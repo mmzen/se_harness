@@ -14,13 +14,15 @@ These scenarios use the new before-tool hook script `scripts/check-tool-action`,
 
 **Known boundary:** `--decision ID=ACTOR` records an actor assertion; it does not authenticate a human decision. Skills must use actual authority, but instructions and local hooks cannot guarantee that an agent obeys. Deterministic enforcement remains an open requirement in [issue #347](https://github.com/mmzen/se_harness/issues/347).
 
+The agent follows an applicable evaluator next step automatically while the user's request and actual authority cover it. Named skill invocations below are optional entry points, not a prompt required at each stage. Reuse a decision that still covers the exact action, content, candidate, and destination; ask only for missing authority or a material change. A next step identifies what to do, but does not itself grant permission.
+
 ## Scenario 9: Start a work order
 
 ### 1. Purpose and starting point
 
 **Purpose:** Establish that the agent may begin one approved work order.
 
-- **Starts when:** The user asks the `change` skill **[New]** to start a named WO.
+- **Starts when:** The evaluator reaches WO start within the requested work, or the user requests it through `change` **[New]**.
 - **Requires:** An approved WO, the checks from [scenario 3](setup-and-sessions.md#scenario-3-start-a-session), and its governing documents.
 - **Successful result:** An authorized transition changes only that WO to `in_progress`.
 
@@ -38,7 +40,7 @@ Existing transition → preview → apply → check actual state
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | User → `change` skill **[New]** | **Codex:** ask “Use the verity-plane change skill to start WO-DEMO-009.” **Claude Code:** invoke `/verity-plane:change start WO-DEMO-009`. The main agent reads `skills/change/SKILL.md`. |
+| 1 | Main agent → `change` skill **[New]** | Continue from the applicable next step within the existing request. Optional direct entry: ask Codex to use `verity-plane change` to start WO-DEMO-009, or invoke `/verity-plane:change start WO-DEMO-009` in Claude Code. Read `skills/change/SKILL.md`; no repeated invocation is needed. |
 | 2 | Main agent → file tools | Read the selected WO, `docs/engineering/OPERATING_CARD.md`, and the phase reading manifest's governing artifacts. |
 | 3 | Agent → shell tool → bundled `harnessctl` | Run `check REPO --artifact WO-DEMO-009 --json`, then `preflight REPO --work-order WO-DEMO-009 --phase start --json`. The first projects state; the second checks start readiness. Neither starts work. |
 | 4 | Engineering owner, or eligible delegate | Establish the exact start authority. Reuse an existing decision if it covers this start. Otherwise obtain the engineering owner's decision. Use DR-015 delegation only when its required facts are proven. |
@@ -52,7 +54,7 @@ For DR-015, `[delegation] class = "execution"` must exist at the PR base, and th
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `skills/change/SKILL.md` guides start mode. | **New:** follows existing `PROC-WO-START`. |
-| **Hook** | `PreToolUse` calls `scripts/check-tool-action` for supported actions. | **Reuse:** host event. **New:** adapter and registrations; no automatic start. |
+| **Hook** | `PreToolUse` calls `scripts/check-tool-action` before covered actions. | **Reuse:** host event. **New:** required applicable checks; the hook does not grant start authority. |
 | **Script** | `scripts/harnessctl` runs the external published evaluator. | **Adapt:** package the existing CLI with its runtime. |
 | **Tool/interface** | Codex `exec_command`, or Claude Code `Bash` / native `PowerShell`, calls `harnessctl`. | **Reuse:** existing shell tools and CLI arguments. |
 | **Evaluator** | `check`, start `preflight`, and `transition` determine readiness and update the WO. | **Reuse:** existing gates, workflow engine, and delegation checks. |
@@ -122,7 +124,7 @@ How will authenticated human authority be enforced at the effect boundary? The c
 
 **Purpose:** Produce the authorized change and retain what its checks actually found.
 
-- **Starts when:** A selected WO is `in_progress` and the user requests implementation.
+- **Starts when:** A selected WO is `in_progress` and implementation is the applicable next step within the existing request, or the user requests it directly.
 - **Requires:** Approved scope, acceptance criteria, verification contracts, and the repository's required check commands.
 - **Successful result:** Implementation and evidence are ready for the completion decision; the WO remains `in_progress`.
 
@@ -140,9 +142,9 @@ evidence prepare [New] → retain results → harnessctl handoff check
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | User → `change` skill **[New]** | **Codex:** ask “Use the verity-plane change skill to implement WO-DEMO-010.” **Claude Code:** invoke `/verity-plane:change implement WO-DEMO-010`. The main agent reads `skills/change/SKILL.md` and the WO's required context. |
+| 1 | Main agent → `change` skill **[New]** | Continue after the authorized start without waiting for another implementation prompt. Optional direct entry: ask Codex to use `verity-plane change`, or invoke `/verity-plane:change implement WO-DEMO-010` in Claude Code. Read `skills/change/SKILL.md` and the WO's required context. |
 | 2 | Agent → edit tools | Prepare an edit through Codex `apply_patch`, or Claude Code `Edit` / `Write`. The main agent implements the change. |
-| 3 | Host `PreToolUse` → `scripts/check-tool-action` **[New]**, when supported | For a mapped edit, call existing `harnessctl check --checkpoint pre-action --procedure PROC-WO-IMPLEMENT` with the selected WO and actual declared paths. Translate its result into the host's hook response before the edit. Report actions that the adapter cannot cover. |
+| 3 | Host `PreToolUse` → `scripts/check-tool-action` **[New]**, for covered edits | Run the applicable existing `check` pre-action gates for the selected WO, `PROC-WO-IMPLEMENT`, and actual declared paths before the effect. Translate the result into the host's hook response. Do not skip required gates to reduce latency; report actions the adapter cannot cover. |
 | 4 | Agent → shell tool | Run the commands required by the repository's owner instructions and verification contract. Retain their actual command, exit result, and evidence location, including failures. |
 | 5 | Agent following `evidence` prepare mode **[New]** | Read `skills/evidence/SKILL.md`. Run `harnessctl evidence REPO --artifact WO-DEMO-010 --checkpoint handoff --json`, then fill its packet with the actual results and references. An empty packet proves nothing. |
 | 6 | Main agent → optional `evidence-reviewer` **[New]** | Supply only the selected criteria, diff, and retained results. The read-only helper reports omissions; it cannot decide completion or independent assurance. |
@@ -210,7 +212,7 @@ Codex uses `apply_patch` and `exec_command`; an existing `write_stdin` session d
 
 **Checks that demonstrate the behavior**
 
-Proposed acceptance checks: retain real results before a completion handoff; reject an empty evidence packet or failed required check; inspect outputs after interruption before rerunning. Test the supported hook mappings separately from uncovered operations.
+Proposed acceptance checks: retain real results before a completion handoff; reject an empty evidence packet or failed required check; inspect outputs after interruption before rerunning. Test the supported hook mappings separately from uncovered operations. Measure typical and slow check times over representative covered edits against the agreed performance budget. Optimize execution and invalidate any reusable computation when its inputs change; never skip a required gate or use a stale result for speed.
 
 **Open questions**
 
@@ -224,7 +226,7 @@ Which host operations provide reliable intended paths for the first hook mapping
 
 **Purpose:** Record implementation completion, then prepare the exact candidate for assurance when required.
 
-- **Starts when:** The implementation handoff is ready and the user requests completion.
+- **Starts when:** The handoff is ready and completion is the applicable next step within the existing request, or the user requests it directly.
 - **Requires:** Passing completion gates and completion authority; an eligible candidate and preparation authority when a VREC is required.
 - **Successful result:** The WO is `implemented`; when required, a VREC is `ready` for assurance.
 
@@ -242,11 +244,11 @@ Existing capture-verification → ready VREC → assurance handoff
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | User → `change` skill **[New]** | **Codex:** ask “Use the verity-plane change skill to complete WO-DEMO-011.” **Claude Code:** invoke `/verity-plane:change complete WO-DEMO-011`. Read `skills/change/SKILL.md` and refresh the handoff if its inputs changed. |
+| 1 | Main agent → `change` skill **[New]** | Follow the applicable completion step without requiring a new invocation. Optional direct entry: ask Codex to use `verity-plane change`, or invoke `/verity-plane:change complete WO-DEMO-011` in Claude Code. Read the skill and refresh the handoff if its inputs changed. |
 | 2 | Engineering owner, or eligible delegate | Establish the completion decision. Reuse existing authority when it covers this action. DR-015 delegation requires the PR-base class and current successful CI for the exact head. |
 | 3 | Agent → bundled `harnessctl` | Preview `transition` to `WO-DEMO-011=implemented` with the actual actor, then apply while the reviewed content and authority still match. Run `check` for the WO and follow its next step. |
 | 4 | Agent following `evidence` prepare mode **[New]** | If commit-bound verification is required, read `skills/evidence/SKILL.md`, identify the verification contracts and retained evidence, and establish an eligible clean candidate. Any Git commit needs its own actual authorization. |
-| 5 | Agent and preparation actor | Present the proposed VREC ID, WOs, verification contracts, evidence paths, and current candidate. Establish preparation authority through the permitted owner or eligible DR-015 route. Completion authority does not imply it. |
+| 5 | Agent and preparation actor | Present the proposed VREC ID, WOs, verification contracts, evidence paths, and current candidate. Reuse actual preparation authority or eligible DR-015 delegation that covers those inputs. Ask only if that authority is missing or no longer applies; completion authority alone does not imply it. |
 | 6 | Agent → bundled `harnessctl` | Call `capture-verification` with those inputs. This existing command writes the ready VREC and evaluator evidence immediately; it has no preview flag. |
 | 7 | Agent → bundled `harnessctl` | Run `check` for the new VREC. Report its actual state, bound commit, evidence, and assurance decision. Preparation is not verification. |
 
@@ -257,7 +259,7 @@ For `commit_bound_verification = "not_required"`, follow the evaluator's next st
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `skills/change/SKILL.md` guides completion; `skills/evidence/SKILL.md` guides preparation. | **New:** distinct modes follow existing procedures. |
-| **Hook** | `PreToolUse` calls `scripts/check-tool-action` for supported calls. | **Reuse:** host event. **New:** mappings; no automatic completion or preparation. |
+| **Hook** | `PreToolUse` calls `scripts/check-tool-action` before covered calls. | **Reuse:** host event. **New:** required applicable checks; no inferred completion or preparation authority. |
 | **Script** | `scripts/harnessctl` runs the existing evaluator and provenance functions. | **Adapt:** bundle the runtime and CLI; no new preparation API. |
 | **Tool/interface** | `exec_command`, `Bash`, or `PowerShell` invokes `harnessctl` and separately authorized Git commands. | **Reuse:** existing tools. |
 | **Evaluator** | `transition`, `capture-verification`, and `check` record completion and prepare evidence. | **Reuse:** workflow and provenance engine. |
@@ -299,7 +301,7 @@ harnessctl check REPO --artifact VREC-DEMO-011 --json
 
 **Proposed additions**
 
-The skill modes call the existing commands through `scripts/harnessctl`. They present completion, preparation, and Git actions separately because each needs its applicable authority. No extra transaction protocol is introduced.
+The skill modes call the existing commands through `scripts/harnessctl`. Completion, preparation, and Git actions each need applicable authority, but authority already covering them is retained. Continue automatically through covered steps and present only a missing or changed decision. No extra transaction protocol is introduced.
 
 **Inputs, outputs, and writes**
 
@@ -327,7 +329,7 @@ How will the host reliably bind actual completion and preparation decisions to t
 
 **Purpose:** Let the assurance owner judge whether retained evidence verifies the exact candidate.
 
-- **Starts when:** The user submits a ready VREC through the `evidence` skill **[New]**.
+- **Starts when:** A ready VREC reaches the assurance step within the existing request, or the user submits it through `evidence` **[New]**.
 - **Requires:** The VREC's candidate, verification contracts, evidence, and accountable assurance owner.
 - **Successful result:** The assurance owner's explicit decision is recorded on that VREC only.
 
@@ -345,10 +347,10 @@ Existing transition → preview → apply → report actual VREC state
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | User → `evidence` skill **[New]** | **Codex:** ask “Use the verity-plane evidence skill to review VREC-DEMO-012.” **Claude Code:** invoke `/verity-plane:evidence review VREC-DEMO-012`. The main agent reads `skills/evidence/SKILL.md`. |
+| 1 | Main agent → `evidence` skill **[New]** | Continue from VREC preparation when the request covers review preparation. Optional direct entry: ask Codex to use `verity-plane evidence`, or invoke `/verity-plane:evidence review VREC-DEMO-012` in Claude Code. Read `skills/evidence/SKILL.md`. |
 | 2 | Agent → file and shell tools | Read the VREC, exact candidate, verification criteria, and retained evidence. Run `harnessctl check REPO --artifact VREC-DEMO-012 --checkpoint transition --target verified --json`. Present its gate results and unresolved findings. |
 | 3 | Main agent → optional `evidence-reviewer` **[New]** | Ask the read-only helper to inspect the selected evidence and report gaps. Its observations support the human reviewer; they do not authorize verification. |
-| 4 | Assurance owner | Review the evidence and make the exact assurance decision. DR-015 execution delegation does not cover this decision. |
+| 4 | Agent and assurance owner | Reuse the owner's actual independent assurance decision if it still covers this VREC, candidate, and evidence. Otherwise present only the missing or changed decision for the owner's review. DR-015 execution delegation does not cover assurance. |
 | 5 | Agent → bundled `harnessctl` | Preview `transition` for the selected VREC and chosen outcome with the actual actor. Apply only while the reviewed VREC, candidate, evidence, and decision remain applicable. |
 | 6 | Agent → bundled `harnessctl` | Run `check` for the VREC again. Report its actual outcome and next decision. Related WOs and release records do not change by inference; no merge occurs. |
 
@@ -426,60 +428,60 @@ Which authenticated control will enforce the human decision at the transition bo
 
 ### 1. Purpose and starting point
 
-**Purpose:** Hand eligible work to the repository owner for an authorized merge.
+**Purpose:** Integrate eligible work under the repository owner's exact decision.
 
-- **Starts when:** The repository owner selects integration for the candidate.
-- **Requires:** Applicable verified coverage, the exact PR/head/target, and action-specific authority.
-- **Successful result:** The owner merges through the repository's established GitHub process; the agent reports the observed result.
+- **Starts when:** Integration is the selected next step within the existing request, or the repository owner requests it directly.
+- **Requires:** Applicable verified coverage, exact PR/head/target and merge method, action-specific authority, and all required controls at the external effect.
+- **Successful result:** An authorized agent or human executes the permitted merge through existing project tools, and its observed result is reported.
 
 ### 2. Workflow
 
 ```text
 change integrate [New] → harnessctl check → inspect the exact PR
         ↓
-Agent presents coverage, checks, and the repository-owner decision
+Reuse exact owner authority → check current coverage and external controls
         ↓
-Human owner uses the established GitHub merge process
+Authorized agent or human executes through the protected project route
         ↓
 Agent reads remote state and reports the actual result
 ```
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | User → `change` skill **[New]** | **Codex:** ask “Use the verity-plane change skill to prepare integration of this PR.” **Claude Code:** invoke `/verity-plane:change integrate PR_URL`. The main agent reads `skills/change/SKILL.md`. |
+| 1 | Main agent → `change` skill **[New]** | Continue when integration is the applicable selected step and the request covers it. Optional direct entry: ask Codex to use `verity-plane change`, or invoke `/verity-plane:change integrate PR_URL` in Claude Code. Read `skills/change/SKILL.md`. |
 | 2 | Agent → bundled `harnessctl` | Run `check` for the selected WO or VREC and follow the returned delivery procedure. Present applicable coverage and the repository owner's integration decision. The existing integration procedure performs no merge. |
-| 3 | Agent → shell tool → existing `gh` | Read the exact PR, current head, target branch, reviews, and checks with `gh pr view` and `gh pr checks`. Present the current facts and any missing authority or protection. Green CI alone does not authorize merging. |
-| 4 | Repository owner → GitHub | Decide the exact integration action and use the repository's established reviewed merge route. The simplified plugin stops at this handoff and does not merge automatically. |
-| 5 | Agent → existing `gh` | Read the PR state and merge commit after the owner's action. Report merged, still open, or unknown from observed remote facts. Do not infer WO, VREC, or release-state changes. |
+| 3 | Agent → shell tool → existing `gh` | Read the exact PR, current head, target branch and commit, reviews, and checks through the existing GitHub interfaces. Reuse the actual owner decision only while it covers that action, head, target, and method. Ask only for missing or materially changed authority. Green CI alone does not authorize merging. |
+| 4 | Authorized agent or human → protected GitHub route | Check all current gates and independently enforced external controls. When they are demonstrated, the authorized agent may execute with existing `gh pr merge` and the permitted method; a human may use the same permitted project route. A covered tool call also runs `scripts/check-tool-action` before the effect. Missing or unproven external enforcement disables agent automation and produces a specific enforcement blocker. |
+| 5 | Agent → existing `gh` | Read the PR state and resulting merge commit after execution. Report merged, still open, or unknown from observed remote facts. Do not infer WO, VREC, or release-state changes. |
 
-There is no `harnessctl merge`. A `gh pr merge` call would be a separate external action, not a harness operation. Automatic agent integration remains outside this proposal until deterministic controls are implemented and demonstrated under [issue #347](https://github.com/mmzen/se_harness/issues/347). Existing GitHub protections must be inspected; this note does not claim they already prevent every bypass.
+There is no `harnessctl merge`. The human retains the decision right; an authorized agent may execute it. Verification or release approval does not imply merge authority. Agent execution requires demonstrated independent enforcement under [issue #347](https://github.com/mmzen/se_harness/issues/347); this note does not claim those controls already exist. When they are missing, report that exact blocker. A human may use an existing permitted protected route, but an extra human execution step is not a permanent plugin requirement.
 
 ### 3. Components and implementation mapping
 
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
-| **Skill** | `skills/change/SKILL.md` guides integrate mode and the owner handoff. | **New:** follows existing `PROC-REPOSITORY-INTEGRATION`. |
-| **Hook** | `PreToolUse` may call `scripts/check-tool-action` before a supported external-action request. | **Reuse:** host event. **New:** local intervention only; it is not the merge boundary. |
+| **Skill** | `skills/change/SKILL.md` guides integrate mode, reusing applicable authority. | **New:** follows existing `PROC-REPOSITORY-INTEGRATION`. |
+| **Hook** | `PreToolUse` calls `scripts/check-tool-action` before covered external-action requests. | **Reuse:** host event. **New:** required applicable checks; these do not replace independent merge controls. |
 | **Script** | `scripts/harnessctl` runs the selected harness check. | **Adapt:** package the existing CLI; no merge script. |
-| **Tool/interface** | Shell tools call `harnessctl`, `gh pr view`, and `gh pr checks`; the owner uses GitHub. | **Reuse:** current CLI, GitHub CLI, and reviewed human route. |
+| **Tool/interface** | Shell tools run harness and GitHub reads, then authorized `gh pr merge`; a human can use GitHub. | **Reuse:** existing CLI and protected project interfaces. |
 | **Evaluator** | `check` reports applicable coverage and the delivery decision. | **Reuse:** existing procedure; no integration command is added. |
 | **Subagent** | Not used. | **Not used:** another agent cannot authorize integration. |
-| **Human** | The repository owner authorizes and performs the exact external action. | **Reuse:** existing delivery and external-action rights. |
+| **Human** | The repository owner retains the exact decision right; execution may be delegated to an authorized agent. | **Reuse:** existing delivery and external-action rights; no new delegation waiver. |
 | **External control** | GitHub rules, required checks, reviewers, and credential restrictions protect the actual merge route. | **Reuse:** controls actually configured. **New:** missing deterministic enforcement remains issue #347. |
 
 ### 4. Stops, decisions, and recovery
 
 | Situation | What happens | How it resumes |
 | --- | --- | --- |
-| Applicable verification or merge authority is missing. | The agent reports the blocker and stops at the handoff. | Complete the required coverage or obtain the owner's exact decision. |
-| Required deterministic controls are absent or unproven. | No automatic agent merge is offered. | The owner uses the established reviewed route while the control gap is addressed. |
+| Applicable verification or exact merge authority is missing. | The agent reports only the missing requirement. | Complete the required coverage or obtain the missing owner decision; keep decisions that still apply. |
+| Required deterministic controls are absent or unproven. | Disable agent execution and name the enforcement blocker. | Establish the required controls, or let a human use an existing permitted protected route. Human execution is not a substitute for a control that the route itself requires. |
 | PR head, target, or action changes. | Earlier review may no longer cover the action. | Revalidate coverage and refresh authority where needed. |
 | A local hook is disabled or bypassed. | Instructions alone cannot prevent an external effect. | Enforce required checks and credential restrictions outside the agent's editable workspace. |
 | A merge response is lost. | The outcome is unknown, not automatically failed. | Read actual PR and target state before any retry. |
 
 ### 5. Example result
 
-> Illustrative: The applicable verification is complete and the PR details are ready for review. No merge occurred. Next: the repository owner reviews the exact PR, head, target, and merge action in GitHub.
+> Illustrative: The existing owner decision still covers this PR, head, target, and merge method. Agent execution is blocked because independent authority enforcement has not been demonstrated; no new approval is requested and no merge occurred. Next: resolve the identified enforcement gap through the repository's permitted process.
 
 ### 6. Implementation details
 
@@ -503,25 +505,33 @@ gh pr checks PR_URL
 
 Use the actual PR URL. These commands do not prove that live repository protection and credential settings cover every route.
 
+For a merge commit explicitly covered by the owner's decision, the existing execution command is:
+
+```sh
+gh pr merge PR_URL --merge --match-head-commit HEAD_SHA
+```
+
+`HEAD_SHA` is the authorized exact PR head. Use only the permitted merge method. This safeguard checks the head, not the owner's identity or target-state authority; those require independent controls at the effect. Do not add `--admin` or other bypasses. If the project uses a merge queue, its queued execution and later target state must also remain within authority and pass its enforced checks.
+
 **Proposed additions**
 
-`change` integrate mode assembles the selected harness result and current GitHub facts for the owner. It does not add a service, merge protocol, or automated merge command. Separate deterministic controls must authenticate authority and prevent unauthorized effects through GitHub APIs, direct Git access, and alternative credentials.
+`change` integrate mode follows existing tools through preparation and authorized execution. It reuses matching decisions and asks only for missing or changed authority. No new merge API is added. Agent execution is enabled only when independent controls authenticate authority and prevent unauthorized effects through GitHub APIs, direct Git access, and alternative credentials.
 
 VRECs live in later governance commits than their verified candidate. A future enforcement design must check the implementation and permitted later governance changes; requiring a VREC to name its own commit is impossible. Agent-editable branch content must not waive the trusted rules.
 
 **Inputs, outputs, and writes**
 
 - **Inputs:** Exact PR, head, target, merge method, applicable coverage, repository controls, and owner authority.
-- **Outputs:** Owner handoff, blockers, or observed remote result and merge commit.
-- **Writes:** The human owner's authorized merge changes the remote repository. The plugin's preparation and status reads do not.
+- **Outputs:** A missing-decision or enforcement blocker, or the observed remote result and merge commit.
+- **Writes:** The authorized agent's or human's merge changes the remote repository. Preparation and status reads do not.
 
 **Host differences**
 
-Codex uses `exec_command`; Claude Code uses `Bash` / native `PowerShell` for the same read-only `gh` commands. Both hosts can have gaps in [local hook coverage](../plugin-installation-proposal-2026-09-06.md#hooks-useful-intervention-incomplete-enforcement), so neither host substitutes for remote protections.
+Codex uses `exec_command`; Claude Code uses `Bash` / native `PowerShell` for the same GitHub CLI. Covered execution requests run the applicable `scripts/check-tool-action` checks. Both hosts have [coverage limits](../plugin-installation-proposal-2026-09-06.md#hooks-useful-intervention-incomplete-enforcement), so neither substitutes for independent protections.
 
 **Checks that demonstrate the behavior**
 
-Proposed acceptance checks: preparation does not merge; reported success matches the actual remote merge commit; an ambiguous response triggers a status read before retry. Separately test that missing human authority and alternate API or Git routes cannot bypass the required external controls. Until demonstrated, report that guarantee as unimplemented.
+Proposed acceptance checks: matching existing authority permits execution without another prompt; missing or changed authority stops only the affected action; absent external enforcement disables agent execution. Verify current gates, exact head and target checks, alternate API/Git routes, the observed merge commit, and a status read before retry after an ambiguous response. A reused decision never skips a required gate.
 
 **Open questions**
 

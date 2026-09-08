@@ -14,6 +14,8 @@ The plugin supplies `harnessctl`, its Python runtime, skills, and hooks. The use
 
 Ship native Codex and Claude Code packages built from the same engine and skill sources. Keep the existing harness rules, installer, and CI commands. Add a small amount of host integration code.
 
+**Keep the required decisions; reduce the manual steps.** The agent continues through permitted steps under the existing request and authority. The plugin requires no skill invocation at every stage or new approval for each allowed edit. Host trust and tool-permission settings still apply. Ask only when a required decision, input, or correction is missing. Reuse an existing decision while it still covers the exact action and reviewed inputs; preserve the current delegation rules.
+
 ## What changes
 
 | Today | Proposed experience |
@@ -75,6 +77,8 @@ Packaging still needs proof: select a redistributable Python build, verify relea
 
 A skill instructs the agent to use existing commands. The evaluator determines what is allowed. Preserve its blockers, actual writes, and required decisions; a successful command does not approve the next action.
 
+Skill commands in the scenarios are optional ways to enter a workflow. They are not additional approval stops. The agent can move from `change` to `evidence` when the existing workflow and authority permit it. Keep the contracts of the existing read-only skills; `harness-operator-brief` still requires an explicit request.
+
 The main agent implements the work. Optional `investigator` and `evidence-reviewer` subagents provide read-only findings. Neither replaces the accountable human's verification or release decision.
 
 ## Hooks: useful intervention, incomplete enforcement
@@ -95,9 +99,9 @@ Hooks do not initialize repositories, upgrade locks, or make human decisions. In
 
 **A plugin cannot be the only authorization control.** Hooks can be disabled, miss tool paths, or fail without blocking an action. An actor name passed to `transition --decision` is an assertion, not authenticated human approval.
 
-Keep human handoffs for verification, integration, and publication. Deterministic controls must bind the actual owner's decision to the reviewed artifacts and candidate, reject changed inputs, and protect every merge or publication route—including alternate credentials and APIs. This remains separate implementation work tracked in [#347](https://github.com/mmzen/se_harness/issues/347).
+Keep the existing human decisions for verification, integration, and publication. Deterministic controls must bind the actual owner's decision to the reviewed artifacts and candidate, reject changed inputs, and protect every merge or publication route—including alternate credentials and APIs. This remains separate implementation work tracked in [#347](https://github.com/mmzen/se_harness/issues/347).
 
-The initial plugin prepares review material and hands off to the owner through the project's existing process. It does not automatically merge or publish. Automation of those effects waits for demonstrated enforcement.
+The owner decides; an authorized agent or human may execute through the project's existing tools when the exact action is authorized, required checks pass, and independent enforcement is demonstrated. The plugin adds no rule requiring the owner personally to click Merge or dispatch publication. If enforcement is missing or unproven, agent execution of that effect stays blocked and the gap is reported. A human may use the project's existing permitted route; this fallback is a control limitation, not a new workflow stage. Verification and release decisions alone never authorize external actions.
 
 ## Native capabilities and their limits
 
@@ -121,8 +125,11 @@ Adapt the two skill cores for plugin paths and identity checks. Select one activ
 ## Delivery and open choices
 
 1. **Prove packaging:** install on a clean supported machine; run the bundled evaluator; reject a mismatched or modified installation. Confirm marketplace acceptance and offline use after installation.
-2. **Prove workflows:** implement the three skills and two hook scripts; test setup, governance restoration, work, evidence, and human handoffs on both hosts.
-3. **Prove authority separately:** demonstrate that missing approval, changed candidates, disabled hooks, and alternate access routes cannot authorize protected effects before enabling merge or publication automation.
+2. **Prove fewer manual steps:** run the same authorized change with and without the plugin. Preserve the required decisions and delegation, require no repeated skill invocation, and ask no duplicate approval for unchanged authorized inputs. Include setup, compaction, and recovery on both hosts.
+3. **Measure execution cost:** compare startup, supported tool checks, and total task time on small and large repositories. Record operator interactions as well as processing time, and agree performance limits before release. No performance result is claimed yet.
+4. **Prove authority separately:** demonstrate that missing approval, changed candidates, disabled hooks, and alternate access routes cannot authorize protected effects before enabling merge or publication automation. A valid existing decision must not trigger a second approval prompt.
+
+The current [`check` path](../../se_harness/workflow_compliance.py) runs repository validation. Repeating that work before every edit may be expensive. Map each supported action to its required check and measure the cost before finalizing the adapter. Any reuse of prior results must remain in the evaluator, detect changed relevant inputs, and preserve refusals. Performance work must not skip required pre-effect checks, use stale approval, or add approval prompts for routine permitted actions.
 
 Challenge two choices: can one bundled version serve the first supported users, and does portable Python fit the host's distribution limits? Change packaging if testing shows it is needed. Avoid adding a runtime manager or another command protocol in advance.
 

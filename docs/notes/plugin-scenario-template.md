@@ -24,6 +24,7 @@ This is a documentation template for proposals. It is not a formal engineering a
 - **Successful result:** [Observable result when the scenario succeeds.]
 
 <!-- Keep this block short. Distinguish a successful check from permission to perform work. -->
+<!-- A scenario may begin from a fresh request or an authorized next step. Skill invocation examples must not require an extra operator prompt at each stage. Preserve any existing explicit-invocation contract. -->
 
 ### 2. Workflow
 
@@ -75,6 +76,7 @@ Use **Reuse**, **Adapt**, **New**, or **Not used** in the last column. Name the 
 | [An accountable decision is required.] | [What is presented, who decides, and which operation waits.] | [How the exact decision is checked before continuing.] |
 
 <!-- Replace these suggested cases with the cases that apply. Distinguish a displayed warning from an enforced stop. Do not imply that a successful installation check, host tool permission, or actor-name argument supplies a human decision. -->
+<!-- Reuse authority that still covers the exact action and inputs; ask only for missing or changed authority. Distinguish the accountable decision from execution by an authorized agent or human. -->
 
 ### 5. Example result
 
@@ -118,6 +120,8 @@ Show one short example of what the agent or user receives:
 - **Success:** [Input or trigger → expected result.]
 - **Refusal:** [Failure or missing decision → expected stop.]
 - **Recovery:** [Correction or interruption → expected safe resumption.]
+
+<!-- Include no-duplicate-prompt checks. Where automation adds processing, measure overhead while preserving every required check and refusal. -->
 
 **Open questions**
 

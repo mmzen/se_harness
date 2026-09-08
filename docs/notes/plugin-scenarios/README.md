@@ -50,6 +50,8 @@ Installation prepares the coding host. Initialization prepares a repository. Ses
 
 For a new change, follow drafting, review, work-order start, implementation, and completion. Then follow the evaluator's applicable verification and delivery route. Integration, release preparation, and publication each retain their own decisions; the numbering is a reading order, not an unconditional script.
 
+The agent can continue between these scenarios under an existing request when the evaluator's next step and actual authority permit it. Skill invocations shown below are optional entry examples, not instructions to ask the user to launch each stage. Preserve the existing invocation contracts of `harness-orient` and `harness-operator-brief`. Routine allowed checks and edits add no plugin approval prompt.
+
 The component tables describe what to **Reuse**, **Adapt**, or build **New**. **Not used** means that component has no role in that scenario. A hook and a skill can invoke the same script. The evaluator remains the owner of lifecycle rules. A subagent can investigate or review evidence within a bounded task; its findings do not replace an accountable human decision.
 
 Each scenario includes failure and recovery branches. The proposed checks under implementation details are acceptance criteria for future implementation, not test results from a working plugin. Command syntax inspection likewise does not prove authority or runtime behavior.
@@ -99,8 +101,12 @@ Supply the selected scope, question, governance context, read-only tool limits, 
 
 ### Decisions and effects
 
-The agent presents the exact operation and affected records to the accountable human, then follows the existing procedure. A transition preview, passing tests, a tool permission, or `--decision ID=ACTOR` cannot authenticate approval. Existing qualifying delegation applies only to its stated scope.
+The agent identifies the exact operation and affected records, checks existing authority, and asks the accountable human only for a missing or changed required decision. A valid decision covering unchanged action and inputs is reused. A transition preview, passing tests, a tool permission, or `--decision ID=ACTOR` cannot authenticate approval. Existing qualifying delegation applies only to its stated scope.
 
-The first plugin prepares integration and publication handoffs for the human owner; it does not automatically merge or publish. Deterministic approval binding and protection of remote effects remain separate work tracked in [#347](https://github.com/mmzen/se_harness/issues/347). These notes do not introduce new approval services or claim that a hook closes that gap.
+Recheck the inputs that each decision actually governs. Ordinary code edits within an unchanged approved WO scope do not require approving the WO again. Candidate-bound verification or delivery decisions must still match their exact candidate, and all applicable gates continue to apply.
+
+Owners retain the integration and publication decisions. An authorized agent or human may execute the exact action through existing tools when required gates and independent enforcement permit it. The plugin does not require owners personally to operate those tools. Missing or unproven enforcement blocks agent execution and is reported as a control limitation, with any existing permitted human route identified. Deterministic approval binding and protection of remote effects remain separate work tracked in [#347](https://github.com/mmzen/se_harness/issues/347).
+
+Compare operator prompts and elapsed time against the same existing workflow. Measure the cost of startup and automatic tool checks before accepting the implementation. Required checks, current authority, and refusal behavior must survive any optimization; no latency measurements have been made for this proposed plugin.
 
 All example results are illustrative. “Checks that demonstrate the behavior” describes future acceptance checks, not completed plugin tests.

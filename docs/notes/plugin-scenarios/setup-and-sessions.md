@@ -8,6 +8,8 @@ Proposal updated 2026-09-08. **[New]** marks components to build. Current implem
 
 `harnessctl` below means the plugin's absolute `scripts/harnessctl` path (`scripts/harnessctl.exe` on Windows), never a command found on `PATH`. `REPO` is the selected absolute project path. See the [shared calling convention](README.md#shared-component-names-and-calling-convention).
 
+Setup examples show ways to enter the operation. After a concrete setup request is authorized, the agent follows the permitted steps without asking the user to invoke each one. Host installation/trust, missing decisions, changed scope, and unresolved conflicts remain explicit interactions.
+
 ## Scenario 1: Install and activate the plugin
 
 ### 1. Purpose and starting point
@@ -290,7 +292,7 @@ Both hosts support `SessionStart` context. Codex has a configurable context budg
 
 **Checks that demonstrate the behavior**
 
-Verify execution order, modified policy refusal, concurrent file changes, and oversized context. Explicit readiness must produce the same checks as startup.
+Verify execution order, modified policy refusal, concurrent file changes, and oversized context. Explicit readiness must produce the same checks as startup. Measure startup cost on representative repositories and confirm successful readiness adds no approval prompt.
 
 **Open questions**
 
@@ -386,10 +388,10 @@ Register the same readiness handler for startup, compaction, and resume. The mai
 
 **Checks that demonstrate the behavior**
 
-Test manual/automatic compaction, process restart, interruption without a hook event, and an uncertain remote result. None may invent an approval or automatically repeat a mutation.
+Test manual/automatic compaction, process restart, interruption without a hook event, and an uncertain remote result. None may invent an approval or blindly repeat a mutation. Resume permitted work without requesting an unchanged decision again; retain pending decisions as pending.
 
 **Open questions**
 
-Confirm hook delivery and complete context restoration across the supported host versions. Until tested separately, keep delegated recovery out of the initial release.
+Confirm hook delivery and complete context restoration across the supported host versions, including resumption under unchanged valid authority and the existing delegation rules.
 
 </details>

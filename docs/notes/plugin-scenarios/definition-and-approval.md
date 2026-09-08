@@ -8,6 +8,8 @@ Scenarios 5–8 in the [scenario index](README.md), using the [scenario template
 
 `harnessctl` below means the plugin's exact `scripts/harnessctl` path (`scripts/harnessctl.exe` on Windows), with its bundled runtime. It never means a command found on `PATH`. See the [shared calling convention](README.md#shared-component-names-and-calling-convention). Skills call the existing CLI directly; there is no separate launcher or bridge API.
 
+The `change` skill examples are optional ways to begin. During an authorized task, the agent follows the skill across stages without asking the user to invoke it again. Existing authority applies only to the same content and action; missing decisions or changed scope still require the responsible owner. The two existing read-only skills retain their activation and single-agent contracts; `harness-operator-brief` requires an explicit request.
+
 ## Scenario 5: Inspect the project and identify the next action
 
 ### 1. Purpose and starting point
@@ -29,7 +31,7 @@ User → existing harness-orient skill
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | User → existing `harness-orient` skill | Ask “Use harness-orient for WO-DEMO-101.” Claude Code exposes `/verity-plane:harness-orient WO-DEMO-101` through **New** plugin packaging. |
+| 1 | User → existing `harness-orient` skill | Example entry: “Use harness-orient for WO-DEMO-101.” Claude Code exposes `/verity-plane:harness-orient WO-DEMO-101` through **New** plugin packaging. This read-only procedure is not a mandatory extra stage of every change. |
 | 2 | Main agent → existing shell tool | Follow the skill's identity and integrity checks using the bundled evaluator. Read the existing `skill-contract.json`; stop if the installation or selection is unsuitable. |
 | 3 | Main agent → existing `orient.py` | Supply the verified external interpreter, expected version/root, repository, and selected artifact. The helper runs `validate`, `inspect`, and the supported selected `check`. |
 | 4 | Main agent | Explain the returned state, blockers, and next action. Run optional `preflight` only when the user explicitly selected a WO and phase. |
@@ -104,14 +106,14 @@ Illustrative response:
 
 **Purpose:** Prepare related artifacts for review.
 
-- **Starts when:** The user asks to define a change and its work.
+- **Starts when:** The current request includes preparing the change's definitions and work.
 - **Requires:** Clear authoring scope, applicable authorization, and installed authoring rules.
 - **Successful result:** Validated proposals with pending decisions identified. A package is a group of artifacts, not a new artifact type.
 
 ### 2. Workflow
 
 ```text
-User → change skill [New]
+Current request → agent follows change skill [New]
      → read definitions and templates
      → harnessctl scaffold-domain / create-artifact
      → agent fills drafts → harnessctl validate
@@ -120,10 +122,10 @@ User → change skill [New]
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | User → `change` skill **New** | Ask the skill to draft the package, or use `/verity-plane:change` in Claude Code. The main agent reads installed `ARTIFACT_AUTHORING.md`. |
+| 1 | Main agent following `change` **New** | Continue the authorized authoring task and read installed `ARTIFACT_AUTHORING.md`. Asking the skill to draft a package, or using `/verity-plane:change`, is an optional entry example; a new invocation is not required. |
 | 2 | Main agent | Identify existing artifacts to reuse, necessary additions, links, and authorized paths. Optional `investigator` **New** finds relevant IDs and sources without editing. |
 | 3 | Main agent → `harnessctl` | Preview `scaffold-domain --dry-run --json` only if a domain is needed. Preview `create-artifact --dry-run --json` for each addition. Show proposed paths and IDs. |
-| 4 | Main agent → `harnessctl` | Within authorized scope, repeat the selected commands without `--dry-run`. Record actual created IDs and paths after each call. |
+| 4 | Main agent → `harnessctl` | If the preview fits existing authoring authority, repeat the selected commands without `--dry-run`; do not request that same authority again. Record actual created IDs and paths after each call. |
 | 5 | Main agent → editing tool | Fill content, owners, relationships, acceptance criteria, and WO scope. The proposed `scripts/check-tool-action` checks supported mapped write events; it does not grant authoring authority. |
 | 6 | Main agent → `harnessctl validate . --json` | Correct draft findings within scope, then present the artifacts and pending approvals. |
 
@@ -183,7 +185,7 @@ Illustrative response:
 
 **Checks that demonstrate the behavior**
 
-- Reuse existing definitions. Create only needed additions. Interrupt after two creations and resume without duplicate artifacts. Reject damaged installations before managed authoring.
+- Reuse existing definitions and create only needed additions. For unchanged inputs already within authoring authority, continue from preview to creation without another prompt or skill invocation. Interrupt after two creations and resume without duplicates. Stop on missing authority, changed scope, or damaged installation.
 
 **Open questions**
 
@@ -197,7 +199,7 @@ Illustrative response:
 
 **Purpose:** Let each responsible owner decide the exact artifacts being approved.
 
-- **Starts when:** A package is ready for review.
+- **Starts when:** The selected package is ready for review under the current request.
 - **Requires:** Selected artifacts, current content, passing applicable gates, and identified owners.
 - **Successful result:** Only the selected approvals are recorded. Approving a WO does not start it.
 
@@ -205,26 +207,26 @@ Illustrative response:
 
 ```text
 change skill [New] → harnessctl transition (preview)
-                  → responsible owner reviews and decides
+                  → reuse exact owner decision, or obtain the missing decision
                   → harnessctl transition --apply
                   → inspect actual selected states
 ```
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | Main agent following `change` **New** | Read the selected artifacts and installed `DECISION_RIGHTS.md`. Separate definition approvals from the WO approval. |
+| 1 | Main agent following `change` **New** | Continue from the prepared package without a new skill invocation. Read the selected artifacts and installed `DECISION_RIGHTS.md`. Separate definition approvals from the WO approval. |
 | 2 | Main agent → `harnessctl transition` | Preview selected target states without `--apply`. Present the exact content, required owners, and blockers. A valid preview is not approval. |
-| 3 | Responsible human owner | Review and decide the selected content through the repository's accepted process. The agent stops at a missing decision; an existing explicit decision can be reused if it covers this exact action and content. |
-| 4 | Main agent → `harnessctl` | After the required decision, confirm the content still matches the review and rerun applicable checks. Add `--apply` to record only the authorized selected transitions. |
+| 3 | Main agent and responsible human owner | Reuse a valid explicit owner decision covering the exact selected content and transition. If it is missing, present that decision to the responsible owner and wait; the agent does not make it. |
+| 4 | Main agent → `harnessctl` | Verify that the content and preview still match the decision, and rerun applicable checks. Add `--apply` to record only the authorized selected transitions, without another confirmation for the same decision. |
 | 5 | Main agent | Inspect actual states and report what changed. Review the WO separately once its governing chain is ready; starting it remains scenario 9. |
 
-**Current control gap:** `--decision ID=ACTOR` records an actor name; it does not authenticate that person or bind approval to reviewed bytes. Skills require the handoff, but cannot enforce it alone. Deterministic controls are separate work tracked in [#347](https://github.com/mmzen/se_harness/issues/347); this plugin proposal does not claim that gap is solved.
+**Current control gap:** `--decision ID=ACTOR` records an actor name; it does not authenticate that person or bind approval to reviewed bytes. Skills require actual owner authority, but cannot enforce it alone. Deterministic controls are separate work tracked in [#347](https://github.com/mmzen/se_harness/issues/347); this plugin proposal does not claim that gap is solved.
 
 ### 3. Components and implementation mapping
 
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
-| **Skill** | `change` presents content, checks, and required decisions. | **New:** explicit human handoff before application. |
+| **Skill** | `change` presents content, checks, and required decisions. | **New:** human handoff when the exact decision is missing; otherwise continue within existing authority. |
 | **Hook** | `PreToolUse` checks covered transition commands. | **Adapt:** host event calls **New** `scripts/check-tool-action`; it cannot authenticate an owner. |
 | **Script** | `scripts/harnessctl` runs preview and application. | **New:** packaging of the existing CLI; no review service. |
 | **Tool/interface** | Shell tool invokes the CLI; human uses the accepted review process. | **Reuse:** host tools and repository review process. |
@@ -263,7 +265,7 @@ Illustrative response:
 
 **Proposed additions**
 
-- The `change` skill presents the exact review and calls the existing transition command after the required decision. Do not add a second approval API or lifecycle engine.
+- The `change` skill presents the exact review and calls the existing transition command after the required decision. Preview and apply do not require two approvals of unchanged content. Do not add a second approval API or lifecycle engine.
 - Authenticating the actor and preventing acceptance of forged or stale approvals require the separate controls in #347.
 
 **Inputs, outputs, and writes**
@@ -277,7 +279,7 @@ Illustrative response:
 
 **Checks that demonstrate the behavior**
 
-- Approve two selected definitions and verify only those changed. Verify the skill stops when a decision is absent. Exercise forged-actor and stale-content cases when implementing #347; skill compliance alone is insufficient proof.
+- Supply valid decisions for two unchanged definitions: preview and apply only those transitions without duplicate prompts. Change reviewed content or omit a required decision: stop before applying the affected transition. Exercise forged-actor and stale-content cases when implementing #347; skill compliance alone is insufficient proof.
 
 **Open questions**
 
@@ -291,7 +293,7 @@ Illustrative response:
 
 **Purpose:** Change approved meaning or permitted work through an explicit owner decision.
 
-- **Starts when:** New findings require a change outside approved meaning or scope.
+- **Starts when:** Findings during the current task require a change outside approved meaning or scope.
 - **Requires:** Affected artifacts, reason for change, and responsible owners.
 - **Successful result:** Authorized amendments or new drafts, with affected work checked again.
 
@@ -307,10 +309,10 @@ Stop affected work → change skill [New]
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | Main agent | Stop affected work and preserve existing records and evidence. Read installed authoring and workflow rules through the `change` skill **New**. |
+| 1 | Main agent | Stop affected implementation and preserve existing records and evidence. Continue permitted impact analysis through the `change` skill **New**, without requesting a new skill invocation. Read installed authoring and workflow rules. |
 | 2 | Main agent; optional `investigator` **New** | Identify affected definitions, WOs, links, and verification contracts. Present current meaning, proposed meaning, and scope consequences. The optional helper reads and reports only. |
-| 3 | Responsible owners | Decide the exact amendment and revised work scope. If the rules require a DEC, the main agent first drafts it using existing `create-artifact --type decision`. |
-| 4 | Main agent → existing `decide`, when applicable | Preview the declared DEC option, then apply only after the responsible owner's decision. Selecting `amend` records that answer; it leaves target artifacts unchanged. |
+| 3 | Main agent and responsible owners | Identify the exact amendment and revised scope. Reuse decisions that already cover them; obtain only missing or changed decisions from their owners. If the rules require a DEC, first draft it within authoring authority using existing `create-artifact --type decision`. |
+| 4 | Main agent → existing `decide`, when applicable | Preview the declared DEC option, then apply the exact authorized decision without another confirmation for unchanged inputs. Selecting `amend` records that answer; it leaves target artifacts unchanged. |
 | 5 | Main agent → editing tools or `create-artifact` | Make separately authorized amendments under existing rules, or create new drafts. A new WO can cover additional work under unchanged definitions. |
 | 6 | Main agent → `harnessctl` | Run `validate`, then the affected WO's applicable scope `check` using the actual complete changed paths. Resume affected work only through its permitted procedure. |
 
@@ -371,7 +373,7 @@ Illustrative response:
 
 **Checks that demonstrate the behavior**
 
-- Prepare a new WO under unchanged definitions without enlarging the original WO. Refuse an unsupported reopen transition. Confirm that deciding `amend` leaves its target unchanged.
+- Prepare a new WO under unchanged definitions without enlarging the original WO. Continue an already-authorized amendment without duplicate prompts; stop when changed meaning needs a missing owner decision. Refuse unsupported reopen transitions and confirm that deciding `amend` leaves its target unchanged.
 
 **Open questions**
 

@@ -19,6 +19,8 @@
 
 A hook handler and a skill-guided agent can call the **same** `scripts/harnessctl`. There is one evaluator and no second lifecycle implementation in the plugin.
 
+The agent follows permitted next steps under the existing request and authority. The operator does not need to invoke each skill or confirm each command. Ask only for a missing required decision, input, or correction; reuse valid authority covering the exact action and inputs. The scenario commands are optional entry examples. Existing read-only skills retain their invocation contracts.
+
 ```text
 User requests work
   -> Agent reads the skill
@@ -26,7 +28,8 @@ User requests work
   -> Host runs scripts/check-tool-action on PreToolUse, where supported
   -> Tool invokes plugin scripts/harnessctl
   -> Evaluator returns result, blockers, and next action
-  -> Agent explains the result or hands off the required decision
+  -> Agent reports the result and continues the permitted next step
+     or stops for a missing required decision, input, or correction
 ```
 
 A covered hook may deny a tool call. Hook coverage is incomplete; evaluator checks still apply to its own operations. Protection of remote effects needs [independent controls](plugin-installation-proposal-2026-09-06.md#the-merge-boundary-must-stand-on-its-own).
@@ -53,8 +56,8 @@ Each row links to the full sequence, including current commands, new components,
 | [Start WO](plugin-scenarios/implementation-and-integration.md#scenario-9-start-a-work-order) | `change` runs `preflight` and an authorized `transition` to `in_progress`. | `check-tool-action` checks covered tool actions. | Human or qualifying existing delegation supplies start authority. |
 | [Implement](plugin-scenarios/implementation-and-integration.md#scenario-10-implement-the-change-and-collect-evidence) | Main agent edits within scope and runs project checks. `evidence` retains real results. | `PreToolUse` calls `check-tool-action` for mapped scope checks. | Stop on a scope change or failed required check. |
 | [Prepare verification](plugin-scenarios/implementation-and-integration.md#scenario-11-complete-implementation-and-prepare-verification) | `evidence` guides completion, then uses `capture-verification` when required and authorized. | Existing CLI binds the VREC to the eligible candidate. | Assurance owner reviews the exact record and evidence. |
-| [Verify / integrate](plugin-scenarios/implementation-and-integration.md#scenario-12-independently-verify-the-candidate) | Present verification transition and the separate integration decision. | Existing CLI records the authorized VREC state. No plugin auto-merge. | Assurance owner verifies; integration owner uses the project's GitHub process. |
-| [Release / publish](plugin-scenarios/release-and-maintenance.md#scenario-14-prepare-and-approve-a-release) | `evidence` uses `prepare-release` and the project's existing release tools. | CLI prepares RLS; project workflows perform external effects. | Release owner decides; publication is separately authorized and handed off. |
+| [Verify / integrate](plugin-scenarios/implementation-and-integration.md#scenario-12-independently-verify-the-candidate) | Present verification transition and any missing integration decision. | Existing CLI records the authorized VREC state; GitHub tools perform a separately authorized merge. | Owner decides. Agent or human executes when required checks and independent controls permit it. |
+| [Release / publish](plugin-scenarios/release-and-maintenance.md#scenario-14-prepare-and-approve-a-release) | `evidence` uses `prepare-release` and the project's existing release tools. | CLI prepares RLS; project workflows perform external effects. | Owner decides. Separately authorized publication may be executed by agent or human through enforced controls. |
 | [Upgrade / repair](plugin-scenarios/release-and-maintenance.md#scenario-16-upgrade-or-repair-the-installation) | `setup` guides compatible plugin installation or existing `upgrade`. | Re-run identity and installation checks. | Repository upgrade remains explicit; startup never applies it. |
 
 ## What a direct call looks like
@@ -87,6 +90,8 @@ The CLI already provides the operation names and results. Skills and the hook sc
 - **Preparation is not approval.** `capture-verification` and `prepare-release` write records immediately and have no dry-run mode. Each needs its preparation prerequisites and authorization.
 - **Evidence is real output.** Generated evidence templates do not prove tests passed. Retain actual results and candidate references.
 - **Verification, integration, and publication are separate.** A verified VREC or released RLS does not itself merge, upload, or deploy. The enforcement gap in [#347](https://github.com/mmzen/se_harness/issues/347) remains open implementation work.
+- **Decision and execution are different.** Reuse an owner's decision covering the exact effect. If independent enforcement is missing, block agent execution and report that limitation; do not invent a new mandatory human execution stage.
+- **Automatic checks have a cost.** Measure startup, tool-check, and total execution overhead. The current check path validates the repository; avoid redundant work through safe evaluator improvements, never by skipping required checks or reusing stale authority.
 
 ## Implementation map and remaining work
 
