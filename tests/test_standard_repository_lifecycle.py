@@ -346,7 +346,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                     raise OSError("injected transaction interruption")
                 real_replace(source, destination)
 
-            with mock.patch("se_harness.installer.os.replace", side_effect=interrupt_lock_write):
+            with mock.patch("se_harness.integrity.os.replace", side_effect=interrupt_lock_write):
                 with self.assertRaisesRegex(OSError, "injected transaction interruption"):
                     apply_changes(target, changes, old_lock, allow_updates=True)
             after = {
@@ -701,7 +701,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                     raise OSError("injected transaction interruption")
                 real_replace(source, destination)
 
-            with mock.patch("se_harness.installer.os.replace", side_effect=interrupt_once):
+            with mock.patch("se_harness.integrity.os.replace", side_effect=interrupt_once):
                 with self.assertRaisesRegex(OSError, "injected transaction interruption"):
                     apply_changes(target, changes, old_lock, allow_updates=True)
 

@@ -21,7 +21,6 @@ import os
 import stat
 from dataclasses import dataclass
 from pathlib import Path
-from se_harness.integrity import raw_sha256
 
 
 WITHIN_EXPECTED_ROOT = "within-expected-root"
@@ -187,7 +186,9 @@ def _digest(target: Path, supplied: bytes | None) -> str:
             raise InterpreterSafetyRefusal(
                 "EPS004", "target", "the resolved interpreter exceeds the readable bound"
             )
-        return raw_sha256(supplied)
+        # SPEC-REB-015 rule 2: this module imports the standard library only, so the shared
+        # digest helper of integrity.py is not available to it; the one private digest that stays.
+        return hashlib.sha256(supplied).hexdigest()
     digest = hashlib.sha256()
     total = 0
     try:

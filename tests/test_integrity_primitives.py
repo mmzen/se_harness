@@ -167,8 +167,8 @@ class DigestPreservationTests(unittest.TestCase):
     def test_no_package_module_hashes_or_serializes_privately(self) -> None:
         offenders: list[str] = []
         for path in sorted((REPOSITORY_ROOT / "se_harness").glob("*.py")):
-            if path.name == "integrity.py":
-                continue
+            if path.name in {"integrity.py", "interpreter_safety.py"}:
+                continue  # SPEC-REB-015 rule 2: the loader imports the standard library only, so it keeps one private digest
             source = path.read_text(encoding="utf-8")
             if re.search(r"hashlib\.sha256\([^)]", source):
                 offenders.append(f"{path.name}: sha256")
