@@ -25,6 +25,7 @@ paths = [
   "se_harness/installer.py",
   "se_harness/interpreter_safety.py",
   "se_harness/mutation_guard.py",
+  "se_harness/preflight.py",
   "se_harness/provenance.py",
   "se_harness/release_qualification.py",
   "se_harness/runtime_identity.py",
@@ -168,3 +169,14 @@ JSON byte; any managed or engine path in the change set.
 
 The evidence packet, the changed-path ledger, the handoff `check`
 restitution; the completion decision is the engineering owner's.
+
+## Scope amendment, 2026-09-08
+
+`se_harness/preflight.py` is added to `[execution_scope].paths`. `ECP-PRM-013`
+requires `phase` values typed as `Literal` in the package, and
+`preflight.run_preflight` is the one site that defines the phase; the scope
+listed every other module the group touches and omitted this one. The handoff
+check refused the change set on `QGP-G4I-PATHS` (`WEX201`) for that path
+alone, the other eight predicates passing. Decided by the accountable
+engineering owner on 2026-09-08 under DR-REMEDIATION-SCOPE by selecting the
+presented option "Amend the scope". Nothing else is widened.
