@@ -15,7 +15,7 @@ import sys
 import unittest
 from pathlib import Path
 
-from se_harness import artifact_layout, cli, evaluator_evidence, front_matter, preflight, provenance, workflow, workflow_contract, workflow_procedures
+from se_harness import artifact_layout, cli, evaluator_evidence, front_matter, preflight, provenance, repository_graph, workflow, workflow_contract, workflow_procedures
 from se_harness.engine import generate_harness_dashboard, inspect_engineering_artifacts, validate_engineering_artifacts
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -59,7 +59,7 @@ class ImportSurfaceTests(unittest.TestCase):
             if re.search(r"validate_engineering_artifacts\.py|generate_harness_dashboard\.py|inspect_engineering_artifacts\.py", source):
                 offenders.append(f"{path.name}: script path")
         self.assertEqual([], offenders)
-        self.assertIs(workflow._validator_module, validate_engineering_artifacts)
+        self.assertIs(repository_graph._validator_module, validate_engineering_artifacts)
         self.assertIs(preflight.validate_engineering_artifacts, validate_engineering_artifacts)
         self.assertIs(cli.validate_engineering_artifacts, validate_engineering_artifacts)
         self.assertIs(provenance.generate_harness_dashboard, generate_harness_dashboard)
@@ -87,14 +87,14 @@ class TwinTests(unittest.TestCase):
         # ECP-ENG-005
         self.assertIs(validate_engineering_artifacts.load_lifecycle_registry, workflow_contract.load_lifecycle_registry)
         self.assertEqual(workflow.LIFECYCLE_REGISTRY, validate_engineering_artifacts.WORKFLOW_LIFECYCLES)
-        self.assertIs(validate_engineering_artifacts._lifecycle_family, workflow_contract.lifecycle_family)
+        self.assertIs(validate_engineering_artifacts.lifecycle_family, workflow_contract.lifecycle_family)
         test_source = (REPOSITORY_ROOT / "tests" / "test_lifecycle_state_contract.py").read_text(encoding="utf-8")
         self.assertNotIn("EXPECTED = {", test_source)
 
     def test_one_evidence_validator_serves_the_engine_with_its_own_messages(self) -> None:
         # ECP-ENG-006: every reason the validator can raise has an engine message; the engine's
         # stricter checks (an isolated interpreter, an archive for a release) are its parameters.
-        self.assertEqual(set(evaluator_evidence.EVIDENCE_REASONS), set(validate_engineering_artifacts._EVIDENCE_MESSAGES))
+        self.assertEqual(set(evaluator_evidence.EVIDENCE_REASONS), set(validate_engineering_artifacts.EVIDENCE_MESSAGES))
         self.assertIs(validate_engineering_artifacts.validate_evaluator_evidence, evaluator_evidence.validate_evaluator_evidence)
         valid = {
             "schema": evaluator_evidence.EVIDENCE_SCHEMA,
@@ -133,7 +133,7 @@ class TwinTests(unittest.TestCase):
                         expected_evaluator={"version": "0.15.0"} if reason == "lock" else None,
                     )
                 self.assertEqual(reason, raised.exception.reason)
-                self.assertIn(reason, validate_engineering_artifacts._EVIDENCE_MESSAGES)
+                self.assertIn(reason, validate_engineering_artifacts.EVIDENCE_MESSAGES)
         # the package's own readers keep their defaults: an isolated interpreter is not demanded
         relaxed = {key: (dict(value) if isinstance(value, dict) else value) for key, value in valid.items()}
         relaxed["environment"]["isolated_python"] = False
@@ -148,8 +148,8 @@ class TwinTests(unittest.TestCase):
         self.assertIs(one, provenance.IMPLEMENTED_OR_LATER_STATUSES)
         self.assertIs(validate_engineering_artifacts.body_sections, front_matter.body_sections)
         self.assertEqual({"A": "one\n \n", "B": "\n"}, front_matter.body_sections("intro\r\n## A\r\none\r\n```\r\n## not a heading\r\n```\r\n## B\r\n"))
-        self.assertIs(generate_harness_dashboard._specification_rules, validate_engineering_artifacts._specification_rules)
-        self.assertIs(generate_harness_dashboard._coverage_rows, validate_engineering_artifacts._coverage_rows)
+        self.assertIs(generate_harness_dashboard.specification_rules, validate_engineering_artifacts.specification_rules)
+        self.assertIs(generate_harness_dashboard.coverage_rows, validate_engineering_artifacts.coverage_rows)
         for module in (validate_engineering_artifacts, provenance, workflow_procedures):
             self.assertIs(artifact_layout.ID_PATTERN, module.ID_PATTERN)
         self.assertIs(provenance.evidence_work_order_keys, validate_engineering_artifacts.evidence_work_order_keys)

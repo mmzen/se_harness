@@ -157,7 +157,7 @@ class ArtifactAuthoringTests(unittest.TestCase):
         self.assertIn("REQ-", error)
 
     def test_scaffold_failure_rolls_back_only_directories_created_by_the_command(self) -> None:
-        with mock.patch("se_harness.artifact_layout._atomic_create", side_effect=HarnessError("injected failure")):
+        with mock.patch("se_harness.artifact_layout.atomic_create", side_effect=HarnessError("injected failure")):
             code, _, error = invoke("scaffold-domain", str(self.root), "--domain", "rollback-test")
         self.assertEqual(2, code)
         self.assertIn("injected failure", error)

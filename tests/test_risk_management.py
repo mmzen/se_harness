@@ -508,10 +508,10 @@ class DisposalTests(RiskFixture):
         self.assertIn('status = "deferred"', self.decision_file().read_text(encoding="utf-8"))
         self.assertEqual([], self.codes())
         self.assertEqual("pass", self.predicates(self.handoff_check())["QGP-G4I-DECISION"]["status"])
-        from se_harness.workflow import _catalog, _validation
+        from se_harness.repository_graph import artifact_catalog, validated_repository
         from se_harness.workflow_compliance import blocking_decisions
 
-        catalog = _catalog(_validation(self.root)[1])
+        catalog = artifact_catalog(validated_repository(self.root)[1])
         self.assertEqual(["DEC-PRD-001"], [item.artifact_id for item in blocking_decisions(catalog, catalog["WO-001"], "verified")])
         code, _, error = self.decide("--option", "accept", "--revisit", "v1.2.0", "--reason", "The field landed; we live with it.")
         self.assertEqual(0, code, error)
@@ -688,10 +688,10 @@ class ScopeAdmissionTests(RiskFixture):
             with self.subTest(checkpoint=checkpoint, source="declared"):
                 result = self.checkpoint(checkpoint, "--changed-path", RISK_PATH, "--changed-path", DECISION_PATH, "--changes-complete")
                 self.assertEqual("pass", self.predicates(result)["QGP-G4I-PATHS"]["status"])
-        from se_harness.workflow import _catalog, _validation
+        from se_harness.repository_graph import artifact_catalog, validated_repository
         from se_harness.workflow_compliance import git_change_set, risk_admissions
 
-        catalog = _catalog(_validation(self.root)[1])
+        catalog = artifact_catalog(validated_repository(self.root)[1])
         self.assertEqual((RISK_PATH,), risk_admissions(self.root, catalog["WO-001"], git_change_set(self.root, "HEAD")))
 
     def test_an_unrelated_added_file_and_a_modified_or_deleted_risk_file_still_need_a_declared_path(self) -> None:

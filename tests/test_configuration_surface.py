@@ -14,7 +14,7 @@ from se_harness.engine.validate_engineering_artifacts import load_revision_polic
 from se_harness.installer import HarnessError, apply_changes, plan_install
 from se_harness.integrity import canonical_sha256
 from se_harness.preflight import inspect_installation
-from se_harness.workflow import _revision_policy
+from se_harness.workflow_edges import revision_policy
 from tests.mutation_guard_support import patch_mutation_authority
 
 
@@ -36,8 +36,8 @@ READERS = {
     "revision_provenance": {
         # load_revision_policy; E010 for an uncovered verified work order.
         "required_for_verified_work": "se_harness/engine/validate_engineering_artifacts.py",
-        # workflow._revision_policy; QGS-EDGE closes the release transition.
-        "required_for_release": "se_harness/workflow.py",
+        # workflow_edges.revision_policy; QGS-EDGE closes the release transition.
+        "required_for_release": "se_harness/workflow_edges.py",
     },
 }
 
@@ -121,7 +121,7 @@ class ConfigurationSurfaceTests(unittest.TestCase):
         # two provenance loaders read the same policy through it.
         with tempfile.TemporaryDirectory() as temporary:
             target = self.install(temporary)
-            lean = (load_revision_policy(target), _revision_policy(target))
+            lean = (load_revision_policy(target), revision_policy(target))
             self.assertEqual([], [item for item in inspect_installation(target) if not item.passed])
 
             (target / CONFIG).write_text(
@@ -130,7 +130,7 @@ class ConfigurationSurfaceTests(unittest.TestCase):
             )
             self.rebind(target, CONFIG)
 
-            self.assertEqual(lean, (load_revision_policy(target), _revision_policy(target)))
+            self.assertEqual(lean, (load_revision_policy(target), revision_policy(target)))
             # The lock still calls the file unchanged; only the drift against the
             # new template shows, and `upgrade --apply` is what closes it.
             self.assertEqual(

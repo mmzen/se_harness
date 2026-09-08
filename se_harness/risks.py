@@ -27,15 +27,15 @@ from se_harness.artifact_layout import (
     ID_PATTERN,
     REF_ARTIFACT_PATTERN,
     AuthoringChange,
-    _atomic_create,
-    _existing_artifact_path,
-    _rollback_directories,
-    _validate_existing_chain,
     allocate_artifact_id,
+    atomic_create,
     canonical_artifact_relative_path,
+    existing_artifact_path,
     reachable_artifact_ids,
+    rollback_directories,
     validate_artifact_id,
     validate_domain,
+    validate_existing_chain,
 )
 from se_harness.decisions import declared_options
 from se_harness.installer import HarnessError, ensure_target
@@ -185,7 +185,7 @@ def _free_identifier(root: Path, artifact_id: str, artifact_type: str) -> str:
     """RSK-MGT-010: an explicit identifier declared anywhere, on any local ref, is refused."""
 
     selected = validate_artifact_id(artifact_id, artifact_type)
-    existing = _existing_artifact_path(root, selected)
+    existing = existing_artifact_path(root, selected)
     if existing is not None:
         raise HarnessError(f"artifact ID already exists: {selected} at {existing.relative_to(root).as_posix()}")
     if (root / ".git").exists():
@@ -356,7 +356,7 @@ def raise_risk(
     needs no decision right and reads no configuration key (RSK-MGT-011).
     """
 
-    from se_harness.workflow import _catalog, _validation
+    from se_harness.repository_graph import artifact_catalog, validated_repository
 
     root = ensure_target(repository, must_exist=True)
     selected_domain = resolve_domain(root, domain)
@@ -380,11 +380,11 @@ def raise_risk(
     if not threatened:
         raise HarnessError("a risk threatens at least one artifact; pass --threatens")
 
-    _, report = _validation(root)
+    _, report = validated_repository(root)
     if any(item.code in {E001, E003} for item in report.errors):
         first = next(item for item in report.errors if item.code in {E001, E003})
         raise HarnessError(f"the artifact graph cannot be read [{first.code}]: {first.message}")
-    catalog = _catalog(report)
+    catalog = artifact_catalog(report)
     for item in threatened:
         target = catalog.get(item)
         if target is None:
@@ -407,7 +407,7 @@ def raise_risk(
     else:
         risk_id = _free_identifier(root, artifact_id, "risk")
     risk_relative = canonical_artifact_relative_path(selected_domain, "risk", risk_id)
-    risk_path = _validate_existing_chain(root, risk_relative, final_kind="file")
+    risk_path = validate_existing_chain(root, risk_relative, final_kind="file")
     if risk_path.exists():
         raise HarnessError(f"artifact destination already exists: {risk_relative.as_posix()}")
     changes = [AuthoringChange("create", risk_relative.as_posix(), allocated, allocation_refs)]
@@ -420,7 +420,7 @@ def raise_risk(
         else:
             paired_id = _free_identifier(root, decision_id, "decision")
         decision_relative = canonical_artifact_relative_path(selected_domain, "decision", paired_id)
-        decision_path = _validate_existing_chain(root, decision_relative, final_kind="file")
+        decision_path = validate_existing_chain(root, decision_relative, final_kind="file")
         if decision_path.exists():
             raise HarnessError(f"artifact destination already exists: {decision_relative.as_posix()}")
         changes.append(AuthoringChange("create", decision_relative.as_posix()))
@@ -460,15 +460,15 @@ def raise_risk(
                 if not probe.exists():
                     probe.mkdir()
                     created_directories.append(probe)
-        _atomic_create(risk_path, risk_bytes)
+        atomic_create(risk_path, risk_bytes)
         written.append(risk_path)
         if decision_path is not None and decision_bytes is not None:
-            _atomic_create(decision_path, decision_bytes)
+            atomic_create(decision_path, decision_bytes)
             written.append(decision_path)
     except (OSError, HarnessError) as exc:
         for path in reversed(written):
             path.unlink(missing_ok=True)
-        _rollback_directories(created_directories)
+        rollback_directories(created_directories)
         if isinstance(exc, HarnessError):
             raise HarnessError(f"raise-risk wrote nothing: {exc}") from exc
         raise HarnessError(f"raise-risk wrote nothing: {exc}") from exc
@@ -594,7 +594,8 @@ def dispose_decision_with_risks(
     withdraws them; a decided option moves each to the state it names.
     """
 
-    from se_harness.workflow import _catalog, _validation, plan_transition
+    from se_harness.repository_graph import artifact_catalog, validated_repository
+    from se_harness.workflow import plan_transition
 
     if defer and withdraw:
         raise HarnessError("--defer and --withdraw are exclusive")
@@ -606,8 +607,8 @@ def dispose_decision_with_risks(
     dispositions: dict[str, Mapping[str, Any]] = {
         decision_id: {"target": target, "option": option, "revisit": revisit, "scope": tuple(scope)},
     }
-    _, report = _validation(root)
-    catalog = _catalog(report) if not any(item.code in {E001, E003} for item in report.errors) else {}
+    _, report = validated_repository(root)
+    catalog = artifact_catalog(report) if not any(item.code in {E001, E003} for item in report.errors) else {}
     decision = catalog.get(decision_id)
     risks = raised_risks_of(catalog, decision) if decision is not None and decision.artifact_type == "decision" else []
     if not risks and (mitigated_by or avoided_by):
@@ -643,14 +644,14 @@ def dispose_decision_with_risks(
 def risks_threatening(repository: Path, artifact_id: str) -> list[dict[str, Any]]:
     """RSK-MGT-033: the risks threatening one artifact and its governing chain; reads only."""
 
-    from se_harness.workflow import PRIMARY_TYPES, _catalog, _validation, project_scope
+    from se_harness.repository_graph import PRIMARY_TYPES, artifact_catalog, project_scope, validated_repository
 
     root = ensure_target(repository, must_exist=True)
-    _, report = _validation(root)
+    _, report = validated_repository(root)
     if any(item.code in {E001, E003} for item in report.errors):
         first = next(item for item in report.errors if item.code in {E001, E003})
         raise HarnessError(f"the artifact graph cannot be read [{first.code}]: {first.message}")
-    catalog = _catalog(report)
+    catalog = artifact_catalog(report)
     primary = catalog.get(artifact_id)
     if primary is None:
         raise HarnessError(f"unknown artifact ID: {artifact_id}")
