@@ -10,9 +10,9 @@ from __future__ import annotations
 import json
 import os
 import re
-import tempfile
 import tomllib
 
+from se_harness import front_matter
 from se_harness.gate_source import (
     DELEGATED_RIGHTS,
     DELEGATED_ROLE,
@@ -27,22 +27,13 @@ from pathlib import Path
 from typing import Any, Iterable, Mapping
 
 from se_harness.installer import HarnessError, ensure_target, safe_destination
+from se_harness.integrity import IntegrityError, read_toml, stage_bytes
 from se_harness.preflight import _load_validator_module
-from se_harness.workflow_contract import load_workflow_contract, validate_lifecycle_registry
+from se_harness.workflow_contract import DEFINITION_TYPES, load_workflow_contract, validate_lifecycle_registry
+from se_harness.codes import CodedError, E001, E003, WEX001, WEX190, WEX_ECP_001, WEX_ECP_030
 
 
 PRIMARY_TYPES = {"work_order", "verification_record", "release_record", "decision"}
-DEFINITION_TYPES = {
-    "intent",
-    "capability",
-    "requirement",
-    "specification",
-    "architecture",
-    "adr",
-    "verification",
-    "release_contract",
-    "operating_contract",
-}
 
 WORKFLOW_CONTRACT = load_workflow_contract()
 LIFECYCLE_REGISTRY = validate_lifecycle_registry(WORKFLOW_CONTRACT)
@@ -68,6 +59,10 @@ class PreconditionError(HarnessError):
     def __init__(self, predicate_id: str, message: str) -> None:
         super().__init__(message)
         self.predicate_id = predicate_id
+        # ECP-PRM-017: the two attributes of a coded refusal; the wire form stays the bare message,
+        # the CLI labelling it with the predicate.
+        self.code = predicate_id
+        self.message = message
 
 
 @dataclass(frozen=True)
@@ -102,7 +97,7 @@ def failed_result(
     primary: str | None,
     message: str,
     *,
-    code: str = "WEX001",
+    code: str = WEX001,
     repository_blocker: bool = False,
 ) -> dict[str, Any]:
     from se_harness.workflow_compliance import remediation_result
@@ -253,8 +248,7 @@ def project_selected(
             if item.artifact_type == "work_order" and item.status == "in_progress"
         )
         if len(candidates) != 1:
-            raise HarnessError(
-                f"WEX-ECP-001: {len(candidates)} work orders are in_progress; name one with --artifact"
+            raise CodedError(WEX_ECP_001, f"{len(candidates)} work orders are in_progress; name one with --artifact"
                 + (f" ({', '.join(candidates)})" if candidates else "")
             )
         artifact_id = candidates[0]
@@ -276,7 +270,7 @@ def project_selected(
     for item in report.errors:
         diagnostic = _diagnostic(item)
         candidate = safe_destination(root, Path(item.path))
-        if item.code in {"E001", "E003"}:
+        if item.code in {E001, E003}:
             repository.append(diagnostic)
         elif candidate.resolve() in scope_paths:
             scoped.append(diagnostic)
@@ -293,7 +287,7 @@ def project_selected(
     elif counts:
         total = sum(counts.values())
         background.append({
-            "code": "WEX190",
+            "code": WEX190,
             "count": total,
             "message": f"{total} unrelated finding(s); use --include-background for categories",
         })
@@ -375,23 +369,9 @@ def _assertion(value: str, label: str, *, limit: int) -> str:
 
 
 def _split_document(data: bytes) -> tuple[list[str], str, str, str]:
-    try:
-        text = data.decode("utf-8-sig")
-    except UnicodeError as exc:
-        raise HarnessError(f"formal artifact is not valid UTF-8: {exc}") from exc
-    lines = text.splitlines(keepends=True)
-    clean = [line.rstrip("\r\n") for line in lines]
-    if not clean or clean[0] != "+++":
-        raise HarnessError("formal artifact has no TOML front matter")
-    try:
-        closing = clean.index("+++", 1)
-    except ValueError as exc:
-        raise HarnessError("formal artifact has no closing front-matter delimiter") from exc
-    opening_ending = lines[0][len(clean[0]) :]
-    newline = opening_ending or ("\r\n" if "\r\n" in text else "\n")
-    body = "".join(lines[closing + 1 :])
-    bom = "\ufeff" if data.startswith(b"\xef\xbb\xbf") else ""
-    return clean[1:closing], body, newline, bom + "+++" + newline
+    # ECP-PRM-005: the one parser; the document's newline and BOM are kept for the write-back.
+    document = front_matter.split_document(data, error=HarnessError)
+    return list(document.front_lines), document.body, document.newline, document.opening
 
 
 def _top_level_end(lines: list[str]) -> int:
@@ -532,12 +512,13 @@ def _grants_authority(family: str, status: str) -> bool:
 
 
 def _revision_policy(root: Path) -> dict[str, bool]:
+    # ECP-PRM-011: the one configuration reader; an unreadable file is the policy's default.
     path = root / ".engineering-harness.toml"
     if not path.is_file():
         return {"required_for_verified_work": False, "required_for_release": False}
     try:
-        data = tomllib.loads(path.read_text(encoding="utf-8-sig"))
-    except (OSError, UnicodeError, tomllib.TOMLDecodeError):
+        data = read_toml(path)
+    except IntegrityError:
         return {"required_for_verified_work": False, "required_for_release": False}
     table = data.get("revision_provenance", {})
     return {
@@ -554,6 +535,7 @@ def _validate_edge(
     reason: str | None,
     catalog: Mapping[str, Any] | None = None,
     disposition: Mapping[str, Any] | None = None,
+    policy: Mapping[str, bool] | None = None,
 ) -> Mapping[str, Any] | None:
     family = _family(artifact.artifact_type)
     row = LIFECYCLE_REGISTRY.get(family, {}).get(artifact.status)
@@ -595,7 +577,8 @@ def _validate_edge(
         _assertion(reason, f"reason for {artifact.artifact_id}", limit=2000)
     elif reason is not None:
         _assertion(reason, f"reason for {artifact.artifact_id}", limit=2000)
-    policy = _revision_policy(root)
+    if policy is None:
+        policy = _revision_policy(root)  # ECP-PRM-011: the planner passes its one reading
     if family == "work_order" and artifact.status in {"implemented", "verified"}:
         setting = "required_for_verified_work" if target == "verified" else "required_for_release"
         if not policy[setting]:
@@ -668,6 +651,7 @@ def structural_precondition_results(
     artifact: Any,
     target: str,
     reason: str | None,
+    policy: Mapping[str, bool] | None = None,
 ) -> list[dict[str, Any]]:
     """Evaluate the graph-structural checks bound to one edge (ECP-KRN-005).
 
@@ -689,7 +673,8 @@ def structural_precondition_results(
             if row is None or target not in row.transitions_to:
                 results.append(_structural(check, "fail", f"transition {artifact_id}: {artifact.status} -> {target} is not allowed", artifact_id))
                 continue
-            policy = _revision_policy(root)
+            if policy is None:
+                policy = _revision_policy(root)
             if family == "work_order" and artifact.status in {"implemented", "verified"}:
                 setting = "required_for_verified_work" if target == "verified" else "required_for_release"
                 if not policy[setting]:
@@ -748,7 +733,7 @@ def structural_precondition_results(
             else:
                 results.append(_structural(check, "pass", f"{successor_id} is an eligible successor preserving the coverage of {artifact_id}.", artifact_id))
         else:  # pragma: no cover - the loader rejects unknown structural ids
-            raise HarnessError(f"WEX-ECP-030: unknown structural check {check}")
+            raise CodedError(WEX_ECP_030, f"unknown structural check {check}")
     return results
 
 
@@ -762,6 +747,7 @@ def plan_transition(
     dispositions: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> TransitionPlan:
     root = ensure_target(repository, must_exist=True)
+    policy = _revision_policy(root)  # ECP-PRM-011: read once per plan
     dispositions = dict(dispositions or {})
     if not transitions:
         raise HarnessError("at least one --set ID=STATUS is required")
@@ -781,7 +767,7 @@ def plan_transition(
     if report.errors:
         first = report.errors[0]
         message = f"current artifact graph is invalid [{first.code}]: {first.message}"
-        if first.code in {"E001", "E003"}:
+        if first.code in {E001, E003}:
             raise RepositoryWorkflowError(message)
         raise HarnessError(message)
     catalog = _catalog(report)
@@ -813,7 +799,8 @@ def plan_transition(
         if artifact is None:
             raise HarnessError(f"unknown artifact ID: {artifact_id}")
         disposition_fields = _validate_edge(
-            root, artifact, target, decisions[artifact_id], reasons.get(artifact_id), catalog, dispositions.get(artifact_id)
+            root, artifact, target, decisions[artifact_id], reasons.get(artifact_id), catalog, dispositions.get(artifact_id),
+            policy=policy,  # ECP-PRM-011: the planner's one reading
         )
         if artifact.artifact_type == "decision" and disposition_fields is None:
             raise HarnessError(
@@ -873,22 +860,24 @@ def plan_transition(
     _, quality, _, _, gates = load_validated_contracts()
     gate_results: list[dict[str, Any]] = []
     blocked_by: list[str] = []
+    refusals: list[tuple[str, str]] = []
     for artifact_id, target in sorted(transitions.items()):
         artifact = catalog[artifact_id]
         context = build_context(
             root, report, catalog, artifact,
             checkpoint="transition", change_set=declared_change_set((), complete=False), target=target,
         )
-        structural = structural_precondition_results(root, catalog, proposed_catalog, artifact, target, effective_reasons.get(artifact_id))
+        structural = structural_precondition_results(root, catalog, proposed_catalog, artifact, target, effective_reasons.get(artifact_id), policy=policy)
         for gate in transition_gate_results(quality, gates, context, structural=structural):
             gate_results.append(gate)
             for predicate in gate["predicates"]:
                 if predicate["status"] != "pass":
+                    refusals.append((str(predicate["id"]), str(predicate["message"])))
                     blocked_by.append(f"{predicate['id']}: {predicate['message']}")
-    if blocked_by and apply:
+    if refusals and apply:
         # A programmatic apply fails closed, labelled by the first refusing check
         # (ECP-KRN-008); a plan renders the blocked result instead.
-        predicate_id, _, message = blocked_by[0].partition(": ")
+        predicate_id, message = refusals[0]
         raise PreconditionError(predicate_id, "; ".join([message, *blocked_by[1:]]))
     if blocked_by:
         current = catalog[primary_id]
@@ -948,17 +937,8 @@ def plan_transition(
 
 
 def _stage(path: Path, content: bytes) -> Path:
-    descriptor, name = tempfile.mkstemp(prefix=f".{path.name}.wex-", dir=path.parent)
-    staged = Path(name)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(content)
-            handle.flush()
-            os.fsync(handle.fileno())
-    except Exception:
-        staged.unlink(missing_ok=True)
-        raise
-    return staged
+    # ECP-PRM-008: the transaction stages every file through integrity's one writer, then replaces them all.
+    return stage_bytes(path, content, prefix=f".{path.name}.wex-")
 
 
 def _replace(staged: Path, target: Path) -> None:

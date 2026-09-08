@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import io
 import json
 import os
@@ -11,26 +10,56 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import tomllib
 import zipfile
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Callable
 
 from se_harness import __version__
-from se_harness.candidate_acceptance import assess_candidate_wheel
+from se_harness.candidate_acceptance import assess_candidate_wheel, safe_environment
 from se_harness.evaluator_identity import (
     EvaluatorIdentityError,
     installed_evaluator_identity,
     wheel_payload_sha256,
 )
+from se_harness import front_matter
+from se_harness._process import run as _launch
 from se_harness.installer import ENGINE_ROOT, HarnessError, template_root
-from se_harness.integrity import IntegrityError, parse_lock
+from se_harness.integrity import (
+    WHEEL_VERSION_PATTERN,
+    atomic_create_bytes,
+    IntegrityError,
+    canonical_json_bytes,
+    canonical_text,
+    parse_lock,
+    pretty_json_bytes,
+    raw_sha256,
+)
 from se_harness.preflight import inspect_installation
 from se_harness.runtime_identity import (
     COMMIT_PATTERN,
     SHA256_PATTERN,
     inspect_runtime_identity,
+)
+from se_harness.codes import (
+    CC001,
+    CC002,
+    CC003,
+    CC004,
+    CP001,
+    CP002,
+    PI001,
+    PI002,
+    PI003,
+    PI004,
+    PI005,
+    PV001,
+    PV002,
+    RID000,
+    RR001,
+    RR002,
+    RR003,
+    RR004,
 )
 
 
@@ -52,11 +81,12 @@ INDEPENDENCE = {
 #: Retired with the predecessor-bootstrap release path under WO-REB-028. The
 #: values stay reserved so no later check reuses them for another meaning; no
 #: code path emits them.
-RETIRED_CHECK_CODES = ("PV001", "PV002")
+RETIRED_CHECK_CODES = (PV001, PV002)
 
 MAX_COMMAND_OUTPUT_BYTES = 4 * 1024 * 1024
 MAX_WHEEL_BYTES = 100 * 1024 * 1024
-VERSION_PATTERN = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+(?:[A-Za-z0-9.+-]*)?")
+#: ECP-PRM-014: the one wheel grammar both qualify roles apply.
+VERSION_PATTERN = WHEEL_VERSION_PATTERN
 
 
 @dataclass(frozen=True)
@@ -93,21 +123,14 @@ class QualificationResult:
         }
 
     def canonical_bytes(self) -> bytes:
-        return (
-            json.dumps(self.to_dict(), ensure_ascii=True, indent=2, sort_keys=True)
-            + "\n"
-        ).encode("utf-8")
+        return pretty_json_bytes(self.to_dict(), ensure_ascii=True)  # ECP-PRM-006: the same bytes
 
 
 def _canonical_compact(value: Any) -> bytes:
-    return (
-        json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True)
-        + "\n"
-    ).encode("utf-8")
+    return canonical_json_bytes(value, ensure_ascii=True)
 
 
-def _sha256(raw: bytes) -> str:
-    return hashlib.sha256(raw).hexdigest()
+_sha256 = raw_sha256
 
 
 def _identified(value: dict[str, Any]) -> dict[str, Any]:
@@ -158,7 +181,7 @@ def failed_qualification(
 
 
 def _bounded_message(message: str) -> str:
-    lines = message.replace("\r\n", "\n").replace("\r", "\n").splitlines()
+    lines = canonical_text(message).splitlines()  # ECP-PRM-010
     normalized = lines[0] if lines else "qualification failed without a diagnostic"
     for path, replacement in (
         (Path.cwd(), "<ROOT>"),
@@ -215,46 +238,17 @@ def write_qualification_result(
         raise HarnessError("qualification output must be outside the inspected repository")
     if destination.exists() or destination.is_symlink():
         raise HarnessError("qualification output already exists")
-    fd, temporary_name = tempfile.mkstemp(prefix=f".{destination.name}.", dir=parent)
-    try:
-        with os.fdopen(fd, "wb") as stream:
-            stream.write(result.canonical_bytes())
-            stream.flush()
-            os.fsync(stream.fileno())
-        try:
-            os.link(temporary_name, destination)
-        except FileExistsError as exc:
-            raise HarnessError("qualification output already exists") from exc
-        except OSError as exc:
-            raise HarnessError("qualification output could not be published atomically") from exc
-    finally:
-        try:
-            os.unlink(temporary_name)
-        except FileNotFoundError:
-            pass
+    # ECP-PRM-008: the one create-once writer, with this module's wording.
+    atomic_create_bytes(
+        destination,
+        result.canonical_bytes(),
+        exists=lambda: HarnessError("qualification output already exists"),
+        failed=lambda detail: HarnessError("qualification output could not be published atomically"),
+    )
 
 
-def _safe_environment() -> dict[str, str]:
-    selected = {
-        name: value
-        for name, value in os.environ.items()
-        if name.upper()
-        in {
-            "COMSPEC",
-            "HOME",
-            "LANG",
-            "LC_ALL",
-            "PATH",
-            "PATHEXT",
-            "SYSTEMROOT",
-            "TEMP",
-            "TMP",
-            "WINDIR",
-        }
-    }
-    selected["PYTHONNOUSERSITE"] = "1"
-    selected.pop("PYTHONPATH", None)
-    return selected
+# ECP-PRM-015: the one environment builder lives beside the candidate acceptance.
+_safe_environment = safe_environment
 
 
 def _run(
@@ -263,22 +257,14 @@ def _run(
     cwd: Path,
     timeout: int = 180,
 ) -> subprocess.CompletedProcess[bytes]:
-    try:
-        completed = subprocess.run(
-            command,
-            cwd=cwd,
-            env=_safe_environment(),
-            stdin=subprocess.DEVNULL,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            check=False,
-            timeout=timeout,
-        )
-    except (OSError, subprocess.SubprocessError) as exc:
-        raise HarnessError("qualification subprocess could not complete") from exc
-    if len(completed.stdout) > MAX_COMMAND_OUTPUT_BYTES or len(completed.stderr) > MAX_COMMAND_OUTPUT_BYTES:
-        raise HarnessError("qualification subprocess output exceeds the byte limit")
-    return completed
+    # ECP-PRM-001: the one launcher, input closed, both streams captured and capped.
+    return _launch(
+        command, cwd=cwd, env=_safe_environment(), timeout=timeout, output_cap=MAX_COMMAND_OUTPUT_BYTES,
+        error=lambda message: HarnessError(
+            "qualification subprocess output exceeds the byte limit" if "output exceeds" in message
+            else "qualification subprocess could not complete"
+        ),
+    )
 
 
 def _ordinary_root(path: Path) -> Path:
@@ -387,7 +373,7 @@ def _runtime_summary(identity: Any, role: str) -> dict[str, Any]:
     diagnostics = getattr(identity, "diagnostics", ())
     value["diagnostics"] = [
         {
-            "code": str(getattr(item, "code", "RID000")),
+            "code": str(getattr(item, "code", RID000)),
             "subject": str(getattr(item, "subject", "runtime")),
             "message": _bounded_message(str(getattr(item, "message", "identity mismatch"))),
         }
@@ -449,7 +435,7 @@ def qualify_released_root(root: Path) -> QualificationResult:
     )
     checks.append(
         _check(
-            "RR001",
+            RR001,
             identity.passed,
             "released-evaluator",
             "runtime matches the target root lock" if identity.passed else "runtime does not match the target root lock",
@@ -459,22 +445,22 @@ def qualify_released_root(root: Path) -> QualificationResult:
         managed = inspect_installation(selected)
         checks.append(
             _check(
-                "RR002",
+                RR002,
                 bool(managed) and all(item.passed for item in managed),
                 "managed-root",
                 f"{sum(item.passed for item in managed)}/{len(managed)} managed checks passed",
             )
         )
-        checks.append(_validation_check(selected, "RR003"))
+        checks.append(_validation_check(selected, RR003))
     else:
         checks.extend(
             [
-                _check("RR002", False, "managed-root", "not run after evaluator identity failure"),
-                _check("RR003", False, "engineering-graph", "not run after evaluator identity failure"),
+                _check(RR002, False, "managed-root", "not run after evaluator identity failure"),
+                _check(RR003, False, "engineering-graph", "not run after evaluator identity failure"),
             ]
         )
     after = _repository_snapshot(selected)
-    checks.append(_check("RR004", before == after, "repository-state", "target state is unchanged" if before == after else "target state changed"))
+    checks.append(_check(RR004, before == after, "repository-state", "target state is unchanged" if before == after else "target state changed"))
     target = {
         "kind": "released-root",
         "lock_schema": lock.get("schema"),
@@ -504,15 +490,15 @@ def qualify_complete_candidate(root: Path, *, candidate_commit: str) -> Qualific
     )
     tracked_clean = _tracked_clean(selected)
     checks = [
-        _check("CC001", identity.passed, "candidate-runtime", "candidate runtime is bound to the checkout" if identity.passed else "candidate runtime identity failed"),
-        _check("CC002", observed_commit == candidate_commit and tracked_clean, "candidate-commit", "HEAD and tracked tree match the candidate" if observed_commit == candidate_commit and tracked_clean else "HEAD or tracked tree differs from the candidate"),
+        _check(CC001, identity.passed, "candidate-runtime", "candidate runtime is bound to the checkout" if identity.passed else "candidate runtime identity failed"),
+        _check(CC002, observed_commit == candidate_commit and tracked_clean, "candidate-commit", "HEAD and tracked tree match the candidate" if observed_commit == candidate_commit and tracked_clean else "HEAD or tracked tree differs from the candidate"),
     ]
     if all(item.passed for item in checks):
-        checks.append(_validation_check(selected, "CC003"))
+        checks.append(_validation_check(selected, CC003))
     else:
-        checks.append(_check("CC003", False, "engineering-graph", "not run after candidate identity failure"))
+        checks.append(_check(CC003, False, "engineering-graph", "not run after candidate identity failure"))
     after = _repository_snapshot(selected)
-    checks.append(_check("CC004", before == after, "repository-state", "target state is unchanged" if before == after else "target state changed"))
+    checks.append(_check(CC004, before == after, "repository-state", "target state is unchanged" if before == after else "target state changed"))
     return _result(
         "complete-candidate",
         evaluator=_runtime_summary(identity, "candidate-source"),
@@ -547,7 +533,7 @@ def qualify_candidate_package(
         require_entry_point=True,
     )
     checks = [
-        _check("CP001", identity.passed, "released-verifier", "released verifier identity is exact and isolated" if identity.passed else "released verifier identity failed"),
+        _check(CP001, identity.passed, "released-verifier", "released verifier identity is exact and isolated" if identity.passed else "released verifier identity failed"),
     ]
     manifest = None
     if identity.passed:
@@ -560,11 +546,11 @@ def qualify_candidate_package(
                 checkout_root=checkout_root,
             )
         except HarnessError as exc:
-            checks.append(_check("CP002", False, "candidate-wheel", _bounded_message(str(exc))))
+            checks.append(_check(CP002, False, "candidate-wheel", _bounded_message(str(exc))))
         else:
-            checks.append(_check("CP002", True, "candidate-wheel", f"{len(manifest.scenarios)} released-verifier scenarios passed"))
+            checks.append(_check(CP002, True, "candidate-wheel", f"{len(manifest.scenarios)} released-verifier scenarios passed"))
     else:
-        checks.append(_check("CP002", False, "candidate-wheel", "not run after verifier identity failure"))
+        checks.append(_check(CP002, False, "candidate-wheel", "not run after verifier identity failure"))
     target = {
         "kind": "candidate-package",
         "commit": candidate_commit,
@@ -582,19 +568,8 @@ def qualify_candidate_package(
 
 
 def _front_matter(path: Path) -> dict[str, Any] | None:
-    try:
-        text = path.read_text(encoding="utf-8").replace("\r\n", "\n").replace("\r", "\n")
-    except (OSError, UnicodeError):
-        return None
-    lines = text.splitlines()
-    if not lines or lines[0] != "+++":
-        return None
-    try:
-        end = lines.index("+++", 1)
-        value = tomllib.loads("\n".join(lines[1:end]))
-    except (ValueError, tomllib.TOMLDecodeError):
-        return None
-    return value if isinstance(value, dict) else None
+    # ECP-PRM-005: the one parser.
+    return front_matter.read_or_none(path)
 
 
 def _release_record(root: Path, artifact_id: str) -> tuple[Path, dict[str, Any]]:
@@ -690,13 +665,13 @@ def qualify_public_install(
         and all(operation.encode("ascii") in qualify_smoke.stdout for operation in OPERATIONS)
     )
     checks = [
-        _check("PI001", wheel_ok, "public-wheel", "released wheel, record, and installed archive agree" if wheel_ok else "released wheel, record, or installed archive differs"),
-        _check("PI002", payload_ok, "installed-payload", "wheel and installed payload digests agree" if payload_ok else "wheel or installed payload digest differs"),
-        _check("PI003", entry_ok and not contaminated, "installed-runtime", "entry point and resources are isolated from source" if entry_ok and not contaminated else "entry point or resources are contaminated"),
-        _check("PI004", behavior_ok, "public-cli", "installed version and qualification surface passed" if behavior_ok else "installed CLI behavior differs"),
+        _check(PI001, wheel_ok, "public-wheel", "released wheel, record, and installed archive agree" if wheel_ok else "released wheel, record, or installed archive differs"),
+        _check(PI002, payload_ok, "installed-payload", "wheel and installed payload digests agree" if payload_ok else "wheel or installed payload digest differs"),
+        _check(PI003, entry_ok and not contaminated, "installed-runtime", "entry point and resources are isolated from source" if entry_ok and not contaminated else "entry point or resources are contaminated"),
+        _check(PI004, behavior_ok, "public-cli", "installed version and qualification surface passed" if behavior_ok else "installed CLI behavior differs"),
     ]
     after = _repository_snapshot(selected)
-    checks.append(_check("PI005", before == after, "repository-state", "target state is unchanged" if before == after else "target state changed"))
+    checks.append(_check(PI005, before == after, "repository-state", "target state is unchanged" if before == after else "target state changed"))
     return _result(
         "public-install",
         evaluator={

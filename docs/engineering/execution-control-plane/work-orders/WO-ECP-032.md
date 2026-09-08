@@ -2,7 +2,7 @@
 id = "WO-ECP-032"
 type = "work_order"
 title = "Wave 2, group B: the integrity primitives, the closed sets and the two grammars"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -25,6 +25,7 @@ paths = [
   "se_harness/installer.py",
   "se_harness/interpreter_safety.py",
   "se_harness/mutation_guard.py",
+  "se_harness/preflight.py",
   "se_harness/provenance.py",
   "se_harness/release_qualification.py",
   "se_harness/runtime_identity.py",
@@ -59,6 +60,20 @@ to = "approved"
 decided_at = "2026-09-08T09:17:17Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all six (Recommended)', given after the stacked packet pull requests #395, #396 and #397 and their summary were presented: wave 2 of the code health assessment of 2026-09-07 (issue #377) with the owner decision of issue #381 item 4, one primitive per family and the four contract tables read at run time. Approval of a definition authorizes no work. WO-ECP-032 carries no delegation class: its start, completion and record preparation are the engineering owner's explicit decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-08T10:55:39Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-09-08, given with the words 'start the work orders' and confirmed by selecting the presented option 'Complete and prepare the record, then start group B' after WO-ECP-031 completed. Start preflight PASS. Executes on wo/ecp-032-integrity-primitives, stacked on the group A branch because the two groups edit the same modules; DEC-ECP-001 already bounds ECP-PRM-009 and ECP-PRM-015 to the package."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-08T12:19:50Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-09-08 under DR-WO-COMPLETE, by selecting the presented option 'Complete, prepare the record, start group C': se_harness/integrity.py is the one home of the digest, canonical-text, JSON, duplicate-key, staging, atomic-write primitives and the configuration reader; workflow_contract.py defines the checkpoint and definition-type sets once; checkpoint, phase, install-mode and change-action values are typed; both wheel parsers apply one grammar; one environment builder serves both qualification runtimes; the transition planner reads the revision policy once. No recorded digest moved (CONTRACT_SHA256 a443e93d unchanged). Windows suite at its baseline (1309 tests, the one workstation error, 26 skips) at b72c9652 and the 13 pull-request checks of #399 green at 35f83f4f; validate 1397 artifacts, 0 errors, 0 advisories; doctor 0 FAIL; the handoff check over the Git-derived change set from 3d2bee39 passes all nine predicates over 26 paths. Scope amended under DR-REMEDIATION-SCOPE for se_harness/preflight.py. Duplication scan 6 blocks on main to 4; ECP-PRM-027 is read at group C. Evidence: docs/engineering/execution-control-plane/evidence/WO-ECP-032/WO-ECP-032-handoff.md."
 +++
 
 # Work Order: Wave 2, group B: the integrity primitives, the closed sets and the two grammars
@@ -161,3 +176,14 @@ JSON byte; any managed or engine path in the change set.
 
 The evidence packet, the changed-path ledger, the handoff `check`
 restitution; the completion decision is the engineering owner's.
+
+## Scope amendment, 2026-09-08
+
+`se_harness/preflight.py` is added to `[execution_scope].paths`. `ECP-PRM-013`
+requires `phase` values typed as `Literal` in the package, and
+`preflight.run_preflight` is the one site that defines the phase; the scope
+listed every other module the group touches and omitted this one. The handoff
+check refused the change set on `QGP-G4I-PATHS` (`WEX201`) for that path
+alone, the other eight predicates passing. Decided by the accountable
+engineering owner on 2026-09-08 under DR-REMEDIATION-SCOPE by selecting the
+presented option "Amend the scope". Nothing else is widened.

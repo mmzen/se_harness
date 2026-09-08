@@ -5,17 +5,20 @@ from __future__ import annotations
 import json
 import re
 import shutil
-import subprocess
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
-from typing import Any, Iterable, Mapping
+from typing import Iterable, Mapping
 
+from se_harness import front_matter
+from se_harness._process import run_git
 from se_harness.integrity import (
     HASH_MODE,
     IntegrityError,
     canonical_sha256,
+    canonical_text,
     raw_sha256,
+    unique_object_hook,
 )
 
 
@@ -78,13 +81,7 @@ class Declaration:
         return frozenset(field for field, _ in self.unbound_digest_fields)
 
 
-def _object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    result: dict[str, Any] = {}
-    for key, value in pairs:
-        if key in result:
-            raise HashBoundError(f"duplicate declaration key: {key}")
-        result[key] = value
-    return result
+_object = unique_object_hook(lambda key: HashBoundError(f"duplicate declaration key: {key}"))
 
 
 def _text(value: object, label: str, pattern: re.Pattern[str]) -> str:
@@ -290,19 +287,13 @@ def compare_declared_digest(
 
 
 def _git(root: Path, arguments: list[str], *, stdin: bytes | None = None) -> bytes:
-    executable = shutil.which("git")
-    if executable is None:
-        raise HashBoundError("git executable is unavailable")
-    try:
-        completed = subprocess.run(  # noqa: S603 - fixed argument vector, shell=False
-            [executable, "-C", str(root), *arguments],
-            input=stdin,
-            capture_output=True,
-            shell=False,
-            timeout=_GIT_TIMEOUT,
-        )
-    except (OSError, subprocess.SubprocessError) as exc:
-        raise HashBoundError(f"git {arguments[0]} failed: {exc}") from exc
+    # ECP-PRM-003: the one launcher; the refusal keeps this module's wording.
+    completed = run_git(
+        root, *arguments, stdin=stdin, timeout=_GIT_TIMEOUT,
+        error=lambda message: HashBoundError(
+            message if message.startswith("git executable is unavailable") else f"git {arguments[0]} failed: {message}"
+        ),
+    )
     if completed.returncode != 0:
         detail = completed.stderr.decode("utf-8", errors="replace").strip().splitlines()
         raise HashBoundError(
@@ -358,7 +349,7 @@ def attribute_regions(root: Path) -> dict[str, tuple[str, ...]]:
     template: list[str] = []
     repository: list[str] = []
     inside = False
-    for line in text.replace("\r\n", "\n").replace("\r", "\n").split("\n"):
+    for line in canonical_text(text).split("\n"):  # ECP-PRM-010
         stripped = line.strip()
         if stripped == ATTRIBUTE_BEGIN_MARKER:
             if inside:
@@ -393,12 +384,13 @@ def _front_matter(path: Path, relative: str) -> list[str] | None:
             if limit is None:
                 raise HashBoundError(f"cannot read {relative}: invalid UTF-8")
             continue
-        lines = text.replace("\r\n", "\n").replace("\r", "\n").split("\n")
-        if not lines or lines[0].strip() != _FRONT_MATTER:
+        # ECP-PRM-005: the one parser finds both delimiters; this loop only bounds the read.
+        found = front_matter.front_matter_lines(text)
+        if found is None:
             return None
-        for index, line in enumerate(lines[1:], start=1):
-            if line.strip() == _FRONT_MATTER:
-                return lines[1:index]
+        lines, terminated = found
+        if terminated:
+            return lines
         if limit is None:
             raise HashBoundError(f"cannot read {relative}: front matter is unterminated")
     return None

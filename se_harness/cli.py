@@ -2,16 +2,20 @@
 
 from __future__ import annotations
 
+from typing import Mapping
+
 import argparse
 import json
-import hashlib
 import os
 import re
 import subprocess
 import sys
 from pathlib import Path
 
+from se_harness.integrity import pretty_json_bytes, raw_sha256
+from se_harness.workflow_contract import CHECKPOINT_ORDER, EVIDENCE_CHECKPOINTS
 from se_harness import __version__
+from se_harness._process import run as _launch, text as _text
 from se_harness.artifact_layout import create_artifact, scaffold_domain
 from se_harness.installer import (
     engine_script,
@@ -24,7 +28,7 @@ from se_harness.installer import (
 from se_harness.github_ci import SelectionError, select_from_event
 from se_harness.mutation_guard import MutationGuardError
 from se_harness.preflight import inspect_installation, render_preflight, render_preflight_json, run_preflight
-from se_harness.provenance import CAUSE_SUFFIX, capture_verification, prepare_release
+from se_harness.provenance import capture_verification, prepare_release
 from se_harness.risks import OPTION_TARGETS, RISK_CATEGORIES, RISK_STAGES
 from se_harness.release_qualification import (
     failed_qualification,
@@ -50,6 +54,23 @@ from se_harness.workflow import (
     plan_transition,
     preparation_result,
 )
+from se_harness.codes import (
+    CodedError,
+    E_CIP_001,
+    E_RSK_003,
+    RELEASE_RECORD_REFUSALS,
+    RQ001,
+    RQ002,
+    VERIFICATION_RECORD_REFUSALS,
+    W013,
+    WEX200,
+    WEX201,
+    WEX210,
+    WEX_ECP_002,
+    WEX_ECP_010,
+    WEX_ECP_014,
+    W_ADS_001,
+)
 
 
 COMMAND_RESULT_SCHEMA = "se-harness-command-result-v1"
@@ -58,18 +79,25 @@ COMMAND_RESULT_SCHEMA = "se-harness-command-result-v1"
 CODE_PREFIX = re.compile(r"^(WEX(?:-[A-Z]+)?-?\d{3}): (.*)$", re.S)
 
 
-def _split_code(message: str, default: str) -> tuple[str, str]:
-    match = CODE_PREFIX.match(message)
+def _split_code(exc: object, default: str) -> tuple[str, str]:
+    """The code and message of a refusal: its two attributes when it carries them (ECP-PRM-017),
+    else the one split of its leading code, else the default and the whole text."""
+
+    code = getattr(exc, "code", None)
+    message = getattr(exc, "message", None)
+    if isinstance(code, str) and code and isinstance(message, str):
+        return code, message
+    text = str(exc)
+    match = CODE_PREFIX.match(text)
     if match:
         return match.group(1), match.group(2)
-    return default, message
+    return default, text
 
 
-def _record_code(exc: HarnessError, family: str) -> tuple[str, str]:
+def _record_code(exc: HarnessError, refusals: Mapping[str, str]) -> tuple[str, str]:
     """The code of a refused record preparation: its cause class, or the code it carries (ECP-CLI-007)."""
 
-    code, message = _split_code(str(exc), family + CAUSE_SUFFIX.get(getattr(exc, "cause", "state"), "1"))
-    return code, message
+    return _split_code(exc, refusals.get(str(getattr(exc, "cause", "state")), refusals["state"]))
 
 
 def _command_result(command: str, outcome: str, **members: object) -> dict[str, object]:
@@ -213,13 +241,14 @@ ENGINE_TIMEOUT_SECONDS = 1800
 
 
 def _launch_engine(script: str, argv: list[str], *, cwd: Path, capture: bool) -> subprocess.CompletedProcess:
-    try:
-        return subprocess.run(
-            argv, cwd=cwd, env=_distribution_environment(), check=False,
-            capture_output=capture, text=capture, timeout=ENGINE_TIMEOUT_SECONDS,
-        )
-    except subprocess.TimeoutExpired as exc:
-        raise HarnessError(f"{script} did not finish within {ENGINE_TIMEOUT_SECONDS} seconds") from exc
+    # ECP-PRM-001: the one launcher; a timeout or a start failure is a refusal that names the script.
+    completed = _launch(
+        argv, cwd=cwd, env=_distribution_environment(), timeout=ENGINE_TIMEOUT_SECONDS, capture=capture,
+        error=lambda message: HarnessError(f"{script}: {message}"),
+    )
+    if not capture:
+        return completed
+    return subprocess.CompletedProcess(completed.args, completed.returncode, _text(completed.stdout), _text(completed.stderr))
 
 
 def _run_distribution_script(
@@ -260,7 +289,7 @@ def _inspect_repository(args: argparse.Namespace) -> int:
         else:
             report["mode"] = "repository_wide"
             report["selection"] = {"primary": None, "artifacts": []}
-            output = json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+            output = pretty_json_bytes(report, ensure_ascii=False).decode("utf-8")
     elif completed.returncode == 0:
         output = output.replace("Harness inspection", "Harness inspection (repository_wide)", 1)
     print(output, end="")
@@ -289,7 +318,7 @@ def _doctor(args: argparse.Namespace) -> int:
         except json.JSONDecodeError:
             report = {}
         for warning in report.get("warnings", []):
-            if isinstance(warning, dict) and warning.get("code") == "W013":
+            if isinstance(warning, dict) and warning.get("code") == W013:
                 warnings.append({
                     "code": str(warning["code"]),
                     "path": str(warning.get("path", "<unknown>")),
@@ -326,7 +355,7 @@ def _dashboard(args: argparse.Namespace) -> int:
     if not output.is_absolute():
         output = target / output
     manifest = output / "dashboard-manifest.json"
-    digest = hashlib.sha256(manifest.read_bytes()).hexdigest() if manifest.is_file() else None
+    digest = raw_sha256(manifest.read_bytes()) if manifest.is_file() else None
     members: dict[str, object] = {"output": output.as_posix(), "manifest_sha256": digest}
     if completed.returncode != 0:
         # ECP-COR-010: the engine's standard error travels with the failed result.
@@ -355,7 +384,7 @@ def _project(target: str, artifact: str | None, *, include_background: bool, jso
     try:
         result = project_selected(Path(target), artifact, include_background=include_background)
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
-        code, message = _split_code(str(exc), "WEX210")
+        code, message = _split_code(exc, WEX210)
         result = failed_result("check", artifact, message, code=code, repository_blocker=isinstance(exc, RepositoryWorkflowError))
     print(render_workflow_json_v2(result) if json_output else render_workflow_human_v2(result), end="")
     return 0 if result["operation"]["outcome"] == "completed" else 1
@@ -374,7 +403,7 @@ def _check_projection(args: argparse.Namespace) -> int:
         ("--pull-request-body", args.pull_request_body),
     ):
         if value:
-            raise HarnessError(f"WEX210: {option} requires --checkpoint")
+            raise CodedError(WEX210, f"{option} requires --checkpoint")
     return _project(args.target, args.artifact, include_background=args.include_background, json_output=args.json)
 
 
@@ -383,14 +412,12 @@ def _check(args: argparse.Namespace) -> int:
         return _check_projection(args)
     if args.artifact is None:
         # ECP-CTX-002: the default artifact belongs to the projection only.
-        raise HarnessError("WEX210: --artifact is required with --checkpoint")
+        raise CodedError(WEX210, "--artifact is required with --checkpoint")
     if args.change_manifest and (args.changed_path or args.changes_complete):
-        raise HarnessError(
-            "WEX200: --change-manifest is mutually exclusive with --changed-path and --changes-complete"
+        raise CodedError(WEX200, "--change-manifest is mutually exclusive with --changed-path and --changes-complete"
         )
     if args.from_git is not None and (args.changed_path or args.changes_complete or args.change_manifest):
-        raise HarnessError(
-            "WEX-ECP-002: --from-git is mutually exclusive with --changed-path, --changes-complete and --change-manifest"
+        raise CodedError(WEX_ECP_002, "--from-git is mutually exclusive with --changed-path, --changes-complete and --change-manifest"
         )
     try:
         result = check_workflow(
@@ -407,7 +434,7 @@ def _check(args: argparse.Namespace) -> int:
         )
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
         # ECP-COR-001: one splitter, so no line carries a code twice.
-        code, message = _split_code(str(exc), "WEX210")
+        code, message = _split_code(exc, WEX210)
         result = failed_result("check", args.artifact, message, code=code)
     if (
         args.from_git is not None
@@ -440,7 +467,7 @@ def _evidence(args: argparse.Namespace) -> int:
             Path(args.target), artifact_id=args.artifact, checkpoint=args.checkpoint, now=now,
         )
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
-        code, message = _split_code(str(exc), "WEX-ECP-010")
+        code, message = _split_code(exc, WEX_ECP_010)
         result = failed_result("evidence", args.artifact, message, code=code)
     print(_render_selected_result(result, args), end="")
     return 0 if result["operation"]["outcome"] == "completed" else 1
@@ -456,7 +483,7 @@ def _pr_body(args: argparse.Namespace) -> int:
     if primary is None:
         # ECP-COR-011, ECP-COR-012: a failed result on stdout, exit 1, as check and evidence;
         # the one splitter names the code, as on every other result path.
-        code, message = _split_code(f"WEX-ECP-014: unknown artifact ID: {args.artifact}", "WEX210")
+        code, message = _split_code(CodedError(WEX_ECP_014, f"unknown artifact ID: {args.artifact}"), WEX210)
         if args.json:
             _print_json(_command_result("pr-body", "failed", code=code, message=message))
         else:
@@ -505,7 +532,7 @@ def _capture_verification(args: argparse.Namespace) -> int:
         if isinstance(exc, MutationGuardError):
             # ECP-CLI-004, ECP-COR-005: an environment refusal is not a result; main() exits 2.
             raise
-        code, message = _record_code(exc, "WEX30")
+        code, message = _record_code(exc, VERIFICATION_RECORD_REFUSALS)
         result = failed_result("capture-verification", args.record_id, message, code=code)
         print(_render_selected_result(result, args), end="")
         return 1
@@ -532,7 +559,7 @@ def _prepare_release(args: argparse.Namespace) -> int:
         if isinstance(exc, MutationGuardError):
             # ECP-CLI-004, ECP-COR-005: an environment refusal is not a result; main() exits 2.
             raise
-        code, message = _record_code(exc, "WEX40")
+        code, message = _record_code(exc, RELEASE_RECORD_REFUSALS)
         result = failed_result("prepare-release", args.record_id, message, code=code)
         print(_render_selected_result(result, args), end="")
         return 1
@@ -559,7 +586,7 @@ def _assignments(values: list[str], label: str) -> dict[str, str]:
 def _refusal_code(exc: Exception) -> str:
     """The identifier of the check that refused, else the operation's generic code (ECP-KRN-008)."""
 
-    return str(getattr(exc, "predicate_id", "") or "WEX201")
+    return str(getattr(exc, "predicate_id", "") or WEX201)
 
 
 def _transition(args: argparse.Namespace) -> int:
@@ -581,7 +608,7 @@ def _transition(args: argparse.Namespace) -> int:
         if isinstance(exc, MutationGuardError):
             # ECP-COR-005: the guard is an environment refusal; main() prints it and exits 2.
             raise
-        code, message = _split_code(str(exc), _refusal_code(exc))
+        code, message = _split_code(exc, _refusal_code(exc))
         result = failed_result(
             "transition",
             primary,
@@ -617,7 +644,7 @@ def _decide(args: argparse.Namespace) -> int:
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
         if isinstance(exc, MutationGuardError):
             raise
-        code, message = _split_code(str(exc), _refusal_code(exc))
+        code, message = _split_code(exc, _refusal_code(exc))
         result = failed_result(
             "decide",
             args.artifact,
@@ -666,7 +693,7 @@ def _raise_risk(args: argparse.Namespace) -> int:
     if result.decision_id is not None:
         print(f"{result.decision_id} blocks {', '.join(args.threatens)} until it is disposed with harnessctl decide")
     else:
-        print("no decision names this risk yet: the validator reports E-RSK-003 until one does")
+        print(f"no decision names this risk yet: the validator reports {E_RSK_003} until one does")
     if args.dry_run:
         print("dry run: no files were written")
     return 0
@@ -848,7 +875,7 @@ def _qualify(args: argparse.Namespace) -> int:
     except (HarnessError, OSError, ValueError) as exc:
         result = failed_qualification(
             operation,
-            code="RQ001",
+            code=RQ001,
             subject="qualification-input",
             message=str(exc),
         )
@@ -863,7 +890,7 @@ def _qualify(args: argparse.Namespace) -> int:
         except HarnessError as exc:
             result = failed_qualification(
                 operation,
-                code="RQ002",
+                code=RQ002,
                 subject="qualification-output",
                 message=str(exc),
             )
@@ -938,7 +965,7 @@ def build_parser() -> argparse.ArgumentParser:
         help="one selected WO, VREC, or RLS ID; without a checkpoint it defaults to the single in_progress work order",
     )
     check.add_argument(
-        "--checkpoint", choices=("start", "pre-action", "transition", "handoff", "scope"),
+        "--checkpoint", choices=CHECKPOINT_ORDER,  # ECP-PRM-012
         help="fixed stateless evaluation checkpoint; omitted, check projects the selected scope and evaluates no gate",
     )
     check.add_argument(
@@ -971,7 +998,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     check.add_argument(
         "--pull-request-body",
-        help="UTF-8 pull-request body file; reports W-ADS-001 when its work-order trailer carries a carriage return",
+        help=f"UTF-8 pull-request body file; reports {W_ADS_001} when its work-order trailer carries a carriage return",
     )
     check.add_argument("--json", action="store_true", help="emit se-harness-workflow-result-v2 JSON")
     check.set_defaults(handler=_check)
@@ -979,7 +1006,7 @@ def build_parser() -> argparse.ArgumentParser:
     evidence = commands.add_parser("evidence", help="write or rebind one work order's evidence packet to the current formal snapshot")
     evidence.add_argument("target", nargs="?", default=".")
     evidence.add_argument("--artifact", required=True, help="the work order the packet is keyed by")
-    evidence.add_argument("--checkpoint", required=True, choices=("start", "pre-action", "transition", "handoff"))
+    evidence.add_argument("--checkpoint", required=True, choices=EVIDENCE_CHECKPOINTS)  # ECP-PRM-012
     evidence.add_argument("--rebound-at", help="RFC 3339 UTC timestamp to record; defaults to now")
     evidence.add_argument("--json", action="store_true", help="emit se-harness-workflow-result-v2 JSON")
     evidence.set_defaults(handler=_evidence)
@@ -1101,7 +1128,7 @@ def build_parser() -> argparse.ArgumentParser:
     release_unit.add_argument("--from", dest="from_ref", required=True, help="the previous release tag")
     release_unit.add_argument("--to", dest="to_ref", required=True, help="the candidate commit or ref")
     release_unit.add_argument("--exempt", action="append", help="full commit id on the first-parent path that carries no trailer by owner decision; repeatable")
-    release_unit.add_argument("--contract", help="a release contract to compare with; E-CIP-001 findings fail the command")
+    release_unit.add_argument("--contract", help=f"a release contract to compare with; {E_CIP_001} findings fail the command")
     release_unit.add_argument("--json", action="store_true", help="emit the canonical JSON census")
     release_unit.add_argument("--toml", action="store_true", help="emit only the gates array ready to paste into a contract")
     release_unit.set_defaults(handler=_release_unit)

@@ -18,7 +18,7 @@ test fails the suite when it does. The installed root evaluator is a
 released version and may emit a slightly older set until the repository
 adopts the next release.
 
-195 codes across 30 registered prefixes.
+196 codes across 30 registered prefixes.
 
 ## How to read a code
 
@@ -48,7 +48,7 @@ but are not diagnostics and are not listed here.
 | `I` | preflight | an installation check failed. | 1 |
 | `WEX` | workflow execution | a check, transition, or evidence operation is refused. | 16 |
 | `WEX-ADS` | workflow execution | a directive-surface workflow refusal. | 2 |
-| `WEX-ECP` | workflow execution | a control-plane workflow refusal. | 11 |
+| `WEX-ECP` | workflow execution | a control-plane workflow refusal. | 12 |
 | `MG` | mutation guard | an installed-root write is refused before any file changes. | 5 |
 | `RID` | runtime identity | the running evaluator's identity could not be proven. | 25 |
 | `EPS` | interpreter safety | the environment entry-point safety rule failed. | 11 |
@@ -97,7 +97,7 @@ but are not diagnostics and are not listed here.
 
 | Code | Message text in the source |
 | --- | --- |
-| `E-CIP-001` | `CIP-RLU: a release contract that names a candidate commit declares the census the history yields. A contract …`; `E-CIP-001:` (+6 more) |
+| `E-CIP-001` | `CIP-RLU: a release contract that names a candidate commit declares the census the history yields. A contract …`; `E-CIP-001` (+7 more) |
 
 ### `E-DCM` — installed validator
 
@@ -106,7 +106,7 @@ but are not diagnostics and are not listed here.
 | `E-DCM-001` | `E-DCM-001` |
 | `E-DCM-002` | `E-DCM-002` |
 | `E-DCM-003` | `E-DCM-003` |
-| `E-DCM-004` | `E-DCM-004:` |
+| `E-DCM-004` | `E-DCM-004`; `E-DCM-004: {…} has an open decision written as prose: {…} (the Open decisions section reads exactly None, or …` |
 | `E-DCM-005` | `E-DCM-005` |
 
 ### `E-ECP` — installed validator
@@ -121,7 +121,7 @@ but are not diagnostics and are not listed here.
 | --- | --- |
 | `E-RSK-001` | `E-RSK-001` |
 | `E-RSK-002` | `E-RSK-002` |
-| `E-RSK-003` | `E-RSK-003`; `no decision names this risk yet: the validator reports E-RSK-003 until one does` |
+| `E-RSK-003` | `E-RSK-003` |
 | `E-RSK-004` | `E-RSK-004` |
 | `E-RSK-005` | `E-RSK-005` |
 
@@ -129,32 +129,32 @@ but are not diagnostics and are not listed here.
 
 | Code | Message text in the source |
 | --- | --- |
-| `W001` | `W001` |
-| `W002` | `W002` |
-| `W003` | `W003` |
-| `W004` | `W004` |
-| `W005` | `W005` |
-| `W010` | `W010` |
-| `W011` | `W011` |
-| `W012` | `W012` |
-| `W013` | `W013` |
+| `W001` | `W001`; `W001: invalid work-order ID` |
+| `W002` | `W002`; `W002: unknown work-order ID` |
+| `W003` | `W003`; `W003: work-order ID is not unique` |
+| `W004` | `W004`; `W004: selected artifact is not a work order` |
+| `W005` | `W005`; `W005: status {…} is not eligible for {…}; expected one of {…}` |
+| `W010` | `W010`; `W010: required relation {…} is empty` |
+| `W011` | `W011`; `W011: missing target of {…}` |
+| `W012` | `W012`; `W012: {…} targets type {…}` |
+| `W013` | `W013`; `W013: governing artifact {…} is not active` |
 | `W014` | `W014` |
 | `W015` | `W015` |
-| `W016` | `W016` |
-| `W017` | `W017` |
-| `W018` | `W018` |
-| `W019` | `W019` |
-| `W020` | `W020` |
-| `W021` | `W021` |
-| `W022` | `W022` |
+| `W016` | `W016`; `W016: {…} coverage is missing {…}` |
+| `W017` | `W017`; `W017: ADR does not decide a selected architecture` |
+| `W018` | `W018`; `W018: adr_required architecture {…} has no selected active deciding ADR` |
+| `W019` | `W019`; `W019: legacy architecture {…} has no selected active deciding ADR` |
+| `W020` | `W020`; `W020: architecture {…} has no valid decision assessment: {…}` |
+| `W021` | `W021`; `W021: selected architecture {…} is unrelated to selected specifications or requirements` |
+| `W022` | `W022`; `W022: applicable architecture {…} is not selected by the work order` |
 | `W023` | `W023` |
 
 ### `W-ADS` — installed validator
 
 | Code | Message text in the source |
 | --- | --- |
-| `W-ADS-001` | `Report W-ADS-001 for a pull-request body whose trailer carries a carriage return.`; `UTF-8 byte offsets of a carriage return that ends a Harness-Work-Order line (W-ADS-001).` (+3 more) |
-| `W-ADS-002` | `W-ADS-002`; `W-ADS-002:` (+1 more) |
+| `W-ADS-001` | `A coded selection refusal (W-ADS-001, WEX-ECP-014): a `SelectionError` that carries its code.`; `Report W-ADS-001 for a pull-request body whose trailer carries a carriage return.` (+4 more) |
+| `W-ADS-002` | `W-ADS-002`; `W-ADS-002: ready verification records for the work order whose candidate left HEAD.` (+1 more) |
 
 ### `W-AUT` — installed validator
 
@@ -195,8 +195,8 @@ but are not diagnostics and are not listed here.
 
 | Code | Message text in the source |
 | --- | --- |
-| `W-ECP-002` | `. W-ECP-002: the packet carries no machine header; migrate it with harnessctl evidence . --artifact` |
-| `W-ECP-005` | `W-ECP-005: delegation.gate_source is local-file outside a rehearsal; the gate this run reads is not the CI pr…` |
+| `W-ECP-002` | `W-ECP-002` |
+| `W-ECP-005` | `W-ECP-005`; `W-ECP-005: delegation.gate_source is local-file outside a rehearsal; the gate this run reads is not the CI pr…` |
 
 ### `W-REB` — installed validator
 
@@ -235,7 +235,7 @@ but are not diagnostics and are not listed here.
 
 | Code | Message text in the source |
 | --- | --- |
-| `A001` | `A001` |
+| `A001` | `A001`; `A001: validator unavailable: {…}` |
 
 ### `I` — preflight
 
@@ -249,83 +249,84 @@ but are not diagnostics and are not listed here.
 | --- | --- |
 | `WEX001` | `WEX001` |
 | `WEX190` | `WEX190` |
-| `WEX200` | `WEX200`; `WEX200:` (+22 more) |
-| `WEX201` | `WEX201`; `WEX201: changed path is outside execution scope:` |
-| `WEX210` | `WEX210`; `WEX210:` (+13 more) |
-| `WEX220` | `WEX220: --procedure is required for pre-action`; `WEX220: procedure` (+1 more) |
-| `WEX221` | `WEX221: optional procedure parameter`; `WEX221: procedure parameter` (+3 more) |
-| `WEX230` | `WEX230: blocked restitution requires an exact blocker`; `WEX230: canonical restitution requires schema 2` (+13 more) |
-| `WEX301` | `Composed at run time as WEX30 plus the cause digit (state 1, provenance 2, evidence 3, inputs 4); this one is the state cause.` |
-| `WEX302` | `Composed at run time as WEX30 plus the cause digit (state 1, provenance 2, evidence 3, inputs 4); this one is the provenance cause.` |
-| `WEX303` | `Composed at run time as WEX30 plus the cause digit (state 1, provenance 2, evidence 3, inputs 4); this one is the evidence cause.` |
-| `WEX304` | `Composed at run time as WEX30 plus the cause digit (state 1, provenance 2, evidence 3, inputs 4); this one is the inputs cause.` |
-| `WEX401` | `Composed at run time as WEX40 plus the cause digit (state 1, provenance 2, evidence 3, inputs 4); this one is the state cause.` |
-| `WEX402` | `Composed at run time as WEX40 plus the cause digit (state 1, provenance 2, evidence 3, inputs 4); this one is the provenance cause.` |
-| `WEX403` | `Composed at run time as WEX40 plus the cause digit (state 1, provenance 2, evidence 3, inputs 4); this one is the evidence cause.` |
-| `WEX404` | `Composed at run time as WEX40 plus the cause digit (state 1, provenance 2, evidence 3, inputs 4); this one is the inputs cause.` |
+| `WEX200` | `WEX200`; `WEX200: --change-manifest is mutually exclusive with --changed-path and --changes-complete` (+23 more) |
+| `WEX201` | `Generate the diagnostic-code index note from the candidate source. `WO-TCM-003` (`REQ-TCM-005`, `SPEC-TCM-002…`; `WEX201` (+2 more) |
+| `WEX210` | `Generate the diagnostic-code index note from the candidate source. `WO-TCM-003` (`REQ-TCM-005`, `SPEC-TCM-002…`; `WEX210` (+16 more) |
+| `WEX220` | `WEX220`; `WEX220: --procedure is required for pre-action` (+3 more) |
+| `WEX221` | `WEX221`; `WEX221: optional procedure parameter {…} has an invalid value` (+8 more) |
+| `WEX230` | `A schema-2 result or restitution that does not hold (WEX230); a `ValueError` to its callers.`; `WEX230` (+15 more) |
+| `WEX301` | `WEX301` |
+| `WEX302` | `WEX302` |
+| `WEX303` | `WEX303` |
+| `WEX304` | `WEX304` |
+| `WEX401` | `WEX401` |
+| `WEX402` | `WEX402` |
+| `WEX403` | `WEX403` |
+| `WEX404` | `WEX404` |
 
 ### `WEX-ADS` — workflow execution
 
 | Code | Message text in the source |
 | --- | --- |
-| `WEX-ADS-001` | `WEX-ADS-001:`; `WEX-ADS-001: step` (+1 more) |
-| `WEX-ADS-003` | `WEX-ADS-003: operating card is` |
+| `WEX-ADS-001` | `WEX-ADS-001`; `WEX-ADS-001: step {…} has no corrective form for {…}` (+9 more) |
+| `WEX-ADS-003` | `WEX-ADS-003`; `WEX-ADS-003: operating card is {…} bytes; limit is {…}` |
 
 ### `WEX-ECP` — workflow execution
 
 | Code | Message text in the source |
 | --- | --- |
-| `WEX-ECP-001` | `WEX-ECP-001:` |
-| `WEX-ECP-002` | `WEX-ECP-002: --from-git is mutually exclusive with --changed-path, --changes-complete and --change-manifest` |
-| `WEX-ECP-003` | `Derive the change set from Git (ECP-CHG-002 to -004). The set is the union of `git diff --name-only BASE` aga…`; `WEX-ECP-003:` (+4 more) |
-| `WEX-ECP-010` | `Split a packet into its machine header and retained body (ECP-EVD-002, -004). Returns `(None, data)` when no …`; `WEX-ECP-010` (+10 more) |
-| `WEX-ECP-011` | `WEX-ECP-011: a .gitattributes rule would convert line endings of` |
-| `WEX-ECP-012` | `WEX-ECP-012: the working tree selects` |
-| `WEX-ECP-013` | `WEX-ECP-013:`; `WEX-ECP-013: domain` (+3 more) |
-| `WEX-ECP-014` | `WEX-ECP-014:`; `WEX-ECP-014: the generated body does not round-trip through the selector` (+1 more) |
-| `WEX-ECP-022` | `WEX-ECP-022` |
-| `WEX-ECP-030` | `WEX-ECP-030:`; `WEX-ECP-030: duplicate transition binding` (+8 more) |
-| `WEX-ECP-040` | `WEX-ECP-040` |
+| `WEX-ECP-001` | `WEX-ECP-001` |
+| `WEX-ECP-002` | `WEX-ECP-002`; `WEX-ECP-002: --from-git is mutually exclusive with --changed-path, --changes-complete and --change-manifest` |
+| `WEX-ECP-003` | `Derive the change set from Git (ECP-CHG-002 to -004). The set is the union of `git diff --name-only BASE` aga…`; `WEX-ECP-003` (+4 more) |
+| `WEX-ECP-010` | `Split a packet into its machine header and retained body (ECP-EVD-002, -004). Returns `(None, data)` when no …`; `WEX-ECP-010` (+13 more) |
+| `WEX-ECP-011` | `WEX-ECP-011`; `WEX-ECP-011: a .gitattributes rule would convert line endings of {…} ({…})` |
+| `WEX-ECP-012` | `WEX-ECP-012`; `WEX-ECP-012: the working tree selects {…} (the one in_progress work order), not {…}` |
+| `WEX-ECP-013` | `WEX-ECP-013`; `WEX-ECP-013: domain {…} has no artifact to read its identifier token from; pass --id explicitly` (+4 more) |
+| `WEX-ECP-014` | `A coded selection refusal (W-ADS-001, WEX-ECP-014): a `SelectionError` that carries its code.`; `WEX-ECP-014` (+5 more) |
+| `WEX-ECP-022` | `WEX-ECP-022`; `WEX-ECP-022: {…} carries no [delegation] class at the base {…}; a branch cannot widen its own delegation` (+2 more) |
+| `WEX-ECP-030` | `WEX-ECP-030`; `WEX-ECP-030: duplicate transition binding {…}:{…}` (+11 more) |
+| `WEX-ECP-031` | `Read and validate `agentic_operations` (ECP-PRM-019, ECP-PRM-023). Every entry carries exactly the seven fiel…`; `WEX-ECP-031` |
+| `WEX-ECP-040` | `WEX-ECP-040`; `WEX-ECP-040: check {…} is missing at head {…}` (+13 more) |
 
 ### `MG` — mutation guard
 
 | Code | Message text in the source |
 | --- | --- |
-| `MG001` | `MG001`; `prints a short code such as `MG001`, `WEX210` or `E012` beside its` |
-| `MG003` | `MG003` |
-| `MG004` | `MG004` |
+| `MG001` | `MG001`; `MG001: cannot read the standard config: {…}` (+6 more) |
+| `MG003` | `MG003`; `MG003: standard config and lock tool versions differ` |
+| `MG004` | `MG004`; `MG004: cannot identify the target evaluator: {…}` (+1 more) |
 | `MG005` | `MG005` |
-| `MG006` | `MG006` |
+| `MG006` | `MG006`; `MG006: cannot canonicalize evaluator evidence: {…}` |
 
 ### `RID` — runtime identity
 
 | Code | Message text in the source |
 | --- | --- |
 | `RID000` | `RID000` |
-| `RID001` | `RID001` |
-| `RID002` | `RID002` |
-| `RID003` | `RID003` |
-| `RID004` | `RID004` |
-| `RID005` | `RID005` |
-| `RID006` | `RID006` |
-| `RID007` | `RID007` |
-| `RID008` | `RID008` |
-| `RID009` | `RID009` |
-| `RID010` | `RID010` |
-| `RID011` | `RID011` |
-| `RID012` | `RID012` |
-| `RID013` | `RID013` |
-| `RID014` | `RID014` |
-| `RID015` | `RID015` |
-| `RID016` | `RID016` |
-| `RID017` | `RID017` |
-| `RID018` | `RID018` |
-| `RID019` | `RID019` |
-| `RID020` | `RID020` |
-| `RID021` | `RID021` |
-| `RID022` | `RID022` |
-| `RID023` | `RID023` |
-| `RID024` | `RID024` |
+| `RID001` | `RID001`; `RID001: unsupported runtime role` |
+| `RID002` | `RID002`; `RID002: resolved {…}; expected {…}` |
+| `RID003` | `RID003`; `RID003: origin is outside the expected runtime root` |
+| `RID004` | `RID004`; `RID004: installed-runtime path is outside its environment` (+2 more) |
+| `RID005` | `RID005`; `RID005: checkout boundary is required` |
+| `RID006` | `RID006`; `RID006: installed runtime launcher is inside the checkout` (+1 more) |
+| `RID007` | `RID007`; `RID007: effective import search contains the checkout` |
+| `RID008` | `RID008`; `RID008: runtime inherited PYTHONPATH` |
+| `RID009` | `RID009`; `RID009: runtime enables user site-packages` |
+| `RID010` | `RID010`; `RID010: harnessctl resolves outside the environment` |
+| `RID011` | `RID011`; `RID011: harnessctl entry point is unavailable` |
+| `RID012` | `RID012`; `RID012: candidate source root must equal the checkout root` |
+| `RID013` | `RID013`; `RID013: the optional digest must be a lowercase SHA-256` |
+| `RID014` | `RID014`; `RID014: released evaluator identity cannot claim a candidate commit` |
+| `RID015` | `RID015`; `RID015: a full lowercase candidate commit is required` |
+| `RID016` | `RID016`; `RID016: candidate identity cannot claim a released evaluator digest` |
+| `RID017` | `RID017`; `RID017: Python isolated mode is required` |
+| `RID018` | `RID018`; `RID018: source distribution metadata resolves outside the checkout` |
+| `RID019` | `RID019`; `RID019: installed payload identity failed: {…}` |
+| `RID020` | `RID020`; `RID020: the expected payload digest must be a lowercase SHA-256` |
+| `RID021` | `RID021`; `RID021: installed payload digest differs from the expected evaluator payload` |
+| `RID022` | `RID022`; `RID022: installed PEP 610 archive digest differs from the expected evaluator wheel` |
+| `RID023` | `RID023`; `RID023: candidate identity cannot claim a released evaluator payload` |
+| `RID024` | `RID024`; `RID024: launcher refused by interpreter-safety case {…}` |
 
 ### `EPS` — interpreter safety
 
@@ -369,36 +370,36 @@ but are not diagnostics and are not listed here.
 
 | Code | Message text in the source |
 | --- | --- |
-| `CC001` | `CC001` |
-| `CC002` | `CC002` |
-| `CC003` | `CC003` |
-| `CC004` | `CC004` |
+| `CC001` | `CC001`; `CC001: candidate-runtime` |
+| `CC002` | `CC002`; `CC002: candidate-commit` |
+| `CC003` | `CC003`; `CC003: not run after candidate identity failure` |
+| `CC004` | `CC004`; `CC004: repository-state` |
 
 ### `CP` — release qualification
 
 | Code | Message text in the source |
 | --- | --- |
-| `CP001` | `CP001` |
-| `CP002` | `CP002` |
+| `CP001` | `CP001`; `CP001: released-verifier` |
+| `CP002` | `CP002`; `CP002: candidate-wheel` (+2 more) |
 
 ### `RR` — release qualification
 
 | Code | Message text in the source |
 | --- | --- |
-| `RR001` | `RR001` |
-| `RR002` | `RR002` |
-| `RR003` | `RR003` |
-| `RR004` | `RR004` |
+| `RR001` | `RR001`; `RR001: released-evaluator` (+1 more) |
+| `RR002` | `RR002`; `RR002: not run after evaluator identity failure` (+1 more) |
+| `RR003` | `RR003`; `RR003: not run after evaluator identity failure` |
+| `RR004` | `RR004`; `RR004: repository-state` |
 
 ### `PI` — release qualification
 
 | Code | Message text in the source |
 | --- | --- |
-| `PI001` | `PI001` |
-| `PI002` | `PI002` |
-| `PI003` | `PI003` |
-| `PI004` | `PI004` |
-| `PI005` | `PI005` |
+| `PI001` | `PI001`; `PI001: public-wheel` |
+| `PI002` | `PI002`; `PI002: installed-payload` |
+| `PI003` | `PI003`; `PI003: installed-runtime` |
+| `PI004` | `PI004`; `PI004: public-cli` |
+| `PI005` | `PI005`; `PI005: repository-state` |
 
 ### `PV` — release qualification
 

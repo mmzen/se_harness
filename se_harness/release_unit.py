@@ -20,12 +20,13 @@ from __future__ import annotations
 
 import json
 import re
-import subprocess
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Iterable, Mapping
 
+from se_harness._process import run_git, text as _text
 from se_harness.installer import HarnessError
+from se_harness.codes import E_CIP_001
 
 RELEASE_UNIT_SCHEMA = "se-harness-release-unit-v1"
 TRAILER = "Harness-Work-Order"
@@ -68,15 +69,11 @@ StatusLookup = Callable[[str], tuple[str | None, bool | None]]
 
 
 def _git(root: Path, *arguments: str) -> str:
-    try:
-        completed = subprocess.run(
-            ["git", "-C", str(root), *arguments], capture_output=True, text=True, encoding="utf-8", check=False, timeout=120
-        )
-    except (OSError, subprocess.TimeoutExpired) as exc:
-        raise HarnessError(f"git is unavailable: {exc}") from exc
+    # ECP-PRM-003: the one launcher.
+    completed = run_git(root, *arguments, timeout=120, error=lambda message: HarnessError(f"git is unavailable: {message}"))
     if completed.returncode != 0:
-        raise HarnessError(f"git {' '.join(arguments[:2])} failed: {completed.stderr.strip() or completed.returncode}")
-    return completed.stdout
+        raise HarnessError(f"git {' '.join(arguments[:2])} failed: {_text(completed.stderr).strip() or completed.returncode}")
+    return _text(completed.stdout)
 
 
 def _resolve(root: Path, ref: str) -> str:
@@ -161,10 +158,10 @@ def compare_with_contract(unit: ReleaseUnit, contract: Mapping[str, Any]) -> lis
     findings: list[str] = []
     declared_commit = contract.get("candidate_commit")
     if declared_commit != unit.to_commit:
-        findings.append(f"E-CIP-001: contract candidate_commit {declared_commit!r} is not the derived candidate {unit.to_commit}")
+        findings.append(f"{E_CIP_001}: contract candidate_commit {declared_commit!r} is not the derived candidate {unit.to_commit}")
     declared_tag = contract.get("previous_release_tag")
     if declared_tag != unit.from_ref:
-        findings.append(f"E-CIP-001: contract previous_release_tag {declared_tag!r} is not the derivation's {unit.from_ref!r}")
+        findings.append(f"{E_CIP_001}: contract previous_release_tag {declared_tag!r} is not the derivation's {unit.from_ref!r}")
     relations = contract.get("relations", {})
     declared = relations.get("gates", []) if isinstance(relations, dict) else []
     declared_work_orders = sorted(item for item in declared if isinstance(item, str) and WORK_ORDER_PATTERN.fullmatch(item))
@@ -172,12 +169,12 @@ def compare_with_contract(unit: ReleaseUnit, contract: Mapping[str, Any]) -> lis
         missing = sorted(set(unit.gates) - set(declared_work_orders))
         extra = sorted(set(declared_work_orders) - set(unit.gates))
         findings.append(
-            "E-CIP-001: contract gates differ from the derived census"
+            f"{E_CIP_001}: contract gates differ from the derived census"
             + (f"; missing from gates: {', '.join(missing)}" if missing else "")
             + (f"; not in the derivation: {', '.join(extra)}" if extra else "")
         )
     if not unit.complete:
-        findings.append("E-CIP-001: the derivation is incomplete: " + "; ".join(unit.reasons))
+        findings.append(f"{E_CIP_001}: the derivation is incomplete: " + "; ".join(unit.reasons))
     return findings
 
 

@@ -1322,7 +1322,8 @@ class ProducerNewlineTests(unittest.TestCase):
 
     def test_the_installer_writes_the_lock_as_explicit_bytes(self) -> None:
         source = (ROOT / "se_harness" / "installer.py").read_text(encoding="utf-8")
-        self.assertIn('lock_bytes = (json.dumps(lock, indent=2, sort_keys=True) + "\\n").encode("utf-8")', source)
+        # WO-ECP-032 (SPEC-ECP-023 ECP-PRM-006): the lock bytes come from integrity's one pretty serializer.
+        self.assertIn("lock_bytes = pretty_json_bytes(lock, ensure_ascii=True)", source)
         self.assertIn("_atomic_write(lock_path, lock_bytes)", source)
 
     @unittest.skipUnless(git_available(), "git is unavailable")
@@ -1347,7 +1348,11 @@ class ProducerNewlineTests(unittest.TestCase):
 class SafetyTests(unittest.TestCase):
     def test_no_repository_content_reaches_a_shell(self) -> None:
         source = (ROOT / "se_harness" / "hash_bound.py").read_text(encoding="utf-8")
-        self.assertIn("shell=False", source)
+        # WO-ECP-031 (SPEC-ECP-023 ECP-PRM-003): the launch lives in the one launcher, which fixes shell=False.
+        launcher = (ROOT / "se_harness" / "_process.py").read_text(encoding="utf-8")
+        self.assertIn("from se_harness._process import run_git", source)
+        self.assertIn("shell=False", launcher)
+        self.assertNotIn("shell=True", launcher)
         self.assertNotIn("shell=True", source)
         self.assertNotIn("os.system", source)
         self.assertNotIn("os.popen", source)
@@ -1411,7 +1416,7 @@ class UnmodifiedBehaviourTests(unittest.TestCase):
 
     def test_preflight_diagnostic_codes_are_unchanged(self) -> None:
         source = (ROOT / "se_harness" / "preflight.py").read_text(encoding="utf-8")
-        self.assertIn('PreflightDiagnostic("I001"', source)
+        self.assertIn("PreflightDiagnostic(I001", source)  # the code is the registry's name (ECP-PRM-016)
         self.assertNotIn("hash-bound", source.split("def _hash_bound_checks")[0])
 
     @unittest.skipUnless(git_available(), "git is unavailable")

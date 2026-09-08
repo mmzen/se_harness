@@ -197,3 +197,19 @@ one entry in a throwaway copy, **then** the delegation gate refuses to load
 - The exact `Literal` versus `StrEnum` choice per value set.
 - Whether the three groups land as three pull requests or one stacked
   series; each work order is independent of the others.
+
+## Amendment record
+
+**`ECP-PRM-003`, `ECP-PRM-005`, `ECP-PRM-009` and `ECP-PRM-015` bind the
+package only, decided 2026-09-08 by the technical owner disposing
+`DEC-ECP-001` with `amend`, under `WO-ECP-031`.** The Scope sentence "and
+`repository_tools/`, which imports it" was wrong: `ARCH-REB-013` and
+`SPEC-REB-015` rule 2 keep the import barrier of `ARCH-REB-010`, under which
+`repository_tools` imports only the standard library and its own package,
+and two tests refuse the crossing. The four rules therefore read "in the
+package" where they said "in the package and in `repository_tools`";
+`ECP-PRM-009` keeps the rename of `release_build.canonical_json_bytes` and
+drops the re-export from `repository_tools/json_bytes.py`; `ECP-PRM-015`
+serves `candidate_acceptance` and `release_qualification`. The copies the
+assessment counted in the tools are the accepted price of the barrier.
+Nothing else in this specification changes.

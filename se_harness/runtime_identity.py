@@ -18,6 +18,32 @@ from se_harness.evaluator_identity import (
     installed_evaluator_identity,
 )
 from se_harness.installer import template_root
+from se_harness.codes import (
+    RID001,
+    RID002,
+    RID003,
+    RID004,
+    RID005,
+    RID006,
+    RID007,
+    RID008,
+    RID009,
+    RID010,
+    RID011,
+    RID012,
+    RID013,
+    RID014,
+    RID015,
+    RID016,
+    RID017,
+    RID018,
+    RID019,
+    RID020,
+    RID021,
+    RID022,
+    RID023,
+    RID024,
+)
 
 
 IDENTITY_SCHEMA = "se-harness-runtime-identity-v3"
@@ -181,52 +207,52 @@ def inspect_runtime_identity(
         binary_sha256 = entry.binary_sha256
 
     if role not in ROLES:
-        diagnostics.append(IdentityDiagnostic("RID001", "role", "unsupported runtime role"))
+        diagnostics.append(IdentityDiagnostic(RID001, "role", "unsupported runtime role"))
     if __version__ != expected_version:
         diagnostics.append(
             IdentityDiagnostic(
-                "RID002",
+                RID002,
                 "harness_version",
                 f"resolved {__version__!r}; expected {expected_version!r}",
             )
         )
     if pythonpath_present:
         diagnostics.append(
-            IdentityDiagnostic("RID008", "PYTHONPATH", "runtime inherited PYTHONPATH")
+            IdentityDiagnostic(RID008, "PYTHONPATH", "runtime inherited PYTHONPATH")
         )
     if user_site_enabled:
         diagnostics.append(
-            IdentityDiagnostic("RID009", "user_site", "runtime enables user site-packages")
+            IdentityDiagnostic(RID009, "user_site", "runtime enables user site-packages")
         )
     for label, path in (("module_origin", module), ("template_origin", templates)):
         if not _within(path, expected):
             diagnostics.append(
-                IdentityDiagnostic("RID003", label, "origin is outside the expected runtime root")
+                IdentityDiagnostic(RID003, label, "origin is outside the expected runtime root")
             )
 
     if bounded:
         if entry_refusal is not None:
             diagnostics.append(
                 IdentityDiagnostic(
-                    "RID024",
+                    RID024,
                     "python_executable",
                     f"launcher refused by interpreter-safety case {entry_refusal}",
                 )
             )
         if runtime_prefix != expected:
             diagnostics.append(
-                IdentityDiagnostic("RID004", "runtime_prefix", "runtime prefix differs from the expected environment")
+                IdentityDiagnostic(RID004, "runtime_prefix", "runtime prefix differs from the expected environment")
             )
         if not _lexically_within(executable, expected):
             diagnostics.append(
-                IdentityDiagnostic("RID004", "python_executable", "virtualenv launcher is outside its environment")
+                IdentityDiagnostic(RID004, "python_executable", "virtualenv launcher is outside its environment")
             )
         if not _within(distribution, expected):
             diagnostics.append(
-                IdentityDiagnostic("RID004", "distribution_origin", "installed-runtime path is outside its environment")
+                IdentityDiagnostic(RID004, "distribution_origin", "installed-runtime path is outside its environment")
             )
         if checkout is None:
-            diagnostics.append(IdentityDiagnostic("RID005", "checkout_root", "checkout boundary is required"))
+            diagnostics.append(IdentityDiagnostic(RID005, "checkout_root", "checkout boundary is required"))
         else:
             for label, path in (
                 ("module_origin", module),
@@ -235,36 +261,36 @@ def inspect_runtime_identity(
             ):
                 if _within(path, checkout):
                     diagnostics.append(
-                        IdentityDiagnostic("RID006", label, "installed runtime resolves inside the checkout")
+                        IdentityDiagnostic(RID006, label, "installed runtime resolves inside the checkout")
                     )
             if _lexically_within(executable, checkout):
                 diagnostics.append(
-                    IdentityDiagnostic("RID006", "python_executable", "installed runtime launcher is inside the checkout")
+                    IdentityDiagnostic(RID006, "python_executable", "installed runtime launcher is inside the checkout")
                 )
             contaminated = [path for path in _effective_search_paths() if _within(path, checkout)]
             if contaminated:
                 diagnostics.append(
-                    IdentityDiagnostic("RID007", "sys.path", "effective import search contains the checkout")
+                    IdentityDiagnostic(RID007, "sys.path", "effective import search contains the checkout")
                 )
         if resolved_entry_point is not None and not _within(resolved_entry_point, expected):
             diagnostics.append(
-                IdentityDiagnostic("RID010", "entry_point_origin", "harnessctl resolves outside the environment")
+                IdentityDiagnostic(RID010, "entry_point_origin", "harnessctl resolves outside the environment")
             )
         if require_entry_point and resolved_entry_point is None:
             diagnostics.append(
-                IdentityDiagnostic("RID011", "entry_point_origin", "harnessctl entry point is unavailable")
+                IdentityDiagnostic(RID011, "entry_point_origin", "harnessctl entry point is unavailable")
             )
 
     if role == "candidate-source":
         if checkout is None:
-            diagnostics.append(IdentityDiagnostic("RID005", "checkout_root", "checkout boundary is required"))
+            diagnostics.append(IdentityDiagnostic(RID005, "checkout_root", "checkout boundary is required"))
         elif expected != checkout:
             diagnostics.append(
-                IdentityDiagnostic("RID012", "expected_root", "candidate source root must equal the checkout root")
+                IdentityDiagnostic(RID012, "expected_root", "candidate source root must equal the checkout root")
             )
         if not _within(distribution, expected):
             diagnostics.append(
-                IdentityDiagnostic("RID018", "distribution_origin", "source distribution metadata resolves outside the checkout")
+                IdentityDiagnostic(RID018, "distribution_origin", "source distribution metadata resolves outside the checkout")
             )
 
     if role == "released-evaluator":
@@ -272,7 +298,7 @@ def inspect_runtime_identity(
             evaluator = installed_evaluator_identity()
         except EvaluatorIdentityError as exc:
             diagnostics.append(
-                IdentityDiagnostic("RID019", "evaluator_payload", f"installed payload identity failed: {exc}")
+                IdentityDiagnostic(RID019, "evaluator_payload", f"installed payload identity failed: {exc}")
             )
         else:
             installed_payload_manifest = evaluator.payload_manifest
@@ -283,7 +309,7 @@ def inspect_runtime_identity(
             if SHA256_PATTERN.fullmatch(evaluator_payload_sha256) is None:
                 diagnostics.append(
                     IdentityDiagnostic(
-                        "RID020",
+                        RID020,
                         "evaluator_payload_sha256",
                         "the expected payload digest must be a lowercase SHA-256",
                     )
@@ -291,14 +317,14 @@ def inspect_runtime_identity(
             elif installed_payload_sha256 != evaluator_payload_sha256:
                 diagnostics.append(
                     IdentityDiagnostic(
-                        "RID021",
+                        RID021,
                         "evaluator_payload_sha256",
                         "installed payload digest differs from the expected evaluator payload",
                     )
                 )
         if evaluator_wheel_sha256 is not None and SHA256_PATTERN.fullmatch(evaluator_wheel_sha256) is None:
             diagnostics.append(
-                IdentityDiagnostic("RID013", "evaluator_wheel_sha256", "the optional digest must be a lowercase SHA-256")
+                IdentityDiagnostic(RID013, "evaluator_wheel_sha256", "the optional digest must be a lowercase SHA-256")
             )
         elif (
             evaluator_wheel_sha256 is not None
@@ -310,32 +336,32 @@ def inspect_runtime_identity(
             # digest that differs is a mismatch (REQ-REB-028).
             diagnostics.append(
                 IdentityDiagnostic(
-                    "RID022",
+                    RID022,
                     "evaluator_wheel_sha256",
                     "installed PEP 610 archive digest differs from the expected evaluator wheel",
                 )
             )
         if candidate_commit is not None:
             diagnostics.append(
-                IdentityDiagnostic("RID014", "candidate_commit", "released evaluator identity cannot claim a candidate commit")
+                IdentityDiagnostic(RID014, "candidate_commit", "released evaluator identity cannot claim a candidate commit")
             )
     elif role in {"candidate-source", "candidate-package"}:
         if candidate_commit is None or COMMIT_PATTERN.fullmatch(candidate_commit) is None:
             diagnostics.append(
-                IdentityDiagnostic("RID015", "candidate_commit", "a full lowercase candidate commit is required")
+                IdentityDiagnostic(RID015, "candidate_commit", "a full lowercase candidate commit is required")
             )
         if evaluator_wheel_sha256 is not None:
             diagnostics.append(
-                IdentityDiagnostic("RID016", "evaluator_wheel_sha256", "candidate identity cannot claim a released evaluator digest")
+                IdentityDiagnostic(RID016, "evaluator_wheel_sha256", "candidate identity cannot claim a released evaluator digest")
             )
         if evaluator_payload_sha256 is not None:
             diagnostics.append(
-                IdentityDiagnostic("RID023", "evaluator_payload_sha256", "candidate identity cannot claim a released evaluator payload")
+                IdentityDiagnostic(RID023, "evaluator_payload_sha256", "candidate identity cannot claim a released evaluator payload")
             )
 
     if require_isolated_python and not isolated:
         diagnostics.append(
-            IdentityDiagnostic("RID017", "isolated_python", "Python isolated mode is required")
+            IdentityDiagnostic(RID017, "isolated_python", "Python isolated mode is required")
         )
 
     ordered = tuple(sorted(set(diagnostics)))

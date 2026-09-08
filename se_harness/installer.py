@@ -2,16 +2,12 @@
 
 from __future__ import annotations
 
-import hashlib
-import json
-import os
 import re
 import sysconfig
-import tempfile
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path, PurePosixPath
-from typing import Iterable
+from typing import Iterable, Literal
 
 from se_harness import __version__
 from se_harness.evaluator_identity import EvaluatorIdentityError, installed_evaluator_identity
@@ -20,10 +16,16 @@ from se_harness.integrity import (
     HASH_MODE,
     LOCK_SCHEMA,
     IntegrityError,
+    atomic_write_bytes,
+    canonical_json_bytes,
     canonical_sha256,
+    canonical_text,
     canonical_text_equal,
     compare_lock_entry,
     parse_lock,
+    pretty_json_bytes,
+    raw_sha256,
+    read_toml,
 )
 
 
@@ -53,10 +55,15 @@ class TemplateFile:
     mode: str
 
 
+
+#: ECP-PRM-013: the installer's closed value sets, typed.
+InstallMode = Literal["init", "upgrade"]
+ChangeAction = Literal["add", "update", "adopt", "remove", "customized", "conflict", "integrate", "unchanged"]
+
 @dataclass(frozen=True)
 class Change:
     path: str
-    action: str
+    action: ChangeAction
     mode: str
     desired: bytes
     current: bytes | None
@@ -104,7 +111,7 @@ def _render(raw: bytes, variables: dict[str, str]) -> bytes:
         raise HarnessError("template files must be UTF-8") from exc
     for key, value in variables.items():
         text = text.replace("{{" + key + "}}", value)
-    return text.replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
+    return canonical_text(text).encode("utf-8")  # ECP-PRM-010
 
 
 def _templates() -> list[TemplateFile]:
@@ -263,12 +270,10 @@ def plan_install(
     config_path = target / CONFIG_NAME
     if config_path.exists():
         try:
-            import tomllib
-
-            harness_config = tomllib.loads(config_path.read_text(encoding="utf-8")).get("harness", {})
-            installed_at = harness_config.get("installed_at")
-            configured_project_name = harness_config.get("project_name")
-        except (OSError, ValueError):
+            harness_config = read_toml(config_path).get("harness", {})  # ECP-PRM-011: the one reader
+            installed_at = harness_config.get("installed_at") if isinstance(harness_config, dict) else None
+            configured_project_name = harness_config.get("project_name") if isinstance(harness_config, dict) else None
+        except IntegrityError:
             installed_at = None
     variables = _variables(target, project_name or configured_project_name, installed_at)
     changes: list[Change] = []
@@ -409,18 +414,8 @@ def _plan_leaving_set(target: Path, old_lock: dict, old_files: dict) -> list[Cha
     return changes
 
 
-def _atomic_write(destination: Path, content: bytes) -> None:
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    fd, temporary_name = tempfile.mkstemp(prefix=f".{destination.name}.", dir=destination.parent)
-    try:
-        with os.fdopen(fd, "wb") as handle:
-            handle.write(content)
-            handle.flush()
-            os.fsync(handle.fileno())
-        os.replace(temporary_name, destination)
-    finally:
-        if os.path.exists(temporary_name):
-            os.unlink(temporary_name)
+# ECP-PRM-008: the installer's five writes go through integrity's one atomic writer.
+_atomic_write = atomic_write_bytes
 
 
 def _prune_empty_directories(directory: Path, root: Path) -> None:
@@ -513,7 +508,7 @@ def _upgrade_evidence_bytes(
             "authorize a release, publish, tag, deploy, or grant incident authority."
         ),
     }
-    return (json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n").encode("utf-8")
+    return canonical_json_bytes(value, ensure_ascii=True)  # ECP-PRM-006, ECP-PRM-007
 
 
 def apply_changes(
@@ -547,7 +542,13 @@ def apply_changes(
         target_identity = getattr(authority, "target_identity", None)
         lock_file = target / LOCK_NAME
         if lock_file.is_file():
-            prior_lock_sha256 = hashlib.sha256(lock_file.read_bytes()).hexdigest()
+            # ECP-PRM-022: the lock's digest under the mode its hash-bound class declares.
+            from se_harness.hash_bound import HashBoundError, declared_digest
+
+            try:
+                prior_lock_sha256 = declared_digest(LOCK_NAME, lock_file.read_bytes())
+            except HashBoundError as exc:
+                raise HarnessError(f"cannot hash the prior lock: {exc}") from exc
         # REQ-LRE-003 (the evaluator-evidence floor, owner decision of
         # 2026-08-30): a released record without evaluator evidence is not
         # assessed, so an identity transition enumerates nothing, refuses
@@ -660,7 +661,7 @@ def apply_changes(
                 raise HarnessError(
                     "installed evaluator identity changed after the authority check; no files were retained"
                 )
-        lock_bytes = (json.dumps(lock, indent=2, sort_keys=True) + "\n").encode("utf-8")
+        lock_bytes = pretty_json_bytes(lock, ensure_ascii=True)  # ECP-PRM-006: the same bytes as before
         _atomic_write(lock_path, lock_bytes)
         if transition:
             replay, replay_lock = plan_install(target, project_name=None, mode="upgrade")

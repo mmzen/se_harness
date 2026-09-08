@@ -2,22 +2,21 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
-import os
 import re
 import shutil
 import subprocess
 import sys
-import tempfile
 from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
 from typing import Any
 
-import tomllib
 
-from se_harness import mutation_guard
-from se_harness.gate_source import DELEGATED_ROLE, DelegationError, authorize_delegated_right, delegated_reason
+from se_harness.integrity import atomic_create_bytes, raw_sha256
+from se_harness import front_matter, mutation_guard
+from se_harness._process import run as _launch, text as _text
+from se_harness.gate_source import DELEGATED_RIGHTS, DELEGATED_ROLE, DelegationError, authorize_delegated_right, delegated_reason
+from se_harness.hash_bound import HashBoundError, declared_digest
 from se_harness.artifact_layout import common_artifact_domain, repository_record_relative_path, validate_domain
 from se_harness.installer import ENGINE_ROOT, HarnessError, ensure_target, safe_destination
 from se_harness.workflow_contract import load_lifecycle_registry
@@ -37,7 +36,8 @@ LIFECYCLE_REGISTRY = load_lifecycle_registry()
 class RecordRefusal(HarnessError):
     """A refused record preparation, labelled by its cause class (SPEC-ECP-016, ECP-CLI-007).
 
-    The CLI maps the class to the code suffix: state 1, provenance 2, evidence 3, inputs 4.
+    The CLI maps the class to a code of `codes.VERIFICATION_RECORD_REFUSALS` or
+    `codes.RELEASE_RECORD_REFUSALS`.
     """
 
     cause = "state"
@@ -59,8 +59,6 @@ class InputRefusal(RecordRefusal):
     cause = "inputs"
 
 
-CAUSE_SUFFIX = {"state": "1", "provenance": "2", "evidence": "3", "inputs": "4"}
-
 
 def _grants_authority(family: str, status: object) -> bool:
     row = LIFECYCLE_REGISTRY.get(family, {}).get(status) if isinstance(status, str) else None
@@ -73,17 +71,12 @@ def _reserves_version(status: object) -> bool:
 
 
 def _run(command: list[str], *, cwd: Path, refusal: type[RecordRefusal] = EvidenceRefusal) -> subprocess.CompletedProcess[str]:
-    try:
-        return subprocess.run(
-            command,
-            cwd=cwd,
-            check=False,
-            capture_output=True,
-            text=True,
-            timeout=30,
-        )
-    except (OSError, subprocess.SubprocessError) as exc:
-        raise refusal(f"command failed to start safely: {command[0]}: {exc}") from exc
+    # ECP-PRM-001: the one launcher, decoded as UTF-8 so the record never depends on the locale.
+    completed = _launch(
+        command, cwd=cwd, timeout=30,
+        error=lambda message: refusal(f"command failed to start safely: {command[0]}: {message}"),
+    )
+    return subprocess.CompletedProcess(completed.args, completed.returncode, _text(completed.stdout), _text(completed.stderr))
 
 
 def _git(repository_root: Path, *arguments: str) -> str:
@@ -122,18 +115,8 @@ def _decision_metadata(root: Path, item: dict[str, Any]) -> dict[str, Any]:
     path_value = item.get("path")
     if not isinstance(path_value, str):
         return {}
-    try:
-        text = (root / path_value).read_text(encoding="utf-8-sig")
-    except (OSError, UnicodeError):
-        return {}
-    lines = text.replace("\r\n", "\n").split("\n")
-    if not lines or lines[0].strip() != "+++":
-        return {}
-    try:
-        closing = lines.index("+++", 1)
-        return tomllib.loads("\n".join(lines[1:closing]))
-    except (ValueError, tomllib.TOMLDecodeError):
-        return {}
+    # ECP-PRM-005: the one parser.
+    return front_matter.read_or_none(root / path_value) or {}
 
 
 def standing_deviations_for_work(root: Path, catalog: dict[str, dict[str, Any]], work_ids: list[str]) -> list[tuple[str, str]]:
@@ -195,11 +178,8 @@ def _require_artifact(catalog: dict[str, dict[str, Any]], artifact_id: str, arti
 def _load_metadata(repository_root: Path, artifact: dict[str, Any]) -> dict[str, Any]:
     path = safe_destination(repository_root, Path(artifact["path"]))
     try:
-        text = path.read_text(encoding="utf-8-sig")
-        lines = text.splitlines()
-        closing = lines.index("+++", 1)
-        return tomllib.loads("\n".join(lines[1:closing]))
-    except (OSError, UnicodeError, ValueError, tomllib.TOMLDecodeError) as exc:
+        return front_matter.read(path)
+    except front_matter.FrontMatterError as exc:
         raise InputRefusal(f"cannot read formal metadata for {artifact['id']}: {exc}") from exc
 
 
@@ -313,41 +293,22 @@ def _record_domain(
 
 
 def _atomic_write(path: Path, content: str) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "w", encoding="utf-8", newline="\n") as handle:
-            handle.write(content)
-            handle.flush()
-            os.fsync(handle.fileno())
-        try:
-            os.link(temporary_name, path)
-        except FileExistsError as exc:
-            raise InputRefusal(f"record output already exists: {path}") from exc
-        except OSError as exc:
-            raise InputRefusal(f"cannot create record output atomically: {exc}") from exc
-    finally:
-        if os.path.exists(temporary_name):
-            os.unlink(temporary_name)
+    # ECP-PRM-008: the one create-once writer; a record is never overwritten.
+    atomic_create_bytes(
+        path,
+        content.encode("utf-8"),
+        exists=lambda: InputRefusal(f"record output already exists: {path}"),
+        failed=lambda detail: InputRefusal(f"cannot create record output atomically: {detail}"),
+    )
 
 
 def _atomic_write_bytes(path: Path, content: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(content)
-            handle.flush()
-            os.fsync(handle.fileno())
-        try:
-            os.link(temporary_name, path)
-        except FileExistsError as exc:
-            raise InputRefusal(f"evaluator evidence already exists: {path}") from exc
-        except OSError as exc:
-            raise InputRefusal(f"cannot create evaluator evidence atomically: {exc}") from exc
-    finally:
-        if os.path.exists(temporary_name):
-            os.unlink(temporary_name)
+    atomic_create_bytes(
+        path,
+        content,
+        exists=lambda: InputRefusal(f"evaluator evidence already exists: {path}"),
+        failed=lambda detail: InputRefusal(f"cannot create evaluator evidence atomically: {detail}"),
+    )
 
 
 def _evaluator_evidence_output(
@@ -363,6 +324,15 @@ def _evaluator_evidence_output(
     if destination.exists():
         raise InputRefusal(f"evaluator evidence already exists: {relative.as_posix()}")
     return destination, relative.as_posix()
+
+
+def _evidence_digest(relative: str, content: bytes) -> str:
+    """ECP-PRM-022: the evidence digest under the mode `hash_bound_classes.json` declares for its path."""
+
+    try:
+        return declared_digest(relative, content)
+    except HashBoundError as exc:
+        raise EvidenceRefusal(f"cannot hash evaluator evidence {relative}: {exc}") from exc
 
 
 def _write_record_and_evidence(
@@ -403,7 +373,7 @@ def _generate_snapshot(repository_root: Path) -> str:
         raise EvidenceRefusal("dashboard generator did not create dashboard-manifest.json")
     # The v2 manifest recursively binds every deterministic artifact, relation,
     # readiness, provenance, and retained-content resource for this revision.
-    return hashlib.sha256(manifest.read_bytes()).hexdigest()
+    return raw_sha256(manifest.read_bytes())
 
 
 def capture_verification(
@@ -452,7 +422,7 @@ def capture_verification(
                 )
             except DelegationError as exc:
                 raise StateRefusal(f"{exc.code}: {exc.message}") from exc
-            mutation_guard.require_mutation_authority(root, operation="delegated-vrec-prepare")
+            mutation_guard.require_mutation_authority(root, operation=DELEGATED_RIGHTS["DR-VREC-PREPARE"])
             delegated_sentence = " " + delegated_reason("DR-VREC-PREPARE", gate, None)
         else:
             delegated_sentence = ""
@@ -490,6 +460,7 @@ def capture_verification(
         record_id,
         selected_domain,
     )
+    evidence_sha256 = _evidence_digest(evaluator_evidence_path, authority.evidence_bytes)
     require_clean_worktree(root)
     commit, object_format = git_identity(root)
     snapshot_hash = _generate_snapshot(root)
@@ -523,7 +494,7 @@ prepared_by = "{owner}"
 artifact_snapshot_sha256 = "{snapshot_hash}"
 evidence_paths = {evidence_array}
 evaluator_evidence_path = "{evaluator_evidence_path}"
-evaluator_evidence_sha256 = "{authority.evidence_sha256}"
+evaluator_evidence_sha256 = "{evidence_sha256}"
 
 [relations]
 verifies_work_order = {work_array}
@@ -632,6 +603,7 @@ def prepare_release(
         record_id,
         selected_domain,
     )
+    evidence_sha256 = _evidence_digest(evaluator_evidence_path, authority.evidence_bytes)
     require_clean_worktree(root)
     now = _timestamp()
     tag_line = f'tag = "{tag}"\n' if tag is not None else ""
@@ -652,7 +624,7 @@ git_object_format = "{object_format}"
 prepared_at = "{now}"
 prepared_by = "{authorized_by}"
 evaluator_evidence_path = "{evaluator_evidence_path}"
-evaluator_evidence_sha256 = "{authority.evidence_sha256}"
+evaluator_evidence_sha256 = "{evidence_sha256}"
 {tag_line}
 [relations]
 satisfies = ["{release_contract_id}"]

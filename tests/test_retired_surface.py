@@ -215,10 +215,10 @@ ABSENT_TEXT_IN_FILES = (
         frozenset(),
     ),
     (
-        "WO-REB-028: the retired check codes are reserved by their declaration and emitted by no path",
+        "WO-REB-028: the retired check codes are reserved by their declaration, named by the registry (ECP-PRM-016) and emitted by no path",
         _python_sources("se_harness", "repository_tools", "scripts", ".github/scripts"),
         release_qualification.RETIRED_CHECK_CODES,
-        frozenset({"se_harness/release_qualification.py"}),
+        frozenset({"se_harness/codes.py", "se_harness/release_qualification.py"}),
     ),
     (
         "WO-REB-028: a retired schema name appears only in retained history",

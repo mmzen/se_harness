@@ -5,10 +5,10 @@ from __future__ import annotations
 import os
 import sys
 import sysconfig
-import tomllib
 from dataclasses import dataclass
 from pathlib import Path
 
+from se_harness.integrity import IntegrityError, read_toml
 from se_harness import __version__
 from se_harness.evaluator_evidence import EvaluatorEvidence, build_evaluator_evidence
 from se_harness.evaluator_identity import (
@@ -18,21 +18,25 @@ from se_harness.evaluator_identity import (
 )
 from se_harness.installer import CONFIG_NAME, HarnessError, ensure_target, load_lock, safe_destination
 from se_harness.runtime_identity import RuntimeIdentity, inspect_runtime_identity
+from se_harness.workflow_contract import delegated_operations
+from se_harness.codes import CodedError, MG001, MG003, MG004, MG005, MG006
 
 
-PUBLIC_MUTATION_OPERATIONS = frozenset(
+#: The guarded operations a human decision drives; the delegated ones join from the contract.
+_HUMAN_MUTATION_OPERATIONS = frozenset(
     {
         "capture-verification",
         "create-artifact",
-        "delegated-vrec-prepare",
-        "delegated-work-order-complete",
-        "delegated-work-order-start",
         "installed-root-apply",
         "prepare-release",
         "scaffold-domain",
         "transition-apply",
         "upgrade-apply",
     }
+)
+#: ECP-PRM-019: the three delegated names are the contract's `mutation_operation` values.
+PUBLIC_MUTATION_OPERATIONS = _HUMAN_MUTATION_OPERATIONS | frozenset(
+    operation.mutation_operation for operation in delegated_operations()
 )
 
 
@@ -70,25 +74,32 @@ class MutationAuthority:
         return self.evidence.sha256
 
 
-class MutationGuardError(HarnessError):
+class MutationGuardError(CodedError):
     """An environment refusal of a guarded mutation (ECP-COR-004): the CLI re-raises it by
-    type so that `main()` prints it and exits 2, never rendering it as a result."""
+    type so that `main()` prints it and exits 2, never rendering it as a result. Its wire
+    form names the operation: `mutation guard CODE (operation): message`."""
+
+    def __init__(self, code: str, operation: str, message: str) -> None:
+        HarnessError.__init__(self, f"mutation guard {code} ({operation}): {message}")
+        self.code = code
+        self.operation = operation
+        self.message = message
 
 
 def _failure(code: str, operation: str, message: str) -> MutationGuardError:
-    return MutationGuardError(f"mutation guard {code} ({operation}): {message}")
+    return MutationGuardError(code, operation, message)
 
 
 def _configured_version(root: Path, operation: str) -> str:
     try:
         config_path = safe_destination(root, Path(CONFIG_NAME))
-        value = tomllib.loads(config_path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, tomllib.TOMLDecodeError, HarnessError) as exc:
-        raise _failure("MG001", operation, f"cannot read the standard config: {exc}") from exc
+        value = read_toml(config_path)  # ECP-PRM-011: the one reader
+    except (IntegrityError, HarnessError) as exc:
+        raise _failure(MG001, operation, f"cannot read the standard config: {exc}") from exc
     harness = value.get("harness") if isinstance(value, dict) else None
     version = harness.get("tool_version") if isinstance(harness, dict) else None
     if not isinstance(version, str) or not version:
-        raise _failure("MG001", operation, "the standard config has no tool version")
+        raise _failure(MG001, operation, "the standard config has no tool version")
     return version
 
 
@@ -134,11 +145,11 @@ def require_mutation_authority(
     try:
         lock = load_lock(root)
     except HarnessError as exc:
-        raise _failure("MG001", operation, f"cannot read the standard lock: {exc}") from exc
+        raise _failure(MG001, operation, f"cannot read the standard lock: {exc}") from exc
     configured_version = _configured_version(root, operation)
     locked_version = lock.get("tool_version")
     if not isinstance(locked_version, str) or configured_version != locked_version:
-        raise _failure("MG003", operation, "standard config and lock tool versions differ")
+        raise _failure(MG003, operation, "standard config and lock tool versions differ")
 
     target_identity: InstalledEvaluatorIdentity | None = None
     transition = False
@@ -150,7 +161,7 @@ def require_mutation_authority(
         try:
             target_identity = installed_evaluator_identity()
         except EvaluatorIdentityError as exc:
-            raise _failure("MG004", operation, f"cannot identify the target evaluator: {exc}") from exc
+            raise _failure(MG004, operation, f"cannot identify the target evaluator: {exc}") from exc
         report = _runtime_report(
             root,
             version=__version__,
@@ -164,17 +175,17 @@ def require_mutation_authority(
         # floor. The code stays reserved and is never reused.
         evaluator = lock.get("evaluator")
         if not isinstance(evaluator, dict):
-            raise _failure("MG001", operation, "the standard lock evaluator identity is unavailable")
+            raise _failure(MG001, operation, "the standard lock evaluator identity is unavailable")
         version = evaluator.get("version")
         payload_sha256 = evaluator.get("payload_sha256")
         archive_sha256 = evaluator.get("archive_sha256")
         if not isinstance(version, str) or not isinstance(payload_sha256, str):
-            raise _failure("MG001", operation, "the standard lock evaluator identity is incomplete")
+            raise _failure(MG001, operation, "the standard lock evaluator identity is incomplete")
         if archive_sha256 is not None and not isinstance(archive_sha256, str):
-            raise _failure("MG001", operation, "the standard lock evaluator archive identity is invalid")
+            raise _failure(MG001, operation, "the standard lock evaluator archive identity is invalid")
         if require_archive and archive_sha256 is None:
             raise _failure(
-                "MG004",
+                MG004,
                 operation,
                 "this mutation requires a locked evaluator archive identity",
             )
@@ -188,9 +199,9 @@ def require_mutation_authority(
         detail = "; ".join(
             f"{item.code} {item.subject}: {item.message}" for item in report.diagnostics
         )
-        raise _failure("MG005", operation, detail)
+        raise _failure(MG005, operation, detail)
     try:
         evidence = build_evaluator_evidence(report)
     except ValueError as exc:
-        raise _failure("MG006", operation, f"cannot canonicalize evaluator evidence: {exc}") from exc
+        raise _failure(MG006, operation, f"cannot canonicalize evaluator evidence: {exc}") from exc
     return MutationAuthority(operation, report, evidence, target_identity, transition)

@@ -15,6 +15,7 @@ from pathlib import Path
 from unittest import mock
 
 from se_harness.cli import build_parser, main
+from se_harness.codes import MG005, WEX220
 from se_harness.release_qualification import failed_qualification
 from tests.fixture_support import standard_repository
 from tests.mutation_guard_support import patch_mutation_authority
@@ -158,7 +159,7 @@ class RepositoryCommandShapeTests(unittest.TestCase):
         # handler re-raises it by type, never by message prefix.
         from se_harness.mutation_guard import MutationGuardError
 
-        with mock.patch("se_harness.mutation_guard.require_mutation_authority", side_effect=MutationGuardError("mutation guard MG005 (capture-verification): RID002 harness_version: resolved")):
+        with mock.patch("se_harness.mutation_guard.require_mutation_authority", side_effect=MutationGuardError(MG005, "capture-verification", "RID002 harness_version: resolved")):
             code, output, error = invoke(
                 "capture-verification", str(self.root), "--id", "VREC-009", "--work-order", "WO-001",
                 "--verification", "VER-001", "--evidence", "README.md", "--json",
@@ -187,7 +188,7 @@ class RepositoryCommandShapeTests(unittest.TestCase):
         # WO-ECP-027 (ECP-COR-005): transition follows its siblings; the guard is a refusal.
         from se_harness.mutation_guard import MutationGuardError
 
-        with mock.patch("se_harness.cli.plan_transition", side_effect=MutationGuardError("mutation guard MG005 (transition): RID002 harness_version: resolved")):
+        with mock.patch("se_harness.cli.plan_transition", side_effect=MutationGuardError(MG005, "transition", "RID002 harness_version: resolved")):
             code, output, error = invoke("transition", str(self.root), "--apply", "--set", "WO-001=verified", "--decision", "WO-001=engineering-owner", "--json")
         self.assertEqual(2, code)
         self.assertEqual("", output)
@@ -205,7 +206,7 @@ class RepositoryCommandShapeTests(unittest.TestCase):
         # classes _check converts, with the code split once.
         from se_harness.workflow_procedures import ProcedureError
 
-        with mock.patch("se_harness.cli.plan_transition", side_effect=ProcedureError("WEX220: no procedure binds the transition")):
+        with mock.patch("se_harness.cli.plan_transition", side_effect=ProcedureError(WEX220, "no procedure binds the transition")):
             code, payload, error = self.json_of("transition", str(self.root), "--set", "WO-001=verified", "--decision", "WO-001=engineering-owner", "--json")
         self.assertEqual(1, code, error)
         self.assertEqual(["WEX220: no procedure binds the transition"], payload["restitution"]["blocked_by"])
@@ -213,7 +214,7 @@ class RepositoryCommandShapeTests(unittest.TestCase):
             code, payload, error = self.json_of("evidence", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--json")
         self.assertEqual(1, code, error)
         self.assertEqual(["WEX230: result field missing"], payload["restitution"]["blocked_by"])
-        with mock.patch("se_harness.cli.capture_verification", side_effect=ProcedureError("WEX220: no procedure binds the record")):
+        with mock.patch("se_harness.cli.capture_verification", side_effect=ProcedureError(WEX220, "no procedure binds the record")):
             code, payload, error = self.json_of(
                 "capture-verification", str(self.root), "--id", "VREC-009", "--work-order", "WO-001",
                 "--verification", "VER-001", "--evidence", "README.md", "--json",
@@ -225,24 +226,24 @@ class RepositoryCommandShapeTests(unittest.TestCase):
         # WO-ECP-027 (ECP-COR-008): no traceback; the refusal line and exit 2.
         from se_harness.workflow_procedures import ProcedureError
 
-        with mock.patch("se_harness.cli.inspect_installation", side_effect=ProcedureError("no procedure binds doctor")):
+        with mock.patch("se_harness.cli.inspect_installation", side_effect=ProcedureError(WEX220, "no procedure binds doctor")):
             code, output, error = invoke("doctor", str(self.root))
         self.assertEqual(2, code)
         self.assertEqual("", output)
-        self.assertTrue(error.startswith("harnessctl: no procedure binds doctor"), error)
+        self.assertTrue(error.startswith("harnessctl: WEX220: no procedure binds doctor"), error)  # ECP-PRM-017: the refusal carries its code
 
     def test_dashboard_json_passes_the_engine_refusal_and_error_through(self) -> None:
         # WO-ECP-027 (ECP-COR-009, ECP-COR-010): engine exit 2 is a refusal, engine exit 1 keeps its stderr.
         import subprocess
 
         refused = subprocess.CompletedProcess(args=[], returncode=2, stdout="", stderr="GenerationError: bad root\n")
-        with mock.patch("se_harness.cli.subprocess.run", return_value=refused):
+        with mock.patch("se_harness._process.subprocess.run", return_value=refused):
             code, output, error = invoke("dashboard", str(self.root), "--json")
         self.assertEqual(2, code)
         self.assertEqual("", output)
         self.assertIn("GenerationError: bad root", error)
         failed = subprocess.CompletedProcess(args=[], returncode=1, stdout="", stderr="dashboard: manifest mismatch\n")
-        with mock.patch("se_harness.cli.subprocess.run", return_value=failed):
+        with mock.patch("se_harness._process.subprocess.run", return_value=failed):
             code, payload, error = self.json_of("dashboard", str(self.root), "--json")
         self.assertEqual(1, code, error)
         self.assertEqual("failed", payload["outcome"])
@@ -263,7 +264,7 @@ class RepositoryCommandShapeTests(unittest.TestCase):
         # WO-ECP-027 (ECP-COR-014): the engine launches are bounded and a timeout is a refusal.
         import subprocess
 
-        with mock.patch("se_harness.cli.subprocess.run", side_effect=subprocess.TimeoutExpired(cmd="validate", timeout=1800)) as run:
+        with mock.patch("se_harness._process.subprocess.run", side_effect=subprocess.TimeoutExpired(cmd="validate", timeout=1800)) as run:
             code, output, error = invoke("validate", str(self.root))
         self.assertEqual(2, code)
         self.assertEqual("", output)

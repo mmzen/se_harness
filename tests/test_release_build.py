@@ -382,7 +382,7 @@ class BuildRecipeSchemaTests(unittest.TestCase):
         self.recipe = json.loads(self.recipe_bytes)
 
     def encoded(self, value: object) -> bytes:
-        return BUILD.canonical_json_bytes(value)
+        return BUILD.recipe_json_bytes(value)
 
     def test_canonical_recipe_binds_complete_identity(self) -> None:
         recipe = BUILD.validate_recipe_bytes(
@@ -759,7 +759,7 @@ class HostIndependentCandidateSourceTests(unittest.TestCase):
         (source / "module.py").write_bytes(b"# fixture\n")
         recipe = json.loads(RECIPE_PATH.read_bytes())
         recipe["environment"]["fixed"]["HOME"] = (root / "home").as_posix()
-        (root / "recipe.json").write_bytes(BUILD.canonical_json_bytes(recipe))
+        (root / "recipe.json").write_bytes(BUILD.recipe_json_bytes(recipe))
         shutil.copyfile(LOCK_PATH, root / "lock.txt")
         established = BUILD._establish_declared_source_modes
 
