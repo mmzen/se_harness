@@ -2,7 +2,7 @@
 id = "WO-ECP-035"
 type = "work_order"
 title = "Wave 3, group B: one validation per governance command"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -49,6 +49,13 @@ to = "approved"
 decided_at = "2026-09-08T15:13:53Z"
 decided_by = "engineering-owner"
 reason = "Approved on 2026-09-08 by the accountable owner by selecting the presented option 'Approve all six (Recommended)', given after the stacked packet pull requests #404, #405 and #406 and their summary were presented: wave 3 of the code health assessment of 2026-09-07 (issue #378) and the revisit triggers of DEC-ECP-001 and DEC-ECP-002, the engine as an import surface, one validation per governance command, the three largest modules split along their seams, every recorded output byte-identical. Approval of a definition authorizes no work."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-08T17:38:49Z"
+decided_by = "engineering-owner"
+reason = "Started on 2026-09-08 by the accountable engineering owner, by selecting the presented option 'Complete, prepare the record, start group B' after WO-ECP-034 was marked implemented and VREC-ECP-038 prepared at b7444502: wave 3, group B, one validation per governance command (SPEC-ECP-024 ECP-ENG-010 to ECP-ENG-016, ECP-ENG-023 to ECP-ENG-026). Start preflight PASS. Stacked on the group A branch because the two groups edit the same modules."
 +++
 
 # Work Order: Wave 3, group B: one validation per governance command
