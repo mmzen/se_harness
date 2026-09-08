@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-ECP-034"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "869d7ba7a4ed6c94715fc88f4ff33a0e0465fbb8ba76de805c2b0cd3fe89886e"
-rebound_at = "2026-09-08T16:39:41Z"
+formal_snapshot_sha256 = "2cdd557b688541fb0a5654d55ba953d70debbef98e244f9f76d9210d691f370d"
+rebound_at = "2026-09-08T17:29:26Z"
 ```
 
 # WO-ECP-034 handoff evidence
@@ -35,7 +35,8 @@ repository.
 - Candidate: this checkout, branch `wo/ecp-034-engine-import-surface` off
   `main` at `0e7d718b`; the code commits are `647d666c` (the import surface
   and the loaders), `a30ecc44` (the twins, the codes, the amendment records)
-  and `41c77a44` (two CLI shape tests and the `ECP-COR-014` record).
+  and `41c77a44` (two CLI shape tests and the `ECP-COR-014` record); `5094aea7`
+  merges `main` at `517dc5f6` (disclosure 9).
 - Byte identity: the base code (a worktree at the start commit `a8e9a5ca`,
   whose code equals `main`'s) and the candidate code, each run on the same
   target checkout at the same revision, so the observed revision the
@@ -80,14 +81,14 @@ repository.
 | `dashboard --json` manifest | base vs candidate | `dashboard-manifest.json` byte-identical, digest `54c500c243e7fac5…` |
 | `check --checkpoint start --json` on `WO-ECP-034`, `WO-ECP-033`, `VREC-ECP-037` | base vs candidate | byte-identical; `result_sha256` `cab9d8e2…`, `a24e3534…`, `b4dd5fab…` |
 | `check --checkpoint handoff --from-git main` formal snapshot | base vs candidate | `fe052def…` both |
-| `validate --advisories` | exact 0.16.0 | 1,410 artifacts, 0 errors, 73 warnings (the pre-existing maintenance set), 0 advisories |
+| `validate --advisories` | exact 0.16.0 | 1,427 artifacts (after the merge of `main`, disclosure 9), 0 errors, 73 warnings (the pre-existing maintenance set), 0 advisories |
 | `doctor` | exact 0.16.0 | 0 FAIL |
 | `preflight --work-order WO-ECP-034 --phase review` | exact 0.16.0 | PASS |
-| `check --checkpoint handoff --from-git main` | exact 0.16.0 | Completed; all nine `QGP-G4I-*` predicates pass, every one of the 53 changed paths inside the amended scope; `complete: true`; the schema-2 result is retained beside this packet as `handoff.json`. The first run refused `se_harness/workflow_procedures.py` on `QGP-G4I-PATHS`; disclosure 8 |
+| `check --checkpoint handoff --from-git main` | exact 0.16.0 | Completed; all nine `QGP-G4I-*` predicates pass, every one of the 47 changed paths inside the amended scope; `complete: true`; the schema-2 result is retained beside this packet as `handoff.json`. The first run refused `se_harness/workflow_procedures.py` on `QGP-G4I-PATHS`; disclosure 8 |
 | `CONTRACT_SHA256` | candidate, `main` vs branch | `a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75` both |
 | `pylint --enable=duplicate-code --min-similarity-lines=8` | scratch environment | 3 blocks at the base, 0 on this branch (disclosure 2) |
 | `radon cc`, functions above 60 | scratch environment | 11 at the base, 10 on this branch: `_validate_evaluator_evidence_binding` fell below 60 with the fold; the rest are group C's |
-| `PYTHONUTF8=1 python scripts/run_tests.py --scale full` | candidate, Windows 11 (CPython 3.13.3) | 1,333 tests, 1 error, 26 skipped: the workstation baseline (`errors=1, skipped=26`), at `41c77a44` in a detached worktree; 1,324 before this group, 9 tests added, the hand-written lifecycle matrix and the copy-and-exec case retired |
+| `PYTHONUTF8=1 python scripts/run_tests.py --scale full` | candidate, Windows 11 (CPython 3.13.3) | 1,063 tests, 1 error, 22 skipped: the workstation baseline (`errors=1, skipped=22`) at `5094aea7`, after the merge of `main` whose `WO-TST-004` collapsed the inherited re-runs; before the merge 1,333 tests, 1 error, 26 skipped at `41c77a44` |
 
 ### The Windows suite
 
@@ -154,3 +155,12 @@ tests that mocked the engine subprocess, now mocking the entry module.
    refused it (`WEX201`); the accountable engineering owner amended the scope on
    2026-09-08 under DR-REMEDIATION-SCOPE and the work order carries the dated
    amendment. Nothing else was widened.
+9. `main` moved under this branch while the group ran: the wave 5 packets
+   (#409, #410, #411) and `WO-TST-004` (#402, the test-suite hygiene), which
+   rewrote how twenty test modules load the engine through
+   `tests/root_identity_support.load_evaluator_module`. The merge resolved
+   those twenty by taking `main`'s structure and pointing the one loader at
+   the package: it imports `se_harness.engine.<name>` and answers the retired
+   registry name with `se_harness.artifact_layout`. `main` changed no file
+   under `se_harness/` or `repository_tools/`, so the base code of the
+   byte-identity comparison is still `main`'s code.

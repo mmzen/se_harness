@@ -2,7 +2,7 @@
   "compliance": {
     "change_set_source": "git",
     "checkpoint": "handoff",
-    "formal_snapshot_sha256": "869d7ba7a4ed6c94715fc88f4ff33a0e0465fbb8ba76de805c2b0cd3fe89886e",
+    "formal_snapshot_sha256": "2cdd557b688541fb0a5654d55ba953d70debbef98e244f9f76d9210d691f370d",
     "gates": [
       {
         "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 53 declared changed path(s) are within execution scope.",
+            "message": "All 47 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -273,7 +273,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "a88ef1d5199be4fdd46313a89380ebf4ef995af35ca99ad01f7be9d539bb2b89",
+  "result_sha256": "96cf6f791afe037b7b7cff54484047dd0a6075536bb947fb52dfb6214f8a7b93",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
@@ -303,21 +303,17 @@
       "se_harness/workflow.py",
       "se_harness/workflow_contract.py",
       "se_harness/workflow_procedures.py",
-      "tests/test_adr_applicability.py",
-      "tests/test_architecture_traceability.py",
+      "tests/root_identity_support.py",
       "tests/test_artifact_authoring.py",
       "tests/test_artifact_authoring_policy.py",
-      "tests/test_artifact_catalog.py",
       "tests/test_cli_shape.py",
       "tests/test_codes_and_contract_tables.py",
-      "tests/test_dashboard_webui.py",
       "tests/test_decision_management.py",
       "tests/test_engine_import_surface.py",
       "tests/test_glossary.py",
       "tests/test_inspection.py",
       "tests/test_legacy_release_evidence.py",
       "tests/test_lifecycle_state_contract.py",
-      "tests/test_operating_contract_readiness.py",
       "tests/test_predecessor_bootstrap_retirement.py",
       "tests/test_reader_first_capabilities.py",
       "tests/test_reader_first_intents.py",
@@ -326,8 +322,6 @@
       "tests/test_release_build.py",
       "tests/test_revision_provenance.py",
       "tests/test_risk_management.py",
-      "tests/test_validation_taxonomy.py",
-      "tests/test_work_order_assurance.py",
       "tests/test_workflow_compliance.py",
       "tests/test_workflow_documentation_contract.py",
       "tests/test_workflow_execution.py"
