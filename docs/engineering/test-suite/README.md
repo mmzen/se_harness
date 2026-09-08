@@ -27,6 +27,7 @@ serial reference.
 - `WO-TST-001`: runner, marker, test command in `AGENTS.md`, candidate-evidence suite step, notes (REQ-TST-001, 002).
 - `WO-TST-002`: the cached fixture install (REQ-TST-003).
 - `WO-TST-003`: follow-up to WO-TST-001's deviation 1 — the release qualification sets the scale marker (REQ-TST-002). Draft.
+- `WO-TST-004`: wave 4 of the code health assessment of 2026-09-07 (issue #379, section 5 and the wave 4 plan) under `REQ-TST-004` / `SPEC-TST-002` / `VER-TST-002`, drafted 2026-09-08: mixins for the 253 inherited re-runs, five support modules for the copied helpers, one retired-surface table for the tombstones, un-cited prose pins turned into structural checks, one fixture project name, the timings file on the hosted lane; product code stays with waves 2 and 3; starts after the wave 2 work orders and `WO-TCM-011` merge; no architecture relation.
 
 Every artifact remains `draft`. This packet authorizes no implementation,
 lifecycle transition, Git action, or external action.
