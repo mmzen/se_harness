@@ -290,7 +290,8 @@ listed only so the count of files under `.github/workflows/` adds up.
 | `engineering-harness.yml` (managed) | PR + push, per the release | 1 | 10 | 167 | 0 of 3, and out of scope |
 
 Repository-owned public action pins: 52 of 52 in pin form, from 28; floating
-tags 18 to 0. Every `python-version` is `"3.11"`, once as
+tags 15 to 0, digests with an inexact tag comment 9 to 0. Every
+`python-version` is `"3.11"`, once as
 `publish-pypi.yml`'s `PYTHON_VERSION`. Workflow YAML grew 2,082 to 2,137
 lines: the conditions, the `env` block and the headers are text, and nothing
 was deleted except two inline re-checks.
