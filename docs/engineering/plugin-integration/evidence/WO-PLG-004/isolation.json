@@ -1,0 +1,13 @@
+{
+  "metadata_only": true,
+  "target_sha256": "4459a0b100ff243487a6d4794f0c28bec7e230824df0efd89d9eb311a2d175bd",
+  "sandbox": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02",
+  "credentials_copied": false,
+  "host_authentication_not_established": true,
+  "readable_normal_profile_metadata_unchanged": true,
+  "unavailable_inventory_paths": [
+    "C:\\Users\\mathi\\.config\\git\\ignore"
+  ],
+  "credential_files_opened_by_probe": false,
+  "public_capture_policy": "sanitized-public-v1"
+}

@@ -1,0 +1,20 @@
+{
+  "expected": "Spaced paths, version restart, stable plugin data and missing interpreter are observed.",
+  "observed": {
+    "events": [],
+    "reload": "restart tested; interactive /reload-plugins unavailable",
+    "normal_interpreter_removed": false
+  },
+  "conclusion": "unavailable",
+  "production_support": "unqualified",
+  "source_evidence": [
+    "commands.json",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "exit_status": [
+    0,
+    0
+  ],
+  "host_identity_evidence": "docs/engineering/plugin-integration/evidence/WO-PLG-004/identities.json"
+}

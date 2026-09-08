@@ -1,0 +1,20 @@
+{
+  "expected": "Missing, old and unusable provided Python produce guidance without installation.",
+  "observed": {
+    "missing_python": "observed by host-shell prerequisite check; not a Claude tool invocation",
+    "old_python": "unavailable: no such interpreter supplied",
+    "missing_venv_ensurepip": "unavailable: no such interpreter supplied",
+    "target_unchanged": "4459a0b100ff243487a6d4794f0c28bec7e230824df0efd89d9eb311a2d175bd"
+  },
+  "conclusion": "unavailable",
+  "production_support": "unqualified",
+  "source_evidence": [
+    "commands.json",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "exit_status": [
+    0
+  ],
+  "host_identity_evidence": "docs/engineering/plugin-integration/evidence/WO-PLG-004/identities.json"
+}
