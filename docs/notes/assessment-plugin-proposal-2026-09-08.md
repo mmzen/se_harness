@@ -20,6 +20,12 @@
 > case list are now given. One measurement was added: a bounded first
 > delivery fails validation with 41 errors. The carrier and packet-count
 > items of the proposal were rewritten. Two scores moved.
+>
+> **Reassessed at `c5c3c7c4`** the same night, after the author revised
+> PR #416 in answer. The [reassessment](#reassessment-at-c5c3c7c4) at the end
+> re-scores the ten axes, lists what still blocks approval apart from what
+> only reads badly, and answers whether the two probe packages are ready
+> for their owners. The body above is left as written at `3575f727`.
 
 ## Summary
 
@@ -457,3 +463,129 @@ matrix column, empty for numbered scenarios.
 | VER-PLG-015 | - | Missing coverage or samples remain visible; untested combinations gain no support claim. |  |
 | VER-PLG-015 | - | A closed decision selecting preview-only cannot produce qualification acceptance; the governing artifacts require appropriate disposition or amendment. |  |
 | VER-PLG-016 | - | Unavailable releases and untested hosts remain prospective or unsupported. |  |
+
+## Reassessment at c5c3c7c4
+
+PR #416 was revised to `c5c3c7c4` in answer to this note and the discussion
+under it. This section judges that commit alone. Its base is still `main` at
+`fae52e1b`; `main` has since moved 33 commits to `560973cf`, and the two merge
+without conflict or overlapping files.
+
+### What was checked again
+
+- The released 0.16.0 evaluator on the head: 1,512 artifacts, 0 errors, 44
+  warnings, 0 advisories; 97 doctor checks; the 17 documentation tests pass.
+- The delivery note's groups D01 to D04 were rehearsed here in scratch
+  worktrees, on `fae52e1b` and on live `main`, each group as a real commit
+  over the previous one: `harnessctl validate` and the scope checkpoint of
+  the selected work order against the prior commit. Both bases: 0 errors,
+  no scope blocker, changed paths 8, 4, 13, and 27.
+- The 130 verification rows were inventoried with the same mechanical rule
+  as the appendix: 96 name an observable in the result cell, 34 do not, and
+  no evidence cell is empty. Six probe rows carry an "or the probe records
+  the incompatibility" escape.
+- The vendor pages for hooks were read again for what a host does when a
+  hook times out or fails to start.
+
+### Scores, previous to revised
+
+| Axis | Before | Now | Why |
+| --- | ---: | ---: | --- |
+| Problem fit and value | 8 | 8 | Unchanged. |
+| Architecture | 8 | 8 | The activation route is now in ARCH-PLG-002 and two adapter rules; the unready guard is fail-open by rule, which matches the host's documented default. New: the host proceeds when a before-tool hook times out or cannot start, so the hook layer is best-effort in a second way the contracts do not yet name. |
+| Authority and trust boundary | 7 | 8 | The wheel digest is compared and the observation must be present (PLG-ENV-005, ENV08); "covers" has its comparison table; the fail-open window is stated, not hidden. The #347 gap is unchanged by design. |
+| Host-platform accuracy | 7 | 8 | The documented bootstrap is adopted and the two decisions ask the right question. VER-PLG-008 C03 still expects a timed-out check to prevent the effect, which the host does not do. |
+| Absorption of the PR #360 review | 6 | 8 | Finding 2 is now a rule with cases; finding 3's four items are in scenarios 14 and 15; the repository `.codex/agents/` writes are gone; "covers" is defined; one baseline. |
+| Packet quality | 6 | 7 | Every contract is a fixture, action, observable, evidence table with a named evidence file; the share of rows without a named observable fell from 41% to 26%. What remains is self-report: about a dozen rows whose observable is the handler's own statement about coverage or readiness. The copied host columns stay by choice. |
+| Decomposition and delivery plan | 4 | 6 | A route exists, is written down, and rehearses clean here on both bases. Its price is one 27-artifact group and a WO-PLG-007 scope that spans five packages for its lifetime. The evaluator-release dependency behind DEC-PLG-004 is now visible and the setup sequence is stated. |
+| Mergeability and process conformance | 3 | 6 | Closed groups with one selected work order each, scopes naming exact files, index and glossary carried by D01. Not yet shown end to end: review preflight needs the approvals, and the umbrella PR stays unmergeable by design. |
+| Readability and size | 4 | 4 | One baseline, less repeated setup prose, the lock rule in one place. Against that, 61,000 words to review, up from 51,000; the verification tables account for most of the growth and earn it. |
+| Honesty of claims | 9 | 9 | Every figure reproduced again, including the rehearsal. The reply names its own limits before being asked. |
+
+### Blockers, apart from readability
+
+Each item names the artifact and the change that would clear it.
+
+1. **A timed-out or unstarted before-tool hook does not block.** Claude
+   Code documents that a command hook on `PreToolUse` defaults to 600
+   seconds, and that a hook which reaches its timeout, or fails to start
+   (a missing interpreter exits 127), renders no decision: the call
+   continues through the normal permission flow. VER-PLG-008 C03 expects
+   "times out, or is interrupted" to end with "no target effect occurs";
+   PLG-HOOK-002 says "translate failure into host refusal". Neither holds
+   on a timeout unless the handler owns the deadline. Fix: a rule in
+   SPEC-PLG-008 that the handler enforces an inner deadline shorter than
+   the host's and exits 2 with a reason when the evaluator has not
+   answered; a case in VER-PLG-008 with a deliberately slow check that
+   still ends in a host refusal; and a rule in SPEC-PLG-005 and 006 that
+   the registered guard command must start on every supported platform,
+   since a mistyped path leaves the gate silently disabled. Blocks the
+   adapter and tool-hook contracts (D04), not the probes.
+2. **Self-report observables.** VER-PLG-008 C05 and C07, VER-PLG-015 C01
+   and C08, and VER-PLG-011 EVD02 to EVD04 pass when the handler's output
+   says the right thing about itself. Pair each with the external state:
+   the effect count and target hash for coverage claims, the lifecycle
+   state read back by `harnessctl check` for readiness claims. Blocks
+   approval of those contracts.
+3. **Governed writes during the unready window are stopped by nobody in
+   the rules.** PLG-CDXA-008 and PLG-CLCA-008 make the guard fail-open,
+   correctly. SPEC-PLG-010 and SPEC-PLG-011 have no rule that the skill
+   refuses governed writes while readiness is unestablished; the notes say
+   it, the contracts do not. One rule in each closes the window at the only
+   level available.
+4. **The probe contracts cannot fail on host behaviour.** VER-PLG-003 and
+   004 C01, C03, and C04 accept "or records the incompatibility" as a pass.
+   That is right for a probe, and it should be said: the pass condition is
+   completeness of the observation record, judged against PLG-CDXP-006 and
+   007, not the host's answer. One sentence in Independence. Blocks
+   nothing; fix before the owners read D01.
+5. **The engineering index will link to notes that are not on `main`.**
+   `docs/engineering/plugin-integration/README.md` links to the proposal,
+   the operation map, and the scenarios; D01 carries only the delivery
+   note. Land the four proposal notes first under the notes-only exception,
+   or trim the D01 slice of the index. Small.
+6. **Merge `main` into the umbrella before cutting D01.** Thirty-three
+   commits behind, clean merge, no overlapping files. Routine.
+
+### Readability, not blocking
+
+- Sixty-one thousand words. The delivery note and the 130 rows are worth
+  their cost; the seven explanations of the shell guard in one scenario
+  file are not.
+- The comparison table in SPEC-PLG-010 is normative and sits under Terms.
+  The repository's shape puts what a verifier tests under Rules.
+- The two probe columns and the two adapter columns still differ only in
+  host names. The author keeps them for separate evidence sets; that is a
+  defensible choice and the duplication is now a known cost rather than an
+  accident.
+
+### The 11-group route and its 27
+
+The route is sound and reproduces. Its cost is real and bounded: WO-PLG-007
+carries 27 files for its lifetime, including the definitions of four sibling
+packages, and WO-PLG-001 carries WO-PLG-002's. That is the ordering this note
+called "the first" applied to two subgraphs instead of the whole domain, and
+it is a fair trade for closed groups with no relation surgery. One
+alternative is worth pricing: ARCH-PLG-002 spans host-neutral scripts
+(packages 07 and 08) and host-specific adapters (05, 06, 14). Splitting it
+along that seam, which the proposal itself draws as one engine and two
+adapters, would give two groups of about 14 and 15 and halve the largest
+scope, at the cost of a second architecture record and ADR. Whether the seam
+is real enough to carry an architecture boundary is the technical owner's
+call.
+
+### Are the two probe packages ready for their owners?
+
+Yes, with the two small edits above. REQ-PLG-006 and 007 are one EARS
+sentence each and derive from an existing capability. SPEC-PLG-003 and 004
+have seven rules apiece including the guard before and after setup and
+after interpreter removal. VER-PLG-003 and 004 have seven cases with named
+evidence files, and C07 requires real setup through host tools with hooks
+registered and a governed write attempted while unready, which is the
+right test of the fail-open choice. WO-PLG-003 and 004 depend on no other
+packet and may end in an evidenced incompatibility. Start preflight on
+WO-PLG-003 reports only the expected draft-state diagnostics. Before the
+owners read them: add the one-sentence pass-condition statement (item 4)
+and, if the four proposal notes have not landed, trim the D01 slice of the
+engineering index (item 5). A better score is not approval; the owners
+decide.
