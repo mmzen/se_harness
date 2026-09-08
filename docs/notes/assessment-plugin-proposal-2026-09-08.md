@@ -10,6 +10,17 @@
 > [review of PR #360](https://github.com/mmzen/se_harness/issues/367), which
 > the proposal says it incorporates.
 
+> **Revised the same evening**, after the author's reply on
+> [discussion #418](https://github.com/mmzen/se_harness/discussions/418).
+> Four points were corrected: the offline exact-wheel install is already a
+> rule, so the identity gap is narrower; "covers" is half defined by
+> PLG-CHANGE-004; the hosted build of record is the route when there is no
+> Docker engine, not a mandatory step; and the count of verification cases
+> without an observable depends on the reading, so both readings and the
+> case list are now given. One measurement was added: a bounded first
+> delivery fails validation with 41 errors. The carrier and packet-count
+> items of the proposal were rewritten. Two scores moved.
+
 ## Summary
 
 PR #416 proposes shipping SE Harness as a native plugin for two coding hosts,
@@ -25,23 +36,24 @@ records, 2 ADRs, and 5 open decisions. Everything is `draft` or `open`.
 The direction is right and the honesty is exemplary. The packet shape is the
 problem. Three things need fixing before any work order is approved:
 
-1. **The wheel digest is still not a rule.** The identity check the plugin
-   relies on accepts two digest flags; no rule requires them, and no rule
-   requires installing from the exact wheel file. This was the second
-   blocking finding on PR #360.
+1. **The wheel digest is still not compared.** Installing the supplied
+   wheel offline is a rule; checking its digest against release metadata is
+   not, and the evaluator passes a missing digest by design. This was the
+   second blocking finding on PR #360.
 2. **No work order can carry the packet onto `main`.** Every scope lists only
    its own work order file, evidence directory, and code paths. The 79
-   definitions, the domain index, and the glossary are in no scope.
+   definitions, the domain index, and the glossary are in no scope, and a
+   bounded first delivery fails validation with 41 errors because the shared
+   records reference most other packages.
 3. **Two host probes and two decisions answer a question the vendor
    documentation already answers.** Both hosts document a session-start hook
    that prepares dependencies in a persistent plugin data directory on first
    run. A one-line shell guard is a hook command, not a launcher.
 
 Scores run from 3 (mergeability) to 9 (honesty of claims); the table is
-below. The proposal at the end is: approve the package assembly and
-environment setup packets plus one merged host spike, let those three work
-orders carry the definitions, and hold the other thirteen until the spike
-reports.
+below. The proposal at the end is: start with the two probe packages, then
+assembly and setup, hold the other twelve as drafts, and choose one of two
+carrier orderings, each costed below.
 
 ## What the proposal is
 
@@ -69,6 +81,9 @@ read-only helper agents.
 - Each finding of the PR #360 review was traced into the new text.
 - The 79 formal artifacts were surveyed for traceability, rule shape, test
   wording, and scope overlap.
+- A bounded first delivery was assembled in a scratch worktree and validated.
+- After the author's reply, each of their corrections was checked against
+  the code and artifacts they cite.
 
 ## Strengths
 
@@ -109,21 +124,28 @@ read-only helper agents.
 
 ## Weaknesses
 
-1. **The wheel digest is not bound.** [SPEC-PLG-002](../engineering/plugin-integration/specifications/SPEC-PLG-002.md)
-   rule PLG-ENV-005 says "verify the installed release and payload through
-   existing evaluator identity checks"; rule PLG-ENV-011 names
-   `--expected-root` and `--entry-point`. The 0.16.0 `harnessctl identity`
-   command also accepts `--evaluator-wheel-sha256` and
-   `--evaluator-payload-sha256`; no rule names them, and no rule says the
-   install must come from the exact wheel file. An install from a local
-   wheel file records the archive hash in the package's `direct_url.json`
-   (the 0.16.0 environment on this machine shows it); an index install
-   records none, and release preparation then refuses with `MG004`. A
-   "repair" that reinstalls from an index satisfies every PLG-ENV rule and
-   fails months later. [VER-PLG-002](../engineering/plugin-integration/verification/VER-PLG-002.md)
+1. **The wheel digest is not compared.** [SPEC-PLG-002](../engineering/plugin-integration/specifications/SPEC-PLG-002.md)
+   already requires the offline install of the supplied wheel (PLG-ENV-004),
+   and SPEC-PLG-013 requires repair from the bundled wheel with
+   `--no-index --no-deps` (PLG-MNT-002), so an index install is outside the
+   contract. What no rule requires is the comparison. PLG-ENV-005 says
+   "verify the installed release and payload through existing evaluator
+   identity checks"; PLG-ENV-011 names `--expected-root` and
+   `--entry-point` but not `--expected-version`, which the command
+   requires, nor `--evaluator-wheel-sha256` and
+   `--evaluator-payload-sha256`. The flags alone would not close the gap:
+   the evaluator raises `RID022` only when an installed archive digest
+   exists and differs, and passes an installation with no recorded digest
+   by design (REQ-REB-028, `runtime_identity.py`). An install from a local
+   wheel file records that digest in `direct_url.json`; the 0.16.0
+   environment on this machine shows it. So the plugin contract has to
+   require that the observed archive digest is present and equal to the
+   independently verified wheel, with expected values taken from release
+   metadata rather than from the installation under check.
+   [VER-PLG-002](../engineering/plugin-integration/verification/VER-PLG-002.md)
    mentions "wheel provenance" under evidence retention but has no case for
-   it. Rule PLG-ENV-011 also omits `--expected-version`, which the command
-   requires.
+   a wrong payload, a different archive, missing archive metadata, or a
+   tampered bundled wheel.
 2. **No scope carries the packet.** Compare
    [WO-DST-026](../engineering/harness-distribution/work-orders/WO-DST-026.md),
    which lists every requirement, specification, and verification file it
@@ -135,7 +157,18 @@ read-only helper agents.
    [AGENTS.md](../../AGENTS.md#ungoverned-paths) exempts only `docs/notes/`,
    `docs/rca/`, `docs/images/`, and the roadmap. The PR body says the managed
    check will reject the head and calls that expected. It is not a review
-   detail; it is the absence of a route to `main`.
+   detail; it is the absence of a route to `main`. The route is also harder
+   than "deliver bounded subsets". The CI selector accepts exactly one work
+   order per pull request and checks the whole diff against its scope. The
+   shared records reference artifacts in most packages: ARCH-PLG-002
+   addresses requirements from five packages and conforms to five
+   specifications, and each decision concerns a specification and a work
+   order from another package. Measured in a scratch worktree at
+   `3575f727`: a first delivery of the Codex probe package together with
+   the domain index, both architecture records, both ADRs, and all five
+   decisions validates with 41 errors, 39 of them `E006` unknown relation
+   target and 2 `E016` addressed requirement without a conforming
+   specification.
 3. **The activation problem is self-inflicted.** The proposal requires every
    hook to run as `ENV_PYTHON -I ABS_SCRIPT` with "no custom command wrapper".
    Before setup has created `ENV_PYTHON`, no such hook can run, so
@@ -150,24 +183,34 @@ read-only helper agents.
    compatibility. "If the environment interpreter exists, run the script;
    otherwise print a not-ready message" is one line of hook command. It is
    not a launcher, a policy engine, or a second protocol. A live check on
-   each host, including Windows and Codex hook trust, remains prudent; two
-   decisions and two work orders to reach a documented pattern do not.
-4. **"A decision that still covers the action" is undefined.** The phrase
-   appears in the proposal, the operation map, and fourteen of the sixteen
-   scenarios. Nothing says what "covers" means: the same artifact IDs, the
-   same content digest, the same candidate commit, the same destination?
-   Decision right DR-003 forbids inferring authority across actions. The
-   skills in SPEC-PLG-010 and SPEC-PLG-011 will have to answer this in
-   prose, which is the place least suited to it.
+   each host, including Windows and Codex hook trust, remains prudent, and
+   two host-specific evidence sets are a defensible shape. What does not
+   hold is the question the two decisions ask, "which mechanism", which the
+   documentation answers. Once a guard exists, the "no custom command
+   wrapper" sentence that the notes repeat on many pages also needs
+   re-scoping to what it means: no launcher binary, no `PATH` lookup, no
+   second protocol.
+4. **"A decision that still covers the action" is half defined.** The
+   phrase appears in the proposal, the operation map, and fourteen of the
+   sixteen scenarios. Rule PLG-CHANGE-004 in SPEC-PLG-010 names the
+   dimensions whose change invalidates a continuation: scope, content,
+   candidate, destination, gates, and required authority. It does not say
+   how each is compared (content by digest, candidate by commit,
+   destination by address), nor which dimensions apply to which kind of
+   decision: a definition approval, a work-order start, an assurance
+   decision, and an external action are not invalidated by the same
+   changes. Decision right DR-003 forbids inferring authority across
+   actions. One shared table would close this; the author has proposed
+   one.
 5. **The release scenario still diverges from the authoritative sequence.**
    [Scenario 14](plugin-scenarios/release-and-maintenance.md) now lists the
    replay build, the bundle manifest, `harnessctl prepare-release`, the
    distribution binding, the candidate replay workflow, and the owner's
    decision. Against [Release sequences](developing-se-harness.md#release-sequences)
    it still omits the release unit derived from the release contract, the
-   hosted build of record in the publication rehearsal, the merge of the
-   released record to `main` before publication, and the two latest
-   markers.
+   publication rehearsal as the build of record when the workstation has no
+   Docker engine, the merge of the released record to `main` before
+   publication, and the two latest markers.
 6. **Two baselines in one review.** The notes analyse `aad82a9`, candidate
    0.16.0, released evaluator 0.15.0. The packet is built on `fae52e1b`,
    candidate 0.17.0, released evaluator 0.16.0. The notes say "revised
@@ -183,21 +226,28 @@ read-only helper agents.
    release, and a root adoption before WO-PLG-009 can connect any
    repository. The prerequisites table in the packet index does not show
    it.
-9. **The verification contracts are the weak layer.** Of 78 cases across
-   the sixteen contracts, 21 name a command, a file, a digest, a version, or
-   a unit. The other 57 read like "invalid or incomplete integration never
-   reports readiness" or "verify clear restitution of actual effects". No
-   case names an exit code or a diagnostic code; one names a command. Six
-   contracts share four sentences verbatim. A verifier working from these
-   contracts would have to invent the observable, which is the independence
-   the contract exists to remove.
+9. **The verification contracts are the weak layer, by either reading.**
+   Two readings of the same 78 cases were made. A reader applying the
+   rubric "names a command, a file, a digest, a version, or a unit" found 21
+   observable and 57 not. A mechanical rule over the same text, stated in
+   the appendix, is more generous: it also accepts a lifecycle state in
+   backticks, the words "unchanged", "identical", "sentinel", "bytes",
+   "hash", and any tool name, and finds 46 observable and 32 not. The 32
+   are listed in the appendix. Under either reading, VER-PLG-005 and
+   VER-PLG-006 have no observable in any of their four cases, VER-PLG-001
+   and VER-PLG-002 have none in half of theirs, six contracts share four
+   sentences verbatim, no case names an exit code or a diagnostic code, and
+   one names a command. A verifier working from these contracts would have
+   to invent the observable, which is the independence the contract exists
+   to remove.
 10. **Copied columns.** REQ-PLG-006 and REQ-PLG-007 differ in 8 of 50
    lines: the host name and one sentence. Their specifications have
    identical rules under two prefixes, and the same holds for REQ-PLG-008
    and REQ-PLG-009 with their adapters. Three specifications carry the same
    rule that a plugin update cannot change the repository lock. Four
    specification rules restate their requirement's statement. Sixteen
-   packets were the design choice; the content supports about eight.
+   packets were the design choice; the copies suggest fewer would carry the
+   same content.
 11. **Size.** The notes are 24,568 words; the packet is 26,795. That is
    51,000 words to review before one line of plugin code, at a declared
    target of 3.5/10. The specifications keep rules short, which helps; the
@@ -208,19 +258,21 @@ read-only helper agents.
 
 - **Effort before value.** Sixteen work orders, each needing a definition
   merge and an implementation merge, plus five decisions, precede the first
-  user. The bounded spike that the PR #360 review asked for is present but
-  buried as packets 3 and 4 behind packets 1 and 2.
+  user. The bounded spike that the PR #360 review asked for exists as
+  packets 3 and 4. The index lists them after assembly and setup, but they
+  depend on neither and can go first.
 - **Hook latency.** Measured here, warm, on 1,512 artifacts: a state
   projection takes 3.8 s, a scope check 2.0 s, `harnessctl doctor` 2.4 s,
   `harnessctl validate` 12.3 s. A before-tool hook that runs a scope check
   costs about two seconds per covered edit on this repository; larger
   repositories cost more. DEC-PLG-005 defers the budget. The numbers exist
   now.
-- **Qualification may be unreachable.** VER-PLG-015 requires passing
-  evidence for a complete host matrix including "operator prompts per
-  operation". Prompt counts depend on model behaviour and vary between runs.
-  A verification contract that can never be satisfied blocks the packet it
-  qualifies.
+- **Qualification needs its counting rules first.** VER-PLG-015 requires
+  passing evidence for a complete host matrix including "operator prompts
+  per operation". Prompt counts depend on model behaviour and vary between
+  runs, so the profile has to say what is counted, how many repetitions,
+  and which aggregate and threshold apply before the contract can be passed
+  or failed. Until then it blocks the packet it qualifies.
 - **Two skill routes at once.** Until DEC-PLG-004 is resolved and its
   evaluator work shipped, a connected repository carries the hash-locked
   `.agents/skills/harness-orient` and the plugin's copy. Two discoverable
@@ -247,71 +299,97 @@ not the idea.
 | --- | --- | --- |
 | Problem fit and value | 8 | Manual environment creation and repository adoption are real friction; the plugin route matches how both hosts are used. |
 | Architecture | 8 | One engine, two thin adapters, no second lifecycle, hooks as intervention. Loses points for the self-inflicted activation problem. |
-| Authority and trust boundary | 6 | Honest about every gap and points at the right issue. Loses points for the unbound wheel digest and the undefined "covers". |
+| Authority and trust boundary | 7 | Honest about every gap and points at the right issue. Loses points for the uncompared wheel digest and the half-defined "covers". |
 | Host-platform accuracy | 7 | Every checked vendor fact is right. Misses the documented first-run bootstrap pattern that would dissolve two decisions. |
-| Absorption of the PR #360 review | 5 | Finding 1 fixed; finding 4 mostly fixed; findings 3 and 5 partly; finding 2 not fixed in any rule; finding 6 partly. |
-| Packet quality | 6 | Requirements and specifications are strong: complete traceability, clean validation, short numbered rules in the repository's current shape. Verification contracts are weak: 57 of 78 cases name nothing observable, and four artifact columns are copies. |
-| Decomposition and delivery plan | 4 | Sixteen packets where the content supports eight, three on one file, two probes for one question, a hidden evaluator-release dependency, and no way to express order. |
-| Mergeability and process conformance | 3 | No trailer can carry it; the PR says so and offers no route. The precedent packet in PR #410 shows the shape that merges. |
+| Absorption of the PR #360 review | 6 | Finding 1 fixed; finding 4 mostly; findings 2, 3, 5, and 6 partly: the offline exact wheel is a rule, its digest is never compared. |
+| Packet quality | 6 | Requirements and specifications are strong: complete traceability, clean validation, short numbered rules in the repository's current shape. Verification contracts are weak: between 32 and 57 of 78 cases name nothing observable depending on the reading, and four artifact columns are copies. |
+| Decomposition and delivery plan | 4 | Sixteen packets with four copied columns, three on one file, two decisions for one documented question, a hidden evaluator-release dependency, and no way to express order. |
+| Mergeability and process conformance | 3 | No trailer can carry it; the PR says so and offers no route. A bounded first delivery fails validation with 41 errors because the shared records reference other packages. |
 | Readability and size | 4 | 51,000 words at a 3.5/10 target, two baselines, banners repeated on every page. |
 | Honesty of claims | 9 | Every figure reproduces. Nothing is claimed that was not done. |
 
 ## Proposal
 
-1. **Give the packet a carrier.** Either draft it as stacked pull requests
-   from the start, one work order per pull request, each work order's scope
-   naming its own requirement, specification, and verification files, with
-   WO-PLG-001 also naming the index, the architecture records, the ADRs, the
-   decisions, `docs/engineering/README.md`, and `GLOSSARY.md`. Or, the lighter
-   route below.
-2. **Approve three work orders, not sixteen.** Package assembly (WO-PLG-001),
-   environment setup (WO-PLG-002), and one merged host spike replacing
-   WO-PLG-003 and WO-PLG-004. Let those three scopes carry the whole
-   definition set. Hold the other thirteen as drafts until the spike
-   reports. This is the bounded experiment the PR #360 review recommended,
-   now with the definitions it needs.
-3. **Bind the wheel.** Add two rules to SPEC-PLG-002: install from the exact
-   wheel file so the package records its archive hash; pass
-   `--expected-version`, `--evaluator-wheel-sha256`, and
-   `--evaluator-payload-sha256` from the release's locked digests on every
-   identity check. Add one case to VER-PLG-002: an index-installed
-   environment is refused.
+1. **Choose a carrier, knowing the cost of each.** One work order per pull
+   request is fixed by the CI selector, so the definitions land in stacked
+   pull requests either way. Two orderings validate. In the first, the
+   first package's work order names the whole domain directory,
+   `docs/engineering/README.md`, and `GLOSSARY.md` in its scope, so the 79
+   drafts land together and each later package approves and implements its
+   own. Drafts confer no authority, but that first trailer covers the
+   domain while it is selectable, and reviewers carry that. In the second,
+   packages land one by one, each work order naming its own files, with
+   the shared architecture records and decisions trimmed to the artifacts
+   already delivered and amended as each package lands, and each decision
+   travelling with the specification it blocks rather than with the
+   probe. The second respects the small-packet preference at the price of
+   about ten amendments to records that will be approved partway through,
+   some under a repair work order. As drafted today the second ordering
+   fails with 41 errors. Either is workable; the packet has to say which.
+2. **Start with the probes.** WO-PLG-003 and WO-PLG-004 depend on no
+   production adapter and may end in an evidenced incompatibility. Approve
+   them first, then WO-PLG-001 and WO-PLG-002. Hold the other twelve as
+   drafts until the probes report. This is the bounded experiment the
+   PR #360 review recommended.
+3. **Compare the wheel.** Add to SPEC-PLG-002 and SPEC-PLG-013 that the
+   identity check passes `--expected-version`,
+   `--evaluator-wheel-sha256`, and `--evaluator-payload-sha256` from
+   release metadata the installation cannot influence, and that readiness
+   requires the observed archive digest to be present and equal, since the
+   evaluator passes a missing digest by design. Add cases to VER-PLG-002
+   and VER-PLG-013 for a wrong payload, a different archive, missing
+   archive metadata, a tampered bundled wheel, and a failed replacement
+   that preserves the previous environment. Keep this inside the plugin
+   contract; the generic rule for index installs stays as it is.
 4. **Use the documented bootstrap.** Register a shell-form `SessionStart`
-   hook that runs the Python script when the environment interpreter exists
-   and prints a not-ready message when it does not. Fold DEC-PLG-001 and
-   DEC-PLG-002 into one decision whose recommended option names that route,
-   and let the spike confirm it on both hosts, on Windows, and behind Codex
-   hook trust.
-5. **Define "covers" or drop it.** If a decision is reusable, say for which
-   artifact IDs, which content digest, which candidate, and which
-   destination. If that cannot be said, the agent asks again.
+   hook that runs the Python handler when the environment interpreter
+   exists and reports that setup is required when it does not. The handler
+   still performs the identity and installation checks; an interpreter's
+   existence is not readiness. Write that route into ARCH-PLG-002 and the
+   two activation specifications, re-word DEC-PLG-001 and DEC-PLG-002 from
+   "which mechanism" to "does the documented route hold on this host", and
+   re-scope the "no custom command wrapper" sentence to no launcher binary,
+   no `PATH` lookup, no second protocol. Keep both probes if two evidence
+   sets are wanted.
+5. **Finish "covers".** Add one shared table to SPEC-PLG-010 naming, for
+   each kind of decision (definition approval, work-order start and
+   continuation, assurance, external action), which of scope, content,
+   candidate, destination, gates, and authority invalidate it and how each
+   is compared. Add tests for invalidated decisions. Ordinary edits inside
+   an approved scope do not re-open the approval.
 6. **Align scenarios 14 and 15 with Release sequences.** Add the release
-   unit, the publication rehearsal as build of record, the merge of the
-   released record, and the latest markers.
+   unit, the publication rehearsal as the build of record when there is no
+   Docker engine, the merge of the released record, and the latest
+   markers.
 7. **Re-baseline the notes** to `fae52e1b`, or add a short delta box to each
    of the four note pages listing what changed between the two baselines.
-8. **Seed DEC-PLG-005 with the numbers above.** Two seconds per covered edit
-   and three seconds at session start are a measured starting budget on a
-   1,512-artifact repository.
-9. **Fold the skill packets.** WO-PLG-010, WO-PLG-011, and WO-PLG-012 ship
-   three skill files each; one work order can. WO-PLG-013 belongs in
-   WO-PLG-002. WO-PLG-014 waits for a host that can load the helpers. That
-   takes sixteen packets to eight without losing a requirement.
-10. **Give every verification case an observable.** For each of the 57
-   cases that name none, add the command, the expected exit code or
-   diagnostic code, the file, or the threshold. Where the observable does
-   not exist yet, say which work order creates it. A contract that cannot
-   be failed cannot be passed either.
+8. **Seed DEC-PLG-005 with the numbers above, as a baseline, not a
+   limit.** Single warm runs on one repository: two seconds per covered
+   edit and three at session start. The profile sets the repetitions, the
+   conditions, and the aggregate.
+9. **Merge only where the work is one change.** The copied columns
+   (REQ-PLG-006 and 007, REQ-PLG-008 and 009, with their specifications,
+   contracts, and work orders) can become one artifact each with a host
+   parameter; the three specifications restating the lock rule can cite
+   one; WO-PLG-013 and WO-PLG-002 edit one skill file and one procedure.
+   How many packets remain is the owner's call. The duplication is not.
+10. **Give every verification case an observable.** For the 32 cases in
+   the appendix, and for any of the further 25 a reader judges vague, add
+   the starting fixture, the action, the observable result, and the
+   retained evidence. Use a diagnostic code where the evaluator defines
+   one; a host demonstration names the host's denial and the unchanged
+   target hash instead. A contract that cannot be failed cannot be passed
+   either.
 
 ## How the PR #360 review findings fared
 
 | Finding on PR #360 | Status in PR #416 |
 | --- | --- |
 | 1. Approve, verify, and decide flows assumed a protected decision service that does not exist. | Fixed. The service is gone; each scenario names the gap and issue #347. |
-| 2. Runtime provisioning must bind the wheel digest and record the archive pair. | Not fixed. No rule, no verification case, no flag. |
-| 3. The release scenario omitted the release unit, the build of record, the merge to `main`, and the latest markers. | Partly fixed. The candidate replay and publication workflow are named; the four items are still absent. |
+| 2. Runtime provisioning must bind the wheel digest and record the archive pair. | Partly fixed. The offline install of the supplied wheel is a rule; comparing its digest is not, and the evaluator passes a missing digest by design. |
+| 3. The release scenario omitted the release unit, the build of record, the merge to `main`, and the latest markers. | Partly fixed. The candidate replay and publication workflow are named; the release unit, the rehearsal as build of record without Docker, the merge to `main`, and the latest markers are still absent. |
 | 4. Two proposals edited a hash-locked skill and wrote under `.codex/agents/`. | Mostly fixed. The adapted skills live in the plugin. Codex registration in the repository is still described. |
-| 5. Smaller factual points (delegation recheck, undefined "covers", supersession, LF header, candidate commit, stop tables). | Partly fixed. "Covers" is still undefined; the rest are corrected or removed. |
+| 5. Smaller factual points (delegation recheck, undefined "covers", supersession, LF header, candidate commit, stop tables). | Partly fixed. "Covers" has its dimensions in PLG-CHANGE-004 but not their comparison; the rest are corrected or removed. |
 | 6. Terms used before definition; five components in one paragraph. | Partly fixed. A component table opens the operation map; the glossary gained six terms; the scenarios remain dense. |
 
 ## Measurements
@@ -331,4 +409,51 @@ All figures were taken on this checkout, on Windows, with the released
 | --- | --- | --- | --- |
 | Notes (proposal, map, template, scenarios) | 8 | 2,186 | 24,568 |
 | Formal packet (`docs/engineering/plugin-integration/`) | 85 | 5,179 | 26,795 |
-| Index and glossary edits | 4 | 23 | — |
+| Index and glossary edits | 4 | 23 | n/a |
+
+## Appendix: verification cases naming no observable
+
+Method: every case in the sixteen contracts was inventoried, 51 items from
+the requirement-to-evidence matrices of VER-PLG-001 to 010 and 27 numbered
+acceptance scenarios from VER-PLG-011 to 016. A case counts as observable
+when its text or pass condition names a tool or command word, a path or
+filename, a byte, digest, hash, version, or payload comparison word or
+"unchanged", "identical", "sentinel", an exit or diagnostic code, a numeric
+unit, or a lifecycle state in backticks. That rule is generous on purpose.
+It finds 46 observable and 32 not. The 32 follow; the pass condition is the
+matrix column, empty for numbered scenarios.
+
+| Contract | Requirement | Case text | Pass condition |
+| --- | --- | --- | --- |
+| VER-PLG-001 | REQ-PLG-002 | Both host outputs | Shared files agree with source; divergence and path escape refused. |
+| VER-PLG-001 | REQ-PLG-002 | divergent common files | Shared files agree with source; divergence and path escape refused. |
+| VER-PLG-001 | REQ-PLG-002 | unsafe path | Shared files agree with source; divergence and path escape refused. |
+| VER-PLG-002 | REQ-PLG-003 | Supported Python | Supported setup proceeds; every missing prerequisite produces guidance without Python installation. |
+| VER-PLG-002 | REQ-PLG-003 | missing, old, or incomplete Python | Supported setup proceeds; every missing prerequisite produces guidance without Python installation. |
+| VER-PLG-002 | REQ-PLG-004 | Offline setup | Supplied wheel installs externally; no network request or checkout mutation; incomplete environments stay unav |
+| VER-PLG-002 | REQ-PLG-004 | network disabled | Supplied wheel installs externally; no network request or checkout mutation; incomplete environments stay unav |
+| VER-PLG-002 | REQ-PLG-004 | interrupted installation | Supplied wheel installs externally; no network request or checkout mutation; incomplete environments stay unav |
+| VER-PLG-005 | REQ-PLG-008 | Accepted activation | Shared skills and scripts run through accepted bindings; invalid or incomplete integration never reports readi |
+| VER-PLG-005 | REQ-PLG-008 | malformed event | Shared skills and scripts run through accepted bindings; invalid or incomplete integration never reports readi |
+| VER-PLG-005 | REQ-PLG-008 | absent binding | Shared skills and scripts run through accepted bindings; invalid or incomplete integration never reports readi |
+| VER-PLG-005 | REQ-PLG-008 | script failure | Shared skills and scripts run through accepted bindings; invalid or incomplete integration never reports readi |
+| VER-PLG-006 | REQ-PLG-009 | Accepted activation | Shared skills and scripts run through accepted bindings; invalid or incomplete integration never reports readi |
+| VER-PLG-006 | REQ-PLG-009 | malformed event | Shared skills and scripts run through accepted bindings; invalid or incomplete integration never reports readi |
+| VER-PLG-006 | REQ-PLG-009 | absent binding | Shared skills and scripts run through accepted bindings; invalid or incomplete integration never reports readi |
+| VER-PLG-006 | REQ-PLG-009 | script failure | Shared skills and scripts run through accepted bindings; invalid or incomplete integration never reports readi |
+| VER-PLG-007 | REQ-PLG-012 | Output limit | Changed content is rejected and reverified before readiness. |
+| VER-PLG-009 | REQ-PLG-015 | customized managed file | Only the reviewed authorized installer operation changes the target; conflicts preserve files. |
+| VER-PLG-010 | REQ-PLG-018 | Covered continuation | No duplicate prompt for covered work; affected unauthorized work stops. |
+| VER-PLG-010 | REQ-PLG-018 | changed scope | No duplicate prompt for covered work; affected unauthorized work stops. |
+| VER-PLG-010 | REQ-PLG-018 | missing authority | No duplicate prompt for covered work; affected unauthorized work stops. |
+| VER-PLG-011 | - | Retain actual successful and failed results, including the exact candidate. |  |
+| VER-PLG-011 | - | Dirty-candidate capture fails. Successful required-assurance capture binds the earlier clean committed candidate; a later governance commit retains the VREC without rebinding it. |  |
+| VER-PLG-012 | - | Implicit briefing stays inactive; valid explicit input produces existing schemas. |  |
+| VER-PLG-012 | - | File, lifecycle, network and credential effect sentinels remain empty. |  |
+| VER-PLG-013 | - | Provided Python prepares an empty replacement before selecting it. |  |
+| VER-PLG-014 | - | Bounded investigation returns sources and uncertainty; unrelated findings do not become blockers. |  |
+| VER-PLG-014 | - | Host controls deny file mutation, privileged tools, credential access and publication. |  |
+| VER-PLG-014 | - | Findings cannot approve a VREC or replace the assurance owner. |  |
+| VER-PLG-015 | - | Missing coverage or samples remain visible; untested combinations gain no support claim. |  |
+| VER-PLG-015 | - | A closed decision selecting preview-only cannot produce qualification acceptance; the governing artifacts require appropriate disposition or amendment. |  |
+| VER-PLG-016 | - | Unavailable releases and untested hosts remain prospective or unsupported. |  |
