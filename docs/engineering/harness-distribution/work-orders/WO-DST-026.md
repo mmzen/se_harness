@@ -2,7 +2,7 @@
 id = "WO-DST-026"
 type = "work_order"
 title = "Wave 5, templates: the managed workflow's failure surface, header and pins, the gitignore markers, the environment inventory"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-08"
 updated = "2026-09-08"
@@ -46,6 +46,13 @@ to = "approved"
 decided_at = "2026-09-08T15:56:54Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-09-08 by selecting the presented option 'Approve all three (Recommended)', as a decision distinct from the approval of its definitions in the same transaction. This approval is the delegating act under DR-007 and DR-015: the work order carries [delegation] class = 'execution', so DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE may be applied by the delegated-executor role while the required validate check is success for the exact candidate head, read from the base of the pull request. It authorizes only the declared scope: the standard template of the managed workflow, the installer's fragment writer, the tests, the two notes, the amendment record on SPEC-ECP-006, the domain index and the evidence file. It authorizes no change to any root managed byte, no verification decision, no release, no publication and no adoption; the merges remain the owner's decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-08T21:39:59Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at fd4584ccd47110d137fb87eeea40a2fa0f726724 (check-run 102246942278, source github-checks). Start decided by the delegated-executor role on 2026-09-08 under the execution delegation class WO-DST-026 carries, delegated by the engineering owner in the approval of 2026-09-08 and read at the base of this branch: main at fd4584ccd47110d137fb87eeea40a2fa0f726724, the merge of WO-CIP-007, where the required validate check is success. Branch wo/dst-026-managed-template off main at fd4584cc. This decision authorizes only the declared execution scope: the standard template engineering-harness.yml, se_harness/installer.py, tests/, the two notes, the amendment record on SPEC-ECP-006, the four requirements, SPEC-DST-027, VER-DST-027, this work order, the domain index and the evidence file. It authorizes no change to any hash-locked root managed byte, the lock, the root .gitignore block, the installer's transaction rules, the skills or the gate source's behaviour, and no build, release, publication or adoption. Completion and record preparation are separate decisions of this role under the same gate; verification and every merge remain the accountable human owners."
 +++
 
 # Work Order: Wave 5, templates: the managed workflow's failure surface, header and pins, the gitignore markers, the environment inventory
