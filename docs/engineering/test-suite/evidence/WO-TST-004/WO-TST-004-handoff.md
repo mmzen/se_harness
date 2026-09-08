@@ -102,7 +102,7 @@ reference) on the candidate: 961 s (this workstation is slower than the one the 
 | Run | Suite step | Wall |
 | --- | --- | ---: |
 | `main` at `4dc59d0a`, run 34238078845, `--timings ""` | Run complete candidate-source regression | 51 s |
-| candidate, PR #402 | Run complete candidate-source regression | pending: read from PR #402's lane and recorded in the completion commit |
+| candidate, PR #402 | Run complete candidate-source regression | 45 s (run 34242510375, 15:05:46 to 15:06:31; the first run finds no cached timings and seeds the cache for the next) |
 
 ## Rule by rule (SPEC-TST-002)
 

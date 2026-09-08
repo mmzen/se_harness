@@ -120,16 +120,7 @@
     "unrelated_count": 73
   },
   "mutation": {
-    "writes": [
-      {
-        "fields": [
-          "formal_snapshot_sha256",
-          "rebound_at"
-        ],
-        "id": "WO-TST-004",
-        "path": "docs/engineering/test-suite/evidence/WO-TST-004/WO-TST-004-handoff.md"
-      }
-    ]
+    "writes": []
   },
   "operation": {
     "kind": "check",

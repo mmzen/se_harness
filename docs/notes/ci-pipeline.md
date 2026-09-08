@@ -264,7 +264,7 @@ merge, against `main`:
 | `python scripts/run_tests.py` (8 workers), candidate | 369 s | 1,054 tests, 22 skips; the same two names |
 | `python -m unittest discover` (canonical serial), candidate | 961 s | the same verdict |
 | hosted `candidate-source` suite step, `main` at `4dc59d0a` (`--timings ""`) | 51 s | success |
-| hosted `candidate-source` suite step, candidate (timings restored) | pending: read from PR #402's lane and recorded in the completion commit | |
+| hosted `candidate-source` suite step, candidate (timings restored) | 45 s (run 34242510375, 15:05:46 to 15:06:31; the first run finds no cached timings and seeds the cache for the next) | success |
 
 Four modules that imported the engine by bare name after another module had
 put `se_harness/engine` on `sys.path` now load it through
