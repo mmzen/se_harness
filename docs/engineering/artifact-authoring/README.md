@@ -33,6 +33,7 @@ of `REQUIREMENT.template.md` measured on this repository's 255 requirements.
 - `WO-AUT-002`: second increment — vocabulary migration and approval predicates (REQ-AUT-003, 005).
 - `WO-AUT-003`: retarget the dry-run pin so requirements drafted in the closed vocabulary do not fail the suite (REQ-AUT-003).
 - `WO-AUT-004`: report authoring advisories apart from errors and warnings (REQ-AUT-007), drafted 2026-08-30 from the functional assessment's issue #283.
+- `REQ-AUT-008`, `SPEC-AUT-003`, `VER-AUT-003`, `WO-AUT-005` (drafted 2026-09-08 for issues #380 and #381, owner decision 3 of 2026-09-07: migrate the corpus, then close the windows): the fifteen legacy architectures take `addresses` and `conforms_to`, the fourteen without a decision assessment gain one naming their deciding ADR, the verification-method migration of `AUT-VOC-003` is applied once with four steward decisions, and the script leaves the repository. Closing the `W014`/`W015` branches is the following work order, drafted after this one merges. No delegation table: every decision is the engineering owner's.
 
 Every artifact remains `draft`. This packet authorizes no implementation,
 lifecycle transition, Git action, or external action.
