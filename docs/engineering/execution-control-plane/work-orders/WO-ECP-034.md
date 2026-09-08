@@ -28,6 +28,7 @@ paths = [
   "se_harness/workflow.py",
   "se_harness/workflow_compliance.py",
   "se_harness/workflow_contract.py",
+  "se_harness/workflow_procedures.py",
   "repository_tools/diagnostic_code_index.py",
   "docs/notes/diagnostic-codes.md",
   "tests/",
@@ -165,3 +166,14 @@ written, which is a deviation decision in this domain's `decisions/`.
 
 The evidence packet, the changed-path ledger, the handoff `check`
 restitution; the completion decision is the engineering owner's.
+
+## Scope amendment, 2026-09-08
+
+`se_harness/workflow_procedures.py` is added to `[execution_scope].paths`.
+`ECP-ENG-008` requires one compiled artifact-id pattern for the package, and
+that module carried a fourth copy of it; the scope listed every other module
+the group touches and omitted this one. The handoff check refused the change
+set on `QGP-G4I-PATHS` (`WEX201`) for that path alone, the other eight
+predicates passing. Decided by the accountable engineering owner on
+2026-09-08 under DR-REMEDIATION-SCOPE by selecting the presented option
+"Amend the scope". Nothing else is widened.
