@@ -31,10 +31,10 @@ from se_harness.engine.validate_engineering_artifacts import (
     Diagnostic,
     ValidationReport,
     architecture_traceability_state,
-    coverage_rows as _coverage_rows,
+    coverage_rows,
     decision_assessment_state,
     evidence_work_order_keys,
-    specification_rules as _specification_rules,
+    specification_rules,
     load_revision_policy,
     standing_deviations,
     validate_repository,
@@ -398,7 +398,7 @@ def normalize_artifacts(
     for specification in report.artifacts:
         if specification.artifact_type != "specification" or specification.artifact_id == "<unknown>":
             continue
-        for requirement_id, rule_ids in _coverage_rows(specification.body) or []:
+        for requirement_id, rule_ids in coverage_rows(specification.body) or []:
             for rule_id in rule_ids:
                 covered_by[requirement_id].append({"specification": specification.artifact_id, "rule": rule_id})
 
@@ -439,12 +439,12 @@ def normalize_artifacts(
                 item["plain_words"] = plain_words
             item["rules"] = [
                 {"id": identifier, "text": text}
-                for identifier, text in _specification_rules(artifact.body)
+                for identifier, text in specification_rules(artifact.body)
                 if identifier is not None
             ]
             item["coverage"] = [
                 {"requirement": requirement_id, "rules": list(rule_ids)}
-                for requirement_id, rule_ids in _coverage_rows(artifact.body) or []
+                for requirement_id, rule_ids in coverage_rows(artifact.body) or []
             ]
         if artifact.artifact_type == "intent":
             # SPEC-TCM-004 TCM-RFI-006: the outcome line and the plain words of an intent.

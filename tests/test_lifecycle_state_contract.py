@@ -78,7 +78,7 @@ class LifecycleStateContractTests(unittest.TestCase):
             ("decision", "decision"), ("risk", "risk"), ("unknown", "definition"),
         ):
             self.assertEqual(family, lifecycle_family(artifact_type))
-            self.assertEqual(family, VALIDATOR._lifecycle_family(artifact_type))
+            self.assertEqual(family, VALIDATOR.lifecycle_family(artifact_type))
 
     def test_registry_is_immutable_and_rejected_rows_are_terminal_history(self) -> None:
         with self.assertRaises(TypeError):
@@ -113,11 +113,11 @@ class LifecycleStateContractTests(unittest.TestCase):
                 self.assertEqual(row.grants_authority, provenance._grants_authority(family, status))
                 self.assertEqual(
                     row.grants_authority,
-                    VALIDATOR._grants_authority(artifact_type[family], status),
+                    VALIDATOR.grants_authority(artifact_type[family], status),
                 )
                 if family == "release_record":
                     self.assertEqual(row.reserves_version, provenance._reserves_version(status))
-                    self.assertEqual(row.reserves_version, VALIDATOR._reserves_version(status))
+                    self.assertEqual(row.reserves_version, VALIDATOR.reserves_version(status))
 
     def test_strict_loader_rejects_each_structural_inconsistency(self) -> None:
         source = json.loads(RUNTIME_CONTRACT.read_text(encoding="utf-8"))
