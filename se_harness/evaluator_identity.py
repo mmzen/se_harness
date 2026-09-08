@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import importlib.metadata
 import json
 import re
@@ -15,6 +14,7 @@ from typing import Any
 from urllib.parse import unquote, urlparse
 
 from se_harness import __version__
+from se_harness.integrity import canonical_json_bytes, raw_sha256, unique_object_hook
 
 
 PAYLOAD_MANIFEST = "se-harness-installed-payload-v1"
@@ -29,13 +29,7 @@ class EvaluatorIdentityError(ValueError):
     """The installed evaluator payload cannot be identified safely."""
 
 
-def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    value: dict[str, Any] = {}
-    for key, item in pairs:
-        if key in value:
-            raise EvaluatorIdentityError(f"installed evaluator PEP 610 metadata repeats field: {key}")
-        value[key] = item
-    return value
+_unique_object = unique_object_hook(lambda key: EvaluatorIdentityError(f"installed evaluator PEP 610 metadata repeats field: {key}"))
 
 
 @dataclass(frozen=True)
@@ -126,15 +120,15 @@ def canonical_payload_manifest() -> bytes:
             {
                 "bytes": len(content),
                 "path": relative,
-                "sha256": hashlib.sha256(content).hexdigest(),
+                "sha256": raw_sha256(content),
             }
         )
     value = {"files": entries, "schema": PAYLOAD_MANIFEST}
-    return (json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n").encode("utf-8")
+    return canonical_json_bytes(value, ensure_ascii=True)  # ECP-PRM-006, ECP-PRM-007: the same bytes
 
 
 def installed_payload_sha256() -> str:
-    return hashlib.sha256(canonical_payload_manifest()).hexdigest()
+    return raw_sha256(canonical_payload_manifest())
 
 
 def wheel_payload_sha256(wheel: Path, version: str) -> str:
@@ -188,7 +182,7 @@ def wheel_payload_sha256(wheel: Path, version: str) -> str:
                     {
                         "bytes": len(content),
                         "path": logical,
-                        "sha256": hashlib.sha256(content).hexdigest(),
+                        "sha256": raw_sha256(content),
                     }
                 )
     except (OSError, RuntimeError, zipfile.BadZipFile) as exc:
@@ -210,11 +204,7 @@ def wheel_payload_sha256(wheel: Path, version: str) -> str:
         "files": entries,
         "schema": PAYLOAD_MANIFEST,
     }
-    raw = (
-        json.dumps(manifest, ensure_ascii=True, separators=(",", ":"), sort_keys=True)
-        + "\n"
-    ).encode("utf-8")
-    return hashlib.sha256(raw).hexdigest()
+    return raw_sha256(canonical_json_bytes(manifest, ensure_ascii=True))
 
 
 def _direct_url_archive() -> tuple[str, str] | None:

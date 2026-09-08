@@ -2,19 +2,17 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
-import os
 import re
 import shutil
 import subprocess
 import sys
-import tempfile
 from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
 from typing import Any
 
 
+from se_harness.integrity import atomic_create_bytes, raw_sha256
 from se_harness import front_matter, mutation_guard
 from se_harness._process import run as _launch, text as _text
 from se_harness.gate_source import DELEGATED_ROLE, DelegationError, authorize_delegated_right, delegated_reason
@@ -295,41 +293,22 @@ def _record_domain(
 
 
 def _atomic_write(path: Path, content: str) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "w", encoding="utf-8", newline="\n") as handle:
-            handle.write(content)
-            handle.flush()
-            os.fsync(handle.fileno())
-        try:
-            os.link(temporary_name, path)
-        except FileExistsError as exc:
-            raise InputRefusal(f"record output already exists: {path}") from exc
-        except OSError as exc:
-            raise InputRefusal(f"cannot create record output atomically: {exc}") from exc
-    finally:
-        if os.path.exists(temporary_name):
-            os.unlink(temporary_name)
+    # ECP-PRM-008: the one create-once writer; a record is never overwritten.
+    atomic_create_bytes(
+        path,
+        content.encode("utf-8"),
+        exists=lambda: InputRefusal(f"record output already exists: {path}"),
+        failed=lambda detail: InputRefusal(f"cannot create record output atomically: {detail}"),
+    )
 
 
 def _atomic_write_bytes(path: Path, content: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(content)
-            handle.flush()
-            os.fsync(handle.fileno())
-        try:
-            os.link(temporary_name, path)
-        except FileExistsError as exc:
-            raise InputRefusal(f"evaluator evidence already exists: {path}") from exc
-        except OSError as exc:
-            raise InputRefusal(f"cannot create evaluator evidence atomically: {exc}") from exc
-    finally:
-        if os.path.exists(temporary_name):
-            os.unlink(temporary_name)
+    atomic_create_bytes(
+        path,
+        content,
+        exists=lambda: InputRefusal(f"evaluator evidence already exists: {path}"),
+        failed=lambda detail: InputRefusal(f"cannot create evaluator evidence atomically: {detail}"),
+    )
 
 
 def _evaluator_evidence_output(
@@ -385,7 +364,7 @@ def _generate_snapshot(repository_root: Path) -> str:
         raise EvidenceRefusal("dashboard generator did not create dashboard-manifest.json")
     # The v2 manifest recursively binds every deterministic artifact, relation,
     # readiness, provenance, and retained-content resource for this revision.
-    return hashlib.sha256(manifest.read_bytes()).hexdigest()
+    return raw_sha256(manifest.read_bytes())
 
 
 def capture_verification(

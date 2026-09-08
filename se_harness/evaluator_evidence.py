@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 import os
 import re
@@ -12,12 +11,12 @@ from typing import Any
 
 from se_harness.evaluator_identity import PAYLOAD_MANIFEST
 from se_harness.runtime_identity import RuntimeIdentity
+from se_harness.integrity import VERSION_PATTERN, canonical_json_bytes, raw_sha256, unique_object_hook
 
 
 EVIDENCE_SCHEMA = "se-harness-evaluator-evidence-v1"
 MAX_EVIDENCE_BYTES = 64 * 1024
 SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
-VERSION_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.!+\-]{0,127}")
 NORMALIZED_ORIGIN_PATTERN = re.compile(r"<evaluator-root>(?:/[A-Za-z0-9._+()@ -]+)*")
 TOP_LEVEL_FIELDS = {"schema", "role", "evaluator", "origins", "environment", "diagnostics"}
 EVALUATOR_FIELDS = {
@@ -48,19 +47,11 @@ class EvaluatorEvidence:
     sha256: str
 
 
-def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    value: dict[str, Any] = {}
-    for key, item in pairs:
-        if key in value:
-            raise EvaluatorEvidenceError(f"duplicate evaluator evidence field: {key}")
-        value[key] = item
-    return value
+_unique_object = unique_object_hook(lambda key: EvaluatorEvidenceError(f"duplicate evaluator evidence field: {key}"))
 
 
 def canonical_evidence_bytes(value: dict[str, Any]) -> bytes:
-    return (
-        json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n"
-    ).encode("utf-8")
+    return canonical_json_bytes(value, ensure_ascii=True)  # ECP-PRM-006, ECP-PRM-007: the same bytes
 
 
 def _lexical_relative(path: Path, root: Path) -> Path | None:
@@ -181,7 +172,7 @@ def parse_evaluator_evidence(
     canonical = canonical_evidence_bytes(validated)
     if raw != canonical:
         raise EvaluatorEvidenceError("evaluator evidence bytes are not canonical")
-    return EvaluatorEvidence(validated, canonical, hashlib.sha256(canonical).hexdigest())
+    return EvaluatorEvidence(validated, canonical, raw_sha256(canonical))
 
 
 def build_evaluator_evidence(identity: RuntimeIdentity) -> EvaluatorEvidence:
@@ -220,4 +211,4 @@ def build_evaluator_evidence(identity: RuntimeIdentity) -> EvaluatorEvidence:
     }
     validate_evaluator_evidence(value)
     canonical = canonical_evidence_bytes(value)
-    return EvaluatorEvidence(value, canonical, hashlib.sha256(canonical).hexdigest())
+    return EvaluatorEvidence(value, canonical, raw_sha256(canonical))

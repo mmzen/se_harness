@@ -8,7 +8,7 @@ import shutil
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
-from typing import Any, Iterable, Mapping
+from typing import Iterable, Mapping
 
 from se_harness import front_matter
 from se_harness._process import run_git
@@ -16,7 +16,9 @@ from se_harness.integrity import (
     HASH_MODE,
     IntegrityError,
     canonical_sha256,
+    canonical_text,
     raw_sha256,
+    unique_object_hook,
 )
 
 
@@ -79,13 +81,7 @@ class Declaration:
         return frozenset(field for field, _ in self.unbound_digest_fields)
 
 
-def _object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    result: dict[str, Any] = {}
-    for key, value in pairs:
-        if key in result:
-            raise HashBoundError(f"duplicate declaration key: {key}")
-        result[key] = value
-    return result
+_object = unique_object_hook(lambda key: HashBoundError(f"duplicate declaration key: {key}"))
 
 
 def _text(value: object, label: str, pattern: re.Pattern[str]) -> str:
@@ -353,7 +349,7 @@ def attribute_regions(root: Path) -> dict[str, tuple[str, ...]]:
     template: list[str] = []
     repository: list[str] = []
     inside = False
-    for line in text.replace("\r\n", "\n").replace("\r", "\n").split("\n"):
+    for line in canonical_text(text).split("\n"):  # ECP-PRM-010
         stripped = line.strip()
         if stripped == ATTRIBUTE_BEGIN_MARKER:
             if inside:

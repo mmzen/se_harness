@@ -6,6 +6,7 @@ import json
 import re
 from pathlib import Path
 from typing import Any
+from se_harness.integrity import unique_object_hook
 
 
 MAX_EVENT_BYTES = 2 * 1024 * 1024
@@ -28,13 +29,7 @@ class SelectionError(ValueError):
     """A bounded pull-request work-order selection error."""
 
 
-def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    result: dict[str, Any] = {}
-    for key, value in pairs:
-        if key in result:
-            raise SelectionError(f"duplicate JSON key: {key}")
-        result[key] = value
-    return result
+_unique_object = unique_object_hook(lambda key: SelectionError(f"duplicate JSON key: {key}"))
 
 
 def carriage_return_trailer_offsets(body: str) -> list[int]:

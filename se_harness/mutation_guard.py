@@ -5,10 +5,10 @@ from __future__ import annotations
 import os
 import sys
 import sysconfig
-import tomllib
 from dataclasses import dataclass
 from pathlib import Path
 
+from se_harness.integrity import IntegrityError, read_toml
 from se_harness import __version__
 from se_harness.evaluator_evidence import EvaluatorEvidence, build_evaluator_evidence
 from se_harness.evaluator_identity import (
@@ -82,8 +82,8 @@ def _failure(code: str, operation: str, message: str) -> MutationGuardError:
 def _configured_version(root: Path, operation: str) -> str:
     try:
         config_path = safe_destination(root, Path(CONFIG_NAME))
-        value = tomllib.loads(config_path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, tomllib.TOMLDecodeError, HarnessError) as exc:
+        value = read_toml(config_path)  # ECP-PRM-011: the one reader
+    except (IntegrityError, HarnessError) as exc:
         raise _failure("MG001", operation, f"cannot read the standard config: {exc}") from exc
     harness = value.get("harness") if isinstance(value, dict) else None
     version = harness.get("tool_version") if isinstance(harness, dict) else None

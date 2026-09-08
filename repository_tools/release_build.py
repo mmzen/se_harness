@@ -67,8 +67,20 @@ class BuildRecipe:
         )
 
 
-def canonical_json_bytes(value: Any) -> bytes:
+def recipe_json_bytes(value: Any) -> bytes:
+    """The recipe and replay document form: sorted keys, two-space indent, non-ASCII kept (ECP-PRM-009).
+
+    Renamed from `canonical_json_bytes`, which `repository_tools.json_bytes` also defines with
+    compact separators; the two produced different bytes under one name. Every recipe digest
+    on record was taken over these bytes, so this function changes nothing but its name.
+    """
+
     return (json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
+
+
+#: Kept for `scripts/replay_release_build.py`, a lane script outside WO-ECP-032's scope, until its
+#: import moves; every package-visible caller uses the new name.
+canonical_json_bytes = recipe_json_bytes
 
 
 def _duplicate_safe_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
@@ -161,7 +173,7 @@ def validate_recipe_bytes(payload: bytes, *, path: str, lock: bytes) -> BuildRec
         value = json.loads(payload.decode("utf-8"), object_pairs_hook=_duplicate_safe_object)
     except (UnicodeError, json.JSONDecodeError) as exc:
         raise BuildRecipeError("build recipe must be valid UTF-8 JSON") from exc
-    if canonical_json_bytes(value) != payload:
+    if recipe_json_bytes(value) != payload:
         raise BuildRecipeError("build recipe JSON is not canonical")
     recipe = _exact_keys(value, RECIPE_KEYS, "build recipe")
     if recipe["schema"] != RECIPE_SCHEMA:
@@ -475,7 +487,7 @@ def _producer(recipe_path: Path, lock_path: Path, source: Path, output: Path, ve
     ]
     _bounded_run(normalize_command, cwd=source, environment=build_env, timeout=300)
     hashes = {name: _sha256_bytes((output / name).read_bytes()) for name in (wheel_name, sdist_name)}
-    evidence.write_bytes(canonical_json_bytes({
+    evidence.write_bytes(recipe_json_bytes({
         "schema": "se-harness-release-build-producer/v1",
         "recipe_sha256": recipe.sha256,
         "producer_image": recipe.image,
@@ -702,7 +714,7 @@ def main(argv: Iterable[str] | None = None) -> int:
                 expected_wheel_sha256=arguments.expected_wheel_sha256,
                 expected_sdist_sha256=arguments.expected_sdist_sha256,
             )
-            arguments.result.write_bytes(canonical_json_bytes(result))
+            arguments.result.write_bytes(recipe_json_bytes(result))
     except (BuildRecipeError, OSError, ValueError) as exc:
         print(f"release-build: {exc}", file=sys.stderr)
         return 2

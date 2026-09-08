@@ -2,12 +2,10 @@
 
 from __future__ import annotations
 
-import hashlib
 import io
 import json
 import os
 import platform
-import re
 import shutil
 import tempfile
 import venv
@@ -16,6 +14,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
+from se_harness.integrity import WHEEL_VERSION_PATTERN, canonical_text, pretty_json_bytes, raw_sha256
 from se_harness import __version__
 from se_harness.hash_bound import LOCK_RELATIVE
 from se_harness._process import run as _launch, text as _text
@@ -36,13 +35,15 @@ SCENARIO_IDS = (
     "corrupted-integrity-refusal",
     "authority-denial",
 )
-CONTRACT_SHA256 = hashlib.sha256(
+# ECP-PRM-024: this digest is recorded by every released verifier; its bytes stay exactly as they were.
+CONTRACT_SHA256 = raw_sha256(
     json.dumps({"schema": ACCEPTANCE_SCHEMA, "scenarios": SCENARIO_IDS}, sort_keys=True).encode("utf-8")
-).hexdigest()
+)
 MAX_CANDIDATE_WHEEL_BYTES = 100 * 1024 * 1024
 MAX_SNAPSHOT_FILES = 20_000
 MAX_SNAPSHOT_BYTES = 250 * 1024 * 1024
-VERSION_PATTERN = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+")
+#: ECP-PRM-014: the one wheel grammar both qualify roles apply.
+VERSION_PATTERN = WHEEL_VERSION_PATTERN
 
 
 @dataclass(frozen=True)
@@ -82,11 +83,10 @@ class AcceptanceManifest:
         }
 
     def canonical_bytes(self) -> bytes:
-        return (json.dumps(self.to_dict(), indent=2, sort_keys=True) + "\n").encode("utf-8")
+        return pretty_json_bytes(self.to_dict(), ensure_ascii=True)  # ECP-PRM-006: the same bytes as before
 
 
-def _hash(value: bytes) -> str:
-    return hashlib.sha256(value).hexdigest()
+_hash = raw_sha256
 
 
 def _within(path: Path, root: Path) -> bool:
@@ -118,21 +118,23 @@ def _wheel_version(path: Path, raw: bytes) -> str:
     return versions[0]
 
 
-def _environment() -> dict[str, str]:
-    selected = {
-        key: value
-        for key, value in os.environ.items()
-        if key.upper() in {"PATH", "SYSTEMROOT", "WINDIR", "COMSPEC", "PATHEXT", "TEMP", "TMP", "HOME", "LANG", "LC_ALL"}
-    }
-    selected.update(
-        {
-            "PYTHONNOUSERSITE": "1",
-            "PYTHONPATH": "",
-            "PIP_DISABLE_PIP_VERSION_CHECK": "1",
-            "PIP_NO_INPUT": "1",
-        }
-    )
+#: ECP-PRM-015: the environment keys a qualification subprocess may inherit.
+INHERITED_ENVIRONMENT_KEYS = frozenset({"PATH", "SYSTEMROOT", "WINDIR", "COMSPEC", "PATHEXT", "TEMP", "TMP", "HOME", "LANG", "LC_ALL"})
+
+
+def safe_environment(extra: dict[str, str] | None = None) -> dict[str, str]:
+    """The one subprocess environment builder (ECP-PRM-015): an allow-list, user site disabled, no PYTHONPATH."""
+
+    selected = {key: value for key, value in os.environ.items() if key.upper() in INHERITED_ENVIRONMENT_KEYS}
+    selected.pop("PYTHONPATH", None)
+    selected["PYTHONNOUSERSITE"] = "1"
+    if extra:
+        selected.update(extra)
     return selected
+
+
+def _environment() -> dict[str, str]:
+    return safe_environment({"PIP_DISABLE_PIP_VERSION_CHECK": "1", "PIP_NO_INPUT": "1"})
 
 
 def _launcher(environment: Path, name: str) -> Path:
@@ -148,7 +150,7 @@ def _launcher(environment: Path, name: str) -> Path:
 
 
 def _normalize(value: str, temporary: Path, wheel: Path, checkout: Path | None) -> str:
-    normalized = value.replace("\r\n", "\n").replace("\r", "\n")
+    normalized = canonical_text(value)  # ECP-PRM-010
     replacements = [(temporary, "<TEMP>"), (wheel, "<WHEEL>")]
     if checkout is not None:
         replacements.append((checkout, "<CHECKOUT>"))
@@ -377,8 +379,8 @@ def assess_candidate_wheel(
         lock["files"]["ENGINEERING_HARNESS.md"]["sha256"] = "0" * 64
         # Explicit LF: the lock is hash-bound text, so the writing platform must
         # not decide its bytes.
-        lock_path.write_text(
-            json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
+        lock_path.write_text(  # ECP-PRM-006: the same bytes, written with the newline the lock producers declare
+            pretty_json_bytes(lock, ensure_ascii=True).decode("utf-8"), encoding="utf-8", newline="\n"
         )
         results.append(
             _run(

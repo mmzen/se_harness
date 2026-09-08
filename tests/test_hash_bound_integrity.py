@@ -1348,7 +1348,8 @@ class ProducerNewlineTests(unittest.TestCase):
 
     def test_the_installer_writes_the_lock_as_explicit_bytes(self) -> None:
         source = (ROOT / "se_harness" / "installer.py").read_text(encoding="utf-8")
-        self.assertIn('lock_bytes = (json.dumps(lock, indent=2, sort_keys=True) + "\\n").encode("utf-8")', source)
+        # WO-ECP-032 (SPEC-ECP-023 ECP-PRM-006): the lock bytes come from integrity's one pretty serializer.
+        self.assertIn("lock_bytes = pretty_json_bytes(lock, ensure_ascii=True)", source)
         self.assertIn("_atomic_write(lock_path, lock_bytes)", source)
 
     @unittest.skipUnless(git_available(), "git is unavailable")

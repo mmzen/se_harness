@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import io
 import json
 import os
@@ -17,7 +16,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 from se_harness import __version__
-from se_harness.candidate_acceptance import assess_candidate_wheel
+from se_harness.candidate_acceptance import assess_candidate_wheel, safe_environment
 from se_harness.evaluator_identity import (
     EvaluatorIdentityError,
     installed_evaluator_identity,
@@ -26,7 +25,16 @@ from se_harness.evaluator_identity import (
 from se_harness import front_matter
 from se_harness._process import run as _launch
 from se_harness.installer import ENGINE_ROOT, HarnessError, template_root
-from se_harness.integrity import IntegrityError, parse_lock
+from se_harness.integrity import (
+    WHEEL_VERSION_PATTERN,
+    atomic_create_bytes,
+    IntegrityError,
+    canonical_json_bytes,
+    canonical_text,
+    parse_lock,
+    pretty_json_bytes,
+    raw_sha256,
+)
 from se_harness.preflight import inspect_installation
 from se_harness.runtime_identity import (
     COMMIT_PATTERN,
@@ -57,7 +65,8 @@ RETIRED_CHECK_CODES = ("PV001", "PV002")
 
 MAX_COMMAND_OUTPUT_BYTES = 4 * 1024 * 1024
 MAX_WHEEL_BYTES = 100 * 1024 * 1024
-VERSION_PATTERN = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+(?:[A-Za-z0-9.+-]*)?")
+#: ECP-PRM-014: the one wheel grammar both qualify roles apply.
+VERSION_PATTERN = WHEEL_VERSION_PATTERN
 
 
 @dataclass(frozen=True)
@@ -94,21 +103,14 @@ class QualificationResult:
         }
 
     def canonical_bytes(self) -> bytes:
-        return (
-            json.dumps(self.to_dict(), ensure_ascii=True, indent=2, sort_keys=True)
-            + "\n"
-        ).encode("utf-8")
+        return pretty_json_bytes(self.to_dict(), ensure_ascii=True)  # ECP-PRM-006: the same bytes
 
 
 def _canonical_compact(value: Any) -> bytes:
-    return (
-        json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True)
-        + "\n"
-    ).encode("utf-8")
+    return canonical_json_bytes(value, ensure_ascii=True)
 
 
-def _sha256(raw: bytes) -> str:
-    return hashlib.sha256(raw).hexdigest()
+_sha256 = raw_sha256
 
 
 def _identified(value: dict[str, Any]) -> dict[str, Any]:
@@ -159,7 +161,7 @@ def failed_qualification(
 
 
 def _bounded_message(message: str) -> str:
-    lines = message.replace("\r\n", "\n").replace("\r", "\n").splitlines()
+    lines = canonical_text(message).splitlines()  # ECP-PRM-010
     normalized = lines[0] if lines else "qualification failed without a diagnostic"
     for path, replacement in (
         (Path.cwd(), "<ROOT>"),
@@ -216,46 +218,17 @@ def write_qualification_result(
         raise HarnessError("qualification output must be outside the inspected repository")
     if destination.exists() or destination.is_symlink():
         raise HarnessError("qualification output already exists")
-    fd, temporary_name = tempfile.mkstemp(prefix=f".{destination.name}.", dir=parent)
-    try:
-        with os.fdopen(fd, "wb") as stream:
-            stream.write(result.canonical_bytes())
-            stream.flush()
-            os.fsync(stream.fileno())
-        try:
-            os.link(temporary_name, destination)
-        except FileExistsError as exc:
-            raise HarnessError("qualification output already exists") from exc
-        except OSError as exc:
-            raise HarnessError("qualification output could not be published atomically") from exc
-    finally:
-        try:
-            os.unlink(temporary_name)
-        except FileNotFoundError:
-            pass
+    # ECP-PRM-008: the one create-once writer, with this module's wording.
+    atomic_create_bytes(
+        destination,
+        result.canonical_bytes(),
+        exists=lambda: HarnessError("qualification output already exists"),
+        failed=lambda detail: HarnessError("qualification output could not be published atomically"),
+    )
 
 
-def _safe_environment() -> dict[str, str]:
-    selected = {
-        name: value
-        for name, value in os.environ.items()
-        if name.upper()
-        in {
-            "COMSPEC",
-            "HOME",
-            "LANG",
-            "LC_ALL",
-            "PATH",
-            "PATHEXT",
-            "SYSTEMROOT",
-            "TEMP",
-            "TMP",
-            "WINDIR",
-        }
-    }
-    selected["PYTHONNOUSERSITE"] = "1"
-    selected.pop("PYTHONPATH", None)
-    return selected
+# ECP-PRM-015: the one environment builder lives beside the candidate acceptance.
+_safe_environment = safe_environment
 
 
 def _run(

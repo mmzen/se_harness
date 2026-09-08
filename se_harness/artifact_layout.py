@@ -2,14 +2,13 @@
 
 from __future__ import annotations
 
-import os
 import re
 import stat
-import tempfile
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path, PurePath
 
+from se_harness.integrity import atomic_create_bytes, canonical_text
 from se_harness import front_matter, mutation_guard
 from se_harness._process import run_git
 from se_harness.installer import HarnessError, ensure_target, safe_destination
@@ -216,23 +215,13 @@ def _validate_existing_chain(root: Path, relative: Path, *, final_kind: str) -> 
 
 
 def _atomic_create(path: Path, content: bytes) -> None:
-    descriptor, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "wb") as handle:
-            handle.write(content)
-            handle.flush()
-            os.fsync(handle.fileno())
-        try:
-            os.link(temporary_name, path)
-        except FileExistsError as exc:
-            raise HarnessError(f"destination already exists: {path}") from exc
-        except OSError as exc:
-            raise HarnessError(f"cannot create destination atomically: {exc}") from exc
-    finally:
-        try:
-            os.unlink(temporary_name)
-        except FileNotFoundError:
-            pass
+    # ECP-PRM-008: the one create-once writer, with this module's wording.
+    atomic_create_bytes(
+        path,
+        content,
+        exists=lambda: HarnessError(f"destination already exists: {path}"),
+        failed=lambda detail: HarnessError(f"cannot create destination atomically: {detail}"),
+    )
 
 
 def _rollback_directories(paths: list[Path]) -> None:
@@ -310,7 +299,7 @@ def scaffold_domain(
 
 
 def _render_draft(template: str, artifact_type: str, artifact_id: str) -> bytes:
-    normalized = template.replace("\r\n", "\n").replace("\r", "\n")
+    normalized = canonical_text(template)  # ECP-PRM-010
     expected_type = re.search(r'^type = "([^"]+)"$', normalized, flags=re.MULTILINE)
     if expected_type is None or expected_type.group(1) != artifact_type:
         raise HarnessError(f"canonical template type does not match requested type: {artifact_type}")
@@ -335,7 +324,7 @@ def authoring_checklist(repository: Path, artifact_type: str) -> list[str]:
     if not policy.is_file():
         return []
     try:
-        lines = policy.read_text(encoding="utf-8-sig").replace("\r\n", "\n").split("\n")
+        lines = canonical_text(policy.read_text(encoding="utf-8-sig")).split("\n")  # ECP-PRM-010
     except (OSError, UnicodeError):
         return []
     bullets: list[str] = []

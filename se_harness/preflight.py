@@ -10,7 +10,7 @@ import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from types import ModuleType
-from typing import Any, Iterable
+from typing import Any, Iterable, Literal
 
 from se_harness.installer import (
     ENGINE_ROOT,
@@ -72,6 +72,11 @@ POLICY_PATHS = (
     "docs/engineering/ARTIFACT_AUTHORING.md",
 )
 _VALIDATOR_MODULE: ModuleType | None = None
+
+#: ECP-PRM-013: the two preflight phases, typed.
+Phase = Literal["start", "review"]
+
+
 @dataclass(frozen=True, order=True)
 class InstallationCheck:
     name: str
@@ -307,7 +312,7 @@ def _unique_paths(items: Iterable[str]) -> tuple[str, ...]:
     return tuple(result)
 
 
-def run_preflight(target: Path, *, work_order_id: str, phase: str = "start") -> PreflightReport:
+def run_preflight(target: Path, *, work_order_id: str, phase: Phase = "start") -> PreflightReport:
     """Evaluate implementation or review readiness without mutating the repository."""
 
     root = ensure_target(target, must_exist=True)

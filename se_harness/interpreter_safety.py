@@ -21,6 +21,7 @@ import os
 import stat
 from dataclasses import dataclass
 from pathlib import Path
+from se_harness.integrity import raw_sha256
 
 
 WITHIN_EXPECTED_ROOT = "within-expected-root"
@@ -186,7 +187,7 @@ def _digest(target: Path, supplied: bytes | None) -> str:
             raise InterpreterSafetyRefusal(
                 "EPS004", "target", "the resolved interpreter exceeds the readable bound"
             )
-        return hashlib.sha256(supplied).hexdigest()
+        return raw_sha256(supplied)
     digest = hashlib.sha256()
     total = 0
     try:
