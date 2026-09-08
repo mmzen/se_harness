@@ -22,13 +22,16 @@ Ship native Codex and Claude Code packages built from the same engine and skill 
 | Run `harnessctl init` or `adopt` manually. | Ask the new `setup` skill to connect the repository. It uses those same commands. |
 | Repository files provide agent instructions. | Session hooks verify the installation and load those instructions automatically. |
 | Two existing read-only skills. | Reuse both and add three skills: `setup`, `change`, and `evidence`. |
-| No native plugin manifests or hooks. | Add host manifests and one shared hook handler with host-specific input/output handling. |
+| No native plugin manifests or hooks. | Add host manifests and two scripts: `session-context` and `check-tool-action`. |
 
 ## Architecture: one engine, two adapters
 
+The two host adapters target Codex and Claude Code. Each uses the same two purpose-specific scripts and existing evaluator.
+
 ```text
 User request -> skill -> agent's tool -> scripts/harnessctl -> repository
-Host event   -> scripts/hook-handler -> scripts/harnessctl -> check result
+SessionStart -> scripts/session-context -> verify installation and load rules
+PreToolUse   -> scripts/check-tool-action -> evaluate action -> host response
 ```
 
 `scripts/harnessctl` is the packaged entry point to the **existing** CLI. On Windows, ship `scripts/harnessctl.exe`. It starts the included Python interpreter and package; its arguments remain the current `harnessctl` arguments.
@@ -38,7 +41,8 @@ verity-plane/
   .claude-plugin/plugin.json       New Claude manifest
   OR .codex-plugin/plugin.json     New Codex manifest
   scripts/harnessctl[.exe]         New packaging of the existing CLI
-  scripts/hook-handler[.exe]       New host event adapter
+  scripts/session-context[.exe]    New readiness checks and governance loading
+  scripts/check-tool-action[.exe]  New checks before supported tool actions
   runtime/                        Bundled Python + released package + templates
   hooks/hooks.json                 New host event registrations
   skills/setup/                    New
@@ -75,15 +79,15 @@ The main agent implements the work. Optional `investigator` and `evidence-review
 
 ## Hooks: useful intervention, incomplete enforcement
 
-Use one `scripts/hook-handler` to translate host events and call the same evaluator:
+Use two scripts with explicit responsibilities. Both call the same `harnessctl` evaluator:
 
-| Event | Handler action |
-| --- | --- |
-| `SessionStart` | Verify runtime identity and installed content with `doctor`, then inject the verified `se-harness:begin` / `end` block from `AGENTS.md` and the full `ENGINEERING_HARNESS.md` router. |
-| `SessionStart` after compact or resume | Repeat those checks and load fresh governance and selected work context. |
-| `PreToolUse` | For explicitly supported actions, run the corresponding existing checkpoint and return the host's supported allow/deny response. |
+| Event | Script | Action |
+| --- | --- | --- |
+| `SessionStart` | `scripts/session-context` | Verify runtime identity and installed content with `doctor`, then inject the verified `se-harness:begin` / `end` block from `AGENTS.md` and the full `ENGINEERING_HARNESS.md` router. |
+| `SessionStart` after compact or resume | `scripts/session-context` | Repeat those checks and load fresh governance and selected work context. |
+| `PreToolUse` | `scripts/check-tool-action` | For explicitly supported actions, run the corresponding existing checkpoint and return the host's supported allow/deny response. |
 
-Keep verification and injection in the **same ordered handler**: matching hooks can run concurrently. If context is truncated or spills to a file, require a complete read before declaring readiness. Use the documented `SessionStart` recovery path; do not assume `PostCompact` output restores context. [Codex hooks](https://learn.chatgpt.com/docs/hooks), [Claude hooks](https://code.claude.com/docs/en/hooks).
+Keep verification and injection together, in order, inside **`session-context`**: matching hooks can run concurrently. The setup skill can also call `session-context --readiness REPO` for a manual retry. If context is truncated or spills to a file, require a complete read before declaring readiness. Use the documented `SessionStart` recovery path; do not assume `PostCompact` output restores context. [Codex hooks](https://learn.chatgpt.com/docs/hooks), [Claude hooks](https://code.claude.com/docs/en/hooks).
 
 Hooks do not initialize repositories, upgrade locks, or make human decisions. In an unrelated repository, startup writes nothing. A missing or untrusted hook is a readiness failure for the proposed workflow, not proof that the host has blocked every tool.
 
@@ -117,7 +121,7 @@ Adapt the two skill cores for plugin paths and identity checks. Select one activ
 ## Delivery and open choices
 
 1. **Prove packaging:** install on a clean supported machine; run the bundled evaluator; reject a mismatched or modified installation. Confirm marketplace acceptance and offline use after installation.
-2. **Prove workflows:** implement the three skills and hook handler; test setup, governance restoration, work, evidence, and human handoffs on both hosts.
+2. **Prove workflows:** implement the three skills and two hook scripts; test setup, governance restoration, work, evidence, and human handoffs on both hosts.
 3. **Prove authority separately:** demonstrate that missing approval, changed candidates, disabled hooks, and alternate access routes cannot authorize protected effects before enabling merge or publication automation.
 
 Challenge two choices: can one bundled version serve the first supported users, and does portable Python fit the host's distribution limits? Change packaging if testing shows it is needed. Avoid adding a runtime manager or another command protocol in advance.

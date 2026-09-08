@@ -11,7 +11,7 @@
 | --- | --- | --- |
 | **Skill** | Instructions the agent follows. | New `change` skill explains how to create a package or start a WO. |
 | **Tool** | Host capability the agent invokes. | Codex `exec_command` or Claude Code `Bash` runs a command; an editing tool changes a file. |
-| **Script** | Code that performs a defined operation. | New `scripts/hook-handler` translates a host event. |
+| **Script** | Code that performs a defined operation. | New `scripts/session-context` verifies readiness and loads governance. New `scripts/check-tool-action` checks supported tool actions. |
 | **Hook** | An event that automatically invokes the handler. | `SessionStart` triggers installation checks and governance injection. |
 | **Evaluator** | Existing SE Harness engine, exposed as `harnessctl`. | Checks scope, computes next actions, and applies permitted transitions. |
 | **Subagent** | Optional helper with a bounded task. | New read-only `investigator` finds relevant artifacts. |
@@ -23,7 +23,7 @@ A hook handler and a skill-guided agent can call the **same** `scripts/harnessct
 User requests work
   -> Agent reads the skill
   -> Agent calls a host tool
-  -> Host runs PreToolUse handler, where supported
+  -> Host runs scripts/check-tool-action on PreToolUse, where supported
   -> Tool invokes plugin scripts/harnessctl
   -> Evaluator returns result, blockers, and next action
   -> Agent explains the result or hands off the required decision
@@ -33,7 +33,7 @@ A covered hook may deny a tool call. Hook coverage is incomplete; evaluator chec
 
 ## Where the pieces would live
 
-The plugin contains the released evaluator and portable Python, `scripts/harnessctl[.exe]`, one `scripts/hook-handler[.exe]`, host manifests, hooks, and skills. See the [package layout](plugin-installation-proposal-2026-09-06.md#architecture-one-engine-two-adapters).
+The plugin contains the released evaluator and portable Python, `scripts/harnessctl[.exe]`, two hook scripts (`scripts/session-context[.exe]` and `scripts/check-tool-action[.exe]`), host manifests, hooks, and skills. See the [package layout](plugin-installation-proposal-2026-09-06.md#architecture-one-engine-two-adapters).
 
 **Three new skills:** `setup`, `change`, `evidence`. **Two adapted skills:** `harness-orient`, `harness-operator-brief`. Optional `investigator` and `evidence-reviewer` roles are new and read-only.
 
@@ -45,13 +45,13 @@ Each row links to the full sequence, including current commands, new components,
 
 | Operation | Skill / agent action | Hook or script role | Required handoff |
 | --- | --- | --- | --- |
-| [Install](plugin-scenarios/setup-and-sessions.md#scenario-1-install-and-activate-the-plugin) | User installs the host plugin, which includes `harnessctl` and Python. | Host loads components; handler checks availability. | Resolve missing trust or an incompatible bundle. |
-| [Connect repository](plugin-scenarios/setup-and-sessions.md#scenario-2-initialize-or-adopt-a-repository) | `setup` previews existing `init` or `adopt`, then runs the authorized operation. | Handler checks readiness afterward. | User approves the concrete repository changes. |
-| [Start / restore session](plugin-scenarios/setup-and-sessions.md#scenario-3-start-a-session) | `harness-orient` reads the selected state when needed. | `SessionStart` checks identity and `doctor`, then injects governance; repeat on compact/resume. | Resolve failed checks or incomplete context before governed work. |
+| [Install](plugin-scenarios/setup-and-sessions.md#scenario-1-install-and-activate-the-plugin) | User installs the host plugin, which includes `harnessctl` and Python. | Host loads components; `session-context` checks availability. | Resolve missing trust or an incompatible bundle. |
+| [Connect repository](plugin-scenarios/setup-and-sessions.md#scenario-2-initialize-or-adopt-a-repository) | `setup` previews existing `init` or `adopt`, then runs the authorized operation. | `session-context` checks readiness afterward. | User approves the concrete repository changes. |
+| [Start / restore session](plugin-scenarios/setup-and-sessions.md#scenario-3-start-a-session) | `harness-orient` reads the selected state when needed. | `SessionStart` calls `session-context`: identity, `doctor`, then governance injection; repeat on compact/resume. | Resolve failed checks or incomplete context before governed work. |
 | [Create package](plugin-scenarios/definition-and-approval.md#scenario-6-create-an-artifact-package) | `change` uses `scaffold-domain`, `create-artifact`, and editing tools. | Same bundled CLI; optional investigator locates existing definitions. | Review connected drafts. Creation does not approve them. |
 | [Approve / revise](plugin-scenarios/definition-and-approval.md#scenario-7-review-and-approve-the-package) | `change` presents exact content and existing transition previews. | CLI checks legality; editing follows the applicable amendment procedure. | Actual owners decide; apply only their selected changes. |
-| [Start WO](plugin-scenarios/implementation-and-integration.md#scenario-9-start-a-work-order) | `change` runs `preflight` and an authorized `transition` to `in_progress`. | Handler checks covered tool actions. | Human or qualifying existing delegation supplies start authority. |
-| [Implement](plugin-scenarios/implementation-and-integration.md#scenario-10-implement-the-change-and-collect-evidence) | Main agent edits within scope and runs project checks. `evidence` retains real results. | Mapped `PreToolUse` checks assist scope enforcement. | Stop on a scope change or failed required check. |
+| [Start WO](plugin-scenarios/implementation-and-integration.md#scenario-9-start-a-work-order) | `change` runs `preflight` and an authorized `transition` to `in_progress`. | `check-tool-action` checks covered tool actions. | Human or qualifying existing delegation supplies start authority. |
+| [Implement](plugin-scenarios/implementation-and-integration.md#scenario-10-implement-the-change-and-collect-evidence) | Main agent edits within scope and runs project checks. `evidence` retains real results. | `PreToolUse` calls `check-tool-action` for mapped scope checks. | Stop on a scope change or failed required check. |
 | [Prepare verification](plugin-scenarios/implementation-and-integration.md#scenario-11-complete-implementation-and-prepare-verification) | `evidence` guides completion, then uses `capture-verification` when required and authorized. | Existing CLI binds the VREC to the eligible candidate. | Assurance owner reviews the exact record and evidence. |
 | [Verify / integrate](plugin-scenarios/implementation-and-integration.md#scenario-12-independently-verify-the-candidate) | Present verification transition and the separate integration decision. | Existing CLI records the authorized VREC state. No plugin auto-merge. | Assurance owner verifies; integration owner uses the project's GitHub process. |
 | [Release / publish](plugin-scenarios/release-and-maintenance.md#scenario-14-prepare-and-approve-a-release) | `evidence` uses `prepare-release` and the project's existing release tools. | CLI prepares RLS; project workflows perform external effects. | Release owner decides; publication is separately authorized and handed off. |
@@ -78,7 +78,7 @@ harnessctl transition REPO --set WO-DEMO-001=in_progress --decision WO-DEMO-001=
 
 The transition is a preview. Add `--apply` only after the actual start authority is established. `--decision` records an actor assertion; it does not authenticate that person.
 
-The CLI already provides the operation names and results. Skills and the hook handler preserve arguments and supported JSON schemas; they do not turn a returned decision request into a shell command.
+The CLI already provides the operation names and results. Skills and the hook scripts preserve arguments and supported JSON schemas; they do not turn a returned decision request into a shell command.
 
 ## Details that must stay correct
 

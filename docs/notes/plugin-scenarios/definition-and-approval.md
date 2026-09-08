@@ -124,7 +124,7 @@ User → change skill [New]
 | 2 | Main agent | Identify existing artifacts to reuse, necessary additions, links, and authorized paths. Optional `investigator` **New** finds relevant IDs and sources without editing. |
 | 3 | Main agent → `harnessctl` | Preview `scaffold-domain --dry-run --json` only if a domain is needed. Preview `create-artifact --dry-run --json` for each addition. Show proposed paths and IDs. |
 | 4 | Main agent → `harnessctl` | Within authorized scope, repeat the selected commands without `--dry-run`. Record actual created IDs and paths after each call. |
-| 5 | Main agent → editing tool | Fill content, owners, relationships, acceptance criteria, and WO scope. The proposed `scripts/hook-handler` checks supported mapped write events; it does not grant authoring authority. |
+| 5 | Main agent → editing tool | Fill content, owners, relationships, acceptance criteria, and WO scope. The proposed `scripts/check-tool-action` checks supported mapped write events; it does not grant authoring authority. |
 | 6 | Main agent → `harnessctl validate . --json` | Correct draft findings within scope, then present the artifacts and pending approvals. |
 
 Ordinary definitions start `draft`; decisions start `open`. Neither authorizes implementation. Drafting a WO cannot require starting that same WO first; follow the repository's authoring rules.
@@ -134,7 +134,7 @@ Ordinary definitions start `draft`; decisions start `open`. Neither authorizes i
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `skills/change/SKILL.md` guides authoring. | **New:** instructions using current rules and templates. |
-| **Hook** | `PreToolUse` checks supported write events. | **Adapt:** host event calls **New** `scripts/hook-handler`; coverage must be demonstrated. |
+| **Hook** | `PreToolUse` checks supported write events. | **Adapt:** host event calls **New** `scripts/check-tool-action`; coverage must be demonstrated. |
 | **Script** | `scripts/harnessctl` runs the existing CLI. | **New:** bundled entry point; no package transaction engine. |
 | **Tool/interface** | Shell and editing tools create and complete drafts. | **Reuse:** Codex `exec_command` / `apply_patch`; Claude Code `Bash` / `Read` / `Edit` / `Write`. |
 | **Evaluator** | `scaffold-domain`, `create-artifact`, and `validate`. | **Reuse:** existing authoring commands. |
@@ -225,7 +225,7 @@ change skill [New] → harnessctl transition (preview)
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `change` presents content, checks, and required decisions. | **New:** explicit human handoff before application. |
-| **Hook** | `PreToolUse` checks covered transition commands. | **Adapt:** host event calls **New** `scripts/hook-handler`; it cannot authenticate an owner. |
+| **Hook** | `PreToolUse` checks covered transition commands. | **Adapt:** host event calls **New** `scripts/check-tool-action`; it cannot authenticate an owner. |
 | **Script** | `scripts/harnessctl` runs preview and application. | **New:** packaging of the existing CLI; no review service. |
 | **Tool/interface** | Shell tool invokes the CLI; human uses the accepted review process. | **Reuse:** host tools and repository review process. |
 | **Evaluator** | `transition` plans and applies selected changes. | **Reuse:** existing lifecycle checks, including multi-artifact planning. |
@@ -321,7 +321,7 @@ There is no general `approved → draft` transition or amendment transaction. Th
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `change` guides impact analysis, decisions, and amendments. | **New:** instructions using existing authoring and lifecycle rules. |
-| **Hook** | `PreToolUse` checks covered write operations. | **Adapt:** host event calls **New** `scripts/hook-handler`; it does not create amendment authority. |
+| **Hook** | `PreToolUse` checks covered write operations. | **Adapt:** host event calls **New** `scripts/check-tool-action`; it does not create amendment authority. |
 | **Script** | `scripts/harnessctl` runs supported operations. | **New:** packaging of existing commands; no amendment API. |
 | **Tool/interface** | Shell and editing tools apply authorized changes. | **Reuse:** Codex `exec_command` / `apply_patch`; Claude Code `Bash` / `Edit` / `Write`. |
 | **Evaluator** | `create-artifact`, `decide`, `validate`, and scope `check`. | **Reuse:** current behavior; no general reopen command. |

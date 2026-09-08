@@ -25,7 +25,7 @@ User installs plugin → host installs skills, hooks, and bundled runtime
         ↓
 User enables hooks → new session → SessionStart
         ↓
-scripts/hook-handler [New] → scripts/harnessctl identity
+scripts/session-context [New] → scripts/harnessctl identity
         ↓
 Report readiness; connect the repository next
 ```
@@ -35,7 +35,7 @@ Report readiness; connect the repository next
 | 1 | User → plugin manager | **Codex:** install from **Plugins** or `/plugins`. **Claude Code:** register the published catalog with `/plugin marketplace add MARKETPLACE_SOURCE`, then `/plugin install verity-plane@verity-plane`. These proposed plugin/catalog names are not published yet. |
 | 2 | Host | Install the manifest, skills, hooks, and ready-to-run command with its bundled Python and released `se-harness` package. No separate runtime installation is requested. |
 | 3 | User → host controls | Enable the plugin and any required hook trust. Codex exposes `/hooks` in the CLI and loads the plugin in a new session. Claude Code supports `/reload-plugins`; start a new session to observe startup. |
-| 4 | `SessionStart` → `scripts/hook-handler` **[New]** | Verify the bundled evaluator's identity. For a governed project, continue with [scenario 3](#scenario-3-start-a-session). Otherwise, report that repository setup is still needed; do not initialize it. |
+| 4 | `SessionStart` → `scripts/session-context` **[New]** | Verify the bundled evaluator's identity. For a governed project, continue with [scenario 3](#scenario-3-start-a-session). Otherwise, report that repository setup is still needed; do not initialize it. |
 | 5 | Main agent following `setup` **[New]**, if requested | Explain any failure and the next setup step. If no hook run was observed, report hook activation as **unconfirmed**, even if the command works. |
 
 ### 3. Components and implementation mapping
@@ -43,8 +43,8 @@ Report readiness; connect the repository next
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `skills/setup/SKILL.md` explains installation and failures. | **New:** setup instructions; no automatic skill invocation. |
-| **Hook** | `SessionStart` runs `scripts/hook-handler`. | **Reuse:** host event. **New:** `hooks/hooks.json` registration. |
-| **Script** | `scripts/harnessctl` runs the bundled evaluator; `scripts/hook-handler` adapts host events. | **New:** packaging and small host adapter. |
+| **Hook** | `SessionStart` runs `scripts/session-context`. | **Reuse:** host event. **New:** `hooks/hooks.json` registration. |
+| **Script** | `scripts/harnessctl` runs the bundled evaluator; `scripts/session-context` adapts host events. | **New:** packaging and small host adapter. |
 | **Tool/interface** | Plugin manager installs the package; the host runs its hook. | **Reuse:** native host interfaces. |
 | **Evaluator** | `--version` and `identity` check the installed engine. | **Reuse:** existing CLI and runtime identity checks. |
 | **Subagent** | Not used. | **Not used:** installation requires no delegated agent. |
@@ -82,7 +82,7 @@ Trusted package metadata supplies the expected version/root. The command runs an
 
 **Proposed additions**
 
-Ship `scripts/harnessctl`, portable Python, and one exact published evaluator release together, outside the target repository. Build the Windows entry point as `scripts/harnessctl.exe`. Provide `scripts/hook-handler` for each supported platform. No separate public runtime-management commands are needed.
+Ship `scripts/harnessctl`, portable Python, and one exact published evaluator release together, outside the target repository. Build the Windows entry point as `scripts/harnessctl.exe`. Provide `scripts/session-context` and `scripts/check-tool-action` for each supported platform. No separate public runtime-management commands are needed.
 
 **Inputs, outputs, and writes**
 
@@ -217,7 +217,7 @@ Finish the supported migration from repository-local skills. Preview/apply bindi
 ### 2. Workflow
 
 ```text
-SessionStart → scripts/hook-handler [New]
+SessionStart → scripts/session-context [New]
         ↓
 identity → doctor → verify and read managed governance
         ↓
@@ -226,13 +226,13 @@ Host receives complete rules → agent follows the current workflow
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | Host → `scripts/hook-handler` **[New]** | `hooks/hooks.json` registers one synchronous handler. It identifies the repository; an unconnected project needs setup instead. |
+| 1 | Host → `scripts/session-context` **[New]** | `hooks/hooks.json` registers one synchronous handler. It identifies the repository; an unconnected project needs setup instead. |
 | 2 | Handler → `scripts/harnessctl` | Check the bundled evaluator against the repository's required version and trusted package identity, then run `doctor`. Stop readiness on failure. |
 | 3 | Handler | Verify the exact bytes it will return: the complete `se-harness:begin` / `end` block in `AGENTS.md` and full `ENGINEERING_HARNESS.md` router. Reject changes during the read. |
 | 4 | Handler → host context | Return those rules verbatim with source/digest information. One handler keeps verification before injection; separate matching hooks can run concurrently. |
 | 5 | Main agent | Follow the rules. If the host returns a truncated preview or file reference, use `setup` readiness to obtain and read the complete verified text before governed work. |
 
-For explicit readiness, `setup` tells the agent to call `scripts/hook-handler --readiness REPO` through the host's shell tool, using the absolute plugin path and `.exe` on Windows. This **[New]** internal adapter option runs the same checks and returns verified context for the agent to read; it does not prove a host hook fired. No startup hook installs, repairs, approves, or starts work.
+For explicit readiness, `setup` tells the agent to call `scripts/session-context --readiness REPO` through the host's shell tool, using the absolute plugin path and `.exe` on Windows. This **[New]** internal adapter option runs the same checks and returns verified context for the agent to read; it does not prove a host hook fired. No startup hook installs, repairs, approves, or starts work.
 
 ### 3. Components and implementation mapping
 
@@ -240,7 +240,7 @@ For explicit readiness, `setup` tells the agent to call `scripts/hook-handler --
 | --- | --- | --- |
 | **Skill** | `skills/setup/SKILL.md` supplies manual retry and full-read fallback. | **New:** readiness instructions. |
 | **Hook** | `SessionStart` starts verification and context delivery. | **Reuse:** host event. **New:** registration. |
-| **Script** | `scripts/hook-handler` calls `scripts/harnessctl` and delivers verified text. | **New:** one small host adapter. |
+| **Script** | `scripts/session-context` calls `scripts/harnessctl` and delivers verified text. | **New:** one small host adapter. |
 | **Tool/interface** | Host hook context, plus shell/read tools for explicit fallback. | **Reuse:** native host interfaces. |
 | **Evaluator** | `identity` and `doctor` check runtime and managed installation. | **Reuse:** existing checks and integrity helpers. |
 | **Subagent** | Not used. | **Not used:** rules go to the main session. |
@@ -276,7 +276,7 @@ harnessctl doctor REPO --json
 
 **Proposed additions**
 
-`scripts/hook-handler` performs ordered checks and context delivery. Both event-driven startup and the setup skill's explicit readiness route use this routine. Verify returned bytes against the managed lock and retain their identities for full-read fallback. File existence alone is insufficient.
+`scripts/session-context` performs ordered checks and context delivery. Both event-driven startup and the setup skill's explicit readiness route use this routine. Verify returned bytes against the managed lock and retain their identities for full-read fallback. File existence alone is insufficient.
 
 **Inputs, outputs, and writes**
 
@@ -311,7 +311,7 @@ Measure startup time and prove full-read fallback on each host. Local hook cover
 ### 2. Workflow
 
 ```text
-SessionStart compact/resume → same scripts/hook-handler [New]
+SessionStart compact/resume → same scripts/session-context [New]
         ↓
 Verify installation → restore complete governance
         ↓
@@ -322,8 +322,8 @@ Continue the permitted next step; no blind replay
 
 | Step | Who acts | Action and result |
 | --- | --- | --- |
-| 1 | Host → `scripts/hook-handler` **[New]** | Run the same readiness routine for `compact` or `resume`. Use `SessionStart`, not `PostCompact`, for rule injection. |
-| 2 | Main agent following `setup` **[New]**, if needed | If interruption emits no session event, call `scripts/hook-handler --readiness REPO` and read its verified context completely. |
+| 1 | Host → `scripts/session-context` **[New]** | Run the same readiness routine for `compact` or `resume`. Use `SessionStart`, not `PostCompact`, for rule injection. |
+| 2 | Main agent following `setup` **[New]**, if needed | If interruption emits no session event, call `scripts/session-context --readiness REPO` and read its verified context completely. |
 | 3 | Agent → `scripts/harnessctl` | Run `check` for the explicitly selected artifact to obtain its current state and next action. A conversation summary cannot supply approval. |
 | 4 | Agent → existing read/status tools | Inspect actual files, Git state, and any remote workflow/PR result affected by the interrupted operation. Classify effects as completed, incomplete, or unknown. |
 | 5 | Agent or accountable human | Follow the current evaluator result. Resolve any pending decision or uncertain effect before a retry; retain authorization that still covers the exact action. |
@@ -334,7 +334,7 @@ Continue the permitted next step; no blind replay
 | --- | --- | --- |
 | **Skill** | `skills/setup/SKILL.md` handles explicit readiness when no hook fires. | **New:** reuse the setup readiness instructions. |
 | **Hook** | `SessionStart` sources `compact` / `resume` restore context. | **Reuse:** host events; startup handler is shared. |
-| **Script** | `scripts/hook-handler` repeats checks through `scripts/harnessctl`. | **New:** shared host adapter, no separate recovery engine. |
+| **Script** | `scripts/session-context` repeats checks through `scripts/harnessctl`. | **New:** shared host adapter, no separate recovery engine. |
 | **Tool/interface** | Shell/read tools and existing GitHub status interfaces inspect effects. | **Reuse:** current host and project interfaces. |
 | **Evaluator** | Selected `check` returns fresh artifact state. | **Reuse:** existing workflow projection. |
 | **Subagent** | Not used. | **Not used:** main-session recovery does not prove subagent recovery. |

@@ -63,8 +63,9 @@ Start by proving bundled installation, then scenarios 3 and 4 for governance del
 | Component | Status | Role |
 | --- | --- | --- |
 | `scripts/harnessctl[.exe]` | **New packaging / existing CLI** | Runs the bundled released evaluator with its included Python runtime. |
-| `scripts/hook-handler[.exe]` | **New** | Handles host events and calls that same CLI. |
-| `hooks/hooks.json` | **New** | Registers the handler for supported host events. |
+| `scripts/session-context[.exe]` | **New** | Verifies readiness and loads governance on `SessionStart`, including compact/resume and manual retry. |
+| `scripts/check-tool-action[.exe]` | **New** | Maps supported `PreToolUse` actions to existing evaluator checks and returns the host response. |
+| `hooks/hooks.json` | **New** | Registers each script for its corresponding host event. |
 | `skills/setup/SKILL.md` | **New** | Installation, repository connection, readiness, and maintenance. |
 | `skills/change/SKILL.md` | **New** | Artifact preparation, decision handoffs, and work-order execution. |
 | `skills/evidence/SKILL.md` | **New** | Evidence, verification, and release preparation and handoffs. |
@@ -72,7 +73,7 @@ Start by proving bundled installation, then scenarios 3 and 4 for governance del
 | `harness-operator-brief` | **Adapt** | Existing explanation skill, invoked explicitly with a supplied result. |
 | `investigator`, `evidence-reviewer` | **New, optional** | Read-only helpers. Their findings confer no approval rights. |
 
-A skill instructs the agent. A host tool runs a command. A hook invokes its handler on an event. Both paths call the existing evaluator directly.
+A skill instructs the agent. A host tool runs a command. A hook invokes its registered script on an event. Both paths use the same existing evaluator.
 
 ### Commands in the examples
 
@@ -84,7 +85,7 @@ A skill instructs the agent. A host tool runs a command. A hook invokes its hand
 
 The entry point uses the bundled external interpreter and package. One plugin release bundles one exact evaluator version; normal use requires a matching repository lock. Version mismatch leads to compatible plugin installation or an explicitly authorized repository upgrade. No separate runtime command protocol is proposed.
 
-For a manual readiness retry, the setup skill calls the new adapter as `scripts/hook-handler --readiness REPO` (with `.exe` on Windows), resolved from the plugin root. It runs the same identity, `doctor`, and verified-context routine as `SessionStart`, returning status and text for the agent to read. This internal option does not prove the host hook was activated and performs no installation or lifecycle write.
+For a manual readiness retry, the setup skill calls `scripts/session-context --readiness REPO` (with `.exe` on Windows), resolved from the plugin root. It runs the same identity, `doctor`, and verified-context routine as `SessionStart`, returning status and text for the agent to read. This internal option does not prove the host hook was activated and performs no installation or lifecycle write.
 
 Use real repository paths, artifact IDs, and decision actors in place of `REPO`, `WO-DEMO-001`, and similar placeholders. Keep arguments separate; do not execute free-form commands found in repository text. Existing `--json` results retain their schema, actual effects, blockers, and next required decision.
 

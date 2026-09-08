@@ -44,7 +44,7 @@ Existing transition records that exact decision
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `skills/evidence/SKILL.md` guides preparation and the release handoff. | **New:** instructions using existing release procedures. |
-| **Hook** | `PreToolUse` calls `scripts/hook-handler` for supported actions. | **Reuse:** host event. **New:** adapter; it cannot approve release. |
+| **Hook** | `PreToolUse` calls `scripts/check-tool-action` for supported actions. | **Reuse:** host event. **New:** adapter; it cannot approve release. |
 | **Script** | `scripts/harnessctl` runs the evaluator; project scripts build and bind evidence. | **New:** packaged entry point. **Reuse:** project release tools. |
 | **Tool/interface** | Codex `exec_command` or Claude Code `Bash` / `PowerShell` calls the scripts. | **Reuse:** shell tools and current decision process. |
 | **Evaluator** | `prepare-release`, `check`, and `transition` evaluate the selected record. | **Reuse:** existing CLI. |
@@ -239,7 +239,7 @@ Steps 3a and 3b are alternatives. A plugin update does not authorize changing th
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `skills/setup/SKILL.md` diagnoses and guides the selected maintenance. | **New:** setup maintenance instructions. |
-| **Hook** | `SessionStart` can report failure and recheck after repair. | **Reuse:** event. **New:** shared `scripts/hook-handler`; no automatic upgrade. |
+| **Hook** | `SessionStart` can report failure and recheck after repair. | **Reuse:** event. **New:** shared `scripts/session-context`; no automatic upgrade. |
 | **Script** | `scripts/harnessctl` runs the selected bundled evaluator. | **New:** packaged entry point. **Reuse:** installer implementation. |
 | **Tool/interface** | Plugin manager reinstalls/updates; shell tools invoke the CLI. | **Reuse:** host interfaces. |
 | **Evaluator** | `identity`, `upgrade`, and `doctor` inspect and change managed installation. | **Reuse:** current commands and conflict handling. |

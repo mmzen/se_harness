@@ -10,7 +10,7 @@ These scenarios grant no work or decision authority. **New** means a component m
 
 The plugin supplies `scripts/harnessctl` **[New packaging]** (`scripts/harnessctl.exe` on Windows), with portable Python, a published evaluator, its templates, and package metadata outside the target repository. Skills and hooks call this entry point directly. The commands below use `harnessctl` as shorthand for that plugin path; `REPO` is the absolute target repository path. The installed evaluator must match the repository's required version before these scenarios run.
 
-The only new hook adapter is `scripts/hook-handler`, registered in `hooks/hooks.json`. It translates supported host events into existing `harnessctl` checks. See the [shared calling convention](README.md#shared-component-names-and-calling-convention) for host paths and optional subagent invocation.
+These scenarios use the new before-tool hook script `scripts/check-tool-action`, registered in `hooks/hooks.json`. It translates supported host events into existing `harnessctl` checks. See the [shared calling convention](README.md#shared-component-names-and-calling-convention) for host paths and optional subagent invocation.
 
 **Known boundary:** `--decision ID=ACTOR` records an actor assertion; it does not authenticate a human decision. Skills must use actual authority, but instructions and local hooks cannot guarantee that an agent obeys. Deterministic enforcement remains an open requirement in [issue #347](https://github.com/mmzen/se_harness/issues/347).
 
@@ -52,7 +52,7 @@ For DR-015, `[delegation] class = "execution"` must exist at the PR base, and th
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `skills/change/SKILL.md` guides start mode. | **New:** follows existing `PROC-WO-START`. |
-| **Hook** | `PreToolUse` calls `scripts/hook-handler` for supported actions. | **Reuse:** host event. **New:** adapter and registrations; no automatic start. |
+| **Hook** | `PreToolUse` calls `scripts/check-tool-action` for supported actions. | **Reuse:** host event. **New:** adapter and registrations; no automatic start. |
 | **Script** | `scripts/harnessctl` runs the external published evaluator. | **Adapt:** package the existing CLI with its runtime. |
 | **Tool/interface** | Codex `exec_command`, or Claude Code `Bash` / native `PowerShell`, calls `harnessctl`. | **Reuse:** existing shell tools and CLI arguments. |
 | **Evaluator** | `check`, start `preflight`, and `transition` determine readiness and update the WO. | **Reuse:** existing gates, workflow engine, and delegation checks. |
@@ -94,7 +94,7 @@ harnessctl check REPO --artifact WO-DEMO-009 --json
 
 **Proposed additions**
 
-`change` start mode calls the packaged CLI directly. `scripts/hook-handler` runs existing checks for supported tool events; it does not implement lifecycle rules or authenticate the actor.
+`change` start mode calls the packaged CLI directly. `scripts/check-tool-action` runs existing checks for supported tool events; it does not implement lifecycle rules or authenticate the actor.
 
 **Inputs, outputs, and writes**
 
@@ -131,7 +131,7 @@ How will authenticated human authority be enforced at the effect boundary? The c
 ```text
 change implement [New] → main agent prepares an in-scope edit
         ↓
-Supported PreToolUse → scripts/hook-handler [New] → harnessctl check
+Supported PreToolUse → scripts/check-tool-action [New] → harnessctl check
         ↓
 Agent edits and runs the repository's actual checks
         ↓
@@ -142,7 +142,7 @@ evidence prepare [New] → retain results → harnessctl handoff check
 | --- | --- | --- |
 | 1 | User → `change` skill **[New]** | **Codex:** ask “Use the verity-plane change skill to implement WO-DEMO-010.” **Claude Code:** invoke `/verity-plane:change implement WO-DEMO-010`. The main agent reads `skills/change/SKILL.md` and the WO's required context. |
 | 2 | Agent → edit tools | Prepare an edit through Codex `apply_patch`, or Claude Code `Edit` / `Write`. The main agent implements the change. |
-| 3 | Host `PreToolUse` → `scripts/hook-handler` **[New]**, when supported | For a mapped edit, call existing `harnessctl check --checkpoint pre-action --procedure PROC-WO-IMPLEMENT` with the selected WO and actual declared paths. Translate its result into the host's hook response before the edit. Report actions that the adapter cannot cover. |
+| 3 | Host `PreToolUse` → `scripts/check-tool-action` **[New]**, when supported | For a mapped edit, call existing `harnessctl check --checkpoint pre-action --procedure PROC-WO-IMPLEMENT` with the selected WO and actual declared paths. Translate its result into the host's hook response before the edit. Report actions that the adapter cannot cover. |
 | 4 | Agent → shell tool | Run the commands required by the repository's owner instructions and verification contract. Retain their actual command, exit result, and evidence location, including failures. |
 | 5 | Agent following `evidence` prepare mode **[New]** | Read `skills/evidence/SKILL.md`. Run `harnessctl evidence REPO --artifact WO-DEMO-010 --checkpoint handoff --json`, then fill its packet with the actual results and references. An empty packet proves nothing. |
 | 6 | Main agent → optional `evidence-reviewer` **[New]** | Supply only the selected criteria, diff, and retained results. The read-only helper reports omissions; it cannot decide completion or independent assurance. |
@@ -155,7 +155,7 @@ Evidence preparation is also directly available: ask Codex to use the `verity-pl
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `skills/change/SKILL.md` guides implementation; `skills/evidence/SKILL.md` guides evidence preparation. | **New:** modes call existing commands. |
-| **Hook** | `PreToolUse` calls `scripts/hook-handler` for supported intended edits. | **Reuse:** host event. **New:** action mapping, registrations, and recursion protection. |
+| **Hook** | `PreToolUse` calls `scripts/check-tool-action` for supported intended edits. | **Reuse:** host event. **New:** action mapping, registrations, and recursion protection. |
 | **Script** | `scripts/harnessctl` runs harness checks; repository scripts run the project's checks. | **Adapt:** package the existing CLI. **Reuse:** actual project scripts. |
 | **Tool/interface** | `apply_patch`, `Edit`, or `Write` edits; `exec_command`, `Bash`, or `PowerShell` runs commands. | **Reuse:** existing host tools. |
 | **Evaluator** | Pre-action and handoff `check`, `evidence`, and review `preflight` evaluate scope and evidence. | **Reuse:** workflow compliance and evidence operations. |
@@ -196,7 +196,7 @@ Use the actual selected action's paths and comparison base. `--changes-complete`
 
 **Proposed additions**
 
-The two skill modes and `scripts/hook-handler` call this same CLI. The hook adapter needs explicit supported-action mappings and must avoid recursion. The optional `evidence-reviewer` follows the [shared host registration](README.md#shared-component-names-and-calling-convention).
+The two skill modes and `scripts/check-tool-action` call this same CLI. The hook adapter needs explicit supported-action mappings and must avoid recursion. The optional `evidence-reviewer` follows the [shared host registration](README.md#shared-component-names-and-calling-convention).
 
 **Inputs, outputs, and writes**
 
@@ -257,7 +257,7 @@ For `commit_bound_verification = "not_required"`, follow the evaluator's next st
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `skills/change/SKILL.md` guides completion; `skills/evidence/SKILL.md` guides preparation. | **New:** distinct modes follow existing procedures. |
-| **Hook** | `PreToolUse` calls `scripts/hook-handler` for supported calls. | **Reuse:** host event. **New:** mappings; no automatic completion or preparation. |
+| **Hook** | `PreToolUse` calls `scripts/check-tool-action` for supported calls. | **Reuse:** host event. **New:** mappings; no automatic completion or preparation. |
 | **Script** | `scripts/harnessctl` runs the existing evaluator and provenance functions. | **Adapt:** bundle the runtime and CLI; no new preparation API. |
 | **Tool/interface** | `exec_command`, `Bash`, or `PowerShell` invokes `harnessctl` and separately authorized Git commands. | **Reuse:** existing tools. |
 | **Evaluator** | `transition`, `capture-verification`, and `check` record completion and prepare evidence. | **Reuse:** workflow and provenance engine. |
@@ -359,7 +359,7 @@ The owner may choose a valid rejection or supersession instead. Rejection needs 
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `skills/evidence/SKILL.md` guides review mode. | **New:** follows `PROC-VREC-DECIDE` and valid alternatives. |
-| **Hook** | `PreToolUse` calls `scripts/hook-handler` for a supported transition call. | **Reuse:** host event. **New:** mapping; it cannot authenticate the assurance owner. |
+| **Hook** | `PreToolUse` calls `scripts/check-tool-action` for a supported transition call. | **Reuse:** host event. **New:** mapping; it cannot authenticate the assurance owner. |
 | **Script** | `scripts/harnessctl` runs the existing assurance checks and transition. | **Adapt:** package the current evaluator. |
 | **Tool/interface** | `exec_command`, `Bash`, or `PowerShell` runs the CLI; the agent presents evidence to the owner. | **Reuse:** existing tools and human conversation. |
 | **Evaluator** | Assurance checkpoint `check` and `transition` validate and record the selected outcome. | **Reuse:** gates and transition engine. |
@@ -459,7 +459,7 @@ There is no `harnessctl merge`. A `gh pr merge` call would be a separate externa
 | Component | Role in this scenario | Current implementation → proposed change |
 | --- | --- | --- |
 | **Skill** | `skills/change/SKILL.md` guides integrate mode and the owner handoff. | **New:** follows existing `PROC-REPOSITORY-INTEGRATION`. |
-| **Hook** | `PreToolUse` may call `scripts/hook-handler` before a supported external-action request. | **Reuse:** host event. **New:** local intervention only; it is not the merge boundary. |
+| **Hook** | `PreToolUse` may call `scripts/check-tool-action` before a supported external-action request. | **Reuse:** host event. **New:** local intervention only; it is not the merge boundary. |
 | **Script** | `scripts/harnessctl` runs the selected harness check. | **Adapt:** package the existing CLI; no merge script. |
 | **Tool/interface** | Shell tools call `harnessctl`, `gh pr view`, and `gh pr checks`; the owner uses GitHub. | **Reuse:** current CLI, GitHub CLI, and reviewed human route. |
 | **Evaluator** | `check` reports applicable coverage and the delivery decision. | **Reuse:** existing procedure; no integration command is added. |
