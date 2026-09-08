@@ -14,7 +14,6 @@ from __future__ import annotations
 
 import json
 import os
-import subprocess
 import sys
 import tomllib
 from dataclasses import dataclass
@@ -23,6 +22,9 @@ from typing import Any, Mapping
 from urllib.error import HTTPError, URLError
 from urllib.parse import quote
 from urllib.request import Request, urlopen
+
+from se_harness import front_matter
+from se_harness._process import run_git, text as _text
 
 DELEGATED_ROLE = "delegated-executor"
 DELEGATION_CLASS = "execution"
@@ -114,16 +116,14 @@ def load_configuration(root: Path) -> DelegationConfiguration | None:
 
 
 def _git(root: Path, *arguments: str) -> str:
-    # ECP-COR-013: bounded, and a start failure is the gate's own refusal.
-    try:
-        completed = subprocess.run(
-            ["git", "-C", str(root), *arguments], capture_output=True, text=True, check=False, timeout=60,
-        )
-    except (OSError, subprocess.SubprocessError) as exc:
-        raise DelegationError("WEX-ECP-040", f"git {' '.join(arguments)} could not run: {exc}") from exc
+    # ECP-COR-013, ECP-PRM-003: bounded through the one launcher; a start failure is the gate's own refusal.
+    completed = run_git(
+        root, *arguments, timeout=60,
+        error=lambda message: DelegationError("WEX-ECP-040", f"git {' '.join(arguments)} could not run: {message}"),
+    )
     if completed.returncode != 0:
-        raise DelegationError("WEX-ECP-040", f"git {' '.join(arguments)} failed: {completed.stderr.strip()[:200]}")
-    return completed.stdout.strip()
+        raise DelegationError("WEX-ECP-040", f"git {' '.join(arguments)} failed: {_text(completed.stderr).strip()[:200]}")
+    return _text(completed.stdout).strip()
 
 
 def candidate_head(root: Path) -> str:
@@ -150,12 +150,10 @@ def class_at_base(root: Path, configuration: DelegationConfiguration, work_order
         content = _git(root, "show", f"{base}:{relative}")
     except DelegationError:
         return False
-    front = content.split("+++", 2)
-    if len(front) < 3:
-        return False
+    # ECP-PRM-005: the one parser, line-anchored; the earlier split matched a +++ anywhere in the body.
     try:
-        metadata = tomllib.loads(front[1])
-    except tomllib.TOMLDecodeError:
+        metadata = front_matter.parse(content)
+    except front_matter.FrontMatterError:
         return False
     table = metadata.get("delegation")
     return isinstance(table, dict) and table.get("class") == DELEGATION_CLASS

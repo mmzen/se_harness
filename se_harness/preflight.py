@@ -6,7 +6,6 @@ import importlib.util
 import json
 import platform
 import re
-import subprocess
 import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -25,6 +24,7 @@ from se_harness.installer import (
     template_files,
     tracked_content,
 )
+from se_harness._process import ProcessError, run_git
 from se_harness.hash_bound import assess as assess_hash_bound, is_git_worktree
 from se_harness.integrity import IntegrityError, canonical_text_equal, compare_lock_entry
 
@@ -267,14 +267,8 @@ def _commit_is_ancestor(root: Path, commit: str, reference: str = "HEAD") -> boo
     if not is_git_worktree(root) or not re.fullmatch(r"[0-9a-f]{40}|[0-9a-f]{64}", commit):
         return None
     try:
-        completed = subprocess.run(
-            ["git", "-C", str(root), "merge-base", "--is-ancestor", commit, reference],
-            capture_output=True,
-            text=True,
-            timeout=60,
-            check=False,
-        )
-    except (OSError, subprocess.SubprocessError):
+        completed = run_git(root, "merge-base", "--is-ancestor", commit, reference, timeout=60, error=ProcessError)
+    except ProcessError:
         return None
     if completed.returncode == 0:
         return True

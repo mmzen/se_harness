@@ -413,7 +413,7 @@ class GateGitLauncherTests(unittest.TestCase):
 
         for failure in (FileNotFoundError("git"), subprocess.TimeoutExpired(cmd="git", timeout=60)):
             with self.subTest(failure=type(failure).__name__):
-                with mock.patch("se_harness.gate_source.subprocess.run", side_effect=failure):
+                with mock.patch("se_harness._process.subprocess.run", side_effect=failure):
                     with self.assertRaises(gate_source.DelegationError) as caught:
                         gate_source.candidate_head(Path("."))
                 self.assertEqual("WEX-ECP-040", caught.exception.code)
@@ -422,6 +422,6 @@ class GateGitLauncherTests(unittest.TestCase):
         from se_harness import gate_source
 
         completed = subprocess.CompletedProcess(args=[], returncode=0, stdout="abc123\n", stderr="")
-        with mock.patch("se_harness.gate_source.subprocess.run", return_value=completed) as run:
+        with mock.patch("se_harness._process.subprocess.run", return_value=completed) as run:
             self.assertEqual("abc123", gate_source.candidate_head(Path(".")))
         self.assertEqual(60, run.call_args.kwargs.get("timeout"))

@@ -11,7 +11,6 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import tomllib
 import zipfile
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -24,6 +23,8 @@ from se_harness.evaluator_identity import (
     installed_evaluator_identity,
     wheel_payload_sha256,
 )
+from se_harness import front_matter
+from se_harness._process import run as _launch
 from se_harness.installer import ENGINE_ROOT, HarnessError, template_root
 from se_harness.integrity import IntegrityError, parse_lock
 from se_harness.preflight import inspect_installation
@@ -263,22 +264,14 @@ def _run(
     cwd: Path,
     timeout: int = 180,
 ) -> subprocess.CompletedProcess[bytes]:
-    try:
-        completed = subprocess.run(
-            command,
-            cwd=cwd,
-            env=_safe_environment(),
-            stdin=subprocess.DEVNULL,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            check=False,
-            timeout=timeout,
-        )
-    except (OSError, subprocess.SubprocessError) as exc:
-        raise HarnessError("qualification subprocess could not complete") from exc
-    if len(completed.stdout) > MAX_COMMAND_OUTPUT_BYTES or len(completed.stderr) > MAX_COMMAND_OUTPUT_BYTES:
-        raise HarnessError("qualification subprocess output exceeds the byte limit")
-    return completed
+    # ECP-PRM-001: the one launcher, input closed, both streams captured and capped.
+    return _launch(
+        command, cwd=cwd, env=_safe_environment(), timeout=timeout, output_cap=MAX_COMMAND_OUTPUT_BYTES,
+        error=lambda message: HarnessError(
+            "qualification subprocess output exceeds the byte limit" if "output exceeds" in message
+            else "qualification subprocess could not complete"
+        ),
+    )
 
 
 def _ordinary_root(path: Path) -> Path:
@@ -582,19 +575,8 @@ def qualify_candidate_package(
 
 
 def _front_matter(path: Path) -> dict[str, Any] | None:
-    try:
-        text = path.read_text(encoding="utf-8").replace("\r\n", "\n").replace("\r", "\n")
-    except (OSError, UnicodeError):
-        return None
-    lines = text.splitlines()
-    if not lines or lines[0] != "+++":
-        return None
-    try:
-        end = lines.index("+++", 1)
-        value = tomllib.loads("\n".join(lines[1:end]))
-    except (ValueError, tomllib.TOMLDecodeError):
-        return None
-    return value if isinstance(value, dict) else None
+    # ECP-PRM-005: the one parser.
+    return front_matter.read_or_none(path)
 
 
 def _release_record(root: Path, artifact_id: str) -> tuple[Path, dict[str, Any]]:

@@ -13,6 +13,7 @@ import re
 import tempfile
 import tomllib
 
+from se_harness import front_matter
 from se_harness.gate_source import (
     DELEGATED_RIGHTS,
     DELEGATED_ROLE,
@@ -375,23 +376,9 @@ def _assertion(value: str, label: str, *, limit: int) -> str:
 
 
 def _split_document(data: bytes) -> tuple[list[str], str, str, str]:
-    try:
-        text = data.decode("utf-8-sig")
-    except UnicodeError as exc:
-        raise HarnessError(f"formal artifact is not valid UTF-8: {exc}") from exc
-    lines = text.splitlines(keepends=True)
-    clean = [line.rstrip("\r\n") for line in lines]
-    if not clean or clean[0] != "+++":
-        raise HarnessError("formal artifact has no TOML front matter")
-    try:
-        closing = clean.index("+++", 1)
-    except ValueError as exc:
-        raise HarnessError("formal artifact has no closing front-matter delimiter") from exc
-    opening_ending = lines[0][len(clean[0]) :]
-    newline = opening_ending or ("\r\n" if "\r\n" in text else "\n")
-    body = "".join(lines[closing + 1 :])
-    bom = "\ufeff" if data.startswith(b"\xef\xbb\xbf") else ""
-    return clean[1:closing], body, newline, bom + "+++" + newline
+    # ECP-PRM-005: the one parser; the document's newline and BOM are kept for the write-back.
+    document = front_matter.split_document(data, error=HarnessError)
+    return list(document.front_lines), document.body, document.newline, document.opening
 
 
 def _top_level_end(lines: list[str]) -> int:

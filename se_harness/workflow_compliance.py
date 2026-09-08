@@ -10,6 +10,8 @@ from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterable, Mapping
 
+from se_harness import front_matter
+from se_harness._process import ProcessError, run_git, text as _text
 from se_harness.installer import HarnessError, ensure_target, safe_destination
 from se_harness.preflight import orphaned_ready_records, run_preflight
 from se_harness.workflow_contract import (
@@ -160,17 +162,13 @@ def declared_change_set(paths: Iterable[str], *, complete: bool) -> ChangeSet:
 
 
 def _git_lines(root: Path, arguments: list[str], *, base: str) -> list[str]:
-    import subprocess
-
-    try:
-        completed = subprocess.run(
-            ["git", "-C", str(root), *arguments],
-            capture_output=True, check=False, timeout=120,
-        )
-    except (OSError, subprocess.TimeoutExpired) as exc:
-        raise HarnessError(f"WEX-ECP-003: git is unavailable for base {base!r}: {exc}") from exc
+    # ECP-PRM-003: the one launcher.
+    completed = run_git(
+        root, *arguments, timeout=120,
+        error=lambda message: HarnessError(f"WEX-ECP-003: git is unavailable for base {base!r}: {message}"),
+    )
     if completed.returncode != 0:
-        detail = completed.stderr.decode("utf-8", "replace").strip().splitlines()
+        detail = _text(completed.stderr).strip().splitlines()
         raise HarnessError(
             f"WEX-ECP-003: git {arguments[0]} failed for base {base!r} with exit status {completed.returncode}"
             + (f": {detail[0]}" if detail else "")
@@ -415,16 +413,11 @@ def evidence_packet_path(root: Path, artifact: Any, checkpoint: str) -> Path:
 def _line_ending_conversion(root: Path, relative: str) -> str | None:
     """The attribute rule that would convert this path's line endings, if any (ECP-EVD-006)."""
 
-    import subprocess
-
     if not (root / ".git").exists():
         return None
     try:
-        completed = subprocess.run(
-            ["git", "-C", str(root), "check-attr", "-z", "text", "eol", "--", relative],
-            capture_output=True, check=False, timeout=60,
-        )
-    except (OSError, subprocess.TimeoutExpired):
+        completed = run_git(root, "check-attr", "-z", "text", "eol", "--", relative, timeout=60, error=ProcessError)
+    except ProcessError:
         return None
     if completed.returncode != 0:
         return None
@@ -1363,10 +1356,11 @@ def authoring_ready(artifact: Any) -> tuple[str, str]:
         return "not_assessable", f"{artifact.artifact_id} cannot be read: {exc}"
     prose = _INLINE_CODE.sub("", _FENCE.sub("", text.replace("\r\n", "\n")))
     # the template's five shape comments live in the front matter; markdown headings stay
-    head, separator, body = prose.partition("\n+++\n") if prose.startswith("+++\n") else ("", "", prose)
-    if separator:
+    split = front_matter.partition(prose)  # ECP-PRM-005: line-anchored on the normalized text
+    if split is not None:
+        head, body = split
         head = "\n".join(line for line in head.split("\n") if not line.lstrip().startswith("#"))
-    prose = head + separator + body
+        prose = head + "\n+++\n" + body
     match = _PLACEHOLDER.search(prose)
     if match is not None:
         return "fail", f"{artifact.artifact_id} still carries the template placeholder {match.group(0)}."

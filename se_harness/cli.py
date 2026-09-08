@@ -12,6 +12,7 @@ import sys
 from pathlib import Path
 
 from se_harness import __version__
+from se_harness._process import run as _launch, text as _text
 from se_harness.artifact_layout import create_artifact, scaffold_domain
 from se_harness.installer import (
     engine_script,
@@ -213,13 +214,14 @@ ENGINE_TIMEOUT_SECONDS = 1800
 
 
 def _launch_engine(script: str, argv: list[str], *, cwd: Path, capture: bool) -> subprocess.CompletedProcess:
-    try:
-        return subprocess.run(
-            argv, cwd=cwd, env=_distribution_environment(), check=False,
-            capture_output=capture, text=capture, timeout=ENGINE_TIMEOUT_SECONDS,
-        )
-    except subprocess.TimeoutExpired as exc:
-        raise HarnessError(f"{script} did not finish within {ENGINE_TIMEOUT_SECONDS} seconds") from exc
+    # ECP-PRM-001: the one launcher; a timeout or a start failure is a refusal that names the script.
+    completed = _launch(
+        argv, cwd=cwd, env=_distribution_environment(), timeout=ENGINE_TIMEOUT_SECONDS, capture=capture,
+        error=lambda message: HarnessError(f"{script}: {message}"),
+    )
+    if not capture:
+        return completed
+    return subprocess.CompletedProcess(completed.args, completed.returncode, _text(completed.stdout), _text(completed.stderr))
 
 
 def _run_distribution_script(
