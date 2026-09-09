@@ -2,7 +2,7 @@
 id = "WO-TCM-011"
 type = "work_order"
 title = "Turn the four authoring-advisory families blocking at approval"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-06"
 updated = "2026-09-09"
@@ -43,6 +43,13 @@ to = "in_progress"
 decided_at = "2026-09-09T10:36:54Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 6b6dbfd7829c58e94a4005fcb964100b7f23d236 (check-run 102431792677, source github-checks)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-09T11:08:32Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 1e4e6e9c561c96c7e90e1c4cb7deef56f6f307b8 (check-run 102439759079, source github-checks)."
 +++
 
 # Work Order: Turn the four authoring-advisory families blocking at approval
