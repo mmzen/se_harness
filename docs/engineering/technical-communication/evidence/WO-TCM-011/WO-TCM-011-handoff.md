@@ -130,11 +130,15 @@ and the head it read.
 
 ## Disclosures
 
-1. `tests/test_decision_management.py`'s Open-decisions test writes a
-   requirement in the legacy body shape, which the new check would refuse
-   for its advisories; the test now holds the advisory reader silent with a
-   patch so it keeps reading the two checks it was written for. The gate's
-   own order test covers the interaction.
+1. Three existing tests approve minimal fixture drafts the gate now
+   refuses: `tests/test_decision_management.py`'s Open-decisions test (a
+   requirement in the legacy body shape) and, in
+   `tests/test_workflow_execution.py`, the mutually dependent definition
+   packet and the read-only plan after a lifecycle event. Each reads a
+   transaction property, not authoring, so each now holds the advisory
+   reader silent with a patch, with a comment naming this work order. The
+   gate's own tests cover the interaction; no fixture was rewritten and no
+   root copy is compared to the template unconditionally.
 2. The root copy of `ARTIFACT_AUTHORING.md` is hash-locked and lags the
    candidate guide until the next release is adopted; the in-tree `doctor`
    reads that skew as one more `differs from distribution` finding, by
