@@ -15,3 +15,10 @@ The [applied transition](governance/completion-20260909/completion-applied-01.js
 records only the engineering-owner completion decision. The operator separately
 authorized preparing one ready verification record with VER-PLG-001 and the
 retained evidence. No assurance or merge decision was made. WO-PLG-002 remains draft.
+
+The released evaluator subsequently prepared
+[VREC-PLG-003](../../verification-records/VREC-PLG-003.md) as `ready`, binding
+171 retained evidence files to clean candidate
+`b8d6f04a15bf411aec3e1339b56467ce5a4781df` and VER-PLG-001.
+The next decision belongs to the assurance owner: whether that evidence verifies
+the exact candidate. The record has not been marked verified.
