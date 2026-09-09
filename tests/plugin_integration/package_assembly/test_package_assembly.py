@@ -112,6 +112,24 @@ class PackageAssemblyTests(unittest.TestCase):
             self.prepare()
         self.assertFalse(self.out.exists())
 
+    def test_git_executable_mode_and_host_only_scripts(self):
+        for host in pkg.HOSTS:
+            self.write(f"{host}.py", f"# {host} integration fixture\n")
+            self.plan["hosts"][host][f"scripts/{host}.py"] = f"{host}.py"
+        self.commit_plan()
+        git(self.repo, "update-index", "--chmod=+x", "shared.py")
+        git(self.repo, "commit", "-qm", "executable shared source")
+        self.revision = git(self.repo, "rev-parse", "HEAD")
+        assembly = self.prepare()
+        pkg.build(assembly, self.out)
+        for host in pkg.HOSTS:
+            foreign = "claude" if host == "codex" else "codex"
+            with zipfile.ZipFile(self.out / f"test-plugin-{host}.zip") as archive:
+                executable = archive.getinfo("test-plugin/scripts/shared.py")
+                self.assertEqual((executable.external_attr >> 16) & 0o777, 0o755)
+                self.assertIn(f"test-plugin/scripts/{host}.py", archive.namelist())
+                self.assertNotIn(f"test-plugin/scripts/{foreign}.py", archive.namelist())
+
     def test_independent_release_identity_required(self):
         for changes, message in [({"expected_wheel_sha256": "0" * 64}, "disagrees"),
                                  ({"revision": "HEAD"}, "immutable"),
