@@ -16,12 +16,17 @@ candidate to 0.17.0 (`WO-HUP-017`).
   construction, the build of record taken from the hosted pinned producer.
 - `WO-RLS-023`: cut, qualify and build the candidate.
 - `VREC-SEH-026`: the aggregate verification record over every gate, bound
-  to the candidate; prepared and verified after the candidate exists.
-- `RLS-SEH-026`: the release record binding the build of record; prepared,
-  bound and released after the verification.
+  to the candidate `a9f4905d`, verified on 2026-09-09.
+- `RLS-SEH-026`: the release record binding the build of record (wheel
+  `305c7cbc…`, sdist `dda4bc73…`, run 34326469527), reproduced from the
+  bound record by run 34328103886, released on 2026-09-09.
 
 Drafted on 2026-09-09 on the repository owner's instruction "prepare
 release 0.17.0", with `main` at `4ea947be`, no work order in progress and
-every required member verified. This packet authorizes no publication; the
+every required member verified. The release owner approved the contract and
+the engineering owner approved the work order the same day, by selecting the
+presented option "Approve both" (PR #424); the engineering owner then gave
+"merged, start", and `WO-RLS-023` ran on `release/0.17.0` off `main` at
+`2bd2ae7c` (PR #425). This packet authorizes no publication; the
 verification and release decisions are recorded on `VREC-SEH-026` and
 `RLS-SEH-026`.

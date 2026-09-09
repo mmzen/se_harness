@@ -2,7 +2,7 @@
 id = "WO-RLS-023"
 type = "work_order"
 title = "Cut, qualify and build the se-harness 0.17.0 candidate from main"
-status = "approved"
+status = "implemented"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -27,6 +27,20 @@ to = "approved"
 decided_at = "2026-09-09T06:44:05Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-09-09 by selecting the presented option 'Approve both (Recommended)', after the release owner approved REL-SEH-028 in the same transaction. WO-RLS-023 carries no delegation class: its start, completion and record preparation are the engineering owner's explicit decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-09T06:53:26Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-09-09, given with the words 'merged, start' after the approved packet #424 merged to main at 2bd2ae7c. Start preflight PASS with no diagnostics over the reading manifest; REL-SEH-028 approved by the release owner on 2026-09-09; branch release/0.17.0 cut from main at 2bd2ae7c."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-09T07:56:31Z"
+decided_by = "engineering-owner"
+reason = "Marked implemented by the accountable engineering owner on 2026-09-09 under DR-WO-COMPLETE, by selecting the presented option 'Complete and prepare the record (Recommended)': every reading of REL-SEH-028's candidate-qualification section is recorded in the evidence packet with its evaluator and platform, the census from v0.16.0 is complete with the seven exemptions the contract names and WO-TST-004 traced through the trace commit 10e4face, the hosted build reading at 10e4face was byte-identical twice on the pinned producer (run 34321911662), every hosted lane at 308b2304 on both events is success, and the Git-derived handoff check completes with every predicate passing. This commit is the candidate the records bind."
 +++
 
 # Work Order: Cut, qualify and build the se-harness 0.17.0 candidate from main
