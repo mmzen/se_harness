@@ -1,6 +1,19 @@
 # Plugin integration
 
-These deliveries introduce the Codex and Claude Code compatibility probes from [PR #416](https://github.com/mmzen/se_harness/pull/416), reviewed at `be8b4126`. Lifecycle authority is recorded in each artifact's metadata. Each probe uses its own work order and implementation branch.
+These deliveries introduce the plugin packets from [PR #416](https://github.com/mmzen/se_harness/pull/416), reviewed at `be8b4126`. Lifecycle authority is recorded in each artifact's metadata. Each implementation uses its own work order and branch.
+
+## Shared assembly and runtime definitions (D03)
+
+WO-PLG-001 is in progress. WO-PLG-002 remains draft; introducing its approved
+definitions does not start its implementation.
+
+- [Published evaluator payload](requirements/REQ-PLG-001.md) and [shared source](requirements/REQ-PLG-002.md)
+- [Assembly specification](specifications/SPEC-PLG-001.md), [verification](verification/VER-PLG-001.md), [work order](work-orders/WO-PLG-001.md), and [evidence](evidence/WO-PLG-001/README.md)
+- [Python prerequisite](requirements/REQ-PLG-003.md), [runtime identity](requirements/REQ-PLG-004.md), and [atomic environment creation](requirements/REQ-PLG-005.md)
+- [Runtime specification](specifications/SPEC-PLG-002.md), [verification](verification/VER-PLG-002.md), and [work order](work-orders/WO-PLG-002.md)
+- [Shared architecture](architecture/ARCH-PLG-001.md) and [packaging decision](architecture/adr/ADR-PLG-001.md)
+
+## Compatibility probes (D01 and D02)
 
 - [Requirement: establish the Codex activation sequence](requirements/REQ-PLG-006.md)
 - [Specification: reproducible Codex compatibility assessment](specifications/SPEC-PLG-003.md)

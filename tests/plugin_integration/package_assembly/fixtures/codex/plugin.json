@@ -1,0 +1,6 @@
+{
+  "name": "verity-plane-assembly-fixture",
+  "version": "0.0.0",
+  "description": "Non-promotable package assembly fixture. No governance or installation behavior.",
+  "skills": "./skills/"
+}

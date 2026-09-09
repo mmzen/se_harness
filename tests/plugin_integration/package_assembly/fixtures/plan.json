@@ -1,0 +1,17 @@
+{
+  "schema": "se-harness-plugin-assembly-v1",
+  "name": "verity-plane-assembly-fixture",
+  "shared": {
+    "README.md": "tests/plugin_integration/package_assembly/fixtures/shared/README.md",
+    "skills/assembly-fixture/SKILL.md": "tests/plugin_integration/package_assembly/fixtures/shared/skills/assembly-fixture/SKILL.md",
+    "scripts/fixture.py": "tests/plugin_integration/package_assembly/fixtures/shared/scripts/fixture.py"
+  },
+  "hosts": {
+    "codex": {
+      ".codex-plugin/plugin.json": "tests/plugin_integration/package_assembly/fixtures/codex/plugin.json"
+    },
+    "claude": {
+      ".claude-plugin/plugin.json": "tests/plugin_integration/package_assembly/fixtures/claude/plugin.json"
+    }
+  }
+}
