@@ -1,0 +1,10 @@
+{
+  "tested_source_revision": "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6",
+  "released_record_revision": "cb4255a985c5bb85afeda7c2a5f3ad9d311ac05b",
+  "sha256": {
+    "repository_tools/plugin_distribution.py": "399c139220269f723fed5ea3db89363fce1d0aa9a161636f636ac500aaff17dc",
+    "scripts/build_plugin_archives.py": "d27923fa5e8a75cd26ad8c8c57c0ccafae2f1953b5e0e3f7408a886040b0c75b",
+    "tests/plugin_integration/package_assembly/run_acceptance.py": "43c95480c60cc4a21886ce68da438176359b7c3f7c2c4c6c3d5df84bd6425e1a",
+    "tests/plugin_integration/package_assembly/test_package_assembly.py": "364c9aa744c5669659471f3abe79be18d4283153aa285eab00f15f1c284b33f1"
+  }
+}

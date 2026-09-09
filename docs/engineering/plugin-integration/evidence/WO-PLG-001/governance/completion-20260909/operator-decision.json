@@ -1,0 +1,12 @@
+{
+  "date": "2026-09-09",
+  "source": "Explicit operator message in this Codex task",
+  "message": "you can mark WO-PLG-001 as completed, and prepare the verification record",
+  "selected_work_order": "WO-PLG-001",
+  "decisions": [
+    "DR-WO-COMPLETE",
+    "DR-VREC-PREPARE"
+  ],
+  "assurance_decision": false,
+  "merge_authorized": false
+}

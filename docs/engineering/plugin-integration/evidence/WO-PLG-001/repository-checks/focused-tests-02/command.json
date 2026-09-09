@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-eval-017/Scripts/python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/plugin_integration/package_assembly",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-assembly",
+  "exit_status": 0,
+  "started_at": "2026-09-09T18:44:06.230817+00:00",
+  "duration_seconds": 37.131
+}

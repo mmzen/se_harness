@@ -1,0 +1,16 @@
+{
+  "name": "verity-plane-assembly-fixture",
+  "version": "0.0.0",
+  "description": "Non-promotable package assembly fixture. No governance or installation behavior.",
+  "skills": "./skills/",
+  "author": {"name": "SE Harness"},
+  "interface": {
+    "displayName": "Assembly Fixture",
+    "shortDescription": "Inspect an inert package assembly fixture.",
+    "longDescription": "This non-promotable fixture tests package layout and shared bytes. It provides no governance, installation or production host integration.",
+    "developerName": "SE Harness",
+    "category": "Developer Tools",
+    "capabilities": ["Inspect assembly fixture"],
+    "defaultPrompt": ["Explain why this package is an assembly fixture only."]
+  }
+}

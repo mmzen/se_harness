@@ -1,0 +1,1041 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "transition",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "ADR-PLG-001",
+    "artifacts": [
+      "ADR-PLG-001",
+      "ARCH-PLG-001",
+      "REQ-PLG-001",
+      "REQ-PLG-002",
+      "REQ-PLG-003",
+      "REQ-PLG-004",
+      "REQ-PLG-005",
+      "SPEC-PLG-001",
+      "SPEC-PLG-002",
+      "VER-PLG-001",
+      "VER-PLG-002"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "transition",
+    "workflow_rule_id": "WFL-DEFINITION-COMPLETE",
+    "procedure_id": "PROC-DEFINITION-COMPLETE",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G2-ARCHITECTURE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G2-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:ADR-PLG-001"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G2-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G2-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "ADR-PLG-001"
+              }
+            ],
+            "message": "ADR-PLG-001 carries no placeholder and no open decision."
+          },
+          {
+            "id": "QGP-G2-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:ADR-PLG-001"
+              }
+            ],
+            "message": "No open decision blocks ADR-PLG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "ADR-PLG-001"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for ADR-PLG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-G2-ARCHITECTURE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G2-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:ARCH-PLG-001"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G2-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G2-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "ARCH-PLG-001"
+              }
+            ],
+            "message": "ARCH-PLG-001 carries no placeholder and no open decision."
+          },
+          {
+            "id": "QGP-G2-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:ARCH-PLG-001"
+              }
+            ],
+            "message": "No open decision blocks ARCH-PLG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "ARCH-PLG-001"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for ARCH-PLG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-PLG-001"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-PLG-001"
+              }
+            ],
+            "message": "REQ-PLG-001 carries no placeholder and no open decision."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-PLG-001"
+              }
+            ],
+            "message": "No open decision blocks REQ-PLG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-PLG-001"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-PLG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-PLG-002"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-PLG-002"
+              }
+            ],
+            "message": "REQ-PLG-002 carries no placeholder and no open decision."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-PLG-002"
+              }
+            ],
+            "message": "No open decision blocks REQ-PLG-002."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-PLG-002"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-PLG-002."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-PLG-003"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-PLG-003"
+              }
+            ],
+            "message": "REQ-PLG-003 carries no placeholder and no open decision."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-PLG-003"
+              }
+            ],
+            "message": "No open decision blocks REQ-PLG-003."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-PLG-003"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-PLG-003."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-PLG-004"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-PLG-004"
+              }
+            ],
+            "message": "REQ-PLG-004 carries no placeholder and no open decision."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-PLG-004"
+              }
+            ],
+            "message": "No open decision blocks REQ-PLG-004."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-PLG-004"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-PLG-004."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-PLG-005"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-PLG-005"
+              }
+            ],
+            "message": "REQ-PLG-005 carries no placeholder and no open decision."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-PLG-005"
+              }
+            ],
+            "message": "No open decision blocks REQ-PLG-005."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-PLG-005"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-PLG-005."
+          }
+        ]
+      },
+      {
+        "id": "QG-G2-ARCHITECTURE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G2-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:SPEC-PLG-001"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G2-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G2-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "SPEC-PLG-001"
+              }
+            ],
+            "message": "SPEC-PLG-001 carries no placeholder and no open decision."
+          },
+          {
+            "id": "QGP-G2-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:SPEC-PLG-001"
+              }
+            ],
+            "message": "No open decision blocks SPEC-PLG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "SPEC-PLG-001"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for SPEC-PLG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-G2-ARCHITECTURE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G2-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:SPEC-PLG-002"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G2-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G2-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "SPEC-PLG-002"
+              }
+            ],
+            "message": "SPEC-PLG-002 carries no placeholder and no open decision."
+          },
+          {
+            "id": "QGP-G2-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:SPEC-PLG-002"
+              }
+            ],
+            "message": "No open decision blocks SPEC-PLG-002."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "SPEC-PLG-002"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for SPEC-PLG-002."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:VER-PLG-001"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "VER-PLG-001"
+              }
+            ],
+            "message": "VER-PLG-001 carries no placeholder and no open decision."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:VER-PLG-001"
+              }
+            ],
+            "message": "No open decision blocks VER-PLG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "VER-PLG-001"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for VER-PLG-001."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:VER-PLG-002"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "VER-PLG-002"
+              }
+            ],
+            "message": "VER-PLG-002 carries no placeholder and no open decision."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:VER-PLG-002"
+              }
+            ],
+            "message": "No open decision blocks VER-PLG-002."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "VER-PLG-002"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for VER-PLG-002."
+          }
+        ]
+      }
+    ]
+  },
+  "procedure": {
+    "id": "PROC-DEFINITION-COMPLETE",
+    "current_step": "STEP-DEFINITION-COMPLETE",
+    "steps": [
+      {
+        "id": "STEP-DEFINITION-COMPLETE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G1-DEFINITION",
+          "QG-G2-ARCHITECTURE"
+        ],
+        "effects": [
+          "Permits a decision on ADR-PLG-001 only."
+        ],
+        "non_effects": [
+          "Related definitions remain unchanged unless separately selected."
+        ],
+        "decision_right": "DR-DEFINITION-DECIDE",
+        "role": "definition-owner",
+        "artifact": "ADR-PLG-001",
+        "decision": "whether the selected definition is complete",
+        "outcomes": [
+          "implemented",
+          "reject",
+          "stop"
+        ],
+        "response": "Decide the selected definition ADR-PLG-001 only."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "ADR-PLG-001",
+        "status": "draft"
+      },
+      {
+        "id": "ARCH-PLG-001",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-PLG-001",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-PLG-002",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-PLG-003",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-PLG-004",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-PLG-005",
+        "status": "draft"
+      },
+      {
+        "id": "SPEC-PLG-001",
+        "status": "draft"
+      },
+      {
+        "id": "SPEC-PLG-002",
+        "status": "draft"
+      },
+      {
+        "id": "VER-PLG-001",
+        "status": "draft"
+      },
+      {
+        "id": "VER-PLG-002",
+        "status": "draft"
+      }
+    ],
+    "after": [
+      {
+        "id": "ADR-PLG-001",
+        "status": "approved"
+      },
+      {
+        "id": "ARCH-PLG-001",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-PLG-001",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-PLG-002",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-PLG-003",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-PLG-004",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-PLG-005",
+        "status": "approved"
+      },
+      {
+        "id": "SPEC-PLG-001",
+        "status": "approved"
+      },
+      {
+        "id": "SPEC-PLG-002",
+        "status": "approved"
+      },
+      {
+        "id": "VER-PLG-001",
+        "status": "approved"
+      },
+      {
+        "id": "VER-PLG-002",
+        "status": "approved"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "ADR-PLG-001",
+        "path": "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-001.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "ARCH-PLG-001",
+        "path": "docs/engineering/plugin-integration/architecture/ARCH-PLG-001.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-PLG-001",
+        "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-001.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-PLG-002",
+        "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-002.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-PLG-003",
+        "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-003.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-PLG-004",
+        "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-004.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-PLG-005",
+        "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-005.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "SPEC-PLG-001",
+        "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-001.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "SPEC-PLG-002",
+        "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-002.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "VER-PLG-001",
+        "path": "docs/engineering/plugin-integration/verification/VER-PLG-001.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "VER-PLG-002",
+        "path": "docs/engineering/plugin-integration/verification/VER-PLG-002.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Applied 11 explicit lifecycle transition(s) atomically."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "ADR-PLG-001 is approved."
+    ],
+    "decision_required": {
+      "decision_right": "DR-DEFINITION-DECIDE",
+      "role": "definition-owner",
+      "artifact": "ADR-PLG-001",
+      "decision": "whether the selected definition is complete",
+      "outcomes": [
+        "implemented",
+        "reject",
+        "stop"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-DEFINITION-COMPLETE",
+      "step_id": "STEP-DEFINITION-COMPLETE",
+      "action": "whether the selected definition is complete"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Decide the selected definition ADR-PLG-001 only."
+    },
+    "alternatives": []
+  },
+  "result_sha256": "13edac0f15870ed95886acba8a143b25282e772c4ab5f3f76e0aef0e779b6dc1"
+}

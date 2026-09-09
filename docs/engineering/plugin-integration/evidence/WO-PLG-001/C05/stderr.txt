@@ -1,0 +1,7 @@
+warning: unable to access 'C:\Users\mathi/.config/git/ignore': Permission denied
+
+
+
+
+
+{"accepted": false, "error": "conflicting output path: scripts/fixture.py"}

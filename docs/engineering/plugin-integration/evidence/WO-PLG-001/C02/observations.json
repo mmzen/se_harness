@@ -1,0 +1,45 @@
+{
+  "checks": [
+    {
+      "check": "build accepted exit",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "build accepted flag",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "output_listing": {},
+      "rejection": "missing or invalid released wheel: se_harness-0.17.0-py3-none-any.whl"
+    },
+    {
+      "check": "build accepted exit",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "build accepted flag",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "output_listing": {},
+      "rejection": "released wheel SHA-256 mismatch: se_harness-0.17.0-py3-none-any.whl"
+    }
+  ],
+  "conclusion": "pass",
+  "exit_statuses": [
+    1,
+    1
+  ],
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "source_evidence_paths": [
+    "actions.txt",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "source_revision": "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6"
+}

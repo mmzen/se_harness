@@ -1,0 +1,3 @@
+Plugin validation failed:
+- plugin.json field `author` must be an object
+- plugin.json field `interface` must be an object

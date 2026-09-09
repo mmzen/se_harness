@@ -1,0 +1,9 @@
+warning: unable to access 'C:\Users\mathi/.config/git/ignore': Permission denied
+
+
+
+
+
+{"accepted": false, "error": "missing committed source: missing-shared.py"}
+
+{"accepted": false, "error": "output differs from committed source/inventory: claude/verity-plane-assembly-fixture/scripts/fixture.py"}

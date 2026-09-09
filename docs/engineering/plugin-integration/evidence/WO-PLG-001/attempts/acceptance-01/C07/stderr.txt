@@ -1,0 +1,1 @@
+{"accepted": false, "error": "inventory codex/verity-plane-assembly-fixture/assembly-inventory.json: missing entries ['scripts/fixture.py']; extra entries []"}

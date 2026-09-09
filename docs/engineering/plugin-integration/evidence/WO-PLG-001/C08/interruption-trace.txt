@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-assembly\tests\plugin_integration\package_assembly\run_acceptance.py", line 222, in c08
+    pkg.build(assembly, output)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-assembly\repository_tools\plugin_distribution.py", line 327, in build
+    _write(directory / path, raw)
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-assembly\tests\plugin_integration\package_assembly\run_acceptance.py", line 216, in interrupt
+    raise OSError("injected interruption after first copied file")
+OSError: injected interruption after first copied file

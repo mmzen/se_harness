@@ -1,0 +1,162 @@
+{
+  "checks": [
+    {
+      "check": "independent archive SHA-256",
+      "expected": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+      "observed": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced"
+    },
+    {
+      "check": "independent canonical hash exit",
+      "expected": 0,
+      "observed": 0
+    },
+    {
+      "check": "build accepted exit",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "check": "build accepted flag",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "check": "build accepted exit",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "check": "build accepted flag",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "check": "repeat archive digests",
+      "expected": {
+        "verity-plane-assembly-fixture-claude.zip": "ecc569938129c906fd27f8bb5ddf23c583a9327eaf7b6c7bfe4abce23599ce7f",
+        "verity-plane-assembly-fixture-codex.zip": "49da8a3ab1bf3cf223b176a1c09f4b31eabbeb2ce5f58a862228089053fbe5fc"
+      },
+      "observed": {
+        "verity-plane-assembly-fixture-claude.zip": "ecc569938129c906fd27f8bb5ddf23c583a9327eaf7b6c7bfe4abce23599ce7f",
+        "verity-plane-assembly-fixture-codex.zip": "49da8a3ab1bf3cf223b176a1c09f4b31eabbeb2ce5f58a862228089053fbe5fc"
+      }
+    },
+    {
+      "check": "codex exact wheel bytes",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "check": "codex payload hash",
+      "expected": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405",
+      "observed": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405"
+    },
+    {
+      "check": "codex source revision",
+      "expected": "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6",
+      "observed": "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6"
+    },
+    {
+      "check": "codex source bytes: README.md",
+      "expected": "bf137f605a3261b5c1074b1f2d147fd416110d8f89e1b585a134edc570634cdd",
+      "observed": "bf137f605a3261b5c1074b1f2d147fd416110d8f89e1b585a134edc570634cdd"
+    },
+    {
+      "check": "codex source bytes: skills/assembly-fixture/SKILL.md",
+      "expected": "1ab0f7b8ba3c47a9ef65e040b749fc33e5b10082fe920669541f5450758b2372",
+      "observed": "1ab0f7b8ba3c47a9ef65e040b749fc33e5b10082fe920669541f5450758b2372"
+    },
+    {
+      "check": "codex source bytes: scripts/fixture.py",
+      "expected": "ee4830c3650a253bcf40ad23b2e2d2f003bb907d3239906c91412c396441dea4",
+      "observed": "ee4830c3650a253bcf40ad23b2e2d2f003bb907d3239906c91412c396441dea4"
+    },
+    {
+      "check": "codex file listing",
+      "expected": [
+        ".codex-plugin/plugin.json",
+        "README.md",
+        "packages/se_harness-0.17.0-py3-none-any.whl",
+        "scripts/fixture.py",
+        "skills/assembly-fixture/SKILL.md"
+      ],
+      "observed": [
+        ".codex-plugin/plugin.json",
+        "README.md",
+        "packages/se_harness-0.17.0-py3-none-any.whl",
+        "scripts/fixture.py",
+        "skills/assembly-fixture/SKILL.md"
+      ]
+    },
+    {
+      "check": "claude exact wheel bytes",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "check": "claude payload hash",
+      "expected": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405",
+      "observed": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405"
+    },
+    {
+      "check": "claude source revision",
+      "expected": "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6",
+      "observed": "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6"
+    },
+    {
+      "check": "claude source bytes: README.md",
+      "expected": "bf137f605a3261b5c1074b1f2d147fd416110d8f89e1b585a134edc570634cdd",
+      "observed": "bf137f605a3261b5c1074b1f2d147fd416110d8f89e1b585a134edc570634cdd"
+    },
+    {
+      "check": "claude source bytes: skills/assembly-fixture/SKILL.md",
+      "expected": "1ab0f7b8ba3c47a9ef65e040b749fc33e5b10082fe920669541f5450758b2372",
+      "observed": "1ab0f7b8ba3c47a9ef65e040b749fc33e5b10082fe920669541f5450758b2372"
+    },
+    {
+      "check": "claude source bytes: scripts/fixture.py",
+      "expected": "ee4830c3650a253bcf40ad23b2e2d2f003bb907d3239906c91412c396441dea4",
+      "observed": "ee4830c3650a253bcf40ad23b2e2d2f003bb907d3239906c91412c396441dea4"
+    },
+    {
+      "check": "claude file listing",
+      "expected": [
+        ".claude-plugin/plugin.json",
+        "README.md",
+        "packages/se_harness-0.17.0-py3-none-any.whl",
+        "scripts/fixture.py",
+        "skills/assembly-fixture/SKILL.md"
+      ],
+      "observed": [
+        ".claude-plugin/plugin.json",
+        "README.md",
+        "packages/se_harness-0.17.0-py3-none-any.whl",
+        "scripts/fixture.py",
+        "skills/assembly-fixture/SKILL.md"
+      ]
+    }
+  ],
+  "conclusion": "pass",
+  "exit_statuses": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "source_evidence_paths": [
+    "actions.txt",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "source_revision": "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6"
+}
