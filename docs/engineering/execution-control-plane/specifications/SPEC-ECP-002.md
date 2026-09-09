@@ -5,7 +5,7 @@ title = "Evidence packets, identifier allocation, and pull-request body generati
 status = "approved"
 owners = ["technical-owner", "quality-owner", "repository-owner"]
 created = "2026-08-27"
-updated = "2026-08-28"
+updated = "2026-09-09"
 
 [relations]
 specifies = ["REQ-ECP-003", "REQ-ECP-004", "REQ-ECP-005"]
@@ -213,3 +213,14 @@ upgrade. The seeded pull-request template gains one line pointing at
   by any predicate.
 - The wording of the ref list in `ECP-IDA-005`.
 - Whether `pr-body` accepts `--output FILE` in addition to standard output.
+
+## Amendment record
+
+**The substring path is removed, under `WO-AUT-006` (`SPEC-AUT-004`
+`AUT-WIN-007`, `AUT-WIN-008`), recorded 2026-09-09.** The Compatibility
+section above granted substring-matched evidence one release with
+`W-ECP-002`; that release, 0.17.0, has shipped. `QGP-G4I-EVIDENCE` now reads
+the machine header only: a packet without one is `not_assessable`, and the
+message names `harnessctl evidence` as the corrective. `W-ECP-002` leaves the
+registry with no tombstone. The rule text is unchanged; nothing else in this
+specification changes.

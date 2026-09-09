@@ -5,7 +5,7 @@ title = "One kernel: schema 2, one selector, one precondition engine"
 status = "approved"
 owners = ["technical-owner", "quality-owner", "repository-owner"]
 created = "2026-08-27"
-updated = "2026-08-28"
+updated = "2026-09-09"
 
 [relations]
 specifies = ["REQ-ECP-009", "REQ-ECP-010"]
@@ -206,3 +206,13 @@ governed"). `SPEC-CIP-001` line 96 mentions `[--result-schema 2]` on
 ## Amendment record
 
 **`ECP-KRN-007`'s filter moves to preflight under `WO-ECP-035` (`SPEC-ECP-024` `ECP-ENG-014` and `ECP-ENG-025`), recorded 2026-09-08.** The one preflight-diagnostic filter is `preflight.lifecycle_relevant`; `run_preflight` applies it, reporting candidate-versus-released skew apart and never blocking on it, and `workflow_compliance.lifecycle_relevant_diagnostics` applies the same classifier to any report it is handed, so `check --checkpoint start` and `preflight` read one verdict. The conformance test of the rule stands. Nothing else in this specification changes.
+
+**The `WEX-ECP-030` hint for a retired quality-gates schema is gone, under
+`WO-AUT-006` (`SPEC-AUT-004` `AUT-WIN-009`, `AUT-WIN-010`), recorded
+2026-09-09.** The Compatibility sentence "loading an older installed copy is
+`WEX-ECP-030` until the consumer upgrades" described a hint the loader added
+for `se-harness-quality-gates-v1`; no installed repository carries that schema
+and the hint is removed. A contract on any schema the loader does not accept
+meets the loader's own schema error. `WEX-ECP-030` keeps every meaning
+`ECP-KRN-009` gives it for a lifecycle edge without a transition binding. The
+rule text is unchanged; nothing else in this specification changes.

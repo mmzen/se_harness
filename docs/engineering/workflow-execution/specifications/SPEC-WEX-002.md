@@ -5,7 +5,7 @@ title = "Scoped compliance, procedure, and restitution contract"
 status = "approved"
 owners = ["technical-owner", "repository-owner", "quality-owner"]
 created = "2026-08-21"
-updated = "2026-08-21"
+updated = "2026-09-09"
 
 [relations]
 specifies = ["REQ-WEX-007", "REQ-WEX-008", "REQ-WEX-009", "REQ-WEX-010"]
@@ -466,3 +466,13 @@ reports completed effects honestly, marks incomplete expected effects under
 The public checkpoint command, scope grammar, policy schemas, gate aggregation,
 procedure step kinds, schema-2 restitution fields and order, compatibility
 boundary, and failure codes are not delegated implementation choices.
+
+## Amendment record
+
+**The v1 loading hint of the 2026-08-28 amendment is withdrawn, under
+`WO-AUT-006` (`SPEC-AUT-004` `AUT-WIN-009`), recorded 2026-09-09.** That
+amendment said "loading a v1 copy is `WEX-ECP-030`"; since `WO-AUT-006` a
+`QUALITY_GATES.json` on `se-harness-quality-gates-v1` meets the loader's own
+schema error, and `WEX-ECP-030` names transition-binding faults only. The
+contract version stays `se-harness-quality-gates-v2`; nothing else in this
+specification changes.
