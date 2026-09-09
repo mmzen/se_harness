@@ -24,6 +24,9 @@ recorded in [governance](governance/). No completion or assurance transition was
   candidate CLI, and distribution-metadata results.
 - The fixture instructions and focused test evidence document repeatable local
   checks. Passing observer tests are not passing host acceptance cases.
+- The [2026-09-09 resumption check](20260909-resumption/auth-status.json)
+  confirms that the existing isolated profile is still signed out. The separate
+  official sign-in flow contributes no additional acceptance claim.
 - No live authenticated conversation completed; setup/repair through the host's
   real tools and the remaining resume, compaction, trust, and permission observations
   must still be collected. Isolated sign-in is pending with the operator.
