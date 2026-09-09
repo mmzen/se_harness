@@ -134,9 +134,17 @@ def template_files() -> list[TemplateFile]:
     return _templates()
 
 
+#: SPEC-DST-027 DST-MWF-006: the Git dot-files read a line as a pattern unless it
+#: starts with a hash, so their managed block takes the hash-prefixed pair; the
+#: Markdown fragments keep the HTML comments. ``_extract_block`` accepts both
+#: pairs, so an upgrade of a block written with the other pair rewrites only the
+#: block (DST-MWF-007).
+HASH_MARKER_TARGETS = frozenset({Path(".gitattributes"), Path(".gitignore")})
+
+
 def _block(fragment: bytes, target: Path) -> bytes:
     content = fragment.decode("utf-8").strip()
-    if target == Path(".gitattributes"):
+    if target in HASH_MARKER_TARGETS:
         return f"{ATTRIBUTE_BEGIN_MARKER}\n{content}\n{ATTRIBUTE_END_MARKER}\n".encode("utf-8")
     return f"{BEGIN_MARKER}\n{content}\n{END_MARKER}\n".encode("utf-8")
 

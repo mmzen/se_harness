@@ -173,6 +173,8 @@ Product implementation or release authorization does not authorize this later ro
 
 The apply operation is transactional: customized, conflicting, or ambiguous managed content blocks the operation without a partial managed-file update. A missing unmodified managed file may be restored when the reviewed plan classifies it as `add`. Owner-controlled content and managed fragments outside their bounded markers are preserved.
 
+The markers of a fragment follow its file's comment syntax. `.gitattributes` and, since `WO-DST-026`, `.gitignore` bound their block with `# se-harness:begin` and `# se-harness:end`, which Git reads as comments; `AGENTS.md` and `CLAUDE.md` keep the HTML-comment pair. A repository whose `.gitignore` block still carries the HTML pair is planned as `update` in `fragment` mode at its next `upgrade`, and `--apply` rewrites only the block between the markers, so every owner line outside it is byte-identical afterwards. A block edited inside is `customized`, as for any fragment, and nothing is written.
+
 This rule also covers every managed `.agents/skills/` core, Codex policy file,
 and `.claude/skills/` adapter. If a repository edits a managed skill surface,
 the upgrade plan reports it as customized and preserves the bytes. Move
