@@ -2,7 +2,7 @@
 id = "VREC-PLG-001"
 type = "verification_record"
 title = "Verification candidate for WO-PLG-003"
-status = "ready"
+status = "verified"
 owners = ["engineering-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/plugin-integration/evidence/WO-PLG-003/20260
 evaluator_evidence_path = "docs/engineering/plugin-integration/evidence/VREC-PLG-001-evaluator.json"
 evaluator_evidence_sha256 = "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
 
+verified_at = "2026-09-09T18:05:31Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-PLG-003"]
 conforms_to = ["VER-PLG-003"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-09T18:05:31Z"
+decided_by = "assurance-owner"
+reason = "Operator explicitly stated \"i verify both record\" in this Codex task on 2026-09-09, selecting VREC-PLG-001 and VREC-PLG-002 for the assurance decision. Record the assurance-owner decision for VREC-PLG-001 at its bound candidate a8c880a11e0cece6932695b7951cfa047a9f691c. The retained C02 and platform coverage limits remain disclosed; no unperformed case is claimed as passing. This decision changes only this VREC, without changing WO state or authorizing production support, release or PR merge."
 +++
 
 # Verification Record Candidate
