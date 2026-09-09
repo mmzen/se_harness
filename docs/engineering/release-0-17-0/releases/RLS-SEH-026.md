@@ -2,7 +2,7 @@
 id = "RLS-SEH-026"
 type = "release_record"
 title = "Release candidate 0.17.0"
-status = "ready"
+status = "released"
 owners = ["release-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -15,6 +15,8 @@ evaluator_evidence_path = "docs/engineering/release-0-17-0/evidence/RLS-SEH-026-
 evaluator_evidence_sha256 = "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
 tag = "v0.17.0"
 
+released_at = "2026-09-09T08:28:14Z"
+authorized_by = "release-owner"
 [distribution]
 schema = 2
 kind = "python-wheel-sdist"
@@ -34,6 +36,13 @@ build_recipe_sha256 = "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92
 satisfies = ["REL-SEH-028"]
 includes_verification = ["VREC-SEH-026"]
 releases_work = ["WO-AUT-005", "WO-CIP-007", "WO-DST-025", "WO-DST-026", "WO-ECP-027", "WO-ECP-028", "WO-ECP-029", "WO-ECP-030", "WO-ECP-031", "WO-ECP-032", "WO-ECP-033", "WO-ECP-034", "WO-ECP-035", "WO-ECP-036", "WO-HUP-017", "WO-RLS-023", "WO-RSK-010", "WO-TST-004"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "released"
+decided_at = "2026-09-09T08:28:14Z"
+decided_by = "release-owner"
+reason = "Released by the accountable release owner on 2026-09-09 by selecting the presented option 'Release RLS-SEH-026': the record binds the candidate a9f4905d, the wheel 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced and the sdist dda4bc73190674f8837ab0669b6aeb205c72b9428cad052b6368ea229860c318 of the hosted recipe-bound build of record (run 34326469527), which the replay from the bound record (run 34328103886) reproduced byte for byte twice; VREC-SEH-026 is verified over the eighteen gates of REL-SEH-028; every lane at 169d477c is success. The released transition rides PR #425 to main; publication is the separate dispatch of publish-pypi.yml with release_record=RLS-SEH-026 and the pypi environment's own approval."
 +++
 
 # Release Record Candidate
