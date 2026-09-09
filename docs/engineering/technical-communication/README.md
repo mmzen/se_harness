@@ -284,6 +284,14 @@ specifications with more than ten each. `WO-TCM-011` starts only after
 release of advisories.
 
 On 2026-09-06 the repository owner approved the four artifacts with "i
-approve" (PR #366). `WO-TCM-011` waits, approved, for the 0.16.0 release and
-adoption before its delegated start.
+approve" (PR #366). `WO-TCM-011` waited, approved, for the 0.16.0 release
+and adoption; 0.17.0 followed, and on 2026-09-09 the owner's "go WO-TCM-011"
+opened its execution on `wo/tcm-011-advisory-gate` (PR #428) on the
+delegated route: `DR-WO-START` taken by the delegated executor at `6b6dbfd7`
+on the required `validate` check. The validator exposes
+`authoring_advisories(artifact)`; `authoring_ready` refuses a definition
+draft that still draws an advisory, naming each in the validator's order and
+ending "fix the draft and run the transition again"; the candidate
+`ARTIFACT_AUTHORING.md` states the gate in each definition checklist; no
+budget, code or message moved. Evidence in `evidence/WO-TCM-011/`.
 
