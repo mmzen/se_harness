@@ -18,7 +18,7 @@ test fails the suite when it does. The installed root evaluator is a
 released version and may emit a slightly older set until the repository
 adopts the next release.
 
-197 codes across 31 registered prefixes.
+193 codes across 31 registered prefixes.
 
 ## How to read a code
 
@@ -35,11 +35,11 @@ but are not diagnostics and are not listed here.
 | `E-DCM` | installed validator | a decision-artifact rule error. | 5 |
 | `E-ECP` | installed validator | a control-plane rule error. | 1 |
 | `E-RSK` | installed validator | a risk-artifact rule error. | 5 |
-| `W` | installed validator | a warning; validation still passes. | 19 |
+| `W` | installed validator | a warning; validation still passes. | 16 |
 | `W-ADS` | installed validator | an agent-directive-surface warning. | 2 |
 | `W-AUT` | installed validator | an authoring-style advisory, raised only on drafts. | 23 |
 | `W-DCM` | installed validator | a decision-artifact warning. | 2 |
-| `W-ECP` | installed validator | a control-plane warning. | 2 |
+| `W-ECP` | installed validator | a control-plane warning. | 1 |
 | `W-REB` | installed validator | a released-evaluator-boundary warning. | 3 |
 | `W-REV` | installed validator | a revision-provenance warning. | 3 |
 | `W-RSK` | installed validator | a risk-artifact warning. | 1 |
@@ -80,7 +80,7 @@ but are not diagnostics and are not listed here.
 | `E011` | `E011`; `E011: relation '{…}' target '{…}' must have type {…}, found {…}` |
 | `E012` | `E012`; `E012: evidence path does not identify an existing file: '{…}'` (+10 more) |
 | `E014` | `E014`; `E014: field 'lifecycle_events' must be a non-empty array of tables when present` (+14 more) |
-| `E015` | `E015`; `E015: adr_required architecture has no active ADR whose decides relation targets it` (+1 more) |
+| `E015` | `E015`; `E015: adr_required architecture has no active ADR whose decides relation targets it` |
 | `E016` | `E016`; `E016: governance` |
 | `E017` | `E017`; `E017: active operating contract assures inactive requirement '{…}'` (+1 more) |
 | `E018` | `E018`; `E018: active operating contract assures requirement '{…}' without a verified or released VREC covering comple…` |
@@ -139,13 +139,10 @@ but are not diagnostics and are not listed here.
 | `W011` | `W011`; `W011: missing target of {…}` |
 | `W012` | `W012`; `W012: {…} targets type {…}` |
 | `W013` | `W013`; `W013: artifact '{…}' is valid outside its canonical location; expected '{…}'` (+1 more) |
-| `W014` | `W014`; `W014: completed legacy architecture has no decision_assessment; migrate during the compatibility window` |
-| `W015` | `W015`; `W015: architecture uses deprecated constrains relation ({…}); migrate through accountable governance` |
 | `W016` | `W016`; `W016: {…} coverage is missing {…}` |
 | `W017` | `W017`; `W017: ADR does not decide a selected architecture` |
-| `W018` | `Append W020/W019/W018 for selected architectures lacking a valid decision assessment or deciding ADR.`; `W018` (+1 more) |
-| `W019` | `Append W020/W019/W018 for selected architectures lacking a valid decision assessment or deciding ADR.`; `W019` (+1 more) |
-| `W020` | `Append W020/W019/W018 for selected architectures lacking a valid decision assessment or deciding ADR.`; `W020` (+1 more) |
+| `W018` | `Append W020/W018 for selected architectures lacking a valid decision assessment or deciding ADR.`; `W018` (+1 more) |
+| `W020` | `Append W020/W018 for selected architectures lacking a valid decision assessment or deciding ADR.`; `W020` (+1 more) |
 | `W021` | `Append W021 for each selected architecture unrelated to the selected specifications or requirements.`; `W021` (+1 more) |
 | `W022` | `Append W022 for each active, unselected architecture that applies to the selected requirements.`; `W022` (+1 more) |
 | `W023` | `Resolve the selected work order, its summary and assurance summary, appending W001-W005/W023 diagnostics.`; `W023` |
@@ -196,7 +193,6 @@ but are not diagnostics and are not listed here.
 
 | Code | Message text in the source |
 | --- | --- |
-| `W-ECP-002` | `W-ECP-002` |
 | `W-ECP-005` | `W-ECP-005`; `W-ECP-005: delegation.gate_source is local-file outside a rehearsal; the gate this run reads is not the CI pr…` |
 
 ### `W-REB` — installed validator
@@ -291,7 +287,7 @@ but are not diagnostics and are not listed here.
 | `WEX-ECP-013` | `WEX-ECP-013`; `WEX-ECP-013: domain {…} has no artifact to read its identifier token from; pass --id explicitly` (+4 more) |
 | `WEX-ECP-014` | `A coded selection refusal (W-ADS-001, WEX-ECP-014): a `SelectionError` that carries its code.`; `WEX-ECP-014` (+5 more) |
 | `WEX-ECP-022` | `WEX-ECP-022`; `WEX-ECP-022: {…} carries no [delegation] class at the base {…}; a branch cannot widen its own delegation` (+2 more) |
-| `WEX-ECP-030` | `WEX-ECP-030`; `WEX-ECP-030: duplicate transition binding {…}:{…}` (+11 more) |
+| `WEX-ECP-030` | `WEX-ECP-030`; `WEX-ECP-030: duplicate transition binding {…}:{…}` (+10 more) |
 | `WEX-ECP-031` | `Read and validate `agentic_operations` (ECP-PRM-019, ECP-PRM-023). Every entry carries exactly the seven fiel…`; `WEX-ECP-031` |
 | `WEX-ECP-040` | `WEX-ECP-040`; `WEX-ECP-040: check {…} is missing at head {…}` (+13 more) |
 

@@ -200,9 +200,9 @@ header naming another artifact or checkpoint, or with invalid TOML is refused
 (`WEX-ECP-010`). It refuses when a `.gitattributes` rule would convert the
 packet's line endings (`WEX-ECP-011`) and when the single `in_progress` work
 order is not the one named (`WEX-ECP-012`). `QGP-G4I-EVIDENCE` reads that
-header through a TOML parser; a packet bound by the older substring lines
-still passes for one release with `W-ECP-002` naming the file and the
-`evidence` command that migrates it. `check --checkpoint handoff
+header through a TOML parser; a packet without one is not assessable, and
+the message names the `evidence` command that writes the header (the
+one-release substring grace closed under `WO-AUT-006`). `check --checkpoint handoff
 --from-git BASE` is self-binding (`ECP-SBH-001` to `-006`): it rebinds an
 existing packet header to the current formal snapshot before evaluating —
 body preserved, `evidence`'s `WEX-ECP-010`/`WEX-ECP-011` guards unchanged,

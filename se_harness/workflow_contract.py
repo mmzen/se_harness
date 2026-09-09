@@ -16,7 +16,6 @@ from typing import Any, Iterable, Mapping, Literal
 
 WORKFLOW_SCHEMA = "se-harness-workflow-v4"
 QUALITY_GATES_SCHEMA = "se-harness-quality-gates-v2"
-RETIRED_QUALITY_GATES_SCHEMAS = frozenset({"se-harness-quality-gates-v1"})
 #: Graph-structural transition checks (SPEC-ECP-005 Terms): properties of the
 #: artifact graph shape alone, kept in Python and reported as predicates.
 STRUCTURAL_CHECKS = frozenset({
@@ -358,19 +357,9 @@ def load_workflow_contract(path: Path | None = None) -> dict[str, Any]:
 
 
 def load_quality_gate_contract(path: Path | None = None) -> dict[str, Any]:
-    target = path or Path(__file__).with_name("quality_gates_contract.json")
-    try:
-        return _load(target, QUALITY_GATES_SCHEMA)
-    except ContractError as exc:
-        try:
-            observed = json.loads(target.read_bytes().decode("utf-8")).get("schema")
-        except Exception:  # noqa: BLE001 - the original error is the one to report
-            raise exc from None
-        if observed in RETIRED_QUALITY_GATES_SCHEMAS:
-            raise ContractRefusal(WEX_ECP_030, f"{target} uses retired schema {observed}; the transition bindings of "
-                f"{QUALITY_GATES_SCHEMA} are required, upgrade the installed contract"
-            ) from exc
-        raise
+    # SPEC-AUT-004 AUT-WIN-009: any schema the loader does not accept meets the
+    # loader's own error; the hint for the retired v1 schema closed under WO-AUT-006.
+    return _load(path or Path(__file__).with_name("quality_gates_contract.json"), QUALITY_GATES_SCHEMA)
 
 
 def effective_checkpoints(gate: Mapping[str, Any], predicate: Mapping[str, Any]) -> frozenset[str]:

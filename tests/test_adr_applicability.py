@@ -232,12 +232,19 @@ class AdrApplicabilityTests(unittest.TestCase):
         self.assertIn("[W018]", output)
         self.assertIn("ARCH-ADR-001", output)
 
-    def test_completed_legacy_architecture_requires_existing_selected_adr(self) -> None:
+    def test_completed_architecture_without_assessment_is_refused_like_any_other(self) -> None:
+        # SPEC-AUT-004 AUT-WIN-003 to AUT-WIN-005: the legacy_missing window is closed;
+        # a completed architecture without the table reads E014, never W014, and the
+        # preflight names no W019 whether or not a deciding ADR is selected.
         self.build_chain(assessment=None, architecture_status="implemented")
         report = validate_repository(self.root)
-        self.assertTrue(report.valid)
-        self.assertIn("W014", {item.code for item in report.warnings})
-        self.assertEqual(0, self.preflight()[0])
+        self.assertFalse(report.valid)
+        self.assertIn("E014", {item.code for item in report.errors})
+        self.assertEqual(set(), {item.code for item in report.warnings} & {"W014", "W015"})
+        code, output, _ = self.preflight()
+        self.assertEqual(1, code)
+        self.assertNotIn("[W019]", output)
+        self.assertNotIn("[W014]", output)
 
         work_order = self.root / "docs/engineering/product/work-orders/WO-ADR-001.md"
         work_order.write_text(
@@ -249,10 +256,10 @@ class AdrApplicabilityTests(unittest.TestCase):
         )
         code, output, _ = self.preflight()
         self.assertEqual(1, code)
-        self.assertIn("[W019]", output)
+        self.assertNotIn("[W019]", output)
 
-    def test_ongoing_architecture_cannot_use_legacy_exception(self) -> None:
-        for status in ("draft", "approved", "in_progress"):
+    def test_no_architecture_status_is_exempt_from_the_assessment(self) -> None:
+        for status in ("draft", "approved", "in_progress", "implemented"):
             with self.subTest(status=status):
                 root = self.root
                 self.build_chain(assessment=None, architecture_status=status)

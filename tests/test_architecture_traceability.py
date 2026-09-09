@@ -179,38 +179,41 @@ class ArchitectureTraceabilityTests(unittest.TestCase):
                 self.assertTrue({"E011", "E016"}.intersection(codes), codes)
         architecture.write_text(valid, encoding="utf-8")
 
-    def test_legacy_classifier_is_status_and_target_type_bounded(self) -> None:
+    def test_the_retired_constrains_relation_is_refused_for_every_status(self) -> None:
+        # SPEC-AUT-004 AUT-WIN-001, AUT-WIN-002: the compatibility window is closed;
+        # constrains is an E016 issue naming the relation as retired, whatever the
+        # status and whatever it targets, and W015 is emitted nowhere.
         self.build_chain(
             architecture_relations={"constrains": ["REQ-TRC-001"]},
             architecture_status="approved",
         )
         architecture = self.root / "docs/engineering/product/architecture/ARCH-TRC-001.md"
-        self.assertIn("E016", {item.code for item in validate_repository(self.root).errors})
-
-        content = architecture.read_text(encoding="utf-8").replace('status = "approved"', 'status = "implemented"')
-        architecture.write_text(content, encoding="utf-8")
-        report = validate_repository(self.root)
-        self.assertTrue(report.valid)
-        self.assertIn("W015", {item.code for item in report.warnings})
-
-        architecture.write_text(
-            content.replace('constrains = ["REQ-TRC-001"]', 'constrains = ["SPEC-TRC-001"]'),
-            encoding="utf-8",
-        )
-        report = validate_repository(self.root)
-        self.assertTrue(report.valid)
-        self.assertIn("W015", {item.code for item in report.warnings})
-
-        architecture.write_text(
-            content.replace(
-                'constrains = ["REQ-TRC-001"]',
-                'constrains = ["REQ-TRC-001", "SPEC-TRC-001"]',
+        content = architecture.read_text(encoding="utf-8")
+        implemented = content.replace('status = "approved"', 'status = "implemented"')
+        variants = {
+            "approved, requirement target": content,
+            "implemented, requirement target": implemented,
+            "implemented, specification target": implemented.replace(
+                'constrains = ["REQ-TRC-001"]', 'constrains = ["SPEC-TRC-001"]'
             ),
-            encoding="utf-8",
-        )
-        self.assertIn("E016", {item.code for item in validate_repository(self.root).errors})
+            "implemented, mixed targets": implemented.replace(
+                'constrains = ["REQ-TRC-001"]', 'constrains = ["REQ-TRC-001", "SPEC-TRC-001"]'
+            ),
+        }
+        for label, text in variants.items():
+            with self.subTest(variant=label):
+                architecture.write_text(text, encoding="utf-8")
+                report = validate_repository(self.root)
+                self.assertFalse(report.valid)
+                retired = [item for item in report.errors if item.code == "E016" and "retired" in item.message]
+                self.assertTrue(retired, [item.message for item in report.errors])
+                self.assertIn("constrains", retired[0].message)
+                self.assertNotIn("W015", {item.code for item in report.warnings})
+        architecture.write_text(content, encoding="utf-8")
 
-    def test_dual_declared_bootstrap_must_be_consistent(self) -> None:
+    def test_constrains_beside_typed_relations_is_still_refused(self) -> None:
+        # The dual-declared bootstrap state is gone with the window: typed relations
+        # do not excuse the retired one, and removing it makes the graph valid.
         self.build_chain(
             architecture_relations={
                 "constrains": ["REQ-TRC-001"],
@@ -219,17 +222,16 @@ class ArchitectureTraceabilityTests(unittest.TestCase):
             }
         )
         report = validate_repository(self.root)
-        self.assertTrue(report.valid)
-        self.assertIn("W015", {item.code for item in report.warnings})
+        self.assertFalse(report.valid)
+        self.assertIn("E016", {item.code for item in report.errors})
+        self.assertEqual([], [item for item in report.warnings if item.code in {"W014", "W015"}])
 
         architecture = self.root / "docs/engineering/product/architecture/ARCH-TRC-001.md"
         architecture.write_text(
-            architecture.read_text(encoding="utf-8").replace(
-                'constrains = ["REQ-TRC-001"]', 'constrains = ["REQ-TRC-002"]'
-            ),
+            architecture.read_text(encoding="utf-8").replace('constrains = ["REQ-TRC-001"]\n', ""),
             encoding="utf-8",
         )
-        self.assertIn("E016", {item.code for item in validate_repository(self.root).errors})
+        self.assertTrue(validate_repository(self.root).valid)
 
     def test_routine_requirement_does_not_need_nominal_architecture_coverage(self) -> None:
         self.build_chain()

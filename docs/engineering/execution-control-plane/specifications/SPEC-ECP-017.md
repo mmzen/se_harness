@@ -5,7 +5,7 @@ title = "The handoff check self-binds its packet and closes the change set over 
 status = "approved"
 owners = ["technical-owner", "quality-owner"]
 created = "2026-08-31"
-updated = "2026-08-31"
+updated = "2026-09-09"
 
 [relations]
 specifies = ["REQ-ECP-028"]
@@ -98,3 +98,13 @@ next root adoption.
 ## Open decisions
 
 None.
+
+## Amendment record
+
+**The one-release legacy grace named by `ECP-SBH-002` is closed, under
+`WO-AUT-006` (`SPEC-AUT-004` `AUT-WIN-007`, `AUT-WIN-008`), recorded
+2026-09-09.** `ECP-SBH-002` said the grace (`W-ECP-002`) keeps reading a packet
+without a machine header at byte offset 0; since `WO-AUT-006` such a packet is
+`not_assessable` and `harnessctl evidence` remains the corrective command, as
+the rule already states for a missing packet. The rule text is unchanged;
+nothing else in this specification changes.

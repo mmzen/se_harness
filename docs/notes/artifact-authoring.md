@@ -140,3 +140,17 @@ moves: `validate` still passes with advisories present and lists them apart,
 approved artifacts are not re-read, the budgets and codes of the four
 families are unchanged, and the other transitions read no advisory. The
 checklists of `ARTIFACT_AUTHORING.md` say so in one sentence each.
+
+## Permanent branches
+
+Two tolerances of the validator are permanent, by the owner decision of
+2026-09-07 on issue #381 (`SPEC-AUT-004` `AUT-WIN-012`). A verification or
+release record decided before preparation existed carries no `prepared_at`,
+and its decision timestamp is read from its last lifecycle event instead:
+84 of 230 records on `main` at `b11ea537`. A work order approved
+before the scope contract carries no `[execution_scope]`, and a checkpoint
+over it is not assessable rather than refused: 111 of 261 work orders
+at the same base. Both are historical facts of this repository; neither
+branch closes, and each carries a comment naming this section. The four
+windows that did close under `WO-AUT-006` (`W014`, `W015`, `W019`,
+`W-ECP-002`) tolerated shapes the corpus no longer held after `WO-AUT-005`.
