@@ -2,7 +2,7 @@
 id = "WO-AUT-006"
 type = "work_order"
 title = "Close the compatibility windows: W014, W015, the W-ECP-002 grace and the WEX-ECP-030 v1 hint"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -52,6 +52,13 @@ to = "approved"
 decided_at = "2026-09-09T17:21:18Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-09-09 by selecting the presented option 'Approve all four (Recommended)' on pull request #423, as a decision distinct from the approval of its definitions in the same transaction. This approval is the delegating act under DR-007 and DR-015: the work order carries [delegation] class = 'execution', so DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE may be applied by the delegated-executor role while the required validate check is success for the exact candidate head, read from the base of the pull request. It authorizes only the declared scope: the seven modules named in SPEC-AUT-004, tests/, the three notes and the regenerated index, the amendment records on SPEC-ECP-002, SPEC-ECP-005, SPEC-ECP-017 and SPEC-WEX-002, the domain index and the evidence packet. It authorizes no change to a managed template or any root managed byte, no change to a corpus artifact, no verification decision, no release and no publication; the merges remain the owner's decisions. In the same prompt the owner selected 'Keep the template out of scope (Recommended)', so the TRC-008 sentence of the managed TRACEABILITY.md template is owed to the next managed-template work order."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-09T17:37:24Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at b11ea53709814e8e3a1411d3f22a3295b2e7d841 (check-run 102575250379, source github-checks). Start decided by the delegated-executor role on 2026-09-09 under the execution delegation class WO-AUT-006 carries, delegated by the engineering owner in the approval of 2026-09-09 and read at the base of this branch: main at b11ea53709814e8e3a1411d3f22a3295b2e7d841, the merge of the packet, where the required validate check is success. Branch wo/aut-006-close-the-windows off main at b11ea537. This decision authorizes only the declared execution scope: the seven modules of SPEC-AUT-004, tests/, the three notes and the regenerated index, the amendment records on SPEC-ECP-002, SPEC-ECP-005, SPEC-ECP-017 and SPEC-WEX-002, the four artifacts of the packet, the domain index and the evidence packet. It authorizes no change to a managed template or any root managed byte, no change to a corpus artifact, no new diagnostic code, no release, publication or adoption. Completion and record preparation are separate decisions of this role under the same gate; verification and every merge remain the accountable human owners."
 +++
 
 # Work Order: Close the compatibility windows: W014, W015, the W-ECP-002 grace and the WEX-ECP-030 v1 hint
