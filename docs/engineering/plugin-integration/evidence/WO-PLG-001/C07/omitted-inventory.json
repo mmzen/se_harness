@@ -1,0 +1,45 @@
+{
+  "evaluator": {
+    "archive": "se_harness-0.17.0-py3-none-any.whl",
+    "archive_sha256": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+    "payload_sha256": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405",
+    "release_record": "docs/engineering/release-0-17-0/releases/RLS-SEH-026.md",
+    "release_record_sha256": "041a6a093550a40fe6f7192ed68f60966a2157415bc1ff5e7af8cf14411a6250",
+    "release_revision": "cb4255a985c5bb85afeda7c2a5f3ad9d311ac05b",
+    "version": "0.17.0"
+  },
+  "files": {
+    ".codex-plugin/plugin.json": {
+      "bytes": 725,
+      "mode": 420,
+      "origin": "codex",
+      "sha256": "b66f6a65f4f9010d98619aff80af3909ee0d8fcfe04d4189a89c76fa9878cdd9"
+    },
+    "README.md": {
+      "bytes": 247,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "bf137f605a3261b5c1074b1f2d147fd416110d8f89e1b585a134edc570634cdd"
+    },
+    "packages/se_harness-0.17.0-py3-none-any.whl": {
+      "bytes": 484532,
+      "mode": 420,
+      "origin": "evaluator",
+      "sha256": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced"
+    },
+    "skills/assembly-fixture/SKILL.md": {
+      "bytes": 271,
+      "mode": 420,
+      "origin": "shared",
+      "sha256": "1ab0f7b8ba3c47a9ef65e040b749fc33e5b10082fe920669541f5450758b2372"
+    }
+  },
+  "host": "codex",
+  "plugin": "verity-plane-assembly-fixture",
+  "schema": "se-harness-plugin-assembly-v1",
+  "source": {
+    "plan": "tests/plugin_integration/package_assembly/fixtures/plan.json",
+    "plan_sha256": "10abc6345dbbbcdfa49b42af6523e00355ea7b268f939c078100fa26bb8cdf8d",
+    "revision": "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6"
+  }
+}

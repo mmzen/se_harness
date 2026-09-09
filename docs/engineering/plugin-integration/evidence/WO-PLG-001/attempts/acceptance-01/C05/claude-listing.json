@@ -1,0 +1,8 @@
+{
+  ".claude-plugin/plugin.json": "b1e9ae3f6106584d05c01ace3b9decf3a585a570d3f9babf3f4d03ed589a1498",
+  "README.md": "bf137f605a3261b5c1074b1f2d147fd416110d8f89e1b585a134edc570634cdd",
+  "assembly-inventory.json": "f05c685f5ea57414c0777beafdbe80fc3cd02b47aa0dd2bd509254c60bbaf248",
+  "packages/se_harness-0.17.0-py3-none-any.whl": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+  "scripts/fixture.py": "ee4830c3650a253bcf40ad23b2e2d2f003bb907d3239906c91412c396441dea4",
+  "skills/assembly-fixture/SKILL.md": "1ab0f7b8ba3c47a9ef65e040b749fc33e5b10082fe920669541f5450758b2372"
+}

@@ -1,0 +1,25 @@
+test_owner_region_stays_within_the_size_bound (test_instruction_architecture.OwnerInstructionRegionTests.test_owner_region_stays_within_the_size_bound) ... ok
+test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref (test_artifact_authoring.IdentifierAllocationTests.test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref) ... ERROR
+
+======================================================================
+ERROR: test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref (test_artifact_authoring.IdentifierAllocationTests.test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plg001-baseline\tests\test_artifact_authoring.py", line 313, in test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref
+    shutil.rmtree(self.root / ".git")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 5] Accès refusé: 'C:\\Users\\mathi\\AppData\\Local\\Temp\\tmpu6x1ahj6\\.git\\objects\\04\\e1206c9e14aa0f1a1e753b6f612c0dc862675c'
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.785s
+
+FAILED (errors=1)

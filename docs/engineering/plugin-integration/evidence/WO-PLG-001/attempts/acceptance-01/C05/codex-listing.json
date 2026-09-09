@@ -1,0 +1,8 @@
+{
+  ".codex-plugin/plugin.json": "f321771a8bd9e24d5e09c5d637835775311a4c62d09fc7d088ae94bd7a29bb49",
+  "README.md": "bf137f605a3261b5c1074b1f2d147fd416110d8f89e1b585a134edc570634cdd",
+  "assembly-inventory.json": "511691e11979995fafae23d48aa5693fb85596bc30b526fab7463b93cdad4d94",
+  "packages/se_harness-0.17.0-py3-none-any.whl": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+  "scripts/fixture.py": "ee4830c3650a253bcf40ad23b2e2d2f003bb907d3239906c91412c396441dea4",
+  "skills/assembly-fixture/SKILL.md": "1ab0f7b8ba3c47a9ef65e040b749fc33e5b10082fe920669541f5450758b2372"
+}

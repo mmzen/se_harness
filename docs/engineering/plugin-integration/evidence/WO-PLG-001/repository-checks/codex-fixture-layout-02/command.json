@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe",
+    "-B",
+    "C:/Users/mathi/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py",
+    "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-assembly-scratch-02/valid/codex/verity-plane-assembly-fixture"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-assembly",
+  "exit_status": 0,
+  "started_at": "2026-09-09T18:47:13.210945+00:00",
+  "duration_seconds": 0.205
+}

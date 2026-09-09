@@ -1,0 +1,50 @@
+{
+  "checks": [
+    {
+      "check": "check accepted exit",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "check accepted flag",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "output_listing": {
+        "claude/verity-plane-assembly-fixture/.claude-plugin/plugin.json": "b1e9ae3f6106584d05c01ace3b9decf3a585a570d3f9babf3f4d03ed589a1498",
+        "claude/verity-plane-assembly-fixture/README.md": "bf137f605a3261b5c1074b1f2d147fd416110d8f89e1b585a134edc570634cdd",
+        "claude/verity-plane-assembly-fixture/assembly-inventory.json": "f05c685f5ea57414c0777beafdbe80fc3cd02b47aa0dd2bd509254c60bbaf248",
+        "claude/verity-plane-assembly-fixture/packages/se_harness-0.17.0-py3-none-any.whl": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+        "claude/verity-plane-assembly-fixture/scripts/fixture.py": "ee4830c3650a253bcf40ad23b2e2d2f003bb907d3239906c91412c396441dea4",
+        "claude/verity-plane-assembly-fixture/skills/assembly-fixture/SKILL.md": "1ab0f7b8ba3c47a9ef65e040b749fc33e5b10082fe920669541f5450758b2372",
+        "codex/verity-plane-assembly-fixture/.codex-plugin/plugin.json": "f321771a8bd9e24d5e09c5d637835775311a4c62d09fc7d088ae94bd7a29bb49",
+        "codex/verity-plane-assembly-fixture/README.md": "bf137f605a3261b5c1074b1f2d147fd416110d8f89e1b585a134edc570634cdd",
+        "codex/verity-plane-assembly-fixture/assembly-inventory.json": "c4f4c15df34f5c9dcaf208c2b4b2d2779dab05acbd529551372954d943ad2f47",
+        "codex/verity-plane-assembly-fixture/packages/se_harness-0.17.0-py3-none-any.whl": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+        "codex/verity-plane-assembly-fixture/scripts/fixture.py": "ee4830c3650a253bcf40ad23b2e2d2f003bb907d3239906c91412c396441dea4",
+        "codex/verity-plane-assembly-fixture/skills/assembly-fixture/SKILL.md": "1ab0f7b8ba3c47a9ef65e040b749fc33e5b10082fe920669541f5450758b2372",
+        "verity-plane-assembly-fixture-claude.zip": "4b810869692c155c73efb0ec1bc45b5def6fb80e07256e1c0dcae7e061dd4c8d",
+        "verity-plane-assembly-fixture-codex.zip": "9eb9aa7449d381171a890673f38a2debeaa29029eaf747517bdaa71c04207697"
+      },
+      "rejection": "inventory codex/verity-plane-assembly-fixture/assembly-inventory.json: missing entries ['scripts/fixture.py']; extra entries []"
+    },
+    {
+      "check": "rejection identifies omitted entry",
+      "expected": true,
+      "observed": true
+    }
+  ],
+  "conclusion": "pass",
+  "exit_statuses": [
+    1
+  ],
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "source_evidence_paths": [
+    "actions.txt",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "source_revision": "0150a57562d22e5bc3619ca7f6a1c82139728f3b"
+}

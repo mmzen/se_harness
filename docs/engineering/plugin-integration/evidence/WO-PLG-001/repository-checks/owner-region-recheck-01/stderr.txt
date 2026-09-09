@@ -1,0 +1,6 @@
+test_owner_region_stays_within_the_size_bound (test_instruction_architecture.OwnerInstructionRegionTests.test_owner_region_stays_within_the_size_bound) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK

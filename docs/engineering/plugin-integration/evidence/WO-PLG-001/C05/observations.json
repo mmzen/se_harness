@@ -1,0 +1,77 @@
+{
+  "checks": [
+    {
+      "check": "codex own manifest",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "check": "codex foreign manifest absent",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "claude own manifest",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "check": "claude foreign manifest absent",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "extra_sources": {},
+      "fixture_revision": "522584dafd2af95462cfa4beb2e4053b8982871a",
+      "plan": {
+        "hosts": {
+          "claude": {
+            ".claude-plugin/plugin.json": "tests/plugin_integration/package_assembly/fixtures/claude/plugin.json"
+          },
+          "codex": {
+            ".codex-plugin/plugin.json": "tests/plugin_integration/package_assembly/fixtures/codex/plugin.json",
+            "scripts/fixture.py": "tests/plugin_integration/package_assembly/fixtures/shared/scripts/fixture.py"
+          }
+        },
+        "name": "verity-plane-assembly-fixture",
+        "schema": "se-harness-plugin-assembly-v1",
+        "shared": {
+          "README.md": "tests/plugin_integration/package_assembly/fixtures/shared/README.md",
+          "scripts/fixture.py": "tests/plugin_integration/package_assembly/fixtures/shared/scripts/fixture.py",
+          "skills/assembly-fixture/SKILL.md": "tests/plugin_integration/package_assembly/fixtures/shared/skills/assembly-fixture/SKILL.md"
+        }
+      }
+    },
+    {
+      "check": "build accepted exit",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "build accepted flag",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "output_listing": {},
+      "rejection": "conflicting output path: scripts/fixture.py"
+    }
+  ],
+  "conclusion": "pass",
+  "exit_statuses": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+  ],
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "source_evidence_paths": [
+    "actions.txt",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "source_revision": "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6"
+}

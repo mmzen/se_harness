@@ -1,0 +1,660 @@
+{
+  "case": "c03",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "read-tree",
+        "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6"
+      ],
+      "duration_seconds": 0.087,
+      "exit_status": 0,
+      "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "hash-object",
+        "-w",
+        "--stdin"
+      ],
+      "duration_seconds": 0.045,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "0ef7591a13d75e431a602432b94309750fb2df65\n"
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "update-index",
+        "--add",
+        "--cacheinfo",
+        "100644,0ef7591a13d75e431a602432b94309750fb2df65,tests/plugin_integration/package_assembly/fixtures/plan.json"
+      ],
+      "duration_seconds": 0.031,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "hash-object",
+        "-w",
+        "--stdin"
+      ],
+      "duration_seconds": 0.032,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "86f7eeae2c1f58d4040a8e7a98fd6f0ad66581b1\n"
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "update-index",
+        "--add",
+        "--cacheinfo",
+        "100644,86f7eeae2c1f58d4040a8e7a98fd6f0ad66581b1,forbidden.txt"
+      ],
+      "duration_seconds": 0.032,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "write-tree"
+      ],
+      "duration_seconds": 0.052,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "4d54ced65cadab469120aa1c4006c140800aaac3\n"
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "commit-tree",
+        "4d54ced65cadab469120aa1c4006c140800aaac3",
+        "-p",
+        "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6",
+        "-m",
+        "Disposable negative assembly fixture"
+      ],
+      "duration_seconds": 0.038,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "48b67ebacf83e3508db3bf5c2e29fa6be9fa0ea4\n"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-assembly\\scripts\\build_plugin_archives.py",
+        "build",
+        "--repository",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "--revision",
+        "48b67ebacf83e3508db3bf5c2e29fa6be9fa0ea4",
+        "--plan",
+        "tests/plugin_integration/package_assembly/fixtures/plan.json",
+        "--release-revision",
+        "cb4255a985c5bb85afeda7c2a5f3ad9d311ac05b",
+        "--release-record",
+        "docs/engineering/release-0-17-0/releases/RLS-SEH-026.md",
+        "--expected-wheel-sha256",
+        "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+        "--wheel",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evaluator-wheels\\se_harness-0.17.0-py3-none-any.whl",
+        "--evaluator-python",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+        "--output-directory",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\forbidden-0"
+      ],
+      "duration_seconds": 0.796,
+      "exit_status": 1,
+      "stderr": "{\"accepted\": false, \"error\": \"forbidden payload destination: runtime/python.exe\"}\r\n",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "read-tree",
+        "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6"
+      ],
+      "duration_seconds": 0.09,
+      "exit_status": 0,
+      "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "hash-object",
+        "-w",
+        "--stdin"
+      ],
+      "duration_seconds": 0.04,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "23da8bfa5d82eb48d2a9c732d67d8016fc5e9c02\n"
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "update-index",
+        "--add",
+        "--cacheinfo",
+        "100644,23da8bfa5d82eb48d2a9c732d67d8016fc5e9c02,tests/plugin_integration/package_assembly/fixtures/plan.json"
+      ],
+      "duration_seconds": 0.032,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "hash-object",
+        "-w",
+        "--stdin"
+      ],
+      "duration_seconds": 0.031,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "a7c09bc1446cf2464d0bcc38c4206de6c8601833\n"
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "update-index",
+        "--add",
+        "--cacheinfo",
+        "100644,a7c09bc1446cf2464d0bcc38c4206de6c8601833,forbidden.txt"
+      ],
+      "duration_seconds": 0.032,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "write-tree"
+      ],
+      "duration_seconds": 0.048,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "55744235a9854e35c2316197d9e432e84b49678a\n"
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "commit-tree",
+        "55744235a9854e35c2316197d9e432e84b49678a",
+        "-p",
+        "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6",
+        "-m",
+        "Disposable negative assembly fixture"
+      ],
+      "duration_seconds": 0.037,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "ce759651f8573d909a8f9a14fc54eaa0857e6e83\n"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-assembly\\scripts\\build_plugin_archives.py",
+        "build",
+        "--repository",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "--revision",
+        "ce759651f8573d909a8f9a14fc54eaa0857e6e83",
+        "--plan",
+        "tests/plugin_integration/package_assembly/fixtures/plan.json",
+        "--release-revision",
+        "cb4255a985c5bb85afeda7c2a5f3ad9d311ac05b",
+        "--release-record",
+        "docs/engineering/release-0-17-0/releases/RLS-SEH-026.md",
+        "--expected-wheel-sha256",
+        "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+        "--wheel",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evaluator-wheels\\se_harness-0.17.0-py3-none-any.whl",
+        "--evaluator-python",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+        "--output-directory",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\forbidden-1"
+      ],
+      "duration_seconds": 0.796,
+      "exit_status": 1,
+      "stderr": "{\"accepted\": false, \"error\": \"forbidden payload destination: packages/candidate.whl\"}\r\n",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "read-tree",
+        "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6"
+      ],
+      "duration_seconds": 0.088,
+      "exit_status": 0,
+      "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "hash-object",
+        "-w",
+        "--stdin"
+      ],
+      "duration_seconds": 0.041,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "9a48061c0cdcd67a3ba4e40f623556af7df482c9\n"
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "update-index",
+        "--add",
+        "--cacheinfo",
+        "100644,9a48061c0cdcd67a3ba4e40f623556af7df482c9,tests/plugin_integration/package_assembly/fixtures/plan.json"
+      ],
+      "duration_seconds": 0.032,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "hash-object",
+        "-w",
+        "--stdin"
+      ],
+      "duration_seconds": 0.031,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "25470fa597a23b52b5ac2cf21366bec5db54f730\n"
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "update-index",
+        "--add",
+        "--cacheinfo",
+        "100644,25470fa597a23b52b5ac2cf21366bec5db54f730,forbidden.txt"
+      ],
+      "duration_seconds": 0.032,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "write-tree"
+      ],
+      "duration_seconds": 0.048,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "9a1cf2ec62a67b3f57e69fa36527e7e500bb741b\n"
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "commit-tree",
+        "9a1cf2ec62a67b3f57e69fa36527e7e500bb741b",
+        "-p",
+        "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6",
+        "-m",
+        "Disposable negative assembly fixture"
+      ],
+      "duration_seconds": 0.036,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "1c0555b738da7a939c9e30e7ab451b265874962d\n"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-assembly\\scripts\\build_plugin_archives.py",
+        "build",
+        "--repository",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "--revision",
+        "1c0555b738da7a939c9e30e7ab451b265874962d",
+        "--plan",
+        "tests/plugin_integration/package_assembly/fixtures/plan.json",
+        "--release-revision",
+        "cb4255a985c5bb85afeda7c2a5f3ad9d311ac05b",
+        "--release-record",
+        "docs/engineering/release-0-17-0/releases/RLS-SEH-026.md",
+        "--expected-wheel-sha256",
+        "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+        "--wheel",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evaluator-wheels\\se_harness-0.17.0-py3-none-any.whl",
+        "--evaluator-python",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+        "--output-directory",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\forbidden-2"
+      ],
+      "duration_seconds": 0.849,
+      "exit_status": 1,
+      "stderr": "{\"accepted\": false, \"error\": \"unsupported payload type: assets/dependency.whl\"}\r\n",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "read-tree",
+        "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6"
+      ],
+      "duration_seconds": 0.089,
+      "exit_status": 0,
+      "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "hash-object",
+        "-w",
+        "--stdin"
+      ],
+      "duration_seconds": 0.035,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "e1ea958874505c9832dfe6e62a63de5c1b5adbe7\n"
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "update-index",
+        "--add",
+        "--cacheinfo",
+        "100644,e1ea958874505c9832dfe6e62a63de5c1b5adbe7,tests/plugin_integration/package_assembly/fixtures/plan.json"
+      ],
+      "duration_seconds": 0.031,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "hash-object",
+        "-w",
+        "--stdin"
+      ],
+      "duration_seconds": 0.031,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "060950e27cd563055b835a540410050634cc8b03\n"
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "update-index",
+        "--add",
+        "--cacheinfo",
+        "100644,060950e27cd563055b835a540410050634cc8b03,forbidden.txt"
+      ],
+      "duration_seconds": 0.032,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "write-tree"
+      ],
+      "duration_seconds": 0.047,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "3918961f546cad8800fc44792cb069d3a45ce53f\n"
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "-c",
+        "core.longpaths=true",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "commit-tree",
+        "3918961f546cad8800fc44792cb069d3a45ce53f",
+        "-p",
+        "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6",
+        "-m",
+        "Disposable negative assembly fixture"
+      ],
+      "duration_seconds": 0.034,
+      "exit_status": 0,
+      "stderr": "",
+      "stdout": "70344b5e9e4a48c4444aaf71aaee06a354d54fcc\n"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-assembly\\scripts\\build_plugin_archives.py",
+        "build",
+        "--repository",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\variants",
+        "--revision",
+        "70344b5e9e4a48c4444aaf71aaee06a354d54fcc",
+        "--plan",
+        "tests/plugin_integration/package_assembly/fixtures/plan.json",
+        "--release-revision",
+        "cb4255a985c5bb85afeda7c2a5f3ad9d311ac05b",
+        "--release-record",
+        "docs/engineering/release-0-17-0/releases/RLS-SEH-026.md",
+        "--expected-wheel-sha256",
+        "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+        "--wheel",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evaluator-wheels\\se_harness-0.17.0-py3-none-any.whl",
+        "--evaluator-python",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+        "--output-directory",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-assembly-scratch-02\\forbidden-3"
+      ],
+      "duration_seconds": 0.799,
+      "exit_status": 1,
+      "stderr": "{\"accepted\": false, \"error\": \"forbidden payload destination: bin/run.py\"}\r\n",
+      "stdout": ""
+    }
+  ],
+  "runner_argv": [
+    "tests/plugin_integration/package_assembly/run_acceptance.py",
+    "--repository",
+    "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-assembly",
+    "--revision",
+    "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6",
+    "--plan",
+    "tests/plugin_integration/package_assembly/fixtures/plan.json",
+    "--release-revision",
+    "cb4255a985c5bb85afeda7c2a5f3ad9d311ac05b",
+    "--release-record",
+    "docs/engineering/release-0-17-0/releases/RLS-SEH-026.md",
+    "--expected-wheel-sha256",
+    "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+    "--wheel",
+    "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-evaluator-wheels/se_harness-0.17.0-py3-none-any.whl",
+    "--evaluator-python",
+    "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-eval-017/Scripts/python.exe",
+    "--evidence-directory",
+    "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-control/se-harness-plugin-assembly/acceptance-02",
+    "--scratch-directory",
+    "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-assembly-scratch-02"
+  ]
+}

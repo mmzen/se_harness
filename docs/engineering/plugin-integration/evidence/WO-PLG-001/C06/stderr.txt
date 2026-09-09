@@ -1,0 +1,7 @@
+warning: unable to access 'C:\Users\mathi/.config/git/ignore': Permission denied
+
+
+
+
+
+{"accepted": false, "error": "unsafe path: '../../../outside/sentinel.txt'"}

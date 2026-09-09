@@ -1,0 +1,199 @@
+{
+  "checks": [
+    {
+      "extra_sources": {
+        "forbidden.txt": "78a83403fcb3b7a3fc1df1abbeb6dfad652c01e561efd9ba6985f7c75c44245a"
+      },
+      "fixture_revision": "6b34f9f0ee3b25e77b2db8f307ab39409b4b2b3e",
+      "plan": {
+        "hosts": {
+          "claude": {
+            ".claude-plugin/plugin.json": "tests/plugin_integration/package_assembly/fixtures/claude/plugin.json"
+          },
+          "codex": {
+            ".codex-plugin/plugin.json": "tests/plugin_integration/package_assembly/fixtures/codex/plugin.json"
+          }
+        },
+        "name": "verity-plane-assembly-fixture",
+        "schema": "se-harness-plugin-assembly-v1",
+        "shared": {
+          "README.md": "tests/plugin_integration/package_assembly/fixtures/shared/README.md",
+          "runtime/python.exe": "forbidden.txt",
+          "scripts/fixture.py": "tests/plugin_integration/package_assembly/fixtures/shared/scripts/fixture.py",
+          "skills/assembly-fixture/SKILL.md": "tests/plugin_integration/package_assembly/fixtures/shared/skills/assembly-fixture/SKILL.md"
+        }
+      }
+    },
+    {
+      "check": "build accepted exit",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "build accepted flag",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "output_listing": {},
+      "rejection": "forbidden payload destination: runtime/python.exe"
+    },
+    {
+      "extra_sources": {
+        "forbidden.txt": "102855d599837ca8258d565736139b711e301989df39f506468076decfea1dac"
+      },
+      "fixture_revision": "7b50edacc9fed4ad49eee02a48ac82d8d15244d8",
+      "plan": {
+        "hosts": {
+          "claude": {
+            ".claude-plugin/plugin.json": "tests/plugin_integration/package_assembly/fixtures/claude/plugin.json"
+          },
+          "codex": {
+            ".codex-plugin/plugin.json": "tests/plugin_integration/package_assembly/fixtures/codex/plugin.json"
+          }
+        },
+        "name": "verity-plane-assembly-fixture",
+        "schema": "se-harness-plugin-assembly-v1",
+        "shared": {
+          "README.md": "tests/plugin_integration/package_assembly/fixtures/shared/README.md",
+          "packages/candidate.whl": "forbidden.txt",
+          "scripts/fixture.py": "tests/plugin_integration/package_assembly/fixtures/shared/scripts/fixture.py",
+          "skills/assembly-fixture/SKILL.md": "tests/plugin_integration/package_assembly/fixtures/shared/skills/assembly-fixture/SKILL.md"
+        }
+      }
+    },
+    {
+      "check": "build accepted exit",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "build accepted flag",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "output_listing": {},
+      "rejection": "forbidden payload destination: packages/candidate.whl"
+    },
+    {
+      "extra_sources": {
+        "forbidden.txt": "1c45ce3ae06d873ccd6d3c7e62bdad3e14c59af93b0d1f75c638911bb4a261e2"
+      },
+      "fixture_revision": "4fa6392a2808a59d7d4baa0b1b9b87faa32705af",
+      "plan": {
+        "hosts": {
+          "claude": {
+            ".claude-plugin/plugin.json": "tests/plugin_integration/package_assembly/fixtures/claude/plugin.json"
+          },
+          "codex": {
+            ".codex-plugin/plugin.json": "tests/plugin_integration/package_assembly/fixtures/codex/plugin.json"
+          }
+        },
+        "name": "verity-plane-assembly-fixture",
+        "schema": "se-harness-plugin-assembly-v1",
+        "shared": {
+          "README.md": "tests/plugin_integration/package_assembly/fixtures/shared/README.md",
+          "assets/dependency.whl": "forbidden.txt",
+          "scripts/fixture.py": "tests/plugin_integration/package_assembly/fixtures/shared/scripts/fixture.py",
+          "skills/assembly-fixture/SKILL.md": "tests/plugin_integration/package_assembly/fixtures/shared/skills/assembly-fixture/SKILL.md"
+        }
+      }
+    },
+    {
+      "check": "build accepted exit",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "build accepted flag",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "output_listing": {},
+      "rejection": "unsupported payload type: assets/dependency.whl"
+    },
+    {
+      "extra_sources": {
+        "forbidden.txt": "de2a7afbf6f7c62dc9b32bb3cd4461acdbd282a1ac2c5059db956c05f62e4ad5"
+      },
+      "fixture_revision": "a71c507a5026525da3bdd73c312595cb1fd60a94",
+      "plan": {
+        "hosts": {
+          "claude": {
+            ".claude-plugin/plugin.json": "tests/plugin_integration/package_assembly/fixtures/claude/plugin.json"
+          },
+          "codex": {
+            ".codex-plugin/plugin.json": "tests/plugin_integration/package_assembly/fixtures/codex/plugin.json"
+          }
+        },
+        "name": "verity-plane-assembly-fixture",
+        "schema": "se-harness-plugin-assembly-v1",
+        "shared": {
+          "README.md": "tests/plugin_integration/package_assembly/fixtures/shared/README.md",
+          "bin/run.py": "forbidden.txt",
+          "scripts/fixture.py": "tests/plugin_integration/package_assembly/fixtures/shared/scripts/fixture.py",
+          "skills/assembly-fixture/SKILL.md": "tests/plugin_integration/package_assembly/fixtures/shared/skills/assembly-fixture/SKILL.md"
+        }
+      }
+    },
+    {
+      "check": "build accepted exit",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "build accepted flag",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "output_listing": {},
+      "rejection": "forbidden payload destination: bin/run.py"
+    }
+  ],
+  "conclusion": "pass",
+  "exit_statuses": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+  ],
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "source_evidence_paths": [
+    "actions.txt",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "source_revision": "0150a57562d22e5bc3619ca7f6a1c82139728f3b"
+}

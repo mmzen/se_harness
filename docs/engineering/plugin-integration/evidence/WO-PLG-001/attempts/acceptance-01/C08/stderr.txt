@@ -1,0 +1,5 @@
+{"accepted": false, "error": "incomplete or extra output files: ['claude/verity-plane-assembly-fixture/.claude-plugin/plugin.json', 'claude/verity-plane-assembly-fixture/README.md', 'claude/verity-plane-assembly-fixture/assembly-inventory.json', 'claude/verity-plane-assembly-fixture/packages/se_harness-0.17.0-py3-none-any.whl', 'claude/verity-plane-assembly-fixture/scripts/fixture.py', 'claude/verity-plane-assembly-fixture/skills/assembly-fixture/SKILL.md', 'codex/verity-plane-assembly-fixture/README.md', 'codex/verity-plane-assembly-fixture/assembly-inventory.json', 'codex/verity-plane-assembly-fixture/packages/se_harness-0.17.0-py3-none-any.whl', 'codex/verity-plane-assembly-fixture/scripts/fixture.py', 'codex/verity-plane-assembly-fixture/skills/assembly-fixture/SKILL.md', 'verity-plane-assembly-fixture-claude.zip', 'verity-plane-assembly-fixture-codex.zip']"}
+
+{"accepted": false, "error": "output already exists; inspect it or retry in a fresh directory"}
+
+

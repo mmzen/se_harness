@@ -1,0 +1,66 @@
+{
+  "checks": [
+    {
+      "extra_sources": {},
+      "fixture_revision": "2134eb280eedfeb37dc0e5ad720037967791aeb1",
+      "plan": {
+        "hosts": {
+          "claude": {
+            ".claude-plugin/plugin.json": "tests/plugin_integration/package_assembly/fixtures/claude/plugin.json"
+          },
+          "codex": {
+            ".codex-plugin/plugin.json": "tests/plugin_integration/package_assembly/fixtures/codex/plugin.json"
+          }
+        },
+        "name": "verity-plane-assembly-fixture",
+        "schema": "se-harness-plugin-assembly-v1",
+        "shared": {
+          "../../../outside/sentinel.txt": "tests/plugin_integration/package_assembly/fixtures/shared/scripts/fixture.py",
+          "README.md": "tests/plugin_integration/package_assembly/fixtures/shared/README.md",
+          "scripts/fixture.py": "tests/plugin_integration/package_assembly/fixtures/shared/scripts/fixture.py",
+          "skills/assembly-fixture/SKILL.md": "tests/plugin_integration/package_assembly/fixtures/shared/skills/assembly-fixture/SKILL.md"
+        }
+      }
+    },
+    {
+      "check": "build accepted exit",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "build accepted flag",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "output_listing": {},
+      "rejection": "unsafe path: '../../../outside/sentinel.txt'"
+    },
+    {
+      "check": "outside listing and bytes",
+      "expected": {
+        "sentinel.txt": "619cc5a35df8cfd23a13886e389e8c7f808b5b6e9f0b4c2215ecbe686673175a"
+      },
+      "observed": {
+        "sentinel.txt": "619cc5a35df8cfd23a13886e389e8c7f808b5b6e9f0b4c2215ecbe686673175a"
+      }
+    }
+  ],
+  "conclusion": "pass",
+  "exit_statuses": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+  ],
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "source_evidence_paths": [
+    "actions.txt",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "source_revision": "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6"
+}

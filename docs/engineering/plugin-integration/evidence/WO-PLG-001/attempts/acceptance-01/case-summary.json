@@ -1,0 +1,43 @@
+{
+  "claim": "Assembly fixture observations only; no formal assurance, native host support or publication.",
+  "outcomes": [
+    {
+      "case": "C01",
+      "conclusion": "pass"
+    },
+    {
+      "case": "C02",
+      "conclusion": "pass"
+    },
+    {
+      "case": "C03",
+      "conclusion": "pass"
+    },
+    {
+      "case": "C04",
+      "conclusion": "pass"
+    },
+    {
+      "case": "C05",
+      "conclusion": "pass"
+    },
+    {
+      "case": "C06",
+      "conclusion": "pass"
+    },
+    {
+      "case": "C07",
+      "conclusion": "pass"
+    },
+    {
+      "case": "C08",
+      "conclusion": "pass"
+    }
+  ],
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "unavailable_platforms": [
+    "Linux",
+    "Darwin"
+  ]
+}

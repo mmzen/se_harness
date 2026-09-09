@@ -1,0 +1,85 @@
+{
+  "checks": [
+    {
+      "check": "files copied before interruption",
+      "expected": 1,
+      "observed": 1
+    },
+    {
+      "check": "check accepted exit",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "check accepted flag",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "output_listing": {
+        "codex/verity-plane-assembly-fixture/.codex-plugin/plugin.json": "b66f6a65f4f9010d98619aff80af3909ee0d8fcfe04d4189a89c76fa9878cdd9"
+      },
+      "rejection": "incomplete or extra output files: ['claude/verity-plane-assembly-fixture/.claude-plugin/plugin.json', 'claude/verity-plane-assembly-fixture/README.md', 'claude/verity-plane-assembly-fixture/assembly-inventory.json', 'claude/verity-plane-assembly-fixture/packages/se_harness-0.17.0-py3-none-any.whl', 'claude/verity-plane-assembly-fixture/scripts/fixture.py', 'claude/verity-plane-assembly-fixture/skills/assembly-fixture/SKILL.md', 'codex/verity-plane-assembly-fixture/README.md', 'codex/verity-plane-assembly-fixture/assembly-inventory.json', 'codex/verity-plane-assembly-fixture/packages/se_harness-0.17.0-py3-none-any.whl', 'codex/verity-plane-assembly-fixture/scripts/fixture.py', 'codex/verity-plane-assembly-fixture/skills/assembly-fixture/SKILL.md', 'verity-plane-assembly-fixture-claude.zip', 'verity-plane-assembly-fixture-codex.zip']"
+    },
+    {
+      "check": "build accepted exit",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "check": "build accepted flag",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "output_listing": {
+        "codex/verity-plane-assembly-fixture/.codex-plugin/plugin.json": "b66f6a65f4f9010d98619aff80af3909ee0d8fcfe04d4189a89c76fa9878cdd9"
+      },
+      "rejection": "output already exists; inspect it or retry in a fresh directory"
+    },
+    {
+      "check": "same-directory retry preserves partial bytes",
+      "expected": {
+        "codex/verity-plane-assembly-fixture/.codex-plugin/plugin.json": "b66f6a65f4f9010d98619aff80af3909ee0d8fcfe04d4189a89c76fa9878cdd9"
+      },
+      "observed": {
+        "codex/verity-plane-assembly-fixture/.codex-plugin/plugin.json": "b66f6a65f4f9010d98619aff80af3909ee0d8fcfe04d4189a89c76fa9878cdd9"
+      }
+    },
+    {
+      "check": "build accepted exit",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "check": "build accepted flag",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "check": "check accepted exit",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "check": "check accepted flag",
+      "expected": true,
+      "observed": true
+    }
+  ],
+  "conclusion": "pass",
+  "exit_statuses": [
+    1,
+    1,
+    0,
+    0
+  ],
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "source_evidence_paths": [
+    "actions.txt",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "source_revision": "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6"
+}
