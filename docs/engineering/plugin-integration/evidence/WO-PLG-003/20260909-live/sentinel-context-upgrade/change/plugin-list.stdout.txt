@@ -1,0 +1,23 @@
+{
+  "installed": [
+    {
+      "pluginId": "codex-probe@codex-probe-local",
+      "name": "codex-probe",
+      "marketplaceName": "codex-probe-local",
+      "version": "0.0.7",
+      "installed": true,
+      "enabled": true,
+      "source": {
+        "source": "local",
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\marketplace with spaces\\plugins\\codex-probe"
+      },
+      "marketplaceSource": {
+        "sourceType": "local",
+        "source": "\\\\?\\C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\marketplace with spaces"
+      },
+      "installPolicy": "AVAILABLE",
+      "authPolicy": "ON_INSTALL"
+    }
+  ],
+  "available": []
+}

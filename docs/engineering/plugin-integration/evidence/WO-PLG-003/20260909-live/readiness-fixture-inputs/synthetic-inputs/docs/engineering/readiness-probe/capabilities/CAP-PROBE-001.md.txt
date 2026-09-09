@@ -1,0 +1,18 @@
++++
+id = "CAP-PROBE-001"
+type = "capability"
+title = "Observe a supplied evaluator"
+status = "approved"
+owners = ["synthetic-fixture-owner"]
+created = "2026-09-09"
+updated = "2026-09-09"
+
+[relations]
+derives_from = ["INT-PROBE-001"]
++++
+
+# Observe a supplied evaluator
+
+This document is controlled synthetic test data for a disposable compatibility probe.
+Its status and owner fields are input values, not recorded real-world approvals.
+It grants no authority in the source repository or any operator project.

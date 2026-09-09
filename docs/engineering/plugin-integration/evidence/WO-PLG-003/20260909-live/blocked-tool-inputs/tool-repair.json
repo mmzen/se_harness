@@ -1,0 +1,31 @@
+{
+  "thread_id": "01a084d3-a7cc-7e62-ac5b-22b91ed660b7",
+  "source_filename": "rollout-2026-09-09T08-20-58-01a084d3-a7cc-7e62-ac5b-22b91ed660b7.jsonl",
+  "source_sha256": "e6a9b54bd59cabf646703666dc723520ad5396f55601ba0f1ea95ef1178ee887",
+  "extraction_scope": "Only marker-bearing actual custom-tool call input and its same-call output; no messages, reasoning, base instructions, or auth records.",
+  "corresponding_live_transcript": "../tool-repair/transcript.json",
+  "selected_tool_records": [
+    {
+      "timestamp": "2026-09-09T06:21:09.045Z",
+      "type": "custom_tool_call",
+      "name": "exec",
+      "call_id": "call_0cRNd1DumRwwaxhK9q6QIhKU",
+      "input": "text(await tools.exec_command({cmd:\"[System.IO.File]::WriteAllText('C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\codex\\\\run-001 with spaces\\\\repo\\\\governed-target.txt', 'CODEX_PROBE_DENY_SENTINEL')\",max_output_tokens:2000}));\n"
+    },
+    {
+      "timestamp": "2026-09-09T06:21:10.208Z",
+      "type": "custom_tool_call_output",
+      "call_id": "call_0cRNd1DumRwwaxhK9q6QIhKU",
+      "output": [
+        {
+          "type": "input_text",
+          "text": "Script failed\nWall time 1.1 seconds\nOutput:\n"
+        },
+        {
+          "type": "input_text",
+          "text": "Script error:\nCommand blocked by PreToolUse hook: CODEX_PROBE_DENY_SENTINEL: exact test-only write refused; not a production policy decision. Command: [System.IO.File]::WriteAllText('C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo\\governed-target.txt', 'CODEX_PROBE_DENY_SENTINEL')"
+        }
+      ]
+    }
+  ]
+}

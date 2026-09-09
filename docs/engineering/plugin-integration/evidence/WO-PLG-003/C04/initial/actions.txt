@@ -1,0 +1,119 @@
+{
+  "layer": "live app-server endpoint observations only",
+  "argv": [],
+  "app_server_messages": [
+    {
+      "sent_at": 1788904028.9017344,
+      "message": {
+        "id": 4,
+        "method": "thread/start",
+        "params": {
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+          "sandbox": "read-only",
+          "approvalPolicy": "on-request"
+        }
+      }
+    },
+    {
+      "received_at": 1788904028.937339,
+      "message": {
+        "id": 4,
+        "result": {
+          "thread": {
+            "id": "01a082fd-3ae9-7d33-b2a8-6e689f7ed3a4",
+            "extra": null,
+            "sessionId": "01a082fd-3ae9-7d33-b2a8-6e689f7ed3a4",
+            "forkedFromId": null,
+            "parentThreadId": null,
+            "preview": "",
+            "ephemeral": false,
+            "section": null,
+            "sectionEnteredAt": null,
+            "projectId": null,
+            "historyMode": "paginated",
+            "modelProvider": "openai",
+            "model": "gpt-6-astra",
+            "reasoningEffort": null,
+            "createdAt": 1788904028,
+            "updatedAt": 1788904028,
+            "recencyAt": 1788904028,
+            "status": {
+              "type": "idle"
+            },
+            "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\sessions\\2026\\09\\08\\rollout-2026-09-08T23-47-08-01a082fd-3ae9-7d33-b2a8-6e689f7ed3a4.jsonl",
+            "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+            "cliVersion": "0.153.4",
+            "source": "vscode",
+            "canAcceptDirectInput": true,
+            "threadSource": null,
+            "agentNickname": null,
+            "agentRole": null,
+            "gitInfo": null,
+            "name": null,
+            "turns": []
+          },
+          "model": "gpt-6-astra",
+          "modelProvider": "openai",
+          "serviceTier": null,
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+          "runtimeWorkspaceRoots": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+          ],
+          "instructionSources": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo\\AGENTS.md"
+          ],
+          "approvalPolicy": "on-request",
+          "approvalsReviewer": "user",
+          "sandbox": {
+            "type": "readOnly",
+            "networkAccess": false
+          },
+          "activePermissionProfile": null,
+          "reasoningEffort": null,
+          "multiAgentMode": "explicitRequestOnly"
+        }
+      }
+    },
+    {
+      "sent_at": 1788904028.9375024,
+      "message": {
+        "id": 5,
+        "method": "thread/resume",
+        "params": {
+          "threadId": "01a082fd-3ae9-7d33-b2a8-6e689f7ed3a4",
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+        }
+      }
+    },
+    {
+      "received_at": 1788904028.9617636,
+      "message": {
+        "error": {
+          "code": -32600,
+          "message": "no rollout found for thread id 01a082fd-3ae9-7d33-b2a8-6e689f7ed3a4"
+        },
+        "id": 5
+      }
+    },
+    {
+      "sent_at": 1788904028.9617953,
+      "message": {
+        "id": 6,
+        "method": "thread/compact/start",
+        "params": {
+          "threadId": "01a082fd-3ae9-7d33-b2a8-6e689f7ed3a4"
+        }
+      }
+    },
+    {
+      "received_at": 1788904028.9621966,
+      "message": {
+        "id": 6,
+        "result": {}
+      }
+    }
+  ],
+  "source_evidence": [
+    "app-server/transcript.json"
+  ]
+}

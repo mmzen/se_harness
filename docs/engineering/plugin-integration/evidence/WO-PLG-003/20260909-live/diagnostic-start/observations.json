@@ -1,0 +1,42 @@
+{
+  "whole_case_conclusion": "unassessed",
+  "production_readiness": false,
+  "thread_id": "01a084bf-b5dd-7390-92df-57c9542f4450",
+  "turn_completion": {
+    "method": "turn/completed",
+    "params": {
+      "threadId": "01a084bf-b5dd-7390-92df-57c9542f4450",
+      "turn": {
+        "id": "01a084bf-b606-70d2-89fb-5c6d4ec9bfa0",
+        "items": [
+          {
+            "type": "agentMessage",
+            "id": "msg_0a84bd61d0c04982016aa0f5b5076c87d29d754f61ca242a3a",
+            "text": "READY",
+            "phase": "final_answer",
+            "memoryCitation": null,
+            "delivery": null,
+            "questions": null
+          }
+        ],
+        "itemsView": "summary",
+        "status": "completed",
+        "error": null,
+        "startedAt": 1788933551,
+        "completedAt": 1788933556,
+        "durationMs": 5119
+      }
+    },
+    "emittedAtMs": 1788933556769
+  },
+  "seconds": 5.586,
+  "cleanup": {
+    "pid": 24812,
+    "method": "owned Windows Job Object",
+    "active_processes": 0
+  },
+  "reader_complete": [
+    true,
+    true
+  ]
+}

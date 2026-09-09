@@ -1,0 +1,6 @@
+[
+  {
+    "source": "20260909-live\\changed-resume-compact\\stderr.txt",
+    "stderr": ""
+  }
+]

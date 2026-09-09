@@ -1,0 +1,317 @@
+SOURCE: ../20260909-live/approved-tool-setup-2/transcript.json
+
+{
+  "method": "item/completed",
+  "params": {
+    "item": {
+      "type": "commandExecution",
+      "id": "exec-a52092a4-e515-4b48-9459-80776abec2d5",
+      "pluginId": null,
+      "scriptPath": null,
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"& 'C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe' -I -m venv 'C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\codex\\\\run-001 with spaces\\\\profile\\\\codex\\\\plugins\\\\data\\\\codex-probe-codex-probe-local\\\\tool-environment'\"",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+      "processId": "29087",
+      "source": "unifiedExecStartup",
+      "status": "completed",
+      "commandActions": [
+        {
+          "type": "unknown",
+          "command": "& 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe' -I -m venv 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local\\tool-environment'"
+        }
+      ],
+      "aggregatedOutput": null,
+      "exitCode": 0,
+      "durationMs": 7266
+    },
+    "threadId": "01a084ce-1031-7bd2-98b8-4bf98d60ed29",
+    "turnId": "01a084ce-105c-7d43-ba31-dcfadb556e55",
+    "completedAtMs": 1788934515039
+  },
+  "emittedAtMs": 1788934515051
+}
+
+{
+  "method": "item/completed",
+  "params": {
+    "item": {
+      "type": "commandExecution",
+      "id": "exec-ffc7eb34-68cf-4953-aa4e-b1473fbd2301",
+      "pluginId": null,
+      "scriptPath": null,
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"& 'C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\codex\\\\run-001 with spaces\\\\profile\\\\codex\\\\plugins\\\\data\\\\codex-probe-codex-probe-local\\\\tool-environment\\\\Scripts\\\\python.exe' -I -m pip install --no-index --no-deps 'C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-evaluator-wheels\\\\se_harness-0.16.0-py3-none-any.whl'\"",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+      "processId": "55510",
+      "source": "unifiedExecStartup",
+      "status": "completed",
+      "commandActions": [
+        {
+          "type": "unknown",
+          "command": "& 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local\\tool-environment\\Scripts\\python.exe' -I -m pip install --no-index --no-deps 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evaluator-wheels\\se_harness-0.16.0-py3-none-any.whl'"
+        }
+      ],
+      "aggregatedOutput": "Processing C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evaluator-wheels\\se_harness-0.16.0-py3-none-any.whl\r\nInstalling collected packages: se-harness\r\nSuccessfully installed se-harness-0.16.0\r\n",
+      "exitCode": 0,
+      "durationMs": 3085
+    },
+    "threadId": "01a084ce-1031-7bd2-98b8-4bf98d60ed29",
+    "turnId": "01a084ce-105c-7d43-ba31-dcfadb556e55",
+    "completedAtMs": 1788934528836
+  },
+  "emittedAtMs": 1788934528849
+}
+
+SOURCE: ../20260909-live/tool-complete-setup/transcript.json
+
+{
+  "method": "hook/completed",
+  "params": {
+    "threadId": "01a084d1-d001-7551-b2ca-95f0208a620c",
+    "turnId": "01a084d1-d02d-7951-b11c-c5f1f26b91bb",
+    "run": {
+      "id": "pre-tool-use:0:C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.7\\hooks\\hooks.json:exec-06a28576-41f0-45c1-8751-c1a06fbd7413",
+      "eventName": "preToolUse",
+      "handlerType": "command",
+      "executionMode": "sync",
+      "scope": "turn",
+      "sourcePath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.7\\hooks\\hooks.json",
+      "source": "plugin",
+      "displayOrder": 0,
+      "status": "blocked",
+      "statusMessage": null,
+      "startedAt": 1788934747,
+      "completedAt": 1788934748,
+      "durationMs": 1138,
+      "entries": [
+        {
+          "kind": "feedback",
+          "text": "CODEX_PROBE_DENY_SENTINEL: exact test-only write refused; not a production policy decision"
+        }
+      ]
+    }
+  },
+  "emittedAtMs": 1788934748285
+}
+
+{
+  "method": "item/completed",
+  "params": {
+    "item": {
+      "type": "commandExecution",
+      "id": "exec-f66a3357-b307-4865-bda1-ec8addda59f0",
+      "pluginId": null,
+      "scriptPath": null,
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"[System.IO.File]::WriteAllText('C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\codex\\\\run-001 with spaces\\\\profile\\\\codex\\\\plugins\\\\data\\\\codex-probe-codex-probe-local\\\\runtime-path.txt', 'C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\codex\\\\run-001 with spaces\\\\profile\\\\codex\\\\plugins\\\\data\\\\codex-probe-codex-probe-local\\\\tool-environment\\\\Scripts\\\\python.exe')\"",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+      "processId": "43489",
+      "source": "unifiedExecStartup",
+      "status": "completed",
+      "commandActions": [
+        {
+          "type": "unknown",
+          "command": "[System.IO.File]::WriteAllText('C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local\\runtime-path.txt', 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local\\tool-environment\\Scripts\\python.exe')"
+        }
+      ],
+      "aggregatedOutput": null,
+      "exitCode": 0,
+      "durationMs": 577
+    },
+    "threadId": "01a084d1-d001-7551-b2ca-95f0208a620c",
+    "turnId": "01a084d1-d02d-7951-b11c-c5f1f26b91bb",
+    "completedAtMs": 1788934757396
+  },
+  "emittedAtMs": 1788934757414
+}
+
+SOURCE: ../20260909-live/tool-ready-start/transcript.json
+
+SOURCE: ../20260909-live/tool-repair/transcript.json
+
+{
+  "method": "hook/completed",
+  "params": {
+    "threadId": "01a084d3-a7cc-7e62-ac5b-22b91ed660b7",
+    "turnId": "01a084d3-a7f9-70e2-8cca-4a766ddb8d05",
+    "run": {
+      "id": "pre-tool-use:0:C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.7\\hooks\\hooks.json:exec-ec57f945-5a47-45d0-9be5-832e6f0ab427",
+      "eventName": "preToolUse",
+      "handlerType": "command",
+      "executionMode": "sync",
+      "scope": "turn",
+      "sourcePath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.7\\hooks\\hooks.json",
+      "source": "plugin",
+      "displayOrder": 0,
+      "status": "blocked",
+      "statusMessage": null,
+      "startedAt": 1788934869,
+      "completedAt": 1788934870,
+      "durationMs": 1107,
+      "entries": [
+        {
+          "kind": "feedback",
+          "text": "CODEX_PROBE_DENY_SENTINEL: exact test-only write refused; not a production policy decision"
+        }
+      ]
+    }
+  },
+  "emittedAtMs": 1788934870207
+}
+
+{
+  "method": "item/completed",
+  "params": {
+    "item": {
+      "type": "commandExecution",
+      "id": "exec-6519cce4-ce2f-4393-86e9-1594a30e4c81",
+      "pluginId": null,
+      "scriptPath": null,
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"& 'C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe' -I -m venv 'C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\codex\\\\run-001 with spaces\\\\profile\\\\codex\\\\plugins\\\\data\\\\codex-probe-codex-probe-local\\\\tool-environment'\"",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+      "processId": "2266",
+      "source": "unifiedExecStartup",
+      "status": "completed",
+      "commandActions": [
+        {
+          "type": "unknown",
+          "command": "& 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe' -I -m venv 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local\\tool-environment'"
+        }
+      ],
+      "aggregatedOutput": null,
+      "exitCode": 0,
+      "durationMs": 2969
+    },
+    "threadId": "01a084d3-a7cc-7e62-ac5b-22b91ed660b7",
+    "turnId": "01a084d3-a7f9-70e2-8cca-4a766ddb8d05",
+    "completedAtMs": 1788934882294
+  },
+  "emittedAtMs": 1788934882304
+}
+
+{
+  "method": "item/completed",
+  "params": {
+    "item": {
+      "type": "commandExecution",
+      "id": "exec-5f9a92d7-ba79-4732-bd5d-7a2fcf62b536",
+      "pluginId": null,
+      "scriptPath": null,
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"& 'C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\codex\\\\run-001 with spaces\\\\profile\\\\codex\\\\plugins\\\\data\\\\codex-probe-codex-probe-local\\\\tool-environment\\\\Scripts\\\\python.exe' -I -m pip install --force-reinstall --no-index --no-deps 'C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-evaluator-wheels\\\\se_harness-0.16.0-py3-none-any.whl'\"",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+      "processId": "25191",
+      "source": "unifiedExecStartup",
+      "status": "completed",
+      "commandActions": [
+        {
+          "type": "unknown",
+          "command": "& 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local\\tool-environment\\Scripts\\python.exe' -I -m pip install --force-reinstall --no-index --no-deps 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evaluator-wheels\\se_harness-0.16.0-py3-none-any.whl'"
+        }
+      ],
+      "aggregatedOutput": "Processing C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evaluator-wheels\\se_harness-0.16.0-py3-none-any.whl\r\nInstalling collected packages: se-harness\r\n  Attempting uninstall: se-harness\r\n    Found existing installation: se-harness 0.16.0\r\n    Uninstalling se-harness-0.16.0:\r\n      Successfully uninstalled se-harness-0.16.0\r\nSuccessfully installed se-harness-0.16.0\r\n",
+      "exitCode": 0,
+      "durationMs": 2329
+    },
+    "threadId": "01a084d3-a7cc-7e62-ac5b-22b91ed660b7",
+    "turnId": "01a084d3-a7f9-70e2-8cca-4a766ddb8d05",
+    "completedAtMs": 1788934897065
+  },
+  "emittedAtMs": 1788934897077
+}
+
+{
+  "method": "item/completed",
+  "params": {
+    "item": {
+      "type": "commandExecution",
+      "id": "exec-3ccdde24-1899-4962-8dc5-6e84f94bc142",
+      "pluginId": null,
+      "scriptPath": null,
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"[System.IO.File]::WriteAllText('C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\codex\\\\run-001 with spaces\\\\profile\\\\codex\\\\plugins\\\\data\\\\codex-probe-codex-probe-local\\\\runtime-path.txt', 'C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\codex\\\\run-001 with spaces\\\\profile\\\\codex\\\\plugins\\\\data\\\\codex-probe-codex-probe-local\\\\tool-environment\\\\Scripts\\\\python.exe')\"",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+      "processId": "47113",
+      "source": "unifiedExecStartup",
+      "status": "completed",
+      "commandActions": [
+        {
+          "type": "unknown",
+          "command": "[System.IO.File]::WriteAllText('C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local\\runtime-path.txt', 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local\\tool-environment\\Scripts\\python.exe')"
+        }
+      ],
+      "aggregatedOutput": null,
+      "exitCode": 0,
+      "durationMs": 606
+    },
+    "threadId": "01a084d3-a7cc-7e62-ac5b-22b91ed660b7",
+    "turnId": "01a084d3-a7f9-70e2-8cca-4a766ddb8d05",
+    "completedAtMs": 1788934908927
+  },
+  "emittedAtMs": 1788934908937
+}
+
+SOURCE: ../20260909-live/repaired-ready-start/transcript.json
+
+SOURCE: ../20260909-live/blocked-tool-inputs/tool-complete-setup.json
+{
+  "thread_id": "01a084d1-d001-7551-b2ca-95f0208a620c",
+  "source_filename": "rollout-2026-09-09T08-18-57-01a084d1-d001-7551-b2ca-95f0208a620c.jsonl",
+  "source_sha256": "f8f271e60b8476706f0814ab5d17bb3aabe94fbde803b8bb03a760f05c18a390",
+  "extraction_scope": "Only marker-bearing actual custom-tool call input and its same-call output; no messages, reasoning, base instructions, or auth records.",
+  "corresponding_live_transcript": "../tool-complete-setup/transcript.json",
+  "selected_tool_records": [
+    {
+      "timestamp": "2026-09-09T06:19:07.097Z",
+      "type": "custom_tool_call",
+      "name": "exec",
+      "call_id": "call_nwUHCpnb4MaQjb17xVMEBzcJ",
+      "input": "text(await tools.exec_command({cmd:\"[System.IO.File]::WriteAllText('C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\codex\\\\run-001 with spaces\\\\repo\\\\governed-target.txt', 'CODEX_PROBE_DENY_SENTINEL')\"}));\n"
+    },
+    {
+      "timestamp": "2026-09-09T06:19:08.286Z",
+      "type": "custom_tool_call_output",
+      "call_id": "call_nwUHCpnb4MaQjb17xVMEBzcJ",
+      "output": [
+        {
+          "type": "input_text",
+          "text": "Script failed\nWall time 1.1 seconds\nOutput:\n"
+        },
+        {
+          "type": "input_text",
+          "text": "Script error:\nCommand blocked by PreToolUse hook: CODEX_PROBE_DENY_SENTINEL: exact test-only write refused; not a production policy decision. Command: [System.IO.File]::WriteAllText('C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo\\governed-target.txt', 'CODEX_PROBE_DENY_SENTINEL')"
+        }
+      ]
+    }
+  ]
+}
+
+
+SOURCE: ../20260909-live/blocked-tool-inputs/tool-repair.json
+{
+  "thread_id": "01a084d3-a7cc-7e62-ac5b-22b91ed660b7",
+  "source_filename": "rollout-2026-09-09T08-20-58-01a084d3-a7cc-7e62-ac5b-22b91ed660b7.jsonl",
+  "source_sha256": "e6a9b54bd59cabf646703666dc723520ad5396f55601ba0f1ea95ef1178ee887",
+  "extraction_scope": "Only marker-bearing actual custom-tool call input and its same-call output; no messages, reasoning, base instructions, or auth records.",
+  "corresponding_live_transcript": "../tool-repair/transcript.json",
+  "selected_tool_records": [
+    {
+      "timestamp": "2026-09-09T06:21:09.045Z",
+      "type": "custom_tool_call",
+      "name": "exec",
+      "call_id": "call_0cRNd1DumRwwaxhK9q6QIhKU",
+      "input": "text(await tools.exec_command({cmd:\"[System.IO.File]::WriteAllText('C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\codex\\\\run-001 with spaces\\\\repo\\\\governed-target.txt', 'CODEX_PROBE_DENY_SENTINEL')\",max_output_tokens:2000}));\n"
+    },
+    {
+      "timestamp": "2026-09-09T06:21:10.208Z",
+      "type": "custom_tool_call_output",
+      "call_id": "call_0cRNd1DumRwwaxhK9q6QIhKU",
+      "output": [
+        {
+          "type": "input_text",
+          "text": "Script failed\nWall time 1.1 seconds\nOutput:\n"
+        },
+        {
+          "type": "input_text",
+          "text": "Script error:\nCommand blocked by PreToolUse hook: CODEX_PROBE_DENY_SENTINEL: exact test-only write refused; not a production policy decision. Command: [System.IO.File]::WriteAllText('C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo\\governed-target.txt', 'CODEX_PROBE_DENY_SENTINEL')"
+        }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,117 @@
+{
+  "case": "C07",
+  "host": "Codex CLI0.153.4 / Windows10.0.26200 x86_64",
+  "status": "pass",
+  "conclusion": "The bounded Windows bootstrap/repair observation is complete. It is not a production-support or assurance decision.",
+  "expected": "Real model shell setup and repair under ordinary permissions; actual pre-readiness write refusal; fresh released readiness and context after each install/repair.",
+  "observed": {
+    "initial_setup_commands_exit": [
+      0,
+      0
+    ],
+    "setup_pointer_exit": 0,
+    "repair_commands_exit": [
+      0,
+      0,
+      0
+    ],
+    "sentinel": "Actual tool input and matching error output prove the requested governed-target write was blocked in setup completion and repair. Predicate is marker-triggered test-only.",
+    "fresh_readiness": [
+      {
+        "trial": "tool-ready-start",
+        "observer_timestamp": 1788934793.7316327,
+        "thread_id": "01a084d2-9cfe-7651-be5b-26c650656cca",
+        "ready": true,
+        "preflight_ready": true,
+        "all_check_exits": {
+          "identity": 0,
+          "doctor": 0,
+          "preflight": 0,
+          "check": 0
+        },
+        "manifest_count": 9,
+        "context_received_equal_after_newline_normalization": true,
+        "context_raw_sha256": "0eced7b2d1207ac978696d0c9938b79129bce8e4e4e0561e59b10239a4120b9f",
+        "turn_status": "completed"
+      },
+      {
+        "trial": "repaired-ready-start",
+        "observer_timestamp": 1788934962.2961955,
+        "thread_id": "01a084d5-3069-76f3-80ab-09b588a200b7",
+        "ready": true,
+        "preflight_ready": true,
+        "all_check_exits": {
+          "identity": 0,
+          "doctor": 0,
+          "preflight": 0,
+          "check": 0
+        },
+        "manifest_count": 9,
+        "context_received_equal_after_newline_normalization": true,
+        "context_raw_sha256": "0eced7b2d1207ac978696d0c9938b79129bce8e4e4e0561e59b10239a4120b9f",
+        "turn_status": "completed"
+      }
+    ],
+    "repository_window": "The49-file inventory before missing-supplied-skill (after initial venv/pip and before first genuine sentinel/pointer) equals final inventory. Repair has separate matching49-file before/after inventories. No initial-venv/pip inventory or normal-profile full audit is claimed.",
+    "initial_venv_pip_inventory": "unavailable",
+    "repair_repository_unchanged": true,
+    "sentinel_sha256": "4fb3fb38100be0a78a3273edc5d2721fb305953bd652179b17dff64a00cac8bd",
+    "permission_handling": "Actual requests/responses retained; only one-shot exact reviewed setup/skill-read approvals. No execution-policy amendment or Windows security setup.",
+    "fixture_versions": "0.0.6 records original actual venv/pip;0.0.7 adds explicit test-negative permission and completes pointer, fresh readiness and repair. All failures remain.",
+    "production_policy": "None; real released evaluator projects synthetic WO-PROBE-001 test inputs."
+  },
+  "exit_status": 0,
+  "source_evidence": [
+    "20260909-live/approved-tool-setup-2/identity.json",
+    "20260909-live/approved-tool-setup-2/observations.json",
+    "20260909-live/approved-tool-setup-2/transcript.json",
+    "20260909-live/tool-complete-setup/identity.json",
+    "20260909-live/tool-complete-setup/observations.json",
+    "20260909-live/tool-complete-setup/transcript.json",
+    "20260909-live/tool-ready-start/identity.json",
+    "20260909-live/tool-ready-start/observations.json",
+    "20260909-live/tool-ready-start/transcript.json",
+    "20260909-live/tool-repair/identity.json",
+    "20260909-live/tool-repair/observations.json",
+    "20260909-live/tool-repair/transcript.json",
+    "20260909-live/repaired-ready-start/identity.json",
+    "20260909-live/repaired-ready-start/observations.json",
+    "20260909-live/repaired-ready-start/transcript.json",
+    "20260909-live/blocked-tool-inputs/tool-complete-setup.json",
+    "20260909-live/blocked-tool-inputs/tool-repair.json",
+    "20260909-live/ui-review-actions.json",
+    "20260909-live/readiness-fixture-inputs/synthetic-inputs/path-map.json",
+    "20260909-live/removed-tool-interpreter/before.json",
+    "20260909-live/removed-tool-interpreter/after.json",
+    "20260909-live/final-observations/summary.json",
+    "20260909-live/final-observations/runtime-readiness-observations.jsonl.json",
+    "20260909-live/final-fixture-tests/result.json"
+  ],
+  "source_sha256": {
+    "20260909-live/approved-tool-setup-2/identity.json": "f3470fa22e307520b457c71ccf269118151c937bc421f6b46dbbfa7d35e3df8e",
+    "20260909-live/approved-tool-setup-2/observations.json": "7cbe6ec02d41d30dda6423480a7588f5f78757f0db53f67dfdddfa2de1c566bc",
+    "20260909-live/approved-tool-setup-2/transcript.json": "25faa3c451d7062d9196ea44369ba09b6238d45fd991365a47b4b1568e414efe",
+    "20260909-live/tool-complete-setup/identity.json": "08eb055f0a0223099ea743f4d3b2d857ed1894159a2e8220e2f00923bee70bae",
+    "20260909-live/tool-complete-setup/observations.json": "2a328a6abf63a1711629c93441e487783c9901c0346a9e830ffc34f129d739f1",
+    "20260909-live/tool-complete-setup/transcript.json": "74aac3b7a6d69eed294bd720683a76b839d49be8b5a0d51f23dc03562739019c",
+    "20260909-live/tool-ready-start/identity.json": "349db9c21bf5eabe4217822b5b8d0f792c9af3dce3cdcd90e34a5fd17632b50d",
+    "20260909-live/tool-ready-start/observations.json": "7b0855f58d154563ce419f567945e19f363ad971ae7d90abda55bb182f46e23d",
+    "20260909-live/tool-ready-start/transcript.json": "5205e751351f64f75625381f96c8d20ee49adb288f0a4f5ceb1b06ce50107a0b",
+    "20260909-live/tool-repair/identity.json": "eeac0e573a2f249392f7bdf2a39d66058c936a16c85af0241c412fbab0b5cc92",
+    "20260909-live/tool-repair/observations.json": "90621c7b809c6fd563e7505dcbefc9164fb89ed82185f8ca461ecbca08d5cb9b",
+    "20260909-live/tool-repair/transcript.json": "5d273f91683cf105c55ba01110a2af257dc400f19df6099354399d442f41a35c",
+    "20260909-live/repaired-ready-start/identity.json": "a7cb429bce4ba166c73f0bdeea8a11f77dcee0af28e174f6ae5d4fb265760724",
+    "20260909-live/repaired-ready-start/observations.json": "f823e29fbb652064fcf5ebe427f342f7b0e2accee28e4ce5c80d6193b960a3cb",
+    "20260909-live/repaired-ready-start/transcript.json": "3f26a827e78b6efe9f95ce3e55e828b05478e0e799f4cc461d88cb07cccc8b34",
+    "20260909-live/blocked-tool-inputs/tool-complete-setup.json": "850b92c3b5a77e1250d0ae2c35fb2bdf282b24226d2ca07a7ce7913e62b79603",
+    "20260909-live/blocked-tool-inputs/tool-repair.json": "b7b7b00f887876a01d2da3581ce64b88a40d6f4f898525257b71426035858de3",
+    "20260909-live/ui-review-actions.json": "26638b0aa83fc881ab68865ef60cc3d8512d7330333c05fc1972bf8233ce0305",
+    "20260909-live/readiness-fixture-inputs/synthetic-inputs/path-map.json": "a8e5d02e42f83b5afd499989fb7a34e743ec24a38ba10e0f26355ba657438cc8",
+    "20260909-live/removed-tool-interpreter/before.json": "68655d6f6cb62faa08fdadfd35fd4bc52c22604a51a1cc913306e68aecb05d33",
+    "20260909-live/removed-tool-interpreter/after.json": "f06d0b92feb823d7cab9e26eeb78259fabb7dfb37e8473744f10fa835c8bfaac",
+    "20260909-live/final-observations/summary.json": "d50c9d223d820f5650de23302e1b4489a5a865f2e10a5716c811b36b8ab56fdd",
+    "20260909-live/final-observations/runtime-readiness-observations.jsonl.json": "1b3187e12230d128d066a620cd16a91a21e4083bc4164360d1324d2a2b4d5476",
+    "20260909-live/final-fixture-tests/result.json": "0835c7b38509ec273658be0089b997d51ca047defcdfc246f3a371b2382ead48"
+  },
+  "authority": "WO-PLG-003 remains in_progress. No VREC, lifecycle completion or support selection."
+}

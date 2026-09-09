@@ -1,17 +1,26 @@
 {
   "case": "C03",
   "expected": "Two fresh host sessions deliver interpreter identity and source bytes from the prepared evaluator.",
-  "observed": "Exact 0.16.0 wheel installs offline; direct identity/doctor checks pass and source bytes are emitted. No two trusted host runs yet.",
-  "conclusion": "unavailable",
-  "case_passed": false,
-  "evidence_layer": "direct calibration only",
-  "exit_statuses": [
-    0,
-    0
-  ],
+  "observed": "Two fresh authenticated sessions complete successfully; actual SessionStart context delivers both source files, with successful released identity/doctor observations.",
+  "conclusion": "pass",
+  "case_passed": true,
+  "evidence_layer": "Retained authenticated host protocol; manual case assessment, not VREC assurance.",
   "source_evidence": {
-    "calibration-inline-corrected/install-wheel.json": "7ad6009eb6f53a5eeb9e3bec19d3ce09fe749c67b8cf76a564a406c10dbad07a",
-    "calibration-inline-corrected/prepared-runtime.json": "e1bc7bf9ce8c432385c0226855fbae8267a7b366440d9d0934c109c0ca93c2b0"
+    "20260909-live/input-diagnostic-start/transcript.json": "91a0036b807310a1291b43fb6fa4c4d376a63e949d3688c68723507caf4b4503",
+    "20260909-live/input-diagnostic-start/observations.json": "0919e632f2208c3ef32df581e9a96c4f102cc6ac08ff68b739935780cd50b8f5",
+    "20260909-live/input-diagnostic-start/identity.json": "a45d3788e467b06655bfd07dc2e9fe4723e89ca25c864935157812a58dca2354",
+    "20260909-live/prepared-start-2/transcript.json": "6d79c56ae7fa3d4ed803b1cfad7e5c06e4ed9066a84e813d52b6a2ed0b254b58",
+    "20260909-live/prepared-start-2/observations.json": "bba05eec6625b2d983b8f6f756fdf08995c43b15d906f65e462487b9f74a024c",
+    "20260909-live/prepared-start-2/identity.json": "b9d6d6716fc96bd71a93be5b14970c3c7d013ce860aaaeed55dbf2988c065f4a",
+    "20260909-live/changed-source/runtime-observations.jsonl": "d3502dab5dfe05e2eaee74d16d8b43ac23779839d7aad2ac9c4d243dfcb8011d",
+    "20260909-live/changed-source/before.json": "e6a8fb44b7ee7a021ce356c99e2deca35acbee97591439fe10fc2900a5869852"
   },
-  "remaining": "See report.md; operator login and hook trust are not complete."
+  "limitations": [
+    "Windows Codex CLI 0.153.4 only; no production support decision.",
+    "UI actions are labeled observer transcriptions; machine trust states are separately retained.",
+    "No whole-session normal-profile inventory comparison was collected."
+  ],
+  "historical_observations": "initial/observations.json",
+  "remaining": "No missing observation for this recorded route; broader host/platform qualification is separate.",
+  "source_comparison": "Source-file hashes bind exact file bytes; delivered host text matches after newline normalization."
 }

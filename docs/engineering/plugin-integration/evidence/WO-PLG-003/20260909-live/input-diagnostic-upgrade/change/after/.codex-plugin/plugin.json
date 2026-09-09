@@ -1,0 +1,7 @@
+{
+  "name": "codex-probe",
+  "version": "0.0.5",
+  "description": "Disposable compatibility observation",
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json"
+}

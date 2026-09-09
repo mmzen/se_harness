@@ -7,7 +7,8 @@ rebound_at = "2026-09-08T21:59:14Z"
 
 # WO-PLG-003: partial investigation handoff
 
-**Work remains in progress. All seven full host acceptance cases are incomplete.**
+**Work remains in progress. The current case matrix and remaining observations
+are recorded in [the report](report.md).**
 This packet retains the observations available so far and the current environment
 limits. It is not a claim of completed implementation, verified conformance,
 production support, or permission to merge.
@@ -25,15 +26,27 @@ recorded in [governance](governance/). No completion or assurance transition was
 - The fixture instructions and focused test evidence document repeatable local
   checks. Passing observer tests are not passing host acceptance cases.
 - The [2026-09-09 resumption check](20260909-resumption/auth-status.json)
-  confirms that the existing isolated profile is still signed out. The separate
-  official sign-in flow contributes no additional acceptance claim.
-- No live authenticated conversation completed; setup/repair through the host's
-  real tools and the remaining resume, compaction, trust, and permission observations
-  must still be collected. Isolated sign-in is pending with the operator.
+  retains the earlier signed-out state. The operator subsequently completed
+  isolated sign-in. [Live observations](20260909-live/) now include actual
+  authenticated conversations and hook-trust interactions. Login output and
+  credential material remain excluded from public evidence.
+- Further case conclusions must follow the actual host events and evaluator
+  results. A successful model response alone does not establish hook delivery,
+  setup, readiness, or permission enforcement.
+- C01 and C03-C07 now have complete behavioral observations for the recorded
+  Windows route. The [fresh C07 sequence](20260909-live/complete-sequence-summary/)
+  retains actual tool-call refusals, real setup and repair, released readiness
+  and fresh host context. Its full 49-file repository comparison and bounded
+  20-input metadata comparison are distinct from the earlier inventory gaps.
+- C02 demonstrates guidance and stopping for an observer-confirmed missing
+  selected interpreter; no agent prerequisite-check tool runs in that case.
+  Genuine older/unusable interpreter variants and other platforms remain
+  unavailable. The report retains all source, trust and inventory limitations.
 
 ## Decision and next action
 
-Continue the already authorized investigation once its isolated sign-in is available.
+The engineering owner must decide whether these observations and their explicit
+coverage limits complete the authorized investigation.
 Keep `WO-PLG-003` in `in_progress`. The accountable engineering owner has not accepted
 completion. A mechanically passing handoff check would establish fresh, scoped
 evidence only; it does not inspect the completeness of these host observations.

@@ -1,13 +1,24 @@
 {
   "case": "C04",
   "expected": "Resume and completed compaction deliver fresh changed source bytes, or a precise unavailable route is retained.",
-  "observed": "Empty-thread start succeeded; immediate resume found no rollout; compact request accepted without observed completion. Real restoration remains untested.",
-  "conclusion": "unavailable",
-  "case_passed": false,
-  "evidence_layer": "live app-server endpoint observations only",
-  "exit_statuses": [],
+  "observed": "Actual persisted-session resume and completed compaction deliver newly changed source bytes; the post-compaction turn also completes successfully.",
+  "conclusion": "pass",
+  "case_passed": true,
+  "evidence_layer": "Retained authenticated host protocol; manual case assessment, not VREC assurance.",
   "source_evidence": {
-    "app-server/transcript.json": "7803233b75a43d11767c3d8cf44a199bd7c485996a1ca10af153bdc4342c8fec"
+    "20260909-live/changed-resume-compact/transcript.json": "4f476f2f5f5cf763d60053ba0126cd8231f5cd8f7c60fcf1961f41349a84d0aa",
+    "20260909-live/changed-resume-compact/observations.json": "19a1d6843235235e9bc0e9585c9f113fb1c5835135a69ffe71e7c7e2e547a02b",
+    "20260909-live/changed-resume-compact/identity.json": "9f2fadba57db45719051eb6af4b59e0930ca556faaf92b83e6daa9811235d71c",
+    "20260909-live/changed-source/before.json": "e6a8fb44b7ee7a021ce356c99e2deca35acbee97591439fe10fc2900a5869852",
+    "20260909-live/changed-source/after.json": "e9e35d039ffb6eec79160c8a62918f7dc738a22c08b9998dd44d92a03ed279a3",
+    "20260909-live/removed-interpreter/runtime-observations.jsonl": "8c415d48d9827f22500cfe19513cd80b42c8f9976296bad46456f0446b4fdc5b"
   },
-  "remaining": "See report.md; operator login and hook trust are not complete."
+  "limitations": [
+    "Windows Codex CLI 0.153.4 only; no production support decision.",
+    "UI actions are labeled observer transcriptions; machine trust states are separately retained.",
+    "No whole-session normal-profile inventory comparison was collected."
+  ],
+  "historical_observations": "initial/observations.json",
+  "remaining": "No missing observation for this recorded route; broader host/platform qualification is separate.",
+  "source_comparison": "Source-file hashes bind exact file bytes; delivered host text matches after newline normalization."
 }

@@ -1,1 +1,10 @@
-
+[
+  {
+    "source": "20260909-live\\input-diagnostic-start\\stderr.txt",
+    "stderr": ""
+  },
+  {
+    "source": "20260909-live\\prepared-start-2\\stderr.txt",
+    "stderr": ""
+  }
+]

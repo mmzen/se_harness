@@ -1,0 +1,76 @@
+{
+  "layer": "live hooks/list observation only",
+  "argv": [],
+  "app_server_messages": [
+    {
+      "sent_at": 1788904028.8764806,
+      "message": {
+        "id": 2,
+        "method": "hooks/list",
+        "params": {
+          "cwds": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+          ]
+        }
+      }
+    },
+    {
+      "received_at": 1788904028.88513,
+      "message": {
+        "id": 2,
+        "result": {
+          "data": [
+            {
+              "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+              "hooks": [
+                {
+                  "key": "codex-probe@codex-probe-local:hooks/hooks.json:pre_tool_use:0:0",
+                  "eventName": "preToolUse",
+                  "handlerType": "command",
+                  "command": "powershell.exe -NoProfile -NonInteractive -File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.1/observe.ps1\"",
+                  "async": false,
+                  "matcher": null,
+                  "timeoutSec": 10,
+                  "statusMessage": null,
+                  "additionalContextLimit": null,
+                  "sourcePath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.1\\hooks\\hooks.json",
+                  "source": "plugin",
+                  "pluginId": "codex-probe@codex-probe-local",
+                  "displayOrder": 0,
+                  "enabled": true,
+                  "isManaged": false,
+                  "currentHash": "sha256:68eaea7e0d0d9b0cfb1fae785e096a931633bb570bae144317a9c7d09e422a02",
+                  "trustStatus": "untrusted"
+                },
+                {
+                  "key": "codex-probe@codex-probe-local:hooks/hooks.json:session_start:0:0",
+                  "eventName": "sessionStart",
+                  "handlerType": "command",
+                  "command": "powershell.exe -NoProfile -NonInteractive -File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.1/observe.ps1\"",
+                  "async": false,
+                  "matcher": "startup|resume|clear|compact",
+                  "timeoutSec": 10,
+                  "statusMessage": null,
+                  "additionalContextLimit": null,
+                  "sourcePath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.1\\hooks\\hooks.json",
+                  "source": "plugin",
+                  "pluginId": "codex-probe@codex-probe-local",
+                  "displayOrder": 1,
+                  "enabled": true,
+                  "isManaged": false,
+                  "currentHash": "sha256:ecb7fe7ded8b13591302b7c25608efcaab61e8c968ed66345267746f7df5325d",
+                  "trustStatus": "untrusted"
+                }
+              ],
+              "warnings": [],
+              "errors": []
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "source_evidence": [
+    "app-server/transcript.json"
+  ]
+}

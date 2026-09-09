@@ -1,0 +1,36 @@
+{
+  "host_version": {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+      "--version"
+    ],
+    "exit_status": 0,
+    "stdout": "codex-cli 0.153.4\n",
+    "stderr": "",
+    "duration_seconds": 0.071,
+    "timed_out": false
+  },
+  "sandbox": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces",
+  "schemas": {
+    "ClientRequest.json": "05c82ead1a820c765c23d3a1d262e4ae54889785276ee1acf7c494141fd94d70",
+    "v2\\TurnStartParams.json": "b36fb37326b1cf69f75c8b306f1f886d53a57c4b1b985e08e298e2407ea2ad02",
+    "v2\\HookCompletedNotification.json": "1f146d70303cea6e59752191179e36a273650d63a74d4f9338f9a399da6597d2"
+  },
+  "source_sha256": {
+    "calibrate.py": "9449733f598609a3bdfc6cf8f6003d5aabafed2280624ea06f57b0d390746367",
+    "interactive_isolated.py": "f4e63632198077fba8f7e7388446731fa6d2c8019bb67ff103e1230a425b6949",
+    "live_session.py": "2827feb5ec3ac0ef23877809937c81e16d3c5d1c27f5fe7e3b4c73fdab5d5d1d",
+    "login_isolated.py": "9e2033ad1f20318c55129bba3ee65bd11b6127976990a7d88327516e59958448",
+    "observe_runtime.py": "037bd78f4226c2671584765b07faca599a8a0349ff464409db6bc4d67c63c6ea",
+    "probe.py": "fddb9c93e147f2f9d488344004b4e4b2793e9386b65895a80d1da1f86dc193e4",
+    "processes.py": "9b9bb7edc4f65b8f6884c5fa1a9fb1b16a737cc5617c81fb52f5f8e189a22586",
+    "sanitize_output.py": "8ca00c4a425d976cf1cfde97f0f5f3d0f8073899ea45413b43fc3a586eb4d749",
+    "summarize_partial.py": "68ab2862fee7790b5eedd908ee5edffea7fae05d1945d13b384fb2b807fb70a2",
+    "test_probe.py": "8bfc0eae219b8410917eee1ae6055b447bc5b9af856565f53d2dca18ae4d26d5",
+    "test_sanitize_output.py": "f297fad8fb13a04bea9d325d3a7898a6679fbc130622783efb41ac8b79c04ce0",
+    "upgrade_inline.py": "22f20f54592c4b08ffceff37cdba91bade3ff5daee6d369d19e217a7d0ef5ec1"
+  },
+  "authenticated_status": "signed_in",
+  "normal_profile_used": false,
+  "capture_policy": "Sanitized session observations only; login output is excluded."
+}

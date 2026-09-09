@@ -1,0 +1,18 @@
+{
+  "layer": "live unauthenticated host attempt",
+  "argv": [
+    [
+      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+      "exec",
+      "--json",
+      "--skip-git-repo-check",
+      "--sandbox",
+      "read-only",
+      "Report CODEX_PROBE_STARTUP_003. Do not use tools or write files."
+    ]
+  ],
+  "app_server_messages": [],
+  "source_evidence": [
+    "host-attempts/exec-startup-network-retry.json"
+  ]
+}

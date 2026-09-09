@@ -1,23 +1,204 @@
-{
-  "layer": "live host; no model completion",
-  "argv": [
-    [
-      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
-      "plugin",
-      "add",
-      "codex-probe@codex-probe-local",
-      "--json"
-    ],
-    [
-      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
-      "debug",
-      "prompt-input",
-      "Use the setup skill; report its marker only."
-    ]
-  ],
-  "app_server_messages": [],
-  "source_evidence": [
-    "host-attempts/plugin-add.json",
-    "host-attempts/prompt-input.json"
-  ]
-}
+[
+  {
+    "source": "20260909-live/native-missing-start/transcript.json",
+    "sent_at": 1788933657.9807045,
+    "message": {
+      "id": 1,
+      "method": "initialize",
+      "params": {
+        "clientInfo": {
+          "name": "codex-live-probe",
+          "version": "0.0.1"
+        },
+        "capabilities": {
+          "experimentalApi": true
+        }
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-start/transcript.json",
+    "sent_at": 1788933658.1829386,
+    "message": {
+      "id": 2,
+      "method": "hooks/list",
+      "params": {
+        "cwds": [
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+        ]
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-start/transcript.json",
+    "sent_at": 1788933658.2335775,
+    "message": {
+      "id": 3,
+      "method": "skills/list",
+      "params": {
+        "cwds": [
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+        ],
+        "forceReload": true
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-start/transcript.json",
+    "sent_at": 1788933658.284332,
+    "message": {
+      "id": 4,
+      "method": "thread/start",
+      "params": {
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+        "sandbox": "read-only",
+        "approvalPolicy": "on-request",
+        "ephemeral": false
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-start/transcript.json",
+    "sent_at": 1788933658.3348415,
+    "message": {
+      "id": 5,
+      "method": "turn/start",
+      "params": {
+        "threadId": "01a084c1-56b4-79d2-b1c0-129aa71c2fd8",
+        "input": [
+          {
+            "type": "text",
+            "text": "Reply with the single word READY. Do not use tools or change files."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-start/transcript.json",
+    "sent_at": 1788933663.9774566,
+    "message": {
+      "id": 6,
+      "method": "thread/read",
+      "params": {
+        "threadId": "01a084c1-56b4-79d2-b1c0-129aa71c2fd8",
+        "includeTurns": true
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-resume-compact/transcript.json",
+    "sent_at": 1788933703.2086124,
+    "message": {
+      "id": 1,
+      "method": "initialize",
+      "params": {
+        "clientInfo": {
+          "name": "codex-live-probe",
+          "version": "0.0.1"
+        },
+        "capabilities": {
+          "experimentalApi": true
+        }
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-resume-compact/transcript.json",
+    "sent_at": 1788933703.3600373,
+    "message": {
+      "id": 2,
+      "method": "hooks/list",
+      "params": {
+        "cwds": [
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+        ]
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-resume-compact/transcript.json",
+    "sent_at": 1788933703.410358,
+    "message": {
+      "id": 3,
+      "method": "skills/list",
+      "params": {
+        "cwds": [
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+        ],
+        "forceReload": true
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-resume-compact/transcript.json",
+    "sent_at": 1788933703.4608462,
+    "message": {
+      "id": 4,
+      "method": "thread/resume",
+      "params": {
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+        "sandbox": "read-only",
+        "approvalPolicy": "on-request",
+        "threadId": "01a084c1-56b4-79d2-b1c0-129aa71c2fd8"
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-resume-compact/transcript.json",
+    "sent_at": 1788933703.5619223,
+    "message": {
+      "id": 5,
+      "method": "turn/start",
+      "params": {
+        "threadId": "01a084c1-56b4-79d2-b1c0-129aa71c2fd8",
+        "input": [
+          {
+            "type": "text",
+            "text": "Reply with the single word READY. Do not use tools or change files."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-resume-compact/transcript.json",
+    "sent_at": 1788933709.3169382,
+    "message": {
+      "id": 6,
+      "method": "thread/compact/start",
+      "params": {
+        "threadId": "01a084c1-56b4-79d2-b1c0-129aa71c2fd8"
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-resume-compact/transcript.json",
+    "sent_at": 1788933722.437065,
+    "message": {
+      "id": 7,
+      "method": "turn/start",
+      "params": {
+        "threadId": "01a084c1-56b4-79d2-b1c0-129aa71c2fd8",
+        "input": [
+          {
+            "type": "text",
+            "text": "Reply with the single word READY. Do not use tools or change files."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-resume-compact/transcript.json",
+    "sent_at": 1788933726.07289,
+    "message": {
+      "id": 8,
+      "method": "thread/read",
+      "params": {
+        "threadId": "01a084c1-56b4-79d2-b1c0-129aa71c2fd8",
+        "includeTurns": true
+      }
+    }
+  }
+]
