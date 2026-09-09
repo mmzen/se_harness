@@ -523,3 +523,20 @@ def _specification_authoring(artifact: Artifact, report_root: Path) -> tuple[lis
         found.append(Diagnostic(path, W_AUT_009,
             f"In plain words has {len(sentences(plain))} sentences; the budget is {AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT}", "maintenance"))
     return errors, found
+
+
+def authoring_advisories(artifact: Artifact, report_root: Path | None = None) -> list[Diagnostic]:
+    """The `W-AUT` diagnostics the four per-type passes raise for one artifact read as a draft.
+
+    SPEC-TCM-007 TCM-RFB-001 and TCM-RFB-002: the approval gate reads what the author would
+    have seen, so the artifact is evaluated with `status = "draft"` whatever its recorded
+    status; errors and warnings of the same pass are not returned. An artifact of a type with
+    no advisory family returns none.
+    """
+
+    if artifact.artifact_type not in ("intent", "capability", "requirement", "specification"):
+        return []
+    draft = Artifact(path=artifact.path, metadata={**artifact.metadata, "status": "draft"}, body=artifact.body)
+    root = report_root if report_root is not None else artifact.path.parent
+    _errors, _warnings, advisories = validate_authoring([draft], root)
+    return [item for item in advisories if item.code.startswith("W-AUT")]

@@ -38,6 +38,7 @@ rules for the accountable reviewer.
 - The body stays under 250 words, every sentence under 25 words, and cites at most three code identifiers; the rest belongs in the specification. *(mechanical: W-AUT-005, W-AUT-007, W-AUT-008)*
 - No template placeholder (`<…>`) survives. *(mechanical at approval)*
 - Draft-time advisories (`W-AUT`) never fail validation and never fire on an approved requirement. An approved requirement is not rewritten for shape; it adopts the shape when it is amended for another reason.
+- A draft that still draws an advisory is not approved until it is fixed; the approval transition refuses and names each advisory. *(mechanical at approval: QGP-G1-AUTHORING)*
 
 ### Guidance
 
@@ -76,6 +77,7 @@ identifiers; prose there is `E-DCM-004`.
 - Who the actors are belongs in the capability's `Actor and need`; the principles later decisions must keep belong in a specification rule or an ADR; a risk is a risk artifact; an open question is a `DEC-` artifact. None of them is a section of the intent.
 - No template placeholder (`<…>`) survives. *(mechanical at approval)*
 - Draft-time advisories (`W-AUT`) never fail validation and never fire on an approved intent. An approved intent is not rewritten for shape; it adopts the shape and the `outcome` field when it is amended for another reason.
+- A draft that still draws an advisory is not approved until it is fixed; the approval transition refuses and names each advisory. *(mechanical at approval: QGP-G1-AUTHORING)*
 
 ### Guidance
 
@@ -98,6 +100,7 @@ intent, not a new intent.
 - The body stays under 150 words, every sentence under 25 words, and cites at most two code identifiers; the how belongs in the specification. *(mechanical: W-AUT-005, W-AUT-007, W-AUT-008)*
 - No template placeholder (`<…>`) survives. *(mechanical at approval)*
 - Draft-time advisories (`W-AUT`) never fail validation and never fire on an approved capability. An approved capability is not rewritten for shape; it adopts the shape and the `ability` field when it is amended for another reason.
+- A draft that still draws an advisory is not approved until it is fixed; the approval transition refuses and names each advisory. *(mechanical at approval: QGP-G1-AUTHORING)*
 
 ### Guidance
 
@@ -120,6 +123,7 @@ is the actor, the ability and what the capability does not decide.
 - The prose outside `Rules`, `Failure behaviour`, `Examples` and `Coverage` stays under 300 words and every sentence outside `Rules` under 25 words. Code identifiers are the substance of a rule and are not budgeted. *(mechanical: W-AUT-005, W-AUT-007; no W-AUT-008)*
 - No template placeholder (`<…>`) survives. *(mechanical at approval)*
 - Draft-time advisories (`W-AUT`) never fail validation and never fire on an approved specification. An approved specification is not rewritten for shape; it adopts identifiers only when amended for another reason, keeping each former number in a note beside the identifier.
+- A draft that still draws an advisory is not approved until it is fixed; the approval transition refuses and names each advisory. *(mechanical at approval: QGP-G2-AUTHORING)*
 
 ### Guidance
 

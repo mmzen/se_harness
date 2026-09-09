@@ -10,6 +10,7 @@ from typing import Any, Mapping
 
 from se_harness import front_matter
 from se_harness.codes import CodedError, E_CIP_001, E_DCM_004, WEX200, W_ECP_002
+from se_harness.engine import validate_engineering_artifacts
 from se_harness.installer import HarnessError
 from se_harness.integrity import canonical_text
 from se_harness.workflow_contract import Checkpoint
@@ -127,8 +128,18 @@ _INLINE_CODE = re.compile(r"`[^`\n]*`")
 _DECISION_LINE = re.compile(r"^-?\s*`?DEC-(?:[A-Z0-9]+-)*\d{3}`?(?:\s*\((?:open|deferred|decided|withdrawn)\))?\.?$")
 
 
-def authoring_ready(artifact: Any) -> tuple[str, str]:
-    """AUT-GTE-001: no leftover template placeholder, and Open decisions closed."""
+#: SPEC-TCM-007: the four artifact types with an authoring-advisory family.
+DEFINITION_KINDS = frozenset({"intent", "capability", "requirement", "specification"})
+
+
+def authoring_ready(artifact: Any, root: Path | None = None) -> tuple[str, str]:
+    """AUT-GTE-001: no leftover template placeholder, and Open decisions closed.
+
+    SPEC-TCM-007 (TCM-RFB-003 to TCM-RFB-007): after those two checks, a draft of one of the
+    four definition kinds fails while it still draws an authoring advisory; the advisories
+    are read through the validator module preflight loads, never through a second copy of
+    the budgets. Any other type passes this check without reading the validator.
+    """
 
     try:
         text = artifact.path.read_text(encoding="utf-8-sig")
@@ -162,7 +173,19 @@ def authoring_ready(artifact: Any) -> tuple[str, str]:
                     f"(the Open decisions section reads exactly None, or lists DEC- identifiers)"
                 )
             break
-    return "pass", f"{artifact.artifact_id} carries no placeholder and no open decision."
+    if artifact.artifact_type in DEFINITION_KINDS:
+        try:
+            advisories = validate_engineering_artifacts.authoring_advisories(artifact, root)
+        except Exception as exc:  # the validator could not read the draft: not a pass, not a refusal
+            return "not_assessable", f"{artifact.artifact_id}: the authoring advisories cannot be read: {exc}"
+        if advisories:
+            listed = "; ".join(f"{item.code}: {item.message}" for item in advisories)
+            noun = "advisory" if len(advisories) == 1 else "advisories"
+            return "fail", (
+                f"{artifact.artifact_id} still draws {len(advisories)} authoring {noun}: {listed}; "
+                "fix the draft and run the transition again"
+            )
+    return "pass", f"{artifact.artifact_id} carries no placeholder, no open decision and no authoring advisory."
 
 
 def blocking_decisions(catalog: Mapping[str, Any], artifact: Any, target: str | None) -> list[Any]:

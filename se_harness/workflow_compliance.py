@@ -241,7 +241,7 @@ def _evaluate(name: str, predicate: Mapping[str, Any], context: CheckpointContex
     if name == "review_evidence_available":
         return review_evidence(context)
     if name == "authoring_ready":
-        return authoring_ready(context.artifact)
+        return authoring_ready(context.artifact, context.root)
     if name == "release_unit_ready":
         return release_unit_ready(context.artifact, context.root, context.catalog)
     if name == "decision_gate_clear":
