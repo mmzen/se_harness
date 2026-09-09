@@ -191,3 +191,51 @@ verification contracts, eighteen evidence paths, `status` `ready`; the one
 new warning of `validate` is the `W013` location note every release
 domain's record carries.
 
+## Section 6: the records and the replay from the bound record
+
+`VREC-SEH-026` was verified by the assurance owner on 2026-09-09 at
+`8cb6cb81`. `RLS-SEH-026` was prepared by the released 0.16.0 evaluator's
+generic `prepare-release` on the clean tree at `a9f4905d` over the eighteen
+work orders `VREC-SEH-026` verifies (the command requires every one; a first
+call naming this work order alone was refused with `WEX404`, and a second
+was refused with `WEX402` because the retained bundle manifest sat untracked
+in the tree, so it was moved aside for the preparation and restored for the
+binding), then bound by `scripts/bind_release_distribution.py` to the
+manifest of section 4b, retained as `RLS-SEH-026-bundle.json`; the record
+carries `commit` `a9f4905d`, `tag` `v0.17.0`, the wheel `305c7cbc…`, the
+sdist `dda4bc73…`, `SOURCE_DATE_EPOCH` 1788940609, and `status` `ready` at
+`11baacd3`. `scripts/validate_release_distributions.py` reads PASS over 14
+distribution-bearing records; `validate` reads 1,437 artifacts, 0 errors,
+46 warnings (the two new ones the `W013` location notes of the two records),
+0 advisories.
+
+`release-candidate-replay.yml` dispatched on `release/0.17.0` at `11baacd3`
+with `release_record=RLS-SEH-026` (run 34328103886): two producer runs
+byte-identical, `state` `exact`, `expected` equal to the bound digests,
+`candidate.commit` `a9f4905d`, recipe `0c3f368c…`; the rebuilt wheel and
+sdist equal the record byte for byte. Two earlier dispatches of the same
+workflow (runs 34327827784 and 34327928584) failed by construction: they
+were requested before the record existed, one by a command chain that did
+not stop at a refused step; neither read or wrote anything of record.
+
+Every pull-request lane at `11baacd3` is `success` (23 checks, the three
+push-event integration rows skipping by the lane's own condition).
+
+## Disclosures
+
+1. The `Harness-Work-Order` trailer of every commit written in this
+   repository since 2026-09-07 with a blank line before its `Co-Authored-By`
+   line is unreadable to Git and to `release-unit`; the packet merge
+   `2bd2ae7c` is exempted by the contract's dated amendment for that reason,
+   and the release branch's commits are written in one trailer block. The
+   earlier work orders were traced through other commits and their
+   membership is unaffected.
+2. The build-of-record digests at the trace commit (section 4) and at the
+   candidate (section 4b) differ by the epoch and the exported tree; the
+   record binds the candidate's, and the replay from the bound record
+   reproduces them.
+3. The candidate's readings of section 2 were taken at `5c78221d` and
+   `10e4face`; the packaged bytes and `tests/` are identical at every commit
+   of this branch, `git diff 2bd2ae7c..HEAD -- se_harness tests pyproject.toml
+   templates` being empty.
+
