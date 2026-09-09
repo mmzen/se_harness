@@ -1,0 +1,83 @@
+{
+  "case": "ENV08",
+  "description": "Missing archive despite supplied expected hash",
+  "passed": true,
+  "observations": {
+    "generic_identity_passed": true,
+    "plugin_ready": false,
+    "expected_flag_was_supplied": true,
+    "observed_archive": null
+  },
+  "platform": {
+    "system": "Windows",
+    "release": "11",
+    "version": "10.0.26200",
+    "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "evaluator": "0.17.0",
+    "network_constraint": "Codex sandbox network restriction; offline pip flags",
+    "host_shell": "pwsh.EXE",
+    "live_native_plugin_activation": false
+  },
+  "expected": {
+    "archive": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+    "payload": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405"
+  },
+  "duration_seconds": 1.2518,
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.EXE",
+        "-NoProfile",
+        "-NonInteractive",
+        "-File",
+        "<fixture-root>\\invocation-008.ps1"
+      ],
+      "exit_status": 1,
+      "duration_seconds": 1.2486,
+      "stdout": "Python 3.14.6 venv available; pip 26.1.2\r\nexisting: uninitialized; tool setup only\r\n",
+      "stderr": "Evaluator is not ready: require passing identity and matching observed archive.\r\nException: <fixture-root>\\invocation-008.ps1:121\r\nLine |\r\n 121 |  if ($LASTEXITCODE -ne 0) { throw 'Plugin readiness refused.' }\r\n     |                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Plugin readiness refused.\r\n",
+      "document_snippet": "powershell",
+      "document_sha256": "f93fc6c325de8e31e5450a866f60ba3d1d102377a874a90891d3963755ba5b73",
+      "selected_inputs": {
+        "SetupPython": "<provided-python-root>\\python.exe",
+        "Repo": "<fixture-root>\\target repository",
+        "Data": "<fixture-root>\\persistent plugin data",
+        "EnvDir": "<fixture-root>\\persistent plugin data\\released evaluator",
+        "Wheel": "<wheel-root>\\se_harness-0.17.0-py3-none-any.whl",
+        "Version": "0.17.0",
+        "Payload": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405",
+        "Archive": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+        "IdentityFile": "<fixture-root>\\persistent plugin data\\identity-008.json"
+      },
+      "identity": {
+        "candidate_commit": null,
+        "checkout_root": "<fixture-root>\\target repository",
+        "diagnostics": [],
+        "distribution_origin": "<fixture-root>\\persistent plugin data\\released evaluator\\Lib\\site-packages",
+        "entry_point_origin": "<fixture-root>\\persistent plugin data\\released evaluator\\Scripts\\harnessctl.exe",
+        "evaluator_archive_name": null,
+        "evaluator_archive_sha256": null,
+        "evaluator_payload_manifest": "se-harness-installed-payload-v1",
+        "evaluator_payload_sha256": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405",
+        "evaluator_wheel_sha256": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+        "expected_root": "<fixture-root>\\persistent plugin data\\released evaluator",
+        "harness_version": "0.17.0",
+        "isolated_python": true,
+        "module_origin": "<fixture-root>\\persistent plugin data\\released evaluator\\Lib\\site-packages\\se_harness\\runtime_identity.py",
+        "passed": true,
+        "python_binary_position": "within-expected-root",
+        "python_binary_sha256": "199ce15a9f0d4f9522edba59338e4879d28cf61f88e377b8164bcb716275ed22",
+        "python_entry_is_link": false,
+        "python_executable": "<fixture-root>\\persistent plugin data\\released evaluator\\Scripts\\python.exe",
+        "python_version": "3.14.6",
+        "pythonpath_present": false,
+        "role": "released-evaluator",
+        "schema": "se-harness-runtime-identity-v3",
+        "template_origin": "<fixture-root>\\persistent plugin data\\released evaluator\\share\\se-harness\\templates\\repository\\standard",
+        "user_site_enabled": false
+      },
+      "repository_unchanged": true,
+      "parent_path_unchanged": true
+    }
+  ]
+}

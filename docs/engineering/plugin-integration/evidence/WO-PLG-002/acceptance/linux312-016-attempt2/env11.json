@@ -1,0 +1,28 @@
+{
+  "case": "ENV11",
+  "description": "Unsafe import origin, expected root and entry points",
+  "passed": false,
+  "failure": "[Errno 2] No such file or directory: '<fixture-root>/persistent plugin data/released evaluator/bin/harnessctl'",
+  "traceback": "Traceback (most recent call last):\n  File \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-environment/tests/plugin_integration/environment_setup/run_acceptance.py\", line 186, in run_case\n    facts = method()\n            ^^^^^^^^\n  File \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-environment/tests/plugin_integration/environment_setup/run_acceptance.py\", line 315, in env11\n    with self.changed(entry, None):\n  File \"/usr/lib/python3.12/contextlib.py\", line 137, in __enter__\n    return next(self.gen)\n           ^^^^^^^^^^^^^^\n  File \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-environment/tests/plugin_integration/environment_setup/run_acceptance.py\", line 171, in changed\n    path.unlink()\n  File \"/usr/lib/python3.12/pathlib.py\", line 1344, in unlink\n    os.unlink(self)\nFileNotFoundError: [Errno 2] No such file or directory: '<fixture-root>/persistent plugin data/released evaluator/bin/harnessctl'\n",
+  "platform": {
+    "system": "Linux",
+    "release": "6.6.87.2-microsoft-standard-WSL2",
+    "version": "#1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025",
+    "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+    "evaluator": "0.16.0",
+    "network_constraint": "Linux unshare -Urn network namespace",
+    "host_shell": "bash",
+    "live_native_plugin_activation": false,
+    "network_observation": {
+      "devices": "Inter-|   Receive                                                |  Transmit\n face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed\n    lo:       0       0    0    0    0     0          0         0        0       0    0    0    0     0       0          0\n",
+      "routes": "",
+      "external_interfaces": false
+    }
+  },
+  "expected": {
+    "archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c"
+  },
+  "duration_seconds": 0.0075,
+  "commands": []
+}

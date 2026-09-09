@@ -1,0 +1,54 @@
+{
+  "case": "ENV10",
+  "description": "Repository/PYTHONPATH/global-command shadowing",
+  "passed": false,
+  "failure": "Install Python venv/ensurepip support before plugin setup: [Errno 2] No such file or directory: '/usr/lib/python3.12/ensurepip/_bundled'\n",
+  "traceback": "Traceback (most recent call last):\n  File \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-environment/tests/plugin_integration/environment_setup/run_acceptance.py\", line 186, in run_case\n    facts = method()\n            ^^^^^^^^\n  File \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-environment/tests/plugin_integration/environment_setup/run_acceptance.py\", line 305, in env10\n    assert result[\"exit_status\"] == 0, result[\"stderr\"]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Install Python venv/ensurepip support before plugin setup: [Errno 2] No such file or directory: '/usr/lib/python3.12/ensurepip/_bundled'\n\n",
+  "platform": {
+    "system": "Linux",
+    "release": "6.6.87.2-microsoft-standard-WSL2",
+    "version": "#1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025",
+    "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+    "evaluator": "0.16.0",
+    "network_constraint": "Linux unshare -Urn network namespace",
+    "host_shell": "bash",
+    "live_native_plugin_activation": false,
+    "network_observation": {
+      "devices": "Inter-|   Receive                                                |  Transmit\n face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed\n    lo:       0       0    0    0    0     0          0         0        0       0    0    0    0     0       0          0\n",
+      "routes": "",
+      "external_interfaces": false
+    }
+  },
+  "expected": {
+    "archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c"
+  },
+  "duration_seconds": 0.1112,
+  "commands": [
+    {
+      "argv": [
+        "<provided-python-root>/bash",
+        "<fixture-root>/invocation-006.sh"
+      ],
+      "exit_status": 1,
+      "duration_seconds": 0.0492,
+      "stdout": "",
+      "stderr": "Install Python venv/ensurepip support before plugin setup: [Errno 2] No such file or directory: '/usr/lib/python3.12/ensurepip/_bundled'\n",
+      "document_snippet": "bash",
+      "document_sha256": "f93fc6c325de8e31e5450a866f60ba3d1d102377a874a90891d3963755ba5b73",
+      "selected_inputs": {
+        "SetupPython": "<provided-python-root>/python3",
+        "Repo": "<fixture-root>/target repository",
+        "Data": "<fixture-root>/persistent plugin data",
+        "EnvDir": "<fixture-root>/persistent plugin data/released evaluator",
+        "Wheel": "<wheel-root>/se_harness-0.16.0-py3-none-any.whl",
+        "Version": "0.16.0",
+        "Payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "Archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "IdentityFile": "<fixture-root>/persistent plugin data/identity-006.json"
+      },
+      "repository_unchanged": true,
+      "parent_path_unchanged": true
+    }
+  ]
+}

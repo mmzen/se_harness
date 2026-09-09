@@ -1,0 +1,85 @@
+{
+  "platform": {
+    "system": "Linux",
+    "release": "6.6.87.2-microsoft-standard-WSL2",
+    "version": "#1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025",
+    "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+    "evaluator": "0.16.0",
+    "network_constraint": "Linux unshare -Urn network namespace",
+    "host_shell": "bash",
+    "live_native_plugin_activation": false,
+    "network_observation": {
+      "devices": "Inter-|   Receive                                                |  Transmit\n face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed\n    lo:       0       0    0    0    0     0          0         0        0       0    0    0    0     0       0          0\n",
+      "routes": "",
+      "external_interfaces": false
+    }
+  },
+  "cases": [
+    {
+      "case": "ENV01",
+      "description": "Offline setup with spaces and no manual activation",
+      "passed": false
+    },
+    {
+      "case": "ENV02",
+      "description": "Missing or unsupported Python prerequisites",
+      "passed": true
+    },
+    {
+      "case": "ENV03",
+      "description": "Interrupted installation remains unavailable",
+      "passed": true
+    },
+    {
+      "case": "ENV04",
+      "description": "Reuse without reinstalling; identity rechecked",
+      "passed": false
+    },
+    {
+      "case": "ENV05",
+      "description": "Installed runtime version mismatch",
+      "passed": false
+    },
+    {
+      "case": "ENV06",
+      "description": "Modified installed payload",
+      "passed": false
+    },
+    {
+      "case": "ENV07",
+      "description": "Wrong observed archive digest",
+      "passed": false
+    },
+    {
+      "case": "ENV08",
+      "description": "Missing archive despite supplied expected hash",
+      "passed": false
+    },
+    {
+      "case": "ENV09",
+      "description": "Bundled wheel changed after trust selection",
+      "passed": true
+    },
+    {
+      "case": "ENV10",
+      "description": "Repository/PYTHONPATH/global-command shadowing",
+      "passed": false
+    },
+    {
+      "case": "ENV11",
+      "description": "Unsafe import origin, expected root and entry points",
+      "passed": false
+    },
+    {
+      "case": "ENV12",
+      "description": "Native discovery, command order and repository lock",
+      "passed": false
+    }
+  ],
+  "passed": false,
+  "limitations": [
+    "Missing/broken prerequisite classes use isolated failure injection where noted.",
+    "No native plugin installation or activation is exercised.",
+    "Only the reported OS/interpreter/evaluator combination is exercised."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-09",
+  "message": "you can start WO-PLG-002",
+  "source": "Explicit operator message in this Codex task",
+  "artifact": "WO-PLG-002",
+  "recorded_states": [
+    "approved",
+    "in_progress"
+  ],
+  "actor": "engineering-owner",
+  "completion_authorized": false,
+  "verification_record_preparation_authorized": false,
+  "merge_authorized": false
+}

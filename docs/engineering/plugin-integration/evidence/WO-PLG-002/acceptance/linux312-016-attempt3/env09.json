@@ -1,0 +1,57 @@
+{
+  "case": "ENV09",
+  "description": "Bundled wheel changed after trust selection",
+  "passed": true,
+  "observations": {
+    "install_attempted": false,
+    "ready": false,
+    "expected_archive_unchanged": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae"
+  },
+  "platform": {
+    "system": "Linux",
+    "release": "6.6.87.2-microsoft-standard-WSL2",
+    "version": "#1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025",
+    "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+    "evaluator": "0.16.0",
+    "network_constraint": "Linux unshare -Urn network namespace",
+    "host_shell": "bash",
+    "live_native_plugin_activation": false,
+    "network_observation": {
+      "devices": "Inter-|   Receive                                                |  Transmit\n face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed\n    lo:       0       0    0    0    0     0          0         0        0       0    0    0    0     0       0          0\n",
+      "routes": "",
+      "external_interfaces": false
+    }
+  },
+  "expected": {
+    "archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c"
+  },
+  "duration_seconds": 0.1535,
+  "commands": [
+    {
+      "argv": [
+        "<provided-python-root>/bash",
+        "<fixture-root>/invocation-009.sh"
+      ],
+      "exit_status": 1,
+      "duration_seconds": 0.1102,
+      "stdout": "Python 3.12.3 venv available; pip 24.0\n",
+      "stderr": "Bundled wheel SHA-256 mismatch; do not install it.\n",
+      "document_snippet": "bash",
+      "document_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+      "selected_inputs": {
+        "SetupPython": "<provided-python-root>/python3",
+        "Repo": "<fixture-root>/target repository",
+        "Data": "<fixture-root>/persistent plugin data",
+        "EnvDir": "<fixture-root>/persistent plugin data/refused wheel environment",
+        "Wheel": "<fixture-root>/changed package/se_harness-0.16.0-py3-none-any.whl",
+        "Version": "0.16.0",
+        "Payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "Archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "IdentityFile": "<fixture-root>/persistent plugin data/identity-009.json"
+      },
+      "repository_unchanged": true,
+      "parent_path_unchanged": true
+    }
+  ]
+}

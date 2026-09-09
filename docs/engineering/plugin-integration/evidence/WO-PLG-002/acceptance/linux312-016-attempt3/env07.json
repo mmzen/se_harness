@@ -1,0 +1,89 @@
+{
+  "case": "ENV07",
+  "description": "Wrong observed archive digest",
+  "passed": true,
+  "observations": {
+    "ready": false,
+    "observed_archive": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "platform": {
+    "system": "Linux",
+    "release": "6.6.87.2-microsoft-standard-WSL2",
+    "version": "#1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025",
+    "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+    "evaluator": "0.16.0",
+    "network_constraint": "Linux unshare -Urn network namespace",
+    "host_shell": "bash",
+    "live_native_plugin_activation": false,
+    "network_observation": {
+      "devices": "Inter-|   Receive                                                |  Transmit\n face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed\n    lo:       0       0    0    0    0     0          0         0        0       0    0    0    0     0       0          0\n",
+      "routes": "",
+      "external_interfaces": false
+    }
+  },
+  "expected": {
+    "archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c"
+  },
+  "duration_seconds": 1.8512,
+  "commands": [
+    {
+      "argv": [
+        "<provided-python-root>/bash",
+        "<fixture-root>/invocation-007.sh"
+      ],
+      "exit_status": 1,
+      "duration_seconds": 1.7951,
+      "stdout": "Python 3.12.3 venv available; pip 24.0\nexisting: uninitialized; tool setup only\n",
+      "stderr": "",
+      "document_snippet": "bash",
+      "document_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+      "selected_inputs": {
+        "SetupPython": "<provided-python-root>/python3",
+        "Repo": "<fixture-root>/target repository",
+        "Data": "<fixture-root>/persistent plugin data",
+        "EnvDir": "<fixture-root>/persistent plugin data/released evaluator",
+        "Wheel": "<wheel-root>/se_harness-0.16.0-py3-none-any.whl",
+        "Version": "0.16.0",
+        "Payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "Archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "IdentityFile": "<fixture-root>/persistent plugin data/identity-007.json"
+      },
+      "identity": {
+        "candidate_commit": null,
+        "checkout_root": "<fixture-root>/target repository",
+        "diagnostics": [
+          {
+            "code": "RID022",
+            "message": "installed PEP 610 archive digest differs from the expected evaluator wheel",
+            "subject": "evaluator_wheel_sha256"
+          }
+        ],
+        "distribution_origin": "<fixture-root>/persistent plugin data/released evaluator/lib/python3.12/site-packages",
+        "entry_point_origin": "<fixture-root>/persistent plugin data/released evaluator/bin/harnessctl",
+        "evaluator_archive_name": "se_harness-0.16.0-py3-none-any.whl",
+        "evaluator_archive_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "evaluator_payload_manifest": "se-harness-installed-payload-v1",
+        "evaluator_payload_sha256": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "evaluator_wheel_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "expected_root": "<fixture-root>/persistent plugin data/released evaluator",
+        "harness_version": "0.16.0",
+        "isolated_python": true,
+        "module_origin": "<fixture-root>/persistent plugin data/released evaluator/lib/python3.12/site-packages/se_harness/runtime_identity.py",
+        "passed": false,
+        "python_binary_position": "outside-declared-roots",
+        "python_binary_sha256": "a92f0f95e883390c7256b2e441484aac06b1002dbe1d924141a77c8d82f96223",
+        "python_entry_is_link": true,
+        "python_executable": "<fixture-root>/persistent plugin data/released evaluator/bin/python",
+        "python_version": "3.12.3",
+        "pythonpath_present": false,
+        "role": "released-evaluator",
+        "schema": "se-harness-runtime-identity-v3",
+        "template_origin": "<fixture-root>/persistent plugin data/released evaluator/share/se-harness/templates/repository/standard",
+        "user_site_enabled": false
+      },
+      "repository_unchanged": true,
+      "parent_path_unchanged": true
+    }
+  ]
+}

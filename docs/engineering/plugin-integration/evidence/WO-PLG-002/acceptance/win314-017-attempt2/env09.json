@@ -1,0 +1,55 @@
+{
+  "case": "ENV09",
+  "description": "Bundled wheel changed after trust selection",
+  "passed": true,
+  "observations": {
+    "install_attempted": false,
+    "ready": false,
+    "expected_archive_unchanged": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced"
+  },
+  "platform": {
+    "system": "Windows",
+    "release": "11",
+    "version": "10.0.26200",
+    "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "evaluator": "0.17.0",
+    "network_constraint": "Codex sandbox network restriction; offline pip flags",
+    "host_shell": "pwsh.EXE",
+    "live_native_plugin_activation": false
+  },
+  "expected": {
+    "archive": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+    "payload": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405"
+  },
+  "duration_seconds": 0.8123,
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.EXE",
+        "-NoProfile",
+        "-NonInteractive",
+        "-File",
+        "<fixture-root>\\invocation-009.ps1"
+      ],
+      "exit_status": 1,
+      "duration_seconds": 0.8087,
+      "stdout": "Python 3.14.6 venv available; pip 26.1.2\r\n",
+      "stderr": "Bundled wheel SHA-256 mismatch; do not install it.\r\nException: <fixture-root>\\invocation-009.ps1:99\r\nLine |\r\n  99 |  … DE -ne 0) { throw 'Setup inputs refused; no installation attempted.'  …\r\n     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Setup inputs refused; no installation attempted.\r\n",
+      "document_snippet": "powershell",
+      "document_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+      "selected_inputs": {
+        "SetupPython": "<provided-python-root>\\python.exe",
+        "Repo": "<fixture-root>\\target repository",
+        "Data": "<fixture-root>\\persistent plugin data",
+        "EnvDir": "<fixture-root>\\persistent plugin data\\refused wheel environment",
+        "Wheel": "<fixture-root>\\changed package\\se_harness-0.17.0-py3-none-any.whl",
+        "Version": "0.17.0",
+        "Payload": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405",
+        "Archive": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+        "IdentityFile": "<fixture-root>\\persistent plugin data\\identity-009.json"
+      },
+      "repository_unchanged": true,
+      "parent_path_unchanged": true
+    }
+  ]
+}

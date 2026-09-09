@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe",
+    "-B",
+    "-S",
+    "scripts/validate_release_distributions.py",
+    "--root",
+    "."
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-environment",
+  "exit_status": 0,
+  "started_at": "2026-09-09T20:39:57.863466+00:00",
+  "duration_seconds": 2.722
+}

@@ -1,0 +1,20 @@
+{
+  "platform": {
+    "system": "Windows",
+    "release": "10",
+    "version": "10.0.26200",
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "evaluator": "0.16.0",
+    "network_constraint": "Codex sandbox network restriction; offline pip flags",
+    "host_shell": "pwsh.EXE",
+    "live_native_plugin_activation": false
+  },
+  "expected": {
+    "archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c"
+  },
+  "wheel_sha256_observed_before_run": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+  "reference_sha256": "f93fc6c325de8e31e5450a866f60ba3d1d102377a874a90891d3963755ba5b73",
+  "runner_sha256": "9a30195c9539f7e58408780afbfdf31951da758e7b5ee3c591dc63442a8ff96b",
+  "expectation_source": "Published 0.16.0/0.17.0 release identities retained in the approved PLG probe/assembly evidence; never candidate output."
+}

@@ -1,0 +1,80 @@
+{
+  "platform": {
+    "system": "Windows",
+    "release": "10",
+    "version": "10.0.26200",
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "evaluator": "0.16.0",
+    "network_constraint": "Codex sandbox network restriction; offline pip flags",
+    "host_shell": "pwsh.EXE",
+    "live_native_plugin_activation": false
+  },
+  "cases": [
+    {
+      "case": "ENV01",
+      "description": "Offline setup with spaces and no manual activation",
+      "passed": true
+    },
+    {
+      "case": "ENV02",
+      "description": "Missing or unsupported Python prerequisites",
+      "passed": true
+    },
+    {
+      "case": "ENV03",
+      "description": "Interrupted installation remains unavailable",
+      "passed": true
+    },
+    {
+      "case": "ENV04",
+      "description": "Reuse without reinstalling; identity rechecked",
+      "passed": true
+    },
+    {
+      "case": "ENV05",
+      "description": "Installed runtime version mismatch",
+      "passed": true
+    },
+    {
+      "case": "ENV06",
+      "description": "Modified installed payload",
+      "passed": true
+    },
+    {
+      "case": "ENV07",
+      "description": "Wrong observed archive digest",
+      "passed": true
+    },
+    {
+      "case": "ENV08",
+      "description": "Missing archive despite supplied expected hash",
+      "passed": true
+    },
+    {
+      "case": "ENV09",
+      "description": "Bundled wheel changed after trust selection",
+      "passed": true
+    },
+    {
+      "case": "ENV10",
+      "description": "Repository/PYTHONPATH/global-command shadowing",
+      "passed": true
+    },
+    {
+      "case": "ENV11",
+      "description": "Unsafe import origin, expected root and entry points",
+      "passed": true
+    },
+    {
+      "case": "ENV12",
+      "description": "Native discovery, command order and repository lock",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "limitations": [
+    "Missing/broken prerequisite classes use isolated failure injection where noted.",
+    "No native plugin installation or activation is exercised.",
+    "Only the reported OS/interpreter/evaluator combination is exercised."
+  ]
+}

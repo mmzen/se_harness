@@ -1,0 +1,171 @@
+{
+  "case": "ENV11",
+  "description": "Unsafe import origin, expected root and entry points",
+  "passed": true,
+  "observations": {
+    "missing_entry_point_refused_before_identity": true,
+    "wrong_entry_point_refused": true,
+    "wrong_root_diagnostics": [
+      {
+        "code": "RID004",
+        "message": "runtime prefix differs from the expected environment",
+        "subject": "runtime_prefix"
+      }
+    ],
+    "foreign_import_diagnostics": [
+      "RID003"
+    ]
+  },
+  "platform": {
+    "system": "Windows",
+    "release": "10",
+    "version": "10.0.26200",
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "evaluator": "0.16.0",
+    "network_constraint": "Codex sandbox network restriction; offline pip flags",
+    "host_shell": "pwsh.EXE",
+    "live_native_plugin_activation": false
+  },
+  "expected": {
+    "archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c"
+  },
+  "duration_seconds": 2.938,
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.EXE",
+        "-NoProfile",
+        "-NonInteractive",
+        "-File",
+        "<fixture-root>\\invocation-011.ps1"
+      ],
+      "exit_status": 1,
+      "duration_seconds": 0.813,
+      "stdout": "Python 3.11.9 venv available; pip 24.0\r\nexisting: uninitialized; tool setup only\r\n",
+      "stderr": "Incomplete environment; retain it and use a fresh location for an authorized retry.\r\nException: <fixture-root>\\invocation-011.ps1:111\r\nLine |\r\n 111 |  if ($LASTEXITCODE -ne 0) { throw 'Environment entry point refused.' }\r\n     |                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Environment entry point refused.\r\n",
+      "document_snippet": "powershell",
+      "document_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+      "selected_inputs": {
+        "SetupPython": "<provided-python-root>\\python.exe",
+        "Repo": "<fixture-root>\\target repository",
+        "Data": "<fixture-root>\\persistent plugin data",
+        "EnvDir": "<fixture-root>\\persistent plugin data\\released evaluator",
+        "Wheel": "<wheel-root>\\se_harness-0.16.0-py3-none-any.whl",
+        "Version": "0.16.0",
+        "Payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "Archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "IdentityFile": "<fixture-root>\\persistent plugin data\\identity-011.json"
+      },
+      "repository_unchanged": true,
+      "parent_path_unchanged": true
+    },
+    {
+      "argv": [
+        "<provided-python-root>\\python.exe",
+        "-I",
+        "-S",
+        "-c",
+        "import os, stat, sys\nfrom pathlib import Path\nenv, python, entry = map(Path, sys.argv[1:])\nfolder = 'Scripts' if os.name == 'nt' else 'bin'\nif python != env / folder / ('python.exe' if os.name == 'nt' else 'python') or entry != env / folder / ('harnessctl.exe' if os.name == 'nt' else 'harnessctl'):\n    raise SystemExit('Use this environment\\'s exact Python and harnessctl entry point.')\nfor path in (env, python.parent, entry):\n    for item in (path, *path.parents):\n        if item.is_symlink() or (item.exists() and getattr(item.lstat(), 'st_file_attributes', 0) & getattr(stat, 'FILE_ATTRIBUTE_REPARSE_POINT', 0)):\n            raise SystemExit('Unsafe environment or entry-point path.')\nif not python.is_file() or not entry.is_file() or not (env / 'pyvenv.cfg').is_file():\n    raise SystemExit('Incomplete environment; retain it and use a fresh location for an authorized retry.')\nif os.name != 'nt' and not os.access(entry, os.X_OK):\n    raise SystemExit('Installed harnessctl entry point is not executable.')",
+        "<fixture-root>\\persistent plugin data\\released evaluator",
+        "<fixture-root>\\persistent plugin data\\released evaluator\\Scripts\\python.exe",
+        "<provided-python-root>\\python.exe"
+      ],
+      "exit_status": 1,
+      "duration_seconds": 0.062,
+      "stdout": "",
+      "stderr": "Use this environment's exact Python and harnessctl entry point.\r\n"
+    },
+    {
+      "argv": [
+        "<fixture-root>\\persistent plugin data\\released evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "identity",
+        "--role",
+        "released-evaluator",
+        "--expected-version",
+        "0.16.0",
+        "--expected-root",
+        "<fixture-root>\\persistent plugin data",
+        "--checkout-root",
+        "<fixture-root>\\target repository",
+        "--evaluator-payload-sha256",
+        "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "--evaluator-wheel-sha256",
+        "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "--entry-point",
+        "<fixture-root>\\persistent plugin data\\released evaluator\\Scripts\\harnessctl.exe",
+        "--require-entry-point",
+        "--require-isolated-python",
+        "--json"
+      ],
+      "exit_status": 1,
+      "duration_seconds": 0.344,
+      "stdout": "{\r\n  \"candidate_commit\": null,\r\n  \"checkout_root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-environment-runs\\\\win311-016-attempt3\\\\target repository\",\r\n  \"diagnostics\": [\r\n    {\r\n      \"code\": \"RID004\",\r\n      \"message\": \"runtime prefix differs from the expected environment\",\r\n      \"subject\": \"runtime_prefix\"\r\n    }\r\n  ],\r\n  \"distribution_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-environment-runs\\\\win311-016-attempt3\\\\persistent plugin data\\\\released evaluator\\\\Lib\\\\site-packages\",\r\n  \"entry_point_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-environment-runs\\\\win311-016-attempt3\\\\persistent plugin data\\\\released evaluator\\\\Scripts\\\\harnessctl.exe\",\r\n  \"evaluator_archive_name\": \"se_harness-0.16.0-py3-none-any.whl\",\r\n  \"evaluator_archive_sha256\": \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\",\r\n  \"evaluator_payload_manifest\": \"se-harness-installed-payload-v1\",\r\n  \"evaluator_payload_sha256\": \"51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c\",\r\n  \"evaluator_wheel_sha256\": \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\",\r\n  \"expected_root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-environment-runs\\\\win311-016-attempt3\\\\persistent plugin data\",\r\n  \"harness_version\": \"0.16.0\",\r\n  \"isolated_python\": true,\r\n  \"module_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-environment-runs\\\\win311-016-attempt3\\\\persistent plugin data\\\\released evaluator\\\\Lib\\\\site-packages\\\\se_harness\\\\runtime_identity.py\",\r\n  \"passed\": false,\r\n  \"python_binary_position\": \"within-expected-root\",\r\n  \"python_binary_sha256\": \"21bb438c0d4a6f1f164b9a646f6ee000340185e5871180aec06db8d3f07c0082\",\r\n  \"python_entry_is_link\": false,\r\n  \"python_executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-environment-runs\\\\win311-016-attempt3\\\\persistent plugin data\\\\released evaluator\\\\Scripts\\\\python.exe\",\r\n  \"python_version\": \"3.11.9\",\r\n  \"pythonpath_present\": false,\r\n  \"role\": \"released-evaluator\",\r\n  \"schema\": \"se-harness-runtime-identity-v3\",\r\n  \"template_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-environment-runs\\\\win311-016-attempt3\\\\persistent plugin data\\\\released evaluator\\\\share\\\\se-harness\\\\templates\\\\repository\\\\standard\",\r\n  \"user_site_enabled\": false\r\n}\r\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.EXE",
+        "-NoProfile",
+        "-NonInteractive",
+        "-File",
+        "<fixture-root>\\invocation-012.ps1"
+      ],
+      "exit_status": 1,
+      "duration_seconds": 1.641,
+      "stdout": "Python 3.11.9 venv available; pip 24.0\r\nexisting: uninitialized; tool setup only\r\n",
+      "stderr": "Exception: <fixture-root>\\invocation-012.ps1:115\r\nLine |\r\n 115 |  … it -ne 0) { throw 'Released evaluator identity refused; retain the ob …\r\n     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Released evaluator identity refused; retain the observation.\r\n",
+      "document_snippet": "powershell",
+      "document_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+      "selected_inputs": {
+        "SetupPython": "<provided-python-root>\\python.exe",
+        "Repo": "<fixture-root>\\target repository",
+        "Data": "<fixture-root>\\persistent plugin data",
+        "EnvDir": "<fixture-root>\\persistent plugin data\\released evaluator",
+        "Wheel": "<wheel-root>\\se_harness-0.16.0-py3-none-any.whl",
+        "Version": "0.16.0",
+        "Payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "Archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "IdentityFile": "<fixture-root>\\persistent plugin data\\identity-012.json"
+      },
+      "identity": {
+        "candidate_commit": null,
+        "checkout_root": "<fixture-root>\\target repository",
+        "diagnostics": [
+          {
+            "code": "RID003",
+            "message": "origin is outside the expected runtime root",
+            "subject": "module_origin"
+          }
+        ],
+        "distribution_origin": "<fixture-root>\\persistent plugin data\\released evaluator\\Lib\\site-packages",
+        "entry_point_origin": "<fixture-root>\\persistent plugin data\\released evaluator\\Scripts\\harnessctl.exe",
+        "evaluator_archive_name": null,
+        "evaluator_archive_sha256": null,
+        "evaluator_payload_manifest": "se-harness-installed-payload-v1",
+        "evaluator_payload_sha256": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "evaluator_wheel_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "expected_root": "<fixture-root>\\persistent plugin data\\released evaluator",
+        "harness_version": "0.16.0",
+        "isolated_python": true,
+        "module_origin": "<fixture-root>\\persistent plugin data\\foreign released package\\se_harness\\runtime_identity.py",
+        "passed": false,
+        "python_binary_position": "within-expected-root",
+        "python_binary_sha256": "21bb438c0d4a6f1f164b9a646f6ee000340185e5871180aec06db8d3f07c0082",
+        "python_entry_is_link": false,
+        "python_executable": "<fixture-root>\\persistent plugin data\\released evaluator\\Scripts\\python.exe",
+        "python_version": "3.11.9",
+        "pythonpath_present": false,
+        "role": "released-evaluator",
+        "schema": "se-harness-runtime-identity-v3",
+        "template_origin": "<fixture-root>\\persistent plugin data\\released evaluator\\share\\se-harness\\templates\\repository\\standard",
+        "user_site_enabled": false
+      },
+      "repository_unchanged": true,
+      "parent_path_unchanged": true
+    }
+  ]
+}

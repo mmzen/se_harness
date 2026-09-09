@@ -1,0 +1,23 @@
+{
+  "case": "ENV07",
+  "description": "Wrong observed archive digest",
+  "passed": false,
+  "failure": "[Errno 2] No such file or directory: '..\\\\plugin-environment-runs\\\\win311-016-attempt1\\\\persistent plugin data\\\\released evaluator\\\\Lib\\\\site-packages\\\\se_harness-0.16.0.dist-info\\\\direct_url.json'",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-environment\\tests\\plugin_integration\\environment_setup\\run_acceptance.py\", line 178, in run_case\n    facts = method()\n            ^^^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-environment\\tests\\plugin_integration\\environment_setup\\run_acceptance.py\", line 260, in env07\n    value = json.loads(path.read_bytes())\n                       ^^^^^^^^^^^^^^^^^\n  File \"<provided-python-root>\\Lib\\pathlib.py\", line 1050, in read_bytes\n    with self.open(mode='rb') as f:\n         ^^^^^^^^^^^^^^^^^^^^\n  File \"<provided-python-root>\\Lib\\pathlib.py\", line 1044, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '..\\\\plugin-environment-runs\\\\win311-016-attempt1\\\\persistent plugin data\\\\released evaluator\\\\Lib\\\\site-packages\\\\se_harness-0.16.0.dist-info\\\\direct_url.json'\n",
+  "platform": {
+    "system": "Windows",
+    "release": "10",
+    "version": "10.0.26200",
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "evaluator": "0.16.0",
+    "network_constraint": "Codex sandbox network restriction; offline pip flags",
+    "host_shell": "pwsh.EXE",
+    "live_native_plugin_activation": false
+  },
+  "expected": {
+    "archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c"
+  },
+  "duration_seconds": 0.0,
+  "commands": []
+}

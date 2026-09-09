@@ -1,0 +1,52 @@
+{
+  "case": "ENV04",
+  "description": "Reuse without reinstalling; identity rechecked",
+  "passed": false,
+  "failure": "The argument '<fixture-root>\\invocation-004.ps1' is not recognized as the name of a script file. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.\r\n",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-environment\\tests\\plugin_integration\\environment_setup\\run_acceptance.py\", line 178, in run_case\n    facts = method()\n            ^^^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-environment\\tests\\plugin_integration\\environment_setup\\run_acceptance.py\", line 234, in env04\n    assert result[\"exit_status\"] == 0, result[\"stderr\"]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: The argument '<fixture-root>\\invocation-004.ps1' is not recognized as the name of a script file. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.\r\n\n",
+  "platform": {
+    "system": "Windows",
+    "release": "10",
+    "version": "10.0.26200",
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "evaluator": "0.16.0",
+    "network_constraint": "Codex sandbox network restriction; offline pip flags",
+    "host_shell": "pwsh.EXE",
+    "live_native_plugin_activation": false
+  },
+  "expected": {
+    "archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c"
+  },
+  "duration_seconds": 0.188,
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.EXE",
+        "-NoProfile",
+        "-NonInteractive",
+        "-File",
+        "<fixture-root>\\invocation-004.ps1"
+      ],
+      "exit_status": 64,
+      "duration_seconds": 0.188,
+      "stdout": "\r\nUsage: pwsh[.exe] [-Login] [[-File] <filePath> [args]]\r\n                  [-Command { - | <script-block> [-args <arg-array>]\r\n                                | <string> [<CommandParameters>] } ]\r\n                  [-CommandWithArgs <string> [<CommandParameters>]\r\n                  [-ConfigurationName <string>] [-ConfigurationFile <filePath>]\r\n                  [-CustomPipeName <string>] [-EncodedCommand <Base64EncodedCommand>]\r\n                  [-ExecutionPolicy <ExecutionPolicy>] [-InputFormat {Text | XML}]\r\n                  [-Interactive] [-MTA] [-NoExit] [-NoLogo] [-NonInteractive] [-NoProfile]\r\n                  [-NoProfileLoadTime] [-OutputFormat {Text | XML}]\r\n                  [-SettingsFile <filePath>] [-SSHServerMode] [-STA]\r\n                  [-Version] [-WindowStyle <style>]\r\n                  [-WorkingDirectory <directoryPath>]\r\n\r\n       pwsh[.exe] -h | -Help | -? | /?\r\n\r\nPowerShell Online Help https://aka.ms/powershell-docs\r\n\r\nAll parameters are case-insensitive.\r\n",
+      "stderr": "The argument '<fixture-root>\\invocation-004.ps1' is not recognized as the name of a script file. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.\r\n",
+      "document_snippet": "powershell",
+      "document_sha256": "f93fc6c325de8e31e5450a866f60ba3d1d102377a874a90891d3963755ba5b73",
+      "selected_inputs": {
+        "SetupPython": "<provided-python-root>\\python.exe",
+        "Repo": "<fixture-root>\\target repository",
+        "Data": "<fixture-root>\\persistent plugin data",
+        "EnvDir": "<fixture-root>\\persistent plugin data\\released evaluator",
+        "Wheel": "<wheel-root>\\se_harness-0.16.0-py3-none-any.whl",
+        "Version": "0.16.0",
+        "Payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "Archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "IdentityFile": "<fixture-root>\\persistent plugin data\\identity-004.json"
+      },
+      "repository_unchanged": true,
+      "parent_path_unchanged": true
+    }
+  ]
+}

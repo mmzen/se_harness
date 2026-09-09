@@ -1,0 +1,26 @@
+--workers must be at least 1
+docs/notes/diagnostic-codes.md matches the source
+WEX_SCALE artifacts=100 validation=0.083873s focus=0.143672s plan=0.164358s
+WEX_SCALE artifacts=500 validation=0.416867s focus=0.511014s plan=0.849741s
+======================================================================
+ERROR: test_artifact_authoring.IdentifierAllocationTests.test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<candidate-root>\tests\test_artifact_authoring.py", line 313, in test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref
+    shutil.rmtree(self.root / ".git")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<user-root>\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "<user-root>\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<user-root>\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 5] Acc�s refus�: '<user-root>\\AppData\\Local\\Temp\\tmpei39twch\\.git\\objects\\04\\e1206c9e14aa0f1a1e753b6f612c0dc862675c'
+
+----------------------------------------------------------------------
+Ran 1126 tests in 97.198s (175 classes, 4 workers)
+
+FAILED (errors=1, skipped=23)
