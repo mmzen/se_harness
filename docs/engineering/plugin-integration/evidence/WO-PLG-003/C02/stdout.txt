@@ -1,1 +1,7 @@
-CODEX_PROBE_INLINE_003: Setup required. Supplied Python 3.11+ with venv/ensurepip is required. No Python was invoked. This fixture is not governance-ready; do not perform governed writes.
+SOURCE: ../20260909-live/missing-supplied-skill/transcript.json; actual completed agent message
+
+CODEX_PROBE_SKILL_003
+
+Using `codex-probe:setup`: the observer confirmed the selected supplied interpreter path does not exist. Setup requires supplied Python 3.11+ with `venv` and `ensurepip`.
+
+Setup stopped. No tools were used or changes made. Environment and governance readiness are not claimed; ordinary governed writes remain prohibited.

@@ -1,0 +1,41 @@
+{
+  "fixture_only": true,
+  "project_name": "Disposable readiness observation",
+  "selected_artifact": "WO-PROBE-001",
+  "evaluator_version": "0.16.0",
+  "archive_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+  "payload_sha256": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+  "authority": "Synthetic input statuses only; no real approval or transition.",
+  "files": [
+    {
+      "repository_path": "docs/engineering/readiness-probe/capabilities/CAP-PROBE-001.md",
+      "retained_path": "docs/engineering/readiness-probe/capabilities/CAP-PROBE-001.md.txt",
+      "sha256": "5e2f91b033649308d32285e57067e79021651ffc8a62a8dfa8c13ba41278f454"
+    },
+    {
+      "repository_path": "docs/engineering/readiness-probe/intent/INT-PROBE-001.md",
+      "retained_path": "docs/engineering/readiness-probe/intent/INT-PROBE-001.md.txt",
+      "sha256": "12696d0d5e187dcff79beb9b834d95b6892e0d89b3e8334a2199d0ce64bdd71e"
+    },
+    {
+      "repository_path": "docs/engineering/readiness-probe/requirements/REQ-PROBE-001.md",
+      "retained_path": "docs/engineering/readiness-probe/requirements/REQ-PROBE-001.md.txt",
+      "sha256": "4c120a409fe51ca39143e1dd6f5665577043789ba2e93a8bf79cb8f55dc4086d"
+    },
+    {
+      "repository_path": "docs/engineering/readiness-probe/specifications/SPEC-PROBE-001.md",
+      "retained_path": "docs/engineering/readiness-probe/specifications/SPEC-PROBE-001.md.txt",
+      "sha256": "8872ef62aed5ea1cba6845abb5de9b943e3281cbdfb2343a41c3da20537681f6"
+    },
+    {
+      "repository_path": "docs/engineering/readiness-probe/verification/VER-PROBE-001.md",
+      "retained_path": "docs/engineering/readiness-probe/verification/VER-PROBE-001.md.txt",
+      "sha256": "65c1b041c112868bde7de534d4b4fa2c33271b9dda44dd747cfb95794ec1edca"
+    },
+    {
+      "repository_path": "docs/engineering/readiness-probe/work-orders/WO-PROBE-001.md",
+      "retained_path": "docs/engineering/readiness-probe/work-orders/WO-PROBE-001.md.txt",
+      "sha256": "8d19471bf9f6a1d866b7d62385f219da0ef704e577656111c0a8648a48ff1587"
+    }
+  ]
+}

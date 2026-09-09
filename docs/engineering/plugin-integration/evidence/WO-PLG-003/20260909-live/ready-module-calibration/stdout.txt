@@ -1,0 +1,312 @@
+CODEX_PROBE_READY_003: Released preflight ready=true for disposable synthetic WO-PROBE-001. No real approval, lifecycle transition or production authority is recorded by this observation.
+
+FILE: ENGINEERING_HARNESS.md
+# Engineering Harness for Disposable readiness observation
+
+This repository uses SE Harness 0.16.0.
+
+The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,
+**SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and
+**OPTIONAL** in this document are to be interpreted as described in BCP 14
+(RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.
+
+## Goals
+
+This harness makes engineering authority explicit, limits execution to approved
+scope, binds assurance and release claims to exact evidence, and gives every
+actor the same deterministic next step. These goals are informative; the rules
+below and the routed policies are normative.
+
+## Global invariants
+
+`HRN-001` - Formal artifacts under `docs/engineering/` are the repository-native
+source of product intent, requirements, architecture decisions, work authority,
+verification contracts, assurance decisions, and release decisions. Code,
+tests, commits, tickets, dashboards, and conversation text are evidence or
+observations; they MUST NOT substitute for formal authority.
+
+`HRN-002` - Repository facts and commands belong in the owner-controlled region
+of `AGENTS.md`. That content is repository-owned and MUST NOT grant product,
+engineering, assurance, release, or external-action authority. This harness does
+not scaffold, track, or require it.
+
+`HRN-003` - An actor MUST select one bounded artifact scope before acting. It
+MUST NOT report findings from unrelated work orders as findings of the selected
+scope. A discovered issue outside scope MAY be identified only as an unassessed
+observation with its artifact ID, and MUST NOT block the selected work unless a
+declared dependency or gate connects it.
+
+`HRN-004` - Only `harnessctl` MAY compute lifecycle legality and the canonical
+next action. Agent prose, prompts, Skills, dashboards, and repository notes MAY
+render or invoke that result and MUST NOT redefine it.
+
+`HRN-005` - Preparation, inspection, validation, and evidence capture MUST NOT
+exercise a decision right. A state change requires the exact artifact, target
+state, accountable actor, passing gates, and an explicit applied transition.
+
+`HRN-006` - A transition MUST change only the artifacts explicitly selected by
+the accountable actor. Related artifact states MUST NOT be synchronized by
+inference.
+
+`HRN-007` - Repository-owned instructions MAY add stricter local constraints.
+They MUST NOT waive, weaken, or contradict this managed contract.
+
+`HRN-008` - Managed integrity, graph validation, scope validation, and required
+gates MUST fail closed. A warning MUST NOT be treated as approval or accepted
+risk.
+
+## Scope of these obligations
+
+The bounded-scope invariant above, the lifecycle handoff rules, and the stop
+conditions bind an actor executing or reporting a lifecycle stage. Reading,
+analysis, and answering questions are unconstrained, provided no lifecycle
+state changes, no decision right is exercised, and no finding is presented as
+a formal result.
+
+Before acting on a lifecycle stage, read `docs/engineering/OPERATING_CARD.md`,
+the selected work order, and every governing artifact listed by the phase
+reading manifest. The routed policies below are reference for humans and for
+the evaluator; an agent is not required to read them to act.
+
+## Routing
+
+Each subject has one policy owner. Other documents MUST reference the owner and
+MUST NOT restate its rules.
+
+| Subject | Normative owner |
+| --- | --- |
+| Lifecycle states, transitions, procedures, next actions, and handoff fields | `docs/engineering/WORKFLOW.md` and its machine-readable `WORKFLOW.json` |
+| Roles, accountabilities, delegation, and reserved decisions | `docs/engineering/DECISION_RIGHTS.md` |
+| Gate criteria, executable predicates, validation planes, pass/fail behavior, and exceptions | `docs/engineering/QUALITY_GATES.md` and `docs/engineering/QUALITY_GATES.json` |
+| Normative chain, artifact applicability, relation types, and coverage | `docs/engineering/TRACEABILITY.md` |
+| Eligible operator and technical-artifact English prose | `docs/engineering/TECHNICAL_COMMUNICATION.md` |
+| Artifact authoring locations and templates | `docs/engineering/templates/README.md` |
+| Authoring rules for formal artifacts | `docs/engineering/ARTIFACT_AUTHORING.md` |
+| Repository-specific facts and commands | the owner-controlled region of `AGENTS.md` |
+
+`docs/engineering/README.md` is an index. It MUST NOT become a second policy
+source.
+
+## Lifecycle handoff
+
+After completing a lifecycle stage or reaching a stop condition, the actor MUST
+obtain the selected workflow result using result schema 2. The structured
+result is authoritative. The actor MUST preserve its actual artifact IDs,
+lifecycle state, observed effects, material non-effects, blockers, accountable
+decision, recommended next action, and command argument boundaries or suggested
+response meaning. It MUST NOT claim an effect, decision, or authority absent
+from that result.
+
+For human interaction, the actor SHOULD summarize the result clearly and
+concisely. It MAY adapt wording and structure to the user and situation, add
+relevant explanation, and omit empty fields. It MUST distinguish completed
+work from remaining work, identify any required accountable decision, and
+recommend exactly one next action. Complete alternatives MAY be shown
+separately. It MUST NOT add an unrelated finding or another recommendation.
+
+When exact headings or bytes are required, the application or automation MUST
+invoke the deterministic human renderer directly. Model transcription MUST NOT
+be used as the enforcement mechanism. The complete procedure is
+`WORKFLOW.md#lifecycle-handoff-procedure`.
+
+## Stop conditions
+
+The actor MUST stop before changing state or scope when any of these conditions
+is true:
+
+- managed integrity fails;
+- the formal graph is invalid;
+- no phase-eligible selected work order exists;
+- a required governing artifact or gate is missing;
+- a required check fails;
+- owner instructions conflict with this contract;
+- remediation would exceed the selected work order; or
+- the requested action lacks the decision right or explicit authority defined
+  by the routed policies.
+
+The actor MUST report the failing rule or gate, the unchanged lifecycle state,
+and one exact retry or accountable escalation. It MUST NOT ask an open-ended
+next-action question when `harnessctl` provides a canonical recommendation.
+
+
+FILE: docs/engineering/OPERATING_CARD.md
+# Operating card
+
+Derived from `WORKFLOW.json` and `QUALITY_GATES.json`; `harnessctl` alone computes
+legality and the next step.
+
+## Stop when
+
+- managed integrity fails;
+- the formal graph is invalid;
+- no phase-eligible selected work order exists;
+- a required governing artifact or gate is missing;
+- a required check fails;
+- owner instructions conflict with the managed contract;
+- remediation would exceed the selected work order;
+- the action lacks its decision right or explicit authority;
+
+Then report the failing rule, the unchanged state, and the corrective step.
+
+## Traps
+
+- A PR body needs one standalone `Harness-Work-Order: WO-...` line with LF endings; CI reads the stored event.
+- A VREC or RLS binds an earlier commit; it lives in a later governance commit and is never rewritten.
+- Artifact IDs are shared across branches and sessions; check every ref before numbering.
+- A `ready` VREC whose candidate leaves `HEAD` (rebase, merge below it) is orphaned; verify, reject, or succeed it.
+
+
+FILE: AGENTS.md
+<!-- se-harness:begin -->
+## Software engineering harness
+
+Read `ENGINEERING_HARNESS.md` before engineering work. It is the single managed harness contract and router. Repository-owned instructions outside this block may add constraints but cannot waive formal artifact authority, approved work-order scope, required evidence, or accountable verification and release decisions. Stop when this managed gate is missing, damaged, or materially conflicts with owner instructions.
+
+For a bounded iteration, select one WO, VREC, or RLS and use `harnessctl check`
+at the procedure's checkpoint. Treat its schema-2 structured result as
+authoritative. Present a clear human handoff that preserves actual artifact
+IDs, observed effects, material non-effects, blockers, final lifecycle state,
+the accountable decision, and exactly one typed next step. Adapt wording and
+structure to the interaction, but preserve command argument boundaries or the
+suggested response's meaning. Exact-format consumers must use the direct
+renderer. Do not add unrelated findings or provider-specific workflow rules.
+<!-- se-harness:end -->
+
+
+FILE: docs/engineering/readiness-probe/intent/INT-PROBE-001.md
++++
+id = "INT-PROBE-001"
+type = "intent"
+title = "Observe disposable evaluator readiness"
+status = "approved"
+owners = ["synthetic-fixture-owner"]
+created = "2026-09-09"
+updated = "2026-09-09"
+
+[relations]
++++
+
+# Observe disposable evaluator readiness
+
+This document is controlled synthetic test data for a disposable compatibility probe.
+Its status and owner fields are input values, not recorded real-world approvals.
+It grants no authority in the source repository or any operator project.
+
+
+FILE: docs/engineering/readiness-probe/capabilities/CAP-PROBE-001.md
++++
+id = "CAP-PROBE-001"
+type = "capability"
+title = "Observe a supplied evaluator"
+status = "approved"
+owners = ["synthetic-fixture-owner"]
+created = "2026-09-09"
+updated = "2026-09-09"
+
+[relations]
+derives_from = ["INT-PROBE-001"]
++++
+
+# Observe a supplied evaluator
+
+This document is controlled synthetic test data for a disposable compatibility probe.
+Its status and owner fields are input values, not recorded real-world approvals.
+It grants no authority in the source repository or any operator project.
+
+
+FILE: docs/engineering/readiness-probe/requirements/REQ-PROBE-001.md
++++
+id = "REQ-PROBE-001"
+type = "requirement"
+title = "Retain actual evaluator results"
+status = "approved"
+owners = ["synthetic-fixture-owner"]
+created = "2026-09-09"
+updated = "2026-09-09"
+statement = "WHEN the fixture is assessed, THE PROBE SHALL retain the actual released evaluator result."
+verification_method = ["test"]
+
+[relations]
+derives_from = ["CAP-PROBE-001"]
++++
+
+# Retain actual evaluator results
+
+This document is controlled synthetic test data for a disposable compatibility probe.
+Its status and owner fields are input values, not recorded real-world approvals.
+It grants no authority in the source repository or any operator project.
+
+
+FILE: docs/engineering/readiness-probe/specifications/SPEC-PROBE-001.md
++++
+id = "SPEC-PROBE-001"
+type = "specification"
+title = "Observe the released evaluator without mutation"
+status = "approved"
+owners = ["synthetic-fixture-owner"]
+created = "2026-09-09"
+updated = "2026-09-09"
+contract = "The fixture records released evaluator identity, readiness and current execution context without applying lifecycle transitions."
+
+[relations]
+specifies = ["REQ-PROBE-001"]
++++
+
+# Observe the released evaluator without mutation
+
+This document is controlled synthetic test data for a disposable compatibility probe.
+Its status and owner fields are input values, not recorded real-world approvals.
+It grants no authority in the source repository or any operator project.
+
+
+FILE: docs/engineering/readiness-probe/verification/VER-PROBE-001.md
++++
+id = "VER-PROBE-001"
+type = "verification"
+title = "Inspect actual readiness and context outputs"
+status = "approved"
+owners = ["synthetic-fixture-owner"]
+created = "2026-09-09"
+updated = "2026-09-09"
+
+[relations]
+verifies = ["REQ-PROBE-001"]
++++
+
+# Inspect actual readiness and context outputs
+
+This document is controlled synthetic test data for a disposable compatibility probe.
+Its status and owner fields are input values, not recorded real-world approvals.
+It grants no authority in the source repository or any operator project.
+
+
+FILE: docs/engineering/readiness-probe/work-orders/WO-PROBE-001.md
++++
+id = "WO-PROBE-001"
+type = "work_order"
+title = "Observe readiness for one disposable sentinel"
+status = "approved"
+owners = ["synthetic-fixture-owner"]
+created = "2026-09-09"
+updated = "2026-09-09"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "Synthetic classification input for a disposable evaluator observation; no assurance decision is recorded."
+decided_by = "synthetic-fixture-owner"
+
+[execution_scope]
+paths = ["governed-target.txt"]
+
+[relations]
+implements = ["REQ-PROBE-001"]
+specifications = ["SPEC-PROBE-001"]
+verification = ["VER-PROBE-001"]
++++
+
+# Observe readiness for one disposable sentinel
+
+This document is controlled synthetic test data for a disposable compatibility probe.
+Its status and owner fields are input values, not recorded real-world approvals.
+It grants no authority in the source repository or any operator project.
+

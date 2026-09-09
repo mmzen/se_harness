@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+    "plugin",
+    "list",
+    "--json"
+  ],
+  "exit_status": 0,
+  "stdout": "{\n  \"installed\": [\n    {\n      \"pluginId\": \"codex-probe@codex-probe-local\",\n      \"name\": \"codex-probe\",\n      \"marketplaceName\": \"codex-probe-local\",\n      \"version\": \"0.0.6\",\n      \"installed\": true,\n      \"enabled\": true,\n      \"source\": {\n        \"source\": \"local\",\n        \"path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\codex\\\\run-001 with spaces\\\\marketplace with spaces\\\\plugins\\\\codex-probe\"\n      },\n      \"marketplaceSource\": {\n        \"sourceType\": \"local\",\n        \"source\": \"\\\\\\\\?\\\\C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\codex\\\\run-001 with spaces\\\\marketplace with spaces\"\n      },\n      \"installPolicy\": \"AVAILABLE\",\n      \"authPolicy\": \"ON_INSTALL\"\n    }\n  ],\n  \"available\": []\n}\n",
+  "stderr": "Warning: failed to list remote marketplace plugins: failed to send remote plugin catalog request to https://chatgpt.com/backend-api/ps/plugins/installed?scope=GLOBAL: error sending request for url (https://chatgpt.com/backend-api/ps/plugins/installed?scope=GLOBAL)\n",
+  "duration_seconds": 0.152,
+  "timed_out": false
+}

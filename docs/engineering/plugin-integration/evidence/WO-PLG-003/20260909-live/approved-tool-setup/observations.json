@@ -1,0 +1,45 @@
+{
+  "whole_case_conclusion": "unassessed",
+  "production_readiness": false,
+  "thread_id": "01a084cc-e88f-7771-851d-0cfeb0b1f04e",
+  "tool_attempt": {
+    "provided_python": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "wheel": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evaluator-wheels\\se_harness-0.16.0-py3-none-any.whl",
+    "wheel_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "environment": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local\\tool-environment",
+    "commands": [
+      "& 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe' -I -m venv 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local\\tool-environment'",
+      "& 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local\\tool-environment\\Scripts\\python.exe' -I -m pip install --no-index --no-deps 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evaluator-wheels\\se_harness-0.16.0-py3-none-any.whl'",
+      "[System.IO.File]::WriteAllText('C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local\\runtime-path.txt', 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local\\tool-environment\\Scripts\\python.exe')"
+    ],
+    "sentinel": "[System.IO.File]::WriteAllText('C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo\\governed-target.txt', 'CODEX_PROBE_DENY_SENTINEL')",
+    "permissions": "ordinary workspace-write/on-request; exact existing-authority one-shot approval"
+  },
+  "turn_completion": {
+    "method": "turn/completed",
+    "params": {
+      "threadId": "01a084cc-e88f-7771-851d-0cfeb0b1f04e",
+      "turn": {
+        "id": "01a084cc-e8bc-7ce0-8a63-fb815afc977e",
+        "items": [],
+        "itemsView": "notLoaded",
+        "status": "interrupted",
+        "error": null,
+        "startedAt": 1788934416,
+        "completedAt": 1788934430,
+        "durationMs": 13597
+      }
+    },
+    "emittedAtMs": 1788934430231
+  },
+  "seconds": 14.093,
+  "cleanup": {
+    "pid": 18788,
+    "method": "owned Windows Job Object",
+    "active_processes": 0
+  },
+  "reader_complete": [
+    true,
+    true
+  ]
+}

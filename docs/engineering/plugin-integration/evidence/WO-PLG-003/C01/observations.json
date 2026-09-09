@@ -1,17 +1,24 @@
 {
   "case": "C01",
   "expected": "Discovery, startup, resume and compaction invoke the guard or retain the precise unavailable step.",
-  "observed": "Plugin installation and skill discovery succeeded. Hooks are registered but untrusted. No handler delivery observed.",
-  "conclusion": "unavailable",
-  "case_passed": false,
-  "evidence_layer": "live host; no model completion",
-  "exit_statuses": [
-    0,
-    0
-  ],
+  "observed": "Skill discovery and trusted startup/resume/completed compaction deliver missing-runtime setup guidance; no runtime handler is invoked.",
+  "conclusion": "pass",
+  "case_passed": true,
+  "evidence_layer": "Retained authenticated host protocol; manual case assessment, not VREC assurance.",
   "source_evidence": {
-    "host-attempts/plugin-add.json": "80c7de11979500f03efc7dfc205fa386f08d76a1f65f36bbec5702b1cc2aa141",
-    "host-attempts/prompt-input.json": "d8ca78606ba97c4cc1e741bd9fbfdf65a119cc43018d0f1701bf369be634dc41"
+    "20260909-live/native-missing-start/transcript.json": "9fd2f0c0aaf58a61691f58a4a1718b571060dc518c4c6d4cf34feb5a8001f344",
+    "20260909-live/native-missing-start/observations.json": "c45902be43b6c3d7148cebc46a46b266d763fca846316a2606cfa79939829b61",
+    "20260909-live/native-missing-start/identity.json": "11bce75c0cf98e6f147e3a20a9dd4a24c7d00bd89701be4e54125b985e5a81e1",
+    "20260909-live/native-missing-resume-compact/transcript.json": "b5af129bbd516332968aac4f19710e6625e379ed9245a71ca13a855026c34039",
+    "20260909-live/native-missing-resume-compact/observations.json": "0c1be49f605ff5a2800745e7e47ff1ccb41c0cee2976685a5c025292074a0abd",
+    "20260909-live/native-missing-resume-compact/identity.json": "81d6ccc98814722597996bf7b7c039a6164f367debc60153b62878144694b8b3",
+    "20260909-live/native-inline-upgrade/change/source-digests.json": "c2ca6703b864d012bcd38152d5a3e156fde777768a27ea72780cedebde86375d"
   },
-  "remaining": "See report.md; operator login and hook trust are not complete."
+  "limitations": [
+    "Windows Codex CLI 0.153.4 only; no production support decision.",
+    "UI actions are labeled observer transcriptions; machine trust states are separately retained.",
+    "No whole-session normal-profile inventory comparison was collected."
+  ],
+  "historical_observations": "initial/observations.json",
+  "remaining": "No missing observation for this recorded route; broader host/platform qualification is separate."
 }

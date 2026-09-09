@@ -1,0 +1,40 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-B",
+    "-I",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/plugin_integration/codex_probe",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "exit_status": 0,
+  "stdout": "",
+  "stderr": "test_substituted_wheel_refused_before_any_command_or_fixture_write (test_live_fixture_state.PreparationBoundaryTests.test_substituted_wheel_refused_before_any_command_or_fixture_write) ... usage: python.exe -m unittest [-h] --sandbox SANDBOX\n                              --action {prepare,change-source,remove,restore,add-readiness-inputs}\n                              --evidence-name EVIDENCE_NAME [--wheel WHEEL]\n                              [--tool-environment]\npython.exe -m unittest: error: Preparation requires the exact selected released 0.16.0 wheel bytes.\nok\ntest_credentials_and_user_paths_are_not_inherited (test_probe.ProbeSafetyTests.test_credentials_and_user_paths_are_not_inherited) ... ok\ntest_existing_evidence_is_never_overwritten (test_probe.ProbeSafetyTests.test_existing_evidence_is_never_overwritten) ... ok\ntest_existing_sandbox_is_never_erased (test_probe.ProbeSafetyTests.test_existing_sandbox_is_never_erased) ... ok\ntest_exited_parent_cannot_leave_descendant_holding_output_pipe (test_probe.ProbeSafetyTests.test_exited_parent_cannot_leave_descendant_holding_output_pipe) ... ok\ntest_hook_no_trust_or_permissions_bypass (test_probe.ProbeSafetyTests.test_hook_no_trust_or_permissions_bypass) ... ok\ntest_inline_variant_does_not_evaluate_the_refused_script (test_probe.ProbeSafetyTests.test_inline_variant_does_not_evaluate_the_refused_script) ... ok\ntest_manifest_resolves_inside_marketplace_and_declares_real_skill (test_probe.ProbeSafetyTests.test_manifest_resolves_inside_marketplace_and_declares_real_skill) ... ok\ntest_nonzero_exit_and_raw_output_are_preserved (test_probe.ProbeSafetyTests.test_nonzero_exit_and_raw_output_are_preserved) ... ok\ntest_real_child_timeout_is_not_reported_as_success (test_probe.ProbeSafetyTests.test_real_child_timeout_is_not_reported_as_success) ... ok\ntest_timeout_stops_own_descendant_but_not_unrelated_process (test_probe.ProbeSafetyTests.test_timeout_stops_own_descendant_but_not_unrelated_process) ... ok\ntest_current_check_manifest_is_required_and_hashes_exact_bytes (test_ready_runtime.ReadinessEvidenceTests.test_current_check_manifest_is_required_and_hashes_exact_bytes) ... ok\ntest_failed_identity_prevents_readiness_calls (test_ready_runtime.ReadinessEvidenceTests.test_failed_identity_prevents_readiness_calls) ... ok\ntest_manifest_escape_is_rejected (test_ready_runtime.ReadinessEvidenceTests.test_manifest_escape_is_rejected) ... ok\ntest_relative_or_oversized_input_is_rejected (test_ready_runtime.ReadinessEvidenceTests.test_relative_or_oversized_input_is_rejected) ... ok\ntest_success_exit_or_truthy_text_is_not_boolean_readiness (test_ready_runtime.ReadinessEvidenceTests.test_success_exit_or_truthy_text_is_not_boolean_readiness) ... ok\ntest_timeout_truncation_and_nonzero_exit_cannot_pass (test_ready_runtime.ReadinessEvidenceTests.test_timeout_truncation_and_nonzero_exit_cannot_pass) ... ok\ntest_utf8_input_with_bom_is_supported (test_ready_runtime.ReadinessEvidenceTests.test_utf8_input_with_bom_is_supported) ... ok\ntest_different_action_or_missing_one_shot_choice_is_refused (test_review_approval.ApprovalBoundaryTests.test_different_action_or_missing_one_shot_choice_is_refused) ... ok\ntest_exact_named_skill_read_only (test_review_approval.ApprovalBoundaryTests.test_exact_named_skill_read_only) ... ok\ntest_exact_reviewed_command_gets_one_shot_only (test_review_approval.ApprovalBoundaryTests.test_exact_reviewed_command_gets_one_shot_only) ... ok\ntest_outer_command_cannot_append_an_action (test_review_approval.ApprovalBoundaryTests.test_outer_command_cannot_append_an_action) ... ok\ntest_same_inner_command_with_different_cwd_is_refused (test_review_approval.ApprovalBoundaryTests.test_same_inner_command_with_different_cwd_is_refused) ... ok\ntest_unrelated_request_has_no_fabricated_response (test_review_approval.ApprovalBoundaryTests.test_unrelated_request_has_no_fabricated_response) ... ok\ntest_bearer_and_basic_header_text (test_sanitize_output.SanitizeOutputTests.test_bearer_and_basic_header_text) ... ok\ntest_credential_argv_and_command_text (test_sanitize_output.SanitizeOutputTests.test_credential_argv_and_command_text) ... ok\ntest_jsonl_preserves_order_and_nonsecret_fields (test_sanitize_output.SanitizeOutputTests.test_jsonl_preserves_order_and_nonsecret_fields) ... ok\ntest_local_ipc_authentication_examples (test_sanitize_output.SanitizeOutputTests.test_local_ipc_authentication_examples) ... ok\ntest_multiline_private_key_blocks (test_sanitize_output.SanitizeOutputTests.test_multiline_private_key_blocks) ... ok\ntest_nested_secret_fields_and_header_maps (test_sanitize_output.SanitizeOutputTests.test_nested_secret_fields_and_header_maps) ... ok\ntest_nested_serialized_json_remains_parseable (test_sanitize_output.SanitizeOutputTests.test_nested_serialized_json_remains_parseable) ... ok\ntest_openai_key_families_and_synthetic_jwt (test_sanitize_output.SanitizeOutputTests.test_openai_key_families_and_synthetic_jwt) ... ok\ntest_probe_identity_counts_and_auth_failure_diagnostics_are_preserved (test_sanitize_output.SanitizeOutputTests.test_probe_identity_counts_and_auth_failure_diagnostics_are_preserved) ... ok\ntest_pure_type_preserving_and_idempotent_operations (test_sanitize_output.SanitizeOutputTests.test_pure_type_preserving_and_idempotent_operations) ... ok\n\n----------------------------------------------------------------------\nRan 34 tests in 2.464s\n\nOK\n",
+  "duration_seconds": 2.802,
+  "timed_out": false,
+  "source_sha256": {
+    "calibrate.py": "9449733f598609a3bdfc6cf8f6003d5aabafed2280624ea06f57b0d390746367",
+    "interactive_isolated.py": "f4e63632198077fba8f7e7388446731fa6d2c8019bb67ff103e1230a425b6949",
+    "live_fixture_state.py": "92503d4a2ee5cd78cab16f6fac0c37c4c0710395c1674adf27963568e7f8b014",
+    "live_session.py": "6a7300de32c72fff1bfaf2a38b8213328265c82744025535fbb5bd78e16dbbaa",
+    "login_isolated.py": "9e2033ad1f20318c55129bba3ee65bd11b6127976990a7d88327516e59958448",
+    "observe_ready_runtime.py": "06a2860d05ada00e2c789cae692858917c204b1d928f7e3991028da2aca30d88",
+    "observe_runtime.py": "1543cadc5c96c0c6d0337c0eade0a6d70fcc2d3d9585eaeaa1112ab217ec3e9d",
+    "probe.py": "fddb9c93e147f2f9d488344004b4e4b2793e9386b65895a80d1da1f86dc193e4",
+    "processes.py": "9b9bb7edc4f65b8f6884c5fa1a9fb1b16a737cc5617c81fb52f5f8e189a22586",
+    "review_approval.py": "e3ed20ce1cbc06ce1852fc3c48567c081cccf98da70923526970b9aaeba283b7",
+    "sanitize_output.py": "8ca00c4a425d976cf1cfde97f0f5f3d0f8073899ea45413b43fc3a586eb4d749",
+    "summarize_partial.py": "68ab2862fee7790b5eedd908ee5edffea7fae05d1945d13b384fb2b807fb70a2",
+    "test_live_fixture_state.py": "fe74f2bcd4eb18248a52bc4a0c381e57d45107ecdb732541e8c1ec0537f26698",
+    "test_probe.py": "8bfc0eae219b8410917eee1ae6055b447bc5b9af856565f53d2dca18ae4d26d5",
+    "test_ready_runtime.py": "2e5aa8197d55b89b4cc9cd4055a561f901c12c27ca0c8063a5979eb398397fd4",
+    "test_review_approval.py": "12537113f7e6dd7fad6fc9bee61baed384cfb9a49252062796dead468c920322",
+    "test_sanitize_output.py": "f297fad8fb13a04bea9d325d3a7898a6679fbc130622783efb41ac8b79c04ce0",
+    "upgrade_inline.py": "48cadcae7cc55046b0bee4f17b7b06f9e9b08fa5582bea39d458e9828dfd23b5"
+  }
+}

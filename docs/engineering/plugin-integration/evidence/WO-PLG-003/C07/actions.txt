@@ -1,18 +1,10 @@
-{
-  "layer": "live unauthenticated host attempt",
-  "argv": [
-    [
-      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
-      "exec",
-      "--json",
-      "--skip-git-repo-check",
-      "--sandbox",
-      "read-only",
-      "Report CODEX_PROBE_STARTUP_003. Do not use tools or write files."
-    ]
-  ],
-  "app_server_messages": [],
-  "source_evidence": [
-    "host-attempts/exec-startup-network-retry.json"
-  ]
-}
+SELECTED: fresh complete sequence, fixture0.0.7, complete-tool-environment.
+1. Select an absent named runtime in disposable plugin data; no environment is prepared by the observer.
+2. Before first real setup, record all49 controlled repository files and named normal-profile metadata.
+3. Through actual model-origin tools: attempt sentinel once (hook refuses), create venv, install exact wheel offline, write runtime pointer. All3 setup commands exit0.
+4. Fresh session: real released identity/doctor/preflight/check all0, boolean ready=true,9-file manifest context received.
+5. Observer removes only the disposable interpreter by preserving it under a new name.
+6. Through actual model tools: sentinel refused again, then venv recreation/offline force-reinstall/pointer each exit0.
+7. Fresh session: real checks and9-file context again. Compare snapshots through after this final session.
+Only20 positively statted named normal-profile inputs are compared;5 ambiguous earlier negatives and discovery exhaustiveness are excluded. No credential contents or broad OS audit.
+Prior unsuccessful and partial sequences remain unchanged; prior-selected-sequence/ preserves the preceding index.

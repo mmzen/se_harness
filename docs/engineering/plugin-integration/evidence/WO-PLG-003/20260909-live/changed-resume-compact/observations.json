@@ -1,0 +1,82 @@
+{
+  "whole_case_conclusion": "unassessed",
+  "production_readiness": false,
+  "thread_id": "01a084c5-7aed-7760-91e4-209411f8b5b3",
+  "turn_completion": {
+    "method": "turn/completed",
+    "params": {
+      "threadId": "01a084c5-7aed-7760-91e4-209411f8b5b3",
+      "turn": {
+        "id": "01a084c5-eab8-77b3-a41b-63a0d4f9d385",
+        "items": [
+          {
+            "type": "agentMessage",
+            "id": "msg_00024a101c325793016aa0f74fe36c87d2a4e20d81251466ad",
+            "text": "READY",
+            "phase": "final_answer",
+            "memoryCitation": null,
+            "delivery": null,
+            "questions": null
+          }
+        ],
+        "itemsView": "summary",
+        "status": "completed",
+        "error": null,
+        "startedAt": 1788933958,
+        "completedAt": 1788933967,
+        "durationMs": 9274
+      }
+    },
+    "emittedAtMs": 1788933967616
+  },
+  "compact_completion": {
+    "method": "item/completed",
+    "params": {
+      "item": {
+        "type": "contextCompaction",
+        "id": "01a084c6-0f42-7fb2-bfc1-2e4b6987160e"
+      },
+      "threadId": "01a084c5-7aed-7760-91e4-209411f8b5b3",
+      "turnId": "01a084c6-0f22-70f0-a7fa-0a840da0b5e3",
+      "completedAtMs": 1788933997048
+    },
+    "emittedAtMs": 1788933997067
+  },
+  "post_compact_turn_completion": {
+    "method": "turn/completed",
+    "params": {
+      "threadId": "01a084c5-7aed-7760-91e4-209411f8b5b3",
+      "turn": {
+        "id": "01a084c6-8228-7990-8ca4-0759a05ab94a",
+        "items": [
+          {
+            "type": "agentMessage",
+            "id": "msg_00024a101c325793016aa0f774b81087d283bfed896d8c514b",
+            "text": "READY",
+            "phase": "final_answer",
+            "memoryCitation": null,
+            "delivery": null,
+            "questions": null
+          }
+        ],
+        "itemsView": "summary",
+        "status": "completed",
+        "error": null,
+        "startedAt": 1788933997,
+        "completedAt": 1788934004,
+        "durationMs": 7315
+      }
+    },
+    "emittedAtMs": 1788934004423
+  },
+  "seconds": 46.611,
+  "cleanup": {
+    "pid": 23028,
+    "method": "owned Windows Job Object",
+    "active_processes": 0
+  },
+  "reader_complete": [
+    true,
+    true
+  ]
+}

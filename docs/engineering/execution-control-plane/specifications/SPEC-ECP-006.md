@@ -5,7 +5,7 @@ title = "Delegation at the Git boundary and the retained journaled apply"
 status = "approved"
 owners = ["technical-owner", "quality-owner", "repository-owner"]
 created = "2026-08-27"
-updated = "2026-08-28"
+updated = "2026-09-08"
 
 [relations]
 specifies = ["REQ-ECP-011", "REQ-ECP-017", "REQ-ECP-018"]
@@ -234,3 +234,16 @@ inferred by the actor. Nothing else in this specification changes.
 **`ECP-JNL-001` to `ECP-JNL-005` are retired, under `WO-ECP-030` (`SPEC-ECP-022`), proposed 2026-09-07 on the owner decisions recorded on issue #381 (`ECP-DEL-030`).** `se_harness/journaled_apply.py` is removed; no command performs a journaled write and `harnessctl recover` never existed. The delegation rules of this specification are unchanged.
 
 **The three delegated rights are read from `workflow_contract.json` `agentic_operations` at run time, under `WO-ECP-033` (`SPEC-ECP-023` `ECP-PRM-019` and `ECP-PRM-026`), recorded 2026-09-08.** `ECP-DLG-002` names `DR-WO-START`, `DR-WO-COMPLETE` and `DR-VREC-PREPARE`; the operative table is the contract section, which the delegation gate, the transition planner and the mutation guard read, and their Python copies are gone. The Compatibility sentence "`workflow_contract.json` drops the `agentic_operations` block" is superseded: the block stayed under its schema-v4 name and is now the one source; a missing or malformed section refuses with `WEX-ECP-031` before any read. Nothing else in this specification changes.
+
+**`SE_HARNESS_REHEARSAL` is the rehearsal marker `ECP-DLG-004` exempts, under
+`WO-DST-026` (`SPEC-DST-027` `DST-MWF-009`), recorded 2026-09-08.**
+`ECP-DLG-004` says the `local-file` source exists for tests and rehearsals
+only and that a repository configured with it outside a test rehearsal is
+`W-ECP-005`; it did not say how a run is known to be a rehearsal. A test
+rehearsal is a process with `SE_HARNESS_REHEARSAL=1` in its environment, read
+by `gate_source.load_configuration`: with the variable equal to `1` the
+`local-file` source loads without the warning; any other value, or its
+absence, prints `W-ECP-005` on every read. The variable changes nothing else,
+and `GITHUB_TOKEN` is the only other environment variable the delegation gate
+reads. The rule text is unchanged; nothing else in this specification
+changes.

@@ -1,0 +1,8 @@
+{
+  "observation": "The pre-integration index check compared 789 staged files against their on-disk bytes using Git blob identities; no difference was found.",
+  "source_whitespace_check": "git diff --cached --check for Python, Markdown, JSON and JSONL files exited 0.",
+  "raw_capture_whitespace_check_exit": 2,
+  "raw_capture_whitespace": "Ten locations in retained stdout/stderr text contain original help-output trailing spaces or terminal blank lines. They are preserved as observed; the repository configures no whitespace lint gate.",
+  "retention_rule": "Do not normalize executed source snapshots or raw capture bytes to silence a presentation-only diff warning.",
+  "scope": "Index-byte and presentation checks only; no lifecycle or assurance decision."
+}

@@ -30,3 +30,25 @@ The child process receives an allow-list of operating-system inputs and disposab
 On Windows, `processes.py` assigns a suspended child to a private job before starting it. Timeout and app-server cleanup stop that job's processes, including descendants of an already-exited parent. No process-name matching, execution-policy change, or permission-bypass flag is used. The process-group fallback for other platforms is not qualified by this Windows run.
 
 See the [current evidence report](../../../docs/engineering/plugin-integration/evidence/WO-PLG-003/report.md) for completed observations and remaining live cases.
+
+## Authenticated continuation
+
+`interactive_isolated.py` opens the real CLI against an existing disposable profile. Review each changed hook through the built-in hook UI. This helper does not alter trust records or complete Windows sandbox setup.
+
+`upgrade_inline.py` retains before/after sources and uses the actual plugin update command. The observed Windows route uses `--native-inline`: a direct native command, without a second nested PowerShell invocation. `--readiness` additionally installs `observe_ready_runtime.py` and a marker-triggered test refusal. The requested sentinel write includes that marker; the predicate is not an exact-path or production command classifier.
+
+`live_session.py` records actual app-server conversations, source snapshots, hook completion/context entries and cleanup. It normally requests a no-tools `READY` response. `--resume THREAD_ID --compact` uses the real persisted thread and waits for compaction and the following turn. `--setup-skill-missing` invokes the discovered setup skill with an actually absent selected interpreter path; it does not claim all machine interpreters are missing.
+
+```powershell
+& $probePython -I tests/plugin_integration/codex_probe/interactive_isolated.py --codex $probeCodex --sandbox $probeSandbox
+& $probePython -I tests/plugin_integration/codex_probe/live_session.py --codex $probeCodex --sandbox $probeSandbox --evidence "$probeEvidence/fresh-start"
+& $probePython -I tests/plugin_integration/codex_probe/live_session.py --codex $probeCodex --sandbox $probeSandbox --evidence "$probeEvidence/fresh-restoration" --resume ACTUAL_THREAD_ID --compact
+```
+
+`live_fixture_state.py` records direct observer preparation, source changes or removal of a disposable interpreter. Preparation checks the pinned wheel digest before installation. These direct actions do not substitute for C07's model-origin shell tools.
+
+For C07, `live_session.py --tool-setup-probe` requests only fixed disposable setup commands. `--approved-setup` reuses the operator's existing explicit authorization through one-shot approvals of exact commands and the named fixture skill read; mismatches are cancelled. It never grants an execution-policy amendment. `--tool-stage complete` finishes a previously observed install; `--tool-stage repair` repairs a removed interpreter. Each stage requires a new evidence directory and the expected existing runtime state.
+
+`--tool-environment-name` selects one plain directory name inside the fixture's plugin-data directory. A complete repeated sequence can therefore start with a genuinely absent environment. `--inventory-static-profile PATH` records only size, modification time and presence of named config/auth inputs and plugin manifests; it never reads credential contents or session databases. The same run also records the complete controlled repository's file hashes before and after.
+
+The readiness observer calls the installed released evaluator's identity, doctor, preflight and checkpoint-free check. It relays actual readiness and the returned reading manifest for six synthetic fixture artifacts. Their approved-status fields are controlled test inputs, not real approval transitions. Successful observations do not authorize production work or establish support.

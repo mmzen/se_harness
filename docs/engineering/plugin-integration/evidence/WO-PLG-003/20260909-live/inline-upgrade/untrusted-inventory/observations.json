@@ -1,0 +1,15 @@
+{
+  "whole_case_conclusion": "unassessed",
+  "production_readiness": false,
+  "inventory_only": true,
+  "seconds": 0.288,
+  "cleanup": {
+    "pid": 8908,
+    "method": "owned Windows Job Object",
+    "active_processes": 0
+  },
+  "reader_complete": [
+    true,
+    true
+  ]
+}

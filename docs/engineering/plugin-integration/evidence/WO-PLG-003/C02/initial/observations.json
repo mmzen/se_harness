@@ -1,0 +1,15 @@
+{
+  "case": "C02",
+  "expected": "Real setup identifies missing, old or unusable supplied Python without installing Python or claiming readiness.",
+  "observed": "Missing-runtime guidance was observed only in direct inline calibration. Live setup awaits authentication; old/unusable Python not assessed.",
+  "conclusion": "unavailable",
+  "case_passed": false,
+  "evidence_layer": "direct calibration only",
+  "exit_statuses": [
+    0
+  ],
+  "source_evidence": {
+    "calibration-inline-corrected/missing-runtime.json": "25c972ddd40a18aea0f3f328b9007bf00fdb0eeb8170b047d04165dc1e8cd2b5"
+  },
+  "remaining": "See report.md; operator login and hook trust are not complete."
+}

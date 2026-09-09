@@ -1,0 +1,178 @@
+[
+  {
+    "event": "SessionStart",
+    "source": "startup",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.4",
+    "timestamp": "2026-09-09T06:01:01.3170623+00:00"
+  },
+  {
+    "event": "SessionStart",
+    "source": "resume",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.4",
+    "timestamp": "2026-09-09T06:01:46.5418188+00:00"
+  },
+  {
+    "event": "SessionStart",
+    "source": "compact",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.4",
+    "timestamp": "2026-09-09T06:02:03.5853106+00:00"
+  },
+  {
+    "event": "SessionStart",
+    "source": "startup",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.4",
+    "timestamp": "2026-09-09T06:03:33.5822730+00:00"
+  },
+  {
+    "event": "SessionStart",
+    "source": "startup",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.4",
+    "timestamp": "2026-09-09T06:04:04.1123997+00:00"
+  },
+  {
+    "event": "SessionStart",
+    "source": "startup",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.5",
+    "timestamp": "2026-09-09T06:04:53.0331709+00:00"
+  },
+  {
+    "event": "SessionStart",
+    "source": "startup",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.5",
+    "timestamp": "2026-09-09T06:05:32.3474564+00:00"
+  },
+  {
+    "event": "SessionStart",
+    "source": "resume",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.5",
+    "timestamp": "2026-09-09T06:06:01.3760545+00:00"
+  },
+  {
+    "event": "SessionStart",
+    "source": "compact",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.5",
+    "timestamp": "2026-09-09T06:06:38.2965737+00:00"
+  },
+  {
+    "event": "SessionStart",
+    "source": "startup",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.5",
+    "timestamp": "2026-09-09T06:07:10.2915662+00:00"
+  },
+  {
+    "event": "SessionStart",
+    "source": "startup",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.5",
+    "timestamp": "2026-09-09T06:07:53.5601521+00:00"
+  },
+  {
+    "event": "PreToolUse",
+    "source": null,
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.5",
+    "timestamp": "2026-09-09T06:08:01.5298085+00:00"
+  },
+  {
+    "event": "SessionStart",
+    "source": "startup",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.6",
+    "timestamp": "2026-09-09T06:13:39.5951842+00:00"
+  },
+  {
+    "event": "PreToolUse",
+    "source": null,
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.6",
+    "timestamp": "2026-09-09T06:13:49.8327877+00:00"
+  },
+  {
+    "event": "SessionStart",
+    "source": "startup",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.6",
+    "timestamp": "2026-09-09T06:14:54.7351634+00:00"
+  },
+  {
+    "event": "PreToolUse",
+    "source": null,
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.6",
+    "timestamp": "2026-09-09T06:15:07.4461469+00:00"
+  },
+  {
+    "event": "PreToolUse",
+    "source": null,
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.6",
+    "timestamp": "2026-09-09T06:15:25.4564526+00:00"
+  },
+  {
+    "event": "SessionStart",
+    "source": "startup",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.7",
+    "timestamp": "2026-09-09T06:18:40.5726533+00:00"
+  },
+  {
+    "event": "SessionStart",
+    "source": "startup",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.7",
+    "timestamp": "2026-09-09T06:19:01.0397431+00:00"
+  },
+  {
+    "event": "PreToolUse",
+    "source": null,
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.7",
+    "timestamp": "2026-09-09T06:19:08.2144360+00:00"
+  },
+  {
+    "event": "PreToolUse",
+    "source": null,
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.7",
+    "timestamp": "2026-09-09T06:19:16.5195447+00:00"
+  },
+  {
+    "event": "SessionStart",
+    "source": "startup",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+    "plugin_data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+    "plugin_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.7",
+    "timestamp": "2026-09-09T06:19:53.5355959+00:00"
+  }
+]
