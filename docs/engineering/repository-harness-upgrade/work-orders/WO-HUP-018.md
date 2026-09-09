@@ -2,7 +2,7 @@
 id = "WO-HUP-018"
 type = "work_order"
 title = "Adopt exact public 0.17.0 as the standard root, the simple way, and take the carried obligations into the root"
-status = "approved"
+status = "in_progress"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -27,6 +27,13 @@ to = "approved"
 decided_at = "2026-09-09T09:04:33Z"
 decided_by = "repository-owner"
 reason = "Approved by the accountable repository owner on 2026-09-09 by selecting the presented option 'Approve all five (Recommended)', after reviewing PR #426 (REQ-HUP-035, REQ-HUP-036, SPEC-HUP-018, VER-HUP-018, WO-HUP-018) and the rehearsal of the 0.17.0 root adoption on a throwaway LF clone of main at e855cc9a. WO-HUP-018 carries no delegation class: its start, completion and record preparation are the owners' explicit decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-09T09:37:09Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-09-09, given with the words 'merged => start' after the approved packet #426 merged to main at b172f42a. Start preflight PASS with no diagnostics over the reading manifest after ARCH-HUP-012 was amended by record on the packet branch; the transaction runs from an LF checkout whose lock bytes equal the committed blob."
 +++
 
 # Work Order: Adopt exact public 0.17.0 as the standard root, the simple way, and take the carried obligations into the root
