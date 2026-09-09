@@ -2,10 +2,10 @@
 id = "WO-PLG-003"
 type = "work_order"
 title = "Probe Codex plugin activation in isolated fixtures"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
-updated = "2026-09-08"
+updated = "2026-09-09"
 
 [assurance]
 commit_bound_verification = "required"
@@ -44,15 +44,22 @@ to = "in_progress"
 decided_at = "2026-09-08T21:41:01Z"
 decided_by = "engineering-owner"
 reason = "Operator explicitly authorized starting the Codex probe work after approving its packet in this Codex task. Current start checks passed. No completion, assurance or external integration decision is inferred."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-09T17:23:27Z"
+decided_by = "engineering-owner"
+reason = "Operator explicitly approved marking WO-PLG-003 and WO-PLG-004 implemented in this Codex task on 2026-09-09, after reviewing the completion handoff and its documented C02 and platform coverage limits. This records completion only; independent commit-bound verification and integration remain separate decisions."
 +++
 
 # Work Order: Probe Codex plugin activation in isolated fixtures
 
 ## Lifecycle
 
-Draft only: this proposes scope and assurance classification, not authorization.
-The engineering owner decides approval and start under existing rules.
-No execution delegation is proposed; later verification needs a commit-bound record.
+The lifecycle events above record the engineering owner's approval, start,
+and explicit completion decision. The work order is implemented.
+Independent verification still requires a commit-bound record.
 
 ## Objective
 

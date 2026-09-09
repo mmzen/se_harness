@@ -1,6 +1,6 @@
 # Codex probe: authenticated observations
 
-**WO-PLG-003 remains in progress.** The operator completed isolated sign-in, and real Codex conversations now support the observations below. This report does not accept completion, verify a candidate, or select production support.
+**WO-PLG-003 is implemented following the engineering owner's explicit completion decision.** Real Codex conversations support the observations below. Candidate verification and production support remain separate decisions.
 
 Assessed host: **Codex CLI 0.153.4 on Windows 10.0.26200 x86_64**, supplied Python **3.14.6**, released evaluator **0.16.0**. Linux and macOS were unavailable. The [earlier signed-out check](20260909-resumption/auth-status.json) remains historical evidence; it is no longer the current authentication state.
 
@@ -52,6 +52,6 @@ Authentication uses the existing disposable file store. Login output and credent
 
 The [supplied-runtime inventory](repository-checks/authenticated-continuation/supplied-runtime-inventory.json) records accessible Python 3.11.9 and 3.14.6 with importable venv/ensurepip. It is not a complete machine inventory or a simulation of older/broken installations. Unavailable variants and platforms are not counted as passes.
 
-[Repository checks](repository-checks/) and the [36 passing observer tests](20260909-live/final-complete-fixture-tests/result.json) are separate from host acceptance. Their passing results do not authorize WO completion, VREC verification or a merge. The engineering owner retains the completion decision; production support remains a separate technical decision.
+[Repository checks](repository-checks/) and the [36 passing observer tests](20260909-live/final-complete-fixture-tests/result.json) are separate from host acceptance. Their passing results do not authorize WO completion, VREC verification or a merge. The engineering owner made the completion decision separately from these checks; production support remains a separate technical decision.
 
 Reproduction instructions: [probe README](../../../../../tests/plugin_integration/codex_probe/README.md). Assessed sources include the installed executable's help/generated schemas, [plugin packaging](https://developers.openai.com/plugins/build/plugins), [hooks](https://learn.chatgpt.com/docs/hooks), [CLI commands](https://learn.chatgpt.com/docs/cli/slash-commands), and [authentication](https://learn.chatgpt.com/docs/auth).
