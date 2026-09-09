@@ -5,17 +5,18 @@ formal_snapshot_sha256 = "003bdbb4410d6560b8edb48cf6ce938c43ebef73f387b1636dccbc
 rebound_at = "2026-09-09T06:37:28Z"
 ```
 
-# WO-PLG-004: partial investigation handoff
+# WO-PLG-004: investigation handoff
 
-**Work remains in progress. The current case matrix and remaining observations
-are recorded in [the report](REPORT.md).**
-This packet retains the observations available so far and the current environment
-limits. It is not a claim of completed implementation, verified conformance,
-production support, or permission to merge.
+**WO-PLG-004 is implemented following the engineering owner's explicit completion
+decision on 2026-09-09.** [The report](REPORT.md) retains the case results and
+coverage limits. Completion does not establish verified conformance, production
+support, or permission to merge.
 
 The operator approved this packet and authorized its work in the current Codex
 task. The actual definition approvals, WO approval, and separate start are
-recorded in [governance](governance/). No completion or assurance transition was applied.
+recorded in [governance](governance/). The later
+[completion transition](governance/completion-20260909/completion-applied.json)
+records the explicit operator decision. No assurance transition was applied.
 
 ## Actual work and evidence
 
@@ -47,10 +48,12 @@ recorded in [governance](governance/). No completion or assurance transition was
 
 ## Decision and next action
 
-The engineering owner must decide whether these observations and their explicit
-coverage limits complete the authorized investigation.
-Keep `WO-PLG-004` in `in_progress`. The accountable engineering owner has not accepted
-completion. A mechanically passing handoff check would establish fresh, scoped
-evidence only; it does not inspect the completeness of these host observations.
+The engineering owner approved marking `WO-PLG-004` implemented after the
+completion handoff described its evidence and coverage limits. The released
+evaluator applied that exact state change.
+
+The next decision is whether to prepare one ready VREC for `WO-PLG-004` with
+the exact approved verification contract and retained evidence (`DR-VREC-PREPARE`).
+No verification record is prepared by this completion update.
 
 No VREC, production adapter, release, or integration decision is made by this packet.

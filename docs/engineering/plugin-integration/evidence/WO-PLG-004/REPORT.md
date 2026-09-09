@@ -1,11 +1,12 @@
 # Claude Code probe: partial observations
 
-WO-PLG-004 remains in progress. This report supplies evidence for review; it
-does not complete the work, verify a candidate, or select production support.
+**WO-PLG-004 is implemented following the engineering owner's explicit
+completion decision.** Candidate verification and production support remain
+separate decisions.
 The Windows inline-plugin trials on Claude Code **2.1.266** complete
 **C01, C03, C04, C05, C06 and C07** as observation cases.
 **The full C02 prerequisite matrix remains incomplete.** These case
-findings do not qualify a production integration or complete the work order.
+findings do not qualify a production integration or establish full case coverage.
 The [current case index](case-status.json) points to the latest assessment for
 each case; original failed and incomplete attempts remain unchanged.
 
@@ -145,8 +146,7 @@ The operator completed the official login flow for
 `run-20260908-02/isolated profile`. A normalized auth-status check confirmed the
 login without publishing account details or credential material. Later live
 trials used that same profile and new disposable fixtures. The unavailable older/unusable C02 prerequisite combinations remain an
-explicit limitation. No VREC, completion transition or production activation
-decision is created here.
+explicit limitation. No VREC or production activation decision is created here.
 
 The authenticated continuation also has an isolation-evidence limitation:
 normal `.claude.json` metadata changed between two separately captured windows.

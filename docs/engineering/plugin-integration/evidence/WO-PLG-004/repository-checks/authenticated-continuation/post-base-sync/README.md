@@ -25,6 +25,6 @@ governing evaluator, policy, or Git configuration was changed to obtain that
 result. The cause of the initial discrepancy is not established; long-path
 handling or Git stat-cache behavior has not been proved to be its cause.
 
-The selected work order remains `in_progress`. Passing this mechanical check
+At this check, the selected work order remained `in_progress`. Passing this mechanical check
 does not exercise the engineering owner's completion decision or independent
 assurance.
