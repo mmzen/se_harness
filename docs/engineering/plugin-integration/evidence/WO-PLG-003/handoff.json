@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 201 declared changed path(s) are within execution scope.",
+            "message": "All 202 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -273,11 +273,12 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "e66552df29640f6d1664746efcf6284d8ff3b455f7599c889e74408a668bcd8a",
+  "result_sha256": "cb440bb2d53582555ee222c0d1bc622dc770862b2e2bc8de8862d27f0fcbe2e4",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
     "changed_paths": [
+      "docs/engineering/plugin-integration/evidence/WO-PLG-003/20260909-resumption/auth-status.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-003/app-server/schema-digests.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-003/app-server/stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-003/app-server/transcript.json",

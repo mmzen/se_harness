@@ -2,6 +2,12 @@
 
 WO-PLG-003 remains **in_progress**. This is partial evidence, not a completion, verification, or support decision. No VER-PLG-003 case is claimed fully passed yet.
 
+The operator requested continuation on 2026-09-09. The existing isolated profile
+still reports [signed out](20260909-resumption/auth-status.json), so a fresh
+official device-login flow was started separately. Its URL/code and any resulting
+credentials are excluded from public evidence. No authenticated model turn or
+additional acceptance case is claimed by this resumption check.
+
 Assessed host: **Codex CLI 0.153.4, Windows 10.0.26200 x86_64**, with supplied Python **3.14.6** and released evaluator **0.16.0**. Linux and macOS are unavailable in this investigation environment; no support claim is made for them.
 
 ## What is observed
