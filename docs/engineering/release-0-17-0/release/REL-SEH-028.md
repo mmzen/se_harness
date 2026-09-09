@@ -38,6 +38,7 @@ untraced_exemptions = [
   "46eff4668adc6c1d37637862202ed43d51544a6e",
   "3a311d49f8052bfa0d09ec92ede460ed73397caa",
   "517dc5f6a72f80264b59d59d96de0c6e59cd379e",
+  "2bd2ae7c548c1f92ab04a9cf5db1d0cecc2ceb86",
 ]
 
 [[lifecycle_events]]
@@ -401,3 +402,20 @@ work order.
   domain.
 - The `release_build.canonical_json_bytes` alias for
   `scripts/replay_release_build.py` is a wave 2 follow-up still open.
+
+## Amendment record
+
+**The merge of this contract's own packet is exempted by name (`2bd2ae7c`),
+decided 2026-09-09 by the release owner under `WO-RLS-023`.** The two commits
+of pull request #424 that drafted and approved this contract and `WO-RLS-023`
+ended with the `Harness-Work-Order` line, a blank line and a `Co-Authored-By`
+line; Git reads trailers from the last paragraph only, so the trailer was
+unreadable and `harnessctl release-unit` reads the merge `2bd2ae7c` as
+untraced. The release owner, by selecting the presented option 'Exempt it by
+dated amendment', adds it to `untraced_exemptions` above with the reason that
+the merge carried this packet's two definitions and no other path, and that
+`WO-RLS-023` is traced through the release branch's own commits, whose
+trailers are written in one block. No gate changes; the census the contract
+predicts is otherwise unchanged. The same defect sits on earlier commits of
+this repository written the same way; those work orders were traced through
+other commits and need no repair. Nothing else in this contract changes.
