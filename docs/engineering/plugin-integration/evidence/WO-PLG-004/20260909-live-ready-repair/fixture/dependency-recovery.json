@@ -1,0 +1,6 @@
+{
+  "source": "live_sessions.py",
+  "sha256": "063c79a32c9a5e8dadd7ad5c000aa3af592a7e579b1f9fd28ef16cae51bf119f",
+  "method": "Reversed the two recorded post-run structured-success predicate edits in current source and restored original newline encoding. Exact digest matches the identity captured before execution; host events and current source were not modified.",
+  "expected_digest_source": "../identities.json source_sha256.live_sessions.py"
+}

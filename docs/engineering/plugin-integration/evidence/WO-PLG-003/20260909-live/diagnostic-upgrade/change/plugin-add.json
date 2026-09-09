@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+    "plugin",
+    "add",
+    "codex-probe@codex-probe-local",
+    "--json"
+  ],
+  "exit_status": 0,
+  "stdout": "{\n  \"pluginId\": \"codex-probe@codex-probe-local\",\n  \"name\": \"codex-probe\",\n  \"marketplaceName\": \"codex-probe-local\",\n  \"version\": \"0.0.3\",\n  \"installedPath\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\codex\\\\run-001 with spaces\\\\profile\\\\codex\\\\plugins\\\\cache\\\\codex-probe-local\\\\codex-probe\\\\0.0.3\",\n  \"authPolicy\": \"ON_INSTALL\"\n}\n",
+  "stderr": "",
+  "duration_seconds": 0.512,
+  "timed_out": false
+}

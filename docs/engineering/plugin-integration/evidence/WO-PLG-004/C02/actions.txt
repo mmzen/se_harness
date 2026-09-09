@@ -1,0 +1,1 @@
+["C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", "-NoProfile", "-NonInteractive", "-Command", "if (Test-Path -LiteralPath $env:PROBE_PYTHON) { exit 9 }; Write-Output 'Provided Python unavailable; install Python 3.11+ with venv/ensurepip. No setup performed.'"]

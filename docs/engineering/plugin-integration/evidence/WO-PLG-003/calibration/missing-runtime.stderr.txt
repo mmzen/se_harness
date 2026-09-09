@@ -1,0 +1,6 @@
+Impossible de charger le fichier 
+C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\codex\calibration-001 with spaces\plugin 
+with spaces\observe.ps1, car l’exécution de scripts est désactivée sur ce système. Pour plus d’informations, consultez 
+about_Execution_Policies à l’adresse https://go.microsoft.com/fwlink/?LinkID=135170.
+    + CategoryInfo          : Erreur de sécurité : (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : UnauthorizedAccess

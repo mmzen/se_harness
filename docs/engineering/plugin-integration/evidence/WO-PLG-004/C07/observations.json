@@ -1,0 +1,22 @@
+{
+  "expected": "Actual Claude shell tools perform authorized setup/repair and the unready governed-write trial.",
+  "observed": {
+    "setup": "not executed by Claude",
+    "repair": "not executed by Claude",
+    "governed_write": "not attempted; authentication unavailable",
+    "target_sha256": "4459a0b100ff243487a6d4794f0c28bec7e230824df0efd89d9eb311a2d175bd",
+    "governance_readiness": false,
+    "external_observer_venv_is_not_C07": true
+  },
+  "conclusion": "unavailable",
+  "production_support": "unqualified",
+  "source_evidence": [
+    "commands.json",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "exit_status": [
+    1
+  ],
+  "host_identity_evidence": "docs/engineering/plugin-integration/evidence/WO-PLG-004/identities.json"
+}

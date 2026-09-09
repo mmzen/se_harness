@@ -1,0 +1,8 @@
+{
+  "name": "verity-plane-live-probe",
+  "version": "0.0.1",
+  "author": {
+    "name": "SE Harness compatibility probe"
+  },
+  "description": "Disposable observation fixture for WO-PLG-004"
+}

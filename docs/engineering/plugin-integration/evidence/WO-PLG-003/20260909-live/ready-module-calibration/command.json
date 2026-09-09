@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-probe\\tests\\plugin_integration\\codex_probe\\observe_ready_runtime.py"
+  ],
+  "input": {
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\readiness-input-20260909\\repository",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  "exit_code": 0,
+  "fixture_source_sha256": "06a2860d05ada00e2c789cae692858917c204b1d928f7e3991028da2aca30d88",
+  "kind": "Direct observer calibration; not a host event or acceptance result."
+}

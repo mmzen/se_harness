@@ -1,0 +1,17 @@
+[
+  {
+    "argv": [
+      "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "-NoProfile",
+      "-NonInteractive",
+      "-Command",
+      "if (Test-Path -LiteralPath $env:PROBE_PYTHON) { exit 9 }; Write-Output 'Provided Python unavailable; install Python 3.11+ with venv/ensurepip. No setup performed.'"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\disposable repository",
+    "exit": 0,
+    "timeout": false,
+    "seconds": 0.518,
+    "stdout": "Provided Python unavailable; install Python 3.11+ with venv/ensurepip. No setup performed.\n",
+    "stderr": ""
+  }
+]

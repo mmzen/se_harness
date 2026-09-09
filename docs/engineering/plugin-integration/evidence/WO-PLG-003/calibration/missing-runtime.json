@@ -1,0 +1,14 @@
+{
+  "layer": "direct fixture calibration, not host",
+  "argv": [
+    "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "-NoProfile",
+    "-NonInteractive",
+    "-File",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\calibration-001 with spaces\\plugin with spaces\\observe.ps1"
+  ],
+  "stdin": "{\"hook_event_name\": \"SessionStart\", \"source\": \"startup\", \"cwd\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\codex\\\\calibration-001 with spaces\\\\repo\"}",
+  "exit_status": 1,
+  "stdout": "",
+  "stderr": "Impossible de charger le fichier \nC:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\calibration-001 with spaces\\plugin \nwith spaces\\observe.ps1, car l\u2019ex\u00e9cution de scripts est d\u00e9sactiv\u00e9e sur ce syst\u00e8me. Pour plus d\u2019informations, consultez \nabout_Execution_Policies \u00e0 l\u2019adresse https://go.microsoft.com/fwlink/?LinkID=135170.\n    + CategoryInfo          : Erreur de s\u00e9curit\u00e9\u00a0: (:) [], ParentContainsErrorRecordException\n    + FullyQualifiedErrorId : UnauthorizedAccess\n"
+}

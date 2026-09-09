@@ -1,0 +1,87 @@
+[
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "plugin",
+      "validate",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\plugin with spaces",
+      "--json",
+      "--strict"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\disposable repository",
+    "exit": 1,
+    "timeout": false,
+    "seconds": 0.422,
+    "stdout": "{\n  \"success\": false,\n  \"strict\": true,\n  \"target\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\plugin with spaces\\\\.claude-plugin\\\\plugin.json\",\n  \"manifest\": {\n    \"file\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\plugin with spaces\\\\.claude-plugin\\\\plugin.json\",\n    \"type\": \"plugin\",\n    \"errors\": [],\n    \"warnings\": [\n      {\n        \"path\": \"author\",\n        \"message\": \"No author information provided. Consider adding author details for plugin attribution\",\n        \"code\": null\n      }\n    ],\n    \"notes\": []\n  },\n  \"contents\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "--setting-sources",
+      "user",
+      "--settings",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\settings.json",
+      "--plugin-dir",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\plugin with spaces",
+      "--strict-mcp-config",
+      "--mcp-config",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\empty-mcp.json",
+      "plugin",
+      "list",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\disposable repository",
+    "exit": 1,
+    "timeout": false,
+    "seconds": 0.221,
+    "stdout": "",
+    "stderr": "error: unknown option '--json'\n"
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "--setting-sources",
+      "user",
+      "--settings",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\settings.json",
+      "--plugin-dir",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\plugin with spaces",
+      "--strict-mcp-config",
+      "--mcp-config",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\empty-mcp.json",
+      "plugin",
+      "details",
+      "verity-plane-probe"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\disposable repository",
+    "exit": 1,
+    "timeout": false,
+    "seconds": 0.279,
+    "stdout": "",
+    "stderr": "Error: Invalid MCP configuration:\nMCP config file not found: C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\disposable repository\\plugin\nMCP config file not found: C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\disposable repository\\details\nMCP config file not found: C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\disposable repository\\verity-plane-probe\n"
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "--setting-sources",
+      "user",
+      "--settings",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\settings.json",
+      "--plugin-dir",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\plugin with spaces",
+      "--strict-mcp-config",
+      "--mcp-config",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\empty-mcp.json",
+      "--debug-file",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\C01-start.debug.txt",
+      "--init-only"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\disposable repository",
+    "exit": 0,
+    "timeout": false,
+    "seconds": 1.324,
+    "stdout": "",
+    "stderr": ""
+  }
+]

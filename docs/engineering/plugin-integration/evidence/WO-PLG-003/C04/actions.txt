@@ -1,0 +1,117 @@
+[
+  {
+    "source": "20260909-live/changed-resume-compact/transcript.json",
+    "sent_at": 1788933957.9592297,
+    "message": {
+      "id": 1,
+      "method": "initialize",
+      "params": {
+        "clientInfo": {
+          "name": "codex-live-probe",
+          "version": "0.0.1"
+        },
+        "capabilities": {
+          "experimentalApi": true
+        }
+      }
+    }
+  },
+  {
+    "source": "20260909-live/changed-resume-compact/transcript.json",
+    "sent_at": 1788933958.1105633,
+    "message": {
+      "id": 2,
+      "method": "hooks/list",
+      "params": {
+        "cwds": [
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+        ]
+      }
+    }
+  },
+  {
+    "source": "20260909-live/changed-resume-compact/transcript.json",
+    "sent_at": 1788933958.1611054,
+    "message": {
+      "id": 3,
+      "method": "skills/list",
+      "params": {
+        "cwds": [
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+        ],
+        "forceReload": true
+      }
+    }
+  },
+  {
+    "source": "20260909-live/changed-resume-compact/transcript.json",
+    "sent_at": 1788933958.211498,
+    "message": {
+      "id": 4,
+      "method": "thread/resume",
+      "params": {
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+        "sandbox": "read-only",
+        "approvalPolicy": "on-request",
+        "threadId": "01a084c5-7aed-7760-91e4-209411f8b5b3"
+      }
+    }
+  },
+  {
+    "source": "20260909-live/changed-resume-compact/transcript.json",
+    "sent_at": 1788933958.312488,
+    "message": {
+      "id": 5,
+      "method": "turn/start",
+      "params": {
+        "threadId": "01a084c5-7aed-7760-91e4-209411f8b5b3",
+        "input": [
+          {
+            "type": "text",
+            "text": "Reply with the single word READY. Do not use tools or change files."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "source": "20260909-live/changed-resume-compact/transcript.json",
+    "sent_at": 1788933967.6496325,
+    "message": {
+      "id": 6,
+      "method": "thread/compact/start",
+      "params": {
+        "threadId": "01a084c5-7aed-7760-91e4-209411f8b5b3"
+      }
+    }
+  },
+  {
+    "source": "20260909-live/changed-resume-compact/transcript.json",
+    "sent_at": 1788933997.0959795,
+    "message": {
+      "id": 7,
+      "method": "turn/start",
+      "params": {
+        "threadId": "01a084c5-7aed-7760-91e4-209411f8b5b3",
+        "input": [
+          {
+            "type": "text",
+            "text": "Reply with the single word READY. Do not use tools or change files."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "source": "20260909-live/changed-resume-compact/transcript.json",
+    "sent_at": 1788934004.462276,
+    "message": {
+      "id": 8,
+      "method": "thread/read",
+      "params": {
+        "threadId": "01a084c5-7aed-7760-91e4-209411f8b5b3",
+        "includeTurns": true
+      }
+    }
+  }
+]

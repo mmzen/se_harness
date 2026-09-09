@@ -1,0 +1,5 @@
+{
+  "command": "python -B -S -m se_harness --help",
+  "exit_code": 0,
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-probe"
+}

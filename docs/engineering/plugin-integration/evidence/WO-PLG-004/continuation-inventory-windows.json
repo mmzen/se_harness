@@ -1,0 +1,26 @@
+{
+  "live_sessions_evidence": "20260909-live-sessions/isolation.json",
+  "tool_setup_evidence": "20260909-live-tool-setup/isolation.json",
+  "changed_between_windows": {
+    "C:\\Users\\mathi\\.claude.json": {
+      "after_live_sessions": {
+        "exists": true,
+        "size": 54022,
+        "mtime_ns": 1788931151410493700
+      },
+      "before_tool_setup": {
+        "exists": true,
+        "size": 54059,
+        "mtime_ns": 1788932543532094700
+      }
+    }
+  },
+  "unmeasured_intervals": [
+    "later resume_compact.py runs",
+    "denial_probe.py after tool-setup final snapshot"
+  ],
+  "causation": "unknown; metadata comparison cannot attribute the change",
+  "full_continuation_normal_profile_unchanged": "not established",
+  "credential_contents_read": false,
+  "unowned_files_restored": false
+}

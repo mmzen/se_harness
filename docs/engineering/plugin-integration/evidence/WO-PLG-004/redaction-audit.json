@@ -1,0 +1,32 @@
+{
+  "policy": "sanitized-public-v1",
+  "files_inspected": 118,
+  "files_changed": [
+    "C01-start.debug.txt",
+    "C03-first.debug.txt",
+    "C03-second.debug.txt",
+    "C05-disabled.debug.txt",
+    "C05-enabled.debug.txt",
+    "C06-removed.debug.txt",
+    "C06-updated.debug.txt",
+    "native-inline/C01-missing.debug.txt",
+    "native-inline/C03-first.debug.txt",
+    "native-inline/C03-second.debug.txt",
+    "native-inline/C05-disabled.debug.txt",
+    "native-inline/C05-enabled.debug.txt",
+    "native-inline/C06-removed.debug.txt",
+    "native-inline/C06-version-restart.debug.txt",
+    "native-inline-corrected/C01-missing.debug.txt",
+    "native-inline-corrected/C03-first.debug.txt",
+    "native-inline-corrected/C03-second.debug.txt",
+    "native-inline-corrected/C05-disabled.debug.txt",
+    "native-inline-corrected/C05-enabled.debug.txt",
+    "native-inline-corrected/C06-removed.debug.txt",
+    "native-inline-corrected/C06-version-restart.debug.txt"
+  ],
+  "host_profiles_opened": false,
+  "private_raw_captures_opened": false,
+  "governance_directory_excluded": true,
+  "sanitizer_source_sha256": "7d8491ea4d84d658e96b1ce0adbab1082f1fb6cd37fd7703f8f0512080817372",
+  "note": "Public captures are sanitized observations, not byte-for-byte raw logs. Local raw debug logs remain outside the checkout."
+}

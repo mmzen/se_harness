@@ -1,0 +1,127 @@
+{
+  "expected": "Actual resume and compaction deliver current hook events/context, or missing-runtime guidance.",
+  "observed": {
+    "mode": "missing-runtime",
+    "events": [
+      {
+        "at": "2026-09-09T05:42:14.8118143Z",
+        "event": "SessionStart",
+        "source": "startup",
+        "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-sessions\\plugin with spaces",
+        "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\data\\verity-plane-live-probe-inline",
+        "interpreter": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-sessions\\not installed\\python.exe",
+        "handler_invoked": false,
+        "host_output": {
+          "hookSpecificOutput": {
+            "hookEventName": "SessionStart",
+            "additionalContext": "PROBE: setup required. The selected interpreter is absent. No governance readiness is asserted."
+          }
+        }
+      },
+      {
+        "at": "2026-09-09T05:42:36.4678343Z",
+        "event": "SessionStart",
+        "source": "resume",
+        "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-sessions\\plugin with spaces",
+        "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\data\\verity-plane-live-probe-inline",
+        "interpreter": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-sessions\\not installed\\python.exe",
+        "handler_invoked": false,
+        "host_output": {
+          "hookSpecificOutput": {
+            "hookEventName": "SessionStart",
+            "additionalContext": "PROBE: setup required. The selected interpreter is absent. No governance readiness is asserted."
+          }
+        }
+      },
+      {
+        "at": "2026-09-09T05:42:43.4019243Z",
+        "event": "SessionStart",
+        "source": "resume",
+        "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-sessions\\plugin with spaces",
+        "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\data\\verity-plane-live-probe-inline",
+        "interpreter": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-sessions\\not installed\\python.exe",
+        "handler_invoked": false,
+        "host_output": {
+          "hookSpecificOutput": {
+            "hookEventName": "SessionStart",
+            "additionalContext": "PROBE: setup required. The selected interpreter is absent. No governance readiness is asserted."
+          }
+        }
+      },
+      {
+        "at": "2026-09-09T05:43:39.2658989Z",
+        "event": "SessionStart",
+        "source": "compact",
+        "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-sessions\\plugin with spaces",
+        "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\data\\verity-plane-live-probe-inline",
+        "interpreter": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-sessions\\not installed\\python.exe",
+        "handler_invoked": false,
+        "host_output": {
+          "hookSpecificOutput": {
+            "hookEventName": "SessionStart",
+            "additionalContext": "PROBE: setup required. The selected interpreter is absent. No governance readiness is asserted."
+          }
+        }
+      },
+      {
+        "at": "2026-09-09T05:43:40.3145031Z",
+        "event": "PostCompact",
+        "source": null,
+        "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-sessions\\plugin with spaces",
+        "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\data\\verity-plane-live-probe-inline",
+        "interpreter": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-sessions\\not installed\\python.exe",
+        "handler_invoked": false
+      }
+    ],
+    "old_source_sha256": "51b6f6cf28cadde0a69ba268f354b737a4e3780ef9cd27eccadb02dcc04b54bc",
+    "resume_source_sha256": "abc10db7f2bebfb54b924835c5f2394c89d796045eb09f880485f4abb06cf07d",
+    "compact_source_sha256": "a46e30a076e1d19cf40309723b198da11e4c2ff6d5272663568f2f9ccbf59ca3",
+    "compact_boundaries": [
+      {
+        "type": "system",
+        "subtype": "compact_boundary",
+        "session_id": "0195484b-02fc-4b7b-91ae-3692316921fe",
+        "uuid": "631cf19d-cb8c-4b66-aa73-aace8c25a6a7",
+        "compact_metadata": {
+          "trigger": "manual",
+          "pre_tokens": 5344,
+          "post_tokens": 2491,
+          "cumulative_dropped_tokens": 2853,
+          "duration_ms": 54731,
+          "preserved_segment": {
+            "head_uuid": "105f4e55-b41d-453a-bbd1-0179d306268f",
+            "anchor_uuid": "b390ed5e-be5a-4fef-a916-2ab2fde07364",
+            "tail_uuid": "105f4e55-b41d-453a-bbd1-0179d306268f"
+          },
+          "preserved_messages": {
+            "anchor_uuid": "b390ed5e-be5a-4fef-a916-2ab2fde07364",
+            "uuids": [
+              "105f4e55-b41d-453a-bbd1-0179d306268f"
+            ],
+            "all_uuids": [
+              "105f4e55-b41d-453a-bbd1-0179d306268f"
+            ]
+          }
+        },
+        "logical_parent_uuid": "105f4e55-b41d-453a-bbd1-0179d306268f"
+      }
+    ],
+    "governance_readiness": false,
+    "session": "0195484b-02fc-4b7b-91ae-3692316921fe",
+    "documentation": "https://code.claude.com/docs/en/agent-sdk/slash-commands#compact-history-with-compact"
+  },
+  "conclusion": "pass",
+  "production_support": "unqualified",
+  "exit_status": [
+    0,
+    0,
+    0
+  ],
+  "host_identity_evidence": "docs/engineering/plugin-integration/evidence/WO-PLG-004/20260909-live-sessions/identities.json",
+  "capture_policy": "sanitized-public-v1; credential fields and sensitive diagnostic lines redacted",
+  "source_evidence": [
+    "commands.json",
+    "stdout.txt",
+    "stderr.txt"
+  ]
+}

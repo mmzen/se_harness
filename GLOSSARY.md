@@ -36,6 +36,18 @@ artifacts.
 
 **Evaluator.** The installed copy of SE Harness that judges a repository. It runs at a pinned released version, from a virtual environment outside the checkout.
 
+**Plugin.** A package loaded by a coding application to add instructions, event handlers, and other supported components.
+
+**Coding host.** The application running the coding agent, such as Codex or Claude Code. Each host controls how plugins and tools are loaded.
+
+**Skill.** Instructions an agent follows for a named task. A skill may direct tool use but does not grant decision authority.
+
+**Hook.** A host event registration that invokes code, for example when a session starts or before a supported tool action.
+
+**Private environment.** An isolated Python environment created for the plugin outside the target repository. It uses provided Python and contains the selected released evaluator.
+
+**Wheel.** An installable Python package archive. It contains package files and metadata; it does not supply the Python interpreter.
+
 **Root evaluator versus candidate.** The root evaluator is the released version the repository pins in `.engineering-harness.toml`. The candidate is the source code being developed in the checkout: it is judged, and it never judges.
 
 **Managed file.** A file the tool installs and hash-locks. Editing it by hand breaks `doctor` and the required CI check.

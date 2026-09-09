@@ -1,0 +1,18 @@
+{
+  "before": {
+    "observe.ps1": "6ba407a5bfa592447f12bb21943d376dacf5405e9592ab308dd659735d3e3359",
+    "observe_runtime.py": "037bd78f4226c2671584765b07faca599a8a0349ff464409db6bc4d67c63c6ea",
+    ".codex-plugin\\plugin.json": "f35ae14c4c54f0d85f40e85aa454d73ce0fa4c8b8744d850284cce8b97d6a139",
+    "hooks\\hooks.json": "82b7947b929839af04545d93a6031b60710fbe9456168914358f73d2ab786431",
+    "skills\\setup\\SKILL.md": "2769c93952f6f0ca9fdcabf5828582ae3b59095d6b13b48e470f5156eaa4571c"
+  },
+  "after": {
+    "observe.ps1": "6ba407a5bfa592447f12bb21943d376dacf5405e9592ab308dd659735d3e3359",
+    "observe_runtime.py": "1543cadc5c96c0c6d0337c0eade0a6d70fcc2d3d9585eaeaa1112ab217ec3e9d",
+    ".codex-plugin\\plugin.json": "685c76df6ef6536446a6cf74addf9a8aa41923c6556758e414ca297fdc1a241e",
+    "hooks\\hooks.json": "82b7947b929839af04545d93a6031b60710fbe9456168914358f73d2ab786431",
+    "skills\\setup\\SKILL.md": "2769c93952f6f0ca9fdcabf5828582ae3b59095d6b13b48e470f5156eaa4571c"
+  },
+  "actor": "observer",
+  "changes": "Disposable marketplace fixture only; hook trust unchanged by this script."
+}

@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "doctor",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work",
+  "started_at_utc": "2026-09-09T06:12:09Z",
+  "duration_seconds": 2.69,
+  "exit_code": 0,
+  "stdout_sha256": "87053ea966dcd6c3213af8a8018aac13a5e97395d646e578f6384217fedf571f",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "claim": "Repository check only; no host acceptance, lifecycle transition, release build or assurance decision."
+}

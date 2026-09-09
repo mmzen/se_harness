@@ -1,0 +1,3 @@
+# Disposable Codex observation repository
+
+Fixture only. Do not change any path outside this disposable sandbox.

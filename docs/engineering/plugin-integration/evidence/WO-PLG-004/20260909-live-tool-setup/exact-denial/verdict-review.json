@@ -1,0 +1,12 @@
+{
+  "reassessment": "Retained real host records, not a new host execution",
+  "correlated_write_refusal_observed": true,
+  "source_sha256": "c3f4ce9e6c386716631bb3f2d549de1df3360de42573f58ab330b62e18757dea",
+  "conditions": [
+    "exact Write path and matching tool_use_id",
+    "structured user tool_result is_error and exact hook reason",
+    "final command success, no timeout",
+    "actual hook deny event and unchanged target"
+  ],
+  "original_runner_preserved": "denial_probe.py"
+}

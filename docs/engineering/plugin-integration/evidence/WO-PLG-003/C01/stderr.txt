@@ -1,0 +1,10 @@
+[
+  {
+    "source": "20260909-live\\native-missing-start\\stderr.txt",
+    "stderr": ""
+  },
+  {
+    "source": "20260909-live\\native-missing-resume-compact\\stderr.txt",
+    "stderr": ""
+  }
+]

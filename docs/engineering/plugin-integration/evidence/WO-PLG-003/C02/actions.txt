@@ -1,0 +1,4 @@
+Invoke the actually discovered codex-probe:setup through the documented skill UserInput.
+The selected supplied interpreter path does not exist; the observer checked that fact.
+Request prerequisite-only guidance, no tools or substitute runtime discovery.
+Retain original incomplete evidence under initial/.

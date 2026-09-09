@@ -1,0 +1,86 @@
+{
+  "purpose": "Retained operator instruction and observed application, not a separate authority mechanism",
+  "reviewed_proposal_commit": "be8b4126f6b9147dff8dec2ceaac5a79d59953f7",
+  "operator_instruction": "i approve the packets, i authorize the work",
+  "context": "The preceding handoff named the Codex and Claude probe packets and their separate starts.",
+  "selected_work_order": "WO-PLG-003",
+  "artifacts": [
+    {
+      "artifact": "REQ-PLG-006",
+      "actor_role": "requirements-steward",
+      "source_path": "docs/engineering/plugin-integration/requirements/REQ-PLG-006.md",
+      "reviewed_git_blob_sha256": "1db31a36648e6665ee1d72d2b61d79eb4109315e89a0ac643155d4b103fa2351",
+      "observed_status": "approved",
+      "lifecycle_events": [
+        {
+          "from": "draft",
+          "to": "approved",
+          "decided_at": "2026-09-08T21:39:22Z",
+          "decided_by": "requirements-steward",
+          "reason": "Operator explicitly approved the Codex and Claude probe packets reviewed at be8b4126 in this Codex task: i approve the packets, i authorize the work. Record the selected definition approval only."
+        }
+      ]
+    },
+    {
+      "artifact": "SPEC-PLG-003",
+      "actor_role": "technical-owner",
+      "source_path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-003.md",
+      "reviewed_git_blob_sha256": "b5427ef9f8b4dabc11abb24aab1d4501536805e1fdc1f75cd1a29a670cde61c0",
+      "observed_status": "approved",
+      "lifecycle_events": [
+        {
+          "from": "draft",
+          "to": "approved",
+          "decided_at": "2026-09-08T21:39:22Z",
+          "decided_by": "technical-owner",
+          "reason": "Operator explicitly approved the Codex probe packet reviewed at be8b4126 in this Codex task. Record the selected specification approval only."
+        }
+      ]
+    },
+    {
+      "artifact": "VER-PLG-003",
+      "actor_role": "assurance-owner",
+      "source_path": "docs/engineering/plugin-integration/verification/VER-PLG-003.md",
+      "reviewed_git_blob_sha256": "568eaabe14c58482435d389671cf7abe11d4c35749468723b0dd98d48dd91314",
+      "observed_status": "approved",
+      "lifecycle_events": [
+        {
+          "from": "draft",
+          "to": "approved",
+          "decided_at": "2026-09-08T21:39:22Z",
+          "decided_by": "assurance-owner",
+          "reason": "Operator explicitly approved the Codex probe verification contract reviewed at be8b4126. This approves the verification plan, not any implementation result or VREC."
+        }
+      ]
+    },
+    {
+      "artifact": "WO-PLG-003",
+      "actor_role": "engineering-owner",
+      "source_path": "docs/engineering/plugin-integration/work-orders/WO-PLG-003.md",
+      "reviewed_git_blob_sha256": "859e6a897c59766ec573b84934efaccb449eb337f0742f837432bf741e03fcb1",
+      "observed_status": "in_progress",
+      "lifecycle_events": [
+        {
+          "from": "draft",
+          "to": "approved",
+          "decided_at": "2026-09-08T21:39:49Z",
+          "decided_by": "engineering-owner",
+          "reason": "Operator explicitly approved the Codex probe packet reviewed at be8b4126 and authorized its work in this Codex task. Scope and required commit-bound assurance are unchanged; start is recorded separately."
+        },
+        {
+          "from": "approved",
+          "to": "in_progress",
+          "decided_at": "2026-09-08T21:41:01Z",
+          "decided_by": "engineering-owner",
+          "reason": "Operator explicitly authorized starting the Codex probe work after approving its packet in this Codex task. Current start checks passed. No completion, assurance or external integration decision is inferred."
+        }
+      ]
+    }
+  ],
+  "not_authorized_by_this_record": [
+    "completion",
+    "verification of implementation",
+    "PR merge",
+    "publication"
+  ]
+}

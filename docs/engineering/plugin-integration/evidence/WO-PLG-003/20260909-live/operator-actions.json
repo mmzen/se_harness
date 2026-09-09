@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-09",
+  "host": "Codex CLI 0.153.4",
+  "work_order": "WO-PLG-003",
+  "capture_kind": "Observer transcription of terminal/tool output; not a byte-exact terminal recording or a host-generated permission log.",
+  "scope": "Existing run-001 disposable profile and its two-file synthetic repository only.",
+  "actions_in_order": [
+    {
+      "action": "Complete the official isolated sign-in separately.",
+      "observed": "CLI reports successful login. Login output, device codes and credential material are excluded from repository evidence."
+    },
+    {
+      "action": "Start interactive_isolated.py in the existing disposable profile.",
+      "observed": "The TUI warns that TERM is dumb and asks Continue anyway? The observer answers y."
+    },
+    {
+      "action": "Attempt the separate bounded READY/no-tools app-server conversation.",
+      "observed": "Outer automatic approval review initially rejects possible repository-data disclosure. Inspection confirms the model workspace contains only AGENTS.md with the disposable-fixture boundary and governed-target.txt with unchanged sentinel. Re-review approves the same command with this explicit context; no sandbox, hook-trust or approval-bypass option is added.",
+      "machine_evidence": "untrusted-start/transcript.json"
+    },
+    {
+      "action": "Accept directory trust for the inspected synthetic repository.",
+      "observed": "The TUI presents Hooks need review: 2 hooks are new or changed, and warns that trusted hooks can run outside the sandbox. Options are Review hooks, Trust all and continue, and Continue without trusting."
+    },
+    {
+      "action": "Select Continue without trusting using two down-arrow inputs and Enter.",
+      "observed": "Rapid terminal redraw does not retain a complete final selection screen. The later independent hooks/list capture confirms that both hooks remain untrusted. No hook execution is observed in the corresponding conversation.",
+      "machine_evidence": "after-trust-dialog/transcript.json"
+    },
+    {
+      "action": "Review the Windows sandbox setup prompt and choose Quit.",
+      "observed": "The TUI offers default sandbox setup requiring Administrator permissions, non-admin sandbox, or Quit. The observer moves down once, observes option 2 selected, moves down again, observes option 3 Quit selected, and presses Enter. The TUI shuts down with exit 0. Neither sandbox setup option is selected.",
+      "tui_session_id": "01a084b3-2988-79c2-a845-2a387702da82"
+    }
+  ],
+  "conclusions": {
+    "authenticated_no_tools_conversation": "observed",
+    "hook_trust_after_this_sequence": "both untrusted, confirmed by host hooks/list",
+    "windows_sandbox_setup": "not performed",
+    "governance_readiness": false,
+    "whole_case_acceptance": "not decided by these observer notes"
+  }
+}

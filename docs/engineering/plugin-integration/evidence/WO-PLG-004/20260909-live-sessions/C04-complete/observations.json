@@ -1,0 +1,123 @@
+{
+  "expected": "Actual resume and compaction deliver current hook events/context, or missing-runtime guidance.",
+  "observed": {
+    "mode": "prepared-runtime",
+    "events": [
+      {
+        "at": "2026-09-09T05:41:04.3346476Z",
+        "event": "SessionStart",
+        "source": "resume",
+        "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-sessions\\plugin with spaces",
+        "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\data\\verity-plane-live-probe-inline",
+        "interpreter": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\selected evaluator\\Scripts\\python.exe",
+        "handler_invoked": true,
+        "handler_exit": 0,
+        "handler_output": "{\"probe_only\": true, \"governance_readiness\": false, \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\python.exe\", \"-I\", \"-m\", \"se_harness\", \"identity\", \"--role\", \"released-evaluator\", \"--expected-version\", \"0.16.0\", \"--expected-root\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\", \"--checkout-root\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\20260909-live-sessions\\\\disposable repository\", \"--require-isolated-python\", \"--entry-point\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\harnessctl.exe\", \"--require-entry-point\", \"--evaluator-payload-sha256\", \"51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c\", \"--evaluator-wheel-sha256\", \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\", \"--json\"], \"identity_exit\": 0, \"identity\": {\"candidate_commit\": null, \"checkout_root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\20260909-live-sessions\\\\disposable repository\", \"diagnostics\": [], \"distribution_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Lib\\\\site-packages\", \"entry_point_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\harnessctl.exe\", \"evaluator_archive_name\": \"se_harness-0.16.0-py3-none-any.whl\", \"evaluator_archive_sha256\": \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\", \"evaluator_payload_manifest\": \"se-harness-installed-payload-v1\", \"evaluator_payload_sha256\": \"51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c\", \"evaluator_wheel_sha256\": \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\", \"expected_root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\", \"harness_version\": \"0.16.0\", \"isolated_python\": true, \"module_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Lib\\\\site-packages\\\\se_harness\\\\runtime_identity.py\", \"passed\": true, \"python_binary_position\": \"within-expected-root\", \"python_binary_sha256\": \"199ce15a9f0d4f9522edba59338e4879d28cf61f88e377b8164bcb716275ed22\", \"python_entry_is_link\": false, \"python_executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\python.exe\", \"python_version\": \"3.14.6\", \"pythonpath_present\": false, \"role\": \"released-evaluator\", \"schema\": \"se-harness-runtime-identity-v3\", \"template_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\share\\\\se-harness\\\\templates\\\\repository\\\\standard\", \"user_site_enabled\": false}, \"source_sha256\": \"aea1c63c96e9ce7325d89758fffdc500bd84b045c61d77b74b0c5b9d45324d54\", \"context\": \"Fixture revision: resume-e6ba994f-17b8-4a7a-96ad-830c0c2a8837\\r\\nObservation fixture; no authority granted.\\r\\n\"}",
+        "host_output": {
+          "hookSpecificOutput": {
+            "hookEventName": "SessionStart",
+            "additionalContext": "Fixture revision: resume-e6ba994f-17b8-4a7a-96ad-830c0c2a8837\r\nObservation fixture; no authority granted.\r\n"
+          }
+        }
+      },
+      {
+        "at": "2026-09-09T05:41:08.4969730Z",
+        "event": "SessionStart",
+        "source": "resume",
+        "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-sessions\\plugin with spaces",
+        "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\data\\verity-plane-live-probe-inline",
+        "interpreter": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\selected evaluator\\Scripts\\python.exe",
+        "handler_invoked": true,
+        "handler_exit": 0,
+        "handler_output": "{\"probe_only\": true, \"governance_readiness\": false, \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\python.exe\", \"-I\", \"-m\", \"se_harness\", \"identity\", \"--role\", \"released-evaluator\", \"--expected-version\", \"0.16.0\", \"--expected-root\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\", \"--checkout-root\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\20260909-live-sessions\\\\disposable repository\", \"--require-isolated-python\", \"--entry-point\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\harnessctl.exe\", \"--require-entry-point\", \"--evaluator-payload-sha256\", \"51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c\", \"--evaluator-wheel-sha256\", \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\", \"--json\"], \"identity_exit\": 0, \"identity\": {\"candidate_commit\": null, \"checkout_root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\20260909-live-sessions\\\\disposable repository\", \"diagnostics\": [], \"distribution_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Lib\\\\site-packages\", \"entry_point_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\harnessctl.exe\", \"evaluator_archive_name\": \"se_harness-0.16.0-py3-none-any.whl\", \"evaluator_archive_sha256\": \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\", \"evaluator_payload_manifest\": \"se-harness-installed-payload-v1\", \"evaluator_payload_sha256\": \"51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c\", \"evaluator_wheel_sha256\": \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\", \"expected_root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\", \"harness_version\": \"0.16.0\", \"isolated_python\": true, \"module_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Lib\\\\site-packages\\\\se_harness\\\\runtime_identity.py\", \"passed\": true, \"python_binary_position\": \"within-expected-root\", \"python_binary_sha256\": \"199ce15a9f0d4f9522edba59338e4879d28cf61f88e377b8164bcb716275ed22\", \"python_entry_is_link\": false, \"python_executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\python.exe\", \"python_version\": \"3.14.6\", \"pythonpath_present\": false, \"role\": \"released-evaluator\", \"schema\": \"se-harness-runtime-identity-v3\", \"template_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\share\\\\se-harness\\\\templates\\\\repository\\\\standard\", \"user_site_enabled\": false}, \"source_sha256\": \"51b6f6cf28cadde0a69ba268f354b737a4e3780ef9cd27eccadb02dcc04b54bc\", \"context\": \"Fixture revision: compact-1a0cb745-79d9-4f2a-82ca-dd652b7574b9\\r\\nObservation fixture; no authority granted.\\r\\n\"}",
+        "host_output": {
+          "hookSpecificOutput": {
+            "hookEventName": "SessionStart",
+            "additionalContext": "Fixture revision: compact-1a0cb745-79d9-4f2a-82ca-dd652b7574b9\r\nObservation fixture; no authority granted.\r\n"
+          }
+        }
+      },
+      {
+        "at": "2026-09-09T05:41:47.4809640Z",
+        "event": "SessionStart",
+        "source": "compact",
+        "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-sessions\\plugin with spaces",
+        "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\data\\verity-plane-live-probe-inline",
+        "interpreter": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\selected evaluator\\Scripts\\python.exe",
+        "handler_invoked": true,
+        "handler_exit": 0,
+        "handler_output": "{\"probe_only\": true, \"governance_readiness\": false, \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\python.exe\", \"-I\", \"-m\", \"se_harness\", \"identity\", \"--role\", \"released-evaluator\", \"--expected-version\", \"0.16.0\", \"--expected-root\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\", \"--checkout-root\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\20260909-live-sessions\\\\disposable repository\", \"--require-isolated-python\", \"--entry-point\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\harnessctl.exe\", \"--require-entry-point\", \"--evaluator-payload-sha256\", \"51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c\", \"--evaluator-wheel-sha256\", \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\", \"--json\"], \"identity_exit\": 0, \"identity\": {\"candidate_commit\": null, \"checkout_root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\20260909-live-sessions\\\\disposable repository\", \"diagnostics\": [], \"distribution_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Lib\\\\site-packages\", \"entry_point_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\harnessctl.exe\", \"evaluator_archive_name\": \"se_harness-0.16.0-py3-none-any.whl\", \"evaluator_archive_sha256\": \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\", \"evaluator_payload_manifest\": \"se-harness-installed-payload-v1\", \"evaluator_payload_sha256\": \"51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c\", \"evaluator_wheel_sha256\": \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\", \"expected_root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\", \"harness_version\": \"0.16.0\", \"isolated_python\": true, \"module_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Lib\\\\site-packages\\\\se_harness\\\\runtime_identity.py\", \"passed\": true, \"python_binary_position\": \"within-expected-root\", \"python_binary_sha256\": \"199ce15a9f0d4f9522edba59338e4879d28cf61f88e377b8164bcb716275ed22\", \"python_entry_is_link\": false, \"python_executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\python.exe\", \"python_version\": \"3.14.6\", \"pythonpath_present\": false, \"role\": \"released-evaluator\", \"schema\": \"se-harness-runtime-identity-v3\", \"template_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\share\\\\se-harness\\\\templates\\\\repository\\\\standard\", \"user_site_enabled\": false}, \"source_sha256\": \"51b6f6cf28cadde0a69ba268f354b737a4e3780ef9cd27eccadb02dcc04b54bc\", \"context\": \"Fixture revision: compact-1a0cb745-79d9-4f2a-82ca-dd652b7574b9\\r\\nObservation fixture; no authority granted.\\r\\n\"}",
+        "host_output": {
+          "hookSpecificOutput": {
+            "hookEventName": "SessionStart",
+            "additionalContext": "Fixture revision: compact-1a0cb745-79d9-4f2a-82ca-dd652b7574b9\r\nObservation fixture; no authority granted.\r\n"
+          }
+        }
+      },
+      {
+        "at": "2026-09-09T05:41:49.0003062Z",
+        "event": "PostCompact",
+        "source": null,
+        "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-sessions\\plugin with spaces",
+        "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\data\\verity-plane-live-probe-inline",
+        "interpreter": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\selected evaluator\\Scripts\\python.exe",
+        "handler_invoked": true,
+        "handler_exit": 0,
+        "handler_output": "{\"probe_only\": true, \"governance_readiness\": false, \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\python.exe\", \"-I\", \"-m\", \"se_harness\", \"identity\", \"--role\", \"released-evaluator\", \"--expected-version\", \"0.16.0\", \"--expected-root\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\", \"--checkout-root\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\20260909-live-sessions\\\\disposable repository\", \"--require-isolated-python\", \"--entry-point\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\harnessctl.exe\", \"--require-entry-point\", \"--evaluator-payload-sha256\", \"51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c\", \"--evaluator-wheel-sha256\", \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\", \"--json\"], \"identity_exit\": 0, \"identity\": {\"candidate_commit\": null, \"checkout_root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\20260909-live-sessions\\\\disposable repository\", \"diagnostics\": [], \"distribution_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Lib\\\\site-packages\", \"entry_point_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\harnessctl.exe\", \"evaluator_archive_name\": \"se_harness-0.16.0-py3-none-any.whl\", \"evaluator_archive_sha256\": \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\", \"evaluator_payload_manifest\": \"se-harness-installed-payload-v1\", \"evaluator_payload_sha256\": \"51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c\", \"evaluator_wheel_sha256\": \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\", \"expected_root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\", \"harness_version\": \"0.16.0\", \"isolated_python\": true, \"module_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Lib\\\\site-packages\\\\se_harness\\\\runtime_identity.py\", \"passed\": true, \"python_binary_position\": \"within-expected-root\", \"python_binary_sha256\": \"199ce15a9f0d4f9522edba59338e4879d28cf61f88e377b8164bcb716275ed22\", \"python_entry_is_link\": false, \"python_executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\python.exe\", \"python_version\": \"3.14.6\", \"pythonpath_present\": false, \"role\": \"released-evaluator\", \"schema\": \"se-harness-runtime-identity-v3\", \"template_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\share\\\\se-harness\\\\templates\\\\repository\\\\standard\", \"user_site_enabled\": false}, \"source_sha256\": \"51b6f6cf28cadde0a69ba268f354b737a4e3780ef9cd27eccadb02dcc04b54bc\", \"context\": \"Fixture revision: compact-1a0cb745-79d9-4f2a-82ca-dd652b7574b9\\r\\nObservation fixture; no authority granted.\\r\\n\"}"
+      }
+    ],
+    "old_source_sha256": "1cc8f767edf87f004c93b23b515a596acf87d1a5fffc5f8d0fe0f85a93f8dcb4",
+    "resume_source_sha256": "aea1c63c96e9ce7325d89758fffdc500bd84b045c61d77b74b0c5b9d45324d54",
+    "compact_source_sha256": "51b6f6cf28cadde0a69ba268f354b737a4e3780ef9cd27eccadb02dcc04b54bc",
+    "compact_boundaries": [
+      {
+        "type": "system",
+        "subtype": "compact_boundary",
+        "session_id": "b242f81f-deec-4e77-8a35-61343bc02a2b",
+        "uuid": "71a57262-6fcf-4069-b9de-781e78f06d77",
+        "compact_metadata": {
+          "trigger": "manual",
+          "pre_tokens": 3821,
+          "post_tokens": 1748,
+          "cumulative_dropped_tokens": 2073,
+          "duration_ms": 37366,
+          "preserved_segment": {
+            "head_uuid": "a11aa062-73dc-4567-a870-6b8057e1e1f9",
+            "anchor_uuid": "80b65e84-d8a0-4d41-8002-31e378aad809",
+            "tail_uuid": "77ba9624-ada6-4000-9426-31a8a0ebf69f"
+          },
+          "preserved_messages": {
+            "anchor_uuid": "80b65e84-d8a0-4d41-8002-31e378aad809",
+            "uuids": [
+              "a11aa062-73dc-4567-a870-6b8057e1e1f9",
+              "f71ef6a9-0b5c-4315-b4e8-3faac7ddaced",
+              "77ba9624-ada6-4000-9426-31a8a0ebf69f"
+            ],
+            "all_uuids": [
+              "a11aa062-73dc-4567-a870-6b8057e1e1f9",
+              "f71ef6a9-0b5c-4315-b4e8-3faac7ddaced",
+              "77ba9624-ada6-4000-9426-31a8a0ebf69f"
+            ]
+          }
+        },
+        "logical_parent_uuid": "77ba9624-ada6-4000-9426-31a8a0ebf69f"
+      }
+    ],
+    "governance_readiness": false,
+    "session": "b242f81f-deec-4e77-8a35-61343bc02a2b",
+    "documentation": "https://code.claude.com/docs/en/agent-sdk/slash-commands#compact-history-with-compact"
+  },
+  "conclusion": "pass",
+  "production_support": "unqualified",
+  "exit_status": [
+    1,
+    0
+  ],
+  "host_identity_evidence": "docs/engineering/plugin-integration/evidence/WO-PLG-004/20260909-live-sessions/identities.json",
+  "capture_policy": "sanitized-public-v1; credential fields and sensitive diagnostic lines redacted",
+  "source_evidence": [
+    "commands.json",
+    "stdout.txt",
+    "stderr.txt"
+  ]
+}

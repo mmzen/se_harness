@@ -1,0 +1,218 @@
+[
+  {
+    "longpaths": null,
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work",
+    "argv": [
+      "git",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+      "diff",
+      "-z",
+      "--name-only",
+      "--no-renames",
+      "fdff3a3046fb93fcc4b353c05e1c1af5ba8a5663",
+      "--"
+    ],
+    "exit_code": 0,
+    "path_count": 567,
+    "inherited_paths": [],
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  },
+  {
+    "longpaths": null,
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work",
+    "argv": [
+      "git",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+      "ls-files",
+      "-z",
+      "--others",
+      "--exclude-standard"
+    ],
+    "exit_code": 0,
+    "path_count": 12,
+    "inherited_paths": [],
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  },
+  {
+    "longpaths": null,
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+    "argv": [
+      "git",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+      "diff",
+      "-z",
+      "--name-only",
+      "--no-renames",
+      "fdff3a3046fb93fcc4b353c05e1c1af5ba8a5663",
+      "--"
+    ],
+    "exit_code": 0,
+    "path_count": 567,
+    "inherited_paths": [],
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  },
+  {
+    "longpaths": null,
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+    "argv": [
+      "git",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+      "ls-files",
+      "-z",
+      "--others",
+      "--exclude-standard"
+    ],
+    "exit_code": 0,
+    "path_count": 12,
+    "inherited_paths": [],
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  },
+  {
+    "longpaths": "false",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work",
+    "argv": [
+      "git",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+      "diff",
+      "-z",
+      "--name-only",
+      "--no-renames",
+      "fdff3a3046fb93fcc4b353c05e1c1af5ba8a5663",
+      "--"
+    ],
+    "exit_code": 0,
+    "path_count": 567,
+    "inherited_paths": [],
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  },
+  {
+    "longpaths": "false",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work",
+    "argv": [
+      "git",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+      "ls-files",
+      "-z",
+      "--others",
+      "--exclude-standard"
+    ],
+    "exit_code": 0,
+    "path_count": 12,
+    "inherited_paths": [],
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  },
+  {
+    "longpaths": "false",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+    "argv": [
+      "git",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+      "diff",
+      "-z",
+      "--name-only",
+      "--no-renames",
+      "fdff3a3046fb93fcc4b353c05e1c1af5ba8a5663",
+      "--"
+    ],
+    "exit_code": 0,
+    "path_count": 567,
+    "inherited_paths": [],
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  },
+  {
+    "longpaths": "false",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+    "argv": [
+      "git",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+      "ls-files",
+      "-z",
+      "--others",
+      "--exclude-standard"
+    ],
+    "exit_code": 0,
+    "path_count": 12,
+    "inherited_paths": [],
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  },
+  {
+    "longpaths": "true",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work",
+    "argv": [
+      "git",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+      "diff",
+      "-z",
+      "--name-only",
+      "--no-renames",
+      "fdff3a3046fb93fcc4b353c05e1c1af5ba8a5663",
+      "--"
+    ],
+    "exit_code": 0,
+    "path_count": 567,
+    "inherited_paths": [],
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  },
+  {
+    "longpaths": "true",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work",
+    "argv": [
+      "git",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+      "ls-files",
+      "-z",
+      "--others",
+      "--exclude-standard"
+    ],
+    "exit_code": 0,
+    "path_count": 12,
+    "inherited_paths": [],
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  },
+  {
+    "longpaths": "true",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+    "argv": [
+      "git",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+      "diff",
+      "-z",
+      "--name-only",
+      "--no-renames",
+      "fdff3a3046fb93fcc4b353c05e1c1af5ba8a5663",
+      "--"
+    ],
+    "exit_code": 0,
+    "path_count": 567,
+    "inherited_paths": [],
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  },
+  {
+    "longpaths": "true",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+    "argv": [
+      "git",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+      "ls-files",
+      "-z",
+      "--others",
+      "--exclude-standard"
+    ],
+    "exit_code": 0,
+    "path_count": 12,
+    "inherited_paths": [],
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "case": "C06",
+  "expected": "Observe paths with spaces, update/reload, persistent plugin data and interpreter removal through the host.",
+  "observed": "Actual version updates/restarts use paths with spaces and stable plugin-data location. A removed interpreter yields setup guidance without runtime execution. Referenced script bytes changed while identical command definitions remained trusted.",
+  "conclusion": "pass",
+  "case_passed": true,
+  "evidence_layer": "Retained authenticated host protocol; manual case assessment, not VREC assurance.",
+  "source_evidence": {
+    "20260909-live/inline-missing-start/transcript.json": "56bab60b4e64e634515670771f686a6f6ccc75216344b5ce86084b1070fc1c50",
+    "20260909-live/inline-missing-start/observations.json": "a48d182cd38d68aa0e1e3a3da69a6daff5a110d434dfcd4f3557e509e2e6b475",
+    "20260909-live/inline-missing-start/identity.json": "571201a20aee3452b635bf6b2e58e029e8531760275bac238771748fe87fb051",
+    "20260909-live/diagnostic-start/transcript.json": "998d3cc4b176c4f0088f64deb79fb4e662d8f1f704efd0d51e1cf013eacfa4c4",
+    "20260909-live/diagnostic-start/observations.json": "a9fdb3e26cdf7b1df88cd6725e333ec66dd15801a1d674fed6e024ff920c6de1",
+    "20260909-live/diagnostic-start/identity.json": "7e033b73789375c1bc8a02846d1c6ed02edd85d4fc34fac4890c615f0989609e",
+    "20260909-live/native-missing-start/transcript.json": "9fd2f0c0aaf58a61691f58a4a1718b571060dc518c4c6d4cf34feb5a8001f344",
+    "20260909-live/native-missing-start/observations.json": "c45902be43b6c3d7148cebc46a46b266d763fca846316a2606cfa79939829b61",
+    "20260909-live/native-missing-start/identity.json": "11bce75c0cf98e6f147e3a20a9dd4a24c7d00bd89701be4e54125b985e5a81e1",
+    "20260909-live/input-diagnostic-start/transcript.json": "91a0036b807310a1291b43fb6fa4c4d376a63e949d3688c68723507caf4b4503",
+    "20260909-live/input-diagnostic-start/observations.json": "0919e632f2208c3ef32df581e9a96c4f102cc6ac08ff68b739935780cd50b8f5",
+    "20260909-live/input-diagnostic-start/identity.json": "a45d3788e467b06655bfd07dc2e9fe4723e89ca25c864935157812a58dca2354",
+    "20260909-live/removed-start/transcript.json": "f4f0f2c9c91f2cd94c48eff6f2dd38d883e38fe9ed507e56bf13e542f225f186",
+    "20260909-live/removed-start/observations.json": "83eed92011f9fee0ab7af084e08ae62b6fd2c5912db1da678956628fc476d006",
+    "20260909-live/removed-start/identity.json": "5242b94884881dcd15eedf7bbbe31240bfad560054ddec062cf43046ce207cc7",
+    "20260909-live/ui-review-actions.json": "26638b0aa83fc881ab68865ef60cc3d8512d7330333c05fc1972bf8233ce0305",
+    "20260909-live/inline-upgrade/change/source-digests.json": "2652b227cfa4d0b65fad547233d19379a3f31ae1d76a40f1b37ff4c11ac45524",
+    "20260909-live/native-inline-upgrade/change/source-digests.json": "c2ca6703b864d012bcd38152d5a3e156fde777768a27ea72780cedebde86375d",
+    "20260909-live/input-diagnostic-upgrade/change/source-digests.json": "4e418d95c7e5436b8c63be0dbd93668c0402caa21f879daa852c4b288afbb4d9",
+    "20260909-live/removed-interpreter/before.json": "68655d6f6cb62faa08fdadfd35fd4bc52c22604a51a1cc913306e68aecb05d33",
+    "20260909-live/removed-interpreter/after.json": "f06d0b92feb823d7cab9e26eeb78259fabb7dfb37e8473744f10fa835c8bfaac"
+  },
+  "limitations": [
+    "Windows Codex CLI 0.153.4 only; no production support decision.",
+    "UI actions are labeled observer transcriptions; machine trust states are separately retained.",
+    "No whole-session normal-profile inventory comparison was collected."
+  ],
+  "historical_observations": "initial/observations.json",
+  "remaining": "No missing observation for this recorded route; broader host/platform qualification is separate."
+}

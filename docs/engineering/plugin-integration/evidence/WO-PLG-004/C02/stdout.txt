@@ -1,0 +1,2 @@
+COMMAND 1
+Provided Python unavailable; install Python 3.11+ with venv/ensurepip. No setup performed.

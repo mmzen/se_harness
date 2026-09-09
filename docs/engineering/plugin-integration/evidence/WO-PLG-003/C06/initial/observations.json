@@ -1,0 +1,17 @@
+{
+  "case": "C06",
+  "expected": "Observe paths with spaces, update/reload, persistent plugin data and interpreter removal through the host.",
+  "observed": "Live installation uses paths with spaces. Removed-runtime behavior and data paths calibrated directly, not through Codex. Update/reload pending.",
+  "conclusion": "unavailable",
+  "case_passed": false,
+  "evidence_layer": "live install plus separately labeled calibration",
+  "exit_statuses": [
+    0,
+    0
+  ],
+  "source_evidence": {
+    "host-attempts/plugin-add.json": "80c7de11979500f03efc7dfc205fa386f08d76a1f65f36bbec5702b1cc2aa141",
+    "calibration-inline-corrected/removed-runtime.json": "25c972ddd40a18aea0f3f328b9007bf00fdb0eeb8170b047d04165dc1e8cd2b5"
+  },
+  "remaining": "See report.md; operator login and hook trust are not complete."
+}

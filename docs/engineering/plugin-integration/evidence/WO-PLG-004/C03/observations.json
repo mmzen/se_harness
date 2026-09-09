@@ -1,0 +1,22 @@
+{
+  "expected": "Two fresh startups invoke the selected evaluator and capture context bytes.",
+  "observed": {
+    "events": [],
+    "preparation_actor": "probe observer, not Claude tool",
+    "context_in_model": "unavailable without authenticated conversation"
+  },
+  "conclusion": "unavailable",
+  "production_support": "unqualified",
+  "source_evidence": [
+    "commands.json",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "exit_status": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "host_identity_evidence": "docs/engineering/plugin-integration/evidence/WO-PLG-004/identities.json"
+}

@@ -1,0 +1,16 @@
+{
+  "review_kind": "Stricter post-run predicate validation; executed host/fixture snapshots are unchanged",
+  "observations": {
+    "exact_denial": true,
+    "after-setup-start": true,
+    "after-repair-start": true,
+    "repair_detected_absent_interpreter": true,
+    "repository_equal": true,
+    "normal_profile_metadata_equal": true
+  },
+  "source_sha256": {
+    "live_sessions.py": "0c199f8510d67d3a925fd4a373ad01d800e6a301bf8bdcef0480386c0ca0a92d",
+    "tool_setup.py": "f7f1eb3b6ffb0e0ed4f9ecedd81637d536098b86ddd2ee23d1e114c76373721c",
+    "denial_probe.py": "c3f4ce9e6c386716631bb3f2d549de1df3360de42573f58ab330b62e18757dea"
+  }
+}

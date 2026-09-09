@@ -1,0 +1,152 @@
+{
+  "case": "C07",
+  "host": "Codex CLI0.153.4 / Windows10.0.26200 x86_64",
+  "status": "pass",
+  "conclusion": "Complete reproducible Windows bootstrap/repair observations in one fresh final-fixture sequence. This does not select production support or approve assurance.",
+  "expected": "Real model tools create external venv/install exact wheel offline, refuse the pre-readiness test write, then repair a removed interpreter with fresh released readiness/context after both phases.",
+  "observed": {
+    "setup_commands_exit": [
+      0,
+      0,
+      0
+    ],
+    "repair_commands_exit": [
+      0,
+      0,
+      0
+    ],
+    "blocked_calls": "Each selected actual marker-bearing WriteAllText input and its same-call hook refusal output are retained. The marker predicate is a test mechanism, not a production/exact-path classifier.",
+    "fresh_readiness": [
+      {
+        "trial": "complete-sequence-ready",
+        "event_timestamp": 1788935325.8649225,
+        "python": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local\\complete-tool-environment\\Scripts\\python.exe",
+        "preflight_ready": true,
+        "checks": {
+          "identity": 0,
+          "doctor": 0,
+          "preflight": 0,
+          "check": 0
+        },
+        "manifest_files": 9,
+        "context_equal_after_CRLF_and_trailing_newline_normalization": true,
+        "raw_context_sha256": "0eced7b2d1207ac978696d0c9938b79129bce8e4e4e0561e59b10239a4120b9f"
+      },
+      {
+        "trial": "complete-sequence-repaired-ready",
+        "event_timestamp": 1788935451.1520176,
+        "python": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local\\complete-tool-environment\\Scripts\\python.exe",
+        "preflight_ready": true,
+        "checks": {
+          "identity": 0,
+          "doctor": 0,
+          "preflight": 0,
+          "check": 0
+        },
+        "manifest_files": 9,
+        "context_equal_after_CRLF_and_trailing_newline_normalization": true,
+        "raw_context_sha256": "0eced7b2d1207ac978696d0c9938b79129bce8e4e4e0561e59b10239a4120b9f"
+      }
+    ],
+    "repository": {
+      "files": 49,
+      "unchanged_across_all_four_windows": true,
+      "before_source": "../complete-sequence-setup/observations.json#/repository_before",
+      "after_source": "../complete-sequence-repaired-ready/observations.json#/repository_after",
+      "sentinel_sha256": "4fb3fb38100be0a78a3273edc5d2721fb305953bd652179b17dff64a00cac8bd"
+    },
+    "normal_profile": {
+      "positively_statted_named_inputs": 20,
+      "known_present_inputs_unchanged": true,
+      "included_paths": [
+        "auth.json",
+        "config.toml",
+        "plugins/cache/openai-bundled/browser/26.901.51231/.codex-plugin/plugin.json",
+        "plugins/cache/openai-bundled/codex-app-tools/0.1.3/.codex-plugin/plugin.json",
+        "plugins/cache/openai-bundled/computer-use/26.901.51231/.codex-plugin/plugin.json",
+        "plugins/cache/openai-bundled/sites/0.1.57/.codex-plugin/plugin.json",
+        "plugins/cache/openai-bundled/unified-computer-use/26.901.51231/.codex-plugin/plugin.json",
+        "plugins/cache/openai-bundled/visualize/1.0.29/.codex-plugin/plugin.json",
+        "plugins/cache/openai-curated/gmail/1e285826/.codex-plugin/plugin.json",
+        "plugins/cache/openai-curated/google-calendar/1e285826/.codex-plugin/plugin.json",
+        "plugins/cache/openai-curated/slack/1e285826/.codex-plugin/plugin.json",
+        "plugins/cache/openai-curated-remote/atlassian-rovo/1.0.7/.codex-plugin/plugin.json",
+        "plugins/cache/openai-curated-remote/deep-research-work/0.1.15/.codex-plugin/plugin.json",
+        "plugins/cache/openai-curated-remote/openai-templates/0.1.1/.codex-plugin/plugin.json",
+        "plugins/cache/openai-curated-remote/plugin-management/0.1.0/.codex-plugin/plugin.json",
+        "plugins/cache/openai-primary-runtime/documents/26.905.11957/.codex-plugin/plugin.json",
+        "plugins/cache/openai-primary-runtime/pdf/26.905.11957/.codex-plugin/plugin.json",
+        "plugins/cache/openai-primary-runtime/presentations/26.905.11957/.codex-plugin/plugin.json",
+        "plugins/cache/openai-primary-runtime/spreadsheets/26.905.11957/.codex-plugin/plugin.json",
+        "plugins/cache/openai-primary-runtime/template-creator/26.905.11957/.codex-plugin/plugin.json"
+      ],
+      "excluded_ambiguous_before_inputs": [
+        "credentials.json",
+        "plugins/config.json",
+        "plugins/installed_plugins.json",
+        "plugins/marketplaces.json",
+        "plugins.json"
+      ],
+      "after_stat_errors": [],
+      "limitation": "Only the20 positively statted named inputs are compared. Earlier is_file(False) results and glob completeness are unproven and excluded; no complete normal-profile/OS audit or credential-content equality is claimed."
+    },
+    "permissions": "Ordinary workspace-write/on-request; no Windows sandbox setup or persistent policy amendment. The runner permits only one-shot exact reviewed setup/skill-read requests under existing authority.",
+    "production_authority": "None; synthetic approved-status fixture fields do not record real decisions.",
+    "fixture_version": "0.0.7 throughout selected setup/ready/repair/final-ready sequence.",
+    "test_results": "36 focused tests pass; actual host observations remain separate."
+  },
+  "exit_status": 0,
+  "source_evidence": [
+    "20260909-live/complete-sequence-setup/identity.json",
+    "20260909-live/complete-sequence-setup/observations.json",
+    "20260909-live/complete-sequence-setup/transcript.json",
+    "20260909-live/complete-sequence-ready/identity.json",
+    "20260909-live/complete-sequence-ready/observations.json",
+    "20260909-live/complete-sequence-ready/transcript.json",
+    "20260909-live/complete-sequence-repair/identity.json",
+    "20260909-live/complete-sequence-repair/observations.json",
+    "20260909-live/complete-sequence-repair/transcript.json",
+    "20260909-live/complete-sequence-repaired-ready/identity.json",
+    "20260909-live/complete-sequence-repaired-ready/observations.json",
+    "20260909-live/complete-sequence-repaired-ready/transcript.json",
+    "20260909-live/complete-sequence-summary/summary.json",
+    "20260909-live/complete-sequence-summary/runtime-readiness-observations.json",
+    "20260909-live/complete-sequence-summary/complete-sequence-setup-blocked-call.json",
+    "20260909-live/complete-sequence-summary/complete-sequence-repair-blocked-call.json",
+    "20260909-live/complete-sequence-selected/before.json",
+    "20260909-live/complete-sequence-selected/after.json",
+    "20260909-live/complete-sequence-removed/before.json",
+    "20260909-live/complete-sequence-removed/after.json",
+    "20260909-live/sentinel-context-upgrade/change/source-digests.json",
+    "20260909-live/readiness-fixture-inputs/synthetic-inputs/path-map.json",
+    "20260909-live/ui-review-actions.json",
+    "20260909-live/final-complete-fixture-tests/result.json"
+  ],
+  "source_sha256": {
+    "20260909-live/complete-sequence-setup/identity.json": "9991aeb77a5753007c46fec63945297aa2e1e7e291e016417b4c7d8d401705c0",
+    "20260909-live/complete-sequence-setup/observations.json": "e3632e908f3afe437d3f60d12c39ecc66315207d2ab007f9a2d9c358d6f41acd",
+    "20260909-live/complete-sequence-setup/transcript.json": "afb024563e1e9972f072c0a125ed4bc6e2a30be408e07773de02a9ff4ff12034",
+    "20260909-live/complete-sequence-ready/identity.json": "f6e744eb8757372343fbf05191673c31da974d4e557413d54155cc2816a3f28b",
+    "20260909-live/complete-sequence-ready/observations.json": "67d17b65e7776740f64d91306bb17c1669a6770bbfb8f39877e65b166596c83a",
+    "20260909-live/complete-sequence-ready/transcript.json": "3e7f1803971704224c5f6682f3d998f2725b9d9c86e0d01eedc48ba8c89e84ef",
+    "20260909-live/complete-sequence-repair/identity.json": "35686b01039f85c0cb91fc74a05bb772202aba4e312eea68a773a6bc5471393b",
+    "20260909-live/complete-sequence-repair/observations.json": "0aa65ab7228d7249fee3d3186613e99d897eca708c7d59b982a20184919647d6",
+    "20260909-live/complete-sequence-repair/transcript.json": "adb039389084595e1a9bcb206ceae5b22b67006c9947665c6656b3ab1efbf89c",
+    "20260909-live/complete-sequence-repaired-ready/identity.json": "d5299a8ff3ef578aae3c86cdcc28fbb632725b1c54f7135cb4815b4cc9591f79",
+    "20260909-live/complete-sequence-repaired-ready/observations.json": "d531549eb5f7ebc24a2d2ae9449e93e240f59e8c4bb00fc11cdb0553792be3c3",
+    "20260909-live/complete-sequence-repaired-ready/transcript.json": "7c536a8b247e037e84a381a4bd49280b185432bbd9a2c56ebebc0c5f64220684",
+    "20260909-live/complete-sequence-summary/summary.json": "11001d3ec0cc8ec232c2c03120844e9b09000860565171e8b50d3240aa607874",
+    "20260909-live/complete-sequence-summary/runtime-readiness-observations.json": "50d35818363025ab314a1695f077d6a3cbdf2d5aac53c0c7ed1c6f0a3b92989a",
+    "20260909-live/complete-sequence-summary/complete-sequence-setup-blocked-call.json": "aaf9a28a599f4f2da1c39bee1c3c44e3049e518256393cb0af3adde1479b4224",
+    "20260909-live/complete-sequence-summary/complete-sequence-repair-blocked-call.json": "b3882dd52f908c988bd78b23a7c79446f1b6df4a1c6ecccf0d43ebc3c90bc468",
+    "20260909-live/complete-sequence-selected/before.json": "6c20b878b30300926997dd228232df4ee24e7cc271f1220d6fe00d36204e37b5",
+    "20260909-live/complete-sequence-selected/after.json": "fcb92b5cad62bbe99d428f6a687d08a68916bd11a81b62108a28b2e51511c449",
+    "20260909-live/complete-sequence-removed/before.json": "68655d6f6cb62faa08fdadfd35fd4bc52c22604a51a1cc913306e68aecb05d33",
+    "20260909-live/complete-sequence-removed/after.json": "f06d0b92feb823d7cab9e26eeb78259fabb7dfb37e8473744f10fa835c8bfaac",
+    "20260909-live/sentinel-context-upgrade/change/source-digests.json": "6bedd11386b8197da209299d180c3ce57575bea7b579e2003a58cbc86ba44da0",
+    "20260909-live/readiness-fixture-inputs/synthetic-inputs/path-map.json": "a8e5d02e42f83b5afd499989fb7a34e743ec24a38ba10e0f26355ba657438cc8",
+    "20260909-live/ui-review-actions.json": "26638b0aa83fc881ab68865ef60cc3d8512d7330333c05fc1972bf8233ce0305",
+    "20260909-live/final-complete-fixture-tests/result.json": "96c1d428cbf8b4290debb5ed11e59421d37f0750bc00c4fe6781a9b959f06fdd"
+  },
+  "authority": "WO-PLG-003 remains in_progress; no VREC or lifecycle completion."
+}
