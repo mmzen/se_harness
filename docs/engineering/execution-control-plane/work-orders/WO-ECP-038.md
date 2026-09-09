@@ -2,7 +2,7 @@
 id = "WO-ECP-038"
 type = "work_order"
 title = "Retire the canonical_json_bytes alias of release_build"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -26,6 +26,13 @@ paths = [
 implements = ["REQ-ECP-034"]
 specifications = ["SPEC-ECP-023"]
 verification = ["VER-ECP-025"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-09T12:48:33Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-09-09 by selecting the presented option 'Approve; start, change and complete on this branch (Recommended)' after reviewing PR #430: an import rename in the replay lane script and the alias line removed, no byte of output changing, commit-bound verification not required; the same decision covers the start and the completion on this branch, each recorded as its own event."
 +++
 
 # Work Order: Retire the canonical_json_bytes alias of release_build
