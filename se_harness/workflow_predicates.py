@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from se_harness import front_matter
-from se_harness.codes import CodedError, E_CIP_001, E_DCM_004, WEX200, W_ECP_002
+from se_harness.codes import CodedError, E_CIP_001, E_DCM_004, WEX200
 from se_harness.engine import validate_engineering_artifacts
 from se_harness.installer import HarnessError
 from se_harness.integrity import canonical_text
@@ -46,51 +46,35 @@ def review_evidence(context: CheckpointContext) -> tuple[str, str]:
         and "evidence" in path.parts
         and any(part.startswith(context.artifact.artifact_id) for part in path.parts[path.parts.index("evidence") + 1 :])
     ]
-    binding = f"formal_snapshot_sha256: {context.formal_snapshot_sha256}"
     # The handoff checkpoint is the one that retains evidence; a transition to
     # implemented accepts the handoff-bound document for the same snapshot, so
     # the transition can never pass on weaker evidence than check evaluated.
     checkpoint = "handoff" if context.checkpoint == "transition" else context.checkpoint
-    legacy: str | None = None
     for path in sorted(candidates):
         try:
             data = path.read_bytes()
         except OSError:
             continue
         relative = path.relative_to(context.root).as_posix()
-        # ECP-EVD-005: the machine header is read through the TOML parser, never by substring.
+        # ECP-EVD-005: the machine header is read through the TOML parser, never by
+        # substring. A packet without one is not assessable (SPEC-AUT-004 AUT-WIN-007);
+        # the substring grace of W-ECP-002 closed under WO-AUT-006.
         try:
             header, _ = parse_evidence_header(data)
         except HarnessError:
-            header = None
-        if header is not None:
-            if (
-                header["artifact"] == context.artifact.artifact_id
-                and header["checkpoint"] == checkpoint
-                and header["formal_snapshot_sha256"] == context.formal_snapshot_sha256
-            ):
-                return "pass", f"Fresh retained evidence is bound at {relative}."
             continue
-        try:
-            text = data.decode("utf-8")
-        except UnicodeError:
+        if header is None:
             continue
         if (
-            legacy is None
-            and f"artifact: {context.artifact.artifact_id}" in text
-            and f"checkpoint: {checkpoint}" in text
-            and binding in text
+            header["artifact"] == context.artifact.artifact_id
+            and header["checkpoint"] == checkpoint
+            and header["formal_snapshot_sha256"] == context.formal_snapshot_sha256
         ):
-            legacy = relative
-    if legacy is not None:
-        # Compatibility for one release: substring-bound packets still pass, named by W-ECP-002.
-        return "pass", (
-            f"Fresh retained evidence is bound at {legacy}. {W_ECP_002}: the packet carries no machine header; "
-            f"migrate it with harnessctl evidence . --artifact {context.artifact.artifact_id} --checkpoint {checkpoint}."
-        )
+            return "pass", f"Fresh retained evidence is bound at {relative}."
     return "not_assessable", (
         f"No readable evidence for {context.artifact.artifact_id}, checkpoint {checkpoint}, "
-        f"and formal snapshot {context.formal_snapshot_sha256} is available."
+        f"and formal snapshot {context.formal_snapshot_sha256} is available; write the header with "
+        f"harnessctl evidence . --artifact {context.artifact.artifact_id} --checkpoint {checkpoint}."
     )
 
 

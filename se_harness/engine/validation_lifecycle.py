@@ -284,6 +284,9 @@ def validate_lifecycle_events(artifacts: list[Artifact], report_root: Path) -> l
                 )
         if expected_fields is not None:
             timestamp_field, actor_field = expected_fields
+            # Permanent (SPEC-AUT-004 AUT-WIN-012): the records verified or released
+            # before preparation existed carry no prepared_at and never gain one;
+            # docs/notes/artifact-authoring.md carries the count.
             legacy_decision_record = (
                 artifact.artifact_type in {"verification_record", "release_record"}
                 and "prepared_at" not in artifact.metadata

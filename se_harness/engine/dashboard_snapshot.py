@@ -77,7 +77,7 @@ TEMPORAL_REASSESSMENT_RELATIONS = {
     "capability": frozenset({"derives_from"}),
     "requirement": frozenset({"derives_from"}),
     "specification": frozenset({"specifies"}),
-    "architecture": frozenset({"addresses", "conforms_to", "constrains"}),
+    "architecture": frozenset({"addresses", "conforms_to"}),
     "adr": frozenset({"decides"}),
     "verification": frozenset({"verifies"}),
     "release_contract": frozenset({"gates"}),
@@ -487,8 +487,6 @@ def _project_architecture_fields(
             state = "adr_required_covered" if deciding_adrs else "adr_required_missing"
         else:
             state = "no_significant_decision_justified"
-    elif assessment["state"] == "legacy_missing":
-        state = "legacy_adr_covered" if deciding_adrs else "legacy_adr_missing"
     else:
         state = f"assessment_{assessment['state']}"
     item["decision_assessment"] = {
@@ -768,7 +766,7 @@ def build_architecture_transitive_relations(artifacts: Sequence[Artifact]) -> li
         if architecture.artifact_type != "architecture":
             continue
         traceability = architecture_traceability_state(architecture, catalog)
-        if traceability["state"] not in {"typed", "dual_declared"}:
+        if traceability["state"] != "typed":
             continue
         for specification_id in traceability["conforms_to"]:
             specification = catalog.get(specification_id)
