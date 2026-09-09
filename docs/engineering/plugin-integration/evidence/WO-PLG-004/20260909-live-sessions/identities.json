@@ -1,0 +1,37 @@
+{
+  "at": "2026-09-09T05:39:28.731722+00:00",
+  "host": {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "--version"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-sessions\\disposable repository",
+    "exit": 0,
+    "timeout": false,
+    "seconds": 0.031,
+    "stdout": "2.1.266 (Claude Code)\n",
+    "stderr": ""
+  },
+  "authenticated": true,
+  "profile": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile",
+  "archive_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+  "source_sha256": {
+    "guard.ps1": "0c2eabd0b08a1700cc8e7fbccc31db0847e74be886d9972044113a6025b5509c",
+    "handler.py": "8cc26dbada9e61c06d7e5d42ac2bc5fe5c512bde7207bf67b018a02a463654ba",
+    "inline_probe.py": "85201870d0efb9b60467d6f9e8d77a9ad010155517fc15b07c55282567dc4a00",
+    "live_sessions.py": "5574ecb82b5f98c0e8db0e97567aad0a2563f479d9027269e0d82fbce2ad9faa",
+    "probe.py": "c67382d30033827ac9a2081812d2177cf798b4c1f9785b333d0a1c362c35acc8",
+    "README.md": "161ef8127c7566b748b7775e2940ec60e729385ad7a7049363690d8fcf9f1de8",
+    "sanitize_evidence.py": "1f34d62de06cfa5657c2783d2d917c331e0b78ffc1f2d9001d0b3b38a4c355ea",
+    "test_probe.py": "0d3236e1d13edb308257a19016a7b582b073a2008e0bb9e58bd5f4a91500c79a"
+  },
+  "runtime_preparation_actor": "observer restored existing renamed interpreter, not host-tool setup",
+  "documentation": [
+    "https://code.claude.com/docs/en/cli-reference",
+    "https://code.claude.com/docs/en/plugins-reference",
+    "https://code.claude.com/docs/en/hooks",
+    "https://code.claude.com/docs/en/settings",
+    "https://code.claude.com/docs/en/authentication#credential-management",
+    "https://code.claude.com/docs/en/sessions"
+  ]
+}

@@ -60,3 +60,29 @@ The inline guard emits the documented SessionStart `additionalContext` envelope
 and stores identity telemetry in its event log. Arbitrary telemetry JSON is not
 a Claude context protocol: the older trial's rejected output remains retained.
 Recognized `--init-only` output does not prove delivery to an authenticated model.
+
+
+## Authenticated continuation
+
+The continuation runners reuse only the existing isolated profile after the operator completes the official login flow. They check normalized auth status and never copy credentials. Each run needs a fresh label; every earlier attempt remains separate.
+
+```powershell
+& $providedPython -I tests/plugin_integration/claude_probe/live_sessions.py `
+  --sandbox $existingSandbox --claude $claudeExe --label $freshSessionLabel
+& $providedPython -I tests/plugin_integration/claude_probe/resume_compact.py `
+  --run $sessionRun --label $freshCompactLabel
+& $providedPython -I tests/plugin_integration/claude_probe/resume_compact.py `
+  --run $sessionRun --label $freshMissingRuntimeLabel --missing-runtime
+& $providedPython -I tests/plugin_integration/claude_probe/prerequisite_probe.py `
+  --sandbox $existingSandbox --claude $claudeExe --python $providedPython `
+  --label $freshPrerequisiteLabel
+& $providedPython -I tests/plugin_integration/claude_probe/tool_setup.py `
+  --sandbox $existingSandbox --claude $claudeExe --python $providedPython `
+  --wheel $releasedWheel --label $freshToolLabel --ready-fixture $preparedSyntheticRepository
+```
+
+Check each runner's `--help` and the retained `commands.json` for the exact invocation used. Session and compact runners retain real host events; they do not require the model to repeat hidden instructions. The prerequisite runner checks one deliberately absent provided-Python path. Its explicit directory grant is limited to a new empty task-owned prerequisite directory.
+
+The tool runner allows only the exact venv and offline pip commands through ordinary host permissions. Its test-only hook denies one exact disposable Write target. With `--ready-fixture`, a Python handler calls the real released evaluator's identity, doctor, preflight and check against explicitly synthetic inputs, then passes the exact current reading manifest as SessionStart context. Interpreter removal is gated by real readiness and host context receipt before actual tool repair. This is a compatibility observation, not production governance or a real lifecycle transition. The synthetic fixture is retained as `.txt` captures with a repository-path/hash map.
+
+Source snapshots copy the reviewed authored fixture bytes exactly; host/debug captures are sanitized text. The latest independent integrity test record is [20260909-final-tests](../../../docs/engineering/plugin-integration/evidence/WO-PLG-004/20260909-final-tests/unit-tests-final.json). Earlier nineteen-, twenty-two- and twenty-seven-test results remain historical. The report records gaps between separate profile-inventory windows; do not treat per-window equality as proof that the operator's entire profile never changed.

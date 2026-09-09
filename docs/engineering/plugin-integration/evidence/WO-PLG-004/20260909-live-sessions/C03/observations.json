@@ -1,0 +1,230 @@
+{
+  "expected": "Two real fresh conversations repeat context supplied only by the startup hook.",
+  "observed": {
+    "expected_marker": "CONTEXT-37d3550f-dbc0-4e3f-87b9-b66e7cf4cff0",
+    "source_sha256": "81906d135752fe261e3407100bbf9854cbdd0b300e8b254bf1348558e43d367c",
+    "events": [
+      [
+        {
+          "at": "2026-09-09T05:39:30.4783160Z",
+          "event": "SessionStart",
+          "source": "startup",
+          "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-sessions\\plugin with spaces",
+          "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\data\\verity-plane-live-probe-inline",
+          "interpreter": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\selected evaluator\\Scripts\\python.exe",
+          "handler_invoked": true,
+          "handler_exit": 0,
+          "handler_output": "{\"probe_only\": true, \"governance_readiness\": false, \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\python.exe\", \"-I\", \"-m\", \"se_harness\", \"identity\", \"--role\", \"released-evaluator\", \"--expected-version\", \"0.16.0\", \"--expected-root\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\", \"--checkout-root\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\20260909-live-sessions\\\\disposable repository\", \"--require-isolated-python\", \"--entry-point\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\harnessctl.exe\", \"--require-entry-point\", \"--evaluator-payload-sha256\", \"51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c\", \"--evaluator-wheel-sha256\", \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\", \"--json\"], \"identity_exit\": 0, \"identity\": {\"candidate_commit\": null, \"checkout_root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\20260909-live-sessions\\\\disposable repository\", \"diagnostics\": [], \"distribution_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Lib\\\\site-packages\", \"entry_point_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\harnessctl.exe\", \"evaluator_archive_name\": \"se_harness-0.16.0-py3-none-any.whl\", \"evaluator_archive_sha256\": \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\", \"evaluator_payload_manifest\": \"se-harness-installed-payload-v1\", \"evaluator_payload_sha256\": \"51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c\", \"evaluator_wheel_sha256\": \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\", \"expected_root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\", \"harness_version\": \"0.16.0\", \"isolated_python\": true, \"module_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Lib\\\\site-packages\\\\se_harness\\\\runtime_identity.py\", \"passed\": true, \"python_binary_position\": \"within-expected-root\", \"python_binary_sha256\": \"199ce15a9f0d4f9522edba59338e4879d28cf61f88e377b8164bcb716275ed22\", \"python_entry_is_link\": false, \"python_executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\python.exe\", \"python_version\": \"3.14.6\", \"pythonpath_present\": false, \"role\": \"released-evaluator\", \"schema\": \"se-harness-runtime-identity-v3\", \"template_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\share\\\\se-harness\\\\templates\\\\repository\\\\standard\", \"user_site_enabled\": false}, \"source_sha256\": \"81906d135752fe261e3407100bbf9854cbdd0b300e8b254bf1348558e43d367c\", \"context\": \"PROBE-CONTEXT-ID: CONTEXT-37d3550f-dbc0-4e3f-87b9-b66e7cf4cff0\\r\\nObservation fixture; no governance authority granted.\\r\\n\"}",
+          "host_output": {
+            "hookSpecificOutput": {
+              "hookEventName": "SessionStart",
+              "additionalContext": "PROBE-CONTEXT-ID: CONTEXT-37d3550f-dbc0-4e3f-87b9-b66e7cf4cff0\r\nObservation fixture; no governance authority granted.\r\n"
+            }
+          }
+        }
+      ],
+      [
+        {
+          "at": "2026-09-09T05:39:35.3569680Z",
+          "event": "SessionStart",
+          "source": "startup",
+          "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-sessions\\plugin with spaces",
+          "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\data\\verity-plane-live-probe-inline",
+          "interpreter": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\selected evaluator\\Scripts\\python.exe",
+          "handler_invoked": true,
+          "handler_exit": 0,
+          "handler_output": "{\"probe_only\": true, \"governance_readiness\": false, \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\python.exe\", \"-I\", \"-m\", \"se_harness\", \"identity\", \"--role\", \"released-evaluator\", \"--expected-version\", \"0.16.0\", \"--expected-root\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\", \"--checkout-root\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\20260909-live-sessions\\\\disposable repository\", \"--require-isolated-python\", \"--entry-point\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\harnessctl.exe\", \"--require-entry-point\", \"--evaluator-payload-sha256\", \"51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c\", \"--evaluator-wheel-sha256\", \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\", \"--json\"], \"identity_exit\": 0, \"identity\": {\"candidate_commit\": null, \"checkout_root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\20260909-live-sessions\\\\disposable repository\", \"diagnostics\": [], \"distribution_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Lib\\\\site-packages\", \"entry_point_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\harnessctl.exe\", \"evaluator_archive_name\": \"se_harness-0.16.0-py3-none-any.whl\", \"evaluator_archive_sha256\": \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\", \"evaluator_payload_manifest\": \"se-harness-installed-payload-v1\", \"evaluator_payload_sha256\": \"51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c\", \"evaluator_wheel_sha256\": \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\", \"expected_root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\", \"harness_version\": \"0.16.0\", \"isolated_python\": true, \"module_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Lib\\\\site-packages\\\\se_harness\\\\runtime_identity.py\", \"passed\": true, \"python_binary_position\": \"within-expected-root\", \"python_binary_sha256\": \"199ce15a9f0d4f9522edba59338e4879d28cf61f88e377b8164bcb716275ed22\", \"python_entry_is_link\": false, \"python_executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\Scripts\\\\python.exe\", \"python_version\": \"3.14.6\", \"pythonpath_present\": false, \"role\": \"released-evaluator\", \"schema\": \"se-harness-runtime-identity-v3\", \"template_origin\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\selected evaluator\\\\share\\\\se-harness\\\\templates\\\\repository\\\\standard\", \"user_site_enabled\": false}, \"source_sha256\": \"81906d135752fe261e3407100bbf9854cbdd0b300e8b254bf1348558e43d367c\", \"context\": \"PROBE-CONTEXT-ID: CONTEXT-37d3550f-dbc0-4e3f-87b9-b66e7cf4cff0\\r\\nObservation fixture; no governance authority granted.\\r\\n\"}",
+          "host_output": {
+            "hookSpecificOutput": {
+              "hookEventName": "SessionStart",
+              "additionalContext": "PROBE-CONTEXT-ID: CONTEXT-37d3550f-dbc0-4e3f-87b9-b66e7cf4cff0\r\nObservation fixture; no governance authority granted.\r\n"
+            }
+          }
+        }
+      ]
+    ],
+    "messages": [
+      {
+        "duration_api_ms": 1620,
+        "stop_reason": "end_turn",
+        "session_id": "8b43cf0b-2e97-47ce-8ace-3f50653a7ade",
+        "total_cost_usd": 0.036375,
+        "usage": {
+          "input_tokens": 2,
+          "cache_creation_input_tokens": 3539,
+          "cache_read_input_tokens": 0,
+          "output_tokens": 39,
+          "output_tokens_details": {
+            "thinking_tokens": 0
+          },
+          "server_tool_use": {
+            "web_search_requests": 0,
+            "web_fetch_requests": 0
+          },
+          "service_tier": "standard",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 3539,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "inference_geo": "not_available",
+          "iterations": [],
+          "speed": "standard"
+        },
+        "modelUsage": {
+          "claude-opus-5[1m]": {
+            "inputTokens": 2,
+            "outputTokens": 39,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 3539,
+            "webSearchRequests": 0,
+            "costUSD": 0.036375,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 64000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-opus-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "permission_denials": [],
+        "terminal_reason": "completed",
+        "fast_mode_state": "off",
+        "fast_mode_disabled_reason": "sdk_opt_in_required",
+        "subagent_stats": {
+          "spawned": 0,
+          "requested": {
+            "background": 0,
+            "foreground": 0,
+            "unset": 0
+          },
+          "started_in_background": 0,
+          "max_depth": 0,
+          "spawned_by_subagents": 0,
+          "completed": 0,
+          "failed": 0,
+          "killed": {
+            "parent": 0,
+            "user": 0,
+            "system": 0
+          },
+          "refused": {
+            "depth_limit": 0,
+            "concurrency_limit": 0,
+            "budget": 0
+          },
+          "by_type": {}
+        },
+        "is_error": false,
+        "num_turns": 1,
+        "subtype": "success",
+        "api_error_status": null,
+        "result": "CONTEXT-37d3550f-dbc0-4e3f-87b9-b66e7cf4cff0",
+        "ttft_ms": 1633,
+        "type": "result",
+        "duration_ms": 1664,
+        "uuid": "3d694ccc-2cd6-4c1a-bf55-d7f10ee58ba9",
+        "ttft_stream_ms": 873,
+        "time_to_request_ms": 41,
+        "first_content_frame_ms": 873,
+        "queued_turn_count": 0
+      },
+      {
+        "duration_api_ms": 1470,
+        "stop_reason": "end_turn",
+        "session_id": "b242f81f-deec-4e77-8a35-61343bc02a2b",
+        "total_cost_usd": 0.0027545,
+        "usage": {
+          "input_tokens": 2,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 3539,
+          "output_tokens": 39,
+          "output_tokens_details": {
+            "thinking_tokens": 0
+          },
+          "server_tool_use": {
+            "web_search_requests": 0,
+            "web_fetch_requests": 0
+          },
+          "service_tier": "standard",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "inference_geo": "not_available",
+          "iterations": [],
+          "speed": "standard"
+        },
+        "modelUsage": {
+          "claude-opus-5[1m]": {
+            "inputTokens": 2,
+            "outputTokens": 39,
+            "cacheReadInputTokens": 3539,
+            "cacheCreationInputTokens": 0,
+            "webSearchRequests": 0,
+            "costUSD": 0.0027545,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 64000,
+            "thinkingTokens": 0,
+            "canonicalModel": "claude-opus-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "permission_denials": [],
+        "terminal_reason": "completed",
+        "fast_mode_state": "off",
+        "fast_mode_disabled_reason": "sdk_opt_in_required",
+        "subagent_stats": {
+          "spawned": 0,
+          "requested": {
+            "background": 0,
+            "foreground": 0,
+            "unset": 0
+          },
+          "started_in_background": 0,
+          "max_depth": 0,
+          "spawned_by_subagents": 0,
+          "completed": 0,
+          "failed": 0,
+          "killed": {
+            "parent": 0,
+            "user": 0,
+            "system": 0
+          },
+          "refused": {
+            "depth_limit": 0,
+            "concurrency_limit": 0,
+            "budget": 0
+          },
+          "by_type": {}
+        },
+        "is_error": false,
+        "num_turns": 1,
+        "subtype": "success",
+        "api_error_status": null,
+        "result": "CONTEXT-37d3550f-dbc0-4e3f-87b9-b66e7cf4cff0",
+        "ttft_ms": 1489,
+        "type": "result",
+        "duration_ms": 1513,
+        "uuid": "b006457d-dd33-4733-bebc-6c4e8e2fe743",
+        "ttft_stream_ms": 771,
+        "time_to_request_ms": 44,
+        "first_content_frame_ms": 771,
+        "queued_turn_count": 0
+      }
+    ]
+  },
+  "conclusion": "pass",
+  "production_support": "unqualified",
+  "exit_status": [
+    0,
+    0
+  ],
+  "host_identity_evidence": "docs/engineering/plugin-integration/evidence/WO-PLG-004/20260909-live-sessions/identities.json",
+  "capture_policy": "sanitized-public-v1; credential fields and sensitive diagnostic lines redacted",
+  "source_evidence": [
+    "commands.json",
+    "stdout.txt",
+    "stderr.txt"
+  ]
+}

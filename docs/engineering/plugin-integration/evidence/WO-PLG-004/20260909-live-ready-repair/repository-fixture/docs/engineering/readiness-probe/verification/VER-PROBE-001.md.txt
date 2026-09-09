@@ -1,0 +1,18 @@
++++
+id = "VER-PROBE-001"
+type = "verification"
+title = "Inspect actual readiness and context outputs"
+status = "approved"
+owners = ["synthetic-fixture-owner"]
+created = "2026-09-09"
+updated = "2026-09-09"
+
+[relations]
+verifies = ["REQ-PROBE-001"]
++++
+
+# Inspect actual readiness and context outputs
+
+This document is controlled synthetic test data for a disposable compatibility probe.
+Its status and owner fields are input values, not recorded real-world approvals.
+It grants no authority in the source repository or any operator project.

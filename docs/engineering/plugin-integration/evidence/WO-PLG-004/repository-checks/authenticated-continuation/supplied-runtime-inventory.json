@@ -1,0 +1,36 @@
+{
+  "observed_at_utc": "2026-09-09T06:04:15Z",
+  "scope": "Two actual runtimes identified by prior read-only inventory; no installation, download, repair, or profile access.",
+  "observations": [
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.11-64\\python.exe",
+        "-I",
+        "-B",
+        "-c",
+        "import sys,json,venv,ensurepip; print(json.dumps({\"python\":sys.executable,\"version\":sys.version,\"isolated\":sys.flags.isolated,\"dont_write_bytecode\":sys.dont_write_bytecode,\"venv_module\":venv.__file__,\"ensurepip_module\":ensurepip.__file__,\"ensurepip_version\":ensurepip.version()}))"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"python\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.11-64\\\\python.exe\", \"version\": \"3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]\", \"isolated\": 1, \"dont_write_bytecode\": true, \"venv_module\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.11-64\\\\Lib\\\\venv\\\\__init__.py\", \"ensurepip_module\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.11-64\\\\Lib\\\\ensurepip\\\\__init__.py\", \"ensurepip_version\": \"24.0\"}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-I",
+        "-B",
+        "-c",
+        "import sys,json,venv,ensurepip; print(json.dumps({\"python\":sys.executable,\"version\":sys.version,\"isolated\":sys.flags.isolated,\"dont_write_bytecode\":sys.dont_write_bytecode,\"venv_module\":venv.__file__,\"ensurepip_module\":ensurepip.__file__,\"ensurepip_version\":ensurepip.version()}))"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"python\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.14-64\\\\python.exe\", \"version\": \"3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]\", \"isolated\": 1, \"dont_write_bytecode\": true, \"venv_module\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.14-64\\\\Lib\\\\venv\\\\__init__.py\", \"ensurepip_module\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Python\\\\pythoncore-3.14-64\\\\Lib\\\\ensurepip\\\\__init__.py\", \"ensurepip_version\": \"26.1.2\"}\n",
+      "stderr": ""
+    }
+  ],
+  "limitations": [
+    "This is not a machine-wide Python inventory.",
+    "Importing venv and ensurepip does not prove every bootstrap operation succeeds.",
+    "No genuine Python older than 3.11 or runtime with unusable venv/ensurepip was identified in the accessible inventory; those C02 variants remain unobserved.",
+    "The previous bounded inventory reported access denied for Local/Programs/Python and WindowsApps manager alias locations; those locations are unknown, not empty."
+  ]
+}

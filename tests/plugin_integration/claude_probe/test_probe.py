@@ -15,9 +15,76 @@ spec.loader.exec_module(probe)
 inline_spec = importlib.util.spec_from_file_location('inline_probe', Path(__file__).with_name('inline_probe.py'))
 inline_probe = importlib.util.module_from_spec(inline_spec)
 inline_spec.loader.exec_module(inline_probe)
+live_spec = importlib.util.spec_from_file_location('live_sessions', Path(__file__).with_name('live_sessions.py'))
+live_sessions = importlib.util.module_from_spec(live_spec)
+live_spec.loader.exec_module(live_sessions)
+tool_spec = importlib.util.spec_from_file_location('tool_setup', Path(__file__).with_name('tool_setup.py'))
+tool_setup = importlib.util.module_from_spec(tool_spec)
+tool_spec.loader.exec_module(tool_setup)
+denial_spec = importlib.util.spec_from_file_location('denial_probe', Path(__file__).with_name('denial_probe.py'))
+denial_probe = importlib.util.module_from_spec(denial_spec)
+denial_spec.loader.exec_module(denial_probe)
 
 
 class ObservationIntegrityTests(unittest.TestCase):
+    def test_provider_error_cannot_be_promoted_by_success_subtype(self):
+        record = {'exit': 0, 'timeout': False, 'stdout': json.dumps({'type': 'result', 'subtype': 'success', 'is_error': True})}
+        self.assertFalse(live_sessions.completed_successfully(record))
+
+    def test_ready_requires_this_invocations_event_and_matching_context_receipt(self):
+        record = {'exit': 0, 'timeout': False, 'stdout': json.dumps({'type': 'result', 'subtype': 'success', 'is_error': False})}
+        event = {'event': 'SessionStart', 'handler_exit': 0,
+                 'handler_output': json.dumps({'governance_readiness': True, 'context': 'fresh'}),
+                 'host_output': {'hookSpecificOutput': {'additionalContext': 'fresh'}}}
+        receipt = 'Hook SessionStart (fixture) provided additionalContext (5 chars)'
+        self.assertTrue(tool_setup.ready_context_observed(record, [event], receipt))
+        self.assertFalse(tool_setup.ready_context_observed(record, [], receipt))
+        self.assertFalse(tool_setup.ready_context_observed(record, [event], receipt.replace('(5 chars)', '(4 chars)')))
+        event['host_output']['hookSpecificOutput']['additionalContext'] = 'stale'
+        self.assertFalse(tool_setup.ready_context_observed(record, [event], receipt))
+
+    def test_empty_or_failed_handler_is_unready_without_crashing(self):
+        for event in [{}, {'handler_exit': 1, 'handler_output': ''},
+                      {'handler_exit': 0, 'handler_output': 'invalid'},
+                      {'handler_exit': 0, 'handler_output': 'null'}]:
+            self.assertFalse(tool_setup.handler_readiness(event))
+
+    def test_ready_requires_successful_handler_and_boolean_true(self):
+        self.assertTrue(tool_setup.handler_readiness({'handler_exit': 0, 'handler_output': '{"governance_readiness":true}'}))
+        self.assertFalse(tool_setup.handler_readiness({'handler_exit': 1, 'handler_output': '{"governance_readiness":true}'}))
+        self.assertFalse(tool_setup.handler_readiness({'handler_exit': 0, 'handler_output': '{"governance_readiness":"true"}'}))
+
+    def denial_fixture(self):
+        target = str(Path('sentinel.txt').resolve())
+        records = [
+            {'type': 'assistant', 'message': {'content': [{'type': 'tool_use', 'id': 'write-1', 'name': 'Write', 'input': {'file_path': target}}]}},
+            {'type': 'user', 'message': {'content': [{'type': 'tool_result', 'tool_use_id': 'write-1', 'is_error': True, 'content': denial_probe.REASON}]}},
+            {'type': 'result', 'subtype': 'success', 'is_error': False}]
+        command = {'exit': 0, 'timeout': False, 'stdout': '\n'.join(json.dumps(r) for r in records)}
+        events = [{'host_output': {'hookSpecificOutput': {'permissionDecision': 'deny', 'permissionDecisionReason': denial_probe.REASON}}}]
+        return target, command, events, records
+
+    def test_exact_correlated_tool_refusal_is_observed(self):
+        target, command, events, _ = self.denial_fixture()
+        self.assertTrue(denial_probe.denial_observed(command, events, target, True))
+
+    def test_model_only_denial_phrase_is_not_a_host_refusal(self):
+        target, command, events, records = self.denial_fixture()
+        records[1] = {'type': 'assistant', 'message': {'content': [{'type': 'text', 'text': denial_probe.REASON}]}}
+        command['stdout'] = '\n'.join(json.dumps(r) for r in records)
+        self.assertFalse(denial_probe.denial_observed(command, events, target, True))
+
+    def test_partial_timeout_does_not_pass_despite_refusal_records(self):
+        target, command, events, _ = self.denial_fixture()
+        command['timeout'] = True
+        self.assertFalse(denial_probe.denial_observed(command, events, target, True))
+    def test_model_prose_cannot_substitute_for_structured_host_result(self):
+        record = {'stdout': '[]\nnull\nnot JSON\n' + json.dumps({'type': 'assistant', 'message': 'The tool succeeded.'})}
+        self.assertEqual({}, live_sessions.result_message(record))
+
+    def test_actual_error_result_is_preserved_even_with_success_subtype(self):
+        result = {'type': 'result', 'subtype': 'success', 'is_error': True, 'result': 'provider refused'}
+        self.assertEqual(result, live_sessions.result_message({'stdout': json.dumps(result)}))
     def test_ipc_auth_examples_are_removed_whole(self):
         for token in ["token:'FIXTURE-SECRET'", 'token:"FIXTURE-SECRET"', r'token:\"FIXTURE-SECRET\"']:
             with self.subTest(token=token):
@@ -165,6 +232,28 @@ class NativeOutputBoundaryTests(unittest.TestCase):
         self.assertEqual('', output)
         self.assertEqual('PreToolUse', records[0]['event'])
         self.assertNotIn('host_output', records[0])
+
+    def test_sentinel_denial_is_exact_after_path_separator_normalization(self):
+        with tempfile.TemporaryDirectory(prefix='claude sentinel test ') as directory:
+            root = Path(directory)
+            target = root / 'governed-target.txt'
+            probe.dump(root / 'probe.json', {'interpreter': str(root / 'missing.exe'),
+                       'event_log': str(root / 'events.jsonl'), 'sentinel': str(target)})
+            env = dict(probe.child_environment(root / 'profile'), CLAUDE_PLUGIN_ROOT=str(root))
+            command = str(Path(os.environ['SystemRoot']) / 'System32/WindowsPowerShell/v1.0/powershell.exe')
+            hook = inline_probe.INLINE.replace('[IO.File]::AppendAllText', tool_setup.SENTINEL + '[IO.File]::AppendAllText', 1)
+            for tool, path, expected in [('Write', target.as_posix(), 'deny'),
+                                         ('Write', str(root / 'other.txt'), None),
+                                         ('Read', str(target), None)]:
+                with self.subTest(tool=tool, path=path):
+                    result = subprocess.run([command, '-NoProfile', '-NonInteractive', '-Command', hook],
+                        input=json.dumps({'hook_event_name': 'PreToolUse', 'tool_name': tool, 'tool_input': {'file_path': path}}),
+                        capture_output=True, text=True, encoding='utf-8', env=env, timeout=30)
+                    self.assertEqual(0, result.returncode, result.stderr)
+                    if expected:
+                        self.assertEqual(expected, json.loads(result.stdout)['hookSpecificOutput']['permissionDecision'])
+                    else:
+                        self.assertEqual('', result.stdout)
 
 
 if __name__ == '__main__':

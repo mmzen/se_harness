@@ -1,0 +1,79 @@
+{
+  "expected": "Read precondition satisfied, then exact Write denied by the real PreToolUse hook.",
+  "observed": {
+    "events": [
+      {
+        "at": "2026-09-09T05:46:13.1065705Z",
+        "event": "SessionStart",
+        "source": "startup",
+        "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-tool-setup\\plugin with spaces",
+        "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\data\\verity-plane-tool-probe-inline",
+        "interpreter": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-tool-setup\\intentionally absent\\python.exe",
+        "handler_invoked": false,
+        "host_output": {
+          "hookSpecificOutput": {
+            "hookEventName": "SessionStart",
+            "additionalContext": "PROBE: setup required. The selected interpreter is absent. No governance readiness is asserted."
+          }
+        },
+        "tool_name": null,
+        "tool_input": null,
+        "fixture_expected_decision": "no decision requested"
+      },
+      {
+        "at": "2026-09-09T05:46:16.3817845Z",
+        "event": "PreToolUse",
+        "source": null,
+        "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-tool-setup\\plugin with spaces",
+        "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\data\\verity-plane-tool-probe-inline",
+        "interpreter": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-tool-setup\\intentionally absent\\python.exe",
+        "handler_invoked": false,
+        "tool_name": "Read",
+        "tool_input": {
+          "file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-tool-setup\\disposable repository\\governed-target.txt"
+        },
+        "fixture_expected_decision": "no decision requested"
+      },
+      {
+        "at": "2026-09-09T05:46:20.6903433Z",
+        "event": "PreToolUse",
+        "source": null,
+        "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-tool-setup\\plugin with spaces",
+        "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\data\\verity-plane-tool-probe-inline",
+        "interpreter": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-tool-setup\\intentionally absent\\python.exe",
+        "handler_invoked": false,
+        "tool_name": "Write",
+        "tool_input": {
+          "file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-tool-setup\\disposable repository\\governed-target.txt",
+          "content": "changed\n"
+        },
+        "fixture_expected_decision": "deny exact disposable sentinel",
+        "host_output": {
+          "hookSpecificOutput": {
+            "permissionDecision": "deny",
+            "hookEventName": "PreToolUse",
+            "permissionDecisionReason": "WO-PLG-004 test-only sentinel. This exact disposable write must not run."
+          }
+        }
+      }
+    ],
+    "target_before_sha256": "4459a0b100ff243487a6d4794f0c28bec7e230824df0efd89d9eb311a2d175bd",
+    "target_after_sha256": "4459a0b100ff243487a6d4794f0c28bec7e230824df0efd89d9eb311a2d175bd",
+    "fixture_expected_decision": "deny",
+    "host_denial_observed": true,
+    "governance_readiness": false,
+    "production_enforcement_proved": false
+  },
+  "conclusion": "pass",
+  "production_support": "unqualified",
+  "exit_status": [
+    0
+  ],
+  "host_identity_evidence": "docs/engineering/plugin-integration/evidence/WO-PLG-004/20260909-live-tool-setup/identities.json",
+  "capture_policy": "sanitized-public-v1; credential fields and sensitive diagnostic lines redacted",
+  "source_evidence": [
+    "commands.json",
+    "stdout.txt",
+    "stderr.txt"
+  ]
+}

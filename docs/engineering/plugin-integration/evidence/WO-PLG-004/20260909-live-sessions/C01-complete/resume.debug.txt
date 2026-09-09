@@ -1,0 +1,154 @@
+2026-09-09T05:42:35.055Z [DEBUG] MDM settings load completed in 3ms
+2026-09-09T05:42:35.058Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\isolated profile\settings.json
+2026-09-09T05:42:35.076Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Program Files\ClaudeCode\managed-settings.json
+2026-09-09T05:42:35.078Z [DEBUG] CA certs: Config fallback - globalEnv keys: , settingsEnv keys: none
+2026-09-09T05:42:35.081Z [DEBUG] [init] configureGlobalMTLS starting
+2026-09-09T05:42:35.081Z [DEBUG] [init] configureGlobalMTLS complete
+2026-09-09T05:42:35.081Z [DEBUG] [init] configureGlobalAgents starting
+2026-09-09T05:42:35.081Z [DEBUG] CA certs: stores=bundled,system, extraCertsPath=undefined
+2026-09-09T05:42:35.081Z [DEBUG] CA certs: Loaded 121 bundled root certificates
+2026-09-09T05:42:35.094Z [DEBUG] CA certs: Dropped 15 expired certificate(s) from system store
+2026-09-09T05:42:35.094Z [DEBUG] CA certs: Loaded 101 system CA certificates
+2026-09-09T05:42:35.094Z [DEBUG] mTLS: Creating HTTPS agent with custom certificates
+2026-09-09T05:42:35.094Z [DEBUG] [init] configureGlobalAgents complete
+2026-09-09T05:42:35.095Z [DEBUG] Using bash path: "C:\Program Files\Git\bin\bash.exe"
+2026-09-09T05:42:35.097Z [DEBUG] Git remote URL: null
+2026-09-09T05:42:35.097Z [DEBUG] No git remote URL found
+2026-09-09T05:42:35.097Z [DEBUG] Error log sink initialized
+2026-09-09T05:42:35.099Z [DEBUG] clearPluginCache: invalidating loadAllPlugins cache (preAction: --plugin-dir inline plugins)
+2026-09-09T05:42:35.108Z [DEBUG] [ToolSearch:optimistic] mode=tst, ENABLE_TOOL_SEARCH=undefined, result=true
+2026-09-09T05:42:35.206Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\20260909-live-sessions\disposable repository\.claude\settings.json
+2026-09-09T05:42:35.206Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\20260909-live-sessions\disposable repository\.claude\settings.local.json
+2026-09-09T05:42:35.207Z [DEBUG] [STARTUP] Loading MCP configs...
+2026-09-09T05:42:35.215Z [DEBUG] installed_plugins.json doesn't exist, returning empty V2 object
+2026-09-09T05:42:35.217Z [DEBUG] [STARTUP] Running setup()...
+2026-09-09T05:42:35.221Z [DEBUG] [win32-proc-times] bun:ffi loaded, using procStartFt
+2026-09-09T05:42:35.227Z [DEBUG] Loading skills from: managed=C:\Program Files\ClaudeCode\.claude\skills, user=C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\isolated profile\skills, project=[]
+2026-09-09T05:42:35.234Z [DEBUG] Failed to stat directory C:\Program Files\ClaudeCode\.claude\agents: ENOENT: no such file or directory, stat 'C:\Program Files\ClaudeCode\.claude\agents'
+2026-09-09T05:42:35.234Z [DEBUG] Failed to stat directory C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\isolated profile\agents: ENOENT: no such file or directory, stat 'C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\isolated profile\agents'
+2026-09-09T05:42:35.234Z [DEBUG] Failed to stat directory C:\Program Files\ClaudeCode\.claude\commands: ENOENT: no such file or directory, stat 'C:\Program Files\ClaudeCode\.claude\commands'
+2026-09-09T05:42:35.234Z [DEBUG] Failed to stat directory C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\isolated profile\commands: ENOENT: no such file or directory, stat 'C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\isolated profile\commands'
+2026-09-09T05:42:35.235Z [DEBUG] Loaded 0 unique skills (0 unconditional, 0 conditional, managed: 0, user: 0, project: 0, additional: 0, legacy commands: 0)
+2026-09-09T05:42:35.237Z [DEBUG] Read hooks.json for plugin verity-plane-live-probe (enabled=true): C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\20260909-live-sessions\plugin with spaces\hooks\hooks.json
+2026-09-09T05:42:35.238Z [INFO] [uds-messaging] Listening: \\.\pipe\LOCAL\cc-msg-d14d29a8b95859ea4be73969d535d3cf
+[REDACTED: IPC authentication example]
+2026-09-09T05:42:35.238Z [INFO] [uds-messaging] Connect when the data is ready (run the command first, then connect and write its output as ONE line, as in the node recipe above): a connection that sends no complete line within 30000 ms is closed
+2026-09-09T05:42:35.239Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Program Files\ClaudeCode\managed-settings.json
+2026-09-09T05:42:35.240Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\isolated profile\settings.json
+2026-09-09T05:42:35.242Z [DEBUG] Error log sink initialized
+2026-09-09T05:42:35.243Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\20260909-live-sessions\disposable repository\.claude\settings.json
+2026-09-09T05:42:35.244Z [DEBUG] [STARTUP] setup() completed in 27ms
+2026-09-09T05:42:35.245Z [DEBUG] Cleared mTLS configuration cache
+2026-09-09T05:42:35.245Z [DEBUG] Cleared proxy agent cache
+2026-09-09T05:42:35.245Z [DEBUG] mTLS: Creating HTTPS agent with custom certificates
+2026-09-09T05:42:35.246Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\20260909-live-sessions\disposable repository\.claude\settings.local.json
+2026-09-09T05:42:35.247Z [DEBUG] [STARTUP] Loading commands and agents...
+2026-09-09T05:42:35.251Z [DEBUG] Loaded inline plugin from path: verity-plane-live-probe
+2026-09-09T05:42:35.251Z [DEBUG] Loaded 1 directory-loaded plugins
+2026-09-09T05:42:35.251Z [DEBUG] Found 1 plugins (1 enabled, 0 disabled)
+2026-09-09T05:42:35.252Z [DEBUG] getPluginSkills: Processing 1 enabled plugins
+2026-09-09T05:42:35.252Z [DEBUG] Checking plugin verity-plane-live-probe: skillsPath=exists, skillsPaths=0 paths
+2026-09-09T05:42:35.252Z [DEBUG] Attempting to load skills from plugin verity-plane-live-probe default skillsPath: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\20260909-live-sessions\plugin with spaces\skills
+2026-09-09T05:42:35.252Z [DEBUG] Total plugin workflows loaded: 0
+2026-09-09T05:42:35.253Z [DEBUG] hooks modules not loaded: rollout flag (tengu_plugin_hooks_modules) is off, from the default (GrowthBook is off for this session: a third-party provider, or telemetry opted out)
+2026-09-09T05:42:35.253Z [DEBUG] Loading hooks from plugin: verity-plane-live-probe
+2026-09-09T05:42:35.253Z [DEBUG] Total plugin commands loaded: 0
+2026-09-09T05:42:35.253Z [DEBUG] Total plugin agents loaded: 0
+2026-09-09T05:42:35.254Z [DEBUG] Registered 3 hooks from 1 plugins
+2026-09-09T05:42:35.263Z [DEBUG] Loaded 1 skills from plugin verity-plane-live-probe default directory
+2026-09-09T05:42:35.263Z [DEBUG] Total plugin skills loaded: 1 (0 duplicate/user-owned entries skipped)
+2026-09-09T05:42:35.264Z [DEBUG] getSkills returning: 0 skill dir commands, 1 plugin skills, 40 bundled skills, 0 builtin plugin skills
+2026-09-09T05:42:35.270Z [DEBUG] [STARTUP] Commands and agents loaded in 23ms
+2026-09-09T05:42:35.271Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2026-09-09T05:42:35.271Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2026-09-09T05:42:35.271Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2026-09-09T05:42:35.271Z [DEBUG] Starting background startup prefetches
+2026-09-09T05:42:35.272Z [DEBUG] [Bootstrap] Skipped: Nonessential traffic disabled
+2026-09-09T05:42:35.272Z [DEBUG] [STARTUP] MCP configs resolved in 1ms (awaited at +65ms)
+2026-09-09T05:42:35.274Z [DEBUG] Cleared mTLS configuration cache
+2026-09-09T05:42:35.274Z [DEBUG] Cleared proxy agent cache
+2026-09-09T05:42:35.274Z [DEBUG] mTLS: Creating HTTPS agent with custom certificates
+2026-09-09T05:42:35.275Z [DEBUG] Initialized versioned plugins system with 0 plugins
+2026-09-09T05:42:35.275Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-09-09T05:42:35.276Z [DEBUG] [MCP] --mcp-config servers running fully async (nonblocking)
+2026-09-09T05:42:35.276Z [DEBUG] [MCP] claude.ai connectors running fully async (nonblocking)
+2026-09-09T05:42:35.294Z [DEBUG] [auto-mode] verifyAutoModeGateAccess: enabledState=enabled disabledBySettings=false model=claude-opus-5[1m] modelSupported=true disableFastModeBreakerFires=false carouselAvailable=true canEnterAuto=true
+2026-09-09T05:42:35.304Z [DEBUG] [servedCatalog] off (essential_traffic)
+2026-09-09T05:42:35.315Z [DEBUG] [Perfetto] initializePerfettoTracing called, env value: undefined
+2026-09-09T05:42:35.315Z [DEBUG] [3P telemetry] isTelemetryEnabled=false (CLAUDE_CODE_ENABLE_TELEMETRY=undefined)
+2026-09-09T05:42:35.394Z [DEBUG] Plugin autoupdate: command-source refresh disabled by tengu_plugin_command_source_refresh (still excluding command-sourced plugins from the regular pass)
+2026-09-09T05:42:35.395Z [DEBUG] Grove: No cache, fetching config in background (dialog skipped this session)
+2026-09-09T05:42:35.397Z [DEBUG] Plugin autoupdate: skipped (auto-updater disabled)
+2026-09-09T05:42:35.398Z [DEBUG] Failed to fetch Grove notice config: Error: Failed to fetch Grove notice config: essential-traffic-only
+2026-09-09T05:42:35.408Z [DEBUG] LSP Diagnostics: Resetting all state (0 pending, 0 files tracked)
+2026-09-09T05:42:35.408Z [DEBUG] Total LSP servers loaded: 0
+2026-09-09T05:42:35.408Z [DEBUG] [LSP SERVER MANAGER] getAllLspServers returned 0 server(s)
+2026-09-09T05:42:35.408Z [DEBUG] LSP manager initialized with 0 servers
+2026-09-09T05:42:35.409Z [DEBUG] LSP server manager initialized successfully
+2026-09-09T05:42:35.409Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2026-09-09T05:42:35.409Z [DEBUG] [sessionRegistry] sweep permitted (domain win32:mmzen)
+2026-09-09T05:42:35.410Z [DEBUG] [sessionRegistry] sweep permitted (domain win32:mmzen)
+2026-09-09T05:42:35.411Z [WARN] [3P telemetry] Event dropped (no event logger initialized): hook_registered
+2026-09-09T05:42:35.423Z [DEBUG] [sessionRegistry] sweep permitted (domain win32:mmzen)
+2026-09-09T05:42:35.430Z [DEBUG] Ripgrep first use test: PASSED (mode=embedded, path=C:\Users\mathi\.local\bin\claude.exe)
+2026-09-09T05:42:35.431Z [DEBUG] "rg error (signal=undefined, code=2, stderr: rg: C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\cache: IO error for operation on C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\cache: The system cannot find the file specified. (os error 2)\n), 0 results"
+2026-09-09T05:42:35.434Z [DEBUG] Watching C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\20260909-live-sessions\disposable repository for C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\20260909-live-sessions\disposable repository\.claude to appear
+2026-09-09T05:42:35.434Z [DEBUG] Watching for changes in setting files C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\isolated profile\settings.json...
+2026-09-09T05:42:35.485Z [DEBUG] Git remote URL: null
+2026-09-09T05:42:35.485Z [DEBUG] No git remote URL found
+2026-09-09T05:42:36.520Z [DEBUG] Hooks: Checking first line for async: {"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"PROBE: setup required. The selected interpreter is absent. No governance readiness is asserted."}}
+2026-09-09T05:42:36.520Z [DEBUG] Hooks: Parsed initial response: {"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"PROBE: setup required. The selected interpreter is absent. No governance readiness is asserted."}}
+2026-09-09T05:42:36.520Z [DEBUG] Hooks: Initial response is not async, continuing normal processing
+2026-09-09T05:42:36.554Z [DEBUG] Successfully parsed and validated hook JSON output
+2026-09-09T05:42:36.554Z [DEBUG] "Hook SessionStart:resume (SessionStart) success:\n{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"PROBE: setup required. The selected interpreter is absent. No governance readiness is asserted.\"}}"
+2026-09-09T05:42:36.556Z [DEBUG] Hook SessionStart ($ErrorActionPreference = 'Stop'␤$e = [Console]::In.ReadToEnd() | ConvertFrom-Json␤$c = Get-Content -Raw -LiteralPath "$env:CLAUDE_PLUGIN_ROOT/probe.json" | ConvertFrom-Json␤$r = [ordered]@{ at=[DateTime]::UtcNow.ToString('o'); event=$e.hook_event_name; source=$e.source; root=$env:CLAUDE_PLUGIN_ROOT; data=$env:CLAUDE_PLUGIN_DATA; interpreter=$c.interpreter; handler_invoked=$false }␤$context = 'PROBE: setup required. The selected interpreter is absent. No governance readiness is asserted.'␤if (Test-Path -LiteralPath $c.interpreter -PathType Leaf) {␤  $r.handler_invoked = $true␤  $out = & $c.interpreter -I "$env:CLAUDE_PLUGIN_ROOT/handler.py"␤  $r.handler_exit = $LASTEXITCODE␤  $r.handler_output = $out -join "`n"␤  $context = 'PROBE: evaluator identity was not established. No governance readiness is asserted.'␤  if ($r.handler_exit -eq 0) {␤    $observation = $r.handler_output | ConvertFrom-Json␤    if (($observation.identity_exit -eq 0) -and ($observation.identity.passed -eq $true)) {␤      $context = $observation.context␤    }␤  }␤}␤# Telemetry belongs in the event log; Claude ignores arbitrary JSON stdout keys.␤$output = $null␤if ($e.hook_event_name -eq 'SessionStart') {␤  $output = @{ hookSpecificOutput = @{ hookEventName = 'SessionStart'; additionalContext = $context } }␤  $r.host_output = $output␤}␤[IO.File]::AppendAllText($c.event_log, (($r | ConvertTo-Json -Compress -Depth 8) + "`n"), [Text.UTF8Encoding]::new($false))␤if ($null -ne $output) { $output | ConvertTo-Json -Compress -Depth 4 }␤) provided additionalContext (95 chars)
+2026-09-09T05:42:36.564Z [DEBUG] [print.ts] MCP task sidecar restore skipped: tasks gate off after the flag settle
+2026-09-09T05:42:36.568Z [DEBUG] [ScheduledTasks] scheduler start() — enabled=false, hasTasks=false
+2026-09-09T05:42:36.570Z [DEBUG] [Bootstrap] Skipped: Nonessential traffic disabled
+2026-09-09T05:42:36.570Z [DEBUG] [Bootstrap] Skipped: Nonessential traffic disabled
+2026-09-09T05:42:36.570Z [DEBUG] session.start: raised (surface none, not interactive)
+2026-09-09T05:42:36.576Z [DEBUG] getPluginSkills: Processing 1 enabled plugins
+2026-09-09T05:42:36.576Z [DEBUG] Checking plugin verity-plane-live-probe: skillsPath=exists, skillsPaths=0 paths
+2026-09-09T05:42:36.576Z [DEBUG] Attempting to load skills from plugin verity-plane-live-probe default skillsPath: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\20260909-live-sessions\plugin with spaces\skills
+2026-09-09T05:42:36.576Z [DEBUG] Total plugin workflows loaded: 0
+2026-09-09T05:42:36.576Z [DEBUG] Total plugin commands loaded: 0
+2026-09-09T05:42:36.577Z [DEBUG] [claudeai-mcp] Fetching from https://api.anthropic.com/v1/mcp_servers?limit=1000
+2026-09-09T05:42:36.577Z [DEBUG] mcp runtime arm: v1 (source: default)
+2026-09-09T05:42:36.584Z [DEBUG] Loading skills from: managed=C:\Program Files\ClaudeCode\.claude\skills, user=C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\isolated profile\skills, project=[]
+2026-09-09T05:42:36.584Z [DEBUG] Failed to stat directory C:\Program Files\ClaudeCode\.claude\output-styles: ENOENT: no such file or directory, stat 'C:\Program Files\ClaudeCode\.claude\output-styles'
+2026-09-09T05:42:36.585Z [DEBUG] Failed to stat directory C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\isolated profile\output-styles: ENOENT: no such file or directory, stat 'C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\isolated profile\output-styles'
+2026-09-09T05:42:36.585Z [DEBUG] Total plugin output styles loaded: 0
+2026-09-09T05:42:36.586Z [DEBUG] Failed to stat directory C:\Program Files\ClaudeCode\.claude\commands: ENOENT: no such file or directory, stat 'C:\Program Files\ClaudeCode\.claude\commands'
+2026-09-09T05:42:36.586Z [DEBUG] Failed to stat directory C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\isolated profile\commands: ENOENT: no such file or directory, stat 'C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\isolated profile\commands'
+2026-09-09T05:42:36.586Z [DEBUG] Loaded 0 unique skills (0 unconditional, 0 conditional, managed: 0, user: 0, project: 0, additional: 0, legacy commands: 0)
+2026-09-09T05:42:36.588Z [DEBUG] Loaded 1 skills from plugin verity-plane-live-probe default directory
+2026-09-09T05:42:36.588Z [DEBUG] Total plugin skills loaded: 1 (0 duplicate/user-owned entries skipped)
+2026-09-09T05:42:36.588Z [DEBUG] getSkills returning: 0 skill dir commands, 1 plugin skills, 40 bundled skills, 0 builtin plugin skills
+2026-09-09T05:42:36.591Z [DEBUG] act_dont_rederive_arm_active source=growthbook
+2026-09-09T05:42:36.596Z [DEBUG] Hooks: Found 0 total hooks in registry
+2026-09-09T05:42:36.596Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2026-09-09T05:42:36.601Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-09-09T05:42:36.601Z [DEBUG] [session-notices] advertise=false mode=default flag=false(disabled) pollChannel=false remote=false remoteEnv=false nonInteractive=true
+2026-09-09T05:42:36.602Z [DEBUG] [engine] turn 1 start
+2026-09-09T05:42:36.605Z [DEBUG] autocompact: tokens=[REDACTED] level=ok effectiveWindow=980000
+2026-09-09T05:42:36.609Z [DEBUG] attribution header x-anthropic-billing-header: cc_version=2.1.266.439; cc_entrypoint=sdk-cli; cch=00000; cc_prev_req=req_011CesLBkSFqRagL1xs7FweF; cc_prompt_id=9511aaa4-af82-4a75-a425-b78e0c7f67ec;
+2026-09-09T05:42:36.610Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-09-09T05:42:36.611Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-09-09T05:42:36.613Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-09-09T05:42:36.613Z [DEBUG] [API:timing] dispatching to firstParty model=claude-opus-5
+2026-09-09T05:42:36.614Z [DEBUG] [API REQUEST] /v1/messages x-client-request-id=a681dd9c-2377-4309-acd0-0e4a8932f808 source=sdk
+2026-09-09T05:42:36.851Z [DEBUG] [claudeai-mcp] Fetched 0 servers
+2026-09-09T05:42:36.852Z [DEBUG] installPluginsForHeadless: starting
+2026-09-09T05:42:36.852Z [DEBUG] installPluginsForHeadless: no marketplaces declared
+2026-09-09T05:42:37.487Z [DEBUG] Stream started - received first chunk
+2026-09-09T05:42:37.487Z [DEBUG] [API:timing] first byte after 875ms
+2026-09-09T05:42:41.719Z [DEBUG] [engine] turn 1 end (turns=1 usage in=2 out=269 cost=$0.0575 api=5105ms stop=end_turn resultLen=843)
+2026-09-09T05:42:41.719Z [DEBUG] Fast mode unavailable: Fast mode is not available in the Agent SDK
+2026-09-09T05:42:41.723Z [DEBUG] [uds-messaging] Shutting down
+2026-09-09T05:42:41.724Z [DEBUG] LSP server manager shut down successfully
+2026-09-09T05:42:41.763Z [DEBUG] Preserving file permissions: 100666
+2026-09-09T05:42:41.763Z [DEBUG] Writing to temp file: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\isolated profile\.claude.json.tmp.19508.355e5f4b1ff4
+2026-09-09T05:42:41.764Z [DEBUG] Applied original permissions to temp file
+2026-09-09T05:42:41.766Z [DEBUG] Temp file written successfully, size: 1765 bytes
+2026-09-09T05:42:41.767Z [DEBUG] Renaming C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\isolated profile\.claude.json.tmp.19508.355e5f4b1ff4 to C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\isolated profile\.claude.json
+2026-09-09T05:42:41.768Z [DEBUG] File C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\isolated profile\.claude.json written atomically

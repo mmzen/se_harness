@@ -7,8 +7,8 @@ rebound_at = "2026-09-08T22:05:33Z"
 
 # WO-PLG-004: partial investigation handoff
 
-**Work remains in progress. C05 and C06 pass for the recorded Windows route;
-C01, C02, C03, C04 and C07 remain incomplete.**
+**Work remains in progress. The current case matrix and remaining observations
+are recorded in [the report](REPORT.md).**
 This packet retains the observations available so far and the current environment
 limits. It is not a claim of completed implementation, verified conformance,
 production support, or permission to merge.
@@ -25,19 +25,29 @@ recorded in [governance](governance/). No completion or assurance transition was
   candidate CLI, and distribution-metadata results.
 - The fixture instructions and focused test evidence document repeatable local
   checks. Passing observer tests are not passing host acceptance cases.
-- The [2026-09-09 trial](20260909-context-envelope/README.md) fixes the ignored
-  context JSON and records Claude Code 2.1.266 receiving the documented envelope.
-  C05 observes hook disable/enable behavior. C06 observes paths with spaces,
-  a version update and process restart, stable plugin-data location, and a
-  removed interpreter. Nineteen fixture tests pass. These observations do not
-  establish delivery to an authenticated conversation or production readiness.
-- No live authenticated conversation completed; setup/repair through the host's
-  real tools and the remaining resume, compaction, prerequisite, and permission observations
-  must still be collected. Isolated sign-in is pending with the operator.
+- The [earlier context trial](20260909-context-envelope/README.md) fixes the
+  ignored context JSON and records the documented envelope. C05 observes hook
+  disable/enable behavior. C06 observes paths with spaces, a version update and
+  process restart, stable plugin-data location, and a removed interpreter.
+- The operator has now completed isolated sign-in. The
+  [live-session evidence](20260909-live-sessions/) records authenticated startup,
+  resume and compaction. The [tool trial](20260909-live-tool-setup/) records real
+  setup, repair, ordinary host permission refusals and exact sentinel denial.
+  Earlier failed and incomplete attempts remain available. Model claims that
+  contradict process/event evidence do not establish a result.
+- The [complete C07 trial](20260909-live-ready-repair-02/) records the exact
+  test-write refusal, real tool-driven setup, a fresh released-evaluator
+  readiness result and host context receipt, interpreter removal, then real
+  repair and fresh readiness/context again. This qualifies the observed
+  bootstrap route; the sentinel is not a production authorization classifier.
+- C02 observes missing-Python guidance through the real setup skill and tool.
+  Genuine older-Python and unusable-venv/ensurepip cases remain unobserved.
+  Linux and macOS were unavailable. Inventory windows and their gaps are
+  explicit in the report; this is not a whole-session filesystem audit.
 
 ## Decision and next action
 
-Continue the already authorized investigation once its isolated sign-in is available.
+Continue the already authorized investigation using the authenticated isolated profile.
 Keep `WO-PLG-004` in `in_progress`. The accountable engineering owner has not accepted
 completion. A mechanically passing handoff check would establish fresh, scoped
 evidence only; it does not inspect the completeness of these host observations.
