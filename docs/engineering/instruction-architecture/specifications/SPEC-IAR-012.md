@@ -103,3 +103,11 @@ candidate source and ship inside the wheel; the direction for the managed
 policy documents and templates is unchanged. The count and the eight names
 stay in the rules as the record of the roots they described. Nothing else
 in this specification changes.
+
+**Rule 6 under the 0.17.0 root, recorded 2026-09-09 under `WO-HUP-018`
+(`SPEC-HUP-018` `HUP-ADS-013`).** The 0.17.0 root adds one managed path,
+`docs/engineering/templates/RISK.template.md`, which rule 6's clause "every
+file in `docs/engineering/templates/`" already covers; the lock names
+forty-one files where the 0.16.0 lock named forty, still none under
+`scripts/`. The owner region's enumeration is unchanged and remains keyed on
+the lock. Nothing else in this specification changes.
