@@ -2,7 +2,7 @@
 id = "WO-HUP-018"
 type = "work_order"
 title = "Adopt exact public 0.17.0 as the standard root, the simple way, and take the carried obligations into the root"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -20,6 +20,13 @@ implements = ["REQ-HUP-035", "REQ-HUP-036"]
 specifications = ["SPEC-HUP-018"]
 architecture = ["ARCH-HUP-012"]
 verification = ["VER-HUP-018"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-09T09:04:33Z"
+decided_by = "repository-owner"
+reason = "Approved by the accountable repository owner on 2026-09-09 by selecting the presented option 'Approve all five (Recommended)', after reviewing PR #426 (REQ-HUP-035, REQ-HUP-036, SPEC-HUP-018, VER-HUP-018, WO-HUP-018) and the rehearsal of the 0.17.0 root adoption on a throwaway LF clone of main at e855cc9a. WO-HUP-018 carries no delegation class: its start, completion and record preparation are the owners' explicit decisions."
 +++
 
 # Work Order: Adopt exact public 0.17.0 as the standard root, the simple way, and take the carried obligations into the root

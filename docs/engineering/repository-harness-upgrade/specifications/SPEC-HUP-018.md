@@ -2,7 +2,7 @@
 id = "SPEC-HUP-018"
 type = "specification"
 title = "Standard-root adoption of released 0.17.0, the simple way, taking the carried obligations"
-status = "draft"
+status = "approved"
 owners = ["technical-owner", "engineering-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -10,6 +10,13 @@ contract = "A conforming adoption moves the root to released 0.17.0 in one verif
 
 [relations]
 specifies = ["REQ-HUP-035", "REQ-HUP-036"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-09T09:04:33Z"
+decided_by = "technical-owner"
+reason = "Approved by the accountable repository owner on 2026-09-09 by selecting the presented option 'Approve all five (Recommended)', after reviewing PR #426 (REQ-HUP-035, REQ-HUP-036, SPEC-HUP-018, VER-HUP-018, WO-HUP-018) and the rehearsal of the 0.17.0 root adoption on a throwaway LF clone of main at e855cc9a."
 +++
 
 # Specification: Standard-root adoption of released 0.17.0, the simple way, taking the carried obligations

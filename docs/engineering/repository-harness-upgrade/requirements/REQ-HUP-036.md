@@ -2,7 +2,7 @@
 id = "REQ-HUP-036"
 type = "requirement"
 title = "Prove complete-graph operation under the 0.17.0 root and take the carried obligations into the root"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "engineering-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -13,6 +13,13 @@ source = "REQ-HUP-034's proof pattern for the previous adoption; SPEC-DST-026 ru
 
 [relations]
 derives_from = ["CAP-HUP-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-09T09:04:33Z"
+decided_by = "repository-owner"
+reason = "Approved by the accountable repository owner on 2026-09-09 by selecting the presented option 'Approve all five (Recommended)', after reviewing PR #426 (REQ-HUP-035, REQ-HUP-036, SPEC-HUP-018, VER-HUP-018, WO-HUP-018) and the rehearsal of the 0.17.0 root adoption on a throwaway LF clone of main at e855cc9a."
 +++
 
 # Requirement: Prove complete-graph operation under the 0.17.0 root and take the carried obligations into the root
