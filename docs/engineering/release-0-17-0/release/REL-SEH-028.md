@@ -2,7 +2,7 @@
 id = "REL-SEH-028"
 type = "release_contract"
 title = "Release se-harness 0.17.0: the code-health programme, the risk artifact, the honest configuration and the hardened managed workflow"
-status = "draft"
+status = "approved"
 owners = ["release-owner", "quality-owner", "security-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -39,6 +39,13 @@ untraced_exemptions = [
   "3a311d49f8052bfa0d09ec92ede460ed73397caa",
   "517dc5f6a72f80264b59d59d96de0c6e59cd379e",
 ]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-09T06:44:05Z"
+decided_by = "release-owner"
+reason = "Approved by the accountable release owner on 2026-09-09 by selecting the presented option 'Approve both (Recommended)', as a decision distinct from the work order's approval, after the census was measured on main at 4ea947be with every one of the seventeen content members implemented and holding a verified record, the released WO-RLS-022 excluded by construction, the six trailer-less merges #391, #401, #402, #409, #410 and #411 exempted by name with their reasons and WO-TST-004 admitted as a member whose trace the release branch repairs, and every hosted lane at 4ea947be on main success. The allow-list is exact at approval: eighteen gates."
 +++
 
 # Release contract: se-harness 0.17.0

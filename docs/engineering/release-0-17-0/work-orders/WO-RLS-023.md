@@ -2,7 +2,7 @@
 id = "WO-RLS-023"
 type = "work_order"
 title = "Cut, qualify and build the se-harness 0.17.0 candidate from main"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "release-owner", "quality-owner", "engineering-owner", "security-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -20,6 +20,13 @@ implements = ["REQ-DST-006"]
 specifications = ["SPEC-DST-001"]
 architecture = ["ARCH-DST-001", "ADR-DST-001"]
 verification = ["VER-DST-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-09T06:44:05Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-09-09 by selecting the presented option 'Approve both (Recommended)', after the release owner approved REL-SEH-028 in the same transaction. WO-RLS-023 carries no delegation class: its start, completion and record preparation are the engineering owner's explicit decisions."
 +++
 
 # Work Order: Cut, qualify and build the se-harness 0.17.0 candidate from main
