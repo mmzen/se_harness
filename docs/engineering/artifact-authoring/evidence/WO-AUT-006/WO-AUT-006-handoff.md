@@ -71,7 +71,7 @@ artifact, managed template or root managed byte changed.
 | `python scripts/run_tests.py --workers 4` | candidate, Windows 11 (local control) | 1,126 tests, 99 s, 0 failures, 1 error (the documented `WinError 5` baseline), 23 skips |
 | discovered tests, base `b11ea537` vs candidate | `unittest` discovery | 1,119 vs 1,126 |
 | the scenarios | scratch worktree at `bb2e73a4` | S1 `E016`, S2 `E014` and no `W019`, S4 the loader's own error, S5 the traceability test fails naming the missing `E016`; S3 at the bound commit |
-| `check --checkpoint handoff --from-git b11ea537` | exact 0.17.0 | the retained `handoff.json` beside this file |
+| `check --checkpoint handoff --from-git be8fd8a5` (`main`'s tip after the merge of 2026-09-09) | exact 0.17.0 | the retained `handoff.json` beside this file |
 | lanes at the implementation head `bb2e73a4` (PR #431) | GitHub | Candidate Evidence 34386523765, Publication Rehearsal 34386524653, Predecessor Evaluator Assessment 34386523764, CodeQL 34386520900: success; Engineering Harness 34386523767: failure on the scope check, `WEX201: changed path is outside execution scope: se_harness/engine/validation_lifecycle.py` — the module the `prepared_at` comment of `AUT-WIN-012` lives in, which the approved scope omitted; remedied by the owner's scope amendment of 2026-09-09 (below), so the lanes at the packet head, the completion commit and the record head are quoted in the lifecycle events |
 
 ## Change set
