@@ -94,8 +94,6 @@ def main():
         'archive_sha256': probe.ARCHIVE, 'payload_sha256': probe.PAYLOAD,
         'documentation': probe.DOCS, 'fixture_mode': 'inline plugin; fresh unauthenticated profile',
         'platforms': {'Windows': 'assessed', 'Linux': 'unavailable', 'macOS': 'unavailable'}})
-    for name in ['inline_probe.py', 'probe.py']:
-        probe.publish_capture(probe.HERE / name, destination / 'fixture' / (Path(name).stem + '-used.py'))
     for name in ['probe.json', 'handler.py', 'guard.ps1', 'hooks/hooks.json', '.claude-plugin/plugin.json', 'skills/setup/SKILL.md']:
         probe.publish_capture(plugin / name, destination / 'fixture' / name)
 
@@ -104,10 +102,6 @@ def main():
 
     def run(argv):
         return probe.execute(argv, cwd, env)
-
-    def save_case(case, records, expectation, observed, conclusion):
-        probe.save_case(destination / case, records, expectation, observed, conclusion,
-                        identity_evidence=(destination / 'identities.json').relative_to(probe.ROOT).as_posix())
 
     def start(label):
         before = len(probe.events(log))
@@ -122,7 +116,7 @@ def main():
                  run(base() + ['plugin', 'list', '--json']),
                  run(base() + ['plugin', 'details', 'verity-plane-inline-probe'])]
     missing, missing_events = start('C01-missing')
-    save_case('C01', inventory + [missing], 'Actual inline guard observes missing interpreter.',
+    probe.save_case(destination / 'C01', inventory + [missing], 'Actual inline guard observes missing interpreter.',
                     {'events': missing_events, 'startup': probe.classify_start(missing, missing_events, False),
                      'resume_compact': 'not assessed in this startup-only trial'}, 'unavailable')
     removed = runtime.with_suffix('.removed')
@@ -131,7 +125,7 @@ def main():
     removed.rename(runtime)
     first, first_events = start('C03-first')
     second, second_events = start('C03-second')
-    save_case('C03', [first, second], 'Two startups call the restored disposable evaluator and retain its returned context.',
+    probe.save_case(destination / 'C03', [first, second], 'Two startups call the restored disposable evaluator and retain its returned context.',
                     {'first': first_events, 'second': second_events,
                      'first_start': probe.classify_start(first, first_events, True),
                      'second_start': probe.classify_start(second, second_events, True),
@@ -145,7 +139,7 @@ def main():
     on, on_events = start('C05-enabled')
     enablement_observed = (off['exit'] == on['exit'] == 0 and not off['timeout'] and not on['timeout']
                           and not off_events and probe.classify_start(on, on_events, True) == 'observed')
-    save_case('C05', [off, on], 'Only enabled hooks deliver the fixture event.',
+    probe.save_case(destination / 'C05', [off, on], 'Only enabled hooks deliver the fixture event.',
                     {'disabled': off_events, 'enabled': on_events,
                      'enablement_interaction': 'observer changed only explicit --settings file: disableAllHooks true, then false',
                      'interactive_trust': 'no dialog in this init-only route; interactive UI not assessed',
@@ -169,7 +163,7 @@ def main():
                         and data_paths_before == data_paths_after and bool(data_paths_before)
                         and all(item.get('exists') for item in data_before.values())
                         and all(item.get('exists') for item in data_after.values()))
-    save_case('C06', [update, absent], 'Version restart preserves data identity; removed interpreter is not invoked.',
+    probe.save_case(destination / 'C06', [update, absent], 'Version restart preserves data identity; removed interpreter is not invoked.',
                     {'updated': update_events, 'removed': absent_events,
                      'manifest_before_sha256': manifest_before_digest, 'manifest_after_sha256': manifest_after_digest,
                      'plugin_data_before': data_before, 'plugin_data_after': data_after,

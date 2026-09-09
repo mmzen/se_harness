@@ -1,0 +1,96 @@
+2026-09-09T05:23:48.458Z [DEBUG] MDM settings load completed in 2ms
+2026-09-09T05:23:48.464Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\context envelope profile 20260909\settings.json
+2026-09-09T05:23:48.482Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Program Files\ClaudeCode\managed-settings.json
+2026-09-09T05:23:48.484Z [DEBUG] CA certs: Config fallback - globalEnv keys: , settingsEnv keys: none
+2026-09-09T05:23:48.487Z [DEBUG] [init] configureGlobalMTLS starting
+2026-09-09T05:23:48.488Z [DEBUG] [init] configureGlobalMTLS complete
+2026-09-09T05:23:48.488Z [DEBUG] [init] configureGlobalAgents starting
+2026-09-09T05:23:48.488Z [DEBUG] CA certs: stores=bundled,system, extraCertsPath=undefined
+2026-09-09T05:23:48.488Z [DEBUG] CA certs: Loaded 121 bundled root certificates
+2026-09-09T05:23:48.501Z [DEBUG] CA certs: Dropped 15 expired certificate(s) from system store
+2026-09-09T05:23:48.501Z [DEBUG] CA certs: Loaded 105 system CA certificates
+2026-09-09T05:23:48.501Z [DEBUG] mTLS: Creating HTTPS agent with custom certificates
+2026-09-09T05:23:48.501Z [DEBUG] [init] configureGlobalAgents complete
+2026-09-09T05:23:48.502Z [DEBUG] Using bash path: "C:\Program Files\Git\bin\bash.exe"
+2026-09-09T05:23:48.503Z [DEBUG] Git remote URL: null
+2026-09-09T05:23:48.503Z [DEBUG] No git remote URL found
+2026-09-09T05:23:48.504Z [DEBUG] Error log sink initialized
+2026-09-09T05:23:48.505Z [DEBUG] clearPluginCache: invalidating loadAllPlugins cache (preAction: --plugin-dir inline plugins)
+2026-09-09T05:23:48.512Z [DEBUG] [Claude in Chrome] Disabled: OAuth token has no scope accepted by /api/oauth/validate (needs user:profile, user:office, or user:ccr_inference; env-var and setup-token sessions default to user:inference only)
+2026-09-09T05:23:48.777Z [DEBUG] [ToolSearch:optimistic] mode=tst, ENABLE_TOOL_SEARCH=undefined, result=true
+2026-09-09T05:23:48.778Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\disposable repository\.claude\settings.json
+2026-09-09T05:23:48.779Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\disposable repository\.claude\settings.local.json
+2026-09-09T05:23:48.779Z [DEBUG] [STARTUP] Loading MCP configs...
+2026-09-09T05:23:48.941Z [DEBUG] installed_plugins.json doesn't exist, returning empty V2 object
+2026-09-09T05:23:48.943Z [DEBUG] [STARTUP] Running setup()...
+2026-09-09T05:23:48.946Z [DEBUG] [win32-proc-times] bun:ffi loaded, using procStartFt
+2026-09-09T05:23:48.954Z [DEBUG] Loading skills from: managed=C:\Program Files\ClaudeCode\.claude\skills, user=C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\context envelope profile 20260909\skills, project=[]
+2026-09-09T05:23:48.956Z [DEBUG] Failed to stat directory C:\Program Files\ClaudeCode\.claude\agents: ENOENT: no such file or directory, stat 'C:\Program Files\ClaudeCode\.claude\agents'
+2026-09-09T05:23:48.956Z [DEBUG] Failed to stat directory C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\context envelope profile 20260909\agents: ENOENT: no such file or directory, stat 'C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\context envelope profile 20260909\agents'
+2026-09-09T05:23:48.962Z [DEBUG] Failed to stat directory C:\Program Files\ClaudeCode\.claude\commands: ENOENT: no such file or directory, stat 'C:\Program Files\ClaudeCode\.claude\commands'
+2026-09-09T05:23:48.962Z [DEBUG] Failed to stat directory C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\context envelope profile 20260909\commands: ENOENT: no such file or directory, stat 'C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\context envelope profile 20260909\commands'
+2026-09-09T05:23:48.962Z [DEBUG] Loaded 0 unique skills (0 unconditional, 0 conditional, managed: 0, user: 0, project: 0, additional: 0, legacy commands: 0)
+2026-09-09T05:23:48.965Z [DEBUG] Read hooks.json for plugin verity-plane-inline-probe (enabled=true): C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\20260909-context-envelope command plugin with spaces\hooks\hooks.json
+2026-09-09T05:23:48.966Z [DEBUG] Loaded inline plugin from path: verity-plane-inline-probe
+2026-09-09T05:23:48.966Z [DEBUG] Loaded 1 directory-loaded plugins
+2026-09-09T05:23:48.966Z [DEBUG] Found 1 plugins (1 enabled, 0 disabled)
+2026-09-09T05:23:48.966Z [DEBUG] getPluginSkills: Processing 1 enabled plugins
+2026-09-09T05:23:48.967Z [DEBUG] Checking plugin verity-plane-inline-probe: skillsPath=exists, skillsPaths=0 paths
+2026-09-09T05:23:48.967Z [DEBUG] Attempting to load skills from plugin verity-plane-inline-probe default skillsPath: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\20260909-context-envelope command plugin with spaces\skills
+2026-09-09T05:23:48.967Z [DEBUG] Total plugin workflows loaded: 0
+2026-09-09T05:23:48.967Z [DEBUG] Total plugin commands loaded: 0
+2026-09-09T05:23:48.967Z [DEBUG] Total plugin agents loaded: 0
+2026-09-09T05:23:48.969Z [INFO] [uds-messaging] Listening: \\.\pipe\LOCAL\cc-msg-26ed73d4e7613379b8c80d55415e36b1
+[REDACTED: IPC authentication example]
+2026-09-09T05:23:48.969Z [INFO] [uds-messaging] Connect when the data is ready (run the command first, then connect and write its output as ONE line, as in the node recipe above): a connection that sends no complete line within 30000 ms is closed
+2026-09-09T05:23:48.970Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Program Files\ClaudeCode\managed-settings.json
+2026-09-09T05:23:48.971Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\context envelope profile 20260909\settings.json
+2026-09-09T05:23:48.972Z [DEBUG] Error log sink initialized
+2026-09-09T05:23:48.973Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\disposable repository\.claude\settings.json
+2026-09-09T05:23:48.974Z [DEBUG] hooks modules not loaded: rollout flag (tengu_plugin_hooks_modules) is off, from the default (GrowthBook is off for this session: a third-party provider, or telemetry opted out)
+2026-09-09T05:23:48.975Z [DEBUG] Loading hooks from plugin: verity-plane-inline-probe
+2026-09-09T05:23:48.975Z [DEBUG] Registered 3 hooks from 1 plugins
+2026-09-09T05:23:48.976Z [DEBUG] [STARTUP] setup() completed in 33ms
+2026-09-09T05:23:48.976Z [DEBUG] Cleared mTLS configuration cache
+2026-09-09T05:23:48.976Z [DEBUG] Cleared proxy agent cache
+2026-09-09T05:23:48.976Z [DEBUG] mTLS: Creating HTTPS agent with custom certificates
+2026-09-09T05:23:48.977Z [DEBUG] Broken symlink or missing file encountered for settings.json at path: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\disposable repository\.claude\settings.local.json
+2026-09-09T05:23:48.978Z [DEBUG] [STARTUP] Loading commands and agents...
+2026-09-09T05:23:48.984Z [DEBUG] Loaded 1 skills from plugin verity-plane-inline-probe default directory
+2026-09-09T05:23:48.984Z [DEBUG] Total plugin skills loaded: 1 (0 duplicate/user-owned entries skipped)
+2026-09-09T05:23:48.984Z [DEBUG] getSkills returning: 0 skill dir commands, 1 plugin skills, 40 bundled skills, 0 builtin plugin skills
+2026-09-09T05:23:48.990Z [DEBUG] [STARTUP] Commands and agents loaded in 12ms
+2026-09-09T05:23:48.993Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2026-09-09T05:23:48.993Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2026-09-09T05:23:48.993Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2026-09-09T05:23:48.993Z [DEBUG] Starting background startup prefetches
+2026-09-09T05:23:48.993Z [DEBUG] [Bootstrap] Skipped: Nonessential traffic disabled
+2026-09-09T05:23:48.994Z [DEBUG] [STARTUP] MCP configs resolved in 1ms (awaited at +215ms)
+2026-09-09T05:23:48.995Z [DEBUG] Cleared mTLS configuration cache
+2026-09-09T05:23:48.995Z [DEBUG] Cleared proxy agent cache
+2026-09-09T05:23:48.995Z [DEBUG] mTLS: Creating HTTPS agent with custom certificates
+2026-09-09T05:23:48.996Z [DEBUG] Initialized versioned plugins system with 0 plugins
+2026-09-09T05:23:49.021Z [DEBUG] Total LSP servers loaded: 0
+2026-09-09T05:23:49.022Z [DEBUG] [LSP SERVER MANAGER] getAllLspServers returned 0 server(s)
+2026-09-09T05:23:49.022Z [DEBUG] LSP manager initialized with 0 servers
+2026-09-09T05:23:49.022Z [DEBUG] LSP server manager initialized successfully
+2026-09-09T05:23:49.022Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2026-09-09T05:23:49.038Z [DEBUG] [sessionRegistry] sweep permitted (domain win32:mmzen)
+2026-09-09T05:23:49.038Z [DEBUG] Ripgrep first use test: PASSED (mode=embedded, path=C:\Users\mathi\.local\bin\claude.exe)
+2026-09-09T05:23:49.054Z [DEBUG] "rg error (signal=undefined, code=2, stderr: rg: C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\context envelope profile 20260909\\plugins\\cache: IO error for operation on C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\context envelope profile 20260909\\plugins\\cache: Le fichier spécifié est introuvable. (os error 2)\n), 0 results"
+2026-09-09T05:23:49.083Z [DEBUG] Git remote URL: null
+2026-09-09T05:23:49.083Z [DEBUG] No git remote URL found
+2026-09-09T05:23:52.270Z [DEBUG] Hooks: Checking first line for async: {"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"PROBE GOVERNANCE CONTEXT version two; no authority granted.\r\n"}}
+2026-09-09T05:23:52.270Z [DEBUG] Hooks: Parsed initial response: {"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"PROBE GOVERNANCE CONTEXT version two; no authority granted.\r\n"}}
+2026-09-09T05:23:52.270Z [DEBUG] Hooks: Initial response is not async, continuing normal processing
+2026-09-09T05:23:52.333Z [DEBUG] Successfully parsed and validated hook JSON output
+2026-09-09T05:23:52.334Z [DEBUG] "Hook SessionStart:startup (SessionStart) success:\n{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"PROBE GOVERNANCE CONTEXT version two; no authority granted.\\r\\n\"}}"
+2026-09-09T05:23:52.336Z [DEBUG] Hook SessionStart ($ErrorActionPreference = 'Stop'␤$e = [Console]::In.ReadToEnd() | ConvertFrom-Json␤$c = Get-Content -Raw -LiteralPath "$env:CLAUDE_PLUGIN_ROOT/probe.json" | ConvertFrom-Json␤$r = [ordered]@{ at=[DateTime]::UtcNow.ToString('o'); event=$e.hook_event_name; source=$e.source; root=$env:CLAUDE_PLUGIN_ROOT; data=$env:CLAUDE_PLUGIN_DATA; interpreter=$c.interpreter; handler_invoked=$false }␤$context = 'PROBE: setup required. The selected interpreter is absent. No governance readiness is asserted.'␤if (Test-Path -LiteralPath $c.interpreter -PathType Leaf) {␤  $r.handler_invoked = $true␤  $out = & $c.interpreter -I "$env:CLAUDE_PLUGIN_ROOT/handler.py"␤  $r.handler_exit = $LASTEXITCODE␤  $r.handler_output = $out -join "`n"␤  $context = 'PROBE: evaluator identity was not established. No governance readiness is asserted.'␤  if ($r.handler_exit -eq 0) {␤    $observation = $r.handler_output | ConvertFrom-Json␤    if (($observation.identity_exit -eq 0) -and ($observation.identity.passed -eq $true)) {␤      $context = $observation.context␤    }␤  }␤}␤# Telemetry belongs in the event log; Claude ignores arbitrary JSON stdout keys.␤$output = $null␤if ($e.hook_event_name -eq 'SessionStart') {␤  $output = @{ hookSpecificOutput = @{ hookEventName = 'SessionStart'; additionalContext = $context } }␤  $r.host_output = $output␤}␤[IO.File]::AppendAllText($c.event_log, (($r | ConvertTo-Json -Compress -Depth 8) + "`n"), [Text.UTF8Encoding]::new($false))␤if ($null -ne $output) { $output | ConvertTo-Json -Compress -Depth 4 }␤) provided additionalContext (61 chars)
+2026-09-09T05:23:52.342Z [DEBUG] [uds-messaging] Shutting down
+2026-09-09T05:23:52.343Z [DEBUG] LSP server manager shut down successfully
+2026-09-09T05:23:52.353Z [DEBUG] Preserving file permissions: 100666
+2026-09-09T05:23:52.354Z [DEBUG] Writing to temp file: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\context envelope profile 20260909\.claude.json.tmp.22344.028ba32cddb1
+2026-09-09T05:23:52.355Z [DEBUG] Applied original permissions to temp file
+2026-09-09T05:23:52.360Z [DEBUG] Temp file written successfully, size: 584 bytes
+2026-09-09T05:23:52.361Z [DEBUG] Renaming C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\context envelope profile 20260909\.claude.json.tmp.22344.028ba32cddb1 to C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\context envelope profile 20260909\.claude.json
+2026-09-09T05:23:52.364Z [DEBUG] File C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\context envelope profile 20260909\.claude.json written atomically

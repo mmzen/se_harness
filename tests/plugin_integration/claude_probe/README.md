@@ -47,3 +47,16 @@ unreadable inventory entries are reported as limitations. Evidence contains
 local paths, but no credential contents. Linux and macOS are unavailable on this
 host. The independent unit tests check reporting and isolation boundaries;
 they do not establish Claude compatibility.
+
+`inline_probe.py` runs a separate native PowerShell command trial against the
+existing disposable sandbox. Always supply a new `--label` and a fresh
+`--profile-name`; it refuses an existing profile, including a pending login.
+It preserves exact settings, fixture files, manifest versions, event logs and
+the limited before/after inventories. This runner restores only its task-owned
+renamed interpreter and removes it again for C06; that is observer activity,
+not host-tool setup evidence.
+
+The inline guard emits the documented SessionStart `additionalContext` envelope
+and stores identity telemetry in its event log. Arbitrary telemetry JSON is not
+a Claude context protocol: the older trial's rejected output remains retained.
+Recognized `--init-only` output does not prove delivery to an authenticated model.

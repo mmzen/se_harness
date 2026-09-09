@@ -1,0 +1,40 @@
+{
+  "expected": "Actual inline guard observes missing interpreter.",
+  "observed": {
+    "events": [
+      {
+        "at": "2026-09-09T05:23:48.0905244Z",
+        "event": "SessionStart",
+        "source": "startup",
+        "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-context-envelope command plugin with spaces",
+        "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\context envelope profile 20260909\\plugins\\data\\verity-plane-inline-probe-inline",
+        "interpreter": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\selected evaluator\\Scripts\\python.exe",
+        "handler_invoked": false,
+        "host_output": {
+          "hookSpecificOutput": {
+            "hookEventName": "SessionStart",
+            "additionalContext": "PROBE: setup required. The selected interpreter is absent. No governance readiness is asserted."
+          }
+        }
+      }
+    ],
+    "startup": "observed",
+    "resume_compact": "not assessed in this startup-only trial"
+  },
+  "conclusion": "unavailable",
+  "production_support": "unqualified",
+  "exit_status": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "host_identity_evidence": "docs/engineering/plugin-integration/evidence/WO-PLG-004/20260909-context-envelope/identities.json",
+  "capture_policy": "sanitized-public-v1; credential fields and sensitive diagnostic lines redacted",
+  "source_evidence": [
+    "commands.json",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "reporting_correction": "Only provenance link corrected after review; host output and result unchanged. Exact executed runner source retained in fixture/*-used.py."
+}

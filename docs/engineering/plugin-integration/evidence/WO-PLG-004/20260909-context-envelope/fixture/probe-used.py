@@ -206,8 +206,7 @@ def create_plugin(path, config, powershell, version='0.0.1'):
         shutil.copyfile(HERE / name, path / name)
 
 
-def save_case(destination, records, expectation, observed, conclusion, *,
-              identity_evidence='docs/engineering/plugin-integration/evidence/WO-PLG-004/identities.json'):
+def save_case(destination, records, expectation, observed, conclusion):
     destination.mkdir(parents=True, exist_ok=True)
     publish_json(destination / 'commands.json', records)
     publish_text(destination / 'actions.txt', '\n'.join(json.dumps(r['argv']) for r in records) + '\n')
@@ -216,7 +215,7 @@ def save_case(destination, records, expectation, observed, conclusion, *,
     publish_json(destination / 'observations.json', {'expected': expectation, 'observed': observed,
         'conclusion': conclusion, 'production_support': 'unqualified',
         'exit_status': [r['exit'] for r in records],
-        'host_identity_evidence': identity_evidence,
+        'host_identity_evidence': 'docs/engineering/plugin-integration/evidence/WO-PLG-004/identities.json',
         'capture_policy': 'sanitized-public-v1; credential fields and sensitive diagnostic lines redacted',
         'source_evidence': ['commands.json', 'stdout.txt', 'stderr.txt']})
 

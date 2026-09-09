@@ -7,7 +7,8 @@ rebound_at = "2026-09-08T22:05:33Z"
 
 # WO-PLG-004: partial investigation handoff
 
-**Work remains in progress. All seven full host acceptance cases are incomplete.**
+**Work remains in progress. C05 and C06 pass for the recorded Windows route;
+C01, C02, C03, C04 and C07 remain incomplete.**
 This packet retains the observations available so far and the current environment
 limits. It is not a claim of completed implementation, verified conformance,
 production support, or permission to merge.
@@ -24,8 +25,14 @@ recorded in [governance](governance/). No completion or assurance transition was
   candidate CLI, and distribution-metadata results.
 - The fixture instructions and focused test evidence document repeatable local
   checks. Passing observer tests are not passing host acceptance cases.
+- The [2026-09-09 trial](20260909-context-envelope/README.md) fixes the ignored
+  context JSON and records Claude Code 2.1.266 receiving the documented envelope.
+  C05 observes hook disable/enable behavior. C06 observes paths with spaces,
+  a version update and process restart, stable plugin-data location, and a
+  removed interpreter. Nineteen fixture tests pass. These observations do not
+  establish delivery to an authenticated conversation or production readiness.
 - No live authenticated conversation completed; setup/repair through the host's
-  real tools and the remaining resume, compaction, trust, and permission observations
+  real tools and the remaining resume, compaction, prerequisite, and permission observations
   must still be collected. Isolated sign-in is pending with the operator.
 
 ## Decision and next action

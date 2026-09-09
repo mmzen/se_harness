@@ -4,12 +4,17 @@ import json
 import os
 from pathlib import Path
 import tempfile
+import subprocess
+import sys
 import unittest
 from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location('claude_probe', Path(__file__).with_name('probe.py'))
 probe = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(probe)
+inline_spec = importlib.util.spec_from_file_location('inline_probe', Path(__file__).with_name('inline_probe.py'))
+inline_probe = importlib.util.module_from_spec(inline_spec)
+inline_spec.loader.exec_module(inline_probe)
 
 
 class ObservationIntegrityTests(unittest.TestCase):
@@ -111,6 +116,55 @@ class ObservationIntegrityTests(unittest.TestCase):
                 result = probe.metadata([secret])
             self.assertTrue(result[str(secret)]['exists'])
             self.assertNotIn('TEST-SECRET', json.dumps(result))
+
+
+@unittest.skipUnless(os.name == 'nt', 'Native PowerShell serialization boundary')
+class NativeOutputBoundaryTests(unittest.TestCase):
+    """Execute the shell guard with explicit test data, never a Claude host."""
+
+    def run_guard(self, event='SessionStart', identity=None):
+        with tempfile.TemporaryDirectory(prefix='claude guard test ') as directory:
+            root = Path(directory)
+            selected = str(root / 'missing/python.exe') if identity is None else sys.executable
+            probe.dump(root / 'probe.json', {'interpreter': selected, 'event_log': str(root / 'events.jsonl')})
+            if identity is not None:
+                # A test stub validates protocol serialization, not real identity.
+                (root / 'handler.py').write_text('print(' + repr(json.dumps(identity)) + ')', encoding='utf-8')
+            env = dict(probe.child_environment(root / 'profile'), CLAUDE_PLUGIN_ROOT=str(root),
+                       CLAUDE_PLUGIN_DATA=str(root / 'plugin data'))
+            command = str(Path(os.environ['SystemRoot']) / 'System32/WindowsPowerShell/v1.0/powershell.exe')
+            result = subprocess.run([command, '-NoProfile', '-NonInteractive', '-Command', inline_probe.INLINE],
+                                    input=json.dumps({'hook_event_name': event, 'source': 'startup'}),
+                                    capture_output=True, text=True, encoding='utf-8', env=env, timeout=30)
+            self.assertEqual(0, result.returncode, result.stderr)
+            return result.stdout, probe.events(root / 'events.jsonl')
+
+    def test_missing_runtime_emits_only_documented_context_envelope(self):
+        output, records = self.run_guard()
+        parsed = json.loads(output)
+        self.assertEqual({'hookSpecificOutput'}, set(parsed))
+        self.assertEqual({'hookEventName', 'additionalContext'}, set(parsed['hookSpecificOutput']))
+        self.assertEqual('SessionStart', parsed['hookSpecificOutput']['hookEventName'])
+        self.assertIn('setup required', parsed['hookSpecificOutput']['additionalContext'])
+        self.assertFalse(records[0]['handler_invoked'])
+
+    def test_context_bytes_are_separate_from_identity_telemetry(self):
+        context = 'Fixture governance: "quoted" line\nsecond line\n'
+        output, records = self.run_guard(identity={'identity_exit': 0, 'identity': {'passed': True}, 'context': context})
+        self.assertEqual(context, json.loads(output)['hookSpecificOutput']['additionalContext'])
+        self.assertNotIn('identity_exit', json.loads(output))
+        self.assertIn('identity_exit', json.loads(records[0]['handler_output']))
+
+    def test_failed_identity_does_not_deliver_source_as_ready_context(self):
+        output, _ = self.run_guard(identity={'identity_exit': 1, 'identity': {'passed': False}, 'context': 'DO NOT DELIVER'})
+        self.assertNotIn('DO NOT DELIVER', output)
+        self.assertIn('identity was not established', output)
+
+    def test_tool_event_does_not_emit_an_allow_decision(self):
+        output, records = self.run_guard(event='PreToolUse')
+        self.assertEqual('', output)
+        self.assertEqual('PreToolUse', records[0]['event'])
+        self.assertNotIn('host_output', records[0])
 
 
 if __name__ == '__main__':
