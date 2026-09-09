@@ -120,3 +120,39 @@ identical Explorer generations; the Windows suite's failure set equals its
 same-commit 0.15.0 control's. The candidate is 0.17.0; the three release
 workflows invoke the evaluator; `SPEC-IAR-012` carries its amendment
 record. Evidence in `evidence/WO-HUP-017/`; the record is `VREC-HUP-016`.
+
+- `REQ-HUP-035`, `REQ-HUP-036`, `SPEC-HUP-018` and `VER-HUP-018` are drafted
+  for the adoption of exact public 0.17.0 (`RLS-SEH-026`, wheel `305c7cbc…`,
+  payload `dd48b16b…`) the simple way, deriving from `CAP-HUP-002` and reusing
+  `ARCH-HUP-012`, whose standard-root boundary is unchanged. `WO-HUP-018` is
+  drafted. The rehearsal of 2026-09-09 on a throwaway LF clone of `main` at
+  `e855cc9a` measured 41 files with 10 updates and the one expected addition
+  (`RISK.template.md`), no removal; a no-op replay over 41 files; 0 errors, 46
+  warnings, 0 advisories, 99 managed checks and a passing released-root
+  qualification under the 0.17.0 gate; an identical Explorer twice (1,720 of
+  1,722 resources). `DST-CFG-015` and `DST-MWF-014`, carried to this work order
+  by `WO-DST-025` and `WO-DST-026`, are discharged by the transaction: the
+  root configuration takes its five-key form and the root workflow and ignore
+  block take the release's template and hash markers. `ARCH-HUP-012` is
+  amended by record after approval and before the start preflight, as for
+  `WO-HUP-017`. The work order carries no delegation class, so its start,
+  completion and record are the owners' explicit acts.
+
+The repository owner approved the five artifacts on 2026-09-09 by selecting
+"Approve all five" (PR #426); `ARCH-HUP-012` was amended by record on the
+packet branch once the requirements were approved. `WO-HUP-018` was
+started, executed and completed on 2026-09-09 (PR #427) on the owner's
+"merged => start" and "Complete and prepare the record": the root is exact
+public 0.17.0 under a schema-3 lock recording archive `305c7cbc…` and
+payload `dd48b16b…`, moved from the 0.16.0 lock `69d0fb9f…` by one
+transaction (41 managed files, 10 updated, `RISK.template.md` added, replay
+41 unchanged) retained as `evidence/WO-HUP-018-evaluator-upgrade.json`. The
+root configuration holds its five keys and the root workflow and ignore
+block take the release's template, discharging `DST-CFG-015` and
+`DST-MWF-014`. Under exact 0.17.0 the graph reads 1,442 artifacts, 0
+errors, 46 warnings, 0 advisories, 99 managed checks, released-root
+qualification PASS and two identical Explorer generations; the Windows
+suite's failure set equals its same-commit 0.16.0 control's. The candidate
+is 0.18.0; `SPEC-IAR-012` carries its amendment record. Evidence in
+`evidence/WO-HUP-018/`; the record is `VREC-HUP-017`.
+

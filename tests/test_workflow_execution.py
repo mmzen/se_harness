@@ -465,6 +465,11 @@ class WorkflowExecutionTests(WorkflowExecutionFixture, unittest.TestCase):
         self.assertEqual(2, checkpoint.call_count)
 
     def test_mutually_dependent_definition_packet_is_validated_and_applied_together(self) -> None:
+        # WO-TCM-011 (SPEC-TCM-007): the minimal fixture drafts draw authoring advisories, which the
+        # approval gate now refuses; this test reads the transaction, so the reader is held silent.
+        patcher = mock.patch.object(validate_engineering_artifacts, "authoring_advisories", return_value=[])
+        patcher.start()
+        self.addCleanup(patcher.stop)
         base = self.root / "docs/engineering/packet"
         write(base / "intent/INT-PKT-001.md", formal("INT-PKT-001", "intent", "draft", {}))
         write(base / "capabilities/CAP-PKT-001.md", formal("CAP-PKT-001", "capability", "draft", {"derives_from": ["INT-PKT-001"]}))
@@ -678,6 +683,11 @@ class WorkflowExecutionTests(WorkflowExecutionFixture, unittest.TestCase):
         self.assertNotIn("9999-12-31", first[1])
 
     def test_plan_after_existing_lifecycle_event_remains_read_only(self) -> None:
+        # WO-TCM-011 (SPEC-TCM-007): the minimal INT-002 draft draws authoring advisories; the
+        # reader is held silent because this test reads the plan's read-only property.
+        patcher = mock.patch.object(validate_engineering_artifacts, "authoring_advisories", return_value=[])
+        patcher.start()
+        self.addCleanup(patcher.stop)
         path = self.root / "docs/engineering/product/intent/INT-001.md"
         code, _, error = invoke(
             "transition", str(self.root),

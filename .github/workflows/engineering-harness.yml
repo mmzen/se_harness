@@ -1,6 +1,11 @@
-# Managed by SE Harness. Runs the exact released evaluator outside the checkout:
-# work-order selection and review preflight on pull requests, then doctor,
-# validate and the dashboard. The declarations are selected from the pull
+# Managed by SE Harness. One job runs the exact released evaluator outside the
+# checkout. Its steps: Install the exact released evaluator; on a pull request,
+# Read the live pull-request body, Select the pull-request work order, run the
+# Review preflight and Enforce the work-order scope on the pull request's diff
+# (the handoff check runs inside that step while the work order is in
+# progress); then Qualify the root with its exact released evaluator, Generate
+# Harness Explorer, and upload the Explorer with the qualification result as
+# the harness-dashboard artifact. The declarations are selected from the pull
 # request's current body, read from the API during the run, so a corrected
 # body needs a re-run, not a push. Trigger policy: pull requests, and pushes to
 # main, release/** and candidate/** only; a newer push to the same ref cancels
@@ -24,14 +29,14 @@ permissions:
   pull-requests: read
 
 env:
-  SE_HARNESS_VERSION: "0.16.0"
+  SE_HARNESS_VERSION: "0.17.0"
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.11"
       - name: Install the exact released evaluator
@@ -92,13 +97,28 @@ jobs:
           # implemented, and
           # neither a declared line nor a lifecycle state relaxes the scope verdict.
           git fetch --depth=1 origin "$HARNESS_BASE_SHA"
+          # DST-MWF-001, -002: the check's exit status and stderr are captured, so a
+          # refusal that writes no result (a guard or identity code such as MG005)
+          # reaches the log as the evaluator's own text and fails the step with the
+          # check's status, never as a decoder traceback. A parsed result is judged
+          # exactly as before.
+          scope_status=0
           "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness check . \
             --artifact "$HARNESS_WORK_ORDER" --checkpoint scope \
             --from-git "$HARNESS_BASE_SHA" --json \
-            > "$RUNNER_TEMP/scope.json" || true
-          in_progress="$("$RUNNER_TEMP/se-harness-env/bin/python" - "$RUNNER_TEMP/scope.json" <<'PY'
+            > "$RUNNER_TEMP/scope.json" 2> "$RUNNER_TEMP/scope.stderr" || scope_status=$?
+          in_progress="$("$RUNNER_TEMP/se-harness-env/bin/python" - "$RUNNER_TEMP/scope.json" "$RUNNER_TEMP/scope.stderr" "$scope_status" <<'PY'
           import json, sys
-          result = json.load(open(sys.argv[1], encoding="utf-8"))
+          with open(sys.argv[2], encoding="utf-8", errors="replace") as captured:
+              check_stderr = captured.read()
+          if check_stderr:
+              sys.stderr.write(check_stderr)
+          try:
+              with open(sys.argv[1], encoding="utf-8") as source:
+                  result = json.load(source)
+          except (OSError, ValueError):
+              print(f"The scope check wrote no result (exit status {sys.argv[3]}).", file=sys.stderr)
+              sys.exit(int(sys.argv[3]) or 1)
           outcome = result.get("operation", {}).get("outcome")
           failures = [
               predicate for gate in result.get("compliance", {}).get("gates", [])
@@ -126,13 +146,23 @@ jobs:
               echo "The pull request's diff is inside the declared scope; no restitution digest was declared."
             fi
           else
+          handoff_status=0
           "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness check . \
             --artifact "$HARNESS_WORK_ORDER" --checkpoint handoff \
             --from-git "$HARNESS_BASE_SHA" --json \
-            > "$RUNNER_TEMP/restitution.json" || true
-          "$RUNNER_TEMP/se-harness-env/bin/python" - "$RUNNER_TEMP/restitution.json" "$declared" <<'PY'
+            > "$RUNNER_TEMP/restitution.json" 2> "$RUNNER_TEMP/restitution.stderr" || handoff_status=$?
+          "$RUNNER_TEMP/se-harness-env/bin/python" - "$RUNNER_TEMP/restitution.json" "$declared" "$RUNNER_TEMP/restitution.stderr" "$handoff_status" <<'PY'
           import json, sys
-          result = json.load(open(sys.argv[1], encoding="utf-8"))
+          with open(sys.argv[3], encoding="utf-8", errors="replace") as captured:
+              check_stderr = captured.read()
+          if check_stderr:
+              sys.stderr.write(check_stderr)
+          try:
+              with open(sys.argv[1], encoding="utf-8") as source:
+                  result = json.load(source)
+          except (OSError, ValueError):
+              print(f"The handoff check wrote no result (exit status {sys.argv[4]}).", file=sys.stderr)
+              sys.exit(int(sys.argv[4]) or 1)
           declared = sys.argv[2]
           outcome = result.get("operation", {}).get("outcome")
           if outcome != "completed":
@@ -158,7 +188,7 @@ jobs:
       - name: Generate Harness Explorer
         run: |
           "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness dashboard .
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: always()
         with:
           name: harness-dashboard
