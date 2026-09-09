@@ -21,6 +21,7 @@ paths = [
   "se_harness/preflight.py",
   "se_harness/workflow_predicates.py",
   "se_harness/workflow_contract.py",
+  "se_harness/engine/validation_lifecycle.py",
   "tests/",
   "docs/notes/diagnostic-codes.md",
   "docs/notes/harnessctl-reference.md",
@@ -185,3 +186,16 @@ list of test files touched, and the `TRC-008` obligation carried to the next
 managed-template work order. Completion is the delegated executor's decision
 under the class above; verification and the merge are the accountable human
 owners'.
+
+## Scope amendment, 2026-09-09
+
+`se_harness/engine/validation_lifecycle.py` joins `[execution_scope]`. It
+holds the `prepared_at` branch that `SPEC-AUT-004` `AUT-WIN-012` requires
+to carry a comment naming it permanent; the scope as approved listed the
+`execution_scope` branch's module and not this one, and the managed lane's
+scope check named the path at the implementation head `bb2e73a4`
+(`WEX201`). The engineering owner widened the scope by this one path under
+`DR-REMEDIATION-SCOPE` on 2026-09-09 by selecting the presented option
+"Amend the scope: add the module (Recommended)". The change to that module
+is the three-line comment and nothing else; nothing else is widened, and
+the retained evidence is re-bound to the snapshot this amendment moves.
