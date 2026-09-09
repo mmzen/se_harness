@@ -159,3 +159,35 @@ Retained by the candidate-evidence run 34321903659:
 | `repository_tools.upgrade_rehearsal` 0.16.0 -> 0.17.0, Linux, twice | `overall_result` pass both runs; `semantic_sha256` `f50c7b4847ac0323…` both |
 | the same, Windows, twice | `overall_result` pass both runs; the same `semantic_sha256` |
 | deterministic integration package | built, verified on Linux and Windows, retained (`f309ee6d…`) |
+
+## Section 4b: build re-verified at the bound candidate
+
+`VREC-SEH-026` and `RLS-SEH-026` bind `a9f4905d`, the implemented-transition
+commit, so the replay was dispatched again on `release/0.17.0` at that exact
+head (run 34326469527): two producer runs byte-identical, `state` `exact`,
+the same pinned image `python@sha256:2856e6af…` and recipe `0c3f368c…`,
+`candidate.commit` equal to `a9f4905d`. Wheel
+`305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced`; sdist
+`dda4bc73190674f8837ab0669b6aeb205c72b9428cad052b6368ea229860c318`;
+`SOURCE_DATE_EPOCH` 1788940609; source manifest `bd231484…`; checksums
+`5148c154…`. The digests differ from section 4's because the epoch and the
+exported tree (this packet, the transition) differ; the packaged Python
+bytes are the same, as the identical `semantic_sha256` of the upgrade
+rehearsal at both heads shows. The retained manifest is
+`docs/engineering/release-0-17-0/evidence/RLS-SEH-026-bundle.json`, bound
+into the record when it is prepared.
+
+## Section 5b: hosted lanes at the candidate and the record
+
+At `a9f4905d` the push-event Engineering Harness, Predecessor Evaluator
+Assessment and SE Harness Candidate Evidence runs are `success`, and the
+Publication Rehearsal dispatch of section 4b is `success`; the pull-request
+event's runs at that head were cancelled by the push of the record commit
+`3041c5b9` minutes later (concurrency by ref) and re-ran at `3041c5b9`, where
+every pull-request lane is `success` and the Publication Rehearsal run
+34326563944 is `success`. `VREC-SEH-026` was captured on the clean tree at
+`a9f4905d` by the released 0.16.0 evaluator: eighteen work orders, twelve
+verification contracts, eighteen evidence paths, `status` `ready`; the one
+new warning of `validate` is the `W013` location note every release
+domain's record carries.
+
