@@ -934,3 +934,23 @@ class ReplayWorkflowTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class RecipeJsonBytesNameTests(unittest.TestCase):
+    """WO-ECP-038 (SPEC-ECP-023 ECP-PRM-009): the recipe form has one name and the lane script reads it."""
+
+    def test_the_alias_is_gone_and_the_replay_script_reads_the_new_name(self) -> None:
+        import repository_tools.release_build as module
+
+        self.assertTrue(hasattr(module, "recipe_json_bytes"))
+        self.assertFalse(hasattr(module, "canonical_json_bytes"))
+        script = (Path(__file__).resolve().parents[1] / "scripts" / "replay_release_build.py").read_text(encoding="utf-8")
+        self.assertIn("recipe_json_bytes", script)
+        self.assertNotIn("canonical_json_bytes", script)
+        # the recipe form: sorted keys, two-space indent, non-ASCII kept, one trailing newline
+        expected = '''{
+  "a": 1,
+  "z": "é"
+}
+'''.encode("utf-8")
+        self.assertEqual(expected, module.recipe_json_bytes({"z": "é", "a": 1}))

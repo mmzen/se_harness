@@ -11,7 +11,7 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
-from repository_tools.release_build import BuildRecipeError, canonical_json_bytes, replay_build
+from repository_tools.release_build import BuildRecipeError, recipe_json_bytes, replay_build
 from repository_tools.release_distribution import (
     DISTRIBUTION_SCHEMA_V2,
     ReleaseDistributionError,
@@ -80,7 +80,7 @@ def main() -> int:
         result["release_record"] = arguments.release_record
         arguments.result.parent.mkdir(parents=True, exist_ok=True)
         temporary = arguments.result.with_name(f".{arguments.result.name}.tmp")
-        temporary.write_bytes(canonical_json_bytes(result))
+        temporary.write_bytes(recipe_json_bytes(result))
         temporary.replace(arguments.result)
         print(f"release build replay: PASS ({arguments.release_record})")
         return 0
@@ -88,7 +88,7 @@ def main() -> int:
         try:
             arguments.result.parent.mkdir(parents=True, exist_ok=True)
             arguments.result.write_bytes(
-                canonical_json_bytes(
+                recipe_json_bytes(
                     {
                         "schema": "se-harness-release-build-replay/v1",
                         "authority": "technical replay evidence only; no lifecycle or external-action authority",
