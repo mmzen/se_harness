@@ -2,7 +2,7 @@
 id = "VREC-PLG-003"
 type = "verification_record"
 title = "Verification candidate for WO-PLG-001"
-status = "ready"
+status = "verified"
 owners = ["engineering-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/plugin-integration/evidence/WO-PLG-001/C01/a
 evaluator_evidence_path = "docs/engineering/plugin-integration/evidence/VREC-PLG-003-evaluator.json"
 evaluator_evidence_sha256 = "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
 
+verified_at = "2026-09-09T20:07:30Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-PLG-001"]
 conforms_to = ["VER-PLG-001"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-09T20:07:30Z"
+decided_by = "assurance-owner"
+reason = "Operator explicitly stated \"i verify VREC-PLG-003\" in this Codex task on 2026-09-09. Record the assurance-owner decision for exact candidate b8d6f04a15bf411aec3e1339b56467ce5a4781df under VER-PLG-001, with the retained platform and local-test limitations disclosed. This decision changes only VREC-PLG-003; it does not change work-order status or authorize release or PR merge."
 +++
 
 # Verification Record Candidate

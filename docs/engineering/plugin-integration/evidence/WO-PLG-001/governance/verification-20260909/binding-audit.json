@@ -1,0 +1,15 @@
+{
+  "record": "VREC-PLG-003",
+  "state": "verified",
+  "verified_by": "assurance-owner",
+  "bound_candidate": "b8d6f04a15bf411aec3e1339b56467ce5a4781df",
+  "candidate_is_ancestor": true,
+  "bound_evidence_files_unchanged": 171,
+  "preparation_and_binding_metadata_unchanged": true,
+  "evaluator_sidecar_digest_matches": true,
+  "assembly_code_unchanged_from": "32a0c69d6b08fb8428afe4ec4615b5748bb8bea6",
+  "work_order_states_unchanged": {
+    "WO-PLG-001": "implemented",
+    "WO-PLG-002": "draft"
+  }
+}
