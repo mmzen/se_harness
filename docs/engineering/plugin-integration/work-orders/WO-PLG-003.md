@@ -17,6 +17,8 @@ paths = [
   "tests/plugin_integration/codex_probe/",
   "docs/engineering/plugin-integration/work-orders/WO-PLG-003.md",
   "docs/engineering/plugin-integration/evidence/WO-PLG-003/",
+  "docs/engineering/plugin-integration/verification-records/VREC-PLG-001.md",
+  "docs/engineering/plugin-integration/evidence/VREC-PLG-001-evaluator.json",
   "GLOSSARY.md",
   "docs/notes/plugin-definition-delivery-2026-09-08.md",
   "docs/engineering/README.md",
@@ -59,7 +61,7 @@ reason = "Operator explicitly approved marking WO-PLG-003 and WO-PLG-004 impleme
 
 The lifecycle events above record the engineering owner's approval, start,
 and explicit completion decision. The work order is implemented.
-Independent verification still requires a commit-bound record.
+VREC-PLG-001 is prepared; the independent assurance decision remains pending.
 
 ## Objective
 
@@ -100,6 +102,21 @@ Record real host, operating-system, Python, and released-evaluator versions; no 
 
 Retain commands, independent expectations, observed results, candidate identity, and limitations under `evidence/WO-PLG-003/`.
 Prepare the later verification record through the existing evaluator when authorized.
+
+## Approved delivery-scope amendment — 2026-09-09
+
+After the two exact generated paths were presented, the operator replied
+"i approve" in this Codex task. As engineering owner, the operator approves
+adding VREC-PLG-001 and its evaluator sidecar to this work order's delivery
+scope under DR-REMEDIATION-SCOPE. As repository owner, the operator authorizes
+committing and pushing them for review in PR #421.
+
+This amendment permits publication of the prepared record in that PR only.
+It is recorded after the bound candidate
+`a8c880a11e0cece6932695b7951cfa047a9f691c`; it does not change that candidate,
+the retained evidence, or the record's provenance. The work order remains
+implemented and VREC-PLG-001 remains ready. Verification, PR merge, production
+support selection, and package release or publication remain separate decisions.
 
 ## Stop and escalate conditions
 
