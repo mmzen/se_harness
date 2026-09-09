@@ -78,9 +78,6 @@ def recipe_json_bytes(value: Any) -> bytes:
     return (json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
 
 
-#: Kept for `scripts/replay_release_build.py`, a lane script outside WO-ECP-032's scope, until its
-#: import moves; every package-visible caller uses the new name.
-canonical_json_bytes = recipe_json_bytes
 
 
 def _duplicate_safe_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:

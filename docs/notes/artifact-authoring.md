@@ -127,3 +127,16 @@ A deviation whose `against` fragment names no rule identifier of its
 specification is `E-DCM-005`. Approved specifications are not rewritten;
 one that is amended for another reason adopts identifiers then, keeping
 each former number in a note beside the identifier.
+
+## The approval gate
+
+`WO-TCM-011` (SPEC-TCM-007) closes the regime the owner chose four times:
+advisory for one release, then blocking at approval. Since 0.18.0 the
+approval transition of a draft intent, capability, requirement or
+specification reads the draft's advisories through the validator and refuses
+while any remains, naming each code and message in the validator's order and
+ending with "fix the draft and run the transition again". Nothing else
+moves: `validate` still passes with advisories present and lists them apart,
+approved artifacts are not re-read, the budgets and codes of the four
+families are unchanged, and the other transitions read no advisory. The
+checklists of `ARTIFACT_AUTHORING.md` say so in one sentence each.

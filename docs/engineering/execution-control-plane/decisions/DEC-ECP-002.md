@@ -88,3 +88,16 @@ table records the option, its label, the role, the time and the verbatim
 reason. An accepted deviation records its revisit trigger and stays visible
 on the departed specification, the work order and the records until the rule
 changes.
+
+## Revisit record
+
+**The trigger fired with the merge of wave 3 (#378) on 2026-09-08; recorded
+2026-09-09 under `WO-ECP-037`.** The three engine-side blocks this decision
+accepted for wave 2 (the layout registry, the standing deviations, the body
+parser) left with `WO-ECP-034`, whose verified record `VREC-ECP-038` retains
+the duplication scan at 0 blocks; `WO-ECP-035` and `WO-ECP-036` read 0 again
+at their heads. `ECP-PRM-027` of `SPEC-ECP-023` is met as written, and the
+specification carries the dated record. This decision stays `decided` with
+its `accept` disposition as the history of why the rule read met late; no
+successor decision is raised, because no rule changed and nothing departs
+from one.

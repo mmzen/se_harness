@@ -55,6 +55,7 @@ from se_harness.engine.validation_lifecycle import (  # noqa: F401
     validate_lifecycle_events,
 )
 from se_harness.engine.validation_authoring import (  # noqa: F401
+    authoring_advisories,
     AUTHORING_BODY_LIMIT,
     AUTHORING_CODE_IDENTIFIER_LIMIT,
     AUTHORING_NAMED_SUBJECT,

@@ -194,8 +194,14 @@ class DecisionManagementTests(DecisionManagementFixture, unittest.TestCase):
         self.assertTrue(any("observed" in item for item in self.decision_errors()))
 
     def test_open_decisions_section_accepts_none_or_decision_ids_only(self) -> None:
-        from se_harness.workflow_compliance import authoring_ready
+        from se_harness.workflow_compliance import authoring_ready as gate
 
+        # WO-TCM-011 (SPEC-TCM-007 TCM-RFB-003): the advisory check follows the two checks this test
+        # reads; the legacy-shaped body below draws advisories, so that check is held silent here.
+        patcher = mock.patch.object(validate_engineering_artifacts, "authoring_advisories", return_value=[])
+        patcher.start()
+        self.addCleanup(patcher.stop)
+        authoring_ready = gate
         path = self.root / "docs/engineering/product/requirements/REQ-001.md"
         body = (
             "\n## Statement\n\nTHE SYSTEM SHALL retain revision provenance.\n\n## Rationale\n\nProvenance is the proof.\n\n"

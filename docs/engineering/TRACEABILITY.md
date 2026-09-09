@@ -59,6 +59,9 @@ listed below. A validator MUST reject an undeclared pair.
 | `TRC-REL-020` | `concerns` | `DEC -> any type` | A decision names every artifact its question is about. |
 | `TRC-REL-021` | `blocks` | `DEC -> REQ, SPEC, VER, ARCH, ADR or WO` | A decision names the artifacts that cannot change state while it is open; each is also in `concerns`. |
 | `TRC-REL-022` | `produces` | `DEC -> REQ, SPEC, VER, ARCH, ADR or WO` | A decided decision names the artifact its answer created or amended, when the answer created one. |
+| `TRC-REL-023` | `threatens` | `RISK -> any type` | A risk names every artifact the threat would damage; the decision that answers it blocks exactly that set. |
+| `TRC-REL-024` | `mitigated_by` | `RISK -> WO` | A mitigating or mitigated risk names the work orders that reduce the threat; written by the disposing act. |
+| `TRC-REL-025` | `avoided_by` | `RISK -> ADR or DEC` | An avoided risk names the one design record that removes the threat; written by the disposing act. |
 
 `TRC-003` - A selected work order MUST have complete `INT -> CAP -> REQ`
 upstream coverage and complete selected `SPEC` and `VER` coverage for every
@@ -96,6 +99,7 @@ false.
 | `release_contract` | `REL-` | Defines the work scope, gates, rollback conditions, and authority boundary for a release. | Every release record needs an applicable active contract that gates its complete released-work set. | Omit while no release is proposed; a contract may gate several work orders when its policy genuinely covers them. | Release owner. | `REL.gates -> WO`; `RLS.satisfies -> REL` |
 | `release_record` | `RLS-` | Records the accountable release decision for eligible verified work at one exact candidate commit. | Create only when a release is proposed; `released` requires eligible VRECs and matching commit identity. | Omit for unreleased continuous delivery; one aggregate record may release several work orders through included verification. | Release owner. | `RLS.satisfies -> REL`; `RLS.includes_verification -> VREC`; `RLS.releases_work -> WO` |
 | `decision` | `DEC-` | Records one pending question with its options, its decider and the artifacts it blocks, or one implementation deviation against one rule of one specification, with the verbatim disposition. | A question blocks a transition, concerns more than one artifact, or must survive approval; or an implementation cannot meet one specification rule under a work order. | Below the threshold the answer stays in a transition's `reason`; a settled architectural decision is an ADR, not a decision. | Owner of the blocked artifact; for a deviation, the owner of the departed specification. | `DEC.concerns -> any`; `DEC.blocks -> REQ, SPEC, VER, ARCH, ADR, WO`; `DEC.produces -> REQ, SPEC, VER, ARCH, ADR, WO` |
+| `risk` | `RISK-` | Records one measured threat to governed work: one cause, one effect, the threatened stage, a five-by-five score, and a copy of the answer the paired decision gave. | A threat to governed work is noticed at any stage; recording it raises it, and the decision that names it stops the threatened artifacts until an owner answers. | Below one cause and one effect the threat is a sentence in a transition's `reason`; a risk never blocks anything itself, so no risk is needed where no artifact is threatened. | Owners of the threatened artifacts; the answer is the paired decision's. | `RISK.threatens -> any`; `RISK.mitigated_by -> WO`; `RISK.avoided_by -> ADR or DEC`; `DEC.concerns -> RISK` |
 | `operating_contract` | `OPS-` | Defines continuing service, support, observability, or operational assurance obligations. | It applies when repository or service policy declares ongoing operational commitments at G5. | Omit when no operational assurance is claimed; absence never implies that an operational obligation is satisfied. | Service owner. | `OPS.assures -> REQ` |
 
 Evidence, acceptance scenarios, source files, candidate commits, dashboards, tickets, and conversations are not formal artifact types. They may be retained or referenced as observations, but they do not establish product authority, work authorization, verification, or release by themselves.
@@ -149,6 +153,12 @@ does not admit. An accepted deviation stands on the specification it departs
 from, on the work orders it concerns, and on every verification or release
 record covering that work, until a later decided deviation against the same
 rule chose `amend` or `supersede` (`SPEC-DCM-001`).
+
+`TRC-016` - A `RISK` in `raised` MUST be named in `concerns` by exactly one
+`DEC` in `open` or `deferred`, and that decision's `blocks` MUST equal the
+risk's `threatens`. The risk blocks nothing itself: the decision's stop holds
+the threatened artifacts, and disposing it moves the risk in the same act
+(`SPEC-RSK-010`).
 
 `TRC-014` - An active `OPS.assures -> REQ` claim requires an active assured
 requirement and at least one completed implementing work order. When verified

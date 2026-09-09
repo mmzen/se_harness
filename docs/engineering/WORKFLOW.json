@@ -57,6 +57,15 @@
       "deferred": {"transitions_to": ["decided", "withdrawn"], "grants_authority": false, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
       "decided": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
       "withdrawn": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"}
+    },
+    "risk": {
+      "identified": {"transitions_to": ["raised", "withdrawn"], "grants_authority": false, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "raised": {"transitions_to": ["accepted", "avoided", "mitigating", "withdrawn"], "grants_authority": false, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "mitigating": {"transitions_to": ["mitigated", "withdrawn"], "grants_authority": false, "reserves_version": false, "transitionable": true, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "accepted": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "avoided": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "mitigated": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"},
+      "withdrawn": {"transitions_to": [], "grants_authority": false, "reserves_version": false, "transitionable": false, "must_remain_visible": true, "predecessor_adapter": "none"}
     }
   },
   "failure": {
@@ -307,13 +316,6 @@
       "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
       "steps": [
         {"id": "STEP-WO-PREPARE-VREC-DECIDE", "kind": "decision", "decision_right": "DR-VREC-PREPARE", "role": "engineering-owner", "artifact": "{artifact_id}", "decision": "whether to prepare one ready verification record with exact approved inputs", "outcomes": ["prepare", "stop"], "response": "Prepare one ready VREC for {artifact_id} with the exact approved verification contract and retained evidence.", "gate_ids": ["QG-G4-CANDIDATE-READY"], "effects": ["Permits preparation of one ready VREC."], "non_effects": ["Preparation does not verify {artifact_id}."]}
-      ]
-    },
-    {
-      "id": "PROC-CANDIDATE-COMMIT",
-      "parameters": [{"name": "artifact_id", "type": "artifact_id", "cardinality": "one", "source": "selection.primary"}],
-      "steps": [
-        {"id": "STEP-CANDIDATE-COMMIT-AUTHORIZE", "kind": "decision", "decision_right": "DR-EXTERNAL-ACTION", "role": "repository-owner", "artifact": "{artifact_id}", "decision": "whether the exact candidate commit may be created", "outcomes": ["authorize", "stop"], "response": "Authorize creating the exact candidate commit for {artifact_id}.", "gate_ids": ["QG-G4-CANDIDATE-READY"], "effects": ["Permits only creation of the exact candidate commit."], "non_effects": ["This decision request does not stage, commit, branch, push, merge, or verify anything."]}
       ]
     },
     {
