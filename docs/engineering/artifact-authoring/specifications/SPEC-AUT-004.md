@@ -2,7 +2,7 @@
 id = "SPEC-AUT-004"
 type = "specification"
 title = "Closing the compatibility windows: the retired relation, the unassessed architecture, the header-less packet, the v1 hint"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -10,6 +10,13 @@ contract = "The validator, the preflight, the evidence predicate and the contrac
 
 [relations]
 specifies = ["REQ-AUT-009"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-09T17:21:18Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-09-09 by the accountable owner by selecting the presented option 'Approve all four (Recommended)', given after the packet closing the compatibility windows (issue #381 owner decision 3 of 2026-09-07, migrate the corpus then close; SPEC-AUT-003 AUT-MIG-012) was presented on pull request #423 with the released 0.16.0 evaluator reading 0 errors and 0 authoring advisories. Approval of a definition authorizes no work. Rules AUT-WIN-001 to AUT-WIN-018. In the same prompt the owner selected 'Keep the template out of scope (Recommended)': the TRC-008 sentence of the managed TRACEABILITY.md template stays untouched and is owed to the next managed-template work order, as AUT-WIN-018 states."
 +++
 
 # Specification: Closing the compatibility windows: the retired relation, the unassessed architecture, the header-less packet, the v1 hint

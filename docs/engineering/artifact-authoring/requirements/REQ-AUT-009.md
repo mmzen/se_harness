@@ -2,7 +2,7 @@
 id = "REQ-AUT-009"
 type = "requirement"
 title = "Keep no compatibility window for a migrated corpus"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -14,6 +14,13 @@ measure = "W014, W015, W019 and W-ECP-002 absent from the package and from the d
 
 [relations]
 derives_from = ["CAP-AUT-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-09T17:21:18Z"
+decided_by = "product-owner"
+reason = "Approved on 2026-09-09 by the accountable owner by selecting the presented option 'Approve all four (Recommended)', given after the packet closing the compatibility windows (issue #381 owner decision 3 of 2026-09-07, migrate the corpus then close; SPEC-AUT-003 AUT-MIG-012) was presented on pull request #423 with the released 0.16.0 evaluator reading 0 errors and 0 authoring advisories. Approval of a definition authorizes no work. The four refusals and the two permanent gaps."
 +++
 
 # Requirement: Keep no compatibility window for a migrated corpus

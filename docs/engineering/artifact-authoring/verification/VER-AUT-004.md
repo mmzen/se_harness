@@ -2,13 +2,20 @@
 id = "VER-AUT-004"
 type = "verification"
 title = "Independent evidence for the closed compatibility windows"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
 
 [relations]
 verifies = ["REQ-AUT-009"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-09T17:21:18Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-09-09 by the accountable owner by selecting the presented option 'Approve all four (Recommended)', given after the packet closing the compatibility windows (issue #381 owner decision 3 of 2026-09-07, migrate the corpus then close; SPEC-AUT-003 AUT-MIG-012) was presented on pull request #423 with the released 0.16.0 evaluator reading 0 errors and 0 authoring advisories. Approval of a definition authorizes no work. The retired-relation, unassessed-architecture, dashboard, header-less packet, v1 schema, registry, permanent-branch, amendment, notes, baseline, scope, regression and delegation rows."
 +++
 
 # Verification Contract: Independent evidence for the closed compatibility windows

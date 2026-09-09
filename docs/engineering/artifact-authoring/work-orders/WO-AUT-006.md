@@ -2,7 +2,7 @@
 id = "WO-AUT-006"
 type = "work_order"
 title = "Close the compatibility windows: W014, W015, the W-ECP-002 grace and the WEX-ECP-030 v1 hint"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -45,6 +45,13 @@ class = "execution"
 implements = ["REQ-AUT-009"]
 specifications = ["SPEC-AUT-004"]
 verification = ["VER-AUT-004"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-09T17:21:18Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-09-09 by selecting the presented option 'Approve all four (Recommended)' on pull request #423, as a decision distinct from the approval of its definitions in the same transaction. This approval is the delegating act under DR-007 and DR-015: the work order carries [delegation] class = 'execution', so DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE may be applied by the delegated-executor role while the required validate check is success for the exact candidate head, read from the base of the pull request. It authorizes only the declared scope: the seven modules named in SPEC-AUT-004, tests/, the three notes and the regenerated index, the amendment records on SPEC-ECP-002, SPEC-ECP-005, SPEC-ECP-017 and SPEC-WEX-002, the domain index and the evidence packet. It authorizes no change to a managed template or any root managed byte, no change to a corpus artifact, no verification decision, no release and no publication; the merges remain the owner's decisions. In the same prompt the owner selected 'Keep the template out of scope (Recommended)', so the TRC-008 sentence of the managed TRACEABILITY.md template is owed to the next managed-template work order."
 +++
 
 # Work Order: Close the compatibility windows: W014, W015, the W-ECP-002 grace and the WEX-ECP-030 v1 hint
