@@ -1,10 +1,10 @@
 {
   "evaluator": {
-    "archive_name": "se_harness-0.16.0-py3-none-any.whl",
-    "archive_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "archive_name": "se_harness-0.17.0-py3-none-any.whl",
+    "archive_sha256": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
     "payload_manifest": "se-harness-installed-payload-v1",
-    "payload_sha256": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
-    "version": "0.16.0"
+    "payload_sha256": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405",
+    "version": "0.17.0"
   },
   "files": {
     ".agents/skills/harness-operator-brief/SKILL.md": {
@@ -37,7 +37,7 @@
     },
     ".engineering-harness.toml": {
       "mode": "managed",
-      "sha256": "3da952a09b2d6aeb80b7e892b9514af1bcf9efd39b56deb5892c6953082fa9cc"
+      "sha256": "b17e1a31c8d14144d9a7f2084994f9f2bec52746918b775c3148aba219ce064a"
     },
     ".gitattributes": {
       "mode": "fragment",
@@ -49,11 +49,11 @@
     },
     ".github/workflows/engineering-harness.yml": {
       "mode": "managed",
-      "sha256": "9956aa5624569c132ec8bf938789e5dea1f2a777c90a9a07fe79aa3e4c8dfc2e"
+      "sha256": "461a41e18df263831272deb7ec6a305767e7c9878eb7cd80fe23d136267381a8"
     },
     ".gitignore": {
       "mode": "fragment",
-      "sha256": "1b9c8af1917e119817b7160d3afa4e7277226d187b964c318fdbb6072beeaeaa"
+      "sha256": "6bc923b4d2ef88ea61e997fc03ea4252aae3f2dc885cb82791293698184594f6"
     },
     "AGENTS.md": {
       "mode": "fragment",
@@ -65,7 +65,7 @@
     },
     "ENGINEERING_HARNESS.md": {
       "mode": "managed",
-      "sha256": "6ff5001b2666ff971b9268b7c56814d99b5313726ccd1be29fa16efabec54a6c"
+      "sha256": "2eba66c086611568ca2bed91ce89f278d78c7f2c5096ba5fea20fc4b6f21e4d8"
     },
     "GLOSSARY.md": {
       "mode": "seed",
@@ -85,11 +85,11 @@
     },
     "docs/engineering/QUALITY_GATES.json": {
       "mode": "managed",
-      "sha256": "a7c256bb2a96c19e3e7229a3712e2577e70f711f755f83d4635db49670e4d66f"
+      "sha256": "4cbf80f9130630a591c76a42b43486e2db2fa83d64de2ad8bd32f22204661c5c"
     },
     "docs/engineering/QUALITY_GATES.md": {
       "mode": "managed",
-      "sha256": "c4b1d4930d41353dbdb60c714c154426394ce6c70176f678aecf6831f920e7ee"
+      "sha256": "caaf231d883d3b0b6007d7945f9610f208a3fedff86af3c2df27972643ee01d5"
     },
     "docs/engineering/README.md": {
       "mode": "seed",
@@ -101,15 +101,15 @@
     },
     "docs/engineering/TRACEABILITY.md": {
       "mode": "managed",
-      "sha256": "7e3639e5ca85ac99c0bd286fcc785efb9c5c4a5085210ce3933abad3a65fd623"
+      "sha256": "4f116876ffcfd3abaddd946fd41b969636048c095afea46881ebd1672b506f20"
     },
     "docs/engineering/WORKFLOW.json": {
       "mode": "managed",
-      "sha256": "b7c63cbfd9a6075aa455c36ee3a331b6f93c1f0384057f4f74dd54a9015a6194"
+      "sha256": "f866cf32423ce1b41a635d7c2dbc35c8294923006a3297bcea66a3b4ece0f48f"
     },
     "docs/engineering/WORKFLOW.md": {
       "mode": "managed",
-      "sha256": "82494b587c8713a41a1b3ce00814286ad60424f664646929004eb0bc502e8ed0"
+      "sha256": "286bb8759eb031306c571ad034d0da2bd42ab4cf6a5b0163dbff77f43627b651"
     },
     "docs/engineering/templates/ADR.template.md": {
       "mode": "managed",
@@ -137,7 +137,7 @@
     },
     "docs/engineering/templates/README.md": {
       "mode": "managed",
-      "sha256": "3426c5ca9f03435b649f25ae611984f093a188933198c75613d94d2a87d85e9e"
+      "sha256": "7d0b822af791a7cdf8601bff4b6b6566a002f1b2d3e2b8fab5fb93e491a3cf74"
     },
     "docs/engineering/templates/RELEASE_CONTRACT.template.md": {
       "mode": "managed",
@@ -150,6 +150,10 @@
     "docs/engineering/templates/REQUIREMENT.template.md": {
       "mode": "managed",
       "sha256": "09c88ffc221a6bce8c0ae698f1ecefa39ef91cb54de6ecbf79f18df317e249ee"
+    },
+    "docs/engineering/templates/RISK.template.md": {
+      "mode": "managed",
+      "sha256": "05f30f5f78e3677750a8da51d458c0b2de26018aff73ac79a8fe8abda0484f3a"
     },
     "docs/engineering/templates/SPECIFICATION.template.md": {
       "mode": "managed",
@@ -171,5 +175,5 @@
   "hash_algorithm": "sha256",
   "hash_mode": "utf8-text-lf-v1",
   "schema": 3,
-  "tool_version": "0.16.0"
+  "tool_version": "0.17.0"
 }

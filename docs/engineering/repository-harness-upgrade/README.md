@@ -138,3 +138,21 @@ record. Evidence in `evidence/WO-HUP-017/`; the record is `VREC-HUP-016`.
   `WO-HUP-017`. The work order carries no delegation class, so its start,
   completion and record are the owners' explicit acts.
 
+The repository owner approved the five artifacts on 2026-09-09 by selecting
+"Approve all five" (PR #426); `ARCH-HUP-012` was amended by record on the
+packet branch once the requirements were approved. `WO-HUP-018` was
+started, executed and completed on 2026-09-09 (PR #427) on the owner's
+"merged => start" and "Complete and prepare the record": the root is exact
+public 0.17.0 under a schema-3 lock recording archive `305c7cbc…` and
+payload `dd48b16b…`, moved from the 0.16.0 lock `69d0fb9f…` by one
+transaction (41 managed files, 10 updated, `RISK.template.md` added, replay
+41 unchanged) retained as `evidence/WO-HUP-018-evaluator-upgrade.json`. The
+root configuration holds its five keys and the root workflow and ignore
+block take the release's template, discharging `DST-CFG-015` and
+`DST-MWF-014`. Under exact 0.17.0 the graph reads 1,442 artifacts, 0
+errors, 46 warnings, 0 advisories, 99 managed checks, released-root
+qualification PASS and two identical Explorer generations; the Windows
+suite's failure set equals its same-commit 0.16.0 control's. The candidate
+is 0.18.0; `SPEC-IAR-012` carries its amendment record. Evidence in
+`evidence/WO-HUP-018/`; the record is `VREC-HUP-017`.
+

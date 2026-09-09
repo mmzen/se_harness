@@ -2,7 +2,7 @@
 id = "WO-HUP-018"
 type = "work_order"
 title = "Adopt exact public 0.17.0 as the standard root, the simple way, and take the carried obligations into the root"
-status = "approved"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner", "security-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -27,6 +27,20 @@ to = "approved"
 decided_at = "2026-09-09T09:04:33Z"
 decided_by = "repository-owner"
 reason = "Approved by the accountable repository owner on 2026-09-09 by selecting the presented option 'Approve all five (Recommended)', after reviewing PR #426 (REQ-HUP-035, REQ-HUP-036, SPEC-HUP-018, VER-HUP-018, WO-HUP-018) and the rehearsal of the 0.17.0 root adoption on a throwaway LF clone of main at e855cc9a. WO-HUP-018 carries no delegation class: its start, completion and record preparation are the owners' explicit decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-09T09:37:09Z"
+decided_by = "engineering-owner"
+reason = "Started on the engineering owner's explicit start decision of 2026-09-09, given with the words 'merged => start' after the approved packet #426 merged to main at b172f42a. Start preflight PASS with no diagnostics over the reading manifest after ARCH-HUP-012 was amended by record on the packet branch; the transaction runs from an LF checkout whose lock bytes equal the committed blob."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-09T10:03:00Z"
+decided_by = "engineering-owner"
+reason = "Completed by the accountable engineering owner on 2026-09-09 under DR-WO-COMPLETE, by selecting the presented option 'Complete and prepare the record (Recommended)' for WO-HUP-018 (PR #427). The standard root is exact public 0.17.0 by the simple upgrade from the isolated wheel-file environment (transaction d8ba7a23: 41 managed files, 10 updated, RISK.template.md added, replay 41 unchanged; prior lock 69d0fb9f under 0.16.0, target archive 305c7cbc, payload dd48b16b, document WO-HUP-018-evaluator-upgrade.json); the root configuration holds its five keys and the root workflow and ignore block take the release's template (DST-CFG-015, DST-MWF-014 discharged). VER-HUP-018 executed in full under exact 0.17.0: validate 1442 artifacts, 0 errors, 46 warnings, 0 advisories; doctor 99/0; released-root qualification RR001-RR004 PASS; inspect 0; identical Explorer digests twice; review preflight PASS; identity passed; derive PRE008 then 0.17.0 to 0.18.0; the Windows suite's failure set equals the same-commit 0.16.0 control's (1098 tests, the one workstation baseline error, 23 skips). HUP-ADS-011 to HUP-ADS-015 applied: the candidate 0.18.0, the owner region, the developing note, the SPEC-IAR-012 amendment record, the duplicated ignore lines dropped; no test needed an identity-aware edit. All four lanes green at the evidence head 39fc1352, the governor-transition lane assessing the real 0.16.0 to 0.17.0 move with one transaction document and RLS-SEH-026 supplying the wheel. Evidence: docs/engineering/repository-harness-upgrade/evidence/WO-HUP-018/WO-HUP-018-handoff.md, bound at handoff."
 +++
 
 # Work Order: Adopt exact public 0.17.0 as the standard root, the simple way, and take the carried obligations into the root
