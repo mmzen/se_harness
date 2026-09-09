@@ -1,0 +1,13 @@
+{
+  "exists": true,
+  "files": {
+    "AGENTS.md": {
+      "size": 113,
+      "mtime_ns": 1788903868240951200
+    },
+    "governed-target.txt": {
+      "size": 19,
+      "mtime_ns": 1788903868241462600
+    }
+  }
+}

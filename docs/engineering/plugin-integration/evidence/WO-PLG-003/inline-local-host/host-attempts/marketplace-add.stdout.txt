@@ -1,0 +1,5 @@
+{
+  "marketplaceName": "codex-probe-local",
+  "installedRoot": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-002 inline with spaces\\marketplace with spaces",
+  "alreadyAdded": false
+}

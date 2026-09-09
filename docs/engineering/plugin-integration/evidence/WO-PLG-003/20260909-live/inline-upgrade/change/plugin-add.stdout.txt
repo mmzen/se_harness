@@ -1,0 +1,8 @@
+{
+  "pluginId": "codex-probe@codex-probe-local",
+  "name": "codex-probe",
+  "marketplaceName": "codex-probe-local",
+  "version": "0.0.2",
+  "installedPath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.2",
+  "authPolicy": "ON_INSTALL"
+}

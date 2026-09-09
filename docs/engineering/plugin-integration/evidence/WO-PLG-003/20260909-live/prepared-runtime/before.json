@@ -1,0 +1,16 @@
+{
+  "sources": {
+    "AGENTS.md": {
+      "sha256": "6f2772113e9d53196ef3961999f4a92c6362d371571cbb6ead96441c68d72f78",
+      "retained": "before/AGENTS.md.txt"
+    },
+    "governed-target.txt": {
+      "sha256": "4fb3fb38100be0a78a3273edc5d2721fb305953bd652179b17dff64a00cac8bd",
+      "retained": "before/governed-target.txt.txt"
+    }
+  },
+  "python_exists": false,
+  "removed_python_exists": false,
+  "data_directory": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\codex-probe-codex-probe-local",
+  "scope": "Selected synthetic repository and runtime files only; not an OS-wide profile audit."
+}

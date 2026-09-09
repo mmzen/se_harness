@@ -1,0 +1,437 @@
+[
+  {
+    "source": "20260909-live/inline-missing-start/transcript.json",
+    "sent_at": 1788933249.7470732,
+    "message": {
+      "id": 1,
+      "method": "initialize",
+      "params": {
+        "clientInfo": {
+          "name": "codex-live-probe",
+          "version": "0.0.1"
+        },
+        "capabilities": {
+          "experimentalApi": true
+        }
+      }
+    }
+  },
+  {
+    "source": "20260909-live/inline-missing-start/transcript.json",
+    "sent_at": 1788933249.8987336,
+    "message": {
+      "id": 2,
+      "method": "hooks/list",
+      "params": {
+        "cwds": [
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+        ]
+      }
+    }
+  },
+  {
+    "source": "20260909-live/inline-missing-start/transcript.json",
+    "sent_at": 1788933249.9491937,
+    "message": {
+      "id": 3,
+      "method": "skills/list",
+      "params": {
+        "cwds": [
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+        ],
+        "forceReload": true
+      }
+    }
+  },
+  {
+    "source": "20260909-live/inline-missing-start/transcript.json",
+    "sent_at": 1788933249.99969,
+    "message": {
+      "id": 4,
+      "method": "thread/start",
+      "params": {
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+        "sandbox": "read-only",
+        "approvalPolicy": "on-request",
+        "ephemeral": false
+      }
+    }
+  },
+  {
+    "source": "20260909-live/inline-missing-start/transcript.json",
+    "sent_at": 1788933250.0500877,
+    "message": {
+      "id": 5,
+      "method": "turn/start",
+      "params": {
+        "threadId": "01a084bb-1bd7-7b11-a7b2-09b006bd1fcb",
+        "input": [
+          {
+            "type": "text",
+            "text": "Reply with the single word READY. Do not use tools or change files."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "source": "20260909-live/inline-missing-start/transcript.json",
+    "sent_at": 1788933255.7530284,
+    "message": {
+      "id": 6,
+      "method": "thread/read",
+      "params": {
+        "threadId": "01a084bb-1bd7-7b11-a7b2-09b006bd1fcb",
+        "includeTurns": true
+      }
+    }
+  },
+  {
+    "source": "20260909-live/diagnostic-start/transcript.json",
+    "sent_at": 1788933551.3192663,
+    "message": {
+      "id": 1,
+      "method": "initialize",
+      "params": {
+        "clientInfo": {
+          "name": "codex-live-probe",
+          "version": "0.0.1"
+        },
+        "capabilities": {
+          "experimentalApi": true
+        }
+      }
+    }
+  },
+  {
+    "source": "20260909-live/diagnostic-start/transcript.json",
+    "sent_at": 1788933551.4702957,
+    "message": {
+      "id": 2,
+      "method": "hooks/list",
+      "params": {
+        "cwds": [
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+        ]
+      }
+    }
+  },
+  {
+    "source": "20260909-live/diagnostic-start/transcript.json",
+    "sent_at": 1788933551.5210514,
+    "message": {
+      "id": 3,
+      "method": "skills/list",
+      "params": {
+        "cwds": [
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+        ],
+        "forceReload": true
+      }
+    }
+  },
+  {
+    "source": "20260909-live/diagnostic-start/transcript.json",
+    "sent_at": 1788933551.5714858,
+    "message": {
+      "id": 4,
+      "method": "thread/start",
+      "params": {
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+        "sandbox": "read-only",
+        "approvalPolicy": "on-request",
+        "ephemeral": false
+      }
+    }
+  },
+  {
+    "source": "20260909-live/diagnostic-start/transcript.json",
+    "sent_at": 1788933551.6218398,
+    "message": {
+      "id": 5,
+      "method": "turn/start",
+      "params": {
+        "threadId": "01a084bf-b5dd-7390-92df-57c9542f4450",
+        "input": [
+          {
+            "type": "text",
+            "text": "Reply with the single word READY. Do not use tools or change files."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "source": "20260909-live/diagnostic-start/transcript.json",
+    "sent_at": 1788933556.7713904,
+    "message": {
+      "id": 6,
+      "method": "thread/read",
+      "params": {
+        "threadId": "01a084bf-b5dd-7390-92df-57c9542f4450",
+        "includeTurns": true
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-start/transcript.json",
+    "sent_at": 1788933657.9807045,
+    "message": {
+      "id": 1,
+      "method": "initialize",
+      "params": {
+        "clientInfo": {
+          "name": "codex-live-probe",
+          "version": "0.0.1"
+        },
+        "capabilities": {
+          "experimentalApi": true
+        }
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-start/transcript.json",
+    "sent_at": 1788933658.1829386,
+    "message": {
+      "id": 2,
+      "method": "hooks/list",
+      "params": {
+        "cwds": [
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+        ]
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-start/transcript.json",
+    "sent_at": 1788933658.2335775,
+    "message": {
+      "id": 3,
+      "method": "skills/list",
+      "params": {
+        "cwds": [
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+        ],
+        "forceReload": true
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-start/transcript.json",
+    "sent_at": 1788933658.284332,
+    "message": {
+      "id": 4,
+      "method": "thread/start",
+      "params": {
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+        "sandbox": "read-only",
+        "approvalPolicy": "on-request",
+        "ephemeral": false
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-start/transcript.json",
+    "sent_at": 1788933658.3348415,
+    "message": {
+      "id": 5,
+      "method": "turn/start",
+      "params": {
+        "threadId": "01a084c1-56b4-79d2-b1c0-129aa71c2fd8",
+        "input": [
+          {
+            "type": "text",
+            "text": "Reply with the single word READY. Do not use tools or change files."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "source": "20260909-live/native-missing-start/transcript.json",
+    "sent_at": 1788933663.9774566,
+    "message": {
+      "id": 6,
+      "method": "thread/read",
+      "params": {
+        "threadId": "01a084c1-56b4-79d2-b1c0-129aa71c2fd8",
+        "includeTurns": true
+      }
+    }
+  },
+  {
+    "source": "20260909-live/input-diagnostic-start/transcript.json",
+    "sent_at": 1788933890.146305,
+    "message": {
+      "id": 1,
+      "method": "initialize",
+      "params": {
+        "clientInfo": {
+          "name": "codex-live-probe",
+          "version": "0.0.1"
+        },
+        "capabilities": {
+          "experimentalApi": true
+        }
+      }
+    }
+  },
+  {
+    "source": "20260909-live/input-diagnostic-start/transcript.json",
+    "sent_at": 1788933890.2982123,
+    "message": {
+      "id": 2,
+      "method": "hooks/list",
+      "params": {
+        "cwds": [
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+        ]
+      }
+    }
+  },
+  {
+    "source": "20260909-live/input-diagnostic-start/transcript.json",
+    "sent_at": 1788933890.3489318,
+    "message": {
+      "id": 3,
+      "method": "skills/list",
+      "params": {
+        "cwds": [
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+        ],
+        "forceReload": true
+      }
+    }
+  },
+  {
+    "source": "20260909-live/input-diagnostic-start/transcript.json",
+    "sent_at": 1788933890.399306,
+    "message": {
+      "id": 4,
+      "method": "thread/start",
+      "params": {
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+        "sandbox": "read-only",
+        "approvalPolicy": "on-request",
+        "ephemeral": false
+      }
+    }
+  },
+  {
+    "source": "20260909-live/input-diagnostic-start/transcript.json",
+    "sent_at": 1788933890.4498558,
+    "message": {
+      "id": 5,
+      "method": "turn/start",
+      "params": {
+        "threadId": "01a084c4-e166-74c2-9da9-218bb82eb8e4",
+        "input": [
+          {
+            "type": "text",
+            "text": "Reply with the single word READY. Do not use tools or change files."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "source": "20260909-live/input-diagnostic-start/transcript.json",
+    "sent_at": 1788933896.7558625,
+    "message": {
+      "id": 6,
+      "method": "thread/read",
+      "params": {
+        "threadId": "01a084c4-e166-74c2-9da9-218bb82eb8e4",
+        "includeTurns": true
+      }
+    }
+  },
+  {
+    "source": "20260909-live/removed-start/transcript.json",
+    "sent_at": 1788934027.4128597,
+    "message": {
+      "id": 1,
+      "method": "initialize",
+      "params": {
+        "clientInfo": {
+          "name": "codex-live-probe",
+          "version": "0.0.1"
+        },
+        "capabilities": {
+          "experimentalApi": true
+        }
+      }
+    }
+  },
+  {
+    "source": "20260909-live/removed-start/transcript.json",
+    "sent_at": 1788934027.5140417,
+    "message": {
+      "id": 2,
+      "method": "hooks/list",
+      "params": {
+        "cwds": [
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+        ]
+      }
+    }
+  },
+  {
+    "source": "20260909-live/removed-start/transcript.json",
+    "sent_at": 1788934027.564529,
+    "message": {
+      "id": 3,
+      "method": "skills/list",
+      "params": {
+        "cwds": [
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo"
+        ],
+        "forceReload": true
+      }
+    }
+  },
+  {
+    "source": "20260909-live/removed-start/transcript.json",
+    "sent_at": 1788934027.6147938,
+    "message": {
+      "id": 4,
+      "method": "thread/start",
+      "params": {
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+        "sandbox": "read-only",
+        "approvalPolicy": "on-request",
+        "ephemeral": false
+      }
+    }
+  },
+  {
+    "source": "20260909-live/removed-start/transcript.json",
+    "sent_at": 1788934027.7153602,
+    "message": {
+      "id": 5,
+      "method": "turn/start",
+      "params": {
+        "threadId": "01a084c6-f966-74d1-b6ea-316d33bae090",
+        "input": [
+          {
+            "type": "text",
+            "text": "Reply with the single word READY. Do not use tools or change files."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "source": "20260909-live/removed-start/transcript.json",
+    "sent_at": 1788934032.8047402,
+    "message": {
+      "id": 6,
+      "method": "thread/read",
+      "params": {
+        "threadId": "01a084c6-f966-74d1-b6ea-316d33bae090",
+        "includeTurns": true
+      }
+    }
+  }
+]

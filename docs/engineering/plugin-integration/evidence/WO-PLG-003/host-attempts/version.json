@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+    "--version"
+  ],
+  "exit_status": 0,
+  "stdout": "codex-cli 0.153.4\n",
+  "stderr": "",
+  "duration_seconds": 0.279,
+  "timed_out": false
+}

@@ -1,0 +1,15 @@
+test_credentials_and_user_paths_are_not_inherited (test_probe.ProbeSafetyTests.test_credentials_and_user_paths_are_not_inherited) ... ok
+test_existing_evidence_is_never_overwritten (test_probe.ProbeSafetyTests.test_existing_evidence_is_never_overwritten) ... ok
+test_existing_sandbox_is_never_erased (test_probe.ProbeSafetyTests.test_existing_sandbox_is_never_erased) ... ok
+test_exited_parent_cannot_leave_descendant_holding_output_pipe (test_probe.ProbeSafetyTests.test_exited_parent_cannot_leave_descendant_holding_output_pipe) ... ok
+test_hook_no_trust_or_permissions_bypass (test_probe.ProbeSafetyTests.test_hook_no_trust_or_permissions_bypass) ... ok
+test_inline_variant_does_not_evaluate_the_refused_script (test_probe.ProbeSafetyTests.test_inline_variant_does_not_evaluate_the_refused_script) ... ok
+test_manifest_resolves_inside_marketplace_and_declares_real_skill (test_probe.ProbeSafetyTests.test_manifest_resolves_inside_marketplace_and_declares_real_skill) ... ok
+test_nonzero_exit_and_raw_output_are_preserved (test_probe.ProbeSafetyTests.test_nonzero_exit_and_raw_output_are_preserved) ... ok
+test_real_child_timeout_is_not_reported_as_success (test_probe.ProbeSafetyTests.test_real_child_timeout_is_not_reported_as_success) ... ok
+test_timeout_stops_own_descendant_but_not_unrelated_process (test_probe.ProbeSafetyTests.test_timeout_stops_own_descendant_but_not_unrelated_process) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 2.500s
+
+OK

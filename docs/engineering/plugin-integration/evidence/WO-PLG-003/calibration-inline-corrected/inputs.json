@@ -1,0 +1,11 @@
+{
+  "layer": "direct fixture calibration, not host",
+  "provided_python": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+  "provided_python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "wheel": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evaluator-wheels\\se_harness-0.16.0-py3-none-any.whl",
+  "wheel_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+  "fixture_digests": {
+    "observe.ps1": "bff06ee9e373c6cf85b1cc650372c0666d5c3053e8ce4078d2ee7c2d7ebb986a",
+    "observe_runtime.py": "037bd78f4226c2671584765b07faca599a8a0349ff464409db6bc4d67c63c6ea"
+  }
+}

@@ -1,0 +1,1 @@
+CODEX_PROBE_INLINE_003: Setup required. Supplied Python 3.11+ with venv/ensurepip is required. No Python was invoked. This fixture is not governance-ready; do not perform governed writes.

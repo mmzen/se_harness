@@ -1,0 +1,41 @@
+{
+  "case": "C02",
+  "host": "Codex CLI0.153.4 / Windows10.0.26200 x86_64",
+  "status": "unavailable",
+  "conclusion": "The missing-selected-interpreter guidance branch is observed; genuinely old/unusable supplied-runtime variants remain unavailable. The whole case is not passed.",
+  "expected": "Missing, older-than3.11 or unusable venv/ensurepip yields prerequisite guidance, no Python installation, readiness or repository initialization claim.",
+  "observed": {
+    "missing_selected_path": {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\supplied-missing\\python.exe",
+      "exists": false,
+      "scope": "Only this supplied path is absent; other installed Python versions are not hidden or claimed missing."
+    },
+    "selected_skill": {
+      "name": "codex-probe:setup",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.7\\skills\\setup\\SKILL.md",
+      "sha256": "5a7ac3e517d244678f8f469e67c07c887c3c699c7fff384bbb193c3dd9e6281f"
+    },
+    "turn_status": "completed",
+    "marker_reported": true,
+    "prerequisite_guidance_observed": true,
+    "tools_requested_or_executed": false,
+    "repository_inventory_file_count": 49,
+    "repository_unchanged": true,
+    "guidance_basis": "Observer-supplied absent-path fact; this is not an agent-executed prerequisite discovery/check.",
+    "other_runtimes": "Actual3.11.9 and3.14.6 are inventoried; no old/unusable profile is fabricated."
+  },
+  "exit_status": 0,
+  "source_evidence": [
+    "20260909-live/missing-supplied-skill/identity.json",
+    "20260909-live/missing-supplied-skill/observations.json",
+    "20260909-live/missing-supplied-skill/transcript.json",
+    "repository-checks/authenticated-continuation/supplied-runtime-inventory.json"
+  ],
+  "source_sha256": {
+    "20260909-live/missing-supplied-skill/identity.json": "349db9c21bf5eabe4217822b5b8d0f792c9af3dce3cdcd90e34a5fd17632b50d",
+    "20260909-live/missing-supplied-skill/observations.json": "e899f6134673f0261a19ef50dac5783bd69bcb7bc7c1ba896fe1968e321f3757",
+    "20260909-live/missing-supplied-skill/transcript.json": "cb9c1d8c121bd4133a9a14f21997d5a993bd0b6915a567002f230e64fb0bbe6a",
+    "repository-checks/authenticated-continuation/supplied-runtime-inventory.json": "d59953144276c8378bb0e7387b139b6beb8bea34a85b40a5693e7fdda58dfe21"
+  },
+  "authority": "Observation only. WO-PLG-003 remains in_progress; no VREC/support decision."
+}

@@ -1,0 +1,27 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cmd.exe /d /c \"echo CODEX_PROBE_DIAGNOSTIC_003 & echo PROBE_ROOT=%PLUGIN_ROOT% & echo PROBE_DATA=%PLUGIN_DATA%\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cmd.exe /d /c \"echo CODEX_PROBE_DIAGNOSTIC_003 & echo PROBE_ROOT=%PLUGIN_ROOT% & echo PROBE_DATA=%PLUGIN_DATA%\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "source": "20260909-live\\untrusted-start\\stderr.txt",
+    "stderr": ""
+  },
+  {
+    "source": "20260909-live\\after-trust-dialog\\stderr.txt",
+    "stderr": ""
+  },
+  {
+    "source": "20260909-live\\trusted-file-start\\stderr.txt",
+    "stderr": ""
+  },
+  {
+    "source": "20260909-live\\native-missing-start\\stderr.txt",
+    "stderr": ""
+  }
+]

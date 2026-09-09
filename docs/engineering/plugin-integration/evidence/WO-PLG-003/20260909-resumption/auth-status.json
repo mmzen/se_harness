@@ -1,0 +1,17 @@
+{
+  "observed_at": "2026-09-09T05:28:01.066474+00:00",
+  "command": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+    "login",
+    "status"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\repo",
+  "profile": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex",
+  "state": "signed_out",
+  "exit_status": 1,
+  "timed_out": false,
+  "normal_profile_used": false,
+  "credentials_copied": false,
+  "capture_policy": "Only normalized sign-in status is retained; no credentials or device-code output.",
+  "acceptance_case_conclusion": "No additional C01-C07 acceptance claim; authenticated cases remain unavailable."
+}

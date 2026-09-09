@@ -1,0 +1,13 @@
+SOURCE: ../20260909-live/complete-sequence-setup/stderr.txt
+2026-09-09T06:27:40.564488Z ERROR codex_core::tools::router: error=Command blocked by PreToolUse hook: CODEX_PROBE_DENY_SENTINEL: exact test-only write refused; not a production policy decision. Command: [System.IO.File]::WriteAllText('C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\codex\run-001 with spaces\repo\governed-target.txt', 'CODEX_PROBE_DENY_SENTINEL')
+
+
+SOURCE: ../20260909-live/complete-sequence-ready/stderr.txt
+
+
+SOURCE: ../20260909-live/complete-sequence-repair/stderr.txt
+2026-09-09T06:29:26.083233Z ERROR codex_core::tools::router: error=Command blocked by PreToolUse hook: CODEX_PROBE_DENY_SENTINEL: exact test-only write refused; not a production policy decision. Command: [System.IO.File]::WriteAllText('C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\codex\run-001 with spaces\repo\governed-target.txt', 'CODEX_PROBE_DENY_SENTINEL')
+
+
+SOURCE: ../20260909-live/complete-sequence-repaired-ready/stderr.txt
+

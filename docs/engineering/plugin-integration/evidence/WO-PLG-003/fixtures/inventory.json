@@ -1,0 +1,12 @@
+{
+  "fixtures\\host-file-v001\\observe.ps1": "6ba407a5bfa592447f12bb21943d376dacf5405e9592ab308dd659735d3e3359",
+  "fixtures\\host-file-v001\\.codex-plugin\\plugin.json": "f20f4321267924631cb4c881db66a2599e6250fe63b39addab619ed942f64c92",
+  "fixtures\\host-file-v001\\hooks\\hooks.json": "ba89ac4032036ea7c5b56c3d9073cd6828a1c752a9f7c280fb2f85509cd08a68",
+  "fixtures\\host-file-v001\\skills\\setup\\SKILL.md": "2769c93952f6f0ca9fdcabf5828582ae3b59095d6b13b48e470f5156eaa4571c",
+  "fixtures\\calibration-file\\observe.ps1": "bff06ee9e373c6cf85b1cc650372c0666d5c3053e8ce4078d2ee7c2d7ebb986a",
+  "fixtures\\calibration-file\\observe_runtime.py": "499ec960ce989a40ce2d5254e27800784e8b0ea55d45c3369bd13b4f0aa523c2",
+  "fixtures\\calibration-inline-first\\observe.ps1": "bff06ee9e373c6cf85b1cc650372c0666d5c3053e8ce4078d2ee7c2d7ebb986a",
+  "fixtures\\calibration-inline-first\\observe_runtime.py": "499ec960ce989a40ce2d5254e27800784e8b0ea55d45c3369bd13b4f0aa523c2",
+  "fixtures\\calibration-inline-corrected\\observe.ps1": "bff06ee9e373c6cf85b1cc650372c0666d5c3053e8ce4078d2ee7c2d7ebb986a",
+  "fixtures\\calibration-inline-corrected\\observe_runtime.py": "037bd78f4226c2671584765b07faca599a8a0349ff464409db6bc4d67c63c6ea"
+}

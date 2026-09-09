@@ -1,0 +1,22 @@
+[
+  {
+    "source": "20260909-live\\inline-missing-start\\stderr.txt",
+    "stderr": ""
+  },
+  {
+    "source": "20260909-live\\diagnostic-start\\stderr.txt",
+    "stderr": ""
+  },
+  {
+    "source": "20260909-live\\native-missing-start\\stderr.txt",
+    "stderr": ""
+  },
+  {
+    "source": "20260909-live\\input-diagnostic-start\\stderr.txt",
+    "stderr": ""
+  },
+  {
+    "source": "20260909-live\\removed-start\\stderr.txt",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "host_executable": "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+  "os": "Windows-11-10.0.26200-SP0",
+  "provided_python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "probe_python": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+  "fixture_sha256": {
+    "probe.py": "d62171afd04997bd2aee13ec808c0928544b7bb382543be7cc448983b65515cc"
+  },
+  "sandbox": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces",
+  "repository_before": {
+    "exists": true,
+    "files": {
+      "AGENTS.md": {
+        "size": 113,
+        "mtime_ns": 1788903868240951200
+      },
+      "governed-target.txt": {
+        "size": 19,
+        "mtime_ns": 1788903868241462600
+      }
+    }
+  },
+  "auth_mode": "isolated file store; no credentials supplied",
+  "started_at": 1788903868.3328454
+}

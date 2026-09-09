@@ -1,0 +1,31 @@
+{
+  "case": "C05",
+  "expected": "Observe separately denied/untrusted and trusted hook activation, including actual permission interaction.",
+  "observed": "The initial continue-without-trusting choice leaves both hooks untrusted and no handler delivery. Later documented /hooks review grants trust. The trusted file route fails; the separately trusted native route delivers context.",
+  "conclusion": "pass",
+  "case_passed": true,
+  "evidence_layer": "Retained authenticated host protocol; manual case assessment, not VREC assurance.",
+  "source_evidence": {
+    "20260909-live/untrusted-start/transcript.json": "61e31b9483386377d36178e5b182c72392f2469d390d77a6ca3045a1edc3e7c2",
+    "20260909-live/untrusted-start/observations.json": "2f6017156fbb1da39a314b18a287beee4e83c6f8c7e19e7a8eab66e8772eb2b5",
+    "20260909-live/untrusted-start/identity.json": "c40955c16e1a03d09e05ba80dc6ee3e38f934b9c2066a517709a6de3a181fecd",
+    "20260909-live/after-trust-dialog/transcript.json": "a0685171806d9970dec39afc813bc495f6890ea4970a47bb28140757a941849e",
+    "20260909-live/after-trust-dialog/observations.json": "9547b1a14157b3b0851bf6eef08e5ed32cd1dfc5edaeb6aaad3fa546ca9fb9a7",
+    "20260909-live/after-trust-dialog/identity.json": "22d183470d134033638a46a0f530899a6a602194a5d6c925d2b162aaa4d8f0cf",
+    "20260909-live/trusted-file-start/transcript.json": "583a49e6a72732987cc02c4ce3991e5e0a3aff87118b0d5111f15b3827547b27",
+    "20260909-live/trusted-file-start/observations.json": "eb53d96fca75d94720abd0bb11662dfeac2cbf879492e51725dca73e29bd67a5",
+    "20260909-live/trusted-file-start/identity.json": "bd98182265c2fe858bfcd217b08eddf44fcbb024f185e0942488ef04f93a1ad7",
+    "20260909-live/native-missing-start/transcript.json": "9fd2f0c0aaf58a61691f58a4a1718b571060dc518c4c6d4cf34feb5a8001f344",
+    "20260909-live/native-missing-start/observations.json": "c45902be43b6c3d7148cebc46a46b266d763fca846316a2606cfa79939829b61",
+    "20260909-live/native-missing-start/identity.json": "11bce75c0cf98e6f147e3a20a9dd4a24c7d00bd89701be4e54125b985e5a81e1",
+    "20260909-live/operator-actions.json": "01fecbc1c848060a315507ff2014bb8efb43d0263d1e72d12c2fe432d3f3a723",
+    "20260909-live/ui-review-actions.json": "26638b0aa83fc881ab68865ef60cc3d8512d7330333c05fc1972bf8233ce0305"
+  },
+  "limitations": [
+    "Windows Codex CLI 0.153.4 only; no production support decision.",
+    "UI actions are labeled observer transcriptions; machine trust states are separately retained.",
+    "No whole-session normal-profile inventory comparison was collected."
+  ],
+  "historical_observations": "initial/observations.json",
+  "remaining": "No missing observation for this recorded route; broader host/platform qualification is separate."
+}

@@ -1,0 +1,47 @@
+test_substituted_wheel_refused_before_any_command_or_fixture_write (test_live_fixture_state.PreparationBoundaryTests.test_substituted_wheel_refused_before_any_command_or_fixture_write) ... usage: python.exe -m unittest [-h] --sandbox SANDBOX
+                              --action {prepare,change-source,remove,restore,add-readiness-inputs,select-tool-runtime}
+                              --evidence-name EVIDENCE_NAME [--wheel WHEEL]
+                              [--tool-environment]
+                              [--tool-environment-name TOOL_ENVIRONMENT_NAME]
+python.exe -m unittest: error: Preparation requires the exact selected released 0.16.0 wheel bytes.
+ok
+test_credentials_and_user_paths_are_not_inherited (test_probe.ProbeSafetyTests.test_credentials_and_user_paths_are_not_inherited) ... ok
+test_existing_evidence_is_never_overwritten (test_probe.ProbeSafetyTests.test_existing_evidence_is_never_overwritten) ... ok
+test_existing_sandbox_is_never_erased (test_probe.ProbeSafetyTests.test_existing_sandbox_is_never_erased) ... ok
+test_exited_parent_cannot_leave_descendant_holding_output_pipe (test_probe.ProbeSafetyTests.test_exited_parent_cannot_leave_descendant_holding_output_pipe) ... ok
+test_hook_no_trust_or_permissions_bypass (test_probe.ProbeSafetyTests.test_hook_no_trust_or_permissions_bypass) ... ok
+test_inline_variant_does_not_evaluate_the_refused_script (test_probe.ProbeSafetyTests.test_inline_variant_does_not_evaluate_the_refused_script) ... ok
+test_manifest_resolves_inside_marketplace_and_declares_real_skill (test_probe.ProbeSafetyTests.test_manifest_resolves_inside_marketplace_and_declares_real_skill) ... ok
+test_nonzero_exit_and_raw_output_are_preserved (test_probe.ProbeSafetyTests.test_nonzero_exit_and_raw_output_are_preserved) ... ok
+test_real_child_timeout_is_not_reported_as_success (test_probe.ProbeSafetyTests.test_real_child_timeout_is_not_reported_as_success) ... ok
+test_timeout_stops_own_descendant_but_not_unrelated_process (test_probe.ProbeSafetyTests.test_timeout_stops_own_descendant_but_not_unrelated_process) ... ok
+test_current_check_manifest_is_required_and_hashes_exact_bytes (test_ready_runtime.ReadinessEvidenceTests.test_current_check_manifest_is_required_and_hashes_exact_bytes) ... ok
+test_failed_identity_prevents_readiness_calls (test_ready_runtime.ReadinessEvidenceTests.test_failed_identity_prevents_readiness_calls) ... ok
+test_manifest_escape_is_rejected (test_ready_runtime.ReadinessEvidenceTests.test_manifest_escape_is_rejected) ... ok
+test_relative_or_oversized_input_is_rejected (test_ready_runtime.ReadinessEvidenceTests.test_relative_or_oversized_input_is_rejected) ... ok
+test_success_exit_or_truthy_text_is_not_boolean_readiness (test_ready_runtime.ReadinessEvidenceTests.test_success_exit_or_truthy_text_is_not_boolean_readiness) ... ok
+test_timeout_truncation_and_nonzero_exit_cannot_pass (test_ready_runtime.ReadinessEvidenceTests.test_timeout_truncation_and_nonzero_exit_cannot_pass) ... ok
+test_utf8_input_with_bom_is_supported (test_ready_runtime.ReadinessEvidenceTests.test_utf8_input_with_bom_is_supported) ... ok
+test_different_action_or_missing_one_shot_choice_is_refused (test_review_approval.ApprovalBoundaryTests.test_different_action_or_missing_one_shot_choice_is_refused) ... ok
+test_exact_named_skill_read_only (test_review_approval.ApprovalBoundaryTests.test_exact_named_skill_read_only) ... ok
+test_exact_reviewed_command_gets_one_shot_only (test_review_approval.ApprovalBoundaryTests.test_exact_reviewed_command_gets_one_shot_only) ... ok
+test_outer_command_cannot_append_an_action (test_review_approval.ApprovalBoundaryTests.test_outer_command_cannot_append_an_action) ... ok
+test_same_inner_command_with_different_cwd_is_refused (test_review_approval.ApprovalBoundaryTests.test_same_inner_command_with_different_cwd_is_refused) ... ok
+test_unrelated_request_has_no_fabricated_response (test_review_approval.ApprovalBoundaryTests.test_unrelated_request_has_no_fabricated_response) ... ok
+test_bearer_and_basic_header_text (test_sanitize_output.SanitizeOutputTests.test_bearer_and_basic_header_text) ... ok
+test_credential_argv_and_command_text (test_sanitize_output.SanitizeOutputTests.test_credential_argv_and_command_text) ... ok
+test_jsonl_preserves_order_and_nonsecret_fields (test_sanitize_output.SanitizeOutputTests.test_jsonl_preserves_order_and_nonsecret_fields) ... ok
+test_local_ipc_authentication_examples (test_sanitize_output.SanitizeOutputTests.test_local_ipc_authentication_examples) ... ok
+test_multiline_private_key_blocks (test_sanitize_output.SanitizeOutputTests.test_multiline_private_key_blocks) ... ok
+test_nested_secret_fields_and_header_maps (test_sanitize_output.SanitizeOutputTests.test_nested_secret_fields_and_header_maps) ... ok
+test_nested_serialized_json_remains_parseable (test_sanitize_output.SanitizeOutputTests.test_nested_serialized_json_remains_parseable) ... ok
+test_openai_key_families_and_synthetic_jwt (test_sanitize_output.SanitizeOutputTests.test_openai_key_families_and_synthetic_jwt) ... ok
+test_probe_identity_counts_and_auth_failure_diagnostics_are_preserved (test_sanitize_output.SanitizeOutputTests.test_probe_identity_counts_and_auth_failure_diagnostics_are_preserved) ... ok
+test_pure_type_preserving_and_idempotent_operations (test_sanitize_output.SanitizeOutputTests.test_pure_type_preserving_and_idempotent_operations) ... ok
+test_named_metadata_only_never_reads_contents_or_session_records (test_static_profile_inventory.StaticMetadataTests.test_named_metadata_only_never_reads_contents_or_session_records) ... ok
+test_stat_denial_is_unknown_not_absent (test_static_profile_inventory.StaticMetadataTests.test_stat_denial_is_unknown_not_absent) ... ok
+
+----------------------------------------------------------------------
+Ran 36 tests in 2.483s
+
+OK

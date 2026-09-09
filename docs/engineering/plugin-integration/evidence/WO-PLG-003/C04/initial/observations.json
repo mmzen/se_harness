@@ -1,0 +1,13 @@
+{
+  "case": "C04",
+  "expected": "Resume and completed compaction deliver fresh changed source bytes, or a precise unavailable route is retained.",
+  "observed": "Empty-thread start succeeded; immediate resume found no rollout; compact request accepted without observed completion. Real restoration remains untested.",
+  "conclusion": "unavailable",
+  "case_passed": false,
+  "evidence_layer": "live app-server endpoint observations only",
+  "exit_statuses": [],
+  "source_evidence": {
+    "app-server/transcript.json": "7803233b75a43d11767c3d8cf44a199bd7c485996a1ca10af153bdc4342c8fec"
+  },
+  "remaining": "See report.md; operator login and hook trust are not complete."
+}
