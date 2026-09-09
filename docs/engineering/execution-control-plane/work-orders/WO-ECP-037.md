@@ -2,7 +2,7 @@
 id = "WO-ECP-037"
 type = "work_order"
 title = "Record the DEC-ECP-002 revisit on SPEC-ECP-023 and close the wave 3 index"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -32,6 +32,13 @@ to = "approved"
 decided_at = "2026-09-09T11:48:35Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-09-09 by selecting the presented option 'Approve; start, record and complete on this branch (Recommended)' after reviewing PR #429: two dated records and one index line, commit-bound verification not required; the same decision covers the start and the completion on this branch, each recorded as its own event."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-09T11:49:03Z"
+decided_by = "engineering-owner"
+reason = "Started by the accountable engineering owner on 2026-09-09 under the decision 'Approve; start, record and complete on this branch (Recommended)' (PR #429). Start preflight PASS."
 +++
 
 # Work Order: Record the DEC-ECP-002 revisit on SPEC-ECP-023 and close the wave 3 index
