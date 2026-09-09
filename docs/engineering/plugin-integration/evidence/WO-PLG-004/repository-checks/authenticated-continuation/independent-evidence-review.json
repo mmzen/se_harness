@@ -55,7 +55,10 @@
     "docs/engineering/plugin-integration/evidence/WO-PLG-004/20260909-live-ready-repair-02/fixture/probe-used.py": "c67382d30033827ac9a2081812d2177cf798b4c1f9785b333d0a1c362c35acc8",
     "docs/engineering/plugin-integration/evidence/WO-PLG-004/20260909-live-ready-repair-02/fixture/inline_probe-used.py": "85201870d0efb9b60467d6f9e8d77a9ad010155517fc15b07c55282567dc4a00",
     "docs/engineering/plugin-integration/evidence/WO-PLG-004/20260909-live-ready-repair-02/fixture/handler.py": "b66ba00828422da0d3e1b28342b7bfa031c5e0ed1d8c2b834746fe1f45e6190c",
-    "docs/engineering/plugin-integration/evidence/WO-PLG-004/20260909-live-ready-repair-02/fixture/identity_observer.py": "8cc26dbada9e61c06d7e5d42ac2bc5fe5c512bde7207bf67b018a02a463654ba"
+    "docs/engineering/plugin-integration/evidence/WO-PLG-004/20260909-live-ready-repair-02/fixture/identity_observer.py": "8cc26dbada9e61c06d7e5d42ac2bc5fe5c512bde7207bf67b018a02a463654ba",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-004/20260909-live-ready-repair-02/fixture/hooks/hooks.json": "fb5c1f5fe8dda374b3f0e5a8c912d4ca5618af208d5a328733e055101cf445bc",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-004/20260909-live-ready-repair-02/fixture/probe.json": "1ce97996a9443aed6b7d5d67e23916f5bfd28a15e0918beae73fd488faf0c160",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-004/20260909-live-ready-repair-02/fixture/.claude-plugin/plugin.json": "887e94f9d58c7782e0fbfb654e2a38a64ca504f1627a795438b9b6cc042fcc2d"
   },
   "checked_predicates": {
     "C01": "Startup/skill dispatch/resume/manual compact with absent runtime; structured compact boundary and PostCompact, no handler invocation. Model-only tool claims excluded.",

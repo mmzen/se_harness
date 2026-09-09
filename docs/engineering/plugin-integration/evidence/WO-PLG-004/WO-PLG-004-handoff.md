@@ -47,7 +47,8 @@ recorded in [governance](governance/). No completion or assurance transition was
 
 ## Decision and next action
 
-Continue the already authorized investigation using the authenticated isolated profile.
+The engineering owner must decide whether these observations and their explicit
+coverage limits complete the authorized investigation.
 Keep `WO-PLG-004` in `in_progress`. The accountable engineering owner has not accepted
 completion. A mechanically passing handoff check would establish fresh, scoped
 evidence only; it does not inspect the completeness of these host observations.
