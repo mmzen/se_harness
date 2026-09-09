@@ -226,11 +226,15 @@ class WorkflowComplianceTests(WorkflowComplianceFixture, unittest.TestCase):
         self.assertNotIn("extra", result["scope"])
 
     def test_evidence_freshness_requires_artifact_checkpoint_and_snapshot(self) -> None:
+        from se_harness.workflow_evidence_packet import render_evidence_header
+
+        def header(digest: str) -> bytes:
+            return render_evidence_header(
+                {"artifact": "WO-001", "checkpoint": "handoff", "formal_snapshot_sha256": digest, "rebound_at": "2026-09-09T00:00:00Z"}
+            )
+
         evidence = self.root / "docs/engineering/product/evidence/WO-001-verification.md"
-        evidence.write_text(
-            "artifact: WO-001\ncheckpoint: handoff\nformal_snapshot_sha256: " + "0" * 64 + "\n",
-            encoding="utf-8",
-        )
+        evidence.write_bytes(header("0" * 64) + b"# stale\n")
         with mock.patch(
             "se_harness.workflow_compliance._preflight_status",
             return_value=("pass", "Review preflight is ready."),
@@ -250,10 +254,7 @@ class WorkflowComplianceTests(WorkflowComplianceFixture, unittest.TestCase):
 
         report = validate_engineering_artifacts.validate_repository(self.root)
         digest = formal_snapshot_digest(self.root, report.artifacts)
-        evidence.write_text(
-            f"artifact: WO-001\ncheckpoint: handoff\nformal_snapshot_sha256: {digest}\n",
-            encoding="utf-8",
-        )
+        evidence.write_bytes(header(digest) + b"# fresh\n")
         with mock.patch(
             "se_harness.workflow_compliance._preflight_status",
             return_value=("pass", "Review preflight is ready."),
@@ -475,7 +476,7 @@ class EvidencePacketTests(GitDerivedChangeSetFixture, unittest.TestCase):
         self.assertEqual(1, code, error)
         self.assertIn("WEX-ECP-012: the working tree selects WO-002", json.loads(output)["restitution"]["blocked_by"][0])
 
-    def test_the_predicate_reads_the_header_never_substrings_and_keeps_the_grace_for_legacy_packets(self) -> None:
+    def test_the_predicate_reads_the_header_never_substrings_and_refuses_a_header_less_packet(self) -> None:
         from se_harness.workflow_compliance import formal_snapshot_digest
 
         self.evidence("--rebound-at", "2026-08-28T20:00:00Z")
@@ -492,12 +493,15 @@ class EvidencePacketTests(GitDerivedChangeSetFixture, unittest.TestCase):
         self.assertEqual(1, code, error)
         statuses = {p["id"]: p["status"] for g in result["compliance"]["gates"] for p in g["predicates"]}
         self.assertEqual("not_assessable", statuses["QGP-G4I-EVIDENCE"])
-        # a legacy packet with no header still passes for one release, named by W-ECP-002
+        # SPEC-AUT-004 AUT-WIN-007, AUT-WIN-008: a packet with no header is not
+        # assessable; the one-release substring grace and W-ECP-002 are gone.
         packet.write_text(f"# legacy\n\nartifact: WO-001\ncheckpoint: handoff\nformal_snapshot_sha256: {digest}\n", encoding="utf-8")
         code, result, error = self.check_real("--changes-complete", "--json")
-        self.assertEqual(0, code, error)
+        self.assertEqual(1, code, error)
+        statuses = {p["id"]: p["status"] for g in result["compliance"]["gates"] for p in g["predicates"]}
+        self.assertEqual("not_assessable", statuses["QGP-G4I-EVIDENCE"])
         messages = [p["message"] for g in result["compliance"]["gates"] for p in g["predicates"] if p["id"] == "QGP-G4I-EVIDENCE"]
-        self.assertIn("W-ECP-002", messages[0])
+        self.assertNotIn("W-ECP-002", json.dumps(result))
         self.assertIn("harnessctl evidence . --artifact WO-001 --checkpoint handoff", messages[0])
 
     def check_from_git_real(self, base: str) -> tuple[int, dict, str]:
@@ -601,19 +605,20 @@ class SelfBindingHandoffTests(GitDerivedChangeSetFixture, unittest.TestCase):
         statuses = {p["id"]: p["status"] for g in result["compliance"]["gates"] for p in g["predicates"]}
         self.assertEqual("not_assessable", statuses["QGP-G4I-EVIDENCE"])
         self.assertFalse((self.root / self.PACKET).exists())
-        # ECP-SBH-002: the legacy grace still reads a headerless packet, and the run leaves it alone.
+        # ECP-SBH-002: a headerless packet is not touched; since WO-AUT-006 (SPEC-AUT-004
+        # AUT-WIN-007) it is not assessable either, and nothing is retained.
         report = validate_engineering_artifacts.validate_repository(self.root)
         digest = formal_snapshot_digest(self.root, report.artifacts)
         legacy = f"# legacy\n\nartifact: WO-001\ncheckpoint: handoff\nformal_snapshot_sha256: {digest}\n"
         (self.root / self.PACKET).parent.mkdir(parents=True, exist_ok=True)
         (self.root / self.PACKET).write_text(legacy, encoding="utf-8")
         code, result, error = self.check_real(base)
-        self.assertEqual(0, code, error)
+        self.assertEqual(1, code, error)
+        statuses = {p["id"]: p["status"] for g in result["compliance"]["gates"] for p in g["predicates"]}
+        self.assertEqual("not_assessable", statuses["QGP-G4I-EVIDENCE"])
         self.assertEqual(legacy, (self.root / self.PACKET).read_text(encoding="utf-8"))
-        self.assertEqual(
-            [{"id": "WO-001", "path": self.RETAINED, "fields": ["result_sha256"]}],
-            result["mutation"]["writes"],
-        )
+        self.assertEqual([], result["mutation"]["writes"])
+        self.assertFalse((self.root / self.RETAINED).exists())
 
     def test_a_foreign_header_and_a_converting_rule_refuse_without_writing(self) -> None:
         base = self.commit_base()
@@ -818,7 +823,10 @@ class CanonicalSnapshotTests(WorkflowComplianceFixture, unittest.TestCase):
 
     # The digest of this fixture chain with LF line endings, computed under the
     # raw-byte rule before WO-ECP-014; the canonical rule must reproduce it.
-    LF_DIGEST = "3ccc996f334394ef9cce7947f51c6780ce5250466ea42912ef040963db107d3f"
+    # Re-pinned under WO-AUT-006, when the fixture architectures took the typed
+    # relations and a decision assessment (SPEC-AUT-004): the value moves with
+    # the fixture bytes, the LF-versus-CRLF invariance below is what is tested.
+    LF_DIGEST = "3e10adbbcd1e70d49d8d08273d89e72167f0ca21c337c49392495d95ae59bc8c"
 
     def artifact_paths(self) -> list[Path]:
         return sorted(path for path in (self.root / "docs/engineering").rglob("*.md") if path.read_bytes().startswith(b"+++"))

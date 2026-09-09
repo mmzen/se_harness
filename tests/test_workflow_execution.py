@@ -119,16 +119,25 @@ paths = ["src/"]
 
         from se_harness.repository_graph import validated_repository
         from se_harness.workflow_compliance import formal_snapshot_digest
+        from se_harness.workflow_evidence_packet import parse_evidence_header, render_evidence_header
 
         _, report = validated_repository(self.root)
         snapshot = formal_snapshot_digest(self.root, report.artifacts)
         path = self.root / f"docs/engineering/product/evidence/{work_order_id}-verification.md"
         path.parent.mkdir(parents=True, exist_ok=True)
-        existing = path.read_text(encoding="utf-8") if path.exists() else f"# {work_order_id} evidence\n"
-        path.write_text(
-            existing + f"\nartifact: {work_order_id}\ncheckpoint: handoff\nformal_snapshot_sha256: {snapshot}\n",
-            encoding="utf-8",
+        # SPEC-AUT-004 AUT-WIN-007: the predicate reads the machine header only, so
+        # the fixture binds through it; an existing header is replaced, the body kept.
+        existing = path.read_bytes() if path.exists() else f"# {work_order_id} evidence\n".encode("utf-8")
+        _, body = parse_evidence_header(existing)
+        header = render_evidence_header(
+            {
+                "artifact": work_order_id,
+                "checkpoint": "handoff",
+                "formal_snapshot_sha256": snapshot,
+                "rebound_at": "2026-09-09T00:00:00Z",
+            }
         )
+        path.write_bytes(header + body)
         return path
 
 
@@ -1557,16 +1566,20 @@ class OnePreconditionEngineTests(WorkflowExecutionFixture, unittest.TestCase):
         self.assertEqual("blocked", plan.result["operation"]["outcome"])
         self.assertTrue(any(item.startswith("QGP-G4I-COMPLETE:") for item in plan.result["restitution"]["blocked_by"]), plan.result["restitution"]["blocked_by"])
 
-    def test_a_retired_gate_contract_is_refused_with_wex_ecp_030(self) -> None:
-        from se_harness.workflow_contract import ContractError, load_quality_gate_contract
+    def test_a_retired_gate_contract_meets_the_loaders_own_schema_error(self) -> None:
+        # SPEC-AUT-004 AUT-WIN-009, AUT-WIN-010: the v1 hint is gone; a retired schema
+        # meets the loader's own error and WEX-ECP-030 names binding faults only.
+        from se_harness.workflow_contract import QUALITY_GATES_SCHEMA, ContractError, load_quality_gate_contract
 
         contract = json.loads((REPOSITORY_ROOT / "se_harness/quality_gates_contract.json").read_text(encoding="utf-8"))
         contract["schema"] = "se-harness-quality-gates-v1"
         contract.pop("transition_bindings")
         older = self.root / "older-gates.json"
         older.write_text(json.dumps(contract), encoding="utf-8")
-        with self.assertRaisesRegex(ContractError, "WEX-ECP-030"):
+        with self.assertRaises(ContractError) as raised:
             load_quality_gate_contract(older)
+        self.assertIn(f"must use schema {QUALITY_GATES_SCHEMA}", str(raised.exception))
+        self.assertNotIn("WEX-ECP-030", str(raised.exception))
 
     def test_an_unbound_lifecycle_edge_fails_contract_loading(self) -> None:
         from se_harness.workflow_contract import ContractError, load_workflow_contract, validate_contracts

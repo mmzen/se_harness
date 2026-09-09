@@ -167,6 +167,20 @@ required_for_release = false''',
     )
 
 
+#: SPEC-AUT-004 (WO-AUT-006): the fixture architectures carry the typed relations
+#: and a decision assessment, the shape the validator admits since the
+#: compatibility windows closed; each is decided by the ADR beside it.
+FIXTURE_ASSESSMENT = "\n".join(
+    (
+        "[decision_assessment]",
+        'outcome = "adr_required"',
+        'triggers = ["public-interface-or-protocol"]',
+        'rationale = "The fixture architecture selects a public metadata contract."',
+        'assessed_by = "technical-owner"',
+    )
+)
+
+
 def create_base_chain(
     root: Path,
     *,
@@ -187,7 +201,10 @@ def create_base_chain(
         ),
     )
     write(base / "specifications/SPEC-001.md", formal("SPEC-001", "specification", "implemented", {"specifies": ["REQ-001"]}))
-    write(base / "architecture/ARCH-001.md", formal("ARCH-001", "architecture", "implemented", {"constrains": ["REQ-001"]}))
+    write(
+        base / "architecture/ARCH-001.md",
+        formal("ARCH-001", "architecture", "implemented", {"addresses": ["REQ-001"], "conforms_to": ["SPEC-001"]}, FIXTURE_ASSESSMENT),
+    )
     write(base / "architecture/adr/ADR-001.md", formal("ADR-001", "adr", "approved", {"decides": ["ARCH-001"]}))
     write(base / "verification/VER-001.md", formal("VER-001", "verification", "approved", {"verifies": ["REQ-001"]}))
     write(
@@ -233,7 +250,10 @@ def create_additional_chain(root: Path, *, work_order_status: str = "implemented
         ),
     )
     write(base / "specifications/SPEC-002.md", formal("SPEC-002", "specification", "implemented", {"specifies": ["REQ-002"]}))
-    write(base / "architecture/ARCH-002.md", formal("ARCH-002", "architecture", "implemented", {"constrains": ["REQ-002"]}))
+    write(
+        base / "architecture/ARCH-002.md",
+        formal("ARCH-002", "architecture", "implemented", {"addresses": ["REQ-002"], "conforms_to": ["SPEC-002"]}, FIXTURE_ASSESSMENT),
+    )
     write(base / "architecture/adr/ADR-002.md", formal("ADR-002", "adr", "approved", {"decides": ["ARCH-002"]}))
     write(base / "verification/VER-002.md", formal("VER-002", "verification", "approved", {"verifies": ["REQ-002"]}))
     write(
