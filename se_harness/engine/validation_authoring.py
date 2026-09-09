@@ -539,4 +539,5 @@ def authoring_advisories(artifact: Artifact, report_root: Path | None = None) ->
     draft = Artifact(path=artifact.path, metadata={**artifact.metadata, "status": "draft"}, body=artifact.body)
     root = report_root if report_root is not None else artifact.path.parent
     _errors, _warnings, advisories = validate_authoring([draft], root)
-    return [item for item in advisories if item.code.startswith("W-AUT")]
+    # the order `validate --advisories` prints: the report sorts its diagnostics (path, code, message)
+    return sorted({item for item in advisories if item.code.startswith("W-AUT")})
