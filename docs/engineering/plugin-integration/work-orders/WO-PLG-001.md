@@ -2,7 +2,7 @@
 id = "WO-PLG-001"
 type = "work_order"
 title = "Build shared native plugin package assembly"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-09"
@@ -53,16 +53,23 @@ to = "in_progress"
 decided_at = "2026-09-09T18:25:04Z"
 decided_by = "engineering-owner"
 reason = "Operator explicitly approved the reviewed plugin packets in this task: i approve the packets, i authorize the work. On 2026-09-09 the operator selected go for WO-PLG-001 after the D03 delivery and assembly-first sequence were presented. This records only the selected WO-PLG-001 start; completion, VREC preparation, assurance, release and merge are separate decisions."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-09T19:47:27Z"
+decided_by = "engineering-owner"
+reason = "Operator explicitly stated in this task on 2026-09-09: you can mark WO-PLG-001 as completed, and prepare the verification record. Record the engineering-owner completion decision for WO-PLG-001 after the delivered implementation, sixteen focused tests, eight acceptance scenarios, passing hosted checks and retained platform/local-test limits were presented. The operator separately authorizes ready verification-record preparation; this completion transition does not verify a record, release software or merge a PR."
 +++
 
 # Work Order: Build shared native plugin package assembly
 
 ## Lifecycle
 
-The operator's packet approval and selected start are recorded in the lifecycle
-events above. This work order is in progress. Completion remains an engineering
-owner decision; later verification needs a commit-bound record and an assurance
-owner decision. No execution delegation is recorded.
+The lifecycle events above record the operator's approval, start and explicit
+completion decision. This work order is implemented. The operator separately
+authorized preparation of a commit-bound verification record. The assurance
+owner retains the verification decision. No execution delegation is recorded.
 
 ## Objective
 

@@ -5,18 +5,13 @@ formal_snapshot_sha256 = "2a2e9eee6dc4e92cd476d6044c0bd996ba73c5d2d0841b308917cd
 rebound_at = "2026-09-09T18:51:48Z"
 ```
 
-# WO-PLG-001 implementation handoff
+# WO-PLG-001 completion handoff
 
-WO-PLG-001 remains **in progress**. The [report](README.md) records the delivered
-assembly code, exact tested inputs, C01–C08 observations, focused tests and limits.
+WO-PLG-001 is **implemented** following the operator's explicit completion
+decision. The [report](README.md) retains the implementation, C01–C08 observations,
+sixteen focused tests, hosted checks, original failures and platform limits.
 
-The scoped implementation is ready for review. A repository-wide Windows test
-error remains and also reproduces on unchanged main. It is outside this work
-order's paths; no exception, test suppression or assurance decision is implied.
-The initial owner-region test failure was a checkout line-ending effect and its
-targeted recheck passed with unchanged committed content.
-
-The next accountable action is engineering-owner review of this delivery and
-the remaining check error. A scope change or risk acceptance requires a separate
-decision. Marking the work order implemented and preparing a VREC are separate
-decisions; neither has been taken. WO-PLG-002 is still draft.
+The [applied transition](governance/completion-20260909/completion-applied-01.json)
+records only the engineering-owner completion decision. The operator separately
+authorized preparing one ready verification record with VER-PLG-001 and the
+retained evidence. No assurance or merge decision was made. WO-PLG-002 remains draft.

@@ -4,7 +4,7 @@ These deliveries introduce the plugin packets from [PR #416](https://github.com/
 
 ## Shared assembly and runtime definitions (D03)
 
-WO-PLG-001 is in progress. WO-PLG-002 remains draft; introducing its approved
+WO-PLG-001 is implemented. WO-PLG-002 remains draft; introducing its approved
 definitions does not start its implementation.
 
 - [Published evaluator payload](requirements/REQ-PLG-001.md) and [shared source](requirements/REQ-PLG-002.md)

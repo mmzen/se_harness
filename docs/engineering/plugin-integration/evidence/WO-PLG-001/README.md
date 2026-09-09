@@ -1,7 +1,9 @@
 # WO-PLG-001 implementation evidence
 
-The assembly implementation is delivered for review. **WO-PLG-001 remains
-in progress.** No completion, assurance, release or publication decision is recorded.
+**WO-PLG-001 is implemented** following the operator's explicit completion
+decision on 2026-09-09. The [applied transition](governance/completion-20260909/completion-applied-01.json)
+records that decision. The operator separately authorized ready verification-record
+preparation. No assurance, release or publication decision is recorded.
 
 ## Implementation and input identity
 
@@ -79,6 +81,16 @@ separate host packaging. Runtime creation and native adapters are separate work.
   encoding error after saving the first suite output; the raw files and command
   exit status were retained, and later helper output uses UTF-8.
 
+## Hosted checks and completion
+
+All seventeen GitHub checks passed for delivery commit
+`216726cfbd7920826c7eec02888e3a4a448cae3b`, including the full Linux
+regression suite: 1,119 tests, four skips.
+[The retained PR snapshot](governance/completion-20260909/completion-ci.json) and
+[candidate workflow result](governance/completion-20260909/completion-candidate-ci.json)
+identify the runs, head commit and outcomes. These hosted checks do not replace
+the separately retained Windows C01–C08 assembly observations.
+
 ## Limits and handoff
 
 Linux, macOS and Python 3.11 assembly runs are unavailable. The focused suite
@@ -90,9 +102,11 @@ The sample packages are inert and non-promotable. They establish no production
 skills, hooks, bootstrap behavior, native host activation or marketplace support.
 Focused tests run explicitly; top-level unittest discovery does not include them.
 
-Review the implementation and address the remaining repository-check error before
-claiming a clean required test run. Any out-of-scope fix needs its own authorized
-scope. Completion and VREC preparation remain separate decisions.
+The operator made the completion decision after these limits were presented.
+The local Windows cleanup error remains disclosed; the hosted Linux regression
+passed. No failed local run is relabeled as passing. Any out-of-scope fix needs
+its own authority. The operator also authorized VREC preparation; assurance
+still requires a separate decision against the exact bound candidate.
 
 The `governance/` directory retains the released evaluator's packet readings,
 approval/start plans, applied results and independently fetched PyPI metadata.
