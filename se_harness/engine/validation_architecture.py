@@ -6,8 +6,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from se_harness.codes import E006, E007, E008, E011, E016, W015
-from se_harness.workflow_contract import IMPLEMENTED_OR_LATER_STATUSES
+from se_harness.codes import E006, E007, E008, E011, E016
 from se_harness.engine.validation_core import (
     Artifact,
     Diagnostic,
@@ -22,7 +21,6 @@ from se_harness.engine.validation_lifecycle import grants_authority
 RELATION_TARGET_TYPES: dict[tuple[str, str], set[str]] = {
     ("architecture", "addresses"): {"requirement"},
     ("architecture", "conforms_to"): {"specification"},
-    ("architecture", "constrains"): {"requirement", "specification"},
     ("operating_contract", "assures"): {"requirement"},
     ("verification_record", "verifies_work_order"): {"work_order"},
     ("verification_record", "conforms_to"): {"verification"},
@@ -118,7 +116,6 @@ def architecture_traceability_state(
             "conforms_to": [],
             "transitive_requirements": [],
             "missing_from_conforming_specifications": [],
-            "legacy_targets": [],
             "issues": [],
         }
 
@@ -146,10 +143,12 @@ def architecture_traceability_state(
         return sorted(set(clean))
 
     typed_present = "addresses" in relations or "conforms_to" in relations
-    legacy_present = "constrains" in relations
+    if "constrains" in relations:
+        # SPEC-AUT-004 AUT-WIN-001: the compatibility relation is retired. The corpus
+        # was migrated under WO-AUT-005 and the window closed under WO-AUT-006.
+        issues.append("architecture relation 'constrains' is retired; declare addresses and conforms_to")
     addresses = values("addresses", required=typed_present)
     conforms_to = values("conforms_to", required=typed_present)
-    legacy_targets = values("constrains", required=legacy_present)
 
     transitive_requirements: set[str] = set()
     for specification_id in conforms_to:
@@ -185,44 +184,10 @@ def architecture_traceability_state(
         )
 
     state = "typed"
-    if typed_present:
-        if legacy_present:
-            for target_id in legacy_targets:
-                target = catalog.get(target_id)
-                if target is None:
-                    continue
-                if target.artifact_type == "requirement" and target_id not in addresses:
-                    issues.append(
-                        f"legacy requirement target '{target_id}' is absent from addresses"
-                    )
-                elif target.artifact_type == "specification" and target_id not in conforms_to:
-                    issues.append(
-                        f"legacy specification target '{target_id}' is absent from conforms_to"
-                    )
-                elif target.artifact_type not in {"requirement", "specification"}:
-                    issues.append(
-                        f"legacy target '{target_id}' has unsupported type '{target.artifact_type}'"
-                    )
-            state = "dual_declared"
-    elif legacy_present and artifact.status in IMPLEMENTED_OR_LATER_STATUSES:
-        target_types = {
-            catalog[target_id].artifact_type
-            for target_id in legacy_targets
-            if target_id in catalog
-        }
-        if target_types == {"requirement"}:
-            state = "legacy_requirement_trace"
-        elif target_types == {"specification"}:
-            state = "legacy_specification_trace"
-        else:
-            state = "legacy_ambiguous"
-            issues.append(
-                "completed legacy architecture constrains relation must target only requirements or only specifications"
-            )
-    else:
+    if not typed_present:
         state = "missing_typed_relations"
         issues.append(
-            "new or ongoing architecture requires typed addresses and conforms_to relations"
+            "architecture requires typed addresses and conforms_to relations"
         )
 
     if issues:
@@ -233,7 +198,6 @@ def architecture_traceability_state(
         "conforms_to": conforms_to,
         "transitive_requirements": sorted(transitive_requirements),
         "missing_from_conforming_specifications": missing,
-        "legacy_targets": legacy_targets,
         "issues": sorted(set(issues)),
     }
 
@@ -261,19 +225,6 @@ def validate_architecture_traceability(
                 E016,
                 issue,
                 plane="governance",
-            )
-        if traceability["state"] in {
-            "dual_declared",
-            "legacy_requirement_trace",
-            "legacy_specification_trace",
-        }:
-            warnings.append(
-                Diagnostic(
-                    display_path(artifact.path, report_root),
-                    W015,
-                    f"architecture uses deprecated constrains relation ({traceability['state']}); migrate through accountable governance",
-                    "maintenance",
-                )
             )
     return errors, warnings
 

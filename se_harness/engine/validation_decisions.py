@@ -23,12 +23,10 @@ from se_harness.codes import (
     E_RSK_003,
     E_RSK_004,
     E_RSK_005,
-    W014,
     W_DCM_001,
     W_DCM_002,
     W_RSK_001,
 )
-from se_harness.workflow_contract import IMPLEMENTED_OR_LATER_STATUSES
 from se_harness.engine.validation_authoring import sentences, specification_rules
 from se_harness.engine.validation_core import (
     Artifact,
@@ -116,14 +114,15 @@ def decision_assessment_state(artifact: Artifact) -> dict[str, Any]:
             "issues": ["decision_assessment is allowed only on architecture artifacts"] if raw is not None else [],
         }
     if raw is None:
-        legacy = artifact.status in IMPLEMENTED_OR_LATER_STATUSES
+        # SPEC-AUT-004 AUT-WIN-003: every architecture carries the table. The
+        # legacy window closed once the corpus was migrated (WO-AUT-005, WO-AUT-006).
         return {
-            "state": "legacy_missing" if legacy else "missing",
+            "state": "missing",
             "outcome": None,
             "triggers": [],
             "rationale": None,
             "assessed_by": None,
-            "issues": [] if legacy else ["architecture decision assessment is required"],
+            "issues": ["architecture decision assessment is required"],
         }
     if not isinstance(raw, dict):
         return {
@@ -353,10 +352,11 @@ def validate_work_order_execution_scope(
             continue
         table = artifact.metadata.get("execution_scope")
         if table is None:
-            # Compatibility: the validator cannot infer whether an active work
-            # order predates this contract. Checkpoint evaluation treats an
-            # absent scope as not assessable; authoring templates require it for
-            # new or resumed implementation.
+            # Permanent (SPEC-AUT-004 AUT-WIN-012): the work orders approved before
+            # the scope contract never gain one; docs/notes/artifact-authoring.md
+            # carries the count. Checkpoint evaluation treats an absent scope as
+            # not assessable; authoring templates require it for new or resumed
+            # implementation.
             continue
         if not isinstance(table, dict) or set(table) != {"paths"}:
             add_error(
@@ -446,25 +446,6 @@ def validate_decision_assessments(
                 )
             continue
         deciding = active_decisions_by_architecture.get(artifact.artifact_id, set())
-        if state == "legacy_missing":
-            warnings.append(
-                Diagnostic(
-                    display_path(artifact.path, report_root),
-                    W014,
-                    "completed legacy architecture has no decision_assessment; migrate during the compatibility window",
-                    "maintenance",
-                )
-            )
-            if not deciding:
-                add_error(
-                    errors,
-                    artifact,
-                    report_root,
-                    E015,
-                    "completed legacy architecture without decision_assessment requires an active deciding ADR",
-                    plane="governance",
-                )
-            continue
         if (
             grants_authority(artifact.artifact_type, artifact.status)
             and assessment["outcome"] == "adr_required"

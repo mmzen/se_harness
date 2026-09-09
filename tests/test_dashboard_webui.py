@@ -1014,7 +1014,7 @@ class DashboardWebUIContractTests(unittest.TestCase):
             "capability": ("derives_from",),
             "requirement": ("derives_from",),
             "specification": ("specifies",),
-            "architecture": ("addresses", "conforms_to", "constrains"),
+            "architecture": ("addresses", "conforms_to"),
             "adr": ("decides",),
             "verification": ("verifies",),
             "release_contract": ("gates",),

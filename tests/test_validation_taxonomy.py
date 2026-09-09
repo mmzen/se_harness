@@ -163,7 +163,7 @@ class ValidationTaxonomyTests(unittest.TestCase):
         report = ValidationReport(
             artifacts=[],
             errors=[Diagnostic("broken.md", "E001", "broken", "structure")],
-            warnings=[Diagnostic("legacy.md", "W015", "legacy", "maintenance")],
+            warnings=[Diagnostic("legacy.md", "W013", "legacy", "maintenance")],
         )
         payload = report.to_dict(Path.cwd())
         self.assertEqual(TAXONOMY_VERSION, payload["taxonomy"])
@@ -181,7 +181,7 @@ class ValidationTaxonomyTests(unittest.TestCase):
         rendered = render_human(report)
         self.assertIn("Planes:", rendered)
         self.assertIn("[E001] [structure] broken.md: broken", rendered)
-        self.assertIn("[W015] [maintenance] legacy.md: legacy", rendered)
+        self.assertIn("[W013] [maintenance] legacy.md: legacy", rendered)
         self.assertNotIn("score", rendered.lower())
 
     def test_current_rule_authority_selects_the_expected_plane(self) -> None:

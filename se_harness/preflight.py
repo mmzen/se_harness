@@ -42,7 +42,6 @@ from se_harness.codes import (
     W016,
     W017,
     W018,
-    W019,
     W020,
     W021,
     W022,
@@ -426,15 +425,9 @@ def _selected_architecture_relevance_diagnostics(
 
     for architecture in architectures:
         traceability = validator.architecture_traceability_state(architecture, catalog)
-        if traceability["state"] in {"typed", "dual_declared"}:
+        if traceability["state"] == "typed":
             relevant = bool(
                 selected_specification_ids.intersection(traceability["conforms_to"])
-            )
-        elif traceability["state"] == "legacy_requirement_trace":
-            relevant = bool(requirement_ids.intersection(traceability["legacy_targets"]))
-        elif traceability["state"] == "legacy_specification_trace":
-            relevant = bool(
-                selected_specification_ids.intersection(traceability["legacy_targets"])
             )
         else:
             relevant = True
@@ -468,14 +461,8 @@ def _unselected_architecture_diagnostics(
         ):
             continue
         traceability = validator.architecture_traceability_state(architecture, catalog)
-        if traceability["state"] in {"typed", "dual_declared"}:
+        if traceability["state"] == "typed":
             applicable = bool(requirement_ids.intersection(traceability["addresses"]))
-        elif traceability["state"] == "legacy_requirement_trace":
-            applicable = bool(requirement_ids.intersection(traceability["legacy_targets"]))
-        elif traceability["state"] == "legacy_specification_trace":
-            applicable = bool(
-                selected_specification_ids.intersection(traceability["legacy_targets"])
-            )
         else:
             applicable = False
         if applicable:
@@ -495,7 +482,7 @@ def _decision_assessment_diagnostics(
     root: Path,
     diagnostics: list[PreflightDiagnostic],
 ) -> None:
-    """Append W020/W019/W018 for selected architectures lacking a valid decision assessment or deciding ADR."""
+    """Append W020/W018 for selected architectures lacking a valid decision assessment or deciding ADR."""
 
     active_decisions = [
         item for item in decisions if item.status in ACTIVE_CHAIN_STATUSES
@@ -514,14 +501,6 @@ def _decision_assessment_diagnostics(
                     W020,
                     _relative(architecture.path, root),
                     f"architecture {architecture.artifact_id} has no valid decision assessment: {details}",
-                )
-            )
-        elif assessment["state"] == "legacy_missing" and not selected_deciding:
-            diagnostics.append(
-                PreflightDiagnostic(
-                    W019,
-                    _relative(architecture.path, root),
-                    f"legacy architecture {architecture.artifact_id} has no selected active deciding ADR",
                 )
             )
         elif assessment["outcome"] == "adr_required" and not selected_deciding:

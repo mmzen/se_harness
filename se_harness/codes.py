@@ -160,7 +160,6 @@ W013 = "W013"
 W016 = "W016"
 W017 = "W017"
 W018 = "W018"
-W019 = "W019"
 W020 = "W020"
 W021 = "W021"
 W022 = "W022"
@@ -171,7 +170,6 @@ W_ADS_001 = "W-ADS-001"
 W_ADS_002 = "W-ADS-002"
 
 # Control-plane warnings the package emits.
-W_ECP_002 = "W-ECP-002"
 W_ECP_005 = "W-ECP-005"
 
 # Installed-validator errors the package consumes to classify a broken graph; it raises none of them.
@@ -228,10 +226,6 @@ E_RSK_001 = "E-RSK-001"
 E_RSK_002 = "E-RSK-002"
 E_RSK_004 = "E-RSK-004"
 E_RSK_005 = "E-RSK-005"
-
-# Installed validator: a warning; validation still passes.
-W014 = "W014"
-W015 = "W015"
 
 # Installed validator: an authoring-style advisory, raised only on drafts.
 W_AUT_001 = "W-AUT-001"
