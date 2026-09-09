@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-PLG-004"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "e51678349daba4802f9c4eaf97a5ceec7a77113dfaa7e17fa68ada56c7316608"
-rebound_at = "2026-09-08T22:05:33Z"
+formal_snapshot_sha256 = "003bdbb4410d6560b8edb48cf6ce938c43ebef73f387b1636dccbc8867d7618c"
+rebound_at = "2026-09-09T06:37:28Z"
 ```
 
 # WO-PLG-004: partial investigation handoff

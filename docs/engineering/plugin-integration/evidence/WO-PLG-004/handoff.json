@@ -2,7 +2,7 @@
   "compliance": {
     "change_set_source": "git",
     "checkpoint": "handoff",
-    "formal_snapshot_sha256": "e51678349daba4802f9c4eaf97a5ceec7a77113dfaa7e17fa68ada56c7316608",
+    "formal_snapshot_sha256": "003bdbb4410d6560b8edb48cf6ce938c43ebef73f387b1636dccbc8867d7618c",
     "gates": [
       {
         "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 567 declared changed path(s) are within execution scope.",
+            "message": "All 584 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -273,7 +273,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "66473131ffc45e08058a7a9934256b8661699a1931b7f14a8910ee0ef24f69ab",
+  "result_sha256": "619c608e41500e8b2658bc329d93654c44f257815cee44ee87621f9a60bb6577",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
@@ -801,6 +801,23 @@
       "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/distribution-records.stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/distribution-records.stdout.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/independent-evidence-review.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/post-base-sync/candidate-help.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/post-base-sync/candidate-help.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/post-base-sync/candidate-help.stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/post-base-sync/distribution-records.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/post-base-sync/distribution-records.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/post-base-sync/distribution-records.stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/post-base-sync/git-path-investigation.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/post-base-sync/handoff-initial-blocked.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/post-base-sync/handoff-retry-passed.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/post-base-sync/investigate_probe_git_paths.py.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/post-base-sync/README.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/post-base-sync/released-doctor.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/post-base-sync/released-doctor.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/post-base-sync/released-doctor.stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/post-base-sync/released-validate.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/post-base-sync/released-validate.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/post-base-sync/released-validate.stdout.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/released-doctor.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/released-doctor.stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-004/repository-checks/authenticated-continuation/released-doctor.stdout.txt",

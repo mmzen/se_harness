@@ -1,0 +1,29 @@
+from pathlib import Path
+import json
+import os
+import subprocess
+import sys
+
+root = Path(__file__).parent
+repo = root / 'se-harness-plugin-claude-probe'
+base = 'fdff3a3046fb93fcc4b353c05e1c1af5ba8a5663'
+prefix = 'docs/engineering/plugin-integration/evidence/WO-PLG-003/'
+observations = []
+for longpaths in (None, 'false', 'true'):
+    env = os.environ.copy()
+    env.pop('PYTHONPATH', None)
+    env['PATH'] = str(root / 'se-harness-plugin-eval-016/Scripts') + os.pathsep + env.get('PATH', '')
+    env.update(GIT_CONFIG_COUNT='1', GIT_CONFIG_KEY_0='safe.directory', GIT_CONFIG_VALUE_0=repo.as_posix())
+    if longpaths is not None:
+        env.update(GIT_CONFIG_COUNT='2', GIT_CONFIG_KEY_1='core.longpaths', GIT_CONFIG_VALUE_1=longpaths)
+    for cwd in (root, repo):
+        for args in (['diff', '-z', '--name-only', '--no-renames', base, '--'], ['ls-files', '-z', '--others', '--exclude-standard']):
+            argv = ['git', '-C', str(repo), *args]
+            r = subprocess.run(argv, cwd=cwd, env=env, capture_output=True, timeout=120)
+            paths = r.stdout.decode('utf8').split('\0')
+            observations.append(dict(longpaths=longpaths, cwd=str(cwd), argv=argv, exit_code=r.returncode,
+                                     path_count=len([p for p in paths if p]), inherited_paths=[p for p in paths if p.startswith(prefix)],
+                                     stderr=r.stderr.decode('utf8', 'replace')))
+out = root / 'plugin-probe-control' / repo.name / 'git-longpath-investigation.json'
+out.write_text(json.dumps(observations, indent=2) + '\n', encoding='utf8')
+print(json.dumps(observations, indent=2))
