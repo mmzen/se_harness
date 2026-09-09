@@ -2,7 +2,7 @@
 id = "WO-AUT-006"
 type = "work_order"
 title = "Close the compatibility windows: W014, W015, the W-ECP-002 grace and the WEX-ECP-030 v1 hint"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -60,6 +60,13 @@ to = "in_progress"
 decided_at = "2026-09-09T17:37:24Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at b11ea53709814e8e3a1411d3f22a3295b2e7d841 (check-run 102575250379, source github-checks). Start decided by the delegated-executor role on 2026-09-09 under the execution delegation class WO-AUT-006 carries, delegated by the engineering owner in the approval of 2026-09-09 and read at the base of this branch: main at b11ea53709814e8e3a1411d3f22a3295b2e7d841, the merge of the packet, where the required validate check is success. Branch wo/aut-006-close-the-windows off main at b11ea537. This decision authorizes only the declared execution scope: the seven modules of SPEC-AUT-004, tests/, the three notes and the regenerated index, the amendment records on SPEC-ECP-002, SPEC-ECP-005, SPEC-ECP-017 and SPEC-WEX-002, the four artifacts of the packet, the domain index and the evidence packet. It authorizes no change to a managed template or any root managed byte, no change to a corpus artifact, no new diagnostic code, no release, publication or adoption. Completion and record preparation are separate decisions of this role under the same gate; verification and every merge remain the accountable human owners."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-09T18:23:05Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at d5ee428436661401179df07993d1a5918da1f476 (check-run 102588037814, source github-checks). Completion decided by the delegated-executor role on 2026-09-09 under the execution delegation class WO-AUT-006 carries, read at the base of pull request #431. Rules AUT-WIN-001 to AUT-WIN-018 of SPEC-AUT-004 are met and mapped to evidence in docs/engineering/artifact-authoring/evidence/WO-AUT-006/: constrains is an E016 issue naming it retired, an architecture without a decision assessment reads E014, the preflight emits no W019, a header-less evidence packet is not assessable naming harnessctl evidence, a v1 quality-gates contract meets the loader's own error, W014, W015, W019 and W-ECP-002 left the registry and the index, the two permanent branches carry a comment and the note their counts, and four specifications are amended by record. The handoff check from main's tip completed, nine predicates passing, 27 changed paths inside the scope the owner amended on 2026-09-09 to admit validation_lifecycle.py, result 0edcd4c4 at its fixed point. Released 0.17.0 and the candidate read the same on this tree: 1,450 artifacts, 0 errors, 46 W013, 0 advisories; doctor and the review preflight PASS. Suite 1,119 to 1,126 tests at the Windows baseline; the hosted suite passed. Scenarios on a scratch worktree reproduce E016, E014 without W019, the loader's own error, and the traceability test failing when the window is restored; the header-less packet scenario is repeated at the bound commit. Lanes: five of five success at the packet head d5ee4284; at bb2e73a4 the managed lane named validation_lifecycle.py outside the scope before the amendment. No corpus artifact, managed template or root managed byte changed; the TRC-008 template sentence is owed to the next managed-template work order. Completion approves nothing; preparation, verification and the merge are separate decisions."
 +++
 
 # Work Order: Close the compatibility windows: W014, W015, the W-ECP-002 grace and the WEX-ECP-030 v1 hint
