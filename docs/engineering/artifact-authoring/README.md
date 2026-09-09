@@ -46,5 +46,11 @@ on `REQ-REB-004`, `-011`, `-014` and `-018`, and
 and its note paragraph. `SPEC-AUT-001` carries the amendment record of
 `AUT-MIG-008`, and the rewrite scripts and reports are retained under
 `evidence/WO-AUT-005/`. Each artifact's own front matter is its state.
-Closing the `W014` and `W015` validator branches is the following work order,
-drafted after `WO-AUT-005` merges; this index authorizes nothing.
+That following work order is `REQ-AUT-009`, `SPEC-AUT-004`, `VER-AUT-004` and
+`WO-AUT-006` (drafted 2026-09-09 under issue #381 owner decision 3 and
+`SPEC-AUT-003` `AUT-MIG-012`): `constrains` and an unassessed completed
+architecture are refused, a header-less evidence packet is not assessable,
+a v1 quality-gates contract meets the loader's own error, and `W014`, `W015`,
+`W019` and `W-ECP-002` leave the package; the `prepared_at` and
+`execution_scope` branches stay, documented as permanent. Delegated route; the
+corpus and the managed templates do not change. This index authorizes nothing.
