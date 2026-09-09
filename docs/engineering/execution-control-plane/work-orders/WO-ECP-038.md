@@ -2,7 +2,7 @@
 id = "WO-ECP-038"
 type = "work_order"
 title = "Retire the canonical_json_bytes alias of release_build"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-09"
 updated = "2026-09-09"
@@ -40,6 +40,13 @@ to = "in_progress"
 decided_at = "2026-09-09T12:48:47Z"
 decided_by = "engineering-owner"
 reason = "Started by the accountable engineering owner on 2026-09-09 under the decision 'Approve; start, change and complete on this branch (Recommended)' (PR #430). Start preflight PASS."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-09T12:58:02Z"
+decided_by = "engineering-owner"
+reason = "Completed by the accountable engineering owner on 2026-09-09 under DR-WO-COMPLETE, under the decision 'Approve; start, change and complete on this branch (Recommended)' (PR #430): the replay lane script reads recipe_json_bytes and the alias is gone, no line of the function changed, the release-build tests and the full Windows suite are at their baseline with one test added, validate under exact 0.17.0 reads 1446 artifacts with 0 errors and 0 advisories, the Publication Rehearsal's candidate leg ran the renamed script at 51a704e1 (run 34353497766), and the handoff check completes over the Git-derived change set. No record is prepared: commit-bound verification is not required."
 +++
 
 # Work Order: Retire the canonical_json_bytes alias of release_build
