@@ -1,0 +1,15 @@
+{
+  "exit_status": 0,
+  "test_count": 15,
+  "command": "external Python -I -m unittest discover -s tests/plugin_integration/claude_probe -p test_*.py -v",
+  "source_sha256": {
+    "guard.ps1": "0c2eabd0b08a1700cc8e7fbccc31db0847e74be886d9972044113a6025b5509c",
+    "handler.py": "8cc26dbada9e61c06d7e5d42ac2bc5fe5c512bde7207bf67b018a02a463654ba",
+    "inline_probe.py": "2c07e74f7075a53ca1fb79cb9b413e2eaed7721437cc8d2cc6ac34652d8063f6",
+    "probe.py": "7d8491ea4d84d658e96b1ce0adbab1082f1fb6cd37fd7703f8f0512080817372",
+    "README.md": "6f0f4698284db8d46e8999602797bb11126fe8f33b580802d96b0a534c5156d1",
+    "test_probe.py": "45b02626ee720701e199d725d8d063232d9cc25b4b51e3ea82151bf532ca335e",
+    "sanitize_evidence.py": "1f34d62de06cfa5657c2783d2d917c331e0b78ffc1f2d9001d0b3b38a4c355ea"
+  },
+  "live_host_support_proven": false
+}

@@ -1,0 +1,32 @@
+{
+  "expected": "Actual inline guard observes missing interpreter.",
+  "observed": {
+    "events": [
+      {
+        "at": "2026-09-08T21:51:19.0855067Z",
+        "event": "SessionStart",
+        "source": "startup",
+        "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\inline command plugin with spaces",
+        "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\data\\verity-plane-inline-probe-inline",
+        "interpreter": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\selected evaluator\\Scripts\\python.exe",
+        "handler_invoked": false
+      }
+    ],
+    "startup": "observed",
+    "resume_compact": "not assessed in this startup-only trial"
+  },
+  "conclusion": "unavailable",
+  "production_support": "unqualified",
+  "source_evidence": [
+    "commands.json",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "exit_status": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "host_identity_evidence": "docs/engineering/plugin-integration/evidence/WO-PLG-004/identities.json"
+}

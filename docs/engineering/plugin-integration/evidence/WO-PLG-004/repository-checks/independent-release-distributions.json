@@ -1,0 +1,5 @@
+{
+  "command": "python -B -S scripts/validate_release_distributions.py --root .",
+  "exit_code": 0,
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe"
+}

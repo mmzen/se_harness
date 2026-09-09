@@ -1,0 +1,55 @@
+{
+  "at": "2026-09-09T06:03:09.216488+00:00",
+  "host": {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "--version"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-ready-repair-02\\disposable repository",
+    "exit": 0,
+    "timeout": false,
+    "seconds": 0.039,
+    "stdout": "2.1.266 (Claude Code)\n",
+    "stderr": ""
+  },
+  "provided_python": {
+    "argv": [
+      "..\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+      "-I",
+      "-c",
+      "import sys,venv,ensurepip;print(sys.version);print(sys.executable);print(ensurepip.version())"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-ready-repair-02\\disposable repository",
+    "exit": 0,
+    "timeout": false,
+    "seconds": 0.301,
+    "stdout": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]\nC:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe\n26.1.2\n",
+    "stderr": ""
+  },
+  "authenticated": true,
+  "archive_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+  "source_sha256": {
+    "denial_probe.py": "c3f4ce9e6c386716631bb3f2d549de1df3360de42573f58ab330b62e18757dea",
+    "guard.ps1": "0c2eabd0b08a1700cc8e7fbccc31db0847e74be886d9972044113a6025b5509c",
+    "handler.py": "8cc26dbada9e61c06d7e5d42ac2bc5fe5c512bde7207bf67b018a02a463654ba",
+    "inline_probe.py": "85201870d0efb9b60467d6f9e8d77a9ad010155517fc15b07c55282567dc4a00",
+    "live_sessions.py": "063c79a32c9a5e8dadd7ad5c000aa3af592a7e579b1f9fd28ef16cae51bf119f",
+    "prerequisite_probe.py": "180d2728993e5631d167d441e13f8df9c65b0c1bb3fcdbd842d0dc2f9cc654d8",
+    "probe.py": "c67382d30033827ac9a2081812d2177cf798b4c1f9785b333d0a1c362c35acc8",
+    "readiness_handler.py": "b66ba00828422da0d3e1b28342b7bfa031c5e0ed1d8c2b834746fe1f45e6190c",
+    "README.md": "161ef8127c7566b748b7775e2940ec60e729385ad7a7049363690d8fcf9f1de8",
+    "resume_compact.py": "fda0d291a4ad83b2a7a43c12d577d3ddcbb12f4a7acbcc3d7fb92186286a5523",
+    "sanitize_evidence.py": "1f34d62de06cfa5657c2783d2d917c331e0b78ffc1f2d9001d0b3b38a4c355ea",
+    "test_probe.py": "18bf2611ebceca4ce4b913a3b98142a4223f0918b7115bc7528f1026f0273dc5",
+    "tool_setup.py": "e14fcd8eb148c61084cbb492aa0416707fcd6d5a772830f5e6222d8d5e74cfc7"
+  },
+  "synthetic_readiness_fixture": "..\\plugin-probe-sandboxes\\readiness-input-20260909\\repository",
+  "documentation": [
+    "https://code.claude.com/docs/en/cli-reference",
+    "https://code.claude.com/docs/en/plugins-reference",
+    "https://code.claude.com/docs/en/hooks",
+    "https://code.claude.com/docs/en/settings",
+    "https://code.claude.com/docs/en/authentication#credential-management",
+    "https://code.claude.com/docs/en/permissions"
+  ]
+}

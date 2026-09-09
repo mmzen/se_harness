@@ -1,0 +1,74 @@
+{
+  "at": "2026-09-08T21:48:28.578871+00:00",
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "--version"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\disposable repository",
+      "exit": 0,
+      "timeout": false,
+      "seconds": 0.033,
+      "stdout": "2.1.265 (Claude Code)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import sys,platform,venv,ensurepip; print(sys.version); print(platform.platform()); print(sys.executable); print(ensurepip.version())"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\disposable repository",
+      "exit": 0,
+      "timeout": false,
+      "seconds": 0.248,
+      "stdout": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]\nWindows-11-10.0.26200-SP0\nC:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe\n26.1.2\n",
+      "stderr": ""
+    }
+  ],
+  "wheel": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evaluator-wheels\\se_harness-0.16.0-py3-none-any.whl",
+  "archive_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+  "source_files": {
+    "guard.ps1": "0c2eabd0b08a1700cc8e7fbccc31db0847e74be886d9972044113a6025b5509c",
+    "handler.py": "e30f0fea73da00dfccba10b42fcf8e10b479a5294e9c63ac1b5c110c37739851",
+    "probe.py": "b0fab7e7e305a79e160881a3f66bb00eb802338bac7539188790c22090b3cfa7"
+  },
+  "documentation": [
+    "https://code.claude.com/docs/en/cli-reference",
+    "https://code.claude.com/docs/en/plugins-reference",
+    "https://code.claude.com/docs/en/hooks",
+    "https://code.claude.com/docs/en/settings",
+    "https://code.claude.com/docs/en/authentication#credential-management"
+  ],
+  "platforms": {
+    "Windows": "tested",
+    "Linux": "unavailable",
+    "macOS": "unavailable"
+  },
+  "isolated_profile": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile",
+  "environment_variable_names": [
+    "APPDATA",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC",
+    "CLAUDE_CODE_DISABLE_OFFICIAL_MARKETPLACE_AUTOINSTALL",
+    "CLAUDE_CONFIG_DIR",
+    "COMMONPROGRAMFILES",
+    "ComSpec",
+    "HOMEDRIVE",
+    "HOMEPATH",
+    "LOCALAPPDATA",
+    "PATH",
+    "PATHEXT",
+    "PROCESSOR_ARCHITECTURE",
+    "PROGRAMDATA",
+    "PROGRAMFILES",
+    "PROGRAMFILES(X86)",
+    "SystemDrive",
+    "SystemRoot",
+    "TEMP",
+    "TMP",
+    "USERPROFILE",
+    "WINDIR"
+  ]
+}

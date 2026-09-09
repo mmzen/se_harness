@@ -1,0 +1,26 @@
+COMMAND 1
+{
+  "success": false,
+  "strict": true,
+  "target": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\plugin with spaces\\.claude-plugin\\plugin.json",
+  "manifest": {
+    "file": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\plugin with spaces\\.claude-plugin\\plugin.json",
+    "type": "plugin",
+    "errors": [],
+    "warnings": [
+      {
+        "path": "author",
+        "message": "No author information provided. Consider adding author details for plugin attribution",
+        "code": null
+      }
+    ],
+    "notes": []
+  },
+  "contents": []
+}
+
+COMMAND 2
+
+COMMAND 3
+
+COMMAND 4

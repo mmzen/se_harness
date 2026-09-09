@@ -1,0 +1,11 @@
+{
+  "files_inspected": 331,
+  "suspected_secret_files": [],
+  "sanitizer_differences": [],
+  "JSON_parsed": true,
+  "python_source_hashes_match_final_29_test_run": true,
+  "credential_contents_read": false,
+  "private_debug_opened": false,
+  "historical_evidence_modified": false,
+  "scope": "fresh 20260909-live-* and final-tests directories, excluding earlier context-envelope and root-reserved repository checks"
+}

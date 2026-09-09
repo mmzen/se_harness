@@ -1,0 +1,23 @@
+# Engineering Artifacts for Disposable readiness observation
+
+> Repository-owned after installation. Maintain this file as the index of local artifact domains and supporting engineering documentation. Shared harness policy is routed from `ENGINEERING_HARNESS.md` and remains managed separately.
+
+`WORKFLOW.json` and `QUALITY_GATES.json` are managed executable policy.
+`WORKFLOW.md` and `QUALITY_GATES.md` are their bound human explanations.
+Project one artifact with `harnessctl check --artifact ID`; add
+`--checkpoint` for a start, pre-action, scope, or handoff checkpoint. Use repository-wide `inspect` only as
+a separate maintenance operation.
+
+## Artifact domains
+
+- TODO[artifact-domain]: describe the domain and link its packet directory.
+
+Create a domain with `harnessctl scaffold-domain . --domain <lowercase-kebab-domain>`, then create incomplete draft artifacts with `harnessctl create-artifact`. Each domain uses canonical type directories for navigation; stable metadata, typed relations, and lifecycle decisions remain authoritative.
+
+## Repository-specific engineering documentation
+
+- TODO[engineering-document]: link architecture overviews, runbooks, or contribution guidance that is specific to this repository.
+
+## Maintenance
+
+Update this index when domains or local engineering documents are added, moved, or retired. Upgrade never rewrites this repository-owned index or moves product artifacts. Formal authority comes from typed artifact metadata and accountable lifecycle decisions, not from this index.

@@ -1,0 +1,21 @@
+{
+  "expected": "Disabled hooks emit no fixture event; re-enabled hooks emit an event.",
+  "observed": {
+    "events_before": 0,
+    "after_disabled": 0,
+    "after_enabled": 0,
+    "interactive_trust": "unavailable: print/init-only is not an interactive trust test"
+  },
+  "conclusion": "unavailable",
+  "production_support": "unqualified",
+  "source_evidence": [
+    "commands.json",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "exit_status": [
+    0,
+    0
+  ],
+  "host_identity_evidence": "docs/engineering/plugin-integration/evidence/WO-PLG-004/identities.json"
+}

@@ -1,0 +1,10 @@
+COMMAND 1
+
+COMMAND 2
+Processing C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-evaluator-wheels\se_harness-0.16.0-py3-none-any.whl
+Installing collected packages: se-harness
+Successfully installed se-harness-0.16.0
+
+COMMAND 3
+
+COMMAND 4

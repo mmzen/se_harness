@@ -1,0 +1,46 @@
+{
+  "as_of": "2026-09-09",
+  "work_order": "WO-PLG-004",
+  "work_order_status": "in_progress",
+  "host": "Claude Code 2.1.266 (fresh trial); 2.1.265 (earlier trials)",
+  "platform": "Windows 11",
+  "route": "inline local plugin, native PowerShell, authenticated sessions, actual compact and exact authorized tools",
+  "cases": {
+    "C01": {
+      "conclusion": "pass",
+      "current_evidence": "20260909-live-sessions/C01-complete/observations.json"
+    },
+    "C02": {
+      "conclusion": "unavailable",
+      "current_evidence": "20260909-live-prerequisite-scoped/C02/observations.json",
+      "supported_subobservations": [
+        "actual setup skill dispatch; exact scoped Bash check finds absent provided Python; operator receives installation guidance"
+      ],
+      "limitation": "older or unusable provided-Python variants were not available; whole matrix remains incomplete"
+    },
+    "C03": {
+      "conclusion": "pass",
+      "current_evidence": "20260909-live-sessions/C03/observations.json"
+    },
+    "C04": {
+      "conclusion": "pass",
+      "current_evidence": "20260909-live-sessions/C04-complete/observations.json"
+    },
+    "C05": {
+      "conclusion": "pass",
+      "current_evidence": "20260909-context-envelope/C05/observations.json"
+    },
+    "C06": {
+      "conclusion": "pass",
+      "current_evidence": "20260909-context-envelope/C06/observations.json"
+    },
+    "C07": {
+      "conclusion": "pass",
+      "current_evidence": "20260909-live-ready-repair-02/C07/observations.json",
+      "qualification": "actual released-evaluator readiness of synthetic test inputs; production support remains unqualified"
+    }
+  },
+  "production_support": "unqualified",
+  "assurance_decision": "none",
+  "remaining": "C02 genuinely older or unusable provided-interpreter variants are unavailable; no production support or assurance decision is selected."
+}

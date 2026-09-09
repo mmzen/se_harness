@@ -1,0 +1,38 @@
+{
+  "command": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests/plugin_integration/claude_probe",
+      "-p",
+      "test_*.py",
+      "-v"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-probe",
+    "exit": 0,
+    "timeout": false,
+    "seconds": 12.888,
+    "stdout": "",
+    "stderr": "test_context_bytes_are_separate_from_identity_telemetry (test_probe.NativeOutputBoundaryTests.test_context_bytes_are_separate_from_identity_telemetry) ... ok\ntest_failed_identity_does_not_deliver_source_as_ready_context (test_probe.NativeOutputBoundaryTests.test_failed_identity_does_not_deliver_source_as_ready_context) ... ok\ntest_missing_runtime_emits_only_documented_context_envelope (test_probe.NativeOutputBoundaryTests.test_missing_runtime_emits_only_documented_context_envelope) ... ok\ntest_sentinel_denial_is_exact_after_path_separator_normalization (test_probe.NativeOutputBoundaryTests.test_sentinel_denial_is_exact_after_path_separator_normalization) ... ok\ntest_tool_event_does_not_emit_an_allow_decision (test_probe.NativeOutputBoundaryTests.test_tool_event_does_not_emit_an_allow_decision) ... ok\ntest_actual_error_result_is_preserved_even_with_success_subtype (test_probe.ObservationIntegrityTests.test_actual_error_result_is_preserved_even_with_success_subtype) ... ok\ntest_child_does_not_inherit_tokens_or_python_injection (test_probe.ObservationIntegrityTests.test_child_does_not_inherit_tokens_or_python_injection) ... ok\ntest_diagnostics_identity_and_auth_status_survive (test_probe.ObservationIntegrityTests.test_diagnostics_identity_and_auth_status_survive) ... ok\ntest_empty_or_failed_handler_is_unready_without_crashing (test_probe.ObservationIntegrityTests.test_empty_or_failed_handler_is_unready_without_crashing) ... ok\ntest_every_case_output_path_uses_sanitized_values (test_probe.ObservationIntegrityTests.test_every_case_output_path_uses_sanitized_values) ... ok\ntest_exact_correlated_tool_refusal_is_observed (test_probe.ObservationIntegrityTests.test_exact_correlated_tool_refusal_is_observed) ... ok\ntest_headers_private_keys_and_secret_cli_arguments_are_removed (test_probe.ObservationIntegrityTests.test_headers_private_keys_and_secret_cli_arguments_are_removed) ... ok\ntest_inventory_never_reads_secret_bytes (test_probe.ObservationIntegrityTests.test_inventory_never_reads_secret_bytes) ... ok\ntest_ipc_auth_examples_are_removed_whole (test_probe.ObservationIntegrityTests.test_ipc_auth_examples_are_removed_whole) ... ok\ntest_jsonl_stays_parseable_with_nested_and_camel_case_credentials (test_probe.ObservationIntegrityTests.test_jsonl_stays_parseable_with_nested_and_camel_case_credentials) ... ok\ntest_missing_interpreter_must_not_be_reported_invoked (test_probe.ObservationIntegrityTests.test_missing_interpreter_must_not_be_reported_invoked) ... ok\ntest_model_only_denial_phrase_is_not_a_host_refusal (test_probe.ObservationIntegrityTests.test_model_only_denial_phrase_is_not_a_host_refusal) ... ok\ntest_model_prose_cannot_substitute_for_structured_host_result (test_probe.ObservationIntegrityTests.test_model_prose_cannot_substitute_for_structured_host_result) ... ok\ntest_partial_timeout_does_not_pass_despite_refusal_records (test_probe.ObservationIntegrityTests.test_partial_timeout_does_not_pass_despite_refusal_records) ... ok\ntest_provider_error_cannot_be_promoted_by_success_subtype (test_probe.ObservationIntegrityTests.test_provider_error_cannot_be_promoted_by_success_subtype) ... ok\ntest_public_debug_copy_redacts_before_write_and_preserves_local_source (test_probe.ObservationIntegrityTests.test_public_debug_copy_redacts_before_write_and_preserves_local_source) ... ok\ntest_ready_requires_successful_handler_and_boolean_true (test_probe.ObservationIntegrityTests.test_ready_requires_successful_handler_and_boolean_true) ... ok\ntest_ready_requires_this_invocations_event_and_matching_context_receipt (test_probe.ObservationIntegrityTests.test_ready_requires_this_invocations_event_and_matching_context_receipt) ... ok\ntest_sanitizing_retained_evidence_again_is_idempotent (test_probe.ObservationIntegrityTests.test_sanitizing_retained_evidence_again_is_idempotent) ... ok\ntest_sibling_prefix_is_not_contained (test_probe.ObservationIntegrityTests.test_sibling_prefix_is_not_contained) ... ok\ntest_startup_observation_does_not_mean_production_support (test_probe.ObservationIntegrityTests.test_startup_observation_does_not_mean_production_support) ... ok\ntest_timeout_cannot_be_promoted_by_partial_output (test_probe.ObservationIntegrityTests.test_timeout_cannot_be_promoted_by_partial_output) ... ok\ntest_wrong_event_cannot_substitute_for_startup (test_probe.ObservationIntegrityTests.test_wrong_event_cannot_substitute_for_startup) ... ok\ntest_zero_exit_without_host_event_is_not_delivery (test_probe.ObservationIntegrityTests.test_zero_exit_without_host_event_is_not_delivery) ... ok\n\n----------------------------------------------------------------------\nRan 29 tests in 12.599s\n\nOK\n"
+  },
+  "source_sha256": {
+    "denial_probe.py": "c3f4ce9e6c386716631bb3f2d549de1df3360de42573f58ab330b62e18757dea",
+    "guard.ps1": "0c2eabd0b08a1700cc8e7fbccc31db0847e74be886d9972044113a6025b5509c",
+    "handler.py": "8cc26dbada9e61c06d7e5d42ac2bc5fe5c512bde7207bf67b018a02a463654ba",
+    "inline_probe.py": "85201870d0efb9b60467d6f9e8d77a9ad010155517fc15b07c55282567dc4a00",
+    "live_sessions.py": "0c199f8510d67d3a925fd4a373ad01d800e6a301bf8bdcef0480386c0ca0a92d",
+    "prerequisite_probe.py": "180d2728993e5631d167d441e13f8df9c65b0c1bb3fcdbd842d0dc2f9cc654d8",
+    "probe.py": "c67382d30033827ac9a2081812d2177cf798b4c1f9785b333d0a1c362c35acc8",
+    "readiness_handler.py": "b66ba00828422da0d3e1b28342b7bfa031c5e0ed1d8c2b834746fe1f45e6190c",
+    "README.md": "a7662254da0ba6553eaafe34c8e9224e0f3a4e41ab07c8329c6244b54f1b047a",
+    "resume_compact.py": "fda0d291a4ad83b2a7a43c12d577d3ddcbb12f4a7acbcc3d7fb92186286a5523",
+    "sanitize_evidence.py": "1f34d62de06cfa5657c2783d2d917c331e0b78ffc1f2d9001d0b3b38a4c355ea",
+    "test_probe.py": "e1f541316d8ad66f6cec593b9b87716f5c8d41c7798d4425837e3e8918f4014d",
+    "tool_setup.py": "294ce909afa7db714b94e85c1f1675df6e7c6bd9fdc8514c2cd9e2af69019ef8"
+  },
+  "reason": "Repeat after including imported live_sessions.py in future tool-run source snapshots; no host rerun"
+}

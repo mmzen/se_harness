@@ -1,0 +1,19 @@
++++
+id = "SPEC-PROBE-001"
+type = "specification"
+title = "Observe the released evaluator without mutation"
+status = "approved"
+owners = ["synthetic-fixture-owner"]
+created = "2026-09-09"
+updated = "2026-09-09"
+contract = "The fixture records released evaluator identity, readiness and current execution context without applying lifecycle transitions."
+
+[relations]
+specifies = ["REQ-PROBE-001"]
++++
+
+# Observe the released evaluator without mutation
+
+This document is controlled synthetic test data for a disposable compatibility probe.
+Its status and owner fields are input values, not recorded real-world approvals.
+It grants no authority in the source repository or any operator project.

@@ -1,0 +1,8 @@
+{
+  "structured_success_for_both_original_records": [
+    true,
+    true
+  ],
+  "executed_sources_unchanged": true,
+  "review_source_sha256": "0c199f8510d67d3a925fd4a373ad01d800e6a301bf8bdcef0480386c0ca0a92d"
+}

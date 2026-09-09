@@ -1,0 +1,40 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "powershell",
+            "command": "$ErrorActionPreference = 'Stop'\n$e = [Console]::In.ReadToEnd() | ConvertFrom-Json\n$c = Get-Content -Raw -LiteralPath \"$env:CLAUDE_PLUGIN_ROOT/probe.json\" | ConvertFrom-Json\n$r = [ordered]@{ at=[DateTime]::UtcNow.ToString('o'); event=$e.hook_event_name; source=$e.source; root=$env:CLAUDE_PLUGIN_ROOT; data=$env:CLAUDE_PLUGIN_DATA; interpreter=$c.interpreter; handler_invoked=$false }\n$context = 'PROBE: setup required. The selected interpreter is absent. No governance readiness is asserted.'\nif (Test-Path -LiteralPath $c.interpreter -PathType Leaf) {\n  $r.handler_invoked = $true\n  $out = & $c.interpreter -I \"$env:CLAUDE_PLUGIN_ROOT/handler.py\"\n  $r.handler_exit = $LASTEXITCODE\n  $r.handler_output = $out -join \"`n\"\n  $context = 'PROBE: evaluator identity was not established. No governance readiness is asserted.'\n  if ($r.handler_exit -eq 0) {\n    $observation = $r.handler_output | ConvertFrom-Json\n    if (($observation.identity_exit -eq 0) -and ($observation.identity.passed -eq $true)) {\n      $context = $observation.context\n    }\n  }\n}\n# Telemetry belongs in the event log; Claude ignores arbitrary JSON stdout keys.\n$output = $null\nif ($e.hook_event_name -eq 'SessionStart') {\n  $output = @{ hookSpecificOutput = @{ hookEventName = 'SessionStart'; additionalContext = $context } }\n  $r.host_output = $output\n}\n$r.tool_name = $e.tool_name\n$r.tool_input = $e.tool_input\n$r.fixture_expected_decision = 'no decision requested'\nif (($e.hook_event_name -eq 'PreToolUse') -and ($e.tool_name -eq 'Write') -and [IO.Path]::IsPathRooted($e.tool_input.file_path) -and ([IO.Path]::GetFullPath($e.tool_input.file_path) -eq [IO.Path]::GetFullPath($c.sentinel))) {\n  $r.fixture_expected_decision = 'deny exact disposable sentinel'\n  $output = @{ hookSpecificOutput = @{ hookEventName = 'PreToolUse'; permissionDecision = 'deny'; permissionDecisionReason = 'WO-PLG-004 test-only sentinel. This exact disposable write must not run.' } }\n  $r.host_output = $output\n}\n[IO.File]::AppendAllText($c.event_log, (($r | ConvertTo-Json -Compress -Depth 8) + \"`n\"), [Text.UTF8Encoding]::new($false))\nif ($null -ne $output) { $output | ConvertTo-Json -Compress -Depth 4 }\n",
+            "timeout": 60
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "powershell",
+            "command": "$ErrorActionPreference = 'Stop'\n$e = [Console]::In.ReadToEnd() | ConvertFrom-Json\n$c = Get-Content -Raw -LiteralPath \"$env:CLAUDE_PLUGIN_ROOT/probe.json\" | ConvertFrom-Json\n$r = [ordered]@{ at=[DateTime]::UtcNow.ToString('o'); event=$e.hook_event_name; source=$e.source; root=$env:CLAUDE_PLUGIN_ROOT; data=$env:CLAUDE_PLUGIN_DATA; interpreter=$c.interpreter; handler_invoked=$false }\n$context = 'PROBE: setup required. The selected interpreter is absent. No governance readiness is asserted.'\nif (Test-Path -LiteralPath $c.interpreter -PathType Leaf) {\n  $r.handler_invoked = $true\n  $out = & $c.interpreter -I \"$env:CLAUDE_PLUGIN_ROOT/handler.py\"\n  $r.handler_exit = $LASTEXITCODE\n  $r.handler_output = $out -join \"`n\"\n  $context = 'PROBE: evaluator identity was not established. No governance readiness is asserted.'\n  if ($r.handler_exit -eq 0) {\n    $observation = $r.handler_output | ConvertFrom-Json\n    if (($observation.identity_exit -eq 0) -and ($observation.identity.passed -eq $true)) {\n      $context = $observation.context\n    }\n  }\n}\n# Telemetry belongs in the event log; Claude ignores arbitrary JSON stdout keys.\n$output = $null\nif ($e.hook_event_name -eq 'SessionStart') {\n  $output = @{ hookSpecificOutput = @{ hookEventName = 'SessionStart'; additionalContext = $context } }\n  $r.host_output = $output\n}\n$r.tool_name = $e.tool_name\n$r.tool_input = $e.tool_input\n$r.fixture_expected_decision = 'no decision requested'\nif (($e.hook_event_name -eq 'PreToolUse') -and ($e.tool_name -eq 'Write') -and [IO.Path]::IsPathRooted($e.tool_input.file_path) -and ([IO.Path]::GetFullPath($e.tool_input.file_path) -eq [IO.Path]::GetFullPath($c.sentinel))) {\n  $r.fixture_expected_decision = 'deny exact disposable sentinel'\n  $output = @{ hookSpecificOutput = @{ hookEventName = 'PreToolUse'; permissionDecision = 'deny'; permissionDecisionReason = 'WO-PLG-004 test-only sentinel. This exact disposable write must not run.' } }\n  $r.host_output = $output\n}\n[IO.File]::AppendAllText($c.event_log, (($r | ConvertTo-Json -Compress -Depth 8) + \"`n\"), [Text.UTF8Encoding]::new($false))\nif ($null -ne $output) { $output | ConvertTo-Json -Compress -Depth 4 }\n",
+            "timeout": 60
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "powershell",
+            "command": "$ErrorActionPreference = 'Stop'\n$e = [Console]::In.ReadToEnd() | ConvertFrom-Json\n$c = Get-Content -Raw -LiteralPath \"$env:CLAUDE_PLUGIN_ROOT/probe.json\" | ConvertFrom-Json\n$r = [ordered]@{ at=[DateTime]::UtcNow.ToString('o'); event=$e.hook_event_name; source=$e.source; root=$env:CLAUDE_PLUGIN_ROOT; data=$env:CLAUDE_PLUGIN_DATA; interpreter=$c.interpreter; handler_invoked=$false }\n$context = 'PROBE: setup required. The selected interpreter is absent. No governance readiness is asserted.'\nif (Test-Path -LiteralPath $c.interpreter -PathType Leaf) {\n  $r.handler_invoked = $true\n  $out = & $c.interpreter -I \"$env:CLAUDE_PLUGIN_ROOT/handler.py\"\n  $r.handler_exit = $LASTEXITCODE\n  $r.handler_output = $out -join \"`n\"\n  $context = 'PROBE: evaluator identity was not established. No governance readiness is asserted.'\n  if ($r.handler_exit -eq 0) {\n    $observation = $r.handler_output | ConvertFrom-Json\n    if (($observation.identity_exit -eq 0) -and ($observation.identity.passed -eq $true)) {\n      $context = $observation.context\n    }\n  }\n}\n# Telemetry belongs in the event log; Claude ignores arbitrary JSON stdout keys.\n$output = $null\nif ($e.hook_event_name -eq 'SessionStart') {\n  $output = @{ hookSpecificOutput = @{ hookEventName = 'SessionStart'; additionalContext = $context } }\n  $r.host_output = $output\n}\n$r.tool_name = $e.tool_name\n$r.tool_input = $e.tool_input\n$r.fixture_expected_decision = 'no decision requested'\nif (($e.hook_event_name -eq 'PreToolUse') -and ($e.tool_name -eq 'Write') -and [IO.Path]::IsPathRooted($e.tool_input.file_path) -and ([IO.Path]::GetFullPath($e.tool_input.file_path) -eq [IO.Path]::GetFullPath($c.sentinel))) {\n  $r.fixture_expected_decision = 'deny exact disposable sentinel'\n  $output = @{ hookSpecificOutput = @{ hookEventName = 'PreToolUse'; permissionDecision = 'deny'; permissionDecisionReason = 'WO-PLG-004 test-only sentinel. This exact disposable write must not run.' } }\n  $r.host_output = $output\n}\n[IO.File]::AppendAllText($c.event_log, (($r | ConvertTo-Json -Compress -Depth 8) + \"`n\"), [Text.UTF8Encoding]::new($false))\nif ($null -ne $output) { $output | ConvertTo-Json -Compress -Depth 4 }\n",
+            "timeout": 60
+          }
+        ]
+      }
+    ]
+  }
+}

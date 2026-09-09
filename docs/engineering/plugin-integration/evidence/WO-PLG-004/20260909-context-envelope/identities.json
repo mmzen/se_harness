@@ -1,0 +1,39 @@
+{
+  "at": "2026-09-09T05:23:44.686376+00:00",
+  "host_version": {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "--version"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\disposable repository",
+    "exit": 0,
+    "timeout": false,
+    "seconds": 0.033,
+    "stdout": "2.1.266 (Claude Code)\n",
+    "stderr": ""
+  },
+  "source_files": {
+    "guard.ps1": "0c2eabd0b08a1700cc8e7fbccc31db0847e74be886d9972044113a6025b5509c",
+    "handler.py": "8cc26dbada9e61c06d7e5d42ac2bc5fe5c512bde7207bf67b018a02a463654ba",
+    "inline_probe.py": "ed127bd501a659159866dd4d28800a4d31265e0b23125d6122446dbd18269ff1",
+    "probe.py": "7d8491ea4d84d658e96b1ce0adbab1082f1fb6cd37fd7703f8f0512080817372",
+    "README.md": "6f0f4698284db8d46e8999602797bb11126fe8f33b580802d96b0a534c5156d1",
+    "sanitize_evidence.py": "1f34d62de06cfa5657c2783d2d917c331e0b78ffc1f2d9001d0b3b38a4c355ea",
+    "test_probe.py": "0d3236e1d13edb308257a19016a7b582b073a2008e0bb9e58bd5f4a91500c79a"
+  },
+  "archive_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+  "payload_sha256": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+  "documentation": [
+    "https://code.claude.com/docs/en/cli-reference",
+    "https://code.claude.com/docs/en/plugins-reference",
+    "https://code.claude.com/docs/en/hooks",
+    "https://code.claude.com/docs/en/settings",
+    "https://code.claude.com/docs/en/authentication#credential-management"
+  ],
+  "fixture_mode": "inline plugin; fresh unauthenticated profile",
+  "platforms": {
+    "Windows": "assessed",
+    "Linux": "unavailable",
+    "macOS": "unavailable"
+  }
+}

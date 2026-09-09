@@ -1,0 +1,49 @@
+COMMAND 1
+{
+  "success": true,
+  "strict": true,
+  "target": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\inline command plugin with spaces\\.claude-plugin\\plugin.json",
+  "manifest": {
+    "file": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\inline command plugin with spaces\\.claude-plugin\\plugin.json",
+    "type": "plugin",
+    "errors": [],
+    "warnings": [],
+    "notes": []
+  },
+  "contents": []
+}
+
+COMMAND 2
+[
+  {
+    "id": "verity-plane-inline-probe@inline",
+    "version": "0.0.1",
+    "scope": "session",
+    "enabled": true,
+    "installPath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\inline command plugin with spaces"
+  }
+]
+
+COMMAND 3
+verity-plane-inline-probe 0.0.1
+  Description: Disposable observation fixture for WO-PLG-004
+  Source: verity-plane-inline-probe@inline
+
+Component inventory
+  Skills (1)  setup
+  Agents (0)
+  Hooks (3)  SessionStart, PreToolUse, PostCompact  (harness-only — no model context cost)
+  MCP servers (0)
+  LSP servers (0)
+
+Projected token cost
+  Always-on:   ~19 tok   added to every session
+
+Per-component (rounded)
+  component  always-on  on-invoke
+  setup           < 20        ~40
+
+  On-invoke cost is paid each time a skill or agent fires.
+  Token counts are estimates and may differ from actual usage.
+
+COMMAND 4

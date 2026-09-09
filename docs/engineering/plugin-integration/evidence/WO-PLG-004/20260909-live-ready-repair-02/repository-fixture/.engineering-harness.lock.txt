@@ -1,0 +1,175 @@
+{
+  "evaluator": {
+    "archive_name": "se_harness-0.16.0-py3-none-any.whl",
+    "archive_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "payload_manifest": "se-harness-installed-payload-v1",
+    "payload_sha256": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+    "version": "0.16.0"
+  },
+  "files": {
+    ".agents/skills/harness-operator-brief/SKILL.md": {
+      "mode": "managed",
+      "sha256": "b7502217f5aac07c4bb3bd185f52e82d47c8f12fc0f4690efcb58eb8e42e5fd3"
+    },
+    ".agents/skills/harness-operator-brief/scripts/check_brief.py": {
+      "mode": "managed",
+      "sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683"
+    },
+    ".agents/skills/harness-operator-brief/skill-contract.json": {
+      "mode": "managed",
+      "sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52"
+    },
+    ".agents/skills/harness-orient/SKILL.md": {
+      "mode": "managed",
+      "sha256": "0cf64a75e7df251d44bc9f362c31cdb606ed8582165c0309c0984c5743b253ca"
+    },
+    ".agents/skills/harness-orient/scripts/orient.py": {
+      "mode": "managed",
+      "sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56"
+    },
+    ".agents/skills/harness-orient/skill-contract.json": {
+      "mode": "managed",
+      "sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627"
+    },
+    ".claude/skills/harness-orient/SKILL.md": {
+      "mode": "managed",
+      "sha256": "8da58e3e22b3e9d7a7fc332aaf1df1fd45463b65208c3798c30b0d99d9548295"
+    },
+    ".engineering-harness.toml": {
+      "mode": "managed",
+      "sha256": "32cb360caa7aaa9e9d9b3c582db1c583dc0b84e6de07ffdee65c540a627ba3fe"
+    },
+    ".gitattributes": {
+      "mode": "fragment",
+      "sha256": "fba4cf22b45939f8c705f2a9c3bd964408b5003d0599993e72735ce865b97e3b"
+    },
+    ".github/PULL_REQUEST_TEMPLATE.md": {
+      "mode": "seed",
+      "state": "present"
+    },
+    ".github/workflows/engineering-harness.yml": {
+      "mode": "managed",
+      "sha256": "9956aa5624569c132ec8bf938789e5dea1f2a777c90a9a07fe79aa3e4c8dfc2e"
+    },
+    ".gitignore": {
+      "mode": "fragment",
+      "sha256": "1b9c8af1917e119817b7160d3afa4e7277226d187b964c318fdbb6072beeaeaa"
+    },
+    "AGENTS.md": {
+      "mode": "fragment",
+      "sha256": "864a2c3bafbc3191c778fe20402a2e983b4bece1c11103540164c06c46b4bef5"
+    },
+    "CLAUDE.md": {
+      "mode": "fragment",
+      "sha256": "459bf70b6e9b45726ebcd48c1d93b64f603e36c1d22d94d4daccc08181a59f26"
+    },
+    "ENGINEERING_HARNESS.md": {
+      "mode": "managed",
+      "sha256": "0b760848fe8320a0b240b7ffd74777dc058abe4c5957a312fecaab1d659e3f1e"
+    },
+    "GLOSSARY.md": {
+      "mode": "seed",
+      "state": "present"
+    },
+    "docs/engineering/ARTIFACT_AUTHORING.md": {
+      "mode": "managed",
+      "sha256": "8559db739e38a4a6871bea57243c98f35d1e3a27b8df2371bacee9be33fd0ace"
+    },
+    "docs/engineering/DECISION_RIGHTS.md": {
+      "mode": "managed",
+      "sha256": "cab44d7cd079fb5598f83987b15cba2cf605b241288c684b1bda4d8c82d60709"
+    },
+    "docs/engineering/OPERATING_CARD.md": {
+      "mode": "managed",
+      "sha256": "1b9f6dcd497b07f9b1658eeebea09ab915e250a69090634b8f738c59ada95baf"
+    },
+    "docs/engineering/QUALITY_GATES.json": {
+      "mode": "managed",
+      "sha256": "a7c256bb2a96c19e3e7229a3712e2577e70f711f755f83d4635db49670e4d66f"
+    },
+    "docs/engineering/QUALITY_GATES.md": {
+      "mode": "managed",
+      "sha256": "c4b1d4930d41353dbdb60c714c154426394ce6c70176f678aecf6831f920e7ee"
+    },
+    "docs/engineering/README.md": {
+      "mode": "seed",
+      "state": "present"
+    },
+    "docs/engineering/TECHNICAL_COMMUNICATION.md": {
+      "mode": "managed",
+      "sha256": "0f710e2a53f65e63e8904214531e6d8ca8c24487e7e14b9210b62a53db37c245"
+    },
+    "docs/engineering/TRACEABILITY.md": {
+      "mode": "managed",
+      "sha256": "7e3639e5ca85ac99c0bd286fcc785efb9c5c4a5085210ce3933abad3a65fd623"
+    },
+    "docs/engineering/WORKFLOW.json": {
+      "mode": "managed",
+      "sha256": "b7c63cbfd9a6075aa455c36ee3a331b6f93c1f0384057f4f74dd54a9015a6194"
+    },
+    "docs/engineering/WORKFLOW.md": {
+      "mode": "managed",
+      "sha256": "82494b587c8713a41a1b3ce00814286ad60424f664646929004eb0bc502e8ed0"
+    },
+    "docs/engineering/templates/ADR.template.md": {
+      "mode": "managed",
+      "sha256": "e93969569c4942053b177bd985552c80a724ef150ef1bac6b5bb07251a292569"
+    },
+    "docs/engineering/templates/ARCHITECTURE.template.md": {
+      "mode": "managed",
+      "sha256": "cbef4107518714c8589e56bcdd0a26c8370f0beec910a5d8d36a9b72a733264e"
+    },
+    "docs/engineering/templates/CAPABILITY.template.md": {
+      "mode": "managed",
+      "sha256": "ae839e6a46fe79f0941981d1bd1b5031c3ace642f7d4ce7a54ce5d5560392436"
+    },
+    "docs/engineering/templates/DECISION.template.md": {
+      "mode": "managed",
+      "sha256": "7eee2639aed2960b7f3537641b1a1112fa19c2901a76dbd6f994f8db3901953e"
+    },
+    "docs/engineering/templates/INTENT.template.md": {
+      "mode": "managed",
+      "sha256": "37861b9ff3caad2c971cb47d35e561a4d151ecb6c404afad8e700518fc9e094c"
+    },
+    "docs/engineering/templates/OPERATING_CONTRACT.template.md": {
+      "mode": "managed",
+      "sha256": "c43646bead3c08b0bee0cdf1326c7a95b95ceb8b9141bf0a5ac7418c48613468"
+    },
+    "docs/engineering/templates/README.md": {
+      "mode": "managed",
+      "sha256": "3426c5ca9f03435b649f25ae611984f093a188933198c75613d94d2a87d85e9e"
+    },
+    "docs/engineering/templates/RELEASE_CONTRACT.template.md": {
+      "mode": "managed",
+      "sha256": "2ea05c0c0b0ffa529c2999350609d125c584e9ad8a0c866402f9350b5213a3b6"
+    },
+    "docs/engineering/templates/RELEASE_RECORD.template.md": {
+      "mode": "managed",
+      "sha256": "24e90652e4b9582b56ec5ab28b69208a4389fbe5524d50f36e1cc0a7d827a1ff"
+    },
+    "docs/engineering/templates/REQUIREMENT.template.md": {
+      "mode": "managed",
+      "sha256": "09c88ffc221a6bce8c0ae698f1ecefa39ef91cb54de6ecbf79f18df317e249ee"
+    },
+    "docs/engineering/templates/SPECIFICATION.template.md": {
+      "mode": "managed",
+      "sha256": "66e18f26ebcbe0deb06202ae51e833ebabf2d9d71a0c6cf0842d424ef8980814"
+    },
+    "docs/engineering/templates/VERIFICATION.template.md": {
+      "mode": "managed",
+      "sha256": "ee6ca379624742dda1db745761d1e487667fcd4964cc7855e2f9267d95c4699c"
+    },
+    "docs/engineering/templates/VERIFICATION_RECORD.template.md": {
+      "mode": "managed",
+      "sha256": "5223be7b6c0c1243a7d00dcab37474fda634f110e85c891b2a87da9312fa32f5"
+    },
+    "docs/engineering/templates/WORK_ORDER.template.md": {
+      "mode": "managed",
+      "sha256": "5a271993bf90ad3eddc1e08ff0e9ff62c8876b717dd1ff402d4354e073ff1d4b"
+    }
+  },
+  "hash_algorithm": "sha256",
+  "hash_mode": "utf8-text-lf-v1",
+  "schema": 3,
+  "tool_version": "0.16.0"
+}

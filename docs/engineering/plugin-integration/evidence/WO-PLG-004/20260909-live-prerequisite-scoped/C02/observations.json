@@ -1,0 +1,191 @@
+{
+  "expected": "Actual setup entry checks the deliberately absent provided Python and reports the prerequisite.",
+  "observed": {
+    "events": [
+      {
+        "at": "2026-09-09T05:55:32.6560741Z",
+        "event": "SessionStart",
+        "source": "startup",
+        "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-prerequisite-scoped\\plugin with spaces",
+        "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\data\\verity-plane-prerequisite-probe-inline",
+        "interpreter": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-prerequisite-scoped\\absent evaluator\\python.exe",
+        "handler_invoked": false,
+        "host_output": {
+          "hookSpecificOutput": {
+            "hookEventName": "SessionStart",
+            "additionalContext": "PROBE: setup required. The selected interpreter is absent. No governance readiness is asserted."
+          }
+        }
+      },
+      {
+        "at": "2026-09-09T05:55:37.3905950Z",
+        "event": "PreToolUse",
+        "source": null,
+        "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-prerequisite-scoped\\plugin with spaces",
+        "data": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile\\plugins\\data\\verity-plane-prerequisite-probe-inline",
+        "interpreter": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\20260909-live-prerequisite-scoped\\absent evaluator\\python.exe",
+        "handler_invoked": false
+      }
+    ],
+    "selected_absent_python_exists_after": false,
+    "repository_before": {
+      "governance.txt": "7b05a805ca8bd96dfbcc88a2c636da189cb02063d62976330ce85606bf8167a9"
+    },
+    "repository_after": {
+      "governance.txt": "7b05a805ca8bd96dfbcc88a2c636da189cb02063d62976330ce85606bf8167a9"
+    },
+    "actual_result": {
+      "duration_api_ms": 7884,
+      "stop_reason": "end_turn",
+      "session_id": "1b0e6d97-fa12-4033-8aeb-b62584ed1cf9",
+      "total_cost_usd": 0.0783405,
+      "usage": {
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 6204,
+        "cache_read_input_tokens": 10661,
+        "output_tokens": 438,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 6204,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [],
+        "speed": "standard"
+      },
+      "modelUsage": {
+        "claude-opus-5[1m]": {
+          "inputTokens": 4,
+          "outputTokens": 438,
+          "cacheReadInputTokens": 10661,
+          "cacheCreationInputTokens": 6204,
+          "webSearchRequests": 0,
+          "costUSD": 0.0783405,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 64000,
+          "thinkingTokens": 0,
+          "canonicalModel": "claude-opus-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      },
+      "permission_denials": [],
+      "terminal_reason": "completed",
+      "fast_mode_state": "off",
+      "fast_mode_disabled_reason": "sdk_opt_in_required",
+      "subagent_stats": {
+        "spawned": 0,
+        "requested": {
+          "background": 0,
+          "foreground": 0,
+          "unset": 0
+        },
+        "started_in_background": 0,
+        "max_depth": 0,
+        "spawned_by_subagents": 0,
+        "completed": 0,
+        "failed": 0,
+        "killed": {
+          "parent": 0,
+          "user": 0,
+          "system": 0
+        },
+        "refused": {
+          "depth_limit": 0,
+          "concurrency_limit": 0,
+          "budget": 0
+        },
+        "by_type": {}
+      },
+      "is_error": false,
+      "num_turns": 2,
+      "subtype": "success",
+      "api_error_status": null,
+      "result": "**Prerequisite check failed.**\n\nThe selected interpreter does not exist:\n\n```\nC:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude/run-20260908-02/20260909-live-prerequisite-scoped/absent provided python/python.exe\nls: No such file or directory (exit code 2)\n```\n\n**Message to the operator:** Python 3.11+ with venv and ensurepip must be installed or supplied before plugin setup can continue.\n\nStopping here as instructed \u2014 no Python was installed, no other interpreter invoked, no environment created, no repository initialized, and no readiness is claimed. This result speaks only to the one path selected for this trial and says nothing about other Python installations on the system.",
+      "ttft_ms": 1713,
+      "type": "result",
+      "duration_ms": 9913,
+      "uuid": "ac620e75-2cb4-4bc1-a182-f0e30ebd7b16",
+      "ttft_stream_ms": 1484,
+      "time_to_request_ms": 52,
+      "first_content_frame_ms": 1484,
+      "queued_turn_count": 0
+    },
+    "old_python": "unavailable",
+    "unusable_venv_ensurepip": "unavailable",
+    "governance_readiness": false,
+    "normal_profile_before": {
+      "C:\\Users\\mathi\\.claude.json": {
+        "exists": true,
+        "size": 54102,
+        "mtime_ns": 1788932936535351600
+      },
+      "C:\\Users\\mathi\\.claude\\settings.json": {
+        "exists": true,
+        "size": 314,
+        "mtime_ns": 1788900476692578400
+      },
+      "C:\\Users\\mathi\\.claude\\.credentials.json": {
+        "exists": true,
+        "size": 8250,
+        "mtime_ns": 1788930928467948400
+      },
+      "C:\\Users\\mathi\\.claude\\plugins\\installed_plugins.json": {
+        "exists": true,
+        "size": 35,
+        "mtime_ns": 1765698833111938400
+      },
+      "C:\\Users\\mathi\\.claude\\plugins\\known_marketplaces.json": {
+        "exists": true,
+        "size": 284,
+        "mtime_ns": 1788931209066389700
+      }
+    },
+    "normal_profile_after": {
+      "C:\\Users\\mathi\\.claude.json": {
+        "exists": true,
+        "size": 54102,
+        "mtime_ns": 1788932936535351600
+      },
+      "C:\\Users\\mathi\\.claude\\settings.json": {
+        "exists": true,
+        "size": 314,
+        "mtime_ns": 1788900476692578400
+      },
+      "C:\\Users\\mathi\\.claude\\.credentials.json": {
+        "exists": true,
+        "size": 8250,
+        "mtime_ns": 1788930928467948400
+      },
+      "C:\\Users\\mathi\\.claude\\plugins\\installed_plugins.json": {
+        "exists": true,
+        "size": 35,
+        "mtime_ns": 1765698833111938400
+      },
+      "C:\\Users\\mathi\\.claude\\plugins\\known_marketplaces.json": {
+        "exists": true,
+        "size": 284,
+        "mtime_ns": 1788931209066389700
+      }
+    }
+  },
+  "conclusion": "unavailable",
+  "production_support": "unqualified",
+  "exit_status": [
+    0
+  ],
+  "host_identity_evidence": "docs/engineering/plugin-integration/evidence/WO-PLG-004/20260909-live-prerequisite-scoped/identities.json",
+  "capture_policy": "sanitized-public-v1; credential fields and sensitive diagnostic lines redacted",
+  "source_evidence": [
+    "commands.json",
+    "stdout.txt",
+    "stderr.txt"
+  ]
+}

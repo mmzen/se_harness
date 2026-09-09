@@ -1,0 +1,1 @@
+Test data only. Approved artifact statuses are controlled inputs. No real lifecycle transition, approval, or work authorization is represented.

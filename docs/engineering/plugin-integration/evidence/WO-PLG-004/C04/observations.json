@@ -1,0 +1,21 @@
+{
+  "expected": "Actual resume/compact delivers fresh governance after a change.",
+  "observed": {
+    "prior_sha256": "5e19c60105750709d74d5a2f88953853b03d0f596cdcac8026db7a9b5191e636",
+    "new_sha256": "87396f97674925dae936d3425f1b3f7ac865c7d759196e47b4db08413324690c",
+    "resume": "not executed: no authorized authenticated saved session",
+    "compact": "not executed: no authorized authenticated conversation",
+    "attempt": "bounded no-tools authentication availability trial, not resume/compact evidence"
+  },
+  "conclusion": "unavailable",
+  "production_support": "unqualified",
+  "source_evidence": [
+    "commands.json",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "exit_status": [
+    1
+  ],
+  "host_identity_evidence": "docs/engineering/plugin-integration/evidence/WO-PLG-004/identities.json"
+}

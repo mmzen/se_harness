@@ -1,0 +1,86 @@
+{
+  "purpose": "Retained operator instruction and observed application, not a separate authority mechanism",
+  "reviewed_proposal_commit": "be8b4126f6b9147dff8dec2ceaac5a79d59953f7",
+  "operator_instruction": "i approve the packets, i authorize the work",
+  "context": "The preceding handoff named the Codex and Claude probe packets and their separate starts.",
+  "selected_work_order": "WO-PLG-004",
+  "artifacts": [
+    {
+      "artifact": "REQ-PLG-007",
+      "actor_role": "requirements-steward",
+      "source_path": "docs/engineering/plugin-integration/requirements/REQ-PLG-007.md",
+      "reviewed_git_blob_sha256": "8188b1dc130ec1d4c2cd57da76a6ea8b18004566db2a21a07cabd894877fcd5f",
+      "observed_status": "approved",
+      "lifecycle_events": [
+        {
+          "from": "draft",
+          "to": "approved",
+          "decided_at": "2026-09-08T21:43:01Z",
+          "decided_by": "requirements-steward",
+          "reason": "Operator explicitly approved the Codex and Claude probe packets reviewed at be8b4126 in this Codex task: i approve the packets, i authorize the work. Record the selected definition approval only."
+        }
+      ]
+    },
+    {
+      "artifact": "SPEC-PLG-004",
+      "actor_role": "technical-owner",
+      "source_path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-004.md",
+      "reviewed_git_blob_sha256": "5ee402fb2607c1285cc04a1ec7a75218beabfd6ed30da7ad9c07ceffe50f7685",
+      "observed_status": "approved",
+      "lifecycle_events": [
+        {
+          "from": "draft",
+          "to": "approved",
+          "decided_at": "2026-09-08T21:43:01Z",
+          "decided_by": "technical-owner",
+          "reason": "Operator explicitly approved the Claude Code probe packet reviewed at be8b4126. Record the selected specification approval only."
+        }
+      ]
+    },
+    {
+      "artifact": "VER-PLG-004",
+      "actor_role": "assurance-owner",
+      "source_path": "docs/engineering/plugin-integration/verification/VER-PLG-004.md",
+      "reviewed_git_blob_sha256": "cc6eff012f3173b266b8ab5a08d234d4a1536880520960ce47febca2e8496ab6",
+      "observed_status": "approved",
+      "lifecycle_events": [
+        {
+          "from": "draft",
+          "to": "approved",
+          "decided_at": "2026-09-08T21:43:01Z",
+          "decided_by": "assurance-owner",
+          "reason": "Operator explicitly approved the Claude Code probe verification contract reviewed at be8b4126. This approves the verification plan, not any implementation result or VREC."
+        }
+      ]
+    },
+    {
+      "artifact": "WO-PLG-004",
+      "actor_role": "engineering-owner",
+      "source_path": "docs/engineering/plugin-integration/work-orders/WO-PLG-004.md",
+      "reviewed_git_blob_sha256": "3d96ec4645998f1b4749179383badf4e79d942b73f7ea08794d1ba00569836ff",
+      "observed_status": "in_progress",
+      "lifecycle_events": [
+        {
+          "from": "draft",
+          "to": "approved",
+          "decided_at": "2026-09-08T21:43:30Z",
+          "decided_by": "engineering-owner",
+          "reason": "Operator explicitly approved the Claude Code probe packet reviewed at be8b4126 and authorized its work in this Codex task. Scope and required commit-bound assurance are unchanged; start is recorded separately."
+        },
+        {
+          "from": "approved",
+          "to": "in_progress",
+          "decided_at": "2026-09-08T21:43:58Z",
+          "decided_by": "engineering-owner",
+          "reason": "Operator explicitly authorized starting the Claude Code probe work after approving its packet in this Codex task. Current start checks passed. No completion, assurance or external integration decision is inferred."
+        }
+      ]
+    }
+  ],
+  "not_authorized_by_this_record": [
+    "completion",
+    "verification of implementation",
+    "PR merge",
+    "publication"
+  ]
+}

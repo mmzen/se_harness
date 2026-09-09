@@ -1,0 +1,22 @@
+{
+  "expected": "Discover the setup skill and observe a shell guard before evaluator setup.",
+  "observed": {
+    "startup": "incompatible",
+    "events": [],
+    "resume_compact": "unavailable: no authenticated persisted conversation"
+  },
+  "conclusion": "unavailable",
+  "production_support": "unqualified",
+  "source_evidence": [
+    "commands.json",
+    "stdout.txt",
+    "stderr.txt"
+  ],
+  "exit_status": [
+    1,
+    1,
+    1,
+    0
+  ],
+  "host_identity_evidence": "docs/engineering/plugin-integration/evidence/WO-PLG-004/identities.json"
+}

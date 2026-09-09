@@ -1,0 +1,81 @@
+[
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "plugin",
+      "validate",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\inline command plugin with spaces",
+      "--json",
+      "--strict"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\disposable repository",
+    "exit": 0,
+    "timeout": false,
+    "seconds": 0.294,
+    "stdout": "{\n  \"success\": true,\n  \"strict\": true,\n  \"target\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\inline command plugin with spaces\\\\.claude-plugin\\\\plugin.json\",\n  \"manifest\": {\n    \"file\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\inline command plugin with spaces\\\\.claude-plugin\\\\plugin.json\",\n    \"type\": \"plugin\",\n    \"errors\": [],\n    \"warnings\": [],\n    \"notes\": []\n  },\n  \"contents\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "--setting-sources",
+      "user",
+      "--settings",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\inline-settings.json",
+      "--plugin-dir",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\inline command plugin with spaces",
+      "plugin",
+      "list",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\disposable repository",
+    "exit": 0,
+    "timeout": false,
+    "seconds": 0.274,
+    "stdout": "[\n  {\n    \"id\": \"verity-plane-inline-probe@inline\",\n    \"version\": \"0.0.1\",\n    \"scope\": \"session\",\n    \"enabled\": true,\n    \"installPath\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-probe-sandboxes\\\\claude\\\\run-20260908-02\\\\inline command plugin with spaces\"\n  }\n]\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "--setting-sources",
+      "user",
+      "--settings",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\inline-settings.json",
+      "--plugin-dir",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\inline command plugin with spaces",
+      "plugin",
+      "details",
+      "verity-plane-inline-probe"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\disposable repository",
+    "exit": 0,
+    "timeout": false,
+    "seconds": 0.301,
+    "stdout": "verity-plane-inline-probe 0.0.1\n  Description: Disposable observation fixture for WO-PLG-004\n  Source: verity-plane-inline-probe@inline\n\nComponent inventory\n  Skills (1)  setup\n  Agents (0)\n  Hooks (3)  SessionStart, PreToolUse, PostCompact  (harness-only \u2014 no model context cost)\n  MCP servers (0)\n  LSP servers (0)\n\nProjected token cost\n  Always-on:   ~19 tok   added to every session\n\nPer-component (rounded)\n  component  always-on  on-invoke\n  setup           < 20        ~40\n\n  On-invoke cost is paid each time a skill or agent fires.\n  Token counts are estimates and may differ from actual usage.\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "--setting-sources",
+      "user",
+      "--settings",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\inline-settings.json",
+      "--plugin-dir",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\inline command plugin with spaces",
+      "--strict-mcp-config",
+      "--mcp-config",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\empty-mcp.json",
+      "--debug-file",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\C01-missing.inline.debug.txt",
+      "--init-only"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\disposable repository",
+    "exit": 0,
+    "timeout": false,
+    "seconds": 1.462,
+    "stdout": "",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,12 @@
+COMMAND 1
+
+COMMAND 2
+error: unknown option '--json'
+
+COMMAND 3
+Error: Invalid MCP configuration:
+MCP config file not found: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\disposable repository\plugin
+MCP config file not found: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\disposable repository\details
+MCP config file not found: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\claude\run-20260908-02\disposable repository\verity-plane-probe
+
+COMMAND 4

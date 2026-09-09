@@ -1,0 +1,28 @@
++++
+id = "WO-PROBE-001"
+type = "work_order"
+title = "Observe readiness for one disposable sentinel"
+status = "approved"
+owners = ["synthetic-fixture-owner"]
+created = "2026-09-09"
+updated = "2026-09-09"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "Synthetic classification input for a disposable evaluator observation; no assurance decision is recorded."
+decided_by = "synthetic-fixture-owner"
+
+[execution_scope]
+paths = ["governed-target.txt"]
+
+[relations]
+implements = ["REQ-PROBE-001"]
+specifications = ["SPEC-PROBE-001"]
+verification = ["VER-PROBE-001"]
++++
+
+# Observe readiness for one disposable sentinel
+
+This document is controlled synthetic test data for a disposable compatibility probe.
+Its status and owner fields are input values, not recorded real-world approvals.
+It grants no authority in the source repository or any operator project.
