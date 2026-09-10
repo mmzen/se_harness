@@ -1,0 +1,137 @@
+{
+  "case": "ENV12",
+  "description": "Native discovery, command order and repository lock",
+  "passed": true,
+  "observations": {
+    "native_discovery_precedes_python_probe": true,
+    "host": "Linux",
+    "other_shell": "execute this runner on that platform; not claimed from text inspection",
+    "matching_lock_accepted": true,
+    "wrong_lock_refused_without_upgrade": true,
+    "new_plugin_executables": [],
+    "target_snapshot_unchanged": true
+  },
+  "platform": {
+    "system": "Linux",
+    "release": "6.6.87.2-microsoft-standard-WSL2",
+    "version": "#1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025",
+    "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+    "evaluator": "0.16.0",
+    "network_constraint": "Linux unshare -Urn network namespace",
+    "host_shell": "bash",
+    "live_native_plugin_activation": false,
+    "network_observation": {
+      "devices": "Inter-|   Receive                                                |  Transmit\n face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed\n    lo:       0       0    0    0    0     0          0         0        0       0    0    0    0     0       0          0\n",
+      "routes": "",
+      "external_interfaces": false
+    }
+  },
+  "expected": {
+    "archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c"
+  },
+  "duration_seconds": 31.965,
+  "commands": [
+    {
+      "argv": [
+        "<provided-python-root>/bash",
+        "-c",
+        "type -a -- '<provided-python-root>/python3'"
+      ],
+      "exit_status": 0,
+      "duration_seconds": 0.0028,
+      "stdout": "<provided-python-root>/python3 is <provided-python-root>/python3\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "<provided-python-root>/python3",
+        "-I",
+        "-S",
+        "-c",
+        "import sys\nif sys.version_info < (3, 11):\n    raise SystemExit('Install Python 3.11 or newer before plugin setup.')\ntry:\n    import venv, ensurepip\n    print('Python', sys.version.split()[0], 'venv available; pip', ensurepip.version())\nexcept (ImportError, OSError) as error:\n    raise SystemExit('Install Python venv/ensurepip support before plugin setup: ' + str(error))"
+      ],
+      "exit_status": 0,
+      "duration_seconds": 0.0441,
+      "stdout": "Python 3.12.3 venv available; pip 24.0\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "<provided-python-root>/bash",
+        "<fixture-root>/invocation-013.sh"
+      ],
+      "exit_status": 0,
+      "duration_seconds": 1.862,
+      "stdout": "Python 3.12.3 venv available; pip 24.0\nexisting: lock-matched\nEvaluator environment ready; no repository or lifecycle changes made.\n",
+      "stderr": "",
+      "document_snippet": "bash",
+      "document_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+      "selected_inputs": {
+        "SetupPython": "<provided-python-root>/python3",
+        "Repo": "<fixture-root>/target repository",
+        "Data": "<fixture-root>/persistent plugin data",
+        "EnvDir": "<fixture-root>/persistent plugin data/released evaluator",
+        "Wheel": "<wheel-root>/se_harness-0.16.0-py3-none-any.whl",
+        "Version": "0.16.0",
+        "Payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "Archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "IdentityFile": "<fixture-root>/persistent plugin data/identity-013.json"
+      },
+      "identity": {
+        "candidate_commit": null,
+        "checkout_root": "<fixture-root>/target repository",
+        "diagnostics": [],
+        "distribution_origin": "<fixture-root>/persistent plugin data/released evaluator/lib/python3.12/site-packages",
+        "entry_point_origin": "<fixture-root>/persistent plugin data/released evaluator/bin/harnessctl",
+        "evaluator_archive_name": "se_harness-0.16.0-py3-none-any.whl",
+        "evaluator_archive_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "evaluator_payload_manifest": "se-harness-installed-payload-v1",
+        "evaluator_payload_sha256": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "evaluator_wheel_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "expected_root": "<fixture-root>/persistent plugin data/released evaluator",
+        "harness_version": "0.16.0",
+        "isolated_python": true,
+        "module_origin": "<fixture-root>/persistent plugin data/released evaluator/lib/python3.12/site-packages/se_harness/runtime_identity.py",
+        "passed": true,
+        "python_binary_position": "outside-declared-roots",
+        "python_binary_sha256": "a92f0f95e883390c7256b2e441484aac06b1002dbe1d924141a77c8d82f96223",
+        "python_entry_is_link": true,
+        "python_executable": "<fixture-root>/persistent plugin data/released evaluator/bin/python",
+        "python_version": "3.12.3",
+        "pythonpath_present": false,
+        "role": "released-evaluator",
+        "schema": "se-harness-runtime-identity-v3",
+        "template_origin": "<fixture-root>/persistent plugin data/released evaluator/share/se-harness/templates/repository/standard",
+        "user_site_enabled": false
+      },
+      "repository_unchanged": true,
+      "parent_path_unchanged": true
+    },
+    {
+      "argv": [
+        "<provided-python-root>/bash",
+        "<fixture-root>/invocation-014.sh"
+      ],
+      "exit_status": 1,
+      "duration_seconds": 0.1166,
+      "stdout": "Python 3.12.3 venv available; pip 24.0\n",
+      "stderr": "Repository lock requires a different evaluator; do not upgrade it here.\n",
+      "document_snippet": "bash",
+      "document_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+      "selected_inputs": {
+        "SetupPython": "<provided-python-root>/python3",
+        "Repo": "<fixture-root>/target repository",
+        "Data": "<fixture-root>/persistent plugin data",
+        "EnvDir": "<fixture-root>/persistent plugin data/released evaluator",
+        "Wheel": "<wheel-root>/se_harness-0.16.0-py3-none-any.whl",
+        "Version": "0.16.0",
+        "Payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "Archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "IdentityFile": "<fixture-root>/persistent plugin data/identity-014.json"
+      },
+      "repository_unchanged": true,
+      "parent_path_unchanged": true
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "case": "ENV05",
+  "description": "Installed runtime version mismatch",
+  "passed": true,
+  "observations": {
+    "ready": false,
+    "version_fixture": "changed installed runtime version; original restored",
+    "diagnostic_codes": [
+      "RID002",
+      "RID019",
+      "RID021"
+    ]
+  },
+  "platform": {
+    "system": "Windows",
+    "release": "10",
+    "version": "10.0.26200",
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "evaluator": "0.16.0",
+    "network_constraint": "Codex sandbox network restriction; offline pip flags",
+    "host_shell": "pwsh.EXE",
+    "live_native_plugin_activation": false
+  },
+  "expected": {
+    "archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c"
+  },
+  "duration_seconds": 1.219,
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.EXE",
+        "-NoProfile",
+        "-NonInteractive",
+        "-File",
+        "<fixture-root>\\invocation-005.ps1"
+      ],
+      "exit_status": 1,
+      "duration_seconds": 1.219,
+      "stdout": "Python 3.11.9 venv available; pip 24.0\r\nexisting: uninitialized; tool setup only\r\n",
+      "stderr": "Exception: <fixture-root>\\invocation-005.ps1:115\r\nLine |\r\n 115 |  … it -ne 0) { throw 'Released evaluator identity refused; retain the ob …\r\n     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Released evaluator identity refused; retain the observation.\r\n",
+      "document_snippet": "powershell",
+      "document_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+      "selected_inputs": {
+        "SetupPython": "<provided-python-root>\\python.exe",
+        "Repo": "<fixture-root>\\target repository",
+        "Data": "<fixture-root>\\persistent plugin data",
+        "EnvDir": "<fixture-root>\\persistent plugin data\\released evaluator",
+        "Wheel": "<wheel-root>\\se_harness-0.16.0-py3-none-any.whl",
+        "Version": "0.16.0",
+        "Payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "Archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "IdentityFile": "<fixture-root>\\persistent plugin data\\identity-005.json"
+      },
+      "identity": {
+        "candidate_commit": null,
+        "checkout_root": "<fixture-root>\\target repository",
+        "diagnostics": [
+          {
+            "code": "RID002",
+            "message": "resolved '0.0.0-fixture'; expected '0.16.0'",
+            "subject": "harness_version"
+          },
+          {
+            "code": "RID019",
+            "message": "installed payload identity failed: installed evaluator PEP 610 wheel name is inconsistent with its version",
+            "subject": "evaluator_payload"
+          },
+          {
+            "code": "RID021",
+            "message": "installed payload digest differs from the expected evaluator payload",
+            "subject": "evaluator_payload_sha256"
+          }
+        ],
+        "distribution_origin": "<fixture-root>\\persistent plugin data\\released evaluator\\Lib\\site-packages",
+        "entry_point_origin": "<fixture-root>\\persistent plugin data\\released evaluator\\Scripts\\harnessctl.exe",
+        "evaluator_archive_name": null,
+        "evaluator_archive_sha256": null,
+        "evaluator_payload_manifest": null,
+        "evaluator_payload_sha256": null,
+        "evaluator_wheel_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "expected_root": "<fixture-root>\\persistent plugin data\\released evaluator",
+        "harness_version": "0.0.0-fixture",
+        "isolated_python": true,
+        "module_origin": "<fixture-root>\\persistent plugin data\\released evaluator\\Lib\\site-packages\\se_harness\\runtime_identity.py",
+        "passed": false,
+        "python_binary_position": "within-expected-root",
+        "python_binary_sha256": "21bb438c0d4a6f1f164b9a646f6ee000340185e5871180aec06db8d3f07c0082",
+        "python_entry_is_link": false,
+        "python_executable": "<fixture-root>\\persistent plugin data\\released evaluator\\Scripts\\python.exe",
+        "python_version": "3.11.9",
+        "pythonpath_present": false,
+        "role": "released-evaluator",
+        "schema": "se-harness-runtime-identity-v3",
+        "template_origin": "<fixture-root>\\persistent plugin data\\released evaluator\\share\\se-harness\\templates\\repository\\standard",
+        "user_site_enabled": false
+      },
+      "repository_unchanged": true,
+      "parent_path_unchanged": true
+    }
+  ]
+}

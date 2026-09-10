@@ -1,0 +1,78 @@
+{
+  "case": "ENV03",
+  "description": "Interrupted installation remains unavailable",
+  "passed": true,
+  "observations": {
+    "interruption_point": "environment created; pip/evaluator installation has not run",
+    "ready": false,
+    "retained_partial_files": [
+      "Scripts/Activate.ps1",
+      "Scripts/activate",
+      "Scripts/activate.bat",
+      "Scripts/deactivate.bat",
+      "Scripts/python.exe",
+      "Scripts/pythonw.exe",
+      "pyvenv.cfg"
+    ],
+    "repair_attempted": false
+  },
+  "platform": {
+    "system": "Windows",
+    "release": "10",
+    "version": "10.0.26200",
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "evaluator": "0.16.0",
+    "network_constraint": "Codex sandbox network restriction; offline pip flags",
+    "host_shell": "pwsh.EXE",
+    "live_native_plugin_activation": false
+  },
+  "expected": {
+    "archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c"
+  },
+  "duration_seconds": 1.016,
+  "commands": [
+    {
+      "argv": [
+        "<provided-python-root>\\python.exe",
+        "-I",
+        "-m",
+        "venv",
+        "--without-pip",
+        "<fixture-root>\\persistent plugin data\\interrupted environment"
+      ],
+      "exit_status": 0,
+      "duration_seconds": 0.141,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.EXE",
+        "-NoProfile",
+        "-NonInteractive",
+        "-File",
+        "<fixture-root>\\invocation-003.ps1"
+      ],
+      "exit_status": 1,
+      "duration_seconds": 0.829,
+      "stdout": "Python 3.11.9 venv available; pip 24.0\r\nexisting: uninitialized; tool setup only\r\n",
+      "stderr": "Incomplete environment; retain it and use a fresh location for an authorized retry.\r\nException: <fixture-root>\\invocation-003.ps1:111\r\nLine |\r\n 111 |  if ($LASTEXITCODE -ne 0) { throw 'Environment entry point refused.' }\r\n     |                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Environment entry point refused.\r\n",
+      "document_snippet": "powershell",
+      "document_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+      "selected_inputs": {
+        "SetupPython": "<provided-python-root>\\python.exe",
+        "Repo": "<fixture-root>\\target repository",
+        "Data": "<fixture-root>\\persistent plugin data",
+        "EnvDir": "<fixture-root>\\persistent plugin data\\interrupted environment",
+        "Wheel": "<wheel-root>\\se_harness-0.16.0-py3-none-any.whl",
+        "Version": "0.16.0",
+        "Payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "Archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "IdentityFile": "<fixture-root>\\persistent plugin data\\identity-003.json"
+      },
+      "repository_unchanged": true,
+      "parent_path_unchanged": true
+    }
+  ]
+}

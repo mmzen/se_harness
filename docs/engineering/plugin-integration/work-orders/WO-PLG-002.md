@@ -2,10 +2,10 @@
 id = "WO-PLG-002"
 type = "work_order"
 title = "Document and verify first private environment setup"
-status = "draft"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
-updated = "2026-09-08"
+updated = "2026-09-10"
 
 [assurance]
 commit_bound_verification = "required"
@@ -31,15 +31,38 @@ implements = ["REQ-PLG-003","REQ-PLG-004","REQ-PLG-005"]
 specifications = ["SPEC-PLG-002"]
 verification = ["VER-PLG-002"]
 architecture = ["ARCH-PLG-001", "ADR-PLG-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-09T20:19:31Z"
+decided_by = "engineering-owner"
+reason = "The operator explicitly selected and authorized WO-PLG-002 in this task on 2026-09-09: \"you can start WO-PLG-002\". The previously approved plugin packet and this instruction authorize its bounded setup-skill implementation and disposable-fixture tests. Record only this work-order approval; no completion, assurance, release or merge decision is inferred."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-09T20:20:40Z"
+decided_by = "engineering-owner"
+reason = "The operator explicitly selected and authorized WO-PLG-002 in this task on 2026-09-09: \"you can start WO-PLG-002\". The previously approved plugin packet and this instruction authorize its bounded setup-skill implementation and disposable-fixture tests. Record only this work-order start; no completion, assurance, release or merge decision is inferred."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-10T05:29:16Z"
+decided_by = "engineering-owner"
+reason = "Operator explicitly stated in this Codex task on 2026-09-10: \"you can mark as implemented and create the verification record\". Record the engineering-owner completion decision for the selected WO-PLG-002 after delivery of its setup skill, four focused tests, ENV01-ENV12 on three reported configurations and passing hosted checks. The retained Windows cleanup failure and unqualified Linux Python 3.11 and macOS coverage remain disclosed; this is not a waiver or a claim that those checks passed. The operator separately authorizes preparing one ready verification record. No assurance, release or merge decision is inferred."
 +++
 
 # Work Order: Document and verify first private environment setup
 
 ## Lifecycle
 
-Draft only: this proposes scope and assurance classification, not authorization.
-The engineering owner decides approval and start under existing rules.
-No execution delegation is proposed; later verification needs a commit-bound record.
+The operator approved and started this work order on 2026-09-09: "you can start
+WO-PLG-002". On 2026-09-10, the operator explicitly authorized completion and
+preparation of the verification record. The released evaluator recorded the
+work order as implemented. There is no execution delegation. The assurance
+decision on the later commit-bound verification record remains separate.
 
 ## Objective
 

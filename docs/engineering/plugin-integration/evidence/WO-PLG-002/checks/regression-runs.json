@@ -1,0 +1,40 @@
+{
+  "candidate": "ad9cb2cba0f9168a3f2b63f62d2d63a19a548578",
+  "baseline": "3143613ec2f7aa4ffcfca301db0a2a1dab01ab51",
+  "full_suite_command": [
+    "python",
+    "-B",
+    "-S",
+    "scripts/run_tests.py",
+    "--workers",
+    "4"
+  ],
+  "full_suite": {
+    "tests": 1126,
+    "errors": 1,
+    "skips": 23
+  },
+  "baseline_command": [
+    "python",
+    "-B",
+    "-S",
+    "-m",
+    "unittest",
+    "tests.test_artifact_authoring.IdentifierAllocationTests.test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref",
+    "-v"
+  ],
+  "baseline_result": "Same WinError 5 deleting a read-only Git object on unchanged main.",
+  "records": {
+    "full-suite.txt": {
+      "original_sha256": "bde01f9ea5059c2975c829313740eaa098343abb084cc5d2d4315a4fdcd9c668",
+      "exit_status": 1,
+      "normalization": "candidate, baseline and user path prefixes replaced; LF line endings; original retained in local control directory"
+    },
+    "baseline-failure.txt": {
+      "original_sha256": "ea18193de335dc66141c7677791e353c1c117583eccc329264424b0d8b3f1c16",
+      "exit_status": 1,
+      "normalization": "candidate, baseline and user path prefixes replaced; LF line endings; original retained in local control directory"
+    }
+  },
+  "exception_approved": false
+}

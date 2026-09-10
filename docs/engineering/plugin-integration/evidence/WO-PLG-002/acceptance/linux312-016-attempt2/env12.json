@@ -1,0 +1,53 @@
+{
+  "case": "ENV12",
+  "description": "Native discovery, command order and repository lock",
+  "passed": false,
+  "failure": "",
+  "traceback": "Traceback (most recent call last):\n  File \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-environment/tests/plugin_integration/environment_setup/run_acceptance.py\", line 186, in run_case\n    facts = method()\n            ^^^^^^^^\n  File \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-environment/tests/plugin_integration/environment_setup/run_acceptance.py\", line 363, in env12\n    assert prerequisites[\"exit_status\"] == 0\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "platform": {
+    "system": "Linux",
+    "release": "6.6.87.2-microsoft-standard-WSL2",
+    "version": "#1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025",
+    "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+    "evaluator": "0.16.0",
+    "network_constraint": "Linux unshare -Urn network namespace",
+    "host_shell": "bash",
+    "live_native_plugin_activation": false,
+    "network_observation": {
+      "devices": "Inter-|   Receive                                                |  Transmit\n face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed\n    lo:       0       0    0    0    0     0          0         0        0       0    0    0    0     0       0          0\n",
+      "routes": "",
+      "external_interfaces": false
+    }
+  },
+  "expected": {
+    "archive": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "payload": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c"
+  },
+  "duration_seconds": 0.0603,
+  "commands": [
+    {
+      "argv": [
+        "<provided-python-root>/bash",
+        "-c",
+        "type -a -- '<provided-python-root>/python3'"
+      ],
+      "exit_status": 0,
+      "duration_seconds": 0.0036,
+      "stdout": "<provided-python-root>/python3 is <provided-python-root>/python3\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "<provided-python-root>/python3",
+        "-I",
+        "-S",
+        "-c",
+        "import sys\nif sys.version_info < (3, 11):\n    raise SystemExit('Install Python 3.11 or newer before plugin setup.')\ntry:\n    import venv, ensurepip\n    from importlib.resources import files\n    bundled = list(files('ensurepip').joinpath('_bundled').iterdir())\n    if not any(p.name.startswith('pip-') and p.name.endswith('.whl') for p in bundled):\n        raise ImportError('bundled pip unavailable')\n    print('Python', sys.version.split()[0], 'venv available; pip', ensurepip.version())\nexcept (ImportError, OSError) as error:\n    raise SystemExit('Install Python venv/ensurepip support before plugin setup: ' + str(error))"
+      ],
+      "exit_status": 1,
+      "duration_seconds": 0.0547,
+      "stdout": "",
+      "stderr": "Install Python venv/ensurepip support before plugin setup: [Errno 2] No such file or directory: '/usr/lib/python3.12/ensurepip/_bundled'\n"
+    }
+  ]
+}

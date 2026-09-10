@@ -1,0 +1,24 @@
+test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref (tests.test_artifact_authoring.IdentifierAllocationTests.test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref) ... ERROR
+
+======================================================================
+ERROR: test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref (tests.test_artifact_authoring.IdentifierAllocationTests.test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<baseline-root>\tests\test_artifact_authoring.py", line 313, in test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref
+    shutil.rmtree(self.root / ".git")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<user-root>\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "<user-root>\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<user-root>\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 5] Acc�s refus�: '<user-root>\\AppData\\Local\\Temp\\tmp2sumyb8p\\.git\\objects\\04\\e1206c9e14aa0f1a1e753b6f612c0dc862675c'
+
+----------------------------------------------------------------------
+Ran 1 test in 1.497s
+
+FAILED (errors=1)

@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "C:/Users/mathi/AppData/Local/Python/pythoncore-3.11-64/python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/plugin_integration/environment_setup",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-environment",
+  "exit_status": 0,
+  "started_at": "2026-09-09T20:39:57.463430+00:00",
+  "duration_seconds": 1.082
+}

@@ -1,0 +1,111 @@
+{
+  "case": "ENV02",
+  "description": "Missing or unsupported Python prerequisites",
+  "passed": true,
+  "observations": [
+    {
+      "variant": "missing Python executable",
+      "blocked": true,
+      "fixture": "real absent path"
+    },
+    {
+      "variant": "Python below 3.11",
+      "blocked": true,
+      "fixture": "isolated prerequisite-failure injection; no old/broken interpreter installed"
+    },
+    {
+      "variant": "missing venv",
+      "blocked": true,
+      "fixture": "isolated prerequisite-failure injection; no old/broken interpreter installed"
+    },
+    {
+      "variant": "missing ensurepip",
+      "blocked": true,
+      "fixture": "isolated prerequisite-failure injection; no old/broken interpreter installed"
+    }
+  ],
+  "platform": {
+    "system": "Windows",
+    "release": "11",
+    "version": "10.0.26200",
+    "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "evaluator": "0.17.0",
+    "network_constraint": "Codex sandbox network restriction; offline pip flags",
+    "host_shell": "pwsh.EXE",
+    "live_native_plugin_activation": false
+  },
+  "expected": {
+    "archive": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+    "payload": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405"
+  },
+  "duration_seconds": 2.9127,
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.EXE",
+        "-NoProfile",
+        "-NonInteractive",
+        "-File",
+        "<fixture-root>\\invocation-002.ps1"
+      ],
+      "exit_status": 1,
+      "duration_seconds": 0.5428,
+      "stdout": "",
+      "stderr": "Exception: <fixture-root>\\invocation-002.ps1:90\r\nLine |\r\n  90 |      throw 'Select an installed Python 3.11+ executable before plugin  …\r\n     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Select an installed Python 3.11+ executable before plugin setup.\r\n",
+      "document_snippet": "powershell",
+      "document_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+      "selected_inputs": {
+        "SetupPython": "<fixture-root>\\persistent plugin data\\no-python",
+        "Repo": "<fixture-root>\\target repository",
+        "Data": "<fixture-root>\\persistent plugin data",
+        "EnvDir": "<fixture-root>\\persistent plugin data\\missing-python-env",
+        "Wheel": "<wheel-root>\\se_harness-0.17.0-py3-none-any.whl",
+        "Version": "0.17.0",
+        "Payload": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405",
+        "Archive": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+        "IdentityFile": "<fixture-root>\\persistent plugin data\\identity-002.json"
+      },
+      "repository_unchanged": true,
+      "parent_path_unchanged": true
+    },
+    {
+      "argv": [
+        "<provided-python-root>\\python.exe",
+        "-I",
+        "-S",
+        "-c",
+        "import sys; sys.version_info=(3,10,0)\nimport sys\nif sys.version_info < (3, 11):\n    raise SystemExit('Install Python 3.11 or newer before plugin setup.')\ntry:\n    import venv, ensurepip\n    print('Python', sys.version.split()[0], 'venv available; pip', ensurepip.version())\nexcept (ImportError, OSError) as error:\n    raise SystemExit('Install Python venv/ensurepip support before plugin setup: ' + str(error))"
+      ],
+      "exit_status": 1,
+      "duration_seconds": 0.0316,
+      "stdout": "",
+      "stderr": "Install Python 3.11 or newer before plugin setup.\r\n"
+    },
+    {
+      "argv": [
+        "<provided-python-root>\\python.exe",
+        "-I",
+        "-S",
+        "-c",
+        "import sys; sys.modules['venv']=None\nimport sys\nif sys.version_info < (3, 11):\n    raise SystemExit('Install Python 3.11 or newer before plugin setup.')\ntry:\n    import venv, ensurepip\n    print('Python', sys.version.split()[0], 'venv available; pip', ensurepip.version())\nexcept (ImportError, OSError) as error:\n    raise SystemExit('Install Python venv/ensurepip support before plugin setup: ' + str(error))"
+      ],
+      "exit_status": 1,
+      "duration_seconds": 0.0307,
+      "stdout": "",
+      "stderr": "Install Python venv/ensurepip support before plugin setup: import of venv halted; None in sys.modules\r\n"
+    },
+    {
+      "argv": [
+        "<provided-python-root>\\python.exe",
+        "-I",
+        "-S",
+        "-c",
+        "import sys; sys.modules['ensurepip']=None\nimport sys\nif sys.version_info < (3, 11):\n    raise SystemExit('Install Python 3.11 or newer before plugin setup.')\ntry:\n    import venv, ensurepip\n    print('Python', sys.version.split()[0], 'venv available; pip', ensurepip.version())\nexcept (ImportError, OSError) as error:\n    raise SystemExit('Install Python venv/ensurepip support before plugin setup: ' + str(error))"
+      ],
+      "exit_status": 1,
+      "duration_seconds": 0.1389,
+      "stdout": "",
+      "stderr": "Install Python venv/ensurepip support before plugin setup: import of ensurepip halted; None in sys.modules\r\n"
+    }
+  ]
+}

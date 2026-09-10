@@ -1,0 +1,500 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-PLG-002",
+    "artifacts": [
+      "WO-PLG-002"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-PLG-001",
+      "ARCH-PLG-001",
+      "CAP-DST-001",
+      "INT-DST-001",
+      "REQ-PLG-003",
+      "REQ-PLG-004",
+      "REQ-PLG-005",
+      "SPEC-PLG-002",
+      "VER-PLG-002"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-003.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-004.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-005.md",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-002.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-002.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-002.md",
+      "plugins/verity-plane/common/skills/setup/references/environment.md",
+      "plugins/verity-plane/common/skills/setup/SKILL.md",
+      "tests/plugin_integration/environment_setup/"
+    ],
+    "changed_paths": [
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt1/executed-reference.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt1/executed-runner.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt2/env01.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt2/env02.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt2/env03.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt2/env04.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt2/env05.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt2/env06.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt2/env07.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt2/env08.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt2/env09.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt2/env10.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt2/env11.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt2/env12.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt2/executed-reference.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt2/executed-runner.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt2/inputs.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt2/summary.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt3/env01-diff.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt3/env01.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt3/env02.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt3/env03.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt3/env04.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt3/env05.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt3/env06.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt3/env07.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt3/env08.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt3/env09.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt3/env10.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt3/env11.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt3/env12.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt3/executed-reference.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt3/executed-runner.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt3/inputs.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/linux312-016-attempt3/summary.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt1/env01.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt1/env02.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt1/env03.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt1/env04.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt1/env05.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt1/env06.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt1/env07.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt1/env08.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt1/env09.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt1/env10.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt1/env11.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt1/env12.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt1/inputs.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt1/summary.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt2/env01-diff.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt2/env01.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt2/env02.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt2/env03.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt2/env04.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt2/env05.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt2/env06.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt2/env07.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt2/env08.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt2/env09.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt2/env10.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt2/env11.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt2/env12.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt2/executed-reference.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt2/executed-runner.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt2/inputs.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt2/summary.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt3/env01-diff.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt3/env01.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt3/env02.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt3/env03.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt3/env04.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt3/env05.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt3/env06.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt3/env07.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt3/env08.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt3/env09.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt3/env10.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt3/env11.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt3/env12.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt3/executed-reference.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt3/executed-runner.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt3/inputs.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win311-016-attempt3/summary.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt1/env01-diff.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt1/env01.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt1/env02.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt1/env03.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt1/env04.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt1/env05.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt1/env06.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt1/env07.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt1/env08.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt1/env09.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt1/env10.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt1/env11.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt1/env12.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt1/executed-reference.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt1/executed-runner.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt1/inputs.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt1/summary.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt2/env01-diff.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt2/env01.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt2/env02.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt2/env03.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt2/env04.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt2/env05.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt2/env06.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt2/env07.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt2/env08.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt2/env09.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt2/env10.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt2/env11.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt2/env12.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt2/executed-reference.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt2/executed-runner.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt2/inputs.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/acceptance/win314-017-attempt2/summary.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/checks/baseline-failure.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/checks/candidate-help/command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/checks/candidate-help/stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/checks/candidate-help/stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/checks/focused-tests/command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/checks/focused-tests/stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/checks/focused-tests/stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/checks/full-suite.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/checks/regression-runs.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/checks/release-distributions/command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/checks/release-distributions/stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/checks/release-distributions/stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/checks/skill-validation/command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/checks/skill-validation/stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/checks/skill-validation/stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-approved-applied.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-approved-applied.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-approved-plan.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-approved-plan.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-final-doctor.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-final-doctor.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-final-validate.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-final-validate.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-handoff-check.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-handoff-check.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-handoff-packet.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-handoff-packet.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-in_progress-applied.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-in_progress-applied.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-in_progress-plan.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-in_progress-plan.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-review-preflight.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-review-preflight.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-start-precheck.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-start-precheck.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-start-preflight.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/env-start-preflight.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/governance/operator-authorization.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/handoff.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/README.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-002/WO-PLG-002-handoff.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-002.md",
+      "plugins/verity-plane/common/skills/setup/references/environment.md",
+      "plugins/verity-plane/common/skills/setup/SKILL.md",
+      "tests/plugin_integration/environment_setup/README.md",
+      "tests/plugin_integration/environment_setup/run_acceptance.py",
+      "tests/plugin_integration/environment_setup/test_document_checks.py"
+    ],
+    "change_set_complete": true
+  },
+  "compliance": {
+    "checkpoint": "handoff",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT",
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4I-STATUS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-PLG-002"
+              }
+            ],
+            "message": "WO-PLG-002 status is in_progress."
+          },
+          {
+            "id": "QGP-G4I-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-PLG-002"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G4I-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G4I-SCOPE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-PLG-002:[execution_scope]"
+              }
+            ],
+            "message": "WO-PLG-002 declares 10 normalized scope path(s)."
+          },
+          {
+            "id": "QGP-G4I-COMPLETE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-PLG-002"
+              }
+            ],
+            "message": "The caller explicitly asserted that the declared change set is complete."
+          },
+          {
+            "id": "QGP-G4I-PATHS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-PLG-002"
+              }
+            ],
+            "message": "All 164 declared changed path(s) are within execution scope."
+          },
+          {
+            "id": "QGP-G4I-PREFLIGHT",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-PLG-002:review"
+              }
+            ],
+            "message": "Released-installation review preflight inputs are ready."
+          },
+          {
+            "id": "QGP-G4I-EVIDENCE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-PLG-002"
+              }
+            ],
+            "message": "Fresh retained evidence is bound at docs/engineering/plugin-integration/evidence/WO-PLG-002/WO-PLG-002-handoff.md."
+          },
+          {
+            "id": "QGP-G4I-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-PLG-002"
+              }
+            ],
+            "message": "No open decision blocks WO-PLG-002."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "e07d25b34c84a62255aa82c2c2463ae0a23dde2d794af47c88f11bab1d54d12f",
+    "change_set_source": "git"
+  },
+  "procedure": {
+    "id": "PROC-WO-IMPLEMENT",
+    "current_step": "STEP-WO-IMPLEMENT-DECIDE",
+    "steps": [
+      {
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "Evaluated implementation handoff for WO-PLG-002."
+        ],
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-PLG-002",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-START"
+          },
+          "QGP-G4I-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G4I-COMPLETE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-PLG-002",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ]
+          },
+          "QGP-G4I-PATHS": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-PLG-002",
+              "--phase",
+              "review"
+            ]
+          },
+          "QGP-G4I-EVIDENCE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-PLG-002",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "QGP-G4I-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-IMPLEMENT-DECIDE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "An explicit completion decision permits only WO-PLG-002 to become implemented."
+        ],
+        "non_effects": [
+          "Completion does not verify or release the work."
+        ],
+        "decision_right": "DR-WO-COMPLETE",
+        "role": "engineering-owner",
+        "artifact": "WO-PLG-002",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "response": "Mark WO-PLG-002 implemented."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-PLG-002",
+        "status": "in_progress"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-PLG-002",
+        "status": "in_progress"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 46
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "WO-PLG-002",
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-002/handoff.json",
+        "fields": [
+          "result_sha256"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated handoff compliance for WO-PLG-002."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-PLG-002 is in_progress."
+    ],
+    "decision_required": {
+      "decision_right": "DR-WO-COMPLETE",
+      "role": "engineering-owner",
+      "artifact": "WO-PLG-002",
+      "decision": "whether the authorized implementation and evidence are complete",
+      "outcomes": [
+        "implemented",
+        "continue",
+        "reject"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-DECIDE",
+      "action": "whether the authorized implementation and evidence are complete"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Mark WO-PLG-002 implemented."
+    },
+    "alternatives": []
+  },
+  "result_sha256": "ef4484e7ce8c78965d0e08d5d8249d139846070afadc620183064003ee6b5be3"
+}
