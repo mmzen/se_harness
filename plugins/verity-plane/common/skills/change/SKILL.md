@@ -47,10 +47,12 @@ An unchecked next step supplies no decision. These references route to
 replace those contracts nor authenticate their inputs.
 
 Continue covered work without another skill invocation or duplicate approval.
-If an operation is interrupted, inspect current files and checkpoint-free
-`check --artifact ID` before retrying. Compare with its plan and retained result;
-resume only unapplied effects. An uncertain write is a blocker, not permission
-to replay the operation or overwrite its output.
+If an operation is interrupted, inspect current files and lifecycle history
+before retrying. For a WO, VREC, RLS or DEC, also use checkpoint-free
+`check --artifact ID`; that command does not accept definition artifacts.
+Compare the readback with the plan and retained result; resume only unapplied
+effects. An uncertain write is a blocker, not permission to replay the
+operation or overwrite its output.
 
 At a stop or stage handoff, obtain the selected schema-2 result. Report actual
 effects, final state, blocker or accountable decision, and its one typed next

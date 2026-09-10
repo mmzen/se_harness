@@ -31,9 +31,12 @@ No implementation begins from a preview alone.
 
 Once start is applied, continue edits and ordinary commits within the approved
 WO without asking for its approval again. Compare every proposed edit with
-both its behavioral scope and declared paths. Evaluate the installed scope and
-pre-action checkpoints for the chosen procedure; include the complete actual
-change set. A path allowed by a directory prefix does not authorize unrelated
+both its behavioral scope and declared paths. Use the `scope` checkpoint with
+the complete change set, including intended paths before an edit. Use
+`pre-action` when the selected procedure calls for it; do not introduce
+`pre-action --procedure PROC-WO-IMPLEMENT` as a new gate before every edit.
+That checkpoint requires evidence and is not a replacement for edit-scope
+validation. A path allowed by a directory prefix does not authorize unrelated
 behavior. Stop an out-of-scope action before invoking its editing tool.
 
 Run the selected verification contract and repository checks. Retain actual
