@@ -18,6 +18,8 @@ paths = [
   "tests/plugin_integration/tool_action/",
   "docs/engineering/plugin-integration/work-orders/WO-PLG-008.md",
   "docs/engineering/plugin-integration/evidence/WO-PLG-008/",
+  "docs/engineering/plugin-integration/verification-records/VREC-PLG-006.md",
+  "docs/engineering/plugin-integration/evidence/VREC-PLG-006-evaluator.json",
   "docs/engineering/plugin-integration/requirements/REQ-PLG-013.md",
   "docs/engineering/plugin-integration/requirements/REQ-PLG-014.md",
   "docs/engineering/plugin-integration/specifications/SPEC-PLG-008.md",

@@ -1,0 +1,22 @@
+{
+  "operator_statement": "prepare verification record for both work orders",
+  "date": "2026-09-10",
+  "actor": "engineering-owner",
+  "work_order": "WO-PLG-008",
+  "record_to_prepare": "VREC-PLG-006",
+  "verification_contract": "VER-PLG-008",
+  "verification_contract_sha256": "4af301690279b65a5296dedc094aad7a54b404af15280d818b8a9c3a696fabad",
+  "record_status_to_create": "ready",
+  "scope_addition": [
+    "docs/engineering/plugin-integration/verification-records/VREC-PLG-006.md",
+    "docs/engineering/plugin-integration/evidence/VREC-PLG-006-evaluator.json"
+  ],
+  "evidence_selection": "Every retained file under this WO evidence directory except the mutable implementation handoff JSON and Markdown; include all original failed attempts and later passing observations.",
+  "candidate_selection": "Clean committed implementation, completion decision and these preparation inputs, immediately before capture.",
+  "reserved": [
+    "assurance verification",
+    "release",
+    "PR merge"
+  ],
+  "id_check": "No VREC with this ID in history across all fetched refs."
+}
