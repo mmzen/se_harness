@@ -2,7 +2,7 @@
 id = "WO-PLG-017"
 type = "work_order"
 title = "Portable retention of evidence-skill test output"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-10"
 updated = "2026-09-10"
@@ -41,6 +41,13 @@ to = "approved"
 decided_at = "2026-09-10T21:12:46Z"
 decided_by = "engineering-owner"
 reason = "The operator explicitly answered \"Approve WO-PLG-017 and authorize the repair\" to the reviewed PR #447 proposal on 2026-09-10. Record DR-REMEDIATION-SCOPE and DR-WO-SELECT under engineering-owner for only WO-PLG-017. Approval of its execution delegation permits the bounded delegated route after the approved class exists at the configured base and the live exact-head required check succeeds. It does not approve an aggregate VREC, assurance, supersession, integration or merge."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-10T21:21:16Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at ed19676fd2af8b9754f74cbc6bc8664a92d2f803 (check-run 103052409603, source github-checks)."
 +++
 
 # Work Order: Portable retention of evidence-skill test output
