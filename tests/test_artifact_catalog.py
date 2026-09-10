@@ -107,6 +107,19 @@ class ArtifactCatalogTests(unittest.TestCase):
             REPOSITORY_ROOT
             / "templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md"
         ).read_text(encoding="utf-8")
+        # WO-DST-027 (SPEC-DST-028 DST-TPL-004, DST-TPL-006): the candidate template carries
+        # guidance under "Completion report format"; a root released before it (0.17.0)
+        # lacks exactly that paragraph, declared here; a root released with it takes the
+        # branches below unchanged.
+        completion_guidance = (
+            "\nState what the report carries. The completion decision follows from the\n"
+            "front matter, not from this section: it is the engineering owner's, or the\n"
+            "`delegated-executor`'s under `[delegation] class = \"execution\"` while the\n"
+            "required pull-request check is `success`.\n"
+        )
+        self.assertIn(completion_guidance, candidate_work_order)
+        if completion_guidance not in released_work_order:
+            candidate_work_order = candidate_work_order.replace(completion_guidance, "", 1)
         delegation_block = '''# Optional. Delete this entire table when no agentic delegation is intended.
 [agentic_delegation]
 schema = "se-harness-agentic-delegation-v1"
@@ -177,6 +190,26 @@ envelope from fresh live state for each request.
         candidate_traceability = (
             REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/TRACEABILITY.md"
         ).read_text(encoding="utf-8")
+        # WO-DST-027 (SPEC-DST-028 DST-TPL-001 to DST-TPL-003, DST-TPL-006): the candidate
+        # rewrites TRC-008 for the retired relation; a root released before it (0.17.0)
+        # carries the compatibility-only reading, declared here; a root released with the
+        # rewrite takes the branches below unchanged.
+        retired_rule = (
+            "`TRC-008` - `ARCH.constrains` is retired. A validator MUST refuse every\n"
+            "`constrains` relation with `E016`, whatever the architecture's status; it\n"
+            "classifies no historical relation and reports no migration. `ARCH.addresses`\n"
+            "and `ARCH.conforms_to` are the only form. Installation and upgrade MUST NOT\n"
+            "rewrite repository-owned artifacts.\n"
+        )
+        compatibility_rule = (
+            "`TRC-008` - `ARCH.constrains` is compatibility-only. A validator MAY classify\n"
+            "an unambiguous completed historical relation and MUST report the migration. It\n"
+            "MUST reject a mixed or ambiguous target set. Installation and upgrade MUST NOT\n"
+            "rewrite repository-owned artifacts.\n"
+        )
+        self.assertIn(retired_rule, candidate_traceability)
+        if compatibility_rule in released_traceability:
+            candidate_traceability = candidate_traceability.replace(retired_rule, compatibility_rule, 1)
         # WO-DCM-001 (SPEC-DCM-001): the candidate TRACEABILITY.md adds the decision
         # artifact's catalog row, relations TRC-REL-020..022 and rule TRC-015. A root
         # released before them lacks exactly those lines, declared here; a root

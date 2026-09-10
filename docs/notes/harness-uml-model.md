@@ -144,9 +144,9 @@ Intent -> Capability -> Requirement <- Specification.specifies
 - A **verification contract** defines how requirements are checked
   independently of the implementation.
 
-Older completed artifacts may still carry the compatibility-era
-`constrains` relation. New authoring uses `addresses` and `conforms_to`.
-Historical records are not rewritten to modernize their words.
+The compatibility-era `constrains` relation is retired: the validator refuses
+it with `E016`, and every architecture declares `addresses` and `conforms_to`.
+Historical records are not otherwise rewritten to modernize their words.
 
 Definitions move `draft -> approved`. An approved definition may later move
 to `implemented`. A definition that is replaced moves to `superseded` and
