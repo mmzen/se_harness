@@ -679,6 +679,43 @@ if __name__ == "__main__":
     unittest.main()
 
 
+class DefinitionNamesTests(unittest.TestCase):
+    """REQ-CIP-010 / SPEC-CIP-004 CIP-AMD-004 (WO-CIP-008): in the body of every artifact under
+    the domain's architecture and requirements, the retired job name survives only inside an
+    amendment record. Two front-matter fields name it as retired and are pinned as such: the
+    measure of REQ-CIP-009 and the source and measure of REQ-CIP-010."""
+
+    DIRECTORIES = (
+        "docs/engineering/ci-pipeline/architecture",
+        "docs/engineering/ci-pipeline/requirements",
+    )
+    FRONT_MATTER_MENTIONS = {"REQ-CIP-009", "REQ-CIP-010"}
+
+    def test_the_old_job_name_occurs_only_inside_an_amendment_record(self) -> None:
+        offenders: list[str] = []
+        explained: set[str] = set()
+        front_matter_mentions: set[str] = set()
+        for directory in self.DIRECTORIES:
+            for path in sorted((REPOSITORY_ROOT / directory).rglob("*.md")):
+                text = path.read_text(encoding="utf-8")
+                front_matter, body = text.split("+++", 2)[1:]
+                if "governance-migration" in front_matter:
+                    front_matter_mentions.add(path.stem)
+                first_body_line = text[: len(text) - len(body)].count("\n") + 1
+                inside_amendment = False
+                for number, line in enumerate(body.splitlines(), first_body_line):
+                    if line.startswith("## "):
+                        inside_amendment = line.strip() == "## Amendment record"
+                    if "governance-migration" in line:
+                        if inside_amendment:
+                            explained.add(path.stem)
+                        else:
+                            offenders.append(f"{path.relative_to(REPOSITORY_ROOT).as_posix()}:{number}")
+        self.assertEqual([], offenders)
+        # CIP-AMD-001 and CIP-AMD-002: the two definitions WO-CIP-007 left explain the rename.
+        self.assertEqual({"ARCH-CIP-001", "REQ-CIP-002"}, explained)
+        self.assertEqual(self.FRONT_MATTER_MENTIONS, front_matter_mentions)
+
 class EvaluatorFactsFrontMatterTests(unittest.TestCase):
     """WO-ECP-027 (ECP-COR-017): a CRLF checkout yields the same release-record metadata as LF."""
 

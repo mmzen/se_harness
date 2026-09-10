@@ -5,7 +5,7 @@ title = "Build the candidate wheel once per workflow and hand it to every consum
 status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-08-26"
-updated = "2026-08-26"
+updated = "2026-09-10"
 statement = "WHEN the candidate-evidence workflow runs, THE SYSTEM SHALL build the candidate wheel in one job and provide it to every consuming job as a downloaded artifact whose digest the consumer verifies."
 verification_method = ["inspection"]
 verification_notes = "automated-workflow-inspection-and-run-observation"
@@ -24,9 +24,9 @@ decided_by = "requirements-steward"
 ## Rationale
 
 `candidate-evidence.yml` builds the same commit's wheel in
-`candidate-package`, once per platform in `governance-migration`, and twice
+`candidate-package`, once per platform in the upgrade rehearsal, and twice
 inside `build_integration_package.py build` — five builds. Two further jobs,
-`governance-migration-reconcile` and `integration-package-retain`, exist only
+the rehearsal's reconcile job and `integration-package-retain`, exist only
 to compare digests produced elsewhere or to re-upload verified bytes under a
 retention name.
 
@@ -38,7 +38,7 @@ A `candidate-evidence` run on any event.
 
 - `candidate-source` builds the wheel from `git archive` of the commit with
   the pinned build tools and uploads it with its `SHA256SUMS`.
-- `candidate-package`, `governance-migration` and the integration-package
+- `candidate-package`, `upgrade-rehearsal` and the integration-package
   build download it, verify the digest, and do not rebuild.
 - The migration rehearsal runs once per platform; each platform job outputs
   its `semantic_sha256`, and the cross-platform comparison is a job output
@@ -46,7 +46,7 @@ A `candidate-evidence` run on any event.
 - `integration-package-retain` merges into the verify step: the retention
   upload happens once, from the job that verified.
 - Job count: seven to four (`candidate-source`, `candidate-package`,
-  `governance-migration` matrix, `integration-package` matrix).
+  `upgrade-rehearsal` matrix, `integration-package` matrix).
 
 ## Failure and boundary behavior
 
@@ -72,3 +72,17 @@ distribution; the artifact retention stays at the present values.
 ## Open decisions
 
 None.
+
+## Amendment record
+
+**The rehearsal job is `upgrade-rehearsal` and the reconcile job is gone,
+amended 2026-09-10 under `WO-CIP-008` (`REQ-CIP-010`, `SPEC-CIP-004`
+`CIP-AMD-002`).** When this requirement was approved on 2026-08-26 the
+rehearsal job was `governance-migration` and `governance-migration-reconcile`
+existed; the Rationale, the Required response and the job count named them.
+`WO-CIP-001` removed the reconcile job (`VREC-CIP-001`). `WO-CIP-007`
+(`SPEC-CIP-003` `CIP-ONE-012`, verified by `VREC-CIP-007`) renamed the
+rehearsal job, its artifact, its `needs` entries and its outputs on
+2026-09-08, with a scope that did not admit this file. The prose above now
+uses the current name and describes the reconcile job without its retired
+one; the statement, the relations and the lifecycle events are unchanged.
