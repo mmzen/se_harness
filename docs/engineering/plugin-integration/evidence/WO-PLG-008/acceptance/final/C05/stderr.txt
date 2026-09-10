@@ -1,0 +1,2 @@
+
+{"status": "unenforced", "coverage": "unqualified", "checks": [], "entered_monotonic": 110048.8535202, "error": "binding cannot enforce refusal; no governance-check success is claimed", "inner_deadline_monotonic": 110052.8535202, "host_deadline_monotonic": 110057.8535202, "response_prepared_monotonic": 110048.9754656, "effect_inspection_required_on_missing_response": true, "response_written_monotonic": 110048.9754987}

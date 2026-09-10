@@ -1,0 +1,16 @@
+{
+  "definition_delivery": "PR #435, WO-PLG-007 D04",
+  "base_commit": "69240703",
+  "authorization": "we will merge later: GO for WO-PLG-007  and then WO-PLG-008",
+  "state": "in_progress",
+  "reserved": [
+    "completion",
+    "VREC preparation",
+    "assurance",
+    "release",
+    "merge"
+  ],
+  "failed_attempt": "attempt1 C03 wrongly required exactly two processes. The real Windows venv created four; all four exited. Corrected fixture requires at least two and all observed processes exited, plus independent PID inspection.",
+  "final_selection": "final2 adds independent host-receipt and cleanup-margin assertions and explicitly unmapped C05 input. Handler unchanged across these acceptance runs.",
+  "acceptance_sources_unchanged": true
+}

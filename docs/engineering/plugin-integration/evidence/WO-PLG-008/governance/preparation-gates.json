@@ -1,0 +1,172 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-PLG-008",
+    "artifacts": [
+      "WO-PLG-008"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-PLG-002",
+      "ARCH-PLG-002",
+      "CAP-WEX-001",
+      "INT-WEX-001",
+      "REQ-PLG-013",
+      "REQ-PLG-014",
+      "SPEC-PLG-008",
+      "VER-PLG-008"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/plugin-integration/evidence/VREC-PLG-006-evaluator.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-008/",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-013.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-014.md",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-008.md",
+      "docs/engineering/plugin-integration/verification-records/VREC-PLG-006.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-008.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-008.md",
+      "plugins/verity-plane/common/scripts/check-tool-action.py",
+      "tests/plugin_integration/tool_action/"
+    ],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-WO-PREPARE-VREC",
+    "procedure_id": "PROC-WO-PREPARE-VREC",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-CANDIDATE-READY",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4C-STATUS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-PLG-008"
+              }
+            ],
+            "message": "WO-PLG-008 status is implemented."
+          },
+          {
+            "id": "QGP-G4C-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-PLG-008"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G4C-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:pre-action"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "8c31893a3454f78b061f4b08d82e00669909f7407de133b430ba77ea2f9a5145",
+    "change_set_source": "arguments"
+  },
+  "procedure": {
+    "id": "PROC-WO-PREPARE-VREC",
+    "current_step": "STEP-WO-PREPARE-VREC-DECIDE",
+    "steps": [
+      {
+        "id": "STEP-WO-PREPARE-VREC-DECIDE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-CANDIDATE-READY"
+        ],
+        "effects": [
+          "Permits preparation of one ready VREC."
+        ],
+        "non_effects": [
+          "Preparation does not verify WO-PLG-008."
+        ],
+        "decision_right": "DR-VREC-PREPARE",
+        "role": "engineering-owner",
+        "artifact": "WO-PLG-008",
+        "decision": "whether to prepare one ready verification record with exact approved inputs",
+        "outcomes": [
+          "prepare",
+          "stop"
+        ],
+        "response": "Prepare one ready VREC for WO-PLG-008 with the exact approved verification contract and retained evidence."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-PLG-008",
+        "status": "implemented"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-PLG-008",
+        "status": "implemented"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 46
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated pre-action compliance for WO-PLG-008."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-PLG-008 is implemented."
+    ],
+    "decision_required": {
+      "decision_right": "DR-VREC-PREPARE",
+      "role": "engineering-owner",
+      "artifact": "WO-PLG-008",
+      "decision": "whether to prepare one ready verification record with exact approved inputs",
+      "outcomes": [
+        "prepare",
+        "stop"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-WO-PREPARE-VREC",
+      "step_id": "STEP-WO-PREPARE-VREC-DECIDE",
+      "action": "whether to prepare one ready verification record with exact approved inputs"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Prepare one ready VREC for WO-PLG-008 with the exact approved verification contract and retained evidence."
+    },
+    "alternatives": []
+  },
+  "result_sha256": "71719f10e98a6f73a9915139d50d8a65f9748bc1bbb8e31c487ea0b182a690ac"
+}

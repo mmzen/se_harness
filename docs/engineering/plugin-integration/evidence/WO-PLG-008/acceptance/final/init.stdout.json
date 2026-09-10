@@ -1,0 +1,172 @@
+{
+  "changes": [
+    {
+      "action": "add",
+      "path": ".agents/skills/harness-operator-brief/SKILL.md"
+    },
+    {
+      "action": "add",
+      "path": ".agents/skills/harness-operator-brief/scripts/check_brief.py"
+    },
+    {
+      "action": "add",
+      "path": ".agents/skills/harness-operator-brief/skill-contract.json"
+    },
+    {
+      "action": "add",
+      "path": ".agents/skills/harness-orient/SKILL.md"
+    },
+    {
+      "action": "add",
+      "path": ".agents/skills/harness-orient/scripts/orient.py"
+    },
+    {
+      "action": "add",
+      "path": ".agents/skills/harness-orient/skill-contract.json"
+    },
+    {
+      "action": "add",
+      "path": ".claude/skills/harness-orient/SKILL.md"
+    },
+    {
+      "action": "add",
+      "path": ".engineering-harness.toml"
+    },
+    {
+      "action": "add",
+      "path": ".gitattributes"
+    },
+    {
+      "action": "add",
+      "path": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "action": "add",
+      "path": ".github/workflows/engineering-harness.yml"
+    },
+    {
+      "action": "add",
+      "path": ".gitignore"
+    },
+    {
+      "action": "add",
+      "path": "AGENTS.md"
+    },
+    {
+      "action": "add",
+      "path": "CLAUDE.md"
+    },
+    {
+      "action": "add",
+      "path": "ENGINEERING_HARNESS.md"
+    },
+    {
+      "action": "add",
+      "path": "GLOSSARY.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/ARTIFACT_AUTHORING.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/DECISION_RIGHTS.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/OPERATING_CARD.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/QUALITY_GATES.json"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/QUALITY_GATES.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/README.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/TECHNICAL_COMMUNICATION.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/TRACEABILITY.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/WORKFLOW.json"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/WORKFLOW.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/templates/ADR.template.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/templates/ARCHITECTURE.template.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/templates/CAPABILITY.template.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/templates/DECISION.template.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/templates/INTENT.template.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/templates/OPERATING_CONTRACT.template.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/templates/README.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/templates/RELEASE_CONTRACT.template.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/templates/RELEASE_RECORD.template.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/templates/REQUIREMENT.template.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/templates/RISK.template.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/templates/SPECIFICATION.template.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/templates/VERIFICATION.template.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/templates/VERIFICATION_RECORD.template.md"
+    },
+    {
+      "action": "add",
+      "path": "docs/engineering/templates/WORK_ORDER.template.md"
+    }
+  ],
+  "command": "init",
+  "outcome": "completed",
+  "schema": "se-harness-command-result-v1",
+  "written": true
+}

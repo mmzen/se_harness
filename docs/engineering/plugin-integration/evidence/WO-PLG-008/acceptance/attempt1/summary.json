@@ -1,0 +1,43 @@
+[
+  {
+    "case": "C01",
+    "conclusion": "pass"
+  },
+  {
+    "case": "C02",
+    "conclusion": "pass"
+  },
+  {
+    "case": "C03",
+    "conclusion": "fail",
+    "failure": "AssertionError: "
+  },
+  {
+    "case": "C04",
+    "conclusion": "pass"
+  },
+  {
+    "case": "C05",
+    "conclusion": "pass"
+  },
+  {
+    "case": "C06",
+    "conclusion": "pass"
+  },
+  {
+    "case": "C07",
+    "conclusion": "pass"
+  },
+  {
+    "case": "C08",
+    "conclusion": "pass"
+  },
+  {
+    "case": "C09",
+    "conclusion": "pass"
+  },
+  {
+    "case": "C10",
+    "conclusion": "pass"
+  }
+]

@@ -1,0 +1,39 @@
+{
+  "case": "C07",
+  "conclusion": "pass",
+  "effects": [
+    {
+      "before_sha256": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "after_sha256": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "effect_count": 0,
+      "refusal_received": true,
+      "inspected_at_monotonic": 110161.2756513,
+      "qualification": "refusal-observed"
+    },
+    {
+      "before_sha256": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "after_sha256": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "effect_count": 0,
+      "refusal_received": true,
+      "inspected_at_monotonic": 110161.4483309,
+      "qualification": "refusal-observed"
+    },
+    {
+      "before_sha256": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "after_sha256": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "effect_count": 0,
+      "refusal_received": true,
+      "inspected_at_monotonic": 110161.6205033,
+      "qualification": "refusal-observed"
+    },
+    {
+      "before_sha256": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "after_sha256": "7dc6f8747b4f9014b9f7c31a6f3fc457a2d40dfaa19a419f0f87c15c104b64ed",
+      "effect_count": 1,
+      "refusal_received": false,
+      "inspected_at_monotonic": 110161.6220019,
+      "qualification": "unqualified-missing-required-refusal"
+    }
+  ],
+  "fixture_injection": "declared by actions; no live-host result inferred"
+}

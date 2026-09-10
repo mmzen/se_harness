@@ -1,0 +1,107 @@
+[
+  {
+    "case": "C01",
+    "status": "checked",
+    "host_elapsed_seconds": 1.508744899998419,
+    "startup_to_script_seconds": 0.04399000000557862,
+    "script_to_response_seconds": 1.4521529000048758,
+    "cleanup_seconds": 0.00023949999012984335,
+    "remaining_host_seconds": 8.491255100001581,
+    "tree_accounting": {
+      "before_cleanup": {
+        "total_processes": 2,
+        "active_processes": 0,
+        "exited_processes": 2
+      },
+      "total_processes": 2,
+      "active_processes": 0,
+      "exited_processes": 2,
+      "method": "owned Windows Job Object"
+    },
+    "error": null
+  },
+  {
+    "case": "C01",
+    "status": "checked",
+    "host_elapsed_seconds": 1.4549121000018204,
+    "startup_to_script_seconds": 0.057696000003488734,
+    "script_to_response_seconds": 1.3856508000026224,
+    "cleanup_seconds": 0.00017469999147579074,
+    "remaining_host_seconds": 8.54508789999818,
+    "tree_accounting": {
+      "before_cleanup": {
+        "total_processes": 2,
+        "active_processes": 0,
+        "exited_processes": 2
+      },
+      "total_processes": 2,
+      "active_processes": 0,
+      "exited_processes": 2,
+      "method": "owned Windows Job Object"
+    },
+    "error": null
+  },
+  {
+    "case": "C03",
+    "status": "denied",
+    "host_elapsed_seconds": 1.2154507999948692,
+    "startup_to_script_seconds": 0.08628699999826495,
+    "script_to_response_seconds": 1.1171407999936491,
+    "cleanup_seconds": 0.00020379999477881938,
+    "remaining_host_seconds": 8.78454920000513,
+    "tree_accounting": {
+      "before_cleanup": {
+        "total_processes": 4,
+        "active_processes": 2,
+        "exited_processes": 2
+      },
+      "total_processes": 4,
+      "active_processes": 0,
+      "exited_processes": 4,
+      "method": "owned Windows Job Object"
+    },
+    "error": "evaluator left active descendants after returning; inspect any partial evaluator writes before retry"
+  },
+  {
+    "case": "C03",
+    "status": "denied",
+    "host_elapsed_seconds": 4.092926700002863,
+    "startup_to_script_seconds": 0.07794160000048578,
+    "script_to_response_seconds": 4.001553300011437,
+    "cleanup_seconds": 0.001165600013337098,
+    "remaining_host_seconds": 5.907073299997137,
+    "tree_accounting": {
+      "before_cleanup": {
+        "total_processes": 4,
+        "active_processes": 4,
+        "exited_processes": 0
+      },
+      "total_processes": 4,
+      "active_processes": 0,
+      "exited_processes": 4,
+      "method": "owned Windows Job Object"
+    },
+    "error": "inner evaluator deadline expired; inspect any partial evaluator writes before retry"
+  },
+  {
+    "case": "C03",
+    "status": "denied",
+    "host_elapsed_seconds": 1.1357524000050034,
+    "startup_to_script_seconds": 0.0833788000018103,
+    "script_to_response_seconds": 1.0400554000079865,
+    "cleanup_seconds": 0.00018149999959859997,
+    "remaining_host_seconds": 8.864247599994997,
+    "tree_accounting": {
+      "before_cleanup": {
+        "total_processes": 4,
+        "active_processes": 2,
+        "exited_processes": 2
+      },
+      "total_processes": 4,
+      "active_processes": 0,
+      "exited_processes": 4,
+      "method": "owned Windows Job Object"
+    },
+    "error": "evaluator left active descendants after returning; inspect any partial evaluator writes before retry"
+  }
+]
