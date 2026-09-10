@@ -1,0 +1,167 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "VREC-PLG-006",
+    "artifacts": [
+      "VREC-PLG-006"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-PLG-002",
+      "ARCH-PLG-002",
+      "CAP-WEX-001",
+      "INT-WEX-001",
+      "REQ-PLG-013",
+      "REQ-PLG-014",
+      "SPEC-PLG-008",
+      "VER-PLG-008",
+      "WO-PLG-008"
+    ],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-VREC-DECIDE",
+    "procedure_id": "PROC-VREC-DECIDE",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-ASSURANCE-DECISION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4A-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:VREC-PLG-006"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G4A-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:pre-action"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G4A-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:VREC-PLG-006"
+              }
+            ],
+            "message": "No open decision blocks VREC-PLG-006."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "3a43cf1b85191cf276a6f4bd83c0bc979a0fc357e085331554d3f0dd043d78ca",
+    "change_set_source": "arguments"
+  },
+  "procedure": {
+    "id": "PROC-VREC-DECIDE",
+    "current_step": "STEP-VREC-DECIDE",
+    "steps": [
+      {
+        "id": "STEP-VREC-DECIDE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-ASSURANCE-DECISION"
+        ],
+        "effects": [
+          "Permits an explicit decision on VREC-PLG-006 only."
+        ],
+        "non_effects": [
+          "Referenced work orders remain unchanged."
+        ],
+        "decision_right": "DR-VREC-DECIDE",
+        "role": "assurance-owner",
+        "artifact": "VREC-PLG-006",
+        "decision": "whether the retained evidence verifies the exact candidate",
+        "outcomes": [
+          "verified",
+          "reject",
+          "supersede"
+        ],
+        "response": "I verify VREC-PLG-006 as assurance owner."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "VREC-PLG-006",
+        "status": "ready"
+      }
+    ],
+    "after": [
+      {
+        "id": "VREC-PLG-006",
+        "status": "ready"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 46
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated pre-action compliance for VREC-PLG-006."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "VREC-PLG-006 is ready."
+    ],
+    "decision_required": {
+      "decision_right": "DR-VREC-DECIDE",
+      "role": "assurance-owner",
+      "artifact": "VREC-PLG-006",
+      "decision": "whether the retained evidence verifies the exact candidate",
+      "outcomes": [
+        "verified",
+        "reject",
+        "supersede"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-VREC-DECIDE",
+      "step_id": "STEP-VREC-DECIDE",
+      "action": "whether the retained evidence verifies the exact candidate"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "I verify VREC-PLG-006 as assurance owner."
+    },
+    "alternatives": [
+      "Use complete alternative procedure PROC-VREC-REJECT.",
+      "Use complete alternative procedure PROC-VREC-SUPERSEDE."
+    ]
+  },
+  "result_sha256": "f22a0df0875cb4c5671d2a0e8a4975e2cd9963b81fb93c080ee4aadc52a9f5c6"
+}

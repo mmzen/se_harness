@@ -1,0 +1,16 @@
+{
+  "record": "VREC-PLG-006",
+  "status": "ready",
+  "candidate": "1daf4e3ecf3a46a3cb8ad385a11b6cfa39e4549d",
+  "evidence_files_checked": 192,
+  "candidate_bytes_unchanged": true,
+  "work_order_bytes_unchanged": true,
+  "evaluator_sidecar_sha256_matches": true,
+  "verification_contract": "VER-PLG-008",
+  "next_decision": "I verify VREC-PLG-006 as assurance owner.",
+  "not_done": [
+    "independent assurance",
+    "release",
+    "PR merge"
+  ]
+}
