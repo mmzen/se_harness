@@ -2,7 +2,7 @@
 id = "WO-PLG-017"
 type = "work_order"
 title = "Portable retention of evidence-skill test output"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-10"
 updated = "2026-09-10"
@@ -34,16 +34,24 @@ paths = [
 implements = ["REQ-PLG-019"]
 specifications = ["SPEC-PLG-011"]
 verification = ["VER-PLG-011"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-10T21:12:46Z"
+decided_by = "engineering-owner"
+reason = "The operator explicitly answered \"Approve WO-PLG-017 and authorize the repair\" to the reviewed PR #447 proposal on 2026-09-10. Record DR-REMEDIATION-SCOPE and DR-WO-SELECT under engineering-owner for only WO-PLG-017. Approval of its execution delegation permits the bounded delegated route after the approved class exists at the configured base and the live exact-head required check succeeds. It does not approve an aggregate VREC, assurance, supersession, integration or merge."
 +++
 
 # Work Order: Portable retention of evidence-skill test output
 
 ## Lifecycle
 
-Draft remediation proposal; no approval, start or repair is recorded. Approving
-this work order would delegate its start and completion, subject to the released
-evaluator's configured base and live check. It would not authorize assurance,
-supersession, integration, or preparation of an aggregate verification record.
+The operator approved this remediation and authorized the delegated repair on
+2026-09-10. The released evaluator recorded only draft-to-approved. Start and
+completion remain subject to the configured-base and live-check requirements.
+No repair has started. This approval does not authorize assurance, supersession,
+integration, or preparation of an aggregate verification record.
 
 ## Objective
 

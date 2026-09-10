@@ -6,7 +6,8 @@ the depth of retained WO011 native products, introduced during evidence retentio
 
 The proposed work order shortens 55 paths and retains all bytes through an exact
 path/hash map. This directory contains the proposal and original failure logs;
-no relocation, lifecycle decision or successful repair is claimed.
+no relocation or successful repair is claimed. The later explicit owner approval
+is retained under approval; the work order is approved but has not started.
 
 - [Proposed work order](../../work-orders/WO-PLG-017.md)
 - [Exact proposed relocation map](path-plan.json)
