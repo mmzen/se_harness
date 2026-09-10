@@ -1,0 +1,1 @@
+The initial VREC check incorrectly used checkpoint handoff and was refused with WEX210; no record state changed. The prescribed projection succeeded, and the applicable pre-action PROC-VREC-DECIDE check passed. Both outputs are retained; no failed gate was waived.

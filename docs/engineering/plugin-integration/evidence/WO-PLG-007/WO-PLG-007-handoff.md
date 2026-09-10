@@ -16,3 +16,9 @@ WO-PLG-007 remains **in progress**. Its implementation evidence does not record
 completion or independent assurance. No verification record, release, or merge
 decision has been prepared or applied. Native host transport remains separate
 qualification work.
+
+## Verification record preparation — 2026-09-10
+
+[VREC-PLG-005](../../verification-records/VREC-PLG-005.md) is **ready**, binding candidate `bf0a2b4705617e735357842872edd068ce2ed610` to VER-PLG-007 and 235 retained evidence files. The earlier handoff text and header above describe the implementation stage; the work order is now implemented and the operator separately authorized this preparation.
+
+The next decision is the assurance owner's assessment of VREC-PLG-005. Preparation has not verified the record, released the work or merged the PR. Shared-handler fixture limits and original failures remain part of the bound evidence.

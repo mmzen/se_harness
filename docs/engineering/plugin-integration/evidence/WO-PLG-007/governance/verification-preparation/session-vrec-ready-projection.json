@@ -1,0 +1,176 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "VREC-PLG-005",
+    "artifacts": [
+      "VREC-PLG-005"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-PLG-002",
+      "ARCH-PLG-002",
+      "CAP-IAR-001",
+      "INT-IAR-001",
+      "REQ-PLG-010",
+      "REQ-PLG-011",
+      "REQ-PLG-012",
+      "SPEC-PLG-007",
+      "VER-PLG-007",
+      "WO-PLG-007"
+    ],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-VREC-DECIDE",
+    "procedure_id": "PROC-VREC-DECIDE",
+    "status": "not_assessable",
+    "gates": []
+  },
+  "procedure": {
+    "id": "PROC-VREC-DECIDE",
+    "current_step": "STEP-VREC-DECIDE",
+    "steps": [
+      {
+        "id": "STEP-VREC-DECIDE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-ASSURANCE-DECISION"
+        ],
+        "effects": [
+          "Permits an explicit decision on VREC-PLG-005 only."
+        ],
+        "non_effects": [
+          "Referenced work orders remain unchanged."
+        ],
+        "decision_right": "DR-VREC-DECIDE",
+        "role": "assurance-owner",
+        "artifact": "VREC-PLG-005",
+        "decision": "whether the retained evidence verifies the exact candidate",
+        "outcomes": [
+          "verified",
+          "reject",
+          "supersede"
+        ],
+        "response": "I verify VREC-PLG-005 as assurance owner."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "VREC-PLG-005",
+        "status": "ready"
+      }
+    ],
+    "after": [
+      {
+        "id": "VREC-PLG-005",
+        "status": "ready"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 46
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Projected assurance candidate VREC-PLG-005."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "VREC-PLG-005 is ready; referenced work orders were not changed."
+    ],
+    "decision_required": {
+      "decision_right": "DR-VREC-DECIDE",
+      "role": "assurance-owner",
+      "artifact": "VREC-PLG-005",
+      "decision": "whether the retained evidence verifies the exact candidate",
+      "outcomes": [
+        "verified",
+        "reject",
+        "supersede"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-VREC-DECIDE",
+      "step_id": "STEP-VREC-DECIDE",
+      "action": "whether the retained evidence verifies the exact candidate"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "I verify VREC-PLG-005 as assurance owner."
+    },
+    "alternatives": [
+      "Use complete alternative procedure PROC-VREC-REJECT.",
+      "Use complete alternative procedure PROC-VREC-SUPERSEDE."
+    ]
+  },
+  "result_sha256": "aec32ea7f3fdc084e460833678426fb1e0939f5e3a1a7ad622d4634a2a77ba5b",
+  "context": {
+    "reading_manifest": [
+      "ENGINEERING_HARNESS.md",
+      "docs/engineering/OPERATING_CARD.md",
+      "AGENTS.md",
+      "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
+      "docs/engineering/instruction-architecture/capabilities/CAP-IAR-001.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-010.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-011.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-012.md",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-007.md",
+      "docs/engineering/plugin-integration/architecture/ARCH-PLG-002.md",
+      "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-002.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-007.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-007.md"
+    ],
+    "governing": [
+      "ADR-PLG-002",
+      "ARCH-PLG-002",
+      "CAP-IAR-001",
+      "INT-IAR-001",
+      "REQ-PLG-010",
+      "REQ-PLG-011",
+      "REQ-PLG-012",
+      "SPEC-PLG-007",
+      "VER-PLG-007",
+      "WO-PLG-007"
+    ],
+    "declared_paths": [],
+    "state": {
+      "status": "ready",
+      "family": "verification_record"
+    },
+    "next": {
+      "argv": [],
+      "procedure_id": "PROC-VREC-DECIDE",
+      "step_id": "STEP-VREC-DECIDE"
+    },
+    "decision_required": {
+      "decision_right": "DR-VREC-DECIDE",
+      "role": "assurance-owner",
+      "artifact": "VREC-PLG-005",
+      "decision": "whether the retained evidence verifies the exact candidate",
+      "outcomes": [
+        "verified",
+        "reject",
+        "supersede"
+      ]
+    }
+  }
+}
