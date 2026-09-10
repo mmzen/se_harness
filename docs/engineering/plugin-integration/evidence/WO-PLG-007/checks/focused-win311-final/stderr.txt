@@ -1,0 +1,15 @@
+test_complete_read_digest_and_capacity_are_required (test_session_context.SessionBoundaries.test_complete_read_digest_and_capacity_are_required) ... ok
+test_continuously_changing_sources_remain_blocked (test_session_context.SessionBoundaries.test_continuously_changing_sources_remain_blocked) ... ok
+test_empty_or_nonboolean_doctor_results_cannot_pass (test_session_context.SessionBoundaries.test_empty_or_nonboolean_doctor_results_cannot_pass) ... ok
+test_evaluator_environment_does_not_mutate_parent (test_session_context.SessionBoundaries.test_evaluator_environment_does_not_mutate_parent) ... ok
+test_exact_bytes_and_owner_content_exclusion (test_session_context.SessionBoundaries.test_exact_bytes_and_owner_content_exclusion) ... ok
+test_identity_requires_actual_boolean_and_observed_archive (test_session_context.SessionBoundaries.test_identity_requires_actual_boolean_and_observed_archive) ... ok
+test_malformed_findings_do_not_prevent_unready_output (test_session_context.SessionBoundaries.test_malformed_findings_do_not_prevent_unready_output) ... ok
+test_malformed_json_and_unsafe_events_are_refused (test_session_context.SessionBoundaries.test_malformed_json_and_unsafe_events_are_refused) ... ok
+test_marker_order_and_duplicates_are_rejected (test_session_context.SessionBoundaries.test_marker_order_and_duplicates_are_rejected) ... ok
+test_source_race_restarts_identity_and_integrity (test_session_context.SessionBoundaries.test_source_race_restarts_identity_and_integrity) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.234s
+
+OK

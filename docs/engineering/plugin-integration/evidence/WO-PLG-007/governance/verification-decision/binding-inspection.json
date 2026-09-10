@@ -1,0 +1,17 @@
+{
+  "record": "VREC-PLG-005",
+  "status": "verified",
+  "verified_by": "assurance-owner",
+  "verified_at": "2026-09-10T17:40:23Z",
+  "candidate": "bf0a2b4705617e735357842872edd068ce2ed610",
+  "evidence_files_checked": 235,
+  "candidate_and_evidence_unchanged": true,
+  "evaluator_sidecar_sha256_matches": true,
+  "work_order_status": "implemented",
+  "work_order_bytes_unchanged": true,
+  "next_decision_right": "DR-DELIVERY-SELECT",
+  "reserved_decisions": [
+    "repository integration",
+    "release preparation"
+  ]
+}

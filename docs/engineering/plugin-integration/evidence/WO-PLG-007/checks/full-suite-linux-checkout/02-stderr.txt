@@ -1,0 +1,1 @@
+HEAD is now at 07f01d3b feat(plugin): deliver verified session governance under WO-PLG-007

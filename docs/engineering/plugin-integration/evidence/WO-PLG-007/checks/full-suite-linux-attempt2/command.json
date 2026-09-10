@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "wsl.exe",
+    "-d",
+    "Ubuntu-24.04",
+    "--cd",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context",
+    "--exec",
+    "/usr/bin/python3",
+    "-B",
+    "-S",
+    "scripts/run_tests.py",
+    "--workers",
+    "4"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-session-context",
+  "exit_status": 1,
+  "started_at": "2026-09-10T06:23:29.963539+00:00",
+  "duration_seconds": 862.81
+}

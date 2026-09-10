@@ -1,0 +1,14 @@
+[
+  {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\session-fixtures-final\\removed-environment\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-session-context\\plugins\\verity-plane\\common\\scripts\\session-context.py",
+      "--repo",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\session-fixtures-final\\C07"
+    ],
+    "launch_error": "FileNotFoundError",
+    "handler_invocations": 0
+  }
+]

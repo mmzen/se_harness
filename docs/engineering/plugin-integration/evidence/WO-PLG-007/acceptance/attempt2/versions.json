@@ -1,0 +1,10 @@
+{
+  "os": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "released_evaluator": "0.17.0",
+  "payload_sha256": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405",
+  "archive_sha256": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+  "handler_sha256": "fca6aa28a86f9f8aaa7817bfe5802a1bfc02280bcaad46e349c4f3c33d05012d",
+  "runner_sha256": "40610b346046eec307ab44b47930adb4be508fd848e331e19ac8fbdccfdd2bb1",
+  "scope": "captured Codex/Claude SessionStart protocol fixtures; not live host delivery"
+}
