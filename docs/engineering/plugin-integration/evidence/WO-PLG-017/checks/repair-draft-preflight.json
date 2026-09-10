@@ -1,0 +1,35 @@
+{
+  "assurance": {
+    "commit_bound_verification": "required",
+    "decided_by": "engineering-owner",
+    "rationale": "Later assurance depends on complete, readable retained evidence after its storage paths change."
+  },
+  "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+  "diagnostics": [
+    {
+      "code": "W005",
+      "message": "status 'draft' is not eligible for review; expected one of approved, implemented, in_progress, released, verified",
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-017.md"
+    }
+  ],
+  "phase": "review",
+  "reading_manifest": [
+    "ENGINEERING_HARNESS.md",
+    "docs/engineering/OPERATING_CARD.md",
+    "AGENTS.md",
+    "docs/engineering/workflow-execution/intent/INT-WEX-001.md",
+    "docs/engineering/workflow-execution/capabilities/CAP-WEX-001.md",
+    "docs/engineering/plugin-integration/requirements/REQ-PLG-019.md",
+    "docs/engineering/plugin-integration/specifications/SPEC-PLG-011.md",
+    "docs/engineering/plugin-integration/verification/VER-PLG-011.md",
+    "docs/engineering/plugin-integration/work-orders/WO-PLG-017.md"
+  ],
+  "ready": false,
+  "schema": "se-harness-preflight-v2",
+  "skew": [],
+  "work_order": {
+    "id": "WO-PLG-017",
+    "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-017.md",
+    "status": "draft"
+  }
+}

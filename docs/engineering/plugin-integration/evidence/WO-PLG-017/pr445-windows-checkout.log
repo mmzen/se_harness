@@ -1,0 +1,277 @@
+Upgrade rehearsal (Windows)	Set up job	﻿2026-09-10T20:26:58.6993242Z Current runner version: '2.337.0'
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7052975Z ##[group]Runner Image Provisioner
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7053957Z Hosted Compute Agent
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7054818Z Version: 20260819.586
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7055568Z Commit: 3cc4a88dfa507ef76119ad1bb3eccc6378bb2b76
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7056318Z Build Date: 2026-08-18T23:20:18Z
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7057015Z Worker ID: {af226e4f-9583-4532-a545-092a194f7319}
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7057764Z Azure Region: westus3
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7058340Z ##[endgroup]
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7059850Z ##[group]Operating System
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7060576Z Microsoft Windows Server 2025
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7061165Z 10.0.26100
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7061951Z Datacenter
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7062470Z ##[endgroup]
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7063049Z ##[group]Runner Image
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7063638Z Image: windows-2025-vs2026
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7064227Z Version: 20260824.214.3
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7065349Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20260824.214/images/windows/Windows2025-VS2026-Readme.md
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7067498Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20260824.214
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7068466Z ##[endgroup]
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7069495Z ##[group]GITHUB_TOKEN Permissions
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7071433Z Contents: read
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7072055Z Metadata: read
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7072626Z ##[endgroup]
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7075122Z Secret source: Actions
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7076099Z Cache mode: write
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7076814Z Prepare workflow directory
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7829988Z Prepare all required actions
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:58.7903368Z Getting action download info
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:59.1344053Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:59.2800914Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:26:59.4543803Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:27:00.1517696Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Upgrade rehearsal (Windows)	Set up job	2026-09-10T20:27:00.5661676Z Complete job name: Upgrade rehearsal (Windows)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-10T20:27:00.7421894Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7434097Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7435766Z with:
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7436560Z   fetch-depth: 0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7437452Z   persist-credentials: false
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7438749Z   repository: mmzen/se_harness
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7446978Z   token: ***
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7447808Z   ssh-strict: true
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7448597Z   ssh-user: git
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7449352Z   clean: true
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7450241Z   sparse-checkout-cone-mode: true
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7451218Z   fetch-tags: false
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7452070Z   show-progress: true
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7453018Z   lfs: false
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7454128Z   submodules: false
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7455175Z   set-safe-directory: true
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7456118Z   allow-unsafe-pr-checkout: false
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7457507Z env:
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7458299Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7459811Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7461450Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7462301Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.7463083Z ##[endgroup]
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.9274135Z Syncing repository: mmzen/se_harness
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.9281095Z ##[group]Getting Git version info
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:00.9282700Z Working directory is 'D:\a\se_harness\se_harness'
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:01.0683169Z [command]"C:\Program Files\Git\bin\git.exe" version
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:01.5446305Z git version 2.55.0.windows.5
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:01.5507113Z ##[endgroup]
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:01.5530324Z Temporarily overriding HOME='D:\a\_temp\6a0fc081-ff67-47bc-a196-7e8a5b579cef' before making global git config changes
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:01.5531964Z Adding repository directory to the temporary git global config as a safe directory
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:01.5542960Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\se_harness\se_harness
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:01.6312056Z Deleting the contents of 'D:\a\se_harness\se_harness'
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:01.6319459Z ##[group]Initializing the repository
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:01.6328875Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\se_harness\se_harness
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:01.7763145Z Initialized empty Git repository in D:/a/se_harness/se_harness/.git/
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:01.7828400Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/mmzen/se_harness
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:01.8558497Z ##[endgroup]
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:01.8559547Z ##[group]Disabling automatic garbage collection
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:01.8569302Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:01.8957498Z ##[endgroup]
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:01.8958226Z ##[group]Setting up auth
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:01.8976144Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:01.9323737Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:03.5676863Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:03.6065300Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:04.1905034Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:04.2222492Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:04.7770153Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:04.8093093Z ##[endgroup]
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:04.8093658Z ##[group]Fetching the repository
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:04.8107849Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +0d14631d552e53dbd7759f7996711d538b2a45b9:refs/remotes/pull/445/merge
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4258212Z From https://github.com/mmzen/se_harness
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4259391Z  * [new branch]        artifacts/plugin-implementation          -> origin/artifacts/plugin-implementation
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4260550Z  * [new branch]        definitions/plg010-delegation            -> origin/definitions/plg010-delegation
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4262022Z  * [new branch]        definitions/plg011-delegation            -> origin/definitions/plg011-delegation
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4263110Z  * [new branch]        definitions/plg012-delegation            -> origin/definitions/plg012-delegation
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4264041Z  * [new branch]        main                                     -> origin/main
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4265018Z  * [new branch]        notes/plugin-installation-proposal       -> origin/notes/plugin-installation-proposal
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4267372Z  * [new branch]        notes/plugin-proposal-assessment-2026-09-08 -> origin/notes/plugin-proposal-assessment-2026-09-08
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4268055Z  * [new branch]        release/0.10                             -> origin/release/0.10
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4268535Z  * [new branch]        release/0.11                             -> origin/release/0.11
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4268968Z  * [new branch]        release/0.12                             -> origin/release/0.12
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4269469Z  * [new branch]        release/0.12.0                           -> origin/release/0.12.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4269958Z  * [new branch]        release/0.13                             -> origin/release/0.13
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4270403Z  * [new branch]        release/0.13.0                           -> origin/release/0.13.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4270895Z  * [new branch]        release/0.14                             -> origin/release/0.14
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4271329Z  * [new branch]        release/0.14.0                           -> origin/release/0.14.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4271824Z  * [new branch]        release/0.15                             -> origin/release/0.15
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4272269Z  * [new branch]        release/0.15.0                           -> origin/release/0.15.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4272697Z  * [new branch]        release/0.16                             -> origin/release/0.16
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4273144Z  * [new branch]        release/0.16.0                           -> origin/release/0.16.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4273582Z  * [new branch]        release/0.17                             -> origin/release/0.17
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4274270Z  * [new branch]        release/0.17.0                           -> origin/release/0.17.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4274767Z  * [new branch]        release/0.2.0                            -> origin/release/0.2.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4275561Z  * [new branch]        release/0.2.1                            -> origin/release/0.2.1
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4276688Z  * [new branch]        release/0.2.2                            -> origin/release/0.2.2
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4277487Z  * [new branch]        release/0.3.0                            -> origin/release/0.3.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4278304Z  * [new branch]        release/0.4.0                            -> origin/release/0.4.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4278889Z  * [new branch]        release/0.6                              -> origin/release/0.6
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4279453Z  * [new branch]        release/0.7                              -> origin/release/0.7
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4281084Z  * [new branch]        release/0.8                              -> origin/release/0.8
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4281645Z  * [new branch]        release/0.9                              -> origin/release/0.9
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4282282Z  * [new branch]        work/plugin-change-skill                 -> origin/work/plugin-change-skill
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4283020Z  * [new branch]        work/plugin-evidence-skill               -> origin/work/plugin-evidence-skill
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4283650Z  * [new tag]           last                                     -> last
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4284124Z  * [new tag]           v0.10.0                                  -> v0.10.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4284564Z  * [new tag]           v0.11.0                                  -> v0.11.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4284994Z  * [new tag]           v0.12.0                                  -> v0.12.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4285423Z  * [new tag]           v0.13.0                                  -> v0.13.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4285848Z  * [new tag]           v0.14.0                                  -> v0.14.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4286268Z  * [new tag]           v0.15.0                                  -> v0.15.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4286695Z  * [new tag]           v0.16.0                                  -> v0.16.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4287118Z  * [new tag]           v0.17.0                                  -> v0.17.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4287496Z  * [new tag]           v0.2.0                                   -> v0.2.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4288025Z  * [new tag]           v0.2.1                                   -> v0.2.1
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4288378Z  * [new tag]           v0.2.2                                   -> v0.2.2
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4288920Z  * [new tag]           v0.3.0                                   -> v0.3.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4289993Z  * [new tag]           v0.4.0                                   -> v0.4.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4290413Z  * [new tag]           v0.4.1                                   -> v0.4.1
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4290789Z  * [new tag]           v0.5.0                                   -> v0.5.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4291150Z  * [new tag]           v0.5.0a1                                 -> v0.5.0a1
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4291515Z  * [new tag]           v0.6.0                                   -> v0.6.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4291865Z  * [new tag]           v0.7.0                                   -> v0.7.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4292210Z  * [new tag]           v0.7.1                                   -> v0.7.1
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4292575Z  * [new tag]           v0.8.0                                   -> v0.8.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4292922Z  * [new tag]           v0.9.0                                   -> v0.9.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4293328Z  * [new ref]           0d14631d552e53dbd7759f7996711d538b2a45b9 -> pull/445/merge
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4313882Z ##[endgroup]
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4314410Z ##[group]Determining the checkout info
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4316142Z ##[endgroup]
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4326027Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.4821695Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.5160840Z ##[group]Checking out the ref
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:07.5161503Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/remotes/pull/445/merge
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.5857765Z Updating files:  56% (3725/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.6018684Z Updating files:  57% (3755/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.6198045Z Updating files:  58% (3821/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.6392733Z Updating files:  59% (3887/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.6560936Z Updating files:  60% (3953/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.7012913Z Updating files:  61% (4019/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.7441998Z Updating files:  62% (4084/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9429105Z Updating files:  63% (4150/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9572798Z Updating files:  64% (4216/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9691270Z Updating files:  65% (4282/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9726649Z ##[error]error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/data/artifacts/0b1c904a2691c0806bbdd9cd3114ae25f02cf1402ccef943e76e7c7b7faa46c1.json: Filename too long
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9741358Z ##[error]error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/data/artifacts/2262514df3a78b0a166c0279982a64ad6cdfb5eab9c18a22a293deb9549b8385.json: Filename too long
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9745127Z ##[error]error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/data/artifacts/264293643e8f7cf0a1b7e0b48c9d73c0199c754d4ec3a195759216b50f839cf5.json: Filename too long
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9748546Z ##[error]error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/data/artifacts/67a735968173b15ad87afe5d6ca876c87eaabb64b4a24dcef152998aa8b63b92.json: Filename too long
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9751935Z ##[error]error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/data/artifacts/769f4a5a9f168dc3f9f8b48f14ab0bff96d3062b411c77a36cffb558a677bd9d.json: Filename too long
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9756290Z ##[error]error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/data/artifacts/79598de6b0dc18a42df712af22e8e808e4378724073a4f528c175f2a085a5bf0.json: Filename too long
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9759697Z ##[error]error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/data/artifacts/e432e0f04987b1d7cb8bc110e0323c2cef83b5aa7f5be187268dcd963ff79323.json: Filename too long
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9763101Z ##[error]error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/data/readiness/9ec92835065e0acf77ce0430a5a7fe2d81bef5e7d7e266e551f9cc182781b84e.json: Filename too long
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9776532Z ##[error]error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/artifacts/0b1c904a2691c0806bbdd9cd3114ae25f02cf1402ccef943e76e7c7b7faa46c1.json: Filename too long
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9781179Z ##[error]error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/artifacts/2262514df3a78b0a166c0279982a64ad6cdfb5eab9c18a22a293deb9549b8385.json: Filename too long
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9784833Z ##[error]error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/artifacts/264293643e8f7cf0a1b7e0b48c9d73c0199c754d4ec3a195759216b50f839cf5.json: Filename too long
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9789143Z ##[error]error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/artifacts/67a735968173b15ad87afe5d6ca876c87eaabb64b4a24dcef152998aa8b63b92.json: Filename too long
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9792749Z ##[error]error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/artifacts/769f4a5a9f168dc3f9f8b48f14ab0bff96d3062b411c77a36cffb558a677bd9d.json: Filename too long
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9797036Z ##[error]error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/artifacts/79598de6b0dc18a42df712af22e8e808e4378724073a4f528c175f2a085a5bf0.json: Filename too long
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9800482Z ##[error]error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/artifacts/e432e0f04987b1d7cb8bc110e0323c2cef83b5aa7f5be187268dcd963ff79323.json: Filename too long
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9802066Z Updating files:  66% (4348/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9804164Z ##[error]error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/readiness/9ec92835065e0acf77ce0430a5a7fe2d81bef5e7d7e266e551f9cc182781b84e.json: Filename too long
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9807606Z ##[error]error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/summary/bc9dff153a1325b439a223ee652a95851c63fb81e548f9accd94892e596d6403.json: Filename too long
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:08.9810957Z ##[error]error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/topology/5f056d6e5d4b8cad9e6f7039c926faf51de246bb66275e0932c89385fa86104d.json: Filename too long
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.0290378Z Updating files:  67% (4414/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.0422908Z Updating files:  68% (4480/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.0599114Z Updating files:  69% (4546/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.0768707Z Updating files:  70% (4611/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.0936701Z Updating files:  71% (4677/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.1089076Z Updating files:  72% (4743/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.1293308Z Updating files:  73% (4809/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.1502729Z Updating files:  74% (4875/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.1722365Z Updating files:  75% (4941/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.1928182Z Updating files:  76% (5007/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.2126955Z Updating files:  77% (5072/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.2305610Z Updating files:  78% (5138/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.2494179Z Updating files:  79% (5204/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.2658903Z Updating files:  80% (5270/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.2833154Z Updating files:  81% (5336/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.3012298Z Updating files:  82% (5402/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.3183368Z Updating files:  83% (5468/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.3391478Z Updating files:  84% (5534/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.3580070Z Updating files:  85% (5599/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.3767430Z Updating files:  86% (5665/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.3951962Z Updating files:  87% (5731/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.4147838Z Updating files:  88% (5797/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.4530922Z Updating files:  89% (5863/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.4780812Z Updating files:  90% (5929/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.5018836Z Updating files:  91% (5995/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.5507791Z Updating files:  92% (6061/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.5680755Z Updating files:  93% (6126/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.5789787Z Updating files:  94% (6192/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.5918005Z Updating files:  94% (6223/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.6119358Z Updating files:  95% (6258/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.6350402Z Updating files:  96% (6324/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.6654995Z Updating files:  97% (6390/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.6961473Z Updating files:  98% (6456/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7198488Z Updating files:  99% (6522/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7199246Z Updating files: 100% (6587/6587)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7199780Z Updating files: 100% (6587/6587), done.
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7414187Z Note: switching to 'refs/remotes/pull/445/merge'.
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7414543Z 
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7414774Z You are in 'detached HEAD' state. You can look around, make experimental
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7415348Z changes and commit them, and you can discard any commits you make in this
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7415894Z state without impacting any branches by switching back to a branch.
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7416217Z 
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7416430Z If you want to create a new branch to retain commits you create, you may
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7416953Z do so (now or later) by using -c with the switch command. Example:
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7417250Z 
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7417386Z   git switch -c <new-branch-name>
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7417583Z 
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7417684Z Or undo this operation with:
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7417863Z 
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7417948Z   git switch -
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7418080Z 
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7418321Z Turn off this advice by setting config variable advice.detachedHead to false
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7420077Z 
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7420819Z HEAD is now at 0d14631d Merge 7fe82c95823503e54d2e35e00d8c409a6dd4b065 into b319bffd383d010de5b24640a667a61874b9d2ab
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7590550Z ##[group]Removing auth
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7602164Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:09.7938373Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:10.4214592Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:10.4479998Z http.https://github.com/.extraheader
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:10.4526795Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:10.4847579Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:11.0309873Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:11.0619191Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:11.6255447Z ##[endgroup]
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:11.6284790Z ##[error]The process 'C:\Program Files\Git\bin\git.exe' failed with exit code 1
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	﻿2026-09-10T20:27:11.6727070Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-10T20:27:11.6729621Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-10T20:27:11.6730022Z with:
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-10T20:27:11.6730211Z   name: upgrade-rehearsal-Windows
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-10T20:27:11.6730543Z   path: D:\a\_temp/rehearsal-result-*/upgrade-rehearsal-result.json
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-10T20:27:11.6730889Z   if-no-files-found: warn
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-10T20:27:11.6731100Z   compression-level: 6
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-10T20:27:11.6731295Z   overwrite: false
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-10T20:27:11.6731490Z   include-hidden-files: false
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-10T20:27:11.6731718Z env:
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-10T20:27:11.6731889Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-10T20:27:11.6732294Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-10T20:27:11.6732780Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-10T20:27:11.6732972Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-10T20:27:11.6733145Z ##[endgroup]
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-10T20:27:11.8767819Z (node:10124) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-10T20:27:11.8769069Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-10T20:27:11.8842399Z ##[warning]No files were found with the provided path: D:\a\_temp/rehearsal-result-*/upgrade-rehearsal-result.json. No artifacts will be uploaded.
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-10T20:27:11.9249869Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:11.9252144Z Post job cleanup.
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:12.1240383Z [command]"C:\Program Files\Git\bin\git.exe" version
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:12.1534998Z git version 2.55.0.windows.5
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:12.1616534Z Temporarily overriding HOME='D:\a\_temp\4259dd2d-8c66-4073-addf-fdd6dfbfb126' before making global git config changes
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:12.1617915Z Adding repository directory to the temporary git global config as a safe directory
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:12.1632318Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\se_harness\se_harness
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:12.2002749Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:12.2449459Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:12.7935165Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:12.8273754Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:13.3705622Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-10T20:27:13.4005196Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Upgrade rehearsal (Windows)	Complete job	﻿2026-09-10T20:27:13.9868876Z Evaluate and set job outputs
+Upgrade rehearsal (Windows)	Complete job	2026-09-10T20:27:13.9875895Z Cleaning up orphan processes
+Upgrade rehearsal (Windows)	Complete job	2026-09-10T20:27:13.9943707Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
