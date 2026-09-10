@@ -1,0 +1,29 @@
+{
+  "assurance": {
+    "commit_bound_verification": "required",
+    "decided_by": "engineering-owner",
+    "rationale": "Later decisions rely on changed plugin behavior or trusted guidance; assurance must bind the exact candidate."
+  },
+  "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+  "diagnostics": [],
+  "phase": "start",
+  "reading_manifest": [
+    "ENGINEERING_HARNESS.md",
+    "docs/engineering/OPERATING_CARD.md",
+    "AGENTS.md",
+    "docs/engineering/workflow-execution/intent/INT-WEX-001.md",
+    "docs/engineering/workflow-execution/capabilities/CAP-WEX-001.md",
+    "docs/engineering/plugin-integration/requirements/REQ-PLG-019.md",
+    "docs/engineering/plugin-integration/specifications/SPEC-PLG-011.md",
+    "docs/engineering/plugin-integration/verification/VER-PLG-011.md",
+    "docs/engineering/plugin-integration/work-orders/WO-PLG-011.md"
+  ],
+  "ready": true,
+  "schema": "se-harness-preflight-v2",
+  "skew": [],
+  "work_order": {
+    "id": "WO-PLG-011",
+    "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-011.md",
+    "status": "approved"
+  }
+}

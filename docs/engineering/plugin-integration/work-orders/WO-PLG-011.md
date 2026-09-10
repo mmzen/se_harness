@@ -2,7 +2,7 @@
 id = "WO-PLG-011"
 type = "work_order"
 title = "Evidence skill using existing lifecycle procedures"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-10"
@@ -39,6 +39,13 @@ to = "approved"
 decided_at = "2026-09-10T18:17:14Z"
 decided_by = "engineering-owner"
 reason = "The operator previously stated \"i approve the packets, i authorize the work\" for the reviewed plugin proposal, then on 2026-09-10 explicitly selected \"WO-PLG-010 next, followed by WO-PLG-011 and WO-PLG-012  (delegated route)\". Record only WO-PLG-011 approval under engineering-owner, from proposal 0b42325b75bc6d1c36897369687c3d3ed578bdb9; reviewed/current draft SHA-256 9d09c401be4119a0533b7ff5fac66bcbcbb5d1d0c596ae8920aec07c84c447c4. The owner expressly requests [delegation] class execution for WO-PLG-011; approval is the delegating act for DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE only. It includes the exact planned VREC and evaluator-sidecar paths in this bounded scope. The class must exist at origin/main and the required live GitHub validate check must succeed for the exact head before the delegated executor acts. No implementation has started. Assurance of implementation, release and PR merge remain separate human decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-10T19:25:56Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at b319bffd383d010de5b24640a667a61874b9d2ab (check-run 103015218599, source github-checks)."
 +++
 
 # Work Order: Evidence skill using existing lifecycle procedures

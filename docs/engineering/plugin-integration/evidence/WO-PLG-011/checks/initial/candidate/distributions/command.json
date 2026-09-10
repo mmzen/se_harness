@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "C:/Users/mathi/AppData/Local/Python/bin/python.exe",
+    "scripts/validate_release_distributions.py",
+    "--root",
+    "."
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-evidence-skill",
+  "exit_status": 0,
+  "started_at": "2026-09-10T19:28:47.740705+00:00",
+  "duration_seconds": 3.362
+}
