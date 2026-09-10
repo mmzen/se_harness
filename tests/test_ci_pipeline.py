@@ -701,8 +701,7 @@ class DefinitionNamesTests(unittest.TestCase):
                 front_matter, body = text.split("+++", 2)[1:]
                 if "governance-migration" in front_matter:
                     front_matter_mentions.add(path.stem)
-                first_body_line = text[: len(text) - len(body)].count("
-") + 1
+                first_body_line = text[: len(text) - len(body)].count("\n") + 1
                 inside_amendment = False
                 for number, line in enumerate(body.splitlines(), first_body_line):
                     if line.startswith("## "):
