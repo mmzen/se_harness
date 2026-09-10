@@ -1,0 +1,42 @@
+{
+  "candidate_doctor": "Expected candidate 0.18.0 versus managed released 0.17.0 differences; root copies untouched",
+  "candidate_doctor_failed_checks": [
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:.engineering-harness.toml",
+      "passed": false
+    },
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:.github/workflows/engineering-harness.yml",
+      "passed": false
+    },
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:ENGINEERING_HARNESS.md",
+      "passed": false
+    },
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:docs/engineering/ARTIFACT_AUTHORING.md",
+      "passed": false
+    },
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:docs/engineering/TRACEABILITY.md",
+      "passed": false
+    },
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:docs/engineering/templates/WORK_ORDER.template.md",
+      "passed": false
+    }
+  ],
+  "released_doctor": "completed",
+  "graph_errors": 0,
+  "review_preflight_ready": true,
+  "skill_validations": "both passed; corrected briefing repeated and passed",
+  "distribution_validation": "passed, 14 distribution-bearing records",
+  "acceptance": "in progress",
+  "source_ci": "pending dedicated PR"
+}
