@@ -46,3 +46,13 @@ the production adapter/helper work orders remain draft in this delivery.
 
 The remaining introductions and notes are in [PR #416](https://github.com/mmzen/se_harness/pull/416).
 Shared handler fixtures do not qualify native host delivery or universal interception.
+
+## D05: WO-PLG-010 delegated skill packet
+
+- [REQ-PLG-017](requirements/REQ-PLG-017.md)
+- [REQ-PLG-018](requirements/REQ-PLG-018.md)
+- [SPEC-PLG-010](specifications/SPEC-PLG-010.md)
+- [VER-PLG-010](verification/VER-PLG-010.md)
+- [WO-PLG-010](work-orders/WO-PLG-010.md)
+
+This definition delivery records the operator-selected execution delegation. Implementation starts separately after the delegation is present on `origin/main` and the current required GitHub check passes. The packet does not provide implementation evidence or an assurance decision.
