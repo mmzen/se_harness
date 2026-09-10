@@ -1,8 +1,10 @@
 # WO-PLG-008 implementation evidence
 
-WO-PLG-008 is **in progress**. The operator authorized this work after
-WO-PLG-007 on 2026-09-10. This delivery adds the shared before-tool handler and
-its acceptance fixtures. Completion and independent assurance are not recorded.
+WO-PLG-008 is **implemented**. On 2026-09-10, the operator accepted the
+implementation and retained evidence in PR #436. The released evaluator
+[applied the completion decision](governance/action-complete-applied.json).
+Verification-record preparation and independent assurance are not recorded.
+The implementation-stage observations below retain their original context.
 
 ## Result
 
@@ -87,9 +89,10 @@ separate from the local regression evidence retained here.
 
 ## Authority and limits
 
-The released evaluator recorded only the explicitly authorized approval and
-start in this work order. [Delivery context](governance/delivery-context.json)
-identifies the separate definition delivery and reserved decisions.
+The released evaluator recorded the explicitly authorized approval, start and
+completion of this work order. [Initial delivery context](governance/delivery-context.json)
+retains the implementation-stage state before completion; the applied decision
+linked above records the later transition. WO-PLG-007 remains in progress.
 
 Process-tree control is implemented for Windows only. Other platforms return
 unavailable coverage. A called handler denies unsupported routes; an unobserved
@@ -100,7 +103,7 @@ refusal of unsupported overrides rather than accepting arbitrary checkpoint
 selection.
 
 Production bindings and live interception remain WO-PLG-005/006 and
-WO-PLG-015. Independent remote authorization remains issue #347. No lifecycle
-completion, verification record, assurance, release, merge or universal
+WO-PLG-015. Independent remote authorization remains issue #347. No
+verification record, assurance, release, merge or universal
 enforcement claim is included. The next lifecycle action comes from the
 released evaluator's selected handoff.

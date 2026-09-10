@@ -2,7 +2,7 @@
 id = "WO-PLG-008"
 type = "work_order"
 title = "Implement supported before-tool evaluator checks"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-10"
@@ -43,13 +43,20 @@ to = "in_progress"
 decided_at = "2026-09-10T06:45:25Z"
 decided_by = "engineering-owner"
 reason = "The operator explicitly approved the reviewed plugin packets and on 2026-09-10 selected \"we will merge later: GO for WO-PLG-007  and then WO-PLG-008\". WO-PLG-007 implementation is delivered separately in draft PR #435; the D04 governing definitions and bounded Windows decisions are present and approved. Record only WO-PLG-008 start. Completion, VREC preparation, assurance, release and merge remain separate decisions."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-10T16:57:13Z"
+decided_by = "engineering-owner"
+reason = "On 2026-09-10 the operator replied \"you can mark as implemented\" to the explicit handoff requesting the engineering-owner completion decision for WO-PLG-008. Record only WO-PLG-008 as implemented, accepting its authorized implementation and retained evidence delivered in PR #436 at ea566fa53d08214b31456ab9422fec7f206db9c4. WO-PLG-007 completion, VREC preparation, assurance, release and merge remain separate decisions."
 +++
 
 # Work Order: Implement supported before-tool evaluator checks
 
 ## Lifecycle
 
-Approved and started by the engineering owner on 2026-09-10, following the operator's instruction to execute WO-PLG-007 and then WO-PLG-008. Implementation is in progress. Completion, verification-record preparation, assurance, release and merge remain separate decisions under the installed rules.
+Marked implemented by the engineering owner on 2026-09-10 after the operator accepted the implementation and retained evidence in PR #436. The released evaluator recorded the explicit completion decision. Verification-record preparation, assurance, release and merge remain separate decisions under the installed rules.
 
 ## Objective
 
