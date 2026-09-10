@@ -1,0 +1,32 @@
+{
+  "operator_statement": "prepare verification record for both work orders",
+  "date": "2026-09-10",
+  "actor": "engineering-owner",
+  "work_order": "WO-PLG-007",
+  "record_to_prepare": "VREC-PLG-005",
+  "verification_contract": "VER-PLG-007",
+  "verification_contract_sha256": "3cebb4488054c350fae73a764f66e197c2c6c2d7aa4f2513f8208162ee3a8bb7",
+  "record_status_to_create": "ready",
+  "scope_addition": [
+    "docs/engineering/plugin-integration/verification-records/VREC-PLG-005.md",
+    "docs/engineering/plugin-integration/evidence/VREC-PLG-005-evaluator.json"
+  ],
+  "evidence_selection": "Every retained file under this WO evidence directory except the mutable implementation handoff JSON and Markdown; include all original failed attempts and later passing observations.",
+  "candidate_selection": "Clean committed implementation, completion decision and these preparation inputs, immediately before capture.",
+  "reserved": [
+    "assurance verification",
+    "release",
+    "PR merge"
+  ],
+  "id_check": "No VREC with this ID in history across all fetched refs.",
+  "ci_comparison_correction": {
+    "failed_run": "https://github.com/mmzen/se_harness/actions/runs/34506824913",
+    "rule": "WEX201 / QGP-G4I-PATHS",
+    "reported_path": "docs/engineering/ci-pipeline/README.md",
+    "old_event_base": "f0a3a223d9c11d7dcfe38a77db43704fdbd22fdb",
+    "checkout_merge": "0f02491b15a6c2c0a04601422b505b778c260eb0",
+    "checkout_main_parent": "bcbd02624d168f4c2f812c5f328234fab73a3bc7",
+    "candidate_does_not_change_reported_path": true,
+    "correction": "Refreshed PR #435 base metadata with gh pr edit --base main. Target remains main; API now returns bcbd0262. Required scope check remains enabled; retain its next fresh run."
+  }
+}
