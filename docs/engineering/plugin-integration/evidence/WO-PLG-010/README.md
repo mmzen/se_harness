@@ -8,7 +8,7 @@ authority store, host registration or policy exception.
 
 | Evidence | What it establishes |
 | --- | --- |
-| [Independent Windows report](acceptance/independent-windows/REPORT.md) | Actual agent-directed CHG01â€“06 and CHG08â€“10 observations using released 0.16.0; fixed oracle, requests, raw calls, state readbacks and prompt counts. |
+| [Independent Windows report](acceptance/independent-windows/REPORT.md) | Actual agent-directed CHG01Ã¢â‚¬â€œ06 and CHG08Ã¢â‚¬â€œ10 observations using released 0.16.0; fixed oracle, requests, raw calls, state readbacks and prompt counts. |
 | [Case summary](acceptance/independent-windows/behavior-evidence/summary.json) | Exact observed cases and the limits of grouped variants. |
 | [Retained file inventory](acceptance/independent-windows/retention-inventory.json) | Hashes of the copied observations and original/corrected skill bytes. |
 | [Windows live guard cases](acceptance/live-guard-win-016-02/chg07-guard.json) and [Linux live guard cases](acceptance/live-guard-linux-016-02/chg07-guard.json) | The real 0.16.0 guard admits exactly three execution rights for a published passing commit, refuses four other rights, refuses branch-only delegation, and refuses a new unpublished head despite its parent's passing check. These are guard probes, not lifecycle applications. |
@@ -47,9 +47,10 @@ this runner defect is not attributed to the product skill.
   agent session. Linux command replay is separate from fresh model reasoning.
 - Receipt-loss tests suppress acknowledgement after the real process exits.
   They do not claim an in-flight atomic-transaction crash test.
-- The actual CHG07 live delivery begins with the retained start. Completion and
-  ready-VREC preparation are later delivery steps; guard-only results do not
-  claim those mutations occurred.
+- The actual CHG07 live delivery now includes the retained start and
+  [applied completion](governance/completion/chg-complete-applied.json). Ready-VREC
+  preparation is the next delivery step; guard-only results do not claim it
+  occurred.
 - Linux CI at `0600fb70` passed 1,134 source tests (four skipped). The local
   Windows run and unsandboxed retry each reached one unchanged test's Git-object
   cleanup error (23 skipped). Those failures remain visible; no out-of-scope
