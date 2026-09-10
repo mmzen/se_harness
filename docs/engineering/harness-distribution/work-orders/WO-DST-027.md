@@ -2,7 +2,7 @@
 id = "WO-DST-027"
 type = "work_order"
 title = "Issue #433, templates: the retired relation in the traceability policy and the completion decider in the work-order template"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-10"
 updated = "2026-09-10"
@@ -42,6 +42,13 @@ to = "approved"
 decided_at = "2026-09-10T10:18:43Z"
 decided_by = "engineering-owner"
 reason = "Approved by the accountable engineering owner on 2026-09-10 by selecting the presented option 'Approve both packets (Recommended)', as a decision distinct from the approval of its definitions in the same transaction. This approval is the delegating act under DR-007 and DR-015: the work order carries [delegation] class = 'execution', so DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE may be applied by the delegated-executor role while the required validate check is success for the exact candidate head, read from the base of the pull request. It authorizes only the declared scope: the TRC-008 paragraph of the standard TRACEABILITY.md template, the guidance under the Completion report format heading of the standard work-order template, the tests, the UML note, the domain index, the evidence file and the handoff packet. It authorizes no change to any root managed byte, no rewrite of an existing work order, no verification decision, no release, no publication and no adoption; the merges remain the owner's decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-10T12:21:47Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at f00b93e04f6b340c07194fa6e51bfbfd7ebdcb9b (check-run 102867058651, source github-checks)."
 +++
 
 # Work Order: Issue #433, templates: the retired relation in the traceability policy and the completion decider in the work-order template
