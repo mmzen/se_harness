@@ -1,0 +1,17 @@
+{
+  "status": "absent context observed",
+  "groups": [
+    "absent-context"
+  ],
+  "writer_dispatches": 0,
+  "unrun": [
+    "separate stale-context case",
+    "separate incomplete-context case",
+    "native host enforcement"
+  ],
+  "approval_prompts": 0,
+  "evidence_class": "Windows independent model observations in one session; Linux replay separate",
+  "trace_records": [
+    "evd10-readonly-check"
+  ]
+}

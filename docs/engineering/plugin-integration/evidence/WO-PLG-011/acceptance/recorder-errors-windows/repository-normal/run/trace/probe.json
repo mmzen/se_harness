@@ -1,0 +1,26 @@
+{
+  "label": "probe",
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-c",
+    "from pathlib import Path; import sys,time; p=Path(sys.argv[-1]); p.mkdir(parents=True,exist_ok=True); (p/'sentinel.txt').write_text('observed\\n',encoding='utf8'); print('probe-stdout',flush=True); print('probe-stderr',file=sys.stderr,flush=True); sys.exit(0)",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\repository-normal\\run\\capture-repository"
+  ],
+  "stdin": null,
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\repository-normal\\run",
+  "exit_code": 0,
+  "stdout": "probe-stdout\r\n",
+  "stderr": "probe-stderr\r\n",
+  "before": {},
+  "after": {
+    "sentinel.txt": "9b18cfe191ae34a57f99051c3a2b73f5eae86151ec9224aa341195bb7b51b39f"
+  },
+  "changed_paths": [
+    "sentinel.txt"
+  ],
+  "started_unix": 1789071079.0891283,
+  "duration_seconds": 0.08433771133422852,
+  "original_record_sha256": "1358164e80693191e01082cfa6f69441bc0d30f3cc2844351e22328a2d352adb"
+}

@@ -1,0 +1,26 @@
+{
+  "label": "probe",
+  "argv": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "-I",
+    "-B",
+    "-c",
+    "from pathlib import Path; import sys,time; p=Path(sys.argv[-1]); p.mkdir(parents=True,exist_ok=True); (p/'sentinel.txt').write_text('observed\\n',encoding='utf8'); print('probe-stdout',flush=True); print('probe-stderr',file=sys.stderr,flush=True); sys.exit(0)",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/repository-normal/run/capture-repository"
+  ],
+  "stdin": null,
+  "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/repository-normal/run",
+  "exit_code": 0,
+  "stdout": "probe-stdout\n",
+  "stderr": "probe-stderr\n",
+  "before": {},
+  "after": {
+    "sentinel.txt": "08cfb1f08c9a2b3985853df5336808a27d616d731c6e944ff0a4e8e74dde5e5f"
+  },
+  "changed_paths": [
+    "sentinel.txt"
+  ],
+  "started_unix": 1789071198.959166,
+  "duration_seconds": 0.0759129524230957,
+  "original_record_sha256": "1358164e80693191e01082cfa6f69441bc0d30f3cc2844351e22328a2d352adb"
+}

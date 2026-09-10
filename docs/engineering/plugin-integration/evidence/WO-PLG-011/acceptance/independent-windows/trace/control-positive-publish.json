@@ -1,0 +1,60 @@
+{
+  "label": "control-positive-publish",
+  "argv": [
+    "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-eval-016/Scripts/python.exe",
+    "-I",
+    "-B",
+    "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-evidence-acceptance/independent-20260911/project_action.py",
+    "--control-dir",
+    "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-evidence-acceptance/independent-20260911/external-control-calibration",
+    "--action",
+    "publish",
+    "--commit",
+    "772f90c03a04d0a7914088ac6b869bb829b4bcad",
+    "--evidence-digest",
+    "f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220",
+    "--destination",
+    "fixture://registry/evidence-demo/1.2.3"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911",
+  "stdin": null,
+  "started_unix": 1789069539.6158135,
+  "duration_seconds": 0.15208840370178223,
+  "exit_code": 0,
+  "stdout": "{\"simulation_only\": true, \"outcome\": \"applied\", \"request\": {\"action\": \"publish\", \"commit\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\", \"evidence_digest\": \"f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220\", \"destination\": \"fixture://registry/evidence-demo/1.2.3\"}, \"statefile\": \"registry.json\"}\r\n",
+  "stderr": "",
+  "before": {
+    "allowlist.json": "e2e8e5a6c70424003b55d9ef64e5254e632dfc8389a20746a6930a5f72e8a891",
+    "effects.jsonl": "45214f7f2a66c9e8f9a9d3a1e7e94f001a0078332b224aebe02b92ae2463ab06",
+    "gates.json": "121235b84fe9b49a5c35fa5a16c5d13116ce251db35c3619a787e4ad412ec598",
+    "invocations.jsonl": "f810e24fe4af275fedc72a3fe8e0bf85090363c6312fbbd75eec367e33d98e71",
+    "registry.json": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "remote-refs.json": "5f2861a68375a46710e289126707e6ee6493e39240a33af93ba9eb3f723d693c"
+  },
+  "after": {
+    "allowlist.json": "e2e8e5a6c70424003b55d9ef64e5254e632dfc8389a20746a6930a5f72e8a891",
+    "effects.jsonl": "72d0ecfb683218dcc3ae00756d8c0acbd22ec54bb1892c5009885f33a584a657",
+    "gates.json": "121235b84fe9b49a5c35fa5a16c5d13116ce251db35c3619a787e4ad412ec598",
+    "invocations.jsonl": "3f4144e7f7dd0db90f500f3e632b32ce54c62e642134ccf052bad7cc920a70c1",
+    "registry.json": "830446321443a4a07c503fef10ba55f780fd46d2d5380feb19d621dd679b69c4",
+    "remote-refs.json": "5f2861a68375a46710e289126707e6ee6493e39240a33af93ba9eb3f723d693c"
+  },
+  "before_statefiles": {
+    "allowlist.json": "{\n  \"actions\": [\n    {\n      \"action\": \"merge\",\n      \"commit\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n      \"evidence_digest\": \"f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220\",\n      \"destination\": \"fixture://repository/evidence-demo/refs/heads/main\"\n    },\n    {\n      \"action\": \"publish\",\n      \"commit\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n      \"evidence_digest\": \"f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220\",\n      \"destination\": \"fixture://registry/evidence-demo/1.2.3\"\n    }\n  ]\n}\n",
+    "gates.json": "{\n  \"candidate\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n  \"required-check\": \"success\"\n}\n",
+    "registry.json": "{}\n",
+    "remote-refs.json": "{\n  \"fixture://repository/evidence-demo/refs/heads/main\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\"\n}\n"
+  },
+  "after_statefiles": {
+    "allowlist.json": "{\n  \"actions\": [\n    {\n      \"action\": \"merge\",\n      \"commit\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n      \"evidence_digest\": \"f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220\",\n      \"destination\": \"fixture://repository/evidence-demo/refs/heads/main\"\n    },\n    {\n      \"action\": \"publish\",\n      \"commit\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n      \"evidence_digest\": \"f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220\",\n      \"destination\": \"fixture://registry/evidence-demo/1.2.3\"\n    }\n  ]\n}\n",
+    "gates.json": "{\n  \"candidate\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n  \"required-check\": \"success\"\n}\n",
+    "registry.json": "{\n  \"fixture://registry/evidence-demo/1.2.3\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\"\n}\n",
+    "remote-refs.json": "{\n  \"fixture://repository/evidence-demo/refs/heads/main\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\"\n}\n"
+  },
+  "changed_paths": [
+    "effects.jsonl",
+    "invocations.jsonl",
+    "registry.json"
+  ],
+  "receipt_suppressed_after_exit": false
+}

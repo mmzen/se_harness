@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "-I",
+    "-B",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/run_external_replay.py",
+    "--bundle",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/external-timeout/bundle",
+    "--output",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/external-timeout/run",
+    "--command-timeout",
+    "2",
+    "--replay-root",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/external-timeout/native"
+  ],
+  "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/external-timeout",
+  "exit_code": 1,
+  "stdout": "{\"passed\": false, \"output\": \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/external-timeout/run\"}\n",
+  "stderr": "Traceback (most recent call last):\n  File \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/run_external_replay.py\", line 168, in <module>\n    main()\n  File \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/run_external_replay.py\", line 149, in main\n    raise command_error\n  File \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/run_external_replay.py\", line 125, in main\n    result = subprocess.run(argv, cwd=output, env=env, capture_output=True,\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/subprocess.py\", line 550, in run\n    stdout, stderr = process.communicate(input, timeout=timeout)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/subprocess.py\", line 1209, in communicate\n    stdout, stderr = self._communicate(input, endtime, timeout)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/subprocess.py\", line 2116, in _communicate\n    self._check_timeout(endtime, orig_timeout, stdout, stderr)\n  File \"/usr/lib/python3.12/subprocess.py\", line 1253, in _check_timeout\n    raise TimeoutExpired(\nsubprocess.TimeoutExpired: Command '['/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python', '-I', '-B', '-c', 'from pathlib import Path; import sys,time; p=Path(sys.argv[-1]); p.mkdir(parents=True,exist_ok=True); (p/\\'invocations.jsonl\\').write_text(\\'{}\\\\n\\',encoding=\\'utf8\\'); (p/\\'effects.jsonl\\').write_text(\\'{}\\\\n\\',encoding=\\'utf8\\'); (p/\\'remote-refs.json\\').write_text(\\'{\"probe\":true}\\\\n\\',encoding=\\'utf8\\'); print(\\'probe-stdout\\',flush=True); print(\\'probe-stderr\\',file=sys.stderr,flush=True); time.sleep(30)', '--control-dir', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/external-timeout/run/fixtures/external-control-calibration']' timed out after 2.0 seconds\n"
+}

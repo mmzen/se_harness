@@ -1,0 +1,17 @@
+{
+  "label": "capture-verification-help",
+  "phase": "read-only platform preparation",
+  "argv": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "capture-verification",
+    "--help"
+  ],
+  "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-preparation-20260910",
+  "exit_code": 0,
+  "stdout": "usage: harnessctl capture-verification [-h] --id RECORD_ID --work-order\n                                       WORK_ORDER --verification VERIFICATION\n                                       --evidence EVIDENCE [--owner OWNER]\n                                       [--output OUTPUT] [--domain DOMAIN]\n                                       [--json]\n                                       [target]\n\npositional arguments:\n  target\n\noptions:\n  -h, --help            show this help message and exit\n  --id RECORD_ID\n  --work-order WORK_ORDER\n                        work order to verify; repeat for aggregate candidates\n  --verification VERIFICATION\n                        applicable verification contract; repeat for aggregate\n                        candidates\n  --evidence EVIDENCE   retained evidence path; repeat for aggregate\n                        candidates\n  --owner OWNER         preparation actor and record owner; does not verify\n                        the record\n  --output OUTPUT\n  --domain DOMAIN       place the record in an explicit engineering domain\n  --json                emit the canonical workflow result as JSON\n",
+  "stderr": ""
+}

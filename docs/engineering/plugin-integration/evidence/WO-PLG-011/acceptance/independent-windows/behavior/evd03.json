@@ -1,0 +1,29 @@
+{
+  "status": "observed with explicit fault-injection limits",
+  "groups": [
+    "lost-receipt",
+    "uninspectable-completed-effects",
+    "injected-partial-state"
+  ],
+  "preparation_calls": {
+    "lost_receipt": 1,
+    "uninspectable_completed": 1,
+    "synthetic_partial_recovery": 0
+  },
+  "replay_calls": 0,
+  "note": "Actual completed exits hidden; separate partial state injected from retained VREC bytes. No in-flight crash or atomicity claim.",
+  "approval_prompts": 0,
+  "evidence_class": "Windows independent model observations in one session; Linux replay separate",
+  "trace_records": [
+    "evd03-lost-context",
+    "evd03-lost-capture",
+    "evd03-lost-inspect-first",
+    "evd03-lost-check",
+    "evd03-uncertain-context",
+    "evd03-uncertain-capture",
+    "evd03-uncertain-inspection",
+    "evd03-partial-context",
+    "evd03-partial-injected-setup",
+    "evd03-partial-inspection-unavailable"
+  ]
+}

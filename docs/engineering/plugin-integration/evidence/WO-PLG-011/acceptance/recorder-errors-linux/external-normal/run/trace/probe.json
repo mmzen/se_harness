@@ -1,0 +1,44 @@
+{
+  "label": "probe",
+  "argv": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "-I",
+    "-B",
+    "-c",
+    "from pathlib import Path; import sys,time; p=Path(sys.argv[-1]); p.mkdir(parents=True,exist_ok=True); (p/'invocations.jsonl').write_text('{}\\n',encoding='utf8'); (p/'effects.jsonl').write_text('{}\\n',encoding='utf8'); (p/'remote-refs.json').write_text('{\"probe\":true}\\n',encoding='utf8'); print('probe-stdout',flush=True); print('probe-stderr',file=sys.stderr,flush=True); sys.exit(0)",
+    "--control-dir",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/external-normal/run/fixtures/external-control-calibration"
+  ],
+  "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/external-normal/run",
+  "exit_code": 0,
+  "stdout": "probe-stdout\n",
+  "stderr": "probe-stderr\n",
+  "before": {
+    "allowlist.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "effects.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gates.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "invocations.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "registry.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "remote-refs.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+  },
+  "after": {
+    "allowlist.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "effects.jsonl": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "gates.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "invocations.jsonl": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "registry.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "remote-refs.json": "2e1aa608a1146ea9abf6a0298d9f25a0497bd719677564482a0d2a8b0e9ce1d5"
+  },
+  "local_before": {},
+  "local_after": {},
+  "changed_paths": [
+    "effects.jsonl",
+    "invocations.jsonl",
+    "remote-refs.json"
+  ],
+  "started_unix": 1789071202.4116132,
+  "duration_seconds": 0.1151132583618164,
+  "original_record_sha256": "52c50e63cb12a0498a9b45191a75b32d962bb258b678af5bab7abc952160f15d",
+  "dispatch_delta": 1,
+  "simulated_effect_delta": 1
+}

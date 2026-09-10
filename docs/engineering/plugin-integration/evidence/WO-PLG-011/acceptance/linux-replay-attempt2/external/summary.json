@@ -1,0 +1,16 @@
+{
+  "classification": "Command replay and fixed empty observation spans, not fresh model compliance or live external enforcement",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+  "runner_sha256": "571a4f59b55882d0254dad92b720fa353efd32911e87e83e6ce51f46bf57e57c",
+  "bundle_sha256": "02fb894e8cc05cfee24c9b4d0a34d6b1531bb39866d015a1d2dd01624fa2d078",
+  "native_model_calls": 0,
+  "decision_prompt_count": null,
+  "commands": [],
+  "negative_observations": [],
+  "passed": false,
+  "failure": {
+    "type": "ValueError",
+    "message": "Native negative fixture missing: /mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/partial-uncertain-repository"
+  }
+}

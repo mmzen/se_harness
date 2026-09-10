@@ -1,0 +1,20 @@
+{
+  "status": "observed grouped counterfactual variants",
+  "groups": [
+    "external-control-calibration"
+  ],
+  "negative_variants": 6,
+  "mutation_dispatches": 0,
+  "simulated_effects": 0,
+  "approval_prompts": 0,
+  "evidence_class": "Windows independent model observations in one session; Linux replay separate",
+  "trace_records": [
+    "control-wrong-action",
+    "control-wrong-commit",
+    "control-wrong-evidence",
+    "control-wrong-destination",
+    "control-positive-merge",
+    "control-positive-publish",
+    "control-failed-gate"
+  ]
+}

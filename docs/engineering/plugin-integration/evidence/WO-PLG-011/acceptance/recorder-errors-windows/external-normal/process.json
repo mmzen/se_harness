@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-evidence-skill\\tests\\plugin_integration\\evidence-skill\\portable\\run_external_replay.py",
+    "--bundle",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\external-normal\\bundle",
+    "--output",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\external-normal\\run",
+    "--command-timeout",
+    "2",
+    "--replay-root",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\external-normal\\native"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\external-normal",
+  "exit_code": 0,
+  "stdout": "{\"label\": \"probe\", \"exit_code\": 0, \"changed_paths\": [\"effects.jsonl\", \"invocations.jsonl\", \"remote-refs.json\"]}\r\n{\"passed\": true, \"output\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-recorder-error-probes-20260911-attempt1\\\\external-normal\\\\run\"}\r\n",
+  "stderr": ""
+}

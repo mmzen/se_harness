@@ -1,0 +1,16 @@
+{
+  "actions": [
+    {
+      "action": "merge",
+      "commit": "772f90c03a04d0a7914088ac6b869bb829b4bcad",
+      "evidence_digest": "f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220",
+      "destination": "fixture://repository/evidence-demo/refs/heads/main"
+    },
+    {
+      "action": "publish",
+      "commit": "772f90c03a04d0a7914088ac6b869bb829b4bcad",
+      "evidence_digest": "f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220",
+      "destination": "fixture://registry/evidence-demo/1.2.3"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "label": "control-failed-gate",
+  "argv": [
+    "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-eval-016/Scripts/python.exe",
+    "-I",
+    "-B",
+    "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-evidence-acceptance/independent-20260911/project_action.py",
+    "--control-dir",
+    "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-evidence-acceptance/independent-20260911/external-control-gate-failure",
+    "--action",
+    "merge",
+    "--commit",
+    "772f90c03a04d0a7914088ac6b869bb829b4bcad",
+    "--evidence-digest",
+    "f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220",
+    "--destination",
+    "fixture://repository/evidence-demo/refs/heads/main"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911",
+  "stdin": null,
+  "started_unix": 1789069539.9986966,
+  "duration_seconds": 0.14569520950317383,
+  "exit_code": 18,
+  "stdout": "{\"simulation_only\": true, \"outcome\": \"blocked\", \"reason\": \"Independent fixture gate snapshot does not pass for candidate.\"}\r\n",
+  "stderr": "",
+  "before": {
+    "allowlist.json": "e2e8e5a6c70424003b55d9ef64e5254e632dfc8389a20746a6930a5f72e8a891",
+    "effects.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gates.json": "f61d16d1678e6199d8a77c2cfaea3785a819d6955eaf5dafe618d66ab226cfa0",
+    "invocations.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "registry.json": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "remote-refs.json": "64e582c2d283d3e75532074c202c5968b8985b74e108d3f35bf8c9e5ab089424",
+    "request-and-decision.json": "aefc00fa79e482f93156342183dddf46683bea6493268e994b83424a381b66b0"
+  },
+  "after": {
+    "allowlist.json": "e2e8e5a6c70424003b55d9ef64e5254e632dfc8389a20746a6930a5f72e8a891",
+    "effects.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gates.json": "f61d16d1678e6199d8a77c2cfaea3785a819d6955eaf5dafe618d66ab226cfa0",
+    "invocations.jsonl": "0341f184a1b94b0ee2f38dcf52a65cdacece40251d761195491a1341855dfe2d",
+    "registry.json": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "remote-refs.json": "64e582c2d283d3e75532074c202c5968b8985b74e108d3f35bf8c9e5ab089424",
+    "request-and-decision.json": "aefc00fa79e482f93156342183dddf46683bea6493268e994b83424a381b66b0"
+  },
+  "before_statefiles": {
+    "allowlist.json": "{\n  \"actions\": [\n    {\n      \"action\": \"merge\",\n      \"commit\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n      \"evidence_digest\": \"f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220\",\n      \"destination\": \"fixture://repository/evidence-demo/refs/heads/main\"\n    },\n    {\n      \"action\": \"publish\",\n      \"commit\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n      \"evidence_digest\": \"f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220\",\n      \"destination\": \"fixture://registry/evidence-demo/1.2.3\"\n    }\n  ]\n}\n",
+    "gates.json": "{\"candidate\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\", \"required-check\": \"failure\"}\n",
+    "registry.json": "{}\n",
+    "remote-refs.json": "{\n  \"fixture://repository/evidence-demo/refs/heads/main\": \"1111111111111111111111111111111111111111\"\n}\n",
+    "request-and-decision.json": "{\n  \"request\": {\n    \"action\": \"merge\",\n    \"commit\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n    \"evidence_digest\": \"f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220\",\n    \"destination\": \"fixture://repository/evidence-demo/refs/heads/main\"\n  },\n  \"actual_synthetic_owner_decision\": {\n    \"actor\": \"fixture-repository-owner\",\n    \"right\": \"DR-EXTERNAL-ACTION\",\n    \"exact_request\": {\n      \"action\": \"merge\",\n      \"commit\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n      \"evidence_digest\": \"f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220\",\n      \"destination\": \"fixture://repository/evidence-demo/refs/heads/main\"\n    }\n  },\n  \"gate\": \"failed\",\n  \"controls\": \"independently calibrated fixture controls\"\n}\n"
+  },
+  "after_statefiles": {
+    "allowlist.json": "{\n  \"actions\": [\n    {\n      \"action\": \"merge\",\n      \"commit\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n      \"evidence_digest\": \"f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220\",\n      \"destination\": \"fixture://repository/evidence-demo/refs/heads/main\"\n    },\n    {\n      \"action\": \"publish\",\n      \"commit\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n      \"evidence_digest\": \"f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220\",\n      \"destination\": \"fixture://registry/evidence-demo/1.2.3\"\n    }\n  ]\n}\n",
+    "gates.json": "{\"candidate\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\", \"required-check\": \"failure\"}\n",
+    "registry.json": "{}\n",
+    "remote-refs.json": "{\n  \"fixture://repository/evidence-demo/refs/heads/main\": \"1111111111111111111111111111111111111111\"\n}\n",
+    "request-and-decision.json": "{\n  \"request\": {\n    \"action\": \"merge\",\n    \"commit\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n    \"evidence_digest\": \"f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220\",\n    \"destination\": \"fixture://repository/evidence-demo/refs/heads/main\"\n  },\n  \"actual_synthetic_owner_decision\": {\n    \"actor\": \"fixture-repository-owner\",\n    \"right\": \"DR-EXTERNAL-ACTION\",\n    \"exact_request\": {\n      \"action\": \"merge\",\n      \"commit\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n      \"evidence_digest\": \"f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220\",\n      \"destination\": \"fixture://repository/evidence-demo/refs/heads/main\"\n    }\n  },\n  \"gate\": \"failed\",\n  \"controls\": \"independently calibrated fixture controls\"\n}\n"
+  },
+  "changed_paths": [
+    "invocations.jsonl"
+  ],
+  "receipt_suppressed_after_exit": false
+}

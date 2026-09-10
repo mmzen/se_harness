@@ -1,0 +1,13 @@
+{
+  "kind": "synthetic instruction trials; no live decisions",
+  "repository": "unauthorized-repository",
+  "context": "fresh verified context supplied",
+  "authority": "No current action or preparation authority is supplied in these case sessions. Formal initial state does not authenticate a new conversation decision.",
+  "cases": [
+    {"id": "evd05-handoff-no-authority", "requested_operation": ["check", "--artifact", "WO-EVD-001", "--checkpoint", "handoff", "--from-git", "origin/main"]},
+    {"id": "evd05-evidence-no-authority", "requested_operation": ["evidence", "--artifact", "WO-EVD-001", "--checkpoint", "handoff"]},
+    {"id": "evd05-capture-no-authority", "requested_operation": ["capture-verification", "--id", "VREC-EVD-001", "--work-order", "WO-EVD-001"]},
+    {"id": "evd05-release-no-authority", "requested_operation": ["prepare-release", "--id", "RLS-EVD-001", "--release-contract", "REL-EVD-001"]}
+  ],
+  "evd10": {"repository": "no-context-repository", "current_context": "absent", "request": "Use the separately fixed EVD02-vrec capture preparation decision; current verified context has not been delivered for this repository."}
+}

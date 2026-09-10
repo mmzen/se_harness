@@ -1,0 +1,37 @@
+{
+  "classification": "Exact selected Windows commands for replay; not a policy engine or new model test",
+  "fixture_boundaries": {
+    "clean-candidate-input": "Copy capture-repository after evd07-candidate-commit, before evd07-capture; candidate C 772f90c03a04d0a7914088ac6b869bb829b4bcad",
+    "capture-repository-G": "After evd07-governance-commit; G cad90fac47a37d92f9eb94133f069dff6d33adbc",
+    "lost-repository": "Fresh copy of clean-candidate-input",
+    "uncertain-repository": "Fresh copy of clean-candidate-input",
+    "dirty-repository": "Fresh copy of clean-candidate-input, then explicit dirty setup",
+    "handoff-repository": "Fresh copy of clean-candidate-input, then synthetic starting in_progress status edit",
+    "release-repository": "Fresh copy of capture-repository after G, then explicit synthetic preverified input setup; this is not an assurance transition test",
+    "corrected-repository": "Fresh copy of clean-candidate-input, same preparation decision and expanded predeclared normal operation footprint",
+    "unauthorized-repository": "Fresh copy of clean-candidate-input; no current action authority in these counterfactual scenarios",
+    "unauthorized-release-repository": "Local git clone --no-hardlinks of release-repository at synthetic preverified governance commit; untracked prepared RLS is not copied",
+    "no-context-repository": "Fresh copy of clean-candidate-input; no current handler delivery for this repository",
+    "partial-uncertain-repository": "Fresh copy of clean-candidate-input, pre-interruption context, then copy only actual corrected VREC bytes; evaluator sidecar absent; explicit synthetic partial state"
+  },
+  "groups": {
+    "setup-original": ["setup-01-init","setup-02-assets","setup-03-git-init","setup-04-git-add","setup-05-baseline-commit","setup-06-base-ref","setup-07-identity","setup-08-doctor","setup-09-validate"],
+    "setup-corrected": ["setup-10-correct-fixture-enum","setup-11-validate-corrected","setup-12-correction-add","setup-13-correction-commit","setup-14-corrected-base-ref","setup-15-context"],
+    "observations-candidate": ["evd05-preflight-control","evd02-selected-wo","evd01-success","evd01-injected-failure","evd01-retain-observations","evd07-candidate-add","evd07-candidate-commit","evd07-candidate-readback","evd07-all-refs"],
+    "capture-original": ["evd07-capture","evd07-vrec-state","evd07-vrec-check","evd07-governance-add","evd07-governance-commit","evd07-governance-readback","evd07-wo-after"],
+    "lost-receipt": ["evd03-lost-context","evd03-lost-capture","evd03-lost-inspect-first","evd03-lost-check"],
+    "uninspectable-completed-effects": ["evd03-uncertain-context","evd03-uncertain-capture","evd03-uncertain-inspection"],
+    "dirty-candidate": ["evd06-dirty-setup","evd06-dirty-context","evd06-dirty-inspection","evd06-cli-refusal-supplement"],
+    "release-input-setup": ["rls-setup-preverified-status","rls-setup-preverified-metadata","rls-setup-validate","rls-setup-add","rls-setup-commit"],
+    "release-preparation": ["evd02-rls-context","evd02-rls-selected-vrec","evd02-rls-refs-records","evd02-rls-prepare","evd02-rls-state","evd02-rls-check"],
+    "handoff-evidence": ["handoff-setup-state","evd05-handoff-context","evd05-handoff-readonly","evd05-handoff-authorized-first","evd05-evidence-authorized","evd05-handoff-authorized-repeat"],
+    "external-control-calibration": ["control-wrong-action","control-wrong-commit","control-wrong-evidence","control-wrong-destination","control-positive-merge","control-positive-publish","control-failed-gate"],
+    "external-positive": ["evd09-current-integration-gates","evd09-project-tool"],
+    "capture-corrected": ["corrected-capture-context","corrected-capture-readback-before","corrected-capture-refs","corrected-capture","corrected-capture-state","corrected-capture-check"],
+    "absent-writing-authority": ["evd05-no-authority-context","evd05-release-no-authority-clone","evd05-release-no-authority-context","evd05-no-authority-preflight"],
+    "absent-context": ["evd10-readonly-check"],
+    "injected-partial-state": ["evd03-partial-context","evd03-partial-injected-setup","evd03-partial-inspection-unavailable"]
+  },
+  "negative_instruction_observations": "behavior/*-before.json and *-after.json retain supplied model conclusions, prompt counts, full local and simulated target hashes. They are not action scripts.",
+  "replay_binding_rule": "Linux initializes fresh with native external 0.16.0, copies only raw authored content, executes exact selected argv/edits with explicit path/C/G/evidence digest bindings. Do not copy Windows managed locks, .git objects, environments or evaluator sidecars as Linux expected runtime identities. Preserve original failures. Report replay as command regression only."
+}

@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "-I",
+    "-B",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/run_external_replay.py",
+    "--bundle",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/external-normal/bundle",
+    "--output",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/external-normal/run",
+    "--command-timeout",
+    "2",
+    "--replay-root",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/external-normal/native"
+  ],
+  "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/external-normal",
+  "exit_code": 0,
+  "stdout": "{\"label\": \"probe\", \"exit_code\": 0, \"changed_paths\": [\"effects.jsonl\", \"invocations.jsonl\", \"remote-refs.json\"]}\n{\"passed\": true, \"output\": \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/external-normal/run\"}\n",
+  "stderr": ""
+}

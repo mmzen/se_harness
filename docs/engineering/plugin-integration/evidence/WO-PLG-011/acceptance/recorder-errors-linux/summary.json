@@ -1,0 +1,56 @@
+{
+  "classification": "Recorder fault probes only; no evaluator/model/lifecycle behavior",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+  "runner_sha256": "4c2df594a3c631f2bd7f6a76a8da20accdadebe07c36531e3430732bd628f4b3",
+  "sources": {
+    "run_replay.py": "897426be4ff58ad1797fda7f35ab0703485dea647fee1821ba7d21c5298b99c2",
+    "run_external_replay.py": "3a1c303383b7c537b2102b01dbc9fd9d484269f679966d1a47dd1d81c01e40c3",
+    "check_recorder_errors.py": "4c2df594a3c631f2bd7f6a76a8da20accdadebe07c36531e3430732bd628f4b3"
+  },
+  "cases": [
+    {
+      "case": "repository-timeout",
+      "passed": true,
+      "expected_error": "TimeoutExpired",
+      "trace": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/repository-timeout/run/trace/probe.json",
+      "trace_sha256": "dbd272bb3cc0446717594d7447f8b68537e6fc0b32f9e9ac122df5379ce5bb32"
+    },
+    {
+      "case": "repository-missing-executable",
+      "passed": true,
+      "expected_error": "FileNotFoundError",
+      "trace": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/repository-missing-executable/run/trace/probe.json",
+      "trace_sha256": "5bae6e3c968ebb49fb9888134c423205a749a738a7add131b0e8651042d5c195"
+    },
+    {
+      "case": "repository-normal",
+      "passed": true,
+      "expected_error": null,
+      "trace": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/repository-normal/run/trace/probe.json",
+      "trace_sha256": "34f3a851f3b5f0d2f80c02369a3f514c9fb8c5778b926707533e7e55db662373"
+    },
+    {
+      "case": "external-timeout",
+      "passed": true,
+      "expected_error": "TimeoutExpired",
+      "trace": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/external-timeout/run/trace/probe.json",
+      "trace_sha256": "8b847f0770d097db2aa5f49d0ab0540ae2fb093714231a084043b6e9913b8d4d"
+    },
+    {
+      "case": "external-missing-executable",
+      "passed": true,
+      "expected_error": "FileNotFoundError",
+      "trace": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/external-missing-executable/run/trace/probe.json",
+      "trace_sha256": "e59a1f4b23bc2769392f76a4492daf9e96fee26c56b40acb2088cee9c9cdf694"
+    },
+    {
+      "case": "external-normal",
+      "passed": true,
+      "expected_error": null,
+      "trace": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/external-normal/run/trace/probe.json",
+      "trace_sha256": "259ecb0beea0a56eb9ae1fd1d7b07499cd711c933b306870484676a56d92b3f5"
+    }
+  ],
+  "passed": true
+}

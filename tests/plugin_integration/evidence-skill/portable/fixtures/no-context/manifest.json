@@ -1,0 +1,56 @@
+{
+  "classification": "Explicit command replay inputs from the independent Windows observer; no new model behavior or authority decisions",
+  "assets": {
+    "raw-assets/docs/engineering/evidence-demo/capabilities/CAP-EVD-001.md": "d5f9f8b58a3c0a3d45cb02920d34f54ff2e095be40efd7ab7af414e247e70bc2",
+    "raw-assets/docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md": "f2c89d47916f74aaee16f6ccfad1f4f151eb6ac8cfb41c218afc53ceecb4853e",
+    "raw-assets/docs/engineering/evidence-demo/intent/INT-EVD-001.md": "e9e5ffd5a133dc8be99796fdb9da8cb7a508e7b3da0b57c5c0618494700889a1",
+    "raw-assets/docs/engineering/evidence-demo/release/REL-EVD-001.md": "cf19415796f52831383f9dc71d3277920a47cfeeb1d21f42b3fc8f68bd343a3f",
+    "raw-assets/docs/engineering/evidence-demo/requirements/REQ-EVD-001.md": "ee3b34a255fa68a9d267bc9aba5351e698fa94acd65812f0f552406f43e6cb1a",
+    "raw-assets/docs/engineering/evidence-demo/specifications/SPEC-EVD-001.md": "e6f2d20e5dd15742b395664bec8bed246708a007b1b9ecefb992d078e99d38b6",
+    "raw-assets/docs/engineering/evidence-demo/verification/VER-EVD-001.md": "90ae15da01e54cc28ed0aa5c0ad1a9941c5eb3f264baab29ca15455fc843028b",
+    "raw-assets/docs/engineering/evidence-demo/work-orders/WO-EVD-001.md": "4a02f6368953e25da2f014a48e1c195c5e50e1677cf008c853a5d92ec0dffed8",
+    "raw-assets/src/feature.py": "823631af5995f211d18083934fb01e483ec721a1499c03232a028664fef74afa",
+    "oracle.md": "4b791ff512aeb370b6a469789e5a4865a3744759c4b377daeb0c286c72fad401",
+    "raw-scenarios.json": "d13f94233ad1b751868f92d8b3e6856ebd8ffb005490d22aff977a18f040e7bd",
+    "raw-assets-manifest.json": "bf2421143256efbee080cc8999390698450eb32dfe1b88621255f2ae04054385",
+    "fixture_edit.py": "e23edeeb309d1a836c95950e939ca3dffbd7900ef06ea00a6e7c0e7fc8da3f31",
+    "inspect_fixture.py": "67ca1ff1b61222dc7b138b6ac580ffae2eb84a9677c83a5e32c1f71be33f5b59"
+  },
+  "records": [
+    {
+      "label": "evd10-readonly-check",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "WO-EVD-001",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-EVD-001",
+            "status": "implemented"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-EVD-001",
+            "status": "implemented"
+          }
+        ]
+      },
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd10-readonly-check.json",
+      "original_sha256": "b2d0596998a6990791aa515ca7d2e7f7fad451475a9afc5ebe5042dd66473be3"
+    }
+  ]
+}

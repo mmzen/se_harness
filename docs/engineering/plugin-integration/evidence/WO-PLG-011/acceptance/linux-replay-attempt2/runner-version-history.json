@@ -1,0 +1,108 @@
+{
+  "classification": "Exact per-batch historical runner identities; no assertion that final source ran earlier batches",
+  "batches": [
+    {
+      "batch": "attempt1/capture.json",
+      "runner_sha256": "a810bc8dd982bec0ba324f1215e40f4f29201c059e9c7547d4dec3f37c9316b4",
+      "source_available": false,
+      "retained_source": null
+    },
+    {
+      "batch": "attempt1/setup-original.json",
+      "runner_sha256": "2e91dad8226db082ee9ab77d2a24de1dce4e2b49e0948523175b68e7e14c0e13",
+      "source_available": false,
+      "retained_source": null
+    },
+    {
+      "batch": "attempt2/capture.json",
+      "runner_sha256": "c15fc4b0d962f916a8e306872f2965620d0766a101272a6ee10b7cfe70ab285c",
+      "source_available": false,
+      "retained_source": null
+    },
+    {
+      "batch": "attempt2/corrected.json",
+      "runner_sha256": "76bb855bdabb2280c99d6a708948f1f3ce12b6cb5f300fa923e13c4968956244",
+      "source_available": true,
+      "retained_source": "run_replay.py"
+    },
+    {
+      "batch": "attempt2/dirty.json",
+      "runner_sha256": "2ef8e7abcc5e31a703fc70e960390f68d6513877c0a73dcfc096831c89391cb3",
+      "source_available": true,
+      "retained_source": "run_replay.2ef8e7ab.py"
+    },
+    {
+      "batch": "attempt2/governance.json",
+      "runner_sha256": "2ef8e7abcc5e31a703fc70e960390f68d6513877c0a73dcfc096831c89391cb3",
+      "source_available": true,
+      "retained_source": "run_replay.2ef8e7ab.py"
+    },
+    {
+      "batch": "attempt2/handoff.json",
+      "runner_sha256": "2ef8e7abcc5e31a703fc70e960390f68d6513877c0a73dcfc096831c89391cb3",
+      "source_available": true,
+      "retained_source": "run_replay.2ef8e7ab.py"
+    },
+    {
+      "batch": "attempt2/lost.json",
+      "runner_sha256": "2ef8e7abcc5e31a703fc70e960390f68d6513877c0a73dcfc096831c89391cb3",
+      "source_available": true,
+      "retained_source": "run_replay.2ef8e7ab.py"
+    },
+    {
+      "batch": "attempt2/no-context.json",
+      "runner_sha256": "76bb855bdabb2280c99d6a708948f1f3ce12b6cb5f300fa923e13c4968956244",
+      "source_available": true,
+      "retained_source": "run_replay.py"
+    },
+    {
+      "batch": "attempt2/partial.json",
+      "runner_sha256": "76bb855bdabb2280c99d6a708948f1f3ce12b6cb5f300fa923e13c4968956244",
+      "source_available": true,
+      "retained_source": "run_replay.py"
+    },
+    {
+      "batch": "attempt2/release.json",
+      "runner_sha256": "2ef8e7abcc5e31a703fc70e960390f68d6513877c0a73dcfc096831c89391cb3",
+      "source_available": true,
+      "retained_source": "run_replay.2ef8e7ab.py"
+    },
+    {
+      "batch": "attempt2/setup-original.json",
+      "runner_sha256": "4dfde517aef05b995d84a101c54112146c0c44b64fac5f655c8fbfd074534882",
+      "source_available": false,
+      "retained_source": null
+    },
+    {
+      "batch": "attempt2/unauthorized-release.json",
+      "runner_sha256": "76bb855bdabb2280c99d6a708948f1f3ce12b6cb5f300fa923e13c4968956244",
+      "source_available": true,
+      "retained_source": "run_replay.py"
+    },
+    {
+      "batch": "attempt2/unauthorized.json",
+      "runner_sha256": "76bb855bdabb2280c99d6a708948f1f3ce12b6cb5f300fa923e13c4968956244",
+      "source_available": true,
+      "retained_source": "run_replay.py"
+    },
+    {
+      "batch": "attempt2/uncertain.json",
+      "runner_sha256": "2ef8e7abcc5e31a703fc70e960390f68d6513877c0a73dcfc096831c89391cb3",
+      "source_available": true,
+      "retained_source": "run_replay.2ef8e7ab.py"
+    },
+    {
+      "batch": "attempt2/external/summary.json",
+      "runner_sha256": "571a4f59b55882d0254dad92b720fa353efd32911e87e83e6ce51f46bf57e57c",
+      "source_available": true,
+      "retained_source": "run_external_replay.py"
+    },
+    {
+      "batch": "attempt2/external-attempt2/summary.json",
+      "runner_sha256": "571a4f59b55882d0254dad92b720fa353efd32911e87e83e6ce51f46bf57e57c",
+      "source_available": true,
+      "retained_source": "run_external_replay.py"
+    }
+  ],
+  "recovery_note": "run_replay.2ef8e7ab.py was reconstructed by removing final recorded-clone support; its bytes match the exact hash recorded by six batches. Four earliest distinct runner source versions were not persisted and remain unavailable."
+}

@@ -1,0 +1,207 @@
+{
+  "classification": "Explicit command replay inputs from the independent Windows observer; no new model behavior or authority decisions",
+  "assets": {
+    "raw-assets/docs/engineering/evidence-demo/capabilities/CAP-EVD-001.md": "d5f9f8b58a3c0a3d45cb02920d34f54ff2e095be40efd7ab7af414e247e70bc2",
+    "raw-assets/docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md": "f2c89d47916f74aaee16f6ccfad1f4f151eb6ac8cfb41c218afc53ceecb4853e",
+    "raw-assets/docs/engineering/evidence-demo/intent/INT-EVD-001.md": "e9e5ffd5a133dc8be99796fdb9da8cb7a508e7b3da0b57c5c0618494700889a1",
+    "raw-assets/docs/engineering/evidence-demo/release/REL-EVD-001.md": "cf19415796f52831383f9dc71d3277920a47cfeeb1d21f42b3fc8f68bd343a3f",
+    "raw-assets/docs/engineering/evidence-demo/requirements/REQ-EVD-001.md": "ee3b34a255fa68a9d267bc9aba5351e698fa94acd65812f0f552406f43e6cb1a",
+    "raw-assets/docs/engineering/evidence-demo/specifications/SPEC-EVD-001.md": "e6f2d20e5dd15742b395664bec8bed246708a007b1b9ecefb992d078e99d38b6",
+    "raw-assets/docs/engineering/evidence-demo/verification/VER-EVD-001.md": "90ae15da01e54cc28ed0aa5c0ad1a9941c5eb3f264baab29ca15455fc843028b",
+    "raw-assets/docs/engineering/evidence-demo/work-orders/WO-EVD-001.md": "4a02f6368953e25da2f014a48e1c195c5e50e1677cf008c853a5d92ec0dffed8",
+    "raw-assets/src/feature.py": "823631af5995f211d18083934fb01e483ec721a1499c03232a028664fef74afa",
+    "oracle.md": "4b791ff512aeb370b6a469789e5a4865a3744759c4b377daeb0c286c72fad401",
+    "raw-scenarios.json": "d13f94233ad1b751868f92d8b3e6856ebd8ffb005490d22aff977a18f040e7bd",
+    "raw-assets-manifest.json": "bf2421143256efbee080cc8999390698450eb32dfe1b88621255f2ae04054385",
+    "fixture_edit.py": "e23edeeb309d1a836c95950e939ca3dffbd7900ef06ea00a6e7c0e7fc8da3f31",
+    "inspect_fixture.py": "67ca1ff1b61222dc7b138b6ac580ffae2eb84a9677c83a5e32c1f71be33f5b59",
+    "corrected-footprint-expectation.md": "672db4796d7ff649cfeb2798f1642b17c0002fdf15ba512eaeb070805ebbf80c",
+    "session-context.py": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb"
+  },
+  "records": [
+    {
+      "label": "corrected-capture-context",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/session-context.py",
+        "--repo",
+        "{repo}",
+        "--environment",
+        "{environment}",
+        "--version",
+        "0.16.0",
+        "--payload-sha256",
+        "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "--archive-sha256",
+        "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "--host",
+        "codex",
+        "--context-limit",
+        "32768",
+        "--read-limit",
+        "32768"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": "{\"hook_event_name\": \"SessionStart\", \"source\": \"resume\", \"cwd\": \"{repo}\"}",
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\corrected-capture-context.json",
+      "original_sha256": "7be8f2a292ffe451947290a48d08db97a48856b2b87628657de11fd3cf1cccf4"
+    },
+    {
+      "label": "corrected-capture-readback-before",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/inspect_fixture.py",
+        "--repo",
+        "{repo}",
+        "--id",
+        "WO-EVD-001"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\corrected-capture-readback-before.json",
+      "original_sha256": "9f36c17455550554e75966979ef72060dbbc3207a6782165dcbb2ef7048f533e"
+    },
+    {
+      "label": "corrected-capture-refs",
+      "argv": [
+        "git",
+        "-C",
+        "{repo}",
+        "log",
+        "--all",
+        "--format=%H",
+        "--",
+        "docs/engineering/evidence-demo/verification-records/VREC-EVD-001.md"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\corrected-capture-refs.json",
+      "original_sha256": "7aaacd51748ac699176d276c9e537f0d1f44f814a0dfba6cbad960014ce0057a"
+    },
+    {
+      "label": "corrected-capture",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "capture-verification",
+        "{repo}",
+        "--id",
+        "VREC-EVD-001",
+        "--work-order",
+        "WO-EVD-001",
+        "--verification",
+        "VER-EVD-001",
+        "--evidence",
+        "docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md",
+        "--owner",
+        "fixture-preparation-actor",
+        "--domain",
+        "evidence-demo",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/evidence-demo/evidence/VREC-EVD-001-evaluator.json",
+        "docs/engineering/evidence-demo/verification-records/VREC-EVD-001.md",
+        "target/harness-dashboard/content/2f68241d38e28372cc15d9862514e8ace0a9d38e64ca016a43c50b4faee061b5.txt",
+        "target/harness-dashboard/dashboard-manifest.json",
+        "target/harness-dashboard/data/artifacts/1fdb99c68aa495498cb1553a0fc950adc2e51c0d4ffe7ba01254f41aeacccf39.json",
+        "target/harness-dashboard/data/artifacts/369188847510d33ab21bea7eadb77e4ce03f1f388d1a20390d1c368117e126b9.json",
+        "target/harness-dashboard/data/artifacts/4518fb01ee22fd31dc152ae08c578984cfb697ccdb8cb82f0964c6245b9cb1b3.json",
+        "target/harness-dashboard/data/artifacts/7a21c9c5f8f07049e2fa184e0a4fe9e07ca7c984571c77251713fc56fa442687.json",
+        "target/harness-dashboard/data/artifacts/9daee8f404dde105e9bb615956fc4bc599594a88510c9b8707395a9929a9d017.json",
+        "target/harness-dashboard/data/artifacts/b26e499cddd7cc335690077c3959368896b500d488be11b2c0be10c001493300.json",
+        "target/harness-dashboard/data/artifacts/b5f53aaa5054a6d352e403ae23d9aa266b97d7f8f929abf3bd39e9f323cfd240.json",
+        "target/harness-dashboard/data/readiness/605f1d1c150230304d7884fbec97546861ea7355959521faaa8638b3e4580af2.json",
+        "target/harness-dashboard/data/summary/0dbfe2eaf9a0157505f800dfade670dc3970bdf0cd425cdfeaea5bd86d9b1c0f.json",
+        "target/harness-dashboard/data/topology/da4c57d8065822507537ad6d5b6c216b2c5d10b57911b287df1c5789c8536c3b.json",
+        "target/harness-dashboard/generation-summary.json",
+        "target/harness-dashboard/index.html"
+      ],
+      "expected_state": {
+        "before": [],
+        "after": [
+          {
+            "id": "VREC-EVD-001",
+            "status": "ready"
+          }
+        ]
+      },
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\corrected-capture.json",
+      "original_sha256": "28b8fef13c1200420028ed25f49825a4f32f9ab4b78d24a7a5de72e50fc0a820"
+    },
+    {
+      "label": "corrected-capture-state",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/inspect_fixture.py",
+        "--repo",
+        "{repo}",
+        "--id",
+        "VREC-EVD-001"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\corrected-capture-state.json",
+      "original_sha256": "8edd342599b667a7a436cc5f8cbfeb7323ca326ae84992a234ee123e1f829b20"
+    },
+    {
+      "label": "corrected-capture-check",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "VREC-EVD-001",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "VREC-EVD-001",
+            "status": "ready"
+          }
+        ],
+        "after": [
+          {
+            "id": "VREC-EVD-001",
+            "status": "ready"
+          }
+        ]
+      },
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\corrected-capture-check.json",
+      "original_sha256": "12b842edea7d33fc566b4525c4c2070b4fe676eb706c0893e8cdb4c12888d9cb"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "classification": "Recorder fault probes only; no evaluator/model/lifecycle behavior",
+  "assets": {},
+  "records": [
+    {
+      "label": "probe",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\repository-missing-executable\\absent-probe-executable",
+        "{repo}"
+      ],
+      "stdin": null,
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "original_sha256": "c165e11fc10ef831bb2c04c1a2cf08a228946a51e834665d25785925e98c010f"
+    }
+  ]
+}
