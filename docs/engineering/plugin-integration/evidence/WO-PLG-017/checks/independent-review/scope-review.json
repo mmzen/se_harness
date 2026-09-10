@@ -1,0 +1,64 @@
+{
+  "classification": "Read-only scope amendment diagnosis; proposal only; no further relocation authorized or performed",
+  "candidate": "ed31a520964f81627c9c5b428b68968caa6282e7",
+  "ci": {
+    "run_id": 34533149779,
+    "job_id": 103058843952,
+    "log": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-control\\se-harness-plugin-evidence-path-fix\\ci\\ed31a520-failed\\j04.log",
+    "log_sha256": "fe7dc0b1f5a2151afebd01e75cd97b2df841f8922fad6522d7ea152558f51c63",
+    "direct_observation": "Checkout succeeded; export_tracked_tree git add -A fails for the183-character request-and-decision.json path, lines400-401.",
+    "exact_temp_root_logged": false
+  },
+  "source": {
+    "export_and_staging": "repository_tools/upgrade_rehearsal.py:101-123",
+    "scratch_layout": "repository_tools/upgrade_rehearsal.py:195-198",
+    "cli_has_workspace_option": false,
+    "workflow": "candidate-evidence.yml uses default temporary directory for rehearsal; runner.temp is used for runtime/result directories, not passed as rehearsal workspace."
+  },
+  "derived_profile": {
+    "root": "C:\\Users\\runneradmin\\AppData\\Local\\Temp\\upgrade-rehearsal-12345678\\repository",
+    "root_length": 77,
+    "basis": "Source layout plus standard runneradmin Windows temp location and8-character tempfile suffix; actual remote temp root was not printed.",
+    "full_path_formula": "root_length +1+ repository_relative_length",
+    "staging_full_path_ceiling": 259,
+    "relative_ceiling": 181,
+    "existing_checkout_budget_retained": {
+      "root": "D:/a/se_harness/se_harness",
+      "max_full_path": 250
+    },
+    "after_single_relocation_max_remaining": 259
+  },
+  "minimum_supplemental_payload_scope": [
+    {
+      "original_path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json",
+      "relative_length": 183,
+      "derived_full_length": 261,
+      "bytes": 730,
+      "sha256": "730e0507e7c4992b183122e91fda0369d610a499d76545b463d725c22dcaf263"
+    }
+  ],
+  "vrec008_directly_selects_payload": false,
+  "amendment_recommendation": {
+    "payload_count": 1,
+    "destination_example": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0056.json",
+    "preservation": "Keep original bytes,55-file plan/map, original manifests/logs and existing VREC facts. Add separately pinned supplemental plan/map for this payload; update checker and explanatory index under explicitly approved scope.",
+    "checker": "Retain original250-character checkout profile. Add separate259-character staging profile at77-character root; do not relabel259 as a250-character result.",
+    "required_acceptance_after_approval": [
+      "Actual local export/git add at an exactly77-character root with long paths disabled, recording full destination and argv.",
+      "Payload/hash/map reconciliation and original record preservation.",
+      "Real Windows CI upgrade rehearsal and dependent jobs; derived arithmetic alone is not a pass."
+    ]
+  },
+  "budget250_staging_sensitivity": {
+    "count_over250": 36,
+    "count_WO011": 30,
+    "count_WO003": 5,
+    "count_WO004": 1,
+    "interpretation": "These36 paths exceed a stricter hypothetical staging budget; only the one261-character file is over the derived259 ceiling and observed failing. No new36-file policy or authority is proposed."
+  },
+  "limits": [
+    "Exact remote temp root remains inferred; verify with actual observed root in post-approval acceptance.",
+    "No source edit, repair, scope transition, CI change or test performed in this diagnosis.",
+    "The single-file change needs owner-approved WO017 scope amendment; current55-file authority does not cover the new payload."
+  ]
+}

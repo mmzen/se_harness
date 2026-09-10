@@ -1,0 +1,34 @@
+{
+  "classification": "Independent bounded source review; not assurance or a lifecycle decision",
+  "candidate": "c3c74334d1d780c112525b6d2b9043e5239f5425",
+  "base": "7fe82c95823503e54d2e35e00d8c409a6dd4b065",
+  "checker_sha256": "72ba09d4b7e085dd2ccfff2bbd30277932966d4229f5ddcfd78bd37e70dc87e1",
+  "map_sha256": "865a8b516aae860d148fd37316bcf11646f980e9122207f4cc5dd15d501dc083",
+  "approved_plan_sha256": "37031560322c962987513e8950b37503a642c6e474cc2a031822870467659aa9",
+  "findings": [
+    {
+      "priority": "P2",
+      "file": "tests/plugin_integration/evidence-skill/check_retention_paths.py",
+      "lines": [
+        42,
+        58
+      ],
+      "problem": "The checker binds the mapping only to the current working-tree plan, so coordinated plan/map changes can redefine the supposedly fixed approved destinations.",
+      "scenario": "Swap two numbered destinations in plan and map, move their unchanged payloads accordingly, and update source_plan_sha256. Current count, source-blob, hash and index-name checks can still pass.",
+      "correction": "Independently pin the approved plan SHA256 in this purpose-specific checker, after comparing the original at ed19676fd2af8b9754f74cbc6bc8664a92d2f803.",
+      "status": "Root accepted and is correcting; corrected source not reviewed in this report."
+    }
+  ],
+  "observations": [
+    "Git diff identifies55 exact R100 renames with no payload changes.",
+    "The approved plan is unchanged between ed19676fd2af8b9754f74cbc6bc8664a92d2f803 and the reviewed candidate.",
+    "Existing VREC-PLG-008 and evaluator sidecar are absent from the diff. Existing source logs/manifests are unchanged.",
+    "Non-rename changes stay within declared WO017 paths; the only existing evidence text edit is the approved explanatory WO011 README addition.",
+    "No other actionable defect found."
+  ],
+  "limits": [
+    "Read-only source/diff review; actual Windows/Linux and disposable tamper checks belong to another agent.",
+    "No lifecycle action, source edit, external posting or assurance decision performed.",
+    "Root modified the handoff while review ran; candidate-bound comparison excludes that uncommitted update."
+  ]
+}

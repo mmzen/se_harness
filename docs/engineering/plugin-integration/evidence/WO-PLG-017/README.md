@@ -1,33 +1,31 @@
-# Windows checkout repair
+# Windows evidence-path repair
 
-PR445 and PR446 fail during Windows checkout, before the upgrade test runs.
-Their Linux/source/validate passes do not cancel this failure. The root cause is
-the depth of retained WO011 native products, introduced during evidence retention.
+The operator approved WO-PLG-017 and the released evaluator applied its delegated
+start. The 55-file native-product relocation preserves every original byte and
+passes ordinary Windows checkout and independent corruption checks. The checker
+is pinned to the exact approved plan; existing VREC008 and its sidecar remain
+unchanged. Original C/G commits remain ancestors.
 
-The approved work order shortens 55 paths and retains all bytes through an exact
-path/hash map. This directory contains the original failure logs, owner approval,
-delegated start and repair checks. Implementation is in progress.
+**The repair is not complete.** PR449 now passes checkout but fails inside the
+deeper upgrade rehearsal during Git staging of one additional retained JSON.
+Its downstream integration jobs are skipped. See the
+[full CI observation](checks/ci-rehearsal-failed/result.json).
 
-- [Proposed work order](../../work-orders/WO-PLG-017.md)
-- [Exact proposed relocation map](path-plan.json)
-- [PR445 failure log](pr445-windows-checkout.log)
-- [PR446 failure log](pr446-windows-checkout.log)
+- [Original approved plan](path-plan.json), [approval](approval/) and [start](start/).
+- [Original PR445 failure](pr445-windows-checkout.log) and [PR446 failure](pr446-windows-checkout.log).
+- [Independent review and correction](checks/independent-review/followup-ed31a520.json).
+- [Proposed one-file scope extension](scope-extension.md), awaiting owner approval.
 
-The early WO011 completion used the live validate gate and successful source
-checks before the failed Windows result was accounted for. That was insufficient
-verification of the full CI outcome. The historical completion and ready record
-are preserved; they are not evidence that this newly identified gate passed.
+The local Windows source suite separately failed in unchanged fixture cleanup
+with WinError5 on a Git object (1 error,23 skips). Its original output is retained
+under checks/windows-source-failed. Candidate source CI at ed31a520 passed
+1,134 tests with four skipped. These are separate observations; the local run is
+not relabeled successful. Candidate doctor retains the six known candidate/root
+template differences; the governing released doctor and graph validation pass.
 
-## Implementation underway
-
-The actual released evaluator enabled and applied delegated start at ed19676,
-check-run 103052409603. The already-merged definition carries the execution class
-at the base; the explicit approval is recorded on this branch. The earlier
-statement that approval PR448 must merge before any start was too strict.
-No external PR merge was performed by this agent.
-
-All 55 planned captures have moved to shallow paths with identical SHA-256.
-Original records and source manifests remain preserved. The path reconciliation
-check passes; fresh Windows checkout, independent tamper detection, Linux replay
-input reconciliation and the full CI outcomes remain pending. WO-PLG-017 stays
-in_progress until these checks pass.
+The early WO011 completion used validate/source passes before its full Windows
+outcome was accounted for. That was insufficient. Its historical completion and
+ready record are preserved; they do not establish a successful Windows result.
+WO-PLG-017 remains in_progress, and WO-PLG-012 remains paused at this failure.
+No additional evidence path, historical decision, aggregate VREC or PR merge has
+been authorized by the current repair approval.

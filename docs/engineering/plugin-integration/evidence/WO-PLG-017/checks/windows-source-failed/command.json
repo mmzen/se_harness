@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "python",
+    "scripts/run_tests.py"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-evidence-path-fix",
+  "exit_status": 1,
+  "started_at": "2026-09-10T21:32:41.282690+00:00",
+  "duration_seconds": 81.411
+}

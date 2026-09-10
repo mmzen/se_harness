@@ -7,17 +7,16 @@ rebound_at = "2026-09-10T21:33:19Z"
 
 # WO-PLG-017 handoff evidence
 
-## Repair in progress
+The authorized 55 native captures have been relocated with byte-identical payloads.
+The fixed-plan checker and independent ordinary Windows checkout/tamper tests
+pass. Historical records and C/G ancestry remain intact.
 
-The released evaluator applied the delegated start after the operator approved
-WO-PLG-017. All 55 approved native-product files now use short paths. The map
-preserves original names, sizes and SHA-256 values; payload bytes, source
-manifests and historical verification records remain unchanged.
+Full CI at ed31a520 fails in Windows upgrade-rehearsal Git staging of one further
+retained JSON outside the approved 55 source paths; dependent integration jobs are
+skipped. Candidate source CI passes 1134 tests with 4 skips. Original failures and
+the separate local Windows source-suite cleanup error remain retained.
 
-The local retention checker passes. An independent reviewer identified that its
-plan also needed an immutable approval binding; the checker now pins the exact
-approved plan digest. Independent Windows/Linux and tamper checks, and all CI
-outcomes, remain pending. Completion is not claimed from the local check alone.
-
-This work does not verify VREC-PLG-008, authorize an aggregate replacement record,
-supersede history or merge any PR. WO-PLG-017 remains in_progress.
+WO-PLG-017 remains in_progress. No completion or VREC preparation is claimed.
+The next accountable action is engineering-owner approval of the exact one-file
+scope extension in scope-extension.md and scope-extension-plan.json. No extra
+file has moved; no assurance, supersession or merge decision has been made.
