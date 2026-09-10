@@ -2,10 +2,10 @@
 id = "WO-PLG-008"
 type = "work_order"
 title = "Implement supported before-tool evaluator checks"
-status = "draft"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-08"
-updated = "2026-09-08"
+updated = "2026-09-10"
 
 [assurance]
 commit_bound_verification = "required"
@@ -29,13 +29,27 @@ implements = ["REQ-PLG-013", "REQ-PLG-014"]
 specifications = ["SPEC-PLG-008"]
 verification = ["VER-PLG-008"]
 architecture = ["ARCH-PLG-002", "ADR-PLG-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-10T06:44:41Z"
+decided_by = "engineering-owner"
+reason = "The operator explicitly approved the reviewed plugin packets and on 2026-09-10 selected \"we will merge later: GO for WO-PLG-007  and then WO-PLG-008\". WO-PLG-007 implementation is delivered separately in draft PR #435; the D04 governing definitions and bounded Windows decisions are present and approved. Record only WO-PLG-008 approve. Completion, VREC preparation, assurance, release and merge remain separate decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-10T06:45:25Z"
+decided_by = "engineering-owner"
+reason = "The operator explicitly approved the reviewed plugin packets and on 2026-09-10 selected \"we will merge later: GO for WO-PLG-007  and then WO-PLG-008\". WO-PLG-007 implementation is delivered separately in draft PR #435; the D04 governing definitions and bounded Windows decisions are present and approved. Record only WO-PLG-008 start. Completion, VREC preparation, assurance, release and merge remain separate decisions."
 +++
 
 # Work Order: Implement supported before-tool evaluator checks
 
 ## Lifecycle
 
-Draft proposal only; no execution or delegation is authorized. Approval of this WO and its governing chain precedes work; later lifecycle decisions follow the installed rules.
+Approved and started by the engineering owner on 2026-09-10, following the operator's instruction to execute WO-PLG-007 and then WO-PLG-008. Implementation is in progress. Completion, verification-record preparation, assurance, release and merge remain separate decisions under the installed rules.
 
 ## Objective
 

@@ -1,0 +1,19 @@
+test_budget_is_one_deadline_and_requires_strict_margin (test_tool_action.MappingBoundaries.test_budget_is_one_deadline_and_requires_strict_margin) ... ok
+test_denial_schema_and_no_permission_escalation (test_tool_action.MappingBoundaries.test_denial_schema_and_no_permission_escalation) ... ok
+test_event_fields_cannot_weaken_the_fixed_checkpoint (test_tool_action.MappingBoundaries.test_event_fields_cannot_weaken_the_fixed_checkpoint) ... ok
+test_hardlink_alias_cannot_change_another_target (test_tool_action.MappingBoundaries.test_hardlink_alias_cannot_change_another_target) ... ok
+test_malformed_results_never_count_as_a_pass (test_tool_action.MappingBoundaries.test_malformed_results_never_count_as_a_pass) ... ok
+test_malformed_tool_data_is_refused (test_tool_action.MappingBoundaries.test_malformed_tool_data_is_refused) ... ok
+test_outside_traversal_and_stream_paths_are_refused (test_tool_action.MappingBoundaries.test_outside_traversal_and_stream_paths_are_refused) ... ok
+test_patch_move_includes_both_paths (test_tool_action.MappingBoundaries.test_patch_move_includes_both_paths) ... ok
+test_patch_shell_wrappers_and_unknown_syntax_are_refused (test_tool_action.MappingBoundaries.test_patch_shell_wrappers_and_unknown_syntax_are_refused) ... ok
+test_recursion_marker_does_not_exempt_a_shell (test_tool_action.MappingBoundaries.test_recursion_marker_does_not_exempt_a_shell) ... ok
+test_write_and_edit_use_the_actual_path (test_tool_action.MappingBoundaries.test_write_and_edit_use_the_actual_path) ... ok
+test_multiple_calls_do_not_reset_the_inner_deadline (test_tool_action.ProcessBoundaries.test_multiple_calls_do_not_reset_the_inner_deadline) ... ok
+test_stalled_child_tree_is_stopped_within_the_reserved_margin (test_tool_action.ProcessBoundaries.test_stalled_child_tree_is_stopped_within_the_reserved_margin) ... ok
+test_successful_child_is_collected_before_result (test_tool_action.ProcessBoundaries.test_successful_child_is_collected_before_result) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 1.381s
+
+OK

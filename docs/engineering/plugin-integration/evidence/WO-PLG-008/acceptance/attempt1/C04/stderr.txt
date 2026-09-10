@@ -1,0 +1,6 @@
+
+{"status": "denied", "coverage": "unavailable", "checks": [], "entered_monotonic": 109731.6809573, "error": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)", "inner_deadline_monotonic": 109735.6809573, "host_deadline_monotonic": 109740.6809573, "response_prepared_monotonic": 109731.8064062, "effect_inspection_required_on_missing_response": true, "response_written_monotonic": 109731.8064403}
+
+{"status": "denied", "coverage": "unavailable", "checks": [], "entered_monotonic": 109731.8649509, "error": "unsupported event or repository mismatch", "inner_deadline_monotonic": 109735.8649509, "host_deadline_monotonic": 109740.8649509, "response_prepared_monotonic": 109731.9874542, "effect_inspection_required_on_missing_response": true, "response_written_monotonic": 109731.9875262}
+
+{"status": "denied", "coverage": "unavailable", "checks": [], "entered_monotonic": 109732.0412459, "error": "unmapped tool; shell commands, continuing sessions, MCP and other tools need separate coverage", "inner_deadline_monotonic": 109736.0412459, "host_deadline_monotonic": 109741.0412459, "response_prepared_monotonic": 109732.1599897, "effect_inspection_required_on_missing_response": true, "response_written_monotonic": 109732.1600359}

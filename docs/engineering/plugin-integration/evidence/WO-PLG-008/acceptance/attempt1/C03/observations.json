@@ -1,0 +1,7 @@
+{
+  "case": "C03",
+  "conclusion": "fail",
+  "failure": "AssertionError: ",
+  "effects": [],
+  "fixture_injection": "declared by actions; no live-host result inferred"
+}

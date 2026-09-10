@@ -1,0 +1,32 @@
+{
+  "assurance": {
+    "commit_bound_verification": "required",
+    "decided_by": "engineering-owner",
+    "rationale": "Proposed classification: future governed work relies on the correctness of this plugin behavior and its instructions."
+  },
+  "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+  "diagnostics": [],
+  "phase": "review",
+  "reading_manifest": [
+    "ENGINEERING_HARNESS.md",
+    "docs/engineering/OPERATING_CARD.md",
+    "AGENTS.md",
+    "docs/engineering/workflow-execution/intent/INT-WEX-001.md",
+    "docs/engineering/workflow-execution/capabilities/CAP-WEX-001.md",
+    "docs/engineering/plugin-integration/requirements/REQ-PLG-013.md",
+    "docs/engineering/plugin-integration/requirements/REQ-PLG-014.md",
+    "docs/engineering/plugin-integration/specifications/SPEC-PLG-008.md",
+    "docs/engineering/plugin-integration/architecture/ARCH-PLG-002.md",
+    "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-002.md",
+    "docs/engineering/plugin-integration/verification/VER-PLG-008.md",
+    "docs/engineering/plugin-integration/work-orders/WO-PLG-008.md"
+  ],
+  "ready": true,
+  "schema": "se-harness-preflight-v2",
+  "skew": [],
+  "work_order": {
+    "id": "WO-PLG-008",
+    "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-008.md",
+    "status": "in_progress"
+  }
+}

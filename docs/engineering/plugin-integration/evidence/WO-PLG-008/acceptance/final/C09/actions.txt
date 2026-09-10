@@ -1,0 +1,77 @@
+[
+  {
+    "fixture_preparation": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "se_harness",
+      "evidence",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\tool-action-fixtures-final\\C09",
+      "--artifact",
+      "WO-PROBE-001",
+      "--checkpoint",
+      "pre-action",
+      "--json"
+    ],
+    "exit_status": 0
+  },
+  {
+    "missing_refusal_variant": "missing-interpreter",
+    "raw_output": "",
+    "actual_effect_inspection": true
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-tool-action\\plugins\\verity-plane\\common\\scripts\\check-tool-action.py",
+      "--repo",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\tool-action-fixtures-final\\C09",
+      "--environment",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017",
+      "--version",
+      "0.17.0",
+      "--payload-sha256",
+      "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405",
+      "--archive-sha256",
+      "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+      "--host",
+      "claude",
+      "--artifact",
+      "WO-PROBE-001",
+      "--refusal-mode",
+      "deny",
+      "--inner-timeout",
+      "4",
+      "--startup-margin",
+      "1",
+      "--cleanup-margin",
+      "2",
+      "--output-margin",
+      "1",
+      "--host-timeout",
+      "10"
+    ],
+    "event": "{\"hook_event_name\": \"PreToolUse\", \"cwd\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\tool-action-fixtures-final\\\\C09\", \"tool_name\": \"Write\", \"tool_use_id\": \"fixed-captured-fixture-id\", \"tool_input\": {\"file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\tool-action-fixtures-final\\\\C09\\\\governed-target.txt\", \"content\": \"fixture effect\\n\"}}",
+    "exit_status": 0,
+    "host_started_monotonic": 110056.1225816,
+    "host_received_monotonic": 110057.7586887
+  },
+  {
+    "missing_refusal_variant": "guard-removed-after-success",
+    "raw_output": "",
+    "actual_effect_inspection": true
+  },
+  {
+    "missing_refusal_variant": "invalid-output",
+    "raw_output": "{}\r\n",
+    "actual_effect_inspection": true
+  },
+  {
+    "missing_refusal_variant": "empty-output",
+    "raw_output": "",
+    "actual_effect_inspection": true
+  }
+]

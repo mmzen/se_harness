@@ -1,0 +1,31 @@
+{
+  "case": "C06",
+  "conclusion": "pass",
+  "effects": [
+    {
+      "before_sha256": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "after_sha256": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "effect_count": 0,
+      "refusal_received": true,
+      "inspected_at_monotonic": 110160.6587291,
+      "qualification": "refusal-observed"
+    },
+    {
+      "before_sha256": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "after_sha256": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "effect_count": 0,
+      "refusal_received": true,
+      "inspected_at_monotonic": 110160.6589015,
+      "qualification": "refusal-observed"
+    },
+    {
+      "before_sha256": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "after_sha256": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "effect_count": 0,
+      "refusal_received": true,
+      "inspected_at_monotonic": 110160.6590371,
+      "qualification": "refusal-observed"
+    }
+  ],
+  "fixture_injection": "declared by actions; no live-host result inferred"
+}

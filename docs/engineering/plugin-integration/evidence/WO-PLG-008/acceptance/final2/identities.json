@@ -1,0 +1,20 @@
+{
+  "os": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "evaluator": "0.17.0",
+  "payload_sha256": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405",
+  "archive_sha256": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+  "handler_sha256": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4",
+  "session_dependency_sha256": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb",
+  "runner_sha256": "a563dbe79282dbf185235481273b299eac57bdfbb75d3dd165e517ffd44607cd",
+  "fault_invoke_sha256": "632a800095ff921b0a747d5da7c166f3147cf39e04a017220692ad48f910d18d",
+  "fault_worker_sha256": "dcf16ee4b9efed7bb75e99449b480847dee16ef6aace98dd003e35dc6d22aa63",
+  "profile": "captured Codex/Claude protocols on Windows; no native host qualification",
+  "timing": {
+    "inner": 4,
+    "startup_margin": 1,
+    "cleanup_margin": 2,
+    "output_margin": 1,
+    "host": 10
+  }
+}

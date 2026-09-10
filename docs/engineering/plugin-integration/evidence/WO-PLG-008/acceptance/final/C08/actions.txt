@@ -1,0 +1,25 @@
+[
+  {
+    "fixture_preparation": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "se_harness",
+      "evidence",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\tool-action-fixtures-final\\C08",
+      "--artifact",
+      "WO-PROBE-001",
+      "--checkpoint",
+      "pre-action",
+      "--json"
+    ],
+    "exit_status": 0
+  },
+  {
+    "host_timeout_injection": "stand-in handler never responds",
+    "timeout_seconds": 0.25,
+    "elapsed_seconds": 0.2561730000015814,
+    "refusal_observed": false
+  }
+]

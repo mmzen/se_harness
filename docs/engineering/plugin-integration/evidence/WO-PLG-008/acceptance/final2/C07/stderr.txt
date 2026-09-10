@@ -1,0 +1,6 @@
+
+{"status": "denied", "coverage": "unavailable", "checks": [], "entered_monotonic": 110161.1440569, "error": "use absolute paths without parent traversal", "inner_deadline_monotonic": 110165.1440569, "host_deadline_monotonic": 110170.1440569, "response_prepared_monotonic": 110161.2624262, "effect_inspection_required_on_missing_response": true, "response_written_monotonic": 110161.2624611}
+
+{"status": "denied", "coverage": "unavailable", "checks": [], "entered_monotonic": 110161.32056, "error": "unmapped tool; shell commands, continuing sessions, MCP and other tools need separate coverage", "inner_deadline_monotonic": 110165.32056, "host_deadline_monotonic": 110170.32056, "response_prepared_monotonic": 110161.4367145, "effect_inspection_required_on_missing_response": true, "response_written_monotonic": 110161.4367486}
+
+{"status": "denied", "coverage": "unavailable", "checks": [], "entered_monotonic": 110161.4912729, "error": "unmapped tool; shell commands, continuing sessions, MCP and other tools need separate coverage", "inner_deadline_monotonic": 110165.4912729, "host_deadline_monotonic": 110170.4912729, "response_prepared_monotonic": 110161.6080653, "effect_inspection_required_on_missing_response": true, "response_written_monotonic": 110161.6080986}

@@ -1,0 +1,4 @@
+
+{"status": "denied", "coverage": "unavailable", "checks": [], "entered_monotonic": 109742.0868348, "error": "inner timeout plus startup/cleanup/output margins must be below host timeout", "effect_inspection_required_on_missing_response": true, "response_written_monotonic": 109742.2162995}
+
+{"status": "denied", "coverage": "unavailable", "checks": [], "entered_monotonic": 109742.280587, "error": "inner timeout plus startup/cleanup/output margins must be below host timeout", "effect_inspection_required_on_missing_response": true, "response_written_monotonic": 109742.4037342}
