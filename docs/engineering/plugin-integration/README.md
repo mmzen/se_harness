@@ -56,3 +56,12 @@ Shared handler fixtures do not qualify native host delivery or universal interce
 - [WO-PLG-010](work-orders/WO-PLG-010.md)
 
 This definition delivery records the operator-selected execution delegation. Implementation starts separately after the delegation is present on `origin/main` and the current required GitHub check passes. The packet does not provide implementation evidence or an assurance decision.
+
+## D06: WO-PLG-011 delegated skill packet
+
+- [REQ-PLG-019](requirements/REQ-PLG-019.md)
+- [SPEC-PLG-011](specifications/SPEC-PLG-011.md)
+- [VER-PLG-011](verification/VER-PLG-011.md)
+- [WO-PLG-011](work-orders/WO-PLG-011.md)
+
+This definition delivery records the operator-selected execution delegation. Implementation starts separately after the delegation is present on `origin/main` and the current required GitHub check passes. The packet does not provide implementation evidence or an assurance decision.
