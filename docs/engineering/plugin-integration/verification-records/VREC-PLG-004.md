@@ -2,7 +2,7 @@
 id = "VREC-PLG-004"
 type = "verification_record"
 title = "Verification candidate for WO-PLG-002"
-status = "ready"
+status = "verified"
 owners = ["engineering-owner"]
 created = "2026-09-10"
 updated = "2026-09-10"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/plugin-integration/evidence/WO-PLG-002/READM
 evaluator_evidence_path = "docs/engineering/plugin-integration/evidence/VREC-PLG-004-evaluator.json"
 evaluator_evidence_sha256 = "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
 
+verified_at = "2026-09-10T05:41:14Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-PLG-002"]
 conforms_to = ["VER-PLG-002"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-10T05:41:14Z"
+decided_by = "assurance-owner"
+reason = "Operator explicitly stated \"i verify VREC-PLG-004   and I will merge\" in this Codex task on 2026-09-10. Record the assurance-owner decision for exact candidate 9d0ae0ceeda762d156a967d9081a8437aa2761d7 under VER-PLG-002, with the retained Windows cleanup failure and platform qualification limits disclosed. This decision changes only VREC-PLG-004 from ready to verified; its candidate and evidence remain fixed. The operator will perform repository integration personally. No agent merge, release decision or additional work-order transition is authorized."
 +++
 
 # Verification Record Candidate

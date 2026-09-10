@@ -18,13 +18,15 @@ are not waived or relabeled as passing.
 
 On 2026-09-10 the operator authorized completion and verification-record
 preparation. The released evaluator recorded WO-PLG-002 as **implemented**.
-[VREC-PLG-004](../../verification-records/VREC-PLG-004.md) is **ready**, binding
+[VREC-PLG-004](../../verification-records/VREC-PLG-004.md) is **verified**, binding
 candidate `9d0ae0ceeda762d156a967d9081a8437aa2761d7` to 168 retained evidence files
 under VER-PLG-002. Preparation logs are in `governance/verification-preparation-20260910/`.
 The original handoff header above identifies the implementation checkpoint;
 the later completion decision is retained in `governance/completion-20260910/`.
 
-The next decision belongs to the assurance owner: assess whether the retained
-evidence verifies this exact candidate. No assurance, release or merge decision
-has been exercised. All 17 hosted checks passed on the preceding evidence commit;
-the local Windows cleanup failure and platform limits remain disclosed above.
+On 2026-09-10, the operator explicitly verified VREC-PLG-004 and stated that
+they will merge. The released evaluator [recorded the assurance decision](governance/verification-20260910/assurance-plg004-applied.json),
+preserving its candidate, binding metadata, sidecar and all 168 evidence files.
+WO-PLG-002 remains implemented. The operator will perform repository integration
+personally after the PR checks; no agent merge or release has been performed.
+The local Windows cleanup failure and platform limits remain disclosed above.
