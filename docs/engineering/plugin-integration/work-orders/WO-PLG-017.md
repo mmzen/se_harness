@@ -57,7 +57,8 @@ reason = "Delegated DR-WO-START under [delegation] class 'execution': required c
 The operator approved this remediation and authorized the delegated repair on
 2026-09-10. The released evaluator recorded only draft-to-approved. Start and
 completion remain subject to the configured-base and live-check requirements.
-No repair has started. This approval does not authorize assurance, supersession,
+The released evaluator subsequently applied the delegated start; see start/ in
+the retained evidence. This approval does not authorize assurance, supersession,
 integration, or preparation of an aggregate verification record.
 
 ## Objective
@@ -102,7 +103,7 @@ match the approved map. Verify bytes before removing an old working-tree copy.
 
 ## Expected change surface
 
-Only execution_scope paths. No payload has moved in this definition proposal.
+Only execution_scope paths. The approved relocation is now being implemented.
 The longest affected repository-relative path falls from 235 to 72 characters.
 Original selected evidence and its interpretation stay visible in Git history.
 
@@ -142,4 +143,4 @@ WO-PLG-011 and this repair needs explicit preparation authority and exact clean
 candidate/evidence inputs before capture. Delegated
 execution only permits single-WO capture. VREC-PLG-008 stays ready until its
 assurance owner separately decides it; supersession needs an eligible verified
-successor. Do not treat this draft as either decision.
+successor. Work approval is neither decision.

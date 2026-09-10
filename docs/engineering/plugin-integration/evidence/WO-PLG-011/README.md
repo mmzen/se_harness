@@ -59,3 +59,12 @@ enforcement, or live skill migration. Fixture owner decisions are synthetic
 inputs; they grant no authority over this repository or any real destination.
 Record preparation is distinct from human assurance. The live delegated
 completion and ready-record receipts are retained separately under `governance/`.
+
+## Portable native-product retention
+
+WO-PLG-017 relocates the 55 original native-product captures to native/.
+The native-path-map.json file preserves each original path, retained path, size
+and SHA-256. Original logs and manifests retain their observed paths and bytes;
+resolve those paths through the map. VREC-PLG-008 still binds its original
+candidate and evidence in Git history. This relocation is not an assurance
+decision or a claim that the original Windows checkout succeeded.
