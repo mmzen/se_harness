@@ -8,13 +8,19 @@ operations write files, even when their names sound like inspection:
 | --- | --- |
 | `check --checkpoint handoff --from-git BASE` | Writes Git-derived handoff evidence; requires authority for those selected WO evidence paths. |
 | `evidence --artifact WO-ID --checkpoint CHECKPOINT` | Creates or rebinds the selected evidence packet; requires authority to write it. It does not make the packet's claims true. |
-| `capture-verification` | Writes one ready VREC and evaluator evidence after `DR-VREC-PREPARE` and candidate-readiness gates. |
+| `capture-verification` | Generates the candidate snapshot/export and writes one ready VREC and evaluator evidence after `DR-VREC-PREPARE` and candidate-readiness gates. |
 | `prepare-release` | Writes one ready RLS and evaluator evidence after `DR-RLS-PREPARE` and release-preparation gates. |
 
-Classify each actual invocation before dispatch. Passing read-only preflight
-does not grant any of these writing rights. Evidence work already covered by
-the selected WO needs no redundant prompt. Preparation authority does not grant
-assurance, release, Git or external action rights.
+Classify each actual invocation and its installed write destinations before
+dispatch, including generated or ignored files. Released 0.16.0 capture, for
+example, refreshes `target/harness-dashboard/` before writing the record. Git's
+clean/dirty status alone does not account for those effects. Confirm that the
+actual preparation authority covers that footprint and retain the observed
+generated writes, including any left by a failed operation.
+
+Passing read-only preflight does not grant these writing rights. Evidence work
+already covered by the selected WO needs no redundant prompt. Preparation
+authority does not grant assurance, release, Git or external action rights.
 
 ## Verification preparation
 
