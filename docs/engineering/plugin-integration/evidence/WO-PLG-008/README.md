@@ -79,8 +79,11 @@ retain their own source hashes and observations.
 - [Candidate CLI help](checks/candidate-help/command.json): passed.
 - [Scope](governance/action-staged-scope.json) and [handoff](governance/action-handoff-ready.json): passed; WO-PLG-008 remains in progress.
 
-Regression evidence is retained with the delivery as checks complete. No
-passing regression or hosted verdict is inferred from this report.
+- [Full Linux regression](checks/full-suite-linux-checkout/04-stdout.txt): 1,126 tests, four skips, passed at candidate `1004db389debbd9828410c10899a32bea8b8d9e5`.
+- [Focused Linux run](checks/full-suite-linux-checkout/03-stderr.txt): 11 mapping tests pass; three Windows process-control tests explicitly skip. Their Windows run above passes all 14.
+
+The draft PR's Checks tab records hosted results for each pushed commit. It is
+separate from the local regression evidence retained here.
 
 ## Authority and limits
 
