@@ -2,7 +2,7 @@
 id = "WO-CIP-008"
 type = "work_order"
 title = "Issue #433, pipeline: amend two approved definitions for the renamed rehearsal job"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-10"
 updated = "2026-09-10"
@@ -33,6 +33,13 @@ class = "execution"
 implements = ["REQ-CIP-010"]
 specifications = ["SPEC-CIP-004"]
 verification = ["VER-CIP-004"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-10T10:19:05Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-09-10 by selecting the presented option 'Approve both packets (Recommended)', as a decision distinct from the approval of its definitions in the same transaction. This approval is the delegating act under DR-007 and DR-015: the work order carries [delegation] class = 'execution', so DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE may be applied by the delegated-executor role while the required validate check is success for the exact candidate head, read from the base of the pull request. It authorizes only the declared scope: the prose and amendment records of ARCH-CIP-001 and REQ-CIP-002 with their updated dates, the definitions test in tests/test_ci_pipeline.py, the domain index and the evidence packet. It authorizes no change to any workflow, script, module, managed template or hash-locked root file, no move of an identifier, statement, relation, lifecycle event or decision assessment, no verification decision, no release and no publication; the merges remain the owner's decisions."
 +++
 
 # Work Order: Issue #433, pipeline: amend two approved definitions for the renamed rehearsal job

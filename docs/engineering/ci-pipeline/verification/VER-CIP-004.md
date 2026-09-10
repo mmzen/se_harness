@@ -2,13 +2,20 @@
 id = "VER-CIP-004"
 type = "verification"
 title = "Independent evidence for the issue #433 pipeline repair"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner", "quality-owner"]
 created = "2026-09-10"
 updated = "2026-09-10"
 
 [relations]
 verifies = ["REQ-CIP-010"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-10T10:19:05Z"
+decided_by = "assurance-owner"
+reason = "Approved on 2026-09-10 by the accountable owner by selecting the presented option 'Approve both packets (Recommended)', given after the two issue #433 packets (the wave 5 leftovers: TRC-008 still describing the retired constrains relation, the completion boilerplate contradicting the delegation class, and the two ci-pipeline definitions naming the old job) were presented with the released 0.17.0 evaluator reading 0 errors and 0 advisories. Approval of a definition authorizes no work. The grep, test, amendment, front-matter, index, regression and delegation rows."
 +++
 
 # Verification Contract: Independent evidence for the issue #433 pipeline repair

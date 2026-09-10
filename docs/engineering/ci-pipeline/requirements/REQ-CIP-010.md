@@ -2,7 +2,7 @@
 id = "REQ-CIP-010"
 type = "requirement"
 title = "Name the rehearsal job by its current name in the approved pipeline definitions"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "requirements-steward"]
 created = "2026-09-10"
 updated = "2026-09-10"
@@ -14,6 +14,13 @@ measure = "grep governance-migration over docs/engineering/ci-pipeline/architect
 
 [relations]
 derives_from = ["CAP-CIP-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-10T10:19:05Z"
+decided_by = "product-owner"
+reason = "Approved on 2026-09-10 by the accountable owner by selecting the presented option 'Approve both packets (Recommended)', given after the two issue #433 packets (the wave 5 leftovers: TRC-008 still describing the retired constrains relation, the completion boilerplate contradicting the delegation class, and the two ci-pipeline definitions naming the old job) were presented with the released 0.17.0 evaluator reading 0 errors and 0 advisories. Approval of a definition authorizes no work. The pipeline repair packet: amendment records on ARCH-CIP-001 and REQ-CIP-002 for the renamed rehearsal job."
 +++
 
 # Requirement: Name the rehearsal job by its current name in the approved pipeline definitions

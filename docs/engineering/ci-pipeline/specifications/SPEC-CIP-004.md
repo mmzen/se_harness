@@ -2,7 +2,7 @@
 id = "SPEC-CIP-004"
 type = "specification"
 title = "Issue #433 pipeline repair: the renamed rehearsal job in two approved definitions"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-10"
 updated = "2026-09-10"
@@ -10,6 +10,13 @@ contract = "The two approved pipeline definitions name the rehearsal job by its 
 
 [relations]
 specifies = ["REQ-CIP-010"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-10T10:19:05Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-09-10 by the accountable owner by selecting the presented option 'Approve both packets (Recommended)', given after the two issue #433 packets (the wave 5 leftovers: TRC-008 still describing the retired constrains relation, the completion boilerplate contradicting the delegation class, and the two ci-pipeline definitions naming the old job) were presented with the released 0.17.0 evaluator reading 0 errors and 0 advisories. Approval of a definition authorizes no work. Rules CIP-AMD-001 to CIP-AMD-005."
 +++
 
 # Specification: Issue #433 pipeline repair: the renamed rehearsal job in two approved definitions
