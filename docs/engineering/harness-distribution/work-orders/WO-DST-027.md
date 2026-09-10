@@ -2,7 +2,7 @@
 id = "WO-DST-027"
 type = "work_order"
 title = "Issue #433, templates: the retired relation in the traceability policy and the completion decider in the work-order template"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-10"
 updated = "2026-09-10"
@@ -49,6 +49,13 @@ to = "in_progress"
 decided_at = "2026-09-10T12:21:47Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at f00b93e04f6b340c07194fa6e51bfbfd7ebdcb9b (check-run 102867058651, source github-checks)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-10T12:36:45Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 8b68d8ab706128eb762f54e39f7dd88851fbeec7 (check-run 102871046134, source github-checks). Completion decided by the delegated-executor role on 2026-09-10 under the execution delegation class WO-DST-027 carries, delegated by the engineering owner in the approval of 2026-09-10 and read at the base of pull request #440, main at f36c8bf1. Rules DST-TPL-001 to DST-TPL-008 of SPEC-DST-028 are met and mapped to evidence in docs/engineering/harness-distribution/evidence/WO-DST-027-verification.md and evidence/WO-DST-027/WO-DST-027-handoff.md: TRC-008 of the standard TRACEABILITY.md says ARCH.constrains is retired and refused with E016, names the typed pair as the only form and keeps its installation sentence; the standard WORK_ORDER.template.md names who decides completion under Completion report format; the UML note follows; the parity test declares both changes against the 0.17.0 root; tests/test_managed_template_texts.py pins them with a drafted work order as scenario B. DST-TPL-009 is carried to the root adoption of the carrying release. The retained handoff check from origin/main completed, nine predicates passing, ten changed paths in scope. Released 0.17.0: validate 1,485 artifacts, 0 errors, 46 W013; doctor 99 PASS; preflight PASS. Local suite 1,132 tests, 7 added, at the Windows baseline; the hosted validate check at 8b68d8ab is success. Every root managed byte is identical to main. Disclosed: scenario B runs as a test through the suite's mutation-authority patch because both evaluators refuse a consumer-style create-artifact here; the UML note's third sentence gained 'otherwise'; the parity equality branch is first observed at the root adoption. Completion approves nothing: record preparation is this role's separate decision; verification and the merge remain the human owners."
 +++
 
 # Work Order: Issue #433, templates: the retired relation in the traceability policy and the completion decider in the work-order template

@@ -152,8 +152,11 @@ checkout by the declared-exception branch, both substitutions applied.
 
 ## Local suite (control)
 
-Recorded in the completion reason of `WO-DST-027`; the hosted Linux lane at
-the completion head is the record.
+`python scripts/run_tests.py --workers 4` on Windows 11 with Python 3.13, in
+the worktree at `8b68d8ab`: 1,132 tests, 1 error, 23 skipped. The error is
+`test_artifact_authoring.IdentifierAllocationTests.test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref`,
+the Windows baseline PermissionError on a temporary `.git` object. The
+hosted Linux lane at the completion head is the record.
 
 ## Adoption obligation carried forward
 
