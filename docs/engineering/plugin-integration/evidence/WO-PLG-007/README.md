@@ -49,11 +49,15 @@ environment isolation. They are not substitutes for the real-evaluator cases.
 - [Release-distribution validation](checks/release-distributions/stdout.txt): passed, no distribution built.
 - [Candidate CLI help](checks/candidate-help/command.json): passed.
 - [Scope](governance/session-staged-scope.json) and [handoff](governance/session-handoff-ready.json): passed; WO-PLG-007 remains in progress.
-- Full repository regression results will be retained before final handoff.
+- [Full Linux regression](checks/full-suite-linux-checkout/04-stdout.txt): 1,126 tests passed, four skips, at candidate `07f01d3b`. Ten focused tests also passed in that checkout.
+- [Hosted checks](checks/hosted-checks/stdout.txt): all 17 passed at candidate `07f01d3b`.
 
 The initial WSL invocation was refused by the local sandbox before any tests
-started. The authorized retry uses the already installed WSL Python. Both the
-launch failure and final regression result are retained separately.
+started. The authorized retry then failed with four failures and 23 errors:
+Linux Git could not resolve this Windows worktree's `.git` path. No failure was
+waived. A separate Linux clone of the same candidate corrected the test setup;
+all tests passed there. The failed invocation, failed suite, and passing suite
+are retained separately. The handler source was unchanged for that correction.
 
 `acceptance/attempt1` and `attempt2` are preliminary observations. Diagnostic
 rendering changed during the second run, so neither establishes acceptance of

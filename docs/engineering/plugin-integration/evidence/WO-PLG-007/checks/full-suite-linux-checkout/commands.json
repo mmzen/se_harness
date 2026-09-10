@@ -1,0 +1,70 @@
+[
+  {
+    "argv": [
+      "git",
+      "clone",
+      "--no-hardlinks",
+      "--no-checkout",
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness/.git",
+      "/tmp/se-harness-plg007-07f01d3b"
+    ],
+    "exit_status": 0,
+    "seconds": 34.129286656
+  },
+  {
+    "argv": [
+      "git",
+      "-C",
+      "/tmp/se-harness-plg007-07f01d3b",
+      "remote",
+      "set-url",
+      "origin",
+      "https://github.com/mmzen/se_harness.git"
+    ],
+    "exit_status": 0,
+    "seconds": 0.007203025000002583
+  },
+  {
+    "argv": [
+      "git",
+      "-C",
+      "/tmp/se-harness-plg007-07f01d3b",
+      "-c",
+      "core.autocrlf=false",
+      "checkout",
+      "--detach",
+      "07f01d3b"
+    ],
+    "exit_status": 0,
+    "seconds": 0.537724144000002
+  },
+  {
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "-S",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests/plugin_integration/session_context",
+      "-p",
+      "test_*.py",
+      "-v"
+    ],
+    "exit_status": 0,
+    "seconds": 0.11004621899999734
+  },
+  {
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "-S",
+      "scripts/run_tests.py",
+      "--workers",
+      "4"
+    ],
+    "exit_status": 0,
+    "seconds": 23.754237283000002
+  }
+]
