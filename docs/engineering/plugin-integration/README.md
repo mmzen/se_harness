@@ -65,3 +65,13 @@ This definition delivery records the operator-selected execution delegation. Imp
 - [WO-PLG-011](work-orders/WO-PLG-011.md)
 
 This definition delivery records the operator-selected execution delegation. Implementation starts separately after the delegation is present on `origin/main` and the current required GitHub check passes. The packet does not provide implementation evidence or an assurance decision.
+
+## D07: WO-PLG-012 delegated skill packet
+
+- [REQ-PLG-020](requirements/REQ-PLG-020.md)
+- [REQ-PLG-021](requirements/REQ-PLG-021.md)
+- [SPEC-PLG-012](specifications/SPEC-PLG-012.md)
+- [VER-PLG-012](verification/VER-PLG-012.md)
+- [WO-PLG-012](work-orders/WO-PLG-012.md)
+
+This definition delivery records the operator-selected execution delegation. Implementation starts separately after the delegation is present on `origin/main` and the current required GitHub check passes. The packet does not provide implementation evidence or an assurance decision.

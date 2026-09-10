@@ -1,0 +1,67 @@
+{
+  "selected_work_order": "WO-PLG-012",
+  "reviewed_proposal": "0b42325b75bc6d1c36897369687c3d3ed578bdb9",
+  "original_packet_approval": "i approve the packets, i authorize the work",
+  "current_instruction": "first DEC-PLG-004 : ask questions interactively, then go for WO-PLG-010 next, followed by WO-PLG-011 and WO-PLG-012  (delegated route)",
+  "delegation": {
+    "class": "execution",
+    "rights": [
+      "DR-WO-START",
+      "DR-WO-COMPLETE",
+      "DR-VREC-PREPARE"
+    ],
+    "base_ref": "origin/main",
+    "source": "github-checks",
+    "check_name": "validate"
+  },
+  "changes_to_reviewed_packet": [
+    "Explicit requested execution delegation",
+    "Exact planned VREC and sidecar output paths",
+    "Lifecycle explanation and date"
+  ],
+  "reserved_output": "VREC-PLG-009",
+  "record_created": false,
+  "artifacts": [
+    {
+      "artifact": "REQ-PLG-020",
+      "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-020.md",
+      "reviewed_source_sha256": "c1212dba5660c81dd86c9bb26d1d368ca6cbeb4d09a99cb959bf3b5691cf12da",
+      "introduced_content_sha256": "c1212dba5660c81dd86c9bb26d1d368ca6cbeb4d09a99cb959bf3b5691cf12da",
+      "owner": "requirements-steward"
+    },
+    {
+      "artifact": "REQ-PLG-021",
+      "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-021.md",
+      "reviewed_source_sha256": "57557adcef3d4c73befbe5d32f89063e906d10d1b137eb94a760dcb2aba59e5c",
+      "introduced_content_sha256": "57557adcef3d4c73befbe5d32f89063e906d10d1b137eb94a760dcb2aba59e5c",
+      "owner": "requirements-steward"
+    },
+    {
+      "artifact": "SPEC-PLG-012",
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-012.md",
+      "reviewed_source_sha256": "6c1b3287986bc23393deebed63cd87934e5a2a91fcab367de86c233ed9d17ea8",
+      "introduced_content_sha256": "6c1b3287986bc23393deebed63cd87934e5a2a91fcab367de86c233ed9d17ea8",
+      "owner": "technical-owner"
+    },
+    {
+      "artifact": "VER-PLG-012",
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-012.md",
+      "reviewed_source_sha256": "8d19c23d400c0ec960f4761d0f160ee696b7ddeb03cf8d2c57e65e2683d8894b",
+      "introduced_content_sha256": "8d19c23d400c0ec960f4761d0f160ee696b7ddeb03cf8d2c57e65e2683d8894b",
+      "owner": "assurance-owner"
+    },
+    {
+      "artifact": "WO-PLG-012",
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-012.md",
+      "reviewed_source_sha256": "9313c432bf14122622976b0d0962055811698919b44d627fef2998fb2324254b",
+      "introduced_content_sha256": "fad319f2739a2cde999ff0fc614013d64454148d8977aedf26e8d96ada111925",
+      "owner": "engineering-owner"
+    }
+  ],
+  "not_authorized": [
+    "VREC verification",
+    "release",
+    "PR merge",
+    "publication"
+  ]
+}
