@@ -2,7 +2,7 @@
 id = "REQ-DST-076"
 type = "requirement"
 title = "Describe the retired architecture relation as refused in the managed traceability policy"
-status = "draft"
+status = "approved"
 owners = ["product-owner", "technical-owner"]
 created = "2026-09-10"
 updated = "2026-09-10"
@@ -14,6 +14,13 @@ measure = "the template's TRC-008 names the relation retired and refused with E0
 
 [relations]
 derives_from = ["CAP-DST-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-10T10:18:43Z"
+decided_by = "product-owner"
+reason = "Approved on 2026-09-10 by the accountable owner by selecting the presented option 'Approve both packets (Recommended)', given after the two issue #433 packets (the wave 5 leftovers: TRC-008 still describing the retired constrains relation, the completion boilerplate contradicting the delegation class, and the two ci-pipeline definitions naming the old job) were presented with the released 0.17.0 evaluator reading 0 errors and 0 advisories. Approval of a definition authorizes no work. The managed-template packet: TRC-008 for the retired relation, the completion decider in the work-order template."
 +++
 
 # Requirement: Describe the retired architecture relation as refused in the managed traceability policy

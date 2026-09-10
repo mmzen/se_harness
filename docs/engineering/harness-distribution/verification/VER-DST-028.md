@@ -2,13 +2,20 @@
 id = "VER-DST-028"
 type = "verification"
 title = "Evidence for the issue #433 managed-template leftovers"
-status = "draft"
+status = "approved"
 owners = ["quality-owner"]
 created = "2026-09-10"
 updated = "2026-09-10"
 
 [relations]
 verifies = ["REQ-DST-076", "REQ-DST-077"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-10T10:18:43Z"
+decided_by = "quality-owner"
+reason = "Approved on 2026-09-10 by the accountable owner by selecting the presented option 'Approve both packets (Recommended)', given after the two issue #433 packets (the wave 5 leftovers: TRC-008 still describing the retired constrains relation, the completion boilerplate contradicting the delegation class, and the two ci-pipeline definitions naming the old job) were presented with the released 0.17.0 evaluator reading 0 errors and 0 advisories. Approval of a definition authorizes no work. The rule, template, note, parity, inspection, regression and delegation rows."
 +++
 
 # Verification Contract: Evidence for the issue #433 managed-template leftovers

@@ -2,7 +2,7 @@
 id = "WO-DST-027"
 type = "work_order"
 title = "Issue #433, templates: the retired relation in the traceability policy and the completion decider in the work-order template"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-10"
 updated = "2026-09-10"
@@ -35,6 +35,13 @@ class = "execution"
 implements = ["REQ-DST-076", "REQ-DST-077"]
 specifications = ["SPEC-DST-028"]
 verification = ["VER-DST-028"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-10T10:18:43Z"
+decided_by = "engineering-owner"
+reason = "Approved by the accountable engineering owner on 2026-09-10 by selecting the presented option 'Approve both packets (Recommended)', as a decision distinct from the approval of its definitions in the same transaction. This approval is the delegating act under DR-007 and DR-015: the work order carries [delegation] class = 'execution', so DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE may be applied by the delegated-executor role while the required validate check is success for the exact candidate head, read from the base of the pull request. It authorizes only the declared scope: the TRC-008 paragraph of the standard TRACEABILITY.md template, the guidance under the Completion report format heading of the standard work-order template, the tests, the UML note, the domain index, the evidence file and the handoff packet. It authorizes no change to any root managed byte, no rewrite of an existing work order, no verification decision, no release, no publication and no adoption; the merges remain the owner's decisions."
 +++
 
 # Work Order: Issue #433, templates: the retired relation in the traceability policy and the completion decider in the work-order template

@@ -2,7 +2,7 @@
 id = "SPEC-DST-028"
 type = "specification"
 title = "Issue #433 managed-template leftovers: the retired relation in the traceability policy, the completion decider in the work-order template"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-10"
 updated = "2026-09-10"
@@ -10,6 +10,13 @@ contract = "The managed traceability policy calls the retired architecture relat
 
 [relations]
 specifies = ["REQ-DST-076", "REQ-DST-077"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-10T10:18:43Z"
+decided_by = "technical-owner"
+reason = "Approved on 2026-09-10 by the accountable owner by selecting the presented option 'Approve both packets (Recommended)', given after the two issue #433 packets (the wave 5 leftovers: TRC-008 still describing the retired constrains relation, the completion boilerplate contradicting the delegation class, and the two ci-pipeline definitions naming the old job) were presented with the released 0.17.0 evaluator reading 0 errors and 0 advisories. Approval of a definition authorizes no work. Rules DST-TPL-001 to DST-TPL-009."
 +++
 
 # Specification: Issue #433 managed-template leftovers: the retired relation in the traceability policy, the completion decider in the work-order template
