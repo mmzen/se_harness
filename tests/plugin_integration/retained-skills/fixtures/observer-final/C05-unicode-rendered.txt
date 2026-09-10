@@ -1,0 +1,8 @@
+The Café example describes a prepared record: VREC-BRF-001.
+
+The supplied inspection command is `harnessctl check . --artifact VREC-BRF-001 --json`.
+The supplied code example is `print("naïve café ☕")`.
+
+Only the assurance owner may verify VREC-BRF-001 when the retained evidence is sufficient; preparation grants no merge or release authority.
+
+This brief explains the supplied example and does not report current repository state.

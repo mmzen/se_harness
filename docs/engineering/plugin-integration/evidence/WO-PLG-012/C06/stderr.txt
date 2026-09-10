@@ -1,0 +1,37 @@
+Combined review copy; exact original bytes remain at each retained path below.
+
+--- helpers/windows: brief-final/C06-altered-output/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: brief-final/C06-reversed-spans/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: brief-final/C06-valid/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: brief-final/C06-wrong-digest/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: matrix1/C06-altered-output/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: matrix1/C06-reversed-spans/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: matrix1/C06-valid/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: matrix1/C06-wrong-digest/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix-final/C06-altered-output/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix-final/C06-reversed-spans/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix-final/C06-valid/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix-final/C06-wrong-digest/stderr.txt -> acceptance/helpers/f00017.txt ---
+

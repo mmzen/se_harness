@@ -1,0 +1,606 @@
+{
+  "classification": "Fixed actual Windows command groups for transparent Linux command regression; not fresh model reasoning",
+  "groups": {
+    "C05-final": [
+      "C05-final-01-version",
+      "C05-final-02-identity",
+      "C05-final-03-doctor",
+      "C05-final-04-helper"
+    ],
+    "C04-direct-helper": [
+      "C04-direct-invalid-explicit"
+    ],
+    "C07-prerequisites-only": [
+      "C07-01-version",
+      "C07-02-identity",
+      "C07-03-doctor"
+    ],
+    "C05-canonical-bypass-prerequisites": [
+      "C05-canonical-01-version",
+      "C05-canonical-02-identity",
+      "C05-canonical-03-doctor"
+    ],
+    "C05-canonical-supplemental-helper": [
+      "C05-canonical-supplemental-helper"
+    ],
+    "preexecution": [
+      "preexec-version",
+      "preexec-root-version",
+      "preexec-root-identity",
+      "preexec-payload-version",
+      "preexec-payload-identity"
+    ]
+  },
+  "request_sha256": {
+    "C05-unicode-request.json": "a1973893fa9886da9a6cde76b19dcfd3018a85155ed816cdcd1bc52548920469",
+    "C04-invalid-explicit-request.json": "3c78d9f038f481bef9ef8c000150c0c131f0f8a079651dd6fb158c62701fcb8a",
+    "C05-canonical-supplemental-request.json": "9d6ef8f545d6f034e1e3d2a8847cbd8826bdb8e8f007ca0b99acca5c430257be"
+  },
+  "trace": {
+    "C04-direct-invalid-explicit": {
+      "exit_code": 2,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "helper"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C04-direct-invalid-explicit\\boundary-config.json",
+        "--mode",
+        "helper",
+        "--path",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\candidate-final\\harness-operator-brief\\scripts\\check_brief.py",
+        "--",
+        "--request-json",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\C04-invalid-explicit-request.json"
+      ],
+      "stdout_sha256": "0ef4bba8ea9f15b4f8f6fdb8262c8b2778863dfdd5ed573a57a8d5124dea9c46",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C05-canonical-01-version": {
+      "exit_code": 0,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "evaluator"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C05-canonical-01-version\\boundary-config.json",
+        "--mode",
+        "evaluator",
+        "--",
+        "--version"
+      ],
+      "stdout_sha256": "f2158278a038730ac2f0ed3e084c619fb6aed11aadaa36ec51c0de5e8f3eefe8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C05-canonical-02-identity": {
+      "exit_code": 0,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "evaluator"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C05-canonical-02-identity\\boundary-config.json",
+        "--mode",
+        "evaluator",
+        "--",
+        "identity",
+        "--role",
+        "released-evaluator",
+        "--expected-version",
+        "0.16.0",
+        "--expected-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016",
+        "--checkout-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository",
+        "--require-isolated-python",
+        "--evaluator-payload-sha256",
+        "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "--evaluator-wheel-sha256",
+        "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae"
+      ],
+      "stdout_sha256": "1b8b910fac6514e31707d13165ab6d13b7f4ff9cecd87dd872cffd71128740c7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C05-canonical-03-doctor": {
+      "exit_code": 0,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "evaluator",
+        "engine"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C05-canonical-03-doctor\\boundary-config.json",
+        "--mode",
+        "evaluator",
+        "--",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository"
+      ],
+      "stdout_sha256": "9145ce501101195f24401604ae6cfdf6055cdb16d55b4d38b66b2d80299127eb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C05-canonical-supplemental-helper": {
+      "exit_code": 0,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "helper"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C05-canonical-supplemental-helper\\boundary-config.json",
+        "--mode",
+        "helper",
+        "--path",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\candidate-final\\harness-operator-brief\\scripts\\check_brief.py",
+        "--",
+        "--request-json",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\C05-canonical-supplemental-request.json"
+      ],
+      "stdout_sha256": "6c3adcc546776109b251ff8bfaeef4eddb4c579f1604781244531a844727a78b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C05-final-01-version": {
+      "exit_code": 0,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "evaluator"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C05-final-01-version\\boundary-config.json",
+        "--mode",
+        "evaluator",
+        "--",
+        "--version"
+      ],
+      "stdout_sha256": "f2158278a038730ac2f0ed3e084c619fb6aed11aadaa36ec51c0de5e8f3eefe8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C05-final-02-identity": {
+      "exit_code": 0,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "evaluator"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C05-final-02-identity\\boundary-config.json",
+        "--mode",
+        "evaluator",
+        "--",
+        "identity",
+        "--role",
+        "released-evaluator",
+        "--expected-version",
+        "0.16.0",
+        "--expected-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016",
+        "--checkout-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository",
+        "--require-isolated-python",
+        "--evaluator-payload-sha256",
+        "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "--evaluator-wheel-sha256",
+        "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae"
+      ],
+      "stdout_sha256": "1b8b910fac6514e31707d13165ab6d13b7f4ff9cecd87dd872cffd71128740c7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C05-final-03-doctor": {
+      "exit_code": 0,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "evaluator",
+        "engine"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C05-final-03-doctor\\boundary-config.json",
+        "--mode",
+        "evaluator",
+        "--",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository"
+      ],
+      "stdout_sha256": "9145ce501101195f24401604ae6cfdf6055cdb16d55b4d38b66b2d80299127eb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C05-final-04-helper": {
+      "exit_code": 0,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "helper"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C05-final-04-helper\\boundary-config.json",
+        "--mode",
+        "helper",
+        "--path",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\candidate-final\\harness-operator-brief\\scripts\\check_brief.py",
+        "--",
+        "--request-json",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\C05-unicode-request.json"
+      ],
+      "stdout_sha256": "9392ed69cb859815286b2220c154d771483e3d4e0aec35f77b8085af7a013f0f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C05-unicode-01-version": {
+      "exit_code": 0,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "evaluator"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-v1\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C05-unicode-01-version\\boundary-config.json",
+        "--mode",
+        "evaluator",
+        "--",
+        "--version"
+      ],
+      "stdout_sha256": "f2158278a038730ac2f0ed3e084c619fb6aed11aadaa36ec51c0de5e8f3eefe8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C05-unicode-02-identity": {
+      "exit_code": 0,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "evaluator"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-v1\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C05-unicode-02-identity\\boundary-config.json",
+        "--mode",
+        "evaluator",
+        "--",
+        "identity",
+        "--role",
+        "released-evaluator",
+        "--expected-version",
+        "0.16.0",
+        "--expected-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016",
+        "--checkout-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository",
+        "--require-isolated-python",
+        "--evaluator-payload-sha256",
+        "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "--evaluator-wheel-sha256",
+        "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae"
+      ],
+      "stdout_sha256": "1b8b910fac6514e31707d13165ab6d13b7f4ff9cecd87dd872cffd71128740c7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C05-unicode-03-doctor": {
+      "exit_code": 0,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "evaluator",
+        "engine"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-v1\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C05-unicode-03-doctor\\boundary-config.json",
+        "--mode",
+        "evaluator",
+        "--",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository"
+      ],
+      "stdout_sha256": "9145ce501101195f24401604ae6cfdf6055cdb16d55b4d38b66b2d80299127eb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C05-unicode-04-helper": {
+      "exit_code": 0,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "helper"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-v1\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C05-unicode-04-helper\\boundary-config.json",
+        "--mode",
+        "helper",
+        "--path",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\frozen-plugin\\harness-operator-brief\\scripts\\check_brief.py",
+        "--",
+        "--request-json",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\C05-unicode-request.json"
+      ],
+      "stdout_sha256": "9392ed69cb859815286b2220c154d771483e3d4e0aec35f77b8085af7a013f0f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C07-01-version": {
+      "exit_code": 0,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "evaluator"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C07-01-version\\boundary-config.json",
+        "--mode",
+        "evaluator",
+        "--",
+        "--version"
+      ],
+      "stdout_sha256": "f2158278a038730ac2f0ed3e084c619fb6aed11aadaa36ec51c0de5e8f3eefe8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C07-02-identity": {
+      "exit_code": 0,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "evaluator"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C07-02-identity\\boundary-config.json",
+        "--mode",
+        "evaluator",
+        "--",
+        "identity",
+        "--role",
+        "released-evaluator",
+        "--expected-version",
+        "0.16.0",
+        "--expected-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016",
+        "--checkout-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository",
+        "--require-isolated-python",
+        "--evaluator-payload-sha256",
+        "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "--evaluator-wheel-sha256",
+        "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae"
+      ],
+      "stdout_sha256": "1b8b910fac6514e31707d13165ab6d13b7f4ff9cecd87dd872cffd71128740c7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C07-03-doctor": {
+      "exit_code": 0,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "evaluator",
+        "engine"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C07-03-doctor\\boundary-config.json",
+        "--mode",
+        "evaluator",
+        "--",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository"
+      ],
+      "stdout_sha256": "9145ce501101195f24401604ae6cfdf6055cdb16d55b4d38b66b2d80299127eb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "preexec-payload-identity": {
+      "exit_code": 1,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "evaluator"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\preexec-payload-identity\\boundary-config.json",
+        "--mode",
+        "evaluator",
+        "--",
+        "identity",
+        "--role",
+        "released-evaluator",
+        "--expected-version",
+        "0.16.0",
+        "--expected-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016",
+        "--checkout-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository",
+        "--require-isolated-python",
+        "--evaluator-payload-sha256",
+        "0000000000000000000000000000000000000000000000000000000000000000",
+        "--evaluator-wheel-sha256",
+        "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae"
+      ],
+      "stdout_sha256": "85e4f44ba78a4d95668932c156028fa2a7cc90fa42fd8611d6240956561c1001",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "preexec-payload-version": {
+      "exit_code": 0,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "evaluator"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\preexec-payload-version\\boundary-config.json",
+        "--mode",
+        "evaluator",
+        "--",
+        "--version"
+      ],
+      "stdout_sha256": "f2158278a038730ac2f0ed3e084c619fb6aed11aadaa36ec51c0de5e8f3eefe8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "preexec-root-identity": {
+      "exit_code": 1,
+      "original_recorder_passed": false,
+      "changed_paths": [],
+      "roles": [
+        "evaluator"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\preexec-root-identity\\boundary-config.json",
+        "--mode",
+        "evaluator",
+        "--",
+        "identity",
+        "--role",
+        "released-evaluator",
+        "--expected-version",
+        "0.16.0",
+        "--expected-root",
+        "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-windows-20260911-attempt2/repository",
+        "--checkout-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository",
+        "--require-isolated-python",
+        "--evaluator-payload-sha256",
+        "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "--evaluator-wheel-sha256",
+        "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae"
+      ],
+      "stdout_sha256": "08f76b72f8e267c6ed88ea3b55ac7dd0ededec07595608bbe909d2ddce36e35b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "preexec-root-version": {
+      "exit_code": 0,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "evaluator"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\preexec-root-version\\boundary-config.json",
+        "--mode",
+        "evaluator",
+        "--",
+        "--version"
+      ],
+      "stdout_sha256": "f2158278a038730ac2f0ed3e084c619fb6aed11aadaa36ec51c0de5e8f3eefe8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "preexec-version": {
+      "exit_code": 0,
+      "original_recorder_passed": true,
+      "changed_paths": [],
+      "roles": [
+        "evaluator"
+      ],
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py",
+        "--config",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\preexec-version\\boundary-config.json",
+        "--mode",
+        "evaluator",
+        "--",
+        "--version"
+      ],
+      "stdout_sha256": "f2158278a038730ac2f0ed3e084c619fb6aed11aadaa36ec51c0de5e8f3eefe8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "limits": [
+    "Replace fixture/environment paths only; bind Linux-native identities transparently.",
+    "Wrong-root direct CLI exit1 is an original observation; do not repeat the observer mistaken expect-exit2 as an authority oracle.",
+    "C07 has no query/helper after prerequisites; replay does not establish the model refusal."
+  ]
+}

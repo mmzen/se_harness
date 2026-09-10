@@ -1,0 +1,17 @@
+{
+  "classification": "Actual model-selected existing exact-output bypass; deterministic copy of supplied canonical bytes, not a completed managed profile result",
+  "candidate_skill_sha256": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51",
+  "operator_output_file": "C05-canonical-operator-output.txt",
+  "operator_output_sha256": "bb78722a28685df386cfbf5226c5dddc70e35bd6f1dda45b7cd60826f324d567",
+  "operator_output_bytes": 270,
+  "outcome_interpretation": "communication rendering stopped; existing exact-output path returned protected source alone",
+  "profile_claim": false,
+  "result_or_receipt_wrapper": false,
+  "product_trace_records": ["C05-canonical-01-version", "C05-canonical-02-identity", "C05-canonical-03-doctor"],
+  "brief_helper_calls_during_bypass": 0,
+  "prompt_count": 0,
+  "expected": "Whole canonical source remains byte-identical; no surrounding prose",
+  "observed": "270 exact UTF-8 bytes emitted by deterministic source copy, unchanged target hashes; no helper or profile wrapper in bypass",
+  "conclusion": "pass",
+  "oracle_clarification": "Original raw oracle required a completed profile pair for this extra canonical variant. Higher-priority retained TCM-PRT-005/PRF-004 instead requires a bypass. Original oracle remains unchanged; normal Unicode C05 retains the pair."
+}

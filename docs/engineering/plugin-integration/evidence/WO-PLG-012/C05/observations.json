@@ -1,0 +1,945 @@
+{
+  "case": "C05",
+  "expected": "Ordinary explicit Unicode brief retains four exact spans and existing inline result/receipt schemas.",
+  "conclusion": "Final bounded acceptance passed; see source reports for final selection and preserved earlier failures.",
+  "observed_records": [
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-01-version/observations.json",
+      "retained": "acceptance/linux-replay/f00024.json",
+      "sha256": "db8e40c3b5ce6c0202c6ff69d005db87f901457498918d50c5583b994f0c667a",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-02-identity/observations.json",
+      "retained": "acceptance/linux-replay/f00030.json",
+      "sha256": "cb5e23754320ea263a9d8190362b766bcd1c08bd4b451aede561cc3e2166d4b6",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-03-doctor/observations.json",
+      "retained": "acceptance/linux-replay/f00036.json",
+      "sha256": "d353c9c0703ab36f2c8861011f7d4c0541a8e5496733851062c07e7f6368cfa0",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-04-helper/observations.json",
+      "retained": "acceptance/linux-replay/f00044.json",
+      "sha256": "f38cc82a13ee4baca0544dd797df66f4222920ca75724e0ddcd6bb82f1af767b",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-01-version/observations.json",
+      "retained": "acceptance/instructions/f/00127.bin",
+      "sha256": "e2aa387a31886336199febf0c6a92ffb8be68da21397f914c83503cb99f71abc",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-02-identity/observations.json",
+      "retained": "acceptance/instructions/f/00144.bin",
+      "sha256": "c5b0c0c786eaba861cf2140e75204ee1b62ef99b95c8854c4c074ec0ee4b50c3",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-03-doctor/observations.json",
+      "retained": "acceptance/instructions/f/00161.bin",
+      "sha256": "313a2cff8f49b6db82fe2e95bb66aa24b316bece78947041e27ce2c43b62ab20",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-supplemental-helper/observations.json",
+      "retained": "acceptance/instructions/f/00179.bin",
+      "sha256": "a03f5a2c154d314ae97c091e24242947ac095e6df6d3cad0fd502a62d045a2f6",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-01-version/observations.json",
+      "retained": "acceptance/instructions/f/00196.bin",
+      "sha256": "af32cd9dd35f9b1130b28d640aa79883f87875534b923d20d3dcbf5095759ff2",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-02-identity/observations.json",
+      "retained": "acceptance/instructions/f/00213.bin",
+      "sha256": "14805d34b3ae76a66e0beff54872773064a92db303dfdfd0f663b04601c04e6a",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-03-doctor/observations.json",
+      "retained": "acceptance/instructions/f/00230.bin",
+      "sha256": "54e0e9c13683fbb5040335194e4b8e6afe974996d998db891f78c40e15f9c533",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-04-helper/observations.json",
+      "retained": "acceptance/instructions/f/00248.bin",
+      "sha256": "3918b13fe73afd3de82c0af0450db03f115d1ed856a4d204179ee251cbd6a4de",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-01-version/observations.json",
+      "retained": "acceptance/instructions/f/00265.bin",
+      "sha256": "92a0f3de2732c45dc7ae13cf5d98a41a76cd9fccb1231009fb5554d730d519c4",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-02-identity/observations.json",
+      "retained": "acceptance/instructions/f/00282.bin",
+      "sha256": "7e90d02d11aa91e823d77868612e670352a04dc651833450f89c2c5f23e4e49e",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-03-doctor/observations.json",
+      "retained": "acceptance/instructions/f/00299.bin",
+      "sha256": "50292e43035114af6a21276b82f8681cbb2c80b59ba92dae90c84d6dfcbe7fe3",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-04-helper/observations.json",
+      "retained": "acceptance/instructions/f/00317.bin",
+      "sha256": "35426c841a08d4d06e7cc8597e9f163ec7605d19b26a1db8e0c23300e1b900f7",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    }
+  ],
+  "source_evidence": [
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-01-version/actions.txt",
+      "retained": "acceptance/linux-replay/f00020.txt",
+      "sha256": "f8df204cf52bdccc2f37025a00c1b8b7aaea544a052c0603332e6d160d6bca14"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-01-version/audit.jsonl",
+      "retained": "acceptance/linux-replay/f00021.jsonl",
+      "sha256": "8bf93ce2a59919117fe55bb04189af4ad7ad3290fc8eaa3244a5d130c8bfcbc2"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-01-version/boundary-config.json",
+      "retained": "acceptance/linux-replay/f00022.json",
+      "sha256": "24d3c53ba97437ef02d7e0a2ee7a34f504611b4c7ba5560922919460710184b1"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-01-version/observations.json",
+      "retained": "acceptance/linux-replay/f00024.json",
+      "sha256": "db8e40c3b5ce6c0202c6ff69d005db87f901457498918d50c5583b994f0c667a"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-01-version/stderr.txt",
+      "retained": "acceptance/linux-replay/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-01-version/stdout.txt",
+      "retained": "acceptance/linux-replay/f00025.txt",
+      "sha256": "aa037454b5e8320521a32b278a3f4aff05fc79009ab5503f5d4a1b9a33b38c47"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-01-version-driver.json",
+      "retained": "acceptance/linux-replay/f00026.json",
+      "sha256": "2e70eb06b89fcbdba6da529db7b795cc2cd7aca912763c1e679ed8711bd092aa"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-02-identity/actions.txt",
+      "retained": "acceptance/linux-replay/f00027.txt",
+      "sha256": "6324a51e553073d89670eb0e9b5a79e2fd535e5d6bda9d169aac6f162fc71b78"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-02-identity/audit.jsonl",
+      "retained": "acceptance/linux-replay/f00028.jsonl",
+      "sha256": "7007b417f53823949770eb860fd0ae3708c3fcc499ad21851163d3921414c069"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-02-identity/boundary-config.json",
+      "retained": "acceptance/linux-replay/f00029.json",
+      "sha256": "9265697fdd4ec504b3552eec6a12a7178af8b8ae7b595782fb4cd9a7e0f6de20"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-02-identity/observations.json",
+      "retained": "acceptance/linux-replay/f00030.json",
+      "sha256": "cb5e23754320ea263a9d8190362b766bcd1c08bd4b451aede561cc3e2166d4b6"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-02-identity/stderr.txt",
+      "retained": "acceptance/linux-replay/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-02-identity/stdout.txt",
+      "retained": "acceptance/linux-replay/f00031.txt",
+      "sha256": "c8269f824eeb60d290cae7098c93f0be319fa682361045d514dffeeca7d3134e"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-02-identity-driver.json",
+      "retained": "acceptance/linux-replay/f00032.json",
+      "sha256": "8f2e2ca54ef3664d486f3cd1b37adac428d21282f2b69a23b21d9104869f3b30"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-03-doctor/actions.txt",
+      "retained": "acceptance/linux-replay/f00033.txt",
+      "sha256": "08a1894abf22d268fd0010e332d859dd48d3bca11f91083faea62543632a6302"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-03-doctor/audit.jsonl",
+      "retained": "acceptance/linux-replay/f00034.jsonl",
+      "sha256": "d4276dbfc7b547c7831e9f4655d74efe9130ede1c8fd79ade1e7b15f9a87434c"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-03-doctor/boundary-config.json",
+      "retained": "acceptance/linux-replay/f00035.json",
+      "sha256": "668ffc6ecb6e4bfd4400acfa0668a92cf9fa22cc38d2f34c9188cfeedd0adfbe"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-03-doctor/observations.json",
+      "retained": "acceptance/linux-replay/f00036.json",
+      "sha256": "d353c9c0703ab36f2c8861011f7d4c0541a8e5496733851062c07e7f6368cfa0"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-03-doctor/stderr.txt",
+      "retained": "acceptance/linux-replay/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-03-doctor/stdout.txt",
+      "retained": "acceptance/linux-replay/f00037.txt",
+      "sha256": "7cd1f4817e593d06525bf3b96de21b826bddc36d44e43a8e3393e31a2496b330"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-03-doctor-driver.json",
+      "retained": "acceptance/linux-replay/f00038.json",
+      "sha256": "5338276396dc858cd7fe58552d16c4d0a913c8679ca29514b7fba82362ce11d8"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-04-helper/actions.txt",
+      "retained": "acceptance/linux-replay/f00039.txt",
+      "sha256": "0d0a90fa7ad92120b14eac342f183770a5dd3f1370fdc04a278fcf73ca862fbc"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-04-helper/audit.jsonl",
+      "retained": "acceptance/linux-replay/f00040.jsonl",
+      "sha256": "e850bdc5793a44c48fa96d87bc5eae513deb704db6c920220823bb4cc7b3d8b4"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-04-helper/boundary-config.json",
+      "retained": "acceptance/linux-replay/f00041.json",
+      "sha256": "ba8f46122d6bbfa1f76182481eae354d4364f626fae3abfbc0971ee3f0111fd9"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-04-helper/observations.json",
+      "retained": "acceptance/linux-replay/f00044.json",
+      "sha256": "f38cc82a13ee4baca0544dd797df66f4222920ca75724e0ddcd6bb82f1af767b"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-04-helper/stderr.txt",
+      "retained": "acceptance/linux-replay/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-04-helper/stdout.txt",
+      "retained": "acceptance/linux-replay/f00045.txt",
+      "sha256": "7ac534e6ce60fd502b1eb3610e2ad54d675b40cbd943beaa050e78a61ebeb06d"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C05-final-04-helper-driver.json",
+      "retained": "acceptance/linux-replay/f00046.json",
+      "sha256": "51d2b61c6cafa28495dd729960f2a8919f297259a433134ada182ccba7831ffa"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "frozen-observer-inputs/C05-unicode-rendered.txt",
+      "retained": "acceptance/linux-replay/f00065.txt",
+      "sha256": "58bd930030e9bc83fe337b4a3f6f42fb6ad3f8068a239b0c56fe84fe3290aed0"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "frozen-observer-inputs/C05-unicode-request.json",
+      "retained": "acceptance/linux-replay/f00042.json",
+      "sha256": "a1973893fa9886da9a6cde76b19dcfd3018a85155ed816cdcd1bc52548920469"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "frozen-observer-inputs/C05-unicode-source.txt",
+      "retained": "acceptance/linux-replay/f00066.txt",
+      "sha256": "66cedd5c2b34274a387fdac6d0db62b3b716b8531603fff0cd4b0ce60727ccb9"
+    },
+    {
+      "group": "linux-replay/original-final-model-output",
+      "original": "final-outputs/C05-receipt.json",
+      "retained": "acceptance/linux-replay/f00111.json",
+      "sha256": "b4bcefb965027de9969c1f73c9c3869cae21e500d6b0d33259f9a366fc5eba82"
+    },
+    {
+      "group": "linux-replay/original-final-model-output",
+      "original": "final-outputs/C05-result.json",
+      "retained": "acceptance/linux-replay/f00112.json",
+      "sha256": "42540d06241312cc847b43e91da4b32b5ce05fcf0a12bd624753b1388a955e8a"
+    },
+    {
+      "group": "linux-replay/original-observer-history",
+      "original": "C05-final-execution-receipt.json",
+      "retained": "acceptance/linux-replay/f00115.json",
+      "sha256": "e1a347d3ae6fcecd3009f4720c656a187d002a8f6677529fb4ead8ce0ac8477a"
+    },
+    {
+      "group": "linux-replay/original-observer-history",
+      "original": "C05-final-corrected-execution-receipt.json",
+      "retained": "acceptance/linux-replay/f00116.json",
+      "sha256": "7585f46ee05faf053c2411444405e585fd0294c0d1bc02d553e705b434a81220"
+    },
+    {
+      "group": "linux-replay/original-observer-history",
+      "original": "C05-final-skill-result.json",
+      "retained": "acceptance/linux-replay/f00117.json",
+      "sha256": "76a4189057412050c681d4b218c25f1dedc9b6747f6c310a380d9ddd453402e6"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/C05-canonical-operator-output.txt",
+      "retained": "acceptance/instructions/f/00013.bin",
+      "sha256": "bb78722a28685df386cfbf5226c5dddc70e35bd6f1dda45b7cd60826f324d567"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/C05-canonical-source.txt",
+      "retained": "acceptance/instructions/f/00014.bin",
+      "sha256": "bb78722a28685df386cfbf5226c5dddc70e35bd6f1dda45b7cd60826f324d567"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/C05-canonical-supplemental-request.json",
+      "retained": "acceptance/instructions/f/00015.bin",
+      "sha256": "9d6ef8f545d6f034e1e3d2a8847cbd8826bdb8e8f007ca0b99acca5c430257be"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/C05-final-corrected-execution-receipt.json",
+      "retained": "acceptance/instructions/f/00016.bin",
+      "sha256": "7585f46ee05faf053c2411444405e585fd0294c0d1bc02d553e705b434a81220"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/C05-final-execution-receipt.json",
+      "retained": "acceptance/instructions/f/00017.bin",
+      "sha256": "e1a347d3ae6fcecd3009f4720c656a187d002a8f6677529fb4ead8ce0ac8477a"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/C05-final-skill-result.json",
+      "retained": "acceptance/instructions/f/00018.bin",
+      "sha256": "76a4189057412050c681d4b218c25f1dedc9b6747f6c310a380d9ddd453402e6"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/C05-unicode-rendered.txt",
+      "retained": "acceptance/instructions/f/00019.bin",
+      "sha256": "58bd930030e9bc83fe337b4a3f6f42fb6ad3f8068a239b0c56fe84fe3290aed0"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/C05-unicode-request.json",
+      "retained": "acceptance/instructions/f/00020.bin",
+      "sha256": "a1973893fa9886da9a6cde76b19dcfd3018a85155ed816cdcd1bc52548920469"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/C05-unicode-source.txt",
+      "retained": "acceptance/instructions/f/00021.bin",
+      "sha256": "66cedd5c2b34274a387fdac6d0db62b3b716b8531603fff0cd4b0ce60727ccb9"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/final-outputs/C05-inline.jsonl",
+      "retained": "acceptance/instructions/f/00047.bin",
+      "sha256": "e5e2498f1b563f1344318dbe9d4f67a6cbcd23b56d9f550d37aa324311cadf00"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/final-outputs/C05-receipt.json",
+      "retained": "acceptance/instructions/f/00048.bin",
+      "sha256": "b4bcefb965027de9969c1f73c9c3869cae21e500d6b0d33259f9a366fc5eba82"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/final-outputs/C05-receipt.sha256",
+      "retained": "acceptance/instructions/f/00049.bin",
+      "sha256": "53e381f9965b630e2451a358a3a32ef5f7a0e9ce3f88c972c4c594fda8a67a69"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/final-outputs/C05-result.json",
+      "retained": "acceptance/instructions/f/00050.bin",
+      "sha256": "42540d06241312cc847b43e91da4b32b5ce05fcf0a12bd624753b1388a955e8a"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/model-observations/C05-canonical-bypass/after.json",
+      "retained": "acceptance/instructions/f/00063.bin",
+      "sha256": "6a54b066e688a2f0b61d0215880e0e49e508e1531f35f419abb09db690b001ef"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/model-observations/C05-canonical-bypass/before.json",
+      "retained": "acceptance/instructions/f/00064.bin",
+      "sha256": "6a54b066e688a2f0b61d0215880e0e49e508e1531f35f419abb09db690b001ef"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/model-observations/C05-canonical-bypass/model-choice.json",
+      "retained": "acceptance/instructions/f/00065.bin",
+      "sha256": "8862bb6218781d5cd97b19499bf7ae68bae3e2f24ad529fa112246182000049e"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/model-observations/C05-model-choice.json",
+      "retained": "acceptance/instructions/f/00066.bin",
+      "sha256": "2c0f19d74f2a7101bfbf9f85056d0648d02810c981446990e89d6152323a103f"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-01-version/actions.txt",
+      "retained": "acceptance/instructions/f/00113.bin",
+      "sha256": "29024fab563eea1f4194c37f875a139131da608c87ca1bcfd38ab4240a8554d1"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-01-version/audit.jsonl",
+      "retained": "acceptance/instructions/f/00114.bin",
+      "sha256": "d4084d29bcfa17c44ccc609d326f80fb849e79032e645d6a89513ef787fc46a7"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-01-version/boundary-config.json",
+      "retained": "acceptance/instructions/f/00115.bin",
+      "sha256": "eed8e6c4c1ac4ee6e10122bde4061ac144673d022b8acd2e50e9de401d8de018"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-01-version/observations.json",
+      "retained": "acceptance/instructions/f/00127.bin",
+      "sha256": "e2aa387a31886336199febf0c6a92ffb8be68da21397f914c83503cb99f71abc"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-01-version/stderr.txt",
+      "retained": "acceptance/instructions/f/00128.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-01-version/stdout.txt",
+      "retained": "acceptance/instructions/f/00129.bin",
+      "sha256": "f2158278a038730ac2f0ed3e084c619fb6aed11aadaa36ec51c0de5e8f3eefe8"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-02-identity/actions.txt",
+      "retained": "acceptance/instructions/f/00130.bin",
+      "sha256": "566c8cd8d372d1464e16fb3e841ef6d34a47524d1c2e1aa1126af64d7c92ee00"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-02-identity/audit.jsonl",
+      "retained": "acceptance/instructions/f/00131.bin",
+      "sha256": "d34cc36b9dd3fdb3826177605a46f6025dca73a953807f75485f7e2f2358b2b5"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-02-identity/boundary-config.json",
+      "retained": "acceptance/instructions/f/00132.bin",
+      "sha256": "59b7c2ab9697e74c7939a7033e8ec9ee7b61292f134a777ae8d5ec64fbb3e779"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-02-identity/observations.json",
+      "retained": "acceptance/instructions/f/00144.bin",
+      "sha256": "c5b0c0c786eaba861cf2140e75204ee1b62ef99b95c8854c4c074ec0ee4b50c3"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-02-identity/stderr.txt",
+      "retained": "acceptance/instructions/f/00145.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-02-identity/stdout.txt",
+      "retained": "acceptance/instructions/f/00146.bin",
+      "sha256": "1b8b910fac6514e31707d13165ab6d13b7f4ff9cecd87dd872cffd71128740c7"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-03-doctor/actions.txt",
+      "retained": "acceptance/instructions/f/00147.bin",
+      "sha256": "3aea11c560e162ebd29942590b79e3b302e067beff09d66c03befbb126ba2783"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-03-doctor/audit.jsonl",
+      "retained": "acceptance/instructions/f/00148.bin",
+      "sha256": "7087f40ca6abb27965b54700afe523df3967217bfaccb31a5f982364a0cfd840"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-03-doctor/boundary-config.json",
+      "retained": "acceptance/instructions/f/00149.bin",
+      "sha256": "d44e7494ed26af54bead5714abea7998227fcf7c5465e11bf51480f3d644b741"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-03-doctor/observations.json",
+      "retained": "acceptance/instructions/f/00161.bin",
+      "sha256": "313a2cff8f49b6db82fe2e95bb66aa24b316bece78947041e27ce2c43b62ab20"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-03-doctor/stderr.txt",
+      "retained": "acceptance/instructions/f/00162.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-03-doctor/stdout.txt",
+      "retained": "acceptance/instructions/f/00163.bin",
+      "sha256": "9145ce501101195f24401604ae6cfdf6055cdb16d55b4d38b66b2d80299127eb"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-supplemental-helper/actions.txt",
+      "retained": "acceptance/instructions/f/00164.bin",
+      "sha256": "789e3decbe96ffa0a863ce15e27175e668690152e44559b98ecef6c75dc9c74d"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-supplemental-helper/audit.jsonl",
+      "retained": "acceptance/instructions/f/00165.bin",
+      "sha256": "903f0fa1d4b6e5c042fbaff9a5aaddc323f21b01da247f57618133d258b7074c"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-supplemental-helper/boundary-config.json",
+      "retained": "acceptance/instructions/f/00166.bin",
+      "sha256": "a7fa874c13f27e5abcdfc4b9ff7bb620c048d79c5d5f4ba5198b2981988999b5"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-supplemental-helper/observations.json",
+      "retained": "acceptance/instructions/f/00179.bin",
+      "sha256": "a03f5a2c154d314ae97c091e24242947ac095e6df6d3cad0fd502a62d045a2f6"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-supplemental-helper/stderr.txt",
+      "retained": "acceptance/instructions/f/00180.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-supplemental-helper/stdout.txt",
+      "retained": "acceptance/instructions/f/00181.bin",
+      "sha256": "6c3adcc546776109b251ff8bfaeef4eddb4c579f1604781244531a844727a78b"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-01-version/actions.txt",
+      "retained": "acceptance/instructions/f/00182.bin",
+      "sha256": "aa6428cc2c469a38544be69ff530176171f92436334753bbf53e3b2cd48b4849"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-01-version/audit.jsonl",
+      "retained": "acceptance/instructions/f/00183.bin",
+      "sha256": "fdf6a7c78cbfc7c72f7607abe8a732a28a74038acf007a926226e2773bf7f4c6"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-01-version/boundary-config.json",
+      "retained": "acceptance/instructions/f/00184.bin",
+      "sha256": "f18945857debfdf12b36f8f3def1e224d72dc1a4a2d37f4f6b8e65b02f60da51"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-01-version/observations.json",
+      "retained": "acceptance/instructions/f/00196.bin",
+      "sha256": "af32cd9dd35f9b1130b28d640aa79883f87875534b923d20d3dcbf5095759ff2"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-01-version/stderr.txt",
+      "retained": "acceptance/instructions/f/00197.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-01-version/stdout.txt",
+      "retained": "acceptance/instructions/f/00198.bin",
+      "sha256": "f2158278a038730ac2f0ed3e084c619fb6aed11aadaa36ec51c0de5e8f3eefe8"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-02-identity/actions.txt",
+      "retained": "acceptance/instructions/f/00199.bin",
+      "sha256": "7c8f2a33f3c8782bb29ad6a4435d927225c5015225283c00c4679920858005d6"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-02-identity/audit.jsonl",
+      "retained": "acceptance/instructions/f/00200.bin",
+      "sha256": "ede85e40e651efe8e601873a31d12d512d9f6762510efcad3e95bb5b006c850d"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-02-identity/boundary-config.json",
+      "retained": "acceptance/instructions/f/00201.bin",
+      "sha256": "ad27653ebbd2e5caa3c76a93771776ba49a4f2e92ee794e825fe6fc5c32d8ca2"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-02-identity/observations.json",
+      "retained": "acceptance/instructions/f/00213.bin",
+      "sha256": "14805d34b3ae76a66e0beff54872773064a92db303dfdfd0f663b04601c04e6a"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-02-identity/stderr.txt",
+      "retained": "acceptance/instructions/f/00214.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-02-identity/stdout.txt",
+      "retained": "acceptance/instructions/f/00215.bin",
+      "sha256": "1b8b910fac6514e31707d13165ab6d13b7f4ff9cecd87dd872cffd71128740c7"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-03-doctor/actions.txt",
+      "retained": "acceptance/instructions/f/00216.bin",
+      "sha256": "a5c569a740fa7ad3f83d53a348ebb9c660c21d585e9a2e0b61878a71edc09714"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-03-doctor/audit.jsonl",
+      "retained": "acceptance/instructions/f/00217.bin",
+      "sha256": "9bf12513b766cb97ba539110f871982ec012e9b85e2a1a664e8098a7e50d6201"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-03-doctor/boundary-config.json",
+      "retained": "acceptance/instructions/f/00218.bin",
+      "sha256": "310231a2c7d301acb12b3e12bae77f67b01741237e964745a38ddf4738ad9b2a"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-03-doctor/observations.json",
+      "retained": "acceptance/instructions/f/00230.bin",
+      "sha256": "54e0e9c13683fbb5040335194e4b8e6afe974996d998db891f78c40e15f9c533"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-03-doctor/stderr.txt",
+      "retained": "acceptance/instructions/f/00231.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-03-doctor/stdout.txt",
+      "retained": "acceptance/instructions/f/00232.bin",
+      "sha256": "9145ce501101195f24401604ae6cfdf6055cdb16d55b4d38b66b2d80299127eb"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-04-helper/actions.txt",
+      "retained": "acceptance/instructions/f/00233.bin",
+      "sha256": "6f0d93d6fd53e0b7228db87cd4a13eb8e45e1500d31ce830002974d5ca9455d9"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-04-helper/audit.jsonl",
+      "retained": "acceptance/instructions/f/00234.bin",
+      "sha256": "40084f56667df174321ba3830423ae4b9e6e2f7b456f690c25331418ccf10bfc"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-04-helper/boundary-config.json",
+      "retained": "acceptance/instructions/f/00235.bin",
+      "sha256": "7a5365fd2ab8b13a38f4449b6d2c215ec397ece75364165970fc6daa92bbb900"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-04-helper/observations.json",
+      "retained": "acceptance/instructions/f/00248.bin",
+      "sha256": "3918b13fe73afd3de82c0af0450db03f115d1ed856a4d204179ee251cbd6a4de"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-04-helper/stderr.txt",
+      "retained": "acceptance/instructions/f/00249.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-04-helper/stdout.txt",
+      "retained": "acceptance/instructions/f/00250.bin",
+      "sha256": "9392ed69cb859815286b2220c154d771483e3d4e0aec35f77b8085af7a013f0f"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-01-version/actions.txt",
+      "retained": "acceptance/instructions/f/00251.bin",
+      "sha256": "55a1edc5d4e41e7f46bf73c20883b4a7396ef342555006e89b049b5092246df3"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-01-version/audit.jsonl",
+      "retained": "acceptance/instructions/f/00252.bin",
+      "sha256": "90af399b5167c833bf357d269f9b0e2278997e48e097de73c04c36d77e8f4874"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-01-version/boundary-config.json",
+      "retained": "acceptance/instructions/f/00253.bin",
+      "sha256": "1ada65069b561e5dffe27b5cb0a0302478d6792a571e357ca11421e9017d661d"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-01-version/observations.json",
+      "retained": "acceptance/instructions/f/00265.bin",
+      "sha256": "92a0f3de2732c45dc7ae13cf5d98a41a76cd9fccb1231009fb5554d730d519c4"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-01-version/stderr.txt",
+      "retained": "acceptance/instructions/f/00266.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-01-version/stdout.txt",
+      "retained": "acceptance/instructions/f/00267.bin",
+      "sha256": "f2158278a038730ac2f0ed3e084c619fb6aed11aadaa36ec51c0de5e8f3eefe8"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-02-identity/actions.txt",
+      "retained": "acceptance/instructions/f/00268.bin",
+      "sha256": "49f71a2159fc7c1b7bdd0e536bbd31f4b76351092733286495bd6fae906e98c9"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-02-identity/audit.jsonl",
+      "retained": "acceptance/instructions/f/00269.bin",
+      "sha256": "12b9321741eeeaa359d9430294d3d654d96c9209163ca5aa3889531cbe75dc08"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-02-identity/boundary-config.json",
+      "retained": "acceptance/instructions/f/00270.bin",
+      "sha256": "dc726c0d6fb5acd14be4a46f2370d376192963179ef74dca169b7b4e376a18c3"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-02-identity/observations.json",
+      "retained": "acceptance/instructions/f/00282.bin",
+      "sha256": "7e90d02d11aa91e823d77868612e670352a04dc651833450f89c2c5f23e4e49e"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-02-identity/stderr.txt",
+      "retained": "acceptance/instructions/f/00283.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-02-identity/stdout.txt",
+      "retained": "acceptance/instructions/f/00284.bin",
+      "sha256": "1b8b910fac6514e31707d13165ab6d13b7f4ff9cecd87dd872cffd71128740c7"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-03-doctor/actions.txt",
+      "retained": "acceptance/instructions/f/00285.bin",
+      "sha256": "8d264a06603ef4f90f2645f5d3c8a2784339d157d18d9f557d35a22ef160f588"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-03-doctor/audit.jsonl",
+      "retained": "acceptance/instructions/f/00286.bin",
+      "sha256": "ec21fd87eb09ffc9c10d0d466cd21d9d798f9a8341e2c74883a8bf3dcfb6e459"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-03-doctor/boundary-config.json",
+      "retained": "acceptance/instructions/f/00287.bin",
+      "sha256": "47395b3d71803e0fc18fb0be083d65615b0e53ce2b207d5a30c65d45f486898d"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-03-doctor/observations.json",
+      "retained": "acceptance/instructions/f/00299.bin",
+      "sha256": "50292e43035114af6a21276b82f8681cbb2c80b59ba92dae90c84d6dfcbe7fe3"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-03-doctor/stderr.txt",
+      "retained": "acceptance/instructions/f/00300.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-03-doctor/stdout.txt",
+      "retained": "acceptance/instructions/f/00301.bin",
+      "sha256": "9145ce501101195f24401604ae6cfdf6055cdb16d55b4d38b66b2d80299127eb"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-04-helper/actions.txt",
+      "retained": "acceptance/instructions/f/00302.bin",
+      "sha256": "d6402f1faae7e037455d806647269cd0543b4f3b2c33aeb6b39c5043338ca8e5"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-04-helper/audit.jsonl",
+      "retained": "acceptance/instructions/f/00303.bin",
+      "sha256": "42fcad47846e1ab3070e08b7df2cf849945c98f174e5b6997f0ede88513c222f"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-04-helper/boundary-config.json",
+      "retained": "acceptance/instructions/f/00304.bin",
+      "sha256": "9f18d0a50cd200489c2118dec27c9433e2e6933eb691d301c7aa08003e70aa4e"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-04-helper/observations.json",
+      "retained": "acceptance/instructions/f/00317.bin",
+      "sha256": "35426c841a08d4d06e7cc8597e9f163ec7605d19b26a1db8e0c23300e1b900f7"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-04-helper/stderr.txt",
+      "retained": "acceptance/instructions/f/00318.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-04-helper/stdout.txt",
+      "retained": "acceptance/instructions/f/00319.bin",
+      "sha256": "9392ed69cb859815286b2220c154d771483e3d4e0aec35f77b8085af7a013f0f"
+    }
+  ],
+  "limits": [
+    "Helper tests and fixed Linux replay are distinct from Windows instruction observations.",
+    "Native activation, live migration and production sandbox qualification are not claimed.",
+    "Original failed observations retain their failed verdicts; this index does not replace them."
+  ],
+  "reports": [
+    "acceptance/helpers/REPORT.md",
+    "acceptance/instructions/report.md",
+    "acceptance/linux-replay/REPORT.md"
+  ]
+}

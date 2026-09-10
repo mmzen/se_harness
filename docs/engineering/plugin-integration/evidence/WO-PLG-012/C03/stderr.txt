@@ -1,0 +1,19 @@
+Combined review copy; exact original bytes remain at each retained path below.
+
+--- helpers/windows: matrix1/C03-payload/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: matrix1/C03-root/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: matrix1/C03-version/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix-final/C03-payload/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix-final/C03-root/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix-final/C03-version/stderr.txt -> acceptance/helpers/f00017.txt ---
+

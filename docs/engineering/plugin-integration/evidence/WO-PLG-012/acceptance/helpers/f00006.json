@@ -1,0 +1,52 @@
+{
+  "explicit_skill": "harness-operator-brief",
+  "profile": "operator-communication",
+  "source_kind": "bounded-technical-text",
+  "source_text": "Selected WO-ROF-001 remains approved.\nRun: harnessctl check . --artifact WO-ROF-001 --json\nNo approval or lifecycle transition is supplied.\n",
+  "source_sha256": "990d61902809a9b6e960fd1fe9f7f02baa7bcf313877663f3096a1251cf48097",
+  "protected_spans": [
+    {
+      "id": "wo",
+      "kind": "identifier",
+      "start": 9,
+      "end": 19,
+      "sha256": "9b6c9ecd21e5abbb5c4b988bd11869c80a0ce530c300f2226021a551cc1971c0"
+    },
+    {
+      "id": "command",
+      "kind": "command",
+      "start": 43,
+      "end": 90,
+      "sha256": "4649821dddd1dfa206ced14bd0c2938f46f52d429892d5b77172ddd4369cf122"
+    },
+    {
+      "id": "decision",
+      "kind": "decision-meaning",
+      "start": 91,
+      "end": 139,
+      "sha256": "d513e95b512237123b6021615f141dd58ee4fcb665d51c7604158a8ccb6914f2"
+    }
+  ],
+  "rendered_text": "Selected WO-ROF-002 remains approved.\nRun: harnessctl check . --artifact WO-ROF-001 --json\nNo approval or lifecycle transition is supplied.\n",
+  "bindings": [
+    {
+      "id": "wo",
+      "start": 9,
+      "end": 19,
+      "sha256": "9b6c9ecd21e5abbb5c4b988bd11869c80a0ce530c300f2226021a551cc1971c0"
+    },
+    {
+      "id": "command",
+      "start": 43,
+      "end": 90,
+      "sha256": "4649821dddd1dfa206ced14bd0c2938f46f52d429892d5b77172ddd4369cf122"
+    },
+    {
+      "id": "decision",
+      "start": 91,
+      "end": 139,
+      "sha256": "d513e95b512237123b6021615f141dd58ee4fcb665d51c7604158a8ccb6914f2"
+    }
+  ],
+  "changed_paths": []
+}

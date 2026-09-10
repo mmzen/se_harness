@@ -1,0 +1,26 @@
+{
+  "explicit_skill": "harness-operator-brief",
+  "source_kind": "structured-harness-result",
+  "source_text": "Outcome\nCompleted.\n\nDone\n- Prepared VREC-BRF-001.\n\nCurrent lifecycle state\n- VREC-BRF-001 is ready; WO-BRF-001 is implemented.\n\nDecision required\n- The assurance owner must decide VREC-BRF-001 using the retained evidence.\n\nNext\nI verify VREC-BRF-001 as assurance owner.\n",
+  "source_sha256": "bb78722a28685df386cfbf5226c5dddc70e35bd6f1dda45b7cd60826f324d567",
+  "protected_spans": [
+    {
+      "id": "whole-restitution",
+      "kind": "canonical-restitution-block",
+      "start": 0,
+      "end": 270,
+      "sha256": "bb78722a28685df386cfbf5226c5dddc70e35bd6f1dda45b7cd60826f324d567"
+    }
+  ],
+  "profile": "operator-communication",
+  "rendered_text": "Outcome\nCompleted.\n\nDone\n- Prepared VREC-BRF-001.\n\nCurrent lifecycle state\n- VREC-BRF-001 is ready; WO-BRF-001 is implemented.\n\nDecision required\n- The assurance owner must decide VREC-BRF-001 using the retained evidence.\n\nNext\nI verify VREC-BRF-001 as assurance owner.\n",
+  "bindings": [
+    {
+      "id": "whole-restitution",
+      "start": 0,
+      "end": 270,
+      "sha256": "bb78722a28685df386cfbf5226c5dddc70e35bd6f1dda45b7cd60826f324d567"
+    }
+  ],
+  "changed_paths": []
+}

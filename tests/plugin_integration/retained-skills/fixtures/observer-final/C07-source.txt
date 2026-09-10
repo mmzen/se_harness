@@ -1,0 +1,1 @@
+This bounded note describes the Café component purpose. It does not report the current status of WO-BRF-001 or contain a current evaluator result.

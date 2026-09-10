@@ -1,0 +1,337 @@
+{
+  "case": "C03",
+  "expected": "Wrong version/root/payload refuses before later inspection or repair.",
+  "conclusion": "Final bounded acceptance passed; see source reports for final selection and preserved earlier failures.",
+  "observed_records": [
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-payload/observations.json",
+      "retained": "acceptance/helpers/f00170.json",
+      "sha256": "01fe672ecb1984646228be620896b228655e86a50f52dad306a604520f44b153",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-root/observations.json",
+      "retained": "acceptance/helpers/f00176.json",
+      "sha256": "93792c4397596f90f4b694baae903d0f8ef2b2b9d5232a38072258d6317a4daa",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-version/observations.json",
+      "retained": "acceptance/helpers/f00182.json",
+      "sha256": "ac5da93c023453faf4f775132b1403180d0bbf77e7fbc093365a57a9a452629e",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-payload/observations.json",
+      "retained": "acceptance/helpers/f00293.json",
+      "sha256": "d02a1e1d2a8dd453eaee702da766d87a0b8752ce53e36af16d338c0ef66c0849",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-root/observations.json",
+      "retained": "acceptance/helpers/f00299.json",
+      "sha256": "a6fdd1612f45049c2122906c252295c4c5dda83e8d4c66a05a32347583fbfd81",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-version/observations.json",
+      "retained": "acceptance/helpers/f00305.json",
+      "sha256": "d91ff115177f5bfa228b346739535dc4c4e180647c186bddad4ca8be576edb11",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    }
+  ],
+  "source_evidence": [
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-payload/actions.txt",
+      "retained": "acceptance/helpers/f00167.txt",
+      "sha256": "111c10d5f3f0473a81c3f3d899f39ed043a11d153d7478177a46133cb94491f7"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-payload/audit.jsonl",
+      "retained": "acceptance/helpers/f00168.jsonl",
+      "sha256": "1b15728b357e11feb4294623698d0f72e0ba674ce1a4552a578dd8c3e1dfc16f"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-payload/boundary-config.json",
+      "retained": "acceptance/helpers/f00169.json",
+      "sha256": "c3b8bb40ad7b37a7c6a5a41f80981efc0e7e25f689ae848ee34d09a69d1cf37d"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-payload/observations.json",
+      "retained": "acceptance/helpers/f00170.json",
+      "sha256": "01fe672ecb1984646228be620896b228655e86a50f52dad306a604520f44b153"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-payload/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-payload/stdout.txt",
+      "retained": "acceptance/helpers/f00171.txt",
+      "sha256": "d70cedf355e529418349b6fdbb23447916b33330290d76b6c0e66450d3ffeaa8"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-payload-driver.json",
+      "retained": "acceptance/helpers/f00172.json",
+      "sha256": "cb587d0d5dd11425c52e3bbbab034f069e1953251d25e1068d04e945b3e178b3"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-root/actions.txt",
+      "retained": "acceptance/helpers/f00173.txt",
+      "sha256": "2f4e97c8425fbd076a766e5534fa35b234a2b2a1f5a86987900b3c6c6363f747"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-root/audit.jsonl",
+      "retained": "acceptance/helpers/f00174.jsonl",
+      "sha256": "55e813a07386554d07d6af4b171cfaa2ae3d516ff854a5d984566e4db967962b"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-root/boundary-config.json",
+      "retained": "acceptance/helpers/f00175.json",
+      "sha256": "c9283ff01832450d0856e47f7431f501c6287bec62d9ca843c9dc922d4d21622"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-root/observations.json",
+      "retained": "acceptance/helpers/f00176.json",
+      "sha256": "93792c4397596f90f4b694baae903d0f8ef2b2b9d5232a38072258d6317a4daa"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-root/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-root/stdout.txt",
+      "retained": "acceptance/helpers/f00177.txt",
+      "sha256": "1b899bdfdb74a5f71ff452303de06bb3ccb9ce78463a949e0dc6215489030dac"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-root-driver.json",
+      "retained": "acceptance/helpers/f00178.json",
+      "sha256": "dfe8c26bb1519b70ca7cafc965f72f8dfe5f59156a9ff5dc5b00dd93ea9decda"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-version/actions.txt",
+      "retained": "acceptance/helpers/f00179.txt",
+      "sha256": "3ea79de13efabf43b3b0c4e1499c432172557f79ed56de3feb0a1300c6d1efdd"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-version/audit.jsonl",
+      "retained": "acceptance/helpers/f00180.jsonl",
+      "sha256": "6cbfb0d924f07bb7d60cac822ba0c43c8e298170a59ece2ace0c1125602d7fe1"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-version/boundary-config.json",
+      "retained": "acceptance/helpers/f00181.json",
+      "sha256": "d1eed93e5f3383c18ada7dc45cd5164bc087e3239b1f6e738f0fc46d5edbd26c"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-version/observations.json",
+      "retained": "acceptance/helpers/f00182.json",
+      "sha256": "ac5da93c023453faf4f775132b1403180d0bbf77e7fbc093365a57a9a452629e"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-version/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-version/stdout.txt",
+      "retained": "acceptance/helpers/f00183.txt",
+      "sha256": "4fafa6795bd14f855ca5f405c87fd40a34a920ca96d903d7d1a028229018c904"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-version-driver.json",
+      "retained": "acceptance/helpers/f00184.json",
+      "sha256": "7d0cd5db5cead2a5d3258d9271c0c1215bb7bcb9a9947931f70d580fb2ff4937"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-payload/actions.txt",
+      "retained": "acceptance/helpers/f00290.txt",
+      "sha256": "5f3d39af12888ab56a141953fc2efd9ba726523537d206fc399cf96d8797b017"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-payload/audit.jsonl",
+      "retained": "acceptance/helpers/f00291.jsonl",
+      "sha256": "8caba6bf5c473647e3a222b73d3eebddb7c8ea74f6185a391bd6c9cb385eed66"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-payload/boundary-config.json",
+      "retained": "acceptance/helpers/f00292.json",
+      "sha256": "34ff89feff7a0e9553085cc78d0b40b41a0b5f77484e426f2adf2c8aec894e00"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-payload/observations.json",
+      "retained": "acceptance/helpers/f00293.json",
+      "sha256": "d02a1e1d2a8dd453eaee702da766d87a0b8752ce53e36af16d338c0ef66c0849"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-payload/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-payload/stdout.txt",
+      "retained": "acceptance/helpers/f00294.txt",
+      "sha256": "3fa756d5b3f2eeee036c48343fbc1c9eec5a0719aa71e06e1a5b31aafe2dbecf"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-payload-driver.json",
+      "retained": "acceptance/helpers/f00295.json",
+      "sha256": "76f44631b020b7c829cc4b47c60a946e957949abaf3ed9950d1668c737026d88"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-root/actions.txt",
+      "retained": "acceptance/helpers/f00296.txt",
+      "sha256": "3e6fd400273b0d9adda3494730cb8a8df84706e21d2f8cc42106537dd9961ea8"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-root/audit.jsonl",
+      "retained": "acceptance/helpers/f00297.jsonl",
+      "sha256": "b827c980b5a8003edde2b3879640b40b45a8d64b1eec854b3965f6a8836f7002"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-root/boundary-config.json",
+      "retained": "acceptance/helpers/f00298.json",
+      "sha256": "d0ea8474e2f2857a9cd5c4a518beee248fbdd2bf5ae940523f1ff73a4807a740"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-root/observations.json",
+      "retained": "acceptance/helpers/f00299.json",
+      "sha256": "a6fdd1612f45049c2122906c252295c4c5dda83e8d4c66a05a32347583fbfd81"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-root/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-root/stdout.txt",
+      "retained": "acceptance/helpers/f00300.txt",
+      "sha256": "e548f789da77c0f541b7279737adc824e6dc736aaec4c41a9a9d7e84c6195a51"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-root-driver.json",
+      "retained": "acceptance/helpers/f00301.json",
+      "sha256": "5c6e536cd0dbfdac5f45af62558363d68be9b9877a78a557c0a399232a26bee0"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-version/actions.txt",
+      "retained": "acceptance/helpers/f00302.txt",
+      "sha256": "b588854a01909936286fb71ad4376b44c0cdaebfb5c1e650b7c10f13e6d305a5"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-version/audit.jsonl",
+      "retained": "acceptance/helpers/f00303.jsonl",
+      "sha256": "db3f5904c731ab6008e8edbe6769ab89044e34b8c99329959f042211ba80c19d"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-version/boundary-config.json",
+      "retained": "acceptance/helpers/f00304.json",
+      "sha256": "0b3b98f3b3187a1b889548b8156e6834f3bcbf94d46193b21e7e69e1d75f4de2"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-version/observations.json",
+      "retained": "acceptance/helpers/f00305.json",
+      "sha256": "d91ff115177f5bfa228b346739535dc4c4e180647c186bddad4ca8be576edb11"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-version/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-version/stdout.txt",
+      "retained": "acceptance/helpers/f00306.txt",
+      "sha256": "75a493bde776c80f595679eda8342ba9e07b6f72270cfde501afabad1896dcdc"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-version-driver.json",
+      "retained": "acceptance/helpers/f00307.json",
+      "sha256": "11b985712407af5bc0d952878ea887f777160214882f6c0c83a9e83c053168fd"
+    }
+  ],
+  "limits": [
+    "Helper tests and fixed Linux replay are distinct from Windows instruction observations.",
+    "Native activation, live migration and production sandbox qualification are not claimed.",
+    "Original failed observations retain their failed verdicts; this index does not replace them."
+  ],
+  "reports": [
+    "acceptance/helpers/REPORT.md",
+    "acceptance/instructions/report.md",
+    "acceptance/linux-replay/REPORT.md"
+  ]
+}

@@ -37,6 +37,9 @@
   "review_preflight_ready": true,
   "skill_validations": "both passed; corrected briefing repeated and passed",
   "distribution_validation": "passed, 14 distribution-bearing records",
-  "acceptance": "in progress",
-  "source_ci": "pending dedicated PR"
+  "acceptance": "Bounded C01-C08 acceptance retained: independent Windows instructions, actual Windows/Linux helpers and eight fixed Linux observer-call replays",
+  "source_ci": "Initial PR446 head: 1134 tests passed, four skipped; see ci-initial",
+  "helper_acceptance": "Windows and Linux selected C01/C02/C03/C06 helper cases and calibrated C08 boundary passed; fixed tests, not independent instruction reasoning",
+  "blocking_ci": "Windows checkout fails on inherited WO011 evidence paths; dependent integration package jobs skipped",
+  "completion": "Paused before WO implementation transition and VREC preparation: inherited Windows CI checkout failure"
 }

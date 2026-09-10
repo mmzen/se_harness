@@ -1,0 +1,49 @@
+Combined review copy; exact original bytes remain at each retained path below.
+
+--- helpers/windows: brief-final/C06-altered-output/stdout.txt -> acceptance/helpers/f00018.txt ---
+{"code":"TCM010","outcome":"blocked"}
+
+
+--- helpers/windows: brief-final/C06-reversed-spans/stdout.txt -> acceptance/helpers/f00026.txt ---
+{"code":"TCM007","outcome":"blocked"}
+
+
+--- helpers/windows: brief-final/C06-valid/stdout.txt -> acceptance/helpers/f00034.txt ---
+{"changed_paths":[],"outcome":"completed","profile":"operator-communication","protected_binding_count":3,"source_sha256":"990d61902809a9b6e960fd1fe9f7f02baa7bcf313877663f3096a1251cf48097"}
+
+
+--- helpers/windows: brief-final/C06-wrong-digest/stdout.txt -> acceptance/helpers/f00042.txt ---
+{"code":"TCM006","outcome":"blocked"}
+
+
+--- helpers/windows: matrix1/C06-altered-output/stdout.txt -> acceptance/helpers/f00018.txt ---
+{"code":"TCM010","outcome":"blocked"}
+
+
+--- helpers/windows: matrix1/C06-reversed-spans/stdout.txt -> acceptance/helpers/f00026.txt ---
+{"code":"TCM007","outcome":"blocked"}
+
+
+--- helpers/windows: matrix1/C06-valid/stdout.txt -> acceptance/helpers/f00034.txt ---
+{"changed_paths":[],"outcome":"completed","profile":"operator-communication","protected_binding_count":3,"source_sha256":"990d61902809a9b6e960fd1fe9f7f02baa7bcf313877663f3096a1251cf48097"}
+
+
+--- helpers/windows: matrix1/C06-wrong-digest/stdout.txt -> acceptance/helpers/f00042.txt ---
+{"code":"TCM006","outcome":"blocked"}
+
+
+--- helpers/linux: matrix-final/C06-altered-output/stdout.txt -> acceptance/helpers/f00313.txt ---
+{"code":"TCM010","outcome":"blocked"}
+
+
+--- helpers/linux: matrix-final/C06-reversed-spans/stdout.txt -> acceptance/helpers/f00320.txt ---
+{"code":"TCM007","outcome":"blocked"}
+
+
+--- helpers/linux: matrix-final/C06-valid/stdout.txt -> acceptance/helpers/f00327.txt ---
+{"changed_paths":[],"outcome":"completed","profile":"operator-communication","protected_binding_count":3,"source_sha256":"990d61902809a9b6e960fd1fe9f7f02baa7bcf313877663f3096a1251cf48097"}
+
+
+--- helpers/linux: matrix-final/C06-wrong-digest/stdout.txt -> acceptance/helpers/f00334.txt ---
+{"code":"TCM006","outcome":"blocked"}
+

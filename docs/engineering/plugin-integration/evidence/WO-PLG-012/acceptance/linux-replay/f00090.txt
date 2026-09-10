@@ -1,0 +1,1 @@
+{"canary": ["write"], "denied": true}

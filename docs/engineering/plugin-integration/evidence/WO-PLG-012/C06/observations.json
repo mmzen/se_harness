@@ -1,0 +1,655 @@
+{
+  "case": "C06",
+  "expected": "Wrong digest, malformed spans and altered protected output refuse with existing diagnostics.",
+  "conclusion": "Final bounded acceptance passed; see source reports for final selection and preserved earlier failures.",
+  "observed_records": [
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-altered-output/observations.json",
+      "retained": "acceptance/helpers/f00016.json",
+      "sha256": "d7e2101153854b36c46c2eb8ab84452ac8e83a7f3505d2b2325300340136c0ef",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-reversed-spans/observations.json",
+      "retained": "acceptance/helpers/f00025.json",
+      "sha256": "2bb8fd08869a183e7a620c27d547655325648009c978ff8661709142daa532cb",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-valid/observations.json",
+      "retained": "acceptance/helpers/f00033.json",
+      "sha256": "e2cf53d4fdf72b495c56f9da65ba57741057015711a5a44a5be306bd09f3f50b",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-wrong-digest/observations.json",
+      "retained": "acceptance/helpers/f00041.json",
+      "sha256": "2a0334672e36896947317d05b7930bbb0770eaf57518f6c13afbf44e993c16e5",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-altered-output/observations.json",
+      "retained": "acceptance/helpers/f00189.json",
+      "sha256": "ad91a6bfea1c51f4d4986b41bb6d6a2a39e76c119f69ee50e7074a635d6dfd42",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-reversed-spans/observations.json",
+      "retained": "acceptance/helpers/f00195.json",
+      "sha256": "d9ed7dadc4702208ace8e38e7478f133ac39d45f220bd861d45ade53b00e606c",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-valid/observations.json",
+      "retained": "acceptance/helpers/f00201.json",
+      "sha256": "c7292f67e89d79ff045a568154508675cbae04e2fcd1af8e0c066d5ce79fa882",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-wrong-digest/observations.json",
+      "retained": "acceptance/helpers/f00207.json",
+      "sha256": "09b842b5a9f8e036f6da69f2a1c8972ccdb0e19c95f7afc2533fbbb3c20eed1b",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-altered-output/observations.json",
+      "retained": "acceptance/helpers/f00312.json",
+      "sha256": "c83eeca436f437c98d76bfa0c39ef9592b442d316c66f133e707750e3b7df8e8",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-reversed-spans/observations.json",
+      "retained": "acceptance/helpers/f00319.json",
+      "sha256": "db746a98f45d6fa666c86db35e3206dbe16c7c7c1901640be64f66399906936a",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-valid/observations.json",
+      "retained": "acceptance/helpers/f00326.json",
+      "sha256": "dcee06d4dea6b0d150968e26a04d8ddb60f0e973401204de451feae6f50e2ef6",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-wrong-digest/observations.json",
+      "retained": "acceptance/helpers/f00333.json",
+      "sha256": "93291941948b04b3187fcb207ec66f77cf84fc84767804ea0acb51653d244d87",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    }
+  ],
+  "source_evidence": [
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-altered-output/actions.txt",
+      "retained": "acceptance/helpers/f00001.txt",
+      "sha256": "d6e7260694554da9817a4ef2d65ed5480fd95a839bae16b2e175e217cfbf8a8f"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-altered-output/audit.jsonl",
+      "retained": "acceptance/helpers/f00002.jsonl",
+      "sha256": "1b04b20cc31f39887cf500fdf8b8ef0b062b9d6042ee3f22c26d4689a51b9e47"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-altered-output/boundary-config.json",
+      "retained": "acceptance/helpers/f00003.json",
+      "sha256": "e8c77122f0f714ac731010291198e4f8b2083541ce61952028d659904b1e81c2"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-altered-output/observations.json",
+      "retained": "acceptance/helpers/f00016.json",
+      "sha256": "d7e2101153854b36c46c2eb8ab84452ac8e83a7f3505d2b2325300340136c0ef"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-altered-output/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-altered-output/stdout.txt",
+      "retained": "acceptance/helpers/f00018.txt",
+      "sha256": "ca584787b5bc825b1f58b6a5a43f8ca575daca6415431f332f6268c7d3e1c9c0"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-altered-output-driver.json",
+      "retained": "acceptance/helpers/f00019.json",
+      "sha256": "9c76a9d0fc3e4deeb2606113ce05d10493bf571ff4f08417f669a0d73b311a06"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-reversed-spans/actions.txt",
+      "retained": "acceptance/helpers/f00020.txt",
+      "sha256": "ef496e99affb78200f91f90e576e34d623d630a25eb5c47bc1ea23592ab1e642"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-reversed-spans/audit.jsonl",
+      "retained": "acceptance/helpers/f00021.jsonl",
+      "sha256": "f403b1cf28bbc36c5d5861a338bd205b133c88d45dbe716533b3f3942a44b97f"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-reversed-spans/boundary-config.json",
+      "retained": "acceptance/helpers/f00022.json",
+      "sha256": "81090fac909b84e4eeb33a351113b77f9b171453111265f11effc8935018d73d"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-reversed-spans/observations.json",
+      "retained": "acceptance/helpers/f00025.json",
+      "sha256": "2bb8fd08869a183e7a620c27d547655325648009c978ff8661709142daa532cb"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-reversed-spans/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-reversed-spans/stdout.txt",
+      "retained": "acceptance/helpers/f00026.txt",
+      "sha256": "62396f20408bbfd3ded9f7a08fcf4a602e948b1c28588267547fa9579fe87ddc"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-reversed-spans-driver.json",
+      "retained": "acceptance/helpers/f00027.json",
+      "sha256": "a09cb5b9166a4247a1ab47e8fcd6c1d2c38c8a0ccd7f1e1b95b85a4308ad31fd"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-valid/actions.txt",
+      "retained": "acceptance/helpers/f00028.txt",
+      "sha256": "d33b06202b889bba81db90131cb835278773c0d71d6f3010300b0a96fe71ac54"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-valid/audit.jsonl",
+      "retained": "acceptance/helpers/f00029.jsonl",
+      "sha256": "7501c657a459d7c22f96b06ef08796284c1cdd083cd1700c468ccc8bcd803a93"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-valid/boundary-config.json",
+      "retained": "acceptance/helpers/f00030.json",
+      "sha256": "19a679edfe1d6d58e3e586f70f13d1b1d80efec784ffceb5c8a27ec802800645"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-valid/observations.json",
+      "retained": "acceptance/helpers/f00033.json",
+      "sha256": "e2cf53d4fdf72b495c56f9da65ba57741057015711a5a44a5be306bd09f3f50b"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-valid/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-valid/stdout.txt",
+      "retained": "acceptance/helpers/f00034.txt",
+      "sha256": "6e478632341d0095bde71d5e0baf3f3a43ff9253de59787548ca83aa580c9669"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-valid-driver.json",
+      "retained": "acceptance/helpers/f00035.json",
+      "sha256": "1a061b5cb4a662286aef4b5198c0830725b23ac8799bf5286dae48936f50a6f8"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-wrong-digest/actions.txt",
+      "retained": "acceptance/helpers/f00036.txt",
+      "sha256": "f3261a88d6da6619f3e8e96529386711cf85e3899e882f333eef93364e2fec62"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-wrong-digest/audit.jsonl",
+      "retained": "acceptance/helpers/f00037.jsonl",
+      "sha256": "10acc83f45ce533dabbf7bf5710a6b6acc1605da012ad89907d0eb4f24ba35c4"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-wrong-digest/boundary-config.json",
+      "retained": "acceptance/helpers/f00038.json",
+      "sha256": "80cc392ba283f794864b00bbd48c6cef1823a1ffb6ac42b72296e9412582c83b"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-wrong-digest/observations.json",
+      "retained": "acceptance/helpers/f00041.json",
+      "sha256": "2a0334672e36896947317d05b7930bbb0770eaf57518f6c13afbf44e993c16e5"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-wrong-digest/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-wrong-digest/stdout.txt",
+      "retained": "acceptance/helpers/f00042.txt",
+      "sha256": "cc9ead50098c1d63449d86ed7c30e13581852f6c2f55a71bb45a231bc4d4baf0"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-wrong-digest-driver.json",
+      "retained": "acceptance/helpers/f00043.json",
+      "sha256": "9bfc4f74404d4680256ce069c6eec1ca75d34d0338edc23261cd343456ef0eea"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-altered-output/actions.txt",
+      "retained": "acceptance/helpers/f00185.txt",
+      "sha256": "f31019e9a63b8da2f762be9c8057f02a047c8cef3857034b18883d4ed27ee1e8"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-altered-output/audit.jsonl",
+      "retained": "acceptance/helpers/f00186.jsonl",
+      "sha256": "3412cdd7b1730ca50e1e5565a5345b655702528041b75a21effb415966ab70b6"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-altered-output/boundary-config.json",
+      "retained": "acceptance/helpers/f00187.json",
+      "sha256": "629ec3a21e8332f258b91690fe9fb1191943a09750a5c3d9050e50623ed06b4f"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-altered-output/observations.json",
+      "retained": "acceptance/helpers/f00189.json",
+      "sha256": "ad91a6bfea1c51f4d4986b41bb6d6a2a39e76c119f69ee50e7074a635d6dfd42"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-altered-output/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-altered-output/stdout.txt",
+      "retained": "acceptance/helpers/f00018.txt",
+      "sha256": "ca584787b5bc825b1f58b6a5a43f8ca575daca6415431f332f6268c7d3e1c9c0"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-altered-output-driver.json",
+      "retained": "acceptance/helpers/f00190.json",
+      "sha256": "67337081b02c5f072c19aa2a60930e319dc15f927915c598f1b1625356f7b6c8"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-reversed-spans/actions.txt",
+      "retained": "acceptance/helpers/f00191.txt",
+      "sha256": "40d47378f8ef8cc199c61eada334df216862c778e37bc4c9a43071b6b78c5ae5"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-reversed-spans/audit.jsonl",
+      "retained": "acceptance/helpers/f00192.jsonl",
+      "sha256": "61e220fd0a91a5a47d5a7d117eb7052a89cf5651d18c468f57de6348f59795b2"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-reversed-spans/boundary-config.json",
+      "retained": "acceptance/helpers/f00193.json",
+      "sha256": "48ac2d4d530a526d4ceaab3500ffe88bfc3119cfc9c53ab1e46aaaeb7b962a83"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-reversed-spans/observations.json",
+      "retained": "acceptance/helpers/f00195.json",
+      "sha256": "d9ed7dadc4702208ace8e38e7478f133ac39d45f220bd861d45ade53b00e606c"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-reversed-spans/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-reversed-spans/stdout.txt",
+      "retained": "acceptance/helpers/f00026.txt",
+      "sha256": "62396f20408bbfd3ded9f7a08fcf4a602e948b1c28588267547fa9579fe87ddc"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-reversed-spans-driver.json",
+      "retained": "acceptance/helpers/f00196.json",
+      "sha256": "6d006cc7590fc52b4deef20190171323e3de98840a683b8d744f6f7498f0e6d2"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-valid/actions.txt",
+      "retained": "acceptance/helpers/f00197.txt",
+      "sha256": "fab4bbf26e1f5dc38e9dc3d478f50a4f42acdcba120ad04b50d523d40ce77396"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-valid/audit.jsonl",
+      "retained": "acceptance/helpers/f00198.jsonl",
+      "sha256": "ab8dbc080860259b87e4397d0ab516df76366ca56cc503278900ded4294217a0"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-valid/boundary-config.json",
+      "retained": "acceptance/helpers/f00199.json",
+      "sha256": "6b93a56015564b6d71902ab0d82173e122910d1273ef88b03c2027cba6f816e0"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-valid/observations.json",
+      "retained": "acceptance/helpers/f00201.json",
+      "sha256": "c7292f67e89d79ff045a568154508675cbae04e2fcd1af8e0c066d5ce79fa882"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-valid/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-valid/stdout.txt",
+      "retained": "acceptance/helpers/f00034.txt",
+      "sha256": "6e478632341d0095bde71d5e0baf3f3a43ff9253de59787548ca83aa580c9669"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-valid-driver.json",
+      "retained": "acceptance/helpers/f00202.json",
+      "sha256": "fd92d747d171a7705c5cdb0fc153dfed2ff42a08192391f88891a249bc8749b5"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-wrong-digest/actions.txt",
+      "retained": "acceptance/helpers/f00203.txt",
+      "sha256": "8834b20c454849f1b2495baa52bdfea3762765f3025f5920d4f1d936059af4ec"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-wrong-digest/audit.jsonl",
+      "retained": "acceptance/helpers/f00204.jsonl",
+      "sha256": "29d584036029ec2f37ff8033b537cffab11eeca99928531522a98551e1140638"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-wrong-digest/boundary-config.json",
+      "retained": "acceptance/helpers/f00205.json",
+      "sha256": "b0d6060c3cd5137d80b33ac201c901c251d3a2446d9754035ca750238e7d3fdc"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-wrong-digest/observations.json",
+      "retained": "acceptance/helpers/f00207.json",
+      "sha256": "09b842b5a9f8e036f6da69f2a1c8972ccdb0e19c95f7afc2533fbbb3c20eed1b"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-wrong-digest/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-wrong-digest/stdout.txt",
+      "retained": "acceptance/helpers/f00042.txt",
+      "sha256": "cc9ead50098c1d63449d86ed7c30e13581852f6c2f55a71bb45a231bc4d4baf0"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-wrong-digest-driver.json",
+      "retained": "acceptance/helpers/f00208.json",
+      "sha256": "a8d1ee30a9bb318e97f7348b72b2967d3ce68b37bd569ba8418ade58ee54182a"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-altered-output/actions.txt",
+      "retained": "acceptance/helpers/f00308.txt",
+      "sha256": "358f1992985e86c2b39b8a25baef2a4e4413c962cca037b1bc2ed30f6bf8e2dc"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-altered-output/audit.jsonl",
+      "retained": "acceptance/helpers/f00309.jsonl",
+      "sha256": "222e377c26a2254f25446b4ca926ee88c544593511f7884d29c53d20286fa953"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-altered-output/boundary-config.json",
+      "retained": "acceptance/helpers/f00310.json",
+      "sha256": "324287bc0821befce5ff7fd8e8c6195d6d69ad1406074213c4cebf25ddbd03da"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-altered-output/observations.json",
+      "retained": "acceptance/helpers/f00312.json",
+      "sha256": "c83eeca436f437c98d76bfa0c39ef9592b442d316c66f133e707750e3b7df8e8"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-altered-output/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-altered-output/stdout.txt",
+      "retained": "acceptance/helpers/f00313.txt",
+      "sha256": "3280941dfb96010fa894c8b88ca86a6622026493c1daad79fcb79a5153c3767a"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-altered-output-driver.json",
+      "retained": "acceptance/helpers/f00314.json",
+      "sha256": "836d406dafe4e7fa493264b49be1110a4e6c1f3ea4abc38d1f1d8aeaa2f8cb3c"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-reversed-spans/actions.txt",
+      "retained": "acceptance/helpers/f00315.txt",
+      "sha256": "0fac20a63513df53a546277588b1bd34234d51fcba70bcfc02b7f2c74bbc00f4"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-reversed-spans/audit.jsonl",
+      "retained": "acceptance/helpers/f00316.jsonl",
+      "sha256": "df0498177b85e72268ef255106526206e6a38cf7c04105ca4f67cc883a7f6674"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-reversed-spans/boundary-config.json",
+      "retained": "acceptance/helpers/f00317.json",
+      "sha256": "1edc63c9cbf3fbd4d87e2a1a657cc7cbc06be8945f328dd7cf9db9d3da4a7a49"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-reversed-spans/observations.json",
+      "retained": "acceptance/helpers/f00319.json",
+      "sha256": "db746a98f45d6fa666c86db35e3206dbe16c7c7c1901640be64f66399906936a"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-reversed-spans/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-reversed-spans/stdout.txt",
+      "retained": "acceptance/helpers/f00320.txt",
+      "sha256": "c9a47630af592348b3e27dfd9d1f3b54bd48e1dadec95276e16967695716a5ed"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-reversed-spans-driver.json",
+      "retained": "acceptance/helpers/f00321.json",
+      "sha256": "6895d27ae208147b45fede7c40506a990f33d15796008e2749b58dfa0efc9670"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-valid/actions.txt",
+      "retained": "acceptance/helpers/f00322.txt",
+      "sha256": "1029f9bc6dec9d97e5db16085a91dfdbb57f4a8965abb6b5541f5e39c02970df"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-valid/audit.jsonl",
+      "retained": "acceptance/helpers/f00323.jsonl",
+      "sha256": "8f9d78ba7e9a0439f02b908fa91c4090fe2d65f71ecc35d7d750641f000fb1ab"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-valid/boundary-config.json",
+      "retained": "acceptance/helpers/f00324.json",
+      "sha256": "4d70945cc575f21c6c84391ae3f5b5d83cf0f00b30db9246cf0ccfd9bfb28699"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-valid/observations.json",
+      "retained": "acceptance/helpers/f00326.json",
+      "sha256": "dcee06d4dea6b0d150968e26a04d8ddb60f0e973401204de451feae6f50e2ef6"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-valid/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-valid/stdout.txt",
+      "retained": "acceptance/helpers/f00327.txt",
+      "sha256": "9cdc980481e63f8feb3dbbe1c98fd4150f9bac593eaf1d9fe290609b701ef707"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-valid-driver.json",
+      "retained": "acceptance/helpers/f00328.json",
+      "sha256": "69779b4d299b113ecc0fbf9604fa444bc4dee357242b3b3b5619ca6c112d4d15"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-wrong-digest/actions.txt",
+      "retained": "acceptance/helpers/f00329.txt",
+      "sha256": "5c4acb0b8b05d4ea600bd3e9389912292479dde8dd65fbaef35cd191c49ca06d"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-wrong-digest/audit.jsonl",
+      "retained": "acceptance/helpers/f00330.jsonl",
+      "sha256": "859b5e9ab60d8a14074059cd600209346572145c604575b815f0f4076283e3c0"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-wrong-digest/boundary-config.json",
+      "retained": "acceptance/helpers/f00331.json",
+      "sha256": "7a014f908fa6f3801a475106b46d896a0553303ea04bec4c5ebdd6fd8ffadacb"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-wrong-digest/observations.json",
+      "retained": "acceptance/helpers/f00333.json",
+      "sha256": "93291941948b04b3187fcb207ec66f77cf84fc84767804ea0acb51653d244d87"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-wrong-digest/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-wrong-digest/stdout.txt",
+      "retained": "acceptance/helpers/f00334.txt",
+      "sha256": "e6df926534f808ce891ee471617b462a5adbe52b3d1c0d8de6443c6d7e7bb22a"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-wrong-digest-driver.json",
+      "retained": "acceptance/helpers/f00335.json",
+      "sha256": "2acd05262a6dd29ed9fada9b75f777b6f89fec2a440def27daf79159cff1f7fd"
+    }
+  ],
+  "limits": [
+    "Helper tests and fixed Linux replay are distinct from Windows instruction observations.",
+    "Native activation, live migration and production sandbox qualification are not claimed.",
+    "Original failed observations retain their failed verdicts; this index does not replace them."
+  ],
+  "reports": [
+    "acceptance/helpers/REPORT.md",
+    "acceptance/instructions/report.md",
+    "acceptance/linux-replay/REPORT.md"
+  ]
+}

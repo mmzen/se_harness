@@ -1,0 +1,65 @@
+{
+  "explicit_skill": "harness-operator-brief",
+  "source_kind": "bounded-technical-text",
+  "source_text": "The Café example describes one prepared verification record. The following supplied facts determine the explanation.\n\nRecord: VREC-BRF-001\nInspection command: harnessctl check . --artifact VREC-BRF-001 --json\nIllustrative code: print(\"naïve café ☕\")\nDecision boundary: Only the assurance owner may verify VREC-BRF-001 when the retained evidence is sufficient; preparation grants no merge or release authority.\nThe explanation must rely only on this supplied example, not current repository state.\n",
+  "source_sha256": "66cedd5c2b34274a387fdac6d0db62b3b716b8531603fff0cd4b0ce60727ccb9",
+  "protected_spans": [
+    {
+      "id": "record-id",
+      "kind": "identifier",
+      "start": 127,
+      "end": 139,
+      "sha256": "ea3e3dc46e42a31231fec545e3da1af17058f3c2a0d3cc128c8282276a180336"
+    },
+    {
+      "id": "inspection-command",
+      "kind": "command",
+      "start": 160,
+      "end": 209,
+      "sha256": "bf35f50d70ef9b17357bfba75f9aeea179a168b6eda617a09277ce2678bf6f53"
+    },
+    {
+      "id": "unicode-code",
+      "kind": "code",
+      "start": 229,
+      "end": 254,
+      "sha256": "278bf7c4354f71d9774e0d93c11e67179ceffe1a86f300577ee3f9dbe1687e6f"
+    },
+    {
+      "id": "qualified-decision",
+      "kind": "decision-meaning",
+      "start": 274,
+      "end": 414,
+      "sha256": "10e01a628262712b576e734f947a30cff00e53519d8565f03861da462edd07b2"
+    }
+  ],
+  "profile": "operator-communication",
+  "rendered_text": "The Café example describes a prepared record: VREC-BRF-001.\n\nThe supplied inspection command is `harnessctl check . --artifact VREC-BRF-001 --json`.\nThe supplied code example is `print(\"naïve café ☕\")`.\n\nOnly the assurance owner may verify VREC-BRF-001 when the retained evidence is sufficient; preparation grants no merge or release authority.\n\nThis brief explains the supplied example and does not report current repository state.\n",
+  "bindings": [
+    {
+      "id": "record-id",
+      "start": 47,
+      "end": 59,
+      "sha256": "ea3e3dc46e42a31231fec545e3da1af17058f3c2a0d3cc128c8282276a180336"
+    },
+    {
+      "id": "inspection-command",
+      "start": 98,
+      "end": 147,
+      "sha256": "bf35f50d70ef9b17357bfba75f9aeea179a168b6eda617a09277ce2678bf6f53"
+    },
+    {
+      "id": "unicode-code",
+      "start": 180,
+      "end": 205,
+      "sha256": "278bf7c4354f71d9774e0d93c11e67179ceffe1a86f300577ee3f9dbe1687e6f"
+    },
+    {
+      "id": "qualified-decision",
+      "start": 209,
+      "end": 349,
+      "sha256": "10e01a628262712b576e734f947a30cff00e53519d8565f03861da462edd07b2"
+    }
+  ],
+  "changed_paths": []
+}

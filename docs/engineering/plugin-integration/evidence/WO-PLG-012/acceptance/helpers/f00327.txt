@@ -1,0 +1,1 @@
+{"changed_paths":[],"outcome":"completed","profile":"operator-communication","protected_binding_count":3,"source_sha256":"990d61902809a9b6e960fd1fe9f7f02baa7bcf313877663f3096a1251cf48097"}

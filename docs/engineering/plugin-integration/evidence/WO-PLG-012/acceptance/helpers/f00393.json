@@ -1,0 +1,164 @@
+{
+  "python": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+  "environment": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0",
+  "git": "/usr/bin/git",
+  "target": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository",
+  "home": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/isolated-home",
+  "synthetic_credential": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/isolated-home/synthetic-credentials.txt",
+  "engine": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/lib/python3.12/site-packages/se_harness/engine",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python_version": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+  "read_roots": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0",
+    "/usr",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/matrix1/C08-calibrate-spawn",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-orient/scripts/orient.py",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-operator-brief/scripts/check_brief.py",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-orient",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-operator-brief"
+  ],
+  "helpers": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-orient/scripts/orient.py",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-operator-brief/scripts/check_brief.py"
+  ],
+  "product_sha256": {
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-orient/skill-contract.json": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-orient/SKILL.md": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-orient/scripts/orient.py": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-operator-brief/skill-contract.json": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-operator-brief/SKILL.md": "6bb140eee67dd2114080d31b7ded0aa52ebd7b269c78cc5613b6f3798a8be748",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-operator-brief/agents/openai.yaml": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-operator-brief/scripts/check_brief.py": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683"
+  },
+  "audit_log": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/matrix1/C08-calibrate-spawn/audit.jsonl",
+  "source_sha256": {
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py": "fff1982b67ef8945c1ff94876140fad23369ac55e6fbfd6b4b8fa2efa65cdb4d",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/boundary_runner.py": "d47bf80a9d4423d222062b060057324d2c42e5dc303f1aadd40c0f170c7efd81",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/settings.json": "c3a66de715052818159a6cbdb2ce8a1271fe63ee16522a0b5ff415deb94e7761",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-orient/skill-contract.json": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-orient/SKILL.md": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-orient/scripts/orient.py": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-operator-brief/skill-contract.json": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-operator-brief/SKILL.md": "6bb140eee67dd2114080d31b7ded0aa52ebd7b269c78cc5613b6f3798a8be748",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-operator-brief/agents/openai.yaml": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-operator-brief/scripts/check_brief.py": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683"
+  },
+  "evaluator_commands": [
+    [
+      "--version"
+    ],
+    [
+      "identity",
+      "--role",
+      "released-evaluator",
+      "--expected-version",
+      "0.16.0",
+      "--expected-root",
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0",
+      "--checkout-root",
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository",
+      "--require-isolated-python",
+      "--evaluator-payload-sha256",
+      "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+      "--evaluator-wheel-sha256",
+      "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae"
+    ],
+    [
+      "--help"
+    ],
+    [
+      "doctor",
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository"
+    ],
+    [
+      "validate",
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository",
+      "--json"
+    ],
+    [
+      "inspect",
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository",
+      "--json"
+    ],
+    [
+      "check",
+      "--help"
+    ],
+    [
+      "check",
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository",
+      "--artifact",
+      "WO-ROF-001",
+      "--json"
+    ],
+    [
+      "preflight",
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository",
+      "--work-order",
+      "WO-ROF-001",
+      "--phase",
+      "start",
+      "--json"
+    ]
+  ],
+  "engine_commands": [
+    [
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/lib/python3.12/site-packages/se_harness/engine/validate_engineering_artifacts.py",
+      "--root",
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository",
+      "--json"
+    ],
+    [
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/lib/python3.12/site-packages/se_harness/engine/inspect_engineering_artifacts.py",
+      "--root",
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository",
+      "--json"
+    ]
+  ],
+  "git_commands": [
+    [
+      "-C",
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository",
+      "rev-parse",
+      "HEAD"
+    ],
+    [
+      "-C",
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository",
+      "rev-parse",
+      "--show-object-format"
+    ],
+    [
+      "-C",
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository",
+      "remote",
+      "get-url",
+      "origin"
+    ],
+    [
+      "-C",
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository",
+      "ls-files",
+      "-z"
+    ],
+    [
+      "-C",
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository",
+      "check-attr",
+      "-z",
+      "--stdin",
+      "text",
+      "eol"
+    ],
+    [
+      "-C",
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository",
+      "status",
+      "--porcelain",
+      "--untracked-files=all"
+    ]
+  ]
+}

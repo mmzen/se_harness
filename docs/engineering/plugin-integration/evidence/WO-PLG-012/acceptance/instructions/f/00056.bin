@@ -1,0 +1,45 @@
+"""Encode observed model-selected outputs in existing canonical receipt format."""
+import hashlib
+import json
+import sys
+from pathlib import Path
+root = Path(__file__).resolve().parent
+out = root / 'final-outputs'
+assert not out.exists()
+out.mkdir()
+
+def canonical(obj):
+    return (json.dumps(obj, ensure_ascii=False, sort_keys=True, allow_nan=False, separators=(',', ':')) + '\n').encode('utf8')
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+# Exact retained _tree_state manifest rule: ordered {path,state}, file:SHA,
+# canonical JSON with LF. The independent observer additionally retains hashes
+# for every .git object/config/index/ignored file, beyond the receipt ref subset.
+state = json.loads((root / 'trace/C05-final-01-version/observations.json').read_text())['before']
+repo = [{'path': p, 'state': 'file:' + state[p]} for p in sorted(state, key=lambda p: p.encode('utf8')) if not p.startswith('.git/')]
+refs = [{'path': p, 'state': 'file:' + state[p]} for p in sorted(state, key=lambda p: p.encode('utf8')) if p in ['.git/HEAD', '.git/packed-refs'] or p.startswith('.git/refs/')]
+states = [{'kind': 'repository-bytes', 'sha256': sha(canonical(repo))}, {'kind': 'git-references', 'sha256': sha(canonical(refs))}]
+receipt = json.loads((root / 'C05-final-corrected-execution-receipt.json').read_text())
+receipt['effects']['state_before'] = states
+receipt['effects']['state_after'] = states
+result = json.loads((root / 'C05-final-skill-result.json').read_text(encoding='utf8'))
+c07_receipt = json.loads(json.dumps(receipt))
+c07_receipt['execution']['operations'] = c07_receipt['execution']['operations'][:3]
+c07_receipt['validation'].update({'outcome': 'stopped', 'deviations': [{'code': 'current-state-result-required'}], 'residual_uncertainty': ['Current status and canonical next action were not supplied or queried.']})
+c07_result = {
+    'schema': 'se-harness-skill-result-v1', 'outcome': 'stopped', 'profile': 'operator-communication',
+    'policy_path': 'docs/engineering/TECHNICAL_COMMUNICATION.md',
+    'source_sha256': '6dc2cf58e1ffc7b86c23d0212a8d3db0c5e4e8e8c0fa569ab44b019339b77ab4',
+    'operator_message': 'The supplied note does not establish the current status of WO-BRF-001 or its next action. Use harness-orient to obtain a current structured result.',
+    'protected_content_bindings': [], 'protected_binding_count': 0,
+    'material_deviations': [], 'residual_uncertainty': ['current-state-result-required: Current status and canonical next action were not supplied or queried.']}
+for filename, value in [('C05-result.json', result), ('C05-receipt.json', receipt), ('C07-result.json', c07_result), ('C07-receipt.json', c07_receipt)]:
+    (out / filename).write_bytes(canonical(value))
+for name, first, second in [('C05', result, receipt), ('C07', c07_result, c07_receipt)]:
+    (out / (name + '-inline.jsonl')).write_bytes(canonical(first) + canonical(second))
+    (out / (name + '-receipt.sha256')).write_text(sha(canonical(second)) + '\n')
+(out / 'serialization-note.txt').write_text('Final canonical receipt bytes follow retained SPEC-AEX-001 and orient._json_bytes/_tree_state. Prior pretty observer files and abbreviated snapshot digests are retained as provisional observer outputs; use these final receipt files for the corrected existing representation. No new helper invocation or candidate change is claimed by this observer correction.\n')
+sys.stdout.buffer.write((out / 'C05-inline.jsonl').read_bytes())
+sys.stdout.buffer.write((out / 'C07-inline.jsonl').read_bytes())

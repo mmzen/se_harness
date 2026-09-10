@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\boundary_runner.py",
+    "--settings",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\settings.json",
+    "--output",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\matrix1\\C03-root",
+    "--helper",
+    "orient",
+    "--expected-root",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\matrix1\\wrong-evaluator-root",
+    "--expect-exit",
+    "2",
+    "--expect-code",
+    "AEXORI022"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"output\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-retained-helper-windows-20260911-attempt2\\\\matrix1\\\\C03-root\", \"passed\": true, \"exit_code\": 2, \"codes\": [null, \"AEXORI022\"], \"denied\": 0}\r\n{\"background_observation_count\":0,\"blockers\":{\"repository\":[],\"selected\":[]},\"candidate_source\":{\"governing\":false,\"status\":\"not_assessed\"},\"decision\":{\"command_or_suggested_response\":null,\"recommendation\":\"No accountable decision is currently queued.\",\"required_accountable_role\":null},\"execution_receipt\":{\"effects\":{\"changed_paths\":[],\"evidence\":[{\"kind\":\"portable-skill-manifest\",\"sha256\":\"913222368735da7a3ce5110db94cf60440f580dd82239ffa8abb7c5d8a4ba2c8\"}],\"state_after\":[{\"kind\":\"repository-bytes\",\"sha256\":\"f48a239b90109b3d538a4cc2b9035e9ea112a02343d5f6e38db617c4aab46f57\"},{\"kind\":\"git-references\",\"sha256\":\"80c6fcfc814259aec59c7aaf8f3fbc2fdb5f4ae1fb5af5ed18cdf440b1be864b\"}],\"state_before\":[{\"kind\":\"repository-bytes\",\"sha256\":\"f48a239b90109b3d538a4cc2b9035e9ea112a02343d5f6e38db617c4aab46f57\"},{\"kind\":\"git-references\",\"sha256\":\"80c6fcfc814259aec59c7aaf8f3fbc2fdb5f4ae1fb5af5ed18cdf440b1be864b\"}]},\"execution\":{\"operations\":[{\"exit_code\":0,\"id\":\"version\",\"status\":\"passed\"},{\"exit_code\":1,\"id\":\"identity\",\"status\":\"failed\"}],\"profiles\":[\"single-agent-orientation\"],\"skills\":[{\"name\":\"harness-orient\",\"portable_core_sha256\":\"913222368735da7a3ce5110db94cf60440f580dd82239ffa8abb7c5d8a4ba2c8\",\"version\":\"1.0.0\"}],\"worker_results\":[]},\"schema\":\"se-harness-execution-receipt-v1\",\"selection\":{\"artifact\":\"WO-ROF-001\",\"autonomy_envelope_sha256\":null,\"repository\":\"repository\"},\"validation\":{\"deviations\":[{\"code\":\"AEXORI022\",\"diagnostics\":[\"{\",\"\\\"candidate_commit\\\": null,\",\"\\\"checkout_root\\\": \\\"C:\\\\\\\\Users\\\\\\\\mathi\\\\\\\\Documents\\\\\\\\Codex\\\\\\\\2026-09-04\\\\\\\\hel\\\\\\\\work\\\\\\\\plugin-retained-helper-windows-20260911-attempt2\\\\\\\\repository\\\",\",\"\\\"diagnostics\\\": [\",\"{\",\"\\\"code\\\": \\\"RID003\\\",\",\"\\\"message\\\": \\\"origin is outside the expected runtime root\\\",\",\"\\\"subject\\\": \\\"module_origin\\\"\",\"},\",\"{\",\"\\\"code\\\": \\\"RID003\\\",\",\"\\\"message\\\": \\\"origin is outside the expected runtime root\\\",\",\"\\\"subject\\\": \\\"template_origin\\\"\",\"},\",\"{\",\"\\\"code\\\": \\\"RID004\\\",\",\"\\\"message\\\": \\\"installed-runtime path is outside its environment\\\",\",\"\\\"subject\\\": \\\"distribution_origin\\\"\",\"},\",\"{\"],\"operation\":\"identity\"}],\"evaluator\":{\"identity\":\"failed\",\"version\":\"0.16.0\"},\"gates\":[],\"outcome\":\"blocked\",\"residual_uncertainty\":[\"Read-only observations cannot prove that undisclosed work did not occur outside the measured repository and Git-reference boundary.\"]}},\"execution_receipt_sha256\":\"609071ce6f06934e787338a3920911e4e07cf75214ef299d20289aa0fea5e33c\",\"inspection\":{\"queues\":{},\"summary\":{}},\"integrity\":{\"diagnostics\":[],\"outcome\":\"not_assessed\"},\"non_effects\":[\"No repository or Git mutation was requested.\",\"No lifecycle transition or accountable decision was applied.\",\"No evaluator installation, network, credential, or external action was performed.\",\"No receipt or evidence file was retained in the target.\"],\"outcome\":\"blocked\",\"preflight\":{\"status\":\"not_requested\"},\"released_evaluator\":{\"identity\":\"failed\",\"version\":\"0.16.0\"},\"repository\":{\"name\":\"repository\",\"root\":\".\"},\"schema\":\"se-harness-orientation-result-v1\",\"selected\":{\"artifact\":\"WO-ROF-001\",\"scope\":{},\"status\":\"not_assessable\"},\"validation\":{\"outcome\":\"not_assessed\"}}\n",
+  "stderr": ""
+}
