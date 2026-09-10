@@ -1,0 +1,183 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "transition",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "VREC-PLG-006",
+    "artifacts": [
+      "VREC-PLG-006"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "transition",
+    "workflow_rule_id": "WFL-VREC-DELIVER",
+    "procedure_id": "PROC-DELIVERY-SELECT",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-ASSURANCE-DECISION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4A-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:VREC-PLG-006"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G4A-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G4A-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:VREC-PLG-006"
+              }
+            ],
+            "message": "No open decision blocks VREC-PLG-006."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "VREC-PLG-006"
+              }
+            ],
+            "message": "ready -> verified is a declared lifecycle edge for VREC-PLG-006."
+          }
+        ]
+      }
+    ]
+  },
+  "procedure": {
+    "id": "PROC-DELIVERY-SELECT",
+    "current_step": "STEP-DELIVERY-SELECT",
+    "steps": [
+      {
+        "id": "STEP-DELIVERY-SELECT",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-VERIFIED-COVERAGE"
+        ],
+        "effects": [
+          "Selects one delivery path."
+        ],
+        "non_effects": [
+          "Selection performs no repository or release action."
+        ],
+        "decision_right": "DR-DELIVERY-SELECT",
+        "role": "repository-owner or release-owner",
+        "artifact": "VREC-PLG-006",
+        "decision": "which separately authorized delivery path to select",
+        "outcomes": [
+          "repository-integration",
+          "release-preparation",
+          "stop"
+        ],
+        "response": "Select one separately authorized delivery path for VREC-PLG-006."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "VREC-PLG-006",
+        "status": "ready"
+      }
+    ],
+    "after": [
+      {
+        "id": "VREC-PLG-006",
+        "status": "verified"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "VREC-PLG-006",
+        "path": "docs/engineering/plugin-integration/verification-records/VREC-PLG-006.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated",
+          "verified_at",
+          "verified_by"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Applied 1 explicit lifecycle transition(s) atomically."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "VREC-PLG-006 is verified."
+    ],
+    "decision_required": {
+      "decision_right": "DR-DELIVERY-SELECT",
+      "role": "repository-owner or release-owner",
+      "artifact": "VREC-PLG-006",
+      "decision": "which separately authorized delivery path to select",
+      "outcomes": [
+        "repository-integration",
+        "release-preparation",
+        "stop"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-DELIVERY-SELECT",
+      "step_id": "STEP-DELIVERY-SELECT",
+      "action": "which separately authorized delivery path to select"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Select one separately authorized delivery path for VREC-PLG-006."
+    },
+    "alternatives": [
+      "Use complete alternative procedure PROC-REPOSITORY-INTEGRATION."
+    ]
+  },
+  "result_sha256": "877800ea92eaedb26c769acebd33498b9ccf403391249d027369e0d4f13877d6"
+}

@@ -2,7 +2,7 @@
 id = "VREC-PLG-006"
 type = "verification_record"
 title = "Verification candidate for WO-PLG-008"
-status = "ready"
+status = "verified"
 owners = ["engineering-owner"]
 created = "2026-09-10"
 updated = "2026-09-10"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/plugin-integration/evidence/WO-PLG-008/READM
 evaluator_evidence_path = "docs/engineering/plugin-integration/evidence/VREC-PLG-006-evaluator.json"
 evaluator_evidence_sha256 = "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
 
+verified_at = "2026-09-10T17:40:47Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-PLG-008"]
 conforms_to = ["VER-PLG-008"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-10T17:40:47Z"
+decided_by = "assurance-owner"
+reason = "On 2026-09-10 the operator stated \"i ver\\_ify both records\" in response to the explicit handoff naming VREC-PLG-005 for WO-PLG-007 and VREC-PLG-006 for WO-PLG-008. Record the operator's assurance-owner decision for VREC-PLG-006, exact candidate 1daf4e3ecf3a46a3cb8ad385a11b6cfa39e4549d, under VER-PLG-008. The retained evidence and disclosed fixture, platform and host-coverage limits define the scope of this verification. This transition changes only VREC-PLG-006 from ready to verified; its candidate and evidence remain fixed. No related work-order state change, release or PR merge is authorized."
 +++
 
 # Verification Record Candidate
