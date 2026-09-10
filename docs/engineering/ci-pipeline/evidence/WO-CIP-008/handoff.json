@@ -2,7 +2,7 @@
   "compliance": {
     "change_set_source": "git",
     "checkpoint": "handoff",
-    "formal_snapshot_sha256": "ebd371153526b6623a9ccd584f8505ad2494bc3c87c075acdafbc63cf6ac4eec",
+    "formal_snapshot_sha256": "838c34f9100bd985d9937e4acfac3375d5bb021714cf6fd3439143b635f4b50e",
     "gates": [
       {
         "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
@@ -120,7 +120,16 @@
     "unrelated_count": 46
   },
   "mutation": {
-    "writes": []
+    "writes": [
+      {
+        "fields": [
+          "formal_snapshot_sha256",
+          "rebound_at"
+        ],
+        "id": "WO-CIP-008",
+        "path": "docs/engineering/ci-pipeline/evidence/WO-CIP-008/WO-CIP-008-handoff.md"
+      }
+    ]
   },
   "operation": {
     "kind": "check",
@@ -245,8 +254,17 @@
     "alternatives": [],
     "blocked_by": [],
     "command_or_response": {
-      "kind": "response",
-      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: required check 'validate' at head be6c6fc is failure, not success"
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-CIP-008=implemented",
+        "--decision",
+        "WO-CIP-008=delegated-executor",
+        "--apply"
+      ],
+      "kind": "command"
     },
     "current_lifecycle_state": [
       "WO-CIP-008 is in_progress."
@@ -256,8 +274,10 @@
       "decision": "whether the authorized implementation and evidence are complete",
       "decision_right": "DR-WO-COMPLETE",
       "delegation": {
+        "check_run_id": "102867604140",
         "class": "execution",
-        "gate": "not passing"
+        "gate": "success",
+        "head": "1602fcb4f029682959c1c94adee8dbdd8bc7b9f4"
       },
       "outcomes": [
         "implemented",
@@ -277,7 +297,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "012576a49567202bdcc5cc7dae12109854d414f35596ac2cce439b30f7658230",
+  "result_sha256": "4110a8ad43b8d4eaf405a5d1417ba303d8a532f3265b183611114910aef0dcb9",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,

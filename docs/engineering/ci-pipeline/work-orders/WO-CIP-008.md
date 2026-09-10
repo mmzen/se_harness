@@ -2,7 +2,7 @@
 id = "WO-CIP-008"
 type = "work_order"
 title = "Issue #433, pipeline: amend two approved definitions for the renamed rehearsal job"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "technical-owner", "quality-owner"]
 created = "2026-09-10"
 updated = "2026-09-10"
@@ -47,6 +47,13 @@ to = "in_progress"
 decided_at = "2026-09-10T11:07:21Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 82e9b323154548faee0ad3b7b51b030c94996354 (check-run 102835980976, source github-checks)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-10T12:36:12Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 1602fcb4f029682959c1c94adee8dbdd8bc7b9f4 (check-run 102867604140, source github-checks). Completion decided by the delegated-executor role on 2026-09-10 under the execution delegation class WO-CIP-008 carries, delegated by the engineering owner in the approval of 2026-09-10 and read at the base of pull request #439, main at 7457a401. Rules CIP-AMD-001 to CIP-AMD-005 of SPEC-CIP-004 are met and mapped to evidence in docs/engineering/ci-pipeline/evidence/WO-CIP-008/WO-CIP-008-handoff.md and readings.md: ARCH-CIP-001 and REQ-CIP-002 name the rehearsal job upgrade-rehearsal, each carries a dated amendment record, only updated changed in their front matter, and DefinitionNamesTests pins that the old name survives in the artifact bodies only inside those records. The retained handoff check from origin/main completed, nine predicates passing, eight changed paths in scope. Released 0.17.0: validate 1,480 artifacts, 0 errors, 46 W013; doctor 99 PASS; preflight PASS. Local suite 1,127 tests at the Windows baseline; the hosted lanes at 1602fcb4 are the record, 17 of 17 success. Disclosed: the acceptance grep also returns three front-matter lines of REQ-CIP-009 and REQ-CIP-010 naming the retired name as retired, so the test reads bodies and pins those two, and CIP-AMD-004's wording is left to the owner's reading; commit 70b12f67 carried a test syntax error repaired at 51720719; the lane at 70b12f67 read WEX201 on a foreign path until origin/main was merged at 1602fcb4. No workflow, script or managed path changed. Completion approves nothing: record preparation is this role's separate decision; verification and the merge remain the human owners."
 +++
 
 # Work Order: Issue #433, pipeline: amend two approved definitions for the renamed rehearsal job

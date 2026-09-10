@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-CIP-008"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "ebd371153526b6623a9ccd584f8505ad2494bc3c87c075acdafbc63cf6ac4eec"
-rebound_at = "2026-09-10T11:11:02Z"
+formal_snapshot_sha256 = "2963424e5976e88452b57f97830fcefd4ecf00b3041545e6c13a664a87208e80"
+rebound_at = "2026-09-10T12:37:28Z"
 ```
 
 # WO-CIP-008 handoff evidence
@@ -59,7 +59,14 @@ to their evidence below.
   completion reason, the hosted Linux lane is the record.
 - Managed lane at `be6c6fc8` (the start commit): blocked on
   `QGP-G4I-EVIDENCE` only, before this packet existed; every other lane
+  `success`. At `70b12f67` the lane read `WEX201` on
+  `docs/engineering/harness-distribution/README.md`: the pull request's base
+  lagged `main` after #437 merged, so the merge checkout carried a foreign
+  path; `origin/main` was merged in at `1602fcb4`, where all 17 lanes are
   `success`.
+- Local full suite at `1602fcb4`: 1,127 tests, 1 error, 23 skipped; the
+  error is the Windows baseline PermissionError of
+  `test_artifact_authoring.IdentifierAllocationTests`; see `readings.md`.
 
 ## Disclosures
 
@@ -79,7 +86,11 @@ to their evidence below.
    rehearsal's reconcile job" for the two jobs, which is the reading
    `SPEC-CIP-004` leaves undecided; the amendment record gives both former
    names.
-3. Historical evidence packets and verification records under the domain
+3. Commit `70b12f67` carried a syntax error in `tests/test_ci_pipeline.py`
+   (an escaped newline written as a line break by the patching tool), which
+   broke the module's import; `51720719` repaired it and the test then
+   reported file line numbers. Both commits are on this branch.
+4. Historical evidence packets and verification records under the domain
    (`WO-CIP-001` to `WO-CIP-007`) keep the old name as a statement of what
    was true when written; they are outside `[execution_scope]` and the grep
    of acceptance 2 does not cover them.

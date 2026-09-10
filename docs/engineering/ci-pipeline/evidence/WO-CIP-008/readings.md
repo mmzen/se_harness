@@ -66,7 +66,7 @@ amendment record appended. `REQ-CIP-002`: four lines changed (27, 29, 41,
 | --- | --- |
 | `python -m unittest tests.test_ci_pipeline.DefinitionNamesTests -v` | 1 test, OK |
 | `python -m unittest tests.test_ci_pipeline` | 36 tests, OK |
-| `python scripts/run_tests.py` (local control, Windows) | recorded in the completion reason; the hosted Linux lane is the record |
+| `python scripts/run_tests.py --workers 8` (local control, Windows 11, Python 3.13) | 1,127 tests, 1 error, 23 skipped: the error is `test_artifact_authoring.IdentifierAllocationTests.test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref`, the Windows baseline PermissionError on a temporary `.git` object; the hosted Linux lane is the record |
 
 Negative control: reinserting `governance-migration` into the Components
 section of a scratch copy of `ARCH-CIP-001` makes `DefinitionNamesTests`
