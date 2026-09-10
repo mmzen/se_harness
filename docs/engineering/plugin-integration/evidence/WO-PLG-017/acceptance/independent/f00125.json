@@ -1,0 +1,22 @@
+{
+  "calls": [
+    "01-git-version",
+    "02-commit-type",
+    "03-clone"
+  ],
+  "checkout": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17-qid8mbxy\\r",
+  "commit": "c3c74334d1d780c112525b6d2b9043e5239f5425",
+  "error": {
+    "message": "03-clone unexpected result",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-path-repair-independent-20260911\\check_checkout.py\", line 72, in main\n    git('03-clone', 'clone', '--no-checkout', '--no-hardlinks', '--no-tags', '--single-branch', str(source), str(repo), target=source)\n    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-path-repair-independent-20260911\\check_checkout.py\", line 55, in git\n    return call(label, ['git', '-c', 'safe.directory='+source.as_posix(), '-c', 'safe.directory='+repo.as_posix(),\n        '-c', 'core.longpaths=false', '-c', 'core.autocrlf=false', '-c', 'core.hooksPath='+str(hooks),\n        '-C', str(target), *args], expected=expected)\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-path-repair-independent-20260911\\check_checkout.py\", line 51, in call\n    if error or code != expected: raise RuntimeError(label+' unexpected result')\n                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: 03-clone unexpected result\n",
+    "type": "RuntimeError"
+  },
+  "executable": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+  "oracle_sha256": "51370c2582f8360b2bc5530b677c3f41b181a8d8f3d44c99e44e166ae29cc378",
+  "passed": false,
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "runner_sha256": "41626bd78002712f036684165a9c104b030b10c8526a798a7c9ad624a0539c93",
+  "schema": "wo017-independent-checkout-v1",
+  "source": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-evidence-path-fix"
+}

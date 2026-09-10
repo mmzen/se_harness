@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "git",
+    "-c",
+    "safe.directory=/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness",
+    "-c",
+    "safe.directory=/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-path-repair-independent-20260911/linux-final/repo",
+    "-c",
+    "core.longpaths=false",
+    "-c",
+    "core.autocrlf=false",
+    "-c",
+    "core.hooksPath=/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-path-repair-independent-20260911/linux-final/isolated-home/hooks",
+    "-C",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness",
+    "cat-file",
+    "-t",
+    "ed31a520964f81627c9c5b428b68968caa6282e7"
+  ],
+  "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel",
+  "elapsed_seconds": 0.06670331954956055,
+  "error": null,
+  "expected": 0,
+  "returncode": 0,
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "50836eee574ecff79dea3b4fd40673d7d000f7a5f177d8a6a3000b59c78383b8"
+}

@@ -1,0 +1,11 @@
+{
+  "classification": "Root retention audit, not assurance",
+  "inventory_sha256": "7ea3fafb4dfcfec533e72b2bff0e9650abe94766a767bbb2fbae608b638bfd43",
+  "payload_files": 206,
+  "source_mappings": 376,
+  "stored_and_decompressed_digests_checked": true,
+  "copied_bytes_identical": true,
+  "scoped_checks_passed": true,
+  "overall_repair_complete": false,
+  "blocker": "Windows upgrade-rehearsal staging fails on one source path outside the approved55; owner scope extension pending."
+}

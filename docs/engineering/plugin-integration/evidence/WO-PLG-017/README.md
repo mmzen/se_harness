@@ -13,6 +13,7 @@ Its downstream integration jobs are skipped. See the
 
 - [Original approved plan](path-plan.json), [approval](approval/) and [start](start/).
 - [Original PR445 failure](pr445-windows-checkout.log) and [PR446 failure](pr446-windows-checkout.log).
+- [Independent Windows/Linux results](acceptance/independent/REPORT.md) and [exact retention inventory](acceptance/independent/inventory.json).
 - [Independent review and correction](checks/independent-review/followup-ed31a520.json).
 - [Proposed one-file scope extension](scope-extension.md), awaiting owner approval.
 
@@ -29,3 +30,9 @@ ready record are preserved; they do not establish a successful Windows result.
 WO-PLG-017 remains in_progress, and WO-PLG-012 remains paused at this failure.
 No additional evidence path, historical decision, aggregate VREC or PR merge has
 been authorized by the current repair approval.
+
+The released scope check passes against the declared repair paths and the live
+validate job is successful. This does not make the failed Windows rehearsal a
+pass. Completion remains stopped under ENGINEERING_HARNESS.md's required-check
+rule and the work order's explicit scope boundary. No completion transition was
+applied in response to the narrower delegation gate.

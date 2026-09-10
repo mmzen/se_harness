@@ -1,0 +1,38 @@
+[
+  {
+    "source": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-control\\se-harness-plugin-evidence-path-fix\\ci\\ed31a520-failed\\result.json",
+    "retained": "result.json",
+    "bytes": 2753,
+    "sha256": "1e98f217111ebb09bb8c2087fcbc366b1333a24eb52f89315ff4d2fda65fe6d6"
+  },
+  {
+    "source": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-control\\se-harness-plugin-evidence-path-fix\\ci\\ed31a520-failed\\j11.json",
+    "retained": "j11.json",
+    "bytes": 4123,
+    "sha256": "d9037ce54e723c292a2a921ed64698f7fa177d3ecc6e96217a9ad1006c6610d1"
+  },
+  {
+    "source": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-control\\se-harness-plugin-evidence-path-fix\\ci\\ed31a520-failed\\j11.log",
+    "retained": "j11.log",
+    "bytes": 86867,
+    "sha256": "11c3905deb7f3ee8fb4a4950b337c3bd5a965846a3d004cf19be6551ab7922c0"
+  },
+  {
+    "source": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-control\\se-harness-plugin-evidence-path-fix\\ci\\ed31a520-failed\\j04.json",
+    "retained": "j04.json",
+    "bytes": 3761,
+    "sha256": "4b13c55981bb07363d79b4f57e63be22a1f1f56546cde0b2db795524cf9d00ef"
+  },
+  {
+    "source": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-control\\se-harness-plugin-evidence-path-fix\\ci\\ed31a520-failed\\j04.log",
+    "retained": "j04.log",
+    "bytes": 78436,
+    "sha256": "fe7dc0b1f5a2151afebd01e75cd97b2df841f8922fad6522d7ea152558f51c63"
+  },
+  {
+    "source": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-control\\se-harness-plugin-evidence-path-fix\\ci\\ed31a520-failed\\commands.json",
+    "retained": "commands.json",
+    "bytes": 2806,
+    "sha256": "4baf2dc38084f949bffc5bb917e8e571f5a82029f00d042019411e914bdb1e5f"
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "byte_offset": 0,
+  "bytes": 881,
+  "corrupted_sha256": "6dcd5294d362fe8417ad5b90842432ef7228db354719e60adc83fde830049435",
+  "intentional_disposable_only": true,
+  "original_sha256": "9cd3c7c8c9210b5d5438028383b92b64fb04146e56a9cd7c1096b40a94738845",
+  "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0001.json"
+}

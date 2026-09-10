@@ -1,0 +1,136 @@
+[
+  {
+    "argv": [
+      "gh",
+      "pr",
+      "view",
+      "449",
+      "-R",
+      "mmzen/se_harness",
+      "--json",
+      "headRefOid,headRefName,baseRefName,state,url"
+    ],
+    "exit_status": 0,
+    "stdout": "pull.json",
+    "sha256": "4472116f70a5ef1e5a516b18f61029ba1ba6720fe42ca4b4675b45d0a0b20590"
+  },
+  {
+    "argv": [
+      "gh",
+      "pr",
+      "checks",
+      "449",
+      "-R",
+      "mmzen/se_harness",
+      "--json",
+      "name,state,link"
+    ],
+    "exit_status": 0,
+    "stdout": "checks.json",
+    "sha256": "918b940d7964e3bd0c8a429b339885b73ac6d614d28606525daf52d33ff2d435"
+  },
+  {
+    "argv": [
+      "gh",
+      "api",
+      "repos/mmzen/se_harness/actions/jobs/103058844003"
+    ],
+    "exit_status": 0,
+    "stdout": "j03.json",
+    "sha256": "03f1a2747dae7551870fab51a36b268bfeca6a6af0043aad6b0b9af5af687fa5"
+  },
+  {
+    "argv": [
+      "gh",
+      "run",
+      "view",
+      "34533149779",
+      "-R",
+      "mmzen/se_harness",
+      "--job",
+      "103058844003",
+      "--log"
+    ],
+    "exit_status": 0,
+    "stdout": "j03.log",
+    "sha256": "cff7082efb98956e436274f550cef53660ecbfa6a0877fa1d9a90560a7a0ad41"
+  },
+  {
+    "argv": [
+      "gh",
+      "api",
+      "repos/mmzen/se_harness/actions/jobs/103058843952"
+    ],
+    "exit_status": 0,
+    "stdout": "j04.json",
+    "sha256": "4b13c55981bb07363d79b4f57e63be22a1f1f56546cde0b2db795524cf9d00ef"
+  },
+  {
+    "argv": [
+      "gh",
+      "run",
+      "view",
+      "34533149779",
+      "-R",
+      "mmzen/se_harness",
+      "--job",
+      "103058843952",
+      "--log"
+    ],
+    "exit_status": 0,
+    "stdout": "j04.log",
+    "sha256": "fe7dc0b1f5a2151afebd01e75cd97b2df841f8922fad6522d7ea152558f51c63"
+  },
+  {
+    "argv": [
+      "gh",
+      "api",
+      "repos/mmzen/se_harness/actions/jobs/103058455683"
+    ],
+    "exit_status": 0,
+    "stdout": "j09.json",
+    "sha256": "4a6bd07879757608b964c3f22673f3c048e1a3ba880981dd70ff3afc846ad549"
+  },
+  {
+    "argv": [
+      "gh",
+      "run",
+      "view",
+      "34533149898",
+      "-R",
+      "mmzen/se_harness",
+      "--job",
+      "103058455683",
+      "--log"
+    ],
+    "exit_status": 0,
+    "stdout": "j09.log",
+    "sha256": "a5053e9b95b7a9b357591cbb3fd237e3e6dc975b4de0a076f082720236a475fe"
+  },
+  {
+    "argv": [
+      "gh",
+      "api",
+      "repos/mmzen/se_harness/actions/jobs/103058454420"
+    ],
+    "exit_status": 0,
+    "stdout": "j11.json",
+    "sha256": "d9037ce54e723c292a2a921ed64698f7fa177d3ecc6e96217a9ad1006c6610d1"
+  },
+  {
+    "argv": [
+      "gh",
+      "run",
+      "view",
+      "34533149779",
+      "-R",
+      "mmzen/se_harness",
+      "--job",
+      "103058454420",
+      "--log"
+    ],
+    "exit_status": 0,
+    "stdout": "j11.log",
+    "sha256": "11c3905deb7f3ee8fb4a4950b337c3bd5a965846a3d004cf19be6551ab7922c0"
+  }
+]
