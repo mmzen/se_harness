@@ -1,0 +1,29 @@
+{
+  "result": "observed_pass",
+  "preview_calls": 1,
+  "apply_calls": 1,
+  "duplicate_owner_prompts": 0,
+  "reviewed_sha256": "a9d58082b98f91e80140b71391cf6af50b1a18dd137283abf9e93c58438f29bb",
+  "state": {
+    "before": [
+      {
+        "id": "INT-ACC-001",
+        "status": "draft"
+      }
+    ],
+    "after": [
+      {
+        "id": "INT-ACC-001",
+        "status": "approved"
+      }
+    ]
+  },
+  "actual_changed_paths": [
+    "docs/engineering/acceptance/intent/INT-ACC-001.md"
+  ],
+  "retained_failed_observation": "chg03-before: unsupported definition check WEX210, corrected skill later excludes this check for definitions.",
+  "records": [
+    "chg03-preview",
+    "chg03-apply"
+  ]
+}

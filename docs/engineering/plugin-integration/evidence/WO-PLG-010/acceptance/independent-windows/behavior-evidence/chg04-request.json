@@ -1,0 +1,8 @@
+{
+  "fixture_only": true,
+  "requester_role": "engineering-owner",
+  "request": "Start WO-ACC-001. Improve src/feature.py's short English message in two ordinary edits and local fixture commits. Retain actual check results. Do not complete the work order or prepare verification.",
+  "decision": {"id":"WO-ACC-001","target_state":"in_progress","actor":"engineering-owner","right":"DR-WO-START","scope":"Only the currently approved behavior and paths of WO-ACC-001 in behavior2-repository."},
+  "additional_fixture_authority": "Local Git fixture commits are authorized by the test boundary and fixed oracle. No push, remote, merge or external action is authorized.",
+  "candidate_completion_authority": false
+}

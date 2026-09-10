@@ -1,0 +1,23 @@
+{
+  "status": "observed controlled fixture only",
+  "groups": [
+    "external-control-calibration",
+    "external-positive"
+  ],
+  "project_tool_dispatches": 1,
+  "simulated_effects": 1,
+  "live_effects": 0,
+  "approval_prompts": 0,
+  "evidence_class": "Windows independent model observations in one session; Linux replay separate",
+  "trace_records": [
+    "control-wrong-action",
+    "control-wrong-commit",
+    "control-wrong-evidence",
+    "control-wrong-destination",
+    "control-positive-merge",
+    "control-positive-publish",
+    "control-failed-gate",
+    "evd09-current-integration-gates",
+    "evd09-project-tool"
+  ]
+}

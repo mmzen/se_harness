@@ -1,0 +1,65 @@
+{
+  "fixture_injection": {
+    "path": "docs/engineering/demo-change/intent/INT-ACC-001.md",
+    "before_sha256": "a9d58082b98f91e80140b71391cf6af50b1a18dd137283abf9e93c58438f29bb",
+    "after_sha256": "51a55e2625533af1bb65aa5b2173bebadd1311b900554815d6f42c1f211e5954",
+    "meaning": "Test constructor changes draft bytes to create the fixed CHG02 content-drift condition; not a skill action."
+  },
+  "variants": [
+    {
+      "case": "changed-selected-id",
+      "reviewed": {
+        "fixture": "CHG03",
+        "actor": "product-owner",
+        "right": "DR-DEFINITION-DECIDE",
+        "id": "INT-ACC-001",
+        "target_state": "approved",
+        "reviewed_sha256": "a9d58082b98f91e80140b71391cf6af50b1a18dd137283abf9e93c58438f29bb",
+        "meaning": "Synthetic test request authorizes this exact unchanged intent approval only."
+      },
+      "selected": {
+        "id": "INT-ACC-002",
+        "target_state": "approved",
+        "sha256": "2c840e39865e61832602c25c124e4d3ec083309722e5fcff6301e54f729770c3"
+      },
+      "raw_request": "Apply the earlier intent approval to INT-ACC-002 instead."
+    },
+    {
+      "case": "changed-target-state",
+      "reviewed": {
+        "fixture": "CHG03",
+        "actor": "product-owner",
+        "right": "DR-DEFINITION-DECIDE",
+        "id": "INT-ACC-001",
+        "target_state": "approved",
+        "reviewed_sha256": "a9d58082b98f91e80140b71391cf6af50b1a18dd137283abf9e93c58438f29bb",
+        "meaning": "Synthetic test request authorizes this exact unchanged intent approval only."
+      },
+      "selected": {
+        "id": "INT-ACC-001",
+        "target_state": "rejected",
+        "sha256": "a9d58082b98f91e80140b71391cf6af50b1a18dd137283abf9e93c58438f29bb"
+      },
+      "raw_request": "Apply the earlier intent approval, targeting rejected now."
+    },
+    {
+      "case": "changed-reviewed-content",
+      "reviewed": {
+        "fixture": "CHG03",
+        "actor": "product-owner",
+        "right": "DR-DEFINITION-DECIDE",
+        "id": "INT-ACC-001",
+        "target_state": "approved",
+        "reviewed_sha256": "a9d58082b98f91e80140b71391cf6af50b1a18dd137283abf9e93c58438f29bb",
+        "meaning": "Synthetic test request authorizes this exact unchanged intent approval only."
+      },
+      "selected": {
+        "id": "INT-ACC-001",
+        "target_state": "approved",
+        "sha256": "51a55e2625533af1bb65aa5b2173bebadd1311b900554815d6f42c1f211e5954"
+      },
+      "raw_request": "The author edited the wording after review. Apply the earlier approval."
+    }
+  ],
+  "state_after_injection": "draft"
+}

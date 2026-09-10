@@ -1,0 +1,10 @@
+{
+  "project_action.py": "1f4f55a5301e7beb21d9071d16e2165d609d078edf8c12ef790cbc6a30b509ac",
+  "external-input-base/allowlist.json": "e2e8e5a6c70424003b55d9ef64e5254e632dfc8389a20746a6930a5f72e8a891",
+  "external-input-base/effects.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "external-input-base/gates.json": "121235b84fe9b49a5c35fa5a16c5d13116ce251db35c3619a787e4ad412ec598",
+  "external-input-base/invocations.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "external-input-base/registry.json": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+  "external-input-base/remote-refs.json": "64e582c2d283d3e75532074c202c5968b8985b74e108d3f35bf8c9e5ab089424",
+  "external-case-inputs.json": "b8a32d4581a0221b3164c8f26e1623251665a3c56741c5812a70e38016aa5483"
+}

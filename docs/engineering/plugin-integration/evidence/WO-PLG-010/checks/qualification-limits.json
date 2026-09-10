@@ -1,0 +1,10 @@
+{
+  "path": "tests/test_artifact_authoring.py",
+  "base_sha256": "bb7a935543bf24fd59429d21d3845d01f7444f444cb367f69790afafca40d899",
+  "current_sha256": "bb7a935543bf24fd59429d21d3845d01f7444f444cb367f69790afafca40d899",
+  "unchanged_from_base": true,
+  "observed_failure": "Windows Python 3.14.6: fixture cleanup at line 313 raises WinError 5 while deleting its own read-only Git object; same error with sandbox restriction removed.",
+  "scope": "The failing test and product evaluator source are unchanged by WO-PLG-010. No out-of-scope test repair is included.",
+  "required_ci_result": "Linux Candidate source evidence passed 1134 tests (4 skipped) at 0600fb70, job 102999589543; Windows local results remain recorded as failed.",
+  "candidate_doctor": "Candidate 0.18.0 templates differ from installed managed 0.17.0 root. The released 0.17.0 doctor passes; root managed copies were not changed."
+}

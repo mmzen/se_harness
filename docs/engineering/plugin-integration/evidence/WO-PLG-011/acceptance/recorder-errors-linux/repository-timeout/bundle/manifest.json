@@ -1,0 +1,24 @@
+{
+  "classification": "Recorder fault probes only; no evaluator/model/lifecycle behavior",
+  "assets": {},
+  "records": [
+    {
+      "label": "probe",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-c",
+        "from pathlib import Path; import sys,time; p=Path(sys.argv[-1]); p.mkdir(parents=True,exist_ok=True); (p/'sentinel.txt').write_text('observed\\n',encoding='utf8'); print('probe-stdout',flush=True); print('probe-stderr',file=sys.stderr,flush=True); time.sleep(30)",
+        "{repo}"
+      ],
+      "stdin": null,
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "sentinel.txt"
+      ],
+      "expected_state": null,
+      "original_sha256": "e8f639d479719284710add28d3e4ebddd33481d89e1eeaf8cd503caa63a39aeb"
+    }
+  ]
+}

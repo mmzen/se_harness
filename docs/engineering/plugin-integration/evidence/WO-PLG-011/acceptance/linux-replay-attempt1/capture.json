@@ -1,0 +1,285 @@
+{
+  "classification": "Explicit command replay inputs from the independent Windows observer; no new model behavior or authority decisions",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+  "evaluator_python": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+  "runner_sha256": "a810bc8dd982bec0ba324f1215e40f4f29201c059e9c7547d4dec3f37c9316b4",
+  "bundle_sha256": "2403fb1b2cdbf0763bb0ef87392e2e17c8316d8c4fddc4929bedf2afdd2fc77b",
+  "batch": "capture",
+  "bindings": {
+    "{python}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "{environment}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0",
+    "{repo}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/capture-repository",
+    "{bundle}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/capture",
+    "{trace}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/trace"
+  },
+  "commands": [
+    {
+      "label": "setup-10-correct-fixture-enum",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/capture/fixture_edit.py",
+        "--repo",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/capture-repository",
+        "--path",
+        "docs/engineering/evidence-demo/requirements/REQ-EVD-001.md",
+        "--old",
+        "[\"automated-test\"]",
+        "--new",
+        "[\"test\"]"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "setup-11-validate-corrected",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "validate",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/capture-repository",
+        "--json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "setup-12-correction-add",
+      "argv": [
+        "git",
+        "-C",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/capture-repository",
+        "add",
+        "--",
+        "docs/engineering/evidence-demo/requirements/REQ-EVD-001.md"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "setup-13-correction-commit",
+      "argv": [
+        "git",
+        "-C",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/capture-repository",
+        "-c",
+        "user.name=Fixture Owner",
+        "-c",
+        "user.email=fixture@example.invalid",
+        "commit",
+        "-m",
+        "Correct fixture verification method enum"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "setup-14-corrected-base-ref",
+      "argv": [
+        "git",
+        "-C",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/capture-repository",
+        "update-ref",
+        "refs/remotes/origin/main",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "setup-15-context",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/capture/session-context.py",
+        "--repo",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/capture-repository",
+        "--environment",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0",
+        "--version",
+        "0.16.0",
+        "--payload-sha256",
+        "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "--archive-sha256",
+        "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "--host",
+        "codex",
+        "--context-limit",
+        "32768",
+        "--read-limit",
+        "32768"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd02-selected-wo",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/capture-repository",
+        "--artifact",
+        "WO-EVD-001",
+        "--json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd05-preflight-control",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "preflight",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/capture-repository",
+        "--work-order",
+        "WO-EVD-001",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd01-success",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/capture/inspect_fixture.py",
+        "--repo",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/capture-repository",
+        "--expect",
+        "Hello evidence"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd01-injected-failure",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/capture/inspect_fixture.py",
+        "--repo",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/capture-repository",
+        "--expect",
+        "Injected wrong expectation"
+      ],
+      "exit_code": 1
+    },
+    {
+      "label": "evd01-retain-observations",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/capture/retain_observations.py",
+        "--repo",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/capture-repository",
+        "--trace",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/trace",
+        "--record",
+        "evd01-success",
+        "--record",
+        "evd01-injected-failure",
+        "--record",
+        "setup-08-doctor",
+        "--record",
+        "evd05-preflight-control"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd07-candidate-add",
+      "argv": [
+        "git",
+        "-C",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/capture-repository",
+        "add",
+        "--",
+        "docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd07-candidate-commit",
+      "argv": [
+        "git",
+        "-C",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/capture-repository",
+        "-c",
+        "user.name=Fixture Owner",
+        "-c",
+        "user.email=fixture@example.invalid",
+        "commit",
+        "-m",
+        "Retain observations for candidate C"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd07-candidate-readback",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/capture/inspect_fixture.py",
+        "--repo",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/capture-repository"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd07-all-refs",
+      "argv": [
+        "git",
+        "-C",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/capture-repository",
+        "for-each-ref",
+        "--format=%(refname) %(objectname)"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd07-capture",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "capture-verification",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt1/capture-repository",
+        "--id",
+        "VREC-EVD-001",
+        "--work-order",
+        "WO-EVD-001",
+        "--verification",
+        "VER-EVD-001",
+        "--evidence",
+        "docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md",
+        "--owner",
+        "fixture-preparation-actor",
+        "--domain",
+        "evidence-demo",
+        "--json"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "fresh_model_behavior": false,
+  "decision_prompt_count": null,
+  "receipt_note": "Suppression belongs to the original Windows model observation; this runner replays actual commands and fixed readback choices.",
+  "passed": false,
+  "failure": {
+    "type": "KeyError",
+    "message": "'revision'"
+  }
+}

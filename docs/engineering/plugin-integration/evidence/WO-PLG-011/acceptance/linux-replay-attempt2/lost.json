@@ -1,0 +1,104 @@
+{
+  "classification": "Explicit command replay inputs from the independent Windows observer; no new model behavior or authority decisions",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+  "evaluator_python": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+  "runner_sha256": "2ef8e7abcc5e31a703fc70e960390f68d6513877c0a73dcfc096831c89391cb3",
+  "bundle_sha256": "4022e2ab8cb76fde5c708ffa6bda1bf0b4668ff4453af27a9f4e0c169b4591a2",
+  "batch": "lost",
+  "bindings": {
+    "{python}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "{environment}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0",
+    "{repo}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/lost-repository",
+    "{bundle}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/lost",
+    "{trace}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/trace"
+  },
+  "commands": [
+    {
+      "label": "evd03-lost-context",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/lost/session-context.py",
+        "--repo",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/lost-repository",
+        "--environment",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0",
+        "--version",
+        "0.16.0",
+        "--payload-sha256",
+        "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "--archive-sha256",
+        "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "--host",
+        "codex",
+        "--context-limit",
+        "32768",
+        "--read-limit",
+        "32768"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd03-lost-capture",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "capture-verification",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/lost-repository",
+        "--id",
+        "VREC-EVD-001",
+        "--work-order",
+        "WO-EVD-001",
+        "--verification",
+        "VER-EVD-001",
+        "--evidence",
+        "docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md",
+        "--owner",
+        "fixture-preparation-actor",
+        "--domain",
+        "evidence-demo",
+        "--json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd03-lost-inspect-first",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/lost/inspect_fixture.py",
+        "--repo",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/lost-repository",
+        "--id",
+        "VREC-EVD-001"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd03-lost-check",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/lost-repository",
+        "--artifact",
+        "VREC-EVD-001",
+        "--json"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "fresh_model_behavior": false,
+  "decision_prompt_count": null,
+  "receipt_note": "Suppression belongs to the original Windows model observation; this runner replays actual commands and fixed readback choices.",
+  "passed": true
+}

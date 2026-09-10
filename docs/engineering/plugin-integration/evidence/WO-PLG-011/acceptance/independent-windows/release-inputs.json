@@ -1,0 +1,21 @@
+{
+  "schema": "fixed-synthetic-release-input-v1",
+  "candidate": "772f90c03a04d0a7914088ac6b869bb829b4bcad",
+  "work_order": "WO-EVD-001",
+  "verification_record": "VREC-EVD-001",
+  "release_contract": "REL-EVD-001",
+  "record": "RLS-EVD-001",
+  "version": "1.2.3",
+  "domain": "evidence-demo",
+  "owner": "release-owner",
+  "right": "DR-RLS-PREPARE",
+  "input_sha256": {
+    "docs/engineering/evidence-demo/verification-records/VREC-EVD-001.md": "2aa3a762bfc7a32a18e9ec3528d12ec6078c2cbad536180c7a375a24954ff3ab",
+    "docs/engineering/evidence-demo/evidence/VREC-EVD-001-evaluator.json": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951",
+    "docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md": "f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220",
+    "docs/engineering/evidence-demo/release/REL-EVD-001.md": "cf19415796f52831383f9dc71d3277920a47cfeeb1d21f42b3fc8f68bd343a3f",
+    "docs/engineering/evidence-demo/work-orders/WO-EVD-001.md": "4a02f6368953e25da2f014a48e1c195c5e50e1677cf008c853a5d92ec0dffed8"
+  },
+  "supplied_decision": "EVD02-rls raw request: synthetic release-owner authorizes these exact preparation inputs only. No release or external action decision.",
+  "preexisting_assurance_input": "Fixture setup only: VREC-EVD-001 was previously verified at candidate C by fixture-assurance-owner. This is not a live or tested assurance transition."
+}

@@ -1,0 +1,22 @@
+{
+  "fixture_only": true,
+  "request": "Apply the supplied exact WO approval using the change skill. Preserve this unchanged decision through readiness recovery.",
+  "decision": {
+    "fixture": "CHG09-corrected",
+    "actor": "engineering-owner",
+    "right": "DR-WO-SELECT",
+    "id": "WO-ACC-001",
+    "target_state": "approved",
+    "reviewed_sha256": "ab333d0ed3516f27f51b499fb78e7575de9b800f007f56174bb5391c6d47a81e",
+    "meaning": "Synthetic test input approves only this exact corrected draft. No start authority is provided."
+  },
+  "unready_variants": [
+    "No delivery for newly selected repository",
+    "Only a prior repository delivery is available",
+    "An interrupted delivery omits END VERIFIED GOVERNANCE"
+  ],
+  "repo": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\readiness-repository",
+  "initial_state": "draft",
+  "initial_wo_sha256": "ab333d0ed3516f27f51b499fb78e7575de9b800f007f56174bb5391c6d47a81e",
+  "expected_from_fixed_oracle": "No mutation before complete verified context; after recovery apply exactly approval and no start."
+}

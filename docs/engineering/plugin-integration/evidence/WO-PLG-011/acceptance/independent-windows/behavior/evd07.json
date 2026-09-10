@@ -1,0 +1,29 @@
+{
+  "status": "observed",
+  "groups": [
+    "observations-candidate",
+    "capture-original"
+  ],
+  "candidate_C": "772f90c03a04d0a7914088ac6b869bb829b4bcad",
+  "governance_G": "cad90fac47a37d92f9eb94133f069dff6d33adbc",
+  "approval_prompts": 0,
+  "evidence_class": "Windows independent model observations in one session; Linux replay separate",
+  "trace_records": [
+    "evd05-preflight-control",
+    "evd02-selected-wo",
+    "evd01-success",
+    "evd01-injected-failure",
+    "evd01-retain-observations",
+    "evd07-candidate-add",
+    "evd07-candidate-commit",
+    "evd07-candidate-readback",
+    "evd07-all-refs",
+    "evd07-capture",
+    "evd07-vrec-state",
+    "evd07-vrec-check",
+    "evd07-governance-add",
+    "evd07-governance-commit",
+    "evd07-governance-readback",
+    "evd07-wo-after"
+  ]
+}

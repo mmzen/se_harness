@@ -1,0 +1,167 @@
+{
+  "classification": "Read-only platform preparation; no behavioral or lifecycle acceptance result",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+  "evaluator_python": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+  "version": "0.16.0",
+  "payload_sha256": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+  "archive_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+  "governing_artifact_hashes": {
+    "SPEC-PLG-011": "89073b9654e26802a71379f2802975e4abdfc1a391413f441a0e8944aaa43f6b",
+    "VER-PLG-011": "f08ccaab8ad8417edbed538149ec8f4f947909b0a70cf8bc56511d1d5e30fe2e"
+  },
+  "runner_sha256": "22c7953e5c1fd7e57fd0cb070d969936bfa95093409d9e9a3d53903adfe18634",
+  "identity_and_help_passed": true,
+  "candidate_skill_read": false,
+  "commands": [
+    {
+      "label": "identity",
+      "phase": "read-only platform preparation",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "identity",
+        "--role",
+        "released-evaluator",
+        "--expected-version",
+        "0.16.0",
+        "--expected-root",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0",
+        "--evaluator-payload-sha256",
+        "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "--evaluator-wheel-sha256",
+        "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "--checkout-root",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill",
+        "--require-isolated-python",
+        "--json"
+      ],
+      "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-preparation-20260910",
+      "exit_code": 0,
+      "stdout": "{\n  \"candidate_commit\": null,\n  \"checkout_root\": \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill\",\n  \"diagnostics\": [],\n  \"distribution_origin\": \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/lib/python3.12/site-packages\",\n  \"entry_point_origin\": \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/harnessctl\",\n  \"evaluator_archive_name\": \"se_harness-0.16.0-py3-none-any.whl\",\n  \"evaluator_archive_sha256\": \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\",\n  \"evaluator_payload_manifest\": \"se-harness-installed-payload-v1\",\n  \"evaluator_payload_sha256\": \"51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c\",\n  \"evaluator_wheel_sha256\": \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\",\n  \"expected_root\": \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0\",\n  \"harness_version\": \"0.16.0\",\n  \"isolated_python\": true,\n  \"module_origin\": \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/lib/python3.12/site-packages/se_harness/runtime_identity.py\",\n  \"passed\": true,\n  \"python_binary_position\": \"outside-declared-roots\",\n  \"python_binary_sha256\": \"a92f0f95e883390c7256b2e441484aac06b1002dbe1d924141a77c8d82f96223\",\n  \"python_entry_is_link\": true,\n  \"python_executable\": \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python\",\n  \"python_version\": \"3.12.3\",\n  \"pythonpath_present\": false,\n  \"role\": \"released-evaluator\",\n  \"schema\": \"se-harness-runtime-identity-v3\",\n  \"template_origin\": \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/share/se-harness/templates/repository/standard\",\n  \"user_site_enabled\": false\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "init-help",
+      "phase": "read-only platform preparation",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "init",
+        "--help"
+      ],
+      "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-preparation-20260910",
+      "exit_code": 0,
+      "stdout": "usage: harnessctl init [-h] [--project-name PROJECT_NAME] [--dry-run] [--json]\n                       [target]\n\npositional arguments:\n  target\n\noptions:\n  -h, --help            show this help message and exit\n  --project-name PROJECT_NAME\n  --dry-run             report the complete plan without writing\n  --json                emit one se-harness-command-result-v1 object\n",
+      "stderr": ""
+    },
+    {
+      "label": "check-help",
+      "phase": "read-only platform preparation",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "--help"
+      ],
+      "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-preparation-20260910",
+      "exit_code": 0,
+      "stdout": "usage: harnessctl check [-h] [--artifact ARTIFACT]\n                        [--checkpoint {start,pre-action,transition,handoff,scope}]\n                        [--include-background] [--target TARGET_STATE]\n                        [--procedure PROCEDURE] [--changed-path CHANGED_PATH]\n                        [--changes-complete]\n                        [--change-manifest CHANGE_MANIFEST] [--from-git BASE]\n                        [--pull-request-body PULL_REQUEST_BODY] [--json]\n                        [target]\n\npositional arguments:\n  target\n\noptions:\n  -h, --help            show this help message and exit\n  --artifact ARTIFACT   one selected WO, VREC, or RLS ID; without a checkpoint\n                        it defaults to the single in_progress work order\n  --checkpoint {start,pre-action,transition,handoff,scope}\n                        fixed stateless evaluation checkpoint; omitted, check\n                        projects the selected scope and evaluates no gate\n  --include-background  with no checkpoint, list unrelated findings by\n                        category instead of one count\n  --target TARGET_STATE\n                        target lifecycle state; required for and limited to\n                        the transition checkpoint\n  --procedure PROCEDURE\n                        selected PROC ID; required for pre-action and limited\n                        to declared alternatives\n  --changed-path CHANGED_PATH\n                        normalized repository-relative changed path; repeat\n                        for the declared set\n  --changes-complete    assert that repeated changed paths are complete; this\n                        is evidence, not trusted proof\n  --change-manifest CHANGE_MANIFEST\n                        in-repository se-harness-change-set-v1 JSON; exclusive\n                        with changed-path options\n  --from-git BASE       derive the complete change set from Git against BASE;\n                        exclusive with the changed-path options\n  --pull-request-body PULL_REQUEST_BODY\n                        UTF-8 pull-request body file; reports W-ADS-001 when\n                        its work-order trailer carries a carriage return\n  --json                emit se-harness-workflow-result-v2 JSON\n",
+      "stderr": ""
+    },
+    {
+      "label": "evidence-help",
+      "phase": "read-only platform preparation",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "evidence",
+        "--help"
+      ],
+      "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-preparation-20260910",
+      "exit_code": 0,
+      "stdout": "usage: harnessctl evidence [-h] --artifact ARTIFACT --checkpoint\n                           {start,pre-action,transition,handoff}\n                           [--rebound-at REBOUND_AT] [--json]\n                           [target]\n\npositional arguments:\n  target\n\noptions:\n  -h, --help            show this help message and exit\n  --artifact ARTIFACT   the work order the packet is keyed by\n  --checkpoint {start,pre-action,transition,handoff}\n  --rebound-at REBOUND_AT\n                        RFC 3339 UTC timestamp to record; defaults to now\n  --json                emit se-harness-workflow-result-v2 JSON\n",
+      "stderr": ""
+    },
+    {
+      "label": "capture-verification-help",
+      "phase": "read-only platform preparation",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "capture-verification",
+        "--help"
+      ],
+      "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-preparation-20260910",
+      "exit_code": 0,
+      "stdout": "usage: harnessctl capture-verification [-h] --id RECORD_ID --work-order\n                                       WORK_ORDER --verification VERIFICATION\n                                       --evidence EVIDENCE [--owner OWNER]\n                                       [--output OUTPUT] [--domain DOMAIN]\n                                       [--json]\n                                       [target]\n\npositional arguments:\n  target\n\noptions:\n  -h, --help            show this help message and exit\n  --id RECORD_ID\n  --work-order WORK_ORDER\n                        work order to verify; repeat for aggregate candidates\n  --verification VERIFICATION\n                        applicable verification contract; repeat for aggregate\n                        candidates\n  --evidence EVIDENCE   retained evidence path; repeat for aggregate\n                        candidates\n  --owner OWNER         preparation actor and record owner; does not verify\n                        the record\n  --output OUTPUT\n  --domain DOMAIN       place the record in an explicit engineering domain\n  --json                emit the canonical workflow result as JSON\n",
+      "stderr": ""
+    },
+    {
+      "label": "prepare-release-help",
+      "phase": "read-only platform preparation",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "prepare-release",
+        "--help"
+      ],
+      "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-preparation-20260910",
+      "exit_code": 0,
+      "stdout": "usage: harnessctl prepare-release [-h] --id RECORD_ID --release-contract\n                                  RELEASE_CONTRACT --verification-record\n                                  VERIFICATION_RECORD --work-order WORK_ORDER\n                                  --version RELEASE_VERSION --owner OWNER\n                                  [--tag TAG] [--output OUTPUT]\n                                  [--domain DOMAIN] [--json]\n                                  [target]\n\npositional arguments:\n  target\n\noptions:\n  -h, --help            show this help message and exit\n  --id RECORD_ID\n  --release-contract RELEASE_CONTRACT\n  --verification-record VERIFICATION_RECORD\n                        included verification record; repeat for aggregate\n                        releases\n  --work-order WORK_ORDER\n                        released work order; repeat for aggregate releases\n  --version RELEASE_VERSION\n  --owner OWNER         preparation actor and record owner; does not authorize\n                        the release\n  --tag TAG\n  --output OUTPUT\n  --domain DOMAIN       place the record in an explicit engineering domain\n  --json                emit the canonical workflow result as JSON\n",
+      "stderr": ""
+    },
+    {
+      "label": "preflight-help",
+      "phase": "read-only platform preparation",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "preflight",
+        "--help"
+      ],
+      "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-preparation-20260910",
+      "exit_code": 0,
+      "stdout": "usage: harnessctl preflight [-h] --work-order WORK_ORDER\n                            [--phase {start,review}] [--json]\n                            [target]\n\npositional arguments:\n  target\n\noptions:\n  -h, --help            show this help message and exit\n  --work-order WORK_ORDER\n  --phase {start,review}\n  --json\n",
+      "stderr": ""
+    },
+    {
+      "label": "transition-help",
+      "phase": "read-only platform preparation",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "transition",
+        "--help"
+      ],
+      "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-preparation-20260910",
+      "exit_code": 0,
+      "stdout": "usage: harnessctl transition [-h] --set TRANSITIONS --decision DECISIONS\n                             [--reason REASONS] [--apply] [--json]\n                             [target]\n\npositional arguments:\n  target\n\noptions:\n  -h, --help            show this help message and exit\n  --set TRANSITIONS     explicit ID=STATUS transition; repeat for packets\n  --decision DECISIONS  ID=ACTOR assertion; repeat for every selected artifact\n  --reason REASONS      ID=TEXT reason; required for rejection, or use\n                        successor VREC ID for supersession\n  --apply               apply the exact validated transaction; default is\n                        read-only planning\n  --json\n",
+      "stderr": ""
+    }
+  ]
+}

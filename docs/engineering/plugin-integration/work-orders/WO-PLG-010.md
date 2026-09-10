@@ -2,7 +2,7 @@
 id = "WO-PLG-010"
 type = "work_order"
 title = "Implement the bounded change workflow skill"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-10"
@@ -41,6 +41,20 @@ to = "approved"
 decided_at = "2026-09-10T18:12:39Z"
 decided_by = "engineering-owner"
 reason = "The operator previously stated \"i approve the packets, i authorize the work\" for the reviewed plugin proposal, then on 2026-09-10 explicitly selected \"WO-PLG-010 next, followed by WO-PLG-011 and WO-PLG-012  (delegated route)\". Record only WO-PLG-010 approval under engineering-owner, from proposal 0b42325b75bc6d1c36897369687c3d3ed578bdb9; reviewed/current draft SHA-256 725d7fa9bc18b1c4d1e329ca1e92d3b7c3825570cb838089e634c7c16241a100. The owner expressly requests [delegation] class execution for WO-PLG-010; approval is the delegating act for DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE only. It includes the exact planned VREC and evaluator-sidecar paths in this bounded scope. The class must exist at origin/main and the required live GitHub validate check must succeed for the exact head before the delegated executor acts. No implementation has started. Assurance of implementation, release and PR merge remain separate human decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-10T18:31:30Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 9bc323a7bd5bd259b1ba2098b719314091734a20 (check-run 102995269085, source github-checks). Begin the operator-selected change skill implementation within approved scope; execution delegation is now present at origin/main."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-10T19:19:03Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 246c7db9a2192537b236f7d08ca0da637cd2b4a8 (check-run 103013037943, source github-checks)."
 +++
 
 # Work Order: Implement the bounded change workflow skill

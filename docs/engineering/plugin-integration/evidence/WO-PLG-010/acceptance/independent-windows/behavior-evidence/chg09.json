@@ -1,0 +1,29 @@
+{
+  "result": "corrected_fixture_observed_pass",
+  "original_fixture_defect": "Reserved domain name acceptance caused WEX-ECP-010; failed attempt retained and new input decision fixed before retry.",
+  "state_after_approval": {
+    "before": [
+      {
+        "id": "WO-ACC-001",
+        "status": "approved"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-ACC-001",
+        "status": "approved"
+      }
+    ]
+  },
+  "apply_invocations": 1,
+  "start_invocations_in_this_case": 0,
+  "completion_invocations": 0,
+  "next_required_decision": "Engineering-owner DR-WO-START after PROC-WO-START focus/start preflight.",
+  "records": [
+    "fixture-repair",
+    "chg09-preview",
+    "chg09-corrected-preview",
+    "chg09-corrected-apply",
+    "chg09-corrected-after"
+  ]
+}

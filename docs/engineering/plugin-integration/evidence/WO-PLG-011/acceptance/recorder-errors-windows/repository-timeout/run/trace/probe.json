@@ -1,0 +1,31 @@
+{
+  "label": "probe",
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-c",
+    "from pathlib import Path; import sys,time; p=Path(sys.argv[-1]); p.mkdir(parents=True,exist_ok=True); (p/'sentinel.txt').write_text('observed\\n',encoding='utf8'); print('probe-stdout',flush=True); print('probe-stderr',file=sys.stderr,flush=True); time.sleep(30)",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\repository-timeout\\run\\capture-repository"
+  ],
+  "stdin": null,
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\repository-timeout\\run",
+  "exit_code": null,
+  "stdout": "probe-stdout\r\n",
+  "stderr": "probe-stderr\r\n",
+  "before": {},
+  "after": {
+    "sentinel.txt": "9b18cfe191ae34a57f99051c3a2b73f5eae86151ec9224aa341195bb7b51b39f"
+  },
+  "changed_paths": [
+    "sentinel.txt"
+  ],
+  "started_unix": 1789071076.5417914,
+  "duration_seconds": 2.0186569690704346,
+  "original_record_sha256": "e8f639d479719284710add28d3e4ebddd33481d89e1eeaf8cd503caa63a39aeb",
+  "error": {
+    "type": "TimeoutExpired",
+    "message": "Command '['C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe', '-I', '-B', '-c', \"from pathlib import Path; import sys,time; p=Path(sys.argv[-1]); p.mkdir(parents=True,exist_ok=True); (p/'sentinel.txt').write_text('observed\\\\n',encoding='utf8'); print('probe-stdout',flush=True); print('probe-stderr',file=sys.stderr,flush=True); time.sleep(30)\", 'C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-recorder-error-probes-20260911-attempt1\\\\repository-timeout\\\\run\\\\capture-repository']' timed out after 2.0 seconds"
+  },
+  "timed_out": true
+}

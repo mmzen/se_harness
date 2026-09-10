@@ -1,0 +1,35 @@
+{
+  "classification": "Command replay and fixed empty observation spans, not fresh model compliance or live external enforcement",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+  "runner_sha256": "3a1c303383b7c537b2102b01dbc9fd9d484269f679966d1a47dd1d81c01e40c3",
+  "bundle_sha256": "6f863ae025f19f72105cbb3cc5fe5223adbec3710eb85b4ebcdf9312820a16d1",
+  "native_model_calls": 0,
+  "decision_prompt_count": null,
+  "commands": [
+    {
+      "label": "probe",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-c",
+        "from pathlib import Path; import sys,time; p=Path(sys.argv[-1]); p.mkdir(parents=True,exist_ok=True); (p/'invocations.jsonl').write_text('{}\\n',encoding='utf8'); (p/'effects.jsonl').write_text('{}\\n',encoding='utf8'); (p/'remote-refs.json').write_text('{\"probe\":true}\\n',encoding='utf8'); print('probe-stdout',flush=True); print('probe-stderr',file=sys.stderr,flush=True); time.sleep(30)",
+        "--control-dir",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/external-timeout/run/fixtures/external-control-calibration"
+      ],
+      "exit_code": null,
+      "changed_paths": [
+        "effects.jsonl",
+        "invocations.jsonl",
+        "remote-refs.json"
+      ]
+    }
+  ],
+  "negative_observations": [],
+  "passed": false,
+  "failure": {
+    "type": "TimeoutExpired",
+    "message": "Command '['/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python', '-I', '-B', '-c', 'from pathlib import Path; import sys,time; p=Path(sys.argv[-1]); p.mkdir(parents=True,exist_ok=True); (p/\\'invocations.jsonl\\').write_text(\\'{}\\\\n\\',encoding=\\'utf8\\'); (p/\\'effects.jsonl\\').write_text(\\'{}\\\\n\\',encoding=\\'utf8\\'); (p/\\'remote-refs.json\\').write_text(\\'{\"probe\":true}\\\\n\\',encoding=\\'utf8\\'); print(\\'probe-stdout\\',flush=True); print(\\'probe-stderr\\',file=sys.stderr,flush=True); time.sleep(30)', '--control-dir', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/external-timeout/run/fixtures/external-control-calibration']' timed out after 2.0 seconds"
+  }
+}

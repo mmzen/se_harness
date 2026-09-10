@@ -1,0 +1,46 @@
+{
+  "result": "observed_pass",
+  "method": "Direct agent-selected tool execution with corrected skill",
+  "artifacts": [
+    {
+      "id": "SPEC-PKG-001",
+      "status": "draft",
+      "sha256": "28a845e7728922dbd8441ce530e90b045694aa66ce1a25f60acd10d79cebbfda",
+      "events": [],
+      "path": "docs/engineering/package-demo/specifications/SPEC-PKG-001.md"
+    },
+    {
+      "id": "WO-PKG-001",
+      "status": "draft",
+      "sha256": "b3ebd8331a94a2541606d5784b015e7887f033dcaf6a9b1804264ad35313e7c5",
+      "events": [],
+      "path": "docs/engineering/package-demo/work-orders/WO-PKG-001.md"
+    },
+    {
+      "id": "DEC-PKG-001",
+      "status": "open",
+      "sha256": "80fabe2dced4e8aed256f02bd30fea12adc079b439a100da8c0b60bad953fc96",
+      "events": [],
+      "path": "docs/engineering/package-demo/decisions/DEC-PKG-001.md"
+    }
+  ],
+  "create_calls": 3,
+  "scaffold_calls": 1,
+  "approval_apply_calls": 0,
+  "decision_disposition_calls": 0,
+  "validation": {
+    "valid": true,
+    "error_count": 0,
+    "warning_count": 0,
+    "advisory_count": 0
+  },
+  "records": [
+    "chg01-domain-create",
+    "chg08-spec-create-lost-receipt",
+    "chg01-wo-create",
+    "chg01-dec-create",
+    "chg01-validate",
+    "chg01-state",
+    "chg01-decision-state"
+  ]
+}

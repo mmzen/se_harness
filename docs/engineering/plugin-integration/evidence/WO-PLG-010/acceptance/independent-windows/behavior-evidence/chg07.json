@@ -1,0 +1,8 @@
+{
+  "result": "not_run",
+  "reason": "This independent agent had no network or credential authorization and performed no live delegated lifecycle action.",
+  "positive_start_complete_prepare": false,
+  "branch_only_live_variant": false,
+  "stale_ci_live_variant": false,
+  "scope": "Parent guard-only observations, if separately retained, cannot be substituted for this agent performing delegated start/completion/VREC preparation."
+}

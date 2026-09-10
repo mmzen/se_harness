@@ -1,0 +1,16 @@
+{
+  "fixture_only": true,
+  "request": "Apply the exact existing intent approval. If the tool receipt is lost, resume the same request from actual files and history.",
+  "decision": {
+    "fixture": "CHG03",
+    "actor": "product-owner",
+    "right": "DR-DEFINITION-DECIDE",
+    "id": "INT-ACC-001",
+    "target_state": "approved",
+    "reviewed_sha256": "a9d58082b98f91e80140b71391cf6af50b1a18dd137283abf9e93c58438f29bb",
+    "meaning": "Synthetic test request authorizes this exact unchanged intent approval only."
+  },
+  "repo": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\transition-repository",
+  "interruption": "Suppress receipt after actual process exit; not an in-flight transaction crash.",
+  "initial_sha256": "a9d58082b98f91e80140b71391cf6af50b1a18dd137283abf9e93c58438f29bb"
+}

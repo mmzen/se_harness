@@ -1,0 +1,51 @@
+usage: harnessctl [-h] [--version]
+                  {init,adopt,validate,inspect,dashboard,doctor,preflight,check,evidence,pr-body,transition,decide,select-work-order,upgrade,rehearse-recovery,scaffold-domain,create-artifact,renumber-artifacts,release-unit,identity,qualify,capture-verification,prepare-release}
+                  ...
+
+Install and operate the standard software-engineering harness.
+
+positional arguments:
+  {init,adopt,validate,inspect,dashboard,doctor,preflight,check,evidence,pr-body,transition,decide,select-work-order,upgrade,rehearse-recovery,scaffold-domain,create-artifact,renumber-artifacts,release-unit,identity,qualify,capture-verification,prepare-release}
+    init                install the standard harness into an absent, empty or
+                        existing repository
+    adopt               alias of init, kept for the 0.16.0 release only
+    validate            validate the repository artifact graph
+    inspect             inspect repository-wide attention and lifecycle queues
+    dashboard           generate the repository Harness Explorer
+    doctor              check an installed harness
+    preflight           check work-order implementation or review readiness
+    check               project one selected WO, VREC, or RLS scope, or
+                        evaluate one of its checkpoints, and emit canonical
+                        restitution
+    evidence            write or rebind one work order's evidence packet to
+                        the current formal snapshot
+    pr-body             emit the LF-terminated pull-request body for one work
+                        order
+    transition          plan or atomically apply explicit lifecycle
+                        transitions
+    decide              dispose one pending decision with a declared option,
+                        under DR-DECISION-DISPOSE
+    select-work-order   select one structured work-order field from a GitHub
+                        pull-request event
+    upgrade             plan or apply safe managed-file upgrades
+    rehearse-recovery   run a no-network evaluator-recovery rehearsal in a
+                        disposable directory
+    scaffold-domain     safely create the canonical organization for one
+                        engineering domain
+    create-artifact     create one incomplete draft from the canonical
+                        artifact template
+    renumber-artifacts  plan or apply explicit structured artifact renumbering
+    release-unit        derive a release unit's work-order census from the
+                        commits between the previous release tag and a
+                        candidate commit
+    identity            emit and verify one evaluator or candidate runtime
+                        identity
+    qualify             run one typed, provenance-bound release qualification
+                        operation
+    capture-verification
+                        prepare a ready commit-bound verification record
+    prepare-release     prepare a ready commit-bound release record
+
+options:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit

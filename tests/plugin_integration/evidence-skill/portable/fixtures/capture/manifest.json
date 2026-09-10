@@ -1,0 +1,421 @@
+{
+  "classification": "Explicit command replay inputs from the independent Windows observer; no new model behavior or authority decisions",
+  "assets": {
+    "raw-assets/docs/engineering/evidence-demo/capabilities/CAP-EVD-001.md": "d5f9f8b58a3c0a3d45cb02920d34f54ff2e095be40efd7ab7af414e247e70bc2",
+    "raw-assets/docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md": "f2c89d47916f74aaee16f6ccfad1f4f151eb6ac8cfb41c218afc53ceecb4853e",
+    "raw-assets/docs/engineering/evidence-demo/intent/INT-EVD-001.md": "e9e5ffd5a133dc8be99796fdb9da8cb7a508e7b3da0b57c5c0618494700889a1",
+    "raw-assets/docs/engineering/evidence-demo/release/REL-EVD-001.md": "cf19415796f52831383f9dc71d3277920a47cfeeb1d21f42b3fc8f68bd343a3f",
+    "raw-assets/docs/engineering/evidence-demo/requirements/REQ-EVD-001.md": "ee3b34a255fa68a9d267bc9aba5351e698fa94acd65812f0f552406f43e6cb1a",
+    "raw-assets/docs/engineering/evidence-demo/specifications/SPEC-EVD-001.md": "e6f2d20e5dd15742b395664bec8bed246708a007b1b9ecefb992d078e99d38b6",
+    "raw-assets/docs/engineering/evidence-demo/verification/VER-EVD-001.md": "90ae15da01e54cc28ed0aa5c0ad1a9941c5eb3f264baab29ca15455fc843028b",
+    "raw-assets/docs/engineering/evidence-demo/work-orders/WO-EVD-001.md": "4a02f6368953e25da2f014a48e1c195c5e50e1677cf008c853a5d92ec0dffed8",
+    "raw-assets/src/feature.py": "823631af5995f211d18083934fb01e483ec721a1499c03232a028664fef74afa",
+    "oracle.md": "4b791ff512aeb370b6a469789e5a4865a3744759c4b377daeb0c286c72fad401",
+    "raw-scenarios.json": "d13f94233ad1b751868f92d8b3e6856ebd8ffb005490d22aff977a18f040e7bd",
+    "raw-assets-manifest.json": "bf2421143256efbee080cc8999390698450eb32dfe1b88621255f2ae04054385",
+    "fixture_edit.py": "e23edeeb309d1a836c95950e939ca3dffbd7900ef06ea00a6e7c0e7fc8da3f31",
+    "inspect_fixture.py": "67ca1ff1b61222dc7b138b6ac580ffae2eb84a9677c83a5e32c1f71be33f5b59",
+    "retain_observations.py": "219c10945cb78c6d04fa6f7011cc14ecffe5706553972aeea8b14e9bc497a427",
+    "candidate-inputs.json": "93f42e9070baef61d311663c7d038c0586a1458526981324aa1867f6860cecb6",
+    "session-context.py": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb"
+  },
+  "records": [
+    {
+      "label": "setup-10-correct-fixture-enum",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/fixture_edit.py",
+        "--repo",
+        "{repo}",
+        "--path",
+        "docs/engineering/evidence-demo/requirements/REQ-EVD-001.md",
+        "--old",
+        "[\"automated-test\"]",
+        "--new",
+        "[\"test\"]"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/evidence-demo/requirements/REQ-EVD-001.md"
+      ],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\setup-10-correct-fixture-enum.json",
+      "original_sha256": "aa7b113373e2b83ebaf9eca2438734b5b0294af2305e2ce23aeb4363557bd7a2"
+    },
+    {
+      "label": "setup-11-validate-corrected",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "validate",
+        "{repo}",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\setup-11-validate-corrected.json",
+      "original_sha256": "5968a6153eb1f5b7bb1f1491b5d82e1de09ebe6abd56a938c07f88908dc6cc14"
+    },
+    {
+      "label": "setup-12-correction-add",
+      "argv": [
+        "git",
+        "-C",
+        "{repo}",
+        "add",
+        "--",
+        "docs/engineering/evidence-demo/requirements/REQ-EVD-001.md"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\setup-12-correction-add.json",
+      "original_sha256": "c8aa26603baba69e5afb31060e022d6b96f151077b62b1e7edf05f72d3c98f16"
+    },
+    {
+      "label": "setup-13-correction-commit",
+      "argv": [
+        "git",
+        "-C",
+        "{repo}",
+        "-c",
+        "user.name=Fixture Owner",
+        "-c",
+        "user.email=fixture@example.invalid",
+        "commit",
+        "-m",
+        "Correct fixture verification method enum"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\setup-13-correction-commit.json",
+      "original_sha256": "76211ecac4106ce3fad23c3efc8d0b63b9a1c5841aca2ba3163c068841ff5f37"
+    },
+    {
+      "label": "setup-14-corrected-base-ref",
+      "argv": [
+        "git",
+        "-C",
+        "{repo}",
+        "update-ref",
+        "refs/remotes/origin/main",
+        "HEAD"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\setup-14-corrected-base-ref.json",
+      "original_sha256": "41d5b83363960164d8440b76b76bb1882beeac7717ba1a41654dde9b0b523fd9"
+    },
+    {
+      "label": "setup-15-context",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/session-context.py",
+        "--repo",
+        "{repo}",
+        "--environment",
+        "{environment}",
+        "--version",
+        "0.16.0",
+        "--payload-sha256",
+        "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "--archive-sha256",
+        "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "--host",
+        "codex",
+        "--context-limit",
+        "32768",
+        "--read-limit",
+        "32768"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": "{\"cwd\": \"{repo}\", \"hook_event_name\": \"SessionStart\", \"source\": \"resume\"}",
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\setup-15-context.json",
+      "original_sha256": "90de83c5c5dcb8546b50638be8ba5cebeb66923bf5e334111053e759d29cd836"
+    },
+    {
+      "label": "evd02-selected-wo",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "WO-EVD-001",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-EVD-001",
+            "status": "implemented"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-EVD-001",
+            "status": "implemented"
+          }
+        ]
+      },
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd02-selected-wo.json",
+      "original_sha256": "1385f3648fe568593c5ca6962db93a8702fc4d7febd170eed3368c5848932233"
+    },
+    {
+      "label": "evd05-preflight-control",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "preflight",
+        "{repo}",
+        "--work-order",
+        "WO-EVD-001",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd05-preflight-control.json",
+      "original_sha256": "7c7f04e20d83621709e5bd77fd9c091118c7f429f814266624b063f49f89dedc"
+    },
+    {
+      "label": "evd01-success",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/inspect_fixture.py",
+        "--repo",
+        "{repo}",
+        "--expect",
+        "Hello evidence"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd01-success.json",
+      "original_sha256": "4e46220c577f592a7eb6e2626152deaae23a880e2efb8ab5976d436e06f7c9a5"
+    },
+    {
+      "label": "evd01-injected-failure",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/inspect_fixture.py",
+        "--repo",
+        "{repo}",
+        "--expect",
+        "Injected wrong expectation"
+      ],
+      "expected_exit": 1,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd01-injected-failure.json",
+      "original_sha256": "429bf69fdd195197ffdcaaba456022d85cf4e2e490f5ad1344b91c091fc3764a"
+    },
+    {
+      "label": "evd01-retain-observations",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/retain_observations.py",
+        "--repo",
+        "{repo}",
+        "--trace",
+        "{trace}",
+        "--record",
+        "evd01-success",
+        "--record",
+        "evd01-injected-failure",
+        "--record",
+        "setup-08-doctor",
+        "--record",
+        "evd05-preflight-control"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md"
+      ],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd01-retain-observations.json",
+      "original_sha256": "b6666c7d62691c498fc7518fe69b1c6fcc4bd2d4aa47b85cc880a6124f312f0f"
+    },
+    {
+      "label": "evd07-candidate-add",
+      "argv": [
+        "git",
+        "-C",
+        "{repo}",
+        "add",
+        "--",
+        "docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd07-candidate-add.json",
+      "original_sha256": "b9fd3e83a43f8aae11f6dced6d534bd757319bf7b71ff847c79da97cbc8859c3"
+    },
+    {
+      "label": "evd07-candidate-commit",
+      "argv": [
+        "git",
+        "-C",
+        "{repo}",
+        "-c",
+        "user.name=Fixture Owner",
+        "-c",
+        "user.email=fixture@example.invalid",
+        "commit",
+        "-m",
+        "Retain observations for candidate C"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd07-candidate-commit.json",
+      "original_sha256": "9cc4b0224658051f03c5c3cb20454ddfbe111749ae8fe9b5e278cd85bcfbbb77"
+    },
+    {
+      "label": "evd07-candidate-readback",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/inspect_fixture.py",
+        "--repo",
+        "{repo}"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd07-candidate-readback.json",
+      "original_sha256": "ad5e704c4bbc33700377ad5bb6db2a0afb9d13549f971af5fc63c47e6cf6664c"
+    },
+    {
+      "label": "evd07-all-refs",
+      "argv": [
+        "git",
+        "-C",
+        "{repo}",
+        "for-each-ref",
+        "--format=%(refname) %(objectname)"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd07-all-refs.json",
+      "original_sha256": "8891b3840ffed95db66acec14170cd72b18470d29c414b6fd60eaf6a6c3d55ae"
+    },
+    {
+      "label": "evd07-capture",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "capture-verification",
+        "{repo}",
+        "--id",
+        "VREC-EVD-001",
+        "--work-order",
+        "WO-EVD-001",
+        "--verification",
+        "VER-EVD-001",
+        "--evidence",
+        "docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md",
+        "--owner",
+        "fixture-preparation-actor",
+        "--domain",
+        "evidence-demo",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/evidence-demo/evidence/VREC-EVD-001-evaluator.json",
+        "docs/engineering/evidence-demo/verification-records/VREC-EVD-001.md",
+        "target/harness-dashboard/content/2f68241d38e28372cc15d9862514e8ace0a9d38e64ca016a43c50b4faee061b5.txt",
+        "target/harness-dashboard/dashboard-manifest.json",
+        "target/harness-dashboard/data/artifacts/1fdb99c68aa495498cb1553a0fc950adc2e51c0d4ffe7ba01254f41aeacccf39.json",
+        "target/harness-dashboard/data/artifacts/369188847510d33ab21bea7eadb77e4ce03f1f388d1a20390d1c368117e126b9.json",
+        "target/harness-dashboard/data/artifacts/4518fb01ee22fd31dc152ae08c578984cfb697ccdb8cb82f0964c6245b9cb1b3.json",
+        "target/harness-dashboard/data/artifacts/7a21c9c5f8f07049e2fa184e0a4fe9e07ca7c984571c77251713fc56fa442687.json",
+        "target/harness-dashboard/data/artifacts/9daee8f404dde105e9bb615956fc4bc599594a88510c9b8707395a9929a9d017.json",
+        "target/harness-dashboard/data/artifacts/b26e499cddd7cc335690077c3959368896b500d488be11b2c0be10c001493300.json",
+        "target/harness-dashboard/data/artifacts/b5f53aaa5054a6d352e403ae23d9aa266b97d7f8f929abf3bd39e9f323cfd240.json",
+        "target/harness-dashboard/data/readiness/605f1d1c150230304d7884fbec97546861ea7355959521faaa8638b3e4580af2.json",
+        "target/harness-dashboard/data/summary/8bdc5a2affb3927c1e33a0a9b7151335367bd114ca3a9a2fbcda4ca798c8c85a.json",
+        "target/harness-dashboard/data/topology/da4c57d8065822507537ad6d5b6c216b2c5d10b57911b287df1c5789c8536c3b.json",
+        "target/harness-dashboard/generation-summary.json",
+        "target/harness-dashboard/index.html"
+      ],
+      "expected_state": {
+        "before": [],
+        "after": [
+          {
+            "id": "VREC-EVD-001",
+            "status": "ready"
+          }
+        ]
+      },
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd07-capture.json",
+      "original_sha256": "02af77a726a1143a0e6cdefe250b327f6813df005e276a8acf305eed5477fa22"
+    }
+  ]
+}

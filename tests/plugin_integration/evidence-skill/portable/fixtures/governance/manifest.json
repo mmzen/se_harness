@@ -1,0 +1,172 @@
+{
+  "classification": "Explicit command replay inputs from the independent Windows observer; no new model behavior or authority decisions",
+  "assets": {
+    "raw-assets/docs/engineering/evidence-demo/capabilities/CAP-EVD-001.md": "d5f9f8b58a3c0a3d45cb02920d34f54ff2e095be40efd7ab7af414e247e70bc2",
+    "raw-assets/docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md": "f2c89d47916f74aaee16f6ccfad1f4f151eb6ac8cfb41c218afc53ceecb4853e",
+    "raw-assets/docs/engineering/evidence-demo/intent/INT-EVD-001.md": "e9e5ffd5a133dc8be99796fdb9da8cb7a508e7b3da0b57c5c0618494700889a1",
+    "raw-assets/docs/engineering/evidence-demo/release/REL-EVD-001.md": "cf19415796f52831383f9dc71d3277920a47cfeeb1d21f42b3fc8f68bd343a3f",
+    "raw-assets/docs/engineering/evidence-demo/requirements/REQ-EVD-001.md": "ee3b34a255fa68a9d267bc9aba5351e698fa94acd65812f0f552406f43e6cb1a",
+    "raw-assets/docs/engineering/evidence-demo/specifications/SPEC-EVD-001.md": "e6f2d20e5dd15742b395664bec8bed246708a007b1b9ecefb992d078e99d38b6",
+    "raw-assets/docs/engineering/evidence-demo/verification/VER-EVD-001.md": "90ae15da01e54cc28ed0aa5c0ad1a9941c5eb3f264baab29ca15455fc843028b",
+    "raw-assets/docs/engineering/evidence-demo/work-orders/WO-EVD-001.md": "4a02f6368953e25da2f014a48e1c195c5e50e1677cf008c853a5d92ec0dffed8",
+    "raw-assets/src/feature.py": "823631af5995f211d18083934fb01e483ec721a1499c03232a028664fef74afa",
+    "oracle.md": "4b791ff512aeb370b6a469789e5a4865a3744759c4b377daeb0c286c72fad401",
+    "raw-scenarios.json": "d13f94233ad1b751868f92d8b3e6856ebd8ffb005490d22aff977a18f040e7bd",
+    "raw-assets-manifest.json": "bf2421143256efbee080cc8999390698450eb32dfe1b88621255f2ae04054385",
+    "fixture_edit.py": "e23edeeb309d1a836c95950e939ca3dffbd7900ef06ea00a6e7c0e7fc8da3f31",
+    "inspect_fixture.py": "67ca1ff1b61222dc7b138b6ac580ffae2eb84a9677c83a5e32c1f71be33f5b59"
+  },
+  "records": [
+    {
+      "label": "evd07-vrec-state",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/inspect_fixture.py",
+        "--repo",
+        "{repo}",
+        "--id",
+        "VREC-EVD-001"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd07-vrec-state.json",
+      "original_sha256": "9404941ff6e24e8054fb0b2002ced471622b358bec2e82aaddcce8c778d241de"
+    },
+    {
+      "label": "evd07-vrec-check",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "VREC-EVD-001",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "VREC-EVD-001",
+            "status": "ready"
+          }
+        ],
+        "after": [
+          {
+            "id": "VREC-EVD-001",
+            "status": "ready"
+          }
+        ]
+      },
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd07-vrec-check.json",
+      "original_sha256": "8bd3e9e70fd7df791d12e130de758b07a6a50a18e1bee3334d65a4a558472c89"
+    },
+    {
+      "label": "evd07-governance-add",
+      "argv": [
+        "git",
+        "-C",
+        "{repo}",
+        "add",
+        "--",
+        "docs/engineering/evidence-demo/verification-records/VREC-EVD-001.md",
+        "docs/engineering/evidence-demo/evidence/VREC-EVD-001-evaluator.json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd07-governance-add.json",
+      "original_sha256": "87848e87286c0263188ea40b872c2e20fe04af6639a278e8bc396d096d6e898b"
+    },
+    {
+      "label": "evd07-governance-commit",
+      "argv": [
+        "git",
+        "-C",
+        "{repo}",
+        "-c",
+        "user.name=Fixture Owner",
+        "-c",
+        "user.email=fixture@example.invalid",
+        "commit",
+        "-m",
+        "Retain ready VREC in separate governance G"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd07-governance-commit.json",
+      "original_sha256": "0c482b1858d494e47f00dcf39a946d57be70408c3c325f77241182477a130b7e"
+    },
+    {
+      "label": "evd07-governance-readback",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/inspect_fixture.py",
+        "--repo",
+        "{repo}",
+        "--id",
+        "VREC-EVD-001"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd07-governance-readback.json",
+      "original_sha256": "42b9371c09787db0c87e50dcea3a59b3b6e9f18d87604c8beb25b80090a818ae"
+    },
+    {
+      "label": "evd07-wo-after",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "WO-EVD-001",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-EVD-001",
+            "status": "implemented"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-EVD-001",
+            "status": "implemented"
+          }
+        ]
+      },
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd07-wo-after.json",
+      "original_sha256": "f45b135bbe229e2d269447b191e2045cf55129046850fedca2fca005b7de5282"
+    }
+  ]
+}

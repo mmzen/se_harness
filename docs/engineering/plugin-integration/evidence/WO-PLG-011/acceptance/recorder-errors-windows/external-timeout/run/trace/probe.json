@@ -1,0 +1,49 @@
+{
+  "label": "probe",
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-c",
+    "from pathlib import Path; import sys,time; p=Path(sys.argv[-1]); p.mkdir(parents=True,exist_ok=True); (p/'invocations.jsonl').write_text('{}\\n',encoding='utf8'); (p/'effects.jsonl').write_text('{}\\n',encoding='utf8'); (p/'remote-refs.json').write_text('{\"probe\":true}\\n',encoding='utf8'); print('probe-stdout',flush=True); print('probe-stderr',file=sys.stderr,flush=True); time.sleep(30)",
+    "--control-dir",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\external-timeout\\run\\fixtures/external-control-calibration"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\external-timeout\\run",
+  "exit_code": null,
+  "stdout": "probe-stdout\r\n",
+  "stderr": "probe-stderr\r\n",
+  "before": {
+    "allowlist.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "effects.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gates.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "invocations.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "registry.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "remote-refs.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+  },
+  "after": {
+    "allowlist.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "effects.jsonl": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "gates.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "invocations.jsonl": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "registry.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "remote-refs.json": "1cdfdbe02dc3256c4b7f4b13a5756bb296f48f2a6ae4e7856f787566c20739cb"
+  },
+  "local_before": {},
+  "local_after": {},
+  "changed_paths": [
+    "effects.jsonl",
+    "invocations.jsonl",
+    "remote-refs.json"
+  ],
+  "started_unix": 1789071079.43386,
+  "duration_seconds": 2.0271403789520264,
+  "original_record_sha256": "daca3e449d98d8b2fd5176276856941d8e0cb7403ba194398a5ea234a57839f6",
+  "error": {
+    "type": "TimeoutExpired",
+    "message": "Command '['C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe', '-I', '-B', '-c', 'from pathlib import Path; import sys,time; p=Path(sys.argv[-1]); p.mkdir(parents=True,exist_ok=True); (p/\\'invocations.jsonl\\').write_text(\\'{}\\\\n\\',encoding=\\'utf8\\'); (p/\\'effects.jsonl\\').write_text(\\'{}\\\\n\\',encoding=\\'utf8\\'); (p/\\'remote-refs.json\\').write_text(\\'{\"probe\":true}\\\\n\\',encoding=\\'utf8\\'); print(\\'probe-stdout\\',flush=True); print(\\'probe-stderr\\',file=sys.stderr,flush=True); time.sleep(30)', '--control-dir', 'C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-recorder-error-probes-20260911-attempt1\\\\external-timeout\\\\run\\\\fixtures/external-control-calibration']' timed out after 2.0 seconds"
+  },
+  "timed_out": true,
+  "dispatch_delta": 1,
+  "simulated_effect_delta": 1
+}
