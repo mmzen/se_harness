@@ -1,9 +1,12 @@
 # WO-PLG-007 implementation evidence
 
-WO-PLG-007 is **in progress**. The operator authorized its execution on
-2026-09-10. This delivery contains the shared session handler, its acceptance
-fixtures, and the D04 definition introduction from PR #416. Completion and
-independent assurance have not been recorded.
+WO-PLG-007 is **implemented**. On 2026-09-10, the operator requested completion
+of the delivered implementation and evidence in PR #435. The released evaluator
+[applied the completion decision](governance/session-complete-applied.json).
+This delivery contains the shared session handler, its acceptance fixtures and
+the D04 definitions from PR #416. Verification-record preparation and independent
+assurance have not been recorded. The observations below retain their original
+implementation-stage context.
 
 ## Result
 
@@ -48,7 +51,7 @@ environment isolation. They are not substitutes for the real-evaluator cases.
 - [Graph validation](governance/session-final-validate.json): zero errors.
 - [Release-distribution validation](checks/release-distributions/stdout.txt): passed, no distribution built.
 - [Candidate CLI help](checks/candidate-help/command.json): passed.
-- [Scope](governance/session-staged-scope.json) and [handoff](governance/session-handoff-ready.json): passed; WO-PLG-007 remains in progress.
+- [Scope](governance/session-staged-scope.json) and [handoff](governance/session-handoff-ready.json): passed at the implementation-stage handoff, before the later completion decision.
 - [Full Linux regression](checks/full-suite-linux-checkout/04-stdout.txt): 1,126 tests passed, four skips, at candidate `07f01d3b`. Ten focused tests also passed in that checkout.
 - [Hosted checks](checks/hosted-checks/stdout.txt): all 17 passed at candidate `07f01d3b`.
 
@@ -68,7 +71,7 @@ is the acceptance result for the retained handler digest.
 
 [Packet provenance](governance/packet-source.json) identifies the reviewed source
 commit and every imported definition. The released evaluator recorded the
-approved shared definitions and WO-PLG-007's approval/start. The first incomplete
+approved shared definitions and WO-PLG-007's approval, start and completion. The first incomplete
 definition preview was refused; its failure is retained beside the corrected
 preview and applied result. No blocked preview was applied.
 
@@ -84,5 +87,5 @@ marker. Production bindings must separately qualify capacity, full-read support,
 startup/resume/compaction transport, and failure behavior under WO-PLG-005/006
 and WO-PLG-015. No live plugin support or universal enforcement claim is made.
 
-No completion, verification record, assurance, release, or merge decision is
+No verification record, assurance, release, or merge decision is
 included. The next lifecycle handoff is derived from the released evaluator.

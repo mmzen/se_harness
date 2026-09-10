@@ -2,7 +2,7 @@
 id = "WO-PLG-007"
 type = "work_order"
 title = "Implement verified session governance delivery"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-10"
@@ -66,16 +66,23 @@ to = "in_progress"
 decided_at = "2026-09-10T06:13:00Z"
 decided_by = "engineering-owner"
 reason = "The operator explicitly approved the reviewed plugin packets in this task: \"i approve the packets, i authorize the work\". On 2026-09-10 they selected \"we will merge later: GO for WO-PLG-007  and then WO-PLG-008\" after deciding DEC-PLG-001 and DEC-PLG-002 for the tested Windows activation routes. Record only the named start decision for the D04 governing chain or WO-PLG-007, from reviewed proposal 0b42325b. Sibling work-order states, completion, assurance, release and merge remain separate."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-10T17:10:39Z"
+decided_by = "engineering-owner"
+reason = "On 2026-09-10 the operator requested \"can WO-PLG-007 be set to implemented ?\" after delivery of its implementation and retained evidence in PR #435 at 692407030f30aed7e462e7cac9760e256d7a7f5d. Record the engineering-owner completion decision for WO-PLG-007 only, conditional on passing released evaluator gates. VREC preparation, assurance, release and PR merge remain separate decisions."
 +++
 
 # Work Order: Implement verified session governance delivery
 
 ## Lifecycle
 
-Approved and started under the operator's explicit 2026-09-10 instruction, after
-the governing definitions and both bounded host-route decisions were recorded.
-The lifecycle events above are authoritative. Completion, assurance, release,
-and merge remain separate decisions.
+Marked implemented by the engineering owner on 2026-09-10 after the operator
+requested completion of the delivered implementation and evidence in PR #435.
+The released evaluator applied the explicit completion decision. Verification-record
+preparation, assurance, release and merge remain separate decisions.
 
 ## Objective
 

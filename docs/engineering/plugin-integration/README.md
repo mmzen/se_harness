@@ -34,7 +34,9 @@ Repository integration or release requires a separate delivery decision.
 
 The operator accepted [DEC-PLG-001](decisions/DEC-PLG-001.md) and
 [DEC-PLG-002](decisions/DEC-PLG-002.md) for the tested Windows activation routes.
-The shared definitions are approved. WO-PLG-007 is in progress; WO-PLG-008 and
+The shared definitions are approved. WO-PLG-007 is implemented. WO-PLG-008's
+implementation and lifecycle decisions are delivered separately in
+[PR #436](https://github.com/mmzen/se_harness/pull/436); its local definition and
 the production adapter/helper work orders remain draft in this delivery.
 
 - [Session contract](specifications/SPEC-PLG-007.md), [verification](verification/VER-PLG-007.md), [WO-PLG-007](work-orders/WO-PLG-007.md), and [evidence](evidence/WO-PLG-007/README.md)
