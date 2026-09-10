@@ -2,7 +2,7 @@
 id = "WO-PLG-011"
 type = "work_order"
 title = "Evidence skill using existing lifecycle procedures"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-10"
@@ -46,6 +46,13 @@ to = "in_progress"
 decided_at = "2026-09-10T19:25:56Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at b319bffd383d010de5b24640a667a61874b9d2ab (check-run 103015218599, source github-checks)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-10T20:19:17Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at cb5df4da98f98fe73f01336784b95866e1b05683 (check-run 103033194549, source github-checks)."
 +++
 
 # Work Order: Evidence skill using existing lifecycle procedures
