@@ -1,0 +1,100 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "transition",
+    "outcome": "blocked"
+  },
+  "selection": {
+    "primary": "WO-PLG-012",
+    "artifacts": [
+      "WO-PLG-012"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-FAIL-REMEDIATE",
+    "procedure_id": "PROC-REMEDIATE",
+    "status": "fail",
+    "gates": []
+  },
+  "procedure": {
+    "id": "PROC-REMEDIATE",
+    "current_step": "STEP-REMEDIATE-FOCUS",
+    "steps": [
+      {
+        "id": "STEP-REMEDIATE-FOCUS",
+        "kind": "command",
+        "gate_ids": [],
+        "effects": [
+          "Re-evaluated selected state for WO-PLG-012."
+        ],
+        "non_effects": [
+          "Remediation does not expand scope or change state."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-PLG-012"
+        ]
+      }
+    ]
+  },
+  "state": {
+    "before": [],
+    "after": []
+  },
+  "findings": {
+    "scoped_blockers": [
+      {
+        "code": "WEX-ECP-022",
+        "message": "WO-PLG-012.md carries no [delegation] class at the base origin/main; a branch cannot widen its own delegation"
+      }
+    ],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "blocked",
+    "done": [],
+    "not_done": [
+      "The requested workflow operation remains incomplete."
+    ],
+    "blocked_by": [
+      "WEX-ECP-022: WO-PLG-012.md carries no [delegation] class at the base origin/main; a branch cannot widen its own delegation"
+    ],
+    "current_lifecycle_state": [
+      "No lifecycle state was changed."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-REMEDIATE",
+      "step_id": "STEP-REMEDIATE-FOCUS",
+      "action": "remediate"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "WO-PLG-012"
+      ]
+    },
+    "alternatives": []
+  },
+  "result_sha256": "faaacdfdfd5083ffbe8e773c6cc7b81bfaf9382a9fd3aca0ac0da63660ff7c19"
+}
