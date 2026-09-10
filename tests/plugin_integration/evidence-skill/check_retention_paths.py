@@ -10,6 +10,9 @@ from pathlib import Path, PurePosixPath, PureWindowsPath
 import subprocess
 import sys
 
+# Exact proposal approved for WO-PLG-017, retained at ed19676fd2af8b9754f74cbc6bc8664a92d2f803.
+APPROVED_PLAN_SHA256 = '37031560322c962987513e8950b37503a642c6e474cc2a031822870467659aa9'
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -40,6 +43,8 @@ def main():
         return resolved
 
     plan_bytes = path(plan_path).read_bytes()
+    if sha(plan_bytes) != APPROVED_PLAN_SHA256:
+        raise ValueError('Relocation plan differs from the approved WO-PLG-017 plan')
     plan = json.loads(plan_bytes)
     mapping = json.loads(path(map_path).read_bytes())
     if mapping['schema'] != 'se-harness-evidence-relocation-v1' or mapping['evidence_bytes_modified'] is not False:
