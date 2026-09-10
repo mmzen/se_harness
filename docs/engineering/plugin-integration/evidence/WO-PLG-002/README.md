@@ -1,9 +1,10 @@
 # WO-PLG-002 implementation evidence
 
 The setup skill and its environment procedure are delivered at candidate
-`ad9cb2cba0f9168a3f2b63f62d2d63a19a548578`. WO-PLG-002 remains **in_progress**.
-The operator authorized approval and start; completion and verification-record
-preparation have not been authorized.
+`ad9cb2cba0f9168a3f2b63f62d2d63a19a548578`. On 2026-09-10, the operator explicitly
+authorized completion and verification-record preparation. The released
+evaluator recorded WO-PLG-002 as **implemented**. This report is retained before
+capture of the ready record; its assurance decision remains separate.
 
 ## Delivered behavior
 
@@ -60,6 +61,10 @@ released package code imported outside the selected environment.
 - Released evaluator 0.17.0 reported passing
   [managed integrity](governance/env-final-doctor.json) and
   [graph validation](governance/env-final-validate.json).
+- All 17 [hosted checks](governance/completion-20260910/pr-checks.json) passed
+  at `81405ca2cd9bc314905b9238f39f1d11f42210b6`, which retains evidence without
+  changing the tested implementation. The [hosted Linux suite](governance/completion-20260910/hosted-suite.json)
+  ran 1,126 tests and passed with four skips.
 - The [full Windows repository suite](checks/full-suite.txt) ran 1,126 tests:
   one error, 23 skips. The error is `WinError 5` while an existing artifact
   allocation test deletes a read-only Git object. The exact test also
@@ -75,8 +80,10 @@ executable is a real absent path. The version mismatch changes the disposable
 installed runtime version. Interruption stops after venv creation and before
 package installation. These fixture limits are recorded in each case.
 
-No native plugin installation/activation, repository initialization or upgrade,
-release, work-order completion, VREC preparation or merge was performed.
+The implementation stage did not perform native plugin installation/activation,
+repository initialization, upgrade, release or merge. Work-order completion was
+recorded later under the operator's separate instruction, which also authorizes
+preparation of one ready verification record.
 
 ## Earlier attempts retained
 
@@ -103,6 +110,9 @@ here and its executed runner/reference are retained.
 The [operator authorization](governance/operator-authorization.json) and the
 released evaluator's [approval](governance/env-approved-applied.json) and
 [start](governance/env-in_progress-applied.json) transitions concern only
-WO-PLG-002. Completion requires the engineering owner's separate decision after
-reviewing these delivered changes and retained limits. A later verification
-record must be prepared and decided through its own authorized workflow.
+WO-PLG-002. The later [operator decision](governance/completion-20260910/operator-decision.json)
+authorizes completion and preparation of one ready record. The released
+evaluator [applied completion](governance/completion-20260910/env-completion-applied-20260910.json).
+The record will bind the clean candidate containing this report and retained
+evidence. Its assurance decision remains with the assurance owner; none of the
+reported limits is waived.

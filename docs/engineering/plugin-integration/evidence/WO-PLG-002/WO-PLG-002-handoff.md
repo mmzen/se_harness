@@ -16,6 +16,9 @@ The local full repository suite retains one Windows cleanup error, reproduced
 on unchanged main. Linux Python 3.11 and macOS remain unqualified. These limits
 are not waived or relabeled as passing.
 
-WO-PLG-002 remains **in_progress**. No completion, verification-record preparation,
-assurance, release or merge decision was made. The engineering owner must decide
-whether the implementation and evidence are complete after reviewing the report.
+On 2026-09-10 the operator authorized completion and verification-record
+preparation. The released evaluator recorded WO-PLG-002 as **implemented**.
+Preparation of one ready record is the next authorized action. The original
+handoff header above identifies the implementation checkpoint; the later
+completion decision is retained in `governance/completion-20260910/`.
+The assurance, release and merge decisions remain separate.

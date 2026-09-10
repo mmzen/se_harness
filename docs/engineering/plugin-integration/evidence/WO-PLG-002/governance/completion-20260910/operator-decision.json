@@ -1,0 +1,16 @@
+{
+  "artifact": "WO-PLG-002",
+  "date": "2026-09-10",
+  "source": "Explicit operator instruction in this Codex task",
+  "instruction": "you can mark as implemented and create the verification record",
+  "authorized": [
+    "Record WO-PLG-002 as implemented",
+    "Prepare one ready verification record using VER-PLG-002"
+  ],
+  "not_inferred": [
+    "Assurance decision",
+    "Release decision",
+    "Merge decision"
+  ],
+  "limits": "The retained Windows cleanup error and unqualified Linux Python 3.11 and macOS coverage are not waived."
+}

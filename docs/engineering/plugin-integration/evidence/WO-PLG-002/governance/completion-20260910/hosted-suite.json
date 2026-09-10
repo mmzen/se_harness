@@ -1,0 +1,10 @@
+{
+  "run_url": "https://github.com/mmzen/se_harness/actions/runs/34403001703",
+  "candidate_commit": "81405ca2cd9bc314905b9238f39f1d11f42210b6",
+  "command": "gh run view 34403001703 --repo mmzen/se_harness --log",
+  "selection": "Exact lines containing Ran 1126 tests or OK (skipped=4)",
+  "selected_log_lines": [
+    "Candidate source evidence\tUNKNOWN STEP\t2026-09-09T20:46:36.0762353Z Ran 1126 tests in 30.538s (175 classes, 4 workers)",
+    "Candidate source evidence\tUNKNOWN STEP\t2026-09-09T20:46:36.0763137Z OK (skipped=4)"
+  ]
+}
