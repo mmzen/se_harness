@@ -1,0 +1,355 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-ACC-001",
+    "artifacts": [
+      "WO-ACC-001"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "CAP-ACC-001",
+      "INT-ACC-003",
+      "REQ-ACC-001",
+      "SPEC-ACC-001",
+      "VER-ACC-001"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/demo-change/evidence/WO-ACC-001/",
+      "docs/engineering/demo-change/work-orders/WO-ACC-001.md",
+      "src/feature.py"
+    ],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-WO-START",
+    "procedure_id": "PROC-WO-START",
+    "status": "not_assessable",
+    "gates": []
+  },
+  "procedure": {
+    "id": "PROC-WO-START",
+    "current_step": "STEP-WO-START-FOCUS",
+    "steps": [
+      {
+        "id": "STEP-WO-START-FOCUS",
+        "kind": "command",
+        "gate_ids": [],
+        "effects": [
+          "Projected selected scope for WO-ACC-001."
+        ],
+        "non_effects": [
+          "Focus does not change lifecycle state."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-ACC-001"
+        ]
+      },
+      {
+        "id": "STEP-WO-START-PREFLIGHT",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G3-WORK-AUTHORIZATION"
+        ],
+        "effects": [
+          "Evaluated start readiness for WO-ACC-001."
+        ],
+        "non_effects": [
+          "Preflight does not authorize or start implementation."
+        ],
+        "argv": [
+          "harnessctl",
+          "preflight",
+          ".",
+          "--work-order",
+          "WO-ACC-001",
+          "--phase",
+          "start"
+        ],
+        "corrective": {
+          "QGP-G3-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-PREFLIGHT": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-START-DECIDE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G3-WORK-AUTHORIZATION"
+        ],
+        "effects": [
+          "An explicit start decision authorizes bounded implementation."
+        ],
+        "non_effects": [
+          "The decision does not itself edit a file."
+        ],
+        "decision_right": "DR-WO-START",
+        "role": "engineering-owner",
+        "artifact": "WO-ACC-001",
+        "decision": "whether implementation may start",
+        "outcomes": [
+          "start",
+          "stop"
+        ],
+        "response": "Start WO-ACC-001 implementation."
+      },
+      {
+        "id": "STEP-WO-START-PREVIEW",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G3-WORK-AUTHORIZATION"
+        ],
+        "effects": [
+          "Planned the explicit transition for WO-ACC-001."
+        ],
+        "non_effects": [
+          "A preview does not change lifecycle state."
+        ],
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-ACC-001=in_progress",
+          "--decision",
+          "WO-ACC-001=engineering-owner"
+        ],
+        "corrective": {
+          "QGP-G3-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-ACC-001",
+              "--phase",
+              "start"
+            ]
+          },
+          "QGP-G3-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-START-APPLY",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G3-WORK-AUTHORIZATION"
+        ],
+        "effects": [
+          "Changed only WO-ACC-001 to in_progress."
+        ],
+        "non_effects": [
+          "Related artifacts remain unchanged."
+        ],
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-ACC-001=in_progress",
+          "--decision",
+          "WO-ACC-001=engineering-owner",
+          "--apply"
+        ],
+        "corrective": {
+          "QGP-G3-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-ACC-001",
+              "--phase",
+              "start"
+            ]
+          },
+          "QGP-G3-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-START-FINAL-FOCUS",
+        "kind": "command",
+        "gate_ids": [],
+        "effects": [
+          "Projected the resulting state for WO-ACC-001."
+        ],
+        "non_effects": [
+          "Focus does not change lifecycle state."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-ACC-001"
+        ]
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-ACC-001",
+        "status": "approved"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-ACC-001",
+        "status": "approved"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Projected the selected scope for WO-ACC-001."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-ACC-001 is approved."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-WO-START",
+      "step_id": "STEP-WO-START-FOCUS",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "WO-ACC-001"
+      ]
+    },
+    "alternatives": []
+  },
+  "result_sha256": "0209ab3e5008758eb9ccee4c8edf6fb116975f37c18873b29d0e6c5e11c070a2",
+  "context": {
+    "reading_manifest": [
+      "ENGINEERING_HARNESS.md",
+      "docs/engineering/OPERATING_CARD.md",
+      "AGENTS.md",
+      "docs/engineering/demo-change/intent/INT-ACC-003.md",
+      "docs/engineering/demo-change/capabilities/CAP-ACC-001.md",
+      "docs/engineering/demo-change/requirements/REQ-ACC-001.md",
+      "docs/engineering/demo-change/specifications/SPEC-ACC-001.md",
+      "docs/engineering/demo-change/verification/VER-ACC-001.md",
+      "docs/engineering/demo-change/work-orders/WO-ACC-001.md"
+    ],
+    "governing": [
+      "CAP-ACC-001",
+      "INT-ACC-003",
+      "REQ-ACC-001",
+      "SPEC-ACC-001",
+      "VER-ACC-001"
+    ],
+    "declared_paths": [
+      "src/feature.py",
+      "docs/engineering/demo-change/work-orders/WO-ACC-001.md",
+      "docs/engineering/demo-change/evidence/WO-ACC-001/"
+    ],
+    "state": {
+      "status": "approved",
+      "family": "work_order"
+    },
+    "next": {
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "WO-ACC-001"
+      ],
+      "procedure_id": "PROC-WO-START",
+      "step_id": "STEP-WO-START-FOCUS"
+    },
+    "decision_required": null
+  }
+}

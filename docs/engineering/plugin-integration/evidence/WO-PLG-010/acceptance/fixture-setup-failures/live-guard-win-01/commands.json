@@ -1,0 +1,23 @@
+[
+  {
+    "argv": [
+      "git",
+      "-c",
+      "safe.directory=C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-change-skill",
+      "-c",
+      "core.longpaths=true",
+      "-c",
+      "core.autocrlf=false",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-change-skill",
+      "clone",
+      "--shared",
+      "--no-checkout",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-change-skill",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\live-guard-win-01\\published"
+    ],
+    "exit_status": 128,
+    "stdout": "",
+    "stderr": "Cloning into 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\live-guard-win-01\\published'...\nfatal: detected dubious ownership in repository at 'C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness/.git/worktrees/se-harness-plugin-change-skill'\n'C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness/.git/worktrees/se-harness-plugin-change-skill' is owned by:\n\tmmzen/CodexSandboxOffline (S-1-5-21-778813600-4079903668-2251971101-1003)\nbut the current user is:\n\tMMZEN/mathi (S-1-5-21-778813600-4079903668-2251971101-1001)\nTo add an exception for this directory, call:\n\n\tgit config --global --add safe.directory C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness/.git/worktrees/se-harness-plugin-change-skill\nfatal: Could not read from remote repository.\n\nPlease make sure you have the correct access rights\nand the repository exists.\n"
+  }
+]

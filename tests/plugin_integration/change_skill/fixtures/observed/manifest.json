@@ -1,0 +1,1577 @@
+{
+  "classification": "Fixed command replay of independently observed Windows actions; not fresh model behavior or a policy engine",
+  "evaluator_version": "0.16.0",
+  "payload_sha256": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+  "archive_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+  "assets": {
+    "raw/docs/engineering/acceptance/capabilities/CAP-ACC-001.md": "b9009e0d3320c3bd8bd7a7653995ffd4120f99e52d571e53ddbfbb6cf8b1e1d5",
+    "raw/docs/engineering/acceptance/intent/INT-ACC-001.md": "a9d58082b98f91e80140b71391cf6af50b1a18dd137283abf9e93c58438f29bb",
+    "raw/docs/engineering/acceptance/intent/INT-ACC-002.md": "2c840e39865e61832602c25c124e4d3ec083309722e5fcff6301e54f729770c3",
+    "raw/docs/engineering/acceptance/intent/INT-ACC-003.md": "f5ebc8d8bc37bb43bd88561a952a2fff1c7ee25d3b40b3119659094bb587b40a",
+    "raw/docs/engineering/acceptance/requirements/REQ-ACC-001.md": "e9f8b79f88fadaff5ea6bbb9eeb71e1ccddd23662d382169a87fd8496bc1f5ff",
+    "raw/docs/engineering/acceptance/specifications/SPEC-ACC-001.md": "47716dcbfac2faeb2efbe5f3fea57e2985b71673f40caa285857d4e79e21ac73",
+    "raw/docs/engineering/acceptance/verification/VER-ACC-001.md": "8940b9e21e125f09fe4e1221f11b099d88f6de0e6c6e5370dbe46b6c24cbfa46",
+    "raw/docs/engineering/acceptance/work-orders/WO-ACC-001.md": "f20d0b3b573c2e4ce6d32394adc41c673095a4fe61b6c6d1728007d19750b494",
+    "raw/src/feature.py": "9bc5c2f75ef228b660858b48003d8016fafcd578fab0116f78497d6f14cfd7cc",
+    "raw/src/outside.py": "6cbef4c44ba2a8773c31dda9339113982ff0679092c849cc4afdc527f8ad9fd0",
+    "package-inputs/SPEC-PKG-001.md": "28a845e7728922dbd8441ce530e90b045694aa66ce1a25f60acd10d79cebbfda",
+    "package-inputs/WO-PKG-001.md": "b3ebd8331a94a2541606d5784b015e7887f033dcaf6a9b1804264ad35313e7c5",
+    "package-inputs/DEC-PKG-001.md": "80fabe2dced4e8aed256f02bd30fea12adc079b439a100da8c0b60bad953fc96",
+    "oracle.md": "96ad8e174bbd9abb32f3ce2901dd4e9fdbe6152bbf8d94da7c86b776629bd17d",
+    "fixed-inputs.json": "dfb07deedbc94b095e62db50cc984149555e65d0bdf843f8998620768d88ecc7",
+    "trace-groups.json": "979d496a95490c4664ba389e6ba28292686147a0cf3ade16275584769a3b4c89",
+    "fixture-repair.json": "e568f80420e70dc029c1535d31b4ed628fa79ae7722e910c0153be02fec7f3b4",
+    "chg02-raw-operands.json": "adf1f6c947c36a32af98cd5cc55a85792714a1094f199c24528b9003281ac786",
+    "chg06-observation.json": "d69081fee31e3f640cc72d5d53a4972eec0ed02b1ac86c2968edd6618af37d26",
+    "chg04-request.json": "7550bf09c804567295f0096e9ebe9bd0d8922af696b024c17ce1f7c9b5ce4cdb",
+    "chg10-repeat-inputs.json": "e5f1b7632b0eee5bbe9b7bde1f3fae915f1df1a0be5fd1206cd42677a9827e0b",
+    "helpers/edit_feature.py": "d13621d996447c9f99cadc4db37819b957d1436fb44df1fae94dedd81f69539d",
+    "helpers/retain_feature_evidence.py": "deaaf232f91ca7f433f5aa4b15c0953b2c7be4526ec5dff3da96e9cc10c8795c",
+    "changed-intent.md": "51a55e2625533af1bb65aa5b2173bebadd1311b900554815d6f42c1f211e5954"
+  },
+  "groups": {
+    "definition_approval_original": [
+      "chg03-before",
+      "chg03-preview",
+      "chg03-apply"
+    ],
+    "work_order_corrected_fixture": [
+      "chg09-corrected-before",
+      "chg09-corrected-preview",
+      "chg09-corrected-apply",
+      "chg09-corrected-after",
+      "chg06-passing-preflight",
+      "chg04-start-preview",
+      "chg04-start-apply",
+      "chg04-start-after",
+      "chg04-scope",
+      "chg04-preaction",
+      "chg04-corrective-evidence",
+      "chg04-preaction-retry",
+      "chg04-corrected-resume",
+      "chg04-corrected-scope-before-edit1",
+      "chg04-edit1",
+      "chg04-commit1",
+      "chg04-commit1-result",
+      "chg04-scope-after-commit1",
+      "chg04-edit2",
+      "chg04-commit2",
+      "chg04-commit2-result",
+      "chg04-observed-feature",
+      "chg04-review-preflight",
+      "chg04-validate",
+      "chg04-doctor",
+      "chg04-retain-observed-evidence",
+      "chg04-handoff",
+      "chg04-final-diff"
+    ],
+    "package_after_work_order_group": [
+      "chg01-refs",
+      "chg01-domain-preview",
+      "chg01-domain-create",
+      "chg01-spec-preview",
+      "chg08-spec-create-lost-receipt",
+      "chg08-fill-existing-spec",
+      "chg01-wo-preview",
+      "chg01-dec-preview",
+      "chg01-wo-create",
+      "chg01-fill-wo",
+      "chg01-dec-create",
+      "chg01-fill-dec",
+      "chg01-validate",
+      "chg01-state",
+      "chg01-decision-state"
+    ],
+    "readiness_new_corrected_fixture": [
+      "chg10-repeat-state-before",
+      "chg10-repeat-preview",
+      "chg10-repeat-apply",
+      "chg10-repeat-state-after"
+    ],
+    "lost_transition_receipt_new_corrected_fixture": [
+      "chg08-transition-preview",
+      "chg08-transition-apply-lost-receipt",
+      "chg08-transition-recovery-readback"
+    ],
+    "negative_outside_scope": [
+      "chg05-proposed-scope"
+    ],
+    "transition_receipt_recovery": [
+      "chg08-transition-preview",
+      "chg08-transition-apply-lost-receipt",
+      "chg08-transition-recovery-readback"
+    ]
+  },
+  "records": {
+    "chg01-dec-create": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "create-artifact",
+        "{repo}",
+        "--domain",
+        "package-demo",
+        "--type",
+        "decision",
+        "--id",
+        "DEC-PKG-001",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/package-demo/decisions/DEC-PKG-001.md"
+      ],
+      "expected_state": null,
+      "observed_record_sha256": "3dba4b4494fbd3accd8cf4553e9d1745f40a878881895a62d7b1350273b833ff",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg01-dec-create.json"
+    },
+    "chg01-dec-preview": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "create-artifact",
+        "{repo}",
+        "--domain",
+        "package-demo",
+        "--type",
+        "decision",
+        "--id",
+        "DEC-PKG-001",
+        "--dry-run",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "observed_record_sha256": "00c500f6015e69f39fb5286ff29afb9f93e82bdd5929ca7f92761431eb80970b",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg01-dec-preview.json"
+    },
+    "chg01-decision-state": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "DEC-PKG-001",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "DEC-PKG-001",
+            "status": "open"
+          }
+        ],
+        "after": [
+          {
+            "id": "DEC-PKG-001",
+            "status": "open"
+          }
+        ]
+      },
+      "observed_record_sha256": "676aa86415c124a924aeba7a64b10a5e0d735f36f2b4fab63a62c35aec3b8488",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg01-decision-state.json"
+    },
+    "chg01-domain-create": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "scaffold-domain",
+        "{repo}",
+        "--domain",
+        "package-demo",
+        "--title",
+        "Package fixture",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/package-demo/README.md"
+      ],
+      "expected_state": null,
+      "observed_record_sha256": "27663d799d890da8fe186f78d9fd052bddbb49fd6f62d0a8a4471946dd577889",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg01-domain-create.json"
+    },
+    "chg01-domain-preview": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "scaffold-domain",
+        "{repo}",
+        "--domain",
+        "package-demo",
+        "--title",
+        "Package fixture",
+        "--dry-run",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "observed_record_sha256": "c70dd64159adfeed984bc093f2eec5f744f60f9aa1649dcce8f901653ac188e5",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg01-domain-preview.json"
+    },
+    "chg01-fill-dec": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-c",
+        "import shutil,sys; shutil.copyfile(sys.argv[1],sys.argv[2])",
+        "{fixtures}/package-inputs/DEC-PKG-001.md",
+        "{repo}/docs/engineering/package-demo/decisions/DEC-PKG-001.md"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/package-demo/decisions/DEC-PKG-001.md"
+      ],
+      "expected_state": null,
+      "observed_record_sha256": "d9043f5d09c1b987d553862c152dd831185ae806a788d2afa82d04f879a5af16",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg01-fill-dec.json"
+    },
+    "chg01-fill-wo": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-c",
+        "import shutil,sys; shutil.copyfile(sys.argv[1],sys.argv[2])",
+        "{fixtures}/package-inputs/WO-PKG-001.md",
+        "{repo}/docs/engineering/package-demo/work-orders/WO-PKG-001.md"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/package-demo/work-orders/WO-PKG-001.md"
+      ],
+      "expected_state": null,
+      "observed_record_sha256": "16d1a7ce15173a66a183741b7aea2fbb596cdafa92ba8d84b1b876317c3639ab",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg01-fill-wo.json"
+    },
+    "chg01-refs": {
+      "argv": [
+        "git",
+        "-C",
+        "{repo}",
+        "for-each-ref",
+        "--format=%(refname) %(objectname)"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "observed_record_sha256": "70059a66d365ee2c052a6f3c879a1a6397c23522d704b9bdf2fda43d666bf17f",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg01-refs.json"
+    },
+    "chg01-spec-preview": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "create-artifact",
+        "{repo}",
+        "--domain",
+        "package-demo",
+        "--type",
+        "specification",
+        "--id",
+        "SPEC-PKG-001",
+        "--dry-run",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "observed_record_sha256": "98ce3cc3d6927878522194eceaa2a48fa7e563183db4012fb363ae524a615968",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg01-spec-preview.json"
+    },
+    "chg01-state": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "WO-PKG-001",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-PKG-001",
+            "status": "draft"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-PKG-001",
+            "status": "draft"
+          }
+        ]
+      },
+      "observed_record_sha256": "bb4b4b3cb59f3f487bf9159db5d44a96b32ef1723da488c1096b0a991defb803",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg01-state.json"
+    },
+    "chg01-validate": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "validate",
+        "{repo}",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "observed_record_sha256": "da0021b2d47a763420bb11a89cf9b248138aeedebdb4082d28198da8b3a8d0e0",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg01-validate.json"
+    },
+    "chg01-wo-create": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "create-artifact",
+        "{repo}",
+        "--domain",
+        "package-demo",
+        "--type",
+        "work_order",
+        "--id",
+        "WO-PKG-001",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/package-demo/work-orders/WO-PKG-001.md"
+      ],
+      "expected_state": null,
+      "observed_record_sha256": "361dba32a5f1407ff40a7f11b6dfef3331c681810a6eb6d94c80e8ddd9fb1422",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg01-wo-create.json"
+    },
+    "chg01-wo-preview": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "create-artifact",
+        "{repo}",
+        "--domain",
+        "package-demo",
+        "--type",
+        "work_order",
+        "--id",
+        "WO-PKG-001",
+        "--dry-run",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "observed_record_sha256": "46e31585de9436fdfc0451e132ca675c228eda9fd7697fcf70e445f2467c3f83",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg01-wo-preview.json"
+    },
+    "chg03-apply": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "transition",
+        "{repo}",
+        "--set",
+        "INT-ACC-001=approved",
+        "--decision",
+        "INT-ACC-001=product-owner",
+        "--reason",
+        "INT-ACC-001=Synthetic test decision approves the exact fixed reviewed intent only.",
+        "--apply",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/acceptance/intent/INT-ACC-001.md"
+      ],
+      "expected_state": {
+        "before": [
+          {
+            "id": "INT-ACC-001",
+            "status": "draft"
+          }
+        ],
+        "after": [
+          {
+            "id": "INT-ACC-001",
+            "status": "approved"
+          }
+        ]
+      },
+      "observed_record_sha256": "e2c39f3c549d615a35fa003a771a9b4372576a4189acf5e2098e6cf05f746803",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg03-apply.json"
+    },
+    "chg03-before": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "INT-ACC-001",
+        "--json"
+      ],
+      "expected_exit": 1,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [],
+        "after": []
+      },
+      "observed_record_sha256": "f99aade9afc74953833ea27128653790c0457fa3fa8e8f7a0d8912a04ed3c8fd",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg03-before.json"
+    },
+    "chg03-preview": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "transition",
+        "{repo}",
+        "--set",
+        "INT-ACC-001=approved",
+        "--decision",
+        "INT-ACC-001=product-owner",
+        "--reason",
+        "INT-ACC-001=Synthetic test decision approves the exact fixed reviewed intent only.",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "INT-ACC-001",
+            "status": "draft"
+          }
+        ],
+        "after": [
+          {
+            "id": "INT-ACC-001",
+            "status": "approved"
+          }
+        ]
+      },
+      "observed_record_sha256": "6222503e6896d2f5f4d022f91afc325fcf0c08157597fd53719ba8b8483f4bfa",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg03-preview.json"
+    },
+    "chg04-commit1": {
+      "argv": [
+        "git",
+        "-C",
+        "{repo}",
+        "add",
+        "--",
+        "src/feature.py"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "observed_record_sha256": "6567615fa6512b8ba10adaece49fcc920c98ed517d8c9ab25c73584a919b5e78",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-commit1.json"
+    },
+    "chg04-commit1-result": {
+      "argv": [
+        "git",
+        "-C",
+        "{repo}",
+        "-c",
+        "user.name=Fixture Owner",
+        "-c",
+        "user.email=fixture@example.invalid",
+        "commit",
+        "-m",
+        "Improve feature message"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "observed_record_sha256": "42e8c37ae4197e8ca5cba99aa9870962c8a415f897e661ed8aebce94f40f6c18",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-commit1-result.json"
+    },
+    "chg04-commit2": {
+      "argv": [
+        "git",
+        "-C",
+        "{repo}",
+        "add",
+        "--",
+        "src/feature.py"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "observed_record_sha256": "417b4f99e8c0bd8faf2ce213a4552ad240c0d33f0fadba73fd932640a13bfefe",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-commit2.json"
+    },
+    "chg04-commit2-result": {
+      "argv": [
+        "git",
+        "-C",
+        "{repo}",
+        "-c",
+        "user.name=Fixture Owner",
+        "-c",
+        "user.email=fixture@example.invalid",
+        "commit",
+        "-m",
+        "Clarify feature message"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "observed_record_sha256": "de310f4ff45d291cf8384099847f2b8c2606d975d50cda9c90bc8f092f0270c7",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-commit2-result.json"
+    },
+    "chg04-corrected-resume": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "WO-ACC-001",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ]
+      },
+      "observed_record_sha256": "3b3f03ba33c57921b42500300a64e29f6542d2e731930e2fb8ac8a7371915885",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-corrected-resume.json"
+    },
+    "chg04-corrected-scope-before-edit1": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "WO-ACC-001",
+        "--checkpoint",
+        "scope",
+        "--changed-path",
+        "docs/engineering/demo-change/work-orders/WO-ACC-001.md",
+        "--changed-path",
+        "docs/engineering/demo-change/evidence/WO-ACC-001/WO-ACC-001-handoff.md",
+        "--changed-path",
+        "src/feature.py",
+        "--changes-complete",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ]
+      },
+      "observed_record_sha256": "6ea57f90300f824f5f1fb2845e2e36fb0d9e3da1507e1ae8e52fdc3edcd7a44c",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-corrected-scope-before-edit1.json"
+    },
+    "chg04-corrective-evidence": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "evidence",
+        "{repo}",
+        "--artifact",
+        "WO-ACC-001",
+        "--checkpoint",
+        "handoff",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/demo-change/evidence/WO-ACC-001/WO-ACC-001-handoff.md"
+      ],
+      "expected_state": {
+        "before": [],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ]
+      },
+      "observed_record_sha256": "2618442659e7de26256de20829376b2704cfc0a9706884fdbea225315379a3ab",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-corrective-evidence.json"
+    },
+    "chg04-doctor": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "doctor",
+        "{repo}",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "observed_record_sha256": "9eda5854546352e3e0c9b89079b07287664a2a67b3dbd58a15476082c5a8851a",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-doctor.json"
+    },
+    "chg04-edit1": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{helpers}/edit_feature.py",
+        "{repo}",
+        "The feature is ready."
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "src/feature.py"
+      ],
+      "expected_state": null,
+      "observed_record_sha256": "ee8b31186ed6323596959c208d9fdabe7866795fa82d28792f14fef9bac0d3ea",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-edit1.json"
+    },
+    "chg04-edit2": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{helpers}/edit_feature.py",
+        "{repo}",
+        "The feature is ready to use."
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "src/feature.py"
+      ],
+      "expected_state": null,
+      "observed_record_sha256": "5f502f47969699e36199379c578a18a65b41e6710b2d67ac523b3be5c3e53c2b",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-edit2.json"
+    },
+    "chg04-final-diff": {
+      "argv": [
+        "git",
+        "-C",
+        "{repo}",
+        "diff",
+        "origin/main",
+        "--",
+        "src/feature.py",
+        "docs/engineering/demo-change/work-orders/WO-ACC-001.md"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "observed_record_sha256": "bbccec5ef33d2f7ec66f8a5efbfa29191680c8c7cbc4dd474a76f52de65b666e",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-final-diff.json"
+    },
+    "chg04-handoff": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "WO-ACC-001",
+        "--checkpoint",
+        "handoff",
+        "--from-git",
+        "origin/main",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/demo-change/evidence/WO-ACC-001/handoff.json"
+      ],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ]
+      },
+      "observed_record_sha256": "c17275974eb8382ba9e0ba6adc7af2a1345e3e6d552a1f806541f753e929f9d5",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-handoff.json"
+    },
+    "chg04-observed-feature": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-c",
+        "import pathlib,runpy,sys; print(runpy.run_path(str(pathlib.Path(sys.argv[1])/'src/feature.py'))['message']())",
+        "{repo}"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "observed_record_sha256": "fcc4ba86cc7f6eefc21ac4f4eae164c1696b80fc133e22aba6aacf2d1f2c3b42",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-observed-feature.json"
+    },
+    "chg04-preaction": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "WO-ACC-001",
+        "--checkpoint",
+        "pre-action",
+        "--procedure",
+        "PROC-WO-IMPLEMENT",
+        "--from-git",
+        "origin/main",
+        "--json"
+      ],
+      "expected_exit": 1,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ]
+      },
+      "observed_record_sha256": "7396972b7c5d09ed31f422f525791e59dd6531bd8398120704bf4f4306ff916f",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-preaction.json"
+    },
+    "chg04-preaction-retry": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "WO-ACC-001",
+        "--checkpoint",
+        "pre-action",
+        "--procedure",
+        "PROC-WO-IMPLEMENT",
+        "--from-git",
+        "origin/main",
+        "--json"
+      ],
+      "expected_exit": 1,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ]
+      },
+      "observed_record_sha256": "04071788cd1a9dc907dc84011a0ba2d5f6a49b124aa0cc9105eaf3fa14869c16",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-preaction-retry.json"
+    },
+    "chg04-retain-observed-evidence": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{helpers}/retain_feature_evidence.py",
+        "{repo}"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/demo-change/evidence/WO-ACC-001/WO-ACC-001-handoff.md"
+      ],
+      "expected_state": null,
+      "observed_record_sha256": "f52279497537d1c6ee2846b6ec1bf65deddff22012569c12311cf8e2374e9588",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-retain-observed-evidence.json"
+    },
+    "chg04-review-preflight": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "preflight",
+        "{repo}",
+        "--work-order",
+        "WO-ACC-001",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "observed_record_sha256": "debf8e7bc1a7323e8e234c05c29087c8a8ee6db002c92b57291348a9ceeb0522",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-review-preflight.json"
+    },
+    "chg04-scope": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "WO-ACC-001",
+        "--checkpoint",
+        "scope",
+        "--from-git",
+        "origin/main",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ]
+      },
+      "observed_record_sha256": "4ec2953c1d5cfa8034f9fd3ac52d51354c284c8f0aad8ede850000e057d25f74",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-scope.json"
+    },
+    "chg04-scope-after-commit1": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "WO-ACC-001",
+        "--checkpoint",
+        "scope",
+        "--from-git",
+        "origin/main",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ]
+      },
+      "observed_record_sha256": "20e436875ae11221fbc32a9421b2d331159cf0f1762db4a233ce3453db1c39a0",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-scope-after-commit1.json"
+    },
+    "chg04-start-after": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "WO-ACC-001",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ]
+      },
+      "observed_record_sha256": "d7f1961fe9b46902447cde6a2f6778747371ae8ab0cf442a7ac36ff72c063bb8",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-start-after.json"
+    },
+    "chg04-start-apply": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "transition",
+        "{repo}",
+        "--set",
+        "WO-ACC-001=in_progress",
+        "--decision",
+        "WO-ACC-001=engineering-owner",
+        "--reason",
+        "WO-ACC-001=Synthetic engineering-owner start decision for the fixed approved feature scope.",
+        "--apply",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/demo-change/work-orders/WO-ACC-001.md"
+      ],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "approved"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ]
+      },
+      "observed_record_sha256": "e70dcba547f99b8461161fbb179bc67adfb05e9ff47d8350373af77cb5b26c76",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-start-apply.json"
+    },
+    "chg04-start-preview": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "transition",
+        "{repo}",
+        "--set",
+        "WO-ACC-001=in_progress",
+        "--decision",
+        "WO-ACC-001=engineering-owner",
+        "--reason",
+        "WO-ACC-001=Synthetic engineering-owner start decision for the fixed approved feature scope.",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "approved"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ]
+      },
+      "observed_record_sha256": "ccf9731316a812f8be5b81b4661f722e03aeb44f59e7b5ff73c10822df86671d",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-start-preview.json"
+    },
+    "chg04-validate": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "validate",
+        "{repo}",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "observed_record_sha256": "86118f37b9585675f0dad3199bcc99010e19422573854ce99c07352136c13311",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg04-validate.json"
+    },
+    "chg05-proposed-scope": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "WO-ACC-001",
+        "--checkpoint",
+        "scope",
+        "--changed-path",
+        "docs/engineering/demo-change/work-orders/WO-ACC-001.md",
+        "--changed-path",
+        "docs/engineering/demo-change/evidence/WO-ACC-001/WO-ACC-001-handoff.md",
+        "--changed-path",
+        "src/outside.py",
+        "--changes-complete",
+        "--json"
+      ],
+      "expected_exit": 1,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "in_progress"
+          }
+        ]
+      },
+      "observed_record_sha256": "0bdcef9063b383895afa717cadb93200139a614d21f190b6ad74fbdcc34875a3",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg05-proposed-scope.json"
+    },
+    "chg06-passing-preflight": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "preflight",
+        "{repo}",
+        "--work-order",
+        "WO-ACC-001",
+        "--phase",
+        "start",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "observed_record_sha256": "c2645e6388bb28adbe1b81adc8bdfc5e32d8d6c55751fc23b6d67d8e0b01ae4e",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg06-passing-preflight.json"
+    },
+    "chg08-fill-existing-spec": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-c",
+        "import shutil,sys; shutil.copyfile(sys.argv[1],sys.argv[2])",
+        "{fixtures}/package-inputs/SPEC-PKG-001.md",
+        "{repo}/docs/engineering/package-demo/specifications/SPEC-PKG-001.md"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/package-demo/specifications/SPEC-PKG-001.md"
+      ],
+      "expected_state": null,
+      "observed_record_sha256": "c15754b05baa866ea7def5f77374a8b0c050631bab468f8fb2710a0dbce507f4",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg08-fill-existing-spec.json"
+    },
+    "chg08-spec-create-lost-receipt": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "create-artifact",
+        "{repo}",
+        "--domain",
+        "package-demo",
+        "--type",
+        "specification",
+        "--id",
+        "SPEC-PKG-001",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/package-demo/specifications/SPEC-PKG-001.md"
+      ],
+      "expected_state": null,
+      "observed_record_sha256": "7f220b37bec93f48cbc965d540b0c24a8d044e977eb51622a25ff498b839af7c",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg08-spec-create-lost-receipt.json"
+    },
+    "chg08-transition-apply-lost-receipt": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "transition",
+        "{repo}",
+        "--set",
+        "INT-ACC-001=approved",
+        "--decision",
+        "INT-ACC-001=product-owner",
+        "--reason",
+        "INT-ACC-001=Synthetic original reviewed intent approval; recover from any lost receipt by readback only.",
+        "--apply",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/demo-change/intent/INT-ACC-001.md"
+      ],
+      "expected_state": {
+        "before": [
+          {
+            "id": "INT-ACC-001",
+            "status": "draft"
+          }
+        ],
+        "after": [
+          {
+            "id": "INT-ACC-001",
+            "status": "approved"
+          }
+        ]
+      },
+      "observed_record_sha256": "ae6315ad5e8b32e111410a28767910b46764441a89336f44e16852f85539a591",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg08-transition-apply-lost-receipt.json"
+    },
+    "chg08-transition-preview": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "transition",
+        "{repo}",
+        "--set",
+        "INT-ACC-001=approved",
+        "--decision",
+        "INT-ACC-001=product-owner",
+        "--reason",
+        "INT-ACC-001=Synthetic original reviewed intent approval; recover from any lost receipt by readback only.",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "INT-ACC-001",
+            "status": "draft"
+          }
+        ],
+        "after": [
+          {
+            "id": "INT-ACC-001",
+            "status": "approved"
+          }
+        ]
+      },
+      "observed_record_sha256": "e5cc6f2e68e5792b0ded0e435d82a5413fddee5d6e06a2822d06d1bd4f8151d6",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg08-transition-preview.json"
+    },
+    "chg08-transition-recovery-readback": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-c",
+        "import hashlib,json,pathlib,sys,tomllib; p=pathlib.Path(sys.argv[1])/'docs/engineering/demo-change/intent/INT-ACC-001.md'; raw=p.read_bytes(); data=tomllib.loads(raw.decode().split('+++',2)[1]); print(json.dumps({'id':data['id'],'status':data['status'],'events':data.get('lifecycle_events',[]),'sha256':hashlib.sha256(raw).hexdigest()},indent=2))",
+        "{repo}"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "observed_record_sha256": "7f2daa10c8e7f740016d81a222d774c1686cad20ffbe26a1605e18946f8eff46",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg08-transition-recovery-readback.json"
+    },
+    "chg09-corrected-after": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "WO-ACC-001",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "approved"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "approved"
+          }
+        ]
+      },
+      "observed_record_sha256": "2cffa0f8061abbd89e14ad8bba96cab42c784df4eac7adea0c0804056c9d0c0f",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg09-corrected-after.json"
+    },
+    "chg09-corrected-apply": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "transition",
+        "{repo}",
+        "--set",
+        "WO-ACC-001=approved",
+        "--decision",
+        "WO-ACC-001=engineering-owner",
+        "--reason",
+        "WO-ACC-001=Synthetic corrected fixture approval only; no start authority supplied.",
+        "--apply",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/demo-change/work-orders/WO-ACC-001.md"
+      ],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "draft"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "approved"
+          }
+        ]
+      },
+      "observed_record_sha256": "f8227c6029eb41e9bb755d9a41ded823eff4261bc4c10ced2e37dde9a78dac97",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg09-corrected-apply.json"
+    },
+    "chg09-corrected-before": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "WO-ACC-001",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "draft"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "draft"
+          }
+        ]
+      },
+      "observed_record_sha256": "4112bc6a99283d116ad5c7f24e53ef846cc370669bc23b42d42331eaf35bdf1c",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg09-corrected-before.json"
+    },
+    "chg09-corrected-preview": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "transition",
+        "{repo}",
+        "--set",
+        "WO-ACC-001=approved",
+        "--decision",
+        "WO-ACC-001=engineering-owner",
+        "--reason",
+        "WO-ACC-001=Synthetic corrected fixture approval only; no start authority supplied.",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "draft"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "approved"
+          }
+        ]
+      },
+      "observed_record_sha256": "dfdc0ee2ffc5576c81507f806219df602c17d9e72b5b79c5204097fbc2ba4703",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg09-corrected-preview.json"
+    },
+    "chg10-repeat-apply": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "transition",
+        "{repo}",
+        "--set",
+        "WO-ACC-001=approved",
+        "--decision",
+        "WO-ACC-001=engineering-owner",
+        "--reason",
+        "WO-ACC-001=Unchanged synthetic corrected fixture approval retained through readiness recovery.",
+        "--apply",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/demo-change/work-orders/WO-ACC-001.md"
+      ],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "draft"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "approved"
+          }
+        ]
+      },
+      "observed_record_sha256": "cdaf3a73205b114d71b80c204ebf704269156449cdb5579ceae1180d189d6a60",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg10-repeat-apply.json"
+    },
+    "chg10-repeat-preview": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "transition",
+        "{repo}",
+        "--set",
+        "WO-ACC-001=approved",
+        "--decision",
+        "WO-ACC-001=engineering-owner",
+        "--reason",
+        "WO-ACC-001=Unchanged synthetic corrected fixture approval retained through readiness recovery.",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "draft"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "approved"
+          }
+        ]
+      },
+      "observed_record_sha256": "2f194b8eeade311dc752f898faf75f5db01f9c03b29026b7ab8d7426425bbdb0",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg10-repeat-preview.json"
+    },
+    "chg10-repeat-state-after": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "WO-ACC-001",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "approved"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "approved"
+          }
+        ]
+      },
+      "observed_record_sha256": "504fc072855915659d87a102c08861a4738cc9ebc66d3807c71d9a0b775190f5",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg10-repeat-state-after.json"
+    },
+    "chg10-repeat-state-before": {
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "WO-ACC-001",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "WO-ACC-001",
+            "status": "draft"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-ACC-001",
+            "status": "draft"
+          }
+        ]
+      },
+      "observed_record_sha256": "b6c785d8e3f846aa98e3b31c6eef4ac07fc303c7e65c2a9b44d008055774d262",
+      "observed_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg10-repeat-state-before.json"
+    }
+  }
+}

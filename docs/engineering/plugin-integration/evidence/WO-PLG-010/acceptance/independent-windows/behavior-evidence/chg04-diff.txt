@@ -1,0 +1,42 @@
+diff --git a/docs/engineering/demo-change/work-orders/WO-ACC-001.md b/docs/engineering/demo-change/work-orders/WO-ACC-001.md
+index 4c6a508..ac1c6d2 100644
+--- a/docs/engineering/demo-change/work-orders/WO-ACC-001.md
++++ b/docs/engineering/demo-change/work-orders/WO-ACC-001.md
+@@ -2,7 +2,7 @@
+ id = "WO-ACC-001"
+ type = "work_order"
+ title = "WO-ACC-001 acceptance fixture"
+-status = "draft"
++status = "in_progress"
+ owners = ["engineering-owner"]
+ created = "2026-09-10"
+ updated = "2026-09-10"
+@@ -20,6 +20,20 @@ paths = ["src/feature.py", "docs/engineering/demo-change/work-orders/WO-ACC-001.
+ implements = ["REQ-ACC-001"]
+ specifications = ["SPEC-ACC-001"]
+ verification = ["VER-ACC-001"]
++
++[[lifecycle_events]]
++from = "draft"
++to = "approved"
++decided_at = "2026-09-10T18:44:47Z"
++decided_by = "engineering-owner"
++reason = "Synthetic corrected fixture approval only; no start authority supplied."
++
++[[lifecycle_events]]
++from = "approved"
++to = "in_progress"
++decided_at = "2026-09-10T18:46:01Z"
++decided_by = "engineering-owner"
++reason = "Synthetic engineering-owner start decision for the fixed approved feature scope."
+ +++
+ 
+ # WO-ACC-001: Acceptance fixture
+diff --git a/src/feature.py b/src/feature.py
+index 94575df..b1e1f71 100644
+--- a/src/feature.py
++++ b/src/feature.py
+@@ -1,2 +1,2 @@
+ def message():
+-    return "Initial message"
++    return 'The feature is ready to use.'

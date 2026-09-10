@@ -1,0 +1,28 @@
+{
+  "schema": "verity-plane-independent-instruction-observations-v1",
+  "formal_verification_record": false,
+  "platform": "Windows 11, Python 3.14.6, isolated released evaluator 0.16.0",
+  "oracle_fixed_before_candidate": true,
+  "cases": {
+    "CHG01": "observed_pass",
+    "CHG02": "observed_pass_with_grouped_variants",
+    "CHG03": "observed_pass",
+    "CHG04": "corrected_skill_observed_pass",
+    "CHG05": "observed_pass",
+    "CHG06": "observed_pass_with_grouped_variants",
+    "CHG07": "not_run",
+    "CHG08": "observed_pass_for_two_injected_receipt_losses",
+    "CHG09": "corrected_fixture_observed_pass",
+    "CHG10": "observed_pass_with_grouped_unready_variants"
+  },
+  "not_claimed": [
+    "Complete VER-PLG-010 satisfaction",
+    "Live native host activation",
+    "Live delegated lifecycle case CHG07",
+    "Linux behavioral reasoning",
+    "In-flight crash recovery"
+  ],
+  "prompt_counts": "prompt-counts.json",
+  "candidate_hashes": "candidate-identities.json",
+  "final_hashes": "final-hashes.json"
+}

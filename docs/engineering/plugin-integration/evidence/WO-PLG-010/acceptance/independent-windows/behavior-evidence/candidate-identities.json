@@ -1,0 +1,14 @@
+{
+  "candidate": {
+    "change/SKILL.md": "a9b7e6d7597eac88d1a756fe22975452bb6e301e10ad645e2dddb2dfebf39369",
+    "change/references/artifacts.md": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3",
+    "change/references/authority.md": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f",
+    "change/references/work-orders.md": "9f715fcc4614429148f7899b197401de5d9e7dfd552b68ac259b4e6e22837223"
+  },
+  "candidate-corrected": {
+    "change/SKILL.md": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13",
+    "change/references/artifacts.md": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3",
+    "change/references/authority.md": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f",
+    "change/references/work-orders.md": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "label": "check-help",
+  "phase": "setup",
+  "argv": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "check",
+    "--help"
+  ],
+  "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-change-replay-20260910-attempt2",
+  "started_unix": 1789067316.595885,
+  "duration_seconds": 0.47751379013061523,
+  "exit_code": 0,
+  "expected_exit": 0,
+  "stdout": "usage: harnessctl check [-h] [--artifact ARTIFACT]\n                        [--checkpoint {start,pre-action,transition,handoff,scope}]\n                        [--include-background] [--target TARGET_STATE]\n                        [--procedure PROCEDURE] [--changed-path CHANGED_PATH]\n                        [--changes-complete]\n                        [--change-manifest CHANGE_MANIFEST] [--from-git BASE]\n                        [--pull-request-body PULL_REQUEST_BODY] [--json]\n                        [target]\n\npositional arguments:\n  target\n\noptions:\n  -h, --help            show this help message and exit\n  --artifact ARTIFACT   one selected WO, VREC, or RLS ID; without a checkpoint\n                        it defaults to the single in_progress work order\n  --checkpoint {start,pre-action,transition,handoff,scope}\n                        fixed stateless evaluation checkpoint; omitted, check\n                        projects the selected scope and evaluates no gate\n  --include-background  with no checkpoint, list unrelated findings by\n                        category instead of one count\n  --target TARGET_STATE\n                        target lifecycle state; required for and limited to\n                        the transition checkpoint\n  --procedure PROCEDURE\n                        selected PROC ID; required for pre-action and limited\n                        to declared alternatives\n  --changed-path CHANGED_PATH\n                        normalized repository-relative changed path; repeat\n                        for the declared set\n  --changes-complete    assert that repeated changed paths are complete; this\n                        is evidence, not trusted proof\n  --change-manifest CHANGE_MANIFEST\n                        in-repository se-harness-change-set-v1 JSON; exclusive\n                        with changed-path options\n  --from-git BASE       derive the complete change set from Git against BASE;\n                        exclusive with the changed-path options\n  --pull-request-body PULL_REQUEST_BODY\n                        UTF-8 pull-request body file; reports W-ADS-001 when\n                        its work-order trailer carries a carriage return\n  --json                emit se-harness-workflow-result-v2 JSON\n",
+  "stderr": "",
+  "before": {},
+  "after": {},
+  "changed_paths": []
+}

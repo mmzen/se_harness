@@ -1,0 +1,27 @@
+{
+  "kind": "Recorded command replay plan; not new behavioral reasoning or an authority engine",
+  "records_directory": "behavior-evidence",
+  "initialization": "Use the externally verified platform evaluator to init a fresh repository. Copy only raw-repository/docs/engineering/acceptance and raw-repository/src. For corrected groups, rename acceptance to demo-change and replace that scope prefix inside WO-ACC-001. Initialize only local fixture Git and origin/main when required. Never copy a Windows managed harness or Python environment to Linux.",
+  "definition_approval_original": ["chg03-before", "chg03-preview", "chg03-apply"],
+  "work_order_corrected_fixture": [
+    "chg09-corrected-before", "chg09-corrected-preview", "chg09-corrected-apply", "chg09-corrected-after", "chg06-passing-preflight",
+    "chg04-start-preview", "chg04-start-apply", "chg04-start-after", "chg04-scope", "chg04-preaction", "chg04-corrective-evidence", "chg04-preaction-retry",
+    "chg04-corrected-resume", "chg04-corrected-scope-before-edit1", "chg04-edit1", "chg04-commit1", "chg04-commit1-result", "chg04-scope-after-commit1",
+    "chg04-edit2", "chg04-commit2", "chg04-commit2-result", "chg04-observed-feature", "chg04-review-preflight", "chg04-validate", "chg04-doctor", "chg04-retain-observed-evidence", "chg04-handoff", "chg04-final-diff"
+  ],
+  "package_after_work_order_group": [
+    "chg01-refs", "chg01-domain-preview", "chg01-domain-create", "chg01-spec-preview", "chg08-spec-create-lost-receipt", "chg08-fill-existing-spec",
+    "chg01-wo-preview", "chg01-dec-preview", "chg01-wo-create", "chg01-fill-wo", "chg01-dec-create", "chg01-fill-dec", "chg01-validate", "chg01-state", "chg01-decision-state"
+  ],
+  "readiness_new_corrected_fixture": ["chg10-repeat-state-before", "chg10-repeat-preview", "chg10-repeat-apply", "chg10-repeat-state-after"],
+  "lost_transition_receipt_new_corrected_fixture": ["chg08-transition-preview", "chg08-transition-apply-lost-receipt", "chg08-transition-recovery-readback"],
+  "expected_failures_preserved": {"chg03-before":"WEX210 unsupported definition check", "chg04-preaction":"QGP-G4I-EVIDENCE", "chg04-preaction-retry":"QGP-G4I-EVIDENCE"},
+  "notes": [
+    "Read argv arrays from each actual record; replace every known fixture repository prefix with the group's new target and each Python executable with the external platform evaluator.",
+    "The readiness group separates a no-mutation observation phase from recovery using setup and complete session-context output; a CLI replay alone does not reevaluate skill readiness behavior.",
+    "Source edits are exact calls to edit_feature.py with a supplied string. Draft filling copies fixed package-inputs bytes. A helper's import path must remain outside the checkout.",
+    "retain_feature_evidence.py reads actual recorded results from its own sibling behavior-evidence directory. For Linux replay, use that run's records; do not copy Windows pass narration as Linux evidence.",
+    "Receipt loss was injected by the recorder after actual process exit. Replay of the underlying create/transition command does not independently repeat the model's recovery decision.",
+    "CHG02/05/06 stops and prompt counts are instruction observations and snapshots, not executable authority logic in this replay plan. CHG07 live lifecycle was not run by this evaluator."
+  ]
+}

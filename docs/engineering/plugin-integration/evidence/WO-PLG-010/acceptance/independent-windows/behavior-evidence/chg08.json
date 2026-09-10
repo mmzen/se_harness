@@ -1,0 +1,32 @@
+{
+  "result": "observed_pass_for_two_injected_receipt_losses",
+  "creation": {
+    "first_create_invocations": 1,
+    "duplicate_successful_create_invocations": 0,
+    "resumed_missing_creates": 2,
+    "record": "chg08-spec-create-lost-receipt"
+  },
+  "transition": {
+    "preview_invocations": 1,
+    "apply_invocations": 1,
+    "repeat_apply_invocations": 0,
+    "readback": {
+      "id": "INT-ACC-001",
+      "status": "approved",
+      "events": [
+        {
+          "from": "draft",
+          "to": "approved",
+          "decided_at": "2026-09-10T19:00:55Z",
+          "decided_by": "product-owner",
+          "reason": "Synthetic original reviewed intent approval; recover from any lost receipt by readback only."
+        }
+      ],
+      "sha256": "83a50e373c3c3a926e3463cb4a4c0dd2d98b4599041c98ad8a749b10f31b6bf7"
+    },
+    "record": "chg08-transition-apply-lost-receipt"
+  },
+  "duplicate_owner_prompts": 0,
+  "injection": "Recorder suppressed the tool receipt after actual process exit. It retained raw stdout/stderr for observer inspection.",
+  "not_tested": "No in-flight process crash or partially committed atomic lifecycle transaction was induced."
+}
