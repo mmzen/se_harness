@@ -78,3 +78,8 @@ Use components rather than guessed files when the code has not yet been inspecte
 ## Stop and escalate conditions
 
 ## Completion report format
+
+State what the report carries. The completion decision follows from the
+front matter, not from this section: it is the engineering owner's, or the
+`delegated-executor`'s under `[delegation] class = "execution"` while the
+required pull-request check is `success`.

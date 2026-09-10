@@ -118,9 +118,10 @@ MUST be decided by a selected active ADR. `ADR.decides -> ARCH` establishes cove
 `no_significant_decision` MUST include an accepted rationale and MUST have no
 active decision trigger.
 
-`TRC-008` - `ARCH.constrains` is compatibility-only. A validator MAY classify
-an unambiguous completed historical relation and MUST report the migration. It
-MUST reject a mixed or ambiguous target set. Installation and upgrade MUST NOT
+`TRC-008` - `ARCH.constrains` is retired. A validator MUST refuse every
+`constrains` relation with `E016`, whatever the architecture's status; it
+classifies no historical relation and reports no migration. `ARCH.addresses`
+and `ARCH.conforms_to` are the only form. Installation and upgrade MUST NOT
 rewrite repository-owned artifacts.
 
 `TRC-009` - A VREC MUST bind one or more work orders, all their declared
