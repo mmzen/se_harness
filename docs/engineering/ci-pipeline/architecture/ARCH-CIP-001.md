@@ -5,7 +5,7 @@ title = "One execution per check, one definition per lane, one commit per releas
 status = "approved"
 owners = ["technical-owner", "release-owner"]
 created = "2026-08-26"
-updated = "2026-08-26"
+updated = "2026-09-10"
 [decision_assessment]
 outcome = "adr_required"
 triggers = ["cross-cutting-policy", "material-alternatives"]
@@ -40,7 +40,7 @@ its digest, the qualification result.
 
 ### Consumers
 `candidate-package` (acceptance by the public predecessor),
-`governance-migration` (N-1 to N scenario per platform),
+`upgrade-rehearsal` (N-1 to N scenario per platform),
 `integration-package` (build, install-test, retain). Each verifies the
 digest and never rebuilds.
 
@@ -84,3 +84,16 @@ scenario, a trailer-less commit, or a census mismatch stops the run.
 Per push, one run per workflow and one wheel build per workflow. Scripts:
 at least 2,500 lines fewer, each helper defined once. Release: one contract
 per version in the ordinary case.
+
+## Amendment record
+
+**The rehearsal consumer is `upgrade-rehearsal`, amended 2026-09-10 under
+`WO-CIP-008` (`REQ-CIP-010`, `SPEC-CIP-004` `CIP-AMD-001`).** The Consumers
+component named the job `governance-migration`, its name when this
+architecture was approved on 2026-08-26. `WO-CIP-007` (`SPEC-CIP-003`
+`CIP-ONE-012`, verified by `VREC-CIP-007`) renamed the job, its artifact,
+its `needs` entries and its output references `upgrade-rehearsal` on
+2026-09-08; its scope did not admit this file, which kept the old name
+until this record. The component's responsibility, the dependency
+direction, the decision assessment and every relation of this
+architecture are unchanged.
