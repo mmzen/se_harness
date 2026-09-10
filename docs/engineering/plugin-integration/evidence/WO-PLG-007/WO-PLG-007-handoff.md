@@ -22,3 +22,11 @@ qualification work.
 [VREC-PLG-005](../../verification-records/VREC-PLG-005.md) is **ready**, binding candidate `bf0a2b4705617e735357842872edd068ce2ed610` to VER-PLG-007 and 235 retained evidence files. The earlier handoff text and header above describe the implementation stage; the work order is now implemented and the operator separately authorized this preparation.
 
 The next decision is the assurance owner's assessment of VREC-PLG-005. Preparation has not verified the record, released the work or merged the PR. Shared-handler fixture limits and original failures remain part of the bound evidence.
+
+## Assurance decision — 2026-09-10
+
+The operator explicitly verified both named records. Released evaluator 0.17.0 applied the assurance-owner decision for **VREC-PLG-005**, now **verified**, at `2026-09-10T17:40:23Z`. Only this record changed lifecycle state. WO-PLG-007 remains implemented; candidate `bf0a2b4705617e735357842872edd068ce2ed610` and all bound evidence remain unchanged.
+
+The reading, preview, applied result and binding inspection are retained under `governance/verification-decision/`. Earlier sections record the preceding implementation and preparation stages.
+
+The repository owner or release owner must select the separately authorized delivery path (DR-DELIVERY-SELECT). This assurance decision does not merge the PR or release the work.
