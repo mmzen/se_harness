@@ -1,0 +1,127 @@
+{
+  "proposal_commit": "0b42325b75bc6d1c36897369687c3d3ed578bdb9",
+  "base_commit": "f0a3a223d9c11d7dcfe38a77db43704fdbd22fdb",
+  "definition_introduction": "D04",
+  "paths": [
+    {
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-007.md",
+      "reviewed_source_sha256": "36a025834122a2959b73311016c362849138b645f921235f373d8fe56aa8e69f"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/architecture/ARCH-PLG-002.md",
+      "reviewed_source_sha256": "2eae18e1d6b7e6d1c45073bdf9b621b9bc0fbfa398b3b8d4bfcbd5a0379b8392"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-002.md",
+      "reviewed_source_sha256": "7cb58c01afecb64f2f49fe0be89b63252ee2052311c89f61ad10d94ce2b08d5f"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/decisions/DEC-PLG-001.md",
+      "reviewed_source_sha256": "2d992518c43f11fb74c9f6f6ed38154fbcaccd2182719eb884dc3fca41fe6671"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/decisions/DEC-PLG-002.md",
+      "reviewed_source_sha256": "3e3fa890514c93e12a84c5b369021ce702ff9b8bf5d9b2cffbcb2e54676d76cf"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-008.md",
+      "reviewed_source_sha256": "8a41431e898bfd2d22454e4588f0b2d50acdb7b55118bf13dc75681bb1e1dc5e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-009.md",
+      "reviewed_source_sha256": "f317131c8f31c585f86fa6c915d8134b4c39935ffd836aa60664bf7865047202"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-010.md",
+      "reviewed_source_sha256": "b84ad8d9d30eb9dd4ab34c0f76a440e24570f90559ecae349a45ab800dbe21dc"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-011.md",
+      "reviewed_source_sha256": "5bedd314ccad8ebb6927e7be9c59c202d8a1b45642fe59ba097262c40cabcc48"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-012.md",
+      "reviewed_source_sha256": "5557dc97e047ea3f049e180e69aa7035589011865426129edf8183aca1306bb9"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-013.md",
+      "reviewed_source_sha256": "1ea1d5711c3028e274038f87fa4f55df40ac79687b6a25e761cd13e3cb51ffe1"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-014.md",
+      "reviewed_source_sha256": "2e7129c46bcb19f12456b19daaad0051cc53abb9d46bf3cce6c8ee8dd433f647"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-024.md",
+      "reviewed_source_sha256": "335fe4ef652c85ba59ecc70db12a4abfdd3b23cf59eaf2c6e8523b794fd53356"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-005.md",
+      "reviewed_source_sha256": "1a610ac0d6a7ba0cb94204733d4dfe41be61c6e245b18f037f495752b6d97144"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-006.md",
+      "reviewed_source_sha256": "4c7a236b64f46bf3476d935b37935a1dffbb08ba21c4b870de0864585c897298"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-007.md",
+      "reviewed_source_sha256": "8a40c9a0a6a960a409198a80c5514dcfad7d76a99842e4cc42ee594b0e28a147"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-008.md",
+      "reviewed_source_sha256": "80bb46c66cdc31e7bad4d5e3d0472a66d523ad4379086e1f82b116157e63b0f8"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-014.md",
+      "reviewed_source_sha256": "1374a4b9fba12abe89703952e0c75d9c5c3841f0fe52c7f9a269e01f792c7aa1"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-005.md",
+      "reviewed_source_sha256": "766cc0f7377253dfdc38056a5c59c4e55dd83b1978b5dee09f35a545d4c0c99f"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-006.md",
+      "reviewed_source_sha256": "aed12fff03b0ce29827f45438f6cca6c7a1f606deead9a8434c3d95c091c8ef4"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-007.md",
+      "reviewed_source_sha256": "da275a3a17526cd367b98d29e96f003b5077d9f22978fb68f8ffc79be5f36bc7"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-008.md",
+      "reviewed_source_sha256": "66abfe28db587ea9d17187405771802ec432eb25b9b5af8f4ce55e67a84b27a7"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-014.md",
+      "reviewed_source_sha256": "5091e37ace159e031fa50755b547122206ed16b1fe0d218086b62026fc895915"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-005.md",
+      "reviewed_source_sha256": "de070d9bfc8570a35460621f9f55bc23c2e4da32654a29a25ce1600900dad19e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-006.md",
+      "reviewed_source_sha256": "4dd75f9b1d6e499f3c0451418708cb18e66f4d4b3ae69a87ee8c1f8490826e6f"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-008.md",
+      "reviewed_source_sha256": "dcae3ebd792b447d908bcabd693861f331d1a0f5ee7a00a3d5357615085e24e3"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-014.md",
+      "reviewed_source_sha256": "891836cf03b1547e62fea2220e21ec616aa7d8cdb5416f41d888c148e798cd8a"
+    }
+  ],
+  "authorization": [
+    "i approve the packets, i authorize the work",
+    "we will merge later: GO for WO-PLG-007  and then WO-PLG-008"
+  ],
+  "reserved": [
+    "WO completion",
+    "VREC preparation",
+    "verification",
+    "release",
+    "merge"
+  ],
+  "preview_correction": "The initial 17-definition preview was refused with WEX201/E008. Add the three reviewed verification contracts required for the shared architecture coverage; 20-definition preview and application passed. No blocked preview was applied."
+}

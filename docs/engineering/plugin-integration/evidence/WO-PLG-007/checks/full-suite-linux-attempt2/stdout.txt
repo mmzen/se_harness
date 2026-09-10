@@ -1,0 +1,498 @@
+docs/notes/diagnostic-codes.md matches the source
+WEX_SCALE artifacts=100 validation=0.034528s focus=0.585436s plan=0.082211s
+WEX_SCALE artifacts=500 validation=0.143620s focus=0.633839s plan=0.315239s
+======================================================================
+FAIL: test_hash_bound_integrity.FailClosedTests.test_failed_attribute_resolution_fails_closed
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 1096, in test_failed_attribute_resolution_fails_closed
+    self.assertIn("check-attr exited 128", detail)
+AssertionError: 'check-attr exited 128' not found in 'git ls-files exited 128: fatal: not a git repository: /mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness/.git/worktrees/se-harness-plugin-session-context'
+
+======================================================================
+FAIL: test_hash_bound_integrity.CheckContractTests.test_details_are_bounded_and_disclose_nothing
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 486, in test_details_are_bounded_and_disclose_nothing
+    self.assertNotIn(secret, lowered, detail)
+AssertionError: 'users/' unexpectedly found in 'git ls-files exited 128: fatal: not a git repository: /mnt/c/users/mathi/documents/codex/2026-09-04/hel/work/se-harness-plugin-session-context/c:/users/mathi/documents/codex/2026-09-04/hel/work/se_harness/.git/worktrees/se-harness-plugin-session-context' : git ls-files exited 128: fatal: not a git repository: /mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness/.git/worktrees/se-harness-plugin-session-context
+
+======================================================================
+FAIL: test_hash_bound_integrity.RepositoryAssessmentTests.test_this_repository_passes_every_check
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 497, in test_this_repository_passes_every_check
+    self.assertTrue(passed, f"{name}: {detail}")
+AssertionError: False is not true : hash-bound-class-declared: git ls-files exited 128: fatal: not a git repository: /mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness/.git/worktrees/se-harness-plugin-session-context
+
+======================================================================
+FAIL: test_dashboard_webui.DashboardWebUIContractTests.test_release_proof_fields_reach_the_summary_and_compact_topology
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_dashboard_webui.py", line 450, in test_release_proof_fields_reach_the_summary_and_compact_topology
+    self.assertEqual("https://github.com/mmzen/se_harness", summary["repository"].get("source_url"))
+AssertionError: 'https://github.com/mmzen/se_harness' != None
+
+======================================================================
+ERROR: test_release_orchestration.DistributionManifestTests.test_manifest_producer_hashes_exact_files_and_candidate_tree
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_release_orchestration.py", line 133, in test_manifest_producer_hashes_exact_files_and_candidate_tree
+    commit = git(REPOSITORY_ROOT, "-c", f"safe.directory={REPOSITORY_ROOT.as_posix()}", "rev-parse", "HEAD")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', '-c', 'safe.directory=/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', 'rev-parse', 'HEAD']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.FailClosedTests.test_absent_attributes_file_fails_closed
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 996, in test_absent_attributes_file_fails_closed
+    root = self.repository(directory)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 991, in repository
+    build_source(root, committed_attributes() if attributes is None else attributes)
+                       ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.FailClosedTests.test_empty_template_class_is_vacuously_declared
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 1055, in test_empty_template_class_is_vacuously_declared
+    build_source(root, committed_attributes(), files)
+                       ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.FailClosedTests.test_empty_template_class_still_requires_its_attribute_rule
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 1066, in test_empty_template_class_still_requires_its_attribute_rule
+    attributes = committed_attributes().replace(
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.FailClosedTests.test_invalid_utf8_attributes_file_fails_closed
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 1013, in test_invalid_utf8_attributes_file_fails_closed
+    root = self.repository(directory)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 991, in repository
+    build_source(root, committed_attributes() if attributes is None else attributes)
+                       ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.FailClosedTests.test_no_condition_is_advisory
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 1109, in test_no_condition_is_advisory
+    root = self.repository(directory)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 991, in repository
+    build_source(root, committed_attributes() if attributes is None else attributes)
+                       ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.FailClosedTests.test_unreadable_attributes_file_fails_closed
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 1004, in test_unreadable_attributes_file_fails_closed
+    root = self.repository(directory)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 991, in repository
+    build_source(root, committed_attributes() if attributes is None else attributes)
+                       ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.FailClosedTests.test_untracked_declared_path_fails_closed
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 1040, in test_untracked_declared_path_fails_closed
+    build_source(root, committed_attributes() + b"notes/*.txt text eol=lf\n")
+                       ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.AttributeEffectivenessTests.test_absent_attribute_is_ineffective
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 892, in test_absent_attribute_is_ineffective
+    attributes = committed_attributes().replace(
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.AttributeEffectivenessTests.test_baseline_attributes_are_effective
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 888, in test_baseline_attributes_are_effective
+    observed = self.assess_with_attributes(committed_attributes())
+                                           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.AttributeEffectivenessTests.test_duplicate_identical_rule_in_both_regions_stays_effective
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 964, in test_duplicate_identical_rule_in_both_regions_stays_effective
+    attributes = committed_attributes() + b"docs/engineering/**/evidence/*.json text eol=lf\n"
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.AttributeEffectivenessTests.test_hostile_attribute_content_is_read_not_executed
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 970, in test_hostile_attribute_content_is_read_not_executed
+    committed_attributes()
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.AttributeEffectivenessTests.test_more_specific_crlf_override_is_ineffective
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 911, in test_more_specific_crlf_override_is_ineffective
+    attributes = committed_attributes() + b"docs/engineering/x/evidence/*.json text eol=crlf\n"
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.AttributeEffectivenessTests.test_more_specific_negated_text_override_is_ineffective
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 902, in test_more_specific_negated_text_override_is_ineffective
+    attributes = committed_attributes() + b"docs/engineering/x/evidence/*.json -text\n"
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.InventoryReconciliationTests.test_an_undeclared_hash_bound_field_fails_the_declared_check
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 678, in test_an_undeclared_hash_bound_field_fails_the_declared_check
+    build_source(root, committed_attributes())
+                       ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.InventoryReconciliationTests.test_an_untracked_artifact_cannot_introduce_a_field
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 694, in test_an_untracked_artifact_cannot_introduce_a_field
+    build_source(root, committed_attributes())
+                       ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.InventoryReconciliationTests.test_front_matter_beyond_the_bounded_read_is_still_scanned
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 705, in test_front_matter_beyond_the_bounded_read_is_still_scanned
+    build_source(root, committed_attributes())
+                       ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.InventoryReconciliationTests.test_invalid_utf8_artifact_fails_closed
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 733, in test_invalid_utf8_artifact_fails_closed
+    build_source(root, committed_attributes())
+                       ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.InventoryReconciliationTests.test_unterminated_front_matter_fails_closed
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 720, in test_unterminated_front_matter_fails_closed
+    build_source(root, committed_attributes())
+                       ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: setUpClass (test_hash_bound_integrity.ByteExactSurfaceTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 542, in setUpClass
+    cls.tracked = hash_bound.tracked_paths(ROOT)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/se_harness/hash_bound.py", line 312, in tracked_paths
+    output = _git(root, ["ls-files", "-z"])
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/se_harness/hash_bound.py", line 299, in _git
+    raise HashBoundError(
+se_harness.hash_bound.HashBoundError: git ls-files exited 128: fatal: not a git repository: /mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness/.git/worktrees/se-harness-plugin-session-context
+
+======================================================================
+ERROR: setUpClass (test_hash_bound_integrity.FreshCheckoutMatrixTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 810, in setUpClass
+    build_source(cls.source, committed_attributes())
+                             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.RepositoryAssessmentTests.test_assessment_is_read_only
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 507, in test_assessment_is_read_only
+    status_before = git(ROOT, "status", "--porcelain", binary=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'status', '--porcelain']' returned non-zero exit status 128.
+
+======================================================================
+ERROR: test_hash_bound_integrity.SafetyTests.test_a_symlinked_covered_path_changes_nothing
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 1403, in test_a_symlinked_covered_path_changes_nothing
+    build_source(root, committed_attributes())
+                       ^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/test_hash_bound_integrity.py", line 136, in committed_attributes
+    return git(ROOT, "cat-file", "blob", "HEAD:.gitattributes", binary=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 51, in git
+    completed = run_git(root, *arguments, check=check, env=env)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context/tests/git_support.py", line 35, in run_git
+    return subprocess.run(
+           ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-session-context', '-c', 'commit.gpgsign=false', 'cat-file', 'blob', 'HEAD:.gitattributes']' returned non-zero exit status 128.
+
+----------------------------------------------------------------------
+Ran 1116 tests in 848.510s (175 classes, 4 workers)
+
+FAILED (failures=4, errors=23, skipped=6)

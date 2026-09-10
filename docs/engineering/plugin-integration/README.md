@@ -4,8 +4,9 @@ These deliveries introduce the plugin packets from [PR #416](https://github.com/
 
 ## Shared assembly and runtime definitions (D03)
 
-WO-PLG-001 is implemented. WO-PLG-002 remains draft; introducing its approved
-definitions does not start its implementation.
+WO-PLG-001 and WO-PLG-002 are implemented. Their verified records are
+[VREC-PLG-003](verification-records/VREC-PLG-003.md) and
+[VREC-PLG-004](verification-records/VREC-PLG-004.md).
 
 [VREC-PLG-003](verification-records/VREC-PLG-003.md) is verified following the
 operator's assurance decision for WO-PLG-001 at candidate `b8d6f04a`.
@@ -29,4 +30,17 @@ Repository integration or release requires a separate delivery decision.
 - [Verification contract: Claude Code compatibility evidence](verification/VER-PLG-004.md)
 - [Work order: probe Claude Code activation in isolated fixtures](work-orders/WO-PLG-004.md)
 
-See the [definition-delivery plan](../../notes/plugin-definition-delivery-2026-09-08.md) for the remaining introductions. Production adapters and support decisions are separate work.
+## Shared session and tool handlers (D04)
+
+The operator accepted [DEC-PLG-001](decisions/DEC-PLG-001.md) and
+[DEC-PLG-002](decisions/DEC-PLG-002.md) for the tested Windows activation routes.
+The shared definitions are approved. WO-PLG-007 is in progress; WO-PLG-008 and
+the production adapter/helper work orders remain draft in this delivery.
+
+- [Session contract](specifications/SPEC-PLG-007.md), [verification](verification/VER-PLG-007.md), [WO-PLG-007](work-orders/WO-PLG-007.md), and [evidence](evidence/WO-PLG-007/README.md)
+- [Tool-action contract](specifications/SPEC-PLG-008.md), [verification](verification/VER-PLG-008.md), and [WO-PLG-008](work-orders/WO-PLG-008.md)
+- [Host architecture](architecture/ARCH-PLG-002.md) and [decision](architecture/adr/ADR-PLG-002.md)
+- [Codex adapter](work-orders/WO-PLG-005.md), [Claude adapter](work-orders/WO-PLG-006.md), and [optional helpers](work-orders/WO-PLG-014.md): definitions only
+
+The remaining introductions and notes are in [PR #416](https://github.com/mmzen/se_harness/pull/416).
+Shared handler fixtures do not qualify native host delivery or universal interception.

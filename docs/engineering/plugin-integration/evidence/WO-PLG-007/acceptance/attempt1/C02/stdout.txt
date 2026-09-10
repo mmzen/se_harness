@@ -1,0 +1,5 @@
+{"hookSpecificOutput": {"hookEventName": "SessionStart", "additionalContext": "Verity Plane governance context is UNREADY. Stop governed work. released evaluator identity refused; inspect its findings"}}
+
+{"hookSpecificOutput": {"hookEventName": "SessionStart", "additionalContext": "Verity Plane governance context is UNREADY. Stop governed work. repository integrity refused; inspect doctor findings"}}
+
+{"hookSpecificOutput": {"hookEventName": "SessionStart", "additionalContext": "Verity Plane governance context is UNREADY. Stop governed work. repository integrity refused; inspect doctor findings"}}
