@@ -351,7 +351,15 @@ class Acceptance:
                 removed.rename(interpreter)
         finally:
             s.dump(self.f['config_path'], self.f['config'])
-        self.save('Missing runtime returns setup guidance without interpreter call; wrong installed evaluator remains unready.',
+        try:
+            for name,path in [('root-relative-environment',self.f['config']['environment'][2:]),
+                              ('drive-relative-environment','C:private plugin data/evaluator')]:
+                s.dump(self.f['config_path'],dict(self.f['config'],environment=path))
+                result,debug=self.host(name,'Say runtime observation. Do not use tools.')
+                findings.append({'step':name,'selected_environment':path,'receipts':assess_capture.hooks(result,'SessionStart')})
+        finally:
+            s.dump(self.f['config_path'],self.f['config'])
+        self.save('Missing runtime returns setup guidance without interpreter call; wrong installed evaluator remains unready; ambiguous binding paths refuse before Python.',
                   {'observations': findings, 'removal_variant': 'only task-owned private environment interpreter renamed then restored'},
                   'unavailable')
 
@@ -402,8 +410,10 @@ class Acceptance:
             observation.update(mode=mode, blocking_control='none observed' if observation['effect_count'] else 'undetermined: inspect host output',
                                classification='unqualified when required denial absent')
             findings.append(observation)
+        removed = self.removed_guard_observation()
+        findings.append(removed['effect'])
         self.save('Inspect target effects when guard startup/output is missing; missing refusal never establishes protection.',
-                  {'variants': findings}, 'fail' if any(x['tool_calls'] and not x['denial_observed'] for x in findings) else 'unavailable')
+                  {'variants': findings, 'guard_removal_after_readiness':removed}, 'fail' if any(x['tool_calls'] and not x['denial_observed'] for x in findings) else 'unavailable')
 
     def C12(self):
         self.case('C12')
@@ -421,8 +431,7 @@ class Acceptance:
         self.save('Actual loaded asynchronous or insufficient-timeout bindings are rejected regardless of isolated check outcomes.',
                   {'bindings':findings}, 'pass' if all(not x['eligible_for_live_assessment'] and not x['qualified'] for x in findings) else 'fail')
 
-    def C11_removed(self):
-        self.case('C11')
+    def removed_guard_observation(self):
         plugin = self.variant('guard removed after readiness')
         ready, debug = self.host('before-guard-removal', 'Say current runtime observed. Do not use tools.', plugin=plugin)
         receipts = self.context_receipts(ready, debug)
@@ -434,8 +443,13 @@ class Acceptance:
                     'removed': 'inline PreToolUse binding', 'removed_monotonic': time.monotonic(),
                     'activation_boundary': 'readiness session ended; binding removed before the next native activation; no same-process hot-reload claim'}
         result, debug, observation = self.edit('guard-removed-after-readiness', plugin=plugin)
+        return {'readiness_receipts': receipts, 'binding_removal': mutation, 'effect':observation}
+
+    def C11_removed(self):
+        self.case('C11')
+        removed=self.removed_guard_observation()
         self.save('Observe a verified ready startup, remove that disposable inline guard binding, then inspect the next exact Write without inferring refusal.',
-                  {'readiness_receipts': receipts, 'binding_removal': mutation, 'variants': [observation]},
+                  {**removed,'variants':[removed['effect']]},
                   'unavailable')
 
 

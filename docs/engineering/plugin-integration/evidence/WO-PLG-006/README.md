@@ -5,12 +5,18 @@ tests are implemented, and all C01-C12 observations have been collected. C10 and
 C11 failed enforcement and remain unqualified. No supported production profile,
 completion, verification, release or merge is claimed by this evidence.
 
+The subsequent [path-validation correction](path-validation/README.md) changes
+production guard bytes. The matrix below describes retained acceptance-04/05;
+new package binding and native observations for the correction are pending.
+The separate [Linux rehearsal failure](governance/linux-rehearsal-failure/README.md)
+occurred in shared scratch cleanup outside this work order's correction scope.
+
 The accepted compatibility boundary remains Claude Code 2.1.266, Windows,
 Python 3.14.6 and evaluator 0.16.0. Repository governance uses released 0.17.0
 separately. The five packaged shared skills are explicitly namespaced; this work
 does not qualify overlap with repository-managed skill copies or implement WO009.
 
-## Current case results
+## Retained case results before the path correction
 
 Each canonical `Cnn/` directory contains the required actions, stdout, stderr and
 observations. It points back to immutable attempt captures. `reassessment.json`
@@ -40,7 +46,7 @@ case verdicts and qualification are recorded separately.
 
 ## Candidate and methods
 
-Baseline production bytes have not changed since `1f51da0b`. Attempt 04 packages
+The earlier production baseline was `1f51da0b`. Attempt 04 packages
 source `84c5987054cc0c38410f7ce31951ac2e9b93f242` as
 `e7ce223f9a7996ec167313e1d054f8b72c583b72fc08a6e4cb02f6dfafb8eaee`.
 Attempt 05 uses a later evidence-only source revision. The 46 source-to-package-

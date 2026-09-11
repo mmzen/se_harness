@@ -12,7 +12,9 @@ function Envelope([string]$message, [bool]$deny) {
   return @{hookSpecificOutput=@{hookEventName='PreToolUse';additionalContext=$message}}
 }
 function Absolute([string]$value) {
-  if ([string]::IsNullOrWhiteSpace($value) -or -not [IO.Path]::IsPathRooted($value) -or $value -match '(^|[\\/])\.\.([\\/]|$)' -or $value -match '[\x00-\x1f]') { throw 'Select an absolute ordinary binding path.' }
+  if ([string]::IsNullOrWhiteSpace($value) -or $value -match '(^|[\\/])\.\.([\\/]|$)' -or $value -match '[\x00-\x1f]' -or $value -match '^[\\/]{2}[?.][\\/]') { throw 'Select an absolute ordinary binding path.' }
+  $pathRoot = [IO.Path]::GetPathRoot($value)
+  if ($pathRoot -notmatch '^[A-Za-z]:[\\/]$' -and $pathRoot -notmatch '^[\\/]{2}[^\\/]+[\\/][^\\/]+[\\/]?$') { throw 'Select a fully qualified ordinary binding path; drive-relative and root-relative paths are unsupported.' }
   $p = [IO.Path]::GetFullPath($value)
   $walk = $p
   while ($walk) {

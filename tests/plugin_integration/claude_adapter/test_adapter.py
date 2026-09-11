@@ -106,6 +106,48 @@ class BindingTests(unittest.TestCase):
         self.assertIn('actual environment interpreter',record['error'])
         self.assertNotIn('argv',record)
 
+    def test_ambiguous_windows_paths_never_invoke_interpreter_or_receiver(self):
+        # The copied interpreter/cfg supplies only a receiving-side calibration,
+        # not a released evaluator environment or readiness proof.
+        environment=self.f['space']/'path receiver environment'
+        (environment/'Scripts').mkdir(parents=True,exist_ok=True)
+        shutil.copyfile(s.PYTHON,environment/'Scripts/python.exe')
+        shutil.copyfile(s.PYTHON.parent.parent/'pyvenv.cfg',environment/'pyvenv.cfg')
+        config=dict(self.f['config'],environment=str(environment))
+        marker=self.f['space']/'path-receiver-marker.txt'
+        script=self.f['plugin']/'scripts/check-tool-action.py'
+        original=script.read_bytes()
+        try:
+            script.write_text('from pathlib import Path\nPath('+repr(str(marker))+').write_text("received")\nprint(\'{"hookSpecificOutput":{"hookEventName":"PreToolUse","additionalContext":"receiver observed"}}\')\n',encoding='utf8')
+            s.dump(self.f['config_path'],config)
+            control=s.direct(self.f,s.event(self.f,'PreToolUse'))
+            self.assertTrue(marker.exists(),control['stderr'])
+            marker.unlink()
+            variants=[('environment',environment.drive+'path receiver environment'),
+                      ('environment',str(environment)[2:]),
+                      ('repo',self.f['repo'].drive+'disposable repository'),
+                      ('repo',str(self.f['repo'])[2:]),
+                      ('host_executable',str(s.CLAUDE)[2:]),
+                      ('binding',str(self.f['config_path'])[2:]),
+                      ('plugin',str(self.f['plugin'])[2:]),
+                      ('cwd',str(self.f['repo'])[2:])]
+            for field,value in variants:
+                with self.subTest(field=field,value=value):
+                    fixture={**self.f,'env':dict(self.f['env'])}
+                    selected=dict(config)
+                    event=s.event(self.f,'PreToolUse')
+                    if field=='binding': fixture['env']['VERITY_PLANE_CLAUDE_BINDING']=value
+                    elif field=='plugin': fixture['env']['CLAUDE_PLUGIN_ROOT']=value
+                    elif field=='cwd': event['cwd']=value
+                    else: selected[field]=value
+                    s.dump(self.f['config_path'],selected)
+                    result=s.direct(fixture,event)
+                    self.assertTrue(s.denied(result),result['stderr'])
+                    self.assertFalse(s.guard_record(result)['interpreter_invoked'])
+                    self.assertFalse(marker.exists(),'invalid path reached receiver')
+        finally:
+            script.write_bytes(original)
+
     def test_profile_and_loaded_binding_cannot_self_qualify(self):
         loaded = json.loads((s.ADAPTER / 'hooks/hooks.json').read_text())
         observed = {'host': '2.1.266', 'os': 'Windows', 'python': '3.14.6', 'evaluator': '0.16.0'}

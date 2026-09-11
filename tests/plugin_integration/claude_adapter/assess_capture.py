@@ -101,7 +101,8 @@ def assess(case, *, rows=None, original=None):
         missing=lambda hs:any(h['guard'].get('interpreter_invoked') is False and 'SETUP REQUIRED' in h['output'].get('additionalContext','') for h in hs)
         wrong=any(h['guard'].get('interpreter_invoked') is True and any('released evaluator identity refused' in x.get('error','') for x in h['handler']) for h in observations[1])
         ready=any(any(x.get('status')=='complete-output-prepared' for x in h['handler']) for h in observations[2])
-        found.update(observations=observations,correction='Wrong identity is an identity refusal, not setup-required. Earlier debug-substring flags are superseded by these actual hook outputs.',conclusion='pass' if len(observations)==4 and missing(observations[0]) and wrong and ready and missing(observations[3]) else 'fail')
+        paths_rejected=all(any(h['guard'].get('interpreter_invoked') is False and 'fully qualified ordinary binding path' in h['guard'].get('error','') for h in hs) for hs in observations[4:])
+        found.update(observations=observations,ambiguous_paths_observed=len(observations)-4,ambiguous_paths_rejected=paths_rejected,correction='Wrong identity is an identity refusal, not setup-required. Earlier debug-substring flags are superseded by these actual hook outputs.',conclusion='pass' if len(observations)>=4 and paths_rejected and missing(observations[0]) and wrong and ready and missing(observations[3]) else 'fail')
     elif name in ('C09','C10','C11','C12'):
         observations=[edit(r) for r in rows]
         if name=='C09':
