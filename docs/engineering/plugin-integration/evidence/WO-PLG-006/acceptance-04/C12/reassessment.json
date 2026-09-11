@@ -1,0 +1,1143 @@
+{
+  "source": "native system/hook_response stdout+stderr and correlated tool_use/tool_result objects",
+  "qualification": false,
+  "case": "C12",
+  "loaded_mutation_and_static_rejection": true,
+  "observations": [
+    {
+      "uses": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01GoizPKBkLHhCx15EUxVQLH",
+          "name": "Write",
+          "input": {
+            "file_path": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-04/disposable repository/governed-target.txt",
+            "content": "effect-timeout\n"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "results": [
+        {
+          "tool_use_id": "toolu_01GoizPKBkLHhCx15EUxVQLH",
+          "type": "tool_result",
+          "content": "The file C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-04/disposable repository/governed-target.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+        }
+      ],
+      "decisions": [],
+      "exact_requested_write": true,
+      "native_Write_hooks": [
+        {
+          "id": "49a6c66e-a216-45f8-8f63-7fbc4bdfab52",
+          "outcome": "cancelled",
+          "exit": 1,
+          "output": {},
+          "elapsed_seconds": 1.158862099982798
+        }
+      ],
+      "target_key": "governed-target.txt",
+      "expected_sha256": "9c62dd1a0abf078c2eb66780aff84bbd8e0b9ca8fddd3f1ca12010ac21391b09",
+      "expected_target_effect": true,
+      "successful_Write_results": 1,
+      "final_target_hashes_before": {
+        "governed-target.txt": "a1d73198c43eb4003978c8574befddc64999c02de5b8cf92fc79ad1e46356aaa",
+        "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+      },
+      "final_target_hashes_after": {
+        "governed-target.txt": "9c62dd1a0abf078c2eb66780aff84bbd8e0b9ca8fddd3f1ca12010ac21391b09",
+        "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+      }
+    },
+    {
+      "uses": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01WycTJVmeLqTWhDHTbXzkXF",
+          "name": "Write",
+          "input": {
+            "file_path": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-04/disposable repository/governed-target.txt",
+            "content": "effect-async\n"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "results": [
+        {
+          "tool_use_id": "toolu_01WycTJVmeLqTWhDHTbXzkXF",
+          "type": "tool_result",
+          "content": "The file C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-04/disposable repository/governed-target.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+        }
+      ],
+      "decisions": [
+        {
+          "tool_use_id": "toolu_01WycTJVmeLqTWhDHTbXzkXF",
+          "denied": false,
+          "hook": {
+            "id": "bdad0dee-0d20-4b33-9b50-7ebb7abeb87e",
+            "name": "PreToolUse:Write",
+            "event": "PreToolUse",
+            "outcome": "success",
+            "exit": 0,
+            "output": {
+              "hookEventName": "PreToolUse",
+              "additionalContext": "Current evaluator checks passed for WO-PROBE-001. Host permissions and accountable decisions remain required."
+            },
+            "guard": {
+              "adapter": "verity-plane-claude-v1",
+              "status": "shared-response",
+              "interpreter_invoked": true,
+              "entered_monotonic": 241561.7526946,
+              "event": "PreToolUse",
+              "tool_use_id": "toolu_01WycTJVmeLqTWhDHTbXzkXF",
+              "tool_name": "Write",
+              "profile_argv": [
+                "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\private plugin data\\evaluator\\Scripts\\python.exe",
+                "-I",
+                "-B",
+                "-c",
+                "import sys; print(sys.version.split()[0])"
+              ],
+              "observed_python": "3.14.6",
+              "argv": [
+                "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\private plugin data\\evaluator\\Scripts\\python.exe",
+                "-I",
+                "-B",
+                "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\C12\\async\\scripts\\check-tool-action.py",
+                "--repo",
+                "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\disposable repository",
+                "--environment",
+                "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\private plugin data\\evaluator",
+                "--version",
+                "0.16.0",
+                "--payload-sha256",
+                "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+                "--archive-sha256",
+                "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+                "--host",
+                "claude",
+                "--artifact",
+                "WO-PROBE-001",
+                "--refusal-mode",
+                "deny",
+                "--host-timeout",
+                "60",
+                "--inner-timeout",
+                "35",
+                "--startup-margin",
+                "5",
+                "--cleanup-margin",
+                "5",
+                "--output-margin",
+                "5"
+              ],
+              "script_start_ms": 622.4101,
+              "script_exit": 0,
+              "script_end_ms": 2859.5096000000003,
+              "response": {
+                "hookSpecificOutput": {
+                  "hookEventName": "PreToolUse",
+                  "additionalContext": "Current evaluator checks passed for WO-PROBE-001. Host permissions and accountable decisions remain required."
+                }
+              },
+              "finished_ms": 2877.0993000000003,
+              "response_written_monotonic": 241564.6337346
+            },
+            "handler": [
+              {
+                "status": "checked",
+                "coverage": "mapped",
+                "checks": [
+                  {
+                    "argv": [
+                      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\private plugin data\\evaluator\\Scripts\\python.exe",
+                      "-I",
+                      "-B",
+                      "-m",
+                      "se_harness",
+                      "identity",
+                      "--role",
+                      "released-evaluator",
+                      "--expected-version",
+                      "0.16.0",
+                      "--expected-root",
+                      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\private plugin data\\evaluator",
+                      "--checkout-root",
+                      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\disposable repository",
+                      "--entry-point",
+                      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\private plugin data\\evaluator\\Scripts\\harnessctl.exe",
+                      "--require-entry-point",
+                      "--require-isolated-python",
+                      "--evaluator-payload-sha256",
+                      "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+                      "--evaluator-wheel-sha256",
+                      "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+                      "--json"
+                    ],
+                    "started_monotonic": 241562.5865745,
+                    "inner_deadline_monotonic": 241597.4549377,
+                    "exit_status": 0,
+                    "result": {
+                      "candidate_commit": null,
+                      "checkout_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\disposable repository",
+                      "diagnostics": [],
+                      "distribution_origin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\private plugin data\\evaluator\\Lib\\site-packages",
+                      "entry_point_origin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\private plugin data\\evaluator\\Scripts\\harnessctl.exe",
+                      "evaluator_archive_name": "se_harness-0.16.0-py3-none-any.whl",
+                      "evaluator_archive_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+                      "evaluator_payload_manifest": "se-harness-installed-payload-v1",
+                      "evaluator_payload_sha256": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+                      "evaluator_wheel_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+                      "expected_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\private plugin data\\evaluator",
+                      "harness_version": "0.16.0",
+                      "isolated_python": true,
+                      "module_origin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\private plugin data\\evaluator\\Lib\\site-packages\\se_harness\\runtime_identity.py",
+                      "passed": true,
+                      "python_binary_position": "within-expected-root",
+                      "python_binary_sha256": "199ce15a9f0d4f9522edba59338e4879d28cf61f88e377b8164bcb716275ed22",
+                      "python_entry_is_link": false,
+                      "python_executable": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\private plugin data\\evaluator\\Scripts\\python.exe",
+                      "python_version": "3.14.6",
+                      "pythonpath_present": false,
+                      "role": "released-evaluator",
+                      "schema": "se-harness-runtime-identity-v3",
+                      "template_origin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\private plugin data\\evaluator\\share\\se-harness\\templates\\repository\\standard",
+                      "user_site_enabled": false
+                    },
+                    "stderr": "",
+                    "pid": 13468,
+                    "resumed_monotonic": 241562.629256,
+                    "cleanup_started_monotonic": 241563.1046112,
+                    "cleanup": {
+                      "before_cleanup": {
+                        "total_processes": 2,
+                        "active_processes": 0,
+                        "exited_processes": 2
+                      },
+                      "total_processes": 2,
+                      "active_processes": 0,
+                      "exited_processes": 2,
+                      "method": "owned Windows Job Object"
+                    },
+                    "cleanup_finished_monotonic": 241563.1050777,
+                    "finished_monotonic": 241563.1051276
+                  },
+                  {
+                    "argv": [
+                      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\private plugin data\\evaluator\\Scripts\\python.exe",
+                      "-I",
+                      "-B",
+                      "-m",
+                      "se_harness",
+                      "doctor",
+                      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\disposable repository",
+                      "--json"
+                    ],
+                    "started_monotonic": 241563.105402,
+                    "inner_deadline_monotonic": 241597.4549377,
+                    "exit_status": 0,
+                    "result": {
+                      "checks": [
+                        {
+                          "detail": "required",
+                          "name": "AGENTS.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "required",
+                          "name": "CLAUDE.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "required",
+                          "name": "ENGINEERING_HARNESS.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "@AGENTS.md",
+                          "name": "claude-import",
+                          "passed": true
+                        },
+                        {
+                          "detail": ".engineering-harness.toml",
+                          "name": "config",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:.agents/skills/harness-operator-brief/SKILL.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:.agents/skills/harness-operator-brief/scripts/check_brief.py",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:.agents/skills/harness-operator-brief/skill-contract.json",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:.agents/skills/harness-orient/SKILL.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:.agents/skills/harness-orient/scripts/orient.py",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:.agents/skills/harness-orient/skill-contract.json",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:.claude/skills/harness-orient/SKILL.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:.engineering-harness.toml",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:.gitattributes",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:.github/workflows/engineering-harness.yml",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:.gitignore",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:AGENTS.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:CLAUDE.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:ENGINEERING_HARNESS.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/ARTIFACT_AUTHORING.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/DECISION_RIGHTS.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/OPERATING_CARD.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/QUALITY_GATES.json",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/QUALITY_GATES.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/TECHNICAL_COMMUNICATION.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/TRACEABILITY.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/WORKFLOW.json",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/WORKFLOW.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/templates/ADR.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/templates/ARCHITECTURE.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/templates/CAPABILITY.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/templates/DECISION.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/templates/INTENT.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/templates/OPERATING_CONTRACT.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/templates/README.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/templates/RELEASE_CONTRACT.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/templates/RELEASE_RECORD.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/templates/REQUIREMENT.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/templates/SPECIFICATION.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/templates/VERIFICATION.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/templates/VERIFICATION_RECORD.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "matches distribution",
+                          "name": "distribution:docs/engineering/templates/WORK_ORDER.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "required",
+                          "name": "docs/engineering/ARTIFACT_AUTHORING.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "required",
+                          "name": "docs/engineering/DECISION_RIGHTS.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "required",
+                          "name": "docs/engineering/OPERATING_CARD.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "required",
+                          "name": "docs/engineering/QUALITY_GATES.json",
+                          "passed": true
+                        },
+                        {
+                          "detail": "required",
+                          "name": "docs/engineering/QUALITY_GATES.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "required",
+                          "name": "docs/engineering/README.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "required",
+                          "name": "docs/engineering/TECHNICAL_COMMUNICATION.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "required",
+                          "name": "docs/engineering/TRACEABILITY.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "required",
+                          "name": "docs/engineering/WORKFLOW.json",
+                          "passed": true
+                        },
+                        {
+                          "detail": "required",
+                          "name": "docs/engineering/WORKFLOW.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": ".engineering-harness.lock",
+                          "name": "lock",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:.agents/skills/harness-operator-brief/SKILL.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:.agents/skills/harness-operator-brief/scripts/check_brief.py",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:.agents/skills/harness-operator-brief/skill-contract.json",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:.agents/skills/harness-orient/SKILL.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:.agents/skills/harness-orient/scripts/orient.py",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:.agents/skills/harness-orient/skill-contract.json",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:.claude/skills/harness-orient/SKILL.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:.engineering-harness.toml",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:.gitattributes",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:.github/workflows/engineering-harness.yml",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:.gitignore",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:AGENTS.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:CLAUDE.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:ENGINEERING_HARNESS.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/ARTIFACT_AUTHORING.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/DECISION_RIGHTS.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/OPERATING_CARD.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/QUALITY_GATES.json",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/QUALITY_GATES.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/TECHNICAL_COMMUNICATION.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/TRACEABILITY.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/WORKFLOW.json",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/WORKFLOW.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/templates/ADR.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/templates/ARCHITECTURE.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/templates/CAPABILITY.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/templates/DECISION.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/templates/INTENT.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/templates/OPERATING_CONTRACT.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/templates/README.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/templates/RELEASE_CONTRACT.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/templates/RELEASE_RECORD.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/templates/REQUIREMENT.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/templates/SPECIFICATION.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/templates/VERIFICATION.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/templates/VERIFICATION_RECORD.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "unchanged",
+                          "name": "managed:docs/engineering/templates/WORK_ORDER.template.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "3.14.6",
+                          "name": "python",
+                          "passed": true
+                        },
+                        {
+                          "detail": "present",
+                          "name": "seed:.github/PULL_REQUEST_TEMPLATE.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "present",
+                          "name": "seed:GLOSSARY.md",
+                          "passed": true
+                        },
+                        {
+                          "detail": "present",
+                          "name": "seed:docs/engineering/README.md",
+                          "passed": true
+                        }
+                      ],
+                      "command": "doctor",
+                      "outcome": "completed",
+                      "schema": "se-harness-command-result-v1",
+                      "warnings": []
+                    },
+                    "stderr": "",
+                    "pid": 17420,
+                    "resumed_monotonic": 241563.1476641,
+                    "cleanup_started_monotonic": 241563.8790838,
+                    "cleanup": {
+                      "before_cleanup": {
+                        "total_processes": 4,
+                        "active_processes": 0,
+                        "exited_processes": 4
+                      },
+                      "total_processes": 4,
+                      "active_processes": 0,
+                      "exited_processes": 4,
+                      "method": "owned Windows Job Object"
+                    },
+                    "cleanup_finished_monotonic": 241563.8793408,
+                    "finished_monotonic": 241563.879546
+                  },
+                  {
+                    "argv": [
+                      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\private plugin data\\evaluator\\Scripts\\python.exe",
+                      "-I",
+                      "-B",
+                      "-m",
+                      "se_harness",
+                      "check",
+                      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\disposable repository",
+                      "--artifact",
+                      "WO-PROBE-001",
+                      "--checkpoint",
+                      "pre-action",
+                      "--procedure",
+                      "PROC-WO-IMPLEMENT",
+                      "--changes-complete",
+                      "--changed-path",
+                      "governed-target.txt",
+                      "--json"
+                    ],
+                    "started_monotonic": 241563.8877338,
+                    "inner_deadline_monotonic": 241597.4549377,
+                    "exit_status": 0,
+                    "result": {
+                      "schema": "se-harness-workflow-result-v2",
+                      "operation": {
+                        "kind": "check",
+                        "outcome": "completed"
+                      },
+                      "selection": {
+                        "primary": "WO-PROBE-001",
+                        "artifacts": [
+                          "WO-PROBE-001"
+                        ]
+                      },
+                      "scope": {
+                        "mode": "selected",
+                        "governing": [
+                          "CAP-PROBE-001",
+                          "INT-PROBE-001",
+                          "REQ-PROBE-001",
+                          "SPEC-PROBE-001",
+                          "VER-PROBE-001"
+                        ],
+                        "dependencies": [],
+                        "declared_paths": [
+                          "governed-target.txt"
+                        ],
+                        "changed_paths": [
+                          "governed-target.txt"
+                        ],
+                        "change_set_complete": true
+                      },
+                      "compliance": {
+                        "checkpoint": "pre-action",
+                        "workflow_rule_id": "WFL-WO-IMPLEMENT",
+                        "procedure_id": "PROC-WO-IMPLEMENT",
+                        "status": "pass",
+                        "gates": [
+                          {
+                            "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+                            "status": "pass",
+                            "predicates": [
+                              {
+                                "id": "QGP-G4I-STATUS",
+                                "status": "pass",
+                                "evidence": [
+                                  {
+                                    "kind": "artifact",
+                                    "reference": "WO-PROBE-001"
+                                  }
+                                ],
+                                "message": "WO-PROBE-001 status is in_progress."
+                              },
+                              {
+                                "id": "QGP-G4I-GRAPH",
+                                "status": "pass",
+                                "evidence": [
+                                  {
+                                    "kind": "result",
+                                    "reference": "formal-graph:WO-PROBE-001"
+                                  }
+                                ],
+                                "message": "The selected formal graph is valid."
+                              },
+                              {
+                                "id": "QGP-G4I-INTEGRITY",
+                                "status": "pass",
+                                "evidence": [
+                                  {
+                                    "kind": "result",
+                                    "reference": "repository-integrity:pre-action"
+                                  }
+                                ],
+                                "message": "No repository-integrity blocker prevents selected evaluation."
+                              },
+                              {
+                                "id": "QGP-G4I-SCOPE",
+                                "status": "pass",
+                                "evidence": [
+                                  {
+                                    "kind": "artifact",
+                                    "reference": "WO-PROBE-001:[execution_scope]"
+                                  }
+                                ],
+                                "message": "WO-PROBE-001 declares 1 normalized scope path(s)."
+                              },
+                              {
+                                "id": "QGP-G4I-COMPLETE",
+                                "status": "pass",
+                                "evidence": [
+                                  {
+                                    "kind": "result",
+                                    "reference": "declared-change-set:WO-PROBE-001"
+                                  }
+                                ],
+                                "message": "The caller explicitly asserted that the declared change set is complete."
+                              },
+                              {
+                                "id": "QGP-G4I-PATHS",
+                                "status": "pass",
+                                "evidence": [
+                                  {
+                                    "kind": "path",
+                                    "reference": "declared-change-set:WO-PROBE-001"
+                                  }
+                                ],
+                                "message": "All 1 declared changed path(s) are within execution scope."
+                              },
+                              {
+                                "id": "QGP-G4I-PREFLIGHT",
+                                "status": "pass",
+                                "evidence": [
+                                  {
+                                    "kind": "result",
+                                    "reference": "preflight:WO-PROBE-001:review"
+                                  }
+                                ],
+                                "message": "Released-installation review preflight inputs are ready."
+                              },
+                              {
+                                "id": "QGP-G4I-EVIDENCE",
+                                "status": "pass",
+                                "evidence": [
+                                  {
+                                    "kind": "path",
+                                    "reference": "work-order-evidence:WO-PROBE-001"
+                                  }
+                                ],
+                                "message": "Fresh retained evidence is bound at docs/engineering/readiness-probe/evidence/WO-PROBE-001/WO-PROBE-001-pre-action.md."
+                              },
+                              {
+                                "id": "QGP-G4I-DECISION",
+                                "status": "pass",
+                                "evidence": [
+                                  {
+                                    "kind": "result",
+                                    "reference": "decision-register:WO-PROBE-001"
+                                  }
+                                ],
+                                "message": "No open decision blocks WO-PROBE-001."
+                              }
+                            ]
+                          }
+                        ],
+                        "formal_snapshot_sha256": "bd8347dcaa4f5b00b69d6efc5b842a61f311532781cbf3f97ccce47614850b2f",
+                        "change_set_source": "arguments"
+                      },
+                      "procedure": {
+                        "id": "PROC-WO-IMPLEMENT",
+                        "current_step": "STEP-WO-IMPLEMENT-CHECK",
+                        "steps": [
+                          {
+                            "id": "STEP-WO-IMPLEMENT-CHECK",
+                            "kind": "command",
+                            "gate_ids": [
+                              "QG-G4-IMPLEMENTATION-EVIDENCE"
+                            ],
+                            "effects": [
+                              "Evaluated implementation handoff for WO-PROBE-001."
+                            ],
+                            "non_effects": [
+                              "A checkpoint does not complete or verify work."
+                            ],
+                            "argv": [
+                              "harnessctl",
+                              "check",
+                              ".",
+                              "--artifact",
+                              "WO-PROBE-001",
+                              "--checkpoint",
+                              "handoff"
+                            ],
+                            "corrective": {
+                              "QGP-G4I-STATUS": {
+                                "kind": "escalation",
+                                "decision_right": "DR-WO-START"
+                              },
+                              "QGP-G4I-GRAPH": {
+                                "kind": "escalation",
+                                "decision_right": "DR-REMEDIATION-SCOPE"
+                              },
+                              "QGP-G4I-INTEGRITY": {
+                                "kind": "escalation",
+                                "decision_right": "DR-REMEDIATION-SCOPE"
+                              },
+                              "QGP-G4I-SCOPE": {
+                                "kind": "escalation",
+                                "decision_right": "DR-WO-SELECT"
+                              },
+                              "QGP-G4I-COMPLETE": {
+                                "kind": "command",
+                                "argv": [
+                                  "harnessctl",
+                                  "check",
+                                  ".",
+                                  "--artifact",
+                                  "WO-PROBE-001",
+                                  "--checkpoint",
+                                  "handoff",
+                                  "--from-git",
+                                  "<base>"
+                                ]
+                              },
+                              "QGP-G4I-PATHS": {
+                                "kind": "escalation",
+                                "decision_right": "DR-REMEDIATION-SCOPE"
+                              },
+                              "QGP-G4I-PREFLIGHT": {
+                                "kind": "command",
+                                "argv": [
+                                  "harnessctl",
+                                  "preflight",
+                                  ".",
+                                  "--work-order",
+                                  "WO-PROBE-001",
+                                  "--phase",
+                                  "review"
+                                ]
+                              },
+                              "QGP-G4I-EVIDENCE": {
+                                "kind": "command",
+                                "argv": [
+                                  "harnessctl",
+                                  "evidence",
+                                  ".",
+                                  "--artifact",
+                                  "WO-PROBE-001",
+                                  "--checkpoint",
+                                  "handoff"
+                                ]
+                              },
+                              "QGP-G4I-DECISION": {
+                                "kind": "escalation",
+                                "decision_right": "DR-DECISION-DISPOSE"
+                              }
+                            }
+                          },
+                          {
+                            "id": "STEP-WO-IMPLEMENT-DECIDE",
+                            "kind": "decision",
+                            "gate_ids": [
+                              "QG-G4-IMPLEMENTATION-EVIDENCE"
+                            ],
+                            "effects": [
+                              "An explicit completion decision permits only WO-PROBE-001 to become implemented."
+                            ],
+                            "non_effects": [
+                              "Completion does not verify or release the work."
+                            ],
+                            "decision_right": "DR-WO-COMPLETE",
+                            "role": "engineering-owner",
+                            "artifact": "WO-PROBE-001",
+                            "decision": "whether the authorized implementation and evidence are complete",
+                            "outcomes": [
+                              "implemented",
+                              "continue",
+                              "reject"
+                            ],
+                            "response": "Mark WO-PROBE-001 implemented."
+                          }
+                        ]
+                      },
+                      "state": {
+                        "before": [
+                          {
+                            "id": "WO-PROBE-001",
+                            "status": "in_progress"
+                          }
+                        ],
+                        "after": [
+                          {
+                            "id": "WO-PROBE-001",
+                            "status": "in_progress"
+                          }
+                        ]
+                      },
+                      "findings": {
+                        "scoped_blockers": [],
+                        "repository_blockers": [],
+                        "unrelated_count": 0
+                      },
+                      "mutation": {
+                        "writes": []
+                      },
+                      "restitution": {
+                        "outcome": "completed",
+                        "done": [
+                          "Evaluated pre-action compliance for WO-PROBE-001."
+                        ],
+                        "not_done": [],
+                        "blocked_by": [],
+                        "current_lifecycle_state": [
+                          "WO-PROBE-001 is in_progress."
+                        ],
+                        "decision_required": null,
+                        "next": {
+                          "procedure_id": "PROC-WO-IMPLEMENT",
+                          "step_id": "STEP-WO-IMPLEMENT-CHECK",
+                          "action": "Run the bound command"
+                        },
+                        "command_or_response": {
+                          "kind": "command",
+                          "argv": [
+                            "harnessctl",
+                            "check",
+                            ".",
+                            "--artifact",
+                            "WO-PROBE-001",
+                            "--checkpoint",
+                            "handoff"
+                          ]
+                        },
+                        "alternatives": []
+                      },
+                      "result_sha256": "f2a4c4d097a1121fca10fceaacdd02496e0d725c00f63542d8ef9f1aebbbaa7c"
+                    },
+                    "stderr": "",
+                    "pid": 15964,
+                    "resumed_monotonic": 241563.9322988,
+                    "cleanup_started_monotonic": 241564.5881588,
+                    "cleanup": {
+                      "before_cleanup": {
+                        "total_processes": 2,
+                        "active_processes": 0,
+                        "exited_processes": 2
+                      },
+                      "total_processes": 2,
+                      "active_processes": 0,
+                      "exited_processes": 2,
+                      "method": "owned Windows Job Object"
+                    },
+                    "cleanup_finished_monotonic": 241564.5883262,
+                    "finished_monotonic": 241564.5884474
+                  }
+                ],
+                "entered_monotonic": 241562.4549377,
+                "action": {
+                  "tool": "Write",
+                  "paths": [
+                    "governed-target.txt"
+                  ],
+                  "checkpoint": "pre-action",
+                  "procedure": "PROC-WO-IMPLEMENT"
+                },
+                "inner_deadline_monotonic": 241597.4549377,
+                "host_deadline_monotonic": 241617.4549377,
+                "response_prepared_monotonic": 241564.5940559,
+                "effect_inspection_required_on_missing_response": true,
+                "response_written_monotonic": 241564.594099
+              }
+            ]
+          },
+          "host_elapsed_seconds": 6.69589500001166,
+          "hook_precedes_tool_result": false
+        }
+      ],
+      "exact_requested_write": true,
+      "native_Write_hooks": [
+        {
+          "id": "bdad0dee-0d20-4b33-9b50-7ebb7abeb87e",
+          "outcome": "success",
+          "exit": 0,
+          "output": {
+            "hookEventName": "PreToolUse",
+            "additionalContext": "Current evaluator checks passed for WO-PROBE-001. Host permissions and accountable decisions remain required."
+          },
+          "elapsed_seconds": 6.69589500001166
+        }
+      ],
+      "target_key": "governed-target.txt",
+      "expected_sha256": "d8290b1fc1380c6a8be81906e853db739305aa0898dac761be02ef2a3203f847",
+      "expected_target_effect": true,
+      "successful_Write_results": 1,
+      "final_target_hashes_before": {
+        "governed-target.txt": "9c62dd1a0abf078c2eb66780aff84bbd8e0b9ca8fddd3f1ca12010ac21391b09",
+        "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+      },
+      "final_target_hashes_after": {
+        "governed-target.txt": "d8290b1fc1380c6a8be81906e853db739305aa0898dac761be02ef2a3203f847",
+        "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+      }
+    }
+  ],
+  "conclusion": "pass"
+}

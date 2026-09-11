@@ -16,6 +16,7 @@ import zipfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import support as s
+import assess_capture
 
 
 class Acceptance:
@@ -103,11 +104,15 @@ class Acceptance:
     def save(self, expected, observed, conclusion):
         s.probe.publish_text(self.dest / 'actions.txt', '\n'.join(json.dumps(row['argv']) for row in self.rows) + '\n')
         for stream in ('stdout', 'stderr'):
-            s.probe.publish_text(self.dest / (stream + '.txt'), '\n'.join(row[stream] for row in self.rows))
-        s.probe.publish_json(self.dest / 'observations.json', {'expected': expected, 'observed': observed,
+            s.probe.publish_text(self.dest / (stream + '.txt'), '\n'.join(row[stream].replace('\r\n','\n') for row in self.rows))
+        observation = {'expected': expected, 'observed': observed,
              'conclusion': conclusion, 'qualified': False, 'exit_status': [r['exit'] for r in self.rows],
              'source_evidence': ['actions.txt', 'stdout.txt', 'stderr.txt', '../package-identity.json', '../identities.json'],
-             'capture_policy': 'sanitized public observations; raw host debug stays in disposable sandbox'})
+             'capture_policy': 'sanitized public observations; raw host debug stays in disposable sandbox'}
+        if self.name in ('C03','C05','C06','C08','C09','C10','C11','C12'):
+            observation['wire_assessment'] = assess_capture.assess(self.dest, rows=self.rows, original=observation)
+            conclusion = observation['conclusion'] = observation['wire_assessment']['conclusion']
+        s.probe.publish_json(self.dest / 'observations.json', observation)
         s.probe.publish_json(self.dest / 'commands.json', self.rows)
         print(json.dumps({'case': self.name, 'conclusion': conclusion, 'qualified': False}), flush=True)
 
@@ -139,6 +144,15 @@ class Acceptance:
                    Path.home() / '.claude/.credentials.json', Path.home() / '.claude/plugins/installed_plugins.json']
         before = s.probe.metadata(watched)
         targets = {p.name: s.sha(p) for p in self.f['repo'].glob('*.txt')}
+        s.probe.publish_json(self.dest / (name + '-planned-request.json'), {
+            'argv': [str(a) for a in argv], 'prompt': prompt, 'tools': tools, 'allowed_tools': allowed or [],
+            'settings': settings or {'disableAllHooks': False}, 'cwd': str(self.f['repo']),
+            'destination': 'api.anthropic.com/v1/messages through official Claude Code',
+            'profile_instruction_files_present': [n for n in ('CLAUDE.md','settings.json','settings.local.json','rules','agents') if (s.PROFILE/n).exists()],
+            'loaded_hook_sha256': s.sha(plugin/'hooks/hooks.json'), 'target_before': targets,
+            'authorization': 'governance/api-scope/operator-authorization.json; public/synthetic content only'})
+        if any((s.PROFILE/n).exists() for n in ('CLAUDE.md','settings.json','settings.local.json','rules','agents')):
+            raise RuntimeError('unexpected isolated-profile instructions require inspection before API request')
         result = s.run_stream(argv, self.f['repo'], self.f['env'], timeout=timeout)
         result.update(normal_profile_before=before, normal_profile_after=s.probe.metadata(watched),
                       target_before=targets, target_after={p.name: s.sha(p) for p in self.f['repo'].glob('*.txt')},
@@ -275,9 +289,9 @@ class Acceptance:
         (broken / 'scripts/session-context.py').write_text('raise SystemExit(4)\n')
         failed, fd = self.host('failed', 'Say script failure observed. Do not use tools.', plugin=broken)
         self.save('Inactive required hook is visible and failing script returns UNREADY without readiness.',
-                  {'disabled_receipt': 'provided additionalContext' in od, 'script_failure_unready': 'UNREADY' in fd,
+                  {'disabled_receipt': assess_capture.hooks(off, 'SessionStart'), 'script_failure_receipt': assess_capture.hooks(failed, 'SessionStart'),
                    'disabled_control': 'retained disableAllHooks=true setting; missing hook cannot diagnose itself'},
-                  'pass' if 'provided additionalContext' not in od and 'UNREADY' in fd else 'fail')
+                  'unavailable')  # The shared wire assessor determines the verdict.
 
     def C06(self):
         self.case('C06')
@@ -286,18 +300,34 @@ class Acceptance:
         live, debug = self.host('unsupported-read', 'Use Read once to read exactly ' + (self.f['repo'] / 'governed-target.txt').as_posix() + '. Then stop.', tools='Read', allowed=['Read'])
         self.save('Space-containing repository and script paths preserve argv; unsupported Read produces coverage gap without allow.',
                   {'space_paths': str(self.f['repo']), 'direct_coverage_gap': 'COVERAGE GAP' in direct['stdout'],
-                   'live_coverage_gap': 'COVERAGE GAP' in debug, 'receiving_side_unicode_calibration': 'test_adapter.py:test_event_quotes_and_unicode_survive_exactly'},
-                  'pass' if 'COVERAGE GAP' in direct['stdout'] and 'COVERAGE GAP' in debug else 'fail')
+                   'live_receipts': assess_capture.hooks(live, 'PreToolUse'), 'receiving_side_unicode_calibration': 'test_adapter.py:test_event_quotes_and_unicode_survive_exactly'},
+                  'unavailable')
 
     def C07(self):
         self.case('C07')
         observed = {'host': '2.1.266', 'os': 'Windows', 'python': '3.14.6', 'evaluator': '0.16.0'}
         hooks = json.loads((self.f['plugin'] / 'hooks/hooks.json').read_text())
-        results = [s.binding.assess_binding(self.f['config'], hooks, dict(observed, os='Linux'), s.binding.PROFILE['decision']),
-                   s.binding.assess_binding(self.f['config'], hooks, observed, 'exclude-claude')]
+        snapshot = lambda: {p.relative_to(self.f['repo']).as_posix():s.sha(p) for p in self.f['repo'].rglob('*.md')}
+        before = snapshot()
+        spawns = []
+        auditing = True
+        def audit(event, args):
+            if auditing and event in ('subprocess.Popen', 'os.system', 'os.spawn'):
+                spawns.append({'event':event,'arguments':repr(args)})
+        sys.addaudithook(audit)
+        try:
+            results = [s.binding.assess_binding(self.f['config'], hooks, dict(observed, os='Linux'), s.binding.PROFILE['decision']),
+                       s.binding.assess_binding(self.f['config'], hooks, observed, 'exclude-claude')]
+        finally:
+            auditing = False
+        after = snapshot()
+        self.rows.append({'argv':['in-process Python call','binding.assess_binding','unaccepted Linux profile','exclude-claude decision'],
+                          'invocation_kind':'local function under Python process-spawn audit; no native host session',
+                          'stdout':json.dumps(results),'stderr':'','exit':0})
         self.save('Unaccepted profile or no positive decision cannot qualify; no helper spawn or lifecycle effects.',
-                  {'assessments': results, 'helper_spawns': [], 'lifecycle_mutations': []},
-                  'pass' if all(not x['eligible_for_live_assessment'] and not x['qualified'] for x in results) else 'fail')
+                  {'assessments': results, 'helper_spawns': spawns, 'repository_markdown_before':before, 'repository_markdown_after':after,
+                   'lifecycle_mutations': sorted(p for p in before.keys()|after.keys() if before.get(p)!=after.get(p))},
+                  'pass' if before==after and not spawns and all(not x['eligible_for_live_assessment'] and not x['qualified'] for x in results) else 'fail')
 
     def C08(self):
         self.case('C08')
@@ -307,8 +337,7 @@ class Acceptance:
                                  ('wrong-identity', dict(self.f['config'], environment=str(s.ROOT.parent / 'se-harness-plugin-eval-017')))]:
                 s.dump(self.f['config_path'], config)
                 result, debug = self.host(name, 'Say runtime observation. Do not use tools.')
-                findings.append({'step': name, 'unready': 'UNREADY' in debug,
-                    'setup_required': 'SETUP REQUIRED' in debug, 'identity_refusal': 'released evaluator identity refused' in debug})
+                findings.append({'step': name, 'receipts': assess_capture.hooks(result, 'SessionStart')})
             s.dump(self.f['config_path'], self.f['config'])
             self.host('before-removal', 'Say current runtime observed. Do not use tools.')
             interpreter = Path(self.f['config']['environment']) / 'Scripts/python.exe'
@@ -317,14 +346,14 @@ class Acceptance:
             interpreter.rename(removed)
             try:
                 result, debug = self.host('after-removal', 'Say removed runtime observed. Do not use tools.')
-                findings.append({'step':'after-removal','unready':'UNREADY' in debug,'setup_required':'SETUP REQUIRED' in debug})
+                findings.append({'step':'after-removal','receipts': assess_capture.hooks(result, 'SessionStart')})
             finally:
                 removed.rename(interpreter)
         finally:
             s.dump(self.f['config_path'], self.f['config'])
         self.save('Missing runtime returns setup guidance without interpreter call; wrong installed evaluator remains unready.',
                   {'observations': findings, 'removal_variant': 'only task-owned private environment interpreter renamed then restored'},
-                  'pass' if all(x['unready'] for x in findings) and findings[1]['identity_refusal'] else 'fail')
+                  'unavailable')
 
     def C09(self):
         self.case('C09')
@@ -339,8 +368,7 @@ class Acceptance:
             (plugin / 'scripts/check-tool-action.py').write_text(source)
             result, debug, observation = self.edit(mode, plugin=plugin)
             pids = json.loads((folder / 'pids.json').read_text()) if (folder / 'pids.json').exists() else {}
-            observation.update(mode=mode, child_pids=pids, children_alive={k:s.fault_observer.alive(v) for k,v in pids.items()},
-                               cleanup_logged='cleanup_finished_monotonic' in debug or 'active_processes' in debug)
+            observation.update(mode=mode, child_pids=pids, children_alive={k:s.fault_observer.alive(v) for k,v in pids.items()})
             findings.append(observation)
         self.save('Real mapped edits are denied before 60s host deadline after shared evaluator failures; child trees stop and target bytes remain unchanged.',
                   {'faults': findings, 'configured_budgets': s.binding.BUDGET},
@@ -351,7 +379,7 @@ class Acceptance:
         plugin = self.variant('handler exceeds timeout')
         (plugin / 'scripts/check-tool-action.py').write_text('import time\ntime.sleep(75)\n')
         result, debug, observation = self.edit('host-timeout', plugin=plugin)
-        observation.update(host_timeout=60, handler_stall=75, host_timeout_logged='timed out' in debug.lower() or 'timeout' in debug.lower(),
+        observation.update(host_timeout=60, handler_stall=75, native_hooks=assess_capture.edit(result)['native_Write_hooks'],
                            classification='unqualified: required handler denial is absent; inspect effects before retry')
         self.save('Observe real host cancellation and actual effects; never infer denial from timeout.', observation,
                   'fail' if observation['tool_calls'] and not observation['denial_observed'] else 'unavailable')
@@ -393,18 +421,39 @@ class Acceptance:
         self.save('Actual loaded asynchronous or insufficient-timeout bindings are rejected regardless of isolated check outcomes.',
                   {'bindings':findings}, 'pass' if all(not x['eligible_for_live_assessment'] and not x['qualified'] for x in findings) else 'fail')
 
+    def C11_removed(self):
+        self.case('C11')
+        plugin = self.variant('guard removed after readiness')
+        ready, debug = self.host('before-guard-removal', 'Say current runtime observed. Do not use tools.', plugin=plugin)
+        receipts = self.context_receipts(ready, debug)
+        before = s.sha(plugin / 'hooks/hooks.json')
+        hooks = json.loads((plugin / 'hooks/hooks.json').read_text())
+        del hooks['hooks']['PreToolUse']
+        s.dump(plugin / 'hooks/hooks.json', hooks)
+        mutation = {'before_sha256': before, 'after_sha256': s.sha(plugin / 'hooks/hooks.json'),
+                    'removed': 'inline PreToolUse binding', 'removed_monotonic': time.monotonic(),
+                    'activation_boundary': 'readiness session ended; binding removed before the next native activation; no same-process hot-reload claim'}
+        result, debug, observation = self.edit('guard-removed-after-readiness', plugin=plugin)
+        self.save('Observe a verified ready startup, remove that disposable inline guard binding, then inspect the next exact Write without inferring refusal.',
+                  {'readiness_receipts': receipts, 'binding_removal': mutation, 'variants': [observation]},
+                  'unavailable')
+
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--sandbox', type=Path, required=True)
     parser.add_argument('--evidence', type=Path, required=True)
     parser.add_argument('--cases', default='C01,C02,C03,C04,C05,C06,C07,C08,C09,C10,C11,C12')
+    parser.add_argument('--guard-removal-only', action='store_true')
     args=parser.parse_args()
     fresh=not args.sandbox.exists()
     acceptance=Acceptance(args)
     if fresh:
         acceptance.initialize_package()
     acceptance.observe_identity()
+    if args.guard_removal_only:
+        acceptance.C11_removed()
+        return 0
     for name in args.cases.split(','):
         if name not in ['C'+str(n).zfill(2) for n in range(1,13)]:
             parser.error('unknown case')

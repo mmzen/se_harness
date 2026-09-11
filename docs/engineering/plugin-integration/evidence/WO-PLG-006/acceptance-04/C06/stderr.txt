@@ -1,0 +1,1 @@
+{"adapter":"verity-plane-claude-v1","status":"unready","interpreter_invoked":false,"entered_monotonic":241259.0278467,"event":"PreToolUse","tool_use_id":"fixed-fixture-id","tool_name":"Read","finished_ms":65.2827,"response_written_monotonic":241259.1085193}

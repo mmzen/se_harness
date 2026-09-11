@@ -1,0 +1,57 @@
+{
+  "case": "C06",
+  "expected": [
+    "Space-containing repository and script paths preserve argv; unsupported Read produces coverage gap without allow."
+  ],
+  "observed": [
+    {
+      "source": "native system/hook_response stdout+stderr and correlated tool_use/tool_result objects",
+      "qualification": false,
+      "case": "C06",
+      "observations": [
+        {
+          "id": "4fa32470-05c2-4f6e-a8ab-e00dbc3be6df",
+          "name": "PreToolUse:Read",
+          "event": "PreToolUse",
+          "outcome": "success",
+          "exit": 0,
+          "output": {
+            "hookEventName": "PreToolUse",
+            "additionalContext": "UNREADY COVERAGE GAP: this tool has no evaluator mapping. Ordinary host permissions and already-authorized setup access remain in force. No governance check succeeded."
+          },
+          "guard": {
+            "adapter": "verity-plane-claude-v1",
+            "status": "unready",
+            "interpreter_invoked": false,
+            "entered_monotonic": 241265.2319537,
+            "event": "PreToolUse",
+            "tool_use_id": "toolu_01BVJfMHjpwdH6Qwd4b6PGYW",
+            "tool_name": "Read",
+            "finished_ms": 64.138,
+            "response_written_monotonic": 241265.3114383
+          },
+          "handler": []
+        }
+      ],
+      "conclusion": "pass"
+    }
+  ],
+  "conclusion": "pass",
+  "qualified": false,
+  "observation_complete": true,
+  "enforcement_result": "only the demonstrated case behavior",
+  "exit_status": [
+    [
+      0,
+      0
+    ]
+  ],
+  "source_evidence": [
+    "acceptance-04/C06/actions.txt",
+    "acceptance-04/C06/stdout.txt",
+    "acceptance-04/C06/stderr.txt",
+    "acceptance-04/C06/commands.json",
+    "acceptance-04/C06/observations.json"
+  ],
+  "assessment_policy": "C10/C11 remain fail and unqualified despite completed negative experiments. C12 pass means rejection, not enforcement. Earlier derived observations remain unchanged; reassessment uses actual structured host messages."
+}

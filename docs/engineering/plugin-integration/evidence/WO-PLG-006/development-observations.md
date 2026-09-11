@@ -18,3 +18,7 @@ The C04 readable stdout/stderr projections initially contained doubled CRLF from
 writing captured Windows process bytes through text-mode output. Those two text
 projections now use LF. Their original structured command captures, including
 captured process stdout/stderr strings, remain unchanged in commands.json.
+
+The final readable stderr projections trim empty trailing separator lines in
+C06/C08/C11 and acceptance-04 C06/C08. Raw per-command stdout/stderr remains
+unchanged in commands.json; the canonical projections are readability copies.

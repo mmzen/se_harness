@@ -1,0 +1,79 @@
+{
+  "case": "C10",
+  "expected": [
+    "Observe real host cancellation and actual effects; never infer denial from timeout."
+  ],
+  "observed": [
+    {
+      "source": "native system/hook_response stdout+stderr and correlated tool_use/tool_result objects",
+      "qualification": false,
+      "case": "C10",
+      "observations": [
+        {
+          "uses": [
+            {
+              "type": "tool_use",
+              "id": "toolu_01LfgGyhsmY1K22nxrbjYMmM",
+              "name": "Write",
+              "input": {
+                "file_path": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-04/disposable repository/governed-target.txt",
+                "content": "effect-host-timeout\n"
+              },
+              "caller": {
+                "type": "direct"
+              }
+            }
+          ],
+          "results": [
+            {
+              "tool_use_id": "toolu_01LfgGyhsmY1K22nxrbjYMmM",
+              "type": "tool_result",
+              "content": "The file C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-04/disposable repository/governed-target.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+            }
+          ],
+          "decisions": [],
+          "exact_requested_write": true,
+          "native_Write_hooks": [
+            {
+              "id": "f90e95d9-19c5-499b-808e-2cf3bd710293",
+              "outcome": "cancelled",
+              "exit": 1,
+              "output": {},
+              "elapsed_seconds": 60.16176079999423
+            }
+          ],
+          "target_key": "governed-target.txt",
+          "expected_sha256": "20db5b25449ad2fd7de6eb4e4d9ebc2185f4121e7ef230557470893fd9e463e7",
+          "expected_target_effect": true,
+          "successful_Write_results": 1,
+          "final_target_hashes_before": {
+            "governed-target.txt": "0a1f24d49e1620655adfbf9790ea35f0a7bda4df3b86c046869d461279e8cbc9",
+            "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+          },
+          "final_target_hashes_after": {
+            "governed-target.txt": "20db5b25449ad2fd7de6eb4e4d9ebc2185f4121e7ef230557470893fd9e463e7",
+            "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+          }
+        }
+      ],
+      "conclusion": "fail"
+    }
+  ],
+  "conclusion": "fail",
+  "qualified": false,
+  "observation_complete": true,
+  "enforcement_result": "failed; missing required refusal",
+  "exit_status": [
+    [
+      0
+    ]
+  ],
+  "source_evidence": [
+    "acceptance-04/C10/actions.txt",
+    "acceptance-04/C10/stdout.txt",
+    "acceptance-04/C10/stderr.txt",
+    "acceptance-04/C10/commands.json",
+    "acceptance-04/C10/observations.json"
+  ],
+  "assessment_policy": "C10/C11 remain fail and unqualified despite completed negative experiments. C12 pass means rejection, not enforcement. Earlier derived observations remain unchanged; reassessment uses actual structured host messages."
+}

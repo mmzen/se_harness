@@ -1,0 +1,23 @@
+{
+  "expected": "Space-containing repository and script paths preserve argv; unsupported Read produces coverage gap without allow.",
+  "observed": {
+    "space_paths": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\disposable repository",
+    "direct_coverage_gap": true,
+    "live_coverage_gap": true,
+    "receiving_side_unicode_calibration": "test_adapter.py:test_event_quotes_and_unicode_survive_exactly"
+  },
+  "conclusion": "pass",
+  "qualified": false,
+  "exit_status": [
+    0,
+    0
+  ],
+  "source_evidence": [
+    "actions.txt",
+    "stdout.txt",
+    "stderr.txt",
+    "../package-identity.json",
+    "../identities.json"
+  ],
+  "capture_policy": "sanitized public observations; raw host debug stays in disposable sandbox"
+}

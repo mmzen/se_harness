@@ -1,0 +1,37 @@
+{
+  "case": "C04",
+  "expected": [
+    "Accepted inline command returns PreToolUse denial for malformed JSON and missing required fields."
+  ],
+  "observed": [
+    {
+      "direct_command_calibration": true,
+      "denials": [
+        true,
+        true,
+        true,
+        true
+      ]
+    }
+  ],
+  "conclusion": "pass",
+  "qualified": false,
+  "observation_complete": true,
+  "enforcement_result": "only the demonstrated case behavior",
+  "exit_status": [
+    [
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "source_evidence": [
+    "acceptance-04/C04/actions.txt",
+    "acceptance-04/C04/stdout.txt",
+    "acceptance-04/C04/stderr.txt",
+    "acceptance-04/C04/commands.json",
+    "acceptance-04/C04/observations.json"
+  ],
+  "assessment_policy": "C10/C11 remain fail and unqualified despite completed negative experiments. C12 pass means rejection, not enforcement. Earlier derived observations remain unchanged; reassessment uses actual structured host messages."
+}
