@@ -2,7 +2,7 @@
 id = "WO-RLO-009"
 type = "work_order"
 title = "Exclude retained evidence from release artifact discovery"
-status = "draft"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-11"
 updated = "2026-09-11"
@@ -31,16 +31,30 @@ implements = ["REQ-RLO-001"]
 specifications = ["SPEC-RLO-001"]
 architecture = ["ARCH-RLO-001", "ADR-RLO-001"]
 verification = ["VER-RLO-006"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-11T12:57:17Z"
+decided_by = "engineering-owner"
+reason = "The operator stated on 2026-09-11: I approve both artifacts and authorize implementation. This records engineering-owner approval of the bounded repair and required commit-bound verification classification reviewed in PR 452 at 553c7badf6f742c092b0b2d284f95e2e4ca60428. Start remains subject to preflight; completion, VREC preparation, assurance and merge remain separate decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-11T12:58:44Z"
+decided_by = "engineering-owner"
+reason = "The operator explicitly authorized implementation with approval of both artifacts on 2026-09-11. Released evaluator 0.17.0 start preflight passes for the approved packet and its governing reading manifest has been read. Start only the declared discovery repair; no completion, preparation, assurance or merge decision."
 +++
 
 # Work Order: Exclude retained evidence from release artifact discovery
 
 ## Lifecycle
 
-This packet is draft. The operator requested the small resolver repair on
-2026-09-11. No existing approved work order covers its source changes.
-Approval of this WO and VER-RLO-006, and authorization to start, are the next
-accountable decisions. No execution delegation is proposed.
+The operator approved this WO and VER-RLO-006 and authorized implementation on
+2026-09-11. The lifecycle events record approval and start through the released
+evaluator after passing start preflight. No execution delegation is granted.
+Completion, VREC preparation, assurance and merge remain separate decisions.
 
 ## Objective
 

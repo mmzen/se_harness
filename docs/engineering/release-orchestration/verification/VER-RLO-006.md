@@ -2,13 +2,20 @@
 id = "VER-RLO-006"
 type = "verification"
 title = "Verify release discovery separates artifacts from evidence"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner"]
 created = "2026-09-11"
 updated = "2026-09-11"
 
 [relations]
 verifies = ["REQ-RLO-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-11T12:57:17Z"
+decided_by = "assurance-owner"
+reason = "The operator stated on 2026-09-11: I approve both artifacts and authorize implementation. This records assurance-owner approval of the verification contract reviewed in PR 452 at 553c7badf6f742c092b0b2d284f95e2e4ca60428; no candidate assurance or release decision."
 +++
 
 # Verification Contract: Verify release discovery separates artifacts from evidence
