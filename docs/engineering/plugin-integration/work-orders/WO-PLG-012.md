@@ -54,7 +54,7 @@ reason = "Delegated DR-WO-START under [delegation] class 'execution': required c
 
 ## Lifecycle
 
-The operator selected WO-PLG-012 for the delegated execution route on 2026-09-10. The released evaluator records definition and work-order approval separately. The execution class permits only start, completion and ready-VREC preparation, after this approved work order is present at the configured PR base and the required GitHub check succeeds for the exact candidate. No implementation has started in this definition delivery. Assurance, release and integration remain separate human decisions.
+The operator selected WO-PLG-012 for the delegated execution route on 2026-09-10. The released evaluator records definition and work-order approval separately. The execution class permits only start, completion and ready-VREC preparation, after this approved work order is present at the configured PR base and the required GitHub check succeeds for the exact candidate. The released evaluator subsequently applied the delegated start. The retained plugin skills and acceptance evidence are delivered in PR #446. Assurance, release and integration remain separate human decisions.
 
 ## Objective
 

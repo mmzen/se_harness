@@ -31,9 +31,9 @@ graph and review preflight pass. Candidate doctor retains the six documented
 **Windows upgrade rehearsal failed during checkout on inherited WO011 evidence
 paths.** Its dependent integration-package jobs were skipped. See
 [actual CI results](checks/ci-initial/result.json) and the retained raw logs.
-Passing source/validate checks do not cancel that failure. The separate proposed
-repair WO-PLG-017 is unapproved and unapplied.
+Passing source/validate checks do not cancel that failure. The operator subsequently approved WO-PLG-017; its completed repair is now
+inherited from PR #449. All 56 relocated evidence files retain their original bytes.
 
-WO-PLG-012 remains **in_progress**. Completion and VREC preparation are paused at
-this gate. The real delegated start is retained under governance/start. No
+WO-PLG-012 remains **in_progress** pending the full CI result at its new head.
+Completion and VREC preparation will follow only after those checks pass. The real delegated start is retained under governance/start. No
 assurance, release, merge or live plugin installation is claimed.

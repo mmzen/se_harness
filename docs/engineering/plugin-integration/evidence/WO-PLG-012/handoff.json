@@ -2,7 +2,7 @@
   "compliance": {
     "change_set_source": "git",
     "checkpoint": "handoff",
-    "formal_snapshot_sha256": "5a124b042b11747f15f32b2113fcd46cd5395cffb22cc4b8fd28d65541954ddd",
+    "formal_snapshot_sha256": "4a71a7ba4ebe6bc7cd869625ad5a247bfb2d2496f73f9b20804cccd271712c61",
     "gates": [
       {
         "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 1243 declared changed path(s) are within execution scope.",
+            "message": "All 1249 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -120,7 +120,16 @@
     "unrelated_count": 46
   },
   "mutation": {
-    "writes": []
+    "writes": [
+      {
+        "fields": [
+          "formal_snapshot_sha256",
+          "rebound_at"
+        ],
+        "id": "WO-PLG-012",
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/WO-PLG-012-handoff.md"
+      }
+    ]
   },
   "operation": {
     "kind": "check",
@@ -245,17 +254,8 @@
     "alternatives": [],
     "blocked_by": [],
     "command_or_response": {
-      "argv": [
-        "harnessctl",
-        "transition",
-        ".",
-        "--set",
-        "WO-PLG-012=implemented",
-        "--decision",
-        "WO-PLG-012=delegated-executor",
-        "--apply"
-      ],
-      "kind": "command"
+      "kind": "response",
+      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for d1f4604: HTTP 422"
     },
     "current_lifecycle_state": [
       "WO-PLG-012 is in_progress."
@@ -265,10 +265,8 @@
       "decision": "whether the authorized implementation and evidence are complete",
       "decision_right": "DR-WO-COMPLETE",
       "delegation": {
-        "check_run_id": "103041044910",
         "class": "execution",
-        "gate": "success",
-        "head": "2a32e978442a0644aa72b751c0244378b0172fd4"
+        "gate": "not passing"
       },
       "outcomes": [
         "implemented",
@@ -288,7 +286,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "9e772e1ad56a1695647aa8244c658dae823475501316cd17480281f35035d1d7",
+  "result_sha256": "c23afb99a536bf9f9e86439203309d4ac2a8814c47e75a370f3a3dbc787be78f",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
@@ -1414,6 +1412,12 @@
       "docs/engineering/plugin-integration/evidence/WO-PLG-012/C08/observations.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-012/C08/stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-012/C08/stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/retention-notes.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-acceptance-evidence-lf.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-acceptance-evidence.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-acceptance-handoff-lf.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-acceptance-handoff.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-acceptance-scope.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-retained-acceptance-doctor.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-retained-acceptance-preflight.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-retained-acceptance-validate.json",
