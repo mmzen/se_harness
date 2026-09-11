@@ -1,0 +1,485 @@
+validate	Set up job	﻿2026-09-11T06:29:01.9006191Z Current runner version: '2.337.0'
+validate	Set up job	2026-09-11T06:29:01.9031202Z ##[group]Runner Image Provisioner
+validate	Set up job	2026-09-11T06:29:01.9032172Z Hosted Compute Agent
+validate	Set up job	2026-09-11T06:29:01.9033069Z Version: 20260828.587
+validate	Set up job	2026-09-11T06:29:01.9033728Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+validate	Set up job	2026-09-11T06:29:01.9034652Z Build Date: 2026-08-28T16:44:25Z
+validate	Set up job	2026-09-11T06:29:01.9035378Z Worker ID: {29df5b52-a1a2-401e-8032-43255ea36824}
+validate	Set up job	2026-09-11T06:29:01.9036188Z Azure Region: westcentralus
+validate	Set up job	2026-09-11T06:29:01.9036825Z ##[endgroup]
+validate	Set up job	2026-09-11T06:29:01.9038172Z ##[group]Operating System
+validate	Set up job	2026-09-11T06:29:01.9038958Z Ubuntu
+validate	Set up job	2026-09-11T06:29:01.9039508Z 24.04.5
+validate	Set up job	2026-09-11T06:29:01.9040084Z LTS
+validate	Set up job	2026-09-11T06:29:01.9040648Z ##[endgroup]
+validate	Set up job	2026-09-11T06:29:01.9041234Z ##[group]Runner Image
+validate	Set up job	2026-09-11T06:29:01.9041981Z Image: ubuntu-24.04
+validate	Set up job	2026-09-11T06:29:01.9042800Z Version: 20260907.300.1
+validate	Set up job	2026-09-11T06:29:01.9043971Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260907.300/images/ubuntu/Ubuntu2404-Readme.md
+validate	Set up job	2026-09-11T06:29:01.9045705Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260907.300
+validate	Set up job	2026-09-11T06:29:01.9046827Z ##[endgroup]
+validate	Set up job	2026-09-11T06:29:01.9048076Z ##[group]GITHUB_TOKEN Permissions
+validate	Set up job	2026-09-11T06:29:01.9050016Z Contents: read
+validate	Set up job	2026-09-11T06:29:01.9050648Z Metadata: read
+validate	Set up job	2026-09-11T06:29:01.9051323Z PullRequests: read
+validate	Set up job	2026-09-11T06:29:01.9051986Z ##[endgroup]
+validate	Set up job	2026-09-11T06:29:01.9054188Z Secret source: Actions
+validate	Set up job	2026-09-11T06:29:01.9055285Z Cache mode: write
+validate	Set up job	2026-09-11T06:29:01.9055989Z Prepare workflow directory
+validate	Set up job	2026-09-11T06:29:01.9482715Z Prepare all required actions
+validate	Set up job	2026-09-11T06:29:01.9529851Z Getting action download info
+validate	Set up job	2026-09-11T06:29:02.2550952Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+validate	Set up job	2026-09-11T06:29:02.3381644Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+validate	Set up job	2026-09-11T06:29:02.4278311Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+validate	Set up job	2026-09-11T06:29:02.6295861Z Complete job name: validate
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T06:29:02.7110293Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7120212Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7121115Z with:
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7121549Z   repository: mmzen/se_harness
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7126780Z   token: ***
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7127257Z   ssh-strict: true
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7127722Z   ssh-user: git
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7128163Z   persist-credentials: true
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7128651Z   clean: true
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7129096Z   sparse-checkout-cone-mode: true
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7129637Z   fetch-depth: 1
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7130059Z   fetch-tags: false
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7130671Z   show-progress: true
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7131356Z   lfs: false
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7132055Z   submodules: false
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7132922Z   set-safe-directory: true
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7133683Z   allow-unsafe-pr-checkout: false
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7134934Z env:
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7135608Z   SE_HARNESS_VERSION: 0.17.0
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.7136386Z ##[endgroup]
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8174181Z Syncing repository: mmzen/se_harness
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8176739Z ##[group]Getting Git version info
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8177877Z Working directory is '/home/runner/work/se_harness/se_harness'
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8179554Z [command]/usr/bin/git version
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8210460Z git version 2.55.0
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8230299Z ##[endgroup]
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8244733Z Temporarily overriding HOME='/home/runner/work/_temp/92a57172-cae1-4f25-8aa5-e01bb357c3ca' before making global git config changes
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8247414Z Adding repository directory to the temporary git global config as a safe directory
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8249583Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/se_harness/se_harness
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8306699Z Deleting the contents of '/home/runner/work/se_harness/se_harness'
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8308653Z ##[group]Initializing the repository
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8310158Z [command]/usr/bin/git init /home/runner/work/se_harness/se_harness
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8378132Z hint: Using 'master' as the name for the initial branch. This default branch name
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8379905Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8381597Z hint: to use in all of your new repositories, which will suppress this warning,
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8383147Z hint: call:
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8383966Z hint:
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8386439Z hint: 	git config --global init.defaultBranch <name>
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8387663Z hint:
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8388781Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8390634Z hint: 'development'. The just-created branch can be renamed via this command:
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8392136Z hint:
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8393236Z hint: 	git branch -m <name>
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8394266Z hint:
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8395362Z hint: Disable this message with "git config set advice.defaultBranchName false"
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8397451Z Initialized empty Git repository in /home/runner/work/se_harness/se_harness/.git/
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8400624Z [command]/usr/bin/git remote add origin https://github.com/mmzen/se_harness
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8433693Z ##[endgroup]
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8434950Z ##[group]Disabling automatic garbage collection
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8438264Z [command]/usr/bin/git config --local gc.auto 0
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8470994Z ##[endgroup]
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8472114Z ##[group]Setting up auth
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8477995Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8512840Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8877095Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.8915625Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.9174422Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.9212784Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.9459517Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.9503509Z ##[endgroup]
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.9504613Z ##[group]Fetching the repository
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:02.9517199Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +6004193f4423307f47a424f8b100f42ad1c0dfee:refs/remotes/pull/449/merge
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.3138766Z From https://github.com/mmzen/se_harness
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.3140666Z  * [new ref]         6004193f4423307f47a424f8b100f42ad1c0dfee -> pull/449/merge
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.3145639Z ##[endgroup]
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.3147284Z ##[group]Determining the checkout info
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.3148832Z ##[endgroup]
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.3153801Z [command]/usr/bin/git sparse-checkout disable
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.3207536Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.3252874Z ##[group]Checking out the ref
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.3257164Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/449/merge
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8853859Z Note: switching to 'refs/remotes/pull/449/merge'.
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8854455Z 
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8854749Z You are in 'detached HEAD' state. You can look around, make experimental
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8855361Z changes and commit them, and you can discard any commits you make in this
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8856019Z state without impacting any branches by switching back to a branch.
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8856381Z 
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8856690Z If you want to create a new branch to retain commits you create, you may
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8857263Z do so (now or later) by using -c with the switch command. Example:
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8857585Z 
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8857747Z   git switch -c <new-branch-name>
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8857988Z 
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8858146Z Or undo this operation with:
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8858362Z 
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8858503Z   git switch -
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8858706Z 
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8858991Z Turn off this advice by setting config variable advice.detachedHead to false
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8859398Z 
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8859810Z HEAD is now at 6004193 Merge 47f7b842d395764583adbe834c39aecdc0afd521 into 7fe82c95823503e54d2e35e00d8c409a6dd4b065
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8905370Z ##[endgroup]
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8954234Z [command]/usr/bin/git log -1 --format=%H
+validate	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:05.8983724Z 6004193f4423307f47a424f8b100f42ad1c0dfee
+validate	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T06:29:05.9266536Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+validate	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:05.9268819Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+validate	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:05.9269319Z with:
+validate	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:05.9269616Z   python-version: 3.11
+validate	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:05.9269928Z   check-latest: false
+validate	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:05.9273389Z   token: ***
+validate	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:05.9273691Z   update-environment: true
+validate	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:05.9274073Z   allow-prereleases: false
+validate	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:05.9274412Z   freethreaded: false
+validate	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:05.9274718Z env:
+validate	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:05.9275003Z   SE_HARNESS_VERSION: 0.17.0
+validate	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:05.9275329Z ##[endgroup]
+validate	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:06.0578441Z ##[group]Installed versions
+validate	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:06.0656860Z (node:2317) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+validate	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:06.0658483Z (Use `node --trace-deprecation ...` to show where the warning was created)
+validate	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:06.0659327Z Successfully set up CPython (3.11.16)
+validate	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:06.0660313Z ##[endgroup]
+validate	Install the exact released evaluator	﻿2026-09-11T06:29:06.0857929Z ##[group]Run python -m venv "$RUNNER_TEMP/se-harness-env"
+validate	Install the exact released evaluator	2026-09-11T06:29:06.0858607Z ^[[36;1mpython -m venv "$RUNNER_TEMP/se-harness-env"^[[0m
+validate	Install the exact released evaluator	2026-09-11T06:29:06.0859165Z ^[[36;1m"$RUNNER_TEMP/se-harness-env/bin/python" -m pip install \^[[0m
+validate	Install the exact released evaluator	2026-09-11T06:29:06.0859744Z ^[[36;1m  --disable-pip-version-check --no-deps --only-binary=:all: \^[[0m
+validate	Install the exact released evaluator	2026-09-11T06:29:06.0860289Z ^[[36;1m  "se-harness==$SE_HARNESS_VERSION"^[[0m
+validate	Install the exact released evaluator	2026-09-11T06:29:06.0915002Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+validate	Install the exact released evaluator	2026-09-11T06:29:06.0915550Z env:
+validate	Install the exact released evaluator	2026-09-11T06:29:06.0915885Z   SE_HARNESS_VERSION: 0.17.0
+validate	Install the exact released evaluator	2026-09-11T06:29:06.0916326Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Install the exact released evaluator	2026-09-11T06:29:06.0916914Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+validate	Install the exact released evaluator	2026-09-11T06:29:06.0917496Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Install the exact released evaluator	2026-09-11T06:29:06.0918018Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Install the exact released evaluator	2026-09-11T06:29:06.0918541Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Install the exact released evaluator	2026-09-11T06:29:06.0919128Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+validate	Install the exact released evaluator	2026-09-11T06:29:06.0919581Z ##[endgroup]
+validate	Install the exact released evaluator	2026-09-11T06:29:10.5280972Z Collecting se-harness==0.17.0
+validate	Install the exact released evaluator	2026-09-11T06:29:10.6144378Z   Downloading se_harness-0.17.0-py3-none-any.whl.metadata (45 kB)
+validate	Install the exact released evaluator	2026-09-11T06:29:10.6343515Z      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.9/45.9 kB 2.1 MB/s eta 0:00:00
+validate	Install the exact released evaluator	2026-09-11T06:29:10.6636367Z Downloading se_harness-0.17.0-py3-none-any.whl (484 kB)
+validate	Install the exact released evaluator	2026-09-11T06:29:10.7253858Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 484.5/484.5 kB 8.1 MB/s eta 0:00:00
+validate	Install the exact released evaluator	2026-09-11T06:29:10.7318796Z Installing collected packages: se-harness
+validate	Install the exact released evaluator	2026-09-11T06:29:10.9326769Z Successfully installed se-harness-0.17.0
+validate	Read the live pull-request body	﻿2026-09-11T06:29:10.9901843Z ##[group]Run # ECP-LPB-002, -003: the declarations are selected from the pull request
+validate	Read the live pull-request body	2026-09-11T06:29:10.9902691Z ^[[36;1m# ECP-LPB-002, -003: the declarations are selected from the pull request^[[0m
+validate	Read the live pull-request body	2026-09-11T06:29:10.9903212Z ^[[36;1m# as it is now, not from the stored trigger snapshot, so a corrected^[[0m
+validate	Read the live pull-request body	2026-09-11T06:29:10.9903696Z ^[[36;1m# body is honoured by re-running this check without a new push.^[[0m
+validate	Read the live pull-request body	2026-09-11T06:29:10.9904116Z ^[[36;1mcurl --fail --silent --show-error \^[[0m
+validate	Read the live pull-request body	2026-09-11T06:29:10.9904656Z ^[[36;1m  --header "Authorization: ***" \^[[0m
+validate	Read the live pull-request body	2026-09-11T06:29:10.9905065Z ^[[36;1m  --header "Accept: application/vnd.github+json" \^[[0m
+validate	Read the live pull-request body	2026-09-11T06:29:10.9905517Z ^[[36;1m  "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/pulls/$PULL_REQUEST_NUMBER" \^[[0m
+validate	Read the live pull-request body	2026-09-11T06:29:10.9905986Z ^[[36;1m  > "$RUNNER_TEMP/pull-request.json"^[[0m
+validate	Read the live pull-request body	2026-09-11T06:29:10.9906551Z ^[[36;1m"$RUNNER_TEMP/se-harness-env/bin/python" - "$RUNNER_TEMP/pull-request.json" "$RUNNER_TEMP/live-event.json" <<'PY'^[[0m
+validate	Read the live pull-request body	2026-09-11T06:29:10.9907168Z ^[[36;1mimport json, sys^[[0m
+validate	Read the live pull-request body	2026-09-11T06:29:10.9907478Z ^[[36;1mwith open(sys.argv[1], encoding="utf-8") as source:^[[0m
+validate	Read the live pull-request body	2026-09-11T06:29:10.9907832Z ^[[36;1m    pull_request = json.load(source)^[[0m
+validate	Read the live pull-request body	2026-09-11T06:29:10.9908191Z ^[[36;1mwith open(sys.argv[2], "w", encoding="utf-8") as target:^[[0m
+validate	Read the live pull-request body	2026-09-11T06:29:10.9908649Z ^[[36;1m    json.dump({"pull_request": {"body": pull_request.get("body")}}, target)^[[0m
+validate	Read the live pull-request body	2026-09-11T06:29:10.9909040Z ^[[36;1mPY^[[0m
+validate	Read the live pull-request body	2026-09-11T06:29:10.9951407Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+validate	Read the live pull-request body	2026-09-11T06:29:10.9951778Z env:
+validate	Read the live pull-request body	2026-09-11T06:29:10.9952003Z   SE_HARNESS_VERSION: 0.17.0
+validate	Read the live pull-request body	2026-09-11T06:29:10.9952457Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Read the live pull-request body	2026-09-11T06:29:10.9952898Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+validate	Read the live pull-request body	2026-09-11T06:29:10.9953345Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Read the live pull-request body	2026-09-11T06:29:10.9953768Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Read the live pull-request body	2026-09-11T06:29:10.9954211Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Read the live pull-request body	2026-09-11T06:29:10.9954594Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+validate	Read the live pull-request body	2026-09-11T06:29:10.9957766Z   GH_TOKEN: ***
+validate	Read the live pull-request body	2026-09-11T06:29:10.9958003Z   PULL_REQUEST_NUMBER: 449
+validate	Read the live pull-request body	2026-09-11T06:29:10.9958252Z ##[endgroup]
+validate	Select the pull-request work order	﻿2026-09-11T06:29:11.7733945Z ##[group]Run work_order="$("$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness \
+validate	Select the pull-request work order	2026-09-11T06:29:11.7734553Z ^[[36;1mwork_order="$("$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness \^[[0m
+validate	Select the pull-request work order	2026-09-11T06:29:11.7735078Z ^[[36;1m  select-work-order --event "$RUNNER_TEMP/live-event.json")"^[[0m
+validate	Select the pull-request work order	2026-09-11T06:29:11.7735533Z ^[[36;1mprintf 'work_order=%s\n' "$work_order" >> "$GITHUB_OUTPUT"^[[0m
+validate	Select the pull-request work order	2026-09-11T06:29:11.7776319Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+validate	Select the pull-request work order	2026-09-11T06:29:11.7776676Z env:
+validate	Select the pull-request work order	2026-09-11T06:29:11.7776891Z   SE_HARNESS_VERSION: 0.17.0
+validate	Select the pull-request work order	2026-09-11T06:29:11.7777214Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Select the pull-request work order	2026-09-11T06:29:11.7777645Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+validate	Select the pull-request work order	2026-09-11T06:29:11.7778065Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Select the pull-request work order	2026-09-11T06:29:11.7778458Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Select the pull-request work order	2026-09-11T06:29:11.7778836Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Select the pull-request work order	2026-09-11T06:29:11.7779264Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+validate	Select the pull-request work order	2026-09-11T06:29:11.7779593Z ##[endgroup]
+validate	Review preflight	﻿2026-09-11T06:29:11.9358082Z ##[group]Run "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness preflight . --work-order "$HARNESS_WORK_ORDER" --phase review
+validate	Review preflight	2026-09-11T06:29:11.9359111Z ^[[36;1m"$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness preflight . --work-order "$HARNESS_WORK_ORDER" --phase review^[[0m
+validate	Review preflight	2026-09-11T06:29:11.9398725Z shell: /usr/bin/bash -e {0}
+validate	Review preflight	2026-09-11T06:29:11.9398988Z env:
+validate	Review preflight	2026-09-11T06:29:11.9399196Z   SE_HARNESS_VERSION: 0.17.0
+validate	Review preflight	2026-09-11T06:29:11.9399512Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Review preflight	2026-09-11T06:29:11.9399952Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+validate	Review preflight	2026-09-11T06:29:11.9400383Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Review preflight	2026-09-11T06:29:11.9400770Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Review preflight	2026-09-11T06:29:11.9401134Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Review preflight	2026-09-11T06:29:11.9401506Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+validate	Review preflight	2026-09-11T06:29:11.9401857Z   HARNESS_WORK_ORDER: WO-PLG-017
+validate	Review preflight	2026-09-11T06:29:11.9402154Z ##[endgroup]
+validate	Review preflight	2026-09-11T06:29:13.1472459Z Harness preflight: PASS
+validate	Review preflight	2026-09-11T06:29:13.1472920Z Phase: review
+validate	Review preflight	2026-09-11T06:29:13.1473260Z Work order: WO-PLG-017 (implemented)
+validate	Review preflight	2026-09-11T06:29:13.1473552Z 
+validate	Review preflight	2026-09-11T06:29:13.1473704Z Assurance classification:
+validate	Review preflight	2026-09-11T06:29:13.1474093Z - Commit-bound verification: required
+validate	Review preflight	2026-09-11T06:29:13.1474537Z - Decided by: engineering-owner
+validate	Review preflight	2026-09-11T06:29:13.1475282Z - Rationale: Later assurance depends on complete, readable retained evidence after its storage paths change.
+validate	Review preflight	2026-09-11T06:29:13.1475923Z 
+validate	Review preflight	2026-09-11T06:29:13.1476049Z Reading manifest:
+validate	Review preflight	2026-09-11T06:29:13.1476356Z - ENGINEERING_HARNESS.md
+validate	Review preflight	2026-09-11T06:29:13.1476707Z - docs/engineering/OPERATING_CARD.md
+validate	Review preflight	2026-09-11T06:29:13.1477321Z - AGENTS.md
+validate	Review preflight	2026-09-11T06:29:13.1477724Z - docs/engineering/workflow-execution/intent/INT-WEX-001.md
+validate	Review preflight	2026-09-11T06:29:13.1478374Z - docs/engineering/workflow-execution/capabilities/CAP-WEX-001.md
+validate	Review preflight	2026-09-11T06:29:13.1479089Z - docs/engineering/plugin-integration/requirements/REQ-PLG-019.md
+validate	Review preflight	2026-09-11T06:29:13.1479770Z - docs/engineering/plugin-integration/specifications/SPEC-PLG-011.md
+validate	Review preflight	2026-09-11T06:29:13.1480445Z - docs/engineering/plugin-integration/verification/VER-PLG-011.md
+validate	Review preflight	2026-09-11T06:29:13.1481107Z - docs/engineering/plugin-integration/work-orders/WO-PLG-017.md
+validate	Review preflight	2026-09-11T06:29:13.1481510Z 
+validate	Review preflight	2026-09-11T06:29:13.1482550Z Authority boundary: Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.
+validate	Enforce the work-order scope on the pull request's diff	﻿2026-09-11T06:29:13.1713108Z ##[group]Run # ECP-SCP-006 to -009: the scope check runs on every pull request over the
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1713776Z ^[[36;1m# ECP-SCP-006 to -009: the scope check runs on every pull request over the^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1714297Z ^[[36;1m# diff Git reports, with the released evaluator from the lock, whatever the^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1714802Z ^[[36;1m# work order's lifecycle state; the handoff check and the comparison of a^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1715315Z ^[[36;1m# declared Harness-Restitution line run only while it is still being^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1715715Z ^[[36;1m# implemented, and^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1716079Z ^[[36;1m# neither a declared line nor a lifecycle state relaxes the scope verdict.^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1716510Z ^[[36;1mgit fetch --depth=1 origin "$HARNESS_BASE_SHA"^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1716929Z ^[[36;1m# DST-MWF-001, -002: the check's exit status and stderr are captured, so a^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1717419Z ^[[36;1m# refusal that writes no result (a guard or identity code such as MG005)^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1717940Z ^[[36;1m# reaches the log as the evaluator's own text and fails the step with the^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1718418Z ^[[36;1m# check's status, never as a decoder traceback. A parsed result is judged^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1718800Z ^[[36;1m# exactly as before.^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1719050Z ^[[36;1mscope_status=0^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1719406Z ^[[36;1m"$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness check . \^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1720053Z ^[[36;1m  --artifact "$HARNESS_WORK_ORDER" --checkpoint scope \^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1720427Z ^[[36;1m  --from-git "$HARNESS_BASE_SHA" --json \^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1720852Z ^[[36;1m  > "$RUNNER_TEMP/scope.json" 2> "$RUNNER_TEMP/scope.stderr" || scope_status=$?^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1721559Z ^[[36;1min_progress="$("$RUNNER_TEMP/se-harness-env/bin/python" - "$RUNNER_TEMP/scope.json" "$RUNNER_TEMP/scope.stderr" "$scope_status" <<'PY'^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1722133Z ^[[36;1mimport json, sys^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1722619Z ^[[36;1mwith open(sys.argv[2], encoding="utf-8", errors="replace") as captured:^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1723037Z ^[[36;1m    check_stderr = captured.read()^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1723332Z ^[[36;1mif check_stderr:^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1723583Z ^[[36;1m    sys.stderr.write(check_stderr)^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1723845Z ^[[36;1mtry:^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1724110Z ^[[36;1m    with open(sys.argv[1], encoding="utf-8") as source:^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1724450Z ^[[36;1m        result = json.load(source)^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1724744Z ^[[36;1mexcept (OSError, ValueError):^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1725199Z ^[[36;1m    print(f"The scope check wrote no result (exit status {sys.argv[3]}).", file=sys.stderr)^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1725676Z ^[[36;1m    sys.exit(int(sys.argv[3]) or 1)^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1726042Z ^[[36;1moutcome = result.get("operation", {}).get("outcome")^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1726377Z ^[[36;1mfailures = [^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1726712Z ^[[36;1m    predicate for gate in result.get("compliance", {}).get("gates", [])^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1727138Z ^[[36;1m    for predicate in gate.get("predicates", [])^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1727594Z ^[[36;1m    if predicate.get("id") == "QGP-G4I-PATHS" and predicate.get("status") != "pass"^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1728033Z ^[[36;1m]^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1728254Z ^[[36;1mfor predicate in failures:^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1728636Z ^[[36;1m    print(f"scope: {predicate.get('message', '')}", file=sys.stderr)^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1729025Z ^[[36;1mif failures:^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1729388Z ^[[36;1m    sys.exit("The pull request's diff leaves the work order's declared scope.")^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1729826Z ^[[36;1mif outcome != "completed":^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1730212Z ^[[36;1m    for blocker in result.get("restitution", {}).get("blocked_by", []):^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1730649Z ^[[36;1m        print(f"blocked: {blocker}", file=sys.stderr)^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1731069Z ^[[36;1m    sys.exit(f"The scope check did not complete (outcome {outcome}).")^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1731752Z ^[[36;1mstates = result.get("restitution", {}).get("current_lifecycle_state", [])^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1732394Z ^[[36;1mprint("yes" if any(item.endswith(" is in_progress.") for item in states) else "no")^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1732819Z ^[[36;1mPY^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1733032Z ^[[36;1m)"^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1733394Z ^[[36;1mdeclared="$("$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness \^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1733968Z ^[[36;1m  select-work-order --event "$RUNNER_TEMP/live-event.json" --field restitution-digest)"^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1734452Z ^[[36;1mif [ "$in_progress" != "yes" ]; then^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1734754Z ^[[36;1m  if [ -n "$declared" ]; then^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1735449Z ^[[36;1m    echo "The pull request's diff is inside the declared scope; the declared Harness-Restitution $declared was bound at handoff and is not recomputed after completion."^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1736112Z ^[[36;1m  else^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1736512Z ^[[36;1m    echo "The pull request's diff is inside the declared scope; no restitution digest was declared."^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1736967Z ^[[36;1m  fi^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1737155Z ^[[36;1melse^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1737358Z ^[[36;1mhandoff_status=0^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1737710Z ^[[36;1m"$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness check . \^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1738172Z ^[[36;1m  --artifact "$HARNESS_WORK_ORDER" --checkpoint handoff \^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1738565Z ^[[36;1m  --from-git "$HARNESS_BASE_SHA" --json \^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1739178Z ^[[36;1m  > "$RUNNER_TEMP/restitution.json" 2> "$RUNNER_TEMP/restitution.stderr" || handoff_status=$?^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1739987Z ^[[36;1m"$RUNNER_TEMP/se-harness-env/bin/python" - "$RUNNER_TEMP/restitution.json" "$declared" "$RUNNER_TEMP/restitution.stderr" "$handoff_status" <<'PY'^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1740600Z ^[[36;1mimport json, sys^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1740954Z ^[[36;1mwith open(sys.argv[3], encoding="utf-8", errors="replace") as captured:^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1741354Z ^[[36;1m    check_stderr = captured.read()^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1741644Z ^[[36;1mif check_stderr:^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1741892Z ^[[36;1m    sys.stderr.write(check_stderr)^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1742155Z ^[[36;1mtry:^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1742676Z ^[[36;1m    with open(sys.argv[1], encoding="utf-8") as source:^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1743031Z ^[[36;1m        result = json.load(source)^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1743320Z ^[[36;1mexcept (OSError, ValueError):^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1743769Z ^[[36;1m    print(f"The handoff check wrote no result (exit status {sys.argv[4]}).", file=sys.stderr)^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1744222Z ^[[36;1m    sys.exit(int(sys.argv[4]) or 1)^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1744523Z ^[[36;1mdeclared = sys.argv[2]^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1744861Z ^[[36;1moutcome = result.get("operation", {}).get("outcome")^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1745209Z ^[[36;1mif outcome != "completed":^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1745578Z ^[[36;1m    for blocker in result.get("restitution", {}).get("blocked_by", []):^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1746572Z ^[[36;1m        print(f"blocked: {blocker}", file=sys.stderr)^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1747241Z ^[[36;1m    sys.exit(f"The handoff check did not complete (outcome {outcome}).")^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1747903Z ^[[36;1mrecomputed = result.get("result_sha256", "")^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1748249Z ^[[36;1mif declared and declared != recomputed:^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1748799Z ^[[36;1m    sys.exit(f"Declared Harness-Restitution {declared} does not match the recomputed result_sha256 {recomputed}.")^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1749457Z ^[[36;1mprint("The pull request's diff is inside the declared scope"^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1750081Z ^[[36;1m      + (" and the declared restitution digest matches." if declared else "; no restitution digest was declared."))^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1750581Z ^[[36;1mPY^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1750780Z ^[[36;1mfi^[[0m
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1789725Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1790075Z env:
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1790290Z   SE_HARNESS_VERSION: 0.17.0
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1790756Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1791192Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1791610Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1791998Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1792646Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1793095Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1793443Z   HARNESS_WORK_ORDER: WO-PLG-017
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1793754Z   HARNESS_BASE_SHA: 7fe82c95823503e54d2e35e00d8c409a6dd4b065
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.1794073Z ##[endgroup]
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.7785094Z From https://github.com/mmzen/se_harness
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:13.7786015Z  * branch            7fe82c95823503e54d2e35e00d8c409a6dd4b065 -> FETCH_HEAD
+validate	Enforce the work-order scope on the pull request's diff	2026-09-11T06:29:15.7364528Z The pull request's diff is inside the declared scope; no restitution digest was declared.
+validate	Qualify the root with its exact released evaluator	﻿2026-09-11T06:29:15.7397216Z ##[group]Run cd "$RUNNER_TEMP"
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:15.7397534Z ^[[36;1mcd "$RUNNER_TEMP"^[[0m
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:15.7397811Z ^[[36;1mexport PYTHONNOUSERSITE=1 PYTHONPATH=^[[0m
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:15.7398213Z ^[[36;1m"$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness \^[[0m
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:15.7398631Z ^[[36;1m  qualify released-root "$GITHUB_WORKSPACE" \^[[0m
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:15.7399051Z ^[[36;1m  --output "$RUNNER_TEMP/released-root-qualification.json" \^[[0m
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:15.7399636Z ^[[36;1m  --json^[[0m
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:15.7438327Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:15.7438664Z env:
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:15.7438869Z   SE_HARNESS_VERSION: 0.17.0
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:15.7439179Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:15.7439601Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:15.7440024Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:15.7440401Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:15.7440814Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:15.7441202Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:15.7441530Z ##[endgroup]
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5712888Z {
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5713585Z   "authority": "evidence-only; no lifecycle or external action authorized",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5714224Z   "checks": [
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5714559Z     {
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5714823Z       "id": "RR001",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5715206Z       "message": "runtime matches the target root lock",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5715675Z       "passed": true,
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5716016Z       "subject": "released-evaluator"
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5716381Z     },
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5716622Z     {
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5716868Z       "id": "RR002",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5717194Z       "message": "99/99 managed checks passed",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5717611Z       "passed": true,
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5717923Z       "subject": "managed-root"
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5718270Z     },
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5718502Z     {
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5718736Z       "id": "RR003",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5719113Z       "message": "artifacts=1533; errors=0; warnings=46",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5719547Z       "passed": true,
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5719857Z       "subject": "engineering-graph"
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5720203Z     },
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5720438Z     {
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5720680Z       "id": "RR004",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5721002Z       "message": "target state is unchanged",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5721404Z       "passed": true,
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5721715Z       "subject": "repository-state"
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5722059Z     }
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5722434Z   ],
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5722708Z   "completion": "completed",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5723028Z   "evaluator": {
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5723312Z     "diagnostics": [],
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5723629Z     "distribution": "se-harness",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5724277Z     "entry_point_sha256": "1a9619b137a71e0bbfc6f232c010b9dcabe54bf314102ae2440a73f0f0e36681",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5725186Z     "evaluator_payload_manifest": "se-harness-installed-payload-v1",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5726026Z     "evaluator_payload_sha256": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5726934Z     "identity_sha256": "77406e344612c7a527171273e7cdb680eea4230814a2f998c5719f358327cfa3",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5727559Z     "isolated_python": true,
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5727921Z     "pythonpath_present": false,
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5728295Z     "role": "released-evaluator",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5728668Z     "user_site_enabled": false,
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5729009Z     "version": "0.17.0"
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5729305Z   },
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5729615Z   "independence": "released-evaluator",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5730024Z   "operation": "released-root",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5730363Z   "passed": true,
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5730733Z   "schema": "se-harness-release-qualification-v1",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5731180Z   "target": {
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5731867Z     "head": "6004193f4423307f47a424f8b100f42ad1c0dfee",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5732731Z     "identity_sha256": "f38486962c35026f3dff0e49eecf5c75722fb2dcb1da2669f678d7834665c776",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5733387Z     "kind": "released-root",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5733727Z     "lock_schema": 3,
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5734269Z     "lock_sha256": "ac614b2bb0c9910df078a7025bef72b6da3074aa84e6728c0ecc0539bd9efc15",
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5735184Z     "tree": "d1787e3dea90c66e8088ef03953446290979f786"
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5735595Z   }
+validate	Qualify the root with its exact released evaluator	2026-09-11T06:29:17.5735845Z }
+validate	Generate Harness Explorer	﻿2026-09-11T06:29:17.5930652Z ##[group]Run "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness dashboard .
+validate	Generate Harness Explorer	2026-09-11T06:29:17.5931267Z ^[[36;1m"$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness dashboard .^[[0m
+validate	Generate Harness Explorer	2026-09-11T06:29:17.5970133Z shell: /usr/bin/bash -e {0}
+validate	Generate Harness Explorer	2026-09-11T06:29:17.5970402Z env:
+validate	Generate Harness Explorer	2026-09-11T06:29:17.5970619Z   SE_HARNESS_VERSION: 0.17.0
+validate	Generate Harness Explorer	2026-09-11T06:29:17.5970931Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Generate Harness Explorer	2026-09-11T06:29:17.5971366Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+validate	Generate Harness Explorer	2026-09-11T06:29:17.5971793Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Generate Harness Explorer	2026-09-11T06:29:17.5972184Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Generate Harness Explorer	2026-09-11T06:29:17.5972851Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Generate Harness Explorer	2026-09-11T06:29:17.5973236Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+validate	Generate Harness Explorer	2026-09-11T06:29:17.5973583Z ##[endgroup]
+validate	Generate Harness Explorer	2026-09-11T06:29:21.2841070Z Harness Explorer generation: PASS | Artifacts: 1533 | Relations: 5538 | Errors: 0 | Warnings: 397 | Output: target/harness-dashboard | Manifest: 04a2141d21af120ba8a6b6ef0b2866c14008faba1726ec5562c923b4a63e9323
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	﻿2026-09-11T06:29:21.3157787Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.3159130Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.3159520Z with:
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.3159732Z   name: harness-dashboard
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.3160151Z   path: target/harness-dashboard
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	/home/runner/work/_temp/released-root-qualification.json
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.3160623Z   if-no-files-found: warn
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.3160861Z   compression-level: 6
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.3161088Z   overwrite: false
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.3161309Z   include-hidden-files: false
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.3161547Z env:
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.3161744Z   SE_HARNESS_VERSION: 0.17.0
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.3162041Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.3162656Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.3163077Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.3163454Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.3163834Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.3164209Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.3164531Z ##[endgroup]
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.4806458Z (node:2497) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.4807747Z (Use `node --trace-deprecation ...` to show where the warning was created)
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.7721601Z Multiple search paths detected. Calculating the least common ancestor of all paths
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.7723787Z The least common ancestor is /home/runner/work. This will be the root directory of the artifact
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.7724647Z With the provided path, there will be 2412 files uploaded
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.7729624Z Artifact name is valid!
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:21.7730141Z Root directory input is valid!
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:22.1353036Z Beginning upload of artifact content to blob storage
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:23.5317535Z (node:2497) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:24.3577827Z Uploaded bytes 7426548
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:24.4260750Z Finished uploading artifact content to blob storage!
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:24.4263205Z SHA256 digest of uploaded artifact zip is da50e4de84274cb226c282e149bb859df317bf7ae01d66df7bc2f6d5fe52ceea
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:24.4266035Z Finalizing artifact upload
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:24.6561778Z Artifact harness-dashboard.zip successfully finalized. Artifact ID 10187446684
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:24.6562900Z Artifact harness-dashboard has been successfully uploaded! Final size is 7426548 bytes. Artifact ID is 10187446684
+validate	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-09-11T06:29:24.6571815Z Artifact download URL: https://github.com/mmzen/se_harness/actions/runs/34570104946/artifacts/10187446684
+validate	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T06:29:24.6870522Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+validate	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:24.6871709Z Post job cleanup.
+validate	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:24.8049595Z (node:2510) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+validate	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:29:24.8050384Z (Use `node --trace-deprecation ...` to show where the warning was created)
+validate	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T06:29:24.8202871Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+validate	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:24.8204147Z Post job cleanup.
+validate	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:24.9082948Z [command]/usr/bin/git version
+validate	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:24.9113160Z git version 2.55.0
+validate	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:24.9149648Z Temporarily overriding HOME='/home/runner/work/_temp/49111ab9-d521-4311-a923-702786cc4d1c' before making global git config changes
+validate	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:24.9151045Z Adding repository directory to the temporary git global config as a safe directory
+validate	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:24.9154622Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/se_harness/se_harness
+validate	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:24.9194153Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+validate	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:24.9229491Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+validate	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:24.9513412Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+validate	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:24.9537571Z http.https://github.com/.extraheader
+validate	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:24.9550213Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+validate	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:24.9584558Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+validate	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:24.9917437Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+validate	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:29:24.9967414Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+validate	Complete job	﻿2026-09-11T06:29:25.0436918Z Cleaning up orphan processes
+validate	Complete job	2026-09-11T06:29:25.0760410Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

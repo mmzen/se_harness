@@ -1,0 +1,17 @@
+{
+  "decision_right": "DR-VREC-PREPARE",
+  "decided_by": "engineering-owner",
+  "operator_response": "Authorize aggregate record preparation",
+  "record": "VREC-PLG-010",
+  "candidate": "47f7b842d395764583adbe834c39aecdc0afd521",
+  "work_orders": [
+    "WO-PLG-011",
+    "WO-PLG-017"
+  ],
+  "verification_contracts": [
+    "VER-PLG-011"
+  ],
+  "preparation_actor": "codex-preparation-actor",
+  "manifest_sha256": "0a8e05dbfadab5c6fa5cdc86de5b631205ea479e8d1baf96b0e16ca6d8c89f8c",
+  "scope": "Prepare the exact ready aggregate only. No assurance, supersession, release or merge."
+}
