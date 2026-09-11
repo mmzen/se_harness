@@ -104,22 +104,22 @@
 2026-09-11T19:33:05.0113167Z ##[group]Checking out the ref
 2026-09-11T19:33:05.0119313Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/456/merge
 2026-09-11T19:33:05.6952804Z Note: switching to 'refs/remotes/pull/456/merge'.
-2026-09-11T19:33:05.6953586Z 
+2026-09-11T19:33:05.6953586Z
 2026-09-11T19:33:05.6953956Z You are in 'detached HEAD' state. You can look around, make experimental
 2026-09-11T19:33:05.6954825Z changes and commit them, and you can discard any commits you make in this
 2026-09-11T19:33:05.6955655Z state without impacting any branches by switching back to a branch.
-2026-09-11T19:33:05.6956122Z 
+2026-09-11T19:33:05.6956122Z
 2026-09-11T19:33:05.6956471Z If you want to create a new branch to retain commits you create, you may
 2026-09-11T19:33:05.6957209Z do so (now or later) by using -c with the switch command. Example:
-2026-09-11T19:33:05.6957615Z 
+2026-09-11T19:33:05.6957615Z
 2026-09-11T19:33:05.6957802Z   git switch -c <new-branch-name>
-2026-09-11T19:33:05.6958117Z 
+2026-09-11T19:33:05.6958117Z
 2026-09-11T19:33:05.6958297Z Or undo this operation with:
-2026-09-11T19:33:05.6958616Z 
+2026-09-11T19:33:05.6958616Z
 2026-09-11T19:33:05.6958788Z   git switch -
-2026-09-11T19:33:05.6959017Z 
+2026-09-11T19:33:05.6959017Z
 2026-09-11T19:33:05.6959432Z Turn off this advice by setting config variable advice.detachedHead to false
-2026-09-11T19:33:05.6960256Z 
+2026-09-11T19:33:05.6960256Z
 2026-09-11T19:33:05.6960815Z HEAD is now at 3bb4d7d Merge 4549f19f562841f461961a21a83c02bd194a9d36 into 78cd64df7c130a6f42ab357836093db30f710753
 2026-09-11T19:33:05.6998167Z ##[endgroup]
 2026-09-11T19:33:05.7055759Z [command]/usr/bin/git log -1 --format=%H
@@ -221,12 +221,12 @@
 2026-09-11T19:33:13.3376566Z Harness preflight: PASS
 2026-09-11T19:33:13.3377156Z Phase: review
 2026-09-11T19:33:13.3377644Z Work order: WO-PLG-006 (in_progress)
-2026-09-11T19:33:13.3378060Z 
+2026-09-11T19:33:13.3378060Z
 2026-09-11T19:33:13.3378273Z Assurance classification:
 2026-09-11T19:33:13.3378831Z - Commit-bound verification: required
 2026-09-11T19:33:13.3379484Z - Decided by: engineering-owner
 2026-09-11T19:33:13.3380889Z - Rationale: Future governed Claude Code sessions rely on correct host bindings and truthful reporting of supported checks.
-2026-09-11T19:33:13.3381643Z 
+2026-09-11T19:33:13.3381643Z
 2026-09-11T19:33:13.3381766Z Reading manifest:
 2026-09-11T19:33:13.3382065Z - ENGINEERING_HARNESS.md
 2026-09-11T19:33:13.3382411Z - docs/engineering/OPERATING_CARD.md
@@ -239,7 +239,7 @@
 2026-09-11T19:33:13.3582817Z - docs/engineering/plugin-integration/architecture/adr/ADR-PLG-002.md
 2026-09-11T19:33:13.3583336Z - docs/engineering/plugin-integration/verification/VER-PLG-006.md
 2026-09-11T19:33:13.3583783Z - docs/engineering/plugin-integration/work-orders/WO-PLG-006.md
-2026-09-11T19:33:13.3584067Z 
+2026-09-11T19:33:13.3584067Z
 2026-09-11T19:33:13.3584674Z Authority boundary: Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.
 2026-09-11T19:33:13.3640977Z ##[group]Run # ECP-SCP-006 to -009: the scope check runs on every pull request over the
 2026-09-11T19:33:13.3641645Z [36;1m# ECP-SCP-006 to -009: the scope check runs on every pull request over the[0m

@@ -21,3 +21,9 @@ The authored packet explicitly records incomplete live acceptance and an
 in-progress draft. This is evidence for review, not a lifecycle transition or
 claim that the adapter is qualified. `evidence-result.json`, `check-result.json`
 and `check-stderr.txt` retain the correction commands' results.
+
+`initial-job-log-text.json` preserves the original serialized log text. The
+readable `.log` projection trims trailing whitespace only; its original bytes
+were not an HTTP-wire capture. Handoff check completed with exit 0; live GitHub
+gate retrieval was unavailable in the default network sandbox, so no delegated
+completion authority was inferred.
