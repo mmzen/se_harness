@@ -13,3 +13,8 @@ requires no embedded quotes. The subsequent nine-test run passed in 17.238 s.
 Each failure returned UNREADY or denial; none established host qualification.
 These command results were observed during development before durable acceptance
 capture. The later focused command/result capture supplies rerunnable evidence.
+
+The C04 readable stdout/stderr projections initially contained doubled CRLF from
+writing captured Windows process bytes through text-mode output. Those two text
+projections now use LF. Their original structured command captures, including
+captured process stdout/stderr strings, remain unchanged in commands.json.
