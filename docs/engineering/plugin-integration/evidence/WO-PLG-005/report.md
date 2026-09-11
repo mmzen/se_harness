@@ -1,5 +1,7 @@
 # WO-PLG-005 implementation and acceptance report
 
+**Operator acceptance recorded:** the operator accepted hook failure as a [documented local limitation](local-limitation-acceptance/README.md). The failed observations remain unchanged. Formal decision recording and any required contract changes are separate; this evidence update changes no lifecycle state.
+
 WO-PLG-005 remains **in_progress** and **unqualified** under VER-PLG-005. Current evidence supports C01–C09 on the routes stated below and C12's rejection of invalid configurations. **C10 and C11 observed failed enforcement:** timeout, missing output, invalid output and loss of the active binding each allowed an exact synthetic edit after ordinary one-time file approval, without a supported handler refusal. Literal OS shell-start failure remains unavailable. The [qualification limit](qualification-limit.md) records these findings and their scope. A passing observation does not qualify the whole adapter or approve completion, verification, release or publication.
 
 The [case index](#acceptance-status) links each conclusion to its retained captures. Each `Cnn/observations.json` is a consolidation with expected/observed results and source digests. The adjacent `actions.txt`, `stdout.txt` and `stderr.txt` are explicitly labeled indexes, not invented command runs or replacement raw output. Original nested attempts remain unchanged.

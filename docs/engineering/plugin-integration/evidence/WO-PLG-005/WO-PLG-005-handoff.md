@@ -2,7 +2,7 @@
 artifact = "WO-PLG-005"
 checkpoint = "handoff"
 formal_snapshot_sha256 = "adcc15b6639b67810dd01e44d67204feeef49a4051759c6d659a6678aadf1716"
-rebound_at = "2026-09-11T21:40:53Z"
+rebound_at = "2026-09-11T22:03:41Z"
 ```
 
 # WO-PLG-005 handoff evidence
@@ -15,4 +15,8 @@ The [acceptance report](report.md) and [qualification limit](qualification-limit
 
 [Final focused and repository checks](checks/final-live-checks-01/results.json) record 143 passing focused tests, passing candidate graph/help/distribution checks and passing released 0.17 graph/doctor/preflight checks. Candidate doctor reports exactly the six existing candidate-versus-released template differences. [Complete candidate regression](checks/final-regression-01/result.json) retains its separate result. CI must be read for the exact PR head; none of these integrity checks proves live-host enforcement.
 
-The implementation and evidence are not complete against VER-PLG-005. Continue in progress and escalate the missing enforcement and untested launch-failure case for engineering-owner disposition. This packet authorizes no definition amendment, completion transition, VREC preparation, assurance decision, merge or release. A passing mechanical handoff check establishes scoped evidence freshness; it does not replace the failed live acceptance results.
+The implementation and evidence are not complete against VER-PLG-005. Continue in progress. The operator has accepted the local limitation; formal decision recording remains separate and the launch-failure case stays untested. This packet authorizes no definition amendment, completion transition, VREC preparation, assurance decision, merge or release. A passing mechanical handoff check establishes scoped evidence freshness; it does not replace the failed live acceptance results.
+
+## Operator acceptance of the local limitation
+
+**Operator acceptance recorded:** the operator accepted hook failure as a [documented local limitation](local-limitation-acceptance/README.md). The failed observations remain unchanged. Formal decision recording and any required contract changes are separate; this evidence update changes no lifecycle state.

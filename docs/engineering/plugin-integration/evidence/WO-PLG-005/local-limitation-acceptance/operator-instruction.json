@@ -1,0 +1,23 @@
+{
+  "record_kind": "operator-instruction-evidence",
+  "work_order": "WO-PLG-005",
+  "pull_request": 457,
+  "instruction_verbatim": "I accept the hook failure as a documented local limitation",
+  "recorded_at": "2026-09-11T22:02:45.033791+00:00",
+  "instruction_source": "Current Codex task, following discussion of local hook failure and future independent acceptance controls.",
+  "reviewed_evidence_commit": "29b9d9842547ab01000c2ea60b5b6db9499fc478",
+  "accepted_boundary": "Documented local hook-failure limitation; no claim that every local edit is prevented.",
+  "formal_decision_recorded": false,
+  "lifecycle_changed": false,
+  "cases": {
+    "C10": "0c15bb7a7223df4e83ddec64529fe204b5eab9e9b55b74d2b144e734ad0f10f3",
+    "C11": "295986d1e680e4f1c7841dab15f5545b89cffebcb4496f819dad7863b401dcb3"
+  },
+  "not_authorized_by_this_acceptance": [
+    "Changing raw observations or failed verdicts",
+    "Expanding work-order scope",
+    "Bypassing ordinary host permissions",
+    "Claiming the future remote service already enforces acceptance",
+    "Completion, verification-record preparation, assurance, merge or release"
+  ]
+}

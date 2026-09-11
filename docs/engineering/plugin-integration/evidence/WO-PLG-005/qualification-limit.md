@@ -1,5 +1,7 @@
 # WO-PLG-005 qualification limit
 
+**Operator acceptance recorded:** the operator accepted hook failure as a [documented local limitation](local-limitation-acceptance/README.md). The failed observations remain unchanged. Formal decision recording and any required contract changes are separate; this evidence update changes no lifecycle state.
+
 The Codex adapter remains **unqualified**. On the tested profile, a missing
 before-tool refusal allowed the reviewed synthetic edit to proceed after
 ordinary one-time file approval. Successful healthy-path checks do not cover
