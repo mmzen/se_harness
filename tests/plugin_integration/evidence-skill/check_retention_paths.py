@@ -12,6 +12,7 @@ import sys
 
 # Exact proposal approved for WO-PLG-017, retained at ed19676fd2af8b9754f74cbc6bc8664a92d2f803.
 APPROVED_PLAN_SHA256 = '37031560322c962987513e8950b37503a642c6e474cc2a031822870467659aa9'
+APPROVED_EXTENSION_SHA256 = '1927a7d61c7d6357e61047f427c0d2f1fb8e456d32dd1698efc01c7bba6f9538'
 
 
 def main():
@@ -70,6 +71,34 @@ def main():
             raise ValueError('Changed evidence payload: ' + row['original_path'])
         if path(row['original_path']).exists():
             raise ValueError('Old long path is still present: ' + row['original_path'])
+    extension_bytes = path(prefix + 'evidence/WO-PLG-017/scope-extension-plan.json').read_bytes()
+    if sha(extension_bytes) != APPROVED_EXTENSION_SHA256:
+        raise ValueError('Supplemental plan differs from the approved scope extension')
+    extension = json.loads(extension_bytes)
+    supplemental = json.loads(path(extension['retention_map_destination']).read_bytes())
+    if (supplemental['schema'] != 'se-harness-evidence-relocation-v1'
+            or supplemental['evidence_bytes_modified'] is not False
+            or supplemental['source_plan_sha256'] != APPROVED_EXTENSION_SHA256
+            or supplemental['source_commit'] != extension['source_commit']):
+        raise ValueError('Supplemental map is not bound to the approved extension')
+    expected_extra = [{('retained_path' if key == 'proposed_path' else key): value
+                       for key, value in row.items()} for row in extension['files']]
+    if supplemental['files'] != expected_extra or len(expected_extra) != 1:
+        raise ValueError('Supplemental mapping differs from the approved one-file extension')
+    git('merge-base', '--is-ancestor', extension['source_commit'], 'HEAD')
+    if path(map_path).read_bytes() != git('show', extension['source_commit'] + ':' + map_path):
+        raise ValueError('Original 55-file map changed')
+    extra = expected_extra[0]
+    original = git('show', extension['source_commit'] + ':' + extra['original_path'])
+    retained = path(extra['retained_path']).read_bytes()
+    if retained != original or len(retained) != extra['bytes'] or sha(retained) != extra['sha256']:
+        raise ValueError('Changed supplemental evidence payload')
+    if path(extra['original_path']).exists():
+        raise ValueError('Supplemental old path is still present')
+    original_set.add(extra['original_path'])
+    destinations.add(extra['retained_path'])
+    if len(original_set) != 56 or len(destinations) != 56:
+        raise ValueError('Combined relocation paths are not unique')
     # Staging is performed by the caller. This check never updates the Git index.
     tracked = git('ls-files', '-z').decode().rstrip('\0').split('\0')
     if original_set.intersection(tracked) or not destinations.issubset(tracked):
@@ -78,15 +107,25 @@ def main():
     over_budget = [(length, rel) for length, rel in lengths if length > args.max_full_path]
     if over_budget:
         raise ValueError('Windows checkout path budget exceeded: ' + repr(over_budget))
+    staging = extension['staging_profile']
+    staging_lengths = [(len(str(PureWindowsPath(staging['root']) / rel)), rel) for rel in tracked]
+    staging_excess = [(length, rel) for length, rel in staging_lengths if length > staging['maximum_full_path']]
+    if staging_excess:
+        raise ValueError('Windows rehearsal staging path budget exceeded: ' + repr(staging_excess))
     # Preserve the ready record and its captured evaluator facts exactly at G.
     immutable = [prefix + 'verification-records/VREC-PLG-008.md', prefix + 'evidence/VREC-PLG-008-evaluator.json']
     for rel in immutable:
         if path(rel).read_bytes() != git('show', mapping['source_commit'] + ':' + rel):
             raise ValueError('Historical verification evidence changed: ' + rel)
-    print(json.dumps({'passed': True, 'mapped_files': len(rows), 'payload_bytes_unchanged': True,
+    print(json.dumps({'passed': True, 'mapped_files': len(destinations), 'original_map_files': len(rows),
+                      'supplemental_files': len(expected_extra), 'payload_bytes_unchanged': True,
                       'source_commit': mapping['source_commit'], 'preserved_vrec': 'VREC-PLG-008',
                       'max_full_path': max(length for length, _ in lengths), 'path_budget': args.max_full_path,
-                      'checkout_root': args.checkout_root, 'scope': 'Retained evidence bytes and paths only; no assurance decision'}, indent=2))
+                      'checkout_root': args.checkout_root,
+                      'staging_root': staging['root'], 'staging_max_full_path': max(length for length, _ in staging_lengths),
+                      'staging_budget': staging['maximum_full_path'],
+                      'staging_limit': 'Derived profile; actual export/staging and hosted rehearsal must also pass.',
+                      'scope': 'Retained evidence bytes and paths only; no assurance decision'}, indent=2))
 
 
 if __name__ == '__main__':

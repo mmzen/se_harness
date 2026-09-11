@@ -68,3 +68,9 @@ and SHA-256. Original logs and manifests retain their observed paths and bytes;
 resolve those paths through the map. VREC-PLG-008 still binds its original
 candidate and evidence in Git history. This relocation is not an assurance
 decision or a claim that the original Windows checkout succeeded.
+
+The approved WO-PLG-017 scope extension relocates one further retained JSON for
+the deeper Windows upgrade-rehearsal directory. Its separate
+[staging map](../WO-PLG-017/staging-path-map.json) preserves the original path,
+size and SHA-256. The original 55-file map remains unchanged; old logs and
+manifests continue to describe the paths observed during their original runs.

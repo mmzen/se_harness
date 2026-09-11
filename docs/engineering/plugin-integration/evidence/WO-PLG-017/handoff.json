@@ -2,7 +2,7 @@
   "compliance": {
     "change_set_source": "git",
     "checkpoint": "handoff",
-    "formal_snapshot_sha256": "694127693cc6a38ab00a9c21f680abf2b4007266b96943f42b9369f412e3c29a",
+    "formal_snapshot_sha256": "1313dcbde1269e6098677297bcbc154c1f9d00a3edd4f98eb8f5539e53f0fb6c",
     "gates": [
       {
         "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
@@ -48,7 +48,7 @@
               }
             ],
             "id": "QGP-G4I-SCOPE",
-            "message": "WO-PLG-017 declares 11 normalized scope path(s).",
+            "message": "WO-PLG-017 declares 12 normalized scope path(s).",
             "status": "pass"
           },
           {
@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 404 declared changed path(s) are within execution scope.",
+            "message": "All 410 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -245,17 +245,8 @@
     "alternatives": [],
     "blocked_by": [],
     "command_or_response": {
-      "argv": [
-        "harnessctl",
-        "transition",
-        ".",
-        "--set",
-        "WO-PLG-017=implemented",
-        "--decision",
-        "WO-PLG-017=delegated-executor",
-        "--apply"
-      ],
-      "kind": "command"
+      "kind": "response",
+      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for 58dc19f: HTTP 422"
     },
     "current_lifecycle_state": [
       "WO-PLG-017 is in_progress."
@@ -265,10 +256,8 @@
       "decision": "whether the authorized implementation and evidence are complete",
       "decision_right": "DR-WO-COMPLETE",
       "delegation": {
-        "check_run_id": "103061723065",
         "class": "execution",
-        "gate": "success",
-        "head": "a5aae5a39d0ac30b3847187d84c17371cad893cd"
+        "gate": "not passing"
       },
       "outcomes": [
         "implemented",
@@ -288,7 +277,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "2af72630f70ff63dfb8e3e5c38cc2c86c3a57f8eb6c138db3d3428e42b98e3d1",
+  "result_sha256": "2a40dc1698bf0bfffe18c242e5f119e31e2496840e4477d33faee992216223e6",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
@@ -309,6 +298,7 @@
       "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/target/harness-dashboard/data/topology/e8ed2545376da173dc9783aef81e988547ef9489a0c719bfbc07fdc0ab2d8b5b.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/target/harness-dashboard/generation-summary.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/target/harness-dashboard/index.html",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/docs/engineering/evidence-demo/evidence/VREC-EVD-001-evaluator.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md",
       "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/docs/engineering/evidence-demo/verification-records/VREC-EVD-001.md",
@@ -404,6 +394,7 @@
       "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0053.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0054.md",
       "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0055.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0056.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-011/README.md",
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/audit.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/c-vs-g.json",
@@ -620,6 +611,7 @@
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/approval/repair-approved-preflight.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/approval/repair-approved-validate.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/approval/repair-owner-approval.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/approval/scope-extension.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/acceptance-retention.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/checks.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/checks.json.stderr",
@@ -664,6 +656,8 @@
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-help/command.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-help/stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-help/stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-paused-handoff.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-paused-handoff.stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-proposal-doctor.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-proposal-doctor.stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-proposal-graph.json",
@@ -691,6 +685,7 @@
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/README.md",
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/scope-extension-plan.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/scope-extension.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/staging-path-map.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/start/repair-start-applied.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/start/repair-start-plan.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-017/start/repair-start-preflight.json",
@@ -701,6 +696,7 @@
     "declared_paths": [
       "docs/engineering/plugin-integration/evidence/VREC-PLG-010-evaluator.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/",
       "docs/engineering/plugin-integration/evidence/WO-PLG-011/native-path-map.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/",
