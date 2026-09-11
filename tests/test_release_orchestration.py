@@ -26,6 +26,8 @@ from repository_tools.release_distribution import (
 )
 from tests.git_support import git
 from tests.root_identity_support import load_module
+from tests.artifact_support import write
+from tests import test_dashboard_publication as dashboard_tests
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -85,6 +87,157 @@ def plan() -> object:
         checksums_sha256=values["checksums_sha256"],
         source_manifest_sha256=values["source_manifest_sha256"],
     )
+
+
+class ReleaseArtifactDiscoveryTests(unittest.TestCase):
+    """WO-RLO-009: real Git histories distinguish records from retained copies."""
+
+    def setUp(self) -> None:
+        self.fixture = dashboard_tests.GitReleaseFixture()
+        self.fixture.setUp()
+        self.addCleanup(self.fixture.tearDown)
+        self.root = self.fixture.root
+        self.distribution = distribution_values()
+        self.distribution["source_date_epoch"] = int(git(self.root, "show", "-s", "--format=%ct", self.fixture.candidate))
+        self.distribution["source_manifest_sha256"] = DISTRIBUTION.source_manifest_sha256(self.root, self.fixture.candidate)
+        self.record = self.fixture.release_record("RLS-TST-001").replace(
+            "\n+++\n", "\n[distribution]\n" + "\n".join(
+                f"{key} = {json.dumps(value)}" for key, value in self.distribution.items()
+            ) + "\n+++\n", 1,
+        )
+        self.write_live_records()
+        self.fixture.commit("add publication provenance")
+
+    def write_live_records(self) -> None:
+        write(self.root / self.fixture.record_path, self.record)
+        for artifact_id, artifact_type in (
+            ("VREC-TST-001", "verification_record"),
+            ("WO-TST-001", "work_order"),
+            ("REL-TST-001", "release_contract"),
+        ):
+            write(self.root / f"docs/engineering/release/{artifact_id}.md", self.artifact(artifact_id, artifact_type))
+
+    def artifact(self, artifact_id: str, artifact_type: str) -> str:
+        return (f'+++\nid = "{artifact_id}"\ntype = "{artifact_type}"\nstatus = "verified"\n'
+                f'commit = "{self.fixture.candidate}"\ngit_object_format = "sha1"\n+++\n')
+
+    def resolve(self):
+        return RELEASE.resolve_plan(self.root, "RLS-TST-001", "refs/heads/main")
+
+    def test_path_boundary_matches_the_validator_without_substring_exclusions(self) -> None:
+        from se_harness.engine.validation_core import EXCLUDED_DIRECTORY_NAMES, _is_excluded
+
+        excluded = {"templates", "evidence", ".git", ".idea", "target", "node_modules"}
+        self.assertEqual(excluded, EXCLUDED_DIRECTORY_NAMES)
+        artifact_root = Path("docs/engineering")
+        for directory in excluded:
+            for path in (f"docs/engineering/{directory}/record.md",
+                         f"docs/engineering/domain/nested/{directory}/record.md"):
+                with self.subTest(path=path):
+                    self.assertFalse(RELEASE.dashboard._is_artifact_path(path))
+                    self.assertTrue(_is_excluded(Path(path), artifact_root))
+        for path in ("docs/engineering/flat.md", "docs/engineering/evidence.md",
+                     "docs/engineering/domain/evidence-backed/VREC-EVD-001.md",
+                     "docs/engineering/domain/mytemplates/record.md"):
+            with self.subTest(path=path):
+                self.assertTrue(RELEASE.dashboard._is_artifact_path(path))
+                self.assertFalse(_is_excluded(Path(path), artifact_root))
+        for path in ("docs/engineering-other/record.md", "other/docs/engineering/record.md",
+                     "docs/engineering/record.json", "docs/engineering/record.MD"):
+            with self.subTest(path=path):
+                self.assertFalse(RELEASE.dashboard._is_artifact_path(path))
+
+    def test_excluded_front_matter_is_not_parsed_and_live_evd_ids_remain_visible(self) -> None:
+        from se_harness.engine.validation_core import discover_candidate_files
+
+        for directory in ("templates", "evidence", ".idea", "target", "node_modules"):
+            base = self.root / f"docs/engineering/domain/{directory}/nested"
+            write(base / "copy.md", self.record)
+            write(base / "bad.md", '+++\ntype = "release_record"\ninvalid = [\n+++\n')
+        live = "docs/engineering/domain/evidence-backed/VREC-EVD-001.md"
+        write(self.root / live, self.artifact("VREC-EVD-001", "verification_record"))
+        self.fixture.commit("retain copies and malformed test inputs")
+        head = git(self.root, "rev-parse", "HEAD")
+        expected_paths = sorted(path.relative_to(self.root).as_posix() for path in
+                                discover_candidate_files(self.root / "docs/engineering"))
+        self.assertEqual(expected_paths, RELEASE.dashboard._tree_markdown_paths(self.root, head))
+        catalog = RELEASE._catalog_at(self.root, head)
+        self.assertEqual(live, catalog["VREC-EVD-001"][0])
+        self.assertEqual(5, len(catalog))
+        self.assertEqual(self.fixture.candidate, self.resolve().candidate_commit)
+
+    def test_duplicate_live_catalog_ids_still_refuse(self) -> None:
+        duplicate = self.root / "docs/engineering/other/duplicate.md"
+        for artifact_id, artifact_type in (("VREC-TST-001", "verification_record"),
+                                          ("WO-TST-001", "work_order"),
+                                          ("RLS-TST-001", "release_record")):
+            with self.subTest(artifact_id=artifact_id):
+                write(self.root / "docs/engineering/other/evidence/copy.md", self.artifact(artifact_id, artifact_type))
+                write(duplicate, self.artifact(artifact_id, artifact_type))
+                self.fixture.commit("duplicate live artifact")
+                with self.assertRaisesRegex(RELEASE.ReleaseError, "duplicate artifact ID.*" + artifact_id):
+                    RELEASE._catalog_at(self.root, git(self.root, "rev-parse", "HEAD"))
+
+    def test_duplicate_live_release_selection_and_malformed_live_metadata_refuse(self) -> None:
+        duplicate = self.root / "docs/engineering/other/releases/duplicate.md"
+        write(duplicate, self.record)
+        self.fixture.commit("duplicate live release")
+        with self.assertRaisesRegex(RELEASE.ReleaseError, "found 2"):
+            self.resolve()
+        write(duplicate, '+++\ntype = "release_record"\ninvalid = [\n+++\n')
+        self.fixture.commit("malformed live record")
+        with self.assertRaises(RELEASE.dashboard.PublicationError):
+            self.resolve()
+
+    def test_evidence_before_and_after_release_does_not_select_the_history(self) -> None:
+        lock = git(self.root, "show", f"{self.fixture.governance}:.engineering-harness.lock")
+        git(self.root, "checkout", "-b", "evidence-first", self.fixture.candidate)
+        evidence_path = self.root / "docs/engineering/release/evidence/early.md"
+        write(evidence_path, self.record)
+        self.fixture.commit("retain a released-looking test input before the real record")
+        write(self.root / ".engineering-harness.lock", lock + "\n")
+        write(self.root / self.fixture.evaluator_evidence_path, self.fixture.evaluator_evidence)
+        self.write_live_records()
+        self.fixture.commit("integrate real release")
+        real_governance = git(self.root, "rev-parse", "HEAD")
+        write(evidence_path, self.record + "\nLater observation.\n")
+        self.fixture.commit("change the retained copy")
+        git(self.root, "update-ref", "refs/heads/main", "HEAD")
+        for resolved in (self.resolve(), RELEASE.dashboard.resolve_release(
+                self.root, "v1.2.3", default_ref="refs/heads/main")):
+            self.assertEqual(real_governance, resolved.governance_commit)
+            self.assertEqual(self.fixture.record_path, resolved.release_record_path)
+
+    def test_bound_evidence_is_still_read_and_missing_or_corrupt_bytes_refuse(self) -> None:
+        self.assertEqual(self.fixture.evaluator_evidence_sha256, self.resolve().evaluator_evidence_sha256)
+        sidecar = self.root / self.fixture.evaluator_evidence_path
+        write(sidecar, "{}\n")
+        self.fixture.commit("corrupt explicit evidence")
+        with self.assertRaisesRegex(RELEASE.dashboard.PublicationError, "evaluator evidence digest differs"):
+            self.resolve()
+        sidecar.unlink()
+        self.fixture.commit("remove explicit evidence")
+        with self.assertRaisesRegex(RELEASE.dashboard.PublicationError, "evaluator evidence is unavailable"):
+            self.resolve()
+
+    def test_working_tree_edits_do_not_change_committed_resolution(self) -> None:
+        expected = self.resolve()
+        write(self.root / self.fixture.record_path, "+++\ninvalid = [\n+++\n")
+        write(self.root / "docs/engineering/other/duplicate.md", self.record)
+        self.assertEqual(expected, self.resolve())
+
+    def test_rehearsal_selector_ignores_evidence_only_records(self) -> None:
+        rehearsal_copy = self.record.replace("schema = 1", "schema = 2")
+        for status in ("ready", "released"):
+            with self.subTest(status=status):
+                write(self.root / "docs/engineering/evidence/releases/RLS-TST-999.md",
+                      rehearsal_copy.replace('status = "released"', f'status = "{status}"'))
+                self.fixture.commit("retain a rehearsable-looking record")
+                for ref in (None, "refs/heads/main"):
+                    result = RELEASE.select_rehearsal_record(self.root, None, ref)
+                    self.assertEqual("", result["release_record"])
+                    with self.assertRaisesRegex(RELEASE.ReleaseError, "not a ready or released"):
+                        RELEASE.select_rehearsal_record(self.root, "RLS-TST-001", ref)
 
 
 class DistributionManifestTests(unittest.TestCase):

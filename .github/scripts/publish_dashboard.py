@@ -42,6 +42,9 @@ TAG_PATTERN = re.compile(r"v(?P<version>0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9
 RELEASE_RECORD_PATTERN = re.compile(r"RLS-[A-Z0-9]+-[0-9]{3}")
 HEX_PATTERN = re.compile(r"[0-9a-f]+")
 DEFAULT_REFS = frozenset({"refs/heads/main", "refs/remotes/origin/main"})
+# Keep repository-owned publication independent of candidate-package imports.
+# WO-RLO-009 tests parity with validation_core's artifact discovery boundary.
+EXCLUDED_ARTIFACT_DIRECTORIES = frozenset({"templates", "evidence", ".git", ".idea", "target", "node_modules"})
 MAX_PAYLOAD_BYTES = 100 * 1024 * 1024
 # WO-DPG-002: the constant demonstration notice is inserted directly after the
 # one accepted boundary that occurs exactly once in the generated page. The
@@ -185,6 +188,15 @@ def _metadata_at(repository: Path, commit: str, path: str) -> dict[str, Any] | N
     return None if text is None else _parse_front_matter(text, f"{commit}:{path}")
 
 
+def _is_artifact_path(path: str) -> bool:
+    relative = PurePosixPath(path)
+    return (
+        relative.parts[:2] == ("docs", "engineering")
+        and relative.suffix == ".md"
+        and not any(part in EXCLUDED_ARTIFACT_DIRECTORIES for part in relative.parts[2:-1])
+    )
+
+
 def _tree_markdown_paths(repository: Path, commit: str) -> list[str]:
     output = _run_git(
         repository,
@@ -199,7 +211,7 @@ def _tree_markdown_paths(repository: Path, commit: str) -> list[str]:
     return sorted(
         line.strip()
         for line in output.splitlines()
-        if line.strip().endswith(".md") and line.strip().startswith("docs/engineering/")
+        if _is_artifact_path(line.strip())
     )
 
 
@@ -222,7 +234,7 @@ def _release_records_at(repository: Path, commit: str) -> list[tuple[str, dict[s
     candidate_paths = sorted(
         line[len(prefix) :].strip()
         for line in completed.stdout.splitlines()
-        if line.startswith(prefix) and line[len(prefix) :].strip().endswith(".md")
+        if line.startswith(prefix) and _is_artifact_path(line[len(prefix) :].strip())
     )
     for path in candidate_paths:
         metadata = _metadata_at(repository, commit, path)
@@ -247,7 +259,7 @@ def _changed_markdown_paths(repository: Path, parent: str | None, commit: str) -
     return sorted(
         line.strip()
         for line in output.splitlines()
-        if line.strip().endswith(".md") and line.strip().startswith("docs/engineering/")
+        if _is_artifact_path(line.strip())
     )
 
 
