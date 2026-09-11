@@ -1,0 +1,96 @@
+{
+  "schema": "plugin-stack-base-amendment-review-v1",
+  "observed_at": "2026-09-11T09:55:48.163333+00:00",
+  "base_main": "fc1f087371b100d5fda7a1f254ee00ebde8cbadf",
+  "original_plan_sha256": "68b59c5837e890396701e46f5e37cc391a3ebf91d9f71c736d27e50345155aaa",
+  "proposed_plan_sha256": "eb0fa0a8e8e5e77428f45fdcde3c99f2080c318bdcb75a6425216081002feefb",
+  "remote_query_argv": [
+    "gh",
+    "api",
+    "graphql",
+    "-f",
+    "query=query { repository(owner:\"mmzen\", name:\"se_harness\") { defaultBranchRef { target { oid } } p444: pullRequest(number:444) { number state headRefOid } p445: pullRequest(number:445) { number state headRefOid } p448: pullRequest(number:448) { number state headRefOid } p449: pullRequest(number:449) { number state headRefOid } p446: pullRequest(number:446) { number state headRefOid } p450: pullRequest(number:450) { state mergedAt mergeCommit { oid } } } }"
+  ],
+  "remote_observation": {
+    "defaultBranchRef": {
+      "target": {
+        "oid": "fc1f087371b100d5fda7a1f254ee00ebde8cbadf"
+      }
+    },
+    "p444": {
+      "number": 444,
+      "state": "OPEN",
+      "headRefOid": "278549eab76e806131b2950a7a6ea1ed6f2fb2b5"
+    },
+    "p445": {
+      "number": 445,
+      "state": "OPEN",
+      "headRefOid": "7fe82c95823503e54d2e35e00d8c409a6dd4b065"
+    },
+    "p448": {
+      "number": 448,
+      "state": "OPEN",
+      "headRefOid": "ed19676fd2af8b9754f74cbc6bc8664a92d2f803"
+    },
+    "p449": {
+      "number": 449,
+      "state": "OPEN",
+      "headRefOid": "8a8a61ff786436ba0da8b18753c4a46b5be35c1b"
+    },
+    "p446": {
+      "number": 446,
+      "state": "OPEN",
+      "headRefOid": "0d3269e4917f55cf9a487aaa8f11d95aaa46fe9b"
+    },
+    "p450": {
+      "state": "MERGED",
+      "mergedAt": "2026-09-11T09:51:32Z",
+      "mergeCommit": {
+        "oid": "fc1f087371b100d5fda7a1f254ee00ebde8cbadf"
+      }
+    }
+  },
+  "delegation_at_base": {
+    "artifact": "WO-PLG-018",
+    "status": "approved",
+    "class": "execution",
+    "work_order_sha256": "ce93dacadd3b265a3728555e2b0aa5757923a52efa4dfe2a4277ac926bb0753d",
+    "verification_contract_sha256": "7ee96d383f0a9e837df2abc626a7ca681b81e72db534c897f689f62359ee585d"
+  },
+  "previews": {
+    "source_only_tree": "f592089dc2e14822faea475af200dc89f9f04648",
+    "base_plus_left_tree": "54f718ab5e250e0a6b5ba5c56250bbde8b056a94",
+    "unreferenced_intermediate_commit": "abd960f6391ef0d03142c95927fd21ad150304b3",
+    "combined_tree": "dbc52b56a3820c8765aec2aa5de250c3e1d7a379",
+    "conflicts": false
+  },
+  "imported_paths": 3177,
+  "all_import_modes_and_blobs_equal_original_plan": true,
+  "all_other_baseline_paths_unchanged": true,
+  "scope_and_record_expectations_unchanged": true,
+  "archive_entries_before_amendment": 9963,
+  "prospective_entries_with_three_new_amendment_files": 9966,
+  "remaining_entries_before_later_receipts_checker_and_vrec": 34,
+  "plan_json_preserved": true,
+  "head_and_worktree_unchanged_by_previews": true,
+  "lifecycle_changed": false,
+  "integration_started": false,
+  "limits": "Git previews establish only input identity and merge shape. Acceptance, exact-head delegated-start gate, implementation and assurance are pending.",
+  "proposal_checks": {
+    "governing_evaluator_version": "0.17.0",
+    "doctor": "completed",
+    "graph_errors": 0,
+    "review_preflight_ready": true,
+    "git_derived_scope": "completed",
+    "scope_base": "fc1f087371b100d5fda7a1f254ee00ebde8cbadf",
+    "delegation_projection": {
+      "class": "execution",
+      "gate": "success",
+      "check_run_id": "103221271511",
+      "head": "fc1f087371b100d5fda7a1f254ee00ebde8cbadf"
+    },
+    "independent_recomparison": "Only base_main, assembly, source_archive_entries differ among original plan fields; new amendment metadata is proposed.",
+    "formal_artifacts_and_original_plan_equal_main": true,
+    "interpretation": "The base delegation is available. Execution still awaits review of the materially changed pinned baseline under the approved work-order constraint."
+  }
+}
