@@ -32,12 +32,15 @@ import subprocess
 import sys
 import tarfile
 import tempfile
+import time
+from contextlib import contextmanager, nullcontext
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Sequence
 
 SCHEMA = "se-harness-upgrade-rehearsal-v1"
 RESULT_NAME = "upgrade-rehearsal-result.json"
+TIMING_NAME = "upgrade-rehearsal-timing.json"
 LOCK_NAME = ".engineering-harness.lock"
 TRANSACTION_EVIDENCE = "docs/engineering/evidence/upgrade-rehearsal-transaction.json"
 #: The one validator error a root change legitimately produces: a `ready`
@@ -63,6 +66,76 @@ class Completed:
 
 
 Runner = Callable[[Sequence[str], Path], Completed]
+
+
+class RehearsalTiming:
+    """Optional observations, separate from the handover result and its digest.
+
+    Children of replay are sequential; sum them once and compare with replay.
+    The remainder includes Python checks, output and measurement overhead.
+    Boundary snapshots retain running stages if the process is interrupted.
+    """
+
+    def __init__(self, output: Path, clock: Callable[[], float] = time.perf_counter):
+        self.output = output
+        self.clock = clock
+        self.data: dict[str, Any] = {
+            "schema": "se-harness-upgrade-timing-v1", "complete": False,
+            "identity": {key: os.environ.get(key) for key in (
+                "GITHUB_RUN_ID", "GITHUB_RUN_ATTEMPT", "GITHUB_SHA", "GITHUB_JOB",
+                "REHEARSAL_HEAD_SHA", "RUNNER_OS", "ImageOS", "ImageVersion",
+            )},
+            "stages": [], "diagnostic_errors": [],
+        }
+
+    def persist(self) -> None:
+        try:
+            temporary = self.output / (TIMING_NAME + ".tmp")
+            temporary.write_text(json.dumps(self.data, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
+            temporary.replace(self.output / TIMING_NAME)
+        except OSError as exc:
+            self.data["complete"] = False
+            self.data["diagnostic_errors"].append(type(exc).__name__)
+
+    def progress(self, text: str) -> None:
+        try:
+            print(f"upgrade timing: {text}", file=sys.stderr, flush=True)
+        except OSError as exc:
+            self.data["diagnostic_errors"].append(type(exc).__name__)
+
+    @contextmanager
+    def measure(self, identifier: str):
+        entry = {"id": identifier, "parent": None if identifier == "replay" else "replay", "status": "running"}
+        self.data["stages"].append(entry)
+        self.persist()
+        self.progress(f"start {identifier}")
+        started = self.clock()
+        try:
+            yield entry
+        except BaseException as exc:
+            entry.update(status="error", error_type=type(exc).__name__)
+            raise
+        else:
+            entry["status"] = "finished"
+        finally:
+            entry["elapsed_seconds"] = self.clock() - started
+            self.progress(f"end {identifier}: {entry['elapsed_seconds']:.6f}s ({entry['status']})")
+            self.persist()
+
+
+def _measure(timing: RehearsalTiming | None, identifier: str):
+    return timing.measure(identifier) if timing else nullcontext({})
+
+
+@contextmanager
+def _scratch(workspace: Path | None, timing: RehearsalTiming | None):
+    # Keep TemporaryDirectory's original exception/cleanup behavior.
+    temporary = tempfile.TemporaryDirectory(prefix="upgrade-rehearsal-", dir=str(workspace) if workspace else None)
+    try:
+        yield temporary.__enter__()
+    finally:
+        with _measure(timing, "scratch-cleanup"):
+            temporary.__exit__(*sys.exc_info())
 
 
 def _environment() -> dict[str, str]:
@@ -98,29 +171,37 @@ def canonical_sha256(raw: bytes) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
-def export_tracked_tree(repository: Path, destination: Path, runner: Runner = run) -> None:
+def export_tracked_tree(repository: Path, destination: Path, runner: Runner = run, *, timing: RehearsalTiming | None = None) -> None:
     """Copy the committed tree (never the working tree) into `destination` and commit it there."""
 
-    archive = subprocess.run(
-        ["git", "-c", "core.autocrlf=false", "archive", "--format=tar", "HEAD"],
-        cwd=str(repository), capture_output=True, check=False, timeout=RUN_TIMEOUT_SECONDS,
-    )
-    if archive.returncode != 0:
-        raise UpgradeRehearsalError(f"cannot export the tracked tree: {archive.stderr.decode('utf-8', 'replace').strip()}")
-    with tarfile.open(fileobj=io.BytesIO(archive.stdout)) as tar:
-        tar.extractall(destination, filter="data")
-    for argv in (
-        ["git", "init", "-q", "-b", "main"],
-        ["git", "config", "core.autocrlf", "false"],
-        ["git", "config", "user.email", "rehearsal@example.invalid"],
-        ["git", "config", "user.name", "upgrade rehearsal"],
-        ["git", "config", "commit.gpgsign", "false"],
-        ["git", "add", "-A"],
-        ["git", "commit", "-q", "-m", "exported tracked tree"],
+    with _measure(timing, "git-archive") as observation:
+        archive = subprocess.run(
+            ["git", "-c", "core.autocrlf=false", "archive", "--format=tar", "HEAD"],
+            cwd=str(repository), capture_output=True, check=False, timeout=RUN_TIMEOUT_SECONDS,
+        )
+        if archive.returncode != 0:
+            raise UpgradeRehearsalError(f"cannot export the tracked tree: {archive.stderr.decode('utf-8', 'replace').strip()}")
+        observation["archive_bytes"] = len(archive.stdout)
+    with _measure(timing, "archive-extraction") as observation:
+        with tarfile.open(fileobj=io.BytesIO(archive.stdout)) as tar:
+            tar.extractall(destination, filter="data")
+            if timing:
+                members = tar.getmembers()
+                observation.update(entries=len(members), files=sum(member.isfile() for member in members))
+    for identifier, argv in (
+        ("git-init", ["git", "init", "-q", "-b", "main"]),
+        ("git-config-autocrlf", ["git", "config", "core.autocrlf", "false"]),
+        ("git-config-email", ["git", "config", "user.email", "rehearsal@example.invalid"]),
+        ("git-config-name", ["git", "config", "user.name", "upgrade rehearsal"]),
+        ("git-config-signing", ["git", "config", "commit.gpgsign", "false"]),
+        ("git-add", ["git", "add", "-A"]),
+        ("git-commit", ["git", "commit", "-q", "-m", "exported tracked tree"]),
     ):
-        completed = runner(argv, destination)
-        if completed.exit_code != 0:
-            raise UpgradeRehearsalError(f"cannot prepare the throwaway repository: {' '.join(argv)}: {completed.stderr.strip()}")
+        with _measure(timing, identifier) as observation:
+            completed = runner(argv, destination)
+            observation["exit_code"] = completed.exit_code
+            if completed.exit_code != 0:
+                raise UpgradeRehearsalError(f"cannot prepare the throwaway repository: {' '.join(argv)}: {completed.stderr.strip()}")
 
 
 def _digest(text: str) -> str:
@@ -163,6 +244,7 @@ def rehearse(
     output: Path,
     runner: Runner = run,
     workspace: Path | None = None,
+    timings: bool = False,
 ) -> dict[str, Any]:
     repository = repository.resolve()
     output = output.resolve()
@@ -171,12 +253,34 @@ def rehearse(
     if repository == output or repository in output.parents:
         raise UpgradeRehearsalError("the output directory must lie outside the operational repository")
     output.mkdir(parents=True, exist_ok=True)
+    timing = RehearsalTiming(output) if timings else None
+    try:
+        with _measure(timing, "replay") as observation:
+            result = _rehearse(repository, predecessor_python, successor_python, output, runner, workspace, timing)
+            observation["handover_result"] = result["overall_result"]
+        if timing:
+            timing.data["complete"] = not timing.data["diagnostic_errors"]
+    finally:
+        if timing:
+            stages = timing.data["stages"]
+            total = stages[0].get("elapsed_seconds") if stages else None
+            if total is not None:
+                timing.data["unaccounted_seconds"] = total - sum(stage.get("elapsed_seconds", 0) for stage in stages[1:])
+            timing.persist()
+    if timing and timing.data["diagnostic_errors"] and result["overall_result"] == "pass":
+        raise UpgradeRehearsalError("handover passed but timing diagnostics are incomplete")
+    return result
+
+
+def _rehearse(repository, predecessor_python, successor_python, output, runner, workspace, timing):
     steps: list[dict[str, Any]] = []
     failure: str | None = None
 
     def step(identifier: str, argv: Sequence[str], cwd: Path, *, expect: str = "success") -> Completed:
         nonlocal failure
-        completed = runner(argv, cwd)
+        with _measure(timing, identifier) as observation:
+            completed = runner(argv, cwd)
+            observation["exit_code"] = completed.exit_code
         succeeded = completed.exit_code == 0
         outcome = "pass" if expect == "any" or succeeded == (expect == "success") else "fail"
         steps.append({
@@ -192,12 +296,14 @@ def rehearse(
             failure = f"{identifier}: expected {expect}, exit code {completed.exit_code}: {(completed.stderr or completed.stdout).strip()[:400]}"
         return completed
 
-    with tempfile.TemporaryDirectory(prefix="upgrade-rehearsal-", dir=str(workspace) if workspace else None) as scratch:
+    with _scratch(workspace, timing) as scratch:
         copy = Path(scratch) / "repository"
         copy.mkdir()
-        export_tracked_tree(repository, copy, runner)
-        predecessor_version = _version(predecessor_python, runner, Path(scratch))
-        successor_version = _version(successor_python, runner, Path(scratch))
+        export_tracked_tree(repository, copy, runner, timing=timing)
+        with _measure(timing, "predecessor-version"):
+            predecessor_version = _version(predecessor_python, runner, Path(scratch))
+        with _measure(timing, "successor-version"):
+            successor_version = _version(successor_python, runner, Path(scratch))
         result: dict[str, Any] = {
             "schema": SCHEMA,
             "predecessor": {"version": predecessor_version},
@@ -274,6 +380,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--successor-python", required=True, help="interpreter of the environment holding the successor candidate")
     parser.add_argument("--output", required=True, help="absent or empty directory outside the repository for the result")
     parser.add_argument("--json", action="store_true", help="print the result as JSON")
+    parser.add_argument("--timings", action="store_true", help="retain separate stage timings in --output and print progress to stderr")
     args = parser.parse_args(argv)
     try:
         result = rehearse(
@@ -281,6 +388,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             predecessor_python=Path(args.predecessor_python),
             successor_python=Path(args.successor_python),
             output=Path(args.output),
+            timings=args.timings,
         )
     except UpgradeRehearsalError as exc:
         print(f"upgrade rehearsal: {exc}", file=sys.stderr)

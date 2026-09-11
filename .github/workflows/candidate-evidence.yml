@@ -279,6 +279,7 @@ jobs:
     env:
       PREDECESSOR_VERSION: ${{ needs.candidate-source.outputs.predecessor_version }}
       PREDECESSOR_WHEEL_SHA256: ${{ needs.candidate-source.outputs.predecessor_wheel_sha256 }}
+      REHEARSAL_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
       PYTHONNOUSERSITE: "1"
       PYTHONPATH: ""
     steps:
@@ -295,6 +296,49 @@ jobs:
           if (-not $env:PREDECESSOR_VERSION -or -not $env:PREDECESSOR_WHEEL_SHA256) {
             throw 'predecessor facts were not derived by candidate-source'
           }
+      - name: Observe the rehearsal runtime (read-only)
+        shell: pwsh
+        run: |
+          $facts = [ordered]@{
+            schema = 'se-harness-rehearsal-runtime-v1'
+            run_id = $env:GITHUB_RUN_ID
+            run_attempt = $env:GITHUB_RUN_ATTEMPT
+            head_sha = $env:REHEARSAL_HEAD_SHA
+            tested_sha = $env:GITHUB_SHA
+            checkout_sha = (git rev-parse HEAD)
+            runner_os = $env:RUNNER_OS
+            image_os = $env:ImageOS
+            image_version = $env:ImageVersion
+            os_version = [System.Runtime.InteropServices.RuntimeInformation]::OSDescription
+            python_version = (python --version)
+            git_version = (git --version)
+            defender_status = @{ availability = 'not_applicable' }
+            defender_preferences = @{ availability = 'not_applicable' }
+          }
+          if ($IsWindows) {
+            try {
+              $state = Get-MpComputerStatus -ErrorAction Stop
+              $facts.defender_status = @{
+                availability = 'available'
+                AntivirusEnabled = $state.AntivirusEnabled
+                RealTimeProtectionEnabled = $state.RealTimeProtectionEnabled
+                AMRunningMode = $state.AMRunningMode
+              }
+            } catch {
+              $facts.defender_status = @{ availability = 'unavailable'; error_type = $_.Exception.GetType().Name }
+            }
+            try {
+              $preferences = Get-MpPreference -ErrorAction Stop
+              $facts.defender_preferences = @{
+                availability = 'available'
+                DisableRealtimeMonitoring = $preferences.DisableRealtimeMonitoring
+                ExclusionPath = @($preferences.ExclusionPath)
+              }
+            } catch {
+              $facts.defender_preferences = @{ availability = 'unavailable'; error_type = $_.Exception.GetType().Name }
+            }
+          }
+          $facts | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'upgrade-rehearsal-runtime.json') -Encoding utf8
       - name: Acquire and verify the already-public predecessor
         shell: pwsh
         run: |
@@ -347,10 +391,10 @@ jobs:
           $first = Join-Path '${{ runner.temp }}' 'rehearsal-result-1'
           $second = Join-Path '${{ runner.temp }}' 'rehearsal-result-2'
           python -m repository_tools.upgrade_rehearsal --repository . `
-            --predecessor-python $predecessorPython --successor-python $successorPython --output $first
+            --predecessor-python $predecessorPython --successor-python $successorPython --output $first --timings
           if ($LASTEXITCODE -ne 0) { throw 'first upgrade rehearsal failed' }
           python -m repository_tools.upgrade_rehearsal --repository . `
-            --predecessor-python $predecessorPython --successor-python $successorPython --output $second
+            --predecessor-python $predecessorPython --successor-python $successorPython --output $second --timings
           if ($LASTEXITCODE -ne 0) { throw 'second upgrade rehearsal failed' }
           $firstResult = Get-Content -Raw -LiteralPath (Join-Path $first 'upgrade-rehearsal-result.json') | ConvertFrom-Json
           $secondResult = Get-Content -Raw -LiteralPath (Join-Path $second 'upgrade-rehearsal-result.json') | ConvertFrom-Json
@@ -367,7 +411,10 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: upgrade-rehearsal-${{ matrix.platform }}
-          path: ${{ runner.temp }}/rehearsal-result-*/upgrade-rehearsal-result.json
+          path: |
+            ${{ runner.temp }}/rehearsal-result-*/upgrade-rehearsal-result.json
+            ${{ runner.temp }}/rehearsal-result-*/upgrade-rehearsal-timing.json
+            ${{ runner.temp }}/upgrade-rehearsal-runtime.json
           if-no-files-found: warn
       - name: Prove the upgrade rehearsal made no checkout change
         shell: pwsh

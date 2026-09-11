@@ -2,13 +2,20 @@
 id = "VER-CIP-005"
 type = "verification"
 title = "Check upgrade rehearsal timing preserves the real handover"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner"]
 created = "2026-09-11"
 updated = "2026-09-11"
 
 [relations]
 verifies = ["REQ-ECP-012"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-11T17:09:29Z"
+decided_by = "assurance-owner"
+reason = "The accountable operator approved VER-CIP-005 and WO-CIP-009 on 2026-09-11: i approve both, in response to the named packet and diagnostic implementation authorization question."
 +++
 
 # Verification Contract: Check upgrade rehearsal timing preserves the real handover

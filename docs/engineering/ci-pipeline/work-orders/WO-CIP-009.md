@@ -2,7 +2,7 @@
 id = "WO-CIP-009"
 type = "work_order"
 title = "Measure Windows and Linux upgrade rehearsal stages"
-status = "draft"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-11"
 updated = "2026-09-11"
@@ -26,15 +26,30 @@ paths = [
 implements = ["REQ-ECP-012"]
 specifications = ["SPEC-ECP-007"]
 verification = ["VER-CIP-005"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-11T17:09:29Z"
+decided_by = "engineering-owner"
+reason = "The accountable operator approved VER-CIP-005 and WO-CIP-009 and authorized diagnostic implementation and hosted runs on 2026-09-11: i approve both."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-11T17:10:20Z"
+decided_by = "engineering-owner"
+reason = "The operator authorized diagnostic implementation and hosted runs by approving both named artifacts on 2026-09-11 in response to the explicit start authorization question."
 +++
 
 # Work Order: Measure Windows and Linux upgrade rehearsal stages
 
 ## Lifecycle
 
-Draft packet for the operator's request, "ok, let's go for the measure".
-Approval of this WO and VER-CIP-005, followed by authorized start, is required
-before changing executable files. No execution delegation is proposed.
+The operator approved this WO and VER-CIP-005 and authorized diagnostic
+implementation and hosted runs on 2026-09-11: "i approve both". The released
+evaluator applied approval and start after passing the gates. No execution
+delegation is proposed. Completion and assurance remain separate decisions.
 
 ## Objective
 
