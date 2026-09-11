@@ -2,7 +2,7 @@
 id = "WO-PLG-018"
 type = "work_order"
 title = "Integrate the verified plugin workflow stack"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-11"
 updated = "2026-09-11"
@@ -54,6 +54,13 @@ paths = [
 implements = ["REQ-PLG-017", "REQ-PLG-018", "REQ-PLG-019", "REQ-PLG-020", "REQ-PLG-021"]
 specifications = ["SPEC-PLG-010", "SPEC-PLG-011", "SPEC-PLG-012"]
 verification = ["VER-PLG-018"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-11T09:44:19Z"
+decided_by = "engineering-owner"
+reason = "On 2026-09-11 the operator stated \"i approve VER-PLG-018 and WO-PLG-018, including its proposed execution delegation\". Record only WO-PLG-018 approval as engineering-owner, reviewed at 054625aa84d30935d667dcaa25fd5c58a983b473, artifact SHA-256 74cac542df1e617b3a1dbce06c34b4be3f50f3223cf743bf3b9a49072b2759a9, with immutable integration plan SHA-256 68b59c5837e890396701e46f5e37cc391a3ebf91d9f71c736d27e50345155aaa. This approves the pinned scope and execution class delegation for start, completion and single-WO VREC preparation through existing gates. Assurance of VREC-PLG-011, merge, PR closure, supersession and release remain separate decisions."
 +++
 
 # Work Order: Integrate the verified plugin workflow stack

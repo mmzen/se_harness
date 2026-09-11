@@ -2,13 +2,20 @@
 id = "VER-PLG-018"
 type = "verification"
 title = "Preserve verified plugin work during integration"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner"]
 created = "2026-09-11"
 updated = "2026-09-11"
 
 [relations]
 verifies = ["REQ-PLG-017", "REQ-PLG-018", "REQ-PLG-019", "REQ-PLG-020", "REQ-PLG-021"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-11T09:43:46Z"
+decided_by = "assurance-owner"
+reason = "On 2026-09-11 the operator stated \"i approve VER-PLG-018 and WO-PLG-018, including its proposed execution delegation\". Record only VER-PLG-018 approval as assurance-owner, reviewed at 054625aa84d30935d667dcaa25fd5c58a983b473, artifact SHA-256 c0446d6335b8727cc759ada7037974e51f031442e05d43942f8f100c1c1685a7, with immutable integration plan SHA-256 68b59c5837e890396701e46f5e37cc391a3ebf91d9f71c736d27e50345155aaa. This approves the verification contract, not assurance of its future candidate. Assurance of VREC-PLG-011, merge, PR closure, supersession and release remain separate decisions."
 +++
 
 # Verification Contract: Preserve verified plugin work during integration
