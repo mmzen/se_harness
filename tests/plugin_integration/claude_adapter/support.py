@@ -7,6 +7,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import time
+import threading
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
@@ -66,6 +67,46 @@ def run(argv, cwd, env=None, raw=None, timeout=90):
     return {'argv': [str(a) for a in argv], 'cwd': str(cwd), 'exit': process.returncode,
             'timeout': expired, 'started_monotonic': start, 'finished_monotonic': time.monotonic(),
             'stdout': out.decode('utf8', 'replace'), 'stderr': err.decode('utf8', 'replace')}
+
+
+def run_stream(argv, cwd, env, timeout=150):
+    """Timestamp actual streamed host events outside the adapter process."""
+    started = time.monotonic()
+    proc = subprocess.Popen([str(a) for a in argv], cwd=cwd, env=env, stdin=subprocess.DEVNULL,
+                            stdout=subprocess.PIPE, stderr=subprocess.PIPE, creationflags=subprocess.CREATE_NO_WINDOW)
+    captured = {'stdout': [], 'stderr': []}
+    timeline = []
+    def receive(stream, name):
+        for raw in iter(stream.readline, b''):
+            stamp = time.monotonic()
+            captured[name].append(raw)
+            if name == 'stdout':
+                try:
+                    value = json.loads(raw)
+                except ValueError:
+                    continue
+                item = {k: value[k] for k in ('type', 'subtype', 'hook_id', 'hook_name', 'hook_event', 'outcome', 'exit_code') if k in value}
+                blocks = value.get('message', {}).get('content', [])
+                item['tools'] = [{k:b[k] for k in ('type','id','name','tool_use_id','is_error') if k in b}
+                                 for b in blocks if isinstance(b,dict) and b.get('type') in ('tool_use','tool_result')]
+                if item.get('subtype','').startswith('hook_') or item['tools']:
+                    item['received_monotonic'] = stamp
+                    timeline.append(item)
+    threads = [threading.Thread(target=receive, args=(getattr(proc,name),name),daemon=True) for name in captured]
+    for thread in threads:
+        thread.start()
+    expired = False
+    try:
+        proc.wait(timeout=timeout)
+    except subprocess.TimeoutExpired:
+        expired = True
+        subprocess.run(['taskkill.exe','/PID',str(proc.pid),'/T','/F'],capture_output=True)
+        proc.wait(timeout=15)
+    for thread in threads:
+        thread.join(15)
+    return {'argv':[str(a) for a in argv],'cwd':str(cwd),'exit':proc.returncode,'timeout':expired,
+            'started_monotonic':started,'finished_monotonic':time.monotonic(),'timeline':timeline,
+            **{name:b''.join(raw).decode('utf8','replace') for name,raw in captured.items()}}
 
 
 def create_fixture(space, *, initialize=True):

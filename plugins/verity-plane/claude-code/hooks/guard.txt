@@ -34,6 +34,8 @@ try {
     $covered=$event.tool_name -in @('Write','Edit')
   }
   $record.event=$kind
+  $record.tool_use_id=$event.tool_use_id
+  $record.tool_name=$event.tool_name
   if ($kind -eq 'PreToolUse' -and -not $covered) {
     $response = Envelope 'UNREADY COVERAGE GAP: this tool has no evaluator mapping. Ordinary host permissions and already-authorized setup access remain in force. No governance check succeeded.' $false
   } else {
@@ -108,10 +110,10 @@ try {
     if ($kind -eq 'PreToolUse' -and $specific.permissionDecision -eq 'deny') { $expectedFields=@('hookEventName','permissionDecision','permissionDecisionReason') }
     if (Compare-Object @($specific.PSObject.Properties.Name | Sort-Object) @($expectedFields | Sort-Object)) { throw 'Shared script returned unexpected event controls.' }
     if ($kind -eq 'SessionStart') {
-      if (-not ($specific.additionalContext -is [string]) -or -not $specific.additionalContext) { throw 'Shared script returned missing context.' }
+      if (-not ($specific.additionalContext -is [string]) -or [string]::IsNullOrWhiteSpace($specific.additionalContext)) { throw 'Shared script returned missing context.' }
     } elseif ($specific.permissionDecision -eq 'deny') {
-      if (-not ($specific.permissionDecisionReason -is [string]) -or -not $specific.permissionDecisionReason) { throw 'Shared script returned a missing denial reason.' }
-    } elseif ($specific.permissionDecision -or -not ($specific.additionalContext -is [string]) -or -not $specific.additionalContext) { throw 'Shared script returned an invalid permission response.' }
+      if (-not ($specific.permissionDecisionReason -is [string]) -or [string]::IsNullOrWhiteSpace($specific.permissionDecisionReason)) { throw 'Shared script returned a missing denial reason.' }
+    } elseif ($specific.permissionDecision -or -not ($specific.additionalContext -is [string]) -or [string]::IsNullOrWhiteSpace($specific.additionalContext)) { throw 'Shared script returned an invalid permission response.' }
     $record.status='shared-response'
     $record.response=$response
     $process.Dispose()
