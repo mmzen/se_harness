@@ -239,6 +239,31 @@ class OneBuildPerWorkflowTests(unittest.TestCase):
         self.assertEqual(2, rehearsal.count("-m repository_tools.upgrade_rehearsal"))
 
 
+class RehearsalDiagnosticBoundaryTests(unittest.TestCase):
+    def test_diagnostics_are_read_only_and_retained_without_changing_replay_gates(self):
+        job = _job_blocks((WORKFLOWS / "candidate-evidence.yml").read_text(encoding="utf-8"))["upgrade-rehearsal"]
+        steps = _step_blocks(job)
+        diagnostic = next(step for step in steps if "name: Observe the rehearsal runtime" in step)
+        self.assertIn("Get-MpComputerStatus -ErrorAction Stop", diagnostic)
+        self.assertIn("Get-MpPreference -ErrorAction Stop", diagnostic)
+        self.assertIn("RealTimeProtectionEnabled", diagnostic)
+        self.assertIn("DisableRealtimeMonitoring", diagnostic)
+        self.assertIn("ExclusionPath", diagnostic)
+        self.assertEqual(2, diagnostic.count("availability = 'unavailable'"))
+        self.assertNotRegex(diagnostic, r"(?i)(?:Set|Add|Remove)-Mp\w+|Stop-Service|Get-ChildItem\s+Env:")
+        self.assertIn("Join-Path $env:RUNNER_TEMP 'upgrade-rehearsal-runtime.json'", diagnostic)
+        replay = next(step for step in steps if "name: Rehearse the real predecessor-to-successor" in step)
+        self.assertEqual(2, replay.count("python -m repository_tools.upgrade_rehearsal"))
+        self.assertEqual(2, replay.count(" --timings"))
+        self.assertEqual(2, replay.count(" --workspace $env:RUNNER_TEMP"))
+        self.assertIn("if ($firstResult.semantic_sha256 -ne $secondResult.semantic_sha256)", replay)
+        self.assertIn("if ($firstResult.overall_result -ne 'pass' -or $secondResult.overall_result -ne 'pass')", replay)
+        retention = next(step for step in steps if "name: Retain the bounded upgrade rehearsal evidence" in step)
+        self.assertIn("if: always()", retention)
+        for filename in ("upgrade-rehearsal-result.json", "upgrade-rehearsal-timing.json", "upgrade-rehearsal-runtime.json"):
+            self.assertIn(filename, retention)
+
+
 class PredecessorDerivationTests(unittest.TestCase):
     """REQ-CIP-006 / SPEC-CIP-001 CIP-PRE."""
 

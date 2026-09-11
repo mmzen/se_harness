@@ -1,0 +1,94 @@
+{
+  "schema": "wo-cip-009-capacity-local-checks-v1",
+  "authority": "Implementation observations only; lifecycle and assurance decisions are separate.",
+  "measured_input": "Source hashes identify the tested edits before their commit; no file binds its own commit.",
+  "source_sha256": {
+    ".github/scripts/build_integration_package.py": "c073fc6845da5dc0970f4594364d3b7e59ca80349572eab7605c80400704ba11",
+    ".github/workflows/candidate-evidence.yml": "d62f0a71f84fe14d2cd04e3aeda537385bedda381d8feba1de086568dad4307a",
+    "repository_tools/upgrade_rehearsal.py": "c7d6b3b1330756ce7b6aa048aa363ddaa975fdf037beb7749d377842b29945ce",
+    "tests/test_integration_package.py": "4206814332638c6a5c50228be153ec130954219ea2bf0c31a7bb0ed9b5cc7365",
+    "tests/test_ci_pipeline.py": "da5819d2ea81040caeca2277ced846bd249256ced68549ff47c38c5de11680ab",
+    "tests/test_upgrade_rehearsal.py": "51aaa3b99be9da7bbc498a714a01cfe58d6903dcbe3058d21441ed0e07c609f5",
+    "docs/engineering/ci-pipeline/work-orders/WO-CIP-009.md": "3858e04c0ca1c2a8fe4fbdce8161789636981ff2b497c921c9de0c7a551a5219",
+    "docs/engineering/ci-pipeline/verification/VER-CIP-005.md": "54bd6c5e41a3495d2e9dfce11b35f200c238a3dd246fc638b363ae50e473921e"
+  },
+  "checks": [
+    {
+      "command": "python -m unittest tests.test_integration_package",
+      "exit_code": 0,
+      "output": "capacity-tests.txt",
+      "output_sha256": "e547dcd8b0c5d1946cad9ea882d05cc861103c306ed8372a888bd1dde9f7d147",
+      "observed": "OK"
+    },
+    {
+      "command": "python scripts/run_tests.py",
+      "exit_code": 0,
+      "output": "capacity-full-tests.txt",
+      "output_sha256": "0c5af36951a41464ab8085042354a57a317c9b56a6f3bffc2a63a55e74288770",
+      "observed": "OK (skipped=23)"
+    },
+    {
+      "command": "python scripts/validate_release_distributions.py --root .",
+      "exit_code": 0,
+      "output": "capacity-distributions.txt",
+      "output_sha256": "c27f0712b4a9b2c06498e19445ce3d7bc4970af7b4c8178b62c9b7f8c74b7987",
+      "observed": "PASS"
+    },
+    {
+      "evaluator": "isolated released se-harness 0.17.0 outside checkout",
+      "argv": [
+        "harnessctl",
+        "doctor",
+        ".",
+        "--json"
+      ],
+      "exit_code": 0,
+      "output_sha256": "b5aed293dfd57f1aceb2eaf827702930cd1d61872cf1626992bf85787f634205",
+      "observed": "pass"
+    },
+    {
+      "evaluator": "isolated released se-harness 0.17.0 outside checkout",
+      "argv": [
+        "harnessctl",
+        "validate",
+        ".",
+        "--json"
+      ],
+      "exit_code": 0,
+      "output_sha256": "d92dc6c325e402cbb38aa46b91e40682b11e98ce90598e21ced113964bc985fb",
+      "observed": "pass"
+    },
+    {
+      "evaluator": "isolated released se-harness 0.17.0 outside checkout",
+      "argv": [
+        "harnessctl",
+        "preflight",
+        ".",
+        "--work-order",
+        "WO-CIP-009",
+        "--json"
+      ],
+      "exit_code": 0,
+      "output_sha256": "37b13945fcae1bab2b476177c1c7b1e21eabc3e4ce82c6dc3c6082621aad1456",
+      "observed": "pass"
+    },
+    {
+      "evaluator": "isolated released se-harness 0.17.0 outside checkout",
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "WO-CIP-009",
+        "--checkpoint",
+        "handoff",
+        "--from-git",
+        "6b30ed3d07f61f9d3a994392ce9564b2f46e1a4a",
+        "--json"
+      ],
+      "exit_code": 0,
+      "output_sha256": "86945f51f326185e79d98a6070de5e30b548efe710a28f2751c54f4e994bf015",
+      "observed": "pass"
+    }
+  ]
+}

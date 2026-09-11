@@ -211,6 +211,9 @@ class IntegrationPackageContractTests(unittest.TestCase):
                     member.type = tarfile.SYMTYPE
                     member.linkname = "target"
                     archive.addfile(member)
+                elif value == "directory":
+                    member.type = tarfile.DIRTYPE
+                    archive.addfile(member)
                 else:
                     assert isinstance(value, bytes)
                     member.size = len(value)
@@ -229,6 +232,72 @@ class IntegrationPackageContractTests(unittest.TestCase):
         destination = self.root / "valid-export"
         integration.extract_safe_archive(archive, destination)
         self.assertEqual(b"candidate\n", (destination / "README.md").read_bytes())
+
+    def test_archive_member_budget_is_twenty_thousand_inclusive(self) -> None:
+        self.assertEqual(20_000, integration.MAX_ARCHIVE_MEMBERS)
+        for count in (19_999, 20_000, 20_001):
+            with self.subTest(entries=count):
+                archive = self.root / f"count-{count}.tar"
+                # The first member is a sentinel: counts within budget reach the
+                # type check; an excess count must fail earlier. No 20,000-file
+                # extraction is needed to exercise the real TAR count boundary.
+                self.write_tar(archive, [("sentinel", "symlink"),
+                                        *((f"file-{index}", b"") for index in range(count - 1))])
+                destination = self.root / f"count-{count}"
+                expected = "member count is invalid" if count == 20_001 else "link or special member"
+                with self.assertRaisesRegex(integration.IntegrationPackageError, expected):
+                    integration.extract_safe_archive(archive, destination)
+                self.assertEqual([], list(destination.iterdir()))
+
+    def test_archive_boundary_extracts_at_limit_and_counts_directories(self) -> None:
+        members = [("pyproject.toml", b"project"), ("se_harness/", "directory"),
+                   ("se_harness/__init__.py", b"package")]
+        archive = self.root / "at-boundary.tar"
+        self.write_tar(archive, members)
+        with mock.patch.object(integration, "MAX_ARCHIVE_MEMBERS", 3):
+            destination = self.root / "at-boundary"
+            integration.extract_safe_archive(archive, destination)
+            self.assertEqual(b"project", (destination / "pyproject.toml").read_bytes())
+            self.assertEqual(b"package", (destination / "se_harness/__init__.py").read_bytes())
+            for index, extra in enumerate((("extra", b""), ("extra/", "directory"))):
+                with self.subTest(extra=extra):
+                    self.write_tar(archive, [*members, extra])
+                    rejected = self.root / f"over-boundary-{index}"
+                    with self.assertRaisesRegex(integration.IntegrationPackageError, "member count is invalid"):
+                        integration.extract_safe_archive(archive, rejected)
+                    self.assertEqual([], list(rejected.iterdir()))
+
+    def test_empty_archives_still_fail(self) -> None:
+        archive = self.root / "empty.tar"
+        self.write_tar(archive, [])
+        with self.assertRaisesRegex(integration.IntegrationPackageError, "member count is invalid"):
+            integration.extract_safe_archive(archive, self.root / "empty-output")
+
+    def test_archive_byte_budgets_remain_enforced_before_extraction(self) -> None:
+        self.assertEqual(128 * 1024 * 1024, integration.MAX_ARCHIVE_MEMBER)
+        self.assertEqual(512 * 1024 * 1024, integration.MAX_ARCHIVE_TOTAL)
+        archive = self.root / "byte-budget.tar"
+        self.write_tar(archive, [("pyproject.toml", b"abc"), ("se_harness/__init__.py", b"x")])
+        with mock.patch.object(integration, "MAX_ARCHIVE_MEMBER", 2):
+            with self.assertRaisesRegex(integration.IntegrationPackageError, "member size is invalid"):
+                integration.extract_safe_archive(archive, self.root / "member-budget")
+        self.assertEqual([], list((self.root / "member-budget").iterdir()))
+        with mock.patch.object(integration, "MAX_ARCHIVE_TOTAL", archive.stat().st_size - 1):
+            with self.assertRaisesRegex(integration.IntegrationPackageError, "bounded regular file"):
+                integration.extract_safe_archive(archive, self.root / "archive-budget")
+        self.assertFalse((self.root / "archive-budget").exists())
+
+        # Test declared expanded sizes without allocating hundreds of MiB.
+        members = [tarfile.TarInfo(f"large-{index}") for index in range(5)]
+        for member in members:
+            member.size = 128 * 1024 * 1024
+        with mock.patch.object(integration.tarfile, "open") as open_archive:
+            parsed = open_archive.return_value.__enter__.return_value
+            parsed.getmembers.return_value = members
+            with self.assertRaisesRegex(integration.IntegrationPackageError, "expanded size exceeds the limit"):
+                integration.extract_safe_archive(archive, self.root / "expanded-budget")
+            parsed.extractfile.assert_not_called()
+        self.assertEqual([], list((self.root / "expanded-budget").iterdir()))
 
     def test_safe_archive_rejects_traversal_links_duplicates_and_reserved_names(self) -> None:
         invalid_members = {

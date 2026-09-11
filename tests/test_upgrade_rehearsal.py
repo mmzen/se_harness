@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import io
 import json
 import os
 import re
@@ -12,6 +13,7 @@ import tempfile
 import unittest
 import unittest.mock
 from dataclasses import dataclass, field
+from contextlib import redirect_stderr
 from pathlib import Path
 
 from repository_tools import upgrade_rehearsal
@@ -222,6 +224,196 @@ class UpgradeRehearsalTests(unittest.TestCase):
         for name in ("GITHUB_TOKEN", "PYTHONPATH", "AWS_SECRET_ACCESS_KEY"):
             self.assertNotIn(name, environment)
         self.assertEqual("1", environment["PYTHONNOUSERSITE"])
+
+    def test_timing_preserves_commands_results_and_success_and_failure_verdicts(self) -> None:
+        cases = (
+            {"validate_lines": ["- [E012] [governance] VREC-X-001: evaluator evidence differs from the standard lock"]},
+            {"predecessor_doctor_before": 1},
+            {"predecessor_doctor_after": 0},
+            {"validate_lines": ["- [E010] invalid record"]},
+        )
+        for index, knobs in enumerate(cases):
+            with self.subTest(knobs=knobs), redirect_stderr(io.StringIO()):
+                runs = []
+                calls = []
+                for enabled in (False, True):
+                    fake = FakeEvaluators(**knobs)
+                    output = self.output.with_name(f"out-{index}-{enabled}")
+                    runs.append(rehearse(self.repository, predecessor_python=PREDECESSOR, successor_python=SUCCESSOR,
+                                        output=output, runner=fake, workspace=self.workspace, timings=enabled))
+                    calls.append([tuple(re.sub(r"upgrade-rehearsal-[^/\\]+", "upgrade-rehearsal-copy", item)
+                                        for item in argv) for argv in fake.calls if argv[:2] != ["git", "rev-parse"]])
+                    path_queries = [argv for argv in fake.calls if argv[:2] == ["git", "rev-parse"]]
+                    self.assertEqual(1 if enabled else 0, len(path_queries))
+                    self.assertEqual(enabled, (output / upgrade_rehearsal.TIMING_NAME).exists())
+                    if enabled:
+                        timing = json.loads((output / upgrade_rehearsal.TIMING_NAME).read_text())
+                        self.assertTrue(timing["complete"])
+                        self.assertEqual(runs[-1]["overall_result"], timing["stages"][0]["handover_result"])
+                        self.assertEqual([], timing["diagnostic_errors"])
+                        self.assertGreaterEqual(timing["unaccounted_seconds"], 0)
+                        stages = {stage["id"]: stage for stage in timing["stages"]}
+                        self.assertIn("git-add", stages)
+                        self.assertIn("git-commit", stages)
+                        self.assertIn("scratch-cleanup", stages)
+                        self.assertGreater(stages["archive-extraction"]["files"], 0)
+                        if "predecessor-doctor-after" in stages:
+                            self.assertEqual(fake.predecessor_doctor_after, stages["predecessor-doctor-after"]["exit_code"])
+                self.assertEqual(runs[0], runs[1])
+                self.assertEqual(calls[0], calls[1])
+
+    def test_default_and_explicit_workspace_report_actual_storage_and_cleanup(self) -> None:
+        default = self.workspace / "default temp"
+        explicit = self.workspace / "selected temp"
+        default.mkdir()
+        explicit.mkdir()
+        results = []
+        for workspace, expected in ((None, default), (explicit, explicit)):
+            output = self.output.with_name(expected.name)
+            with unittest.mock.patch.object(upgrade_rehearsal.tempfile, "gettempdir", return_value=str(default)), redirect_stderr(io.StringIO()):
+                results.append(rehearse(self.repository, predecessor_python=PREDECESSOR, successor_python=SUCCESSOR,
+                                       output=output, runner=FakeEvaluators(), workspace=workspace, timings=True))
+            timing = json.loads((output / upgrade_rehearsal.TIMING_NAME).read_text())
+            storage = timing["storage"]
+            self.assertEqual("python-default" if workspace is None else "explicit", storage["selection"])
+            self.assertEqual(default.resolve(), Path(storage["python_default_temp"]))
+            self.assertEqual(expected.resolve(), Path(storage["workspace_root"]))
+            scratch = Path(storage["scratch_directory"])
+            copy = Path(storage["repository_directory"])
+            self.assertEqual(expected.resolve(), scratch.parent)
+            self.assertEqual(scratch / "repository", copy)
+            self.assertEqual(copy / ".git", Path(storage["git_directory"]))
+            self.assertEqual(copy / ".git/index", Path(storage["index_file"]))
+            self.assertEqual(copy / ".git/objects", Path(storage["object_directory"]))
+            self.assertEqual({"TMPDIR", "TEMP", "TMP", "RUNNER_TEMP"}, set(storage["temp_environment"]))
+            self.assertFalse(scratch.exists())
+            self.assertEqual([], list(expected.iterdir()))
+        self.assertEqual(results[0], results[1])
+        self.assertEqual("", git(self.repository, "status", "--porcelain"))
+
+    def test_invalid_workspace_is_rejected_before_output_or_scratch_writes(self) -> None:
+        file = self.workspace / "file"
+        file.write_text("retain")
+        for workspace in (self.repository, self.repository / "child", self.workspace / "missing", file):
+            with self.subTest(workspace=workspace), unittest.mock.patch.object(upgrade_rehearsal, "_scratch") as scratch:
+                with self.assertRaisesRegex(UpgradeRehearsalError, "workspace must"):
+                    rehearse(self.repository, predecessor_python=PREDECESSOR, successor_python=SUCCESSOR,
+                             output=self.output, workspace=workspace)
+                scratch.assert_not_called()
+                self.assertFalse(self.output.exists())
+        with unittest.mock.patch.object(upgrade_rehearsal.tempfile, "gettempdir", return_value=str(self.repository)):
+            with self.assertRaisesRegex(UpgradeRehearsalError, "outside the operational repository"):
+                rehearse(self.repository, predecessor_python=PREDECESSOR, successor_python=SUCCESSOR, output=self.output)
+        self.assertEqual("", git(self.repository, "status", "--porcelain"))
+        self.assertEqual("retain", file.read_text())
+
+    def test_git_path_diagnostic_failure_is_incomplete_and_does_not_hide_handover_failure(self) -> None:
+        for failed_handover in (False, True):
+            fake = FakeEvaluators(predecessor_doctor_before=int(failed_handover))
+            output = self.output.with_name(f"path-query-{failed_handover}")
+            def runner(argv, cwd):
+                if list(argv[:2]) == ["git", "rev-parse"]:
+                    return Completed(1, "", "do not retain this raw diagnostic")
+                return fake(argv, cwd)
+            with redirect_stderr(io.StringIO()):
+                if failed_handover:
+                    result = rehearse(self.repository, predecessor_python=PREDECESSOR, successor_python=SUCCESSOR,
+                                      output=output, runner=runner, workspace=self.workspace, timings=True)
+                    self.assertEqual("fail", result["overall_result"])
+                else:
+                    with self.assertRaisesRegex(UpgradeRehearsalError, "timing diagnostics are incomplete"):
+                        rehearse(self.repository, predecessor_python=PREDECESSOR, successor_python=SUCCESSOR,
+                                 output=output, runner=runner, workspace=self.workspace, timings=True)
+            timing = json.loads((output / upgrade_rehearsal.TIMING_NAME).read_text())
+            self.assertFalse(timing["complete"])
+            self.assertEqual(["git-storage-paths"], timing["diagnostic_errors"])
+            self.assertNotIn("do not retain", json.dumps(timing))
+            self.assertEqual([], list(self.workspace.iterdir()))
+
+    def test_cli_passes_the_explicit_workspace_without_changing_omitted_default(self) -> None:
+        for extra, expected in (([], None), (["--workspace", str(self.workspace)], self.workspace)):
+            with unittest.mock.patch.object(upgrade_rehearsal, "rehearse", return_value={"overall_result": "pass"}) as operation, unittest.mock.patch("builtins.print"):
+                self.assertEqual(0, upgrade_rehearsal.main([
+                    "--repository", str(self.repository), "--predecessor-python", str(PREDECESSOR),
+                    "--successor-python", str(SUCCESSOR), "--output", str(self.output), "--json", *extra,
+                ]))
+            self.assertEqual(expected, operation.call_args.kwargs["workspace"])
+
+    def test_partial_timing_retains_export_failure_without_masking_it(self) -> None:
+        with unittest.mock.patch.object(upgrade_rehearsal.subprocess, "run", return_value=subprocess.CompletedProcess([], 1, b"", b"export refused")), redirect_stderr(io.StringIO()):
+            with self.assertRaisesRegex(UpgradeRehearsalError, "export refused"):
+                rehearse(self.repository, predecessor_python=PREDECESSOR, successor_python=SUCCESSOR,
+                         output=self.output, runner=FakeEvaluators(), workspace=self.workspace, timings=True)
+        timing = json.loads((self.output / upgrade_rehearsal.TIMING_NAME).read_text())
+        self.assertFalse(timing["complete"])
+        self.assertEqual([("replay", "error"), ("git-archive", "error"), ("scratch-cleanup", "finished")],
+                         [(item["id"], item["status"]) for item in timing["stages"]])
+        self.assertFalse((self.output / upgrade_rehearsal.RESULT_NAME).exists())
+
+    def test_cleanup_failure_remains_an_error_and_is_measured(self) -> None:
+        original = tempfile.TemporaryDirectory.cleanup
+
+        def fail_after_cleanup(directory):
+            original(directory)
+            raise OSError("cleanup refused")
+
+        with unittest.mock.patch.object(tempfile.TemporaryDirectory, "cleanup", fail_after_cleanup), redirect_stderr(io.StringIO()):
+            with self.assertRaisesRegex(OSError, "cleanup refused"):
+                rehearse(self.repository, predecessor_python=PREDECESSOR, successor_python=SUCCESSOR,
+                         output=self.output, runner=FakeEvaluators(), workspace=self.workspace, timings=True)
+        timing = json.loads((self.output / upgrade_rehearsal.TIMING_NAME).read_text())
+        self.assertFalse(timing["complete"])
+        self.assertEqual("scratch-cleanup", timing["stages"][-1]["id"])
+        self.assertEqual("error", timing["stages"][-1]["status"])
+
+    def test_unwritable_timing_cannot_hide_export_failure_or_claim_complete_success(self) -> None:
+        with unittest.mock.patch.object(Path, "replace", side_effect=PermissionError("timing denied")), redirect_stderr(io.StringIO()):
+            with unittest.mock.patch.object(upgrade_rehearsal.subprocess, "run", side_effect=RuntimeError("original failure")):
+                with self.assertRaisesRegex(RuntimeError, "original failure"):
+                    rehearse(self.repository, predecessor_python=PREDECESSOR, successor_python=SUCCESSOR,
+                             output=self.output, runner=FakeEvaluators(), workspace=self.workspace, timings=True)
+            with self.assertRaisesRegex(UpgradeRehearsalError, "timing diagnostics are incomplete"):
+                rehearse(self.repository, predecessor_python=PREDECESSOR, successor_python=SUCCESSOR,
+                         output=self.output.with_name("other-out"), runner=FakeEvaluators(), workspace=self.workspace, timings=True)
+
+    def test_timing_cannot_write_into_the_operational_repository(self) -> None:
+        with self.assertRaisesRegex(UpgradeRehearsalError, "outside the operational repository"):
+            rehearse(self.repository, predecessor_python=PREDECESSOR, successor_python=SUCCESSOR,
+                     output=self.repository / "diagnostic", runner=FakeEvaluators(), timings=True)
+        self.assertFalse((self.repository / "diagnostic").exists())
+
+
+class TimingClockTests(unittest.TestCase):
+    def test_nested_measurements_use_monotonic_intervals_and_flush_progress(self) -> None:
+        with tempfile.TemporaryDirectory() as directory, unittest.mock.patch("builtins.print") as progress:
+            timing = upgrade_rehearsal.RehearsalTiming(Path(directory), clock=iter([10., 12., 17., 22.]).__next__)
+            with timing.measure("replay"):
+                with timing.measure("git-archive"):
+                    partial = json.loads((Path(directory) / upgrade_rehearsal.TIMING_NAME).read_text())
+                    self.assertFalse(partial["complete"])
+                    self.assertEqual("running", partial["stages"][-1]["status"])
+            self.assertEqual([(None, 12.), ("replay", 5.)],
+                             [(item["parent"], item["elapsed_seconds"]) for item in timing.data["stages"]])
+            self.assertEqual(4, progress.call_count)
+            self.assertTrue(all(call.kwargs["flush"] for call in progress.call_args_list))
+
+    def test_interruption_is_not_suppressed_or_reported_as_finished(self) -> None:
+        with tempfile.TemporaryDirectory() as directory, redirect_stderr(io.StringIO()):
+            timing = upgrade_rehearsal.RehearsalTiming(Path(directory), clock=iter([3., 8.]).__next__)
+            with self.assertRaises(KeyboardInterrupt):
+                with timing.measure("replay"):
+                    raise KeyboardInterrupt()
+            saved = json.loads((Path(directory) / upgrade_rehearsal.TIMING_NAME).read_text())
+            self.assertFalse(saved["complete"])
+            self.assertEqual("KeyboardInterrupt", saved["stages"][0]["error_type"])
+            self.assertEqual(5., saved["stages"][0]["elapsed_seconds"])
+
+    def test_timing_identity_is_allowlisted(self) -> None:
+        with tempfile.TemporaryDirectory() as directory, unittest.mock.patch.dict(os.environ, {"GITHUB_TOKEN": "secret", "GITHUB_SHA": "tested", "REHEARSAL_HEAD_SHA": "head"}):
+            timing = upgrade_rehearsal.RehearsalTiming(Path(directory))
+            self.assertEqual("tested", timing.data["identity"]["GITHUB_SHA"])
+            self.assertEqual("head", timing.data["identity"]["REHEARSAL_HEAD_SHA"])
+            self.assertNotIn("secret", json.dumps(timing.data))
 
 
 class RetiredSurfaceTests(unittest.TestCase):

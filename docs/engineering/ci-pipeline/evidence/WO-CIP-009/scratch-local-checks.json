@@ -1,0 +1,32 @@
+{
+  "schema": "wo-cip-009-scratch-local-checks-v1",
+  "authority": "Implementation observations; no lifecycle or assurance decision.",
+  "source_sha256": {
+    "repository_tools/upgrade_rehearsal.py": "83f9266accf70a233171ae010c648dc3f37844d87ceae1aec87f17468073b870",
+    ".github/workflows/candidate-evidence.yml": "f0fff2280e0606ea617bd6a27b82a112b60d4303b607341e108773a9f4ca3bf6",
+    "tests/test_upgrade_rehearsal.py": "061d08f669252d61b2602fd72db772734328b376b1a0328e519e2c0d91996a53",
+    "tests/test_ci_pipeline.py": "b403380af77dc5dd758f054e27820f56f76bf5e8316a3c158504b7895063fdb7",
+    "docs/engineering/ci-pipeline/work-orders/WO-CIP-009.md": "6ab88008c977075a20d145e020a4087c78a281f20139fad773a379763f614911",
+    "docs/engineering/ci-pipeline/verification/VER-CIP-005.md": "f166f9224b4f8ca6baebe018177eb1ecbbc0b59c6d738f0a0a0bc41d81be5515"
+  },
+  "checks": [
+    {
+      "command": "python -m unittest tests.test_upgrade_rehearsal tests.test_ci_pipeline",
+      "exit_code": 0,
+      "output": "scratch-focused.txt",
+      "sha256": "81cad0aa63b8222a8493b659909fc9a0999138f34c7d27514bae69acecde3acd"
+    },
+    {
+      "command": "python scripts/run_tests.py",
+      "exit_code": 0,
+      "output": "scratch-full.txt",
+      "sha256": "4f91c8a09431b5194fb50137818115f27f45ebe012778ccba7119deda5fcdf1f"
+    },
+    {
+      "command": "python scripts/validate_release_distributions.py --root .",
+      "exit_code": 0,
+      "output": "scratch-distributions.txt",
+      "sha256": "c27f0712b4a9b2c06498e19445ce3d7bc4970af7b4c8178b62c9b7f8c74b7987"
+    }
+  ]
+}
