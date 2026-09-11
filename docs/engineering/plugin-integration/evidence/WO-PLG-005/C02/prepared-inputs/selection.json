@@ -1,0 +1,26 @@
+{
+  "binding_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\data\\verity-plane-verity-plane-codex-fixture\\binding.json",
+  "binding": {
+    "schema": "verity-codex-binding-v1",
+    "repo": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\codex-adapter-sandboxes\\accepted 001 with spaces\\repo with spaces",
+    "environment": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016",
+    "artifact": "WO-PROBE-001",
+    "capture": true,
+    "profile": {
+      "host": "0.153.4",
+      "os": "windows",
+      "python": "3.14.6",
+      "evaluator": "0.16.0"
+    },
+    "decision": {
+      "id": "DEC-PLG-001",
+      "status": "decided",
+      "option": "prove-supported-route"
+    }
+  },
+  "binding_sha256": "7394e24e9eb97192d4bdcfc4c33feb31f9b76058dd6a8d7b569e79b9b65805a3",
+  "decision_source_sha256": "2d992518c43f11fb74c9f6f6ed38154fbcaccd2182719eb884dc3fca41fe6671",
+  "body_sha256": "5b1ed562a275f5ed51a14a632b0b9a3779daebb4165e1f908db33f8241541ca2",
+  "expected_body_bytes": 7567,
+  "scope": "Independent source expectation and already-prepared interpreter selection, not host readiness or delivery evidence"
+}

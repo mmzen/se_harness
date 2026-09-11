@@ -1,0 +1,17 @@
+{
+  "label": "excluded-route-SessionStart",
+  "expected": "deny/unready with unchanged helper-spawn log",
+  "exit_status": 0,
+  "host_response_channel": "registered PowerShell command stdout; no model/app-server invoked",
+  "response": {
+    "hookSpecificOutput": {
+      "hookEventName": "SessionStart",
+      "additionalContext": "Verity Plane UNREADY: No positively selected Codex route; no Python invoked. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed."
+    }
+  },
+  "helper_spawn_log_before": "{\"pid\": 35620, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C07\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C07\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243172.1254377}\r\n",
+  "helper_spawn_log_after": "{\"pid\": 35620, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C07\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C07\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243172.1254377}\r\n",
+  "started_monotonic": 243175.8860107,
+  "finished_monotonic": 243176.3902632,
+  "conclusion": "pass"
+}

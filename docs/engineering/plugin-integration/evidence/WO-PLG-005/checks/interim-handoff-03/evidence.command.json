@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "evidence",
+    ".",
+    "--artifact",
+    "WO-PLG-005",
+    "--checkpoint",
+    "handoff",
+    "--json"
+  ],
+  "exit_status": 0,
+  "started_monotonic": 243533.1871713,
+  "finished_monotonic": 243535.8925405
+}

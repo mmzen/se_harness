@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\codex-adapter-sandboxes\\accepted 001 with spaces\\C08 owned runtime 016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "pip",
+    "install",
+    "--no-index",
+    "--no-deps",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evaluator-wheels\\se_harness-0.16.0-py3-none-any.whl"
+  ],
+  "exit_status": 0
+}

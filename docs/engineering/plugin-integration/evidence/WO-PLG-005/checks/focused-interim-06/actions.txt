@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/plugin_integration/codex_adapter",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "started_monotonic": 243278.373954,
+  "finished_monotonic": 243289.9078097,
+  "exit_status": 0
+}

@@ -1,0 +1,8 @@
+positive-sentinel-before: pass
+missing-required-cwd: pass
+malformed-json: pass
+wrong-event-shape: pass
+blank-tool: pass
+object-tool: pass
+array-tool: pass
+positive-sentinel-after: pass

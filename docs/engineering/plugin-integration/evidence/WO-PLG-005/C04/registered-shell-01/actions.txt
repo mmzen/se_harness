@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\tests\\plugin_integration\\codex_adapter\\calibration.py",
+    "C04",
+    "--run",
+    "registered-shell-01"
+  ],
+  "source_sha256": {
+    "hooks/hooks.json": "2b768288dd11dca1510ea250e0b1cf9c7455e1f6d9152e62ed45482336c75a43",
+    "calibration.py": "562c1acf7fa42f2e68d93a92bc04660acb12b9934cacf864c46c09d3bb3faa87",
+    "sentinel-dispatch.py": "27eda7a63ea3efd7255120546e6426768015c473f940d653417efe90ae5cf3c2",
+    "selected-python": "199ce15a9f0d4f9522edba59338e4879d28cf61f88e377b8164bcb716275ed22",
+    "native-shell": "8bb6fa8c283b4d92120b1ef249a9b311b0f804d4cabbe9981159976c8be76a5e"
+  },
+  "fixture": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\codex-adapter-sandboxes\\accepted 001 with spaces\\registered shell calibration\\C04\\registered-shell-01",
+  "actions": [
+    "positive-sentinel-before",
+    "missing-required-cwd",
+    "malformed-json",
+    "wrong-event-shape",
+    "blank-tool",
+    "object-tool",
+    "array-tool",
+    "positive-sentinel-after"
+  ]
+}

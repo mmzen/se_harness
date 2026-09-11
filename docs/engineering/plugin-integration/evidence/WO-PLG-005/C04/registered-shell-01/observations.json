@@ -1,0 +1,159 @@
+{
+  "case": "C04",
+  "expected": "All negative inputs refuse before sentinel Python; positive controls prove the spawn audit is active.",
+  "source_evidence": [
+    "actions.txt",
+    "helper-spawn.jsonl",
+    "state-before.json",
+    "state-after.json",
+    "per-input directories"
+  ],
+  "observed": [
+    {
+      "label": "positive-sentinel-before",
+      "expected": "sentinel invoked",
+      "exit_status": 0,
+      "host_response_channel": "registered PowerShell command stdout; no model/app-server invoked",
+      "response": {
+        "hookSpecificOutput": {
+          "hookEventName": "PreToolUse",
+          "additionalContext": "SENTINEL CALIBRATION ONLY; no production readiness result"
+        }
+      },
+      "helper_spawn_log_before": "",
+      "helper_spawn_log_after": "{\"pid\": 13176, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243163.7435595}\r\n",
+      "started_monotonic": 243163.083461,
+      "finished_monotonic": 243163.7700583,
+      "conclusion": "pass"
+    },
+    {
+      "label": "missing-required-cwd",
+      "expected": "deny/unready with unchanged helper-spawn log",
+      "exit_status": 0,
+      "host_response_channel": "registered PowerShell command stdout; no model/app-server invoked",
+      "response": {
+        "hookSpecificOutput": {
+          "permissionDecision": "deny",
+          "hookEventName": "PreToolUse",
+          "permissionDecisionReason": "Verity Plane UNREADY: Host repository field missing. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed."
+        }
+      },
+      "helper_spawn_log_before": "{\"pid\": 13176, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243163.7435595}\r\n",
+      "helper_spawn_log_after": "{\"pid\": 13176, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243163.7435595}\r\n",
+      "started_monotonic": 243163.7807034,
+      "finished_monotonic": 243164.1906578,
+      "conclusion": "pass"
+    },
+    {
+      "label": "malformed-json",
+      "expected": "deny/unready with unchanged helper-spawn log",
+      "exit_status": 0,
+      "host_response_channel": "registered PowerShell command stdout; no model/app-server invoked",
+      "response": {
+        "hookSpecificOutput": {
+          "permissionDecision": "deny",
+          "hookEventName": "PreToolUse",
+          "permissionDecisionReason": "Verity Plane UNREADY: Objet non valide passé, ':' ou '}' attendu. (1): {. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed."
+        }
+      },
+      "helper_spawn_log_before": "{\"pid\": 13176, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243163.7435595}\r\n",
+      "helper_spawn_log_after": "{\"pid\": 13176, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243163.7435595}\r\n",
+      "started_monotonic": 243164.1978248,
+      "finished_monotonic": 243164.6003205,
+      "conclusion": "pass"
+    },
+    {
+      "label": "wrong-event-shape",
+      "expected": "deny/unready with unchanged helper-spawn log",
+      "exit_status": 0,
+      "host_response_channel": "registered PowerShell command stdout; no model/app-server invoked",
+      "response": {
+        "hookSpecificOutput": {
+          "permissionDecision": "deny",
+          "hookEventName": "PreToolUse",
+          "permissionDecisionReason": "Verity Plane UNREADY: Host input must be an object. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed."
+        }
+      },
+      "helper_spawn_log_before": "{\"pid\": 13176, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243163.7435595}\r\n",
+      "helper_spawn_log_after": "{\"pid\": 13176, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243163.7435595}\r\n",
+      "started_monotonic": 243164.6043754,
+      "finished_monotonic": 243165.0012751,
+      "conclusion": "pass"
+    },
+    {
+      "label": "blank-tool",
+      "expected": "deny/unready with unchanged helper-spawn log",
+      "exit_status": 0,
+      "host_response_channel": "registered PowerShell command stdout; no model/app-server invoked",
+      "response": {
+        "hookSpecificOutput": {
+          "permissionDecision": "deny",
+          "hookEventName": "PreToolUse",
+          "permissionDecisionReason": "Verity Plane UNREADY: Host tool fields missing or malformed. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed."
+        }
+      },
+      "helper_spawn_log_before": "{\"pid\": 13176, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243163.7435595}\r\n",
+      "helper_spawn_log_after": "{\"pid\": 13176, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243163.7435595}\r\n",
+      "started_monotonic": 243165.0050353,
+      "finished_monotonic": 243165.4654891,
+      "conclusion": "pass"
+    },
+    {
+      "label": "object-tool",
+      "expected": "deny/unready with unchanged helper-spawn log",
+      "exit_status": 0,
+      "host_response_channel": "registered PowerShell command stdout; no model/app-server invoked",
+      "response": {
+        "hookSpecificOutput": {
+          "permissionDecision": "deny",
+          "hookEventName": "PreToolUse",
+          "permissionDecisionReason": "Verity Plane UNREADY: Host tool fields missing or malformed. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed."
+        }
+      },
+      "helper_spawn_log_before": "{\"pid\": 13176, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243163.7435595}\r\n",
+      "helper_spawn_log_after": "{\"pid\": 13176, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243163.7435595}\r\n",
+      "started_monotonic": 243165.4727243,
+      "finished_monotonic": 243165.9247116,
+      "conclusion": "pass"
+    },
+    {
+      "label": "array-tool",
+      "expected": "deny/unready with unchanged helper-spawn log",
+      "exit_status": 0,
+      "host_response_channel": "registered PowerShell command stdout; no model/app-server invoked",
+      "response": {
+        "hookSpecificOutput": {
+          "permissionDecision": "deny",
+          "hookEventName": "PreToolUse",
+          "permissionDecisionReason": "Verity Plane UNREADY: Host tool fields missing or malformed. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed."
+        }
+      },
+      "helper_spawn_log_before": "{\"pid\": 13176, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243163.7435595}\r\n",
+      "helper_spawn_log_after": "{\"pid\": 13176, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243163.7435595}\r\n",
+      "started_monotonic": 243165.9318754,
+      "finished_monotonic": 243166.3783678,
+      "conclusion": "pass"
+    },
+    {
+      "label": "positive-sentinel-after",
+      "expected": "sentinel invoked",
+      "exit_status": 0,
+      "host_response_channel": "registered PowerShell command stdout; no model/app-server invoked",
+      "response": {
+        "hookSpecificOutput": {
+          "hookEventName": "PreToolUse",
+          "additionalContext": "SENTINEL CALIBRATION ONLY; no production readiness result"
+        }
+      },
+      "helper_spawn_log_before": "{\"pid\": 13176, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243163.7435595}\r\n",
+      "helper_spawn_log_after": "{\"pid\": 13176, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243163.7435595}\r\n{\"pid\": 9720, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243166.9766368}\r\n",
+      "started_monotonic": 243166.3848282,
+      "finished_monotonic": 243167.0031655,
+      "conclusion": "pass"
+    }
+  ],
+  "lifecycle_artifact_hashes_unchanged": true,
+  "exit_status": 0,
+  "conclusion": "pass",
+  "limits": "Direct execution of the exact registered native shell commands with a sentinel dispatcher. No live model, native pending edit, actual production readiness, or broader supported profile is claimed."
+}

@@ -1,0 +1,6 @@
+Requested exec_command (require_escalated) from the WO-PLG-005 implementation checkout:
+C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-eval-016/Scripts/python.exe -I -B tests/plugin_integration/codex_adapter/live.py --package-record docs/engineering/plugin-integration/evidence/WO-PLG-005/preparation/package-04/package.json --evidence docs/engineering/plugin-integration/evidence/WO-PLG-005/C02/resume-compact-01 --resume 01a0920e-dc36-7481-8dee-83cd5cce39db --compact
+
+Justification: Run the authorized disposable Codex 0.153.4 read-only acceptance session for resume and compaction, with exact loaded-package checks, abort on any approval request, and owned-process cleanup.
+
+The request was rejected before launch. This directory was written afterwards to retain the rejection; it is not observer output from a native process.

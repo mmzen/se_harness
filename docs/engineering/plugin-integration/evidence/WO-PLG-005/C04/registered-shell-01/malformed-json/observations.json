@@ -1,0 +1,18 @@
+{
+  "label": "malformed-json",
+  "expected": "deny/unready with unchanged helper-spawn log",
+  "exit_status": 0,
+  "host_response_channel": "registered PowerShell command stdout; no model/app-server invoked",
+  "response": {
+    "hookSpecificOutput": {
+      "permissionDecision": "deny",
+      "hookEventName": "PreToolUse",
+      "permissionDecisionReason": "Verity Plane UNREADY: Objet non valide passé, ':' ou '}' attendu. (1): {. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed."
+    }
+  },
+  "helper_spawn_log_before": "{\"pid\": 13176, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243163.7435595}\r\n",
+  "helper_spawn_log_after": "{\"pid\": 13176, \"executable\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe\", \"argv\": [\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\plugin with spaces\\\\scripts\\\\codex-dispatch.py\", \"--data\", \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\codex-adapter-sandboxes\\\\accepted 001 with spaces\\\\registered shell calibration\\\\C04\\\\registered-shell-01\\\\data with spaces\", \"--event\", \"PreToolUse\"], \"monotonic\": 243163.7435595}\r\n",
+  "started_monotonic": 243164.1978248,
+  "finished_monotonic": 243164.6003205,
+  "conclusion": "pass"
+}

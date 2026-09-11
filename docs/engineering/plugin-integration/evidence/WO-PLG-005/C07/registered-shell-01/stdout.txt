@@ -1,0 +1,12 @@
+positive-sentinel-before: pass
+unaccepted-host-PreToolUse: pass
+unaccepted-host-SessionStart: pass
+empty-host-PreToolUse: pass
+empty-host-SessionStart: pass
+open-decision-PreToolUse: pass
+open-decision-SessionStart: pass
+excluded-route-PreToolUse: pass
+excluded-route-SessionStart: pass
+empty-positive-route-PreToolUse: pass
+empty-positive-route-SessionStart: pass
+positive-sentinel-after: pass
