@@ -2,7 +2,7 @@
 id = "WO-CIP-009"
 type = "work_order"
 title = "Measure Windows and Linux upgrade rehearsal stages"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-11"
 updated = "2026-09-11"
@@ -44,6 +44,13 @@ to = "in_progress"
 decided_at = "2026-09-11T17:10:20Z"
 decided_by = "engineering-owner"
 reason = "The operator authorized diagnostic implementation and hosted runs by approving both named artifacts on 2026-09-11 in response to the explicit start authorization question."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-11T18:32:47Z"
+decided_by = "engineering-owner"
+reason = "The operator confirmed marking WO-CIP-009 implemented and preparing its verification record on 2026-09-11. The scoped tests and hosted checks pass; verification, merge and release remain separate decisions."
 +++
 
 # Work Order: Measure Windows and Linux upgrade rehearsal stages
