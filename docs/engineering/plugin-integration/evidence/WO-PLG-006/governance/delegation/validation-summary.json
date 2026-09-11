@@ -1,0 +1,59 @@
+{
+  "work_order": "WO-PLG-006",
+  "base_commit": "2326c23d5029436d712cc3a653714ef12ebf08bc",
+  "evaluator_version": "0.17.0",
+  "retained_results_sha256": {
+    "approval-plan": "a69ee8a55de2020d13f7e515f833a82bec337fb73588b714bb362b56ba8e6b60",
+    "approval-applied": "c225c325eaf6363f299f20b7f80123b1cb27dfb0b2f84b3eb678a520580558ce",
+    "definition-review": "c30995f65d87ad67a05cbc2d18f327e513a5cae43554c9c6c30d2e643fb11fff",
+    "delegated-start-preview": "e35703ebdc9709b2399639cdc553c2ff3f151546b1316efa17cceb39e13b5c3d"
+  },
+  "checks": [
+    {
+      "command": [
+        "harnessctl",
+        "doctor",
+        ".",
+        "--json"
+      ],
+      "exit_code": 0,
+      "result_sha256": "40e666299a7b8087cb884685cfba36cfc90d43f523f7a1ba5204783d3d817634",
+      "result": "completed"
+    },
+    {
+      "command": [
+        "harnessctl",
+        "validate",
+        ".",
+        "--json"
+      ],
+      "exit_code": 0,
+      "result_sha256": "e9b062eacbe5fb51ce97f21d2eb7123ec3d43bc4bcda26e899391afa7cfbec05",
+      "result": {
+        "error_count": 0
+      }
+    },
+    {
+      "command": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "WO-PLG-006",
+        "--checkpoint",
+        "scope",
+        "--from-git",
+        "2326c23d5029436d712cc3a653714ef12ebf08bc",
+        "--json"
+      ],
+      "exit_code": 0,
+      "result_sha256": "b97d039d8585090607d811baabce1705d4428c7151dad8b88e36e9a5dc5c6274",
+      "result": {
+        "kind": "check",
+        "outcome": "completed"
+      }
+    }
+  ],
+  "delegated_start": "blocked: WEX-ECP-022",
+  "implementation_started": false
+}

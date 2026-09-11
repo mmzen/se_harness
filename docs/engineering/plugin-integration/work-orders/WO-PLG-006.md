@@ -2,10 +2,13 @@
 id = "WO-PLG-006"
 type = "work_order"
 title = "Implement the accepted Claude Code host adapter"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-08"
-updated = "2026-09-08"
+updated = "2026-09-11"
+
+[delegation]
+class = "execution"
 
 [assurance]
 commit_bound_verification = "required"
@@ -18,6 +21,8 @@ paths = [
   "tests/plugin_integration/claude_adapter/",
   "docs/engineering/plugin-integration/work-orders/WO-PLG-006.md",
   "docs/engineering/plugin-integration/evidence/WO-PLG-006/",
+  "docs/engineering/plugin-integration/verification-records/VREC-PLG-013.md",
+  "docs/engineering/plugin-integration/evidence/VREC-PLG-013-evaluator.json",
   "docs/engineering/plugin-integration/requirements/REQ-PLG-009.md",
   "docs/engineering/plugin-integration/specifications/SPEC-PLG-006.md",
   "docs/engineering/plugin-integration/verification/VER-PLG-006.md",
@@ -28,15 +33,20 @@ implements = ["REQ-PLG-009"]
 specifications = ["SPEC-PLG-006"]
 verification = ["VER-PLG-006"]
 architecture = ["ARCH-PLG-002", "ADR-PLG-002"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-11T19:00:19Z"
+decided_by = "engineering-owner"
+reason = "The operator explicitly selected WO-PLG-005 and WO-PLG-006 for implementation through the delegated route on 2026-09-11. Approve this work order with the requested execution class and exact future verification-record paths. This delegates only DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE, conditional on the class at the PR base and a successful live required check for the exact head. No implementation has started; verification, release and merge remain human decisions."
 +++
 
 # Work Order: Implement the accepted Claude Code host adapter
 
 ## Lifecycle
 
-Draft only: this proposes scope and assurance classification, not authorization.
-The engineering owner decides approval and start under existing rules.
-No execution delegation is proposed; later verification needs a commit-bound record.
+The operator selected WO-PLG-006 for the delegated route on 2026-09-11. Work-order approval records the requested execution delegation. The class permits only DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE, after it is present at the pull-request base and the required live GitHub check succeeds for the exact head. This packet prepares that base prerequisite; implementation has not started. Verification, release and merge remain human decisions.
 
 ## Objective
 
@@ -59,7 +69,7 @@ After approval, choose host-file organization and test fixtures within the accep
 
 ## Constraints
 
-The blocked, unapproved SPEC-PLG-006 prevents this work order's approval. The technical owner must select a positively supported route through DEC-PLG-002 before approving that specification.
+The technical owner accepted the demonstrated Windows route in DEC-PLG-002, and SPEC-PLG-006 is approved. That decision's profile and retained limits govern this work. Other host, platform, Python or evaluator profiles remain unqualified; this work does not expand the accepted profile.
 Selecting exclude-claude authorizes no implementation or support. Rejection, deferral, or amendment requires its own artifact decision. Consume completed outputs from WO-PLG-001, WO-PLG-002, WO-PLG-004, WO-PLG-007, and WO-PLG-008. Missing skill assets remain an explicit integration prerequisite.
 The proposal source is PR #360 at `9e894e99`; this work order's approved relations and scope govern implementation.
 
