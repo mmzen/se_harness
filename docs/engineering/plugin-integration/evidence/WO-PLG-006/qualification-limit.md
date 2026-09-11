@@ -1,5 +1,7 @@
 # Missing-enforcement observations
 
+**Operator acceptance recorded:** the operator accepted hook failure as a [documented local limitation](local-limitation-acceptance/README.md). The failed observations remain unchanged. Formal decision recording and any required contract changes are separate; this evidence update changes no lifecycle state.
+
 WO-PLG-006 remains in progress. The C10 and C11 experiments completed their
 required observations, but enforcement failed and the affected routes remain
 unqualified. This does not turn the successful C09 running-handler observations
@@ -24,6 +26,8 @@ that closes that gap within the accepted inline command route was found in this
 inspection. An SDK callback or an independent permission boundary requires its
 own approved architecture and qualification; neither is implemented here.
 
-The engineering owner must disposition this bounded result before completion.
+The operator has accepted this local limitation. The technical owner records
+the formal deviation; the engineering owner separately decides completion
+against the applicable contract.
 No supported production profile, VREC, lifecycle transition, definition amendment,
 release or installation outside the disposable fixtures is claimed.

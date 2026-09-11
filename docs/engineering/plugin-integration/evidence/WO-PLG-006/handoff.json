@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 462 declared changed path(s) are within execution scope.",
+            "message": "All 470 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -265,10 +265,10 @@
       "decision": "whether the authorized implementation and evidence are complete",
       "decision_right": "DR-WO-COMPLETE",
       "delegation": {
-        "check_run_id": "103403625697",
+        "check_run_id": "103406956663",
         "class": "execution",
         "gate": "success",
-        "head": "fd2419f4c26b9ba4d4a97f85b7d2b08da72b8626"
+        "head": "83bf6dbc46884a38d66e415c16722e3a204f674f"
       },
       "outcomes": [
         "implemented",
@@ -288,7 +288,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "0d54150790d22d7fa61c622b18e2601956adf162ef3caa5cd66403ba7cf46bb4",
+  "result_sha256": "daa3e337cc822caa72c2ab0b9689ee9bdc391675db98249c4de4ddc60ee6fa82",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
@@ -709,11 +709,19 @@
       "docs/engineering/plugin-integration/evidence/WO-PLG-006/governance/path-correction-checks/released-doctor-stdout.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-006/governance/path-correction-checks/released-preflight-stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-006/governance/path-correction-checks/released-preflight-stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-006/governance/path-correction-checks/source-ci-checks.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-006/governance/path-correction-checks/source-ci-pull.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-006/governance/path-correction-checks/source-ci-result.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-006/governance/start/start-applied.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-006/governance/start/start-focus-live.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-006/governance/start/start-plan.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-006/governance/start/start-preflight.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-006/handoff.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-006/local-limitation-acceptance/formal-recording-proposal.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-006/local-limitation-acceptance/operator-instruction.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-006/local-limitation-acceptance/pre-action.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-006/local-limitation-acceptance/pre-action.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-006/local-limitation-acceptance/README.md",
       "docs/engineering/plugin-integration/evidence/WO-PLG-006/path-validation/focused-tests.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-006/path-validation/post-correction.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-006/path-validation/pre-correction.json",

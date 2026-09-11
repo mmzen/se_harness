@@ -1,5 +1,7 @@
 # Claude adapter implementation evidence
 
+**Operator acceptance recorded:** the operator accepted hook failure as a [documented local limitation](local-limitation-acceptance/README.md). The failed observations remain unchanged. Formal decision recording and any required contract changes are separate; this evidence update changes no lifecycle state.
+
 WO-PLG-006 remains in progress. The native manifest, inline guards and focused
 tests are implemented, and all C01-C12 observations have been collected. C10 and
 C11 failed enforcement and remain unqualified. No supported production profile,

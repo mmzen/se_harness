@@ -2,7 +2,7 @@
 artifact = "WO-PLG-006"
 checkpoint = "handoff"
 formal_snapshot_sha256 = "d486c36a30fdc1eeec9d0169de12a6a270105cdb20f874ce5f788496fb30742e"
-rebound_at = "2026-09-11T20:09:05Z"
+rebound_at = "2026-09-11T22:03:44Z"
 ```
 
 # WO-PLG-006 handoff evidence
@@ -38,3 +38,7 @@ unqualified, with C12 passing rejection only. The current canonical case records
 and candidate-binding.json use the corrected package; earlier attempts remain
 historical. Required small repository checks are retained under
 governance/path-correction-checks. No lifecycle action occurred.
+
+## Operator acceptance of the local limitation
+
+**Operator acceptance recorded:** the operator accepted hook failure as a [documented local limitation](local-limitation-acceptance/README.md). The failed observations remain unchanged. Formal decision recording and any required contract changes are separate; this evidence update changes no lifecycle state.
