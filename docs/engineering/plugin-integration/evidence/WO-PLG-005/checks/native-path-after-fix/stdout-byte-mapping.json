@@ -1,0 +1,19 @@
+{
+  "schema": "retained-stdout-mapping-v1",
+  "original_filename": "stdout.txt",
+  "original_sha256": "92baa42ae4342982c3d83aa24dfd13ace5d96fa7c230084ac52c2090a47a7ab2",
+  "original_size_bytes": 650,
+  "byte_container": "stdout.raw-bytes.json",
+  "readable_projection": "stdout.txt",
+  "projection_sha256": "b508193b877742651715071a276397de1c64a461864d61c7af09459d230308b7",
+  "projection_size_bytes": 894,
+  "projection_hash_domain": "SHA-256 of UTF-8 LF projection bytes; normalize checkout newline conversion to LF when verifying a text checkout.",
+  "decoded_before_replacement_equals_original": true,
+  "unchanged_source_metadata": {
+    "actions.txt": "a2893af734a942beb05db53a0c6633fd083d3ea456d6afaa37c89046086b40ef",
+    "observations.json": "ac63c600548913cfe0d3b4dcdabaff7391caf3e82be1bc69ea143ac613762ef5",
+    "stderr.txt": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+  },
+  "limits": "The readable projection is not the original stdout byte stream. Double-CR sequences and every other original byte remain in the lossless container.",
+  "projection_method": "UTF-8 LF text; remove trailing spaces/tabs and final blank lines; prepend explicit source/container label."
+}

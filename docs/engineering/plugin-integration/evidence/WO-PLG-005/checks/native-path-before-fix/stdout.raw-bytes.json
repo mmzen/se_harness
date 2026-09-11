@@ -1,0 +1,8 @@
+{
+  "schema": "retained-evidence-bytes-v1",
+  "original_filename": "stdout.txt",
+  "original_sha256": "f3f43dc8158d79083a18354038dab8d4f1f6223c9b64aed32dd13a39dee1d951",
+  "original_size_bytes": 80,
+  "encoding": "base64",
+  "bytes_base64": "eyJmaXh0dXJlX2Rpc3BhdGNoZXJfaW52b2tlZCI6IHRydWV9DQ0KDQp7ImZpeHR1cmVfZGlzcGF0Y2hlcl9pbnZva2VkIjogdHJ1ZX0NDQo="
+}

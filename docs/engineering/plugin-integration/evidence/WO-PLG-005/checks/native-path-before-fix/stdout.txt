@@ -1,3 +1,9 @@
-{"fixture_dispatcher_invoked": true}
+READABLE PROJECTION; not raw stdout evidence.
+Original bytes: stdout.raw-bytes.json
+Original SHA-256: f3f43dc8158d79083a18354038dab8d4f1f6223c9b64aed32dd13a39dee1d951
+Projection normalizes newlines and removes trailing whitespace/blank EOF lines.
 
-{"fixture_dispatcher_invoked": true}
+{"fixture_dispatcher_invoked": true}
+
+
+{"fixture_dispatcher_invoked": true}
