@@ -1,0 +1,36 @@
+"""Review source only. Do not execute without the separate native-update approval."""
+import json
+import shutil
+import sys
+from pathlib import Path
+
+ROOT = Path("C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-codex-adapter")
+sys.path.insert(0, str(ROOT / "tests/plugin_integration/codex_adapter"))
+from fixture import CODEX, SANDBOX, host_environment, run, sha
+from observer import loaded_payload
+
+records = ROOT / "docs/engineering/plugin-integration/evidence/WO-PLG-005/preparation"
+new = json.loads((records / "package-03/package.json").read_text(encoding="utf-8"))
+old = json.loads((records / "package-02/package.json").read_text(encoding="utf-8"))
+source = Path(new["package_root"])
+target = SANDBOX / "marketplace with spaces/plugins/verity-plane"
+assert source == SANDBOX / "review package c7d30a92dab5/codex/verity-plane"
+assert target == Path(old["package_root"])
+for selected in (source, target):
+    for path in (selected, *selected.parents):
+        if path.is_symlink() or (getattr(path.lstat(), "st_file_attributes", 0) & 0x400):
+            raise RuntimeError("Linked source/marketplace ancestry is unsupported")
+assert set(new["payload"]) == set(old["payload"])
+assert sha(CODEX) == "e5aa76d19c7c94e2e9ef9b707d590206a73ac0e97c8ddc8382181242494bef75"
+loaded_payload(source, new["payload"])
+loaded_payload(target, old["payload"])
+evidence = records / "native-update-02"
+if evidence.exists():
+    raise RuntimeError("Use the reviewed fresh evidence destination; do not overwrite an attempt")
+for name in new["payload"]:
+    # No directory deletion, cache editing, or marketplace-metadata change.
+    shutil.copyfile(source / name, target / name)
+loaded_payload(target, new["payload"])
+env = host_environment()
+run([CODEX, "plugin", "add", "verity-plane@verity-plane-codex-fixture", "--json"], evidence / "plugin-add", env=env)
+run([CODEX, "plugin", "list", "--json"], evidence / "plugin-list", env=env)

@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 89 declared changed path(s) are within execution scope.",
+            "message": "All 117 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -246,7 +246,7 @@
     "blocked_by": [],
     "command_or_response": {
       "kind": "response",
-      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for ab8d6e2: <urlopen error [WinError 10013] Une tentative d\u2019acc\u00e8s \u00e0 un socket de mani\u00e8re interdite par ses autorisations d\u2019acc\u00e8s a \u00e9t\u00e9 tent\u00e9e>"
+      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for c7d30a9: <urlopen error [WinError 10013] Une tentative d\u2019acc\u00e8s \u00e0 un socket de mani\u00e8re interdite par ses autorisations d\u2019acc\u00e8s a \u00e9t\u00e9 tent\u00e9e>"
     },
     "current_lifecycle_state": [
       "WO-PLG-005 is in_progress."
@@ -277,11 +277,20 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "a56c6b846ec84e6c89316b5f798b050c847856a1d236331d63dec414b910cfcc",
+  "result_sha256": "e7b10a2da2aea20645f869e77acc0e251228b93aa0a2139ced2737ee66841c2d",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
     "changed_paths": [
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/C01/stale-inventory-01/actions.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/C01/stale-inventory-01/observations.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/C01/stale-inventory-01/stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/C01/stale-inventory-01/stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/C01/stale-inventory-02/actions.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/C01/stale-inventory-02/observations.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/C01/stale-inventory-02/stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/C01/stale-inventory-02/stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/C01/stale-inventory-02/transcript.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/focused-interim-01/command.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/focused-interim-01/stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/focused-interim-01/stdout.txt",
@@ -291,17 +300,26 @@
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/focused-interim-03/command.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/focused-interim-03/stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/focused-interim-03/stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/focused-interim-04/command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/focused-interim-04/stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/focused-interim-04/stdout.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/generic-plugin-validator-01/command.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/generic-plugin-validator-01/stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/generic-plugin-validator-01/stdout.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/generic-plugin-validator-02/command.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/generic-plugin-validator-02/stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/generic-plugin-validator-02/stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/interim-handoff-01/check.command.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/interim-handoff-01/check.stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/interim-handoff-01/check.stdout.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/interim-handoff-01/evidence.command.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/interim-handoff-01/evidence.stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/interim-handoff-01/evidence.stdout.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/interim-handoff-02/check.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/interim-handoff-02/check.stdout.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/interim-handoff-02/evidence.command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/interim-handoff-02/evidence.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/interim-handoff-02/evidence.stdout.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/pre-action-after-initial-edits/checkpoint-retry.command.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/pre-action-after-initial-edits/checkpoint-retry.stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/pre-action-after-initial-edits/checkpoint-retry.stdout.json",
@@ -352,6 +370,16 @@
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/preparation/package-02/check/stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/preparation/package-02/check/stdout.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/preparation/package-02/package.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/preparation/package-03/build/command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/preparation/package-03/build/stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/preparation/package-03/build/stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/preparation/package-03/check/command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/preparation/package-03/check/stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/preparation/package-03/check/stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/preparation/package-03/package.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/preparation/package-03/proposed-update.py.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/preparation/package-03/review-plan.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-005/preparation/package-03/REVIEW.md",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/report.md",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/WO-PLG-005-handoff.md",
       "docs/engineering/plugin-integration/evidence/WO-PLG-005/WO-PLG-005-pre-action.md",

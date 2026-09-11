@@ -1,0 +1,23 @@
+{
+  "accepted": true,
+  "archives": {
+    "verity-plane-claude.zip": "f157bc1bb5851bf02dc603f2a0a02c8a0a1599d9bf7f871551981e3cb63fc9cd",
+    "verity-plane-codex.zip": "effa69a1eb7f50a7cb1eda38bd955083886a327b6d9b6eaa3c75e79068707a53"
+  },
+  "claim": "Package contents only; no host support, release or publication decision.",
+  "evaluator": {
+    "archive": "se_harness-0.16.0-py3-none-any.whl",
+    "archive_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "payload_sha256": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+    "release_record": "docs/engineering/release-0-16-0/releases/RLS-SEH-025.md",
+    "release_record_sha256": "9248e66df86bdea7bb8d93c65cc7e2048fe8858085e84496750d94959d710533",
+    "release_revision": "c7d30a92dab5d3fb12c6e42fd3d8ae9ed6ce2163",
+    "version": "0.16.0"
+  },
+  "schema": "se-harness-plugin-assembly-v1",
+  "source": {
+    "plan": "tests/plugin_integration/codex_adapter/assembly-plan.json",
+    "plan_sha256": "ad72dc8aa46cfe0b0fae772d548522ea84c12c0d90c28e27b737b7f8d301b398",
+    "revision": "c7d30a92dab5d3fb12c6e42fd3d8ae9ed6ce2163"
+  }
+}
