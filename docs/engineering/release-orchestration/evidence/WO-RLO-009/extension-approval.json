@@ -1,0 +1,33 @@
+{
+  "recorded_at": "2026-09-11T13:29:33.493500+00:00",
+  "operator_message": "i accept the extension",
+  "reviewed_commit": "a53f5663bb812aa0c91d9f01ad2d104311d20fc9",
+  "pull_request": 452,
+  "reviewed_files": {
+    "docs/engineering/release-orchestration/evidence/WO-RLO-009/scope-extension-proposal.md": "38bd8946b2d3b7d89d937b2a596bf11aded753bfee070b8088485dcc22124ff0",
+    "docs/engineering/release-orchestration/work-orders/WO-RLO-009.md": "9720683afa2c005cf4f8c307400bb4da48e0f68024b59ff25649226381d20d4c",
+    "docs/engineering/release-orchestration/verification/VER-RLO-006.md": "2cdf2d5112750bb0bf703d055110a24d581b63a8f3a73d65a6a5e97794e0ef6a"
+  },
+  "decisions": [
+    {
+      "artifact": "WO-RLO-009",
+      "role": "engineering-owner",
+      "decision": "Approve the proposed scope extension and authorize the fixture-only correction in tests/test_artifact_authoring.py."
+    },
+    {
+      "artifact": "VER-RLO-006",
+      "role": "assurance-owner",
+      "decision": "Approve proposed DISC08: unchanged refusal assertions and both full platform suites, preserving all existing verification obligations."
+    }
+  ],
+  "lifecycle_states_unchanged": {
+    "WO-RLO-009": "in_progress",
+    "VER-RLO-006": "approved"
+  },
+  "non_effects": [
+    "No work-order completion",
+    "No VREC preparation",
+    "No assurance decision",
+    "No merge"
+  ]
+}

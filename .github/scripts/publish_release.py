@@ -368,6 +368,8 @@ def _checkout_release_records(repository: Path) -> list[dict[str, Any]]:
 
     fronts: list[dict[str, Any]] = []
     for path in sorted((repository / "docs/engineering").glob("*/releases/RLS-*.md")):
+        if not dashboard._is_artifact_path(path.relative_to(repository).as_posix()):
+            continue
         text = path.read_text(encoding="utf-8")
         if not text.startswith("+++\n") or "\n+++\n" not in text[4:]:
             continue
