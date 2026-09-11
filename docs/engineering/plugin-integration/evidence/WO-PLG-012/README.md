@@ -14,7 +14,7 @@ without running it. The existing canonical-output exception remains intact.
   C04/C05/C07 choices, protected UTF-8 bytes, existing inline schemas and refusals.
 - [Eight fixed Linux calls](acceptance/linux-replay/REPORT.md): regression of the
   observer's selected commands; no new model-reasoning claim.
-- C01â€“C08 contain review copies of actions/stdout/stderr and observation indexes.
+- C01Ã¢â‚¬â€œC08 contain review copies of actions/stdout/stderr and observation indexes.
   Each index points to exact originals in short mapped retention paths. Original
   failed fixtures and observer outputs remain failed and visible beside corrections.
 
@@ -48,6 +48,12 @@ resolve inside raw.zip; extract it into a separate temporary directory to inspec
 or replay those logical paths. This does not rerun the helpers or change their
 observed results. The [checker](../../../../../tests/plugin_integration/retained-skills/check_raw_archive.py)
 compares the archive against the fixed original inventory.
+
+[Independent archive review](checks/archive-review/REPORT.md) passes: 415 raw
+payloads and four readable files are unchanged; both tamper cases are rejected.
+The actual native Linux extraction guard accepts 9,816 entries at 6db8bd61,
+using the unchanged 10,000-member limit. This is an extraction check; the complete
+integration build and current full CI remain separate.
 
 WO-PLG-012 remains **in_progress** until the corrected candidate passes full CI.
 No assurance, release, merge or live plugin installation is claimed.
