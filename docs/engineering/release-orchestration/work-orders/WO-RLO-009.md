@@ -19,6 +19,7 @@ paths = [
   "tests/test_dashboard_publication.py",
   "tests/test_release_orchestration.py",
   "tests/test_ci_pipeline.py",
+  "tests/test_artifact_authoring.py",
   "docs/engineering/release-orchestration/work-orders/WO-RLO-009.md",
   "docs/engineering/release-orchestration/verification/VER-RLO-006.md",
   "docs/engineering/release-orchestration/evidence/WO-RLO-009/",
@@ -55,6 +56,21 @@ The operator approved this WO and VER-RLO-006 and authorized implementation on
 2026-09-11. The lifecycle events record approval and start through the released
 evaluator after passing start preflight. No execution delegation is granted.
 Completion, VREC preparation, assurance and merge remain separate decisions.
+
+## Approved scope extension — 2026-09-11
+
+The operator stated "i accept the extension", accepting the
+[reviewed proposal](../evidence/WO-RLO-009/scope-extension-proposal.md) at
+`a53f5663bb812aa0c91d9f01ad2d104311d20fc9`. The
+[approval receipt](../evidence/WO-RLO-009/extension-approval.json) records the
+engineering-owner and assurance-owner decisions and reviewed file digests.
+
+The added scope is confined to the named allocation test in
+`tests/test_artifact_authoring.py`: rename its temporary `.git` directory
+instead of deleting read-only Git objects, and remove the unused local import.
+Every assertion and product implementation stays unchanged. VER-RLO-006 DISC08
+requires the corrected case and both full platform suites to pass.
+Existing discovery scope and authority boundaries remain unchanged.
 
 ## Objective
 
@@ -116,6 +132,7 @@ this two-artifact packet and its own evidence. No consumer installation change.
 Pass VER-RLO-006 cases DISC01–DISC07 on Windows and Linux, using released
 SE Harness 0.17.0 for governing checks. Prove the original failure first and
 successful resolution afterward on the same frozen trusted-main tree.
+Also pass DISC08 for the approved fixture-only correction on both platforms.
 
 ## Evidence to record
 

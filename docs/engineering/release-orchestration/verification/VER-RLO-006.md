@@ -20,6 +20,14 @@ reason = "The operator stated on 2026-09-11: I approve both artifacts and author
 
 # Verification Contract: Verify release discovery separates artifacts from evidence
 
+## Approved scope extension — 2026-09-11
+
+The operator accepted the [scope extension](../evidence/WO-RLO-009/scope-extension-proposal.md)
+at `a53f5663bb812aa0c91d9f01ad2d104311d20fc9`. The
+[approval receipt](../evidence/WO-RLO-009/extension-approval.json) records
+assurance-owner approval of DISC08. DISC01–DISC07, preservation, the archive
+limit and required commit-bound verification remain unchanged.
+
 ## Independence
 
 Expected artifact membership follows the canonical validator's existing path
@@ -32,6 +40,7 @@ An assurance owner separately assesses the resulting commit-bound record.
 | Requirement | Method | Cases | Pass condition |
 | --- | --- | --- | --- |
 | REQ-RLO-001; SPEC-RLO-001 rules 3–5 | test, inspection | DISC01–DISC07 | Only real artifacts determine the unique released record and its unchanged candidate, evidence and main-history identity. |
+| WO-RLO-009 acceptance support | test, inspection | DISC08 | The existing allocation refusal assertions and both full platform suites pass after the fixture-only correction. |
 
 ## Acceptance scenarios
 
@@ -44,6 +53,7 @@ An assurance owner separately assesses the resulting commit-bound record.
 | DISC05 — Incident replay | Use trusted-main tree `fb6f60d5069706e8ae0ca69d1263285cbb904f45` and selected `RLS-SEH-026`. Run original and repaired discovery, then the repaired full resolver. | Original code reproduces the recorded `VREC-EVD-001` duplicate refusal. Repaired catalog membership equals canonical discovery on that tree, and full resolution returns identities independently read from its real RLS/VREC records. Preserve all original evidence bytes. |
 | DISC06 — Revision isolation | Modify uncommitted working-tree artifacts while resolving the frozen trusted-main revision. Repeat the existing publication and CI-policy suites. | Working-tree edits cannot change the release plan. Existing main-ref, candidate, first-parent, binding and permission checks still pass. |
 | DISC07 — Candidate acceptance | Run governance, preservation, archive and hosted checks for the repair candidate and final governance head. | Required checks pass on their identified commits; historical engineering bytes and modes are unchanged; every tested archive has at most 10,000 entries. |
+| DISC08 — Portable test fixture | Rename the named allocation test's temporary `.git` directory in place instead of deleting read-only Git objects. Run its unchanged assertions and the full Windows and Linux suites. | The expected outside-checkout refusal is exercised, automatic fixture cleanup succeeds, and both suites pass without new skips or accepted failures. Retain the baseline failure and corrected results. |
 
 ## Property and invariant tests
 
