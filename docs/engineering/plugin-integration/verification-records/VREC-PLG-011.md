@@ -2,7 +2,7 @@
 id = "VREC-PLG-011"
 type = "verification_record"
 title = "Verification candidate for WO-PLG-018"
-status = "ready"
+status = "verified"
 owners = ["delegated-executor"]
 created = "2026-09-11"
 updated = "2026-09-11"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/plugin-integration/evidence/WO-PLG-018/WO-PL
 evaluator_evidence_path = "docs/engineering/plugin-integration/evidence/VREC-PLG-011-evaluator.json"
 evaluator_evidence_sha256 = "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
 
+verified_at = "2026-09-11T12:16:14Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-PLG-018"]
 conforms_to = ["VER-PLG-018"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-11T12:16:14Z"
+decided_by = "assurance-owner"
+reason = "On 2026-09-11 the operator stated \"i verify VREC-PLG-011\". Record this explicit DR-VREC-DECIDE assurance-owner decision for VREC-PLG-011, candidate 6f926523d545d130aa0c5d692ecbbb4698ff4a36, under VER-PLG-018 and its 15 selected evidence files. The retained integration observations, preserved historical records and disclosed host-qualification limits define the assurance scope. The final ready-head Linux cleanup failure and successful unchanged retry remain retained. Candidate identity, preparation provenance and bound evidence remain fixed. This selects only VREC-PLG-011 from ready to verified; it does not change another record or work order, supersede VREC-PLG-008, release software, merge or close a PR."
 +++
 
 # Verification Record Candidate
