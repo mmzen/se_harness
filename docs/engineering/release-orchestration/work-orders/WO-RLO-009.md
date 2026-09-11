@@ -2,7 +2,7 @@
 id = "WO-RLO-009"
 type = "work_order"
 title = "Exclude retained evidence from release artifact discovery"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-11"
 updated = "2026-09-11"
@@ -46,16 +46,26 @@ to = "in_progress"
 decided_at = "2026-09-11T12:58:44Z"
 decided_by = "engineering-owner"
 reason = "The operator explicitly authorized implementation with approval of both artifacts on 2026-09-11. Released evaluator 0.17.0 start preflight passes for the approved packet and its governing reading manifest has been read. Start only the declared discovery repair; no completion, preparation, assurance or merge decision."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-11T15:55:19Z"
+decided_by = "engineering-owner"
+reason = "The operator stated on 2026-09-11: Mark WO-RLO-009 implemented. This records DR-WO-COMPLETE for the approved repair and extension reviewed at 9c251f8e2b9e513b7b15f7945a33cc5c088dd7b5, with retained VER-RLO-006 DISC01-DISC08 evidence, passing Windows and Linux suites, and 17 passing hosted checks. Completion only; no VREC preparation, independent verification, release or merge decision."
 +++
 
 # Work Order: Exclude retained evidence from release artifact discovery
 
 ## Lifecycle
 
-The operator approved this WO and VER-RLO-006 and authorized implementation on
-2026-09-11. The lifecycle events record approval and start through the released
-evaluator after passing start preflight. No execution delegation is granted.
-Completion, VREC preparation, assurance and merge remain separate decisions.
+The operator approved this WO and VER-RLO-006, authorized implementation and its
+bounded extension, then explicitly marked this WO implemented on 2026-09-11.
+The released evaluator applied each lifecycle transition after passing its
+gates. The completion decision covers reviewed head
+`9c251f8e2b9e513b7b15f7945a33cc5c088dd7b5` and its retained evidence.
+No execution delegation is granted. VREC preparation, assurance and merge
+remain separate decisions.
 
 ## Approved scope extension — 2026-09-11
 

@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-RLO-009"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "dd46e91766a16499869ea299144201a0690c99070d818854a5f87cf29afe3fa9"
-rebound_at = "2026-09-11T13:35:07Z"
+formal_snapshot_sha256 = "5bd606f1f0eac95155ebf34a03d46ec73016cb798cf0fab932d1360b3c0c093f"
+rebound_at = "2026-09-11T15:56:34Z"
 ```
 
 # WO-RLO-009 handoff evidence
@@ -45,19 +45,24 @@ the preceding evidence head `a53f5663bb812aa0c91d9f01ad2d104311d20fc9`.
 | Governing evaluator | Isolated released 0.17.0 doctor, graph validation, review preflight and Git-derived scope checks pass. |
 | Candidate source doctor | Six distribution-template differences against the installed 0.17.0 managed root, the expected source/released boundary described by AGENTS.md; root managed files are unchanged. |
 | Repository release validation | 14 distribution-bearing records pass. CLI help succeeds. |
-| DISC07 preservation | Every engineering path present at the incident baseline retains its blob and mode. The corrected candidate archive contains 9,992 entries against the unchanged 10,000 limit. Final-head archive and CI observations remain to be retained. |
+| DISC07 preservation | Every engineering path present at the incident baseline retains its blob and mode. The reviewed evidence head 9c251f8e contains 9,993 archive entries against the unchanged 10,000 limit. All 17 hosted checks pass for that head and merge checkout ebb0905a. |
 
 ## Remaining work and authority
 
-All 17 hosted checks passed at the preceding evidence head a53f5663, including
-the release-record rehearsal, both upgrade rehearsals and managed validation.
-Earlier hosted failures (a missing handoff packet and a Linux temporary-directory
-cleanup error) remain retained. The handoff header is now rebound to the formally
-approved scope extension. Hosted checks for the extension evidence head remain
-pending; previous-head results do not stand in for them.
+All 17 hosted checks pass at reviewed head
+`9c251f8e2b9e513b7b15f7945a33cc5c088dd7b5`, including the release-record
+rehearsal, both upgrade rehearsals and managed validation. The hosted merge
+checkout is `ebb0905ae743a62f50b6ceefd055e608f8b9592c`, whose parents are
+incident main `fb6f60d5069706e8ae0ca69d1263285cbb904f45` and the reviewed head.
+Earlier failures remain retained. The managed gate's PR-description CRLF
+refusal was corrected by writing LF input; its rerun passed. The final-head
+observations and completion decision are retained in
+[completion-results.json](completion-results.json).
 
 The [scope extension proposal](scope-extension-proposal.md) is retained unchanged
 as reviewed; its approval is recorded separately. Its fixture-only correction
 and DISC08 checks are now complete. No failed required check is waived.
-WO-RLO-009 remains `in_progress`; VREC-RLO-009 is not prepared.
-Completion, preparation, assurance and merge require their separate decisions.
+The operator stated "Mark WO-RLO-009 implemented" on 2026-09-11. The released
+evaluator applied that completion decision after a passing transition preview.
+WO-RLO-009 is `implemented`; VREC-RLO-009 is not prepared.
+Preparation, assurance and merge require their separate decisions.
