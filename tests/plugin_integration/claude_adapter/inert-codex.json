@@ -1,0 +1,6 @@
+{
+  "name": "verity-plane",
+  "version": "0.0.0",
+  "description": "Inert companion required only by the paired assembly test; no Codex integration or support.",
+  "author": {"name": "SE Harness"}
+}
