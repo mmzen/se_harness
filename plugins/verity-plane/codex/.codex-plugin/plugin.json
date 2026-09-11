@@ -1,0 +1,17 @@
+{
+  "name": "verity-plane",
+  "version": "0.0.1",
+  "description": "Connect the selected shared skills and released evaluator to the assessed Codex Windows route.",
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json",
+  "author": {"name": "SE Harness"},
+  "interface": {
+    "displayName": "Verity Plane",
+    "shortDescription": "Inspect the selected governed-work binding.",
+    "longDescription": "The Codex adapter exposes selected shared skills and reports current session and native patch checks. Support is limited to the configurations and behavior retained by its acceptance evidence.",
+    "developerName": "SE Harness",
+    "category": "Developer Tools",
+    "capabilities": ["Prepare evaluator environment", "Inspect session governance", "Check native patch edits"],
+    "defaultPrompt": ["Inspect this plugin's selected binding and current readiness."]
+  }
+}

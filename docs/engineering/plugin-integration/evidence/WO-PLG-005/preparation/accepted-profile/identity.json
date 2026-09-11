@@ -1,0 +1,18 @@
+{
+  "host_executable": "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+  "host_sha256": "e5aa76d19c7c94e2e9ef9b707d590206a73ac0e97c8ddc8382181242494bef75",
+  "expected_host_version": "codex-cli 0.153.4",
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+  "python_sha256": "199ce15a9f0d4f9522edba59338e4879d28cf61f88e377b8164bcb716275ed22",
+  "profile": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile",
+  "profile_origin": "Existing authenticated disposable WO-PLG-003 file store; no credentials copied",
+  "sandbox": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\codex-adapter-sandboxes\\accepted 001 with spaces",
+  "fixture_sources": {
+    "docs/engineering/readiness-probe/capabilities/CAP-PROBE-001.md.txt": "5e2f91b033649308d32285e57067e79021651ffc8a62a8dfa8c13ba41278f454",
+    "docs/engineering/readiness-probe/intent/INT-PROBE-001.md.txt": "12696d0d5e187dcff79beb9b834d95b6892e0d89b3e8334a2199d0ce64bdd71e",
+    "docs/engineering/readiness-probe/requirements/REQ-PROBE-001.md.txt": "4c120a409fe51ca39143e1dd6f5665577043789ba2e93a8bf79cb8f55dc4086d",
+    "docs/engineering/readiness-probe/specifications/SPEC-PROBE-001.md.txt": "8872ef62aed5ea1cba6845abb5de9b943e3281cbdfb2343a41c3da20537681f6",
+    "docs/engineering/readiness-probe/verification/VER-PROBE-001.md.txt": "65c1b041c112868bde7de534d4b4fa2c33271b9dda44dd747cfb95794ec1edca",
+    "docs/engineering/readiness-probe/work-orders/WO-PROBE-001.md.txt": "8d19471bf9f6a1d866b7d62385f219da0ef704e577656111c0a8648a48ff1587"
+  }
+}

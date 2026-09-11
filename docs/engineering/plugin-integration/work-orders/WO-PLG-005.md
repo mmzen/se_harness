@@ -53,7 +53,7 @@ reason = "Delegated DR-WO-START under [delegation] class 'execution': required c
 
 ## Lifecycle
 
-The operator selected WO-PLG-005 for the delegated route on 2026-09-11. Work-order approval records the requested execution delegation. The class permits only DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE, after it is present at the pull-request base and the required live GitHub check succeeds for the exact head. This packet prepares that base prerequisite; implementation has not started. Verification, release and merge remain human decisions.
+The operator selected WO-PLG-005 for the delegated route on 2026-09-11. Work-order approval records the requested execution delegation. The class permits only DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE, after it is present at the pull-request base and the required live GitHub check succeeds for the exact head. The released evaluator recorded the delegated start on 2026-09-11; implementation is in progress. Verification, release and merge remain human decisions.
 
 ## Objective
 
