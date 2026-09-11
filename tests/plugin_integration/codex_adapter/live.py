@@ -15,7 +15,7 @@ import sanitize_output
 from fixture import ROOT, CODEX, PYTHON, PROFILE, SCHEMAS, SANDBOX, host_argv, host_environment, sha, write
 from processes import spawn, stop_owned_tree
 from sanitize_output import sanitize_text, sanitize_value
-from observer import ObservationStopped, received, schema_methods, active_bindings, loaded_payload
+from observer import ObservationStopped, received, schema_methods, active_bindings, loaded_payload, package_record
 import observer
 
 
@@ -35,7 +35,7 @@ def main():
     hooks_path = ROOT / "plugins/verity-plane/codex/hooks/hooks.json"
     definitions = json.loads(hooks_path.read_text(encoding="utf8"))
     hooks_sha256 = sha(hooks_path)
-    package = json.loads(args.package_record.read_text(encoding="utf8-sig"))
+    package = package_record(args.package_record)
     package_is_current = (package["payload"]["hooks/hooks.json"] == hooks_sha256 and
             package["payload"]["scripts/codex-dispatch.py"] == sha(ROOT / "plugins/verity-plane/codex/dispatch.py"))
     if not package_is_current and not args.inventory_only:

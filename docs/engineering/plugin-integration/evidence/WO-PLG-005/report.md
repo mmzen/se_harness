@@ -22,13 +22,17 @@ The first package attempt used a forbidden destination for the dispatcher. Its f
 
 The generic Plugin Creator validator could not start with either the selected external Python or the bundled authoring Python because both lacked PyYAML. Both actual failures are in `checks/generic-plugin-validator-01/` and `-02/`; no package installation was attempted to repair those runtimes. Static inspection of the retained validator identity's `validate_manifest_shape` allowlist shows it also excludes the accepted native `hooks` key. This is a generic-authoring-validator limitation, not a native-host validation pass. The parent explicitly retained DEC-PLG-001's native route; the accepted key was not removed to satisfy a different validator.
 
+After the interim commit, the parent authorized only a bounded read-only app-server inventory. `C01/stale-inventory-01/` retains an observer preparation failure on the misspelled `utf8-sig` codec alias, before the first native command. The correction uses `utf-8-sig` and a focused test covering UTF-8 with and without a BOM. `C01/stale-inventory-02/` retains the subsequent real native inventory: both historical plugin hooks were enabled/trusted, both old probe hooks disabled, and the three expected shared skills resolved. The entire historical loaded cache matched the checked historical package. The observer then stopped on the current-candidate mismatch; only initialize/initialized/hooks-list/skills-list were sent, targets remained unchanged, and owned Job Object cleanup reported zero active processes. This is partial historical discovery evidence, not a passing current-candidate C01 or C02.
+
+`checks/focused-interim-04/` records the subsequent fourteen-test focused run, including BOM preparation and external stop/deadline cleanup boundaries. The revised `interactive.py` is prepared for separate review only: a fresh external marker or a fixed 180-second deadline stops its owned job without any menu exit navigation. That UI helper has not been run. A fresh source-manifest version was generated using the Plugin Creator cachebuster helper after validating the existing disposable marketplace name; it enables a later native reinstall to obtain a distinct cache path, not a support-profile change or installation authority.
+
 ## Acceptance status
 
 Each status below is **unavailable**, meaning the required complete case has not been run against this candidate. No absence of evidence is interpreted as prevention.
 
 | Case | Available preparation/calibration | Remaining evidence |
 | --- | --- | --- |
-| C01 | Historical package build/check and native install | Current package-to-loaded-payload mapping, actual active bindings and shared skill resolution |
+| C01 | Historical package build/check, native install, actual stale inventory and exact old-cache payload mapping | Current package-to-loaded-payload mapping, actual active bindings and shared skill resolution |
 | C02 | Absolute argv mapping and prepared read-only observer | Actual startup, resume, compaction and complete delivered-byte/digest receipts |
 | C03 | Shared handler selected for native apply_patch | Real permitted/refused edits, ordered events and independent effects |
 | C04 | Trusted binding event, malformed data and strict output calibration | Complete retained accepted-test-route case and host-visible responses |

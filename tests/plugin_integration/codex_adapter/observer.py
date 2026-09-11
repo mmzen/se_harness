@@ -10,6 +10,10 @@ class ObservationStopped(RuntimeError):
         self.detail = detail
 
 
+def package_record(path):
+    return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
 def received(records, first, predicate):
     # Inspect requests before matching responses; server/client ids may collide.
     for entry in records:

@@ -9,9 +9,39 @@ import unittest
 spec = importlib.util.spec_from_file_location("adapter_observer", Path(__file__).with_name("observer.py"))
 observer = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(observer)
+review_spec = importlib.util.spec_from_file_location("adapter_review_ui", Path(__file__).with_name("interactive.py"))
+review = importlib.util.module_from_spec(review_spec)
+review_spec.loader.exec_module(review)
 
 
 class ObserverTests(unittest.TestCase):
+    def test_external_review_stop_and_deadline_always_cleanup_owned_process(self):
+        class Process:
+            pid = 123
+            def poll(self):
+                return None
+        for stopped in (False, True):
+            with tempfile.TemporaryDirectory() as folder:
+                marker = Path(folder) / "stop"
+                if stopped:
+                    marker.touch()
+                record, cleaned = {}, []
+                def cleanup(process):
+                    cleaned.append(process.pid)
+                    return {"active_processes": 0}
+                review.review_until_stopped(["unused"], Path(folder), {}, marker, 0,
+                    record=record, factory=lambda *args, **kwargs: Process(), cleanup=cleanup)
+                self.assertEqual(cleaned, [123])
+                self.assertEqual(record["stop_reason"], "external marker" if stopped else "fixed review deadline")
+                self.assertEqual(record["cleanup"]["active_processes"], 0)
+
+    def test_package_record_accepts_utf8_bom_before_host_launch(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "package.json"
+            for encoding in ("utf-8", "utf-8-sig"):
+                path.write_text('{"payload":{"café":"digest"}}', encoding=encoding)
+                self.assertEqual(observer.package_record(path), {"payload": {"café": "digest"}})
+
     def test_loaded_payload_rejects_changed_missing_or_extra_files(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)

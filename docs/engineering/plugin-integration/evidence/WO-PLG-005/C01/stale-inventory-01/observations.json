@@ -1,0 +1,11 @@
+{
+  "case": "C01",
+  "conclusion": "unavailable",
+  "expected": "Read-only inventory observes the historical stale package and stops before any thread/model work.",
+  "observed": "Observer preparation failed on an invalid encoding alias before the first native command or process spawn.",
+  "exit_status": 1,
+  "candidate": "9397519357deb85ecdcc44f322e359b73ce37ba4",
+  "native_requests_sent": 0,
+  "source_evidence": ["actions.txt", "stderr.txt"],
+  "limitation": "This preparation failure provides no host-discovery or enforcement evidence. No independent target hash sample was taken by the helper before the preparation failure."
+}
