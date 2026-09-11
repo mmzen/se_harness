@@ -1,94 +1,153 @@
 {
-  "case": "C05",
-  "expected": [
-    "Inactive required hook is visible and failing script returns UNREADY without readiness."
-  ],
-  "observed": [
-    {
-      "source": "native system/hook_response stdout+stderr and correlated tool_use/tool_result objects",
-      "qualification": false,
-      "case": "C05",
-      "observations": [
-        [],
-        [
-          {
-            "id": "e922101b-58ea-412f-87a4-19304e400b03",
-            "name": "SessionStart:startup",
-            "event": "SessionStart",
-            "outcome": "success",
-            "exit": 0,
-            "output": {
-              "hookEventName": "SessionStart",
-              "additionalContext": "UNREADY: Shared script failed or returned missing/oversized output; inspect actual effects if refusal is absent. No successful governance check is claimed. Ordinary setup permissions remain in force."
-            },
-            "guard": {
-              "adapter": "verity-plane-claude-v1",
-              "status": "unready",
-              "interpreter_invoked": true,
-              "entered_monotonic": 241256.4459257,
-              "event": "SessionStart",
-              "tool_use_id": null,
-              "tool_name": null,
-              "profile_argv": [
-                "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\private plugin data\\evaluator\\Scripts\\python.exe",
-                "-I",
-                "-B",
-                "-c",
-                "import sys; print(sys.version.split()[0])"
-              ],
-              "observed_python": "3.14.6",
-              "argv": [
-                "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\private plugin data\\evaluator\\Scripts\\python.exe",
-                "-I",
-                "-B",
-                "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\C05\\failed script\\scripts\\session-context.py",
-                "--repo",
-                "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\disposable repository",
-                "--environment",
-                "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\private plugin data\\evaluator",
-                "--version",
-                "0.16.0",
-                "--payload-sha256",
-                "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
-                "--archive-sha256",
-                "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
-                "--host",
-                "claude",
-                "--context-limit",
-                "32768",
-                "--read-limit",
-                "0"
-              ],
-              "script_start_ms": 623.1043000000001,
-              "script_exit": 4,
-              "script_end_ms": 706.1217,
-              "error": "Shared script failed or returned missing/oversized output; inspect actual effects if refusal is absent.",
-              "finished_ms": 714.8727,
-              "response_written_monotonic": 241257.1648589
-            },
-            "handler": []
-          }
-        ]
-      ],
-      "conclusion": "pass"
-    }
-  ],
+  "expected": "Inactive required hook is visible and failing script returns UNREADY without readiness.",
+  "observed": {
+    "disabled_receipt": [],
+    "script_failure_receipt": [
+      {
+        "id": "8e8649e6-5858-4de8-9477-9781a58098f2",
+        "name": "SessionStart:startup",
+        "event": "SessionStart",
+        "outcome": "success",
+        "exit": 0,
+        "output": {
+          "hookEventName": "SessionStart",
+          "additionalContext": "UNREADY: Shared script failed or returned missing/oversized output; inspect actual effects if refusal is absent. No successful governance check is claimed. Ordinary setup permissions remain in force."
+        },
+        "guard": {
+          "adapter": "verity-plane-claude-v1",
+          "status": "unready",
+          "interpreter_invoked": true,
+          "entered_monotonic": 242798.4059489,
+          "event": "SessionStart",
+          "tool_use_id": null,
+          "tool_name": null,
+          "profile_argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "-B",
+            "-c",
+            "import sys; print(sys.version.split()[0])"
+          ],
+          "observed_python": "3.14.6",
+          "argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "-B",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\C05\\failed script\\scripts\\session-context.py",
+            "--repo",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\disposable repository",
+            "--environment",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator",
+            "--version",
+            "0.16.0",
+            "--payload-sha256",
+            "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+            "--archive-sha256",
+            "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+            "--host",
+            "claude",
+            "--context-limit",
+            "32768",
+            "--read-limit",
+            "0"
+          ],
+          "script_start_ms": 626.6483000000001,
+          "script_exit": 4,
+          "script_end_ms": 694.4558000000001,
+          "error": "Shared script failed or returned missing/oversized output; inspect actual effects if refusal is absent.",
+          "finished_ms": 703.0274000000001,
+          "response_written_monotonic": 242799.1127705
+        },
+        "handler": []
+      }
+    ],
+    "disabled_control": "retained disableAllHooks=true setting; missing hook cannot diagnose itself"
+  },
   "conclusion": "pass",
   "qualified": false,
-  "observation_complete": true,
-  "enforcement_result": "only the demonstrated case behavior",
   "exit_status": [
-    [
-      0,
-      0
-    ]
+    0,
+    0
   ],
   "source_evidence": [
-    "acceptance-04/C05/actions.txt",
-    "acceptance-04/C05/stdout.txt",
-    "acceptance-04/C05/stderr.txt",
-    "acceptance-04/C05/commands.json",
-    "acceptance-04/C05/observations.json"
+    "acceptance-06/C05/actions.txt",
+    "acceptance-06/C05/stdout.txt",
+    "acceptance-06/C05/stderr.txt",
+    "acceptance-06/C05/commands.json",
+    "acceptance-06/C05/observations.json"
   ],
-  "assessment_policy": "C10/C11 remain fail and unqualified despite completed negative experiments. C12 pass means rejection, not enforcement. Earlier derived observations remain unchanged; reassessment uses actual structured host messages."
+  "capture_policy": "sanitized public observations; raw host debug stays in disposable sandbox",
+  "wire_assessment": {
+    "source": "native system/hook_response stdout+stderr and correlated tool_use/tool_result objects",
+    "qualification": false,
+    "case": "C05",
+    "observations": [
+      [],
+      [
+        {
+          "id": "8e8649e6-5858-4de8-9477-9781a58098f2",
+          "name": "SessionStart:startup",
+          "event": "SessionStart",
+          "outcome": "success",
+          "exit": 0,
+          "output": {
+            "hookEventName": "SessionStart",
+            "additionalContext": "UNREADY: Shared script failed or returned missing/oversized output; inspect actual effects if refusal is absent. No successful governance check is claimed. Ordinary setup permissions remain in force."
+          },
+          "guard": {
+            "adapter": "verity-plane-claude-v1",
+            "status": "unready",
+            "interpreter_invoked": true,
+            "entered_monotonic": 242798.4059489,
+            "event": "SessionStart",
+            "tool_use_id": null,
+            "tool_name": null,
+            "profile_argv": [
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator\\Scripts\\python.exe",
+              "-I",
+              "-B",
+              "-c",
+              "import sys; print(sys.version.split()[0])"
+            ],
+            "observed_python": "3.14.6",
+            "argv": [
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator\\Scripts\\python.exe",
+              "-I",
+              "-B",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\C05\\failed script\\scripts\\session-context.py",
+              "--repo",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\disposable repository",
+              "--environment",
+              "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator",
+              "--version",
+              "0.16.0",
+              "--payload-sha256",
+              "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+              "--archive-sha256",
+              "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+              "--host",
+              "claude",
+              "--context-limit",
+              "32768",
+              "--read-limit",
+              "0"
+            ],
+            "script_start_ms": 626.6483000000001,
+            "script_exit": 4,
+            "script_end_ms": 694.4558000000001,
+            "error": "Shared script failed or returned missing/oversized output; inspect actual effects if refusal is absent.",
+            "finished_ms": 703.0274000000001,
+            "response_written_monotonic": 242799.1127705
+          },
+          "handler": []
+        }
+      ]
+    ],
+    "conclusion": "pass"
+  },
+  "case": "C05",
+  "candidate_source_commit": "fd2419f4c26b9ba4d4a97f85b7d2b08da72b8626",
+  "package_sha256": "f11d94139ad7e6194147c32a80a070f34f6761900a8c737aec354ec9b447d7f6",
+  "observation_complete": true,
+  "source_paths_relative_to": "evidence/WO-PLG-006"
 }

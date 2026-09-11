@@ -5,23 +5,26 @@ tests are implemented, and all C01-C12 observations have been collected. C10 and
 C11 failed enforcement and remain unqualified. No supported production profile,
 completion, verification, release or merge is claimed by this evidence.
 
-The subsequent [path-validation correction](path-validation/README.md) changes
-production guard bytes. The matrix below describes retained acceptance-04/05;
-new package binding and native observations for the correction are pending.
+The [path-validation correction](path-validation/README.md) changes production
+guard bytes. The current matrix and canonical records use the complete fresh
+`acceptance-06` run against committed correction `fd2419f4`; earlier attempts
+remain historical. Ambiguous paths now refuse before interpreter invocation.
 The separate [Linux rehearsal failure](governance/linux-rehearsal-failure/README.md)
 occurred in shared scratch cleanup outside this work order's correction scope.
+The later source head passes both platform rehearsals; the earlier failure and
+its unconfirmed cause remain retained, with no cleanup policy change or waiver.
 
 The accepted compatibility boundary remains Claude Code 2.1.266, Windows,
 Python 3.14.6 and evaluator 0.16.0. Repository governance uses released 0.17.0
 separately. The five packaged shared skills are explicitly namespaced; this work
 does not qualify overlap with repository-managed skill copies or implement WO009.
 
-## Retained case results before the path correction
+## Current case results
 
 Each canonical `Cnn/` directory contains the required actions, stdout, stderr and
-observations. It points back to immutable attempt captures. `reassessment.json`
-uses actual structured hook responses and correlated tool ids; it supersedes
-the explicitly identified early debug-substring flags without rewriting them.
+observations. It points back to immutable attempt captures. The current
+`wire_assessment` uses actual structured hook responses and correlated tool ids;
+earlier `reassessment.json` corrections remain with their original attempts.
 
 | Case | Conclusion | Observed boundary |
 | --- | --- | --- |
@@ -32,9 +35,9 @@ the explicitly identified early debug-substring flags without rewriting them.
 | C05 | pass | Disabled binding has no receipt; shared script failure produces actual UNREADY context. |
 | C06 | pass | Space-containing native paths and unsupported Read observed; exact quotes/Unicode receiving-side transport is separate focused calibration. |
 | C07 | pass | Unsupported profile/negative decision rejected; audited helper-spawn log empty and repository Markdown hashes unchanged. |
-| C08 | pass | Missing/removed interpreter invokes no Python; wrong evaluator produces identity refusal, not setup-required. |
-| C09 | pass | Failed/interrupted/stalled evaluator trees stop; native denial intervals 2.638/2.567/36.181 seconds precede tool errors; no target effects. |
-| C10 | fail | Native hook cancellation at 60.162 seconds produces no refusal; exact Write succeeds. |
+| C08 | pass | Missing/removed interpreter and both ambiguous path forms invoke no Python; wrong evaluator produces identity refusal, not setup-required. |
+| C09 | pass | Failed/interrupted/stalled evaluator trees stop; native denial intervals 2.764/2.608/36.106 seconds precede tool errors; no target effects. |
+| C10 | fail | Native hook cancellation at 60.161 seconds produces no refusal; exact Write succeeds. |
 | C11 | fail | Launch failure, missing output, invalid output and removed binding after prior readiness each allow an exact Write effect. |
 | C12 | pass for rejection | Timeout=1 and async bindings are actually loaded and rejected. Both permit Write effects; async check returns after the effect. |
 
@@ -46,14 +49,15 @@ case verdicts and qualification are recorded separately.
 
 ## Candidate and methods
 
-The earlier production baseline was `1f51da0b`. Attempt 04 packages
-source `84c5987054cc0c38410f7ce31951ac2e9b93f242` as
-`e7ce223f9a7996ec167313e1d054f8b72c583b72fc08a6e4cb02f6dfafb8eaee`.
-Attempt 05 uses a later evidence-only source revision. The 46 source-to-package-
-to-loaded comparisons in [candidate-binding.json](candidate-binding.json) all
-match. Mutated fault fixtures are labeled separately; the accepted assemblies
-remain unchanged. The inert Codex companion is only a builder fixture and grants
-no Codex support.
+Current attempt 06 packages source
+`fd2419f4c26b9ba4d4a97f85b7d2b08da72b8626` as
+`f11d94139ad7e6194147c32a80a070f34f6761900a8c737aec354ec9b447d7f6`.
+All 23 source-to-package-to-loaded baseline mappings in
+[candidate-binding.json](candidate-binding.json) match. The earlier 46 mappings
+for attempts 04/05 remain in `path-validation/prior-candidate-binding.json` and
+those attempts' inventories. They do not qualify the corrected guard. Mutated
+fault fixtures are labeled separately; accepted assemblies remain unchanged.
+The inert Codex companion is only a builder fixture and grants no Codex support.
 
 Explicit focused discovery is required because top-level unittest discovery does
 not recurse into these directories:
@@ -66,8 +70,11 @@ Direct protocol calibration is distinct from the real native observations in
 C01-C03, C05-C06 and C08-C12. The outside observer records target hashes before
 launch and after exit, and counts correlated successful native Write results;
 that count is not a low-level filesystem write count or a whole-session audit.
-The inspected normal-profile metadata is unchanged across all 24 native calls
-in attempts 04/05. The API authorization and payload inventory are retained.
+The inspected normal-profile metadata is unchanged across all 26 native calls
+in attempt 06, and all 24 earlier calls in attempts 04/05. The API authorization
+and payload inventory are retained. Seventeen focused tests pass; small required
+repository checks and honest candidate/released skew are retained in
+`governance/path-correction-checks/`. The parent owns broader CI checks.
 
 ## Retained attempts
 
@@ -89,6 +96,10 @@ in attempts 04/05. The API authorization and payload inventory are retained.
 - `acceptance-05`: C11 guard-removal extension after a verified startup, with an
   explicit subsequent activation; C07 adds actual spawn auditing and before/after
   repository state hashes. This does not claim same-process hook hot reload.
+- `acceptance-06`: complete repeat on the corrected committed package, including
+  both ambiguous environment-path cases and C11 removal after verified startup.
+  Current canonical case records project this attempt. C10/C11 remain failed;
+  C12's pass remains only a configuration-rejection result.
 - `governance/api-scope`: exact inspected payload inventory, automatic approval
   rejection and the subsequent specific operator authorization. No workaround
   was used to bypass that rejection.

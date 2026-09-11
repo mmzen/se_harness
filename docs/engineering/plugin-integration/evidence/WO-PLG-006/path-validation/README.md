@@ -18,5 +18,8 @@ configuration, plugin and event paths; no marker appears for rejected inputs.
 
 This is a production guard change. Earlier acceptance-04/05 observations and
 their package identities remain historical evidence for the earlier guard bytes.
-They do not qualify the corrected guard. Its committed package and affected
-native acceptance must be rebound before reporting current-byte observations.
+They do not qualify the corrected guard. Fresh acceptance-06 repeats all C01-C12
+against committed source `fd2419f4c26b9ba4d4a97f85b7d2b08da72b8626`, including
+two real startup rejections for ambiguous paths and guard removal after verified
+startup. The current canonical records and candidate-binding.json use those new
+package bytes. C10/C11 remain failed/unqualified; no broader support is inferred.

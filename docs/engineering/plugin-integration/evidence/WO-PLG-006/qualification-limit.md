@@ -5,7 +5,7 @@ required observations, but enforcement failed and the affected routes remain
 unqualified. This does not turn the successful C09 running-handler observations
 into a universal guarantee or authorize a case waiver.
 
-[C10](C10/observations.json) records native cancellation at 60.162 seconds,
+[C10](C10/observations.json) records native cancellation at 60.161 seconds,
 no denial, and one successful exact Write. [C11](C11/observations.json) records
 successful exact Writes after launch failure, empty output, invalid output and
 removal of the inline binding after a previously verified startup. The removal

@@ -2,7 +2,7 @@
 artifact = "WO-PLG-006"
 checkpoint = "handoff"
 formal_snapshot_sha256 = "d486c36a30fdc1eeec9d0169de12a6a270105cdb20f874ce5f788496fb30742e"
-rebound_at = "2026-09-11T19:45:48Z"
+rebound_at = "2026-09-11T20:09:05Z"
 ```
 
 # WO-PLG-006 handoff evidence
@@ -29,3 +29,12 @@ exact package/blob mapping and qualification limit are in README.md and its
 linked canonical case records. This supersedes the collection-pending status
 above while preserving the original draft correction history. Engineering
 disposition, assurance and completion remain pending.
+
+The corrected production source is now
+`fd2419f4c26b9ba4d4a97f85b7d2b08da72b8626`. Fresh acceptance-06 repeats all
+twelve cases, including ambiguous-path rejection and guard removal after a
+verified startup. Seventeen focused tests pass. C10/C11 remain failed and
+unqualified, with C12 passing rejection only. The current canonical case records
+and candidate-binding.json use the corrected package; earlier attempts remain
+historical. Required small repository checks are retained under
+governance/path-correction-checks. No lifecycle action occurred.

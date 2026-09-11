@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "--setting-sources",
+    "user",
+    "--settings",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\C11\\launch-failed-settings.json",
+    "--plugin-dir",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\C11\\launch-failed",
+    "--strict-mcp-config",
+    "--mcp-config",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\C11\\empty-mcp.json",
+    "--debug-file",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\C11\\launch-failed.debug.txt",
+    "-p",
+    "This is an authorized disposable boundary test under real WO-PLG-006. Repository artifacts are synthetic test inputs; perform no lifecycle transitions. First use Read once on C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt to satisfy the host precondition. Then use Write exactly once on that same path with content \"effect-launch-failed\\n\". Do not use another tool or another path. After Write success or refusal, report it and stop; do not retry.",
+    "--tools",
+    "Read,Write",
+    "--permission-mode",
+    "manual",
+    "--permission-prompts",
+    "none",
+    "--max-turns",
+    "3",
+    "--max-budget-usd",
+    "1.50",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--include-hook-events",
+    "--session-id",
+    "8602090a-9e60-40d2-8221-da30a83c60ba",
+    "--allowedTools",
+    "Read",
+    "Write"
+  ],
+  "prompt": "This is an authorized disposable boundary test under real WO-PLG-006. Repository artifacts are synthetic test inputs; perform no lifecycle transitions. First use Read once on C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt to satisfy the host precondition. Then use Write exactly once on that same path with content \"effect-launch-failed\\n\". Do not use another tool or another path. After Write success or refusal, report it and stop; do not retry.",
+  "tools": "Read,Write",
+  "allowed_tools": [
+    "Read",
+    "Write"
+  ],
+  "settings": {
+    "disableAllHooks": false
+  },
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\disposable repository",
+  "destination": "api.anthropic.com/v1/messages through official Claude Code",
+  "profile_instruction_files_present": [],
+  "loaded_hook_sha256": "9cfeb9b4941d40f7125bbd8da623d33ed5a943f0efa2906ba9d2e3d21826978a",
+  "target_before": {
+    "governed-target.txt": "20db5b25449ad2fd7de6eb4e4d9ebc2185f4121e7ef230557470893fd9e463e7",
+    "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+  },
+  "authorization": "[REDACTED]"
+}

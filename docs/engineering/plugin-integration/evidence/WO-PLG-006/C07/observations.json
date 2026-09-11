@@ -1,125 +1,121 @@
 {
-  "case": "C07",
-  "expected": [
-    "Unaccepted profile or no positive decision cannot qualify; no helper spawn or lifecycle effects."
-  ],
-  "observed": [
-    {
-      "assessments": [
-        {
-          "eligible_for_live_assessment": false,
-          "qualified": false,
-          "reasons": [
-            "unaccepted observed profile"
-          ],
-          "note": "Configuration eligibility does not prove host receipt or enforcement."
-        },
-        {
-          "eligible_for_live_assessment": false,
-          "qualified": false,
-          "reasons": [
-            "no positive compatibility decision"
-          ],
-          "note": "Configuration eligibility does not prove host receipt or enforcement."
-        }
-      ],
-      "helper_spawns": [],
-      "repository_markdown_before": {
-        "AGENTS.md": "864a2c3bafbc3191c778fe20402a2e983b4bece1c11103540164c06c46b4bef5",
-        "CLAUDE.md": "459bf70b6e9b45726ebcd48c1d93b64f603e36c1d22d94d4daccc08181a59f26",
-        "ENGINEERING_HARNESS.md": "18b8535a5cf4fb71255dcc910739eaa295aebcc45c28ba2529ef5d5ce7bf2705",
-        "GLOSSARY.md": "18d27d25f9c7c73c71c265ae68df3f78601fd8fac46c2b2961b06f26822529a2",
-        ".github/PULL_REQUEST_TEMPLATE.md": "9c655e1a5d0424f2d620db4ff9762a7c2883abfce8aef34a92115faff674a90e",
-        "docs/engineering/ARTIFACT_AUTHORING.md": "8559db739e38a4a6871bea57243c98f35d1e3a27b8df2371bacee9be33fd0ace",
-        "docs/engineering/DECISION_RIGHTS.md": "cab44d7cd079fb5598f83987b15cba2cf605b241288c684b1bda4d8c82d60709",
-        "docs/engineering/OPERATING_CARD.md": "1b9f6dcd497b07f9b1658eeebea09ab915e250a69090634b8f738c59ada95baf",
-        "docs/engineering/QUALITY_GATES.md": "c4b1d4930d41353dbdb60c714c154426394ce6c70176f678aecf6831f920e7ee",
-        "docs/engineering/README.md": "7e479e0845a7f386e3c35303f3d8893b7fe5c96fdbe353e4b149fa9bc0a5294c",
-        "docs/engineering/TECHNICAL_COMMUNICATION.md": "0f710e2a53f65e63e8904214531e6d8ca8c24487e7e14b9210b62a53db37c245",
-        "docs/engineering/TRACEABILITY.md": "7e3639e5ca85ac99c0bd286fcc785efb9c5c4a5085210ce3933abad3a65fd623",
-        "docs/engineering/WORKFLOW.md": "82494b587c8713a41a1b3ce00814286ad60424f664646929004eb0bc502e8ed0",
-        "docs/engineering/templates/ADR.template.md": "e93969569c4942053b177bd985552c80a724ef150ef1bac6b5bb07251a292569",
-        "docs/engineering/templates/ARCHITECTURE.template.md": "cbef4107518714c8589e56bcdd0a26c8370f0beec910a5d8d36a9b72a733264e",
-        "docs/engineering/templates/CAPABILITY.template.md": "ae839e6a46fe79f0941981d1bd1b5031c3ace642f7d4ce7a54ce5d5560392436",
-        "docs/engineering/templates/DECISION.template.md": "7eee2639aed2960b7f3537641b1a1112fa19c2901a76dbd6f994f8db3901953e",
-        "docs/engineering/templates/INTENT.template.md": "37861b9ff3caad2c971cb47d35e561a4d151ecb6c404afad8e700518fc9e094c",
-        "docs/engineering/templates/OPERATING_CONTRACT.template.md": "c43646bead3c08b0bee0cdf1326c7a95b95ceb8b9141bf0a5ac7418c48613468",
-        "docs/engineering/templates/README.md": "3426c5ca9f03435b649f25ae611984f093a188933198c75613d94d2a87d85e9e",
-        "docs/engineering/templates/RELEASE_CONTRACT.template.md": "2ea05c0c0b0ffa529c2999350609d125c584e9ad8a0c866402f9350b5213a3b6",
-        "docs/engineering/templates/RELEASE_RECORD.template.md": "24e90652e4b9582b56ec5ab28b69208a4389fbe5524d50f36e1cc0a7d827a1ff",
-        "docs/engineering/templates/REQUIREMENT.template.md": "09c88ffc221a6bce8c0ae698f1ecefa39ef91cb54de6ecbf79f18df317e249ee",
-        "docs/engineering/templates/SPECIFICATION.template.md": "66e18f26ebcbe0deb06202ae51e833ebabf2d9d71a0c6cf0842d424ef8980814",
-        "docs/engineering/templates/VERIFICATION.template.md": "ee6ca379624742dda1db745761d1e487667fcd4964cc7855e2f9267d95c4699c",
-        "docs/engineering/templates/VERIFICATION_RECORD.template.md": "5223be7b6c0c1243a7d00dcab37474fda634f110e85c891b2a87da9312fa32f5",
-        "docs/engineering/templates/WORK_ORDER.template.md": "5a271993bf90ad3eddc1e08ff0e9ff62c8876b717dd1ff402d4354e073ff1d4b",
-        "docs/engineering/readiness-probe/capabilities/CAP-PROBE-001.md": "5e2f91b033649308d32285e57067e79021651ffc8a62a8dfa8c13ba41278f454",
-        "docs/engineering/readiness-probe/intent/INT-PROBE-001.md": "12696d0d5e187dcff79beb9b834d95b6892e0d89b3e8334a2199d0ce64bdd71e",
-        "docs/engineering/readiness-probe/requirements/REQ-PROBE-001.md": "4c120a409fe51ca39143e1dd6f5665577043789ba2e93a8bf79cb8f55dc4086d",
-        "docs/engineering/readiness-probe/specifications/SPEC-PROBE-001.md": "8872ef62aed5ea1cba6845abb5de9b943e3281cbdfb2343a41c3da20537681f6",
-        "docs/engineering/readiness-probe/verification/VER-PROBE-001.md": "65c1b041c112868bde7de534d4b4fa2c33271b9dda44dd747cfb95794ec1edca",
-        "docs/engineering/readiness-probe/work-orders/WO-PROBE-001.md": "5a3ee327e43b8188769175e5b8a01c2f1dde04001fe140f823b988af9905d550",
-        "docs/engineering/readiness-probe/evidence/WO-PROBE-001/WO-PROBE-001-pre-action.md": "ef7bb141a7140bd2879634dce230bec8c331c42fa8483312ee9ea282f846e5a9",
-        ".claude/skills/harness-orient/SKILL.md": "8da58e3e22b3e9d7a7fc332aaf1df1fd45463b65208c3798c30b0d99d9548295",
-        ".agents/skills/harness-operator-brief/SKILL.md": "b7502217f5aac07c4bb3bd185f52e82d47c8f12fc0f4690efcb58eb8e42e5fd3",
-        ".agents/skills/harness-orient/SKILL.md": "0cf64a75e7df251d44bc9f362c31cdb606ed8582165c0309c0984c5743b253ca"
+  "expected": "Unaccepted profile or no positive decision cannot qualify; no helper spawn or lifecycle effects.",
+  "observed": {
+    "assessments": [
+      {
+        "eligible_for_live_assessment": false,
+        "qualified": false,
+        "reasons": [
+          "unaccepted observed profile"
+        ],
+        "note": "Configuration eligibility does not prove host receipt or enforcement."
       },
-      "repository_markdown_after": {
-        "AGENTS.md": "864a2c3bafbc3191c778fe20402a2e983b4bece1c11103540164c06c46b4bef5",
-        "CLAUDE.md": "459bf70b6e9b45726ebcd48c1d93b64f603e36c1d22d94d4daccc08181a59f26",
-        "ENGINEERING_HARNESS.md": "18b8535a5cf4fb71255dcc910739eaa295aebcc45c28ba2529ef5d5ce7bf2705",
-        "GLOSSARY.md": "18d27d25f9c7c73c71c265ae68df3f78601fd8fac46c2b2961b06f26822529a2",
-        ".github/PULL_REQUEST_TEMPLATE.md": "9c655e1a5d0424f2d620db4ff9762a7c2883abfce8aef34a92115faff674a90e",
-        "docs/engineering/ARTIFACT_AUTHORING.md": "8559db739e38a4a6871bea57243c98f35d1e3a27b8df2371bacee9be33fd0ace",
-        "docs/engineering/DECISION_RIGHTS.md": "cab44d7cd079fb5598f83987b15cba2cf605b241288c684b1bda4d8c82d60709",
-        "docs/engineering/OPERATING_CARD.md": "1b9f6dcd497b07f9b1658eeebea09ab915e250a69090634b8f738c59ada95baf",
-        "docs/engineering/QUALITY_GATES.md": "c4b1d4930d41353dbdb60c714c154426394ce6c70176f678aecf6831f920e7ee",
-        "docs/engineering/README.md": "7e479e0845a7f386e3c35303f3d8893b7fe5c96fdbe353e4b149fa9bc0a5294c",
-        "docs/engineering/TECHNICAL_COMMUNICATION.md": "0f710e2a53f65e63e8904214531e6d8ca8c24487e7e14b9210b62a53db37c245",
-        "docs/engineering/TRACEABILITY.md": "7e3639e5ca85ac99c0bd286fcc785efb9c5c4a5085210ce3933abad3a65fd623",
-        "docs/engineering/WORKFLOW.md": "82494b587c8713a41a1b3ce00814286ad60424f664646929004eb0bc502e8ed0",
-        "docs/engineering/templates/ADR.template.md": "e93969569c4942053b177bd985552c80a724ef150ef1bac6b5bb07251a292569",
-        "docs/engineering/templates/ARCHITECTURE.template.md": "cbef4107518714c8589e56bcdd0a26c8370f0beec910a5d8d36a9b72a733264e",
-        "docs/engineering/templates/CAPABILITY.template.md": "ae839e6a46fe79f0941981d1bd1b5031c3ace642f7d4ce7a54ce5d5560392436",
-        "docs/engineering/templates/DECISION.template.md": "7eee2639aed2960b7f3537641b1a1112fa19c2901a76dbd6f994f8db3901953e",
-        "docs/engineering/templates/INTENT.template.md": "37861b9ff3caad2c971cb47d35e561a4d151ecb6c404afad8e700518fc9e094c",
-        "docs/engineering/templates/OPERATING_CONTRACT.template.md": "c43646bead3c08b0bee0cdf1326c7a95b95ceb8b9141bf0a5ac7418c48613468",
-        "docs/engineering/templates/README.md": "3426c5ca9f03435b649f25ae611984f093a188933198c75613d94d2a87d85e9e",
-        "docs/engineering/templates/RELEASE_CONTRACT.template.md": "2ea05c0c0b0ffa529c2999350609d125c584e9ad8a0c866402f9350b5213a3b6",
-        "docs/engineering/templates/RELEASE_RECORD.template.md": "24e90652e4b9582b56ec5ab28b69208a4389fbe5524d50f36e1cc0a7d827a1ff",
-        "docs/engineering/templates/REQUIREMENT.template.md": "09c88ffc221a6bce8c0ae698f1ecefa39ef91cb54de6ecbf79f18df317e249ee",
-        "docs/engineering/templates/SPECIFICATION.template.md": "66e18f26ebcbe0deb06202ae51e833ebabf2d9d71a0c6cf0842d424ef8980814",
-        "docs/engineering/templates/VERIFICATION.template.md": "ee6ca379624742dda1db745761d1e487667fcd4964cc7855e2f9267d95c4699c",
-        "docs/engineering/templates/VERIFICATION_RECORD.template.md": "5223be7b6c0c1243a7d00dcab37474fda634f110e85c891b2a87da9312fa32f5",
-        "docs/engineering/templates/WORK_ORDER.template.md": "5a271993bf90ad3eddc1e08ff0e9ff62c8876b717dd1ff402d4354e073ff1d4b",
-        "docs/engineering/readiness-probe/capabilities/CAP-PROBE-001.md": "5e2f91b033649308d32285e57067e79021651ffc8a62a8dfa8c13ba41278f454",
-        "docs/engineering/readiness-probe/intent/INT-PROBE-001.md": "12696d0d5e187dcff79beb9b834d95b6892e0d89b3e8334a2199d0ce64bdd71e",
-        "docs/engineering/readiness-probe/requirements/REQ-PROBE-001.md": "4c120a409fe51ca39143e1dd6f5665577043789ba2e93a8bf79cb8f55dc4086d",
-        "docs/engineering/readiness-probe/specifications/SPEC-PROBE-001.md": "8872ef62aed5ea1cba6845abb5de9b943e3281cbdfb2343a41c3da20537681f6",
-        "docs/engineering/readiness-probe/verification/VER-PROBE-001.md": "65c1b041c112868bde7de534d4b4fa2c33271b9dda44dd747cfb95794ec1edca",
-        "docs/engineering/readiness-probe/work-orders/WO-PROBE-001.md": "5a3ee327e43b8188769175e5b8a01c2f1dde04001fe140f823b988af9905d550",
-        "docs/engineering/readiness-probe/evidence/WO-PROBE-001/WO-PROBE-001-pre-action.md": "ef7bb141a7140bd2879634dce230bec8c331c42fa8483312ee9ea282f846e5a9",
-        ".claude/skills/harness-orient/SKILL.md": "8da58e3e22b3e9d7a7fc332aaf1df1fd45463b65208c3798c30b0d99d9548295",
-        ".agents/skills/harness-operator-brief/SKILL.md": "b7502217f5aac07c4bb3bd185f52e82d47c8f12fc0f4690efcb58eb8e42e5fd3",
-        ".agents/skills/harness-orient/SKILL.md": "0cf64a75e7df251d44bc9f362c31cdb606ed8582165c0309c0984c5743b253ca"
-      },
-      "lifecycle_mutations": []
-    }
-  ],
+      {
+        "eligible_for_live_assessment": false,
+        "qualified": false,
+        "reasons": [
+          "no positive compatibility decision"
+        ],
+        "note": "Configuration eligibility does not prove host receipt or enforcement."
+      }
+    ],
+    "helper_spawns": [],
+    "repository_markdown_before": {
+      "AGENTS.md": "864a2c3bafbc3191c778fe20402a2e983b4bece1c11103540164c06c46b4bef5",
+      "CLAUDE.md": "459bf70b6e9b45726ebcd48c1d93b64f603e36c1d22d94d4daccc08181a59f26",
+      "ENGINEERING_HARNESS.md": "18b8535a5cf4fb71255dcc910739eaa295aebcc45c28ba2529ef5d5ce7bf2705",
+      "GLOSSARY.md": "18d27d25f9c7c73c71c265ae68df3f78601fd8fac46c2b2961b06f26822529a2",
+      ".github/PULL_REQUEST_TEMPLATE.md": "9c655e1a5d0424f2d620db4ff9762a7c2883abfce8aef34a92115faff674a90e",
+      "docs/engineering/ARTIFACT_AUTHORING.md": "8559db739e38a4a6871bea57243c98f35d1e3a27b8df2371bacee9be33fd0ace",
+      "docs/engineering/DECISION_RIGHTS.md": "cab44d7cd079fb5598f83987b15cba2cf605b241288c684b1bda4d8c82d60709",
+      "docs/engineering/OPERATING_CARD.md": "1b9f6dcd497b07f9b1658eeebea09ab915e250a69090634b8f738c59ada95baf",
+      "docs/engineering/QUALITY_GATES.md": "c4b1d4930d41353dbdb60c714c154426394ce6c70176f678aecf6831f920e7ee",
+      "docs/engineering/README.md": "7e479e0845a7f386e3c35303f3d8893b7fe5c96fdbe353e4b149fa9bc0a5294c",
+      "docs/engineering/TECHNICAL_COMMUNICATION.md": "0f710e2a53f65e63e8904214531e6d8ca8c24487e7e14b9210b62a53db37c245",
+      "docs/engineering/TRACEABILITY.md": "7e3639e5ca85ac99c0bd286fcc785efb9c5c4a5085210ce3933abad3a65fd623",
+      "docs/engineering/WORKFLOW.md": "82494b587c8713a41a1b3ce00814286ad60424f664646929004eb0bc502e8ed0",
+      "docs/engineering/templates/ADR.template.md": "e93969569c4942053b177bd985552c80a724ef150ef1bac6b5bb07251a292569",
+      "docs/engineering/templates/ARCHITECTURE.template.md": "cbef4107518714c8589e56bcdd0a26c8370f0beec910a5d8d36a9b72a733264e",
+      "docs/engineering/templates/CAPABILITY.template.md": "ae839e6a46fe79f0941981d1bd1b5031c3ace642f7d4ce7a54ce5d5560392436",
+      "docs/engineering/templates/DECISION.template.md": "7eee2639aed2960b7f3537641b1a1112fa19c2901a76dbd6f994f8db3901953e",
+      "docs/engineering/templates/INTENT.template.md": "37861b9ff3caad2c971cb47d35e561a4d151ecb6c404afad8e700518fc9e094c",
+      "docs/engineering/templates/OPERATING_CONTRACT.template.md": "c43646bead3c08b0bee0cdf1326c7a95b95ceb8b9141bf0a5ac7418c48613468",
+      "docs/engineering/templates/README.md": "3426c5ca9f03435b649f25ae611984f093a188933198c75613d94d2a87d85e9e",
+      "docs/engineering/templates/RELEASE_CONTRACT.template.md": "2ea05c0c0b0ffa529c2999350609d125c584e9ad8a0c866402f9350b5213a3b6",
+      "docs/engineering/templates/RELEASE_RECORD.template.md": "24e90652e4b9582b56ec5ab28b69208a4389fbe5524d50f36e1cc0a7d827a1ff",
+      "docs/engineering/templates/REQUIREMENT.template.md": "09c88ffc221a6bce8c0ae698f1ecefa39ef91cb54de6ecbf79f18df317e249ee",
+      "docs/engineering/templates/SPECIFICATION.template.md": "66e18f26ebcbe0deb06202ae51e833ebabf2d9d71a0c6cf0842d424ef8980814",
+      "docs/engineering/templates/VERIFICATION.template.md": "ee6ca379624742dda1db745761d1e487667fcd4964cc7855e2f9267d95c4699c",
+      "docs/engineering/templates/VERIFICATION_RECORD.template.md": "5223be7b6c0c1243a7d00dcab37474fda634f110e85c891b2a87da9312fa32f5",
+      "docs/engineering/templates/WORK_ORDER.template.md": "5a271993bf90ad3eddc1e08ff0e9ff62c8876b717dd1ff402d4354e073ff1d4b",
+      "docs/engineering/readiness-probe/capabilities/CAP-PROBE-001.md": "5e2f91b033649308d32285e57067e79021651ffc8a62a8dfa8c13ba41278f454",
+      "docs/engineering/readiness-probe/intent/INT-PROBE-001.md": "12696d0d5e187dcff79beb9b834d95b6892e0d89b3e8334a2199d0ce64bdd71e",
+      "docs/engineering/readiness-probe/requirements/REQ-PROBE-001.md": "4c120a409fe51ca39143e1dd6f5665577043789ba2e93a8bf79cb8f55dc4086d",
+      "docs/engineering/readiness-probe/specifications/SPEC-PROBE-001.md": "8872ef62aed5ea1cba6845abb5de9b943e3281cbdfb2343a41c3da20537681f6",
+      "docs/engineering/readiness-probe/verification/VER-PROBE-001.md": "65c1b041c112868bde7de534d4b4fa2c33271b9dda44dd747cfb95794ec1edca",
+      "docs/engineering/readiness-probe/work-orders/WO-PROBE-001.md": "5a3ee327e43b8188769175e5b8a01c2f1dde04001fe140f823b988af9905d550",
+      "docs/engineering/readiness-probe/evidence/WO-PROBE-001/WO-PROBE-001-pre-action.md": "ca2d578f1d6ccad361b6de73bef85b93739037f46b9f96ba2687dce9eb8d0091",
+      ".claude/skills/harness-orient/SKILL.md": "8da58e3e22b3e9d7a7fc332aaf1df1fd45463b65208c3798c30b0d99d9548295",
+      ".agents/skills/harness-operator-brief/SKILL.md": "b7502217f5aac07c4bb3bd185f52e82d47c8f12fc0f4690efcb58eb8e42e5fd3",
+      ".agents/skills/harness-orient/SKILL.md": "0cf64a75e7df251d44bc9f362c31cdb606ed8582165c0309c0984c5743b253ca"
+    },
+    "repository_markdown_after": {
+      "AGENTS.md": "864a2c3bafbc3191c778fe20402a2e983b4bece1c11103540164c06c46b4bef5",
+      "CLAUDE.md": "459bf70b6e9b45726ebcd48c1d93b64f603e36c1d22d94d4daccc08181a59f26",
+      "ENGINEERING_HARNESS.md": "18b8535a5cf4fb71255dcc910739eaa295aebcc45c28ba2529ef5d5ce7bf2705",
+      "GLOSSARY.md": "18d27d25f9c7c73c71c265ae68df3f78601fd8fac46c2b2961b06f26822529a2",
+      ".github/PULL_REQUEST_TEMPLATE.md": "9c655e1a5d0424f2d620db4ff9762a7c2883abfce8aef34a92115faff674a90e",
+      "docs/engineering/ARTIFACT_AUTHORING.md": "8559db739e38a4a6871bea57243c98f35d1e3a27b8df2371bacee9be33fd0ace",
+      "docs/engineering/DECISION_RIGHTS.md": "cab44d7cd079fb5598f83987b15cba2cf605b241288c684b1bda4d8c82d60709",
+      "docs/engineering/OPERATING_CARD.md": "1b9f6dcd497b07f9b1658eeebea09ab915e250a69090634b8f738c59ada95baf",
+      "docs/engineering/QUALITY_GATES.md": "c4b1d4930d41353dbdb60c714c154426394ce6c70176f678aecf6831f920e7ee",
+      "docs/engineering/README.md": "7e479e0845a7f386e3c35303f3d8893b7fe5c96fdbe353e4b149fa9bc0a5294c",
+      "docs/engineering/TECHNICAL_COMMUNICATION.md": "0f710e2a53f65e63e8904214531e6d8ca8c24487e7e14b9210b62a53db37c245",
+      "docs/engineering/TRACEABILITY.md": "7e3639e5ca85ac99c0bd286fcc785efb9c5c4a5085210ce3933abad3a65fd623",
+      "docs/engineering/WORKFLOW.md": "82494b587c8713a41a1b3ce00814286ad60424f664646929004eb0bc502e8ed0",
+      "docs/engineering/templates/ADR.template.md": "e93969569c4942053b177bd985552c80a724ef150ef1bac6b5bb07251a292569",
+      "docs/engineering/templates/ARCHITECTURE.template.md": "cbef4107518714c8589e56bcdd0a26c8370f0beec910a5d8d36a9b72a733264e",
+      "docs/engineering/templates/CAPABILITY.template.md": "ae839e6a46fe79f0941981d1bd1b5031c3ace642f7d4ce7a54ce5d5560392436",
+      "docs/engineering/templates/DECISION.template.md": "7eee2639aed2960b7f3537641b1a1112fa19c2901a76dbd6f994f8db3901953e",
+      "docs/engineering/templates/INTENT.template.md": "37861b9ff3caad2c971cb47d35e561a4d151ecb6c404afad8e700518fc9e094c",
+      "docs/engineering/templates/OPERATING_CONTRACT.template.md": "c43646bead3c08b0bee0cdf1326c7a95b95ceb8b9141bf0a5ac7418c48613468",
+      "docs/engineering/templates/README.md": "3426c5ca9f03435b649f25ae611984f093a188933198c75613d94d2a87d85e9e",
+      "docs/engineering/templates/RELEASE_CONTRACT.template.md": "2ea05c0c0b0ffa529c2999350609d125c584e9ad8a0c866402f9350b5213a3b6",
+      "docs/engineering/templates/RELEASE_RECORD.template.md": "24e90652e4b9582b56ec5ab28b69208a4389fbe5524d50f36e1cc0a7d827a1ff",
+      "docs/engineering/templates/REQUIREMENT.template.md": "09c88ffc221a6bce8c0ae698f1ecefa39ef91cb54de6ecbf79f18df317e249ee",
+      "docs/engineering/templates/SPECIFICATION.template.md": "66e18f26ebcbe0deb06202ae51e833ebabf2d9d71a0c6cf0842d424ef8980814",
+      "docs/engineering/templates/VERIFICATION.template.md": "ee6ca379624742dda1db745761d1e487667fcd4964cc7855e2f9267d95c4699c",
+      "docs/engineering/templates/VERIFICATION_RECORD.template.md": "5223be7b6c0c1243a7d00dcab37474fda634f110e85c891b2a87da9312fa32f5",
+      "docs/engineering/templates/WORK_ORDER.template.md": "5a271993bf90ad3eddc1e08ff0e9ff62c8876b717dd1ff402d4354e073ff1d4b",
+      "docs/engineering/readiness-probe/capabilities/CAP-PROBE-001.md": "5e2f91b033649308d32285e57067e79021651ffc8a62a8dfa8c13ba41278f454",
+      "docs/engineering/readiness-probe/intent/INT-PROBE-001.md": "12696d0d5e187dcff79beb9b834d95b6892e0d89b3e8334a2199d0ce64bdd71e",
+      "docs/engineering/readiness-probe/requirements/REQ-PROBE-001.md": "4c120a409fe51ca39143e1dd6f5665577043789ba2e93a8bf79cb8f55dc4086d",
+      "docs/engineering/readiness-probe/specifications/SPEC-PROBE-001.md": "8872ef62aed5ea1cba6845abb5de9b943e3281cbdfb2343a41c3da20537681f6",
+      "docs/engineering/readiness-probe/verification/VER-PROBE-001.md": "65c1b041c112868bde7de534d4b4fa2c33271b9dda44dd747cfb95794ec1edca",
+      "docs/engineering/readiness-probe/work-orders/WO-PROBE-001.md": "5a3ee327e43b8188769175e5b8a01c2f1dde04001fe140f823b988af9905d550",
+      "docs/engineering/readiness-probe/evidence/WO-PROBE-001/WO-PROBE-001-pre-action.md": "ca2d578f1d6ccad361b6de73bef85b93739037f46b9f96ba2687dce9eb8d0091",
+      ".claude/skills/harness-orient/SKILL.md": "8da58e3e22b3e9d7a7fc332aaf1df1fd45463b65208c3798c30b0d99d9548295",
+      ".agents/skills/harness-operator-brief/SKILL.md": "b7502217f5aac07c4bb3bd185f52e82d47c8f12fc0f4690efcb58eb8e42e5fd3",
+      ".agents/skills/harness-orient/SKILL.md": "0cf64a75e7df251d44bc9f362c31cdb606ed8582165c0309c0984c5743b253ca"
+    },
+    "lifecycle_mutations": []
+  },
   "conclusion": "pass",
   "qualified": false,
-  "observation_complete": true,
-  "enforcement_result": "only the demonstrated case behavior",
   "exit_status": [
-    [
-      0
-    ]
+    0
   ],
   "source_evidence": [
-    "acceptance-05/C07/actions.txt",
-    "acceptance-05/C07/stdout.txt",
-    "acceptance-05/C07/stderr.txt",
-    "acceptance-05/C07/commands.json",
-    "acceptance-05/C07/observations.json"
+    "acceptance-06/C07/actions.txt",
+    "acceptance-06/C07/stdout.txt",
+    "acceptance-06/C07/stderr.txt",
+    "acceptance-06/C07/commands.json",
+    "acceptance-06/C07/observations.json"
   ],
-  "assessment_policy": "C10/C11 remain fail and unqualified despite completed negative experiments. C12 pass means rejection, not enforcement. Earlier derived observations remain unchanged; reassessment uses actual structured host messages."
+  "capture_policy": "sanitized public observations; raw host debug stays in disposable sandbox",
+  "case": "C07",
+  "candidate_source_commit": "fd2419f4c26b9ba4d4a97f85b7d2b08da72b8626",
+  "package_sha256": "f11d94139ad7e6194147c32a80a070f34f6761900a8c737aec354ec9b447d7f6",
+  "observation_complete": true,
+  "source_paths_relative_to": "evidence/WO-PLG-006"
 }

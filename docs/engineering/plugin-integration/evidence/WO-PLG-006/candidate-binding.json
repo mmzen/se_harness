@@ -1,390 +1,194 @@
 {
-  "comparison_commit": "99ed2b33eb52f0c94612857904c15a16273e9354",
-  "production_unchanged_since": "1f51da0b",
+  "comparison_commit": "fd2419f4c26b9ba4d4a97f85b7d2b08da72b8626",
+  "current_attempt": "acceptance-06",
+  "assembly_source_commit": "fd2419f4c26b9ba4d4a97f85b7d2b08da72b8626",
+  "package_sha256": "f11d94139ad7e6194147c32a80a070f34f6761900a8c737aec354ec9b447d7f6",
   "all_source_packaged_loaded_equal": true,
-  "packages": [
+  "files": [
     {
-      "attempt": "acceptance-04",
-      "assembly_source_commit": "84c5987054cc0c38410f7ce31951ac2e9b93f242",
-      "package_sha256": "e7ce223f9a7996ec167313e1d054f8b72c583b72fc08a6e4cb02f6dfafb8eaee",
-      "files": [
-        {
-          "source": "plugins/verity-plane/common/scripts/check-tool-action.py",
-          "packaged": "scripts/check-tool-action.py",
-          "source_git_blob_sha256": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4",
-          "packaged_sha256": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4",
-          "loaded_sha256": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/scripts/session-context.py",
-          "packaged": "scripts/session-context.py",
-          "source_git_blob_sha256": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb",
-          "packaged_sha256": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb",
-          "loaded_sha256": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/change/references/artifacts.md",
-          "packaged": "skills/change/references/artifacts.md",
-          "source_git_blob_sha256": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3",
-          "packaged_sha256": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3",
-          "loaded_sha256": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/change/references/authority.md",
-          "packaged": "skills/change/references/authority.md",
-          "source_git_blob_sha256": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f",
-          "packaged_sha256": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f",
-          "loaded_sha256": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/change/references/work-orders.md",
-          "packaged": "skills/change/references/work-orders.md",
-          "source_git_blob_sha256": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8",
-          "packaged_sha256": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8",
-          "loaded_sha256": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/change/SKILL.md",
-          "packaged": "skills/change/SKILL.md",
-          "source_git_blob_sha256": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13",
-          "packaged_sha256": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13",
-          "loaded_sha256": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/evidence/references/external-actions.md",
-          "packaged": "skills/evidence/references/external-actions.md",
-          "source_git_blob_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
-          "packaged_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
-          "loaded_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/evidence/references/records.md",
-          "packaged": "skills/evidence/references/records.md",
-          "source_git_blob_sha256": "0c266bef118b904030e1982318763021bdfd699e34b353d4f38e5d9f2f43a20b",
-          "packaged_sha256": "0c266bef118b904030e1982318763021bdfd699e34b353d4f38e5d9f2f43a20b",
-          "loaded_sha256": "0c266bef118b904030e1982318763021bdfd699e34b353d4f38e5d9f2f43a20b",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/evidence/SKILL.md",
-          "packaged": "skills/evidence/SKILL.md",
-          "source_git_blob_sha256": "647c20a982c798c0617145cbcfe2f3356d23b4f827641b6affff9592bf02ad3b",
-          "packaged_sha256": "647c20a982c798c0617145cbcfe2f3356d23b4f827641b6affff9592bf02ad3b",
-          "loaded_sha256": "647c20a982c798c0617145cbcfe2f3356d23b4f827641b6affff9592bf02ad3b",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/harness-operator-brief/agents/openai.yaml",
-          "packaged": "skills/harness-operator-brief/agents/openai.yaml",
-          "source_git_blob_sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
-          "packaged_sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
-          "loaded_sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/harness-operator-brief/scripts/check_brief.py",
-          "packaged": "skills/harness-operator-brief/scripts/check_brief.py",
-          "source_git_blob_sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
-          "packaged_sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
-          "loaded_sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/harness-operator-brief/skill-contract.json",
-          "packaged": "skills/harness-operator-brief/skill-contract.json",
-          "source_git_blob_sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
-          "packaged_sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
-          "loaded_sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/harness-operator-brief/SKILL.md",
-          "packaged": "skills/harness-operator-brief/SKILL.md",
-          "source_git_blob_sha256": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51",
-          "packaged_sha256": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51",
-          "loaded_sha256": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/harness-orient/scripts/orient.py",
-          "packaged": "skills/harness-orient/scripts/orient.py",
-          "source_git_blob_sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
-          "packaged_sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
-          "loaded_sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/harness-orient/skill-contract.json",
-          "packaged": "skills/harness-orient/skill-contract.json",
-          "source_git_blob_sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
-          "packaged_sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
-          "loaded_sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/harness-orient/SKILL.md",
-          "packaged": "skills/harness-orient/SKILL.md",
-          "source_git_blob_sha256": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf",
-          "packaged_sha256": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf",
-          "loaded_sha256": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/setup/references/environment.md",
-          "packaged": "skills/setup/references/environment.md",
-          "source_git_blob_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
-          "packaged_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
-          "loaded_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/setup/SKILL.md",
-          "packaged": "skills/setup/SKILL.md",
-          "source_git_blob_sha256": "68b3270b2ed4b8ad3651b6ff2ad737a425f8e7e3034df7fc065fb4e0feb03271",
-          "packaged_sha256": "68b3270b2ed4b8ad3651b6ff2ad737a425f8e7e3034df7fc065fb4e0feb03271",
-          "loaded_sha256": "68b3270b2ed4b8ad3651b6ff2ad737a425f8e7e3034df7fc065fb4e0feb03271",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/claude-code/.claude-plugin/plugin.json",
-          "packaged": ".claude-plugin/plugin.json",
-          "source_git_blob_sha256": "d6ebebb168a498e9b268d519fa94aea032ff7124ddfac0bad92343e6ce87725f",
-          "packaged_sha256": "d6ebebb168a498e9b268d519fa94aea032ff7124ddfac0bad92343e6ce87725f",
-          "loaded_sha256": "d6ebebb168a498e9b268d519fa94aea032ff7124ddfac0bad92343e6ce87725f",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/claude-code/hooks/guard.txt",
-          "packaged": "hooks/guard.txt",
-          "source_git_blob_sha256": "336202b731951eea4f69f3b0b46787aba56d0fa17a848efcd8e9b0bde78a4abb",
-          "packaged_sha256": "336202b731951eea4f69f3b0b46787aba56d0fa17a848efcd8e9b0bde78a4abb",
-          "loaded_sha256": "336202b731951eea4f69f3b0b46787aba56d0fa17a848efcd8e9b0bde78a4abb",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/claude-code/hooks/hooks.json",
-          "packaged": "hooks/hooks.json",
-          "source_git_blob_sha256": "ca485f95331a47f0a4069db25dccc08f4363e87a2065d129e11d109810de9e3c",
-          "packaged_sha256": "ca485f95331a47f0a4069db25dccc08f4363e87a2065d129e11d109810de9e3c",
-          "loaded_sha256": "ca485f95331a47f0a4069db25dccc08f4363e87a2065d129e11d109810de9e3c",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/claude-code/README.md",
-          "packaged": "README.md",
-          "source_git_blob_sha256": "c96939974873b2df43edb632a6a9b413d385af6672717dca4d340f575c02d05b",
-          "packaged_sha256": "c96939974873b2df43edb632a6a9b413d385af6672717dca4d340f575c02d05b",
-          "loaded_sha256": "c96939974873b2df43edb632a6a9b413d385af6672717dca4d340f575c02d05b",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/claude-code/scripts/binding.py",
-          "packaged": "scripts/binding.py",
-          "source_git_blob_sha256": "034a6945f09af1bc12cceb5f966490bbf59e3bf623ed521b689c146ab00ef04a",
-          "packaged_sha256": "034a6945f09af1bc12cceb5f966490bbf59e3bf623ed521b689c146ab00ef04a",
-          "loaded_sha256": "034a6945f09af1bc12cceb5f966490bbf59e3bf623ed521b689c146ab00ef04a",
-          "all_equal": true
-        }
-      ]
+      "source": "plugins/verity-plane/common/scripts/check-tool-action.py",
+      "packaged": "scripts/check-tool-action.py",
+      "source_git_blob_sha256": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4",
+      "packaged_sha256": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4",
+      "loaded_sha256": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4",
+      "all_equal": true
     },
     {
-      "attempt": "acceptance-05",
-      "assembly_source_commit": "99ed2b33eb52f0c94612857904c15a16273e9354",
-      "package_sha256": "647192b6791d3609e1844d8ee50456f08fa815a188af0d3ecc03fcc312959d46",
-      "files": [
-        {
-          "source": "plugins/verity-plane/common/scripts/check-tool-action.py",
-          "packaged": "scripts/check-tool-action.py",
-          "source_git_blob_sha256": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4",
-          "packaged_sha256": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4",
-          "loaded_sha256": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/scripts/session-context.py",
-          "packaged": "scripts/session-context.py",
-          "source_git_blob_sha256": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb",
-          "packaged_sha256": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb",
-          "loaded_sha256": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/change/references/artifacts.md",
-          "packaged": "skills/change/references/artifacts.md",
-          "source_git_blob_sha256": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3",
-          "packaged_sha256": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3",
-          "loaded_sha256": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/change/references/authority.md",
-          "packaged": "skills/change/references/authority.md",
-          "source_git_blob_sha256": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f",
-          "packaged_sha256": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f",
-          "loaded_sha256": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/change/references/work-orders.md",
-          "packaged": "skills/change/references/work-orders.md",
-          "source_git_blob_sha256": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8",
-          "packaged_sha256": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8",
-          "loaded_sha256": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/change/SKILL.md",
-          "packaged": "skills/change/SKILL.md",
-          "source_git_blob_sha256": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13",
-          "packaged_sha256": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13",
-          "loaded_sha256": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/evidence/references/external-actions.md",
-          "packaged": "skills/evidence/references/external-actions.md",
-          "source_git_blob_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
-          "packaged_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
-          "loaded_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/evidence/references/records.md",
-          "packaged": "skills/evidence/references/records.md",
-          "source_git_blob_sha256": "0c266bef118b904030e1982318763021bdfd699e34b353d4f38e5d9f2f43a20b",
-          "packaged_sha256": "0c266bef118b904030e1982318763021bdfd699e34b353d4f38e5d9f2f43a20b",
-          "loaded_sha256": "0c266bef118b904030e1982318763021bdfd699e34b353d4f38e5d9f2f43a20b",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/evidence/SKILL.md",
-          "packaged": "skills/evidence/SKILL.md",
-          "source_git_blob_sha256": "647c20a982c798c0617145cbcfe2f3356d23b4f827641b6affff9592bf02ad3b",
-          "packaged_sha256": "647c20a982c798c0617145cbcfe2f3356d23b4f827641b6affff9592bf02ad3b",
-          "loaded_sha256": "647c20a982c798c0617145cbcfe2f3356d23b4f827641b6affff9592bf02ad3b",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/harness-operator-brief/agents/openai.yaml",
-          "packaged": "skills/harness-operator-brief/agents/openai.yaml",
-          "source_git_blob_sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
-          "packaged_sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
-          "loaded_sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/harness-operator-brief/scripts/check_brief.py",
-          "packaged": "skills/harness-operator-brief/scripts/check_brief.py",
-          "source_git_blob_sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
-          "packaged_sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
-          "loaded_sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/harness-operator-brief/skill-contract.json",
-          "packaged": "skills/harness-operator-brief/skill-contract.json",
-          "source_git_blob_sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
-          "packaged_sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
-          "loaded_sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/harness-operator-brief/SKILL.md",
-          "packaged": "skills/harness-operator-brief/SKILL.md",
-          "source_git_blob_sha256": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51",
-          "packaged_sha256": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51",
-          "loaded_sha256": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/harness-orient/scripts/orient.py",
-          "packaged": "skills/harness-orient/scripts/orient.py",
-          "source_git_blob_sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
-          "packaged_sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
-          "loaded_sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/harness-orient/skill-contract.json",
-          "packaged": "skills/harness-orient/skill-contract.json",
-          "source_git_blob_sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
-          "packaged_sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
-          "loaded_sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/harness-orient/SKILL.md",
-          "packaged": "skills/harness-orient/SKILL.md",
-          "source_git_blob_sha256": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf",
-          "packaged_sha256": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf",
-          "loaded_sha256": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/setup/references/environment.md",
-          "packaged": "skills/setup/references/environment.md",
-          "source_git_blob_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
-          "packaged_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
-          "loaded_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/common/skills/setup/SKILL.md",
-          "packaged": "skills/setup/SKILL.md",
-          "source_git_blob_sha256": "68b3270b2ed4b8ad3651b6ff2ad737a425f8e7e3034df7fc065fb4e0feb03271",
-          "packaged_sha256": "68b3270b2ed4b8ad3651b6ff2ad737a425f8e7e3034df7fc065fb4e0feb03271",
-          "loaded_sha256": "68b3270b2ed4b8ad3651b6ff2ad737a425f8e7e3034df7fc065fb4e0feb03271",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/claude-code/.claude-plugin/plugin.json",
-          "packaged": ".claude-plugin/plugin.json",
-          "source_git_blob_sha256": "d6ebebb168a498e9b268d519fa94aea032ff7124ddfac0bad92343e6ce87725f",
-          "packaged_sha256": "d6ebebb168a498e9b268d519fa94aea032ff7124ddfac0bad92343e6ce87725f",
-          "loaded_sha256": "d6ebebb168a498e9b268d519fa94aea032ff7124ddfac0bad92343e6ce87725f",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/claude-code/hooks/guard.txt",
-          "packaged": "hooks/guard.txt",
-          "source_git_blob_sha256": "336202b731951eea4f69f3b0b46787aba56d0fa17a848efcd8e9b0bde78a4abb",
-          "packaged_sha256": "336202b731951eea4f69f3b0b46787aba56d0fa17a848efcd8e9b0bde78a4abb",
-          "loaded_sha256": "336202b731951eea4f69f3b0b46787aba56d0fa17a848efcd8e9b0bde78a4abb",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/claude-code/hooks/hooks.json",
-          "packaged": "hooks/hooks.json",
-          "source_git_blob_sha256": "ca485f95331a47f0a4069db25dccc08f4363e87a2065d129e11d109810de9e3c",
-          "packaged_sha256": "ca485f95331a47f0a4069db25dccc08f4363e87a2065d129e11d109810de9e3c",
-          "loaded_sha256": "ca485f95331a47f0a4069db25dccc08f4363e87a2065d129e11d109810de9e3c",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/claude-code/README.md",
-          "packaged": "README.md",
-          "source_git_blob_sha256": "c96939974873b2df43edb632a6a9b413d385af6672717dca4d340f575c02d05b",
-          "packaged_sha256": "c96939974873b2df43edb632a6a9b413d385af6672717dca4d340f575c02d05b",
-          "loaded_sha256": "c96939974873b2df43edb632a6a9b413d385af6672717dca4d340f575c02d05b",
-          "all_equal": true
-        },
-        {
-          "source": "plugins/verity-plane/claude-code/scripts/binding.py",
-          "packaged": "scripts/binding.py",
-          "source_git_blob_sha256": "034a6945f09af1bc12cceb5f966490bbf59e3bf623ed521b689c146ab00ef04a",
-          "packaged_sha256": "034a6945f09af1bc12cceb5f966490bbf59e3bf623ed521b689c146ab00ef04a",
-          "loaded_sha256": "034a6945f09af1bc12cceb5f966490bbf59e3bf623ed521b689c146ab00ef04a",
-          "all_equal": true
-        }
-      ]
+      "source": "plugins/verity-plane/common/scripts/session-context.py",
+      "packaged": "scripts/session-context.py",
+      "source_git_blob_sha256": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb",
+      "packaged_sha256": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb",
+      "loaded_sha256": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/change/references/artifacts.md",
+      "packaged": "skills/change/references/artifacts.md",
+      "source_git_blob_sha256": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3",
+      "packaged_sha256": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3",
+      "loaded_sha256": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/change/references/authority.md",
+      "packaged": "skills/change/references/authority.md",
+      "source_git_blob_sha256": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f",
+      "packaged_sha256": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f",
+      "loaded_sha256": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/change/references/work-orders.md",
+      "packaged": "skills/change/references/work-orders.md",
+      "source_git_blob_sha256": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8",
+      "packaged_sha256": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8",
+      "loaded_sha256": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/change/SKILL.md",
+      "packaged": "skills/change/SKILL.md",
+      "source_git_blob_sha256": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13",
+      "packaged_sha256": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13",
+      "loaded_sha256": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/evidence/references/external-actions.md",
+      "packaged": "skills/evidence/references/external-actions.md",
+      "source_git_blob_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+      "packaged_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+      "loaded_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/evidence/references/records.md",
+      "packaged": "skills/evidence/references/records.md",
+      "source_git_blob_sha256": "0c266bef118b904030e1982318763021bdfd699e34b353d4f38e5d9f2f43a20b",
+      "packaged_sha256": "0c266bef118b904030e1982318763021bdfd699e34b353d4f38e5d9f2f43a20b",
+      "loaded_sha256": "0c266bef118b904030e1982318763021bdfd699e34b353d4f38e5d9f2f43a20b",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/evidence/SKILL.md",
+      "packaged": "skills/evidence/SKILL.md",
+      "source_git_blob_sha256": "647c20a982c798c0617145cbcfe2f3356d23b4f827641b6affff9592bf02ad3b",
+      "packaged_sha256": "647c20a982c798c0617145cbcfe2f3356d23b4f827641b6affff9592bf02ad3b",
+      "loaded_sha256": "647c20a982c798c0617145cbcfe2f3356d23b4f827641b6affff9592bf02ad3b",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/harness-operator-brief/agents/openai.yaml",
+      "packaged": "skills/harness-operator-brief/agents/openai.yaml",
+      "source_git_blob_sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+      "packaged_sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+      "loaded_sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/harness-operator-brief/scripts/check_brief.py",
+      "packaged": "skills/harness-operator-brief/scripts/check_brief.py",
+      "source_git_blob_sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+      "packaged_sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+      "loaded_sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/harness-operator-brief/skill-contract.json",
+      "packaged": "skills/harness-operator-brief/skill-contract.json",
+      "source_git_blob_sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+      "packaged_sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+      "loaded_sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/harness-operator-brief/SKILL.md",
+      "packaged": "skills/harness-operator-brief/SKILL.md",
+      "source_git_blob_sha256": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51",
+      "packaged_sha256": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51",
+      "loaded_sha256": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/harness-orient/scripts/orient.py",
+      "packaged": "skills/harness-orient/scripts/orient.py",
+      "source_git_blob_sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
+      "packaged_sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
+      "loaded_sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/harness-orient/skill-contract.json",
+      "packaged": "skills/harness-orient/skill-contract.json",
+      "source_git_blob_sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+      "packaged_sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+      "loaded_sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/harness-orient/SKILL.md",
+      "packaged": "skills/harness-orient/SKILL.md",
+      "source_git_blob_sha256": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf",
+      "packaged_sha256": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf",
+      "loaded_sha256": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/setup/references/environment.md",
+      "packaged": "skills/setup/references/environment.md",
+      "source_git_blob_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+      "packaged_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+      "loaded_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/setup/SKILL.md",
+      "packaged": "skills/setup/SKILL.md",
+      "source_git_blob_sha256": "68b3270b2ed4b8ad3651b6ff2ad737a425f8e7e3034df7fc065fb4e0feb03271",
+      "packaged_sha256": "68b3270b2ed4b8ad3651b6ff2ad737a425f8e7e3034df7fc065fb4e0feb03271",
+      "loaded_sha256": "68b3270b2ed4b8ad3651b6ff2ad737a425f8e7e3034df7fc065fb4e0feb03271",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/claude-code/.claude-plugin/plugin.json",
+      "packaged": ".claude-plugin/plugin.json",
+      "source_git_blob_sha256": "d6ebebb168a498e9b268d519fa94aea032ff7124ddfac0bad92343e6ce87725f",
+      "packaged_sha256": "d6ebebb168a498e9b268d519fa94aea032ff7124ddfac0bad92343e6ce87725f",
+      "loaded_sha256": "d6ebebb168a498e9b268d519fa94aea032ff7124ddfac0bad92343e6ce87725f",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/claude-code/hooks/guard.txt",
+      "packaged": "hooks/guard.txt",
+      "source_git_blob_sha256": "27a7285fd2135dc9d901cdc86389ebe162f8ba908ca56bc0eefc45acdf03aad0",
+      "packaged_sha256": "27a7285fd2135dc9d901cdc86389ebe162f8ba908ca56bc0eefc45acdf03aad0",
+      "loaded_sha256": "27a7285fd2135dc9d901cdc86389ebe162f8ba908ca56bc0eefc45acdf03aad0",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/claude-code/hooks/hooks.json",
+      "packaged": "hooks/hooks.json",
+      "source_git_blob_sha256": "6439357461262516af3914241b8054d33240bc4d34e516b2c9de2bc57d566390",
+      "packaged_sha256": "6439357461262516af3914241b8054d33240bc4d34e516b2c9de2bc57d566390",
+      "loaded_sha256": "6439357461262516af3914241b8054d33240bc4d34e516b2c9de2bc57d566390",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/claude-code/README.md",
+      "packaged": "README.md",
+      "source_git_blob_sha256": "c96939974873b2df43edb632a6a9b413d385af6672717dca4d340f575c02d05b",
+      "packaged_sha256": "c96939974873b2df43edb632a6a9b413d385af6672717dca4d340f575c02d05b",
+      "loaded_sha256": "c96939974873b2df43edb632a6a9b413d385af6672717dca4d340f575c02d05b",
+      "all_equal": true
+    },
+    {
+      "source": "plugins/verity-plane/claude-code/scripts/binding.py",
+      "packaged": "scripts/binding.py",
+      "source_git_blob_sha256": "034a6945f09af1bc12cceb5f966490bbf59e3bf623ed521b689c146ab00ef04a",
+      "packaged_sha256": "034a6945f09af1bc12cceb5f966490bbf59e3bf623ed521b689c146ab00ef04a",
+      "loaded_sha256": "034a6945f09af1bc12cceb5f966490bbf59e3bf623ed521b689c146ab00ef04a",
+      "all_equal": true
     }
   ],
-  "scope": "All selected Claude/shared asset Git blobs match packaged and loaded baseline bytes. Fault variants are separately labeled disposable mutations. This evidence commit and observer/report changes do not alter production assets."
+  "scope": "Current baseline assets only. Earlier attempt identities remain historical; fault mutations are labeled separately. No qualification inferred."
 }

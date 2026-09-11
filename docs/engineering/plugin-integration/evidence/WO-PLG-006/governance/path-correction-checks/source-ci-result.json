@@ -1,0 +1,127 @@
+{
+  "observed_at": "2026-09-11T20:09:30.066676+00:00",
+  "pull_request": {
+    "baseRefName": "main",
+    "baseRefOid": "78cd64df7c130a6f42ab357836093db30f710753",
+    "headRefName": "work/plugin-claude-adapter",
+    "headRefOid": "fd2419f4c26b9ba4d4a97f85b7d2b08da72b8626",
+    "state": "OPEN",
+    "url": "https://github.com/mmzen/se_harness/pull/456"
+  },
+  "checks": [
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34641960207/job/103405304132",
+      "name": "Retain verified integration package",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34641960207/job/103405020765",
+      "name": "Verify integration package (Linux)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34641960207/job/103405020717",
+      "name": "Verify integration package (Windows)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34641960207/job/103404721280",
+      "name": "Build deterministic integration package",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34641960207/job/103404102996",
+      "name": "Upgrade rehearsal (Windows)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34641960207/job/103404103008",
+      "name": "Upgrade rehearsal (Linux)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34641960207/job/103403937902",
+      "name": "Candidate package evidence",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/runs/103403838937",
+      "name": "CodeQL",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34641960249/job/103403691015",
+      "name": "Rehearse the qualification of the release record / Qualify and replay (release-record)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34641960207/job/103403626182",
+      "name": "Candidate source evidence",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34641960249/job/103403626272",
+      "name": "Select the release record to rehearse",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34641960249/job/103403626370",
+      "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34641960130/job/103403625873",
+      "name": "Predecessor evaluator assessment",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34641960085/job/103403625697",
+      "name": "validate",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34641955502/job/103403614084",
+      "name": "Analyze (actions)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34641955502/job/103403614326",
+      "name": "Analyze (python)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34641955502/job/103403614301",
+      "name": "Analyze (javascript-typescript)",
+      "state": "SUCCESS"
+    }
+  ],
+  "runs": {
+    "34641960207": {
+      "head_sha": "fd2419f4c26b9ba4d4a97f85b7d2b08da72b8626",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "34641960249": {
+      "head_sha": "fd2419f4c26b9ba4d4a97f85b7d2b08da72b8626",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "34641960130": {
+      "head_sha": "fd2419f4c26b9ba4d4a97f85b7d2b08da72b8626",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "34641960085": {
+      "head_sha": "fd2419f4c26b9ba4d4a97f85b7d2b08da72b8626",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "34641955502": {
+      "head_sha": "fd2419f4c26b9ba4d4a97f85b7d2b08da72b8626",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  },
+  "all_reported_checks_successful": true,
+  "scope": "Observed CI outcomes at this exact head; no assurance decision or merge"
+}

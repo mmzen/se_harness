@@ -16,6 +16,9 @@ The failing helper and workflow lie outside WO-PLG-006's execution scope. No
 shared cleanup, workflow or managed-control change is made here. Investigation
 of the leftover tree/processes or a separately authorized rehearsal correction
 is required; this failure cannot be waived by adapter test results.
+This is an unassessed cross-scope observation concerning rehearsal ownership
+under WO-ECP-010 and timing instrumentation under WO-CIP-009, not a formal
+assessment of either work order.
 
 Captures used `gh api repos/mmzen/se_harness/actions/jobs/103400106532` and
 the same URL plus `/logs --allow-escape-sequences`. The first log request was
@@ -23,3 +26,9 @@ rejected by gh's terminal-escape output check; the second captured it locally.
 `job-log-capture.json` preserves the original captured text and SHA-256; `job.log`
 is a readable projection stripping terminal escapes/trailing whitespace. No raw
 HTTP byte identity is claimed. These were read-only GitHub API requests.
+
+Later source head fd2419f4 passed both Linux and Windows upgrade rehearsals
+(jobs 103404103008 and 103404102996 in run 34641960207), as retained in
+`../path-correction-checks/source-ci-result.json`. No rehearsal/cleanup code
+changed. The previous failure remains historical evidence with its cause
+unconfirmed; these later passing executions do not constitute a waiver.

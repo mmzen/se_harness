@@ -22,3 +22,5 @@ captured process stdout/stderr strings, remain unchanged in commands.json.
 The final readable stderr projections trim empty trailing separator lines in
 C06/C08/C11 and acceptance-04 C06/C08. Raw per-command stdout/stderr remains
 unchanged in commands.json; the canonical projections are readability copies.
+
+Acceptance-06 readable stderr projections trim trailing empty separators: acceptance-06/C01/stderr.txt, acceptance-06/C02/stderr.txt, acceptance-06/C03/stderr.txt, acceptance-06/C05/stderr.txt, acceptance-06/C06/stderr.txt, acceptance-06/C08/stderr.txt, acceptance-06/C09/stderr.txt, acceptance-06/C11/stderr.txt, acceptance-06/C12/stderr.txt. Per-command captures in commands.json remain unchanged.

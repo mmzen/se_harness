@@ -1,37 +1,33 @@
 {
-  "case": "C04",
-  "expected": [
-    "Accepted inline command returns PreToolUse denial for malformed JSON and missing required fields."
-  ],
-  "observed": [
-    {
-      "direct_command_calibration": true,
-      "denials": [
-        true,
-        true,
-        true,
-        true
-      ]
-    }
-  ],
+  "expected": "Accepted inline command returns PreToolUse denial for malformed JSON and missing required fields.",
+  "observed": {
+    "direct_command_calibration": true,
+    "denials": [
+      true,
+      true,
+      true,
+      true
+    ]
+  },
   "conclusion": "pass",
   "qualified": false,
-  "observation_complete": true,
-  "enforcement_result": "only the demonstrated case behavior",
   "exit_status": [
-    [
-      0,
-      0,
-      0,
-      0
-    ]
+    0,
+    0,
+    0,
+    0
   ],
   "source_evidence": [
-    "acceptance-04/C04/actions.txt",
-    "acceptance-04/C04/stdout.txt",
-    "acceptance-04/C04/stderr.txt",
-    "acceptance-04/C04/commands.json",
-    "acceptance-04/C04/observations.json"
+    "acceptance-06/C04/actions.txt",
+    "acceptance-06/C04/stdout.txt",
+    "acceptance-06/C04/stderr.txt",
+    "acceptance-06/C04/commands.json",
+    "acceptance-06/C04/observations.json"
   ],
-  "assessment_policy": "C10/C11 remain fail and unqualified despite completed negative experiments. C12 pass means rejection, not enforcement. Earlier derived observations remain unchanged; reassessment uses actual structured host messages."
+  "capture_policy": "sanitized public observations; raw host debug stays in disposable sandbox",
+  "case": "C04",
+  "candidate_source_commit": "fd2419f4c26b9ba4d4a97f85b7d2b08da72b8626",
+  "package_sha256": "f11d94139ad7e6194147c32a80a070f34f6761900a8c737aec354ec9b447d7f6",
+  "observation_complete": true,
+  "source_paths_relative_to": "evidence/WO-PLG-006"
 }
