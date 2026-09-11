@@ -298,8 +298,6 @@ class IdentifierAllocationTests(unittest.TestCase):
         self.assertEqual("DEC-PRD-002", self.allocate("decision")[0])
 
     def test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref(self) -> None:
-        import shutil
-
         from se_harness.artifact_layout import create_artifact
         from se_harness.installer import HarnessError
 
@@ -310,7 +308,7 @@ class IdentifierAllocationTests(unittest.TestCase):
             create_artifact(self.root, domain="product", artifact_type="requirement", artifact_id="REQ-PRD-007", dry_run=True)
         change = create_artifact(self.root, domain="product", artifact_type="requirement", artifact_id=None, dry_run=True)
         self.assertEqual("REQ-PRD-003", change.allocated_id)
-        shutil.rmtree(self.root / ".git")
+        (self.root / ".git").rename(self.root / ".git-retained")
         with self.assertRaisesRegex(HarnessError, "WEX-ECP-013"):
             self.allocate()
 
