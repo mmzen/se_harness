@@ -1,0 +1,24 @@
+{
+  "classification": "Explicit operator scope decision; not a lifecycle or assurance decision",
+  "artifact": "WO-PLG-017",
+  "decision_right": "DR-REMEDIATION-SCOPE",
+  "accountable_role": "engineering-owner",
+  "operator_statement": "i approve extension of WO-PLG-017",
+  "recorded_at": "2026-09-11T06:00:14.225075+00:00",
+  "reviewed_commit": "e9c256eb49d27f82e60543b7b3ca24f43a5129be",
+  "proposal_path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/scope-extension-plan.json",
+  "proposal_sha256": "1927a7d61c7d6357e61047f427c0d2f1fb8e456d32dd1698efc01c7bba6f9538",
+  "added_source_paths": [
+    "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json"
+  ],
+  "authorized_action": "Continue the existing delegated repair with the one exact supplemental move, immutable byte/map retention and deeper staging checks.",
+  "unchanged_lifecycle_state": "in_progress",
+  "not_authorized": [
+    "Aggregate VREC preparation",
+    "Assurance",
+    "Supersession",
+    "Release",
+    "PR merge"
+  ],
+  "effect_at_recording": "Scope amendment only; supplemental payload has not moved."
+}

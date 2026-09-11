@@ -1,6 +1,6 @@
 # Proposed extension of WO-PLG-017
 
-**Awaiting engineering-owner approval. No additional payload has moved.**
+**Approved by the engineering owner on 2026-09-11.** The [decision receipt](approval/scope-extension.json) records the operator's exact instruction. Implementation and acceptance follow separately; the original proposal JSON remains unchanged.
 
 The authorized 55-file relocation passes a fresh ordinary Windows checkout,
 byte reconciliation and tamper tests. PR449 at `ed31a520964f81627c9c5b428b68968caa6282e7` now fails later:

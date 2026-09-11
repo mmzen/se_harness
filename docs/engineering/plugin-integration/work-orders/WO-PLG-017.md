@@ -5,7 +5,7 @@ title = "Portable retention of evidence-skill test output"
 status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-10"
-updated = "2026-09-10"
+updated = "2026-09-11"
 
 [assurance]
 commit_bound_verification = "required"
@@ -17,6 +17,7 @@ class = "execution"
 
 [execution_scope]
 paths = [
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json",
   "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/",
   "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/",
   "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/",
@@ -61,6 +62,22 @@ The released evaluator subsequently applied the delegated start; see start/ in
 the retained evidence. This approval does not authorize assurance, supersession,
 integration, or preparation of an aggregate verification record.
 
+## Scope amendment approved on 2026-09-11
+
+The operator explicitly stated "i approve extension of WO-PLG-017", exercising
+DR-REMEDIATION-SCOPE as engineering-owner for the reviewed
+[one-file extension](../evidence/WO-PLG-017/scope-extension-plan.json).
+Its SHA-256 is `1927a7d61c7d6357e61047f427c0d2f1fb8e456d32dd1698efc01c7bba6f9538`.
+The [decision receipt](../evidence/WO-PLG-017/approval/scope-extension.json)
+records the exact additional source path and unchanged in_progress state.
+
+Move that one JSON to native/0056.json, preserve its bytes and a separate pinned
+supplemental map. Keep the original 55-file plan/map unchanged. Check the existing
+250-character ordinary-checkout budget and the separate 259-character deeper
+staging profile. Actually export and stage at the derived 77-character root with
+long paths disabled, then require the existing Windows rehearsal and downstream
+integration checks. This extension leaves all previous decision boundaries intact.
+
 ## Objective
 
 Make the WO-PLG-011 evidence checkout work on the existing Windows CI runner
@@ -88,7 +105,8 @@ from moving a file.
 ## Authorized decision envelope
 
 After approval and start, implement only the declared relocation, its checker and
-evidence. Proposed paths and original hashes are fixed by path-plan.json. Stop
+evidence. Original paths/hashes are fixed by path-plan.json; the one additional
+path/hash is fixed by the separately approved scope-extension-plan.json. Stop
 for a new scope decision if another path or behavior needs changing.
 
 ## Constraints
