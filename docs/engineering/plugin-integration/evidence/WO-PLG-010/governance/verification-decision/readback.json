@@ -1,0 +1,34 @@
+{
+  "record": "VREC-PLG-007",
+  "status": "verified",
+  "verified_by": "assurance-owner",
+  "verified_at": "2026-09-11T08:32:14Z",
+  "candidate": "398538ef6d11481f13c11bed639eb585963e2afb",
+  "evidence_file_count": 69,
+  "record_sha256": "4e2d590807dca0c319826c139db9f4f171ae72dbe8ebb376b941eb7452b81a40",
+  "all_selected_evidence_read_from_bound_candidate": true,
+  "current_evidence_unchanged_from_ready_head": true,
+  "current_files_identical_to_candidate": 68,
+  "existing_post_candidate_receipt_refresh": [
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/WO-PLG-010-handoff.md",
+      "candidate_header": {
+        "artifact": "WO-PLG-010",
+        "checkpoint": "handoff",
+        "formal_snapshot_sha256": "f0ff2e1e62b6ecdb5cf68ae9a66cd2b22f4e237229b594e22bf08bdc25cd719f",
+        "rebound_at": "2026-09-10T19:19:54Z"
+      },
+      "ready_head_header": {
+        "artifact": "WO-PLG-010",
+        "checkpoint": "handoff",
+        "formal_snapshot_sha256": "9eb77372a7aac9337a4e4ccd6ef73757ebea3a0565442f444c7efbf9cdf693bf",
+        "rebound_at": "2026-09-10T19:23:09Z"
+      },
+      "meaning": "The prepared record binds the original candidate bytes. The later receipt refresh is preserved without rebinding the VREC."
+    }
+  ],
+  "preparation_fields_and_evaluator_sidecar_unchanged": true,
+  "work_order_unchanged": true,
+  "only_selected_record_changed_before_receipts": true,
+  "candidate_is_ancestor": true
+}

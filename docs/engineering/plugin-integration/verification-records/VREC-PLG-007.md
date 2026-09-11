@@ -2,10 +2,10 @@
 id = "VREC-PLG-007"
 type = "verification_record"
 title = "Verification candidate for WO-PLG-010"
-status = "ready"
+status = "verified"
 owners = ["delegated-executor"]
 created = "2026-09-10"
-updated = "2026-09-10"
+updated = "2026-09-11"
 commit = "398538ef6d11481f13c11bed639eb585963e2afb"
 git_object_format = "sha1"
 worktree_state = "clean"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/plugin-integration/evidence/WO-PLG-010/READM
 evaluator_evidence_path = "docs/engineering/plugin-integration/evidence/VREC-PLG-007-evaluator.json"
 evaluator_evidence_sha256 = "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
 
+verified_at = "2026-09-11T08:32:14Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-PLG-010"]
 conforms_to = ["VER-PLG-010"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-11T08:32:14Z"
+decided_by = "assurance-owner"
+reason = "On 2026-09-11 the operator stated \"i verify VREC-PLG-007\". Record this explicit DR-VREC-DECIDE assurance-owner decision for VREC-PLG-007, exact candidate 398538ef6d11481f13c11bed639eb585963e2afb, under VER-PLG-010 and its 69 selected evidence files. The retained observations and disclosed Windows fixture, platform and host-coverage limits define the verification scope. Candidate identity, preparation provenance and evidence remain fixed. This selects only VREC-PLG-007 from ready to verified; it does not change WO-PLG-010 or another record, authorize an integration scope, or perform release or PR merge."
 +++
 
 # Verification Record Candidate

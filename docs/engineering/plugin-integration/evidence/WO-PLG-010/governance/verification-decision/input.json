@@ -1,0 +1,523 @@
+{
+  "operator_quote": "i verify VREC-PLG-007",
+  "actor": "assurance-owner",
+  "decision_right": "DR-VREC-DECIDE",
+  "record": "VREC-PLG-007",
+  "candidate": "398538ef6d11481f13c11bed639eb585963e2afb",
+  "head_before_decision": "b319bffd383d010de5b24640a667a61874b9d2ab",
+  "record_before_sha256": "7244d9227e812a3ad02a5a94d1c3c2a83083586c5b2ace9c739308f9aa8a11a5",
+  "bound_evidence": [
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/README.md",
+      "candidate_bytes": 4685,
+      "candidate_sha256": "3e806aa9a7c0c4bd0bcbe1cfb208e0ce8179f73d73a2a52393b6aef202b1e0d0",
+      "ready_head_sha256": "3e806aa9a7c0c4bd0bcbe1cfb208e0ce8179f73d73a2a52393b6aef202b1e0d0",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/WO-PLG-010-handoff.md",
+      "candidate_bytes": 1761,
+      "candidate_sha256": "d0af712c1051ded906fc2212d8087e0b0ba3972482cdd56fd8ca606539a21a56",
+      "ready_head_sha256": "0ddd5695e26c7628f66ffed0fb8616505c31ebe27ab0c92d3eaed09f81590e12",
+      "current_matches_candidate": false
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/REPORT.md",
+      "candidate_bytes": 4915,
+      "candidate_sha256": "e5ba851cec3e76f6322369c52729b33fbb78ff98b5c14d4001c147f6dcd75732",
+      "ready_head_sha256": "e5ba851cec3e76f6322369c52729b33fbb78ff98b5c14d4001c147f6dcd75732",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/behavior-evidence/candidate-identities.json",
+      "candidate_bytes": 891,
+      "candidate_sha256": "29c7eb3caa7c02eab0f86636d489a0ea540159c2c188453958336d3e051b04e4",
+      "ready_head_sha256": "29c7eb3caa7c02eab0f86636d489a0ea540159c2c188453958336d3e051b04e4",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/behavior-evidence/chg01.json",
+      "candidate_bytes": 1318,
+      "candidate_sha256": "7d32c4516831884040472a7d852f5c2d328b9f68a5803dddca28f060941db2f7",
+      "ready_head_sha256": "7d32c4516831884040472a7d852f5c2d328b9f68a5803dddca28f060941db2f7",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/behavior-evidence/chg02.json",
+      "candidate_bytes": 2937,
+      "candidate_sha256": "c38ee7e7d01d80549302a9c9f7516a9803b8a7708d9b1df773f8fdfacf119ced",
+      "ready_head_sha256": "c38ee7e7d01d80549302a9c9f7516a9803b8a7708d9b1df773f8fdfacf119ced",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/behavior-evidence/chg03.json",
+      "candidate_bytes": 725,
+      "candidate_sha256": "b8f5d21c243d40919b5a9347e264cd1bb573a977d2beb71e46f7def29a84629f",
+      "ready_head_sha256": "b8f5d21c243d40919b5a9347e264cd1bb573a977d2beb71e46f7def29a84629f",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/behavior-evidence/chg04.json",
+      "candidate_bytes": 1772,
+      "candidate_sha256": "4d00dae174f803eba2f8cbb86149cefc9942d89ecb9db65754b06b00dd1a4cbc",
+      "ready_head_sha256": "4d00dae174f803eba2f8cbb86149cefc9942d89ecb9db65754b06b00dd1a4cbc",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/behavior-evidence/chg05.json",
+      "candidate_bytes": 847,
+      "candidate_sha256": "45e59589629164e1a717560e2efe20b18d9d1ade96ed6bff873169d4b82277d5",
+      "ready_head_sha256": "45e59589629164e1a717560e2efe20b18d9d1ade96ed6bff873169d4b82277d5",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/behavior-evidence/chg06.json",
+      "candidate_bytes": 1125,
+      "candidate_sha256": "3548940b35d91ac8cd0b3a2ae6547c959d0726e0a70eaff4c46b92c1c736adc0",
+      "ready_head_sha256": "3548940b35d91ac8cd0b3a2ae6547c959d0726e0a70eaff4c46b92c1c736adc0",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/behavior-evidence/chg07.json",
+      "candidate_bytes": 443,
+      "candidate_sha256": "3c9f205e339777de0b2dd23bffcd915596d15a6272858ea66b8e0114d3c78368",
+      "ready_head_sha256": "3c9f205e339777de0b2dd23bffcd915596d15a6272858ea66b8e0114d3c78368",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/behavior-evidence/chg08.json",
+      "candidate_bytes": 1200,
+      "candidate_sha256": "b5833f8abeb851653f24daf37e337313622998aabbe72c633a73c32fc77a4bf8",
+      "ready_head_sha256": "b5833f8abeb851653f24daf37e337313622998aabbe72c633a73c32fc77a4bf8",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/behavior-evidence/chg09.json",
+      "candidate_bytes": 804,
+      "candidate_sha256": "81477c837703549121aad7338d784b2ef76d6faf4871a1fff5d1f7efa61633ba",
+      "ready_head_sha256": "81477c837703549121aad7338d784b2ef76d6faf4871a1fff5d1f7efa61633ba",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/behavior-evidence/chg10.json",
+      "candidate_bytes": 1595,
+      "candidate_sha256": "4a5ca85e84fd853bb545a920d75e748911e837f429e0defb22483ba7dc7c4c7d",
+      "ready_head_sha256": "4a5ca85e84fd853bb545a920d75e748911e837f429e0defb22483ba7dc7c4c7d",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/behavior-evidence/final-hashes.json",
+      "candidate_bytes": 30855,
+      "candidate_sha256": "4312e86ea15bfd5c919387e6379aa69f323a73b56afb35f5829635e704a0444b",
+      "ready_head_sha256": "4312e86ea15bfd5c919387e6379aa69f323a73b56afb35f5829635e704a0444b",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/behavior-evidence/prompt-counts.json",
+      "candidate_bytes": 394,
+      "candidate_sha256": "f9673cc32092288182133f33a4ff94a81346f592cd39d379c9d1a810840d70db",
+      "ready_head_sha256": "f9673cc32092288182133f33a4ff94a81346f592cd39d379c9d1a810840d70db",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/behavior-evidence/summary.json",
+      "candidate_bytes": 1048,
+      "candidate_sha256": "45e0c62ca1cce646322d22f26ca4010c03c225119d5db613bd98603d337cacd6",
+      "ready_head_sha256": "45e0c62ca1cce646322d22f26ca4010c03c225119d5db613bd98603d337cacd6",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/evidence-manifest.json",
+      "candidate_bytes": 12704,
+      "candidate_sha256": "67cff0f98c88dacff516e2f11675e678da488585d9b0140da40bec90533fc49e",
+      "ready_head_sha256": "67cff0f98c88dacff516e2f11675e678da488585d9b0140da40bec90533fc49e",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/fixed-inputs.json",
+      "candidate_bytes": 3031,
+      "candidate_sha256": "dfb07deedbc94b095e62db50cc984149555e65d0bdf843f8998620768d88ecc7",
+      "ready_head_sha256": "dfb07deedbc94b095e62db50cc984149555e65d0bdf843f8998620768d88ecc7",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/oracle.md",
+      "candidate_bytes": 5775,
+      "candidate_sha256": "96ad8e174bbd9abb32f3ce2901dd4e9fdbe6152bbf8d94da7c86b776629bd17d",
+      "ready_head_sha256": "96ad8e174bbd9abb32f3ce2901dd4e9fdbe6152bbf8d94da7c86b776629bd17d",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/retention-inventory.json",
+      "candidate_bytes": 15712,
+      "candidate_sha256": "c176e3bdec442fd2f3da82e655c017f947ead1c40c067d475331a95ea9684482",
+      "ready_head_sha256": "c176e3bdec442fd2f3da82e655c017f947ead1c40c067d475331a95ea9684482",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/independent-windows/trace-groups.json",
+      "candidate_bytes": 3354,
+      "candidate_sha256": "979d496a95490c4664ba389e6ba28292686147a0cf3ade16275584769a3b4c89",
+      "ready_head_sha256": "979d496a95490c4664ba389e6ba28292686147a0cf3ade16275584769a3b4c89",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/linux-replay-attempt1/ATTEMPT-NOTE.md",
+      "candidate_bytes": 643,
+      "candidate_sha256": "76925bd7bf4f7cd9d8127d3c230187b1dd30461114032800757e4edc545d1547",
+      "ready_head_sha256": "76925bd7bf4f7cd9d8127d3c230187b1dd30461114032800757e4edc545d1547",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/linux-replay-attempt1/retention-inventory.json",
+      "candidate_bytes": 5743,
+      "candidate_sha256": "195a6e36dd44fb8e7715d4ba64b0de8e25e59eb2ada0d32b4612839bf8db8bbc",
+      "ready_head_sha256": "195a6e36dd44fb8e7715d4ba64b0de8e25e59eb2ada0d32b4612839bf8db8bbc",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/linux-replay-attempt1/summary.json",
+      "candidate_bytes": 37854,
+      "candidate_sha256": "9c9b82bf7a65873fd60da93b794463579df310f23a8b712cc4c743c5c9b515ca",
+      "ready_head_sha256": "9c9b82bf7a65873fd60da93b794463579df310f23a8b712cc4c743c5c9b515ca",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/linux-replay-attempt2/REPLAY-NOTE.md",
+      "candidate_bytes": 2286,
+      "candidate_sha256": "44400b68bffff0df0b7984c6c0ec8fdd0f1494345fae2444a21ccda0d63ef205",
+      "ready_head_sha256": "44400b68bffff0df0b7984c6c0ec8fdd0f1494345fae2444a21ccda0d63ef205",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/linux-replay-attempt2/inspection.json",
+      "candidate_bytes": 1887,
+      "candidate_sha256": "80fc82b88bb8fff6a83bc18eb11e0e70343f83e99abda0c4b407b60d1ddb6e5b",
+      "ready_head_sha256": "80fc82b88bb8fff6a83bc18eb11e0e70343f83e99abda0c4b407b60d1ddb6e5b",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/linux-replay-attempt2/retention-inventory.json",
+      "candidate_bytes": 9533,
+      "candidate_sha256": "daede9878775f48424edbb0ca13f722ab7dc21d8727a2ec22a8acabbf1ca8318",
+      "ready_head_sha256": "daede9878775f48424edbb0ca13f722ab7dc21d8727a2ec22a8acabbf1ca8318",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/linux-replay-attempt2/summary.json",
+      "candidate_bytes": 81863,
+      "candidate_sha256": "ad5293a1e625c8f68e3a4c5de1435c28f4f6edd1eb4975315ce9ca74c7391ca4",
+      "ready_head_sha256": "ad5293a1e625c8f68e3a4c5de1435c28f4f6edd1eb4975315ce9ca74c7391ca4",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/live-guard-linux-016-02/chg07-guard.json",
+      "candidate_bytes": 5304,
+      "candidate_sha256": "54ba67e355da85b3a9f3df5bc1348798f0d242bb2c17f67885a5ffa68096de94",
+      "ready_head_sha256": "54ba67e355da85b3a9f3df5bc1348798f0d242bb2c17f67885a5ffa68096de94",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/live-guard-linux-016-02/commands.json",
+      "candidate_bytes": 26242,
+      "candidate_sha256": "bdf713a4817ab987fff5fba5deb23c45882f8b7c5c35e3bfceaae993929856c7",
+      "ready_head_sha256": "bdf713a4817ab987fff5fba5deb23c45882f8b7c5c35e3bfceaae993929856c7",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/live-guard-win-016-02/chg07-guard.json",
+      "candidate_bytes": 5301,
+      "candidate_sha256": "c21e953287e5ef6969b207cf563655370334f1ee29f1700d6642d6ba9db4bab9",
+      "ready_head_sha256": "c21e953287e5ef6969b207cf563655370334f1ee29f1700d6642d6ba9db4bab9",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/live-guard-win-016-02/commands.json",
+      "candidate_bytes": 32118,
+      "candidate_sha256": "23472cf1681a817669d4b59391cc74221924949849afd0da2cc832d81f29d2ad",
+      "ready_head_sha256": "23472cf1681a817669d4b59391cc74221924949849afd0da2cc832d81f29d2ad",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/live-guard-win-05/chg07-guard.json",
+      "candidate_bytes": 5301,
+      "candidate_sha256": "a000c87bb3396054dfe1830f365ee74c11f7f88500e9b3773311b185c4046aff",
+      "ready_head_sha256": "a000c87bb3396054dfe1830f365ee74c11f7f88500e9b3773311b185c4046aff",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/live-guard-win-05/commands.json",
+      "candidate_bytes": 31742,
+      "candidate_sha256": "55301c2b9c1294a55a072f3e09b6813170f6099a1eef157d2507f0a7eb6e10a4",
+      "ready_head_sha256": "55301c2b9c1294a55a072f3e09b6813170f6099a1eef157d2507f0a7eb6e10a4",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/runtime-linux-016/observations.json",
+      "candidate_bytes": 1579,
+      "candidate_sha256": "21c9ee8ccabd092d446ddf722a8363e5deccb7a85f15b788fe4332b17ff9780d",
+      "ready_head_sha256": "21c9ee8ccabd092d446ddf722a8363e5deccb7a85f15b788fe4332b17ff9780d",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/acceptance/runtime-win-016/observations.json",
+      "candidate_bytes": 1573,
+      "candidate_sha256": "fcfa20bf47fcc12d5f62a46448f88d0225bf28f6d0823094bf824bcea21dd743",
+      "ready_head_sha256": "fcfa20bf47fcc12d5f62a46448f88d0225bf28f6d0823094bf824bcea21dd743",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/checks/candidate-doctor/command.json",
+      "candidate_bytes": 359,
+      "candidate_sha256": "69f47996b56e9500a88d4b671e95645a8dc6ac86d71ea052e2887708dc3dbe5d",
+      "ready_head_sha256": "69f47996b56e9500a88d4b671e95645a8dc6ac86d71ea052e2887708dc3dbe5d",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/checks/candidate-help/command.json",
+      "candidate_bytes": 334,
+      "candidate_sha256": "2cc51ed5d3dc4416f41b5232a8cc431234e9646d777e0dbf8ab7e42f37a7c40a",
+      "ready_head_sha256": "2cc51ed5d3dc4416f41b5232a8cc431234e9646d777e0dbf8ab7e42f37a7c40a",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/checks/candidate-suite-retry/command.json",
+      "candidate_bytes": 348,
+      "candidate_sha256": "6a357876cb9593532b5d34d88a95cccee5714a24f690630927faf159e1ea3d7d",
+      "ready_head_sha256": "6a357876cb9593532b5d34d88a95cccee5714a24f690630927faf159e1ea3d7d",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/checks/candidate-suite/command.json",
+      "candidate_bytes": 348,
+      "candidate_sha256": "f616595455f8d9443d6a9b8ed974b85059561582958efdf3d27635c091849f17",
+      "ready_head_sha256": "f616595455f8d9443d6a9b8ed974b85059561582958efdf3d27635c091849f17",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/checks/distributions/command.json",
+      "candidate_bytes": 364,
+      "candidate_sha256": "1470b19fd62afa12898a7f5671bd475b1ff1ccead55a423d562068aa628c92fd",
+      "ready_head_sha256": "1470b19fd62afa12898a7f5671bd475b1ff1ccead55a423d562068aa628c92fd",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/checks/final/chg-final-doctor.json",
+      "candidate_bytes": 25718,
+      "candidate_sha256": "b8f10919f53c6c159a6c6a45979658f3ba7859bb61cccda3fc303b0dfb5b081a",
+      "ready_head_sha256": "b8f10919f53c6c159a6c6a45979658f3ba7859bb61cccda3fc303b0dfb5b081a",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/checks/final/chg-final-preflight.json",
+      "candidate_bytes": 1337,
+      "candidate_sha256": "17e85fc24b72fa74bd36a2a80800e1dfa6a8d485b0835a4220dc130df6537422",
+      "ready_head_sha256": "17e85fc24b72fa74bd36a2a80800e1dfa6a8d485b0835a4220dc130df6537422",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/checks/final/chg-final-scope.json",
+      "candidate_bytes": 55419,
+      "candidate_sha256": "d4eb17c56bddb4b6c0a8f25f9aa3a05f86b70f6b7766396a5f64eb5233bb3c5c",
+      "ready_head_sha256": "d4eb17c56bddb4b6c0a8f25f9aa3a05f86b70f6b7766396a5f64eb5233bb3c5c",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/checks/final/chg-final-validate.json",
+      "candidate_bytes": 303399,
+      "candidate_sha256": "2001858b377f6c37580f95fe698cc66bbe8da01f19875a0a1179a9e4cbe5cb5f",
+      "ready_head_sha256": "2001858b377f6c37580f95fe698cc66bbe8da01f19875a0a1179a9e4cbe5cb5f",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/checks/qualification-limits.json",
+      "candidate_bytes": 904,
+      "candidate_sha256": "1b25eb3171fef333596908f64b8bbb9031076c89b42c3f3ed9610046f94e6298",
+      "ready_head_sha256": "1b25eb3171fef333596908f64b8bbb9031076c89b42c3f3ed9610046f94e6298",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/checks/skill-validation/command.json",
+      "candidate_bytes": 424,
+      "candidate_sha256": "e35f5b63a529ce5d7f475e9c3852c0f6ba94e8fe511b5e2ffbff720bc421bc3a",
+      "ready_head_sha256": "e35f5b63a529ce5d7f475e9c3852c0f6ba94e8fe511b5e2ffbff720bc421bc3a",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/completion/chg-complete-applied.json",
+      "candidate_bytes": 7006,
+      "candidate_sha256": "e4b683ce8a81bcc221afca6dbbf14367e0fa6ab6dfa5d54bb6a1b8c39031cfd9",
+      "ready_head_sha256": "e4b683ce8a81bcc221afca6dbbf14367e0fa6ab6dfa5d54bb6a1b8c39031cfd9",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/completion/chg-complete-preview.json",
+      "candidate_bytes": 7018,
+      "candidate_sha256": "9c37343543a5e28f8d18bcfe19153bbbc5fc4a140a1f79f53939cea8333993da",
+      "ready_head_sha256": "9c37343543a5e28f8d18bcfe19153bbbc5fc4a140a1f79f53939cea8333993da",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/definition-delivery/definition-doctor.json",
+      "candidate_bytes": 25718,
+      "candidate_sha256": "b8f10919f53c6c159a6c6a45979658f3ba7859bb61cccda3fc303b0dfb5b081a",
+      "ready_head_sha256": "b8f10919f53c6c159a6c6a45979658f3ba7859bb61cccda3fc303b0dfb5b081a",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/definition-delivery/definition-review-preflight.json",
+      "candidate_bytes": 1334,
+      "candidate_sha256": "1f8bb11776c50ea68451554061f2368d3ae22dfc62025227bdd0e31055160a12",
+      "ready_head_sha256": "1f8bb11776c50ea68451554061f2368d3ae22dfc62025227bdd0e31055160a12",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/definition-delivery/definition-scope.json",
+      "candidate_bytes": 11542,
+      "candidate_sha256": "6da3769012d02bd0959abaede839edb7039eee1e291fd5608be30011fbc85449",
+      "ready_head_sha256": "6da3769012d02bd0959abaede839edb7039eee1e291fd5608be30011fbc85449",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/definition-delivery/definition-start-reading.json",
+      "candidate_bytes": 2296,
+      "candidate_sha256": "337219833af2cfc8d02d8864f347f663082e1ca8c34ac01939f50f614382784f",
+      "ready_head_sha256": "337219833af2cfc8d02d8864f347f663082e1ca8c34ac01939f50f614382784f",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/definition-delivery/definition-validate.json",
+      "candidate_bytes": 301743,
+      "candidate_sha256": "4a2b935912284ac0a815bb1a0b6dc0acf3112e09e5f2ed336d3db697872e6241",
+      "ready_head_sha256": "4a2b935912284ac0a815bb1a0b6dc0acf3112e09e5f2ed336d3db697872e6241",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/definition-delivery/definitions-approval-applied.json",
+      "candidate_bytes": 12067,
+      "candidate_sha256": "dc4f3bed0e0867638efe5b5b293d192c65015522c097f3c4a0c5cb6f46d1f58a",
+      "ready_head_sha256": "dc4f3bed0e0867638efe5b5b293d192c65015522c097f3c4a0c5cb6f46d1f58a",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/definition-delivery/definitions-approval-inputs.json",
+      "candidate_bytes": 560,
+      "candidate_sha256": "0b18f5d040f83a55b278729e968488e28ce76485eb674709ff95ca193f24eb04",
+      "ready_head_sha256": "0b18f5d040f83a55b278729e968488e28ce76485eb674709ff95ca193f24eb04",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/definition-delivery/definitions-approval-plan.json",
+      "candidate_bytes": 12079,
+      "candidate_sha256": "546df6596beb4731a60f370f4615b6eb6fde9c1b8608b0f3dd7f7ca198f30b82",
+      "ready_head_sha256": "546df6596beb4731a60f370f4615b6eb6fde9c1b8608b0f3dd7f7ca198f30b82",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/definition-delivery/delegated-start-preview.json",
+      "candidate_bytes": 2422,
+      "candidate_sha256": "ba36fbbaca4884119652e0a382e0465798202ff2c5ba97196c26ff7bf1f04c51",
+      "ready_head_sha256": "ba36fbbaca4884119652e0a382e0465798202ff2c5ba97196c26ff7bf1f04c51",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/definition-delivery/operator-instruction.json",
+      "candidate_bytes": 2769,
+      "candidate_sha256": "973b15b8f3a592956c46b89df895a9e699605fa7764a19d69c79d52fb00bd642",
+      "ready_head_sha256": "973b15b8f3a592956c46b89df895a9e699605fa7764a19d69c79d52fb00bd642",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/definition-delivery/work-order-approval-applied.json",
+      "candidate_bytes": 10771,
+      "candidate_sha256": "9741889797339612b78e09bed9ec811702253429b6d6048f793cf3314fe88a5a",
+      "ready_head_sha256": "9741889797339612b78e09bed9ec811702253429b6d6048f793cf3314fe88a5a",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/definition-delivery/work-order-approval-inputs.json",
+      "candidate_bytes": 141,
+      "candidate_sha256": "56bc435a13f44b942ad0dad2abfb0ba44a7579f5eb11c77b0f73ecfc0f2067c6",
+      "ready_head_sha256": "56bc435a13f44b942ad0dad2abfb0ba44a7579f5eb11c77b0f73ecfc0f2067c6",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/definition-delivery/work-order-approval-plan.json",
+      "candidate_bytes": 10783,
+      "candidate_sha256": "c6843b2a2a2224c4561abb520d6a5c9d7c124964b8ffe207f3912960cbb5159c",
+      "ready_head_sha256": "c6843b2a2a2224c4561abb520d6a5c9d7c124964b8ffe207f3912960cbb5159c",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/start/chg-start-applied.json",
+      "candidate_bytes": 8598,
+      "candidate_sha256": "547bbd57e7a2c77cfe22170306a58b9b38bcf7bf9acbd3045a65448662e1c090",
+      "ready_head_sha256": "547bbd57e7a2c77cfe22170306a58b9b38bcf7bf9acbd3045a65448662e1c090",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/start/chg-start-final.json",
+      "candidate_bytes": 7917,
+      "candidate_sha256": "f91bdac017879af56d87a160284bc21120f5d3dc5ce4fe17115f97860529f0b8",
+      "ready_head_sha256": "f91bdac017879af56d87a160284bc21120f5d3dc5ce4fe17115f97860529f0b8",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/start/chg-start-focus.json",
+      "candidate_bytes": 11743,
+      "candidate_sha256": "7aca94c5a03a49ba3e2bd57af1352354914b9e1d4e264aa5fe93a5d002ab3379",
+      "ready_head_sha256": "7aca94c5a03a49ba3e2bd57af1352354914b9e1d4e264aa5fe93a5d002ab3379",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/start/chg-start-preflight.json",
+      "candidate_bytes": 1333,
+      "candidate_sha256": "e781429f35337788eefa62e0b0136de810d1604ef1941e10d486de52441c5ea2",
+      "ready_head_sha256": "e781429f35337788eefa62e0b0136de810d1604ef1941e10d486de52441c5ea2",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/start/chg-start-preview.json",
+      "candidate_bytes": 8610,
+      "candidate_sha256": "b78b7694d6dc7faa34518e514eba3eed82be0f8119a3b3c66bddd7f816a256cd",
+      "ready_head_sha256": "b78b7694d6dc7faa34518e514eba3eed82be0f8119a3b3c66bddd7f816a256cd",
+      "current_matches_candidate": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/governance/start/selection.json",
+      "candidate_bytes": 593,
+      "candidate_sha256": "97f9d5b0f07f88610366f7cc85b696926adf65ec547df01e5b503ab9d5620c89",
+      "ready_head_sha256": "97f9d5b0f07f88610366f7cc85b696926adf65ec547df01e5b503ab9d5620c89",
+      "current_matches_candidate": true
+    }
+  ],
+  "transition_args": [
+    "transition",
+    ".",
+    "--set",
+    "VREC-PLG-007=verified",
+    "--decision",
+    "VREC-PLG-007=assurance-owner",
+    "--reason",
+    "VREC-PLG-007=On 2026-09-11 the operator stated \"i verify VREC-PLG-007\". Record this explicit DR-VREC-DECIDE assurance-owner decision for VREC-PLG-007, exact candidate 398538ef6d11481f13c11bed639eb585963e2afb, under VER-PLG-010 and its 69 selected evidence files. The retained observations and disclosed Windows fixture, platform and host-coverage limits define the verification scope. Candidate identity, preparation provenance and evidence remain fixed. This selects only VREC-PLG-007 from ready to verified; it does not change WO-PLG-010 or another record, authorize an integration scope, or perform release or PR merge.",
+    "--json"
+  ],
+  "existing_post_candidate_receipt_refresh": [
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-010/WO-PLG-010-handoff.md",
+      "candidate_header": {
+        "artifact": "WO-PLG-010",
+        "checkpoint": "handoff",
+        "formal_snapshot_sha256": "f0ff2e1e62b6ecdb5cf68ae9a66cd2b22f4e237229b594e22bf08bdc25cd719f",
+        "rebound_at": "2026-09-10T19:19:54Z"
+      },
+      "ready_head_header": {
+        "artifact": "WO-PLG-010",
+        "checkpoint": "handoff",
+        "formal_snapshot_sha256": "9eb77372a7aac9337a4e4ccd6ef73757ebea3a0565442f444c7efbf9cdf693bf",
+        "rebound_at": "2026-09-10T19:23:09Z"
+      },
+      "meaning": "The prepared record binds the original candidate bytes. The later receipt refresh is preserved without rebinding the VREC."
+    }
+  ]
+}
