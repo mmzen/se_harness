@@ -2,7 +2,7 @@
 id = "VREC-RLO-009"
 type = "verification_record"
 title = "Verification candidate for WO-RLO-009"
-status = "ready"
+status = "verified"
 owners = ["codex-preparation-actor"]
 created = "2026-09-11"
 updated = "2026-09-11"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-orchestration/evidence/WO-RLO-009/WO
 evaluator_evidence_path = "docs/engineering/release-orchestration/evidence/VREC-RLO-009-evaluator.json"
 evaluator_evidence_sha256 = "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
 
+verified_at = "2026-09-11T16:23:17Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-RLO-009"]
 conforms_to = ["VER-RLO-006"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-11T16:23:17Z"
+decided_by = "assurance-owner"
+reason = "On 2026-09-11 the operator stated: I verify VREC-RLO-009. Record this explicit DR-VREC-DECIDE assurance-owner decision for candidate c96b9f2f821e7c8a4af0d8c4122cfa0239a99453 under VER-RLO-006 and its eight retained evidence files. The accepted scope is the release artifact-discovery repair and approved fixture-only extension, with the recorded Windows and Linux results and preserved evidence. Candidate identity, preparation provenance, snapshot digest, selected evidence and evaluator binding remain fixed. This changes only VREC-RLO-009 from ready to verified; it does not change WO-RLO-009, prepare a release, merge a PR, publish or deploy."
 +++
 
 # Verification Record Candidate
