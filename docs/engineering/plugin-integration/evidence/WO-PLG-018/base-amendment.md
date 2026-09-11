@@ -1,8 +1,9 @@
 # WO-PLG-018: proposed main-baseline amendment
 
-**Awaiting approval of this amendment to WO-PLG-018 and VER-PLG-018.**
-Both artifacts retain their approved state and original bytes. No integration
-has started, and no new lifecycle decision is recorded by this proposal.
+**Approved on 2026-09-11.** The [decision receipt](base-amendment-approval.json)
+records the operator approval for both artifacts and the exact plan below.
+The WO and VER carry the dated amendment; lifecycle metadata is unchanged.
+Implementation follows through the delegated route after its gates pass.
 
 ## What changed
 

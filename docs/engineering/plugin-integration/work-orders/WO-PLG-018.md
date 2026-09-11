@@ -73,6 +73,18 @@ assurance-owner approval. Approving this WO would delegate only start, completio
 and single-WO VREC preparation through the existing execution class and gates.
 Verification and external merge remain separate operator decisions.
 
+## Baseline amendment approved on 2026-09-11
+
+The operator stated "i approve the baseline amendment to WO-PLG-018 and VER-PLG-018 in PR #451". As engineering-owner, this approves
+[plan-main.json](../evidence/WO-PLG-018/plan-main.json), SHA-256
+`eb0fa0a8e8e5e77428f45fdcde3c99f2080c318bdcb75a6425216081002feefb`, for main baseline `fc1f087371b100d5fda7a1f254ee00ebde8cbadf` and integration PR #451.
+The [decision receipt](../evidence/WO-PLG-018/base-amendment-approval.json)
+binds the reviewed packet. The original plan digest `68b59c5837e890396701e46f5e37cc391a3ebf91d9f71c736d27e50345155aaa` and its approvals
+remain historical; the amended plan now governs execution and INT01–INT06.
+All 3,177 import entries, source heads, scope and verification obligations are
+unchanged. Existing execution delegation applies through the current gates.
+Assurance of VREC-PLG-011, merge, PR closure and release remain separate decisions.
+
 ## Objective
 
 Deliver WO-PLG-010, WO-PLG-011, WO-PLG-012 and WO-PLG-017 together through one
@@ -80,11 +92,11 @@ bounded PR to main, preserving their verified implementation and decision histor
 
 ## In scope
 
-Import the exact 3,177 paths in [plan.json](../evidence/WO-PLG-018/plan.json),
-SHA-256 `68b59c5837e890396701e46f5e37cc391a3ebf91d9f71c736d27e50345155aaa`.
+Import the exact 3,177 paths in [plan-main.json](../evidence/WO-PLG-018/plan-main.json),
+SHA-256 `eb0fa0a8e8e5e77428f45fdcde3c99f2080c318bdcb75a6425216081002feefb`.
 The plan pins base main, all five PR heads, expected modes/blobs and source owners.
 
-Keep this packet's approved files on a branch from the pinned main baseline.
+Keep this packet's approved files on PR #451's branch from the amended main baseline.
 After authorized start, merge the pinned #446 head, then the pinned #444 head.
 The former already contains #445, #448 and #449 history. Add only the integration
 checker and its tests, new evidence, this WO's authorized lifecycle receipts and
@@ -121,7 +133,7 @@ new content; a conflict or different source/base requires a reviewed amendment.
 ## Expected change surface
 
 The frozen imports contain 3,171 additions and six modifications relative to
-main c0451b7694b02f140f95661b07907d4722b336cd. Only this packet, the integration
+main fc1f087371b100d5fda7a1f254ee00ebde8cbadf. Only this packet, the integration
 checker, its tests and new integration evidence may add content beyond that import.
 Proposal delivery itself contains no imported implementation changes.
 
