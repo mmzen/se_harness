@@ -1,0 +1,20 @@
+C07 actions: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | registered-shell-01/actions.txt | 1449 bytes | sha256 70d44cf2709412474dac162d7ce241ddf14cd02d110155c3428b24e9b48fb1b6
+current | registered-shell-01/empty-host-PreToolUse/actions.txt | 6650 bytes | sha256 862eb8df9aa02f477007e4353c588b4114099973c9e300030db2b8993b73170b
+current | registered-shell-01/empty-host-SessionStart/actions.txt | 6652 bytes | sha256 6a415e8aaed357ae296ff9c01e2d515df3a09404ecbf1ca029f088c034fa5003
+current | registered-shell-01/empty-positive-route-PreToolUse/actions.txt | 6636 bytes | sha256 085b0b4f180d66a786a5baa6f763390bafcb505d5f236ddc834bb5817e0a7d52
+current | registered-shell-01/empty-positive-route-SessionStart/actions.txt | 6638 bytes | sha256 6824af6542b7004336a9f2948b6808ef6952f96db28ab1657aafbc28e6dc01db
+current | registered-shell-01/excluded-route-PreToolUse/actions.txt | 6649 bytes | sha256 fad2c77fb1be0cc21deb732ad5b4acce9271a226b052e31483bb5d29b53afb87
+current | registered-shell-01/excluded-route-SessionStart/actions.txt | 6651 bytes | sha256 d2943ab2fa4ebf86e65aeeb531c0be02417c0d883ae12c7fed031279fa8867b2
+current | registered-shell-01/open-decision-PreToolUse/actions.txt | 6654 bytes | sha256 1f890df9b3e5ec61ffa526240d537f91e75dda7543b3d3efc71ec061d56d7484
+current | registered-shell-01/open-decision-SessionStart/actions.txt | 6656 bytes | sha256 0ef6603f3caf45549b1271852a45b5205afaca9dfc5dc5a3e06eb719efbc4119
+current | registered-shell-01/positive-sentinel-after/actions.txt | 6657 bytes | sha256 147474040d5564d0ef54d0bc71bbb73c059a92e8c0ec3ec9376d50918d181f3e
+current | registered-shell-01/positive-sentinel-before/actions.txt | 6657 bytes | sha256 147474040d5564d0ef54d0bc71bbb73c059a92e8c0ec3ec9376d50918d181f3e
+current | registered-shell-01/unaccepted-host-PreToolUse/actions.txt | 6657 bytes | sha256 c08482f4d7a529169b09973a00d7cc37e0f47a1eac820bd03ca465d3af4a7ea1
+current | registered-shell-01/unaccepted-host-SessionStart/actions.txt | 6659 bytes | sha256 1362b29395c7662d8298b027333d4ae35102823d2c1abca6b3b871b6e72c09ff

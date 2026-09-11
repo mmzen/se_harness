@@ -1,0 +1,138 @@
+{
+  "scope": "Independent read-only inspection of retained C02 resume/compaction ordering; no host call or qualification decision.",
+  "transcript_sha256": "d8749ee41ce816396f2623701dac9a154c1e5e6b10c8c52677eeb3d9b5007ffb",
+  "context_assessment_sha256": "52e6970356ef8000ceda893738a130adef89f88a095ad8756353dfc212fac70a",
+  "actual_fixture_body_sha256": "5b1ed562a275f5ed51a14a632b0b9a3779daebb4165e1f908db33f8241541ca2",
+  "actual_fixture_body_matches_assessor": true,
+  "resume_complete_context_observed": true,
+  "resume_context_bytes": 7901,
+  "compact_turn_id": "01a09230-1c37-7b21-8af6-4fd9d60db07e",
+  "compact_turn_completed_observed": true,
+  "post_compact_restoration_observed": false,
+  "restoration_conclusion": "unavailable: restoration turn/start was sent after compact item completion but before compact turn completion; host rejected it with ActiveTurnNotSteerable { turn_kind: Compact }.",
+  "post_compact_context_receipts": 0,
+  "ordering": [
+    {
+      "index": 8,
+      "sent_monotonic": 245031.1201341,
+      "received_monotonic": null,
+      "message": {
+        "id": 4,
+        "method": "thread/resume",
+        "params": {
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\codex-adapter-sandboxes\\accepted 001 with spaces\\repo with spaces",
+          "sandbox": "read-only",
+          "approvalPolicy": "on-request",
+          "threadId": "01a0920e-dc36-7481-8dee-83cd5cce39db"
+        }
+      }
+    },
+    {
+      "index": 14,
+      "sent_monotonic": 245031.8329196,
+      "received_monotonic": null,
+      "message": {
+        "id": 5,
+        "method": "turn/start",
+        "params": {
+          "threadId": "01a0920e-dc36-7481-8dee-83cd5cce39db",
+          "input": [
+            {
+              "type": "text",
+              "text": "Reply with READY only. Do not use tools or change files."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "index": 30,
+      "sent_monotonic": 245037.9759719,
+      "received_monotonic": null,
+      "message": {
+        "id": 6,
+        "method": "thread/compact/start",
+        "params": {
+          "threadId": "01a0920e-dc36-7481-8dee-83cd5cce39db"
+        }
+      }
+    },
+    {
+      "index": 37,
+      "sent_monotonic": null,
+      "received_monotonic": 245074.4386554,
+      "message": {
+        "method": "item/completed",
+        "params": {
+          "item": {
+            "type": "contextCompaction",
+            "id": "01a09230-1c5c-7e53-a99b-89f933f0af51"
+          },
+          "threadId": "01a0920e-dc36-7481-8dee-83cd5cce39db",
+          "turnId": "01a09230-1c37-7b21-8af6-4fd9d60db07e",
+          "completedAtMs": 1789159058074
+        },
+        "emittedAtMs": 1789159058085
+      }
+    },
+    {
+      "index": 38,
+      "sent_monotonic": 245074.4389571,
+      "received_monotonic": null,
+      "message": {
+        "id": 7,
+        "method": "turn/start",
+        "params": {
+          "threadId": "01a0920e-dc36-7481-8dee-83cd5cce39db",
+          "input": [
+            {
+              "type": "text",
+              "text": "Reply READY only. No tools or changes."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "index": 39,
+      "sent_monotonic": null,
+      "received_monotonic": 245074.4397565,
+      "message": {
+        "error": {
+          "code": -32603,
+          "message": "failed to submit turn input: ActiveTurnNotSteerable { turn_kind: Compact }"
+        },
+        "id": 7
+      }
+    },
+    {
+      "index": 41,
+      "sent_monotonic": null,
+      "received_monotonic": 245074.4501893,
+      "message": {
+        "method": "turn/completed",
+        "params": {
+          "threadId": "01a0920e-dc36-7481-8dee-83cd5cce39db",
+          "turn": {
+            "id": "01a09230-1c37-7b21-8af6-4fd9d60db07e",
+            "items": [],
+            "itemsView": "notLoaded",
+            "status": "completed",
+            "error": null,
+            "startedAt": 1789159021,
+            "completedAt": 1789159058,
+            "durationMs": 36462
+          }
+        },
+        "emittedAtMs": 1789159058096
+      }
+    }
+  ],
+  "cleanup": {
+    "pid": 3396,
+    "method": "owned Windows Job Object",
+    "active_processes": 0
+  },
+  "targets_unchanged": true,
+  "qualified": false
+}

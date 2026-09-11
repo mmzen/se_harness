@@ -1,0 +1,1 @@
+{"evidence": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\docs\\engineering\\plugin-integration\\evidence\\WO-PLG-005\\C11\\lost-active-binding-01\\restored", "thread_id": null, "turn": null, "targets_unchanged": true}

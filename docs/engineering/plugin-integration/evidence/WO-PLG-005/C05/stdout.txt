@@ -1,0 +1,13 @@
+C05 stdout: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | disabled-session-start-01/disabled/stdout.txt | 47143 bytes | sha256 1d7d9e6dc37a8567c4af1700b321c303d55d90f1000d2ffc2f695e27e5b08378
+current | disabled-session-start-01/restored-stdout.txt | 271 bytes | sha256 44b318e1bdba90f8ac120672c0ff45bd4df113c064146a0a2747d652bb6ce75e
+current | disabled-session-start-01/restored/stdout.txt | 33014 bytes | sha256 27e58cbd0b044dee9fc2beb08211b4d1adcc8af180aa0161982e40c855734b86
+current | disabled-session-start-01/stdout.txt | 817 bytes | sha256 004ba99c41aeed41c344e894a35ebde206751897faa37020ada89570073e5309
+current | ../C08/wrong017-01/live/stdout.txt | 50660 bytes | sha256 d11cc555cc9ad774fff42ce924fa80baec9610e9c5f1dbbd9279da836293ac49
+current | ../C08/wrong017-01/stdout.txt | 799 bytes | sha256 d780990dfcbc6131a14989aedb0d4fc078e5e3ae46f68da82c383a2df13f7cd9

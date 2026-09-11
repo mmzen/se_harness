@@ -1,0 +1,21 @@
+C09 actions: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | failed-01/actions.txt | 21776 bytes | sha256 78218e7d42750e5409d63eb2e74d1c5c637c2c92ab72a6ed65a1789faf681241
+current | failed-01/live/actions.txt | 6141 bytes | sha256 30274cd87c9a31d7655ba5830f3c28be9b43b9b6415461c11f939e2ce701ee29
+current | failed-01/one-edit-plan.json | 170 bytes | sha256 d4eb96dfd3dee53fb48d7b51774bebbc9fc229c2163720ec35a101bc8a8f7595
+current | interrupted-01/actions.txt | 21811 bytes | sha256 07a9abdc822a0c6f4d187c77d8642cc39f05f0edf02d93d879b0594d09b13ec3
+current | interrupted-01/live/actions.txt | 6151 bytes | sha256 6e4a6dc6e1e4e036876a85e8ab07ab63a91d33451df4d8b4eacd46f767bfd8d9
+current | interrupted-01/one-edit-plan.json | 175 bytes | sha256 d2e465b753cf2c1f804da697a4eee4d1e8ed8d7c9c85bb836a5b28fc1011bd90
+current | runtime-preparation-01/actions.txt | 8129 bytes | sha256 980016a1fa299a41a3584154f18fc05bc5f8d9566b31422eb5e32615f3ca7dac
+current | runtime-preparation-01/command-0/command.json | 384 bytes | sha256 c669eb3cc9e18e90f05a64c60be3adcf9c4e1704d7784610bf42e24332fb23af
+current | runtime-preparation-01/command-1/command.json | 516 bytes | sha256 89e3d06a93e20a59d12c8f53fa58ae8b65cc9f7a73ed7d3f6edcb1aaae4762ec
+current | runtime-preparation-01/command-2/command.json | 1133 bytes | sha256 e88e5e0625f27592515117c0fd0ea5dff65d58621b9625fc113c0177a3fa98a5
+current | runtime-preparation-01/command-3/command.json | 451 bytes | sha256 045dbd468987e2c9bc35a3b1434ec4460234ec6de7a152224837971f7853376f
+current | stalled-01/actions.txt | 21783 bytes | sha256 21ffdb2789b3681c9c97fbec138a891a1261d9c9a442ab6426ddacc9d78c06c9
+current | stalled-01/live/actions.txt | 6143 bytes | sha256 35b051260ad636e923829a4be653c24f27d29beb263304716cd79920ea2b5bf6
+current | stalled-01/one-edit-plan.json | 171 bytes | sha256 a2712f35e76bc7ce7c5df8d6a5cb3b91287cd4cf61e186670aaee57199084ddf

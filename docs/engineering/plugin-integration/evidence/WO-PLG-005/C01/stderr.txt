@@ -1,0 +1,10 @@
+C01 stderr: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | current-inventory-01/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+historical | stale-inventory-01/stderr.txt | 1087 bytes | sha256 b629d9bf1929055f1f0d64c55bc0e42bd4c56e7c5c7f7457c332ab5545df4807
+historical | stale-inventory-02/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855

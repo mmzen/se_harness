@@ -1,0 +1,573 @@
+{
+  "schema": "verity-codex-acceptance-index-v1",
+  "case": "C12",
+  "created_at": "2026-09-11T21:09:23.192392+00:00",
+  "kind": "Agent-authored consolidation of retained observations; no new native run or assurance decision.",
+  "source_paths_relative_to": "This case directory",
+  "expected": {
+    "starting_fixture": "Disposable live-host bindings with insufficient timeout margin or asynchronous before-tool execution",
+    "action": "Load each binding and evaluate it against VER-PLG-008 C10 and the adapter timing rule",
+    "observable_result": "Actual configured mode/budgets are retained; asynchronous or insufficient-budget routes cannot qualify, even if an isolated check passes",
+    "additional_evidence": "loaded binding; host configuration; timing comparison; rejected qualification result"
+  },
+  "observed": "Native inventory loads timeoutSec=1 and async=true in separate disposable configurations. Both are rejected against the synchronous timing rule; the one-second timeout cannot exceed the 18-second inner/startup/cleanup/output budget. Both changed PreToolUse trust to modified while SessionStart remained trusted. No thread or trust approval is requested. Original source, native selection, full payload, binding hashes, exact config and sentinel hashes are restored.",
+  "conclusion": "pass",
+  "qualification": {
+    "qualified": false,
+    "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+  },
+  "exit_status": null,
+  "exit_status_meaning": "No aggregate command was executed. Actual retained subprocess/observer statuses are indexed below; an assessment pass does not rewrite a raw exit.",
+  "exit_status_evidence": [
+    {
+      "path": "async-true-native-01/restore-add/result.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "async-true-native-01/restore-list/result.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "async-true-native-01/variant-add/result.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "async-true-native-01/variant-list/result.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "timeout-1-native-01/restore-add/result.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "timeout-1-native-01/restore-list/result.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "timeout-1-native-01/variant-add/result.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "timeout-1-native-01/variant-list/result.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    }
+  ],
+  "current_capture_directories": [
+    "timeout-1-native-01",
+    "async-true-native-01"
+  ],
+  "historical_capture_directories": [],
+  "limitations": [
+    "Pass means invalid-configuration rejection only; neither variant is qualified.",
+    "No execution, denial, cancellation or effects of an invalid hook were exercised.",
+    "Changed native hashes are actual host observations, not a general hash-algorithm claim."
+  ],
+  "source_evidence": [
+    {
+      "path": "async-true-native-01/INVALID-variant-source/.codex-plugin/plugin.json",
+      "bytes": 953,
+      "sha256": "84e8a3acedc1ad5dede0bb8fe5d68cbefd8f86797d5943778533df114e5d01ec",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/INVALID-variant-source/hooks/hooks.json",
+      "bytes": 10928,
+      "sha256": "651de3797e23395171c06f2ad54e0aa794cbf216b75c64fff2527743121e0359",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/derived-payload.json",
+      "bytes": 1782,
+      "sha256": "b5a73e7a3e296a5af26140dfb1b76ed6530e9e64714def0e3bf3657b5f70f6fe",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/negative-assessment.json",
+      "bytes": 14377,
+      "sha256": "b571ff3202483f43220abd094e29984c875a09a88019c7cc06fdfac0d1b50cc4",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/original-before-inventory/command.json",
+      "bytes": 207,
+      "sha256": "bd8613bf9950d0a6f2701a6bb372e997d27f52d16979527a8ef18cc30b6b5169",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/original-before-inventory/result.json",
+      "bytes": 18379,
+      "sha256": "b763937aebe1ed7f0fe34107bbff212ae8016b4c69bb9214a57e198047e02181",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/original-before-inventory/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/original-before-inventory/stdout.txt",
+      "bytes": 18218,
+      "sha256": "badf62d3bc92dd007c26481cad41a79ffdee3d899d43811c26f72abc412f9384",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/original-before-inventory/transcript.json",
+      "bytes": 19844,
+      "sha256": "ab8f6ad3d6647f76580856e9654a71f820763c2abcb260dbfd845f6afb1f04ef",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/original-source/.codex-plugin/plugin.json",
+      "bytes": 942,
+      "sha256": "b255479285fa4e45843715ac43d88418f4e11f62b259f0242b59acd55e82a6b6",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/original-source/hooks/hooks.json",
+      "bytes": 10929,
+      "sha256": "2b768288dd11dca1510ea250e0b1cf9c7455e1f6d9152e62ed45482336c75a43",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/outcome.json",
+      "bytes": 44179,
+      "sha256": "0a4c68307502af08a06097c45c9f8ac6a96da8e35ab034496636d7ce7a0bbd66",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/preflight.json",
+      "bytes": 7227,
+      "sha256": "cb409606459743d181d3511c41026c5bd179ecac1244b382afae93cefc821bb0",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/restoration-complete.json",
+      "bytes": 14337,
+      "sha256": "d4a02a5172150e200cd92d4327589db1432875d7963c70ed6843146d9cd42bf4",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/restoration-needed.json",
+      "bytes": 270,
+      "sha256": "c6c6d647610cb4154554e8b8995f9630cc1de9eeb4088b9673626949fb1a4216",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/restore-add/command.json",
+      "bytes": 233,
+      "sha256": "09730af33a8adac8df5b206dbf78f679e7a5ebc265157aedbb5e633773360737",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/restore-add/result.json",
+      "bytes": 672,
+      "sha256": "6c0b7119d8478130d67da00a69aa0dd1f6b0b52d579ae81c31474a9132031fb9",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/restore-add/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/restore-add/stdout.txt",
+      "bytes": 444,
+      "sha256": "6c05f0197b4dca55dfb1b98caaef1b8babb6422ff14516014bc3908a2cd832a3",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/restore-inventory/command.json",
+      "bytes": 207,
+      "sha256": "fa4197c73fd3b9c4f449fe4060008a541bfdb9fc5e024a19e737ba8d3401ec71",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/restore-inventory/result.json",
+      "bytes": 18378,
+      "sha256": "37845547566bff95d2abdfe5da1a8e79b09464f9e90059ffc9867013aac956dd",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/restore-inventory/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/restore-inventory/stdout.txt",
+      "bytes": 18218,
+      "sha256": "321b9a77ef088f9149820337bd4ed57cee830ea5744212e6e1ccb9b035c74a4d",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/restore-inventory/transcript.json",
+      "bytes": 19844,
+      "sha256": "1022d6296f804bd7e64bf8673ed035bcf3539d564101d31402e23359c5c677e9",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/restore-list/command.json",
+      "bytes": 187,
+      "sha256": "b5d38e3e530e0c595c51ec2ffc9be460ddb4e3e56a999978d65cab02aec5c73e",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/restore-list/result.json",
+      "bytes": 627,
+      "sha256": "221491ff8279cc9d33cf3bc615b07a7dcada477a391af91e0370e302347b39c0",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/restore-list/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/restore-list/stdout.txt",
+      "bytes": 3284,
+      "sha256": "f1e312e0bcb9ea868b3f603f550c852b8d179244d0c39b1bdc6bbffdfc090763",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/variant-add/command.json",
+      "bytes": 233,
+      "sha256": "80888945c1736eb69d236ff4d2aa7f6448453b4bca9133f40a6e0156be570371",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/variant-add/result.json",
+      "bytes": 672,
+      "sha256": "92d23c39ead4f9321e89e67d8f1ad042a811b11227bc1b51899fff3e3c9a4203",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/variant-add/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/variant-add/stdout.txt",
+      "bytes": 466,
+      "sha256": "b0d1149e776c160e4053cf9a8f52b4befa32e0edd1c83e7a0f3c1f4a6844d166",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/variant-inventory/command.json",
+      "bytes": 207,
+      "sha256": "1afc382353d495ec45b2db1e08aaeaac28908902c5f227a5046c6ad38c1d09ed",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/variant-inventory/result.json",
+      "bytes": 18401,
+      "sha256": "290be2a6931570aa5322b4ff1f04b24c3105c4e07e9a6a2d399103618d6adbda",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/variant-inventory/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/variant-inventory/stdout.txt",
+      "bytes": 18240,
+      "sha256": "fb1309f265aefcbf7511820c4baee3b2826d3e7a3b9c7c6d19ab04701077c490",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/variant-inventory/transcript.json",
+      "bytes": 19866,
+      "sha256": "460e06991777f26d82e1d1e3a058b26d3b008f496a855f50416a2463678add25",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/variant-list/command.json",
+      "bytes": 187,
+      "sha256": "1d288cc8f0d8a479c1a8b7487d438dcc2a169dae625afb4205d66c16083355ac",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/variant-list/result.json",
+      "bytes": 627,
+      "sha256": "f48465129124e99d39929232352c86fd7a4324fbaf887221f3c470edd60b5de3",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/variant-list/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "async-true-native-01/variant-list/stdout.txt",
+      "bytes": 3295,
+      "sha256": "6a2c9e9369d7ffe0bdfaf51c3b5a4cd765e0d862047c9fd6a51933092132fc04",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/INVALID-variant-source/.codex-plugin/plugin.json",
+      "bytes": 955,
+      "sha256": "28f8982d45c985038f7d823daeb42be7aff4e830c3e29efc8061e684a7d09e2a",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/INVALID-variant-source/hooks/hooks.json",
+      "bytes": 10928,
+      "sha256": "ccc9f63cb41f5b6ae707628faea184982f6702e1496d5057cb8e521e6164ba90",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/derived-payload.json",
+      "bytes": 1782,
+      "sha256": "957fe552f6cccff43a915dee36d7a41d4d328f8035d260bcd6417bbd09abc321",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/negative-assessment.json",
+      "bytes": 14404,
+      "sha256": "4ad9b3c4b30187e32f59a0f6e211ece374ae9bf4bbb5748426d7c61c6f0289af",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/original-before-inventory/command.json",
+      "bytes": 207,
+      "sha256": "3d948c87d43a4753cbe4258983f4f9049429fcf0db4cfed1a6c120d552f89b2a",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/original-before-inventory/result.json",
+      "bytes": 18379,
+      "sha256": "a7e885c5e3b999b46358e82a2498bc24653031e2b87bcbfa88b9dfde7dc16534",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/original-before-inventory/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/original-before-inventory/stdout.txt",
+      "bytes": 18218,
+      "sha256": "a89481b6dd90bffb3a5382c48aa751e703f442e696adcf632067e365027d29f3",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/original-before-inventory/transcript.json",
+      "bytes": 19845,
+      "sha256": "dad21ae9af5806bd9ea98b6028bf3ee876c4e0d10b9d0fea5b7b62b62376b480",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/original-source/.codex-plugin/plugin.json",
+      "bytes": 942,
+      "sha256": "b255479285fa4e45843715ac43d88418f4e11f62b259f0242b59acd55e82a6b6",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/original-source/hooks/hooks.json",
+      "bytes": 10929,
+      "sha256": "2b768288dd11dca1510ea250e0b1cf9c7455e1f6d9152e62ed45482336c75a43",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/outcome.json",
+      "bytes": 44206,
+      "sha256": "3e62542732a0989c977ca1a293dda2dade35c7c7a5a0f1b36974816295ffc341",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/preflight.json",
+      "bytes": 7226,
+      "sha256": "3fcea4238a93a4ef436ad623eef42d1a3faee938c7d8878b0e1695063f98a15a",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/restoration-complete.json",
+      "bytes": 14337,
+      "sha256": "d4a02a5172150e200cd92d4327589db1432875d7963c70ed6843146d9cd42bf4",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/restoration-needed.json",
+      "bytes": 270,
+      "sha256": "c6c6d647610cb4154554e8b8995f9630cc1de9eeb4088b9673626949fb1a4216",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/restore-add/command.json",
+      "bytes": 232,
+      "sha256": "c4bd5814e6a6e54224824d5c9d37150b0e47fd7f26fc9534d3f7158812585f8c",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/restore-add/result.json",
+      "bytes": 671,
+      "sha256": "16e0bafbe2a5d91c2de0a268811162e587fa2fedea28a5c91aa395c06aefc305",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/restore-add/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/restore-add/stdout.txt",
+      "bytes": 444,
+      "sha256": "6c05f0197b4dca55dfb1b98caaef1b8babb6422ff14516014bc3908a2cd832a3",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/restore-inventory/command.json",
+      "bytes": 207,
+      "sha256": "d64afb4d80398fd7de7d2348d333d9be06325a789da04f11ed468861371d4ac6",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/restore-inventory/result.json",
+      "bytes": 18379,
+      "sha256": "5cfbc458124cfbd1f146b8a4ed600d8ba99cd816edab5b5931cfac8ef6417a88",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/restore-inventory/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/restore-inventory/stdout.txt",
+      "bytes": 18218,
+      "sha256": "dc1325052996316df3fd8e184ed93b9c7e7e7091eeec62eaa6f8d7644323c40d",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/restore-inventory/transcript.json",
+      "bytes": 19844,
+      "sha256": "6135bd7149152f9e402c2eeb5e1c8acb1ec70299e5eac1c2a08fb8383ab9111b",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/restore-list/command.json",
+      "bytes": 187,
+      "sha256": "654fa903259982b42a516eb816fe36b8ef37bae6b793b6c6b3d9a1d680d1fb6b",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/restore-list/result.json",
+      "bytes": 627,
+      "sha256": "cb0f61aa180b034c2177efca8bbbbe2e2453a6bd3cd3c1c510c0e1b163c4617b",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/restore-list/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/restore-list/stdout.txt",
+      "bytes": 3284,
+      "sha256": "f1e312e0bcb9ea868b3f603f550c852b8d179244d0c39b1bdc6bbffdfc090763",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/variant-add/command.json",
+      "bytes": 233,
+      "sha256": "d67909d5d7766f47d8e66dcee91f1786153a15428fbdbe2195ca62220eb63de5",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/variant-add/result.json",
+      "bytes": 673,
+      "sha256": "2f8df1ed4a6b54fa7ed4e3022d4edd2276d52306a4e8d456a5eda3c6e808f181",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/variant-add/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/variant-add/stdout.txt",
+      "bytes": 470,
+      "sha256": "259ad4aeac395d54798a83352eb777cfb84e7fb4aefec40fda2d1e49b45d0b8c",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/variant-inventory/command.json",
+      "bytes": 207,
+      "sha256": "a010c71566985dcfbb5459f3f6a8b4ffe96eda6cd31ad52532db10ce4b880d62",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/variant-inventory/result.json",
+      "bytes": 18405,
+      "sha256": "f816c99104dc07d27bb64e5aaecca4998e9c7e48e216fd6e26a1a59d268bb9d5",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/variant-inventory/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/variant-inventory/stdout.txt",
+      "bytes": 18244,
+      "sha256": "9eca2064ffb630075d2a57179649be57d1a5877e4bb063249fe48794a16523db",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/variant-inventory/transcript.json",
+      "bytes": 19872,
+      "sha256": "73125840912492093cc33e6e61d27a8242950072fb200fed62d8dd4ebba95cd0",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/variant-list/command.json",
+      "bytes": 186,
+      "sha256": "5c8d963bb5eb4b09d1f994c7688127977084fd3bdc6db49eb3b9d1d94297161e",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/variant-list/result.json",
+      "bytes": 626,
+      "sha256": "d326c7aed0b43a5311b1f490c59c5a63a380261e544d319ecf6b0c150c52991c",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/variant-list/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "timeout-1-native-01/variant-list/stdout.txt",
+      "bytes": 3297,
+      "sha256": "f10a2f81b9713fec1a82095e15e46571a783ec64d4684d675f0e77e3142e576e",
+      "role": "current"
+    },
+    {
+      "path": "../../../verification/VER-PLG-005.md",
+      "bytes": 7948,
+      "sha256": "dea7963993a1be26b41bfa4d7a6c1199f2c19613940c01eeaef5d4ead9301e30",
+      "role": "approved expectation"
+    }
+  ]
+}

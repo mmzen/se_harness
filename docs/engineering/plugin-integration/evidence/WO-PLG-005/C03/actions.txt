@@ -1,0 +1,11 @@
+C03 actions: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | observer-preparation/c03-permitted-plan.json | 168 bytes | sha256 cd577324c6358aadd8c4dd6b2ec80f7c317903f072964850e5698ff1992754b1
+historical | permitted-edit-01/actions.txt | 6146 bytes | sha256 4f32b8e76fe51a66248dbc556d6f163858acdc91a9ffb7505ec8a2454ef1aaf1
+current | permitted-edit-02/actions.txt | 6141 bytes | sha256 df006ed2c95df320bf65041dcea5bd051b9bae009a049da1ae0d696ed9c145a5
+current | refused-edit-01/actions.txt | 6131 bytes | sha256 691a13d084af73e6ab63f9e7f535d5e4723d67f9436cbc57d292758a58aace55

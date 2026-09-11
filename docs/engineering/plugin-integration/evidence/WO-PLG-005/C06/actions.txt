@@ -1,0 +1,10 @@
+C06 actions: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | unicode-edit-01/actions.txt | 6179 bytes | sha256 74a8f8bec04a73e2b750a1fc5835e0b66e61161980a1c01c67b5264443fe4574
+current | unsupported-noop-01/actions.txt | 736 bytes | sha256 cefcc657a31f5ce63ef77fde73c7207247cfd05f63c46d213bf0e58ad8bd8e44
+historical | unsupported-plan-01/actions.txt | 681 bytes | sha256 f01fc6d472bfded7e3a03f0654107505190a5133ba47e692f1b0154cc4da97ab

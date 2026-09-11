@@ -1,0 +1,48 @@
+{
+  "scope": "Independent retained-capture assessment of the permitted half of C03; no host call, lifecycle action or qualification decision.",
+  "conclusion": "pass",
+  "qualified": false,
+  "checks": {
+    "plan_hash_matches": true,
+    "plan_values_match": true,
+    "one_target_update": true,
+    "exact_whole_patch": true,
+    "patch_unchanged_at_completion": true,
+    "identity_correlation": true,
+    "one_shot_no_grant_root": true,
+    "hook_id_correlates_to_file_item": true,
+    "hook_context_equals_checked_dispatch": true,
+    "hook_dispatch_before_approval_and_completion": true,
+    "exact_before_hash": true,
+    "exact_after_hash": true,
+    "current_target_matches_recorded_after": true,
+    "other_sentinels_unchanged": true,
+    "native_completed_once": true,
+    "cleanup_confirmed": true,
+    "no_observer_stop": true
+  },
+  "source_sha256": {
+    "actions.txt": "df006ed2c95df320bf65041dcea5bd051b9bae009a049da1ae0d696ed9c145a5",
+    "transcript.json": "311f8e289f5c7e6b44e0aa88d52852c50402261c3b57f4a0d0dfb61f8c63875c",
+    "dispatch.jsonl": "e91600f74adc0053efc971d50007594332b2e1eb958782b6fe85b8517a89706b",
+    "observations.json": "5ba62af7abef4a2c2384222c8a52f481a1470f19424e5b34057b80b3034cdc77",
+    "approval-prepared.json": "e0fc581dfccbca7bdd5737ed60b246e62bf3b57b398e4c34cfffd7ead6a756f3"
+  },
+  "plan_sha256": "0612bb218cde363073374d7f40c6e5e1fdca43d1edbae9ffcce654293881caa9",
+  "expected_before_sha256": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+  "expected_after_sha256": "c32c7e5d2eae3e433c0d5985a6d60b9e831abab63aac541f9c2bdb10c4bca214",
+  "file_item_id": "exec-d04c3afd-b326-495d-aeee-5108883dc390",
+  "hook_run_id": "pre-tool-use:2:C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\verity-plane-codex-fixture\\verity-plane\\0.0.1+codex.20260911195218\\hooks\\hooks.json:exec-d04c3afd-b326-495d-aeee-5108883dc390",
+  "event_indexes": {
+    "hook_started": 36,
+    "hook_completed": 37,
+    "file_started": 38,
+    "approval_requested": 40,
+    "accept_sent": 41,
+    "file_completed": 45
+  },
+  "host_hook_interval_seconds": 2.3318053999973927,
+  "effect_count": 1,
+  "effect_count_basis": "One native completed fileChange item plus exact independent target hash; not a low-level write count or whole-session audit.",
+  "limit": "This establishes the permitted edit only. Refused-edit observation and broader qualification remain separate."
+}

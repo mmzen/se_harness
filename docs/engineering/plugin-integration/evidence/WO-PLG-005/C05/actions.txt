@@ -1,0 +1,13 @@
+C05 actions: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | disabled-session-start-01/actions.txt | 479 bytes | sha256 84d3619aa9296068f27f123115bff4513dfa39c55ed365949b61b32140db1efc
+current | disabled-session-start-01/disabled/actions.txt | 370 bytes | sha256 7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321
+current | disabled-session-start-01/plan.json | 13722 bytes | sha256 a1016f8327d49020e18015489d45d0bf492b7964c44d59512c36fda50f3c7e90
+current | disabled-session-start-01/restored/actions.txt | 316 bytes | sha256 ac07f4dddad191bc20124702802ff1857a2db333a721667a6e6c46a5c70f0ef8
+current | ../C08/wrong017-01/actions.txt | 20186 bytes | sha256 0c1279e88474b07c7b974bfa2f85cb980b2d395f2e9b5fa2614139c1dcaf3508
+current | ../C08/wrong017-01/live/actions.txt | 370 bytes | sha256 7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321

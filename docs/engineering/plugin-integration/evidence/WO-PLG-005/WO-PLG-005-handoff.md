@@ -2,13 +2,17 @@
 artifact = "WO-PLG-005"
 checkpoint = "handoff"
 formal_snapshot_sha256 = "adcc15b6639b67810dd01e44d67204feeef49a4051759c6d659a6678aadf1716"
-rebound_at = "2026-09-11T20:11:57Z"
+rebound_at = "2026-09-11T21:40:53Z"
 ```
 
 # WO-PLG-005 handoff evidence
 
 Retained by `harnessctl evidence`; body content is owner-authored.
 
-WO-PLG-005 remains in progress and unqualified. Current-package discovery C01 passes; C02 startup has the complete native context receipt, while resume/compaction and the remaining API-backed cases are unavailable pending explicit payload/destination consent after automatic approval review rejected that run before launch. C04/C07 pass their local registered-shell route. These observations do not complete the work or provide assurance, release or merge authority.
+WO-PLG-005 remains **in_progress and unqualified**. The operator authorized the remaining bounded live tests. C01–C09 pass on their recorded routes; C12 observes and rejects invalid configurations without executing them. C10 and C11 demonstrate failed enforcement: hook timeout, empty output, invalid output and loss of the active before-tool binding each allowed the exact synthetic edit after ordinary one-time file approval. Literal OS shell-start failure remains unavailable. No absent result counts as a passing case.
 
-The [interim report](report.md) retains the case matrix, package identities, original failures, unresolved historical native-menu effects and exact limits. [Focused evidence](checks/focused-interim-06/actions.txt) records 34 passing tests. [Required repository checks](checks/required-interim-01/) distinguish passing released doctor/preflight and other checks from the six candidate-versus-released template differences reported by candidate doctor. The parent owns continuation, publication and later lifecycle decisions.
+The [acceptance report](report.md) and [qualification limit](qualification-limit.md) retain actual effects, native receipts, target hashes, package identities, failed attempts and restoration evidence. All completed fault runs confirm owned-process cleanup and restoration of selected inputs; changed synthetic targets remain the recorded effects. The earlier native-menu incident's historical OS effects remain unresolved.
+
+[Final focused and repository checks](checks/final-live-checks-01/results.json) record 143 passing focused tests, passing candidate graph/help/distribution checks and passing released 0.17 graph/doctor/preflight checks. Candidate doctor reports exactly the six existing candidate-versus-released template differences. [Complete candidate regression](checks/final-regression-01/result.json) retains its separate result. CI must be read for the exact PR head; none of these integrity checks proves live-host enforcement.
+
+The implementation and evidence are not complete against VER-PLG-005. Continue in progress and escalate the missing enforcement and untested launch-failure case for engineering-owner disposition. This packet authorizes no definition amendment, completion transition, VREC preparation, assurance decision, merge or release. A passing mechanical handoff check establishes scoped evidence freshness; it does not replace the failed live acceptance results.

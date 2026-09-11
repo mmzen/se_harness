@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+    "plugin",
+    "add",
+    "verity-plane@verity-plane-codex-fixture",
+    "--json"
+  ],
+  "started_monotonic": 246354.5966187,
+  "exit_status": 0,
+  "cleanup": {
+    "pid": 32340,
+    "method": "owned Windows Job Object",
+    "active_processes": 0
+  },
+  "stdout_raw_sha256": "b0d1149e776c160e4053cf9a8f52b4befa32e0edd1c83e7a0f3c1f4a6844d166",
+  "stdout_sanitization_changed_bytes": false,
+  "stderr_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sanitization_changed_bytes": false,
+  "finished_monotonic": 246354.721903
+}

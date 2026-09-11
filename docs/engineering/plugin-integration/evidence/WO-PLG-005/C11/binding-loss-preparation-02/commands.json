@@ -1,0 +1,59 @@
+[
+  {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\tests\\plugin_integration\\codex_adapter\\c11_binding_loss.py",
+      "--evidence",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\docs\\engineering\\plugin-integration\\evidence\\WO-PLG-005\\C11\\lost-active-binding-01",
+      "--package-record",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\docs\\engineering\\plugin-integration\\evidence\\WO-PLG-005\\preparation\\package-04\\package.json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+    "exit_status": 0,
+    "label": "preview",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "3a4777972a2cdb3e5f8c9ddbfb400309b0b720367250ca419eeb17d1725490c7"
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests/plugin_integration/codex_adapter",
+      "-p",
+      "test_c11_binding_loss.py",
+      "-v"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+    "exit_status": 0,
+    "label": "focused-tests",
+    "stderr_sha256": "cccbb217babf77281df5abde08a5d64b550b05bc06fb71a875e321ec1af3ba80",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests/plugin_integration/codex_adapter",
+      "-p",
+      "test_edit_observer.py",
+      "-v"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+    "exit_status": 0,
+    "label": "existing-edit-gate-tests",
+    "stderr_sha256": "0c7f582bb93592d242875b0f8d763e0d3288aa8f36d40b71dd0f5524e791d05a",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

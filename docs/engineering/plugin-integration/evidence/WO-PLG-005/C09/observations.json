@@ -1,0 +1,443 @@
+{
+  "schema": "verity-codex-acceptance-index-v1",
+  "case": "C09",
+  "created_at": "2026-09-11T21:09:21.665046+00:00",
+  "kind": "Agent-authored consolidation of retained observations; no new native run or assurance decision.",
+  "source_paths_relative_to": "This case directory",
+  "expected": {
+    "starting_fixture": "Live accepted host profile; synchronous binding; fixed host/inner budgets; separately failed, interrupted and stalled evaluator children",
+    "action": "Repeat VER-PLG-008 C03 through the real host's mapped edit tool",
+    "observable_result": "Running handler stops its evaluator process tree and returns the documented denial before the host timeout; target SHA-256 unchanged, effect count zero",
+    "additional_evidence": "configured budgets; monotonic startup/evaluator/cleanup/response timestamps; child exits; raw denial; independent target hashes/effect count"
+  },
+  "observed": "The separately failed, interrupted and stalled evaluator children cause correlated synchronous native denials in 2.2841268999909516, 2.237533600011375 and 8.830686000001151 seconds, before the 30-second host timeout. Inner descendants reach zero before response. Final independent target hashes remain equal to each plan, completed denied effects are zero, outer jobs contain zero processes, and binding/fault-config/runtime restoration passes.",
+  "conclusion": "pass",
+  "qualification": {
+    "qualified": false,
+    "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+  },
+  "exit_status": null,
+  "exit_status_meaning": "No aggregate command was executed. Actual retained subprocess/observer statuses are indexed below; an assessment pass does not rewrite a raw exit.",
+  "exit_status_evidence": [
+    {
+      "path": "failed-01/observations.json",
+      "json_pointer": "/observer_exit_status",
+      "value": 1
+    },
+    {
+      "path": "interrupted-01/observations.json",
+      "json_pointer": "/observer_exit_status",
+      "value": 1
+    },
+    {
+      "path": "runtime-preparation-01/command-0/command.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "runtime-preparation-01/command-1/command.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "runtime-preparation-01/command-2/command.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "runtime-preparation-01/command-3/command.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "stalled-01/observations.json",
+      "json_pointer": "/observer_exit_status",
+      "value": 1
+    }
+  ],
+  "current_capture_directories": [
+    "failed-01",
+    "interrupted-01",
+    "stalled-01",
+    "runtime-preparation-01"
+  ],
+  "historical_capture_directories": [],
+  "limitations": [
+    "Explicit fault runtime instrumentation does not qualify a normal runtime or unavailable hooks.",
+    "Original native observer exit 1/no-fileChange-after-blocked outcome remains intact; the strict native/dispatcher/effect assessment separately establishes refusal.",
+    "No native patch contents or global write-count guarantee are claimed.",
+    "Optional native-shells.json is metadata, not the enforcement predicate."
+  ],
+  "source_evidence": [
+    {
+      "path": "failed-01/actions.txt",
+      "bytes": 21776,
+      "sha256": "78218e7d42750e5409d63eb2e74d1c5c637c2c92ab72a6ed65a1789faf681241",
+      "role": "current"
+    },
+    {
+      "path": "failed-01/descendant.json",
+      "bytes": 1158,
+      "sha256": "619c4d99c7720e80aaafbb95ecd03626a654dab3261afac9eb80c1ff337b17c7",
+      "role": "current"
+    },
+    {
+      "path": "failed-01/evaluator.json",
+      "bytes": 1831,
+      "sha256": "1699a421951c77810d59486b0451a900cf761964a4d19a8fd4cea7fc8df354b4",
+      "role": "current"
+    },
+    {
+      "path": "failed-01/live/actions.txt",
+      "bytes": 6141,
+      "sha256": "30274cd87c9a31d7655ba5830f3c28be9b43b9b6415461c11f939e2ce701ee29",
+      "role": "current"
+    },
+    {
+      "path": "failed-01/live/dispatch.jsonl",
+      "bytes": 44509,
+      "sha256": "674223dfb9bd4621ee982400fe442bf47a535266f5c17f189497effd329b78ab",
+      "role": "current"
+    },
+    {
+      "path": "failed-01/live/observations.json",
+      "bytes": 23330,
+      "sha256": "862e8a9d02d6e2d504f5800273da5c99fd0d22db503c792dcf6baf07c09f0af9",
+      "role": "current"
+    },
+    {
+      "path": "failed-01/live/stderr.txt",
+      "bytes": 494,
+      "sha256": "2f391fbdb38dd5ee619a6f101c0ef1226fbb5a07a51e79b94a3da2b15816fa6e",
+      "role": "current"
+    },
+    {
+      "path": "failed-01/live/stdout.txt",
+      "bytes": 64841,
+      "sha256": "64652d295ba9935f627fcec7c02bee67ba33c4ccbe1327098e5cd3c50052635c",
+      "role": "current"
+    },
+    {
+      "path": "failed-01/live/transcript.json",
+      "bytes": 66440,
+      "sha256": "045b6057de7157df8b73e23acc1f7816735d0ef3011867d0540d35d9d3cae77a",
+      "role": "current"
+    },
+    {
+      "path": "failed-01/native-shells.json",
+      "bytes": 11754,
+      "sha256": "41ed084501d277425cd86e0f56955be42ba9bb27d880745934ccb0f966ffc5a0",
+      "role": "current"
+    },
+    {
+      "path": "failed-01/observations.json",
+      "bytes": 13419,
+      "sha256": "16a7b922ef30856c3d3618771ec83a6ac638ccd2f7f7aeb47c88442c58f5c658",
+      "role": "current"
+    },
+    {
+      "path": "failed-01/one-edit-plan.json",
+      "bytes": 170,
+      "sha256": "d4eb96dfd3dee53fb48d7b51774bebbc9fc229c2163720ec35a101bc8a8f7595",
+      "role": "current"
+    },
+    {
+      "path": "failed-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "failed-01/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "interrupted-01/actions.txt",
+      "bytes": 21811,
+      "sha256": "07a9abdc822a0c6f4d187c77d8642cc39f05f0edf02d93d879b0594d09b13ec3",
+      "role": "current"
+    },
+    {
+      "path": "interrupted-01/descendant.json",
+      "bytes": 1157,
+      "sha256": "3f9776125e081ec9d2401a370526a7752a93dd5a59aa418e716723059394eea2",
+      "role": "current"
+    },
+    {
+      "path": "interrupted-01/evaluator.json",
+      "bytes": 1835,
+      "sha256": "b913364c4d0e55d5d63ce0272e0f69f667759069cae5153bb69f51f3475599a9",
+      "role": "current"
+    },
+    {
+      "path": "interrupted-01/live/actions.txt",
+      "bytes": 6151,
+      "sha256": "6e4a6dc6e1e4e036876a85e8ab07ab63a91d33451df4d8b4eacd46f767bfd8d9",
+      "role": "current"
+    },
+    {
+      "path": "interrupted-01/live/dispatch.jsonl",
+      "bytes": 44507,
+      "sha256": "deee693869bfe51736e064bcf6f566b3f82321b8e99b4bfc51ffb57af08fd96a",
+      "role": "current"
+    },
+    {
+      "path": "interrupted-01/live/observations.json",
+      "bytes": 23341,
+      "sha256": "9042b6e54ff03a20e09a1c365a8af5c2254fea95c1d58058cf4ba55cefbabed3",
+      "role": "current"
+    },
+    {
+      "path": "interrupted-01/live/stderr.txt",
+      "bytes": 499,
+      "sha256": "66542d4d5070e3c54a7161337ee943cc86e194b3ab2b102714acf27a64ef7a11",
+      "role": "current"
+    },
+    {
+      "path": "interrupted-01/live/stdout.txt",
+      "bytes": 59875,
+      "sha256": "cfbbe2b5a066f09ab38860ba042be8bb02da6692ecc342ac5e22c227e0bf4df3",
+      "role": "current"
+    },
+    {
+      "path": "interrupted-01/live/transcript.json",
+      "bytes": 61480,
+      "sha256": "c8c54c36785f8a06e97e03d83eae906b123ef0e5d7fe16de44f0617c95892566",
+      "role": "current"
+    },
+    {
+      "path": "interrupted-01/native-shells.json",
+      "bytes": 11753,
+      "sha256": "bae7521366010a6db164f94ff3a8e901e0842a895d56ff8aa224e82187ea7b71",
+      "role": "current"
+    },
+    {
+      "path": "interrupted-01/observations.json",
+      "bytes": 13645,
+      "sha256": "b5c9fd92738d9f2b484b842ed61ab97218093422a308071045b72472de03c7c7",
+      "role": "current"
+    },
+    {
+      "path": "interrupted-01/one-edit-plan.json",
+      "bytes": 175,
+      "sha256": "d2e465b753cf2c1f804da697a4eee4d1e8ed8d7c9c85bb836a5b28fc1011bd90",
+      "role": "current"
+    },
+    {
+      "path": "interrupted-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "interrupted-01/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/actions.txt",
+      "bytes": 8129,
+      "sha256": "980016a1fa299a41a3584154f18fc05bc5f8d9566b31422eb5e32615f3ca7dac",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-0/command.json",
+      "bytes": 384,
+      "sha256": "c669eb3cc9e18e90f05a64c60be3adcf9c4e1704d7784610bf42e24332fb23af",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-0/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-0/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-1/command.json",
+      "bytes": 516,
+      "sha256": "89e3d06a93e20a59d12c8f53fa58ae8b65cc9f7a73ed7d3f6edcb1aaae4762ec",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-1/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-1/stdout.txt",
+      "bytes": 207,
+      "sha256": "616edf6a355a6db7168c4055f92f0fdd275afef26d5cbd90693013022123d6a0",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-2/command.json",
+      "bytes": 1133,
+      "sha256": "e88e5e0625f27592515117c0fd0ea5dff65d58621b9625fc113c0177a3fa98a5",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-2/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-2/stdout.txt",
+      "bytes": 2243,
+      "sha256": "c9e2d137d4312ffa9076697e9e175d95ddf740bc83090d748239a63616969bbe",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-3/command.json",
+      "bytes": 451,
+      "sha256": "045dbd468987e2c9bc35a3b1434ec4460234ec6de7a152224837971f7853376f",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-3/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-3/stdout.txt",
+      "bytes": 12842,
+      "sha256": "8d14f8464d60bac62f4d60cd1a4f86f7e9d8ec32c03983f2488237cd7c46a565",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/observations.json",
+      "bytes": 147,
+      "sha256": "02a27616632984d70a3b02af46fd1fdcf59b1604d0882b46a2889b8a62507893",
+      "role": "current"
+    },
+    {
+      "path": "stalled-01/actions.txt",
+      "bytes": 21783,
+      "sha256": "21ffdb2789b3681c9c97fbec138a891a1261d9c9a442ab6426ddacc9d78c06c9",
+      "role": "current"
+    },
+    {
+      "path": "stalled-01/descendant.json",
+      "bytes": 1157,
+      "sha256": "98fad277a997acc1b8cbda2254df32b2dc03d56f925e3864dcba1a2c7536bcd8",
+      "role": "current"
+    },
+    {
+      "path": "stalled-01/evaluator.json",
+      "bytes": 1830,
+      "sha256": "b8e982709968b39ed1d2d00c6849c093335acbf7d597276adea699aa83680fb5",
+      "role": "current"
+    },
+    {
+      "path": "stalled-01/live/actions.txt",
+      "bytes": 6143,
+      "sha256": "35b051260ad636e923829a4be653c24f27d29beb263304716cd79920ea2b5bf6",
+      "role": "current"
+    },
+    {
+      "path": "stalled-01/live/dispatch.jsonl",
+      "bytes": 44455,
+      "sha256": "fc27c889fabb1120af27335bd8d75cf5c68863222846fe1bdc2c4950dc8b4aae",
+      "role": "current"
+    },
+    {
+      "path": "stalled-01/live/observations.json",
+      "bytes": 23333,
+      "sha256": "476d98abdbeac878b807f64550bfab4491de440e3b36f6bb265b6bc6bb4d836a",
+      "role": "current"
+    },
+    {
+      "path": "stalled-01/live/stderr.txt",
+      "bytes": 478,
+      "sha256": "ebe90b4093c7a0f3b346a61b8dacf6438aead9f9b458eb78e89419041c7fb383",
+      "role": "current"
+    },
+    {
+      "path": "stalled-01/live/stdout.txt",
+      "bytes": 58935,
+      "sha256": "076801c33b0ba6f88c86cba37859fbb41921b880701d15f51e2897a7f2cbc15e",
+      "role": "current"
+    },
+    {
+      "path": "stalled-01/live/transcript.json",
+      "bytes": 60535,
+      "sha256": "3b6abbfda10f8fe6264fccf06ebf532ed534485ca20605db5dab3621d942740c",
+      "role": "current"
+    },
+    {
+      "path": "stalled-01/native-shells.json",
+      "bytes": 11754,
+      "sha256": "67bcaf3769ad2e01916083a1a304da4c9a984bb417e0c4c3ee8853161423a24b",
+      "role": "current"
+    },
+    {
+      "path": "stalled-01/observations.json",
+      "bytes": 13419,
+      "sha256": "a2a6e2940f2a0fba8dca7b0799c5b11215d50538e22fa642949d2fbb00e603a4",
+      "role": "current"
+    },
+    {
+      "path": "stalled-01/one-edit-plan.json",
+      "bytes": 171,
+      "sha256": "a2712f35e76bc7ce7c5df8d6a5cb3b91287cd4cf61e186670aaee57199084ddf",
+      "role": "current"
+    },
+    {
+      "path": "stalled-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "stalled-01/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "../../../verification/VER-PLG-005.md",
+      "bytes": 7948,
+      "sha256": "dea7963993a1be26b41bfa4d7a6c1199f2c19613940c01eeaef5d4ead9301e30",
+      "role": "approved expectation"
+    }
+  ],
+  "additional_read_only_reassessment": {
+    "assessments": [
+      {
+        "capture": "failed-01",
+        "assessment_reproduced": true,
+        "final_outer_cleanup_zero": true,
+        "final_targets_equal_plan": true,
+        "restoration_confirmed": true
+      },
+      {
+        "capture": "interrupted-01",
+        "assessment_reproduced": true,
+        "final_outer_cleanup_zero": true,
+        "final_targets_equal_plan": true,
+        "restoration_confirmed": true
+      },
+      {
+        "capture": "stalled-01",
+        "assessment_reproduced": true,
+        "final_outer_cleanup_zero": true,
+        "final_targets_equal_plan": true,
+        "restoration_confirmed": true
+      }
+    ],
+    "assessor_path": "../../../../../../tests/plugin_integration/codex_adapter/c09_runner.py",
+    "assessor_sha256": "8239a5101fbca1de5d8e0854d925b54e7ed843fa007baa8f1b71c01e5696f105",
+    "note": "Current pure assessor reproduces retained results; final gates additionally require outer cleanup and final target snapshots. The original run pins remain in each actions.txt."
+  }
+}

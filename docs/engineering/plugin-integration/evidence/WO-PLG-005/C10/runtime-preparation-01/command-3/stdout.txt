@@ -1,0 +1,478 @@
+{
+  "checks": [
+    {
+      "detail": "required",
+      "name": "AGENTS.md",
+      "passed": true
+    },
+    {
+      "detail": "required",
+      "name": "CLAUDE.md",
+      "passed": true
+    },
+    {
+      "detail": "required",
+      "name": "ENGINEERING_HARNESS.md",
+      "passed": true
+    },
+    {
+      "detail": "@AGENTS.md",
+      "name": "claude-import",
+      "passed": true
+    },
+    {
+      "detail": ".engineering-harness.toml",
+      "name": "config",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:.agents/skills/harness-operator-brief/SKILL.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:.agents/skills/harness-operator-brief/scripts/check_brief.py",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:.agents/skills/harness-operator-brief/skill-contract.json",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:.agents/skills/harness-orient/SKILL.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:.agents/skills/harness-orient/scripts/orient.py",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:.agents/skills/harness-orient/skill-contract.json",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:.claude/skills/harness-orient/SKILL.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:.engineering-harness.toml",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:.gitattributes",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:.github/workflows/engineering-harness.yml",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:.gitignore",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:AGENTS.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:CLAUDE.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:ENGINEERING_HARNESS.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/ARTIFACT_AUTHORING.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/DECISION_RIGHTS.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/OPERATING_CARD.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/QUALITY_GATES.json",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/QUALITY_GATES.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/TECHNICAL_COMMUNICATION.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/TRACEABILITY.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/WORKFLOW.json",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/WORKFLOW.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/templates/ADR.template.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/templates/ARCHITECTURE.template.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/templates/CAPABILITY.template.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/templates/DECISION.template.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/templates/INTENT.template.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/templates/OPERATING_CONTRACT.template.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/templates/README.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/templates/RELEASE_CONTRACT.template.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/templates/RELEASE_RECORD.template.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/templates/REQUIREMENT.template.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/templates/SPECIFICATION.template.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/templates/VERIFICATION.template.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/templates/VERIFICATION_RECORD.template.md",
+      "passed": true
+    },
+    {
+      "detail": "matches distribution",
+      "name": "distribution:docs/engineering/templates/WORK_ORDER.template.md",
+      "passed": true
+    },
+    {
+      "detail": "required",
+      "name": "docs/engineering/ARTIFACT_AUTHORING.md",
+      "passed": true
+    },
+    {
+      "detail": "required",
+      "name": "docs/engineering/DECISION_RIGHTS.md",
+      "passed": true
+    },
+    {
+      "detail": "required",
+      "name": "docs/engineering/OPERATING_CARD.md",
+      "passed": true
+    },
+    {
+      "detail": "required",
+      "name": "docs/engineering/QUALITY_GATES.json",
+      "passed": true
+    },
+    {
+      "detail": "required",
+      "name": "docs/engineering/QUALITY_GATES.md",
+      "passed": true
+    },
+    {
+      "detail": "required",
+      "name": "docs/engineering/README.md",
+      "passed": true
+    },
+    {
+      "detail": "required",
+      "name": "docs/engineering/TECHNICAL_COMMUNICATION.md",
+      "passed": true
+    },
+    {
+      "detail": "required",
+      "name": "docs/engineering/TRACEABILITY.md",
+      "passed": true
+    },
+    {
+      "detail": "required",
+      "name": "docs/engineering/WORKFLOW.json",
+      "passed": true
+    },
+    {
+      "detail": "required",
+      "name": "docs/engineering/WORKFLOW.md",
+      "passed": true
+    },
+    {
+      "detail": ".engineering-harness.lock",
+      "name": "lock",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:.agents/skills/harness-operator-brief/SKILL.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:.agents/skills/harness-operator-brief/scripts/check_brief.py",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:.agents/skills/harness-operator-brief/skill-contract.json",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:.agents/skills/harness-orient/SKILL.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:.agents/skills/harness-orient/scripts/orient.py",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:.agents/skills/harness-orient/skill-contract.json",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:.claude/skills/harness-orient/SKILL.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:.engineering-harness.toml",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:.gitattributes",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:.github/workflows/engineering-harness.yml",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:.gitignore",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:AGENTS.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:CLAUDE.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:ENGINEERING_HARNESS.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/ARTIFACT_AUTHORING.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/DECISION_RIGHTS.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/OPERATING_CARD.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/QUALITY_GATES.json",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/QUALITY_GATES.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/TECHNICAL_COMMUNICATION.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/TRACEABILITY.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/WORKFLOW.json",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/WORKFLOW.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/templates/ADR.template.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/templates/ARCHITECTURE.template.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/templates/CAPABILITY.template.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/templates/DECISION.template.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/templates/INTENT.template.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/templates/OPERATING_CONTRACT.template.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/templates/README.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/templates/RELEASE_CONTRACT.template.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/templates/RELEASE_RECORD.template.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/templates/REQUIREMENT.template.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/templates/SPECIFICATION.template.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/templates/VERIFICATION.template.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/templates/VERIFICATION_RECORD.template.md",
+      "passed": true
+    },
+    {
+      "detail": "unchanged",
+      "name": "managed:docs/engineering/templates/WORK_ORDER.template.md",
+      "passed": true
+    },
+    {
+      "detail": "3.14.6",
+      "name": "python",
+      "passed": true
+    },
+    {
+      "detail": "present",
+      "name": "seed:.github/PULL_REQUEST_TEMPLATE.md",
+      "passed": true
+    },
+    {
+      "detail": "present",
+      "name": "seed:GLOSSARY.md",
+      "passed": true
+    },
+    {
+      "detail": "present",
+      "name": "seed:docs/engineering/README.md",
+      "passed": true
+    }
+  ],
+  "command": "doctor",
+  "outcome": "completed",
+  "schema": "se-harness-command-result-v1",
+  "warnings": []
+}

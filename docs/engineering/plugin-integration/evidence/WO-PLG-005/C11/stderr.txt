@@ -1,0 +1,27 @@
+C11 stderr: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+provenance | ../C10/runtime-preparation-01/command-0/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+provenance | ../C10/runtime-preparation-01/command-1/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+provenance | ../C10/runtime-preparation-01/command-2/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+provenance | ../C10/runtime-preparation-01/command-3/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+historical | binding-loss-preparation-01/existing-edit-gate-tests-stderr.txt | 3099 bytes | sha256 9ae6a234ff4ff2dac5bc1f73b8e470e6324beaed8fdd061d3584d11b6444d144
+historical | binding-loss-preparation-01/focused-tests-stderr.txt | 2882 bytes | sha256 61deb285bfe2e3adf8d05a035655368e0c7e50fdbe568f161a02ab5f3be60b30
+historical | binding-loss-preparation-01/preview-stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | binding-loss-preparation-02/existing-edit-gate-tests-stderr.txt | 3099 bytes | sha256 0c7f582bb93592d242875b0f8d763e0d3288aa8f36d40b71dd0f5524e791d05a
+current | binding-loss-preparation-02/focused-tests-stderr.txt | 2882 bytes | sha256 cccbb217babf77281df5abde08a5d64b550b05bc06fb71a875e321ec1af3ba80
+current | binding-loss-preparation-02/preview-stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | invalid-output-01/live/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | invalid-output-01/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | lost-active-binding-01/lost-stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | lost-active-binding-01/lost/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | lost-active-binding-01/ready-stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | lost-active-binding-01/ready/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | lost-active-binding-01/restored-stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | lost-active-binding-01/restored/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | missing-output-01/live/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | missing-output-01/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855

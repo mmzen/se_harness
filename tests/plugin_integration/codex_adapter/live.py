@@ -19,6 +19,28 @@ from observer import ObservationStopped, received, schema_methods, active_bindin
 import observer
 
 
+def wait_for_compact_turn(wait, thread, first):
+    """An item completion does not make the compact turn steerable.
+
+    C02/resume-compact-02 received contextCompaction item/completed before
+    turn/completed. Correlate both notifications through the pinned turnId;
+    a failed or ambiguous compact turn cannot authorize a restoration request.
+    """
+    item = wait(lambda value: value.get("method") == "item/completed" and
+                value.get("params", {}).get("threadId") == thread and
+                value.get("params", {}).get("item", {}).get("type") == "contextCompaction", first)
+    turn_id = item["params"].get("turnId")
+    if not isinstance(turn_id, str) or not turn_id:
+        raise ObservationStopped("completed compaction item has no bound turn id", item)
+    turn = wait(lambda value: value.get("method") == "turn/completed" and
+                value.get("params", {}).get("threadId") == thread and
+                value.get("params", {}).get("turn", {}).get("id") == turn_id, first)
+    result = turn["params"]["turn"]
+    if result.get("status") != "completed" or result.get("error") is not None:
+        raise ObservationStopped("compact turn did not finish successfully", turn)
+    return item, turn
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--evidence", type=Path, required=True)
@@ -26,7 +48,15 @@ def main():
     parser.add_argument("--inventory-only", action="store_true")
     parser.add_argument("--resume")
     parser.add_argument("--compact", action="store_true")
+    parser.add_argument("--unsupported-plan", action="store_true",
+                        help="Observe one session-only update_plan call, with no file or command tools")
+    parser.add_argument("--unsupported-noop", action="store_true",
+                        help="Observe one fixed console-output command; no approval is answered")
     args = parser.parse_args()
+    if (args.unsupported_plan or args.unsupported_noop) and (args.resume or args.compact or args.inventory_only):
+        parser.error("the unsupported-tool observation requires one fresh standalone turn")
+    if args.unsupported_plan and args.unsupported_noop:
+        parser.error("select only one unsupported-tool observation")
     destination = args.evidence.absolute()
     allowed = ROOT / "docs/engineering/plugin-integration/evidence/WO-PLG-005"
     if allowed not in destination.parents or destination.exists():
@@ -134,6 +164,19 @@ def main():
             outcome["thread_id"] = thread
             if thread:
                 prompt = "Reply with READY only. Do not use tools or change files."
+                if args.unsupported_plan:
+                    prompt = ("This is a synthetic tool-coverage observation. Invoke update_plan exactly once "
+                              "with one completed step named 'Synthetic coverage observation'. Do not invoke "
+                              "any other tool, shell command, file operation, MCP, subagent, setup or permission "
+                              "change. If that tool is unavailable or a hook refuses it, stop without an "
+                              "alternative or retry. Report the observed result only.")
+                if args.unsupported_noop:
+                    prompt = ("This is a synthetic tool-coverage observation. Invoke the available shell-command "
+                              "tool exactly once with this literal PowerShell command: "
+                              "Write-Output VERITY_UNSUPPORTED_TOOL_PROBE. It only prints a fixed test marker. "
+                              "Do not read or change files, run any other command or tool, request elevated "
+                              "permissions, perform setup, or retry. If ordinary permissions or a hook refuse "
+                              "the call, stop. Report the observed result only.")
                 outcome["prompt"] = prompt
                 first = len(records)
                 request("turn/start", {"threadId":thread, "input":[{"type":"text", "text":prompt}]})
@@ -141,9 +184,7 @@ def main():
                 if args.compact and outcome["turn"].get("method") == "turn/completed":
                     first = len(records)
                     request("thread/compact/start", {"threadId":thread})
-                    outcome["compact"] = wait(lambda value:value.get("params", {}).get("threadId") == thread and
-                        (value.get("method") == "thread/compacted" or value.get("method") == "item/completed" and
-                         value.get("params", {}).get("item", {}).get("type") == "contextCompaction"), first)
+                    outcome["compact"], outcome["compact_turn"] = wait_for_compact_turn(wait, thread, first)
                     first = len(records)
                     request("turn/start", {"threadId":thread, "input":[{"type":"text","text":"Reply READY only. No tools or changes."}]})
                     outcome["restored_turn"] = wait(lambda value:value.get("method") == "turn/completed" and value.get("params", {}).get("threadId") == thread, first)

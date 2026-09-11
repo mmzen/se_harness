@@ -1,0 +1,159 @@
+{
+  "observed_at": "2026-09-11T21:37:27.317985+00:00",
+  "checks": [
+    {
+      "check": "focused",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/plugin_integration/codex_adapter",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+      "exit_status": 0,
+      "expected_exit_status": 0,
+      "duration_seconds": 20.309679900004994,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "ab8401b7c517fef707186f68514bb1214abc701e7badb61a1bf2db9249a3d288"
+    },
+    {
+      "check": "candidate-help",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+        "-B",
+        "-S",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+      "exit_status": 0,
+      "expected_exit_status": 0,
+      "duration_seconds": 0.5561279999965336,
+      "stdout_sha256": "bd6eb5ee50cb73d0c1e5d736a1318fe1a80c554eb03b8b926ef75431b5fa9fef",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "check": "candidate-validate",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+        "-B",
+        "-S",
+        "-m",
+        "se_harness",
+        "validate",
+        ".",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+      "exit_status": 0,
+      "expected_exit_status": 0,
+      "duration_seconds": 3.2343718000047375,
+      "stdout_sha256": "efce6fa75c1aa4732b5604c72b8797105d52ce6af5e914bf44471469cf11e625",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "check": "distribution-records",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+        "-B",
+        "-S",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+      "exit_status": 0,
+      "expected_exit_status": 0,
+      "duration_seconds": 2.7352084000012837,
+      "stdout_sha256": "c27f0712b4a9b2c06498e19445ce3d7bc4970af7b4c8178b62c9b7f8c74b7987",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "check": "released-validate",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "validate",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work",
+      "exit_status": 0,
+      "expected_exit_status": 0,
+      "duration_seconds": 3.299358400021447,
+      "stdout_sha256": "efce6fa75c1aa4732b5604c72b8797105d52ce6af5e914bf44471469cf11e625",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "check": "released-doctor",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work",
+      "exit_status": 0,
+      "expected_exit_status": 0,
+      "duration_seconds": 1.9699307999981102,
+      "stdout_sha256": "40e666299a7b8087cb884685cfba36cfc90d43f523f7a1ba5204783d3d817634",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "check": "released-preflight",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+        "--work-order",
+        "WO-PLG-005",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work",
+      "exit_status": 0,
+      "expected_exit_status": 0,
+      "duration_seconds": 2.8464103000005707,
+      "stdout_sha256": "6d216e809b11e2569f352b51669b284eed6cba6a1a8e73ca8e2df5fe6cb23f6c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "check": "candidate-doctor-boundary",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+        "-B",
+        "-S",
+        "-m",
+        "se_harness",
+        "doctor",
+        ".",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+      "exit_status": 1,
+      "expected_exit_status": 1,
+      "duration_seconds": 2.115127400000347,
+      "stdout_sha256": "19529e0bef5d7e99af86613dfe864da1b9c15edc9dc1a5868b38382052543ab2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "claim": "Repository checks only. Candidate doctor is an expected version-boundary diagnostic requiring inspection; no host qualification, lifecycle transition or assurance decision."
+}

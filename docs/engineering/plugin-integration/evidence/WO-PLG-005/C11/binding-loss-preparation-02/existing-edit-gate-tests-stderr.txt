@@ -1,0 +1,24 @@
+test_add_delete_move_extra_paths_and_hidden_fields_rejected (test_edit_observer.GateTests.test_add_delete_move_extra_paths_and_hidden_fields_rejected) ... ok
+test_changed_or_late_patch_and_extra_item_always_stop (test_edit_observer.GateTests.test_changed_or_late_patch_and_extra_item_always_stop) ... ok
+test_changed_target_before_accept_has_no_response (test_edit_observer.GateTests.test_changed_target_before_accept_has_no_response) ... ok
+test_cli_default_preflight_and_tampered_plan_never_spawn (test_edit_observer.GateTests.test_cli_default_preflight_and_tampered_plan_never_spawn) ... ok
+test_command_item_and_unapproved_completed_edit_stop (test_edit_observer.GateTests.test_command_item_and_unapproved_completed_edit_stop) ... ok
+test_complete_patch_update_can_fill_initial_empty_item (test_edit_observer.GateTests.test_complete_patch_update_can_fill_initial_empty_item) ... ok
+test_exact_one_shot_update_and_completion (test_edit_observer.GateTests.test_exact_one_shot_update_and_completion) ... ok
+test_hard_link_and_reparse_identity_cannot_receive_approval (test_edit_observer.GateTests.test_hard_link_and_reparse_identity_cannot_receive_approval) ... ok
+test_native_refusal_not_overridden_but_handler_failure_not_invented_refusal (test_edit_observer.GateTests.test_native_refusal_not_overridden_but_handler_failure_not_invented_refusal) ... ok
+test_patch_must_precede_request_and_cannot_be_inferred_from_reason (test_edit_observer.GateTests.test_patch_must_precede_request_and_cannot_be_inferred_from_reason) ... ok
+test_permission_expansion_unknown_fields_and_other_requests_refused (test_edit_observer.GateTests.test_permission_expansion_unknown_fields_and_other_requests_refused) ... ok
+test_request_collision_replay_and_invalid_identifiers (test_edit_observer.GateTests.test_request_collision_replay_and_invalid_identifiers) ... ok
+test_schema_identity_drift_fails_before_any_launch (test_edit_observer.GateTests.test_schema_identity_drift_fails_before_any_launch) ... ok
+test_stale_thread_turn_and_item_requests (test_edit_observer.GateTests.test_stale_thread_turn_and_item_requests) ... ok
+test_strict_json_rejects_replacement_decoding_duplicate_keys_and_nonfinite (test_edit_observer.GateTests.test_strict_json_rejects_replacement_decoding_duplicate_keys_and_nonfinite) ... ok
+test_thread_profile_cannot_expand_or_choose_automated_reviewer (test_edit_observer.GateTests.test_thread_profile_cannot_expand_or_choose_automated_reviewer) ... ok
+test_transport_contains_unknown_request_and_persists_before_exact_accept (test_edit_observer.GateTests.test_transport_contains_unknown_request_and_persists_before_exact_accept) ... ok
+test_unified_diff_exact_whole_file_with_context_quotes_unicode_and_crlf (test_edit_observer.GateTests.test_unified_diff_exact_whole_file_with_context_quotes_unicode_and_crlf) ... ok
+test_unsupported_partial_binary_or_ambiguous_diff_stops (test_edit_observer.GateTests.test_unsupported_partial_binary_or_ambiguous_diff_stops) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.141s
+
+OK

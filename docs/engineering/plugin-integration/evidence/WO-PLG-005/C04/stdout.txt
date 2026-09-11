@@ -1,0 +1,16 @@
+C04 stdout: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | registered-shell-01/array-tool/stdout.txt | 294 bytes | sha256 77f53fe5883fa3a62443e3d0581fada9bdbe978fc78a70b31a4089042118a598
+current | registered-shell-01/blank-tool/stdout.txt | 294 bytes | sha256 77f53fe5883fa3a62443e3d0581fada9bdbe978fc78a70b31a4089042118a598
+current | registered-shell-01/malformed-json/stdout.txt | 328 bytes | sha256 fe20dc9f639e9b8f8d09ad653be9e5029159283ede5b9118d3a5f984a9e713fd
+current | registered-shell-01/missing-required-cwd/stdout.txt | 286 bytes | sha256 e4f208607b67e013c769f7499c3a31205469ff2ffa5cf8740b62c7a608131507
+current | registered-shell-01/object-tool/stdout.txt | 294 bytes | sha256 77f53fe5883fa3a62443e3d0581fada9bdbe978fc78a70b31a4089042118a598
+current | registered-shell-01/positive-sentinel-after/stdout.txt | 139 bytes | sha256 14160b37c3713e06ffda71a0ce6c20da5b1aec51a6c9de66b58a0693c8107c52
+current | registered-shell-01/positive-sentinel-before/stdout.txt | 139 bytes | sha256 14160b37c3713e06ffda71a0ce6c20da5b1aec51a6c9de66b58a0693c8107c52
+current | registered-shell-01/stdout.txt | 193 bytes | sha256 1e74b7ab6878097cdcb34eaaf2edd9042cc486568b7f19d06a23956718a6d742
+current | registered-shell-01/wrong-event-shape/stdout.txt | 285 bytes | sha256 489834f4a6ae3d9e1c456d88033e11a1785c9d288adf8bc6d1a43fca0b808255

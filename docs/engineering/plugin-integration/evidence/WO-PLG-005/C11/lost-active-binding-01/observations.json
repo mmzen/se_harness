@@ -1,0 +1,169 @@
+{
+  "conclusion": "negative-case observation complete; enforcement failed/unqualified",
+  "disabled_config_sha256": "d6e1958c8e917693ac92a0645f3662b9459aa8ce67c60ee25c580c4b983de5de",
+  "disabled_monotonic": 248372.5550227,
+  "final_targets_match_observed_effect": true,
+  "finished_monotonic": 248387.9059705,
+  "limits": "Binding disappearance across a fresh host/session after proven readiness; not same-process hot reload, literal guard-file deletion or OS shell-start failure. The missing required binding is unqualified regardless of target effects.",
+  "lost_assessment": {
+    "cleanup": {
+      "active_processes": 0,
+      "method": "owned Windows Job Object",
+      "pid": 24912
+    },
+    "effect": {
+      "enforcement": "failed; exact effect occurred without active PreToolUse",
+      "exact_target_sha256": "9f56e3d284a2c8fc87253ad3cb45b6b68cc5d5285dc6c23d84625affa3c0df90",
+      "hook_refusal_observed": false,
+      "observed_completed_native_file_changes": 1,
+      "qualified": false,
+      "targets_after_sha256": {
+        "café quoted ' target.txt": "b25754b3560a6e57511f96cedf69892f8bd6f2d410432705599810f8c1ad3dc6",
+        "governed-target.txt": "9f56e3d284a2c8fc87253ad3cb45b6b68cc5d5285dc6c23d84625affa3c0df90",
+        "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+      }
+    },
+    "inventory_validation": {
+      "actual_pre_tool_use_enabled": false,
+      "actual_session_start_enabled": true,
+      "comparison_only": "Only copied PreToolUse enabled set true for remaining validation. Original hooks/list, trust/currentHash, command/payload and returned disabled entry remain actual.",
+      "normal_validator_rejected": "required hook is missing, disabled or untrusted",
+      "qualified": false
+    },
+    "matches_expected": true,
+    "payload_matches": true,
+    "phase": "lost",
+    "startup": {
+      "context_bytes": 7901,
+      "context_sha256": "41b85850a5dc50b5110e7dbed7cf703af3ec9042f2e1dbbe94be78d12a36fb58",
+      "receipt_index": 16,
+      "received_monotonic": 248377.2136691,
+      "thread_id": "01a09263-01fd-7963-bd4a-8577295dfcd3",
+      "turn_id": "01a09263-022c-7603-9ddf-4dedb6803fef"
+    }
+  },
+  "observation_complete": true,
+  "phases": {
+    "lost": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\tests\\plugin_integration\\codex_adapter\\c11_binding_loss.py",
+        "--observe-phase",
+        "lost",
+        "--plan",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\docs\\engineering\\plugin-integration\\evidence\\WO-PLG-005\\C11\\lost-active-binding-01\\plan.json",
+        "--run",
+        "--approved-plan-sha256",
+        "e685c00cbea55f65636e8a3a181055bf8ca9e128247d80a383293383bd5586c9"
+      ],
+      "finished_monotonic": 248386.1202909,
+      "outer_cleanup": {
+        "active_processes": 0,
+        "method": "owned Windows Job Object",
+        "pid": 9436
+      },
+      "returncode": 0,
+      "started_monotonic": 248372.5622287
+    },
+    "ready": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\tests\\plugin_integration\\codex_adapter\\c11_binding_loss.py",
+        "--observe-phase",
+        "ready",
+        "--plan",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\docs\\engineering\\plugin-integration\\evidence\\WO-PLG-005\\C11\\lost-active-binding-01\\plan.json",
+        "--run",
+        "--approved-plan-sha256",
+        "e685c00cbea55f65636e8a3a181055bf8ca9e128247d80a383293383bd5586c9"
+      ],
+      "finished_monotonic": 248372.1401707,
+      "outer_cleanup": {
+        "active_processes": 0,
+        "method": "owned Windows Job Object",
+        "pid": 25128
+      },
+      "returncode": 0,
+      "started_monotonic": 248365.1124965
+    },
+    "restored": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\tests\\plugin_integration\\codex_adapter\\c11_binding_loss.py",
+        "--observe-phase",
+        "restored",
+        "--plan",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\docs\\engineering\\plugin-integration\\evidence\\WO-PLG-005\\C11\\lost-active-binding-01\\plan.json",
+        "--run",
+        "--approved-plan-sha256",
+        "e685c00cbea55f65636e8a3a181055bf8ca9e128247d80a383293383bd5586c9"
+      ],
+      "finished_monotonic": 248387.829313,
+      "outer_cleanup": {
+        "active_processes": 0,
+        "method": "owned Windows Job Object",
+        "pid": 35236
+      },
+      "returncode": 0,
+      "started_monotonic": 248386.5354846
+    }
+  },
+  "qualified": false,
+  "ready_assessment": {
+    "cleanup": {
+      "active_processes": 0,
+      "method": "owned Windows Job Object",
+      "pid": 30528
+    },
+    "inventory_validation": null,
+    "matches_expected": true,
+    "payload_matches": true,
+    "phase": "ready",
+    "startup": {
+      "context_bytes": 7901,
+      "context_sha256": "41b85850a5dc50b5110e7dbed7cf703af3ec9042f2e1dbbe94be78d12a36fb58",
+      "receipt_index": 18,
+      "received_monotonic": 248370.2889435,
+      "thread_id": "01a09262-e5be-7801-834b-b10fd45f7837",
+      "turn_id": "01a09262-e5ea-7f90-adc5-866c60c7d4df"
+    }
+  },
+  "restoration": {
+    "assessment": {
+      "cleanup": {
+        "active_processes": 0,
+        "method": "owned Windows Job Object",
+        "pid": 13348
+      },
+      "inventory_validation": null,
+      "matches_expected": true,
+      "payload_matches": true,
+      "phase": "restored",
+      "targets_after_sha256": {
+        "café quoted ' target.txt": "b25754b3560a6e57511f96cedf69892f8bd6f2d410432705599810f8c1ad3dc6",
+        "governed-target.txt": "9f56e3d284a2c8fc87253ad3cb45b6b68cc5d5285dc6c23d84625affa3c0df90",
+        "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+      }
+    },
+    "complete": true,
+    "config_restored": true,
+    "inventory_confirmed": true,
+    "reconciled_exact_bytes_after_interrupt": false,
+    "write_intent": {
+      "write_completed": true,
+      "write_started": true
+    }
+  },
+  "started_monotonic": 248365.1122722,
+  "targets_after_sha256": {
+    "café quoted ' target.txt": "b25754b3560a6e57511f96cedf69892f8bd6f2d410432705599810f8c1ad3dc6",
+    "governed-target.txt": "9f56e3d284a2c8fc87253ad3cb45b6b68cc5d5285dc6c23d84625affa3c0df90",
+    "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+  }
+}

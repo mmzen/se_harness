@@ -1,0 +1,13 @@
+{
+  "checks": [
+    {
+      "actual_pre_tool_use_enabled": false,
+      "actual_session_start_enabled": true,
+      "comparison_only": "Only copied PreToolUse enabled set true for remaining validation. Original hooks/list, trust/currentHash, command/payload and returned disabled entry remain actual.",
+      "normal_validator_rejected": "required hook is missing, disabled or untrusted",
+      "qualified": false
+    }
+  ],
+  "phase": "lost",
+  "plan_sha256": "e685c00cbea55f65636e8a3a181055bf8ca9e128247d80a383293383bd5586c9"
+}

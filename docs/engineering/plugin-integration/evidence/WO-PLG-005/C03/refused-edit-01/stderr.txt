@@ -1,0 +1,6 @@
+2026-09-11T20:43:16.248850Z ERROR codex_core::tools::router: error=Command blocked by PreToolUse hook: Governed action refused: evaluator failed; inspect any partial evaluator writes before retry. Command: *** Begin Patch
+*** Update File: outside-scope.txt
+@@
+-initial fixture target
++WO-PLG-005 refused edit
+*** End Patch

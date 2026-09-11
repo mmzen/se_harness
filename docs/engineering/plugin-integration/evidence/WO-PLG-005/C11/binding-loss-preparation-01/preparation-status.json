@@ -1,0 +1,4 @@
+{
+  "cause": "Preview stdout used Windows local encoding for Unicode path; downstream UTF-8 JSON read rejected byte 0xe9. No native execution or profile change. CLI now emits ASCII-escaped JSON; prior raw outputs preserved.",
+  "status": "preparation capture failed after three successful pure commands"
+}

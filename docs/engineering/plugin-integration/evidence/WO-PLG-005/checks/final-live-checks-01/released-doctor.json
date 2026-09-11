@@ -1,0 +1,19 @@
+{
+  "check": "released-doctor",
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "doctor",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work",
+  "exit_status": 0,
+  "expected_exit_status": 0,
+  "duration_seconds": 1.9699307999981102,
+  "stdout_sha256": "40e666299a7b8087cb884685cfba36cfc90d43f523f7a1ba5204783d3d817634",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

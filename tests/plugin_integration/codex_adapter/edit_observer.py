@@ -533,14 +533,14 @@ def run_session(plan, destination, package, stop_marker, details):
                 with data.open("rb") as stream:
                     stream.seek(offset)
                     appended = stream.read().decode("utf8", errors="strict")
-                (destination / "dispatch.jsonl").write_text(sanitize_text(appended), encoding="utf8")
+                (destination / "dispatch.jsonl").write_text(sanitize_text(appended), encoding="utf8", newline="")
         except (OSError, UnicodeError) as error:
             details["dispatch_capture_error"] = str(error)
             details["observation_complete"] = False
         details["conclusion"] = "observed; hook/effect assessment remains separate" if details.get("observation_complete") else "unavailable; observer cancellation is not hook refusal"
         retain(destination / "transcript.json", transcript)
         retain(destination / "stdout.txt", [entry for entry in transcript if "received_monotonic" in entry])
-        (destination / "stderr.txt").write_text("".join(stderr), encoding="utf8")
+        (destination / "stderr.txt").write_text("".join(stderr), encoding="utf8", newline="")
         retain(destination / "observations.json", sanitize_value(details))
     return 0 if details.get("observation_complete") else 1
 

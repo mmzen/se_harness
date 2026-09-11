@@ -1,0 +1,27 @@
+{
+  "assessment": {
+    "cleanup": {
+      "active_processes": 0,
+      "method": "owned Windows Job Object",
+      "pid": 10800
+    },
+    "inventory_validation": null,
+    "matches_expected": true,
+    "payload_matches": true,
+    "phase": "ready",
+    "startup": {
+      "context_bytes": 7901,
+      "context_sha256": "41b85850a5dc50b5110e7dbed7cf703af3ec9042f2e1dbbe94be78d12a36fb58",
+      "receipt_index": 18,
+      "received_monotonic": 242862.7742392,
+      "thread_id": "01a0920e-dc36-7481-8dee-83cd5cce39db",
+      "turn_id": "01a0920e-dd14-7241-afd2-95203cc07735"
+    }
+  },
+  "label": "read-only historical-capture parser calibration, not fresh C11 acceptance",
+  "raw_capture_hashes": {
+    "dispatch.jsonl": "f30b08b095def923d531001ab5cbe5dd7c4160670fdcf8a2a6f1b49e52e6b2c8",
+    "observations.json": "5dd350ba3dd3a0cfc38cc782e78bbc03582a9ac5da67ce5045c2eb28d43b4701",
+    "transcript.json": "ae41eff47e748a30a65329991bdb651a03bf9c3bc48f4e067eac5121008cb60d"
+  }
+}

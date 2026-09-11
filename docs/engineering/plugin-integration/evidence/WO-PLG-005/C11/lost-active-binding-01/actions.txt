@@ -1,0 +1,11 @@
+{
+  "limits": "Binding disappearance across a fresh host/session after proven readiness; not same-process hot reload, literal guard-file deletion or OS shell-start failure. The missing required binding is unqualified regardless of target effects.",
+  "plan_sha256": "e685c00cbea55f65636e8a3a181055bf8ca9e128247d80a383293383bd5586c9",
+  "sequence": [
+    "ready native activation and owned cleanup",
+    "disable only PreToolUse",
+    "fresh native one-edit activation and owned cleanup",
+    "restore exact original config",
+    "fresh active native inventory only"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "change": {
+    "enabled": false,
+    "key": "verity-plane@verity-plane-codex-fixture:hooks/hooks.json:pre_tool_use:0:0",
+    "trusted_hash_unchanged": "sha256:f39cf9eac1e46f8bc70dc5b6c60e1ba1b4ce51a15affbc3210a0a70cac8821cb"
+  },
+  "config_sha256": "d6e1958c8e917693ac92a0645f3662b9459aa8ce67c60ee25c580c4b983de5de",
+  "disabled_monotonic": 248372.5550227,
+  "prior_owned_cleanup": {
+    "active_processes": 0,
+    "method": "owned Windows Job Object",
+    "pid": 25128
+  },
+  "prior_ready": {
+    "cleanup": {
+      "active_processes": 0,
+      "method": "owned Windows Job Object",
+      "pid": 30528
+    },
+    "inventory_validation": null,
+    "matches_expected": true,
+    "payload_matches": true,
+    "phase": "ready",
+    "startup": {
+      "context_bytes": 7901,
+      "context_sha256": "41b85850a5dc50b5110e7dbed7cf703af3ec9042f2e1dbbe94be78d12a36fb58",
+      "receipt_index": 18,
+      "received_monotonic": 248370.2889435,
+      "thread_id": "01a09262-e5be-7801-834b-b10fd45f7837",
+      "turn_id": "01a09262-e5ea-7f90-adc5-866c60c7d4df"
+    }
+  }
+}

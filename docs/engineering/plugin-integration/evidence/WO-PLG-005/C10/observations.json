@@ -1,0 +1,273 @@
+{
+  "schema": "verity-codex-acceptance-index-v1",
+  "case": "C10",
+  "created_at": "2026-09-11T21:09:21.668176+00:00",
+  "kind": "Agent-authored consolidation of retained observations; no new native run or assurance decision.",
+  "source_paths_relative_to": "This case directory",
+  "expected": {
+    "starting_fixture": "Live disposable profile; handler hangs past the configured host timeout",
+    "action": "Repeat VER-PLG-008 C08; observe the pending edit after host cancellation",
+    "observable_result": "Record host timeout and actual effects without assuming denial; absent required refusal marks the route unqualified; inspect before retry",
+    "additional_evidence": "host cancellation/output trace; independent target hashes/effect count; qualification result"
+  },
+  "observed": "The unchanged synchronous native hook times out after 30,012 ms (30.046185999992304 seconds between observed start and receipt). No supported handler refusal arrives. The host then requests ordinary approval of the exact reviewed synthetic patch; one one-time acceptance and one completed native file update occur. Final target bytes equal that patch. Configuration/binding/runtime restoration and zero outer processes are confirmed.",
+  "conclusion": "fail",
+  "qualification": {
+    "qualified": false,
+    "reason": "Host timeout did not supply required refusal. The observed synthetic edit proceeded after ordinary one-time approval. WO-PLG-005 remains in_progress."
+  },
+  "exit_status": null,
+  "exit_status_meaning": "No aggregate command was executed. Actual retained subprocess/observer statuses are indexed below; an assessment pass does not rewrite a raw exit.",
+  "exit_status_evidence": [
+    {
+      "path": "host-timeout-01/live/dispatch.jsonl",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "host-timeout-01/observations.json",
+      "json_pointer": "/observer_exit_status",
+      "value": 0
+    },
+    {
+      "path": "runtime-preparation-01/command-0/command.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "runtime-preparation-01/command-1/command.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "runtime-preparation-01/command-2/command.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "runtime-preparation-01/command-3/command.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    }
+  ],
+  "current_capture_directories": [
+    "host-timeout-01",
+    "runtime-preparation-01"
+  ],
+  "historical_capture_directories": [],
+  "limitations": [
+    "A completed negative observation is not passing enforcement or qualification.",
+    "The dispatcher is deliberately stalled before its source/shared handler starts, so no shared inner deadline has started. The native guard and host timeout are unchanged.",
+    "The one-time acceptance is the previously reviewed synthetic test approval; it changes no permission profile or session-wide authority.",
+    "A final changed target is the observed effect; other sentinels are unchanged. No global write-count guarantee is claimed.",
+    "This injection does not test a shell guard that cannot launch."
+  ],
+  "source_evidence": [
+    {
+      "path": "host-timeout-01/actions.txt",
+      "bytes": 36824,
+      "sha256": "31660d3559c5ea837cca1b626c9ef9c4f583ab5b2b1098c9dc298b5977a14e4f",
+      "role": "current"
+    },
+    {
+      "path": "host-timeout-01/binding-before.raw.json",
+      "bytes": 862,
+      "sha256": "b0246c0d8d267617e097126067275ca3e6e26e2e77c9161b7a920ec5e196c3d0",
+      "role": "current"
+    },
+    {
+      "path": "host-timeout-01/dispatcher.json",
+      "bytes": 4912,
+      "sha256": "db3ebfd17f24924d1547e882c2b710ef8387cf097e5266ab472f841af98bad13",
+      "role": "current"
+    },
+    {
+      "path": "host-timeout-01/live/actions.txt",
+      "bytes": 6149,
+      "sha256": "df27263458944784d81882f289f583a8361650d860ee5eb1dc4c20b92c94b3cd",
+      "role": "current"
+    },
+    {
+      "path": "host-timeout-01/live/approval-prepared.json",
+      "bytes": 1419,
+      "sha256": "cee5d9336053eaa72f689202d43e0d3ce0f3d1e75e6c69112a724fa1dff81313",
+      "role": "current"
+    },
+    {
+      "path": "host-timeout-01/live/dispatch.jsonl",
+      "bytes": 25423,
+      "sha256": "0329b4e4263553e786b196261bee25ac5f55d432ecdeda7bd68f5d5e9ab8cb23",
+      "role": "current"
+    },
+    {
+      "path": "host-timeout-01/live/observations.json",
+      "bytes": 23310,
+      "sha256": "4d3ce6fdbd893ea99642def67940215f8459e72642cba205a2a03e93b0b8467b",
+      "role": "current"
+    },
+    {
+      "path": "host-timeout-01/live/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "host-timeout-01/live/stdout.txt",
+      "bytes": 62008,
+      "sha256": "5bd018353b65577a15e7f4cff669191201589ffdc2c3a910f0382117dc1d3947",
+      "role": "current"
+    },
+    {
+      "path": "host-timeout-01/live/transcript.json",
+      "bytes": 63702,
+      "sha256": "9cd07aa1efe1ea57a7983525ada1efcc9bdfa1b1a0070a6b5dd1a38442fbcda3",
+      "role": "current"
+    },
+    {
+      "path": "host-timeout-01/observations.json",
+      "bytes": 2884,
+      "sha256": "0ff96954ad6dcf6da3e8dc7dfbd8b2f5c401d6b622ed5e26682361461a09c4a7",
+      "role": "current"
+    },
+    {
+      "path": "host-timeout-01/one-edit-plan.json",
+      "bytes": 172,
+      "sha256": "b26a771e4551c36c3a798cb7157e2a8afa518e7d8bc4b90f4b2725bcea432d60",
+      "role": "current"
+    },
+    {
+      "path": "host-timeout-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "host-timeout-01/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/actions.txt",
+      "bytes": 21656,
+      "sha256": "4a3968099b60afcff406ae51654ffc58759cfb5db5f0f586255558090fea6a87",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-0/command.json",
+      "bytes": 320,
+      "sha256": "a1163ab8e7cb326517a721ee84a46fedea48a6c9997d2fdd8fc592f53babeca1",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-0/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-0/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-1/command.json",
+      "bytes": 453,
+      "sha256": "178e41b918c55cef68a1541431bce1b6a7f0e46d3ce647c69948d5a3e1a3c128",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-1/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-1/stdout.txt",
+      "bytes": 207,
+      "sha256": "616edf6a355a6db7168c4055f92f0fdd275afef26d5cbd90693013022123d6a0",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-2/command.json",
+      "bytes": 1091,
+      "sha256": "f019b82740e899a5a56bffc3282afdf3def5d338fb9fe86dbc4098cdac1b45b2",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-2/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-2/stdout.txt",
+      "bytes": 2309,
+      "sha256": "08bdbe1d9c17d6e8253ce27daa0e29843af17a9b889374346cdb7cd8f554364e",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-3/command.json",
+      "bytes": 387,
+      "sha256": "d143b03f80852b61c6087f9fb153228cb583e439ef5a9187a29ae98884cc6b94",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-3/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/command-3/stdout.txt",
+      "bytes": 12842,
+      "sha256": "8d14f8464d60bac62f4d60cd1a4f86f7e9d8ec32c03983f2488237cd7c46a565",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation-01/observations.json",
+      "bytes": 140,
+      "sha256": "ff61e80c230db2a0f9964e9f025de6969e5229afea89f38b2436f5eec9c1da5f",
+      "role": "current"
+    },
+    {
+      "path": "../../../verification/VER-PLG-005.md",
+      "bytes": 7948,
+      "sha256": "dea7963993a1be26b41bfa4d7a6c1199f2c19613940c01eeaef5d4ead9301e30",
+      "role": "approved expectation"
+    }
+  ],
+  "updated_at": "2026-09-11T21:32:26.364109+00:00",
+  "negative_observation_complete": true,
+  "enforcement_result": "Failed required enforcement; the negative observation completed.",
+  "actual_effect_count": 1,
+  "required_handler_refusal_observed": false,
+  "additional_read_only_reassessment": {
+    "assessor_path": "../../../../../../tests/plugin_integration/codex_adapter/c10_c11_runner.py",
+    "assessor_sha256": "2918dac94e4435993441da1937a0b99fe91de606bbad7d6874638c5bb3af4a77",
+    "matches_retained_assessment": true,
+    "final_gates_pass": true,
+    "ordered_transcript_indexes": {
+      "session_context_completed": 16,
+      "pre_tool_started": 32,
+      "native_timeout": 33,
+      "file_change_started": 34,
+      "approval_requested": 36,
+      "one_acceptance_sent": 37,
+      "file_change_completed": 40,
+      "turn_completed": 76
+    },
+    "actual_input_matches_reviewed_patch": true,
+    "approval_proof_matches_actual_request_and_exact_patch": true,
+    "native_reported_timeout_ms": 30012,
+    "observed_hook_seconds": 30.046185999992304,
+    "expected_and_observed_after_sha256": "565452fa538024f71b0c359e2bfd8fd3a1a2f5676d5400072704dfd4e86fef07",
+    "actual_session_context_bytes": 7901,
+    "native_session_context_equals_shared_output": true,
+    "session_context_sha256": "41b85850a5dc50b5110e7dbed7cf703af3ec9042f2e1dbbe94be78d12a36fb58",
+    "shared_dispatch_rows": 1,
+    "shared_before_tool_handler_started": false,
+    "notes": "Read-only reconstruction of retained evidence. No native launch, new approval, file effect or lifecycle decision during reassessment."
+  }
+}

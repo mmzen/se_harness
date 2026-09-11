@@ -9,12 +9,59 @@ import unittest
 spec = importlib.util.spec_from_file_location("adapter_observer", Path(__file__).with_name("observer.py"))
 observer = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(observer)
+live_spec = importlib.util.spec_from_file_location("adapter_live_observation", Path(__file__).with_name("live.py"))
+live = importlib.util.module_from_spec(live_spec)
+live_spec.loader.exec_module(live)
 review_spec = importlib.util.spec_from_file_location("adapter_review_ui", Path(__file__).with_name("interactive.py"))
 review = importlib.util.module_from_spec(review_spec)
 review_spec.loader.exec_module(review)
 
 
 class ObserverTests(unittest.TestCase):
+    def test_compact_item_must_wait_for_its_own_turn_before_restoration(self):
+        # Native resume-compact-02 ordering: item completion precedes turn
+        # completion. Prior/foreign turns cannot release the restoration call.
+        item = {"method": "item/completed", "params": {"threadId": "thread", "turnId": "compact",
+                "item": {"type": "contextCompaction", "id": "compact-item"}}}
+        def completed(thread, turn):
+            return {"method": "turn/completed", "params": {"threadId": thread,
+                    "turn": {"id": turn, "status": "completed", "error": None}}}
+        history = [completed("thread", "compact"), item, completed("thread", "old"),
+                   completed("another-thread", "compact"), completed("thread", "compact")]
+        observed = []
+        def wait(predicate, first):
+            for index, value in enumerate(history[first:], first):
+                if predicate(value):
+                    observed.append(index)
+                    return value
+            raise live.ObservationStopped("test stream exhausted before required notification")
+        result = live.wait_for_compact_turn(wait, "thread", 1)
+        self.assertEqual(observed, [1, 4])
+        self.assertEqual(result, (item, history[4]))
+
+    def test_compact_item_alone_does_not_release_restoration(self):
+        item = {"method": "item/completed", "params": {"threadId": "thread", "turnId": "compact",
+                "item": {"type": "contextCompaction", "id": "item"}}}
+        def wait(predicate, first):
+            if predicate(item):
+                return item
+            raise live.ObservationStopped("deadline without compact-turn completion")
+        with self.assertRaises(live.ObservationStopped):
+            live.wait_for_compact_turn(wait, "thread", 0)
+
+    def test_ambiguous_or_failed_compact_turn_cannot_restore(self):
+        for turn_id, status, error in ((None, "completed", None), ("", "completed", None),
+                                       ("compact", "failed", {"message": "failed"}),
+                                       ("compact", "interrupted", None)):
+            item = {"method": "item/completed", "params": {"threadId": "thread", "turnId": turn_id,
+                    "item": {"type": "contextCompaction", "id": "item"}}}
+            turn = {"method": "turn/completed", "params": {"threadId": "thread",
+                    "turn": {"id": turn_id, "status": status, "error": error}}}
+            def wait(predicate, first):
+                return next(value for value in (item, turn) if predicate(value))
+            with self.subTest(turn_id=turn_id, status=status), self.assertRaises(live.ObservationStopped):
+                live.wait_for_compact_turn(wait, "thread", 0)
+
     def test_external_review_stop_and_deadline_always_cleanup_owned_process(self):
         class Process:
             pid = 123

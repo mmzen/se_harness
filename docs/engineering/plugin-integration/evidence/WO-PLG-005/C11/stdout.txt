@@ -1,0 +1,27 @@
+C11 stdout: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+provenance | ../C10/runtime-preparation-01/command-0/stdout.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+provenance | ../C10/runtime-preparation-01/command-1/stdout.txt | 207 bytes | sha256 616edf6a355a6db7168c4055f92f0fdd275afef26d5cbd90693013022123d6a0
+provenance | ../C10/runtime-preparation-01/command-2/stdout.txt | 2309 bytes | sha256 08bdbe1d9c17d6e8253ce27daa0e29843af17a9b889374346cdb7cd8f554364e
+provenance | ../C10/runtime-preparation-01/command-3/stdout.txt | 12842 bytes | sha256 8d14f8464d60bac62f4d60cd1a4f86f7e9d8ec32c03983f2488237cd7c46a565
+historical | binding-loss-preparation-01/existing-edit-gate-tests-stdout.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+historical | binding-loss-preparation-01/focused-tests-stdout.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+historical | binding-loss-preparation-01/preview-stdout.txt | 28570 bytes | sha256 395d96372c13e8dc1fb831152d228f5b1c101578fa3a1afee9b868653ade8dea
+current | binding-loss-preparation-02/existing-edit-gate-tests-stdout.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | binding-loss-preparation-02/focused-tests-stdout.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | binding-loss-preparation-02/preview-stdout.txt | 28575 bytes | sha256 3a4777972a2cdb3e5f8c9ddbfb400309b0b720367250ca419eeb17d1725490c7
+current | invalid-output-01/live/stdout.txt | 60529 bytes | sha256 49eb3aa2da60bd98b69addfdd56a7cf817cf896103fa7f5b2833dffa4cfcb782
+current | invalid-output-01/stdout.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | lost-active-binding-01/lost-stdout.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | lost-active-binding-01/lost/stdout.txt | 61889 bytes | sha256 942b63de4282cc66bf989dc0a9aa3ba42703a6e8c16e6b24ab08a5a9641a71b9
+current | lost-active-binding-01/ready-stdout.txt | 811 bytes | sha256 b54aecb7c7496e0bdc5ffa92e7624a4b4d67a7731ec0e11fe813103072f2e547
+current | lost-active-binding-01/ready/stdout.txt | 58117 bytes | sha256 d163eb2bb0c74a1f54dd714be3186df9466ca5af7eec8d73180f92b009cb5b15
+current | lost-active-binding-01/restored-stdout.txt | 268 bytes | sha256 5fcf289b6d659a5265dfccec9ffc1711547e66b483ffd33cc64ba208ecb2551f
+current | lost-active-binding-01/restored/stdout.txt | 33014 bytes | sha256 f559ff6fa7999fc3f2e98ee682ac2ad39ff046bcf3136fe4a08737fe541f28e3
+current | missing-output-01/live/stdout.txt | 60446 bytes | sha256 bc98f36ece0691494097b056217528a42de81b462096a66a3814f109b58bb3b8
+current | missing-output-01/stdout.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855

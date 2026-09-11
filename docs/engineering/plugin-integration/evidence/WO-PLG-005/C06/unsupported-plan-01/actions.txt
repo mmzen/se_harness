@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+    "app-server",
+    "--stdio"
+  ],
+  "prompt": "This is a synthetic tool-coverage observation. Invoke update_plan exactly once with one completed step named 'Synthetic coverage observation'. Do not invoke any other tool, shell command, file operation, MCP, subagent, setup or permission change. If that tool is unavailable or a hook refuses it, stop without an alternative or retry. Report the observed result only.",
+  "source": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\tests\\plugin_integration\\codex_adapter\\live.py"
+}

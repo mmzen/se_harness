@@ -1,0 +1,10 @@
+C01 actions: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | current-inventory-01/actions.txt | 316 bytes | sha256 ac07f4dddad191bc20124702802ff1857a2db333a721667a6e6c46a5c70f0ef8
+historical | stale-inventory-01/actions.txt | 664 bytes | sha256 a2aa00116ae8d7f007044c13dad28eb2c2aabfa17cc031d55cd8b5387ae63785
+historical | stale-inventory-02/actions.txt | 316 bytes | sha256 ac07f4dddad191bc20124702802ff1857a2db333a721667a6e6c46a5c70f0ef8

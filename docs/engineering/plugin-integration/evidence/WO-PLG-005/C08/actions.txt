@@ -1,0 +1,18 @@
+C08 actions: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | missing-01/actions.txt | 20283 bytes | sha256 60350de6f11937a94fa0559b845a811e9951f95d27768209db8b29a0a3c86360
+current | missing-01/live/actions.txt | 370 bytes | sha256 7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321
+current | removed-01/actions.txt | 20564 bytes | sha256 cae5ff93c43439720d62ef66c6c66032f10e92908049034a734aa2173a0dee4e
+current | removed-01/live/actions.txt | 370 bytes | sha256 7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321
+current | runtime-preparation/identity/command.json | 1133 bytes | sha256 65b15b45a5d4a92da8d1900c6b17059dc2446e4f6b687438b85ffba669020ae1
+current | runtime-preparation/install/command.json | 416 bytes | sha256 1a1d31540ad0340b7e587f58e822c2629e6a1a8f20e7c0f2d223835889742efd
+current | runtime-preparation/venv/command.json | 350 bytes | sha256 fdb552618206f3a65f47eb6714daaa5859badb29f9c7c0fd52d651aba2d79c28
+current | runtime-ready-01/actions.txt | 20293 bytes | sha256 a4d8ad720cacd85061226b083d05212af15ca9d5980dd38b758c947b388e781a
+current | runtime-ready-01/live/actions.txt | 370 bytes | sha256 7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321
+current | wrong017-01/actions.txt | 20186 bytes | sha256 0c1279e88474b07c7b974bfa2f85cb980b2d395f2e9b5fa2614139c1dcaf3508
+current | wrong017-01/live/actions.txt | 370 bytes | sha256 7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321

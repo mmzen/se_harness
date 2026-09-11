@@ -1,0 +1,20 @@
+C07 stdout: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | registered-shell-01/empty-host-PreToolUse/stdout.txt | 304 bytes | sha256 bbfafa74538fa53d0e0e427ae0b57bb84ead3f288e98478e1c38dff1e2dfaa9f
+current | registered-shell-01/empty-host-SessionStart/stdout.txt | 271 bytes | sha256 280b95b11da7a9c2d382e1621738dc868d44f4316aa35789c4ae73aaa7bdc3cb
+current | registered-shell-01/empty-positive-route-PreToolUse/stdout.txt | 310 bytes | sha256 42043fbcfafb2c7cc9857346dad17d4dd48e3712cd21ea8616e4b643ba274339
+current | registered-shell-01/empty-positive-route-SessionStart/stdout.txt | 277 bytes | sha256 c174e7a1eb852deecf06097351c8105f0284dee106e9b27bd954782ae5e1881f
+current | registered-shell-01/excluded-route-PreToolUse/stdout.txt | 310 bytes | sha256 42043fbcfafb2c7cc9857346dad17d4dd48e3712cd21ea8616e4b643ba274339
+current | registered-shell-01/excluded-route-SessionStart/stdout.txt | 277 bytes | sha256 c174e7a1eb852deecf06097351c8105f0284dee106e9b27bd954782ae5e1881f
+current | registered-shell-01/open-decision-PreToolUse/stdout.txt | 310 bytes | sha256 42043fbcfafb2c7cc9857346dad17d4dd48e3712cd21ea8616e4b643ba274339
+current | registered-shell-01/open-decision-SessionStart/stdout.txt | 277 bytes | sha256 c174e7a1eb852deecf06097351c8105f0284dee106e9b27bd954782ae5e1881f
+current | registered-shell-01/positive-sentinel-after/stdout.txt | 139 bytes | sha256 14160b37c3713e06ffda71a0ce6c20da5b1aec51a6c9de66b58a0693c8107c52
+current | registered-shell-01/positive-sentinel-before/stdout.txt | 139 bytes | sha256 14160b37c3713e06ffda71a0ce6c20da5b1aec51a6c9de66b58a0693c8107c52
+current | registered-shell-01/stdout.txt | 407 bytes | sha256 679a3b2c52195261f8135b4753f88e686222779e9aa6afae347493bda8166b16
+current | registered-shell-01/unaccepted-host-PreToolUse/stdout.txt | 304 bytes | sha256 bbfafa74538fa53d0e0e427ae0b57bb84ead3f288e98478e1c38dff1e2dfaa9f
+current | registered-shell-01/unaccepted-host-SessionStart/stdout.txt | 271 bytes | sha256 280b95b11da7a9c2d382e1621738dc868d44f4316aa35789c4ae73aaa7bdc3cb

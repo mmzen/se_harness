@@ -1,0 +1,405 @@
+{
+  "schema": "verity-codex-acceptance-index-v1",
+  "case": "C04",
+  "created_at": "2026-09-11T21:09:20.771434+00:00",
+  "kind": "Agent-authored consolidation of retained observations; no new native run or assurance decision.",
+  "source_paths_relative_to": "This case directory",
+  "expected": {
+    "starting_fixture": "Event missing a required field, then malformed event data",
+    "action": "Submit each event through the accepted test route.",
+    "observable_result": "The host-visible failure preserves the accepted mapping’s refusal/unready response; no successful check is reported.",
+    "additional_evidence": "raw event; script response; host response"
+  },
+  "observed": "Six missing-field or malformed-event inputs produce the supported visible failure response, with no sentinel-helper call. Positive sentinel controls run before and after. Repository lifecycle hashes remain unchanged.",
+  "conclusion": "pass",
+  "qualification": {
+    "qualified": false,
+    "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+  },
+  "exit_status": null,
+  "exit_status_meaning": "No aggregate command was executed. Actual retained subprocess/observer statuses are indexed below; an assessment pass does not rewrite a raw exit.",
+  "exit_status_evidence": [
+    {
+      "path": "registered-shell-01/array-tool/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/blank-tool/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/malformed-json/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/missing-required-cwd/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/object-tool/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/0/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/1/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/2/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/3/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/4/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/5/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/6/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/7/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-after/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-before/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/wrong-event-shape/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    }
+  ],
+  "current_capture_directories": [
+    "registered-shell-01"
+  ],
+  "historical_capture_directories": [],
+  "limitations": [
+    "Accepted registered-shell route, not a native pending-edit observation."
+  ],
+  "source_evidence": [
+    {
+      "path": "registered-shell-01/actions.txt",
+      "bytes": 1235,
+      "sha256": "cf9cf318ab96d42a060caf1b5a8aca91fdb029817cac7568c93617631ac3ebbd",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/array-tool/actions.txt",
+      "bytes": 6657,
+      "sha256": "409fe8dafdbd50b17280f6ba67b8d22dd3ab2041835b6d6b42eebdffd769af93",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/array-tool/event.json.txt",
+      "bytes": 317,
+      "sha256": "6457767e03db893838058989914eb8aa91dbecab283a1cb1fd7c9d9e1887f9fb",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/array-tool/observations.json",
+      "bytes": 2148,
+      "sha256": "a1cdc0580184f4df00fb06468813b294c92baa037ac79c3993851918c6b5e156",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/array-tool/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/array-tool/stdout.txt",
+      "bytes": 294,
+      "sha256": "77f53fe5883fa3a62443e3d0581fada9bdbe978fc78a70b31a4089042118a598",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/blank-tool/actions.txt",
+      "bytes": 6657,
+      "sha256": "409fe8dafdbd50b17280f6ba67b8d22dd3ab2041835b6d6b42eebdffd769af93",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/blank-tool/event.json.txt",
+      "bytes": 305,
+      "sha256": "174c891d4b258a07bb2bd25bf972b2e0aa1675eee3f6d2357e9c8daa930ad9c0",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/blank-tool/observations.json",
+      "bytes": 2148,
+      "sha256": "f1c579bf1ed133f68c5169d3e7f9ef13452439a2e4e8b51a573bb96c44115483",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/blank-tool/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/blank-tool/stdout.txt",
+      "bytes": 294,
+      "sha256": "77f53fe5883fa3a62443e3d0581fada9bdbe978fc78a70b31a4089042118a598",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/helper-spawn.jsonl",
+      "bytes": 1231,
+      "sha256": "6892b8722a133fcdf37b504b0bb59e0456d68897bd06f4696fd2eab253787cfb",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/malformed-json/actions.txt",
+      "bytes": 6657,
+      "sha256": "409fe8dafdbd50b17280f6ba67b8d22dd3ab2041835b6d6b42eebdffd769af93",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/malformed-json/event.json.txt",
+      "bytes": 1,
+      "sha256": "021fb596db81e6d02bf3d2586ee3981fe519f275c0ac9ca76bbcf2ebb4097d96",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/malformed-json/observations.json",
+      "bytes": 2166,
+      "sha256": "6395aea8c3bf7fadcf87b2db13fea4fb6929ccab287d348bb755d6ab5f979940",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/malformed-json/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/malformed-json/stdout.txt",
+      "bytes": 328,
+      "sha256": "fe20dc9f639e9b8f8d09ad653be9e5029159283ede5b9118d3a5f984a9e713fd",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/missing-required-cwd/actions.txt",
+      "bytes": 6657,
+      "sha256": "409fe8dafdbd50b17280f6ba67b8d22dd3ab2041835b6d6b42eebdffd769af93",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/missing-required-cwd/event.json.txt",
+      "bytes": 122,
+      "sha256": "0ac84ad76827d1c4c513914dadaf6c94d9b5684ba80488cdfcc4227cb22fa44b",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/missing-required-cwd/observations.json",
+      "bytes": 2150,
+      "sha256": "fa182834a7f52c8fdadee40e86fe9bf2ec468754a82159d82cec77d2a3a0d275",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/missing-required-cwd/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/missing-required-cwd/stdout.txt",
+      "bytes": 286,
+      "sha256": "e4f208607b67e013c769f7499c3a31205469ff2ffa5cf8740b62c7a608131507",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/object-tool/actions.txt",
+      "bytes": 6657,
+      "sha256": "409fe8dafdbd50b17280f6ba67b8d22dd3ab2041835b6d6b42eebdffd769af93",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/object-tool/event.json.txt",
+      "bytes": 304,
+      "sha256": "ee055c51b0105c15f4eecc990b26abdd194b5e5577a64eebbf9836e4cb8eeb05",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/object-tool/observations.json",
+      "bytes": 2149,
+      "sha256": "a89911541ec620ba12ffa440cd5cbd0e531212c7409e865b9bf416d3bd649cf3",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/object-tool/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/object-tool/stdout.txt",
+      "bytes": 294,
+      "sha256": "77f53fe5883fa3a62443e3d0581fada9bdbe978fc78a70b31a4089042118a598",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "bytes": 18026,
+      "sha256": "248d04148fa2996432ffdf2bb569d6e1dc8dab343d6e20c5fc83af64eddf6703",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-after/actions.txt",
+      "bytes": 6657,
+      "sha256": "409fe8dafdbd50b17280f6ba67b8d22dd3ab2041835b6d6b42eebdffd769af93",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-after/event.json.txt",
+      "bytes": 315,
+      "sha256": "9d19c7dc3aa63b917b315bcb8f4382b4a7c10287dd6aacec0774fdf1a6c348c2",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-after/observations.json",
+      "bytes": 2679,
+      "sha256": "4a85a86d5579dcb0c6b7deafa58ec94b46ca2987d49f02e48a55a29c76eb5545",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-after/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-after/stdout.txt",
+      "bytes": 139,
+      "sha256": "14160b37c3713e06ffda71a0ce6c20da5b1aec51a6c9de66b58a0693c8107c52",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-before/actions.txt",
+      "bytes": 6657,
+      "sha256": "409fe8dafdbd50b17280f6ba67b8d22dd3ab2041835b6d6b42eebdffd769af93",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-before/event.json.txt",
+      "bytes": 315,
+      "sha256": "9d19c7dc3aa63b917b315bcb8f4382b4a7c10287dd6aacec0774fdf1a6c348c2",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-before/observations.json",
+      "bytes": 1252,
+      "sha256": "2fec2e6dad416e6930ecec885fca8bee3257450c82f9f9d38624a178c67bc2f9",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-before/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-before/stdout.txt",
+      "bytes": 139,
+      "sha256": "14160b37c3713e06ffda71a0ce6c20da5b1aec51a6c9de66b58a0693c8107c52",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/state-after.json",
+      "bytes": 10540,
+      "sha256": "80427101a6d1db9592e1d9582204bc540eac25b1f6b000340164788e36adaa37",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/state-before.json",
+      "bytes": 10540,
+      "sha256": "80427101a6d1db9592e1d9582204bc540eac25b1f6b000340164788e36adaa37",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/stdout.txt",
+      "bytes": 193,
+      "sha256": "1e74b7ab6878097cdcb34eaaf2edd9042cc486568b7f19d06a23956718a6d742",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/wrong-event-shape/actions.txt",
+      "bytes": 6657,
+      "sha256": "409fe8dafdbd50b17280f6ba67b8d22dd3ab2041835b6d6b42eebdffd769af93",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/wrong-event-shape/event.json.txt",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/wrong-event-shape/observations.json",
+      "bytes": 2146,
+      "sha256": "7097121172a465ca2799db4b78e4af80faf141fada21edfaefe92f4eba6e0a59",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/wrong-event-shape/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/wrong-event-shape/stdout.txt",
+      "bytes": 285,
+      "sha256": "489834f4a6ae3d9e1c456d88033e11a1785c9d288adf8bc6d1a43fca0b808255",
+      "role": "current"
+    },
+    {
+      "path": "../../../verification/VER-PLG-005.md",
+      "bytes": 7948,
+      "sha256": "dea7963993a1be26b41bfa4d7a6c1199f2c19613940c01eeaef5d4ead9301e30",
+      "role": "approved expectation"
+    }
+  ]
+}
