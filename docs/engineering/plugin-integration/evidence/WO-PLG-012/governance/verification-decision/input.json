@@ -1,0 +1,523 @@
+{
+  "operator_quote": "i verify both VREC-PLG-010  and VREC-PLG-009",
+  "decision_right": "DR-VREC-DECIDE",
+  "actor": "assurance-owner",
+  "record": "VREC-PLG-009",
+  "candidate": "aea16859a3ea106e33f759098712cf80f83f3843",
+  "head_before_decision": "a218a065eee0bd8c95955525939be32f6200f2fe",
+  "record_before_sha256": "3dfa3bb139e442360043173f23d79ff3745fc54f709991e6c752c8667ad1d0bc",
+  "evidence_file_count": 100,
+  "bound_evidence": [
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C01/actions.txt",
+      "bytes": 8007,
+      "sha256": "92cb65c82ed220a181408d01eaa4f88c344aca1e4d0fb97dc2c3e4e7f729c8bf"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C01/observations.json",
+      "bytes": 12086,
+      "sha256": "dcdf9307b3f6b8ec745d2111d9d897f5b6119ee185e9ae88b9f8d920425ec026"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C01/stderr.txt",
+      "bytes": 4420,
+      "sha256": "4f269fc9597eff6ad1f42fba78a59e78e39ae60e48ac1fd38bfe1e6ced35ca58"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C01/stdout.txt",
+      "bytes": 14522,
+      "sha256": "26bab5486a9150b0223b8bb6543c449ff41f2ee5eeae053f1ef8d5b70ad11197"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C02/actions.txt",
+      "bytes": 3334,
+      "sha256": "59581d1b743b3085ecd8d1c663b93203c0ee4c95974fcc3c73f95452428ebcf0"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C02/observations.json",
+      "bytes": 4963,
+      "sha256": "8f4bb3be0188779135997dff5dcc1e1cf0859c50eff9640a8c309217def3c1fe"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C02/stderr.txt",
+      "bytes": 268,
+      "sha256": "a97b0570cd839312dd302905852d2568af139561fd89c282a69c7b266fbcceca"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C02/stdout.txt",
+      "bytes": 9424,
+      "sha256": "642871b8bd9bd0b816c386372da607aabcc86b83f5f293e2f09aad064c530a16"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C03/actions.txt",
+      "bytes": 9754,
+      "sha256": "b045ca277b0566aa78fccb15b1cb3bb0339ed262923873373b83bf2dbbc66552"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C03/observations.json",
+      "bytes": 13229,
+      "sha256": "b7da70e6240e8f18fce25236b8d53d96b786429bdeb53037c22031e32fdb4c2f"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C03/stderr.txt",
+      "bytes": 628,
+      "sha256": "1a3e905e35607c2ae558f94882dbab78900a388a194c4b5ea2415cb17283ba8b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C03/stdout.txt",
+      "bytes": 19102,
+      "sha256": "51e9006ee2b7e6376d6c0f194698c9b8f41317815129bae205d52ce26a9f674d"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C04/actions.txt",
+      "bytes": 2022,
+      "sha256": "199077e3a3cdd0bca14dcf33704a69ff424b98fe4b29c6385fbc5aa7ce65198e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C04/observations.json",
+      "bytes": 6394,
+      "sha256": "919336823a878ce8f910c2f23ebe21ee16e1bba809c75977e356b8cb291a0aca"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C04/stderr.txt",
+      "bytes": 313,
+      "sha256": "6c583c30a94d0f8198a48e9bb9cab90f7821b72451237910ff1ad157c7095a0e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C04/stdout.txt",
+      "bytes": 390,
+      "sha256": "a9897a04faee4358da6a4e922e250255110f366f6f49cbb3c671e5d1952420a6"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C05/actions.txt",
+      "bytes": 13822,
+      "sha256": "222c331b376f6b9ecce52c24a76d1499e8f011703586ca23481557918cc05fb2"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C05/observations.json",
+      "bytes": 40173,
+      "sha256": "4a687e085b8f32abf576f371d5f4d93ac4388f61d9d049ab80d48b0d92183bfa"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C05/stderr.txt",
+      "bytes": 1893,
+      "sha256": "d0877c259451e79c91e60b5c493f89602e69c804d6a85246781e8fd265865781"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C05/stdout.txt",
+      "bytes": 36866,
+      "sha256": "6f0187349c885e93406a0b5493f63926b17d4b205730ceff3af6bfca084a2d8b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C06/actions.txt",
+      "bytes": 11404,
+      "sha256": "507d838ea34095118653a35fbc692606a1e1e03286cab21636bce8695f51a5cc"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C06/observations.json",
+      "bytes": 26316,
+      "sha256": "02787b8a5c7a20c5e76a83394d8ff72830f09dbc2e175f73ff70f098a6fd47db"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C06/stderr.txt",
+      "bytes": 1250,
+      "sha256": "d34ee48de2ba0875ce114099609336dfc4579c293e405ceae513d8390e0ae9bf"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C06/stdout.txt",
+      "bytes": 2167,
+      "sha256": "d652222f21d37b9135fdabcd365d5873a09505f8dc9e15d0ba58e6e4d4251650"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C07/actions.txt",
+      "bytes": 4911,
+      "sha256": "5d211dd9066203d2035dc8e0fef200586e966cdb9f1b4eac1162e9bcad0a2aed"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C07/observations.json",
+      "bytes": 15879,
+      "sha256": "6da9527e60b724e613bc603afd8939e32b13b55c0bbe313871fe48b055b86488"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C07/stderr.txt",
+      "bytes": 703,
+      "sha256": "42c2f00dadc863e02b10e5d5228fd1b34a8852cf3908a9d85e41d83d7b2224b3"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C07/stdout.txt",
+      "bytes": 17767,
+      "sha256": "a056a81d1db878c3723c6511c34eb67feac78d1402c8dfce013c04df1cd88000"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C08/actions.txt",
+      "bytes": 24761,
+      "sha256": "721dbe2c0d0e41568c48ef64845bcd374e3bb8eb696ca397620fbae024b55701"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C08/observations.json",
+      "bytes": 124070,
+      "sha256": "9b57d1f58a3c65c6d98192ad9f22462c23331b6604f75112aeabcca2618a9c25"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C08/stderr.txt",
+      "bytes": 10335,
+      "sha256": "be160e0337163051cde41f23d17b831294eb58dcf675b4f5caac43c7b11c044f"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/C08/stdout.txt",
+      "bytes": 5484,
+      "sha256": "72b5e35a4e21693aec66a4d9910131cd953dc8e5c9a6171207f2dc57607204bc"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/README.md",
+      "bytes": 4325,
+      "sha256": "f30cc90e876cee828f72ddf3b6459f4bc92321ff2d9b463fc6ea2e19f7b17caf"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/WO-PLG-012-handoff.md",
+      "bytes": 1599,
+      "sha256": "6a9c8afe4ee3fe02f8202823ce3645c5cc2741cb6d69d5124f9db71e41a12159"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/acceptance/helpers/REPORT.md",
+      "bytes": 3269,
+      "sha256": "70e2f3502ef84853f79fd1227a08ebd964c739eac850522babdf69f7c7d6856f"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/acceptance/helpers/audit.json",
+      "bytes": 64833,
+      "sha256": "e3c3feb125c09e22dc7fd7c420f1e8acf81e2d5811e5658edb8ff78e75381410"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/acceptance/helpers/inventory.json",
+      "bytes": 56838,
+      "sha256": "332a379e7fc242ab869998495de624135718115743ebffe145d9b3cb42800119"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/acceptance/helpers/raw-index.json",
+      "bytes": 61266,
+      "sha256": "c3004c1c5cdc044d122cd94102f5c68c6806e42287888051a1b95bbf6a831e0a"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/acceptance/helpers/raw.zip",
+      "bytes": 1196071,
+      "sha256": "77989599bf2db7c68636cf614e285a9794c191cee0a64c92576b4882a9314311"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/acceptance/helpers/source-path-map.json",
+      "bytes": 591224,
+      "sha256": "5c38d4cb5117def6d03ddee181d2bf70bca9224e892705386cd6684279ad4ef0"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/acceptance/instructions/audit.json",
+      "bytes": 2746,
+      "sha256": "ce6add76996a6a639fdc237138b09dbf068dac891d21f7c9f3edd565ed656fc8"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/acceptance/instructions/bundle-summary.json",
+      "bytes": 458,
+      "sha256": "594ab8b476f2b4187dd84aef6d157733733e4c1f57897b095e0d322a2accf869"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/acceptance/instructions/map.json",
+      "bytes": 236190,
+      "sha256": "c35ace0399555a705ec3661e1d8373186cf2ce72155443160858837c4b18a2e8"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/acceptance/instructions/report.md",
+      "bytes": 10249,
+      "sha256": "6c5e745340a50a370af04335e912381622a47f23f0d6a9a6c4f3fc3fc1325ccc"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/acceptance/instructions/trace-groups.json",
+      "bytes": 27562,
+      "sha256": "3fbb905e0b79ba94bce7effc75eb1016eeb1fc7a5eb3cc5516cb203fb683c3c7"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/acceptance/linux-replay/REPORT.md",
+      "bytes": 1929,
+      "sha256": "ed5b8a380762a3b753edac47c1023419c4c7567b72a0443a47a6e4f1d32fd9ac"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/acceptance/linux-replay/audit.json",
+      "bytes": 4354,
+      "sha256": "c204a75f6d42fc92bb89262f3071e40c6c35ead5fc201ebe887acee515747d16"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/acceptance/linux-replay/inventory.json",
+      "bytes": 16621,
+      "sha256": "f27d4e36fc2222eb476f62146c0ece664dbc70100076b350e0654f85069514e3"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/acceptance/linux-replay/source-path-map.json",
+      "bytes": 121963,
+      "sha256": "1f8c256ce98423b1dfeeadbd4e941ed73bf5e51bb3fea0efb34b2c437193c6c9"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-acceptance-evidence-lf.json",
+      "bytes": 6355,
+      "sha256": "cbdfd6345563eadd9e91aac6108672742d9e2854343e7c5fb340fad3a66683bc"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-acceptance-evidence.json",
+      "bytes": 2458,
+      "sha256": "a4ab46c8bb59a728a6b420e49f637840a9a49a55ec398c2649409a6a9f8c4d02"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-acceptance-handoff-lf.json",
+      "bytes": 134133,
+      "sha256": "65cd6a0914409ecb1a4ab61ca83c8bd9ec60e0c1689454821ec217707bc50578"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-acceptance-handoff.json",
+      "bytes": 133685,
+      "sha256": "ddd8ae08b2d15616997b38ae0957293a5814623d72223eb4c4022bef9ae1b20a"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-acceptance-scope.json",
+      "bytes": 131738,
+      "sha256": "67f637eeee1a6b5081e53492d513690ce3f494e42bb550cd56ea2c52b27a36eb"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-retained-acceptance-doctor.json",
+      "bytes": 25718,
+      "sha256": "b5aed293dfd57f1aceb2eaf827702930cd1d61872cf1626992bf85787f634205"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-retained-acceptance-preflight.json",
+      "bytes": 1329,
+      "sha256": "1a066b585cb9cc305b225aacb2a4e64728b4da83d4e112a94d71f0288553899c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-retained-acceptance-validate.json",
+      "bytes": 303801,
+      "sha256": "9d63a0b33b69739fda4b5725687d4e553be328a10f6f07f3151ff10ce21165d4"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/archive-review/REPORT.md",
+      "bytes": 3560,
+      "sha256": "e5205fe748080210bde713c6df79a82d4a774c18322397b9959aadff2665d484"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/archive-review/audit.json",
+      "bytes": 3846,
+      "sha256": "b07417e134a148e9123b68c5e1c418d93468928205ca395fdeed62b8a47b4c1e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/archive-review/inventory.json",
+      "bytes": 25289,
+      "sha256": "167c57800ca9f027067b3f805087bdf9c0df7ccfc9db4768111a71c0f6960c8b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/archive-review/raw.zip",
+      "bytes": 4234147,
+      "sha256": "3d97f0cb1df25b21c5b0cb6b3993d22d7f7e21037dc250908d1d1014c16ea258"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/ci-corrected/checks.json",
+      "bytes": 2010,
+      "sha256": "a7c91f87fcbbf55e39639e1db8570553bb944fd6b5b6365e569483923e52a18c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/ci-corrected/commands.json",
+      "bytes": 4998,
+      "sha256": "9b6ddd97ac170daecbe83f55666faf699579c553422fc07c941635401658cd8c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/ci-corrected/j00.json",
+      "bytes": 2647,
+      "sha256": "cd67436a6101ea6ba82168870c61958eec4c603937d8f4d72ad3238e4d6b9a6a"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/ci-corrected/j01.json",
+      "bytes": 2464,
+      "sha256": "6a2719e1c0ba2a23e641736cc36a57a59e05b1f4424b4b74ae3f97025e7c9874"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/ci-corrected/j02.json",
+      "bytes": 2467,
+      "sha256": "dd221e6c99966b33d3c5a554012cc587f4799fe446f75d21ec68b971f652f31a"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/ci-corrected/j03.json",
+      "bytes": 2824,
+      "sha256": "cf7035bce8422fcfc9c3a73a3e9ed5cd78e6b460778d440da8670a9c83b77900"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/ci-corrected/j04.json",
+      "bytes": 3753,
+      "sha256": "0c29b3e34914699243c093f068640fd9c312e9ff484900178ce02739e8770dec"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/ci-corrected/j05.json",
+      "bytes": 3756,
+      "sha256": "16e5c82d6eb482b9cc5b19930b89d10b12c75ad9cb83793cfcd5a7de51c800f3"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/ci-corrected/j10.json",
+      "bytes": 4118,
+      "sha256": "dd3dcb5a11c64f58967c4e633f2ffc6ed18ef3dafeabf49dd5fae305c05144f4"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/ci-corrected/j12.json",
+      "bytes": 3481,
+      "sha256": "49a9497ef7ad807eae358916d1d4bf21d3c84f3256bd9194144412fcca0a269b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/ci-corrected/pull.json",
+      "bytes": 219,
+      "sha256": "73658f304658a30ec2ab70959feda014e72f18635f53f1ff7f244babfa09579b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/ci-corrected/result.json",
+      "bytes": 2923,
+      "sha256": "c0db91bcc8cef55aeba628414665c7cda050db2d1c8c15353bfdc90629dbde46"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/completion/archive-live-handoff.json",
+      "bytes": 100056,
+      "sha256": "263d2f279ee35bd97ab13c58295304365bbb3cb8770bc6df73a108e26136ce11"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/completion/completed-evidence.json",
+      "bytes": 4330,
+      "sha256": "e43fbc447a766e27451b4e88ddf2e542ad8b84b4cba212116bb14ffe4968cf0e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/completion/completed-graph.json",
+      "bytes": 304181,
+      "sha256": "7e2af4eeac846064fee4a32e8ef19b76e75f08f9f0b88a213f20004217f2d0ab"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/completion/completed-live-state.json",
+      "bytes": 7085,
+      "sha256": "0ac83e9733821aacda2e0bd561f77766ff57d421743983427b3796edc82fbb47"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/completion/wo012-completion-applied.json",
+      "bytes": 7086,
+      "sha256": "f2bc896d2ab5e7a33d7ff9c390fa7e9ca815f2dfc872d861c2e3ce829ed5e0d7"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/completion/wo012-completion-plan.json",
+      "bytes": 7098,
+      "sha256": "2a66449f5aba7a1a7c51c5358a1c4e3d15daaec0a2ccfb3dbdcaaae96c09447b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/definition-delivery/definition-doctor.json",
+      "bytes": 25718,
+      "sha256": "b8f10919f53c6c159a6c6a45979658f3ba7859bb61cccda3fc303b0dfb5b081a"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/definition-delivery/definition-review-preflight.json",
+      "bytes": 1326,
+      "sha256": "10197bdd37fe3dd501d59371775c5790b923eac4b6b496f21408e230427a86ae"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/definition-delivery/definition-scope.json",
+      "bytes": 11622,
+      "sha256": "add47160959343282ffcff77c779e972f797c571fe9566841d7c8e18692dcda6"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/definition-delivery/definition-start-reading.json",
+      "bytes": 2288,
+      "sha256": "2b201c1e33e1a7349a5ad4f55a13b991218736445dcb0125773eac9e87a78c25"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/definition-delivery/definition-validate.json",
+      "bytes": 303396,
+      "sha256": "1f68c67136c9333a3905dabe5690f29e88e22214686055f273308844260919e6"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/definition-delivery/definitions-approval-applied.json",
+      "bytes": 12067,
+      "sha256": "698c44c2a976e5aecbbe6b2abd74c94e05e0044053f7ca4d49d6b6e4b223d63d"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/definition-delivery/definitions-approval-inputs.json",
+      "bytes": 560,
+      "sha256": "c898c973f625aaff7e8d556bd28f1aadbee4984dbdef8f0eb7b77637b36a5061"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/definition-delivery/definitions-approval-plan.json",
+      "bytes": 12079,
+      "sha256": "cd1e5507933b16257b6a631ddb3e6e5f5f12a2b248f492c3168833d77b2a1486"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/definition-delivery/delegated-start-preview.json",
+      "bytes": 2422,
+      "sha256": "356b6fa7a9c58c9e92832bdcd70dd785c05f8ac3a92b616e502b3420135e2bdc"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/definition-delivery/operator-instruction.json",
+      "bytes": 2769,
+      "sha256": "ddd8eb0ab09eb815987717724b9dc33e0ea3bda21982d4cdee5ce10302cb1a9c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/definition-delivery/work-order-approval-applied.json",
+      "bytes": 10851,
+      "sha256": "3b0f94d90daec3da29995721243e69ffd30d3786e67cf96094c656e472fc4217"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/definition-delivery/work-order-approval-inputs.json",
+      "bytes": 141,
+      "sha256": "39501b81df312cfb2125b48334106e3164e4a3462245c4d2d1c235cd70212b38"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/definition-delivery/work-order-approval-plan.json",
+      "bytes": 10863,
+      "sha256": "5ef0568f262fa86e469c431d0b3485c7bf57e4c30f9b2b1a01f4f8ec22d6d9cc"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/start/ro-start-applied.json",
+      "bytes": 8678,
+      "sha256": "fc8cacc12afd94da080f9cb223030e56820efa2473a114086471640e266079e3"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/start/ro-start-doctor.json",
+      "bytes": 25718,
+      "sha256": "b5aed293dfd57f1aceb2eaf827702930cd1d61872cf1626992bf85787f634205"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/start/ro-start-focus.json",
+      "bytes": 11903,
+      "sha256": "2c9183370e6224550edd50b2d7e0160c239af438ce182d8b5089ec879089e432"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/start/ro-start-preflight.json",
+      "bytes": 1325,
+      "sha256": "46775e0024cc8f73804d15bae5fe33b437be75b075ad4e48d81063f5edd82e58"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/governance/start/ro-start-preview.json",
+      "bytes": 8690,
+      "sha256": "b24d38c231b4e5be31f27f723d962ecadbe5d8f8cbfd8f7ed2a2b8f2ec88104d"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/handoff.json",
+      "bytes": 98627,
+      "sha256": "52fbda9696d1bda7286aad76c7ef7bee85e1016d52d87ac765fd4ed07b54d2a0"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/instruction-review.md",
+      "bytes": 2697,
+      "sha256": "1511734155d877abd6961756f3dfe367a851f6e03004e621d02eedd43099e950"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/retained-core-comparison.json",
+      "bytes": 1171,
+      "sha256": "e90e1f5b714034f0463bd4ea5efcce28d8ce2cedc0c731a941a8573d82ea0421"
+    }
+  ],
+  "transition_args": [
+    "transition",
+    ".",
+    "--set",
+    "VREC-PLG-009=verified",
+    "--decision",
+    "VREC-PLG-009=assurance-owner",
+    "--reason",
+    "VREC-PLG-009=On 2026-09-11 the operator stated \"i verify both VREC-PLG-010  and VREC-PLG-009\". Record this explicit DR-VREC-DECIDE assurance-owner decision for VREC-PLG-009, exact candidate aea16859a3ea106e33f759098712cf80f83f3843, and its 100 selected evidence files. The retained observations and disclosed platform, fixture and host-coverage limits define the verification scope. Candidate identity, preparation provenance and evidence remain fixed. Related work-order states, VREC-PLG-008, supersession, release and PR merge are not selected by this decision.",
+    "--json"
+  ]
+}

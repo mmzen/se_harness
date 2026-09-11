@@ -2,7 +2,7 @@
 id = "VREC-PLG-009"
 type = "verification_record"
 title = "Verification candidate for WO-PLG-012"
-status = "ready"
+status = "verified"
 owners = ["delegated-executor"]
 created = "2026-09-11"
 updated = "2026-09-11"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/plugin-integration/evidence/WO-PLG-012/C01/a
 evaluator_evidence_path = "docs/engineering/plugin-integration/evidence/VREC-PLG-009-evaluator.json"
 evaluator_evidence_sha256 = "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
 
+verified_at = "2026-09-11T08:19:25Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-PLG-012"]
 conforms_to = ["VER-PLG-012"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-11T08:19:25Z"
+decided_by = "assurance-owner"
+reason = "On 2026-09-11 the operator stated \"i verify both VREC-PLG-010  and VREC-PLG-009\". Record this explicit DR-VREC-DECIDE assurance-owner decision for VREC-PLG-009, exact candidate aea16859a3ea106e33f759098712cf80f83f3843, and its 100 selected evidence files. The retained observations and disclosed platform, fixture and host-coverage limits define the verification scope. Candidate identity, preparation provenance and evidence remain fixed. Related work-order states, VREC-PLG-008, supersession, release and PR merge are not selected by this decision."
 +++
 
 # Verification Record Candidate
