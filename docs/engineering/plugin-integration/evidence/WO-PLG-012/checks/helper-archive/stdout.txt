@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "raw_entries": 415,
+  "retained_loose_files": 4,
+  "original_inventory_sha256": "332a379e7fc242ab869998495de624135718115743ebffe145d9b3cb42800119",
+  "source_commit": "5aba54143d43d1b64be4b6cb2529c30570cabc26",
+  "payload_bytes_unchanged": true
+}

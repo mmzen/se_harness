@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "python",
+    "tests/plugin_integration/retained-skills/check_raw_archive.py",
+    "--root",
+    "."
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills",
+  "exit_status": 0,
+  "started_at": "2026-09-11T06:45:20.234800+00:00",
+  "duration_seconds": 0.17
+}

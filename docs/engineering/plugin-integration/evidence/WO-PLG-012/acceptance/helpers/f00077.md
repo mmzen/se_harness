@@ -1,1 +1,0 @@
-The initial altered-output fixture changed unprotected approved prose and would not test TCM010. Before any helper run it was preserved as brief-altered-output-original-fixture-defect.json, and corrected to alter the protected WO identifier bytes. This is a test fixture correction, not an observed candidate failure.

@@ -2,23 +2,20 @@
 artifact = "WO-PLG-012"
 checkpoint = "handoff"
 formal_snapshot_sha256 = "4a71a7ba4ebe6bc7cd869625ad5a247bfb2d2496f73f9b20804cccd271712c61"
-rebound_at = "2026-09-11T06:30:00Z"
+rebound_at = "2026-09-11T06:48:15Z"
 ```
 
 # WO-PLG-012 handoff evidence
 
-Plugin orientation and explicit briefing instructions are implemented and tested
-within the approved scope; helper scripts and contracts remain byte-identical.
-C01-C08 retain actual helpers, bounded Windows instruction observations and
-eight fixed Linux replays. The evidence keeps original failures, corrections,
-source versions, protected UTF-8 bytes, inline results and calibrated effects.
+The retained plugin skills and existing acceptance observations are delivered.
+The inherited WO017 repair preserves all56 relocated WO011 payloads. Both
+upgrade rehearsals pass at5aba5414; the subsequent integration builder rejects
+10145 Git archive entries against its unchanged10000-member ceiling.
 
-The earlier Windows CI checkout failure is retained under checks/ci-initial.
-The separately authorized WO-PLG-017 repair is implemented and inherited from
-PR #449. It moves 56 WO011 evidence files without altering payload bytes or
-historical records. This delivery does not claim those edits as WO012 work.
+Within WO012 evidence scope,415 raw helper files are now losslessly stored in
+raw.zip. Original report/audit/inventory/map bytes and every payload remain
+unchanged. A fixed-inventory checker and independent reconciliation qualify the
+storage correction. Original failed CI and observation versions stay visible.
 
-Released integrity, graph and review preflight must be checked at the combined
-candidate. Its full CI result is still pending. No implementation completion,
-verification decision, release or PR merge is inferred from the parent repair.
-WO-PLG-012 remains in_progress until its own required checks pass.
+WO-PLG-012 remains in_progress pending full corrected CI. No completion,
+ready-record preparation, assurance, release or GitHub merge is inferred.

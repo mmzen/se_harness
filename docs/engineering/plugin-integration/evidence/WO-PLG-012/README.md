@@ -14,7 +14,7 @@ without running it. The existing canonical-output exception remains intact.
   C04/C05/C07 choices, protected UTF-8 bytes, existing inline schemas and refusals.
 - [Eight fixed Linux calls](acceptance/linux-replay/REPORT.md): regression of the
   observer's selected commands; no new model-reasoning claim.
-- C01–C08 contain review copies of actions/stdout/stderr and observation indexes.
+- C01â€“C08 contain review copies of actions/stdout/stderr and observation indexes.
   Each index points to exact originals in short mapped retention paths. Original
   failed fixtures and observer outputs remain failed and visible beside corrections.
 
@@ -34,6 +34,20 @@ paths.** Its dependent integration-package jobs were skipped. See
 Passing source/validate checks do not cancel that failure. The operator subsequently approved WO-PLG-017; its completed repair is now
 inherited from PR #449. All 56 relocated evidence files retain their original bytes.
 
-WO-PLG-012 remains **in_progress** pending the full CI result at its new head.
-Completion and VREC preparation will follow only after those checks pass. The real delegated start is retained under governance/start. No
-assurance, release, merge or live plugin installation is claimed.
+The combined candidate 5aba5414 passed both upgrade rehearsals, but its
+integration builder rejected the Git archive: 10,145 entries exceed the existing
+10,000-member limit. The [failed CI result](checks/ci-member-limit/result.json)
+and original logs remain retained. No completion was applied.
+
+The correction packs this work order's 415 raw helper trace files into
+[raw.zip](acceptance/helpers/raw.zip). Their bytes and flat names are unchanged.
+The original REPORT, audit, inventory and source map stay directly readable and
+byte-identical. The [raw index](acceptance/helpers/raw-index.json) binds every
+ZIP member to the original inventory. Entries referenced by the original maps
+resolve inside raw.zip; extract it into a separate temporary directory to inspect
+or replay those logical paths. This does not rerun the helpers or change their
+observed results. The [checker](../../../../../tests/plugin_integration/retained-skills/check_raw_archive.py)
+compares the archive against the fixed original inventory.
+
+WO-PLG-012 remains **in_progress** until the corrected candidate passes full CI.
+No assurance, release, merge or live plugin installation is claimed.
