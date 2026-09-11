@@ -65,7 +65,7 @@ def main():
     for row in rows:
         if not row['retained_path'].startswith(prefix + 'evidence/WO-PLG-011/native/'):
             raise ValueError('Unexpected retention destination')
-        original = git('show', mapping['source_commit'] + ':' + row['original_path'])
+        original = git('cat-file', 'blob', mapping['source_commit'] + ':' + row['original_path'])
         retained = path(row['retained_path']).read_bytes()
         if retained != original or len(retained) != row['bytes'] or sha(retained) != row['sha256']:
             raise ValueError('Changed evidence payload: ' + row['original_path'])
@@ -86,10 +86,10 @@ def main():
     if supplemental['files'] != expected_extra or len(expected_extra) != 1:
         raise ValueError('Supplemental mapping differs from the approved one-file extension')
     git('merge-base', '--is-ancestor', extension['source_commit'], 'HEAD')
-    if path(map_path).read_bytes() != git('show', extension['source_commit'] + ':' + map_path):
+    if path(map_path).read_bytes() != git('cat-file', 'blob', extension['source_commit'] + ':' + map_path):
         raise ValueError('Original 55-file map changed')
     extra = expected_extra[0]
-    original = git('show', extension['source_commit'] + ':' + extra['original_path'])
+    original = git('cat-file', 'blob', extension['source_commit'] + ':' + extra['original_path'])
     retained = path(extra['retained_path']).read_bytes()
     if retained != original or len(retained) != extra['bytes'] or sha(retained) != extra['sha256']:
         raise ValueError('Changed supplemental evidence payload')
@@ -115,7 +115,7 @@ def main():
     # Preserve the ready record and its captured evaluator facts exactly at G.
     immutable = [prefix + 'verification-records/VREC-PLG-008.md', prefix + 'evidence/VREC-PLG-008-evaluator.json']
     for rel in immutable:
-        if path(rel).read_bytes() != git('show', mapping['source_commit'] + ':' + rel):
+        if path(rel).read_bytes() != git('cat-file', 'blob', mapping['source_commit'] + ':' + rel):
             raise ValueError('Historical verification evidence changed: ' + rel)
     print(json.dumps({'passed': True, 'mapped_files': len(destinations), 'original_map_files': len(rows),
                       'supplemental_files': len(expected_extra), 'payload_bytes_unchanged': True,
