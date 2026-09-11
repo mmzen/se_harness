@@ -2,7 +2,7 @@
 id = "WO-PLG-005"
 type = "work_order"
 title = "Implement the accepted Codex host adapter"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-08"
 updated = "2026-09-11"
@@ -40,6 +40,13 @@ to = "approved"
 decided_at = "2026-09-11T18:59:37Z"
 decided_by = "engineering-owner"
 reason = "The operator explicitly selected WO-PLG-005 and WO-PLG-006 for implementation through the delegated route on 2026-09-11. Approve this work order with the requested execution class and exact future verification-record paths. This delegates only DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE, conditional on the class at the PR base and a successful live required check for the exact head. No implementation has started; verification, release and merge remain human decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-11T19:08:16Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 78cd64df7c130a6f42ab357836093db30f710753 (check-run 103386776253, source github-checks)."
 +++
 
 # Work Order: Implement the accepted Codex host adapter
