@@ -1,0 +1,32 @@
+{
+  "kind": "read-only incident observation; not verification evidence of a repair",
+  "observed_date": "2026-09-11",
+  "main_commit": "fb6f60d5069706e8ae0ca69d1263285cbb904f45",
+  "prior_main_commit": "fc1f087371b100d5fda7a1f254ee00ebde8cbadf",
+  "merged_pull_request": 451,
+  "release_record": "RLS-SEH-026",
+  "workflow_run_id": 34599358590,
+  "job_id": 103262653829,
+  "job_url": "https://github.com/mmzen/se_harness/actions/runs/34599358590/job/103262653829",
+  "failed_step": "Resolve the subject",
+  "error": "release orchestration: duplicate artifact ID at trusted main head: VREC-EVD-001",
+  "downloaded_job_log_sha256": "620dca8bcf75e10cd77dacb12997c7a853342225a31b09b87e099cde4f260396",
+  "catalog_comparison": [
+    {
+      "commit": "fc1f087371b100d5fda7a1f254ee00ebde8cbadf",
+      "catalog_entries": 1547,
+      "result": "pass"
+    },
+    {
+      "commit": "fb6f60d5069706e8ae0ca69d1263285cbb904f45",
+      "result": "refused",
+      "error": "duplicate artifact ID at trusted main head: VREC-EVD-001"
+    }
+  ],
+  "example_retained_snapshot": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0002.md",
+  "cause": "Publication helpers enumerate engineering Markdown without the validator directory exclusions, so retained test snapshots enter the artifact catalog.",
+  "premerge_gap": "Resolution reads trusted main. Before PR 451 merged, that tree did not contain the imported retained snapshots.",
+  "preservation": "Retained snapshot bytes, historical decisions, release identities and true-duplicate rejection must remain unchanged.",
+  "baseline_archive_entries": 9983,
+  "archive_entry_limit": 10000
+}
