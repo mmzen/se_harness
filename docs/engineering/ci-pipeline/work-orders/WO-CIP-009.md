@@ -59,7 +59,8 @@ delegation is proposed. Completion and assurance remain separate decisions.
 
 Identify where the real upgrade rehearsal spends time on hosted Windows and
 Linux, while preserving the handover checks required by SPEC-ECP-007 ECP-PRD-008.
-This is a diagnostic branch, not a performance optimisation or release.
+The authorized scratch-placement amendment also tests explicit storage location.
+No release is authorized.
 
 ## In scope
 
@@ -86,11 +87,14 @@ Its tested merge was `816e1231fab5d620a32469714b2058228c995971`.
 6. Under the capacity amendment below, raise the integration-package archive
    member limit from 10,000 to 20,000, test the boundary and retain the bounded
    handoff evidence needed by this WO. This does not optimize the rehearsal.
+7. Under the scratch-placement amendment below, expose the temporary and Git
+   storage paths and place both disposable replays under RUNNER_TEMP. Compare
+   their observed durations with the retained default-location baseline.
 
 ## Out of scope
 
 No faster exporter, cache, parallel replay, removed check, reduced fixture,
-Python upgrade, Defender setting change, permission change, or broader logging.
+Python upgrade, Defender setting change, permission change, RAM disk, or broader logging.
 No product package change, managed-file edit, release, merge, historical evidence
 rewrite, or verification-record preparation. The only archive-limit change
 is the 20,000-entry capacity amendment below.
@@ -145,8 +149,9 @@ measurements and hypotheses. Link it from the PR report when requested.
 
 Stop on a changed handover verdict or digest, changed isolation, credential
 exposure, missing authority, failed required checks, scope expansion, new
-tracked files outside the declared scope, or archive overflow. Do not optimise while
-measuring or present a local profile as the hosted result.
+tracked files outside the declared scope, or archive overflow. Do not introduce
+optimisations beyond the authorized scratch placement or present a local profile
+as the hosted result.
 
 ## Completion report format
 
@@ -169,3 +174,28 @@ REQ-IPK-001 and SPEC-IPK-001 govern the exact-commit export and safety boundary.
 Re-run the affected tests and normal CI, including Windows/Linux integration
 verification. Do not reinterpret historical WO-PLG-018 evidence or its 10,000
 entry constraint: it describes the earlier accepted integration candidate.
+
+## Authorized scratch-placement amendment — 2026-09-11
+
+The operator's "ok go" authorizes the proposed first step: make the scratch
+location explicit and observable. The retained baseline run 34630231918 used
+Python's default temporary directory, whose resolved path was not recorded.
+Record that default, the selected workspace, actual disposable repository and
+Git-resolved index/object locations. Limit environment observations to TMPDIR,
+TEMP, TMP and RUNNER_TEMP. Paths are diagnostics, not semantic-digest inputs.
+
+Expose the existing workspace argument as an optional CLI option. An explicit
+workspace must be an existing directory outside the operational checkout; reject
+invalid, missing and checkout-contained paths before writing. Preserve unique
+temporary subdirectories and cleanup. Without the option, preserve Python's
+default selection, subject to the same checkout boundary.
+
+Set the two existing platform replays to RUNNER_TEMP, resolved by the runner
+rather than a hard-coded drive. Keep their wheel, sequence and verdict checks.
+Git-path queries are bounded read-only diagnostics, timed separately; failure
+must remain visible and must not create a false complete measurement.
+Test default/explicit placement, invalid paths, cleanup, diagnostics and unchanged
+results. Re-run normal CI and retain exact-head evidence. Cross-run differences
+are observations, not proof of drive performance; the older run did not capture
+its scratch path. No RAM disk, extra replay, security setting or lifecycle
+transition is authorized by this amendment. Execution paths remain unchanged.

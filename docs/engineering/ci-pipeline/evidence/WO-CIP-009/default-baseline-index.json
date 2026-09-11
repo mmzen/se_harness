@@ -1,0 +1,69 @@
+{
+  "schema": "wo-cip-009-default-location-baseline-v1",
+  "run_url": "https://github.com/mmzen/se_harness/actions/runs/34630231918",
+  "head": "db0574f937a23e236fe9ec9dadae5f87ae99877a",
+  "tested_merge": "bd38ad14428f146658101f0e9b9c09fc50707d94",
+  "limitation": "Default scratch location was not recorded; this is a cross-run timing baseline, not proof of C: I/O.",
+  "files": [
+    {
+      "path": "default-baseline-windows-1-result.json",
+      "source_path": "Windows/rehearsal-result-1/upgrade-rehearsal-result.json",
+      "bytes": 3924,
+      "sha256": "278fd2a158d7480b72891e81725329b7474d2ab6b63c821822babd142366dd95"
+    },
+    {
+      "path": "default-baseline-windows-1-timing.json",
+      "source_path": "Windows/rehearsal-result-1/upgrade-rehearsal-timing.json",
+      "bytes": 3646,
+      "sha256": "61a177cce7ae2a70c2fc1f8803370132ceb37533c921c67f8145ac743012b6b4"
+    },
+    {
+      "path": "default-baseline-windows-2-result.json",
+      "source_path": "Windows/rehearsal-result-2/upgrade-rehearsal-result.json",
+      "bytes": 3924,
+      "sha256": "278fd2a158d7480b72891e81725329b7474d2ab6b63c821822babd142366dd95"
+    },
+    {
+      "path": "default-baseline-windows-2-timing.json",
+      "source_path": "Windows/rehearsal-result-2/upgrade-rehearsal-timing.json",
+      "bytes": 3646,
+      "sha256": "0ebdd432db3ee570a56bfcdc9f5fc09ae72d3a425dc145738853149fde61d428"
+    },
+    {
+      "path": "default-baseline-windows-runtime.json",
+      "source_path": "Windows/upgrade-rehearsal-runtime.json",
+      "bytes": 856,
+      "sha256": "6118b9cacb63434f726afdb30fac7365ba0410370aaf68d9ad2a805c8e637411"
+    },
+    {
+      "path": "default-baseline-linux-1-result.json",
+      "source_path": "Linux/rehearsal-result-1/upgrade-rehearsal-result.json",
+      "bytes": 3918,
+      "sha256": "35741680e03e4d309fec1af4f78085e4d774002b871dcecb0b112535de372eb6"
+    },
+    {
+      "path": "default-baseline-linux-1-timing.json",
+      "source_path": "Linux/rehearsal-result-1/upgrade-rehearsal-timing.json",
+      "bytes": 3651,
+      "sha256": "af6d2d5bb856db151226f328aeb848883edddd7138da88efda0891bdbac0a352"
+    },
+    {
+      "path": "default-baseline-linux-2-result.json",
+      "source_path": "Linux/rehearsal-result-2/upgrade-rehearsal-result.json",
+      "bytes": 3918,
+      "sha256": "35741680e03e4d309fec1af4f78085e4d774002b871dcecb0b112535de372eb6"
+    },
+    {
+      "path": "default-baseline-linux-2-timing.json",
+      "source_path": "Linux/rehearsal-result-2/upgrade-rehearsal-timing.json",
+      "bytes": 3650,
+      "sha256": "58fb0256e474b9adc54985bbd8afb2bfab7e4959926e9a619a83bcfe2749125b"
+    },
+    {
+      "path": "default-baseline-linux-runtime.json",
+      "source_path": "Linux/upgrade-rehearsal-runtime.json",
+      "bytes": 616,
+      "sha256": "c6a0d1749a962627a28f389467a95545afdf7a924138173483c9f4a182802ab4"
+    }
+  ]
+}

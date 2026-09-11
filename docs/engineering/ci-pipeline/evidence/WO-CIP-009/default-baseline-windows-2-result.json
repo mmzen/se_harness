@@ -1,0 +1,130 @@
+{
+  "failure": null,
+  "lock": {
+    "canonical_sha256": "a597dc17b2b762d8cca77567f40156d042c6efa3f510ef0dbfbe87023a8c5d01",
+    "evaluator": {
+      "payload_sha256": "c3517992ff7f2aba7541b9888b285fb879cb8b16de9008f32af68a92498fb881",
+      "version": "0.18.0"
+    },
+    "schema": 3,
+    "tool_version": "0.18.0"
+  },
+  "overall_result": "pass",
+  "predecessor": {
+    "version": "0.17.0"
+  },
+  "schema": "se-harness-upgrade-rehearsal-v1",
+  "semantic_sha256": "a597dc17b2b762d8cca77567f40156d042c6efa3f510ef0dbfbe87023a8c5d01",
+  "steps": [
+    {
+      "argv": [
+        "D:\\a\\_temp\\predecessor-env\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "<copy>\\repository"
+      ],
+      "exit_code": 0,
+      "expect": "success",
+      "id": "predecessor-doctor-before",
+      "outcome": "pass",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "66672a0f520378bd33be8f017316f2ed873916f8eaff00ac209410d582ea3887"
+    },
+    {
+      "argv": [
+        "D:\\a\\_temp\\successor-env\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "<copy>\\repository"
+      ],
+      "exit_code": 0,
+      "expect": "success",
+      "id": "successor-upgrade-plan",
+      "outcome": "pass",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "b271b77ae46dd0531c42ea53addb6aa6aebee546736d79be48269a6d0ba61279"
+    },
+    {
+      "argv": [
+        "D:\\a\\_temp\\successor-env\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "<copy>\\repository",
+        "--apply",
+        "--evidence-output",
+        "docs/engineering/evidence/upgrade-rehearsal-transaction.json"
+      ],
+      "exit_code": 0,
+      "expect": "success",
+      "id": "successor-upgrade-apply",
+      "outcome": "pass",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "a9bfed23ab49ffca91f7d78d01fdfadc1c3c68a9dc1d19c28365a2595e4c968e"
+    },
+    {
+      "argv": [
+        "D:\\a\\_temp\\successor-env\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "<copy>\\repository"
+      ],
+      "exit_code": 0,
+      "expect": "success",
+      "id": "successor-doctor-after",
+      "outcome": "pass",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "66672a0f520378bd33be8f017316f2ed873916f8eaff00ac209410d582ea3887"
+    },
+    {
+      "argv": [
+        "D:\\a\\_temp\\successor-env\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "<copy>\\repository"
+      ],
+      "exit_code": 1,
+      "expect": "any",
+      "id": "successor-validate-after",
+      "outcome": "pass",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "2f5c5a1be1ac3a3868a8163811c5931a4ee18e82887e546597e649f234e4525c"
+    },
+    {
+      "argv": [
+        "D:\\a\\_temp\\predecessor-env\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "<copy>\\repository"
+      ],
+      "exit_code": 1,
+      "expect": "failure",
+      "id": "predecessor-doctor-after",
+      "outcome": "pass",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "1e0e6ad3c942e414bc14f5629f9a061bd714ca06ef87ee4cec0cf77e2939fd79"
+    }
+  ],
+  "successor": {
+    "version": "0.18.0"
+  },
+  "tolerated_diagnostics": [
+    "- [E012] [governance] docs/engineering/plugin-integration/verification-records/VREC-PLG-008.md: evaluator evidence differs from the standard lock"
+  ],
+  "validation": {
+    "artifacts": 1543,
+    "errors": 1,
+    "warnings": 46
+  }
+}

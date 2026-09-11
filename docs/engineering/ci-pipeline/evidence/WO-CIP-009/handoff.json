@@ -2,7 +2,7 @@
   "compliance": {
     "change_set_source": "git",
     "checkpoint": "handoff",
-    "formal_snapshot_sha256": "1c89b2945131e02376c2606c8a488100bab191bff8f0cbb62d8c5e1b321ff26f",
+    "formal_snapshot_sha256": "e9c268e5e92f44646edbd9af4fec38c8227cc935b9a83852a6a4623a7efffcef",
     "gates": [
       {
         "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 25 declared changed path(s) are within execution scope.",
+            "message": "All 40 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -273,7 +273,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "f53c9ebfb966180572bec2e111c16a35d504dad970314765a1f51242f01a68cb",
+  "result_sha256": "5dae09cdcb315722a478a37e47611be02acf1078ae6bdead8f7b42419fe6a87d",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
@@ -283,6 +283,17 @@
       "docs/engineering/ci-pipeline/evidence/WO-CIP-009/capacity-distributions.txt",
       "docs/engineering/ci-pipeline/evidence/WO-CIP-009/capacity-full-tests.txt",
       "docs/engineering/ci-pipeline/evidence/WO-CIP-009/capacity-tests.txt",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-009/default-baseline-index.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-009/default-baseline-linux-1-result.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-009/default-baseline-linux-1-timing.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-009/default-baseline-linux-2-result.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-009/default-baseline-linux-2-timing.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-009/default-baseline-linux-runtime.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-009/default-baseline-windows-1-result.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-009/default-baseline-windows-1-timing.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-009/default-baseline-windows-2-result.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-009/default-baseline-windows-2-timing.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-009/default-baseline-windows-runtime.json",
       "docs/engineering/ci-pipeline/evidence/WO-CIP-009/handoff.json",
       "docs/engineering/ci-pipeline/evidence/WO-CIP-009/local-checks.json",
       "docs/engineering/ci-pipeline/evidence/WO-CIP-009/measured-linux-1-result.json",
@@ -296,6 +307,10 @@
       "docs/engineering/ci-pipeline/evidence/WO-CIP-009/measured-windows-2-timing.json",
       "docs/engineering/ci-pipeline/evidence/WO-CIP-009/measured-windows-runtime.json",
       "docs/engineering/ci-pipeline/evidence/WO-CIP-009/measurement-index.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-009/scratch-distributions.txt",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-009/scratch-focused.txt",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-009/scratch-full.txt",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-009/scratch-local-checks.json",
       "docs/engineering/ci-pipeline/evidence/WO-CIP-009/WO-CIP-009-handoff.md",
       "docs/engineering/ci-pipeline/verification/VER-CIP-005.md",
       "docs/engineering/ci-pipeline/work-orders/WO-CIP-009.md",

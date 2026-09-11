@@ -255,6 +255,7 @@ class RehearsalDiagnosticBoundaryTests(unittest.TestCase):
         replay = next(step for step in steps if "name: Rehearse the real predecessor-to-successor" in step)
         self.assertEqual(2, replay.count("python -m repository_tools.upgrade_rehearsal"))
         self.assertEqual(2, replay.count(" --timings"))
+        self.assertEqual(2, replay.count(" --workspace $env:RUNNER_TEMP"))
         self.assertIn("if ($firstResult.semantic_sha256 -ne $secondResult.semantic_sha256)", replay)
         self.assertIn("if ($firstResult.overall_result -ne 'pass' -or $secondResult.overall_result -ne 'pass')", replay)
         retention = next(step for step in steps if "name: Retain the bounded upgrade rehearsal evidence" in step)

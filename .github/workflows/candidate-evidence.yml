@@ -391,10 +391,10 @@ jobs:
           $first = Join-Path '${{ runner.temp }}' 'rehearsal-result-1'
           $second = Join-Path '${{ runner.temp }}' 'rehearsal-result-2'
           python -m repository_tools.upgrade_rehearsal --repository . `
-            --predecessor-python $predecessorPython --successor-python $successorPython --output $first --timings
+            --predecessor-python $predecessorPython --successor-python $successorPython --output $first --workspace $env:RUNNER_TEMP --timings
           if ($LASTEXITCODE -ne 0) { throw 'first upgrade rehearsal failed' }
           python -m repository_tools.upgrade_rehearsal --repository . `
-            --predecessor-python $predecessorPython --successor-python $successorPython --output $second --timings
+            --predecessor-python $predecessorPython --successor-python $successorPython --output $second --workspace $env:RUNNER_TEMP --timings
           if ($LASTEXITCODE -ne 0) { throw 'second upgrade rehearsal failed' }
           $firstResult = Get-Content -Raw -LiteralPath (Join-Path $first 'upgrade-rehearsal-result.json') | ConvertFrom-Json
           $secondResult = Get-Content -Raw -LiteralPath (Join-Path $second 'upgrade-rehearsal-result.json') | ConvertFrom-Json

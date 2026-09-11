@@ -202,6 +202,18 @@ def export_tracked_tree(repository: Path, destination: Path, runner: Runner = ru
             observation["exit_code"] = completed.exit_code
             if completed.exit_code != 0:
                 raise UpgradeRehearsalError(f"cannot prepare the throwaway repository: {' '.join(argv)}: {completed.stderr.strip()}")
+    if timing:
+        with timing.measure("git-storage-paths") as observation:
+            completed = runner([
+                "git", "rev-parse", "--path-format=absolute", "--absolute-git-dir",
+                "--git-path", "index", "--git-path", "objects",
+            ], destination)
+            observation["exit_code"] = completed.exit_code
+            paths = completed.stdout.strip().splitlines()
+            if completed.exit_code != 0 or len(paths) != 3 or not all(Path(path).is_absolute() for path in paths):
+                timing.data["diagnostic_errors"].append("git-storage-paths")
+            else:
+                timing.data["storage"].update(zip(("git_directory", "index_file", "object_directory"), paths))
 
 
 def _digest(text: str) -> str:
@@ -252,11 +264,25 @@ def rehearse(
         raise UpgradeRehearsalError(f"output directory is not empty: {output}")
     if repository == output or repository in output.parents:
         raise UpgradeRehearsalError("the output directory must lie outside the operational repository")
+    default_temp = Path(tempfile.gettempdir()).resolve()
+    selected_workspace = workspace.resolve() if workspace is not None else default_temp
+    if selected_workspace == repository or repository in selected_workspace.parents:
+        raise UpgradeRehearsalError("the workspace must lie outside the operational repository")
+    if not selected_workspace.is_dir():
+        raise UpgradeRehearsalError("the workspace must be an existing directory")
     output.mkdir(parents=True, exist_ok=True)
     timing = RehearsalTiming(output) if timings else None
+    if timing:
+        timing.data["storage"] = {
+            "selection": "explicit" if workspace is not None else "python-default",
+            "python_default_temp": str(default_temp),
+            "workspace_root": str(selected_workspace),
+            "operational_repository": str(repository),
+            "temp_environment": {key: os.environ.get(key) for key in ("TMPDIR", "TEMP", "TMP", "RUNNER_TEMP")},
+        }
     try:
         with _measure(timing, "replay") as observation:
-            result = _rehearse(repository, predecessor_python, successor_python, output, runner, workspace, timing)
+            result = _rehearse(repository, predecessor_python, successor_python, output, runner, selected_workspace, timing)
             observation["handover_result"] = result["overall_result"]
         if timing:
             timing.data["complete"] = not timing.data["diagnostic_errors"]
@@ -299,6 +325,9 @@ def _rehearse(repository, predecessor_python, successor_python, output, runner, 
     with _scratch(workspace, timing) as scratch:
         copy = Path(scratch) / "repository"
         copy.mkdir()
+        if timing:
+            timing.data["storage"].update(scratch_directory=str(Path(scratch).resolve()), repository_directory=str(copy.resolve()))
+            timing.persist()
         export_tracked_tree(repository, copy, runner, timing=timing)
         with _measure(timing, "predecessor-version"):
             predecessor_version = _version(predecessor_python, runner, Path(scratch))
@@ -379,6 +408,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--predecessor-python", required=True, help="interpreter of the environment holding the released predecessor")
     parser.add_argument("--successor-python", required=True, help="interpreter of the environment holding the successor candidate")
     parser.add_argument("--output", required=True, help="absent or empty directory outside the repository for the result")
+    parser.add_argument("--workspace", type=Path, help="existing directory outside the repository for disposable copies; defaults to Python's temporary directory")
     parser.add_argument("--json", action="store_true", help="print the result as JSON")
     parser.add_argument("--timings", action="store_true", help="retain separate stage timings in --output and print progress to stderr")
     args = parser.parse_args(argv)
@@ -388,6 +418,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             predecessor_python=Path(args.predecessor_python),
             successor_python=Path(args.successor_python),
             output=Path(args.output),
+            workspace=args.workspace,
             timings=args.timings,
         )
     except UpgradeRehearsalError as exc:
