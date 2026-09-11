@@ -101,3 +101,11 @@ VREC-PLG-008 remains unchanged; assurance and supersession are separate decision
 WO017 repair. Retained helper contracts, explicit briefing and read-only effects
 are preserved. See the [acceptance and CI evidence](evidence/WO-PLG-012/README.md).
 Ready verification preparation and the assurance owner's decision remain separate.
+
+
+[VREC-PLG-009](verification-records/VREC-PLG-009.md) is ready for WO-PLG-012
+at clean candidate aea16859. It binds 100 selected evidence files, including
+the raw ZIPs and their inventories. All 13 checks passed at that candidate;
+see [CI](evidence/WO-PLG-012/checks/ci-candidate/result.json) and
+[preparation receipts](evidence/WO-PLG-012/governance/README.md).
+The assurance decision remains with the assurance owner.
