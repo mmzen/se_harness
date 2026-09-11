@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "git",
+    "-c",
+    "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-path-fix",
+    "-c",
+    "safe.directory=C:/Users/mathi/AppData/Local/Temp/p17-l1_m1c6q/r",
+    "-c",
+    "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness/.git/worktrees/se-harness-plugin-evidence-path-fix",
+    "-c",
+    "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness/.git",
+    "-c",
+    "core.longpaths=false",
+    "-c",
+    "core.autocrlf=false",
+    "-c",
+    "core.hooksPath=C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-path-repair-independent-20260911\\windows-final\\isolated-home\\hooks",
+    "-C",
+    "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17-l1_m1c6q\\r",
+    "checkout",
+    "--detach",
+    "ed31a520964f81627c9c5b428b68968caa6282e7"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel",
+  "elapsed_seconds": 5.7898924350738525,
+  "error": null,
+  "expected": 0,
+  "returncode": 0,
+  "stderr_sha256": "c816b5793ed91fe5bd21a4c2c61be7d37be474424898ee93aa7c6068e5750c30",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

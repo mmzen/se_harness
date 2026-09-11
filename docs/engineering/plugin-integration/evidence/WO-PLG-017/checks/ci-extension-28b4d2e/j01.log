@@ -1,0 +1,375 @@
+Verify integration package (Windows)	Set up job	﻿2026-09-11T06:10:43.2061356Z Current runner version: '2.337.0'
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2115802Z ##[group]Runner Image Provisioner
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2116708Z Hosted Compute Agent
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2117278Z Version: 20260828.587
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2117868Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2118644Z Build Date: 2026-08-28T16:44:25Z
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2119306Z Worker ID: {e1f5599b-8fb3-4358-a28e-74f11dcface3}
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2120019Z Azure Region: westus
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2120546Z ##[endgroup]
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2121897Z ##[group]Operating System
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2122572Z Microsoft Windows Server 2025
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2123222Z 10.0.26100
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2124099Z Datacenter
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2124695Z ##[endgroup]
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2125201Z ##[group]Runner Image
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2125815Z Image: windows-2025-vs2026
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2126384Z Version: 20260907.229.1
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2127492Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20260907.229/images/windows/Windows2025-VS2026-Readme.md
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2129514Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20260907.229
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2130527Z ##[endgroup]
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2131540Z ##[group]GITHUB_TOKEN Permissions
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2133396Z Contents: read
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2134074Z Metadata: read
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2134635Z ##[endgroup]
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2136587Z Secret source: Actions
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2137488Z Cache mode: write
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2138170Z Prepare workflow directory
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2720823Z Prepare all required actions
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.2771696Z Getting action download info
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.6182260Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.7463349Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:43.9301031Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+Verify integration package (Windows)	Set up job	2026-09-11T06:10:44.6715729Z Complete job name: Verify integration package (Windows)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T06:10:45.0607549Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0622462Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0624111Z with:
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0624821Z   fetch-depth: 0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0625570Z   persist-credentials: false
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0626454Z   repository: mmzen/se_harness
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0634387Z   token: ***
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0635118Z   ssh-strict: true
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0636661Z   ssh-user: git
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0637424Z   clean: true
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0638139Z   sparse-checkout-cone-mode: true
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0639380Z   fetch-tags: false
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0640117Z   show-progress: true
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0640852Z   lfs: false
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0642004Z   submodules: false
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0643133Z   set-safe-directory: true
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0645246Z   allow-unsafe-pr-checkout: false
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0646801Z env:
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0647519Z   INTEGRATION_EVENT: pull_request
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0648462Z   INTEGRATION_REF: refs/pull/449/merge
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0649392Z   INTEGRATION_PR: 449
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0650206Z   INTEGRATION_RETENTION_DAYS: 3
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0651498Z   PYTHONNOUSERSITE: 1
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0652280Z   PYTHONPATH: 
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.0652898Z ##[endgroup]
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.3250186Z Syncing repository: mmzen/se_harness
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.3252679Z ##[group]Getting Git version info
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.3256183Z Working directory is 'D:\a\se_harness\se_harness'
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.5156715Z [command]"C:\Program Files\Git\bin\git.exe" version
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.9347831Z git version 2.55.0.windows.5
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.9407428Z ##[endgroup]
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.9431799Z Temporarily overriding HOME='D:\a\_temp\861d7ef7-dc4b-4b89-a668-a75580a5791b' before making global git config changes
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.9435403Z Adding repository directory to the temporary git global config as a safe directory
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:45.9446736Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\se_harness\se_harness
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:46.0408328Z Deleting the contents of 'D:\a\se_harness\se_harness'
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:46.0416290Z ##[group]Initializing the repository
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:46.0425990Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\se_harness\se_harness
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:46.1503447Z Initialized empty Git repository in D:/a/se_harness/se_harness/.git/
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:46.1590737Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/mmzen/se_harness
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:46.2721102Z ##[endgroup]
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:46.2732313Z ##[group]Disabling automatic garbage collection
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:46.2798911Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:46.3189181Z ##[endgroup]
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:46.3192788Z ##[group]Setting up auth
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:46.3204606Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:46.4540777Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:49.1236070Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:49.2030044Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:50.7530038Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:50.7972722Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:51.8835708Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:51.9780459Z ##[endgroup]
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:51.9781420Z ##[group]Fetching the repository
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:51.9825653Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +158003a67a1ff672a15a721cbd78a8ba19fa3bf6:refs/remotes/pull/449/merge
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3211339Z From https://github.com/mmzen/se_harness
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3213445Z  * [new branch]        artifacts/plugin-implementation          -> origin/artifacts/plugin-implementation
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3214610Z  * [new branch]        definitions/plg010-delegation            -> origin/definitions/plg010-delegation
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3215854Z  * [new branch]        definitions/plg011-delegation            -> origin/definitions/plg011-delegation
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3217114Z  * [new branch]        definitions/plg012-delegation            -> origin/definitions/plg012-delegation
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3218611Z  * [new branch]        definitions/plg017-path-repair           -> origin/definitions/plg017-path-repair
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3219620Z  * [new branch]        main                                     -> origin/main
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3220758Z  * [new branch]        notes/plugin-installation-proposal       -> origin/notes/plugin-installation-proposal
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3222545Z  * [new branch]        notes/plugin-proposal-assessment-2026-09-08 -> origin/notes/plugin-proposal-assessment-2026-09-08
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3223245Z  * [new branch]        release/0.10                             -> origin/release/0.10
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3223726Z  * [new branch]        release/0.11                             -> origin/release/0.11
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3224224Z  * [new branch]        release/0.12                             -> origin/release/0.12
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3224879Z  * [new branch]        release/0.12.0                           -> origin/release/0.12.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3225758Z  * [new branch]        release/0.13                             -> origin/release/0.13
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3226560Z  * [new branch]        release/0.13.0                           -> origin/release/0.13.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3227346Z  * [new branch]        release/0.14                             -> origin/release/0.14
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3228132Z  * [new branch]        release/0.14.0                           -> origin/release/0.14.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3228987Z  * [new branch]        release/0.15                             -> origin/release/0.15
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3229769Z  * [new branch]        release/0.15.0                           -> origin/release/0.15.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3230582Z  * [new branch]        release/0.16                             -> origin/release/0.16
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3231424Z  * [new branch]        release/0.16.0                           -> origin/release/0.16.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3232303Z  * [new branch]        release/0.17                             -> origin/release/0.17
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3233161Z  * [new branch]        release/0.17.0                           -> origin/release/0.17.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3233938Z  * [new branch]        release/0.2.0                            -> origin/release/0.2.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3234705Z  * [new branch]        release/0.2.1                            -> origin/release/0.2.1
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3235521Z  * [new branch]        release/0.2.2                            -> origin/release/0.2.2
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3236689Z  * [new branch]        release/0.3.0                            -> origin/release/0.3.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3237556Z  * [new branch]        release/0.4.0                            -> origin/release/0.4.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3239612Z  * [new branch]        release/0.6                              -> origin/release/0.6
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3240446Z  * [new branch]        release/0.7                              -> origin/release/0.7
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3241223Z  * [new branch]        release/0.8                              -> origin/release/0.8
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3242150Z  * [new branch]        release/0.9                              -> origin/release/0.9
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3242770Z  * [new branch]        work/plugin-change-skill                 -> origin/work/plugin-change-skill
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3243459Z  * [new branch]        work/plugin-evidence-path-repair         -> origin/work/plugin-evidence-path-repair
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3244454Z  * [new branch]        work/plugin-evidence-skill               -> origin/work/plugin-evidence-skill
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3245100Z  * [new branch]        work/plugin-retained-skills              -> origin/work/plugin-retained-skills
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3245616Z  * [new tag]           last                                     -> last
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3246127Z  * [new tag]           v0.10.0                                  -> v0.10.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3246541Z  * [new tag]           v0.11.0                                  -> v0.11.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3247152Z  * [new tag]           v0.12.0                                  -> v0.12.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3247521Z  * [new tag]           v0.13.0                                  -> v0.13.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3247871Z  * [new tag]           v0.14.0                                  -> v0.14.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3248226Z  * [new tag]           v0.15.0                                  -> v0.15.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3248801Z  * [new tag]           v0.16.0                                  -> v0.16.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3249166Z  * [new tag]           v0.17.0                                  -> v0.17.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3249637Z  * [new tag]           v0.2.0                                   -> v0.2.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3250951Z  * [new tag]           v0.2.1                                   -> v0.2.1
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3251638Z  * [new tag]           v0.2.2                                   -> v0.2.2
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3252272Z  * [new tag]           v0.3.0                                   -> v0.3.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3252868Z  * [new tag]           v0.4.0                                   -> v0.4.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3253490Z  * [new tag]           v0.4.1                                   -> v0.4.1
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3254103Z  * [new tag]           v0.5.0                                   -> v0.5.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3254714Z  * [new tag]           v0.5.0a1                                 -> v0.5.0a1
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3255359Z  * [new tag]           v0.6.0                                   -> v0.6.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3256007Z  * [new tag]           v0.7.0                                   -> v0.7.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3331577Z  * [new tag]           v0.7.1                                   -> v0.7.1
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3332402Z  * [new tag]           v0.8.0                                   -> v0.8.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3333059Z  * [new tag]           v0.9.0                                   -> v0.9.0
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3333822Z  * [new ref]           158003a67a1ff672a15a721cbd78a8ba19fa3bf6 -> pull/449/merge
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3336111Z ##[endgroup]
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3337270Z ##[group]Determining the checkout info
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3337980Z ##[endgroup]
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.3338497Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.4789020Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.5823374Z ##[group]Checking out the ref
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:55.5839326Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/remotes/pull/449/merge
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:56.8666683Z Updating files:  21% (1449/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:56.8874938Z Updating files:  22% (1515/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:56.9097248Z Updating files:  23% (1584/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:56.9297859Z Updating files:  24% (1653/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:56.9518734Z Updating files:  25% (1721/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:56.9701110Z Updating files:  26% (1790/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:56.9885451Z Updating files:  27% (1859/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.0079538Z Updating files:  28% (1928/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.0279603Z Updating files:  29% (1997/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.0458402Z Updating files:  30% (2066/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.0635315Z Updating files:  31% (2135/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.0815722Z Updating files:  32% (2203/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.0983651Z Updating files:  33% (2272/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.1160639Z Updating files:  34% (2341/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.1329619Z Updating files:  35% (2410/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.1509422Z Updating files:  36% (2479/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.1753025Z Updating files:  37% (2548/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.1955539Z Updating files:  38% (2616/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.2200915Z Updating files:  39% (2685/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.2421012Z Updating files:  40% (2754/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.2631421Z Updating files:  41% (2823/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.2799872Z Updating files:  42% (2892/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.2962065Z Updating files:  43% (2961/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.3177349Z Updating files:  44% (3029/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.3359827Z Updating files:  45% (3098/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.3522495Z Updating files:  46% (3167/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.3686968Z Updating files:  47% (3236/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.3852405Z Updating files:  48% (3305/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.4009471Z Updating files:  49% (3374/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.4166174Z Updating files:  50% (3442/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.4382310Z Updating files:  51% (3511/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.4596956Z Updating files:  52% (3580/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.4790153Z Updating files:  53% (3649/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.4970364Z Updating files:  54% (3718/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.5159425Z Updating files:  55% (3787/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.5358837Z Updating files:  56% (3856/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.5583344Z Updating files:  57% (3924/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.5876264Z Updating files:  58% (3993/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.6497929Z Updating files:  59% (4062/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.8367988Z Updating files:  60% (4131/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.8514709Z Updating files:  61% (4200/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.8651638Z Updating files:  62% (4269/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.8695473Z Updating files:  62% (4325/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.8949591Z Updating files:  63% (4337/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.9119521Z Updating files:  64% (4406/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.9305867Z Updating files:  65% (4475/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.9481596Z Updating files:  66% (4544/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.9645103Z Updating files:  67% (4613/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.9837035Z Updating files:  68% (4682/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:57.9998335Z Updating files:  69% (4750/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.0654655Z Updating files:  70% (4819/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.0866538Z Updating files:  71% (4888/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.1110670Z Updating files:  72% (4957/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.1331810Z Updating files:  73% (5026/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.1527967Z Updating files:  74% (5095/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.1735512Z Updating files:  75% (5163/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.1958424Z Updating files:  76% (5232/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.2237517Z Updating files:  77% (5301/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.2430921Z Updating files:  78% (5370/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.2614163Z Updating files:  79% (5439/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.2805173Z Updating files:  80% (5508/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.3135615Z Updating files:  81% (5577/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.3345596Z Updating files:  82% (5645/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.3540240Z Updating files:  83% (5714/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.3758758Z Updating files:  84% (5783/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.3977957Z Updating files:  85% (5852/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.4168215Z Updating files:  86% (5921/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.4371008Z Updating files:  87% (5990/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.4579981Z Updating files:  88% (6058/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.4971390Z Updating files:  89% (6127/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.5189045Z Updating files:  90% (6196/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.5458272Z Updating files:  91% (6265/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.5662129Z Updating files:  92% (6334/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.5847328Z Updating files:  93% (6403/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.6061383Z Updating files:  94% (6471/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.6467321Z Updating files:  95% (6540/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.6709266Z Updating files:  96% (6609/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.6937750Z Updating files:  97% (6678/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7157338Z Updating files:  98% (6747/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7425814Z Updating files:  99% (6816/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7426362Z Updating files: 100% (6884/6884)
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7426797Z Updating files: 100% (6884/6884), done.
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7952209Z Note: switching to 'refs/remotes/pull/449/merge'.
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7952626Z 
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7953299Z You are in 'detached HEAD' state. You can look around, make experimental
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7954090Z changes and commit them, and you can discard any commits you make in this
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7954862Z state without impacting any branches by switching back to a branch.
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7955343Z 
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7955632Z If you want to create a new branch to retain commits you create, you may
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7956326Z do so (now or later) by using -c with the switch command. Example:
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7956743Z 
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7956918Z   git switch -c <new-branch-name>
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7958260Z 
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7958408Z Or undo this operation with:
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7958657Z 
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7958768Z   git switch -
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7958948Z 
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7959277Z Turn off this advice by setting config variable advice.detachedHead to false
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7959813Z 
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.7960406Z HEAD is now at 158003a6 Merge 28b4d2e22477067a17544e8275a37cecf22575f0 into 7fe82c95823503e54d2e35e00d8c409a6dd4b065
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.8136998Z ##[endgroup]
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.8708427Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.9047075Z 158003a67a1ff672a15a721cbd78a8ba19fa3bf6
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.9103090Z ##[group]Removing auth
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.9112272Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:58.9449106Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:59.7598611Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:59.7985998Z http.https://github.com/.extraheader
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:59.8047405Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:10:59.8510904Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:11:00.5288353Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:11:00.5602929Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Verify integration package (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:11:01.1569095Z ##[endgroup]
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T06:11:01.1993571Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.1995697Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.1996079Z with:
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.1996254Z   python-version: 3.11
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.1996459Z   check-latest: false
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.1998967Z   token: ***
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.1999172Z   update-environment: true
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.1999398Z   allow-prereleases: false
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.1999603Z   freethreaded: false
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.1999784Z env:
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.1999955Z   INTEGRATION_EVENT: pull_request
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.2000194Z   INTEGRATION_REF: refs/pull/449/merge
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.2000446Z   INTEGRATION_PR: 449
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.2000646Z   INTEGRATION_RETENTION_DAYS: 3
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.2000900Z   PYTHONNOUSERSITE: 1
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.2001085Z   PYTHONPATH: 
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.2001256Z ##[endgroup]
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.3621845Z ##[group]Installed versions
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.4083418Z (node:6544) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.4084157Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.4085474Z Successfully set up CPython (3.11.9)
+Verify integration package (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:01.4086054Z ##[endgroup]
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	﻿2026-09-11T06:11:01.4411653Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4413372Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4413759Z with:
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4414079Z   name: integration-package-staging-158003a67a1ff672a15a721cbd78a8ba19fa3bf6
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4414490Z   path: D:\a\_temp/integration-payload
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4414747Z   merge-multiple: false
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4414956Z   repository: mmzen/se_harness
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4415164Z   run-id: 34568411408
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4415341Z env:
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4415511Z   INTEGRATION_EVENT: pull_request
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4415754Z   INTEGRATION_REF: refs/pull/449/merge
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4415990Z   INTEGRATION_PR: 449
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4416215Z   INTEGRATION_RETENTION_DAYS: 3
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4416428Z   PYTHONNOUSERSITE: 1
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4416610Z   PYTHONPATH: 
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4416857Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4417335Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4417785Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4418181Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4418575Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.4418879Z ##[endgroup]
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.6330468Z Downloading single artifact
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.6564373Z (node:2228) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.6566199Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.9419588Z Preparing to download the following artifacts:
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:01.9420634Z - integration-package-staging-158003a67a1ff672a15a721cbd78a8ba19fa3bf6 (ID: 10186986842, Size: 472525, Expected Digest: sha256:965007e3bb1711a5ff95e2de0f53fd309b420e2dcadca727d5ad32f899a0a87c)
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:02.1953003Z Redirecting to blob download url: https://productionresultssa0.blob.core.windows.net/actions-results/d89ea746-abfa-48ea-a2ef-f235e8ef6572/workflow-job-run-b37cd200-b625-5a7f-b739-9e7df91b1bab/artifacts/58f686cca59b143590b283ea1431c78afa339fe161aecb85d30a0b8192cac2ad.zip
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:02.1954400Z Starting download of artifact to: D:\a\_temp\integration-payload
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:02.4999825Z (node:2228) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:02.7735529Z SHA256 digest of downloaded artifact is 965007e3bb1711a5ff95e2de0f53fd309b420e2dcadca727d5ad32f899a0a87c
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:02.7736187Z Artifact download completed successfully.
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:02.7736477Z Total of 1 artifact(s) downloaded
+Verify integration package (Windows)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:11:02.7743766Z Download artifact has finished successfully
+Verify integration package (Windows)	Verify and install the exact staged bytes	﻿2026-09-11T06:11:02.8038792Z ##[group]Run $integrationArgs = @(
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8039205Z ^[[36;1m$integrationArgs = @(^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8039536Z ^[[36;1m  '.github/scripts/build_integration_package.py',^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8039862Z ^[[36;1m  'install-test',^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8040191Z ^[[36;1m  '--payload', (Join-Path 'D:\a\_temp' 'integration-payload'),^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8040572Z ^[[36;1m  '--checkout', $env:GITHUB_WORKSPACE,^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8040883Z ^[[36;1m  '--expected-commit', $env:GITHUB_SHA,^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8041214Z ^[[36;1m  '--expected-repository', $env:GITHUB_REPOSITORY,^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8041559Z ^[[36;1m  '--expected-event', $env:INTEGRATION_EVENT,^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8041877Z ^[[36;1m  '--expected-ref', $env:INTEGRATION_REF,^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8042221Z ^[[36;1m  '--expected-run-id', $env:GITHUB_RUN_ID,^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8042565Z ^[[36;1m  '--expected-run-attempt', $env:GITHUB_RUN_ATTEMPT,^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8042941Z ^[[36;1m  '--expected-workflow', $env:GITHUB_WORKFLOW,^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8043374Z ^[[36;1m  '--expected-retention-days', $env:INTEGRATION_RETENTION_DAYS^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8043911Z ^[[36;1m)^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8044096Z ^[[36;1mif ($env:INTEGRATION_PR) {^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8044468Z ^[[36;1m  $integrationArgs += @('--expected-pull-request', $env:INTEGRATION_PR)^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8044834Z ^[[36;1m}^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8045015Z ^[[36;1mpython @integrationArgs^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8045449Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'integration-package installation verification failed' }^[[0m
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8843886Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8844346Z env:
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8844562Z   INTEGRATION_EVENT: pull_request
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8844834Z   INTEGRATION_REF: refs/pull/449/merge
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8845092Z   INTEGRATION_PR: 449
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8845311Z   INTEGRATION_RETENTION_DAYS: 3
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8845564Z   PYTHONNOUSERSITE: 1
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8845783Z   PYTHONPATH: 
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8846068Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8846550Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8847024Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8847454Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8847871Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:02.8848201Z ##[endgroup]
+Verify integration package (Windows)	Verify and install the exact staged bytes	2026-09-11T06:11:27.5393850Z {"checkout_sha256":"54b3383aa4486de61289faac7b9e0a53fe92352caba3ff0791021bd1a57141fa","commit":"158003a67a1ff672a15a721cbd78a8ba19fa3bf6","platform":"Windows","result":"pass","schema":"se-harness-integration-install-result-v1","version":"0.18.0+pr449.g158003a67a1f","wheel_sha256":"ca860d7a9df5955330ad6a823c8cd54b627988b547abb045fc89fd160652a04a"}
+Verify integration package (Windows)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T06:11:27.6033402Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Verify integration package (Windows)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:27.6034789Z Post job cleanup.
+Verify integration package (Windows)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:27.7518388Z (node:1272) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Verify integration package (Windows)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:11:27.7519505Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Verify integration package (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T06:11:27.7834087Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Verify integration package (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:11:27.7835435Z Post job cleanup.
+Verify integration package (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:11:28.0131489Z [command]"C:\Program Files\Git\bin\git.exe" version
+Verify integration package (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:11:28.0438643Z git version 2.55.0.windows.5
+Verify integration package (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:11:28.0511095Z Temporarily overriding HOME='D:\a\_temp\b208b151-7ab0-4c4a-a67e-8bf74d3c5cba' before making global git config changes
+Verify integration package (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:11:28.0512252Z Adding repository directory to the temporary git global config as a safe directory
+Verify integration package (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:11:28.0523326Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\se_harness\se_harness
+Verify integration package (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:11:28.0849171Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Verify integration package (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:11:28.1155384Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Verify integration package (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:11:28.6744624Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Verify integration package (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:11:28.7136442Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Verify integration package (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:11:29.2469414Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Verify integration package (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:11:29.2770013Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Verify integration package (Windows)	Complete job	﻿2026-09-11T06:11:29.8407679Z Cleaning up orphan processes
+Verify integration package (Windows)	Complete job	2026-09-11T06:11:29.8990356Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

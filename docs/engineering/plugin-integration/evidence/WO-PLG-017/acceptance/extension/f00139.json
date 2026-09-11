@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-path-extension-independent-20260911/read_linux.py"
+  ],
+  "checker_status_separate": false,
+  "elapsed_seconds": 0.021910667419433594,
+  "error": {
+    "message": "[Errno 13] Permission denied: '/mnt/c/Users/mathi/AppData/Local/Temp/p17e-pkny7t08/ssssssssssssssssss/repository/docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0001.json'",
+    "traceback": "Traceback (most recent call last):\n  File \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-path-extension-independent-20260911/read_linux.py\", line 18, in <module>\n    observed=reconcile(target,base/'attempt2')\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-path-extension-independent-20260911/reconcile.py\", line 13, in reconcile\n    data=(root/r['proposed_path']).read_bytes()\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1021, in read_bytes\n    with self.open(mode='rb') as f:\n         ^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/pathlib.py\", line 1015, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nPermissionError: [Errno 13] Permission denied: '/mnt/c/Users/mathi/AppData/Local/Temp/p17e-pkny7t08/ssssssssssssssssss/repository/docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0001.json'\n",
+    "type": "PermissionError"
+  },
+  "input_export": "/mnt/c/Users/mathi/AppData/Local/Temp/p17e-pkny7t08/ssssssssssssssssss/repository",
+  "input_kind": "Actual staged Windows export, read natively through WSL; no new evaluator or model replay",
+  "oracle_sha256": "a809a6bd7940daf6d7cef9b8036e01924c1036ddfcbada333f4b3939a2cc52f3",
+  "passed": false,
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+  "reconciler_sha256": "8c5245abc1b507e557e67fbbbc292ce80b679b5dd2da97d35d6820b3e58b891c",
+  "returncode": 1,
+  "source_commit": "28b4d2e22477067a17544e8275a37cecf22575f0"
+}

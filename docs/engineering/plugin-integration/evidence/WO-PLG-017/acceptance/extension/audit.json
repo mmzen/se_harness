@@ -1,0 +1,826 @@
+{
+  "archive_streams_omitted": [
+    {
+      "actual_archive_argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "archive",
+        "--format=tar",
+        "HEAD"
+      ],
+      "actual_archive_cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-k47frca9\\src",
+      "external_retention_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-path-extension-independent-20260911\\before-extension\\export\\call01.stdout.gz",
+      "external_stored_bytes": 31539237,
+      "external_stored_sha256": "5c667811baaf2a51b924aec65e9455d205c182ccce2b2e88f69df3e04187d0ba",
+      "omitted_from_package": true,
+      "reason": "Whole-repository archive recursively contains prior acceptance packages; retained externally and reproducible from immutable Git commit.",
+      "reproduction_argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "archive",
+        "--format=tar",
+        "e9c256eb49d27f82e60543b7b3ca24f43a5129be"
+      ],
+      "reproduction_context": "Run in the preserved source repository containing this immutable commit. HEAD in the actual argv was recorded as source_commit.",
+      "source_commit": "e9c256eb49d27f82e60543b7b3ca24f43a5129be",
+      "source_path": "before-extension/export/call01.stdout.gz",
+      "stdout_bytes": 119029760,
+      "stdout_sha256": "5187f393bf9457e053ade5119a1e784d14a67cb1d45a056d46d5288fed5c344a"
+    },
+    {
+      "actual_archive_argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "archive",
+        "--format=tar",
+        "HEAD"
+      ],
+      "actual_archive_cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-pkny7t08\\src",
+      "external_retention_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-path-extension-independent-20260911\\after-extension\\export\\call01.stdout.gz",
+      "external_stored_bytes": 31541579,
+      "external_stored_sha256": "8ef8f52b075a677ced7f2b4c2dedf557ed62e5b8df93f487740db7ee572e71c0",
+      "omitted_from_package": true,
+      "reason": "Whole-repository archive recursively contains prior acceptance packages; retained externally and reproducible from immutable Git commit.",
+      "reproduction_argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "archive",
+        "--format=tar",
+        "28b4d2e22477067a17544e8275a37cecf22575f0"
+      ],
+      "reproduction_context": "Run in the preserved source repository containing this immutable commit. HEAD in the actual argv was recorded as source_commit.",
+      "source_commit": "28b4d2e22477067a17544e8275a37cecf22575f0",
+      "source_path": "after-extension/export/call01.stdout.gz",
+      "stdout_bytes": 119040000,
+      "stdout_sha256": "816388d8d304a12259f91dc0811bfc9bd56d412494333904604456a4f910d0ce"
+    }
+  ],
+  "assurance_claimed": false,
+  "checked_records": [
+    {
+      "returncode": 0,
+      "source_path": "01-approved-head.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "02-approved-proposal.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 128,
+      "source_path": "03-original-payload.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/01-source-gitdir.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/02-source-common.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/03-trust-0.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/03-trust-1.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/03-trust-2.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/03-trust-3.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/03-trust-4.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/04-config-0.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/04-config-1.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/04-config-2.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/05-clone.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/06-checkout.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/07-head.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/08-longpaths.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/09-ancestor-approved.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/09-ancestor-c.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/09-ancestor-g.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/10-original-helper.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/11-tracked.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/12-actual-export.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/13-destination-longpaths.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/14-export-commit.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 1,
+      "source_path": "after-extension/15-checker-pass.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 128,
+      "source_path": "after-extension/checker-git-readback.json",
+      "stream_hashes_pass": {}
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/export/call01.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/export/call02.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/export/call03.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/export/call04.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/export/call05.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/export/call06.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/export/call07.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "after-extension/export/call08.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "attempt2/01-approved-head.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "attempt2/02-approved-proposal.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "attempt2/03-original-payload.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "attempt2/04-approved-tree.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "attempt2/05-immutable-objects.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "attempt2/06-c-ancestor.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "attempt2/07-g-ancestor.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/01-source-gitdir.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/02-source-common.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/03-trust-0.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/03-trust-1.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/03-trust-2.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/03-trust-3.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/03-trust-4.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/04-config-0.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/04-config-1.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/04-config-2.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/05-clone.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/06-checkout.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/07-head.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/08-longpaths.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/09-ancestor-approved.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/09-ancestor-c.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/09-ancestor-g.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/10-original-helper.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/11-tracked.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 1,
+      "source_path": "before-extension/12-actual-export.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/13-destination-longpaths.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/22-source-clean.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/export/call01.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/export/call02.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/export/call03.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/export/call04.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/export/call05.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "before-extension/export/call06.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 128,
+      "source_path": "before-extension/export/call07.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "checker-correction/01-checker-blob.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "checker-correction/02-commit-diff.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "checker-correction/03-head.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "checker-correction/04-longpaths.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "checker-correction/05-clean-before.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "checker-correction/06-corrected-positive.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 1,
+      "source_path": "checker-correction/08-payload-reject.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "checker-correction/09-payload-restored.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 1,
+      "source_path": "checker-correction/11-plan-reject.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "checker-correction/12-plan-restored.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "checker-correction/13-clean-after.json",
+      "stream_hashes_pass": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source_path": "linux-archive-readability/result.json",
+      "stream_hashes_pass": {}
+    },
+    {
+      "returncode": 1,
+      "source_path": "linux-readability/result.json",
+      "stream_hashes_pass": {}
+    }
+  ],
+  "completion_claimed": false,
+  "corrected_checker": {
+    "checker_commit": "e5b48a16be2e5e59ecd17d7d28d24409ff5ce519",
+    "checker_sha256": "fe9ebcec67aa8671fa4c25cf5c04b865955e927dcdc1354223bce80f1fcff089",
+    "coordinated_plan_map_rejected": true,
+    "one_byte_rejected": true,
+    "passed": true,
+    "repository": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-pkny7t08\\src",
+    "repository_commit": "28b4d2e22477067a17544e8275a37cecf22575f0",
+    "restored_hashes_equal": true,
+    "scope": "Corrected checker bytes from new commit against unchanged original staged candidate/history inputs; no new staging claim",
+    "snapshot_files": 428,
+    "staging_commit": "28b4d2e22477067a17544e8275a37cecf22575f0"
+  },
+  "limitations": [
+    "Actual staging candidates are e9c256eb and28b4d2e2; corrected checker source is e5b48a16 against unchanged28b history/payload inputs.",
+    "Linux read the exact captured Git archive in a fresh native directory after a direct Windows Temp ACL refusal; no evaluator/model replay.",
+    "Hosted Windows upgrade and downstream/full CI outcomes are separate from these local observations."
+  ],
+  "linux": {
+    "archive_record": "after-extension/export/call01.json",
+    "archive_sha256": "816388d8d304a12259f91dc0811bfc9bd56d412494333904604456a4f910d0ce",
+    "argv": [
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+      "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-path-extension-independent-20260911/read_linux.py"
+    ],
+    "checker_status_separate": false,
+    "elapsed_seconds": 1.5812721252441406,
+    "input_export": "/tmp/p17x-read-pyx87iue",
+    "input_kind": "Native extraction of exact captured real git archive bytes from the successful Windows exporter; no evaluator/model replay",
+    "mapped_files": 56,
+    "oracle_sha256": "a809a6bd7940daf6d7cef9b8036e01924c1036ddfcbada333f4b3939a2cc52f3",
+    "passed": true,
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "protected_files": 366,
+    "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+    "reconciler_sha256": "8c5245abc1b507e557e67fbbbc292ce80b679b5dd2da97d35d6820b3e58b891c",
+    "returncode": 0,
+    "selected_unchanged_files": 94,
+    "source_commit": "28b4d2e22477067a17544e8275a37cecf22575f0",
+    "unchanged_original_files": 1084
+  },
+  "oracle_sha256": "a809a6bd7940daf6d7cef9b8036e01924c1036ddfcbada333f4b3939a2cc52f3",
+  "preextension": {
+    "commit": "e9c256eb49d27f82e60543b7b3ca24f43a5129be",
+    "destination": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-k47frca9\\ssssssssssssssssss\\repository",
+    "destination_characters": 77,
+    "expected": "failure",
+    "expected_staging_failure_observed": true,
+    "export": {
+      "calls": [
+        "call01",
+        "call02",
+        "call03",
+        "call04",
+        "call05",
+        "call06",
+        "call07"
+      ],
+      "destination": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-k47frca9\\ssssssssssssssssss\\repository",
+      "destination_characters": 77,
+      "error": {
+        "message": "cannot prepare the throwaway repository: git add -A: fatal: unable to stat 'docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json': Filename too long",
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-path-extension-independent-20260911\\export_worker.py\", line 42, in <module>\n    module.export_tracked_tree(a.source,a.destination)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-k47frca9\\src\\repository_tools\\upgrade_rehearsal.py\", line 123, in export_tracked_tree\n    raise UpgradeRehearsalError(f\"cannot prepare the throwaway repository: {' '.join(argv)}: {completed.stderr.strip()}\")\nactual_upgrade_rehearsal.UpgradeRehearsalError: cannot prepare the throwaway repository: git add -A: fatal: unable to stat 'docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json': Filename too long\n",
+        "type": "UpgradeRehearsalError"
+      },
+      "exporter_sha256": "4dfba43492ce476366f0b5b44b432671b60998d43b292099b640cb97e64fb4c9",
+      "passed": false,
+      "source": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-k47frca9\\src",
+      "worker_sha256": "0f82bc634624953eae06e785583107310ade09d019c79c4051ff038382fadcb1"
+    },
+    "exporter_sha256": "4dfba43492ce476366f0b5b44b432671b60998d43b292099b640cb97e64fb4c9",
+    "max_full_path_at77": 261,
+    "oracle_sha256": "a809a6bd7940daf6d7cef9b8036e01924c1036ddfcbada333f4b3939a2cc52f3",
+    "passed": true,
+    "source_checkout": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-k47frca9\\src"
+  },
+  "repaired_staging": {
+    "calls": [
+      "call01",
+      "call02",
+      "call03",
+      "call04",
+      "call05",
+      "call06",
+      "call07",
+      "call08"
+    ],
+    "destination": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-pkny7t08\\ssssssssssssssssss\\repository",
+    "destination_characters": 77,
+    "exporter_sha256": "4dfba43492ce476366f0b5b44b432671b60998d43b292099b640cb97e64fb4c9",
+    "passed": true,
+    "source": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-pkny7t08\\src",
+    "worker_sha256": "0f82bc634624953eae06e785583107310ade09d019c79c4051ff038382fadcb1"
+  },
+  "retention_audit_passed": true,
+  "scoped_checks_passed": true,
+  "source_suite": "Not run; full source/hosted CI qualification remains with parent task."
+}

@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "mapped_files": 56,
+  "original_map_files": 55,
+  "supplemental_files": 1,
+  "payload_bytes_unchanged": true,
+  "source_commit": "7fe82c95823503e54d2e35e00d8c409a6dd4b065",
+  "preserved_vrec": "VREC-PLG-008",
+  "max_full_path": 208,
+  "path_budget": 250,
+  "checkout_root": "D:/a/se_harness/se_harness",
+  "staging_root": "C:/Users/runneradmin/AppData/Local/Temp/upgrade-rehearsal-12345678/repository",
+  "staging_max_full_path": 259,
+  "staging_budget": 259,
+  "staging_limit": "Derived profile; actual export/staging and hosted rehearsal must also pass.",
+  "scope": "Retained evidence bytes and paths only; no assurance decision"
+}

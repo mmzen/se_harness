@@ -1,0 +1,221 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "evidence",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-PLG-017",
+    "artifacts": [
+      "WO-PLG-017"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "CAP-WEX-001",
+      "INT-WEX-001",
+      "REQ-PLG-019",
+      "SPEC-PLG-011",
+      "VER-PLG-011"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/plugin-integration/evidence/VREC-PLG-010-evaluator.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native-path-map.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/README.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/plugin-integration/verification-records/VREC-PLG-010.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-017.md",
+      "tests/plugin_integration/evidence-skill/check_retention_paths.py"
+    ],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT",
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "not_assessable",
+    "gates": []
+  },
+  "procedure": {
+    "id": "PROC-WO-IMPLEMENT",
+    "current_step": "STEP-WO-IMPLEMENT-CHECK",
+    "steps": [
+      {
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "Evaluated implementation handoff for WO-PLG-017."
+        ],
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-PLG-017",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-START"
+          },
+          "QGP-G4I-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G4I-COMPLETE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-PLG-017",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ]
+          },
+          "QGP-G4I-PATHS": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-PLG-017",
+              "--phase",
+              "review"
+            ]
+          },
+          "QGP-G4I-EVIDENCE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-PLG-017",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "QGP-G4I-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-IMPLEMENT-DECIDE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "An explicit completion decision permits only WO-PLG-017 to become implemented."
+        ],
+        "non_effects": [
+          "Completion does not verify or release the work."
+        ],
+        "decision_right": "DR-WO-COMPLETE",
+        "role": "engineering-owner",
+        "artifact": "WO-PLG-017",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "response": "Mark WO-PLG-017 implemented."
+      }
+    ]
+  },
+  "state": {
+    "before": [],
+    "after": [
+      {
+        "id": "WO-PLG-017",
+        "status": "in_progress"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "WO-PLG-017",
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/WO-PLG-017-handoff.md",
+        "fields": [
+          "artifact",
+          "checkpoint",
+          "formal_snapshot_sha256",
+          "rebound_at"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Rebound the handoff evidence packet of WO-PLG-017 at docs/engineering/plugin-integration/evidence/WO-PLG-017/WO-PLG-017-handoff.md to formal snapshot 1313dcbde1269e6098677297bcbc154c1f9d00a3edd4f98eb8f5539e53f0fb6c."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-PLG-017 is in_progress."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-CHECK",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "WO-PLG-017",
+        "--checkpoint",
+        "handoff"
+      ]
+    },
+    "alternatives": []
+  },
+  "result_sha256": "badf8d27bdf1227d74cbf6215ef5995890cef4537b60ab943c9b0defca2ce3b0"
+}

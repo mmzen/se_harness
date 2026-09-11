@@ -1,0 +1,752 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-PLG-017",
+    "artifacts": [
+      "WO-PLG-017"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "CAP-WEX-001",
+      "INT-WEX-001",
+      "REQ-PLG-019",
+      "SPEC-PLG-011",
+      "VER-PLG-011"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/plugin-integration/evidence/VREC-PLG-010-evaluator.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native-path-map.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/README.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/plugin-integration/verification-records/VREC-PLG-010.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-017.md",
+      "tests/plugin_integration/evidence-skill/check_retention_paths.py"
+    ],
+    "changed_paths": [
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/docs/engineering/evidence-demo/evidence/VREC-EVD-001-evaluator.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/docs/engineering/evidence-demo/verification-records/VREC-EVD-001.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/target/harness-dashboard/content/ea43c242f0429f61a83383a81418f90b1a47e93e1470162a7d8b73f0c009a6e6.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/target/harness-dashboard/dashboard-manifest.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/target/harness-dashboard/data/artifacts/0acbb4aeb9b07c22b33add4f1120ab38a46d6c84bd37f191d24209e2bbde64e9.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/target/harness-dashboard/data/artifacts/3517f32a79e6da2c2a12fe0273a7b6386e05c92f3f9187b25d2774acdc119c09.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/target/harness-dashboard/data/artifacts/3d9feded312000ef41e14f27aad51015bf6bb9749005503c14c0a740280cb650.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/target/harness-dashboard/data/artifacts/68709b0cdc8a964c89088e0120066b2d7cf0c2ae123660b32937396863798ee4.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/target/harness-dashboard/data/artifacts/70a5a3c54097b87b6d997e1a914daa0795764286d46771ca62a7f782da76eb3e.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/target/harness-dashboard/data/artifacts/c8671ae5902e74ac392a2de327c4a88eb5ddbba5a9d5547dd72b10df7db21ea9.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/target/harness-dashboard/data/artifacts/f4e7c80ece35787cf142d8132303429febc92a1b3a83b6c5180ff066c835c8d8.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/target/harness-dashboard/data/readiness/f39a03f5d5d82fc0b374723cf32b467e4c2c0a2d987d0b174c5407f73c84ab19.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/target/harness-dashboard/data/summary/3c18634ace06b547de4eb29ab724af74e14f6210ee7a9af36ba65ce0710de884.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/target/harness-dashboard/data/topology/e8ed2545376da173dc9783aef81e988547ef9489a0c719bfbc07fdc0ab2d8b5b.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/target/harness-dashboard/generation-summary.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/target/harness-dashboard/index.html",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/docs/engineering/evidence-demo/evidence/VREC-EVD-001-evaluator.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/docs/engineering/evidence-demo/verification-records/VREC-EVD-001.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/content/b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/dashboard-manifest.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/data/artifacts/0b1c904a2691c0806bbdd9cd3114ae25f02cf1402ccef943e76e7c7b7faa46c1.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/data/artifacts/2262514df3a78b0a166c0279982a64ad6cdfb5eab9c18a22a293deb9549b8385.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/data/artifacts/264293643e8f7cf0a1b7e0b48c9d73c0199c754d4ec3a195759216b50f839cf5.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/data/artifacts/67a735968173b15ad87afe5d6ca876c87eaabb64b4a24dcef152998aa8b63b92.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/data/artifacts/769f4a5a9f168dc3f9f8b48f14ab0bff96d3062b411c77a36cffb558a677bd9d.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/data/artifacts/79598de6b0dc18a42df712af22e8e808e4378724073a4f528c175f2a085a5bf0.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/data/artifacts/e432e0f04987b1d7cb8bc110e0323c2cef83b5aa7f5be187268dcd963ff79323.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/data/readiness/9ec92835065e0acf77ce0430a5a7fe2d81bef5e7d7e266e551f9cc182781b84e.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/data/summary/75d4e6e9f0cf0bd01d0e9d8210f53c198361e76681d2a448a8e268b5ed4b7114.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/data/topology/5f056d6e5d4b8cad9e6f7039c926faf51de246bb66275e0932c89385fa86104d.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/generation-summary.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/capture-repository/target/harness-dashboard/index.html",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/docs/engineering/evidence-demo/evidence/VREC-EVD-001-evaluator.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/docs/engineering/evidence-demo/verification-records/VREC-EVD-001.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/content/b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/dashboard-manifest.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/artifacts/0b1c904a2691c0806bbdd9cd3114ae25f02cf1402ccef943e76e7c7b7faa46c1.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/artifacts/2262514df3a78b0a166c0279982a64ad6cdfb5eab9c18a22a293deb9549b8385.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/artifacts/264293643e8f7cf0a1b7e0b48c9d73c0199c754d4ec3a195759216b50f839cf5.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/artifacts/67a735968173b15ad87afe5d6ca876c87eaabb64b4a24dcef152998aa8b63b92.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/artifacts/769f4a5a9f168dc3f9f8b48f14ab0bff96d3062b411c77a36cffb558a677bd9d.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/artifacts/79598de6b0dc18a42df712af22e8e808e4378724073a4f528c175f2a085a5bf0.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/artifacts/e432e0f04987b1d7cb8bc110e0323c2cef83b5aa7f5be187268dcd963ff79323.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/readiness/9ec92835065e0acf77ce0430a5a7fe2d81bef5e7d7e266e551f9cc182781b84e.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/summary/bc9dff153a1325b439a223ee652a95851c63fb81e548f9accd94892e596d6403.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/data/topology/5f056d6e5d4b8cad9e6f7039c926faf51de246bb66275e0932c89385fa86104d.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/generation-summary.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/corrected-repository/target/harness-dashboard/index.html",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/handoff-repository/docs/engineering/evidence-demo/evidence/WO-EVD-001/handoff.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/handoff-repository/docs/engineering/evidence-demo/evidence/WO-EVD-001/WO-EVD-001-handoff.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/partial-uncertain-repository/docs/engineering/evidence-demo/verification-records/VREC-EVD-001.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/release-repository/docs/engineering/evidence-demo/evidence/RLS-EVD-001-evaluator.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/release-repository/docs/engineering/evidence-demo/releases/RLS-EVD-001.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/release-repository/docs/engineering/evidence-demo/verification-records/VREC-EVD-001.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native-path-map.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0001.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0002.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0003.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0004.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0005.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0006.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0007.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0008.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0009.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0010.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0011.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0012.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0013.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0014.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0015.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0016.html",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0017.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0018.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0019.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0020.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0021.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0022.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0023.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0024.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0025.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0026.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0027.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0028.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0029.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0030.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0031.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0032.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0033.html",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0034.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0035.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0036.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0037.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0038.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0039.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0040.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0041.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0042.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0043.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0044.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0045.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0046.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0047.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0048.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0049.html",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0050.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0051.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0052.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0053.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0054.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0055.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/README.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/audit.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/c-vs-g.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/ci-source.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/ci-source.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/ci-windows.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/ci-windows.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00002.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00004.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00005.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00006.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00011.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00012.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00013.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00014.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00015.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00016.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00017.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00018.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00019.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00020.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00021.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00022.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00023.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00024.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00025.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00026.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00027.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00028.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00029.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00030.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00031.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00032.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00033.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00034.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00035.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00036.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00037.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00038.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00039.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00040.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00041.gz",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00042.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00043.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00044.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00045.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00046.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00047.gz",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00048.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00049.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00050.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00051.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00052.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00053.gz",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00054.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00055.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00056.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00057.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00058.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00059.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00061.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00062.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00063.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00064.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00065.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00066.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00067.gz",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00068.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00069.gz",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00070.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00071.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00072.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00075.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00076.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00077.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00078.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00079.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00080.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00081.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00082.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00083.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00084.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00085.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00086.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00087.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00088.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00089.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00090.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00091.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00092.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00093.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00094.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00095.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00096.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00097.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00098.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00099.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00100.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00101.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00102.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00103.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00104.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00105.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00106.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00107.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00108.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00109.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00110.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00111.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00112.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00113.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00114.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00115.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00116.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00117.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00118.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00120.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00121.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00122.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00123.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00124.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00125.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00126.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00127.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00128.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00129.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00130.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00131.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00132.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00133.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00134.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00135.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00136.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00137.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00138.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00139.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00140.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00141.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00142.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00143.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00144.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00145.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00146.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00147.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00148.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00149.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00150.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00151.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00152.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00153.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00154.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00155.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00156.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00157.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00158.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00159.gz",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00160.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00161.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00162.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00163.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00164.gz",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00165.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00166.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00167.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00168.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00169.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00170.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00171.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00172.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00173.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00174.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00175.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00176.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00177.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00178.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00179.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00180.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00181.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00182.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00183.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00184.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00185.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00186.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00187.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00188.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00189.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00190.gz",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00191.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00192.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00193.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00194.gz",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00195.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00196.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00197.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00198.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00199.gz",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00200.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/f00201.bin",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/inventory.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/linux.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/oracle.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/oracle.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/pack-source.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/path-plan.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/REPORT.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/source-path-map.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/suite-not-run.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/windows.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/approval/checkpoint-note.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/approval/repair-approval-applied.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/approval/repair-approval-plan.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/approval/repair-approved-evidence.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/approval/repair-approved-handoff.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/approval/repair-approved-preflight.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/approval/repair-approved-validate.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/approval/repair-owner-approval.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/acceptance-retention.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/checks.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/checks.json.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/commands.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/j03.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/j03.json.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/j03.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/j03.log.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/j04.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/j04.json.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/j04.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/j04.log.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/j09.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/j09.json.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/j09.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/j09.log.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/j11.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/j11.json.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/j11.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/j11.log.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/pull.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/pull.json.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-rehearsal-failed/result.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/independent-review/followup-ed31a520.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/independent-review/review.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/independent-review/scope-review.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/candidate-skew.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-blocked-scope.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-blocked-scope.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-candidate-doctor/command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-candidate-doctor/stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-candidate-doctor/stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-distributions/command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-distributions/stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-distributions/stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-fixed-doctor.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-fixed-doctor.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-fixed-graph.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-fixed-graph.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-fixed-preflight.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-fixed-preflight.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-help/command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-help/stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-help/stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-proposal-doctor.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-proposal-doctor.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-proposal-graph.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-proposal-graph.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-proposal-preflight.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/local/repair-proposal-preflight.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/path-reconciliation/command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/path-reconciliation/stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/path-reconciliation/stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/repair-create-017-draft.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/repair-draft-doctor.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/repair-draft-preflight.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/repair-final-approval-preview.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/repair-final-draft-validate.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/repair-main-approval-preview.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/repair-main-draft-doctor.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/repair-main-draft-validate.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/windows-source-failed/command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/windows-source-failed/stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/windows-source-failed/stdout.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/handoff.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/path-plan.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/pr445-windows-checkout.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/pr446-windows-checkout.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/README.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/scope-extension-plan.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/scope-extension.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/start/repair-start-applied.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/start/repair-start-plan.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/start/repair-start-preflight.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-017/WO-PLG-017-handoff.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-017.md",
+      "tests/plugin_integration/evidence-skill/check_retention_paths.py"
+    ],
+    "change_set_complete": true
+  },
+  "compliance": {
+    "checkpoint": "handoff",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT",
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4I-STATUS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-PLG-017"
+              }
+            ],
+            "message": "WO-PLG-017 status is in_progress."
+          },
+          {
+            "id": "QGP-G4I-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-PLG-017"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G4I-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G4I-SCOPE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-PLG-017:[execution_scope]"
+              }
+            ],
+            "message": "WO-PLG-017 declares 11 normalized scope path(s)."
+          },
+          {
+            "id": "QGP-G4I-COMPLETE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-PLG-017"
+              }
+            ],
+            "message": "The caller explicitly asserted that the declared change set is complete."
+          },
+          {
+            "id": "QGP-G4I-PATHS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-PLG-017"
+              }
+            ],
+            "message": "All 404 declared changed path(s) are within execution scope."
+          },
+          {
+            "id": "QGP-G4I-PREFLIGHT",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-PLG-017:review"
+              }
+            ],
+            "message": "Released-installation review preflight inputs are ready."
+          },
+          {
+            "id": "QGP-G4I-EVIDENCE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-PLG-017"
+              }
+            ],
+            "message": "Fresh retained evidence is bound at docs/engineering/plugin-integration/evidence/WO-PLG-017/WO-PLG-017-handoff.md."
+          },
+          {
+            "id": "QGP-G4I-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-PLG-017"
+              }
+            ],
+            "message": "No open decision blocks WO-PLG-017."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "694127693cc6a38ab00a9c21f680abf2b4007266b96943f42b9369f412e3c29a",
+    "change_set_source": "git"
+  },
+  "procedure": {
+    "id": "PROC-WO-IMPLEMENT",
+    "current_step": "STEP-WO-IMPLEMENT-DECIDE",
+    "steps": [
+      {
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "Evaluated implementation handoff for WO-PLG-017."
+        ],
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-PLG-017",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-START"
+          },
+          "QGP-G4I-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G4I-COMPLETE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-PLG-017",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ]
+          },
+          "QGP-G4I-PATHS": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-PLG-017",
+              "--phase",
+              "review"
+            ]
+          },
+          "QGP-G4I-EVIDENCE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-PLG-017",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "QGP-G4I-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-IMPLEMENT-DECIDE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "An explicit completion decision permits only WO-PLG-017 to become implemented."
+        ],
+        "non_effects": [
+          "Completion does not verify or release the work."
+        ],
+        "decision_right": "DR-WO-COMPLETE",
+        "role": "engineering-owner",
+        "artifact": "WO-PLG-017",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "response": "Mark WO-PLG-017 implemented."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-PLG-017",
+        "status": "in_progress"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-PLG-017",
+        "status": "in_progress"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 46
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "WO-PLG-017",
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/handoff.json",
+        "fields": [
+          "result_sha256"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated handoff compliance for WO-PLG-017."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-PLG-017 is in_progress."
+    ],
+    "decision_required": {
+      "decision_right": "DR-WO-COMPLETE",
+      "role": "delegated-executor",
+      "artifact": "WO-PLG-017",
+      "decision": "whether the authorized implementation and evidence are complete",
+      "outcomes": [
+        "implemented",
+        "continue",
+        "reject"
+      ],
+      "delegation": {
+        "class": "execution",
+        "gate": "success",
+        "check_run_id": "103061723065",
+        "head": "a5aae5a39d0ac30b3847187d84c17371cad893cd"
+      }
+    },
+    "next": {
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-DECIDE",
+      "action": "whether the authorized implementation and evidence are complete"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-PLG-017=implemented",
+        "--decision",
+        "WO-PLG-017=delegated-executor",
+        "--apply"
+      ]
+    },
+    "alternatives": []
+  },
+  "result_sha256": "2af72630f70ff63dfb8e3e5c38cc2c86c3a57f8eb6c138db3d3428e42b98e3d1"
+}

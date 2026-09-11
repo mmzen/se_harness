@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "git",
+    "-c",
+    "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-path-fix",
+    "-c",
+    "core.longpaths=false",
+    "-c",
+    "core.autocrlf=false",
+    "-C",
+    "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-k47frca9\\src",
+    "cat-file",
+    "blob",
+    "e9c256eb49d27f82e60543b7b3ca24f43a5129be:repository_tools/upgrade_rehearsal.py"
+  ],
+  "elapsed_seconds": 0.029834747314453125,
+  "error": null,
+  "expected": 0,
+  "returncode": 0,
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "4dfba43492ce476366f0b5b44b432671b60998d43b292099b640cb97e64fb4c9"
+}

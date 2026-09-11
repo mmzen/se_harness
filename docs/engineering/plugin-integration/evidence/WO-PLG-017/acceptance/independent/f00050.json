@@ -1,0 +1,10 @@
+{
+  "altered_map_sha256": "778ca3deec9e4a5896235949d4a74f33d2a09b8cac7d2c7c379e574fa4d2d936",
+  "altered_plan_sha256": "a1e98390bfaeaa13bb96a400be0f47e56138b8da3d65786bd448a52be766192c",
+  "changed_map_field": "source_plan_sha256",
+  "changed_plan_field": "preserved_candidate",
+  "intentional_disposable_only": true,
+  "original_map_sha256": "865a8b516aae860d148fd37316bcf11646f980e9122207f4cc5dd15d501dc083",
+  "original_plan_sha256": "37031560322c962987513e8950b37503a642c6e474cc2a031822870467659aa9",
+  "unchanged_payloads": true
+}

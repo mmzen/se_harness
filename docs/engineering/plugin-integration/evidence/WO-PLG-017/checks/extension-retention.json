@@ -1,0 +1,12 @@
+{
+  "classification": "Retention audit, not assurance",
+  "inventory_sha256": "c1951dcd4f56f6820908258508a1b11dcb1a6ae6617ceb0d79dbe0c73052a864",
+  "payload_files": 206,
+  "source_mappings": 357,
+  "all_stored_and_decompressed_hashes_checked": true,
+  "copied_bytes_identical": true,
+  "scoped_checks_passed": true,
+  "bulk_archives_omitted": 2,
+  "bulk_archive_reproduction": "acceptance/extension/bulk-omissions.json",
+  "completion_transition": "Recorded separately by the released evaluator."
+}

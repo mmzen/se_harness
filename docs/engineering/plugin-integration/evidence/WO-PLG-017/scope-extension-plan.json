@@ -1,0 +1,44 @@
+{
+  "schema": "wo017-scope-extension-proposal-v1",
+  "status": "proposed_not_approved_not_applied",
+  "source_commit": "ed31a520964f81627c9c5b428b68968caa6282e7",
+  "files": [
+    {
+      "original_path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json",
+      "proposed_path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0056.json",
+      "bytes": 730,
+      "sha256": "730e0507e7c4992b183122e91fda0369d610a499d76545b463d725c22dcaf263"
+    }
+  ],
+  "proposed_additional_execution_scope_paths": [
+    "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json"
+  ],
+  "existing_authorized_destinations": [
+    "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-017/",
+    "tests/plugin_integration/evidence-skill/check_retention_paths.py"
+  ],
+  "retention_map_destination": "docs/engineering/plugin-integration/evidence/WO-PLG-017/staging-path-map.json",
+  "original_55_file_plan_and_map_unchanged": true,
+  "existing_vrec_mutations": false,
+  "directly_selected_by_vrec008": false,
+  "staging_profile": {
+    "root": "C:/Users/runneradmin/AppData/Local/Temp/upgrade-rehearsal-12345678/repository",
+    "root_character_count": 77,
+    "maximum_full_path": 259,
+    "before_longest_full_path": 261,
+    "after_longest_full_path": 259,
+    "basis": "Derived from default Windows runner temp layout, the unchanged rehearsal prefix, eight-character tempfile suffix and repository child. The failed job does not print the actual scratch root; a matching-depth real staging probe and hosted rehearsal must validate this profile."
+  },
+  "ordinary_checkout_profile": {
+    "root": "D:/a/se_harness/se_harness",
+    "maximum_full_path": 250
+  },
+  "acceptance": [
+    "Preserve original payload bytes, size and SHA-256; retain a separate one-row map bound to this approved proposal digest.",
+    "Keep original55 plan and map and all existing VREC/sidecar/source-manifest bytes unchanged.",
+    "Check both ordinary checkout and deeper rehearsal profiles; actually export and git add the tree at the derived staging depth with core.longpaths=false.",
+    "Run existing Windows upgrade and downstream integration checks without modifying CI or weakening its tests.",
+    "Reconcile all56 moved files independently and retain original failure and correction observations."
+  ]
+}

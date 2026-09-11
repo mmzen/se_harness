@@ -1,0 +1,31 @@
+{
+  "classification": "Independent read-only follow-up source review; not assurance or lifecycle decision",
+  "candidate": "ed31a520964f81627c9c5b428b68968caa6282e7",
+  "prior_review": "review.json",
+  "finding": "Mutable current plan could redefine approved destination mapping",
+  "resolution": "Addressed in source: fixed approved-plan digest is checked before parsing or using the current plan",
+  "independent_binding": {
+    "approval_commit": "ed19676fd2af8b9754f74cbc6bc8664a92d2f803",
+    "approved_git_plan_sha256": "37031560322c962987513e8950b37503a642c6e474cc2a031822870467659aa9",
+    "checker_pin": "37031560322c962987513e8950b37503a642c6e474cc2a031822870467659aa9",
+    "pin_matches_original": true,
+    "candidate_plan_matches_original": true,
+    "checker_sha256": "bbebd978d2fd985e8dc7f9194a70a16fb72f435b5a2a4f9f7506c3287552e6d5",
+    "working_checker_matches_candidate": true
+  },
+  "windows_source_failure": {
+    "evidence_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-control\\se-harness-plugin-evidence-path-fix\\checks\\repair-source",
+    "command_sha256": "dc5b449e3f19a93729af8c6016e3d7c3f936cda70c245e448678ca4407e41264",
+    "stdout_sha256": "afba943f4def54e37ed141a8db1e3eba71848fce50190e70eaf1c7ab6e1f164b",
+    "site": "tests/test_artifact_authoring.py:313",
+    "effect": "shutil.rmtree fixture .git failed at os.unlink of loose Git object with WinError5; final outside-checkout assertion was not reached",
+    "baseline_test_unchanged": true,
+    "assessment": "Consistent with unhandled read-only Git object deletion on Windows. The log records no file-attribute snapshot, so another Windows access restriction is not excluded. Not caused by an edit to this test in the repair diff.",
+    "suite_result": "Failed:1134 tests,1 error,23 skips"
+  },
+  "limits": [
+    "No test execution or out-of-scope source fix.",
+    "No claim of historical baseline reproduction or confirmed read-only attribute.",
+    "Other agent owns actual Windows/Linux/tamper acceptance."
+  ]
+}

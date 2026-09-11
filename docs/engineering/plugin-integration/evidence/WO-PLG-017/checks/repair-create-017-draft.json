@@ -1,0 +1,12 @@
+{
+  "changes": [
+    {
+      "action": "create",
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-017.md"
+    }
+  ],
+  "command": "create-artifact",
+  "dry_run": false,
+  "outcome": "completed",
+  "schema": "se-harness-command-result-v1"
+}

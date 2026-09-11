@@ -1,0 +1,25 @@
+docs/notes/diagnostic-codes.md matches the source
+WEX_SCALE artifacts=100 validation=0.125037s focus=0.235609s plan=0.267678s
+WEX_SCALE artifacts=500 validation=0.730680s focus=0.864357s plan=1.387138s
+======================================================================
+ERROR: test_artifact_authoring.IdentifierAllocationTests.test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-evidence-path-fix\tests\test_artifact_authoring.py", line 313, in test_allocation_refuses_outside_a_checkout_and_an_explicit_id_on_any_ref
+    shutil.rmtree(self.root / ".git")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 5] Accès refusé: 'C:\\Users\\mathi\\AppData\\Local\\Temp\\tmp4h65y_fu\\.git\\objects\\04\\e1206c9e14aa0f1a1e753b6f612c0dc862675c'
+
+----------------------------------------------------------------------
+Ran 1134 tests in 77.889s (180 classes, 8 workers)
+
+FAILED (errors=1, skipped=23)
