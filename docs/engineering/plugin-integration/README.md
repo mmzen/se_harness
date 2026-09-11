@@ -85,3 +85,10 @@ relocation preserves bytes and historical verification records. Independent
 retention checks and full Windows/Linux CI pass; see its
 [evidence index](evidence/WO-PLG-017/README.md). Aggregate verification preparation
 and assurance remain separate decisions.
+
+
+The operator-authorized aggregate [VREC-PLG-010](verification-records/VREC-PLG-010.md)
+is ready for WO-PLG-011 and WO-PLG-017 at candidate 47f7b842. It binds 182 selected
+evidence files. [Preparation receipts](evidence/WO-PLG-017/governance/ready-record/README.md)
+and [final candidate CI](evidence/WO-PLG-017/checks/ci-final/result.json) are retained.
+VREC-PLG-008 remains unchanged; assurance and supersession are separate decisions.
