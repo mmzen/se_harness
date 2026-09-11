@@ -1,0 +1,8 @@
+--workers must be at least 1
+WEX_SCALE artifacts=100 validation=0.144904s focus=0.246942s plan=0.285530s
+WEX_SCALE artifacts=500 validation=0.615512s focus=0.794840s plan=1.298329s
+docs/notes/diagnostic-codes.md matches the source
+----------------------------------------------------------------------
+Ran 1155 tests in 80.096s (183 classes, 8 workers)
+
+OK (skipped=23)

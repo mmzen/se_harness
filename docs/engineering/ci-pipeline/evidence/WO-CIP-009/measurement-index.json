@@ -1,0 +1,68 @@
+{
+  "schema": "wo-cip-009-retained-measurement-v1",
+  "run_url": "https://github.com/mmzen/se_harness/actions/runs/34627146995",
+  "head": "9b2adbd44094d5c3451d997048dd80dca7057102",
+  "tested_merge": "719d9d506b9db118e3d5b13994812d6fee2aedd6",
+  "files": [
+    {
+      "path": "measured-linux-runtime.json",
+      "source_path": "Linux/upgrade-rehearsal-runtime.json",
+      "sha256": "392aec6d4b38c84763f095e3e9fc4214cc070c4852afd434a1bc5acc540a9d7a",
+      "bytes": 616
+    },
+    {
+      "path": "measured-linux-1-timing.json",
+      "source_path": "Linux/rehearsal-result-1/upgrade-rehearsal-timing.json",
+      "sha256": "188b37beb4955075d2826c3e3dcc43135e58afb25e4bb118c9af362bf31aae5d",
+      "bytes": 3651
+    },
+    {
+      "path": "measured-linux-1-result.json",
+      "source_path": "Linux/rehearsal-result-1/upgrade-rehearsal-result.json",
+      "sha256": "dd754a5a30528b7ce82a94a84d8584733c252bae9135a0ffa48f7d43fc1ae0f7",
+      "bytes": 3918
+    },
+    {
+      "path": "measured-linux-2-timing.json",
+      "source_path": "Linux/rehearsal-result-2/upgrade-rehearsal-timing.json",
+      "sha256": "56dd02f37581a2b925e069be336319ce380bc5660b5e8ba17ebadd99340d1a7a",
+      "bytes": 3639
+    },
+    {
+      "path": "measured-linux-2-result.json",
+      "source_path": "Linux/rehearsal-result-2/upgrade-rehearsal-result.json",
+      "sha256": "dd754a5a30528b7ce82a94a84d8584733c252bae9135a0ffa48f7d43fc1ae0f7",
+      "bytes": 3918
+    },
+    {
+      "path": "measured-windows-runtime.json",
+      "source_path": "Windows/upgrade-rehearsal-runtime.json",
+      "sha256": "a0be61ce716e998e321512a8ffbfea4b1e61b55dfa4d0f2f1b02184fd95d0ad8",
+      "bytes": 856
+    },
+    {
+      "path": "measured-windows-1-timing.json",
+      "source_path": "Windows/rehearsal-result-1/upgrade-rehearsal-timing.json",
+      "sha256": "115ba84cf2eece8d37764f2dff6760ed26cfa1665f5f04a2969f1c445a893f1a",
+      "bytes": 3642
+    },
+    {
+      "path": "measured-windows-1-result.json",
+      "source_path": "Windows/rehearsal-result-1/upgrade-rehearsal-result.json",
+      "sha256": "ee2cd68359b1024e6b7a6bbee9d9fed3ceaf3131af73c6b8318df3834451b494",
+      "bytes": 3924
+    },
+    {
+      "path": "measured-windows-2-timing.json",
+      "source_path": "Windows/rehearsal-result-2/upgrade-rehearsal-timing.json",
+      "sha256": "a2ce24016a0af23d5782808b9eb86ed2f16a409f55e87b894411a8daff536a05",
+      "bytes": 3647
+    },
+    {
+      "path": "measured-windows-2-result.json",
+      "source_path": "Windows/rehearsal-result-2/upgrade-rehearsal-result.json",
+      "sha256": "ee2cd68359b1024e6b7a6bbee9d9fed3ceaf3131af73c6b8318df3834451b494",
+      "bytes": 3924
+    }
+  ]
+}

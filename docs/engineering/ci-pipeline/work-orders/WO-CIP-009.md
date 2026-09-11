@@ -18,13 +18,17 @@ paths = [
   ".github/workflows/candidate-evidence.yml",
   "tests/test_upgrade_rehearsal.py",
   "tests/test_ci_pipeline.py",
+  ".github/scripts/build_integration_package.py",
+  "tests/test_integration_package.py",
   "docs/engineering/ci-pipeline/work-orders/WO-CIP-009.md",
   "docs/engineering/ci-pipeline/verification/VER-CIP-005.md",
+  "docs/engineering/ci-pipeline/evidence/WO-CIP-009/",
 ]
 
 [relations]
-implements = ["REQ-ECP-012"]
-specifications = ["SPEC-ECP-007"]
+implements = ["REQ-ECP-012", "REQ-IPK-001"]
+specifications = ["SPEC-ECP-007", "SPEC-IPK-001"]
+architecture = ["ARCH-IPK-001", "ADR-IPK-001"]
 verification = ["VER-CIP-005"]
 
 [[lifecycle_events]]
@@ -79,13 +83,17 @@ Its tested merge was `816e1231fab5d620a32469714b2058228c995971`.
    inspect each replay and platform, and download the raw diagnostic evidence.
    Repeat the complete diagnostic run once on the same commit if needed to
    distinguish a reproducible bottleneck from first-run or runner variability.
+6. Under the capacity amendment below, raise the integration-package archive
+   member limit from 10,000 to 20,000, test the boundary and retain the bounded
+   handoff evidence needed by this WO. This does not optimize the rehearsal.
 
 ## Out of scope
 
 No faster exporter, cache, parallel replay, removed check, reduced fixture,
 Python upgrade, Defender setting change, permission change, or broader logging.
 No product package change, managed-file edit, release, merge, historical evidence
-rewrite, archive-limit increase, or verification-record preparation.
+rewrite, or verification-record preparation. The only archive-limit change
+is the 20,000-entry capacity amendment below.
 
 ## Authorized decision envelope
 
@@ -105,18 +113,19 @@ actual errors and retain partial timings on failure without hiding the original
 failure. Optional diagnostic errors must not turn failed handover checks green.
 No secrets, broad environment dumps or unredacted subprocess output are logged.
 
-The baseline archive has 9,998 entries against a 10,000-entry limit. This packet
-adds exactly two files in existing directories. Executable instrumentation and
-tests modify existing files only; runner output stays outside the checkout.
-Download GitHub artifacts before expiry and record their hashes in the report.
-Do not add tracked evidence or later VREC files within this bounded measurement.
-A durable evidence/VREC delivery needs a separately reviewed archive-capacity
-plan before completion or assurance is claimed; this packet grants no waiver.
+The original measurement candidate has exactly 10,000 archive entries. The
+authorized amendment raises the integration-package extraction limit to 20,000
+entries, counting both files and directories. Keep the 128 MiB member limit,
+512 MiB archive/expanded-total limits, and every path and member-type check.
+No automatic limit growth, bypass, CLI override or evidence deletion is allowed.
+Retain compact handoff evidence under this WO's evidence directory. Large raw
+logs and wheel files remain downloaded outside the checkout; record hashes and
+run links. Verification-record preparation still requires separate authority.
 
 ## Expected change surface
 
-Two new draft artifacts, followed after approval by modifications to the four
-existing executable/test files. No diagnostic data is a tracked source input.
+Two formal artifacts, six existing executable/test files, and this WO's bounded
+handoff evidence directory. Diagnostic data is not an input to package behavior.
 
 ## Required verification
 
@@ -126,8 +135,9 @@ Keep the two replay digests and Windows/Linux agreement checks unchanged.
 
 ## Evidence to record
 
-Retain raw job logs, timing/result files, runtime diagnostics, workflow/run/job
-identities, file counts, exact commands and hashes outside the repository.
+Retain raw job logs and wheel files outside the repository. Keep compact timing,
+runtime, test and handoff evidence under this WO, naming exact workflow/run/job
+identities, file counts, commands and hashes.
 Provide a compact stage comparison and distinguish hosted facts from local
 measurements and hypotheses. Link it from the PR report when requested.
 
@@ -135,7 +145,7 @@ measurements and hypotheses. Link it from the PR report when requested.
 
 Stop on a changed handover verdict or digest, changed isolation, credential
 exposure, missing authority, failed required checks, scope expansion, new
-tracked files beyond the packet, or archive overflow. Do not optimise while
+tracked files outside the declared scope, or archive overflow. Do not optimise while
 measuring or present a local profile as the hosted result.
 
 ## Completion report format
@@ -144,3 +154,18 @@ Report per-replay and per-platform timings, the confirmed largest stages,
 Defender's observed state, missing data, and measurement limitations. Preserve
 WO state and the boundary between an observation and formal completion,
 verification or integration. Propose a repair only after the measurements.
+
+## Authorized capacity amendment — 2026-09-11
+
+The accountable operator authorized the repair with "you can raise the limit"
+after the implementation limit and the evidence blockage were explained.
+This is authority to extend WO-CIP-009 and its verification coverage for that
+repair and necessary handoff evidence. Lifecycle states remain unchanged.
+
+The bounded choice is 20,000 entries: twice the exhausted limit, while keeping
+all byte budgets and safe-extraction checks. Add only the packaging script,
+its existing test file, and this WO's evidence directory to execution scope.
+REQ-IPK-001 and SPEC-IPK-001 govern the exact-commit export and safety boundary.
+Re-run the affected tests and normal CI, including Windows/Linux integration
+verification. Do not reinterpret historical WO-PLG-018 evidence or its 10,000
+entry constraint: it describes the earlier accepted integration candidate.
