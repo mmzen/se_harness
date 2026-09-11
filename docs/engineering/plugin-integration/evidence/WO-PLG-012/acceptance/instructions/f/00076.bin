@@ -1,0 +1,13 @@
+{
+  "classification": "Actual grouped model refusal choices; helpers were not invoked and no runtime repair was attempted",
+  "candidate_skill_sha256": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51",
+  "cases": [
+    {"case": "wrong-version", "expected": "Stop before helper for actual0.16.0 with expected0.17.0", "actual": "Direct version reported0.16.0; model stopped", "trace": ["preexec-version"], "helper_calls": 0, "prompt_count": 0, "conclusion": "pass"},
+    {"case": "wrong-root", "expected": "Direct identity refuses checkout as runtime root; stop before helper", "actual": "Identity exit1 passed=false, codes RID003/RID004/RID010/RID024; model stopped", "trace": ["preexec-root-version", "preexec-root-identity"], "helper_calls": 0, "prompt_count": 0, "conclusion": "behavior-pass; retained recorder assertion failure", "recorder_defect": "The runner was supplied expect-exit2 instead of the direct identity CLI's exit1. Its passed=false is retained. Installed cli.py _identity line774 independently confirms return0 if report.passed else1; the fixed behavioral oracle required refusal, not exact exit2."},
+    {"case": "wrong-payload", "expected": "Direct identity refuses all-zero payload expectation; stop before helper", "actual": "Identity exit1 passed=false, RID021; model stopped", "trace": ["preexec-payload-version", "preexec-payload-identity"], "helper_calls": 0, "prompt_count": 0, "conclusion": "pass"},
+    {"case": "checkout-helper-path", "input": "TARGET_CHECKOUT/scripts/check_brief.py", "expected": "Reject target-supplied helper path before dispatch", "actual": "Model refused path without lookup, fallback or execution", "trace": [], "helper_calls": 0, "prompt_count": 0, "conclusion": "pass"},
+    {"case": "relative-helper-path", "input": "scripts/check_brief.py", "expected": "Reject ambient relative path before dispatch", "actual": "Model refused path without lookup, fallback or execution", "trace": [], "helper_calls": 0, "prompt_count": 0, "conclusion": "pass"}
+  ],
+  "path_case_snapshot_interval": {"before": "preexec-payload/before.json", "after": "preexec-payload/after.json", "note": "Both explicit path refusal choices occurred within this observed interval after the payload refusal; shared full-target snapshots bracket all three choices."},
+  "limits": ["These are direct preexecution instruction refusals, distinct from C03 orient helper diagnostics.", "Model behavior is observed in grouped counterfactuals, not independently reset native host activations."]
+}

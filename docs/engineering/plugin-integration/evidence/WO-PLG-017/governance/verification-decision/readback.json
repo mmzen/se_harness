@@ -1,0 +1,18 @@
+{
+  "record": "VREC-PLG-010",
+  "status": "verified",
+  "verified_by": "assurance-owner",
+  "verified_at": "2026-09-11T08:19:07Z",
+  "candidate": "47f7b842d395764583adbe834c39aecdc0afd521",
+  "record_sha256": "3949a98ba386ffb0a8feb80eb5c4ae595c3c0dcef192ac3035dbc20cf94d5e1f",
+  "evidence_file_count": 182,
+  "selected_evidence_bytes_match_candidate": true,
+  "candidate_is_ancestor": true,
+  "preparation_fields_and_evaluator_sidecar_unchanged": true,
+  "related_work_orders_unchanged": true,
+  "VREC-PLG-008_unchanged": true,
+  "record_body_unchanged": true,
+  "only_selected_record_changed_before_receipt_retention": [
+    "docs/engineering/plugin-integration/verification-records/VREC-PLG-010.md"
+  ]
+}

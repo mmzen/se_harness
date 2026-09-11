@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-evidence-skill\\tests\\plugin_integration\\evidence-skill\\portable\\run_replay.py",
+    "--bundle",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\repository-missing-executable\\bundle",
+    "--output",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\repository-missing-executable\\run",
+    "--command-timeout",
+    "2",
+    "--batch",
+    "probe"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\repository-missing-executable",
+  "exit_code": 1,
+  "stdout": "{\"label\": \"probe\", \"exit_code\": null, \"non_git_changes\": []}\r\n{\"passed\": false, \"batch\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-recorder-error-probes-20260911-attempt1\\\\repository-missing-executable\\\\run\\\\probe.json\"}\r\n",
+  "stderr": "Traceback (most recent call last):\r\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-evidence-skill\\tests\\plugin_integration\\evidence-skill\\portable\\run_replay.py\", line 217, in <module>\r\n    main()\r\n    ~~~~^^\r\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-evidence-skill\\tests\\plugin_integration\\evidence-skill\\portable\\run_replay.py\", line 179, in main\r\n    raise command_error\r\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-evidence-skill\\tests\\plugin_integration\\evidence-skill\\portable\\run_replay.py\", line 157, in main\r\n    result = subprocess.run(argv, cwd=output, env=env, capture_output=True,\r\n                            input=stdin.encode(\"utf8\") if stdin else None,\r\n                            timeout=ns.command_timeout)\r\n  File \"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\subprocess.py\", line 555, in run\r\n    with Popen(*popenargs, **kwargs) as process:\r\n         ~~~~~^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\subprocess.py\", line 1039, in __init__\r\n    self._execute_child(args, executable, preexec_fn, close_fds,\r\n    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n                        pass_fds, cwd, env,\r\n                        ^^^^^^^^^^^^^^^^^^^\r\n    ...<5 lines>...\r\n                        gid, gids, uid, umask,\r\n                        ^^^^^^^^^^^^^^^^^^^^^^\r\n                        start_new_session, process_group)\r\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\subprocess.py\", line 1553, in _execute_child\r\n    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,\r\n                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\r\n                             # no special security\r\n                             ^^^^^^^^^^^^^^^^^^^^^\r\n    ...<4 lines>...\r\n                             cwd,\r\n                             ^^^^\r\n                             startupinfo)\r\n                             ^^^^^^^^^^^^\r\nFileNotFoundError: [WinError 2] Le fichier sp\ufffdcifi\ufffd est introuvable\r\n"
+}

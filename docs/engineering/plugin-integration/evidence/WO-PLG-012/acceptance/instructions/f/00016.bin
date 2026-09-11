@@ -1,0 +1,84 @@
+{
+  "schema": "se-harness-execution-receipt-v1",
+  "effects": {
+    "changed_paths": [],
+    "evidence": [
+      {
+        "kind": "portable-skill-manifest",
+        "sha256": "ff2a0830ee08afd9f263bbcc0092c100b1682f05598adab2f9a168258bbbbf63"
+      }
+    ],
+    "state_before": [
+      {
+        "kind": "repository-bytes",
+        "sha256": "b7f9b6da652eb910f2d2b105aebe04dfde35a7a4c8f477e5a2d1322816027855"
+      },
+      {
+        "kind": "git-references",
+        "sha256": "56e8c2dff1cb172b15579faccc48bf311665d0dfac01c1a3908c563af1dde2f9"
+      }
+    ],
+    "state_after": [
+      {
+        "kind": "repository-bytes",
+        "sha256": "b7f9b6da652eb910f2d2b105aebe04dfde35a7a4c8f477e5a2d1322816027855"
+      },
+      {
+        "kind": "git-references",
+        "sha256": "56e8c2dff1cb172b15579faccc48bf311665d0dfac01c1a3908c563af1dde2f9"
+      }
+    ]
+  },
+  "execution": {
+    "operations": [
+      {
+        "id": "version",
+        "exit_code": 0,
+        "status": "passed"
+      },
+      {
+        "id": "identity",
+        "exit_code": 0,
+        "status": "passed"
+      },
+      {
+        "id": "doctor",
+        "exit_code": 0,
+        "status": "passed"
+      },
+      {
+        "id": "protected-content-guard",
+        "exit_code": 0,
+        "status": "passed"
+      }
+    ],
+    "profiles": [
+      "operator-communication"
+    ],
+    "skills": [
+      {
+        "name": "harness-operator-brief",
+        "version": "1.0.0",
+        "portable_core_sha256": "ff2a0830ee08afd9f263bbcc0092c100b1682f05598adab2f9a168258bbbbf63"
+      }
+    ],
+    "worker_results": []
+  },
+  "selection": {
+    "artifact": null,
+    "autonomy_envelope_sha256": null,
+    "repository": "Retained helper fixture"
+  },
+  "validation": {
+    "deviations": [],
+    "evaluator": {
+      "identity": "passed",
+      "version": "0.16.0"
+    },
+    "gates": [],
+    "outcome": "completed",
+    "residual_uncertainty": [
+      "The supplied example is not a current repository-state or evidence-sufficiency assessment."
+    ]
+  }
+}

@@ -1,0 +1,933 @@
+{
+  "operator_quote": "i verify both VREC-PLG-010  and VREC-PLG-009",
+  "decision_right": "DR-VREC-DECIDE",
+  "actor": "assurance-owner",
+  "record": "VREC-PLG-010",
+  "candidate": "47f7b842d395764583adbe834c39aecdc0afd521",
+  "head_before_decision": "731014d8fa58ba193f6eaf05af3408ed5c41e43f",
+  "record_before_sha256": "6b08603388965f4e4fd4138d1851b0151a28de3896d8bd076f009fefab22459b",
+  "evidence_file_count": 182,
+  "bound_evidence": [
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/README.md",
+      "bytes": 4765,
+      "sha256": "ed0ddac307e1aa417e8a7d60ff7b0981af23e85c6c8c3697d4fd9bee417f538e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/WO-PLG-011-handoff.md",
+      "bytes": 2010,
+      "sha256": "9bf77cb0e42a414e1f422374d280f3db660cf2d6718e78627017813ad846d766"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/REPORT.md",
+      "bytes": 7396,
+      "sha256": "579499e711e8e3111dbdf21e8c49afb53e54e16dae3c25f53be1473ee17e1387"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/audit.json",
+      "bytes": 3239,
+      "sha256": "f1468330cad3919f1dd406671d5837711f3368a520eade9c90ae2a219eb3f397"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/behavior/evd01.json",
+      "bytes": 632,
+      "sha256": "a5d5c842d7036375a6dd5ca305d5bfcaf824943583095b882b30d30ee14463f2"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/behavior/evd02.json",
+      "bytes": 1037,
+      "sha256": "c7acb9504dff7d414163fb22c214b937cb0b360d14d91be29cb5a58fcef3b437"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/behavior/evd03.json",
+      "bytes": 948,
+      "sha256": "76624ee9c2dc8c92b8352ec2596dba2940321ab3d1556bac7af2a0e28158e50c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/behavior/evd04.json",
+      "bytes": 571,
+      "sha256": "b3ab0e3d4b607de8e8dcd3544efc7d1d911e196bf832728986efcd8052afbab1"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/behavior/evd05.json",
+      "bytes": 1445,
+      "sha256": "0656806b09a8d151c538641839c2de19b629529a923e47bb7927afb2f54c4e1b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/behavior/evd06.json",
+      "bytes": 505,
+      "sha256": "b723c148e280497fc6edda96f98c9309cb0fedd42256cfdeff4dc08ebac83dd9"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/behavior/evd07.json",
+      "bytes": 835,
+      "sha256": "48996ff9d7b9b43ea67ed838299bb9e4fdfd48132447bfdbb62eef84cc3484e7"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/behavior/evd08.json",
+      "bytes": 438,
+      "sha256": "8b4b6675aa8c6126476866b26e99774c416725a0449a1b6b56a7a3a9bd64cb6e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/behavior/evd09.json",
+      "bytes": 655,
+      "sha256": "0525a97e043e37dc95d9d395ab38b17950a1bf1240178ae88a35e832171fb589"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/behavior/evd10.json",
+      "bytes": 426,
+      "sha256": "b7e70df571a39b17f08c57ce46f64e28861c07f7b6c798fa617082652d35c32e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/candidate-inputs.json",
+      "bytes": 645,
+      "sha256": "93f42e9070baef61d311663c7d038c0586a1458526981324aa1867f6860cecb6"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/corrected-footprint-expectation.md",
+      "bytes": 1643,
+      "sha256": "672db4796d7ff649cfeb2798f1642b17c0002fdf15ba512eaeb070805ebbf80c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/evidence-manifest.json",
+      "bytes": 20435,
+      "sha256": "8cda21178ab0f9167e5275f909fb0e0ed55f1bc4fdd6f729a6b2fcaaa6babc1a"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/final-hashes.json",
+      "bytes": 246322,
+      "sha256": "91f0c00db1ba45bd1a3fcd8e37728b13b15e909ee097e9235867b9e145b8e2fc"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/oracle.md",
+      "bytes": 5842,
+      "sha256": "4b791ff512aeb370b6a469789e5a4865a3744759c4b377daeb0c286c72fad401"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/raw-scenarios.json",
+      "bytes": 3191,
+      "sha256": "d13f94233ad1b751868f92d8b3e6856ebd8ffb005490d22aff977a18f040e7bd"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/release-inputs.json",
+      "bytes": 1435,
+      "sha256": "2bea33312bfed7399f9afaf258df7af37242a775b3f03a96441a33737adb405d"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/retention-inventory.json",
+      "bytes": 20893,
+      "sha256": "2867b1f5c8c77ce87e433bfc7a4cf3de3f25ac3700c52dfbd659280fef8339c1"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/trace-groups.json",
+      "bytes": 4778,
+      "sha256": "ad8986e24326d7973060f544e97e7bf9767830aebaedbc28cb69c3fd1e44ef52"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/trace/corrected-capture-check.json",
+      "bytes": 387008,
+      "sha256": "12b842edea7d33fc566b4525c4c2070b4fe676eb706c0893e8cdb4c12888d9cb"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/trace/corrected-capture-context.json",
+      "bytes": 344923,
+      "sha256": "7be8f2a292ffe451947290a48d08db97a48856b2b87628657de11fd3cf1cccf4"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/trace/corrected-capture-readback-before.json",
+      "bytes": 322096,
+      "sha256": "9f36c17455550554e75966979ef72060dbbc3207a6782165dcbb2ef7048f533e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/trace/corrected-capture-refs.json",
+      "bytes": 320539,
+      "sha256": "7aaacd51748ac699176d276c9e537f0d1f44f814a0dfba6cbad960014ce0057a"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/trace/corrected-capture-state.json",
+      "bytes": 383725,
+      "sha256": "8edd342599b667a7a436cc5f8cbfeb7323ca326ae84992a234ee123e1f829b20"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/trace/corrected-capture.json",
+      "bytes": 357452,
+      "sha256": "28b8fef13c1200420028ed25f49825a4f32f9ab4b78d24a7a5de72e50fc0a820"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/trace/evd02-rls-prepare.json",
+      "bytes": 393311,
+      "sha256": "ac97f83bed871e6175fea9dcf874bb382cb358f4c3f2f279f6e482cb0530002b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/trace/evd03-lost-capture.json",
+      "bytes": 357466,
+      "sha256": "960e7696ab66ec866ec0de2cec19fb51d09aaa94d5b83342a20ba5833f10829b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/trace/evd03-partial-context.json",
+      "bytes": 344958,
+      "sha256": "9707df2db2f7b4991b807dad93cdfa05617d3bd9f36e8462b96d0128d49dbcac"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/trace/evd03-partial-injected-setup.json",
+      "bytes": 322909,
+      "sha256": "8f1ca7c7bbfc3e4a10ed04ffb7f55ac8ada19ec12d277e69318b4de1c9e4a79b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/trace/evd03-partial-inspection-unavailable.json",
+      "bytes": 323865,
+      "sha256": "0ddbc75c0776cdda0fc41a14726bc143cbecacbd43291f7ca5d6f290cd389cda"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/trace/evd03-uncertain-capture.json",
+      "bytes": 357485,
+      "sha256": "74f58bf517230da615bcc1c500a4941f89fcca37d337cf619cc01d09a7de2181"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/trace/evd03-uncertain-inspection.json",
+      "bytes": 382064,
+      "sha256": "4e892975ef1d16eeca572f41f9a9d55147337859f620a86b4a88d4adb942e7a7"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/trace/evd07-capture.json",
+      "bytes": 357452,
+      "sha256": "02af77a726a1143a0e6cdefe250b327f6813df005e276a8acf305eed5477fa22"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/trace/evd09-current-integration-gates.json",
+      "bytes": 396518,
+      "sha256": "bbd4116d48fac4fdbb93a8751f16c06385a8f1ae4d202b48448d7e474d09e6c8"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/independent-windows/trace/evd09-project-tool.json",
+      "bytes": 6496,
+      "sha256": "7d0d654849de91395036736136784352f230f65a237f74ee2d7ecce92181f9ee"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/ATTEMPT-NOTE.md",
+      "bytes": 767,
+      "sha256": "75eba03e3b9c9b7944ff8dc6f34ca5c0d0f2792e85de0211d966c0e4bf142b75"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/REPORT.md",
+      "bytes": 6059,
+      "sha256": "67259b70f7331a680d1f8059390ec9e1fd5e502783ba23e8b4920c0fc43ef6a9"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/audit.json",
+      "bytes": 8997,
+      "sha256": "d77826daad56955813f583853bfe1eee21adb327e1a228b4e7efd4dddd48e743"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/capture.json",
+      "bytes": 10701,
+      "sha256": "f93fc7bc2139d33a281c7af434c87229272afb0253a1e8594454d619b75931e8"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/corrected.json",
+      "bytes": 5729,
+      "sha256": "941be5d50c1e66b9e9e58d95bc2cf30ab1da1cc2151bfe6bc7378a8c84d07910"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/dirty.json",
+      "bytes": 4745,
+      "sha256": "a682db0ea953385f7eae4e6abd61f615e51273be0b9fcb7ab659bdafe7ba73af"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-attempt2/summary.json",
+      "bytes": 10589,
+      "sha256": "7fd5c812c93d8eff5f1857e9e192e8e68b9b22261c8c24b8e905b180061b347e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external/summary.json",
+      "bytes": 804,
+      "sha256": "8427bacd5012291914006387721b9667411c29c778f59d40db3a5af312795700"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/governance.json",
+      "bytes": 4680,
+      "sha256": "08ae050eda93bca1fb388e216d7863993d735ee039b41df3e670efb7ca4b8f07"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/handoff.json",
+      "bytes": 5652,
+      "sha256": "452c2b72948b8a6f22204a7ac1071a18faa0bd786c01b637198e50a636a813f7"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/lost.json",
+      "bytes": 4510,
+      "sha256": "d22e8de450b7346fa106e54a74618b097298acb314ab572c82c8100aca5e5394"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/no-context.json",
+      "bytes": 2186,
+      "sha256": "12c803861f0a06c866491595a7b620ee7fc1a9b488fee5e775fdb9bd91f3c8e0"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/partial.json",
+      "bytes": 4143,
+      "sha256": "5da05b8866bfa661a08bb5067d1720aeb6e2731b01b88f28d91bc4f168ff1662"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/release.json",
+      "bytes": 8319,
+      "sha256": "294e7074fd6c5bdcf694bb3fe95c5f2fb6671818fe55d922996a996015a28f22"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/runner-version-history.json",
+      "bytes": 4285,
+      "sha256": "5673aa575b8b8323cc163b420fc0aaa886a8f0b221621ee0c4a84e49c56a3291"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/setup-original.json",
+      "bytes": 6086,
+      "sha256": "e544080da3100d13e7084ab70878a701b35f0ca3bd1da952399e3f416e00b165"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/unauthorized-release.json",
+      "bytes": 3282,
+      "sha256": "435204454910a2c01f4497e7ff1df280e6e70207288184f55ec74846c204f142"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/unauthorized.json",
+      "bytes": 3335,
+      "sha256": "e052beb446b05b779c20417f274a8ad94fe76983b2b88fd6e7dce969c68db620"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/uncertain.json",
+      "bytes": 3894,
+      "sha256": "7fdd413b796580eb289109e3706081b17c24d51fccffb554292a10ddbe37ae57"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-retention-inventory.json",
+      "bytes": 71559,
+      "sha256": "e9bff29640ca215b84243b5d3f237af64aa9d7df2351e62b63d762ac4463d91e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-retention-mapped-inventory.json",
+      "bytes": 53826,
+      "sha256": "e5bbc9b6a56167dd931fb4868d26eb8e5ff937f8e7a7a87f00ea3162a761634d"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/recorder-error-probes.json",
+      "bytes": 2512,
+      "sha256": "c62e0b5dd77e7dfb6f55f20fd4cf2cafe72c3897972d72a2b497bbeebdc79965"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/recorder-errors-linux/inventory.json",
+      "bytes": 14105,
+      "sha256": "548e2520dcc4bda4d5ace9edb389e06cf684ae32f671adad9660a5629f141102"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/recorder-errors-linux/summary.json",
+      "bytes": 2881,
+      "sha256": "94a81c6986007030c53b2869a3827bd9e056822be21b47d8384dec68708ffe8e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/recorder-errors-windows/inventory.json",
+      "bytes": 14107,
+      "sha256": "21bd96577726960083d92138cc5668b5cd2413df047c3e160d92e15b3e9e6f22"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/recorder-errors-windows/summary.json",
+      "bytes": 2889,
+      "sha256": "d64a1da4295f76a1f27e5e2562eb7b65035445effc4bde6421c15ba34604a136"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/checks/final/evd-final-doctor.json",
+      "bytes": 25718,
+      "sha256": "09ac407543cb698c2fa1ae1cc47ed3a2fbbcbfd290645e377b52b977be7aca69"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/checks/final/evd-final-evidence.json",
+      "bytes": 6183,
+      "sha256": "390e299e2b75ae91d97fc8e7838d9e46486526dba8bd03357f4a89b608253b22"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/checks/final/evd-final-handoff.json",
+      "bytes": 163758,
+      "sha256": "175a437fe3f8504a19049ff5efe9112dbbeb4e00fb3e928c3f418e9bde7e5f5c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/checks/final/evd-final-preflight.json",
+      "bytes": 1257,
+      "sha256": "ad91fd4224c81008e7cb78c506df0db299bad23a76f3d9aad707dfe337dcf62b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/checks/final/evd-final-scope.json",
+      "bytes": 128802,
+      "sha256": "8d14da52877fca91e085003a60ff30735a24a0350299f27085380bef2792ee7c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/checks/final/evd-final-validate.json",
+      "bytes": 303600,
+      "sha256": "cb0c03c806b8945b520ff15fa4066ebfaa58f752925496b49ccd0ad4f0699073"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/checks/qualification.json",
+      "bytes": 2116,
+      "sha256": "b59a2d9bdc4fba676c1cd81e0b8581606bed66994478c6ed2f6380fac36cc5f1"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/completion/evd-complete-applied.json",
+      "bytes": 6936,
+      "sha256": "9fb63e2e1adea4a1dbf2eb0261683b086fcb3cacd4337ee105c67bfc4978ebb8"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/completion/evd-complete-preview.json",
+      "bytes": 6948,
+      "sha256": "942da268226e087e1d4f0149e59a490ba1c005994185984af7e3c6a931341c56"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/completion/evd-completed-evidence.json",
+      "bytes": 4158,
+      "sha256": "a88d6fe46f1564ca31fd455b05a1015dfaac9e6f4be6b2bc4b570aef1cf42e11"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/completion/evd-completed-focus.json",
+      "bytes": 6667,
+      "sha256": "da82bfc7f4070a9439cea23e1a1d8e237b08ed7cb34623bce96d22e92d6781ac"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/definition-delivery/definition-doctor.json",
+      "bytes": 25718,
+      "sha256": "b8f10919f53c6c159a6c6a45979658f3ba7859bb61cccda3fc303b0dfb5b081a"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/definition-delivery/definition-review-preflight.json",
+      "bytes": 1254,
+      "sha256": "7b53d3fb3ad604a23f26608b38ad11c8fa9088cd446bbaac372c6807d709ad10"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/definition-delivery/definition-scope.json",
+      "bytes": 11376,
+      "sha256": "5ca53cdce3d0f028c7a15998f71bf0c6ce562a46b3ec4982feb75aec24e2a57e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/definition-delivery/definition-start-reading.json",
+      "bytes": 2031,
+      "sha256": "885473d6aa0d42e0b65499b4ac045ca720d158a5e78fd24a42c76e526836bf1b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/definition-delivery/definition-validate.json",
+      "bytes": 302478,
+      "sha256": "6365e21b512f00efc060fba645a6724e42585c3152a8c6373c9d2ecb8332c412"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/definition-delivery/definitions-approval-applied.json",
+      "bytes": 9730,
+      "sha256": "66f25726d7156768779b38013e40314c6c9662c48e550b84f541c3463e2f4422"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/definition-delivery/definitions-approval-inputs.json",
+      "bytes": 422,
+      "sha256": "f0c2fc3bf55b6b6f1a65f3179a2bccc1f5411c4c13d6f42ff15c0adfe9ed8375"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/definition-delivery/definitions-approval-plan.json",
+      "bytes": 9742,
+      "sha256": "6fdc73eddd7ad3d21e0f741bc21113afd78c3af9af8ade39de5d54900df865fb"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/definition-delivery/delegated-start-preview.json",
+      "bytes": 2422,
+      "sha256": "1546362d769da81ffa8ba68cd4ff82c1051ac5bd0eeb294de79d84b918132348"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/definition-delivery/operator-instruction.json",
+      "bytes": 2401,
+      "sha256": "cc49820119de9603e8b1198f23dcfce2576d5d970137359213b7e1de0f05f527"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/definition-delivery/work-order-approval-applied.json",
+      "bytes": 10701,
+      "sha256": "5ec9004664625916ccb2dd2371d2040c9edc064d72786d1d9655de2a7cab4a5c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/definition-delivery/work-order-approval-inputs.json",
+      "bytes": 141,
+      "sha256": "506aecf8dc8de5c9f03d3914fff9bc50e15f50da22cc32500b2b06d09089b30c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/definition-delivery/work-order-approval-plan.json",
+      "bytes": 10713,
+      "sha256": "4177d508634d7c90cd7dd8216e173d45d59291200efe0f815fa7a595b421d647"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/start/evd-start-applied.json",
+      "bytes": 8528,
+      "sha256": "19c1dcd716a656964cb4dd97c484dbfa5d7161bc60245979101cb662d94c3315"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/start/evd-start-focus.json",
+      "bytes": 11485,
+      "sha256": "57dad500d220fa7a29b07497313fe61b0731781ba0d82f7ddf1171e23f8105f3"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/start/evd-start-preflight.json",
+      "bytes": 1253,
+      "sha256": "8beb4f48f3f6bb2a08b1c675f8b9038fb1a0751ccd86fe57e3a1ae190757e9af"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/governance/start/evd-start-preview.json",
+      "bytes": 8540,
+      "sha256": "2923c5e404cb192a2c1e8bb7a6c8529c96e2ac264e28cd75d35244bea177550e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/instruction-review.md",
+      "bytes": 2295,
+      "sha256": "5ecf1977d294455771519c1f371ce6203e6ca647f5278f705c6368e182635416"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native-path-map.json",
+      "bytes": 25302,
+      "sha256": "865a8b516aae860d148fd37316bcf11646f980e9122207f4cc5dd15d501dc083"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0001.json",
+      "bytes": 881,
+      "sha256": "9cd3c7c8c9210b5d5438028383b92b64fb04146e56a9cd7c1096b40a94738845"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0002.md",
+      "bytes": 1287,
+      "sha256": "8c5e1eb6152d894a2af8adb0c5844d7aeed329b4d57fc5a506418af054ac06af"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0003.txt",
+      "bytes": 19687,
+      "sha256": "ea43c242f0429f61a83383a81418f90b1a47e93e1470162a7d8b73f0c009a6e6"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0004.json",
+      "bytes": 4695,
+      "sha256": "2c288b4d2fefae3abf56e7d46ae7d79137623876ad72a66b0b91bfadae177ce3"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0005.json",
+      "bytes": 856,
+      "sha256": "0acbb4aeb9b07c22b33add4f1120ab38a46d6c84bd37f191d24209e2bbde64e9"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0006.json",
+      "bytes": 722,
+      "sha256": "3517f32a79e6da2c2a12fe0273a7b6386e05c92f3f9187b25d2774acdc119c09"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0007.json",
+      "bytes": 775,
+      "sha256": "3d9feded312000ef41e14f27aad51015bf6bb9749005503c14c0a740280cb650"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0008.json",
+      "bytes": 832,
+      "sha256": "68709b0cdc8a964c89088e0120066b2d7cf0c2ae123660b32937396863798ee4"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0009.json",
+      "bytes": 734,
+      "sha256": "70a5a3c54097b87b6d997e1a914daa0795764286d46771ca62a7f782da76eb3e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0010.json",
+      "bytes": 835,
+      "sha256": "c8671ae5902e74ac392a2de327c4a88eb5ddbba5a9d5547dd72b10df7db21ea9"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0011.json",
+      "bytes": 1949,
+      "sha256": "f4e7c80ece35787cf142d8132303429febc92a1b3a83b6c5180ff066c835c8d8"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0012.json",
+      "bytes": 3103,
+      "sha256": "f39a03f5d5d82fc0b374723cf32b467e4c2c0a2d987d0b174c5407f73c84ab19"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0013.json",
+      "bytes": 1019,
+      "sha256": "3c18634ace06b547de4eb29ab724af74e14f6210ee7a9af36ba65ce0710de884"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0014.json",
+      "bytes": 4940,
+      "sha256": "e8ed2545376da173dc9783aef81e988547ef9489a0c719bfbc07fdc0ab2d8b5b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0015.json",
+      "bytes": 1461,
+      "sha256": "17802c0561780b763736a691cae24069978fc870ccff4b6d4ff418087ef463f3"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0016.html",
+      "bytes": 442824,
+      "sha256": "706b8e772b7aef1d96ba326e776781de5ad5d94df453d409dccbca907b8de8cf"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0017.json",
+      "bytes": 881,
+      "sha256": "9cd3c7c8c9210b5d5438028383b92b64fb04146e56a9cd7c1096b40a94738845"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0018.md",
+      "bytes": 19687,
+      "sha256": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0019.md",
+      "bytes": 1287,
+      "sha256": "5e88ddb1020dfea17d1bed8e34fccc1b05131284870809096995850b2e790a6e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0020.txt",
+      "bytes": 19687,
+      "sha256": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0021.json",
+      "bytes": 4695,
+      "sha256": "7ee3404a96c19beed65824685cbaa269ab23af957e021dd94562b0994bfe31ba"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0022.json",
+      "bytes": 722,
+      "sha256": "0b1c904a2691c0806bbdd9cd3114ae25f02cf1402ccef943e76e7c7b7faa46c1"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0023.json",
+      "bytes": 856,
+      "sha256": "2262514df3a78b0a166c0279982a64ad6cdfb5eab9c18a22a293deb9549b8385"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0024.json",
+      "bytes": 1949,
+      "sha256": "264293643e8f7cf0a1b7e0b48c9d73c0199c754d4ec3a195759216b50f839cf5"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0025.json",
+      "bytes": 734,
+      "sha256": "67a735968173b15ad87afe5d6ca876c87eaabb64b4a24dcef152998aa8b63b92"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0026.json",
+      "bytes": 775,
+      "sha256": "769f4a5a9f168dc3f9f8b48f14ab0bff96d3062b411c77a36cffb558a677bd9d"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0027.json",
+      "bytes": 835,
+      "sha256": "79598de6b0dc18a42df712af22e8e808e4378724073a4f528c175f2a085a5bf0"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0028.json",
+      "bytes": 832,
+      "sha256": "e432e0f04987b1d7cb8bc110e0323c2cef83b5aa7f5be187268dcd963ff79323"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0029.json",
+      "bytes": 3103,
+      "sha256": "9ec92835065e0acf77ce0430a5a7fe2d81bef5e7d7e266e551f9cc182781b84e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0030.json",
+      "bytes": 1019,
+      "sha256": "75d4e6e9f0cf0bd01d0e9d8210f53c198361e76681d2a448a8e268b5ed4b7114"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0031.json",
+      "bytes": 4940,
+      "sha256": "5f056d6e5d4b8cad9e6f7039c926faf51de246bb66275e0932c89385fa86104d"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0032.json",
+      "bytes": 1461,
+      "sha256": "c7a1919851d2e8c065acc8bac9394462543fa892884829c5af68435837df18e2"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0033.html",
+      "bytes": 442824,
+      "sha256": "5630df7cb4252bac94fbacdc118fe4476e46fd74ee2ab15335abdc573c2fa171"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0034.json",
+      "bytes": 881,
+      "sha256": "9cd3c7c8c9210b5d5438028383b92b64fb04146e56a9cd7c1096b40a94738845"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0035.md",
+      "bytes": 1287,
+      "sha256": "4bfc0077bd3cd45c461bed48f5babdff0fb4be2548e7a18d8e950b5825ba9f49"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0036.txt",
+      "bytes": 19687,
+      "sha256": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0037.json",
+      "bytes": 4697,
+      "sha256": "aaca3f1d94e990a5d709602f5e8d2f6064f961b3414cf21ad3a4a7bdee897780"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0038.json",
+      "bytes": 722,
+      "sha256": "0b1c904a2691c0806bbdd9cd3114ae25f02cf1402ccef943e76e7c7b7faa46c1"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0039.json",
+      "bytes": 856,
+      "sha256": "2262514df3a78b0a166c0279982a64ad6cdfb5eab9c18a22a293deb9549b8385"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0040.json",
+      "bytes": 1949,
+      "sha256": "264293643e8f7cf0a1b7e0b48c9d73c0199c754d4ec3a195759216b50f839cf5"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0041.json",
+      "bytes": 734,
+      "sha256": "67a735968173b15ad87afe5d6ca876c87eaabb64b4a24dcef152998aa8b63b92"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0042.json",
+      "bytes": 775,
+      "sha256": "769f4a5a9f168dc3f9f8b48f14ab0bff96d3062b411c77a36cffb558a677bd9d"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0043.json",
+      "bytes": 835,
+      "sha256": "79598de6b0dc18a42df712af22e8e808e4378724073a4f528c175f2a085a5bf0"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0044.json",
+      "bytes": 832,
+      "sha256": "e432e0f04987b1d7cb8bc110e0323c2cef83b5aa7f5be187268dcd963ff79323"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0045.json",
+      "bytes": 3103,
+      "sha256": "9ec92835065e0acf77ce0430a5a7fe2d81bef5e7d7e266e551f9cc182781b84e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0046.json",
+      "bytes": 1021,
+      "sha256": "bc9dff153a1325b439a223ee652a95851c63fb81e548f9accd94892e596d6403"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0047.json",
+      "bytes": 4940,
+      "sha256": "5f056d6e5d4b8cad9e6f7039c926faf51de246bb66275e0932c89385fa86104d"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0048.json",
+      "bytes": 1461,
+      "sha256": "38f7cbfa756206243f27bf0e5e26712075b1c977616e47325676ea5e4959a8d2"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0049.html",
+      "bytes": 442824,
+      "sha256": "54a5044682f250680c19e3ad175ba83ea1a00089dea06937942b520159a36af7"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0050.md",
+      "bytes": 286,
+      "sha256": "912cfb3d11e44878aa09f1a0c15cb688058db2deec7da8f0d5de4845caa88f72"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0051.json",
+      "bytes": 8870,
+      "sha256": "4900e0c932278c8a833228b0c734db5a356dc0c60dcc30356765535c87ea589a"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0052.md",
+      "bytes": 1287,
+      "sha256": "4bfc0077bd3cd45c461bed48f5babdff0fb4be2548e7a18d8e950b5825ba9f49"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0053.json",
+      "bytes": 881,
+      "sha256": "9cd3c7c8c9210b5d5438028383b92b64fb04146e56a9cd7c1096b40a94738845"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0054.md",
+      "bytes": 1110,
+      "sha256": "669813570a3441b15c7161c56aa7fe3c00918eb2dcb093b92d9892c96b2b8c68"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0055.md",
+      "bytes": 1367,
+      "sha256": "cbdd139c16647110e4767de16d82f7e3b30276264c3ec34a897d61307b94762a"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0056.json",
+      "bytes": 730,
+      "sha256": "730e0507e7c4992b183122e91fda0369d610a499d76545b463d725c22dcaf263"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/replay-review.md",
+      "bytes": 1760,
+      "sha256": "6b36ba7148bcb25352de6ce3ee34929ec54418dc94775d6522a7577307593c84"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/README.md",
+      "bytes": 2944,
+      "sha256": "d955e857476350ceb0977b3783ddd4b8197bcd28872d1f7d1f019f4716196aca"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/WO-PLG-017-handoff.md",
+      "bytes": 989,
+      "sha256": "064bccb8fd6ff03b90e4f90423de316c2ec609a988bb7cd04159f476e1636fa8"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/extension/REPORT.md",
+      "bytes": 4274,
+      "sha256": "81bd915290bcd1dcc8b15cec01e63a3adf42a47ce9be3a23e0f9460ba008b902"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/extension/audit.json",
+      "bytes": 23600,
+      "sha256": "e1b256020867e3d592d11f158061e1a311e832559a0f5767789246b6680e4ed3"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/extension/bulk-omissions.json",
+      "bytes": 2857,
+      "sha256": "4635aed6f2652f4c32e6d2bb3195e33a853679fd2402ad124bef7a73fb63ac83"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/extension/inventory.json",
+      "bytes": 30148,
+      "sha256": "c1951dcd4f56f6820908258508a1b11dcb1a6ae6617ceb0d79dbe0c73052a864"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/extension/source-path-map.json",
+      "bytes": 136482,
+      "sha256": "7b7965ee3c54056500b4cc857dc3908ec4f049060f174f46579c0ea4fd11a0d1"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/REPORT.md",
+      "bytes": 4586,
+      "sha256": "bbc4c41e551f5f34ba6fcc3b050a76c4cdb0f9ad5247c2b2905a3d2e63367998"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/audit.json",
+      "bytes": 21812,
+      "sha256": "0518a016f460658dde0982c141db64c3d93e295f38e9c66837b930545d8f2c00"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/inventory.json",
+      "bytes": 30196,
+      "sha256": "7ea3fafb4dfcfec533e72b2bff0e9650abe94766a767bbb2fbae608b638bfd43"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/acceptance/independent/source-path-map.json",
+      "bytes": 139882,
+      "sha256": "d4a533fff1a61958fcc0578e4bf3b60a2b03b8fe89f69c8b0dadfdc3de4ad2af"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/approval/scope-extension.json",
+      "bytes": 1225,
+      "sha256": "08ad118df5e086fe239cd0eebedf47a8ccd382856968edf86430bf5c41a1db51"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-extension-28b4d2e/checks.json",
+      "bytes": 2010,
+      "sha256": "528d4795036c898dfe7302c270e9c69e311f6eac2e2b0b8a04bfe29a990aa546"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-extension-28b4d2e/result.json",
+      "bytes": 2922,
+      "sha256": "4429e6d43f54acf04d5df93dd0304cdeb1a334c7bdb41ec0f84b83744145daea"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-extension-e5b48a16/checks.json",
+      "bytes": 2010,
+      "sha256": "2e5d044d18dc6573ff3bfba271a2b3153d5eecea36a911c0924e3b3ae69af898"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/ci-extension-e5b48a16/result.json",
+      "bytes": 2922,
+      "sha256": "002f00fe059ea0e66a06ac2b3c3a5a19b642639b1064dba4a882ade0ecff33ad"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/extension-retention.json",
+      "bytes": 499,
+      "sha256": "bc20403eddfd3a29cd4c3564ad63dce3cfee0390e1707cda7a91d00fee19925d"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/final-path-check/command.json",
+      "bytes": 348,
+      "sha256": "5812b29ddea31b6c0012482cd7e680a475afa0fcb471497719c2a2fb7584f393"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/final-path-check/stdout.txt",
+      "bytes": 674,
+      "sha256": "50c77d075532fb2f8d9992df9d8769b7c6d44418d00bb528b7be6c0416333e0f"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/independent-review/blob-read-e5b48a16.json",
+      "bytes": 1338,
+      "sha256": "75c746b2e0466200dd2054b2aaafe76d1860855671025ef5d6a4ba062f3a69ca"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/checks/independent-review/extension-28b4d2e.json",
+      "bytes": 2606,
+      "sha256": "2850353398214d9cc6263fddf0605a510c602ef894a645d9226b1677b4bf4146"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/governance/completion/completed-graph.json",
+      "bytes": 303980,
+      "sha256": "87100ae47676d487ed235da2c8cb5b3a419fd0bc05daa5fc7d96b62f9eb2969a"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/governance/completion/completed-live-state.json",
+      "bytes": 7481,
+      "sha256": "7d6f6aa173d0110ad7286f9597bb6b34e63815554eeaafca987a514b41d67729"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/governance/completion/completion-review.json",
+      "bytes": 1243,
+      "sha256": "75c85cde6e26121fe5faa4b9e4421afe44b211ccf57d874cf4db8e641fff1030"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/governance/completion/completion-scope.json",
+      "bytes": 87060,
+      "sha256": "600e0e41e49deedb45fb7595224ade27c5b485e0c39aac1d74b97faec41be6f6"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/governance/completion/wo017-completion-applied.json",
+      "bytes": 7343,
+      "sha256": "d4f683ad6cb6a2ca6d9fe9f3db9cbe81fd402b4e75d9a69b0358aeab8935f4fc"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/path-plan.json",
+      "bytes": 25409,
+      "sha256": "37031560322c962987513e8950b37503a642c6e474cc2a031822870467659aa9"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/scope-extension-plan.json",
+      "bytes": 2626,
+      "sha256": "1927a7d61c7d6357e61047f427c0d2f1fb8e456d32dd1698efc01c7bba6f9538"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/scope-extension.md",
+      "bytes": 2868,
+      "sha256": "dd8421b6b0dfb22714c08293ea3c6a44658c991580b17223383eabe02dc31cc2"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/staging-path-map.json",
+      "bytes": 685,
+      "sha256": "3db2265dade63dc996631c76dae5db7ee9caebbdf16665ec9b49873a40b389ab"
+    }
+  ],
+  "transition_args": [
+    "transition",
+    ".",
+    "--set",
+    "VREC-PLG-010=verified",
+    "--decision",
+    "VREC-PLG-010=assurance-owner",
+    "--reason",
+    "VREC-PLG-010=On 2026-09-11 the operator stated \"i verify both VREC-PLG-010  and VREC-PLG-009\". Record this explicit DR-VREC-DECIDE assurance-owner decision for VREC-PLG-010, exact candidate 47f7b842d395764583adbe834c39aecdc0afd521, and its 182 selected evidence files. The retained observations and disclosed platform, fixture and host-coverage limits define the verification scope. Candidate identity, preparation provenance and evidence remain fixed. Related work-order states, VREC-PLG-008, supersession, release and PR merge are not selected by this decision.",
+    "--json"
+  ]
+}

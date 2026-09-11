@@ -1,0 +1,111 @@
+{
+  "classification": "Explicit command replay inputs from the independent Windows observer; no new model behavior or authority decisions",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+  "evaluator_python": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+  "runner_sha256": "2ef8e7abcc5e31a703fc70e960390f68d6513877c0a73dcfc096831c89391cb3",
+  "bundle_sha256": "e16be8329465ed637a1cfd1b9819c0dac13c09c36aa00c5107167c000c90ed19",
+  "batch": "governance",
+  "bindings": {
+    "{python}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "{environment}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0",
+    "{repo}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/capture-repository",
+    "{bundle}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/governance",
+    "{trace}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/trace"
+  },
+  "commands": [
+    {
+      "label": "evd07-vrec-state",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/governance/inspect_fixture.py",
+        "--repo",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/capture-repository",
+        "--id",
+        "VREC-EVD-001"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd07-vrec-check",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/capture-repository",
+        "--artifact",
+        "VREC-EVD-001",
+        "--json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd07-governance-add",
+      "argv": [
+        "git",
+        "-C",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/capture-repository",
+        "add",
+        "--",
+        "docs/engineering/evidence-demo/verification-records/VREC-EVD-001.md",
+        "docs/engineering/evidence-demo/evidence/VREC-EVD-001-evaluator.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd07-governance-commit",
+      "argv": [
+        "git",
+        "-C",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/capture-repository",
+        "-c",
+        "user.name=Fixture Owner",
+        "-c",
+        "user.email=fixture@example.invalid",
+        "commit",
+        "-m",
+        "Retain ready VREC in separate governance G"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd07-governance-readback",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/governance/inspect_fixture.py",
+        "--repo",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/capture-repository",
+        "--id",
+        "VREC-EVD-001"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd07-wo-after",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/capture-repository",
+        "--artifact",
+        "WO-EVD-001",
+        "--json"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "fresh_model_behavior": false,
+  "decision_prompt_count": null,
+  "receipt_note": "Suppression belongs to the original Windows model observation; this runner replays actual commands and fixed readback choices.",
+  "passed": true
+}

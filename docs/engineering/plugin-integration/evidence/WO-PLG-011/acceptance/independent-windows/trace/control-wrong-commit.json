@@ -1,0 +1,58 @@
+{
+  "label": "control-wrong-commit",
+  "argv": [
+    "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-eval-016/Scripts/python.exe",
+    "-I",
+    "-B",
+    "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-evidence-acceptance/independent-20260911/project_action.py",
+    "--control-dir",
+    "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-evidence-acceptance/independent-20260911/external-control-calibration",
+    "--action",
+    "merge",
+    "--commit",
+    "2222222222222222222222222222222222222222",
+    "--evidence-digest",
+    "f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220",
+    "--destination",
+    "fixture://repository/evidence-demo/refs/heads/main"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911",
+  "stdin": null,
+  "started_unix": 1789069538.4090383,
+  "duration_seconds": 0.14177632331848145,
+  "exit_code": 17,
+  "stdout": "{\"simulation_only\": true, \"outcome\": \"blocked\", \"reason\": \"Exact request is outside the independent fixture control allowlist.\"}\r\n",
+  "stderr": "",
+  "before": {
+    "allowlist.json": "e2e8e5a6c70424003b55d9ef64e5254e632dfc8389a20746a6930a5f72e8a891",
+    "effects.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gates.json": "121235b84fe9b49a5c35fa5a16c5d13116ce251db35c3619a787e4ad412ec598",
+    "invocations.jsonl": "062679d2e2f9373cd2f270e317064b55ad77072b475ee10ce01ff823edd0041b",
+    "registry.json": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "remote-refs.json": "64e582c2d283d3e75532074c202c5968b8985b74e108d3f35bf8c9e5ab089424"
+  },
+  "after": {
+    "allowlist.json": "e2e8e5a6c70424003b55d9ef64e5254e632dfc8389a20746a6930a5f72e8a891",
+    "effects.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gates.json": "121235b84fe9b49a5c35fa5a16c5d13116ce251db35c3619a787e4ad412ec598",
+    "invocations.jsonl": "1e8f690b7894f77392a2747ccf0378481f84ce9b53c9bdfe1e6735981d3cee60",
+    "registry.json": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "remote-refs.json": "64e582c2d283d3e75532074c202c5968b8985b74e108d3f35bf8c9e5ab089424"
+  },
+  "before_statefiles": {
+    "allowlist.json": "{\n  \"actions\": [\n    {\n      \"action\": \"merge\",\n      \"commit\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n      \"evidence_digest\": \"f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220\",\n      \"destination\": \"fixture://repository/evidence-demo/refs/heads/main\"\n    },\n    {\n      \"action\": \"publish\",\n      \"commit\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n      \"evidence_digest\": \"f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220\",\n      \"destination\": \"fixture://registry/evidence-demo/1.2.3\"\n    }\n  ]\n}\n",
+    "gates.json": "{\n  \"candidate\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n  \"required-check\": \"success\"\n}\n",
+    "registry.json": "{}\n",
+    "remote-refs.json": "{\n  \"fixture://repository/evidence-demo/refs/heads/main\": \"1111111111111111111111111111111111111111\"\n}\n"
+  },
+  "after_statefiles": {
+    "allowlist.json": "{\n  \"actions\": [\n    {\n      \"action\": \"merge\",\n      \"commit\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n      \"evidence_digest\": \"f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220\",\n      \"destination\": \"fixture://repository/evidence-demo/refs/heads/main\"\n    },\n    {\n      \"action\": \"publish\",\n      \"commit\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n      \"evidence_digest\": \"f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220\",\n      \"destination\": \"fixture://registry/evidence-demo/1.2.3\"\n    }\n  ]\n}\n",
+    "gates.json": "{\n  \"candidate\": \"772f90c03a04d0a7914088ac6b869bb829b4bcad\",\n  \"required-check\": \"success\"\n}\n",
+    "registry.json": "{}\n",
+    "remote-refs.json": "{\n  \"fixture://repository/evidence-demo/refs/heads/main\": \"1111111111111111111111111111111111111111\"\n}\n"
+  },
+  "changed_paths": [
+    "invocations.jsonl"
+  ],
+  "receipt_suppressed_after_exit": false
+}

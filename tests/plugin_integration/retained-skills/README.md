@@ -1,0 +1,78 @@
+# Retained helper fixtures
+
+These are actual Windows/Linux helper tests for VER-PLG-012 C01–03/C06/C08.
+Their oracle was fixed from approved definitions and existing managed helpers/
+contracts before the candidate SKILL was read. C04/C05/C07 instruction routing,
+rendering, full inline receipts, and current-state refusal belong to the separate
+independent observer. No runner makes those model decisions.
+
+Use the verified external released0.16 Python with `-I -B`. `prepare_fixture.py
+--product-root ABSOLUTE_COMMON_SKILLS --output NEW_ABSOLUTE_OUTPUT` creates a fresh
+native fixture through actual identity/init/doctor/validate and local Git. It
+copies only raw authored assets and byte-identical product core snapshots.
+It emits `settings.json`. Never reuse a failed output path.
+
+`run_cases.py --settings ABSOLUTE_SETTINGS --output NEW_ABSOLUTE_CASES` executes
+five calibrated denied-effect probes, selected orientation with and without
+preflight, wrong version/root/payload helper probes, and valid/invalid protected
+brief fixtures. `--only-brief` repeats only the brief cases and boundary
+calibration when a later SKILL-only change leaves orientation untouched.
+`refresh_product_inputs.py` freezes such a revised core to a new output while
+asserting unchanged helper/contract and target bytes.
+
+For an independent observer, `boundary_runner.py --settings ABSOLUTE_SETTINGS
+--output NEW_ABSOLUTE_CASE --operation version|identity|doctor --expect-exit 0`
+runs a direct real prerequisite. `--expected-root` and the identity-only
+`--expected-payload` are explicit negative-probe inputs, never target lock edits.
+`--helper brief --request-json ABSOLUTE_JSON --expect-exit 0` validates the
+observer's own request. For a fixed invalid input add `--expect-exit 2
+--expect-code TCM003` (or the applicable existing diagnostic). This runner makes
+no activation decision and does not render a brief.
+
+Each invocation creates `actions.txt`, raw stdout/stderr, `observations.json`,
+the fixed boundary configuration, append-only audit events, and exact executed
+source snapshots with SHA256 mappings. Source changes require new output; old
+source is retained. Target snapshots cover every file, including all `.git`
+metadata and ignored files. No paths are filtered from the independent effect
+comparison. The deliberate wrong-payload helper probe uses a new native fixture
+copy with one explicit setup-only lock change; source-managed files are untouched.
+
+The audit worker executes unchanged helper source and real installed evaluator
+modules. Exact approved evaluator launcher commands propagate the worker to
+the installed validator/inspector subprocesses. Exact read-only Git vectors
+resolve to the fixed absolute Git executable. Original/effective argv and real
+captured subprocess output are logged; no evaluator output is mocked. The helper
+receipt is evidence, not the effect oracle.
+
+The CPython hook denies file writes/mutations, socket operations, the synthetic
+credential read, and all unlisted process vectors. Real denied canaries calibrate
+these categories before empty denied-event logs are interpreted. The lifecycle
+calibration verifies rejection at the evaluator entry before module dispatch;
+it does not apply a lifecycle action. Approved evaluator/engine/Git process logs
+are separate and nonempty. The synthetic HOME contains no real credential;
+environment/Git configuration is isolated, with optional index writes disabled.
+
+This is a test boundary, not a production sandbox or native host qualification.
+It does not contain malicious native extensions or prove universal shell/API
+enforcement. Fixed Git subprocess internals are outside CPython auditing; exact
+read-only argv, isolated config, and full target hashes bound their effects.
+No helper delegates, and no runtime is installed by these tests.
+
+Original setup and boundary defects remain evidence: missing checkout identity
+argument, Windows audit-event string representation, one unsupported expected
+check flag, and Linux PathLike audit-log serialization. A pre-run protected-output
+fixture correction is preserved too. None changed the product helper or evaluator.
+The report distinguishes intermediate/final SKILL inputs and exact runner bytes.
+
+Retention should flatten files to short names with a source-path/digest map.
+Do not copy disposable repositories, `.git` directories, environments, or deep
+dashboard/source trees into acceptance paths; preserve selected raw bytes through
+that map and retain the full hash snapshots inside the observation JSON.
+
+`replay_observer_cases.py --settings ABSOLUTE_FINAL_SETTINGS --output NEW_OUTPUT`
+adds the eight frozen Windows observer calls for final C05 Unicode validation,
+C04 invalid explicit activation, and C07's read-only prerequisites on Linux.
+It validates exact copied request/core bytes, keeps the original record hashes,
+and runs the same calibrated boundary. This is fixed command replay, not fresh
+Linux activation/rendering/refusal reasoning. The original final LF-corrected
+model receipts are retained separately without synthesizing Linux model receipts.

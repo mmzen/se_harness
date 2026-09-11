@@ -1,0 +1,52 @@
+"""Fixture acceptance manifest; hashes are independently fixed inputs, not self-trust."""
+from pathlib import Path
+import hashlib
+import json
+
+ROOT = Path(__file__).resolve().parent
+EXPECTED = {
+    'harness-orient/SKILL.md': '7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf',
+    'harness-orient/skill-contract.json': '8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627',
+    'harness-orient/scripts/orient.py': 'e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56',
+    'harness-operator-brief/SKILL.md': '6bb140eee67dd2114080d31b7ded0aa52ebd7b269c78cc5613b6f3798a8be748',
+    'harness-operator-brief/skill-contract.json': 'e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52',
+    'harness-operator-brief/scripts/check_brief.py': 'b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683',
+}
+EXPECTED_YAML = b'policy:\n  allow_implicit_invocation: false\n'
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+def canonical_json(obj):
+    return json.dumps(obj, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')
+
+def main():
+    core = ROOT / 'candidate-corrected'
+    yaml_path = 'harness-operator-brief/agents/openai.yaml'
+    files = sorted(p for p in core.rglob('*') if p.is_file())
+    assert {p.relative_to(core).as_posix() for p in files} == set(EXPECTED) | {yaml_path}
+    records = []
+    for path in files:
+        assert not path.is_symlink()
+        relative = path.relative_to(core).as_posix()
+        raw = path.read_bytes()
+        normalized = raw.decode('utf-8').replace('\r\n', '\n').replace('\r', '\n').encode('utf-8')
+        if relative == yaml_path:
+            assert normalized == EXPECTED_YAML
+        else:
+            assert sha(raw) == EXPECTED[relative], relative
+        records.append({'path': relative, 'raw_sha256': sha(raw), 'canonical_sha256': sha(normalized)})
+    manifests = {}
+    for name in ['harness-orient', 'harness-operator-brief']:
+        entries = [{'mode': 'utf8-text-lf-v1', 'path': r['path'].split('/', 1)[1], 'sha256': r['canonical_sha256']} for r in records if r['path'].startswith(name + '/')]
+        entries.sort(key=lambda r: r['path'].encode('utf-8'))
+        manifest = {'files': entries, 'schema': 'se-harness-skill-manifest-v1'}
+        manifests[name] = {'manifest': manifest, 'sha256': sha(canonical_json(manifest))}
+    result = {'classification': 'test-only independently accepted fixture package identity; not production publisher or native installation qualification', 'expected_input_provenance': 'Parent-reviewed SKILL hashes; previously verified managed helper/contract originals; literal implicit=false YAML fixed before invocation.', 'files': records, 'cores': manifests}
+    out = ROOT / 'accepted-fixture-package-identity.json'
+    assert not out.exists(), 'Keep immutable accepted identity; never silently overwrite.'
+    out.write_bytes(json.dumps(result, ensure_ascii=False, indent=2).encode('utf-8') + b'\n')
+    print(json.dumps({'result': 'verified', 'manifest_sha256': sha(out.read_bytes()), 'core_sha256': {n: m['sha256'] for n, m in manifests.items()}}))
+
+if __name__ == '__main__':
+    main()

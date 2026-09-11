@@ -1,0 +1,308 @@
+Verify integration package (Linux)	Set up job	﻿2026-09-11T06:39:30.6043362Z Current runner version: '2.337.0'
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6070219Z ##[group]Runner Image Provisioner
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6071201Z Hosted Compute Agent
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6071837Z Version: 20260828.587
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6072503Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6073330Z Build Date: 2026-08-28T16:44:25Z
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6074090Z Worker ID: {299b507f-9437-4b18-a684-61040977365f}
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6074824Z Azure Region: westcentralus
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6075545Z ##[endgroup]
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6077201Z ##[group]Operating System
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6077993Z Ubuntu
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6078542Z 24.04.5
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6079062Z LTS
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6079671Z ##[endgroup]
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6080261Z ##[group]Runner Image
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6080903Z Image: ubuntu-24.04
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6081542Z Version: 20260907.300.1
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6082636Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260907.300/images/ubuntu/Ubuntu2404-Readme.md
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6084485Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260907.300
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6085533Z ##[endgroup]
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6087105Z ##[group]GITHUB_TOKEN Permissions
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6089315Z Contents: read
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6090006Z Metadata: read
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6090618Z ##[endgroup]
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6092813Z Secret source: Actions
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6093765Z Cache mode: write
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6094573Z Prepare workflow directory
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6687095Z Prepare all required actions
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.6737431Z Getting action download info
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:30.9616992Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:31.0484689Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:31.1392759Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+Verify integration package (Linux)	Set up job	2026-09-11T06:39:31.8943855Z Complete job name: Verify integration package (Linux)
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T06:39:31.9669136Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9678135Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9679118Z with:
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9679646Z   fetch-depth: 0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9680153Z   persist-credentials: false
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9680777Z   repository: mmzen/se_harness
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9684868Z   token: ***
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9685363Z   ssh-strict: true
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9685844Z   ssh-user: git
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9686524Z   clean: true
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9687060Z   sparse-checkout-cone-mode: true
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9687640Z   fetch-tags: false
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9688135Z   show-progress: true
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9688622Z   lfs: false
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9689159Z   submodules: false
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9689653Z   set-safe-directory: true
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9690204Z   allow-unsafe-pr-checkout: false
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9690992Z env:
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9691457Z   INTEGRATION_EVENT: pull_request
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9692043Z   INTEGRATION_REF: refs/pull/449/merge
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9692639Z   INTEGRATION_PR: 449
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9693155Z   INTEGRATION_RETENTION_DAYS: 3
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9693716Z   PYTHONNOUSERSITE: 1
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9694215Z   PYTHONPATH: 
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:31.9694676Z ##[endgroup]
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.0773927Z Syncing repository: mmzen/se_harness
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.0777397Z ##[group]Getting Git version info
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.0778731Z Working directory is '/home/runner/work/se_harness/se_harness'
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.0781587Z [command]/usr/bin/git version
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.0807549Z git version 2.55.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.0830536Z ##[endgroup]
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.0846291Z Temporarily overriding HOME='/home/runner/work/_temp/40dea7e1-b871-4501-93e3-9e50c32083df' before making global git config changes
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.0849394Z Adding repository directory to the temporary git global config as a safe directory
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.0851796Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/se_harness/se_harness
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.0908205Z Deleting the contents of '/home/runner/work/se_harness/se_harness'
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.0913873Z ##[group]Initializing the repository
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.0928443Z [command]/usr/bin/git init /home/runner/work/se_harness/se_harness
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1020960Z hint: Using 'master' as the name for the initial branch. This default branch name
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1023209Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1025424Z hint: to use in all of your new repositories, which will suppress this warning,
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1027232Z hint: call:
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1028151Z hint:
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1029723Z hint: 	git config --global init.defaultBranch <name>
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1030987Z hint:
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1032066Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1033749Z hint: 'development'. The just-created branch can be renamed via this command:
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1035147Z hint:
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1035658Z hint: 	git branch -m <name>
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1036196Z hint:
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1037539Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1039521Z Initialized empty Git repository in /home/runner/work/se_harness/se_harness/.git/
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1042599Z [command]/usr/bin/git remote add origin https://github.com/mmzen/se_harness
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1090811Z ##[endgroup]
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1093858Z ##[group]Disabling automatic garbage collection
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1095117Z [command]/usr/bin/git config --local gc.auto 0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1126537Z ##[endgroup]
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1127808Z ##[group]Setting up auth
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1133471Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1170529Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1546153Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1590964Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1852105Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.1891639Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.2136907Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.2179478Z ##[endgroup]
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.2180829Z ##[group]Fetching the repository
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:32.2189568Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +6004193f4423307f47a424f8b100f42ad1c0dfee:refs/remotes/pull/449/merge
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8059380Z From https://github.com/mmzen/se_harness
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8062056Z  * [new branch]        artifacts/plugin-implementation          -> origin/artifacts/plugin-implementation
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8064055Z  * [new branch]        definitions/plg010-delegation            -> origin/definitions/plg010-delegation
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8066043Z  * [new branch]        definitions/plg011-delegation            -> origin/definitions/plg011-delegation
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8068656Z  * [new branch]        definitions/plg012-delegation            -> origin/definitions/plg012-delegation
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8070923Z  * [new branch]        definitions/plg017-path-repair           -> origin/definitions/plg017-path-repair
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8072951Z  * [new branch]        main                                     -> origin/main
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8075222Z  * [new branch]        notes/plugin-installation-proposal       -> origin/notes/plugin-installation-proposal
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8078012Z  * [new branch]        notes/plugin-proposal-assessment-2026-09-08 -> origin/notes/plugin-proposal-assessment-2026-09-08
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8080349Z  * [new branch]        release/0.10                             -> origin/release/0.10
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8082272Z  * [new branch]        release/0.11                             -> origin/release/0.11
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8084192Z  * [new branch]        release/0.12                             -> origin/release/0.12
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8086055Z  * [new branch]        release/0.12.0                           -> origin/release/0.12.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8088155Z  * [new branch]        release/0.13                             -> origin/release/0.13
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8090390Z  * [new branch]        release/0.13.0                           -> origin/release/0.13.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8092662Z  * [new branch]        release/0.14                             -> origin/release/0.14
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8094823Z  * [new branch]        release/0.14.0                           -> origin/release/0.14.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8097184Z  * [new branch]        release/0.15                             -> origin/release/0.15
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8099450Z  * [new branch]        release/0.15.0                           -> origin/release/0.15.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8101591Z  * [new branch]        release/0.16                             -> origin/release/0.16
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8103765Z  * [new branch]        release/0.16.0                           -> origin/release/0.16.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8105934Z  * [new branch]        release/0.17                             -> origin/release/0.17
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8108852Z  * [new branch]        release/0.17.0                           -> origin/release/0.17.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8111259Z  * [new branch]        release/0.2.0                            -> origin/release/0.2.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8113630Z  * [new branch]        release/0.2.1                            -> origin/release/0.2.1
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8116030Z  * [new branch]        release/0.2.2                            -> origin/release/0.2.2
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8118657Z  * [new branch]        release/0.3.0                            -> origin/release/0.3.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8121449Z  * [new branch]        release/0.4.0                            -> origin/release/0.4.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8123983Z  * [new branch]        release/0.6                              -> origin/release/0.6
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8126903Z  * [new branch]        release/0.7                              -> origin/release/0.7
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8130093Z  * [new branch]        release/0.8                              -> origin/release/0.8
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8133698Z  * [new branch]        release/0.9                              -> origin/release/0.9
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8137353Z  * [new branch]        work/plugin-change-skill                 -> origin/work/plugin-change-skill
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8140742Z  * [new branch]        work/plugin-evidence-path-repair         -> origin/work/plugin-evidence-path-repair
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8143934Z  * [new branch]        work/plugin-evidence-skill               -> origin/work/plugin-evidence-skill
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8147370Z  * [new branch]        work/plugin-retained-skills              -> origin/work/plugin-retained-skills
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8149901Z  * [new tag]           last                                     -> last
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8151851Z  * [new tag]           v0.10.0                                  -> v0.10.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8154049Z  * [new tag]           v0.11.0                                  -> v0.11.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8156092Z  * [new tag]           v0.12.0                                  -> v0.12.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8158712Z  * [new tag]           v0.13.0                                  -> v0.13.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8160710Z  * [new tag]           v0.14.0                                  -> v0.14.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8162684Z  * [new tag]           v0.15.0                                  -> v0.15.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8164588Z  * [new tag]           v0.16.0                                  -> v0.16.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8166648Z  * [new tag]           v0.17.0                                  -> v0.17.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8168623Z  * [new tag]           v0.2.0                                   -> v0.2.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8170619Z  * [new tag]           v0.2.1                                   -> v0.2.1
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8172894Z  * [new tag]           v0.2.2                                   -> v0.2.2
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8174876Z  * [new tag]           v0.3.0                                   -> v0.3.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8177241Z  * [new tag]           v0.4.0                                   -> v0.4.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8179116Z  * [new tag]           v0.4.1                                   -> v0.4.1
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8180925Z  * [new tag]           v0.5.0                                   -> v0.5.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8182784Z  * [new tag]           v0.5.0a1                                 -> v0.5.0a1
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8184773Z  * [new tag]           v0.6.0                                   -> v0.6.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8186826Z  * [new tag]           v0.7.0                                   -> v0.7.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8188694Z  * [new tag]           v0.7.1                                   -> v0.7.1
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8190546Z  * [new tag]           v0.8.0                                   -> v0.8.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8192437Z  * [new tag]           v0.9.0                                   -> v0.9.0
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8194502Z  * [new ref]           6004193f4423307f47a424f8b100f42ad1c0dfee -> pull/449/merge
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8272489Z ##[endgroup]
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8274407Z ##[group]Determining the checkout info
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8276620Z ##[endgroup]
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8277858Z [command]/usr/bin/git sparse-checkout disable
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8281215Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8285116Z ##[group]Checking out the ref
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:34.8287068Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/449/merge
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3926928Z Note: switching to 'refs/remotes/pull/449/merge'.
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3927389Z 
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3927809Z You are in 'detached HEAD' state. You can look around, make experimental
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3928590Z changes and commit them, and you can discard any commits you make in this
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3929403Z state without impacting any branches by switching back to a branch.
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3929746Z 
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3929948Z If you want to create a new branch to retain commits you create, you may
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3930410Z do so (now or later) by using -c with the switch command. Example:
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3930671Z 
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3930785Z   git switch -c <new-branch-name>
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3930980Z 
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3931095Z Or undo this operation with:
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3931270Z 
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3931359Z   git switch -
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3931502Z 
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3931739Z Turn off this advice by setting config variable advice.detachedHead to false
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3932063Z 
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3932418Z HEAD is now at 6004193f Merge 47f7b842d395764583adbe834c39aecdc0afd521 into 7fe82c95823503e54d2e35e00d8c409a6dd4b065
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.3971335Z ##[endgroup]
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.4020031Z [command]/usr/bin/git log -1 --format=%H
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.4048939Z 6004193f4423307f47a424f8b100f42ad1c0dfee
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.4060291Z ##[group]Removing auth
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.4063713Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.4098259Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.4349575Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.4379997Z http.https://github.com/.extraheader
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.4386077Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.4422982Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.4670747Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.4706192Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Verify integration package (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:35.4952075Z ##[endgroup]
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T06:39:35.5196185Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.5198205Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.5198608Z with:
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.5198831Z   python-version: 3.11
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.5199075Z   check-latest: false
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.5201700Z   token: ***
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.5201928Z   update-environment: true
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.5202193Z   allow-prereleases: false
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.5202464Z   freethreaded: false
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.5202701Z env:
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.5202918Z   INTEGRATION_EVENT: pull_request
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.5203213Z   INTEGRATION_REF: refs/pull/449/merge
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.5203494Z   INTEGRATION_PR: 449
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.5203735Z   INTEGRATION_RETENTION_DAYS: 3
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.5204049Z   PYTHONNOUSERSITE: 1
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.5204282Z   PYTHONPATH: 
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.5204494Z ##[endgroup]
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.6509215Z ##[group]Installed versions
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.6635708Z (node:2455) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.6636624Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.6637322Z Successfully set up CPython (3.11.16)
+Verify integration package (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:35.6638093Z ##[endgroup]
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	﻿2026-09-11T06:39:35.6831885Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6833327Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6833742Z with:
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6834110Z   name: integration-package-staging-6004193f4423307f47a424f8b100f42ad1c0dfee
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6834597Z   path: /home/runner/work/_temp/integration-payload
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6834926Z   merge-multiple: false
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6835180Z   repository: mmzen/se_harness
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6835433Z   run-id: 34570104939
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6835645Z env:
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6835851Z   INTEGRATION_EVENT: pull_request
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6836130Z   INTEGRATION_REF: refs/pull/449/merge
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6836622Z   INTEGRATION_PR: 449
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6836904Z   INTEGRATION_RETENTION_DAYS: 3
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6837173Z   PYTHONNOUSERSITE: 1
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6837584Z   PYTHONPATH: 
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6837870Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6838339Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6839036Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6839553Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6840100Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6840494Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.6840831Z ##[endgroup]
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.8435420Z Downloading single artifact
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.8610459Z (node:2464) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:35.8611692Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:36.0899042Z Preparing to download the following artifacts:
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:36.0900477Z - integration-package-staging-6004193f4423307f47a424f8b100f42ad1c0dfee (ID: 10187697522, Size: 472521, Expected Digest: sha256:f046dfe359a6fb9509bff29d31a617223902010fed14b485090e05e774460768)
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:36.3125855Z Redirecting to blob download url: https://productionresultssa17.blob.core.windows.net/actions-results/97760d06-7418-4e43-9671-d0c90d0eccff/workflow-job-run-7b4e65b6-8757-5c56-81b3-cb08e5ca7305/artifacts/3bb0664353c53f34577636d72b967e8d1570a12cd5a5ee0d3751fd1b914e422f.zip
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:36.3128363Z Starting download of artifact to: /home/runner/work/_temp/integration-payload
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:36.5350448Z (node:2464) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:36.8023210Z SHA256 digest of downloaded artifact is f046dfe359a6fb9509bff29d31a617223902010fed14b485090e05e774460768
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:36.8024118Z Artifact download completed successfully.
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:36.8024704Z Total of 1 artifact(s) downloaded
+Verify integration package (Linux)	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T06:39:36.8031408Z Download artifact has finished successfully
+Verify integration package (Linux)	Verify and install the exact staged bytes	﻿2026-09-11T06:39:36.8195326Z ##[group]Run $integrationArgs = @(
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8195736Z ^[[36;1m$integrationArgs = @(^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8196085Z ^[[36;1m  '.github/scripts/build_integration_package.py',^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8196729Z ^[[36;1m  'install-test',^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8197118Z ^[[36;1m  '--payload', (Join-Path '/home/runner/work/_temp' 'integration-payload'),^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8197560Z ^[[36;1m  '--checkout', $env:GITHUB_WORKSPACE,^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8197893Z ^[[36;1m  '--expected-commit', $env:GITHUB_SHA,^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8198245Z ^[[36;1m  '--expected-repository', $env:GITHUB_REPOSITORY,^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8198613Z ^[[36;1m  '--expected-event', $env:INTEGRATION_EVENT,^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8198955Z ^[[36;1m  '--expected-ref', $env:INTEGRATION_REF,^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8199279Z ^[[36;1m  '--expected-run-id', $env:GITHUB_RUN_ID,^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8199649Z ^[[36;1m  '--expected-run-attempt', $env:GITHUB_RUN_ATTEMPT,^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8200020Z ^[[36;1m  '--expected-workflow', $env:GITHUB_WORKFLOW,^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8200477Z ^[[36;1m  '--expected-retention-days', $env:INTEGRATION_RETENTION_DAYS^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8200872Z ^[[36;1m)^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8201089Z ^[[36;1mif ($env:INTEGRATION_PR) {^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8201479Z ^[[36;1m  $integrationArgs += @('--expected-pull-request', $env:INTEGRATION_PR)^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8201855Z ^[[36;1m}^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8202063Z ^[[36;1mpython @integrationArgs^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8202518Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'integration-package installation verification failed' }^[[0m
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8258565Z shell: /usr/bin/pwsh -command ". '{0}'"
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8258874Z env:
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8259103Z   INTEGRATION_EVENT: pull_request
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8259398Z   INTEGRATION_REF: refs/pull/449/merge
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8259686Z   INTEGRATION_PR: 449
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8260163Z   INTEGRATION_RETENTION_DAYS: 3
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8260449Z   PYTHONNOUSERSITE: 1
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8260672Z   PYTHONPATH: 
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8260960Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8261396Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8261846Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8262231Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8262610Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8262990Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:36.8263335Z ##[endgroup]
+Verify integration package (Linux)	Verify and install the exact staged bytes	2026-09-11T06:39:45.0238117Z {"checkout_sha256":"727533624a5b587ee7aa865e9a91ffeab7f7d7c012e16376a41dc4ca7c32efae","commit":"6004193f4423307f47a424f8b100f42ad1c0dfee","platform":"Linux","result":"pass","schema":"se-harness-integration-install-result-v1","version":"0.18.0+pr449.g6004193f4423","wheel_sha256":"ce5f27e0d3f60f44362e0e97bc0898d2f7a0ab6b31774e580136b95a81a67888"}
+Verify integration package (Linux)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T06:39:45.1075620Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Verify integration package (Linux)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:45.1077037Z Post job cleanup.
+Verify integration package (Linux)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:45.2271122Z (node:2587) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Verify integration package (Linux)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:45.2271892Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Verify integration package (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T06:39:45.2478810Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Verify integration package (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:45.2480047Z Post job cleanup.
+Verify integration package (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:45.3358074Z [command]/usr/bin/git version
+Verify integration package (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:45.3402340Z git version 2.55.0
+Verify integration package (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:45.3441455Z Temporarily overriding HOME='/home/runner/work/_temp/8a396b74-7ceb-4eaa-a5bf-73bfd05dc31a' before making global git config changes
+Verify integration package (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:45.3442767Z Adding repository directory to the temporary git global config as a safe directory
+Verify integration package (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:45.3447806Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/se_harness/se_harness
+Verify integration package (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:45.3492059Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Verify integration package (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:45.3530605Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Verify integration package (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:45.3814654Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Verify integration package (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:45.3853602Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Verify integration package (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:45.4140964Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Verify integration package (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:45.4184070Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Verify integration package (Linux)	Complete job	﻿2026-09-11T06:39:45.4613364Z Cleaning up orphan processes
+Verify integration package (Linux)	Complete job	2026-09-11T06:39:45.4898657Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

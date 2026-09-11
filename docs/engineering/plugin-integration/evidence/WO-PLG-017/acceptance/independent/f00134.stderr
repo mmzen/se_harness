@@ -1,0 +1,13 @@
+Cloning into 'C:\Users\mathi\AppData\Local\Temp\p17-3s6kl1nm\r'...
+fatal: detected dubious ownership in repository at 'C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness/.git/worktrees/se-harness-plugin-evidence-path-fix'
+'C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness/.git/worktrees/se-harness-plugin-evidence-path-fix' is owned by:
+	mmzen/mathi (S-1-5-21-778813600-4079903668-2251971101-1001)
+but the current user is:
+	mmzen/CodexSandboxOffline (S-1-5-21-778813600-4079903668-2251971101-1003)
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness/.git/worktrees/se-harness-plugin-evidence-path-fix
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.

@@ -1,0 +1,39 @@
+{
+  "classification": "Recorder fault probes only; no evaluator/model/lifecycle behavior",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "evaluator_python": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+  "runner_sha256": "897426be4ff58ad1797fda7f35ab0703485dea647fee1821ba7d21c5298b99c2",
+  "bundle_sha256": "04f16d42fc18df3283668c56d3e02b8d686a0026628bc4a0eaedaa46a05a81c0",
+  "batch": "probe",
+  "bindings": {
+    "{python}": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "{environment}": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016",
+    "{repo}": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\repository-timeout\\run\\capture-repository",
+    "{bundle}": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\repository-timeout\\bundle",
+    "{trace}": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\repository-timeout\\run\\trace",
+    "{output}": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\repository-timeout\\run"
+  },
+  "commands": [
+    {
+      "label": "probe",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-c",
+        "from pathlib import Path; import sys,time; p=Path(sys.argv[-1]); p.mkdir(parents=True,exist_ok=True); (p/'sentinel.txt').write_text('observed\\n',encoding='utf8'); print('probe-stdout',flush=True); print('probe-stderr',file=sys.stderr,flush=True); time.sleep(30)",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\repository-timeout\\run\\capture-repository"
+      ],
+      "exit_code": null
+    }
+  ],
+  "fresh_model_behavior": false,
+  "decision_prompt_count": null,
+  "receipt_note": "Suppression belongs to the original Windows model observation; this runner replays actual commands and fixed readback choices.",
+  "passed": false,
+  "failure": {
+    "type": "TimeoutExpired",
+    "message": "Command '['C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe', '-I', '-B', '-c', \"from pathlib import Path; import sys,time; p=Path(sys.argv[-1]); p.mkdir(parents=True,exist_ok=True); (p/'sentinel.txt').write_text('observed\\\\n',encoding='utf8'); print('probe-stdout',flush=True); print('probe-stderr',file=sys.stderr,flush=True); time.sleep(30)\", 'C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-recorder-error-probes-20260911-attempt1\\\\repository-timeout\\\\run\\\\capture-repository']' timed out after 2.0 seconds"
+  }
+}

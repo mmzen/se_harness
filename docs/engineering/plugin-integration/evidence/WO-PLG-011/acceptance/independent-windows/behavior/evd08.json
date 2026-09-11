@@ -1,0 +1,11 @@
+{
+  "status": "observed grouped supplied-input identity drift",
+  "groups": [],
+  "negative_variants": 5,
+  "mutation_dispatches": 0,
+  "simulated_effects": 0,
+  "note": "Commit/evidence/action/destination and assurance-only inputs; no new actual Git head per counterfactual.",
+  "approval_prompts": 0,
+  "evidence_class": "Windows independent model observations in one session; Linux replay separate",
+  "trace_records": []
+}

@@ -1,0 +1,67 @@
+{
+  "classification": "Explicit command replay inputs from the independent Windows observer; no new model behavior or authority decisions",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+  "evaluator_python": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+  "runner_sha256": "76bb855bdabb2280c99d6a708948f1f3ce12b6cb5f300fa923e13c4968956244",
+  "bundle_sha256": "41459956edef208c84c84aa63b4d3e016babb7be8946f634a51c4f6b9ce67d57",
+  "batch": "unauthorized",
+  "bindings": {
+    "{python}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "{environment}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0",
+    "{repo}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/unauthorized-repository",
+    "{bundle}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/unauthorized",
+    "{trace}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/trace",
+    "{output}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2"
+  },
+  "commands": [
+    {
+      "label": "evd05-no-authority-context",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/unauthorized/session-context.py",
+        "--repo",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/unauthorized-repository",
+        "--environment",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0",
+        "--version",
+        "0.16.0",
+        "--payload-sha256",
+        "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "--archive-sha256",
+        "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "--host",
+        "codex",
+        "--context-limit",
+        "32768",
+        "--read-limit",
+        "32768"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd05-no-authority-preflight",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "preflight",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/unauthorized-repository",
+        "--work-order",
+        "WO-EVD-001",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "fresh_model_behavior": false,
+  "decision_prompt_count": null,
+  "receipt_note": "Suppression belongs to the original Windows model observation; this runner replays actual commands and fixed readback choices.",
+  "passed": true
+}

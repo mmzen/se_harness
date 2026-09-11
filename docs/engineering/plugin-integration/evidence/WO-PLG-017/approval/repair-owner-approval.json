@@ -1,0 +1,7 @@
+{
+  "operator_answer": "Approve WO-PLG-017 and authorize the repair",
+  "pr": 447,
+  "draft_sha256": "68aee28ffc7a4adddf59268d005d8425ff915a3616a2bce77a913f1f6a832e3a",
+  "actor": "engineering-owner",
+  "reason": "The operator explicitly answered \"Approve WO-PLG-017 and authorize the repair\" to the reviewed PR #447 proposal on 2026-09-10. Record DR-REMEDIATION-SCOPE and DR-WO-SELECT under engineering-owner for only WO-PLG-017. Approval of its execution delegation permits the bounded delegated route after the approved class exists at the configured base and the live exact-head required check succeeds. It does not approve an aggregate VREC, assurance, supersession, integration or merge."
+}

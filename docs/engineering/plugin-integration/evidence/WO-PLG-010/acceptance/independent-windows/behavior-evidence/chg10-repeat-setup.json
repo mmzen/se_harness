@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.EXE",
+    "-NoProfile",
+    "-NonInteractive",
+    "-File",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-evidence\\chg10-repeat-setup.ps1"
+  ],
+  "exit_code": 0,
+  "stdout": "Python 3.14.6 venv available; pip 26.1.2\r\nexisting: lock-matched\r\nEvaluator environment ready; no repository or lifecycle changes made.\r\n",
+  "stderr": "",
+  "reference_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+  "method": "Exact Windows setup command block; offline disposable installation; no native host activation."
+}

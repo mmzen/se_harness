@@ -1,0 +1,225 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-PLG-012",
+    "artifacts": [
+      "WO-PLG-012"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "CAP-WEX-001",
+      "INT-WEX-001",
+      "REQ-PLG-020",
+      "REQ-PLG-021",
+      "SPEC-PLG-012",
+      "VER-PLG-012"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/plugin-integration/evidence/VREC-PLG-009-evaluator.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-020.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-021.md",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-012.md",
+      "docs/engineering/plugin-integration/verification-records/VREC-PLG-009.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-012.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-012.md",
+      "plugins/verity-plane/common/skills/harness-operator-brief/",
+      "plugins/verity-plane/common/skills/harness-orient/",
+      "tests/plugin_integration/retained-skills/"
+    ],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-WO-PREPARE-VREC",
+    "procedure_id": "PROC-WO-PREPARE-VREC",
+    "status": "not_assessable",
+    "gates": []
+  },
+  "procedure": {
+    "id": "PROC-WO-PREPARE-VREC",
+    "current_step": "STEP-WO-PREPARE-VREC-DECIDE",
+    "steps": [
+      {
+        "id": "STEP-WO-PREPARE-VREC-DECIDE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-CANDIDATE-READY"
+        ],
+        "effects": [
+          "Permits preparation of one ready VREC."
+        ],
+        "non_effects": [
+          "Preparation does not verify WO-PLG-012."
+        ],
+        "decision_right": "DR-VREC-PREPARE",
+        "role": "engineering-owner",
+        "artifact": "WO-PLG-012",
+        "decision": "whether to prepare one ready verification record with exact approved inputs",
+        "outcomes": [
+          "prepare",
+          "stop"
+        ],
+        "response": "Prepare one ready VREC for WO-PLG-012 with the exact approved verification contract and retained evidence."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-PLG-012",
+        "status": "implemented"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-PLG-012",
+        "status": "implemented"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 46
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "WO-PLG-012 is implemented; no assurance decision was inferred."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-PLG-012 is implemented."
+    ],
+    "decision_required": {
+      "decision_right": "DR-VREC-PREPARE",
+      "role": "delegated-executor",
+      "artifact": "WO-PLG-012",
+      "decision": "whether to prepare one ready verification record with exact approved inputs",
+      "outcomes": [
+        "prepare",
+        "stop"
+      ],
+      "delegation": {
+        "class": "execution",
+        "gate": "success",
+        "check_run_id": "103176796613",
+        "head": "e152f6a8f30a62b4fb3676ada2e437f94544ee9c"
+      }
+    },
+    "next": {
+      "procedure_id": "PROC-WO-PREPARE-VREC",
+      "step_id": "STEP-WO-PREPARE-VREC-DECIDE",
+      "action": "whether to prepare one ready verification record with exact approved inputs"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "capture-verification",
+        ".",
+        "--work-order",
+        "WO-PLG-012",
+        "--owner",
+        "delegated-executor",
+        "--id",
+        "VREC-...",
+        "--verification",
+        "VER-...",
+        "--evidence",
+        "..."
+      ]
+    },
+    "alternatives": []
+  },
+  "result_sha256": "1cfaa294d27043fbd9d487408159d02fcac84e454002385740c834b726b8e484",
+  "context": {
+    "reading_manifest": [
+      "ENGINEERING_HARNESS.md",
+      "docs/engineering/OPERATING_CARD.md",
+      "AGENTS.md",
+      "docs/engineering/workflow-execution/intent/INT-WEX-001.md",
+      "docs/engineering/workflow-execution/capabilities/CAP-WEX-001.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-020.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-021.md",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-012.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-012.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-012.md"
+    ],
+    "governing": [
+      "CAP-WEX-001",
+      "INT-WEX-001",
+      "REQ-PLG-020",
+      "REQ-PLG-021",
+      "SPEC-PLG-012",
+      "VER-PLG-012"
+    ],
+    "declared_paths": [
+      "plugins/verity-plane/common/skills/harness-orient/",
+      "plugins/verity-plane/common/skills/harness-operator-brief/",
+      "tests/plugin_integration/retained-skills/",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-012.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/",
+      "docs/engineering/plugin-integration/verification-records/VREC-PLG-009.md",
+      "docs/engineering/plugin-integration/evidence/VREC-PLG-009-evaluator.json",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-020.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-021.md",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-012.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-012.md"
+    ],
+    "state": {
+      "status": "implemented",
+      "family": "work_order"
+    },
+    "next": {
+      "argv": [
+        "harnessctl",
+        "capture-verification",
+        ".",
+        "--work-order",
+        "WO-PLG-012",
+        "--owner",
+        "delegated-executor",
+        "--id",
+        "VREC-...",
+        "--verification",
+        "VER-...",
+        "--evidence",
+        "..."
+      ],
+      "procedure_id": "PROC-WO-PREPARE-VREC",
+      "step_id": "STEP-WO-PREPARE-VREC-DECIDE"
+    },
+    "decision_required": {
+      "decision_right": "DR-VREC-PREPARE",
+      "role": "delegated-executor",
+      "artifact": "WO-PLG-012",
+      "decision": "whether to prepare one ready verification record with exact approved inputs",
+      "outcomes": [
+        "prepare",
+        "stop"
+      ],
+      "delegation": {
+        "class": "execution",
+        "gate": "success",
+        "check_run_id": "103176796613",
+        "head": "e152f6a8f30a62b4fb3676ada2e437f94544ee9c"
+      }
+    }
+  }
+}

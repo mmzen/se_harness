@@ -1,0 +1,11 @@
+{
+  "helper_contract_hashes_match": true,
+  "compared": [
+    "harness-orient/skill-contract.json",
+    "harness-orient/scripts/orient.py",
+    "harness-operator-brief/skill-contract.json",
+    "harness-operator-brief/scripts/check_brief.py"
+  ],
+  "product_and_tests_unchanged_since": "e535102bd33754dbe56df724526f8d50bc3d983d",
+  "candidate": "5aba54143d43d1b64be4b6cb2529c30570cabc26"
+}

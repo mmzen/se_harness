@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "C:/Users/mathi/AppData/Local/Python/bin/python.exe",
+    "C:/Users/mathi/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+    "plugins/verity-plane/common/skills/harness-orient"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills",
+  "exit_status": 0,
+  "started_at": "2026-09-10T20:33:05.205077+00:00",
+  "duration_seconds": 0.127
+}

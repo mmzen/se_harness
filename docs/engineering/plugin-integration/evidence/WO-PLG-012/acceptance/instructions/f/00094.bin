@@ -1,0 +1,36 @@
+{
+  "source_sha256": "66cedd5c2b34274a387fdac6d0db62b3b716b8531603fff0cd4b0ce60727ccb9",
+  "byte_length": 502,
+  "spans": [
+    {
+      "id": "record-id",
+      "kind": "identifier",
+      "start": 127,
+      "end": 139,
+      "sha256": "ea3e3dc46e42a31231fec545e3da1af17058f3c2a0d3cc128c8282276a180336"
+    },
+    {
+      "id": "inspection-command",
+      "kind": "command",
+      "start": 160,
+      "end": 209,
+      "sha256": "bf35f50d70ef9b17357bfba75f9aeea179a168b6eda617a09277ce2678bf6f53"
+    },
+    {
+      "id": "unicode-code",
+      "kind": "code",
+      "start": 229,
+      "end": 254,
+      "sha256": "278bf7c4354f71d9774e0d93c11e67179ceffe1a86f300577ee3f9dbe1687e6f"
+    },
+    {
+      "id": "qualified-decision",
+      "kind": "decision-meaning",
+      "start": 274,
+      "end": 414,
+      "sha256": "10e01a628262712b576e734f947a30cff00e53519d8565f03861da462edd07b2"
+    }
+  ],
+  "canonical_sha256": "bb78722a28685df386cfbf5226c5dddc70e35bd6f1dda45b7cd60826f324d567",
+  "canonical_bytes": 270
+}

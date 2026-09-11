@@ -1,0 +1,6 @@
+Observer packaging defect, not candidate/helper failure:
+package_completed_result.py successfully wrote both outside-target result JSON files,
+then its final console print failed under Windows cp1252:
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2615' in position 488: character maps to <undefined>
+Actual process exit status was 1. Both files retained; no target paths changed.
+The immutable script remains unchanged. emit_result_utf8.py emits their existing UTF-8 bytes through sys.stdout.buffer.

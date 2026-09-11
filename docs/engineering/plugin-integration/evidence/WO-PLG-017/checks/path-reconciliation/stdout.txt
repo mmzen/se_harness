@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "mapped_files": 55,
+  "payload_bytes_unchanged": true,
+  "source_commit": "7fe82c95823503e54d2e35e00d8c409a6dd4b065",
+  "preserved_vrec": "VREC-PLG-008",
+  "max_full_path": 210,
+  "path_budget": 250,
+  "checkout_root": "D:/a/se_harness/se_harness",
+  "scope": "Retained evidence bytes and paths only; no assurance decision"
+}

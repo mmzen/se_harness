@@ -1,0 +1,25 @@
+Derived from fixed reviewed bytes and actual readback after suppressed receipt.
+--- reviewed/INT-ACC-001.md
++++ observed/INT-ACC-001.md
+@@ -2,7 +2,7 @@
+ id = "INT-ACC-001"
+ type = "intent"
+ title = "INT-ACC-001 acceptance fixture"
+-status = "draft"
++status = "approved"
+ owners = ["product-owner"]
+ created = "2026-09-10"
+ updated = "2026-09-10"
+@@ -10,6 +10,12 @@
+ 
+ [relations]
+ 
++[[lifecycle_events]]
++from = "draft"
++to = "approved"
++decided_at = "2026-09-10T19:00:55Z"
++decided_by = "product-owner"
++reason = "Synthetic original reviewed intent approval; recover from any lost receipt by readback only."
+ +++
+ 
+ # INT-ACC-001: Acceptance fixture

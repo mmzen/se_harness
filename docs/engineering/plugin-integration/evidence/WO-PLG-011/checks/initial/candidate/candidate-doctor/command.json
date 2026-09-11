@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:/Users/mathi/AppData/Local/Python/bin/python.exe",
+    "-m",
+    "se_harness",
+    "doctor",
+    ".",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-evidence-skill",
+  "exit_status": 1,
+  "started_at": "2026-09-10T19:28:48.174161+00:00",
+  "duration_seconds": 3.226
+}

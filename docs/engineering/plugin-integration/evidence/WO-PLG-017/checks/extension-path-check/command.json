@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "python",
+    "tests/plugin_integration/evidence-skill/check_retention_paths.py",
+    "--root",
+    "."
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-evidence-path-fix",
+  "exit_status": 0,
+  "started_at": "2026-09-11T06:03:15.038437+00:00",
+  "duration_seconds": 2.571
+}

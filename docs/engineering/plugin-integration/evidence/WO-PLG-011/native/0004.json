@@ -1,0 +1,120 @@
+{
+  "entrypoints": {
+    "readiness": {
+      "bytes": 3103,
+      "path": "data/readiness/f39a03f5d5d82fc0b374723cf32b467e4c2c0a2d987d0b174c5407f73c84ab19.json",
+      "role": "readiness",
+      "schema": "harness-dashboard-readiness-v2",
+      "sha256": "f39a03f5d5d82fc0b374723cf32b467e4c2c0a2d987d0b174c5407f73c84ab19"
+    },
+    "summary": {
+      "bytes": 1019,
+      "path": "data/summary/3c18634ace06b547de4eb29ab724af74e14f6210ee7a9af36ba65ce0710de884.json",
+      "role": "summary",
+      "schema": "harness-dashboard-summary-v2",
+      "sha256": "3c18634ace06b547de4eb29ab724af74e14f6210ee7a9af36ba65ce0710de884"
+    },
+    "topology": {
+      "bytes": 4940,
+      "path": "data/topology/e8ed2545376da173dc9783aef81e988547ef9489a0c719bfbc07fdc0ab2d8b5b.json",
+      "role": "topology",
+      "schema": "harness-dashboard-topology-v2",
+      "sha256": "e8ed2545376da173dc9783aef81e988547ef9489a0c719bfbc07fdc0ab2d8b5b"
+    }
+  },
+  "repository": {
+    "artifact_root": "docs/engineering",
+    "git_object_format": "sha1",
+    "name": "capture-repository",
+    "revision": "d2f0f0e8e76b31fcca5eb89215bf1cde92a099f7",
+    "source_url": null,
+    "valid": true
+  },
+  "resources": [
+    {
+      "bytes": 19687,
+      "path": "content/ea43c242f0429f61a83383a81418f90b1a47e93e1470162a7d8b73f0c009a6e6.txt",
+      "role": "evidence",
+      "schema": "utf8-markdown-v1",
+      "sha256": "ea43c242f0429f61a83383a81418f90b1a47e93e1470162a7d8b73f0c009a6e6"
+    },
+    {
+      "artifact_id": "VER-EVD-001",
+      "bytes": 856,
+      "path": "data/artifacts/0acbb4aeb9b07c22b33add4f1120ab38a46d6c84bd37f191d24209e2bbde64e9.json",
+      "role": "artifact",
+      "schema": "harness-dashboard-artifact-v2",
+      "sha256": "0acbb4aeb9b07c22b33add4f1120ab38a46d6c84bd37f191d24209e2bbde64e9"
+    },
+    {
+      "artifact_id": "INT-EVD-001",
+      "bytes": 722,
+      "path": "data/artifacts/3517f32a79e6da2c2a12fe0273a7b6386e05c92f3f9187b25d2774acdc119c09.json",
+      "role": "artifact",
+      "schema": "harness-dashboard-artifact-v2",
+      "sha256": "3517f32a79e6da2c2a12fe0273a7b6386e05c92f3f9187b25d2774acdc119c09"
+    },
+    {
+      "artifact_id": "SPEC-EVD-001",
+      "bytes": 775,
+      "path": "data/artifacts/3d9feded312000ef41e14f27aad51015bf6bb9749005503c14c0a740280cb650.json",
+      "role": "artifact",
+      "schema": "harness-dashboard-artifact-v2",
+      "sha256": "3d9feded312000ef41e14f27aad51015bf6bb9749005503c14c0a740280cb650"
+    },
+    {
+      "artifact_id": "REQ-EVD-001",
+      "bytes": 832,
+      "path": "data/artifacts/68709b0cdc8a964c89088e0120066b2d7cf0c2ae123660b32937396863798ee4.json",
+      "role": "artifact",
+      "schema": "harness-dashboard-artifact-v2",
+      "sha256": "68709b0cdc8a964c89088e0120066b2d7cf0c2ae123660b32937396863798ee4"
+    },
+    {
+      "artifact_id": "CAP-EVD-001",
+      "bytes": 734,
+      "path": "data/artifacts/70a5a3c54097b87b6d997e1a914daa0795764286d46771ca62a7f782da76eb3e.json",
+      "role": "artifact",
+      "schema": "harness-dashboard-artifact-v2",
+      "sha256": "70a5a3c54097b87b6d997e1a914daa0795764286d46771ca62a7f782da76eb3e"
+    },
+    {
+      "artifact_id": "REL-EVD-001",
+      "bytes": 835,
+      "path": "data/artifacts/c8671ae5902e74ac392a2de327c4a88eb5ddbba5a9d5547dd72b10df7db21ea9.json",
+      "role": "artifact",
+      "schema": "harness-dashboard-artifact-v2",
+      "sha256": "c8671ae5902e74ac392a2de327c4a88eb5ddbba5a9d5547dd72b10df7db21ea9"
+    },
+    {
+      "artifact_id": "WO-EVD-001",
+      "bytes": 1949,
+      "path": "data/artifacts/f4e7c80ece35787cf142d8132303429febc92a1b3a83b6c5180ff066c835c8d8.json",
+      "role": "artifact",
+      "schema": "harness-dashboard-artifact-v2",
+      "sha256": "f4e7c80ece35787cf142d8132303429febc92a1b3a83b6c5180ff066c835c8d8"
+    },
+    {
+      "bytes": 3103,
+      "path": "data/readiness/f39a03f5d5d82fc0b374723cf32b467e4c2c0a2d987d0b174c5407f73c84ab19.json",
+      "role": "readiness",
+      "schema": "harness-dashboard-readiness-v2",
+      "sha256": "f39a03f5d5d82fc0b374723cf32b467e4c2c0a2d987d0b174c5407f73c84ab19"
+    },
+    {
+      "bytes": 1019,
+      "path": "data/summary/3c18634ace06b547de4eb29ab724af74e14f6210ee7a9af36ba65ce0710de884.json",
+      "role": "summary",
+      "schema": "harness-dashboard-summary-v2",
+      "sha256": "3c18634ace06b547de4eb29ab724af74e14f6210ee7a9af36ba65ce0710de884"
+    },
+    {
+      "bytes": 4940,
+      "path": "data/topology/e8ed2545376da173dc9783aef81e988547ef9489a0c719bfbc07fdc0ab2d8b5b.json",
+      "role": "topology",
+      "schema": "harness-dashboard-topology-v2",
+      "sha256": "e8ed2545376da173dc9783aef81e988547ef9489a0c719bfbc07fdc0ab2d8b5b"
+    }
+  ],
+  "schema": "harness-dashboard-bundle-v2"
+}

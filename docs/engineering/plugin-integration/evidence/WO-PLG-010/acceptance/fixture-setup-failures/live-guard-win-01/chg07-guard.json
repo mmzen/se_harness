@@ -1,0 +1,8 @@
+{
+  "classification": "Released guard integration, not a skill-behavior test or lifecycle application",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "evaluator_python": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+  "runner_sha256": "67f2b848acb4ea8a80088002ea3533352f40e6b1bc41dc9f0f57190aa5741865",
+  "observations": []
+}

@@ -1,0 +1,469 @@
+Upgrade rehearsal (Linux)	Set up job	﻿2026-09-11T06:15:25.7538035Z Current runner version: '2.337.0'
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7566489Z ##[group]Runner Image Provisioner
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7567389Z Hosted Compute Agent
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7568004Z Version: 20260828.587
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7568763Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7569786Z Build Date: 2026-08-28T16:44:25Z
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7570480Z Worker ID: {cb7dd2a7-8f9a-42d5-9106-0274f34f1baa}
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7571341Z Azure Region: northcentralus
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7571977Z ##[endgroup]
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7573446Z ##[group]Operating System
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7574092Z Ubuntu
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7574646Z 24.04.5
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7575249Z LTS
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7575800Z ##[endgroup]
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7576433Z ##[group]Runner Image
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7577066Z Image: ubuntu-24.04
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7577670Z Version: 20260907.300.1
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7579104Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260907.300/images/ubuntu/Ubuntu2404-Readme.md
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7580910Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260907.300
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7581926Z ##[endgroup]
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7583105Z ##[group]GITHUB_TOKEN Permissions
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7584979Z Contents: read
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7585702Z Metadata: read
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7586485Z ##[endgroup]
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7588478Z Secret source: Actions
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7589788Z Cache mode: write
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.7590542Z Prepare workflow directory
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.8263256Z Prepare all required actions
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:25.8333015Z Getting action download info
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:26.0959356Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:26.1821604Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:26.2720570Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:26.5861524Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Upgrade rehearsal (Linux)	Set up job	2026-09-11T06:15:26.8023773Z Complete job name: Upgrade rehearsal (Linux)
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T06:15:26.8789159Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8798408Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8799955Z with:
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8800449Z   fetch-depth: 0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8800949Z   persist-credentials: false
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8801513Z   repository: mmzen/se_harness
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8805830Z   token: ***
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8806314Z   ssh-strict: true
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8806795Z   ssh-user: git
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8807254Z   clean: true
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8807737Z   sparse-checkout-cone-mode: true
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8808301Z   fetch-tags: false
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8808800Z   show-progress: true
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8809437Z   lfs: false
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8809964Z   submodules: false
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8810454Z   set-safe-directory: true
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8811010Z   allow-unsafe-pr-checkout: false
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8811831Z env:
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8812301Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8813190Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8814121Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8814627Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:26.8815087Z ##[endgroup]
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0043354Z Syncing repository: mmzen/se_harness
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0045597Z ##[group]Getting Git version info
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0046889Z Working directory is '/home/runner/work/se_harness/se_harness'
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0048182Z [command]/usr/bin/git version
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0048756Z git version 2.55.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0050789Z ##[endgroup]
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0055959Z Temporarily overriding HOME='/home/runner/work/_temp/2e0fa9ad-c84c-4fe2-82f8-f3b3527ef820' before making global git config changes
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0058332Z Adding repository directory to the temporary git global config as a safe directory
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0060545Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/se_harness/se_harness
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0114981Z Deleting the contents of '/home/runner/work/se_harness/se_harness'
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0150910Z ##[group]Initializing the repository
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0152418Z [command]/usr/bin/git init /home/runner/work/se_harness/se_harness
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0250886Z hint: Using 'master' as the name for the initial branch. This default branch name
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0271011Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0273125Z hint: to use in all of your new repositories, which will suppress this warning,
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0274640Z hint: call:
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0275530Z hint:
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0276572Z hint: 	git config --global init.defaultBranch <name>
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0277806Z hint:
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0279158Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0281041Z hint: 'development'. The just-created branch can be renamed via this command:
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0285801Z hint:
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0286897Z hint: 	git branch -m <name>
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0287991Z hint:
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0289274Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0291192Z Initialized empty Git repository in /home/runner/work/se_harness/se_harness/.git/
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0294469Z [command]/usr/bin/git remote add origin https://github.com/mmzen/se_harness
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0322127Z ##[endgroup]
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0323853Z ##[group]Disabling automatic garbage collection
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0325395Z [command]/usr/bin/git config --local gc.auto 0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0376170Z ##[endgroup]
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0377738Z ##[group]Setting up auth
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0385367Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.0443038Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.2896794Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.2936687Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.3188299Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.3231257Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.3499179Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.3547921Z ##[endgroup]
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.3549368Z ##[group]Fetching the repository
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.3562754Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +ab9d7ab0f02e71c2b1fee5efa4daeb6bf83fb6f6:refs/remotes/pull/449/merge
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1493589Z From https://github.com/mmzen/se_harness
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1495026Z  * [new branch]        artifacts/plugin-implementation          -> origin/artifacts/plugin-implementation
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1496252Z  * [new branch]        definitions/plg010-delegation            -> origin/definitions/plg010-delegation
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1497527Z  * [new branch]        definitions/plg011-delegation            -> origin/definitions/plg011-delegation
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1498274Z  * [new branch]        definitions/plg012-delegation            -> origin/definitions/plg012-delegation
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1499489Z  * [new branch]        definitions/plg017-path-repair           -> origin/definitions/plg017-path-repair
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1500191Z  * [new branch]        main                                     -> origin/main
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1500849Z  * [new branch]        notes/plugin-installation-proposal       -> origin/notes/plugin-installation-proposal
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1501763Z  * [new branch]        notes/plugin-proposal-assessment-2026-09-08 -> origin/notes/plugin-proposal-assessment-2026-09-08
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1502738Z  * [new branch]        release/0.10                             -> origin/release/0.10
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1503434Z  * [new branch]        release/0.11                             -> origin/release/0.11
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1504085Z  * [new branch]        release/0.12                             -> origin/release/0.12
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1504832Z  * [new branch]        release/0.12.0                           -> origin/release/0.12.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1505393Z  * [new branch]        release/0.13                             -> origin/release/0.13
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1506074Z  * [new branch]        release/0.13.0                           -> origin/release/0.13.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1506706Z  * [new branch]        release/0.14                             -> origin/release/0.14
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1507260Z  * [new branch]        release/0.14.0                           -> origin/release/0.14.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1507833Z  * [new branch]        release/0.15                             -> origin/release/0.15
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1508372Z  * [new branch]        release/0.15.0                           -> origin/release/0.15.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1509268Z  * [new branch]        release/0.16                             -> origin/release/0.16
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1509928Z  * [new branch]        release/0.16.0                           -> origin/release/0.16.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1510650Z  * [new branch]        release/0.17                             -> origin/release/0.17
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1511452Z  * [new branch]        release/0.17.0                           -> origin/release/0.17.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1512360Z  * [new branch]        release/0.2.0                            -> origin/release/0.2.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1513032Z  * [new branch]        release/0.2.1                            -> origin/release/0.2.1
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1513602Z  * [new branch]        release/0.2.2                            -> origin/release/0.2.2
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1514177Z  * [new branch]        release/0.3.0                            -> origin/release/0.3.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1514706Z  * [new branch]        release/0.4.0                            -> origin/release/0.4.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1515426Z  * [new branch]        release/0.6                              -> origin/release/0.6
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1516300Z  * [new branch]        release/0.7                              -> origin/release/0.7
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1516956Z  * [new branch]        release/0.8                              -> origin/release/0.8
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1517468Z  * [new branch]        release/0.9                              -> origin/release/0.9
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1518078Z  * [new branch]        work/plugin-change-skill                 -> origin/work/plugin-change-skill
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1518831Z  * [new branch]        work/plugin-evidence-path-repair         -> origin/work/plugin-evidence-path-repair
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1519680Z  * [new branch]        work/plugin-evidence-skill               -> origin/work/plugin-evidence-skill
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1520406Z  * [new branch]        work/plugin-retained-skills              -> origin/work/plugin-retained-skills
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1521109Z  * [new tag]           last                                     -> last
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1521815Z  * [new tag]           v0.10.0                                  -> v0.10.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1522277Z  * [new tag]           v0.11.0                                  -> v0.11.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1522707Z  * [new tag]           v0.12.0                                  -> v0.12.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1523146Z  * [new tag]           v0.13.0                                  -> v0.13.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1523567Z  * [new tag]           v0.14.0                                  -> v0.14.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1523986Z  * [new tag]           v0.15.0                                  -> v0.15.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1524417Z  * [new tag]           v0.16.0                                  -> v0.16.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1524838Z  * [new tag]           v0.17.0                                  -> v0.17.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1525268Z  * [new tag]           v0.2.0                                   -> v0.2.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1525702Z  * [new tag]           v0.2.1                                   -> v0.2.1
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1526145Z  * [new tag]           v0.2.2                                   -> v0.2.2
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1526605Z  * [new tag]           v0.3.0                                   -> v0.3.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1527058Z  * [new tag]           v0.4.0                                   -> v0.4.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1527520Z  * [new tag]           v0.4.1                                   -> v0.4.1
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1527965Z  * [new tag]           v0.5.0                                   -> v0.5.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1528427Z  * [new tag]           v0.5.0a1                                 -> v0.5.0a1
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1529011Z  * [new tag]           v0.6.0                                   -> v0.6.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1529465Z  * [new tag]           v0.7.0                                   -> v0.7.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1529911Z  * [new tag]           v0.7.1                                   -> v0.7.1
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1530368Z  * [new tag]           v0.8.0                                   -> v0.8.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1530810Z  * [new tag]           v0.9.0                                   -> v0.9.0
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1531336Z  * [new ref]           ab9d7ab0f02e71c2b1fee5efa4daeb6bf83fb6f6 -> pull/449/merge
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1533008Z ##[endgroup]
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1533482Z ##[group]Determining the checkout info
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1534215Z ##[endgroup]
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1534531Z [command]/usr/bin/git sparse-checkout disable
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1566361Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1609413Z ##[group]Checking out the ref
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1613048Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/449/merge
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7197797Z Note: switching to 'refs/remotes/pull/449/merge'.
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7199751Z 
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7200501Z You are in 'detached HEAD' state. You can look around, make experimental
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7201206Z changes and commit them, and you can discard any commits you make in this
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7201855Z state without impacting any branches by switching back to a branch.
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7202288Z 
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7202585Z If you want to create a new branch to retain commits you create, you may
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7203287Z do so (now or later) by using -c with the switch command. Example:
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7203553Z 
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7203679Z   git switch -c <new-branch-name>
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7203859Z 
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7203994Z Or undo this operation with:
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7204162Z 
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7204253Z   git switch -
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7204392Z 
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7204610Z Turn off this advice by setting config variable advice.detachedHead to false
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7204920Z 
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7205279Z HEAD is now at ab9d7ab0 Merge e5b48a16be2e5e59ecd17d7d28d24409ff5ce519 into 7fe82c95823503e54d2e35e00d8c409a6dd4b065
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7242194Z ##[endgroup]
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7290457Z [command]/usr/bin/git log -1 --format=%H
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7319120Z ab9d7ab0f02e71c2b1fee5efa4daeb6bf83fb6f6
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7329816Z ##[group]Removing auth
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7333950Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7369845Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7629278Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7659776Z http.https://github.com/.extraheader
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7667606Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7706820Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7961653Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.7999167Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Upgrade rehearsal (Linux)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.8253410Z ##[endgroup]
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T06:15:29.8524724Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.8526603Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.8526984Z with:
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.8527199Z   python-version: 3.11
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.8527474Z   check-latest: false
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.8530176Z   token: ***
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.8530405Z   update-environment: true
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.8530689Z   allow-prereleases: false
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.8530926Z   freethreaded: false
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.8531150Z env:
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.8531358Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.8531798Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.8532260Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.8532533Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.8532738Z ##[endgroup]
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.9889560Z ##[group]Installed versions
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.9986602Z (node:2331) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.9987897Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.9988581Z Successfully set up CPython (3.11.16)
+Upgrade rehearsal (Linux)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:29.9989484Z ##[endgroup]
+Upgrade rehearsal (Linux)	Require the derived predecessor facts	﻿2026-09-11T06:15:30.0171398Z ##[group]Run if (-not $env:PREDECESSOR_VERSION -or -not $env:PREDECESSOR_WHEEL_SHA256) {
+Upgrade rehearsal (Linux)	Require the derived predecessor facts	2026-09-11T06:15:30.0172519Z ^[[36;1mif (-not $env:PREDECESSOR_VERSION -or -not $env:PREDECESSOR_WHEEL_SHA256) {^[[0m
+Upgrade rehearsal (Linux)	Require the derived predecessor facts	2026-09-11T06:15:30.0173400Z ^[[36;1m  throw 'predecessor facts were not derived by candidate-source'^[[0m
+Upgrade rehearsal (Linux)	Require the derived predecessor facts	2026-09-11T06:15:30.0174013Z ^[[36;1m}^[[0m
+Upgrade rehearsal (Linux)	Require the derived predecessor facts	2026-09-11T06:15:30.0249446Z shell: /usr/bin/pwsh -command ". '{0}'"
+Upgrade rehearsal (Linux)	Require the derived predecessor facts	2026-09-11T06:15:30.0249943Z env:
+Upgrade rehearsal (Linux)	Require the derived predecessor facts	2026-09-11T06:15:30.0250279Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Linux)	Require the derived predecessor facts	2026-09-11T06:15:30.0251015Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Linux)	Require the derived predecessor facts	2026-09-11T06:15:30.0251795Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	Require the derived predecessor facts	2026-09-11T06:15:30.0252166Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	Require the derived predecessor facts	2026-09-11T06:15:30.0252619Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Require the derived predecessor facts	2026-09-11T06:15:30.0253360Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Upgrade rehearsal (Linux)	Require the derived predecessor facts	2026-09-11T06:15:30.0254129Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Require the derived predecessor facts	2026-09-11T06:15:30.0254872Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Require the derived predecessor facts	2026-09-11T06:15:30.0255799Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Require the derived predecessor facts	2026-09-11T06:15:30.0256447Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Upgrade rehearsal (Linux)	Require the derived predecessor facts	2026-09-11T06:15:30.0257000Z ##[endgroup]
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	﻿2026-09-11T06:15:31.1729586Z ##[group]Run $predecessorDist = Join-Path '/home/runner/work/_temp' 'predecessor-dist'
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1730270Z ^[[36;1m$predecessorDist = Join-Path '/home/runner/work/_temp' 'predecessor-dist'^[[0m
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1730817Z ^[[36;1mNew-Item -ItemType Directory -Path $predecessorDist | Out-Null^[[0m
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1731386Z ^[[36;1mpython -m pip download --disable-pip-version-check --only-binary=:all: --no-deps `^[[0m
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1731974Z ^[[36;1m  --dest $predecessorDist "se-harness==$env:PREDECESSOR_VERSION"^[[0m
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1732478Z ^[[36;1m$wheel = Get-ChildItem -LiteralPath $predecessorDist -Filter '*.whl'^[[0m
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1733008Z ^[[36;1mif ($wheel.Count -ne 1) { throw 'expected exactly one predecessor wheel' }^[[0m
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1733615Z ^[[36;1m$actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $wheel.FullName).Hash.ToLowerInvariant()^[[0m
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1734284Z ^[[36;1mif ($actual -ne $env:PREDECESSOR_WHEEL_SHA256) { throw 'predecessor wheel digest mismatch' }^[[0m
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1778041Z shell: /usr/bin/pwsh -command ". '{0}'"
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1778339Z env:
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1778558Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1779317Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1779795Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1780022Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1780313Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1780752Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1781172Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1781554Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1781928Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1782330Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:31.1782661Z ##[endgroup]
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:35.5172897Z Collecting se-harness==0.17.0
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:35.5635672Z   Downloading se_harness-0.17.0-py3-none-any.whl.metadata (45 kB)
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:35.5892994Z Downloading se_harness-0.17.0-py3-none-any.whl (484 kB)
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:35.6184479Z Saved /home/runner/work/_temp/predecessor-dist/se_harness-0.17.0-py3-none-any.whl
+Upgrade rehearsal (Linux)	Acquire and verify the already-public predecessor	2026-09-11T06:15:35.6185160Z Successfully downloaded se-harness
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	﻿2026-09-11T06:15:35.7888568Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7890246Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7890666Z with:
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7891068Z   name: candidate-wheel-non-promotable-ab9d7ab0f02e71c2b1fee5efa4daeb6bf83fb6f6
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7891555Z   path: /home/runner/work/_temp/candidate-dist
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7891871Z   merge-multiple: false
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7892116Z   repository: mmzen/se_harness
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7892365Z   run-id: 34569064009
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7892580Z env:
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7892818Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7893257Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7893765Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7893997Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7894281Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7894710Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7895133Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7895514Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7896103Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7896488Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.7896825Z ##[endgroup]
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.9436890Z Downloading single artifact
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.9585218Z (node:2405) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:35.9586142Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:36.0858001Z Preparing to download the following artifacts:
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:36.0859993Z - candidate-wheel-non-promotable-ab9d7ab0f02e71c2b1fee5efa4daeb6bf83fb6f6 (ID: 10187088292, Size: 471519, Expected Digest: sha256:7df38a4db08d96d150f10dcbc85f96c08c27169a258faa41c7699f49693ecc19)
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:36.2489014Z Redirecting to blob download url: https://productionresultssa2.blob.core.windows.net/actions-results/b7c6dae6-7885-4954-b562-8d79fa65a948/workflow-job-run-3ad94ef7-b033-5d11-b3a4-e930c7c1c850/artifacts/5df106d07a054443a644bdf03cad32f046130a927f2e40a12bd6c00c61db5605.zip
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:36.2491034Z Starting download of artifact to: /home/runner/work/_temp/candidate-dist
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:36.3881336Z (node:2405) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:36.5076001Z SHA256 digest of downloaded artifact is 7df38a4db08d96d150f10dcbc85f96c08c27169a258faa41c7699f49693ecc19
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:36.5077065Z Artifact download completed successfully.
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:36.5077766Z Total of 1 artifact(s) downloaded
+Upgrade rehearsal (Linux)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:36.5082481Z Download artifact has finished successfully
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	﻿2026-09-11T06:15:36.5203170Z ##[group]Run $candidateDist = Join-Path '/home/runner/work/_temp' 'candidate-dist'
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5203802Z ^[[36;1m$candidateDist = Join-Path '/home/runner/work/_temp' 'candidate-dist'^[[0m
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5204348Z ^[[36;1m$wheel = Get-ChildItem -LiteralPath $candidateDist -Filter '*.whl'^[[0m
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5204874Z ^[[36;1mif ($wheel.Count -ne 1) { throw 'expected exactly one successor wheel' }^[[0m
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5205607Z ^[[36;1m$expected = (Get-Content -LiteralPath (Join-Path $candidateDist 'SHA256SUMS') | Where-Object { $_ -match [regex]::Escape($wheel.Name) })^[[0m
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5206334Z ^[[36;1mif (-not $expected) { throw 'SHA256SUMS does not name the successor wheel' }^[[0m
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5206859Z ^[[36;1m$expectedDigest = ($expected -split '\s+')[0].ToLowerInvariant()^[[0m
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5207448Z ^[[36;1m$actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $wheel.FullName).Hash.ToLowerInvariant()^[[0m
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5208185Z ^[[36;1mif ($actual -ne $expectedDigest) { throw "successor wheel digest mismatch: expected $expectedDigest, got $actual" }^[[0m
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5251873Z shell: /usr/bin/pwsh -command ". '{0}'"
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5252187Z env:
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5252419Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5252906Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5253384Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5253634Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5253929Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5254377Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5254805Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5255190Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5255565Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5255948Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Upgrade rehearsal (Linux)	Verify the handed-over successor bytes	2026-09-11T06:15:36.5256282Z ##[endgroup]
+Upgrade rehearsal (Linux)	Install isolated local runtimes	﻿2026-09-11T06:15:37.4701765Z ##[group]Run $predecessorRoot = Join-Path '/home/runner/work/_temp' 'predecessor-env'
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4703055Z ^[[36;1m$predecessorRoot = Join-Path '/home/runner/work/_temp' 'predecessor-env'^[[0m
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4703888Z ^[[36;1m$successorRoot = Join-Path '/home/runner/work/_temp' 'successor-env'^[[0m
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4704545Z ^[[36;1mpython -m venv $predecessorRoot^[[0m
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4705024Z ^[[36;1mpython -m venv $successorRoot^[[0m
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4705635Z ^[[36;1m$predecessorPython = Join-Path $predecessorRoot 'bin/python'^[[0m
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4706385Z ^[[36;1m$successorPython = Join-Path $successorRoot 'bin/python'^[[0m
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4707531Z ^[[36;1m$predecessorWheel = (Get-ChildItem -LiteralPath (Join-Path '/home/runner/work/_temp' 'predecessor-dist') -Filter '*.whl').FullName^[[0m
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4709269Z ^[[36;1m$successorWheel = (Get-ChildItem -LiteralPath (Join-Path '/home/runner/work/_temp' 'candidate-dist') -Filter '*.whl').FullName^[[0m
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4710621Z ^[[36;1m& $predecessorPython -m pip install --disable-pip-version-check --no-index --no-deps $predecessorWheel^[[0m
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4711861Z ^[[36;1m& $successorPython -m pip install --disable-pip-version-check --no-index --no-deps $successorWheel^[[0m
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4773249Z shell: /usr/bin/pwsh -command ". '{0}'"
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4773724Z env:
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4774070Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4774815Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4775640Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4776009Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4776461Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4777192Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4777924Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4778553Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4779743Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4780246Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:37.4780621Z ##[endgroup]
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:46.2736362Z Processing /home/runner/work/_temp/predecessor-dist/se_harness-0.17.0-py3-none-any.whl
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:46.2840399Z Installing collected packages: se-harness
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:46.4847443Z Successfully installed se-harness-0.17.0
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:46.8662949Z Processing /home/runner/work/_temp/candidate-dist/se_harness-0.18.0-py3-none-any.whl
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:46.8762164Z Installing collected packages: se-harness
+Upgrade rehearsal (Linux)	Install isolated local runtimes	2026-09-11T06:15:47.0733143Z Successfully installed se-harness-0.18.0
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	﻿2026-09-11T06:15:47.1781726Z ##[group]Run # WO-ECP-010 (REQ-ECP-012, ECP-PRD-008): the successor's own upgrade --apply
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1782399Z ^[[36;1m# WO-ECP-010 (REQ-ECP-012, ECP-PRD-008): the successor's own upgrade --apply^[[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1782959Z ^[[36;1m# against a throwaway export whose lock is the released predecessor's, judged^[[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1783499Z ^[[36;1m# by both evaluators' doctor and by the resulting lock. No per-release^[[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1784053Z ^[[36;1m# fixture, no network inside the rehearsal, no write to this checkout.^[[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1784698Z ^[[36;1m$predecessorPython = Join-Path (Join-Path '/home/runner/work/_temp' 'predecessor-env') 'bin/python'^[[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1785404Z ^[[36;1m$successorPython = Join-Path (Join-Path '/home/runner/work/_temp' 'successor-env') 'bin/python'^[[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1785976Z ^[[36;1m$first = Join-Path '/home/runner/work/_temp' 'rehearsal-result-1'^[[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1786460Z ^[[36;1m$second = Join-Path '/home/runner/work/_temp' 'rehearsal-result-2'^[[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1786997Z ^[[36;1mpython -m repository_tools.upgrade_rehearsal --repository . `^[[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1787596Z ^[[36;1m  --predecessor-python $predecessorPython --successor-python $successorPython --output $first^[[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1788197Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'first upgrade rehearsal failed' }^[[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1788687Z ^[[36;1mpython -m repository_tools.upgrade_rehearsal --repository . `^[[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1789672Z ^[[36;1m  --predecessor-python $predecessorPython --successor-python $successorPython --output $second^[[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1790303Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'second upgrade rehearsal failed' }^[[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1790981Z ^[[36;1m$firstResult = Get-Content -Raw -LiteralPath (Join-Path $first 'upgrade-rehearsal-result.json') | ConvertFrom-Json^[[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1791827Z ^[[36;1m$secondResult = Get-Content -Raw -LiteralPath (Join-Path $second 'upgrade-rehearsal-result.json') | ConvertFrom-Json^[[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1792667Z ^[[36;1mif ($firstResult.semantic_sha256 -ne $secondResult.semantic_sha256) { throw 'upgrade rehearsal replay digest differs' }^[[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1793519Z ^[[36;1mif ($firstResult.overall_result -ne 'pass' -or $secondResult.overall_result -ne 'pass') { throw 'upgrade rehearsal did not pass' }^[[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1837432Z shell: /usr/bin/pwsh -command ". '{0}'"
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1837755Z env:
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1837989Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1838464Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1839063Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1839417Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1839710Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1840166Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1840604Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1840996Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1841407Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1841799Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:47.1842139Z ##[endgroup]
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:57.2289412Z upgrade rehearsal: PASS (0.17.0 -> 0.18.0)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:15:57.2290207Z semantic_sha256: 4503b1eb20f320613d29c7d5d5b76fe8e928da00e2216ff86cd610cb0850b061
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:06.4937502Z upgrade rehearsal: PASS (0.17.0 -> 0.18.0)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:06.4938309Z semantic_sha256: 4503b1eb20f320613d29c7d5d5b76fe8e928da00e2216ff86cd610cb0850b061
+Upgrade rehearsal (Linux)	Publish this platform's semantic digest as a job output	﻿2026-09-11T06:16:06.6404269Z ##[group]Run $result = Get-Content -Raw -LiteralPath (Join-Path (Join-Path '/home/runner/work/_temp' 'rehearsal-result-1') 'upgrade-rehearsal-result.json') | ConvertFrom-Json
+Upgrade rehearsal (Linux)	Publish this platform's semantic digest as a job output	2026-09-11T06:16:06.6406303Z ^[[36;1m$result = Get-Content -Raw -LiteralPath (Join-Path (Join-Path '/home/runner/work/_temp' 'rehearsal-result-1') 'upgrade-rehearsal-result.json') | ConvertFrom-Json^[[0m
+Upgrade rehearsal (Linux)	Publish this platform's semantic digest as a job output	2026-09-11T06:16:06.6407863Z ^[[36;1m"Linux=$($result.semantic_sha256)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8^[[0m
+Upgrade rehearsal (Linux)	Publish this platform's semantic digest as a job output	2026-09-11T06:16:06.6468780Z shell: /usr/bin/pwsh -command ". '{0}'"
+Upgrade rehearsal (Linux)	Publish this platform's semantic digest as a job output	2026-09-11T06:16:06.6469524Z env:
+Upgrade rehearsal (Linux)	Publish this platform's semantic digest as a job output	2026-09-11T06:16:06.6469879Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Linux)	Publish this platform's semantic digest as a job output	2026-09-11T06:16:06.6470648Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Linux)	Publish this platform's semantic digest as a job output	2026-09-11T06:16:06.6471475Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	Publish this platform's semantic digest as a job output	2026-09-11T06:16:06.6471848Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	Publish this platform's semantic digest as a job output	2026-09-11T06:16:06.6472304Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Publish this platform's semantic digest as a job output	2026-09-11T06:16:06.6473041Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Upgrade rehearsal (Linux)	Publish this platform's semantic digest as a job output	2026-09-11T06:16:06.6473796Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Publish this platform's semantic digest as a job output	2026-09-11T06:16:06.6474413Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Publish this platform's semantic digest as a job output	2026-09-11T06:16:06.6475043Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Publish this platform's semantic digest as a job output	2026-09-11T06:16:06.6475670Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Upgrade rehearsal (Linux)	Publish this platform's semantic digest as a job output	2026-09-11T06:16:06.6476195Z ##[endgroup]
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	﻿2026-09-11T06:16:06.9786977Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9788496Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9789167Z with:
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9789439Z   name: upgrade-rehearsal-Linux
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9789847Z   path: /home/runner/work/_temp/rehearsal-result-*/upgrade-rehearsal-result.json
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9790261Z   if-no-files-found: warn
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9790513Z   compression-level: 6
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9790748Z   overwrite: false
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9790979Z   include-hidden-files: false
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9791227Z env:
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9791447Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9791880Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9792386Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9792617Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9792897Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9793338Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9793766Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9794159Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9794546Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9794944Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:06.9795280Z ##[endgroup]
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:07.1476956Z (node:2718) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:07.1478145Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:07.1541757Z With the provided path, there will be 2 files uploaded
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:07.1547802Z Artifact name is valid!
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:07.1548598Z Root directory input is valid!
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:07.4189062Z Beginning upload of artifact content to blob storage
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:07.4386009Z (node:2718) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:07.5332661Z Uploaded bytes 2386
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:07.5896281Z Finished uploading artifact content to blob storage!
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:07.5897543Z SHA256 digest of uploaded artifact zip is 42b719b74df476277e488fd84f063cdfa091657768233e3276d62aefc91e2fe9
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:07.5898433Z Finalizing artifact upload
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:07.8225224Z Artifact upgrade-rehearsal-Linux.zip successfully finalized. Artifact ID 10187121199
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:07.8226530Z Artifact upgrade-rehearsal-Linux has been successfully uploaded! Final size is 2386 bytes. Artifact ID is 10187121199
+Upgrade rehearsal (Linux)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:16:07.8232266Z Artifact download URL: https://github.com/mmzen/se_harness/actions/runs/34569064009/artifacts/10187121199
+Upgrade rehearsal (Linux)	Prove the upgrade rehearsal made no checkout change	﻿2026-09-11T06:16:07.8363558Z ##[group]Run git diff --exit-code
+Upgrade rehearsal (Linux)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:16:07.8363907Z ^[[36;1mgit diff --exit-code^[[0m
+Upgrade rehearsal (Linux)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:16:07.8364284Z ^[[36;1m$status = git status --porcelain=v1 --untracked-files=all^[[0m
+Upgrade rehearsal (Linux)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:16:07.8364755Z ^[[36;1mif ($status) { throw 'upgrade rehearsal changed the checkout' }^[[0m
+Upgrade rehearsal (Linux)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:16:07.8408627Z shell: /usr/bin/pwsh -command ". '{0}'"
+Upgrade rehearsal (Linux)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:16:07.8409217Z env:
+Upgrade rehearsal (Linux)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:16:07.8409493Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Linux)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:16:07.8409965Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Linux)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:16:07.8410453Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:16:07.8410697Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:16:07.8410989Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:16:07.8411436Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Upgrade rehearsal (Linux)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:16:07.8411870Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:16:07.8412269Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:16:07.8412723Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:16:07.8413324Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Upgrade rehearsal (Linux)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:16:07.8413667Z ##[endgroup]
+Upgrade rehearsal (Linux)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T06:16:09.0153983Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Linux)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:16:09.0155197Z Post job cleanup.
+Upgrade rehearsal (Linux)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:16:09.1367821Z (node:2779) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Upgrade rehearsal (Linux)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:16:09.1387225Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Upgrade rehearsal (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T06:16:09.1574859Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:16:09.1576961Z Post job cleanup.
+Upgrade rehearsal (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:16:09.2509724Z [command]/usr/bin/git version
+Upgrade rehearsal (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:16:09.2551702Z git version 2.55.0
+Upgrade rehearsal (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:16:09.2601917Z Temporarily overriding HOME='/home/runner/work/_temp/c72d1361-22f2-4c22-a1a1-4a23d82c71a0' before making global git config changes
+Upgrade rehearsal (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:16:09.2630222Z Adding repository directory to the temporary git global config as a safe directory
+Upgrade rehearsal (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:16:09.2650287Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/se_harness/se_harness
+Upgrade rehearsal (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:16:09.2659501Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Upgrade rehearsal (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:16:09.2704638Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Upgrade rehearsal (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:16:09.3016823Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Upgrade rehearsal (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:16:09.3059507Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Upgrade rehearsal (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:16:09.3347575Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Upgrade rehearsal (Linux)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:16:09.3389652Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Upgrade rehearsal (Linux)	Complete job	﻿2026-09-11T06:16:09.3846085Z Evaluate and set job outputs
+Upgrade rehearsal (Linux)	Complete job	2026-09-11T06:16:09.3853659Z Set output 'Linux'
+Upgrade rehearsal (Linux)	Complete job	2026-09-11T06:16:09.3856173Z Cleaning up orphan processes
+Upgrade rehearsal (Linux)	Complete job	2026-09-11T06:16:09.4177260Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

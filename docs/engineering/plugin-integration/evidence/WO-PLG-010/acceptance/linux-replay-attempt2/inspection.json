@@ -1,0 +1,65 @@
+{
+  "classification": "Read-only inspection of completed Linux replay; no new lifecycle computation",
+  "source_record_count": 54,
+  "all_original_record_names_replayed": true,
+  "missing": [],
+  "executed_runner_hash_matches_current": true,
+  "runner_sha256": "d9acb1b03ffe5715dba896041e009b67c21141f66e5b2cd973546b096910d76a",
+  "expected_failures": [
+    {
+      "label": "chg03-before",
+      "exit_code": 1,
+      "changed_paths": [],
+      "blocker_codes": [
+        "WEX210"
+      ],
+      "failed_predicates": []
+    },
+    {
+      "label": "chg04-preaction",
+      "exit_code": 1,
+      "changed_paths": [],
+      "blocker_codes": [
+        null
+      ],
+      "failed_predicates": [
+        {
+          "id": "QGP-G4I-EVIDENCE",
+          "status": "not_assessable",
+          "message": "No readable evidence for WO-ACC-001, checkpoint pre-action, and formal snapshot 547fe8d79031540ed8e3b2820e8f9287195900a3984f54dccba5abbfd8caa60b is available."
+        }
+      ]
+    },
+    {
+      "label": "chg04-preaction-retry",
+      "exit_code": 1,
+      "changed_paths": [],
+      "blocker_codes": [
+        null
+      ],
+      "failed_predicates": [
+        {
+          "id": "QGP-G4I-EVIDENCE",
+          "status": "not_assessable",
+          "message": "No readable evidence for WO-ACC-001, checkpoint pre-action, and formal snapshot 547fe8d79031540ed8e3b2820e8f9287195900a3984f54dccba5abbfd8caa60b is available."
+        }
+      ]
+    },
+    {
+      "label": "chg05-proposed-scope",
+      "exit_code": 1,
+      "changed_paths": [],
+      "blocker_codes": [
+        null
+      ],
+      "failed_predicates": [
+        {
+          "id": "QGP-G4I-PATHS",
+          "status": "fail",
+          "message": "WEX201: changed path is outside execution scope: src/outside.py"
+        }
+      ]
+    }
+  ],
+  "passed": true
+}

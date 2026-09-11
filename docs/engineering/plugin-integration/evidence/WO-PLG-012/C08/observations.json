@@ -1,0 +1,3162 @@
+{
+  "case": "C08",
+  "expected": "Calibrated test boundary and independent full snapshots show no target/ignored/Git changes or unexpected effects.",
+  "conclusion": "Final bounded acceptance passed; see source reports for final selection and preserved earlier failures.",
+  "observed_records": [
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-credential/observations.json",
+      "retained": "acceptance/helpers/f00048.json",
+      "sha256": "32dba62fe2d02e65e3f4b7686c7076f5e4525f70f50276e61ab2f37e499f2e6f",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 20364,
+          "role": "canary",
+          "time_ns": 1789073170201419900,
+          "category": "credential",
+          "event": "open",
+          "detail": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\isolated-home\\synthetic-credentials.txt"
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-lifecycle/observations.json",
+      "retained": "acceptance/helpers/f00054.json",
+      "sha256": "336e6d85076c69bbc15d6d4c1f262fc742ff0bd3714241ac911ba75695b52f8a",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 13680,
+          "role": "evaluator",
+          "time_ns": 1789073171021485900,
+          "category": "lifecycle",
+          "event": "evaluator-entry",
+          "detail": [
+            "transition",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository",
+            "--apply"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-network/observations.json",
+      "retained": "acceptance/helpers/f00060.json",
+      "sha256": "ad2b140d2b0ffb76dabc9186cfb0141f987ff3f28ece0068b308617ce3db995c",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 4300,
+          "role": "canary",
+          "time_ns": 1789073169779757800,
+          "category": "network",
+          "event": "socket.__new__",
+          "detail": "(<socket.socket fd=-1, family=0, type=0, proto=0>, 2, 1, 0)"
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-spawn/observations.json",
+      "retained": "acceptance/helpers/f00066.json",
+      "sha256": "45d07c60e6fa235e9a8c39009d455963f080d4cfc9a024a9d019793a1bc9b93b",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 30344,
+          "role": "canary",
+          "time_ns": 1789073170613465200,
+          "category": "spawn",
+          "event": "subprocess.Popen-wrapper",
+          "detail": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+            "-I",
+            "-B",
+            "-c",
+            "print('unexpected worker')"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-write/observations.json",
+      "retained": "acceptance/helpers/f00072.json",
+      "sha256": "839343be20b36d4470915620e972a4b4cbe107e863c9c2aa62f9bde65e9cb572",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 16756,
+          "role": "canary",
+          "time_ns": 1789073169362532600,
+          "category": "write",
+          "event": "open",
+          "detail": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository\\boundary-must-not-exist"
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-credential/observations.json",
+      "retained": "acceptance/helpers/f00212.json",
+      "sha256": "349f3cd2f3b912a32fbb4bbdf304e38bb5c5037cb43cece6fe7555c7cf49b286",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 20720,
+          "role": "canary",
+          "time_ns": 1789073014620042200,
+          "category": "credential",
+          "event": "open",
+          "detail": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\isolated-home\\synthetic-credentials.txt"
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-lifecycle/observations.json",
+      "retained": "acceptance/helpers/f00217.json",
+      "sha256": "e9bc384eb07c694ae3b73489b90304d191ca16787590fc5cb6e2acd1909384f6",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 27180,
+          "role": "evaluator",
+          "time_ns": 1789073015447045900,
+          "category": "lifecycle",
+          "event": "evaluator-entry",
+          "detail": [
+            "transition",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository",
+            "--apply"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-network/observations.json",
+      "retained": "acceptance/helpers/f00222.json",
+      "sha256": "73a3a6890fb6e01574a680fc76d7d3936d0aca4c27584305c68dce9adb0aed81",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 31128,
+          "role": "canary",
+          "time_ns": 1789073014205297700,
+          "category": "network",
+          "event": "socket.__new__",
+          "detail": "(<socket.socket fd=-1, family=0, type=0, proto=0>, 2, 1, 0)"
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-spawn/observations.json",
+      "retained": "acceptance/helpers/f00227.json",
+      "sha256": "5c603ad69caf8e88c1e3ee2b743b3611cf6f94163bb1516460fc2d573aef7673",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 28632,
+          "role": "canary",
+          "time_ns": 1789073015029563200,
+          "category": "spawn",
+          "event": "subprocess.Popen-wrapper",
+          "detail": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+            "-I",
+            "-B",
+            "-c",
+            "print('unexpected worker')"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-write/observations.json",
+      "retained": "acceptance/helpers/f00232.json",
+      "sha256": "dc35d4b1f8bfa8afc2e562e4ca130fb05e6cff5c448c2ce83e4f282fc89b6071",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 7648,
+          "role": "canary",
+          "time_ns": 1789073013770115800,
+          "category": "write",
+          "event": "open",
+          "detail": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository\\boundary-must-not-exist"
+        }
+      ]
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-credential/observations.json",
+      "retained": "acceptance/helpers/f00339.json",
+      "sha256": "7cfef972812d97ca14fc75829fc0721f7457f6a8fa6991c6c5af068c1ec6aeff",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 605,
+          "role": "canary",
+          "time_ns": 1789073232071836014,
+          "category": "credential",
+          "event": "open",
+          "detail": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/isolated-home/synthetic-credentials.txt"
+        }
+      ]
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-lifecycle/observations.json",
+      "retained": "acceptance/helpers/f00345.json",
+      "sha256": "94dccd8e8db83e70ae76fdaddc36410a2347d1af660fb1dcd5f5da7eddda7c16",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 609,
+          "role": "evaluator",
+          "time_ns": 1789073240059874817,
+          "category": "lifecycle",
+          "event": "evaluator-entry",
+          "detail": [
+            "transition",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository",
+            "--apply"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-network/observations.json",
+      "retained": "acceptance/helpers/f00351.json",
+      "sha256": "cb972c6666763799e6234eaa1ab916efda45c5e7f14cbae19071f7d600660f0e",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 603,
+          "role": "canary",
+          "time_ns": 1789073228221341037,
+          "category": "network",
+          "event": "socket.__new__",
+          "detail": "(<socket.socket fd=-1, family=0, type=0, proto=0>, 2, 1, 0)"
+        }
+      ]
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-spawn/observations.json",
+      "retained": "acceptance/helpers/f00357.json",
+      "sha256": "6ed0285a57acff7e478167deaf4c5d89b47f1b7aa8c25eb4fb16034844df0cf3",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 607,
+          "role": "canary",
+          "time_ns": 1789073236095658911,
+          "category": "spawn",
+          "event": "subprocess.Popen-wrapper",
+          "detail": [
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+            "-I",
+            "-B",
+            "-c",
+            "print('unexpected worker')"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-write/observations.json",
+      "retained": "acceptance/helpers/f00363.json",
+      "sha256": "3951e59ed1305dd2f0cffeb79b4521bfde28ad5744e1470fa3f81cd40577cab7",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 601,
+          "role": "canary",
+          "time_ns": 1789073224338776112,
+          "category": "write",
+          "event": "open",
+          "detail": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository/boundary-must-not-exist"
+        }
+      ]
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-credential/observations.json",
+      "retained": "acceptance/helpers/f00379.json",
+      "sha256": "b27ea0d22755e8342e9698f22c36dd24a0931b9d03523a9f049c342af3114f2b",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 589,
+          "role": "canary",
+          "time_ns": 1789073039244159729,
+          "category": "credential",
+          "event": "open",
+          "detail": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/isolated-home/synthetic-credentials.txt"
+        }
+      ]
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-lifecycle/observations.json",
+      "retained": "acceptance/helpers/f00384.json",
+      "sha256": "5298732b200540d50f95f07cac21d9d0678dbde4c730fe691b63a7074ac6b3c5",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 593,
+          "role": "evaluator",
+          "time_ns": 1789073047301190938,
+          "category": "lifecycle",
+          "event": "evaluator-entry",
+          "detail": [
+            "transition",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository",
+            "--apply"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-network/observations.json",
+      "retained": "acceptance/helpers/f00389.json",
+      "sha256": "3920a9df05b3261aeb2685771d41f4301d9d03ecb61c508b181b048fadab8af0",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 587,
+          "role": "canary",
+          "time_ns": 1789073035616317675,
+          "category": "network",
+          "event": "socket.__new__",
+          "detail": "(<socket.socket fd=-1, family=0, type=0, proto=0>, 2, 1, 0)"
+        }
+      ]
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-spawn/observations.json",
+      "retained": "acceptance/helpers/f00394.json",
+      "sha256": "ef89cf35797456a7cca2297a3c7d4ee0c460e0aac4e01a4d2b61efa5bc64ab65",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 591,
+          "role": "canary",
+          "time_ns": 1789073043160671876,
+          "category": "spawn",
+          "event": "subprocess.Popen-wrapper",
+          "detail": [
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+            "-I",
+            "-B",
+            "-c",
+            "print('unexpected worker')"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-write/observations.json",
+      "retained": "acceptance/helpers/f00399.json",
+      "sha256": "bdc62be2cd3af8b3d36f78ba3025f6ae2e380f99fc34f2aaa80e65e7114abed5",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 585,
+          "role": "canary",
+          "time_ns": 1789073031875458404,
+          "category": "write",
+          "event": "open",
+          "detail": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository/boundary-must-not-exist"
+        }
+      ]
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-write/observations.json",
+      "retained": "acceptance/linux-replay/f00089.json",
+      "sha256": "3951e59ed1305dd2f0cffeb79b4521bfde28ad5744e1470fa3f81cd40577cab7",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 601,
+          "role": "canary",
+          "time_ns": 1789073224338776112,
+          "category": "write",
+          "event": "open",
+          "detail": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository/boundary-must-not-exist"
+        }
+      ]
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-network/observations.json",
+      "retained": "acceptance/linux-replay/f00094.json",
+      "sha256": "cb972c6666763799e6234eaa1ab916efda45c5e7f14cbae19071f7d600660f0e",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 603,
+          "role": "canary",
+          "time_ns": 1789073228221341037,
+          "category": "network",
+          "event": "socket.__new__",
+          "detail": "(<socket.socket fd=-1, family=0, type=0, proto=0>, 2, 1, 0)"
+        }
+      ]
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-credential/observations.json",
+      "retained": "acceptance/linux-replay/f00099.json",
+      "sha256": "7cfef972812d97ca14fc75829fc0721f7457f6a8fa6991c6c5af068c1ec6aeff",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 605,
+          "role": "canary",
+          "time_ns": 1789073232071836014,
+          "category": "credential",
+          "event": "open",
+          "detail": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/isolated-home/synthetic-credentials.txt"
+        }
+      ]
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-spawn/observations.json",
+      "retained": "acceptance/linux-replay/f00104.json",
+      "sha256": "6ed0285a57acff7e478167deaf4c5d89b47f1b7aa8c25eb4fb16034844df0cf3",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 607,
+          "role": "canary",
+          "time_ns": 1789073236095658911,
+          "category": "spawn",
+          "event": "subprocess.Popen-wrapper",
+          "detail": [
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+            "-I",
+            "-B",
+            "-c",
+            "print('unexpected worker')"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-lifecycle/observations.json",
+      "retained": "acceptance/linux-replay/f00109.json",
+      "sha256": "94dccd8e8db83e70ae76fdaddc36410a2347d1af660fb1dcd5f5da7eddda7c16",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 609,
+          "role": "evaluator",
+          "time_ns": 1789073240059874817,
+          "category": "lifecycle",
+          "event": "evaluator-entry",
+          "detail": [
+            "transition",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository",
+            "--apply"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-altered-output/observations.json",
+      "retained": "acceptance/helpers/f00016.json",
+      "sha256": "d7e2101153854b36c46c2eb8ab84452ac8e83a7f3505d2b2325300340136c0ef",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-reversed-spans/observations.json",
+      "retained": "acceptance/helpers/f00025.json",
+      "sha256": "2bb8fd08869a183e7a620c27d547655325648009c978ff8661709142daa532cb",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-valid/observations.json",
+      "retained": "acceptance/helpers/f00033.json",
+      "sha256": "e2cf53d4fdf72b495c56f9da65ba57741057015711a5a44a5be306bd09f3f50b",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-wrong-digest/observations.json",
+      "retained": "acceptance/helpers/f00041.json",
+      "sha256": "2a0334672e36896947317d05b7930bbb0770eaf57518f6c13afbf44e993c16e5",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-credential/observations.json",
+      "retained": "acceptance/helpers/f00117.json",
+      "sha256": "e732b9b385d3db4cfc937833ffc4599b49a5aabc8b943efb6da64d4b9f55a89b",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 26776,
+          "role": "canary",
+          "time_ns": 1789072744932111600,
+          "category": "credential",
+          "event": "open",
+          "detail": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\isolated-home\\synthetic-credentials.txt"
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-lifecycle/observations.json",
+      "retained": "acceptance/helpers/f00121.json",
+      "sha256": "f855edbb5f73083a01f0c0b94b51048dbeda835aa59d6c7822afacc0af1bd659",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 12492,
+          "role": "evaluator",
+          "time_ns": 1789072746547488600,
+          "category": "lifecycle",
+          "event": "evaluator-entry",
+          "detail": [
+            "transition",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository",
+            "--apply"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-network/observations.json",
+      "retained": "acceptance/helpers/f00126.json",
+      "sha256": "e4ad56622073d976a08ce0b4cda8d90f2669ba6911bf8fbdd25470fe4714c1e2",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 27920,
+          "role": "canary",
+          "time_ns": 1789072744485272200,
+          "category": "network",
+          "event": "socket.__new__",
+          "detail": "(<socket.socket fd=-1, family=0, type=0, proto=0>, 2, 1, 0)"
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-spawn/observations.json",
+      "retained": "acceptance/helpers/f00130.json",
+      "sha256": "7c79449481e6965ae93badf035d09e4e6b3cc4e53ba58d0e3bd2f21d1435aa84",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 29940,
+          "role": "canary",
+          "time_ns": 1789072745651913000,
+          "category": "spawn",
+          "event": "subprocess.Popen-wrapper",
+          "detail": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+            "-I",
+            "-B",
+            "-c",
+            "print('unexpected worker')"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-write/observations.json",
+      "retained": "acceptance/helpers/f00134.json",
+      "sha256": "28af4b53c32f5b078250ee7c85f3513d18a8edef67a1741f5bdfa05742c1f2fe",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 12616,
+          "role": "canary",
+          "time_ns": 1789072744065076700,
+          "category": "write",
+          "event": "open",
+          "detail": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository\\boundary-must-not-exist"
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-credential/observations.json",
+      "retained": "acceptance/helpers/f00138.json",
+      "sha256": "91e30fe8e9df34f4362bbd0c96bfad3f4c8d3d0eca70a9883c3851114c87c987",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 7640,
+          "role": "canary",
+          "time_ns": 1789072817304476800,
+          "category": "credential",
+          "event": "open",
+          "detail": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\isolated-home\\synthetic-credentials.txt"
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-lifecycle/observations.json",
+      "retained": "acceptance/helpers/f00142.json",
+      "sha256": "b66df97052623babd4e9affbfc9fc3f7776db480d2b7a0678683fdef9ac9fc89",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 2068,
+          "role": "evaluator",
+          "time_ns": 1789072818102580600,
+          "category": "lifecycle",
+          "event": "evaluator-entry",
+          "detail": [
+            "transition",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository",
+            "--apply"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-network/observations.json",
+      "retained": "acceptance/helpers/f00146.json",
+      "sha256": "d56eb49876a131699b774f4b430ef52c1f04934704ffd60ee6b89b53d8f178e4",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 24476,
+          "role": "canary",
+          "time_ns": 1789072816864214900,
+          "category": "network",
+          "event": "socket.__new__",
+          "detail": "(<socket.socket fd=-1, family=0, type=0, proto=0>, 2, 1, 0)"
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-spawn/observations.json",
+      "retained": "acceptance/helpers/f00150.json",
+      "sha256": "5eafee4eb2c7a18f188c925caed00cebf59b6262940d2cd6ab21e0baf75b8bee",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 10304,
+          "role": "canary",
+          "time_ns": 1789072817708048800,
+          "category": "spawn",
+          "event": "subprocess.Popen-wrapper",
+          "detail": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+            "-I",
+            "-B",
+            "-c",
+            "print('unexpected worker')"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-write/observations.json",
+      "retained": "acceptance/helpers/f00154.json",
+      "sha256": "c90dba21c69164ed6af450a3fd19ecc5369171cf53acf79843c727f2e353421d",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 28108,
+          "role": "canary",
+          "time_ns": 1789072816440467000,
+          "category": "write",
+          "event": "open",
+          "detail": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository\\boundary-must-not-exist"
+        }
+      ]
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C01-selected/observations.json",
+      "retained": "acceptance/helpers/f00159.json",
+      "sha256": "ba974065c6285313326ff4f34d8d252053669397010aeb0f2819264be56d79a2",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C02-preflight/observations.json",
+      "retained": "acceptance/helpers/f00164.json",
+      "sha256": "e8d83c46046b7a2008ba6dc9579adad1112317429ca32ca4479a239ceee720d8",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-payload/observations.json",
+      "retained": "acceptance/helpers/f00170.json",
+      "sha256": "01fe672ecb1984646228be620896b228655e86a50f52dad306a604520f44b153",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-root/observations.json",
+      "retained": "acceptance/helpers/f00176.json",
+      "sha256": "93792c4397596f90f4b694baae903d0f8ef2b2b9d5232a38072258d6317a4daa",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-version/observations.json",
+      "retained": "acceptance/helpers/f00182.json",
+      "sha256": "ac5da93c023453faf4f775132b1403180d0bbf77e7fbc093365a57a9a452629e",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-altered-output/observations.json",
+      "retained": "acceptance/helpers/f00189.json",
+      "sha256": "ad91a6bfea1c51f4d4986b41bb6d6a2a39e76c119f69ee50e7074a635d6dfd42",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-reversed-spans/observations.json",
+      "retained": "acceptance/helpers/f00195.json",
+      "sha256": "d9ed7dadc4702208ace8e38e7478f133ac39d45f220bd861d45ade53b00e606c",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-valid/observations.json",
+      "retained": "acceptance/helpers/f00201.json",
+      "sha256": "c7292f67e89d79ff045a568154508675cbae04e2fcd1af8e0c066d5ce79fa882",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-wrong-digest/observations.json",
+      "retained": "acceptance/helpers/f00207.json",
+      "sha256": "09b842b5a9f8e036f6da69f2a1c8972ccdb0e19c95f7afc2533fbbb3c20eed1b",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C01-selected/observations.json",
+      "retained": "acceptance/helpers/f00281.json",
+      "sha256": "3054616d69517accdbd22922203770fec4eabef0b3bef3ef7eefb3aa77a75c1a",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C02-preflight/observations.json",
+      "retained": "acceptance/helpers/f00287.json",
+      "sha256": "b3733166207c88f1ef88295f3d4f099b19eabbd21d70872e864e2f3ad625f9cb",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-payload/observations.json",
+      "retained": "acceptance/helpers/f00293.json",
+      "sha256": "d02a1e1d2a8dd453eaee702da766d87a0b8752ce53e36af16d338c0ef66c0849",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-root/observations.json",
+      "retained": "acceptance/helpers/f00299.json",
+      "sha256": "a6fdd1612f45049c2122906c252295c4c5dda83e8d4c66a05a32347583fbfd81",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-version/observations.json",
+      "retained": "acceptance/helpers/f00305.json",
+      "sha256": "d91ff115177f5bfa228b346739535dc4c4e180647c186bddad4ca8be576edb11",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-altered-output/observations.json",
+      "retained": "acceptance/helpers/f00312.json",
+      "sha256": "c83eeca436f437c98d76bfa0c39ef9592b442d316c66f133e707750e3b7df8e8",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-reversed-spans/observations.json",
+      "retained": "acceptance/helpers/f00319.json",
+      "sha256": "db746a98f45d6fa666c86db35e3206dbe16c7c7c1901640be64f66399906936a",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-valid/observations.json",
+      "retained": "acceptance/helpers/f00326.json",
+      "sha256": "dcee06d4dea6b0d150968e26a04d8ddb60f0e973401204de451feae6f50e2ef6",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-wrong-digest/observations.json",
+      "retained": "acceptance/helpers/f00333.json",
+      "sha256": "93291941948b04b3187fcb207ec66f77cf84fc84767804ea0acb51653d244d87",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C01-selected/observations.json",
+      "retained": "acceptance/helpers/f00373.json",
+      "sha256": "60753d4689e541dbafd4d77f195c498c045bef456062955221320566767b763f",
+      "expected_exit": 0,
+      "actual_exit": 1,
+      "passed": false,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C04-direct-invalid-explicit/observations.json",
+      "retained": "acceptance/instructions/f/00110.bin",
+      "sha256": "303953c66d3082fb80d42562de9cdc5a03956c7fcb47f971366ba2109b686851",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-01-version/observations.json",
+      "retained": "acceptance/instructions/f/00127.bin",
+      "sha256": "e2aa387a31886336199febf0c6a92ffb8be68da21397f914c83503cb99f71abc",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-02-identity/observations.json",
+      "retained": "acceptance/instructions/f/00144.bin",
+      "sha256": "c5b0c0c786eaba861cf2140e75204ee1b62ef99b95c8854c4c074ec0ee4b50c3",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-03-doctor/observations.json",
+      "retained": "acceptance/instructions/f/00161.bin",
+      "sha256": "313a2cff8f49b6db82fe2e95bb66aa24b316bece78947041e27ce2c43b62ab20",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-supplemental-helper/observations.json",
+      "retained": "acceptance/instructions/f/00179.bin",
+      "sha256": "a03f5a2c154d314ae97c091e24242947ac095e6df6d3cad0fd502a62d045a2f6",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-01-version/observations.json",
+      "retained": "acceptance/instructions/f/00196.bin",
+      "sha256": "af32cd9dd35f9b1130b28d640aa79883f87875534b923d20d3dcbf5095759ff2",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-02-identity/observations.json",
+      "retained": "acceptance/instructions/f/00213.bin",
+      "sha256": "14805d34b3ae76a66e0beff54872773064a92db303dfdfd0f663b04601c04e6a",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-03-doctor/observations.json",
+      "retained": "acceptance/instructions/f/00230.bin",
+      "sha256": "54e0e9c13683fbb5040335194e4b8e6afe974996d998db891f78c40e15f9c533",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-04-helper/observations.json",
+      "retained": "acceptance/instructions/f/00248.bin",
+      "sha256": "3918b13fe73afd3de82c0af0450db03f115d1ed856a4d204179ee251cbd6a4de",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-01-version/observations.json",
+      "retained": "acceptance/instructions/f/00265.bin",
+      "sha256": "92a0f3de2732c45dc7ae13cf5d98a41a76cd9fccb1231009fb5554d730d519c4",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-02-identity/observations.json",
+      "retained": "acceptance/instructions/f/00282.bin",
+      "sha256": "7e90d02d11aa91e823d77868612e670352a04dc651833450f89c2c5f23e4e49e",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-03-doctor/observations.json",
+      "retained": "acceptance/instructions/f/00299.bin",
+      "sha256": "50292e43035114af6a21276b82f8681cbb2c80b59ba92dae90c84d6dfcbe7fe3",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-04-helper/observations.json",
+      "retained": "acceptance/instructions/f/00317.bin",
+      "sha256": "35426c841a08d4d06e7cc8597e9f163ec7605d19b26a1db8e0c23300e1b900f7",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C07-01-version/observations.json",
+      "retained": "acceptance/instructions/f/00334.bin",
+      "sha256": "b0acffbba9166f6d090e8961f8342291960cec6919f9d1a54c154640692f97ca",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C07-02-identity/observations.json",
+      "retained": "acceptance/instructions/f/00351.bin",
+      "sha256": "3f09aa84c573b9f655505a132df6e8c4d3171f8afc6972e1f921e2f47ddb3db6",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C07-03-doctor/observations.json",
+      "retained": "acceptance/instructions/f/00368.bin",
+      "sha256": "cc3116ac3cebfcf0cf47200fcc4ae512635d2bf44e74a2d065578ac9eddac664",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-write/observations.json",
+      "retained": "acceptance/instructions/f/00471.bin",
+      "sha256": "c90dba21c69164ed6af450a3fd19ecc5369171cf53acf79843c727f2e353421d",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 28108,
+          "role": "canary",
+          "time_ns": 1789072816440467000,
+          "category": "write",
+          "event": "open",
+          "detail": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository\\boundary-must-not-exist"
+        }
+      ]
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-network/observations.json",
+      "retained": "acceptance/instructions/f/00488.bin",
+      "sha256": "d56eb49876a131699b774f4b430ef52c1f04934704ffd60ee6b89b53d8f178e4",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 24476,
+          "role": "canary",
+          "time_ns": 1789072816864214900,
+          "category": "network",
+          "event": "socket.__new__",
+          "detail": "(<socket.socket fd=-1, family=0, type=0, proto=0>, 2, 1, 0)"
+        }
+      ]
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-credential/observations.json",
+      "retained": "acceptance/instructions/f/00505.bin",
+      "sha256": "91e30fe8e9df34f4362bbd0c96bfad3f4c8d3d0eca70a9883c3851114c87c987",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 7640,
+          "role": "canary",
+          "time_ns": 1789072817304476800,
+          "category": "credential",
+          "event": "open",
+          "detail": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\isolated-home\\synthetic-credentials.txt"
+        }
+      ]
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-spawn/observations.json",
+      "retained": "acceptance/instructions/f/00522.bin",
+      "sha256": "5eafee4eb2c7a18f188c925caed00cebf59b6262940d2cd6ab21e0baf75b8bee",
+      "expected_exit": 73,
+      "actual_exit": 73,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 10304,
+          "role": "canary",
+          "time_ns": 1789072817708048800,
+          "category": "spawn",
+          "event": "subprocess.Popen-wrapper",
+          "detail": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+            "-I",
+            "-B",
+            "-c",
+            "print('unexpected worker')"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-lifecycle/observations.json",
+      "retained": "acceptance/instructions/f/00539.bin",
+      "sha256": "b66df97052623babd4e9affbfc9fc3f7776db480d2b7a0678683fdef9ac9fc89",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": [
+        {
+          "kind": "denied",
+          "pid": 2068,
+          "role": "evaluator",
+          "time_ns": 1789072818102580600,
+          "category": "lifecycle",
+          "event": "evaluator-entry",
+          "detail": [
+            "transition",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository",
+            "--apply"
+          ]
+        }
+      ]
+    }
+  ],
+  "source_evidence": [
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-credential/actions.txt",
+      "retained": "acceptance/helpers/f00044.txt",
+      "sha256": "fb5558155b80b70dfe0f2cc65a0fc6a54e1e1f3997e1a6e0843067f65a7a0fe6"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-credential/audit.jsonl",
+      "retained": "acceptance/helpers/f00045.jsonl",
+      "sha256": "eff97f4f98b163d2c350196ad2c15f64134fdf749f90c0fb7db7590aa5b72c6b"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-credential/boundary-config.json",
+      "retained": "acceptance/helpers/f00046.json",
+      "sha256": "8722bae78784bda7e7f51b0d4b9c61d14f54bf20310a5d18354a46fc0b772861"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-credential/observations.json",
+      "retained": "acceptance/helpers/f00048.json",
+      "sha256": "32dba62fe2d02e65e3f4b7686c7076f5e4525f70f50276e61ab2f37e499f2e6f"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-credential/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-credential/stdout.txt",
+      "retained": "acceptance/helpers/f00049.txt",
+      "sha256": "aed70d6906ce33df2cf936facb9f89f86228e0edd1edbd1fc732d6103d7870db"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-credential-driver.json",
+      "retained": "acceptance/helpers/f00050.json",
+      "sha256": "846315af2d81164c3f3765440e1839abac6fc0d8e2371fe54aaef983b3716827"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-lifecycle/actions.txt",
+      "retained": "acceptance/helpers/f00051.txt",
+      "sha256": "1a40a9c80971e44030be6ee8beb9326f3b3cab20829d6975dccb3e2fc96541f3"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-lifecycle/audit.jsonl",
+      "retained": "acceptance/helpers/f00052.jsonl",
+      "sha256": "e3e7b5f95581e2366112bb19d40142900cdf26d38061b2405045b51a128b3313"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-lifecycle/boundary-config.json",
+      "retained": "acceptance/helpers/f00053.json",
+      "sha256": "b4d6ff1446a138f99fb8d8e2ccc9483a1b9ec42e180c470e39c51964e6e66167"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-lifecycle/observations.json",
+      "retained": "acceptance/helpers/f00054.json",
+      "sha256": "336e6d85076c69bbc15d6d4c1f262fc742ff0bd3714241ac911ba75695b52f8a"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-lifecycle/stderr.txt",
+      "retained": "acceptance/helpers/f00055.txt",
+      "sha256": "4476d78824489c64361ffaf6a83dedf325fabfbe9203e1dd83b7a8fc4464ca6c"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-lifecycle/stdout.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-lifecycle-driver.json",
+      "retained": "acceptance/helpers/f00056.json",
+      "sha256": "70ce3150a52afdad669fede3329f0c5ad5c698b59d353617c6cd9dc7e4054b50"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-network/actions.txt",
+      "retained": "acceptance/helpers/f00057.txt",
+      "sha256": "2353416f86d9148868e3d4d5dc74ec6bcf988e302ad817ebd9b018853b5d5c4d"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-network/audit.jsonl",
+      "retained": "acceptance/helpers/f00058.jsonl",
+      "sha256": "7842cba02401a1d64aa050e89cf37ef49eed2281ea1ee9458c6948120f55b2e2"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-network/boundary-config.json",
+      "retained": "acceptance/helpers/f00059.json",
+      "sha256": "b75ad2b7fd181c71fd1580bcacd8c1085bbd35e67847091a983b58c5533c1f67"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-network/observations.json",
+      "retained": "acceptance/helpers/f00060.json",
+      "sha256": "ad2b140d2b0ffb76dabc9186cfb0141f987ff3f28ece0068b308617ce3db995c"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-network/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-network/stdout.txt",
+      "retained": "acceptance/helpers/f00061.txt",
+      "sha256": "7f06da349e21393d7de6ae8f4b5d7255652ef06b365144a5da8e2bf7b2e78d8f"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-network-driver.json",
+      "retained": "acceptance/helpers/f00062.json",
+      "sha256": "cfefd1b5be365962ae587aba0244b93a71d5efd7f0c34a3066610a351255625c"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-spawn/actions.txt",
+      "retained": "acceptance/helpers/f00063.txt",
+      "sha256": "c6d5c9cf5210b9d7827323ae3247655f434ede936601079b8ae2a55e60dc087e"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-spawn/audit.jsonl",
+      "retained": "acceptance/helpers/f00064.jsonl",
+      "sha256": "dfbf77f6c5ef98529a690cdce4e255e63e05ab5879b35aa83f0203de477e0ab3"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-spawn/boundary-config.json",
+      "retained": "acceptance/helpers/f00065.json",
+      "sha256": "1a9198b3e56f7da908a7040069d46d11c9a6e131078bc494d3e7e461c0887ad4"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-spawn/observations.json",
+      "retained": "acceptance/helpers/f00066.json",
+      "sha256": "45d07c60e6fa235e9a8c39009d455963f080d4cfc9a024a9d019793a1bc9b93b"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-spawn/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-spawn/stdout.txt",
+      "retained": "acceptance/helpers/f00067.txt",
+      "sha256": "b0866a2e4c61c5b5b38ecf2a349733e8629a896e992a3fd68b51992576112c05"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-spawn-driver.json",
+      "retained": "acceptance/helpers/f00068.json",
+      "sha256": "658444fae495afd88dcd2044ffaa9d7aa2431393bfd83fc6ebf297c9f75a2807"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-write/actions.txt",
+      "retained": "acceptance/helpers/f00069.txt",
+      "sha256": "1151e6c559ad2bcb6b11780a271c9eac0e824cfd158118cd1a4c669b760e6236"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-write/audit.jsonl",
+      "retained": "acceptance/helpers/f00070.jsonl",
+      "sha256": "6aaa9b56b62e3cc79506fc024488b9929934ef7ad8d75288a8995d387744ae7b"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-write/boundary-config.json",
+      "retained": "acceptance/helpers/f00071.json",
+      "sha256": "72fdc8f1433abe498118b6adc85264869e14d8707193319d83ec3db86d5896f1"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-write/observations.json",
+      "retained": "acceptance/helpers/f00072.json",
+      "sha256": "839343be20b36d4470915620e972a4b4cbe107e863c9c2aa62f9bde65e9cb572"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-write/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-write/stdout.txt",
+      "retained": "acceptance/helpers/f00073.txt",
+      "sha256": "4d9ea96614820d635dced08745fa46fa82582fbd3a8ab4de805924ab6053dd76"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C08-calibrate-write-driver.json",
+      "retained": "acceptance/helpers/f00074.json",
+      "sha256": "fd4137d4e822451820b15e13978ab8de389cdc8fbc2433085890af45c12bca53"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-credential/actions.txt",
+      "retained": "acceptance/helpers/f00209.txt",
+      "sha256": "e896e1992e04102c0d74b23e0a44af516898ba561faa3bb8a186d5a74e3d1cc0"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-credential/audit.jsonl",
+      "retained": "acceptance/helpers/f00210.jsonl",
+      "sha256": "c4dc34a17d07a119628d0da8ed3c4343a2089f7ebb22cdb9d2c8eb983ca9dc05"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-credential/boundary-config.json",
+      "retained": "acceptance/helpers/f00211.json",
+      "sha256": "753149aaf740800d843e0652da10ff1f4224eca3bcbad4573416af2c6c7c6a7f"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-credential/observations.json",
+      "retained": "acceptance/helpers/f00212.json",
+      "sha256": "349f3cd2f3b912a32fbb4bbdf304e38bb5c5037cb43cece6fe7555c7cf49b286"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-credential/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-credential/stdout.txt",
+      "retained": "acceptance/helpers/f00049.txt",
+      "sha256": "aed70d6906ce33df2cf936facb9f89f86228e0edd1edbd1fc732d6103d7870db"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-credential-driver.json",
+      "retained": "acceptance/helpers/f00213.json",
+      "sha256": "4f95ace672c18dcebe4948d03aad89eb0e8bcbb180884df6e5ffa1c5082975d5"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-lifecycle/actions.txt",
+      "retained": "acceptance/helpers/f00214.txt",
+      "sha256": "46dbb164d6da5559afd495cafa48caee630947ea20cb4b3ef2832b5d43da7b99"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-lifecycle/audit.jsonl",
+      "retained": "acceptance/helpers/f00215.jsonl",
+      "sha256": "343a62ed599526e7c8e63eb2c9d89ce0399b6eea1446cc9ba1f5d5bc1e9f4ca9"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-lifecycle/boundary-config.json",
+      "retained": "acceptance/helpers/f00216.json",
+      "sha256": "d8f9e0ab146570349cccb869646abf8ed88e7dc1395528008a5b8265adf63eee"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-lifecycle/observations.json",
+      "retained": "acceptance/helpers/f00217.json",
+      "sha256": "e9bc384eb07c694ae3b73489b90304d191ca16787590fc5cb6e2acd1909384f6"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-lifecycle/stderr.txt",
+      "retained": "acceptance/helpers/f00055.txt",
+      "sha256": "4476d78824489c64361ffaf6a83dedf325fabfbe9203e1dd83b7a8fc4464ca6c"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-lifecycle/stdout.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-lifecycle-driver.json",
+      "retained": "acceptance/helpers/f00218.json",
+      "sha256": "96f77faacd6eaf9fc50c9a21ec1947aa7cd922ee6a3967455081b6aa2419a9c1"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-network/actions.txt",
+      "retained": "acceptance/helpers/f00219.txt",
+      "sha256": "91f855dfa5b1b141182e28f80dd5992e85c6972674c101bb2b3fdf1335dab396"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-network/audit.jsonl",
+      "retained": "acceptance/helpers/f00220.jsonl",
+      "sha256": "c432cbbce133361fcd3e8f82d0cfca0ca0bae0d3be63658f925d41daae06a9ba"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-network/boundary-config.json",
+      "retained": "acceptance/helpers/f00221.json",
+      "sha256": "64a44c7dfe4db676239175d050e3ef322c63ed69d45719a1a3f08ded5e395d88"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-network/observations.json",
+      "retained": "acceptance/helpers/f00222.json",
+      "sha256": "73a3a6890fb6e01574a680fc76d7d3936d0aca4c27584305c68dce9adb0aed81"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-network/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-network/stdout.txt",
+      "retained": "acceptance/helpers/f00061.txt",
+      "sha256": "7f06da349e21393d7de6ae8f4b5d7255652ef06b365144a5da8e2bf7b2e78d8f"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-network-driver.json",
+      "retained": "acceptance/helpers/f00223.json",
+      "sha256": "d78eb52da21fe34a0b931d2d7e5fd6c98991894d497460a9c04a18a555689651"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-spawn/actions.txt",
+      "retained": "acceptance/helpers/f00224.txt",
+      "sha256": "48f8af8611f4737c5a8cf9d667b8f2eefba6093f02a55a598d04a9c70a511857"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-spawn/audit.jsonl",
+      "retained": "acceptance/helpers/f00225.jsonl",
+      "sha256": "c584cdeb4a0a1aa819a9e7754f7af6a8c728ec8a82e05c66d336fce8703b881a"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-spawn/boundary-config.json",
+      "retained": "acceptance/helpers/f00226.json",
+      "sha256": "c9a9715d783bc57642e1566a3fff05f785ee4ff00e4ba9668c71c04e5ac0ae33"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-spawn/observations.json",
+      "retained": "acceptance/helpers/f00227.json",
+      "sha256": "5c603ad69caf8e88c1e3ee2b743b3611cf6f94163bb1516460fc2d573aef7673"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-spawn/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-spawn/stdout.txt",
+      "retained": "acceptance/helpers/f00067.txt",
+      "sha256": "b0866a2e4c61c5b5b38ecf2a349733e8629a896e992a3fd68b51992576112c05"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-spawn-driver.json",
+      "retained": "acceptance/helpers/f00228.json",
+      "sha256": "4800bc9ee919d3b88301194f6f0bdc468335486be54c51e1a8e41fdc36218939"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-write/actions.txt",
+      "retained": "acceptance/helpers/f00229.txt",
+      "sha256": "2e5e85fbb3041c4d781bc43c783a7737bb1b17a47d7a45443e5acba6939ce975"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-write/audit.jsonl",
+      "retained": "acceptance/helpers/f00230.jsonl",
+      "sha256": "68711a964de60776f728186a67d402f5f54c2aa8f92792e41b31aa5e98585c8f"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-write/boundary-config.json",
+      "retained": "acceptance/helpers/f00231.json",
+      "sha256": "2ba45baf4198640e70f6dc0ee7debef559f875600959ada44904ed816aa1bd1d"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-write/observations.json",
+      "retained": "acceptance/helpers/f00232.json",
+      "sha256": "dc35d4b1f8bfa8afc2e562e4ca130fb05e6cff5c448c2ce83e4f282fc89b6071"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-write/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-write/stdout.txt",
+      "retained": "acceptance/helpers/f00073.txt",
+      "sha256": "4d9ea96614820d635dced08745fa46fa82582fbd3a8ab4de805924ab6053dd76"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C08-calibrate-write-driver.json",
+      "retained": "acceptance/helpers/f00233.json",
+      "sha256": "5a0322f93da7665d14444eb1dc35d79534c46b0ea8f56bc40d2b23cfae72f815"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-credential/actions.txt",
+      "retained": "acceptance/helpers/f00336.txt",
+      "sha256": "701dc1753add866e2133e0d7b11746a283b3757ce8e678534cd4f25efa3fb08c"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-credential/audit.jsonl",
+      "retained": "acceptance/helpers/f00337.jsonl",
+      "sha256": "a18506de20b2f46bd4108d9a81dba59b18af0be7a72220ce131119988c07ad91"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-credential/boundary-config.json",
+      "retained": "acceptance/helpers/f00338.json",
+      "sha256": "9a5833bf6b913f2b14e75f8eba859a80e9083da2e90cbe4f604ac2c39feb20f8"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-credential/observations.json",
+      "retained": "acceptance/helpers/f00339.json",
+      "sha256": "7cfef972812d97ca14fc75829fc0721f7457f6a8fa6991c6c5af068c1ec6aeff"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-credential/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-credential/stdout.txt",
+      "retained": "acceptance/helpers/f00340.txt",
+      "sha256": "1735e73e9fe3cd6e610d901976673e9483de02eaf297277df7e0bdb635c8bf37"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-credential-driver.json",
+      "retained": "acceptance/helpers/f00341.json",
+      "sha256": "95c3fd878975cf6a3e3b0031b97165fa86caa8e40b5311be6d106796683ad9ac"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-lifecycle/actions.txt",
+      "retained": "acceptance/helpers/f00342.txt",
+      "sha256": "ff267a8a8e230759cf7c449e27c9aec98b4a56954db2fdfa8454179f01b4010d"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-lifecycle/audit.jsonl",
+      "retained": "acceptance/helpers/f00343.jsonl",
+      "sha256": "2fba34d2a8927e227cc5739f9449d21d4dc7454aeb83474e8ce5145a9f954d89"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-lifecycle/boundary-config.json",
+      "retained": "acceptance/helpers/f00344.json",
+      "sha256": "1a8ed6d153cb9ff576e4d66f86347858b8f85943e858fb1bfed64e4c21b3d6d7"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-lifecycle/observations.json",
+      "retained": "acceptance/helpers/f00345.json",
+      "sha256": "94dccd8e8db83e70ae76fdaddc36410a2347d1af660fb1dcd5f5da7eddda7c16"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-lifecycle/stderr.txt",
+      "retained": "acceptance/helpers/f00346.txt",
+      "sha256": "b7bebb1283bb8477802d78e3fb91f446a7595f87705b2235275156b4125d4d1e"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-lifecycle/stdout.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-lifecycle-driver.json",
+      "retained": "acceptance/helpers/f00347.json",
+      "sha256": "57478f57fa2b6e8ba730edab351411b19c1440530d76c1814d34b4ee2592fc9d"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-network/actions.txt",
+      "retained": "acceptance/helpers/f00348.txt",
+      "sha256": "955961017abb0e788ee8585cfe13779a4ae2db5d21b304274bee11e1758c1ff2"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-network/audit.jsonl",
+      "retained": "acceptance/helpers/f00349.jsonl",
+      "sha256": "ea877ccb44dfff5112f700a5299d7d7210182a53d6375341681985978fe605d7"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-network/boundary-config.json",
+      "retained": "acceptance/helpers/f00350.json",
+      "sha256": "7858a9bbdc5ed7a2b1f3294de4f4ac24f3892a6dd7675eede2d11898adf7708b"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-network/observations.json",
+      "retained": "acceptance/helpers/f00351.json",
+      "sha256": "cb972c6666763799e6234eaa1ab916efda45c5e7f14cbae19071f7d600660f0e"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-network/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-network/stdout.txt",
+      "retained": "acceptance/helpers/f00352.txt",
+      "sha256": "20fa80085c0cafcafa82b67e0fc1c37a43f0484c2a073813fb1315b10ac8b31c"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-network-driver.json",
+      "retained": "acceptance/helpers/f00353.json",
+      "sha256": "98e1d76c21a3fcff6c990d9b0fac256147cba610d6693c3bffb456aa48897a8b"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-spawn/actions.txt",
+      "retained": "acceptance/helpers/f00354.txt",
+      "sha256": "772ad31769905e4f9ab718dd915072851ee82d4b308ee2a6ab3fcd7a4a0da263"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-spawn/audit.jsonl",
+      "retained": "acceptance/helpers/f00355.jsonl",
+      "sha256": "9170d12404ac08c179f577ef522144c123f4b134440b4eb2a25a09014841a810"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-spawn/boundary-config.json",
+      "retained": "acceptance/helpers/f00356.json",
+      "sha256": "d6c3511d67ebd596409f7f87955de8c9968fbb79f2a62e92ffb97f401185df4a"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-spawn/observations.json",
+      "retained": "acceptance/helpers/f00357.json",
+      "sha256": "6ed0285a57acff7e478167deaf4c5d89b47f1b7aa8c25eb4fb16034844df0cf3"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-spawn/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-spawn/stdout.txt",
+      "retained": "acceptance/helpers/f00358.txt",
+      "sha256": "6d071da2db09475e6aa83103e9b8f59de754747756221748b3a9c45e0371499a"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-spawn-driver.json",
+      "retained": "acceptance/helpers/f00359.json",
+      "sha256": "5fedd25842d7543e0a23308f3659918f9feca8b0c68f92ca5e9f180ed74c4659"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-write/actions.txt",
+      "retained": "acceptance/helpers/f00360.txt",
+      "sha256": "f6230eade9463b91aa91242559958a38a6b8611e09724530148f9842b36bf6ef"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-write/audit.jsonl",
+      "retained": "acceptance/helpers/f00361.jsonl",
+      "sha256": "b5eec7839cf531d0e426eca419116a4be5f7a432e89dedf6e40945b318289bbd"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-write/boundary-config.json",
+      "retained": "acceptance/helpers/f00362.json",
+      "sha256": "a0b8406264d2abd45bd3a768242f8034a39b36649b1d782e5cebed01f8eeac9a"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-write/observations.json",
+      "retained": "acceptance/helpers/f00363.json",
+      "sha256": "3951e59ed1305dd2f0cffeb79b4521bfde28ad5744e1470fa3f81cd40577cab7"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-write/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-write/stdout.txt",
+      "retained": "acceptance/helpers/f00364.txt",
+      "sha256": "ff4eac03c3f2d012e59aed3b59f7a85ce01eb31424fd3f6f54426708a2607084"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C08-calibrate-write-driver.json",
+      "retained": "acceptance/helpers/f00365.json",
+      "sha256": "e03c9ef9c8b2fad48a1ba69b62ca6cf23fee7b606a70c0d493a7d1fb064fb29a"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-credential/actions.txt",
+      "retained": "acceptance/helpers/f00376.txt",
+      "sha256": "cda53dc57fc4d7e5f50c3a60253df1f14e5fcfc97698f179bbb7d739f6fe8cce"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-credential/audit.jsonl",
+      "retained": "acceptance/helpers/f00377.jsonl",
+      "sha256": "0bb213b15242114c0ceea87fb3bce02b8ecb2bc234e745599f7d8ed382925a1b"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-credential/boundary-config.json",
+      "retained": "acceptance/helpers/f00378.json",
+      "sha256": "70322a624ca0098e877c6b942a014481ad5020aec20f61f2d5ca4397ddc684de"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-credential/observations.json",
+      "retained": "acceptance/helpers/f00379.json",
+      "sha256": "b27ea0d22755e8342e9698f22c36dd24a0931b9d03523a9f049c342af3114f2b"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-credential/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-credential/stdout.txt",
+      "retained": "acceptance/helpers/f00340.txt",
+      "sha256": "1735e73e9fe3cd6e610d901976673e9483de02eaf297277df7e0bdb635c8bf37"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-credential-driver.json",
+      "retained": "acceptance/helpers/f00380.json",
+      "sha256": "7f5c993583ab451f7cee7352205961bf94c016ebc4cf4275ba7174da2c10bd04"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-lifecycle/actions.txt",
+      "retained": "acceptance/helpers/f00381.txt",
+      "sha256": "841b0d524ddc15eaf4832127e90eff8e1776cdab1e8f409a69b94b0653d94e85"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-lifecycle/audit.jsonl",
+      "retained": "acceptance/helpers/f00382.jsonl",
+      "sha256": "a602047cd9b6650bfb6123ba3dce43e0608d0d51dd2b9d1cc29384f5ce9f66f4"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-lifecycle/boundary-config.json",
+      "retained": "acceptance/helpers/f00383.json",
+      "sha256": "4a9093ce1282696c865e2d7b688318edcc52ed0fe89842efc7c7ef717d207b6b"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-lifecycle/observations.json",
+      "retained": "acceptance/helpers/f00384.json",
+      "sha256": "5298732b200540d50f95f07cac21d9d0678dbde4c730fe691b63a7074ac6b3c5"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-lifecycle/stderr.txt",
+      "retained": "acceptance/helpers/f00346.txt",
+      "sha256": "b7bebb1283bb8477802d78e3fb91f446a7595f87705b2235275156b4125d4d1e"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-lifecycle/stdout.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-lifecycle-driver.json",
+      "retained": "acceptance/helpers/f00385.json",
+      "sha256": "0b40cd41c66cc3185eaf5d9dc8af284c1a4d706d830f707ee2936094daeed68a"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-network/actions.txt",
+      "retained": "acceptance/helpers/f00386.txt",
+      "sha256": "b3865e1a43c11e04232c2cb2acb028d2031f57527c88335ef2fd8347e29b6592"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-network/audit.jsonl",
+      "retained": "acceptance/helpers/f00387.jsonl",
+      "sha256": "7e518d6d97816f6e234707d73c0d81f33c7d9aea427b110156b1a30c1b6214e3"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-network/boundary-config.json",
+      "retained": "acceptance/helpers/f00388.json",
+      "sha256": "d5d8c0f14a88ed4cdc5168f613d0f6280e883a149d0430361d1a6870b6011471"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-network/observations.json",
+      "retained": "acceptance/helpers/f00389.json",
+      "sha256": "3920a9df05b3261aeb2685771d41f4301d9d03ecb61c508b181b048fadab8af0"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-network/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-network/stdout.txt",
+      "retained": "acceptance/helpers/f00352.txt",
+      "sha256": "20fa80085c0cafcafa82b67e0fc1c37a43f0484c2a073813fb1315b10ac8b31c"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-network-driver.json",
+      "retained": "acceptance/helpers/f00390.json",
+      "sha256": "20af9aa9ffcce5cc5ead16227d5836d465e64965d0e6c6bee65db41701637046"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-spawn/actions.txt",
+      "retained": "acceptance/helpers/f00391.txt",
+      "sha256": "fd4e45dc9e6eb1368b9af27aa2ad4a341c62cb07a1a97b8756dc1e8fd5b4fe27"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-spawn/audit.jsonl",
+      "retained": "acceptance/helpers/f00392.jsonl",
+      "sha256": "e8624b4a9557dbf58a42483c69d8c17ae286ae6a685b11a7e39a1e3caa5f74fe"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-spawn/boundary-config.json",
+      "retained": "acceptance/helpers/f00393.json",
+      "sha256": "67fc4b32831115fc514c287cd284f6d0e0f583aa625048cb595a938aa09c699b"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-spawn/observations.json",
+      "retained": "acceptance/helpers/f00394.json",
+      "sha256": "ef89cf35797456a7cca2297a3c7d4ee0c460e0aac4e01a4d2b61efa5bc64ab65"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-spawn/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-spawn/stdout.txt",
+      "retained": "acceptance/helpers/f00358.txt",
+      "sha256": "6d071da2db09475e6aa83103e9b8f59de754747756221748b3a9c45e0371499a"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-spawn-driver.json",
+      "retained": "acceptance/helpers/f00395.json",
+      "sha256": "c2b91cc3a094ff25ee364fde0566bc366c91879a0704a8890d1bc39dbfef82d6"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-write/actions.txt",
+      "retained": "acceptance/helpers/f00396.txt",
+      "sha256": "8e285f87142ed4e8b3dfc179ee4520138ce176f79a565c17d9a0082a1e83d92e"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-write/audit.jsonl",
+      "retained": "acceptance/helpers/f00397.jsonl",
+      "sha256": "324296d7a073a608aa2ed81d5bc3fbdf178977c0d61c75d0a240b6c8998e6e7f"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-write/boundary-config.json",
+      "retained": "acceptance/helpers/f00398.json",
+      "sha256": "6ad16f3277596c5fdffb9e1773f742cb3f94853d890134d1fb656482ee9ef402"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-write/observations.json",
+      "retained": "acceptance/helpers/f00399.json",
+      "sha256": "bdc62be2cd3af8b3d36f78ba3025f6ae2e380f99fc34f2aaa80e65e7114abed5"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-write/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-write/stdout.txt",
+      "retained": "acceptance/helpers/f00364.txt",
+      "sha256": "ff4eac03c3f2d012e59aed3b59f7a85ce01eb31424fd3f6f54426708a2607084"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C08-calibrate-write-driver.json",
+      "retained": "acceptance/helpers/f00400.json",
+      "sha256": "03bf4f8b895093251784fc36093107a0718b43db6f6f8a6e385ae5f35f443414"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-write/actions.txt",
+      "retained": "acceptance/linux-replay/f00086.txt",
+      "sha256": "f6230eade9463b91aa91242559958a38a6b8611e09724530148f9842b36bf6ef"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-write/audit.jsonl",
+      "retained": "acceptance/linux-replay/f00087.jsonl",
+      "sha256": "b5eec7839cf531d0e426eca419116a4be5f7a432e89dedf6e40945b318289bbd"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-write/boundary-config.json",
+      "retained": "acceptance/linux-replay/f00088.json",
+      "sha256": "a0b8406264d2abd45bd3a768242f8034a39b36649b1d782e5cebed01f8eeac9a"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-write/observations.json",
+      "retained": "acceptance/linux-replay/f00089.json",
+      "sha256": "3951e59ed1305dd2f0cffeb79b4521bfde28ad5744e1470fa3f81cd40577cab7"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-write/stderr.txt",
+      "retained": "acceptance/linux-replay/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-write/stdout.txt",
+      "retained": "acceptance/linux-replay/f00090.txt",
+      "sha256": "ff4eac03c3f2d012e59aed3b59f7a85ce01eb31424fd3f6f54426708a2607084"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-network/actions.txt",
+      "retained": "acceptance/linux-replay/f00091.txt",
+      "sha256": "955961017abb0e788ee8585cfe13779a4ae2db5d21b304274bee11e1758c1ff2"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-network/audit.jsonl",
+      "retained": "acceptance/linux-replay/f00092.jsonl",
+      "sha256": "ea877ccb44dfff5112f700a5299d7d7210182a53d6375341681985978fe605d7"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-network/boundary-config.json",
+      "retained": "acceptance/linux-replay/f00093.json",
+      "sha256": "7858a9bbdc5ed7a2b1f3294de4f4ac24f3892a6dd7675eede2d11898adf7708b"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-network/observations.json",
+      "retained": "acceptance/linux-replay/f00094.json",
+      "sha256": "cb972c6666763799e6234eaa1ab916efda45c5e7f14cbae19071f7d600660f0e"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-network/stderr.txt",
+      "retained": "acceptance/linux-replay/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-network/stdout.txt",
+      "retained": "acceptance/linux-replay/f00095.txt",
+      "sha256": "20fa80085c0cafcafa82b67e0fc1c37a43f0484c2a073813fb1315b10ac8b31c"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-credential/actions.txt",
+      "retained": "acceptance/linux-replay/f00096.txt",
+      "sha256": "701dc1753add866e2133e0d7b11746a283b3757ce8e678534cd4f25efa3fb08c"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-credential/audit.jsonl",
+      "retained": "acceptance/linux-replay/f00097.jsonl",
+      "sha256": "a18506de20b2f46bd4108d9a81dba59b18af0be7a72220ce131119988c07ad91"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-credential/boundary-config.json",
+      "retained": "acceptance/linux-replay/f00098.json",
+      "sha256": "9a5833bf6b913f2b14e75f8eba859a80e9083da2e90cbe4f604ac2c39feb20f8"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-credential/observations.json",
+      "retained": "acceptance/linux-replay/f00099.json",
+      "sha256": "7cfef972812d97ca14fc75829fc0721f7457f6a8fa6991c6c5af068c1ec6aeff"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-credential/stderr.txt",
+      "retained": "acceptance/linux-replay/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-credential/stdout.txt",
+      "retained": "acceptance/linux-replay/f00100.txt",
+      "sha256": "1735e73e9fe3cd6e610d901976673e9483de02eaf297277df7e0bdb635c8bf37"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-spawn/actions.txt",
+      "retained": "acceptance/linux-replay/f00101.txt",
+      "sha256": "772ad31769905e4f9ab718dd915072851ee82d4b308ee2a6ab3fcd7a4a0da263"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-spawn/audit.jsonl",
+      "retained": "acceptance/linux-replay/f00102.jsonl",
+      "sha256": "9170d12404ac08c179f577ef522144c123f4b134440b4eb2a25a09014841a810"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-spawn/boundary-config.json",
+      "retained": "acceptance/linux-replay/f00103.json",
+      "sha256": "d6c3511d67ebd596409f7f87955de8c9968fbb79f2a62e92ffb97f401185df4a"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-spawn/observations.json",
+      "retained": "acceptance/linux-replay/f00104.json",
+      "sha256": "6ed0285a57acff7e478167deaf4c5d89b47f1b7aa8c25eb4fb16034844df0cf3"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-spawn/stderr.txt",
+      "retained": "acceptance/linux-replay/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-spawn/stdout.txt",
+      "retained": "acceptance/linux-replay/f00105.txt",
+      "sha256": "6d071da2db09475e6aa83103e9b8f59de754747756221748b3a9c45e0371499a"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-lifecycle/actions.txt",
+      "retained": "acceptance/linux-replay/f00106.txt",
+      "sha256": "ff267a8a8e230759cf7c449e27c9aec98b4a56954db2fdfa8454179f01b4010d"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-lifecycle/audit.jsonl",
+      "retained": "acceptance/linux-replay/f00107.jsonl",
+      "sha256": "2fba34d2a8927e227cc5739f9449d21d4dc7454aeb83474e8ce5145a9f954d89"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-lifecycle/boundary-config.json",
+      "retained": "acceptance/linux-replay/f00108.json",
+      "sha256": "1a8ed6d153cb9ff576e4d66f86347858b8f85943e858fb1bfed64e4c21b3d6d7"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-lifecycle/observations.json",
+      "retained": "acceptance/linux-replay/f00109.json",
+      "sha256": "94dccd8e8db83e70ae76fdaddc36410a2347d1af660fb1dcd5f5da7eddda7c16"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-lifecycle/stderr.txt",
+      "retained": "acceptance/linux-replay/f00110.txt",
+      "sha256": "b7bebb1283bb8477802d78e3fb91f446a7595f87705b2235275156b4125d4d1e"
+    },
+    {
+      "group": "linux-replay/linux-calibration",
+      "original": "C08-calibrate-lifecycle/stdout.txt",
+      "retained": "acceptance/linux-replay/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-altered-output/observations.json",
+      "retained": "acceptance/helpers/f00016.json",
+      "sha256": "d7e2101153854b36c46c2eb8ab84452ac8e83a7f3505d2b2325300340136c0ef"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-reversed-spans/observations.json",
+      "retained": "acceptance/helpers/f00025.json",
+      "sha256": "2bb8fd08869a183e7a620c27d547655325648009c978ff8661709142daa532cb"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-valid/observations.json",
+      "retained": "acceptance/helpers/f00033.json",
+      "sha256": "e2cf53d4fdf72b495c56f9da65ba57741057015711a5a44a5be306bd09f3f50b"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "brief-final/C06-wrong-digest/observations.json",
+      "retained": "acceptance/helpers/f00041.json",
+      "sha256": "2a0334672e36896947317d05b7930bbb0770eaf57518f6c13afbf44e993c16e5"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-credential/actions.txt",
+      "retained": "acceptance/helpers/f00112.txt",
+      "sha256": "7952e117ad57c9ff1054ea0aa33406b5e6963d4e4d3ccf875e9fd5fa49154f0c"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-credential/audit.jsonl",
+      "retained": "acceptance/helpers/f00113.jsonl",
+      "sha256": "2dfbca22534a46eb852509788457c9ae77422a0da6bb5df6e9cbcb8599f0c8ce"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-credential/boundary-config.json",
+      "retained": "acceptance/helpers/f00114.json",
+      "sha256": "2a0c0271a811f1054c84ba3f91cd885fefc4575db9025bbaadd8666b8ed4c7b7"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-credential/observations.json",
+      "retained": "acceptance/helpers/f00117.json",
+      "sha256": "e732b9b385d3db4cfc937833ffc4599b49a5aabc8b943efb6da64d4b9f55a89b"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-credential/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-credential/stdout.txt",
+      "retained": "acceptance/helpers/f00049.txt",
+      "sha256": "aed70d6906ce33df2cf936facb9f89f86228e0edd1edbd1fc732d6103d7870db"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-lifecycle/actions.txt",
+      "retained": "acceptance/helpers/f00118.txt",
+      "sha256": "57b882940480e0ca6ecc9815afb47146f3d810a104d1bdb7fca23c2927a6fddc"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-lifecycle/audit.jsonl",
+      "retained": "acceptance/helpers/f00119.jsonl",
+      "sha256": "fec22b486fcc83dd266b590f999ec75300d2924f571ef494dd6ee64b08c174c0"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-lifecycle/boundary-config.json",
+      "retained": "acceptance/helpers/f00120.json",
+      "sha256": "f32490288dd4baef479f548470c4c77217fb46eaa3cb3818eafdf91e62a5e160"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-lifecycle/observations.json",
+      "retained": "acceptance/helpers/f00121.json",
+      "sha256": "f855edbb5f73083a01f0c0b94b51048dbeda835aa59d6c7822afacc0af1bd659"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-lifecycle/stderr.txt",
+      "retained": "acceptance/helpers/f00122.txt",
+      "sha256": "cf023d4f050479431b30940fc564a3f6e37b3e8491083b20aa30377d18be6088"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-lifecycle/stdout.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-network/actions.txt",
+      "retained": "acceptance/helpers/f00123.txt",
+      "sha256": "6851d9b70bc7fe09afc8b8b743223d3b9af5689356f77945c0f708fdb8f87010"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-network/audit.jsonl",
+      "retained": "acceptance/helpers/f00124.jsonl",
+      "sha256": "6c73cac82f626989e56b076a048dd7aa9eaffe199ac86a087bb33ad72d29c913"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-network/boundary-config.json",
+      "retained": "acceptance/helpers/f00125.json",
+      "sha256": "8837c20ca1dcebb902767badc9f1542d59d115e23f9f3704a230ca81033b480f"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-network/observations.json",
+      "retained": "acceptance/helpers/f00126.json",
+      "sha256": "e4ad56622073d976a08ce0b4cda8d90f2669ba6911bf8fbdd25470fe4714c1e2"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-network/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-network/stdout.txt",
+      "retained": "acceptance/helpers/f00061.txt",
+      "sha256": "7f06da349e21393d7de6ae8f4b5d7255652ef06b365144a5da8e2bf7b2e78d8f"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-spawn/actions.txt",
+      "retained": "acceptance/helpers/f00127.txt",
+      "sha256": "5932de02d3b32310ccda9f12742f9e083ed83bbfffc558cba9b5ef2d856e9765"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-spawn/audit.jsonl",
+      "retained": "acceptance/helpers/f00128.jsonl",
+      "sha256": "3adcac6692b04546d2f3288b3bbf770fee2988f0891d48922fe73258600f2d22"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-spawn/boundary-config.json",
+      "retained": "acceptance/helpers/f00129.json",
+      "sha256": "d3747e3208ee73cedd06a297f865cbb384ced94c1fd5784494b446b56dfdd50a"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-spawn/observations.json",
+      "retained": "acceptance/helpers/f00130.json",
+      "sha256": "7c79449481e6965ae93badf035d09e4e6b3cc4e53ba58d0e3bd2f21d1435aa84"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-spawn/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-spawn/stdout.txt",
+      "retained": "acceptance/helpers/f00067.txt",
+      "sha256": "b0866a2e4c61c5b5b38ecf2a349733e8629a896e992a3fd68b51992576112c05"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-write/actions.txt",
+      "retained": "acceptance/helpers/f00131.txt",
+      "sha256": "db08c96c38b9c4a326f753f141fac697c902f59c28e686495cb7dbe0ec9bf1fc"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-write/audit.jsonl",
+      "retained": "acceptance/helpers/f00132.jsonl",
+      "sha256": "11802dcd2d6dc2048d96fe6fb63d3985adc852da3a901ac18fe2115a706375a2"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-write/boundary-config.json",
+      "retained": "acceptance/helpers/f00133.json",
+      "sha256": "aca67da41bfb7693e6b3001bdd8c456fd58268095347ce1168303d98cb41000f"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-write/observations.json",
+      "retained": "acceptance/helpers/f00134.json",
+      "sha256": "28af4b53c32f5b078250ee7c85f3513d18a8edef67a1741f5bdfa05742c1f2fe"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-write/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration-write/stdout.txt",
+      "retained": "acceptance/helpers/f00073.txt",
+      "sha256": "4d9ea96614820d635dced08745fa46fa82582fbd3a8ab4de805924ab6053dd76"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-credential/actions.txt",
+      "retained": "acceptance/helpers/f00135.txt",
+      "sha256": "b808cf90a8e06552fc01363bfe6d3b173d054751c2972d95a22c798dbb161061"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-credential/audit.jsonl",
+      "retained": "acceptance/helpers/f00136.jsonl",
+      "sha256": "701ec54f85a17957e25a0a9d5dc5e6e3a26932d6766ed8f91d7d6369effff607"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-credential/boundary-config.json",
+      "retained": "acceptance/helpers/f00137.json",
+      "sha256": "4f64bf457435021184272619815125f2089d23c710d11a86bb7b29c59088eb99"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-credential/observations.json",
+      "retained": "acceptance/helpers/f00138.json",
+      "sha256": "91e30fe8e9df34f4362bbd0c96bfad3f4c8d3d0eca70a9883c3851114c87c987"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-credential/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-credential/stdout.txt",
+      "retained": "acceptance/helpers/f00049.txt",
+      "sha256": "aed70d6906ce33df2cf936facb9f89f86228e0edd1edbd1fc732d6103d7870db"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-lifecycle/actions.txt",
+      "retained": "acceptance/helpers/f00139.txt",
+      "sha256": "52a31bc183da6d80372a0a7b99edd9b15f6f27299185c058dc5c2586237f12d3"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-lifecycle/audit.jsonl",
+      "retained": "acceptance/helpers/f00140.jsonl",
+      "sha256": "d1bbe7e1f56afa578b69a9893a6f92c3a853987a7e35151faaba3a02df43e808"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-lifecycle/boundary-config.json",
+      "retained": "acceptance/helpers/f00141.json",
+      "sha256": "dff16e52db7ce612e2aefa40676921e19a35fc06277522faa72aa7a17e2dc6f7"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-lifecycle/observations.json",
+      "retained": "acceptance/helpers/f00142.json",
+      "sha256": "b66df97052623babd4e9affbfc9fc3f7776db480d2b7a0678683fdef9ac9fc89"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-lifecycle/stderr.txt",
+      "retained": "acceptance/helpers/f00055.txt",
+      "sha256": "4476d78824489c64361ffaf6a83dedf325fabfbe9203e1dd83b7a8fc4464ca6c"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-lifecycle/stdout.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-network/actions.txt",
+      "retained": "acceptance/helpers/f00143.txt",
+      "sha256": "b0ba6d63dc88545a046e04b8ebd069d657586962653678d8a195ccbc22bd98c4"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-network/audit.jsonl",
+      "retained": "acceptance/helpers/f00144.jsonl",
+      "sha256": "f0a8e8b86c2ce24e6b2ba97f3925cf100dce1c8d8157b609009f14ba1f2d31fe"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-network/boundary-config.json",
+      "retained": "acceptance/helpers/f00145.json",
+      "sha256": "c0b5c93c42b94f088007aa28bc0557be092b20cb1d49ed01a96526d1915a8156"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-network/observations.json",
+      "retained": "acceptance/helpers/f00146.json",
+      "sha256": "d56eb49876a131699b774f4b430ef52c1f04934704ffd60ee6b89b53d8f178e4"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-network/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-network/stdout.txt",
+      "retained": "acceptance/helpers/f00061.txt",
+      "sha256": "7f06da349e21393d7de6ae8f4b5d7255652ef06b365144a5da8e2bf7b2e78d8f"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-spawn/actions.txt",
+      "retained": "acceptance/helpers/f00147.txt",
+      "sha256": "f8e2cf44b115e42b14644adbb2ef8e42461f0ae16349c0b59be4555cf0def130"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-spawn/audit.jsonl",
+      "retained": "acceptance/helpers/f00148.jsonl",
+      "sha256": "5585a7cd7b4fbeddfef4a3d5f36b39392232816b08ca73a5e652155d87bf49a0"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-spawn/boundary-config.json",
+      "retained": "acceptance/helpers/f00149.json",
+      "sha256": "06fe2b873c4f1c0a9f844d9b978fbcba1b9d7b287f72fecd20decae59e4fdc40"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-spawn/observations.json",
+      "retained": "acceptance/helpers/f00150.json",
+      "sha256": "5eafee4eb2c7a18f188c925caed00cebf59b6262940d2cd6ab21e0baf75b8bee"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-spawn/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-spawn/stdout.txt",
+      "retained": "acceptance/helpers/f00067.txt",
+      "sha256": "b0866a2e4c61c5b5b38ecf2a349733e8629a896e992a3fd68b51992576112c05"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-write/actions.txt",
+      "retained": "acceptance/helpers/f00151.txt",
+      "sha256": "d63da1a0d9c07e33b9ebd139241abc55b6a731952f19200c30e8905ecaa5a8c0"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-write/audit.jsonl",
+      "retained": "acceptance/helpers/f00152.jsonl",
+      "sha256": "6b8dd9eec1853cc4a7a911ebd8c0866d359fc1817d8141d663159c269d78e688"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-write/boundary-config.json",
+      "retained": "acceptance/helpers/f00153.json",
+      "sha256": "af7b0ec3b512787ad112c6adf4e8eea571f1d09b6a8b6aed257679c2b369280d"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-write/observations.json",
+      "retained": "acceptance/helpers/f00154.json",
+      "sha256": "c90dba21c69164ed6af450a3fd19ecc5369171cf53acf79843c727f2e353421d"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-write/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "calibration2-write/stdout.txt",
+      "retained": "acceptance/helpers/f00073.txt",
+      "sha256": "4d9ea96614820d635dced08745fa46fa82582fbd3a8ab4de805924ab6053dd76"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C01-selected/observations.json",
+      "retained": "acceptance/helpers/f00159.json",
+      "sha256": "ba974065c6285313326ff4f34d8d252053669397010aeb0f2819264be56d79a2"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C02-preflight/observations.json",
+      "retained": "acceptance/helpers/f00164.json",
+      "sha256": "e8d83c46046b7a2008ba6dc9579adad1112317429ca32ca4479a239ceee720d8"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-payload/observations.json",
+      "retained": "acceptance/helpers/f00170.json",
+      "sha256": "01fe672ecb1984646228be620896b228655e86a50f52dad306a604520f44b153"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-root/observations.json",
+      "retained": "acceptance/helpers/f00176.json",
+      "sha256": "93792c4397596f90f4b694baae903d0f8ef2b2b9d5232a38072258d6317a4daa"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C03-version/observations.json",
+      "retained": "acceptance/helpers/f00182.json",
+      "sha256": "ac5da93c023453faf4f775132b1403180d0bbf77e7fbc093365a57a9a452629e"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-altered-output/observations.json",
+      "retained": "acceptance/helpers/f00189.json",
+      "sha256": "ad91a6bfea1c51f4d4986b41bb6d6a2a39e76c119f69ee50e7074a635d6dfd42"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-reversed-spans/observations.json",
+      "retained": "acceptance/helpers/f00195.json",
+      "sha256": "d9ed7dadc4702208ace8e38e7478f133ac39d45f220bd861d45ade53b00e606c"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-valid/observations.json",
+      "retained": "acceptance/helpers/f00201.json",
+      "sha256": "c7292f67e89d79ff045a568154508675cbae04e2fcd1af8e0c066d5ce79fa882"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C06-wrong-digest/observations.json",
+      "retained": "acceptance/helpers/f00207.json",
+      "sha256": "09b842b5a9f8e036f6da69f2a1c8972ccdb0e19c95f7afc2533fbbb3c20eed1b"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C01-selected/observations.json",
+      "retained": "acceptance/helpers/f00281.json",
+      "sha256": "3054616d69517accdbd22922203770fec4eabef0b3bef3ef7eefb3aa77a75c1a"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C02-preflight/observations.json",
+      "retained": "acceptance/helpers/f00287.json",
+      "sha256": "b3733166207c88f1ef88295f3d4f099b19eabbd21d70872e864e2f3ad625f9cb"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-payload/observations.json",
+      "retained": "acceptance/helpers/f00293.json",
+      "sha256": "d02a1e1d2a8dd453eaee702da766d87a0b8752ce53e36af16d338c0ef66c0849"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-root/observations.json",
+      "retained": "acceptance/helpers/f00299.json",
+      "sha256": "a6fdd1612f45049c2122906c252295c4c5dda83e8d4c66a05a32347583fbfd81"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C03-version/observations.json",
+      "retained": "acceptance/helpers/f00305.json",
+      "sha256": "d91ff115177f5bfa228b346739535dc4c4e180647c186bddad4ca8be576edb11"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-altered-output/observations.json",
+      "retained": "acceptance/helpers/f00312.json",
+      "sha256": "c83eeca436f437c98d76bfa0c39ef9592b442d316c66f133e707750e3b7df8e8"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-reversed-spans/observations.json",
+      "retained": "acceptance/helpers/f00319.json",
+      "sha256": "db746a98f45d6fa666c86db35e3206dbe16c7c7c1901640be64f66399906936a"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-valid/observations.json",
+      "retained": "acceptance/helpers/f00326.json",
+      "sha256": "dcee06d4dea6b0d150968e26a04d8ddb60f0e973401204de451feae6f50e2ef6"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C06-wrong-digest/observations.json",
+      "retained": "acceptance/helpers/f00333.json",
+      "sha256": "93291941948b04b3187fcb207ec66f77cf84fc84767804ea0acb51653d244d87"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix1/C01-selected/observations.json",
+      "retained": "acceptance/helpers/f00373.json",
+      "sha256": "60753d4689e541dbafd4d77f195c498c045bef456062955221320566767b763f"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C04-direct-invalid-explicit/observations.json",
+      "retained": "acceptance/instructions/f/00110.bin",
+      "sha256": "303953c66d3082fb80d42562de9cdc5a03956c7fcb47f971366ba2109b686851"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-01-version/observations.json",
+      "retained": "acceptance/instructions/f/00127.bin",
+      "sha256": "e2aa387a31886336199febf0c6a92ffb8be68da21397f914c83503cb99f71abc"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-02-identity/observations.json",
+      "retained": "acceptance/instructions/f/00144.bin",
+      "sha256": "c5b0c0c786eaba861cf2140e75204ee1b62ef99b95c8854c4c074ec0ee4b50c3"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-03-doctor/observations.json",
+      "retained": "acceptance/instructions/f/00161.bin",
+      "sha256": "313a2cff8f49b6db82fe2e95bb66aa24b316bece78947041e27ce2c43b62ab20"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-canonical-supplemental-helper/observations.json",
+      "retained": "acceptance/instructions/f/00179.bin",
+      "sha256": "a03f5a2c154d314ae97c091e24242947ac095e6df6d3cad0fd502a62d045a2f6"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-01-version/observations.json",
+      "retained": "acceptance/instructions/f/00196.bin",
+      "sha256": "af32cd9dd35f9b1130b28d640aa79883f87875534b923d20d3dcbf5095759ff2"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-02-identity/observations.json",
+      "retained": "acceptance/instructions/f/00213.bin",
+      "sha256": "14805d34b3ae76a66e0beff54872773064a92db303dfdfd0f663b04601c04e6a"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-03-doctor/observations.json",
+      "retained": "acceptance/instructions/f/00230.bin",
+      "sha256": "54e0e9c13683fbb5040335194e4b8e6afe974996d998db891f78c40e15f9c533"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-final-04-helper/observations.json",
+      "retained": "acceptance/instructions/f/00248.bin",
+      "sha256": "3918b13fe73afd3de82c0af0450db03f115d1ed856a4d204179ee251cbd6a4de"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-01-version/observations.json",
+      "retained": "acceptance/instructions/f/00265.bin",
+      "sha256": "92a0f3de2732c45dc7ae13cf5d98a41a76cd9fccb1231009fb5554d730d519c4"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-02-identity/observations.json",
+      "retained": "acceptance/instructions/f/00282.bin",
+      "sha256": "7e90d02d11aa91e823d77868612e670352a04dc651833450f89c2c5f23e4e49e"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-03-doctor/observations.json",
+      "retained": "acceptance/instructions/f/00299.bin",
+      "sha256": "50292e43035114af6a21276b82f8681cbb2c80b59ba92dae90c84d6dfcbe7fe3"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C05-unicode-04-helper/observations.json",
+      "retained": "acceptance/instructions/f/00317.bin",
+      "sha256": "35426c841a08d4d06e7cc8597e9f163ec7605d19b26a1db8e0c23300e1b900f7"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C07-01-version/observations.json",
+      "retained": "acceptance/instructions/f/00334.bin",
+      "sha256": "b0acffbba9166f6d090e8961f8342291960cec6919f9d1a54c154640692f97ca"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C07-02-identity/observations.json",
+      "retained": "acceptance/instructions/f/00351.bin",
+      "sha256": "3f09aa84c573b9f655505a132df6e8c4d3171f8afc6972e1f921e2f47ddb3db6"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C07-03-doctor/observations.json",
+      "retained": "acceptance/instructions/f/00368.bin",
+      "sha256": "cc3116ac3cebfcf0cf47200fcc4ae512635d2bf44e74a2d065578ac9eddac664"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-write/actions.txt",
+      "retained": "acceptance/instructions/f/00457.bin",
+      "sha256": "d63da1a0d9c07e33b9ebd139241abc55b6a731952f19200c30e8905ecaa5a8c0"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-write/audit.jsonl",
+      "retained": "acceptance/instructions/f/00458.bin",
+      "sha256": "6b8dd9eec1853cc4a7a911ebd8c0866d359fc1817d8141d663159c269d78e688"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-write/boundary-config.json",
+      "retained": "acceptance/instructions/f/00459.bin",
+      "sha256": "af7b0ec3b512787ad112c6adf4e8eea571f1d09b6a8b6aed257679c2b369280d"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-write/observations.json",
+      "retained": "acceptance/instructions/f/00471.bin",
+      "sha256": "c90dba21c69164ed6af450a3fd19ecc5369171cf53acf79843c727f2e353421d"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-write/stderr.txt",
+      "retained": "acceptance/instructions/f/00472.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-write/stdout.txt",
+      "retained": "acceptance/instructions/f/00473.bin",
+      "sha256": "4d9ea96614820d635dced08745fa46fa82582fbd3a8ab4de805924ab6053dd76"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-network/actions.txt",
+      "retained": "acceptance/instructions/f/00474.bin",
+      "sha256": "b0ba6d63dc88545a046e04b8ebd069d657586962653678d8a195ccbc22bd98c4"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-network/audit.jsonl",
+      "retained": "acceptance/instructions/f/00475.bin",
+      "sha256": "f0a8e8b86c2ce24e6b2ba97f3925cf100dce1c8d8157b609009f14ba1f2d31fe"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-network/boundary-config.json",
+      "retained": "acceptance/instructions/f/00476.bin",
+      "sha256": "c0b5c93c42b94f088007aa28bc0557be092b20cb1d49ed01a96526d1915a8156"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-network/observations.json",
+      "retained": "acceptance/instructions/f/00488.bin",
+      "sha256": "d56eb49876a131699b774f4b430ef52c1f04934704ffd60ee6b89b53d8f178e4"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-network/stderr.txt",
+      "retained": "acceptance/instructions/f/00489.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-network/stdout.txt",
+      "retained": "acceptance/instructions/f/00490.bin",
+      "sha256": "7f06da349e21393d7de6ae8f4b5d7255652ef06b365144a5da8e2bf7b2e78d8f"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-credential/actions.txt",
+      "retained": "acceptance/instructions/f/00491.bin",
+      "sha256": "b808cf90a8e06552fc01363bfe6d3b173d054751c2972d95a22c798dbb161061"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-credential/audit.jsonl",
+      "retained": "acceptance/instructions/f/00492.bin",
+      "sha256": "701ec54f85a17957e25a0a9d5dc5e6e3a26932d6766ed8f91d7d6369effff607"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-credential/boundary-config.json",
+      "retained": "acceptance/instructions/f/00493.bin",
+      "sha256": "4f64bf457435021184272619815125f2089d23c710d11a86bb7b29c59088eb99"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-credential/observations.json",
+      "retained": "acceptance/instructions/f/00505.bin",
+      "sha256": "91e30fe8e9df34f4362bbd0c96bfad3f4c8d3d0eca70a9883c3851114c87c987"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-credential/stderr.txt",
+      "retained": "acceptance/instructions/f/00506.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-credential/stdout.txt",
+      "retained": "acceptance/instructions/f/00507.bin",
+      "sha256": "aed70d6906ce33df2cf936facb9f89f86228e0edd1edbd1fc732d6103d7870db"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-spawn/actions.txt",
+      "retained": "acceptance/instructions/f/00508.bin",
+      "sha256": "f8e2cf44b115e42b14644adbb2ef8e42461f0ae16349c0b59be4555cf0def130"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-spawn/audit.jsonl",
+      "retained": "acceptance/instructions/f/00509.bin",
+      "sha256": "5585a7cd7b4fbeddfef4a3d5f36b39392232816b08ca73a5e652155d87bf49a0"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-spawn/boundary-config.json",
+      "retained": "acceptance/instructions/f/00510.bin",
+      "sha256": "06fe2b873c4f1c0a9f844d9b978fbcba1b9d7b287f72fecd20decae59e4fdc40"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-spawn/observations.json",
+      "retained": "acceptance/instructions/f/00522.bin",
+      "sha256": "5eafee4eb2c7a18f188c925caed00cebf59b6262940d2cd6ab21e0baf75b8bee"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-spawn/stderr.txt",
+      "retained": "acceptance/instructions/f/00523.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-spawn/stdout.txt",
+      "retained": "acceptance/instructions/f/00524.bin",
+      "sha256": "b0866a2e4c61c5b5b38ecf2a349733e8629a896e992a3fd68b51992576112c05"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-lifecycle/actions.txt",
+      "retained": "acceptance/instructions/f/00525.bin",
+      "sha256": "52a31bc183da6d80372a0a7b99edd9b15f6f27299185c058dc5c2586237f12d3"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-lifecycle/audit.jsonl",
+      "retained": "acceptance/instructions/f/00526.bin",
+      "sha256": "d1bbe7e1f56afa578b69a9893a6f92c3a853987a7e35151faaba3a02df43e808"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-lifecycle/boundary-config.json",
+      "retained": "acceptance/instructions/f/00527.bin",
+      "sha256": "dff16e52db7ce612e2aefa40676921e19a35fc06277522faa72aa7a17e2dc6f7"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-lifecycle/observations.json",
+      "retained": "acceptance/instructions/f/00539.bin",
+      "sha256": "b66df97052623babd4e9affbfc9fc3f7776db480d2b7a0678683fdef9ac9fc89"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-lifecycle/stderr.txt",
+      "retained": "acceptance/instructions/f/00540.bin",
+      "sha256": "4476d78824489c64361ffaf6a83dedf325fabfbe9203e1dd83b7a8fc4464ca6c"
+    },
+    {
+      "group": "instructions",
+      "original": "boundary-calibration/calibration2-lifecycle/stdout.txt",
+      "retained": "acceptance/instructions/f/00541.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "limits": [
+    "Helper tests and fixed Linux replay are distinct from Windows instruction observations.",
+    "Native activation, live migration and production sandbox qualification are not claimed.",
+    "Original failed observations retain their failed verdicts; this index does not replace them."
+  ],
+  "reports": [
+    "acceptance/helpers/REPORT.md",
+    "acceptance/instructions/report.md",
+    "acceptance/linux-replay/REPORT.md"
+  ]
+}

@@ -1,0 +1,25 @@
+Combined review copy; exact original bytes remain at each retained path below.
+
+--- linux-replay/linux-replay: C07-01-version/actions.txt -> acceptance/linux-replay/f00047.txt ---
+["/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python", "-I", "-B", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", "--config", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-observer-replay-20260911/C07-01-version/boundary-config.json", "--mode", "evaluator", "--", "--version"]
+
+
+--- linux-replay/linux-replay: C07-02-identity/actions.txt -> acceptance/linux-replay/f00052.txt ---
+["/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python", "-I", "-B", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", "--config", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-observer-replay-20260911/C07-02-identity/boundary-config.json", "--mode", "evaluator", "--", "identity", "--role", "released-evaluator", "--expected-version", "0.16.0", "--expected-root", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0", "--checkout-root", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository", "--require-isolated-python", "--evaluator-payload-sha256", "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c", "--evaluator-wheel-sha256", "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae"]
+
+
+--- linux-replay/linux-replay: C07-03-doctor/actions.txt -> acceptance/linux-replay/f00057.txt ---
+["/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python", "-I", "-B", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", "--config", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-observer-replay-20260911/C07-03-doctor/boundary-config.json", "--mode", "evaluator", "--", "doctor", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository"]
+
+
+--- instructions: independent/trace/C07-01-version/actions.txt -> acceptance/instructions/f/00320.bin ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C07-01-version\\boundary-config.json", "--mode", "evaluator", "--", "--version"]
+
+
+--- instructions: independent/trace/C07-02-identity/actions.txt -> acceptance/instructions/f/00337.bin ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C07-02-identity\\boundary-config.json", "--mode", "evaluator", "--", "identity", "--role", "released-evaluator", "--expected-version", "0.16.0", "--expected-root", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016", "--checkout-root", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository", "--require-isolated-python", "--evaluator-payload-sha256", "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c", "--evaluator-wheel-sha256", "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae"]
+
+
+--- instructions: independent/trace/C07-03-doctor/actions.txt -> acceptance/instructions/f/00354.bin ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\boundary-final\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\trace\\C07-03-doctor\\boundary-config.json", "--mode", "evaluator", "--", "doctor", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository"]
+

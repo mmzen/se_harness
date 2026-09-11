@@ -1,0 +1,4 @@
+usage: check_retention_paths.py [-h] --root ROOT
+                                [--checkout-root CHECKOUT_ROOT]
+                                [--max-full-path MAX_FULL_PATH]
+check_retention_paths.py: error: the following arguments are required: --root

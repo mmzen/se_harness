@@ -1,0 +1,18 @@
+{
+  "classification": "Actual independent model choice in grouped fixture, not helper-determined activation or native-host execution",
+  "source_file": "C07-source.txt",
+  "source_sha256": "6dc2cf58e1ffc7b86c23d0212a8d3db0c5e4e8e8c0fa569ab44b019339b77ab4",
+  "candidate_skill_sha256": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51",
+  "outcome": "stopped",
+  "stop_condition": "current-state-result-required",
+  "operator_output": "The supplied note does not establish the current status of WO-BRF-001 or its next action. Use harness-orient to obtain a current structured result.",
+  "product_trace_records": ["C07-01-version", "C07-02-identity", "C07-03-doctor"],
+  "brief_helper_calls": 0,
+  "orient_calls": 0,
+  "current_state_query_calls": 0,
+  "prompt_count": 0,
+  "claimed_artifact_state": null,
+  "expected": "Stop; do not invent state or invoke an unrequested query",
+  "observed": "Stopped after valid identity/integrity checks; recommended orientation without dispatching it",
+  "conclusion": "pass"
+}

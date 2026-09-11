@@ -1,0 +1,95 @@
+{
+  "classification": "Explicit command replay inputs from the independent Windows observer; no new model behavior or authority decisions",
+  "assets": {
+    "raw-assets/docs/engineering/evidence-demo/capabilities/CAP-EVD-001.md": "d5f9f8b58a3c0a3d45cb02920d34f54ff2e095be40efd7ab7af414e247e70bc2",
+    "raw-assets/docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md": "f2c89d47916f74aaee16f6ccfad1f4f151eb6ac8cfb41c218afc53ceecb4853e",
+    "raw-assets/docs/engineering/evidence-demo/intent/INT-EVD-001.md": "e9e5ffd5a133dc8be99796fdb9da8cb7a508e7b3da0b57c5c0618494700889a1",
+    "raw-assets/docs/engineering/evidence-demo/release/REL-EVD-001.md": "cf19415796f52831383f9dc71d3277920a47cfeeb1d21f42b3fc8f68bd343a3f",
+    "raw-assets/docs/engineering/evidence-demo/requirements/REQ-EVD-001.md": "ee3b34a255fa68a9d267bc9aba5351e698fa94acd65812f0f552406f43e6cb1a",
+    "raw-assets/docs/engineering/evidence-demo/specifications/SPEC-EVD-001.md": "e6f2d20e5dd15742b395664bec8bed246708a007b1b9ecefb992d078e99d38b6",
+    "raw-assets/docs/engineering/evidence-demo/verification/VER-EVD-001.md": "90ae15da01e54cc28ed0aa5c0ad1a9941c5eb3f264baab29ca15455fc843028b",
+    "raw-assets/docs/engineering/evidence-demo/work-orders/WO-EVD-001.md": "4a02f6368953e25da2f014a48e1c195c5e50e1677cf008c853a5d92ec0dffed8",
+    "raw-assets/src/feature.py": "823631af5995f211d18083934fb01e483ec721a1499c03232a028664fef74afa",
+    "oracle.md": "4b791ff512aeb370b6a469789e5a4865a3744759c4b377daeb0c286c72fad401",
+    "raw-scenarios.json": "d13f94233ad1b751868f92d8b3e6856ebd8ffb005490d22aff977a18f040e7bd",
+    "raw-assets-manifest.json": "bf2421143256efbee080cc8999390698450eb32dfe1b88621255f2ae04054385",
+    "fixture_edit.py": "e23edeeb309d1a836c95950e939ca3dffbd7900ef06ea00a6e7c0e7fc8da3f31",
+    "inspect_fixture.py": "67ca1ff1b61222dc7b138b6ac580ffae2eb84a9677c83a5e32c1f71be33f5b59",
+    "unavailable_inspection.py": "165ee56e1433344ca79414104a651af1066e83aa782d1b8431c8f46e735fdf01",
+    "session-context.py": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb"
+  },
+  "records": [
+    {
+      "label": "evd03-partial-context",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/session-context.py",
+        "--repo",
+        "{repo}",
+        "--environment",
+        "{environment}",
+        "--version",
+        "0.16.0",
+        "--payload-sha256",
+        "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "--archive-sha256",
+        "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "--host",
+        "codex",
+        "--context-limit",
+        "32768",
+        "--read-limit",
+        "32768"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": "{\"hook_event_name\": \"SessionStart\", \"source\": \"resume\", \"cwd\": \"{repo}\"}",
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd03-partial-context.json",
+      "original_sha256": "9707df2db2f7b4991b807dad93cdfa05617d3bd9f36e8462b96d0128d49dbcac"
+    },
+    {
+      "label": "evd03-partial-injected-setup",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/fixture_edit.py",
+        "--repo",
+        "{repo}",
+        "--path",
+        "docs/engineering/evidence-demo/verification-records/VREC-EVD-001.md",
+        "--text-file",
+        "{output}/corrected-repository/docs/engineering/evidence-demo/verification-records/VREC-EVD-001.md"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "docs/engineering/evidence-demo/verification-records/VREC-EVD-001.md"
+      ],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd03-partial-injected-setup.json",
+      "original_sha256": "8f1ca7c7bbfc3e4a10ed04ffb7f55ac8ada19ec12d277e69318b4de1c9e4a79b"
+    },
+    {
+      "label": "evd03-partial-inspection-unavailable",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/unavailable_inspection.py"
+      ],
+      "expected_exit": 13,
+      "expected_changed_paths": [],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd03-partial-inspection-unavailable.json",
+      "original_sha256": "0ddbc75c0776cdda0fc41a14726bc143cbecacbd43291f7ca5d6f290cd389cda"
+    }
+  ]
+}

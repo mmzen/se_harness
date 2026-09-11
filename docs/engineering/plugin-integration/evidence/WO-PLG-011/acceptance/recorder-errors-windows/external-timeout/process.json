@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-evidence-skill\\tests\\plugin_integration\\evidence-skill\\portable\\run_external_replay.py",
+    "--bundle",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\external-timeout\\bundle",
+    "--output",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\external-timeout\\run",
+    "--command-timeout",
+    "2",
+    "--replay-root",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\external-timeout\\native"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\external-timeout",
+  "exit_code": 1,
+  "stdout": "{\"passed\": false, \"output\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-recorder-error-probes-20260911-attempt1\\\\external-timeout\\\\run\"}\r\n",
+  "stderr": "Traceback (most recent call last):\r\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-evidence-skill\\tests\\plugin_integration\\evidence-skill\\portable\\run_external_replay.py\", line 168, in <module>\r\n    main()\r\n    ~~~~^^\r\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-evidence-skill\\tests\\plugin_integration\\evidence-skill\\portable\\run_external_replay.py\", line 149, in main\r\n    raise command_error\r\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-evidence-skill\\tests\\plugin_integration\\evidence-skill\\portable\\run_external_replay.py\", line 125, in main\r\n    result = subprocess.run(argv, cwd=output, env=env, capture_output=True,\r\n                            timeout=args.command_timeout)\r\n  File \"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\subprocess.py\", line 557, in run\r\n    stdout, stderr = process.communicate(input, timeout=timeout)\r\n                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\subprocess.py\", line 1221, in communicate\r\n    stdout, stderr = self._communicate(input, endtime, timeout)\r\n                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\subprocess.py\", line 1664, in _communicate\r\n    raise TimeoutExpired(self.args, orig_timeout)\r\nsubprocess.TimeoutExpired: Command '['C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\se-harness-plugin-eval-016\\\\Scripts\\\\python.exe', '-I', '-B', '-c', 'from pathlib import Path; import sys,time; p=Path(sys.argv[-1]); p.mkdir(parents=True,exist_ok=True); (p/\\'invocations.jsonl\\').write_text(\\'{}\\\\n\\',encoding=\\'utf8\\'); (p/\\'effects.jsonl\\').write_text(\\'{}\\\\n\\',encoding=\\'utf8\\'); (p/\\'remote-refs.json\\').write_text(\\'{\"probe\":true}\\\\n\\',encoding=\\'utf8\\'); print(\\'probe-stdout\\',flush=True); print(\\'probe-stderr\\',file=sys.stderr,flush=True); time.sleep(30)', '--control-dir', 'C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-04\\\\hel\\\\work\\\\plugin-recorder-error-probes-20260911-attempt1\\\\external-timeout\\\\run\\\\fixtures/external-control-calibration']' timed out after 2.0 seconds\r\n"
+}

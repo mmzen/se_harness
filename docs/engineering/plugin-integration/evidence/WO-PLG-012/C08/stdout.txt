@@ -1,0 +1,153 @@
+Combined review copy; exact original bytes remain at each retained path below.
+
+--- helpers/windows: brief-final/C08-calibrate-credential/stdout.txt -> acceptance/helpers/f00049.txt ---
+{"canary": ["credential"], "denied": true}
+
+
+--- helpers/windows: brief-final/C08-calibrate-lifecycle/stdout.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: brief-final/C08-calibrate-network/stdout.txt -> acceptance/helpers/f00061.txt ---
+{"canary": ["network"], "denied": true}
+
+
+--- helpers/windows: brief-final/C08-calibrate-spawn/stdout.txt -> acceptance/helpers/f00067.txt ---
+{"canary": ["spawn"], "denied": true}
+
+
+--- helpers/windows: brief-final/C08-calibrate-write/stdout.txt -> acceptance/helpers/f00073.txt ---
+{"canary": ["write"], "denied": true}
+
+
+--- helpers/windows: matrix1/C08-calibrate-credential/stdout.txt -> acceptance/helpers/f00049.txt ---
+{"canary": ["credential"], "denied": true}
+
+
+--- helpers/windows: matrix1/C08-calibrate-lifecycle/stdout.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: matrix1/C08-calibrate-network/stdout.txt -> acceptance/helpers/f00061.txt ---
+{"canary": ["network"], "denied": true}
+
+
+--- helpers/windows: matrix1/C08-calibrate-spawn/stdout.txt -> acceptance/helpers/f00067.txt ---
+{"canary": ["spawn"], "denied": true}
+
+
+--- helpers/windows: matrix1/C08-calibrate-write/stdout.txt -> acceptance/helpers/f00073.txt ---
+{"canary": ["write"], "denied": true}
+
+
+--- helpers/linux: matrix-final/C08-calibrate-credential/stdout.txt -> acceptance/helpers/f00340.txt ---
+{"canary": ["credential"], "denied": true}
+
+
+--- helpers/linux: matrix-final/C08-calibrate-lifecycle/stdout.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix-final/C08-calibrate-network/stdout.txt -> acceptance/helpers/f00352.txt ---
+{"canary": ["network"], "denied": true}
+
+
+--- helpers/linux: matrix-final/C08-calibrate-spawn/stdout.txt -> acceptance/helpers/f00358.txt ---
+{"canary": ["spawn"], "denied": true}
+
+
+--- helpers/linux: matrix-final/C08-calibrate-write/stdout.txt -> acceptance/helpers/f00364.txt ---
+{"canary": ["write"], "denied": true}
+
+
+--- helpers/linux: matrix1/C08-calibrate-credential/stdout.txt -> acceptance/helpers/f00340.txt ---
+{"canary": ["credential"], "denied": true}
+
+
+--- helpers/linux: matrix1/C08-calibrate-lifecycle/stdout.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix1/C08-calibrate-network/stdout.txt -> acceptance/helpers/f00352.txt ---
+{"canary": ["network"], "denied": true}
+
+
+--- helpers/linux: matrix1/C08-calibrate-spawn/stdout.txt -> acceptance/helpers/f00358.txt ---
+{"canary": ["spawn"], "denied": true}
+
+
+--- helpers/linux: matrix1/C08-calibrate-write/stdout.txt -> acceptance/helpers/f00364.txt ---
+{"canary": ["write"], "denied": true}
+
+
+--- linux-replay/linux-calibration: C08-calibrate-write/stdout.txt -> acceptance/linux-replay/f00090.txt ---
+{"canary": ["write"], "denied": true}
+
+
+--- linux-replay/linux-calibration: C08-calibrate-network/stdout.txt -> acceptance/linux-replay/f00095.txt ---
+{"canary": ["network"], "denied": true}
+
+
+--- linux-replay/linux-calibration: C08-calibrate-credential/stdout.txt -> acceptance/linux-replay/f00100.txt ---
+{"canary": ["credential"], "denied": true}
+
+
+--- linux-replay/linux-calibration: C08-calibrate-spawn/stdout.txt -> acceptance/linux-replay/f00105.txt ---
+{"canary": ["spawn"], "denied": true}
+
+
+--- linux-replay/linux-calibration: C08-calibrate-lifecycle/stdout.txt -> acceptance/linux-replay/f00017.txt ---
+
+
+--- helpers/windows: calibration-credential/stdout.txt -> acceptance/helpers/f00049.txt ---
+{"canary": ["credential"], "denied": true}
+
+
+--- helpers/windows: calibration-lifecycle/stdout.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: calibration-network/stdout.txt -> acceptance/helpers/f00061.txt ---
+{"canary": ["network"], "denied": true}
+
+
+--- helpers/windows: calibration-spawn/stdout.txt -> acceptance/helpers/f00067.txt ---
+{"canary": ["spawn"], "denied": true}
+
+
+--- helpers/windows: calibration-write/stdout.txt -> acceptance/helpers/f00073.txt ---
+{"canary": ["write"], "denied": true}
+
+
+--- helpers/windows: calibration2-credential/stdout.txt -> acceptance/helpers/f00049.txt ---
+{"canary": ["credential"], "denied": true}
+
+
+--- helpers/windows: calibration2-lifecycle/stdout.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: calibration2-network/stdout.txt -> acceptance/helpers/f00061.txt ---
+{"canary": ["network"], "denied": true}
+
+
+--- helpers/windows: calibration2-spawn/stdout.txt -> acceptance/helpers/f00067.txt ---
+{"canary": ["spawn"], "denied": true}
+
+
+--- helpers/windows: calibration2-write/stdout.txt -> acceptance/helpers/f00073.txt ---
+{"canary": ["write"], "denied": true}
+
+
+--- instructions: boundary-calibration/calibration2-write/stdout.txt -> acceptance/instructions/f/00473.bin ---
+{"canary": ["write"], "denied": true}
+
+
+--- instructions: boundary-calibration/calibration2-network/stdout.txt -> acceptance/instructions/f/00490.bin ---
+{"canary": ["network"], "denied": true}
+
+
+--- instructions: boundary-calibration/calibration2-credential/stdout.txt -> acceptance/instructions/f/00507.bin ---
+{"canary": ["credential"], "denied": true}
+
+
+--- instructions: boundary-calibration/calibration2-spawn/stdout.txt -> acceptance/instructions/f/00524.bin ---
+{"canary": ["spawn"], "denied": true}
+
+
+--- instructions: boundary-calibration/calibration2-lifecycle/stdout.txt -> acceptance/instructions/f/00541.bin ---
+

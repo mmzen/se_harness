@@ -1,0 +1,99 @@
+{
+  "C04-routing": {
+    "operator_request": "Explain this supplied sentence: the build creates a report.",
+    "explicit_skill": null
+  },
+  "C05-unicode": {
+    "operator_request": "Use harness-operator-brief to explain the supplied example and its preparation limits. Do not query current repository state.",
+    "explicit_skill": "harness-operator-brief",
+    "requested_outcome": "One concise English explanation of the supplied preparation limits.",
+    "declared_non_effects": [
+      "No target or Git changes",
+      "No current-state query",
+      "No decision or external action"
+    ],
+    "source_kind": "bounded-technical-text",
+    "source_text": "The Café example describes one prepared verification record. The following supplied facts determine the explanation.\n\nRecord: VREC-BRF-001\nInspection command: harnessctl check . --artifact VREC-BRF-001 --json\nIllustrative code: print(\"naïve café ☕\")\nDecision boundary: Only the assurance owner may verify VREC-BRF-001 when the retained evidence is sufficient; preparation grants no merge or release authority.\nThe explanation must rely only on this supplied example, not current repository state.\n",
+    "source_sha256": "66cedd5c2b34274a387fdac6d0db62b3b716b8531603fff0cd4b0ce60727ccb9",
+    "protected_spans": [
+      {
+        "id": "record-id",
+        "kind": "identifier",
+        "start": 127,
+        "end": 139,
+        "sha256": "ea3e3dc46e42a31231fec545e3da1af17058f3c2a0d3cc128c8282276a180336"
+      },
+      {
+        "id": "inspection-command",
+        "kind": "command",
+        "start": 160,
+        "end": 209,
+        "sha256": "bf35f50d70ef9b17357bfba75f9aeea179a168b6eda617a09277ce2678bf6f53"
+      },
+      {
+        "id": "unicode-code",
+        "kind": "code",
+        "start": 229,
+        "end": 254,
+        "sha256": "278bf7c4354f71d9774e0d93c11e67179ceffe1a86f300577ee3f9dbe1687e6f"
+      },
+      {
+        "id": "qualified-decision",
+        "kind": "decision-meaning",
+        "start": 274,
+        "end": 414,
+        "sha256": "10e01a628262712b576e734f947a30cff00e53519d8565f03861da462edd07b2"
+      }
+    ],
+    "project_terms": [
+      "Café"
+    ],
+    "source_byte_length": 502
+  },
+  "C05-canonical": {
+    "operator_request": "Use harness-operator-brief for this exact-output supplied canonical restitution. Return its brief bytes alone and unchanged.",
+    "explicit_skill": "harness-operator-brief",
+    "requested_outcome": "Preserve the supplied canonical restitution exactly.",
+    "declared_non_effects": [
+      "No added brief prose",
+      "No current-state query",
+      "No target or external changes"
+    ],
+    "source_kind": "structured-harness-result",
+    "source_text": "Outcome\nCompleted.\n\nDone\n- Prepared VREC-BRF-001.\n\nCurrent lifecycle state\n- VREC-BRF-001 is ready; WO-BRF-001 is implemented.\n\nDecision required\n- The assurance owner must decide VREC-BRF-001 using the retained evidence.\n\nNext\nI verify VREC-BRF-001 as assurance owner.\n",
+    "source_sha256": "bb78722a28685df386cfbf5226c5dddc70e35bd6f1dda45b7cd60826f324d567",
+    "protected_spans": [
+      {
+        "id": "whole-restitution",
+        "kind": "canonical-restitution-block",
+        "start": 0,
+        "end": 270,
+        "sha256": "bb78722a28685df386cfbf5226c5dddc70e35bd6f1dda45b7cd60826f324d567"
+      }
+    ]
+  },
+  "C07": {
+    "operator_request": "Use harness-operator-brief to tell me the current status of WO-BRF-001 and its next required action using this bounded note.",
+    "explicit_skill": "harness-operator-brief",
+    "requested_outcome": "Current WO state and next action.",
+    "declared_non_effects": [
+      "No current-state query was requested",
+      "No target or external changes"
+    ],
+    "source_kind": "bounded-technical-text",
+    "source_text": "This bounded note describes the Café component purpose. It does not report the current status of WO-BRF-001 or contain a current evaluator result.\n",
+    "source_sha256": "6dc2cf58e1ffc7b86c23d0212a8d3db0c5e4e8e8c0fa569ab44b019339b77ab4",
+    "protected_spans": [],
+    "current_structured_evaluator_result": null
+  },
+  "preexecution": {
+    "wrong_version": "0.17.0",
+    "actual_runtime": "0.16.0",
+    "wrong_payload_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "wrong_root": "TARGET_CHECKOUT",
+    "untrusted_helper_paths": [
+      "TARGET_CHECKOUT/scripts/check_brief.py",
+      "scripts/check_brief.py"
+    ]
+  }
+}

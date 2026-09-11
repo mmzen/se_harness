@@ -75,3 +75,37 @@ This definition delivery records the operator-selected execution delegation. Imp
 - [WO-PLG-012](work-orders/WO-PLG-012.md)
 
 This definition delivery records the operator-selected execution delegation. Implementation starts separately after the delegation is present on `origin/main` and the current required GitHub check passes. The packet does not provide implementation evidence or an assurance decision.
+
+
+## WO-PLG-017 evidence-path repair
+
+[WO-PLG-017](work-orders/WO-PLG-017.md) is implemented in
+[PR #449](https://github.com/mmzen/se_harness/pull/449). The approved 56-file
+relocation preserves bytes and historical verification records. Independent
+retention checks and full Windows/Linux CI pass; see its
+[evidence index](evidence/WO-PLG-017/README.md). Aggregate verification preparation
+and assurance remain separate decisions.
+
+
+The operator-authorized aggregate [VREC-PLG-010](verification-records/VREC-PLG-010.md)
+is ready for WO-PLG-011 and WO-PLG-017 at candidate 47f7b842. It binds 182 selected
+evidence files. [Preparation receipts](evidence/WO-PLG-017/governance/ready-record/README.md)
+and [final candidate CI](evidence/WO-PLG-017/checks/ci-final/result.json) are retained.
+VREC-PLG-008 remains unchanged; assurance and supersession are separate decisions.
+
+
+## WO-PLG-012 retained plugin skills
+
+[WO-PLG-012](work-orders/WO-PLG-012.md) is implemented in
+[PR #446](https://github.com/mmzen/se_harness/pull/446), stacked on the completed
+WO017 repair. Retained helper contracts, explicit briefing and read-only effects
+are preserved. See the [acceptance and CI evidence](evidence/WO-PLG-012/README.md).
+Ready verification preparation and the assurance owner's decision remain separate.
+
+
+[VREC-PLG-009](verification-records/VREC-PLG-009.md) is ready for WO-PLG-012
+at clean candidate aea16859. It binds 100 selected evidence files, including
+the raw ZIPs and their inventories. All 13 checks passed at that candidate;
+see [CI](evidence/WO-PLG-012/checks/ci-candidate/result.json) and
+[preparation receipts](evidence/WO-PLG-012/governance/README.md).
+The assurance decision remains with the assurance owner.

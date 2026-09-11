@@ -1,0 +1,23 @@
+{
+  "label": "probe",
+  "argv": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/repository-missing-executable/absent-probe-executable",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/repository-missing-executable/run/capture-repository"
+  ],
+  "stdin": null,
+  "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/repository-missing-executable/run",
+  "exit_code": null,
+  "stdout": "",
+  "stderr": "",
+  "before": {},
+  "after": {},
+  "changed_paths": [],
+  "started_unix": 1789071198.8015258,
+  "duration_seconds": 0.0012519359588623047,
+  "original_record_sha256": "c165e11fc10ef831bb2c04c1a2cf08a228946a51e834665d25785925e98c010f",
+  "error": {
+    "type": "FileNotFoundError",
+    "message": "[Errno 2] No such file or directory: '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/repository-missing-executable/absent-probe-executable'"
+  },
+  "timed_out": false
+}

@@ -1,0 +1,20 @@
+{
+  "classification": "Test-runner input integrity, not a candidate skill failure",
+  "argv": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "-I",
+    "-B",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/run_replay.py",
+    "--bundle",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/input-integrity/corrupt-bundle",
+    "--output",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/input-integrity/must-not-be-created",
+    "--batch",
+    "rejected-input"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/run_replay.py\", line 196, in <module>\n    main()\n  File \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/run_replay.py\", line 59, in main\n    manifest = load_inputs(bundle)  # Reject corruption before any target creation.\n               ^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/run_replay.py\", line 34, in load_inputs\n    raise ValueError(\"Fixture input mismatch: \" + rel)\nValueError: Fixture input mismatch: raw-assets/src/feature.py\n",
+  "target_created": false,
+  "passed": true
+}

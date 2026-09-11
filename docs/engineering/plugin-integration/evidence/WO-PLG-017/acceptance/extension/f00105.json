@@ -1,0 +1,30 @@
+{
+  "argv": [
+    "git",
+    "config",
+    "core.autocrlf",
+    "false"
+  ],
+  "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-k47frca9\\ssssssssssssssssss\\repository",
+  "elapsed_seconds": 0.030597686767578125,
+  "observer": "Passthrough to original subprocess.run; no command or returned output replacement",
+  "returncode": 0,
+  "stderr": {
+    "bytes": 0,
+    "encoding": "identity",
+    "path": "call03.stderr",
+    "representation": "UTF-8 bytes of text returned by unchanged helper",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stored_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 0,
+    "encoding": "identity",
+    "path": "call03.stdout",
+    "representation": "UTF-8 bytes of text returned by unchanged helper",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stored_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "text_mode": true,
+  "timeout": 600
+}

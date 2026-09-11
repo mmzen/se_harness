@@ -1,0 +1,19 @@
+{
+  "classification": "Independent read-only delta review; not assurance or a lifecycle decision",
+  "base": "28b4d2e22477067a17544e8275a37cecf22575f0",
+  "candidate": "e5b48a16be2e5e59ecd17d7d28d24409ff5ce519",
+  "file": "tests/plugin_integration/evidence-skill/check_retention_paths.py",
+  "checker_sha256": "fe9ebcec67aa8671fa4c25cf5c04b865955e927dcdc1354223bce80f1fcff089",
+  "findings": [],
+  "delta": "Four exact-object read sites change from git show REV:PATH to git cat-file blob REV:PATH; no other candidate files changed.",
+  "assessment": [
+    "The command requests raw bytes of the same pinned Git object. It does not mutate the index, working tree or repository history.",
+    "The existing checked subprocess still fails on a missing or invalid object. Explicit blob type is appropriate for retained payloads, JSON map, VREC Markdown and evaluator sidecar.",
+    "All byte/size/SHA comparisons, plan pins, ancestry checks, scope constraints and both path profiles remain unchanged."
+  ],
+  "limits": [
+    "No acceptance test rerun by this reviewer.",
+    "Prior deep-root git show failure and subsequent actual checker results belong to the independent acceptance evidence; this receipt does not reclassify them.",
+    "No new lifecycle, CI or assurance outcome inferred from this source review."
+  ]
+}

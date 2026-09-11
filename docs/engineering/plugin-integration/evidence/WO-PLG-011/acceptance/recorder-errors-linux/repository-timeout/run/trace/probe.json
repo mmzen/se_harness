@@ -1,0 +1,31 @@
+{
+  "label": "probe",
+  "argv": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "-I",
+    "-B",
+    "-c",
+    "from pathlib import Path; import sys,time; p=Path(sys.argv[-1]); p.mkdir(parents=True,exist_ok=True); (p/'sentinel.txt').write_text('observed\\n',encoding='utf8'); print('probe-stdout',flush=True); print('probe-stderr',file=sys.stderr,flush=True); time.sleep(30)",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/repository-timeout/run/capture-repository"
+  ],
+  "stdin": null,
+  "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/repository-timeout/run",
+  "exit_code": null,
+  "stdout": "probe-stdout\n",
+  "stderr": "probe-stderr\n",
+  "before": {},
+  "after": {
+    "sentinel.txt": "08cfb1f08c9a2b3985853df5336808a27d616d731c6e944ff0a4e8e74dde5e5f"
+  },
+  "changed_paths": [
+    "sentinel.txt"
+  ],
+  "started_unix": 1789071196.6169233,
+  "duration_seconds": 2.016707420349121,
+  "original_record_sha256": "e8f639d479719284710add28d3e4ebddd33481d89e1eeaf8cd503caa63a39aeb",
+  "error": {
+    "type": "TimeoutExpired",
+    "message": "Command '['/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python', '-I', '-B', '-c', \"from pathlib import Path; import sys,time; p=Path(sys.argv[-1]); p.mkdir(parents=True,exist_ok=True); (p/'sentinel.txt').write_text('observed\\\\n',encoding='utf8'); print('probe-stdout',flush=True); print('probe-stderr',file=sys.stderr,flush=True); time.sleep(30)\", '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/repository-timeout/run/capture-repository']' timed out after 2.0 seconds"
+  },
+  "timed_out": true
+}

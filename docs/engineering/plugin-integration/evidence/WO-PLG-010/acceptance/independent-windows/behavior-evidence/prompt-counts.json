@@ -1,0 +1,8 @@
+{
+  "observer": "Independent evaluating agent",
+  "method": "Count actual owner-decision prompts issued by this agent; printed evaluator guidance is not counted.",
+  "duplicate_approval_prompts": 0,
+  "duplicate_start_prompts": 0,
+  "interactive_owner_decision_tool_calls": 0,
+  "scope": "Applies to this retained agent session, not native host sessions or the Linux command replay."
+}

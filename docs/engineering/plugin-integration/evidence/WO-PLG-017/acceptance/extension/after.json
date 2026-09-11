@@ -1,0 +1,34 @@
+{
+  "commit": "28b4d2e22477067a17544e8275a37cecf22575f0",
+  "destination": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-pkny7t08\\ssssssssssssssssss\\repository",
+  "destination_characters": 77,
+  "error": {
+    "message": "15-checker-pass unexpected result",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-path-extension-independent-20260911\\run_probe.py\", line 71, in <module>\n    assert json.loads(call('15-checker-pass',checker_argv))['mapped_files']==56\n                      ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-path-extension-independent-20260911\\run_probe.py\", line 30, in call\n    if code!=expected or error:raise RuntimeError(label+' unexpected result')\n                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: 15-checker-pass unexpected result\n",
+    "type": "RuntimeError"
+  },
+  "expected": "success",
+  "export": {
+    "calls": [
+      "call01",
+      "call02",
+      "call03",
+      "call04",
+      "call05",
+      "call06",
+      "call07",
+      "call08"
+    ],
+    "destination": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-pkny7t08\\ssssssssssssssssss\\repository",
+    "destination_characters": 77,
+    "exporter_sha256": "4dfba43492ce476366f0b5b44b432671b60998d43b292099b640cb97e64fb4c9",
+    "passed": true,
+    "source": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-pkny7t08\\src",
+    "worker_sha256": "0f82bc634624953eae06e785583107310ade09d019c79c4051ff038382fadcb1"
+  },
+  "exporter_sha256": "4dfba43492ce476366f0b5b44b432671b60998d43b292099b640cb97e64fb4c9",
+  "max_full_path_at77": 259,
+  "oracle_sha256": "a809a6bd7940daf6d7cef9b8036e01924c1036ddfcbada333f4b3939a2cc52f3",
+  "passed": false,
+  "source_checkout": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-pkny7t08\\src"
+}

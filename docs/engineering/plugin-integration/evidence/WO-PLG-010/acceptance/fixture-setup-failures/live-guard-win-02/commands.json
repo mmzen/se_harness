@@ -1,0 +1,23 @@
+[
+  {
+    "argv": [
+      "git",
+      "-c",
+      "safe.directory=C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se_harness",
+      "-c",
+      "core.longpaths=true",
+      "-c",
+      "core.autocrlf=false",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se_harness",
+      "clone",
+      "--shared",
+      "--no-checkout",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se_harness",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\live-guard-win-02\\published"
+    ],
+    "exit_status": 128,
+    "stdout": "",
+    "stderr": "Cloning into 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\live-guard-win-02\\published'...\nfatal: detected dubious ownership in repository at 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se_harness/.git'\n'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se_harness/.git' is owned by:\n\tmmzen/CodexSandboxOnline (S-1-5-21-778813600-4079903668-2251971101-1004)\nbut the current user is:\n\tMMZEN/mathi (S-1-5-21-778813600-4079903668-2251971101-1001)\nTo add an exception for this directory, call:\n\n\tgit config --global --add safe.directory 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se_harness/.git'\nfatal: Could not read from remote repository.\n\nPlease make sure you have the correct access rights\nand the repository exists.\n"
+  }
+]

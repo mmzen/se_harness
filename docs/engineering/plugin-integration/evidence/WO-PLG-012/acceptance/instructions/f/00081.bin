@@ -1,0 +1,14 @@
+"""Fixed direct-helper probes; these are not selected skill invocations."""
+import json
+from pathlib import Path
+root = Path(__file__).resolve().parent
+invalid = json.loads((root / 'C05-unicode-request.json').read_text(encoding='utf8'))
+invalid['explicit_skill'] = 'ordinary-explanation'
+raw = json.loads((root / 'raw-inputs.json').read_text(encoding='utf8'))['C05-canonical']
+canonical = {key: raw[key] for key in ['explicit_skill', 'source_kind', 'source_text', 'source_sha256', 'protected_spans']}
+canonical.update({'profile': 'operator-communication', 'rendered_text': raw['source_text'], 'bindings': [{'id': 'whole-restitution', 'start': 0, 'end': 270, 'sha256': 'bb78722a28685df386cfbf5226c5dddc70e35bd6f1dda45b7cd60826f324d567'}], 'changed_paths': []})
+for filename, request in [('C04-invalid-explicit-request.json', invalid), ('C05-canonical-supplemental-request.json', canonical)]:
+    dest = root / filename
+    assert not dest.exists()
+    dest.write_bytes(json.dumps(request, ensure_ascii=False, indent=2).encode('utf8') + b'\n')
+print('Packaged two supplemental checker requests; no candidate code executed.')

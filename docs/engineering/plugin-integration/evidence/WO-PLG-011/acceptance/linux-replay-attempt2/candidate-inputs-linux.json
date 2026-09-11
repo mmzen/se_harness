@@ -1,0 +1,19 @@
+{
+  "schema": "fixed-synthetic-preparation-input-v1",
+  "candidate": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+  "work_order": "WO-EVD-001",
+  "verification": "VER-EVD-001",
+  "record": "VREC-EVD-001",
+  "actor": "fixture-preparation-actor",
+  "right": "DR-VREC-PREPARE",
+  "domain": "evidence-demo",
+  "evidence": {
+    "docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8"
+  },
+  "supplied_decision": "EVD02-vrec raw request, synthetic engineering-owner test input. Prepare this exact ready record only. No assurance/release/external right.",
+  "original_windows_candidate": "772f90c03a04d0a7914088ac6b869bb829b4bcad",
+  "original_windows_evidence": {
+    "docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md": "f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220"
+  },
+  "classification": "Explicit synthetic fixture input binding to native Linux identities before replay; not an authority engine"
+}

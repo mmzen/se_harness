@@ -1,0 +1,14 @@
+{
+  "schema": "se-harness-evidence-relocation-v1",
+  "source_plan_sha256": "1927a7d61c7d6357e61047f427c0d2f1fb8e456d32dd1698efc01c7bba6f9538",
+  "source_commit": "ed31a520964f81627c9c5b428b68968caa6282e7",
+  "evidence_bytes_modified": false,
+  "files": [
+    {
+      "original_path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json",
+      "retained_path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0056.json",
+      "bytes": 730,
+      "sha256": "730e0507e7c4992b183122e91fda0369d610a499d76545b463d725c22dcaf263"
+    }
+  ]
+}

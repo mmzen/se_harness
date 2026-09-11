@@ -1,0 +1,214 @@
+{
+  "classification": "Explicit command replay inputs from the independent Windows observer; no new model behavior or authority decisions",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+  "evaluator_python": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+  "runner_sha256": "2ef8e7abcc5e31a703fc70e960390f68d6513877c0a73dcfc096831c89391cb3",
+  "bundle_sha256": "8db11d2806906d7d7252231c3b57fb7ff0744c5ef7db0102647db412881edbf2",
+  "batch": "release",
+  "bindings": {
+    "{python}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "{environment}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0",
+    "{repo}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/release-repository",
+    "{bundle}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/release",
+    "{trace}": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/trace"
+  },
+  "commands": [
+    {
+      "label": "rls-setup-preverified-status",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/release/fixture_edit.py",
+        "--repo",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/release-repository",
+        "--path",
+        "docs/engineering/evidence-demo/verification-records/VREC-EVD-001.md",
+        "--old",
+        "status = \"ready\"",
+        "--new",
+        "status = \"verified\""
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "rls-setup-preverified-metadata",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/release/fixture_edit.py",
+        "--repo",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/release-repository",
+        "--path",
+        "docs/engineering/evidence-demo/verification-records/VREC-EVD-001.md",
+        "--old",
+        "prepared_by = \"fixture-preparation-actor\"",
+        "--new",
+        "prepared_by = \"fixture-preparation-actor\"\nverified_at = \"2026-09-10T19:40:00Z\"\nverified_by = \"fixture-assurance-owner\""
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "rls-setup-validate",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "validate",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/release-repository",
+        "--json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "rls-setup-add",
+      "argv": [
+        "git",
+        "-C",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/release-repository",
+        "add",
+        "--",
+        "docs/engineering/evidence-demo/verification-records/VREC-EVD-001.md"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "rls-setup-commit",
+      "argv": [
+        "git",
+        "-C",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/release-repository",
+        "-c",
+        "user.name=Fixture Owner",
+        "-c",
+        "user.email=fixture@example.invalid",
+        "commit",
+        "-m",
+        "Synthetic preexisting verified VREC input only"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd02-rls-context",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/release/session-context.py",
+        "--repo",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/release-repository",
+        "--environment",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0",
+        "--version",
+        "0.16.0",
+        "--payload-sha256",
+        "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "--archive-sha256",
+        "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "--host",
+        "codex",
+        "--context-limit",
+        "32768",
+        "--read-limit",
+        "32768"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd02-rls-selected-vrec",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/release-repository",
+        "--artifact",
+        "VREC-EVD-001",
+        "--json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd02-rls-refs-records",
+      "argv": [
+        "git",
+        "-C",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/release-repository",
+        "log",
+        "--all",
+        "--format=%H",
+        "--",
+        "docs/engineering/evidence-demo/releases/"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd02-rls-prepare",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "prepare-release",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/release-repository",
+        "--id",
+        "RLS-EVD-001",
+        "--release-contract",
+        "REL-EVD-001",
+        "--verification-record",
+        "VREC-EVD-001",
+        "--work-order",
+        "WO-EVD-001",
+        "--version",
+        "1.2.3",
+        "--owner",
+        "release-owner",
+        "--domain",
+        "evidence-demo",
+        "--json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd02-rls-state",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/release/inspect_fixture.py",
+        "--repo",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/release-repository",
+        "--id",
+        "RLS-EVD-001"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "evd02-rls-check",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/release-repository",
+        "--artifact",
+        "RLS-EVD-001",
+        "--json"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "fresh_model_behavior": false,
+  "decision_prompt_count": null,
+  "receipt_note": "Suppression belongs to the original Windows model observation; this runner replays actual commands and fixed readback choices.",
+  "passed": true
+}

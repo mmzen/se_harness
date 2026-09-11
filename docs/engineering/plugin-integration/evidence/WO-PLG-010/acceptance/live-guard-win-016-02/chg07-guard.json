@@ -1,0 +1,144 @@
+{
+  "classification": "Released guard integration, not a skill-behavior test or lifecycle application",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "evaluator_python": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+  "runner_sha256": "f4e93329aec9b488677cefdf966b67207006c1baf7344cada930edce4891add2",
+  "observations": [
+    {
+      "case": "published-exact-check",
+      "right": "DR-WO-START",
+      "head": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+      "base": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+      "expected_code": null,
+      "gate": {
+        "sha": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+        "conclusion": "success",
+        "check_run_id": "102995269085",
+        "check_name": "validate",
+        "source": "github-checks"
+      },
+      "passed": true,
+      "work_order_unchanged": true,
+      "git_status_unchanged": true
+    },
+    {
+      "case": "published-exact-check",
+      "right": "DR-WO-COMPLETE",
+      "head": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+      "base": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+      "expected_code": null,
+      "gate": {
+        "sha": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+        "conclusion": "success",
+        "check_run_id": "102995269085",
+        "check_name": "validate",
+        "source": "github-checks"
+      },
+      "passed": true,
+      "work_order_unchanged": true,
+      "git_status_unchanged": true
+    },
+    {
+      "case": "published-exact-check",
+      "right": "DR-VREC-PREPARE",
+      "head": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+      "base": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+      "expected_code": null,
+      "gate": {
+        "sha": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+        "conclusion": "success",
+        "check_run_id": "102995269085",
+        "check_name": "validate",
+        "source": "github-checks"
+      },
+      "passed": true,
+      "work_order_unchanged": true,
+      "git_status_unchanged": true
+    },
+    {
+      "case": "right-not-delegated",
+      "right": "DR-WO-APPROVE",
+      "head": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+      "base": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+      "expected_code": "WEX-ECP-022",
+      "error": {
+        "code": "WEX-ECP-022",
+        "message": "WEX-ECP-022: delegated-executor may apply only DR-WO-START, DR-WO-COMPLETE, DR-VREC-PREPARE; DR-WO-APPROVE is a human decision right"
+      },
+      "passed": true,
+      "work_order_unchanged": true,
+      "git_status_unchanged": true
+    },
+    {
+      "case": "right-not-delegated",
+      "right": "DR-VREC-DECIDE",
+      "head": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+      "base": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+      "expected_code": "WEX-ECP-022",
+      "error": {
+        "code": "WEX-ECP-022",
+        "message": "WEX-ECP-022: delegated-executor may apply only DR-WO-START, DR-WO-COMPLETE, DR-VREC-PREPARE; DR-VREC-DECIDE is a human decision right"
+      },
+      "passed": true,
+      "work_order_unchanged": true,
+      "git_status_unchanged": true
+    },
+    {
+      "case": "right-not-delegated",
+      "right": "DR-RLS-DECIDE",
+      "head": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+      "base": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+      "expected_code": "WEX-ECP-022",
+      "error": {
+        "code": "WEX-ECP-022",
+        "message": "WEX-ECP-022: delegated-executor may apply only DR-WO-START, DR-WO-COMPLETE, DR-VREC-PREPARE; DR-RLS-DECIDE is a human decision right"
+      },
+      "passed": true,
+      "work_order_unchanged": true,
+      "git_status_unchanged": true
+    },
+    {
+      "case": "right-not-delegated",
+      "right": "DR-EXTERNAL-ACTION",
+      "head": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+      "base": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+      "expected_code": "WEX-ECP-022",
+      "error": {
+        "code": "WEX-ECP-022",
+        "message": "WEX-ECP-022: delegated-executor may apply only DR-WO-START, DR-WO-COMPLETE, DR-VREC-PREPARE; DR-EXTERNAL-ACTION is a human decision right"
+      },
+      "passed": true,
+      "work_order_unchanged": true,
+      "git_status_unchanged": true
+    },
+    {
+      "case": "class-missing-at-base",
+      "right": "DR-WO-START",
+      "head": "f20943ba509537d4896b48c39a8e58ba7643309b",
+      "base": "403a2c10f449032dc67ae70d4a9e37286d07d754",
+      "expected_code": "WEX-ECP-022",
+      "error": {
+        "code": "WEX-ECP-022",
+        "message": "WEX-ECP-022: WO-PLG-010.md carries no [delegation] class at the base origin/main; a branch cannot widen its own delegation"
+      },
+      "passed": true,
+      "work_order_unchanged": true,
+      "git_status_unchanged": true
+    },
+    {
+      "case": "parent-pass-is-not-current-pass",
+      "right": "DR-WO-START",
+      "head": "4d1b15ec4ca52cbb2e80b88137866a4941e4e842",
+      "base": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+      "expected_code": "WEX-ECP-040",
+      "error": {
+        "code": "WEX-ECP-040",
+        "message": "WEX-ECP-040: gate source error for 4d1b15e: HTTP 422"
+      },
+      "passed": true,
+      "work_order_unchanged": true,
+      "git_status_unchanged": true
+    }
+  ]
+}

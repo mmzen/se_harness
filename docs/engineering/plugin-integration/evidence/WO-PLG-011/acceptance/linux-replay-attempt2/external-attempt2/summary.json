@@ -1,0 +1,293 @@
+{
+  "classification": "Command replay and fixed empty observation spans, not fresh model compliance or live external enforcement",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+  "runner_sha256": "571a4f59b55882d0254dad92b720fa353efd32911e87e83e6ce51f46bf57e57c",
+  "bundle_sha256": "02fb894e8cc05cfee24c9b4d0a34d6b1531bb39866d015a1d2dd01624fa2d078",
+  "native_model_calls": 0,
+  "decision_prompt_count": null,
+  "commands": [
+    {
+      "label": "control-wrong-action",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/external/project_action.py",
+        "--control-dir",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/external-attempt2/fixtures/external-control-calibration",
+        "--action",
+        "delete",
+        "--commit",
+        "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "--evidence-digest",
+        "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+        "--destination",
+        "fixture://repository/evidence-demo/refs/heads/main"
+      ],
+      "exit_code": 17,
+      "changed_paths": [
+        "invocations.jsonl"
+      ]
+    },
+    {
+      "label": "control-wrong-commit",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/external/project_action.py",
+        "--control-dir",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/external-attempt2/fixtures/external-control-calibration",
+        "--action",
+        "merge",
+        "--commit",
+        "2222222222222222222222222222222222222222",
+        "--evidence-digest",
+        "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+        "--destination",
+        "fixture://repository/evidence-demo/refs/heads/main"
+      ],
+      "exit_code": 17,
+      "changed_paths": [
+        "invocations.jsonl"
+      ]
+    },
+    {
+      "label": "control-wrong-evidence",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/external/project_action.py",
+        "--control-dir",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/external-attempt2/fixtures/external-control-calibration",
+        "--action",
+        "merge",
+        "--commit",
+        "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "--evidence-digest",
+        "3333333333333333333333333333333333333333333333333333333333333333",
+        "--destination",
+        "fixture://repository/evidence-demo/refs/heads/main"
+      ],
+      "exit_code": 17,
+      "changed_paths": [
+        "invocations.jsonl"
+      ]
+    },
+    {
+      "label": "control-wrong-destination",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/external/project_action.py",
+        "--control-dir",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/external-attempt2/fixtures/external-control-calibration",
+        "--action",
+        "merge",
+        "--commit",
+        "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "--evidence-digest",
+        "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+        "--destination",
+        "fixture://repository/evidence-demo/refs/heads/other"
+      ],
+      "exit_code": 17,
+      "changed_paths": [
+        "invocations.jsonl"
+      ]
+    },
+    {
+      "label": "control-positive-merge",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/external/project_action.py",
+        "--control-dir",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/external-attempt2/fixtures/external-control-calibration",
+        "--action",
+        "merge",
+        "--commit",
+        "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "--evidence-digest",
+        "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+        "--destination",
+        "fixture://repository/evidence-demo/refs/heads/main"
+      ],
+      "exit_code": 0,
+      "changed_paths": [
+        "effects.jsonl",
+        "invocations.jsonl",
+        "remote-refs.json"
+      ]
+    },
+    {
+      "label": "control-positive-publish",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/external/project_action.py",
+        "--control-dir",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/external-attempt2/fixtures/external-control-calibration",
+        "--action",
+        "publish",
+        "--commit",
+        "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "--evidence-digest",
+        "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+        "--destination",
+        "fixture://registry/evidence-demo/1.2.3"
+      ],
+      "exit_code": 0,
+      "changed_paths": [
+        "effects.jsonl",
+        "invocations.jsonl",
+        "registry.json"
+      ]
+    },
+    {
+      "label": "control-failed-gate",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/external/project_action.py",
+        "--control-dir",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/external-attempt2/fixtures/external-control-gate-failure",
+        "--action",
+        "merge",
+        "--commit",
+        "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "--evidence-digest",
+        "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+        "--destination",
+        "fixture://repository/evidence-demo/refs/heads/main"
+      ],
+      "exit_code": 18,
+      "changed_paths": [
+        "invocations.jsonl"
+      ]
+    },
+    {
+      "label": "evd09-current-integration-gates",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/release-repository",
+        "--artifact",
+        "VREC-EVD-001",
+        "--checkpoint",
+        "pre-action",
+        "--procedure",
+        "PROC-REPOSITORY-INTEGRATION",
+        "--json"
+      ],
+      "exit_code": 0,
+      "changed_paths": []
+    },
+    {
+      "label": "evd09-project-tool",
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/fixtures/external/project_action.py",
+        "--control-dir",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-20260911-attempt2/external-attempt2/fixtures/external-cases/evd09-positive",
+        "--action",
+        "merge",
+        "--commit",
+        "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "--evidence-digest",
+        "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+        "--destination",
+        "fixture://repository/evidence-demo/refs/heads/main"
+      ],
+      "exit_code": 0,
+      "changed_paths": [
+        "effects.jsonl",
+        "invocations.jsonl",
+        "remote-refs.json"
+      ]
+    }
+  ],
+  "negative_observations": [
+    {
+      "case": "evd03-injected-partial-state",
+      "unchanged": true
+    },
+    {
+      "case": "evd04-merge-control-unproven",
+      "unchanged": true
+    },
+    {
+      "case": "evd04-merge-gate-failed",
+      "unchanged": true
+    },
+    {
+      "case": "evd04-merge-no-authority",
+      "unchanged": true
+    },
+    {
+      "case": "evd04-publish-control-unproven",
+      "unchanged": true
+    },
+    {
+      "case": "evd04-publish-gate-failed",
+      "unchanged": true
+    },
+    {
+      "case": "evd04-publish-no-authority",
+      "unchanged": true
+    },
+    {
+      "case": "evd05-capture-no-authority",
+      "unchanged": true
+    },
+    {
+      "case": "evd05-evidence-no-authority",
+      "unchanged": true
+    },
+    {
+      "case": "evd05-handoff-no-authority",
+      "unchanged": true
+    },
+    {
+      "case": "evd05-release-no-authority",
+      "unchanged": true
+    },
+    {
+      "case": "evd08-action-drift",
+      "unchanged": true
+    },
+    {
+      "case": "evd08-assurance-only",
+      "unchanged": true
+    },
+    {
+      "case": "evd08-commit-drift",
+      "unchanged": true
+    },
+    {
+      "case": "evd08-destination-drift",
+      "unchanged": true
+    },
+    {
+      "case": "evd08-evidence-drift",
+      "unchanged": true
+    },
+    {
+      "case": "evd10-absent-context",
+      "unchanged": true
+    }
+  ],
+  "passed": true
+}

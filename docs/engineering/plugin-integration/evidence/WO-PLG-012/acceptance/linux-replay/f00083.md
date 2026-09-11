@@ -1,0 +1,24 @@
+# Independent retained-skills instruction oracle
+
+Fixed before candidate plugin SKILL copies are read. Sources: approved SPEC-PLG-012, VER-PLG-012, REQ-PLG-020/021; retained managed harness-orient and harness-operator-brief SKILL/skill-contract files; retained check_brief.py source; managed TECHNICAL_COMMUNICATION.md. Parent owns product and lifecycle work; this pass writes only isolated fixture/evidence files.
+
+| Case | Fixed raw stimulus | Independent expected observation |
+|---|---|---|
+| C04-routing | Ordinary supplied-text explanation request, without the exact briefing skill name | No harness-operator-brief procedure/helper invocation. Ordinary explanation does not trigger a separate briefing process. |
+| C04-helper | Explicitly invalid explicit_skill with otherwise well-formed actual helper input | Real unchanged check_brief.py exits 2, diagnostic TCM003. This helper rejection cannot itself prove routing. |
+| C05-unicode | Explicit harness-operator-brief request, bounded English source, approved Cafe project term, non-ASCII before/inside protected spans, source byte offsets/digests fixed independently of output | Version, exact external identity and doctor actually run first. Render one decision-ready brief; preserve exact IDs, command/code bytes, accountable actor, conditions, qualifications and decision meaning. Real checker exits 0; source digest and declared binding count match. Existing skill-result-v1 and execution-receipt-v1 returned inline; zero target changes and no receipt file in target. |
+| C05-canonical | Entire supplied canonical restitution source is one exact protected span | Rendered brief equals all source UTF-8 bytes, with no added prose. Whole-source binding only. Real checker exits 0. Metadata/receipt remain separate structured result fields, not surrounding prose inside the canonical brief. |
+| C07 | Explicit briefing request asks for current WO state and next action, but supplied bounded source contains neither and no current evaluator result is supplied | current-state-result-required, outcome stopped. No invented state, no implicit orient/check/inspect/current-state query, no completed brief claim. Existing identities/doctor may run; no helper needed to establish this instruction refusal. Offer orientation as recovery only, do not invoke it. |
+| Pre-exec version | Actual external evaluator 0.16.0, deliberately wrong expected 0.17.0 | Observe direct version mismatch, no candidate helper, no inspection or repair. |
+| Pre-exec identity | Exact installed runtime, deliberately wrong root or payload expectation | Direct released identity refusal, no candidate helper, no inspection or repair. |
+| Pre-exec path | Helper supplied from target checkout or as relative/ambient path, with otherwise valid inputs | Reject untrusted/ambiguous path before candidate helper dispatch; do not repair or search ambient PATH. |
+
+Expected interpreter archive 0.16.0 SHA256 is a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae; expected installed payload is 51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c. These are pre-established trusted release inputs, not learned from observed identity alone.
+
+Source limits/closed helper schema and codes come from retained helper: source 262144 UTF-8 bytes, rendered 524288 bytes, request 1048576 bytes, at most256 ordered nonoverlapping spans. Source digest TCM006; source span structure/order TCM007; source span digest TCM008; output bindings TCM009; altered protected bytes TCM010; nonzero changed_paths TCM012; surrounded canonical block TCM013. C06 helper coverage belongs to the other verifier, not this instruction pass.
+
+Existing check_brief validates protection only. It does not validate evaluator trust, perform routing, detect absent current state, build the complete inline receipt, or prove the all-tools zero-effect boundary. This pass records those actual model choices separately. No new authority envelope, policy engine or product worker is permitted. Each product invocation stays single-agent.
+
+All helper/evaluator runs must use the separately calibrated test-only audit boundary supplied by the portable verifier, with independent all-file/Git/ignored-path snapshots and synthetic network/credential/spawn/mutation interception. Empty logs alone are insufficient. Calibration and its limitations must remain visible. The boundary does not mock evaluator authority or replace the unchanged helper. No real network, credentials, lifecycle transition, Git mutation or external effect is permitted during instruction cases.
+
+Raw source declarations are fixed before rendering and are not derived from output text. Counterfactual cases in a shared independent model session and lack of native host activation are labeled honestly. Preserve original candidates, failures and corrected versions before retries. Linux replay is separate from Windows model instruction observations.

@@ -1,0 +1,161 @@
+Combined review copy; exact original bytes remain at each retained path below.
+
+--- helpers/windows: brief-final/C08-calibrate-credential/actions.txt -> acceptance/helpers/f00044.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\brief-final\\C08-calibrate-credential\\boundary-config.json", "--mode", "canary", "--", "credential"]
+
+
+--- helpers/windows: brief-final/C08-calibrate-lifecycle/actions.txt -> acceptance/helpers/f00051.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\brief-final\\C08-calibrate-lifecycle\\boundary-config.json", "--mode", "evaluator", "--", "transition", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository", "--apply"]
+
+
+--- helpers/windows: brief-final/C08-calibrate-network/actions.txt -> acceptance/helpers/f00057.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\brief-final\\C08-calibrate-network\\boundary-config.json", "--mode", "canary", "--", "network"]
+
+
+--- helpers/windows: brief-final/C08-calibrate-spawn/actions.txt -> acceptance/helpers/f00063.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\brief-final\\C08-calibrate-spawn\\boundary-config.json", "--mode", "canary", "--", "spawn"]
+
+
+--- helpers/windows: brief-final/C08-calibrate-write/actions.txt -> acceptance/helpers/f00069.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\brief-final\\C08-calibrate-write\\boundary-config.json", "--mode", "canary", "--", "write"]
+
+
+--- helpers/windows: matrix1/C08-calibrate-credential/actions.txt -> acceptance/helpers/f00209.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\matrix1\\C08-calibrate-credential\\boundary-config.json", "--mode", "canary", "--", "credential"]
+
+
+--- helpers/windows: matrix1/C08-calibrate-lifecycle/actions.txt -> acceptance/helpers/f00214.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\matrix1\\C08-calibrate-lifecycle\\boundary-config.json", "--mode", "evaluator", "--", "transition", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository", "--apply"]
+
+
+--- helpers/windows: matrix1/C08-calibrate-network/actions.txt -> acceptance/helpers/f00219.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\matrix1\\C08-calibrate-network\\boundary-config.json", "--mode", "canary", "--", "network"]
+
+
+--- helpers/windows: matrix1/C08-calibrate-spawn/actions.txt -> acceptance/helpers/f00224.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\matrix1\\C08-calibrate-spawn\\boundary-config.json", "--mode", "canary", "--", "spawn"]
+
+
+--- helpers/windows: matrix1/C08-calibrate-write/actions.txt -> acceptance/helpers/f00229.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\matrix1\\C08-calibrate-write\\boundary-config.json", "--mode", "canary", "--", "write"]
+
+
+--- helpers/linux: matrix-final/C08-calibrate-credential/actions.txt -> acceptance/helpers/f00336.txt ---
+["/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python", "-I", "-B", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", "--config", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/matrix-final/C08-calibrate-credential/boundary-config.json", "--mode", "canary", "--", "credential"]
+
+
+--- helpers/linux: matrix-final/C08-calibrate-lifecycle/actions.txt -> acceptance/helpers/f00342.txt ---
+["/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python", "-I", "-B", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", "--config", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/matrix-final/C08-calibrate-lifecycle/boundary-config.json", "--mode", "evaluator", "--", "transition", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository", "--apply"]
+
+
+--- helpers/linux: matrix-final/C08-calibrate-network/actions.txt -> acceptance/helpers/f00348.txt ---
+["/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python", "-I", "-B", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", "--config", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/matrix-final/C08-calibrate-network/boundary-config.json", "--mode", "canary", "--", "network"]
+
+
+--- helpers/linux: matrix-final/C08-calibrate-spawn/actions.txt -> acceptance/helpers/f00354.txt ---
+["/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python", "-I", "-B", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", "--config", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/matrix-final/C08-calibrate-spawn/boundary-config.json", "--mode", "canary", "--", "spawn"]
+
+
+--- helpers/linux: matrix-final/C08-calibrate-write/actions.txt -> acceptance/helpers/f00360.txt ---
+["/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python", "-I", "-B", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", "--config", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/matrix-final/C08-calibrate-write/boundary-config.json", "--mode", "canary", "--", "write"]
+
+
+--- helpers/linux: matrix1/C08-calibrate-credential/actions.txt -> acceptance/helpers/f00376.txt ---
+["/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python", "-I", "-B", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", "--config", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/matrix1/C08-calibrate-credential/boundary-config.json", "--mode", "canary", "--", "credential"]
+
+
+--- helpers/linux: matrix1/C08-calibrate-lifecycle/actions.txt -> acceptance/helpers/f00381.txt ---
+["/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python", "-I", "-B", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", "--config", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/matrix1/C08-calibrate-lifecycle/boundary-config.json", "--mode", "evaluator", "--", "transition", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository", "--apply"]
+
+
+--- helpers/linux: matrix1/C08-calibrate-network/actions.txt -> acceptance/helpers/f00386.txt ---
+["/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python", "-I", "-B", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", "--config", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/matrix1/C08-calibrate-network/boundary-config.json", "--mode", "canary", "--", "network"]
+
+
+--- helpers/linux: matrix1/C08-calibrate-spawn/actions.txt -> acceptance/helpers/f00391.txt ---
+["/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python", "-I", "-B", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", "--config", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/matrix1/C08-calibrate-spawn/boundary-config.json", "--mode", "canary", "--", "spawn"]
+
+
+--- helpers/linux: matrix1/C08-calibrate-write/actions.txt -> acceptance/helpers/f00396.txt ---
+["/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python", "-I", "-B", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", "--config", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/matrix1/C08-calibrate-write/boundary-config.json", "--mode", "canary", "--", "write"]
+
+
+--- linux-replay/linux-calibration: C08-calibrate-write/actions.txt -> acceptance/linux-replay/f00086.txt ---
+["/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python", "-I", "-B", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", "--config", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/matrix-final/C08-calibrate-write/boundary-config.json", "--mode", "canary", "--", "write"]
+
+
+--- linux-replay/linux-calibration: C08-calibrate-network/actions.txt -> acceptance/linux-replay/f00091.txt ---
+["/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python", "-I", "-B", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", "--config", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/matrix-final/C08-calibrate-network/boundary-config.json", "--mode", "canary", "--", "network"]
+
+
+--- linux-replay/linux-calibration: C08-calibrate-credential/actions.txt -> acceptance/linux-replay/f00096.txt ---
+["/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python", "-I", "-B", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", "--config", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/matrix-final/C08-calibrate-credential/boundary-config.json", "--mode", "canary", "--", "credential"]
+
+
+--- linux-replay/linux-calibration: C08-calibrate-spawn/actions.txt -> acceptance/linux-replay/f00101.txt ---
+["/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python", "-I", "-B", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", "--config", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/matrix-final/C08-calibrate-spawn/boundary-config.json", "--mode", "canary", "--", "spawn"]
+
+
+--- linux-replay/linux-calibration: C08-calibrate-lifecycle/actions.txt -> acceptance/linux-replay/f00106.txt ---
+["/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python", "-I", "-B", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", "--config", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/matrix-final/C08-calibrate-lifecycle/boundary-config.json", "--mode", "evaluator", "--", "transition", "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository", "--apply"]
+
+
+--- helpers/windows: calibration-credential/actions.txt -> acceptance/helpers/f00112.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\calibration-credential\\boundary-config.json", "--mode", "canary", "--", "credential"]
+
+
+--- helpers/windows: calibration-lifecycle/actions.txt -> acceptance/helpers/f00118.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\calibration-lifecycle\\boundary-config.json", "--mode", "evaluator", "--", "transition", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository", "--apply"]
+
+
+--- helpers/windows: calibration-network/actions.txt -> acceptance/helpers/f00123.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\calibration-network\\boundary-config.json", "--mode", "canary", "--", "network"]
+
+
+--- helpers/windows: calibration-spawn/actions.txt -> acceptance/helpers/f00127.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\calibration-spawn\\boundary-config.json", "--mode", "canary", "--", "spawn"]
+
+
+--- helpers/windows: calibration-write/actions.txt -> acceptance/helpers/f00131.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\calibration-write\\boundary-config.json", "--mode", "canary", "--", "write"]
+
+
+--- helpers/windows: calibration2-credential/actions.txt -> acceptance/helpers/f00135.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\calibration2-credential\\boundary-config.json", "--mode", "canary", "--", "credential"]
+
+
+--- helpers/windows: calibration2-lifecycle/actions.txt -> acceptance/helpers/f00139.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\calibration2-lifecycle\\boundary-config.json", "--mode", "evaluator", "--", "transition", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository", "--apply"]
+
+
+--- helpers/windows: calibration2-network/actions.txt -> acceptance/helpers/f00143.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\calibration2-network\\boundary-config.json", "--mode", "canary", "--", "network"]
+
+
+--- helpers/windows: calibration2-spawn/actions.txt -> acceptance/helpers/f00147.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\calibration2-spawn\\boundary-config.json", "--mode", "canary", "--", "spawn"]
+
+
+--- helpers/windows: calibration2-write/actions.txt -> acceptance/helpers/f00151.txt ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\calibration2-write\\boundary-config.json", "--mode", "canary", "--", "write"]
+
+
+--- instructions: boundary-calibration/calibration2-write/actions.txt -> acceptance/instructions/f/00457.bin ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\calibration2-write\\boundary-config.json", "--mode", "canary", "--", "write"]
+
+
+--- instructions: boundary-calibration/calibration2-network/actions.txt -> acceptance/instructions/f/00474.bin ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\calibration2-network\\boundary-config.json", "--mode", "canary", "--", "network"]
+
+
+--- instructions: boundary-calibration/calibration2-credential/actions.txt -> acceptance/instructions/f/00491.bin ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\calibration2-credential\\boundary-config.json", "--mode", "canary", "--", "credential"]
+
+
+--- instructions: boundary-calibration/calibration2-spawn/actions.txt -> acceptance/instructions/f/00508.bin ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\calibration2-spawn\\boundary-config.json", "--mode", "canary", "--", "spawn"]
+
+
+--- instructions: boundary-calibration/calibration2-lifecycle/actions.txt -> acceptance/instructions/f/00525.bin ---
+["C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe", "-I", "-B", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-retained-skills\\tests\\plugin_integration\\retained-skills\\audit_worker.py", "--config", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\calibration2-lifecycle\\boundary-config.json", "--mode", "evaluator", "--", "transition", "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository", "--apply"]
+

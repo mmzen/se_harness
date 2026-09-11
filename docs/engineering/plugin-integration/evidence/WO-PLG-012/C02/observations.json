@@ -1,0 +1,125 @@
+{
+  "case": "C02",
+  "expected": "Only explicit preflight requests add preflight; no retained target receipt.",
+  "conclusion": "Final bounded acceptance passed; see source reports for final selection and preserved earlier failures.",
+  "observed_records": [
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C02-preflight/observations.json",
+      "retained": "acceptance/helpers/f00164.json",
+      "sha256": "e8d83c46046b7a2008ba6dc9579adad1112317429ca32ca4479a239ceee720d8",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C02-preflight/observations.json",
+      "retained": "acceptance/helpers/f00287.json",
+      "sha256": "b3733166207c88f1ef88295f3d4f099b19eabbd21d70872e864e2f3ad625f9cb",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    }
+  ],
+  "source_evidence": [
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C02-preflight/actions.txt",
+      "retained": "acceptance/helpers/f00161.txt",
+      "sha256": "d5d2590bce9c71639772175ba3ea94194c6ad512f755fba5cd85e682fc3387dd"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C02-preflight/audit.jsonl",
+      "retained": "acceptance/helpers/f00162.jsonl",
+      "sha256": "f52d3d6392714b8df1d2112b72d8084b06a8f63d7ce54f4a7a6985b3aae038f8"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C02-preflight/boundary-config.json",
+      "retained": "acceptance/helpers/f00163.json",
+      "sha256": "16849906e9e1e7d47b103e4498313e159eed2bf948e530cba19e57afacb858c3"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C02-preflight/observations.json",
+      "retained": "acceptance/helpers/f00164.json",
+      "sha256": "e8d83c46046b7a2008ba6dc9579adad1112317429ca32ca4479a239ceee720d8"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C02-preflight/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C02-preflight/stdout.txt",
+      "retained": "acceptance/helpers/f00165.txt",
+      "sha256": "5f7b587172a918dd4b49df2a1df448d3c98c18b7c9637675db1b49522bab0401"
+    },
+    {
+      "group": "helpers/windows",
+      "original": "matrix1/C02-preflight-driver.json",
+      "retained": "acceptance/helpers/f00166.json",
+      "sha256": "ae8716d0de69bd6da8dc4de4880a81877230569365be1e70ce5723b9d0b16e2d"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C02-preflight/actions.txt",
+      "retained": "acceptance/helpers/f00284.txt",
+      "sha256": "aca074858354fe3767ff2299474f173fefc4a1d11cd145aa0771623eef7d23b5"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C02-preflight/audit.jsonl",
+      "retained": "acceptance/helpers/f00285.jsonl",
+      "sha256": "02bfa9ed918373711edfcbfcf0e6fc3586e74afb3aa872eb2df0b9da77bcfb0c"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C02-preflight/boundary-config.json",
+      "retained": "acceptance/helpers/f00286.json",
+      "sha256": "50de5029ed65cbc30b4abdcaf0444a64472627d5dbc1546416958143d1aab8ff"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C02-preflight/observations.json",
+      "retained": "acceptance/helpers/f00287.json",
+      "sha256": "b3733166207c88f1ef88295f3d4f099b19eabbd21d70872e864e2f3ad625f9cb"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C02-preflight/stderr.txt",
+      "retained": "acceptance/helpers/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C02-preflight/stdout.txt",
+      "retained": "acceptance/helpers/f00288.txt",
+      "sha256": "7f1aa20369d7ee7fe45e90ab677170b78c5cafb664372eb544316b73cfe9bb0d"
+    },
+    {
+      "group": "helpers/linux",
+      "original": "matrix-final/C02-preflight-driver.json",
+      "retained": "acceptance/helpers/f00289.json",
+      "sha256": "66a8ff1748a0e418e8efcc91c67f50f09dd8fe2722b2417b4849bea0cd6908e8"
+    }
+  ],
+  "limits": [
+    "Helper tests and fixed Linux replay are distinct from Windows instruction observations.",
+    "Native activation, live migration and production sandbox qualification are not claimed.",
+    "Original failed observations retain their failed verdicts; this index does not replace them."
+  ],
+  "reports": [
+    "acceptance/helpers/REPORT.md",
+    "acceptance/instructions/report.md",
+    "acceptance/linux-replay/REPORT.md"
+  ]
+}

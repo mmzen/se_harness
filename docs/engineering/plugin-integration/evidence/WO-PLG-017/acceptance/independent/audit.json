@@ -1,0 +1,845 @@
+{
+  "call_records": [
+    {
+      "returncode": 0,
+      "source": "linux-final/01-git-version.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/02-commit-type.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/02b-source-gitdir.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/02c-source-common.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/02d-trust-0.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/02d-trust-1.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/02d-trust-2.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/02d-trust-3.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/03-clone.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/04-longpaths-config.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/05-autocrlf-config.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/06-checkout.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/07-longpaths-readback.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/08-head.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/09-g-ancestor.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/10-c-ancestor.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/11-tracked.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/12-clean-before.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/14-checker-positive.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 1,
+      "source": "linux-final/17-checker-reject.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/19-checker-restored.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/21-clean-after.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 1,
+      "source": "linux-final/23-checker-plan-reject.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "linux-final/25-checker-plan-restored.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 128,
+      "source": "o01-ownership-refusal.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "o02-c-ancestor.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "o03-original-tree.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "o04-original-objects.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "o05-candidate.json",
+      "stream_hashes": {}
+    },
+    {
+      "returncode": 0,
+      "source": "o06-historical-diff.json",
+      "stream_hashes": {}
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt1/01-git-version.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt1/02-commit-type.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 128,
+      "source": "windows-attempt1/03-clone.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt2/01-git-version.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt2/02-commit-type.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt2/02b-source-gitdir.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt2/02c-source-common.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 128,
+      "source": "windows-attempt2/03-clone.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/01-git-version.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/02-commit-type.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/02b-source-gitdir.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/02c-source-common.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/02d-trust-0.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/02d-trust-1.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/02d-trust-2.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/02d-trust-3.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/03-clone.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/04-longpaths-config.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/05-autocrlf-config.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/06-checkout.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/07-longpaths-readback.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/08-head.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/09-g-ancestor.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/10-c-ancestor.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/11-tracked.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/12-clean-before.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/14-checker-positive.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 1,
+      "source": "windows-attempt3/17-checker-reject.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/19-checker-restored.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-attempt3/21-clean-after.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/01-git-version.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/02-commit-type.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/02b-source-gitdir.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/02c-source-common.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/02d-trust-0.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/02d-trust-1.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/02d-trust-2.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/02d-trust-3.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/03-clone.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/04-longpaths-config.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/05-autocrlf-config.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/06-checkout.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/07-longpaths-readback.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/08-head.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/09-g-ancestor.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/10-c-ancestor.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/11-tracked.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/12-clean-before.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/14-checker-positive.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 1,
+      "source": "windows-final/17-checker-reject.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/19-checker-restored.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/21-clean-after.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 1,
+      "source": "windows-final/23-checker-plan-reject.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    },
+    {
+      "returncode": 0,
+      "source": "windows-final/25-checker-plan-restored.json",
+      "stream_hashes": {
+        "stderr": true,
+        "stdout": true
+      }
+    }
+  ],
+  "executed_versions": {
+    "linux-final": {
+      "archived_runner_matches": true,
+      "commit": "ed31a520964f81627c9c5b428b68968caa6282e7",
+      "passed": true,
+      "runner_sha256": "3d624c828789cd1a7bd722cb9fbde9cca03ab5674e0ef5e1dfe2bfa24a53ebea",
+      "snapshot_file_count": 12066,
+      "snapshot_restore_equal": true
+    },
+    "windows-attempt3": {
+      "archived_runner_matches": true,
+      "commit": "c3c74334d1d780c112525b6d2b9043e5239f5425",
+      "passed": true,
+      "runner_sha256": "aee3d4dc6acae77e8728d6dfc721bb0852cd0edfc8e4279e062530f75c629151",
+      "snapshot_file_count": 12025,
+      "snapshot_restore_equal": true
+    },
+    "windows-final": {
+      "archived_runner_matches": true,
+      "commit": "ed31a520964f81627c9c5b428b68968caa6282e7",
+      "passed": true,
+      "runner_sha256": "3d624c828789cd1a7bd722cb9fbde9cca03ab5674e0ef5e1dfe2bfa24a53ebea",
+      "snapshot_file_count": 12068,
+      "snapshot_restore_equal": true
+    }
+  },
+  "external_blocker": {
+    "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json",
+    "reason": "Actual Git filename-too-long error for the 183-character relative path during nested upgrade rehearsal; outside the approved 55 moves",
+    "root_limit": "The full temporary root is absent from the CI log; a 77-character rehearsal root against a 259-character ceiling is a separate derived explanation.",
+    "source": "Parent-retained exact-head PR449 CI log; raw copy archived in ci-context",
+    "stage": "upgrade_rehearsal export_tracked_tree git add -A"
+  },
+  "final_commit": "ed31a520964f81627c9c5b428b68968caa6282e7",
+  "fixed_inputs": "Original G oracle is unchanged; no product/helper/evaluator behavior rerun is claimed.",
+  "linux": {
+    "actual_root_max_windows_full_path": [
+      295,
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json"
+    ],
+    "all_checkout_bytes_unchanged_after_check": true,
+    "calls": [
+      "01-git-version",
+      "02-commit-type",
+      "02b-source-gitdir",
+      "02c-source-common",
+      "02d-trust-0",
+      "02d-trust-1",
+      "02d-trust-2",
+      "02d-trust-3",
+      "03-clone",
+      "04-longpaths-config",
+      "05-autocrlf-config",
+      "06-checkout",
+      "07-longpaths-readback",
+      "08-head",
+      "09-g-ancestor",
+      "10-c-ancestor",
+      "11-tracked",
+      "12-clean-before",
+      "14-checker-positive",
+      "17-checker-reject",
+      "19-checker-restored",
+      "23-checker-plan-reject",
+      "25-checker-plan-restored",
+      "21-clean-after"
+    ],
+    "checker_internally_uses_longpaths_true_for_readonly_git": true,
+    "checker_sha256": "bbebd978d2fd985e8dc7f9194a70a16fb72f435b5a2a4f9f7506c3287552e6d5",
+    "checkout": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-path-repair-independent-20260911/linux-final/repo",
+    "checkout_core_longpaths": false,
+    "ci_root_max_windows_full_path": [
+      210,
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json"
+    ],
+    "commit": "ed31a520964f81627c9c5b428b68968caa6282e7",
+    "coordinated_plan_map_tamper_rejected": true,
+    "executable": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "mapped_files": 55,
+    "max_relative_path": 183,
+    "oracle_sha256": "51370c2582f8360b2bc5530b677c3f41b181a8d8f3d44c99e44e166ae29cc378",
+    "passed": true,
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+    "readme_original_prefix_preserved": true,
+    "runner_sha256": "3d624c828789cd1a7bd722cb9fbde9cca03ab5674e0ef5e1dfe2bfa24a53ebea",
+    "schema": "wo017-independent-checkout-v1",
+    "selected_unchanged_files": 94,
+    "source": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness",
+    "tamper_rejected": true,
+    "tracked_files": 6634,
+    "unchanged_original_files": 1085
+  },
+  "oracle_sha256": "51370c2582f8360b2bc5530b677c3f41b181a8d8f3d44c99e44e166ae29cc378",
+  "original_failures_preserved": [
+    "o01 ownership refusal",
+    "Windows clone ownership refusals attempts1 and2",
+    "Candidate-vs-G all-equal supplemental assertion: handoff already changed between C and G"
+  ],
+  "passed": false,
+  "repair_completion_claimed": false,
+  "retention_audit_passed": true,
+  "scoped_checks_passed": true,
+  "source_suite": {
+    "actual_source_evidence_job": 103058454420,
+    "actual_source_summary": "Ran 1134 tests; OK (skipped=4)",
+    "actual_upgrade_windows_job": 103058843952,
+    "launched": false,
+    "planned_argv": [
+      "python3",
+      "scripts/run_tests.py"
+    ],
+    "reason": "Parent withdrew redundant local source-suite request after exact-head CI source suite passed.",
+    "repair_remains_blocked": true,
+    "status": "not_run"
+  },
+  "source_suite_summary": "Ran 1134 tests; OK (skipped=4)",
+  "windows": {
+    "actual_root_max_windows_full_path": [
+      232,
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json"
+    ],
+    "all_checkout_bytes_unchanged_after_check": true,
+    "calls": [
+      "01-git-version",
+      "02-commit-type",
+      "02b-source-gitdir",
+      "02c-source-common",
+      "02d-trust-0",
+      "02d-trust-1",
+      "02d-trust-2",
+      "02d-trust-3",
+      "03-clone",
+      "04-longpaths-config",
+      "05-autocrlf-config",
+      "06-checkout",
+      "07-longpaths-readback",
+      "08-head",
+      "09-g-ancestor",
+      "10-c-ancestor",
+      "11-tracked",
+      "12-clean-before",
+      "14-checker-positive",
+      "17-checker-reject",
+      "19-checker-restored",
+      "23-checker-plan-reject",
+      "25-checker-plan-restored",
+      "21-clean-after"
+    ],
+    "checker_internally_uses_longpaths_true_for_readonly_git": true,
+    "checker_sha256": "bbebd978d2fd985e8dc7f9194a70a16fb72f435b5a2a4f9f7506c3287552e6d5",
+    "checkout": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17-l1_m1c6q\\r",
+    "checkout_core_longpaths": false,
+    "ci_root_max_windows_full_path": [
+      210,
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json"
+    ],
+    "commit": "ed31a520964f81627c9c5b428b68968caa6282e7",
+    "coordinated_plan_map_tamper_rejected": true,
+    "executable": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "mapped_files": 55,
+    "max_relative_path": 183,
+    "oracle_sha256": "51370c2582f8360b2bc5530b677c3f41b181a8d8f3d44c99e44e166ae29cc378",
+    "passed": true,
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "readme_original_prefix_preserved": true,
+    "runner_sha256": "3d624c828789cd1a7bd722cb9fbde9cca03ab5674e0ef5e1dfe2bfa24a53ebea",
+    "schema": "wo017-independent-checkout-v1",
+    "selected_unchanged_files": 94,
+    "source": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-evidence-path-fix",
+    "tamper_rejected": true,
+    "tracked_files": 6634,
+    "unchanged_original_files": 1085
+  }
+}

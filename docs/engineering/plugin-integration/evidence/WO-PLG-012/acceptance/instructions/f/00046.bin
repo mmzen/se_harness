@@ -1,0 +1,6 @@
+import json
+import sys
+from pathlib import Path
+root = Path(__file__).resolve().parent
+value = {name: json.loads((root / filename).read_text(encoding='utf8')) for name, filename in [('skill_result', 'C05-final-skill-result.json'), ('execution_receipt', 'C05-final-execution-receipt.json')]}
+sys.stdout.buffer.write(json.dumps(value, ensure_ascii=False).encode('utf8') + b'\n')

@@ -1,0 +1,523 @@
+Candidate source evidence	Set up job	﻿2026-09-11T06:14:07.5522064Z Current runner version: '2.337.0'
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5547076Z ##[group]Runner Image Provisioner
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5548147Z Hosted Compute Agent
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5548688Z Version: 20260828.587
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5549276Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5550012Z Build Date: 2026-08-28T16:44:25Z
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5550621Z Worker ID: {9ada632b-79df-4d8c-acfa-4838ed77faa2}
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5551304Z Azure Region: centralus
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5551838Z ##[endgroup]
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5553356Z ##[group]Operating System
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5553975Z Ubuntu
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5554446Z 24.04.5
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5554947Z LTS
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5555407Z ##[endgroup]
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5555892Z ##[group]Runner Image
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5556621Z Image: ubuntu-24.04
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5557130Z Version: 20260907.300.1
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5558261Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260907.300/images/ubuntu/Ubuntu2404-Readme.md
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5559877Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260907.300
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5560748Z ##[endgroup]
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5561735Z ##[group]GITHUB_TOKEN Permissions
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5563934Z Contents: read
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5564577Z Metadata: read
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5565168Z ##[endgroup]
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5567574Z Secret source: Actions
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5568865Z Cache mode: write
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5569525Z Prepare workflow directory
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5948733Z Prepare all required actions
+Candidate source evidence	Set up job	2026-09-11T06:14:07.5999223Z Getting action download info
+Candidate source evidence	Set up job	2026-09-11T06:14:07.8576417Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Candidate source evidence	Set up job	2026-09-11T06:14:07.9719676Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+Candidate source evidence	Set up job	2026-09-11T06:14:08.0362821Z Download action repository 'actions/cache@5a3ec84eff668545956fd18022155c47e93e2684' (SHA:5a3ec84eff668545956fd18022155c47e93e2684)
+Candidate source evidence	Set up job	2026-09-11T06:14:08.2171453Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Candidate source evidence	Set up job	2026-09-11T06:14:08.4137575Z Complete job name: Candidate source evidence
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T06:14:08.4826413Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4834900Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4835741Z with:
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4836125Z   fetch-depth: 0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4836554Z   persist-credentials: false
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4837028Z   repository: mmzen/se_harness
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4841034Z   token: ***
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4841461Z   ssh-strict: true
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4841863Z   ssh-user: git
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4842254Z   clean: true
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4842666Z   sparse-checkout-cone-mode: true
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4843144Z   fetch-tags: false
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4843552Z   show-progress: true
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4843958Z   lfs: false
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4844378Z   submodules: false
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4844790Z   set-safe-directory: true
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4845253Z   allow-unsafe-pr-checkout: false
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4845935Z env:
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4846311Z   PYTHONNOUSERSITE: 1
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4846732Z   PYTHONPATH: 
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.4847117Z ##[endgroup]
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.5907049Z Syncing repository: mmzen/se_harness
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.5909356Z ##[group]Getting Git version info
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.5910564Z Working directory is '/home/runner/work/se_harness/se_harness'
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.5912229Z [command]/usr/bin/git version
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.5977369Z git version 2.55.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.5997955Z ##[endgroup]
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6014235Z Temporarily overriding HOME='/home/runner/work/_temp/2d2d5f98-c617-4d54-9eda-79f5e56ba76c' before making global git config changes
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6016919Z Adding repository directory to the temporary git global config as a safe directory
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6022055Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/se_harness/se_harness
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6075900Z Deleting the contents of '/home/runner/work/se_harness/se_harness'
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6088961Z ##[group]Initializing the repository
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6098579Z [command]/usr/bin/git init /home/runner/work/se_harness/se_harness
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6181805Z hint: Using 'master' as the name for the initial branch. This default branch name
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6184696Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6186500Z hint: to use in all of your new repositories, which will suppress this warning,
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6188131Z hint: call:
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6188904Z hint:
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6189890Z hint: 	git config --global init.defaultBranch <name>
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6191041Z hint:
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6192071Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6193686Z hint: 'development'. The just-created branch can be renamed via this command:
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6195293Z hint:
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6196147Z hint: 	git branch -m <name>
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6197050Z hint:
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6198302Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6200205Z Initialized empty Git repository in /home/runner/work/se_harness/se_harness/.git/
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6203186Z [command]/usr/bin/git remote add origin https://github.com/mmzen/se_harness
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6243859Z ##[endgroup]
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6245258Z ##[group]Disabling automatic garbage collection
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6248311Z [command]/usr/bin/git config --local gc.auto 0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6278360Z ##[endgroup]
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6279898Z ##[group]Setting up auth
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6285514Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6317183Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6632347Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6664598Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6877961Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.6913720Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.7105488Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.7137573Z ##[endgroup]
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.7138631Z ##[group]Fetching the repository
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:08.7148253Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +ab9d7ab0f02e71c2b1fee5efa4daeb6bf83fb6f6:refs/remotes/pull/449/merge
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6101165Z From https://github.com/mmzen/se_harness
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6103629Z  * [new branch]        artifacts/plugin-implementation          -> origin/artifacts/plugin-implementation
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6106491Z  * [new branch]        definitions/plg010-delegation            -> origin/definitions/plg010-delegation
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6109586Z  * [new branch]        definitions/plg011-delegation            -> origin/definitions/plg011-delegation
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6112818Z  * [new branch]        definitions/plg012-delegation            -> origin/definitions/plg012-delegation
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6115508Z  * [new branch]        definitions/plg017-path-repair           -> origin/definitions/plg017-path-repair
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6118035Z  * [new branch]        main                                     -> origin/main
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6120494Z  * [new branch]        notes/plugin-installation-proposal       -> origin/notes/plugin-installation-proposal
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6123429Z  * [new branch]        notes/plugin-proposal-assessment-2026-09-08 -> origin/notes/plugin-proposal-assessment-2026-09-08
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6126131Z  * [new branch]        release/0.10                             -> origin/release/0.10
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6127487Z  * [new branch]        release/0.11                             -> origin/release/0.11
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6128685Z  * [new branch]        release/0.12                             -> origin/release/0.12
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6129722Z  * [new branch]        release/0.12.0                           -> origin/release/0.12.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6130704Z  * [new branch]        release/0.13                             -> origin/release/0.13
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6131712Z  * [new branch]        release/0.13.0                           -> origin/release/0.13.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6133604Z  * [new branch]        release/0.14                             -> origin/release/0.14
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6134938Z  * [new branch]        release/0.14.0                           -> origin/release/0.14.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6135912Z  * [new branch]        release/0.15                             -> origin/release/0.15
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6137014Z  * [new branch]        release/0.15.0                           -> origin/release/0.15.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6138279Z  * [new branch]        release/0.16                             -> origin/release/0.16
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6139247Z  * [new branch]        release/0.16.0                           -> origin/release/0.16.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6140218Z  * [new branch]        release/0.17                             -> origin/release/0.17
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6141172Z  * [new branch]        release/0.17.0                           -> origin/release/0.17.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6142125Z  * [new branch]        release/0.2.0                            -> origin/release/0.2.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6143523Z  * [new branch]        release/0.2.1                            -> origin/release/0.2.1
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6144482Z  * [new branch]        release/0.2.2                            -> origin/release/0.2.2
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6145454Z  * [new branch]        release/0.3.0                            -> origin/release/0.3.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6146485Z  * [new branch]        release/0.4.0                            -> origin/release/0.4.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6147440Z  * [new branch]        release/0.6                              -> origin/release/0.6
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6148741Z  * [new branch]        release/0.7                              -> origin/release/0.7
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6149881Z  * [new branch]        release/0.8                              -> origin/release/0.8
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6150828Z  * [new branch]        release/0.9                              -> origin/release/0.9
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6151965Z  * [new branch]        work/plugin-change-skill                 -> origin/work/plugin-change-skill
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6153270Z  * [new branch]        work/plugin-evidence-path-repair         -> origin/work/plugin-evidence-path-repair
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6154615Z  * [new branch]        work/plugin-evidence-skill               -> origin/work/plugin-evidence-skill
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6156909Z  * [new branch]        work/plugin-retained-skills              -> origin/work/plugin-retained-skills
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6159347Z  * [new tag]           last                                     -> last
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6161105Z  * [new tag]           v0.10.0                                  -> v0.10.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6162838Z  * [new tag]           v0.11.0                                  -> v0.11.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6164728Z  * [new tag]           v0.12.0                                  -> v0.12.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6166288Z  * [new tag]           v0.13.0                                  -> v0.13.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6168186Z  * [new tag]           v0.14.0                                  -> v0.14.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6169913Z  * [new tag]           v0.15.0                                  -> v0.15.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6171528Z  * [new tag]           v0.16.0                                  -> v0.16.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6173183Z  * [new tag]           v0.17.0                                  -> v0.17.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6174914Z  * [new tag]           v0.2.0                                   -> v0.2.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6176200Z  * [new tag]           v0.2.1                                   -> v0.2.1
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6177017Z  * [new tag]           v0.2.2                                   -> v0.2.2
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6178145Z  * [new tag]           v0.3.0                                   -> v0.3.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6178997Z  * [new tag]           v0.4.0                                   -> v0.4.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6179824Z  * [new tag]           v0.4.1                                   -> v0.4.1
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6180973Z  * [new tag]           v0.5.0                                   -> v0.5.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6182471Z  * [new tag]           v0.5.0a1                                 -> v0.5.0a1
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6184075Z  * [new tag]           v0.6.0                                   -> v0.6.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6185674Z  * [new tag]           v0.7.0                                   -> v0.7.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6187340Z  * [new tag]           v0.7.1                                   -> v0.7.1
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6188955Z  * [new tag]           v0.8.0                                   -> v0.8.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6190406Z  * [new tag]           v0.9.0                                   -> v0.9.0
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6192778Z  * [new ref]           ab9d7ab0f02e71c2b1fee5efa4daeb6bf83fb6f6 -> pull/449/merge
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6196171Z ##[endgroup]
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6197829Z ##[group]Determining the checkout info
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6199665Z ##[endgroup]
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6200591Z [command]/usr/bin/git sparse-checkout disable
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6203640Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6207419Z ##[group]Checking out the ref
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:10.6209290Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/449/merge
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0218623Z Note: switching to 'refs/remotes/pull/449/merge'.
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0219798Z 
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0220696Z You are in 'detached HEAD' state. You can look around, make experimental
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0223379Z changes and commit them, and you can discard any commits you make in this
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0226543Z state without impacting any branches by switching back to a branch.
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0228765Z 
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0230093Z If you want to create a new branch to retain commits you create, you may
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0233287Z do so (now or later) by using -c with the switch command. Example:
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0235398Z 
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0236191Z   git switch -c <new-branch-name>
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0237454Z 
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0238367Z Or undo this operation with:
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0239573Z 
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0240251Z   git switch -
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0241217Z 
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0243013Z Turn off this advice by setting config variable advice.detachedHead to false
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0248666Z 
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0251405Z HEAD is now at ab9d7ab0 Merge e5b48a16be2e5e59ecd17d7d28d24409ff5ce519 into 7fe82c95823503e54d2e35e00d8c409a6dd4b065
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0259688Z ##[endgroup]
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0286445Z [command]/usr/bin/git log -1 --format=%H
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0309701Z ab9d7ab0f02e71c2b1fee5efa4daeb6bf83fb6f6
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0324117Z ##[group]Removing auth
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0325989Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0359610Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0568305Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0595508Z http.https://github.com/.extraheader
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0602520Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0634969Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0829080Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.0856145Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Candidate source evidence	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:11.1044511Z ##[endgroup]
+Candidate source evidence	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T06:14:11.1281823Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Candidate source evidence	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:11.1284245Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+Candidate source evidence	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:11.1284739Z with:
+Candidate source evidence	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:11.1285029Z   python-version: 3.11
+Candidate source evidence	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:11.1285342Z   check-latest: false
+Candidate source evidence	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:11.1288548Z   token: ***
+Candidate source evidence	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:11.1288887Z   update-environment: true
+Candidate source evidence	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:11.1289236Z   allow-prereleases: false
+Candidate source evidence	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:11.1289573Z   freethreaded: false
+Candidate source evidence	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:11.1289932Z env:
+Candidate source evidence	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:11.1290227Z   PYTHONNOUSERSITE: 1
+Candidate source evidence	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:11.1290570Z   PYTHONPATH: 
+Candidate source evidence	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:11.1290860Z ##[endgroup]
+Candidate source evidence	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:11.2575290Z ##[group]Installed versions
+Candidate source evidence	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:11.2657749Z (node:2352) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Candidate source evidence	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:11.2658791Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Candidate source evidence	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:11.2659720Z Successfully set up CPython (3.11.16)
+Candidate source evidence	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:11.2660667Z ##[endgroup]
+Candidate source evidence	Resolve candidate version	﻿2026-09-11T06:14:11.2846245Z ##[group]Run version="$(python -c 'import se_harness; print(se_harness.__version__)')"
+Candidate source evidence	Resolve candidate version	2026-09-11T06:14:11.2847845Z ^[[36;1mversion="$(python -c 'import se_harness; print(se_harness.__version__)')"^[[0m
+Candidate source evidence	Resolve candidate version	2026-09-11T06:14:11.2848909Z ^[[36;1mprintf 'version=%s\n' "$version" >> "$GITHUB_OUTPUT"^[[0m
+Candidate source evidence	Resolve candidate version	2026-09-11T06:14:11.2902072Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Candidate source evidence	Resolve candidate version	2026-09-11T06:14:11.2902968Z env:
+Candidate source evidence	Resolve candidate version	2026-09-11T06:14:11.2903543Z   PYTHONNOUSERSITE: 1
+Candidate source evidence	Resolve candidate version	2026-09-11T06:14:11.2904200Z   PYTHONPATH: 
+Candidate source evidence	Resolve candidate version	2026-09-11T06:14:11.2904915Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Resolve candidate version	2026-09-11T06:14:11.2905987Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Candidate source evidence	Resolve candidate version	2026-09-11T06:14:11.2907082Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Resolve candidate version	2026-09-11T06:14:11.2908241Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Resolve candidate version	2026-09-11T06:14:11.2909238Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Resolve candidate version	2026-09-11T06:14:11.2910246Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Candidate source evidence	Resolve candidate version	2026-09-11T06:14:11.2911163Z ##[endgroup]
+Candidate source evidence	Derive the predecessor evaluator facts from the declared root	﻿2026-09-11T06:14:11.3400641Z ##[group]Run set -euo pipefail
+Candidate source evidence	Derive the predecessor evaluator facts from the declared root	2026-09-11T06:14:11.3401157Z ^[[36;1mset -euo pipefail^[[0m
+Candidate source evidence	Derive the predecessor evaluator facts from the declared root	2026-09-11T06:14:11.3401814Z ^[[36;1mpython -m repository_tools.evaluator_facts derive --repository . --github-output "$GITHUB_OUTPUT" --json^[[0m
+Candidate source evidence	Derive the predecessor evaluator facts from the declared root	2026-09-11T06:14:11.3425547Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Candidate source evidence	Derive the predecessor evaluator facts from the declared root	2026-09-11T06:14:11.3426049Z env:
+Candidate source evidence	Derive the predecessor evaluator facts from the declared root	2026-09-11T06:14:11.3426521Z   PYTHONNOUSERSITE: 1
+Candidate source evidence	Derive the predecessor evaluator facts from the declared root	2026-09-11T06:14:11.3426888Z   PYTHONPATH: 
+Candidate source evidence	Derive the predecessor evaluator facts from the declared root	2026-09-11T06:14:11.3427302Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Derive the predecessor evaluator facts from the declared root	2026-09-11T06:14:11.3428112Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Candidate source evidence	Derive the predecessor evaluator facts from the declared root	2026-09-11T06:14:11.3428701Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Derive the predecessor evaluator facts from the declared root	2026-09-11T06:14:11.3429234Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Derive the predecessor evaluator facts from the declared root	2026-09-11T06:14:11.3429762Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Derive the predecessor evaluator facts from the declared root	2026-09-11T06:14:11.3430310Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Candidate source evidence	Derive the predecessor evaluator facts from the declared root	2026-09-11T06:14:11.3430827Z ##[endgroup]
+Candidate source evidence	Derive the predecessor evaluator facts from the declared root	2026-09-11T06:14:11.4215174Z {"candidate_version":"0.18.0","payload_sha256":"dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405","schema":"se-harness-evaluator-facts-v1","version":"0.17.0","wheel":"se_harness-0.17.0-py3-none-any.whl","wheel_sha256":"305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced"}
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	﻿2026-09-11T06:14:11.4334118Z ##[group]Run set -euo pipefail
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:11.4334685Z ^[[36;1mset -euo pipefail^[[0m
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:11.4335249Z ^[[36;1mpython -m se_harness qualify complete-candidate . \^[[0m
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:11.4335871Z ^[[36;1m  --candidate-commit "$GITHUB_SHA" \^[[0m
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:11.4336466Z ^[[36;1m  --output "$RUNNER_TEMP/complete-candidate.json" \^[[0m
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:11.4337019Z ^[[36;1m  --json^[[0m
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:11.4360868Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:11.4361420Z env:
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:11.4361757Z   PYTHONNOUSERSITE: 1
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:11.4362101Z   PYTHONPATH: 
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:11.4362520Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:11.4363099Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:11.4363684Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:11.4364208Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:11.4364761Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:11.4365372Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:11.4365833Z ##[endgroup]
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8359338Z {
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8360257Z   "authority": "evidence-only; no lifecycle or external action authorized",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8360924Z   "checks": [
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8361247Z     {
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8361567Z       "id": "CC001",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8361946Z       "message": "candidate runtime is bound to the checkout",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8362271Z       "passed": true,
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8362510Z       "subject": "candidate-runtime"
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8362764Z     },
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8362945Z     {
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8363131Z       "id": "CC002",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8363401Z       "message": "HEAD and tracked tree match the candidate",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8363719Z       "passed": true,
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8363953Z       "subject": "candidate-commit"
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8364197Z     },
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8364448Z     {
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8364637Z       "id": "CC003",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8364887Z       "message": "artifacts=1533; errors=0; warnings=46",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8365189Z       "passed": true,
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8365420Z       "subject": "engineering-graph"
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8365668Z     },
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8365847Z     {
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8366040Z       "id": "CC004",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8366295Z       "message": "target state is unchanged",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8366574Z       "passed": true,
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8366801Z       "subject": "repository-state"
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8367047Z     }
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8367224Z   ],
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8367422Z   "completion": "completed",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8367861Z   "evaluator": {
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8368163Z     "candidate_commit": "ab9d7ab0f02e71c2b1fee5efa4daeb6bf83fb6f6",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8368518Z     "diagnostics": [],
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8368759Z     "distribution": "se-harness",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8369167Z     "identity_sha256": "8936e2c2f05854894a86382ae222b65d9062f43b651bc9b2dc4bdf3449548e58",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8369960Z     "isolated_python": false,
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8370224Z     "pythonpath_present": false,
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8370489Z     "role": "candidate-source",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8370749Z     "user_site_enabled": false,
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8370990Z     "version": "0.18.0"
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8371206Z   },
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8371418Z   "independence": "candidate-controlled",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8371716Z   "operation": "complete-candidate",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8371969Z   "passed": true,
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8372230Z   "schema": "se-harness-release-qualification-v1",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8372536Z   "target": {
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8372794Z     "commit": "ab9d7ab0f02e71c2b1fee5efa4daeb6bf83fb6f6",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8373263Z     "identity_sha256": "185387cd906f183debd2eb761ca3da0fd9696ca16656f8d9a12fecdebb515b6d",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8373691Z     "kind": "complete-candidate",
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8373987Z     "tree": "4f330ebe8cb10137a00ea4aefeed1a84f7a38a94"
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8374502Z   }
+Candidate source evidence	Qualify the complete candidate graph as candidate-controlled	2026-09-11T06:14:12.8374681Z }
+Candidate source evidence	Prove active evaluator surface	﻿2026-09-11T06:14:12.8571675Z ##[group]Run python scripts/check_portable_release_surface.py --repository .
+Candidate source evidence	Prove active evaluator surface	2026-09-11T06:14:12.8572233Z ^[[36;1mpython scripts/check_portable_release_surface.py --repository .^[[0m
+Candidate source evidence	Prove active evaluator surface	2026-09-11T06:14:12.8595920Z shell: /usr/bin/bash -e {0}
+Candidate source evidence	Prove active evaluator surface	2026-09-11T06:14:12.8596198Z env:
+Candidate source evidence	Prove active evaluator surface	2026-09-11T06:14:12.8596415Z   PYTHONNOUSERSITE: 1
+Candidate source evidence	Prove active evaluator surface	2026-09-11T06:14:12.8596652Z   PYTHONPATH: 
+Candidate source evidence	Prove active evaluator surface	2026-09-11T06:14:12.8596929Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Prove active evaluator surface	2026-09-11T06:14:12.8597355Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Candidate source evidence	Prove active evaluator surface	2026-09-11T06:14:12.8597879Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Prove active evaluator surface	2026-09-11T06:14:12.8598257Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Prove active evaluator surface	2026-09-11T06:14:12.8598631Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Prove active evaluator surface	2026-09-11T06:14:12.8599013Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Candidate source evidence	Prove active evaluator surface	2026-09-11T06:14:12.8599366Z ##[endgroup]
+Candidate source evidence	Prove active evaluator surface	2026-09-11T06:14:12.9156460Z portable release surface: PASS
+Candidate source evidence	Restore the suite timings of the previous run	﻿2026-09-11T06:14:12.9310726Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9311986Z ##[group]Run actions/cache@5a3ec84eff668545956fd18022155c47e93e2684
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9312322Z with:
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9312545Z   path: target/test-timings.json
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9312821Z   key: test-timings-Linux-34569064009
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9313112Z   restore-keys: test-timings-Linux-
+Candidate source evidence	Restore the suite timings of the previous run	
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9313388Z   enableCrossOsArchive: false
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9313641Z   fail-on-cache-miss: false
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9313876Z   lookup-only: false
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9314089Z   save-always: false
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9314307Z env:
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9314498Z   PYTHONNOUSERSITE: 1
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9314724Z   PYTHONPATH: 
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9314997Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9315465Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9315881Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9316249Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9316612Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9316988Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:12.9317300Z ##[endgroup]
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:13.0347187Z (node:2444) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:13.0348493Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:13.1803007Z Cache hit for: test-timings-Linux-34569064009
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:13.1947471Z (node:2444) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:13.4023428Z Received 3313 of 3313 (100.0%), 0.1 MBs/sec
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:13.4024167Z Cache Size: ~0 MB (3313 B)
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:13.4050515Z [command]/usr/bin/tar -xf /home/runner/work/_temp/a7e8e6d3-176e-4454-9815-d1784fbe379a/cache.tzst -P -C /home/runner/work/se_harness/se_harness --use-compress-program unzstd
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:13.4111672Z Cache restored successfully
+Candidate source evidence	Restore the suite timings of the previous run	2026-09-11T06:14:13.4190147Z Cache restored from key: test-timings-Linux-34568411408
+Candidate source evidence	Run complete candidate-source regression	﻿2026-09-11T06:14:13.4257021Z ##[group]Run python scripts/run_tests.py --workers 4 --scale full --timings target/test-timings.json
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:13.4258069Z ^[[36;1mpython scripts/run_tests.py --workers 4 --scale full --timings target/test-timings.json^[[0m
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:13.4280972Z shell: /usr/bin/bash -e {0}
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:13.4281331Z env:
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:13.4281617Z   PYTHONNOUSERSITE: 1
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:13.4281983Z   PYTHONPATH: 
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:13.4282360Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:13.4282869Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:13.4283406Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:13.4283841Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:13.4284314Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:13.4284792Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:13.4285238Z ##[endgroup]
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:41.7988725Z --workers must be at least 1
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:41.8048762Z docs/notes/diagnostic-codes.md matches the source
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:42.3641915Z WEX_SCALE artifacts=100 validation=0.036782s focus=0.061567s plan=0.074560s
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:42.3643239Z WEX_SCALE artifacts=500 validation=0.162018s focus=0.214884s plan=0.324062s
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:42.3669572Z WEX_SCALE artifacts=1000 validation=0.371429s focus=0.389581s plan=0.625619s
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:42.3722746Z ----------------------------------------------------------------------
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:42.3723942Z Ran 1134 tests in 28.161s (180 classes, 4 workers)
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:42.3725024Z 
+Candidate source evidence	Run complete candidate-source regression	2026-09-11T06:14:42.3725519Z OK (skipped=4)
+Candidate source evidence	Export and build the one non-promotable candidate wheel	﻿2026-09-11T06:14:42.4240420Z ##[group]Run set -euo pipefail
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4240773Z ^[[36;1mset -euo pipefail^[[0m
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4241151Z ^[[36;1mmkdir -p "$RUNNER_TEMP/candidate-export" "$RUNNER_TEMP/candidate-dist"^[[0m
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4241661Z ^[[36;1mgit archive "$GITHUB_SHA" | tar -x -C "$RUNNER_TEMP/candidate-export"^[[0m
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4242148Z ^[[36;1mpython -m pip wheel --disable-pip-version-check --no-deps \^[[0m
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4242638Z ^[[36;1m  --wheel-dir "$RUNNER_TEMP/candidate-dist" "$RUNNER_TEMP/candidate-export"^[[0m
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4243207Z ^[[36;1mtest "$(find "$RUNNER_TEMP/candidate-dist" -maxdepth 1 -name '*.whl' | wc -l)" -eq 1^[[0m
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4243832Z ^[[36;1mtest -f "$RUNNER_TEMP/candidate-dist/se_harness-$CANDIDATE_VERSION-py3-none-any.whl"^[[0m
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4244356Z ^[[36;1m(cd "$RUNNER_TEMP/candidate-dist" && sha256sum -- *.whl > SHA256SUMS)^[[0m
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4266229Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4266576Z env:
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4266835Z   PYTHONNOUSERSITE: 1
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4267063Z   PYTHONPATH: 
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4267344Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4267969Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4268396Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4268777Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4269158Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4269707Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4270038Z   CANDIDATE_VERSION: 0.18.0
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:42.4270274Z ##[endgroup]
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:43.1313261Z Processing /home/runner/work/_temp/candidate-export
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:43.1332306Z   Installing build dependencies: started
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:44.8582835Z   Installing build dependencies: finished with status 'done'
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:44.8588955Z   Getting requirements to build wheel: started
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:45.3040374Z   Getting requirements to build wheel: finished with status 'done'
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:45.3047937Z   Preparing metadata (pyproject.toml): started
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:45.4987050Z   Preparing metadata (pyproject.toml): finished with status 'done'
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:45.5046993Z Building wheels for collected packages: se-harness
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:45.5053602Z   Building wheel for se-harness (pyproject.toml): started
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:45.7835648Z   Building wheel for se-harness (pyproject.toml): finished with status 'done'
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:45.7850487Z   Created wheel for se-harness: filename=se_harness-0.18.0-py3-none-any.whl size=484824 sha256=54b25362844a3909795bb16cd599b908d3cd3907ed5eca9a280fb8b05c9cf5c6
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:45.7852393Z   Stored in directory: /tmp/pip-ephem-wheel-cache-z2bekf4v/wheels/82/2d/b2/e08890299b718e07f3c1733b6c37897b1fd983619937ee73b3
+Candidate source evidence	Export and build the one non-promotable candidate wheel	2026-09-11T06:14:45.7927301Z Successfully built se-harness
+Candidate source evidence	Prove candidate source made no checkout change	﻿2026-09-11T06:14:45.8517588Z ##[group]Run git diff --exit-code
+Candidate source evidence	Prove candidate source made no checkout change	2026-09-11T06:14:45.8518259Z ^[[36;1mgit diff --exit-code^[[0m
+Candidate source evidence	Prove candidate source made no checkout change	2026-09-11T06:14:45.8518607Z ^[[36;1mtest -z "$(git status --porcelain=v1 --untracked-files=all)"^[[0m
+Candidate source evidence	Prove candidate source made no checkout change	2026-09-11T06:14:45.8540204Z shell: /usr/bin/bash -e {0}
+Candidate source evidence	Prove candidate source made no checkout change	2026-09-11T06:14:45.8540489Z env:
+Candidate source evidence	Prove candidate source made no checkout change	2026-09-11T06:14:45.8540699Z   PYTHONNOUSERSITE: 1
+Candidate source evidence	Prove candidate source made no checkout change	2026-09-11T06:14:45.8540926Z   PYTHONPATH: 
+Candidate source evidence	Prove candidate source made no checkout change	2026-09-11T06:14:45.8541209Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Prove candidate source made no checkout change	2026-09-11T06:14:45.8541634Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Candidate source evidence	Prove candidate source made no checkout change	2026-09-11T06:14:45.8542062Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Prove candidate source made no checkout change	2026-09-11T06:14:45.8542433Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Prove candidate source made no checkout change	2026-09-11T06:14:45.8542811Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Prove candidate source made no checkout change	2026-09-11T06:14:45.8543184Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Candidate source evidence	Prove candidate source made no checkout change	2026-09-11T06:14:45.8543500Z ##[endgroup]
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	﻿2026-09-11T06:14:45.8920927Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8922240Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8922615Z with:
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8922992Z   name: candidate-wheel-non-promotable-ab9d7ab0f02e71c2b1fee5efa4daeb6bf83fb6f6
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8923468Z   path: /home/runner/work/_temp/candidate-dist/
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8923780Z   if-no-files-found: error
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8924015Z   retention-days: 1
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8924231Z   compression-level: 6
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8924454Z   overwrite: false
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8924670Z   include-hidden-files: false
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8924908Z env:
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8925100Z   PYTHONNOUSERSITE: 1
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8925357Z   PYTHONPATH: 
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8925621Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8926034Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8926457Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8926832Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8927205Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8927585Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:45.8928175Z ##[endgroup]
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:46.0546456Z (node:6152) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:46.0547868Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:46.0614397Z With the provided path, there will be 2 files uploaded
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:46.0638935Z Artifact name is valid!
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:46.0639693Z Root directory input is valid!
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:46.3301634Z Beginning upload of artifact content to blob storage
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:46.3665930Z (node:6152) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:46.6742404Z Uploaded bytes 471519
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:46.7176326Z Finished uploading artifact content to blob storage!
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:46.7177137Z SHA256 digest of uploaded artifact zip is 7df38a4db08d96d150f10dcbc85f96c08c27169a258faa41c7699f49693ecc19
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:46.7178879Z Finalizing artifact upload
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:46.9144842Z Artifact candidate-wheel-non-promotable-ab9d7ab0f02e71c2b1fee5efa4daeb6bf83fb6f6.zip successfully finalized. Artifact ID 10187088292
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:46.9146493Z Artifact candidate-wheel-non-promotable-ab9d7ab0f02e71c2b1fee5efa4daeb6bf83fb6f6 has been successfully uploaded! Final size is 471519 bytes. Artifact ID is 10187088292
+Candidate source evidence	Hand the candidate wheel to the consuming jobs	2026-09-11T06:14:46.9152197Z Artifact download URL: https://github.com/mmzen/se_harness/actions/runs/34569064009/artifacts/10187088292
+Candidate source evidence	Retain the complete-candidate role result	﻿2026-09-11T06:14:46.9273640Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:46.9274953Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:46.9275355Z with:
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:46.9275596Z   name: complete-candidate-qualification
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:46.9275945Z   path: /home/runner/work/_temp/complete-candidate.json
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:46.9276272Z   if-no-files-found: warn
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:46.9276534Z   compression-level: 6
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:46.9276760Z   overwrite: false
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:46.9276991Z   include-hidden-files: false
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:46.9277231Z env:
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:46.9277428Z   PYTHONNOUSERSITE: 1
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:46.9277836Z   PYTHONPATH: 
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:46.9278127Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:46.9278597Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:46.9279018Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:46.9279391Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:46.9279770Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:46.9280159Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:46.9280478Z ##[endgroup]
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:47.0902581Z (node:6164) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:47.0903811Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:47.0945340Z With the provided path, there will be 1 file uploaded
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:47.0958439Z Artifact name is valid!
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:47.0959081Z Root directory input is valid!
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:47.3756046Z Beginning upload of artifact content to blob storage
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:47.3925746Z (node:6164) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:47.5059765Z Uploaded bytes 814
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:47.5425915Z Finished uploading artifact content to blob storage!
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:47.5427600Z SHA256 digest of uploaded artifact zip is 25f109b91c5719262371bfdd6542f02c0014c5799693251bc7136f3e0bb13d24
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:47.5428857Z Finalizing artifact upload
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:47.7474811Z Artifact complete-candidate-qualification.zip successfully finalized. Artifact ID 10187088647
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:47.7475990Z Artifact complete-candidate-qualification has been successfully uploaded! Final size is 814 bytes. Artifact ID is 10187088647
+Candidate source evidence	Retain the complete-candidate role result	2026-09-11T06:14:47.7482278Z Artifact download URL: https://github.com/mmzen/se_harness/actions/runs/34569064009/artifacts/10187088647
+Candidate source evidence	Post Restore the suite timings of the previous run	﻿2026-09-11T06:14:47.7635469Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Candidate source evidence	Post Restore the suite timings of the previous run	2026-09-11T06:14:47.7636661Z Post job cleanup.
+Candidate source evidence	Post Restore the suite timings of the previous run	2026-09-11T06:14:47.8735593Z (node:6177) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Candidate source evidence	Post Restore the suite timings of the previous run	2026-09-11T06:14:47.8736821Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Candidate source evidence	Post Restore the suite timings of the previous run	2026-09-11T06:14:47.8882251Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/se_harness/se_harness --files-from manifest.txt --use-compress-program zstdmt
+Candidate source evidence	Post Restore the suite timings of the previous run	2026-09-11T06:14:48.0272245Z (node:6177) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Candidate source evidence	Post Restore the suite timings of the previous run	2026-09-11T06:14:48.1662363Z Sent 3309 of 3309 (100.0%), 0.0 MBs/sec
+Candidate source evidence	Post Restore the suite timings of the previous run	2026-09-11T06:14:48.2688219Z Cache saved with key: test-timings-Linux-34569064009
+Candidate source evidence	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T06:14:48.2780000Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Candidate source evidence	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:48.2781218Z Post job cleanup.
+Candidate source evidence	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:48.4015576Z (node:6197) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Candidate source evidence	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:14:48.4017024Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Candidate source evidence	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T06:14:48.4136263Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Candidate source evidence	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:48.4137813Z Post job cleanup.
+Candidate source evidence	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:48.5023946Z [command]/usr/bin/git version
+Candidate source evidence	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:48.5061609Z git version 2.55.0
+Candidate source evidence	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:48.5099050Z Temporarily overriding HOME='/home/runner/work/_temp/2a7bf5c3-441e-47f0-b7ef-1a9c964d6648' before making global git config changes
+Candidate source evidence	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:48.5100786Z Adding repository directory to the temporary git global config as a safe directory
+Candidate source evidence	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:48.5105779Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/se_harness/se_harness
+Candidate source evidence	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:48.5142859Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Candidate source evidence	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:48.5177107Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Candidate source evidence	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:48.5400167Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Candidate source evidence	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:48.5429307Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Candidate source evidence	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:48.5665281Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Candidate source evidence	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:14:48.5702175Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Candidate source evidence	Complete job	﻿2026-09-11T06:14:48.6042640Z Evaluate and set job outputs
+Candidate source evidence	Complete job	2026-09-11T06:14:48.6049381Z Set output 'candidate_version'
+Candidate source evidence	Complete job	2026-09-11T06:14:48.6051283Z Set output 'predecessor_version'
+Candidate source evidence	Complete job	2026-09-11T06:14:48.6052186Z Set output 'predecessor_wheel'
+Candidate source evidence	Complete job	2026-09-11T06:14:48.6052700Z Set output 'predecessor_wheel_sha256'
+Candidate source evidence	Complete job	2026-09-11T06:14:48.6053220Z Set output 'predecessor_payload_sha256'
+Candidate source evidence	Complete job	2026-09-11T06:14:48.6053935Z Cleaning up orphan processes
+Candidate source evidence	Complete job	2026-09-11T06:14:48.6283934Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684, actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

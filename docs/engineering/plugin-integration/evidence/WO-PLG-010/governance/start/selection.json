@@ -1,0 +1,11 @@
+{
+  "work_order": "WO-PLG-010",
+  "request": "WO-PLG-010 next, followed by WO-PLG-011 and WO-PLG-012 (delegated route)",
+  "actor": "delegated-executor",
+  "base": "origin/main",
+  "head": "9bc323a7bd5bd259b1ba2098b719314091734a20",
+  "check_run_id": "102995269085",
+  "check_url": "https://github.com/mmzen/se_harness/actions/runs/34514130635/job/102995269085",
+  "observed_effect": "WO-PLG-010 approved -> in_progress through released evaluator 0.17.0",
+  "classification": "Actual delegated start with live GitHub check; not a fixture and not completion or assurance evidence"
+}

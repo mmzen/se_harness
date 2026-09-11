@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "-I",
+    "-B",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/run_replay.py",
+    "--bundle",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/repository-missing-executable/bundle",
+    "--output",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/repository-missing-executable/run",
+    "--command-timeout",
+    "2",
+    "--batch",
+    "probe"
+  ],
+  "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/repository-missing-executable",
+  "exit_code": 1,
+  "stdout": "{\"label\": \"probe\", \"exit_code\": null, \"non_git_changes\": []}\n{\"passed\": false, \"batch\": \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/repository-missing-executable/run/probe.json\"}\n",
+  "stderr": "Traceback (most recent call last):\n  File \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/run_replay.py\", line 217, in <module>\n    main()\n  File \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/run_replay.py\", line 179, in main\n    raise command_error\n  File \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-skill/tests/plugin_integration/evidence-skill/portable/run_replay.py\", line 157, in main\n    result = subprocess.run(argv, cwd=output, env=env, capture_output=True,\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/subprocess.py\", line 548, in run\n    with Popen(*popenargs, **kwargs) as process:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/subprocess.py\", line 1026, in __init__\n    self._execute_child(args, executable, preexec_fn, close_fds,\n  File \"/usr/lib/python3.12/subprocess.py\", line 1955, in _execute_child\n    raise child_exception_type(errno_num, err_msg, err_filename)\nFileNotFoundError: [Errno 2] No such file or directory: '/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1/repository-missing-executable/absent-probe-executable'\n"
+}

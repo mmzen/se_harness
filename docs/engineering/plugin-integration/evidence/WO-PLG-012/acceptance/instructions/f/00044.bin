@@ -1,0 +1,12 @@
+"""Copy the selected exact-output fixture byte-for-byte; no profile rendering."""
+import hashlib
+import sys
+from pathlib import Path
+root = Path(__file__).resolve().parent
+source = (root / 'C05-canonical-source.txt').read_bytes()
+assert len(source) == 270
+assert hashlib.sha256(source).hexdigest() == 'bb78722a28685df386cfbf5226c5dddc70e35bd6f1dda45b7cd60826f324d567'
+output = root / 'C05-canonical-operator-output.txt'
+assert not output.exists()
+output.write_bytes(source)
+sys.stdout.buffer.write(source)

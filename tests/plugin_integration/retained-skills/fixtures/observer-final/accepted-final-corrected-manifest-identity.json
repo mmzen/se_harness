@@ -1,0 +1,68 @@
+{
+  "classification": "test-only accepted fixture identity; not production publisher trust",
+  "raw_sha256": {
+    "harness-operator-brief/agents/openai.yaml": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+    "harness-operator-brief/scripts/check_brief.py": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+    "harness-operator-brief/skill-contract.json": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+    "harness-operator-brief/SKILL.md": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51",
+    "harness-orient/scripts/orient.py": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
+    "harness-orient/skill-contract.json": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+    "harness-orient/SKILL.md": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf"
+  },
+  "cores": {
+    "harness-orient": {
+      "manifest": {
+        "files": [
+          {
+            "mode": "utf8-text-lf-v1",
+            "path": "SKILL.md",
+            "sha256": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf"
+          },
+          {
+            "mode": "utf8-text-lf-v1",
+            "path": "scripts/orient.py",
+            "sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56"
+          },
+          {
+            "mode": "utf8-text-lf-v1",
+            "path": "skill-contract.json",
+            "sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627"
+          }
+        ],
+        "schema": "se-harness-skill-manifest-v1"
+      },
+      "sha256": "913222368735da7a3ce5110db94cf60440f580dd82239ffa8abb7c5d8a4ba2c8",
+      "prior_observer_digest_without_final_lf": "60aab1f0e2a4f85182fc1ee04aa7f6ea3959d7d5213c0c729c7884c9f1c68342"
+    },
+    "harness-operator-brief": {
+      "manifest": {
+        "files": [
+          {
+            "mode": "utf8-text-lf-v1",
+            "path": "SKILL.md",
+            "sha256": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51"
+          },
+          {
+            "mode": "utf8-text-lf-v1",
+            "path": "agents/openai.yaml",
+            "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+          },
+          {
+            "mode": "utf8-text-lf-v1",
+            "path": "scripts/check_brief.py",
+            "sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683"
+          },
+          {
+            "mode": "utf8-text-lf-v1",
+            "path": "skill-contract.json",
+            "sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52"
+          }
+        ],
+        "schema": "se-harness-skill-manifest-v1"
+      },
+      "sha256": "ff2a0830ee08afd9f263bbcc0092c100b1682f05598adab2f9a168258bbbbf63",
+      "prior_observer_digest_without_final_lf": "c17c538ddaa28096e555be3883c2de88d306a191bae7c74469e657746e5d0aa9"
+    }
+  },
+  "serialization_source": "Retained orient.py _json_bytes: compact sorted UTF-8 JSON followed by LF; original observer omitted LF."
+}

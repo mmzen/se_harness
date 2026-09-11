@@ -1,0 +1,154 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-ACC-001",
+    "artifacts": [
+      "WO-ACC-001"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "CAP-ACC-001",
+      "INT-ACC-003",
+      "REQ-ACC-001",
+      "SPEC-ACC-001",
+      "VER-ACC-001"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/demo-change/evidence/WO-ACC-001/",
+      "docs/engineering/demo-change/work-orders/WO-ACC-001.md",
+      "src/feature.py"
+    ],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-DEFAULT-REVIEW",
+    "procedure_id": "PROC-FOCUS-SELECTED",
+    "status": "not_assessable",
+    "gates": []
+  },
+  "procedure": {
+    "id": "PROC-FOCUS-SELECTED",
+    "current_step": "STEP-FOCUS-SELECTED",
+    "steps": [
+      {
+        "id": "STEP-FOCUS-SELECTED",
+        "kind": "command",
+        "gate_ids": [],
+        "effects": [
+          "Projected selected state for WO-ACC-001."
+        ],
+        "non_effects": [
+          "Focus changes no lifecycle state."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-ACC-001"
+        ]
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-ACC-001",
+        "status": "draft"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-ACC-001",
+        "status": "draft"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Projected the selected scope for WO-ACC-001."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-ACC-001 is draft."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-FOCUS-SELECTED",
+      "step_id": "STEP-FOCUS-SELECTED",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "WO-ACC-001"
+      ]
+    },
+    "alternatives": []
+  },
+  "result_sha256": "e4d0efb1b6b0e4ed1c505b76e62b8ee96d1cd043646c3017ba0cfe25609651ec",
+  "context": {
+    "reading_manifest": [
+      "ENGINEERING_HARNESS.md",
+      "docs/engineering/OPERATING_CARD.md",
+      "AGENTS.md",
+      "docs/engineering/demo-change/intent/INT-ACC-003.md",
+      "docs/engineering/demo-change/capabilities/CAP-ACC-001.md",
+      "docs/engineering/demo-change/requirements/REQ-ACC-001.md",
+      "docs/engineering/demo-change/specifications/SPEC-ACC-001.md",
+      "docs/engineering/demo-change/verification/VER-ACC-001.md",
+      "docs/engineering/demo-change/work-orders/WO-ACC-001.md"
+    ],
+    "governing": [
+      "CAP-ACC-001",
+      "INT-ACC-003",
+      "REQ-ACC-001",
+      "SPEC-ACC-001",
+      "VER-ACC-001"
+    ],
+    "declared_paths": [
+      "src/feature.py",
+      "docs/engineering/demo-change/work-orders/WO-ACC-001.md",
+      "docs/engineering/demo-change/evidence/WO-ACC-001/"
+    ],
+    "state": {
+      "status": "draft",
+      "family": "work_order"
+    },
+    "next": {
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "WO-ACC-001"
+      ],
+      "procedure_id": "PROC-FOCUS-SELECTED",
+      "step_id": "STEP-FOCUS-SELECTED"
+    },
+    "decision_required": null
+  }
+}

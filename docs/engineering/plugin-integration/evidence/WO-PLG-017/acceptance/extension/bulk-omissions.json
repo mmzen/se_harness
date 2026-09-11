@@ -1,0 +1,64 @@
+{
+  "files": [
+    {
+      "actual_archive_argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "archive",
+        "--format=tar",
+        "HEAD"
+      ],
+      "actual_archive_cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-k47frca9\\src",
+      "external_retention_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-path-extension-independent-20260911\\before-extension\\export\\call01.stdout.gz",
+      "external_stored_bytes": 31539237,
+      "external_stored_sha256": "5c667811baaf2a51b924aec65e9455d205c182ccce2b2e88f69df3e04187d0ba",
+      "omitted_from_package": true,
+      "reason": "Whole-repository archive recursively contains prior acceptance packages; retained externally and reproducible from immutable Git commit.",
+      "reproduction_argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "archive",
+        "--format=tar",
+        "e9c256eb49d27f82e60543b7b3ca24f43a5129be"
+      ],
+      "reproduction_context": "Run in the preserved source repository containing this immutable commit. HEAD in the actual argv was recorded as source_commit.",
+      "source_commit": "e9c256eb49d27f82e60543b7b3ca24f43a5129be",
+      "source_path": "before-extension/export/call01.stdout.gz",
+      "stdout_bytes": 119029760,
+      "stdout_sha256": "5187f393bf9457e053ade5119a1e784d14a67cb1d45a056d46d5288fed5c344a"
+    },
+    {
+      "actual_archive_argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "archive",
+        "--format=tar",
+        "HEAD"
+      ],
+      "actual_archive_cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-pkny7t08\\src",
+      "external_retention_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-path-extension-independent-20260911\\after-extension\\export\\call01.stdout.gz",
+      "external_stored_bytes": 31541579,
+      "external_stored_sha256": "8ef8f52b075a677ced7f2b4c2dedf557ed62e5b8df93f487740db7ee572e71c0",
+      "omitted_from_package": true,
+      "reason": "Whole-repository archive recursively contains prior acceptance packages; retained externally and reproducible from immutable Git commit.",
+      "reproduction_argv": [
+        "git",
+        "-c",
+        "core.autocrlf=false",
+        "archive",
+        "--format=tar",
+        "28b4d2e22477067a17544e8275a37cecf22575f0"
+      ],
+      "reproduction_context": "Run in the preserved source repository containing this immutable commit. HEAD in the actual argv was recorded as source_commit.",
+      "source_commit": "28b4d2e22477067a17544e8275a37cecf22575f0",
+      "source_path": "after-extension/export/call01.stdout.gz",
+      "stdout_bytes": 119040000,
+      "stdout_sha256": "816388d8d304a12259f91dc0811bfc9bd56d412494333904604456a4f910d0ce"
+    }
+  ],
+  "plans_and_maps_retained": 4,
+  "retained_actual_payload_count": 56
+}

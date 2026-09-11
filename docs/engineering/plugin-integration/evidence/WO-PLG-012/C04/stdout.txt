@@ -1,0 +1,9 @@
+Combined review copy; exact original bytes remain at each retained path below.
+
+--- linux-replay/linux-replay: C04-direct-invalid-explicit/stdout.txt -> acceptance/linux-replay/f00018.txt ---
+{"code":"TCM003","outcome":"blocked"}
+
+
+--- instructions: independent/trace/C04-direct-invalid-explicit/stdout.txt -> acceptance/instructions/f/00112.bin ---
+{"code":"TCM003","outcome":"blocked"}
+

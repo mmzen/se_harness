@@ -1,0 +1,7 @@
+The Café example describes one prepared verification record. The following supplied facts determine the explanation.
+
+Record: VREC-BRF-001
+Inspection command: harnessctl check . --artifact VREC-BRF-001 --json
+Illustrative code: print("naïve café ☕")
+Decision boundary: Only the assurance owner may verify VREC-BRF-001 when the retained evidence is sufficient; preparation grants no merge or release authority.
+The explanation must rely only on this supplied example, not current repository state.

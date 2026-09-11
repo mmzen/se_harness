@@ -1,0 +1,47 @@
+{
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+  "released_evaluator": "0.16.0",
+  "observed_archive_and_payload_match": true,
+  "commands": [
+    {
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "identity",
+        "--role",
+        "released-evaluator",
+        "--expected-version",
+        "0.16.0",
+        "--expected-root",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0",
+        "--checkout-root",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-change-skill",
+        "--evaluator-payload-sha256",
+        "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+        "--evaluator-wheel-sha256",
+        "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+        "--entry-point",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/harnessctl",
+        "--require-entry-point",
+        "--require-isolated-python",
+        "--json"
+      ],
+      "exit_status": 0
+    },
+    {
+      "argv": [
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "exit_status": 0
+    }
+  ]
+}

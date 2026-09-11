@@ -1,0 +1,24 @@
+"""Correct the observer-only omitted-LF defect; preserve every original file."""
+import hashlib
+import json
+import sys
+from pathlib import Path
+root = Path(__file__).resolve().parent
+identity = json.loads((root / 'accepted-final-fixture-package-identity.json').read_text())
+for core in identity['cores'].values():
+    canonical = (json.dumps(core['manifest'], sort_keys=True, ensure_ascii=False, allow_nan=False, separators=(',', ':')) + '\n').encode('utf8')
+    core['prior_observer_digest_without_final_lf'] = core['sha256']
+    core['sha256'] = hashlib.sha256(canonical).hexdigest()
+identity['serialization_source'] = 'Retained orient.py _json_bytes: compact sorted UTF-8 JSON followed by LF; original observer omitted LF.'
+new_path = root / 'accepted-final-corrected-manifest-identity.json'
+assert not new_path.exists()
+new_path.write_bytes(json.dumps(identity, indent=2).encode('utf8') + b'\n')
+receipt = json.loads((root / 'C05-final-execution-receipt.json').read_text())
+digest = identity['cores']['harness-operator-brief']['sha256']
+receipt['effects']['evidence'][0]['sha256'] = digest
+receipt['execution']['skills'][0]['portable_core_sha256'] = digest
+result = json.loads((root / 'C05-final-skill-result.json').read_text(encoding='utf8'))
+receipt_path = root / 'C05-final-corrected-execution-receipt.json'
+assert not receipt_path.exists()
+receipt_path.write_bytes(json.dumps(receipt, indent=2).encode('utf8') + b'\n')
+sys.stdout.buffer.write(json.dumps({'corrected_core_digests': {name: core['sha256'] for name, core in identity['cores'].items()}, 'skill_result': result, 'execution_receipt': receipt}, ensure_ascii=False).encode('utf8') + b'\n')

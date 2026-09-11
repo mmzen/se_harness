@@ -1,0 +1,6 @@
+{
+  "batch": "probe",
+  "snapshot": {
+    "sentinel.txt": "9b18cfe191ae34a57f99051c3a2b73f5eae86151ec9224aa341195bb7b51b39f"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "fixed-synthetic-preparation-input-v1",
+  "candidate": "772f90c03a04d0a7914088ac6b869bb829b4bcad",
+  "work_order": "WO-EVD-001",
+  "verification": "VER-EVD-001",
+  "record": "VREC-EVD-001",
+  "actor": "fixture-preparation-actor",
+  "right": "DR-VREC-PREPARE",
+  "domain": "evidence-demo",
+  "evidence": {
+    "docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md": "f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220"
+  },
+  "supplied_decision": "EVD02-vrec raw request, synthetic engineering-owner test input. Prepare this exact ready record only. No assurance/release/external right."
+}

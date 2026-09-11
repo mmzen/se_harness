@@ -1,0 +1,7 @@
+Combined review copy; exact original bytes remain at each retained path below.
+
+--- helpers/windows: matrix1/C02-preflight/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix-final/C02-preflight/stderr.txt -> acceptance/helpers/f00017.txt ---
+

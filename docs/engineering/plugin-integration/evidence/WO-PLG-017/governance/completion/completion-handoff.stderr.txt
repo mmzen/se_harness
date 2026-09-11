@@ -1,0 +1,3 @@
+usage: harnessctl [-h] [--version]
+                  {init,validate,inspect,dashboard,doctor,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,prepare-release} ...
+harnessctl: error: unrecognized arguments: --work-order WO-PLG-017

@@ -1,0 +1,79 @@
+{
+  "observed_at": "2026-09-11T06:41:44.594905+00:00",
+  "pull_request": {
+    "baseRefName": "work/plugin-evidence-skill",
+    "headRefName": "work/plugin-evidence-path-repair",
+    "headRefOid": "47f7b842d395764583adbe834c39aecdc0afd521",
+    "state": "OPEN",
+    "url": "https://github.com/mmzen/se_harness/pull/449"
+  },
+  "checks": [
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34570104939/job/103172607744",
+      "name": "Retain verified integration package",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34570104939/job/103172458315",
+      "name": "Verify integration package (Windows)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34570104939/job/103172458291",
+      "name": "Verify integration package (Linux)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34570104939/job/103172383709",
+      "name": "Build deterministic integration package",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34570104939/job/103170470628",
+      "name": "Upgrade rehearsal (Windows)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34570104939/job/103170470730",
+      "name": "Upgrade rehearsal (Linux)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34570104939/job/103170361570",
+      "name": "Candidate package evidence",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34570105177/job/103170247172",
+      "name": "Rehearse the qualification of the release record / Qualify and replay (release-record)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34570105177/job/103170211371",
+      "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34570104946/job/103170210554",
+      "name": "validate",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34570104939/job/103170210301",
+      "name": "Candidate source evidence",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34570105177/job/103170211014",
+      "name": "Select the release record to rehearse",
+      "state": "SUCCESS"
+    },
+    {
+      "link": "https://github.com/mmzen/se_harness/actions/runs/34570104953/job/103170210475",
+      "name": "Predecessor evaluator assessment",
+      "state": "SUCCESS"
+    }
+  ],
+  "all_reported_checks_successful": true,
+  "scope": "Observed CI outcomes at this exact head; no assurance decision or merge"
+}

@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-pkny7t08\\src\\tests\\plugin_integration\\evidence-skill\\check_retention_paths.py",
+    "--root",
+    "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-pkny7t08\\src"
+  ],
+  "elapsed_seconds": 0.25366997718811035,
+  "error": null,
+  "expected": 0,
+  "returncode": 1,
+  "stderr_sha256": "b93b516c862bca2ed2076fd23ef3a0375451308fe3074a6a9d66a3fed121ce33",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

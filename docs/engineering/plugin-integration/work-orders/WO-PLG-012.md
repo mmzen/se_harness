@@ -2,10 +2,10 @@
 id = "WO-PLG-012"
 type = "work_order"
 title = "Retained orientation and explicit operator briefing"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
-updated = "2026-09-10"
+updated = "2026-09-11"
 [delegation]
 class = "execution"
 
@@ -41,13 +41,27 @@ to = "approved"
 decided_at = "2026-09-10T18:20:07Z"
 decided_by = "engineering-owner"
 reason = "The operator previously stated \"i approve the packets, i authorize the work\" for the reviewed plugin proposal, then on 2026-09-10 explicitly selected \"WO-PLG-010 next, followed by WO-PLG-011 and WO-PLG-012  (delegated route)\". Record only WO-PLG-012 approval under engineering-owner, from proposal 0b42325b75bc6d1c36897369687c3d3ed578bdb9; reviewed/current draft SHA-256 fad319f2739a2cde999ff0fc614013d64454148d8977aedf26e8d96ada111925. The owner expressly requests [delegation] class execution for WO-PLG-012; approval is the delegating act for DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE only. It includes the exact planned VREC and evaluator-sidecar paths in this bounded scope. The class must exist at origin/main and the required live GitHub validate check must succeed for the exact head before the delegated executor acts. No implementation has started. Assurance of implementation, release and PR merge remain separate human decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-10T20:27:42Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 7fe82c95823503e54d2e35e00d8c409a6dd4b065 (check-run 103035926587, source github-checks)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-11T07:08:42Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at e152f6a8f30a62b4fb3676ada2e437f94544ee9c (check-run 103176796613, source github-checks)."
 +++
 
 # Work Order: Retained orientation and explicit operator briefing
 
 ## Lifecycle
 
-The operator selected WO-PLG-012 for the delegated execution route on 2026-09-10. The released evaluator records definition and work-order approval separately. The execution class permits only start, completion and ready-VREC preparation, after this approved work order is present at the configured PR base and the required GitHub check succeeds for the exact candidate. No implementation has started in this definition delivery. Assurance, release and integration remain separate human decisions.
+The operator selected WO-PLG-012 for the delegated execution route on 2026-09-10. The released evaluator records definition and work-order approval separately. The execution class permits only start, completion and ready-VREC preparation, after this approved work order is present at the configured PR base and the required GitHub check succeeds for the exact candidate. The released evaluator subsequently applied the delegated start. The retained plugin skills and acceptance evidence are delivered in PR #446. Assurance, release and integration remain separate human decisions.
 
 ## Objective
 
@@ -91,3 +105,12 @@ Stop on failed identity, undeclared effects, unsupported required host behavior,
 ## Completion report format
 
 Report implemented behavior, evidence, material non-effects, limitations and the evaluator's next accountable step. Completion does not decide assurance, merge or publication.
+
+
+## Completion observation
+
+The released evaluator applied delegated completion after all 13 hosted checks
+passed at e152f6a8f30a62b4fb3676ada2e437f94544ee9c. See the
+[evidence index](../evidence/WO-PLG-012/README.md). The inherited Windows failure
+is repaired under separate WO-PLG-017; retained skill behavior and tests are
+unchanged. Ready VREC009 preparation remains separate from human assurance.

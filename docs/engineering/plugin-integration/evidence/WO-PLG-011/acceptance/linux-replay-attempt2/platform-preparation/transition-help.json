@@ -1,0 +1,17 @@
+{
+  "label": "transition-help",
+  "phase": "read-only platform preparation",
+  "argv": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "transition",
+    "--help"
+  ],
+  "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-preparation-20260910",
+  "exit_code": 0,
+  "stdout": "usage: harnessctl transition [-h] --set TRANSITIONS --decision DECISIONS\n                             [--reason REASONS] [--apply] [--json]\n                             [target]\n\npositional arguments:\n  target\n\noptions:\n  -h, --help            show this help message and exit\n  --set TRANSITIONS     explicit ID=STATUS transition; repeat for packets\n  --decision DECISIONS  ID=ACTOR assertion; repeat for every selected artifact\n  --reason REASONS      ID=TEXT reason; required for rejection, or use\n                        successor VREC ID for supersession\n  --apply               apply the exact validated transaction; default is\n                        read-only planning\n  --json\n",
+  "stderr": ""
+}

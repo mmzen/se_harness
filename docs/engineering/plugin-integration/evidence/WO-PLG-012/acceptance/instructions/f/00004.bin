@@ -1,0 +1,111 @@
+"""Independent assertions over immutable observations; executes no product code."""
+import hashlib
+import json
+from pathlib import Path
+root = Path(__file__).resolve().parent
+
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+def canonical(obj):
+    return (json.dumps(obj, ensure_ascii=False, sort_keys=True, allow_nan=False, separators=(',', ':')) + '\n').encode('utf8')
+
+assert sha((root / 'oracle.md').read_bytes()) == '7a76b6ae582c8fd78f82ee7e4025c5a7730952637365251de56523b2881b2e4c'
+assert sha((root / 'raw-inputs.json').read_bytes()) == 'b263586318c022a4b21fff4a74eb52ca11670537da766238039a293f258a5448'
+raw = json.loads((root / 'raw-inputs.json').read_text(encoding='utf8'))
+traces = {}
+all_events = []
+source_copies = 0
+baseline = None
+for path in sorted((root / 'trace').iterdir()):
+    obs = json.loads((path / 'observations.json').read_text())
+    assert obs['execution_error'] is None
+    assert not obs['changed_paths'] and obs['before'] == obs['after']
+    assert len(obs['before']) == 150
+    baseline = obs['before'] if baseline is None else baseline
+    assert obs['before'] == baseline
+    assert not obs['denied_events']
+    if path.name == 'preexec-root-identity':
+        assert obs['passed'] is False and obs['exit_code'] == 1 and obs['expected_exit'] == 2
+        actual = json.loads((path / 'stdout.txt').read_text())
+        assert actual['passed'] is False and {d['code'] for d in actual['diagnostics']} == {'RID003', 'RID004', 'RID010', 'RID024'}
+    else:
+        assert obs['passed'] is True
+    mapping = json.loads((path / 'executed-source/source-map.json').read_text())
+    for filename, item in mapping.items():
+        assert sha((path / 'executed-source' / filename).read_bytes()) == item['sha256']
+        source_copies += 1
+    events = [json.loads(line) for line in (path / 'audit.jsonl').read_text().splitlines()]
+    assert not [event for event in events if event['kind'] == 'denied']
+    all_events.extend(events)
+    traces[path.name] = {'exit_code': obs['exit_code'], 'original_recorder_passed': obs['passed'], 'changed_paths': obs['changed_paths'], 'roles': obs['boundary_entries'], 'argv': obs['argv'], 'stdout_sha256': sha((path / 'stdout.txt').read_bytes()), 'stderr_sha256': sha((path / 'stderr.txt').read_bytes())}
+for path in (root / 'model-observations').glob('*/before.json'):
+    assert json.loads(path.read_text()) == baseline
+    assert json.loads(path.with_name('after.json').read_text()) == baseline
+
+accepted = json.loads((root / 'accepted-final-corrected-manifest-identity.json').read_text())
+for name, core in accepted['cores'].items():
+    assert sha(canonical(core['manifest'])) == core['sha256']
+    for row in core['manifest']['files']:
+        data = (root / 'candidate-final' / name / row['path']).read_bytes()
+        assert sha(data) == accepted['raw_sha256'][name + '/' + row['path']]
+        assert sha(data.decode('utf8').replace('\r\n', '\n').replace('\r', '\n').encode()) == row['sha256']
+
+source = raw['C05-unicode']['source_text'].encode('utf8')
+request = json.loads((root / 'C05-unicode-request.json').read_text(encoding='utf8'))
+render = (root / 'C05-unicode-rendered.txt').read_bytes()
+assert source == (root / 'C05-unicode-source.txt').read_bytes()
+assert sha(source) == raw['C05-unicode']['source_sha256']
+assert request['rendered_text'].encode('utf8') == render
+for span, binding in zip(raw['C05-unicode']['protected_spans'], request['bindings'], strict=True):
+    original = source[span['start']:span['end']]
+    selected = render[binding['start']:binding['end']]
+    assert original == selected and span['id'] == binding['id']
+    assert sha(original) == span['sha256'] == binding['sha256']
+assert (root / 'C05-canonical-operator-output.txt').read_bytes() == (root / 'C05-canonical-source.txt').read_bytes()
+assert len((root / 'C05-canonical-operator-output.txt').read_bytes()) == 270
+for case in ['C05', 'C07']:
+    result_file = root / 'final-outputs' / (case + '-result.json')
+    receipt_file = root / 'final-outputs' / (case + '-receipt.json')
+    result = json.loads(result_file.read_text(encoding='utf8'))
+    receipt = json.loads(receipt_file.read_text(encoding='utf8'))
+    assert receipt_file.read_bytes() == canonical(receipt)
+    assert sha(receipt_file.read_bytes()) == (root / 'final-outputs' / (case + '-receipt.sha256')).read_text().strip()
+    assert result['schema'] == 'se-harness-skill-result-v1'
+    assert receipt['schema'] == 'se-harness-execution-receipt-v1'
+    assert set(receipt) == {'schema', 'selection', 'execution', 'effects', 'validation'}
+    assert receipt['effects']['changed_paths'] == [] and receipt['execution']['worker_results'] == []
+    assert receipt['effects']['state_before'] == receipt['effects']['state_after']
+    assert receipt['execution']['skills'][0]['portable_core_sha256'] == accepted['cores']['harness-operator-brief']['sha256']
+    assert receipt['validation']['outcome'] == result['outcome'] == ('completed' if case == 'C05' else 'stopped')
+    assert 'C:\\' not in receipt_file.read_text() and 'C:/' not in receipt_file.read_text()
+    assert 'source_text' not in receipt and 'operator_message' not in receipt
+    assert [op['id'] for op in receipt['execution']['operations']] == (['version', 'identity', 'doctor', 'protected-content-guard'] if case == 'C05' else ['version', 'identity', 'doctor'])
+
+calibration_base = root.parents[1] / 'plugin-retained-helper-windows-20260911-attempt2'
+calibrations = []
+for category in ['write', 'network', 'credential', 'spawn', 'lifecycle']:
+    path = calibration_base / ('calibration2-' + category)
+    obs = json.loads((path / 'observations.json').read_text())
+    assert obs['passed'] and not obs['changed_paths'] and obs['before'] == obs['after']
+    assert len(obs['denied_events']) == 1 and obs['denied_events'][0]['category'] == category
+    worker_digests = [digest for path, digest in obs['source_sha256'].items() if path.endswith('audit_worker.py')]
+    assert worker_digests == ['fff1982b67ef8945c1ff94876140fad23369ac55e6fbfd6b4b8fa2efa65cdb4d']
+    calibrations.append({'case': path.name, 'observations_sha256': sha((path / 'observations.json').read_bytes()), 'worker_sha256': worker_digests[0], 'passed': True})
+
+groups = {
+    'classification': 'Fixed actual Windows command groups for transparent Linux command regression; not fresh model reasoning',
+    'groups': {
+        'C05-final': ['C05-final-01-version', 'C05-final-02-identity', 'C05-final-03-doctor', 'C05-final-04-helper'],
+        'C04-direct-helper': ['C04-direct-invalid-explicit'],
+        'C07-prerequisites-only': ['C07-01-version', 'C07-02-identity', 'C07-03-doctor'],
+        'C05-canonical-bypass-prerequisites': ['C05-canonical-01-version', 'C05-canonical-02-identity', 'C05-canonical-03-doctor'],
+        'C05-canonical-supplemental-helper': ['C05-canonical-supplemental-helper'],
+        'preexecution': ['preexec-version', 'preexec-root-version', 'preexec-root-identity', 'preexec-payload-version', 'preexec-payload-identity']},
+    'request_sha256': {name: sha((root / name).read_bytes()) for name in ['C05-unicode-request.json', 'C04-invalid-explicit-request.json', 'C05-canonical-supplemental-request.json']},
+    'trace': traces,
+    'limits': ['Replace fixture/environment paths only; bind Linux-native identities transparently.', 'Wrong-root direct CLI exit1 is an original observation; do not repeat the observer mistaken expect-exit2 as an authority oracle.', 'C07 has no query/helper after prerequisites; replay does not establish the model refusal.']}
+(root / 'trace-groups.json').write_bytes(json.dumps(groups, indent=2).encode() + b'\n')
+summary = {'passed': True, 'audit_scope': 'Immutable evidence consistency; retained failures remain failures', 'trace_count': len(traces), 'verified_executed_source_copies': source_copies, 'target_files_each_snapshot': len(baseline), 'target_changes': [], 'unexpected_events': 0, 'boundary_role_counts': {role: sum(event['kind'] == 'boundary-enter' and event['role'] == role for event in all_events) for role in ['evaluator', 'engine', 'helper']}, 'calibrations': calibrations, 'retained_recorder_failures': ['preexec-root-identity expected2/actual1', 'omitted-LF provisional portable core digests and provisional receipt encoding', 'cp1252 observer console emission'], 'final_output_sha256': {p.name: sha(p.read_bytes()) for p in sorted((root / 'final-outputs').iterdir()) if p.is_file()}}
+(root / 'audit.json').write_bytes(json.dumps(summary, indent=2).encode() + b'\n')
+print(json.dumps(summary))

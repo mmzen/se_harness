@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "git",
+    "add",
+    "-A"
+  ],
+  "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-k47frca9\\ssssssssssssssssss\\repository",
+  "elapsed_seconds": 9.038495302200317,
+  "observer": "Passthrough to original subprocess.run; no command or returned output replacement",
+  "returncode": 128,
+  "stderr": {
+    "bytes": 227,
+    "encoding": "identity",
+    "path": "call07.stderr",
+    "representation": "UTF-8 bytes of text returned by unchanged helper",
+    "sha256": "1b3157f9dc9f5e8f69bfaa8a4780aa3009ca1249743f7abbfdac9725a68e1569",
+    "stored_sha256": "1b3157f9dc9f5e8f69bfaa8a4780aa3009ca1249743f7abbfdac9725a68e1569"
+  },
+  "stdout": {
+    "bytes": 0,
+    "encoding": "identity",
+    "path": "call07.stdout",
+    "representation": "UTF-8 bytes of text returned by unchanged helper",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stored_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "text_mode": true,
+  "timeout": 600
+}
