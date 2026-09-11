@@ -30,6 +30,8 @@ After the interim commit, the parent authorized only a bounded read-only app-ser
 
 The parent's bounded SessionStart review later exercised that external marker and job cleanup as described above. A direct registered-shell calibration then confirmed that the original `.NET IsPathRooted` check accepted drive-relative and root-relative environment selections and invoked the sentinel Python dispatcher before later validation. `checks/native-path-before-fix/` preserves both failures. The minimal guard correction validates a fully qualified drive or share root before any ancestor lookup/interpreter launch; existing traversal/reparse checks remain. `checks/native-path-after-fix/` repeats the exact inputs and records valid denials with no sentinel invocation. `checks/focused-interim-05/` records fifteen passing tests, including negative environment and repository path selection and the existing positive Unicode/quoted-path case. The fresh default cachebuster identifies corrected command bytes; a fresh checked package and native trust are still required.
 
+`preparation/package-04/` contains that subsequently built and independently checked package from source `400cf3d5d669e239d046cc640ac94e962a6e731d`, archive `a94185033507c3e3c65de890a6979c34048e6905ea6062a270d004b1b254c4c5`. Its proposed updater explicitly binds the currently installed package-03 and retains fresh marker/evidence paths for both changed commands. The corrected package has not yet been installed or trusted at this report revision.
+
 ## Acceptance status
 
 Each status below is **unavailable**, meaning the required complete case has not been run against this candidate. No absence of evidence is interpreted as prevention.
