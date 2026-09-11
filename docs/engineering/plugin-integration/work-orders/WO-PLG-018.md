@@ -2,7 +2,7 @@
 id = "WO-PLG-018"
 type = "work_order"
 title = "Integrate the verified plugin workflow stack"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-11"
 updated = "2026-09-11"
@@ -68,6 +68,13 @@ to = "in_progress"
 decided_at = "2026-09-11T10:19:05Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 19f908d8857c1113d6237322de8dd4e1562e826d (check-run 103228186881, source github-checks)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-11T10:55:59Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 507bdb8d2bd978bcb02ea043c72a68617a9d9439 (check-run 103235149334, source github-checks)."
 +++
 
 # Work Order: Integrate the verified plugin workflow stack

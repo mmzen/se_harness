@@ -245,8 +245,17 @@
     "alternatives": [],
     "blocked_by": [],
     "command_or_response": {
-      "kind": "response",
-      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: required check 'validate' at head 001f60f is failure, not success"
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-PLG-018=implemented",
+        "--decision",
+        "WO-PLG-018=delegated-executor",
+        "--apply"
+      ],
+      "kind": "command"
     },
     "current_lifecycle_state": [
       "WO-PLG-018 is in_progress."
@@ -256,8 +265,10 @@
       "decision": "whether the authorized implementation and evidence are complete",
       "decision_right": "DR-WO-COMPLETE",
       "delegation": {
+        "check_run_id": "103235149334",
         "class": "execution",
-        "gate": "not passing"
+        "gate": "success",
+        "head": "507bdb8d2bd978bcb02ea043c72a68617a9d9439"
       },
       "outcomes": [
         "implemented",
@@ -277,7 +288,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "664260bf0e280a9e01916e4d14c150cc0a4ed93fa796ed45fdd4aee866de71d3",
+  "result_sha256": "5313d29b546f75cf8c3b4dad6f0b0f7cc41eda06742d9b752d7d6f526c76cb2f",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,

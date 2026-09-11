@@ -1,6 +1,6 @@
 # WO-PLG-018 integration evidence
 
-**Implementation in progress; full hosted acceptance remains pending.**
+**WO-PLG-018 is implemented. The released evaluator applied delegated completion after full hosted acceptance passed. Verification-record preparation follows for the clean committed candidate.**
 
 The operator-approved [amended plan](plan-main.json) pins main
 `fc1f087371b100d5fda7a1f254ee00ebde8cbadf` and five source heads. Its SHA-256 is
@@ -32,7 +32,7 @@ logs correctly retain the preceding HEAD. Source SHA-256 values are:
 
 ## Hosted and governing checks
 
-Hosted acceptance is pending. At `001f60fc`, source and package checks passed, but managed validate failed because the required handoff packet was missing (QGP-G4I-EVIDENCE). Its log is retained; other unfinished or unavailable results are not passes.
+All 17 reported hosted checks passed at `507bdb8d2bd978bcb02ea043c72a68617a9d9439`. The raw archive records each run/job identity, tested checkout and actual main base.
 
 Released 0.17.0 integrity, graph, review and Git-derived scope checks passed.
 Source CLI help and distribution validation passed (14 distribution-bearing
@@ -53,6 +53,8 @@ Git bundle provided the clean-copy test without changing global Git trust.
 These observations are retained alongside the successful runs.
 
 The implementation tree at `001f60fc` has 9,971 entries before this evidence.
+The actual Git tar at `507bdb8d` contains 9,976 entries (8,277 files and 1,699
+directories), independently counted without extraction.
 The actual completed candidate and final governance tree must both remain within
 10,000. Existing host-qualification limits remain; this work adds no live-host
 qualification, assurance, release, supersession or external merge authority.
@@ -65,3 +67,5 @@ it contains no complete repository export. Run `python -B
 tests/plugin_integration/stack-integration/test_check.py` for the synthetic cases.
 Run `check.py --help` for the four explicit verification inputs. Supply the
 approved plan digest from the approval record, never a newly calculated approval.
+
+The [completion receipt](completion.json) retains the preview and applied transition. The handoff packet and its structured result retain the preceding implementation-stage observation; they are not rebound after completion.
