@@ -1,0 +1,36 @@
+{
+  "work_order": "WO-PLG-005",
+  "operator_instruction": "now, go for WO-PLG-005 and WO-PLG-006, use the delegated route",
+  "date": "2026-09-11",
+  "base_commit": "2326c23d5029436d712cc3a653714ef12ebf08bc",
+  "approval_actor": "engineering-owner",
+  "original_work_order_sha256": "de070d9bfc8570a35460621f9f55bc23c2e4da32654a29a25ce1600900dad19e",
+  "approval_input_sha256": "e397854755695c7d1f534d94187883f8d908f920d31204d7617b7c720273515d",
+  "delegation": {
+    "class": "execution",
+    "rights": [
+      "DR-WO-START",
+      "DR-WO-COMPLETE",
+      "DR-VREC-PREPARE"
+    ],
+    "base_ref": "origin/main",
+    "check_source": "github-checks",
+    "check_name": "validate"
+  },
+  "changes": [
+    "Requested execution delegation",
+    "Exact future VREC and evaluator-sidecar scope",
+    "Current lifecycle and accepted-route description"
+  ],
+  "reserved_verification_record": "VREC-PLG-012",
+  "record_created": false,
+  "implementation_started": false,
+  "not_authorized": [
+    "Verification decision",
+    "Release",
+    "Merge",
+    "Publication",
+    "New support profile",
+    "Shared-component implementation changes"
+  ]
+}
