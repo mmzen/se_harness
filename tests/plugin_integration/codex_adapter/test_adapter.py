@@ -98,9 +98,9 @@ class AdapterTests(unittest.TestCase):
     def test_native_guard_preserves_unicode_quotes_and_absolute_argv(self):
         with tempfile.TemporaryDirectory(prefix="codex quoted '") as space:
             folder = Path(space)
-            (folder / "codex").mkdir()
+            (folder / "scripts").mkdir()
             (folder / "repo with spaces").mkdir()
-            fake = folder / "codex/dispatch.py"
+            fake = folder / "scripts/codex-dispatch.py"
             fake.write_text("import json,sys; print(json.dumps({'argv':sys.argv,'input':json.load(sys.stdin)},ensure_ascii=False))", encoding="utf8")
             (folder / "binding.json").write_text(json.dumps({"environment": str(Path(sys.executable).parent.parent),
                                                           "repo": str(folder / "repo with spaces")}), encoding="utf8")

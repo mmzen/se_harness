@@ -7,7 +7,7 @@ The acceptance report, not this manifest or a successful script invocation,
 states which host behavior was actually observed.
 
 The assembled package maps `.codex-plugin/plugin.json`, `hooks/hooks.json` and
-`codex/dispatch.py` from this directory. Its `scripts/` and selected `skills/`
+`scripts/codex-dispatch.py` from this directory. Its shared scripts and selected `skills/`
 come unchanged from the common source at the same commit. The assembly fixture
 selects setup, change and evidence. Overlapping retained repository skills are
 not activated by this selection; ownership migration remains separate work.

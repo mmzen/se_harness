@@ -18,7 +18,7 @@
     "codex": {
       ".codex-plugin/plugin.json": "plugins/verity-plane/codex/.codex-plugin/plugin.json",
       "hooks/hooks.json": "plugins/verity-plane/codex/hooks/hooks.json",
-      "codex/dispatch.py": "plugins/verity-plane/codex/dispatch.py"
+      "scripts/codex-dispatch.py": "plugins/verity-plane/codex/dispatch.py"
     },
     "claude": {
       ".claude-plugin/plugin.json": "tests/plugin_integration/codex_adapter/inert-claude.json"

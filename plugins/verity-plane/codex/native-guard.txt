@@ -34,7 +34,7 @@ try {
     if($envPath -eq $repoPath -or $envPath.StartsWith($repoPath+'\',[StringComparison]::OrdinalIgnoreCase) -or $repoPath.StartsWith($envPath+'\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Evaluator environment must be outside the repository' };
     $python=Join-Path $binding.environment 'Scripts/python.exe'; Ordinary $python;
     if(!(Test-Path -LiteralPath $python -PathType Leaf)) { throw 'Setup required: selected interpreter absent; no Python invoked' };
-    $script=Join-Path $env:PLUGIN_ROOT 'codex/dispatch.py'; Ordinary $script;
+    $script=Join-Path $env:PLUGIN_ROOT 'scripts/codex-dispatch.py'; Ordinary $script;
     if(!(Test-Path -LiteralPath $script -PathType Leaf)) { throw 'Adapter dispatcher missing; no successful check' };
     $raw|& $python -I -B $script --data $data --event $kind;
     if($LASTEXITCODE -ne 0) { throw 'Adapter launch/script failed; inspect effects before retry' };
