@@ -2,7 +2,7 @@
 id = "VREC-PLG-010"
 type = "verification_record"
 title = "Verification candidate for 2 work orders"
-status = "ready"
+status = "verified"
 owners = ["codex-preparation-actor"]
 created = "2026-09-11"
 updated = "2026-09-11"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/plugin-integration/evidence/WO-PLG-011/READM
 evaluator_evidence_path = "docs/engineering/plugin-integration/evidence/VREC-PLG-010-evaluator.json"
 evaluator_evidence_sha256 = "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
 
+verified_at = "2026-09-11T08:19:07Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-PLG-011", "WO-PLG-017"]
 conforms_to = ["VER-PLG-011"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-11T08:19:07Z"
+decided_by = "assurance-owner"
+reason = "On 2026-09-11 the operator stated \"i verify both VREC-PLG-010  and VREC-PLG-009\". Record this explicit DR-VREC-DECIDE assurance-owner decision for VREC-PLG-010, exact candidate 47f7b842d395764583adbe834c39aecdc0afd521, and its 182 selected evidence files. The retained observations and disclosed platform, fixture and host-coverage limits define the verification scope. Candidate identity, preparation provenance and evidence remain fixed. Related work-order states, VREC-PLG-008, supersession, release and PR merge are not selected by this decision."
 +++
 
 # Verification Record Candidate
