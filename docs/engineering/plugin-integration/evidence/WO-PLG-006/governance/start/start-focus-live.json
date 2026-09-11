@@ -1,0 +1,407 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-PLG-006",
+    "artifacts": [
+      "WO-PLG-006"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-PLG-002",
+      "ARCH-PLG-002",
+      "CAP-DST-001",
+      "INT-DST-001",
+      "REQ-PLG-009",
+      "SPEC-PLG-006",
+      "VER-PLG-006"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/plugin-integration/evidence/VREC-PLG-013-evaluator.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-006/",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-009.md",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-006.md",
+      "docs/engineering/plugin-integration/verification-records/VREC-PLG-013.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-006.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-006.md",
+      "plugins/verity-plane/claude-code/",
+      "tests/plugin_integration/claude_adapter/"
+    ],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-WO-START",
+    "procedure_id": "PROC-WO-START",
+    "status": "not_assessable",
+    "gates": []
+  },
+  "procedure": {
+    "id": "PROC-WO-START",
+    "current_step": "STEP-WO-START-FOCUS",
+    "steps": [
+      {
+        "id": "STEP-WO-START-FOCUS",
+        "kind": "command",
+        "gate_ids": [],
+        "effects": [
+          "Projected selected scope for WO-PLG-006."
+        ],
+        "non_effects": [
+          "Focus does not change lifecycle state."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-PLG-006"
+        ]
+      },
+      {
+        "id": "STEP-WO-START-PREFLIGHT",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G3-WORK-AUTHORIZATION"
+        ],
+        "effects": [
+          "Evaluated start readiness for WO-PLG-006."
+        ],
+        "non_effects": [
+          "Preflight does not authorize or start implementation."
+        ],
+        "argv": [
+          "harnessctl",
+          "preflight",
+          ".",
+          "--work-order",
+          "WO-PLG-006",
+          "--phase",
+          "start"
+        ],
+        "corrective": {
+          "QGP-G3-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-PREFLIGHT": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-START-DECIDE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G3-WORK-AUTHORIZATION"
+        ],
+        "effects": [
+          "An explicit start decision authorizes bounded implementation."
+        ],
+        "non_effects": [
+          "The decision does not itself edit a file."
+        ],
+        "decision_right": "DR-WO-START",
+        "role": "engineering-owner",
+        "artifact": "WO-PLG-006",
+        "decision": "whether implementation may start",
+        "outcomes": [
+          "start",
+          "stop"
+        ],
+        "response": "Start WO-PLG-006 implementation."
+      },
+      {
+        "id": "STEP-WO-START-PREVIEW",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G3-WORK-AUTHORIZATION"
+        ],
+        "effects": [
+          "Planned the explicit transition for WO-PLG-006."
+        ],
+        "non_effects": [
+          "A preview does not change lifecycle state."
+        ],
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-PLG-006=in_progress",
+          "--decision",
+          "WO-PLG-006=engineering-owner"
+        ],
+        "corrective": {
+          "QGP-G3-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-PLG-006",
+              "--phase",
+              "start"
+            ]
+          },
+          "QGP-G3-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-START-APPLY",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G3-WORK-AUTHORIZATION"
+        ],
+        "effects": [
+          "Changed only WO-PLG-006 to in_progress."
+        ],
+        "non_effects": [
+          "Related artifacts remain unchanged."
+        ],
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-PLG-006=in_progress",
+          "--decision",
+          "WO-PLG-006=engineering-owner",
+          "--apply"
+        ],
+        "corrective": {
+          "QGP-G3-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-PLG-006",
+              "--phase",
+              "start"
+            ]
+          },
+          "QGP-G3-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-START-FINAL-FOCUS",
+        "kind": "command",
+        "gate_ids": [],
+        "effects": [
+          "Projected the resulting state for WO-PLG-006."
+        ],
+        "non_effects": [
+          "Focus does not change lifecycle state."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-PLG-006"
+        ]
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-PLG-006",
+        "status": "approved"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-PLG-006",
+        "status": "approved"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 46
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Projected the selected scope for WO-PLG-006."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-PLG-006 is approved."
+    ],
+    "decision_required": {
+      "decision_right": "DR-WO-START",
+      "role": "delegated-executor",
+      "artifact": "WO-PLG-006",
+      "decision": "whether to start the approved work order",
+      "outcomes": [
+        "in_progress"
+      ],
+      "delegation": {
+        "class": "execution",
+        "gate": "success",
+        "check_run_id": "103386776253",
+        "head": "78cd64df7c130a6f42ab357836093db30f710753"
+      }
+    },
+    "next": {
+      "procedure_id": "PROC-WO-START",
+      "step_id": "STEP-WO-START-FOCUS",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-PLG-006=in_progress",
+        "--decision",
+        "WO-PLG-006=delegated-executor",
+        "--apply"
+      ]
+    },
+    "alternatives": []
+  },
+  "result_sha256": "0c06ae48e222b43c93f5551e624c8edb1a6117a39fdd704683afe51313079f7d",
+  "context": {
+    "reading_manifest": [
+      "ENGINEERING_HARNESS.md",
+      "docs/engineering/OPERATING_CARD.md",
+      "AGENTS.md",
+      "docs/engineering/harness-distribution/intent/INT-DST-001.md",
+      "docs/engineering/harness-distribution/capabilities/CAP-DST-001.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-009.md",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-006.md",
+      "docs/engineering/plugin-integration/architecture/ARCH-PLG-002.md",
+      "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-002.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-006.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-006.md"
+    ],
+    "governing": [
+      "ADR-PLG-002",
+      "ARCH-PLG-002",
+      "CAP-DST-001",
+      "INT-DST-001",
+      "REQ-PLG-009",
+      "SPEC-PLG-006",
+      "VER-PLG-006"
+    ],
+    "declared_paths": [
+      "plugins/verity-plane/claude-code/",
+      "tests/plugin_integration/claude_adapter/",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-006.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-006/",
+      "docs/engineering/plugin-integration/verification-records/VREC-PLG-013.md",
+      "docs/engineering/plugin-integration/evidence/VREC-PLG-013-evaluator.json",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-009.md",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-006.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-006.md"
+    ],
+    "state": {
+      "status": "approved",
+      "family": "work_order"
+    },
+    "next": {
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-PLG-006=in_progress",
+        "--decision",
+        "WO-PLG-006=delegated-executor",
+        "--apply"
+      ],
+      "procedure_id": "PROC-WO-START",
+      "step_id": "STEP-WO-START-FOCUS"
+    },
+    "decision_required": {
+      "decision_right": "DR-WO-START",
+      "role": "delegated-executor",
+      "artifact": "WO-PLG-006",
+      "decision": "whether to start the approved work order",
+      "outcomes": [
+        "in_progress"
+      ],
+      "delegation": {
+        "class": "execution",
+        "gate": "success",
+        "check_run_id": "103386776253",
+        "head": "78cd64df7c130a6f42ab357836093db30f710753"
+      }
+    }
+  }
+}
