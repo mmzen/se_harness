@@ -1,6 +1,37 @@
 # Bring the verified plugin stack into main
 
-**Proposal, 11 September 2026. Nothing is approved or integrated by this note.**
+**Updated 11 September 2026: packet approved; delegated start blocked.**
+
+## Current status and required correction
+
+The operator approved VER-PLG-018 and WO-PLG-018, including execution delegation.
+The released evaluator recorded both approvals. Its start preview then refused
+with **WEX-ECP-022**: WO-PLG-018 has no delegation class at `origin/main`.
+The work order remains **approved**; no integration has started.
+
+[DR-015](../engineering/DECISION_RIGHTS.md#governed-delegated-execution) reads
+delegation from the PR base, not its branch. The proposal below missed this
+prerequisite: passing CI and approving a new branch-only work order do not make
+its delegated start legal. The earlier WO-PLG-017 route worked because main
+already contained that work order's delegation through #447.
+
+The corrected delivery sequence is:
+
+1. Deliver **PR #450 as the approval packet only**, after its checks pass and
+   the operator separately chooses to merge it. This establishes delegation
+   on main; it delivers no plugin implementation and claims no verification.
+2. Prepare a reviewed amendment naming the resulting main commit and a new
+   implementation PR. Recheck the pinned source heads and import plan. Keep the
+   original plan and its approval intact as history; the approved packet requires
+   another review when its base changes.
+3. After that amendment is approved and the exact-head gate passes, use delegated
+   start, assembly, acceptance, completion and ready VREC preparation. Assurance
+   of the assembled candidate and its final merge stay separate decisions.
+
+The [start-block receipt](../engineering/plugin-integration/evidence/WO-PLG-018/start-block.json)
+retains the refused command and the unchanged state. No base override, manual
+start, policy edit or merge was used to bypass the refusal. This correction is a
+delivery proposal, not an amendment to the approved WO, VER or frozen plan.
 
 Use one integration PR under **WO-PLG-018**. Import the existing commits, prove
 that their files and decisions survived, then let the operator merge the result.
@@ -34,7 +65,7 @@ with their exact Git blob IDs and file modes. Every path maps to an existing
 implementation scope. A Git tree preview found no conflicts; it did not assemble
 an implementation branch or authorize work.
 
-## The proposed workflow
+## Original workflow (blocked by the prerequisite above)
 
 1. **Approve the packet.** Review [WO-PLG-018](../engineering/plugin-integration/work-orders/WO-PLG-018.md)
    and [VER-PLG-018](../engineering/plugin-integration/verification/VER-PLG-018.md).
