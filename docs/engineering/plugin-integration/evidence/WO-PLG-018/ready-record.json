@@ -1,0 +1,348 @@
+{
+  "schema": "plugin-integration-ready-record-receipt-v1",
+  "classification": "Technical readback and delegated preparation; no assurance decision.",
+  "record": "VREC-PLG-011",
+  "state": "ready",
+  "candidate": "6f926523d545d130aa0c5d692ecbbb4698ff4a36",
+  "prepared_by": "delegated-executor",
+  "selected_evidence_files": 15,
+  "evaluator_sidecar_sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb",
+  "selected_evidence_matches_candidate": true,
+  "capture_command": {
+    "candidate_commit": "6f926523d545d130aa0c5d692ecbbb4698ff4a36",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work",
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "capture-verification",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-integration-proposal",
+      "--id",
+      "VREC-PLG-011",
+      "--work-order",
+      "WO-PLG-018",
+      "--verification",
+      "VER-PLG-018",
+      "--owner",
+      "delegated-executor",
+      "--domain",
+      "plugin-integration",
+      "--json",
+      "--evidence",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/WO-PLG-018-handoff.md",
+      "--evidence",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/approval.json",
+      "--evidence",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/base-amendment-approval.json",
+      "--evidence",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/base-amendment-review.json",
+      "--evidence",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/base-amendment.md",
+      "--evidence",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/completion.json",
+      "--evidence",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/handoff.json",
+      "--evidence",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/plan-main.json",
+      "--evidence",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/plan.json",
+      "--evidence",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/proposal-review.json",
+      "--evidence",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/raw-index.json",
+      "--evidence",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/raw.zip",
+      "--evidence",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/report.md",
+      "--evidence",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/start-block.json",
+      "--evidence",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/start.json"
+    ],
+    "evidence_files": [
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/WO-PLG-018-handoff.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/approval.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/base-amendment-approval.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/base-amendment-review.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/base-amendment.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/completion.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/handoff.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/plan-main.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/plan.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/proposal-review.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/raw-index.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/raw.zip",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/report.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/start-block.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-018/start.json"
+    ],
+    "selection_note": "Each named file is passed explicitly. Raw linked files are retained at this candidate; --evidence does not recursively expand index links."
+  },
+  "capture": {
+    "schema": "se-harness-workflow-result-v2",
+    "operation": {
+      "kind": "capture-verification",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "VREC-PLG-011",
+      "artifacts": [
+        "VREC-PLG-011"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [
+        "CAP-WEX-001",
+        "INT-WEX-001",
+        "REQ-PLG-017",
+        "REQ-PLG-018",
+        "REQ-PLG-019",
+        "REQ-PLG-020",
+        "REQ-PLG-021",
+        "SPEC-PLG-010",
+        "SPEC-PLG-011",
+        "SPEC-PLG-012",
+        "VER-PLG-018",
+        "WO-PLG-018"
+      ],
+      "dependencies": [],
+      "declared_paths": [],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "pre-action",
+      "workflow_rule_id": "WFL-VREC-DECIDE",
+      "procedure_id": "PROC-VREC-DECIDE",
+      "status": "not_assessable",
+      "gates": []
+    },
+    "procedure": {
+      "id": "PROC-VREC-DECIDE",
+      "current_step": "STEP-VREC-DECIDE",
+      "steps": [
+        {
+          "id": "STEP-VREC-DECIDE",
+          "kind": "decision",
+          "gate_ids": [
+            "QG-G4-ASSURANCE-DECISION"
+          ],
+          "effects": [
+            "Permits an explicit decision on VREC-PLG-011 only."
+          ],
+          "non_effects": [
+            "Referenced work orders remain unchanged."
+          ],
+          "decision_right": "DR-VREC-DECIDE",
+          "role": "assurance-owner",
+          "artifact": "VREC-PLG-011",
+          "decision": "whether the retained evidence verifies the exact candidate",
+          "outcomes": [
+            "verified",
+            "reject",
+            "supersede"
+          ],
+          "response": "I verify VREC-PLG-011 as assurance owner."
+        }
+      ]
+    },
+    "state": {
+      "before": [],
+      "after": [
+        {
+          "id": "VREC-PLG-011",
+          "status": "ready"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 0
+    },
+    "mutation": {
+      "writes": [
+        {
+          "id": "VREC-PLG-011",
+          "path": "docs/engineering/plugin-integration/verification-records/VREC-PLG-011.md",
+          "fields": [
+            "artifact_snapshot_sha256",
+            "commit",
+            "created",
+            "evaluator_evidence_path",
+            "evaluator_evidence_sha256",
+            "evidence_paths",
+            "git_object_format",
+            "id",
+            "owners",
+            "prepared_at",
+            "prepared_by",
+            "relations",
+            "status",
+            "title",
+            "type",
+            "updated",
+            "worktree_state"
+          ]
+        }
+      ]
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Prepared ready verification record VREC-PLG-011 at docs/engineering/plugin-integration/verification-records/VREC-PLG-011.md."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "VREC-PLG-011 is ready; referenced work orders were not changed."
+      ],
+      "decision_required": {
+        "decision_right": "DR-VREC-DECIDE",
+        "role": "assurance-owner",
+        "artifact": "VREC-PLG-011",
+        "decision": "whether the retained evidence verifies the exact candidate",
+        "outcomes": [
+          "verified",
+          "reject",
+          "supersede"
+        ]
+      },
+      "next": {
+        "procedure_id": "PROC-VREC-DECIDE",
+        "step_id": "STEP-VREC-DECIDE",
+        "action": "whether the retained evidence verifies the exact candidate"
+      },
+      "command_or_response": {
+        "kind": "response",
+        "value": "I verify VREC-PLG-011 as assurance owner."
+      },
+      "alternatives": [
+        "Use complete alternative procedure PROC-VREC-REJECT.",
+        "Use complete alternative procedure PROC-VREC-SUPERSEDE."
+      ]
+    },
+    "result_sha256": "f04f5158589c635d22551e58fd6c5410255e4e4870229d896700a1e18e5e9712"
+  },
+  "candidate_checks": {
+    "checker-completed-candidate": {
+      "command": {
+        "argv": [
+          "python",
+          "-B",
+          "tests/plugin_integration/stack-integration/check.py",
+          "--repository",
+          ".",
+          "--candidate",
+          "6f926523d545d130aa0c5d692ecbbb4698ff4a36",
+          "--plan",
+          "docs/engineering/plugin-integration/evidence/WO-PLG-018/plan-main.json",
+          "--approved-plan-sha256",
+          "eb0fa0a8e8e5e77428f45fdcde3c99f2080c318bdcb75a6425216081002feefb"
+        ],
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-integration-proposal",
+        "head": "6f926523d545d130aa0c5d692ecbbb4698ff4a36",
+        "started_at": "2026-09-11T10:57:12.060372+00:00",
+        "duration_seconds": 3.174,
+        "exit_status": 0,
+        "stdout_sha256": "5a3f39eb64809b1307927600fc44278703863810ca2957c30d890ddbd65966a2",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "result": {
+        "approved_plan_sha256": "eb0fa0a8e8e5e77428f45fdcde3c99f2080c318bdcb75a6425216081002feefb",
+        "archive_entries_including_directories": 9977,
+        "archive_entry_limit": 10000,
+        "base_main": "fc1f087371b100d5fda7a1f254ee00ebde8cbadf",
+        "boundary": "Committed-object preservation only. No lifecycle decision, CI result or merge authority.",
+        "candidate": "6f926523d545d130aa0c5d692ecbbb4698ff4a36",
+        "imported_paths": 3177,
+        "passed": true,
+        "preserved_records": [
+          {
+            "candidate": "398538ef6d11481f13c11bed639eb585963e2afb",
+            "current_evidence_entries_differ_from_bound_commit": 1,
+            "evidence_inventory_sha256": "f3f491f863f9638d4a7026d7b5d30076bcd2a1951a44fb1578a26cbce6ddbe04",
+            "id": "VREC-PLG-007",
+            "record_sha256": "4e2d590807dca0c319826c139db9f4f171ae72dbe8ebb376b941eb7452b81a40",
+            "selected_evidence_files": 69,
+            "status": "verified"
+          },
+          {
+            "candidate": "e9418644e22497e622b706cb228f0cd8b36f3b5b",
+            "current_evidence_entries_differ_from_bound_commit": 2,
+            "evidence_inventory_sha256": "125d43e4548fad1a727152186b4cd2d72f3583764471e622599cf207232ac08c",
+            "id": "VREC-PLG-008",
+            "record_sha256": "64404dbc6d0ae075b643d0e2c6c1cf25ddb3670bce62e2c901bae7d135eba950",
+            "selected_evidence_files": 95,
+            "status": "ready"
+          },
+          {
+            "candidate": "aea16859a3ea106e33f759098712cf80f83f3843",
+            "current_evidence_entries_differ_from_bound_commit": 0,
+            "evidence_inventory_sha256": "984668e67824baa41f9f43e1e033bed07b63e63265f2bceeb2b4a7d632c1c62b",
+            "id": "VREC-PLG-009",
+            "record_sha256": "6326da1efd5a1dfe03c14df9eb0702ada630cd833747b73d1c451c4691d911d0",
+            "selected_evidence_files": 100,
+            "status": "verified"
+          },
+          {
+            "candidate": "47f7b842d395764583adbe834c39aecdc0afd521",
+            "current_evidence_entries_differ_from_bound_commit": 0,
+            "evidence_inventory_sha256": "e12b1a7928cc7e9cb0ada41e32f1271d0450b9b6b7d206193b2cff4a9be5ee8d",
+            "id": "VREC-PLG-010",
+            "record_sha256": "3949a98ba386ffb0a8feb80eb5c4ae595c3c0dcef192ac3035dbc20cf94d5e1f",
+            "selected_evidence_files": 182,
+            "status": "verified"
+          }
+        ],
+        "schema": "plugin-stack-integration-check-v1",
+        "source_change_counts": {
+          "A": 3171,
+          "M": 6
+        },
+        "source_heads": {
+          "444": "278549eab76e806131b2950a7a6ea1ed6f2fb2b5",
+          "445": "7fe82c95823503e54d2e35e00d8c409a6dd4b065",
+          "446": "0d3269e4917f55cf9a487aaa8f11d95aaa46fe9b",
+          "448": "ed19676fd2af8b9754f74cbc6bc8664a92d2f803",
+          "449": "8a8a61ff786436ba0da8b18753c4a46b5be35c1b"
+        },
+        "source_work_orders": [
+          "WO-PLG-010",
+          "WO-PLG-011",
+          "WO-PLG-012",
+          "WO-PLG-017"
+        ]
+      },
+      "stderr": ""
+    },
+    "archive-completed-candidate": {
+      "command": {
+        "argv": [
+          "python",
+          "../count_plugin_integration_archive.py",
+          "6f926523d545d130aa0c5d692ecbbb4698ff4a36"
+        ],
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-integration-proposal",
+        "head": "6f926523d545d130aa0c5d692ecbbb4698ff4a36",
+        "started_at": "2026-09-11T10:57:15.339013+00:00",
+        "duration_seconds": 1.221,
+        "exit_status": 0,
+        "stdout_sha256": "bd23e512ab04669a3227b5a3f56f013deee458fe12e09ac599d58f70a234b482",
+        "stderr_sha256": "1509f6895e799fe33ef990c06a467b151193f89a90d546e3a403a11a0abd65ef"
+      },
+      "result": {
+        "candidate": "6f926523d545d130aa0c5d692ecbbb4698ff4a36",
+        "tar_members": 9977,
+        "files": 8278,
+        "directories": 1699,
+        "expanded_bytes": 143222911,
+        "limit": 10000
+      },
+      "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+    }
+  },
+  "next": "The assurance owner decides whether to verify VREC-PLG-011. Merge, supersession and release remain separate."
+}
