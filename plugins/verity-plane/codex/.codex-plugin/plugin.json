@@ -1,6 +1,6 @@
 {
   "name": "verity-plane",
-  "version": "0.0.1+codex.20260911194142",
+  "version": "0.0.1+codex.20260911195218",
   "description": "Connect the selected shared skills and released evaluator to the assessed Codex Windows route.",
   "skills": "./skills/",
   "hooks": "./hooks/hooks.json",

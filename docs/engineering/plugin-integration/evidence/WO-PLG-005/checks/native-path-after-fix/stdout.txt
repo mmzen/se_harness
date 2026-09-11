@@ -1,0 +1,3 @@
+{"hookSpecificOutput":{"permissionDecision":"deny","hookEventName":"PreToolUse","permissionDecisionReason":"Verity Plane UNREADY: Fully qualified absolute binding paths required; no Python invoked. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed."}}
+
+{"hookSpecificOutput":{"permissionDecision":"deny","hookEventName":"PreToolUse","permissionDecisionReason":"Verity Plane UNREADY: Fully qualified absolute binding paths required; no Python invoked. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed."}}

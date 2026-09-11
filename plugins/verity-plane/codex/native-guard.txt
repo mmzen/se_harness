@@ -6,6 +6,8 @@ $kind='__EVENT__';
 $raw=[Console]::In.ReadToEnd();
 function Ordinary([string]$name) {
     if (!$name -or ![IO.Path]::IsPathRooted($name) -or $name -match '(^|[\\/])\.\.([\\/]|$)' -or $name -match '[\x00-\x1f]') { throw 'Absolute ordinary binding paths required' };
+    $root=[IO.Path]::GetPathRoot($name);
+    if($root -notmatch '^[A-Za-z]:[\\/]$' -and $root -notmatch '^[\\/]{2}[^\\/]+[\\/][^\\/]+[\\/]?$') { throw 'Fully qualified absolute binding paths required; no Python invoked' };
     $item=$name;
     while($item) {
         if(Test-Path -LiteralPath $item) { if((Get-Item -LiteralPath $item -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Linked binding paths unsupported' } };

@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+    "plugin",
+    "list",
+    "--json"
+  ],
+  "exit_status": 0
+}

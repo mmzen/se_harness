@@ -105,6 +105,40 @@ class AdapterTests(unittest.TestCase):
                 self.assertEqual(json.loads(run.stdout)["hookSpecificOutput"]["permissionDecision"], "deny")
 
     @unittest.skipUnless(os.name == "nt", "accepted argv profile is Windows")
+    def test_native_guard_rejects_drive_and_root_relative_paths_before_python(self):
+        with tempfile.TemporaryDirectory(prefix="codex path boundary ") as space:
+            folder = Path(space)
+            (folder / "scripts").mkdir()
+            repo = folder / "repo"
+            repo.mkdir()
+            marker = folder / "python-invoked.txt"
+            (folder / "scripts/codex-dispatch.py").write_text(
+                "from pathlib import Path; Path(" + repr(str(marker)) + ").write_text('invoked')", encoding="utf8")
+            environment_root = Path(sys.executable).parent.parent
+            selected = {"schema": "verity-codex-binding-v1", "environment": str(environment_root),
+                        "repo": str(repo), "artifact": "WO-PROBE-001", "capture": False,
+                        "profile": {"host": "0.153.4", "os": "windows", "python": "3.14.6", "evaluator": "0.16.0"},
+                        "decision": {"id": "DEC-PLG-001", "status": "decided", "option": "prove-supported-route"}}
+            environment = os.environ.copy()
+            environment.update(PLUGIN_DATA=str(folder), PLUGIN_ROOT=str(folder))
+            shell = str(Path(os.environ["SYSTEMROOT"]) / "System32/WindowsPowerShell/v1.0/powershell.exe")
+            command = renderer.definitions(HOST)["hooks"]["PreToolUse"][0]["hooks"][0]["command"]
+            event = {"hook_event_name": "PreToolUse", "cwd": str(repo), "tool_name": "apply_patch",
+                     "tool_input": {"command": "*** Begin Patch\n*** End Patch"}}
+            for field, path in (("environment", environment_root.drive + environment_root.name),
+                                ("environment", str(environment_root)[2:]), ("repo", str(repo)[2:])):
+                (folder / "binding.json").write_text(json.dumps({**selected, field:path}), encoding="utf8")
+                denied = subprocess.run([shell, "-NoProfile", "-NonInteractive", "-Command", command],
+                    input=json.dumps(event).encode(), capture_output=True, env=environment,
+                    cwd=environment_root.parent, timeout=10)
+                with self.subTest(field=field, path=path):
+                    self.assertEqual(denied.returncode, 0, denied.stderr)
+                    self.assertFalse(marker.exists(), "non-absolute selection invoked Python")
+                    failure = json.loads(denied.stdout)["hookSpecificOutput"]
+                    self.assertEqual(failure["permissionDecision"], "deny")
+                    self.assertIn("Fully qualified", failure["permissionDecisionReason"])
+
+    @unittest.skipUnless(os.name == "nt", "accepted argv profile is Windows")
     def test_native_guard_preserves_unicode_quotes_and_absolute_argv(self):
         with tempfile.TemporaryDirectory(prefix="codex quoted '") as space:
             folder = Path(space)
