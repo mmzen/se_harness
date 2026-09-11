@@ -6,6 +6,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+import tomllib
 
 HERE = Path(__file__).absolute().parent
 ROOT = HERE.parents[2]
@@ -45,15 +46,20 @@ def host_environment():
 
 
 def host_argv(*args):
-    # Ordinary documented process-local config override. The earlier probe is
-    # preserved, and its hooks must not affect the adapter's independent cases.
-    return [str(CODEX), "-c", 'plugins."codex-probe@codex-probe-local".enabled=false', *args]
+    # Native /hooks review explicitly disabled the old probe hooks. The initial
+    # process-local plugin-disable override did not disable them; retained
+    # preparation evidence preserves that attempt. Verify loaded state per run.
+    return [str(CODEX), *args]
 
 
 def binding(repo, environment=PYTHON.parent.parent, capture=True):
+    decision_path = ROOT / "docs/engineering/plugin-integration/decisions/DEC-PLG-001.md"
+    metadata = tomllib.loads(decision_path.read_text(encoding="utf8").split("+++", 2)[1])
     return {"schema": "verity-codex-binding-v1", "repo": str(repo), "environment": str(environment),
             "artifact": "WO-PROBE-001", "capture": capture,
-            "profile": {"host": "0.153.4", "os": "windows", "python": "3.14.6", "evaluator": "0.16.0"}}
+            "profile": {"host": "0.153.4", "os": "windows", "python": "3.14.6", "evaluator": "0.16.0"},
+            "decision": {"id": metadata["id"], "status": metadata["status"],
+                         "option": metadata.get("disposition", {}).get("option")}}
 
 
 def prepare(evidence):

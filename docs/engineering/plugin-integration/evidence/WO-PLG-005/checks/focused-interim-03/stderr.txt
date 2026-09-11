@@ -1,0 +1,17 @@
+test_binding_rejects_unaccepted_profile (test_adapter.AdapterTests.test_binding_rejects_unaccepted_profile) ... ok
+test_decode_rejects_malformed_duplicate_and_large_inputs (test_adapter.AdapterTests.test_decode_rejects_malformed_duplicate_and_large_inputs) ... ok
+test_generated_native_commands_are_exact (test_adapter.AdapterTests.test_generated_native_commands_are_exact) ... ok
+test_missing_empty_or_whitespace_context_is_unready (test_adapter.AdapterTests.test_missing_empty_or_whitespace_context_is_unready) ... ok
+test_native_guard_failures_and_setup_access (test_adapter.AdapterTests.test_native_guard_failures_and_setup_access) ... ok
+test_native_guard_preserves_unicode_quotes_and_absolute_argv (test_adapter.AdapterTests.test_native_guard_preserves_unicode_quotes_and_absolute_argv) ... ok
+test_only_documented_decision_envelopes_are_returned (test_adapter.AdapterTests.test_only_documented_decision_envelopes_are_returned) ... ok
+test_ambiguous_or_foreign_enabled_hook_inventory_cannot_start_thread (test_observer.ObserverTests.test_ambiguous_or_foreign_enabled_hook_inventory_cannot_start_thread) ... ok
+test_loaded_payload_rejects_changed_missing_or_extra_files (test_observer.ObserverTests.test_loaded_payload_rejects_changed_missing_or_extra_files) ... ok
+test_missing_schema_method_is_rejected (test_observer.ObserverTests.test_missing_schema_method_is_rejected) ... ok
+test_request_response_scan_excludes_prior_response_and_outgoing_message (test_observer.ObserverTests.test_request_response_scan_excludes_prior_response_and_outgoing_message) ... ok
+test_server_request_with_colliding_id_stops_before_response_match (test_observer.ObserverTests.test_server_request_with_colliding_id_stops_before_response_match) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 9.549s
+
+OK

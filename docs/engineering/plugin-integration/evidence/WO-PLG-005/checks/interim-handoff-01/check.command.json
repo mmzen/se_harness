@@ -1,0 +1,21 @@
+{
+  "exit_status": 0,
+  "base_revision": "78cd64df7c130a6f42ab357836093db30f710753",
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "check",
+    ".",
+    "--artifact",
+    "WO-PLG-005",
+    "--checkpoint",
+    "handoff",
+    "--from-git",
+    "origin/main",
+    "--json"
+  ],
+  "observed_at_utc": "2026-09-11T19:36:54.9844125Z"
+}

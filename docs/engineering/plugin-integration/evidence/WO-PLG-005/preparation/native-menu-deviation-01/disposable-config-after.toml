@@ -1,0 +1,41 @@
+cli_auth_credentials_store = "file"
+check_for_update_on_startup = false
+
+[marketplaces.codex-probe-local]
+source_type = "local"
+source = '\\?\C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\plugin-probe-sandboxes\codex\run-001 with spaces\marketplace with spaces'
+
+[marketplaces.verity-plane-codex-fixture]
+source_type = "local"
+source = '\\?\C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\codex-adapter-sandboxes\accepted 001 with spaces\marketplace with spaces'
+
+[plugins."codex-probe@codex-probe-local"]
+enabled = true
+
+[plugins."verity-plane@verity-plane-codex-fixture"]
+enabled = true
+
+[projects.'c:\users\mathi\documents\codex\2026-09-04\hel\work\plugin-probe-sandboxes\codex\run-001 with spaces\repo']
+trust_level = "trusted"
+
+[projects.'c:\users\mathi\documents\codex\2026-09-04\hel\work\codex-adapter-sandboxes\accepted 001 with spaces\repo with spaces']
+trust_level = "trusted"
+
+[tui.model_availability_nux]
+gpt-6-astra = 4
+
+[hooks.state]
+
+[hooks.state."codex-probe@codex-probe-local:hooks/hooks.json:pre_tool_use:0:0"]
+trusted_hash = "sha256:cc297ef88256c5b56a0016d8a9ddf63c8f0010166c6f4bab8911b306ab2449ed"
+enabled = false
+
+[hooks.state."codex-probe@codex-probe-local:hooks/hooks.json:session_start:0:0"]
+trusted_hash = "sha256:9494b4d2540467f6ee4fa9ea56df5f149446b21b62f013f584d01b924b4d590b"
+enabled = false
+
+[hooks.state."verity-plane@verity-plane-codex-fixture:hooks/hooks.json:pre_tool_use:0:0"]
+trusted_hash = "sha256:6ba82eca31d39081fb1164cca9c06c2173a60d0f9fe073979e9d16e7b3e5abe5"
+
+[hooks.state."verity-plane@verity-plane-codex-fixture:hooks/hooks.json:session_start:0:0"]
+trusted_hash = "sha256:d319f310ee4c3b4056396fa063c0b57792fba73fb66e136d60488efa83dc2a60"

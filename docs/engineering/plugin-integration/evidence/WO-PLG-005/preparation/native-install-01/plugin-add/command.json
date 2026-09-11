@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+    "-c",
+    "plugins.\"codex-probe@codex-probe-local\".enabled=false",
+    "plugin",
+    "add",
+    "verity-plane@verity-plane-codex-fixture",
+    "--json"
+  ],
+  "exit_status": 0
+}

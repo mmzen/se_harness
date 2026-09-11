@@ -39,11 +39,17 @@ already initialized fixture repository, prepared environment and work order:
   "environment": "C:\\absolute\\private environment",
   "artifact": "WO-PROBE-001",
   "profile": {"host": "0.153.4", "os": "windows", "python": "3.14.6", "evaluator": "0.16.0"},
+  "decision": {"id": "DEC-PLG-001", "status": "decided", "option": "prove-supported-route"},
   "capture": false
 }
 ```
 
 These are explicit transport inputs, not approval or cached readiness. The
+decision selection must be taken from the actual governing decision; copying
+this example cannot decide or amend that artifact. The native guard checks
+the closed positive selection and accepted profile before invoking Python.
+The dispatcher independently rechecks them. Actual selected host executable
+identity and current decision bytes remain required qualification evidence. The
 guard never installs dependencies or selects an ambient interpreter. Missing
 inputs/runtime produce UNREADY guidance; supplied inputs still run fresh shared
 identity and context checks. A 0.17 repository lock does not match this profile.

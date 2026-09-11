@@ -1,0 +1,8 @@
+{
+  "pluginId": "verity-plane@verity-plane-codex-fixture",
+  "name": "verity-plane",
+  "marketplaceName": "verity-plane-codex-fixture",
+  "version": "0.0.1",
+  "installedPath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\verity-plane-codex-fixture\\verity-plane\\0.0.1",
+  "authPolicy": "ON_INSTALL"
+}

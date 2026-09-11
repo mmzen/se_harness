@@ -65,12 +65,14 @@ def response(event_name, message):
 
 
 def arguments(binding, event, data, root=ROOT):
-    if set(binding) != {"schema", "repo", "environment", "artifact", "profile", "capture"}:
+    if set(binding) != {"schema", "repo", "environment", "artifact", "profile", "decision", "capture"}:
         raise ValueError("missing or unknown binding fields; configure the selected fixture")
     if binding["schema"] != "verity-codex-binding-v1" or not isinstance(binding["capture"], bool):
         raise ValueError("unsupported binding schema or capture flag")
     if binding["profile"] != {"host": HOST, "os": "windows", "python": "3.14.6", "evaluator": VERSION}:
         raise ValueError("unsupported selected profile; DEC-PLG-001 has no positive route for it")
+    if binding["decision"] != {"id": "DEC-PLG-001", "status": "decided", "option": "prove-supported-route"}:
+        raise ValueError("no positively selected Codex route")
     repo, environment = ordinary(binding["repo"]), ordinary(binding["environment"])
     if repo == environment or repo in environment.parents or environment in repo.parents:
         raise ValueError("prepared environment must be outside the repository")

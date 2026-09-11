@@ -12,6 +12,10 @@ function Ordinary([string]$name) {
         $item=[IO.Path]::GetDirectoryName($item)
     }
 }
+function Fields($value,[string[]]$names) {
+    if($value -isnot [System.Management.Automation.PSCustomObject] -or $value.PSObject.Properties.Name.Count -ne $names.Count) { throw 'Missing or unknown selected binding fields' };
+    foreach($name in $names) { if($value.PSObject.Properties.Name -cnotcontains $name) { throw 'Missing or unknown selected binding fields' } }
+}
 try {
     if($raw.Length -gt 65536) { throw 'Host input exceeds the supported size' };
     $event=$raw|ConvertFrom-Json;
@@ -28,6 +32,12 @@ try {
     $config=Join-Path $data 'binding.json'; Ordinary $config;
     if(!(Test-Path -LiteralPath $config -PathType Leaf)) { throw 'Setup required: explicitly select a prepared environment and repository binding; no Python invoked' };
     $binding=Get-Content -LiteralPath $config -Raw -Encoding UTF8|ConvertFrom-Json;
+    Fields $binding @('schema','repo','environment','artifact','profile','decision','capture');
+    if($binding.schema -cne 'verity-codex-binding-v1' -or $binding.capture -isnot [bool]) { throw 'Unsupported binding schema; no Python invoked' };
+    Fields $binding.profile @('host','os','python','evaluator');
+    if($binding.profile.host -cne '0.153.4' -or $binding.profile.os -cne 'windows' -or $binding.profile.python -cne '3.14.6' -or $binding.profile.evaluator -cne '0.16.0') { throw 'Unsupported selected profile; no Python invoked' };
+    Fields $binding.decision @('id','status','option');
+    if($binding.decision.id -cne 'DEC-PLG-001' -or $binding.decision.status -cne 'decided' -or $binding.decision.option -cne 'prove-supported-route') { throw 'No positively selected Codex route; no Python invoked' };
     Ordinary $binding.environment; Ordinary $binding.repo;
     $envPath=[IO.Path]::GetFullPath($binding.environment).TrimEnd('\');
     $repoPath=[IO.Path]::GetFullPath($binding.repo).TrimEnd('\');

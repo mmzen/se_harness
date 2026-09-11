@@ -1,0 +1,42 @@
+{
+  "revalidated_at_utc": "2026-09-11T19:27:51.5238933Z",
+  "scope": "Only exact revalidated native acceptance process terminated; helper and shell not directly terminated; no sandbox or security changes",
+  "operation": "Stop-Process -Id 28204 -Force",
+  "remaining_known_ancestry": [],
+  "observed_at_utc": "2026-09-11T19:27:53.9005858Z",
+  "termination_target_pid": 28204,
+  "before": [
+    {
+      "ProcessId": 12256,
+      "ParentProcessId": 27576,
+      "Name": "pwsh.exe",
+      "CreationDate": "2026-09-11T21:21:34.749412+02:00",
+      "ExecutablePath": "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "CommandLine": "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -Command \"try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}\n& '../se-harness-plugin-eval-016/Scripts/python.exe' -I -B tests/plugin_integration/codex_adapter/interactive.py\""
+    },
+    {
+      "ProcessId": 31112,
+      "ParentProcessId": 12256,
+      "Name": "python.exe",
+      "CreationDate": "2026-09-11T21:21:35.05825+02:00",
+      "ExecutablePath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+      "CommandLine": "\"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe\" -I -B tests/plugin_integration/codex_adapter/interactive.py"
+    },
+    {
+      "ProcessId": 28244,
+      "ParentProcessId": 31112,
+      "Name": "python.exe",
+      "CreationDate": "2026-09-11T21:21:35.075616+02:00",
+      "ExecutablePath": "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "CommandLine": "\"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe\" -I -B tests/plugin_integration/codex_adapter/interactive.py"
+    },
+    {
+      "ProcessId": 28204,
+      "ParentProcessId": 28244,
+      "Name": "codex.exe",
+      "CreationDate": "2026-09-11T21:21:35.254216+02:00",
+      "ExecutablePath": "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+      "CommandLine": "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe -c plugins.\\\"codex-probe@codex-probe-local\\\".enabled=false --no-alt-screen --sandbox read-only --ask-for-approval on-request"
+    }
+  ]
+}

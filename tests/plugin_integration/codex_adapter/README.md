@@ -11,14 +11,19 @@ into this directory:
 0.16.0, applies explicitly synthetic fixture inputs and records fresh pre-action
 evidence. It records the actual accepted host executable/version/digest. It
 never copies credentials. The already authenticated WO-PLG-003 disposable
-profile is selected explicitly; the old probe plugin is disabled only for the
-process through a documented config override.
+profile is selected explicitly. The initial process-local plugin-disable
+override did not disable the old probe hooks. Those hooks were then disabled
+through native `/hooks` review; every later run must inspect actual loaded state.
 
 Commit package inputs before `fixture.py assemble --revision FULL_COMMIT`.
 The unchanged WO-PLG-001 builder selects the released 0.16 wheel and runs both
 build and independent check. The companion Claude manifest is deliberately
 inert; only the Codex package is installed and assessed here. Native marketplace
 installation and `/hooks` review retain host receipts without cache edits.
+
+Native sessions are currently paused after the retained native-menu deviation.
+`interactive.py` must not be run pending the parent's incident assessment.
+`live.py` is a prepared app-server observer, with no completed acceptance run.
 
 All command captures use fresh evidence directories. Direct guard and script
 tests are calibration. VER-PLG-005 C01-C12 additionally need retained native

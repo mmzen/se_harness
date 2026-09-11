@@ -1,0 +1,36 @@
+{
+  "named_log_directory": [
+    {
+      "Name": "codex-login.log",
+      "Length": 661,
+      "LastWriteTimeUtc": "2026-09-09T05:41:30.0314995Z"
+    }
+  ],
+  "items": [
+    {
+      "name": ".sandbox",
+      "directory": true,
+      "last_write_time_utc": "2026-09-11T19:23:03.0462985Z",
+      "full_name": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\.sandbox",
+      "creation_time_utc": "2026-09-11T19:23:03.0462985Z",
+      "child_names": []
+    },
+    {
+      "name": ".sandbox-bin",
+      "directory": true,
+      "last_write_time_utc": "2026-09-11T19:23:03.0517746Z",
+      "full_name": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\.sandbox-bin",
+      "creation_time_utc": "2026-09-11T19:23:03.0517746Z",
+      "child_names": []
+    },
+    {
+      "name": ".sandbox_migration",
+      "directory": false,
+      "last_write_time_utc": "2026-09-08T21:44:28.8895481Z",
+      "full_name": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\.sandbox_migration",
+      "creation_time_utc": "2026-09-08T21:44:28.8895481Z",
+      "child_names": []
+    }
+  ],
+  "observed_at_utc": "2026-09-11T19:26:23.6057898Z"
+}

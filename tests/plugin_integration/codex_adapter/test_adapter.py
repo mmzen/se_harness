@@ -43,6 +43,7 @@ class AdapterTests(unittest.TestCase):
     def test_binding_rejects_unaccepted_profile(self):
         binding = {"schema": "verity-codex-binding-v1", "repo": "unused", "environment": "unused",
                    "artifact": "WO-PROBE-001", "capture": False,
+                   "decision": {"id": "DEC-PLG-001", "status": "decided", "option": "prove-supported-route"},
                    "profile": {"host": "0.153.5", "os": "windows", "python": "3.14.6", "evaluator": "0.16.0"}}
         with self.assertRaisesRegex(ValueError, "unsupported selected profile"):
             adapter.arguments(binding, {}, Path.cwd())
@@ -60,6 +61,15 @@ class AdapterTests(unittest.TestCase):
             self.assertEqual(adapter.validate_output(json.dumps(expected).encode(), "PreToolUse", 0), expected)
             with self.assertRaises(ValueError):
                 adapter.validate_output(json.dumps(expected).encode(), "PreToolUse", 1)
+
+    def test_missing_empty_or_whitespace_context_is_unready(self):
+        for name in ("SessionStart", "PreToolUse"):
+            for context in (None, "", " ", "\r\n\t", [], {}):
+                specific = {"hookEventName": name, "additionalContext": context}
+                with self.subTest(name=name, context=context), self.assertRaises(ValueError):
+                    adapter.validate_output(json.dumps({"hookSpecificOutput": specific}).encode(), name, 0)
+            expected = {"hookSpecificOutput": {"hookEventName": name, "additionalContext": "Fresh context\n"}}
+            self.assertEqual(adapter.validate_output(json.dumps(expected).encode(), name, 0), expected)
 
     @unittest.skipUnless(os.name == "nt", "accepted guard profile is Windows")
     def test_native_guard_failures_and_setup_access(self):
@@ -102,8 +112,11 @@ class AdapterTests(unittest.TestCase):
             (folder / "repo with spaces").mkdir()
             fake = folder / "scripts/codex-dispatch.py"
             fake.write_text("import json,sys; print(json.dumps({'argv':sys.argv,'input':json.load(sys.stdin)},ensure_ascii=False))", encoding="utf8")
-            (folder / "binding.json").write_text(json.dumps({"environment": str(Path(sys.executable).parent.parent),
-                                                          "repo": str(folder / "repo with spaces")}), encoding="utf8")
+            selected = {"schema": "verity-codex-binding-v1", "environment": str(Path(sys.executable).parent.parent),
+                        "repo": str(folder / "repo with spaces"), "artifact": "WO-PROBE-001", "capture": False,
+                        "profile": {"host": "0.153.4", "os": "windows", "python": "3.14.6", "evaluator": "0.16.0"},
+                        "decision": {"id": "DEC-PLG-001", "status": "decided", "option": "prove-supported-route"}}
+            (folder / "binding.json").write_text(json.dumps(selected), encoding="utf8")
             environment = os.environ.copy()
             environment.update(PLUGIN_DATA=str(folder), PLUGIN_ROOT=str(folder))
             raw = {"hook_event_name": "PreToolUse", "tool_name": "apply_patch", "cwd":str(folder / "repo with spaces"), "tool_input":
@@ -117,6 +130,29 @@ class AdapterTests(unittest.TestCase):
             output = json.loads(run.stdout)
             self.assertEqual(output["input"], raw)
             self.assertEqual(output["argv"], [str(fake), "--data", str(folder), "--event", "PreToolUse"])
+            # A selected eligibility failure must happen in the shell, before
+            # even the fixture dispatcher can record a Python invocation.
+            marker = folder / "python-spawned.txt"
+            fake.write_text("from pathlib import Path; Path(" + repr(str(marker)) + ").write_text('spawned')", encoding="utf8")
+            for changes in ({"profile": {}}, {"profile": {**selected["profile"], "host": "0.153.5"}},
+                            {"decision": {}}, {"decision": {**selected["decision"], "status": "open"}},
+                            {"decision": {**selected["decision"], "option": "exclude-codex"}}):
+                (folder / "binding.json").write_text(json.dumps({**selected, **changes}), encoding="utf8")
+                for name in ("SessionStart", "PreToolUse"):
+                    event = {"hook_event_name": name, "source": "startup", "cwd": selected["repo"],
+                             "tool_name": "apply_patch", "tool_input": {"command": "*** Begin Patch\n*** End Patch"}}
+                    guard = renderer.definitions(HOST)["hooks"][name][0]["hooks"][0]["command"]
+                    denied = subprocess.run([shell, "-NoProfile", "-NonInteractive", "-Command", guard],
+                                            input=json.dumps(event).encode(), capture_output=True, env=environment, timeout=10)
+                    with self.subTest(changes=changes, event=name):
+                        self.assertFalse(marker.exists(), "negative selection invoked Python")
+                        self.assertEqual(denied.returncode, 0, denied.stderr)
+                        failure = json.loads(denied.stdout)["hookSpecificOutput"]
+                        self.assertEqual(failure["hookEventName"], name)
+                        if name == "PreToolUse":
+                            self.assertEqual(failure["permissionDecision"], "deny")
+                        else:
+                            self.assertIn("UNREADY", failure["additionalContext"])
 
 
 if __name__ == "__main__":
