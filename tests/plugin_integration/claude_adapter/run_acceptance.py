@@ -1,10 +1,12 @@
 """Retain independent Claude observations. Never promote missing enforcement."""
 import argparse
 import copy
+import hashlib
 import json
 import os
 from pathlib import Path
 import platform
+import re
 import shutil
 import subprocess
 import sys
@@ -179,15 +181,44 @@ class Acceptance:
                 hook_results.append({'hook_id':message['hook_id'],'tool_use_id':record['tool_use_id'],
                     'output':output,'record':record,'handler_records':records,'exit_code':message.get('exit_code'),
                     'outcome':message.get('outcome'),'host_elapsed':ends[0]-starts[0] if starts and ends else None})
-        denied=any(h['output'].get('permissionDecision')=='deny' and h['outcome']=='success' and h['exit_code']==0 and
+        exact_uses=bool(uses) and all(Path(u.get('input',{}).get('file_path','')).absolute()==target.absolute() and u.get('input',{}).get('content')=='effect-'+name+'\n' for u in uses)
+        denied=exact_uses and any(h['output'].get('permissionDecision')=='deny' and h['output'].get('permissionDecisionReason','').strip() and h['outcome']=='success' and h['exit_code']==0 and
                    any(t.get('is_error') and h['output'].get('permissionDecisionReason','') in str(t.get('content')) for t in tool_results) for h in hook_results)
         effects=sum(t.get('is_error') is not True for t in tool_results)
-        return result, debug, {'tool_calls': len(uses), 'tool_uses':uses,'tool_results':tool_results,'correlated_hooks':hook_results,
+        return result, debug, {'tool_calls': len(uses), 'exact_requested_write':exact_uses,'tool_uses':uses,'tool_results':tool_results,'correlated_hooks':hook_results,
             'target_before': result['target_before'].get(path), 'target_after': result['target_after'].get(path),
             'effect_count':effects,'final_state_changed':changed,'exact_expected_content':(self.f['repo']/path).read_text()=='effect-'+name+'\n',
             'independent_effect_observer': 'outer runner SHA256 before process launch and after host exit',
             'effect_count_basis':'host-correlated Write results; final state independently checked; no whole-session filesystem audit',
             'denial_observed':denied}
+
+    def context_receipts(self, result, debug):
+        agents=(self.f['repo']/'AGENTS.md').read_bytes()
+        router=(self.f['repo']/'ENGINEERING_HARNESS.md').read_bytes()
+        begin,end=b'<!-- se-harness:begin -->',b'<!-- se-harness:end -->'
+        gate=agents[agents.index(begin):agents.index(end)+len(end)]
+        body=b'AGENTS.md managed gate:\n'+gate+b'\n\nENGINEERING_HARNESS.md:\n'+router
+        body_hash=hashlib.sha256(body).hexdigest()
+        messages=s.json_lines(result['stdout'])
+        started={m.get('hook_id') for m in messages if m.get('subtype')=='hook_started'}
+        lengths=[int(m.group(1)) for line in debug.splitlines() if (m:=re.search(r'\) provided additionalContext \((\d+) chars\)$',line))]
+        receipts=[]
+        for message in messages:
+            if message.get('subtype')!='hook_response' or message.get('hook_event')!='SessionStart':
+                continue
+            try:
+                context=json.loads(message['stdout'])['hookSpecificOutput']['additionalContext']
+            except (ValueError,KeyError,TypeError):
+                continue
+            records=s.json_lines(message.get('stderr',''))
+            record=next((r for r in records if r.get('adapter')), {})
+            complete=(message.get('hook_id') in started and message.get('outcome')=='success' and message.get('exit_code')==0 and
+                      body in context.encode('utf8') and context.endswith('\n\nEND VERIFIED GOVERNANCE '+body_hash+'; complete context delivered.\n') and len(context) in lengths)
+            receipts.append({'hook_id':message['hook_id'],'hook_name':message['hook_name'],'complete_received':complete,
+                'expected_body_sha256':body_hash,'received_context_sha256':hashlib.sha256(context.encode('utf8')).hexdigest(),
+                'received_utf8_bytes':len(context.encode('utf8')),'recognized_context_lengths':lengths,'argv':record.get('argv'),
+                'checks':[r for r in records if 'checks' in r]})
+        return receipts
 
     def C01(self):
         self.case('C01')
@@ -195,10 +226,13 @@ class Acceptance:
         self.rows.append(manifest)
         result, debug = self.host('discovery', 'Say adapter discovery captured. Do not use tools.')
         text = result['stdout'] + debug
-        found = {name: ('verity-plane:' + name) in text for name in s.binding.SKILLS}
+        init=next((m for m in s.json_lines(result['stdout']) if m.get('subtype')=='init'),{})
+        found = {name: ('verity-plane:' + name) in init.get('slash_commands',[]) for name in s.binding.SKILLS}
+        receipts=self.context_receipts(result,debug)
         self.save('Real host resolves all five packaged shared skills and loads the committed inline bindings.',
-                  {'discovered': found, 'manifest_exit': manifest['exit'], 'startup_context_receipt': 'provided additionalContext' in debug},
-                  'pass' if all(found.values()) and manifest['exit'] == 0 and 'provided additionalContext' in debug else 'fail')
+                  {'discovered': found, 'manifest_exit': manifest['exit'], 'startup_context_receipts': receipts,
+                   'namespace_limit':'Only explicit verity-plane: names and packaged paths; no repository-skill ownership/coexistence qualification.'},
+                  'pass' if all(found.values()) and manifest['exit'] == 0 and any(r['complete_received'] for r in receipts) else 'fail')
 
     def C02(self):
         self.case('C02')
@@ -209,10 +243,11 @@ class Acceptance:
         if 'compact_boundary' not in c['stdout'] and 'Not enough messages' in c['stdout']:
             self.host('seed', 'Explain integration testing in three sentences. Do not use tools.', session=session, resume=True)
             c, cd = self.host('compact-retry', '/compact', session=session, resume=True)
-        delivered = {name: 'provided additionalContext' in text and 'END VERIFIED GOVERNANCE' in text
-                     for name, text in [('startup', ad), ('resume', bd), ('compact', cd)]}
+        receipts={name:self.context_receipts(row,text) for name,row,text in [('startup',a,ad),('resume',b,bd),('compact',c,cd)]}
+        delivered = {name:any(r['complete_received'] and r['hook_name']=='SessionStart:'+name for r in values)
+                     for name,values in receipts.items()}
         self.save('Fresh complete verified context after actual startup, resume and manual compaction; absolute isolated argv.',
-                  {'delivered': delivered, 'compact_boundary': 'compact_boundary' in c['stdout']},
+                  {'delivered': delivered, 'receipts':receipts,'compact_boundary': 'compact_boundary' in c['stdout']},
                   'pass' if all(delivered.values()) and 'compact_boundary' in c['stdout'] else 'fail')
 
     def C03(self):
@@ -221,7 +256,7 @@ class Acceptance:
         no, nd, no_observation = self.edit('refused', path='outside-scope.txt')
         self.save('Mapped Write runs current evaluator checks; permitted effect occurs and out-of-scope effect is refused.',
                   {'permitted': yo, 'refused': no_observation},
-                  'pass' if yo['tool_calls'] == no_observation['tool_calls'] == 1 and yo['effect_count'] == 1 and no_observation['effect_count'] == 0 and no_observation['denial_observed'] else 'fail')
+                  'pass' if yo['tool_calls'] == no_observation['tool_calls'] == 1 and yo['effect_count'] == 1 and yo['exact_expected_content'] and no_observation['effect_count'] == 0 and not no_observation['final_state_changed'] and no_observation['denial_observed'] else 'fail')
 
     def C04(self):
         self.case('C04')
@@ -309,7 +344,7 @@ class Acceptance:
             findings.append(observation)
         self.save('Real mapped edits are denied before 60s host deadline after shared evaluator failures; child trees stop and target bytes remain unchanged.',
                   {'faults': findings, 'configured_budgets': s.binding.BUDGET},
-                  'pass' if all(x['tool_calls']==1 and x['effect_count']==0 and x['denial_observed'] and x['child_pids'] and not any(x['children_alive'].values()) for x in findings) else 'fail')
+                  'pass' if all(x['tool_calls']==1 and x['effect_count']==0 and not x['final_state_changed'] and x['denial_observed'] and x['child_pids'] and not any(x['children_alive'].values()) and x['correlated_hooks'] and all(h['host_elapsed'] is not None and h['host_elapsed']<60 for h in x['correlated_hooks']) for x in findings) else 'fail')
 
     def C10(self):
         self.case('C10')

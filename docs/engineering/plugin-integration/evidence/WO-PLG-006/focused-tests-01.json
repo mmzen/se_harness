@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-B",
+    "-S",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/plugin_integration/claude_adapter",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-claude-adapter",
+  "exit": 0,
+  "timeout": false,
+  "started_monotonic": 240983.9420295,
+  "finished_monotonic": 241003.994601,
+  "stdout": "",
+  "stderr": "test_event_quotes_and_unicode_survive_exactly (test_adapter.BindingTests.test_event_quotes_and_unicode_survive_exactly) ... ok\r\ntest_forged_pyvenv_version_cannot_replace_actual_interpreter_probe (test_adapter.BindingTests.test_forged_pyvenv_version_cannot_replace_actual_interpreter_probe) ... ok\r\ntest_malformed_and_missing_tool_fields_deny (test_adapter.BindingTests.test_malformed_and_missing_tool_fields_deny) ... ok\r\ntest_missing_runtime_never_launches_python (test_adapter.BindingTests.test_missing_runtime_never_launches_python) ... ok\r\ntest_native_hooks_match_inline_source_and_are_synchronous (test_adapter.BindingTests.test_native_hooks_match_inline_source_and_are_synchronous) ... ok\r\ntest_profile_and_loaded_binding_cannot_self_qualify (test_adapter.BindingTests.test_profile_and_loaded_binding_cannot_self_qualify) ... ok\r\ntest_real_scope_refusal_and_permitted_edit (test_adapter.BindingTests.test_real_scope_refusal_and_permitted_edit) ... ok\r\ntest_real_session_uses_absolute_isolated_python_and_full_context (test_adapter.BindingTests.test_real_session_uses_absolute_isolated_python_and_full_context) ... ok\r\ntest_unexpected_output_controls_are_refused (test_adapter.BindingTests.test_unexpected_output_controls_are_refused) ... ok\r\ntest_unsupported_tools_leave_setup_access_without_allow (test_adapter.BindingTests.test_unsupported_tools_leave_setup_access_without_allow) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 10 tests in 19.805s\r\n\r\nOK\r\n"
+}

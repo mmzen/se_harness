@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-PLG-006"
 checkpoint = "pre-action"
-formal_snapshot_sha256 = "e04b95aa6a7a8b7d5b687ff921a3d1c78212d7e5c3c201407c4245e4125795a2"
-rebound_at = "2026-09-11T19:10:38Z"
+formal_snapshot_sha256 = "d486c36a30fdc1eeec9d0169de12a6a270105cdb20f874ce5f788496fb30742e"
+rebound_at = "2026-09-11T19:30:26Z"
 ```
 
 # WO-PLG-006 pre-action evidence

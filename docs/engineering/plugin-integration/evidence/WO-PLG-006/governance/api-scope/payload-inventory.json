@@ -1,0 +1,429 @@
+{
+  "destination": "Claude Code 2.1.266 official Anthropic service, api.anthropic.com/v1/messages",
+  "scope": "WO-PLG-006 C01-C12 synthetic disposable adapter tests only",
+  "representative_inspected_sandbox": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03",
+  "package_source_revision": "1ba4ff719254af4333fbb574057f1b076cfb936b",
+  "content_sent_by_hook": [
+    "Exact released 0.16.0 AGENTS.md managed gate",
+    "Exact released 0.16.0 ENGINEERING_HARNESS.md router",
+    "Runtime refusal/coverage diagnostics containing disposable paths and fixed version/hash values"
+  ],
+  "other_model_context": [
+    "Released fixture CLAUDE.md and installed managed instructions",
+    "Packaged shared skill metadata and selected skill content",
+    "Explicit synthetic test prompts and Read results for the two fixture target files",
+    "Local fixture paths, host/OS/environment metadata normally supplied by Claude Code"
+  ],
+  "target_contents": {
+    "governed-target.txt": "initial fixture target\n",
+    "outside-scope.txt": "initial fixture target\n"
+  },
+  "ancestor_CLAUDE_files": [],
+  "fixture_has_git_repository": false,
+  "source_exclusions": [
+    "No product implementation checkout mounted as the host working directory",
+    "No real work-order transition or product source edit",
+    "No observer read/copy of credential contents; existing isolated profile is used through normal Claude CLI authentication",
+    "No normal-profile plugin installation or host upgrade"
+  ],
+  "actual_inspection": [
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\.agents\\skills\\harness-operator-brief\\scripts\\check_brief.py",
+      "bytes": 9175,
+      "sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\.agents\\skills\\harness-operator-brief\\skill-contract.json",
+      "bytes": 4376,
+      "sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\.agents\\skills\\harness-operator-brief\\SKILL.md",
+      "bytes": 3833,
+      "sha256": "b7502217f5aac07c4bb3bd185f52e82d47c8f12fc0f4690efcb58eb8e42e5fd3"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\.agents\\skills\\harness-orient\\scripts\\orient.py",
+      "bytes": 36278,
+      "sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\.agents\\skills\\harness-orient\\skill-contract.json",
+      "bytes": 2921,
+      "sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\.agents\\skills\\harness-orient\\SKILL.md",
+      "bytes": 3177,
+      "sha256": "0cf64a75e7df251d44bc9f362c31cdb606ed8582165c0309c0984c5743b253ca"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\.claude\\skills\\harness-orient\\SKILL.md",
+      "bytes": 1125,
+      "sha256": "8da58e3e22b3e9d7a7fc332aaf1df1fd45463b65208c3798c30b0d99d9548295"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\.engineering-harness.lock",
+      "bytes": 6828,
+      "sha256": "062776e1e68398fb7a6db2eb9c0d7469cb7cebf516a57fba0f22dbaacd580665"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\.engineering-harness.toml",
+      "bytes": 413,
+      "sha256": "d46a42ee96e94bdbc468838fea626738839e06113e86db94d27bab68f3250268"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\.gitattributes",
+      "bytes": 173,
+      "sha256": "fba4cf22b45939f8c705f2a9c3bd964408b5003d0599993e72735ce865b97e3b"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\.github\\PULL_REQUEST_TEMPLATE.md",
+      "bytes": 1114,
+      "sha256": "9c655e1a5d0424f2d620db4ff9762a7c2883abfce8aef34a92115faff674a90e"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\.github\\workflows\\engineering-harness.yml",
+      "bytes": 8103,
+      "sha256": "9956aa5624569c132ec8bf938789e5dea1f2a777c90a9a07fe79aa3e4c8dfc2e"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\.gitignore",
+      "bytes": 130,
+      "sha256": "1b9c8af1917e119817b7160d3afa4e7277226d187b964c318fdbb6072beeaeaa"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\AGENTS.md",
+      "bytes": 1111,
+      "sha256": "864a2c3bafbc3191c778fe20402a2e983b4bece1c11103540164c06c46b4bef5"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\CLAUDE.md",
+      "bytes": 402,
+      "sha256": "459bf70b6e9b45726ebcd48c1d93b64f603e36c1d22d94d4daccc08181a59f26"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\ARTIFACT_AUTHORING.md",
+      "bytes": 16427,
+      "sha256": "8559db739e38a4a6871bea57243c98f35d1e3a27b8df2371bacee9be33fd0ace"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\DECISION_RIGHTS.md",
+      "bytes": 7312,
+      "sha256": "cab44d7cd079fb5598f83987b15cba2cf605b241288c684b1bda4d8c82d60709"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\OPERATING_CARD.md",
+      "bytes": 1006,
+      "sha256": "1b9f6dcd497b07f9b1658eeebea09ab915e250a69090634b8f738c59ada95baf"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\QUALITY_GATES.json",
+      "bytes": 12374,
+      "sha256": "a7c256bb2a96c19e3e7229a3712e2577e70f711f755f83d4635db49670e4d66f"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\QUALITY_GATES.md",
+      "bytes": 13869,
+      "sha256": "c4b1d4930d41353dbdb60c714c154426394ce6c70176f678aecf6831f920e7ee"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\readiness-probe\\capabilities\\CAP-PROBE-001.md",
+      "bytes": 510,
+      "sha256": "5e2f91b033649308d32285e57067e79021651ffc8a62a8dfa8c13ba41278f454"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\readiness-probe\\evidence\\WO-PROBE-001\\WO-PROBE-001-pre-action.md",
+      "bytes": 296,
+      "sha256": "2e97ca631cc5b4bf6c9ed772b8221f9c48cf4dd917e4ecb8b251a1aa4fc822fb"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\readiness-probe\\intent\\INT-PROBE-001.md",
+      "bytes": 493,
+      "sha256": "12696d0d5e187dcff79beb9b834d95b6892e0d89b3e8334a2199d0ce64bdd71e"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\readiness-probe\\requirements\\REQ-PROBE-001.md",
+      "bytes": 653,
+      "sha256": "4c120a409fe51ca39143e1dd6f5665577043789ba2e93a8bf79cb8f55dc4086d"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\readiness-probe\\specifications\\SPEC-PROBE-001.md",
+      "bytes": 691,
+      "sha256": "8872ef62aed5ea1cba6845abb5de9b943e3281cbdfb2343a41c3da20537681f6"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\readiness-probe\\verification\\VER-PROBE-001.md",
+      "bytes": 540,
+      "sha256": "65c1b041c112868bde7de534d4b4fa2c33271b9dda44dd747cfb95794ec1edca"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\readiness-probe\\work-orders\\WO-PROBE-001.md",
+      "bytes": 903,
+      "sha256": "5a3ee327e43b8188769175e5b8a01c2f1dde04001fe140f823b988af9905d550"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\README.md",
+      "bytes": 1517,
+      "sha256": "7e479e0845a7f386e3c35303f3d8893b7fe5c96fdbe353e4b149fa9bc0a5294c"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\TECHNICAL_COMMUNICATION.md",
+      "bytes": 6333,
+      "sha256": "0f710e2a53f65e63e8904214531e6d8ca8c24487e7e14b9210b62a53db37c245"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\templates\\ADR.template.md",
+      "bytes": 842,
+      "sha256": "e93969569c4942053b177bd985552c80a724ef150ef1bac6b5bb07251a292569"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\templates\\ARCHITECTURE.template.md",
+      "bytes": 2404,
+      "sha256": "cbef4107518714c8589e56bcdd0a26c8370f0beec910a5d8d36a9b72a733264e"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\templates\\CAPABILITY.template.md",
+      "bytes": 1269,
+      "sha256": "ae839e6a46fe79f0941981d1bd1b5031c3ace642f7d4ce7a54ce5d5560392436"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\templates\\DECISION.template.md",
+      "bytes": 1828,
+      "sha256": "7eee2639aed2960b7f3537641b1a1112fa19c2901a76dbd6f994f8db3901953e"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\templates\\INTENT.template.md",
+      "bytes": 1742,
+      "sha256": "37861b9ff3caad2c971cb47d35e561a4d151ecb6c404afad8e700518fc9e094c"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\templates\\OPERATING_CONTRACT.template.md",
+      "bytes": 496,
+      "sha256": "c43646bead3c08b0bee0cdf1326c7a95b95ceb8b9141bf0a5ac7418c48613468"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\templates\\README.md",
+      "bytes": 1744,
+      "sha256": "3426c5ca9f03435b649f25ae611984f093a188933198c75613d94d2a87d85e9e"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\templates\\RELEASE_CONTRACT.template.md",
+      "bytes": 1696,
+      "sha256": "2ea05c0c0b0ffa529c2999350609d125c584e9ad8a0c866402f9350b5213a3b6"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\templates\\RELEASE_RECORD.template.md",
+      "bytes": 1415,
+      "sha256": "24e90652e4b9582b56ec5ab28b69208a4389fbe5524d50f36e1cc0a7d827a1ff"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\templates\\REQUIREMENT.template.md",
+      "bytes": 1772,
+      "sha256": "09c88ffc221a6bce8c0ae698f1ecefa39ef91cb54de6ecbf79f18df317e249ee"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\templates\\SPECIFICATION.template.md",
+      "bytes": 2280,
+      "sha256": "66e18f26ebcbe0deb06202ae51e833ebabf2d9d71a0c6cf0842d424ef8980814"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\templates\\VERIFICATION.template.md",
+      "bytes": 698,
+      "sha256": "ee6ca379624742dda1db745761d1e487667fcd4964cc7855e2f9267d95c4699c"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\templates\\VERIFICATION_RECORD.template.md",
+      "bytes": 2650,
+      "sha256": "5223be7b6c0c1243a7d00dcab37474fda634f110e85c891b2a87da9312fa32f5"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\templates\\WORK_ORDER.template.md",
+      "bytes": 3712,
+      "sha256": "5a271993bf90ad3eddc1e08ff0e9ff62c8876b717dd1ff402d4354e073ff1d4b"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\TRACEABILITY.md",
+      "bytes": 15410,
+      "sha256": "7e3639e5ca85ac99c0bd286fcc785efb9c5c4a5085210ce3933abad3a65fd623"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\WORKFLOW.json",
+      "bytes": 36079,
+      "sha256": "b7c63cbfd9a6075aa455c36ee3a331b6f93c1f0384057f4f74dd54a9015a6194"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\docs\\engineering\\WORKFLOW.md",
+      "bytes": 20836,
+      "sha256": "82494b587c8713a41a1b3ce00814286ad60424f664646929004eb0bc502e8ed0"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\ENGINEERING_HARNESS.md",
+      "bytes": 6408,
+      "sha256": "18b8535a5cf4fb71255dcc910739eaa295aebcc45c28ba2529ef5d5ce7bf2705"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\GLOSSARY.md",
+      "bytes": 1425,
+      "sha256": "18d27d25f9c7c73c71c265ae68df3f78601fd8fac46c2b2961b06f26822529a2"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\governed-target.txt",
+      "bytes": 24,
+      "sha256": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+    },
+    {
+      "origin": "released-evaluator initialized synthetic repository",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository\\outside-scope.txt",
+      "bytes": 24,
+      "sha256": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+    },
+    {
+      "origin": "accepted package shared skills",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\accepted assembly\\claude\\verity-plane\\skills\\change\\references\\artifacts.md",
+      "bytes": 2255,
+      "sha256": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3"
+    },
+    {
+      "origin": "accepted package shared skills",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\accepted assembly\\claude\\verity-plane\\skills\\change\\references\\authority.md",
+      "bytes": 2216,
+      "sha256": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f"
+    },
+    {
+      "origin": "accepted package shared skills",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\accepted assembly\\claude\\verity-plane\\skills\\change\\references\\work-orders.md",
+      "bytes": 3593,
+      "sha256": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8"
+    },
+    {
+      "origin": "accepted package shared skills",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\accepted assembly\\claude\\verity-plane\\skills\\change\\SKILL.md",
+      "bytes": 3495,
+      "sha256": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13"
+    },
+    {
+      "origin": "accepted package shared skills",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\accepted assembly\\claude\\verity-plane\\skills\\evidence\\references\\external-actions.md",
+      "bytes": 1672,
+      "sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69"
+    },
+    {
+      "origin": "accepted package shared skills",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\accepted assembly\\claude\\verity-plane\\skills\\evidence\\references\\records.md",
+      "bytes": 4605,
+      "sha256": "0c266bef118b904030e1982318763021bdfd699e34b353d4f38e5d9f2f43a20b"
+    },
+    {
+      "origin": "accepted package shared skills",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\accepted assembly\\claude\\verity-plane\\skills\\evidence\\SKILL.md",
+      "bytes": 3564,
+      "sha256": "647c20a982c798c0617145cbcfe2f3356d23b4f827641b6affff9592bf02ad3b"
+    },
+    {
+      "origin": "accepted package shared skills",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\accepted assembly\\claude\\verity-plane\\skills\\harness-operator-brief\\agents\\openai.yaml",
+      "bytes": 43,
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+    },
+    {
+      "origin": "accepted package shared skills",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\accepted assembly\\claude\\verity-plane\\skills\\harness-operator-brief\\scripts\\check_brief.py",
+      "bytes": 9175,
+      "sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683"
+    },
+    {
+      "origin": "accepted package shared skills",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\accepted assembly\\claude\\verity-plane\\skills\\harness-operator-brief\\skill-contract.json",
+      "bytes": 4376,
+      "sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52"
+    },
+    {
+      "origin": "accepted package shared skills",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\accepted assembly\\claude\\verity-plane\\skills\\harness-operator-brief\\SKILL.md",
+      "bytes": 5860,
+      "sha256": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51"
+    },
+    {
+      "origin": "accepted package shared skills",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\accepted assembly\\claude\\verity-plane\\skills\\harness-orient\\scripts\\orient.py",
+      "bytes": 36278,
+      "sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56"
+    },
+    {
+      "origin": "accepted package shared skills",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\accepted assembly\\claude\\verity-plane\\skills\\harness-orient\\skill-contract.json",
+      "bytes": 2921,
+      "sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627"
+    },
+    {
+      "origin": "accepted package shared skills",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\accepted assembly\\claude\\verity-plane\\skills\\harness-orient\\SKILL.md",
+      "bytes": 4745,
+      "sha256": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf"
+    },
+    {
+      "origin": "accepted package shared skills",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\accepted assembly\\claude\\verity-plane\\skills\\setup\\references\\environment.md",
+      "bytes": 14101,
+      "sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59"
+    },
+    {
+      "origin": "accepted package shared skills",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\accepted assembly\\claude\\verity-plane\\skills\\setup\\SKILL.md",
+      "bytes": 2151,
+      "sha256": "68b3270b2ed4b8ad3651b6ff2ad737a425f8e7e3034df7fc065fb4e0feb03271"
+    }
+  ],
+  "proposed_shell_command": "$env:GIT_CONFIG_COUNT='1'; $env:GIT_CONFIG_KEY_0='safe.directory'; $env:GIT_CONFIG_VALUE_0='C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-claude-adapter'; & 'C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe' -I -B -S tests/plugin_integration/claude_adapter/run_acceptance.py --sandbox '../plugin-probe-sandboxes/claude-adapter-20260911-04' --evidence 'docs/engineering/plugin-integration/evidence/WO-PLG-006/acceptance-04' --cases C01,C02,C03,C04,C05,C06,C07,C08,C09,C10,C11,C12",
+  "approval_boundary": "No API-backed retry is made by this inventory. Network execution awaits the specifically requested user authorization."
+}

@@ -1,0 +1,7 @@
+{"hookSpecificOutput":{"permissionDecision":"deny","hookEventName":"PreToolUse","permissionDecisionReason":"UNREADY: Required tool name is missing or malformed. No successful governance check is claimed. Ordinary setup permissions remain in force."}}
+
+{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Governed action refused: tool_input must be an object"}}
+
+{"hookSpecificOutput":{"permissionDecision":"deny","hookEventName":"PreToolUse","permissionDecisionReason":"UNREADY: Select an absolute ordinary binding path. No successful governance check is claimed. Ordinary setup permissions remain in force."}}
+
+{"hookSpecificOutput":{"permissionDecision":"deny","hookEventName":"PreToolUse","permissionDecisionReason":"UNREADY: Objet non valide passé, \u0027:\u0027 ou \u0027}\u0027 attendu. (10): {malformed No successful governance check is claimed. Ordinary setup permissions remain in force."}}

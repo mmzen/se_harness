@@ -3,6 +3,8 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+import os
+import shutil
 
 import support as s
 
@@ -85,11 +87,24 @@ class BindingTests(unittest.TestCase):
         original = path.read_bytes()
         try:
             for value in ({'hookSpecificOutput': {'hookEventName': 'PreToolUse', 'additionalContext': 'ok', 'permissionDecision': 'allow'}},
-                          {'hookSpecificOutput': {'hookEventName': 'PreToolUse', 'additionalContext': 'ok'}, 'continue': True}):
+                          {'hookSpecificOutput': {'hookEventName': 'PreToolUse', 'additionalContext': 'ok'}, 'continue': True},
+                          {'hookSpecificOutput': {'hookEventName': 'PreToolUse', 'additionalContext': '   '}}):
                 path.write_text('print(' + repr(json.dumps(value)) + ')\n', encoding='utf8')
                 self.assertTrue(s.denied(s.direct(self.f, s.event(self.f, 'PreToolUse'))))
         finally:
             path.write_bytes(original)
+
+    def test_forged_pyvenv_version_cannot_replace_actual_interpreter_probe(self):
+        folder=self.f['space']/'forged environment'
+        (folder/'Scripts').mkdir(parents=True,exist_ok=True)
+        (folder/'pyvenv.cfg').write_text('version = 3.14.6\n')
+        shutil.copyfile(Path(os.environ['SystemRoot'])/'System32/where.exe',folder/'Scripts/python.exe')
+        s.dump(self.f['config_path'],dict(self.f['config'],environment=str(folder)))
+        result=s.direct(self.f,s.event(self.f))
+        record=s.guard_record(result)
+        self.assertTrue(record['interpreter_invoked'])
+        self.assertIn('actual environment interpreter',record['error'])
+        self.assertNotIn('argv',record)
 
     def test_profile_and_loaded_binding_cannot_self_qualify(self):
         loaded = json.loads((s.ADAPTER / 'hooks/hooks.json').read_text())
@@ -104,6 +119,12 @@ class BindingTests(unittest.TestCase):
             modified = copy.deepcopy(loaded)
             modified['hooks']['PreToolUse'][0]['hooks'][0][field] = value
             self.assertFalse(s.binding.assess_binding(self.f['config'], modified, observed, s.binding.PROFILE['decision'])['eligible_for_live_assessment'])
+        changed=copy.deepcopy(loaded)
+        changed['hooks']['PreToolUse'][0]['matcher']='NoSuchTool'
+        self.assertFalse(s.binding.assess_binding(self.f['config'],changed,observed,s.binding.PROFILE['decision'])['eligible_for_live_assessment'])
+        changed=copy.deepcopy(loaded)
+        changed['hooks']['PreToolUse'][0]['hooks'][0]['command']='exit 0'
+        self.assertFalse(s.binding.assess_binding(self.f['config'],changed,observed,s.binding.PROFILE['decision'])['eligible_for_live_assessment'])
 
 
 if __name__ == '__main__':
