@@ -1,21 +1,30 @@
 ```toml
 artifact = "WO-PLG-012"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "c59019b10d44f824a0198398f9d38fd45587a28b25fbe9f6464bf50601f071bc"
-rebound_at = "2026-09-11T06:51:10Z"
+formal_snapshot_sha256 = "e937c7f0f07033efc553caaa3d50d9b89b1475e526c09503e410f3cc60cad396"
+rebound_at = "2026-09-11T07:09:06Z"
 ```
 
 # WO-PLG-012 handoff evidence
 
-The retained plugin skills and existing acceptance observations are delivered.
-The inherited WO017 repair preserves all 56 relocated WO011 payloads. Both
-upgrade rehearsals pass at 5aba5414; the subsequent integration builder rejects
-10,145 Git archive entries against its unchanged 10,000-member ceiling.
+The plugin supplies retained harness-orient and explicitly requested
+harness-operator-brief skills. Existing helper/contract bytes, protected text,
+inline schemas and read-only effects are preserved. C01-C08 include actual
+Windows/Linux helper results, bounded Windows instruction observations and eight
+fixed Linux calls. Original failures and limitations remain visible.
 
-Within WO012 evidence scope, 415 raw helper files are now losslessly stored in
-raw.zip. Original report/audit/inventory/map bytes and every payload remain
-unchanged. A fixed-inventory checker and independent reconciliation qualify the
-storage correction. Original failed CI and observation versions stay visible.
+The separately approved WO017 repair is inherited from PR449. All 56 relocated
+WO011 payloads retain their original bytes; those edits are not WO012 work.
+The earlier Windows CI failure remains under checks/ci-initial. All 13 checks
+at e152f6a8 now pass, including both upgrade rehearsals and downstream integration.
+Source CI ran 1,134 tests with four skipped. Released integrity and review pass;
+the six known candidate/root doctor differences remain unchanged.
 
-WO-PLG-012 remains in_progress pending full corrected CI. No completion,
-ready-record preparation, assurance, release or GitHub merge is inferred.
+The integration archive-member failure is also retained. Its scoped correction
+stores 415 raw helper observations losslessly in raw.zip, while keeping the
+original reports, inventory and source map readable. Independent byte, tamper
+and actual extraction checks pass; the CI size/count limits are unchanged.
+
+The released evaluator applied delegated completion. WO-PLG-012 is implemented.
+Ready VREC009 preparation follows separately at an exact clean candidate.
+No assurance, release, merge, native activation or live migration is claimed.

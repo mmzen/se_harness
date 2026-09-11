@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 874 declared changed path(s) are within execution scope.",
+            "message": "All 886 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -120,16 +120,7 @@
     "unrelated_count": 46
   },
   "mutation": {
-    "writes": [
-      {
-        "fields": [
-          "formal_snapshot_sha256",
-          "rebound_at"
-        ],
-        "id": "WO-PLG-012",
-        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-012/WO-PLG-012-handoff.md"
-      }
-    ]
+    "writes": []
   },
   "operation": {
     "kind": "check",
@@ -254,8 +245,17 @@
     "alternatives": [],
     "blocked_by": [],
     "command_or_response": {
-      "kind": "response",
-      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for 6db8bd6: HTTP 422"
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-PLG-012=implemented",
+        "--decision",
+        "WO-PLG-012=delegated-executor",
+        "--apply"
+      ],
+      "kind": "command"
     },
     "current_lifecycle_state": [
       "WO-PLG-012 is in_progress."
@@ -265,8 +265,10 @@
       "decision": "whether the authorized implementation and evidence are complete",
       "decision_right": "DR-WO-COMPLETE",
       "delegation": {
+        "check_run_id": "103176796613",
         "class": "execution",
-        "gate": "not passing"
+        "gate": "success",
+        "head": "e152f6a8f30a62b4fb3676ada2e437f94544ee9c"
       },
       "outcomes": [
         "implemented",
@@ -286,7 +288,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "5692ae0234548457daf351184e57cf5a29aef5c4a48fcd4eb11e098e9491eed9",
+  "result_sha256": "2dfe81f6115fa9cb2ac8597374e1658d39e5ff8b07edf66b1566fabc2097b874",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
@@ -1008,6 +1010,10 @@
       "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-retained-acceptance-doctor.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-retained-acceptance-preflight.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/acceptance/ro-retained-acceptance-validate.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/archive-review/audit.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/archive-review/inventory.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/archive-review/raw.zip",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/archive-review/REPORT.md",
       "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/ci-initial/initial-source-ci.log",
       "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/ci-initial/initial-windows-upgrade-failure.log",
       "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/ci-initial/result.json",
@@ -1065,6 +1071,14 @@
       "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/initial/ro-review-preflight.stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/initial/ro-start-doctor.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/initial/ro-start-doctor.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/parent-repair/archive-evidence.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/parent-repair/archive-evidence.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/parent-repair/archive-graph.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/parent-repair/archive-graph.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/parent-repair/archive-review.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/parent-repair/archive-review.stderr.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/parent-repair/archive-scope.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/parent-repair/archive-scope.stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/parent-repair/repair-parent-doctor.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/parent-repair/repair-parent-doctor.stderr.txt",
       "docs/engineering/plugin-integration/evidence/WO-PLG-012/checks/parent-repair/repair-parent-evidence.json",

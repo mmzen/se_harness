@@ -1,0 +1,345 @@
+Retain verified integration package	Set up job	﻿2026-09-11T07:06:34.3916754Z Current runner version: '2.337.0'
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3942472Z ##[group]Runner Image Provisioner
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3943455Z Hosted Compute Agent
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3944065Z Version: 20260828.587
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3944749Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3945598Z Build Date: 2026-08-28T16:44:25Z
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3946300Z Worker ID: {5ecb070c-50f7-428d-8ee1-a2a64d0bf211}
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3947128Z Azure Region: westus
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3947705Z ##[endgroup]
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3949299Z ##[group]Operating System
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3950106Z Ubuntu
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3950643Z 24.04.5
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3951473Z LTS
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3952019Z ##[endgroup]
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3952619Z ##[group]Runner Image
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3953330Z Image: ubuntu-24.04
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3953908Z Version: 20260907.300.1
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3955069Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260907.300/images/ubuntu/Ubuntu2404-Readme.md
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3956782Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260907.300
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3957884Z ##[endgroup]
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3958983Z ##[group]GITHUB_TOKEN Permissions
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3961347Z Contents: read
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3962014Z Metadata: read
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3962720Z ##[endgroup]
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3964865Z Secret source: Actions
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3965898Z Cache mode: write
+Retain verified integration package	Set up job	2026-09-11T07:06:34.3966672Z Prepare workflow directory
+Retain verified integration package	Set up job	2026-09-11T07:06:34.4538231Z Prepare all required actions
+Retain verified integration package	Set up job	2026-09-11T07:06:34.4588810Z Getting action download info
+Retain verified integration package	Set up job	2026-09-11T07:06:34.8065594Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Retain verified integration package	Set up job	2026-09-11T07:06:34.9390263Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+Retain verified integration package	Set up job	2026-09-11T07:06:35.0278495Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+Retain verified integration package	Set up job	2026-09-11T07:06:35.4761796Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Retain verified integration package	Set up job	2026-09-11T07:06:35.7014572Z Complete job name: Retain verified integration package
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T07:06:35.7870498Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7882433Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7884084Z with:
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7884890Z   fetch-depth: 0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7885781Z   persist-credentials: false
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7886801Z   repository: mmzen/se_harness
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7896319Z   token: ***
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7897163Z   ssh-strict: true
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7898017Z   ssh-user: git
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7898844Z   clean: true
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7899707Z   sparse-checkout-cone-mode: true
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7900742Z   fetch-tags: false
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7901777Z   show-progress: true
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7902677Z   lfs: false
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7903542Z   submodules: false
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7904409Z   set-safe-directory: true
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7905409Z   allow-unsafe-pr-checkout: false
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7906729Z env:
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7907560Z   INTEGRATION_EVENT: pull_request
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7908632Z   INTEGRATION_REF: refs/pull/446/merge
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7909694Z   INTEGRATION_PR: 446
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7910618Z   INTEGRATION_RETENTION_DAYS: 3
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7912051Z   PYTHONNOUSERSITE: 1
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7912973Z   PYTHONPATH: 
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.7913787Z ##[endgroup]
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.8975208Z Syncing repository: mmzen/se_harness
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.8979885Z ##[group]Getting Git version info
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.8982490Z Working directory is '/home/runner/work/se_harness/se_harness'
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.8985926Z [command]/usr/bin/git version
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9047474Z git version 2.55.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9072162Z ##[endgroup]
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9100756Z Temporarily overriding HOME='/home/runner/work/_temp/bd72bf97-512c-4521-891d-b992ad5357a5' before making global git config changes
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9104695Z Adding repository directory to the temporary git global config as a safe directory
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9108196Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/se_harness/se_harness
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9167321Z Deleting the contents of '/home/runner/work/se_harness/se_harness'
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9171197Z ##[group]Initializing the repository
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9176787Z [command]/usr/bin/git init /home/runner/work/se_harness/se_harness
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9301320Z hint: Using 'master' as the name for the initial branch. This default branch name
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9304192Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9306629Z hint: to use in all of your new repositories, which will suppress this warning,
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9308668Z hint: call:
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9309938Z hint:
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9311540Z hint: 	git config --global init.defaultBranch <name>
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9313306Z hint:
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9314946Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9317337Z hint: 'development'. The just-created branch can be renamed via this command:
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9319284Z hint:
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9320604Z hint: 	git branch -m <name>
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9322939Z hint:
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9325331Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9329127Z Initialized empty Git repository in /home/runner/work/se_harness/se_harness/.git/
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9338628Z [command]/usr/bin/git remote add origin https://github.com/mmzen/se_harness
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9392917Z ##[endgroup]
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9395050Z ##[group]Disabling automatic garbage collection
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9397260Z [command]/usr/bin/git config --local gc.auto 0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9429667Z ##[endgroup]
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9431802Z ##[group]Setting up auth
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9436808Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9482655Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9882503Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:35.9920275Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:36.0152028Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:36.0192246Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:36.0427277Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:36.0469165Z ##[endgroup]
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:36.0472078Z ##[group]Fetching the repository
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:36.0484337Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +7233948fd3f1b6a96116f4e374747f94a59cfc9b:refs/remotes/pull/446/merge
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7545811Z From https://github.com/mmzen/se_harness
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7547576Z  * [new branch]        artifacts/plugin-implementation          -> origin/artifacts/plugin-implementation
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7548746Z  * [new branch]        definitions/plg010-delegation            -> origin/definitions/plg010-delegation
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7549719Z  * [new branch]        definitions/plg011-delegation            -> origin/definitions/plg011-delegation
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7551194Z  * [new branch]        definitions/plg012-delegation            -> origin/definitions/plg012-delegation
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7552052Z  * [new branch]        definitions/plg017-path-repair           -> origin/definitions/plg017-path-repair
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7552713Z  * [new branch]        main                                     -> origin/main
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7553513Z  * [new branch]        notes/plugin-installation-proposal       -> origin/notes/plugin-installation-proposal
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7554861Z  * [new branch]        notes/plugin-proposal-assessment-2026-09-08 -> origin/notes/plugin-proposal-assessment-2026-09-08
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7555931Z  * [new branch]        release/0.10                             -> origin/release/0.10
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7556707Z  * [new branch]        release/0.11                             -> origin/release/0.11
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7557358Z  * [new branch]        release/0.12                             -> origin/release/0.12
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7557966Z  * [new branch]        release/0.12.0                           -> origin/release/0.12.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7558564Z  * [new branch]        release/0.13                             -> origin/release/0.13
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7559235Z  * [new branch]        release/0.13.0                           -> origin/release/0.13.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7559939Z  * [new branch]        release/0.14                             -> origin/release/0.14
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7560521Z  * [new branch]        release/0.14.0                           -> origin/release/0.14.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7561345Z  * [new branch]        release/0.15                             -> origin/release/0.15
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7561936Z  * [new branch]        release/0.15.0                           -> origin/release/0.15.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7562797Z  * [new branch]        release/0.16                             -> origin/release/0.16
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7563615Z  * [new branch]        release/0.16.0                           -> origin/release/0.16.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7564310Z  * [new branch]        release/0.17                             -> origin/release/0.17
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7565165Z  * [new branch]        release/0.17.0                           -> origin/release/0.17.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7565743Z  * [new branch]        release/0.2.0                            -> origin/release/0.2.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7566321Z  * [new branch]        release/0.2.1                            -> origin/release/0.2.1
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7566891Z  * [new branch]        release/0.2.2                            -> origin/release/0.2.2
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7567453Z  * [new branch]        release/0.3.0                            -> origin/release/0.3.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7568018Z  * [new branch]        release/0.4.0                            -> origin/release/0.4.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7568618Z  * [new branch]        release/0.6                              -> origin/release/0.6
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7569271Z  * [new branch]        release/0.7                              -> origin/release/0.7
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7570088Z  * [new branch]        release/0.8                              -> origin/release/0.8
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7570749Z  * [new branch]        release/0.9                              -> origin/release/0.9
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7571856Z  * [new branch]        work/plugin-change-skill                 -> origin/work/plugin-change-skill
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7572666Z  * [new branch]        work/plugin-evidence-path-repair         -> origin/work/plugin-evidence-path-repair
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7573452Z  * [new branch]        work/plugin-evidence-skill               -> origin/work/plugin-evidence-skill
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7574201Z  * [new branch]        work/plugin-retained-skills              -> origin/work/plugin-retained-skills
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7574991Z  * [new tag]           last                                     -> last
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7575471Z  * [new tag]           v0.10.0                                  -> v0.10.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7575957Z  * [new tag]           v0.11.0                                  -> v0.11.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7576439Z  * [new tag]           v0.12.0                                  -> v0.12.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7576950Z  * [new tag]           v0.13.0                                  -> v0.13.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7577423Z  * [new tag]           v0.14.0                                  -> v0.14.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7577901Z  * [new tag]           v0.15.0                                  -> v0.15.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7578376Z  * [new tag]           v0.16.0                                  -> v0.16.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7578844Z  * [new tag]           v0.17.0                                  -> v0.17.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7579319Z  * [new tag]           v0.2.0                                   -> v0.2.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7579810Z  * [new tag]           v0.2.1                                   -> v0.2.1
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7580287Z  * [new tag]           v0.2.2                                   -> v0.2.2
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7580814Z  * [new tag]           v0.3.0                                   -> v0.3.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7581618Z  * [new tag]           v0.4.0                                   -> v0.4.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7582175Z  * [new tag]           v0.4.1                                   -> v0.4.1
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7582689Z  * [new tag]           v0.5.0                                   -> v0.5.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7583233Z  * [new tag]           v0.5.0a1                                 -> v0.5.0a1
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7583784Z  * [new tag]           v0.6.0                                   -> v0.6.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7584313Z  * [new tag]           v0.7.0                                   -> v0.7.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7584829Z  * [new tag]           v0.7.1                                   -> v0.7.1
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7585364Z  * [new tag]           v0.8.0                                   -> v0.8.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7585880Z  * [new tag]           v0.9.0                                   -> v0.9.0
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7586455Z  * [new ref]           7233948fd3f1b6a96116f4e374747f94a59cfc9b -> pull/446/merge
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7588149Z ##[endgroup]
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7588632Z ##[group]Determining the checkout info
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7589151Z ##[endgroup]
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7589481Z [command]/usr/bin/git sparse-checkout disable
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7629213Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7668838Z ##[group]Checking out the ref
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:38.7673722Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/446/merge
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4198790Z Note: switching to 'refs/remotes/pull/446/merge'.
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4199322Z 
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4199697Z You are in 'detached HEAD' state. You can look around, make experimental
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4200575Z changes and commit them, and you can discard any commits you make in this
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4201722Z state without impacting any branches by switching back to a branch.
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4202214Z 
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4202550Z If you want to create a new branch to retain commits you create, you may
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4203360Z do so (now or later) by using -c with the switch command. Example:
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4203776Z 
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4203963Z   git switch -c <new-branch-name>
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4204275Z 
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4204443Z Or undo this operation with:
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4204780Z 
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4204915Z   git switch -
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4205134Z 
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4205470Z Turn off this advice by setting config variable advice.detachedHead to false
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4205966Z 
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4206547Z HEAD is now at 7233948f Merge e152f6a8f30a62b4fb3676ada2e437f94544ee9c into 731014d8fa58ba193f6eaf05af3408ed5c41e43f
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4250238Z ##[endgroup]
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4299813Z [command]/usr/bin/git log -1 --format=%H
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4327643Z 7233948fd3f1b6a96116f4e374747f94a59cfc9b
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4338140Z ##[group]Removing auth
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4341914Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4375003Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4614924Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4645731Z http.https://github.com/.extraheader
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4653605Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4689678Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4933090Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.4969892Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Retain verified integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:39.5213729Z ##[endgroup]
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T07:06:39.5456640Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.5458452Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.5458839Z with:
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.5459038Z   python-version: 3.11
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.5459258Z   check-latest: false
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.5462024Z   token: ***
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.5462251Z   update-environment: true
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.5462504Z   allow-prereleases: false
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.5462737Z   freethreaded: false
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.5462939Z env:
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.5463142Z   INTEGRATION_EVENT: pull_request
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.5463406Z   INTEGRATION_REF: refs/pull/446/merge
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.5463665Z   INTEGRATION_PR: 446
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.5463887Z   INTEGRATION_RETENTION_DAYS: 3
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.5464165Z   PYTHONNOUSERSITE: 1
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.5464371Z   PYTHONPATH: 
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.5464562Z ##[endgroup]
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.6799877Z ##[group]Installed versions
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.6915913Z (node:2560) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.6916791Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.6917375Z Successfully set up CPython (3.11.16)
+Retain verified integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:39.6918134Z ##[endgroup]
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	﻿2026-09-11T07:06:39.7111982Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7113411Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7113810Z with:
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7114157Z   name: integration-package-staging-7233948fd3f1b6a96116f4e374747f94a59cfc9b
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7114618Z   path: /home/runner/work/_temp/integration-payload
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7114927Z   merge-multiple: false
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7115161Z   repository: mmzen/se_harness
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7115396Z   run-id: 34572283989
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7115595Z env:
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7115789Z   INTEGRATION_EVENT: pull_request
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7116049Z   INTEGRATION_REF: refs/pull/446/merge
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7116490Z   INTEGRATION_PR: 446
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7116746Z   INTEGRATION_RETENTION_DAYS: 3
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7116985Z   PYTHONNOUSERSITE: 1
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7117194Z   PYTHONPATH: 
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7117456Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7117888Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7118318Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7118700Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7119086Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7119466Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.7119786Z ##[endgroup]
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.8763065Z Downloading single artifact
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.8914509Z (node:2568) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:39.8915389Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:40.1463929Z Preparing to download the following artifacts:
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:40.1465364Z - integration-package-staging-7233948fd3f1b6a96116f4e374747f94a59cfc9b (ID: 10188405342, Size: 472525, Expected Digest: sha256:9ceecf89aff9780c4270b1f2efcbd37e5a00e4318930ed64bf9d2916afb8ca6d)
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:40.4037465Z Redirecting to blob download url: https://productionresultssa16.blob.core.windows.net/actions-results/8a22f406-17e7-49df-b6ca-a8de12f1ef86/workflow-job-run-ea1bfc1d-c35d-5fc3-97e2-2dd3058a6598/artifacts/7026ecc2863263bc2897979b7b6911a2081f5df7c88cab4450997170947aaf26.zip
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:40.4039759Z Starting download of artifact to: /home/runner/work/_temp/integration-payload
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:40.6941967Z (node:2568) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:41.0506910Z SHA256 digest of downloaded artifact is 9ceecf89aff9780c4270b1f2efcbd37e5a00e4318930ed64bf9d2916afb8ca6d
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:41.0507927Z Artifact download completed successfully.
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:41.0508422Z Total of 1 artifact(s) downloaded
+Retain verified integration package	Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093	2026-09-11T07:06:41.0513390Z Download artifact has finished successfully
+Retain verified integration package	Reverify the final payload boundary	﻿2026-09-11T07:06:41.0638350Z ##[group]Run set -euo pipefail
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0638735Z ^[[36;1mset -euo pipefail^[[0m
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0639003Z ^[[36;1mintegration_args=(^[[0m
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0639252Z ^[[36;1m  verify^[[0m
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0639535Z ^[[36;1m  --payload "$RUNNER_TEMP/integration-payload"^[[0m
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0639897Z ^[[36;1m  --expected-commit "$GITHUB_SHA"^[[0m
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0640234Z ^[[36;1m  --expected-repository "$GITHUB_REPOSITORY"^[[0m
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0640581Z ^[[36;1m  --expected-event "$INTEGRATION_EVENT"^[[0m
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0641233Z ^[[36;1m  --expected-ref "$INTEGRATION_REF"^[[0m
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0641556Z ^[[36;1m  --expected-run-id "$GITHUB_RUN_ID"^[[0m
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0641905Z ^[[36;1m  --expected-run-attempt "$GITHUB_RUN_ATTEMPT"^[[0m
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0642256Z ^[[36;1m  --expected-workflow "$GITHUB_WORKFLOW"^[[0m
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0642647Z ^[[36;1m  --expected-retention-days "$INTEGRATION_RETENTION_DAYS"^[[0m
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0642992Z ^[[36;1m)^[[0m
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0643211Z ^[[36;1mif [[ -n "$INTEGRATION_PR" ]]; then^[[0m
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0643636Z ^[[36;1m  integration_args+=(--expected-pull-request "$INTEGRATION_PR")^[[0m
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0644005Z ^[[36;1mfi^[[0m
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0644355Z ^[[36;1mpython .github/scripts/build_integration_package.py "${integration_args[@]}"^[[0m
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0695694Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0696061Z env:
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0696283Z   INTEGRATION_EVENT: pull_request
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0696568Z   INTEGRATION_REF: refs/pull/446/merge
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0696843Z   INTEGRATION_PR: 446
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0697081Z   INTEGRATION_RETENTION_DAYS: 3
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0697621Z   PYTHONNOUSERSITE: 1
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0697848Z   PYTHONPATH: 
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0698143Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0698585Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0699028Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0699429Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0699820Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0700213Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:41.0700551Z ##[endgroup]
+Retain verified integration package	Reverify the final payload boundary	2026-09-11T07:06:43.0153854Z {"commit":"7233948fd3f1b6a96116f4e374747f94a59cfc9b","result":"pass","schema":"se-harness-integration-package-v1","version":"0.18.0+pr446.g7233948fd3f1","wheel_sha256":"43538a2c1adb6eb5f15de7aafd3c419183245a09b91803e7f0dfaaabb86890e8"}
+Retain verified integration package	Retain the exact cross-platform-verified bytes	﻿2026-09-11T07:06:43.0360734Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0362456Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0362852Z with:
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0363174Z   name: se-harness-integration-7233948fd3f1b6a96116f4e374747f94a59cfc9b
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0363653Z   path: /home/runner/work/_temp/integration-payload/
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0363974Z   if-no-files-found: error
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0364212Z   retention-days: 3
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0364424Z   compression-level: 6
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0364637Z   overwrite: false
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0364850Z   include-hidden-files: false
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0365105Z env:
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0365308Z   INTEGRATION_EVENT: pull_request
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0365640Z   INTEGRATION_REF: refs/pull/446/merge
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0365931Z   INTEGRATION_PR: 446
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0366170Z   INTEGRATION_RETENTION_DAYS: 3
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0366435Z   PYTHONNOUSERSITE: 1
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0366653Z   PYTHONPATH: 
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0366922Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0367354Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0367780Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0368173Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0368555Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0368943Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.0369276Z ##[endgroup]
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.2029316Z (node:2584) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.2030554Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.2087840Z With the provided path, there will be 3 files uploaded
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.2093809Z Artifact name is valid!
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.2094535Z Root directory input is valid!
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.5944795Z Beginning upload of artifact content to blob storage
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:43.6348539Z (node:2584) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:44.1918216Z Uploaded bytes 472525
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:44.2647946Z Finished uploading artifact content to blob storage!
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:44.2649206Z SHA256 digest of uploaded artifact zip is e591445d85c076698d81a86cf12f26ec692ab44d1002d868a7203925d7e6af2c
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:44.2650357Z Finalizing artifact upload
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:44.5144181Z Artifact se-harness-integration-7233948fd3f1b6a96116f4e374747f94a59cfc9b.zip successfully finalized. Artifact ID 10188436696
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:44.5146999Z Artifact se-harness-integration-7233948fd3f1b6a96116f4e374747f94a59cfc9b has been successfully uploaded! Final size is 472525 bytes. Artifact ID is 10188436696
+Retain verified integration package	Retain the exact cross-platform-verified bytes	2026-09-11T07:06:44.5153817Z Artifact download URL: https://github.com/mmzen/se_harness/actions/runs/34572283989/artifacts/10188436696
+Retain verified integration package	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T07:06:44.5321515Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Retain verified integration package	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:44.5322829Z Post job cleanup.
+Retain verified integration package	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:44.6567360Z (node:2596) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Retain verified integration package	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T07:06:44.6568712Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Retain verified integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T07:06:44.6741225Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Retain verified integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:44.6742554Z Post job cleanup.
+Retain verified integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:44.7647422Z [command]/usr/bin/git version
+Retain verified integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:44.7693836Z git version 2.55.0
+Retain verified integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:44.7739356Z Temporarily overriding HOME='/home/runner/work/_temp/b7dc89a4-6753-47b0-99fd-9ba2a4426d8f' before making global git config changes
+Retain verified integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:44.7740362Z Adding repository directory to the temporary git global config as a safe directory
+Retain verified integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:44.7746703Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/se_harness/se_harness
+Retain verified integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:44.7789749Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Retain verified integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:44.7825763Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Retain verified integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:44.8108304Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Retain verified integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:44.8154030Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Retain verified integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:44.8478150Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Retain verified integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T07:06:44.8526407Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Retain verified integration package	Complete job	﻿2026-09-11T07:06:44.9010268Z Cleaning up orphan processes
+Retain verified integration package	Complete job	2026-09-11T07:06:44.9305685Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
