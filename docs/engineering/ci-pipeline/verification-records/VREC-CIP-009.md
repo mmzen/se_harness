@@ -2,7 +2,7 @@
 id = "VREC-CIP-009"
 type = "verification_record"
 title = "Verification candidate for WO-CIP-009"
-status = "ready"
+status = "verified"
 owners = ["codex-preparation-actor"]
 created = "2026-09-11"
 updated = "2026-09-11"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/ci-pipeline/evidence/WO-CIP-009/WO-CIP-009-h
 evaluator_evidence_path = "docs/engineering/ci-pipeline/evidence/VREC-CIP-009-evaluator.json"
 evaluator_evidence_sha256 = "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
 
+verified_at = "2026-09-11T18:44:42Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-CIP-009"]
 conforms_to = ["VER-CIP-005"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-11T18:44:42Z"
+decided_by = "assurance-owner"
+reason = "The accountable operator explicitly verified VREC-CIP-009 on 2026-09-11: i verify VREC-CIP-009. This records the assurance decision for candidate af9b0d052b67716f6e3c8e72cccdd0a8393d65dc and its retained evidence. Work-order state, repository integration, merge and release remain separate."
 +++
 
 # Verification Record Candidate
