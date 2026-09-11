@@ -1,3 +1,8 @@
+READABLE PROJECTION; not raw evidence.
+Original bytes: j10.log.raw-bytes.json
+Original SHA-256: 02e9655038ab524835114f562c62ef37a91177dddb06de808d5a75854a1db561
+Projection removes line-end whitespace and normalizes newlines to LF.
+
 ﻿2026-09-11T20:00:12.7229004Z Current runner version: '2.337.0'
 2026-09-11T20:00:12.7255919Z ##[group]Runner Image Provisioner
 2026-09-11T20:00:12.7257306Z Hosted Compute Agent
@@ -51,7 +56,7 @@
 2026-09-11T20:00:13.9154605Z   allow-unsafe-pr-checkout: false
 2026-09-11T20:00:13.9155982Z env:
 2026-09-11T20:00:13.9156911Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:00:13.9157766Z   PYTHONPATH: 
+2026-09-11T20:00:13.9157766Z   PYTHONPATH:
 2026-09-11T20:00:13.9158536Z ##[endgroup]
 2026-09-11T20:00:14.0267672Z Syncing repository: mmzen/se_harness
 2026-09-11T20:00:14.0271996Z ##[group]Getting Git version info
@@ -170,22 +175,22 @@
 2026-09-11T20:00:16.2767406Z ##[group]Checking out the ref
 2026-09-11T20:00:16.2772170Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/457/merge
 2026-09-11T20:00:17.0777317Z Note: switching to 'refs/remotes/pull/457/merge'.
-2026-09-11T20:00:17.0777823Z 
+2026-09-11T20:00:17.0777823Z
 2026-09-11T20:00:17.0778244Z You are in 'detached HEAD' state. You can look around, make experimental
 2026-09-11T20:00:17.0779068Z changes and commit them, and you can discard any commits you make in this
 2026-09-11T20:00:17.0779669Z state without impacting any branches by switching back to a branch.
-2026-09-11T20:00:17.0780285Z 
+2026-09-11T20:00:17.0780285Z
 2026-09-11T20:00:17.0780519Z If you want to create a new branch to retain commits you create, you may
 2026-09-11T20:00:17.0781098Z do so (now or later) by using -c with the switch command. Example:
-2026-09-11T20:00:17.0781432Z 
+2026-09-11T20:00:17.0781432Z
 2026-09-11T20:00:17.0781579Z   git switch -c <new-branch-name>
-2026-09-11T20:00:17.0781802Z 
+2026-09-11T20:00:17.0781802Z
 2026-09-11T20:00:17.0782054Z Or undo this operation with:
-2026-09-11T20:00:17.0782269Z 
+2026-09-11T20:00:17.0782269Z
 2026-09-11T20:00:17.0782376Z   git switch -
-2026-09-11T20:00:17.0782536Z 
+2026-09-11T20:00:17.0782536Z
 2026-09-11T20:00:17.0782805Z Turn off this advice by setting config variable advice.detachedHead to false
-2026-09-11T20:00:17.0783206Z 
+2026-09-11T20:00:17.0783206Z
 2026-09-11T20:00:17.0783660Z HEAD is now at b715af98 Merge 9d536b3de6adcb91ddfd22d3384980744d5d05e8 into 78cd64df7c130a6f42ab357836093db30f710753
 2026-09-11T20:00:17.1679835Z ##[endgroup]
 2026-09-11T20:00:17.3223757Z [command]/usr/bin/git log -1 --format=%H
@@ -211,7 +216,7 @@
 2026-09-11T20:00:17.6112007Z   freethreaded: false
 2026-09-11T20:00:17.6112224Z env:
 2026-09-11T20:00:17.6112403Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:00:17.6112612Z   PYTHONPATH: 
+2026-09-11T20:00:17.6112612Z   PYTHONPATH:
 2026-09-11T20:00:17.6112799Z ##[endgroup]
 2026-09-11T20:00:17.7514796Z ##[group]Installed versions
 2026-09-11T20:00:17.8313395Z (node:2315) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
@@ -224,7 +229,7 @@
 2026-09-11T20:00:17.8529306Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
 2026-09-11T20:00:17.8529682Z env:
 2026-09-11T20:00:17.8530153Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:00:17.8530370Z   PYTHONPATH: 
+2026-09-11T20:00:17.8530370Z   PYTHONPATH:
 2026-09-11T20:00:17.8530651Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
 2026-09-11T20:00:17.8531089Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
 2026-09-11T20:00:17.8531518Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
@@ -238,7 +243,7 @@
 2026-09-11T20:00:17.9118641Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
 2026-09-11T20:00:17.9118989Z env:
 2026-09-11T20:00:17.9119193Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:00:17.9119410Z   PYTHONPATH: 
+2026-09-11T20:00:17.9119410Z   PYTHONPATH:
 2026-09-11T20:00:17.9119674Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
 2026-09-11T20:00:17.9120285Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
 2026-09-11T20:00:17.9120725Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
@@ -256,7 +261,7 @@
 2026-09-11T20:00:18.0203829Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
 2026-09-11T20:00:18.0204179Z env:
 2026-09-11T20:00:18.0204379Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:00:18.0204597Z   PYTHONPATH: 
+2026-09-11T20:00:18.0204597Z   PYTHONPATH:
 2026-09-11T20:00:18.0204873Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
 2026-09-11T20:00:18.0205306Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
 2026-09-11T20:00:18.0205725Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
@@ -320,7 +325,7 @@
 2026-09-11T20:00:19.7732176Z shell: /usr/bin/bash -e {0}
 2026-09-11T20:00:19.7732430Z env:
 2026-09-11T20:00:19.7732625Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:00:19.7732853Z   PYTHONPATH: 
+2026-09-11T20:00:19.7732853Z   PYTHONPATH:
 2026-09-11T20:00:19.7733129Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
 2026-09-11T20:00:19.7733565Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
 2026-09-11T20:00:19.7733982Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
@@ -342,7 +347,7 @@
 2026-09-11T20:00:19.8507868Z   save-always: false
 2026-09-11T20:00:19.8508071Z env:
 2026-09-11T20:00:19.8508259Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:00:19.8508472Z   PYTHONPATH: 
+2026-09-11T20:00:19.8508472Z   PYTHONPATH:
 2026-09-11T20:00:19.8508777Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
 2026-09-11T20:00:19.8509197Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
 2026-09-11T20:00:19.8509609Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
@@ -364,7 +369,7 @@
 2026-09-11T20:00:20.6202630Z shell: /usr/bin/bash -e {0}
 2026-09-11T20:00:20.6202883Z env:
 2026-09-11T20:00:20.6203087Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:00:20.6203312Z   PYTHONPATH: 
+2026-09-11T20:00:20.6203312Z   PYTHONPATH:
 2026-09-11T20:00:20.6203599Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
 2026-09-11T20:00:20.6204049Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
 2026-09-11T20:00:20.6204472Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
@@ -379,7 +384,7 @@
 2026-09-11T20:00:59.5027765Z WEX_SCALE artifacts=1000 validation=0.440200s focus=0.467334s plan=0.769715s
 2026-09-11T20:00:59.5115370Z ----------------------------------------------------------------------
 2026-09-11T20:00:59.5116259Z Ran 1159 tests in 37.791s (183 classes, 4 workers)
-2026-09-11T20:00:59.5116665Z 
+2026-09-11T20:00:59.5116665Z
 2026-09-11T20:00:59.5116819Z OK (skipped=4)
 2026-09-11T20:00:59.5560856Z ##[group]Run set -euo pipefail
 2026-09-11T20:00:59.5561188Z [36;1mset -euo pipefail[0m
@@ -393,7 +398,7 @@
 2026-09-11T20:00:59.5601613Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
 2026-09-11T20:00:59.5601986Z env:
 2026-09-11T20:00:59.5602187Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:00:59.5602417Z   PYTHONPATH: 
+2026-09-11T20:00:59.5602417Z   PYTHONPATH:
 2026-09-11T20:00:59.5602690Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
 2026-09-11T20:00:59.5603128Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
 2026-09-11T20:00:59.5603564Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
@@ -421,7 +426,7 @@
 2026-09-11T20:01:02.4102954Z shell: /usr/bin/bash -e {0}
 2026-09-11T20:01:02.4103299Z env:
 2026-09-11T20:01:02.4103698Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:01:02.4104023Z   PYTHONPATH: 
+2026-09-11T20:01:02.4104023Z   PYTHONPATH:
 2026-09-11T20:01:02.4104471Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
 2026-09-11T20:01:02.4105032Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
 2026-09-11T20:01:02.4105607Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
@@ -441,7 +446,7 @@
 2026-09-11T20:01:02.4728301Z   include-hidden-files: false
 2026-09-11T20:01:02.4728537Z env:
 2026-09-11T20:01:02.4728761Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:01:02.4728987Z   PYTHONPATH: 
+2026-09-11T20:01:02.4728987Z   PYTHONPATH:
 2026-09-11T20:01:02.4729261Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
 2026-09-11T20:01:02.4729693Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
 2026-09-11T20:01:02.4730111Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
@@ -474,7 +479,7 @@
 2026-09-11T20:01:04.1792093Z   include-hidden-files: false
 2026-09-11T20:01:04.1792337Z env:
 2026-09-11T20:01:04.1792537Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:01:04.1792768Z   PYTHONPATH: 
+2026-09-11T20:01:04.1792768Z   PYTHONPATH:
 2026-09-11T20:01:04.1793079Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
 2026-09-11T20:01:04.1793521Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
 2026-09-11T20:01:04.1793957Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64

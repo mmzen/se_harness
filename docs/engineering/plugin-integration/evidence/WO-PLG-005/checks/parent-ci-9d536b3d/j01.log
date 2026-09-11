@@ -1,3 +1,8 @@
+READABLE PROJECTION; not raw evidence.
+Original bytes: j01.log.raw-bytes.json
+Original SHA-256: bfc116910f56e4af2a310ad027e03190643705ef1659b710d81abbfadf369612
+Projection removes line-end whitespace and normalizes newlines to LF.
+
 ﻿2026-09-11T20:03:56.6019615Z Current runner version: '2.337.0'
 2026-09-11T20:03:56.6045302Z ##[group]Runner Image Provisioner
 2026-09-11T20:03:56.6046105Z Hosted Compute Agent
@@ -54,7 +59,7 @@
 2026-09-11T20:03:57.8941408Z   INTEGRATION_PR: 457
 2026-09-11T20:03:57.8941846Z   INTEGRATION_RETENTION_DAYS: 3
 2026-09-11T20:03:57.8942326Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:03:57.8942742Z   PYTHONPATH: 
+2026-09-11T20:03:57.8942742Z   PYTHONPATH:
 2026-09-11T20:03:57.8943124Z ##[endgroup]
 2026-09-11T20:03:58.0357449Z Syncing repository: mmzen/se_harness
 2026-09-11T20:03:58.0359992Z ##[group]Getting Git version info
@@ -224,22 +229,22 @@
 2026-09-11T20:04:07.4678420Z Updating files: 100% (8507/8507)
 2026-09-11T20:04:07.4678866Z Updating files: 100% (8507/8507), done.
 2026-09-11T20:04:07.4912659Z Note: switching to 'refs/remotes/pull/457/merge'.
-2026-09-11T20:04:07.4913118Z 
+2026-09-11T20:04:07.4913118Z
 2026-09-11T20:04:07.4913465Z You are in 'detached HEAD' state. You can look around, make experimental
 2026-09-11T20:04:07.4914314Z changes and commit them, and you can discard any commits you make in this
 2026-09-11T20:04:07.4915059Z state without impacting any branches by switching back to a branch.
-2026-09-11T20:04:07.4915348Z 
+2026-09-11T20:04:07.4915348Z
 2026-09-11T20:04:07.4915533Z If you want to create a new branch to retain commits you create, you may
 2026-09-11T20:04:07.4916309Z do so (now or later) by using -c with the switch command. Example:
-2026-09-11T20:04:07.4916571Z 
+2026-09-11T20:04:07.4916571Z
 2026-09-11T20:04:07.4916728Z   git switch -c <new-branch-name>
-2026-09-11T20:04:07.4916895Z 
+2026-09-11T20:04:07.4916895Z
 2026-09-11T20:04:07.4917843Z Or undo this operation with:
-2026-09-11T20:04:07.4918011Z 
+2026-09-11T20:04:07.4918011Z
 2026-09-11T20:04:07.4918086Z   git switch -
-2026-09-11T20:04:07.4918206Z 
+2026-09-11T20:04:07.4918206Z
 2026-09-11T20:04:07.4918410Z Turn off this advice by setting config variable advice.detachedHead to false
-2026-09-11T20:04:07.4918729Z 
+2026-09-11T20:04:07.4918729Z
 2026-09-11T20:04:07.4919089Z HEAD is now at b715af98 Merge 9d536b3de6adcb91ddfd22d3384980744d5d05e8 into 78cd64df7c130a6f42ab357836093db30f710753
 2026-09-11T20:04:07.5105842Z ##[endgroup]
 2026-09-11T20:04:07.5883393Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
@@ -269,7 +274,7 @@
 2026-09-11T20:04:09.4414606Z   INTEGRATION_PR: 457
 2026-09-11T20:04:09.4414833Z   INTEGRATION_RETENTION_DAYS: 3
 2026-09-11T20:04:09.4415052Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:04:09.4415244Z   PYTHONPATH: 
+2026-09-11T20:04:09.4415244Z   PYTHONPATH:
 2026-09-11T20:04:09.4415418Z ##[endgroup]
 2026-09-11T20:04:09.6018082Z ##[group]Installed versions
 2026-09-11T20:04:09.6277233Z (node:8936) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
@@ -290,7 +295,7 @@
 2026-09-11T20:04:09.6693459Z   INTEGRATION_PR: 457
 2026-09-11T20:04:09.6693665Z   INTEGRATION_RETENTION_DAYS: 3
 2026-09-11T20:04:09.6693885Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:04:09.6694072Z   PYTHONPATH: 
+2026-09-11T20:04:09.6694072Z   PYTHONPATH:
 2026-09-11T20:04:09.6694325Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
 2026-09-11T20:04:09.6694800Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
 2026-09-11T20:04:09.6695241Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
@@ -336,7 +341,7 @@
 2026-09-11T20:04:10.4942724Z   INTEGRATION_PR: 457
 2026-09-11T20:04:10.4943023Z   INTEGRATION_RETENTION_DAYS: 3
 2026-09-11T20:04:10.4943382Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:04:10.4943663Z   PYTHONPATH: 
+2026-09-11T20:04:10.4943663Z   PYTHONPATH:
 2026-09-11T20:04:10.4944051Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
 2026-09-11T20:04:10.4944718Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
 2026-09-11T20:04:10.4945384Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64

@@ -1,3 +1,8 @@
+READABLE PROJECTION; not raw evidence.
+Original bytes: j03.log.raw-bytes.json
+Original SHA-256: 4c4699d3822900ebd73cab2a908e00af9bb09050bfed10bcce4035370b3c6fae
+Projection removes line-end whitespace and normalizes newlines to LF.
+
 ﻿2026-09-11T20:03:32.7151104Z Current runner version: '2.337.0'
 2026-09-11T20:03:32.7175493Z ##[group]Runner Image Provisioner
 2026-09-11T20:03:32.7176389Z Hosted Compute Agent
@@ -52,7 +57,7 @@
 2026-09-11T20:03:33.6239706Z   INTEGRATION_SETUPTOOLS_VERSION: 75.8.0
 2026-09-11T20:03:33.6240269Z   INTEGRATION_WHEEL_VERSION: 0.45.1
 2026-09-11T20:03:33.6240799Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:03:33.6241311Z   PYTHONPATH: 
+2026-09-11T20:03:33.6241311Z   PYTHONPATH:
 2026-09-11T20:03:33.6241738Z ##[endgroup]
 2026-09-11T20:03:33.6384172Z upgrade rehearsal semantic result (resulting lock, canonical): f654bdf0ff4c5ac61154d9cfa1bc45d3d235f67ebcf32234cd852aac2d3df362
 2026-09-11T20:03:33.6602161Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
@@ -83,7 +88,7 @@
 2026-09-11T20:03:33.6627387Z   INTEGRATION_SETUPTOOLS_VERSION: 75.8.0
 2026-09-11T20:03:33.6627977Z   INTEGRATION_WHEEL_VERSION: 0.45.1
 2026-09-11T20:03:33.6628518Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:03:33.6628968Z   PYTHONPATH: 
+2026-09-11T20:03:33.6628968Z   PYTHONPATH:
 2026-09-11T20:03:33.6629392Z ##[endgroup]
 2026-09-11T20:03:33.7624991Z Syncing repository: mmzen/se_harness
 2026-09-11T20:03:33.7627843Z ##[group]Getting Git version info
@@ -202,22 +207,22 @@
 2026-09-11T20:03:35.7099447Z ##[group]Checking out the ref
 2026-09-11T20:03:35.7103474Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/457/merge
 2026-09-11T20:03:36.3959991Z Note: switching to 'refs/remotes/pull/457/merge'.
-2026-09-11T20:03:36.3961812Z 
+2026-09-11T20:03:36.3961812Z
 2026-09-11T20:03:36.3962746Z You are in 'detached HEAD' state. You can look around, make experimental
 2026-09-11T20:03:36.3964960Z changes and commit them, and you can discard any commits you make in this
 2026-09-11T20:03:36.3967396Z state without impacting any branches by switching back to a branch.
-2026-09-11T20:03:36.3968417Z 
+2026-09-11T20:03:36.3968417Z
 2026-09-11T20:03:36.3969125Z If you want to create a new branch to retain commits you create, you may
 2026-09-11T20:03:36.3970774Z do so (now or later) by using -c with the switch command. Example:
-2026-09-11T20:03:36.3971759Z 
+2026-09-11T20:03:36.3971759Z
 2026-09-11T20:03:36.3972229Z   git switch -c <new-branch-name>
-2026-09-11T20:03:36.3972956Z 
+2026-09-11T20:03:36.3972956Z
 2026-09-11T20:03:36.3973429Z Or undo this operation with:
-2026-09-11T20:03:36.3974090Z 
+2026-09-11T20:03:36.3974090Z
 2026-09-11T20:03:36.3974498Z   git switch -
-2026-09-11T20:03:36.3975059Z 
+2026-09-11T20:03:36.3975059Z
 2026-09-11T20:03:36.3975990Z Turn off this advice by setting config variable advice.detachedHead to false
-2026-09-11T20:03:36.3977426Z 
+2026-09-11T20:03:36.3977426Z
 2026-09-11T20:03:36.3978758Z HEAD is now at b715af98 Merge 9d536b3de6adcb91ddfd22d3384980744d5d05e8 into 78cd64df7c130a6f42ab357836093db30f710753
 2026-09-11T20:03:36.4013361Z ##[endgroup]
 2026-09-11T20:03:36.4061027Z [command]/usr/bin/git log -1 --format=%H
@@ -252,7 +257,7 @@
 2026-09-11T20:03:36.5328995Z   INTEGRATION_SETUPTOOLS_VERSION: 75.8.0
 2026-09-11T20:03:36.5330271Z   INTEGRATION_WHEEL_VERSION: 0.45.1
 2026-09-11T20:03:36.5331438Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:03:36.5332425Z   PYTHONPATH: 
+2026-09-11T20:03:36.5332425Z   PYTHONPATH:
 2026-09-11T20:03:36.5333310Z ##[endgroup]
 2026-09-11T20:03:36.6715786Z ##[group]Installed versions
 2026-09-11T20:03:36.6867272Z (node:2362) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
@@ -277,7 +282,7 @@
 2026-09-11T20:03:36.7242036Z   INTEGRATION_SETUPTOOLS_VERSION: 75.8.0
 2026-09-11T20:03:36.7244170Z   INTEGRATION_WHEEL_VERSION: 0.45.1
 2026-09-11T20:03:36.7246381Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:03:36.7249552Z   PYTHONPATH: 
+2026-09-11T20:03:36.7249552Z   PYTHONPATH:
 2026-09-11T20:03:36.7251790Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
 2026-09-11T20:03:36.7254704Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
 2026-09-11T20:03:36.7257943Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
@@ -306,7 +311,7 @@
 2026-09-11T20:03:38.0186924Z     Found existing installation: setuptools 79.0.1
 2026-09-11T20:03:38.2073097Z     Uninstalling setuptools-79.0.1:
 2026-09-11T20:03:38.2417723Z       Successfully uninstalled setuptools-79.0.1
-2026-09-11T20:03:39.0355975Z 
+2026-09-11T20:03:39.0355975Z
 2026-09-11T20:03:39.0366421Z Successfully installed build-1.2.2.post1 packaging-26.3 pyproject_hooks-1.2.0 setuptools-75.8.0 wheel-0.45.1
 2026-09-11T20:03:39.0977128Z ##[group]Run set -euo pipefail
 2026-09-11T20:03:39.0977490Z [36;1mset -euo pipefail[0m
@@ -342,7 +347,7 @@
 2026-09-11T20:03:39.1027062Z   INTEGRATION_SETUPTOOLS_VERSION: 75.8.0
 2026-09-11T20:03:39.1027349Z   INTEGRATION_WHEEL_VERSION: 0.45.1
 2026-09-11T20:03:39.1027608Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:03:39.1027834Z   PYTHONPATH: 
+2026-09-11T20:03:39.1027834Z   PYTHONPATH:
 2026-09-11T20:03:39.1028112Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
 2026-09-11T20:03:39.1028530Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
 2026-09-11T20:03:39.1028957Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
@@ -372,7 +377,7 @@
 2026-09-11T20:03:48.1858597Z   INTEGRATION_SETUPTOOLS_VERSION: 75.8.0
 2026-09-11T20:03:48.1858868Z   INTEGRATION_WHEEL_VERSION: 0.45.1
 2026-09-11T20:03:48.1859118Z   PYTHONNOUSERSITE: 1
-2026-09-11T20:03:48.1859327Z   PYTHONPATH: 
+2026-09-11T20:03:48.1859327Z   PYTHONPATH:
 2026-09-11T20:03:48.1859588Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
 2026-09-11T20:03:48.1859997Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
 2026-09-11T20:03:48.1860406Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
