@@ -1,0 +1,23 @@
+{
+  "archive_record": "after-extension/export/call01.json",
+  "archive_sha256": "816388d8d304a12259f91dc0811bfc9bd56d412494333904604456a4f910d0ce",
+  "argv": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-path-extension-independent-20260911/read_linux.py"
+  ],
+  "checker_status_separate": false,
+  "elapsed_seconds": 1.5812721252441406,
+  "input_export": "/tmp/p17x-read-pyx87iue",
+  "input_kind": "Native extraction of exact captured real git archive bytes from the successful Windows exporter; no evaluator/model replay",
+  "mapped_files": 56,
+  "oracle_sha256": "a809a6bd7940daf6d7cef9b8036e01924c1036ddfcbada333f4b3939a2cc52f3",
+  "passed": true,
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "protected_files": 366,
+  "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+  "reconciler_sha256": "8c5245abc1b507e557e67fbbbc292ce80b679b5dd2da97d35d6820b3e58b891c",
+  "returncode": 0,
+  "selected_unchanged_files": 94,
+  "source_commit": "28b4d2e22477067a17544e8275a37cecf22575f0",
+  "unchanged_original_files": 1084
+}

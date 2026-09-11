@@ -1,0 +1,52 @@
+{
+  "classification": "Independent read-only source and immutable-tree review; not assurance or lifecycle decision",
+  "candidate": "28b4d2e22477067a17544e8275a37cecf22575f0",
+  "diff_base": "e9c256eb49d27f82e60543b7b3ca24f43a5129be",
+  "scope_approval_commit": "58dc19f97764b0466c249cdd66c24b523f3e341e",
+  "checker_sha256": "12baac974bd7f263f487d4bee1a2537be8456b17608757042edde78faff4055d",
+  "extension_plan_sha256": "1927a7d61c7d6357e61047f427c0d2f1fb8e456d32dd1698efc01c7bba6f9538",
+  "supplemental_map_sha256": "3db2265dade63dc996631c76dae5db7ee9caebbdf16665ec9b49873a40b389ab",
+  "findings": [],
+  "checks": {
+    "extension_pin_matches_approval": true,
+    "original_plan_and_map_unchanged": true,
+    "extra_map_exact": true,
+    "extra_payload_exact": true,
+    "original_55_payloads_exact": true,
+    "old_extra_path_removed": true,
+    "vrec008_unchanged": true,
+    "vrec008_sidecar_unchanged": true,
+    "all_changes_in_scope": true
+  },
+  "changed_paths_outside_scope": [],
+  "vrec008_selected_paths_changed": [
+    "docs/engineering/plugin-integration/evidence/WO-PLG-011/README.md"
+  ],
+  "selected_path_change_explanation": "Only WO011 explanatory README changes; the record retains its original candidate binding.",
+  "profiles": {
+    "ordinary_checkout_profile": {
+      "root": "D:/a/se_harness/se_harness",
+      "maximum_allowed": 250,
+      "observed_tree_maximum": 208,
+      "excess_count": 0
+    },
+    "staging_profile": {
+      "root": "C:/Users/runneradmin/AppData/Local/Temp/upgrade-rehearsal-12345678/repository",
+      "maximum_allowed": 259,
+      "observed_tree_maximum": 259,
+      "excess_count": 0
+    }
+  },
+  "reviewed_logic": [
+    "Both approved plan pins are checked before consuming the plan.",
+    "Supplemental map must equal exactly the one approved row; combined source/destination sets must contain56 unique paths.",
+    "Source Git bytes, sizes and SHA256 must match each retained payload; old names must be absent from working tree and index.",
+    "Original55 map is also compared byte-for-byte to the extension source commit.",
+    "The ordinary250 and staging259 profiles are independently reported; staging is expressly marked derived pending actual export and hosted rehearsal."
+  ],
+  "limits": [
+    "No checker/test execution or source changes. Other agent owns actual Windows deep-root staging and reconciliation.",
+    "Arithmetic validates only the declared profiles; exact remote temporary path was not printed in the earlier CI failure.",
+    "Review is bound to this candidate; later evidence/CI changes need separate verification."
+  ]
+}

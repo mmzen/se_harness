@@ -1,0 +1,195 @@
+Combined review copy; exact original bytes remain at each retained path below.
+
+--- helpers/windows: brief-final/C08-calibrate-credential/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: brief-final/C08-calibrate-lifecycle/stderr.txt -> acceptance/helpers/f00055.txt ---
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-retained-skills\tests\plugin_integration\retained-skills\audit_worker.py", line 152, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-retained-skills\tests\plugin_integration\retained-skills\audit_worker.py", line 129, in main
+    deny("lifecycle", "evaluator-entry", command)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-retained-skills\tests\plugin_integration\retained-skills\audit_worker.py", line 41, in deny
+    raise PermissionError("TEST_BOUNDARY_DENIED:" + category)
+PermissionError: TEST_BOUNDARY_DENIED:lifecycle
+
+
+--- helpers/windows: brief-final/C08-calibrate-network/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: brief-final/C08-calibrate-spawn/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: brief-final/C08-calibrate-write/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: matrix1/C08-calibrate-credential/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: matrix1/C08-calibrate-lifecycle/stderr.txt -> acceptance/helpers/f00055.txt ---
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-retained-skills\tests\plugin_integration\retained-skills\audit_worker.py", line 152, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-retained-skills\tests\plugin_integration\retained-skills\audit_worker.py", line 129, in main
+    deny("lifecycle", "evaluator-entry", command)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-retained-skills\tests\plugin_integration\retained-skills\audit_worker.py", line 41, in deny
+    raise PermissionError("TEST_BOUNDARY_DENIED:" + category)
+PermissionError: TEST_BOUNDARY_DENIED:lifecycle
+
+
+--- helpers/windows: matrix1/C08-calibrate-network/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: matrix1/C08-calibrate-spawn/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: matrix1/C08-calibrate-write/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix-final/C08-calibrate-credential/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix-final/C08-calibrate-lifecycle/stderr.txt -> acceptance/helpers/f00346.txt ---
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", line 152, in <module>
+    main()
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", line 129, in main
+    deny("lifecycle", "evaluator-entry", command)
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", line 41, in deny
+    raise PermissionError("TEST_BOUNDARY_DENIED:" + category)
+PermissionError: TEST_BOUNDARY_DENIED:lifecycle
+
+
+--- helpers/linux: matrix-final/C08-calibrate-network/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix-final/C08-calibrate-spawn/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix-final/C08-calibrate-write/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix1/C08-calibrate-credential/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix1/C08-calibrate-lifecycle/stderr.txt -> acceptance/helpers/f00346.txt ---
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", line 152, in <module>
+    main()
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", line 129, in main
+    deny("lifecycle", "evaluator-entry", command)
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", line 41, in deny
+    raise PermissionError("TEST_BOUNDARY_DENIED:" + category)
+PermissionError: TEST_BOUNDARY_DENIED:lifecycle
+
+
+--- helpers/linux: matrix1/C08-calibrate-network/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix1/C08-calibrate-spawn/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix1/C08-calibrate-write/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- linux-replay/linux-calibration: C08-calibrate-write/stderr.txt -> acceptance/linux-replay/f00017.txt ---
+
+
+--- linux-replay/linux-calibration: C08-calibrate-network/stderr.txt -> acceptance/linux-replay/f00017.txt ---
+
+
+--- linux-replay/linux-calibration: C08-calibrate-credential/stderr.txt -> acceptance/linux-replay/f00017.txt ---
+
+
+--- linux-replay/linux-calibration: C08-calibrate-spawn/stderr.txt -> acceptance/linux-replay/f00017.txt ---
+
+
+--- linux-replay/linux-calibration: C08-calibrate-lifecycle/stderr.txt -> acceptance/linux-replay/f00110.txt ---
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", line 152, in <module>
+    main()
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", line 129, in main
+    deny("lifecycle", "evaluator-entry", command)
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", line 41, in deny
+    raise PermissionError("TEST_BOUNDARY_DENIED:" + category)
+PermissionError: TEST_BOUNDARY_DENIED:lifecycle
+
+
+--- helpers/windows: calibration-credential/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: calibration-lifecycle/stderr.txt -> acceptance/helpers/f00122.txt ---
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-retained-skills\tests\plugin_integration\retained-skills\audit_worker.py", line 150, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-retained-skills\tests\plugin_integration\retained-skills\audit_worker.py", line 127, in main
+    deny("lifecycle", "evaluator-entry", command)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-retained-skills\tests\plugin_integration\retained-skills\audit_worker.py", line 41, in deny
+    raise PermissionError("TEST_BOUNDARY_DENIED:" + category)
+PermissionError: TEST_BOUNDARY_DENIED:lifecycle
+
+
+--- helpers/windows: calibration-network/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: calibration-spawn/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: calibration-write/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: calibration2-credential/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: calibration2-lifecycle/stderr.txt -> acceptance/helpers/f00055.txt ---
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-retained-skills\tests\plugin_integration\retained-skills\audit_worker.py", line 152, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-retained-skills\tests\plugin_integration\retained-skills\audit_worker.py", line 129, in main
+    deny("lifecycle", "evaluator-entry", command)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-retained-skills\tests\plugin_integration\retained-skills\audit_worker.py", line 41, in deny
+    raise PermissionError("TEST_BOUNDARY_DENIED:" + category)
+PermissionError: TEST_BOUNDARY_DENIED:lifecycle
+
+
+--- helpers/windows: calibration2-network/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: calibration2-spawn/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: calibration2-write/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- instructions: boundary-calibration/calibration2-write/stderr.txt -> acceptance/instructions/f/00472.bin ---
+
+
+--- instructions: boundary-calibration/calibration2-network/stderr.txt -> acceptance/instructions/f/00489.bin ---
+
+
+--- instructions: boundary-calibration/calibration2-credential/stderr.txt -> acceptance/instructions/f/00506.bin ---
+
+
+--- instructions: boundary-calibration/calibration2-spawn/stderr.txt -> acceptance/instructions/f/00523.bin ---
+
+
+--- instructions: boundary-calibration/calibration2-lifecycle/stderr.txt -> acceptance/instructions/f/00540.bin ---
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-retained-skills\tests\plugin_integration\retained-skills\audit_worker.py", line 152, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-retained-skills\tests\plugin_integration\retained-skills\audit_worker.py", line 129, in main
+    deny("lifecycle", "evaluator-entry", command)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-retained-skills\tests\plugin_integration\retained-skills\audit_worker.py", line 41, in deny
+    raise PermissionError("TEST_BOUNDARY_DENIED:" + category)
+PermissionError: TEST_BOUNDARY_DENIED:lifecycle
+

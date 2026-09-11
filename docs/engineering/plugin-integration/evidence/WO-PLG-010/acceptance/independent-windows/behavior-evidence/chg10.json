@@ -1,0 +1,52 @@
+{
+  "result": "observed_pass_with_grouped_unready_variants",
+  "variants": {
+    "absent": "Newly selected repository had no current delivery. No mutation invoked.",
+    "stale": "Only another repository delivery was shown. No mutation invoked.",
+    "incomplete": "A real earlier context payload was deliberately truncated to 250 characters and omitted its ending. No mutation invoked."
+  },
+  "limits": "One agent assessed the three supplied conditions at the same unchanged state. Complete shared-handler output was delivered through this tool session; native host activation and enforcement are not claimed.",
+  "pre_recovery_mutation_calls": 0,
+  "before_state": {
+    "before": [
+      {
+        "id": "WO-ACC-001",
+        "status": "draft"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-ACC-001",
+        "status": "draft"
+      }
+    ]
+  },
+  "setup": "Exact existing-environment Windows setup snippet, then fresh complete handler delivery",
+  "repository_unchanged_until_apply": true,
+  "after_state": {
+    "before": [
+      {
+        "id": "WO-ACC-001",
+        "status": "approved"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-ACC-001",
+        "status": "approved"
+      }
+    ]
+  },
+  "approval_apply_calls_after_recovery": 1,
+  "duplicate_approval_prompts": 0,
+  "start_apply_calls": 0,
+  "records": [
+    "chg10-repeat-inputs",
+    "chg10-repeat-state-before",
+    "chg10-repeat-setup",
+    "chg10-repeat-context",
+    "chg10-repeat-preview",
+    "chg10-repeat-apply",
+    "chg10-repeat-state-after"
+  ]
+}

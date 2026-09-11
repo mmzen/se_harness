@@ -1,0 +1,36 @@
+"""Fix raw bounded sources and byte-span oracles before candidate rendering."""
+import hashlib,json
+from pathlib import Path
+root=Path(__file__).resolve().parent
+def digest(b):return hashlib.sha256(b).hexdigest()
+parts=[
+    ('The Café example describes one prepared verification record. The following supplied facts determine the explanation.\n\nRecord: ',None,None),
+    ('VREC-BRF-001','record-id','identifier'),
+    ('\nInspection command: ',None,None),
+    ('harnessctl check . --artifact VREC-BRF-001 --json','inspection-command','command'),
+    ('\nIllustrative code: ',None,None),
+    ('print("naïve café ☕")','unicode-code','code'),
+    ('\nDecision boundary: ',None,None),
+    ('Only the assurance owner may verify VREC-BRF-001 when the retained evidence is sufficient; preparation grants no merge or release authority.','qualified-decision','decision-meaning'),
+    ('\nThe explanation must rely only on this supplied example, not current repository state.\n',None,None)
+]
+source=b'';spans=[]
+for value,ident,kind in parts:
+    b=value.encode('utf8');start=len(source);source+=b
+    if ident:spans.append({'id':ident,'kind':kind,'start':start,'end':len(source),'sha256':digest(b)})
+canonical=('Outcome\nCompleted.\n\nDone\n- Prepared VREC-BRF-001.\n\nCurrent lifecycle state\n- VREC-BRF-001 is ready; WO-BRF-001 is implemented.\n\nDecision required\n- The assurance owner must decide VREC-BRF-001 using the retained evidence.\n\nNext\nI verify VREC-BRF-001 as assurance owner.\n').encode('utf8')
+current=('This bounded note describes the Café component purpose. It does not report the current status of WO-BRF-001 or contain a current evaluator result.\n').encode('utf8')
+raw={
+ 'C04-routing':{'operator_request':'Explain this supplied sentence: the build creates a report.','explicit_skill':None},
+ 'C05-unicode':{'operator_request':'Use harness-operator-brief to explain the supplied example and its preparation limits. Do not query current repository state.','explicit_skill':'harness-operator-brief','requested_outcome':'One concise English explanation of the supplied preparation limits.','declared_non_effects':['No target or Git changes','No current-state query','No decision or external action'],'source_kind':'bounded-technical-text','source_text':source.decode(),'source_sha256':digest(source),'protected_spans':spans,'project_terms':['Café'],'source_byte_length':len(source)},
+ 'C05-canonical':{'operator_request':'Use harness-operator-brief for this exact-output supplied canonical restitution. Return its brief bytes alone and unchanged.','explicit_skill':'harness-operator-brief','requested_outcome':'Preserve the supplied canonical restitution exactly.','declared_non_effects':['No added brief prose','No current-state query','No target or external changes'],'source_kind':'structured-harness-result','source_text':canonical.decode(),'source_sha256':digest(canonical),'protected_spans':[{'id':'whole-restitution','kind':'canonical-restitution-block','start':0,'end':len(canonical),'sha256':digest(canonical)}]},
+ 'C07':{'operator_request':'Use harness-operator-brief to tell me the current status of WO-BRF-001 and its next required action using this bounded note.','explicit_skill':'harness-operator-brief','requested_outcome':'Current WO state and next action.','declared_non_effects':['No current-state query was requested','No target or external changes'],'source_kind':'bounded-technical-text','source_text':current.decode(),'source_sha256':digest(current),'protected_spans':[],'current_structured_evaluator_result':None},
+ 'preexecution':{'wrong_version':'0.17.0','actual_runtime':'0.16.0','wrong_payload_sha256':'0'*64,'wrong_root':'TARGET_CHECKOUT','untrusted_helper_paths':['TARGET_CHECKOUT/scripts/check_brief.py','scripts/check_brief.py']}
+}
+dest=root/'raw-inputs.json'
+if dest.exists():raise FileExistsError(dest)
+dest.write_text(json.dumps(raw,indent=2,ensure_ascii=False)+'\n',encoding='utf8',newline='\n')
+for name,b in [('C05-unicode-source.txt',source),('C05-canonical-source.txt',canonical),('C07-source.txt',current)]:
+    (root/name).write_bytes(b)
+(root/'source-oracle.json').write_text(json.dumps({'source_sha256':digest(source),'byte_length':len(source),'spans':spans,'canonical_sha256':digest(canonical),'canonical_bytes':len(canonical)},indent=2)+'\n')
+print(json.dumps({'raw_input_sha256':digest(dest.read_bytes()),'source_oracle':json.loads((root/'source-oracle.json').read_text())},indent=2))

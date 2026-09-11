@@ -2,7 +2,7 @@
 id = "WO-PLG-018"
 type = "work_order"
 title = "Integrate the verified plugin workflow stack"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-11"
 updated = "2026-09-11"
@@ -61,6 +61,20 @@ to = "approved"
 decided_at = "2026-09-11T09:44:19Z"
 decided_by = "engineering-owner"
 reason = "On 2026-09-11 the operator stated \"i approve VER-PLG-018 and WO-PLG-018, including its proposed execution delegation\". Record only WO-PLG-018 approval as engineering-owner, reviewed at 054625aa84d30935d667dcaa25fd5c58a983b473, artifact SHA-256 74cac542df1e617b3a1dbce06c34b4be3f50f3223cf743bf3b9a49072b2759a9, with immutable integration plan SHA-256 68b59c5837e890396701e46f5e37cc391a3ebf91d9f71c736d27e50345155aaa. This approves the pinned scope and execution class delegation for start, completion and single-WO VREC preparation through existing gates. Assurance of VREC-PLG-011, merge, PR closure, supersession and release remain separate decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-11T10:19:05Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 19f908d8857c1113d6237322de8dd4e1562e826d (check-run 103228186881, source github-checks)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-11T10:55:59Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 507bdb8d2bd978bcb02ea043c72a68617a9d9439 (check-run 103235149334, source github-checks)."
 +++
 
 # Work Order: Integrate the verified plugin workflow stack
@@ -73,6 +87,18 @@ assurance-owner approval. Approving this WO would delegate only start, completio
 and single-WO VREC preparation through the existing execution class and gates.
 Verification and external merge remain separate operator decisions.
 
+## Baseline amendment approved on 2026-09-11
+
+The operator stated "i approve the baseline amendment to WO-PLG-018 and VER-PLG-018 in PR #451". As engineering-owner, this approves
+[plan-main.json](../evidence/WO-PLG-018/plan-main.json), SHA-256
+`eb0fa0a8e8e5e77428f45fdcde3c99f2080c318bdcb75a6425216081002feefb`, for main baseline `fc1f087371b100d5fda7a1f254ee00ebde8cbadf` and integration PR #451.
+The [decision receipt](../evidence/WO-PLG-018/base-amendment-approval.json)
+binds the reviewed packet. The original plan digest `68b59c5837e890396701e46f5e37cc391a3ebf91d9f71c736d27e50345155aaa` and its approvals
+remain historical; the amended plan now governs execution and INT01–INT06.
+All 3,177 import entries, source heads, scope and verification obligations are
+unchanged. Existing execution delegation applies through the current gates.
+Assurance of VREC-PLG-011, merge, PR closure and release remain separate decisions.
+
 ## Objective
 
 Deliver WO-PLG-010, WO-PLG-011, WO-PLG-012 and WO-PLG-017 together through one
@@ -80,11 +106,11 @@ bounded PR to main, preserving their verified implementation and decision histor
 
 ## In scope
 
-Import the exact 3,177 paths in [plan.json](../evidence/WO-PLG-018/plan.json),
-SHA-256 `68b59c5837e890396701e46f5e37cc391a3ebf91d9f71c736d27e50345155aaa`.
+Import the exact 3,177 paths in [plan-main.json](../evidence/WO-PLG-018/plan-main.json),
+SHA-256 `eb0fa0a8e8e5e77428f45fdcde3c99f2080c318bdcb75a6425216081002feefb`.
 The plan pins base main, all five PR heads, expected modes/blobs and source owners.
 
-Keep this packet's approved files on a branch from the pinned main baseline.
+Keep this packet's approved files on PR #451's branch from the amended main baseline.
 After authorized start, merge the pinned #446 head, then the pinned #444 head.
 The former already contains #445, #448 and #449 history. Add only the integration
 checker and its tests, new evidence, this WO's authorized lifecycle receipts and
@@ -121,7 +147,7 @@ new content; a conflict or different source/base requires a reviewed amendment.
 ## Expected change surface
 
 The frozen imports contain 3,171 additions and six modifications relative to
-main c0451b7694b02f140f95661b07907d4722b336cd. Only this packet, the integration
+main fc1f087371b100d5fda7a1f254ee00ebde8cbadf. Only this packet, the integration
 checker, its tests and new integration evidence may add content beyond that import.
 Proposal delivery itself contains no imported implementation changes.
 

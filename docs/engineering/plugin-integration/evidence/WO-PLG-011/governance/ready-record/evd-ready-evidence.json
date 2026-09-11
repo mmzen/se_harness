@@ -1,0 +1,144 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "evidence",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-PLG-011",
+    "artifacts": [
+      "WO-PLG-011"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "CAP-WEX-001",
+      "INT-WEX-001",
+      "REQ-PLG-019",
+      "SPEC-PLG-011",
+      "VER-PLG-011"
+    ],
+    "dependencies": [
+      "VREC-PLG-008"
+    ],
+    "declared_paths": [
+      "docs/engineering/plugin-integration/evidence/VREC-PLG-008-evaluator.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-011/",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-019.md",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-011.md",
+      "docs/engineering/plugin-integration/verification-records/VREC-PLG-008.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-011.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-011.md",
+      "plugins/verity-plane/common/skills/evidence/",
+      "tests/plugin_integration/evidence-skill/"
+    ],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-WO-READY-VREC",
+    "procedure_id": "PROC-FOCUS-RELATED",
+    "status": "not_assessable",
+    "gates": []
+  },
+  "procedure": {
+    "id": "PROC-FOCUS-RELATED",
+    "current_step": "STEP-FOCUS-RELATED",
+    "steps": [
+      {
+        "id": "STEP-FOCUS-RELATED",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-ASSURANCE-DECISION"
+        ],
+        "effects": [
+          "Projected selected state for VREC-PLG-008."
+        ],
+        "non_effects": [
+          "Focus changes no lifecycle state."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "VREC-PLG-008"
+        ],
+        "corrective": {
+          "QGP-G4A-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4A-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4A-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      }
+    ]
+  },
+  "state": {
+    "before": [],
+    "after": [
+      {
+        "id": "WO-PLG-011",
+        "status": "implemented"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "WO-PLG-011",
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/WO-PLG-011-handoff.md",
+        "fields": [
+          "artifact",
+          "checkpoint",
+          "formal_snapshot_sha256",
+          "rebound_at"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Rebound the handoff evidence packet of WO-PLG-011 at docs/engineering/plugin-integration/evidence/WO-PLG-011/WO-PLG-011-handoff.md to formal snapshot e01c7f9452c7803408287fd7e38cc9fa10d3815df58d4c7f3425e93cf9320f00."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-PLG-011 is implemented; VREC-PLG-008 is ready."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-FOCUS-RELATED",
+      "step_id": "STEP-FOCUS-RELATED",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "VREC-PLG-008"
+      ]
+    },
+    "alternatives": []
+  },
+  "result_sha256": "bbd8fa894f5ae6a07cd18ee7d70f623ffeaf13755fbe338716ae9fe084afe6cb"
+}

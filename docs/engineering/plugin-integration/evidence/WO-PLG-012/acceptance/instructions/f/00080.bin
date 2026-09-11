@@ -1,0 +1,33 @@
+"""Retain the chosen inline result/receipt; uses recorded facts, no authority logic."""
+import hashlib
+import json
+from pathlib import Path
+
+root = Path(__file__).resolve().parent
+request = json.loads((root / 'C05-unicode-request.json').read_text(encoding='utf8'))
+traces = [json.loads((root / 'trace' / name / 'observations.json').read_text()) for name in ['C05-final-01-version', 'C05-final-02-identity', 'C05-final-03-doctor', 'C05-final-04-helper']]
+assert all(t['passed'] and t['exit_code'] == 0 and not t['changed_paths'] for t in traces)
+assert all(t['before'] == traces[0]['before'] and t['after'] == traces[0]['before'] for t in traces)
+core = json.loads((root / 'accepted-final-fixture-package-identity.json').read_text())['cores']['harness-operator-brief']['sha256']
+assert core == 'c17c538ddaa28096e555be3883c2de88d306a191bae7c74469e657746e5d0aa9'
+def digest(value):
+    return hashlib.sha256(json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode('utf8')).hexdigest()
+state = traces[0]['before']
+states = [{'kind': 'repository-bytes', 'sha256': digest({p: h for p, h in state.items() if not p.startswith('.git/')})}, {'kind': 'git-references', 'sha256': digest({p: h for p, h in state.items() if p.startswith('.git/')})}]
+result = {
+    'schema': 'se-harness-skill-result-v1', 'outcome': 'completed', 'profile': 'operator-communication',
+    'policy_path': 'docs/engineering/TECHNICAL_COMMUNICATION.md',
+    'source_sha256': request['source_sha256'], 'operator_message': request['rendered_text'],
+    'protected_content_bindings': request['bindings'], 'protected_binding_count': 4,
+    'material_deviations': [], 'residual_uncertainty': ['The supplied example is not a current repository-state or evidence-sufficiency assessment.']}
+receipt = {
+    'schema': 'se-harness-execution-receipt-v1',
+    'effects': {'changed_paths': [], 'evidence': [{'kind': 'portable-skill-manifest', 'sha256': core}], 'state_before': states, 'state_after': states},
+    'execution': {'operations': [{'id': op, 'exit_code': 0, 'status': 'passed'} for op in ['version', 'identity', 'doctor', 'protected-content-guard']], 'profiles': ['operator-communication'], 'skills': [{'name': 'harness-operator-brief', 'version': '1.0.0', 'portable_core_sha256': core}], 'worker_results': []},
+    'selection': {'artifact': None, 'autonomy_envelope_sha256': None, 'repository': 'Retained helper fixture'},
+    'validation': {'deviations': [], 'evaluator': {'identity': 'passed', 'version': '0.16.0'}, 'gates': [], 'outcome': 'completed', 'residual_uncertainty': ['The supplied example is not a current repository-state or evidence-sufficiency assessment.']}}
+for filename, value in [('C05-final-skill-result.json', result), ('C05-final-execution-receipt.json', receipt)]:
+    path = root / filename
+    assert not path.exists()
+    path.write_bytes(json.dumps(value, ensure_ascii=False, indent=2).encode('utf8') + b'\n')
+print(json.dumps({'skill_result': result, 'execution_receipt': receipt}, ensure_ascii=False))

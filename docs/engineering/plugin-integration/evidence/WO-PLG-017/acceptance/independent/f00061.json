@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "git",
+    "-C",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-evidence-path-fix",
+    "show",
+    "7fe82c95823503e54d2e35e00d8c409a6dd4b065:docs/engineering/plugin-integration/verification-records/VREC-PLG-008.md"
+  ],
+  "expected": 128,
+  "returncode": 128,
+  "stderr_sha256": "772d7714608a333215d1bc9ec9d23cbafead5c6ad645e5f6e12a5a7722602533",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

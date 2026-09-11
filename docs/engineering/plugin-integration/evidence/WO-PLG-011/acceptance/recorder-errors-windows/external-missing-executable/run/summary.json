@@ -1,0 +1,27 @@
+{
+  "classification": "Command replay and fixed empty observation spans, not fresh model compliance or live external enforcement",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "runner_sha256": "3a1c303383b7c537b2102b01dbc9fd9d484269f679966d1a47dd1d81c01e40c3",
+  "bundle_sha256": "1933a41f7af733eda2478ffc82316fc245e5d9d20a8fbed8d9ecee8160d2ab22",
+  "native_model_calls": 0,
+  "decision_prompt_count": null,
+  "commands": [
+    {
+      "label": "probe",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\external-missing-executable\\absent-probe-executable",
+        "--control-dir",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\external-missing-executable\\run\\fixtures/external-control-calibration"
+      ],
+      "exit_code": null,
+      "changed_paths": []
+    }
+  ],
+  "negative_observations": [],
+  "passed": false,
+  "failure": {
+    "type": "FileNotFoundError",
+    "message": "[WinError 2] Le fichier sp\u00e9cifi\u00e9 est introuvable"
+  }
+}

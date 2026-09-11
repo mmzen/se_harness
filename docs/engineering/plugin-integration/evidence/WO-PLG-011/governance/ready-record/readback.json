@@ -1,0 +1,10 @@
+{
+  "classification": "Technical readback, not an assurance decision",
+  "record": "VREC-PLG-008",
+  "status": "ready",
+  "candidate": "e9418644e22497e622b706cb228f0cd8b36f3b5b",
+  "work_order_state": "implemented",
+  "prepared_by": "delegated-executor",
+  "selected_evidence_files": 95,
+  "evaluator_sidecar_sha256_matches": true
+}

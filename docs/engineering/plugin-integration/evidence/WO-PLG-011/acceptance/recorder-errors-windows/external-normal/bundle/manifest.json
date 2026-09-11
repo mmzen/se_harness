@@ -1,0 +1,37 @@
+{
+  "classification": "Recorder fault probes only; no evaluator/model/lifecycle behavior",
+  "assets": {
+    "candidate-inputs.json": "e47e31b9dc042e52001618073ac0a88b7f1e2b9f7b0893e2e1085b4808f3c98a",
+    "external-case-inputs.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "external-control-gate-failure/gates.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "external-input-base/allowlist.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "external-input-base/effects.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "external-input-base/gates.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "external-input-base/invocations.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "external-input-base/registry.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "external-input-base/remote-refs.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+  },
+  "records": [
+    {
+      "label": "probe",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-c",
+        "from pathlib import Path; import sys,time; p=Path(sys.argv[-1]); p.mkdir(parents=True,exist_ok=True); (p/'invocations.jsonl').write_text('{}\\n',encoding='utf8'); (p/'effects.jsonl').write_text('{}\\n',encoding='utf8'); (p/'remote-refs.json').write_text('{\"probe\":true}\\n',encoding='utf8'); print('probe-stdout',flush=True); print('probe-stderr',file=sys.stderr,flush=True); sys.exit(0)",
+        "--control-dir",
+        "{external}/external-control-calibration"
+      ],
+      "stdin": null,
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "effects.jsonl",
+        "invocations.jsonl",
+        "remote-refs.json"
+      ],
+      "expected_state": null,
+      "original_sha256": "52c50e63cb12a0498a9b45191a75b32d962bb258b678af5bab7abc952160f15d"
+    }
+  ]
+}

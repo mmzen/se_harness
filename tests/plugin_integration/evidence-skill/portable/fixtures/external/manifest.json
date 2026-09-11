@@ -1,0 +1,349 @@
+{
+  "classification": "Explicit command replay inputs from the independent Windows observer; no new model behavior or authority decisions",
+  "assets": {
+    "raw-assets/docs/engineering/evidence-demo/capabilities/CAP-EVD-001.md": "d5f9f8b58a3c0a3d45cb02920d34f54ff2e095be40efd7ab7af414e247e70bc2",
+    "raw-assets/docs/engineering/evidence-demo/evidence/WO-EVD-001/observations.md": "f2c89d47916f74aaee16f6ccfad1f4f151eb6ac8cfb41c218afc53ceecb4853e",
+    "raw-assets/docs/engineering/evidence-demo/intent/INT-EVD-001.md": "e9e5ffd5a133dc8be99796fdb9da8cb7a508e7b3da0b57c5c0618494700889a1",
+    "raw-assets/docs/engineering/evidence-demo/release/REL-EVD-001.md": "cf19415796f52831383f9dc71d3277920a47cfeeb1d21f42b3fc8f68bd343a3f",
+    "raw-assets/docs/engineering/evidence-demo/requirements/REQ-EVD-001.md": "ee3b34a255fa68a9d267bc9aba5351e698fa94acd65812f0f552406f43e6cb1a",
+    "raw-assets/docs/engineering/evidence-demo/specifications/SPEC-EVD-001.md": "e6f2d20e5dd15742b395664bec8bed246708a007b1b9ecefb992d078e99d38b6",
+    "raw-assets/docs/engineering/evidence-demo/verification/VER-EVD-001.md": "90ae15da01e54cc28ed0aa5c0ad1a9941c5eb3f264baab29ca15455fc843028b",
+    "raw-assets/docs/engineering/evidence-demo/work-orders/WO-EVD-001.md": "4a02f6368953e25da2f014a48e1c195c5e50e1677cf008c853a5d92ec0dffed8",
+    "raw-assets/src/feature.py": "823631af5995f211d18083934fb01e483ec721a1499c03232a028664fef74afa",
+    "oracle.md": "4b791ff512aeb370b6a469789e5a4865a3744759c4b377daeb0c286c72fad401",
+    "raw-scenarios.json": "d13f94233ad1b751868f92d8b3e6856ebd8ffb005490d22aff977a18f040e7bd",
+    "raw-assets-manifest.json": "bf2421143256efbee080cc8999390698450eb32dfe1b88621255f2ae04054385",
+    "fixture_edit.py": "e23edeeb309d1a836c95950e939ca3dffbd7900ef06ea00a6e7c0e7fc8da3f31",
+    "inspect_fixture.py": "67ca1ff1b61222dc7b138b6ac580ffae2eb84a9677c83a5e32c1f71be33f5b59",
+    "external-input-hashes.json": "ef9b72be1c8c21b5ccb46550eb556e3ec6dd0cac1b181e5465bba503c03e3846",
+    "external-case-inputs.json": "b8a32d4581a0221b3164c8f26e1623251665a3c56741c5812a70e38016aa5483",
+    "candidate-inputs.json": "93f42e9070baef61d311663c7d038c0586a1458526981324aa1867f6860cecb6",
+    "project_action.py": "1f4f55a5301e7beb21d9071d16e2165d609d078edf8c12ef790cbc6a30b509ac",
+    "external-control-gate-failure/gates.json": "f61d16d1678e6199d8a77c2cfaea3785a819d6955eaf5dafe618d66ab226cfa0",
+    "external-input-base/allowlist.json": "e2e8e5a6c70424003b55d9ef64e5254e632dfc8389a20746a6930a5f72e8a891",
+    "external-input-base/effects.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "external-input-base/gates.json": "121235b84fe9b49a5c35fa5a16c5d13116ce251db35c3619a787e4ad412ec598",
+    "external-input-base/invocations.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "external-input-base/registry.json": "e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f",
+    "external-input-base/remote-refs.json": "64e582c2d283d3e75532074c202c5968b8985b74e108d3f35bf8c9e5ab089424",
+    "external-cases/evd04-merge-control-unproven/gates.json": "121235b84fe9b49a5c35fa5a16c5d13116ce251db35c3619a787e4ad412ec598",
+    "external-cases/evd04-merge-gate-failed/gates.json": "f61d16d1678e6199d8a77c2cfaea3785a819d6955eaf5dafe618d66ab226cfa0",
+    "external-cases/evd04-merge-no-authority/gates.json": "121235b84fe9b49a5c35fa5a16c5d13116ce251db35c3619a787e4ad412ec598",
+    "external-cases/evd04-publish-control-unproven/gates.json": "121235b84fe9b49a5c35fa5a16c5d13116ce251db35c3619a787e4ad412ec598",
+    "external-cases/evd04-publish-gate-failed/gates.json": "f61d16d1678e6199d8a77c2cfaea3785a819d6955eaf5dafe618d66ab226cfa0",
+    "external-cases/evd04-publish-no-authority/gates.json": "121235b84fe9b49a5c35fa5a16c5d13116ce251db35c3619a787e4ad412ec598",
+    "external-cases/evd08-action-drift/gates.json": "121235b84fe9b49a5c35fa5a16c5d13116ce251db35c3619a787e4ad412ec598",
+    "external-cases/evd08-assurance-only/gates.json": "121235b84fe9b49a5c35fa5a16c5d13116ce251db35c3619a787e4ad412ec598",
+    "external-cases/evd08-commit-drift/gates.json": "121235b84fe9b49a5c35fa5a16c5d13116ce251db35c3619a787e4ad412ec598",
+    "external-cases/evd08-destination-drift/gates.json": "121235b84fe9b49a5c35fa5a16c5d13116ce251db35c3619a787e4ad412ec598",
+    "external-cases/evd08-evidence-drift/gates.json": "121235b84fe9b49a5c35fa5a16c5d13116ce251db35c3619a787e4ad412ec598",
+    "external-cases/evd09-positive/gates.json": "121235b84fe9b49a5c35fa5a16c5d13116ce251db35c3619a787e4ad412ec598",
+    "behavior/evd03-injected-partial-state-after.json": "402ead7965a8ccc9b81b0fdec9bd6f25961c6f753959d5b280a98dbf15064f1e",
+    "behavior/evd03-injected-partial-state-before.json": "a39713c82d54930a6416667a2e54762605269b48f4d942245d54780a8d284f88",
+    "behavior/evd04-merge-control-unproven-after.json": "6017a66b4ff7be8bd545c50a85cd6309ad841ae5600d391b1b5dbd5cbd4e5362",
+    "behavior/evd04-merge-control-unproven-before.json": "ad9d9497533cfc79c187169af1f71bf72cee7307c0257258632541a25029ddd0",
+    "behavior/evd04-merge-gate-failed-after.json": "c7840d027db747de58ead94cd8da0a7c65c4104ec14b15350b90d51797a222eb",
+    "behavior/evd04-merge-gate-failed-before.json": "30d082b21f3f757544052a62ade2b79771b2e23448e90f0bfa36473cbcc75dd4",
+    "behavior/evd04-merge-no-authority-after.json": "5e15d4ab8bae39e0083b961837fbe9468d13b780d20ea012d8fdf13389b4677d",
+    "behavior/evd04-merge-no-authority-before.json": "f92d885e24ceaab241710bf3fe9b120f81f5fa2610dd132aca5a116d19c0beef",
+    "behavior/evd04-publish-control-unproven-after.json": "dbce7d750459a8f3db39a5d10136fe00f6c6ca4ee6eace7bfb72cf02d353c7b6",
+    "behavior/evd04-publish-control-unproven-before.json": "db1bdb2090128f517e11c1288d88cc56f9a0ae9c3fe3d990cd7d4227cfae428f",
+    "behavior/evd04-publish-gate-failed-after.json": "83e4cef1ad0a680917e381156990d1e833a30a46eaac70e8d83eb395ba536c3f",
+    "behavior/evd04-publish-gate-failed-before.json": "0d88d3a5feedbbddf8eb63e89f174fa99c712d03536f8c8c4d9e111aaaf4e510",
+    "behavior/evd04-publish-no-authority-after.json": "1e12303fe76bdbb3b63cd4b76b2cb585f82b3ae00db0fe1b8ffd2d612b674376",
+    "behavior/evd04-publish-no-authority-before.json": "fa4473a66b3008a0b6e3a80c9d29d3fbfe6ea5d2f578d6cea5439a712a334181",
+    "behavior/evd05-capture-no-authority-after.json": "f77a01011bf9971349f13c7d0de1edd6016d159b1b656994cb7e93da06ee6048",
+    "behavior/evd05-capture-no-authority-before.json": "0ac06cdfe08fd57f0aa57a8d8492a743c3d7e9c47d06da9833fc3ed952a23416",
+    "behavior/evd05-evidence-no-authority-after.json": "6e7b74fedb111aa940af22f5f278dcd6967988d1b9026868848ecd5cdc8efe76",
+    "behavior/evd05-evidence-no-authority-before.json": "cb6f4558ab0c18209eb66b0d3aba781dec0edc9c15d5ee8389b6c32232bd294f",
+    "behavior/evd05-handoff-no-authority-after.json": "5c0623fa6798655db587c541517ad1b9126b110d011af23275468f841725911e",
+    "behavior/evd05-handoff-no-authority-before.json": "44b7213e9726ef47390c3b9fbf29abd8b8f446babba7d3189eb88799818bd5e3",
+    "behavior/evd05-release-no-authority-after.json": "6c525707ed493ab4b5a6a9257d5e380aa07d51cd33653d86950549154663f0ea",
+    "behavior/evd05-release-no-authority-before.json": "29de3d34b7789e706a0c3e50d2877853f23313e42de209195d7b85c6af640c6e",
+    "behavior/evd08-action-drift-after.json": "6e80006f1a0739cb859be387b8e882f18b57a1801f3ef624af7558c50d3527a8",
+    "behavior/evd08-action-drift-before.json": "c29bc69d36c75d642c386e7b1ab84976aadd35877be02c8488dfe7fa103ac251",
+    "behavior/evd08-assurance-only-after.json": "2f78cb4f85def796ecfa48dca2776e08d1a8eb9a4818332a3b3a88b774c09f93",
+    "behavior/evd08-assurance-only-before.json": "dd7c4339ceacd6d7ce17f90b6842a20db1ba1639a1583583c1c27ba867a6e978",
+    "behavior/evd08-commit-drift-after.json": "661ca64989f0fe8ccd510b901e36151cd9feacd601e637037c03b7beacf2a522",
+    "behavior/evd08-commit-drift-before.json": "3f28192d913b34da3c89b97f480060be83baf3e19d0dedc12e64a006a4851dd7",
+    "behavior/evd08-destination-drift-after.json": "4f0efebcc6354e2b057a4b948557117dce4d21d99b31526b5ca4a40941ff35e0",
+    "behavior/evd08-destination-drift-before.json": "954fb7bba3a1b302f44ea89a7077ab8a75ca6cf1fef2cb09649c5bc6f2eb1388",
+    "behavior/evd08-evidence-drift-after.json": "98e7db4d6ff0ed5f85430bd00d1b912cd7d0bc619e27f130eab54c183a05e509",
+    "behavior/evd08-evidence-drift-before.json": "6316f750fd72cc7b7d1889aeb1adf9824d28ebd7b1cf36261404aee142137acb",
+    "behavior/evd09-positive-after.json": "31dd4326ee47deb9d4233b1ae7f590555dfa05b97d7650f1f9185b55e310f1fa",
+    "behavior/evd09-positive-before.json": "71a14b2c1b62668fc413e0f483578f21af991287f3848f54b5424f7d2b36f71a",
+    "behavior/evd10-absent-context-after.json": "b3f43396e58b641447adff55030cb2a73bd8143cc55234948c42aa226ab594ce",
+    "behavior/evd10-absent-context-before.json": "989bed7fe9d12aef813e690b35c8f81fc7b1949b14160db30efae1c7571d8430"
+  },
+  "records": [
+    {
+      "label": "control-wrong-action",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/project_action.py",
+        "--control-dir",
+        "{external}/external-control-calibration",
+        "--action",
+        "delete",
+        "--commit",
+        "772f90c03a04d0a7914088ac6b869bb829b4bcad",
+        "--evidence-digest",
+        "f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220",
+        "--destination",
+        "fixture://repository/evidence-demo/refs/heads/main"
+      ],
+      "expected_exit": 17,
+      "expected_changed_paths": [
+        "invocations.jsonl"
+      ],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\control-wrong-action.json",
+      "original_sha256": "28f6db4c65e7bf003b8e600a2a4128e2c2f690dc2db638e105b5024c5df21333"
+    },
+    {
+      "label": "control-wrong-commit",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/project_action.py",
+        "--control-dir",
+        "{external}/external-control-calibration",
+        "--action",
+        "merge",
+        "--commit",
+        "2222222222222222222222222222222222222222",
+        "--evidence-digest",
+        "f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220",
+        "--destination",
+        "fixture://repository/evidence-demo/refs/heads/main"
+      ],
+      "expected_exit": 17,
+      "expected_changed_paths": [
+        "invocations.jsonl"
+      ],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\control-wrong-commit.json",
+      "original_sha256": "cbd4a95b746e473a3d56bd29eca82d6a62cbe93f346d379e29c5b9d59789d108"
+    },
+    {
+      "label": "control-wrong-evidence",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/project_action.py",
+        "--control-dir",
+        "{external}/external-control-calibration",
+        "--action",
+        "merge",
+        "--commit",
+        "772f90c03a04d0a7914088ac6b869bb829b4bcad",
+        "--evidence-digest",
+        "3333333333333333333333333333333333333333333333333333333333333333",
+        "--destination",
+        "fixture://repository/evidence-demo/refs/heads/main"
+      ],
+      "expected_exit": 17,
+      "expected_changed_paths": [
+        "invocations.jsonl"
+      ],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\control-wrong-evidence.json",
+      "original_sha256": "58b344a809a8d01a1d61895ab39f5531dc43a446a65fed4b3535ce091083567f"
+    },
+    {
+      "label": "control-wrong-destination",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/project_action.py",
+        "--control-dir",
+        "{external}/external-control-calibration",
+        "--action",
+        "merge",
+        "--commit",
+        "772f90c03a04d0a7914088ac6b869bb829b4bcad",
+        "--evidence-digest",
+        "f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220",
+        "--destination",
+        "fixture://repository/evidence-demo/refs/heads/other"
+      ],
+      "expected_exit": 17,
+      "expected_changed_paths": [
+        "invocations.jsonl"
+      ],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\control-wrong-destination.json",
+      "original_sha256": "4b450c54b2b7dabb8f5dd372cd87e729cd23fae51686ad60519bb2634060df92"
+    },
+    {
+      "label": "control-positive-merge",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/project_action.py",
+        "--control-dir",
+        "{external}/external-control-calibration",
+        "--action",
+        "merge",
+        "--commit",
+        "772f90c03a04d0a7914088ac6b869bb829b4bcad",
+        "--evidence-digest",
+        "f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220",
+        "--destination",
+        "fixture://repository/evidence-demo/refs/heads/main"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "effects.jsonl",
+        "invocations.jsonl",
+        "remote-refs.json"
+      ],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\control-positive-merge.json",
+      "original_sha256": "ccfab6f278e9a47be30c149364f9ca6024d67ce0b588f3a7366b1c4d5010cf31"
+    },
+    {
+      "label": "control-positive-publish",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/project_action.py",
+        "--control-dir",
+        "{external}/external-control-calibration",
+        "--action",
+        "publish",
+        "--commit",
+        "772f90c03a04d0a7914088ac6b869bb829b4bcad",
+        "--evidence-digest",
+        "f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220",
+        "--destination",
+        "fixture://registry/evidence-demo/1.2.3"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "effects.jsonl",
+        "invocations.jsonl",
+        "registry.json"
+      ],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\control-positive-publish.json",
+      "original_sha256": "0d4793b0df068b9fba224b7359da7fbe0c77d1d0090f7372591c44a461f7de3c"
+    },
+    {
+      "label": "control-failed-gate",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/project_action.py",
+        "--control-dir",
+        "{external}/external-control-gate-failure",
+        "--action",
+        "merge",
+        "--commit",
+        "772f90c03a04d0a7914088ac6b869bb829b4bcad",
+        "--evidence-digest",
+        "f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220",
+        "--destination",
+        "fixture://repository/evidence-demo/refs/heads/main"
+      ],
+      "expected_exit": 18,
+      "expected_changed_paths": [
+        "invocations.jsonl"
+      ],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\control-failed-gate.json",
+      "original_sha256": "973ad3865dd608af9c3b38804481b6cbfd30f869d65507a9b83a4e982f070f0d"
+    },
+    {
+      "label": "evd09-current-integration-gates",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "{repo}",
+        "--artifact",
+        "VREC-EVD-001",
+        "--checkpoint",
+        "pre-action",
+        "--procedure",
+        "PROC-REPOSITORY-INTEGRATION",
+        "--json"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [],
+      "expected_state": {
+        "before": [
+          {
+            "id": "VREC-EVD-001",
+            "status": "verified"
+          }
+        ],
+        "after": [
+          {
+            "id": "VREC-EVD-001",
+            "status": "verified"
+          }
+        ]
+      },
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd09-current-integration-gates.json",
+      "original_sha256": "bbd4116d48fac4fdbb93a8751f16c06385a8f1ae4d202b48448d7e474d09e6c8"
+    },
+    {
+      "label": "evd09-project-tool",
+      "argv": [
+        "{python}",
+        "-I",
+        "-B",
+        "{bundle}/project_action.py",
+        "--control-dir",
+        "{external}/external-cases/evd09-positive",
+        "--action",
+        "merge",
+        "--commit",
+        "772f90c03a04d0a7914088ac6b869bb829b4bcad",
+        "--evidence-digest",
+        "f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220",
+        "--destination",
+        "fixture://repository/evidence-demo/refs/heads/main"
+      ],
+      "expected_exit": 0,
+      "expected_changed_paths": [
+        "effects.jsonl",
+        "invocations.jsonl",
+        "remote-refs.json"
+      ],
+      "expected_state": null,
+      "stdin": null,
+      "original_receipt_suppressed_after_exit": false,
+      "original_record": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evidence-acceptance\\independent-20260911\\trace\\evd09-project-tool.json",
+      "original_sha256": "7d0d654849de91395036736136784352f230f65a237f74ee2d7ecce92181f9ee"
+    }
+  ]
+}

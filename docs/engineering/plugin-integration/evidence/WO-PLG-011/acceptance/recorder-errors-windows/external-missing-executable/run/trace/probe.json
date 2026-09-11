@@ -1,0 +1,41 @@
+{
+  "label": "probe",
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\external-missing-executable\\absent-probe-executable",
+    "--control-dir",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\external-missing-executable\\run\\fixtures/external-control-calibration"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-recorder-error-probes-20260911-attempt1\\external-missing-executable\\run",
+  "exit_code": null,
+  "stdout": "",
+  "stderr": "",
+  "before": {
+    "allowlist.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "effects.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gates.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "invocations.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "registry.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "remote-refs.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+  },
+  "after": {
+    "allowlist.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "effects.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gates.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "invocations.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "registry.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "remote-refs.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+  },
+  "local_before": {},
+  "local_after": {},
+  "changed_paths": [],
+  "started_unix": 1789071081.7504888,
+  "duration_seconds": 0.001651763916015625,
+  "original_record_sha256": "e3cbdfbc6e2c6edf5d56aa3350d02dc5e9843ec382bb55871fcb4d5d75924fd3",
+  "error": {
+    "type": "FileNotFoundError",
+    "message": "[WinError 2] Le fichier sp\u00e9cifi\u00e9 est introuvable"
+  },
+  "timed_out": false,
+  "dispatch_delta": 0,
+  "simulated_effect_delta": 0
+}

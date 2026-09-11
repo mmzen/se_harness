@@ -1,0 +1,51 @@
+{
+  "candidate_source": {
+    "head_prefix": "6acc926f",
+    "check": "Candidate source evidence",
+    "url": "https://github.com/mmzen/se_harness/actions/runs/34521008001/job/103018228307",
+    "observed_result": "success",
+    "tests": 1134,
+    "skipped": 4,
+    "retained_log": "candidate-source-ci-6acc926f.log",
+    "retained_log_sha256": "04f6d4fa4147fc08ddb89a7fa19a375b10165ebb4ea912673a977723328eda60"
+  },
+  "governing_runtime": "Released 0.17.0; doctor and graph validation pass.",
+  "candidate_doctor": {
+    "exit_status": 1,
+    "failed_checks": [
+      {
+        "detail": "differs from distribution template",
+        "name": "distribution:.engineering-harness.toml",
+        "passed": false
+      },
+      {
+        "detail": "differs from distribution template",
+        "name": "distribution:.github/workflows/engineering-harness.yml",
+        "passed": false
+      },
+      {
+        "detail": "differs from distribution template",
+        "name": "distribution:ENGINEERING_HARNESS.md",
+        "passed": false
+      },
+      {
+        "detail": "differs from distribution template",
+        "name": "distribution:docs/engineering/ARTIFACT_AUTHORING.md",
+        "passed": false
+      },
+      {
+        "detail": "differs from distribution template",
+        "name": "distribution:docs/engineering/TRACEABILITY.md",
+        "passed": false
+      },
+      {
+        "detail": "differs from distribution template",
+        "name": "distribution:docs/engineering/templates/WORK_ORDER.template.md",
+        "passed": false
+      }
+    ],
+    "interpretation": "Expected candidate 0.18.0 distribution versus managed 0.17.0 differences described in AGENTS.md. No managed root replacement is authorized or performed."
+  },
+  "scope_observation": "The initial restricted-network scope check passed path evaluation but could not read the live GitHub delegation gate (WinError 10013). Actual delegated start was separately acquired with network access and retained. No failure was substituted with a success.",
+  "instruction_acceptance": "In progress; source CI does not establish EVD01-10 behavior."
+}

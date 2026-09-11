@@ -1,0 +1,46 @@
+{
+  "artifact_count": 7,
+  "bundle_schema": "harness-dashboard-bundle-v2",
+  "content_document_count": 8,
+  "content_omitted_count": 0,
+  "content_projected_bytes": 21106,
+  "dashboard_bytes": 442824,
+  "dashboard_sha256": "706b8e772b7aef1d96ba326e776781de5ad5d94df453d409dccbca907b8de8cf",
+  "elapsed_ms": 741,
+  "generated_at": "2026-09-10T19:42:04.812512Z",
+  "largest_resource": {
+    "bytes": 19687,
+    "path": "content/ea43c242f0429f61a83383a81418f90b1a47e93e1470162a7d8b73f0c009a6e6.txt",
+    "role": "evidence",
+    "schema": "utf8-markdown-v1",
+    "sha256": "ea43c242f0429f61a83383a81418f90b1a47e93e1470162a7d8b73f0c009a6e6"
+  },
+  "manifest_bytes": 4695,
+  "manifest_sha256": "2c288b4d2fefae3abf56e7d46ae7d79137623876ad72a66b0b91bfadae177ce3",
+  "outcome": "generated-valid",
+  "output": "target/harness-dashboard",
+  "output_bytes_excluding_summary": 482971,
+  "relation_count": 8,
+  "repository_revision": "d2f0f0e8e76b31fcca5eb89215bf1cde92a099f7",
+  "resource_bytes": 35452,
+  "resource_count": 11,
+  "resource_role_bytes": {
+    "artifact": 6703,
+    "evidence": 19687,
+    "readiness": 3103,
+    "summary": 1019,
+    "topology": 4940
+  },
+  "resource_role_counts": {
+    "artifact": 7,
+    "evidence": 1,
+    "readiness": 1,
+    "summary": 1,
+    "topology": 1
+  },
+  "schema": "harness-dashboard-generation-v2",
+  "topology_acceptance_bytes": 2097152,
+  "topology_target_exceeded": false,
+  "validator_error_count": 0,
+  "warning_count": 0
+}

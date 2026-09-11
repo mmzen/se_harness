@@ -1,0 +1,23 @@
+{
+  "head": "2a32e978442a0644aa72b751c0244378b0172fd4",
+  "source": {
+    "status": "success",
+    "tests": 1134,
+    "skipped": 4,
+    "run": 34527855603,
+    "job": 103041044385
+  },
+  "validate": {
+    "status": "success",
+    "job": 103041044910
+  },
+  "windows_upgrade": {
+    "status": "failure",
+    "phase": "checkout",
+    "job": 103041514771
+  },
+  "integration_package": "skipped after failed Windows prerequisite",
+  "blocker": "Inherited WO011 retained native-product paths exceed the Windows checkout path limit. Proposed remediation WO-PLG-017 is not authorized or applied.",
+  "wo_state": "in_progress",
+  "vrec_prepared": false
+}

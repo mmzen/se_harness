@@ -1,0 +1,32 @@
+{
+  "argv": [
+    "git",
+    "-c",
+    "core.autocrlf=false",
+    "archive",
+    "--format=tar",
+    "HEAD"
+  ],
+  "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-k47frca9\\src",
+  "elapsed_seconds": 1.5983304977416992,
+  "observer": "Passthrough to original subprocess.run; no command or returned output replacement",
+  "returncode": 0,
+  "stderr": {
+    "bytes": 0,
+    "encoding": "identity",
+    "path": "call01.stderr",
+    "representation": "raw subprocess bytes",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stored_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 119029760,
+    "encoding": "gzip",
+    "path": "call01.stdout.gz",
+    "representation": "raw subprocess bytes",
+    "sha256": "5187f393bf9457e053ade5119a1e784d14a67cb1d45a056d46d5288fed5c344a",
+    "stored_sha256": "5c667811baaf2a51b924aec65e9455d205c182ccce2b2e88f69df3e04187d0ba"
+  },
+  "text_mode": false,
+  "timeout": 600
+}

@@ -1,0 +1,17 @@
+{
+  "label": "prepare-release-help",
+  "phase": "read-only platform preparation",
+  "argv": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "prepare-release",
+    "--help"
+  ],
+  "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evidence-replay-preparation-20260910",
+  "exit_code": 0,
+  "stdout": "usage: harnessctl prepare-release [-h] --id RECORD_ID --release-contract\n                                  RELEASE_CONTRACT --verification-record\n                                  VERIFICATION_RECORD --work-order WORK_ORDER\n                                  --version RELEASE_VERSION --owner OWNER\n                                  [--tag TAG] [--output OUTPUT]\n                                  [--domain DOMAIN] [--json]\n                                  [target]\n\npositional arguments:\n  target\n\noptions:\n  -h, --help            show this help message and exit\n  --id RECORD_ID\n  --release-contract RELEASE_CONTRACT\n  --verification-record VERIFICATION_RECORD\n                        included verification record; repeat for aggregate\n                        releases\n  --work-order WORK_ORDER\n                        released work order; repeat for aggregate releases\n  --version RELEASE_VERSION\n  --owner OWNER         preparation actor and record owner; does not authorize\n                        the release\n  --tag TAG\n  --output OUTPUT\n  --domain DOMAIN       place the record in an explicit engineering domain\n  --json                emit the canonical workflow result as JSON\n",
+  "stderr": ""
+}

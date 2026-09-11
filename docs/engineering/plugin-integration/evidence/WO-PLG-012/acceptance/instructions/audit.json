@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "audit_scope": "Immutable evidence consistency; retained failures remain failures",
+  "trace_count": 21,
+  "verified_executed_source_copies": 214,
+  "target_files_each_snapshot": 150,
+  "target_changes": [],
+  "unexpected_events": 0,
+  "boundary_role_counts": {
+    "evaluator": 17,
+    "engine": 4,
+    "helper": 4
+  },
+  "calibrations": [
+    {
+      "case": "calibration2-write",
+      "observations_sha256": "c90dba21c69164ed6af450a3fd19ecc5369171cf53acf79843c727f2e353421d",
+      "worker_sha256": "fff1982b67ef8945c1ff94876140fad23369ac55e6fbfd6b4b8fa2efa65cdb4d",
+      "passed": true
+    },
+    {
+      "case": "calibration2-network",
+      "observations_sha256": "d56eb49876a131699b774f4b430ef52c1f04934704ffd60ee6b89b53d8f178e4",
+      "worker_sha256": "fff1982b67ef8945c1ff94876140fad23369ac55e6fbfd6b4b8fa2efa65cdb4d",
+      "passed": true
+    },
+    {
+      "case": "calibration2-credential",
+      "observations_sha256": "91e30fe8e9df34f4362bbd0c96bfad3f4c8d3d0eca70a9883c3851114c87c987",
+      "worker_sha256": "fff1982b67ef8945c1ff94876140fad23369ac55e6fbfd6b4b8fa2efa65cdb4d",
+      "passed": true
+    },
+    {
+      "case": "calibration2-spawn",
+      "observations_sha256": "5eafee4eb2c7a18f188c925caed00cebf59b6262940d2cd6ab21e0baf75b8bee",
+      "worker_sha256": "fff1982b67ef8945c1ff94876140fad23369ac55e6fbfd6b4b8fa2efa65cdb4d",
+      "passed": true
+    },
+    {
+      "case": "calibration2-lifecycle",
+      "observations_sha256": "b66df97052623babd4e9affbfc9fc3f7776db480d2b7a0678683fdef9ac9fc89",
+      "worker_sha256": "fff1982b67ef8945c1ff94876140fad23369ac55e6fbfd6b4b8fa2efa65cdb4d",
+      "passed": true
+    }
+  ],
+  "retained_recorder_failures": [
+    "preexec-root-identity expected2/actual1",
+    "omitted-LF provisional portable core digests and provisional receipt encoding",
+    "cp1252 observer console emission"
+  ],
+  "final_output_sha256": {
+    "C05-inline.jsonl": "e5e2498f1b563f1344318dbe9d4f67a6cbcd23b56d9f550d37aa324311cadf00",
+    "C05-receipt.json": "b4bcefb965027de9969c1f73c9c3869cae21e500d6b0d33259f9a366fc5eba82",
+    "C05-receipt.sha256": "53e381f9965b630e2451a358a3a32ef5f7a0e9ce3f88c972c4c594fda8a67a69",
+    "C05-result.json": "42540d06241312cc847b43e91da4b32b5ce05fcf0a12bd624753b1388a955e8a",
+    "C07-inline.jsonl": "8233b4d620ece25627468e8a734e2c0d0a4806c28192ba7e1b0f2b33be3bef1d",
+    "C07-receipt.json": "37ac75fdeda4e4622b801c67a6dbb31a963798d1f8dfa12aa38b045a2fd3e120",
+    "C07-receipt.sha256": "759906292f82a3384282d417ad14e8c317a7fdd13cde106ab2348f8d0a0c7969",
+    "C07-result.json": "4dc6b27e6562e764b622b2b50a903e14ba4eda34c5a8f9af42b973ca705ca9d0",
+    "serialization-note.txt": "4c297ec42e0231a53672d050af22d455d38d44573557ba57849fadc1adb1e187"
+  }
+}

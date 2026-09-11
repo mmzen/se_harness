@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "git",
+    "-c",
+    "safe.directory=C:/Users/mathi/AppData/Local/Temp/p17e-pkny7t08/src",
+    "-C",
+    "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-pkny7t08\\src",
+    "status",
+    "--porcelain=v1",
+    "--untracked-files=all"
+  ],
+  "elapsed_seconds": 0.3016941547393799,
+  "error": null,
+  "expected": 0,
+  "returncode": 0,
+  "stderr_sha256": "c592e2052a18892c82561eab7b75695b638d9aca6f60a743318ac817cc7d32b9",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

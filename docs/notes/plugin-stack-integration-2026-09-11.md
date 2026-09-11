@@ -1,8 +1,18 @@
 # Bring the verified plugin stack into main
 
-**Updated 11 September 2026: packet approved; delegated start blocked.**
+**Updated 11 September 2026: baseline amendment approved; execution pending its start gate.**
 
 ## Current status and required correction
+
+PR #450 is now merged at `fc1f087371b100d5fda7a1f254ee00ebde8cbadf`.
+The approved delegation exists on main. The operator approved
+the [baseline amendment](../engineering/plugin-integration/evidence/WO-PLG-018/base-amendment.md),
+which pins that new main commit for execution in a new PR. Its 3,177 imported
+paths, five source heads and verification obligations match the original plan.
+The WO and VER now include the approved amendment. Delegated execution follows
+through the released evaluator after the actual approval-commit gate passes.
+
+### Earlier refusal and correction
 
 The operator approved VER-PLG-018 and WO-PLG-018, including execution delegation.
 The released evaluator recorded both approvals. Its start preview then refused

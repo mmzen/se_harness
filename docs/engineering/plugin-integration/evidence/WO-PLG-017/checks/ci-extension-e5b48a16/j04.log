@@ -1,0 +1,498 @@
+Upgrade rehearsal (Windows)	Set up job	﻿2026-09-11T06:15:26.1721508Z Current runner version: '2.337.0'
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1772807Z ##[group]Runner Image Provisioner
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1773688Z Hosted Compute Agent
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1774266Z Version: 20260828.587
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1774901Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1775572Z Build Date: 2026-08-28T16:44:25Z
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1776203Z Worker ID: {04b0900b-18f7-45a4-b14c-fbadbd59f76d}
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1776871Z Azure Region: westus
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1777360Z ##[endgroup]
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1778995Z ##[group]Operating System
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1780200Z Microsoft Windows Server 2025
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1781218Z 10.0.26100
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1781959Z Datacenter
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1782770Z ##[endgroup]
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1783363Z ##[group]Runner Image
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1784158Z Image: windows-2025-vs2026
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1784872Z Version: 20260907.229.1
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1786100Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20260907.229/images/windows/Windows2025-VS2026-Readme.md
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1788112Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20260907.229
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1789077Z ##[endgroup]
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1790133Z ##[group]GITHUB_TOKEN Permissions
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1791867Z Contents: read
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1792464Z Metadata: read
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1792989Z ##[endgroup]
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1795033Z Secret source: Actions
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1795953Z Cache mode: write
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.1796626Z Prepare workflow directory
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.2352839Z Prepare all required actions
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.2404953Z Getting action download info
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.5777912Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.7269680Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:26.8938954Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:27.3420646Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Upgrade rehearsal (Windows)	Set up job	2026-09-11T06:15:27.7100868Z Complete job name: Upgrade rehearsal (Windows)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T06:15:27.9804631Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9815701Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9817663Z with:
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9818456Z   fetch-depth: 0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9819292Z   persist-credentials: false
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9820275Z   repository: mmzen/se_harness
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9828041Z   token: ***
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9828826Z   ssh-strict: true
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9829636Z   ssh-user: git
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9830388Z   clean: true
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9831206Z   sparse-checkout-cone-mode: true
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9832171Z   fetch-tags: false
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9832989Z   show-progress: true
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9833795Z   lfs: false
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9904227Z   submodules: false
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9905077Z   set-safe-directory: true
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9906030Z   allow-unsafe-pr-checkout: false
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9907384Z env:
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9908147Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9909659Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9911289Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9912109Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:27.9912853Z ##[endgroup]
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:28.1514438Z Syncing repository: mmzen/se_harness
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:28.1519754Z ##[group]Getting Git version info
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:28.1520943Z Working directory is 'D:\a\se_harness\se_harness'
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:28.2825303Z [command]"C:\Program Files\Git\bin\git.exe" version
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.0392001Z git version 2.55.0.windows.5
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.0442212Z ##[endgroup]
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.0464389Z Temporarily overriding HOME='D:\a\_temp\04630cf0-98b7-4a0e-8978-5fe405d51720' before making global git config changes
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.0466775Z Adding repository directory to the temporary git global config as a safe directory
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.0475106Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\se_harness\se_harness
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1459816Z Deleting the contents of 'D:\a\se_harness\se_harness'
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1466087Z ##[group]Initializing the repository
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.1475021Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\se_harness\se_harness
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.3576361Z Initialized empty Git repository in D:/a/se_harness/se_harness/.git/
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.3622967Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/mmzen/se_harness
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.4531999Z ##[endgroup]
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.4534178Z ##[group]Disabling automatic garbage collection
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.4540654Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.4833601Z ##[endgroup]
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.4834963Z ##[group]Setting up auth
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.4847970Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:29.5135267Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:32.0106062Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:32.0403177Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:32.5698806Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:32.6001484Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:33.1293189Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:33.1580277Z ##[endgroup]
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:33.1581420Z ##[group]Fetching the repository
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:33.1598468Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +ab9d7ab0f02e71c2b1fee5efa4daeb6bf83fb6f6:refs/remotes/pull/449/merge
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8073292Z From https://github.com/mmzen/se_harness
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8077893Z  * [new branch]        artifacts/plugin-implementation          -> origin/artifacts/plugin-implementation
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8079197Z  * [new branch]        definitions/plg010-delegation            -> origin/definitions/plg010-delegation
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8080263Z  * [new branch]        definitions/plg011-delegation            -> origin/definitions/plg011-delegation
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8080919Z  * [new branch]        definitions/plg012-delegation            -> origin/definitions/plg012-delegation
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8081561Z  * [new branch]        definitions/plg017-path-repair           -> origin/definitions/plg017-path-repair
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8082099Z  * [new branch]        main                                     -> origin/main
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8083056Z  * [new branch]        notes/plugin-installation-proposal       -> origin/notes/plugin-installation-proposal
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8085831Z  * [new branch]        notes/plugin-proposal-assessment-2026-09-08 -> origin/notes/plugin-proposal-assessment-2026-09-08
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8086686Z  * [new branch]        release/0.10                             -> origin/release/0.10
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8087249Z  * [new branch]        release/0.11                             -> origin/release/0.11
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8087810Z  * [new branch]        release/0.12                             -> origin/release/0.12
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8088395Z  * [new branch]        release/0.12.0                           -> origin/release/0.12.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8088943Z  * [new branch]        release/0.13                             -> origin/release/0.13
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8089490Z  * [new branch]        release/0.13.0                           -> origin/release/0.13.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8090245Z  * [new branch]        release/0.14                             -> origin/release/0.14
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8090974Z  * [new branch]        release/0.14.0                           -> origin/release/0.14.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8091447Z  * [new branch]        release/0.15                             -> origin/release/0.15
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8091911Z  * [new branch]        release/0.15.0                           -> origin/release/0.15.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8092370Z  * [new branch]        release/0.16                             -> origin/release/0.16
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8092875Z  * [new branch]        release/0.16.0                           -> origin/release/0.16.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8093359Z  * [new branch]        release/0.17                             -> origin/release/0.17
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8093888Z  * [new branch]        release/0.17.0                           -> origin/release/0.17.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8094345Z  * [new branch]        release/0.2.0                            -> origin/release/0.2.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8094843Z  * [new branch]        release/0.2.1                            -> origin/release/0.2.1
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8095658Z  * [new branch]        release/0.2.2                            -> origin/release/0.2.2
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8096578Z  * [new branch]        release/0.3.0                            -> origin/release/0.3.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8097042Z  * [new branch]        release/0.4.0                            -> origin/release/0.4.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8098245Z  * [new branch]        release/0.6                              -> origin/release/0.6
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8098712Z  * [new branch]        release/0.7                              -> origin/release/0.7
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8099155Z  * [new branch]        release/0.8                              -> origin/release/0.8
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8099596Z  * [new branch]        release/0.9                              -> origin/release/0.9
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8100116Z  * [new branch]        work/plugin-change-skill                 -> origin/work/plugin-change-skill
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8100794Z  * [new branch]        work/plugin-evidence-path-repair         -> origin/work/plugin-evidence-path-repair
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8101473Z  * [new branch]        work/plugin-evidence-skill               -> origin/work/plugin-evidence-skill
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8102333Z  * [new branch]        work/plugin-retained-skills              -> origin/work/plugin-retained-skills
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8102838Z  * [new tag]           last                                     -> last
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8103220Z  * [new tag]           v0.10.0                                  -> v0.10.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8103591Z  * [new tag]           v0.11.0                                  -> v0.11.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8103943Z  * [new tag]           v0.12.0                                  -> v0.12.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8104300Z  * [new tag]           v0.13.0                                  -> v0.13.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8104834Z  * [new tag]           v0.14.0                                  -> v0.14.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8105452Z  * [new tag]           v0.15.0                                  -> v0.15.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8105825Z  * [new tag]           v0.16.0                                  -> v0.16.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8106180Z  * [new tag]           v0.17.0                                  -> v0.17.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8106536Z  * [new tag]           v0.2.0                                   -> v0.2.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8106907Z  * [new tag]           v0.2.1                                   -> v0.2.1
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8107254Z  * [new tag]           v0.2.2                                   -> v0.2.2
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8107874Z  * [new tag]           v0.3.0                                   -> v0.3.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8108505Z  * [new tag]           v0.4.0                                   -> v0.4.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8109026Z  * [new tag]           v0.4.1                                   -> v0.4.1
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8109375Z  * [new tag]           v0.5.0                                   -> v0.5.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8109746Z  * [new tag]           v0.5.0a1                                 -> v0.5.0a1
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8110315Z  * [new tag]           v0.6.0                                   -> v0.6.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8110860Z  * [new tag]           v0.7.0                                   -> v0.7.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8111208Z  * [new tag]           v0.7.1                                   -> v0.7.1
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8111556Z  * [new tag]           v0.8.0                                   -> v0.8.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8111903Z  * [new tag]           v0.9.0                                   -> v0.9.0
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8112322Z  * [new ref]           ab9d7ab0f02e71c2b1fee5efa4daeb6bf83fb6f6 -> pull/449/merge
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8118596Z ##[endgroup]
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8119134Z ##[group]Determining the checkout info
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8119933Z ##[endgroup]
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8129228Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8574439Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8849231Z ##[group]Checking out the ref
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:35.8857853Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/remotes/pull/449/merge
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:36.9598572Z Updating files:  52% (3588/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:36.9789746Z Updating files:  53% (3649/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:36.9967916Z Updating files:  54% (3718/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.0156250Z Updating files:  55% (3787/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.0335420Z Updating files:  56% (3856/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.0536127Z Updating files:  57% (3924/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.0831993Z Updating files:  58% (3993/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.1367786Z Updating files:  59% (4062/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.1618435Z Updating files:  60% (4131/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.1769147Z Updating files:  61% (4200/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.1945526Z Updating files:  62% (4269/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.2203075Z Updating files:  63% (4337/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.2402509Z Updating files:  64% (4406/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.2585415Z Updating files:  65% (4475/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.2767922Z Updating files:  66% (4544/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.2935883Z Updating files:  67% (4613/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.3138233Z Updating files:  68% (4682/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.3301632Z Updating files:  69% (4750/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.3965143Z Updating files:  70% (4819/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.4190573Z Updating files:  71% (4888/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.4440618Z Updating files:  72% (4957/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.4615564Z Updating files:  73% (5026/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.4808174Z Updating files:  74% (5095/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.5017112Z Updating files:  75% (5163/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.5237987Z Updating files:  76% (5232/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.5461762Z Updating files:  77% (5301/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.5671022Z Updating files:  78% (5370/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.5855159Z Updating files:  79% (5439/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.6054638Z Updating files:  80% (5508/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.6488442Z Updating files:  81% (5577/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.8311506Z Updating files:  82% (5645/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.8479175Z Updating files:  83% (5714/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.8686907Z Updating files:  84% (5783/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.8896643Z Updating files:  85% (5852/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.9086246Z Updating files:  86% (5921/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.9274491Z Updating files:  87% (5990/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.9469655Z Updating files:  88% (6058/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.9573865Z Updating files:  89% (6127/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:37.9839186Z Updating files:  89% (6163/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.0076217Z Updating files:  90% (6196/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.0332980Z Updating files:  91% (6265/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.0530627Z Updating files:  92% (6334/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.0731991Z Updating files:  93% (6403/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.1214470Z Updating files:  94% (6471/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.1403291Z Updating files:  95% (6540/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.1635799Z Updating files:  96% (6609/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.1856891Z Updating files:  97% (6678/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2075210Z Updating files:  98% (6747/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2321515Z Updating files:  99% (6816/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2322489Z Updating files: 100% (6884/6884)
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2322944Z Updating files: 100% (6884/6884), done.
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2574151Z Note: switching to 'refs/remotes/pull/449/merge'.
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2574561Z 
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2574883Z You are in 'detached HEAD' state. You can look around, make experimental
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2575706Z changes and commit them, and you can discard any commits you make in this
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2576514Z state without impacting any branches by switching back to a branch.
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2576990Z 
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2577290Z If you want to create a new branch to retain commits you create, you may
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2579048Z do so (now or later) by using -c with the switch command. Example:
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2579876Z 
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2580104Z   git switch -c <new-branch-name>
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2580393Z 
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2580546Z Or undo this operation with:
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2580800Z 
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2580931Z   git switch -
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2581119Z 
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2581461Z Turn off this advice by setting config variable advice.detachedHead to false
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2582289Z 
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2582900Z HEAD is now at ab9d7ab0 Merge e5b48a16be2e5e59ecd17d7d28d24409ff5ce519 into 7fe82c95823503e54d2e35e00d8c409a6dd4b065
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.2752814Z ##[endgroup]
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.3113434Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.3372802Z ab9d7ab0f02e71c2b1fee5efa4daeb6bf83fb6f6
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.3408965Z ##[group]Removing auth
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.3417757Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.3710316Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.8964184Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.9212361Z http.https://github.com/.extraheader
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.9252262Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:38.9539307Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:39.5105191Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:39.5389136Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Upgrade rehearsal (Windows)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:15:40.0364131Z ##[endgroup]
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T06:15:40.0797052Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.0799206Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.0799574Z with:
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.0799763Z   python-version: 3.11
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.0799977Z   check-latest: false
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.0802574Z   token: ***
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.0802791Z   update-environment: true
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.0803033Z   allow-prereleases: false
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.0803264Z   freethreaded: false
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.0803457Z env:
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.0803629Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.0804045Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.0804489Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.0804720Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.0804895Z ##[endgroup]
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.2394178Z ##[group]Installed versions
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.2693396Z (node:3336) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.2694111Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.2695567Z Successfully set up CPython (3.11.9)
+Upgrade rehearsal (Windows)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:15:40.2696698Z ##[endgroup]
+Upgrade rehearsal (Windows)	Require the derived predecessor facts	﻿2026-09-11T06:15:40.2988948Z ##[group]Run if (-not $env:PREDECESSOR_VERSION -or -not $env:PREDECESSOR_WHEEL_SHA256) {
+Upgrade rehearsal (Windows)	Require the derived predecessor facts	2026-09-11T06:15:40.2989679Z ^[[36;1mif (-not $env:PREDECESSOR_VERSION -or -not $env:PREDECESSOR_WHEEL_SHA256) {^[[0m
+Upgrade rehearsal (Windows)	Require the derived predecessor facts	2026-09-11T06:15:40.2990237Z ^[[36;1m  throw 'predecessor facts were not derived by candidate-source'^[[0m
+Upgrade rehearsal (Windows)	Require the derived predecessor facts	2026-09-11T06:15:40.2990610Z ^[[36;1m}^[[0m
+Upgrade rehearsal (Windows)	Require the derived predecessor facts	2026-09-11T06:15:40.3723041Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Upgrade rehearsal (Windows)	Require the derived predecessor facts	2026-09-11T06:15:40.3723586Z env:
+Upgrade rehearsal (Windows)	Require the derived predecessor facts	2026-09-11T06:15:40.3723870Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Windows)	Require the derived predecessor facts	2026-09-11T06:15:40.3724512Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Windows)	Require the derived predecessor facts	2026-09-11T06:15:40.3725201Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	Require the derived predecessor facts	2026-09-11T06:15:40.3725495Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	Require the derived predecessor facts	2026-09-11T06:15:40.3725885Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Require the derived predecessor facts	2026-09-11T06:15:40.3726731Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Upgrade rehearsal (Windows)	Require the derived predecessor facts	2026-09-11T06:15:40.3727403Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Require the derived predecessor facts	2026-09-11T06:15:40.3728022Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Require the derived predecessor facts	2026-09-11T06:15:40.3728604Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Require the derived predecessor facts	2026-09-11T06:15:40.3729084Z ##[endgroup]
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	﻿2026-09-11T06:15:40.8445916Z ##[group]Run $predecessorDist = Join-Path 'D:\a\_temp' 'predecessor-dist'
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8446570Z ^[[36;1m$predecessorDist = Join-Path 'D:\a\_temp' 'predecessor-dist'^[[0m
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8447072Z ^[[36;1mNew-Item -ItemType Directory -Path $predecessorDist | Out-Null^[[0m
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8447638Z ^[[36;1mpython -m pip download --disable-pip-version-check --only-binary=:all: --no-deps `^[[0m
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8448201Z ^[[36;1m  --dest $predecessorDist "se-harness==$env:PREDECESSOR_VERSION"^[[0m
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8448693Z ^[[36;1m$wheel = Get-ChildItem -LiteralPath $predecessorDist -Filter '*.whl'^[[0m
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8449191Z ^[[36;1mif ($wheel.Count -ne 1) { throw 'expected exactly one predecessor wheel' }^[[0m
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8449805Z ^[[36;1m$actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $wheel.FullName).Hash.ToLowerInvariant()^[[0m
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8450670Z ^[[36;1mif ($actual -ne $env:PREDECESSOR_WHEEL_SHA256) { throw 'predecessor wheel digest mismatch' }^[[0m
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8521820Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8522596Z env:
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8522788Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8523212Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8523676Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8523876Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8524141Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8524572Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8525015Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8525414Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8525813Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:40.8526132Z ##[endgroup]
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:45.5618499Z Collecting se-harness==0.17.0
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:45.8043639Z   Downloading se_harness-0.17.0-py3-none-any.whl.metadata (45 kB)
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:45.9052731Z Downloading se_harness-0.17.0-py3-none-any.whl (484 kB)
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:46.0447105Z Saved d:\a\_temp\predecessor-dist\se_harness-0.17.0-py3-none-any.whl
+Upgrade rehearsal (Windows)	Acquire and verify the already-public predecessor	2026-09-11T06:15:46.0449314Z Successfully downloaded se-harness
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	﻿2026-09-11T06:15:46.2177475Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.2179209Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.2179602Z with:
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.2179956Z   name: candidate-wheel-non-promotable-ab9d7ab0f02e71c2b1fee5efa4daeb6bf83fb6f6
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.2180417Z   path: D:\a\_temp/candidate-dist
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.2181023Z   merge-multiple: false
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.2181248Z   repository: mmzen/se_harness
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.2181467Z   run-id: 34569064009
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.2181646Z env:
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.2181819Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.2182236Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.2182721Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.2183054Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.2183343Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.2183780Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.2184210Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.2184602Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.2184993Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.2185308Z ##[endgroup]
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.3983297Z Downloading single artifact
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.4202081Z (node:7912) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.4203362Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.6848217Z Preparing to download the following artifacts:
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.6849404Z - candidate-wheel-non-promotable-ab9d7ab0f02e71c2b1fee5efa4daeb6bf83fb6f6 (ID: 10187088292, Size: 471519, Expected Digest: sha256:7df38a4db08d96d150f10dcbc85f96c08c27169a258faa41c7699f49693ecc19)
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.9378131Z Redirecting to blob download url: https://productionresultssa2.blob.core.windows.net/actions-results/b7c6dae6-7885-4954-b562-8d79fa65a948/workflow-job-run-3ad94ef7-b033-5d11-b3a4-e930c7c1c850/artifacts/5df106d07a054443a644bdf03cad32f046130a927f2e40a12bd6c00c61db5605.zip
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:46.9380965Z Starting download of artifact to: D:\a\_temp\candidate-dist
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:47.3279149Z (node:7912) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:47.5903232Z SHA256 digest of downloaded artifact is 7df38a4db08d96d150f10dcbc85f96c08c27169a258faa41c7699f49693ecc19
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:47.5904941Z Artifact download completed successfully.
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:47.5905285Z Total of 1 artifact(s) downloaded
+Upgrade rehearsal (Windows)	Take the exact successor wheel built by candidate-source	2026-09-11T06:15:47.5915037Z Download artifact has finished successfully
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	﻿2026-09-11T06:15:47.6236907Z ##[group]Run $candidateDist = Join-Path 'D:\a\_temp' 'candidate-dist'
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6237498Z ^[[36;1m$candidateDist = Join-Path 'D:\a\_temp' 'candidate-dist'^[[0m
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6237976Z ^[[36;1m$wheel = Get-ChildItem -LiteralPath $candidateDist -Filter '*.whl'^[[0m
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6238468Z ^[[36;1mif ($wheel.Count -ne 1) { throw 'expected exactly one successor wheel' }^[[0m
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6239222Z ^[[36;1m$expected = (Get-Content -LiteralPath (Join-Path $candidateDist 'SHA256SUMS') | Where-Object { $_ -match [regex]::Escape($wheel.Name) })^[[0m
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6239953Z ^[[36;1mif (-not $expected) { throw 'SHA256SUMS does not name the successor wheel' }^[[0m
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6240454Z ^[[36;1m$expectedDigest = ($expected -split '\s+')[0].ToLowerInvariant()^[[0m
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6241024Z ^[[36;1m$actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $wheel.FullName).Hash.ToLowerInvariant()^[[0m
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6241761Z ^[[36;1mif ($actual -ne $expectedDigest) { throw "successor wheel digest mismatch: expected $expectedDigest, got $actual" }^[[0m
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6311713Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6312059Z env:
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6312246Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6312673Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6313157Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6313377Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6313652Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6314097Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6314546Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6314953Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6315355Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Verify the handed-over successor bytes	2026-09-11T06:15:47.6315668Z ##[endgroup]
+Upgrade rehearsal (Windows)	Install isolated local runtimes	﻿2026-09-11T06:15:48.0634299Z ##[group]Run $predecessorRoot = Join-Path 'D:\a\_temp' 'predecessor-env'
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0635126Z ^[[36;1m$predecessorRoot = Join-Path 'D:\a\_temp' 'predecessor-env'^[[0m
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0635600Z ^[[36;1m$successorRoot = Join-Path 'D:\a\_temp' 'successor-env'^[[0m
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0635979Z ^[[36;1mpython -m venv $predecessorRoot^[[0m
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0636266Z ^[[36;1mpython -m venv $successorRoot^[[0m
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0636868Z ^[[36;1m$predecessorPython = Join-Path $predecessorRoot 'Scripts/python.exe'^[[0m
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0637420Z ^[[36;1m$successorPython = Join-Path $successorRoot 'Scripts/python.exe'^[[0m
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0638109Z ^[[36;1m$predecessorWheel = (Get-ChildItem -LiteralPath (Join-Path 'D:\a\_temp' 'predecessor-dist') -Filter '*.whl').FullName^[[0m
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0638931Z ^[[36;1m$successorWheel = (Get-ChildItem -LiteralPath (Join-Path 'D:\a\_temp' 'candidate-dist') -Filter '*.whl').FullName^[[0m
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0639790Z ^[[36;1m& $predecessorPython -m pip install --disable-pip-version-check --no-index --no-deps $predecessorWheel^[[0m
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0640583Z ^[[36;1m& $successorPython -m pip install --disable-pip-version-check --no-index --no-deps $successorWheel^[[0m
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0710875Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0711237Z env:
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0711441Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0712060Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0712533Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0712743Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0713022Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0713470Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0713919Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0714331Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0714756Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:48.0715077Z ##[endgroup]
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:58.8044949Z Processing d:\a\_temp\predecessor-dist\se_harness-0.17.0-py3-none-any.whl
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:58.8354909Z Installing collected packages: se-harness
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:15:59.1126583Z Successfully installed se-harness-0.17.0
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:16:00.1574521Z Processing d:\a\_temp\candidate-dist\se_harness-0.18.0-py3-none-any.whl
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:16:00.2190595Z Installing collected packages: se-harness
+Upgrade rehearsal (Windows)	Install isolated local runtimes	2026-09-11T06:16:00.5094124Z Successfully installed se-harness-0.18.0
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	﻿2026-09-11T06:16:00.6119544Z ##[group]Run # WO-ECP-010 (REQ-ECP-012, ECP-PRD-008): the successor's own upgrade --apply
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6120691Z ^[[36;1m# WO-ECP-010 (REQ-ECP-012, ECP-PRD-008): the successor's own upgrade --apply^[[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6121697Z ^[[36;1m# against a throwaway export whose lock is the released predecessor's, judged^[[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6122656Z ^[[36;1m# by both evaluators' doctor and by the resulting lock. No per-release^[[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6123566Z ^[[36;1m# fixture, no network inside the rehearsal, no write to this checkout.^[[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6124640Z ^[[36;1m$predecessorPython = Join-Path (Join-Path 'D:\a\_temp' 'predecessor-env') 'Scripts/python.exe'^[[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6125814Z ^[[36;1m$successorPython = Join-Path (Join-Path 'D:\a\_temp' 'successor-env') 'Scripts/python.exe'^[[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6126762Z ^[[36;1m$first = Join-Path 'D:\a\_temp' 'rehearsal-result-1'^[[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6127446Z ^[[36;1m$second = Join-Path 'D:\a\_temp' 'rehearsal-result-2'^[[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6128278Z ^[[36;1mpython -m repository_tools.upgrade_rehearsal --repository . `^[[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6129330Z ^[[36;1m  --predecessor-python $predecessorPython --successor-python $successorPython --output $first^[[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6143472Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'first upgrade rehearsal failed' }^[[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6144423Z ^[[36;1mpython -m repository_tools.upgrade_rehearsal --repository . `^[[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6145477Z ^[[36;1m  --predecessor-python $predecessorPython --successor-python $successorPython --output $second^[[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6146552Z ^[[36;1mif ($LASTEXITCODE -ne 0) { throw 'second upgrade rehearsal failed' }^[[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6147674Z ^[[36;1m$firstResult = Get-Content -Raw -LiteralPath (Join-Path $first 'upgrade-rehearsal-result.json') | ConvertFrom-Json^[[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6149150Z ^[[36;1m$secondResult = Get-Content -Raw -LiteralPath (Join-Path $second 'upgrade-rehearsal-result.json') | ConvertFrom-Json^[[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6150608Z ^[[36;1mif ($firstResult.semantic_sha256 -ne $secondResult.semantic_sha256) { throw 'upgrade rehearsal replay digest differs' }^[[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6152130Z ^[[36;1mif ($firstResult.overall_result -ne 'pass' -or $secondResult.overall_result -ne 'pass') { throw 'upgrade rehearsal did not pass' }^[[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6224053Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6224418Z env:
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6224611Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6225040Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6225504Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6225717Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6225984Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6227176Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6227630Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6228040Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6228431Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:16:00.6228748Z ##[endgroup]
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:18:41.9362999Z upgrade rehearsal: PASS (0.17.0 -> 0.18.0)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:18:41.9363863Z semantic_sha256: 4503b1eb20f320613d29c7d5d5b76fe8e928da00e2216ff86cd610cb0850b061
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:20:02.1465333Z upgrade rehearsal: PASS (0.17.0 -> 0.18.0)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-11T06:20:02.1466237Z semantic_sha256: 4503b1eb20f320613d29c7d5d5b76fe8e928da00e2216ff86cd610cb0850b061
+Upgrade rehearsal (Windows)	Publish this platform's semantic digest as a job output	﻿2026-09-11T06:20:02.2439038Z ##[group]Run $result = Get-Content -Raw -LiteralPath (Join-Path (Join-Path 'D:\a\_temp' 'rehearsal-result-1') 'upgrade-rehearsal-result.json') | ConvertFrom-Json
+Upgrade rehearsal (Windows)	Publish this platform's semantic digest as a job output	2026-09-11T06:20:02.2440910Z ^[[36;1m$result = Get-Content -Raw -LiteralPath (Join-Path (Join-Path 'D:\a\_temp' 'rehearsal-result-1') 'upgrade-rehearsal-result.json') | ConvertFrom-Json^[[0m
+Upgrade rehearsal (Windows)	Publish this platform's semantic digest as a job output	2026-09-11T06:20:02.2441863Z ^[[36;1m"Windows=$($result.semantic_sha256)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8^[[0m
+Upgrade rehearsal (Windows)	Publish this platform's semantic digest as a job output	2026-09-11T06:20:02.2522094Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Upgrade rehearsal (Windows)	Publish this platform's semantic digest as a job output	2026-09-11T06:20:02.2522520Z env:
+Upgrade rehearsal (Windows)	Publish this platform's semantic digest as a job output	2026-09-11T06:20:02.2522805Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Windows)	Publish this platform's semantic digest as a job output	2026-09-11T06:20:02.2523591Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Windows)	Publish this platform's semantic digest as a job output	2026-09-11T06:20:02.2524127Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	Publish this platform's semantic digest as a job output	2026-09-11T06:20:02.2524401Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	Publish this platform's semantic digest as a job output	2026-09-11T06:20:02.2524760Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Publish this platform's semantic digest as a job output	2026-09-11T06:20:02.2525377Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Upgrade rehearsal (Windows)	Publish this platform's semantic digest as a job output	2026-09-11T06:20:02.2525893Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Publish this platform's semantic digest as a job output	2026-09-11T06:20:02.2526398Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Publish this platform's semantic digest as a job output	2026-09-11T06:20:02.2526876Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Publish this platform's semantic digest as a job output	2026-09-11T06:20:02.2527261Z ##[endgroup]
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	﻿2026-09-11T06:20:02.6871957Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6873720Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6874184Z with:
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6874479Z   name: upgrade-rehearsal-Windows
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6874897Z   path: D:\a\_temp/rehearsal-result-*/upgrade-rehearsal-result.json
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6875324Z   if-no-files-found: warn
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6875614Z   compression-level: 6
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6875923Z   overwrite: false
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6876189Z   include-hidden-files: false
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6876471Z env:
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6876714Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6877300Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6877886Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6878157Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6878725Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6879254Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6879769Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6880441Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6880953Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.6881334Z ##[endgroup]
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.9159555Z (node:8072) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.9161381Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.9258019Z With the provided path, there will be 2 files uploaded
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.9264134Z Artifact name is valid!
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:02.9266349Z Root directory input is valid!
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:03.3164480Z Beginning upload of artifact content to blob storage
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:03.3411767Z (node:8072) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:03.6195405Z Uploaded bytes 2398
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:03.6969798Z Finished uploading artifact content to blob storage!
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:03.6971666Z SHA256 digest of uploaded artifact zip is 347e7408f5767aac2a68bf1bcbdadee9110f60b215a7903220352d6f741668c6
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:03.6973923Z Finalizing artifact upload
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:04.0410504Z Artifact upgrade-rehearsal-Windows.zip successfully finalized. Artifact ID 10187215689
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:04.0412202Z Artifact upgrade-rehearsal-Windows has been successfully uploaded! Final size is 2398 bytes. Artifact ID is 10187215689
+Upgrade rehearsal (Windows)	Retain the bounded upgrade rehearsal evidence	2026-09-11T06:20:04.0422961Z Artifact download URL: https://github.com/mmzen/se_harness/actions/runs/34569064009/artifacts/10187215689
+Upgrade rehearsal (Windows)	Prove the upgrade rehearsal made no checkout change	﻿2026-09-11T06:20:04.0711401Z ##[group]Run git diff --exit-code
+Upgrade rehearsal (Windows)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:20:04.0711925Z ^[[36;1mgit diff --exit-code^[[0m
+Upgrade rehearsal (Windows)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:20:04.0712339Z ^[[36;1m$status = git status --porcelain=v1 --untracked-files=all^[[0m
+Upgrade rehearsal (Windows)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:20:04.0712903Z ^[[36;1mif ($status) { throw 'upgrade rehearsal changed the checkout' }^[[0m
+Upgrade rehearsal (Windows)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:20:04.0784951Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Upgrade rehearsal (Windows)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:20:04.0785381Z env:
+Upgrade rehearsal (Windows)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:20:04.0785664Z   PREDECESSOR_VERSION: 0.17.0
+Upgrade rehearsal (Windows)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:20:04.0786178Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+Upgrade rehearsal (Windows)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:20:04.0786719Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:20:04.0787023Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:20:04.0787362Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:20:04.0787908Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Upgrade rehearsal (Windows)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:20:04.0788423Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:20:04.0788988Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:20:04.0789504Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Prove the upgrade rehearsal made no checkout change	2026-09-11T06:20:04.0789888Z ##[endgroup]
+Upgrade rehearsal (Windows)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T06:20:04.8125613Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Windows)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:20:04.8126969Z Post job cleanup.
+Upgrade rehearsal (Windows)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:20:04.9623990Z (node:2224) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Upgrade rehearsal (Windows)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:20:04.9624834Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T06:20:04.9944752Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:20:04.9946093Z Post job cleanup.
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:20:05.2136784Z [command]"C:\Program Files\Git\bin\git.exe" version
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:20:05.2407492Z git version 2.55.0.windows.5
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:20:05.2468354Z Temporarily overriding HOME='D:\a\_temp\d7e93e4e-887d-4ed8-970b-d8e8d2303063' before making global git config changes
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:20:05.2469579Z Adding repository directory to the temporary git global config as a safe directory
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:20:05.2479145Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\se_harness\se_harness
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:20:05.2771771Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:20:05.3058586Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:20:05.8349260Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:20:05.8641630Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:20:06.4016653Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Upgrade rehearsal (Windows)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:20:06.4302602Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Upgrade rehearsal (Windows)	Complete job	﻿2026-09-11T06:20:06.9790645Z Evaluate and set job outputs
+Upgrade rehearsal (Windows)	Complete job	2026-09-11T06:20:06.9796447Z Set output 'Windows'
+Upgrade rehearsal (Windows)	Complete job	2026-09-11T06:20:06.9798241Z Cleaning up orphan processes
+Upgrade rehearsal (Windows)	Complete job	2026-09-11T06:20:07.0186494Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "-I",
+    "-B",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-path-repair-independent-20260911/linux-final/repo/tests/plugin_integration/evidence-skill/check_retention_paths.py",
+    "--root",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-path-repair-independent-20260911/linux-final/repo",
+    "--checkout-root",
+    "D:/a/se_harness/se_harness"
+  ],
+  "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel",
+  "elapsed_seconds": 0.20532822608947754,
+  "error": null,
+  "expected": 1,
+  "returncode": 1,
+  "stderr_sha256": "90d1a90f0976875b4aa0d7ace697bef6271254b85af78b096d0df1a6668fa509",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

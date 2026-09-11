@@ -1,0 +1,54 @@
+{
+  "result": "corrected_skill_observed_pass",
+  "initial_candidate_result": "Blocked before edits by inappropriate per-edit pre-action gate. Exact handoff corrective did not satisfy pre-action evidence; original attempts retained.",
+  "start_apply_calls": 1,
+  "corrected_repeat_start_apply_calls": 0,
+  "source_edit_calls": 2,
+  "local_fixture_commit_calls": 2,
+  "duplicate_wo_approval_prompts": 0,
+  "duplicate_start_prompts": 0,
+  "wo_bytes_unchanged_across_commits": true,
+  "state": {
+    "id": "WO-ACC-001",
+    "status": "in_progress",
+    "sha256": "44d7a3a6d1ca4b1c4ae3a823cd81422a66b71c605578223f95346df0142bc80f",
+    "events": [
+      {
+        "from": "draft",
+        "to": "approved",
+        "decided_at": "2026-09-10T18:44:47Z",
+        "decided_by": "engineering-owner",
+        "reason": "Synthetic corrected fixture approval only; no start authority supplied."
+      },
+      {
+        "from": "approved",
+        "to": "in_progress",
+        "decided_at": "2026-09-10T18:46:01Z",
+        "decided_by": "engineering-owner",
+        "reason": "Synthetic engineering-owner start decision for the fixed approved feature scope."
+      }
+    ],
+    "path": "docs/engineering/demo-change/work-orders/WO-ACC-001.md"
+  },
+  "checks_passed": [
+    "scope including intended path",
+    "scope after first commit",
+    "review preflight",
+    "validate",
+    "doctor",
+    "Git-derived handoff"
+  ],
+  "completion_apply_calls": 0,
+  "assurance_actions": 0,
+  "records": [
+    "chg04-preaction",
+    "chg04-corrective-evidence",
+    "chg04-preaction-retry",
+    "chg04-corrected-resume",
+    "chg04-edit1",
+    "chg04-commit1-result",
+    "chg04-edit2",
+    "chg04-commit2-result",
+    "chg04-handoff"
+  ]
+}

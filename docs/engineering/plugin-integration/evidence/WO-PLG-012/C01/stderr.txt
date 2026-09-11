@@ -1,0 +1,66 @@
+Combined review copy; exact original bytes remain at each retained path below.
+
+--- helpers/windows: C01/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: C01-corrected/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/windows: matrix1/C01-selected/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix-final/C01-selected/stderr.txt -> acceptance/helpers/f00017.txt ---
+
+
+--- helpers/linux: matrix1/C01-selected/stderr.txt -> acceptance/helpers/f00374.txt ---
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", line 152, in <module>
+    main()
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", line 120, in main
+    runpy.run_path(args.path, run_name="__main__")
+  File "<frozen runpy>", line 286, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-orient/scripts/orient.py", line 801, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-orient/scripts/orient.py", line 792, in main
+    result, returncode = run_orientation(args)
+                         ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-orient/scripts/orient.py", line 483, in run_orientation
+    version_result = _run(launcher, ["--version"], target=target, operation="version")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/frozen-plugin/harness-orient/scripts/orient.py", line 332, in _run
+    completed = subprocess.run(
+                ^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", line 104, in controlled_run
+    result = original_run(*positional, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", line 99, in controlled_popen
+    return original_popen(effective, *positional, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.12/subprocess.py", line 1823, in _execute_child
+    sys.audit("subprocess.Popen", executable, args, cwd, env)
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", line 87, in audit
+    log("allowed-process", argv=list(argv) if isinstance(argv, (list, tuple)) else argv, cwd=cwd)
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/audit_worker.py", line 37, in log
+    os.write(fd, (json.dumps(row, ensure_ascii=True) + "\n").encode())
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type PosixPath is not JSON serializable
+

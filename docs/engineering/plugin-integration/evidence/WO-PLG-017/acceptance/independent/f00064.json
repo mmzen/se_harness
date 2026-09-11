@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "git",
+    "-c",
+    "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-path-fix",
+    "-C",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-evidence-path-fix",
+    "ls-tree",
+    "-r",
+    "-z",
+    "7fe82c95823503e54d2e35e00d8c409a6dd4b065"
+  ],
+  "expected": 0,
+  "returncode": 0,
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "814e09d71dd9554e240e637af8ec620982f8d0ec106031b6fea00e5ebf64c495"
+}

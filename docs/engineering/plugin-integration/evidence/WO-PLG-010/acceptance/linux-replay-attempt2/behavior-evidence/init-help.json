@@ -1,0 +1,23 @@
+{
+  "label": "init-help",
+  "phase": "setup",
+  "argv": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "init",
+    "--help"
+  ],
+  "cwd": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-change-replay-20260910-attempt2",
+  "started_unix": 1789067314.596484,
+  "duration_seconds": 0.5031027793884277,
+  "exit_code": 0,
+  "expected_exit": 0,
+  "stdout": "usage: harnessctl init [-h] [--project-name PROJECT_NAME] [--dry-run] [--json]\n                       [target]\n\npositional arguments:\n  target\n\noptions:\n  -h, --help            show this help message and exit\n  --project-name PROJECT_NAME\n  --dry-run             report the complete plan without writing\n  --json                emit one se-harness-command-result-v1 object\n",
+  "stderr": "",
+  "before": {},
+  "after": {},
+  "changed_paths": []
+}

@@ -1,0 +1,149 @@
+{
+  "case": "C04",
+  "expected": "Implicit briefing is not selected; invalid explicit helper input returns TCM003.",
+  "conclusion": "Final bounded acceptance passed; see source reports for final selection and preserved earlier failures.",
+  "observed_records": [
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C04-direct-invalid-explicit/observations.json",
+      "retained": "acceptance/linux-replay/f00016.json",
+      "sha256": "c06fcfeea17bafb4d3b787018b307bfac5e292be1cc8df185b6a36ef9af2ecda",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C04-direct-invalid-explicit/observations.json",
+      "retained": "acceptance/instructions/f/00110.bin",
+      "sha256": "303953c66d3082fb80d42562de9cdc5a03956c7fcb47f971366ba2109b686851",
+      "expected_exit": 2,
+      "actual_exit": 2,
+      "passed": true,
+      "changed_paths": [],
+      "denied_events": []
+    }
+  ],
+  "source_evidence": [
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C04-direct-invalid-explicit/actions.txt",
+      "retained": "acceptance/linux-replay/f00001.txt",
+      "sha256": "c0dd3b7b24bf6efefb7c65e0f92ac646197f4664d8fae2a8a4386f213daeacf4"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C04-direct-invalid-explicit/audit.jsonl",
+      "retained": "acceptance/linux-replay/f00002.jsonl",
+      "sha256": "630c67d3720766c90f16eec7ae5966e8e9b3dad853cc679bed952da86da132d7"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C04-direct-invalid-explicit/boundary-config.json",
+      "retained": "acceptance/linux-replay/f00003.json",
+      "sha256": "46ed3f6fe559a500a2c3e5ed03f649e16aa9b0eb90f996fbbe34b641f2290b36"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C04-direct-invalid-explicit/observations.json",
+      "retained": "acceptance/linux-replay/f00016.json",
+      "sha256": "c06fcfeea17bafb4d3b787018b307bfac5e292be1cc8df185b6a36ef9af2ecda"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C04-direct-invalid-explicit/stderr.txt",
+      "retained": "acceptance/linux-replay/f00017.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C04-direct-invalid-explicit/stdout.txt",
+      "retained": "acceptance/linux-replay/f00018.txt",
+      "sha256": "eaa839de9ad65e2960b4ff397fcc874b90939f65c0abcd85f651ebc0bc2c3749"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "C04-direct-invalid-explicit-driver.json",
+      "retained": "acceptance/linux-replay/f00019.json",
+      "sha256": "7589af0218fe70c60f58a50ea8bbc746c0e8e94f284da89f58e756c855b8571f"
+    },
+    {
+      "group": "linux-replay/linux-replay",
+      "original": "frozen-observer-inputs/C04-invalid-explicit-request.json",
+      "retained": "acceptance/linux-replay/f00006.json",
+      "sha256": "3c78d9f038f481bef9ef8c000150c0c131f0f8a079651dd6fb158c62701fcb8a"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/C04-invalid-explicit-request.json",
+      "retained": "acceptance/instructions/f/00012.bin",
+      "sha256": "3c78d9f038f481bef9ef8c000150c0c131f0f8a079651dd6fb158c62701fcb8a"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/model-observations/C04-routing/after.json",
+      "retained": "acceptance/instructions/f/00060.bin",
+      "sha256": "6a54b066e688a2f0b61d0215880e0e49e508e1531f35f419abb09db690b001ef"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/model-observations/C04-routing/before.json",
+      "retained": "acceptance/instructions/f/00061.bin",
+      "sha256": "6a54b066e688a2f0b61d0215880e0e49e508e1531f35f419abb09db690b001ef"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/model-observations/C04-routing/model-choice.json",
+      "retained": "acceptance/instructions/f/00062.bin",
+      "sha256": "e44185d1c7b5dcb41133af7ef33417719e61510852583b5d227c91707d408fbc"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C04-direct-invalid-explicit/actions.txt",
+      "retained": "acceptance/instructions/f/00095.bin",
+      "sha256": "3bd0c852e27b1f0b902c56356d71e44289645d2f4c875c067f198e2831b59cf9"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C04-direct-invalid-explicit/audit.jsonl",
+      "retained": "acceptance/instructions/f/00096.bin",
+      "sha256": "6b45d380066e569b3a1ab796a496f1ab26555a3894b9cd28626fbb6f679105f9"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C04-direct-invalid-explicit/boundary-config.json",
+      "retained": "acceptance/instructions/f/00097.bin",
+      "sha256": "5bce78f71c19473814fed386ac5c482d1bec1f47caa8f227992379c801380d98"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C04-direct-invalid-explicit/observations.json",
+      "retained": "acceptance/instructions/f/00110.bin",
+      "sha256": "303953c66d3082fb80d42562de9cdc5a03956c7fcb47f971366ba2109b686851"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C04-direct-invalid-explicit/stderr.txt",
+      "retained": "acceptance/instructions/f/00111.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "group": "instructions",
+      "original": "independent/trace/C04-direct-invalid-explicit/stdout.txt",
+      "retained": "acceptance/instructions/f/00112.bin",
+      "sha256": "0ef4bba8ea9f15b4f8f6fdb8262c8b2778863dfdd5ed573a57a8d5124dea9c46"
+    }
+  ],
+  "limits": [
+    "Helper tests and fixed Linux replay are distinct from Windows instruction observations.",
+    "Native activation, live migration and production sandbox qualification are not claimed.",
+    "Original failed observations retain their failed verdicts; this index does not replace them."
+  ],
+  "reports": [
+    "acceptance/helpers/REPORT.md",
+    "acceptance/instructions/report.md",
+    "acceptance/linux-replay/REPORT.md"
+  ]
+}

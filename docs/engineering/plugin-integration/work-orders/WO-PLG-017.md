@@ -2,10 +2,10 @@
 id = "WO-PLG-017"
 type = "work_order"
 title = "Portable retention of evidence-skill test output"
-status = "draft"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-10"
-updated = "2026-09-10"
+updated = "2026-09-11"
 
 [assurance]
 commit_bound_verification = "required"
@@ -17,6 +17,7 @@ class = "execution"
 
 [execution_scope]
 paths = [
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json",
   "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt1/native-products/",
   "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/native-products/",
   "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/",
@@ -34,16 +35,55 @@ paths = [
 implements = ["REQ-PLG-019"]
 specifications = ["SPEC-PLG-011"]
 verification = ["VER-PLG-011"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-10T21:12:46Z"
+decided_by = "engineering-owner"
+reason = "The operator explicitly answered \"Approve WO-PLG-017 and authorize the repair\" to the reviewed PR #447 proposal on 2026-09-10. Record DR-REMEDIATION-SCOPE and DR-WO-SELECT under engineering-owner for only WO-PLG-017. Approval of its execution delegation permits the bounded delegated route after the approved class exists at the configured base and the live exact-head required check succeeds. It does not approve an aggregate VREC, assurance, supersession, integration or merge."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-10T21:21:16Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at ed19676fd2af8b9754f74cbc6bc8664a92d2f803 (check-run 103052409603, source github-checks)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-11T06:26:04Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at e5b48a16be2e5e59ecd17d7d28d24409ff5ce519 (check-run 103167080167, source github-checks)."
 +++
 
 # Work Order: Portable retention of evidence-skill test output
 
 ## Lifecycle
 
-Draft remediation proposal; no approval, start or repair is recorded. Approving
-this work order would delegate its start and completion, subject to the released
-evaluator's configured base and live check. It would not authorize assurance,
-supersession, integration, or preparation of an aggregate verification record.
+The operator approved this remediation and authorized the delegated repair on
+2026-09-10. The released evaluator recorded only draft-to-approved. Start and
+completion remain subject to the configured-base and live-check requirements.
+The released evaluator subsequently applied the delegated start; see start/ in
+the retained evidence. This approval does not authorize assurance, supersession,
+integration, or preparation of an aggregate verification record.
+
+## Scope amendment approved on 2026-09-11
+
+The operator explicitly stated "i approve extension of WO-PLG-017", exercising
+DR-REMEDIATION-SCOPE as engineering-owner for the reviewed
+[one-file extension](../evidence/WO-PLG-017/scope-extension-plan.json).
+Its SHA-256 is `1927a7d61c7d6357e61047f427c0d2f1fb8e456d32dd1698efc01c7bba6f9538`.
+The [decision receipt](../evidence/WO-PLG-017/approval/scope-extension.json)
+records the exact additional source path and unchanged in_progress state.
+
+Move that one JSON to native/0056.json, preserve its bytes and a separate pinned
+supplemental map. Keep the original 55-file plan/map unchanged. Check the existing
+250-character ordinary-checkout budget and the separate 259-character deeper
+staging profile. Actually export and stage at the derived 77-character root with
+long paths disabled, then require the existing Windows rehearsal and downstream
+integration checks. This extension leaves all previous decision boundaries intact.
 
 ## Objective
 
@@ -72,7 +112,8 @@ from moving a file.
 ## Authorized decision envelope
 
 After approval and start, implement only the declared relocation, its checker and
-evidence. Proposed paths and original hashes are fixed by path-plan.json. Stop
+evidence. Original paths/hashes are fixed by path-plan.json; the one additional
+path/hash is fixed by the separately approved scope-extension-plan.json. Stop
 for a new scope decision if another path or behavior needs changing.
 
 ## Constraints
@@ -87,7 +128,7 @@ match the approved map. Verify bytes before removing an old working-tree copy.
 
 ## Expected change surface
 
-Only execution_scope paths. No payload has moved in this definition proposal.
+Only execution_scope paths. All 56 approved relocations and their checks are implemented.
 The longest affected repository-relative path falls from 235 to 72 characters.
 Original selected evidence and its interpretation stay visible in Git history.
 
@@ -127,4 +168,14 @@ WO-PLG-011 and this repair needs explicit preparation authority and exact clean
 candidate/evidence inputs before capture. Delegated
 execution only permits single-WO capture. VREC-PLG-008 stays ready until its
 assurance owner separately decides it; supersession needs an eligible verified
-successor. Do not treat this draft as either decision.
+successor. Work approval is neither decision.
+
+
+## Completion observation
+
+The released evaluator applied delegated completion after all 13 checks passed
+at e5b48a16be2e5e59ecd17d7d28d24409ff5ce519. The retained
+[completion receipt](../evidence/WO-PLG-017/governance/completion/wo017-completion-applied.json)
+records the actual actor and live gate. Both Windows upgrade staging and downstream
+integration pass. All 56 payloads reconcile; historical records remain unchanged.
+Aggregate VREC preparation remains the next separate engineering-owner decision.

@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "-I",
+    "-B",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-retained-skills/tests/plugin_integration/retained-skills/boundary_runner.py",
+    "--settings",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/final-inputs/settings.json",
+    "--output",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-observer-replay-20260911/C05-final-02-identity",
+    "--operation",
+    "identity",
+    "--expect-exit",
+    "0"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"output\": \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-observer-replay-20260911/C05-final-02-identity\", \"passed\": true, \"exit_code\": 0, \"codes\": [null], \"denied\": 0}\n{\n  \"candidate_commit\": null,\n  \"checkout_root\": \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-retained-helper-linux-20260911-attempt1/repository\",\n  \"diagnostics\": [],\n  \"distribution_origin\": \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/lib/python3.12/site-packages\",\n  \"entry_point_origin\": \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/harnessctl\",\n  \"evaluator_archive_name\": \"se_harness-0.16.0-py3-none-any.whl\",\n  \"evaluator_archive_sha256\": \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\",\n  \"evaluator_payload_manifest\": \"se-harness-installed-payload-v1\",\n  \"evaluator_payload_sha256\": \"51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c\",\n  \"evaluator_wheel_sha256\": \"a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae\",\n  \"expected_root\": \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0\",\n  \"harness_version\": \"0.16.0\",\n  \"isolated_python\": true,\n  \"module_origin\": \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/lib/python3.12/site-packages/se_harness/runtime_identity.py\",\n  \"passed\": true,\n  \"python_binary_position\": \"outside-declared-roots\",\n  \"python_binary_sha256\": \"a92f0f95e883390c7256b2e441484aac06b1002dbe1d924141a77c8d82f96223\",\n  \"python_entry_is_link\": true,\n  \"python_executable\": \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python\",\n  \"python_version\": \"3.12.3\",\n  \"pythonpath_present\": false,\n  \"role\": \"released-evaluator\",\n  \"schema\": \"se-harness-runtime-identity-v3\",\n  \"template_origin\": \"/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/share/se-harness/templates/repository/standard\",\n  \"user_site_enabled\": false\n}\n",
+  "stderr": ""
+}

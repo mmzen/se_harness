@@ -1,0 +1,34 @@
+{
+  "commit": "e9c256eb49d27f82e60543b7b3ca24f43a5129be",
+  "destination": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-k47frca9\\ssssssssssssssssss\\repository",
+  "destination_characters": 77,
+  "expected": "failure",
+  "expected_staging_failure_observed": true,
+  "export": {
+    "calls": [
+      "call01",
+      "call02",
+      "call03",
+      "call04",
+      "call05",
+      "call06",
+      "call07"
+    ],
+    "destination": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-k47frca9\\ssssssssssssssssss\\repository",
+    "destination_characters": 77,
+    "error": {
+      "message": "cannot prepare the throwaway repository: git add -A: fatal: unable to stat 'docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json': Filename too long",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-path-extension-independent-20260911\\export_worker.py\", line 42, in <module>\n    module.export_tracked_tree(a.source,a.destination)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-k47frca9\\src\\repository_tools\\upgrade_rehearsal.py\", line 123, in export_tracked_tree\n    raise UpgradeRehearsalError(f\"cannot prepare the throwaway repository: {' '.join(argv)}: {completed.stderr.strip()}\")\nactual_upgrade_rehearsal.UpgradeRehearsalError: cannot prepare the throwaway repository: git add -A: fatal: unable to stat 'docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json': Filename too long\n",
+      "type": "UpgradeRehearsalError"
+    },
+    "exporter_sha256": "4dfba43492ce476366f0b5b44b432671b60998d43b292099b640cb97e64fb4c9",
+    "passed": false,
+    "source": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-k47frca9\\src",
+    "worker_sha256": "0f82bc634624953eae06e785583107310ade09d019c79c4051ff038382fadcb1"
+  },
+  "exporter_sha256": "4dfba43492ce476366f0b5b44b432671b60998d43b292099b640cb97e64fb4c9",
+  "max_full_path_at77": 261,
+  "oracle_sha256": "a809a6bd7940daf6d7cef9b8036e01924c1036ddfcbada333f4b3939a2cc52f3",
+  "passed": true,
+  "source_checkout": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-k47frca9\\src"
+}

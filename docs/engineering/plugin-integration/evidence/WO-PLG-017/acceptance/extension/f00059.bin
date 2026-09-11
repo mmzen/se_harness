@@ -1,0 +1,10 @@
+[safe]
+	directory = C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-path-fix
+	directory = C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness/.git/worktrees/se-harness-plugin-evidence-path-fix
+	directory = C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness/.git
+	directory = C:/Users/mathi/AppData/Local/Temp/p17e-pkny7t08/src
+	directory = C:/Users/mathi/AppData/Local/Temp/p17e-pkny7t08/ssssssssssssssssss/repository
+[core]
+	longpaths = false
+	autocrlf = false
+	hooksPath = C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-path-extension-independent-20260911\\after-extension\\home\\hooks

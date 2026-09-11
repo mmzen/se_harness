@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-path-extension-independent-20260911\\export_worker.py",
+    "--source",
+    "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-k47frca9\\src",
+    "--destination",
+    "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-k47frca9\\ssssssssssssssssss\\repository",
+    "--output",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-path-extension-independent-20260911\\before-extension\\export"
+  ],
+  "elapsed_seconds": 21.300048351287842,
+  "error": null,
+  "expected": 1,
+  "returncode": 1,
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "7ae9cce753063937d73338683b0b1e1e769d2312c8c30ed4ba99da93aaed2d0a"
+}

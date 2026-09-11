@@ -1,0 +1,1860 @@
+{
+  "approved_proposal_path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/scope-extension-plan.json",
+  "approved_proposal_sha256": "1927a7d61c7d6357e61047f427c0d2f1fb8e456d32dd1698efc01c7bba6f9538",
+  "expectations": [
+    "Invoke unchanged repository_tools.upgrade_rehearsal.export_tracked_tree at a fresh exact77-character Windows repository path.",
+    "Preextension e9c256eb must fail at git add -A for the183-character file with core.longpaths=false.",
+    "Approved repaired commit must export and stage successfully at the same77-character depth.",
+    "Reconcile all56 moves against fixed original bytes and approved maps; no old paths remain.",
+    "Original55 plan/map, historical VREC/sidecar bytes and original source manifests stay unchanged.",
+    "Supplemental one-byte corruption and coordinated supplemental plan/map tamper must be rejected, then restored exactly.",
+    "Linux readability only; no fresh source suite or model behavior claim."
+  ],
+  "extra": {
+    "bytes": 730,
+    "original_path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-publish-control-unproven/request-and-decision.json",
+    "proposed_path": "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0056.json",
+    "sha256": "730e0507e7c4992b183122e91fda0369d610a499d76545b463d725c22dcaf263"
+  },
+  "ordinary_checkout_budget": 250,
+  "original55_oracle_sha256": "51370c2582f8360b2bc5530b677c3f41b181a8d8f3d44c99e44e166ae29cc378",
+  "preextension_commit": "e9c256eb49d27f82e60543b7b3ca24f43a5129be",
+  "preextension_max_full_path": 261,
+  "protected_preextension_files": {
+    "docs/engineering/agent-directive-surface/evidence/VREC-ADS-001-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/agent-directive-surface/evidence/VREC-ADS-002-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/agent-directive-surface/verification-records/VREC-ADS-001.md": {
+      "bytes": 2057,
+      "git_blob": "e9277bb56f4ef671954535f33b7b11a3d2418c41",
+      "sha256": "45878328b0868bda38b718aae63aa4b62d7b0354082b5f88473667436676863d"
+    },
+    "docs/engineering/agent-directive-surface/verification-records/VREC-ADS-002.md": {
+      "bytes": 2001,
+      "git_blob": "6d9353ea0e7f0b14e83b9078f2350629f36cbd79",
+      "sha256": "f0fc4e52fc3996a9017f8c7474687ae5d54079efb86921d8c0112195d87ad081"
+    },
+    "docs/engineering/agentic-execution/evidence/VREC-AEX-001-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/agentic-execution/evidence/VREC-AEX-002-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/agentic-execution/evidence/VREC-AEX-003-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/agentic-execution/evidence/VREC-AEX-004-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/agentic-execution/evidence/VREC-AEX-005-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/agentic-execution/evidence/VREC-AEX-006-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/agentic-execution/evidence/VREC-AEX-007-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/agentic-execution/evidence/VREC-AEX-008-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/agentic-execution/verification-records/VREC-AEX-001.md": {
+      "bytes": 1471,
+      "git_blob": "0a7d451dd05201faff565156f3ba95591ec70d7a",
+      "sha256": "de086cbe6bb7e090300c96849a866732bc3a12ed04f45a31aaadf9c119c95b59"
+    },
+    "docs/engineering/agentic-execution/verification-records/VREC-AEX-002.md": {
+      "bytes": 1471,
+      "git_blob": "47fdd6ca39ee8c0d895aa91e402c968d028c8d88",
+      "sha256": "7dffa90d6a4fc3ef2abcd0376f394105d3b9b3de29b119817f9c4a57b63df9ea"
+    },
+    "docs/engineering/agentic-execution/verification-records/VREC-AEX-003.md": {
+      "bytes": 1486,
+      "git_blob": "4f74fc31dbffe5d5f3717453dd74c1fb279ba698",
+      "sha256": "1a3f9c80ec11a2b7b9ec7e6cd04f93f7e482df72ed978ab6c4eecbad0360b11e"
+    },
+    "docs/engineering/agentic-execution/verification-records/VREC-AEX-004.md": {
+      "bytes": 1501,
+      "git_blob": "81ea2bda261295c00cfbc68453ba2e9666272cd4",
+      "sha256": "90074a47b844aceac71cdd5898ed36b4da532f0bdb1826940f1c9fae0b807601"
+    },
+    "docs/engineering/agentic-execution/verification-records/VREC-AEX-005.md": {
+      "bytes": 1486,
+      "git_blob": "a2bf865fc61b690fa3946a3d5ad1357cf8da09c4",
+      "sha256": "65f7f4dd0cb7de15e0e5b9679606ce2fcdaec67a2dbe95000e28dbc5a1235ba9"
+    },
+    "docs/engineering/agentic-execution/verification-records/VREC-AEX-006.md": {
+      "bytes": 1486,
+      "git_blob": "b302a812a4febe59ed1067d9644fff30190f951d",
+      "sha256": "c120e1f0c6cea682c0d18aa6af264657fa8423a4c454e170301af2ad2a8f1abb"
+    },
+    "docs/engineering/agentic-execution/verification-records/VREC-AEX-007.md": {
+      "bytes": 1486,
+      "git_blob": "f48321991ffc7a11dffda3361831cbcc1635ad4c",
+      "sha256": "ba0e00bdcccad20a329996c0983a459e713b2491ed7304d3a09cfce80e1e88eb"
+    },
+    "docs/engineering/agentic-execution/verification-records/VREC-AEX-008.md": {
+      "bytes": 1516,
+      "git_blob": "cb2bfe984d2ce610d521c68896d5a47661d20412",
+      "sha256": "0792f6eaac37daf329ddf7392d1d34ebd9f8f5d7befce942a2b257d7a4157db3"
+    },
+    "docs/engineering/aggregate-release/verification-records/VREC-AGR-001.md": {
+      "bytes": 1685,
+      "git_blob": "de0b95b6f6736e360d2c0af60c4e99749eb768a2",
+      "sha256": "70ca2fa1dde77ee4967bd902a543cef167ef8b557c926a8d5ece6b55b0af3f47"
+    },
+    "docs/engineering/artifact-authoring/evidence/VREC-AUT-001-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/artifact-authoring/evidence/VREC-AUT-002-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/artifact-authoring/evidence/VREC-AUT-003-evaluator.json": {
+      "bytes": 786,
+      "git_blob": "b831168fdf392f726e61822c57ea4d84dd0542e1",
+      "sha256": "1e713a859270491fe587d79b3b499a1a077d1c7dc9e588260ef8adc5b429f5cf"
+    },
+    "docs/engineering/artifact-authoring/evidence/VREC-AUT-004-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "869e42a451b218f67d8799007eea729b8d5332a6",
+      "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+    },
+    "docs/engineering/artifact-authoring/evidence/VREC-AUT-005-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "43178f539e832d57ece629053c45254923ec71c2",
+      "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+    },
+    "docs/engineering/artifact-authoring/evidence/VREC-AUT-006-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "0cb0757dc294cb290f047d662e8ef0f6e72e0292",
+      "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+    },
+    "docs/engineering/artifact-authoring/verification-records/VREC-AUT-001.md": {
+      "bytes": 2069,
+      "git_blob": "9b35832f1f14ee454e5d07affb856b4e01094a9e",
+      "sha256": "dea5a86ae0ac25d45bb869828131cf79304ce32c18681e5b29091607c59f9206"
+    },
+    "docs/engineering/artifact-authoring/verification-records/VREC-AUT-002.md": {
+      "bytes": 2253,
+      "git_blob": "6337a13c041b5abb3a80bbb09c903017c271939b",
+      "sha256": "3c70e57fc4706288f01158d263205b32ce154459b1aadab5dc2e48c426103ba9"
+    },
+    "docs/engineering/artifact-authoring/verification-records/VREC-AUT-003.md": {
+      "bytes": 2121,
+      "git_blob": "b42c2483ebc10dea4e544b437096445bd5796057",
+      "sha256": "0a119a072b8fc5de8d0b0491bbf0cca0c533304ccb9d416e1af4d9f5f2a35000"
+    },
+    "docs/engineering/artifact-authoring/verification-records/VREC-AUT-004.md": {
+      "bytes": 2878,
+      "git_blob": "a3455662562ecc170f9a268e57205b35ab20946d",
+      "sha256": "7a190f19b0215b1deba81ad364dc64725d6b1b8bc1d6ec439fee312fb4b12ddd"
+    },
+    "docs/engineering/artifact-authoring/verification-records/VREC-AUT-005.md": {
+      "bytes": 3542,
+      "git_blob": "5d91d5ecb6e89a4add3b96db0f0e0b0f27a859f8",
+      "sha256": "f8b4b0b1b63efe3b791ac5e63a0fcf81d36c48ca1126887a7a544fad4ce9da4f"
+    },
+    "docs/engineering/artifact-authoring/verification-records/VREC-AUT-006.md": {
+      "bytes": 3794,
+      "git_blob": "8baa9e0426f303f21f208dca6693fbaa3a228239",
+      "sha256": "1977478078241cac10ca8bc63f114ba83fc1a36aff5ce0b58d235a5abae10210"
+    },
+    "docs/engineering/ci-pipeline/evidence/VREC-CIP-001-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/ci-pipeline/evidence/VREC-CIP-002-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/ci-pipeline/evidence/VREC-CIP-003-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/ci-pipeline/evidence/VREC-CIP-004-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/ci-pipeline/evidence/VREC-CIP-005-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/ci-pipeline/evidence/VREC-CIP-006-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "17a178e826060f150140d8412726cc1a7a8eb9e3",
+      "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+    },
+    "docs/engineering/ci-pipeline/evidence/VREC-CIP-007-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "43178f539e832d57ece629053c45254923ec71c2",
+      "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+    },
+    "docs/engineering/ci-pipeline/evidence/VREC-CIP-008-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "0cb0757dc294cb290f047d662e8ef0f6e72e0292",
+      "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+    },
+    "docs/engineering/ci-pipeline/verification-records/VREC-CIP-001.md": {
+      "bytes": 2261,
+      "git_blob": "b94886d99c49c41f30d508323062603a7c0ef636",
+      "sha256": "9b2e6f38ede608ec94095e1b89766975e167b5df82cb02eb0abcebecd647baeb"
+    },
+    "docs/engineering/ci-pipeline/verification-records/VREC-CIP-002.md": {
+      "bytes": 2793,
+      "git_blob": "23c5956ce4ca5caa5dd097d92a3370a94bf6aa6e",
+      "sha256": "4b8bb3d485879f1058d4ab626f7fca069212cc1abed7dbc783f71ca5c22ab802"
+    },
+    "docs/engineering/ci-pipeline/verification-records/VREC-CIP-003.md": {
+      "bytes": 2114,
+      "git_blob": "e98a2c3e06c352de88f8e44c5a681cef4bc0ef8f",
+      "sha256": "f6a6a17e3b61af2f1c3126e80caa01cf13ee60755a502a5f424fd8a84d5a3be4"
+    },
+    "docs/engineering/ci-pipeline/verification-records/VREC-CIP-004.md": {
+      "bytes": 2385,
+      "git_blob": "1ac7abc26e409d142ad381ac3fe0549ebd8d2be9",
+      "sha256": "5e842a892d6283bab4767913eca0fdf62414d0391a6565ac0e727deb79fc34e3"
+    },
+    "docs/engineering/ci-pipeline/verification-records/VREC-CIP-005.md": {
+      "bytes": 1846,
+      "git_blob": "948ae7bb74cf4cca93cbe3a67a1d82305de75112",
+      "sha256": "8a38ffe0dc2799e1a96f23acc989fb7acbae635521d40a5bc5c0fd1cb64322ab"
+    },
+    "docs/engineering/ci-pipeline/verification-records/VREC-CIP-006.md": {
+      "bytes": 3133,
+      "git_blob": "c38784ad2c73fee4072afff5bf80fd056d43b1da",
+      "sha256": "be13c31ba4fd7ff2c6d598c205de29d9ce8baa2a943d230bea72bd5a9c54f916"
+    },
+    "docs/engineering/ci-pipeline/verification-records/VREC-CIP-007.md": {
+      "bytes": 3727,
+      "git_blob": "a66f3fe4cca2ba59ccaefc6af4be217355553af7",
+      "sha256": "67fcc3d1626172db70e672927e95e1daec88a7db1ba23471d3c3db70aa111ef0"
+    },
+    "docs/engineering/ci-pipeline/verification-records/VREC-CIP-008.md": {
+      "bytes": 3550,
+      "git_blob": "1eabd74b687003e47c5e7f0bd7b1dc480d311328",
+      "sha256": "2a579e67b16918038344c277c94fc0272e81b8ee68233644d0b883a1d45c5eb4"
+    },
+    "docs/engineering/dashboard-publication/evidence/VREC-DPG-002-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "6c9a8e34340c8eb5150a73104ee6179042b6d6c4",
+      "sha256": "21ded06932d284d3ab2145b5ba7b9d5d3fc40997da8b047f7fb6f9f164910044"
+    },
+    "docs/engineering/dashboard-publication/verification-records/VREC-DPG-001.md": {
+      "bytes": 1535,
+      "git_blob": "70243c1536416320f861f0ae3abf3d319a928b6c",
+      "sha256": "e7b4880fbdbb080a0dca941ada0aabe20cc68c27eb736e9d0d946db3f7e3f7c2"
+    },
+    "docs/engineering/dashboard-publication/verification-records/VREC-DPG-002.md": {
+      "bytes": 2609,
+      "git_blob": "5b29825c4d2d60f945b2afe2134c478629850bd2",
+      "sha256": "dd997895a43d76880b3e3c726380f1111b4de6766481e12524bf640b018eec39"
+    },
+    "docs/engineering/decision-management/evidence/VREC-DCM-001-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "17a178e826060f150140d8412726cc1a7a8eb9e3",
+      "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+    },
+    "docs/engineering/decision-management/verification-records/VREC-DCM-001.md": {
+      "bytes": 2558,
+      "git_blob": "9a360a876ab306f227fa52199464668c9d4cc6d2",
+      "sha256": "2a14a1b8437b0bb09b7ba46762a24648b37689cda2684b31f0b2369d794b58d6"
+    },
+    "docs/engineering/evidence-keying/verification-records/VREC-EVK-001.md": {
+      "bytes": 1910,
+      "git_blob": "d7a21e3e605c6d25759ef2f759fd9abeec976f94",
+      "sha256": "49d826a3f1a73f003552a4606a4cf2a6ffe5f74745473ec758ec9483bae87733"
+    },
+    "docs/engineering/evidence-keying/verification-records/VREC-EVK-002.md": {
+      "bytes": 1989,
+      "git_blob": "de36bdf5f0542542422daa0c248af21f06dc4f27",
+      "sha256": "d6d5ed0f16868bc42740999f81f63125f36db9d955ed8b7ff3f3bfcb2e214093"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-005-evaluator.json": {
+      "bytes": 786,
+      "git_blob": "b831168fdf392f726e61822c57ea4d84dd0542e1",
+      "sha256": "1e713a859270491fe587d79b3b499a1a077d1c7dc9e588260ef8adc5b429f5cf"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-009-evaluator.json": {
+      "bytes": 786,
+      "git_blob": "b831168fdf392f726e61822c57ea4d84dd0542e1",
+      "sha256": "1e713a859270491fe587d79b3b499a1a077d1c7dc9e588260ef8adc5b429f5cf"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-010-evaluator.json": {
+      "bytes": 786,
+      "git_blob": "b831168fdf392f726e61822c57ea4d84dd0542e1",
+      "sha256": "1e713a859270491fe587d79b3b499a1a077d1c7dc9e588260ef8adc5b429f5cf"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-011-evaluator.json": {
+      "bytes": 879,
+      "git_blob": "645c169348430bf698c7c3992f3a58fb7988fb28",
+      "sha256": "8d217a429db288836d69c843e6f0017c0be29a2b743f589a7fe28bfa8b1cf560"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-012-evaluator.json": {
+      "bytes": 879,
+      "git_blob": "645c169348430bf698c7c3992f3a58fb7988fb28",
+      "sha256": "8d217a429db288836d69c843e6f0017c0be29a2b743f589a7fe28bfa8b1cf560"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-013-evaluator.json": {
+      "bytes": 879,
+      "git_blob": "645c169348430bf698c7c3992f3a58fb7988fb28",
+      "sha256": "8d217a429db288836d69c843e6f0017c0be29a2b743f589a7fe28bfa8b1cf560"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-014-evaluator.json": {
+      "bytes": 879,
+      "git_blob": "645c169348430bf698c7c3992f3a58fb7988fb28",
+      "sha256": "8d217a429db288836d69c843e6f0017c0be29a2b743f589a7fe28bfa8b1cf560"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-015-evaluator.json": {
+      "bytes": 879,
+      "git_blob": "6fa296fcb2a8d3b7e27f11e2fe7b81c49e04a414",
+      "sha256": "e78737d57a52748c0381cddd376cd8627a9328f600210a957e5ddd308ef48d91"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-016-evaluator.json": {
+      "bytes": 879,
+      "git_blob": "6fa296fcb2a8d3b7e27f11e2fe7b81c49e04a414",
+      "sha256": "e78737d57a52748c0381cddd376cd8627a9328f600210a957e5ddd308ef48d91"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-017-evaluator.json": {
+      "bytes": 879,
+      "git_blob": "6fa296fcb2a8d3b7e27f11e2fe7b81c49e04a414",
+      "sha256": "e78737d57a52748c0381cddd376cd8627a9328f600210a957e5ddd308ef48d91"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-018-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "9353043318d59f44edf50989dc4bf8271d7396a0",
+      "sha256": "41578bab531e143cd9864870c9af1495aed7465eff512571387403aa734a1f26"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-019-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "9353043318d59f44edf50989dc4bf8271d7396a0",
+      "sha256": "41578bab531e143cd9864870c9af1495aed7465eff512571387403aa734a1f26"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-020-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "9353043318d59f44edf50989dc4bf8271d7396a0",
+      "sha256": "41578bab531e143cd9864870c9af1495aed7465eff512571387403aa734a1f26"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-021-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "9353043318d59f44edf50989dc4bf8271d7396a0",
+      "sha256": "41578bab531e143cd9864870c9af1495aed7465eff512571387403aa734a1f26"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-022-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "869e42a451b218f67d8799007eea729b8d5332a6",
+      "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-023-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "869e42a451b218f67d8799007eea729b8d5332a6",
+      "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-024-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "869e42a451b218f67d8799007eea729b8d5332a6",
+      "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-025-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "869e42a451b218f67d8799007eea729b8d5332a6",
+      "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-026-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "869e42a451b218f67d8799007eea729b8d5332a6",
+      "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-027-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "869e42a451b218f67d8799007eea729b8d5332a6",
+      "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-028-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "aef01322b8d07c436a313cb62341969ebb412021",
+      "sha256": "c5baebb5b7d3c7cc04940aef92872da30321a6bd15d0478309f49ba224a49e0f"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-029-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "17a178e826060f150140d8412726cc1a7a8eb9e3",
+      "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-030-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "88c3f8dcfa00a082011e9320b40d5dd268ef5c87",
+      "sha256": "8c10a3ea2956baff8bfa875c658a98aa7db772f924b38557ad05c819a5f88a2d"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-031-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "43178f539e832d57ece629053c45254923ec71c2",
+      "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-032-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "43178f539e832d57ece629053c45254923ec71c2",
+      "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-033-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "43178f539e832d57ece629053c45254923ec71c2",
+      "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-034-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "43178f539e832d57ece629053c45254923ec71c2",
+      "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-035-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "43178f539e832d57ece629053c45254923ec71c2",
+      "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-036-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "43178f539e832d57ece629053c45254923ec71c2",
+      "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-037-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "43178f539e832d57ece629053c45254923ec71c2",
+      "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-038-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "43178f539e832d57ece629053c45254923ec71c2",
+      "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-039-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "43178f539e832d57ece629053c45254923ec71c2",
+      "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+    },
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-040-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "43178f539e832d57ece629053c45254923ec71c2",
+      "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-005.md": {
+      "bytes": 2304,
+      "git_blob": "b5ab3f2618921c94f7ddc7dcf9de37816656d3a0",
+      "sha256": "b976847a837f9aca5f309f614e7dbef06753d64f47e21b3c53984139b957181b"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-009.md": {
+      "bytes": 2299,
+      "git_blob": "1ea7f11e8fb3e80be0dcfd809023d0c4d05391d5",
+      "sha256": "6daa5279280c20f8a04f6373a2ca7116ad7094066ab7731345d94888c2840882"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-010.md": {
+      "bytes": 2450,
+      "git_blob": "f59aa1e2053ebb305cbd3378f216c2c412dc0b15",
+      "sha256": "eff8d3241b5d7e49172a00ae9715d9132a5c4059464cfa20bcba0f91b52473d6"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-011.md": {
+      "bytes": 2529,
+      "git_blob": "7816966efe2d1dfc3567974445fe814bd80b1c5b",
+      "sha256": "6f22a88d3de1ec331f3f441a6bca87cbf3ababcb7bdea11e4b61739ec4e48f3a"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-012.md": {
+      "bytes": 2389,
+      "git_blob": "b96bb46c3f9278cc955af3e61316bbe919fd1867",
+      "sha256": "585eadcdca9dfe05316530280b9416b0adad09f55a763db6610a15635ccc82c3"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-013.md": {
+      "bytes": 2717,
+      "git_blob": "47d32ed79d1043677c2cd08d4b63f701773e1516",
+      "sha256": "162aba9047c7505ebf87ffb019306dec826c7250bfef347eef2e89dffa534a67"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-014.md": {
+      "bytes": 2745,
+      "git_blob": "39d211b241c8fdd1a702337de16804fa1c53c9e7",
+      "sha256": "0c466fd9c0ade649fc8743ae3ce68cdf84220edcbae2b3c0ed1ac8c227052761"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-015.md": {
+      "bytes": 2717,
+      "git_blob": "4d7351d8928d4f7c7b74ca9272df8774e139001c",
+      "sha256": "9f8a393a935b4ac6eda2dc0252c7841ea5ea513fbcfa640ca843e4a1be7a8987"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-016.md": {
+      "bytes": 2895,
+      "git_blob": "b2ac4024dc8a32a613eb2044da6e24be973ca2e2",
+      "sha256": "efae240466d6d8a3e63b7f5c2d9aa70e8a1ce45e10e498df2a0e7ea705ea6bec"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-017.md": {
+      "bytes": 2751,
+      "git_blob": "d3aedfa3c539df9ce66b65e634d418dc9cfa2630",
+      "sha256": "9a28f8c89cfa3b841bb5939ad3e002dcef6a4fe68eeda30d90ffd17e2885813e"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-018.md": {
+      "bytes": 2707,
+      "git_blob": "9a2319ac0a3bafaa98cb6e958108b65f198e24e3",
+      "sha256": "f786645bfd0592cf4d281bfb42a63fd4c805bf79cbc2b0594045ed806071ae72"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-019.md": {
+      "bytes": 2831,
+      "git_blob": "25ea9a7e626cd4bdcfe59afaffd614970e6fe1e3",
+      "sha256": "c6b2fd52c4a7a635577afa60ecf300fd62e3bad364adc9214d360e05de9e4cd6"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-020.md": {
+      "bytes": 3085,
+      "git_blob": "047b5fc897e66755a641f2d1257260a3a49e60fe",
+      "sha256": "36f38f5d51fcaeaff245d9426c28fcb28a99bb773e1984f4265b180d509baeb5"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-021.md": {
+      "bytes": 3429,
+      "git_blob": "5b81ae55570f186e0432280202903749189cf373",
+      "sha256": "2995635efc58ee7f6f8d73cfee24bc1803a4a99e9891488ec3e192b6e39e81db"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-022.md": {
+      "bytes": 3422,
+      "git_blob": "d5d0ed89971d4c0431562641e127d73bedc55e96",
+      "sha256": "333e6b2d8b07263179f0576012ea10e7d4cdad366f6982ce49ae0c57d1ef8ebc"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-023.md": {
+      "bytes": 3303,
+      "git_blob": "f20cb7bd297272f3505a21eb36fb899496c341ec",
+      "sha256": "81c0bc9a51a7f4d1a728ef09986b2fe04e61f4c34477200a1888be970ed7772c"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-024.md": {
+      "bytes": 2901,
+      "git_blob": "149237dd8caed0ed14b9046ca90bf244a68d30f3",
+      "sha256": "ce5bf6e9ad1067a6d08aab0baf7fb3a4cff30b5cc02e7ba0e92439e9401aec97"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-025.md": {
+      "bytes": 2384,
+      "git_blob": "91854d5ac3e10bce6d0e4a6944bdeb0e11612614",
+      "sha256": "72c9b5c0659d689a8d275b2f7bc205b9a1783d6b454053e9207d9a1b611e4ead"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-026.md": {
+      "bytes": 3420,
+      "git_blob": "336ec63fff420a3ce7308bed7838562bca1f3339",
+      "sha256": "8136c21ba255ceb3b88bab30f3120367580af9cbbdd16df28e68b181957b64a7"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-027.md": {
+      "bytes": 2261,
+      "git_blob": "2d2791d7aec082015c0960fedd7944e0c1c79d19",
+      "sha256": "23cc9f9708653e2139f9af73fc89f84eebe2469c020eef0d7bd70754956eb7d7"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-028.md": {
+      "bytes": 3199,
+      "git_blob": "d44ccf66de6c34f09a9690e8baae3d5900e4129b",
+      "sha256": "c2395cbb4d69bbcea8dead87637288dc6b14d75bcc32431dd0186ba6f75f5080"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-029.md": {
+      "bytes": 2930,
+      "git_blob": "c2594cc98aad6854c53bcf52d76f62afb8085da5",
+      "sha256": "b7dceaa60135b6b33765f58ccdd74740ef641aadb79755a4e2c62c036214b95b"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-030.md": {
+      "bytes": 2100,
+      "git_blob": "5e18cd58887f322ced569beac760e6a6467a6639",
+      "sha256": "e4d6fd7f55e4e6ee6a5884ca38017d954649c0f576a32d97d935caacad4175b9"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-031.md": {
+      "bytes": 2143,
+      "git_blob": "8de1087ba2989a212d9dfe2cb4d40a3b1ab142cd",
+      "sha256": "67d1d0da0a3dbe73590f1ae84177186677a9701d0ed7928c04e9adab34cde8cb"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-032.md": {
+      "bytes": 2188,
+      "git_blob": "d0ca60cac7e774119b56ec7ee7d58160ac50eba9",
+      "sha256": "78249ea4f950165f23c2cfbce8cca63e74df46405f99e53f02323c5e957a2ac7"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-033.md": {
+      "bytes": 2145,
+      "git_blob": "644f16c2af2a4a5b22ba6487c05704098ccdb8bf",
+      "sha256": "51aeca10b42552d05f65c5d477cdae0a5c717b011318495132d2d5f28b02420e"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-034.md": {
+      "bytes": 2248,
+      "git_blob": "60d6713a4daf5b2ed2ddbfbca6775e28580c2cc7",
+      "sha256": "e505b2f96b93415578929467c014330594c8e6cdb72f19cb91ac466e3ab7bae1"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-035.md": {
+      "bytes": 2039,
+      "git_blob": "9b973ded807c8543fe30a045f412e8ee9a19c846",
+      "sha256": "72cd7f5436f0248f50c60e21e943d2c48795c7c3de5b3e34e517ad419bc3d6bf"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-036.md": {
+      "bytes": 1990,
+      "git_blob": "3e4d29ac8edb556784ad608951ded6152e094e9c",
+      "sha256": "851f5972c52f2975d991bd373946665d2d35dd61fff7b66fce90318f53771616"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-037.md": {
+      "bytes": 2248,
+      "git_blob": "1a03d324e1f5cb514dc32dceade3e01cf895a15a",
+      "sha256": "540f9baaddfbf43ddce8647bdba8f467856f96c9853a4b8294bbe1aae9f89b57"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-038.md": {
+      "bytes": 2104,
+      "git_blob": "a8cb062dabdb0fb5bfd1ae5f9c3bd71ab04489a4",
+      "sha256": "5498ceb3b0ca10b49aeb2856c3e005e0a8cc25614cac6b6a4429a2c00e68799c"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-039.md": {
+      "bytes": 2096,
+      "git_blob": "075313c031f49ef94eedb621ccb89060e2c166ed",
+      "sha256": "bd1f998f12da542009ecca2c30748452ab8e5d1dbd88cbf8d723a6313f926236"
+    },
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-040.md": {
+      "bytes": 2141,
+      "git_blob": "7a6f8902b5ddc341f2a0565d70c5f30da47edda3",
+      "sha256": "ef6eb252139695c0acb1576f7663ff603fc0eb3f1477c8fac2703ba06af900e4"
+    },
+    "docs/engineering/harness-distribution/evidence/VREC-DOC-007-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "17a178e826060f150140d8412726cc1a7a8eb9e3",
+      "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+    },
+    "docs/engineering/harness-distribution/evidence/VREC-DST-019-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "869e42a451b218f67d8799007eea729b8d5332a6",
+      "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+    },
+    "docs/engineering/harness-distribution/evidence/VREC-DST-020-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "aef01322b8d07c436a313cb62341969ebb412021",
+      "sha256": "c5baebb5b7d3c7cc04940aef92872da30321a6bd15d0478309f49ba224a49e0f"
+    },
+    "docs/engineering/harness-distribution/evidence/VREC-DST-021-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "88c3f8dcfa00a082011e9320b40d5dd268ef5c87",
+      "sha256": "8c10a3ea2956baff8bfa875c658a98aa7db772f924b38557ad05c819a5f88a2d"
+    },
+    "docs/engineering/harness-distribution/evidence/VREC-DST-022-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "43178f539e832d57ece629053c45254923ec71c2",
+      "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+    },
+    "docs/engineering/harness-distribution/evidence/VREC-DST-023-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "43178f539e832d57ece629053c45254923ec71c2",
+      "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+    },
+    "docs/engineering/harness-distribution/evidence/VREC-DST-024-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "0cb0757dc294cb290f047d662e8ef0f6e72e0292",
+      "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DOC-006.md": {
+      "bytes": 2299,
+      "git_blob": "b8b59e848adc98f1b1d6f56e5662ef559936ef29",
+      "sha256": "e2d94164f77571357d0264b6e6bf8849cc8d480011711aa9bb2f189c1c067143"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DOC-007.md": {
+      "bytes": 2224,
+      "git_blob": "dee30e9861a55cb138a06999f20a89737256a6b7",
+      "sha256": "47dae598454f90b59b093e1eaecc0a34fb0f949a5b2ed54a44146470887e368c"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-003.md": {
+      "bytes": 1272,
+      "git_blob": "edf831557024da0726c01b6ad925e0ee5cc8766b",
+      "sha256": "46d3d1e23fce19b616b82f082c7915e08776955bfd7b8ba2f2f0920781d5d108"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-004.md": {
+      "bytes": 1414,
+      "git_blob": "a444733ddd5414c8390ba435bb52ed4fbbb9ff4b",
+      "sha256": "288196dbf1dd3dd36250efcd1a382ea23900a867f5998efb496d87393c4b325c"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-005.md": {
+      "bytes": 1535,
+      "git_blob": "d38039fc0b5e826718267cde0aed8c5ad63ceb72",
+      "sha256": "1dcfe8aa44fa48f0cff0bfd36913b3ffb2ed086211c9caf1d00cfc6a9230d0ce"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-006.md": {
+      "bytes": 1633,
+      "git_blob": "3ebe3a3661eed5c473c9f90d9dc9cce9043a859b",
+      "sha256": "ad1d05b1655fb383156214f1b2b94922bc161d392229870c1c7476aafb7f567d"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-007.md": {
+      "bytes": 1589,
+      "git_blob": "3db7b2c9a2df379d6d77690938b65d8e11cdb311",
+      "sha256": "37b839d0715f81b17761e98018570849163774ccc5ec9f59b72b820450d494b0"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-008.md": {
+      "bytes": 1608,
+      "git_blob": "a4785006e600b2bc21408aeb4a63a4abc6a898ea",
+      "sha256": "4613db8a76ef2cb9b9470cc0cef214815dafe4317785ce588963b59b6125d30f"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-009.md": {
+      "bytes": 1433,
+      "git_blob": "e91582a00c625f709c4fba9def490ab018263cf0",
+      "sha256": "a2479c9bbf73ad21bc16a10ad0910bb379fba7721dc725c2166ace0cb7adfc5a"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-010.md": {
+      "bytes": 1447,
+      "git_blob": "f7da02b137e8d14b238775762cd78dac39cf8d26",
+      "sha256": "b28f246223f7f0700bf7f6d1d7a55f42810b3528ac7baaec7fe4270217421ffc"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-011.md": {
+      "bytes": 1530,
+      "git_blob": "430f8d7d2d73126133baa31963922c4db946b43c",
+      "sha256": "b833dfe059e89e21a1e8bcbae249ec42b4a50f50ddaff32f6d8a2a66a6e40517"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-012.md": {
+      "bytes": 1420,
+      "git_blob": "8f3dc97290fc9204c4c192b7e512cc9b3a35ba78",
+      "sha256": "a112d770f8d4e140b20fef1b2ee55031e43079cc801969a6930956a5f34776c4"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-013.md": {
+      "bytes": 1351,
+      "git_blob": "a86d6db77aed8826f7b9bef932e84df833e8ea39",
+      "sha256": "f190af7b0202ba20622db7187cc9cec2640b33e59195908b57d6b30802bdcb53"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-014.md": {
+      "bytes": 3485,
+      "git_blob": "3f46249fd39a5fe924936d132cd3b78ed77c5d11",
+      "sha256": "bb1adb8c683ae1d85c58c65e723173fda651d99518f5c16f4a03acdd1122434d"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-015.md": {
+      "bytes": 1963,
+      "git_blob": "3f0ca5546d9751386eea108508ed374c90fae9f3",
+      "sha256": "228ad0c0a0949e46b948bfd16376ef1de7be7f51808044ab69d5374fd7a71d6e"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-016.md": {
+      "bytes": 2049,
+      "git_blob": "c9f0a7a1db2d6e9fe33a9b5a3b64e97c4ade1f0c",
+      "sha256": "f496dfc4c169b4180159c39f1a5a3f79be781490340fc4988871c139181d2c21"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-017.md": {
+      "bytes": 2073,
+      "git_blob": "589fd2802b8aca4dd133e7d89728924cc0316c84",
+      "sha256": "41a439ece49998ef2ced68145ce55db591ea80d70d18607e2dfca22cf8c59036"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-018.md": {
+      "bytes": 6323,
+      "git_blob": "7a60dc9b74e954cca90db6e41e396e789b06387b",
+      "sha256": "c250bb56defc441f18f6ab53390f95f221bdbab1f5a4984169f1c762d7364bf0"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-019.md": {
+      "bytes": 2684,
+      "git_blob": "83cf4816cb097db087616e50e1bbc4cbfe09f3c0",
+      "sha256": "e803233852e56bc83e4547a72b41bb512c6e66b0fabb0b5ebab38017640ece08"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-020.md": {
+      "bytes": 1943,
+      "git_blob": "c930feaf64995f0dfb1f52504cbd744e7c8505ef",
+      "sha256": "cf6972e672f83958a9fbddb539e297725b64cf6bbf7121eaf89d41a73e1ab021"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-021.md": {
+      "bytes": 2172,
+      "git_blob": "5294f2edbfb46f7a35cdfbf830bba556b271469d",
+      "sha256": "559e462493321fa74c66a1e5a780b00be1e53b58fc9d81aece5d9ddc1789bef2"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-022.md": {
+      "bytes": 3318,
+      "git_blob": "eb1427c61909c666537eb8970419c4879543d9fd",
+      "sha256": "5d049d6419de047b44931750a41d887bcf91222fd48b11f3f2b10175ffb563ec"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-023.md": {
+      "bytes": 3748,
+      "git_blob": "5bc416a0bb2cdfdc444f30355d6806c9f39105dd",
+      "sha256": "fc4c82dc378d8d66795be009a8cf7bb6c93634be946eb4605d542aae450e00da"
+    },
+    "docs/engineering/harness-distribution/verification-records/VREC-DST-024.md": {
+      "bytes": 3714,
+      "git_blob": "7de312878758bb24879675f58afab47a7170d94d",
+      "sha256": "8a643aa41848334e5b5a5d64016c248ddd0988a17cd6921c1392bc704960178c"
+    },
+    "docs/engineering/hash-bound-integrity/evidence/VREC-HBI-001-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/hash-bound-integrity/evidence/VREC-HBI-002-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/hash-bound-integrity/evidence/VREC-HBI-003-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/hash-bound-integrity/evidence/VREC-HBI-004-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/hash-bound-integrity/evidence/VREC-HBI-005-evaluator.json": {
+      "bytes": 786,
+      "git_blob": "b831168fdf392f726e61822c57ea4d84dd0542e1",
+      "sha256": "1e713a859270491fe587d79b3b499a1a077d1c7dc9e588260ef8adc5b429f5cf"
+    },
+    "docs/engineering/hash-bound-integrity/verification-records/VREC-HBI-001.md": {
+      "bytes": 2502,
+      "git_blob": "caec005c9d711a7a2d297f7970aa880b2591c4b8",
+      "sha256": "7b677279ef0ff17aa130944a1fa20a9d529810948b9f405cc000e913e7350709"
+    },
+    "docs/engineering/hash-bound-integrity/verification-records/VREC-HBI-002.md": {
+      "bytes": 4193,
+      "git_blob": "2a394e0a10870da78ce642a43165d8c3eb1d5186",
+      "sha256": "a5d1baef9a05731d3a470324ba6c169ae0b52b1a31d32aa48ad79590c912da6c"
+    },
+    "docs/engineering/hash-bound-integrity/verification-records/VREC-HBI-003.md": {
+      "bytes": 10003,
+      "git_blob": "c2e13ac3ee2e0611d8f1bd7ffc37877164573fb3",
+      "sha256": "89e9a567b9bc115bad83f0d66be0470640fd4651af5753490b53e1be7b587c8f"
+    },
+    "docs/engineering/hash-bound-integrity/verification-records/VREC-HBI-004.md": {
+      "bytes": 10034,
+      "git_blob": "459296bc344633295585c3bbca7a6a979e6ca8d0",
+      "sha256": "778213eadc77e8d2a74c184b87f6d1082fee3f86be1af8bb1377d2804696f96e"
+    },
+    "docs/engineering/hash-bound-integrity/verification-records/VREC-HBI-005.md": {
+      "bytes": 2289,
+      "git_blob": "ff89a4374417375ba68ff2828099cf35ed73584e",
+      "sha256": "ca5443d6e9670f53c7fadf35abf21203398d0934b99433bdab27afc759af9447"
+    },
+    "docs/engineering/instruction-architecture/verification-records/VREC-IAR-001.md": {
+      "bytes": 1385,
+      "git_blob": "ec519cbe3ff860f8b5c1bb18857a32d56b44b637",
+      "sha256": "5001e08fc7d792f101bbca55694df9ca7af93c0c95ac04dd84812c843e8767a4"
+    },
+    "docs/engineering/instruction-architecture/verification-records/VREC-IAR-002.md": {
+      "bytes": 1802,
+      "git_blob": "52b197c3d40745de034729f0d1be69c7ae579b6c",
+      "sha256": "f41af82369f3b9ea2d05b4283d728d86b85cd2c9ca8dd86dcc91aa9e3b9c4f69"
+    },
+    "docs/engineering/instruction-architecture/verification-records/VREC-IAR-003.md": {
+      "bytes": 1440,
+      "git_blob": "8fbd5b8e94c9a92eef131e1b146906342fd8f490",
+      "sha256": "af3c8907977b915397897c97162b9236a68f0bc87cedb5c534089c6f0831d792"
+    },
+    "docs/engineering/instruction-architecture/verification-records/VREC-IAR-004.md": {
+      "bytes": 1427,
+      "git_blob": "026d404d43b921c35dd6b1e802fae145581d0090",
+      "sha256": "7770ace222658b7eb028d2dd7417d578fa749b60574dee7fcbe0df960b66f9c7"
+    },
+    "docs/engineering/instruction-architecture/verification-records/VREC-IAR-006.md": {
+      "bytes": 1404,
+      "git_blob": "5aac5ce52a7a461a4e5fc0d7dbdc56b5d9d859a2",
+      "sha256": "053a28ea2dc2426b3dfb7fb03de9dbd419e3132fb25f07d1b2bce9b849677102"
+    },
+    "docs/engineering/instruction-architecture/verification-records/VREC-IAR-007.md": {
+      "bytes": 1404,
+      "git_blob": "fe3c31fa2a749d3e48d45ae9eeb7fbbac88c2619",
+      "sha256": "9b1c08b882f79027885c806254c17f23be84dd006355b7a1a9db20c38c9f9d60"
+    },
+    "docs/engineering/instruction-architecture/verification-records/VREC-IAR-008.md": {
+      "bytes": 4810,
+      "git_blob": "e5e21a535c4eacfbb97799716782ceffee19a6fc",
+      "sha256": "6ba871c9bfd7da5acc8e43db1d55edc0484e3df90416abe2e3014937467db3c4"
+    },
+    "docs/engineering/integration-package/evidence/VREC-IPK-001-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/integration-package/verification-records/VREC-IPK-001.md": {
+      "bytes": 5630,
+      "git_blob": "0e6f5f36b961d3a47e36610df34495c09fe76d8f",
+      "sha256": "94f6d4bfc196c4f86f249ac163f271e0052be9d6cb00006e709c1d68784e5ab6"
+    },
+    "docs/engineering/legacy-release-evidence/evidence/VREC-LRE-001-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/legacy-release-evidence/evidence/VREC-LRE-002-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "869e42a451b218f67d8799007eea729b8d5332a6",
+      "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+    },
+    "docs/engineering/legacy-release-evidence/verification-records/VREC-LRE-001.md": {
+      "bytes": 1485,
+      "git_blob": "80c63ddb39de895f6c526e0c4463c0f11416236f",
+      "sha256": "b1a118b8784de6733028a8acb0047f592260dfc6787960ca83a8755066171864"
+    },
+    "docs/engineering/legacy-release-evidence/verification-records/VREC-LRE-002.md": {
+      "bytes": 3027,
+      "git_blob": "a9984c7c72b8edd5ceb0593f5fb4c7d285dbed99",
+      "sha256": "ffac9b9c4c83b6a52a43cbf4a0a6d7a4ce2952cc57eb2b6b42c6b8dc189c5e38"
+    },
+    "docs/engineering/plugin-integration/evidence/VREC-PLG-001-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "0cb0757dc294cb290f047d662e8ef0f6e72e0292",
+      "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+    },
+    "docs/engineering/plugin-integration/evidence/VREC-PLG-002-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "0cb0757dc294cb290f047d662e8ef0f6e72e0292",
+      "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+    },
+    "docs/engineering/plugin-integration/evidence/VREC-PLG-003-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "0cb0757dc294cb290f047d662e8ef0f6e72e0292",
+      "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+    },
+    "docs/engineering/plugin-integration/evidence/VREC-PLG-004-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "0cb0757dc294cb290f047d662e8ef0f6e72e0292",
+      "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+    },
+    "docs/engineering/plugin-integration/evidence/VREC-PLG-005-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "0cb0757dc294cb290f047d662e8ef0f6e72e0292",
+      "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+    },
+    "docs/engineering/plugin-integration/evidence/VREC-PLG-006-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "0cb0757dc294cb290f047d662e8ef0f6e72e0292",
+      "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+    },
+    "docs/engineering/plugin-integration/evidence/VREC-PLG-007-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "0cb0757dc294cb290f047d662e8ef0f6e72e0292",
+      "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+    },
+    "docs/engineering/plugin-integration/evidence/VREC-PLG-008-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "0cb0757dc294cb290f047d662e8ef0f6e72e0292",
+      "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+    },
+    "docs/engineering/plugin-integration/evidence/WO-PLG-011/native-path-map.json": {
+      "bytes": 25302,
+      "git_blob": "8ede0d7cb799e2bc1cb025df7a68a271a494c71c",
+      "sha256": "865a8b516aae860d148fd37316bcf11646f980e9122207f4cc5dd15d501dc083"
+    },
+    "docs/engineering/plugin-integration/evidence/WO-PLG-017/path-plan.json": {
+      "bytes": 25409,
+      "git_blob": "194bd88f4f1c0807019c06ca88559ac71d4723f1",
+      "sha256": "37031560322c962987513e8950b37503a642c6e474cc2a031822870467659aa9"
+    },
+    "docs/engineering/plugin-integration/verification-records/VREC-PLG-001.md": {
+      "bytes": 5700,
+      "git_blob": "4bb595a8a3482b4b714125cfa92b5b7e549d20f0",
+      "sha256": "6aa1085f3a20952d42835a4f96619faeb777cc29f4a3f1c67ff4ec781b65ffbd"
+    },
+    "docs/engineering/plugin-integration/verification-records/VREC-PLG-002.md": {
+      "bytes": 6036,
+      "git_blob": "65b6f2b1a32cad96ac27283e049d6527b517d5e5",
+      "sha256": "bea77cda56a5ec143db0a4ffd6afd55614f457386a19aa9c5c1f045f88d33c31"
+    },
+    "docs/engineering/plugin-integration/verification-records/VREC-PLG-003.md": {
+      "bytes": 18384,
+      "git_blob": "626ed7b7fa241633e0bec69047a1cf828f880a3f",
+      "sha256": "ed19cff6c28e6416c38a0d126de204970fc104eacbe94e6d373e22cdb3522ab3"
+    },
+    "docs/engineering/plugin-integration/verification-records/VREC-PLG-004.md": {
+      "bytes": 19193,
+      "git_blob": "e6550464b4cf10e39dc0d28e88e2df660d663954",
+      "sha256": "519e1a6640f506239cc3fa394aa8172609ed3b8cf70dce1e930d29fa35536fab"
+    },
+    "docs/engineering/plugin-integration/verification-records/VREC-PLG-005.md": {
+      "bytes": 25014,
+      "git_blob": "fafc8b51969f31f0c36d10131c03204a4e772d76",
+      "sha256": "ad11b1e7c34c115a65a706dbf75f0dab282255df52d45c97482155bed90c3c3b"
+    },
+    "docs/engineering/plugin-integration/verification-records/VREC-PLG-006.md": {
+      "bytes": 20451,
+      "git_blob": "6da36f05b520f6f46f869558d7842b7dfed48095",
+      "sha256": "a25e2d0de48b85218cabf0a3e7200a5774d0783fb1cc1eca29f41e27152f993b"
+    },
+    "docs/engineering/plugin-integration/verification-records/VREC-PLG-007.md": {
+      "bytes": 8904,
+      "git_blob": "0eab9961442ba25eecce32bfbd334329e815e14c",
+      "sha256": "7244d9227e812a3ad02a5a94d1c3c2a83083586c5b2ace9c739308f9aa8a11a5"
+    },
+    "docs/engineering/plugin-integration/verification-records/VREC-PLG-008.md": {
+      "bytes": 11850,
+      "git_blob": "e27f9ff94dbbb36877510346225788c271c7c359",
+      "sha256": "64404dbc6d0ae075b643d0e2c6c1cf25ddb3670bce62e2c901bae7d135eba950"
+    },
+    "docs/engineering/portable-managed-integrity/verification-records/VREC-PMI-001.md": {
+      "bytes": 1449,
+      "git_blob": "c9414a462a4e69dfaadfc7b5a74c04a2b1615bf2",
+      "sha256": "645331fd549e7035f55ab00c40d21d47a5ee214196871010dbc09dc659dfb8ea"
+    },
+    "docs/engineering/pypi-publication/verification-records/VREC-PYP-001.md": {
+      "bytes": 1366,
+      "git_blob": "eb934ff2e75f8bccc97777ca007fbc5ae7d51bc9",
+      "sha256": "4e4a27aaaf207d23f4c72bd7716602015cdad1a584bb8f13bd5136782e8009e9"
+    },
+    "docs/engineering/pypi-publication/verification-records/VREC-PYP-002.md": {
+      "bytes": 1518,
+      "git_blob": "ce40969050f4eb6939f1369cfeb7e2980211b0e1",
+      "sha256": "05647633f5323672c8a48bb71fd1e9afdef92f3c337734490143b85c240696c1"
+    },
+    "docs/engineering/release-0-10-0/evidence/VREC-SEH-019-evaluator.json": {
+      "bytes": 879,
+      "git_blob": "6fa296fcb2a8d3b7e27f11e2fe7b81c49e04a414",
+      "sha256": "e78737d57a52748c0381cddd376cd8627a9328f600210a957e5ddd308ef48d91"
+    },
+    "docs/engineering/release-0-10-0/verification-records/VREC-SEH-019.md": {
+      "bytes": 3538,
+      "git_blob": "db3260f1cc5c265328f108ae98dfe1ab7961bdfd",
+      "sha256": "aaa42b00002c7f886fa730e3cd9d04f0adfaa6852949fe07b65639b3e95a464b"
+    },
+    "docs/engineering/release-0-11-0/evidence/VREC-SEH-020-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "9353043318d59f44edf50989dc4bf8271d7396a0",
+      "sha256": "41578bab531e143cd9864870c9af1495aed7465eff512571387403aa734a1f26"
+    },
+    "docs/engineering/release-0-11-0/verification-records/VREC-SEH-020.md": {
+      "bytes": 3994,
+      "git_blob": "571d60bdd0154d935e1de9ce0f5eaf292b37f209",
+      "sha256": "58539d4941f2201200a0301933011066fc0e78ba345886d386cba1d113f94721"
+    },
+    "docs/engineering/release-0-12-0/evidence/VREC-SEH-021-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "869e42a451b218f67d8799007eea729b8d5332a6",
+      "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+    },
+    "docs/engineering/release-0-12-0/verification-records/VREC-SEH-021.md": {
+      "bytes": 4298,
+      "git_blob": "1c5be9ed985f2a446f3a9b3b57cde7c2a6306188",
+      "sha256": "ed971f7e3b09dfc00ac5d87fec7e359743c8960b99e9cc282d21f5ec93db9f5a"
+    },
+    "docs/engineering/release-0-13-0/evidence/VREC-SEH-022-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "aef01322b8d07c436a313cb62341969ebb412021",
+      "sha256": "c5baebb5b7d3c7cc04940aef92872da30321a6bd15d0478309f49ba224a49e0f"
+    },
+    "docs/engineering/release-0-13-0/verification-records/VREC-SEH-022.md": {
+      "bytes": 3329,
+      "git_blob": "62ffdfd63d13f8c97d07397bca0499950d2a941d",
+      "sha256": "b628dd362d5940ffc413db19dcecb9d524ad3e3936ef39e52ba88e5445e6ec23"
+    },
+    "docs/engineering/release-0-14-0/evidence/VREC-SEH-023-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "6c9a8e34340c8eb5150a73104ee6179042b6d6c4",
+      "sha256": "21ded06932d284d3ab2145b5ba7b9d5d3fc40997da8b047f7fb6f9f164910044"
+    },
+    "docs/engineering/release-0-14-0/verification-records/VREC-SEH-023.md": {
+      "bytes": 2990,
+      "git_blob": "c4f9822069d3b1f646e928882cec25e9612af019",
+      "sha256": "4766b585c0cd627d2efed4097d73ff39f9e92c989edb17b45d5644bb41081973"
+    },
+    "docs/engineering/release-0-15-0/evidence/VREC-SEH-024-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "17a178e826060f150140d8412726cc1a7a8eb9e3",
+      "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+    },
+    "docs/engineering/release-0-15-0/verification-records/VREC-SEH-024.md": {
+      "bytes": 3527,
+      "git_blob": "817b7ade60ba6f316ce1ea6656565c18fb09898b",
+      "sha256": "6bdb2e32d39500849148c9b095f3378d935e191eb6d6d8c08dbbf5a154f060d5"
+    },
+    "docs/engineering/release-0-16-0/evidence/VREC-SEH-025-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "88c3f8dcfa00a082011e9320b40d5dd268ef5c87",
+      "sha256": "8c10a3ea2956baff8bfa875c658a98aa7db772f924b38557ad05c819a5f88a2d"
+    },
+    "docs/engineering/release-0-16-0/verification-records/VREC-SEH-025.md": {
+      "bytes": 2803,
+      "git_blob": "6f3c9db6dfc1d67040b13427499d8d7ead317a3c",
+      "sha256": "b3590db54ef5934241ce163693227e649e27378c5a1fb08153d2206665d00c8b"
+    },
+    "docs/engineering/release-0-17-0/evidence/VREC-SEH-026-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "43178f539e832d57ece629053c45254923ec71c2",
+      "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+    },
+    "docs/engineering/release-0-17-0/verification-records/VREC-SEH-026.md": {
+      "bytes": 4471,
+      "git_blob": "5a1b2a277b5e0393ded96229366c0f0397dd1659",
+      "sha256": "1068548aae1df4d91fe4cd00e3db1ef284abd4174a8145c0b27e4b7420738fa5"
+    },
+    "docs/engineering/release-0-6-0/verification-records/VREC-SEH-008.md": {
+      "bytes": 8750,
+      "git_blob": "e9f882da5c081f9a672879ba13b9a95a53b3909a",
+      "sha256": "b41bbca2749baae11eb69c3fe5a6f74c36f59a8e36066809fe4ca061bdb45fd4"
+    },
+    "docs/engineering/release-0-6-0/verification-records/VREC-SEH-009.md": {
+      "bytes": 11520,
+      "git_blob": "a07b883fff565dc9a0e1183e5fb25f90eef6fd3d",
+      "sha256": "1130a244ee04ac5a0d15888382f0259f3c1f4be895f6eed8c9411b21fe4e679e"
+    },
+    "docs/engineering/release-0-6-0/verification-records/VREC-SEH-010.md": {
+      "bytes": 12581,
+      "git_blob": "d8a3442d93b382348c425b665789c6aee18b1fdb",
+      "sha256": "799751d68e10071b9f043c7c784505d606e52d68e5f2000babe6da58b9d04532"
+    },
+    "docs/engineering/release-0-6-0/verification-records/VREC-SEH-012.md": {
+      "bytes": 12965,
+      "git_blob": "f9a16b6a3c88d5edb7775740b8b017a8ea854b97",
+      "sha256": "0db46c8eb0d9fb1dee23019f617b6172b0c99cc8228fa3dd8b32bf03a2780e60"
+    },
+    "docs/engineering/release-0-7-0/evidence/VREC-SEH-014-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/release-0-7-0/verification-records/VREC-SEH-014.md": {
+      "bytes": 13819,
+      "git_blob": "a282ead2444d5f7d086d93ad562b1d65355858eb",
+      "sha256": "4520c4ec1fdd325e1029cda0cdbb0d54707a11cb32fe7af99835880496e2df18"
+    },
+    "docs/engineering/release-0-7-1/evidence/VREC-SEH-015-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/release-0-7-1/verification-records/VREC-SEH-015.md": {
+      "bytes": 1955,
+      "git_blob": "37513b41405eef0c92def0dd93aafd10422cf82b",
+      "sha256": "b891f6dbc3e5b080a9f6095200a836ca7654e0df8afdd66bc3de4757cbb5592a"
+    },
+    "docs/engineering/release-0-8-0/evidence/VREC-SEH-017-evaluator.json": {
+      "bytes": 879,
+      "git_blob": "5db015eca7fad73fe9f9177acfcb8b5ab9dccae6",
+      "sha256": "0a090f68cad9465498f702505f3c3d35830328a0ebad928be066831252cfabdd"
+    },
+    "docs/engineering/release-0-8-0/verification-records/VREC-SEH-017.md": {
+      "bytes": 3725,
+      "git_blob": "1dbdb67dd3ca417efae428d1fcc9b1be92bba483",
+      "sha256": "a364dbc3578d6753c18af6c96c1fd67a23833f907134f159a804feb69132b2ea"
+    },
+    "docs/engineering/release-0-9-0/evidence/VREC-SEH-018-evaluator.json": {
+      "bytes": 879,
+      "git_blob": "645c169348430bf698c7c3992f3a58fb7988fb28",
+      "sha256": "8d217a429db288836d69c843e6f0017c0be29a2b743f589a7fe28bfa8b1cf560"
+    },
+    "docs/engineering/release-0-9-0/verification-records/VREC-SEH-018.md": {
+      "bytes": 3472,
+      "git_blob": "8b206aa9cc7876cc5d5f9f4ef0b5bcdcee1f5310",
+      "sha256": "146b3f5969135ce72ec28128e0e1df4f047a4a4a8acd98862a7a41f5d04d2732"
+    },
+    "docs/engineering/release-0.2.0/verification-records/VREC-SEH-001.md": {
+      "bytes": 2388,
+      "git_blob": "44104194bbfcbf15885032cc15e6ea52e047cd04",
+      "sha256": "6293f3af244f1ab72de96fb0f426650f7b1d56c990a009f0f94e399261fc3f9e"
+    },
+    "docs/engineering/release-0.2.1/verification-records/VREC-SEH-002.md": {
+      "bytes": 1768,
+      "git_blob": "4d11e6e83c57c01c946bd45f34f8561b68cec990",
+      "sha256": "9bc508207f6c5626329ea90f91f467f831fd4564d54d19854149c14cfea0c410"
+    },
+    "docs/engineering/release-0.2.2/verification-records/VREC-SEH-004.md": {
+      "bytes": 2073,
+      "git_blob": "fd5b585f80b04f9f1a832d47f509466ac6a4fb20",
+      "sha256": "f2b25ee994428ba85fbb5a2c1d7c8444d63b5356276d5d8d95665b4d5ad93d25"
+    },
+    "docs/engineering/release-0.3.0/verification-records/VREC-SEH-005.md": {
+      "bytes": 4974,
+      "git_blob": "9bfdd4d040c2fca7ea37fe1c414964a3a6dbfb3d",
+      "sha256": "c7a78ea923c2e92e8a3edc3a2347b77f5285c9dae8de0cd388b2f04c8fffab5f"
+    },
+    "docs/engineering/release-0.4.0/verification-records/VREC-SEH-006.md": {
+      "bytes": 8348,
+      "git_blob": "72d0b76b57a4470e10cd6d11782a4115488cd0ce",
+      "sha256": "100c7ac1df345a212c831aceac23549959e72343913760092889f362f7b384f2"
+    },
+    "docs/engineering/release-0.4.1/verification-records/VREC-SEH-007.md": {
+      "bytes": 8927,
+      "git_blob": "32b813182d749b611021b93290141ae58e1c7fd8",
+      "sha256": "42351a1086596c11ceaae8d71216b172045786dd437d948ecbbc8737964612f1"
+    },
+    "docs/engineering/release-orchestration/evidence/VREC-RLO-004-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/release-orchestration/evidence/VREC-RLO-005-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/release-orchestration/evidence/VREC-RLO-006-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/release-orchestration/evidence/VREC-RLO-007-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/release-orchestration/evidence/VREC-RLO-008-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/release-orchestration/verification-records/VREC-RLO-001.md": {
+      "bytes": 1457,
+      "git_blob": "26aa0d13053cd43376804aba78eae76f4fab1f26",
+      "sha256": "3bf7578596440ce5f8501fdd909cd8acf117d03c7090a0e4c1a846d3dbe41308"
+    },
+    "docs/engineering/release-orchestration/verification-records/VREC-RLO-002.md": {
+      "bytes": 1481,
+      "git_blob": "43c3df37074d144f4636cef42a83332d09fca1ff",
+      "sha256": "baaadfa0194153efc76eed33d6804d49640a97ef1be505fca41b1a8e1e6f7aa7"
+    },
+    "docs/engineering/release-orchestration/verification-records/VREC-RLO-003.md": {
+      "bytes": 1389,
+      "git_blob": "ab5b5c6f2ae9914c119d699c591f892c29d5d1ca",
+      "sha256": "6e9a88c302e3bc5917706488857e941c101b4d81c42994551c26174a94837a3b"
+    },
+    "docs/engineering/release-orchestration/verification-records/VREC-RLO-004.md": {
+      "bytes": 1471,
+      "git_blob": "03c1b000a1f0f7bce81a631a27423fa2672e941e",
+      "sha256": "de493842c43390acb49b9336ad12b1bae1d4135c5cd9282a06fb14be5a2a9f3c"
+    },
+    "docs/engineering/release-orchestration/verification-records/VREC-RLO-005.md": {
+      "bytes": 10134,
+      "git_blob": "2b73a1bf72e99a351aafefd0d6c5dc64aec6f243",
+      "sha256": "cec244b95ab4951ce610df19b4be9e901ec1dd4c184318d9e7beff414aa6d042"
+    },
+    "docs/engineering/release-orchestration/verification-records/VREC-RLO-006.md": {
+      "bytes": 3457,
+      "git_blob": "cf28c576db40051031f905118a04dc9a9076a0ec",
+      "sha256": "7523d580750d9f1e8e51fa65f1d02e6764cec7621a289109fe799393e2bf5130"
+    },
+    "docs/engineering/release-orchestration/verification-records/VREC-RLO-007.md": {
+      "bytes": 2132,
+      "git_blob": "0128456d3bce10dca5eb0bcdf3ff5af04d1c6ecc",
+      "sha256": "358d1c2af4d0e08ee08b0a2c8ba717bd95e5bc3558ce6a41131d9636052d926e"
+    },
+    "docs/engineering/release-orchestration/verification-records/VREC-RLO-008.md": {
+      "bytes": 3410,
+      "git_blob": "b2ef0137e36760b1160e9573e97e97b41b893dba",
+      "sha256": "17b73eb846e6342fdab5ccb04bd5c47e6d98d59a3b6f46b21126f2ee3bebfec5"
+    },
+    "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-016-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-017-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-018-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-019-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-020-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-021-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-022-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-023-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-024-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-026-evaluator.json": {
+      "bytes": 780,
+      "git_blob": "d8b68e9f998f6b6661d6118b23654077a2cd6fbb",
+      "sha256": "150feaccd4cecd8ce88a42871dbda0de61caaea6ac8e6ca8493966cf2bb987fd"
+    },
+    "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-027-evaluator.json": {
+      "bytes": 780,
+      "git_blob": "d8b68e9f998f6b6661d6118b23654077a2cd6fbb",
+      "sha256": "150feaccd4cecd8ce88a42871dbda0de61caaea6ac8e6ca8493966cf2bb987fd"
+    },
+    "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-028-evaluator.json": {
+      "bytes": 879,
+      "git_blob": "645c169348430bf698c7c3992f3a58fb7988fb28",
+      "sha256": "8d217a429db288836d69c843e6f0017c0be29a2b743f589a7fe28bfa8b1cf560"
+    },
+    "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-029-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "869e42a451b218f67d8799007eea729b8d5332a6",
+      "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-001.md": {
+      "bytes": 1453,
+      "git_blob": "798caa1237ca41f3b0a70f84ee7d881e18d31975",
+      "sha256": "dd7e81952f7680c250b86db8fcd7a20fbfd04434c008653ef414d440b349e87b"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-002.md": {
+      "bytes": 1453,
+      "git_blob": "10942ea5708523bd591a6e55a37b8f38005ff7c3",
+      "sha256": "9801dd2ae8cc8c4700a3c861fbd650db0f1042ce80491789c57671212ccaf42f"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-003.md": {
+      "bytes": 1451,
+      "git_blob": "1f49998497fbd4357fa08667ce86c693bc9a958f",
+      "sha256": "025a5bedfa64ff384188f0b419f49e48a195e92838f60105e94a9bc645787a4d"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-004.md": {
+      "bytes": 3063,
+      "git_blob": "92a4cb52eaeaa55026c97e47b55ae9f59ed9b7c0",
+      "sha256": "68e7ecf4a9c9655c85e78014abcf53b4caf0094a526737023c8af9d085d99a07"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-005.md": {
+      "bytes": 2519,
+      "git_blob": "563cd9024a4a3a291e56b29ec24577cd36c1fe95",
+      "sha256": "6bc443f470801287e7ce07142798b7ff74e177dbb1e9f53b24f4006ed3737622"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-006.md": {
+      "bytes": 2249,
+      "git_blob": "ac7a8d7df9ede91587af29a42c1a79f7e9ec4d34",
+      "sha256": "412d265432a57a884ad594894d016e8161b4c0e0c504ebe1306d10e153dbe6e1"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-007.md": {
+      "bytes": 2196,
+      "git_blob": "2569bd0c7313278d8e661e58a3010d7cce19fcf6",
+      "sha256": "7078fba7ada4f2ed38c556f3bd55aea6e809fb02b466481352599db2f08777a0"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-008.md": {
+      "bytes": 2145,
+      "git_blob": "9dffcdea879977a3d7b02baae8a98c53d42ae5a8",
+      "sha256": "236b378354aa4c68d7ae0b12f94565e4f0b51d9ae4f64e21f8573b29a08ed781"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-009.md": {
+      "bytes": 2178,
+      "git_blob": "fdce5cef9d6cce6122c6938909efd6f61a82e928",
+      "sha256": "afbde97953fb44890af0777d58646af4b8d77d1a91c7936afad23296765647d6"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-010.md": {
+      "bytes": 2171,
+      "git_blob": "be8570524200e64ec03620d0c0cdadf55a257d98",
+      "sha256": "60976d8f644a19a2c21029fb741215c9391a6688436e20ab3ff4858f891b44f4"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-011.md": {
+      "bytes": 2175,
+      "git_blob": "6e066377f3b0207cd97521f93653a82e98bc0747",
+      "sha256": "51cc5eb78e206e3e48c8fe98dc575be598ba18a1eb76b3f5b7a032c51a7627bf"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-012.md": {
+      "bytes": 2383,
+      "git_blob": "3bf34f8a41831dfcdf63f6957984e6f44166efae",
+      "sha256": "673148814db2720dc387a136ed22c749c30a12e5f87deac1fa0ee206a83bf262"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-013.md": {
+      "bytes": 2305,
+      "git_blob": "eb2115a2b7f37be81706be6205dc7dfa298b1b25",
+      "sha256": "745cc9a64d384de07dab436f819bb3b8043aa801beb3cbbfb3a92e87a8197f70"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-014.md": {
+      "bytes": 1215,
+      "git_blob": "843479b65e3ed51e6ab2940ead75842afa68f458",
+      "sha256": "d204815da206ce6e5bc3032014024115a2fe0456f7f5c0eebf254a975268f762"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-015.md": {
+      "bytes": 1219,
+      "git_blob": "df5b9e92329e07f0bacf9d7ee3ca0c8d58e65375",
+      "sha256": "53bf81bb354a10cd3e6b7ce01f6ef3afaaf17aed20171979d5204003e3c60f3b"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-016.md": {
+      "bytes": 1494,
+      "git_blob": "6f196de2216d0e4757d7f75e049490ae501d87d4",
+      "sha256": "8db8a33003b5b99d9c47f71a4cc0b16b805b98fdb4d25a9bb1478b0d8fbab07e"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-017.md": {
+      "bytes": 2765,
+      "git_blob": "f16d20610e1338904960657570d42c5c830a108c",
+      "sha256": "877e6203804e4fd577c38afa14a09c7d9006d70013e8c0155a6ec16c634f1d73"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-018.md": {
+      "bytes": 1512,
+      "git_blob": "39a3780eb4a9a2fe55a6f0fc01247d6963212534",
+      "sha256": "b06032b8e6f60e1af062cd00d85011f32e208597014527c657060afb9aff4f2d"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-019.md": {
+      "bytes": 1501,
+      "git_blob": "0fa4bda865a1005563538c7854bbee5e30aae316",
+      "sha256": "dc6d8e0e823f5f65e578c4c6c68fa3d79da0bd9911acdaccf1772f3ae2822147"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-020.md": {
+      "bytes": 3418,
+      "git_blob": "878800d61bcaec622ecc5523dbf9be8abf3a000c",
+      "sha256": "b2dfcec57ecac7adcd6c2b913610d2a9a56268f4f18e1b15a8d29c0e596a067e"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-021.md": {
+      "bytes": 4301,
+      "git_blob": "d0de733386a75e9cd755defa3355b64e42e36377",
+      "sha256": "e8476ab5ebcd4af44329b217e310d133676a4a5da46ef2204f177f70b8801e22"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-022.md": {
+      "bytes": 4390,
+      "git_blob": "0bb5158fe99dc78a10ebdb09b5be5ada7dd4c615",
+      "sha256": "c9ea1d9bca5427bfe4199e55f701a41e0301ecd0e07c8520709fa56fdabe7062"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-023.md": {
+      "bytes": 3958,
+      "git_blob": "b071697f20c77875a6d9f4abfd3aa9de9604fc40",
+      "sha256": "b99270df9eac92cab3b5e3272c65d673924ab9f92739be1b62153597bb73bbc9"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-024.md": {
+      "bytes": 1487,
+      "git_blob": "98335c5f95c2e294b3e16428eef167d7c5bca252",
+      "sha256": "9966277ba52c4c27a8d086e1e98172f7e92507e1b11e46eac01f89e78f883ba8"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-026.md": {
+      "bytes": 2170,
+      "git_blob": "d8992b87d0aafd9b3bb8e0f0791a606ffd8caaff",
+      "sha256": "b698392a723952d9070bf492501883bbffe30d0a3a2ba3c0b861991d0fabad17"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-027.md": {
+      "bytes": 2170,
+      "git_blob": "56a1a8803312a33486ce3dd529ab18fb86aac575",
+      "sha256": "d27cf1c9b0b53b7e12c8110864c0637954793c931297575bad8fef35bc7dae4f"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-028.md": {
+      "bytes": 2560,
+      "git_blob": "392f977de1900e06e7bb3d4c43cebf5c80ab1ad9",
+      "sha256": "9f964c4610c103520ef9bfea48157237912988f7960263d49c1e99a94ff1a436"
+    },
+    "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-029.md": {
+      "bytes": 2874,
+      "git_blob": "2fee022b47cd457dcbe5e44122fd39223b90a326",
+      "sha256": "beba6cf8cea03e2491d718fd9fb85b8595859030b746aa7607e54b68c7db9369"
+    },
+    "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-003-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-004-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-005-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-006-evaluator.json": {
+      "bytes": 780,
+      "git_blob": "d8b68e9f998f6b6661d6118b23654077a2cd6fbb",
+      "sha256": "150feaccd4cecd8ce88a42871dbda0de61caaea6ac8e6ca8493966cf2bb987fd"
+    },
+    "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-007-evaluator.json": {
+      "bytes": 879,
+      "git_blob": "645c169348430bf698c7c3992f3a58fb7988fb28",
+      "sha256": "8d217a429db288836d69c843e6f0017c0be29a2b743f589a7fe28bfa8b1cf560"
+    },
+    "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-008-evaluator.json": {
+      "bytes": 879,
+      "git_blob": "6fa296fcb2a8d3b7e27f11e2fe7b81c49e04a414",
+      "sha256": "e78737d57a52748c0381cddd376cd8627a9328f600210a957e5ddd308ef48d91"
+    },
+    "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-009-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "9353043318d59f44edf50989dc4bf8271d7396a0",
+      "sha256": "41578bab531e143cd9864870c9af1495aed7465eff512571387403aa734a1f26"
+    },
+    "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-010-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "869e42a451b218f67d8799007eea729b8d5332a6",
+      "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+    },
+    "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-011-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "869e42a451b218f67d8799007eea729b8d5332a6",
+      "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+    },
+    "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-012-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "aef01322b8d07c436a313cb62341969ebb412021",
+      "sha256": "c5baebb5b7d3c7cc04940aef92872da30321a6bd15d0478309f49ba224a49e0f"
+    },
+    "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-013-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "6c9a8e34340c8eb5150a73104ee6179042b6d6c4",
+      "sha256": "21ded06932d284d3ab2145b5ba7b9d5d3fc40997da8b047f7fb6f9f164910044"
+    },
+    "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-014-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "17a178e826060f150140d8412726cc1a7a8eb9e3",
+      "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+    },
+    "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-015-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "88c3f8dcfa00a082011e9320b40d5dd268ef5c87",
+      "sha256": "8c10a3ea2956baff8bfa875c658a98aa7db772f924b38557ad05c819a5f88a2d"
+    },
+    "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-016-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "43178f539e832d57ece629053c45254923ec71c2",
+      "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+    },
+    "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-017-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "0cb0757dc294cb290f047d662e8ef0f6e72e0292",
+      "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+    },
+    "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-001.md": {
+      "bytes": 3110,
+      "git_blob": "bd1d7ae321df9093c78a6e379c441dfcdf21b481",
+      "sha256": "95a5935be8ec1290a2ac5ce05aac1e66c8ef212ce3c587fd53a7bc2793fc1933"
+    },
+    "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-003.md": {
+      "bytes": 1855,
+      "git_blob": "bb4597c5fb425e82f8808ab6158ee4ef38abea3a",
+      "sha256": "66f1d9022919e159bbb3e65d76729b70efb1c7ebfe4caee1474edf07907533d0"
+    },
+    "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-004.md": {
+      "bytes": 1476,
+      "git_blob": "4ed5f64dab2738c91a9da68ddf26356ab9fb7372",
+      "sha256": "97b9e6718b8923926f83ce1d4c2705a9353113c7dfc28c87db1cb34bf2e2617e"
+    },
+    "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-005.md": {
+      "bytes": 1700,
+      "git_blob": "4d7a468db8c79417de636da6e96cf486c3bbe9c5",
+      "sha256": "eef4b41fa7929cba191de1b4662845e83358de6ba2afed6ddc7f2cbd0cc9510f"
+    },
+    "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-006.md": {
+      "bytes": 1575,
+      "git_blob": "26f5651246a5c308f573945e055c89f812af3c07",
+      "sha256": "62d8e74880c4c178cd3d90fcbd54396b1fbe0ee1f62403ae9e8d685f00a70958"
+    },
+    "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-007.md": {
+      "bytes": 2489,
+      "git_blob": "c7c3a60d1518d747fe087fce307c26270c2ae526",
+      "sha256": "169a1cb0a6f7c06d6304abc58a28e72e0f43a2152736939cbc8fda820119df0f"
+    },
+    "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-008.md": {
+      "bytes": 2842,
+      "git_blob": "f6025be9e89d9475743c8232180742b07016ca62",
+      "sha256": "7f318f3689858f3186f366143f7713761a436da35a65bece0d9feacc50347228"
+    },
+    "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-009.md": {
+      "bytes": 2916,
+      "git_blob": "c75254965a4e23183d324eef01454c2860bbae40",
+      "sha256": "27bcd5f89a3e404346b2fd833e21baddb30dedf9a303273ffba435ad392f05d4"
+    },
+    "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-010.md": {
+      "bytes": 3264,
+      "git_blob": "ed0f1ad3e160ca1cb66c354f0fde4f77910d0e00",
+      "sha256": "4ef04d93f0227d414e66b96a46fa1bbd0585dab11138554a45a29297fe355527"
+    },
+    "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-011.md": {
+      "bytes": 3061,
+      "git_blob": "1f40cb470ea660ef0e29ba9f0c2c8f3b0ad8aa33",
+      "sha256": "7506acb72a9bb90fed0c75a5c95a967c0a89451e63c3891ab6b2edc12de415f0"
+    },
+    "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-012.md": {
+      "bytes": 2944,
+      "git_blob": "9a4472e2513b80dcc1a007ddad157aca4db7085a",
+      "sha256": "4f1313fc881c1529e533cec988650fd42ad059a73f9cf10eba4277b8d0dea747"
+    },
+    "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-013.md": {
+      "bytes": 2873,
+      "git_blob": "79075d987cda5899f619c6707db1ac2a66c93a24",
+      "sha256": "3cfb85b5607695ed91f29daa9b8b43b021e47108ab8fc1a07c3178d7d6b7b873"
+    },
+    "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-014.md": {
+      "bytes": 2701,
+      "git_blob": "cc7f722539f672579fc70092b8002d1b856ccd6d",
+      "sha256": "72db19254b63c96dfa4a1133e633aa81ac1e2b99615e4f965bcd2df061f1d07c"
+    },
+    "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-015.md": {
+      "bytes": 2710,
+      "git_blob": "bc96421ec349fba01a0d5b5c481260b844052f0c",
+      "sha256": "2e790dbc4b98a0ed7bc30d17f3d8b6be00da5747f71d2a03dcd70d234304581f"
+    },
+    "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-016.md": {
+      "bytes": 2271,
+      "git_blob": "f0dc336d37f606e84832212da6776703faa0e858",
+      "sha256": "cdd2f6d4250d301d86d3f07fac79c00d44bd64e828009fdb7ad42a102f072b5d"
+    },
+    "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-017.md": {
+      "bytes": 2348,
+      "git_blob": "eb74a628d4cf0bf346714673af0897dd665756f8",
+      "sha256": "b14286f49d568b7eb4900499ef0e1fdcd9e5f8b6d8d04ae106c291cd0fc9664a"
+    },
+    "docs/engineering/revision-provenance/verification-records/VREC-REV-001.md": {
+      "bytes": 1288,
+      "git_blob": "a2501639467bab5f70798ed235e6c0c91c430aa7",
+      "sha256": "40e77e5612874bf29b63e279e2c9ae37fa6aa205675aee79858044150731aeff"
+    },
+    "docs/engineering/risk-management/evidence/VREC-RSK-010-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "43178f539e832d57ece629053c45254923ec71c2",
+      "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+    },
+    "docs/engineering/risk-management/verification-records/VREC-RSK-010.md": {
+      "bytes": 2466,
+      "git_blob": "8f8da1fd39dec2157fae5fa42fe0896948487772",
+      "sha256": "d0664da548c8aa65879f1aedfa37a2a481085744632f8609282c420845caa85c"
+    },
+    "docs/engineering/root-cause-analysis/verification-records/VREC-RCA-001.md": {
+      "bytes": 1594,
+      "git_blob": "49d44ff8a8b47c185f1f708a63237f1c47471f45",
+      "sha256": "25241213c6d34f58deacab6e5610ce10cb3e6d4dc0fdc0624e4162f03a7f4157"
+    },
+    "docs/engineering/self-hosting-boundary/verification-records/VREC-SHB-001.md": {
+      "bytes": 2347,
+      "git_blob": "0f6dc864635e76ad51021330f5da6a01b26b869d",
+      "sha256": "33a18ae8f39ff22b849d20cbe2466b0da9f31f5ff9c4d4f5cd1fbd2c4266bdb2"
+    },
+    "docs/engineering/self-hosting-boundary/verification-records/VREC-SHB-002.md": {
+      "bytes": 1639,
+      "git_blob": "e508d6eb1f04ddafca7e0a1707783c4d3b54daa1",
+      "sha256": "16ae1173db86f3182321a7984aabdca9d8b40309d794b6e19292bd5db84e89fe"
+    },
+    "docs/engineering/technical-communication/evidence/VREC-TCM-001-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/technical-communication/evidence/VREC-TCM-002-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/technical-communication/evidence/VREC-TCM-003-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "869e42a451b218f67d8799007eea729b8d5332a6",
+      "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+    },
+    "docs/engineering/technical-communication/evidence/VREC-TCM-004-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "17a178e826060f150140d8412726cc1a7a8eb9e3",
+      "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+    },
+    "docs/engineering/technical-communication/evidence/VREC-TCM-005-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "17a178e826060f150140d8412726cc1a7a8eb9e3",
+      "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+    },
+    "docs/engineering/technical-communication/evidence/VREC-TCM-006-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "17a178e826060f150140d8412726cc1a7a8eb9e3",
+      "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+    },
+    "docs/engineering/technical-communication/evidence/VREC-TCM-007-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "17a178e826060f150140d8412726cc1a7a8eb9e3",
+      "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+    },
+    "docs/engineering/technical-communication/evidence/VREC-TCM-008-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "17a178e826060f150140d8412726cc1a7a8eb9e3",
+      "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+    },
+    "docs/engineering/technical-communication/evidence/VREC-TCM-009-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "88c3f8dcfa00a082011e9320b40d5dd268ef5c87",
+      "sha256": "8c10a3ea2956baff8bfa875c658a98aa7db772f924b38557ad05c819a5f88a2d"
+    },
+    "docs/engineering/technical-communication/evidence/VREC-TCM-011-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "0cb0757dc294cb290f047d662e8ef0f6e72e0292",
+      "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+    },
+    "docs/engineering/technical-communication/verification-records/VREC-TCM-001.md": {
+      "bytes": 1494,
+      "git_blob": "495b709455a7a6831c3ecc0f8e27cfa4085ef39f",
+      "sha256": "2ffbb3decc5903c20305fb29ef749d230f437c0b0dc28732b217fc8a7aa37c50"
+    },
+    "docs/engineering/technical-communication/verification-records/VREC-TCM-002.md": {
+      "bytes": 11257,
+      "git_blob": "3c8056e5bcf23fd4f58fe3b9307e2edbe3963d29",
+      "sha256": "2806d773eb296b56ea473d4390395d1ae3ebafe5b49397a421f92c212b4fdd45"
+    },
+    "docs/engineering/technical-communication/verification-records/VREC-TCM-003.md": {
+      "bytes": 2902,
+      "git_blob": "856604138ba759335941669adc2ce791ceed1d2a",
+      "sha256": "377945c1b263fd0c91a0b0dce6f1618fb06fda368bb1d2a1affa28f544932b91"
+    },
+    "docs/engineering/technical-communication/verification-records/VREC-TCM-004.md": {
+      "bytes": 2523,
+      "git_blob": "947987a5ff1f36d521bf9af61ce8e7ae5f195f9c",
+      "sha256": "339abc314eaa521d64dd5e9432a7fd5f4360a535e50b0d4d66cbcde47dab256f"
+    },
+    "docs/engineering/technical-communication/verification-records/VREC-TCM-005.md": {
+      "bytes": 2380,
+      "git_blob": "7869445cd7fed5d93000cc97926fc04513741003",
+      "sha256": "7b17f91ee092f36c5f45512525747d8d89fa6069ef3fb1998bd0d8de04ba7376"
+    },
+    "docs/engineering/technical-communication/verification-records/VREC-TCM-006.md": {
+      "bytes": 2503,
+      "git_blob": "91ddc7f6be333ae4c4d9b51ce3ca7747885a9ae2",
+      "sha256": "769a4ce9002fe9a74588ed9f7401537716f2606466c292054b642a75ff958eb4"
+    },
+    "docs/engineering/technical-communication/verification-records/VREC-TCM-007.md": {
+      "bytes": 2446,
+      "git_blob": "2149af6b423365b3afba6461385ec421a3949861",
+      "sha256": "b7133f8e2ee8eafa2bca58d5d8eae870f83daaa67f1321bedc053f6ffd43ab6f"
+    },
+    "docs/engineering/technical-communication/verification-records/VREC-TCM-008.md": {
+      "bytes": 2501,
+      "git_blob": "947e944cd882436bea0591b90e282bdf37890e81",
+      "sha256": "48a26fb7c0041225a69a403fec97784830416f1f3f90bfa243f13cf84f999a71"
+    },
+    "docs/engineering/technical-communication/verification-records/VREC-TCM-009.md": {
+      "bytes": 2963,
+      "git_blob": "e5071c6ee01796ed0477c6370a68b1613b2f14e2",
+      "sha256": "4b187b5a22680843477ff4b9f8f6110d053bf75f33e5329ad95920b596d0165d"
+    },
+    "docs/engineering/technical-communication/verification-records/VREC-TCM-011.md": {
+      "bytes": 2450,
+      "git_blob": "e6ceec3c55b24a4b9215b2f41bce684065cf107a",
+      "sha256": "15f34ab8882eed770d1bef57c38cbf7d679dc89b02bf2d510af4abca7b708ac6"
+    },
+    "docs/engineering/test-suite/evidence/VREC-TST-001-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/test-suite/evidence/VREC-TST-002-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/test-suite/evidence/VREC-TST-003-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/test-suite/evidence/VREC-TST-004-evaluator.json": {
+      "bytes": 875,
+      "git_blob": "43178f539e832d57ece629053c45254923ec71c2",
+      "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+    },
+    "docs/engineering/test-suite/verification-records/VREC-TST-001.md": {
+      "bytes": 2295,
+      "git_blob": "1329b6162fb0bfd7d26548c4af77103eeec9f557",
+      "sha256": "fbdae7874880500fb6bfb77214e4b0b692ea406ede338943d4aa532ad326241c"
+    },
+    "docs/engineering/test-suite/verification-records/VREC-TST-002.md": {
+      "bytes": 1992,
+      "git_blob": "0c2fb57d6c244145735741d0a19422376681b33a",
+      "sha256": "d6f5352e6f560b6648d8d1bc161ced295704ad3ced03dbe2fc71d743481f2dba"
+    },
+    "docs/engineering/test-suite/verification-records/VREC-TST-003.md": {
+      "bytes": 1866,
+      "git_blob": "a4f208a8de71ef918713a572b0dc4c252e9303a4",
+      "sha256": "b701e4f3c87d8958e8e2c660ed9d544f38a5200ac331b0b65a3ff3be8854a57c"
+    },
+    "docs/engineering/test-suite/verification-records/VREC-TST-004.md": {
+      "bytes": 2375,
+      "git_blob": "8e3524ebe3db3f30b7dca2b69a151598b1849454",
+      "sha256": "33e371cca8894ea62d9d7653167a7082e4b212ea31ab5a4b661be7431c19d750"
+    },
+    "docs/engineering/verification-records/VREC-DOC-003.md": {
+      "bytes": 1414,
+      "git_blob": "e57767ef182ac788c74e749bf07fa22c9390a866",
+      "sha256": "6b180aa4cba10231e4be6ffa78fee02249265a2b23965319b15d5a29e898eb10"
+    },
+    "docs/engineering/verification-records/VREC-DOC-005.md": {
+      "bytes": 1414,
+      "git_blob": "706a6e5d48a0ed81a9f281e0b8497d9ec4aa8a2b",
+      "sha256": "6df774ed069e1a4c7a248b2c3d2d7bda1dba67de036e7c10e887b96998ee4c45"
+    },
+    "docs/engineering/verification-records/VREC-IAR-005.md": {
+      "bytes": 1677,
+      "git_blob": "420ccffb9124b23c644b819fe72237dc8e343482",
+      "sha256": "03dae38902ccd6fc832cb40163574c4ff47100e4653291ad6f2bd18f60ee0b58"
+    },
+    "docs/engineering/verification-records/VREC-MNT-001.md": {
+      "bytes": 1936,
+      "git_blob": "469afac4349fab1a5a3a959d6ba952605c52d27b",
+      "sha256": "5b1617c20612d5f64e4ff4fdb72f0ab347fd75c0731c4edb884bd3ce61a51ed7"
+    },
+    "docs/engineering/verification-supersession/evidence/VREC-VSP-002-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/verification-supersession/verification-records/VREC-VSP-001.md": {
+      "bytes": 1321,
+      "git_blob": "767a9a4ae3fce1761e63ded2b747131928afad7b",
+      "sha256": "dec99691de6d723a532e4c80d5e772fdccc016fc6d126b11691b470e0ba6bc0e"
+    },
+    "docs/engineering/verification-supersession/verification-records/VREC-VSP-002.md": {
+      "bytes": 1479,
+      "git_blob": "53735adb09ed3f02462f318cd22fd49cbb485c12",
+      "sha256": "221e0601bc8cc6c6d8634036612fd39e3bdd2ab4bb78165fce4fd1896af1d48b"
+    },
+    "docs/engineering/work-order-assurance-classification/verification-records/VREC-WAC-001.md": {
+      "bytes": 1067,
+      "git_blob": "4e1f112de21dbc2c4c61e84735957ec1f055e25c",
+      "sha256": "4ed4dfd1e361936a429df7f2817d0916886991d8e42de1f08b68068ea5b573ce"
+    },
+    "docs/engineering/work-order-lifecycle/verification-records/VREC-WLC-001.md": {
+      "bytes": 1375,
+      "git_blob": "5719556a8f81408529451bcf5c9b6dac0ecd27fa",
+      "sha256": "40342d0e61d22da448b5092e3303c22f746a3501e178dfc08c2f9ad0e15ec00d"
+    },
+    "docs/engineering/workflow-execution/evidence/VREC-WEX-006-evaluator.json": {
+      "bytes": 873,
+      "git_blob": "231dff48673db7e5ed0089db17c0d7f29984a7ef",
+      "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+    },
+    "docs/engineering/workflow-execution/verification-records/VREC-WEX-001.md": {
+      "bytes": 1412,
+      "git_blob": "9d9c29ed16e8f1e0b1e79a1bf2c9911c0aaa0361",
+      "sha256": "a786fe56b84f6c9c997f2b374f96a4a33b251156c70bf1ba3a789133a3b12bda"
+    },
+    "docs/engineering/workflow-execution/verification-records/VREC-WEX-002.md": {
+      "bytes": 1412,
+      "git_blob": "14e69dc69e03fad9a81dd13164e7ebf646d33012",
+      "sha256": "fc7ded4b7231d6a476a0a736d8541032abbd10a8533118604c49533bbc09976e"
+    },
+    "docs/engineering/workflow-execution/verification-records/VREC-WEX-003.md": {
+      "bytes": 1412,
+      "git_blob": "a4e8acfeee742c3e25f080b08b938147d59938cf",
+      "sha256": "c5b7d87584ece44ee3b9f10826d277e5c9812883f0f4b89375dc47478a0a9292"
+    },
+    "docs/engineering/workflow-execution/verification-records/VREC-WEX-004.md": {
+      "bytes": 1434,
+      "git_blob": "2aa5161dc01e1a67b739d01001e467d2b3c8d16b",
+      "sha256": "4cfb5be835f5ebc39e8070ecc67fd8ade98fbb936da3039730d038c1fbbddc67"
+    },
+    "docs/engineering/workflow-execution/verification-records/VREC-WEX-005.md": {
+      "bytes": 1319,
+      "git_blob": "3ac2e8348b0fddb92264eeb68a05f50fce339365",
+      "sha256": "f68dc323b40147a5b1bdd905e8d8f00aec9b352350ee9fa599bf8ab1e0ee3693"
+    },
+    "docs/engineering/workflow-execution/verification-records/VREC-WEX-006.md": {
+      "bytes": 1473,
+      "git_blob": "22c9364ae8e18e3a54c477ebb95eeae65f6518ae",
+      "sha256": "a98ada5e0b7e921a7849b99b8bcaee26bbaeee65322cf9435cd833cc249452b2"
+    }
+  },
+  "schema": "wo017-extension-independent-v1",
+  "staging_map_path": "docs/engineering/plugin-integration/evidence/WO-PLG-017/staging-path-map.json",
+  "staging_max_full_path": 259,
+  "staging_root_characters": 77,
+  "updated_checker_read": false
+}

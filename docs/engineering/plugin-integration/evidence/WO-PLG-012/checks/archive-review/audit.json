@@ -1,0 +1,105 @@
+{
+  "candidate_commit": "6db8bd61d91a0785d79a7bb1db3b70f815f58d39",
+  "committed_scope_passed": true,
+  "coordinated_inventory_tamper_rejected": true,
+  "disposable_restored": true,
+  "full_build_run": false,
+  "full_source_suite_run": false,
+  "helper_behavior_rerun": false,
+  "native_guard": {
+    "archive": {
+      "argv": [
+        "git",
+        "-c",
+        "safe.directory=/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness",
+        "-C",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/se_harness",
+        "archive",
+        "--format=tar",
+        "--output=/tmp/hraw-caovotkr/candidate.tar",
+        "6db8bd61d91a0785d79a7bb1db3b70f815f58d39"
+      ],
+      "bytes": 138752000,
+      "git_pax_commit": "6db8bd61d91a0785d79a7bb1db3b70f815f58d39",
+      "members": {
+        "directories": 1689,
+        "other": 0,
+        "regular_files": 8127,
+        "total": 9816
+      },
+      "omission_reason": "Bulk Git archive and extracted tree remain outside retained evidence; exact stream is reproducible with recorded Git commit and argv.",
+      "path": "/tmp/hraw-caovotkr/candidate.tar",
+      "retained": false,
+      "sha256": "0b2577a1a27fcefb0858c1e0d212aa3badc1ad449129c28b54dc251bc017c178"
+    },
+    "candidate_commit": "6db8bd61d91a0785d79a7bb1db3b70f815f58d39",
+    "executable": "/mnt/c/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-linux-evaluators-20260910/0.16.0/bin/python",
+    "extracted_package_files": {
+      "REPORT.md": {
+        "bytes": 3269,
+        "sha256": "70e2f3502ef84853f79fd1227a08ebd964c739eac850522babdf69f7c7d6856f"
+      },
+      "audit.json": {
+        "bytes": 64833,
+        "sha256": "e3c3feb125c09e22dc7fd7c420f1e8acf81e2d5811e5658edb8ff78e75381410"
+      },
+      "inventory.json": {
+        "bytes": 56838,
+        "sha256": "332a379e7fc242ab869998495de624135718115743ebffe145d9b3cb42800119"
+      },
+      "raw-index.json": {
+        "bytes": 61266,
+        "sha256": "c3004c1c5cdc044d122cd94102f5c68c6806e42287888051a1b95bbf6a831e0a"
+      },
+      "raw.zip": {
+        "bytes": 1196071,
+        "sha256": "77989599bf2db7c68636cf614e285a9794c191cee0a64c92576b4882a9314311"
+      },
+      "source-path-map.json": {
+        "bytes": 591224,
+        "sha256": "5c38d4cb5117def6d03ddee181d2bf70bca9224e892705386cd6684279ad4ef0"
+      }
+    },
+    "full_build_run": false,
+    "guard": {
+      "call": "extract_safe_archive(archive_path, destination)",
+      "completed": true,
+      "destination": "/tmp/hraw-caovotkr/extracted",
+      "elapsed_seconds": 1.2902863370000004,
+      "max_archive_members": 10000
+    },
+    "guard_sources": {
+      ".github/scripts/build_integration_package.py": {
+        "bytes": 44930,
+        "sha256": "2f8228f5a1b054def1787922d24f98efe21a4a9158c6d1cf3fe5767f5147bf89"
+      },
+      "repository_tools/__init__.py": {
+        "bytes": 93,
+        "sha256": "a014f5dda8c86b69734f66725d704d93d9026da1790d34c255bd1ebd6ab4cae9"
+      },
+      "repository_tools/json_bytes.py": {
+        "bytes": 3387,
+        "sha256": "2ec1ef268e6c859a4e10d2870980e4d98960124c79293c6343bca242650573f2"
+      }
+    },
+    "passed": true,
+    "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+    "scratch": "/tmp/hraw-caovotkr",
+    "source_suite_run": false
+  },
+  "original_commit": "5aba54143d43d1b64be4b6cb2529c30570cabc26",
+  "package_reconciled": true,
+  "passed": true,
+  "path_safety_passed": true,
+  "payload_tamper_rejected": true,
+  "raw_entries_verified": true,
+  "raw_payload_bytes": 4785760,
+  "raw_payloads": 415,
+  "raw_record_count": 158,
+  "reconciliation_record": "zip-reconciliation.json",
+  "retained_loose_files": 4,
+  "scope_base_commit": "731014d8fa58ba193f6eaf05af3408ed5c41e43f",
+  "scope_record": "committed-result.json",
+  "setup_failures_retained": true,
+  "source_package_unchanged": true
+}

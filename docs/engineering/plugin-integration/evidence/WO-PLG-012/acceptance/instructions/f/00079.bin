@@ -1,0 +1,31 @@
+"""Byte-preserving flat evidence transport; no product code or authority calls."""
+import hashlib
+import json
+import shutil
+from pathlib import Path
+root = Path(__file__).resolve().parent
+dest = root.parent / 'flat-20260911'
+assert not dest.exists()
+(dest / 'f').mkdir(parents=True)
+calibration = root.parents[1] / 'plugin-retained-helper-windows-20260911-attempt2'
+sources = [('independent/' + path.relative_to(root).as_posix(), path) for path in sorted(root.rglob('*')) if path.is_file()]
+for category in ['write', 'network', 'credential', 'spawn', 'lifecycle']:
+    folder = calibration / ('calibration2-' + category)
+    sources.extend(('boundary-calibration/' + folder.name + '/' + path.relative_to(folder).as_posix(), path) for path in sorted(folder.rglob('*')) if path.is_file())
+manifest = []
+for number, (logical, source) in enumerate(sources):
+    assert not source.is_symlink()
+    data = source.read_bytes()
+    target = dest / 'f' / (str(number).zfill(5) + '.bin')
+    target.write_bytes(data)
+    digest = hashlib.sha256(data).hexdigest()
+    assert hashlib.sha256(target.read_bytes()).hexdigest() == digest
+    manifest.append({'logical_path': logical, 'retained_path': target.relative_to(dest).as_posix(), 'source_path': str(source), 'sha256': digest, 'bytes': len(data)})
+mapping = {'classification': 'Byte-preserving flat independent Windows evidence plus separately calibrated boundary evidence; source paths are diagnostic provenance, not authority', 'files': manifest}
+(dest / 'map.json').write_bytes(json.dumps(mapping, indent=2).encode('utf8') + b'\n')
+shutil.copyfile(root / 'report.md', dest / 'report.md')
+shutil.copyfile(root / 'audit.json', dest / 'audit.json')
+shutil.copyfile(root / 'trace-groups.json', dest / 'trace-groups.json')
+summary = {'files': len(manifest), 'bytes': sum(item['bytes'] for item in manifest), 'max_flat_relative_length': max(len(item['retained_path']) for item in manifest), 'map_sha256': hashlib.sha256((dest / 'map.json').read_bytes()).hexdigest(), 'report_sha256': hashlib.sha256((dest / 'report.md').read_bytes()).hexdigest(), 'audit_sha256': hashlib.sha256((dest / 'audit.json').read_bytes()).hexdigest(), 'destination': str(dest)}
+(dest / 'bundle-summary.json').write_bytes(json.dumps(summary, indent=2).encode('utf8') + b'\n')
+print(json.dumps(summary))

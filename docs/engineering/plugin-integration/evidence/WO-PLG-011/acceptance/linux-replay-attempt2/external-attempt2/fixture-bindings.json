@@ -1,0 +1,228 @@
+{
+  "classification": "Explicit native Linux C/evidence substitution in fixed synthetic requests and independent control data",
+  "identity_map": {
+    "772f90c03a04d0a7914088ac6b869bb829b4bcad": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+    "f91f854b96ee0f8dc472b444c213f28be07de2df55299e131f3194b27caf3220": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8"
+  },
+  "cases": {
+    "evd04-merge-no-authority": {
+      "request": {
+        "action": "merge",
+        "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+        "destination": "fixture://repository/evidence-demo/refs/heads/main"
+      },
+      "actual_synthetic_owner_decision": null,
+      "gate": "passing fixture snapshot",
+      "controls": "independently calibrated fixture controls"
+    },
+    "evd04-merge-gate-failed": {
+      "request": {
+        "action": "merge",
+        "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+        "destination": "fixture://repository/evidence-demo/refs/heads/main"
+      },
+      "actual_synthetic_owner_decision": {
+        "actor": "fixture-repository-owner",
+        "right": "DR-EXTERNAL-ACTION",
+        "exact_request": {
+          "action": "merge",
+          "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+          "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+          "destination": "fixture://repository/evidence-demo/refs/heads/main"
+        }
+      },
+      "gate": "failed",
+      "controls": "independently calibrated fixture controls"
+    },
+    "evd04-merge-control-unproven": {
+      "request": {
+        "action": "merge",
+        "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+        "destination": "fixture://repository/evidence-demo/refs/heads/main"
+      },
+      "actual_synthetic_owner_decision": {
+        "actor": "fixture-repository-owner",
+        "right": "DR-EXTERNAL-ACTION",
+        "exact_request": {
+          "action": "merge",
+          "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+          "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+          "destination": "fixture://repository/evidence-demo/refs/heads/main"
+        }
+      },
+      "gate": "passing fixture snapshot",
+      "controls": "no demonstration supplied"
+    },
+    "evd04-publish-no-authority": {
+      "request": {
+        "action": "publish",
+        "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+        "destination": "fixture://registry/evidence-demo/1.2.3"
+      },
+      "actual_synthetic_owner_decision": null,
+      "gate": "passing fixture snapshot",
+      "controls": "independently calibrated fixture controls"
+    },
+    "evd04-publish-gate-failed": {
+      "request": {
+        "action": "publish",
+        "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+        "destination": "fixture://registry/evidence-demo/1.2.3"
+      },
+      "actual_synthetic_owner_decision": {
+        "actor": "fixture-publication-owner",
+        "right": "DR-EXTERNAL-ACTION",
+        "exact_request": {
+          "action": "publish",
+          "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+          "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+          "destination": "fixture://registry/evidence-demo/1.2.3"
+        }
+      },
+      "gate": "failed",
+      "controls": "independently calibrated fixture controls"
+    },
+    "evd04-publish-control-unproven": {
+      "request": {
+        "action": "publish",
+        "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+        "destination": "fixture://registry/evidence-demo/1.2.3"
+      },
+      "actual_synthetic_owner_decision": {
+        "actor": "fixture-publication-owner",
+        "right": "DR-EXTERNAL-ACTION",
+        "exact_request": {
+          "action": "publish",
+          "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+          "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+          "destination": "fixture://registry/evidence-demo/1.2.3"
+        }
+      },
+      "gate": "passing fixture snapshot",
+      "controls": "no demonstration supplied"
+    },
+    "evd08-commit-drift": {
+      "request": {
+        "action": "merge",
+        "commit": "2222222222222222222222222222222222222222",
+        "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+        "destination": "fixture://repository/evidence-demo/refs/heads/main"
+      },
+      "actual_synthetic_owner_decision": {
+        "actor": "fixture-repository-owner",
+        "right": "DR-EXTERNAL-ACTION",
+        "exact_request": {
+          "action": "merge",
+          "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+          "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+          "destination": "fixture://repository/evidence-demo/refs/heads/main"
+        }
+      },
+      "gate": "passing fixture snapshot for original C",
+      "controls": "independently calibrated fixture controls"
+    },
+    "evd08-evidence-drift": {
+      "request": {
+        "action": "merge",
+        "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "evidence_digest": "3333333333333333333333333333333333333333333333333333333333333333",
+        "destination": "fixture://repository/evidence-demo/refs/heads/main"
+      },
+      "actual_synthetic_owner_decision": {
+        "actor": "fixture-repository-owner",
+        "right": "DR-EXTERNAL-ACTION",
+        "exact_request": {
+          "action": "merge",
+          "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+          "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+          "destination": "fixture://repository/evidence-demo/refs/heads/main"
+        }
+      },
+      "gate": "passing fixture snapshot for original C",
+      "controls": "independently calibrated fixture controls"
+    },
+    "evd08-action-drift": {
+      "request": {
+        "action": "publish",
+        "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+        "destination": "fixture://repository/evidence-demo/refs/heads/main"
+      },
+      "actual_synthetic_owner_decision": {
+        "actor": "fixture-repository-owner",
+        "right": "DR-EXTERNAL-ACTION",
+        "exact_request": {
+          "action": "merge",
+          "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+          "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+          "destination": "fixture://repository/evidence-demo/refs/heads/main"
+        }
+      },
+      "gate": "passing fixture snapshot for original C",
+      "controls": "independently calibrated fixture controls"
+    },
+    "evd08-destination-drift": {
+      "request": {
+        "action": "merge",
+        "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+        "destination": "fixture://repository/evidence-demo/refs/heads/other"
+      },
+      "actual_synthetic_owner_decision": {
+        "actor": "fixture-repository-owner",
+        "right": "DR-EXTERNAL-ACTION",
+        "exact_request": {
+          "action": "merge",
+          "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+          "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+          "destination": "fixture://repository/evidence-demo/refs/heads/main"
+        }
+      },
+      "gate": "passing fixture snapshot for original C",
+      "controls": "independently calibrated fixture controls"
+    },
+    "evd08-assurance-only": {
+      "request": {
+        "action": "merge",
+        "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+        "destination": "fixture://repository/evidence-demo/refs/heads/main"
+      },
+      "actual_synthetic_owner_decision": {
+        "actor": "fixture-assurance-owner",
+        "right": "DR-VREC-DECIDE",
+        "record": "VREC-EVD-001",
+        "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8"
+      },
+      "gate": "passing fixture snapshot",
+      "controls": "independently calibrated fixture controls"
+    },
+    "evd09-positive": {
+      "request": {
+        "action": "merge",
+        "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+        "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+        "destination": "fixture://repository/evidence-demo/refs/heads/main"
+      },
+      "actual_synthetic_owner_decision": {
+        "actor": "fixture-repository-owner",
+        "right": "DR-EXTERNAL-ACTION",
+        "exact_request": {
+          "action": "merge",
+          "commit": "e7d76ee704848c0ac93d07aa014023039e2cb5cb",
+          "evidence_digest": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8",
+          "destination": "fixture://repository/evidence-demo/refs/heads/main"
+        }
+      },
+      "gate": "passing fixture snapshot",
+      "controls": "independently calibrated fixture controls"
+    }
+  }
+}

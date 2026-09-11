@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "platforms": [
+    {
+      "case_count": 6,
+      "output": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-20260911-attempt1",
+      "passed": true,
+      "runtime_platform": "Windows-11-10.0.26200-SP0",
+      "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "Windows",
+      "inventory_sha256": "21bd96577726960083d92138cc5668b5cd2413df047c3e160d92e15b3e9e6f22",
+      "file_count": 100,
+      "summary_sha256": "d64a1da4295f76a1f27e5e2562eb7b65035445effc4bde6421c15ba34604a136"
+    },
+    {
+      "case_count": 6,
+      "output": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-recorder-error-probes-linux-20260911-attempt1",
+      "passed": true,
+      "runtime_platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "python": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]",
+      "platform": "Linux",
+      "inventory_sha256": "548e2520dcc4bda4d5ace9edb389e06cf684ae32f671adad9660a5629f141102",
+      "file_count": 100,
+      "summary_sha256": "94a81c6986007030c53b2869a3827bd9e056822be21b47d8384dec68708ffe8e"
+    }
+  ],
+  "classification": "WO-PLG-011 focused replay-recorder error retention correction",
+  "limitations": [
+    "Original 82 acceptance records remain unchanged and bind prior runner revisions.",
+    "The six probes per platform exercise only recorder behavior through real local fault/control processes.",
+    "No evaluator outputs, model decisions, authority, lifecycle effects or external enforcement are simulated or qualified by these probes.",
+    "After-state retention requires fixture snapshots to remain readable."
+  ],
+  "original_source_directory": "work/plugin-linux-evidence-replay-retained-20260911/runner-source-before-error-retention-fix",
+  "current_source_sha256": {
+    "check_recorder_errors.py": "4c2df594a3c631f2bd7f6a76a8da20accdadebe07c36531e3430732bd628f4b3",
+    "run_external_replay.py": "3a1c303383b7c537b2102b01dbc9fd9d484269f679966d1a47dd1d81c01e40c3",
+    "README.md": "ac1da9f1e5e401b44934e3da84546b6b15979497abaa920f3dbdc124774f2642",
+    "run_replay.py": "897426be4ff58ad1797fda7f35ab0703485dea647fee1821ba7d21c5298b99c2"
+  },
+  "original_runner_sha256": {
+    "run_external_replay.py": "571a4f59b55882d0254dad92b720fa353efd32911e87e83e6ce51f46bf57e57c",
+    "run_replay.py": "76bb855bdabb2280c99d6a708948f1f3ce12b6cb5f300fa923e13c4968956244"
+  }
+}

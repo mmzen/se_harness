@@ -1,0 +1,407 @@
+Build deterministic integration package	Set up job	﻿2026-09-11T06:39:09.4491320Z Current runner version: '2.337.0'
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4519719Z ##[group]Runner Image Provisioner
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4520685Z Hosted Compute Agent
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4521662Z Version: 20260828.587
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4522325Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4523183Z Build Date: 2026-08-28T16:44:25Z
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4523913Z Worker ID: {d3b31198-b83a-498c-8b08-536b635ff9b7}
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4524693Z Azure Region: northcentralus
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4525378Z ##[endgroup]
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4526880Z ##[group]Operating System
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4527677Z Ubuntu
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4528222Z 24.04.5
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4528778Z LTS
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4529319Z ##[endgroup]
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4529878Z ##[group]Runner Image
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4530536Z Image: ubuntu-24.04
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4531508Z Version: 20260907.300.1
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4532632Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260907.300/images/ubuntu/Ubuntu2404-Readme.md
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4534548Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260907.300
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4535630Z ##[endgroup]
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4536769Z ##[group]GITHUB_TOKEN Permissions
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4538701Z Contents: read
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4539382Z Metadata: read
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4540008Z ##[endgroup]
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4542613Z Secret source: Actions
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4543578Z Cache mode: write
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.4544409Z Prepare workflow directory
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.5315619Z Prepare all required actions
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.5392829Z Getting action download info
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.7700196Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.9018153Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+Build deterministic integration package	Set up job	2026-09-11T06:39:09.9951076Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Build deterministic integration package	Set up job	2026-09-11T06:39:10.1928444Z Complete job name: Build deterministic integration package
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	﻿2026-09-11T06:39:10.2587658Z ##[group]Run set -euo pipefail
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2588387Z ^[[36;1mset -euo pipefail^[[0m
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2589327Z ^[[36;1mtest -n "$REHEARSAL_DIGEST_LINUX" || { echo "Linux upgrade rehearsal digest is missing" >&2; exit 1; }^[[0m
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2590687Z ^[[36;1mtest -n "$REHEARSAL_DIGEST_WINDOWS" || { echo "Windows upgrade rehearsal digest is missing" >&2; exit 1; }^[[0m
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2592073Z ^[[36;1mif [[ "$REHEARSAL_DIGEST_LINUX" != "$REHEARSAL_DIGEST_WINDOWS" ]]; then^[[0m
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2593293Z ^[[36;1m  echo "cross-platform semantic mismatch: Linux=$REHEARSAL_DIGEST_LINUX Windows=$REHEARSAL_DIGEST_WINDOWS" >&2^[[0m
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2594296Z ^[[36;1m  exit 1^[[0m
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2594743Z ^[[36;1mfi^[[0m
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2595531Z ^[[36;1mecho "upgrade rehearsal semantic result (resulting lock, canonical): $REHEARSAL_DIGEST_LINUX"^[[0m
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2638282Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2639574Z env:
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2640072Z   INTEGRATION_EVENT: pull_request
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2640728Z   INTEGRATION_REF: refs/pull/449/merge
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2641726Z   INTEGRATION_PR: 449
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2642250Z   INTEGRATION_RETENTION_DAYS: 3
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2643113Z   REHEARSAL_DIGEST_LINUX: c15dc9bde8b076b3fd7bfe894db423f5dc3c977f66b1f95378cb84ec8a431e86
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2644321Z   REHEARSAL_DIGEST_WINDOWS: c15dc9bde8b076b3fd7bfe894db423f5dc3c977f66b1f95378cb84ec8a431e86
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2645229Z   INTEGRATION_BUILD_VERSION: 1.2.2.post1
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2645844Z   INTEGRATION_SETUPTOOLS_VERSION: 75.8.0
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2646417Z   INTEGRATION_WHEEL_VERSION: 0.45.1
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2646954Z   PYTHONNOUSERSITE: 1
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2647422Z   PYTHONPATH: 
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2647868Z ##[endgroup]
+Build deterministic integration package	Require one cross-platform upgrade rehearsal semantic result	2026-09-11T06:39:10.2795354Z upgrade rehearsal semantic result (resulting lock, canonical): c15dc9bde8b076b3fd7bfe894db423f5dc3c977f66b1f95378cb84ec8a431e86
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T06:39:10.3012032Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3019447Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3020215Z with:
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3020632Z   fetch-depth: 0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3021661Z   persist-credentials: false
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3022417Z   repository: mmzen/se_harness
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3026506Z   token: ***
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3026943Z   ssh-strict: true
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3027554Z   ssh-user: git
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3027987Z   clean: true
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3028444Z   sparse-checkout-cone-mode: true
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3029014Z   fetch-tags: false
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3029468Z   show-progress: true
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3029919Z   lfs: false
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3030378Z   submodules: false
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3031048Z   set-safe-directory: true
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3031584Z   allow-unsafe-pr-checkout: false
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3032134Z env:
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3032556Z   INTEGRATION_EVENT: pull_request
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3033095Z   INTEGRATION_REF: refs/pull/449/merge
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3033641Z   INTEGRATION_PR: 449
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3034112Z   INTEGRATION_RETENTION_DAYS: 3
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3034918Z   REHEARSAL_DIGEST_LINUX: c15dc9bde8b076b3fd7bfe894db423f5dc3c977f66b1f95378cb84ec8a431e86
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3036079Z   REHEARSAL_DIGEST_WINDOWS: c15dc9bde8b076b3fd7bfe894db423f5dc3c977f66b1f95378cb84ec8a431e86
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3036966Z   INTEGRATION_BUILD_VERSION: 1.2.2.post1
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3037547Z   INTEGRATION_SETUPTOOLS_VERSION: 75.8.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3038119Z   INTEGRATION_WHEEL_VERSION: 0.45.1
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3038665Z   PYTHONNOUSERSITE: 1
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3039121Z   PYTHONPATH: 
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.3039542Z ##[endgroup]
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4049651Z Syncing repository: mmzen/se_harness
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4052711Z ##[group]Getting Git version info
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4053980Z Working directory is '/home/runner/work/se_harness/se_harness'
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4055739Z [command]/usr/bin/git version
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4132342Z git version 2.55.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4155071Z ##[endgroup]
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4173701Z Temporarily overriding HOME='/home/runner/work/_temp/bdf78eba-9973-4f02-b933-658c34a53afb' before making global git config changes
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4176558Z Adding repository directory to the temporary git global config as a safe directory
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4181551Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/se_harness/se_harness
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4238687Z Deleting the contents of '/home/runner/work/se_harness/se_harness'
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4242889Z ##[group]Initializing the repository
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4251535Z [command]/usr/bin/git init /home/runner/work/se_harness/se_harness
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4358095Z hint: Using 'master' as the name for the initial branch. This default branch name
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4359358Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4360391Z hint: to use in all of your new repositories, which will suppress this warning,
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4361480Z hint: call:
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4361935Z hint:
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4362508Z hint: 	git config --global init.defaultBranch <name>
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4363158Z hint:
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4363773Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4364734Z hint: 'development'. The just-created branch can be renamed via this command:
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4365517Z hint:
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4365969Z hint: 	git branch -m <name>
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4366502Z hint:
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4457761Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4462505Z Initialized empty Git repository in /home/runner/work/se_harness/se_harness/.git/
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4467389Z [command]/usr/bin/git remote add origin https://github.com/mmzen/se_harness
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4471176Z ##[endgroup]
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4472900Z ##[group]Disabling automatic garbage collection
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4474543Z [command]/usr/bin/git config --local gc.auto 0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4515800Z ##[endgroup]
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4517127Z ##[group]Setting up auth
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4527882Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.4577203Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.5058696Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.5119846Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.5422384Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.5465991Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.5712314Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.5756417Z ##[endgroup]
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.5757429Z ##[group]Fetching the repository
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:10.5767783Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +6004193f4423307f47a424f8b100f42ad1c0dfee:refs/remotes/pull/449/merge
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2922748Z From https://github.com/mmzen/se_harness
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2926095Z  * [new branch]        artifacts/plugin-implementation          -> origin/artifacts/plugin-implementation
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2929708Z  * [new branch]        definitions/plg010-delegation            -> origin/definitions/plg010-delegation
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2933728Z  * [new branch]        definitions/plg011-delegation            -> origin/definitions/plg011-delegation
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2937548Z  * [new branch]        definitions/plg012-delegation            -> origin/definitions/plg012-delegation
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2942522Z  * [new branch]        definitions/plg017-path-repair           -> origin/definitions/plg017-path-repair
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2945794Z  * [new branch]        main                                     -> origin/main
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2948969Z  * [new branch]        notes/plugin-installation-proposal       -> origin/notes/plugin-installation-proposal
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2953382Z  * [new branch]        notes/plugin-proposal-assessment-2026-09-08 -> origin/notes/plugin-proposal-assessment-2026-09-08
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2955998Z  * [new branch]        release/0.10                             -> origin/release/0.10
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2957977Z  * [new branch]        release/0.11                             -> origin/release/0.11
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2959871Z  * [new branch]        release/0.12                             -> origin/release/0.12
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2962455Z  * [new branch]        release/0.12.0                           -> origin/release/0.12.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2964554Z  * [new branch]        release/0.13                             -> origin/release/0.13
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2966866Z  * [new branch]        release/0.13.0                           -> origin/release/0.13.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2969120Z  * [new branch]        release/0.14                             -> origin/release/0.14
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2971606Z  * [new branch]        release/0.14.0                           -> origin/release/0.14.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2974152Z  * [new branch]        release/0.15                             -> origin/release/0.15
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2976681Z  * [new branch]        release/0.15.0                           -> origin/release/0.15.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2979133Z  * [new branch]        release/0.16                             -> origin/release/0.16
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2981804Z  * [new branch]        release/0.16.0                           -> origin/release/0.16.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2984303Z  * [new branch]        release/0.17                             -> origin/release/0.17
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2987061Z  * [new branch]        release/0.17.0                           -> origin/release/0.17.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2989600Z  * [new branch]        release/0.2.0                            -> origin/release/0.2.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2992573Z  * [new branch]        release/0.2.1                            -> origin/release/0.2.1
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.2996350Z  * [new branch]        release/0.2.2                            -> origin/release/0.2.2
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3000022Z  * [new branch]        release/0.3.0                            -> origin/release/0.3.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3003889Z  * [new branch]        release/0.4.0                            -> origin/release/0.4.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3007150Z  * [new branch]        release/0.6                              -> origin/release/0.6
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3009756Z  * [new branch]        release/0.7                              -> origin/release/0.7
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3012795Z  * [new branch]        release/0.8                              -> origin/release/0.8
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3015284Z  * [new branch]        release/0.9                              -> origin/release/0.9
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3018067Z  * [new branch]        work/plugin-change-skill                 -> origin/work/plugin-change-skill
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3021684Z  * [new branch]        work/plugin-evidence-path-repair         -> origin/work/plugin-evidence-path-repair
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3025025Z  * [new branch]        work/plugin-evidence-skill               -> origin/work/plugin-evidence-skill
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3028184Z  * [new branch]        work/plugin-retained-skills              -> origin/work/plugin-retained-skills
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3031879Z  * [new tag]           last                                     -> last
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3033993Z  * [new tag]           v0.10.0                                  -> v0.10.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3036047Z  * [new tag]           v0.11.0                                  -> v0.11.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3038098Z  * [new tag]           v0.12.0                                  -> v0.12.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3040375Z  * [new tag]           v0.13.0                                  -> v0.13.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3042816Z  * [new tag]           v0.14.0                                  -> v0.14.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3045379Z  * [new tag]           v0.15.0                                  -> v0.15.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3047422Z  * [new tag]           v0.16.0                                  -> v0.16.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3050004Z  * [new tag]           v0.17.0                                  -> v0.17.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3052374Z  * [new tag]           v0.2.0                                   -> v0.2.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3054321Z  * [new tag]           v0.2.1                                   -> v0.2.1
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3056426Z  * [new tag]           v0.2.2                                   -> v0.2.2
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3058333Z  * [new tag]           v0.3.0                                   -> v0.3.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3060226Z  * [new tag]           v0.4.0                                   -> v0.4.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3062397Z  * [new tag]           v0.4.1                                   -> v0.4.1
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3064278Z  * [new tag]           v0.5.0                                   -> v0.5.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3066172Z  * [new tag]           v0.5.0a1                                 -> v0.5.0a1
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3068417Z  * [new tag]           v0.6.0                                   -> v0.6.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3070315Z  * [new tag]           v0.7.0                                   -> v0.7.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3072591Z  * [new tag]           v0.7.1                                   -> v0.7.1
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3074498Z  * [new tag]           v0.8.0                                   -> v0.8.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3076402Z  * [new tag]           v0.9.0                                   -> v0.9.0
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3078619Z  * [new ref]           6004193f4423307f47a424f8b100f42ad1c0dfee -> pull/449/merge
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3083389Z ##[endgroup]
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3085249Z ##[group]Determining the checkout info
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3087319Z ##[endgroup]
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3088500Z [command]/usr/bin/git sparse-checkout disable
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3092243Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3096345Z ##[group]Checking out the ref
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.3098178Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/449/merge
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8764267Z Note: switching to 'refs/remotes/pull/449/merge'.
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8781895Z 
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8782457Z You are in 'detached HEAD' state. You can look around, make experimental
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8783460Z changes and commit them, and you can discard any commits you make in this
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8784428Z state without impacting any branches by switching back to a branch.
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8784999Z 
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8785385Z If you want to create a new branch to retain commits you create, you may
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8786148Z do so (now or later) by using -c with the switch command. Example:
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8786481Z 
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8786639Z   git switch -c <new-branch-name>
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8786858Z 
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8787034Z Or undo this operation with:
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8787252Z 
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8787395Z   git switch -
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8787559Z 
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8787943Z Turn off this advice by setting config variable advice.detachedHead to false
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8788323Z 
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8788737Z HEAD is now at 6004193f Merge 47f7b842d395764583adbe834c39aecdc0afd521 into 7fe82c95823503e54d2e35e00d8c409a6dd4b065
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8807574Z ##[endgroup]
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8857189Z [command]/usr/bin/git log -1 --format=%H
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8885674Z 6004193f4423307f47a424f8b100f42ad1c0dfee
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8897089Z ##[group]Removing auth
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8902092Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.8937545Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.9185959Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.9217498Z http.https://github.com/.extraheader
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.9227641Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.9265093Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.9512341Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.9549312Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Build deterministic integration package	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:12.9792400Z ##[endgroup]
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T06:39:12.9983375Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9985535Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9985998Z with:
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9986269Z   python-version: 3.11
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9986558Z   check-latest: false
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9989457Z   token: ***
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9989786Z   update-environment: true
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9990108Z   allow-prereleases: false
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9990415Z   freethreaded: false
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9990690Z env:
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9991200Z   INTEGRATION_EVENT: pull_request
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9991559Z   INTEGRATION_REF: refs/pull/449/merge
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9991897Z   INTEGRATION_PR: 449
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9992191Z   INTEGRATION_RETENTION_DAYS: 3
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9992740Z   REHEARSAL_DIGEST_LINUX: c15dc9bde8b076b3fd7bfe894db423f5dc3c977f66b1f95378cb84ec8a431e86
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9993459Z   REHEARSAL_DIGEST_WINDOWS: c15dc9bde8b076b3fd7bfe894db423f5dc3c977f66b1f95378cb84ec8a431e86
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9994032Z   INTEGRATION_BUILD_VERSION: 1.2.2.post1
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9994412Z   INTEGRATION_SETUPTOOLS_VERSION: 75.8.0
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9994758Z   INTEGRATION_WHEEL_VERSION: 0.45.1
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9995078Z   PYTHONNOUSERSITE: 1
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9995360Z   PYTHONPATH: 
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:12.9995611Z ##[endgroup]
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:13.1388949Z ##[group]Installed versions
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:13.1493635Z (node:2402) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:13.1494539Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:13.1495488Z Successfully set up CPython (3.11.16)
+Build deterministic integration package	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:13.1496504Z ##[endgroup]
+Build deterministic integration package	Install exact integration build tools	﻿2026-09-11T06:39:13.1605141Z ##[group]Run set -euo pipefail
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1605585Z ^[[36;1mset -euo pipefail^[[0m
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1605996Z ^[[36;1mpython -m pip install --disable-pip-version-check \^[[0m
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1606467Z ^[[36;1m  "build==$INTEGRATION_BUILD_VERSION" \^[[0m
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1606917Z ^[[36;1m  "setuptools==$INTEGRATION_SETUPTOOLS_VERSION" \^[[0m
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1607478Z ^[[36;1m  "wheel==$INTEGRATION_WHEEL_VERSION"^[[0m
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1657885Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1658342Z env:
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1658624Z   INTEGRATION_EVENT: pull_request
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1659176Z   INTEGRATION_REF: refs/pull/449/merge
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1659532Z   INTEGRATION_PR: 449
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1659833Z   INTEGRATION_RETENTION_DAYS: 3
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1660329Z   REHEARSAL_DIGEST_LINUX: c15dc9bde8b076b3fd7bfe894db423f5dc3c977f66b1f95378cb84ec8a431e86
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1661408Z   REHEARSAL_DIGEST_WINDOWS: c15dc9bde8b076b3fd7bfe894db423f5dc3c977f66b1f95378cb84ec8a431e86
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1662044Z   INTEGRATION_BUILD_VERSION: 1.2.2.post1
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1662408Z   INTEGRATION_SETUPTOOLS_VERSION: 75.8.0
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1662762Z   INTEGRATION_WHEEL_VERSION: 0.45.1
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1663084Z   PYTHONNOUSERSITE: 1
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1663378Z   PYTHONPATH: 
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1663743Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1664281Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1664794Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1665251Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1665721Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1666191Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.1666595Z ##[endgroup]
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.9285265Z Collecting build==1.2.2.post1
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:13.9777847Z   Downloading build-1.2.2.post1-py3-none-any.whl.metadata (6.5 kB)
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.0733872Z Collecting setuptools==75.8.0
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.0776092Z   Downloading setuptools-75.8.0-py3-none-any.whl.metadata (6.7 kB)
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.0989293Z Collecting wheel==0.45.1
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.1024120Z   Downloading wheel-0.45.1-py3-none-any.whl.metadata (2.3 kB)
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.1181052Z Collecting packaging>=19.1 (from build==1.2.2.post1)
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.1218015Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.1323147Z Collecting pyproject_hooks (from build==1.2.2.post1)
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.1358695Z   Downloading pyproject_hooks-1.2.0-py3-none-any.whl.metadata (1.3 kB)
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.1438632Z Downloading build-1.2.2.post1-py3-none-any.whl (22 kB)
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.1525487Z Downloading setuptools-75.8.0-py3-none-any.whl (1.2 MB)
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.1765085Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 68.4 MB/s  0:00:00
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.1800509Z Downloading wheel-0.45.1-py3-none-any.whl (72 kB)
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.1871962Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.1928578Z Downloading pyproject_hooks-1.2.0-py3-none-any.whl (10 kB)
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.2450371Z Installing collected packages: wheel, setuptools, pyproject_hooks, packaging, build
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.2966776Z   Attempting uninstall: setuptools
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.2985281Z     Found existing installation: setuptools 79.0.1
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.5686032Z     Uninstalling setuptools-79.0.1:
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:14.5996806Z       Successfully uninstalled setuptools-79.0.1
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:15.4334141Z 
+Build deterministic integration package	Install exact integration build tools	2026-09-11T06:39:15.4344651Z Successfully installed build-1.2.2.post1 packaging-26.3 pyproject_hooks-1.2.0 setuptools-75.8.0 wheel-0.45.1
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	﻿2026-09-11T06:39:15.4885652Z ##[group]Run set -euo pipefail
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4886016Z ^[[36;1mset -euo pipefail^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4886279Z ^[[36;1mintegration_args=(^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4886517Z ^[[36;1m  build^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4886763Z ^[[36;1m  --repository "$GITHUB_WORKSPACE"^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4887113Z ^[[36;1m  --repository-slug "$GITHUB_REPOSITORY"^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4887434Z ^[[36;1m  --commit "$GITHUB_SHA"^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4887706Z ^[[36;1m  --event "$INTEGRATION_EVENT"^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4887984Z ^[[36;1m  --ref "$INTEGRATION_REF"^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4888272Z ^[[36;1m  --workflow "$GITHUB_WORKFLOW"^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4888549Z ^[[36;1m  --run-id "$GITHUB_RUN_ID"^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4888840Z ^[[36;1m  --run-attempt "$GITHUB_RUN_ATTEMPT"^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4889192Z ^[[36;1m  --retention-days "$INTEGRATION_RETENTION_DAYS"^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4889590Z ^[[36;1m  --expect-build-version "$INTEGRATION_BUILD_VERSION"^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4890050Z ^[[36;1m  --expect-setuptools-version "$INTEGRATION_SETUPTOOLS_VERSION"^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4890543Z ^[[36;1m  --expect-wheel-version "$INTEGRATION_WHEEL_VERSION"^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4891284Z ^[[36;1m  --output "$RUNNER_TEMP/integration-payload"^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4891597Z ^[[36;1m)^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4891814Z ^[[36;1mif [[ -n "$INTEGRATION_PR" ]]; then^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4892175Z ^[[36;1m  integration_args+=(--pull-request "$INTEGRATION_PR")^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4892509Z ^[[36;1mfi^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4892859Z ^[[36;1mpython .github/scripts/build_integration_package.py "${integration_args[@]}"^[[0m
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4931807Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4932160Z env:
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4932368Z   INTEGRATION_EVENT: pull_request
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4932641Z   INTEGRATION_REF: refs/pull/449/merge
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4932904Z   INTEGRATION_PR: 449
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4933134Z   INTEGRATION_RETENTION_DAYS: 3
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4933578Z   REHEARSAL_DIGEST_LINUX: c15dc9bde8b076b3fd7bfe894db423f5dc3c977f66b1f95378cb84ec8a431e86
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4934225Z   REHEARSAL_DIGEST_WINDOWS: c15dc9bde8b076b3fd7bfe894db423f5dc3c977f66b1f95378cb84ec8a431e86
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4934698Z   INTEGRATION_BUILD_VERSION: 1.2.2.post1
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4934988Z   INTEGRATION_SETUPTOOLS_VERSION: 75.8.0
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4935263Z   INTEGRATION_WHEEL_VERSION: 0.45.1
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4935568Z   PYTHONNOUSERSITE: 1
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4935786Z   PYTHONPATH: 
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4936057Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4936634Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4937065Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4937450Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4937838Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4938227Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:15.4938563Z ##[endgroup]
+Build deterministic integration package	Build twice and stage one canonical non-promotable payload	2026-09-11T06:39:23.5767699Z {"commit":"6004193f4423307f47a424f8b100f42ad1c0dfee","output":"/home/runner/work/_temp/integration-payload","result":"pass","schema":"se-harness-integration-package-v1","version":"0.18.0+pr449.g6004193f4423","wheel":{"filename":"se_harness-0.18.0+pr449.g6004193f4423-py3-none-any.whl","sha256":"ce5f27e0d3f60f44362e0e97bc0898d2f7a0ab6b31774e580136b95a81a67888","size":486736}}
+Build deterministic integration package	Upload one-day staging bytes	﻿2026-09-11T06:39:23.6042679Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6044154Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6044561Z with:
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6044911Z   name: integration-package-staging-6004193f4423307f47a424f8b100f42ad1c0dfee
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6045389Z   path: /home/runner/work/_temp/integration-payload/
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6045720Z   if-no-files-found: error
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6045957Z   retention-days: 1
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6046180Z   compression-level: 6
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6046397Z   overwrite: false
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6046614Z   include-hidden-files: false
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6046852Z env:
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6047047Z   INTEGRATION_EVENT: pull_request
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6047362Z   INTEGRATION_REF: refs/pull/449/merge
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6047634Z   INTEGRATION_PR: 449
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6047861Z   INTEGRATION_RETENTION_DAYS: 3
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6048285Z   REHEARSAL_DIGEST_LINUX: c15dc9bde8b076b3fd7bfe894db423f5dc3c977f66b1f95378cb84ec8a431e86
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6048928Z   REHEARSAL_DIGEST_WINDOWS: c15dc9bde8b076b3fd7bfe894db423f5dc3c977f66b1f95378cb84ec8a431e86
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6049418Z   INTEGRATION_BUILD_VERSION: 1.2.2.post1
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6049708Z   INTEGRATION_SETUPTOOLS_VERSION: 75.8.0
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6049985Z   INTEGRATION_WHEEL_VERSION: 0.45.1
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6050240Z   PYTHONNOUSERSITE: 1
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6050454Z   PYTHONPATH: 
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6050722Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6051511Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6051962Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6052349Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6052752Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6053144Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.6053476Z ##[endgroup]
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.7737137Z (node:2450) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.7742602Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.7803653Z With the provided path, there will be 3 files uploaded
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.7806009Z Artifact name is valid!
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:23.7806639Z Root directory input is valid!
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:24.0323498Z Beginning upload of artifact content to blob storage
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:24.0805681Z (node:2450) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:24.3244732Z Uploaded bytes 472521
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:24.3636096Z Finished uploading artifact content to blob storage!
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:24.3637230Z SHA256 digest of uploaded artifact zip is f046dfe359a6fb9509bff29d31a617223902010fed14b485090e05e774460768
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:24.3638600Z Finalizing artifact upload
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:24.5738967Z Artifact integration-package-staging-6004193f4423307f47a424f8b100f42ad1c0dfee.zip successfully finalized. Artifact ID 10187697522
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:24.5741481Z Artifact integration-package-staging-6004193f4423307f47a424f8b100f42ad1c0dfee has been successfully uploaded! Final size is 472521 bytes. Artifact ID is 10187697522
+Build deterministic integration package	Upload one-day staging bytes	2026-09-11T06:39:24.5748805Z Artifact download URL: https://github.com/mmzen/se_harness/actions/runs/34570104939/artifacts/10187697522
+Build deterministic integration package	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T06:39:24.5933530Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Build deterministic integration package	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:24.5934861Z Post job cleanup.
+Build deterministic integration package	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:24.7150435Z (node:2462) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Build deterministic integration package	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T06:39:24.7151639Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Build deterministic integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T06:39:24.7304011Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Build deterministic integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:24.7305551Z Post job cleanup.
+Build deterministic integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:24.8219958Z [command]/usr/bin/git version
+Build deterministic integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:24.8266134Z git version 2.55.0
+Build deterministic integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:24.8312209Z Temporarily overriding HOME='/home/runner/work/_temp/cd76e5a7-f88b-4990-aaa4-8acdad43a125' before making global git config changes
+Build deterministic integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:24.8313877Z Adding repository directory to the temporary git global config as a safe directory
+Build deterministic integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:24.8319901Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/se_harness/se_harness
+Build deterministic integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:24.8363950Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Build deterministic integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:24.8401720Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Build deterministic integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:24.8688527Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Build deterministic integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:24.8729719Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Build deterministic integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:24.9053488Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Build deterministic integration package	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T06:39:24.9101794Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Build deterministic integration package	Complete job	﻿2026-09-11T06:39:24.9596667Z Cleaning up orphan processes
+Build deterministic integration package	Complete job	2026-09-11T06:39:24.9900208Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

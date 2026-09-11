@@ -1,0 +1,49 @@
+Combined review copy; exact original bytes remain at each retained path below.
+
+--- linux-replay/linux-replay: C05-final-01-version/stderr.txt -> acceptance/linux-replay/f00017.txt ---
+
+
+--- linux-replay/linux-replay: C05-final-02-identity/stderr.txt -> acceptance/linux-replay/f00017.txt ---
+
+
+--- linux-replay/linux-replay: C05-final-03-doctor/stderr.txt -> acceptance/linux-replay/f00017.txt ---
+
+
+--- linux-replay/linux-replay: C05-final-04-helper/stderr.txt -> acceptance/linux-replay/f00017.txt ---
+
+
+--- instructions: independent/trace/C05-canonical-01-version/stderr.txt -> acceptance/instructions/f/00128.bin ---
+
+
+--- instructions: independent/trace/C05-canonical-02-identity/stderr.txt -> acceptance/instructions/f/00145.bin ---
+
+
+--- instructions: independent/trace/C05-canonical-03-doctor/stderr.txt -> acceptance/instructions/f/00162.bin ---
+
+
+--- instructions: independent/trace/C05-canonical-supplemental-helper/stderr.txt -> acceptance/instructions/f/00180.bin ---
+
+
+--- instructions: independent/trace/C05-final-01-version/stderr.txt -> acceptance/instructions/f/00197.bin ---
+
+
+--- instructions: independent/trace/C05-final-02-identity/stderr.txt -> acceptance/instructions/f/00214.bin ---
+
+
+--- instructions: independent/trace/C05-final-03-doctor/stderr.txt -> acceptance/instructions/f/00231.bin ---
+
+
+--- instructions: independent/trace/C05-final-04-helper/stderr.txt -> acceptance/instructions/f/00249.bin ---
+
+
+--- instructions: independent/trace/C05-unicode-01-version/stderr.txt -> acceptance/instructions/f/00266.bin ---
+
+
+--- instructions: independent/trace/C05-unicode-02-identity/stderr.txt -> acceptance/instructions/f/00283.bin ---
+
+
+--- instructions: independent/trace/C05-unicode-03-doctor/stderr.txt -> acceptance/instructions/f/00300.bin ---
+
+
+--- instructions: independent/trace/C05-unicode-04-helper/stderr.txt -> acceptance/instructions/f/00318.bin ---
+

@@ -1,0 +1,142 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "capture-verification",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "VREC-PLG-007",
+    "artifacts": [
+      "VREC-PLG-007"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "CAP-WEX-001",
+      "INT-WEX-001",
+      "REQ-PLG-017",
+      "REQ-PLG-018",
+      "SPEC-PLG-010",
+      "VER-PLG-010",
+      "WO-PLG-010"
+    ],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-VREC-DECIDE",
+    "procedure_id": "PROC-VREC-DECIDE",
+    "status": "not_assessable",
+    "gates": []
+  },
+  "procedure": {
+    "id": "PROC-VREC-DECIDE",
+    "current_step": "STEP-VREC-DECIDE",
+    "steps": [
+      {
+        "id": "STEP-VREC-DECIDE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-ASSURANCE-DECISION"
+        ],
+        "effects": [
+          "Permits an explicit decision on VREC-PLG-007 only."
+        ],
+        "non_effects": [
+          "Referenced work orders remain unchanged."
+        ],
+        "decision_right": "DR-VREC-DECIDE",
+        "role": "assurance-owner",
+        "artifact": "VREC-PLG-007",
+        "decision": "whether the retained evidence verifies the exact candidate",
+        "outcomes": [
+          "verified",
+          "reject",
+          "supersede"
+        ],
+        "response": "I verify VREC-PLG-007 as assurance owner."
+      }
+    ]
+  },
+  "state": {
+    "before": [],
+    "after": [
+      {
+        "id": "VREC-PLG-007",
+        "status": "ready"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "VREC-PLG-007",
+        "path": "docs/engineering/plugin-integration/verification-records/VREC-PLG-007.md",
+        "fields": [
+          "artifact_snapshot_sha256",
+          "commit",
+          "created",
+          "evaluator_evidence_path",
+          "evaluator_evidence_sha256",
+          "evidence_paths",
+          "git_object_format",
+          "id",
+          "owners",
+          "prepared_at",
+          "prepared_by",
+          "relations",
+          "status",
+          "title",
+          "type",
+          "updated",
+          "worktree_state"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Prepared ready verification record VREC-PLG-007 at docs/engineering/plugin-integration/verification-records/VREC-PLG-007.md."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "VREC-PLG-007 is ready; referenced work orders were not changed."
+    ],
+    "decision_required": {
+      "decision_right": "DR-VREC-DECIDE",
+      "role": "assurance-owner",
+      "artifact": "VREC-PLG-007",
+      "decision": "whether the retained evidence verifies the exact candidate",
+      "outcomes": [
+        "verified",
+        "reject",
+        "supersede"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-VREC-DECIDE",
+      "step_id": "STEP-VREC-DECIDE",
+      "action": "whether the retained evidence verifies the exact candidate"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "I verify VREC-PLG-007 as assurance owner."
+    },
+    "alternatives": [
+      "Use complete alternative procedure PROC-VREC-REJECT.",
+      "Use complete alternative procedure PROC-VREC-SUPERSEDE."
+    ]
+  },
+  "result_sha256": "457dc959a7c47b6d81a3b038e2702ef81f63c5fbcd58f7edd677753c7e2b8230"
+}

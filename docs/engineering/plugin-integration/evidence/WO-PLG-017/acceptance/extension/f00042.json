@@ -1,0 +1,1714 @@
+{
+  ".git/HEAD": {
+    "bytes": 41,
+    "sha256": "34df18a61eba923e3975beecbee0ade1f8985b6233899d020ea5c3f25a08ee4a"
+  },
+  ".git/config": {
+    "bytes": 491,
+    "sha256": "202c84093669dd9e73a9390a67ac1c074b6c8114909303cd8042e0fa866bad1e"
+  },
+  ".git/index": {
+    "bytes": 1158117,
+    "sha256": "f5a4fad18e6f5c15bf7e4e32b56eccdc28d67393c9618f139863b4440e13f896"
+  },
+  ".git/packed-refs": {
+    "bytes": 140,
+    "sha256": "0b9cb0820b767ec0324de17585098a49afe566d304fbc54bc5924d05d7104c07"
+  },
+  "docs/engineering/agent-directive-surface/evidence/VREC-ADS-001-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/agent-directive-surface/evidence/VREC-ADS-002-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/agent-directive-surface/verification-records/VREC-ADS-001.md": {
+    "bytes": 2057,
+    "sha256": "45878328b0868bda38b718aae63aa4b62d7b0354082b5f88473667436676863d"
+  },
+  "docs/engineering/agent-directive-surface/verification-records/VREC-ADS-002.md": {
+    "bytes": 2001,
+    "sha256": "f0fc4e52fc3996a9017f8c7474687ae5d54079efb86921d8c0112195d87ad081"
+  },
+  "docs/engineering/agentic-execution/evidence/VREC-AEX-001-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/agentic-execution/evidence/VREC-AEX-002-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/agentic-execution/evidence/VREC-AEX-003-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/agentic-execution/evidence/VREC-AEX-004-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/agentic-execution/evidence/VREC-AEX-005-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/agentic-execution/evidence/VREC-AEX-006-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/agentic-execution/evidence/VREC-AEX-007-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/agentic-execution/evidence/VREC-AEX-008-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/agentic-execution/verification-records/VREC-AEX-001.md": {
+    "bytes": 1471,
+    "sha256": "de086cbe6bb7e090300c96849a866732bc3a12ed04f45a31aaadf9c119c95b59"
+  },
+  "docs/engineering/agentic-execution/verification-records/VREC-AEX-002.md": {
+    "bytes": 1471,
+    "sha256": "7dffa90d6a4fc3ef2abcd0376f394105d3b9b3de29b119817f9c4a57b63df9ea"
+  },
+  "docs/engineering/agentic-execution/verification-records/VREC-AEX-003.md": {
+    "bytes": 1486,
+    "sha256": "1a3f9c80ec11a2b7b9ec7e6cd04f93f7e482df72ed978ab6c4eecbad0360b11e"
+  },
+  "docs/engineering/agentic-execution/verification-records/VREC-AEX-004.md": {
+    "bytes": 1501,
+    "sha256": "90074a47b844aceac71cdd5898ed36b4da532f0bdb1826940f1c9fae0b807601"
+  },
+  "docs/engineering/agentic-execution/verification-records/VREC-AEX-005.md": {
+    "bytes": 1486,
+    "sha256": "65f7f4dd0cb7de15e0e5b9679606ce2fcdaec67a2dbe95000e28dbc5a1235ba9"
+  },
+  "docs/engineering/agentic-execution/verification-records/VREC-AEX-006.md": {
+    "bytes": 1486,
+    "sha256": "c120e1f0c6cea682c0d18aa6af264657fa8423a4c454e170301af2ad2a8f1abb"
+  },
+  "docs/engineering/agentic-execution/verification-records/VREC-AEX-007.md": {
+    "bytes": 1486,
+    "sha256": "ba0e00bdcccad20a329996c0983a459e713b2491ed7304d3a09cfce80e1e88eb"
+  },
+  "docs/engineering/agentic-execution/verification-records/VREC-AEX-008.md": {
+    "bytes": 1516,
+    "sha256": "0792f6eaac37daf329ddf7392d1d34ebd9f8f5d7befce942a2b257d7a4157db3"
+  },
+  "docs/engineering/aggregate-release/verification-records/VREC-AGR-001.md": {
+    "bytes": 1685,
+    "sha256": "70ca2fa1dde77ee4967bd902a543cef167ef8b557c926a8d5ece6b55b0af3f47"
+  },
+  "docs/engineering/artifact-authoring/evidence/VREC-AUT-001-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/artifact-authoring/evidence/VREC-AUT-002-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/artifact-authoring/evidence/VREC-AUT-003-evaluator.json": {
+    "bytes": 786,
+    "sha256": "1e713a859270491fe587d79b3b499a1a077d1c7dc9e588260ef8adc5b429f5cf"
+  },
+  "docs/engineering/artifact-authoring/evidence/VREC-AUT-004-evaluator.json": {
+    "bytes": 875,
+    "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+  },
+  "docs/engineering/artifact-authoring/evidence/VREC-AUT-005-evaluator.json": {
+    "bytes": 875,
+    "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+  },
+  "docs/engineering/artifact-authoring/evidence/VREC-AUT-006-evaluator.json": {
+    "bytes": 875,
+    "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+  },
+  "docs/engineering/artifact-authoring/verification-records/VREC-AUT-001.md": {
+    "bytes": 2069,
+    "sha256": "dea5a86ae0ac25d45bb869828131cf79304ce32c18681e5b29091607c59f9206"
+  },
+  "docs/engineering/artifact-authoring/verification-records/VREC-AUT-002.md": {
+    "bytes": 2253,
+    "sha256": "3c70e57fc4706288f01158d263205b32ce154459b1aadab5dc2e48c426103ba9"
+  },
+  "docs/engineering/artifact-authoring/verification-records/VREC-AUT-003.md": {
+    "bytes": 2121,
+    "sha256": "0a119a072b8fc5de8d0b0491bbf0cca0c533304ccb9d416e1af4d9f5f2a35000"
+  },
+  "docs/engineering/artifact-authoring/verification-records/VREC-AUT-004.md": {
+    "bytes": 2878,
+    "sha256": "7a190f19b0215b1deba81ad364dc64725d6b1b8bc1d6ec439fee312fb4b12ddd"
+  },
+  "docs/engineering/artifact-authoring/verification-records/VREC-AUT-005.md": {
+    "bytes": 3542,
+    "sha256": "f8b4b0b1b63efe3b791ac5e63a0fcf81d36c48ca1126887a7a544fad4ce9da4f"
+  },
+  "docs/engineering/artifact-authoring/verification-records/VREC-AUT-006.md": {
+    "bytes": 3794,
+    "sha256": "1977478078241cac10ca8bc63f114ba83fc1a36aff5ce0b58d235a5abae10210"
+  },
+  "docs/engineering/ci-pipeline/evidence/VREC-CIP-001-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/ci-pipeline/evidence/VREC-CIP-002-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/ci-pipeline/evidence/VREC-CIP-003-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/ci-pipeline/evidence/VREC-CIP-004-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/ci-pipeline/evidence/VREC-CIP-005-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/ci-pipeline/evidence/VREC-CIP-006-evaluator.json": {
+    "bytes": 875,
+    "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+  },
+  "docs/engineering/ci-pipeline/evidence/VREC-CIP-007-evaluator.json": {
+    "bytes": 875,
+    "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+  },
+  "docs/engineering/ci-pipeline/evidence/VREC-CIP-008-evaluator.json": {
+    "bytes": 875,
+    "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+  },
+  "docs/engineering/ci-pipeline/verification-records/VREC-CIP-001.md": {
+    "bytes": 2261,
+    "sha256": "9b2e6f38ede608ec94095e1b89766975e167b5df82cb02eb0abcebecd647baeb"
+  },
+  "docs/engineering/ci-pipeline/verification-records/VREC-CIP-002.md": {
+    "bytes": 2793,
+    "sha256": "4b8bb3d485879f1058d4ab626f7fca069212cc1abed7dbc783f71ca5c22ab802"
+  },
+  "docs/engineering/ci-pipeline/verification-records/VREC-CIP-003.md": {
+    "bytes": 2114,
+    "sha256": "f6a6a17e3b61af2f1c3126e80caa01cf13ee60755a502a5f424fd8a84d5a3be4"
+  },
+  "docs/engineering/ci-pipeline/verification-records/VREC-CIP-004.md": {
+    "bytes": 2385,
+    "sha256": "5e842a892d6283bab4767913eca0fdf62414d0391a6565ac0e727deb79fc34e3"
+  },
+  "docs/engineering/ci-pipeline/verification-records/VREC-CIP-005.md": {
+    "bytes": 1846,
+    "sha256": "8a38ffe0dc2799e1a96f23acc989fb7acbae635521d40a5bc5c0fd1cb64322ab"
+  },
+  "docs/engineering/ci-pipeline/verification-records/VREC-CIP-006.md": {
+    "bytes": 3133,
+    "sha256": "be13c31ba4fd7ff2c6d598c205de29d9ce8baa2a943d230bea72bd5a9c54f916"
+  },
+  "docs/engineering/ci-pipeline/verification-records/VREC-CIP-007.md": {
+    "bytes": 3727,
+    "sha256": "67fcc3d1626172db70e672927e95e1daec88a7db1ba23471d3c3db70aa111ef0"
+  },
+  "docs/engineering/ci-pipeline/verification-records/VREC-CIP-008.md": {
+    "bytes": 3550,
+    "sha256": "2a579e67b16918038344c277c94fc0272e81b8ee68233644d0b883a1d45c5eb4"
+  },
+  "docs/engineering/dashboard-publication/evidence/VREC-DPG-002-evaluator.json": {
+    "bytes": 875,
+    "sha256": "21ded06932d284d3ab2145b5ba7b9d5d3fc40997da8b047f7fb6f9f164910044"
+  },
+  "docs/engineering/dashboard-publication/verification-records/VREC-DPG-001.md": {
+    "bytes": 1535,
+    "sha256": "e7b4880fbdbb080a0dca941ada0aabe20cc68c27eb736e9d0d946db3f7e3f7c2"
+  },
+  "docs/engineering/dashboard-publication/verification-records/VREC-DPG-002.md": {
+    "bytes": 2609,
+    "sha256": "dd997895a43d76880b3e3c726380f1111b4de6766481e12524bf640b018eec39"
+  },
+  "docs/engineering/decision-management/evidence/VREC-DCM-001-evaluator.json": {
+    "bytes": 875,
+    "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+  },
+  "docs/engineering/decision-management/verification-records/VREC-DCM-001.md": {
+    "bytes": 2558,
+    "sha256": "2a14a1b8437b0bb09b7ba46762a24648b37689cda2684b31f0b2369d794b58d6"
+  },
+  "docs/engineering/evidence-keying/verification-records/VREC-EVK-001.md": {
+    "bytes": 1910,
+    "sha256": "49d826a3f1a73f003552a4606a4cf2a6ffe5f74745473ec758ec9483bae87733"
+  },
+  "docs/engineering/evidence-keying/verification-records/VREC-EVK-002.md": {
+    "bytes": 1989,
+    "sha256": "d6d5ed0f16868bc42740999f81f63125f36db9d955ed8b7ff3f3bfcb2e214093"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-005-evaluator.json": {
+    "bytes": 786,
+    "sha256": "1e713a859270491fe587d79b3b499a1a077d1c7dc9e588260ef8adc5b429f5cf"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-009-evaluator.json": {
+    "bytes": 786,
+    "sha256": "1e713a859270491fe587d79b3b499a1a077d1c7dc9e588260ef8adc5b429f5cf"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-010-evaluator.json": {
+    "bytes": 786,
+    "sha256": "1e713a859270491fe587d79b3b499a1a077d1c7dc9e588260ef8adc5b429f5cf"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-011-evaluator.json": {
+    "bytes": 879,
+    "sha256": "8d217a429db288836d69c843e6f0017c0be29a2b743f589a7fe28bfa8b1cf560"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-012-evaluator.json": {
+    "bytes": 879,
+    "sha256": "8d217a429db288836d69c843e6f0017c0be29a2b743f589a7fe28bfa8b1cf560"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-013-evaluator.json": {
+    "bytes": 879,
+    "sha256": "8d217a429db288836d69c843e6f0017c0be29a2b743f589a7fe28bfa8b1cf560"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-014-evaluator.json": {
+    "bytes": 879,
+    "sha256": "8d217a429db288836d69c843e6f0017c0be29a2b743f589a7fe28bfa8b1cf560"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-015-evaluator.json": {
+    "bytes": 879,
+    "sha256": "e78737d57a52748c0381cddd376cd8627a9328f600210a957e5ddd308ef48d91"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-016-evaluator.json": {
+    "bytes": 879,
+    "sha256": "e78737d57a52748c0381cddd376cd8627a9328f600210a957e5ddd308ef48d91"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-017-evaluator.json": {
+    "bytes": 879,
+    "sha256": "e78737d57a52748c0381cddd376cd8627a9328f600210a957e5ddd308ef48d91"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-018-evaluator.json": {
+    "bytes": 875,
+    "sha256": "41578bab531e143cd9864870c9af1495aed7465eff512571387403aa734a1f26"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-019-evaluator.json": {
+    "bytes": 875,
+    "sha256": "41578bab531e143cd9864870c9af1495aed7465eff512571387403aa734a1f26"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-020-evaluator.json": {
+    "bytes": 875,
+    "sha256": "41578bab531e143cd9864870c9af1495aed7465eff512571387403aa734a1f26"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-021-evaluator.json": {
+    "bytes": 875,
+    "sha256": "41578bab531e143cd9864870c9af1495aed7465eff512571387403aa734a1f26"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-022-evaluator.json": {
+    "bytes": 875,
+    "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-023-evaluator.json": {
+    "bytes": 875,
+    "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-024-evaluator.json": {
+    "bytes": 875,
+    "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-025-evaluator.json": {
+    "bytes": 875,
+    "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-026-evaluator.json": {
+    "bytes": 875,
+    "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-027-evaluator.json": {
+    "bytes": 875,
+    "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-028-evaluator.json": {
+    "bytes": 875,
+    "sha256": "c5baebb5b7d3c7cc04940aef92872da30321a6bd15d0478309f49ba224a49e0f"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-029-evaluator.json": {
+    "bytes": 875,
+    "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-030-evaluator.json": {
+    "bytes": 875,
+    "sha256": "8c10a3ea2956baff8bfa875c658a98aa7db772f924b38557ad05c819a5f88a2d"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-031-evaluator.json": {
+    "bytes": 875,
+    "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-032-evaluator.json": {
+    "bytes": 875,
+    "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-033-evaluator.json": {
+    "bytes": 875,
+    "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-034-evaluator.json": {
+    "bytes": 875,
+    "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-035-evaluator.json": {
+    "bytes": 875,
+    "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-036-evaluator.json": {
+    "bytes": 875,
+    "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-037-evaluator.json": {
+    "bytes": 875,
+    "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-038-evaluator.json": {
+    "bytes": 875,
+    "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-039-evaluator.json": {
+    "bytes": 875,
+    "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+  },
+  "docs/engineering/execution-control-plane/evidence/VREC-ECP-040-evaluator.json": {
+    "bytes": 875,
+    "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-005.md": {
+    "bytes": 2304,
+    "sha256": "b976847a837f9aca5f309f614e7dbef06753d64f47e21b3c53984139b957181b"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-009.md": {
+    "bytes": 2299,
+    "sha256": "6daa5279280c20f8a04f6373a2ca7116ad7094066ab7731345d94888c2840882"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-010.md": {
+    "bytes": 2450,
+    "sha256": "eff8d3241b5d7e49172a00ae9715d9132a5c4059464cfa20bcba0f91b52473d6"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-011.md": {
+    "bytes": 2529,
+    "sha256": "6f22a88d3de1ec331f3f441a6bca87cbf3ababcb7bdea11e4b61739ec4e48f3a"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-012.md": {
+    "bytes": 2389,
+    "sha256": "585eadcdca9dfe05316530280b9416b0adad09f55a763db6610a15635ccc82c3"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-013.md": {
+    "bytes": 2717,
+    "sha256": "162aba9047c7505ebf87ffb019306dec826c7250bfef347eef2e89dffa534a67"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-014.md": {
+    "bytes": 2745,
+    "sha256": "0c466fd9c0ade649fc8743ae3ce68cdf84220edcbae2b3c0ed1ac8c227052761"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-015.md": {
+    "bytes": 2717,
+    "sha256": "9f8a393a935b4ac6eda2dc0252c7841ea5ea513fbcfa640ca843e4a1be7a8987"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-016.md": {
+    "bytes": 2895,
+    "sha256": "efae240466d6d8a3e63b7f5c2d9aa70e8a1ce45e10e498df2a0e7ea705ea6bec"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-017.md": {
+    "bytes": 2751,
+    "sha256": "9a28f8c89cfa3b841bb5939ad3e002dcef6a4fe68eeda30d90ffd17e2885813e"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-018.md": {
+    "bytes": 2707,
+    "sha256": "f786645bfd0592cf4d281bfb42a63fd4c805bf79cbc2b0594045ed806071ae72"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-019.md": {
+    "bytes": 2831,
+    "sha256": "c6b2fd52c4a7a635577afa60ecf300fd62e3bad364adc9214d360e05de9e4cd6"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-020.md": {
+    "bytes": 3085,
+    "sha256": "36f38f5d51fcaeaff245d9426c28fcb28a99bb773e1984f4265b180d509baeb5"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-021.md": {
+    "bytes": 3429,
+    "sha256": "2995635efc58ee7f6f8d73cfee24bc1803a4a99e9891488ec3e192b6e39e81db"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-022.md": {
+    "bytes": 3422,
+    "sha256": "333e6b2d8b07263179f0576012ea10e7d4cdad366f6982ce49ae0c57d1ef8ebc"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-023.md": {
+    "bytes": 3303,
+    "sha256": "81c0bc9a51a7f4d1a728ef09986b2fe04e61f4c34477200a1888be970ed7772c"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-024.md": {
+    "bytes": 2901,
+    "sha256": "ce5bf6e9ad1067a6d08aab0baf7fb3a4cff30b5cc02e7ba0e92439e9401aec97"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-025.md": {
+    "bytes": 2384,
+    "sha256": "72c9b5c0659d689a8d275b2f7bc205b9a1783d6b454053e9207d9a1b611e4ead"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-026.md": {
+    "bytes": 3420,
+    "sha256": "8136c21ba255ceb3b88bab30f3120367580af9cbbdd16df28e68b181957b64a7"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-027.md": {
+    "bytes": 2261,
+    "sha256": "23cc9f9708653e2139f9af73fc89f84eebe2469c020eef0d7bd70754956eb7d7"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-028.md": {
+    "bytes": 3199,
+    "sha256": "c2395cbb4d69bbcea8dead87637288dc6b14d75bcc32431dd0186ba6f75f5080"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-029.md": {
+    "bytes": 2930,
+    "sha256": "b7dceaa60135b6b33765f58ccdd74740ef641aadb79755a4e2c62c036214b95b"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-030.md": {
+    "bytes": 2100,
+    "sha256": "e4d6fd7f55e4e6ee6a5884ca38017d954649c0f576a32d97d935caacad4175b9"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-031.md": {
+    "bytes": 2143,
+    "sha256": "67d1d0da0a3dbe73590f1ae84177186677a9701d0ed7928c04e9adab34cde8cb"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-032.md": {
+    "bytes": 2188,
+    "sha256": "78249ea4f950165f23c2cfbce8cca63e74df46405f99e53f02323c5e957a2ac7"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-033.md": {
+    "bytes": 2145,
+    "sha256": "51aeca10b42552d05f65c5d477cdae0a5c717b011318495132d2d5f28b02420e"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-034.md": {
+    "bytes": 2248,
+    "sha256": "e505b2f96b93415578929467c014330594c8e6cdb72f19cb91ac466e3ab7bae1"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-035.md": {
+    "bytes": 2039,
+    "sha256": "72cd7f5436f0248f50c60e21e943d2c48795c7c3de5b3e34e517ad419bc3d6bf"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-036.md": {
+    "bytes": 1990,
+    "sha256": "851f5972c52f2975d991bd373946665d2d35dd61fff7b66fce90318f53771616"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-037.md": {
+    "bytes": 2248,
+    "sha256": "540f9baaddfbf43ddce8647bdba8f467856f96c9853a4b8294bbe1aae9f89b57"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-038.md": {
+    "bytes": 2104,
+    "sha256": "5498ceb3b0ca10b49aeb2856c3e005e0a8cc25614cac6b6a4429a2c00e68799c"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-039.md": {
+    "bytes": 2096,
+    "sha256": "bd1f998f12da542009ecca2c30748452ab8e5d1dbd88cbf8d723a6313f926236"
+  },
+  "docs/engineering/execution-control-plane/verification-records/VREC-ECP-040.md": {
+    "bytes": 2141,
+    "sha256": "ef6eb252139695c0acb1576f7663ff603fc0eb3f1477c8fac2703ba06af900e4"
+  },
+  "docs/engineering/harness-distribution/evidence/VREC-DOC-007-evaluator.json": {
+    "bytes": 875,
+    "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+  },
+  "docs/engineering/harness-distribution/evidence/VREC-DST-019-evaluator.json": {
+    "bytes": 875,
+    "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+  },
+  "docs/engineering/harness-distribution/evidence/VREC-DST-020-evaluator.json": {
+    "bytes": 875,
+    "sha256": "c5baebb5b7d3c7cc04940aef92872da30321a6bd15d0478309f49ba224a49e0f"
+  },
+  "docs/engineering/harness-distribution/evidence/VREC-DST-021-evaluator.json": {
+    "bytes": 875,
+    "sha256": "8c10a3ea2956baff8bfa875c658a98aa7db772f924b38557ad05c819a5f88a2d"
+  },
+  "docs/engineering/harness-distribution/evidence/VREC-DST-022-evaluator.json": {
+    "bytes": 875,
+    "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+  },
+  "docs/engineering/harness-distribution/evidence/VREC-DST-023-evaluator.json": {
+    "bytes": 875,
+    "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+  },
+  "docs/engineering/harness-distribution/evidence/VREC-DST-024-evaluator.json": {
+    "bytes": 875,
+    "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DOC-006.md": {
+    "bytes": 2299,
+    "sha256": "e2d94164f77571357d0264b6e6bf8849cc8d480011711aa9bb2f189c1c067143"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DOC-007.md": {
+    "bytes": 2224,
+    "sha256": "47dae598454f90b59b093e1eaecc0a34fb0f949a5b2ed54a44146470887e368c"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-003.md": {
+    "bytes": 1272,
+    "sha256": "46d3d1e23fce19b616b82f082c7915e08776955bfd7b8ba2f2f0920781d5d108"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-004.md": {
+    "bytes": 1414,
+    "sha256": "288196dbf1dd3dd36250efcd1a382ea23900a867f5998efb496d87393c4b325c"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-005.md": {
+    "bytes": 1535,
+    "sha256": "1dcfe8aa44fa48f0cff0bfd36913b3ffb2ed086211c9caf1d00cfc6a9230d0ce"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-006.md": {
+    "bytes": 1633,
+    "sha256": "ad1d05b1655fb383156214f1b2b94922bc161d392229870c1c7476aafb7f567d"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-007.md": {
+    "bytes": 1589,
+    "sha256": "37b839d0715f81b17761e98018570849163774ccc5ec9f59b72b820450d494b0"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-008.md": {
+    "bytes": 1608,
+    "sha256": "4613db8a76ef2cb9b9470cc0cef214815dafe4317785ce588963b59b6125d30f"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-009.md": {
+    "bytes": 1433,
+    "sha256": "a2479c9bbf73ad21bc16a10ad0910bb379fba7721dc725c2166ace0cb7adfc5a"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-010.md": {
+    "bytes": 1447,
+    "sha256": "b28f246223f7f0700bf7f6d1d7a55f42810b3528ac7baaec7fe4270217421ffc"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-011.md": {
+    "bytes": 1530,
+    "sha256": "b833dfe059e89e21a1e8bcbae249ec42b4a50f50ddaff32f6d8a2a66a6e40517"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-012.md": {
+    "bytes": 1420,
+    "sha256": "a112d770f8d4e140b20fef1b2ee55031e43079cc801969a6930956a5f34776c4"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-013.md": {
+    "bytes": 1351,
+    "sha256": "f190af7b0202ba20622db7187cc9cec2640b33e59195908b57d6b30802bdcb53"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-014.md": {
+    "bytes": 3485,
+    "sha256": "bb1adb8c683ae1d85c58c65e723173fda651d99518f5c16f4a03acdd1122434d"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-015.md": {
+    "bytes": 1963,
+    "sha256": "228ad0c0a0949e46b948bfd16376ef1de7be7f51808044ab69d5374fd7a71d6e"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-016.md": {
+    "bytes": 2049,
+    "sha256": "f496dfc4c169b4180159c39f1a5a3f79be781490340fc4988871c139181d2c21"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-017.md": {
+    "bytes": 2073,
+    "sha256": "41a439ece49998ef2ced68145ce55db591ea80d70d18607e2dfca22cf8c59036"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-018.md": {
+    "bytes": 6323,
+    "sha256": "c250bb56defc441f18f6ab53390f95f221bdbab1f5a4984169f1c762d7364bf0"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-019.md": {
+    "bytes": 2684,
+    "sha256": "e803233852e56bc83e4547a72b41bb512c6e66b0fabb0b5ebab38017640ece08"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-020.md": {
+    "bytes": 1943,
+    "sha256": "cf6972e672f83958a9fbddb539e297725b64cf6bbf7121eaf89d41a73e1ab021"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-021.md": {
+    "bytes": 2172,
+    "sha256": "559e462493321fa74c66a1e5a780b00be1e53b58fc9d81aece5d9ddc1789bef2"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-022.md": {
+    "bytes": 3318,
+    "sha256": "5d049d6419de047b44931750a41d887bcf91222fd48b11f3f2b10175ffb563ec"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-023.md": {
+    "bytes": 3748,
+    "sha256": "fc4c82dc378d8d66795be009a8cf7bb6c93634be946eb4605d542aae450e00da"
+  },
+  "docs/engineering/harness-distribution/verification-records/VREC-DST-024.md": {
+    "bytes": 3714,
+    "sha256": "8a643aa41848334e5b5a5d64016c248ddd0988a17cd6921c1392bc704960178c"
+  },
+  "docs/engineering/hash-bound-integrity/evidence/VREC-HBI-001-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/hash-bound-integrity/evidence/VREC-HBI-002-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/hash-bound-integrity/evidence/VREC-HBI-003-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/hash-bound-integrity/evidence/VREC-HBI-004-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/hash-bound-integrity/evidence/VREC-HBI-005-evaluator.json": {
+    "bytes": 786,
+    "sha256": "1e713a859270491fe587d79b3b499a1a077d1c7dc9e588260ef8adc5b429f5cf"
+  },
+  "docs/engineering/hash-bound-integrity/verification-records/VREC-HBI-001.md": {
+    "bytes": 2502,
+    "sha256": "7b677279ef0ff17aa130944a1fa20a9d529810948b9f405cc000e913e7350709"
+  },
+  "docs/engineering/hash-bound-integrity/verification-records/VREC-HBI-002.md": {
+    "bytes": 4193,
+    "sha256": "a5d1baef9a05731d3a470324ba6c169ae0b52b1a31d32aa48ad79590c912da6c"
+  },
+  "docs/engineering/hash-bound-integrity/verification-records/VREC-HBI-003.md": {
+    "bytes": 10003,
+    "sha256": "89e9a567b9bc115bad83f0d66be0470640fd4651af5753490b53e1be7b587c8f"
+  },
+  "docs/engineering/hash-bound-integrity/verification-records/VREC-HBI-004.md": {
+    "bytes": 10034,
+    "sha256": "778213eadc77e8d2a74c184b87f6d1082fee3f86be1af8bb1377d2804696f96e"
+  },
+  "docs/engineering/hash-bound-integrity/verification-records/VREC-HBI-005.md": {
+    "bytes": 2289,
+    "sha256": "ca5443d6e9670f53c7fadf35abf21203398d0934b99433bdab27afc759af9447"
+  },
+  "docs/engineering/instruction-architecture/verification-records/VREC-IAR-001.md": {
+    "bytes": 1385,
+    "sha256": "5001e08fc7d792f101bbca55694df9ca7af93c0c95ac04dd84812c843e8767a4"
+  },
+  "docs/engineering/instruction-architecture/verification-records/VREC-IAR-002.md": {
+    "bytes": 1802,
+    "sha256": "f41af82369f3b9ea2d05b4283d728d86b85cd2c9ca8dd86dcc91aa9e3b9c4f69"
+  },
+  "docs/engineering/instruction-architecture/verification-records/VREC-IAR-003.md": {
+    "bytes": 1440,
+    "sha256": "af3c8907977b915397897c97162b9236a68f0bc87cedb5c534089c6f0831d792"
+  },
+  "docs/engineering/instruction-architecture/verification-records/VREC-IAR-004.md": {
+    "bytes": 1427,
+    "sha256": "7770ace222658b7eb028d2dd7417d578fa749b60574dee7fcbe0df960b66f9c7"
+  },
+  "docs/engineering/instruction-architecture/verification-records/VREC-IAR-006.md": {
+    "bytes": 1404,
+    "sha256": "053a28ea2dc2426b3dfb7fb03de9dbd419e3132fb25f07d1b2bce9b849677102"
+  },
+  "docs/engineering/instruction-architecture/verification-records/VREC-IAR-007.md": {
+    "bytes": 1404,
+    "sha256": "9b1c08b882f79027885c806254c17f23be84dd006355b7a1a9db20c38c9f9d60"
+  },
+  "docs/engineering/instruction-architecture/verification-records/VREC-IAR-008.md": {
+    "bytes": 4810,
+    "sha256": "6ba871c9bfd7da5acc8e43db1d55edc0484e3df90416abe2e3014937467db3c4"
+  },
+  "docs/engineering/integration-package/evidence/VREC-IPK-001-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/integration-package/verification-records/VREC-IPK-001.md": {
+    "bytes": 5630,
+    "sha256": "94f6d4bfc196c4f86f249ac163f271e0052be9d6cb00006e709c1d68784e5ab6"
+  },
+  "docs/engineering/legacy-release-evidence/evidence/VREC-LRE-001-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/legacy-release-evidence/evidence/VREC-LRE-002-evaluator.json": {
+    "bytes": 875,
+    "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+  },
+  "docs/engineering/legacy-release-evidence/verification-records/VREC-LRE-001.md": {
+    "bytes": 1485,
+    "sha256": "b1a118b8784de6733028a8acb0047f592260dfc6787960ca83a8755066171864"
+  },
+  "docs/engineering/legacy-release-evidence/verification-records/VREC-LRE-002.md": {
+    "bytes": 3027,
+    "sha256": "ffac9b9c4c83b6a52a43cbf4a0a6d7a4ce2952cc57eb2b6b42c6b8dc189c5e38"
+  },
+  "docs/engineering/plugin-integration/evidence/VREC-PLG-001-evaluator.json": {
+    "bytes": 875,
+    "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+  },
+  "docs/engineering/plugin-integration/evidence/VREC-PLG-002-evaluator.json": {
+    "bytes": 875,
+    "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+  },
+  "docs/engineering/plugin-integration/evidence/VREC-PLG-003-evaluator.json": {
+    "bytes": 875,
+    "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+  },
+  "docs/engineering/plugin-integration/evidence/VREC-PLG-004-evaluator.json": {
+    "bytes": 875,
+    "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+  },
+  "docs/engineering/plugin-integration/evidence/VREC-PLG-005-evaluator.json": {
+    "bytes": 875,
+    "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+  },
+  "docs/engineering/plugin-integration/evidence/VREC-PLG-006-evaluator.json": {
+    "bytes": 875,
+    "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+  },
+  "docs/engineering/plugin-integration/evidence/VREC-PLG-007-evaluator.json": {
+    "bytes": 875,
+    "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+  },
+  "docs/engineering/plugin-integration/evidence/VREC-PLG-008-evaluator.json": {
+    "bytes": 875,
+    "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native-path-map.json": {
+    "bytes": 25302,
+    "sha256": "865a8b516aae860d148fd37316bcf11646f980e9122207f4cc5dd15d501dc083"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0001.json": {
+    "bytes": 881,
+    "sha256": "9cd3c7c8c9210b5d5438028383b92b64fb04146e56a9cd7c1096b40a94738845"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0002.md": {
+    "bytes": 1287,
+    "sha256": "8c5e1eb6152d894a2af8adb0c5844d7aeed329b4d57fc5a506418af054ac06af"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0003.txt": {
+    "bytes": 19687,
+    "sha256": "ea43c242f0429f61a83383a81418f90b1a47e93e1470162a7d8b73f0c009a6e6"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0004.json": {
+    "bytes": 4695,
+    "sha256": "2c288b4d2fefae3abf56e7d46ae7d79137623876ad72a66b0b91bfadae177ce3"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0005.json": {
+    "bytes": 856,
+    "sha256": "0acbb4aeb9b07c22b33add4f1120ab38a46d6c84bd37f191d24209e2bbde64e9"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0006.json": {
+    "bytes": 722,
+    "sha256": "3517f32a79e6da2c2a12fe0273a7b6386e05c92f3f9187b25d2774acdc119c09"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0007.json": {
+    "bytes": 775,
+    "sha256": "3d9feded312000ef41e14f27aad51015bf6bb9749005503c14c0a740280cb650"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0008.json": {
+    "bytes": 832,
+    "sha256": "68709b0cdc8a964c89088e0120066b2d7cf0c2ae123660b32937396863798ee4"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0009.json": {
+    "bytes": 734,
+    "sha256": "70a5a3c54097b87b6d997e1a914daa0795764286d46771ca62a7f782da76eb3e"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0010.json": {
+    "bytes": 835,
+    "sha256": "c8671ae5902e74ac392a2de327c4a88eb5ddbba5a9d5547dd72b10df7db21ea9"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0011.json": {
+    "bytes": 1949,
+    "sha256": "f4e7c80ece35787cf142d8132303429febc92a1b3a83b6c5180ff066c835c8d8"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0012.json": {
+    "bytes": 3103,
+    "sha256": "f39a03f5d5d82fc0b374723cf32b467e4c2c0a2d987d0b174c5407f73c84ab19"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0013.json": {
+    "bytes": 1019,
+    "sha256": "3c18634ace06b547de4eb29ab724af74e14f6210ee7a9af36ba65ce0710de884"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0014.json": {
+    "bytes": 4940,
+    "sha256": "e8ed2545376da173dc9783aef81e988547ef9489a0c719bfbc07fdc0ab2d8b5b"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0015.json": {
+    "bytes": 1461,
+    "sha256": "17802c0561780b763736a691cae24069978fc870ccff4b6d4ff418087ef463f3"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0016.html": {
+    "bytes": 442824,
+    "sha256": "706b8e772b7aef1d96ba326e776781de5ad5d94df453d409dccbca907b8de8cf"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0017.json": {
+    "bytes": 881,
+    "sha256": "9cd3c7c8c9210b5d5438028383b92b64fb04146e56a9cd7c1096b40a94738845"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0018.md": {
+    "bytes": 19687,
+    "sha256": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0019.md": {
+    "bytes": 1287,
+    "sha256": "5e88ddb1020dfea17d1bed8e34fccc1b05131284870809096995850b2e790a6e"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0020.txt": {
+    "bytes": 19687,
+    "sha256": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0021.json": {
+    "bytes": 4695,
+    "sha256": "7ee3404a96c19beed65824685cbaa269ab23af957e021dd94562b0994bfe31ba"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0022.json": {
+    "bytes": 722,
+    "sha256": "0b1c904a2691c0806bbdd9cd3114ae25f02cf1402ccef943e76e7c7b7faa46c1"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0023.json": {
+    "bytes": 856,
+    "sha256": "2262514df3a78b0a166c0279982a64ad6cdfb5eab9c18a22a293deb9549b8385"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0024.json": {
+    "bytes": 1949,
+    "sha256": "264293643e8f7cf0a1b7e0b48c9d73c0199c754d4ec3a195759216b50f839cf5"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0025.json": {
+    "bytes": 734,
+    "sha256": "67a735968173b15ad87afe5d6ca876c87eaabb64b4a24dcef152998aa8b63b92"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0026.json": {
+    "bytes": 775,
+    "sha256": "769f4a5a9f168dc3f9f8b48f14ab0bff96d3062b411c77a36cffb558a677bd9d"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0027.json": {
+    "bytes": 835,
+    "sha256": "79598de6b0dc18a42df712af22e8e808e4378724073a4f528c175f2a085a5bf0"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0028.json": {
+    "bytes": 832,
+    "sha256": "e432e0f04987b1d7cb8bc110e0323c2cef83b5aa7f5be187268dcd963ff79323"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0029.json": {
+    "bytes": 3103,
+    "sha256": "9ec92835065e0acf77ce0430a5a7fe2d81bef5e7d7e266e551f9cc182781b84e"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0030.json": {
+    "bytes": 1019,
+    "sha256": "75d4e6e9f0cf0bd01d0e9d8210f53c198361e76681d2a448a8e268b5ed4b7114"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0031.json": {
+    "bytes": 4940,
+    "sha256": "5f056d6e5d4b8cad9e6f7039c926faf51de246bb66275e0932c89385fa86104d"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0032.json": {
+    "bytes": 1461,
+    "sha256": "c7a1919851d2e8c065acc8bac9394462543fa892884829c5af68435837df18e2"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0033.html": {
+    "bytes": 442824,
+    "sha256": "5630df7cb4252bac94fbacdc118fe4476e46fd74ee2ab15335abdc573c2fa171"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0034.json": {
+    "bytes": 881,
+    "sha256": "9cd3c7c8c9210b5d5438028383b92b64fb04146e56a9cd7c1096b40a94738845"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0035.md": {
+    "bytes": 1287,
+    "sha256": "4bfc0077bd3cd45c461bed48f5babdff0fb4be2548e7a18d8e950b5825ba9f49"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0036.txt": {
+    "bytes": 19687,
+    "sha256": "b67d95c5fad647f2ab9db5150a6d2a6c65e54aa317bd3c03febae636eab5ffc8"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0037.json": {
+    "bytes": 4697,
+    "sha256": "aaca3f1d94e990a5d709602f5e8d2f6064f961b3414cf21ad3a4a7bdee897780"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0038.json": {
+    "bytes": 722,
+    "sha256": "0b1c904a2691c0806bbdd9cd3114ae25f02cf1402ccef943e76e7c7b7faa46c1"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0039.json": {
+    "bytes": 856,
+    "sha256": "2262514df3a78b0a166c0279982a64ad6cdfb5eab9c18a22a293deb9549b8385"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0040.json": {
+    "bytes": 1949,
+    "sha256": "264293643e8f7cf0a1b7e0b48c9d73c0199c754d4ec3a195759216b50f839cf5"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0041.json": {
+    "bytes": 734,
+    "sha256": "67a735968173b15ad87afe5d6ca876c87eaabb64b4a24dcef152998aa8b63b92"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0042.json": {
+    "bytes": 775,
+    "sha256": "769f4a5a9f168dc3f9f8b48f14ab0bff96d3062b411c77a36cffb558a677bd9d"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0043.json": {
+    "bytes": 835,
+    "sha256": "79598de6b0dc18a42df712af22e8e808e4378724073a4f528c175f2a085a5bf0"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0044.json": {
+    "bytes": 832,
+    "sha256": "e432e0f04987b1d7cb8bc110e0323c2cef83b5aa7f5be187268dcd963ff79323"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0045.json": {
+    "bytes": 3103,
+    "sha256": "9ec92835065e0acf77ce0430a5a7fe2d81bef5e7d7e266e551f9cc182781b84e"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0046.json": {
+    "bytes": 1021,
+    "sha256": "bc9dff153a1325b439a223ee652a95851c63fb81e548f9accd94892e596d6403"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0047.json": {
+    "bytes": 4940,
+    "sha256": "5f056d6e5d4b8cad9e6f7039c926faf51de246bb66275e0932c89385fa86104d"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0048.json": {
+    "bytes": 1461,
+    "sha256": "38f7cbfa756206243f27bf0e5e26712075b1c977616e47325676ea5e4959a8d2"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0049.html": {
+    "bytes": 442824,
+    "sha256": "54a5044682f250680c19e3ad175ba83ea1a00089dea06937942b520159a36af7"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0050.md": {
+    "bytes": 286,
+    "sha256": "912cfb3d11e44878aa09f1a0c15cb688058db2deec7da8f0d5de4845caa88f72"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0051.json": {
+    "bytes": 8870,
+    "sha256": "4900e0c932278c8a833228b0c734db5a356dc0c60dcc30356765535c87ea589a"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0052.md": {
+    "bytes": 1287,
+    "sha256": "4bfc0077bd3cd45c461bed48f5babdff0fb4be2548e7a18d8e950b5825ba9f49"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0053.json": {
+    "bytes": 881,
+    "sha256": "9cd3c7c8c9210b5d5438028383b92b64fb04146e56a9cd7c1096b40a94738845"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0054.md": {
+    "bytes": 1110,
+    "sha256": "669813570a3441b15c7161c56aa7fe3c00918eb2dcb093b92d9892c96b2b8c68"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0055.md": {
+    "bytes": 1367,
+    "sha256": "cbdd139c16647110e4767de16d82f7e3b30276264c3ec34a897d61307b94762a"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-011/native/0056.json": {
+    "bytes": 730,
+    "sha256": "730e0507e7c4992b183122e91fda0369d610a499d76545b463d725c22dcaf263"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-017/path-plan.json": {
+    "bytes": 25409,
+    "sha256": "37031560322c962987513e8950b37503a642c6e474cc2a031822870467659aa9"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-017/scope-extension-plan.json": {
+    "bytes": 2626,
+    "sha256": "1927a7d61c7d6357e61047f427c0d2f1fb8e456d32dd1698efc01c7bba6f9538"
+  },
+  "docs/engineering/plugin-integration/evidence/WO-PLG-017/staging-path-map.json": {
+    "bytes": 685,
+    "sha256": "3db2265dade63dc996631c76dae5db7ee9caebbdf16665ec9b49873a40b389ab"
+  },
+  "docs/engineering/plugin-integration/verification-records/VREC-PLG-001.md": {
+    "bytes": 5700,
+    "sha256": "6aa1085f3a20952d42835a4f96619faeb777cc29f4a3f1c67ff4ec781b65ffbd"
+  },
+  "docs/engineering/plugin-integration/verification-records/VREC-PLG-002.md": {
+    "bytes": 6036,
+    "sha256": "bea77cda56a5ec143db0a4ffd6afd55614f457386a19aa9c5c1f045f88d33c31"
+  },
+  "docs/engineering/plugin-integration/verification-records/VREC-PLG-003.md": {
+    "bytes": 18384,
+    "sha256": "ed19cff6c28e6416c38a0d126de204970fc104eacbe94e6d373e22cdb3522ab3"
+  },
+  "docs/engineering/plugin-integration/verification-records/VREC-PLG-004.md": {
+    "bytes": 19193,
+    "sha256": "519e1a6640f506239cc3fa394aa8172609ed3b8cf70dce1e930d29fa35536fab"
+  },
+  "docs/engineering/plugin-integration/verification-records/VREC-PLG-005.md": {
+    "bytes": 25014,
+    "sha256": "ad11b1e7c34c115a65a706dbf75f0dab282255df52d45c97482155bed90c3c3b"
+  },
+  "docs/engineering/plugin-integration/verification-records/VREC-PLG-006.md": {
+    "bytes": 20451,
+    "sha256": "a25e2d0de48b85218cabf0a3e7200a5774d0783fb1cc1eca29f41e27152f993b"
+  },
+  "docs/engineering/plugin-integration/verification-records/VREC-PLG-007.md": {
+    "bytes": 8904,
+    "sha256": "7244d9227e812a3ad02a5a94d1c3c2a83083586c5b2ace9c739308f9aa8a11a5"
+  },
+  "docs/engineering/plugin-integration/verification-records/VREC-PLG-008.md": {
+    "bytes": 11850,
+    "sha256": "64404dbc6d0ae075b643d0e2c6c1cf25ddb3670bce62e2c901bae7d135eba950"
+  },
+  "docs/engineering/portable-managed-integrity/verification-records/VREC-PMI-001.md": {
+    "bytes": 1449,
+    "sha256": "645331fd549e7035f55ab00c40d21d47a5ee214196871010dbc09dc659dfb8ea"
+  },
+  "docs/engineering/pypi-publication/verification-records/VREC-PYP-001.md": {
+    "bytes": 1366,
+    "sha256": "4e4a27aaaf207d23f4c72bd7716602015cdad1a584bb8f13bd5136782e8009e9"
+  },
+  "docs/engineering/pypi-publication/verification-records/VREC-PYP-002.md": {
+    "bytes": 1518,
+    "sha256": "05647633f5323672c8a48bb71fd1e9afdef92f3c337734490143b85c240696c1"
+  },
+  "docs/engineering/release-0-10-0/evidence/VREC-SEH-019-evaluator.json": {
+    "bytes": 879,
+    "sha256": "e78737d57a52748c0381cddd376cd8627a9328f600210a957e5ddd308ef48d91"
+  },
+  "docs/engineering/release-0-10-0/verification-records/VREC-SEH-019.md": {
+    "bytes": 3538,
+    "sha256": "aaa42b00002c7f886fa730e3cd9d04f0adfaa6852949fe07b65639b3e95a464b"
+  },
+  "docs/engineering/release-0-11-0/evidence/VREC-SEH-020-evaluator.json": {
+    "bytes": 875,
+    "sha256": "41578bab531e143cd9864870c9af1495aed7465eff512571387403aa734a1f26"
+  },
+  "docs/engineering/release-0-11-0/verification-records/VREC-SEH-020.md": {
+    "bytes": 3994,
+    "sha256": "58539d4941f2201200a0301933011066fc0e78ba345886d386cba1d113f94721"
+  },
+  "docs/engineering/release-0-12-0/evidence/VREC-SEH-021-evaluator.json": {
+    "bytes": 875,
+    "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+  },
+  "docs/engineering/release-0-12-0/verification-records/VREC-SEH-021.md": {
+    "bytes": 4298,
+    "sha256": "ed971f7e3b09dfc00ac5d87fec7e359743c8960b99e9cc282d21f5ec93db9f5a"
+  },
+  "docs/engineering/release-0-13-0/evidence/VREC-SEH-022-evaluator.json": {
+    "bytes": 875,
+    "sha256": "c5baebb5b7d3c7cc04940aef92872da30321a6bd15d0478309f49ba224a49e0f"
+  },
+  "docs/engineering/release-0-13-0/verification-records/VREC-SEH-022.md": {
+    "bytes": 3329,
+    "sha256": "b628dd362d5940ffc413db19dcecb9d524ad3e3936ef39e52ba88e5445e6ec23"
+  },
+  "docs/engineering/release-0-14-0/evidence/VREC-SEH-023-evaluator.json": {
+    "bytes": 875,
+    "sha256": "21ded06932d284d3ab2145b5ba7b9d5d3fc40997da8b047f7fb6f9f164910044"
+  },
+  "docs/engineering/release-0-14-0/verification-records/VREC-SEH-023.md": {
+    "bytes": 2990,
+    "sha256": "4766b585c0cd627d2efed4097d73ff39f9e92c989edb17b45d5644bb41081973"
+  },
+  "docs/engineering/release-0-15-0/evidence/VREC-SEH-024-evaluator.json": {
+    "bytes": 875,
+    "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+  },
+  "docs/engineering/release-0-15-0/verification-records/VREC-SEH-024.md": {
+    "bytes": 3527,
+    "sha256": "6bdb2e32d39500849148c9b095f3378d935e191eb6d6d8c08dbbf5a154f060d5"
+  },
+  "docs/engineering/release-0-16-0/evidence/VREC-SEH-025-evaluator.json": {
+    "bytes": 875,
+    "sha256": "8c10a3ea2956baff8bfa875c658a98aa7db772f924b38557ad05c819a5f88a2d"
+  },
+  "docs/engineering/release-0-16-0/verification-records/VREC-SEH-025.md": {
+    "bytes": 2803,
+    "sha256": "b3590db54ef5934241ce163693227e649e27378c5a1fb08153d2206665d00c8b"
+  },
+  "docs/engineering/release-0-17-0/evidence/VREC-SEH-026-evaluator.json": {
+    "bytes": 875,
+    "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+  },
+  "docs/engineering/release-0-17-0/verification-records/VREC-SEH-026.md": {
+    "bytes": 4471,
+    "sha256": "1068548aae1df4d91fe4cd00e3db1ef284abd4174a8145c0b27e4b7420738fa5"
+  },
+  "docs/engineering/release-0-6-0/verification-records/VREC-SEH-008.md": {
+    "bytes": 8750,
+    "sha256": "b41bbca2749baae11eb69c3fe5a6f74c36f59a8e36066809fe4ca061bdb45fd4"
+  },
+  "docs/engineering/release-0-6-0/verification-records/VREC-SEH-009.md": {
+    "bytes": 11520,
+    "sha256": "1130a244ee04ac5a0d15888382f0259f3c1f4be895f6eed8c9411b21fe4e679e"
+  },
+  "docs/engineering/release-0-6-0/verification-records/VREC-SEH-010.md": {
+    "bytes": 12581,
+    "sha256": "799751d68e10071b9f043c7c784505d606e52d68e5f2000babe6da58b9d04532"
+  },
+  "docs/engineering/release-0-6-0/verification-records/VREC-SEH-012.md": {
+    "bytes": 12965,
+    "sha256": "0db46c8eb0d9fb1dee23019f617b6172b0c99cc8228fa3dd8b32bf03a2780e60"
+  },
+  "docs/engineering/release-0-7-0/evidence/VREC-SEH-014-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/release-0-7-0/verification-records/VREC-SEH-014.md": {
+    "bytes": 13819,
+    "sha256": "4520c4ec1fdd325e1029cda0cdbb0d54707a11cb32fe7af99835880496e2df18"
+  },
+  "docs/engineering/release-0-7-1/evidence/VREC-SEH-015-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/release-0-7-1/verification-records/VREC-SEH-015.md": {
+    "bytes": 1955,
+    "sha256": "b891f6dbc3e5b080a9f6095200a836ca7654e0df8afdd66bc3de4757cbb5592a"
+  },
+  "docs/engineering/release-0-8-0/evidence/VREC-SEH-017-evaluator.json": {
+    "bytes": 879,
+    "sha256": "0a090f68cad9465498f702505f3c3d35830328a0ebad928be066831252cfabdd"
+  },
+  "docs/engineering/release-0-8-0/verification-records/VREC-SEH-017.md": {
+    "bytes": 3725,
+    "sha256": "a364dbc3578d6753c18af6c96c1fd67a23833f907134f159a804feb69132b2ea"
+  },
+  "docs/engineering/release-0-9-0/evidence/VREC-SEH-018-evaluator.json": {
+    "bytes": 879,
+    "sha256": "8d217a429db288836d69c843e6f0017c0be29a2b743f589a7fe28bfa8b1cf560"
+  },
+  "docs/engineering/release-0-9-0/verification-records/VREC-SEH-018.md": {
+    "bytes": 3472,
+    "sha256": "146b3f5969135ce72ec28128e0e1df4f047a4a4a8acd98862a7a41f5d04d2732"
+  },
+  "docs/engineering/release-0.2.0/verification-records/VREC-SEH-001.md": {
+    "bytes": 2388,
+    "sha256": "6293f3af244f1ab72de96fb0f426650f7b1d56c990a009f0f94e399261fc3f9e"
+  },
+  "docs/engineering/release-0.2.1/verification-records/VREC-SEH-002.md": {
+    "bytes": 1768,
+    "sha256": "9bc508207f6c5626329ea90f91f467f831fd4564d54d19854149c14cfea0c410"
+  },
+  "docs/engineering/release-0.2.2/verification-records/VREC-SEH-004.md": {
+    "bytes": 2073,
+    "sha256": "f2b25ee994428ba85fbb5a2c1d7c8444d63b5356276d5d8d95665b4d5ad93d25"
+  },
+  "docs/engineering/release-0.3.0/verification-records/VREC-SEH-005.md": {
+    "bytes": 4974,
+    "sha256": "c7a78ea923c2e92e8a3edc3a2347b77f5285c9dae8de0cd388b2f04c8fffab5f"
+  },
+  "docs/engineering/release-0.4.0/verification-records/VREC-SEH-006.md": {
+    "bytes": 8348,
+    "sha256": "100c7ac1df345a212c831aceac23549959e72343913760092889f362f7b384f2"
+  },
+  "docs/engineering/release-0.4.1/verification-records/VREC-SEH-007.md": {
+    "bytes": 8927,
+    "sha256": "42351a1086596c11ceaae8d71216b172045786dd437d948ecbbc8737964612f1"
+  },
+  "docs/engineering/release-orchestration/evidence/VREC-RLO-004-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/release-orchestration/evidence/VREC-RLO-005-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/release-orchestration/evidence/VREC-RLO-006-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/release-orchestration/evidence/VREC-RLO-007-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/release-orchestration/evidence/VREC-RLO-008-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/release-orchestration/verification-records/VREC-RLO-001.md": {
+    "bytes": 1457,
+    "sha256": "3bf7578596440ce5f8501fdd909cd8acf117d03c7090a0e4c1a846d3dbe41308"
+  },
+  "docs/engineering/release-orchestration/verification-records/VREC-RLO-002.md": {
+    "bytes": 1481,
+    "sha256": "baaadfa0194153efc76eed33d6804d49640a97ef1be505fca41b1a8e1e6f7aa7"
+  },
+  "docs/engineering/release-orchestration/verification-records/VREC-RLO-003.md": {
+    "bytes": 1389,
+    "sha256": "6e9a88c302e3bc5917706488857e941c101b4d81c42994551c26174a94837a3b"
+  },
+  "docs/engineering/release-orchestration/verification-records/VREC-RLO-004.md": {
+    "bytes": 1471,
+    "sha256": "de493842c43390acb49b9336ad12b1bae1d4135c5cd9282a06fb14be5a2a9f3c"
+  },
+  "docs/engineering/release-orchestration/verification-records/VREC-RLO-005.md": {
+    "bytes": 10134,
+    "sha256": "cec244b95ab4951ce610df19b4be9e901ec1dd4c184318d9e7beff414aa6d042"
+  },
+  "docs/engineering/release-orchestration/verification-records/VREC-RLO-006.md": {
+    "bytes": 3457,
+    "sha256": "7523d580750d9f1e8e51fa65f1d02e6764cec7621a289109fe799393e2bf5130"
+  },
+  "docs/engineering/release-orchestration/verification-records/VREC-RLO-007.md": {
+    "bytes": 2132,
+    "sha256": "358d1c2af4d0e08ee08b0a2c8ba717bd95e5bc3558ce6a41131d9636052d926e"
+  },
+  "docs/engineering/release-orchestration/verification-records/VREC-RLO-008.md": {
+    "bytes": 3410,
+    "sha256": "17b73eb846e6342fdab5ccb04bd5c47e6d98d59a3b6f46b21126f2ee3bebfec5"
+  },
+  "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-016-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-017-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-018-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-019-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-020-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-021-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-022-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-023-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-024-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-026-evaluator.json": {
+    "bytes": 780,
+    "sha256": "150feaccd4cecd8ce88a42871dbda0de61caaea6ac8e6ca8493966cf2bb987fd"
+  },
+  "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-027-evaluator.json": {
+    "bytes": 780,
+    "sha256": "150feaccd4cecd8ce88a42871dbda0de61caaea6ac8e6ca8493966cf2bb987fd"
+  },
+  "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-028-evaluator.json": {
+    "bytes": 879,
+    "sha256": "8d217a429db288836d69c843e6f0017c0be29a2b743f589a7fe28bfa8b1cf560"
+  },
+  "docs/engineering/released-evaluator-boundary/evidence/VREC-REB-029-evaluator.json": {
+    "bytes": 875,
+    "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-001.md": {
+    "bytes": 1453,
+    "sha256": "dd7e81952f7680c250b86db8fcd7a20fbfd04434c008653ef414d440b349e87b"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-002.md": {
+    "bytes": 1453,
+    "sha256": "9801dd2ae8cc8c4700a3c861fbd650db0f1042ce80491789c57671212ccaf42f"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-003.md": {
+    "bytes": 1451,
+    "sha256": "025a5bedfa64ff384188f0b419f49e48a195e92838f60105e94a9bc645787a4d"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-004.md": {
+    "bytes": 3063,
+    "sha256": "68e7ecf4a9c9655c85e78014abcf53b4caf0094a526737023c8af9d085d99a07"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-005.md": {
+    "bytes": 2519,
+    "sha256": "6bc443f470801287e7ce07142798b7ff74e177dbb1e9f53b24f4006ed3737622"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-006.md": {
+    "bytes": 2249,
+    "sha256": "412d265432a57a884ad594894d016e8161b4c0e0c504ebe1306d10e153dbe6e1"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-007.md": {
+    "bytes": 2196,
+    "sha256": "7078fba7ada4f2ed38c556f3bd55aea6e809fb02b466481352599db2f08777a0"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-008.md": {
+    "bytes": 2145,
+    "sha256": "236b378354aa4c68d7ae0b12f94565e4f0b51d9ae4f64e21f8573b29a08ed781"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-009.md": {
+    "bytes": 2178,
+    "sha256": "afbde97953fb44890af0777d58646af4b8d77d1a91c7936afad23296765647d6"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-010.md": {
+    "bytes": 2171,
+    "sha256": "60976d8f644a19a2c21029fb741215c9391a6688436e20ab3ff4858f891b44f4"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-011.md": {
+    "bytes": 2175,
+    "sha256": "51cc5eb78e206e3e48c8fe98dc575be598ba18a1eb76b3f5b7a032c51a7627bf"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-012.md": {
+    "bytes": 2383,
+    "sha256": "673148814db2720dc387a136ed22c749c30a12e5f87deac1fa0ee206a83bf262"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-013.md": {
+    "bytes": 2305,
+    "sha256": "745cc9a64d384de07dab436f819bb3b8043aa801beb3cbbfb3a92e87a8197f70"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-014.md": {
+    "bytes": 1215,
+    "sha256": "d204815da206ce6e5bc3032014024115a2fe0456f7f5c0eebf254a975268f762"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-015.md": {
+    "bytes": 1219,
+    "sha256": "53bf81bb354a10cd3e6b7ce01f6ef3afaaf17aed20171979d5204003e3c60f3b"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-016.md": {
+    "bytes": 1494,
+    "sha256": "8db8a33003b5b99d9c47f71a4cc0b16b805b98fdb4d25a9bb1478b0d8fbab07e"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-017.md": {
+    "bytes": 2765,
+    "sha256": "877e6203804e4fd577c38afa14a09c7d9006d70013e8c0155a6ec16c634f1d73"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-018.md": {
+    "bytes": 1512,
+    "sha256": "b06032b8e6f60e1af062cd00d85011f32e208597014527c657060afb9aff4f2d"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-019.md": {
+    "bytes": 1501,
+    "sha256": "dc6d8e0e823f5f65e578c4c6c68fa3d79da0bd9911acdaccf1772f3ae2822147"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-020.md": {
+    "bytes": 3418,
+    "sha256": "b2dfcec57ecac7adcd6c2b913610d2a9a56268f4f18e1b15a8d29c0e596a067e"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-021.md": {
+    "bytes": 4301,
+    "sha256": "e8476ab5ebcd4af44329b217e310d133676a4a5da46ef2204f177f70b8801e22"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-022.md": {
+    "bytes": 4390,
+    "sha256": "c9ea1d9bca5427bfe4199e55f701a41e0301ecd0e07c8520709fa56fdabe7062"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-023.md": {
+    "bytes": 3958,
+    "sha256": "b99270df9eac92cab3b5e3272c65d673924ab9f92739be1b62153597bb73bbc9"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-024.md": {
+    "bytes": 1487,
+    "sha256": "9966277ba52c4c27a8d086e1e98172f7e92507e1b11e46eac01f89e78f883ba8"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-026.md": {
+    "bytes": 2170,
+    "sha256": "b698392a723952d9070bf492501883bbffe30d0a3a2ba3c0b861991d0fabad17"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-027.md": {
+    "bytes": 2170,
+    "sha256": "d27cf1c9b0b53b7e12c8110864c0637954793c931297575bad8fef35bc7dae4f"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-028.md": {
+    "bytes": 2560,
+    "sha256": "9f964c4610c103520ef9bfea48157237912988f7960263d49c1e99a94ff1a436"
+  },
+  "docs/engineering/released-evaluator-boundary/verification-records/VREC-REB-029.md": {
+    "bytes": 2874,
+    "sha256": "beba6cf8cea03e2491d718fd9fb85b8595859030b746aa7607e54b68c7db9369"
+  },
+  "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-003-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-004-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-005-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-006-evaluator.json": {
+    "bytes": 780,
+    "sha256": "150feaccd4cecd8ce88a42871dbda0de61caaea6ac8e6ca8493966cf2bb987fd"
+  },
+  "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-007-evaluator.json": {
+    "bytes": 879,
+    "sha256": "8d217a429db288836d69c843e6f0017c0be29a2b743f589a7fe28bfa8b1cf560"
+  },
+  "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-008-evaluator.json": {
+    "bytes": 879,
+    "sha256": "e78737d57a52748c0381cddd376cd8627a9328f600210a957e5ddd308ef48d91"
+  },
+  "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-009-evaluator.json": {
+    "bytes": 875,
+    "sha256": "41578bab531e143cd9864870c9af1495aed7465eff512571387403aa734a1f26"
+  },
+  "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-010-evaluator.json": {
+    "bytes": 875,
+    "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+  },
+  "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-011-evaluator.json": {
+    "bytes": 875,
+    "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+  },
+  "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-012-evaluator.json": {
+    "bytes": 875,
+    "sha256": "c5baebb5b7d3c7cc04940aef92872da30321a6bd15d0478309f49ba224a49e0f"
+  },
+  "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-013-evaluator.json": {
+    "bytes": 875,
+    "sha256": "21ded06932d284d3ab2145b5ba7b9d5d3fc40997da8b047f7fb6f9f164910044"
+  },
+  "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-014-evaluator.json": {
+    "bytes": 875,
+    "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+  },
+  "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-015-evaluator.json": {
+    "bytes": 875,
+    "sha256": "8c10a3ea2956baff8bfa875c658a98aa7db772f924b38557ad05c819a5f88a2d"
+  },
+  "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-016-evaluator.json": {
+    "bytes": 875,
+    "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+  },
+  "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-017-evaluator.json": {
+    "bytes": 875,
+    "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+  },
+  "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-001.md": {
+    "bytes": 3110,
+    "sha256": "95a5935be8ec1290a2ac5ce05aac1e66c8ef212ce3c587fd53a7bc2793fc1933"
+  },
+  "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-003.md": {
+    "bytes": 1855,
+    "sha256": "66f1d9022919e159bbb3e65d76729b70efb1c7ebfe4caee1474edf07907533d0"
+  },
+  "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-004.md": {
+    "bytes": 1476,
+    "sha256": "97b9e6718b8923926f83ce1d4c2705a9353113c7dfc28c87db1cb34bf2e2617e"
+  },
+  "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-005.md": {
+    "bytes": 1700,
+    "sha256": "eef4b41fa7929cba191de1b4662845e83358de6ba2afed6ddc7f2cbd0cc9510f"
+  },
+  "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-006.md": {
+    "bytes": 1575,
+    "sha256": "62d8e74880c4c178cd3d90fcbd54396b1fbe0ee1f62403ae9e8d685f00a70958"
+  },
+  "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-007.md": {
+    "bytes": 2489,
+    "sha256": "169a1cb0a6f7c06d6304abc58a28e72e0f43a2152736939cbc8fda820119df0f"
+  },
+  "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-008.md": {
+    "bytes": 2842,
+    "sha256": "7f318f3689858f3186f366143f7713761a436da35a65bece0d9feacc50347228"
+  },
+  "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-009.md": {
+    "bytes": 2916,
+    "sha256": "27bcd5f89a3e404346b2fd833e21baddb30dedf9a303273ffba435ad392f05d4"
+  },
+  "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-010.md": {
+    "bytes": 3264,
+    "sha256": "4ef04d93f0227d414e66b96a46fa1bbd0585dab11138554a45a29297fe355527"
+  },
+  "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-011.md": {
+    "bytes": 3061,
+    "sha256": "7506acb72a9bb90fed0c75a5c95a967c0a89451e63c3891ab6b2edc12de415f0"
+  },
+  "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-012.md": {
+    "bytes": 2944,
+    "sha256": "4f1313fc881c1529e533cec988650fd42ad059a73f9cf10eba4277b8d0dea747"
+  },
+  "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-013.md": {
+    "bytes": 2873,
+    "sha256": "3cfb85b5607695ed91f29daa9b8b43b021e47108ab8fc1a07c3178d7d6b7b873"
+  },
+  "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-014.md": {
+    "bytes": 2701,
+    "sha256": "72db19254b63c96dfa4a1133e633aa81ac1e2b99615e4f965bcd2df061f1d07c"
+  },
+  "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-015.md": {
+    "bytes": 2710,
+    "sha256": "2e790dbc4b98a0ed7bc30d17f3d8b6be00da5747f71d2a03dcd70d234304581f"
+  },
+  "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-016.md": {
+    "bytes": 2271,
+    "sha256": "cdd2f6d4250d301d86d3f07fac79c00d44bd64e828009fdb7ad42a102f072b5d"
+  },
+  "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-017.md": {
+    "bytes": 2348,
+    "sha256": "b14286f49d568b7eb4900499ef0e1fdcd9e5f8b6d8d04ae106c291cd0fc9664a"
+  },
+  "docs/engineering/revision-provenance/verification-records/VREC-REV-001.md": {
+    "bytes": 1288,
+    "sha256": "40e77e5612874bf29b63e279e2c9ae37fa6aa205675aee79858044150731aeff"
+  },
+  "docs/engineering/risk-management/evidence/VREC-RSK-010-evaluator.json": {
+    "bytes": 875,
+    "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+  },
+  "docs/engineering/risk-management/verification-records/VREC-RSK-010.md": {
+    "bytes": 2466,
+    "sha256": "d0664da548c8aa65879f1aedfa37a2a481085744632f8609282c420845caa85c"
+  },
+  "docs/engineering/root-cause-analysis/verification-records/VREC-RCA-001.md": {
+    "bytes": 1594,
+    "sha256": "25241213c6d34f58deacab6e5610ce10cb3e6d4dc0fdc0624e4162f03a7f4157"
+  },
+  "docs/engineering/self-hosting-boundary/verification-records/VREC-SHB-001.md": {
+    "bytes": 2347,
+    "sha256": "33a18ae8f39ff22b849d20cbe2466b0da9f31f5ff9c4d4f5cd1fbd2c4266bdb2"
+  },
+  "docs/engineering/self-hosting-boundary/verification-records/VREC-SHB-002.md": {
+    "bytes": 1639,
+    "sha256": "16ae1173db86f3182321a7984aabdca9d8b40309d794b6e19292bd5db84e89fe"
+  },
+  "docs/engineering/technical-communication/evidence/VREC-TCM-001-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/technical-communication/evidence/VREC-TCM-002-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/technical-communication/evidence/VREC-TCM-003-evaluator.json": {
+    "bytes": 875,
+    "sha256": "52678c799ac17cfa9a568da240a9ba2596ca17a124cf73bdcd8a67059474f211"
+  },
+  "docs/engineering/technical-communication/evidence/VREC-TCM-004-evaluator.json": {
+    "bytes": 875,
+    "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+  },
+  "docs/engineering/technical-communication/evidence/VREC-TCM-005-evaluator.json": {
+    "bytes": 875,
+    "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+  },
+  "docs/engineering/technical-communication/evidence/VREC-TCM-006-evaluator.json": {
+    "bytes": 875,
+    "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+  },
+  "docs/engineering/technical-communication/evidence/VREC-TCM-007-evaluator.json": {
+    "bytes": 875,
+    "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+  },
+  "docs/engineering/technical-communication/evidence/VREC-TCM-008-evaluator.json": {
+    "bytes": 875,
+    "sha256": "35e55a43897ec79be254438dab550d99fed9d904a6d1db2d51f6a56875c4d89f"
+  },
+  "docs/engineering/technical-communication/evidence/VREC-TCM-009-evaluator.json": {
+    "bytes": 875,
+    "sha256": "8c10a3ea2956baff8bfa875c658a98aa7db772f924b38557ad05c819a5f88a2d"
+  },
+  "docs/engineering/technical-communication/evidence/VREC-TCM-011-evaluator.json": {
+    "bytes": 875,
+    "sha256": "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
+  },
+  "docs/engineering/technical-communication/verification-records/VREC-TCM-001.md": {
+    "bytes": 1494,
+    "sha256": "2ffbb3decc5903c20305fb29ef749d230f437c0b0dc28732b217fc8a7aa37c50"
+  },
+  "docs/engineering/technical-communication/verification-records/VREC-TCM-002.md": {
+    "bytes": 11257,
+    "sha256": "2806d773eb296b56ea473d4390395d1ae3ebafe5b49397a421f92c212b4fdd45"
+  },
+  "docs/engineering/technical-communication/verification-records/VREC-TCM-003.md": {
+    "bytes": 2902,
+    "sha256": "377945c1b263fd0c91a0b0dce6f1618fb06fda368bb1d2a1affa28f544932b91"
+  },
+  "docs/engineering/technical-communication/verification-records/VREC-TCM-004.md": {
+    "bytes": 2523,
+    "sha256": "339abc314eaa521d64dd5e9432a7fd5f4360a535e50b0d4d66cbcde47dab256f"
+  },
+  "docs/engineering/technical-communication/verification-records/VREC-TCM-005.md": {
+    "bytes": 2380,
+    "sha256": "7b17f91ee092f36c5f45512525747d8d89fa6069ef3fb1998bd0d8de04ba7376"
+  },
+  "docs/engineering/technical-communication/verification-records/VREC-TCM-006.md": {
+    "bytes": 2503,
+    "sha256": "769a4ce9002fe9a74588ed9f7401537716f2606466c292054b642a75ff958eb4"
+  },
+  "docs/engineering/technical-communication/verification-records/VREC-TCM-007.md": {
+    "bytes": 2446,
+    "sha256": "b7133f8e2ee8eafa2bca58d5d8eae870f83daaa67f1321bedc053f6ffd43ab6f"
+  },
+  "docs/engineering/technical-communication/verification-records/VREC-TCM-008.md": {
+    "bytes": 2501,
+    "sha256": "48a26fb7c0041225a69a403fec97784830416f1f3f90bfa243f13cf84f999a71"
+  },
+  "docs/engineering/technical-communication/verification-records/VREC-TCM-009.md": {
+    "bytes": 2963,
+    "sha256": "4b187b5a22680843477ff4b9f8f6110d053bf75f33e5329ad95920b596d0165d"
+  },
+  "docs/engineering/technical-communication/verification-records/VREC-TCM-011.md": {
+    "bytes": 2450,
+    "sha256": "15f34ab8882eed770d1bef57c38cbf7d679dc89b02bf2d510af4abca7b708ac6"
+  },
+  "docs/engineering/test-suite/evidence/VREC-TST-001-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/test-suite/evidence/VREC-TST-002-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/test-suite/evidence/VREC-TST-003-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/test-suite/evidence/VREC-TST-004-evaluator.json": {
+    "bytes": 875,
+    "sha256": "e2cd0929fd42d0634d3bf23a73408665bac8ae473b98c81439dbffb828bff951"
+  },
+  "docs/engineering/test-suite/verification-records/VREC-TST-001.md": {
+    "bytes": 2295,
+    "sha256": "fbdae7874880500fb6bfb77214e4b0b692ea406ede338943d4aa532ad326241c"
+  },
+  "docs/engineering/test-suite/verification-records/VREC-TST-002.md": {
+    "bytes": 1992,
+    "sha256": "d6f5352e6f560b6648d8d1bc161ced295704ad3ced03dbe2fc71d743481f2dba"
+  },
+  "docs/engineering/test-suite/verification-records/VREC-TST-003.md": {
+    "bytes": 1866,
+    "sha256": "b701e4f3c87d8958e8e2c660ed9d544f38a5200ac331b0b65a3ff3be8854a57c"
+  },
+  "docs/engineering/test-suite/verification-records/VREC-TST-004.md": {
+    "bytes": 2375,
+    "sha256": "33e371cca8894ea62d9d7653167a7082e4b212ea31ab5a4b661be7431c19d750"
+  },
+  "docs/engineering/verification-records/VREC-DOC-003.md": {
+    "bytes": 1414,
+    "sha256": "6b180aa4cba10231e4be6ffa78fee02249265a2b23965319b15d5a29e898eb10"
+  },
+  "docs/engineering/verification-records/VREC-DOC-005.md": {
+    "bytes": 1414,
+    "sha256": "6df774ed069e1a4c7a248b2c3d2d7bda1dba67de036e7c10e887b96998ee4c45"
+  },
+  "docs/engineering/verification-records/VREC-IAR-005.md": {
+    "bytes": 1677,
+    "sha256": "03dae38902ccd6fc832cb40163574c4ff47100e4653291ad6f2bd18f60ee0b58"
+  },
+  "docs/engineering/verification-records/VREC-MNT-001.md": {
+    "bytes": 1936,
+    "sha256": "5b1617c20612d5f64e4ff4fdb72f0ab347fd75c0731c4edb884bd3ce61a51ed7"
+  },
+  "docs/engineering/verification-supersession/evidence/VREC-VSP-002-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/verification-supersession/verification-records/VREC-VSP-001.md": {
+    "bytes": 1321,
+    "sha256": "dec99691de6d723a532e4c80d5e772fdccc016fc6d126b11691b470e0ba6bc0e"
+  },
+  "docs/engineering/verification-supersession/verification-records/VREC-VSP-002.md": {
+    "bytes": 1479,
+    "sha256": "221e0601bc8cc6c6d8634036612fd39e3bdd2ab4bb78165fce4fd1896af1d48b"
+  },
+  "docs/engineering/work-order-assurance-classification/verification-records/VREC-WAC-001.md": {
+    "bytes": 1067,
+    "sha256": "4ed4dfd1e361936a429df7f2817d0916886991d8e42de1f08b68068ea5b573ce"
+  },
+  "docs/engineering/work-order-lifecycle/verification-records/VREC-WLC-001.md": {
+    "bytes": 1375,
+    "sha256": "40342d0e61d22da448b5092e3303c22f746a3501e178dfc08c2f9ad0e15ec00d"
+  },
+  "docs/engineering/workflow-execution/evidence/VREC-WEX-006-evaluator.json": {
+    "bytes": 873,
+    "sha256": "fcfc14471cc373fce07ece222f6c03b2152dad2cf4cd5ae6e04cf147c4171962"
+  },
+  "docs/engineering/workflow-execution/verification-records/VREC-WEX-001.md": {
+    "bytes": 1412,
+    "sha256": "a786fe56b84f6c9c997f2b374f96a4a33b251156c70bf1ba3a789133a3b12bda"
+  },
+  "docs/engineering/workflow-execution/verification-records/VREC-WEX-002.md": {
+    "bytes": 1412,
+    "sha256": "fc7ded4b7231d6a476a0a736d8541032abbd10a8533118604c49533bbc09976e"
+  },
+  "docs/engineering/workflow-execution/verification-records/VREC-WEX-003.md": {
+    "bytes": 1412,
+    "sha256": "c5b7d87584ece44ee3b9f10826d277e5c9812883f0f4b89375dc47478a0a9292"
+  },
+  "docs/engineering/workflow-execution/verification-records/VREC-WEX-004.md": {
+    "bytes": 1434,
+    "sha256": "4cfb5be835f5ebc39e8070ecc67fd8ade98fbb936da3039730d038c1fbbddc67"
+  },
+  "docs/engineering/workflow-execution/verification-records/VREC-WEX-005.md": {
+    "bytes": 1319,
+    "sha256": "f68dc323b40147a5b1bdd905e8d8f00aec9b352350ee9fa599bf8ab1e0ee3693"
+  },
+  "docs/engineering/workflow-execution/verification-records/VREC-WEX-006.md": {
+    "bytes": 1473,
+    "sha256": "a98ada5e0b7e921a7849b99b8bcaee26bbaeee65322cf9435cd833cc249452b2"
+  }
+}

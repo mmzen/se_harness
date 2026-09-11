@@ -1,0 +1,13 @@
+{
+  "status": "not_run",
+  "launched": false,
+  "planned_argv": [
+    "python3",
+    "scripts/run_tests.py"
+  ],
+  "reason": "Parent withdrew redundant local source-suite request after exact-head CI source suite passed.",
+  "actual_source_evidence_job": 103058454420,
+  "actual_source_summary": "Ran 1134 tests; OK (skipped=4)",
+  "actual_upgrade_windows_job": 103058843952,
+  "repair_remains_blocked": true
+}

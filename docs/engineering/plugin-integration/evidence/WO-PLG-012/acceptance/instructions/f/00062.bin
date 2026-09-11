@@ -1,0 +1,12 @@
+{
+  "classification": "Actual independent model choice in grouped counterfactual fixture, not native host activation",
+  "operator_request": "Explain this supplied sentence: the build creates a report.",
+  "operator_output": "The build produces a report.",
+  "selected_skill": null,
+  "selected_product_tools": [],
+  "prompt_count": 0,
+  "expected": "No briefing skill/helper invocation",
+  "observed": "Ordinary response emitted; no product dispatch between independent snapshots",
+  "conclusion": "pass",
+  "limits": ["Empty product calls are read with actual model routing choice and the separately calibrated boundary, not treated as a standalone proof of enforcement.", "No native Codex host activation fixture was run."]
+}

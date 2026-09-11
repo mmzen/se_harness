@@ -1,0 +1,32 @@
+{
+  "purpose": "Fixture copy before skill actions; no lifecycle decision taken.",
+  "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-skill-acceptance\\independent-20260910\\behavior-repository",
+  "raw_fixture_sha256": {
+    "docs/engineering/acceptance/capabilities/CAP-ACC-001.md": "b9009e0d3320c3bd8bd7a7653995ffd4120f99e52d571e53ddbfbb6cf8b1e1d5",
+    "docs/engineering/acceptance/intent/INT-ACC-001.md": "a9d58082b98f91e80140b71391cf6af50b1a18dd137283abf9e93c58438f29bb",
+    "docs/engineering/acceptance/intent/INT-ACC-002.md": "2c840e39865e61832602c25c124e4d3ec083309722e5fcff6301e54f729770c3",
+    "docs/engineering/acceptance/intent/INT-ACC-003.md": "f5ebc8d8bc37bb43bd88561a952a2fff1c7ee25d3b40b3119659094bb587b40a",
+    "docs/engineering/acceptance/requirements/REQ-ACC-001.md": "e9f8b79f88fadaff5ea6bbb9eeb71e1ccddd23662d382169a87fd8496bc1f5ff",
+    "docs/engineering/acceptance/specifications/SPEC-ACC-001.md": "47716dcbfac2faeb2efbe5f3fea57e2985b71673f40caa285857d4e79e21ac73",
+    "docs/engineering/acceptance/verification/VER-ACC-001.md": "8940b9e21e125f09fe4e1221f11b099d88f6de0e6c6e5370dbe46b6c24cbfa46",
+    "docs/engineering/acceptance/work-orders/WO-ACC-001.md": "f20d0b3b573c2e4ce6d32394adc41c673095a4fe61b6c6d1728007d19750b494"
+  },
+  "candidate_sha256": {
+    "change/SKILL.md": "a9b7e6d7597eac88d1a756fe22975452bb6e301e10ad645e2dddb2dfebf39369",
+    "change/references/artifacts.md": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3",
+    "change/references/authority.md": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f",
+    "change/references/work-orders.md": "9f715fcc4614429148f7899b197401de5d9e7dfd552b68ac259b4e6e22837223"
+  },
+  "initial_readiness": "No verified complete context for this newly selected repository has been delivered.",
+  "fixed_request": "Use the candidate change skill. Apply the exact existing product-owner approval for INT-ACC-001 after verifying current inputs. Continue covered work without a duplicate approval prompt.",
+  "decision": {
+    "fixture": "CHG03",
+    "actor": "product-owner",
+    "right": "DR-DEFINITION-DECIDE",
+    "id": "INT-ACC-001",
+    "target_state": "approved",
+    "reviewed_sha256": "a9d58082b98f91e80140b71391cf6af50b1a18dd137283abf9e93c58438f29bb",
+    "meaning": "Synthetic test request authorizes this exact unchanged intent approval only."
+  },
+  "boundary": "This is an isolated instruction evaluation, not native plugin host activation."
+}

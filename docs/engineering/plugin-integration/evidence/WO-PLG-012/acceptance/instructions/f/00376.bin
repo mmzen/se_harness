@@ -1,0 +1,30 @@
+{
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+  "environment": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016",
+  "git": "C:\\Program Files\\Git\\cmd\\git.EXE",
+  "target": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\repository",
+  "home": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\isolated-home",
+  "synthetic_credential": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2\\isolated-home\\synthetic-credentials.txt",
+  "engine": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Lib\\site-packages\\se_harness\\engine",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "read_roots": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016",
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-helper-windows-20260911-attempt2",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\candidate-final"
+  ],
+  "helpers": {
+    "orient": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\candidate-final\\harness-orient\\scripts\\orient.py",
+    "brief": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\candidate-final\\harness-operator-brief\\scripts\\check_brief.py"
+  },
+  "product_sha256": {
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\candidate-final\\harness-operator-brief\\agents\\openai.yaml": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\candidate-final\\harness-operator-brief\\scripts\\check_brief.py": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\candidate-final\\harness-operator-brief\\skill-contract.json": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\candidate-final\\harness-operator-brief\\SKILL.md": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\candidate-final\\harness-orient\\scripts\\orient.py": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\candidate-final\\harness-orient\\skill-contract.json": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-retained-skills-acceptance\\independent-20260911\\candidate-final\\harness-orient\\SKILL.md": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "fixture_only": true,
+  "request": "Create the package-demo domain and the three supplied records. Complete their supplied content. This authoring request contains no lifecycle approvals or decision disposition.",
+  "raw_paths": {
+    "SPEC-PKG-001.md": "28a845e7728922dbd8441ce530e90b045694aa66ce1a25f60acd10d79cebbfda",
+    "WO-PKG-001.md": "b3ebd8331a94a2541606d5784b015e7887f033dcaf6a9b1804264ad35313e7c5",
+    "DEC-PKG-001.md": "80fabe2dced4e8aed256f02bd30fea12adc079b439a100da8c0b60bad953fc96"
+  },
+  "decisions": [],
+  "interruption": "Suppress the receipt after the first successful create; then resume the same request using actual readback."
+}

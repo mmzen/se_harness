@@ -1,0 +1,31 @@
+{
+  "schema": "plugin-integration-base-amendment-approval-v1",
+  "operator_statement": "i approve the baseline amendment to WO-PLG-018 and VER-PLG-018 in PR #451",
+  "recorded_at": "2026-09-11T10:17:32.841281+00:00",
+  "reviewed_pr": 451,
+  "reviewed_head": "bd4c2e5cd1d1b4b3584dffd27e9a8013c03befeb",
+  "base_main": "fc1f087371b100d5fda7a1f254ee00ebde8cbadf",
+  "proposed_plan_sha256": "eb0fa0a8e8e5e77428f45fdcde3c99f2080c318bdcb75a6425216081002feefb",
+  "prior_plan_sha256": "68b59c5837e890396701e46f5e37cc391a3ebf91d9f71c736d27e50345155aaa",
+  "artifacts": [
+    {
+      "artifact": "WO-PLG-018",
+      "role": "engineering-owner",
+      "status": "approved",
+      "reviewed_sha256": "ce93dacadd3b265a3728555e2b0aa5757923a52efa4dfe2a4277ac926bb0753d",
+      "amended_sha256": "67d0675ab21507944ad0fd73c58330d4d2a56b1d3bde03e4f3c5e7a0bca0459c",
+      "lifecycle_metadata_unchanged": true
+    },
+    {
+      "artifact": "VER-PLG-018",
+      "role": "assurance-owner",
+      "status": "approved",
+      "reviewed_sha256": "7ee96d383f0a9e837df2abc626a7ca681b81e72db534c897f689f62359ee585d",
+      "amended_sha256": "383e4066cbb979552d984d393d709b43ec7c8427631b1450be61ef327ed69680",
+      "lifecycle_metadata_unchanged": true
+    }
+  ],
+  "authorized": "Use the amended baseline and preserved import plan for WO-PLG-018 execution and VER-PLG-018 acceptance under the existing execution delegation.",
+  "implementation_started": false,
+  "lifecycle_transition_applied": false
+}

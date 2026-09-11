@@ -1,0 +1,20 @@
+{
+  "status": "observed",
+  "groups": [
+    "observations-candidate"
+  ],
+  "note": "Actual success, injected failure and missing observation retained truthfully; raw trace retains external runtime identity.",
+  "approval_prompts": 0,
+  "evidence_class": "Windows independent model observations in one session; Linux replay separate",
+  "trace_records": [
+    "evd05-preflight-control",
+    "evd02-selected-wo",
+    "evd01-success",
+    "evd01-injected-failure",
+    "evd01-retain-observations",
+    "evd07-candidate-add",
+    "evd07-candidate-commit",
+    "evd07-candidate-readback",
+    "evd07-all-refs"
+  ]
+}

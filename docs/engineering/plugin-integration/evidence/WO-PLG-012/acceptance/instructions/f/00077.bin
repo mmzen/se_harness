@@ -1,0 +1,23 @@
+"""Two explicit snapshots only; never decides which product actions may run."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+root = Path(__file__).resolve().parent
+parser = argparse.ArgumentParser()
+parser.add_argument('phase', choices=['before', 'after'])
+parser.add_argument('case')
+args = parser.parse_args()
+settings = json.loads((root / 'boundary-final/settings.json').read_text())
+target = Path(settings['target'])
+state = {p.relative_to(target).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(target.rglob('*')) if p.is_file()}
+out = root / 'model-observations' / args.case
+out.mkdir(exist_ok=True, parents=True)
+path = out / (args.phase + '.json')
+assert not path.exists()
+path.write_text(json.dumps(state, indent=2) + '\n')
+summary = {'case': args.case, 'phase': args.phase, 'files': len(state), 'tree_sha256': hashlib.sha256(json.dumps(state, sort_keys=True, separators=(',', ':')).encode()).hexdigest()}
+if args.phase == 'after':
+    before = json.loads((out / 'before.json').read_text())
+    summary['changed_paths'] = [p for p in sorted(before.keys() | state.keys()) if before.get(p) != state.get(p)]
+print(json.dumps(summary))

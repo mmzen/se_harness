@@ -20,11 +20,23 @@ reason = "On 2026-09-11 the operator stated \"i approve VER-PLG-018 and WO-PLG-0
 
 # Verification Contract: Preserve verified plugin work during integration
 
+## Baseline amendment approved on 2026-09-11
+
+The operator stated "i approve the baseline amendment to WO-PLG-018 and VER-PLG-018 in PR #451". As assurance-owner, this approves
+[plan-main.json](../evidence/WO-PLG-018/plan-main.json), SHA-256
+`eb0fa0a8e8e5e77428f45fdcde3c99f2080c318bdcb75a6425216081002feefb`, for main baseline `fc1f087371b100d5fda7a1f254ee00ebde8cbadf` and integration PR #451.
+The [decision receipt](../evidence/WO-PLG-018/base-amendment-approval.json)
+binds the reviewed packet. The original plan digest `68b59c5837e890396701e46f5e37cc391a3ebf91d9f71c736d27e50345155aaa` and its approvals
+remain historical; the amended plan now governs execution and INT01–INT06.
+All 3,177 import entries, source heads, scope and verification obligations are
+unchanged. Existing execution delegation applies through the current gates.
+Assurance of VREC-PLG-011, merge, PR closure and release remain separate decisions.
+
 ## Independence
 
 Expected imported bytes come from the source commits and reviewed plan, not from
-the assembled candidate. Approval pins plan.json SHA-256
-`68b59c5837e890396701e46f5e37cc391a3ebf91d9f71c736d27e50345155aaa`.
+the assembled candidate. The approved baseline amendment pins plan-main.json SHA-256
+`eb0fa0a8e8e5e77428f45fdcde3c99f2080c318bdcb75a6425216081002feefb`.
 The verifier supplies this digest independently of the current file and checks
 that the source commits remain available. The operator alone decides assurance.
 

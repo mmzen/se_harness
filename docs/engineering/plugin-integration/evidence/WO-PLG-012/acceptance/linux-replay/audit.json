@@ -1,0 +1,84 @@
+{
+  "passed": true,
+  "classification": "Eight fixed Linux replays of final independent Windows command choices; no new model activation/rendering/refusal reasoning",
+  "cases": [
+    {
+      "case": "C05-final-01-version",
+      "passed": true,
+      "actual_exit": 0,
+      "original_record_sha256": "af32cd9dd35f9b1130b28d640aa79883f87875534b923d20d3dcbf5095759ff2",
+      "native_observations_sha256": "db8e40c3b5ce6c0202c6ff69d005db87f901457498918d50c5583b994f0c667a",
+      "native_stdout_sha256": "aa037454b5e8320521a32b278a3f4aff05fc79009ab5503f5d4a1b9a33b38c47"
+    },
+    {
+      "case": "C05-final-02-identity",
+      "passed": true,
+      "actual_exit": 0,
+      "original_record_sha256": "14805d34b3ae76a66e0beff54872773064a92db303dfdfd0f663b04601c04e6a",
+      "native_observations_sha256": "cb5e23754320ea263a9d8190362b766bcd1c08bd4b451aede561cc3e2166d4b6",
+      "native_stdout_sha256": "c8269f824eeb60d290cae7098c93f0be319fa682361045d514dffeeca7d3134e"
+    },
+    {
+      "case": "C05-final-03-doctor",
+      "passed": true,
+      "actual_exit": 0,
+      "original_record_sha256": "54e0e9c13683fbb5040335194e4b8e6afe974996d998db891f78c40e15f9c533",
+      "native_observations_sha256": "d353c9c0703ab36f2c8861011f7d4c0541a8e5496733851062c07e7f6368cfa0",
+      "native_stdout_sha256": "7cd1f4817e593d06525bf3b96de21b826bddc36d44e43a8e3393e31a2496b330"
+    },
+    {
+      "case": "C05-final-04-helper",
+      "passed": true,
+      "actual_exit": 0,
+      "original_record_sha256": "3918b13fe73afd3de82c0af0450db03f115d1ed856a4d204179ee251cbd6a4de",
+      "native_observations_sha256": "f38cc82a13ee4baca0544dd797df66f4222920ca75724e0ddcd6bb82f1af767b",
+      "native_stdout_sha256": "7ac534e6ce60fd502b1eb3610e2ad54d675b40cbd943beaa050e78a61ebeb06d",
+      "source_sha256": "66cedd5c2b34274a387fdac6d0db62b3b716b8531603fff0cd4b0ce60727ccb9",
+      "protected_binding_count": 4
+    },
+    {
+      "case": "C04-direct-invalid-explicit",
+      "passed": true,
+      "actual_exit": 2,
+      "original_record_sha256": "303953c66d3082fb80d42562de9cdc5a03956c7fcb47f971366ba2109b686851",
+      "native_observations_sha256": "c06fcfeea17bafb4d3b787018b307bfac5e292be1cc8df185b6a36ef9af2ecda",
+      "native_stdout_sha256": "eaa839de9ad65e2960b4ff397fcc874b90939f65c0abcd85f651ebc0bc2c3749"
+    },
+    {
+      "case": "C07-01-version",
+      "passed": true,
+      "actual_exit": 0,
+      "original_record_sha256": "b0acffbba9166f6d090e8961f8342291960cec6919f9d1a54c154640692f97ca",
+      "native_observations_sha256": "fc8bfaa8e34ecbd918b5213ba12767f1522bcecff600cffd046e7550606cf72e",
+      "native_stdout_sha256": "aa037454b5e8320521a32b278a3f4aff05fc79009ab5503f5d4a1b9a33b38c47"
+    },
+    {
+      "case": "C07-02-identity",
+      "passed": true,
+      "actual_exit": 0,
+      "original_record_sha256": "3f09aa84c573b9f655505a132df6e8c4d3171f8afc6972e1f921e2f47ddb3db6",
+      "native_observations_sha256": "1e7a8b9edf19e40ebb39eca96fc48d9cf556390698e448207a9b357f88df1def",
+      "native_stdout_sha256": "c8269f824eeb60d290cae7098c93f0be319fa682361045d514dffeeca7d3134e"
+    },
+    {
+      "case": "C07-03-doctor",
+      "passed": true,
+      "actual_exit": 0,
+      "original_record_sha256": "cc3116ac3cebfcf0cf47200fcc4ae512635d2bf44e74a2d065578ac9eddac664",
+      "native_observations_sha256": "2ef7b77a163c4d51658e651bde6c6da3c5ca23fbdad51b1c787183348087aef8",
+      "native_stdout_sha256": "7cd1f4817e593d06525bf3b96de21b826bddc36d44e43a8e3393e31a2496b330"
+    }
+  ],
+  "original_final_model_output_sha256": {
+    "C05-receipt.json": "b4bcefb965027de9969c1f73c9c3869cae21e500d6b0d33259f9a366fc5eba82",
+    "C05-result.json": "42540d06241312cc847b43e91da4b32b5ce05fcf0a12bd624753b1388a955e8a",
+    "C07-receipt.json": "37ac75fdeda4e4622b801c67a6dbb31a963798d1f8dfa12aa38b045a2fd3e120",
+    "C07-result.json": "4dc6b27e6562e764b622b2b50a903e14ba4eda34c5a8f9af42b973ca705ca9d0"
+  },
+  "original_receipt_note": "Original canonical UTF8+LF Windows receipts/results retained byte-for-byte; no Linux model receipt synthesized",
+  "calibrated_denials": 5,
+  "unexpected_events": 0,
+  "target_changes": 0,
+  "C07_checker_or_state_query_replayed": false,
+  "main_helper_matrix_inventory_sha256": "332a379e7fc242ab869998495de624135718115743ebffe145d9b3cb42800119"
+}

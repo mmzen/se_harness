@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "git",
+    "-c",
+    "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-path-fix",
+    "-C",
+    "work\\se-harness-plugin-evidence-path-fix",
+    "diff",
+    "e9418644e22497e622b706cb228f0cd8b36f3b5b",
+    "7fe82c95823503e54d2e35e00d8c409a6dd4b065",
+    "--",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-011/WO-PLG-011-handoff.md"
+  ],
+  "returncode": 0
+}

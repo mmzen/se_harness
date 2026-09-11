@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "git",
+    "--version"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel",
+  "elapsed_seconds": 0.040837764739990234,
+  "error": null,
+  "expected": 0,
+  "returncode": 0,
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "975745a66f4cf5fc84b7edbb7a9f51c8872fa500d44645ef50c345bc46a82bff"
+}

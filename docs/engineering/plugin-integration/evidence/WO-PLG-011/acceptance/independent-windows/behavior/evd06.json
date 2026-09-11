@@ -1,0 +1,19 @@
+{
+  "status": "dirty tracked-candidate variant observed",
+  "groups": [
+    "dirty-candidate"
+  ],
+  "instruction_capture_dispatches": 0,
+  "separate_cli_refusal_calls": 1,
+  "unrun": [
+    "unborn HEAD variant"
+  ],
+  "approval_prompts": 0,
+  "evidence_class": "Windows independent model observations in one session; Linux replay separate",
+  "trace_records": [
+    "evd06-dirty-setup",
+    "evd06-dirty-context",
+    "evd06-dirty-inspection",
+    "evd06-cli-refusal-supplement"
+  ]
+}
