@@ -75,3 +75,13 @@ This definition delivery records the operator-selected execution delegation. Imp
 - [WO-PLG-012](work-orders/WO-PLG-012.md)
 
 This definition delivery records the operator-selected execution delegation. Implementation starts separately after the delegation is present on `origin/main` and the current required GitHub check passes. The packet does not provide implementation evidence or an assurance decision.
+
+
+## WO-PLG-017 evidence-path repair
+
+[WO-PLG-017](work-orders/WO-PLG-017.md) is implemented in
+[PR #449](https://github.com/mmzen/se_harness/pull/449). The approved 56-file
+relocation preserves bytes and historical verification records. Independent
+retention checks and full Windows/Linux CI pass; see its
+[evidence index](evidence/WO-PLG-017/README.md). Aggregate verification preparation
+and assurance remain separate decisions.

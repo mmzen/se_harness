@@ -1,22 +1,21 @@
 ```toml
 artifact = "WO-PLG-017"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "1313dcbde1269e6098677297bcbc154c1f9d00a3edd4f98eb8f5539e53f0fb6c"
-rebound_at = "2026-09-11T06:03:18Z"
+formal_snapshot_sha256 = "2344b4d72d50bcd7413a0a752570ffcf0819a3ee615d166abbebadcc258b5594"
+rebound_at = "2026-09-11T06:26:55Z"
 ```
 
 # WO-PLG-017 handoff evidence
 
-The original 55 native captures and the explicitly approved one-file extension
-have moved to short paths. All 56 payloads retain their original bytes. The
-original 55 plan/map and historical VREC008/sidecar remain unchanged. The new
-supplemental map binds the exact approved extension and its original source.
+All 56 approved files moved without byte changes. The original 55-file plan/map,
+VREC008 and sidecar remain unchanged; C/G remain ancestors. The supplemental map
+binds the separately approved 730-byte JSON.
 
-The checker enforces the ordinary 250-character checkout budget and the separate
-259-character deeper staging profile. Actual matching-depth Windows staging,
-independent 56-file reconciliation and corrected-candidate CI remain pending.
-Original failure and correction observations remain retained separately.
+Independent matching-depth Windows staging, Linux reconciliation and both tamper
+cases passed. The checker enforces the ordinary 250-character checkout budget
+and separate 259-character staging profile. All 13 hosted checks passed at
+e5b48a16, including the Windows upgrade and downstream integration jobs.
+Original failures and the exact observation versions remain retained separately.
 
-WO-PLG-017 remains in_progress. Completion requires the full Windows upgrade
-and downstream integration results, not only the live validate gate. No VREC
-preparation, assurance, supersession, release or PR merge is performed here.
+The released evaluator applied delegated completion; WO-PLG-017 is implemented. No aggregate
+VREC preparation, assurance, supersession, release or GitHub merge is inferred.

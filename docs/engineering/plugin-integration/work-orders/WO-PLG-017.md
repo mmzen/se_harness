@@ -2,7 +2,7 @@
 id = "WO-PLG-017"
 type = "work_order"
 title = "Portable retention of evidence-skill test output"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-10"
 updated = "2026-09-11"
@@ -49,6 +49,13 @@ to = "in_progress"
 decided_at = "2026-09-10T21:21:16Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at ed19676fd2af8b9754f74cbc6bc8664a92d2f803 (check-run 103052409603, source github-checks)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-11T06:26:04Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at e5b48a16be2e5e59ecd17d7d28d24409ff5ce519 (check-run 103167080167, source github-checks)."
 +++
 
 # Work Order: Portable retention of evidence-skill test output
@@ -121,7 +128,7 @@ match the approved map. Verify bytes before removing an old working-tree copy.
 
 ## Expected change surface
 
-Only execution_scope paths. The approved relocation is now being implemented.
+Only execution_scope paths. All 56 approved relocations and their checks are implemented.
 The longest affected repository-relative path falls from 235 to 72 characters.
 Original selected evidence and its interpretation stay visible in Git history.
 
@@ -162,3 +169,13 @@ candidate/evidence inputs before capture. Delegated
 execution only permits single-WO capture. VREC-PLG-008 stays ready until its
 assurance owner separately decides it; supersession needs an eligible verified
 successor. Work approval is neither decision.
+
+
+## Completion observation
+
+The released evaluator applied delegated completion after all 13 checks passed
+at e5b48a16be2e5e59ecd17d7d28d24409ff5ce519. The retained
+[completion receipt](../evidence/WO-PLG-017/governance/completion/wo017-completion-applied.json)
+records the actual actor and live gate. Both Windows upgrade staging and downstream
+integration pass. All 56 payloads reconcile; historical records remain unchanged.
+Aggregate VREC preparation remains the next separate engineering-owner decision.

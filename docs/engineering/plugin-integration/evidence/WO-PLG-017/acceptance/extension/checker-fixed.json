@@ -1,0 +1,13 @@
+{
+  "checker_commit": "e5b48a16be2e5e59ecd17d7d28d24409ff5ce519",
+  "checker_sha256": "fe9ebcec67aa8671fa4c25cf5c04b865955e927dcdc1354223bce80f1fcff089",
+  "coordinated_plan_map_rejected": true,
+  "one_byte_rejected": true,
+  "passed": true,
+  "repository": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-pkny7t08\\src",
+  "repository_commit": "28b4d2e22477067a17544e8275a37cecf22575f0",
+  "restored_hashes_equal": true,
+  "scope": "Corrected checker bytes from new commit against unchanged original staged candidate/history inputs; no new staging claim",
+  "snapshot_files": 428,
+  "staging_commit": "28b4d2e22477067a17544e8275a37cecf22575f0"
+}

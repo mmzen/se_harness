@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "-c",
+    "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-evidence-path-fix",
+    "-C",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-evidence-path-fix",
+    "show",
+    "e9c256eb49d27f82e60543b7b3ca24f43a5129be:docs/engineering/plugin-integration/evidence/WO-PLG-017/scope-extension-plan.json"
+  ],
+  "returncode": 0,
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "1927a7d61c7d6357e61047f427c0d2f1fb8e456d32dd1698efc01c7bba6f9538"
+}

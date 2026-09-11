@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-path-extension-independent-20260911\\checker-correction\\checker-e5.py",
+    "--root",
+    "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-pkny7t08\\src"
+  ],
+  "elapsed_seconds": 2.0262181758880615,
+  "error": null,
+  "expected": 1,
+  "returncode": 1,
+  "stderr_sha256": "c59e056c2f61c12909c36fb5f1f2acbe979b3ec73e1de1b6a54fc3045d56dd8f",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

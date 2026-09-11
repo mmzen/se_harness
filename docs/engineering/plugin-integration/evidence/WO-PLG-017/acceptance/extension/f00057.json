@@ -1,0 +1,18 @@
+{
+  "calls": [
+    "call01",
+    "call02",
+    "call03",
+    "call04",
+    "call05",
+    "call06",
+    "call07",
+    "call08"
+  ],
+  "destination": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-pkny7t08\\ssssssssssssssssss\\repository",
+  "destination_characters": 77,
+  "exporter_sha256": "4dfba43492ce476366f0b5b44b432671b60998d43b292099b640cb97e64fb4c9",
+  "passed": true,
+  "source": "C:\\Users\\mathi\\AppData\\Local\\Temp\\p17e-pkny7t08\\src",
+  "worker_sha256": "0f82bc634624953eae06e785583107310ade09d019c79c4051ff038382fadcb1"
+}
