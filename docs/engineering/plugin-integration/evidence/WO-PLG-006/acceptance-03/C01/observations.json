@@ -1,0 +1,28 @@
+{
+  "expected": "Real host resolves all five packaged shared skills and loads the committed inline bindings.",
+  "observed": {
+    "discovered": {
+      "setup": true,
+      "change": true,
+      "evidence": true,
+      "harness-orient": true,
+      "harness-operator-brief": true
+    },
+    "manifest_exit": 0,
+    "startup_context_receipt": true
+  },
+  "conclusion": "pass",
+  "qualified": false,
+  "exit_status": [
+    0,
+    0
+  ],
+  "source_evidence": [
+    "actions.txt",
+    "stdout.txt",
+    "stderr.txt",
+    "../package-identity.json",
+    "../identities.json"
+  ],
+  "capture_policy": "sanitized public observations; raw host debug stays in disposable sandbox"
+}

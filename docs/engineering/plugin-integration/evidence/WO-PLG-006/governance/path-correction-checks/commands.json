@@ -1,0 +1,41 @@
+{
+  "cwd": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/se-harness-plugin-claude-adapter",
+  "checks": [
+    {
+      "name": "candidate-help",
+      "command": "& 'C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe' -X utf8 -B -m se_harness --help",
+      "exit": 0,
+      "duration_seconds": 0.0000045
+    },
+    {
+      "name": "candidate-doctor",
+      "command": "& 'C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe' -X utf8 -B -m se_harness doctor . --json",
+      "exit": 1,
+      "duration_seconds": 2.1355698
+    },
+    {
+      "name": "candidate-validate",
+      "command": "& 'C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe' -X utf8 -B -m se_harness validate . --json",
+      "exit": 0,
+      "duration_seconds": 3.5546394
+    },
+    {
+      "name": "release-distributions",
+      "command": "& 'C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe' -X utf8 -B scripts/validate_release_distributions.py --root .",
+      "exit": 0,
+      "duration_seconds": 3.1392674
+    },
+    {
+      "name": "released-doctor",
+      "command": "../se-harness-plugin-eval-017/Scripts/python.exe -I -B -m se_harness doctor . --json",
+      "exit": 0,
+      "duration_seconds": 2.8801495
+    },
+    {
+      "name": "released-preflight",
+      "command": "../se-harness-plugin-eval-017/Scripts/python.exe -I -B -m se_harness preflight . --work-order WO-PLG-006 --phase review --json",
+      "exit": 0,
+      "duration_seconds": 3.6339558
+    }
+  ]
+}

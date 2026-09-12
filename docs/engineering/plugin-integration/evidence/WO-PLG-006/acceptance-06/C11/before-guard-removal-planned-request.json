@@ -1,0 +1,49 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "--setting-sources",
+    "user",
+    "--settings",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\C11\\before-guard-removal-settings.json",
+    "--plugin-dir",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\C11\\guard removed after readiness",
+    "--strict-mcp-config",
+    "--mcp-config",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\C11\\empty-mcp.json",
+    "--debug-file",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\C11\\before-guard-removal.debug.txt",
+    "-p",
+    "Say current runtime observed. Do not use tools.",
+    "--tools",
+    "",
+    "--permission-mode",
+    "manual",
+    "--permission-prompts",
+    "none",
+    "--max-turns",
+    "3",
+    "--max-budget-usd",
+    "1.50",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--include-hook-events",
+    "--session-id",
+    "3a5646d3-6b98-44d0-a31f-6254cb768e07"
+  ],
+  "prompt": "Say current runtime observed. Do not use tools.",
+  "tools": "",
+  "allowed_tools": [],
+  "settings": {
+    "disableAllHooks": false
+  },
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\disposable repository",
+  "destination": "api.anthropic.com/v1/messages through official Claude Code",
+  "profile_instruction_files_present": [],
+  "loaded_hook_sha256": "6439357461262516af3914241b8054d33240bc4d34e516b2c9de2bc57d566390",
+  "target_before": {
+    "governed-target.txt": "a1d73198c43eb4003978c8574befddc64999c02de5b8cf92fc79ad1e46356aaa",
+    "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+  },
+  "authorization": "[REDACTED]"
+}

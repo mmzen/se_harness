@@ -1,0 +1,88 @@
+[
+  {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "se_harness",
+      "init",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository",
+      "--project-name",
+      "claude-adapter-fixture",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03",
+    "exit": 0,
+    "timeout": false,
+    "started_monotonic": 240600.0589415,
+    "finished_monotonic": 240600.7639366,
+    "stdout": "{\r\n  \"changes\": [\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \".agents/skills/harness-operator-brief/SKILL.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \".agents/skills/harness-operator-brief/scripts/check_brief.py\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \".agents/skills/harness-operator-brief/skill-contract.json\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \".agents/skills/harness-orient/SKILL.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \".agents/skills/harness-orient/scripts/orient.py\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \".agents/skills/harness-orient/skill-contract.json\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \".claude/skills/harness-orient/SKILL.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \".engineering-harness.toml\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \".gitattributes\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \".github/PULL_REQUEST_TEMPLATE.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \".github/workflows/engineering-harness.yml\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \".gitignore\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"AGENTS.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"CLAUDE.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"ENGINEERING_HARNESS.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"GLOSSARY.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/ARTIFACT_AUTHORING.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/DECISION_RIGHTS.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/OPERATING_CARD.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/QUALITY_GATES.json\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/QUALITY_GATES.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/README.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/TECHNICAL_COMMUNICATION.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/TRACEABILITY.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/WORKFLOW.json\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/WORKFLOW.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/templates/ADR.template.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/templates/ARCHITECTURE.template.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/templates/CAPABILITY.template.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/templates/DECISION.template.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/templates/INTENT.template.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/templates/OPERATING_CONTRACT.template.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/templates/README.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/templates/RELEASE_CONTRACT.template.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/templates/RELEASE_RECORD.template.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/templates/REQUIREMENT.template.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/templates/SPECIFICATION.template.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/templates/VERIFICATION.template.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/templates/VERIFICATION_RECORD.template.md\"\r\n    },\r\n    {\r\n      \"action\": \"add\",\r\n      \"path\": \"docs/engineering/templates/WORK_ORDER.template.md\"\r\n    }\r\n  ],\r\n  \"command\": \"init\",\r\n  \"outcome\": \"completed\",\r\n  \"schema\": \"se-harness-command-result-v1\",\r\n  \"written\": true\r\n}\r\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "se_harness",
+      "evidence",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\disposable repository",
+      "--artifact",
+      "WO-PROBE-001",
+      "--checkpoint",
+      "pre-action",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03",
+    "exit": 0,
+    "timeout": false,
+    "started_monotonic": 240600.7743841,
+    "finished_monotonic": 240601.1705348,
+    "stdout": "{\r\n  \"schema\": \"se-harness-workflow-result-v2\",\r\n  \"operation\": {\r\n    \"kind\": \"evidence\",\r\n    \"outcome\": \"completed\"\r\n  },\r\n  \"selection\": {\r\n    \"primary\": \"WO-PROBE-001\",\r\n    \"artifacts\": [\r\n      \"WO-PROBE-001\"\r\n    ]\r\n  },\r\n  \"scope\": {\r\n    \"mode\": \"selected\",\r\n    \"governing\": [\r\n      \"CAP-PROBE-001\",\r\n      \"INT-PROBE-001\",\r\n      \"REQ-PROBE-001\",\r\n      \"SPEC-PROBE-001\",\r\n      \"VER-PROBE-001\"\r\n    ],\r\n    \"dependencies\": [],\r\n    \"declared_paths\": [\r\n      \"governed-target.txt\"\r\n    ],\r\n    \"changed_paths\": [],\r\n    \"change_set_complete\": false\r\n  },\r\n  \"compliance\": {\r\n    \"checkpoint\": \"pre-action\",\r\n    \"workflow_rule_id\": \"WFL-WO-IMPLEMENT\",\r\n    \"procedure_id\": \"PROC-WO-IMPLEMENT\",\r\n    \"status\": \"not_assessable\",\r\n    \"gates\": []\r\n  },\r\n  \"procedure\": {\r\n    \"id\": \"PROC-WO-IMPLEMENT\",\r\n    \"current_step\": \"STEP-WO-IMPLEMENT-CHECK\",\r\n    \"steps\": [\r\n      {\r\n        \"id\": \"STEP-WO-IMPLEMENT-CHECK\",\r\n        \"kind\": \"command\",\r\n        \"gate_ids\": [\r\n          \"QG-G4-IMPLEMENTATION-EVIDENCE\"\r\n        ],\r\n        \"effects\": [\r\n          \"Evaluated implementation handoff for WO-PROBE-001.\"\r\n        ],\r\n        \"non_effects\": [\r\n          \"A checkpoint does not complete or verify work.\"\r\n        ],\r\n        \"argv\": [\r\n          \"harnessctl\",\r\n          \"check\",\r\n          \".\",\r\n          \"--artifact\",\r\n          \"WO-PROBE-001\",\r\n          \"--checkpoint\",\r\n          \"handoff\"\r\n        ],\r\n        \"corrective\": {\r\n          \"QGP-G4I-STATUS\": {\r\n            \"kind\": \"escalation\",\r\n            \"decision_right\": \"DR-WO-START\"\r\n          },\r\n          \"QGP-G4I-GRAPH\": {\r\n            \"kind\": \"escalation\",\r\n            \"decision_right\": \"DR-REMEDIATION-SCOPE\"\r\n          },\r\n          \"QGP-G4I-INTEGRITY\": {\r\n            \"kind\": \"escalation\",\r\n            \"decision_right\": \"DR-REMEDIATION-SCOPE\"\r\n          },\r\n          \"QGP-G4I-SCOPE\": {\r\n            \"kind\": \"escalation\",\r\n            \"decision_right\": \"DR-WO-SELECT\"\r\n          },\r\n          \"QGP-G4I-COMPLETE\": {\r\n            \"kind\": \"command\",\r\n            \"argv\": [\r\n              \"harnessctl\",\r\n              \"check\",\r\n              \".\",\r\n              \"--artifact\",\r\n              \"WO-PROBE-001\",\r\n              \"--checkpoint\",\r\n              \"handoff\",\r\n              \"--from-git\",\r\n              \"<base>\"\r\n            ]\r\n          },\r\n          \"QGP-G4I-PATHS\": {\r\n            \"kind\": \"escalation\",\r\n            \"decision_right\": \"DR-REMEDIATION-SCOPE\"\r\n          },\r\n          \"QGP-G4I-PREFLIGHT\": {\r\n            \"kind\": \"command\",\r\n            \"argv\": [\r\n              \"harnessctl\",\r\n              \"preflight\",\r\n              \".\",\r\n              \"--work-order\",\r\n              \"WO-PROBE-001\",\r\n              \"--phase\",\r\n              \"review\"\r\n            ]\r\n          },\r\n          \"QGP-G4I-EVIDENCE\": {\r\n            \"kind\": \"command\",\r\n            \"argv\": [\r\n              \"harnessctl\",\r\n              \"evidence\",\r\n              \".\",\r\n              \"--artifact\",\r\n              \"WO-PROBE-001\",\r\n              \"--checkpoint\",\r\n              \"handoff\"\r\n            ]\r\n          },\r\n          \"QGP-G4I-DECISION\": {\r\n            \"kind\": \"escalation\",\r\n            \"decision_right\": \"DR-DECISION-DISPOSE\"\r\n          }\r\n        }\r\n      },\r\n      {\r\n        \"id\": \"STEP-WO-IMPLEMENT-DECIDE\",\r\n        \"kind\": \"decision\",\r\n        \"gate_ids\": [\r\n          \"QG-G4-IMPLEMENTATION-EVIDENCE\"\r\n        ],\r\n        \"effects\": [\r\n          \"An explicit completion decision permits only WO-PROBE-001 to become implemented.\"\r\n        ],\r\n        \"non_effects\": [\r\n          \"Completion does not verify or release the work.\"\r\n        ],\r\n        \"decision_right\": \"DR-WO-COMPLETE\",\r\n        \"role\": \"engineering-owner\",\r\n        \"artifact\": \"WO-PROBE-001\",\r\n        \"decision\": \"whether the authorized implementation and evidence are complete\",\r\n        \"outcomes\": [\r\n          \"implemented\",\r\n          \"continue\",\r\n          \"reject\"\r\n        ],\r\n        \"response\": \"Mark WO-PROBE-001 implemented.\"\r\n      }\r\n    ]\r\n  },\r\n  \"state\": {\r\n    \"before\": [],\r\n    \"after\": [\r\n      {\r\n        \"id\": \"WO-PROBE-001\",\r\n        \"status\": \"in_progress\"\r\n      }\r\n    ]\r\n  },\r\n  \"findings\": {\r\n    \"scoped_blockers\": [],\r\n    \"repository_blockers\": [],\r\n    \"unrelated_count\": 0\r\n  },\r\n  \"mutation\": {\r\n    \"writes\": [\r\n      {\r\n        \"id\": \"WO-PROBE-001\",\r\n        \"path\": \"docs/engineering/readiness-probe/evidence/WO-PROBE-001/WO-PROBE-001-pre-action.md\",\r\n        \"fields\": [\r\n          \"artifact\",\r\n          \"checkpoint\",\r\n          \"formal_snapshot_sha256\",\r\n          \"rebound_at\"\r\n        ]\r\n      }\r\n    ]\r\n  },\r\n  \"restitution\": {\r\n    \"outcome\": \"completed\",\r\n    \"done\": [\r\n      \"Wrote the pre-action evidence packet of WO-PROBE-001 at docs/engineering/readiness-probe/evidence/WO-PROBE-001/WO-PROBE-001-pre-action.md to formal snapshot bd8347dcaa4f5b00b69d6efc5b842a61f311532781cbf3f97ccce47614850b2f.\"\r\n    ],\r\n    \"not_done\": [],\r\n    \"blocked_by\": [],\r\n    \"current_lifecycle_state\": [\r\n      \"WO-PROBE-001 is in_progress.\"\r\n    ],\r\n    \"decision_required\": null,\r\n    \"next\": {\r\n      \"procedure_id\": \"PROC-WO-IMPLEMENT\",\r\n      \"step_id\": \"STEP-WO-IMPLEMENT-CHECK\",\r\n      \"action\": \"Run the bound command\"\r\n    },\r\n    \"command_or_response\": {\r\n      \"kind\": \"command\",\r\n      \"argv\": [\r\n        \"harnessctl\",\r\n        \"check\",\r\n        \".\",\r\n        \"--artifact\",\r\n        \"WO-PROBE-001\",\r\n        \"--checkpoint\",\r\n        \"handoff\"\r\n      ]\r\n    },\r\n    \"alternatives\": []\r\n  },\r\n  \"result_sha256\": \"0ae07f7c617df1693b429b8a3dab9dea00b3aa6996c931ad61eda9d6e3ee76cd\"\r\n}\r\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "venv",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\private plugin data\\evaluator"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03",
+    "exit": 0,
+    "timeout": false,
+    "started_monotonic": 240612.0487161,
+    "finished_monotonic": 240618.4337733,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\private plugin data\\evaluator\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "pip",
+      "--isolated",
+      "--disable-pip-version-check",
+      "install",
+      "--no-index",
+      "--no-deps",
+      "--only-binary=:all:",
+      "--no-cache-dir",
+      "--no-compile",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03\\accepted assembly\\claude\\verity-plane\\packages\\se_harness-0.16.0-py3-none-any.whl"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-03",
+    "exit": 0,
+    "timeout": false,
+    "started_monotonic": 240618.4338411,
+    "finished_monotonic": 240620.0829984,
+    "stdout": "Processing .\\accepted assembly\\claude\\verity-plane\\packages\\se_harness-0.16.0-py3-none-any.whl\r\nInstalling collected packages: se-harness\r\nSuccessfully installed se-harness-0.16.0\r\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "--setting-sources",
+    "user",
+    "--settings",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\C08\\wrong-identity-settings.json",
+    "--plugin-dir",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\accepted assembly\\claude\\verity-plane",
+    "--strict-mcp-config",
+    "--mcp-config",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\C08\\empty-mcp.json",
+    "--debug-file",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\C08\\wrong-identity.debug.txt",
+    "-p",
+    "Say runtime observation. Do not use tools.",
+    "--tools",
+    "",
+    "--permission-mode",
+    "manual",
+    "--permission-prompts",
+    "none",
+    "--max-turns",
+    "3",
+    "--max-budget-usd",
+    "1.50",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--include-hook-events",
+    "--session-id",
+    "48f8c520-802d-4a8f-9d0a-01fa17a523b7"
+  ],
+  "prompt": "Say runtime observation. Do not use tools.",
+  "tools": "",
+  "allowed_tools": [],
+  "settings": {
+    "disableAllHooks": false
+  },
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\disposable repository",
+  "destination": "api.anthropic.com/v1/messages through official Claude Code",
+  "profile_instruction_files_present": [],
+  "loaded_hook_sha256": "ca485f95331a47f0a4069db25dccc08f4363e87a2065d129e11d109810de9e3c",
+  "target_before": {
+    "governed-target.txt": "0a1f24d49e1620655adfbf9790ea35f0a7bda4df3b86c046869d461279e8cbc9",
+    "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+  },
+  "authorization": "[REDACTED]"
+}

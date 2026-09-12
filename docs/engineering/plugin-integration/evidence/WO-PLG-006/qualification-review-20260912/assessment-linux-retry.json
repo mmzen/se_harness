@@ -1,0 +1,12 @@
+{
+  "candidate": "d6e9f8063dbee01dbb112f5cd2aef219def4e4cc",
+  "failed_run": "34684852297",
+  "failed_job": "103530148320",
+  "failure": "Second upgrade rehearsal failed during scratch cleanup: OSError [Errno 39] Directory not empty: .git",
+  "unchanged_candidate_retry": 2,
+  "retry_job": "103530498955",
+  "retry_result": "success",
+  "cause": "Unconfirmed; no cleanup repair or product change is claimed.",
+  "retained_log": "assessment-linux-failure.log",
+  "native_adapter_observations_affected": false
+}

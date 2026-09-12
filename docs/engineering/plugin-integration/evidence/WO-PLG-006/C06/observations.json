@@ -1,0 +1,83 @@
+{
+  "expected": "Space-containing repository and script paths preserve argv; unsupported Read produces coverage gap without allow.",
+  "observed": {
+    "space_paths": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\disposable repository",
+    "direct_coverage_gap": true,
+    "live_receipts": [
+      {
+        "id": "91271023-6da0-4751-a99c-ade699e82fa7",
+        "name": "PreToolUse:Read",
+        "event": "PreToolUse",
+        "outcome": "success",
+        "exit": 0,
+        "output": {
+          "hookEventName": "PreToolUse",
+          "additionalContext": "UNREADY COVERAGE GAP: this tool has no evaluator mapping. Ordinary host permissions and already-authorized setup access remain in force. No governance check succeeded."
+        },
+        "guard": {
+          "adapter": "verity-plane-claude-v1",
+          "status": "unready",
+          "interpreter_invoked": false,
+          "entered_monotonic": 242807.1634219,
+          "event": "PreToolUse",
+          "tool_use_id": "toolu_018yAqnqJBk5stgFqPDyvFLn",
+          "tool_name": "Read",
+          "finished_ms": 57.0886,
+          "response_written_monotonic": 242807.2360718
+        },
+        "handler": []
+      }
+    ],
+    "receiving_side_unicode_calibration": "test_adapter.py:test_event_quotes_and_unicode_survive_exactly"
+  },
+  "conclusion": "pass",
+  "qualified": false,
+  "exit_status": [
+    0,
+    0
+  ],
+  "source_evidence": [
+    "acceptance-06/C06/actions.txt",
+    "acceptance-06/C06/stdout.txt",
+    "acceptance-06/C06/stderr.txt",
+    "acceptance-06/C06/commands.json",
+    "acceptance-06/C06/observations.json"
+  ],
+  "capture_policy": "sanitized public observations; raw host debug stays in disposable sandbox",
+  "wire_assessment": {
+    "source": "native system/hook_response stdout+stderr and correlated tool_use/tool_result objects",
+    "qualification": false,
+    "case": "C06",
+    "observations": [
+      {
+        "id": "91271023-6da0-4751-a99c-ade699e82fa7",
+        "name": "PreToolUse:Read",
+        "event": "PreToolUse",
+        "outcome": "success",
+        "exit": 0,
+        "output": {
+          "hookEventName": "PreToolUse",
+          "additionalContext": "UNREADY COVERAGE GAP: this tool has no evaluator mapping. Ordinary host permissions and already-authorized setup access remain in force. No governance check succeeded."
+        },
+        "guard": {
+          "adapter": "verity-plane-claude-v1",
+          "status": "unready",
+          "interpreter_invoked": false,
+          "entered_monotonic": 242807.1634219,
+          "event": "PreToolUse",
+          "tool_use_id": "toolu_018yAqnqJBk5stgFqPDyvFLn",
+          "tool_name": "Read",
+          "finished_ms": 57.0886,
+          "response_written_monotonic": 242807.2360718
+        },
+        "handler": []
+      }
+    ],
+    "conclusion": "pass"
+  },
+  "case": "C06",
+  "candidate_source_commit": "fd2419f4c26b9ba4d4a97f85b7d2b08da72b8626",
+  "package_sha256": "f11d94139ad7e6194147c32a80a070f34f6761900a8c737aec354ec9b447d7f6",
+  "observation_complete": true,
+  "source_paths_relative_to": "evidence/WO-PLG-006"
+}

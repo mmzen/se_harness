@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:\\Python313\\python.exe",
+    "-B",
+    "-m",
+    "se_harness",
+    "doctor",
+    ".",
+    "--json"
+  ],
+  "exit_code": 1,
+  "stdout_sha256": "069eb47851e877547fbdca46e371c541184c99ba7974162f5a5e80ef91ec9486",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

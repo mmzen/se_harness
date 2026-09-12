@@ -1,0 +1,6 @@
+{
+  "name": "verity-plane",
+  "version": "0.0.1",
+  "description": "Shared SE Harness skills and explicitly qualified Claude Code bindings.",
+  "author": {"name": "SE Harness"}
+}

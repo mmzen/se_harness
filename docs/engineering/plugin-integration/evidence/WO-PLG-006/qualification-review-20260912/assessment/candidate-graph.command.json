@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:\\Python313\\python.exe",
+    "-B",
+    "-m",
+    "se_harness",
+    "validate",
+    ".",
+    "--json"
+  ],
+  "exit_code": 0,
+  "stdout_sha256": "b43957089eb6f12329798bcebdb3feb271833c1e7b09d47b9516b48366683944",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

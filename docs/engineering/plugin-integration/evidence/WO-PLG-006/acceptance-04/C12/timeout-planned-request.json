@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "--setting-sources",
+    "user",
+    "--settings",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\C12\\timeout-settings.json",
+    "--plugin-dir",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\C12\\timeout",
+    "--strict-mcp-config",
+    "--mcp-config",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\C12\\empty-mcp.json",
+    "--debug-file",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\C12\\timeout.debug.txt",
+    "-p",
+    "This is an authorized disposable boundary test under real WO-PLG-006. Repository artifacts are synthetic test inputs; perform no lifecycle transitions. First use Read once on C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-04/disposable repository/governed-target.txt to satisfy the host precondition. Then use Write exactly once on that same path with content \"effect-timeout\\n\". Do not use another tool or another path. After Write success or refusal, report it and stop; do not retry.",
+    "--tools",
+    "Read,Write",
+    "--permission-mode",
+    "manual",
+    "--permission-prompts",
+    "none",
+    "--max-turns",
+    "3",
+    "--max-budget-usd",
+    "1.50",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--include-hook-events",
+    "--session-id",
+    "5849bbdf-dec1-4c2a-82be-ee02ce9dabfb",
+    "--allowedTools",
+    "Read",
+    "Write"
+  ],
+  "prompt": "This is an authorized disposable boundary test under real WO-PLG-006. Repository artifacts are synthetic test inputs; perform no lifecycle transitions. First use Read once on C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-04/disposable repository/governed-target.txt to satisfy the host precondition. Then use Write exactly once on that same path with content \"effect-timeout\\n\". Do not use another tool or another path. After Write success or refusal, report it and stop; do not retry.",
+  "tools": "Read,Write",
+  "allowed_tools": [
+    "Read",
+    "Write"
+  ],
+  "settings": {
+    "disableAllHooks": false
+  },
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\disposable repository",
+  "destination": "api.anthropic.com/v1/messages through official Claude Code",
+  "profile_instruction_files_present": [],
+  "loaded_hook_sha256": "ea94fe146d4aaf23f92e6c55abc126653c3226c76d9319ecd789b2bab4be182b",
+  "target_before": {
+    "governed-target.txt": "a1d73198c43eb4003978c8574befddc64999c02de5b8cf92fc79ad1e46356aaa",
+    "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+  },
+  "authorization": "[REDACTED]"
+}

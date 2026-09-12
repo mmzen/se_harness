@@ -1,0 +1,1 @@
+[{"eligible_for_live_assessment": false, "qualified": false, "reasons": ["unaccepted observed profile"], "note": "Configuration eligibility does not prove host receipt or enforcement."}, {"eligible_for_live_assessment": false, "qualified": false, "reasons": ["no positive compatibility decision"], "note": "Configuration eligibility does not prove host receipt or enforcement."}]

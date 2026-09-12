@@ -1,0 +1,54 @@
+{
+  "source": "native system/hook_response stdout+stderr and correlated tool_use/tool_result objects",
+  "qualification": false,
+  "case": "C10",
+  "observations": [
+    {
+      "uses": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01288VYcvM8uo8n7bjUCPyma",
+          "name": "Write",
+          "input": {
+            "file_path": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt",
+            "content": "effect-host-timeout\n"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "results": [
+        {
+          "tool_use_id": "toolu_01288VYcvM8uo8n7bjUCPyma",
+          "type": "tool_result",
+          "content": "The file C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt has been updated successfully. (file state is current in your context \u2014 no need to Read it back)"
+        }
+      ],
+      "decisions": [],
+      "exact_requested_write": true,
+      "native_Write_hooks": [
+        {
+          "id": "914dbd5f-591c-4ac0-ab88-12aa2b368cbe",
+          "outcome": "cancelled",
+          "exit": 1,
+          "output": {},
+          "elapsed_seconds": 60.16125139998621
+        }
+      ],
+      "target_key": "governed-target.txt",
+      "expected_sha256": "20db5b25449ad2fd7de6eb4e4d9ebc2185f4121e7ef230557470893fd9e463e7",
+      "expected_target_effect": true,
+      "successful_Write_results": 1,
+      "final_target_hashes_before": {
+        "governed-target.txt": "0a1f24d49e1620655adfbf9790ea35f0a7bda4df3b86c046869d461279e8cbc9",
+        "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+      },
+      "final_target_hashes_after": {
+        "governed-target.txt": "20db5b25449ad2fd7de6eb4e4d9ebc2185f4121e7ef230557470893fd9e463e7",
+        "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+      }
+    }
+  ],
+  "conclusion": "fail"
+}

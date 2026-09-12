@@ -1,0 +1,35 @@
+{
+  "expected": "Mapped Write runs current evaluator checks; permitted effect occurs and out-of-scope effect is refused.",
+  "observed": {
+    "permitted": {
+      "tool_calls": 1,
+      "target_before": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "target_after": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "effect_count": 0,
+      "independent_effect_observer": "outer runner SHA256 before process launch and after host exit",
+      "denial_observed": true
+    },
+    "refused": {
+      "tool_calls": 1,
+      "target_before": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "target_after": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "effect_count": 0,
+      "independent_effect_observer": "outer runner SHA256 before process launch and after host exit",
+      "denial_observed": true
+    }
+  },
+  "conclusion": "fail",
+  "qualified": false,
+  "exit_status": [
+    0,
+    0
+  ],
+  "source_evidence": [
+    "actions.txt",
+    "stdout.txt",
+    "stderr.txt",
+    "../package-identity.json",
+    "../identities.json"
+  ],
+  "capture_policy": "sanitized public observations; raw host debug stays in disposable sandbox"
+}

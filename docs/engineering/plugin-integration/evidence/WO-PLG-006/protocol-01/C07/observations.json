@@ -1,0 +1,36 @@
+{
+  "expected": "Unaccepted profile or no positive decision cannot qualify; no helper spawn or lifecycle effects.",
+  "observed": {
+    "assessments": [
+      {
+        "eligible_for_live_assessment": false,
+        "qualified": false,
+        "reasons": [
+          "unaccepted observed profile"
+        ],
+        "note": "Configuration eligibility does not prove host receipt or enforcement."
+      },
+      {
+        "eligible_for_live_assessment": false,
+        "qualified": false,
+        "reasons": [
+          "no positive compatibility decision"
+        ],
+        "note": "Configuration eligibility does not prove host receipt or enforcement."
+      }
+    ],
+    "helper_spawns": [],
+    "lifecycle_mutations": []
+  },
+  "conclusion": "pass",
+  "qualified": false,
+  "exit_status": [],
+  "source_evidence": [
+    "actions.txt",
+    "stdout.txt",
+    "stderr.txt",
+    "../package-identity.json",
+    "../identities.json"
+  ],
+  "capture_policy": "sanitized public observations; raw host debug stays in disposable sandbox"
+}

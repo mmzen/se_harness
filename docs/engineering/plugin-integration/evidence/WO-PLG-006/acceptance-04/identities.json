@@ -1,0 +1,51 @@
+{
+  "host": {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "--version"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04",
+    "exit": 0,
+    "timeout": false,
+    "started_monotonic": 241115.3370163,
+    "finished_monotonic": 241115.3859313,
+    "stdout": "2.1.266 (Claude Code)\n",
+    "stderr": ""
+  },
+  "python": {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-c",
+      "import sys;print(sys.version);print(sys.executable)"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04",
+    "exit": 0,
+    "timeout": false,
+    "started_monotonic": 241115.3860478,
+    "finished_monotonic": 241115.4577631,
+    "stdout": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]\r\nC:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe\r\n",
+    "stderr": ""
+  },
+  "authenticated": true,
+  "profile": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude\\run-20260908-02\\isolated profile",
+  "os": "Windows-11-10.0.26200-SP0",
+  "source_revision": "84c5987054cc0c38410f7ce31951ac2e9b93f242",
+  "expected_profile": {
+    "decision": "DEC-PLG-002:prove-supported-route",
+    "host_version": "2.1.266",
+    "python_version": "3.14.6",
+    "version": "0.16.0",
+    "payload_sha256": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+    "archive_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae"
+  },
+  "budget": {
+    "host_timeout": 60,
+    "inner_timeout": 35,
+    "startup_margin": 5,
+    "cleanup_margin": 5,
+    "output_margin": 5
+  },
+  "credential_contents_read_or_copied": false
+}

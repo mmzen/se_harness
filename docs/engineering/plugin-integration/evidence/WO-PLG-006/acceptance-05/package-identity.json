@@ -1,0 +1,197 @@
+{
+  "source_commit": "99ed2b33eb52f0c94612857904c15a16273e9354",
+  "package_sha256": "647192b6791d3609e1844d8ee50456f08fa815a188af0d3ecc03fcc312959d46",
+  "manifest_sha256": "d6ebebb168a498e9b268d519fa94aea032ff7124ddfac0bad92343e6ce87725f",
+  "inventory": {
+    "evaluator": {
+      "archive": "se_harness-0.16.0-py3-none-any.whl",
+      "archive_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+      "payload_sha256": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+      "release_record": "docs/engineering/release-0-16-0/releases/RLS-SEH-025.md",
+      "release_record_sha256": "9248e66df86bdea7bb8d93c65cc7e2048fe8858085e84496750d94959d710533",
+      "release_revision": "78cd64df7c130a6f42ab357836093db30f710753",
+      "version": "0.16.0"
+    },
+    "files": {
+      ".claude-plugin/plugin.json": {
+        "bytes": 179,
+        "mode": 420,
+        "origin": "claude",
+        "sha256": "d6ebebb168a498e9b268d519fa94aea032ff7124ddfac0bad92343e6ce87725f"
+      },
+      "README.md": {
+        "bytes": 3011,
+        "mode": 420,
+        "origin": "claude",
+        "sha256": "c96939974873b2df43edb632a6a9b413d385af6672717dca4d340f575c02d05b"
+      },
+      "hooks/guard.txt": {
+        "bytes": 10265,
+        "mode": 420,
+        "origin": "claude",
+        "sha256": "336202b731951eea4f69f3b0b46787aba56d0fa17a848efcd8e9b0bde78a4abb"
+      },
+      "hooks/hooks.json": {
+        "bytes": 21279,
+        "mode": 420,
+        "origin": "claude",
+        "sha256": "ca485f95331a47f0a4069db25dccc08f4363e87a2065d129e11d109810de9e3c"
+      },
+      "packages/se_harness-0.16.0-py3-none-any.whl": {
+        "bytes": 466670,
+        "mode": 420,
+        "origin": "evaluator",
+        "sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae"
+      },
+      "scripts/binding.py": {
+        "bytes": 4033,
+        "mode": 420,
+        "origin": "claude",
+        "sha256": "034a6945f09af1bc12cceb5f966490bbf59e3bf623ed521b689c146ab00ef04a"
+      },
+      "scripts/check-tool-action.py": {
+        "bytes": 19864,
+        "mode": 420,
+        "origin": "shared",
+        "sha256": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4"
+      },
+      "scripts/session-context.py": {
+        "bytes": 14839,
+        "mode": 420,
+        "origin": "shared",
+        "sha256": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb"
+      },
+      "skills/change/SKILL.md": {
+        "bytes": 3495,
+        "mode": 420,
+        "origin": "shared",
+        "sha256": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13"
+      },
+      "skills/change/references/artifacts.md": {
+        "bytes": 2255,
+        "mode": 420,
+        "origin": "shared",
+        "sha256": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3"
+      },
+      "skills/change/references/authority.md": {
+        "bytes": 2216,
+        "mode": 420,
+        "origin": "shared",
+        "sha256": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f"
+      },
+      "skills/change/references/work-orders.md": {
+        "bytes": 3593,
+        "mode": 420,
+        "origin": "shared",
+        "sha256": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8"
+      },
+      "skills/evidence/SKILL.md": {
+        "bytes": 3564,
+        "mode": 420,
+        "origin": "shared",
+        "sha256": "647c20a982c798c0617145cbcfe2f3356d23b4f827641b6affff9592bf02ad3b"
+      },
+      "skills/evidence/references/external-actions.md": {
+        "bytes": 1672,
+        "mode": 420,
+        "origin": "shared",
+        "sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69"
+      },
+      "skills/evidence/references/records.md": {
+        "bytes": 4605,
+        "mode": 420,
+        "origin": "shared",
+        "sha256": "0c266bef118b904030e1982318763021bdfd699e34b353d4f38e5d9f2f43a20b"
+      },
+      "skills/harness-operator-brief/SKILL.md": {
+        "bytes": 5860,
+        "mode": 420,
+        "origin": "shared",
+        "sha256": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51"
+      },
+      "skills/harness-operator-brief/agents/openai.yaml": {
+        "bytes": 43,
+        "mode": 420,
+        "origin": "shared",
+        "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94"
+      },
+      "skills/harness-operator-brief/scripts/check_brief.py": {
+        "bytes": 9175,
+        "mode": 420,
+        "origin": "shared",
+        "sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683"
+      },
+      "skills/harness-operator-brief/skill-contract.json": {
+        "bytes": 4376,
+        "mode": 420,
+        "origin": "shared",
+        "sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52"
+      },
+      "skills/harness-orient/SKILL.md": {
+        "bytes": 4745,
+        "mode": 420,
+        "origin": "shared",
+        "sha256": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf"
+      },
+      "skills/harness-orient/scripts/orient.py": {
+        "bytes": 36278,
+        "mode": 420,
+        "origin": "shared",
+        "sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56"
+      },
+      "skills/harness-orient/skill-contract.json": {
+        "bytes": 2921,
+        "mode": 420,
+        "origin": "shared",
+        "sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627"
+      },
+      "skills/setup/SKILL.md": {
+        "bytes": 2151,
+        "mode": 420,
+        "origin": "shared",
+        "sha256": "68b3270b2ed4b8ad3651b6ff2ad737a425f8e7e3034df7fc065fb4e0feb03271"
+      },
+      "skills/setup/references/environment.md": {
+        "bytes": 14101,
+        "mode": 420,
+        "origin": "shared",
+        "sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59"
+      }
+    },
+    "host": "claude",
+    "plugin": "verity-plane",
+    "schema": "se-harness-plugin-assembly-v1",
+    "source": {
+      "plan": "tests/plugin_integration/claude_adapter/assembly-plan.json",
+      "plan_sha256": "24392d4987f0bd38d806a39520d60b746a7e8d86d39e473eca1ea68bbc008bd0",
+      "revision": "99ed2b33eb52f0c94612857904c15a16273e9354"
+    }
+  },
+  "loaded_paths": {
+    "assembly-inventory.json": "6a4c9f341f2b355fb4e461f357303078cf17453c6c94c926d92130b74ead6d88",
+    "README.md": "c96939974873b2df43edb632a6a9b413d385af6672717dca4d340f575c02d05b",
+    ".claude-plugin/plugin.json": "d6ebebb168a498e9b268d519fa94aea032ff7124ddfac0bad92343e6ce87725f",
+    "hooks/guard.txt": "336202b731951eea4f69f3b0b46787aba56d0fa17a848efcd8e9b0bde78a4abb",
+    "hooks/hooks.json": "ca485f95331a47f0a4069db25dccc08f4363e87a2065d129e11d109810de9e3c",
+    "packages/se_harness-0.16.0-py3-none-any.whl": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "scripts/binding.py": "034a6945f09af1bc12cceb5f966490bbf59e3bf623ed521b689c146ab00ef04a",
+    "scripts/check-tool-action.py": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4",
+    "scripts/session-context.py": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb",
+    "skills/change/SKILL.md": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13",
+    "skills/evidence/SKILL.md": "647c20a982c798c0617145cbcfe2f3356d23b4f827641b6affff9592bf02ad3b",
+    "skills/harness-operator-brief/skill-contract.json": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+    "skills/harness-operator-brief/SKILL.md": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51",
+    "skills/harness-orient/skill-contract.json": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+    "skills/harness-orient/SKILL.md": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf",
+    "skills/setup/SKILL.md": "68b3270b2ed4b8ad3651b6ff2ad737a425f8e7e3034df7fc065fb4e0feb03271",
+    "skills/setup/references/environment.md": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+    "skills/harness-orient/scripts/orient.py": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
+    "skills/harness-operator-brief/agents/openai.yaml": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+    "skills/harness-operator-brief/scripts/check_brief.py": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+    "skills/evidence/references/external-actions.md": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+    "skills/evidence/references/records.md": "0c266bef118b904030e1982318763021bdfd699e34b353d4f38e5d9f2f43a20b",
+    "skills/change/references/artifacts.md": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3",
+    "skills/change/references/authority.md": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f",
+    "skills/change/references/work-orders.md": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8"
+  }
+}
