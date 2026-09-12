@@ -1,0 +1,42 @@
+{
+  "applied_at": "2026-09-12T07:26:23.963409+00:00",
+  "manifest_sha256": "29507242f4d17369d242da25f37043fdbdc9f1a3254ff9c01938e6c858845514",
+  "files": [
+    {
+      "artifact": "SPEC-PLG-005",
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-005.md",
+      "before_raw_sha256": "eb7e2c6b99cc9a9fb728d1c1f0fe41d4aa2d0d7a5ecf344439bd3be1ac00a9d0",
+      "after_raw_sha256": "c4ad191725f88119ce27bc62e8eb611e76f27b78de9f83e0e76b1dbc24be0902"
+    },
+    {
+      "artifact": "SPEC-PLG-006",
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-006.md",
+      "before_raw_sha256": "910a6a684596880275fefa6a794e3436923854877a60575bc852ff873469a90d",
+      "after_raw_sha256": "380e80e99063b36d8809c6ab5a93c53e68d44e6238e3a8dc47e1026e1296175b"
+    },
+    {
+      "artifact": "SPEC-PLG-008",
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-008.md",
+      "before_raw_sha256": "1343ed2f8d32d10874564767498f44c06d6d75ffed7724bf68deb04b9cf1265c",
+      "after_raw_sha256": "ce09d9d8e81e4bf8f14eee1c4975b7d4eadb6670ba35c2adc7a5cb4ea4b89ddc"
+    },
+    {
+      "artifact": "VER-PLG-005",
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-005.md",
+      "before_raw_sha256": "021b576a209418a7d6c7b1671b14368d76d125aea530a6cb59ef3e0d2493b23e",
+      "after_raw_sha256": "60ed352159a13deb6b4c7c483c80306511439ea0e57475105c1e62aa2c19c73e"
+    },
+    {
+      "artifact": "VER-PLG-006",
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-006.md",
+      "before_raw_sha256": "71adb30a1f644df1b70171b87bde01d38cd3250be83641f981e5fbd411d5800f",
+      "after_raw_sha256": "917ae0df654f467c128fd2bbd6d6ed7d4c8ad816895ee11e09525f14d65a6c85"
+    },
+    {
+      "artifact": "VER-PLG-008",
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-008.md",
+      "before_raw_sha256": "f3548b50f1bed47b7b2251db7f100a4781d8cb3d040e93c801e491356e2db752",
+      "after_raw_sha256": "c19e65cccd19ad7c25fa9301eb3fb3d57b9bf18ff8a75aacc6fb0b92e32324af"
+    }
+  ]
+}

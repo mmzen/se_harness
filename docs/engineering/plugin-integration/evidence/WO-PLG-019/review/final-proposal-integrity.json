@@ -1,0 +1,66 @@
+{
+  "kind": "final-proposal-integrity-not-assurance",
+  "manifest_sha256": "29507242f4d17369d242da25f37043fdbdc9f1a3254ff9c01938e6c858845514",
+  "amendments": [
+    {
+      "artifact": "SPEC-PLG-005",
+      "proposal_digest_matches": true,
+      "base_digest_matches": true,
+      "active_definition_unchanged": true,
+      "metadata_history_unchanged": true
+    },
+    {
+      "artifact": "SPEC-PLG-006",
+      "proposal_digest_matches": true,
+      "base_digest_matches": true,
+      "active_definition_unchanged": true,
+      "metadata_history_unchanged": true
+    },
+    {
+      "artifact": "SPEC-PLG-008",
+      "proposal_digest_matches": true,
+      "base_digest_matches": true,
+      "active_definition_unchanged": true,
+      "metadata_history_unchanged": true
+    },
+    {
+      "artifact": "VER-PLG-005",
+      "proposal_digest_matches": true,
+      "base_digest_matches": true,
+      "active_definition_unchanged": true,
+      "metadata_history_unchanged": true
+    },
+    {
+      "artifact": "VER-PLG-006",
+      "proposal_digest_matches": true,
+      "base_digest_matches": true,
+      "active_definition_unchanged": true,
+      "metadata_history_unchanged": true
+    },
+    {
+      "artifact": "VER-PLG-008",
+      "proposal_digest_matches": true,
+      "base_digest_matches": true,
+      "active_definition_unchanged": true,
+      "metadata_history_unchanged": true
+    }
+  ],
+  "draft_records": [
+    {
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-019.md",
+      "sha256_matches": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-019.md",
+      "sha256_matches": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/decisions/DEC-PLG-006.md",
+      "sha256_matches": true
+    }
+  ],
+  "patch_check_exit": 0,
+  "tracked_tree_unchanged_exit": 0,
+  "earlier_preparation_checks": "results.json",
+  "change_since_earlier_checks": "Only the six proposal amendment-record paragraphs were clarified. Draft records and active definitions are unchanged; these .txt proposals are outside the formal graph."
+}

@@ -1,0 +1,10 @@
+{
+  "kind": "operator-instruction-evidence",
+  "recorded_at": "2026-09-12T07:37:40.847601+00:00",
+  "instruction_verbatim": "you can prepare the verification record then for WO-PLG-019",
+  "selected_work_order": "WO-PLG-019",
+  "verification_contract": "VER-PLG-019",
+  "preparation_actor": "implementation-agent",
+  "record_id": "VREC-PLG-014",
+  "authority": "Prepare one ready verification record and establish its clean candidate commit. No assurance decision, remote push, merge or release is authorized by this preparation."
+}

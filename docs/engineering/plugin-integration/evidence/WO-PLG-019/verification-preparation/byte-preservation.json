@@ -1,0 +1,25 @@
+{
+  "reason": "Raw stdout/stderr and evidence hashes must survive Git admission without Windows line-ending conversion.",
+  "scope": "docs/engineering/plugin-integration/evidence/WO-PLG-019/",
+  "attribute_file": "docs/engineering/plugin-integration/evidence/WO-PLG-019/.gitattributes",
+  "rule": "* -text",
+  "observed": "\"docs\\\\engineering\\\\plugin-integration\\\\evidence\\\\WO-PLG-019\\\\execution\\\\final-released-validate.stdout\": text: unset\n\"docs\\\\engineering\\\\plugin-integration\\\\evidence\\\\WO-PLG-019\\\\execution\\\\final-released-validate.stdout\": eol: unspecified\n",
+  "managed_files_changed": false,
+  "capture_whitespace": "All retained evidence recognizes CRLF with whitespace=cr-at-eol. Only *.patch disables whitespace checking because a unified diff requires space-prefixed blank context lines.",
+  "initial_staged_check": {
+    "exit": 2,
+    "cause": "CRLF raw command captures were reported as trailing whitespace. Raw bytes were retained; the directory attributes explicitly recognize CRLF for stdout/stderr."
+  },
+  "retained_failed_checks": [
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/verification-preparation/staged-whitespace-initial.stdout.gz",
+      "uncompressed_sha256": "eda834ddc9f40ef08e6582133f9caf1c86b143910b37364639540b62c91c4d1d",
+      "returncode": 2
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/verification-preparation/staged-whitespace-corrected.stdout.gz",
+      "uncompressed_sha256": "a1c0bf2ac3c79613a24f10e4b830c5dd676066a5abd2b316f1bf7d92241970c5",
+      "returncode": 2
+    }
+  ]
+}

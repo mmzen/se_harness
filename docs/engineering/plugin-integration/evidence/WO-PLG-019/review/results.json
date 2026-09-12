@@ -1,0 +1,1966 @@
+{
+  "kind": "preparation-checks-not-assurance",
+  "manifest_sha256": "d8031dafb56e22854387889b4a7d64a195aee1eaf2bbc25b114e3c1cd2fa3edc",
+  "commands": [
+    {
+      "name": "released-doctor",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "doctor",
+        ".",
+        "--json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "1d09f3a7167415a9b78849da9e8936c4251dbb78a3fb0104aca2297cd25e561e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "doctor": {
+        "command": "doctor",
+        "outcome": "completed",
+        "schema": "se-harness-command-result-v1",
+        "warnings": [
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-PMI-001' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-PMI-001.md'",
+            "path": "docs/engineering/portable-managed-integrity/verification-records/VREC-PMI-001.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-019' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-019.md'",
+            "path": "docs/engineering/release-0-10-0/releases/RLS-SEH-019.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-019' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-019.md'",
+            "path": "docs/engineering/release-0-10-0/verification-records/VREC-SEH-019.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-020' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-020.md'",
+            "path": "docs/engineering/release-0-11-0/releases/RLS-SEH-020.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-020' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-020.md'",
+            "path": "docs/engineering/release-0-11-0/verification-records/VREC-SEH-020.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-021' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-021.md'",
+            "path": "docs/engineering/release-0-12-0/releases/RLS-SEH-021.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-021' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-021.md'",
+            "path": "docs/engineering/release-0-12-0/verification-records/VREC-SEH-021.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-022' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-022.md'",
+            "path": "docs/engineering/release-0-13-0/releases/RLS-SEH-022.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-022' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-022.md'",
+            "path": "docs/engineering/release-0-13-0/verification-records/VREC-SEH-022.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-023' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-023.md'",
+            "path": "docs/engineering/release-0-14-0/releases/RLS-SEH-023.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-023' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-023.md'",
+            "path": "docs/engineering/release-0-14-0/verification-records/VREC-SEH-023.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-024' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-024.md'",
+            "path": "docs/engineering/release-0-15-0/releases/RLS-SEH-024.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-024' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-024.md'",
+            "path": "docs/engineering/release-0-15-0/verification-records/VREC-SEH-024.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-025' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-025.md'",
+            "path": "docs/engineering/release-0-16-0/releases/RLS-SEH-025.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-025' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-025.md'",
+            "path": "docs/engineering/release-0-16-0/verification-records/VREC-SEH-025.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-026' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-026.md'",
+            "path": "docs/engineering/release-0-17-0/releases/RLS-SEH-026.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-026' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-026.md'",
+            "path": "docs/engineering/release-0-17-0/verification-records/VREC-SEH-026.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-009' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-009.md'",
+            "path": "docs/engineering/release-0-6-0/releases/RLS-SEH-009.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-012' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-012.md'",
+            "path": "docs/engineering/release-0-6-0/releases/RLS-SEH-012.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-008' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-008.md'",
+            "path": "docs/engineering/release-0-6-0/verification-records/VREC-SEH-008.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-009' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-009.md'",
+            "path": "docs/engineering/release-0-6-0/verification-records/VREC-SEH-009.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-010' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-010.md'",
+            "path": "docs/engineering/release-0-6-0/verification-records/VREC-SEH-010.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-012' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-012.md'",
+            "path": "docs/engineering/release-0-6-0/verification-records/VREC-SEH-012.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-014' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-014.md'",
+            "path": "docs/engineering/release-0-7-0/releases/RLS-SEH-014.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-015' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-015.md'",
+            "path": "docs/engineering/release-0-7-0/releases/RLS-SEH-015.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-014' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-014.md'",
+            "path": "docs/engineering/release-0-7-0/verification-records/VREC-SEH-014.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-016' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-016.md'",
+            "path": "docs/engineering/release-0-7-1/releases/RLS-SEH-016.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-015' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-015.md'",
+            "path": "docs/engineering/release-0-7-1/verification-records/VREC-SEH-015.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-017' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-017.md'",
+            "path": "docs/engineering/release-0-8-0/releases/RLS-SEH-017.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-017' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-017.md'",
+            "path": "docs/engineering/release-0-8-0/verification-records/VREC-SEH-017.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-018' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-018.md'",
+            "path": "docs/engineering/release-0-9-0/releases/RLS-SEH-018.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-018' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-018.md'",
+            "path": "docs/engineering/release-0-9-0/verification-records/VREC-SEH-018.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-001' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-001.md'",
+            "path": "docs/engineering/release-0.2.0/releases/RLS-SEH-001.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-001' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-001.md'",
+            "path": "docs/engineering/release-0.2.0/verification-records/VREC-SEH-001.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-002' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-002.md'",
+            "path": "docs/engineering/release-0.2.1/releases/RLS-SEH-002.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-002' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-002.md'",
+            "path": "docs/engineering/release-0.2.1/verification-records/VREC-SEH-002.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-004' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-004.md'",
+            "path": "docs/engineering/release-0.2.2/releases/RLS-SEH-004.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-004' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-004.md'",
+            "path": "docs/engineering/release-0.2.2/verification-records/VREC-SEH-004.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-005' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-005.md'",
+            "path": "docs/engineering/release-0.3.0/releases/RLS-SEH-005.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-005' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-005.md'",
+            "path": "docs/engineering/release-0.3.0/verification-records/VREC-SEH-005.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-006' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-006.md'",
+            "path": "docs/engineering/release-0.4.0/releases/RLS-SEH-006.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-006' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-006.md'",
+            "path": "docs/engineering/release-0.4.0/verification-records/VREC-SEH-006.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-007' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-007.md'",
+            "path": "docs/engineering/release-0.4.1/releases/RLS-SEH-007.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-007' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-007.md'",
+            "path": "docs/engineering/release-0.4.1/verification-records/VREC-SEH-007.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-DOC-003' is valid outside its canonical location; expected 'docs/engineering/harness-distribution/verification-records/VREC-DOC-003.md'",
+            "path": "docs/engineering/verification-records/VREC-DOC-003.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-DOC-005' is valid outside its canonical location; expected 'docs/engineering/harness-distribution/verification-records/VREC-DOC-005.md'",
+            "path": "docs/engineering/verification-records/VREC-DOC-005.md"
+          }
+        ]
+      },
+      "checks": [
+        {
+          "detail": "required",
+          "name": "AGENTS.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "CLAUDE.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "ENGINEERING_HARNESS.md",
+          "passed": true
+        },
+        {
+          "detail": "@AGENTS.md",
+          "name": "claude-import",
+          "passed": true
+        },
+        {
+          "detail": ".engineering-harness.toml",
+          "name": "config",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.agents/skills/harness-operator-brief/SKILL.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.agents/skills/harness-operator-brief/scripts/check_brief.py",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.agents/skills/harness-operator-brief/skill-contract.json",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.agents/skills/harness-orient/SKILL.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.agents/skills/harness-orient/scripts/orient.py",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.agents/skills/harness-orient/skill-contract.json",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.claude/skills/harness-orient/SKILL.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.engineering-harness.toml",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.gitattributes",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.github/workflows/engineering-harness.yml",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.gitignore",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:AGENTS.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:CLAUDE.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:ENGINEERING_HARNESS.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/ARTIFACT_AUTHORING.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/DECISION_RIGHTS.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/OPERATING_CARD.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/QUALITY_GATES.json",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/QUALITY_GATES.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/TECHNICAL_COMMUNICATION.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/TRACEABILITY.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/WORKFLOW.json",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/WORKFLOW.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/ADR.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/ARCHITECTURE.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/CAPABILITY.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/DECISION.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/INTENT.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/OPERATING_CONTRACT.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/README.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/RELEASE_CONTRACT.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/RELEASE_RECORD.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/REQUIREMENT.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/RISK.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/SPECIFICATION.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/VERIFICATION.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/VERIFICATION_RECORD.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/WORK_ORDER.template.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/ARTIFACT_AUTHORING.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/DECISION_RIGHTS.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/OPERATING_CARD.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/QUALITY_GATES.json",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/QUALITY_GATES.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/README.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/TECHNICAL_COMMUNICATION.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/TRACEABILITY.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/WORKFLOW.json",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/WORKFLOW.md",
+          "passed": true
+        },
+        {
+          "detail": ".engineering-harness.lock",
+          "name": "lock",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.agents/skills/harness-operator-brief/SKILL.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.agents/skills/harness-operator-brief/scripts/check_brief.py",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.agents/skills/harness-operator-brief/skill-contract.json",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.agents/skills/harness-orient/SKILL.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.agents/skills/harness-orient/scripts/orient.py",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.agents/skills/harness-orient/skill-contract.json",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.claude/skills/harness-orient/SKILL.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.engineering-harness.toml",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.gitattributes",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.github/workflows/engineering-harness.yml",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.gitignore",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:AGENTS.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:CLAUDE.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:ENGINEERING_HARNESS.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/ARTIFACT_AUTHORING.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/DECISION_RIGHTS.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/OPERATING_CARD.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/QUALITY_GATES.json",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/QUALITY_GATES.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/TECHNICAL_COMMUNICATION.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/TRACEABILITY.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/WORKFLOW.json",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/WORKFLOW.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/ADR.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/ARCHITECTURE.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/CAPABILITY.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/DECISION.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/INTENT.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/OPERATING_CONTRACT.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/README.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/RELEASE_CONTRACT.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/RELEASE_RECORD.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/REQUIREMENT.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/RISK.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/SPECIFICATION.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/VERIFICATION.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/VERIFICATION_RECORD.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/WORK_ORDER.template.md",
+          "passed": true
+        },
+        {
+          "detail": "3.13.3",
+          "name": "python",
+          "passed": true
+        },
+        {
+          "detail": "present",
+          "name": "seed:.github/PULL_REQUEST_TEMPLATE.md",
+          "passed": true
+        },
+        {
+          "detail": "present",
+          "name": "seed:GLOSSARY.md",
+          "passed": true
+        },
+        {
+          "detail": "present",
+          "name": "seed:docs/engineering/README.md",
+          "passed": true
+        },
+        {
+          "detail": "2 classes cover 192 tracked paths; 10 digest fields declared out of scope",
+          "name": "hash-bound-class-declared",
+          "passed": true
+        },
+        {
+          "detail": "1 raw classes effective for 191 tracked paths",
+          "name": "hash-bound-attribute-effective",
+          "passed": true
+        },
+        {
+          "detail": "one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1",
+          "name": "hash-bound-mode-consistent",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "released-validate",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "validate",
+        ".",
+        "--json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "e41e159e50110fc0f2312b1aef1b35b36b896eaa7db8ab815480874b0b9f22df",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "valid": true,
+      "error_count": 0,
+      "warning_count": 46,
+      "artifact_count": 1547
+    },
+    {
+      "name": "candidate-help",
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "bd6eb5ee50cb73d0c1e5d736a1318fe1a80c554eb03b8b926ef75431b5fa9fef",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output_tail": "                 under DR-DECISION-DISPOSE\r\n    raise-risk          record one measured threat as a raised risk artifact,\r\n                        optionally with the decision that stops the threatened\r\n                        work\r\n    risks               list the risks threatening one artifact and its\r\n                        governing chain; writes nothing\r\n    select-work-order   select one structured work-order field from a GitHub\r\n                        pull-request event\r\n    upgrade             plan or apply safe managed-file upgrades\r\n    scaffold-domain     safely create the canonical organization for one\r\n                        engineering domain\r\n    create-artifact     create one incomplete draft from the canonical\r\n                        artifact template\r\n    release-unit        derive a release unit's work-order census from the\r\n                        commits between the previous release tag and a\r\n                        candidate commit\r\n    identity            emit and verify one evaluator or candidate runtime\r\n                        identity\r\n    qualify             run one typed, provenance-bound release qualification\r\n                        operation\r\n    capture-verification\r\n                        prepare a ready commit-bound verification record\r\n    prepare-release     prepare a ready commit-bound release record\r\n\r\noptions:\r\n  -h, --help            show this help message and exit\r\n  --version             show program's version number and exit\r\n"
+    },
+    {
+      "name": "candidate-validate",
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "se_harness",
+        "validate",
+        ".",
+        "--json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "e41e159e50110fc0f2312b1aef1b35b36b896eaa7db8ab815480874b0b9f22df",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "valid": true,
+      "error_count": 0,
+      "warning_count": 46,
+      "artifact_count": 1547
+    },
+    {
+      "name": "candidate-doctor",
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "se_harness",
+        "doctor",
+        ".",
+        "--json"
+      ],
+      "returncode": 1,
+      "stdout_sha256": "c9cb92adafe4eb9a5585cb41443355a120a6b89623996a893dcabe4b569c9842",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "doctor": {
+        "command": "doctor",
+        "outcome": "failed",
+        "schema": "se-harness-command-result-v1",
+        "warnings": [
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-PMI-001' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-PMI-001.md'",
+            "path": "docs/engineering/portable-managed-integrity/verification-records/VREC-PMI-001.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-019' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-019.md'",
+            "path": "docs/engineering/release-0-10-0/releases/RLS-SEH-019.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-019' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-019.md'",
+            "path": "docs/engineering/release-0-10-0/verification-records/VREC-SEH-019.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-020' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-020.md'",
+            "path": "docs/engineering/release-0-11-0/releases/RLS-SEH-020.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-020' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-020.md'",
+            "path": "docs/engineering/release-0-11-0/verification-records/VREC-SEH-020.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-021' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-021.md'",
+            "path": "docs/engineering/release-0-12-0/releases/RLS-SEH-021.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-021' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-021.md'",
+            "path": "docs/engineering/release-0-12-0/verification-records/VREC-SEH-021.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-022' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-022.md'",
+            "path": "docs/engineering/release-0-13-0/releases/RLS-SEH-022.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-022' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-022.md'",
+            "path": "docs/engineering/release-0-13-0/verification-records/VREC-SEH-022.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-023' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-023.md'",
+            "path": "docs/engineering/release-0-14-0/releases/RLS-SEH-023.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-023' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-023.md'",
+            "path": "docs/engineering/release-0-14-0/verification-records/VREC-SEH-023.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-024' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-024.md'",
+            "path": "docs/engineering/release-0-15-0/releases/RLS-SEH-024.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-024' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-024.md'",
+            "path": "docs/engineering/release-0-15-0/verification-records/VREC-SEH-024.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-025' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-025.md'",
+            "path": "docs/engineering/release-0-16-0/releases/RLS-SEH-025.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-025' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-025.md'",
+            "path": "docs/engineering/release-0-16-0/verification-records/VREC-SEH-025.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-026' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-026.md'",
+            "path": "docs/engineering/release-0-17-0/releases/RLS-SEH-026.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-026' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-026.md'",
+            "path": "docs/engineering/release-0-17-0/verification-records/VREC-SEH-026.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-009' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-009.md'",
+            "path": "docs/engineering/release-0-6-0/releases/RLS-SEH-009.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-012' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-012.md'",
+            "path": "docs/engineering/release-0-6-0/releases/RLS-SEH-012.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-008' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-008.md'",
+            "path": "docs/engineering/release-0-6-0/verification-records/VREC-SEH-008.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-009' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-009.md'",
+            "path": "docs/engineering/release-0-6-0/verification-records/VREC-SEH-009.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-010' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-010.md'",
+            "path": "docs/engineering/release-0-6-0/verification-records/VREC-SEH-010.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-012' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-012.md'",
+            "path": "docs/engineering/release-0-6-0/verification-records/VREC-SEH-012.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-014' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-014.md'",
+            "path": "docs/engineering/release-0-7-0/releases/RLS-SEH-014.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-015' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-015.md'",
+            "path": "docs/engineering/release-0-7-0/releases/RLS-SEH-015.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-014' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-014.md'",
+            "path": "docs/engineering/release-0-7-0/verification-records/VREC-SEH-014.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-016' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-016.md'",
+            "path": "docs/engineering/release-0-7-1/releases/RLS-SEH-016.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-015' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-015.md'",
+            "path": "docs/engineering/release-0-7-1/verification-records/VREC-SEH-015.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-017' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-017.md'",
+            "path": "docs/engineering/release-0-8-0/releases/RLS-SEH-017.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-017' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-017.md'",
+            "path": "docs/engineering/release-0-8-0/verification-records/VREC-SEH-017.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-018' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-018.md'",
+            "path": "docs/engineering/release-0-9-0/releases/RLS-SEH-018.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-018' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-018.md'",
+            "path": "docs/engineering/release-0-9-0/verification-records/VREC-SEH-018.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-001' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-001.md'",
+            "path": "docs/engineering/release-0.2.0/releases/RLS-SEH-001.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-001' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-001.md'",
+            "path": "docs/engineering/release-0.2.0/verification-records/VREC-SEH-001.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-002' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-002.md'",
+            "path": "docs/engineering/release-0.2.1/releases/RLS-SEH-002.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-002' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-002.md'",
+            "path": "docs/engineering/release-0.2.1/verification-records/VREC-SEH-002.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-004' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-004.md'",
+            "path": "docs/engineering/release-0.2.2/releases/RLS-SEH-004.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-004' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-004.md'",
+            "path": "docs/engineering/release-0.2.2/verification-records/VREC-SEH-004.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-005' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-005.md'",
+            "path": "docs/engineering/release-0.3.0/releases/RLS-SEH-005.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-005' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-005.md'",
+            "path": "docs/engineering/release-0.3.0/verification-records/VREC-SEH-005.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-006' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-006.md'",
+            "path": "docs/engineering/release-0.4.0/releases/RLS-SEH-006.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-006' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-006.md'",
+            "path": "docs/engineering/release-0.4.0/verification-records/VREC-SEH-006.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'RLS-SEH-007' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-007.md'",
+            "path": "docs/engineering/release-0.4.1/releases/RLS-SEH-007.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-SEH-007' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-007.md'",
+            "path": "docs/engineering/release-0.4.1/verification-records/VREC-SEH-007.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-DOC-003' is valid outside its canonical location; expected 'docs/engineering/harness-distribution/verification-records/VREC-DOC-003.md'",
+            "path": "docs/engineering/verification-records/VREC-DOC-003.md"
+          },
+          {
+            "code": "W013",
+            "message": "artifact 'VREC-DOC-005' is valid outside its canonical location; expected 'docs/engineering/harness-distribution/verification-records/VREC-DOC-005.md'",
+            "path": "docs/engineering/verification-records/VREC-DOC-005.md"
+          }
+        ]
+      },
+      "checks": [
+        {
+          "detail": "required",
+          "name": "AGENTS.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "CLAUDE.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "ENGINEERING_HARNESS.md",
+          "passed": true
+        },
+        {
+          "detail": "@AGENTS.md",
+          "name": "claude-import",
+          "passed": true
+        },
+        {
+          "detail": ".engineering-harness.toml",
+          "name": "config",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.agents/skills/harness-operator-brief/SKILL.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.agents/skills/harness-operator-brief/scripts/check_brief.py",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.agents/skills/harness-operator-brief/skill-contract.json",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.agents/skills/harness-orient/SKILL.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.agents/skills/harness-orient/scripts/orient.py",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.agents/skills/harness-orient/skill-contract.json",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.claude/skills/harness-orient/SKILL.md",
+          "passed": true
+        },
+        {
+          "detail": "differs from distribution template",
+          "name": "distribution:.engineering-harness.toml",
+          "passed": false
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.gitattributes",
+          "passed": true
+        },
+        {
+          "detail": "differs from distribution template",
+          "name": "distribution:.github/workflows/engineering-harness.yml",
+          "passed": false
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:.gitignore",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:AGENTS.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:CLAUDE.md",
+          "passed": true
+        },
+        {
+          "detail": "differs from distribution template",
+          "name": "distribution:ENGINEERING_HARNESS.md",
+          "passed": false
+        },
+        {
+          "detail": "differs from distribution template",
+          "name": "distribution:docs/engineering/ARTIFACT_AUTHORING.md",
+          "passed": false
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/DECISION_RIGHTS.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/OPERATING_CARD.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/QUALITY_GATES.json",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/QUALITY_GATES.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/TECHNICAL_COMMUNICATION.md",
+          "passed": true
+        },
+        {
+          "detail": "differs from distribution template",
+          "name": "distribution:docs/engineering/TRACEABILITY.md",
+          "passed": false
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/WORKFLOW.json",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/WORKFLOW.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/ADR.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/ARCHITECTURE.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/CAPABILITY.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/DECISION.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/INTENT.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/OPERATING_CONTRACT.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/README.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/RELEASE_CONTRACT.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/RELEASE_RECORD.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/REQUIREMENT.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/RISK.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/SPECIFICATION.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/VERIFICATION.template.md",
+          "passed": true
+        },
+        {
+          "detail": "matches distribution",
+          "name": "distribution:docs/engineering/templates/VERIFICATION_RECORD.template.md",
+          "passed": true
+        },
+        {
+          "detail": "differs from distribution template",
+          "name": "distribution:docs/engineering/templates/WORK_ORDER.template.md",
+          "passed": false
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/ARTIFACT_AUTHORING.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/DECISION_RIGHTS.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/OPERATING_CARD.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/QUALITY_GATES.json",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/QUALITY_GATES.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/README.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/TECHNICAL_COMMUNICATION.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/TRACEABILITY.md",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/WORKFLOW.json",
+          "passed": true
+        },
+        {
+          "detail": "required",
+          "name": "docs/engineering/WORKFLOW.md",
+          "passed": true
+        },
+        {
+          "detail": ".engineering-harness.lock",
+          "name": "lock",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.agents/skills/harness-operator-brief/SKILL.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.agents/skills/harness-operator-brief/scripts/check_brief.py",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.agents/skills/harness-operator-brief/skill-contract.json",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.agents/skills/harness-orient/SKILL.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.agents/skills/harness-orient/scripts/orient.py",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.agents/skills/harness-orient/skill-contract.json",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.claude/skills/harness-orient/SKILL.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.engineering-harness.toml",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.gitattributes",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.github/workflows/engineering-harness.yml",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:.gitignore",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:AGENTS.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:CLAUDE.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:ENGINEERING_HARNESS.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/ARTIFACT_AUTHORING.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/DECISION_RIGHTS.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/OPERATING_CARD.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/QUALITY_GATES.json",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/QUALITY_GATES.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/TECHNICAL_COMMUNICATION.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/TRACEABILITY.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/WORKFLOW.json",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/WORKFLOW.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/ADR.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/ARCHITECTURE.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/CAPABILITY.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/DECISION.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/INTENT.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/OPERATING_CONTRACT.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/README.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/RELEASE_CONTRACT.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/RELEASE_RECORD.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/REQUIREMENT.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/RISK.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/SPECIFICATION.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/VERIFICATION.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/VERIFICATION_RECORD.template.md",
+          "passed": true
+        },
+        {
+          "detail": "unchanged",
+          "name": "managed:docs/engineering/templates/WORK_ORDER.template.md",
+          "passed": true
+        },
+        {
+          "detail": "3.13.3",
+          "name": "python",
+          "passed": true
+        },
+        {
+          "detail": "present",
+          "name": "seed:.github/PULL_REQUEST_TEMPLATE.md",
+          "passed": true
+        },
+        {
+          "detail": "present",
+          "name": "seed:GLOSSARY.md",
+          "passed": true
+        },
+        {
+          "detail": "present",
+          "name": "seed:docs/engineering/README.md",
+          "passed": true
+        },
+        {
+          "detail": "2 classes cover 192 tracked paths; 10 digest fields declared out of scope",
+          "name": "hash-bound-class-declared",
+          "passed": true
+        },
+        {
+          "detail": "1 raw classes effective for 191 tracked paths",
+          "name": "hash-bound-attribute-effective",
+          "passed": true
+        },
+        {
+          "detail": "one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1",
+          "name": "hash-bound-mode-consistent",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "release-distributions",
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "returncode": 0,
+      "stdout_sha256": "c27f0712b4a9b2c06498e19445ce3d7bc4970af7b4c8178b62c9b7f8c74b7987",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output_tail": "SE Harness release distribution validation: PASS (14 distribution-bearing records)\r\n"
+    },
+    {
+      "name": "decision-plan",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "decide",
+        ".",
+        "--artifact",
+        "DEC-PLG-006",
+        "--option",
+        "accept",
+        "--decision",
+        "technical-owner",
+        "--reason",
+        "I accept the hook failure as a documented local limitation",
+        "--revisit",
+        "Before the first public plugin release, any supported host-profile expansion, or introduction of remote acceptance controls.",
+        "--json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "59f25fa7b39063f0dbbaeee4fd03268f0623f966c8b3d3b99b850b07bfe7bc94",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "operation": {
+        "kind": "transition",
+        "outcome": "completed"
+      },
+      "state": {
+        "before": [
+          {
+            "id": "DEC-PLG-006",
+            "status": "open"
+          }
+        ],
+        "after": [
+          {
+            "id": "DEC-PLG-006",
+            "status": "decided"
+          }
+        ]
+      },
+      "findings": {
+        "scoped_blockers": [],
+        "repository_blockers": [],
+        "unrelated_count": 0
+      },
+      "mutation": {
+        "writes": [
+          {
+            "id": "DEC-PLG-006",
+            "path": "docs/engineering/plugin-integration/decisions/DEC-PLG-006.md",
+            "fields": [
+              "disposition",
+              "lifecycle_events",
+              "status",
+              "updated"
+            ]
+          }
+        ]
+      },
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Planned 1 explicit lifecycle transition(s); no files were written."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "DEC-PLG-006 is decided and terminal."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-FOCUS-SELECTED",
+          "step_id": "STEP-FOCUS-SELECTED",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "DEC-PLG-006"
+          ]
+        },
+        "alternatives": []
+      }
+    },
+    {
+      "name": "definition-approval-plan",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "transition",
+        ".",
+        "--set",
+        "VER-PLG-019=approved",
+        "--decision",
+        "VER-PLG-019=assurance-owner",
+        "--reason",
+        "VER-PLG-019=Proposed assurance-owner approval of the exact reviewed qualification reconciliation contract; authorization pending.",
+        "--json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "612b13174e5c2d69640988eb3f730854a5ddde75270af287ac9e54a6996d7bf7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "operation": {
+        "kind": "transition",
+        "outcome": "completed"
+      },
+      "state": {
+        "before": [
+          {
+            "id": "VER-PLG-019",
+            "status": "draft"
+          }
+        ],
+        "after": [
+          {
+            "id": "VER-PLG-019",
+            "status": "approved"
+          }
+        ]
+      },
+      "findings": {
+        "scoped_blockers": [],
+        "repository_blockers": [],
+        "unrelated_count": 0
+      },
+      "mutation": {
+        "writes": [
+          {
+            "id": "VER-PLG-019",
+            "path": "docs/engineering/plugin-integration/verification/VER-PLG-019.md",
+            "fields": [
+              "lifecycle_events",
+              "status",
+              "updated"
+            ]
+          }
+        ]
+      },
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Planned 1 explicit lifecycle transition(s); no files were written."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "VER-PLG-019 is approved."
+        ],
+        "decision_required": {
+          "decision_right": "DR-DEFINITION-DECIDE",
+          "role": "definition-owner",
+          "artifact": "VER-PLG-019",
+          "decision": "whether the selected definition is complete",
+          "outcomes": [
+            "implemented",
+            "reject",
+            "stop"
+          ]
+        },
+        "next": {
+          "procedure_id": "PROC-DEFINITION-COMPLETE",
+          "step_id": "STEP-DEFINITION-COMPLETE",
+          "action": "whether the selected definition is complete"
+        },
+        "command_or_response": {
+          "kind": "response",
+          "value": "Decide the selected definition VER-PLG-019 only."
+        },
+        "alternatives": []
+      }
+    },
+    {
+      "name": "work-approval-plan",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "transition",
+        ".",
+        "--set",
+        "WO-PLG-019=approved",
+        "--decision",
+        "WO-PLG-019=engineering-owner",
+        "--reason",
+        "WO-PLG-019=Proposed engineering-owner approval of the exact reviewed qualification reconciliation work order; authorization pending.",
+        "--json"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "470cfca7fdcd451a44514f1b8a3ba32b870dcc76097556779c3d912512768d46",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "operation": {
+        "kind": "transition",
+        "outcome": "completed"
+      },
+      "state": {
+        "before": [
+          {
+            "id": "WO-PLG-019",
+            "status": "draft"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-PLG-019",
+            "status": "approved"
+          }
+        ]
+      },
+      "findings": {
+        "scoped_blockers": [],
+        "repository_blockers": [],
+        "unrelated_count": 0
+      },
+      "mutation": {
+        "writes": [
+          {
+            "id": "WO-PLG-019",
+            "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-019.md",
+            "fields": [
+              "lifecycle_events",
+              "status",
+              "updated"
+            ]
+          }
+        ]
+      },
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Planned 1 explicit lifecycle transition(s); no files were written."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-PLG-019 is approved."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-WO-START",
+          "step_id": "STEP-WO-START-FOCUS",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "WO-PLG-019"
+          ]
+        },
+        "alternatives": []
+      }
+    },
+    {
+      "name": "patch-applicability",
+      "argv": [
+        "git",
+        "apply",
+        "--check",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\se_harness\\docs\\engineering\\plugin-integration\\evidence\\WO-PLG-019\\qualification-amendments.patch"
+      ],
+      "returncode": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output_tail": ""
+    }
+  ],
+  "proposal_integrity": [
+    {
+      "artifact": "SPEC-PLG-005",
+      "proposal_digest_matches": true,
+      "base_digest_matches": true,
+      "active_definition_unchanged": true,
+      "identity_state_relations_history_unchanged": true
+    },
+    {
+      "artifact": "SPEC-PLG-006",
+      "proposal_digest_matches": true,
+      "base_digest_matches": true,
+      "active_definition_unchanged": true,
+      "identity_state_relations_history_unchanged": true
+    },
+    {
+      "artifact": "SPEC-PLG-008",
+      "proposal_digest_matches": true,
+      "base_digest_matches": true,
+      "active_definition_unchanged": true,
+      "identity_state_relations_history_unchanged": true
+    },
+    {
+      "artifact": "VER-PLG-005",
+      "proposal_digest_matches": true,
+      "base_digest_matches": true,
+      "active_definition_unchanged": true,
+      "identity_state_relations_history_unchanged": true
+    },
+    {
+      "artifact": "VER-PLG-006",
+      "proposal_digest_matches": true,
+      "base_digest_matches": true,
+      "active_definition_unchanged": true,
+      "identity_state_relations_history_unchanged": true
+    },
+    {
+      "artifact": "VER-PLG-008",
+      "proposal_digest_matches": true,
+      "base_digest_matches": true,
+      "active_definition_unchanged": true,
+      "identity_state_relations_history_unchanged": true
+    }
+  ],
+  "source_integrity": [
+    {
+      "pr": 456,
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-006/local-limitation-acceptance/operator-instruction.json",
+      "sha256_matches": true
+    },
+    {
+      "pr": 456,
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-006/local-limitation-acceptance/formal-recording-proposal.md",
+      "sha256_matches": true
+    },
+    {
+      "pr": 456,
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-006/C10/observations.json",
+      "sha256_matches": true
+    },
+    {
+      "pr": 456,
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-006/C11/observations.json",
+      "sha256_matches": true
+    },
+    {
+      "pr": 456,
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-006/C12/observations.json",
+      "sha256_matches": true
+    },
+    {
+      "pr": 456,
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-006/qualification-limit.md",
+      "sha256_matches": true
+    },
+    {
+      "pr": 457,
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/local-limitation-acceptance/operator-instruction.json",
+      "sha256_matches": true
+    },
+    {
+      "pr": 457,
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/local-limitation-acceptance/formal-recording-proposal.md",
+      "sha256_matches": true
+    },
+    {
+      "pr": 457,
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/C10/observations.json",
+      "sha256_matches": true
+    },
+    {
+      "pr": 457,
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/C11/observations.json",
+      "sha256_matches": true
+    },
+    {
+      "pr": 457,
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/C12/observations.json",
+      "sha256_matches": true
+    },
+    {
+      "pr": 457,
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/qualification-limit.md",
+      "sha256_matches": true
+    }
+  ]
+}
