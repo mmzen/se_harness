@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "git",
+    "add",
+    "--",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-006",
+    "docs/engineering/plugin-integration/work-orders/WO-PLG-006.md"
+  ],
+  "exit_code": 0
+}
