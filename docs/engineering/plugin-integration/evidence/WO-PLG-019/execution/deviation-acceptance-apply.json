@@ -1,0 +1,161 @@
+{
+  "name": "deviation-acceptance-apply",
+  "argv": [
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "decide",
+    ".",
+    "--artifact",
+    "DEC-PLG-006",
+    "--option",
+    "accept",
+    "--decision",
+    "technical-owner",
+    "--reason",
+    "I accept the hook failure as a documented local limitation",
+    "--revisit",
+    "Before the first public plugin release, any supported host-profile expansion, or introduction of remote acceptance controls.",
+    "--json",
+    "--apply"
+  ],
+  "started_at": "2026-09-12T07:27:00.615838+00:00",
+  "finished_at": "2026-09-12T07:28:10.779339+00:00",
+  "returncode": 0,
+  "stdout_sha256": "adcb40a1fd14caffc656708a3f9f0b3ca37e038a2e7cd4c9c853485c4128d8aa",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "result": {
+    "schema": "se-harness-workflow-result-v2",
+    "operation": {
+      "kind": "transition",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "DEC-PLG-006",
+      "artifacts": [
+        "DEC-PLG-006"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [],
+      "dependencies": [],
+      "declared_paths": [],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "transition",
+      "workflow_rule_id": "WFL-DEC-CLOSED",
+      "procedure_id": "PROC-FOCUS-SELECTED",
+      "status": "pass",
+      "gates": [
+        {
+          "id": "QG-STRUCTURAL",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGS-EDGE",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "DEC-PLG-006"
+                }
+              ],
+              "message": "open -> decided is a declared lifecycle edge for DEC-PLG-006."
+            }
+          ]
+        }
+      ]
+    },
+    "procedure": {
+      "id": "PROC-FOCUS-SELECTED",
+      "current_step": "STEP-FOCUS-SELECTED",
+      "steps": [
+        {
+          "id": "STEP-FOCUS-SELECTED",
+          "kind": "command",
+          "gate_ids": [],
+          "effects": [
+            "Projected selected state for DEC-PLG-006."
+          ],
+          "non_effects": [
+            "Focus changes no lifecycle state."
+          ],
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "DEC-PLG-006"
+          ]
+        }
+      ]
+    },
+    "state": {
+      "before": [
+        {
+          "id": "DEC-PLG-006",
+          "status": "open"
+        }
+      ],
+      "after": [
+        {
+          "id": "DEC-PLG-006",
+          "status": "decided"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 0
+    },
+    "mutation": {
+      "writes": [
+        {
+          "id": "DEC-PLG-006",
+          "path": "docs/engineering/plugin-integration/decisions/DEC-PLG-006.md",
+          "fields": [
+            "disposition",
+            "lifecycle_events",
+            "status",
+            "updated"
+          ]
+        }
+      ]
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Applied 1 explicit lifecycle transition(s) atomically."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "DEC-PLG-006 is decided and terminal."
+      ],
+      "decision_required": null,
+      "next": {
+        "procedure_id": "PROC-FOCUS-SELECTED",
+        "step_id": "STEP-FOCUS-SELECTED",
+        "action": "Run the bound command"
+      },
+      "command_or_response": {
+        "kind": "command",
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "DEC-PLG-006"
+        ]
+      },
+      "alternatives": []
+    },
+    "result_sha256": "0d03f0a178194963be94e265d9e1b64392b996e436afad2b35fc7a625c349a42"
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "kind": "qualification-reconciliation-integrity",
+  "verified_at": "2026-09-12T07:28:44.953922+00:00",
+  "manifest_sha256": "29507242f4d17369d242da25f37043fdbdc9f1a3254ff9c01938e6c858845514",
+  "amendments": [
+    {
+      "artifact": "SPEC-PLG-005",
+      "exact_approved_bytes": true,
+      "sha256": "c4ad191725f88119ce27bc62e8eb611e76f27b78de9f83e0e76b1dbc24be0902"
+    },
+    {
+      "artifact": "SPEC-PLG-006",
+      "exact_approved_bytes": true,
+      "sha256": "380e80e99063b36d8809c6ab5a93c53e68d44e6238e3a8dc47e1026e1296175b"
+    },
+    {
+      "artifact": "SPEC-PLG-008",
+      "exact_approved_bytes": true,
+      "sha256": "ce09d9d8e81e4bf8f14eee1c4975b7d4eadb6670ba35c2adc7a5cb4ea4b89ddc"
+    },
+    {
+      "artifact": "VER-PLG-005",
+      "exact_approved_bytes": true,
+      "sha256": "60ed352159a13deb6b4c7c483c80306511439ea0e57475105c1e62aa2c19c73e"
+    },
+    {
+      "artifact": "VER-PLG-006",
+      "exact_approved_bytes": true,
+      "sha256": "917ae0df654f467c128fd2bbd6d6ed7d4c8ad816895ee11e09525f14d65a6c85"
+    },
+    {
+      "artifact": "VER-PLG-008",
+      "exact_approved_bytes": true,
+      "sha256": "c19e65cccd19ad7c25fa9301eb3fb3d57b9bf18ff8a75aacc6fb0b92e32324af"
+    }
+  ],
+  "tracked_file_count": 8360,
+  "changed_original_files": [
+    "docs/engineering/plugin-integration/specifications/SPEC-PLG-005.md",
+    "docs/engineering/plugin-integration/specifications/SPEC-PLG-006.md",
+    "docs/engineering/plugin-integration/specifications/SPEC-PLG-008.md",
+    "docs/engineering/plugin-integration/verification/VER-PLG-005.md",
+    "docs/engineering/plugin-integration/verification/VER-PLG-006.md",
+    "docs/engineering/plugin-integration/verification/VER-PLG-008.md"
+  ],
+  "all_other_original_tracked_bytes_unchanged": true,
+  "sources": [
+    {
+      "pr": 456,
+      "commit": "b29fa6e4f1eb594a9e16e72e8752a88ee65adce0",
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-006/local-limitation-acceptance/operator-instruction.json",
+      "sha256_matches": true
+    },
+    {
+      "pr": 456,
+      "commit": "b29fa6e4f1eb594a9e16e72e8752a88ee65adce0",
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-006/local-limitation-acceptance/formal-recording-proposal.md",
+      "sha256_matches": true
+    },
+    {
+      "pr": 456,
+      "commit": "b29fa6e4f1eb594a9e16e72e8752a88ee65adce0",
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-006/C10/observations.json",
+      "sha256_matches": true,
+      "conclusion": "fail",
+      "qualified": false
+    },
+    {
+      "pr": 456,
+      "commit": "b29fa6e4f1eb594a9e16e72e8752a88ee65adce0",
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-006/C11/observations.json",
+      "sha256_matches": true,
+      "conclusion": "fail",
+      "qualified": false
+    },
+    {
+      "pr": 456,
+      "commit": "b29fa6e4f1eb594a9e16e72e8752a88ee65adce0",
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-006/C12/observations.json",
+      "sha256_matches": true
+    },
+    {
+      "pr": 456,
+      "commit": "b29fa6e4f1eb594a9e16e72e8752a88ee65adce0",
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-006/qualification-limit.md",
+      "sha256_matches": true
+    },
+    {
+      "pr": 457,
+      "commit": "472f44f7d1326d1b330c686a0625f550eb4d5afc",
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/local-limitation-acceptance/operator-instruction.json",
+      "sha256_matches": true
+    },
+    {
+      "pr": 457,
+      "commit": "472f44f7d1326d1b330c686a0625f550eb4d5afc",
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/local-limitation-acceptance/formal-recording-proposal.md",
+      "sha256_matches": true
+    },
+    {
+      "pr": 457,
+      "commit": "472f44f7d1326d1b330c686a0625f550eb4d5afc",
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/C10/observations.json",
+      "sha256_matches": true,
+      "conclusion": "fail",
+      "qualified": false
+    },
+    {
+      "pr": 457,
+      "commit": "472f44f7d1326d1b330c686a0625f550eb4d5afc",
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/C11/observations.json",
+      "sha256_matches": true,
+      "conclusion": "fail",
+      "qualified": false
+    },
+    {
+      "pr": 457,
+      "commit": "472f44f7d1326d1b330c686a0625f550eb4d5afc",
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/C12/observations.json",
+      "sha256_matches": true
+    },
+    {
+      "pr": 457,
+      "commit": "472f44f7d1326d1b330c686a0625f550eb4d5afc",
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/qualification-limit.md",
+      "sha256_matches": true
+    }
+  ],
+  "pr_worktrees": [
+    {
+      "pr": 456,
+      "head": "b29fa6e4f1eb594a9e16e72e8752a88ee65adce0",
+      "working_tree_clean": true
+    },
+    {
+      "pr": 457,
+      "head": "472f44f7d1326d1b330c686a0625f550eb4d5afc",
+      "working_tree_clean": true
+    }
+  ],
+  "decision_disposition": {
+    "option": "accept",
+    "label": "Retain the documented local hook-loss limitation and its revisit trigger without claiming enforcement or deciding adapter qualification.",
+    "decided_by": "technical-owner",
+    "decided_at": "2026-09-12T07:27:41Z",
+    "reason": "I accept the hook failure as a documented local limitation",
+    "revisit": "Before the first public plugin release, any supported host-profile expansion, or introduction of remote acceptance controls."
+  }
+}

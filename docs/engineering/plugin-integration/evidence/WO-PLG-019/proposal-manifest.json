@@ -1,0 +1,71 @@
+{
+  "schema": "se-harness-local-limitation-proposal-v1",
+  "status": "proposed-owner-decisions-pending",
+  "base_commit": "78cd64df7c130a6f42ab357836093db30f710753",
+  "work_order": "WO-PLG-019",
+  "decision": "DEC-PLG-006",
+  "amendments": [
+    {
+      "artifact": "SPEC-PLG-005",
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-005.md",
+      "accountable_role": "technical-owner",
+      "base_sha256": "7cfcd4b4bc2d79b2d9ec48a44d437df25cb70eb94f56a20861b9e1abf9682566",
+      "proposal_sha256": "c4ad191725f88119ce27bc62e8eb611e76f27b78de9f83e0e76b1dbc24be0902",
+      "proposal_path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposed/SPEC-PLG-005.md.txt"
+    },
+    {
+      "artifact": "SPEC-PLG-006",
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-006.md",
+      "accountable_role": "technical-owner",
+      "base_sha256": "cb237ad6db5d8d1e43d276d872b2a47c468aa61c4c967995dc8fc450be774a44",
+      "proposal_sha256": "380e80e99063b36d8809c6ab5a93c53e68d44e6238e3a8dc47e1026e1296175b",
+      "proposal_path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposed/SPEC-PLG-006.md.txt"
+    },
+    {
+      "artifact": "SPEC-PLG-008",
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-008.md",
+      "accountable_role": "technical-owner",
+      "base_sha256": "1d947031399fd278593a55aec2c892538d1392f6cc0bf0079494de31769930ca",
+      "proposal_sha256": "ce09d9d8e81e4bf8f14eee1c4975b7d4eadb6670ba35c2adc7a5cb4ea4b89ddc",
+      "proposal_path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposed/SPEC-PLG-008.md.txt"
+    },
+    {
+      "artifact": "VER-PLG-005",
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-005.md",
+      "accountable_role": "assurance-owner",
+      "base_sha256": "dea7963993a1be26b41bfa4d7a6c1199f2c19613940c01eeaef5d4ead9301e30",
+      "proposal_sha256": "60ed352159a13deb6b4c7c483c80306511439ea0e57475105c1e62aa2c19c73e",
+      "proposal_path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposed/VER-PLG-005.md.txt"
+    },
+    {
+      "artifact": "VER-PLG-006",
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-006.md",
+      "accountable_role": "assurance-owner",
+      "base_sha256": "9bbaeca063d48dcec31d760ae4a58c0a6da741587941f1ccdbfdc5b205c94b48",
+      "proposal_sha256": "917ae0df654f467c128fd2bbd6d6ed7d4c8ad816895ee11e09525f14d65a6c85",
+      "proposal_path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposed/VER-PLG-006.md.txt"
+    },
+    {
+      "artifact": "VER-PLG-008",
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-008.md",
+      "accountable_role": "assurance-owner",
+      "base_sha256": "4af301690279b65a5296dedc094aad7a54b404af15280d818b8a9c3a696fabad",
+      "proposal_sha256": "c19e65cccd19ad7c25fa9301eb3fb3d57b9bf18ff8a75aacc6fb0b92e32324af",
+      "proposal_path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposed/VER-PLG-008.md.txt"
+    }
+  ],
+  "draft_records": [
+    {
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-019.md",
+      "sha256": "be15f395dd282f75d84f4304bacbc99ec8965b01880d502cfd69a129ac88ada4"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-019.md",
+      "sha256": "b483ebbcfb8d87f864ef495fca302a2079a61ed7215d0e08c4f06c6b88ee9e53"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/decisions/DEC-PLG-006.md",
+      "sha256": "ab79e6ac84f19bb4f962dbdee8d468eba45bc2f5112f68a664bd141bd0a6a4c5"
+    }
+  ]
+}

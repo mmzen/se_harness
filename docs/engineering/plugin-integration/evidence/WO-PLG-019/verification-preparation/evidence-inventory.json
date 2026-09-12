@@ -1,0 +1,599 @@
+{
+  "schema": "wo-plg-019-verification-evidence-inventory-v1",
+  "digest_mode": "raw-bytes-sha256",
+  "files": [
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/.gitattributes",
+      "sha256": "b6419ccb3da9c67025316edddb43f8a80f6be3a060bada3996231b51f7cd902a"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/amendment-application.json",
+      "sha256": "9f736b5743a834a62d25a3ba99da16b4a165182c30bf2508a95c03cd6540b6f2"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/amendment-receipts.json",
+      "sha256": "3106062b61f7f4c3995cc6c1874531dc386f374d59a936cad0682f5a2b777667"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/approved-inputs/DEC-PLG-006.md.txt",
+      "sha256": "ab79e6ac84f19bb4f962dbdee8d468eba45bc2f5112f68a664bd141bd0a6a4c5"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/approved-inputs/VER-PLG-019.md.txt",
+      "sha256": "b483ebbcfb8d87f864ef495fca302a2079a61ed7215d0e08c4f06c6b88ee9e53"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/approved-inputs/WO-PLG-019.md.txt",
+      "sha256": "be15f395dd282f75d84f4304bacbc99ec8965b01880d502cfd69a129ac88ada4"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/completion-change-set.json",
+      "sha256": "3c5b9d5838a525d324bfcde9c238daed9b23e15a436f828975e323cf0f50340b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/approved-work-focus.json",
+      "sha256": "44c1bda22ee8331cb9dc51e58fe74269002f1648425e40aebd96b2fe63f23ba7"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/approved-work-focus.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/approved-work-focus.stdout",
+      "sha256": "04584955e178c73a71c8935d6da1a3e78c6f43a828c43023ad4d092969d8d292"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/authorized-released-doctor.json",
+      "sha256": "5c4282c87dd94adaebb162f550094b3273a1d3bd13802417e8cd97baf029709e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/authorized-released-doctor.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/authorized-released-doctor.stdout",
+      "sha256": "1d09f3a7167415a9b78849da9e8936c4251dbb78a3fb0104aca2297cd25e561e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/authorized-released-validate.json",
+      "sha256": "6883685c076ff36f6c1fe9123e81c80f3e5eba34b8d64e420ed1b9cb20c847c8"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/authorized-released-validate.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/authorized-released-validate.stdout",
+      "sha256": "e41e159e50110fc0f2312b1aef1b35b36b896eaa7db8ab815480874b0b9f22df"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/before-tracked-files.json",
+      "sha256": "b1cda35f5a547e952b8240ecd8b31fc67b06cc37d356c9c6b2fc85b9ecb6fee2"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/completed-work-focus.json",
+      "sha256": "dca222615af32f948d99c2a9d5462b39acc05ad26ab26ab4259db2729ce85240"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/completed-work-focus.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/completed-work-focus.stdout",
+      "sha256": "a67429dd9c2a37bc65e9390d727f4289b7b6669e2c306e44b82e85d93d779a16"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/deviation-acceptance-apply.json",
+      "sha256": "61036a1062a473ab45dcc9290e3751fc9f2b86b2eb94af715c37edefb7605fce"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/deviation-acceptance-apply.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/deviation-acceptance-apply.stdout",
+      "sha256": "adcb40a1fd14caffc656708a3f9f0b3ca37e038a2e7cd4c9c853485c4128d8aa"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/deviation-acceptance-plan.json",
+      "sha256": "66ffa2113519510cd82d2ec0b3ad707ec4549e2c87015bd9788667162d3d7019"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/deviation-acceptance-plan.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/deviation-acceptance-plan.stdout",
+      "sha256": "59f25fa7b39063f0dbbaeee4fd03268f0623f966c8b3d3b99b850b07bfe7bc94"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/final-candidate-help.json",
+      "sha256": "587e581eb318131844bb678396741e12b7e5589dfad0922764229655cd97dd47"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/final-candidate-help.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/final-candidate-help.stdout",
+      "sha256": "bd6eb5ee50cb73d0c1e5d736a1318fe1a80c554eb03b8b926ef75431b5fa9fef"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/final-candidate-validate.json",
+      "sha256": "955b08face4e25067b85953bdb39fdd9126c48061b6732f20f2594f97f376a8c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/final-candidate-validate.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/final-candidate-validate.stdout",
+      "sha256": "d7913cab5a3808812781a6c707e116571da45dcb7e43efd179da5897ac581368"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/final-diff-whitespace.json",
+      "sha256": "b80159610ef21f8d7a20fa86a73dddefd63300c06daccff3bb1dad8e3e44c6b8"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/final-diff-whitespace.stderr",
+      "sha256": "c3b75a19d78a6eadac762b150f335dcd0b6103abb92425dc9075f67c940b127b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/final-diff-whitespace.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/final-release-distributions.json",
+      "sha256": "1685d2ce8a3ee6ba819ba673d4265496e59fa410c65993b2a359b2982f3ad026"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/final-release-distributions.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/final-release-distributions.stdout",
+      "sha256": "c27f0712b4a9b2c06498e19445ce3d7bc4970af7b4c8178b62c9b7f8c74b7987"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/final-released-doctor.json",
+      "sha256": "a523ec170aa91cb6a98d5a3d0fdd39b08d390cd44e24ca76416539195ea7e256"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/final-released-doctor.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/final-released-doctor.stdout",
+      "sha256": "1d09f3a7167415a9b78849da9e8936c4251dbb78a3fb0104aca2297cd25e561e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/final-released-validate.json",
+      "sha256": "db9577fa5612c1e92d807a6296fa453c27afff8f5983a14da1acc8eac1fa84b8"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/final-released-validate.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/final-released-validate.stdout",
+      "sha256": "d7913cab5a3808812781a6c707e116571da45dcb7e43efd179da5897ac581368"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/handoff-check.json",
+      "sha256": "986510ed1ebc0fde7abbc8d7c0a72c226bb4267ff3f51e9b7e557429db5fcdd3"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/handoff-check.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/handoff-check.stdout",
+      "sha256": "f858e724e9f05bb98752f85d2482f6e5e33b156c481d5bf9b13e05cd60b02c81"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/handoff-evidence.json",
+      "sha256": "ae9d24a209d8f5434ff7890c9cf8178145f90dad865b93c95235d20208ed0c54"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/handoff-evidence.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/handoff-evidence.stdout",
+      "sha256": "c54c9c075f3b440ce8b91d24f31c89daac122f20231b1ed5e573bdd05cc55a1b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/implementation-focus.json",
+      "sha256": "066849b4d14cd24b910a004e80733514883bcfa7b22e60e68c081904c7d9f3bb"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/implementation-focus.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/implementation-focus.stdout",
+      "sha256": "62764404ed04582ac9fe9c994c61efbd7d20e4bf63f85ca60a2f74e22ee04099"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/post-amendment-focus.json",
+      "sha256": "2419e78f3f2bf79fbc7d6f2b890a3c2ac7610e490d6300b93c6f9f63b50bd21e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/post-amendment-focus.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/post-amendment-focus.stdout",
+      "sha256": "62764404ed04582ac9fe9c994c61efbd7d20e4bf63f85ca60a2f74e22ee04099"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/pre-action-check.json",
+      "sha256": "0cacff6175a80e25c2d0b6cc0dc995a0730dd25d48fac6d74c7ff6f2bc1fc15d"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/pre-action-check.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/pre-action-check.stdout",
+      "sha256": "3b18b2caa3f9d1955f737b2d8a5c4851ab80268392266b1ffad8f1ed26728e2c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/pre-action-evidence.json",
+      "sha256": "9a031c6ae156f34080c24c53d7826cc35127d30dd1eab0bcd8a620b5fb84001a"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/pre-action-evidence.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/pre-action-evidence.stdout",
+      "sha256": "3083fe7aa198d2d06e14b9c775a5f95ae506fbaa84cc3b3fbc386dbc94d7b57c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/preservation-review.json",
+      "sha256": "43acdc4114dce9d6dd4fbc57fa5ea9012c2c628f9cf767791de17fda128ce991"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/review-preflight.json",
+      "sha256": "af40cf3d3e813e7f40be25e37e999952f0599e1222564a4bb21ba5944b4b96c1"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/review-preflight.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/review-preflight.stdout",
+      "sha256": "6080f65703c37d61dd3604601b1da31879db98a3cb594097c96c04a9d61379c7"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/start-check.json",
+      "sha256": "9e534730f6a11862a830782092c5c3d6e6b26b73c8c9e84332f712b81d63a595"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/start-check.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/start-check.stdout",
+      "sha256": "157710a4594e1a76ae23b54faf8cdc1cb0ab1d30aa78a525e9f40c1e0a308bc7"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/start-preflight.json",
+      "sha256": "cd5dd397b86764c544163cdaf508bc9da10292e142ded05401587b5e9b9171db"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/start-preflight.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/start-preflight.stdout",
+      "sha256": "6731f20b48e6359ee7ef072cb1c2a89aa976b6df09b84b96bc4722c3e9639845"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/verification-contract-approval-apply.json",
+      "sha256": "55e700bd7e4426634d19654499311a2d336bb8c908b97d787429a256319737e3"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/verification-contract-approval-apply.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/verification-contract-approval-apply.stdout",
+      "sha256": "bd6ee97223b54c4174eb461725177aa1aa5fcdd54b2ca8853212338482dac1df"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/verification-contract-approval-plan.json",
+      "sha256": "4e09d607f2331f3d93b26157bbd7f0861f91b3c7a04a6663467d078e047556b4"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/verification-contract-approval-plan.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/verification-contract-approval-plan.stdout",
+      "sha256": "612b13174e5c2d69640988eb3f730854a5ddde75270af287ac9e54a6996d7bf7"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/work-order-approval-apply.json",
+      "sha256": "acc36ce35eecf05c466b0161dd0d19ecdfd6ea7bf55486c275e7ba2b467a4c1d"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/work-order-approval-apply.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/work-order-approval-apply.stdout",
+      "sha256": "56570b30dad99f48d99e315ff0e74793da8d1e8f27c8f041a73c48d2db38ed49"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/work-order-approval-plan.json",
+      "sha256": "af15fe0cda88b92eea49904cda7ff55606cd45ac03ba5b073ff4acbc1ab8c032"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/work-order-approval-plan.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/work-order-approval-plan.stdout",
+      "sha256": "470cfca7fdcd451a44514f1b8a3ba32b870dcc76097556779c3d912512768d46"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/work-order-completion-apply.json",
+      "sha256": "b4bb1a6391758131e8603410877c15d807a90cc1cf7667304598e42d95456d7c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/work-order-completion-apply.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/work-order-completion-apply.stdout",
+      "sha256": "ad71102f573d5e45171d947efb8ff8c97c4b3dc7c01d90a9944a95afebd6880b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/work-order-completion-plan.json",
+      "sha256": "53ee441b792da0b2b06e77da3b35430ec05d50d7ff1efe3418888aca9a008691"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/work-order-completion-plan.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/work-order-completion-plan.stdout",
+      "sha256": "a874f5b77eaf6ed22614832545488f667162949380337d312c00b6bb5e54386c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/work-order-start-apply.json",
+      "sha256": "a8981f403210d0f5a58da1557fab5b093a557e34160850c6a75426feda199803"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/work-order-start-apply.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/work-order-start-apply.stdout",
+      "sha256": "f8ebe329668a0be4a2179f8743d4ee558a00461092d98d619200db1b73a9469d"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/work-order-start-plan.json",
+      "sha256": "712f0f40ccc25b8bf9b21b13af5fc0a71b72491236f0bcb535bba119065f58e3"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/work-order-start-plan.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/execution/work-order-start-plan.stdout",
+      "sha256": "d556ebbf7c645e095ed8d44de38c36c0b50bb0334ce405749242610c9454369b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/implementation-change-set.json",
+      "sha256": "262dcf02447e7c673592f3e7e9c0238abd5f9f524c8bf34676601bf6a7bd18b6"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/operator-request.json",
+      "sha256": "ae99c74bd3a769846d337abc5d466470bdf4630f584d8397d7c4452c1f24fb6c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/owner-approval.json",
+      "sha256": "6959d35b1a4a46b31201930c024ca1d29b6f1f49c39c4693b3a817e0aaa2770f"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/preparation-change-set.json",
+      "sha256": "b02a3b542e9a607417e6a705243bae9f6af7e7f7e504c47d987ef24dcd5825ef"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposal-manifest.json",
+      "sha256": "29507242f4d17369d242da25f37043fdbdc9f1a3254ff9c01938e6c858845514"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposed/SPEC-PLG-005.md.txt",
+      "sha256": "c4ad191725f88119ce27bc62e8eb611e76f27b78de9f83e0e76b1dbc24be0902"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposed/SPEC-PLG-006.md.txt",
+      "sha256": "380e80e99063b36d8809c6ab5a93c53e68d44e6238e3a8dc47e1026e1296175b"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposed/SPEC-PLG-008.md.txt",
+      "sha256": "ce09d9d8e81e4bf8f14eee1c4975b7d4eadb6670ba35c2adc7a5cb4ea4b89ddc"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposed/VER-PLG-005.md.txt",
+      "sha256": "60ed352159a13deb6b4c7c483c80306511439ea0e57475105c1e62aa2c19c73e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposed/VER-PLG-006.md.txt",
+      "sha256": "917ae0df654f467c128fd2bbd6d6ed7d4c8ad816895ee11e09525f14d65a6c85"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposed/VER-PLG-008.md.txt",
+      "sha256": "c19e65cccd19ad7c25fa9301eb3fb3d57b9bf18ff8a75aacc6fb0b92e32324af"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/qualification-amendments.patch",
+      "sha256": "7ef1a2d45da9c472d04a0ed26325aec5b6866869a4922f243bacaa861bf9620c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/candidate-doctor.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/candidate-doctor.stdout",
+      "sha256": "c9cb92adafe4eb9a5585cb41443355a120a6b89623996a893dcabe4b569c9842"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/candidate-help.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/candidate-help.stdout",
+      "sha256": "bd6eb5ee50cb73d0c1e5d736a1318fe1a80c554eb03b8b926ef75431b5fa9fef"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/candidate-validate.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/candidate-validate.stdout",
+      "sha256": "e41e159e50110fc0f2312b1aef1b35b36b896eaa7db8ab815480874b0b9f22df"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/classification-review.md",
+      "sha256": "15b4ff8132df3eea287eea19e71773d9ecfeaba66330dcec72f0b654b9de3c4c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/decision-plan.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/decision-plan.stdout",
+      "sha256": "59f25fa7b39063f0dbbaeee4fd03268f0623f966c8b3d3b99b850b07bfe7bc94"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/definition-approval-plan.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/definition-approval-plan.stdout",
+      "sha256": "612b13174e5c2d69640988eb3f730854a5ddde75270af287ac9e54a6996d7bf7"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/final-proposal-integrity.json",
+      "sha256": "5465544a793ac8adc17897b3c15f9e0e7dff21e49671e7d80cb3d00d04285a55"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/handoff-summary.json",
+      "sha256": "3bf741052e46123feadf89c7c019999af6335e475391e85239069f930ca5d19c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/patch-applicability.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/patch-applicability.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/release-distributions.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/release-distributions.stdout",
+      "sha256": "c27f0712b4a9b2c06498e19445ce3d7bc4970af7b4c8178b62c9b7f8c74b7987"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/released-doctor.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/released-doctor.stdout",
+      "sha256": "1d09f3a7167415a9b78849da9e8936c4251dbb78a3fb0104aca2297cd25e561e"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/released-validate.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/released-validate.stdout",
+      "sha256": "e41e159e50110fc0f2312b1aef1b35b36b896eaa7db8ab815480874b0b9f22df"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/results.json",
+      "sha256": "be6a8e2e819c8ad79f2e6eea7ea1e0b8bb8fa45b5bbf0fbf5dcb15803883c9a8"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/scope-check.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/scope-check.stdout",
+      "sha256": "8e84da31d2a6053efd02ea673d6657e5ab7b8fc1e0fe230490d050f4efabc84d"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/selected-handoff.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/selected-handoff.stdout",
+      "sha256": "71402d348f2e288acdc50c03e1015e3d9e3bb1783ed057b29fdcff1fbadc72ee"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/start-check.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/start-check.stdout",
+      "sha256": "a5d177a02b301641caec744445aba3868f4690bd87c7749015c4315e019de7ef"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/work-approval-plan.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/work-approval-plan.stdout",
+      "sha256": "470cfca7fdcd451a44514f1b8a3ba32b870dcc76097556779c3d912512768d46"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/sources.json",
+      "sha256": "42ad7cf8443db38d4af008658f1fb135fd79f07a37721cbb2a2d56d5ca96a961"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/verification-preparation/byte-preservation.json",
+      "sha256": "bf8b3d0dcf017e7ad2329eb7670e08754a6c93953a810693aa42c555d1204804"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/verification-preparation/identifier-audit.json",
+      "sha256": "977ed487546bde396778b0749ba40e26ac764d8c28ddda23dc2af0994090a173"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/verification-preparation/preparation-check.json",
+      "sha256": "72cf0c7a79affb6bcaed399faaf626b7e6b4af4604f1bd58292f0eb7d734b823"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/verification-preparation/preparation-request.json",
+      "sha256": "35538374680369def6268b105a0b3437cb1f9415215544bfe44918435ddeb1ac"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/verification-preparation/staged-whitespace-corrected.stdout.gz",
+      "sha256": "89b19231084d20e5705f70106e7ce74f0baf8b8640a27af389d46322f8a2aa9d"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/verification-preparation/staged-whitespace-initial.stdout.gz",
+      "sha256": "c1c721f5156ce8d784cdec4cfc2247ea20fd320d57ffe59026ab7487b18512b1"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/verification-report.md",
+      "sha256": "1fd68f94276ec991d2eff02eda5a9af67cfa9882c9187ae667ef4f88c6d74245"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/WO-PLG-019-handoff.md",
+      "sha256": "812ad4af835cc5f2f5afa92232507974e19704c850b844029d382dfc7ab31f23"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-019/WO-PLG-019-pre-action.md",
+      "sha256": "9cb5a2c93cd41c4d2eab956d199e5c833ccc8a16954df32f509062d8bf8ff948"
+    }
+  ],
+  "excluded": "This inventory does not hash itself. The candidate Git commit binds the complete tree including this inventory."
+}

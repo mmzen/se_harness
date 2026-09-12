@@ -1,0 +1,14 @@
+{
+  "name": "final-diff-whitespace",
+  "argv": [
+    "git",
+    "diff",
+    "--check"
+  ],
+  "returncode": 0,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "c3b75a19d78a6eadac762b150f335dcd0b6103abb92425dc9075f67c940b127b",
+  "result": {
+    "text": ""
+  }
+}

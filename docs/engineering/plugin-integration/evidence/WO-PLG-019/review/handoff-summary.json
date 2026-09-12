@@ -1,0 +1,192 @@
+{
+  "kind": "preparation-handoff",
+  "results": [
+    {
+      "name": "scope-check",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        ".",
+        "--artifact",
+        "WO-PLG-019",
+        "--checkpoint",
+        "scope",
+        "--change-manifest",
+        "docs/engineering/plugin-integration/evidence/WO-PLG-019/preparation-change-set.json",
+        "--json"
+      ],
+      "returncode": 0,
+      "compliance": {
+        "checkpoint": "scope",
+        "workflow_rule_id": "WFL-DEFAULT-REVIEW",
+        "procedure_id": "PROC-FOCUS-SELECTED",
+        "status": "pass",
+        "gates": [
+          {
+            "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+            "status": "pass",
+            "predicates": [
+              {
+                "id": "QGP-G4I-SCOPE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "artifact",
+                    "reference": "WO-PLG-019:[execution_scope]"
+                  }
+                ],
+                "message": "WO-PLG-019 declares 10 normalized scope path(s)."
+              },
+              {
+                "id": "QGP-G4I-COMPLETE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "declared-change-set:WO-PLG-019"
+                  }
+                ],
+                "message": "The caller explicitly asserted that the declared change set is complete."
+              },
+              {
+                "id": "QGP-G4I-PATHS",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "path",
+                    "reference": "declared-change-set:WO-PLG-019"
+                  }
+                ],
+                "message": "All 42 declared changed path(s) are within execution scope."
+              }
+            ]
+          }
+        ],
+        "formal_snapshot_sha256": "609c11c4f4df73c5be8954793d094d38376b336dbdbcbd63343af707cf0036e1",
+        "change_set_source": "docs/engineering/plugin-integration/evidence/WO-PLG-019/preparation-change-set.json"
+      },
+      "state": {
+        "before": [
+          {
+            "id": "WO-PLG-019",
+            "status": "draft"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-PLG-019",
+            "status": "draft"
+          }
+        ]
+      },
+      "findings": {
+        "scoped_blockers": [],
+        "repository_blockers": [],
+        "unrelated_count": 46
+      },
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Evaluated scope compliance for WO-PLG-019."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-PLG-019 is draft."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-FOCUS-SELECTED",
+          "step_id": "STEP-FOCUS-SELECTED",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "WO-PLG-019"
+          ]
+        },
+        "alternatives": []
+      }
+    },
+    {
+      "name": "start-check",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        ".",
+        "--artifact",
+        "WO-PLG-019",
+        "--checkpoint",
+        "start",
+        "--procedure",
+        "PROC-WO-START",
+        "--json"
+      ],
+      "returncode": 1,
+      "compliance": {
+        "checkpoint": "pre-action",
+        "workflow_rule_id": "WFL-FAIL-REMEDIATE",
+        "procedure_id": "PROC-REMEDIATE",
+        "status": "fail",
+        "gates": []
+      },
+      "state": {
+        "before": [],
+        "after": []
+      },
+      "findings": {
+        "scoped_blockers": [
+          {
+            "code": "WEX220",
+            "message": "procedure PROC-WO-START is not selected by workflow rule WFL-DEFAULT-REVIEW"
+          }
+        ],
+        "repository_blockers": [],
+        "unrelated_count": 0
+      },
+      "restitution": {
+        "outcome": "blocked",
+        "done": [],
+        "not_done": [
+          "The requested workflow operation remains incomplete."
+        ],
+        "blocked_by": [
+          "WEX220: procedure PROC-WO-START is not selected by workflow rule WFL-DEFAULT-REVIEW"
+        ],
+        "current_lifecycle_state": [
+          "No lifecycle state was changed."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-REMEDIATE",
+          "step_id": "STEP-REMEDIATE-FOCUS",
+          "action": "remediate"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "WO-PLG-019"
+          ]
+        },
+        "alternatives": []
+      }
+    }
+  ]
+}
