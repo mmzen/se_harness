@@ -2,10 +2,10 @@
 id = "WO-PLG-005"
 type = "work_order"
 title = "Implement the accepted Codex host adapter"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
-updated = "2026-09-11"
+updated = "2026-09-12"
 
 [delegation]
 class = "execution"
@@ -47,13 +47,20 @@ to = "in_progress"
 decided_at = "2026-09-11T19:08:16Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 78cd64df7c130a6f42ab357836093db30f710753 (check-run 103386776253, source github-checks)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-12T09:06:33Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 6828ceb84548abb1eec0cff6cd80c25e34bb2e15 (check-run 103529998760, source github-checks). Complete the bounded adapter implementation and fresh assessment under the approved criteria merged by PR #458. qualification-review-20260912/assessment.md binds unchanged production source, immutable package/recorded-loaded inventories and current definitions; required healthy-path and shared obligations remain satisfied. C10/C11 remain failed enforcement under accepted DEC-PLG-006. Only qualification with a documented local limitation is proposed for independent assurance; no verification, merge, release or expanded host profile is claimed."
 +++
 
 # Work Order: Implement the accepted Codex host adapter
 
 ## Lifecycle
 
-The operator selected WO-PLG-005 for the delegated route on 2026-09-11. Work-order approval records the requested execution delegation. The class permits only DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE, after it is present at the pull-request base and the required live GitHub check succeeds for the exact head. The released evaluator recorded the delegated start on 2026-09-11; implementation is in progress. Verification, release and merge remain human decisions.
+The operator selected WO-PLG-005 for the delegated route on 2026-09-11. Work-order approval records the requested execution delegation. The class permits only DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE, after it is present at the pull-request base and the required live GitHub check succeeds for the exact head. The released evaluator recorded delegated implementation completion on 2026-09-12, as retained in the lifecycle event above. The [dated qualification assessment](../evidence/WO-PLG-005/qualification-review-20260912/assessment.md) applies the criteria merged by PR #458 to unchanged adapter source and retained native observations. C10/C11 remain failed enforcement; the proposed assurance outcome is qualification with a documented local limitation under DEC-PLG-006. Verification, release and merge remain human decisions.
 
 ## Objective
 
