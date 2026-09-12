@@ -97,3 +97,12 @@ diagnostic, and the tree and lock are byte-identical afterward.
 ## Open decisions
 
 None.
+
+
+## Amendment record
+
+### Approved plugin ownership applicability — 2026-09-12
+
+Approved under **WO-PLG-020** by the operator acting as **repository-owner, engineering-owner, security-owner**. The reviewed delegated packet was selected with "take the delegated route"; the additional schema-floor reconciliation was approved through DEC-PLG-007 with "i approve DEC-PLG-007’s `narrow-schema4-exception` with amendements".
+
+For explicit plugin ownership conforming to SPEC-PLG-020, the schema-3-only read and write clauses admit one additional supported format: schema 4 with a fully validated plugin ownership binding. Ordinary repository ownership continues to use schema 3. Schemas 1 and 2 remain refused before any write; unknown schemas and invalid schema-4 bindings remain refused. Canonical digests, evaluator identity, fragment ownership, and preservation of historical evidence remain unchanged.

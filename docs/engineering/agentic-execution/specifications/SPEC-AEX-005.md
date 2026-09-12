@@ -305,3 +305,12 @@ hosts list the skills successfully.
 These choices do not permit another workflow body, symlink, provider-granted
 permission, host-specific lifecycle behavior, implicit writing activation, or
 an undeclared installation destination.
+
+
+## Amendment record
+
+### Approved plugin ownership applicability — 2026-09-12
+
+Approved under **WO-PLG-020** by the operator acting as **technical-owner**. The reviewed delegated packet was selected with "take the delegated route"; the additional schema-floor reconciliation was approved through DEC-PLG-007 with "i approve DEC-PLG-007’s `narrow-schema4-exception` with amendements".
+
+For the retained catalog explicitly migrated under SPEC-PLG-020, its versioned provider binding governs storage location and managed inventory instead of repository-local location and host-surface clauses AEX-HST-001, AEX-HST-003, AEX-HST-007, AEX-HST-009, and AEX-HST-012. All unaffected contracts and default repository behavior remain in force. No provider binding grants lifecycle or external authority. Historical catalog, version, and verification facts are preserved; this amendment creates no new native host qualification claim.
