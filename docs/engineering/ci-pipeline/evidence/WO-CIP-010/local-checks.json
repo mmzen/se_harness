@@ -1,0 +1,207 @@
+{
+  "checks": [
+    {
+      "label": "full-suite",
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-B",
+        "scripts/run_tests.py"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\ci-cleanup",
+      "exit_code": 1,
+      "elapsed_seconds": 580.841059923172,
+      "source_sha256": {
+        "repository_tools/upgrade_rehearsal.py": "90bd4e6d3f4f9c45d5ae80ea39312d344add5337d59a26845f77111c36e038b4",
+        "tests/git_support.py": "0786b746dd98909e01f25dc7e2be6634215bb8be30ab0298afab6662d1b206f7",
+        "tests/test_git_support.py": "6636aa1119804d1b3767baf5b1b79a707d2d3f1ab5097025fd9b2b2dbcd75971",
+        "tests/test_upgrade_rehearsal.py": "719843082cfb92a37f610b41b466475ee2e6d322088edef04eb5c976ac26a0a1"
+      },
+      "sources_unchanged_during_check": true,
+      "output_sha256": "5d76d19cedb04ea8589c745e2cb7dc9bc92dfe69f0845a75b6b49054a117af73"
+    },
+    {
+      "label": "candidate-validate",
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-B",
+        "-m",
+        "se_harness",
+        "validate",
+        "."
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\ci-cleanup",
+      "exit_code": 0,
+      "elapsed_seconds": 19.34587025642395,
+      "source_sha256": {
+        "repository_tools/upgrade_rehearsal.py": "90bd4e6d3f4f9c45d5ae80ea39312d344add5337d59a26845f77111c36e038b4",
+        "tests/git_support.py": "0786b746dd98909e01f25dc7e2be6634215bb8be30ab0298afab6662d1b206f7",
+        "tests/test_git_support.py": "6636aa1119804d1b3767baf5b1b79a707d2d3f1ab5097025fd9b2b2dbcd75971",
+        "tests/test_upgrade_rehearsal.py": "719843082cfb92a37f610b41b466475ee2e6d322088edef04eb5c976ac26a0a1"
+      },
+      "sources_unchanged_during_check": true,
+      "output_sha256": "d4194a92b9a8df3ec37c578fba7ae5e50e9db0d13505f0a2e4f724e02cd7e415"
+    },
+    {
+      "label": "candidate-doctor",
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-B",
+        "-m",
+        "se_harness",
+        "doctor",
+        "."
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\ci-cleanup",
+      "exit_code": 1,
+      "elapsed_seconds": 21.71079397201538,
+      "source_sha256": {
+        "repository_tools/upgrade_rehearsal.py": "90bd4e6d3f4f9c45d5ae80ea39312d344add5337d59a26845f77111c36e038b4",
+        "tests/git_support.py": "0786b746dd98909e01f25dc7e2be6634215bb8be30ab0298afab6662d1b206f7",
+        "tests/test_git_support.py": "6636aa1119804d1b3767baf5b1b79a707d2d3f1ab5097025fd9b2b2dbcd75971",
+        "tests/test_upgrade_rehearsal.py": "719843082cfb92a37f610b41b466475ee2e6d322088edef04eb5c976ac26a0a1"
+      },
+      "sources_unchanged_during_check": true,
+      "output_sha256": "74adfc91c51c15c616150cad8d2ee01590d04f71e2bec2ed3d7e15a6adbbcf98"
+    },
+    {
+      "label": "candidate-help",
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-B",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\ci-cleanup",
+      "exit_code": 0,
+      "elapsed_seconds": 1.5097923278808594,
+      "source_sha256": {
+        "repository_tools/upgrade_rehearsal.py": "90bd4e6d3f4f9c45d5ae80ea39312d344add5337d59a26845f77111c36e038b4",
+        "tests/git_support.py": "0786b746dd98909e01f25dc7e2be6634215bb8be30ab0298afab6662d1b206f7",
+        "tests/test_git_support.py": "6636aa1119804d1b3767baf5b1b79a707d2d3f1ab5097025fd9b2b2dbcd75971",
+        "tests/test_upgrade_rehearsal.py": "719843082cfb92a37f610b41b466475ee2e6d322088edef04eb5c976ac26a0a1"
+      },
+      "sources_unchanged_during_check": true,
+      "output_sha256": "bd6eb5ee50cb73d0c1e5d736a1318fe1a80c554eb03b8b926ef75431b5fa9fef"
+    },
+    {
+      "label": "distributions",
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-B",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\ci-cleanup",
+      "exit_code": 0,
+      "elapsed_seconds": 46.1171190738678,
+      "source_sha256": {
+        "repository_tools/upgrade_rehearsal.py": "90bd4e6d3f4f9c45d5ae80ea39312d344add5337d59a26845f77111c36e038b4",
+        "tests/git_support.py": "0786b746dd98909e01f25dc7e2be6634215bb8be30ab0298afab6662d1b206f7",
+        "tests/test_git_support.py": "6636aa1119804d1b3767baf5b1b79a707d2d3f1ab5097025fd9b2b2dbcd75971",
+        "tests/test_upgrade_rehearsal.py": "719843082cfb92a37f610b41b466475ee2e6d322088edef04eb5c976ac26a0a1"
+      },
+      "sources_unchanged_during_check": true,
+      "output_sha256": "c27f0712b4a9b2c06498e19445ce3d7bc4970af7b4c8178b62c9b7f8c74b7987"
+    },
+    {
+      "label": "released-validate",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "validate",
+        "."
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\ci-cleanup",
+      "exit_code": 0,
+      "elapsed_seconds": 28.257445573806763,
+      "source_sha256": {
+        "repository_tools/upgrade_rehearsal.py": "90bd4e6d3f4f9c45d5ae80ea39312d344add5337d59a26845f77111c36e038b4",
+        "tests/git_support.py": "0786b746dd98909e01f25dc7e2be6634215bb8be30ab0298afab6662d1b206f7",
+        "tests/test_git_support.py": "6636aa1119804d1b3767baf5b1b79a707d2d3f1ab5097025fd9b2b2dbcd75971",
+        "tests/test_upgrade_rehearsal.py": "719843082cfb92a37f610b41b466475ee2e6d322088edef04eb5c976ac26a0a1"
+      },
+      "sources_unchanged_during_check": true,
+      "output_sha256": "d4194a92b9a8df3ec37c578fba7ae5e50e9db0d13505f0a2e4f724e02cd7e415"
+    },
+    {
+      "label": "released-doctor",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "doctor",
+        "."
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\ci-cleanup",
+      "exit_code": 0,
+      "elapsed_seconds": 20.560893774032593,
+      "source_sha256": {
+        "repository_tools/upgrade_rehearsal.py": "90bd4e6d3f4f9c45d5ae80ea39312d344add5337d59a26845f77111c36e038b4",
+        "tests/git_support.py": "0786b746dd98909e01f25dc7e2be6634215bb8be30ab0298afab6662d1b206f7",
+        "tests/test_git_support.py": "6636aa1119804d1b3767baf5b1b79a707d2d3f1ab5097025fd9b2b2dbcd75971",
+        "tests/test_upgrade_rehearsal.py": "719843082cfb92a37f610b41b466475ee2e6d322088edef04eb5c976ac26a0a1"
+      },
+      "sources_unchanged_during_check": true,
+      "output_sha256": "43c616986d7e44a8c188cd7e35088f25ef3c7c4ad05a486a079e138e394f44f3"
+    },
+    {
+      "label": "review-preflight",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "preflight",
+        ".",
+        "--work-order",
+        "WO-CIP-010",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\ci-cleanup",
+      "exit_code": 0,
+      "elapsed_seconds": 34.10987949371338,
+      "source_sha256": {
+        "repository_tools/upgrade_rehearsal.py": "90bd4e6d3f4f9c45d5ae80ea39312d344add5337d59a26845f77111c36e038b4",
+        "tests/git_support.py": "0786b746dd98909e01f25dc7e2be6634215bb8be30ab0298afab6662d1b206f7",
+        "tests/test_git_support.py": "6636aa1119804d1b3767baf5b1b79a707d2d3f1ab5097025fd9b2b2dbcd75971",
+        "tests/test_upgrade_rehearsal.py": "719843082cfb92a37f610b41b466475ee2e6d322088edef04eb5c976ac26a0a1"
+      },
+      "sources_unchanged_during_check": true,
+      "output_sha256": "b8e3826a76176b5c5eb08a236e4a8b4efe0a804130b53d63923e5b23765a9aec"
+    }
+  ],
+  "candidate_source_skew": [
+    "FAIL distribution:.engineering-harness.toml: differs from distribution template",
+    "FAIL distribution:.github/workflows/engineering-harness.yml: differs from distribution template",
+    "FAIL distribution:ENGINEERING_HARNESS.md: differs from distribution template",
+    "FAIL distribution:docs/engineering/ARTIFACT_AUTHORING.md: differs from distribution template",
+    "FAIL distribution:docs/engineering/TRACEABILITY.md: differs from distribution template",
+    "FAIL distribution:docs/engineering/templates/WORK_ORDER.template.md: differs from distribution template"
+  ],
+  "checkout_correction": {
+    "cause": "Unchanged AGENTS.md was checked out with CRLF, exceeding its raw owner-region byte budget.",
+    "repair": "Restored the exact committed LF bytes; no Git diff or content change.",
+    "argv": [
+      "C:\\Python313\\python.exe",
+      "-B",
+      "-m",
+      "unittest",
+      "tests.test_instruction_architecture.OwnerInstructionRegionTests",
+      "-v"
+    ],
+    "exit_code": 0,
+    "tests_run": 10,
+    "output_sha256": "e03da9cf2dd8356ee827c7b31f46da9601f1721f75a27e1bc00ea59fc3bd99a4",
+    "agents_sha256": "188d140a465eb52570ccc8c715ffaf6aeb3d36f57c8aaaf2fdb4d2e517e99437"
+  }
+}
