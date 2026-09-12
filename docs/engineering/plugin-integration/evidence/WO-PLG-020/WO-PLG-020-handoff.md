@@ -1,13 +1,48 @@
 ```toml
 artifact = "WO-PLG-020"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "9b27224dcfb8391618665bdc8f59e3c0be172df321803beba6cc7b49b0fe36ef"
-rebound_at = "2026-09-12T19:55:26Z"
+formal_snapshot_sha256 = "c2dd2d9c75e4f96b485e478bccbbdd434ccc8254577ad7f49f14f5902dff11d3"
+rebound_at = "2026-09-12T21:19:28Z"
 ```
 
 # WO-PLG-020 handoff evidence
 
 Retained by `harnessctl evidence`; body content is owner-authored.
+
+## Current acceptance after the operator's 0.17 exclusion
+
+The operator instructed "we don't care about 0.17, just ignore". The
+[scope receipt](governance/retired-reader-scope-approval.json) records the
+technical-owner, assurance-owner and engineering-owner decisions. New appendices
+in SPEC-PLG-020, ARCH-PLG-003, ADR-PLG-003 and VER-PLG-020 supersede the prior
+requirement to qualify already distributed 0.17 against migrated schema-4 targets.
+Those historical results remain unchanged and no longer block this work order.
+
+The active candidate still must preserve ownership and protected report paths,
+refuse unsupported locks, recover safely and satisfy the remaining acceptance
+matrix. Nine old-reader cases were removed from the required selection. The
+eight inherited cases caused the CI discovery-count mismatch; removing their
+inheritance restores exact discovery without changing the hygiene checker.
+`legacy_reader.py` remains an unimported historical fixture. Current ownership
+selections contain 8 smoke and 53 full tests, with both candidate report-output
+cases included.
+
+Local validation: 1240 source tests completed with 31 explicit
+skips and no failures; all 18 focused discovery/report checks and all 8 installed
+smoke cases passed. The installed run used the unchanged development wheel
+`353d1f72a624426b89a048b673ef17959e1f8e12f77928f86b96b820cc8abf29`;
+all product Python bytes match modulo recorded line-ending transport, but this
+is not a newly qualified committed candidate. Local source regression used the
+default reduced scale. See the [new index](development/retired-reader-scope-index.json)
+and its raw archive for commands, counts, original bytes and limitations.
+
+The root-pinned released governor, released-verifier package lane and ordinary
+predecessor upgrade rehearsal remain unchanged. Required full-scale source and
+source/package platform results for the new immutable head remain pending.
+WO-PLG-020 stays `in_progress`; VREC-PLG-015 is unprepared. Select `continue`
+until those candidate results and the completion gate actually pass.
+
+The dated sections below retain the prior iterations' facts and former blockers.
 
 ## Implementation review
 

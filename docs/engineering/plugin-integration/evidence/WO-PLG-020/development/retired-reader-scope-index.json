@@ -1,0 +1,179 @@
+{
+  "archive": "retired-reader-scope-observations.zip",
+  "archive_sha256": "89c0ce398fdf7e97c048462a13d8b3a94cddf1f903eb8bf0ac062e8c7c9acea3",
+  "bytes": 396614,
+  "summary": {
+    "classification": "Revised candidate acceptance scope; historical 0.17 findings excluded, not passed.",
+    "source_tests": 1240,
+    "source_skipped": 31,
+    "source_failed": 0,
+    "source_process_seconds": 1150.5186321999645,
+    "focused_tests": 18,
+    "installed_smoke_tests": 8,
+    "installed_smoke_seconds": 151.1440189999994,
+    "active_ownership_selection": {
+      "smoke": 8,
+      "full": 53
+    },
+    "old_017_cases_removed_from_required_selection": 9,
+    "installed_wheel_sha256": "353d1f72a624426b89a048b673ef17959e1f8e12f77928f86b96b820cc8abf29",
+    "limits": [
+      "Local development source and unchanged development wheel; new committed-candidate CI is still required.",
+      "Local source regression uses the runner's default reduced scale; hosted full-scale source and OS/Python matrix remain required.",
+      "No product source, hygiene checker, predecessor rehearsal or installed root file was changed.",
+      "Scope exclusion is the operator's explicit decision; historical failing outputs and assertions remain unchanged in evidence."
+    ],
+    "lifecycle": "in_progress",
+    "vrec_prepared": false
+  },
+  "members": {
+    "apply_scope.py": {
+      "bytes": 8366,
+      "sha256": "a58fca17c43a384fdc8ac7e0e5c7a2a7dc478506ad073c2302cb67cd1f30e137"
+    },
+    "audit_selection.py": {
+      "bytes": 2217,
+      "sha256": "513fb1eade8fb1c991b457da528a667601181322a47284497e947b14bcb05b1d"
+    },
+    "doctor.json": {
+      "bytes": 25718,
+      "sha256": "7b8f4d772e23f7a8de817bcbd01e3ccfd6213450c85e84f5cb4297758d9b644f"
+    },
+    "doctor.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "focused.stderr.log": {
+      "bytes": 3377,
+      "sha256": "de731725d1841e4019cbc31eb4093b95bf010935c13ed117b93a85828a3e05b5"
+    },
+    "focused.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "governance.py": {
+      "bytes": 1868,
+      "sha256": "f01d1f76639d4c6da9dc254b72f4fc0fc7c34718180ef3f6fc80dc4223ea9322"
+    },
+    "installed-cases/test_own01_cli_plan_apply_stale_refusal_and_restore_json-5b1c5443.json": {
+      "bytes": 224078,
+      "sha256": "791c6d6f9d56fb44990fde2b80c08277c76fb4572bbabfc474902c808c0a6de9"
+    },
+    "installed-cases/test_own01_exact_catalog_and_each_selected_host-45849afd.json": {
+      "bytes": 665203,
+      "sha256": "41de299a1b31bd295d39e3ac2252555a2d3a13ad75814809db2f6e95d3b6c6d7"
+    },
+    "installed-cases/test_own05_replay_doctor_and_direct_installer_preserve_binding-f1c6b17a.json": {
+      "bytes": 370192,
+      "sha256": "f639bea293bb62f1c02ba54d50fda0a416d3ce5594d238d0f31ef1b582a36d15"
+    },
+    "installed-cases/test_own07_candidate_dashboard_output_preserves_installed_workflow-4c9b5641.json": {
+      "bytes": 200913,
+      "sha256": "13227ec8991d91302c391c803ba46433eaf08123bae8e415d3aba7104b419977"
+    },
+    "installed-cases/test_own07_candidate_qualification_output_preserves_retired_skill-62b14502.json": {
+      "bytes": 180364,
+      "sha256": "50f868a7c65fe7f1f0e62600b47fa8dd204b82026e35ecde8eaeaaf11fcd7741"
+    },
+    "installed-cases/test_own07_unsupported_old_lock_refuses_before_writes-50743603.json": {
+      "bytes": 139483,
+      "sha256": "af19371a1d80606056b158d2288f944923a03702e614cf9fcad646dab8e9cb72"
+    },
+    "installed-cases/test_own11_restore_exact_distribution_and_refuse_owner_conflicts-ad5d0ee1.json": {
+      "bytes": 284926,
+      "sha256": "31c1127ba0c5321ba70aa397c82a7f73938b7dd16f0517ac50b03521e84be3b0"
+    },
+    "installed-cases/test_own12_clone_without_plugin_is_integral_and_availability_unobserved-f0263716.json": {
+      "bytes": 204233,
+      "sha256": "1266e36007667d70cc938ec063784affe3bbc43affebda2a4a13ea0732173202"
+    },
+    "installed-smoke.json": {
+      "bytes": 803,
+      "sha256": "54871d534e0f60921af247c0f29be4a225ba54530ca86b59abf6182c82764b8c"
+    },
+    "installed-smoke.log": {
+      "bytes": 1604,
+      "sha256": "6c32a9b87f80c86da4a247d61f981e75e287fc0064de661ba668f530342d257a"
+    },
+    "installed_smoke.py": {
+      "bytes": 2696,
+      "sha256": "11f875f57da4dbc57788300b921abf93723f2a3964175e2b7a68c65d50241e52"
+    },
+    "pre-commands.json": {
+      "bytes": 1634,
+      "sha256": "9f715f117e75a3c619f7eee2db4d62d50ed86570c0608f23a5bd7b7c8ac7f13b"
+    },
+    "preflight.json": {
+      "bytes": 1675,
+      "sha256": "5e3b2d2e78d66c3fc09521dcab9f0e7b7c5f3ecef3e91705aa2993d0b63c8a2e"
+    },
+    "preflight.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "prepare_pr.py": {
+      "bytes": 7212,
+      "sha256": "8a8b1caafe4eb9672de84830ec9316164531b9822e8e0353088b6b07240067e3"
+    },
+    "retain_results.py": {
+      "bytes": 8257,
+      "sha256": "67063d97d5f570d6b6ee140bca11092beff6e5db4bcb3d61b87555601e5c193f"
+    },
+    "run_command.py": {
+      "bytes": 1000,
+      "sha256": "f1e19a34ad19d35ee404e5f493b90be794a851ebbc9dc1f555be1db63495e3a3"
+    },
+    "scope-approval.json": {
+      "bytes": 3060,
+      "sha256": "c3d2c0d93691574a3c9bb2b9664a15e20d6a26a285490fa24a6d41f93eb25842"
+    },
+    "selection-audit.json": {
+      "bytes": 430,
+      "sha256": "c2aebb5ade1e0a2a497a014dc37bf282f9cd56c77162bca580e3613de0e67b12"
+    },
+    "source-regression.json": {
+      "bytes": 236,
+      "sha256": "6ccdb3d0ecbb7cdfe2aa71de0deaad3ca7edaf07f92daad67833ed6b6cab0645"
+    },
+    "source-regression.stderr.log": {
+      "bytes": 30,
+      "sha256": "697e7bfe46c133456519d600a8da0eeb85a5a7e6ed6cb2579e3cd715acc9e887"
+    },
+    "source-regression.stdout.log": {
+      "bytes": 350,
+      "sha256": "5fed435ce2ac4d1408b132da4638097ef0795ca6ed73ed4ea6a0ed1c13603122"
+    },
+    "stage.py": {
+      "bytes": 3700,
+      "sha256": "465aa41636aef291fd809329e615ce199bcc0297228c3677386c1fe6d0712ead"
+    },
+    "summary.json": {
+      "bytes": 1101,
+      "sha256": "a419bb87ee49b719e837ef50a972a251ab7a81e6509a89eb709b7ac6bd49667b"
+    },
+    "tested-source/tests/fixtures/skill_ownership/README.md": {
+      "bytes": 2606,
+      "sha256": "039491a76ad1328e83310d33b130dc021c7bb1e358054e796f72d016a5b4fd3b"
+    },
+    "tested-source/tests/test_report_output_safety.py": {
+      "bytes": 11639,
+      "sha256": "f885682a1fd5bb583de1ed8232ecfccd07cfef0ea0bbd0f81b9468f9b7afc6b8"
+    },
+    "tested-source/tests/test_skill_ownership.py": {
+      "bytes": 75715,
+      "sha256": "6096e7ff5d97b985f816784aa9bee2790bce8bc79c5f58e7edb27a572d2aee6b"
+    },
+    "tested-source/tests/test_suite_hygiene.py": {
+      "bytes": 5724,
+      "sha256": "2551b6d67e14636cf98e398b2f4efbaf7842fa27d42458d999058ba8c8a27999"
+    },
+    "validation.json": {
+      "bytes": 309613,
+      "sha256": "708b0420145c6002b0839e7283543cd772eae137da9388df1021c24055dcefde"
+    },
+    "validation.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

@@ -94,3 +94,12 @@ The operator approved this exact appendix as `technical-owner` with the instruct
 ### Approved applicability: consequence of the versioned-lock choice
 
 The selected schema-4 design and default schema-3 behavior remain in force. The decision drivers, option comparison and Consequences statements about old readers are qualified as follows: a versioned lock makes migration-unaware installation readers and applicable installed-state/formal-artifact mutation interfaces reject the unsupported format; it cannot make already distributed code consult a lock on paths that never did so. Released 0.17 evidence/report generation and artifact-graph inspection remain an observed exception to universal old-reader refusal. This exception authorizes no ownership mutation, lifecycle decision, evaluator adoption, release or native-host readiness claim. Acceptance MUST retain the contrary observations and apply the precise boundary in SPEC-PLG-020 and VER-PLG-020 rather than describe all old commands as refused.
+
+
+## Approved exclusion of released-0.17 migration acceptance — 2026-09-12
+
+The operator instructed "we don't care about 0.17, just ignore" after review of the old-tool acceptance issue. This instruction authorizes the following scope decision as `technical-owner`. The receipt was recorded at `2026-09-12T20:57:40.552684+00:00` under WO-PLG-020. Earlier approvals and observations are preserved.
+
+The operator's decision supersedes this ADR's earlier requirement to establish old-0.17 refusal across migrated-target interfaces, including the preceding legacy-reader reconciliation. Retain the selected schema-4 representation and the candidate's supported ownership/preservation behavior; exclude already distributed 0.17 behavior on schema-4 targets from migration qualification.
+
+The recorded two protected-output counterexamples remain factual failures of 0.17. They no longer block this work order under the revised scope and are not reclassified as passes. This is a support and acceptance decision, not a repair to 0.17, a lifecycle completion, release/adoption or native-host qualification.

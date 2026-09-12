@@ -208,3 +208,12 @@ isolated-package regression evidence.
 Published 0.17 bytes and their contrary observations remain unchanged. This
 repair cannot establish that unpatched 0.17 now refuses those operations.
 WO-PLG-020 remains in progress and its existing completion conditions remain.
+
+
+## Approved exclusion of released-0.17 migration acceptance — 2026-09-12
+
+The operator instructed "we don't care about 0.17, just ignore" after review of the old-tool acceptance issue. This instruction authorizes the following scope decision as `engineering-owner`. The receipt was recorded at `2026-09-12T20:57:40.552684+00:00` under WO-PLG-020. Earlier approvals and observations are preserved.
+
+The operator explicitly excluded old 0.17 from migration acceptance after reviewing its two report-output failures. Apply the corresponding SPEC-PLG-020, ARCH-PLG-003, ADR-PLG-003 and VER-PLG-020 scope amendments above the preserved historical definitions. Remove the nine old-reader migration cases from active acceptance while retaining the two candidate report-output cases and unsupported-lock refusal coverage.
+
+Removing the inherited eight-case census also resolves the published test-discovery mismatch without changing or weakening suite hygiene. Existing execution scope already includes the governing documents, ownership test module, fixtures, notes and evidence. No additional path or lifecycle change is required. Publish this continuation through PR #462 under the operator's existing publication authorization. WO-PLG-020 remains in progress until the revised candidate acceptance and completion gates pass; VREC-PLG-015 remains unprepared.

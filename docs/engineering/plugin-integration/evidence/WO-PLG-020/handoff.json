@@ -2,7 +2,7 @@
   "compliance": {
     "change_set_source": "git",
     "checkpoint": "handoff",
-    "formal_snapshot_sha256": "9b27224dcfb8391618665bdc8f59e3c0be172df321803beba6cc7b49b0fe36ef",
+    "formal_snapshot_sha256": "c2dd2d9c75e4f96b485e478bccbbdd434ccc8254577ad7f49f14f5902dff11d3",
     "gates": [
       {
         "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 101 declared changed path(s) are within execution scope.",
+            "message": "All 108 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -120,7 +120,16 @@
     "unrelated_count": 46
   },
   "mutation": {
-    "writes": []
+    "writes": [
+      {
+        "fields": [
+          "formal_snapshot_sha256",
+          "rebound_at"
+        ],
+        "id": "WO-PLG-020",
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/WO-PLG-020-handoff.md"
+      }
+    ]
   },
   "operation": {
     "kind": "check",
@@ -245,17 +254,8 @@
     "alternatives": [],
     "blocked_by": [],
     "command_or_response": {
-      "argv": [
-        "harnessctl",
-        "transition",
-        ".",
-        "--set",
-        "WO-PLG-020=implemented",
-        "--decision",
-        "WO-PLG-020=delegated-executor",
-        "--apply"
-      ],
-      "kind": "command"
+      "kind": "response",
+      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for 113bec7: <urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>"
     },
     "current_lifecycle_state": [
       "WO-PLG-020 is in_progress."
@@ -265,10 +265,8 @@
       "decision": "whether the authorized implementation and evidence are complete",
       "decision_right": "DR-WO-COMPLETE",
       "delegation": {
-        "check_run_id": "103597730923",
         "class": "execution",
-        "gate": "success",
-        "head": "69e655686fdc460cb2da7bb882645e2471aecdc9"
+        "gate": "not passing"
       },
       "outcomes": [
         "implemented",
@@ -288,7 +286,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "9abb3b1fe8a898a702eb2f211c80603e6fb9d6d4b27c732fb76de9643f9a821f",
+  "result_sha256": "bc498d09f86a12068108b745c7c51e9fd434dc9624dedbf935f1b59dd8b08fe0",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
@@ -321,6 +319,8 @@
       "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/preliminary-package-raw-evidence.zip",
       "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/report-output-repair-index.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/report-output-repair-observations.zip",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/retired-reader-scope-index.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/retired-reader-scope-observations.zip",
       "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/source-regression-initial.log",
       "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/supplemental-cli-documentation-final.log",
       "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/WO-PLG-020-legacy-reader-evidence-index.json",
@@ -345,6 +345,11 @@
       "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/report-output-repair-preflight.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/report-output-repair-scope.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/report-output-repair-validation.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/retired-reader-scope-approval.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/retired-reader-scope-byte-transport.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/retired-reader-scope-doctor.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/retired-reader-scope-preflight.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/retired-reader-scope-validation.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/start-applied.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/start-check.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/start-preflight.json",

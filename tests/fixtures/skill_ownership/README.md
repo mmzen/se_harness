@@ -15,11 +15,17 @@ guard. Neither mode runs plugin helpers or a native host. The synthetic prior
 schema-4 identity in OWN06 exercises version-changing upgrade behavior; it is
 not evidence about a historical released schema-4 evaluator.
 
-OWN07 runs the actual released 0.17.0 CLI when its isolated interpreter is
-explicitly supplied. Doctor, default-writing init, and upgrade must refuse the
-unsupported lock schema without changing files. The new ownership command must
-be refused as an unknown command. These are four explicit CLI probes; they do
-not claim separate command-line coverage of every writer.
+The operator excluded already distributed 0.17 behavior on migrated schema-4
+repositories from acceptance on 2026-09-12. The preceding old-reader definitions
+and results remain historical evidence under WO-PLG-020. `legacy_reader.py` is
+retained solely for reproducing those historical observations and is not loaded
+or inherited by active acceptance.
+
+Active OWN07 tests require the candidate to refuse unsupported lock inputs and
+protect retired skills and installed workflows from unsafe qualification or
+dashboard output. The same candidate cases run in source and isolated-package
+mode. Ownership selections now contain eight smoke and 53 full tests; every
+active test is defined directly on its test class and discovered exactly once.
 
 `transaction_worker.py` is an independent test process. Its test-only hook waits
 at an observed durable boundary so the parent can terminate the process. It also

@@ -221,14 +221,7 @@ class OwnershipReadBoundaryTests(unittest.TestCase):
             ownership._read(self.path)
 
 
-_legacy_reader_spec = importlib.util.spec_from_file_location("ownership_legacy_reader", FIXTURES / "legacy_reader.py")
-_legacy_reader = importlib.util.module_from_spec(_legacy_reader_spec)
-_legacy_reader_spec.loader.exec_module(_legacy_reader)
-
-
-class SkillOwnershipAcceptanceTests(_legacy_reader.LegacyReaderCases, unittest.TestCase):
-    _legacy_source_root = ROOT
-    _legacy_snapshot = staticmethod(snapshot)
+class SkillOwnershipAcceptanceTests(unittest.TestCase):
 
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory(prefix="ownership-acceptance-")
@@ -912,35 +905,6 @@ class SkillOwnershipAcceptanceTests(_legacy_reader.LegacyReaderCases, unittest.T
                 self.assertEqual(2, code, stdout + stderr)
                 self.assertIn("protected", stderr)
 
-    def test_own07_released_017_cli_format_and_command_refusals(self) -> None:
-        legacy = os.environ.get("SE_HARNESS_OWNERSHIP_LEGACY_PYTHON")
-        if not legacy:
-            self.skipTest("actual released 0.17.0 interpreter not supplied; old-reader observation unavailable")
-        version_command = [legacy, "-I", "-B", "-m", "se_harness", "--version"]
-        version = subprocess.run(version_command, cwd=self.base, capture_output=True, text=True, timeout=60)
-        self.events.append({"operation": "released-0.17-version", "arguments": version_command,
-                            "exit_status": version.returncode, "stdout": version.stdout, "stderr": version.stderr})
-        self.assertEqual(0, version.returncode)
-        self.assertRegex(version.stdout.strip(), r"(?:^|\s)0\.17\.0$")
-        self.migrate()
-        for args in (("doctor",), ("init",), ("upgrade", "--apply"),
-                     ("skill-ownership", "--provider", "repository", "--apply")):
-            with self.subTest(command=args):
-                before = snapshot(self.root)
-                command = [legacy, "-I", "-B", "-m", "se_harness", args[0], str(self.root), *args[1:]]
-                run = subprocess.run(command, cwd=self.base, capture_output=True, text=True, timeout=60)
-                self.events.append({"operation": "released-0.17-reader", "arguments": command,
-                                    "exit_status": run.returncode, "stdout": run.stdout, "stderr": run.stderr,
-                                    "before": before, "after": snapshot(self.root)})
-                self.assertNotEqual(0, run.returncode)
-                self.assertEqual(before, snapshot(self.root))
-                diagnostic = (run.stdout + run.stderr).lower()
-                if args[0] == "skill-ownership":
-                    self.assertIn("invalid choice: 'skill-ownership'", diagnostic)
-                else:
-                    self.assertIn("unsupported lock schema", diagnostic)
-                    self.assertNotIn("unrecognized arguments", diagnostic)
-
     def test_own08_reintroduced_copy_and_deleted_or_tampered_binding_fail_integrity(self) -> None:
         self.migrate()
         lock_raw = (self.root / LOCK).read_bytes()
@@ -1396,15 +1360,6 @@ SMOKE_TESTS = {
     "test_own01_exact_catalog_and_each_selected_host",
     "test_own05_replay_doctor_and_direct_installer_preserve_binding",
     "test_own07_unsupported_old_lock_refuses_before_writes",
-    "test_own07_released_017_cli_format_and_command_refusals",
-    "test_own07_released_017_protected_authoring_interfaces",
-    "test_own07_released_017_ordinary_transitions_and_decisions",
-    "test_own07_released_017_default_reports_preserve_protected_bytes",
-    "test_own07_released_017_delegated_start",
-    "test_own07_released_017_delegated_completion",
-    "test_own07_released_017_retained_check_output_preserves_protected_bytes",
-    "test_own07_released_017_qualification_output_cannot_recreate_retired_core",
-    "test_own07_released_017_dashboard_output_cannot_replace_installed_workflow",
     "test_own11_restore_exact_distribution_and_refuse_owner_conflicts",
     "test_own12_clone_without_plugin_is_integral_and_availability_unobserved",
 }
