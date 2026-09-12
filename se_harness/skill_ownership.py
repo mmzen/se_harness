@@ -155,7 +155,17 @@ def _read(path: Path, *, limit: int = MAX_FILE) -> bytes:
             opened = os.fstat(handle.fileno())
             if (opened.st_dev, opened.st_ino) != (before.st_dev, before.st_ino) or opened.st_nlink != 1:
                 raise OwnershipError(f"path changed while opening: {path}")
-            raw = handle.read(limit + 1)
+            # Large read requests are costly on Windows even for tiny inputs.
+            # Keep the extra byte needed to detect growth beyond the limit.
+            chunks = []
+            remaining = limit + 1
+            while remaining:
+                chunk = handle.read(min(64 * 1024, remaining))
+                if not chunk:
+                    break
+                chunks.append(chunk)
+                remaining -= len(chunk)
+            raw = b"".join(chunks)
             after = os.fstat(handle.fileno())
         current = _ordinary(path)
     except OSError as exc:

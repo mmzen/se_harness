@@ -93,6 +93,134 @@ def trusted_source_authority(root: Path, **_kwargs) -> SimpleNamespace:
     return support.trusted_mutation_authority(root, **_kwargs)
 
 
+class OwnershipReadBoundaryTests(unittest.TestCase):
+    """Exercise bounded reads and input races without a migration fixture."""
+
+    def setUp(self) -> None:
+        temporary = tempfile.TemporaryDirectory(prefix="ownership-read-")
+        self.addCleanup(temporary.cleanup)
+        self.path = Path(temporary.name) / "input.bin"
+        self.path.write_bytes(b"a" * 70000)
+
+    def reader(self, *, after_first=None, short_read=None, observations=None):
+        original = os.fdopen
+
+        class Reader:
+            def __init__(self, *args, **kwargs):
+                self.handle = original(*args, **kwargs)
+                self.called = False
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                return self.handle.__exit__(*args)
+
+            def fileno(self):
+                return self.handle.fileno()
+
+            def read(self, size):
+                raw = self.handle.read(min(size, short_read) if short_read else size)
+                if observations is not None:
+                    observations.append((size, len(raw)))
+                if not self.called:
+                    self.called = True
+                    if after_first is not None:
+                        after_first()
+                return raw
+
+        return mock.patch.object(ownership.os, "fdopen", Reader)
+
+    def test_exact_bytes_at_chunk_and_size_boundaries(self) -> None:
+        for size in (0, 1, 65535, 65536, 65537, 131073, ownership.MAX_FILE):
+            with self.subTest(size=size):
+                expected = (b"0123456789abcdef" * ((size + 15) // 16))[:size]
+                self.path.write_bytes(expected)
+                self.assertEqual(expected, ownership._read(self.path, limit=size))
+
+    def test_short_reads_preserve_complete_bytes(self) -> None:
+        expected = self.path.read_bytes()
+        with self.reader(short_read=997):
+            self.assertEqual(expected, ownership._read(self.path))
+
+    def test_existing_oversize_refuses_before_open(self) -> None:
+        with mock.patch.object(ownership.os, "open") as opened:
+            with self.assertRaisesRegex(ownership.OwnershipError, "exceeds size bound"):
+                ownership._read(self.path, limit=69999)
+            opened.assert_not_called()
+
+    def test_growth_during_read_refuses(self) -> None:
+        def grow():
+            with self.path.open("ab") as stream:
+                stream.write(b"x" * 40000)
+
+        with self.reader(after_first=grow), self.assertRaisesRegex(ownership.OwnershipError, "changed during read"):
+            ownership._read(self.path, limit=80000)
+        self.assertEqual(110000, self.path.stat().st_size)
+
+    def test_growth_is_bounded_even_with_stale_metadata(self) -> None:
+        before = self.path.stat()
+        observations = []
+
+        def grow():
+            with self.path.open("ab") as stream:
+                stream.write(b"x" * 40000)
+
+        with (self.reader(after_first=grow, observations=observations),
+              mock.patch.object(ownership, "_ordinary", return_value=before),
+              mock.patch.object(ownership.os, "fstat", return_value=before)):
+            with self.assertRaisesRegex(ownership.OwnershipError, "changed during read"):
+                ownership._read(self.path, limit=80000)
+        self.assertEqual(110000, self.path.stat().st_size)
+        self.assertEqual(80001, sum(returned for _, returned in observations))
+        self.assertLessEqual(max(requested for requested, _ in observations), 65536)
+
+    def test_truncation_during_read_refuses(self) -> None:
+        def shrink():
+            with self.path.open("r+b") as stream:
+                stream.truncate(10)
+
+        with self.reader(after_first=shrink), self.assertRaisesRegex(ownership.OwnershipError, "changed during read"):
+            ownership._read(self.path)
+        self.assertEqual(10, self.path.stat().st_size)
+
+    def test_changed_timestamp_during_read_refuses(self) -> None:
+        before = self.path.stat()
+
+        def touch():
+            os.utime(self.path, ns=(before.st_atime_ns, before.st_mtime_ns + 10000000000))
+
+        with self.reader(after_first=touch), self.assertRaisesRegex(ownership.OwnershipError, "changed during read"):
+            ownership._read(self.path)
+        self.assertNotEqual(before.st_mtime_ns, self.path.stat().st_mtime_ns)
+
+    def test_opened_identity_mismatch_refuses(self) -> None:
+        before = self.path.stat()
+        changed = SimpleNamespace(st_dev=before.st_dev, st_ino=before.st_ino + 1, st_nlink=1)
+        with mock.patch.object(ownership.os, "fstat", return_value=changed):
+            with self.assertRaisesRegex(ownership.OwnershipError, "changed while opening"):
+                ownership._read(self.path)
+
+    def test_final_path_identity_mismatch_refuses(self) -> None:
+        before = self.path.stat()
+        changed = SimpleNamespace(st_dev=before.st_dev, st_ino=before.st_ino + 1)
+        with mock.patch.object(ownership, "_ordinary", side_effect=[before, changed]):
+            with self.assertRaisesRegex(ownership.OwnershipError, "changed during read"):
+                ownership._read(self.path)
+
+    def test_hard_link_refuses(self) -> None:
+        os.link(self.path, self.path.with_name("alias.bin"))
+        with self.assertRaisesRegex(ownership.OwnershipError, "singly linked file required"):
+            ownership._read(self.path)
+
+    def test_read_error_refuses(self) -> None:
+        def fail():
+            raise OSError("injected read error")
+
+        with self.reader(after_first=fail), self.assertRaisesRegex(ownership.OwnershipError, "cannot read input"):
+            ownership._read(self.path)
+
+
 class SkillOwnershipAcceptanceTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory(prefix="ownership-acceptance-")
@@ -1216,7 +1344,10 @@ SMOKE_TESTS = {
 
 def acceptance_suite(smoke: bool = False) -> unittest.TestSuite:
     names = unittest.defaultTestLoader.getTestCaseNames(SkillOwnershipAcceptanceTests)
-    return unittest.TestSuite(SkillOwnershipAcceptanceTests(name) for name in names if not smoke or name in SMOKE_TESTS)
+    suite = unittest.TestSuite(SkillOwnershipAcceptanceTests(name) for name in names if not smoke or name in SMOKE_TESTS)
+    if not smoke:
+        suite.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(OwnershipReadBoundaryTests))
+    return suite
 
 
 if __name__ == "__main__":

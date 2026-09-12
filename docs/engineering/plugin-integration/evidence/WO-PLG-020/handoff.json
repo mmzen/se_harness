@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 68 declared changed path(s) are within execution scope.",
+            "message": "All 69 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -245,8 +245,17 @@
     "alternatives": [],
     "blocked_by": [],
     "command_or_response": {
-      "kind": "response",
-      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for e33d8c8: HTTP 422"
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-PLG-020=implemented",
+        "--decision",
+        "WO-PLG-020=delegated-executor",
+        "--apply"
+      ],
+      "kind": "command"
     },
     "current_lifecycle_state": [
       "WO-PLG-020 is in_progress."
@@ -256,8 +265,10 @@
       "decision": "whether the authorized implementation and evidence are complete",
       "decision_right": "DR-WO-COMPLETE",
       "delegation": {
+        "check_run_id": "103574053177",
         "class": "execution",
-        "gate": "not passing"
+        "gate": "success",
+        "head": "1e062e4db06b6e7131429db15b3d6b9876e600db"
       },
       "outcomes": [
         "implemented",
@@ -277,7 +288,7 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "c55ee2be58c9058b3b2f756f0c8c527543df19361299f282e623fd80bbe70334",
+  "result_sha256": "3980cf67b1df82dbdb2b347352a81859a7db3e1ea596bdec2caee090888f22ce",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
@@ -309,6 +320,7 @@
       "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/approved-review-preflight.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/approved-scope.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/approved-validation.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/implementation-byte-transport.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/start-applied.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/start-check.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/start-preflight.json",
