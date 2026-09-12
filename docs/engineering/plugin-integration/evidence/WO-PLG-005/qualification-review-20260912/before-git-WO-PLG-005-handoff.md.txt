@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-PLG-005"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "b1a95f73613305c296e86a2e80c6b158632c6de46663a60e97bd18670c276580"
-rebound_at = "2026-09-12T08:57:17Z"
+formal_snapshot_sha256 = "adcc15b6639b67810dd01e44d67204feeef49a4051759c6d659a6678aadf1716"
+rebound_at = "2026-09-11T22:03:41Z"
 ```
 
 # WO-PLG-005 handoff evidence
@@ -20,7 +20,3 @@ The implementation and evidence are not complete against VER-PLG-005. Continue i
 ## Operator acceptance of the local limitation
 
 **Operator acceptance recorded:** the operator accepted hook failure as a [documented local limitation](local-limitation-acceptance/README.md). The failed observations remain unchanged. Formal decision recording and any required contract changes are separate; this evidence update changes no lifecycle state.
-
-## Continuation assessment — 2026-09-12
-
-[The dated qualification assessment](qualification-review-20260912/assessment.md) evaluates the merged criteria and exact source/package/recorded-loaded identities. C10/C11 remain failed enforcement; only independent qualification with a documented local limitation is proposed. Existing case evidence and original reports retain their meaning. Required check records, preserved prior packet bytes and the scoped line-ending correction are in that dated directory.

@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "preflight",
+    ".",
+    "--work-order",
+    "WO-PLG-005",
+    "--phase",
+    "review",
+    "--json"
+  ],
+  "exit_code": 0,
+  "stdout_sha256": "0ad4d39bd2de09f436310db9d1ca5861e63e74aa0de4078df47d6ca48d2365e0",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

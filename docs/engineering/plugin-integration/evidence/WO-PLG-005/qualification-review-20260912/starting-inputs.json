@@ -1,0 +1,22 @@
+{
+  "user_instruction": "ok go for #456 and #457",
+  "work_order": "WO-PLG-005",
+  "pr": 457,
+  "original_head": "472f44f7d1326d1b330c686a0625f550eb4d5afc",
+  "main": "0114707723f565bfdef85e8e74f7e0fef5f402a9",
+  "branch": "work/plugin-codex-adapter",
+  "reading_manifest": [
+    "ENGINEERING_HARNESS.md",
+    "docs/engineering/OPERATING_CARD.md",
+    "AGENTS.md",
+    "docs/engineering/harness-distribution/intent/INT-DST-001.md",
+    "docs/engineering/harness-distribution/capabilities/CAP-DST-001.md",
+    "docs/engineering/plugin-integration/requirements/REQ-PLG-008.md",
+    "docs/engineering/plugin-integration/specifications/SPEC-PLG-005.md",
+    "docs/engineering/plugin-integration/architecture/ARCH-PLG-002.md",
+    "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-002.md",
+    "docs/engineering/plugin-integration/verification/VER-PLG-005.md",
+    "docs/engineering/plugin-integration/work-orders/WO-PLG-005.md"
+  ],
+  "premerge_check_correction": "The original implementation checkpoint compared an unmerged branch to new main and included incoming WO-PLG-019 paths. Repository integration is authorized separately by the operator and evaluated on verified VREC-PLG-014. Before merging, the adapter scope is compared with its actual merge base; implementation evidence will be captured on the merged definitions."
+}

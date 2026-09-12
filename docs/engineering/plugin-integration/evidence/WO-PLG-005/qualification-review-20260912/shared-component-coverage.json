@@ -1,0 +1,18 @@
+[
+  {
+    "verification_record": "VREC-PLG-005",
+    "candidate": "bf0a2b4705617e735357842872edd068ce2ed610",
+    "record_path": "docs/engineering/plugin-integration/verification-records/VREC-PLG-005.md",
+    "source": "plugins/verity-plane/common/scripts/session-context.py",
+    "source_sha256": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb",
+    "unchanged_since_shared_verified_candidate": true
+  },
+  {
+    "verification_record": "VREC-PLG-006",
+    "candidate": "1daf4e3ecf3a46a3cb8ad385a11b6cfa39e4549d",
+    "record_path": "docs/engineering/plugin-integration/verification-records/VREC-PLG-006.md",
+    "source": "plugins/verity-plane/common/scripts/check-tool-action.py",
+    "source_sha256": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4",
+    "unchanged_since_shared_verified_candidate": true
+  }
+]

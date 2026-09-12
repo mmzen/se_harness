@@ -1,0 +1,283 @@
+{
+  "work_order": "WO-PLG-005",
+  "assessment_actor": "implementation-agent",
+  "assessed_source_and_definition_commit": "c7ee1eccec40b92dd0346192cce94900c062094f",
+  "historical_pr_head": "472f44f7d1326d1b330c686a0625f550eb4d5afc",
+  "live_source_commit": "400cf3d5d669e239d046cc640ac94e962a6e731d",
+  "package_sha256": "a94185033507c3e3c65de890a6979c34048e6905ea6062a270d004b1b254c4c5",
+  "mappings": [
+    {
+      "source": "plugins/verity-plane/common/scripts/check-tool-action.py",
+      "packaged": "scripts/check-tool-action.py",
+      "source_sha256": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4",
+      "packaged_sha256": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4",
+      "loaded_sha256": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4"
+    },
+    {
+      "source": "plugins/verity-plane/common/scripts/session-context.py",
+      "packaged": "scripts/session-context.py",
+      "source_sha256": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb",
+      "packaged_sha256": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb",
+      "loaded_sha256": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb"
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/setup/SKILL.md",
+      "packaged": "skills/setup/SKILL.md",
+      "source_sha256": "68b3270b2ed4b8ad3651b6ff2ad737a425f8e7e3034df7fc065fb4e0feb03271",
+      "packaged_sha256": "68b3270b2ed4b8ad3651b6ff2ad737a425f8e7e3034df7fc065fb4e0feb03271",
+      "loaded_sha256": "68b3270b2ed4b8ad3651b6ff2ad737a425f8e7e3034df7fc065fb4e0feb03271"
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/setup/references/environment.md",
+      "packaged": "skills/setup/references/environment.md",
+      "source_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+      "packaged_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+      "loaded_sha256": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59"
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/change/SKILL.md",
+      "packaged": "skills/change/SKILL.md",
+      "source_sha256": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13",
+      "packaged_sha256": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13",
+      "loaded_sha256": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13"
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/change/references/artifacts.md",
+      "packaged": "skills/change/references/artifacts.md",
+      "source_sha256": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3",
+      "packaged_sha256": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3",
+      "loaded_sha256": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3"
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/change/references/authority.md",
+      "packaged": "skills/change/references/authority.md",
+      "source_sha256": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f",
+      "packaged_sha256": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f",
+      "loaded_sha256": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f"
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/change/references/work-orders.md",
+      "packaged": "skills/change/references/work-orders.md",
+      "source_sha256": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8",
+      "packaged_sha256": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8",
+      "loaded_sha256": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8"
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/evidence/SKILL.md",
+      "packaged": "skills/evidence/SKILL.md",
+      "source_sha256": "647c20a982c798c0617145cbcfe2f3356d23b4f827641b6affff9592bf02ad3b",
+      "packaged_sha256": "647c20a982c798c0617145cbcfe2f3356d23b4f827641b6affff9592bf02ad3b",
+      "loaded_sha256": "647c20a982c798c0617145cbcfe2f3356d23b4f827641b6affff9592bf02ad3b"
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/evidence/references/external-actions.md",
+      "packaged": "skills/evidence/references/external-actions.md",
+      "source_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+      "packaged_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+      "loaded_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69"
+    },
+    {
+      "source": "plugins/verity-plane/common/skills/evidence/references/records.md",
+      "packaged": "skills/evidence/references/records.md",
+      "source_sha256": "0c266bef118b904030e1982318763021bdfd699e34b353d4f38e5d9f2f43a20b",
+      "packaged_sha256": "0c266bef118b904030e1982318763021bdfd699e34b353d4f38e5d9f2f43a20b",
+      "loaded_sha256": "0c266bef118b904030e1982318763021bdfd699e34b353d4f38e5d9f2f43a20b"
+    },
+    {
+      "source": "plugins/verity-plane/codex/.codex-plugin/plugin.json",
+      "packaged": ".codex-plugin/plugin.json",
+      "source_sha256": "b255479285fa4e45843715ac43d88418f4e11f62b259f0242b59acd55e82a6b6",
+      "packaged_sha256": "b255479285fa4e45843715ac43d88418f4e11f62b259f0242b59acd55e82a6b6",
+      "loaded_sha256": "b255479285fa4e45843715ac43d88418f4e11f62b259f0242b59acd55e82a6b6"
+    },
+    {
+      "source": "plugins/verity-plane/codex/hooks/hooks.json",
+      "packaged": "hooks/hooks.json",
+      "source_sha256": "2b768288dd11dca1510ea250e0b1cf9c7455e1f6d9152e62ed45482336c75a43",
+      "packaged_sha256": "2b768288dd11dca1510ea250e0b1cf9c7455e1f6d9152e62ed45482336c75a43",
+      "loaded_sha256": "2b768288dd11dca1510ea250e0b1cf9c7455e1f6d9152e62ed45482336c75a43"
+    },
+    {
+      "source": "plugins/verity-plane/codex/dispatch.py",
+      "packaged": "scripts/codex-dispatch.py",
+      "source_sha256": "1b24f62da276450ae8b0fa0529dfe8b786b995e137bd737258c16937ee07acae",
+      "packaged_sha256": "1b24f62da276450ae8b0fa0529dfe8b786b995e137bd737258c16937ee07acae",
+      "loaded_sha256": "1b24f62da276450ae8b0fa0529dfe8b786b995e137bd737258c16937ee07acae"
+    }
+  ],
+  "definitions": {
+    "SPEC-PLG-002": {
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-002.md",
+      "sha256": "2d28f16f04c3109ffa7034c9efc1c2a2ff81de066e449fc7de757bcb4d3b13dd"
+    },
+    "SPEC-PLG-005": {
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-005.md",
+      "sha256": "c4ad191725f88119ce27bc62e8eb611e76f27b78de9f83e0e76b1dbc24be0902"
+    },
+    "SPEC-PLG-006": {
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-006.md",
+      "sha256": "380e80e99063b36d8809c6ab5a93c53e68d44e6238e3a8dc47e1026e1296175b"
+    },
+    "SPEC-PLG-007": {
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-007.md",
+      "sha256": "21a7a49087841e3997b4b9af6f542a756b11ad7bfc9fd8a4306ae4d433cbda8b"
+    },
+    "SPEC-PLG-008": {
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-008.md",
+      "sha256": "ce09d9d8e81e4bf8f14eee1c4975b7d4eadb6670ba35c2adc7a5cb4ea4b89ddc"
+    },
+    "VER-PLG-005": {
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-005.md",
+      "sha256": "60ed352159a13deb6b4c7c483c80306511439ea0e57475105c1e62aa2c19c73e"
+    },
+    "VER-PLG-006": {
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-006.md",
+      "sha256": "917ae0df654f467c128fd2bbd6d6ed7d4c8ad816895ee11e09525f14d65a6c85"
+    },
+    "VER-PLG-007": {
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-007.md",
+      "sha256": "3cebb4488054c350fae73a764f66e197c2c6c2d7aa4f2513f8208162ee3a8bb7"
+    },
+    "VER-PLG-008": {
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-008.md",
+      "sha256": "c19e65cccd19ad7c25fa9301eb3fb3d57b9bf18ff8a75aacc6fb0b92e32324af"
+    },
+    "DEC-PLG-001": {
+      "path": "docs/engineering/plugin-integration/decisions/DEC-PLG-001.md",
+      "sha256": "2d992518c43f11fb74c9f6f6ed38154fbcaccd2182719eb884dc3fca41fe6671"
+    },
+    "DEC-PLG-002": {
+      "path": "docs/engineering/plugin-integration/decisions/DEC-PLG-002.md",
+      "sha256": "3e3fa890514c93e12a84c5b369021ce702ff9b8bf5d9b2cffbcb2e54676d76cf"
+    },
+    "DEC-PLG-006": {
+      "path": "docs/engineering/plugin-integration/decisions/DEC-PLG-006.md",
+      "sha256": "1762782a9d94c2874bac47d87401aa15f607764c5006d3ce8dc2ef8d8fdd9c69"
+    }
+  },
+  "case_records": {
+    "C01": {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/C01/observations.json",
+      "sha256": "cdfa7f489f5b2dace250e1dbbab93660c36bd6496ea4552a0774a147c5690609",
+      "retained_conclusion": "pass",
+      "qualified": {
+        "qualified": false,
+        "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+      }
+    },
+    "C02": {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/C02/observations.json",
+      "sha256": "fcbfbd0da98addf5b2813cf4dcefcb31c8747d5c7f141881b77b2cb3eb2c931f",
+      "retained_conclusion": "pass",
+      "qualified": {
+        "qualified": false,
+        "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+      }
+    },
+    "C03": {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/C03/observations.json",
+      "sha256": "fc5eda53c27c1dc840f921f4b564b76bc2cb1eb92d2f716cb09a511638a3c3f1",
+      "retained_conclusion": "pass",
+      "qualified": {
+        "qualified": false,
+        "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+      }
+    },
+    "C04": {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/C04/observations.json",
+      "sha256": "7328907d74c32f2dfc7eb0eb4d5cd90830116657c0ea2275a5c80b6e2a13e3c3",
+      "retained_conclusion": "pass",
+      "qualified": {
+        "qualified": false,
+        "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+      }
+    },
+    "C05": {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/C05/observations.json",
+      "sha256": "6052c7d3a33edc179fbbe09901f8f19abc1473a11d13b7dde778ea6e3907661b",
+      "retained_conclusion": "pass",
+      "qualified": {
+        "qualified": false,
+        "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+      }
+    },
+    "C06": {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/C06/observations.json",
+      "sha256": "3815792afcc31bd52a38fe76e89a8eac00639da97b46b9f4893341b98c4986bf",
+      "retained_conclusion": "pass",
+      "qualified": {
+        "qualified": false,
+        "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+      }
+    },
+    "C07": {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/C07/observations.json",
+      "sha256": "9bffd77fd6947f2dcc7038f13366e77ac09a399f8a2d09f70f636bc85e7fc5b6",
+      "retained_conclusion": "pass",
+      "qualified": {
+        "qualified": false,
+        "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+      }
+    },
+    "C08": {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/C08/observations.json",
+      "sha256": "baf7d8ecca8ab8cc6b900a2e523c1fa451246fac14340b639c8927f96725f8cb",
+      "retained_conclusion": "pass",
+      "qualified": {
+        "qualified": false,
+        "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+      }
+    },
+    "C09": {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/C09/observations.json",
+      "sha256": "b1dab1336e55d2ca399bd1b7b844f014bfe3847e2c8c0ad28988c35bd7094389",
+      "retained_conclusion": "pass",
+      "qualified": {
+        "qualified": false,
+        "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+      }
+    },
+    "C10": {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/C10/observations.json",
+      "sha256": "0c15bb7a7223df4e83ddec64529fe204b5eab9e9b55b74d2b144e734ad0f10f3",
+      "retained_conclusion": "fail",
+      "qualified": {
+        "qualified": false,
+        "reason": "Host timeout did not supply required refusal. The observed synthetic edit proceeded after ordinary one-time approval. WO-PLG-005 remains in_progress."
+      }
+    },
+    "C11": {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/C11/observations.json",
+      "sha256": "295986d1e680e4f1c7841dab15f5545b89cffebcb4496f819dad7863b401dcb3",
+      "retained_conclusion": "fail",
+      "qualified": {
+        "qualified": false,
+        "reason": "Each observed fault permits the reviewed effect without required handler refusal; literal OS shell-start failure is unobserved. WO-PLG-005 remains in_progress."
+      }
+    },
+    "C12": {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-005/C12/observations.json",
+      "sha256": "3b1ea2acec74ab64b9c0fb6d7dad20fcfd79f4445525dfa6e16b56f8440dc5a4",
+      "retained_conclusion": "pass",
+      "qualified": {
+        "qualified": false,
+        "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+      }
+    }
+  },
+  "observations": {
+    "recorded_loaded_payload_files": 16,
+    "literal_os_shell_start": "unavailable; only admitted unavailable subcase",
+    "replay": {
+      "C09-failed": "pass",
+      "C09-interrupted": "pass",
+      "C09-stalled": "pass",
+      "C10/host-timeout-01": "unqualified: no supported handler refusal observed",
+      "C11/missing-output-01": "unqualified: no supported handler refusal observed",
+      "C11/invalid-output-01": "unqualified: no supported handler refusal observed"
+    }
+  },
+  "production_source_matches_live_revision": true,
+  "new_native_host_runs": false,
+  "assurance_decision": null
+}

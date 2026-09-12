@@ -1,0 +1,2 @@
+# Preserve retained Windows command output and proof bytes.
+* -text whitespace=cr-at-eol
