@@ -1,0 +1,20 @@
+{
+  "reason": "Native checkout CRLF conversion made LF-only evidence headers unreadable. Only current machine packets receive LF attributes; historical case captures remain untouched.",
+  "files": [
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-006/WO-PLG-006-pre-action.md",
+      "checkout_sha256": "d6f6513a7cd37a6701cd430558a1fc5082c0b29e3fcd8bba342e01c9c48d79ac",
+      "committed_sha256": "526cdb6c9a64a565c84b2ae6045ebf112a14d17c7b646e4aff1bbea999d1646f"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-006/WO-PLG-006-handoff.md",
+      "checkout_sha256": "8af74bd6ee0eb2ba5aeede6c86b5680fcc29830ac619a06c2f691d2b5cb9c856",
+      "committed_sha256": "6f080efa052e2c138f00e32e9432d910eb38b1520f3eab0599ca5d11bcd13348"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-006/handoff.json",
+      "checkout_sha256": "41c2663c2246ce89205dc8bc84830bcf459b014ecf445d8e25d72c677b0cbfed",
+      "committed_sha256": "6078ba4c38f4f142e7134e2dfda7554c11ebf90a87f68645897eefc7b8749501"
+    }
+  ]
+}

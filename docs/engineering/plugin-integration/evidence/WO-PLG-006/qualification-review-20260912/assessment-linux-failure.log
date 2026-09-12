@@ -1,0 +1,624 @@
+﻿2026-09-12T09:05:26.0748302Z Current runner version: '2.337.0'
+2026-09-12T09:05:26.0768745Z ##[group]Runner Image Provisioner
+2026-09-12T09:05:26.0769434Z Hosted Compute Agent
+2026-09-12T09:05:26.0770040Z Version: 20260828.587
+2026-09-12T09:05:26.0770713Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+2026-09-12T09:05:26.0771335Z Build Date: 2026-08-28T16:44:25Z
+2026-09-12T09:05:26.0771891Z Worker ID: {16fadddc-9018-4375-95e4-809db06b61aa}
+2026-09-12T09:05:26.0772470Z Azure Region: mexicocentral
+2026-09-12T09:05:26.0773038Z ##[endgroup]
+2026-09-12T09:05:26.0774138Z ##[group]Operating System
+2026-09-12T09:05:26.0774744Z Ubuntu
+2026-09-12T09:05:26.0775190Z 24.04.5
+2026-09-12T09:05:26.0775613Z LTS
+2026-09-12T09:05:26.0776099Z ##[endgroup]
+2026-09-12T09:05:26.0776554Z ##[group]Runner Image
+2026-09-12T09:05:26.0777019Z Image: ubuntu-24.04
+2026-09-12T09:05:26.0777540Z Version: 20260907.300.1
+2026-09-12T09:05:26.0778556Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260907.300/images/ubuntu/Ubuntu2404-Readme.md
+2026-09-12T09:05:26.0779869Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260907.300
+2026-09-12T09:05:26.0780826Z ##[endgroup]
+2026-09-12T09:05:26.0781788Z ##[group]GITHUB_TOKEN Permissions
+2026-09-12T09:05:26.0783278Z Contents: read
+2026-09-12T09:05:26.0783864Z Metadata: read
+2026-09-12T09:05:26.0784330Z ##[endgroup]
+2026-09-12T09:05:26.0786031Z Secret source: Actions
+2026-09-12T09:05:26.0786833Z Cache mode: write
+2026-09-12T09:05:26.0787446Z Prepare workflow directory
+2026-09-12T09:05:26.1203877Z Prepare all required actions
+2026-09-12T09:05:26.1241698Z Getting action download info
+2026-09-12T09:05:26.4209973Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-09-12T09:05:26.4993248Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-09-12T09:05:26.6247473Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2026-09-12T09:05:27.3530129Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-09-12T09:05:27.5696672Z Complete job name: Upgrade rehearsal (Linux)
+2026-09-12T09:05:27.6271636Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-12T09:05:27.6278981Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+2026-09-12T09:05:27.6279750Z with:
+2026-09-12T09:05:27.6280090Z   fetch-depth: 0
+2026-09-12T09:05:27.6280590Z   persist-credentials: false
+2026-09-12T09:05:27.6281007Z   repository: mmzen/se_harness
+2026-09-12T09:05:27.6283994Z   token: ***
+2026-09-12T09:05:27.6284342Z   ssh-strict: true
+2026-09-12T09:05:27.6284698Z   ssh-user: git
+2026-09-12T09:05:27.6285058Z   clean: true
+2026-09-12T09:05:27.6285409Z   sparse-checkout-cone-mode: true
+2026-09-12T09:05:27.6285843Z   fetch-tags: false
+2026-09-12T09:05:27.6286266Z   show-progress: true
+2026-09-12T09:05:27.6286826Z   lfs: false
+2026-09-12T09:05:27.6287166Z   submodules: false
+2026-09-12T09:05:27.6287515Z   set-safe-directory: true
+2026-09-12T09:05:27.6287913Z   allow-unsafe-pr-checkout: false
+2026-09-12T09:05:27.6288497Z env:
+2026-09-12T09:05:27.6288827Z   PREDECESSOR_VERSION: 0.17.0
+2026-09-12T09:05:27.6289469Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-12T09:05:27.6290555Z   REHEARSAL_HEAD_SHA: d6e9f8063dbee01dbb112f5cd2aef219def4e4cc
+2026-09-12T09:05:27.6291088Z   PYTHONNOUSERSITE: 1
+2026-09-12T09:05:27.6291440Z   PYTHONPATH: 
+2026-09-12T09:05:27.6291772Z ##[endgroup]
+2026-09-12T09:05:27.7169793Z Syncing repository: mmzen/se_harness
+2026-09-12T09:05:27.7172726Z ##[group]Getting Git version info
+2026-09-12T09:05:27.7173664Z Working directory is '/home/runner/work/se_harness/se_harness'
+2026-09-12T09:05:27.7175009Z [command]/usr/bin/git version
+2026-09-12T09:05:27.7175693Z git version 2.55.0
+2026-09-12T09:05:27.7192986Z ##[endgroup]
+2026-09-12T09:05:27.7205158Z Temporarily overriding HOME='/home/runner/work/_temp/d6874adb-ecf5-4195-9229-e9aa081489c8' before making global git config changes
+2026-09-12T09:05:27.7206931Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-12T09:05:27.7210148Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/se_harness/se_harness
+2026-09-12T09:05:27.7256928Z Deleting the contents of '/home/runner/work/se_harness/se_harness'
+2026-09-12T09:05:27.7263111Z ##[group]Initializing the repository
+2026-09-12T09:05:27.7264008Z [command]/usr/bin/git init /home/runner/work/se_harness/se_harness
+2026-09-12T09:05:27.7441589Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-09-12T09:05:27.7442882Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-09-12T09:05:27.7444059Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-09-12T09:05:27.7444943Z hint: call:
+2026-09-12T09:05:27.7445468Z hint:
+2026-09-12T09:05:27.7446154Z hint: 	git config --global init.defaultBranch <name>
+2026-09-12T09:05:27.7446923Z hint:
+2026-09-12T09:05:27.7447637Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-09-12T09:05:27.7448800Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-09-12T09:05:27.7449715Z hint:
+2026-09-12T09:05:27.7450403Z hint: 	git branch -m <name>
+2026-09-12T09:05:27.7451039Z hint:
+2026-09-12T09:05:27.7451836Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-09-12T09:05:27.7453121Z Initialized empty Git repository in /home/runner/work/se_harness/se_harness/.git/
+2026-09-12T09:05:27.7456725Z [command]/usr/bin/git remote add origin https://github.com/mmzen/se_harness
+2026-09-12T09:05:27.7503343Z ##[endgroup]
+2026-09-12T09:05:27.7504143Z ##[group]Disabling automatic garbage collection
+2026-09-12T09:05:27.7506730Z [command]/usr/bin/git config --local gc.auto 0
+2026-09-12T09:05:27.7535614Z ##[endgroup]
+2026-09-12T09:05:27.7536633Z ##[group]Setting up auth
+2026-09-12T09:05:27.7541440Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-12T09:05:27.7573212Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-12T09:05:27.7901572Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-12T09:05:27.7933414Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-12T09:05:27.8121695Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-12T09:05:27.8151949Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-12T09:05:27.8339612Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-09-12T09:05:27.8371581Z ##[endgroup]
+2026-09-12T09:05:27.8372274Z ##[group]Fetching the repository
+2026-09-12T09:05:27.8380446Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +7498479e319ca87233d6ec20afb93f85111a9815:refs/remotes/pull/456/merge
+2026-09-12T09:05:30.5836678Z From https://github.com/mmzen/se_harness
+2026-09-12T09:05:30.5838353Z  * [new branch]        artifacts/plugin-implementation          -> origin/artifacts/plugin-implementation
+2026-09-12T09:05:30.5840061Z  * [new branch]        definitions/plg005-delegation            -> origin/definitions/plg005-delegation
+2026-09-12T09:05:30.5842095Z  * [new branch]        definitions/plg006-delegation            -> origin/definitions/plg006-delegation
+2026-09-12T09:05:30.5844414Z  * [new branch]        definitions/plg010-delegation            -> origin/definitions/plg010-delegation
+2026-09-12T09:05:30.5846893Z  * [new branch]        definitions/plg011-delegation            -> origin/definitions/plg011-delegation
+2026-09-12T09:05:30.5849291Z  * [new branch]        definitions/plg012-delegation            -> origin/definitions/plg012-delegation
+2026-09-12T09:05:30.5851839Z  * [new branch]        definitions/plg017-path-repair           -> origin/definitions/plg017-path-repair
+2026-09-12T09:05:30.5854152Z  * [new branch]        definitions/plg018-stack-integration     -> origin/definitions/plg018-stack-integration
+2026-09-12T09:05:30.5856277Z  * [new branch]        diagnostics/upgrade-rehearsal-timing     -> origin/diagnostics/upgrade-rehearsal-timing
+2026-09-12T09:05:30.5857997Z  * [new branch]        main                                     -> origin/main
+2026-09-12T09:05:30.5859708Z  * [new branch]        notes/plugin-installation-proposal       -> origin/notes/plugin-installation-proposal
+2026-09-12T09:05:30.5863210Z  * [new branch]        notes/plugin-proposal-assessment-2026-09-08 -> origin/notes/plugin-proposal-assessment-2026-09-08
+2026-09-12T09:05:30.5865907Z  * [new branch]        release/0.10                             -> origin/release/0.10
+2026-09-12T09:05:30.5867532Z  * [new branch]        release/0.11                             -> origin/release/0.11
+2026-09-12T09:05:30.5869350Z  * [new branch]        release/0.12                             -> origin/release/0.12
+2026-09-12T09:05:30.5871191Z  * [new branch]        release/0.12.0                           -> origin/release/0.12.0
+2026-09-12T09:05:30.5872753Z  * [new branch]        release/0.13                             -> origin/release/0.13
+2026-09-12T09:05:30.5874277Z  * [new branch]        release/0.13.0                           -> origin/release/0.13.0
+2026-09-12T09:05:30.5875798Z  * [new branch]        release/0.14                             -> origin/release/0.14
+2026-09-12T09:05:30.5877515Z  * [new branch]        release/0.14.0                           -> origin/release/0.14.0
+2026-09-12T09:05:30.5879058Z  * [new branch]        release/0.15                             -> origin/release/0.15
+2026-09-12T09:05:30.5880982Z  * [new branch]        release/0.15.0                           -> origin/release/0.15.0
+2026-09-12T09:05:30.5882612Z  * [new branch]        release/0.16                             -> origin/release/0.16
+2026-09-12T09:05:30.5884229Z  * [new branch]        release/0.16.0                           -> origin/release/0.16.0
+2026-09-12T09:05:30.5885878Z  * [new branch]        release/0.17                             -> origin/release/0.17
+2026-09-12T09:05:30.5887507Z  * [new branch]        release/0.17.0                           -> origin/release/0.17.0
+2026-09-12T09:05:30.5889157Z  * [new branch]        release/0.2.0                            -> origin/release/0.2.0
+2026-09-12T09:05:30.5890887Z  * [new branch]        release/0.2.1                            -> origin/release/0.2.1
+2026-09-12T09:05:30.5892598Z  * [new branch]        release/0.2.2                            -> origin/release/0.2.2
+2026-09-12T09:05:30.5894506Z  * [new branch]        release/0.3.0                            -> origin/release/0.3.0
+2026-09-12T09:05:30.5896144Z  * [new branch]        release/0.4.0                            -> origin/release/0.4.0
+2026-09-12T09:05:30.5897757Z  * [new branch]        release/0.6                              -> origin/release/0.6
+2026-09-12T09:05:30.5899358Z  * [new branch]        release/0.7                              -> origin/release/0.7
+2026-09-12T09:05:30.5901038Z  * [new branch]        release/0.8                              -> origin/release/0.8
+2026-09-12T09:05:30.5902644Z  * [new branch]        release/0.9                              -> origin/release/0.9
+2026-09-12T09:05:30.5905168Z  * [new branch]        work/plugin-change-skill                 -> origin/work/plugin-change-skill
+2026-09-12T09:05:30.5907907Z  * [new branch]        work/plugin-claude-adapter               -> origin/work/plugin-claude-adapter
+2026-09-12T09:05:30.5910522Z  * [new branch]        work/plugin-codex-adapter                -> origin/work/plugin-codex-adapter
+2026-09-12T09:05:30.5912704Z  * [new branch]        work/plugin-evidence-path-repair         -> origin/work/plugin-evidence-path-repair
+2026-09-12T09:05:30.5915860Z  * [new branch]        work/plugin-evidence-skill               -> origin/work/plugin-evidence-skill
+2026-09-12T09:05:30.5919513Z  * [new branch]        work/plugin-local-limitation             -> origin/work/plugin-local-limitation
+2026-09-12T09:05:30.5922864Z  * [new branch]        work/plugin-retained-skills              -> origin/work/plugin-retained-skills
+2026-09-12T09:05:30.5925911Z  * [new branch]        work/plugin-stack-integration            -> origin/work/plugin-stack-integration
+2026-09-12T09:05:30.5929261Z  * [new branch]        work/release-artifact-discovery-repair   -> origin/work/release-artifact-discovery-repair
+2026-09-12T09:05:30.5932160Z  * [new tag]           last                                     -> last
+2026-09-12T09:05:30.5934060Z  * [new tag]           v0.10.0                                  -> v0.10.0
+2026-09-12T09:05:30.5935688Z  * [new tag]           v0.11.0                                  -> v0.11.0
+2026-09-12T09:05:30.5937362Z  * [new tag]           v0.12.0                                  -> v0.12.0
+2026-09-12T09:05:30.5938705Z  * [new tag]           v0.13.0                                  -> v0.13.0
+2026-09-12T09:05:30.5940163Z  * [new tag]           v0.14.0                                  -> v0.14.0
+2026-09-12T09:05:30.5941859Z  * [new tag]           v0.15.0                                  -> v0.15.0
+2026-09-12T09:05:30.5943186Z  * [new tag]           v0.16.0                                  -> v0.16.0
+2026-09-12T09:05:30.5944512Z  * [new tag]           v0.17.0                                  -> v0.17.0
+2026-09-12T09:05:30.5945959Z  * [new tag]           v0.2.0                                   -> v0.2.0
+2026-09-12T09:05:30.5947472Z  * [new tag]           v0.2.1                                   -> v0.2.1
+2026-09-12T09:05:30.5948797Z  * [new tag]           v0.2.2                                   -> v0.2.2
+2026-09-12T09:05:30.5950091Z  * [new tag]           v0.3.0                                   -> v0.3.0
+2026-09-12T09:05:30.5951602Z  * [new tag]           v0.4.0                                   -> v0.4.0
+2026-09-12T09:05:30.5952898Z  * [new tag]           v0.4.1                                   -> v0.4.1
+2026-09-12T09:05:30.5954216Z  * [new tag]           v0.5.0                                   -> v0.5.0
+2026-09-12T09:05:30.5955532Z  * [new tag]           v0.5.0a1                                 -> v0.5.0a1
+2026-09-12T09:05:30.5956858Z  * [new tag]           v0.6.0                                   -> v0.6.0
+2026-09-12T09:05:30.5958171Z  * [new tag]           v0.7.0                                   -> v0.7.0
+2026-09-12T09:05:30.5959474Z  * [new tag]           v0.7.1                                   -> v0.7.1
+2026-09-12T09:05:30.5961003Z  * [new tag]           v0.8.0                                   -> v0.8.0
+2026-09-12T09:05:30.5962305Z  * [new tag]           v0.9.0                                   -> v0.9.0
+2026-09-12T09:05:30.5963729Z  * [new ref]           7498479e319ca87233d6ec20afb93f85111a9815 -> pull/456/merge
+2026-09-12T09:05:30.5966691Z ##[endgroup]
+2026-09-12T09:05:30.5967870Z ##[group]Determining the checkout info
+2026-09-12T09:05:30.5969203Z ##[endgroup]
+2026-09-12T09:05:30.5969976Z [command]/usr/bin/git sparse-checkout disable
+2026-09-12T09:05:30.5972370Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-09-12T09:05:30.5974993Z ##[group]Checking out the ref
+2026-09-12T09:05:30.5976223Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/456/merge
+2026-09-12T09:05:31.1804425Z Note: switching to 'refs/remotes/pull/456/merge'.
+2026-09-12T09:05:31.1804776Z 
+2026-09-12T09:05:31.1805013Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-09-12T09:05:31.1805485Z changes and commit them, and you can discard any commits you make in this
+2026-09-12T09:05:31.1805853Z state without impacting any branches by switching back to a branch.
+2026-09-12T09:05:31.1806062Z 
+2026-09-12T09:05:31.1806209Z If you want to create a new branch to retain commits you create, you may
+2026-09-12T09:05:31.1806552Z do so (now or later) by using -c with the switch command. Example:
+2026-09-12T09:05:31.1806743Z 
+2026-09-12T09:05:31.1806833Z   git switch -c <new-branch-name>
+2026-09-12T09:05:31.1807091Z 
+2026-09-12T09:05:31.1807216Z Or undo this operation with:
+2026-09-12T09:05:31.1807399Z 
+2026-09-12T09:05:31.1807495Z   git switch -
+2026-09-12T09:05:31.1807629Z 
+2026-09-12T09:05:31.1807852Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-09-12T09:05:31.1808178Z 
+2026-09-12T09:05:31.1808553Z HEAD is now at 7498479e Merge d6e9f8063dbee01dbb112f5cd2aef219def4e4cc into 0114707723f565bfdef85e8e74f7e0fef5f402a9
+2026-09-12T09:05:31.1855121Z ##[endgroup]
+2026-09-12T09:05:31.1911343Z [command]/usr/bin/git log -1 --format=%H
+2026-09-12T09:05:31.1919635Z 7498479e319ca87233d6ec20afb93f85111a9815
+2026-09-12T09:05:31.1941336Z ##[group]Removing auth
+2026-09-12T09:05:31.1942218Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-12T09:05:31.1959996Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-12T09:05:31.2166601Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-12T09:05:31.2191896Z http.https://github.com/.extraheader
+2026-09-12T09:05:31.2199191Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-09-12T09:05:31.2227714Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-12T09:05:31.2427456Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-12T09:05:31.2454366Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-12T09:05:31.2650606Z ##[endgroup]
+2026-09-12T09:05:31.2849376Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-12T09:05:31.2851028Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+2026-09-12T09:05:31.2851343Z with:
+2026-09-12T09:05:31.2851506Z   python-version: 3.11
+2026-09-12T09:05:31.2851689Z   check-latest: false
+2026-09-12T09:05:31.2853507Z   token: ***
+2026-09-12T09:05:31.2853693Z   update-environment: true
+2026-09-12T09:05:31.2853897Z   allow-prereleases: false
+2026-09-12T09:05:31.2854092Z   freethreaded: false
+2026-09-12T09:05:31.2854265Z env:
+2026-09-12T09:05:31.2854430Z   PREDECESSOR_VERSION: 0.17.0
+2026-09-12T09:05:31.2854787Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-12T09:05:31.2855243Z   REHEARSAL_HEAD_SHA: d6e9f8063dbee01dbb112f5cd2aef219def4e4cc
+2026-09-12T09:05:31.2855511Z   PYTHONNOUSERSITE: 1
+2026-09-12T09:05:31.2855689Z   PYTHONPATH: 
+2026-09-12T09:05:31.2855849Z ##[endgroup]
+2026-09-12T09:05:31.3891784Z ##[group]Installed versions
+2026-09-12T09:05:31.3963595Z (node:2131) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-12T09:05:31.3964800Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-12T09:05:31.3965294Z Successfully set up CPython (3.11.16)
+2026-09-12T09:05:31.3966034Z ##[endgroup]
+2026-09-12T09:05:31.4135551Z ##[group]Run if (-not $env:PREDECESSOR_VERSION -or -not $env:PREDECESSOR_WHEEL_SHA256) {
+2026-09-12T09:05:31.4136094Z [36;1mif (-not $env:PREDECESSOR_VERSION -or -not $env:PREDECESSOR_WHEEL_SHA256) {[0m
+2026-09-12T09:05:31.4136520Z [36;1m  throw 'predecessor facts were not derived by candidate-source'[0m
+2026-09-12T09:05:31.4136810Z [36;1m}[0m
+2026-09-12T09:05:31.4189834Z shell: /usr/bin/pwsh -command ". '{0}'"
+2026-09-12T09:05:31.4190085Z env:
+2026-09-12T09:05:31.4190523Z   PREDECESSOR_VERSION: 0.17.0
+2026-09-12T09:05:31.4190888Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-12T09:05:31.4191331Z   REHEARSAL_HEAD_SHA: d6e9f8063dbee01dbb112f5cd2aef219def4e4cc
+2026-09-12T09:05:31.4191617Z   PYTHONNOUSERSITE: 1
+2026-09-12T09:05:31.4191798Z   PYTHONPATH: 
+2026-09-12T09:05:31.4192031Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:31.4192420Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-12T09:05:31.4192752Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:31.4193047Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:31.4193340Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:31.4193634Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-12T09:05:31.4193887Z ##[endgroup]
+2026-09-12T09:05:32.3939036Z ##[group]Run $facts = [ordered]@{
+2026-09-12T09:05:32.3939323Z [36;1m$facts = [ordered]@{[0m
+2026-09-12T09:05:32.3939568Z [36;1m  schema = 'se-harness-rehearsal-runtime-v1'[0m
+2026-09-12T09:05:32.3939849Z [36;1m  run_id = $env:GITHUB_RUN_ID[0m
+2026-09-12T09:05:32.3940096Z [36;1m  run_attempt = $env:GITHUB_RUN_ATTEMPT[0m
+2026-09-12T09:05:32.3940582Z [36;1m  head_sha = $env:REHEARSAL_HEAD_SHA[0m
+2026-09-12T09:05:32.3940836Z [36;1m  tested_sha = $env:GITHUB_SHA[0m
+2026-09-12T09:05:32.3941084Z [36;1m  checkout_sha = (git rev-parse HEAD)[0m
+2026-09-12T09:05:32.3941325Z [36;1m  runner_os = $env:RUNNER_OS[0m
+2026-09-12T09:05:32.3941537Z [36;1m  image_os = $env:ImageOS[0m
+2026-09-12T09:05:32.3941758Z [36;1m  image_version = $env:ImageVersion[0m
+2026-09-12T09:05:32.3942120Z [36;1m  os_version = [System.Runtime.InteropServices.RuntimeInformation]::OSDescription[0m
+2026-09-12T09:05:32.3942537Z [36;1m  python_version = (python --version)[0m
+2026-09-12T09:05:32.3942814Z [36;1m  git_version = (git --version)[0m
+2026-09-12T09:05:32.3943093Z [36;1m  defender_status = @{ availability = 'not_applicable' }[0m
+2026-09-12T09:05:32.3943424Z [36;1m  defender_preferences = @{ availability = 'not_applicable' }[0m
+2026-09-12T09:05:32.3943693Z [36;1m}[0m
+2026-09-12T09:05:32.3943857Z [36;1mif ($IsWindows) {[0m
+2026-09-12T09:05:32.3944051Z [36;1m  try {[0m
+2026-09-12T09:05:32.3944270Z [36;1m    $state = Get-MpComputerStatus -ErrorAction Stop[0m
+2026-09-12T09:05:32.3944542Z [36;1m    $facts.defender_status = @{[0m
+2026-09-12T09:05:32.3944767Z [36;1m      availability = 'available'[0m
+2026-09-12T09:05:32.3945031Z [36;1m      AntivirusEnabled = $state.AntivirusEnabled[0m
+2026-09-12T09:05:32.3945378Z [36;1m      RealTimeProtectionEnabled = $state.RealTimeProtectionEnabled[0m
+2026-09-12T09:05:32.3945705Z [36;1m      AMRunningMode = $state.AMRunningMode[0m
+2026-09-12T09:05:32.3945931Z [36;1m    }[0m
+2026-09-12T09:05:32.3946094Z [36;1m  } catch {[0m
+2026-09-12T09:05:32.3946435Z [36;1m    $facts.defender_status = @{ availability = 'unavailable'; error_type = $_.Exception.GetType().Name }[0m
+2026-09-12T09:05:32.3946806Z [36;1m  }[0m
+2026-09-12T09:05:32.3946978Z [36;1m  try {[0m
+2026-09-12T09:05:32.3947197Z [36;1m    $preferences = Get-MpPreference -ErrorAction Stop[0m
+2026-09-12T09:05:32.3947478Z [36;1m    $facts.defender_preferences = @{[0m
+2026-09-12T09:05:32.3947886Z [36;1m      availability = 'available'[0m
+2026-09-12T09:05:32.3948212Z [36;1m      DisableRealtimeMonitoring = $preferences.DisableRealtimeMonitoring[0m
+2026-09-12T09:05:32.3948579Z [36;1m      ExclusionPath = @($preferences.ExclusionPath)[0m
+2026-09-12T09:05:32.3948829Z [36;1m    }[0m
+2026-09-12T09:05:32.3948989Z [36;1m  } catch {[0m
+2026-09-12T09:05:32.3949348Z [36;1m    $facts.defender_preferences = @{ availability = 'unavailable'; error_type = $_.Exception.GetType().Name }[0m
+2026-09-12T09:05:32.3949727Z [36;1m  }[0m
+2026-09-12T09:05:32.3949879Z [36;1m}[0m
+2026-09-12T09:05:32.3950455Z [36;1m$facts | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $env:RUNNER_TEMP 'upgrade-rehearsal-runtime.json') -Encoding utf8[0m
+2026-09-12T09:05:32.3986457Z shell: /usr/bin/pwsh -command ". '{0}'"
+2026-09-12T09:05:32.3986691Z env:
+2026-09-12T09:05:32.3986863Z   PREDECESSOR_VERSION: 0.17.0
+2026-09-12T09:05:32.3987232Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-12T09:05:32.3987677Z   REHEARSAL_HEAD_SHA: d6e9f8063dbee01dbb112f5cd2aef219def4e4cc
+2026-09-12T09:05:32.3987946Z   PYTHONNOUSERSITE: 1
+2026-09-12T09:05:32.3988129Z   PYTHONPATH: 
+2026-09-12T09:05:32.3988347Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:32.3988672Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-12T09:05:32.3988998Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:32.3989291Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:32.3989754Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:32.3990062Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-12T09:05:32.3990476Z ##[endgroup]
+2026-09-12T09:05:33.1123054Z ##[group]Run $predecessorDist = Join-Path '/home/runner/work/_temp' 'predecessor-dist'
+2026-09-12T09:05:33.1123562Z [36;1m$predecessorDist = Join-Path '/home/runner/work/_temp' 'predecessor-dist'[0m
+2026-09-12T09:05:33.1123976Z [36;1mNew-Item -ItemType Directory -Path $predecessorDist | Out-Null[0m
+2026-09-12T09:05:33.1124440Z [36;1mpython -m pip download --disable-pip-version-check --only-binary=:all: --no-deps `[0m
+2026-09-12T09:05:33.1124911Z [36;1m  --dest $predecessorDist "se-harness==$env:PREDECESSOR_VERSION"[0m
+2026-09-12T09:05:33.1125305Z [36;1m$wheel = Get-ChildItem -LiteralPath $predecessorDist -Filter '*.whl'[0m
+2026-09-12T09:05:33.1125699Z [36;1mif ($wheel.Count -ne 1) { throw 'expected exactly one predecessor wheel' }[0m
+2026-09-12T09:05:33.1126172Z [36;1m$actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $wheel.FullName).Hash.ToLowerInvariant()[0m
+2026-09-12T09:05:33.1126715Z [36;1mif ($actual -ne $env:PREDECESSOR_WHEEL_SHA256) { throw 'predecessor wheel digest mismatch' }[0m
+2026-09-12T09:05:33.1161589Z shell: /usr/bin/pwsh -command ". '{0}'"
+2026-09-12T09:05:33.1161818Z env:
+2026-09-12T09:05:33.1161988Z   PREDECESSOR_VERSION: 0.17.0
+2026-09-12T09:05:33.1162341Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-12T09:05:33.1162763Z   REHEARSAL_HEAD_SHA: d6e9f8063dbee01dbb112f5cd2aef219def4e4cc
+2026-09-12T09:05:33.1163034Z   PYTHONNOUSERSITE: 1
+2026-09-12T09:05:33.1163220Z   PYTHONPATH: 
+2026-09-12T09:05:33.1163442Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:33.1163773Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-12T09:05:33.1164096Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:33.1164389Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:33.1164679Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:33.1164969Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-12T09:05:33.1165225Z ##[endgroup]
+2026-09-12T09:05:34.4155229Z Collecting se-harness==0.17.0
+2026-09-12T09:05:34.4556228Z   Downloading se_harness-0.17.0-py3-none-any.whl.metadata (45 kB)
+2026-09-12T09:05:34.4774337Z Downloading se_harness-0.17.0-py3-none-any.whl (484 kB)
+2026-09-12T09:05:34.4978475Z Saved /home/runner/work/_temp/predecessor-dist/se_harness-0.17.0-py3-none-any.whl
+2026-09-12T09:05:34.4979059Z Successfully downloaded se-harness
+2026-09-12T09:05:34.6378738Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-12T09:05:34.6379845Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-09-12T09:05:34.6380167Z with:
+2026-09-12T09:05:34.6380698Z   name: candidate-wheel-non-promotable-7498479e319ca87233d6ec20afb93f85111a9815
+2026-09-12T09:05:34.6381056Z   path: /home/runner/work/_temp/candidate-dist
+2026-09-12T09:05:34.6381293Z   merge-multiple: false
+2026-09-12T09:05:34.6381507Z   repository: mmzen/se_harness
+2026-09-12T09:05:34.6381698Z   run-id: 34684852297
+2026-09-12T09:05:34.6381868Z env:
+2026-09-12T09:05:34.6382028Z   PREDECESSOR_VERSION: 0.17.0
+2026-09-12T09:05:34.6382396Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-12T09:05:34.6382805Z   REHEARSAL_HEAD_SHA: d6e9f8063dbee01dbb112f5cd2aef219def4e4cc
+2026-09-12T09:05:34.6383072Z   PYTHONNOUSERSITE: 1
+2026-09-12T09:05:34.6383249Z   PYTHONPATH: 
+2026-09-12T09:05:34.6383472Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:34.6383806Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-12T09:05:34.6384132Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:34.6384434Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:34.6384726Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:34.6385018Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-12T09:05:34.6385276Z ##[endgroup]
+2026-09-12T09:05:34.7618819Z Downloading single artifact
+2026-09-12T09:05:34.7751473Z (node:2224) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-12T09:05:34.7753675Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-12T09:05:34.9901004Z Preparing to download the following artifacts:
+2026-09-12T09:05:34.9902167Z - candidate-wheel-non-promotable-7498479e319ca87233d6ec20afb93f85111a9815 (ID: 10295401619, Size: 471521, Expected Digest: sha256:d35eb96973b0166d15cfaf8398c94e1a805b313190ba67d5989c6e1d9c1111f8)
+2026-09-12T09:05:35.2016433Z Redirecting to blob download url: https://productionresultssa12.blob.core.windows.net/actions-results/18563408-a939-4669-a268-9dbfceb7a492/workflow-job-run-6deb8433-d5a1-5122-aa79-83806828d8b8/artifacts/5e2f33b5f5e6a0c4dddaabcb2b593101c60950054f27762ce0aa64555bc1617a.zip
+2026-09-12T09:05:35.2018233Z Starting download of artifact to: /home/runner/work/_temp/candidate-dist
+2026-09-12T09:05:35.4613687Z (node:2224) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-09-12T09:05:35.7188458Z SHA256 digest of downloaded artifact is d35eb96973b0166d15cfaf8398c94e1a805b313190ba67d5989c6e1d9c1111f8
+2026-09-12T09:05:35.7189080Z Artifact download completed successfully.
+2026-09-12T09:05:35.7189343Z Total of 1 artifact(s) downloaded
+2026-09-12T09:05:35.7193238Z Download artifact has finished successfully
+2026-09-12T09:05:35.7288847Z ##[group]Run $candidateDist = Join-Path '/home/runner/work/_temp' 'candidate-dist'
+2026-09-12T09:05:35.7289329Z [36;1m$candidateDist = Join-Path '/home/runner/work/_temp' 'candidate-dist'[0m
+2026-09-12T09:05:35.7289731Z [36;1m$wheel = Get-ChildItem -LiteralPath $candidateDist -Filter '*.whl'[0m
+2026-09-12T09:05:35.7290150Z [36;1mif ($wheel.Count -ne 1) { throw 'expected exactly one successor wheel' }[0m
+2026-09-12T09:05:35.7291310Z [36;1m$expected = (Get-Content -LiteralPath (Join-Path $candidateDist 'SHA256SUMS') | Where-Object { $_ -match [regex]::Escape($wheel.Name) })[0m
+2026-09-12T09:05:35.7291907Z [36;1mif (-not $expected) { throw 'SHA256SUMS does not name the successor wheel' }[0m
+2026-09-12T09:05:35.7292324Z [36;1m$expectedDigest = ($expected -split '\s+')[0].ToLowerInvariant()[0m
+2026-09-12T09:05:35.7292781Z [36;1m$actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $wheel.FullName).Hash.ToLowerInvariant()[0m
+2026-09-12T09:05:35.7293441Z [36;1mif ($actual -ne $expectedDigest) { throw "successor wheel digest mismatch: expected $expectedDigest, got $actual" }[0m
+2026-09-12T09:05:35.7328536Z shell: /usr/bin/pwsh -command ". '{0}'"
+2026-09-12T09:05:35.7328770Z env:
+2026-09-12T09:05:35.7328952Z   PREDECESSOR_VERSION: 0.17.0
+2026-09-12T09:05:35.7329311Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-12T09:05:35.7329742Z   REHEARSAL_HEAD_SHA: d6e9f8063dbee01dbb112f5cd2aef219def4e4cc
+2026-09-12T09:05:35.7330022Z   PYTHONNOUSERSITE: 1
+2026-09-12T09:05:35.7330421Z   PYTHONPATH: 
+2026-09-12T09:05:35.7330650Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:35.7330989Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-12T09:05:35.7331330Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:35.7331633Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:35.7331939Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:35.7332240Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-12T09:05:35.7332507Z ##[endgroup]
+2026-09-12T09:05:36.3930755Z ##[group]Run $predecessorRoot = Join-Path '/home/runner/work/_temp' 'predecessor-env'
+2026-09-12T09:05:36.3931301Z [36;1m$predecessorRoot = Join-Path '/home/runner/work/_temp' 'predecessor-env'[0m
+2026-09-12T09:05:36.3931744Z [36;1m$successorRoot = Join-Path '/home/runner/work/_temp' 'successor-env'[0m
+2026-09-12T09:05:36.3932065Z [36;1mpython -m venv $predecessorRoot[0m
+2026-09-12T09:05:36.3932313Z [36;1mpython -m venv $successorRoot[0m
+2026-09-12T09:05:36.3932615Z [36;1m$predecessorPython = Join-Path $predecessorRoot 'bin/python'[0m
+2026-09-12T09:05:36.3932976Z [36;1m$successorPython = Join-Path $successorRoot 'bin/python'[0m
+2026-09-12T09:05:36.3933500Z [36;1m$predecessorWheel = (Get-ChildItem -LiteralPath (Join-Path '/home/runner/work/_temp' 'predecessor-dist') -Filter '*.whl').FullName[0m
+2026-09-12T09:05:36.3934196Z [36;1m$successorWheel = (Get-ChildItem -LiteralPath (Join-Path '/home/runner/work/_temp' 'candidate-dist') -Filter '*.whl').FullName[0m
+2026-09-12T09:05:36.3934864Z [36;1m& $predecessorPython -m pip install --disable-pip-version-check --no-index --no-deps $predecessorWheel[0m
+2026-09-12T09:05:36.3935427Z [36;1m& $successorPython -m pip install --disable-pip-version-check --no-index --no-deps $successorWheel[0m
+2026-09-12T09:05:36.3970731Z shell: /usr/bin/pwsh -command ". '{0}'"
+2026-09-12T09:05:36.3970961Z env:
+2026-09-12T09:05:36.3971135Z   PREDECESSOR_VERSION: 0.17.0
+2026-09-12T09:05:36.3971501Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-12T09:05:36.3971939Z   REHEARSAL_HEAD_SHA: d6e9f8063dbee01dbb112f5cd2aef219def4e4cc
+2026-09-12T09:05:36.3972206Z   PYTHONNOUSERSITE: 1
+2026-09-12T09:05:36.3972392Z   PYTHONPATH: 
+2026-09-12T09:05:36.3972614Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:36.3972965Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-12T09:05:36.3973295Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:36.3973602Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:36.3973899Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:36.3974208Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-12T09:05:36.3974603Z ##[endgroup]
+2026-09-12T09:05:42.7923028Z Processing /home/runner/work/_temp/predecessor-dist/se_harness-0.17.0-py3-none-any.whl
+2026-09-12T09:05:42.8000541Z Installing collected packages: se-harness
+2026-09-12T09:05:42.9547134Z Successfully installed se-harness-0.17.0
+2026-09-12T09:05:43.2390577Z Processing /home/runner/work/_temp/candidate-dist/se_harness-0.18.0-py3-none-any.whl
+2026-09-12T09:05:43.2465815Z Installing collected packages: se-harness
+2026-09-12T09:05:43.4017550Z Successfully installed se-harness-0.18.0
+2026-09-12T09:05:43.4823714Z ##[group]Run # WO-ECP-010 (REQ-ECP-012, ECP-PRD-008): the successor's own upgrade --apply
+2026-09-12T09:05:43.4824231Z [36;1m# WO-ECP-010 (REQ-ECP-012, ECP-PRD-008): the successor's own upgrade --apply[0m
+2026-09-12T09:05:43.4824682Z [36;1m# against a throwaway export whose lock is the released predecessor's, judged[0m
+2026-09-12T09:05:43.4825098Z [36;1m# by both evaluators' doctor and by the resulting lock. No per-release[0m
+2026-09-12T09:05:43.4825492Z [36;1m# fixture, no network inside the rehearsal, no write to this checkout.[0m
+2026-09-12T09:05:43.4825990Z [36;1m$predecessorPython = Join-Path (Join-Path '/home/runner/work/_temp' 'predecessor-env') 'bin/python'[0m
+2026-09-12T09:05:43.4826526Z [36;1m$successorPython = Join-Path (Join-Path '/home/runner/work/_temp' 'successor-env') 'bin/python'[0m
+2026-09-12T09:05:43.4826974Z [36;1m$first = Join-Path '/home/runner/work/_temp' 'rehearsal-result-1'[0m
+2026-09-12T09:05:43.4827393Z [36;1m$second = Join-Path '/home/runner/work/_temp' 'rehearsal-result-2'[0m
+2026-09-12T09:05:43.4827769Z [36;1mpython -m repository_tools.upgrade_rehearsal --repository . `[0m
+2026-09-12T09:05:43.4828329Z [36;1m  --predecessor-python $predecessorPython --successor-python $successorPython --output $first --workspace $env:RUNNER_TEMP --timings[0m
+2026-09-12T09:05:43.4828899Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'first upgrade rehearsal failed' }[0m
+2026-09-12T09:05:43.4829273Z [36;1mpython -m repository_tools.upgrade_rehearsal --repository . `[0m
+2026-09-12T09:05:43.4829814Z [36;1m  --predecessor-python $predecessorPython --successor-python $successorPython --output $second --workspace $env:RUNNER_TEMP --timings[0m
+2026-09-12T09:05:43.4830542Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'second upgrade rehearsal failed' }[0m
+2026-09-12T09:05:43.4831061Z [36;1m$firstResult = Get-Content -Raw -LiteralPath (Join-Path $first 'upgrade-rehearsal-result.json') | ConvertFrom-Json[0m
+2026-09-12T09:05:43.4831685Z [36;1m$secondResult = Get-Content -Raw -LiteralPath (Join-Path $second 'upgrade-rehearsal-result.json') | ConvertFrom-Json[0m
+2026-09-12T09:05:43.4832321Z [36;1mif ($firstResult.semantic_sha256 -ne $secondResult.semantic_sha256) { throw 'upgrade rehearsal replay digest differs' }[0m
+2026-09-12T09:05:43.4832966Z [36;1mif ($firstResult.overall_result -ne 'pass' -or $secondResult.overall_result -ne 'pass') { throw 'upgrade rehearsal did not pass' }[0m
+2026-09-12T09:05:43.4868707Z shell: /usr/bin/pwsh -command ". '{0}'"
+2026-09-12T09:05:43.4868948Z env:
+2026-09-12T09:05:43.4869125Z   PREDECESSOR_VERSION: 0.17.0
+2026-09-12T09:05:43.4869515Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-12T09:05:43.4869949Z   REHEARSAL_HEAD_SHA: d6e9f8063dbee01dbb112f5cd2aef219def4e4cc
+2026-09-12T09:05:43.4870363Z   PYTHONNOUSERSITE: 1
+2026-09-12T09:05:43.4870571Z   PYTHONPATH: 
+2026-09-12T09:05:43.4870799Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:43.4871144Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-12T09:05:43.4871477Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:43.4871789Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:43.4872090Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:05:43.4872386Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-12T09:05:43.4872797Z ##[endgroup]
+2026-09-12T09:05:44.0783719Z upgrade timing: start replay
+2026-09-12T09:05:44.0790665Z upgrade timing: start git-archive
+2026-09-12T09:05:44.5181571Z upgrade timing: end git-archive: 0.438943s (finished)
+2026-09-12T09:05:44.5187054Z upgrade timing: start archive-extraction
+2026-09-12T09:05:46.2368297Z upgrade timing: end archive-extraction: 1.718008s (finished)
+2026-09-12T09:05:46.2372612Z upgrade timing: start git-init
+2026-09-12T09:05:46.2407201Z upgrade timing: end git-init: 0.003432s (finished)
+2026-09-12T09:05:46.2411510Z upgrade timing: start git-config-autocrlf
+2026-09-12T09:05:46.2427539Z upgrade timing: end git-config-autocrlf: 0.001591s (finished)
+2026-09-12T09:05:46.2431526Z upgrade timing: start git-config-email
+2026-09-12T09:05:46.2447356Z upgrade timing: end git-config-email: 0.001540s (finished)
+2026-09-12T09:05:46.2451057Z upgrade timing: start git-config-name
+2026-09-12T09:05:46.2466821Z upgrade timing: end git-config-name: 0.001543s (finished)
+2026-09-12T09:05:46.2470521Z upgrade timing: start git-config-signing
+2026-09-12T09:05:46.2486143Z upgrade timing: end git-config-signing: 0.001535s (finished)
+2026-09-12T09:05:46.2491925Z upgrade timing: start git-add
+2026-09-12T09:05:48.9090648Z upgrade timing: end git-add: 2.659708s (finished)
+2026-09-12T09:05:48.9095111Z upgrade timing: start git-commit
+2026-09-12T09:05:49.1030431Z upgrade timing: end git-commit: 0.193386s (finished)
+2026-09-12T09:05:49.1035912Z upgrade timing: start git-storage-paths
+2026-09-12T09:05:49.1054545Z upgrade timing: end git-storage-paths: 0.001833s (finished)
+2026-09-12T09:05:49.1109710Z upgrade timing: start predecessor-version
+2026-09-12T09:05:49.2266693Z upgrade timing: end predecessor-version: 0.115581s (finished)
+2026-09-12T09:05:49.2272999Z upgrade timing: start successor-version
+2026-09-12T09:05:49.3551549Z upgrade timing: end successor-version: 0.125956s (finished)
+2026-09-12T09:05:49.3558390Z upgrade timing: start predecessor-doctor-before
+2026-09-12T09:05:50.3886578Z upgrade timing: end predecessor-doctor-before: 1.033407s (finished)
+2026-09-12T09:05:50.3914759Z upgrade timing: start successor-upgrade-plan
+2026-09-12T09:05:50.5397493Z upgrade timing: end successor-upgrade-plan: 0.150179s (finished)
+2026-09-12T09:05:50.5408560Z upgrade timing: start successor-upgrade-apply
+2026-09-12T09:05:50.7510536Z upgrade timing: end successor-upgrade-apply: 0.210383s (finished)
+2026-09-12T09:05:50.7516700Z upgrade timing: start successor-doctor-after
+2026-09-12T09:05:51.4428531Z upgrade timing: end successor-doctor-after: 0.691051s (finished)
+2026-09-12T09:05:51.4435762Z upgrade timing: start successor-validate-after
+2026-09-12T09:05:52.3718055Z upgrade timing: end successor-validate-after: 0.928140s (finished)
+2026-09-12T09:05:52.3726656Z upgrade timing: start predecessor-doctor-after
+2026-09-12T09:05:53.0686423Z upgrade timing: end predecessor-doctor-after: 0.695877s (finished)
+2026-09-12T09:05:53.0696231Z upgrade timing: start scratch-cleanup
+2026-09-12T09:05:53.4049718Z upgrade timing: end scratch-cleanup: 0.335228s (finished)
+2026-09-12T09:05:53.4054388Z upgrade timing: end replay: 9.327129s (finished)
+2026-09-12T09:05:53.4061558Z upgrade rehearsal: PASS (0.17.0 -> 0.18.0)
+2026-09-12T09:05:53.4061933Z semantic_sha256: 40d9b37247d74a8eca11b292b2856f30f5e10ed9aedd2eaef3ccf1d692ec412c
+2026-09-12T09:05:53.4571318Z upgrade timing: start replay
+2026-09-12T09:05:53.4576493Z upgrade timing: start git-archive
+2026-09-12T09:05:53.8811581Z upgrade timing: end git-archive: 0.423351s (finished)
+2026-09-12T09:05:53.8879272Z upgrade timing: start archive-extraction
+2026-09-12T09:05:55.6070563Z upgrade timing: end archive-extraction: 1.718961s (finished)
+2026-09-12T09:05:55.6075426Z upgrade timing: start git-init
+2026-09-12T09:05:55.6111243Z upgrade timing: end git-init: 0.003554s (finished)
+2026-09-12T09:05:55.6115304Z upgrade timing: start git-config-autocrlf
+2026-09-12T09:05:55.6131648Z upgrade timing: end git-config-autocrlf: 0.001623s (finished)
+2026-09-12T09:05:55.6135634Z upgrade timing: start git-config-email
+2026-09-12T09:05:55.6152178Z upgrade timing: end git-config-email: 0.001593s (finished)
+2026-09-12T09:05:55.6155885Z upgrade timing: start git-config-name
+2026-09-12T09:05:55.6172287Z upgrade timing: end git-config-name: 0.001625s (finished)
+2026-09-12T09:05:55.6176297Z upgrade timing: start git-config-signing
+2026-09-12T09:05:55.6192262Z upgrade timing: end git-config-signing: 0.001578s (finished)
+2026-09-12T09:05:55.6196257Z upgrade timing: start git-add
+2026-09-12T09:05:58.2423809Z upgrade timing: end git-add: 2.622660s (finished)
+2026-09-12T09:05:58.2430143Z upgrade timing: start git-commit
+2026-09-12T09:05:58.4351324Z upgrade timing: end git-commit: 0.192047s (finished)
+2026-09-12T09:05:58.4362545Z upgrade timing: start git-storage-paths
+2026-09-12T09:05:58.4374695Z upgrade timing: end git-storage-paths: 0.001737s (finished)
+2026-09-12T09:05:58.4452292Z upgrade timing: start predecessor-version
+2026-09-12T09:05:58.5513389Z upgrade timing: end predecessor-version: 0.106031s (finished)
+2026-09-12T09:05:58.5615934Z upgrade timing: start successor-version
+2026-09-12T09:05:58.6966693Z upgrade timing: end successor-version: 0.134968s (finished)
+2026-09-12T09:05:58.6973952Z upgrade timing: start predecessor-doctor-before
+2026-09-12T09:05:59.6874503Z upgrade timing: end predecessor-doctor-before: 0.989952s (finished)
+2026-09-12T09:05:59.6886228Z upgrade timing: start successor-upgrade-plan
+2026-09-12T09:05:59.8353914Z upgrade timing: end successor-upgrade-plan: 0.146619s (finished)
+2026-09-12T09:05:59.8360176Z upgrade timing: start successor-upgrade-apply
+2026-09-12T09:06:00.3484622Z upgrade timing: end successor-upgrade-apply: 0.512314s (finished)
+2026-09-12T09:06:00.3489766Z upgrade timing: start successor-doctor-after
+2026-09-12T09:06:01.0416308Z upgrade timing: end successor-doctor-after: 0.692537s (finished)
+2026-09-12T09:06:01.0422500Z upgrade timing: start successor-validate-after
+2026-09-12T09:06:01.9525569Z upgrade timing: end successor-validate-after: 0.910164s (finished)
+2026-09-12T09:06:01.9532337Z upgrade timing: start predecessor-doctor-after
+2026-09-12T09:06:02.6483894Z upgrade timing: end predecessor-doctor-after: 0.695063s (finished)
+2026-09-12T09:06:02.6491151Z upgrade timing: start scratch-cleanup
+2026-09-12T09:06:02.7059230Z upgrade timing: end scratch-cleanup: 0.056715s (error)
+2026-09-12T09:06:02.7062052Z upgrade timing: end replay: 9.249121s (error)
+2026-09-12T09:06:02.7068138Z Traceback (most recent call last):
+2026-09-12T09:06:02.7074693Z   File "<frozen runpy>", line 198, in _run_module_as_main
+2026-09-12T09:06:02.7075379Z   File "<frozen runpy>", line 88, in _run_code
+2026-09-12T09:06:02.7076120Z   File "/home/runner/work/se_harness/se_harness/repository_tools/upgrade_rehearsal.py", line 439, in <module>
+2026-09-12T09:06:02.7076842Z     raise SystemExit(main())
+2026-09-12T09:06:02.7077194Z                      ^^^^^^
+2026-09-12T09:06:02.7077825Z   File "/home/runner/work/se_harness/se_harness/repository_tools/upgrade_rehearsal.py", line 416, in main
+2026-09-12T09:06:02.7078478Z     result = rehearse(
+2026-09-12T09:06:02.7090901Z              ^^^^^^^^^
+2026-09-12T09:06:02.7091718Z   File "/home/runner/work/se_harness/se_harness/repository_tools/upgrade_rehearsal.py", line 285, in rehearse
+2026-09-12T09:06:02.7092431Z     result = _rehearse(repository, predecessor_python, successor_python, output, runner, selected_workspace, timing)
+2026-09-12T09:06:02.7092912Z              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-12T09:06:02.7093428Z   File "/home/runner/work/se_harness/se_harness/repository_tools/upgrade_rehearsal.py", line 325, in _rehearse
+2026-09-12T09:06:02.7093860Z     with _scratch(workspace, timing) as scratch:
+2026-09-12T09:06:02.7094317Z   File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/contextlib.py", line 144, in __exit__
+2026-09-12T09:06:02.7115434Z     next(self.gen)
+2026-09-12T09:06:02.7116042Z   File "/home/runner/work/se_harness/se_harness/repository_tools/upgrade_rehearsal.py", line 138, in _scratch
+2026-09-12T09:06:02.7116976Z     temporary.__exit__(*sys.exc_info())
+2026-09-12T09:06:02.7117452Z   File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/tempfile.py", line 943, in __exit__
+2026-09-12T09:06:02.7362193Z     self.cleanup()
+2026-09-12T09:06:02.7362832Z   File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/tempfile.py", line 947, in cleanup
+2026-09-12T09:06:02.7363490Z     self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+2026-09-12T09:06:02.7364483Z   File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/tempfile.py", line 929, in _rmtree
+2026-09-12T09:06:02.7365005Z     _shutil.rmtree(name, onerror=onerror)
+2026-09-12T09:06:02.7365584Z   File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/shutil.py", line 752, in rmtree
+2026-09-12T09:06:02.7478081Z     _rmtree_safe_fd(fd, path, onerror)
+2026-09-12T09:06:02.7478704Z   File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/shutil.py", line 672, in _rmtree_safe_fd
+2026-09-12T09:06:02.7479356Z     _rmtree_safe_fd(dirfd, fullname, onerror)
+2026-09-12T09:06:02.7480002Z   File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/shutil.py", line 683, in _rmtree_safe_fd
+2026-09-12T09:06:02.7480778Z     onerror(os.rmdir, fullname, sys.exc_info())
+2026-09-12T09:06:02.7481393Z   File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/shutil.py", line 681, in _rmtree_safe_fd
+2026-09-12T09:06:02.7482013Z     os.rmdir(entry.name, dir_fd=topfd)
+2026-09-12T09:06:02.7482384Z OSError: [Errno 39] Directory not empty: '.git'
+2026-09-12T09:06:02.9485650Z [31;1mException: [0m/home/runner/work/_temp/18a6a889-0e47-426a-b61f-8a024d5ef250.ps1:15[0m
+2026-09-12T09:06:02.9486100Z [31;1m[0m[36;1mLine |[0m
+2026-09-12T09:06:02.9486546Z [31;1m[0m[36;1m[36;1m  15 | [0m if ($LASTEXITCODE -ne 0) { [36;1mthrow 'second upgrade rehearsal failed'[0m }[0m
+2026-09-12T09:06:02.9487104Z [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+2026-09-12T09:06:02.9487606Z [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1msecond upgrade rehearsal failed[0m
+2026-09-12T09:06:02.9843350Z ##[error]Process completed with exit code 1.
+2026-09-12T09:06:02.9904994Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-12T09:06:02.9906045Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+2026-09-12T09:06:02.9906351Z with:
+2026-09-12T09:06:02.9906537Z   name: upgrade-rehearsal-Linux
+2026-09-12T09:06:02.9907201Z   path: /home/runner/work/_temp/rehearsal-result-*/upgrade-rehearsal-result.json
+/home/runner/work/_temp/rehearsal-result-*/upgrade-rehearsal-timing.json
+/home/runner/work/_temp/upgrade-rehearsal-runtime.json
+
+2026-09-12T09:06:02.9907868Z   if-no-files-found: warn
+2026-09-12T09:06:02.9908069Z   compression-level: 6
+2026-09-12T09:06:02.9908254Z   overwrite: false
+2026-09-12T09:06:02.9908438Z   include-hidden-files: false
+2026-09-12T09:06:02.9908665Z env:
+2026-09-12T09:06:02.9908833Z   PREDECESSOR_VERSION: 0.17.0
+2026-09-12T09:06:02.9909176Z   PREDECESSOR_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-12T09:06:02.9909605Z   REHEARSAL_HEAD_SHA: d6e9f8063dbee01dbb112f5cd2aef219def4e4cc
+2026-09-12T09:06:02.9909878Z   PYTHONNOUSERSITE: 1
+2026-09-12T09:06:02.9910064Z   PYTHONPATH: 
+2026-09-12T09:06:02.9910501Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:06:02.9910852Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-12T09:06:02.9911183Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:06:02.9911486Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:06:02.9911783Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-12T09:06:02.9912247Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-12T09:06:02.9912507Z ##[endgroup]
+2026-09-12T09:06:03.1223258Z (node:2537) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-12T09:06:03.1223901Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-12T09:06:03.1311455Z With the provided path, there will be 4 files uploaded
+2026-09-12T09:06:03.1312065Z Artifact name is valid!
+2026-09-12T09:06:03.1312276Z Root directory input is valid!
+2026-09-12T09:06:03.4647728Z Beginning upload of artifact content to blob storage
+2026-09-12T09:06:03.4821736Z (node:2537) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-12T09:06:03.7129629Z Uploaded bytes 4195
+2026-09-12T09:06:03.7772542Z Finished uploading artifact content to blob storage!
+2026-09-12T09:06:03.7773058Z SHA256 digest of uploaded artifact zip is 27af60047e4d83d41778a7e5da7982fe299b124e474b10d69b24010ed25dc2cd
+2026-09-12T09:06:03.7774479Z Finalizing artifact upload
+2026-09-12T09:06:04.0227607Z Artifact upgrade-rehearsal-Linux.zip successfully finalized. Artifact ID 10294754701
+2026-09-12T09:06:04.0228612Z Artifact upgrade-rehearsal-Linux has been successfully uploaded! Final size is 4195 bytes. Artifact ID is 10294754701
+2026-09-12T09:06:04.0233900Z Artifact download URL: https://github.com/mmzen/se_harness/actions/runs/34684852297/artifacts/10294754701
+2026-09-12T09:06:04.0392816Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-12T09:06:04.0393788Z Post job cleanup.
+2026-09-12T09:06:04.1051480Z [command]/usr/bin/git version
+2026-09-12T09:06:04.1084428Z git version 2.55.0
+2026-09-12T09:06:04.1143009Z Temporarily overriding HOME='/home/runner/work/_temp/e66d34d4-385c-4bad-a97f-6110a2b04bcd' before making global git config changes
+2026-09-12T09:06:04.1144095Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-12T09:06:04.1147541Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/se_harness/se_harness
+2026-09-12T09:06:04.1177450Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-12T09:06:04.1206511Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-12T09:06:04.1437590Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-12T09:06:04.1468208Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-12T09:06:04.1698269Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-12T09:06:04.1731668Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-12T09:06:04.2068864Z Evaluate and set job outputs
+2026-09-12T09:06:04.2074877Z Cleaning up orphan processes
+2026-09-12T09:06:04.2297774Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

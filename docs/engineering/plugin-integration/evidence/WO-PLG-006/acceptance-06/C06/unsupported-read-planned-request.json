@@ -1,0 +1,53 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "--setting-sources",
+    "user",
+    "--settings",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\C06\\unsupported-read-settings.json",
+    "--plugin-dir",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\accepted assembly\\claude\\verity-plane",
+    "--strict-mcp-config",
+    "--mcp-config",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\C06\\empty-mcp.json",
+    "--debug-file",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\C06\\unsupported-read.debug.txt",
+    "-p",
+    "Use Read once to read exactly C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt. Then stop.",
+    "--tools",
+    "Read",
+    "--permission-mode",
+    "manual",
+    "--permission-prompts",
+    "none",
+    "--max-turns",
+    "3",
+    "--max-budget-usd",
+    "1.50",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--include-hook-events",
+    "--session-id",
+    "5c8753a7-904e-4e94-82a5-18909fc6c848",
+    "--allowedTools",
+    "Read"
+  ],
+  "prompt": "Use Read once to read exactly C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt. Then stop.",
+  "tools": "Read",
+  "allowed_tools": [
+    "Read"
+  ],
+  "settings": {
+    "disableAllHooks": false
+  },
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\disposable repository",
+  "destination": "api.anthropic.com/v1/messages through official Claude Code",
+  "profile_instruction_files_present": [],
+  "loaded_hook_sha256": "6439357461262516af3914241b8054d33240bc4d34e516b2c9de2bc57d566390",
+  "target_before": {
+    "governed-target.txt": "0a1f24d49e1620655adfbf9790ea35f0a7bda4df3b86c046869d461279e8cbc9",
+    "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+  },
+  "authorization": "[REDACTED]"
+}

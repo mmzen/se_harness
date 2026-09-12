@@ -1,0 +1,130 @@
+$ErrorActionPreference = 'Stop'
+[Console]::InputEncoding = New-Object Text.UTF8Encoding($false)
+[Console]::OutputEncoding = New-Object Text.UTF8Encoding($false)
+$started = [Diagnostics.Stopwatch]::StartNew()
+$kind = 'SessionStart'
+$covered = $false
+$invoked = $false
+$record = [ordered]@{ adapter='verity-plane-claude-v1'; status='unready'; interpreter_invoked=$false; entered_monotonic=([Diagnostics.Stopwatch]::GetTimestamp() / [double][Diagnostics.Stopwatch]::Frequency) }
+function Envelope([string]$message, [bool]$deny) {
+  if ($kind -eq 'SessionStart') { return @{hookSpecificOutput=@{hookEventName='SessionStart';additionalContext=$message}} }
+  if ($deny) { return @{hookSpecificOutput=@{hookEventName='PreToolUse';permissionDecision='deny';permissionDecisionReason=$message}} }
+  return @{hookSpecificOutput=@{hookEventName='PreToolUse';additionalContext=$message}}
+}
+function Absolute([string]$value) {
+  if ([string]::IsNullOrWhiteSpace($value) -or $value -match '(^|[\\/])\.\.([\\/]|$)' -or $value -match '[\x00-\x1f]' -or $value -match '^[\\/]{2}[?.][\\/]') { throw 'Select an absolute ordinary binding path.' }
+  $pathRoot = [IO.Path]::GetPathRoot($value)
+  if ($pathRoot -notmatch '^[A-Za-z]:[\\/]$' -and $pathRoot -notmatch '^[\\/]{2}[^\\/]+[\\/][^\\/]+[\\/]?$') { throw 'Select a fully qualified ordinary binding path; drive-relative and root-relative paths are unsupported.' }
+  $p = [IO.Path]::GetFullPath($value)
+  $walk = $p
+  while ($walk) {
+    if (Test-Path -LiteralPath $walk) { if ((Get-Item -Force -LiteralPath $walk).Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Linked binding paths are unsupported.' } }
+    $walk = [IO.Path]::GetDirectoryName($walk)
+  }
+  return $p
+}
+function QuoteArgument([string]$value) {
+  return '"' + ([regex]::Replace([regex]::Replace($value, '(\\*)"', '$1$1\"'), '(\\+)$', '$1$1')) + '"'
+}
+try {
+  $raw = [Console]::In.ReadToEnd()
+  if ([Text.Encoding]::UTF8.GetByteCount($raw) -gt 65536) { throw 'Event exceeds the bounded input limit.' }
+  $event = $raw | ConvertFrom-Json
+  if ($event.hook_event_name -ne $kind) { throw 'Payload does not match the registered host event.' }
+  if ($kind -eq 'PreToolUse') {
+    if (-not ($event.tool_name -is [string]) -or [string]::IsNullOrWhiteSpace($event.tool_name)) { throw 'Required tool name is missing or malformed.' }
+    $covered=$event.tool_name -in @('Write','Edit')
+  }
+  $record.event=$kind
+  $record.tool_use_id=$event.tool_use_id
+  $record.tool_name=$event.tool_name
+  if ($kind -eq 'PreToolUse' -and -not $covered) {
+    $response = Envelope 'UNREADY COVERAGE GAP: this tool has no evaluator mapping. Ordinary host permissions and already-authorized setup access remain in force. No governance check succeeded.' $false
+  } else {
+    $configPath = Absolute $env:VERITY_PLANE_CLAUDE_BINDING
+    if (-not (Test-Path -LiteralPath $configPath -PathType Leaf) -or (Get-Item -LiteralPath $configPath).Length -gt 16384) { throw 'Select the bounded binding JSON after package acceptance.' }
+    $config = Get-Content -Raw -LiteralPath $configPath | ConvertFrom-Json
+    if ($config.schema -ne 'verity-plane-claude-binding-v1' -or $config.decision -ne 'DEC-PLG-002:prove-supported-route' -or $config.host_version -ne '2.1.266' -or $config.python_version -ne '3.14.6' -or $config.version -ne '0.16.0' -or [Environment]::OSVersion.Platform -ne 'Win32NT') { throw 'Unsupported or unaccepted activation profile.' }
+    if ($config.payload_sha256 -ne '51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c' -or $config.archive_sha256 -ne 'a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae') { throw 'Expected evaluator identity differs from the accepted release.' }
+    $hostPath = Absolute $config.host_executable
+    if ((Get-Item -LiteralPath $hostPath).VersionInfo.FileVersion -ne '2.1.266.0' -or (Get-FileHash -Algorithm SHA256 -LiteralPath $hostPath).Hash.ToLowerInvariant() -cne $config.host_sha256) { throw 'The selected Claude executable changed or is unsupported.' }
+    $repo = Absolute $config.repo
+    $environment = Absolute $config.environment
+    $root = Absolute $env:CLAUDE_PLUGIN_ROOT
+    if ((Absolute $event.cwd) -ne $repo) { throw 'Host event repository differs from explicit binding.' }
+    if ($configPath.StartsWith($repo + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase) -or $configPath.StartsWith($root + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) { throw 'Keep selected binding outside the repository and plugin payload.' }
+    $python = Join-Path $environment 'Scripts/python.exe'
+    if (-not (Test-Path -LiteralPath $python -PathType Leaf)) { throw 'SETUP REQUIRED: selected environment Python is absent. Use the shared setup skill; no interpreter was invoked.' }
+    Absolute $python | Out-Null
+    if ((Get-Content -Raw -LiteralPath (Join-Path $environment 'pyvenv.cfg')) -notmatch '(?m)^version = 3\.14\.6\r?$') { throw 'The selected Python profile is unqualified.' }
+    $versionCommand='import sys; print(sys.version.split()[0])'
+    $record.profile_argv=@($python,'-I','-B','-c',$versionCommand)
+    $record.interpreter_invoked=$true
+    $actualPython=& $python -I -B -c $versionCommand
+    if ($LASTEXITCODE -ne 0 -or ($actualPython -join "`n").Trim() -cne '3.14.6') { throw 'The actual environment interpreter is outside the accepted Python profile.' }
+    $record.observed_python='3.14.6'
+    if ($config.artifact -notmatch '^WO-[A-Z0-9]+-[0-9]+$') { throw 'Select an explicit work order; no work authority is inferred.' }
+    if ($config.context_limit -ne 32768 -or $config.read_limit -ne 0 -or $config.host_timeout -ne 60 -or $config.inner_timeout -ne 35 -or $config.startup_margin -ne 5 -or $config.cleanup_margin -ne 5 -or $config.output_margin -ne 5) { throw 'Unsupported transport capacities or timing binding.' }
+    $scriptName = if ($kind -eq 'SessionStart') {'session-context.py'} else {'check-tool-action.py'}
+    $script = Absolute (Join-Path $root ('scripts/' + $scriptName))
+    if (-not (Test-Path -LiteralPath $script -PathType Leaf)) { throw 'Required shared script is absent.' }
+    $argv = @('-I','-B',$script,'--repo',$repo,'--environment',$environment,'--version',$config.version,'--payload-sha256',$config.payload_sha256,'--archive-sha256',$config.archive_sha256,'--host','claude')
+    if ($kind -eq 'SessionStart') { $argv += @('--context-limit','32768','--read-limit','0') }
+    else { $argv += @('--artifact',$config.artifact,'--refusal-mode','deny','--host-timeout','60','--inner-timeout','35','--startup-margin','5','--cleanup-margin','5','--output-margin','5') }
+    $start = New-Object Diagnostics.ProcessStartInfo
+    $start.FileName=$python
+    $start.Arguments=($argv | ForEach-Object { QuoteArgument ([string]$_) }) -join ' '
+    $start.WorkingDirectory=[IO.Path]::GetDirectoryName($repo)
+    $start.UseShellExecute=$false
+    $start.CreateNoWindow=$true
+    $start.RedirectStandardInput=$true
+    $start.RedirectStandardOutput=$true
+    $start.RedirectStandardError=$true
+    $utf8 = New-Object Text.UTF8Encoding($false)
+    $start.StandardOutputEncoding=$utf8
+    $start.StandardErrorEncoding=$utf8
+    $start.EnvironmentVariables.Remove('PYTHONPATH')
+    $start.EnvironmentVariables.Remove('PYTHONHOME')
+    $start.EnvironmentVariables['PATH']=(Join-Path $environment 'Scripts') + ';' + $start.EnvironmentVariables['PATH']
+    $process = New-Object Diagnostics.Process
+    $process.StartInfo=$start
+    $record.argv=@($python) + $argv
+    $record.script_start_ms=$started.Elapsed.TotalMilliseconds
+    if (-not $process.Start()) { throw 'Shared script could not start.' }
+    $record.interpreter_invoked=$true
+    $outTask=$process.StandardOutput.ReadToEndAsync()
+    $errTask=$process.StandardError.ReadToEndAsync()
+    $inputBytes=$utf8.GetBytes($raw)
+    $process.StandardInput.BaseStream.Write($inputBytes, 0, $inputBytes.Length)
+    $process.StandardInput.Close()
+    $process.WaitForExit()
+    $output=$outTask.Result
+    $errors=$errTask.Result
+    $record.script_exit=$process.ExitCode
+    $record.script_end_ms=$started.Elapsed.TotalMilliseconds
+    [Console]::Error.Write($errors)
+    if ($process.ExitCode -ne 0 -or [string]::IsNullOrWhiteSpace($output) -or [Text.Encoding]::UTF8.GetByteCount($output) -gt 4194304) { throw 'Shared script failed or returned missing/oversized output; inspect actual effects if refusal is absent.' }
+    $response=$output | ConvertFrom-Json
+    if (@($response.PSObject.Properties.Name).Count -ne 1 -or $response.PSObject.Properties.Name -ne 'hookSpecificOutput') { throw 'Shared script returned unexpected top-level host controls.' }
+    $specific=$response.hookSpecificOutput
+    if ($specific.hookEventName -ne $kind) { throw 'Shared script returned an invalid host envelope.' }
+    $expectedFields=@('hookEventName','additionalContext')
+    if ($kind -eq 'PreToolUse' -and $specific.permissionDecision -eq 'deny') { $expectedFields=@('hookEventName','permissionDecision','permissionDecisionReason') }
+    if (Compare-Object @($specific.PSObject.Properties.Name | Sort-Object) @($expectedFields | Sort-Object)) { throw 'Shared script returned unexpected event controls.' }
+    if ($kind -eq 'SessionStart') {
+      if (-not ($specific.additionalContext -is [string]) -or [string]::IsNullOrWhiteSpace($specific.additionalContext)) { throw 'Shared script returned missing context.' }
+    } elseif ($specific.permissionDecision -eq 'deny') {
+      if (-not ($specific.permissionDecisionReason -is [string]) -or [string]::IsNullOrWhiteSpace($specific.permissionDecisionReason)) { throw 'Shared script returned a missing denial reason.' }
+    } elseif ($specific.permissionDecision -or -not ($specific.additionalContext -is [string]) -or [string]::IsNullOrWhiteSpace($specific.additionalContext)) { throw 'Shared script returned an invalid permission response.' }
+    $record.status='shared-response'
+    $record.response=$response
+    $process.Dispose()
+  }
+} catch {
+  $record.error=$_.Exception.Message
+  $response=Envelope ('UNREADY: ' + $_.Exception.Message + ' No successful governance check is claimed. Ordinary setup permissions remain in force.') ($kind -eq 'PreToolUse' -and $covered)
+}
+$record.finished_ms=$started.Elapsed.TotalMilliseconds
+[Console]::Out.WriteLine(($response | ConvertTo-Json -Compress -Depth 12))
+$record.response_written_monotonic=([Diagnostics.Stopwatch]::GetTimestamp() / [double][Diagnostics.Stopwatch]::Frequency)
+[Console]::Error.WriteLine(($record | ConvertTo-Json -Compress -Depth 12))

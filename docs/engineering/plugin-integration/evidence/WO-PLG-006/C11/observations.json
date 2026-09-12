@@ -1,0 +1,1021 @@
+{
+  "expected": "Inspect target effects when guard startup/output is missing; missing refusal never establishes protection.",
+  "observed": {
+    "variants": [
+      {
+        "tool_calls": 1,
+        "exact_requested_write": true,
+        "tool_uses": [
+          {
+            "type": "tool_use",
+            "id": "toolu_01QZUMJP1rk3osaxRdPdDnfr",
+            "name": "Write",
+            "input": {
+              "file_path": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt",
+              "content": "effect-launch-failed\n"
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ],
+        "tool_results": [
+          {
+            "tool_use_id": "toolu_01QZUMJP1rk3osaxRdPdDnfr",
+            "type": "tool_result",
+            "content": "The file C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+          }
+        ],
+        "correlated_hooks": [],
+        "target_before": "20db5b25449ad2fd7de6eb4e4d9ebc2185f4121e7ef230557470893fd9e463e7",
+        "target_after": "f15def18080c4d62ad8b1b235d4da535c165f8ac66095cc80e66efaa771f32be",
+        "effect_count": 1,
+        "final_state_changed": true,
+        "exact_expected_content": true,
+        "independent_effect_observer": "outer runner SHA256 before process launch and after host exit",
+        "effect_count_basis": "host-correlated Write results; final state independently checked; no whole-session filesystem audit",
+        "denial_observed": false,
+        "mode": "launch-failed",
+        "blocking_control": "none observed",
+        "classification": "unqualified when required denial absent"
+      },
+      {
+        "tool_calls": 1,
+        "exact_requested_write": true,
+        "tool_uses": [
+          {
+            "type": "tool_use",
+            "id": "toolu_01ENtgigvrFFwt4GmEctmyT7",
+            "name": "Write",
+            "input": {
+              "file_path": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt",
+              "content": "effect-missing-output\n"
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ],
+        "tool_results": [
+          {
+            "tool_use_id": "toolu_01ENtgigvrFFwt4GmEctmyT7",
+            "type": "tool_result",
+            "content": "The file C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+          }
+        ],
+        "correlated_hooks": [],
+        "target_before": "f15def18080c4d62ad8b1b235d4da535c165f8ac66095cc80e66efaa771f32be",
+        "target_after": "253ab542f41481a0fadb5275b002ec2afaadbe2dca0227c5a01c78eb9ce8dd2b",
+        "effect_count": 1,
+        "final_state_changed": true,
+        "exact_expected_content": true,
+        "independent_effect_observer": "outer runner SHA256 before process launch and after host exit",
+        "effect_count_basis": "host-correlated Write results; final state independently checked; no whole-session filesystem audit",
+        "denial_observed": false,
+        "mode": "missing-output",
+        "blocking_control": "none observed",
+        "classification": "unqualified when required denial absent"
+      },
+      {
+        "tool_calls": 1,
+        "exact_requested_write": true,
+        "tool_uses": [
+          {
+            "type": "tool_use",
+            "id": "toolu_01XBaHVgxFL4gfnNfaGDvP2S",
+            "name": "Write",
+            "input": {
+              "file_path": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt",
+              "content": "effect-invalid-output\n"
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ],
+        "tool_results": [
+          {
+            "tool_use_id": "toolu_01XBaHVgxFL4gfnNfaGDvP2S",
+            "type": "tool_result",
+            "content": "The file C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+          }
+        ],
+        "correlated_hooks": [],
+        "target_before": "253ab542f41481a0fadb5275b002ec2afaadbe2dca0227c5a01c78eb9ce8dd2b",
+        "target_after": "a1d73198c43eb4003978c8574befddc64999c02de5b8cf92fc79ad1e46356aaa",
+        "effect_count": 1,
+        "final_state_changed": true,
+        "exact_expected_content": true,
+        "independent_effect_observer": "outer runner SHA256 before process launch and after host exit",
+        "effect_count_basis": "host-correlated Write results; final state independently checked; no whole-session filesystem audit",
+        "denial_observed": false,
+        "mode": "invalid-output",
+        "blocking_control": "none observed",
+        "classification": "unqualified when required denial absent"
+      },
+      {
+        "tool_calls": 1,
+        "exact_requested_write": true,
+        "tool_uses": [
+          {
+            "type": "tool_use",
+            "id": "toolu_01W5RdgrT7D74cwh1YXpUH9b",
+            "name": "Write",
+            "input": {
+              "file_path": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt",
+              "content": "effect-guard-removed-after-readiness\n"
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ],
+        "tool_results": [
+          {
+            "tool_use_id": "toolu_01W5RdgrT7D74cwh1YXpUH9b",
+            "type": "tool_result",
+            "content": "The file C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+          }
+        ],
+        "correlated_hooks": [],
+        "target_before": "a1d73198c43eb4003978c8574befddc64999c02de5b8cf92fc79ad1e46356aaa",
+        "target_after": "7306fd1e0f87d011fbefa4b7a9d1a31ea0c8f74c8e6389ee880e2aa9fe45b0ba",
+        "effect_count": 1,
+        "final_state_changed": true,
+        "exact_expected_content": true,
+        "independent_effect_observer": "outer runner SHA256 before process launch and after host exit",
+        "effect_count_basis": "host-correlated Write results; final state independently checked; no whole-session filesystem audit",
+        "denial_observed": false
+      }
+    ],
+    "guard_removal_after_readiness": {
+      "readiness_receipts": [
+        {
+          "hook_id": "15a5a8bf-9d35-4ce0-b58d-9f8d678f9448",
+          "hook_name": "SessionStart:startup",
+          "complete_received": true,
+          "expected_body_sha256": "4acfdb74302c60a6342461b2287333478175ffbdd8a4a2ac4c5be43ce9cea7cd",
+          "received_context_sha256": "2a4aa89d34ad3a918c45c1b5b58cac8c2cd2b0647241b8a70c190147ad2f6457",
+          "received_utf8_bytes": 7902,
+          "recognized_context_lengths": [
+            7902
+          ],
+          "argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "-B",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\C11\\guard removed after readiness\\scripts\\session-context.py",
+            "--repo",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\disposable repository",
+            "--environment",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator",
+            "--version",
+            "0.16.0",
+            "--payload-sha256",
+            "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+            "--archive-sha256",
+            "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+            "--host",
+            "claude",
+            "--context-limit",
+            "32768",
+            "--read-limit",
+            "0"
+          ],
+          "checks": [
+            {
+              "status": "complete-output-prepared",
+              "delivery": "hook",
+              "gate_sha256": "14eb824b75f61bff70bd3588da65faf699569e8c2097cbbf4964052cb2ce5a50",
+              "router_sha256": "18b8535a5cf4fb71255dcc910739eaa295aebcc45c28ba2529ef5d5ce7bf2705",
+              "body_sha256": "4acfdb74302c60a6342461b2287333478175ffbdd8a4a2ac4c5be43ce9cea7cd",
+              "gate_bytes": 1110,
+              "router_bytes": 6408,
+              "checks": [
+                {
+                  "argv": [
+                    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator\\Scripts\\python.exe",
+                    "-I",
+                    "-B",
+                    "-m",
+                    "se_harness",
+                    "identity",
+                    "--role",
+                    "released-evaluator",
+                    "--expected-version",
+                    "0.16.0",
+                    "--expected-root",
+                    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator",
+                    "--checkout-root",
+                    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\disposable repository",
+                    "--entry-point",
+                    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator\\Scripts\\harnessctl.exe",
+                    "--require-entry-point",
+                    "--require-isolated-python",
+                    "--evaluator-payload-sha256",
+                    "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+                    "--evaluator-wheel-sha256",
+                    "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+                    "--json"
+                  ],
+                  "exit_status": 0,
+                  "started_monotonic": 243100.0666104,
+                  "finished_monotonic": 243100.5585594,
+                  "result": {
+                    "candidate_commit": null,
+                    "checkout_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\disposable repository",
+                    "diagnostics": [],
+                    "distribution_origin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator\\Lib\\site-packages",
+                    "entry_point_origin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator\\Scripts\\harnessctl.exe",
+                    "evaluator_archive_name": "se_harness-0.16.0-py3-none-any.whl",
+                    "evaluator_archive_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+                    "evaluator_payload_manifest": "se-harness-installed-payload-v1",
+                    "evaluator_payload_sha256": "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+                    "evaluator_wheel_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+                    "expected_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator",
+                    "harness_version": "0.16.0",
+                    "isolated_python": true,
+                    "module_origin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator\\Lib\\site-packages\\se_harness\\runtime_identity.py",
+                    "passed": true,
+                    "python_binary_position": "within-expected-root",
+                    "python_binary_sha256": "199ce15a9f0d4f9522edba59338e4879d28cf61f88e377b8164bcb716275ed22",
+                    "python_entry_is_link": false,
+                    "python_executable": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator\\Scripts\\python.exe",
+                    "python_version": "3.14.6",
+                    "pythonpath_present": false,
+                    "role": "released-evaluator",
+                    "schema": "se-harness-runtime-identity-v3",
+                    "template_origin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator\\share\\se-harness\\templates\\repository\\standard",
+                    "user_site_enabled": false
+                  },
+                  "stderr": ""
+                },
+                {
+                  "argv": [
+                    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator\\Scripts\\python.exe",
+                    "-I",
+                    "-B",
+                    "-m",
+                    "se_harness",
+                    "doctor",
+                    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\disposable repository",
+                    "--json"
+                  ],
+                  "exit_status": 0,
+                  "started_monotonic": 243100.5585921,
+                  "finished_monotonic": 243101.3378854,
+                  "result": {
+                    "checks": [
+                      {
+                        "detail": "required",
+                        "name": "AGENTS.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "required",
+                        "name": "CLAUDE.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "required",
+                        "name": "ENGINEERING_HARNESS.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "@AGENTS.md",
+                        "name": "claude-import",
+                        "passed": true
+                      },
+                      {
+                        "detail": ".engineering-harness.toml",
+                        "name": "config",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:.agents/skills/harness-operator-brief/SKILL.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:.agents/skills/harness-operator-brief/scripts/check_brief.py",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:.agents/skills/harness-operator-brief/skill-contract.json",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:.agents/skills/harness-orient/SKILL.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:.agents/skills/harness-orient/scripts/orient.py",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:.agents/skills/harness-orient/skill-contract.json",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:.claude/skills/harness-orient/SKILL.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:.engineering-harness.toml",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:.gitattributes",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:.github/workflows/engineering-harness.yml",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:.gitignore",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:AGENTS.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:CLAUDE.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:ENGINEERING_HARNESS.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/ARTIFACT_AUTHORING.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/DECISION_RIGHTS.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/OPERATING_CARD.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/QUALITY_GATES.json",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/QUALITY_GATES.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/TECHNICAL_COMMUNICATION.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/TRACEABILITY.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/WORKFLOW.json",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/WORKFLOW.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/templates/ADR.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/templates/ARCHITECTURE.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/templates/CAPABILITY.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/templates/DECISION.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/templates/INTENT.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/templates/OPERATING_CONTRACT.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/templates/README.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/templates/RELEASE_CONTRACT.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/templates/RELEASE_RECORD.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/templates/REQUIREMENT.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/templates/SPECIFICATION.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/templates/VERIFICATION.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/templates/VERIFICATION_RECORD.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "matches distribution",
+                        "name": "distribution:docs/engineering/templates/WORK_ORDER.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "required",
+                        "name": "docs/engineering/ARTIFACT_AUTHORING.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "required",
+                        "name": "docs/engineering/DECISION_RIGHTS.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "required",
+                        "name": "docs/engineering/OPERATING_CARD.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "required",
+                        "name": "docs/engineering/QUALITY_GATES.json",
+                        "passed": true
+                      },
+                      {
+                        "detail": "required",
+                        "name": "docs/engineering/QUALITY_GATES.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "required",
+                        "name": "docs/engineering/README.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "required",
+                        "name": "docs/engineering/TECHNICAL_COMMUNICATION.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "required",
+                        "name": "docs/engineering/TRACEABILITY.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "required",
+                        "name": "docs/engineering/WORKFLOW.json",
+                        "passed": true
+                      },
+                      {
+                        "detail": "required",
+                        "name": "docs/engineering/WORKFLOW.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": ".engineering-harness.lock",
+                        "name": "lock",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:.agents/skills/harness-operator-brief/SKILL.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:.agents/skills/harness-operator-brief/scripts/check_brief.py",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:.agents/skills/harness-operator-brief/skill-contract.json",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:.agents/skills/harness-orient/SKILL.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:.agents/skills/harness-orient/scripts/orient.py",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:.agents/skills/harness-orient/skill-contract.json",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:.claude/skills/harness-orient/SKILL.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:.engineering-harness.toml",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:.gitattributes",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:.github/workflows/engineering-harness.yml",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:.gitignore",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:AGENTS.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:CLAUDE.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:ENGINEERING_HARNESS.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/ARTIFACT_AUTHORING.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/DECISION_RIGHTS.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/OPERATING_CARD.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/QUALITY_GATES.json",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/QUALITY_GATES.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/TECHNICAL_COMMUNICATION.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/TRACEABILITY.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/WORKFLOW.json",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/WORKFLOW.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/templates/ADR.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/templates/ARCHITECTURE.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/templates/CAPABILITY.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/templates/DECISION.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/templates/INTENT.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/templates/OPERATING_CONTRACT.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/templates/README.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/templates/RELEASE_CONTRACT.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/templates/RELEASE_RECORD.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/templates/REQUIREMENT.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/templates/SPECIFICATION.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/templates/VERIFICATION.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/templates/VERIFICATION_RECORD.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "unchanged",
+                        "name": "managed:docs/engineering/templates/WORK_ORDER.template.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "3.14.6",
+                        "name": "python",
+                        "passed": true
+                      },
+                      {
+                        "detail": "present",
+                        "name": "seed:.github/PULL_REQUEST_TEMPLATE.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "present",
+                        "name": "seed:GLOSSARY.md",
+                        "passed": true
+                      },
+                      {
+                        "detail": "present",
+                        "name": "seed:docs/engineering/README.md",
+                        "passed": true
+                      }
+                    ],
+                    "command": "doctor",
+                    "outcome": "completed",
+                    "schema": "se-harness-command-result-v1",
+                    "warnings": []
+                  },
+                  "stderr": ""
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "binding_removal": {
+        "before_sha256": "6439357461262516af3914241b8054d33240bc4d34e516b2c9de2bc57d566390",
+        "after_sha256": "c5b71d757b6ef8a0d9224d66e1a6ba73209310eb7799db180677dd3f7b7e830a",
+        "removed": "inline PreToolUse binding",
+        "removed_monotonic": 243106.216495,
+        "activation_boundary": "readiness session ended; binding removed before the next native activation; no same-process hot-reload claim"
+      },
+      "effect": {
+        "tool_calls": 1,
+        "exact_requested_write": true,
+        "tool_uses": [
+          {
+            "type": "tool_use",
+            "id": "toolu_01W5RdgrT7D74cwh1YXpUH9b",
+            "name": "Write",
+            "input": {
+              "file_path": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt",
+              "content": "effect-guard-removed-after-readiness\n"
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ],
+        "tool_results": [
+          {
+            "tool_use_id": "toolu_01W5RdgrT7D74cwh1YXpUH9b",
+            "type": "tool_result",
+            "content": "The file C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+          }
+        ],
+        "correlated_hooks": [],
+        "target_before": "a1d73198c43eb4003978c8574befddc64999c02de5b8cf92fc79ad1e46356aaa",
+        "target_after": "7306fd1e0f87d011fbefa4b7a9d1a31ea0c8f74c8e6389ee880e2aa9fe45b0ba",
+        "effect_count": 1,
+        "final_state_changed": true,
+        "exact_expected_content": true,
+        "independent_effect_observer": "outer runner SHA256 before process launch and after host exit",
+        "effect_count_basis": "host-correlated Write results; final state independently checked; no whole-session filesystem audit",
+        "denial_observed": false
+      }
+    }
+  },
+  "conclusion": "fail",
+  "qualified": false,
+  "exit_status": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "source_evidence": [
+    "acceptance-06/C11/actions.txt",
+    "acceptance-06/C11/stdout.txt",
+    "acceptance-06/C11/stderr.txt",
+    "acceptance-06/C11/commands.json",
+    "acceptance-06/C11/observations.json"
+  ],
+  "capture_policy": "sanitized public observations; raw host debug stays in disposable sandbox",
+  "wire_assessment": {
+    "source": "native system/hook_response stdout+stderr and correlated tool_use/tool_result objects",
+    "qualification": false,
+    "case": "C11",
+    "observations": [
+      {
+        "uses": [
+          {
+            "type": "tool_use",
+            "id": "toolu_01QZUMJP1rk3osaxRdPdDnfr",
+            "name": "Write",
+            "input": {
+              "file_path": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt",
+              "content": "effect-launch-failed\n"
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ],
+        "results": [
+          {
+            "tool_use_id": "toolu_01QZUMJP1rk3osaxRdPdDnfr",
+            "type": "tool_result",
+            "content": "The file C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+          }
+        ],
+        "decisions": [],
+        "exact_requested_write": true,
+        "native_Write_hooks": [
+          {
+            "id": "530e21e2-2030-4dec-b69e-7f04381c9698",
+            "outcome": "error",
+            "exit": 1,
+            "output": {},
+            "elapsed_seconds": 0.2761150000151247
+          }
+        ],
+        "target_key": "governed-target.txt",
+        "expected_sha256": "f15def18080c4d62ad8b1b235d4da535c165f8ac66095cc80e66efaa771f32be",
+        "expected_target_effect": true,
+        "successful_Write_results": 1,
+        "final_target_hashes_before": {
+          "governed-target.txt": "20db5b25449ad2fd7de6eb4e4d9ebc2185f4121e7ef230557470893fd9e463e7",
+          "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+        },
+        "final_target_hashes_after": {
+          "governed-target.txt": "f15def18080c4d62ad8b1b235d4da535c165f8ac66095cc80e66efaa771f32be",
+          "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+        }
+      },
+      {
+        "uses": [
+          {
+            "type": "tool_use",
+            "id": "toolu_01ENtgigvrFFwt4GmEctmyT7",
+            "name": "Write",
+            "input": {
+              "file_path": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt",
+              "content": "effect-missing-output\n"
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ],
+        "results": [
+          {
+            "tool_use_id": "toolu_01ENtgigvrFFwt4GmEctmyT7",
+            "type": "tool_result",
+            "content": "The file C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+          }
+        ],
+        "decisions": [],
+        "exact_requested_write": true,
+        "native_Write_hooks": [
+          {
+            "id": "9ed5de8c-c09e-4e53-93d6-039b5145d113",
+            "outcome": "success",
+            "exit": 0,
+            "output": {},
+            "elapsed_seconds": 0.20767309999791905
+          }
+        ],
+        "target_key": "governed-target.txt",
+        "expected_sha256": "253ab542f41481a0fadb5275b002ec2afaadbe2dca0227c5a01c78eb9ce8dd2b",
+        "expected_target_effect": true,
+        "successful_Write_results": 1,
+        "final_target_hashes_before": {
+          "governed-target.txt": "f15def18080c4d62ad8b1b235d4da535c165f8ac66095cc80e66efaa771f32be",
+          "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+        },
+        "final_target_hashes_after": {
+          "governed-target.txt": "253ab542f41481a0fadb5275b002ec2afaadbe2dca0227c5a01c78eb9ce8dd2b",
+          "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+        }
+      },
+      {
+        "uses": [
+          {
+            "type": "tool_use",
+            "id": "toolu_01XBaHVgxFL4gfnNfaGDvP2S",
+            "name": "Write",
+            "input": {
+              "file_path": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt",
+              "content": "effect-invalid-output\n"
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ],
+        "results": [
+          {
+            "tool_use_id": "toolu_01XBaHVgxFL4gfnNfaGDvP2S",
+            "type": "tool_result",
+            "content": "The file C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+          }
+        ],
+        "decisions": [],
+        "exact_requested_write": true,
+        "native_Write_hooks": [
+          {
+            "id": "0f0fdd7d-b2ad-4b4a-ac56-f3a8d8a861ff",
+            "outcome": "success",
+            "exit": 0,
+            "output": {},
+            "elapsed_seconds": 0.2214825999981258
+          }
+        ],
+        "target_key": "governed-target.txt",
+        "expected_sha256": "a1d73198c43eb4003978c8574befddc64999c02de5b8cf92fc79ad1e46356aaa",
+        "expected_target_effect": true,
+        "successful_Write_results": 1,
+        "final_target_hashes_before": {
+          "governed-target.txt": "253ab542f41481a0fadb5275b002ec2afaadbe2dca0227c5a01c78eb9ce8dd2b",
+          "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+        },
+        "final_target_hashes_after": {
+          "governed-target.txt": "a1d73198c43eb4003978c8574befddc64999c02de5b8cf92fc79ad1e46356aaa",
+          "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+        }
+      },
+      {
+        "uses": [],
+        "results": [],
+        "decisions": [],
+        "exact_requested_write": false,
+        "native_Write_hooks": [],
+        "target_key": null,
+        "expected_sha256": null,
+        "expected_target_effect": false,
+        "successful_Write_results": 0,
+        "final_target_hashes_before": {
+          "governed-target.txt": "a1d73198c43eb4003978c8574befddc64999c02de5b8cf92fc79ad1e46356aaa",
+          "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+        },
+        "final_target_hashes_after": {
+          "governed-target.txt": "a1d73198c43eb4003978c8574befddc64999c02de5b8cf92fc79ad1e46356aaa",
+          "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+        }
+      },
+      {
+        "uses": [
+          {
+            "type": "tool_use",
+            "id": "toolu_01W5RdgrT7D74cwh1YXpUH9b",
+            "name": "Write",
+            "input": {
+              "file_path": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt",
+              "content": "effect-guard-removed-after-readiness\n"
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ],
+        "results": [
+          {
+            "tool_use_id": "toolu_01W5RdgrT7D74cwh1YXpUH9b",
+            "type": "tool_result",
+            "content": "The file C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+          }
+        ],
+        "decisions": [],
+        "exact_requested_write": true,
+        "native_Write_hooks": [],
+        "target_key": "governed-target.txt",
+        "expected_sha256": "7306fd1e0f87d011fbefa4b7a9d1a31ea0c8f74c8e6389ee880e2aa9fe45b0ba",
+        "expected_target_effect": true,
+        "successful_Write_results": 1,
+        "final_target_hashes_before": {
+          "governed-target.txt": "a1d73198c43eb4003978c8574befddc64999c02de5b8cf92fc79ad1e46356aaa",
+          "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+        },
+        "final_target_hashes_after": {
+          "governed-target.txt": "7306fd1e0f87d011fbefa4b7a9d1a31ea0c8f74c8e6389ee880e2aa9fe45b0ba",
+          "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+        }
+      }
+    ],
+    "conclusion": "fail"
+  },
+  "case": "C11",
+  "candidate_source_commit": "fd2419f4c26b9ba4d4a97f85b7d2b08da72b8626",
+  "package_sha256": "f11d94139ad7e6194147c32a80a070f34f6761900a8c737aec354ec9b447d7f6",
+  "observation_complete": true,
+  "source_paths_relative_to": "evidence/WO-PLG-006",
+  "enforcement_result": "failed/unqualified when required refusal is absent; completed negative experiment does not convert this into a pass"
+}

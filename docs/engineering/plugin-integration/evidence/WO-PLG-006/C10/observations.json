@@ -1,0 +1,122 @@
+{
+  "expected": "Observe real host cancellation and actual effects; never infer denial from timeout.",
+  "observed": {
+    "tool_calls": 1,
+    "exact_requested_write": true,
+    "tool_uses": [
+      {
+        "type": "tool_use",
+        "id": "toolu_01288VYcvM8uo8n7bjUCPyma",
+        "name": "Write",
+        "input": {
+          "file_path": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt",
+          "content": "effect-host-timeout\n"
+        },
+        "caller": {
+          "type": "direct"
+        }
+      }
+    ],
+    "tool_results": [
+      {
+        "tool_use_id": "toolu_01288VYcvM8uo8n7bjUCPyma",
+        "type": "tool_result",
+        "content": "The file C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+      }
+    ],
+    "correlated_hooks": [],
+    "target_before": "0a1f24d49e1620655adfbf9790ea35f0a7bda4df3b86c046869d461279e8cbc9",
+    "target_after": "20db5b25449ad2fd7de6eb4e4d9ebc2185f4121e7ef230557470893fd9e463e7",
+    "effect_count": 1,
+    "final_state_changed": true,
+    "exact_expected_content": true,
+    "independent_effect_observer": "outer runner SHA256 before process launch and after host exit",
+    "effect_count_basis": "host-correlated Write results; final state independently checked; no whole-session filesystem audit",
+    "denial_observed": false,
+    "host_timeout": 60,
+    "handler_stall": 75,
+    "native_hooks": [
+      {
+        "id": "914dbd5f-591c-4ac0-ab88-12aa2b368cbe",
+        "outcome": "cancelled",
+        "exit": 1,
+        "output": {},
+        "elapsed_seconds": 60.16125139998621
+      }
+    ],
+    "classification": "unqualified: required handler denial is absent; inspect effects before retry"
+  },
+  "conclusion": "fail",
+  "qualified": false,
+  "exit_status": [
+    0
+  ],
+  "source_evidence": [
+    "acceptance-06/C10/actions.txt",
+    "acceptance-06/C10/stdout.txt",
+    "acceptance-06/C10/stderr.txt",
+    "acceptance-06/C10/commands.json",
+    "acceptance-06/C10/observations.json"
+  ],
+  "capture_policy": "sanitized public observations; raw host debug stays in disposable sandbox",
+  "wire_assessment": {
+    "source": "native system/hook_response stdout+stderr and correlated tool_use/tool_result objects",
+    "qualification": false,
+    "case": "C10",
+    "observations": [
+      {
+        "uses": [
+          {
+            "type": "tool_use",
+            "id": "toolu_01288VYcvM8uo8n7bjUCPyma",
+            "name": "Write",
+            "input": {
+              "file_path": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt",
+              "content": "effect-host-timeout\n"
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ],
+        "results": [
+          {
+            "tool_use_id": "toolu_01288VYcvM8uo8n7bjUCPyma",
+            "type": "tool_result",
+            "content": "The file C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-06/disposable repository/governed-target.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+          }
+        ],
+        "decisions": [],
+        "exact_requested_write": true,
+        "native_Write_hooks": [
+          {
+            "id": "914dbd5f-591c-4ac0-ab88-12aa2b368cbe",
+            "outcome": "cancelled",
+            "exit": 1,
+            "output": {},
+            "elapsed_seconds": 60.16125139998621
+          }
+        ],
+        "target_key": "governed-target.txt",
+        "expected_sha256": "20db5b25449ad2fd7de6eb4e4d9ebc2185f4121e7ef230557470893fd9e463e7",
+        "expected_target_effect": true,
+        "successful_Write_results": 1,
+        "final_target_hashes_before": {
+          "governed-target.txt": "0a1f24d49e1620655adfbf9790ea35f0a7bda4df3b86c046869d461279e8cbc9",
+          "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+        },
+        "final_target_hashes_after": {
+          "governed-target.txt": "20db5b25449ad2fd7de6eb4e4d9ebc2185f4121e7ef230557470893fd9e463e7",
+          "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+        }
+      }
+    ],
+    "conclusion": "fail"
+  },
+  "case": "C10",
+  "candidate_source_commit": "fd2419f4c26b9ba4d4a97f85b7d2b08da72b8626",
+  "package_sha256": "f11d94139ad7e6194147c32a80a070f34f6761900a8c737aec354ec9b447d7f6",
+  "observation_complete": true,
+  "source_paths_relative_to": "evidence/WO-PLG-006",
+  "enforcement_result": "failed/unqualified when required refusal is absent; completed negative experiment does not convert this into a pass"
+}

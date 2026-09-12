@@ -1,0 +1,5 @@
+# Preserve retained Windows command output and proof bytes.
+* -text whitespace=cr-at-eol
+# Preserve whitespace emitted by the retained GitHub job log.
+assessment-linux-failure.log -whitespace
+completion/*.stdout -whitespace

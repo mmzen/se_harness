@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "../se-harness-plugin-eval-017/Scripts/python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/plugin_integration/claude_adapter",
+    "-v"
+  ],
+  "exit": 0,
+  "elapsed_seconds": 27.71180240000831,
+  "stdout": "",
+  "stderr": "test_ambiguous_windows_paths_never_invoke_interpreter_or_receiver (test_adapter.BindingTests.test_ambiguous_windows_paths_never_invoke_interpreter_or_receiver) ... ok\ntest_event_quotes_and_unicode_survive_exactly (test_adapter.BindingTests.test_event_quotes_and_unicode_survive_exactly) ... ok\ntest_forged_pyvenv_version_cannot_replace_actual_interpreter_probe (test_adapter.BindingTests.test_forged_pyvenv_version_cannot_replace_actual_interpreter_probe) ... ok\ntest_malformed_and_missing_tool_fields_deny (test_adapter.BindingTests.test_malformed_and_missing_tool_fields_deny) ... ok\ntest_missing_runtime_never_launches_python (test_adapter.BindingTests.test_missing_runtime_never_launches_python) ... ok\ntest_native_hooks_match_inline_source_and_are_synchronous (test_adapter.BindingTests.test_native_hooks_match_inline_source_and_are_synchronous) ... ok\ntest_profile_and_loaded_binding_cannot_self_qualify (test_adapter.BindingTests.test_profile_and_loaded_binding_cannot_self_qualify) ... ok\ntest_real_scope_refusal_and_permitted_edit (test_adapter.BindingTests.test_real_scope_refusal_and_permitted_edit) ... ok\ntest_real_session_uses_absolute_isolated_python_and_full_context (test_adapter.BindingTests.test_real_session_uses_absolute_isolated_python_and_full_context) ... ok\ntest_unexpected_output_controls_are_refused (test_adapter.BindingTests.test_unexpected_output_controls_are_refused) ... ok\ntest_unsupported_tools_leave_setup_access_without_allow (test_adapter.BindingTests.test_unsupported_tools_leave_setup_access_without_allow) ... ok\ntest_active_child_invalidates_timely_denial (test_capture_assessment.CaptureAssessmentTests.test_active_child_invalidates_timely_denial) ... ok\ntest_debug_source_strings_do_not_prove_hook_receipt (test_capture_assessment.CaptureAssessmentTests.test_debug_source_strings_do_not_prove_hook_receipt) ... ok\ntest_different_requested_target_cannot_substitute (test_capture_assessment.CaptureAssessmentTests.test_different_requested_target_cannot_substitute) ... ok\ntest_missing_refusal_retains_failed_enforcement (test_capture_assessment.CaptureAssessmentTests.test_missing_refusal_retains_failed_enforcement) ... ok\ntest_retained_checked_and_refused_write_correlate (test_capture_assessment.CaptureAssessmentTests.test_retained_checked_and_refused_write_correlate) ... ok\ntest_static_rejection_needs_actual_loaded_hook (test_capture_assessment.CaptureAssessmentTests.test_static_rejection_needs_actual_loaded_hook) ... ok\n\n----------------------------------------------------------------------\nRan 17 tests in 27.484s\n\nOK\n",
+  "scope": "corrected guard and retained-capture regressions; no native model calls"
+}

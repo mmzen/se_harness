@@ -2,10 +2,10 @@
 id = "WO-PLG-006"
 type = "work_order"
 title = "Implement the accepted Claude Code host adapter"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-08"
-updated = "2026-09-11"
+updated = "2026-09-12"
 
 [delegation]
 class = "execution"
@@ -40,13 +40,27 @@ to = "approved"
 decided_at = "2026-09-11T19:00:19Z"
 decided_by = "engineering-owner"
 reason = "The operator explicitly selected WO-PLG-005 and WO-PLG-006 for implementation through the delegated route on 2026-09-11. Approve this work order with the requested execution class and exact future verification-record paths. This delegates only DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE, conditional on the class at the PR base and a successful live required check for the exact head. No implementation has started; verification, release and merge remain human decisions."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-11T19:08:36Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 78cd64df7c130a6f42ab357836093db30f710753 (check-run 103386776253, source github-checks)."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-12T09:06:10Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at d6e9f8063dbee01dbb112f5cd2aef219def4e4cc (check-run 103529953216, source github-checks). Complete the bounded adapter implementation and fresh assessment under the approved criteria merged by PR #458. qualification-review-20260912/assessment.md binds unchanged production source, immutable package/recorded-loaded inventories and current definitions; required healthy-path and shared obligations remain satisfied. C10/C11 remain failed enforcement under accepted DEC-PLG-006. Only qualification with a documented local limitation is proposed for independent assurance; no verification, merge, release or expanded host profile is claimed."
 +++
 
 # Work Order: Implement the accepted Claude Code host adapter
 
 ## Lifecycle
 
-The operator selected WO-PLG-006 for the delegated route on 2026-09-11. Work-order approval records the requested execution delegation. The class permits only DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE, after it is present at the pull-request base and the required live GitHub check succeeds for the exact head. This packet prepares that base prerequisite; implementation has not started. Verification, release and merge remain human decisions.
+The operator selected WO-PLG-006 for the delegated route on 2026-09-11. Work-order approval records the requested execution delegation. The class permits only DR-WO-START, DR-WO-COMPLETE and DR-VREC-PREPARE, after it is present at the pull-request base and the required live GitHub check succeeds for the exact head. The released evaluator recorded delegated implementation completion on 2026-09-12, as retained in the lifecycle event above. The [dated qualification assessment](../evidence/WO-PLG-006/qualification-review-20260912/assessment.md) applies the criteria merged by PR #458 to unchanged adapter source and retained native observations. C10/C11 remain failed enforcement; the proposed assurance outcome is qualification with a documented local limitation under DEC-PLG-006. Verification, release and merge remain human decisions.
 
 ## Objective
 

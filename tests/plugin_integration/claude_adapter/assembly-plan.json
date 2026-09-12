@@ -1,0 +1,36 @@
+{
+  "schema": "se-harness-plugin-assembly-v1",
+  "name": "verity-plane",
+  "shared": {
+    "scripts/check-tool-action.py": "plugins/verity-plane/common/scripts/check-tool-action.py",
+    "scripts/session-context.py": "plugins/verity-plane/common/scripts/session-context.py",
+    "skills/change/references/artifacts.md": "plugins/verity-plane/common/skills/change/references/artifacts.md",
+    "skills/change/references/authority.md": "plugins/verity-plane/common/skills/change/references/authority.md",
+    "skills/change/references/work-orders.md": "plugins/verity-plane/common/skills/change/references/work-orders.md",
+    "skills/change/SKILL.md": "plugins/verity-plane/common/skills/change/SKILL.md",
+    "skills/evidence/references/external-actions.md": "plugins/verity-plane/common/skills/evidence/references/external-actions.md",
+    "skills/evidence/references/records.md": "plugins/verity-plane/common/skills/evidence/references/records.md",
+    "skills/evidence/SKILL.md": "plugins/verity-plane/common/skills/evidence/SKILL.md",
+    "skills/harness-operator-brief/agents/openai.yaml": "plugins/verity-plane/common/skills/harness-operator-brief/agents/openai.yaml",
+    "skills/harness-operator-brief/scripts/check_brief.py": "plugins/verity-plane/common/skills/harness-operator-brief/scripts/check_brief.py",
+    "skills/harness-operator-brief/skill-contract.json": "plugins/verity-plane/common/skills/harness-operator-brief/skill-contract.json",
+    "skills/harness-operator-brief/SKILL.md": "plugins/verity-plane/common/skills/harness-operator-brief/SKILL.md",
+    "skills/harness-orient/scripts/orient.py": "plugins/verity-plane/common/skills/harness-orient/scripts/orient.py",
+    "skills/harness-orient/skill-contract.json": "plugins/verity-plane/common/skills/harness-orient/skill-contract.json",
+    "skills/harness-orient/SKILL.md": "plugins/verity-plane/common/skills/harness-orient/SKILL.md",
+    "skills/setup/references/environment.md": "plugins/verity-plane/common/skills/setup/references/environment.md",
+    "skills/setup/SKILL.md": "plugins/verity-plane/common/skills/setup/SKILL.md"
+  },
+  "hosts": {
+    "codex": {
+      ".codex-plugin/plugin.json": "tests/plugin_integration/claude_adapter/inert-codex.json"
+    },
+    "claude": {
+      ".claude-plugin/plugin.json": "plugins/verity-plane/claude-code/.claude-plugin/plugin.json",
+      "hooks/guard.txt": "plugins/verity-plane/claude-code/hooks/guard.txt",
+      "hooks/hooks.json": "plugins/verity-plane/claude-code/hooks/hooks.json",
+      "README.md": "plugins/verity-plane/claude-code/README.md",
+      "scripts/binding.py": "plugins/verity-plane/claude-code/scripts/binding.py"
+    }
+  }
+}

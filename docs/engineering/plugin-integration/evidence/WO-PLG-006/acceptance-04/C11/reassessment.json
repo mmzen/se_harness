@@ -1,0 +1,146 @@
+{
+  "source": "native system/hook_response stdout+stderr and correlated tool_use/tool_result objects",
+  "qualification": false,
+  "case": "C11",
+  "observations": [
+    {
+      "uses": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01X7uVibb3fu2iuysDyRcJ32",
+          "name": "Write",
+          "input": {
+            "file_path": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-04/disposable repository/governed-target.txt",
+            "content": "effect-launch-failed\n"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "results": [
+        {
+          "tool_use_id": "toolu_01X7uVibb3fu2iuysDyRcJ32",
+          "type": "tool_result",
+          "content": "The file C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-04/disposable repository/governed-target.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+        }
+      ],
+      "decisions": [],
+      "exact_requested_write": true,
+      "native_Write_hooks": [
+        {
+          "id": "37b7775f-496f-40b9-9f8d-b5bb14e7a22b",
+          "outcome": "error",
+          "exit": 1,
+          "output": {},
+          "elapsed_seconds": 0.2634707000106573
+        }
+      ],
+      "target_key": "governed-target.txt",
+      "expected_sha256": "f15def18080c4d62ad8b1b235d4da535c165f8ac66095cc80e66efaa771f32be",
+      "expected_target_effect": true,
+      "successful_Write_results": 1,
+      "final_target_hashes_before": {
+        "governed-target.txt": "20db5b25449ad2fd7de6eb4e4d9ebc2185f4121e7ef230557470893fd9e463e7",
+        "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+      },
+      "final_target_hashes_after": {
+        "governed-target.txt": "f15def18080c4d62ad8b1b235d4da535c165f8ac66095cc80e66efaa771f32be",
+        "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+      }
+    },
+    {
+      "uses": [
+        {
+          "type": "tool_use",
+          "id": "toolu_016B587LXSz43SjqWUyatSvQ",
+          "name": "Write",
+          "input": {
+            "file_path": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-04/disposable repository/governed-target.txt",
+            "content": "effect-missing-output\n"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "results": [
+        {
+          "tool_use_id": "toolu_016B587LXSz43SjqWUyatSvQ",
+          "type": "tool_result",
+          "content": "The file C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-04/disposable repository/governed-target.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+        }
+      ],
+      "decisions": [],
+      "exact_requested_write": true,
+      "native_Write_hooks": [
+        {
+          "id": "3591a95f-0109-4ab7-8752-021c6222d69a",
+          "outcome": "success",
+          "exit": 0,
+          "output": {},
+          "elapsed_seconds": 0.21534209998208098
+        }
+      ],
+      "target_key": "governed-target.txt",
+      "expected_sha256": "253ab542f41481a0fadb5275b002ec2afaadbe2dca0227c5a01c78eb9ce8dd2b",
+      "expected_target_effect": true,
+      "successful_Write_results": 1,
+      "final_target_hashes_before": {
+        "governed-target.txt": "f15def18080c4d62ad8b1b235d4da535c165f8ac66095cc80e66efaa771f32be",
+        "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+      },
+      "final_target_hashes_after": {
+        "governed-target.txt": "253ab542f41481a0fadb5275b002ec2afaadbe2dca0227c5a01c78eb9ce8dd2b",
+        "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+      }
+    },
+    {
+      "uses": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01FfPBLtVDecSKw6tB4J5Cq6",
+          "name": "Write",
+          "input": {
+            "file_path": "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-04/disposable repository/governed-target.txt",
+            "content": "effect-invalid-output\n"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "results": [
+        {
+          "tool_use_id": "toolu_01FfPBLtVDecSKw6tB4J5Cq6",
+          "type": "tool_result",
+          "content": "The file C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-04/disposable repository/governed-target.txt has been updated successfully. (file state is current in your context — no need to Read it back)"
+        }
+      ],
+      "decisions": [],
+      "exact_requested_write": true,
+      "native_Write_hooks": [
+        {
+          "id": "7af43f30-5f08-4f64-a5d8-25d3ba09a4d5",
+          "outcome": "success",
+          "exit": 0,
+          "output": {},
+          "elapsed_seconds": 0.21715879999101162
+        }
+      ],
+      "target_key": "governed-target.txt",
+      "expected_sha256": "a1d73198c43eb4003978c8574befddc64999c02de5b8cf92fc79ad1e46356aaa",
+      "expected_target_effect": true,
+      "successful_Write_results": 1,
+      "final_target_hashes_before": {
+        "governed-target.txt": "253ab542f41481a0fadb5275b002ec2afaadbe2dca0227c5a01c78eb9ce8dd2b",
+        "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+      },
+      "final_target_hashes_after": {
+        "governed-target.txt": "a1d73198c43eb4003978c8574befddc64999c02de5b8cf92fc79ad1e46356aaa",
+        "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+      }
+    }
+  ],
+  "conclusion": "fail"
+}

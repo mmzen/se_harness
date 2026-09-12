@@ -1,0 +1,31 @@
+{
+  "source": "native system/hook_response stdout+stderr and correlated tool_use/tool_result objects",
+  "qualification": false,
+  "case": "C06",
+  "observations": [
+    {
+      "id": "4fa32470-05c2-4f6e-a8ab-e00dbc3be6df",
+      "name": "PreToolUse:Read",
+      "event": "PreToolUse",
+      "outcome": "success",
+      "exit": 0,
+      "output": {
+        "hookEventName": "PreToolUse",
+        "additionalContext": "UNREADY COVERAGE GAP: this tool has no evaluator mapping. Ordinary host permissions and already-authorized setup access remain in force. No governance check succeeded."
+      },
+      "guard": {
+        "adapter": "verity-plane-claude-v1",
+        "status": "unready",
+        "interpreter_invoked": false,
+        "entered_monotonic": 241265.2319537,
+        "event": "PreToolUse",
+        "tool_use_id": "toolu_01BVJfMHjpwdH6Qwd4b6PGYW",
+        "tool_name": "Read",
+        "finished_ms": 64.138,
+        "response_written_monotonic": 241265.3114383
+      },
+      "handler": []
+    }
+  ],
+  "conclusion": "pass"
+}

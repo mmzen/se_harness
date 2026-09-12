@@ -1,0 +1,11 @@
+{
+  "source": "Observed command results in this task; summary, not a raw-output transcript.",
+  "command": "python -X utf8 -B -m unittest discover -s tests/plugin_integration/claude_adapter -p test_capture_assessment.py -v",
+  "python": "3.13.3",
+  "evaluator_environment": "released 0.17.0 external environment",
+  "tests_run": 6,
+  "result": "OK",
+  "exit_code": 0,
+  "native_host_run": false,
+  "claude_runtime_binding_tests": "11 additional tests retain the original 3.14.6/0.16.0-profile evidence; not rerun here."
+}

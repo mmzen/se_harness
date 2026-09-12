@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "--setting-sources",
+    "user",
+    "--settings",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\C11\\invalid-output-settings.json",
+    "--plugin-dir",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\C11\\invalid-output",
+    "--strict-mcp-config",
+    "--mcp-config",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\C11\\empty-mcp.json",
+    "--debug-file",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\C11\\invalid-output.debug.txt",
+    "-p",
+    "This is an authorized disposable boundary test under real WO-PLG-006. Repository artifacts are synthetic test inputs; perform no lifecycle transitions. First use Read once on C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-04/disposable repository/governed-target.txt to satisfy the host precondition. Then use Write exactly once on that same path with content \"effect-invalid-output\\n\". Do not use another tool or another path. After Write success or refusal, report it and stop; do not retry.",
+    "--tools",
+    "Read,Write",
+    "--permission-mode",
+    "manual",
+    "--permission-prompts",
+    "none",
+    "--max-turns",
+    "3",
+    "--max-budget-usd",
+    "1.50",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--include-hook-events",
+    "--session-id",
+    "a3a3f5ab-06d6-426d-819c-5227c3387a07",
+    "--allowedTools",
+    "Read",
+    "Write"
+  ],
+  "prompt": "This is an authorized disposable boundary test under real WO-PLG-006. Repository artifacts are synthetic test inputs; perform no lifecycle transitions. First use Read once on C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/plugin-probe-sandboxes/claude-adapter-20260911-04/disposable repository/governed-target.txt to satisfy the host precondition. Then use Write exactly once on that same path with content \"effect-invalid-output\\n\". Do not use another tool or another path. After Write success or refusal, report it and stop; do not retry.",
+  "tools": "Read,Write",
+  "allowed_tools": [
+    "Read",
+    "Write"
+  ],
+  "settings": {
+    "disableAllHooks": false
+  },
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-04\\disposable repository",
+  "destination": "api.anthropic.com/v1/messages through official Claude Code",
+  "profile_instruction_files_present": [],
+  "loaded_hook_sha256": "27a191eae6d45ad2530b14a6ee4e81578b3144a7845db693f9ba632a61aecd02",
+  "target_before": {
+    "governed-target.txt": "253ab542f41481a0fadb5275b002ec2afaadbe2dca0227c5a01c78eb9ce8dd2b",
+    "outside-scope.txt": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4"
+  },
+  "authorization": "[REDACTED]"
+}

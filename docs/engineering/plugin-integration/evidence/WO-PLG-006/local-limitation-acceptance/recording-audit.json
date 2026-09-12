@@ -1,0 +1,17 @@
+{
+  "baseline_evidence_commit": "83bf6dbc46884a38d66e415c16722e3a204f674f",
+  "baseline_file_count": 455,
+  "changed_existing_files": [
+    "handoff.json",
+    "qualification-limit.md",
+    "README.md",
+    "WO-PLG-006-handoff.md"
+  ],
+  "unchanged_existing_evidence_files": 451,
+  "all_other_original_bytes_preserved": true,
+  "local_document_links_pass": true,
+  "formal_snapshot_sha256": "d486c36a30fdc1eeec9d0169de12a6a270105cdb20f874ce5f788496fb30742e",
+  "lifecycle": "in_progress",
+  "completion_disposition": "continue",
+  "claim": "Documentation of operator acceptance only; no executable tests rerun, raw case edits, definition changes or lifecycle transition."
+}

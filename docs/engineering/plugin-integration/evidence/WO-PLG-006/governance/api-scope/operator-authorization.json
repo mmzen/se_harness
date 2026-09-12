@@ -1,0 +1,10 @@
+{
+  "date": "2026-09-11",
+  "work_order": "WO-PLG-006",
+  "question": "Do you authorize the WO-PLG-006 live tests to send public harness and skill text, synthetic test prompts and file contents, and local test paths to Anthropic’s Claude API through your existing Claude Code sign-in? Product code and credentials are excluded from the prompts.",
+  "operator_response": "Authorize these live tests",
+  "payload_inventory": "payload-inventory.json",
+  "scope": "Only the inspected public/synthetic disposable Claude adapter tests. No product code or credentials in prompts; no publication or lifecycle decision.",
+  "earlier_review_rejection": "The acceptance run sends repository-derived governance and fixture content to the external Claude API, but the user has not specifically authorized that payload for that destination.",
+  "rejected_action_retried_before_authorization": false
+}

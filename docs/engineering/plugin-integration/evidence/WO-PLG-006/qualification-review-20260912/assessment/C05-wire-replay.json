@@ -1,0 +1,68 @@
+{
+  "source": "native system/hook_response stdout+stderr and correlated tool_use/tool_result objects",
+  "qualification": false,
+  "case": "C05",
+  "observations": [
+    [],
+    [
+      {
+        "id": "8e8649e6-5858-4de8-9477-9781a58098f2",
+        "name": "SessionStart:startup",
+        "event": "SessionStart",
+        "outcome": "success",
+        "exit": 0,
+        "output": {
+          "hookEventName": "SessionStart",
+          "additionalContext": "UNREADY: Shared script failed or returned missing/oversized output; inspect actual effects if refusal is absent. No successful governance check is claimed. Ordinary setup permissions remain in force."
+        },
+        "guard": {
+          "adapter": "verity-plane-claude-v1",
+          "status": "unready",
+          "interpreter_invoked": true,
+          "entered_monotonic": 242798.4059489,
+          "event": "SessionStart",
+          "tool_use_id": null,
+          "tool_name": null,
+          "profile_argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "-B",
+            "-c",
+            "import sys; print(sys.version.split()[0])"
+          ],
+          "observed_python": "3.14.6",
+          "argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "-B",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\C05\\failed script\\scripts\\session-context.py",
+            "--repo",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\disposable repository",
+            "--environment",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\claude-adapter-20260911-06\\private plugin data\\evaluator",
+            "--version",
+            "0.16.0",
+            "--payload-sha256",
+            "51712fcfe5253db8d542deb870a0017b25c2976f5f4e76a81fd08923bba45e3c",
+            "--archive-sha256",
+            "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+            "--host",
+            "claude",
+            "--context-limit",
+            "32768",
+            "--read-limit",
+            "0"
+          ],
+          "script_start_ms": 626.6483000000001,
+          "script_exit": 4,
+          "script_end_ms": 694.4558000000001,
+          "error": "Shared script failed or returned missing/oversized output; inspect actual effects if refusal is absent.",
+          "finished_ms": 703.0274000000001,
+          "response_written_monotonic": 242799.1127705
+        },
+        "handler": []
+      }
+    ]
+  ],
+  "conclusion": "pass"
+}

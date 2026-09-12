@@ -1,0 +1,28 @@
+{
+  "expected": "Accepted inline command returns PreToolUse denial for malformed JSON and missing required fields.",
+  "observed": {
+    "direct_command_calibration": true,
+    "denials": [
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  "conclusion": "pass",
+  "qualified": false,
+  "exit_status": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "source_evidence": [
+    "actions.txt",
+    "stdout.txt",
+    "stderr.txt",
+    "../package-identity.json",
+    "../identities.json"
+  ],
+  "capture_policy": "sanitized public observations; raw host debug stays in disposable sandbox"
+}
