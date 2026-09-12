@@ -6,6 +6,9 @@ status = "draft"
 owners = ["engineering-owner"]
 created = "2026-09-12"
 updated = "2026-09-12"
+[delegation]
+class = "execution"
+
 [assurance]
 commit_bound_verification = "required"
 rationale = "Later repository connection, integrity, recovery, upgrades, and release decisions rely on the correctness of changed evaluator behavior and ownership records."
@@ -13,6 +16,17 @@ decided_by = "engineering-owner"
 
 [execution_scope]
 paths = [
+  "se_harness/engine/validation_evidence.py",
+  "templates/repository/standard/docs/engineering/WORKFLOW.md",
+  "tests/test_harnessctl.py",
+  "tests/test_workflow_documentation_contract.py",
+  "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-024.md",
+  "docs/engineering/repository-harness-upgrade/specifications/SPEC-HUP-012.md",
+  "docs/engineering/repository-harness-upgrade/verification/VER-HUP-012.md",
+  "docs/engineering/portable-managed-integrity/specifications/SPEC-PMI-001.md",
+  "docs/engineering/plugin-integration/decisions/DEC-PLG-007.md",
+  "docs/engineering/plugin-integration/verification-records/VREC-PLG-015.md",
+  "docs/engineering/plugin-integration/evidence/VREC-PLG-015-evaluator.json",
   "se_harness/cli.py",
   "se_harness/installer.py",
   "se_harness/integrity.py",
@@ -23,7 +37,6 @@ paths = [
   "pyproject.toml",
   "tests/test_skill_ownership.py",
   "tests/fixtures/skill_ownership/",
-  "tests/test_cli.py",
   "tests/test_integration_package.py",
   "tests/test_mutation_guard.py",
   "tests/test_integrity_primitives.py",
@@ -57,8 +70,10 @@ verification = ["VER-PLG-020"]
 
 ## Lifecycle
 
-Draft prepared at the operator's request on 2026-09-12. This request authorizes preparation, not approval of these new definitions or implementation.
-No delegation class is proposed. Approval, start, completion, assurance, integration, release, and adoption are separately recorded decisions.
+The operator selected "take the delegated route" on 2026-09-12 in response to the reviewed packet approval and implementation question.
+This selects the execution delegation class for WO-PLG-020. Lifecycle approval remains unapplied while DEC-PLG-007 resolves the additional lock-schema contract conflict found during review.
+Once this class-bearing WO is approved at the PR base and the exact candidate has a successful live GitHub validate check, delegated-executor may start, complete, and prepare the ready verification record.
+Verification, release, integration, and external actions remain separately authorized decisions. A branch cannot activate its own delegation.
 
 ## Objective
 
@@ -70,7 +85,8 @@ The implementation includes safe restoration and ownership-aware integrity and u
 - The new ownership command, bounded data-only plugin binding verification, versioned lock representation, shared effective inventory, and recoverable installer transaction.
 - Both currently retained skills: harness-orient and harness-operator-brief; the seven current managed repository files and applicable existing host surfaces.
 - Default installation regression, stale-input and concurrency protection, Windows/Linux fault injection, and non-promotable candidate package acceptance.
-- Exact applicability amendments to the four approved contracts listed in the packet review, after their accountable owners accept the proposed changes.
+- Exact applicability amendments listed in the packet review, including the additional schema-floor reconciliation governed by DEC-PLG-007.
+- Evaluator-evidence matching on a plugin-owned lock and recovery refusal after intervening owner changes or hostile recovery metadata.
 - This work order's draft chain, retained evidence, and concise domain index entry.
 
 ## Out of scope
@@ -82,22 +98,23 @@ The implementation includes safe restoration and ownership-aware integrity and u
 
 ## Authorized decision envelope
 
-After approval and explicit start, choose implementation decomposition, internal names, fixtures, and diagnostics within SPEC-PLG-020 and ADR-PLG-003.
+After approval and an eligible delegated start, choose implementation decomposition, internal names, fixtures, and diagnostics within SPEC-PLG-020 and ADR-PLG-003.
 Keep one standard governance contract; ownership is an explicit installation property, not an alternative policy profile.
 Do not choose a new owner decision, weaken a refusal, widen the catalog, or silently add another installer mode.
-The draft schema-4 and recovery design must be accepted before it is implemented.
+The schema-4 exception needs the additional accountable reconciliation in DEC-PLG-007 before implementation. All other reviewed design choices retain their selected meaning.
 
 ## Constraints and dependencies
 
 Baseline is main `3bf0ef2a7a2b4008efaa3cb79431d526d3f6f600`, after PRs #456, #457, #458, and #459.
 The root is governed by released evaluator 0.17.0; candidate source is 0.18.0 and is not an installed governor.
-Start requires approval of REQ-PLG-028 through REQ-PLG-031, SPEC-PLG-020, ARCH-PLG-003, ADR-PLG-003, VER-PLG-020, this WO, and the exact prior-contract applicability amendments.
-Read CAP-DST-001, INT-DST-001, SPEC-PLG-012, and the four prior contracts before implementation.
+Start requires approval of REQ-PLG-028 through REQ-PLG-031, SPEC-PLG-020, ARCH-PLG-003, ADR-PLG-003, VER-PLG-020, this WO, and the exact prior-contract applicability amendments, including disposition of DEC-PLG-007.
+Read CAP-DST-001, INT-DST-001, SPEC-PLG-012, and all eight prior contracts named in the packet review before implementation.
 
 DEC-PLG-004 at proposal commit `17382d8e7f7a5709f4f55facfe875fbf455e5794` already selected supported migration; its immutable decision remains unchanged.
 WO-PLG-009 explicitly excludes evaluator-core changes and therefore cannot substitute for this work order.
 WO-PLG-009 remains draft and ineligible for live connection until the new evaluator is independently verified, released, and adopted.
-This packet introduces no release WO or version reservation.
+This packet introduces no release WO or version reservation. VREC-PLG-015 and its evaluator sidecar are reserved paths only; neither record is prepared yet.
+The repository-owned governor-transition assessor remains schema-3-only; this WO supplies no schema-4 support claim for that separate tool.
 
 ## Expected change surface
 

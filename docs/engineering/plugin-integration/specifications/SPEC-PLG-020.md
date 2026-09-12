@@ -142,5 +142,5 @@ Only reviewed regular files are removed; only proven-empty repository directorie
 
 The baseline has seven managed files: three per retained core and one Claude orientation adapter.
 Retired writing skills are excluded.
-The [packet review](../../../notes/plugin-ownership-migration-2026-09-12.md) contains four required prior-contract amendments; this draft applies none.
+The [packet review](../../../notes/plugin-ownership-migration-2026-09-12.md) contains required location and schema-floor amendments; DEC-PLG-007 blocks approval until reconciliation.
 DEC-PLG-004 and DEC-PLG-006 remain unchanged.

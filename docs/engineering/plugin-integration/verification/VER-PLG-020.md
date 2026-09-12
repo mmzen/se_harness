@@ -50,9 +50,9 @@ External plugin fixtures include inert scripts that create a sentinel if execute
 | OWN05 | Replay successful migration twice; run doctor and every supported installer entry point. | No lock-byte drift, extra evidence overwrite, or recreation of retained repository skills; direct APIs cannot bypass ownership handling. |
 | OWN06 | Ordinary version-compatible upgrade and a deliberately unsupported ownership-format upgrade. | Compatible upgrade preserves the exact binding; incompatible upgrade refuses atomically and does not reconstruct the default catalog. |
 | OWN07 | Run released 0.17.0 against plugin-owned schema 4; also run candidate against an unsupported old lock. | Every writing path refuses before mutation; read-only commands report unsupported identity/format without claiming readiness. |
-| OWN08 | Reintroduce a selected retained file or tamper with the binding and expected inventory. | Doctor and applicable mutation guards fail; deleting an offending record cannot turn it into an accepted repository-owned installation. |
+| OWN08 | Reintroduce a selected retained file or tamper with the binding and expected inventory. | Doctor and applicable mutation guards fail; deleting an offending record cannot turn it into an accepted repository-owned installation. Current-lock evaluator-evidence matching accepts a valid schema-4 binding and refuses a mismatched evaluator identity. |
 | OWN09 | Inject an exception at each deletion, lock replacement, recovery-record update, and postcondition boundary. | Complete prior snapshots are restored or an explicit recovery-required failure is retained; no partial success. |
-| OWN10 | Terminate an independent application process at each durable transaction boundary; restart and recover. | Pending recovery is detected before another mutation; recovery restores a consistent prior state and records actual outcome. |
+| OWN10 | Terminate an independent application process at each durable transaction boundary; restart and recover. | Pending recovery is detected before another mutation. Untouched targets recover consistently; intervening owner edits or new files remain untouched, with explicit recovery-required status. Tampered, truncated, or path-escaping recovery metadata never causes an overwrite or escaped write. |
 | OWN11 | Restore repository ownership, including variants with owner-created path conflicts. | Exact selected-distribution retained files return only when safe; conflicts preserve all original bytes and the old binding. |
 | OWN12 | Clone a plugin-owned fixture into a different path without external packages or host credentials. | Repository integrity and governed CLI checks remain meaningful; availability is explicitly unobserved, never reported as proven. |
 | OWN13 | Race two independent migration/restoration processes with different plans. | One exclusive transaction or explicit contention refusal; neither commits stale inputs or a mixed ownership state. |
@@ -75,3 +75,9 @@ Retain case JSON, subprocess logs, raw file hashes, fault schedules, recovery re
 Bind a later VREC to the exact committed implementation candidate after completion is separately recorded.
 Retain the approved plan and all failures, missing observations, recovery failures, and supported-version limits.
 Native activation, C10/C11 enforcement, live repository rollout, and public qualification are outside this contract.
+
+## Review clarification: recovery preservation
+
+The existing preservation rules also apply after interruption. Test changed tracked files, newly created destinations, corrupted snapshots, and tampered/truncated/path-escaping recovery records before attempting recovery.
+Recovery must retain usable diagnostic inputs and preserve unexpected current content; it must not overwrite that content merely to reconstruct the old snapshot.
+These are concrete negative cases for REQ-PLG-030 and PLG-OWN-005 through PLG-OWN-010, not permission to weaken rollback or delete owner changes.

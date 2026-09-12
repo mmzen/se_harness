@@ -112,7 +112,7 @@ The assurance decision remains with the assurance owner.
 
 ## Proposed evaluator ownership migration
 
-[WO-PLG-020](work-orders/WO-PLG-020.md) and its [review packet](../../notes/plugin-ownership-migration-2026-09-12.md) propose the evaluator prerequisite for WO-PLG-009. The new chain remains draft; no migration or prior-contract amendment is applied.
+[WO-PLG-020](work-orders/WO-PLG-020.md) and its [review packet](../../notes/plugin-ownership-migration-2026-09-12.md) propose the evaluator prerequisite for WO-PLG-009. The delegated route is selected; the chain remains draft pending [DEC-PLG-007](decisions/DEC-PLG-007.md). No migration or prior-contract amendment is applied.
 
 - [Requirements](requirements/REQ-PLG-028.md): REQ-PLG-028 through REQ-PLG-031.
 - [Specification](specifications/SPEC-PLG-020.md), [architecture](architecture/ARCH-PLG-003.md), [ADR](architecture/adr/ADR-PLG-003.md), and [verification](verification/VER-PLG-020.md).
