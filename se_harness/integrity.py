@@ -108,6 +108,23 @@ def stage_bytes(path: Path, content: bytes, *, prefix: str | None = None) -> Pat
     return staged
 
 
+def fsync_directory(path: Path) -> None:
+    """Flush directory entries on POSIX; Windows exposes no directory fsync.
+
+    File contents are flushed by the atomic writers on both platforms. This
+    additional barrier lets transactions order their journal and file entries
+    where the operating system supports it; errors propagate to the caller.
+    """
+
+    if os.name == "nt":
+        return
+    descriptor = os.open(path, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
 def atomic_write_bytes(path: Path, content: bytes) -> None:
     """Write `content` to a sibling temporary file, fsync it and replace `path` (ECP-PRM-008).
 
@@ -196,15 +213,21 @@ def validate_lock(value: Any) -> dict[str, Any]:
             "remove the stale .engineering-harness.lock and re-adopt the repository "
             "with harnessctl init"
         )
-    if type(schema) is not int or schema != LOCK_SCHEMA:
+    if type(schema) is not int or schema not in {LOCK_SCHEMA, 4}:
         raise IntegrityError("unsupported lock schema")
+    if schema == LOCK_SCHEMA and "skill_ownership" in value:
+        raise IntegrityError("plugin ownership requires lock schema 4")
+    if schema == 4:
+        from se_harness.skill_ownership import validate_ownership_binding
+
+        validate_ownership_binding(value.get("skill_ownership"))
     if value.get("hash_algorithm") != HASH_ALGORITHM:
         raise IntegrityError("unsupported lock hash algorithm")
     if value.get("hash_mode") != HASH_MODE:
         raise IntegrityError("unsupported lock hash mode")
     evaluator = value.get("evaluator")
     if not isinstance(evaluator, dict):
-        raise IntegrityError("schema-3 lock evaluator must be an object")
+        raise IntegrityError("supported lock evaluator must be an object")
     unknown = set(evaluator) - EVALUATOR_FIELDS
     if unknown:
         raise IntegrityError(f"unknown evaluator lock field: {sorted(unknown)[0]}")
@@ -231,6 +254,11 @@ def validate_lock(value: Any) -> dict[str, Any]:
     files = value.get("files")
     if not isinstance(files, dict):
         raise IntegrityError("lock files must be an object")
+    if schema == 4:
+        from se_harness.skill_ownership import catalog_paths
+
+        if set(files) & catalog_paths():
+            raise IntegrityError("plugin-owned catalog must not remain in repository lock entries")
     for relative, entry in files.items():
         if not isinstance(relative, str) or not relative:
             raise IntegrityError("lock paths must be non-empty strings")

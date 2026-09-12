@@ -112,7 +112,7 @@ The assurance decision remains with the assurance owner.
 
 ## Approved evaluator ownership migration
 
-[WO-PLG-020](work-orders/WO-PLG-020.md) and its [review packet](../../notes/plugin-ownership-migration-2026-09-12.md) propose the evaluator prerequisite for WO-PLG-009. The definition packet and eight applicability amendments are approved; [DEC-PLG-007](decisions/DEC-PLG-007.md) selects the narrow schema-4 exception. Delegated implementation awaits the approved class at the PR base and a successful live candidate check. No migration has run.
+[WO-PLG-020](work-orders/WO-PLG-020.md) supplies the evaluator prerequisite for WO-PLG-009. Its approved definition packet and eight applicability amendments merged in [PR #461](https://github.com/mmzen/se_harness/pull/461); [DEC-PLG-007](decisions/DEC-PLG-007.md) selects the narrow schema-4 exception. Delegated implementation started after the required live check passed at the merged base. The work order is in progress; [implementation evidence](evidence/WO-PLG-020/README.md) distinguishes development observations from the required committed-candidate acceptance. The [review and implementation note](../../notes/plugin-ownership-migration-2026-09-12.md) records the current boundary. Live repository migration and WO-PLG-009 remain separate later work.
 
 - [Requirements](requirements/REQ-PLG-028.md): REQ-PLG-028 through REQ-PLG-031.
 - [Specification](specifications/SPEC-PLG-020.md), [architecture](architecture/ARCH-PLG-003.md), [ADR](architecture/adr/ADR-PLG-003.md), and [verification](verification/VER-PLG-020.md).

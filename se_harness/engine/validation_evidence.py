@@ -18,7 +18,7 @@ from se_harness.evaluator_evidence import (
     unique_evidence_object,
     validate_evaluator_evidence,
 )
-from se_harness.integrity import raw_sha256
+from se_harness.integrity import IntegrityError, raw_sha256, validate_lock
 from se_harness.engine.validation_core import (
     Artifact,
     Diagnostic,
@@ -312,7 +312,13 @@ def _validate_evaluator_evidence_binding(
     except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as exc:
         _evaluator_binding_error(artifact, errors, repository_root, f"cannot read standard evaluator lock: {exc}")
         return
-    expected_evaluator = lock.get("evaluator") if isinstance(lock, dict) and lock.get("schema") == 3 else None
+    if isinstance(lock, dict) and lock.get("schema") == 4:
+        try:
+            validate_lock(lock)
+        except IntegrityError as exc:
+            _evaluator_binding_error(artifact, errors, repository_root, f"invalid plugin ownership lock: {exc}")
+            return
+    expected_evaluator = lock.get("evaluator") if isinstance(lock, dict) and lock.get("schema") in {3, 4} else None
     expected_fields = {"version", "payload_manifest", "payload_sha256", "archive_name", "archive_sha256"}
     if (
         not isinstance(expected_evaluator, dict)

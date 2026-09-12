@@ -1,0 +1,69 @@
+{
+  "authority": "Explicit operator approval of the reviewed revision-2 definition and scope supplement; not execution delegation.",
+  "effects": [
+    {
+      "after_sha256": "7f3cc3f9d2f9b8d268b2f5dc0c7508e579ee130f93e55883f71f865accfca3bf",
+      "before_sha256": "4f98ce9e785a379b1fede46ab8159fe8ccc8160c0b5ddd6c515dc5244b619bf1",
+      "effect": "append approved applicability text",
+      "path": "docs/engineering/ci-pipeline/specifications/SPEC-CIP-003.md",
+      "role": "technical-owner"
+    },
+    {
+      "after_sha256": "434b915707c5e03514e9d46e35e3e8d475014efec1eb64f12a51ee7a31e4e74b",
+      "before_sha256": "fd8d51babd33bd59c8c92e5b7ad9f0a1f36f0a7a1c43c60a758d0ca778de63e8",
+      "effect": "append approved applicability text",
+      "path": "docs/engineering/execution-control-plane/requirements/REQ-ECP-027.md",
+      "role": "requirements-steward"
+    },
+    {
+      "after_sha256": "72d17b962742f4911650f841186132c22469d1c2a8f899b35c870f174a623e31",
+      "before_sha256": "df813245a4c3ae9366f1b6534d0b99e20cf1f7b828cb5af285e4fd43f47f82e1",
+      "effect": "append approved applicability text",
+      "path": "docs/engineering/execution-control-plane/specifications/SPEC-ECP-016.md",
+      "role": "technical-owner"
+    },
+    {
+      "after_sha256": "5c8290b22d312b0a1c07d1e023bdc64cbb094b860ba6928a9fc05a9ee34148c0",
+      "before_sha256": "0d329fc324ded33538769c61628ad22d024fdb8500a75ca79d3cf3ea7363c5f0",
+      "effect": "append approved applicability text",
+      "path": "docs/engineering/ci-pipeline/requirements/REQ-CIP-009.md",
+      "role": "requirements-steward"
+    },
+    {
+      "after_sha256": "2a7301a3a3b6a2c15ca0faaf67c120ae8db0473955bdd614546971aca28d8879",
+      "before_sha256": "ed25503b38b7f1fa864bfb218ba5a7d083a6fd83abe3219dd86d5f64906b1ae9",
+      "effect": "append approved applicability text",
+      "path": "docs/engineering/ci-pipeline/verification/VER-CIP-003.md",
+      "role": "assurance-owner"
+    },
+    {
+      "after_sha256": "f08edc50b1fb95ff9ea14b1ae9d9b7ec797dedb36663d5ef42a56e3c6d3c5e7b",
+      "before_sha256": "5b9f28a2af1585438874b2f932c5b693cbb7691cc0ed1cd0bfc07378ff32c407",
+      "effect": "add ten approved scope paths and record owner decision",
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-020.md",
+      "role": "engineering-owner"
+    }
+  ],
+  "lifecycle_after": "in_progress",
+  "lifecycle_before": "in_progress",
+  "observed_at_utc": "2026-09-12T14:49:44Z",
+  "proposal": {
+    "path": "supplement-revision-2.md",
+    "sha256": "6fa1ee1b63c28cb4a406834987911822659792194f100f45a856a89561814ff1"
+  },
+  "schema": "wo-plg-020-supplement-approval-receipt-v1",
+  "scope_additions": [
+    "docs/engineering/ci-pipeline/specifications/SPEC-CIP-003.md",
+    "tests/test_ci_pipeline.py",
+    "docs/engineering/execution-control-plane/requirements/REQ-ECP-027.md",
+    "docs/engineering/execution-control-plane/specifications/SPEC-ECP-016.md",
+    "docs/notes/harnessctl-reference.md",
+    "tests/test_cli_shape.py",
+    "docs/engineering/ci-pipeline/requirements/REQ-CIP-009.md",
+    "docs/engineering/ci-pipeline/verification/VER-CIP-003.md",
+    "docs/notes/ci-pipeline.md",
+    "docs/notes/developing-se-harness.md"
+  ],
+  "user_instruction": "i approve supplement revision 2 to reconcile the CI/CLI contracts and ten required scope additions",
+  "verification_or_release_decision": false
+}

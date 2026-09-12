@@ -26,7 +26,7 @@ from tests.cli_support import invoke
 #: non-repository commands take none (WO-ECP-030 retired rehearse-recovery and renumber-artifacts).
 REPOSITORY_COMMANDS = {
     "init", "validate", "inspect", "dashboard", "doctor", "preflight", "check", "evidence",
-    "pr-body", "transition", "upgrade", "scaffold-domain", "create-artifact",
+    "pr-body", "transition", "upgrade", "skill-ownership", "scaffold-domain", "create-artifact",
     "release-unit", "capture-verification", "prepare-release", "decide", "raise-risk", "risks",
 }
 NON_REPOSITORY_COMMANDS = {"select-work-order", "identity"}
@@ -59,6 +59,14 @@ class ParserShapeTests(unittest.TestCase):
             with self.subTest(command=name):
                 self.assertEqual(["target"], _positionals(choices[name]))
                 self.assertFalse(_options(choices[name]) & {"--root", "--repository", "--checkout-root"})
+                target = next(action for action in choices[name]._actions if action.dest == "target")
+                if name == "skill-ownership":
+                    self.assertTrue(target.required)
+                    self.assertIsNone(target.nargs)
+                    self.assertIsNone(target.default)
+                else:
+                    self.assertEqual("?", target.nargs)
+                    self.assertEqual(".", target.default)
         for name in NON_REPOSITORY_COMMANDS:
             with self.subTest(command=name):
                 self.assertEqual([], _positionals(choices[name]))
@@ -81,6 +89,58 @@ class ParserShapeTests(unittest.TestCase):
                 continue
             with self.subTest(command=name):
                 self.assertIn("--json", _options(subparser))
+
+    def test_skill_ownership_requires_explicit_target_and_provider(self) -> None:
+        # WO-PLG-020: the sole optional-target exception keeps the exact census.
+        ownership = _subparsers(build_parser())["skill-ownership"]
+        provider = next(action for action in ownership._actions if action.dest == "provider")
+        self.assertTrue(provider.required)
+        self.assertEqual({"plugin", "repository"}, set(provider.choices))
+        for arguments, diagnostic in (
+            (("skill-ownership", "--provider", "repository"), "target"),
+            (("skill-ownership", "explicit-repository"), "--provider"),
+            (("skill-ownership", "explicit-repository", "--provider", "automatic"), "invalid choice"),
+        ):
+            with self.subTest(arguments=arguments):
+                code, output, error = invoke(*arguments)
+                self.assertEqual(2, code)
+                self.assertEqual("", output)
+                self.assertIn(diagnostic, error)
+
+    def test_skill_ownership_plans_by_default_and_applies_reviewed_selection(self) -> None:
+        # Parser/handler selection only; real package authority is covered by OWN01.
+        target = Path("explicit-repository")
+        binding = Path("explicit-binding.json")
+        digest = "a" * 64
+        planned = {"schema": SCHEMA, "command": "skill-ownership", "outcome": "planned", "passed": True}
+        applied = {**planned, "outcome": "applied"}
+        arguments = ("skill-ownership", str(target), "--provider", "plugin",
+                     "--binding-input", str(binding), "--json")
+        with mock.patch("se_harness.skill_ownership.plan_skill_ownership", return_value=planned) as plan, \
+                mock.patch("se_harness.skill_ownership.apply_skill_ownership", return_value=applied) as apply:
+            code, output, error = invoke(*arguments)
+            self.assertEqual((0, ""), (code, error))
+            self.assertEqual(planned, json.loads(output))
+            plan.assert_called_once_with(target, provider="plugin", binding_input=binding)
+            apply.assert_not_called()
+            plan.reset_mock()
+            code, output, error = invoke(*arguments, "--apply", "--expected-plan-sha256", digest)
+            self.assertEqual((0, ""), (code, error))
+            self.assertEqual(applied, json.loads(output))
+            plan.assert_not_called()
+            apply.assert_called_once_with(target, provider="plugin", binding_input=binding,
+                                          expected_plan_sha256=digest)
+        for extra, diagnostic in (
+            (("--apply",), "invalid SHA-256: reviewed ownership plan"),
+            (("--expected-plan-sha256", digest), "--expected-plan-sha256 requires --apply"),
+        ):
+            with self.subTest(arguments=extra):
+                code, output, error = invoke(*arguments, *extra)
+                self.assertEqual((1, ""), (code, error))
+                result = json.loads(output)
+                self.assertEqual((SCHEMA, "skill-ownership", "failed", False),
+                                 (result["schema"], result["command"], result["outcome"], result["passed"]))
+                self.assertIn(diagnostic, result["error"])
 
     def test_prepare_release_names_its_actor_owner_and_knows_no_authorized_by(self) -> None:
         # ECP-CLI-002, amended under WO-ECP-025 (ECP-TMB-006): the pre-parse guard is

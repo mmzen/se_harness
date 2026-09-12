@@ -105,3 +105,12 @@ the state code (`WEX301`) exactly once, and the exit code is `1`.
 ## Open decisions
 
 None.
+
+
+## Approved supplemental reconciliation — 2026-09-12
+
+The operator approved WO-PLG-020 supplement revision 2 as `requirements-steward` at `2026-09-12T14:49:44Z`. The recorded instruction was: "i approve supplement revision 2 to reconcile the CI/CLI contracts and ten required scope additions". The retained proposal and decision receipt are in WO-PLG-020's governance evidence. This records only the selected definition amendment; historical approvals and observations remain unchanged.
+
+### Applicability amendment — WO-PLG-020 explicit ownership selection
+
+For the ownership operation selected by REQ-PLG-028 and SPEC-PLG-020, `skill-ownership` is a repository command whose positional `target` is required and has no implicit default. This is the sole exception to this requirement's optional-target rule: the repository argument keeps the same positional name and no alternate repository option is introduced. The operation keeps the standard JSON envelope and exit-code convention; its bounded transaction outcomes are the distinct observations required by PLG-OWN-027. Every other command and every other rule of REQ-ECP-027 remain unchanged.

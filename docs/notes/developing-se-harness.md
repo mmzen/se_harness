@@ -62,6 +62,16 @@ python -m se_harness doctor .
 
 Run phase-appropriate work-order preflight and focused checks required by the governing verification contract. No formatter or linter is currently declared as a repository gate.
 
+For retained-skill ownership changes, `tests/test_skill_ownership.py` exposes the
+shared `acceptance_suite(smoke=...)` used by source and isolated installed-package
+acceptance. Ordinary test discovery includes the full class. Source mode uses
+an explicit installed-authority fixture; package mode uses the real installed
+identity and mutation guard. Keep candidate package environments, disposable
+repositories, and the explicit `SE_HARNESS_OWNERSHIP_EVIDENCE` directory outside
+the checkout. VER-PLG-020 requires Python 3.11 interface/compatibility smoke and
+the complete Python 3.13 ownership/fault matrix on both Ubuntu and Windows.
+Record unavailable filesystem mechanisms separately from passed refusals.
+
 Generated dashboards, bytecode, environments, raw build output, normalized distributions, and disposable acceptance repositories are derived and must not become formal authority.
 
 ## Evaluator and candidate evidence
@@ -79,6 +89,26 @@ The standard managed workflow owns the released-evaluator lane. `.github/workflo
 Trigger policy (`WO-CIP-001`, `SPEC-CIP-001` CIP-TRG): the candidate-evidence workflows run on every pull request and on pushes to `main`, `release/**` and `candidate/**` only, and a newer push to the same ref cancels the older run, so one commit produces one run of each workflow. The pull-request run is the authoritative one; the integration-package lane only passes there. The managed `engineering-harness.yml` carries the same policy in the standard template; this repository's hash-locked root copy keeps the unfiltered triggers until the root-evaluator upgrade replaces it, which is why a push to a branch without a pull request still runs that one workflow, unfiltered.
 
 The candidate wheel is built once, in `candidate-source`, from a Git export of the exact commit, and handed to `candidate-package` and to both `upgrade-rehearsal` legs as the one-day artifact `candidate-wheel-non-promotable-<sha>` with a `SHA256SUMS` file that every consumer verifies before use (`SPEC-CIP-001` CIP-ART). No consumer runs `pip wheel` or `python -m build`. The artifact is candidate evidence, not a distribution; the promotable build is still the recipe replay under a released record.
+
+WO-PLG-020 adds a non-promotable source archive from that same export so inventory
+tests inspect actual wheel and sdist members. Both hashes and the source-member
+list accompany the one shared wheel. After the existing upgrade rehearsals,
+each `upgrade-rehearsal` platform runs the same ownership acceptance runner on
+source and on an isolated installed candidate: smoke on Python 3.11, then the
+full ownership/fault matrix on Python 3.13. The latter uses separately named
+external candidate and predecessor environments and installs the already
+verified wheel. The approved narrow CI applicability amendment permits that
+additional interpreter step; complete-candidate qualification and the canonical
+full repository suite still run once in `candidate-source` on Python 3.11.
+
+Ownership evidence starts with an explicit `incomplete` runtime record and
+retains exact interpreter/platform, tested Git commit and PR head, wheel and
+archive hashes, per-case JSON, subprocess logs, recursive snapshots, and raw
+recovery metadata under `skill-ownership-Linux` or `skill-ownership-Windows`.
+Package runs use isolated Python outside the checkout; source runs identify
+their authority fixture explicitly. A missing observation is not a passed
+refusal. These are candidate acceptance results and do not change the release
+sequences, the root-evaluator adoption procedure, or native host qualification.
 
 The predecessor evaluator's facts are derived, not restated (`WO-CIP-003`, `SPEC-CIP-001` CIP-PRE). Before any network step, `candidate-source` runs `python -m repository_tools.evaluator_facts derive --repository . --github-output "$GITHUB_OUTPUT"`, which reads the declared root — `tool_version` in `.engineering-harness.toml`, the `evaluator` block of `.engineering-harness.lock` (version, `archive_name`, `archive_sha256`, `payload_sha256`) — and the candidate's own `pyproject.toml` version, and exports them as job outputs. `candidate-package` and both `upgrade-rehearsal` legs take every predecessor value from those outputs; the repository-owned workflows carry no version or digest literal for the evaluator, and `tests/test_ci_pipeline.py` asserts that. The derivation fails closed with a `PRE0nn` code naming what is missing. Since `WO-ECP-010` no migration scenario exists: the `upgrade-rehearsal` legs run `repository_tools.upgrade_rehearsal`, the successor's real `upgrade --apply` against a throwaway export holding the predecessor's lock (see [rehearsing the root-evaluator handover](evaluator-migration-rehearsal.md)).
 

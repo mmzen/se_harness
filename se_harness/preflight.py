@@ -18,6 +18,7 @@ from se_harness.installer import (
     LOCK_NAME,
     HarnessError,
     ensure_target,
+    effective_template_files,
     load_lock,
     plan_install,
     safe_destination,
@@ -225,7 +226,12 @@ def inspect_installation(target: Path) -> list[InstallationCheck]:
         lock = load_lock(target)
         changes, _ = plan_install(target, project_name=None, mode="upgrade")
         desired_by_path = {item.path: item for item in changes}
-        expected_by_path = {item.target.as_posix(): item for item in template_files()}
+        expected_by_path = {item.target.as_posix(): item for item in effective_template_files(lock)}
+        if lock.get("schema") == 4:
+            checks.append(InstallationCheck(
+                "skill-ownership", True,
+                "validated plugin ownership; external availability and native loading are unobserved",
+            ))
         lock_files = lock.get("files", {})
 
         for relative, template in sorted(expected_by_path.items()):

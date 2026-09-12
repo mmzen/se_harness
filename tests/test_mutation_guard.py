@@ -20,8 +20,8 @@ from se_harness.evaluator_evidence import (
 )
 from se_harness.evaluator_identity import EvaluatorIdentityError, InstalledEvaluatorIdentity, PAYLOAD_MANIFEST
 from se_harness.hash_bound import LOCK_RELATIVE
-from se_harness.installer import HarnessError, apply_changes, plan_install
-from se_harness.integrity import raw_sha256
+from se_harness.installer import HarnessError, apply_changes, plan_install, template_files
+from se_harness.integrity import canonical_sha256, raw_sha256
 from se_harness.mutation_guard import (
     PUBLIC_MUTATION_OPERATIONS,
     require_mutation_authority,
@@ -78,6 +78,20 @@ class MutationGuardTests(unittest.TestCase):
             "files": {},
         }
         if schema == 3:
+            from se_harness.skill_ownership import catalog_paths
+
+            for template in template_files():
+                relative = template.target.as_posix()
+                if relative not in catalog_paths():
+                    continue
+                destination = root / relative
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                content = template.source.read_bytes()
+                destination.write_bytes(content)
+                lock["files"][relative] = {
+                    "mode": template.mode,
+                    "sha256": canonical_sha256(content),
+                }
             lock["evaluator"] = {
                 "version": __version__,
                 "payload_manifest": PAYLOAD_MANIFEST,
@@ -377,6 +391,8 @@ class MutationGuardTests(unittest.TestCase):
         self.assertEqual(before, self._snapshot(root))
 
     def test_every_public_mutator_rejects_before_any_target_write(self) -> None:
+        from se_harness.skill_ownership import apply_skill_ownership
+
         root = self.base / "all-mutators"
         changes, old_lock = plan_install(root, project_name="All Mutators", mode="init")
         apply_changes(root, changes, old_lock, allow_updates=False)
@@ -431,6 +447,9 @@ class MutationGuardTests(unittest.TestCase):
                 ),
                 lambda: apply_changes(root, [], {"tool_version": __version__}, allow_updates=False),
                 lambda: apply_changes(root, upgrade_changes, upgrade_lock, allow_updates=True),
+                lambda: apply_skill_ownership(
+                    root, provider="repository", expected_plan_sha256="0" * 64,
+                ),
                 lambda: apply_transition(SimpleNamespace(root=root)),
                 lambda: capture_verification(
                     root,
@@ -470,6 +489,7 @@ class MutationGuardTests(unittest.TestCase):
                 "create-artifact",
                 "installed-root-apply",
                 "upgrade-apply",
+                "skill-ownership-apply",
                 "transition-apply",
                 "capture-verification",
                 "prepare-release",

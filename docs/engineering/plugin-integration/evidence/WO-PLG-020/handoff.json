@@ -1,0 +1,442 @@
+{
+  "compliance": {
+    "change_set_source": "git",
+    "checkpoint": "handoff",
+    "formal_snapshot_sha256": "9fafd34d95bb96416bd1cbc5ca9e9754dba5df0632c23393f46d1c5becb9ced1",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "predicates": [
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-PLG-020"
+              }
+            ],
+            "id": "QGP-G4I-STATUS",
+            "message": "WO-PLG-020 status is in_progress.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-PLG-020"
+              }
+            ],
+            "id": "QGP-G4I-GRAPH",
+            "message": "The selected formal graph is valid.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "id": "QGP-G4I-INTEGRITY",
+            "message": "No repository-integrity blocker prevents selected evaluation.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-PLG-020:[execution_scope]"
+              }
+            ],
+            "id": "QGP-G4I-SCOPE",
+            "message": "WO-PLG-020 declares 51 normalized scope path(s).",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-PLG-020"
+              }
+            ],
+            "id": "QGP-G4I-COMPLETE",
+            "message": "The caller explicitly asserted that the declared change set is complete.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-PLG-020"
+              }
+            ],
+            "id": "QGP-G4I-PATHS",
+            "message": "All 68 declared changed path(s) are within execution scope.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-PLG-020:review"
+              }
+            ],
+            "id": "QGP-G4I-PREFLIGHT",
+            "message": "Released-installation review preflight inputs are ready.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-PLG-020"
+              }
+            ],
+            "id": "QGP-G4I-EVIDENCE",
+            "message": "Fresh retained evidence is bound at docs/engineering/plugin-integration/evidence/WO-PLG-020/WO-PLG-020-handoff.md.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-PLG-020"
+              }
+            ],
+            "id": "QGP-G4I-DECISION",
+            "message": "No open decision blocks WO-PLG-020.",
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      }
+    ],
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT"
+  },
+  "findings": {
+    "repository_blockers": [],
+    "scoped_blockers": [],
+    "unrelated_count": 46
+  },
+  "mutation": {
+    "writes": []
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "procedure": {
+    "current_step": "STEP-WO-IMPLEMENT-DECIDE",
+    "id": "PROC-WO-IMPLEMENT",
+    "steps": [
+      {
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-PLG-020",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-PLG-020",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-DECISION": {
+            "decision_right": "DR-DECISION-DISPOSE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-PLG-020",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-PLG-020",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Evaluated implementation handoff for WO-PLG-020."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ]
+      },
+      {
+        "artifact": "WO-PLG-020",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "decision_right": "DR-WO-COMPLETE",
+        "effects": [
+          "An explicit completion decision permits only WO-PLG-020 to become implemented."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-DECIDE",
+        "kind": "decision",
+        "non_effects": [
+          "Completion does not verify or release the work."
+        ],
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "response": "Mark WO-PLG-020 implemented.",
+        "role": "engineering-owner"
+      }
+    ]
+  },
+  "restitution": {
+    "alternatives": [],
+    "blocked_by": [],
+    "command_or_response": {
+      "kind": "response",
+      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for e33d8c8: HTTP 422"
+    },
+    "current_lifecycle_state": [
+      "WO-PLG-020 is in_progress."
+    ],
+    "decision_required": {
+      "artifact": "WO-PLG-020",
+      "decision": "whether the authorized implementation and evidence are complete",
+      "decision_right": "DR-WO-COMPLETE",
+      "delegation": {
+        "class": "execution",
+        "gate": "not passing"
+      },
+      "outcomes": [
+        "implemented",
+        "continue",
+        "reject"
+      ],
+      "role": "delegated-executor"
+    },
+    "done": [
+      "Evaluated handoff compliance for WO-PLG-020."
+    ],
+    "next": {
+      "action": "whether the authorized implementation and evidence are complete",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-DECIDE"
+    },
+    "not_done": [],
+    "outcome": "completed"
+  },
+  "result_sha256": "c55ee2be58c9058b3b2f756f0c8c527543df19361299f282e623fd80bbe70334",
+  "schema": "se-harness-workflow-result-v2",
+  "scope": {
+    "change_set_complete": true,
+    "changed_paths": [
+      ".github/workflows/candidate-evidence.yml",
+      "docs/engineering/ci-pipeline/requirements/REQ-CIP-009.md",
+      "docs/engineering/ci-pipeline/specifications/SPEC-CIP-003.md",
+      "docs/engineering/ci-pipeline/verification/VER-CIP-003.md",
+      "docs/engineering/execution-control-plane/requirements/REQ-ECP-027.md",
+      "docs/engineering/execution-control-plane/specifications/SPEC-ECP-016.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/acceptance-source-development-observations.zip",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/acceptance-source-observation-index.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/acceptance-source-raw-inventory.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/ci-script-validation/ci-contract-tests.stderr.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/ci-script-validation/ci-contract-tests.stdout.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/ci-script-validation/embedded-python-compilation.stderr.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/ci-script-validation/embedded-python-compilation.stdout.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/ci-script-validation/focused-checks.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/ci-script-validation/powershell-parsing.stderr.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/ci-script-validation/powershell-parsing.stdout.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/default-upgrade-regressions.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/default-upgrade-regressions.stderr.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/default-upgrade-regressions.stdout.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/preliminary-package-evidence-index.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/preliminary-package-raw-evidence.zip",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/source-regression-initial.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/supplemental-cli-documentation-final.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/approved-doctor.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/approved-review-preflight.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/approved-scope.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/approved-validation.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/start-applied.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/start-check.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/start-preflight.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/supplement-revision-2-approval.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/supplement-revision-2.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/handoff.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/README.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/WO-PLG-020-handoff.md",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-020.md",
+      "docs/notes/ci-pipeline.md",
+      "docs/notes/developing-se-harness.md",
+      "docs/notes/harnessctl-reference.md",
+      "docs/notes/plugin-ownership-migration-2026-09-12.md",
+      "pyproject.toml",
+      "se_harness/cli.py",
+      "se_harness/engine/validation_evidence.py",
+      "se_harness/installer.py",
+      "se_harness/integrity.py",
+      "se_harness/mutation_guard.py",
+      "se_harness/preflight.py",
+      "se_harness/skill_ownership.py",
+      "se_harness/skill_ownership_contract.json",
+      "templates/repository/standard/docs/engineering/WORKFLOW.md",
+      "tests/fixtures/skill_ownership/expected.json",
+      "tests/fixtures/skill_ownership/payload/skills/harness-operator-brief/scripts/check_brief.py",
+      "tests/fixtures/skill_ownership/payload/skills/harness-operator-brief/skill-contract.json",
+      "tests/fixtures/skill_ownership/payload/skills/harness-operator-brief/SKILL.md",
+      "tests/fixtures/skill_ownership/payload/skills/harness-orient/scripts/orient.py",
+      "tests/fixtures/skill_ownership/payload/skills/harness-orient/skill-contract.json",
+      "tests/fixtures/skill_ownership/payload/skills/harness-orient/SKILL.md",
+      "tests/fixtures/skill_ownership/README.md",
+      "tests/fixtures/skill_ownership/transaction_worker.py",
+      "tests/test_ci_pipeline.py",
+      "tests/test_cli_shape.py",
+      "tests/test_harnessctl.py",
+      "tests/test_integration_package.py",
+      "tests/test_integrity_primitives.py",
+      "tests/test_mutation_guard.py",
+      "tests/test_skill_ownership.py",
+      "tests/test_workflow_documentation_contract.py"
+    ],
+    "declared_paths": [
+      ".github/workflows/candidate-evidence.yml",
+      "docs/engineering/agentic-execution/requirements/REQ-AEX-009.md",
+      "docs/engineering/agentic-execution/specifications/SPEC-AEX-005.md",
+      "docs/engineering/ci-pipeline/requirements/REQ-CIP-009.md",
+      "docs/engineering/ci-pipeline/specifications/SPEC-CIP-003.md",
+      "docs/engineering/ci-pipeline/verification/VER-CIP-003.md",
+      "docs/engineering/execution-control-plane/requirements/REQ-ECP-027.md",
+      "docs/engineering/execution-control-plane/specifications/SPEC-ECP-016.md",
+      "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-003.md",
+      "docs/engineering/plugin-integration/architecture/ARCH-PLG-003.md",
+      "docs/engineering/plugin-integration/decisions/DEC-PLG-007.md",
+      "docs/engineering/plugin-integration/evidence/VREC-PLG-015-evaluator.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-028.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-029.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-030.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-031.md",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-020.md",
+      "docs/engineering/plugin-integration/verification-records/VREC-PLG-015.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-020.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-020.md",
+      "docs/engineering/portable-managed-integrity/specifications/SPEC-PMI-001.md",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-024.md",
+      "docs/engineering/repository-harness-upgrade/specifications/SPEC-HUP-012.md",
+      "docs/engineering/repository-harness-upgrade/verification/VER-HUP-012.md",
+      "docs/engineering/technical-communication/requirements/REQ-TCM-004.md",
+      "docs/engineering/technical-communication/specifications/SPEC-TCM-001.md",
+      "docs/notes/ci-pipeline.md",
+      "docs/notes/developing-se-harness.md",
+      "docs/notes/harnessctl-reference.md",
+      "docs/notes/plugin-ownership-migration-2026-09-12.md",
+      "pyproject.toml",
+      "se_harness/cli.py",
+      "se_harness/engine/validation_evidence.py",
+      "se_harness/installer.py",
+      "se_harness/integrity.py",
+      "se_harness/mutation_guard.py",
+      "se_harness/preflight.py",
+      "se_harness/skill_ownership.py",
+      "se_harness/skill_ownership_contract.json",
+      "templates/repository/standard/docs/engineering/WORKFLOW.md",
+      "tests/fixtures/skill_ownership/",
+      "tests/test_ci_pipeline.py",
+      "tests/test_cli_shape.py",
+      "tests/test_harnessctl.py",
+      "tests/test_integration_package.py",
+      "tests/test_integrity_primitives.py",
+      "tests/test_mutation_guard.py",
+      "tests/test_skill_ownership.py",
+      "tests/test_workflow_documentation_contract.py"
+    ],
+    "dependencies": [],
+    "governing": [
+      "ADR-PLG-003",
+      "ARCH-PLG-003",
+      "CAP-DST-001",
+      "INT-DST-001",
+      "REQ-PLG-028",
+      "REQ-PLG-029",
+      "REQ-PLG-030",
+      "REQ-PLG-031",
+      "SPEC-PLG-020",
+      "VER-PLG-020"
+    ],
+    "mode": "selected"
+  },
+  "selection": {
+    "artifacts": [
+      "WO-PLG-020"
+    ],
+    "primary": "WO-PLG-020"
+  },
+  "state": {
+    "after": [
+      {
+        "id": "WO-PLG-020",
+        "status": "in_progress"
+      }
+    ],
+    "before": [
+      {
+        "id": "WO-PLG-020",
+        "status": "in_progress"
+      }
+    ]
+  }
+}

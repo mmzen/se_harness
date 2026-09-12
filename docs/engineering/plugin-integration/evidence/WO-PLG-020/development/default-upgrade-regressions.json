@@ -1,0 +1,37 @@
+{
+  "argv": [
+    "C:\\Python313\\python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "tests.test_standard_repository_lifecycle.StandardRepositoryLifecycleTests.test_agents_only_upgrade_adds_host_surfaces_without_changing_orientation",
+    "tests.test_standard_repository_lifecycle.StandardRepositoryLifecycleTests.test_standard_upgrade_reports_customized_skills_without_overwriting_them",
+    "tests.test_harnessctl.HarnessCtlTests.test_repository_owned_upgrade_still_repairs_a_missing_retained_file",
+    "-v"
+  ],
+  "classification": "uncommitted source development regression; not final candidate qualification",
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20",
+  "elapsed_seconds": 4.8820083000464365,
+  "exit_status": 0,
+  "outputs": {
+    "stderr": {
+      "bytes": 747,
+      "path": "default-upgrade-regressions.stderr.log",
+      "sha256": "07de8073428ed68785216e56b21621402b2158fcd7587d4fc3df1737450724c2"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "default-upgrade-regressions.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "purpose": "Retain raw console evidence for the final structural-only schema-3 guard regression fixes.",
+  "schema": "wo-plg-020-focused-development-observation-v1",
+  "source_hashes_before": {
+    "se_harness/installer.py": "11cb4c3241fa1e9729f42be5695b46aead7702296c2c33bcaabd58fed3277524",
+    "se_harness/skill_ownership.py": "9fe1090083d88ab8b7c140915229e76fc6cadbc78802e1167dc7e064a219cdf2",
+    "tests/test_harnessctl.py": "689199a14960a3ebea97021223046d4ec82382de267facbde27411ec35c5dbe7",
+    "tests/test_standard_repository_lifecycle.py": "5bcbee1fd6bdd03e9057225a1f07b05675c6efe036b115420feac14bbc62734f"
+  },
+  "started_at_utc": "2026-09-12T14:30:03.304781+00:00"
+}

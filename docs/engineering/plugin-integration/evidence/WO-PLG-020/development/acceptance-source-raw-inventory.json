@@ -1,0 +1,440 @@
+{
+  "files": [
+    {
+      "bytes": 640734,
+      "path": "acceptance-source-development/test_own01_exact_catalog_and_each_selected_host-e21d646b.json",
+      "sha256": "cbb91ed02ccc60b57fc0656ea3ba0544dfe0a691611e355135366e3b6bbb4c08"
+    },
+    {
+      "bytes": 58711,
+      "path": "acceptance-source-development/test_own02_preserves_owner_content_and_directories-40daaf47.json",
+      "sha256": "6ce8d0ddd7c670b1bb70cfd60a5262a582b8e65d55ea798492a36387b724bcfa"
+    },
+    {
+      "bytes": 57058,
+      "path": "acceptance-source-development/test_own03_actual_external_file_size_limit-c22a7556.json",
+      "sha256": "3f183088de09c7ccbaa0d94ac30a708d62241738aaeae882645fda132fb688ac"
+    },
+    {
+      "bytes": 188415,
+      "path": "acceptance-source-development/test_own03_closed_binding_duplicate_keys_and_control_limit-0721e744.json",
+      "sha256": "2eedbd40b316f8021d9c2ddb7a531b3c4166ae3ee14ab16de4628cd58aa221b1"
+    },
+    {
+      "bytes": 101585,
+      "path": "acceptance-source-development/test_own03_external_hard_link_and_unlisted_file_refuse-3e4cc85d.json",
+      "sha256": "606ca84abb50918c095cb6049f16e805c9e366d3dd3de7a2ad5728e0d8ddbfff"
+    },
+    {
+      "bytes": 57411,
+      "path": "acceptance-source-development/test_own03_hard_link_refusal-dd3110ba.json",
+      "sha256": "ce4f2e5e0bb77a9f6d86deba65f6b5f2dab889b34210a5da04607457d92e95de"
+    },
+    {
+      "bytes": 144569,
+      "path": "acceptance-source-development/test_own03_inventory_count_and_declared_size_limits-533d67b9.json",
+      "sha256": "31842704580fd9585919d480c12e7b916d90ebeaf17862c4e3afba4efbacf516"
+    },
+    {
+      "bytes": 140903,
+      "path": "acceptance-source-development/test_own03_modified_missing_and_unowned_catalog_refuse-4a902aab.json",
+      "sha256": "dc8f6c093774c55296995e8fce4bb783dd966d9cdb951d9f5ccb28bc61935a3b"
+    },
+    {
+      "bytes": 13615,
+      "path": "acceptance-source-development/test_own03_symbolic_link_refusal-56b74136.json",
+      "sha256": "df6b6d56b5fc3b8343b541656e6855822a9797773353b4217afe0412f720d555"
+    },
+    {
+      "bytes": 319792,
+      "path": "acceptance-source-development/test_own03_unsafe_inventory_paths_and_case_collisions-3e8e25aa.json",
+      "sha256": "8b9ec85b32183c05b11f22c1ada78c3e5cd8df09e714420480ce5528e2265939"
+    },
+    {
+      "bytes": 57017,
+      "path": "acceptance-source-development/test_own03_windows_reparse_junction_refusal-7698c80b.json",
+      "sha256": "3c7b12c9dcbdba4ed60b2cb8c7c5cbbf9a2fcd7bfc744fd4d4ac7438b6ff17b4"
+    },
+    {
+      "bytes": 723410,
+      "path": "acceptance-source-development/test_own04_stale_equal_size_file_lock_binding_and_inventory-ef0fb73e.json",
+      "sha256": "c21087c7ed23f4d0a560cb2b92bf7579e3dde31e0a0b634ab9f84ccca5356bf4"
+    },
+    {
+      "bytes": 358188,
+      "path": "acceptance-source-development/test_own05_replay_doctor_and_direct_installer_preserve_binding-4605d0da.json",
+      "sha256": "63a7edacdb5b9c766304c79649a742776f340e74f3a96e88c4e216a1d1943502"
+    },
+    {
+      "bytes": 124081,
+      "path": "acceptance-source-development/test_own06_invalid_ownership_format_upgrade_is_atomic-0de52220.json",
+      "sha256": "5405ff7845f00dcac0c96556218e6f211ff01f6a70e3ad4eef0623e4ff3ed5a6"
+    },
+    {
+      "bytes": 172716,
+      "path": "acceptance-source-development/test_own07_released_017_reader_refuses_all_writing_entry_points-9bdfa3e9.json",
+      "sha256": "66e0a27ae99f6a4a81c4da2de06c000856f96c9c6be5d640a4678d82ca243d26"
+    },
+    {
+      "bytes": 134852,
+      "path": "acceptance-source-development/test_own07_unsupported_old_lock_refuses_before_writes-ec588411.json",
+      "sha256": "407d2b76b332ffdfe67f53b66d2ae7b1e60624f830e6852e247b02f089879342"
+    },
+    {
+      "bytes": 124886,
+      "path": "acceptance-source-development/test_own08_current_lock_evaluator_evidence_matches_schema4_identity-cdf322c3.json",
+      "sha256": "689ba20b1cd8ecb50abcf049652b44bd01e5a27735c061b55e3a489a96e791f5"
+    },
+    {
+      "bytes": 287232,
+      "path": "acceptance-source-development/test_own08_reintroduced_copy_and_deleted_or_tampered_binding_fail_integrity-8fd3765a.json",
+      "sha256": "743356f232d84ac9ba75c634dfcbd7ddf89ab360f282204b036b854e7a25de86"
+    },
+    {
+      "bytes": 3112016,
+      "path": "acceptance-source-development/test_own09_exception_at_each_write_and_durable_boundary_rolls_back-311d1aec.json",
+      "sha256": "c3eb9e0eca03ecf7513ea34f1e4be4f879843f369c3c83b1545ce0f78b8901c4"
+    },
+    {
+      "bytes": 1074919,
+      "path": "acceptance-source-development/test_own10_intervening_owner_edits_and_new_files_are_preserved-aeee8c9a.json",
+      "sha256": "c775994d420e23c9a8152b5ad706b9498bd59f93724f8d9c989b0ac8f0c54667"
+    },
+    {
+      "bytes": 5996283,
+      "path": "acceptance-source-development/test_own10_killed_process_recovers_each_durable_boundary-69f0070d.json",
+      "sha256": "95c48eda0dfa1958955936e74e5932a19f9a7d3b4eb4bcca8979ef2e91624cb3"
+    },
+    {
+      "bytes": 499245,
+      "path": "acceptance-source-development/test_own10_tampered_truncated_and_escaping_recovery_never_write-7b613c90.json",
+      "sha256": "aeabcb28a547411b931865ca010626d5e8edc9acad52d1d3a0de4beb6da257d0"
+    },
+    {
+      "bytes": 274825,
+      "path": "acceptance-source-development/test_own11_restore_exact_distribution_and_refuse_owner_conflicts-da0bffc1.json",
+      "sha256": "57e6863aaa62e45bc9aa99992ef2eb5d6d36d2f45d5faec68b605c34a7572c65"
+    },
+    {
+      "bytes": 197781,
+      "path": "acceptance-source-development/test_own12_clone_without_plugin_is_integral_and_availability_unobserved-4a1654b6.json",
+      "sha256": "496f1d76eb8f7a8c281bbd05e0bc2bb20d0b5785da94d0dd5efb261a91ad4af1"
+    },
+    {
+      "bytes": 82652,
+      "path": "acceptance-source-development/test_own13_independent_processes_refuse_contention_and_stale_plan-93472524.json",
+      "sha256": "245152d24be0ca9336860c3882d4ffc8c0b06b338de629927004ea774fd9864a"
+    },
+    {
+      "bytes": 188450,
+      "path": "acceptance-source-development/test_own14_independent_expected_identity_mismatches_refuse-9adafa54.json",
+      "sha256": "72a7dcfd660c3fe48de9cfb307c18df3b6de990b325401c30885330f09784a1c"
+    },
+    {
+      "bytes": 231589,
+      "path": "acceptance-source-development/test_own14_missing_payload_core_and_evaluator_identity_refuse-17f086f6.json",
+      "sha256": "54ca919a1bb8b840274ebf414c5c54a19d97915c7667f53d710e292aa1baa1b4"
+    },
+    {
+      "bytes": 211569,
+      "path": "acceptance-source-focused/test_own01_cli_plan_apply_stale_refusal_and_restore_json-68667c86.json",
+      "sha256": "243dc87592375c1a934bb5975db7780a4f5ef4c751dc897af370801af2bbee5b"
+    },
+    {
+      "bytes": 62094,
+      "path": "acceptance-source-focused/test_own03_actual_aggregate_payload_limit-1fc11a84.json",
+      "sha256": "ef92edbae223f98d974c922523b47808a57d2d719a7045da91737bc83b645156"
+    },
+    {
+      "bytes": 101405,
+      "path": "acceptance-source-focused/test_own03_assembly_unknown_schema_and_duplicate_keys_refuse-4aae752e.json",
+      "sha256": "3e4ed93b5b2d26ad8449e4163bc33ce8a5b3094760fbdd69a4c668341478682f"
+    },
+    {
+      "bytes": 232888,
+      "path": "acceptance-source-focused/test_own03_explicit_hosts_roots_and_closed_expected_fields-f1fc52a4.json",
+      "sha256": "206025e8e14b88a9f8aafe9702d4316c34454b8e0c912607e80a0f9e0e33bcad"
+    },
+    {
+      "bytes": 57635,
+      "path": "acceptance-source-focused/test_own03_repository_case_spelling_collision_refuses-9e1ff72c.json",
+      "sha256": "95eb6f3080d85f49d1f9003112f34a7230f22eb2e064c1246960042d78db0c5c"
+    },
+    {
+      "bytes": 139824,
+      "path": "acceptance-source-focused/test_own05_direct_installer_junction_alias_cannot_recreate_retired_core-8a57c18c.json",
+      "sha256": "244da833118da06fba137c49a4e22db094dc82d348ebe7858f2d17306bff7968"
+    },
+    {
+      "bytes": 197279,
+      "path": "acceptance-source-focused/test_own05_handcrafted_direct_installer_path_aliases_cannot_recreate_retired_core-8fc6872d.json",
+      "sha256": "607fc411a048aba93d604d87a0aaaabe7c12ccd0d9c8aedbb1753e8d6727571a"
+    },
+    {
+      "bytes": 144110,
+      "path": "acceptance-source-focused/test_own06_synthetic_compatible_prior_version_upgrades_preserving_binding-ad0b8c96.json",
+      "sha256": "91580ad3eb5eefd017096b811e9a6a4ba413257dad812f3fce30d19deb687826"
+    },
+    {
+      "bytes": 382122,
+      "path": "acceptance-source-focused/test_own10_byte_identical_owner_replacement_is_not_recovery_authority-f6b48922.json",
+      "sha256": "2efe32df4d1e1a79f0af3f142ad6b3cbecececc910ef986749f4873dabc48a7e"
+    },
+    {
+      "bytes": 1309510,
+      "path": "acceptance-source-focused/test_own10_durable_commit_and_partial_cleanup_finalize_applied_state-fe010296.json",
+      "sha256": "e86ac5c02c363f190b1a1731887b8150ac1cc19ced2cbec60cea854fe5182800"
+    },
+    {
+      "bytes": 1075393,
+      "path": "acceptance-source-focused/test_own10_intervening_owner_edits_and_new_files_are_preserved-debc9a9f.json",
+      "sha256": "d3bd377dbc881061d87004e249bc8c662605b4b068ba058fea34555852302376"
+    },
+    {
+      "bytes": 848132,
+      "path": "acceptance-source-focused/test_own10_recovery_write_failure_retains_diagnostics_and_can_retry-056c6036.json",
+      "sha256": "60be7af8271d06259c9ad705cbab841bb124a50e542d74b49d6e65432e9d58bf"
+    },
+    {
+      "bytes": 473989,
+      "path": "acceptance-source-focused/test_own10_rehashed_journal_cannot_delete_preexisting_owner_empty_directory-d31195eb.json",
+      "sha256": "78b8b9324feadcfdbba1c4fbc26e442ae2857611dc4a44552f199097e669e4c9"
+    },
+    {
+      "bytes": 678556,
+      "path": "acceptance-source-focused/test_own10_tampered_truncated_and_escaping_recovery_never_write-89c69b75.json",
+      "sha256": "8d420d4aaf051f3aebbb5394c5cd735709fd1c34276a831880de5b570415da07"
+    },
+    {
+      "bytes": 83126,
+      "path": "acceptance-source-focused/test_own13_independent_processes_refuse_contention_and_stale_plan-55e0d441.json",
+      "sha256": "80e4fb5769c1600ee08e354c91aa00569680dfd7b533920ac73aaf3f7f6ffca4"
+    },
+    {
+      "bytes": 101546,
+      "path": "acceptance-source-focused/test_own14_rehashed_modified_retained_contract_or_helper_remains_incompatible-f8c23fea.json",
+      "sha256": "ec51e0cff49522a58d6b93b040d5a293863ddea22118315ef6e2d465e184682d"
+    },
+    {
+      "bytes": 177504,
+      "path": "acceptance-source-legacy-corrected/test_own07_released_017_cli_format_and_command_refusals-3bdbab1b.json",
+      "sha256": "a329ed71e8fdfa75d599076278a916433e9dc76486d954f723b72412a4dc3a82"
+    },
+    {
+      "bytes": 223869,
+      "path": "acceptance-source-stabilized/test_own01_cli_plan_apply_stale_refusal_and_restore_json-847cba9d.json",
+      "sha256": "ffd406eff397601267c7535d9eb5fa1e673633eaac0d0cff3946ef6cc1a52766"
+    },
+    {
+      "bytes": 664882,
+      "path": "acceptance-source-stabilized/test_own01_exact_catalog_and_each_selected_host-7824ecf8.json",
+      "sha256": "10cd69e0300fd39aca7b365ca943dee58bdb1ce3ceecd0dc98d571a6a69145b2"
+    },
+    {
+      "bytes": 131981,
+      "path": "acceptance-source-stabilized/test_own02_preserves_owner_content_and_directories-bc3b5873.json",
+      "sha256": "8e3339c974f30ca15e7df7e8aa1088894bb42b52ff887be21058fee1ffaadea4"
+    },
+    {
+      "bytes": 63044,
+      "path": "acceptance-source-stabilized/test_own03_actual_aggregate_payload_limit-b2f26936.json",
+      "sha256": "8da3c8192efeaa728170eb24e7292faa4e394f3cfcc6a910d8ead4d8a2443355"
+    },
+    {
+      "bytes": 58684,
+      "path": "acceptance-source-stabilized/test_own03_actual_external_file_size_limit-cfc2a09e.json",
+      "sha256": "7416e8d51936682fdd899ab4a9a47c2e4acf9a65292bbbd0bc8a3f89bf7870e1"
+    },
+    {
+      "bytes": 103439,
+      "path": "acceptance-source-stabilized/test_own03_assembly_unknown_schema_and_duplicate_keys_refuse-8690da59.json",
+      "sha256": "00e1126701fa0577246eb0538e2be795b2ecd809617d7051d468b6ccdb3ba5dc"
+    },
+    {
+      "bytes": 193293,
+      "path": "acceptance-source-stabilized/test_own03_closed_binding_duplicate_keys_and_control_limit-4d94cf98.json",
+      "sha256": "f7ce6d2141396218dcb008f85c8c78c8529e36ef262130eb5840ba65c4d0abd4"
+    },
+    {
+      "bytes": 238174,
+      "path": "acceptance-source-stabilized/test_own03_explicit_hosts_roots_and_closed_expected_fields-04e07519.json",
+      "sha256": "e5f23ed132676562ca0404a397b13918aeb55d204e34dfddefae3b62884ff279"
+    },
+    {
+      "bytes": 104295,
+      "path": "acceptance-source-stabilized/test_own03_external_hard_link_and_unlisted_file_refuse-c4c93517.json",
+      "sha256": "79e829bd41f912bb0b2b7ecc3ab8c4dd8427b191a9bd49a0f5a7cd7213d4fdc4"
+    },
+    {
+      "bytes": 285243,
+      "path": "acceptance-source-stabilized/test_own03_hard_link_refusal-fd125e94.json",
+      "sha256": "3f2254d9a088dda13ac6988e77c639329d0a2b49e8162febfccfac49034e0b7b"
+    },
+    {
+      "bytes": 103467,
+      "path": "acceptance-source-stabilized/test_own03_inventory_count_and_declared_size_limits-28e19c47.json",
+      "sha256": "431f8358cdc21c872c94cb358d7887432342cdc7cf535455dcc3e527412b4b42"
+    },
+    {
+      "bytes": 144761,
+      "path": "acceptance-source-stabilized/test_own03_modified_missing_and_unowned_catalog_refuse-2100f6f1.json",
+      "sha256": "d778e11db9a5a2683b5827e2715206278b4f8dcf5d64ffe4caa2ff91b9c57ff9"
+    },
+    {
+      "bytes": 58585,
+      "path": "acceptance-source-stabilized/test_own03_repository_case_spelling_collision_refuses-c8aa2c80.json",
+      "sha256": "cf1a39b7a33f876bfe5fb2182572f7cb9cbf16b1110148ad7eacffd6620da164"
+    },
+    {
+      "bytes": 14799,
+      "path": "acceptance-source-stabilized/test_own03_symbolic_link_refusal-35dfca99.json",
+      "sha256": "53c240f7865153984edff34d9dc2196b24df0104e28e9eb6814aa04043d49584"
+    },
+    {
+      "bytes": 327922,
+      "path": "acceptance-source-stabilized/test_own03_unsafe_inventory_paths_and_case_collisions-2980c47e.json",
+      "sha256": "471ea1ae16d02f5928a1c6018890fc9512e40d2413fc63ea8713928f0dff24de"
+    },
+    {
+      "bytes": 150702,
+      "path": "acceptance-source-stabilized/test_own03_windows_reparse_junction_refusal-b399000c.json",
+      "sha256": "9fb98b0c9cfc000ab1d7861bd1e8341c551e8d010b1b14ce3afedbd8dbeddff0"
+    },
+    {
+      "bytes": 193251,
+      "path": "acceptance-source-stabilized/test_own03_wrong_typed_assembly_values_are_bounded_refusals-7d2d3a2d.json",
+      "sha256": "9460917156c1fb5b7930ed0c8ec9adc784d0313f234bc1865ef5052ce5d90ffa"
+    },
+    {
+      "bytes": 744050,
+      "path": "acceptance-source-stabilized/test_own04_stale_equal_size_file_lock_binding_and_inventory-51006829.json",
+      "sha256": "8785f8d51c8b93ca2066e022aa164ff6b4cc1bdf6f5de06ceddcd22d1445115d"
+    },
+    {
+      "bytes": 140738,
+      "path": "acceptance-source-stabilized/test_own05_direct_installer_junction_alias_cannot_recreate_retired_core-c628b088.json",
+      "sha256": "55cff02a1f1a8b0a4fb6e913dfc7e07e9f73956e6eb9457fd4dc2ea78f810614"
+    },
+    {
+      "bytes": 221289,
+      "path": "acceptance-source-stabilized/test_own05_handcrafted_direct_installer_path_aliases_cannot_recreate_retired_core-99626c3c.json",
+      "sha256": "763fdf4fd254eeba96723b7e18272cb380a8e1a0939cd7b458e24fba0d98621c"
+    },
+    {
+      "bytes": 369967,
+      "path": "acceptance-source-stabilized/test_own05_replay_doctor_and_direct_installer_preserve_binding-b90662e2.json",
+      "sha256": "750e1a881ebeb7dee7af32c5f353da2469c14a331658803a0c77d9ca82d4ee98"
+    },
+    {
+      "bytes": 128836,
+      "path": "acceptance-source-stabilized/test_own06_invalid_ownership_format_upgrade_is_atomic-2407c2f5.json",
+      "sha256": "fa45762a0a2e152bec5c24992b8f9ac3994b55ce1a9e4100766bfe00d0c824b4"
+    },
+    {
+      "bytes": 161524,
+      "path": "acceptance-source-stabilized/test_own06_synthetic_compatible_prior_version_upgrades_preserving_binding-9a45483e.json",
+      "sha256": "e538e3713b2309b9c19901432699c23ba75badfb4f0549fc16a903987f2f614f"
+    },
+    {
+      "bytes": 177471,
+      "path": "acceptance-source-stabilized/test_own07_released_017_reader_refuses_all_writing_entry_points-fddbe02d.json",
+      "sha256": "426e6823f425f0915723023e21b8549eb8ebb214169db23dd7d280cbbb6b07c9"
+    },
+    {
+      "bytes": 139306,
+      "path": "acceptance-source-stabilized/test_own07_unsupported_old_lock_refuses_before_writes-ca0590bc.json",
+      "sha256": "64b92b65e0a4af4d6563e0746a3a8f5882dd620999aee86dfef90485d3d6f1fb"
+    },
+    {
+      "bytes": 129641,
+      "path": "acceptance-source-stabilized/test_own08_current_lock_evaluator_evidence_matches_schema4_identity-9b442e52.json",
+      "sha256": "28499cfd379c4025de8e7891b39c65e9c7c3d388c47a733cc4c312b48732e799"
+    },
+    {
+      "bytes": 384697,
+      "path": "acceptance-source-stabilized/test_own08_reintroduced_copy_and_deleted_or_tampered_binding_fail_integrity-ae06e9ea.json",
+      "sha256": "9dc1825f81f0a389b8419ab343c6bf8a971dae59895d6064a92078e4c4164209"
+    },
+    {
+      "bytes": 9452705,
+      "path": "acceptance-source-stabilized/test_own09_exception_at_each_write_and_durable_boundary_rolls_back-9120b25d.json",
+      "sha256": "c70f1528eb05657d98bb41381bafb3533627549ab9d5084ed863d80588293938"
+    },
+    {
+      "bytes": 391560,
+      "path": "acceptance-source-stabilized/test_own10_byte_identical_owner_replacement_is_not_recovery_authority-812f37e7.json",
+      "sha256": "00eb91068f0ae355a99c8f0cd010df4d7a4260635047f60ac34d75fe62625593"
+    },
+    {
+      "bytes": 1309355,
+      "path": "acceptance-source-stabilized/test_own10_durable_commit_and_partial_cleanup_finalize_applied_state-7f280069.json",
+      "sha256": "25b48dd3e8a63d9860aec04e341f3921ce140ffb3a6f9a8d8cc611142a61f2c6"
+    },
+    {
+      "bytes": 1150972,
+      "path": "acceptance-source-stabilized/test_own10_intervening_owner_edits_and_new_files_are_preserved-f3b5528f.json",
+      "sha256": "dffdaf1fc2ede0aa474fc3008872904d21aa92e906df6cbe369c28d47208fd12"
+    },
+    {
+      "bytes": 23798549,
+      "path": "acceptance-source-stabilized/test_own10_killed_process_recovers_each_durable_boundary-70493d87.json",
+      "sha256": "bb985aa3af1dedb243458afa3b3d8c6293ca131c092af48789035aa9a34f0435"
+    },
+    {
+      "bytes": 872022,
+      "path": "acceptance-source-stabilized/test_own10_recovery_write_failure_retains_diagnostics_and_can_retry-54abbf7a.json",
+      "sha256": "5f3b588eb5a88ec5aa88652045700bb61da9e12c58e29f80f9334aec25183d6d"
+    },
+    {
+      "bytes": 484743,
+      "path": "acceptance-source-stabilized/test_own10_rehashed_journal_cannot_delete_preexisting_owner_empty_directory-5e708c58.json",
+      "sha256": "52837d8353fbb3edcb18902c74b314529c92a3c20112cd948fc9bb31c44aa6fe"
+    },
+    {
+      "bytes": 732004,
+      "path": "acceptance-source-stabilized/test_own10_tampered_truncated_and_escaping_recovery_never_write-93d04797.json",
+      "sha256": "cd5c40aea7cc0802c1ba2f419cb2d45150d58d8795db9c3751c8df5f910e358a"
+    },
+    {
+      "bytes": 284717,
+      "path": "acceptance-source-stabilized/test_own11_restore_exact_distribution_and_refuse_owner_conflicts-f3b58ab5.json",
+      "sha256": "fec6fab8b9cadf2922beda57a3b5287b4dfc157fe77612ee39928313f6a7f76b"
+    },
+    {
+      "bytes": 204056,
+      "path": "acceptance-source-stabilized/test_own12_clone_without_plugin_is_integral_and_availability_unobserved-4dea0d58.json",
+      "sha256": "6ab39d14ff53b369b7f54734bce36827609e8fd80756391b0bfc6aff1b745998"
+    },
+    {
+      "bytes": 86291,
+      "path": "acceptance-source-stabilized/test_own13_independent_processes_refuse_contention_and_stale_plan-5ad88d9d.json",
+      "sha256": "359b1adf41e8aa5f49863552a2dbeaf7b56fb95262a2b15720f98b5aa8c45ca0"
+    },
+    {
+      "bytes": 193328,
+      "path": "acceptance-source-stabilized/test_own14_independent_expected_identity_mismatches_refuse-2e92b96e.json",
+      "sha256": "e1ee0163e0e1df7944a2dc0ab3e760d2b55f40787432cca1146db4cc38b00f6b"
+    },
+    {
+      "bytes": 237551,
+      "path": "acceptance-source-stabilized/test_own14_missing_payload_core_and_evaluator_identity_refuse-b26696ba.json",
+      "sha256": "350cdc4392d83adc370fbc6c2eacd4dd266d0dac15120e7870252f45676ef37d"
+    },
+    {
+      "bytes": 103580,
+      "path": "acceptance-source-stabilized/test_own14_rehashed_modified_retained_contract_or_helper_remains_incompatible-e9b7c2b7.json",
+      "sha256": "d4416161edc124ecfc1db5a89be62a87b9150517716713cfb2a73f3e83cee897"
+    },
+    {
+      "bytes": 1851,
+      "path": "acceptance-source-stabilized-completion-tail.log",
+      "sha256": "a65a8f93feb21a764335f0c4f5eab98e2f47fff03111d454a29226db65227da8"
+    },
+    {
+      "bytes": 282,
+      "path": "acceptance-source-legacy-corrected.log",
+      "sha256": "f64b5fd29dde712b0490e218ff30750a15e4a53010566fa92595f092a6cac362"
+    }
+  ],
+  "schema": "wo-plg-020-local-source-observation-inventory-v1"
+}

@@ -56,7 +56,17 @@ paths = [
   "docs/engineering/agentic-execution/requirements/REQ-AEX-009.md",
   "docs/engineering/agentic-execution/specifications/SPEC-AEX-005.md",
   "docs/engineering/technical-communication/requirements/REQ-TCM-004.md",
-  "docs/engineering/technical-communication/specifications/SPEC-TCM-001.md"
+  "docs/engineering/technical-communication/specifications/SPEC-TCM-001.md",
+  "docs/engineering/ci-pipeline/specifications/SPEC-CIP-003.md",
+  "tests/test_ci_pipeline.py",
+  "docs/engineering/execution-control-plane/requirements/REQ-ECP-027.md",
+  "docs/engineering/execution-control-plane/specifications/SPEC-ECP-016.md",
+  "docs/notes/harnessctl-reference.md",
+  "tests/test_cli_shape.py",
+  "docs/engineering/ci-pipeline/requirements/REQ-CIP-009.md",
+  "docs/engineering/ci-pipeline/verification/VER-CIP-003.md",
+  "docs/notes/ci-pipeline.md",
+  "docs/notes/developing-se-harness.md"
 ]
 
 [relations]
@@ -158,3 +168,10 @@ Failed native enforcement remains governed by DEC-PLG-006, not by this ownership
 
 Report actual ownership behavior, exact catalog, candidate identity, evidence and failures, retained limitations, lifecycle state, and one evaluator-derived next accountable step.
 Do not claim release availability, WO-PLG-009 completion, native discovery, or a public rollout.
+
+
+## Approved supplemental scope — 2026-09-12
+
+At `2026-09-12T14:49:44Z`, the operator approved supplement revision 2 as engineering-owner for its ten exact scope additions, requirements-steward for REQ-ECP-027 and REQ-CIP-009, technical-owner for SPEC-ECP-016 and SPEC-CIP-003, and assurance-owner for VER-CIP-003's applicability amendment. The recorded instruction was: "i approve supplement revision 2 to reconcile the CI/CLI contracts and ten required scope additions".
+
+The approved proposal has SHA-256 `6fa1ee1b63c28cb4a406834987911822659792194f100f45a856a89561814ff1` and is retained with the decision receipt under `docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/`. The additional paths reconcile the Python 3.13 ownership acceptance, explicit command target and transaction outcomes, and corresponding CI/CLI documentation and tests. VER-PLG-020 remains unchanged. This approval records definitions and scope only; WO-PLG-020 remains in progress. Delegated completion and VREC preparation still require their live candidate gates; verification and release remain separate decisions.

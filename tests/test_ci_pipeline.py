@@ -592,7 +592,8 @@ class PipelineHygieneTests(unittest.TestCase):
         self.assertNotIn("if: inputs.mode == 'release-record'", replay[0])
 
     def test_candidate_source_is_the_only_lane_that_qualifies_and_tests_a_pull_request(self) -> None:
-        # CIP-ONE-002: one qualification and one suite run per pull-request commit.
+        # CIP-ONE-002: one qualification and one full repository suite per commit.
+        # Its WO-PLG-020 amendment permits only bounded ownership subsets below.
         jobs = _job_blocks(self.texts["candidate-evidence.yml"])
         for command in ("qualify complete-candidate", "scripts/run_tests.py"):
             with self.subTest(command=command):
@@ -605,6 +606,13 @@ class PipelineHygieneTests(unittest.TestCase):
             with self.subTest(workflow=name):
                 for command in ("qualify complete-candidate", "run_tests.py", "unittest discover"):
                     self.assertNotIn(command, text, command)
+        self.assertEqual(
+            ["upgrade-rehearsal"],
+            [name for name, block in jobs.items() if "module.acceptance_suite(" in block],
+        )
+        for name, block in jobs.items():
+            if name != "candidate-source":
+                self.assertNotIn("unittest discover", block, name)
 
     def test_no_step_restates_a_check_a_script_already_performs(self) -> None:
         # CIP-ONE-003 and CIP-ONE-004: the script holds the one definition of the
@@ -618,10 +626,25 @@ class PipelineHygieneTests(unittest.TestCase):
         self.assertNotIn("--help | ", package)
 
     def test_one_python_version_string(self) -> None:
-        # CIP-ONE-005: publish-pypi.yml may hold it in PYTHON_VERSION; every other
-        # occurrence is the literal "3.11".
+        # CIP-ONE-005 and its WO-PLG-020 amendment: the sole 3.13 exception is
+        # the exact ownership setup step, after the existing 3.11 rehearsals.
+        exception_name = "name: Select Python 3.13 for full ownership acceptance\n"
         for name, text in self.texts.items():
             with self.subTest(workflow=name):
+                if name == "candidate-evidence.yml":
+                    exceptions = [
+                        (job_name, step)
+                        for job_name, block in _job_blocks(text).items()
+                        for step in _step_blocks(block)
+                        if step.startswith(exception_name)
+                    ]
+                    self.assertEqual(1, len(exceptions))
+                    job_name, step = exceptions[0]
+                    self.assertEqual("upgrade-rehearsal", job_name)
+                    self.assertIn("uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0", step)
+                    self.assertEqual(['"3.13"'], re.findall(r"(?m)^\s+python-version: (.+)$", step))
+                    self.assertNotIn("run:", step)
+                    text = text.replace("      - " + step, "", 1)
                 values = re.findall(r"(?m)^\s+(?:\"python-version\"|python-version): (.+)$", text)
                 allowed = {'"3.11"'}
                 if name == "publish-pypi.yml":
@@ -630,6 +653,51 @@ class PipelineHygieneTests(unittest.TestCase):
                 else:
                     self.assertNotIn("PYTHON_VERSION", text)
                 self.assertEqual(set(), set(values) - allowed, values)
+
+    def test_ownership_acceptance_is_bounded_to_the_existing_platform_rehearsals(self) -> None:
+        # VER-PLG-020 / CIP-ONE-002 and -005: the additional runs consume the
+        # original verified wheel and retain independent source/package facts.
+        job = _job_blocks(self.texts["candidate-evidence.yml"])["upgrade-rehearsal"]
+        steps = _step_blocks(job)
+        titles = [step.split("\n", 1)[0] for step in steps]
+        names = (
+            "Rehearse the real predecessor-to-successor upgrade twice",
+            "Run ownership interface and compatibility smoke on Python 3.11",
+            "Select Python 3.13 for full ownership acceptance",
+            "Install isolated Python 3.13 ownership runtimes",
+            "Run full source ownership acceptance on Python 3.13",
+            "Run full installed ownership acceptance on Python 3.13",
+            "Retain ownership cases, snapshots, faults and runtime identity",
+        )
+        positions = [titles.index("name: " + name) for name in names]
+        self.assertEqual(sorted(positions), positions)
+        for runner in ("ubuntu-latest", "windows-latest"):
+            self.assertIn("runner: " + runner, job)
+        smoke, install, source, package, retained = (steps[positions[index]] for index in (1, 3, 4, 5, 6))
+        self.assertIn("$testPath source smoke (Join-Path $ownershipRoot '3.11/source')", smoke)
+        self.assertIn("-I -B $runner $testPath package smoke (Join-Path $ownershipRoot '3.11/package')", smoke)
+        self.assertIn("OwnershipDistributionInventoryTests", smoke)
+        self.assertIn("Join-Path $env:RUNNER_TEMP 'candidate-dist'", install)
+        self.assertIn("Join-Path $env:RUNNER_TEMP 'ownership-candidate-313-env'", install)
+        self.assertIn("Join-Path $env:RUNNER_TEMP 'ownership-predecessor-313-env'", install)
+        for runtime, wheel in (("candidate", "candidate"), ("predecessor", "predecessor")):
+            self.assertIn(f"python -m venv ${runtime}Root", install)
+            self.assertIn(f"& ${runtime}Python -m pip install --disable-pip-version-check --no-index --no-deps ${wheel}Wheel", install)
+        self.assertIn("SE_HARNESS_OWNERSHIP_LEGACY_PYTHON=$predecessorPython", install)
+        self.assertIn("SE_HARNESS_OWNERSHIP_WHEEL=$candidateWheel", install)
+        self.assertIn("python -B $runner $testPath source full (Join-Path $ownershipRoot '3.13/source')", source)
+        self.assertIn("& $env:OWNERSHIP_CANDIDATE_PYTHON -I -B $runner $testPath package full (Join-Path $ownershipRoot '3.13/package')", package)
+        for step in (source, package):
+            self.assertGreaterEqual(int(re.search(r"timeout-minutes: (\d+)", step).group(1)), 60)
+            self.assertIn("if ($LASTEXITCODE -ne 0) { throw", step)
+        self.assertIn("!cancelled() && steps.ownership-python313-install.outcome == 'success'", package)
+        self.assertIn('os.environ["SE_HARNESS_OWNERSHIP_COMMIT"] = os.environ["GITHUB_SHA"]', smoke)
+        self.assertIn('"head_commit": os.environ.get("REHEARSAL_HEAD_SHA")', smoke)
+        self.assertIn('assert not imported.is_relative_to(checkout)', smoke)
+        self.assertLess(smoke.index("runtime_path.write_text"), smoke.index("module.acceptance_suite("))
+        self.assertIn("if: always()", retained)
+        self.assertIn("include-hidden-files: true", retained)
+        self.assertIn("name: skill-ownership-${{ matrix.platform }}", retained)
 
     def test_every_public_action_takes_the_pin_form(self) -> None:
         # CIP-ONE-006: a full commit digest and the exact tag it was peeled from.

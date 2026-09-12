@@ -1,7 +1,7 @@
-# Evaluator skill ownership migration: approved definition packet
+# Evaluator skill ownership migration: definitions and implementation
 
 Prepared 2026-09-12 against main `3bf0ef2a7a2b4008efaa3cb79431d526d3f6f600`.
-The operator selected delegated execution and approved DEC-PLG-007 with its amendments on 2026-09-12. The released evaluator records the nine packet approvals, and all eight exact applicability amendments are appended to their target contracts. Implementation remains unstarted pending integration of these definitions and the live candidate gate.
+The operator selected delegated execution and approved DEC-PLG-007 with its amendments on 2026-09-12. The released evaluator records the nine packet approvals, and all eight exact applicability amendments are appended to their target contracts. PR #461 integrated them at `6559568e995fc6e28f64e6bc5a6d4a6dc5dcf7de`. The required live `validate` check passed there, and the delegated start was recorded at `e33d8c86`; WO-PLG-020 is now in progress. Development observations are retained in the [evidence index](../engineering/plugin-integration/evidence/WO-PLG-020/README.md); completion and verification preparation require the remaining acceptance and live candidate gates.
 
 ## Why this work is next
 
@@ -67,12 +67,24 @@ DEC-PLG-004's terminal disposition and DEC-PLG-006's accepted C10/C11 limitation
 ## Delivery sequence and current boundary
 
 DEC-PLG-007 is decided as `narrow-schema4-exception`; the selected nine-artifact packet and all eight applicability amendments are approved.
-Integrate the approved class-bearing definitions into main. Start WO-PLG-020 through delegated execution only after the required live check succeeds for the exact implementation candidate.
+The approved class-bearing definitions are integrated into main. The released evaluator applied the delegated start after check-run `103560311357` succeeded at the merged base; the retained start receipts identify the check and candidate.
 Implement and verify the evaluator change; later select its release and adoption through appropriate governed work.
 Only after that prerequisite is available can WO-PLG-009 connect live repositories, followed by WO-PLG-013 maintenance.
 WO-PLG-015 qualification and WO-PLG-016 released guidance remain separate work.
 
 These definition approvals do not select a release version, live migration, native host reconfiguration, public publication, verification decision, or PR merge.
+
+## Implementation under acceptance
+
+The candidate introduces `skill-ownership TARGET --provider plugin --binding-input FILE` for a read-only migration plan, and `--provider repository` for a restoration plan. An application requires `--apply --expected-plan-sha256 HASH`. The binding input explicitly names supported hosts, ordinary external assembly roots, and independently expected plugin, inventory, and retained-file identities. Planning and application do not execute a plugin or contact a host.
+
+Plugin ownership is recorded in a closed schema-4 lock section. The seven catalog files leave the repository-managed set; unrelated content stays in place. Installer planning, direct application, doctor, ordinary mutation guards, and current-lock evaluator evidence share the ownership checks. Ordinary repository ownership remains schema 3. The portable binding records expected identities, not machine-local roots or a claim that a plugin is currently available. Its checksum detects inconsistent record edits; it is not proof of an owner's approval against a coherent rewrite of the whole record.
+
+Application holds the repository mutex, revalidates the reviewed inputs, and retains bounded before/after stages and durable recovery metadata. A failure before durable commit restores prior state when safe. Recovery after durable commit finalizes the applied state and cleanup. Intervening owner edits, new destinations, conflicting file identities, and hostile recovery data cause explicit refusal or recovery-required status. Recovery does not treat an old snapshot as permission to overwrite owner changes.
+
+The implementation is being tested on disposable repositories and isolated non-promotable package environments. The development full-suite run and preliminary wheel are recorded with their failures and source-snapshot limits. They do not establish final committed-candidate acceptance. The current root remains governed by released 0.17.0; this checkout has not been migrated and the new operation is not yet a released capability.
+
+The operator approved [supplement revision 2](../engineering/plugin-integration/evidence/WO-PLG-020/governance/supplement-revision-2.md) on 2026-09-12. Its [decision receipt](../engineering/plugin-integration/evidence/WO-PLG-020/governance/supplement-revision-2-approval.json) records the five prior-contract applicability amendments and ten additional WO scope paths. They reconcile the Python 3.13 ownership matrix, the explicit command target and transaction outcomes, and their CI/CLI documentation and tests. The original verification matrix remains in force; this supplemental definition approval does not complete the work order or verify a record.
 
 ## Delegated route selected
 

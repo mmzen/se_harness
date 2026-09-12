@@ -53,7 +53,41 @@ class SerializerTests(unittest.TestCase):
         self.assertEqual(b"a\nb\nc\n", integrity.canonical_text_bytes(b"a\r\nb\rc\n"))
 
 
+class OwnershipLockBoundaryTests(unittest.TestCase):
+    def test_schema3_cannot_hide_a_plugin_binding_from_older_inventory_consumers(self) -> None:
+        with self.assertRaisesRegex(integrity.IntegrityError, "requires lock schema 4"):
+            integrity.validate_lock({"schema": 3, "skill_ownership": {}})
+
+    def test_schema4_requires_a_valid_explicit_binding_before_identity_is_read(self) -> None:
+        for binding in (None, {}, {"provider": "plugin"}):
+            with self.subTest(binding=binding), self.assertRaises(integrity.IntegrityError):
+                integrity.validate_lock({"schema": 4, "skill_ownership": binding})
+
+    def test_schema_extension_keeps_pre3_floor_and_rejects_unknown_or_noninteger_formats(self) -> None:
+        for schema in (1, 2):
+            with self.subTest(schema=schema), self.assertRaisesRegex(integrity.IntegrityError, "predates the supported floor"):
+                integrity.validate_lock({"schema": schema})
+        for schema in (0, 5, 4.0, "4", True, None):
+            with self.subTest(schema=schema), self.assertRaisesRegex(integrity.IntegrityError, "unsupported lock schema"):
+                integrity.validate_lock({"schema": schema})
+
+
 class AtomicWriterTests(unittest.TestCase):
+    def test_directory_flush_closes_on_failure_and_windows_uses_no_directory_handle(self) -> None:
+        directory = Path("unused")
+        with mock.patch.object(integrity.os, "name", "posix"), mock.patch.object(
+            integrity.os, "open", return_value=42
+        ) as opened, mock.patch.object(integrity.os, "fsync", side_effect=OSError("flush failed")), mock.patch.object(
+            integrity.os, "close"
+        ) as closed:
+            with self.assertRaisesRegex(OSError, "flush failed"):
+                integrity.fsync_directory(directory)
+            opened.assert_called_once()
+            closed.assert_called_once_with(42)
+        with mock.patch.object(integrity.os, "name", "nt"), mock.patch.object(integrity.os, "open") as opened:
+            integrity.fsync_directory(directory)
+            opened.assert_not_called()
+
     def test_atomic_write_replaces_and_leaves_the_target_untouched_when_the_replace_fails(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary) / "nested" / "file.txt"

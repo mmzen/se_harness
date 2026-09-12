@@ -3,7 +3,10 @@
 # predecessor, the N-1 to N upgrade rehearsal on both platforms, and the
 # expiring integration package. This is the only lane that qualifies the
 # complete candidate graph and runs the test suite for a pull request's commit
-# (WO-CIP-007, SPEC-CIP-003 CIP-ONE-002); it states each check once and leaves
+# (WO-CIP-007, SPEC-CIP-003 CIP-ONE-002). WO-PLG-020 adds bounded ownership
+# smoke on Python 3.11 and full source/package acceptance on Python 3.13 to
+# the existing platform rehearsals, using the same wheel and an ephemeral
+# source archive. It states each check once and leaves
 # the definition of a forbidden wheel member or a retired command to
 # scripts/check_portable_release_surface.py. Trigger policy (WO-CIP-001, SPEC-CIP-001
 # CIP-TRG): pull requests, and pushes to main, release/** and candidate/**
@@ -97,7 +100,24 @@ jobs:
             --wheel-dir "$RUNNER_TEMP/candidate-dist" "$RUNNER_TEMP/candidate-export"
           test "$(find "$RUNNER_TEMP/candidate-dist" -maxdepth 1 -name '*.whl' | wc -l)" -eq 1
           test -f "$RUNNER_TEMP/candidate-dist/se_harness-$CANDIDATE_VERSION-py3-none-any.whl"
+          # VER-PLG-020: the source archive is ephemeral, non-promotable
+          # package evidence from the same export. No second wheel or release
+          # recipe is built, and build metadata stays outside the checkout.
+          python -m venv "$RUNNER_TEMP/candidate-build-env"
+          "$RUNNER_TEMP/candidate-build-env/bin/python" -m pip install \
+            --disable-pip-version-check --no-deps "setuptools>=68"
+          (cd "$RUNNER_TEMP/candidate-export" && \
+            "$RUNNER_TEMP/candidate-build-env/bin/python" -c \
+            'import sys; from setuptools.build_meta import build_sdist; build_sdist(sys.argv[1])' \
+            "$RUNNER_TEMP/candidate-dist")
+          test "$(find "$RUNNER_TEMP/candidate-dist" -maxdepth 1 -name '*.tar.gz' | wc -l)" -eq 1
+          test -f "$RUNNER_TEMP/candidate-dist/se_harness-$CANDIDATE_VERSION.tar.gz"
+          # Retain the backend selection alongside the observed source archive.
+          cp "$RUNNER_TEMP/candidate-export/se_harness.egg-info/SOURCES.txt" \
+            "$RUNNER_TEMP/candidate-dist/SOURCES.txt"
           (cd "$RUNNER_TEMP/candidate-dist" && sha256sum -- *.whl > SHA256SUMS)
+          (cd "$RUNNER_TEMP/candidate-dist" && sha256sum -- *.tar.gz >> SHA256SUMS)
+          (cd "$RUNNER_TEMP/candidate-dist" && sha256sum -- SOURCES.txt >> SHA256SUMS)
       - name: Prove candidate source made no checkout change
         run: |
           git diff --exit-code
@@ -366,6 +386,17 @@ jobs:
           $expectedDigest = ($expected -split '\s+')[0].ToLowerInvariant()
           $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $wheel.FullName).Hash.ToLowerInvariant()
           if ($actual -ne $expectedDigest) { throw "successor wheel digest mismatch: expected $expectedDigest, got $actual" }
+          $sourceManifest = Join-Path $candidateDist 'SOURCES.txt'
+          $sourceExpected = Get-Content -LiteralPath (Join-Path $candidateDist 'SHA256SUMS') | Where-Object { $_ -match '  SOURCES\.txt$' }
+          if (@($sourceExpected).Count -ne 1) { throw 'expected one source-distribution inventory digest' }
+          $sourceActual = (Get-FileHash -Algorithm SHA256 -LiteralPath $sourceManifest).Hash.ToLowerInvariant()
+          if ($sourceActual -ne ($sourceExpected -split '\s+')[0]) { throw 'source-distribution inventory digest mismatch' }
+          $sourceArchive = Get-ChildItem -LiteralPath $candidateDist -Filter '*.tar.gz'
+          if (@($sourceArchive).Count -ne 1) { throw 'expected one non-promotable source archive' }
+          $archiveExpected = Get-Content -LiteralPath (Join-Path $candidateDist 'SHA256SUMS') | Where-Object { $_ -match ('  ' + [regex]::Escape($sourceArchive.Name) + '$') }
+          if (@($archiveExpected).Count -ne 1) { throw 'expected one source-archive digest' }
+          $archiveActual = (Get-FileHash -Algorithm SHA256 -LiteralPath $sourceArchive.FullName).Hash.ToLowerInvariant()
+          if ($archiveActual -ne ($archiveExpected -split '\s+')[0]) { throw 'source-archive digest mismatch' }
       - name: Install isolated local runtimes
         shell: pwsh
         run: |
@@ -415,6 +446,162 @@ jobs:
             ${{ runner.temp }}/rehearsal-result-*/upgrade-rehearsal-result.json
             ${{ runner.temp }}/rehearsal-result-*/upgrade-rehearsal-timing.json
             ${{ runner.temp }}/upgrade-rehearsal-runtime.json
+          if-no-files-found: warn
+      - name: Run ownership interface and compatibility smoke on Python 3.11
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $ownershipRoot = Join-Path $env:RUNNER_TEMP 'skill-ownership'
+          New-Item -ItemType Directory -Path $ownershipRoot -Force | Out-Null
+          $runner = Join-Path $ownershipRoot 'run-acceptance.py'
+          @'
+          import contextlib
+          import hashlib
+          import importlib.util
+          import json
+          import os
+          import pathlib
+          import platform
+          import sys
+          import traceback
+          import unittest
+
+          test_path, mode, selection, output = sys.argv[1:]
+          test_path = pathlib.Path(test_path).resolve()
+          checkout = test_path.parents[1]
+          evidence = pathlib.Path(output).resolve()
+          assert not evidence.is_relative_to(checkout)
+          evidence.mkdir(parents=True, exist_ok=True)
+          assert mode in ("source", "package") and selection in ("smoke", "full")
+          os.environ["SE_HARNESS_OWNERSHIP_PACKAGE"] = "1" if mode == "package" else "0"
+          os.environ["SE_HARNESS_OWNERSHIP_EVIDENCE"] = str(evidence / "cases")
+          if os.environ.get("GITHUB_SHA"):
+              os.environ["SE_HARNESS_OWNERSHIP_COMMIT"] = os.environ["GITHUB_SHA"]
+          if mode == "source":
+              sys.path.insert(0, str(checkout))
+          wheel = pathlib.Path(os.environ["SE_HARNESS_OWNERSHIP_WHEEL"])
+          facts = {
+              "schema": "se-harness-skill-ownership-ci-v1",
+              "status": "incomplete", "mode": mode, "selection": selection,
+              "argv": sys.orig_argv, "python": sys.version, "python_executable": sys.executable,
+              "isolated": sys.flags.isolated, "platform": platform.platform(),
+              "runner_os": os.environ.get("RUNNER_OS"),
+              "runner_image": os.environ.get("ImageOS"),
+              "runner_image_version": os.environ.get("ImageVersion"),
+              "candidate_commit": os.environ.get("GITHUB_SHA"),
+              "head_commit": os.environ.get("REHEARSAL_HEAD_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+              "wheel_name": wheel.name,
+              "wheel_sha256": hashlib.sha256(wheel.read_bytes()).hexdigest(),
+              "test_module_sha256": hashlib.sha256(test_path.read_bytes()).hexdigest(),
+              "source_inventory_sha256": hashlib.sha256(pathlib.Path(os.environ["SE_HARNESS_OWNERSHIP_SOURCE_MANIFEST"]).read_bytes()).hexdigest(),
+              "source_archive_sha256": hashlib.sha256(pathlib.Path(os.environ["SE_HARNESS_OWNERSHIP_SDIST"]).read_bytes()).hexdigest(),
+              "promotable": False,
+          }
+          runtime_path = evidence / "runtime.json"
+          runtime_path.write_text(json.dumps(facts, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          passed = False
+          try:
+              with (evidence / "test-output.log").open("w", encoding="utf-8") as log:
+                  with contextlib.redirect_stdout(log), contextlib.redirect_stderr(log):
+                      import se_harness
+                      imported = pathlib.Path(se_harness.__file__).resolve()
+                      facts["imported_evaluator"] = str(imported)
+                      facts["candidate_version"] = se_harness.__version__
+                      if mode == "package":
+                          assert sys.flags.isolated, "installed acceptance requires -I"
+                          assert imported.is_relative_to(pathlib.Path(sys.prefix).resolve())
+                          assert not imported.is_relative_to(checkout), "checkout evaluator imported"
+                      else:
+                          assert imported.is_relative_to(checkout), "source evaluator was shadowed"
+                      spec = importlib.util.spec_from_file_location("ownership_acceptance", test_path)
+                      module = importlib.util.module_from_spec(spec)
+                      sys.modules[spec.name] = module
+                      spec.loader.exec_module(module)
+                      suite = module.acceptance_suite(smoke=selection == "smoke")
+                      result = unittest.TextTestRunner(stream=log, verbosity=2).run(suite)
+                      passed = result.wasSuccessful() and result.testsRun > 0
+                      facts.update(status="pass" if passed else "fail", tests=result.testsRun,
+                                   failures=len(result.failures), errors=len(result.errors),
+                                   skipped=[{"test": str(test), "reason": reason} for test, reason in result.skipped])
+          except BaseException:
+              facts["status"] = "error"
+              facts["error"] = traceback.format_exc()
+              raise
+          finally:
+              runtime_path.write_text(json.dumps(facts, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print(json.dumps(facts, sort_keys=True))
+          raise SystemExit(0 if passed else 1)
+          '@ | Set-Content -LiteralPath $runner -Encoding utf8
+          $testPath = Join-Path $env:GITHUB_WORKSPACE 'tests/test_skill_ownership.py'
+          $candidateDist = Join-Path $env:RUNNER_TEMP 'candidate-dist'
+          $env:SE_HARNESS_OWNERSHIP_WHEEL = (Get-ChildItem -LiteralPath $candidateDist -Filter '*.whl').FullName
+          $env:SE_HARNESS_OWNERSHIP_SOURCE_MANIFEST = Join-Path $candidateDist 'SOURCES.txt'
+          $env:SE_HARNESS_OWNERSHIP_SDIST = (Get-ChildItem -LiteralPath $candidateDist -Filter '*.tar.gz').FullName
+          $env:SE_HARNESS_OWNERSHIP_LEGACY_PYTHON = Join-Path (Join-Path $env:RUNNER_TEMP 'predecessor-env') '${{ matrix.python }}'
+          $candidatePython = Join-Path (Join-Path $env:RUNNER_TEMP 'successor-env') '${{ matrix.python }}'
+          python -B -m unittest tests.test_integration_package.OwnershipDistributionInventoryTests -v
+          if ($LASTEXITCODE -ne 0) { throw 'ownership distribution inventory failed' }
+          python -B $runner $testPath source smoke (Join-Path $ownershipRoot '3.11/source')
+          if ($LASTEXITCODE -ne 0) { throw 'source ownership smoke failed' }
+          & $candidatePython -I -B $runner $testPath package smoke (Join-Path $ownershipRoot '3.11/package')
+          if ($LASTEXITCODE -ne 0) { throw 'installed ownership smoke failed' }
+      - name: Select Python 3.13 for full ownership acceptance
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.13"
+      - name: Install isolated Python 3.13 ownership runtimes
+        id: ownership-python313-install
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $candidateDist = Join-Path $env:RUNNER_TEMP 'candidate-dist'
+          $candidateWheel = (Get-ChildItem -LiteralPath $candidateDist -Filter '*.whl').FullName
+          $predecessorWheel = (Get-ChildItem -LiteralPath (Join-Path $env:RUNNER_TEMP 'predecessor-dist') -Filter '*.whl').FullName
+          $candidateRoot = Join-Path $env:RUNNER_TEMP 'ownership-candidate-313-env'
+          $predecessorRoot = Join-Path $env:RUNNER_TEMP 'ownership-predecessor-313-env'
+          python -m venv $candidateRoot
+          if ($LASTEXITCODE -ne 0) { throw 'ownership candidate environment creation failed' }
+          python -m venv $predecessorRoot
+          if ($LASTEXITCODE -ne 0) { throw 'ownership predecessor environment creation failed' }
+          $candidatePython = Join-Path $candidateRoot '${{ matrix.python }}'
+          $predecessorPython = Join-Path $predecessorRoot '${{ matrix.python }}'
+          & $candidatePython -m pip install --disable-pip-version-check --no-index --no-deps $candidateWheel
+          if ($LASTEXITCODE -ne 0) { throw 'ownership candidate wheel installation failed' }
+          & $predecessorPython -m pip install --disable-pip-version-check --no-index --no-deps $predecessorWheel
+          if ($LASTEXITCODE -ne 0) { throw 'ownership predecessor wheel installation failed' }
+          "OWNERSHIP_CANDIDATE_PYTHON=$candidatePython" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "SE_HARNESS_OWNERSHIP_LEGACY_PYTHON=$predecessorPython" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "SE_HARNESS_OWNERSHIP_WHEEL=$candidateWheel" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "SE_HARNESS_OWNERSHIP_SOURCE_MANIFEST=$(Join-Path $candidateDist 'SOURCES.txt')" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "SE_HARNESS_OWNERSHIP_SDIST=$((Get-ChildItem -LiteralPath $candidateDist -Filter '*.tar.gz').FullName)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+      - name: Run full source ownership acceptance on Python 3.13
+        timeout-minutes: 60
+        shell: pwsh
+        run: |
+          $ownershipRoot = Join-Path $env:RUNNER_TEMP 'skill-ownership'
+          $runner = Join-Path $ownershipRoot 'run-acceptance.py'
+          $testPath = Join-Path $env:GITHUB_WORKSPACE 'tests/test_skill_ownership.py'
+          python -B $runner $testPath source full (Join-Path $ownershipRoot '3.13/source')
+          if ($LASTEXITCODE -ne 0) { throw 'full source ownership acceptance failed' }
+      - name: Run full installed ownership acceptance on Python 3.13
+        if: ${{ !cancelled() && steps.ownership-python313-install.outcome == 'success' }}
+        timeout-minutes: 60
+        shell: pwsh
+        run: |
+          $ownershipRoot = Join-Path $env:RUNNER_TEMP 'skill-ownership'
+          $runner = Join-Path $ownershipRoot 'run-acceptance.py'
+          $testPath = Join-Path $env:GITHUB_WORKSPACE 'tests/test_skill_ownership.py'
+          & $env:OWNERSHIP_CANDIDATE_PYTHON -I -B $runner $testPath package full (Join-Path $ownershipRoot '3.13/package')
+          if ($LASTEXITCODE -ne 0) { throw 'full installed ownership acceptance failed' }
+      - name: Retain ownership cases, snapshots, faults and runtime identity
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: skill-ownership-${{ matrix.platform }}
+          path: ${{ runner.temp }}/skill-ownership/
+          include-hidden-files: true
           if-no-files-found: warn
       - name: Prove the upgrade rehearsal made no checkout change
         shell: pwsh

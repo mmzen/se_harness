@@ -80,3 +80,12 @@ publication runs; until then it is verified by test and inspection. A
 repository ruleset that named a renamed job is the owner's setting and is
 not read by the suite. The Windows baseline carries the two known failures
 recorded under `WO-TST-004`.
+
+
+## Approved supplemental reconciliation — 2026-09-12
+
+The operator approved WO-PLG-020 supplement revision 2 as `assurance-owner` at `2026-09-12T14:49:44Z`. The recorded instruction was: "i approve supplement revision 2 to reconcile the CI/CLI contracts and ten required scope additions". The retained proposal and decision receipt are in WO-PLG-020's governance evidence. This records only the selected definition amendment; historical approvals and observations remain unchanged.
+
+### Applicability amendment — WO-PLG-020 ownership acceptance
+
+For WO-PLG-020, the versions-and-pins row expects `"3.11"` everywhere except the single named `Select Python 3.13 for full ownership acceptance` setup-python step in the existing `upgrade-rehearsal` job of `candidate-evidence.yml`, as bounded by the corresponding REQ-CIP-009 and SPEC-CIP-003 amendments. Verify that the additional selection uses the existing full action SHA and that both Ubuntu and Windows run the complete source and isolated installed-candidate ownership/fault matrix on `"3.13"`, while interface and compatibility smoke and the pre-existing rehearsals use `"3.11"`. The one-run and run-observation rows continue to require exactly one complete-candidate qualification and one canonical full repository suite in `candidate-source`; the separately identified ownership subsets are the sole permitted additional test executions under this amendment. Every ownership package consumer verifies and uses the same non-promotable candidate wheel. Retain per-platform/interpreter observations and unavailable cases explicitly under WO-PLG-020; its VER-PLG-020 acceptance and every other applicable pin, duplication, graph, regression, and lifecycle criterion remain unchanged. This amendment records no pass result and does not rewrite WO-CIP-007's historical evidence.

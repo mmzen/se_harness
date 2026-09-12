@@ -1,0 +1,810 @@
+--workers must be at least 1
+WEX_SCALE artifacts=100 validation=0.571675s focus=1.098234s plan=1.157242s
+WEX_SCALE artifacts=500 validation=2.216946s focus=5.325676s plan=8.625255s
+WEX_SCALE artifacts=1000 validation=4.319099s focus=6.927480s plan=15.483007s
+docs/notes/diagnostic-codes.md matches the source
+======================================================================
+FAIL: test_progressive_documentation.ProgressiveDocumentationTests.test_command_reference_exactly_covers_current_cli
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_progressive_documentation.py", line 256, in test_command_reference_exactly_covers_current_cli
+    self.assertEqual(set(command_action.choices), table_commands)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the first set but not the second:
+'skill-ownership'
+
+======================================================================
+FAIL: test_instruction_architecture.OwnerInstructionRegionTests.test_owner_region_stays_within_the_size_bound
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_instruction_architecture.py", line 945, in test_owner_region_stays_within_the_size_bound
+    self.assertLess(size, OWNER_REGION_SIZE_LIMIT, f"owner region is {size} bytes")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 6024 not less than 6000 : owner region is 6024 bytes
+
+======================================================================
+FAIL: test_cli_shape.ParserShapeTests.test_every_subcommand_is_classified_and_takes_target_accordingly
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_cli_shape.py", line 54, in test_every_subcommand_is_classified_and_takes_target_accordingly
+    self.assertEqual(
+    ~~~~~~~~~~~~~~~~^
+        REPOSITORY_COMMANDS | NON_REPOSITORY_COMMANDS | {"qualify"},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        set(choices),
+        ^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: Items in the second set but not the first:
+'skill-ownership'
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_byte_identical_owner_replacement_is_not_recovery_authority
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 871, in test_own10_byte_identical_owner_replacement_is_not_recovery_authority
+    if stage:
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    errors = []
+      ^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    value = copy.deepcopy(selected)
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_intervening_owner_edits_and_new_files_are_preserved (effect='new-destination')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 827, in test_own10_intervening_owner_edits_and_new_files_are_preserved
+    self.assertTrue(plan["passed"], plan)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    errors = []
+      ^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    value = copy.deepcopy(selected)
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_intervening_owner_edits_and_new_files_are_preserved (effect='tracked-edit')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 827, in test_own10_intervening_owner_edits_and_new_files_are_preserved
+    self.assertTrue(plan["passed"], plan)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    errors = []
+      ^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    value = copy.deepcopy(selected)
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_intervening_owner_edits_and_new_files_are_preserved (effect='unrelated-new-file')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 827, in test_own10_intervening_owner_edits_and_new_files_are_preserved
+    self.assertTrue(plan["passed"], plan)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    errors = []
+      ^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    value = copy.deepcopy(selected)
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='journal-prepared', path=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='after-write', path='.agents/skills/harness-operator-brief/SKILL.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='journal-updated', path='.agents/skills/harness-operator-brief/SKILL.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='after-write', path='.agents/skills/harness-operator-brief/scripts/check_brief.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='journal-updated', path='.agents/skills/harness-operator-brief/scripts/check_brief.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='after-write', path='.agents/skills/harness-operator-brief/skill-contract.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='journal-updated', path='.agents/skills/harness-operator-brief/skill-contract.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='after-write', path='.agents/skills/harness-orient/SKILL.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='journal-updated', path='.agents/skills/harness-orient/SKILL.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='after-write', path='.agents/skills/harness-orient/scripts/orient.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='journal-updated', path='.agents/skills/harness-orient/scripts/orient.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='after-write', path='.agents/skills/harness-orient/skill-contract.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='journal-updated', path='.agents/skills/harness-orient/skill-contract.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='after-write', path='.claude/skills/harness-orient/SKILL.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='journal-updated', path='.claude/skills/harness-orient/SKILL.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='after-write', path='.engineering-harness.lock')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='journal-updated', path='.engineering-harness.lock')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='after-postcondition', path=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='plugin', stage='before-journal-cleanup', path=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='journal-prepared', path=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='after-write', path='.agents/skills/harness-operator-brief/SKILL.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='journal-updated', path='.agents/skills/harness-operator-brief/SKILL.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='after-write', path='.agents/skills/harness-operator-brief/scripts/check_brief.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='journal-updated', path='.agents/skills/harness-operator-brief/scripts/check_brief.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='after-write', path='.agents/skills/harness-operator-brief/skill-contract.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='journal-updated', path='.agents/skills/harness-operator-brief/skill-contract.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='after-write', path='.agents/skills/harness-orient/SKILL.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='journal-updated', path='.agents/skills/harness-orient/SKILL.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='after-write', path='.agents/skills/harness-orient/scripts/orient.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='journal-updated', path='.agents/skills/harness-orient/scripts/orient.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='after-write', path='.agents/skills/harness-orient/skill-contract.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='journal-updated', path='.agents/skills/harness-orient/skill-contract.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='after-write', path='.claude/skills/harness-orient/SKILL.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='journal-updated', path='.claude/skills/harness-orient/SKILL.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='after-write', path='.engineering-harness.lock')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='journal-updated', path='.engineering-harness.lock')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='after-postcondition', path=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary (provider='repository', stage='before-journal-cleanup', path=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 818, in test_own10_killed_process_recovers_each_durable_boundary
+    schedule = [(stage, path) for path in (*CATALOG, LOCK)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_recovery_write_failure_retains_diagnostics_and_can_retry (stage='recovery-before-write')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 853, in test_own10_recovery_write_failure_retains_diagnostics_and_can_retry
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_recovery_write_failure_retains_diagnostics_and_can_retry (stage='recovery-after-write')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 853, in test_own10_recovery_write_failure_retains_diagnostics_and_can_retry
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    {"id": "VREC-TST-001", "type": "verification_record", "status": "ready",
+    ^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    for mismatch in (False, True):
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_rehashed_journal_cannot_delete_preexisting_owner_empty_directory
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 897, in test_own10_rehashed_journal_cannot_delete_preexisting_owner_empty_directory
+    process.kill()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    destination.write_bytes(raw)
+      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    destination.parent.mkdir(parents=True, exist_ok=True)
+        ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "invalid ownership source lock: invalid skill ownership field set", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own10_tampered_truncated_and_escaping_recovery_never_write
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 918, in test_own10_tampered_truncated_and_escaping_recovery_never_write
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 787, in crash_at
+    destination.write_bytes(raw)
+      ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    destination.parent.mkdir(parents=True, exist_ok=True)
+        ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+FAIL: test_skill_ownership.SkillOwnershipAcceptanceTests.test_own13_independent_processes_refuse_contention_and_stale_plan
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 966, in test_own13_independent_processes_refuse_contention_and_stale_plan
+    name = CATALOG[0] if effect == "new-destination" else CATALOG[-1] if effect == "tracked-edit" else ".agents/skills/harness-orient/owner-new.txt"
+    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_skill_ownership.py", line 779, in wait_marker
+    destination.parent.mkdir(parents=True, exist_ok=True)
+        ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: durable crash boundary not reached: status=1; {"exception": "OwnershipError", "message": "stale reviewed ownership plan; inputs changed", "passed": false}
+; 
+
+======================================================================
+ERROR: test_standard_repository_lifecycle.StandardRepositoryLifecycleTests.test_agents_only_upgrade_adds_host_surfaces_without_changing_orientation
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_standard_repository_lifecycle.py", line 113, in test_agents_only_upgrade_adds_host_surfaces_without_changing_orientation
+    upgrade, upgrade_lock = plan_install(target, project_name=None, mode="upgrade")
+                            ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\se_harness\installer.py", line 277, in plan_install
+    assert_ownership_state(target, old_lock, templates=_templates())
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\se_harness\skill_ownership.py", line 283, in assert_ownership_state
+    raise OwnershipError(f"repository-owned lock is missing retained catalog entry: {path}")
+se_harness.skill_ownership.OwnershipError: repository-owned lock is missing retained catalog entry: .claude/skills/harness-orient/SKILL.md
+
+======================================================================
+ERROR: test_standard_repository_lifecycle.StandardRepositoryLifecycleTests.test_standard_upgrade_reports_customized_skills_without_overwriting_them
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\tests\test_standard_repository_lifecycle.py", line 146, in test_standard_upgrade_reports_customized_skills_without_overwriting_them
+    changes, _ = plan_install(target, project_name=None, mode="upgrade")
+                 ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\se_harness\installer.py", line 277, in plan_install
+    assert_ownership_state(target, old_lock, templates=_templates())
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\hok\Documents\Codex\2026-09-12\clo\work\wo20\se_harness\skill_ownership.py", line 286, in assert_ownership_state
+    raise OwnershipError(f"repository-owned retained file differs from lock: {path}")
+se_harness.skill_ownership.OwnershipError: repository-owned retained file differs from lock: .agents/skills/harness-orient/SKILL.md
+
+----------------------------------------------------------------------
+Ran 1207 tests in 1184.348s (187 classes, 4 workers)
+
+FAILED (failures=50, errors=2, skipped=27)
