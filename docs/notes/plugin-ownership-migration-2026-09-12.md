@@ -94,7 +94,7 @@ The original four location amendments above remain part of the selected packet. 
 
 ### SPEC-HUP-012 — technical-owner, security-owner
 
-> Under SPEC-PLG-020, HUP-LSF-001, HUP-LSF-003, and HUP-LSF-008 admit validated schema-4 plugin ownership as an explicit exception to their schema-3-only clauses. The lower floor remains 3, including the existing pre-3 refusal and recovery guidance. HUP-LSF-002, HUP-LSF-004, HUP-LSF-005, and HUP-LSF-006 remain unchanged. HUP-LSF-007 continues to govern the separate repository-owned governor-transition assessor as schema-3-only; no schema-4 support is claimed for that tool.
+The exact approved text is preserved in [SPEC-HUP-012's amendment record](../engineering/repository-harness-upgrade/specifications/SPEC-HUP-012.md#approved-plugin-ownership-applicability--2026-09-12). It permits validated schema-4 plugin ownership for HUP-LSF-001, HUP-LSF-003, and HUP-LSF-008, retains the schema-3 lower floor and the unchanged rules, and keeps HUP-LSF-007's separate repository transition assessor schema-3-only. This operator note summarizes that record without repeating retired evaluator terminology.
 
 ### VER-HUP-012 — assurance-owner, security-owner
 
