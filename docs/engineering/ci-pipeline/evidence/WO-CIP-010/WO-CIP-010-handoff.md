@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-CIP-010"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "c91f72a391a7cfc08f1b9b3cc93f9bd89cb886a9f81f274f185ceaa55e64ead7"
-rebound_at = "2026-09-12T10:20:49Z"
+formal_snapshot_sha256 = "78deb6832d4a30513d104c158bd0ef04016411ddfda3da1bbdc6bb5ea60aa443"
+rebound_at = "2026-09-12T11:18:38Z"
 ```
 
 # WO-CIP-010 implementation evidence
@@ -115,6 +115,18 @@ these records has its own normal PR checks, which must finish before delivery.
 Historical release replays continue to execute their exact old candidate;
 this repair does not rewrite their fixture code.
 
-Only WO-CIP-010 paths change. PR #456 and #457 and their verified records remain
-unchanged. WO-CIP-010 is in_progress; this packet does not record completion,
-VREC preparation, verification, merge or release.
+## Implementation completion
+
+The operator explicitly requested "mark **WO-CIP-010 implemented**."
+The released 0.17.0 evaluator applied that engineering-owner decision after
+passing the completion gate. `completion-decision.json` retains the applied
+transition; `completion-ci.json` retains the passing CI snapshot for the
+pre-decision candidate `bed6b2a96ae22bb4deabe143a923b99e7b26e45a`.
+All 17 checks passed, including the Linux source suite and four matching
+Linux/Windows upgrade replays. The later completion commit changes governance
+records only and has its own PR checks.
+
+WO-CIP-010 is implemented. PR #456/#457 and their verified records remain
+unchanged. No VREC was prepared and no verification, merge or release decision
+was made. The evaluator's next action is to prepare one ready VREC for this WO
+using VER-CIP-006 and the exact retained evidence.

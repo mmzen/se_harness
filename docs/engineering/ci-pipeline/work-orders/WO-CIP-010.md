@@ -2,7 +2,7 @@
 id = "WO-CIP-010"
 type = "work_order"
 title = "Prevent background Git maintenance from racing disposable repository cleanup"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-12"
 updated = "2026-09-12"
@@ -41,6 +41,13 @@ to = "in_progress"
 decided_at = "2026-09-12T10:12:25Z"
 decided_by = "engineering-owner"
 reason = "Approve both and proceed: explicit approval response authorized implementation of WO-CIP-010, hosted Linux/Windows CI, and the separate repair PR."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-12T11:17:25Z"
+decided_by = "engineering-owner"
+reason = "mark **WO-CIP-010 implemented**."
 +++
 
 # Work Order: Prevent background Git maintenance from racing disposable repository cleanup
@@ -50,7 +57,10 @@ reason = "Approve both and proceed: explicit approval response authorized implem
 The operator approved this WO and VER-CIP-006 and authorized implementation,
 Linux/Windows CI, publishing the repair branch and opening its separate PR:
 "Approve both and proceed". The released evaluator applied approval and start.
-Implementation completion and assurance remain separate decisions.
+The operator then explicitly requested "mark **WO-CIP-010 implemented**."
+The released evaluator applied that completion decision after passing gates
+and confirming all 17 checks on candidate bed6b2a96ae22bb4deabe143a923b99e7b26e45a.
+Verification-record preparation and assurance remain separate decisions.
 
 ## Objective
 
