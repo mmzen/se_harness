@@ -1,0 +1,110 @@
+[
+  {
+    "label": "released-doctor",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "se_harness",
+      "doctor",
+      ".",
+      "--json"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "07f39e00e5962195d6add10cae49c17ab72476ca0a9d264778707e8909ef55e3",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "released-graph",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "se_harness",
+      "validate",
+      ".",
+      "--json"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "6745237e22f2f3ba636df8a9adccfcf946e8c91d868b053c3b28c7497c844047",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "candidate-graph",
+    "argv": [
+      "C:\\Python313\\python.exe",
+      "-B",
+      "-m",
+      "se_harness",
+      "validate",
+      ".",
+      "--json"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "6745237e22f2f3ba636df8a9adccfcf946e8c91d868b053c3b28c7497c844047",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "candidate-help",
+    "argv": [
+      "C:\\Python313\\python.exe",
+      "-B",
+      "-m",
+      "se_harness",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "bd6eb5ee50cb73d0c1e5d736a1318fe1a80c554eb03b8b926ef75431b5fa9fef",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "candidate-doctor-boundary",
+    "argv": [
+      "C:\\Python313\\python.exe",
+      "-B",
+      "-m",
+      "se_harness",
+      "doctor",
+      ".",
+      "--json"
+    ],
+    "exit_code": 1,
+    "stdout_sha256": "069eb47851e877547fbdca46e371c541184c99ba7974162f5a5e80ef91ec9486",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "release-distributions",
+    "argv": [
+      "C:\\Python313\\python.exe",
+      "-B",
+      "scripts/validate_release_distributions.py",
+      "--root",
+      "."
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "c27f0712b4a9b2c06498e19445ce3d7bc4970af7b4c8178b62c9b7f8c74b7987",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "review-preflight",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+      "-I",
+      "-B",
+      "-m",
+      "se_harness",
+      "preflight",
+      ".",
+      "--work-order",
+      "WO-PLG-005",
+      "--phase",
+      "review",
+      "--json"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "0ad4d39bd2de09f436310db9d1ca5861e63e74aa0de4078df47d6ca48d2365e0",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

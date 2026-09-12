@@ -1,0 +1,14 @@
+{
+  "marker": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\codex-adapter-sandboxes\\accepted 001 with spaces\\stop-path-fixed-session-start.txt",
+  "deadline_seconds": 180,
+  "source_sha256": "cf618c42105309444f6f0252dac758c02c683afe3f2aa21cb010299e15e0fd45",
+  "purpose": "One separately approved native hook review only; no setup/menu exit navigation",
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+    "--no-alt-screen",
+    "--sandbox",
+    "read-only",
+    "--ask-for-approval",
+    "on-request"
+  ]
+}

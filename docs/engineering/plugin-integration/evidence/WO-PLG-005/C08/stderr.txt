@@ -1,0 +1,18 @@
+C08 stderr: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | missing-01/live/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | missing-01/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | removed-01/live/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | removed-01/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | runtime-preparation/identity/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | runtime-preparation/install/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | runtime-preparation/venv/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | runtime-ready-01/live/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | runtime-ready-01/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | wrong017-01/live/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | wrong017-01/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855

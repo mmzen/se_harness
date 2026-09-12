@@ -1,0 +1,22 @@
+{
+  "check": "focused",
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/plugin_integration/codex_adapter",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+  "exit_status": 0,
+  "expected_exit_status": 0,
+  "duration_seconds": 20.309679900004994,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "ab8401b7c517fef707186f68514bb1214abc701e7badb61a1bf2db9249a3d288"
+}

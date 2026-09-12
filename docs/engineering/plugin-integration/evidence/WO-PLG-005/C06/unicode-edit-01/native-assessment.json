@@ -1,0 +1,15 @@
+{
+  "conclusion": "pass",
+  "exact_unicode_and_quote_target": true,
+  "mapped_changed_path_exact": true,
+  "hook_before_completed_effect": true,
+  "exact_planned_after_sha256": "b25754b3560a6e57511f96cedf69892f8bd6f2d410432705599810f8c1ad3dc6",
+  "actual_after_sha256": "b25754b3560a6e57511f96cedf69892f8bd6f2d410432705599810f8c1ad3dc6",
+  "qualification": "Observed supported path mapping only; no general tool coverage claim.",
+  "sources": {
+    "actions.txt": "74a8f8bec04a73e2b750a1fc5835e0b66e61161980a1c01c67b5264443fe4574",
+    "observations.json": "546c5a46b5effc8dcc5c568e5e68c37d0b47c5b4ced24e1c088247d251a81baf",
+    "transcript.json": "c9fb15a3deb78af64914e29ab48d5b4f6a3d705c4b861b36b4dbd7d665d1585a",
+    "dispatch.jsonl": "1383d967dec67bb36e1a1766b953f7c2807d60c4fe6e41a331d58a2f64562e89"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "observed_at": "2026-09-11T19:15:25.297339+00:00",
+  "scope_projection_preceded_edits": true,
+  "checkpoint_preceded_initial_edits": false,
+  "initial_paths": [
+    "plugins/verity-plane/codex/",
+    "tests/plugin_integration/codex_adapter/test_adapter.py"
+  ],
+  "initial_focused_tests": {
+    "count": 6,
+    "passed": true
+  },
+  "limitation": "This current checkpoint cannot establish a checkpoint before the initial implementation edits.",
+  "initial_implementation_file_sha256": {
+    "plugins/verity-plane/codex/dispatch.py": "01b0bff70f6a2a7a0c06849be790869d2a78e15785db572990b2b5bea21b5c28",
+    "plugins/verity-plane/codex/native-guard.txt": "da1d20323ad49db4bc8d8f431c76f0827345f458748280a1da299ba777082d14",
+    "plugins/verity-plane/codex/render_hooks.py": "b1b190cb4626a02f517e7122317eaab056f3883ca9ffb53fd6fbf3c77999c3ea",
+    "plugins/verity-plane/codex/.codex-plugin/plugin.json": "9bb3ca7b2fd94a3aac56de016d563784d17b4d6a1782c9b79f59318954614157",
+    "plugins/verity-plane/codex/hooks/hooks.json": "dcfe64089d23f87a389ce6838845de0248dbdb78d9b4f66bf5e9d144267eaa71",
+    "tests/plugin_integration/codex_adapter/test_adapter.py": "9c827830dc0b03b43eb1c801fdfe7e5139ca638b610cd0259909e415e1d8cca5"
+  },
+  "actual_sequence": [
+    "Read governing manifest and ran checkpoint-free released projection",
+    "Created initial adapter and focused tests",
+    "Six focused tests passed",
+    "Retained ordering deviation and generated released pre-action evidence",
+    "First checkpoint invocation rejected trailing-slash directory change arguments with WEX200",
+    "Retried checkpoint with complete explicit file arguments; released pre-action passed before further implementation edits"
+  ]
+}

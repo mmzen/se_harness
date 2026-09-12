@@ -1,0 +1,16 @@
+C04 stderr: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | registered-shell-01/array-tool/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | registered-shell-01/blank-tool/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | registered-shell-01/malformed-json/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | registered-shell-01/missing-required-cwd/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | registered-shell-01/object-tool/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | registered-shell-01/positive-sentinel-after/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | registered-shell-01/positive-sentinel-before/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | registered-shell-01/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | registered-shell-01/wrong-event-shape/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855

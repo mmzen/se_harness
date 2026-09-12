@@ -1,0 +1,270 @@
+{
+  "schema": "verity-codex-acceptance-index-v1",
+  "case": "C02",
+  "created_at": "2026-09-11T21:09:20.601103+00:00",
+  "kind": "Agent-authored consolidation of retained observations; no new native run or assurance decision.",
+  "source_paths_relative_to": "This case directory",
+  "expected": {
+    "starting_fixture": "Active adapter and current verified environment",
+    "action": "Trigger startup, supported resume and compaction restoration.",
+    "observable_result": "Recorded argv invokes the absolute environment Python with -I and session-context.py; delivered bytes match the accepted session contract.",
+    "additional_evidence": "event/argv log; delivered content digest"
+  },
+  "observed": "Startup, resume and post-compaction restoration deliver complete 7,901-byte contexts via the absolute selected Python with -I -B and session-context.py. Independent gate/router comparison passes. Corrected restoration follows the same successful compact-turn completion; the restored turn completes with targets unchanged and owned cleanup zero.",
+  "conclusion": "pass",
+  "qualification": {
+    "qualified": false,
+    "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+  },
+  "exit_status": null,
+  "exit_status_meaning": "No aggregate command was executed. Actual retained subprocess/observer statuses are indexed below; an assessment pass does not rewrite a raw exit.",
+  "exit_status_evidence": [
+    {
+      "path": "resume-compact-01/observations.json",
+      "json_pointer": "/exit_status",
+      "value": null
+    },
+    {
+      "path": "startup-01/observations.json",
+      "json_pointer": "/observer_exit_status",
+      "value": 0
+    }
+  ],
+  "current_capture_directories": [
+    "startup-01",
+    "resume-compact-03",
+    "prepared-inputs"
+  ],
+  "historical_capture_directories": [
+    "resume-compact-01",
+    "resume-compact-02"
+  ],
+  "limitations": [
+    "Full native receipts and actual invocation arrays are evidence; a model READY reply alone is not.",
+    "The pre-launch consent rejection and premature restoration/ActiveTurnNotSteerable attempt are preserved."
+  ],
+  "source_evidence": [
+    {
+      "path": "assess_context.py",
+      "bytes": 4545,
+      "sha256": "f461b68b7625f9c0b4ccdc8469642a8094e62c3766ab8905478b3b23b3a6d2b2",
+      "role": "provenance"
+    },
+    {
+      "path": "prepared-inputs/expected-gate.txt",
+      "bytes": 1110,
+      "sha256": "14eb824b75f61bff70bd3588da65faf699569e8c2097cbbf4964052cb2ce5a50",
+      "role": "current"
+    },
+    {
+      "path": "prepared-inputs/expected-router.md",
+      "bytes": 6407,
+      "sha256": "a2198d35c196b87e36e91965a33aa6c91dcc940a49f644a08b268a1816e0afda",
+      "role": "current"
+    },
+    {
+      "path": "prepared-inputs/selection.json",
+      "bytes": 1257,
+      "sha256": "f5cc30027866debcd3d678cad22e5e8cc421d83c6c46810bb07033a4c768ac9a",
+      "role": "current"
+    },
+    {
+      "path": "resume-compact-01/actions.txt",
+      "bytes": 853,
+      "sha256": "370bcfa4bb5cfef2bfd92ab89f907f715c3c48e1c411a94530d1ce87efe9b726",
+      "role": "historical"
+    },
+    {
+      "path": "resume-compact-01/observations.json",
+      "bytes": 586,
+      "sha256": "bf9ecf108aeb7c4ab7422aa458d293d6878a707942fa3258d5f7dfcf7be33530",
+      "role": "historical"
+    },
+    {
+      "path": "resume-compact-01/stderr.txt",
+      "bytes": 706,
+      "sha256": "0a665910889c670395797768bc9eb7d7078b2f0b1cba134d4b288e1b77367d1f",
+      "role": "historical"
+    },
+    {
+      "path": "resume-compact-01/stdout.txt",
+      "bytes": 79,
+      "sha256": "d573651c606df3a260c970a339bca6537f9aeac77942ba852f1fee7c335ad796",
+      "role": "historical"
+    },
+    {
+      "path": "resume-compact-02/actions.txt",
+      "bytes": 370,
+      "sha256": "7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321",
+      "role": "historical"
+    },
+    {
+      "path": "resume-compact-02/context-assessment.json",
+      "bytes": 3556,
+      "sha256": "52e6970356ef8000ceda893738a130adef89f88a095ad8756353dfc212fac70a",
+      "role": "historical"
+    },
+    {
+      "path": "resume-compact-02/dispatch.jsonl",
+      "bytes": 24590,
+      "sha256": "f2caaa23602d63ca6ae8842d5dd2b84a33900a5bedcdd2e67d95388df69f6d56",
+      "role": "historical"
+    },
+    {
+      "path": "resume-compact-02/host-context-01.txt",
+      "bytes": 7901,
+      "sha256": "41b85850a5dc50b5110e7dbed7cf703af3ec9042f2e1dbbe94be78d12a36fb58",
+      "role": "historical"
+    },
+    {
+      "path": "resume-compact-02/observations.json",
+      "bytes": 52430,
+      "sha256": "5c4fda73b048dfd1a3be878aeffe2a8007098f6ab8a59048d4b2927416be52ea",
+      "role": "historical"
+    },
+    {
+      "path": "resume-compact-02/restoration-assessment.json",
+      "bytes": 4234,
+      "sha256": "47dd164fa4ed7f98ab3fb97829d4e491f114687095d559c9253a13e31687ffd4",
+      "role": "historical"
+    },
+    {
+      "path": "resume-compact-02/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "historical"
+    },
+    {
+      "path": "resume-compact-02/stdout.txt",
+      "bytes": 59971,
+      "sha256": "f3d16837bd69be3836f53ea49f6ee533db88090e65f3c7fe95034540765bb1bf",
+      "role": "historical"
+    },
+    {
+      "path": "resume-compact-02/transcript.json",
+      "bytes": 62399,
+      "sha256": "d8749ee41ce816396f2623701dac9a154c1e5e6b10c8c52677eeb3d9b5007ffb",
+      "role": "historical"
+    },
+    {
+      "path": "resume-compact-03/actions.txt",
+      "bytes": 370,
+      "sha256": "7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321",
+      "role": "current"
+    },
+    {
+      "path": "resume-compact-03/context-assessment.json",
+      "bytes": 5284,
+      "sha256": "8effb4d4207907f0856abd9106506459ab708068329531abead0643e567da6c7",
+      "role": "current"
+    },
+    {
+      "path": "resume-compact-03/dispatch.jsonl",
+      "bytes": 49177,
+      "sha256": "4d5f56d4533955061f71936135b98ac11225322709a86187adc629cb747c0db3",
+      "role": "current"
+    },
+    {
+      "path": "resume-compact-03/host-context-01.txt",
+      "bytes": 7901,
+      "sha256": "41b85850a5dc50b5110e7dbed7cf703af3ec9042f2e1dbbe94be78d12a36fb58",
+      "role": "current"
+    },
+    {
+      "path": "resume-compact-03/host-context-02.txt",
+      "bytes": 7901,
+      "sha256": "41b85850a5dc50b5110e7dbed7cf703af3ec9042f2e1dbbe94be78d12a36fb58",
+      "role": "current"
+    },
+    {
+      "path": "resume-compact-03/observations.json",
+      "bytes": 53430,
+      "sha256": "55b48ca08a82b625fbd2e0f0af4d4f295b77ff6e2f61a34ce6b0f774ec41f23d",
+      "role": "current"
+    },
+    {
+      "path": "resume-compact-03/restoration-assessment.json",
+      "bytes": 4398,
+      "sha256": "5cef4eec0fa0b95149ddde3701334f36d217fa59c760e586a31ab678ef66d99c",
+      "role": "current"
+    },
+    {
+      "path": "resume-compact-03/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "resume-compact-03/stdout.txt",
+      "bytes": 86185,
+      "sha256": "b16955fa581f83dfcdfe89c6ada23dde85c8eba4fccf6dcf70bc2a00a6ddd2d0",
+      "role": "current"
+    },
+    {
+      "path": "resume-compact-03/transcript.json",
+      "bytes": 88842,
+      "sha256": "58b1d112e088a4a25922eb95615e2b2ed674b495a2dd5b9ac8388fc0bf82966e",
+      "role": "current"
+    },
+    {
+      "path": "startup-01/actions.txt",
+      "bytes": 370,
+      "sha256": "7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321",
+      "role": "current"
+    },
+    {
+      "path": "startup-01/context-assessment.json",
+      "bytes": 3541,
+      "sha256": "fbc30108a5c30061db01bb40210b1176e6e0953f41351cbf6fa25e3e1b22a57c",
+      "role": "current"
+    },
+    {
+      "path": "startup-01/dispatch.jsonl",
+      "bytes": 24591,
+      "sha256": "f30b08b095def923d531001ab5cbe5dd7c4160670fdcf8a2a6f1b49e52e6b2c8",
+      "role": "current"
+    },
+    {
+      "path": "startup-01/host-context-01.txt",
+      "bytes": 7901,
+      "sha256": "41b85850a5dc50b5110e7dbed7cf703af3ec9042f2e1dbbe94be78d12a36fb58",
+      "role": "current"
+    },
+    {
+      "path": "startup-01/observations.json",
+      "bytes": 53598,
+      "sha256": "5dd350ba3dd3a0cfc38cc782e78bbc03582a9ac5da67ce5045c2eb28d43b4701",
+      "role": "current"
+    },
+    {
+      "path": "startup-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "startup-01/stdout.txt",
+      "bytes": 58115,
+      "sha256": "857f43a0fbdf28054d82423048f72fb4ad3197d7cd3a8496114c1b47d027f2d9",
+      "role": "current"
+    },
+    {
+      "path": "startup-01/transcript.json",
+      "bytes": 60188,
+      "sha256": "ae41eff47e748a30a65329991bdb651a03bf9c3bc48f4e067eac5121008cb60d",
+      "role": "current"
+    },
+    {
+      "path": "../preparation/service-payload-review/operator-authorization.json",
+      "bytes": 973,
+      "sha256": "31afb17c7b344b86845f77119047331211081788749e2f4cca693b126f87a651",
+      "role": "provenance"
+    },
+    {
+      "path": "../../../verification/VER-PLG-005.md",
+      "bytes": 7948,
+      "sha256": "dea7963993a1be26b41bfa4d7a6c1199f2c19613940c01eeaef5d4ead9301e30",
+      "role": "approved expectation"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\scripts\\build_plugin_archives.py",
+    "build",
+    "--revision",
+    "400cf3d5d669e239d046cc640ac94e962a6e731d",
+    "--plan",
+    "tests/plugin_integration/codex_adapter/assembly-plan.json",
+    "--release-revision",
+    "400cf3d5d669e239d046cc640ac94e962a6e731d",
+    "--release-record",
+    "docs/engineering/release-0-16-0/releases/RLS-SEH-025.md",
+    "--expected-wheel-sha256",
+    "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "--wheel",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evaluator-wheels\\se_harness-0.16.0-py3-none-any.whl",
+    "--evaluator-python",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "--output-directory",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\codex-adapter-sandboxes\\accepted 001 with spaces\\review package 400cf3d5d669"
+  ],
+  "exit_status": 0
+}

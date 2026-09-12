@@ -1,0 +1,8 @@
+{
+  "runtime": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\codex-adapter-sandboxes\\accepted 001 with spaces\\C08 owned runtime 016",
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\codex-adapter-sandboxes\\accepted 001 with spaces\\C08 owned runtime 016\\Scripts\\python.exe",
+  "python_sha256": "199ce15a9f0d4f9522edba59338e4879d28cf61f88e377b8164bcb716275ed22",
+  "wheel": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-evaluator-wheels\\se_harness-0.16.0-py3-none-any.whl",
+  "wheel_sha256": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+  "purpose": "Owned disposable accepted-version runtime for literal C08 interpreter removal/restore; no shared runtime or native profile modified."
+}

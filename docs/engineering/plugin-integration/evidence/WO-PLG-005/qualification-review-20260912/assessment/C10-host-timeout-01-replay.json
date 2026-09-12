@@ -1,0 +1,41 @@
+{
+  "observation_complete": true,
+  "runtime_qualified": false,
+  "exact_fault_observed": true,
+  "native_receipt": {
+    "completedAt": 1789162108,
+    "displayOrder": 2,
+    "durationMs": 30012,
+    "entries": [
+      {
+        "kind": "error",
+        "text": "hook timed out after 30s"
+      }
+    ],
+    "eventName": "preToolUse",
+    "executionMode": "sync",
+    "handlerType": "command",
+    "id": "pre-tool-use:2:C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\verity-plane-codex-fixture\\verity-plane\\0.0.1+codex.20260911195218\\hooks\\hooks.json:exec-9f10bfd7-d4ed-40f3-bf30-670f5da338ab",
+    "scope": "turn",
+    "source": "plugin",
+    "sourcePath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\verity-plane-codex-fixture\\verity-plane\\0.0.1+codex.20260911195218\\hooks\\hooks.json",
+    "startedAt": 1789162078,
+    "status": "failed",
+    "statusMessage": null
+  },
+  "native_timeout_reported": true,
+  "fault_mode_observed": true,
+  "ordered_native_and_fault_events": true,
+  "observed_hook_interval_seconds": 30.046185999992304,
+  "native_completed_update_count": 1,
+  "native_acceptance_sent": true,
+  "full_session_context": true,
+  "effects_bounded": true,
+  "actual_effect_count": 1,
+  "hash_derived_effect_count": 1,
+  "native_blocking_control_observed": false,
+  "supported_handler_denial_observed": false,
+  "required_native_refusal_observed": false,
+  "enforcement_result": "unqualified: no supported handler refusal observed",
+  "limits": "Fault completion is distinct from host acceptance and from actual target effects. Observer cancellation never substitutes for hook refusal."
+}

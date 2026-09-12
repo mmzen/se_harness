@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "doctor",
+    ".",
+    "--json"
+  ],
+  "exit_code": 0,
+  "stdout_sha256": "07f39e00e5962195d6add10cae49c17ab72476ca0a9d264778707e8909ef55e3",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

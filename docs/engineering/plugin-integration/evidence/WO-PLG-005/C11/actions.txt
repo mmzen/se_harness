@@ -1,0 +1,28 @@
+C11 actions: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+provenance | ../C10/runtime-preparation-01/actions.txt | 21656 bytes | sha256 4a3968099b60afcff406ae51654ffc58759cfb5db5f0f586255558090fea6a87
+provenance | ../C10/runtime-preparation-01/command-0/command.json | 320 bytes | sha256 a1163ab8e7cb326517a721ee84a46fedea48a6c9997d2fdd8fc592f53babeca1
+provenance | ../C10/runtime-preparation-01/command-1/command.json | 453 bytes | sha256 178e41b918c55cef68a1541431bce1b6a7f0e46d3ce647c69948d5a3e1a3c128
+provenance | ../C10/runtime-preparation-01/command-2/command.json | 1091 bytes | sha256 f019b82740e899a5a56bffc3282afdf3def5d338fb9fe86dbc4098cdac1b45b2
+provenance | ../C10/runtime-preparation-01/command-3/command.json | 387 bytes | sha256 d143b03f80852b61c6087f9fb153228cb583e439ef5a9187a29ae98884cc6b94
+current | binding-loss-preparation-02/commands.json | 2445 bytes | sha256 98cc47484af69007b9b7f6e4cc3ec5f8ec81c0d8563c5cc60edcb945bb406236
+current | invalid-output-01/actions.txt | 36906 bytes | sha256 c3f02b2d55c51774ce4da7b93ad85ddf4da11f37cb81e29ee393604f41c05d79
+current | invalid-output-01/live/actions.txt | 6193 bytes | sha256 6bae60cefde0e93feea76c2712a4e5b17f88d5be14074fc6aedbb1672732163a
+current | invalid-output-01/one-edit-plan.json | 194 bytes | sha256 a0423560902aba9f8d6b62258d4e6a77938a7a8297b5f1da7cdb834e33586720
+current | lost-active-binding-01/actions.txt | 572 bytes | sha256 9e63153391582547360a58ab9fee6a013b6a33c17859c1b27ac2202c699906c0
+current | lost-active-binding-01/lost-launch.json | 886 bytes | sha256 472c6c2fc07305e07d6c439e32e6d9dfd199a1ae44db295ff0c36620fdfca0dc
+current | lost-active-binding-01/lost/actions.txt | 6191 bytes | sha256 c1c4c9cd2d1df39f65fdb7be975ff85f1ebcb1cfcff873adbb3b278672dec11f
+current | lost-active-binding-01/one-edit-plan.json | 204 bytes | sha256 cee6d0297a74d7d23cb85a8629862bd28543e03b7de216d62a64960a229b209c
+current | lost-active-binding-01/plan.json | 28148 bytes | sha256 e685c00cbea55f65636e8a3a181055bf8ca9e128247d80a383293383bd5586c9
+current | lost-active-binding-01/ready-launch.json | 888 bytes | sha256 864f2c438fead249042eae5e5173bdf735d07d12823e306ce44792dadc0ab8c4
+current | lost-active-binding-01/ready/actions.txt | 370 bytes | sha256 7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321
+current | lost-active-binding-01/restored-launch.json | 890 bytes | sha256 ad6628d47bf9c93e78c38f745b0be478feb16c7b4a58fc606e4386b0344bb6f4
+current | lost-active-binding-01/restored/actions.txt | 316 bytes | sha256 ac07f4dddad191bc20124702802ff1857a2db333a721667a6e6c46a5c70f0ef8
+current | missing-output-01/actions.txt | 36883 bytes | sha256 955c1c04f3fe09cde58b3f1efd43b362846dd6682141bdefea438bc7b4dec770
+current | missing-output-01/live/actions.txt | 6183 bytes | sha256 4fe621c8ad17722ff87f2b4f8afedcc45032b87352e0eec3ffeb1e4f20641d2a
+current | missing-output-01/one-edit-plan.json | 189 bytes | sha256 487a0bc195cac1c6dd82e4b04e14df19740968f73818a00972d9519b94d8190f

@@ -1,0 +1,1 @@
+{"hookSpecificOutput": {"hookEventName": "PreToolUse", "additionalContext": "SENTINEL CALIBRATION ONLY; no production readiness result"}}

@@ -1,0 +1,11 @@
+C02 actions: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+historical | resume-compact-01/actions.txt | 853 bytes | sha256 370bcfa4bb5cfef2bfd92ab89f907f715c3c48e1c411a94530d1ce87efe9b726
+historical | resume-compact-02/actions.txt | 370 bytes | sha256 7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321
+current | resume-compact-03/actions.txt | 370 bytes | sha256 7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321
+current | startup-01/actions.txt | 370 bytes | sha256 7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321

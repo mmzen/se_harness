@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "git",
+    "diff",
+    "--cached",
+    "--check"
+  ],
+  "exit_status": 2,
+  "assessment": "All reported trailing whitespace is preserved original parent CI job output, not implementation or authored prose. Raw evidence was not silently altered.",
+  "affected_files": [
+    "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/parent-ci-9d536b3d/j00.log",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/parent-ci-9d536b3d/j01.log",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/parent-ci-9d536b3d/j02.log",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/parent-ci-9d536b3d/j03.log",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/parent-ci-9d536b3d/j04.log",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/parent-ci-9d536b3d/j05.log",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/parent-ci-9d536b3d/j06.log",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/parent-ci-9d536b3d/j10.log",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/parent-ci-9d536b3d/j13.log"
+  ]
+}

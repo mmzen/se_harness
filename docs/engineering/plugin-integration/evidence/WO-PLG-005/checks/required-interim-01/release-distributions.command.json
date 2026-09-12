@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-B",
+    "scripts/validate_release_distributions.py",
+    "--root",
+    "."
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+  "exit_status": 0,
+  "started_monotonic": 243479.1419052,
+  "finished_monotonic": 243481.894559
+}

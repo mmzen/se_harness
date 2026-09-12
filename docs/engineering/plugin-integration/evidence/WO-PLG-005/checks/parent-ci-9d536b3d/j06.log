@@ -1,0 +1,782 @@
+READABLE PROJECTION; not raw evidence.
+Original bytes: j06.log.raw-bytes.json
+Original SHA-256: a74496fd9972a9d54a4b0a0df57efa216a12e890f58dd0bb1a4a67204a73e0e1
+Projection removes line-end whitespace and normalizes newlines to LF.
+
+﻿2026-09-11T20:01:14.3244810Z Current runner version: '2.337.0'
+2026-09-11T20:01:14.3269592Z ##[group]Runner Image Provisioner
+2026-09-11T20:01:14.3270502Z Hosted Compute Agent
+2026-09-11T20:01:14.3271089Z Version: 20260828.587
+2026-09-11T20:01:14.3271808Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+2026-09-11T20:01:14.3272556Z Build Date: 2026-08-28T16:44:25Z
+2026-09-11T20:01:14.3273283Z Worker ID: {dab4b1ca-ab70-44a0-b288-db355dd88f7e}
+2026-09-11T20:01:14.3274483Z Azure Region: westus
+2026-09-11T20:01:14.3275071Z ##[endgroup]
+2026-09-11T20:01:14.3276654Z ##[group]Operating System
+2026-09-11T20:01:14.3277344Z Ubuntu
+2026-09-11T20:01:14.3277948Z 24.04.5
+2026-09-11T20:01:14.3278519Z LTS
+2026-09-11T20:01:14.3279038Z ##[endgroup]
+2026-09-11T20:01:14.3279644Z ##[group]Runner Image
+2026-09-11T20:01:14.3280261Z Image: ubuntu-24.04
+2026-09-11T20:01:14.3280812Z Version: 20260907.300.1
+2026-09-11T20:01:14.3282156Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260907.300/images/ubuntu/Ubuntu2404-Readme.md
+2026-09-11T20:01:14.3284088Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260907.300
+2026-09-11T20:01:14.3285089Z ##[endgroup]
+2026-09-11T20:01:14.3286306Z ##[group]GITHUB_TOKEN Permissions
+2026-09-11T20:01:14.3288199Z Contents: read
+2026-09-11T20:01:14.3288805Z Metadata: read
+2026-09-11T20:01:14.3289572Z ##[endgroup]
+2026-09-11T20:01:14.3291664Z Secret source: Actions
+2026-09-11T20:01:14.3292772Z Cache mode: write
+2026-09-11T20:01:14.3293470Z Prepare workflow directory
+2026-09-11T20:01:14.3852877Z Prepare all required actions
+2026-09-11T20:01:14.3901570Z Getting action download info
+2026-09-11T20:01:14.7507863Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-09-11T20:01:14.8747627Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-09-11T20:01:14.9556957Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2026-09-11T20:01:15.3842365Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-09-11T20:01:15.6123117Z Complete job name: Candidate package evidence
+2026-09-11T20:01:15.7025277Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-11T20:01:15.7037004Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+2026-09-11T20:01:15.7038601Z with:
+2026-09-11T20:01:15.7039380Z   fetch-depth: 0
+2026-09-11T20:01:15.7040249Z   persist-credentials: false
+2026-09-11T20:01:15.7041242Z   repository: mmzen/se_harness
+2026-09-11T20:01:15.7050442Z   token: ***
+2026-09-11T20:01:15.7051297Z   ssh-strict: true
+2026-09-11T20:01:15.7052123Z   ssh-user: git
+2026-09-11T20:01:15.7052916Z   clean: true
+2026-09-11T20:01:15.7053918Z   sparse-checkout-cone-mode: true
+2026-09-11T20:01:15.7054920Z   fetch-tags: false
+2026-09-11T20:01:15.7055775Z   show-progress: true
+2026-09-11T20:01:15.7056658Z   lfs: false
+2026-09-11T20:01:15.7057464Z   submodules: false
+2026-09-11T20:01:15.7058323Z   set-safe-directory: true
+2026-09-11T20:01:15.7059294Z   allow-unsafe-pr-checkout: false
+2026-09-11T20:01:15.7060607Z env:
+2026-09-11T20:01:15.7061396Z   RELEASED_VERIFIER_VERSION: 0.17.0
+2026-09-11T20:01:15.7062662Z   RELEASED_VERIFIER_WHEEL: se_harness-0.17.0-py3-none-any.whl
+2026-09-11T20:01:15.7064800Z   RELEASED_VERIFIER_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-11T20:01:15.7068187Z   RELEASED_VERIFIER_PAYLOAD_SHA256: dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405
+2026-09-11T20:01:15.7070189Z   PYTHONNOUSERSITE: 1
+2026-09-11T20:01:15.7071407Z   PYTHONPATH:
+2026-09-11T20:01:15.7072292Z ##[endgroup]
+2026-09-11T20:01:15.8248402Z Syncing repository: mmzen/se_harness
+2026-09-11T20:01:15.8251043Z ##[group]Getting Git version info
+2026-09-11T20:01:15.8252414Z Working directory is '/home/runner/work/se_harness/se_harness'
+2026-09-11T20:01:15.8255257Z [command]/usr/bin/git version
+2026-09-11T20:01:15.8260495Z git version 2.55.0
+2026-09-11T20:01:15.8287574Z ##[endgroup]
+2026-09-11T20:01:15.8305539Z Temporarily overriding HOME='/home/runner/work/_temp/2c01f958-126b-41a6-aa90-96df6db8e923' before making global git config changes
+2026-09-11T20:01:15.8310687Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-11T20:01:15.8315257Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/se_harness/se_harness
+2026-09-11T20:01:15.8377196Z Deleting the contents of '/home/runner/work/se_harness/se_harness'
+2026-09-11T20:01:15.8384056Z ##[group]Initializing the repository
+2026-09-11T20:01:15.8397346Z [command]/usr/bin/git init /home/runner/work/se_harness/se_harness
+2026-09-11T20:01:15.8543034Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-09-11T20:01:15.8546671Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-09-11T20:01:15.8549348Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-09-11T20:01:15.8551224Z hint: call:
+2026-09-11T20:01:15.8552362Z hint:
+2026-09-11T20:01:15.8554011Z hint: 	git config --global init.defaultBranch <name>
+2026-09-11T20:01:15.8556050Z hint:
+2026-09-11T20:01:15.8557383Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-09-11T20:01:15.8559606Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-09-11T20:01:15.8561093Z hint:
+2026-09-11T20:01:15.8561884Z hint: 	git branch -m <name>
+2026-09-11T20:01:15.8562790Z hint:
+2026-09-11T20:01:15.8564722Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-09-11T20:01:15.8566824Z Initialized empty Git repository in /home/runner/work/se_harness/se_harness/.git/
+2026-09-11T20:01:15.8571670Z [command]/usr/bin/git remote add origin https://github.com/mmzen/se_harness
+2026-09-11T20:01:15.8626536Z ##[endgroup]
+2026-09-11T20:01:15.8628777Z ##[group]Disabling automatic garbage collection
+2026-09-11T20:01:15.8630839Z [command]/usr/bin/git config --local gc.auto 0
+2026-09-11T20:01:15.8666287Z ##[endgroup]
+2026-09-11T20:01:15.8667953Z ##[group]Setting up auth
+2026-09-11T20:01:15.8674164Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-11T20:01:15.8709842Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-11T20:01:15.9126134Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-11T20:01:15.9167364Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-11T20:01:15.9394381Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-11T20:01:15.9432765Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-11T20:01:15.9659129Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-09-11T20:01:15.9697941Z ##[endgroup]
+2026-09-11T20:01:15.9699374Z ##[group]Fetching the repository
+2026-09-11T20:01:15.9709887Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +b715af98eb2141a333b77656239170b1e43fae1c:refs/remotes/pull/457/merge
+2026-09-11T20:01:18.0100493Z From https://github.com/mmzen/se_harness
+2026-09-11T20:01:18.0105673Z  * [new branch]        artifacts/plugin-implementation          -> origin/artifacts/plugin-implementation
+2026-09-11T20:01:18.0107043Z  * [new branch]        definitions/plg005-delegation            -> origin/definitions/plg005-delegation
+2026-09-11T20:01:18.0108514Z  * [new branch]        definitions/plg006-delegation            -> origin/definitions/plg006-delegation
+2026-09-11T20:01:18.0109790Z  * [new branch]        definitions/plg010-delegation            -> origin/definitions/plg010-delegation
+2026-09-11T20:01:18.0110983Z  * [new branch]        definitions/plg011-delegation            -> origin/definitions/plg011-delegation
+2026-09-11T20:01:18.0112279Z  * [new branch]        definitions/plg012-delegation            -> origin/definitions/plg012-delegation
+2026-09-11T20:01:18.0113200Z  * [new branch]        definitions/plg017-path-repair           -> origin/definitions/plg017-path-repair
+2026-09-11T20:01:18.0114484Z  * [new branch]        definitions/plg018-stack-integration     -> origin/definitions/plg018-stack-integration
+2026-09-11T20:01:18.0115776Z  * [new branch]        diagnostics/upgrade-rehearsal-timing     -> origin/diagnostics/upgrade-rehearsal-timing
+2026-09-11T20:01:18.0116491Z  * [new branch]        main                                     -> origin/main
+2026-09-11T20:01:18.0117190Z  * [new branch]        notes/plugin-installation-proposal       -> origin/notes/plugin-installation-proposal
+2026-09-11T20:01:18.0118089Z  * [new branch]        notes/plugin-proposal-assessment-2026-09-08 -> origin/notes/plugin-proposal-assessment-2026-09-08
+2026-09-11T20:01:18.0118812Z  * [new branch]        release/0.10                             -> origin/release/0.10
+2026-09-11T20:01:18.0119812Z  * [new branch]        release/0.11                             -> origin/release/0.11
+2026-09-11T20:01:18.0121049Z  * [new branch]        release/0.12                             -> origin/release/0.12
+2026-09-11T20:01:18.0122028Z  * [new branch]        release/0.12.0                           -> origin/release/0.12.0
+2026-09-11T20:01:18.0122965Z  * [new branch]        release/0.13                             -> origin/release/0.13
+2026-09-11T20:01:18.0123907Z  * [new branch]        release/0.13.0                           -> origin/release/0.13.0
+2026-09-11T20:01:18.0124676Z  * [new branch]        release/0.14                             -> origin/release/0.14
+2026-09-11T20:01:18.0125221Z  * [new branch]        release/0.14.0                           -> origin/release/0.14.0
+2026-09-11T20:01:18.0125751Z  * [new branch]        release/0.15                             -> origin/release/0.15
+2026-09-11T20:01:18.0126423Z  * [new branch]        release/0.15.0                           -> origin/release/0.15.0
+2026-09-11T20:01:18.0126957Z  * [new branch]        release/0.16                             -> origin/release/0.16
+2026-09-11T20:01:18.0127527Z  * [new branch]        release/0.16.0                           -> origin/release/0.16.0
+2026-09-11T20:01:18.0128207Z  * [new branch]        release/0.17                             -> origin/release/0.17
+2026-09-11T20:01:18.0128746Z  * [new branch]        release/0.17.0                           -> origin/release/0.17.0
+2026-09-11T20:01:18.0129277Z  * [new branch]        release/0.2.0                            -> origin/release/0.2.0
+2026-09-11T20:01:18.0129810Z  * [new branch]        release/0.2.1                            -> origin/release/0.2.1
+2026-09-11T20:01:18.0130418Z  * [new branch]        release/0.2.2                            -> origin/release/0.2.2
+2026-09-11T20:01:18.0131063Z  * [new branch]        release/0.3.0                            -> origin/release/0.3.0
+2026-09-11T20:01:18.0131589Z  * [new branch]        release/0.4.0                            -> origin/release/0.4.0
+2026-09-11T20:01:18.0132103Z  * [new branch]        release/0.6                              -> origin/release/0.6
+2026-09-11T20:01:18.0132616Z  * [new branch]        release/0.7                              -> origin/release/0.7
+2026-09-11T20:01:18.0133282Z  * [new branch]        release/0.8                              -> origin/release/0.8
+2026-09-11T20:01:18.0134181Z  * [new branch]        release/0.9                              -> origin/release/0.9
+2026-09-11T20:01:18.0134806Z  * [new branch]        work/plugin-change-skill                 -> origin/work/plugin-change-skill
+2026-09-11T20:01:18.0135495Z  * [new branch]        work/plugin-claude-adapter               -> origin/work/plugin-claude-adapter
+2026-09-11T20:01:18.0136196Z  * [new branch]        work/plugin-codex-adapter                -> origin/work/plugin-codex-adapter
+2026-09-11T20:01:18.0136914Z  * [new branch]        work/plugin-evidence-path-repair         -> origin/work/plugin-evidence-path-repair
+2026-09-11T20:01:18.0137639Z  * [new branch]        work/plugin-evidence-skill               -> origin/work/plugin-evidence-skill
+2026-09-11T20:01:18.0138344Z  * [new branch]        work/plugin-retained-skills              -> origin/work/plugin-retained-skills
+2026-09-11T20:01:18.0139055Z  * [new branch]        work/plugin-stack-integration            -> origin/work/plugin-stack-integration
+2026-09-11T20:01:18.0139834Z  * [new branch]        work/release-artifact-discovery-repair   -> origin/work/release-artifact-discovery-repair
+2026-09-11T20:01:18.0140464Z  * [new tag]           last                                     -> last
+2026-09-11T20:01:18.0140959Z  * [new tag]           v0.10.0                                  -> v0.10.0
+2026-09-11T20:01:18.0141658Z  * [new tag]           v0.11.0                                  -> v0.11.0
+2026-09-11T20:01:18.0142618Z  * [new tag]           v0.12.0                                  -> v0.12.0
+2026-09-11T20:01:18.0143526Z  * [new tag]           v0.13.0                                  -> v0.13.0
+2026-09-11T20:01:18.0144787Z  * [new tag]           v0.14.0                                  -> v0.14.0
+2026-09-11T20:01:18.0145524Z  * [new tag]           v0.15.0                                  -> v0.15.0
+2026-09-11T20:01:18.0146272Z  * [new tag]           v0.16.0                                  -> v0.16.0
+2026-09-11T20:01:18.0146997Z  * [new tag]           v0.17.0                                  -> v0.17.0
+2026-09-11T20:01:18.0148161Z  * [new tag]           v0.2.0                                   -> v0.2.0
+2026-09-11T20:01:18.0149284Z  * [new tag]           v0.2.1                                   -> v0.2.1
+2026-09-11T20:01:18.0150145Z  * [new tag]           v0.2.2                                   -> v0.2.2
+2026-09-11T20:01:18.0150931Z  * [new tag]           v0.3.0                                   -> v0.3.0
+2026-09-11T20:01:18.0151593Z  * [new tag]           v0.4.0                                   -> v0.4.0
+2026-09-11T20:01:18.0152060Z  * [new tag]           v0.4.1                                   -> v0.4.1
+2026-09-11T20:01:18.0152514Z  * [new tag]           v0.5.0                                   -> v0.5.0
+2026-09-11T20:01:18.0152975Z  * [new tag]           v0.5.0a1                                 -> v0.5.0a1
+2026-09-11T20:01:18.0153440Z  * [new tag]           v0.6.0                                   -> v0.6.0
+2026-09-11T20:01:18.0154341Z  * [new tag]           v0.7.0                                   -> v0.7.0
+2026-09-11T20:01:18.0154803Z  * [new tag]           v0.7.1                                   -> v0.7.1
+2026-09-11T20:01:18.0155274Z  * [new tag]           v0.8.0                                   -> v0.8.0
+2026-09-11T20:01:18.0155750Z  * [new tag]           v0.9.0                                   -> v0.9.0
+2026-09-11T20:01:18.0156309Z  * [new ref]           b715af98eb2141a333b77656239170b1e43fae1c -> pull/457/merge
+2026-09-11T20:01:18.0157769Z ##[endgroup]
+2026-09-11T20:01:18.0158209Z ##[group]Determining the checkout info
+2026-09-11T20:01:18.0158697Z ##[endgroup]
+2026-09-11T20:01:18.0158999Z [command]/usr/bin/git sparse-checkout disable
+2026-09-11T20:01:18.0179523Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-09-11T20:01:18.0210486Z ##[group]Checking out the ref
+2026-09-11T20:01:18.0214701Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/457/merge
+2026-09-11T20:01:18.7143851Z Note: switching to 'refs/remotes/pull/457/merge'.
+2026-09-11T20:01:18.7144517Z
+2026-09-11T20:01:18.7144904Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-09-11T20:01:18.7145788Z changes and commit them, and you can discard any commits you make in this
+2026-09-11T20:01:18.7146635Z state without impacting any branches by switching back to a branch.
+2026-09-11T20:01:18.7147128Z
+2026-09-11T20:01:18.7147460Z If you want to create a new branch to retain commits you create, you may
+2026-09-11T20:01:18.7148162Z do so (now or later) by using -c with the switch command. Example:
+2026-09-11T20:01:18.7148582Z
+2026-09-11T20:01:18.7148760Z   git switch -c <new-branch-name>
+2026-09-11T20:01:18.7149048Z
+2026-09-11T20:01:18.7149210Z Or undo this operation with:
+2026-09-11T20:01:18.7149455Z
+2026-09-11T20:01:18.7149580Z   git switch -
+2026-09-11T20:01:18.7149765Z
+2026-09-11T20:01:18.7150117Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-09-11T20:01:18.7150636Z
+2026-09-11T20:01:18.7151246Z HEAD is now at b715af98 Merge 9d536b3de6adcb91ddfd22d3384980744d5d05e8 into 78cd64df7c130a6f42ab357836093db30f710753
+2026-09-11T20:01:18.7197056Z ##[endgroup]
+2026-09-11T20:01:18.7245058Z [command]/usr/bin/git log -1 --format=%H
+2026-09-11T20:01:18.7272518Z b715af98eb2141a333b77656239170b1e43fae1c
+2026-09-11T20:01:18.7282703Z ##[group]Removing auth
+2026-09-11T20:01:18.7286332Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-11T20:01:18.7318929Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-11T20:01:18.7559395Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-11T20:01:18.7591375Z http.https://github.com/.extraheader
+2026-09-11T20:01:18.7598822Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-09-11T20:01:18.7632765Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-11T20:01:18.7871562Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-11T20:01:18.7905025Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-11T20:01:18.8136206Z ##[endgroup]
+2026-09-11T20:01:18.8394651Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-11T20:01:18.8396446Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+2026-09-11T20:01:18.8396839Z with:
+2026-09-11T20:01:18.8397051Z   python-version: 3.11
+2026-09-11T20:01:18.8397282Z   check-latest: false
+2026-09-11T20:01:18.8399628Z   token: ***
+2026-09-11T20:01:18.8399849Z   update-environment: true
+2026-09-11T20:01:18.8400093Z   allow-prereleases: false
+2026-09-11T20:01:18.8400326Z   freethreaded: false
+2026-09-11T20:01:18.8400528Z env:
+2026-09-11T20:01:18.8400726Z   RELEASED_VERIFIER_VERSION: 0.17.0
+2026-09-11T20:01:18.8401064Z   RELEASED_VERIFIER_WHEEL: se_harness-0.17.0-py3-none-any.whl
+2026-09-11T20:01:18.8401634Z   RELEASED_VERIFIER_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-11T20:01:18.8402303Z   RELEASED_VERIFIER_PAYLOAD_SHA256: dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405
+2026-09-11T20:01:18.8402771Z   PYTHONNOUSERSITE: 1
+2026-09-11T20:01:18.8402986Z   PYTHONPATH:
+2026-09-11T20:01:18.8403178Z ##[endgroup]
+2026-09-11T20:01:18.9729746Z ##[group]Installed versions
+2026-09-11T20:01:18.9830996Z (node:2330) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-11T20:01:18.9832032Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-11T20:01:18.9832859Z Successfully set up CPython (3.11.16)
+2026-09-11T20:01:18.9834012Z ##[endgroup]
+2026-09-11T20:01:19.0071810Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-11T20:01:19.0073222Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+2026-09-11T20:01:19.0073821Z with:
+2026-09-11T20:01:19.0074176Z   name: candidate-wheel-non-promotable-b715af98eb2141a333b77656239170b1e43fae1c
+2026-09-11T20:01:19.0074621Z   path: /home/runner/work/_temp/candidate-dist
+2026-09-11T20:01:19.0074926Z   merge-multiple: false
+2026-09-11T20:01:19.0075159Z   repository: mmzen/se_harness
+2026-09-11T20:01:19.0075395Z   run-id: 34641840129
+2026-09-11T20:01:19.0075594Z env:
+2026-09-11T20:01:19.0075789Z   RELEASED_VERIFIER_VERSION: 0.17.0
+2026-09-11T20:01:19.0076147Z   RELEASED_VERIFIER_WHEEL: se_harness-0.17.0-py3-none-any.whl
+2026-09-11T20:01:19.0076681Z   RELEASED_VERIFIER_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-11T20:01:19.0077348Z   RELEASED_VERIFIER_PAYLOAD_SHA256: dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405
+2026-09-11T20:01:19.0077812Z   PYTHONNOUSERSITE: 1
+2026-09-11T20:01:19.0078029Z   PYTHONPATH:
+2026-09-11T20:01:19.0078296Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:19.0078761Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-11T20:01:19.0079184Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:19.0079568Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:19.0079947Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:19.0080328Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-11T20:01:19.0080648Z ##[endgroup]
+2026-09-11T20:01:19.1634096Z Downloading single artifact
+2026-09-11T20:01:19.1792689Z (node:2338) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-11T20:01:19.1794153Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-11T20:01:19.4600561Z Preparing to download the following artifacts:
+2026-09-11T20:01:19.4602475Z - candidate-wheel-non-promotable-b715af98eb2141a333b77656239170b1e43fae1c (ID: 10279898388, Size: 471526, Expected Digest: sha256:3f52088450c0bc0de6daa6ead3abdc6acb5e5fb9481d267e74bf42f360834636)
+2026-09-11T20:01:19.7118789Z Redirecting to blob download url: https://productionresultssa11.blob.core.windows.net/actions-results/4c41bb33-d4b0-49f6-8603-0641dabcaa17/workflow-job-run-6a0e2711-34ce-5fe9-80b1-bbee91d7838f/artifacts/64bc6e9d1f427a8c9fa413712b821f7297785e18e4153149f6ce2a11af757fa5.zip
+2026-09-11T20:01:19.7121742Z Starting download of artifact to: /home/runner/work/_temp/candidate-dist
+2026-09-11T20:01:20.0146979Z (node:2338) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+2026-09-11T20:01:20.3531043Z SHA256 digest of downloaded artifact is 3f52088450c0bc0de6daa6ead3abdc6acb5e5fb9481d267e74bf42f360834636
+2026-09-11T20:01:20.3532655Z Artifact download completed successfully.
+2026-09-11T20:01:20.3533790Z Total of 1 artifact(s) downloaded
+2026-09-11T20:01:20.3537417Z Download artifact has finished successfully
+2026-09-11T20:01:20.3672409Z ##[group]Run set -euo pipefail
+2026-09-11T20:01:20.3672764Z [36;1mset -euo pipefail[0m
+2026-09-11T20:01:20.3673049Z [36;1mcd "$RUNNER_TEMP/candidate-dist"[0m
+2026-09-11T20:01:20.3674004Z [36;1mtest "$(find . -maxdepth 1 -name '*.whl' | wc -l)" -eq 1[0m
+2026-09-11T20:01:20.3674505Z [36;1msha256sum --check --strict SHA256SUMS[0m
+2026-09-11T20:01:20.3724156Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-09-11T20:01:20.3724530Z env:
+2026-09-11T20:01:20.3724752Z   RELEASED_VERIFIER_VERSION: 0.17.0
+2026-09-11T20:01:20.3725116Z   RELEASED_VERIFIER_WHEEL: se_harness-0.17.0-py3-none-any.whl
+2026-09-11T20:01:20.3725694Z   RELEASED_VERIFIER_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-11T20:01:20.3726414Z   RELEASED_VERIFIER_PAYLOAD_SHA256: dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405
+2026-09-11T20:01:20.3726920Z   PYTHONNOUSERSITE: 1
+2026-09-11T20:01:20.3727148Z   PYTHONPATH:
+2026-09-11T20:01:20.3727476Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:20.3727929Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-11T20:01:20.3728376Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:20.3728781Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:20.3729178Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:20.3729582Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-11T20:01:20.3729918Z ##[endgroup]
+2026-09-11T20:01:20.3993816Z se_harness-0.18.0-py3-none-any.whl: OK
+2026-09-11T20:01:20.4085818Z ##[group]Run # SPEC-CIP-003 CIP-ONE-003: the script's FORBIDDEN_MEMBERS is the one
+2026-09-11T20:01:20.4086410Z [36;1m# SPEC-CIP-003 CIP-ONE-003: the script's FORBIDDEN_MEMBERS is the one[0m
+2026-09-11T20:01:20.4086913Z [36;1m# definition of the members a portable wheel may not carry; this step[0m
+2026-09-11T20:01:20.4087318Z [36;1m# states no second copy of that list.[0m
+2026-09-11T20:01:20.4087834Z [36;1mcandidate_wheel="$RUNNER_TEMP/candidate-dist/se_harness-$CANDIDATE_VERSION-py3-none-any.whl"[0m
+2026-09-11T20:01:20.4088503Z [36;1mpython scripts/check_portable_release_surface.py --wheel "$candidate_wheel"[0m
+2026-09-11T20:01:20.4125555Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-09-11T20:01:20.4125909Z env:
+2026-09-11T20:01:20.4126115Z   RELEASED_VERIFIER_VERSION: 0.17.0
+2026-09-11T20:01:20.4126457Z   RELEASED_VERIFIER_WHEEL: se_harness-0.17.0-py3-none-any.whl
+2026-09-11T20:01:20.4127039Z   RELEASED_VERIFIER_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-11T20:01:20.4127707Z   RELEASED_VERIFIER_PAYLOAD_SHA256: dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405
+2026-09-11T20:01:20.4128179Z   PYTHONNOUSERSITE: 1
+2026-09-11T20:01:20.4128405Z   PYTHONPATH:
+2026-09-11T20:01:20.4128676Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:20.4129102Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-11T20:01:20.4129539Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:20.4129944Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:20.4130322Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:20.4130702Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-11T20:01:20.4131038Z   CANDIDATE_VERSION: 0.18.0
+2026-09-11T20:01:20.4131258Z ##[endgroup]
+2026-09-11T20:01:20.5210244Z portable release surface: PASS
+2026-09-11T20:01:20.5296606Z ##[group]Run set -euo pipefail
+2026-09-11T20:01:20.5296956Z [36;1mset -euo pipefail[0m
+2026-09-11T20:01:20.5297357Z [36;1mtest -n "$RELEASED_VERIFIER_VERSION" -a -n "$RELEASED_VERIFIER_WHEEL_SHA256" \[0m
+2026-09-11T20:01:20.5297993Z [36;1m  || { echo "predecessor facts were not derived; the verifier identity is unknown" >&2; exit 1; }[0m
+2026-09-11T20:01:20.5298506Z [36;1mmkdir -p "$RUNNER_TEMP/verifier-dist"[0m
+2026-09-11T20:01:20.5298982Z [36;1mpython -m pip download --disable-pip-version-check --only-binary=:all: --no-deps \[0m
+2026-09-11T20:01:20.5299744Z [36;1m  --dest "$RUNNER_TEMP/verifier-dist" "se-harness==$RELEASED_VERIFIER_VERSION"[0m
+2026-09-11T20:01:20.5300306Z [36;1mverifier_wheel="$RUNNER_TEMP/verifier-dist/$RELEASED_VERIFIER_WHEEL"[0m
+2026-09-11T20:01:20.5300711Z [36;1mtest -f "$verifier_wheel"[0m
+2026-09-11T20:01:20.5301164Z [36;1mprintf '%s  %s\n' "$RELEASED_VERIFIER_WHEEL_SHA256" "$verifier_wheel" | sha256sum --check -[0m
+2026-09-11T20:01:20.5301703Z [36;1mpython -m venv "$RUNNER_TEMP/verifier-env"[0m
+2026-09-11T20:01:20.5302095Z [36;1m"$RUNNER_TEMP/verifier-env/bin/python" -m pip install \[0m
+2026-09-11T20:01:20.5302575Z [36;1m  --disable-pip-version-check --no-index --no-deps "$verifier_wheel"[0m
+2026-09-11T20:01:20.5302989Z [36;1mcd "$RUNNER_TEMP"[0m
+2026-09-11T20:01:20.5303264Z [36;1mexport PYTHONNOUSERSITE=1 PYTHONPATH=[0m
+2026-09-11T20:01:20.5303964Z [36;1m"$RUNNER_TEMP/verifier-env/bin/python" -I -m se_harness identity \[0m
+2026-09-11T20:01:20.5304373Z [36;1m  --role released-evaluator \[0m
+2026-09-11T20:01:20.5304726Z [36;1m  --expected-version "$RELEASED_VERIFIER_VERSION" \[0m
+2026-09-11T20:01:20.5305111Z [36;1m  --expected-root "$RUNNER_TEMP/verifier-env" \[0m
+2026-09-11T20:01:20.5305458Z [36;1m  --checkout-root "$GITHUB_WORKSPACE" \[0m
+2026-09-11T20:01:20.5305873Z [36;1m  --evaluator-payload-sha256 "$RELEASED_VERIFIER_PAYLOAD_SHA256" \[0m
+2026-09-11T20:01:20.5306371Z [36;1m  --evaluator-wheel-sha256 "$RELEASED_VERIFIER_WHEEL_SHA256" \[0m
+2026-09-11T20:01:20.5306823Z [36;1m  --entry-point "$RUNNER_TEMP/verifier-env/bin/harnessctl" \[0m
+2026-09-11T20:01:20.5307243Z [36;1m  --require-isolated-python --require-entry-point[0m
+2026-09-11T20:01:20.5345371Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-09-11T20:01:20.5345706Z env:
+2026-09-11T20:01:20.5345916Z   RELEASED_VERIFIER_VERSION: 0.17.0
+2026-09-11T20:01:20.5346258Z   RELEASED_VERIFIER_WHEEL: se_harness-0.17.0-py3-none-any.whl
+2026-09-11T20:01:20.5346821Z   RELEASED_VERIFIER_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-11T20:01:20.5347501Z   RELEASED_VERIFIER_PAYLOAD_SHA256: dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405
+2026-09-11T20:01:20.5347969Z   PYTHONNOUSERSITE: 1
+2026-09-11T20:01:20.5348195Z   PYTHONPATH:
+2026-09-11T20:01:20.5348476Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:20.5348908Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-11T20:01:20.5349328Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:20.5349711Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:20.5350094Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:20.5350474Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-11T20:01:20.5350794Z ##[endgroup]
+2026-09-11T20:01:21.5874471Z Collecting se-harness==0.17.0
+2026-09-11T20:01:21.6347890Z   Downloading se_harness-0.17.0-py3-none-any.whl.metadata (45 kB)
+2026-09-11T20:01:21.6634845Z Downloading se_harness-0.17.0-py3-none-any.whl (484 kB)
+2026-09-11T20:01:21.7021056Z Saved /home/runner/work/_temp/verifier-dist/se_harness-0.17.0-py3-none-any.whl
+2026-09-11T20:01:21.7022043Z Successfully downloaded se-harness
+2026-09-11T20:01:21.7403766Z /home/runner/work/_temp/verifier-dist/se_harness-0.17.0-py3-none-any.whl: OK
+2026-09-11T20:01:26.0665541Z Processing /home/runner/work/_temp/verifier-dist/se_harness-0.17.0-py3-none-any.whl
+2026-09-11T20:01:26.0762323Z Installing collected packages: se-harness
+2026-09-11T20:01:26.2749613Z Successfully installed se-harness-0.17.0
+2026-09-11T20:01:26.4584359Z {
+2026-09-11T20:01:26.4584859Z   "candidate_commit": null,
+2026-09-11T20:01:26.4585458Z   "checkout_root": "/home/runner/work/se_harness/se_harness",
+2026-09-11T20:01:26.4586039Z   "diagnostics": [],
+2026-09-11T20:01:26.4586729Z   "distribution_origin": "/home/runner/work/_temp/verifier-env/lib/python3.11/site-packages",
+2026-09-11T20:01:26.4587682Z   "entry_point_origin": "/home/runner/work/_temp/verifier-env/bin/harnessctl",
+2026-09-11T20:01:26.4588978Z   "evaluator_archive_name": "se_harness-0.17.0-py3-none-any.whl",
+2026-09-11T20:01:26.4589787Z   "evaluator_archive_sha256": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+2026-09-11T20:01:26.4590624Z   "evaluator_payload_manifest": "se-harness-installed-payload-v1",
+2026-09-11T20:01:26.4591428Z   "evaluator_payload_sha256": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405",
+2026-09-11T20:01:26.4592359Z   "evaluator_wheel_sha256": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+2026-09-11T20:01:26.4593109Z   "expected_root": "/home/runner/work/_temp/verifier-env",
+2026-09-11T20:01:26.4593791Z   "harness_version": "0.17.0",
+2026-09-11T20:01:26.4594146Z   "isolated_python": true,
+2026-09-11T20:01:26.4594865Z   "module_origin": "/home/runner/work/_temp/verifier-env/lib/python3.11/site-packages/se_harness/runtime_identity.py",
+2026-09-11T20:01:26.4595633Z   "passed": true,
+2026-09-11T20:01:26.4596006Z   "python_binary_position": "outside-declared-roots",
+2026-09-11T20:01:26.4596711Z   "python_binary_sha256": "a15ccdaf07655a8667a3687b13171486c9a265d92273ba3ad820fbb64d2cfecc",
+2026-09-11T20:01:26.4597367Z   "python_entry_is_link": true,
+2026-09-11T20:01:26.4597883Z   "python_executable": "/home/runner/work/_temp/verifier-env/bin/python",
+2026-09-11T20:01:26.4598432Z   "python_version": "3.11.16",
+2026-09-11T20:01:26.4598788Z   "pythonpath_present": false,
+2026-09-11T20:01:26.4599141Z   "role": "released-evaluator",
+2026-09-11T20:01:26.4599545Z   "schema": "se-harness-runtime-identity-v3",
+2026-09-11T20:01:26.4600261Z   "template_origin": "/home/runner/work/_temp/verifier-env/share/se-harness/templates/repository/standard",
+2026-09-11T20:01:26.4600766Z   "user_site_enabled": false
+2026-09-11T20:01:26.4600997Z }
+2026-09-11T20:01:26.4776272Z ##[group]Run set -euo pipefail
+2026-09-11T20:01:26.4776639Z [36;1mset -euo pipefail[0m
+2026-09-11T20:01:26.4777120Z [36;1mcandidate_wheel="$RUNNER_TEMP/candidate-dist/se_harness-$CANDIDATE_VERSION-py3-none-any.whl"[0m
+2026-09-11T20:01:26.4777735Z [36;1mcandidate_sha256="$(sha256sum "$candidate_wheel" | awk '{print $1}')"[0m
+2026-09-11T20:01:26.4778123Z [36;1mcd "$RUNNER_TEMP"[0m
+2026-09-11T20:01:26.4778399Z [36;1mexport PYTHONNOUSERSITE=1 PYTHONPATH=[0m
+2026-09-11T20:01:26.4778832Z [36;1m# SPEC-REB-016 REB-BFH-001: the typed operation is the only acceptance[0m
+2026-09-11T20:01:26.4779340Z [36;1m# path. The exact-public bootstrap fallback expired per SPEC-REB-010[0m
+2026-09-11T20:01:26.4779750Z [36;1m# and was removed under WO-REB-031.[0m
+2026-09-11T20:01:26.4780207Z [36;1m"$RUNNER_TEMP/verifier-env/bin/python" -I -m se_harness qualify candidate-package \[0m
+2026-09-11T20:01:26.4780694Z [36;1m  --candidate-wheel "$candidate_wheel" \[0m
+2026-09-11T20:01:26.4781053Z [36;1m  --candidate-commit "$GITHUB_SHA" \[0m
+2026-09-11T20:01:26.4781401Z [36;1m  --candidate-wheel-sha256 "$candidate_sha256" \[0m
+2026-09-11T20:01:26.4781835Z [36;1m  --verifier-wheel-sha256 "$RELEASED_VERIFIER_WHEEL_SHA256" \[0m
+2026-09-11T20:01:26.4782238Z [36;1m  --checkout-root "$GITHUB_WORKSPACE" \[0m
+2026-09-11T20:01:26.4782642Z [36;1m  --output "$RUNNER_TEMP/candidate-package-qualification.json" \[0m
+2026-09-11T20:01:26.4783009Z [36;1m  --json[0m
+2026-09-11T20:01:26.4783339Z [36;1mpython - "$RUNNER_TEMP/candidate-package-qualification.json" <<'PY'[0m
+2026-09-11T20:01:26.4784024Z [36;1mimport json, pathlib, sys[0m
+2026-09-11T20:01:26.4784435Z [36;1mvalue = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))[0m
+2026-09-11T20:01:26.4784944Z [36;1massert value["schema"] == "se-harness-release-qualification-v1"[0m
+2026-09-11T20:01:26.4785378Z [36;1massert value["operation"] == "candidate-package"[0m
+2026-09-11T20:01:26.4785776Z [36;1massert value["independence"] == "released-verifier"[0m
+2026-09-11T20:01:26.4786120Z [36;1massert value["passed"] is True[0m
+2026-09-11T20:01:26.4786379Z [36;1mPY[0m
+2026-09-11T20:01:26.4822421Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-09-11T20:01:26.4822911Z env:
+2026-09-11T20:01:26.4823117Z   RELEASED_VERIFIER_VERSION: 0.17.0
+2026-09-11T20:01:26.4823462Z   RELEASED_VERIFIER_WHEEL: se_harness-0.17.0-py3-none-any.whl
+2026-09-11T20:01:26.4824245Z   RELEASED_VERIFIER_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-11T20:01:26.4824915Z   RELEASED_VERIFIER_PAYLOAD_SHA256: dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405
+2026-09-11T20:01:26.4825381Z   PYTHONNOUSERSITE: 1
+2026-09-11T20:01:26.4825599Z   PYTHONPATH:
+2026-09-11T20:01:26.4825876Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:26.4826305Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-11T20:01:26.4826739Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:26.4827120Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:26.4827503Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:26.4827894Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-11T20:01:26.4828225Z   CANDIDATE_VERSION: 0.18.0
+2026-09-11T20:01:26.4828459Z ##[endgroup]
+2026-09-11T20:01:33.5711005Z {
+2026-09-11T20:01:33.5712070Z   "authority": "evidence-only; no lifecycle or external action authorized",
+2026-09-11T20:01:33.5713039Z   "checks": [
+2026-09-11T20:01:33.5713294Z     {
+2026-09-11T20:01:33.5713498Z       "id": "CP001",
+2026-09-11T20:01:33.5714174Z       "message": "released verifier identity is exact and isolated",
+2026-09-11T20:01:33.5714548Z       "passed": true,
+2026-09-11T20:01:33.5714911Z       "subject": "released-verifier"
+2026-09-11T20:01:33.5715176Z     },
+2026-09-11T20:01:33.5715431Z     {
+2026-09-11T20:01:33.5715619Z       "id": "CP002",
+2026-09-11T20:01:33.5716336Z       "message": "10 released-verifier scenarios passed",
+2026-09-11T20:01:33.5716771Z       "passed": true,
+2026-09-11T20:01:33.5717024Z       "subject": "candidate-wheel"
+2026-09-11T20:01:33.5717363Z     }
+2026-09-11T20:01:33.5717558Z   ],
+2026-09-11T20:01:33.5717835Z   "completion": "completed",
+2026-09-11T20:01:33.5718149Z   "evaluator": {
+2026-09-11T20:01:33.5718365Z     "diagnostics": [],
+2026-09-11T20:01:33.5718609Z     "distribution": "se-harness",
+2026-09-11T20:01:33.5719200Z     "entry_point_sha256": "31185b188e408767c084c4a5bc5d61a7c6829504f134aa5124732bdf0717f8ba",
+2026-09-11T20:01:33.5719849Z     "evaluator_archive_name": "se_harness-0.17.0-py3-none-any.whl",
+2026-09-11T20:01:33.5720501Z     "evaluator_archive_sha256": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+2026-09-11T20:01:33.5721250Z     "evaluator_payload_manifest": "se-harness-installed-payload-v1",
+2026-09-11T20:01:33.5721923Z     "evaluator_payload_sha256": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405",
+2026-09-11T20:01:33.5722731Z     "identity_sha256": "8a108ad8a442eb10adb531de266ad22bbfde1f2f05529e81b0f0c007bede2b0b",
+2026-09-11T20:01:33.5723338Z     "isolated_python": true,
+2026-09-11T20:01:33.5723878Z     "pythonpath_present": false,
+2026-09-11T20:01:33.5724162Z     "role": "released-verifier",
+2026-09-11T20:01:33.5724414Z     "user_site_enabled": false,
+2026-09-11T20:01:33.5724649Z     "version": "0.17.0"
+2026-09-11T20:01:33.5724850Z   },
+2026-09-11T20:01:33.5725071Z   "independence": "released-verifier",
+2026-09-11T20:01:33.5725355Z   "operation": "candidate-package",
+2026-09-11T20:01:33.5725611Z   "passed": true,
+2026-09-11T20:01:33.5725953Z   "schema": "se-harness-release-qualification-v1",
+2026-09-11T20:01:33.5726334Z   "target": {
+2026-09-11T20:01:33.5726735Z     "acceptance_contract_sha256": "a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75",
+2026-09-11T20:01:33.5727404Z     "commit": "b715af98eb2141a333b77656239170b1e43fae1c",
+2026-09-11T20:01:33.5727937Z     "identity_sha256": "c5505314c0c047ec2a7c0010900153d31b805900812343c082eae18db806dbbd",
+2026-09-11T20:01:33.5728444Z     "kind": "candidate-package",
+2026-09-11T20:01:33.5728698Z     "version": "0.18.0",
+2026-09-11T20:01:33.5729337Z     "wheel_sha256": "bfc400f257c48400d2363bb785a3e942cc8fa51ff021a33745f9aa467a9b7b35"
+2026-09-11T20:01:33.5729804Z   }
+2026-09-11T20:01:33.5730048Z }
+2026-09-11T20:01:33.6148717Z ##[group]Run python -m venv "$RUNNER_TEMP/candidate-env"
+2026-09-11T20:01:33.6149172Z [36;1mpython -m venv "$RUNNER_TEMP/candidate-env"[0m
+2026-09-11T20:01:33.6149690Z [36;1mcandidate_wheel="$RUNNER_TEMP/candidate-dist/se_harness-$CANDIDATE_VERSION-py3-none-any.whl"[0m
+2026-09-11T20:01:33.6150261Z [36;1m"$RUNNER_TEMP/candidate-env/bin/python" -m pip install \[0m
+2026-09-11T20:01:33.6150700Z [36;1m  --disable-pip-version-check --no-deps "$candidate_wheel"[0m
+2026-09-11T20:01:33.6151056Z [36;1mcd "$RUNNER_TEMP"[0m
+2026-09-11T20:01:33.6151327Z [36;1mexport PYTHONNOUSERSITE=1 PYTHONPATH=[0m
+2026-09-11T20:01:33.6151744Z [36;1m"$RUNNER_TEMP/candidate-env/bin/python" -I -m se_harness identity \[0m
+2026-09-11T20:01:33.6152144Z [36;1m  --role candidate-package \[0m
+2026-09-11T20:01:33.6152459Z [36;1m  --expected-version "$CANDIDATE_VERSION" \[0m
+2026-09-11T20:01:33.6152832Z [36;1m  --expected-root "$RUNNER_TEMP/candidate-env" \[0m
+2026-09-11T20:01:33.6153222Z [36;1m  --checkout-root "$GITHUB_WORKSPACE" \[0m
+2026-09-11T20:01:33.6153814Z [36;1m  --candidate-commit "$GITHUB_SHA" \[0m
+2026-09-11T20:01:33.6154224Z [36;1m  --entry-point "$RUNNER_TEMP/candidate-env/bin/harnessctl" \[0m
+2026-09-11T20:01:33.6154653Z [36;1m  --require-isolated-python --require-entry-point[0m
+2026-09-11T20:01:33.6155108Z [36;1mpython "$GITHUB_WORKSPACE/scripts/check_portable_release_surface.py" \[0m
+2026-09-11T20:01:33.6155594Z [36;1m  --harnessctl "$RUNNER_TEMP/candidate-env/bin/harnessctl"[0m
+2026-09-11T20:01:33.6192096Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-09-11T20:01:33.6192441Z env:
+2026-09-11T20:01:33.6192650Z   RELEASED_VERIFIER_VERSION: 0.17.0
+2026-09-11T20:01:33.6192994Z   RELEASED_VERIFIER_WHEEL: se_harness-0.17.0-py3-none-any.whl
+2026-09-11T20:01:33.6193753Z   RELEASED_VERIFIER_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-11T20:01:33.6194534Z   RELEASED_VERIFIER_PAYLOAD_SHA256: dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405
+2026-09-11T20:01:33.6194997Z   PYTHONNOUSERSITE: 1
+2026-09-11T20:01:33.6195217Z   PYTHONPATH:
+2026-09-11T20:01:33.6195486Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:33.6195919Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-11T20:01:33.6196342Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:33.6196722Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:33.6197101Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:33.6197488Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-11T20:01:33.6197819Z   CANDIDATE_VERSION: 0.18.0
+2026-09-11T20:01:33.6198044Z ##[endgroup]
+2026-09-11T20:01:37.6062914Z Processing /home/runner/work/_temp/candidate-dist/se_harness-0.18.0-py3-none-any.whl
+2026-09-11T20:01:37.6167187Z Installing collected packages: se-harness
+2026-09-11T20:01:38.0752249Z Successfully installed se-harness-0.18.0
+2026-09-11T20:01:38.2471342Z {
+2026-09-11T20:01:38.2472056Z   "candidate_commit": "b715af98eb2141a333b77656239170b1e43fae1c",
+2026-09-11T20:01:38.2472903Z   "checkout_root": "/home/runner/work/se_harness/se_harness",
+2026-09-11T20:01:38.2473406Z   "diagnostics": [],
+2026-09-11T20:01:38.2474363Z   "distribution_origin": "/home/runner/work/_temp/candidate-env/lib/python3.11/site-packages",
+2026-09-11T20:01:38.2475228Z   "entry_point_origin": "/home/runner/work/_temp/candidate-env/bin/harnessctl",
+2026-09-11T20:01:38.2475827Z   "evaluator_archive_name": null,
+2026-09-11T20:01:38.2476216Z   "evaluator_archive_sha256": null,
+2026-09-11T20:01:38.2476622Z   "evaluator_payload_manifest": null,
+2026-09-11T20:01:38.2477027Z   "evaluator_payload_sha256": null,
+2026-09-11T20:01:38.2477417Z   "evaluator_wheel_sha256": null,
+2026-09-11T20:01:38.2477874Z   "expected_root": "/home/runner/work/_temp/candidate-env",
+2026-09-11T20:01:38.2478708Z   "harness_version": "0.18.0",
+2026-09-11T20:01:38.2479312Z   "isolated_python": true,
+2026-09-11T20:01:38.2480075Z   "module_origin": "/home/runner/work/_temp/candidate-env/lib/python3.11/site-packages/se_harness/runtime_identity.py",
+2026-09-11T20:01:38.2480757Z   "passed": true,
+2026-09-11T20:01:38.2481066Z   "python_binary_position": "outside-declared-roots",
+2026-09-11T20:01:38.2481648Z   "python_binary_sha256": "a15ccdaf07655a8667a3687b13171486c9a265d92273ba3ad820fbb64d2cfecc",
+2026-09-11T20:01:38.2482207Z   "python_entry_is_link": true,
+2026-09-11T20:01:38.2482638Z   "python_executable": "/home/runner/work/_temp/candidate-env/bin/python",
+2026-09-11T20:01:38.2483105Z   "python_version": "3.11.16",
+2026-09-11T20:01:38.2483400Z   "pythonpath_present": false,
+2026-09-11T20:01:38.2483849Z   "role": "candidate-package",
+2026-09-11T20:01:38.2484179Z   "schema": "se-harness-runtime-identity-v3",
+2026-09-11T20:01:38.2484805Z   "template_origin": "/home/runner/work/_temp/candidate-env/share/se-harness/templates/repository/standard",
+2026-09-11T20:01:38.2485420Z   "user_site_enabled": false
+2026-09-11T20:01:38.2485690Z }
+2026-09-11T20:01:38.8475182Z portable release surface: PASS
+2026-09-11T20:01:38.8585446Z ##[group]Run # SPEC-CIP-003 CIP-ONE-004: no --help grep here. The step above runs
+2026-09-11T20:01:38.8586024Z [36;1m# SPEC-CIP-003 CIP-ONE-004: no --help grep here. The step above runs[0m
+2026-09-11T20:01:38.8586525Z [36;1m# check_portable_release_surface.py --harnessctl, which refuses every[0m
+2026-09-11T20:01:38.8587027Z [36;1m# retired command in its FORBIDDEN_CLI, the one definition of the set.[0m
+2026-09-11T20:01:38.8587492Z [36;1mharnessctl="$RUNNER_TEMP/candidate-env/bin/harnessctl"[0m
+2026-09-11T20:01:38.8587852Z [36;1mcd "$RUNNER_TEMP"[0m
+2026-09-11T20:01:38.8588219Z [36;1m"$harnessctl" init candidate-target --project-name CandidatePackage[0m
+2026-09-11T20:01:38.8588641Z [36;1m"$harnessctl" doctor candidate-target[0m
+2026-09-11T20:01:38.8588971Z [36;1m"$harnessctl" validate candidate-target[0m
+2026-09-11T20:01:38.8589303Z [36;1m"$harnessctl" dashboard candidate-target[0m
+2026-09-11T20:01:38.8589685Z [36;1m"$harnessctl" upgrade candidate-target --apply[0m
+2026-09-11T20:01:38.8626221Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-09-11T20:01:38.8626560Z env:
+2026-09-11T20:01:38.8626774Z   RELEASED_VERIFIER_VERSION: 0.17.0
+2026-09-11T20:01:38.8627119Z   RELEASED_VERIFIER_WHEEL: se_harness-0.17.0-py3-none-any.whl
+2026-09-11T20:01:38.8627665Z   RELEASED_VERIFIER_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-11T20:01:38.8628331Z   RELEASED_VERIFIER_PAYLOAD_SHA256: dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405
+2026-09-11T20:01:38.8628806Z   PYTHONNOUSERSITE: 1
+2026-09-11T20:01:38.8629028Z   PYTHONPATH:
+2026-09-11T20:01:38.8629298Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:38.8629733Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-11T20:01:38.8630166Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:38.8630541Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:38.8630921Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:38.8631340Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-11T20:01:38.8631660Z ##[endgroup]
+2026-09-11T20:01:39.0411891Z add        .agents/skills/harness-operator-brief/SKILL.md
+2026-09-11T20:01:39.0412649Z add        .agents/skills/harness-operator-brief/scripts/check_brief.py
+2026-09-11T20:01:39.0413374Z add        .agents/skills/harness-operator-brief/skill-contract.json
+2026-09-11T20:01:39.0414267Z add        .agents/skills/harness-orient/SKILL.md
+2026-09-11T20:01:39.0414808Z add        .agents/skills/harness-orient/scripts/orient.py
+2026-09-11T20:01:39.0415408Z add        .agents/skills/harness-orient/skill-contract.json
+2026-09-11T20:01:39.0416252Z add        .claude/skills/harness-orient/SKILL.md
+2026-09-11T20:01:39.0416720Z add        .engineering-harness.toml
+2026-09-11T20:01:39.0417125Z add        .gitattributes
+2026-09-11T20:01:39.0417520Z add        .github/PULL_REQUEST_TEMPLATE.md
+2026-09-11T20:01:39.0418040Z add        .github/workflows/engineering-harness.yml
+2026-09-11T20:01:39.0418524Z add        .gitignore
+2026-09-11T20:01:39.0418856Z add        AGENTS.md
+2026-09-11T20:01:39.0419190Z add        CLAUDE.md
+2026-09-11T20:01:39.0419537Z add        ENGINEERING_HARNESS.md
+2026-09-11T20:01:39.0419922Z add        GLOSSARY.md
+2026-09-11T20:01:39.0420312Z add        docs/engineering/ARTIFACT_AUTHORING.md
+2026-09-11T20:01:39.0420794Z add        docs/engineering/DECISION_RIGHTS.md
+2026-09-11T20:01:39.0421279Z add        docs/engineering/OPERATING_CARD.md
+2026-09-11T20:01:39.0421752Z add        docs/engineering/QUALITY_GATES.json
+2026-09-11T20:01:39.0422231Z add        docs/engineering/QUALITY_GATES.md
+2026-09-11T20:01:39.0422682Z add        docs/engineering/README.md
+2026-09-11T20:01:39.0423164Z add        docs/engineering/TECHNICAL_COMMUNICATION.md
+2026-09-11T20:01:39.0423894Z add        docs/engineering/TRACEABILITY.md
+2026-09-11T20:01:39.0424352Z add        docs/engineering/WORKFLOW.json
+2026-09-11T20:01:39.0425034Z add        docs/engineering/WORKFLOW.md
+2026-09-11T20:01:39.0425531Z add        docs/engineering/templates/ADR.template.md
+2026-09-11T20:01:39.0426098Z add        docs/engineering/templates/ARCHITECTURE.template.md
+2026-09-11T20:01:39.0426724Z add        docs/engineering/templates/CAPABILITY.template.md
+2026-09-11T20:01:39.0427311Z add        docs/engineering/templates/DECISION.template.md
+2026-09-11T20:01:39.0427882Z add        docs/engineering/templates/INTENT.template.md
+2026-09-11T20:01:39.0428506Z add        docs/engineering/templates/OPERATING_CONTRACT.template.md
+2026-09-11T20:01:39.0429096Z add        docs/engineering/templates/README.md
+2026-09-11T20:01:39.0429671Z add        docs/engineering/templates/RELEASE_CONTRACT.template.md
+2026-09-11T20:01:39.0430329Z add        docs/engineering/templates/RELEASE_RECORD.template.md
+2026-09-11T20:01:39.0430959Z add        docs/engineering/templates/REQUIREMENT.template.md
+2026-09-11T20:01:39.0431554Z add        docs/engineering/templates/RISK.template.md
+2026-09-11T20:01:39.0432149Z add        docs/engineering/templates/SPECIFICATION.template.md
+2026-09-11T20:01:39.0432781Z add        docs/engineering/templates/VERIFICATION.template.md
+2026-09-11T20:01:39.0433426Z add        docs/engineering/templates/VERIFICATION_RECORD.template.md
+2026-09-11T20:01:39.0434301Z add        docs/engineering/templates/WORK_ORDER.template.md
+2026-09-11T20:01:39.0434850Z summary: 41 files, 0 unchanged
+2026-09-11T20:01:39.0435422Z installed se-harness 0.18.0 in /home/runner/work/_temp/candidate-target
+2026-09-11T20:01:39.2020382Z PASS AGENTS.md: required
+2026-09-11T20:01:39.2021039Z PASS CLAUDE.md: required
+2026-09-11T20:01:39.2021614Z PASS ENGINEERING_HARNESS.md: required
+2026-09-11T20:01:39.2022237Z PASS claude-import: @AGENTS.md
+2026-09-11T20:01:39.2022645Z PASS config: .engineering-harness.toml
+2026-09-11T20:01:39.2023297Z PASS distribution:.agents/skills/harness-operator-brief/SKILL.md: matches distribution
+2026-09-11T20:01:39.2024497Z PASS distribution:.agents/skills/harness-operator-brief/scripts/check_brief.py: matches distribution
+2026-09-11T20:01:39.2025525Z PASS distribution:.agents/skills/harness-operator-brief/skill-contract.json: matches distribution
+2026-09-11T20:01:39.2026419Z PASS distribution:.agents/skills/harness-orient/SKILL.md: matches distribution
+2026-09-11T20:01:39.2027248Z PASS distribution:.agents/skills/harness-orient/scripts/orient.py: matches distribution
+2026-09-11T20:01:39.2028128Z PASS distribution:.agents/skills/harness-orient/skill-contract.json: matches distribution
+2026-09-11T20:01:39.2028957Z PASS distribution:.claude/skills/harness-orient/SKILL.md: matches distribution
+2026-09-11T20:01:39.2029638Z PASS distribution:.engineering-harness.toml: matches distribution
+2026-09-11T20:01:39.2030426Z PASS distribution:.gitattributes: matches distribution
+2026-09-11T20:01:39.2031037Z PASS distribution:.github/workflows/engineering-harness.yml: matches distribution
+2026-09-11T20:01:39.2031636Z PASS distribution:.gitignore: matches distribution
+2026-09-11T20:01:39.2032098Z PASS distribution:AGENTS.md: matches distribution
+2026-09-11T20:01:39.2032542Z PASS distribution:CLAUDE.md: matches distribution
+2026-09-11T20:01:39.2033035Z PASS distribution:ENGINEERING_HARNESS.md: matches distribution
+2026-09-11T20:01:39.2033785Z PASS distribution:docs/engineering/ARTIFACT_AUTHORING.md: matches distribution
+2026-09-11T20:01:39.2034472Z PASS distribution:docs/engineering/DECISION_RIGHTS.md: matches distribution
+2026-09-11T20:01:39.2035138Z PASS distribution:docs/engineering/OPERATING_CARD.md: matches distribution
+2026-09-11T20:01:39.2035814Z PASS distribution:docs/engineering/QUALITY_GATES.json: matches distribution
+2026-09-11T20:01:39.2036482Z PASS distribution:docs/engineering/QUALITY_GATES.md: matches distribution
+2026-09-11T20:01:39.2037191Z PASS distribution:docs/engineering/TECHNICAL_COMMUNICATION.md: matches distribution
+2026-09-11T20:01:39.2037893Z PASS distribution:docs/engineering/TRACEABILITY.md: matches distribution
+2026-09-11T20:01:39.2038685Z PASS distribution:docs/engineering/WORKFLOW.json: matches distribution
+2026-09-11T20:01:39.2039278Z PASS distribution:docs/engineering/WORKFLOW.md: matches distribution
+2026-09-11T20:01:39.2039814Z PASS distribution:docs/engineering/templates/ADR.template.md: matches distribution
+2026-09-11T20:01:39.2040417Z PASS distribution:docs/engineering/templates/ARCHITECTURE.template.md: matches distribution
+2026-09-11T20:01:39.2041051Z PASS distribution:docs/engineering/templates/CAPABILITY.template.md: matches distribution
+2026-09-11T20:01:39.2041654Z PASS distribution:docs/engineering/templates/DECISION.template.md: matches distribution
+2026-09-11T20:01:39.2042235Z PASS distribution:docs/engineering/templates/INTENT.template.md: matches distribution
+2026-09-11T20:01:39.2042860Z PASS distribution:docs/engineering/templates/OPERATING_CONTRACT.template.md: matches distribution
+2026-09-11T20:01:39.2043450Z PASS distribution:docs/engineering/templates/README.md: matches distribution
+2026-09-11T20:01:39.2044170Z PASS distribution:docs/engineering/templates/RELEASE_CONTRACT.template.md: matches distribution
+2026-09-11T20:01:39.2044817Z PASS distribution:docs/engineering/templates/RELEASE_RECORD.template.md: matches distribution
+2026-09-11T20:01:39.2045443Z PASS distribution:docs/engineering/templates/REQUIREMENT.template.md: matches distribution
+2026-09-11T20:01:39.2046041Z PASS distribution:docs/engineering/templates/RISK.template.md: matches distribution
+2026-09-11T20:01:39.2046638Z PASS distribution:docs/engineering/templates/SPECIFICATION.template.md: matches distribution
+2026-09-11T20:01:39.2047281Z PASS distribution:docs/engineering/templates/VERIFICATION.template.md: matches distribution
+2026-09-11T20:01:39.2047940Z PASS distribution:docs/engineering/templates/VERIFICATION_RECORD.template.md: matches distribution
+2026-09-11T20:01:39.2048587Z PASS distribution:docs/engineering/templates/WORK_ORDER.template.md: matches distribution
+2026-09-11T20:01:39.2049081Z PASS docs/engineering/ARTIFACT_AUTHORING.md: required
+2026-09-11T20:01:39.2049431Z PASS docs/engineering/DECISION_RIGHTS.md: required
+2026-09-11T20:01:39.2049767Z PASS docs/engineering/OPERATING_CARD.md: required
+2026-09-11T20:01:39.2050108Z PASS docs/engineering/QUALITY_GATES.json: required
+2026-09-11T20:01:39.2050439Z PASS docs/engineering/QUALITY_GATES.md: required
+2026-09-11T20:01:39.2050753Z PASS docs/engineering/README.md: required
+2026-09-11T20:01:39.2051099Z PASS docs/engineering/TECHNICAL_COMMUNICATION.md: required
+2026-09-11T20:01:39.2051473Z PASS docs/engineering/TRACEABILITY.md: required
+2026-09-11T20:01:39.2051801Z PASS docs/engineering/WORKFLOW.json: required
+2026-09-11T20:01:39.2052112Z PASS docs/engineering/WORKFLOW.md: required
+2026-09-11T20:01:39.2052408Z PASS lock: .engineering-harness.lock
+2026-09-11T20:01:39.2052929Z PASS managed:.agents/skills/harness-operator-brief/SKILL.md: unchanged
+2026-09-11T20:01:39.2053460Z PASS managed:.agents/skills/harness-operator-brief/scripts/check_brief.py: unchanged
+2026-09-11T20:01:39.2054164Z PASS managed:.agents/skills/harness-operator-brief/skill-contract.json: unchanged
+2026-09-11T20:01:39.2054663Z PASS managed:.agents/skills/harness-orient/SKILL.md: unchanged
+2026-09-11T20:01:39.2055108Z PASS managed:.agents/skills/harness-orient/scripts/orient.py: unchanged
+2026-09-11T20:01:39.2055589Z PASS managed:.agents/skills/harness-orient/skill-contract.json: unchanged
+2026-09-11T20:01:39.2056045Z PASS managed:.claude/skills/harness-orient/SKILL.md: unchanged
+2026-09-11T20:01:39.2056431Z PASS managed:.engineering-harness.toml: unchanged
+2026-09-11T20:01:39.2056750Z PASS managed:.gitattributes: unchanged
+2026-09-11T20:01:39.2057101Z PASS managed:.github/workflows/engineering-harness.yml: unchanged
+2026-09-11T20:01:39.2057459Z PASS managed:.gitignore: unchanged
+2026-09-11T20:01:39.2057739Z PASS managed:AGENTS.md: unchanged
+2026-09-11T20:01:39.2057999Z PASS managed:CLAUDE.md: unchanged
+2026-09-11T20:01:39.2058273Z PASS managed:ENGINEERING_HARNESS.md: unchanged
+2026-09-11T20:01:39.2058753Z PASS managed:docs/engineering/ARTIFACT_AUTHORING.md: unchanged
+2026-09-11T20:01:39.2059171Z PASS managed:docs/engineering/DECISION_RIGHTS.md: unchanged
+2026-09-11T20:01:39.2059555Z PASS managed:docs/engineering/OPERATING_CARD.md: unchanged
+2026-09-11T20:01:39.2059936Z PASS managed:docs/engineering/QUALITY_GATES.json: unchanged
+2026-09-11T20:01:39.2060315Z PASS managed:docs/engineering/QUALITY_GATES.md: unchanged
+2026-09-11T20:01:39.2060732Z PASS managed:docs/engineering/TECHNICAL_COMMUNICATION.md: unchanged
+2026-09-11T20:01:39.2061149Z PASS managed:docs/engineering/TRACEABILITY.md: unchanged
+2026-09-11T20:01:39.2061517Z PASS managed:docs/engineering/WORKFLOW.json: unchanged
+2026-09-11T20:01:39.2061867Z PASS managed:docs/engineering/WORKFLOW.md: unchanged
+2026-09-11T20:01:39.2062266Z PASS managed:docs/engineering/templates/ADR.template.md: unchanged
+2026-09-11T20:01:39.2062748Z PASS managed:docs/engineering/templates/ARCHITECTURE.template.md: unchanged
+2026-09-11T20:01:39.2063255Z PASS managed:docs/engineering/templates/CAPABILITY.template.md: unchanged
+2026-09-11T20:01:39.2063896Z PASS managed:docs/engineering/templates/DECISION.template.md: unchanged
+2026-09-11T20:01:39.2064376Z PASS managed:docs/engineering/templates/INTENT.template.md: unchanged
+2026-09-11T20:01:39.2064875Z PASS managed:docs/engineering/templates/OPERATING_CONTRACT.template.md: unchanged
+2026-09-11T20:01:39.2065351Z PASS managed:docs/engineering/templates/README.md: unchanged
+2026-09-11T20:01:39.2065836Z PASS managed:docs/engineering/templates/RELEASE_CONTRACT.template.md: unchanged
+2026-09-11T20:01:39.2066372Z PASS managed:docs/engineering/templates/RELEASE_RECORD.template.md: unchanged
+2026-09-11T20:01:39.2066876Z PASS managed:docs/engineering/templates/REQUIREMENT.template.md: unchanged
+2026-09-11T20:01:39.2067358Z PASS managed:docs/engineering/templates/RISK.template.md: unchanged
+2026-09-11T20:01:39.2067847Z PASS managed:docs/engineering/templates/SPECIFICATION.template.md: unchanged
+2026-09-11T20:01:39.2068365Z PASS managed:docs/engineering/templates/VERIFICATION.template.md: unchanged
+2026-09-11T20:01:39.2068895Z PASS managed:docs/engineering/templates/VERIFICATION_RECORD.template.md: unchanged
+2026-09-11T20:01:39.2069419Z PASS managed:docs/engineering/templates/WORK_ORDER.template.md: unchanged
+2026-09-11T20:01:39.2069816Z PASS python: 3.11.16
+2026-09-11T20:01:39.2070082Z PASS seed:.github/PULL_REQUEST_TEMPLATE.md: present
+2026-09-11T20:01:39.2070402Z PASS seed:GLOSSARY.md: present
+2026-09-11T20:01:39.2070685Z PASS seed:docs/engineering/README.md: present
+2026-09-11T20:01:39.3441674Z Engineering artifact validation: PASS
+2026-09-11T20:01:39.3442447Z Artifacts: 0 | Errors: 0 | Warnings: 0 | Advisories: 0
+2026-09-11T20:01:39.3443380Z Planes: structure E0/W0 | governance E0/W0 | policy E0/W0 | maintenance E0/W0
+2026-09-11T20:01:39.4998004Z Harness Explorer generation: PASS | Artifacts: 0 | Relations: 0 | Errors: 0 | Warnings: 0 | Output: target/harness-dashboard | Manifest: 78ac283333e9efef77e9c348c923ce86199f30329d420e6357c1a4bf7cb3ff1d
+2026-09-11T20:01:39.6909299Z summary: 41 files, 41 unchanged
+2026-09-11T20:01:39.6909821Z upgraded managed files to se-harness 0.18.0
+2026-09-11T20:01:39.6910494Z no transaction evidence retained; pass --evidence-output to keep it
+2026-09-11T20:01:39.7101518Z ##[group]Run git diff --exit-code
+2026-09-11T20:01:39.7101853Z [36;1mgit diff --exit-code[0m
+2026-09-11T20:01:39.7102207Z [36;1mtest -z "$(git status --porcelain=v1 --untracked-files=all)"[0m
+2026-09-11T20:01:39.7138904Z shell: /usr/bin/bash -e {0}
+2026-09-11T20:01:39.7139155Z env:
+2026-09-11T20:01:39.7139359Z   RELEASED_VERIFIER_VERSION: 0.17.0
+2026-09-11T20:01:39.7139722Z   RELEASED_VERIFIER_WHEEL: se_harness-0.17.0-py3-none-any.whl
+2026-09-11T20:01:39.7140265Z   RELEASED_VERIFIER_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-11T20:01:39.7140943Z   RELEASED_VERIFIER_PAYLOAD_SHA256: dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405
+2026-09-11T20:01:39.7141410Z   PYTHONNOUSERSITE: 1
+2026-09-11T20:01:39.7141638Z   PYTHONPATH:
+2026-09-11T20:01:39.7141910Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:39.7142335Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-11T20:01:39.7142790Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:39.7143164Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:39.7143787Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:39.7144203Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-11T20:01:39.7144525Z ##[endgroup]
+2026-09-11T20:01:40.7660358Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-11T20:01:40.7661710Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+2026-09-11T20:01:40.7662091Z with:
+2026-09-11T20:01:40.7662339Z   name: candidate-package-qualification-0.17.0
+2026-09-11T20:01:40.7662743Z   path: /home/runner/work/_temp/candidate-package-qualification.json
+2026-09-11T20:01:40.7663113Z   if-no-files-found: warn
+2026-09-11T20:01:40.7663349Z   compression-level: 6
+2026-09-11T20:01:40.7663831Z   overwrite: false
+2026-09-11T20:01:40.7664063Z   include-hidden-files: false
+2026-09-11T20:01:40.7664294Z env:
+2026-09-11T20:01:40.7664490Z   RELEASED_VERIFIER_VERSION: 0.17.0
+2026-09-11T20:01:40.7664863Z   RELEASED_VERIFIER_WHEEL: se_harness-0.17.0-py3-none-any.whl
+2026-09-11T20:01:40.7665390Z   RELEASED_VERIFIER_WHEEL_SHA256: 305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced
+2026-09-11T20:01:40.7666055Z   RELEASED_VERIFIER_PAYLOAD_SHA256: dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405
+2026-09-11T20:01:40.7666526Z   PYTHONNOUSERSITE: 1
+2026-09-11T20:01:40.7666743Z   PYTHONPATH:
+2026-09-11T20:01:40.7667007Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:40.7667427Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-09-11T20:01:40.7667851Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:40.7668224Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:40.7668601Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-09-11T20:01:40.7668988Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-09-11T20:01:40.7669309Z ##[endgroup]
+2026-09-11T20:01:40.9298916Z (node:2605) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-11T20:01:40.9299723Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-11T20:01:40.9345165Z With the provided path, there will be 1 file uploaded
+2026-09-11T20:01:40.9357539Z Artifact name is valid!
+2026-09-11T20:01:40.9359104Z Root directory input is valid!
+2026-09-11T20:01:41.3089626Z Beginning upload of artifact content to blob storage
+2026-09-11T20:01:41.3277094Z (node:2605) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-11T20:01:41.6204085Z Uploaded bytes 1022
+2026-09-11T20:01:41.7043206Z Finished uploading artifact content to blob storage!
+2026-09-11T20:01:41.7044466Z SHA256 digest of uploaded artifact zip is 9cb88ed8e662114be782626c074e5b39550d02e6a62a7292120d080b4721ec3f
+2026-09-11T20:01:41.7046515Z Finalizing artifact upload
+2026-09-11T20:01:41.9735970Z Artifact candidate-package-qualification-0.17.0.zip successfully finalized. Artifact ID 10280606632
+2026-09-11T20:01:41.9737562Z Artifact candidate-package-qualification-0.17.0 has been successfully uploaded! Final size is 1022 bytes. Artifact ID is 10280606632
+2026-09-11T20:01:41.9742337Z Artifact download URL: https://github.com/mmzen/se_harness/actions/runs/34641840129/artifacts/10280606632
+2026-09-11T20:01:41.9917026Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-11T20:01:41.9918276Z Post job cleanup.
+2026-09-11T20:01:42.1110529Z (node:2617) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-11T20:01:42.1111560Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-11T20:01:42.1296588Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-11T20:01:42.1297826Z Post job cleanup.
+2026-09-11T20:01:42.2212389Z [command]/usr/bin/git version
+2026-09-11T20:01:42.2260530Z git version 2.55.0
+2026-09-11T20:01:42.2304243Z Temporarily overriding HOME='/home/runner/work/_temp/b26ffdb4-93f9-4d08-a485-1b93a32e8c49' before making global git config changes
+2026-09-11T20:01:42.2305993Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-11T20:01:42.2310322Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/se_harness/se_harness
+2026-09-11T20:01:42.2357640Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-11T20:01:42.2397542Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-11T20:01:42.2671753Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-11T20:01:42.2710867Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-11T20:01:42.2986050Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-11T20:01:42.3028306Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-11T20:01:42.3451810Z Cleaning up orphan processes
+2026-09-11T20:01:42.3728515Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

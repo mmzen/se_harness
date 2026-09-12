@@ -1,0 +1,1 @@
+{"hookSpecificOutput":{"permissionDecision":"deny","hookEventName":"PreToolUse","permissionDecisionReason":"Verity Plane UNREADY: Objet non valide passé, \u0027:\u0027 ou \u0027}\u0027 attendu. (1): {. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed."}}

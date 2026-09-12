@@ -1,0 +1,27 @@
+{
+  "schema": "se-harness-plugin-assembly-v1",
+  "name": "verity-plane",
+  "shared": {
+    "scripts/check-tool-action.py": "plugins/verity-plane/common/scripts/check-tool-action.py",
+    "scripts/session-context.py": "plugins/verity-plane/common/scripts/session-context.py",
+    "skills/setup/SKILL.md": "plugins/verity-plane/common/skills/setup/SKILL.md",
+    "skills/setup/references/environment.md": "plugins/verity-plane/common/skills/setup/references/environment.md",
+    "skills/change/SKILL.md": "plugins/verity-plane/common/skills/change/SKILL.md",
+    "skills/change/references/artifacts.md": "plugins/verity-plane/common/skills/change/references/artifacts.md",
+    "skills/change/references/authority.md": "plugins/verity-plane/common/skills/change/references/authority.md",
+    "skills/change/references/work-orders.md": "plugins/verity-plane/common/skills/change/references/work-orders.md",
+    "skills/evidence/SKILL.md": "plugins/verity-plane/common/skills/evidence/SKILL.md",
+    "skills/evidence/references/external-actions.md": "plugins/verity-plane/common/skills/evidence/references/external-actions.md",
+    "skills/evidence/references/records.md": "plugins/verity-plane/common/skills/evidence/references/records.md"
+  },
+  "hosts": {
+    "codex": {
+      ".codex-plugin/plugin.json": "plugins/verity-plane/codex/.codex-plugin/plugin.json",
+      "hooks/hooks.json": "plugins/verity-plane/codex/hooks/hooks.json",
+      "scripts/codex-dispatch.py": "plugins/verity-plane/codex/dispatch.py"
+    },
+    "claude": {
+      ".claude-plugin/plugin.json": "tests/plugin_integration/codex_adapter/inert-claude.json"
+    }
+  }
+}

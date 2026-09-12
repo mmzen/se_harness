@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-codex-adapter\tests\plugin_integration\codex_adapter\live.py", line 179, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\se-harness-plugin-codex-adapter\tests\plugin_integration\codex_adapter\live.py", line 38, in main
+    package = json.loads(args.package_record.read_text(encoding="utf8-sig"))
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 787, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+LookupError: unknown encoding: utf8-sig

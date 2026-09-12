@@ -1,0 +1,23 @@
+C12 actions: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | async-true-native-01/original-before-inventory/command.json | 207 bytes | sha256 bd8613bf9950d0a6f2701a6bb372e997d27f52d16979527a8ef18cc30b6b5169
+current | async-true-native-01/preflight.json | 7227 bytes | sha256 cb409606459743d181d3511c41026c5bd179ecac1244b382afae93cefc821bb0
+current | async-true-native-01/restore-add/command.json | 233 bytes | sha256 09730af33a8adac8df5b206dbf78f679e7a5ebc265157aedbb5e633773360737
+current | async-true-native-01/restore-inventory/command.json | 207 bytes | sha256 fa4197c73fd3b9c4f449fe4060008a541bfdb9fc5e024a19e737ba8d3401ec71
+current | async-true-native-01/restore-list/command.json | 187 bytes | sha256 b5d38e3e530e0c595c51ec2ffc9be460ddb4e3e56a999978d65cab02aec5c73e
+current | async-true-native-01/variant-add/command.json | 233 bytes | sha256 80888945c1736eb69d236ff4d2aa7f6448453b4bca9133f40a6e0156be570371
+current | async-true-native-01/variant-inventory/command.json | 207 bytes | sha256 1afc382353d495ec45b2db1e08aaeaac28908902c5f227a5046c6ad38c1d09ed
+current | async-true-native-01/variant-list/command.json | 187 bytes | sha256 1d288cc8f0d8a479c1a8b7487d438dcc2a169dae625afb4205d66c16083355ac
+current | timeout-1-native-01/original-before-inventory/command.json | 207 bytes | sha256 3d948c87d43a4753cbe4258983f4f9049429fcf0db4cfed1a6c120d552f89b2a
+current | timeout-1-native-01/preflight.json | 7226 bytes | sha256 3fcea4238a93a4ef436ad623eef42d1a3faee938c7d8878b0e1695063f98a15a
+current | timeout-1-native-01/restore-add/command.json | 232 bytes | sha256 c4bd5814e6a6e54224824d5c9d37150b0e47fd7f26fc9534d3f7158812585f8c
+current | timeout-1-native-01/restore-inventory/command.json | 207 bytes | sha256 d64afb4d80398fd7de7d2348d333d9be06325a789da04f11ed468861371d4ac6
+current | timeout-1-native-01/restore-list/command.json | 187 bytes | sha256 654fa903259982b42a516eb816fe36b8ef37bae6b793b6c6b3d9a1d680d1fb6b
+current | timeout-1-native-01/variant-add/command.json | 233 bytes | sha256 d67909d5d7766f47d8e66dcee91f1786153a15428fbdbe2195ca62220eb63de5
+current | timeout-1-native-01/variant-inventory/command.json | 207 bytes | sha256 a010c71566985dcfbb5459f3f6a8b4ffe96eda6cd31ad52532db10ce4b880d62
+current | timeout-1-native-01/variant-list/command.json | 186 bytes | sha256 5c8d963bb5eb4b09d1f994c7688127977084fd3bdc6db49eb3b9d1d94297161e

@@ -1,0 +1,17 @@
+C09 stdout: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | failed-01/live/stdout.txt | 64841 bytes | sha256 64652d295ba9935f627fcec7c02bee67ba33c4ccbe1327098e5cd3c50052635c
+current | failed-01/stdout.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | interrupted-01/live/stdout.txt | 59875 bytes | sha256 cfbbe2b5a066f09ab38860ba042be8bb02da6692ecc342ac5e22c227e0bf4df3
+current | interrupted-01/stdout.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | runtime-preparation-01/command-0/stdout.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | runtime-preparation-01/command-1/stdout.txt | 207 bytes | sha256 616edf6a355a6db7168c4055f92f0fdd275afef26d5cbd90693013022123d6a0
+current | runtime-preparation-01/command-2/stdout.txt | 2243 bytes | sha256 c9e2d137d4312ffa9076697e9e175d95ddf740bc83090d748239a63616969bbe
+current | runtime-preparation-01/command-3/stdout.txt | 12842 bytes | sha256 8d14f8464d60bac62f4d60cd1a4f86f7e9d8ec32c03983f2488237cd7c46a565
+current | stalled-01/live/stdout.txt | 58935 bytes | sha256 076801c33b0ba6f88c86cba37859fbb41921b880701d15f51e2897a7f2cbc15e
+current | stalled-01/stdout.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855

@@ -1,0 +1,265 @@
+{
+  "schema": "verity-codex-acceptance-index-v1",
+  "case": "C05",
+  "created_at": "2026-09-11T21:09:20.994997+00:00",
+  "kind": "Agent-authored consolidation of retained observations; no new native run or assurance decision.",
+  "source_paths_relative_to": "This case directory",
+  "expected": {
+    "starting_fixture": "Inactive required binding, then shared script returning failure",
+    "action": "Attempt the covered session or tool operation.",
+    "observable_result": "Missing binding or script failure is visible; no integration-ready claim replaces the missing check.",
+    "additional_evidence": "binding state; exit status; host diagnostic"
+  },
+  "observed": "Disabling the required SessionStart binding is visible in native inventory; normal validation rejects it, and no dispatcher context or ready integration output appears. Configuration is restored exactly. Separately, an actual shared session-context.py invocation through the wrong 0.17 environment returns UNREADY; its full identity subprocess exits 1 with RID002/RID021/RID022, while the shared script itself exits 0. The native hook receives that logical failure.",
+  "conclusion": "pass",
+  "qualification": {
+    "qualified": false,
+    "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+  },
+  "exit_status": null,
+  "exit_status_meaning": "No aggregate command was executed. Actual retained subprocess/observer statuses are indexed below; an assessment pass does not rewrite a raw exit.",
+  "exit_status_evidence": [
+    {
+      "path": "disabled-session-start-01/observations.json",
+      "json_pointer": "/disabled_exit_status",
+      "value": 0
+    },
+    {
+      "path": "disabled-session-start-01/observations.json",
+      "json_pointer": "/restoration/inventory_exit_status",
+      "value": 0
+    },
+    {
+      "path": "../C08/wrong017-01/observations.json",
+      "json_pointer": "/observer_exit_status",
+      "value": 0
+    }
+  ],
+  "current_capture_directories": [
+    "disabled-session-start-01",
+    "../C08/wrong017-01"
+  ],
+  "historical_capture_directories": [],
+  "limitations": [
+    "The second subcase deliberately reuses C08/wrong017-01; it is not an additional run.",
+    "Shared-script logical failure at exit 0 is not a crash or nonzero shared-script exit. C09 separately tests evaluator process failures."
+  ],
+  "source_evidence": [
+    {
+      "path": "disabled-session-start-01/actions.txt",
+      "bytes": 479,
+      "sha256": "84d3619aa9296068f27f123115bff4513dfa39c55ed365949b61b32140db1efc",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/config-before.raw.json",
+      "bytes": 2378,
+      "sha256": "b42248d810892405bfd117d5c78e37d957f9cdab0e9acd885cb95ca7d07ee2ee",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/disabled/actions.txt",
+      "bytes": 370,
+      "sha256": "7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/disabled/c05-comparison.json",
+      "bytes": 583,
+      "sha256": "1641d58ff07fba12ba56464706f87fab1c6ffb5e776c92aeb2fa9c466fd0f4f2",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/disabled/dispatch.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/disabled/observations.json",
+      "bytes": 51880,
+      "sha256": "fcc457029b5c6407287ce22f95ed07eba4ed69495f542fa642f6d4a3a04a0405",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/disabled/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/disabled/stdout.txt",
+      "bytes": 47143,
+      "sha256": "1d7d9e6dc37a8567c4af1700b321c303d55d90f1000d2ffc2f695e27e5b08378",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/disabled/transcript.json",
+      "bytes": 49215,
+      "sha256": "2085d2f9a4ff83004aca6eb17231674aa659882f4bef708a7f9a19b66ca8f4b8",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/fault-setup.json",
+      "bytes": 129,
+      "sha256": "a03e1419ed87861e76042a6a8fbcfed602b3c27e3d464d50892f37a6acc73d05",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/observations.json",
+      "bytes": 28640,
+      "sha256": "3d1132304fe4308b83916ca15f3154af6e5902d3da8cb5d657223c120e9c755f",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/plan.json",
+      "bytes": 13722,
+      "sha256": "a1016f8327d49020e18015489d45d0bf492b7964c44d59512c36fda50f3c7e90",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/restored-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/restored-stdout.txt",
+      "bytes": 271,
+      "sha256": "44b318e1bdba90f8ac120672c0ff45bd4df113c064146a0a2747d652bb6ce75e",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/restored/actions.txt",
+      "bytes": 316,
+      "sha256": "ac07f4dddad191bc20124702802ff1857a2db333a721667a6e6c46a5c70f0ef8",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/restored/c05-comparison.json",
+      "bytes": 214,
+      "sha256": "89bb7d6acaa5a7aa84860043a3c5a5a7f8dcc821a097158c065ddb0dec720110",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/restored/dispatch.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/restored/observations.json",
+      "bytes": 51001,
+      "sha256": "d9cd0b09a44c960f56747f02b955a0efc8232e762b7b82526859c2081f3418f8",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/restored/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/restored/stdout.txt",
+      "bytes": 33014,
+      "sha256": "27e58cbd0b044dee9fc2beb08211b4d1adcc8af180aa0161982e40c855734b86",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/restored/transcript.json",
+      "bytes": 34108,
+      "sha256": "d9b080d4fdbab8d8718c443cbf416d4760dd8ec79016750d865b7f7697de0a98",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "disabled-session-start-01/stdout.txt",
+      "bytes": 817,
+      "sha256": "004ba99c41aeed41c344e894a35ebde206751897faa37020ada89570073e5309",
+      "role": "current"
+    },
+    {
+      "path": "../C08/wrong017-01/actions.txt",
+      "bytes": 20186,
+      "sha256": "0c1279e88474b07c7b974bfa2f85cb980b2d395f2e9b5fa2614139c1dcaf3508",
+      "role": "current"
+    },
+    {
+      "path": "../C08/wrong017-01/binding-before.raw.json",
+      "bytes": 870,
+      "sha256": "c524c3975f7917d40d7199caaa22c9d3e8a01baa1edabf72c0c7cbb3362b0b94",
+      "role": "current"
+    },
+    {
+      "path": "../C08/wrong017-01/fault-setup.json",
+      "bytes": 158,
+      "sha256": "63c22c934960074db1d3df0f7a4612669ee709691d0e338a240c67a13bb8a43d",
+      "role": "current"
+    },
+    {
+      "path": "../C08/wrong017-01/live/actions.txt",
+      "bytes": 370,
+      "sha256": "7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321",
+      "role": "current"
+    },
+    {
+      "path": "../C08/wrong017-01/live/dispatch.jsonl",
+      "bytes": 6041,
+      "sha256": "40c5f00cc6df8f8a469c7286ecaef30e94086d48f97a5a8d2c6c8a18b25d7311",
+      "role": "current"
+    },
+    {
+      "path": "../C08/wrong017-01/live/observations.json",
+      "bytes": 51878,
+      "sha256": "0a48290b2c123f994ce80742f0a50ff7e2cd87c01e90c727a09b45c2608a4429",
+      "role": "current"
+    },
+    {
+      "path": "../C08/wrong017-01/live/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "../C08/wrong017-01/live/stdout.txt",
+      "bytes": 50660,
+      "sha256": "d11cc555cc9ad774fff42ce924fa80baec9610e9c5f1dbbd9279da836293ac49",
+      "role": "current"
+    },
+    {
+      "path": "../C08/wrong017-01/live/transcript.json",
+      "bytes": 52733,
+      "sha256": "1b249037fef2eee24ffd2646d40de07130deb364cf779bb31fc4403636a8211e",
+      "role": "current"
+    },
+    {
+      "path": "../C08/wrong017-01/observations.json",
+      "bytes": 24777,
+      "sha256": "78771bdc191a0aeafaf2020f75faa86cb23ed5172c1a668a33774ec29d5da467",
+      "role": "current"
+    },
+    {
+      "path": "../C08/wrong017-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "../C08/wrong017-01/stdout.txt",
+      "bytes": 799,
+      "sha256": "d780990dfcbc6131a14989aedb0d4fc078e5e3ae46f68da82c383a2df13f7cd9",
+      "role": "current"
+    },
+    {
+      "path": "../../../verification/VER-PLG-005.md",
+      "bytes": 7948,
+      "sha256": "dea7963993a1be26b41bfa4d7a6c1199f2c19613940c01eeaef5d4ead9301e30",
+      "role": "approved expectation"
+    }
+  ]
+}

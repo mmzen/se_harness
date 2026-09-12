@@ -1,0 +1,21 @@
+C12 stdout: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | async-true-native-01/original-before-inventory/stdout.txt | 18218 bytes | sha256 badf62d3bc92dd007c26481cad41a79ffdee3d899d43811c26f72abc412f9384
+current | async-true-native-01/restore-add/stdout.txt | 444 bytes | sha256 6c05f0197b4dca55dfb1b98caaef1b8babb6422ff14516014bc3908a2cd832a3
+current | async-true-native-01/restore-inventory/stdout.txt | 18218 bytes | sha256 321b9a77ef088f9149820337bd4ed57cee830ea5744212e6e1ccb9b035c74a4d
+current | async-true-native-01/restore-list/stdout.txt | 3284 bytes | sha256 f1e312e0bcb9ea868b3f603f550c852b8d179244d0c39b1bdc6bbffdfc090763
+current | async-true-native-01/variant-add/stdout.txt | 466 bytes | sha256 b0d1149e776c160e4053cf9a8f52b4befa32e0edd1c83e7a0f3c1f4a6844d166
+current | async-true-native-01/variant-inventory/stdout.txt | 18240 bytes | sha256 fb1309f265aefcbf7511820c4baee3b2826d3e7a3b9c7c6d19ab04701077c490
+current | async-true-native-01/variant-list/stdout.txt | 3295 bytes | sha256 6a2c9e9369d7ffe0bdfaf51c3b5a4cd765e0d862047c9fd6a51933092132fc04
+current | timeout-1-native-01/original-before-inventory/stdout.txt | 18218 bytes | sha256 a89481b6dd90bffb3a5382c48aa751e703f442e696adcf632067e365027d29f3
+current | timeout-1-native-01/restore-add/stdout.txt | 444 bytes | sha256 6c05f0197b4dca55dfb1b98caaef1b8babb6422ff14516014bc3908a2cd832a3
+current | timeout-1-native-01/restore-inventory/stdout.txt | 18218 bytes | sha256 dc1325052996316df3fd8e184ed93b9c7e7e7091eeec62eaa6f8d7644323c40d
+current | timeout-1-native-01/restore-list/stdout.txt | 3284 bytes | sha256 f1e312e0bcb9ea868b3f603f550c852b8d179244d0c39b1bdc6bbffdfc090763
+current | timeout-1-native-01/variant-add/stdout.txt | 470 bytes | sha256 259ad4aeac395d54798a83352eb777cfb84e7fb4aefec40fda2d1e49b45d0b8c
+current | timeout-1-native-01/variant-inventory/stdout.txt | 18244 bytes | sha256 9eca2064ffb630075d2a57179649be57d1a5877e4bb063249fe48794a16523db
+current | timeout-1-native-01/variant-list/stdout.txt | 3297 bytes | sha256 f10a2f81b9713fec1a82095e15e46571a783ec64d4684d675f0e77e3142e576e

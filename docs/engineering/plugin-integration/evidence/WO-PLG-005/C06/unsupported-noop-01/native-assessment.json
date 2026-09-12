@@ -1,0 +1,18 @@
+{
+  "conclusion": "pass",
+  "coverage_warning": [
+    "UNENFORCED COVERAGE GAP: this tool has no Verity Plane evaluator mapping. No successful governance check is claimed. Ordinary host permissions and already-authorized setup remain available."
+  ],
+  "correlated_native_tool_attempt": true,
+  "no_evaluator_tool_success_claim": true,
+  "command_approval_answered": false,
+  "command_completed": false,
+  "targets_unchanged": true,
+  "limits": "The unsupported command reached the native hook and emitted its coverage gap. The observer stopped at ordinary command approval without answering it. This proves coverage reporting, not successful command execution or enforcement. The earlier update_plan attempt had no available tool and is not counted.",
+  "sources": {
+    "actions.txt": "cefcc657a31f5ce63ef77fde73c7207247cfd05f63c46d213bf0e58ad8bd8e44",
+    "observations.json": "d1496d7b01817f9df0d823e819df3b3b2c4d61412e07909c7d894a54fd2f2fa7",
+    "transcript.json": "7978f98928535d46a04c9929d7b8ccd9006577e50b9f4e8deb19424cbf3c8526",
+    "dispatch.jsonl": "e3c34e952b14d90e86bcfd39651e15ced80a2777a0f1ae7c721c52ef8571e770"
+  }
+}

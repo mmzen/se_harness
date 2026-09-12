@@ -1,0 +1,173 @@
+{
+  "schema": "verity-codex-acceptance-index-v1",
+  "case": "C06",
+  "created_at": "2026-09-11T21:09:21.258979+00:00",
+  "kind": "Agent-authored consolidation of retained observations; no new native run or assurance decision.",
+  "source_paths_relative_to": "This case directory",
+  "expected": {
+    "starting_fixture": "Paths and arguments containing spaces/quotes; an unsupported tool",
+    "action": "Trigger supported and unsupported calls.",
+    "observable_result": "Supported argv boundaries match input exactly; the unsupported route is labeled as a coverage gap, without a checked-success result.",
+    "additional_evidence": "input/argv comparison; coverage output"
+  },
+  "observed": "The exact Unicode and quoted target path is preserved through native patch, evaluator argv and final bytes. An actual unsupported command hook emits the explicit unenforced-coverage warning without evaluator checked-success. Ordinary command approval remains unanswered and that command does not execute.",
+  "conclusion": "pass",
+  "qualification": {
+    "qualified": false,
+    "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+  },
+  "exit_status": null,
+  "exit_status_meaning": "No aggregate command was executed. Actual retained subprocess/observer statuses are indexed below; an assessment pass does not rewrite a raw exit.",
+  "exit_status_evidence": [],
+  "current_capture_directories": [
+    "unicode-edit-01",
+    "unsupported-noop-01"
+  ],
+  "historical_capture_directories": [
+    "unsupported-plan-01"
+  ],
+  "limitations": [
+    "The earlier unavailable plan-tool attempt is not counted.",
+    "Unsupported-warning delivery is not command execution or shell enforcement."
+  ],
+  "source_evidence": [
+    {
+      "path": "assess_cases.py",
+      "bytes": 6326,
+      "sha256": "54aa702bec2173020880065a356e0ed80fd16d9e99556ab93e09ea2705aed020",
+      "role": "provenance"
+    },
+    {
+      "path": "unicode-edit-01/actions.txt",
+      "bytes": 6179,
+      "sha256": "74a8f8bec04a73e2b750a1fc5835e0b66e61161980a1c01c67b5264443fe4574",
+      "role": "current"
+    },
+    {
+      "path": "unicode-edit-01/approval-prepared.json",
+      "bytes": 1425,
+      "sha256": "e2dab0652020fd16417738fe4cfd4a58a362890a6b5a352c0cc9f9eec1c1bef0",
+      "role": "current"
+    },
+    {
+      "path": "unicode-edit-01/dispatch.jsonl",
+      "bytes": 48917,
+      "sha256": "1383d967dec67bb36e1a1766b953f7c2807d60c4fe6e41a331d58a2f64562e89",
+      "role": "current"
+    },
+    {
+      "path": "unicode-edit-01/native-assessment.json",
+      "bytes": 811,
+      "sha256": "0f4333abec41697281440cf629c6c39c926a343884af4955f26f743b0a98d366",
+      "role": "current"
+    },
+    {
+      "path": "unicode-edit-01/observations.json",
+      "bytes": 23345,
+      "sha256": "546c5a46b5effc8dcc5c568e5e68c37d0b47c5b4ced24e1c088247d251a81baf",
+      "role": "current"
+    },
+    {
+      "path": "unicode-edit-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "unicode-edit-01/stdout.txt",
+      "bytes": 59289,
+      "sha256": "720e7a1b79367812ae360e0817f1b134aa2d04e328347b0fa96d939b080550ed",
+      "role": "current"
+    },
+    {
+      "path": "unicode-edit-01/transcript.json",
+      "bytes": 60987,
+      "sha256": "c9fb15a3deb78af64914e29ab48d5b4f6a3d705c4b861b36b4dbd7d665d1585a",
+      "role": "current"
+    },
+    {
+      "path": "unsupported-noop-01/actions.txt",
+      "bytes": 736,
+      "sha256": "cefcc657a31f5ce63ef77fde73c7207247cfd05f63c46d213bf0e58ad8bd8e44",
+      "role": "current"
+    },
+    {
+      "path": "unsupported-noop-01/dispatch.jsonl",
+      "bytes": 24591,
+      "sha256": "e3c34e952b14d90e86bcfd39651e15ced80a2777a0f1ae7c721c52ef8571e770",
+      "role": "current"
+    },
+    {
+      "path": "unsupported-noop-01/native-assessment.json",
+      "bytes": 1134,
+      "sha256": "e951eec417828c37fd68ee9c45eb2eb573da9275560ae7723a9bc35d7a603525",
+      "role": "current"
+    },
+    {
+      "path": "unsupported-noop-01/observations.json",
+      "bytes": 52783,
+      "sha256": "d1496d7b01817f9df0d823e819df3b3b2c4d61412e07909c7d894a54fd2f2fa7",
+      "role": "current"
+    },
+    {
+      "path": "unsupported-noop-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "unsupported-noop-01/stdout.txt",
+      "bytes": 63668,
+      "sha256": "1e26a89154000d920be2c9e404f64c287fb4208b3d09604e22f9782f0fb22fe1",
+      "role": "current"
+    },
+    {
+      "path": "unsupported-noop-01/transcript.json",
+      "bytes": 65874,
+      "sha256": "7978f98928535d46a04c9929d7b8ccd9006577e50b9f4e8deb19424cbf3c8526",
+      "role": "current"
+    },
+    {
+      "path": "unsupported-plan-01/actions.txt",
+      "bytes": 681,
+      "sha256": "f01fc6d472bfded7e3a03f0654107505190a5133ba47e692f1b0154cc4da97ab",
+      "role": "historical"
+    },
+    {
+      "path": "unsupported-plan-01/dispatch.jsonl",
+      "bytes": 24591,
+      "sha256": "5116281db47f169fe6f2c5461b181d4ac2a33ea56b6e792261526a218500ba8a",
+      "role": "historical"
+    },
+    {
+      "path": "unsupported-plan-01/observations.json",
+      "bytes": 52236,
+      "sha256": "34657dd675954236b9e04fc2eba9eac4d2f9ecef68dac74af8b096b734bc0830",
+      "role": "historical"
+    },
+    {
+      "path": "unsupported-plan-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "historical"
+    },
+    {
+      "path": "unsupported-plan-01/stdout.txt",
+      "bytes": 65109,
+      "sha256": "d5e903cec82ca7bdbae419a26f7e1accc1b2c2ac41b2bf6b662dae67c6bcac33",
+      "role": "historical"
+    },
+    {
+      "path": "unsupported-plan-01/transcript.json",
+      "bytes": 67492,
+      "sha256": "d64c7a3c5b2f7e059c6405eecaf9cc076af970e1cb3ab6998cec7cc59de5de58",
+      "role": "historical"
+    },
+    {
+      "path": "../../../verification/VER-PLG-005.md",
+      "bytes": 7948,
+      "sha256": "dea7963993a1be26b41bfa4d7a6c1199f2c19613940c01eeaef5d4ead9301e30",
+      "role": "approved expectation"
+    }
+  ]
+}

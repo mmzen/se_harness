@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+    "-B",
+    "-S",
+    "scripts/run_tests.py"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+  "exit_status": 0,
+  "duration_seconds": 101.0389778999961,
+  "observed_at": "2026-09-11T21:40:31.410497+00:00",
+  "source_inputs": "../final-live-checks-01/source-inputs.json",
+  "stdout_sha256": "f3113a53ff17924a2fe2e6a5d2958e1a5a2576089763da3f7ed4104e9d278a5f",
+  "stderr_sha256": "697e7bfe46c133456519d600a8da0eeb85a5a7e6ed6cb2579e3cd715acc9e887",
+  "claim": "Complete candidate regression only; live native tests require their separate retained observations."
+}

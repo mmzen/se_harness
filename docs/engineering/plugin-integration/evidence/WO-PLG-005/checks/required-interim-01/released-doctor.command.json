@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "doctor",
+    ".",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+  "exit_status": 0,
+  "started_monotonic": 243481.8950145,
+  "finished_monotonic": 243483.8797385
+}

@@ -1,0 +1,12 @@
+test_binding_rejects_unaccepted_profile (test_adapter.AdapterTests.test_binding_rejects_unaccepted_profile) ... ok
+test_decode_rejects_malformed_duplicate_and_large_inputs (test_adapter.AdapterTests.test_decode_rejects_malformed_duplicate_and_large_inputs) ... ok
+test_generated_native_commands_are_exact (test_adapter.AdapterTests.test_generated_native_commands_are_exact) ... ok
+test_missing_empty_or_whitespace_context_is_unready (test_adapter.AdapterTests.test_missing_empty_or_whitespace_context_is_unready) ... ok
+test_native_guard_failures_and_setup_access (test_adapter.AdapterTests.test_native_guard_failures_and_setup_access) ... ok
+test_native_guard_preserves_unicode_quotes_and_absolute_argv (test_adapter.AdapterTests.test_native_guard_preserves_unicode_quotes_and_absolute_argv) ... ok
+test_only_documented_decision_envelopes_are_returned (test_adapter.AdapterTests.test_only_documented_decision_envelopes_are_returned) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 4.652s
+
+OK

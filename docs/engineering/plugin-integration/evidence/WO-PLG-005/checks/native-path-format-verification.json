@@ -1,0 +1,35 @@
+{
+  "scope": "Two historical stdout evidence representations, byte mappings and report labels only; no source/test/API/lifecycle action.",
+  "byte_checks": [
+    {
+      "capture": "native-path-before-fix",
+      "original_sha256": "f3f43dc8158d79083a18354038dab8d4f1f6223c9b64aed32dd13a39dee1d951",
+      "decoded_bytes": 80,
+      "projection_hash_matches": true,
+      "source_metadata_unchanged": true,
+      "passed": true
+    },
+    {
+      "capture": "native-path-after-fix",
+      "original_sha256": "92baa42ae4342982c3d83aa24dfd13ace5d96fa7c230084ac52c2090a47a7ab2",
+      "decoded_bytes": 650,
+      "projection_hash_matches": true,
+      "source_metadata_unchanged": true,
+      "passed": true
+    }
+  ],
+  "whole_branch_whitespace_check": {
+    "argv": [
+      "git",
+      "-c",
+      "core.whitespace=cr-at-eol",
+      "diff",
+      "origin/main",
+      "--check"
+    ],
+    "exit_status": 0,
+    "stdout": "",
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nwarning: in the working copy of 'docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/native-path-after-fix/stdout-byte-mapping.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/native-path-after-fix/stdout.txt', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/native-path-before-fix/stdout-byte-mapping.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/evidence/WO-PLG-005/checks/native-path-before-fix/stdout.txt', LF will be replaced by CRLF the next time Git touches it\n"
+  },
+  "prior_projection_check": "native-path-format-initial-verification.json retains the first projection check, which rejected final blank lines; the projection was corrected without altering its original-byte container."
+}

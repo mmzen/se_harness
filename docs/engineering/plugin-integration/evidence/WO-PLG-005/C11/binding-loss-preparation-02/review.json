@@ -1,0 +1,22 @@
+{
+  "limits": "Binding disappearance across a fresh host/session after proven readiness; not same-process hot reload, literal guard-file deletion or OS shell-start failure. The missing required binding is unqualified regardless of target effects.",
+  "mode": "prepared only; no runtime/profile/config/native-host operation performed",
+  "plan_sha256": "b5a8f386c3ad118604cca705e8c1a5912b310110dcbbd04f5a5a231af2402001",
+  "preparation": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\docs\\engineering\\plugin-integration\\evidence\\WO-PLG-005\\C11\\binding-loss-preparation-02",
+  "proposed_run_argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\tests\\plugin_integration\\codex_adapter\\c11_binding_loss.py",
+    "--evidence",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\docs\\engineering\\plugin-integration\\evidence\\WO-PLG-005\\C11\\lost-active-binding-01",
+    "--package-record",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\docs\\engineering\\plugin-integration\\evidence\\WO-PLG-005\\preparation\\package-04\\package.json",
+    "--run",
+    "--approved-plan-sha256",
+    "b5a8f386c3ad118604cca705e8c1a5912b310110dcbbd04f5a5a231af2402001"
+  ],
+  "review_required_before_native_run": true,
+  "runner_sha256": "d215c556f08b87210c4a4b40f1bde5c445efff99958763147b0e862de2a68eea",
+  "tests_sha256": "19cea06816cc4fe5d60934e638d666a76b789d0d4c5eeb10cd8f58135d725abb"
+}

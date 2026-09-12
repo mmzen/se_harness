@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "transition",
+    ".",
+    "--set",
+    "WO-PLG-005=implemented",
+    "--decision",
+    "WO-PLG-005=delegated-executor",
+    "--reason",
+    "WO-PLG-005=Complete the bounded adapter implementation and fresh assessment under the approved criteria merged by PR #458. qualification-review-20260912/assessment.md binds unchanged production source, immutable package/recorded-loaded inventories and current definitions; required healthy-path and shared obligations remain satisfied. C10/C11 remain failed enforcement under accepted DEC-PLG-006. Only qualification with a documented local limitation is proposed for independent assurance; no verification, merge, release or expanded host profile is claimed.",
+    "--apply",
+    "--json"
+  ],
+  "exit_code": 0
+}

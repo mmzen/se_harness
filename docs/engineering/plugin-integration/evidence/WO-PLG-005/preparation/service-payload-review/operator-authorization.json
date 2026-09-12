@@ -1,0 +1,15 @@
+{
+  "work_order": "WO-PLG-005",
+  "operator_statement": "i authorize the remaining live tests",
+  "context": "The operator answered the pending request to authorize the remaining Codex live tests after the handoff explicitly identified the OpenAI payload/destination consent block.",
+  "destination": "OpenAI Codex service through the existing Codex sign-in",
+  "authorized_payload": [
+    "public harness and skill text",
+    "synthetic test prompts and fixture file contents",
+    "local test paths"
+  ],
+  "excluded_from_prompts": ["product code", "credentials"],
+  "payload_inventory": "inventory.json",
+  "scope": "Remaining bounded native acceptance tests in disposable fixtures under VER-PLG-005. This consent grants no lifecycle decision, host-security change, installation outside fixtures, or broader support qualification.",
+  "prior_rejection": "../../C02/resume-compact-01/ retains the original pre-launch rejection; this authorization does not rewrite it."
+}

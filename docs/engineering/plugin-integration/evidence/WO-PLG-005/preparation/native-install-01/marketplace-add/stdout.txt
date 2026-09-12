@@ -1,0 +1,2 @@
+Added marketplace `verity-plane-codex-fixture` from \\?\C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\codex-adapter-sandboxes\accepted 001 with spaces\marketplace with spaces.
+Installed marketplace root: C:\Users\mathi\Documents\Codex\2026-09-04\hel\work\codex-adapter-sandboxes\accepted 001 with spaces\marketplace with spaces

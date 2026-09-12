@@ -1,0 +1,565 @@
+{
+  "schema": "verity-codex-acceptance-index-v1",
+  "case": "C07",
+  "created_at": "2026-09-11T21:09:21.285288+00:00",
+  "kind": "Agent-authored consolidation of retained observations; no new native run or assurance decision.",
+  "source_paths_relative_to": "This case directory",
+  "expected": {
+    "starting_fixture": "Excluded or unaccepted host profile; changed decision status without a positive route",
+    "action": "Attempt to qualify the production adapter.",
+    "observable_result": "No supported-profile result is issued; repository lifecycle states and helper-spawn log remain unchanged.",
+    "additional_evidence": "profile decision; result; state snapshots; spawn log"
+  },
+  "observed": "Ten excluded/unaccepted/empty profile and non-positive decision selections return no supported-profile result or helper invocation. Positive sentinel controls demonstrate the audit; lifecycle artifact hashes remain unchanged.",
+  "conclusion": "pass",
+  "qualification": {
+    "qualified": false,
+    "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+  },
+  "exit_status": null,
+  "exit_status_meaning": "No aggregate command was executed. Actual retained subprocess/observer statuses are indexed below; an assessment pass does not rewrite a raw exit.",
+  "exit_status_evidence": [
+    {
+      "path": "registered-shell-01/empty-host-PreToolUse/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/empty-host-SessionStart/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/empty-positive-route-PreToolUse/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/empty-positive-route-SessionStart/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/excluded-route-PreToolUse/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/excluded-route-SessionStart/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/0/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/1/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/2/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/3/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/4/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/5/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/6/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/7/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/8/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/9/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/10/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/observed/11/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/open-decision-PreToolUse/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/open-decision-SessionStart/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-after/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-before/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/unaccepted-host-PreToolUse/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "registered-shell-01/unaccepted-host-SessionStart/observations.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    }
+  ],
+  "current_capture_directories": [
+    "registered-shell-01"
+  ],
+  "historical_capture_directories": [],
+  "limitations": [
+    "Accepted registered-shell route only; no new host profile or artifact authority."
+  ],
+  "source_evidence": [
+    {
+      "path": "registered-shell-01/actions.txt",
+      "bytes": 1449,
+      "sha256": "70d44cf2709412474dac162d7ce241ddf14cd02d110155c3428b24e9b48fb1b6",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-host-PreToolUse/actions.txt",
+      "bytes": 6650,
+      "sha256": "862eb8df9aa02f477007e4353c588b4114099973c9e300030db2b8993b73170b",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-host-PreToolUse/event.json.txt",
+      "bytes": 336,
+      "sha256": "cbd616344ca30158fb7cfa3392ac79c037c792d2bef2a9135867055b80dd8b3a",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-host-PreToolUse/observations.json",
+      "bytes": 2169,
+      "sha256": "b7ab77276154a13eaa31cfa0548fa2403f6f66aa46954b7f5cb4a881c0373df8",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-host-PreToolUse/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-host-PreToolUse/stdout.txt",
+      "bytes": 304,
+      "sha256": "bbfafa74538fa53d0e0e427ae0b57bb84ead3f288e98478e1c38dff1e2dfaa9f",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-host-SessionStart/actions.txt",
+      "bytes": 6652,
+      "sha256": "6a415e8aaed357ae296ff9c01e2d515df3a09404ecbf1ca029f088c034fa5003",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-host-SessionStart/event.json.txt",
+      "bytes": 338,
+      "sha256": "71c7168cded141589da067fd2f010be79db996e20a95f582f5e7d640ee92147d",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-host-SessionStart/observations.json",
+      "bytes": 2129,
+      "sha256": "b37f95bc896162a44c09cd90e5ec612c278a5d8e0a878ef02a44c6b8a3033dad",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-host-SessionStart/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-host-SessionStart/stdout.txt",
+      "bytes": 271,
+      "sha256": "280b95b11da7a9c2d382e1621738dc868d44f4316aa35789c4ae73aaa7bdc3cb",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-positive-route-PreToolUse/actions.txt",
+      "bytes": 6636,
+      "sha256": "085b0b4f180d66a786a5baa6f763390bafcb505d5f236ddc834bb5817e0a7d52",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-positive-route-PreToolUse/event.json.txt",
+      "bytes": 336,
+      "sha256": "cbd616344ca30158fb7cfa3392ac79c037c792d2bef2a9135867055b80dd8b3a",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-positive-route-PreToolUse/observations.json",
+      "bytes": 2185,
+      "sha256": "cee72e56c369e384980701e6b1faf1374760d90ec464af9317335a663e83d338",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-positive-route-PreToolUse/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-positive-route-PreToolUse/stdout.txt",
+      "bytes": 310,
+      "sha256": "42043fbcfafb2c7cc9857346dad17d4dd48e3712cd21ea8616e4b643ba274339",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-positive-route-SessionStart/actions.txt",
+      "bytes": 6638,
+      "sha256": "6824af6542b7004336a9f2948b6808ef6952f96db28ab1657aafbc28e6dc01db",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-positive-route-SessionStart/event.json.txt",
+      "bytes": 338,
+      "sha256": "71c7168cded141589da067fd2f010be79db996e20a95f582f5e7d640ee92147d",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-positive-route-SessionStart/observations.json",
+      "bytes": 2145,
+      "sha256": "640dab2ae408c55a2a87813ca1d91c92e0411e05252c1e853c72e839d1609390",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-positive-route-SessionStart/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/empty-positive-route-SessionStart/stdout.txt",
+      "bytes": 277,
+      "sha256": "c174e7a1eb852deecf06097351c8105f0284dee106e9b27bd954782ae5e1881f",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/excluded-route-PreToolUse/actions.txt",
+      "bytes": 6649,
+      "sha256": "fad2c77fb1be0cc21deb732ad5b4acce9271a226b052e31483bb5d29b53afb87",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/excluded-route-PreToolUse/event.json.txt",
+      "bytes": 336,
+      "sha256": "cbd616344ca30158fb7cfa3392ac79c037c792d2bef2a9135867055b80dd8b3a",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/excluded-route-PreToolUse/observations.json",
+      "bytes": 2179,
+      "sha256": "de34af68b2125d921a5123433876aecfe863dd38928edb364c91b85ec2d23ba1",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/excluded-route-PreToolUse/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/excluded-route-PreToolUse/stdout.txt",
+      "bytes": 310,
+      "sha256": "42043fbcfafb2c7cc9857346dad17d4dd48e3712cd21ea8616e4b643ba274339",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/excluded-route-SessionStart/actions.txt",
+      "bytes": 6651,
+      "sha256": "d2943ab2fa4ebf86e65aeeb531c0be02417c0d883ae12c7fed031279fa8867b2",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/excluded-route-SessionStart/event.json.txt",
+      "bytes": 338,
+      "sha256": "71c7168cded141589da067fd2f010be79db996e20a95f582f5e7d640ee92147d",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/excluded-route-SessionStart/observations.json",
+      "bytes": 2140,
+      "sha256": "39b446ab2ba05619772c975b2b539cf30c86d7c27f782643d2a4866a9117033c",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/excluded-route-SessionStart/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/excluded-route-SessionStart/stdout.txt",
+      "bytes": 277,
+      "sha256": "c174e7a1eb852deecf06097351c8105f0284dee106e9b27bd954782ae5e1881f",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/helper-spawn.jsonl",
+      "bytes": 1232,
+      "sha256": "7feb74fdb165d961a1baed55b72227c8b6ccab6b7e6221264bb9e8b2eee44b88",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/observations.json",
+      "bytes": 26966,
+      "sha256": "50ac9df6ab8b5c584912fa3dcaffdc7e114790681ee5a67bea1a58ec83b67548",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/open-decision-PreToolUse/actions.txt",
+      "bytes": 6654,
+      "sha256": "1f890df9b3e5ec61ffa526240d537f91e75dda7543b3d3efc71ec061d56d7484",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/open-decision-PreToolUse/event.json.txt",
+      "bytes": 336,
+      "sha256": "cbd616344ca30158fb7cfa3392ac79c037c792d2bef2a9135867055b80dd8b3a",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/open-decision-PreToolUse/observations.json",
+      "bytes": 2178,
+      "sha256": "e3229a50f0f76610f458f128b0966cc6eb258355192eb3dfd64e214d930e40cb",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/open-decision-PreToolUse/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/open-decision-PreToolUse/stdout.txt",
+      "bytes": 310,
+      "sha256": "42043fbcfafb2c7cc9857346dad17d4dd48e3712cd21ea8616e4b643ba274339",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/open-decision-SessionStart/actions.txt",
+      "bytes": 6656,
+      "sha256": "0ef6603f3caf45549b1271852a45b5205afaca9dfc5dc5a3e06eb719efbc4119",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/open-decision-SessionStart/event.json.txt",
+      "bytes": 338,
+      "sha256": "71c7168cded141589da067fd2f010be79db996e20a95f582f5e7d640ee92147d",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/open-decision-SessionStart/observations.json",
+      "bytes": 2139,
+      "sha256": "09bb20dffad716a668eb7638b4fb1d1583891539205a2bd7671cbb3b9b3b551a",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/open-decision-SessionStart/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/open-decision-SessionStart/stdout.txt",
+      "bytes": 277,
+      "sha256": "c174e7a1eb852deecf06097351c8105f0284dee106e9b27bd954782ae5e1881f",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-after/actions.txt",
+      "bytes": 6657,
+      "sha256": "147474040d5564d0ef54d0bc71bbb73c059a92e8c0ec3ec9376d50918d181f3e",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-after/event.json.txt",
+      "bytes": 315,
+      "sha256": "d600c67e559a5aecd2e5bac8fbb596e8ff5fd13ce1aa2ca847be63f10ae49f29",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-after/observations.json",
+      "bytes": 2680,
+      "sha256": "180d737898d578c765e8d072ee3948aec0db867fe17c3b5cece07c9f0d85fbe1",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-after/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-after/stdout.txt",
+      "bytes": 139,
+      "sha256": "14160b37c3713e06ffda71a0ce6c20da5b1aec51a6c9de66b58a0693c8107c52",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-before/actions.txt",
+      "bytes": 6657,
+      "sha256": "147474040d5564d0ef54d0bc71bbb73c059a92e8c0ec3ec9376d50918d181f3e",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-before/event.json.txt",
+      "bytes": 315,
+      "sha256": "d600c67e559a5aecd2e5bac8fbb596e8ff5fd13ce1aa2ca847be63f10ae49f29",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-before/observations.json",
+      "bytes": 1253,
+      "sha256": "06d838ea59495c2f2ea90fad770812a0138b716c6a121448eb2c54e9020c84bb",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-before/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/positive-sentinel-before/stdout.txt",
+      "bytes": 139,
+      "sha256": "14160b37c3713e06ffda71a0ce6c20da5b1aec51a6c9de66b58a0693c8107c52",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/state-after.json",
+      "bytes": 10540,
+      "sha256": "80427101a6d1db9592e1d9582204bc540eac25b1f6b000340164788e36adaa37",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/state-before.json",
+      "bytes": 10540,
+      "sha256": "80427101a6d1db9592e1d9582204bc540eac25b1f6b000340164788e36adaa37",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/stdout.txt",
+      "bytes": 407,
+      "sha256": "679a3b2c52195261f8135b4753f88e686222779e9aa6afae347493bda8166b16",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/unaccepted-host-PreToolUse/actions.txt",
+      "bytes": 6657,
+      "sha256": "c08482f4d7a529169b09973a00d7cc37e0f47a1eac820bd03ca465d3af4a7ea1",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/unaccepted-host-PreToolUse/event.json.txt",
+      "bytes": 336,
+      "sha256": "cbd616344ca30158fb7cfa3392ac79c037c792d2bef2a9135867055b80dd8b3a",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/unaccepted-host-PreToolUse/observations.json",
+      "bytes": 2174,
+      "sha256": "9e0561d49514e4bb62f17d43c5f02ba282b350ba9745292f918652bba34d70c0",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/unaccepted-host-PreToolUse/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/unaccepted-host-PreToolUse/stdout.txt",
+      "bytes": 304,
+      "sha256": "bbfafa74538fa53d0e0e427ae0b57bb84ead3f288e98478e1c38dff1e2dfaa9f",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/unaccepted-host-SessionStart/actions.txt",
+      "bytes": 6659,
+      "sha256": "1362b29395c7662d8298b027333d4ae35102823d2c1abca6b3b871b6e72c09ff",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/unaccepted-host-SessionStart/event.json.txt",
+      "bytes": 338,
+      "sha256": "71c7168cded141589da067fd2f010be79db996e20a95f582f5e7d640ee92147d",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/unaccepted-host-SessionStart/observations.json",
+      "bytes": 2135,
+      "sha256": "ae097a995be6997ed664da4863b2d806cdaa4475575707d0f2fb7c2a7d7ac6fb",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/unaccepted-host-SessionStart/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "registered-shell-01/unaccepted-host-SessionStart/stdout.txt",
+      "bytes": 271,
+      "sha256": "280b95b11da7a9c2d382e1621738dc868d44f4316aa35789c4ae73aaa7bdc3cb",
+      "role": "current"
+    },
+    {
+      "path": "../../../verification/VER-PLG-005.md",
+      "bytes": 7948,
+      "sha256": "dea7963993a1be26b41bfa4d7a6c1199f2c19613940c01eeaef5d4ead9301e30",
+      "role": "approved expectation"
+    }
+  ]
+}

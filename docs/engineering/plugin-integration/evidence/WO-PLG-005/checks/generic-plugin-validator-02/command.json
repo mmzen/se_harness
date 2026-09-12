@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "C:/Users/mathi/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe",
+    "-I",
+    "-B",
+    "C:/Users/mathi/.codex/skills/.system/plugin-creator/scripts/validate_plugin.py",
+    "C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/codex-adapter-sandboxes/accepted 001 with spaces/marketplace with spaces/plugins/verity-plane"
+  ],
+  "purpose": "Generic authoring validator only, not accepted host or evaluator runtime",
+  "exit_status": 1,
+  "observed_at_utc": "2026-09-11T19:29:41.0722186Z",
+  "validator_sha256": "1e6cb914505b458856c2cfab7d18a224731c743ef47e0c9d78afe64f35b67f7c"
+}

@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+    "plugin",
+    "list",
+    "--json"
+  ],
+  "started_monotonic": 246354.7401951,
+  "exit_status": 0,
+  "cleanup": {
+    "pid": 15384,
+    "method": "owned Windows Job Object",
+    "active_processes": 0
+  },
+  "stdout_raw_sha256": "6a2c9e9369d7ffe0bdfaf51c3b5a4cd765e0d862047c9fd6a51933092132fc04",
+  "stdout_sanitization_changed_bytes": false,
+  "stderr_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sanitization_changed_bytes": false,
+  "finished_monotonic": 246355.0737042
+}

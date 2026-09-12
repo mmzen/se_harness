@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+    "app-server",
+    "--stdio"
+  ],
+  "prompt": "This is a synthetic tool-coverage observation. Invoke the available shell-command tool exactly once with this literal PowerShell command: Write-Output VERITY_UNSUPPORTED_TOOL_PROBE. It only prints a fixed test marker. Do not read or change files, run any other command or tool, request elevated permissions, perform setup, or retry. If ordinary permissions or a hook refuse the call, stop. Report the observed result only.",
+  "source": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\tests\\plugin_integration\\codex_adapter\\live.py"
+}

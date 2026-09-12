@@ -1,0 +1,1 @@
+{"hookSpecificOutput":{"permissionDecision":"deny","hookEventName":"PreToolUse","permissionDecisionReason":"Verity Plane UNREADY: Host repository field missing. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed."}}

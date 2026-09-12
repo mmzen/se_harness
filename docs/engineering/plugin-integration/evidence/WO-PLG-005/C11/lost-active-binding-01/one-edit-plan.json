@@ -1,0 +1,6 @@
+{
+  "after_utf8": "WO-PLG-005 C11 lost active binding effect\n",
+  "before_utf8": "WO-PLG-005 C11 truncated exact observed effect\n",
+  "schema": "verity-one-edit-v1",
+  "target": "governed-target.txt"
+}

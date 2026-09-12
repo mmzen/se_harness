@@ -1,0 +1,16 @@
+{
+  "C10_observed_variants": [
+    "host timeout"
+  ],
+  "C11_observed_variants": [
+    "missing output",
+    "invalid output",
+    "binding disabled across fresh session after readiness"
+  ],
+  "unavailable_C11_subcase": "literal OS shell-start failure, explicitly admitted only by amended VER-PLG-005 for the limited claim",
+  "C12_evidence": [
+    "C12/timeout-1-native-01/negative-assessment.json",
+    "C12/async-true-native-01/negative-assessment.json"
+  ],
+  "C12_boundary": "native loaded configuration and ineligibility only; no new trust or hook execution was requested"
+}

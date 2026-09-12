@@ -1,0 +1,11 @@
+C02 stdout: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+historical | resume-compact-01/stdout.txt | 79 bytes | sha256 d573651c606df3a260c970a339bca6537f9aeac77942ba852f1fee7c335ad796
+historical | resume-compact-02/stdout.txt | 59971 bytes | sha256 f3d16837bd69be3836f53ea49f6ee533db88090e65f3c7fe95034540765bb1bf
+current | resume-compact-03/stdout.txt | 86185 bytes | sha256 b16955fa581f83dfcdfe89c6ada23dde85c8eba4fccf6dcf70bc2a00a6ddd2d0
+current | startup-01/stdout.txt | 58115 bytes | sha256 857f43a0fbdf28054d82423048f72fb4ad3197d7cd3a8496114c1b47d027f2d9

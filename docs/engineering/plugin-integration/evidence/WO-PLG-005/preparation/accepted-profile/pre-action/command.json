@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "evidence",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\codex-adapter-sandboxes\\accepted 001 with spaces\\repo with spaces",
+    "--artifact",
+    "WO-PROBE-001",
+    "--checkpoint",
+    "pre-action",
+    "--json"
+  ],
+  "exit_status": 0
+}

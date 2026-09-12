@@ -1,0 +1,13 @@
+C10 stdout: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | host-timeout-01/live/stdout.txt | 62008 bytes | sha256 5bd018353b65577a15e7f4cff669191201589ffdc2c3a910f0382117dc1d3947
+current | host-timeout-01/stdout.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | runtime-preparation-01/command-0/stdout.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | runtime-preparation-01/command-1/stdout.txt | 207 bytes | sha256 616edf6a355a6db7168c4055f92f0fdd275afef26d5cbd90693013022123d6a0
+current | runtime-preparation-01/command-2/stdout.txt | 2309 bytes | sha256 08bdbe1d9c17d6e8253ce27daa0e29843af17a9b889374346cdb7cd8f554364e
+current | runtime-preparation-01/command-3/stdout.txt | 12842 bytes | sha256 8d14f8464d60bac62f4d60cd1a4f86f7e9d8ec32c03983f2488237cd7c46a565

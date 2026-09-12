@@ -1,0 +1,14 @@
+{
+  "operation": {
+    "enabled": false,
+    "key": "verity-plane@verity-plane-codex-fixture:hooks/hooks.json:session_start:0:0",
+    "trusted_hash_unchanged": "sha256:3d24ebbb6f1df466e491ac2738c5895b5bef36d63c5ed24be257517d59c56ab3"
+  },
+  "plan_sha256": "a1016f8327d49020e18015489d45d0bf492b7964c44d59512c36fda50f3c7e90",
+  "sequence": [
+    "atomic config disable",
+    "disabled native observation",
+    "exact config restoration",
+    "restored native inventory only"
+  ]
+}

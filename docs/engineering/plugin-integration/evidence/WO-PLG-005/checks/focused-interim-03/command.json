@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/plugin_integration/codex_adapter",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "exit_status": 0,
+  "source_sha256": {
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\tests\\plugin_integration\\codex_adapter\\test_adapter.py": "45e90bcf2d31daa1d4d2d28a80aec537f1305e99d1efa612200c1268acf8a176",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\tests\\plugin_integration\\codex_adapter\\observer.py": "55a8b83436c05a5b7b949527a63f1cc4052005f10a29099f1d5996938309b1b8",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\tests\\plugin_integration\\codex_adapter\\test_observer.py": "9bb650cdc94546c3deaa89e5a710c863038291d6580cf1a426dfe36561d8c721",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\plugins\\verity-plane\\codex\\dispatch.py": "1b24f62da276450ae8b0fa0529dfe8b786b995e137bd737258c16937ee07acae",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\tests\\plugin_integration\\codex_adapter\\live.py": "6e02b81070bed40da487b3babdc04d6c70fd057e12a50660b0372ac96a6547e1",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\tests\\plugin_integration\\codex_adapter\\fixture.py": "e29269b704fa4c0d0ae1cf10df1e4f1814b4e9622ec538a672d388bfe7bfdc46",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\plugins\\verity-plane\\codex\\render_hooks.py": "b1b190cb4626a02f517e7122317eaab056f3883ca9ffb53fd6fbf3c77999c3ea",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\tests\\plugin_integration\\codex_adapter\\interactive.py": "fc8c1f251121dec4cd130b5b1a9858e188338132bb41f9372887af94e0ec8173"
+  },
+  "observed_at_utc": "2026-09-11T19:36:02.0101381Z"
+}

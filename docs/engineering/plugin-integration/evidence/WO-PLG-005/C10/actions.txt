@@ -1,0 +1,15 @@
+C10 actions: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | host-timeout-01/actions.txt | 36824 bytes | sha256 31660d3559c5ea837cca1b626c9ef9c4f583ab5b2b1098c9dc298b5977a14e4f
+current | host-timeout-01/live/actions.txt | 6149 bytes | sha256 df27263458944784d81882f289f583a8361650d860ee5eb1dc4c20b92c94b3cd
+current | host-timeout-01/one-edit-plan.json | 172 bytes | sha256 b26a771e4551c36c3a798cb7157e2a8afa518e7d8bc4b90f4b2725bcea432d60
+current | runtime-preparation-01/actions.txt | 21656 bytes | sha256 4a3968099b60afcff406ae51654ffc58759cfb5db5f0f586255558090fea6a87
+current | runtime-preparation-01/command-0/command.json | 320 bytes | sha256 a1163ab8e7cb326517a721ee84a46fedea48a6c9997d2fdd8fc592f53babeca1
+current | runtime-preparation-01/command-1/command.json | 453 bytes | sha256 178e41b918c55cef68a1541431bce1b6a7f0e46d3ce647c69948d5a3e1a3c128
+current | runtime-preparation-01/command-2/command.json | 1091 bytes | sha256 f019b82740e899a5a56bffc3282afdf3def5d338fb9fe86dbc4098cdac1b45b2
+current | runtime-preparation-01/command-3/command.json | 387 bytes | sha256 d143b03f80852b61c6087f9fb153228cb583e439ef5a9187a29ae98884cc6b94

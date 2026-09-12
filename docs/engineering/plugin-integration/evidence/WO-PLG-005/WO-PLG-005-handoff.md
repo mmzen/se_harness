@@ -1,0 +1,26 @@
+```toml
+artifact = "WO-PLG-005"
+checkpoint = "handoff"
+formal_snapshot_sha256 = "f4567c035d042f2fb39bba629793c531bb33e738a4bf9d0bc2231a8d8657ff94"
+rebound_at = "2026-09-12T09:10:21Z"
+```
+
+# WO-PLG-005 handoff evidence
+
+Retained by `harnessctl evidence`; body content is owner-authored.
+
+WO-PLG-005 remains **in_progress and unqualified**. The operator authorized the remaining bounded live tests. C01–C09 pass on their recorded routes; C12 observes and rejects invalid configurations without executing them. C10 and C11 demonstrate failed enforcement: hook timeout, empty output, invalid output and loss of the active before-tool binding each allowed the exact synthetic edit after ordinary one-time file approval. Literal OS shell-start failure remains unavailable. No absent result counts as a passing case.
+
+The [acceptance report](report.md) and [qualification limit](qualification-limit.md) retain actual effects, native receipts, target hashes, package identities, failed attempts and restoration evidence. All completed fault runs confirm owned-process cleanup and restoration of selected inputs; changed synthetic targets remain the recorded effects. The earlier native-menu incident's historical OS effects remain unresolved.
+
+[Final focused and repository checks](checks/final-live-checks-01/results.json) record 143 passing focused tests, passing candidate graph/help/distribution checks and passing released 0.17 graph/doctor/preflight checks. Candidate doctor reports exactly the six existing candidate-versus-released template differences. [Complete candidate regression](checks/final-regression-01/result.json) retains its separate result. CI must be read for the exact PR head; none of these integrity checks proves live-host enforcement.
+
+The implementation and evidence are not complete against VER-PLG-005. Continue in progress. The operator has accepted the local limitation; formal decision recording remains separate and the launch-failure case stays untested. This packet authorizes no definition amendment, completion transition, VREC preparation, assurance decision, merge or release. A passing mechanical handoff check establishes scoped evidence freshness; it does not replace the failed live acceptance results.
+
+## Operator acceptance of the local limitation
+
+**Operator acceptance recorded:** the operator accepted hook failure as a [documented local limitation](local-limitation-acceptance/README.md). The failed observations remain unchanged. Formal decision recording and any required contract changes are separate; this evidence update changes no lifecycle state.
+
+## Continuation assessment — 2026-09-12
+
+[The dated qualification assessment](qualification-review-20260912/assessment.md) evaluates the merged criteria and exact source/package/recorded-loaded identities. C10/C11 remain failed enforcement; only independent qualification with a documented local limitation is proposed. Existing case evidence and original reports retain their meaning. Required check records, preserved prior packet bytes and the scoped line-ending correction are in that dated directory.

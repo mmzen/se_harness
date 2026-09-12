@@ -1,0 +1,16 @@
+C04 actions: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+current | registered-shell-01/actions.txt | 1235 bytes | sha256 cf9cf318ab96d42a060caf1b5a8aca91fdb029817cac7568c93617631ac3ebbd
+current | registered-shell-01/array-tool/actions.txt | 6657 bytes | sha256 409fe8dafdbd50b17280f6ba67b8d22dd3ab2041835b6d6b42eebdffd769af93
+current | registered-shell-01/blank-tool/actions.txt | 6657 bytes | sha256 409fe8dafdbd50b17280f6ba67b8d22dd3ab2041835b6d6b42eebdffd769af93
+current | registered-shell-01/malformed-json/actions.txt | 6657 bytes | sha256 409fe8dafdbd50b17280f6ba67b8d22dd3ab2041835b6d6b42eebdffd769af93
+current | registered-shell-01/missing-required-cwd/actions.txt | 6657 bytes | sha256 409fe8dafdbd50b17280f6ba67b8d22dd3ab2041835b6d6b42eebdffd769af93
+current | registered-shell-01/object-tool/actions.txt | 6657 bytes | sha256 409fe8dafdbd50b17280f6ba67b8d22dd3ab2041835b6d6b42eebdffd769af93
+current | registered-shell-01/positive-sentinel-after/actions.txt | 6657 bytes | sha256 409fe8dafdbd50b17280f6ba67b8d22dd3ab2041835b6d6b42eebdffd769af93
+current | registered-shell-01/positive-sentinel-before/actions.txt | 6657 bytes | sha256 409fe8dafdbd50b17280f6ba67b8d22dd3ab2041835b6d6b42eebdffd769af93
+current | registered-shell-01/wrong-event-shape/actions.txt | 6657 bytes | sha256 409fe8dafdbd50b17280f6ba67b8d22dd3ab2041835b6d6b42eebdffd769af93

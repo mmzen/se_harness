@@ -1,0 +1,6 @@
+2026-09-11T21:03:47.274690Z ERROR codex_core::tools::router: error=Command blocked by PreToolUse hook: Governed action refused: evaluator left active descendants after returning; inspect any partial evaluator writes before retry. Command: *** Begin Patch
+*** Update File: C:/Users/mathi/Documents/Codex/2026-09-04/hel/work/codex-adapter-sandboxes/accepted 001 with spaces/repo with spaces/governed-target.txt
+@@
+-WO-PLG-005 permitted edit
++WO-PLG-005 C09 interrupted should be refused
+*** End Patch

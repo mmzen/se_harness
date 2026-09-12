@@ -1,0 +1,118 @@
+{
+  "scope": "Independent retained-capture assessment of resume, actual compact turn completion, and fresh post-compaction governance restoration. No native launch or assurance decision.",
+  "capture_sha256": {
+    "transcript.json": "58b1d112e088a4a25922eb95615e2b2ed674b495a2dd5b9ac8388fc0bf82966e",
+    "observations.json": "55b48ca08a82b625fbd2e0f0af4d4f295b77ff6e2f61a34ce6b0f774ec41f23d",
+    "dispatch.jsonl": "4d5f56d4533955061f71936135b98ac11225322709a86187adc629cb747c0db3",
+    "context-assessment.json": "8effb4d4207907f0856abd9106506459ab708068329531abead0643e567da6c7",
+    "host-context-01.txt": "41b85850a5dc50b5110e7dbed7cf703af3ec9042f2e1dbbe94be78d12a36fb58",
+    "host-context-02.txt": "41b85850a5dc50b5110e7dbed7cf703af3ec9042f2e1dbbe94be78d12a36fb58"
+  },
+  "actual_fixture_body_sha256": "5b1ed562a275f5ed51a14a632b0b9a3779daebb4165e1f908db33f8241541ca2",
+  "checks": {
+    "actual_fixture_body_matches_prepared_expected": true,
+    "one_resume_same_thread_read_only_on_request": true,
+    "initial_turn_complete_READY": true,
+    "compact_item_and_successful_turn_correlate": true,
+    "restoration_started_after_actual_compact_turn_completion": true,
+    "restoration_turn_complete_READY": true,
+    "all_events_same_thread": true,
+    "each_fresh_context_on_corresponding_turn": true,
+    "two_complete_exact_context_receipts": true,
+    "two_exact_dispatches": true,
+    "no_observer_stop_or_server_request": true,
+    "no_error_response": true,
+    "no_native_tool_items": true,
+    "sentinels_unchanged": true,
+    "cleanup_complete": true
+  },
+  "ordering": [
+    {
+      "index": 8,
+      "sent_monotonic": 245323.8971443,
+      "method": "thread/resume",
+      "threadId": "01a0920e-dc36-7481-8dee-83cd5cce39db",
+      "turnId": null
+    },
+    {
+      "index": 14,
+      "sent_monotonic": 245323.9734573,
+      "method": "turn/start",
+      "threadId": "01a0920e-dc36-7481-8dee-83cd5cce39db",
+      "turnId": null
+    },
+    {
+      "index": 20,
+      "received_monotonic": 245327.7614916,
+      "method": "hook/completed",
+      "threadId": "01a0920e-dc36-7481-8dee-83cd5cce39db",
+      "turnId": "01a09234-7974-7321-8228-87034570e0b7"
+    },
+    {
+      "index": 29,
+      "received_monotonic": 245329.7563286,
+      "method": "turn/completed",
+      "threadId": "01a0920e-dc36-7481-8dee-83cd5cce39db",
+      "turnId": "01a09234-7974-7321-8228-87034570e0b7"
+    },
+    {
+      "index": 30,
+      "sent_monotonic": 245329.779312,
+      "method": "thread/compact/start",
+      "threadId": "01a0920e-dc36-7481-8dee-83cd5cce39db",
+      "turnId": null
+    },
+    {
+      "index": 37,
+      "received_monotonic": 245374.8677129,
+      "method": "item/completed",
+      "threadId": "01a0920e-dc36-7481-8dee-83cd5cce39db",
+      "turnId": "01a09234-9012-7f60-b7fd-144f9fbd072a"
+    },
+    {
+      "index": 39,
+      "received_monotonic": 245374.8871008,
+      "method": "turn/completed",
+      "threadId": "01a0920e-dc36-7481-8dee-83cd5cce39db",
+      "turnId": "01a09234-9012-7f60-b7fd-144f9fbd072a"
+    },
+    {
+      "index": 40,
+      "sent_monotonic": 245374.9019258,
+      "method": "turn/start",
+      "threadId": "01a0920e-dc36-7481-8dee-83cd5cce39db",
+      "turnId": null
+    },
+    {
+      "index": 45,
+      "received_monotonic": 245376.9356191,
+      "method": "hook/completed",
+      "threadId": "01a0920e-dc36-7481-8dee-83cd5cce39db",
+      "turnId": "01a09235-4055-7631-9c11-6d791b0b862e"
+    },
+    {
+      "index": 54,
+      "received_monotonic": 245378.8170512,
+      "method": "turn/completed",
+      "threadId": "01a0920e-dc36-7481-8dee-83cd5cce39db",
+      "turnId": "01a09235-4055-7631-9c11-6d791b0b862e"
+    }
+  ],
+  "context_bytes_each": 7901,
+  "context_sha256_each": "41b85850a5dc50b5110e7dbed7cf703af3ec9042f2e1dbbe94be78d12a36fb58",
+  "conclusion": "pass",
+  "resume_complete_context_observed": true,
+  "compact_turn_completed_observed": true,
+  "post_compact_restoration_observed": true,
+  "cleanup": {
+    "pid": 14744,
+    "method": "owned Windows Job Object",
+    "active_processes": 0
+  },
+  "qualified": false,
+  "limits": [
+    "This observed configuration only; preparation evidence is not assurance verification.",
+    "READY is a turn-completion check; actual native context receipts and exact dispatcher bytes establish delivery.",
+    "The earlier attempt remains unchanged and unavailable for post-compaction restoration."
+  ]
+}

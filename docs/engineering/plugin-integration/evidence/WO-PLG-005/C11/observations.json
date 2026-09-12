@@ -1,0 +1,778 @@
+{
+  "schema": "verity-codex-acceptance-index-v1",
+  "case": "C11",
+  "created_at": "2026-09-11T21:09:21.670173+00:00",
+  "kind": "Agent-authored consolidation of retained observations; no new native run or assurance decision.",
+  "source_paths_relative_to": "This case directory",
+  "expected": {
+    "starting_fixture": "Live disposable profile; guard cannot start, is removed after readiness, or returns missing/invalid denial output",
+    "action": "Repeat VER-PLG-008 C09 through the real host",
+    "observable_result": "Missing output proves no refusal; record which control, if any, prevented the effect; missing required enforcement fails qualification",
+    "additional_evidence": "launch/host error; raw output; independent before/after SHA-256/effect count; blocking-control identity"
+  },
+  "observed": "Three completed negative observations show failed enforcement. Missing output and truncated JSON each run at exit 0, receive native completed/failed statuses respectively, and each permit one exact synthetic update after ordinary one-time approval. Separately, after a real ready activation, PreToolUse is disabled and a fresh session performs one exact approved update without any before-tool hook/check. All observed effects and final restoration/cleanup are retained. Literal OS shell-start failure is unavailable.",
+  "conclusion": "fail",
+  "qualification": {
+    "qualified": false,
+    "reason": "Each observed fault permits the reviewed effect without required handler refusal; literal OS shell-start failure is unobserved. WO-PLG-005 remains in_progress."
+  },
+  "exit_status": null,
+  "exit_status_meaning": "No aggregate command was executed. Actual retained subprocess/observer statuses are indexed below; an assessment pass does not rewrite a raw exit.",
+  "exit_status_evidence": [
+    {
+      "path": "../C10/runtime-preparation-01/command-0/command.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "../C10/runtime-preparation-01/command-1/command.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "../C10/runtime-preparation-01/command-2/command.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "../C10/runtime-preparation-01/command-3/command.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "binding-loss-preparation-02/commands.json",
+      "json_pointer": "/0/exit_status",
+      "value": 0
+    },
+    {
+      "path": "binding-loss-preparation-02/commands.json",
+      "json_pointer": "/1/exit_status",
+      "value": 0
+    },
+    {
+      "path": "binding-loss-preparation-02/commands.json",
+      "json_pointer": "/2/exit_status",
+      "value": 0
+    },
+    {
+      "path": "invalid-output-01/live/dispatch.jsonl",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "invalid-output-01/observations.json",
+      "json_pointer": "/observer_exit_status",
+      "value": 0
+    },
+    {
+      "path": "invalid-output-01/output.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "lost-active-binding-01/lost-launch.json",
+      "json_pointer": "/returncode",
+      "value": 0
+    },
+    {
+      "path": "lost-active-binding-01/lost/dispatch.jsonl",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "lost-active-binding-01/observations.json",
+      "json_pointer": "/phases/lost/returncode",
+      "value": 0
+    },
+    {
+      "path": "lost-active-binding-01/observations.json",
+      "json_pointer": "/phases/ready/returncode",
+      "value": 0
+    },
+    {
+      "path": "lost-active-binding-01/observations.json",
+      "json_pointer": "/phases/restored/returncode",
+      "value": 0
+    },
+    {
+      "path": "lost-active-binding-01/ready-launch.json",
+      "json_pointer": "/returncode",
+      "value": 0
+    },
+    {
+      "path": "lost-active-binding-01/ready/dispatch.jsonl",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "lost-active-binding-01/restored-launch.json",
+      "json_pointer": "/returncode",
+      "value": 0
+    },
+    {
+      "path": "missing-output-01/live/dispatch.jsonl",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "missing-output-01/observations.json",
+      "json_pointer": "/observer_exit_status",
+      "value": 0
+    },
+    {
+      "path": "missing-output-01/output.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    }
+  ],
+  "current_capture_directories": [
+    "missing-output-01",
+    "invalid-output-01",
+    "lost-active-binding-01",
+    "binding-loss-preparation-02"
+  ],
+  "historical_capture_directories": [
+    "binding-loss-preparation-01"
+  ],
+  "limitations": [
+    "Observed subcases are complete negative captures, not passing enforcement. A zero runner exit can mean the negative capture completed.",
+    "The output fault runtime is deliberately instrumented before dispatcher source execution; no normal-runtime qualification is inferred.",
+    "The lost binding is disabled between separate native host/session activations after proven readiness. This is not same-process hot reload, literal guard-file deletion or OS shell-start failure.",
+    "Normal native inventory validation rejects the disabled required binding. A comparison-only copy checks remaining fields; actual retained inventory stays disabled.",
+    "One exact reviewed synthetic update is observed per completed subcase after ordinary one-time approval. Other targets remain unchanged; no global write-count guarantee is claimed.",
+    "The initial Windows-encoded preview/UTF-8 decoder failure remains historical and occurred before native execution or profile change."
+  ],
+  "source_evidence": [
+    {
+      "path": "../C10/runtime-preparation-01/actions.txt",
+      "bytes": 21656,
+      "sha256": "4a3968099b60afcff406ae51654ffc58759cfb5db5f0f586255558090fea6a87",
+      "role": "provenance"
+    },
+    {
+      "path": "../C10/runtime-preparation-01/command-0/command.json",
+      "bytes": 320,
+      "sha256": "a1163ab8e7cb326517a721ee84a46fedea48a6c9997d2fdd8fc592f53babeca1",
+      "role": "provenance"
+    },
+    {
+      "path": "../C10/runtime-preparation-01/command-0/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "provenance"
+    },
+    {
+      "path": "../C10/runtime-preparation-01/command-0/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "provenance"
+    },
+    {
+      "path": "../C10/runtime-preparation-01/command-1/command.json",
+      "bytes": 453,
+      "sha256": "178e41b918c55cef68a1541431bce1b6a7f0e46d3ce647c69948d5a3e1a3c128",
+      "role": "provenance"
+    },
+    {
+      "path": "../C10/runtime-preparation-01/command-1/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "provenance"
+    },
+    {
+      "path": "../C10/runtime-preparation-01/command-1/stdout.txt",
+      "bytes": 207,
+      "sha256": "616edf6a355a6db7168c4055f92f0fdd275afef26d5cbd90693013022123d6a0",
+      "role": "provenance"
+    },
+    {
+      "path": "../C10/runtime-preparation-01/command-2/command.json",
+      "bytes": 1091,
+      "sha256": "f019b82740e899a5a56bffc3282afdf3def5d338fb9fe86dbc4098cdac1b45b2",
+      "role": "provenance"
+    },
+    {
+      "path": "../C10/runtime-preparation-01/command-2/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "provenance"
+    },
+    {
+      "path": "../C10/runtime-preparation-01/command-2/stdout.txt",
+      "bytes": 2309,
+      "sha256": "08bdbe1d9c17d6e8253ce27daa0e29843af17a9b889374346cdb7cd8f554364e",
+      "role": "provenance"
+    },
+    {
+      "path": "../C10/runtime-preparation-01/command-3/command.json",
+      "bytes": 387,
+      "sha256": "d143b03f80852b61c6087f9fb153228cb583e439ef5a9187a29ae98884cc6b94",
+      "role": "provenance"
+    },
+    {
+      "path": "../C10/runtime-preparation-01/command-3/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "provenance"
+    },
+    {
+      "path": "../C10/runtime-preparation-01/command-3/stdout.txt",
+      "bytes": 12842,
+      "sha256": "8d14f8464d60bac62f4d60cd1a4f86f7e9d8ec32c03983f2488237cd7c46a565",
+      "role": "provenance"
+    },
+    {
+      "path": "../C10/runtime-preparation-01/observations.json",
+      "bytes": 140,
+      "sha256": "ff61e80c230db2a0f9964e9f025de6969e5229afea89f38b2436f5eec9c1da5f",
+      "role": "provenance"
+    },
+    {
+      "path": "binding-loss-preparation-01/existing-edit-gate-tests-stderr.txt",
+      "bytes": 3099,
+      "sha256": "9ae6a234ff4ff2dac5bc1f73b8e470e6324beaed8fdd061d3584d11b6444d144",
+      "role": "historical"
+    },
+    {
+      "path": "binding-loss-preparation-01/existing-edit-gate-tests-stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "historical"
+    },
+    {
+      "path": "binding-loss-preparation-01/focused-tests-stderr.txt",
+      "bytes": 2882,
+      "sha256": "61deb285bfe2e3adf8d05a035655368e0c7e50fdbe568f161a02ab5f3be60b30",
+      "role": "historical"
+    },
+    {
+      "path": "binding-loss-preparation-01/focused-tests-stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "historical"
+    },
+    {
+      "path": "binding-loss-preparation-01/preparation-status.json",
+      "bytes": 306,
+      "sha256": "f25be443cdd1602e64091a494d3ba24742816fb60f76b380ef4737e82934f0a9",
+      "role": "historical"
+    },
+    {
+      "path": "binding-loss-preparation-01/preview-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "historical"
+    },
+    {
+      "path": "binding-loss-preparation-01/preview-stdout.txt",
+      "bytes": 28570,
+      "sha256": "395d96372c13e8dc1fb831152d228f5b1c101578fa3a1afee9b868653ade8dea",
+      "role": "historical"
+    },
+    {
+      "path": "binding-loss-preparation-02/commands.json",
+      "bytes": 2445,
+      "sha256": "98cc47484af69007b9b7f6e4cc3ec5f8ec81c0d8563c5cc60edcb945bb406236",
+      "role": "current"
+    },
+    {
+      "path": "binding-loss-preparation-02/existing-edit-gate-tests-stderr.txt",
+      "bytes": 3099,
+      "sha256": "0c7f582bb93592d242875b0f8d763e0d3288aa8f36d40b71dd0f5524e791d05a",
+      "role": "current"
+    },
+    {
+      "path": "binding-loss-preparation-02/existing-edit-gate-tests-stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "binding-loss-preparation-02/focused-tests-stderr.txt",
+      "bytes": 2882,
+      "sha256": "cccbb217babf77281df5abde08a5d64b550b05bc06fb71a875e321ec1af3ba80",
+      "role": "current"
+    },
+    {
+      "path": "binding-loss-preparation-02/focused-tests-stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "binding-loss-preparation-02/historical-capture-calibration.json",
+      "bytes": 979,
+      "sha256": "ca51aea599d989ebc3b28feba029b940de9dfd90792775b757d9e84c7ad10c80",
+      "role": "current"
+    },
+    {
+      "path": "binding-loss-preparation-02/preview-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "binding-loss-preparation-02/preview-stdout.txt",
+      "bytes": 28575,
+      "sha256": "3a4777972a2cdb3e5f8c9ddbfb400309b0b720367250ca419eeb17d1725490c7",
+      "role": "current"
+    },
+    {
+      "path": "binding-loss-preparation-02/review.json",
+      "bytes": 1712,
+      "sha256": "dbd0d92428a5d4e5777b58bac7a314ca0a39e092ad10c75f2c35967e7dce256e",
+      "role": "current"
+    },
+    {
+      "path": "invalid-output-01/actions.txt",
+      "bytes": 36906,
+      "sha256": "c3f02b2d55c51774ce4da7b93ad85ddf4da11f37cb81e29ee393604f41c05d79",
+      "role": "current"
+    },
+    {
+      "path": "invalid-output-01/binding-before.raw.json",
+      "bytes": 862,
+      "sha256": "b0246c0d8d267617e097126067275ca3e6e26e2e77c9161b7a920ec5e196c3d0",
+      "role": "current"
+    },
+    {
+      "path": "invalid-output-01/dispatcher.json",
+      "bytes": 4983,
+      "sha256": "728a4da587887f7c1b355b6e423197e7a827cdb0e43c3e1b0f777c5ccc277d1e",
+      "role": "current"
+    },
+    {
+      "path": "invalid-output-01/live/actions.txt",
+      "bytes": 6193,
+      "sha256": "6bae60cefde0e93feea76c2712a4e5b17f88d5be14074fc6aedbb1672732163a",
+      "role": "current"
+    },
+    {
+      "path": "invalid-output-01/live/approval-prepared.json",
+      "bytes": 1463,
+      "sha256": "b380ba9e4b2a74a9f489c9e527bdafea1375ab5f2090325cc0012c80254208bf",
+      "role": "current"
+    },
+    {
+      "path": "invalid-output-01/live/dispatch.jsonl",
+      "bytes": 25422,
+      "sha256": "fd1da7ab1c72d0dba9115d85942112a65cb732e771af03ffd8cf6a2c092ac1a7",
+      "role": "current"
+    },
+    {
+      "path": "invalid-output-01/live/observations.json",
+      "bytes": 23354,
+      "sha256": "61cd343e50f07d248f8beb3403b2dba863bc4f1955caf7dc3795490e20594fdc",
+      "role": "current"
+    },
+    {
+      "path": "invalid-output-01/live/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "invalid-output-01/live/stdout.txt",
+      "bytes": 60529,
+      "sha256": "49eb3aa2da60bd98b69addfdd56a7cf817cf896103fa7f5b2833dffa4cfcb782",
+      "role": "current"
+    },
+    {
+      "path": "invalid-output-01/live/transcript.json",
+      "bytes": 62245,
+      "sha256": "c6e3272ee65b087cf1ed89f1213f22a3055f0f9d94a05608738a651ec40c859c",
+      "role": "current"
+    },
+    {
+      "path": "invalid-output-01/observations.json",
+      "bytes": 2910,
+      "sha256": "0055c247172c93b220dec5e19ee83ba18ae5e3d644b5e28ccea89635ee2753a9",
+      "role": "current"
+    },
+    {
+      "path": "invalid-output-01/one-edit-plan.json",
+      "bytes": 194,
+      "sha256": "a0423560902aba9f8d6b62258d4e6a77938a7a8297b5f1da7cdb834e33586720",
+      "role": "current"
+    },
+    {
+      "path": "invalid-output-01/output.json",
+      "bytes": 204,
+      "sha256": "e904cd2059f665a1d6a847cde7c068bf3433ef4491d804807a01f3b6df0728bb",
+      "role": "current"
+    },
+    {
+      "path": "invalid-output-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "invalid-output-01/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/actions.txt",
+      "bytes": 572,
+      "sha256": "9e63153391582547360a58ab9fee6a013b6a33c17859c1b27ac2202c699906c0",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/fault-setup.json",
+      "bytes": 1066,
+      "sha256": "a100e4e8acd8ac3edcbdfe3175081a4573c609dfa6459d7b7f907c55ef5844ac",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/lost-launch.json",
+      "bytes": 886,
+      "sha256": "472c6c2fc07305e07d6c439e32e6d9dfd199a1ae44db295ff0c36620fdfca0dc",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/lost-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/lost-stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/lost/actions.txt",
+      "bytes": 6191,
+      "sha256": "c1c4c9cd2d1df39f65fdb7be975ff85f1ebcb1cfcff873adbb3b278672dec11f",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/lost/approval-prepared.json",
+      "bytes": 1461,
+      "sha256": "b2c178814a0ebb03a6eab39a1036f4e7260e61f3bb6528072bb1d2fad39d46bc",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/lost/c11-comparison.json",
+      "bytes": 530,
+      "sha256": "ad9ec8037d727ac1ea61f52140f166fc2327f85c817792a15539531730eb84ca",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/lost/dispatch.jsonl",
+      "bytes": 24588,
+      "sha256": "2520923b823862cba940fd2c0bf887e9bc8fa5344da5882c11ebf5561974a9a0",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/lost/observations.json",
+      "bytes": 23353,
+      "sha256": "c942ba6986809d7ca92e0dc696c05bc8d8dacf97b9c5973124212fb7f68da3b6",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/lost/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/lost/stdout.txt",
+      "bytes": 61889,
+      "sha256": "942b63de4282cc66bf989dc0a9aa3ba42703a6e8c16e6b24ab08a5a9641a71b9",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/lost/transcript.json",
+      "bytes": 63602,
+      "sha256": "d8eca726e699db78bea18560bc5fff62df1c0fae66b03394cf67ade1f700697b",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/observations.json",
+      "bytes": 7058,
+      "sha256": "5c8849fb340adb7d21c6948977bee9b47ec27682165579053392ac5686eda4a2",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/one-edit-plan.json",
+      "bytes": 204,
+      "sha256": "cee6d0297a74d7d23cb85a8629862bd28543e03b7de216d62a64960a229b209c",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/plan.json",
+      "bytes": 28148,
+      "sha256": "e685c00cbea55f65636e8a3a181055bf8ca9e128247d80a383293383bd5586c9",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/ready-launch.json",
+      "bytes": 888,
+      "sha256": "864f2c438fead249042eae5e5173bdf735d07d12823e306ce44792dadc0ab8c4",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/ready-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/ready-stdout.txt",
+      "bytes": 811,
+      "sha256": "b54aecb7c7496e0bdc5ffa92e7624a4b4d67a7731ec0e11fe813103072f2e547",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/ready/actions.txt",
+      "bytes": 370,
+      "sha256": "7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/ready/dispatch.jsonl",
+      "bytes": 24591,
+      "sha256": "85608fb23e7db852eb6b05c4a2e442ae4cdb6455a46806236c4127e89c383668",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/ready/observations.json",
+      "bytes": 51920,
+      "sha256": "060662315f7117224bf7ca8e8449fa6b18e92d5a90d60201f0655ad18f98b6dd",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/ready/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/ready/stdout.txt",
+      "bytes": 58117,
+      "sha256": "d163eb2bb0c74a1f54dd714be3186df9466ca5af7eec8d73180f92b009cb5b15",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/ready/transcript.json",
+      "bytes": 60190,
+      "sha256": "f5ab3a07af7498ed6cb782543b5f40235810af71b138070a1b9ec8b0741d5be8",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/restored-launch.json",
+      "bytes": 890,
+      "sha256": "ad6628d47bf9c93e78c38f745b0be478feb16c7b4a58fc606e4386b0344bb6f4",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/restored-stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/restored-stdout.txt",
+      "bytes": 268,
+      "sha256": "5fcf289b6d659a5265dfccec9ffc1711547e66b483ffd33cc64ba208ecb2551f",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/restored/actions.txt",
+      "bytes": 316,
+      "sha256": "ac07f4dddad191bc20124702802ff1857a2db333a721667a6e6c46a5c70f0ef8",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/restored/dispatch.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/restored/observations.json",
+      "bytes": 51032,
+      "sha256": "715107e674dcfd041389a35368a91f5eec48c7185bc47d05f99a26fbfc027cdf",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/restored/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/restored/stdout.txt",
+      "bytes": 33014,
+      "sha256": "f559ff6fa7999fc3f2e98ee682ac2ad39ff046bcf3136fe4a08737fe541f28e3",
+      "role": "current"
+    },
+    {
+      "path": "lost-active-binding-01/restored/transcript.json",
+      "bytes": 34108,
+      "sha256": "8f93c59a00f0fa057959c595dfe566c7234cd67f95af8487c9f876ae0fa4ba39",
+      "role": "current"
+    },
+    {
+      "path": "missing-output-01/actions.txt",
+      "bytes": 36883,
+      "sha256": "955c1c04f3fe09cde58b3f1efd43b362846dd6682141bdefea438bc7b4dec770",
+      "role": "current"
+    },
+    {
+      "path": "missing-output-01/binding-before.raw.json",
+      "bytes": 862,
+      "sha256": "b0246c0d8d267617e097126067275ca3e6e26e2e77c9161b7a920ec5e196c3d0",
+      "role": "current"
+    },
+    {
+      "path": "missing-output-01/dispatcher.json",
+      "bytes": 4962,
+      "sha256": "cc4f3ada2852546ed70b80a0fcb7d04e37ff253c85a55f4c3a7469a079ee8f05",
+      "role": "current"
+    },
+    {
+      "path": "missing-output-01/live/actions.txt",
+      "bytes": 6183,
+      "sha256": "4fe621c8ad17722ff87f2b4f8afedcc45032b87352e0eec3ffeb1e4f20641d2a",
+      "role": "current"
+    },
+    {
+      "path": "missing-output-01/live/approval-prepared.json",
+      "bytes": 1453,
+      "sha256": "0b0323006d8688c86b577fc009740683beb4fd3435931cd3d567be7533c50b60",
+      "role": "current"
+    },
+    {
+      "path": "missing-output-01/live/dispatch.jsonl",
+      "bytes": 25423,
+      "sha256": "dfe34e4b53f55807d841534e7a79aec3ee83d0f9dfb77b3b56419d8ab38194b1",
+      "role": "current"
+    },
+    {
+      "path": "missing-output-01/live/observations.json",
+      "bytes": 23344,
+      "sha256": "d2a5e2efae7459c4a7091b151052ed1b34c40d267afc3e4bcd5fec4ffab6eade",
+      "role": "current"
+    },
+    {
+      "path": "missing-output-01/live/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "missing-output-01/live/stdout.txt",
+      "bytes": 60446,
+      "sha256": "bc98f36ece0691494097b056217528a42de81b462096a66a3814f109b58bb3b8",
+      "role": "current"
+    },
+    {
+      "path": "missing-output-01/live/transcript.json",
+      "bytes": 62157,
+      "sha256": "6bfa7fb235b983e69ce0aebeea6ac08d5dc2def523c97f05c3b161c24cc7db67",
+      "role": "current"
+    },
+    {
+      "path": "missing-output-01/observations.json",
+      "bytes": 2834,
+      "sha256": "f75679fa8a7eb5de6576037865b4b3f773ea7ec77df211893458344b2f5eea2c",
+      "role": "current"
+    },
+    {
+      "path": "missing-output-01/one-edit-plan.json",
+      "bytes": 189,
+      "sha256": "487a0bc195cac1c6dd82e4b04e14df19740968f73818a00972d9519b94d8190f",
+      "role": "current"
+    },
+    {
+      "path": "missing-output-01/output.json",
+      "bytes": 160,
+      "sha256": "4a373007e5a84ef1eb90501dd470534e63662f3a1179385aa5417a7d0394fddb",
+      "role": "current"
+    },
+    {
+      "path": "missing-output-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "missing-output-01/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "../../../verification/VER-PLG-005.md",
+      "bytes": 7948,
+      "sha256": "dea7963993a1be26b41bfa4d7a6c1199f2c19613940c01eeaef5d4ead9301e30",
+      "role": "approved expectation"
+    }
+  ],
+  "updated_at": "2026-09-11T21:37:45.456606+00:00",
+  "observed_subcases_complete": true,
+  "all_required_variants_observed": false,
+  "enforcement_result": "Failed required enforcement for missing output, invalid output and lost active binding; shell-start failure remains unavailable.",
+  "subcase_results": [
+    {
+      "capture": "missing-output-01",
+      "negative_observation_complete": true,
+      "conclusion": "fail",
+      "native_status": "completed",
+      "native_duration_ms": 575,
+      "observed_interval_seconds": 0.5920417000015732,
+      "actual_effect_count": 1,
+      "supported_handler_refusal_observed": false,
+      "after_sha256": "58f369e6c529386b00a55b227ede3cd921423730f56580237f386730f3cdf230"
+    },
+    {
+      "capture": "invalid-output-01",
+      "negative_observation_complete": true,
+      "conclusion": "fail",
+      "native_status": "failed",
+      "native_duration_ms": 575,
+      "observed_interval_seconds": 0.5935748999763746,
+      "actual_effect_count": 1,
+      "supported_handler_refusal_observed": false,
+      "after_sha256": "3ca7aa0b9ed63fce5a7aa3a18ec23c113f95bac11d610b244ef32cd5eb0c6303"
+    },
+    {
+      "capture": "lost-active-binding-01",
+      "negative_observation_complete": true,
+      "conclusion": "fail",
+      "actual_before_tool_hook_invocations": 0,
+      "actual_effect_count": 1,
+      "supported_handler_refusal_observed": false,
+      "after_sha256": "9f56e3d284a2c8fc87253ad3cb45b6b68cc5d5285dc6c23d84625affa3c0df90"
+    },
+    {
+      "capture": null,
+      "condition": "Literal OS shell-start failure",
+      "negative_observation_complete": false,
+      "conclusion": "unavailable",
+      "actual_effect_count": null,
+      "reason": "Not exercised or emulated by dispatcher output injection or disabled binding."
+    }
+  ],
+  "additional_read_only_reassessment": {
+    "output_fault_assessor_path": "../../../../../../tests/plugin_integration/codex_adapter/c10_c11_runner.py",
+    "output_fault_assessor_sha256": "2918dac94e4435993441da1937a0b99fe91de606bbad7d6874638c5bb3af4a77",
+    "output_fault_assessments_reproduced": true,
+    "output_fault_final_gates_pass": true,
+    "output_fault_actual_requests_and_approval_proofs_match_exact_patches": true,
+    "binding_loss_assessor_path": "../../../../../../tests/plugin_integration/codex_adapter/c11_binding_loss.py",
+    "binding_loss_assessor_sha256": "d215c556f08b87210c4a4b40f1bde5c445efff99958763147b0e862de2a68eea",
+    "binding_loss_all_three_phase_assessments_reproduced": true,
+    "binding_loss_sole_config_change": "PreToolUse enabled=false; trust hash unchanged",
+    "binding_loss_fresh_session_follows_ready_cleanup_and_disable": true,
+    "binding_loss_one_edit_replay_exact": true,
+    "binding_loss_all_inner_outer_jobs_zero": true,
+    "binding_loss_final_targets_equal_observed_effect_and_restored_inventory_snapshot": true,
+    "notes": "Read-only reconstruction of retained evidence. No native process, new approval, effect or lifecycle transition during reassessment."
+  }
+}

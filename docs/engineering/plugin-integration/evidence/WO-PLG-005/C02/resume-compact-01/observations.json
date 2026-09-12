@@ -1,0 +1,11 @@
+{
+  "case": "C02",
+  "phase": "resume and compaction",
+  "conclusion": "unavailable",
+  "process_started": false,
+  "exit_status": null,
+  "expected": "Native resume and compaction restore the complete verified governance context.",
+  "observed": "The execution tool's automatic approval review rejected the command before process creation.",
+  "source_evidence": ["actions.txt", "stderr.txt"],
+  "limitations": "No native resume, compaction, receipt or effects were observed in this attempt. The prior startup result remains separate. No workaround or indirect retry was attempted."
+}

@@ -1,0 +1,4 @@
+Executed the selected external 0.16 environment Python with:
+-I -B tests/plugin_integration/codex_adapter/live.py --inventory-only --package-record docs/engineering/plugin-integration/evidence/WO-PLG-005/preparation/package-02/package.json --evidence docs/engineering/plugin-integration/evidence/WO-PLG-005/C01/stale-inventory-01
+Candidate: 9397519357deb85ecdcc44f322e359b73ce37ba4.
+The helper failed while reading the package record before authentication status, host version, process spawn, or native requests. The outer tool returned exit status 1. Its exception text is transcribed in stderr.txt; the helper itself had not yet created this evidence directory.

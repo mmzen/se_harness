@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-B",
+    "-m",
+    "se_harness",
+    "--help"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+  "exit_status": 0,
+  "started_monotonic": 243472.699823,
+  "finished_monotonic": 243473.6292409
+}

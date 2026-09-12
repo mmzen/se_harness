@@ -1,0 +1,17 @@
+{
+  "observed_at_utc": "2026-09-11T19:42:15.5651705Z",
+  "exit_status": 0,
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/plugin_integration/codex_adapter",
+    "-p",
+    "test_*.py",
+    "-v"
+  ]
+}

@@ -1,0 +1,9 @@
+READABLE PROJECTION; not raw stdout evidence.
+Original bytes: stdout.raw-bytes.json
+Original SHA-256: 92baa42ae4342982c3d83aa24dfd13ace5d96fa7c230084ac52c2090a47a7ab2
+Projection normalizes newlines and removes trailing whitespace/blank EOF lines.
+
+{"hookSpecificOutput":{"permissionDecision":"deny","hookEventName":"PreToolUse","permissionDecisionReason":"Verity Plane UNREADY: Fully qualified absolute binding paths required; no Python invoked. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed."}}
+
+
+{"hookSpecificOutput":{"permissionDecision":"deny","hookEventName":"PreToolUse","permissionDecisionReason":"Verity Plane UNREADY: Fully qualified absolute binding paths required; no Python invoked. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed."}}

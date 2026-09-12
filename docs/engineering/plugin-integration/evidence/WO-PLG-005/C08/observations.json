@@ -1,0 +1,427 @@
+{
+  "schema": "verity-codex-acceptance-index-v1",
+  "case": "C08",
+  "created_at": "2026-09-11T21:09:21.475898+00:00",
+  "kind": "Agent-authored consolidation of retained observations; no new native run or assurance decision.",
+  "source_paths_relative_to": "This case directory",
+  "expected": {
+    "starting_fixture": "Thin host guard; interpreter absent, then present with wrong evaluator identity",
+    "action": "Trigger startup before setup, after removal and with the wrong environment.",
+    "observable_result": "Absent runtime produces setup-required guidance without a Python call; existing runtime runs full identity/context checks and cannot report ready on identity failure.",
+    "additional_evidence": "guard output; interpreter invocation count; identity refusal; context output"
+  },
+  "observed": "Before setup and after literal removal of the separately owned interpreter, native guidance says setup required and dispatch audit remains empty. The ready 0.16 control delivers complete context. The wrong 0.17 runtime actually calls session-context.py, fails full evaluator identity and delivers UNREADY. Original binding inputs are restored.",
+  "conclusion": "pass",
+  "qualification": {
+    "qualified": false,
+    "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+  },
+  "exit_status": null,
+  "exit_status_meaning": "No aggregate command was executed. Actual retained subprocess/observer statuses are indexed below; an assessment pass does not rewrite a raw exit.",
+  "exit_status_evidence": [
+    {
+      "path": "missing-01/observations.json",
+      "json_pointer": "/observer_exit_status",
+      "value": 0
+    },
+    {
+      "path": "removed-01/observations.json",
+      "json_pointer": "/observer_exit_status",
+      "value": 0
+    },
+    {
+      "path": "runtime-preparation/identity/command.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "runtime-preparation/install/command.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "runtime-preparation/venv/command.json",
+      "json_pointer": "/exit_status",
+      "value": 0
+    },
+    {
+      "path": "runtime-ready-01/observations.json",
+      "json_pointer": "/observer_exit_status",
+      "value": 0
+    },
+    {
+      "path": "wrong017-01/observations.json",
+      "json_pointer": "/observer_exit_status",
+      "value": 0
+    }
+  ],
+  "current_capture_directories": [
+    "missing-01",
+    "runtime-ready-01",
+    "removed-01",
+    "wrong017-01",
+    "runtime-preparation"
+  ],
+  "historical_capture_directories": [],
+  "limitations": [
+    "Invocation evidence concerns the selected absolute interpreter, not all unrelated OS Python processes.",
+    "The shared evaluator environment was not removed.",
+    "The wrong-identity shared handler returns logical failure at exit 0."
+  ],
+  "source_evidence": [
+    {
+      "path": "missing-01/actions.txt",
+      "bytes": 20283,
+      "sha256": "60350de6f11937a94fa0559b845a811e9951f95d27768209db8b29a0a3c86360",
+      "role": "current"
+    },
+    {
+      "path": "missing-01/binding-before.raw.json",
+      "bytes": 870,
+      "sha256": "c524c3975f7917d40d7199caaa22c9d3e8a01baa1edabf72c0c7cbb3362b0b94",
+      "role": "current"
+    },
+    {
+      "path": "missing-01/fault-setup.json",
+      "bytes": 159,
+      "sha256": "3729bd2d92d31b8139e682ce9c024a5b4f34642322069a69dcb3ba8167b317fd",
+      "role": "current"
+    },
+    {
+      "path": "missing-01/live/actions.txt",
+      "bytes": 370,
+      "sha256": "7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321",
+      "role": "current"
+    },
+    {
+      "path": "missing-01/live/dispatch.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "missing-01/live/observations.json",
+      "bytes": 51878,
+      "sha256": "a070706ce1054724db92beb656a88cc6a7b6ec66c805d7abe7c87814fd247efe",
+      "role": "current"
+    },
+    {
+      "path": "missing-01/live/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "missing-01/live/stdout.txt",
+      "bytes": 49889,
+      "sha256": "5e8068a8c404ef7a1d6b8f2acc0a5f5c400b932047e5166a2f6959715e6af52a",
+      "role": "current"
+    },
+    {
+      "path": "missing-01/live/transcript.json",
+      "bytes": 51961,
+      "sha256": "e139d1f60f6b268900bd879130ede21c46ea8dec2eb94a24336bcc463d792c25",
+      "role": "current"
+    },
+    {
+      "path": "missing-01/observations.json",
+      "bytes": 24215,
+      "sha256": "964ea215f9f4d22425d18be59a46315ae4f72641c32fa185e523eaeac1fc40d0",
+      "role": "current"
+    },
+    {
+      "path": "missing-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "missing-01/stdout.txt",
+      "bytes": 798,
+      "sha256": "679d0accb3ead5a362e893118beec8bf229c952a050cefec87c89e21ec8b8893",
+      "role": "current"
+    },
+    {
+      "path": "removed-01/actions.txt",
+      "bytes": 20564,
+      "sha256": "cae5ff93c43439720d62ef66c6c66032f10e92908049034a734aa2173a0dee4e",
+      "role": "current"
+    },
+    {
+      "path": "removed-01/binding-before.raw.json",
+      "bytes": 870,
+      "sha256": "c524c3975f7917d40d7199caaa22c9d3e8a01baa1edabf72c0c7cbb3362b0b94",
+      "role": "current"
+    },
+    {
+      "path": "removed-01/fault-setup.json",
+      "bytes": 158,
+      "sha256": "5634d84a41634bc28d04cdf8813b4cb609d5b2b1de0074a230f0228041db8c26",
+      "role": "current"
+    },
+    {
+      "path": "removed-01/live/actions.txt",
+      "bytes": 370,
+      "sha256": "7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321",
+      "role": "current"
+    },
+    {
+      "path": "removed-01/live/dispatch.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "removed-01/live/observations.json",
+      "bytes": 51878,
+      "sha256": "d2e80bc2c4afccbd3f1255bc7af4e524aa37cbb32f0fca8d324b11ab441247ae",
+      "role": "current"
+    },
+    {
+      "path": "removed-01/live/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "removed-01/live/stdout.txt",
+      "bytes": 49892,
+      "sha256": "bcebc9d93123cd5895ab935cdca1a8194ec75efe0ebcaeda6ba1db99298b2bcb",
+      "role": "current"
+    },
+    {
+      "path": "removed-01/live/transcript.json",
+      "bytes": 51964,
+      "sha256": "047be459d5057932b9665b9a8dab48acb1c2a0cbe6925b691cc1f5515e355537",
+      "role": "current"
+    },
+    {
+      "path": "removed-01/observations.json",
+      "bytes": 24492,
+      "sha256": "62545e83c8023034ccf166bef35c03fdc6fb66df2d7095b688be01e7a50bbcf6",
+      "role": "current"
+    },
+    {
+      "path": "removed-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "removed-01/stdout.txt",
+      "bytes": 798,
+      "sha256": "6087bbfd3100adba233559821d926ed548d541fd54af9f4c22760cfc7de7eb29",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation/identity/command.json",
+      "bytes": 1133,
+      "sha256": "65b15b45a5d4a92da8d1900c6b17059dc2446e4f6b687438b85ffba669020ae1",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation/identity/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation/identity/stdout.txt",
+      "bytes": 2189,
+      "sha256": "669120de36051f672b8332f9c83c0b92ed0df4cd26f276a241f6343e4893f056",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation/install/command.json",
+      "bytes": 416,
+      "sha256": "1a1d31540ad0340b7e587f58e822c2629e6a1a8f20e7c0f2d223835889742efd",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation/install/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation/install/stdout.txt",
+      "bytes": 207,
+      "sha256": "616edf6a355a6db7168c4055f92f0fdd275afef26d5cbd90693013022123d6a0",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation/owned-paths.json",
+      "bytes": 774,
+      "sha256": "6cad8875289eafcbcf5c7f8f6bcffe33f2f688dc96f2ddfc67277e647a7bf817",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation/venv/command.json",
+      "bytes": 350,
+      "sha256": "fdb552618206f3a65f47eb6714daaa5859badb29f9c7c0fd52d651aba2d79c28",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation/venv/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "runtime-preparation/venv/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "runtime-ready-01/actions.txt",
+      "bytes": 20293,
+      "sha256": "a4d8ad720cacd85061226b083d05212af15ca9d5980dd38b758c947b388e781a",
+      "role": "current"
+    },
+    {
+      "path": "runtime-ready-01/binding-before.raw.json",
+      "bytes": 870,
+      "sha256": "c524c3975f7917d40d7199caaa22c9d3e8a01baa1edabf72c0c7cbb3362b0b94",
+      "role": "current"
+    },
+    {
+      "path": "runtime-ready-01/fault-setup.json",
+      "bytes": 158,
+      "sha256": "acf620c93eb3aacc80257a5c633526b3448bc232cae48c393532c1a3294d80f9",
+      "role": "current"
+    },
+    {
+      "path": "runtime-ready-01/live/actions.txt",
+      "bytes": 370,
+      "sha256": "7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321",
+      "role": "current"
+    },
+    {
+      "path": "runtime-ready-01/live/dispatch.jsonl",
+      "bytes": 25183,
+      "sha256": "bb679cc5ddf3e969cd64d40bc332dc959e50f65c9571031255d5250ad8b0ca22",
+      "role": "current"
+    },
+    {
+      "path": "runtime-ready-01/live/observations.json",
+      "bytes": 51878,
+      "sha256": "63513e5471d4a343dca627b4fce052910180b3907c2a967d21ed2cce33273552",
+      "role": "current"
+    },
+    {
+      "path": "runtime-ready-01/live/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "runtime-ready-01/live/stdout.txt",
+      "bytes": 58115,
+      "sha256": "15dd2d2491a5f351b19541061ce1656f77a02b8c781859df85402efce368592b",
+      "role": "current"
+    },
+    {
+      "path": "runtime-ready-01/live/transcript.json",
+      "bytes": 60186,
+      "sha256": "e8d6d37a40aa11c4dea999c49dcae5b9daec56a7c6b59e3e045efbbfdea4c6ce",
+      "role": "current"
+    },
+    {
+      "path": "runtime-ready-01/observations.json",
+      "bytes": 32440,
+      "sha256": "a327c232ec4616cc8fb2c01acde9e332c1a6ba4c1b4358f1597a3f898805f2d4",
+      "role": "current"
+    },
+    {
+      "path": "runtime-ready-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "runtime-ready-01/stdout.txt",
+      "bytes": 804,
+      "sha256": "24cf13606571a51dfc2c0387c3890d6af4601efd31f24d916b056b1a713cec5b",
+      "role": "current"
+    },
+    {
+      "path": "wrong017-01/actions.txt",
+      "bytes": 20186,
+      "sha256": "0c1279e88474b07c7b974bfa2f85cb980b2d395f2e9b5fa2614139c1dcaf3508",
+      "role": "current"
+    },
+    {
+      "path": "wrong017-01/binding-before.raw.json",
+      "bytes": 870,
+      "sha256": "c524c3975f7917d40d7199caaa22c9d3e8a01baa1edabf72c0c7cbb3362b0b94",
+      "role": "current"
+    },
+    {
+      "path": "wrong017-01/fault-setup.json",
+      "bytes": 158,
+      "sha256": "63c22c934960074db1d3df0f7a4612669ee709691d0e338a240c67a13bb8a43d",
+      "role": "current"
+    },
+    {
+      "path": "wrong017-01/live/actions.txt",
+      "bytes": 370,
+      "sha256": "7ce5266e4bb5f8adee46eab34c338c59d13de20bcd96fd16576eed58775e8321",
+      "role": "current"
+    },
+    {
+      "path": "wrong017-01/live/dispatch.jsonl",
+      "bytes": 6041,
+      "sha256": "40c5f00cc6df8f8a469c7286ecaef30e94086d48f97a5a8d2c6c8a18b25d7311",
+      "role": "current"
+    },
+    {
+      "path": "wrong017-01/live/observations.json",
+      "bytes": 51878,
+      "sha256": "0a48290b2c123f994ce80742f0a50ff7e2cd87c01e90c727a09b45c2608a4429",
+      "role": "current"
+    },
+    {
+      "path": "wrong017-01/live/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "wrong017-01/live/stdout.txt",
+      "bytes": 50660,
+      "sha256": "d11cc555cc9ad774fff42ce924fa80baec9610e9c5f1dbbd9279da836293ac49",
+      "role": "current"
+    },
+    {
+      "path": "wrong017-01/live/transcript.json",
+      "bytes": 52733,
+      "sha256": "1b249037fef2eee24ffd2646d40de07130deb364cf779bb31fc4403636a8211e",
+      "role": "current"
+    },
+    {
+      "path": "wrong017-01/observations.json",
+      "bytes": 24777,
+      "sha256": "78771bdc191a0aeafaf2020f75faa86cb23ed5172c1a668a33774ec29d5da467",
+      "role": "current"
+    },
+    {
+      "path": "wrong017-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "wrong017-01/stdout.txt",
+      "bytes": 799,
+      "sha256": "d780990dfcbc6131a14989aedb0d4fc078e5e3ae46f68da82c383a2df13f7cd9",
+      "role": "current"
+    },
+    {
+      "path": "../../../verification/VER-PLG-005.md",
+      "bytes": 7948,
+      "sha256": "dea7963993a1be26b41bfa4d7a6c1199f2c19613940c01eeaef5d4ead9301e30",
+      "role": "approved expectation"
+    }
+  ]
+}

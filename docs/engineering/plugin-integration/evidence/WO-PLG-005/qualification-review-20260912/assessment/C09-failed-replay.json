@@ -1,0 +1,20 @@
+{
+  "qualified": false,
+  "enforcement_observed": true,
+  "conclusion": "pass",
+  "native_hook_seconds": 2.2841268999909516,
+  "evaluator_pid": 11868,
+  "descendant_pid": 30236,
+  "configured_budgets_seconds": {
+    "inner": 8,
+    "host": 30,
+    "startup": 4,
+    "cleanup": 4,
+    "output": 2
+  },
+  "cleanup_before_response": true,
+  "denied_effect_count": 0,
+  "native_observer_terminal_limited": true,
+  "mapping_evidence": "Exact final check argv binds the mapped target; no patch-content observation is claimed when the native host emits no fileChange.",
+  "limits": "This injected-fault observation does not qualify the instrumented runtime or unavailable hooks."
+}

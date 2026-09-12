@@ -1,0 +1,33 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\tests\\plugin_integration\\codex_adapter\\calibration.py",
+    "C07",
+    "--run",
+    "registered-shell-01"
+  ],
+  "source_sha256": {
+    "hooks/hooks.json": "2b768288dd11dca1510ea250e0b1cf9c7455e1f6d9152e62ed45482336c75a43",
+    "calibration.py": "562c1acf7fa42f2e68d93a92bc04660acb12b9934cacf864c46c09d3bb3faa87",
+    "sentinel-dispatch.py": "adbbdda7f98db0254319c0958ad92b9ff8d6c2d725c26c181a586aaad51dfa9e",
+    "selected-python": "199ce15a9f0d4f9522edba59338e4879d28cf61f88e377b8164bcb716275ed22",
+    "native-shell": "8bb6fa8c283b4d92120b1ef249a9b311b0f804d4cabbe9981159976c8be76a5e"
+  },
+  "fixture": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\codex-adapter-sandboxes\\accepted 001 with spaces\\registered shell calibration\\C07\\registered-shell-01",
+  "actions": [
+    "positive-sentinel-before",
+    "unaccepted-host-PreToolUse",
+    "unaccepted-host-SessionStart",
+    "empty-host-PreToolUse",
+    "empty-host-SessionStart",
+    "open-decision-PreToolUse",
+    "open-decision-SessionStart",
+    "excluded-route-PreToolUse",
+    "excluded-route-SessionStart",
+    "empty-positive-route-PreToolUse",
+    "empty-positive-route-SessionStart",
+    "positive-sentinel-after"
+  ]
+}

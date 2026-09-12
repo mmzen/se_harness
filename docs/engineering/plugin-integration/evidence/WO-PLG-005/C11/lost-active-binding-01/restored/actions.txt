@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+    "app-server",
+    "--stdio"
+  ],
+  "prompt": null,
+  "source": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\tests\\plugin_integration\\codex_adapter\\live.py"
+}

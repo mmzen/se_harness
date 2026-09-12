@@ -1,0 +1,35 @@
+{
+  "checks": [
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:.engineering-harness.toml",
+      "passed": false
+    },
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:.github/workflows/engineering-harness.yml",
+      "passed": false
+    },
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:ENGINEERING_HARNESS.md",
+      "passed": false
+    },
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:docs/engineering/ARTIFACT_AUTHORING.md",
+      "passed": false
+    },
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:docs/engineering/TRACEABILITY.md",
+      "passed": false
+    },
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:docs/engineering/templates/WORK_ORDER.template.md",
+      "passed": false
+    }
+  ],
+  "interpretation": "Candidate 0.18 templates differ from the governing 0.17 installation. Released doctor passes; this continuation changes neither source templates nor managed files."
+}

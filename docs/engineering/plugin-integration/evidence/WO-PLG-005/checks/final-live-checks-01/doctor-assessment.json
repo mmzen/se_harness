@@ -1,0 +1,37 @@
+{
+  "candidate_doctor_exit": 1,
+  "expected_only": true,
+  "failed_checks": [
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:.engineering-harness.toml",
+      "passed": false
+    },
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:.github/workflows/engineering-harness.yml",
+      "passed": false
+    },
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:ENGINEERING_HARNESS.md",
+      "passed": false
+    },
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:docs/engineering/ARTIFACT_AUTHORING.md",
+      "passed": false
+    },
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:docs/engineering/TRACEABILITY.md",
+      "passed": false
+    },
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:docs/engineering/templates/WORK_ORDER.template.md",
+      "passed": false
+    }
+  ],
+  "interpretation": "Existing candidate-source versus released-root version differences. Released doctor passes; no managed file changed."
+}

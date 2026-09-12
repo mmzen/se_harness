@@ -1,0 +1,1 @@
+{"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"Verity Plane UNREADY: No positively selected Codex route; no Python invoked. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed."}}

@@ -1,0 +1,19 @@
+{
+  "check": "candidate-doctor-boundary",
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+    "-B",
+    "-S",
+    "-m",
+    "se_harness",
+    "doctor",
+    ".",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+  "exit_status": 1,
+  "expected_exit_status": 1,
+  "duration_seconds": 2.115127400000347,
+  "stdout_sha256": "19529e0bef5d7e99af86613dfe864da1b9c15edc9dc1a5868b38382052543ab2",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,193 @@
+{
+  "schema": "verity-codex-acceptance-index-v1",
+  "case": "C03",
+  "created_at": "2026-09-11T21:09:20.749704+00:00",
+  "kind": "Agent-authored consolidation of retained observations; no new native run or assurance decision.",
+  "source_paths_relative_to": "This case directory",
+  "expected": {
+    "starting_fixture": "Supported tool event; one permitted and one refused fixture edit",
+    "action": "Request both edits through the real host.",
+    "observable_result": "check-tool-action.py runs before each effect; the refused edit leaves target bytes unchanged.",
+    "additional_evidence": "ordered event/effect log; before/after hashes"
+  },
+  "observed": "A synchronous checked hook precedes one correlated acceptance and completed permitted update to the reviewed LF bytes. The out-of-scope edit receives a matching native blocked receipt and WEX201 evaluator denial before any approval/effect; all refused-case target hashes are unchanged.",
+  "conclusion": "pass",
+  "qualification": {
+    "qualified": false,
+    "reason": "Observation result only; WO-PLG-005 remains in_progress and whole-adapter qualification is unresolved."
+  },
+  "exit_status": null,
+  "exit_status_meaning": "No aggregate command was executed. Actual retained subprocess/observer statuses are indexed below; an assessment pass does not rewrite a raw exit.",
+  "exit_status_evidence": [],
+  "current_capture_directories": [
+    "permitted-edit-02",
+    "refused-edit-01",
+    "observer-preparation"
+  ],
+  "historical_capture_directories": [
+    "permitted-edit-01"
+  ],
+  "limitations": [
+    "The first CRLF-after plan mismatch stopped before approval.",
+    "The refused capture has observer exit 1/unavailable because native refusal emits no fileChange item; its independent assessment establishes refusal from native/evaluator correlation and effects without rewriting the original.",
+    "No refused replacement bytes are inferred from its prompt."
+  ],
+  "source_evidence": [
+    {
+      "path": "observer-preparation/c03-permitted-plan.json",
+      "bytes": 168,
+      "sha256": "cd577324c6358aadd8c4dd6b2ec80f7c317903f072964850e5698ff1992754b1",
+      "role": "current"
+    },
+    {
+      "path": "observer-preparation/c03-permitted-preflight.json",
+      "bytes": 6614,
+      "sha256": "248481444ee6399e234a97c897dfd1df3cbb60cad36df5d1482011f78a89f973",
+      "role": "current"
+    },
+    {
+      "path": "observer-preparation/review.md",
+      "bytes": 782,
+      "sha256": "269fe7c6aafcb4d39f0ad0d44fd2833de5b92cdf3c234e64bf4acb69e34cd0f2",
+      "role": "current"
+    },
+    {
+      "path": "observer-preparation/source-hashes.json",
+      "bytes": 363,
+      "sha256": "9a4727dd02a4918dfc35991a6fd6151643ebdc4dc19014ae844d122ceb187b1e",
+      "role": "current"
+    },
+    {
+      "path": "permitted-edit-01/actions.txt",
+      "bytes": 6146,
+      "sha256": "4f32b8e76fe51a66248dbc556d6f163858acdc91a9ffb7505ec8a2454ef1aaf1",
+      "role": "historical"
+    },
+    {
+      "path": "permitted-edit-01/dispatch.jsonl",
+      "bytes": 48901,
+      "sha256": "0cd3f725dd14cf9022408acf37f626229c4443ad02a1b8a975a187c26e26e221",
+      "role": "historical"
+    },
+    {
+      "path": "permitted-edit-01/observations.json",
+      "bytes": 23338,
+      "sha256": "b1a486d8f156bb42ad1cf77eaa2ec5adc0c72eaaba62e850d5f995d46d5b6f78",
+      "role": "historical"
+    },
+    {
+      "path": "permitted-edit-01/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "historical"
+    },
+    {
+      "path": "permitted-edit-01/stdout.txt",
+      "bytes": 46032,
+      "sha256": "d4177a58994dbd74496403259ed5f4167e09ff2d3e9776cbda6ffe4386100119",
+      "role": "historical"
+    },
+    {
+      "path": "permitted-edit-01/transcript.json",
+      "bytes": 47621,
+      "sha256": "93fb01af8dd91031348b9326a90f4facdfc56050f27fcb624ef0ecacfb3aa43a",
+      "role": "historical"
+    },
+    {
+      "path": "permitted-edit-02/actions.txt",
+      "bytes": 6141,
+      "sha256": "df006ed2c95df320bf65041dcea5bd051b9bae009a049da1ae0d696ed9c145a5",
+      "role": "current"
+    },
+    {
+      "path": "permitted-edit-02/approval-prepared.json",
+      "bytes": 1385,
+      "sha256": "e0fc581dfccbca7bdd5737ed60b246e62bf3b57b398e4c34cfffd7ead6a756f3",
+      "role": "current"
+    },
+    {
+      "path": "permitted-edit-02/dispatch.jsonl",
+      "bytes": 48896,
+      "sha256": "e91600f74adc0053efc971d50007594332b2e1eb958782b6fe85b8517a89706b",
+      "role": "current"
+    },
+    {
+      "path": "permitted-edit-02/independent-assessment.json",
+      "bytes": 2504,
+      "sha256": "8e8b2365e85d205b0a87bf101d3ff44f97c5e27dbfcd7da63efa7e015188de0e",
+      "role": "current"
+    },
+    {
+      "path": "permitted-edit-02/observations.json",
+      "bytes": 23302,
+      "sha256": "5ba62af7abef4a2c2384222c8a52f481a1470f19424e5b34057b80b3034cdc77",
+      "role": "current"
+    },
+    {
+      "path": "permitted-edit-02/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "role": "current"
+    },
+    {
+      "path": "permitted-edit-02/stdout.txt",
+      "bytes": 63080,
+      "sha256": "b98d8412dec164fed3ccb9c29a67c66ce6cbac3a8fc13b6b2bb60b9fe56171bd",
+      "role": "current"
+    },
+    {
+      "path": "permitted-edit-02/transcript.json",
+      "bytes": 64758,
+      "sha256": "311f8e289f5c7e6b44e0aa88d52852c50402261c3b57f4a0d0dfb61f8c63875c",
+      "role": "current"
+    },
+    {
+      "path": "refused-edit-01/actions.txt",
+      "bytes": 6131,
+      "sha256": "691a13d084af73e6ab63f9e7f535d5e4723d67f9436cbc57d292758a58aace55",
+      "role": "current"
+    },
+    {
+      "path": "refused-edit-01/dispatch.jsonl",
+      "bytes": 49088,
+      "sha256": "ecd0eb743f68c44d33e7d84453e94acc3bb162728d827c7212fd8c300844bdc6",
+      "role": "current"
+    },
+    {
+      "path": "refused-edit-01/independent-assessment.json",
+      "bytes": 6694,
+      "sha256": "5ae3db88d8667edede9803625ba0c9a9ec189ce72ea94aaf55bbb8cba08c0e59",
+      "role": "current"
+    },
+    {
+      "path": "refused-edit-01/observations.json",
+      "bytes": 23319,
+      "sha256": "2b7bd4d5b99bd155cb8246fa41371c26981747ba8b8fa9ecada207238042a3c1",
+      "role": "current"
+    },
+    {
+      "path": "refused-edit-01/stderr.txt",
+      "bytes": 329,
+      "sha256": "20393182d5e054e2d3ad0334a26b8cf3d8c142912b69463daaaa7317e527d19f",
+      "role": "current"
+    },
+    {
+      "path": "refused-edit-01/stdout.txt",
+      "bytes": 58040,
+      "sha256": "da7497ab8d410c5ae7211d3b8b0c2e6554dbf686507e35ce65a33a41924b7b3e",
+      "role": "current"
+    },
+    {
+      "path": "refused-edit-01/transcript.json",
+      "bytes": 59622,
+      "sha256": "db6a97a00c719cffa0bff7fa1148d14922abbad7f6c83aa9bd4d8b31383e318f",
+      "role": "current"
+    },
+    {
+      "path": "../../../verification/VER-PLG-005.md",
+      "bytes": 7948,
+      "sha256": "dea7963993a1be26b41bfa4d7a6c1199f2c19613940c01eeaef5d4ead9301e30",
+      "role": "approved expectation"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "asset_revision": "ab8d6e2049f87a2d5f1820590f86dfaafdf40416",
+  "archive_sha256": "be1da57d09bb8ec3dbe24542edf0aced6596fc00176f8c07c9adf2c064857746",
+  "package_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\codex-adapter-sandboxes\\accepted 001 with spaces\\marketplace with spaces\\plugins\\verity-plane",
+  "payload": {
+    "assembly-inventory.json": "940441c3cc0e1ed92dc778548a4819ecea776798627db0d4bdb02871e28d6314",
+    ".codex-plugin/plugin.json": "9bb3ca7b2fd94a3aac56de016d563784d17b4d6a1782c9b79f59318954614157",
+    "hooks/hooks.json": "432f5f55ab07efece228aec5c42d7eea5b1d1c69fe23cf94afd52ef2c8361455",
+    "packages/se_harness-0.16.0-py3-none-any.whl": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+    "scripts/check-tool-action.py": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4",
+    "scripts/codex-dispatch.py": "0fff01519f5b4642d2593130e344b8fe2abb26e06051e8d6f3da1f85237f789d",
+    "scripts/session-context.py": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb",
+    "skills/change/SKILL.md": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13",
+    "skills/evidence/SKILL.md": "647c20a982c798c0617145cbcfe2f3356d23b4f827641b6affff9592bf02ad3b",
+    "skills/setup/SKILL.md": "68b3270b2ed4b8ad3651b6ff2ad737a425f8e7e3034df7fc065fb4e0feb03271",
+    "skills/setup/references/environment.md": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+    "skills/evidence/references/external-actions.md": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+    "skills/evidence/references/records.md": "0c266bef118b904030e1982318763021bdfd699e34b353d4f38e5d9f2f43a20b",
+    "skills/change/references/artifacts.md": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3",
+    "skills/change/references/authority.md": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f",
+    "skills/change/references/work-orders.md": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8"
+  },
+  "companion": "The Claude output is an explicitly inert assembly fixture; no native Claude support claim."
+}

@@ -1,0 +1,17 @@
+{
+  "check": "candidate-help",
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-017\\Scripts\\python.exe",
+    "-B",
+    "-S",
+    "-m",
+    "se_harness",
+    "--help"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter",
+  "exit_status": 0,
+  "expected_exit_status": 0,
+  "duration_seconds": 0.5561279999965336,
+  "stdout_sha256": "bd6eb5ee50cb73d0c1e5d736a1318fe1a80c554eb03b8b926ef75431b5fa9fef",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

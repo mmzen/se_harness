@@ -1,0 +1,13 @@
+{
+  "checks": [
+    {
+      "actual_pre_tool_use_enabled": true,
+      "actual_session_start_enabled": false,
+      "comparison_only": "One copied enabled field was set true solely to reuse all other normal inventory checks; original hooks/list and returned enabled=false remain retained.",
+      "normal_validator_rejected": "required hook is missing, disabled or untrusted"
+    }
+  ],
+  "phase": "disabled",
+  "plan_sha256": "a1016f8327d49020e18015489d45d0bf492b7964c44d59512c36fda50f3c7e90",
+  "runner_sha256": "70ae08a52a86aa09ecac52ae9448ff6bd85044942e053509defaa213b6cc45d6"
+}

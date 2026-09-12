@@ -1,0 +1,6 @@
+{
+  "schema": "verity-one-edit-v1",
+  "target": "governed-target.txt",
+  "before_utf8": "initial fixture target\r\n",
+  "after_utf8": "WO-PLG-005 permitted edit\r\n"
+}

@@ -1,0 +1,109 @@
+{
+  "id": 1,
+  "result": {
+    "userAgent": "verity-c12-inventory/0.153.4 (Windows 10.0.26200; x86_64) dumb (verity-c12-inventory; 0.0.1)",
+    "codexHome": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex",
+    "platformFamily": "windows",
+    "platformOs": "windows"
+  }
+}
+{
+  "method": "remoteControl/status/changed",
+  "params": {
+    "status": "disabled",
+    "serverName": "mmzen",
+    "installationId": "cf94518d-be84-4f02-9885-855df67a3e51",
+    "environmentId": null
+  },
+  "emittedAtMs": 1789160315586
+}
+{
+  "id": 2,
+  "result": {
+    "data": [
+      {
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\codex-adapter-sandboxes\\accepted 001 with spaces\\repo with spaces",
+        "hooks": [
+          {
+            "key": "codex-probe@codex-probe-local:hooks/hooks.json:pre_tool_use:0:0",
+            "eventName": "preToolUse",
+            "handlerType": "command",
+            "command": "$ErrorActionPreference='Stop'; $raw=[Console]::In.ReadToEnd(); $event=$raw|ConvertFrom-Json; $data=$env:PLUGIN_DATA; if(!$data){throw 'PLUGIN_DATA absent'}; New-Item -ItemType Directory -Path $data -Force|Out-Null; [ordered]@{event=$event.hook_event_name; source=$event.source; cwd=$event.cwd; plugin_data=$data; plugin_root=$env:PLUGIN_ROOT; timestamp=[DateTimeOffset]::UtcNow.ToString('o')} |ConvertTo-Json -Compress|Add-Content -LiteralPath (Join-Path $data 'inline-events.jsonl'); if($event.hook_event_name -eq 'PreToolUse' -and (($event.tool_input|ConvertTo-Json -Depth 20 -Compress) -like '*CODEX_PROBE_DENY_SENTINEL*')){[Console]::Error.WriteLine('CODEX_PROBE_DENY_SENTINEL: exact test-only write refused; not a production policy decision'); exit 2}; $pointer=Join-Path $data 'runtime-path.txt'; if(Test-Path -LiteralPath $pointer){$python=(Get-Content -LiteralPath $pointer -Raw).Trim(); if(Test-Path -LiteralPath $python -PathType Leaf){ $raw|& $python -I (Join-Path $env:PLUGIN_ROOT 'observe_ready_runtime.py'); exit $LASTEXITCODE}}; if($event.hook_event_name -eq 'SessionStart'){ Write-Output 'CODEX_PROBE_INLINE_003: Setup required. Supplied Python 3.11+ with venv/ensurepip is required. No Python was invoked. This fixture is not governance-ready; ordinary governed writes remain prohibited. The exact CODEX_PROBE_DENY_SENTINEL negative-test command may be attempted once only to observe its hook refusal; never retry or bypass that refusal. Authorized setup commands remain permitted.'}; exit 0",
+            "async": false,
+            "matcher": null,
+            "timeoutSec": 10,
+            "statusMessage": null,
+            "additionalContextLimit": null,
+            "sourcePath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.7\\hooks\\hooks.json",
+            "source": "plugin",
+            "pluginId": "codex-probe@codex-probe-local",
+            "displayOrder": 0,
+            "enabled": false,
+            "isManaged": false,
+            "currentHash": "sha256:cc297ef88256c5b56a0016d8a9ddf63c8f0010166c6f4bab8911b306ab2449ed",
+            "trustStatus": "trusted"
+          },
+          {
+            "key": "codex-probe@codex-probe-local:hooks/hooks.json:session_start:0:0",
+            "eventName": "sessionStart",
+            "handlerType": "command",
+            "command": "$ErrorActionPreference='Stop'; $raw=[Console]::In.ReadToEnd(); $event=$raw|ConvertFrom-Json; $data=$env:PLUGIN_DATA; if(!$data){throw 'PLUGIN_DATA absent'}; New-Item -ItemType Directory -Path $data -Force|Out-Null; [ordered]@{event=$event.hook_event_name; source=$event.source; cwd=$event.cwd; plugin_data=$data; plugin_root=$env:PLUGIN_ROOT; timestamp=[DateTimeOffset]::UtcNow.ToString('o')} |ConvertTo-Json -Compress|Add-Content -LiteralPath (Join-Path $data 'inline-events.jsonl'); if($event.hook_event_name -eq 'PreToolUse' -and (($event.tool_input|ConvertTo-Json -Depth 20 -Compress) -like '*CODEX_PROBE_DENY_SENTINEL*')){[Console]::Error.WriteLine('CODEX_PROBE_DENY_SENTINEL: exact test-only write refused; not a production policy decision'); exit 2}; $pointer=Join-Path $data 'runtime-path.txt'; if(Test-Path -LiteralPath $pointer){$python=(Get-Content -LiteralPath $pointer -Raw).Trim(); if(Test-Path -LiteralPath $python -PathType Leaf){ $raw|& $python -I (Join-Path $env:PLUGIN_ROOT 'observe_ready_runtime.py'); exit $LASTEXITCODE}}; if($event.hook_event_name -eq 'SessionStart'){ Write-Output 'CODEX_PROBE_INLINE_003: Setup required. Supplied Python 3.11+ with venv/ensurepip is required. No Python was invoked. This fixture is not governance-ready; ordinary governed writes remain prohibited. The exact CODEX_PROBE_DENY_SENTINEL negative-test command may be attempted once only to observe its hook refusal; never retry or bypass that refusal. Authorized setup commands remain permitted.'}; exit 0",
+            "async": false,
+            "matcher": "startup|resume|clear|compact",
+            "timeoutSec": 10,
+            "statusMessage": null,
+            "additionalContextLimit": null,
+            "sourcePath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.7\\hooks\\hooks.json",
+            "source": "plugin",
+            "pluginId": "codex-probe@codex-probe-local",
+            "displayOrder": 1,
+            "enabled": false,
+            "isManaged": false,
+            "currentHash": "sha256:9494b4d2540467f6ee4fa9ea56df5f149446b21b62f013f584d01b924b4d590b",
+            "trustStatus": "trusted"
+          },
+          {
+            "key": "verity-plane@verity-plane-codex-fixture:hooks/hooks.json:pre_tool_use:0:0",
+            "eventName": "preToolUse",
+            "handlerType": "command",
+            "command": "$ErrorActionPreference='Stop';\n$OutputEncoding=[Text.UTF8Encoding]::new($false);\n[Console]::InputEncoding=[Text.UTF8Encoding]::new($false);\n[Console]::OutputEncoding=[Text.UTF8Encoding]::new($false);\n$kind='PreToolUse';\n$raw=[Console]::In.ReadToEnd();\nfunction Ordinary([string]$name) {\n    if (!$name -or ![IO.Path]::IsPathRooted($name) -or $name -match '(^|[\\\\/])\\.\\.([\\\\/]|$)' -or $name -match '[\\x00-\\x1f]') { throw 'Absolute ordinary binding paths required' };\n    $root=[IO.Path]::GetPathRoot($name);\n    if($root -notmatch '^[A-Za-z]:[\\\\/]$' -and $root -notmatch '^[\\\\/]{2}[^\\\\/]+[\\\\/][^\\\\/]+[\\\\/]?$') { throw 'Fully qualified absolute binding paths required; no Python invoked' };\n    $item=$name;\n    while($item) {\n        if(Test-Path -LiteralPath $item) { if((Get-Item -LiteralPath $item -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Linked binding paths unsupported' } };\n        $item=[IO.Path]::GetDirectoryName($item)\n    }\n}\nfunction Fields($value,[string[]]$names) {\n    if($value -isnot [System.Management.Automation.PSCustomObject] -or $value.PSObject.Properties.Name.Count -ne $names.Count) { throw 'Missing or unknown selected binding fields' };\n    foreach($name in $names) { if($value.PSObject.Properties.Name -cnotcontains $name) { throw 'Missing or unknown selected binding fields' } }\n}\ntry {\n    if($raw.Length -gt 65536) { throw 'Host input exceeds the supported size' };\n    $event=$raw|ConvertFrom-Json;\n    if($event -isnot [System.Management.Automation.PSCustomObject]) { throw 'Host input must be an object' };\n    if($event.hook_event_name -ne $kind) { throw 'Event differs from registered binding' };\n    if($event.cwd -isnot [string] -or [string]::IsNullOrWhiteSpace($event.cwd)) { throw 'Host repository field missing' };\n    Ordinary $event.cwd;\n    if($kind -eq 'PreToolUse' -and ($event.tool_name -isnot [string] -or [string]::IsNullOrWhiteSpace($event.tool_name) -or $event.PSObject.Properties.Name -notcontains 'tool_input')) { throw 'Host tool fields missing or malformed' };\n    if($kind -eq 'PreToolUse' -and $event.tool_name -ne 'apply_patch') {\n        @{systemMessage='UNENFORCED COVERAGE GAP: this tool has no Verity Plane evaluator mapping. No successful governance check is claimed. Ordinary host permissions and already-authorized setup remain available.'}|ConvertTo-Json -Compress;\n        exit 0\n    };\n    $data=$env:PLUGIN_DATA; Ordinary $data;\n    $config=Join-Path $data 'binding.json'; Ordinary $config;\n    if(!(Test-Path -LiteralPath $config -PathType Leaf)) { throw 'Setup required: explicitly select a prepared environment and repository binding; no Python invoked' };\n    $binding=Get-Content -LiteralPath $config -Raw -Encoding UTF8|ConvertFrom-Json;\n    Fields $binding @('schema','repo','environment','artifact','profile','decision','capture');\n    if($binding.schema -cne 'verity-codex-binding-v1' -or $binding.capture -isnot [bool]) { throw 'Unsupported binding schema; no Python invoked' };\n    Fields $binding.profile @('host','os','python','evaluator');\n    if($binding.profile.host -cne '0.153.4' -or $binding.profile.os -cne 'windows' -or $binding.profile.python -cne '3.14.6' -or $binding.profile.evaluator -cne '0.16.0') { throw 'Unsupported selected profile; no Python invoked' };\n    Fields $binding.decision @('id','status','option');\n    if($binding.decision.id -cne 'DEC-PLG-001' -or $binding.decision.status -cne 'decided' -or $binding.decision.option -cne 'prove-supported-route') { throw 'No positively selected Codex route; no Python invoked' };\n    Ordinary $binding.environment; Ordinary $binding.repo;\n    $envPath=[IO.Path]::GetFullPath($binding.environment).TrimEnd('\\');\n    $repoPath=[IO.Path]::GetFullPath($binding.repo).TrimEnd('\\');\n    if($envPath -eq $repoPath -or $envPath.StartsWith($repoPath+'\\',[StringComparison]::OrdinalIgnoreCase) -or $repoPath.StartsWith($envPath+'\\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Evaluator environment must be outside the repository' };\n    $python=Join-Path $binding.environment 'Scripts/python.exe'; Ordinary $python;\n    if(!(Test-Path -LiteralPath $python -PathType Leaf)) { throw 'Setup required: selected interpreter absent; no Python invoked' };\n    $script=Join-Path $env:PLUGIN_ROOT 'scripts/codex-dispatch.py'; Ordinary $script;\n    if(!(Test-Path -LiteralPath $script -PathType Leaf)) { throw 'Adapter dispatcher missing; no successful check' };\n    $raw|& $python -I -B $script --data $data --event $kind;\n    if($LASTEXITCODE -ne 0) { throw 'Adapter launch/script failed; inspect effects before retry' };\n    exit 0\n} catch {\n    $message='Verity Plane UNREADY: '+$_.Exception.Message+'. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed.';\n    if($kind -eq 'PreToolUse') {\n        @{hookSpecificOutput=@{hookEventName='PreToolUse';permissionDecision='deny';permissionDecisionReason=$message}}|ConvertTo-Json -Depth 4 -Compress\n    } else {\n        @{hookSpecificOutput=@{hookEventName='SessionStart';additionalContext=$message}}|ConvertTo-Json -Depth 4 -Compress\n    };\n    exit 0\n}\n",
+            "async": false,
+            "matcher": null,
+            "timeoutSec": 30,
+            "statusMessage": null,
+            "additionalContextLimit": null,
+            "sourcePath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\verity-plane-codex-fixture\\verity-plane\\0.0.1+codex.20260911195218\\hooks\\hooks.json",
+            "source": "plugin",
+            "pluginId": "verity-plane@verity-plane-codex-fixture",
+            "displayOrder": 2,
+            "enabled": true,
+            "isManaged": false,
+            "currentHash": "sha256:f39cf9eac1e46f8bc70dc5b6c60e1ba1b4ce51a15affbc3210a0a70cac8821cb",
+            "trustStatus": "trusted"
+          },
+          {
+            "key": "verity-plane@verity-plane-codex-fixture:hooks/hooks.json:session_start:0:0",
+            "eventName": "sessionStart",
+            "handlerType": "command",
+            "command": "$ErrorActionPreference='Stop';\n$OutputEncoding=[Text.UTF8Encoding]::new($false);\n[Console]::InputEncoding=[Text.UTF8Encoding]::new($false);\n[Console]::OutputEncoding=[Text.UTF8Encoding]::new($false);\n$kind='SessionStart';\n$raw=[Console]::In.ReadToEnd();\nfunction Ordinary([string]$name) {\n    if (!$name -or ![IO.Path]::IsPathRooted($name) -or $name -match '(^|[\\\\/])\\.\\.([\\\\/]|$)' -or $name -match '[\\x00-\\x1f]') { throw 'Absolute ordinary binding paths required' };\n    $root=[IO.Path]::GetPathRoot($name);\n    if($root -notmatch '^[A-Za-z]:[\\\\/]$' -and $root -notmatch '^[\\\\/]{2}[^\\\\/]+[\\\\/][^\\\\/]+[\\\\/]?$') { throw 'Fully qualified absolute binding paths required; no Python invoked' };\n    $item=$name;\n    while($item) {\n        if(Test-Path -LiteralPath $item) { if((Get-Item -LiteralPath $item -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Linked binding paths unsupported' } };\n        $item=[IO.Path]::GetDirectoryName($item)\n    }\n}\nfunction Fields($value,[string[]]$names) {\n    if($value -isnot [System.Management.Automation.PSCustomObject] -or $value.PSObject.Properties.Name.Count -ne $names.Count) { throw 'Missing or unknown selected binding fields' };\n    foreach($name in $names) { if($value.PSObject.Properties.Name -cnotcontains $name) { throw 'Missing or unknown selected binding fields' } }\n}\ntry {\n    if($raw.Length -gt 65536) { throw 'Host input exceeds the supported size' };\n    $event=$raw|ConvertFrom-Json;\n    if($event -isnot [System.Management.Automation.PSCustomObject]) { throw 'Host input must be an object' };\n    if($event.hook_event_name -ne $kind) { throw 'Event differs from registered binding' };\n    if($event.cwd -isnot [string] -or [string]::IsNullOrWhiteSpace($event.cwd)) { throw 'Host repository field missing' };\n    Ordinary $event.cwd;\n    if($kind -eq 'PreToolUse' -and ($event.tool_name -isnot [string] -or [string]::IsNullOrWhiteSpace($event.tool_name) -or $event.PSObject.Properties.Name -notcontains 'tool_input')) { throw 'Host tool fields missing or malformed' };\n    if($kind -eq 'PreToolUse' -and $event.tool_name -ne 'apply_patch') {\n        @{systemMessage='UNENFORCED COVERAGE GAP: this tool has no Verity Plane evaluator mapping. No successful governance check is claimed. Ordinary host permissions and already-authorized setup remain available.'}|ConvertTo-Json -Compress;\n        exit 0\n    };\n    $data=$env:PLUGIN_DATA; Ordinary $data;\n    $config=Join-Path $data 'binding.json'; Ordinary $config;\n    if(!(Test-Path -LiteralPath $config -PathType Leaf)) { throw 'Setup required: explicitly select a prepared environment and repository binding; no Python invoked' };\n    $binding=Get-Content -LiteralPath $config -Raw -Encoding UTF8|ConvertFrom-Json;\n    Fields $binding @('schema','repo','environment','artifact','profile','decision','capture');\n    if($binding.schema -cne 'verity-codex-binding-v1' -or $binding.capture -isnot [bool]) { throw 'Unsupported binding schema; no Python invoked' };\n    Fields $binding.profile @('host','os','python','evaluator');\n    if($binding.profile.host -cne '0.153.4' -or $binding.profile.os -cne 'windows' -or $binding.profile.python -cne '3.14.6' -or $binding.profile.evaluator -cne '0.16.0') { throw 'Unsupported selected profile; no Python invoked' };\n    Fields $binding.decision @('id','status','option');\n    if($binding.decision.id -cne 'DEC-PLG-001' -or $binding.decision.status -cne 'decided' -or $binding.decision.option -cne 'prove-supported-route') { throw 'No positively selected Codex route; no Python invoked' };\n    Ordinary $binding.environment; Ordinary $binding.repo;\n    $envPath=[IO.Path]::GetFullPath($binding.environment).TrimEnd('\\');\n    $repoPath=[IO.Path]::GetFullPath($binding.repo).TrimEnd('\\');\n    if($envPath -eq $repoPath -or $envPath.StartsWith($repoPath+'\\',[StringComparison]::OrdinalIgnoreCase) -or $repoPath.StartsWith($envPath+'\\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Evaluator environment must be outside the repository' };\n    $python=Join-Path $binding.environment 'Scripts/python.exe'; Ordinary $python;\n    if(!(Test-Path -LiteralPath $python -PathType Leaf)) { throw 'Setup required: selected interpreter absent; no Python invoked' };\n    $script=Join-Path $env:PLUGIN_ROOT 'scripts/codex-dispatch.py'; Ordinary $script;\n    if(!(Test-Path -LiteralPath $script -PathType Leaf)) { throw 'Adapter dispatcher missing; no successful check' };\n    $raw|& $python -I -B $script --data $data --event $kind;\n    if($LASTEXITCODE -ne 0) { throw 'Adapter launch/script failed; inspect effects before retry' };\n    exit 0\n} catch {\n    $message='Verity Plane UNREADY: '+$_.Exception.Message+'. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed.';\n    if($kind -eq 'PreToolUse') {\n        @{hookSpecificOutput=@{hookEventName='PreToolUse';permissionDecision='deny';permissionDecisionReason=$message}}|ConvertTo-Json -Depth 4 -Compress\n    } else {\n        @{hookSpecificOutput=@{hookEventName='SessionStart';additionalContext=$message}}|ConvertTo-Json -Depth 4 -Compress\n    };\n    exit 0\n}\n",
+            "async": false,
+            "matcher": "startup|resume|clear|compact",
+            "timeoutSec": 30,
+            "statusMessage": null,
+            "additionalContextLimit": null,
+            "sourcePath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\verity-plane-codex-fixture\\verity-plane\\0.0.1+codex.20260911195218\\hooks\\hooks.json",
+            "source": "plugin",
+            "pluginId": "verity-plane@verity-plane-codex-fixture",
+            "displayOrder": 3,
+            "enabled": true,
+            "isManaged": false,
+            "currentHash": "sha256:3d24ebbb6f1df466e491ac2738c5895b5bef36d63c5ed24be257517d59c56ab3",
+            "trustStatus": "trusted"
+          }
+        ],
+        "warnings": [],
+        "errors": []
+      }
+    ]
+  }
+}

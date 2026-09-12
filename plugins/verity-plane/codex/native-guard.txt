@@ -1,0 +1,62 @@
+$ErrorActionPreference='Stop';
+$OutputEncoding=[Text.UTF8Encoding]::new($false);
+[Console]::InputEncoding=[Text.UTF8Encoding]::new($false);
+[Console]::OutputEncoding=[Text.UTF8Encoding]::new($false);
+$kind='__EVENT__';
+$raw=[Console]::In.ReadToEnd();
+function Ordinary([string]$name) {
+    if (!$name -or ![IO.Path]::IsPathRooted($name) -or $name -match '(^|[\\/])\.\.([\\/]|$)' -or $name -match '[\x00-\x1f]') { throw 'Absolute ordinary binding paths required' };
+    $root=[IO.Path]::GetPathRoot($name);
+    if($root -notmatch '^[A-Za-z]:[\\/]$' -and $root -notmatch '^[\\/]{2}[^\\/]+[\\/][^\\/]+[\\/]?$') { throw 'Fully qualified absolute binding paths required; no Python invoked' };
+    $item=$name;
+    while($item) {
+        if(Test-Path -LiteralPath $item) { if((Get-Item -LiteralPath $item -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Linked binding paths unsupported' } };
+        $item=[IO.Path]::GetDirectoryName($item)
+    }
+}
+function Fields($value,[string[]]$names) {
+    if($value -isnot [System.Management.Automation.PSCustomObject] -or $value.PSObject.Properties.Name.Count -ne $names.Count) { throw 'Missing or unknown selected binding fields' };
+    foreach($name in $names) { if($value.PSObject.Properties.Name -cnotcontains $name) { throw 'Missing or unknown selected binding fields' } }
+}
+try {
+    if($raw.Length -gt 65536) { throw 'Host input exceeds the supported size' };
+    $event=$raw|ConvertFrom-Json;
+    if($event -isnot [System.Management.Automation.PSCustomObject]) { throw 'Host input must be an object' };
+    if($event.hook_event_name -ne $kind) { throw 'Event differs from registered binding' };
+    if($event.cwd -isnot [string] -or [string]::IsNullOrWhiteSpace($event.cwd)) { throw 'Host repository field missing' };
+    Ordinary $event.cwd;
+    if($kind -eq 'PreToolUse' -and ($event.tool_name -isnot [string] -or [string]::IsNullOrWhiteSpace($event.tool_name) -or $event.PSObject.Properties.Name -notcontains 'tool_input')) { throw 'Host tool fields missing or malformed' };
+    if($kind -eq 'PreToolUse' -and $event.tool_name -ne 'apply_patch') {
+        @{systemMessage='UNENFORCED COVERAGE GAP: this tool has no Verity Plane evaluator mapping. No successful governance check is claimed. Ordinary host permissions and already-authorized setup remain available.'}|ConvertTo-Json -Compress;
+        exit 0
+    };
+    $data=$env:PLUGIN_DATA; Ordinary $data;
+    $config=Join-Path $data 'binding.json'; Ordinary $config;
+    if(!(Test-Path -LiteralPath $config -PathType Leaf)) { throw 'Setup required: explicitly select a prepared environment and repository binding; no Python invoked' };
+    $binding=Get-Content -LiteralPath $config -Raw -Encoding UTF8|ConvertFrom-Json;
+    Fields $binding @('schema','repo','environment','artifact','profile','decision','capture');
+    if($binding.schema -cne 'verity-codex-binding-v1' -or $binding.capture -isnot [bool]) { throw 'Unsupported binding schema; no Python invoked' };
+    Fields $binding.profile @('host','os','python','evaluator');
+    if($binding.profile.host -cne '0.153.4' -or $binding.profile.os -cne 'windows' -or $binding.profile.python -cne '3.14.6' -or $binding.profile.evaluator -cne '0.16.0') { throw 'Unsupported selected profile; no Python invoked' };
+    Fields $binding.decision @('id','status','option');
+    if($binding.decision.id -cne 'DEC-PLG-001' -or $binding.decision.status -cne 'decided' -or $binding.decision.option -cne 'prove-supported-route') { throw 'No positively selected Codex route; no Python invoked' };
+    Ordinary $binding.environment; Ordinary $binding.repo;
+    $envPath=[IO.Path]::GetFullPath($binding.environment).TrimEnd('\');
+    $repoPath=[IO.Path]::GetFullPath($binding.repo).TrimEnd('\');
+    if($envPath -eq $repoPath -or $envPath.StartsWith($repoPath+'\',[StringComparison]::OrdinalIgnoreCase) -or $repoPath.StartsWith($envPath+'\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Evaluator environment must be outside the repository' };
+    $python=Join-Path $binding.environment 'Scripts/python.exe'; Ordinary $python;
+    if(!(Test-Path -LiteralPath $python -PathType Leaf)) { throw 'Setup required: selected interpreter absent; no Python invoked' };
+    $script=Join-Path $env:PLUGIN_ROOT 'scripts/codex-dispatch.py'; Ordinary $script;
+    if(!(Test-Path -LiteralPath $script -PathType Leaf)) { throw 'Adapter dispatcher missing; no successful check' };
+    $raw|& $python -I -B $script --data $data --event $kind;
+    if($LASTEXITCODE -ne 0) { throw 'Adapter launch/script failed; inspect effects before retry' };
+    exit 0
+} catch {
+    $message='Verity Plane UNREADY: '+$_.Exception.Message+'. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed.';
+    if($kind -eq 'PreToolUse') {
+        @{hookSpecificOutput=@{hookEventName='PreToolUse';permissionDecision='deny';permissionDecisionReason=$message}}|ConvertTo-Json -Depth 4 -Compress
+    } else {
+        @{hookSpecificOutput=@{hookEventName='SessionStart';additionalContext=$message}}|ConvertTo-Json -Depth 4 -Compress
+    };
+    exit 0
+}

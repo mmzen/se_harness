@@ -1,0 +1,437 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\8e5b6932251c2c1c\\codex.exe",
+    "app-server",
+    "--stdio"
+  ],
+  "host_version": "codex-cli 0.153.4",
+  "host_sha256": "e5aa76d19c7c94e2e9ef9b707d590206a73ac0e97c8ddc8382181242494bef75",
+  "before": {
+    "governed-target.txt": {
+      "sha256": "c32c7e5d2eae3e433c0d5985a6d60b9e831abab63aac541f9c2bdb10c4bca214",
+      "bytes": "WO-PLG-005 permitted edit\n"
+    },
+    "outside-scope.txt": {
+      "sha256": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "bytes": "initial fixture target\n"
+    },
+    "café quoted ' target.txt": {
+      "sha256": "b25754b3560a6e57511f96cedf69892f8bd6f2d410432705599810f8c1ad3dc6",
+      "bytes": "WO-PLG-005 Unicode and quoted path edit\n"
+    }
+  },
+  "source_sha256": {
+    "tests\\plugin_integration\\codex_adapter\\live.py": "fe25379e5784214e679b5c7abe751fa14c0aded6d8fad7b03b7e2240f398874c",
+    "tests\\plugin_integration\\codex_adapter\\fixture.py": "e29269b704fa4c0d0ae1cf10df1e4f1814b4e9622ec538a672d388bfe7bfdc46",
+    "tests\\plugin_integration\\codex_probe\\processes.py": "9b9bb7edc4f65b8f6884c5fa1a9fb1b16a737cc5617c81fb52f5f8e189a22586",
+    "tests\\plugin_integration\\codex_probe\\sanitize_output.py": "8ca00c4a425d976cf1cfde97f0f5f3d0f8073899ea45413b43fc3a586eb4d749",
+    "tests\\plugin_integration\\codex_adapter\\observer.py": "6ff90e3ed0b357220770493bc2908e656f94756ae7cdce0518abad5fec920eb8"
+  },
+  "schema_sha256": "05c82ead1a820c765c23d3a1d262e4ae54889785276ee1acf7c494141fd94d70",
+  "ordinary_profile": "read-only/on-request; this observer cannot request edits or setup",
+  "profile": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile",
+  "credentials_copied": false,
+  "checked_package": {
+    "asset_revision": "400cf3d5d669e239d046cc640ac94e962a6e731d",
+    "archive_sha256": "a94185033507c3e3c65de890a6979c34048e6905ea6062a270d004b1b254c4c5",
+    "package_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\codex-adapter-sandboxes\\accepted 001 with spaces\\review package 400cf3d5d669\\codex\\verity-plane",
+    "payload": {
+      "assembly-inventory.json": "902dec8172cf138ad46452c64673d2e42f92a0ccc9865a993acc236efa1ecdf3",
+      ".codex-plugin/plugin.json": "b255479285fa4e45843715ac43d88418f4e11f62b259f0242b59acd55e82a6b6",
+      "hooks/hooks.json": "2b768288dd11dca1510ea250e0b1cf9c7455e1f6d9152e62ed45482336c75a43",
+      "packages/se_harness-0.16.0-py3-none-any.whl": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+      "scripts/check-tool-action.py": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4",
+      "scripts/codex-dispatch.py": "1b24f62da276450ae8b0fa0529dfe8b786b995e137bd737258c16937ee07acae",
+      "scripts/session-context.py": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb",
+      "skills/change/SKILL.md": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13",
+      "skills/evidence/SKILL.md": "647c20a982c798c0617145cbcfe2f3356d23b4f827641b6affff9592bf02ad3b",
+      "skills/setup/SKILL.md": "68b3270b2ed4b8ad3651b6ff2ad737a425f8e7e3034df7fc065fb4e0feb03271",
+      "skills/setup/references/environment.md": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+      "skills/evidence/references/external-actions.md": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+      "skills/evidence/references/records.md": "0c266bef118b904030e1982318763021bdfd699e34b353d4f38e5d9f2f43a20b",
+      "skills/change/references/artifacts.md": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3",
+      "skills/change/references/authority.md": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f",
+      "skills/change/references/work-orders.md": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8"
+    },
+    "companion": "Inert Claude assembly fixture only; no native Claude claim.",
+    "state": "Checked corrected-path package prepared only; source marketplace/native cache not updated by this action."
+  },
+  "package_record_sha256": "675c9d101dc9889550b4e2663f12102495dec2388c9107e1f84e9677c180b605",
+  "package_matches_current_adapter": true,
+  "hooks": {
+    "id": 2,
+    "result": {
+      "data": [
+        {
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\codex-adapter-sandboxes\\accepted 001 with spaces\\repo with spaces",
+          "hooks": [
+            {
+              "key": "codex-probe@codex-probe-local:hooks/hooks.json:pre_tool_use:0:0",
+              "eventName": "preToolUse",
+              "handlerType": "command",
+              "command": "$ErrorActionPreference='Stop'; $raw=[Console]::In.ReadToEnd(); $event=$raw|ConvertFrom-Json; $data=$env:PLUGIN_DATA; if(!$data){throw 'PLUGIN_DATA absent'}; New-Item -ItemType Directory -Path $data -Force|Out-Null; [ordered]@{event=$event.hook_event_name; source=$event.source; cwd=$event.cwd; plugin_data=$data; plugin_root=$env:PLUGIN_ROOT; timestamp=[DateTimeOffset]::UtcNow.ToString('o')} |ConvertTo-Json -Compress|Add-Content -LiteralPath (Join-Path $data 'inline-events.jsonl'); if($event.hook_event_name -eq 'PreToolUse' -and (($event.tool_input|ConvertTo-Json -Depth 20 -Compress) -like '*CODEX_PROBE_DENY_SENTINEL*')){[Console]::Error.WriteLine('CODEX_PROBE_DENY_SENTINEL: exact test-only write refused; not a production policy decision'); exit 2}; $pointer=Join-Path $data 'runtime-path.txt'; if(Test-Path -LiteralPath $pointer){$python=(Get-Content -LiteralPath $pointer -Raw).Trim(); if(Test-Path -LiteralPath $python -PathType Leaf){ $raw|& $python -I (Join-Path $env:PLUGIN_ROOT 'observe_ready_runtime.py'); exit $LASTEXITCODE}}; if($event.hook_event_name -eq 'SessionStart'){ Write-Output 'CODEX_PROBE_INLINE_003: Setup required. Supplied Python 3.11+ with venv/ensurepip is required. No Python was invoked. This fixture is not governance-ready; ordinary governed writes remain prohibited. The exact CODEX_PROBE_DENY_SENTINEL negative-test command may be attempted once only to observe its hook refusal; never retry or bypass that refusal. Authorized setup commands remain permitted.'}; exit 0",
+              "async": false,
+              "matcher": null,
+              "timeoutSec": 10,
+              "statusMessage": null,
+              "additionalContextLimit": null,
+              "sourcePath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.7\\hooks\\hooks.json",
+              "source": "plugin",
+              "pluginId": "codex-probe@codex-probe-local",
+              "displayOrder": 0,
+              "enabled": false,
+              "isManaged": false,
+              "currentHash": "sha256:cc297ef88256c5b56a0016d8a9ddf63c8f0010166c6f4bab8911b306ab2449ed",
+              "trustStatus": "trusted"
+            },
+            {
+              "key": "codex-probe@codex-probe-local:hooks/hooks.json:session_start:0:0",
+              "eventName": "sessionStart",
+              "handlerType": "command",
+              "command": "$ErrorActionPreference='Stop'; $raw=[Console]::In.ReadToEnd(); $event=$raw|ConvertFrom-Json; $data=$env:PLUGIN_DATA; if(!$data){throw 'PLUGIN_DATA absent'}; New-Item -ItemType Directory -Path $data -Force|Out-Null; [ordered]@{event=$event.hook_event_name; source=$event.source; cwd=$event.cwd; plugin_data=$data; plugin_root=$env:PLUGIN_ROOT; timestamp=[DateTimeOffset]::UtcNow.ToString('o')} |ConvertTo-Json -Compress|Add-Content -LiteralPath (Join-Path $data 'inline-events.jsonl'); if($event.hook_event_name -eq 'PreToolUse' -and (($event.tool_input|ConvertTo-Json -Depth 20 -Compress) -like '*CODEX_PROBE_DENY_SENTINEL*')){[Console]::Error.WriteLine('CODEX_PROBE_DENY_SENTINEL: exact test-only write refused; not a production policy decision'); exit 2}; $pointer=Join-Path $data 'runtime-path.txt'; if(Test-Path -LiteralPath $pointer){$python=(Get-Content -LiteralPath $pointer -Raw).Trim(); if(Test-Path -LiteralPath $python -PathType Leaf){ $raw|& $python -I (Join-Path $env:PLUGIN_ROOT 'observe_ready_runtime.py'); exit $LASTEXITCODE}}; if($event.hook_event_name -eq 'SessionStart'){ Write-Output 'CODEX_PROBE_INLINE_003: Setup required. Supplied Python 3.11+ with venv/ensurepip is required. No Python was invoked. This fixture is not governance-ready; ordinary governed writes remain prohibited. The exact CODEX_PROBE_DENY_SENTINEL negative-test command may be attempted once only to observe its hook refusal; never retry or bypass that refusal. Authorized setup commands remain permitted.'}; exit 0",
+              "async": false,
+              "matcher": "startup|resume|clear|compact",
+              "timeoutSec": 10,
+              "statusMessage": null,
+              "additionalContextLimit": null,
+              "sourcePath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.7\\hooks\\hooks.json",
+              "source": "plugin",
+              "pluginId": "codex-probe@codex-probe-local",
+              "displayOrder": 1,
+              "enabled": false,
+              "isManaged": false,
+              "currentHash": "sha256:9494b4d2540467f6ee4fa9ea56df5f149446b21b62f013f584d01b924b4d590b",
+              "trustStatus": "trusted"
+            },
+            {
+              "key": "verity-plane@verity-plane-codex-fixture:hooks/hooks.json:pre_tool_use:0:0",
+              "eventName": "preToolUse",
+              "handlerType": "command",
+              "command": "$ErrorActionPreference='Stop';\n$OutputEncoding=[Text.UTF8Encoding]::new($false);\n[Console]::InputEncoding=[Text.UTF8Encoding]::new($false);\n[Console]::OutputEncoding=[Text.UTF8Encoding]::new($false);\n$kind='PreToolUse';\n$raw=[Console]::In.ReadToEnd();\nfunction Ordinary([string]$name) {\n    if (!$name -or ![IO.Path]::IsPathRooted($name) -or $name -match '(^|[\\\\/])\\.\\.([\\\\/]|$)' -or $name -match '[\\x00-\\x1f]') { throw 'Absolute ordinary binding paths required' };\n    $root=[IO.Path]::GetPathRoot($name);\n    if($root -notmatch '^[A-Za-z]:[\\\\/]$' -and $root -notmatch '^[\\\\/]{2}[^\\\\/]+[\\\\/][^\\\\/]+[\\\\/]?$') { throw 'Fully qualified absolute binding paths required; no Python invoked' };\n    $item=$name;\n    while($item) {\n        if(Test-Path -LiteralPath $item) { if((Get-Item -LiteralPath $item -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Linked binding paths unsupported' } };\n        $item=[IO.Path]::GetDirectoryName($item)\n    }\n}\nfunction Fields($value,[string[]]$names) {\n    if($value -isnot [System.Management.Automation.PSCustomObject] -or $value.PSObject.Properties.Name.Count -ne $names.Count) { throw 'Missing or unknown selected binding fields' };\n    foreach($name in $names) { if($value.PSObject.Properties.Name -cnotcontains $name) { throw 'Missing or unknown selected binding fields' } }\n}\ntry {\n    if($raw.Length -gt 65536) { throw 'Host input exceeds the supported size' };\n    $event=$raw|ConvertFrom-Json;\n    if($event -isnot [System.Management.Automation.PSCustomObject]) { throw 'Host input must be an object' };\n    if($event.hook_event_name -ne $kind) { throw 'Event differs from registered binding' };\n    if($event.cwd -isnot [string] -or [string]::IsNullOrWhiteSpace($event.cwd)) { throw 'Host repository field missing' };\n    Ordinary $event.cwd;\n    if($kind -eq 'PreToolUse' -and ($event.tool_name -isnot [string] -or [string]::IsNullOrWhiteSpace($event.tool_name) -or $event.PSObject.Properties.Name -notcontains 'tool_input')) { throw 'Host tool fields missing or malformed' };\n    if($kind -eq 'PreToolUse' -and $event.tool_name -ne 'apply_patch') {\n        @{systemMessage='UNENFORCED COVERAGE GAP: this tool has no Verity Plane evaluator mapping. No successful governance check is claimed. Ordinary host permissions and already-authorized setup remain available.'}|ConvertTo-Json -Compress;\n        exit 0\n    };\n    $data=$env:PLUGIN_DATA; Ordinary $data;\n    $config=Join-Path $data 'binding.json'; Ordinary $config;\n    if(!(Test-Path -LiteralPath $config -PathType Leaf)) { throw 'Setup required: explicitly select a prepared environment and repository binding; no Python invoked' };\n    $binding=Get-Content -LiteralPath $config -Raw -Encoding UTF8|ConvertFrom-Json;\n    Fields $binding @('schema','repo','environment','artifact','profile','decision','capture');\n    if($binding.schema -cne 'verity-codex-binding-v1' -or $binding.capture -isnot [bool]) { throw 'Unsupported binding schema; no Python invoked' };\n    Fields $binding.profile @('host','os','python','evaluator');\n    if($binding.profile.host -cne '0.153.4' -or $binding.profile.os -cne 'windows' -or $binding.profile.python -cne '3.14.6' -or $binding.profile.evaluator -cne '0.16.0') { throw 'Unsupported selected profile; no Python invoked' };\n    Fields $binding.decision @('id','status','option');\n    if($binding.decision.id -cne 'DEC-PLG-001' -or $binding.decision.status -cne 'decided' -or $binding.decision.option -cne 'prove-supported-route') { throw 'No positively selected Codex route; no Python invoked' };\n    Ordinary $binding.environment; Ordinary $binding.repo;\n    $envPath=[IO.Path]::GetFullPath($binding.environment).TrimEnd('\\');\n    $repoPath=[IO.Path]::GetFullPath($binding.repo).TrimEnd('\\');\n    if($envPath -eq $repoPath -or $envPath.StartsWith($repoPath+'\\',[StringComparison]::OrdinalIgnoreCase) -or $repoPath.StartsWith($envPath+'\\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Evaluator environment must be outside the repository' };\n    $python=Join-Path $binding.environment 'Scripts/python.exe'; Ordinary $python;\n    if(!(Test-Path -LiteralPath $python -PathType Leaf)) { throw 'Setup required: selected interpreter absent; no Python invoked' };\n    $script=Join-Path $env:PLUGIN_ROOT 'scripts/codex-dispatch.py'; Ordinary $script;\n    if(!(Test-Path -LiteralPath $script -PathType Leaf)) { throw 'Adapter dispatcher missing; no successful check' };\n    $raw|& $python -I -B $script --data $data --event $kind;\n    if($LASTEXITCODE -ne 0) { throw 'Adapter launch/script failed; inspect effects before retry' };\n    exit 0\n} catch {\n    $message='Verity Plane UNREADY: '+$_.Exception.Message+'. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed.';\n    if($kind -eq 'PreToolUse') {\n        @{hookSpecificOutput=@{hookEventName='PreToolUse';permissionDecision='deny';permissionDecisionReason=$message}}|ConvertTo-Json -Depth 4 -Compress\n    } else {\n        @{hookSpecificOutput=@{hookEventName='SessionStart';additionalContext=$message}}|ConvertTo-Json -Depth 4 -Compress\n    };\n    exit 0\n}\n",
+              "async": false,
+              "matcher": null,
+              "timeoutSec": 30,
+              "statusMessage": null,
+              "additionalContextLimit": null,
+              "sourcePath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\verity-plane-codex-fixture\\verity-plane\\0.0.1+codex.20260911195218\\hooks\\hooks.json",
+              "source": "plugin",
+              "pluginId": "verity-plane@verity-plane-codex-fixture",
+              "displayOrder": 2,
+              "enabled": true,
+              "isManaged": false,
+              "currentHash": "sha256:f39cf9eac1e46f8bc70dc5b6c60e1ba1b4ce51a15affbc3210a0a70cac8821cb",
+              "trustStatus": "trusted"
+            },
+            {
+              "key": "verity-plane@verity-plane-codex-fixture:hooks/hooks.json:session_start:0:0",
+              "eventName": "sessionStart",
+              "handlerType": "command",
+              "command": "$ErrorActionPreference='Stop';\n$OutputEncoding=[Text.UTF8Encoding]::new($false);\n[Console]::InputEncoding=[Text.UTF8Encoding]::new($false);\n[Console]::OutputEncoding=[Text.UTF8Encoding]::new($false);\n$kind='SessionStart';\n$raw=[Console]::In.ReadToEnd();\nfunction Ordinary([string]$name) {\n    if (!$name -or ![IO.Path]::IsPathRooted($name) -or $name -match '(^|[\\\\/])\\.\\.([\\\\/]|$)' -or $name -match '[\\x00-\\x1f]') { throw 'Absolute ordinary binding paths required' };\n    $root=[IO.Path]::GetPathRoot($name);\n    if($root -notmatch '^[A-Za-z]:[\\\\/]$' -and $root -notmatch '^[\\\\/]{2}[^\\\\/]+[\\\\/][^\\\\/]+[\\\\/]?$') { throw 'Fully qualified absolute binding paths required; no Python invoked' };\n    $item=$name;\n    while($item) {\n        if(Test-Path -LiteralPath $item) { if((Get-Item -LiteralPath $item -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Linked binding paths unsupported' } };\n        $item=[IO.Path]::GetDirectoryName($item)\n    }\n}\nfunction Fields($value,[string[]]$names) {\n    if($value -isnot [System.Management.Automation.PSCustomObject] -or $value.PSObject.Properties.Name.Count -ne $names.Count) { throw 'Missing or unknown selected binding fields' };\n    foreach($name in $names) { if($value.PSObject.Properties.Name -cnotcontains $name) { throw 'Missing or unknown selected binding fields' } }\n}\ntry {\n    if($raw.Length -gt 65536) { throw 'Host input exceeds the supported size' };\n    $event=$raw|ConvertFrom-Json;\n    if($event -isnot [System.Management.Automation.PSCustomObject]) { throw 'Host input must be an object' };\n    if($event.hook_event_name -ne $kind) { throw 'Event differs from registered binding' };\n    if($event.cwd -isnot [string] -or [string]::IsNullOrWhiteSpace($event.cwd)) { throw 'Host repository field missing' };\n    Ordinary $event.cwd;\n    if($kind -eq 'PreToolUse' -and ($event.tool_name -isnot [string] -or [string]::IsNullOrWhiteSpace($event.tool_name) -or $event.PSObject.Properties.Name -notcontains 'tool_input')) { throw 'Host tool fields missing or malformed' };\n    if($kind -eq 'PreToolUse' -and $event.tool_name -ne 'apply_patch') {\n        @{systemMessage='UNENFORCED COVERAGE GAP: this tool has no Verity Plane evaluator mapping. No successful governance check is claimed. Ordinary host permissions and already-authorized setup remain available.'}|ConvertTo-Json -Compress;\n        exit 0\n    };\n    $data=$env:PLUGIN_DATA; Ordinary $data;\n    $config=Join-Path $data 'binding.json'; Ordinary $config;\n    if(!(Test-Path -LiteralPath $config -PathType Leaf)) { throw 'Setup required: explicitly select a prepared environment and repository binding; no Python invoked' };\n    $binding=Get-Content -LiteralPath $config -Raw -Encoding UTF8|ConvertFrom-Json;\n    Fields $binding @('schema','repo','environment','artifact','profile','decision','capture');\n    if($binding.schema -cne 'verity-codex-binding-v1' -or $binding.capture -isnot [bool]) { throw 'Unsupported binding schema; no Python invoked' };\n    Fields $binding.profile @('host','os','python','evaluator');\n    if($binding.profile.host -cne '0.153.4' -or $binding.profile.os -cne 'windows' -or $binding.profile.python -cne '3.14.6' -or $binding.profile.evaluator -cne '0.16.0') { throw 'Unsupported selected profile; no Python invoked' };\n    Fields $binding.decision @('id','status','option');\n    if($binding.decision.id -cne 'DEC-PLG-001' -or $binding.decision.status -cne 'decided' -or $binding.decision.option -cne 'prove-supported-route') { throw 'No positively selected Codex route; no Python invoked' };\n    Ordinary $binding.environment; Ordinary $binding.repo;\n    $envPath=[IO.Path]::GetFullPath($binding.environment).TrimEnd('\\');\n    $repoPath=[IO.Path]::GetFullPath($binding.repo).TrimEnd('\\');\n    if($envPath -eq $repoPath -or $envPath.StartsWith($repoPath+'\\',[StringComparison]::OrdinalIgnoreCase) -or $repoPath.StartsWith($envPath+'\\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Evaluator environment must be outside the repository' };\n    $python=Join-Path $binding.environment 'Scripts/python.exe'; Ordinary $python;\n    if(!(Test-Path -LiteralPath $python -PathType Leaf)) { throw 'Setup required: selected interpreter absent; no Python invoked' };\n    $script=Join-Path $env:PLUGIN_ROOT 'scripts/codex-dispatch.py'; Ordinary $script;\n    if(!(Test-Path -LiteralPath $script -PathType Leaf)) { throw 'Adapter dispatcher missing; no successful check' };\n    $raw|& $python -I -B $script --data $data --event $kind;\n    if($LASTEXITCODE -ne 0) { throw 'Adapter launch/script failed; inspect effects before retry' };\n    exit 0\n} catch {\n    $message='Verity Plane UNREADY: '+$_.Exception.Message+'. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed.';\n    if($kind -eq 'PreToolUse') {\n        @{hookSpecificOutput=@{hookEventName='PreToolUse';permissionDecision='deny';permissionDecisionReason=$message}}|ConvertTo-Json -Depth 4 -Compress\n    } else {\n        @{hookSpecificOutput=@{hookEventName='SessionStart';additionalContext=$message}}|ConvertTo-Json -Depth 4 -Compress\n    };\n    exit 0\n}\n",
+              "async": false,
+              "matcher": "startup|resume|clear|compact",
+              "timeoutSec": 30,
+              "statusMessage": null,
+              "additionalContextLimit": null,
+              "sourcePath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\verity-plane-codex-fixture\\verity-plane\\0.0.1+codex.20260911195218\\hooks\\hooks.json",
+              "source": "plugin",
+              "pluginId": "verity-plane@verity-plane-codex-fixture",
+              "displayOrder": 3,
+              "enabled": true,
+              "isManaged": false,
+              "currentHash": "sha256:3d24ebbb6f1df466e491ac2738c5895b5bef36d63c5ed24be257517d59c56ab3",
+              "trustStatus": "trusted"
+            }
+          ],
+          "warnings": [],
+          "errors": []
+        }
+      ]
+    }
+  },
+  "skills": {
+    "id": 3,
+    "result": {
+      "data": [
+        {
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\codex-adapter-sandboxes\\accepted 001 with spaces\\repo with spaces",
+          "skills": [
+            {
+              "name": "harness-operator-brief",
+              "description": "Produce one decision-ready English operator brief from a bounded supplied source under the managed technical-communication policy. Use only when explicitly named; preserve protected content and stop before repository, lifecycle, Git, credential, network, release, or external action.",
+              "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\codex-adapter-sandboxes\\accepted 001 with spaces\\repo with spaces\\.agents\\skills\\harness-operator-brief\\SKILL.md",
+              "scope": "repo",
+              "enabled": true,
+              "pluginId": null
+            },
+            {
+              "name": "harness-orient",
+              "description": "Orient an operator to an installed SE Harness repository or one selected formal artifact using its exact released evaluator. Use for read-only repository understanding and next-decision guidance; do not use for implementation, approval, release, Git, credential, or external-action requests.",
+              "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\codex-adapter-sandboxes\\accepted 001 with spaces\\repo with spaces\\.agents\\skills\\harness-orient\\SKILL.md",
+              "scope": "repo",
+              "enabled": true,
+              "pluginId": null
+            },
+            {
+              "name": "codex-probe:setup",
+              "description": "Disposable Codex probe setup marker; no production authority.",
+              "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\codex-probe-local\\codex-probe\\0.0.7\\skills\\setup\\SKILL.md",
+              "scope": "user",
+              "enabled": true,
+              "pluginId": "codex-probe@codex-probe-local"
+            },
+            {
+              "name": "verity-plane:change",
+              "description": "Draft or amend an SE Harness artifact package and execute a selected work order through existing released workflow commands. Continue work already covered by actual authority, and stop the affected action when its scope, inputs or gates no longer match.",
+              "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\verity-plane-codex-fixture\\verity-plane\\0.0.1+codex.20260911195218\\skills\\change\\SKILL.md",
+              "scope": "user",
+              "enabled": true,
+              "pluginId": "verity-plane@verity-plane-codex-fixture"
+            },
+            {
+              "name": "verity-plane:evidence",
+              "description": "Retain observed checks and prepare SE Harness verification or release records through existing released procedures. Use for evidence handoff, candidate capture, preparation recovery, and identifying the next accountable decision.",
+              "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\verity-plane-codex-fixture\\verity-plane\\0.0.1+codex.20260911195218\\skills\\evidence\\SKILL.md",
+              "scope": "user",
+              "enabled": true,
+              "pluginId": "verity-plane@verity-plane-codex-fixture"
+            },
+            {
+              "name": "verity-plane:setup",
+              "description": "Prepare or check Verity Plane's private released-evaluator environment using provided Python and the wheel supplied with the plugin. Use for first setup or environment reuse, before repository initialization or governed work.",
+              "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\verity-plane-codex-fixture\\verity-plane\\0.0.1+codex.20260911195218\\skills\\setup\\SKILL.md",
+              "scope": "user",
+              "enabled": true,
+              "pluginId": "verity-plane@verity-plane-codex-fixture"
+            },
+            {
+              "name": "imagegen",
+              "description": "Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas.",
+              "interface": {
+                "displayName": "Image Gen",
+                "shortDescription": "Generate or edit images for websites, games, and more",
+                "iconSmall": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\skills\\.system\\imagegen\\assets\\imagegen-small.svg",
+                "iconLarge": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\skills\\.system\\imagegen\\assets\\imagegen.png",
+                "iconSmallUrl": null,
+                "iconLargeUrl": null,
+                "brandColor": null,
+                "defaultPrompt": "Use $imagegen to make or edit an image for this project."
+              },
+              "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\skills\\.system\\imagegen\\SKILL.md",
+              "scope": "system",
+              "enabled": true,
+              "pluginId": null
+            },
+            {
+              "name": "openai-docs",
+              "description": "Use for Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, customization, automations, and self-knowledge—including 'you,' 'your,' 'this app,' or 'this coding agent' when they refer to Codex—and for OpenAI APIs/products and ChatGPT Work. Also use for model choice/migration, prompting, SDKs, Responses, Realtime, agents, evals, and Chat/Work/Codex comparisons. Do not use for generic app/software tasks that merely mention Codex.",
+              "shortDescription": "Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, and self-knowledge; OpenAI APIs and ChatGPT Work. 'You'/'this app' means Codex only.",
+              "interface": {
+                "displayName": "OpenAI Docs",
+                "shortDescription": "OpenAI and Codex docs for models, skills, tasks, and setup",
+                "iconSmall": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\skills\\.system\\openai-docs\\assets\\openai-small.svg",
+                "iconLarge": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\skills\\.system\\openai-docs\\assets\\openai.png",
+                "iconSmallUrl": null,
+                "iconLargeUrl": null,
+                "brandColor": null,
+                "defaultPrompt": "Use OpenAI Docs for official docs lookup, questions about Codex itself or Codex surfaces, model selection, model migration, and prompt-upgrade work."
+              },
+              "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\skills\\.system\\openai-docs\\SKILL.md",
+              "scope": "system",
+              "enabled": true,
+              "pluginId": null
+            },
+            {
+              "name": "plugin-creator",
+              "description": "Create and scaffold plugin directories for Codex with a required `.codex-plugin/plugin.json`, optional plugin folders/files, valid manifest defaults, and personal-marketplace entries by default. Use when Codex needs to create a new personal plugin, add optional plugin structure, generate or update marketplace entries for plugin ordering and availability metadata, or update an existing local plugin during development with the CLI-driven cachebuster and reinstall flow.",
+              "interface": {
+                "displayName": "Plugin Creator",
+                "shortDescription": "Scaffold plugins and marketplace entries",
+                "iconSmall": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\skills\\.system\\plugin-creator\\assets\\plugin-creator-small.svg",
+                "iconLarge": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\skills\\.system\\plugin-creator\\assets\\plugin-creator.png",
+                "iconSmallUrl": null,
+                "iconLargeUrl": null,
+                "brandColor": null,
+                "defaultPrompt": "Use $plugin-creator to scaffold a valid plugin in the personal marketplace, then validate it before handing it back."
+              },
+              "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\skills\\.system\\plugin-creator\\SKILL.md",
+              "scope": "system",
+              "enabled": true,
+              "pluginId": null
+            },
+            {
+              "name": "review-agent",
+              "description": "Perform a read-only, defect-first review of a specified code change and return every actionable finding. Use when another agent delegates review of uncommitted changes, a base-branch diff, a commit, or custom review instructions.",
+              "interface": {
+                "displayName": "Review Agent",
+                "shortDescription": "Find actionable bugs in code changes",
+                "iconSmall": null,
+                "iconLarge": null,
+                "iconSmallUrl": null,
+                "iconLargeUrl": null,
+                "brandColor": null,
+                "defaultPrompt": "Use $review-agent to review the requested code changes and return actionable findings."
+              },
+              "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\skills\\.system\\review-agent\\SKILL.md",
+              "scope": "system",
+              "enabled": true,
+              "pluginId": null
+            },
+            {
+              "name": "skill-creator",
+              "description": "Create or update a Codex skill with appropriately scoped instructions and any needed supporting resources.",
+              "shortDescription": "Create or update a skill",
+              "interface": {
+                "displayName": "Skill Creator",
+                "shortDescription": "Create or update a skill",
+                "iconSmall": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\skills\\.system\\skill-creator\\assets\\skill-creator-small.svg",
+                "iconLarge": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\skills\\.system\\skill-creator\\assets\\skill-creator.png",
+                "iconSmallUrl": null,
+                "iconLargeUrl": null,
+                "brandColor": null,
+                "defaultPrompt": null
+              },
+              "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\skills\\.system\\skill-creator\\SKILL.md",
+              "scope": "system",
+              "enabled": true,
+              "pluginId": null
+            },
+            {
+              "name": "skill-installer",
+              "description": "Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos).",
+              "shortDescription": "Install curated skills from openai/skills or other repos",
+              "interface": {
+                "displayName": "Skill Installer",
+                "shortDescription": "Install curated skills from openai/skills or other repos",
+                "iconSmall": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\skills\\.system\\skill-installer\\assets\\skill-installer-small.svg",
+                "iconLarge": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\skills\\.system\\skill-installer\\assets\\skill-installer.png",
+                "iconSmallUrl": null,
+                "iconLargeUrl": null,
+                "brandColor": null,
+                "defaultPrompt": null
+              },
+              "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\skills\\.system\\skill-installer\\SKILL.md",
+              "scope": "system",
+              "enabled": true,
+              "pluginId": null
+            }
+          ],
+          "errors": []
+        }
+      ]
+    }
+  },
+  "active_bindings": [
+    {
+      "key": "verity-plane@verity-plane-codex-fixture:hooks/hooks.json:pre_tool_use:0:0",
+      "eventName": "preToolUse",
+      "handlerType": "command",
+      "command": "$ErrorActionPreference='Stop';\n$OutputEncoding=[Text.UTF8Encoding]::new($false);\n[Console]::InputEncoding=[Text.UTF8Encoding]::new($false);\n[Console]::OutputEncoding=[Text.UTF8Encoding]::new($false);\n$kind='PreToolUse';\n$raw=[Console]::In.ReadToEnd();\nfunction Ordinary([string]$name) {\n    if (!$name -or ![IO.Path]::IsPathRooted($name) -or $name -match '(^|[\\\\/])\\.\\.([\\\\/]|$)' -or $name -match '[\\x00-\\x1f]') { throw 'Absolute ordinary binding paths required' };\n    $root=[IO.Path]::GetPathRoot($name);\n    if($root -notmatch '^[A-Za-z]:[\\\\/]$' -and $root -notmatch '^[\\\\/]{2}[^\\\\/]+[\\\\/][^\\\\/]+[\\\\/]?$') { throw 'Fully qualified absolute binding paths required; no Python invoked' };\n    $item=$name;\n    while($item) {\n        if(Test-Path -LiteralPath $item) { if((Get-Item -LiteralPath $item -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Linked binding paths unsupported' } };\n        $item=[IO.Path]::GetDirectoryName($item)\n    }\n}\nfunction Fields($value,[string[]]$names) {\n    if($value -isnot [System.Management.Automation.PSCustomObject] -or $value.PSObject.Properties.Name.Count -ne $names.Count) { throw 'Missing or unknown selected binding fields' };\n    foreach($name in $names) { if($value.PSObject.Properties.Name -cnotcontains $name) { throw 'Missing or unknown selected binding fields' } }\n}\ntry {\n    if($raw.Length -gt 65536) { throw 'Host input exceeds the supported size' };\n    $event=$raw|ConvertFrom-Json;\n    if($event -isnot [System.Management.Automation.PSCustomObject]) { throw 'Host input must be an object' };\n    if($event.hook_event_name -ne $kind) { throw 'Event differs from registered binding' };\n    if($event.cwd -isnot [string] -or [string]::IsNullOrWhiteSpace($event.cwd)) { throw 'Host repository field missing' };\n    Ordinary $event.cwd;\n    if($kind -eq 'PreToolUse' -and ($event.tool_name -isnot [string] -or [string]::IsNullOrWhiteSpace($event.tool_name) -or $event.PSObject.Properties.Name -notcontains 'tool_input')) { throw 'Host tool fields missing or malformed' };\n    if($kind -eq 'PreToolUse' -and $event.tool_name -ne 'apply_patch') {\n        @{systemMessage='UNENFORCED COVERAGE GAP: this tool has no Verity Plane evaluator mapping. No successful governance check is claimed. Ordinary host permissions and already-authorized setup remain available.'}|ConvertTo-Json -Compress;\n        exit 0\n    };\n    $data=$env:PLUGIN_DATA; Ordinary $data;\n    $config=Join-Path $data 'binding.json'; Ordinary $config;\n    if(!(Test-Path -LiteralPath $config -PathType Leaf)) { throw 'Setup required: explicitly select a prepared environment and repository binding; no Python invoked' };\n    $binding=Get-Content -LiteralPath $config -Raw -Encoding UTF8|ConvertFrom-Json;\n    Fields $binding @('schema','repo','environment','artifact','profile','decision','capture');\n    if($binding.schema -cne 'verity-codex-binding-v1' -or $binding.capture -isnot [bool]) { throw 'Unsupported binding schema; no Python invoked' };\n    Fields $binding.profile @('host','os','python','evaluator');\n    if($binding.profile.host -cne '0.153.4' -or $binding.profile.os -cne 'windows' -or $binding.profile.python -cne '3.14.6' -or $binding.profile.evaluator -cne '0.16.0') { throw 'Unsupported selected profile; no Python invoked' };\n    Fields $binding.decision @('id','status','option');\n    if($binding.decision.id -cne 'DEC-PLG-001' -or $binding.decision.status -cne 'decided' -or $binding.decision.option -cne 'prove-supported-route') { throw 'No positively selected Codex route; no Python invoked' };\n    Ordinary $binding.environment; Ordinary $binding.repo;\n    $envPath=[IO.Path]::GetFullPath($binding.environment).TrimEnd('\\');\n    $repoPath=[IO.Path]::GetFullPath($binding.repo).TrimEnd('\\');\n    if($envPath -eq $repoPath -or $envPath.StartsWith($repoPath+'\\',[StringComparison]::OrdinalIgnoreCase) -or $repoPath.StartsWith($envPath+'\\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Evaluator environment must be outside the repository' };\n    $python=Join-Path $binding.environment 'Scripts/python.exe'; Ordinary $python;\n    if(!(Test-Path -LiteralPath $python -PathType Leaf)) { throw 'Setup required: selected interpreter absent; no Python invoked' };\n    $script=Join-Path $env:PLUGIN_ROOT 'scripts/codex-dispatch.py'; Ordinary $script;\n    if(!(Test-Path -LiteralPath $script -PathType Leaf)) { throw 'Adapter dispatcher missing; no successful check' };\n    $raw|& $python -I -B $script --data $data --event $kind;\n    if($LASTEXITCODE -ne 0) { throw 'Adapter launch/script failed; inspect effects before retry' };\n    exit 0\n} catch {\n    $message='Verity Plane UNREADY: '+$_.Exception.Message+'. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed.';\n    if($kind -eq 'PreToolUse') {\n        @{hookSpecificOutput=@{hookEventName='PreToolUse';permissionDecision='deny';permissionDecisionReason=$message}}|ConvertTo-Json -Depth 4 -Compress\n    } else {\n        @{hookSpecificOutput=@{hookEventName='SessionStart';additionalContext=$message}}|ConvertTo-Json -Depth 4 -Compress\n    };\n    exit 0\n}\n",
+      "async": false,
+      "matcher": null,
+      "timeoutSec": 30,
+      "statusMessage": null,
+      "additionalContextLimit": null,
+      "sourcePath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\verity-plane-codex-fixture\\verity-plane\\0.0.1+codex.20260911195218\\hooks\\hooks.json",
+      "source": "plugin",
+      "pluginId": "verity-plane@verity-plane-codex-fixture",
+      "displayOrder": 2,
+      "enabled": true,
+      "isManaged": false,
+      "currentHash": "sha256:f39cf9eac1e46f8bc70dc5b6c60e1ba1b4ce51a15affbc3210a0a70cac8821cb",
+      "trustStatus": "trusted",
+      "source_sha256": "2b768288dd11dca1510ea250e0b1cf9c7455e1f6d9152e62ed45482336c75a43"
+    },
+    {
+      "key": "verity-plane@verity-plane-codex-fixture:hooks/hooks.json:session_start:0:0",
+      "eventName": "sessionStart",
+      "handlerType": "command",
+      "command": "$ErrorActionPreference='Stop';\n$OutputEncoding=[Text.UTF8Encoding]::new($false);\n[Console]::InputEncoding=[Text.UTF8Encoding]::new($false);\n[Console]::OutputEncoding=[Text.UTF8Encoding]::new($false);\n$kind='SessionStart';\n$raw=[Console]::In.ReadToEnd();\nfunction Ordinary([string]$name) {\n    if (!$name -or ![IO.Path]::IsPathRooted($name) -or $name -match '(^|[\\\\/])\\.\\.([\\\\/]|$)' -or $name -match '[\\x00-\\x1f]') { throw 'Absolute ordinary binding paths required' };\n    $root=[IO.Path]::GetPathRoot($name);\n    if($root -notmatch '^[A-Za-z]:[\\\\/]$' -and $root -notmatch '^[\\\\/]{2}[^\\\\/]+[\\\\/][^\\\\/]+[\\\\/]?$') { throw 'Fully qualified absolute binding paths required; no Python invoked' };\n    $item=$name;\n    while($item) {\n        if(Test-Path -LiteralPath $item) { if((Get-Item -LiteralPath $item -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Linked binding paths unsupported' } };\n        $item=[IO.Path]::GetDirectoryName($item)\n    }\n}\nfunction Fields($value,[string[]]$names) {\n    if($value -isnot [System.Management.Automation.PSCustomObject] -or $value.PSObject.Properties.Name.Count -ne $names.Count) { throw 'Missing or unknown selected binding fields' };\n    foreach($name in $names) { if($value.PSObject.Properties.Name -cnotcontains $name) { throw 'Missing or unknown selected binding fields' } }\n}\ntry {\n    if($raw.Length -gt 65536) { throw 'Host input exceeds the supported size' };\n    $event=$raw|ConvertFrom-Json;\n    if($event -isnot [System.Management.Automation.PSCustomObject]) { throw 'Host input must be an object' };\n    if($event.hook_event_name -ne $kind) { throw 'Event differs from registered binding' };\n    if($event.cwd -isnot [string] -or [string]::IsNullOrWhiteSpace($event.cwd)) { throw 'Host repository field missing' };\n    Ordinary $event.cwd;\n    if($kind -eq 'PreToolUse' -and ($event.tool_name -isnot [string] -or [string]::IsNullOrWhiteSpace($event.tool_name) -or $event.PSObject.Properties.Name -notcontains 'tool_input')) { throw 'Host tool fields missing or malformed' };\n    if($kind -eq 'PreToolUse' -and $event.tool_name -ne 'apply_patch') {\n        @{systemMessage='UNENFORCED COVERAGE GAP: this tool has no Verity Plane evaluator mapping. No successful governance check is claimed. Ordinary host permissions and already-authorized setup remain available.'}|ConvertTo-Json -Compress;\n        exit 0\n    };\n    $data=$env:PLUGIN_DATA; Ordinary $data;\n    $config=Join-Path $data 'binding.json'; Ordinary $config;\n    if(!(Test-Path -LiteralPath $config -PathType Leaf)) { throw 'Setup required: explicitly select a prepared environment and repository binding; no Python invoked' };\n    $binding=Get-Content -LiteralPath $config -Raw -Encoding UTF8|ConvertFrom-Json;\n    Fields $binding @('schema','repo','environment','artifact','profile','decision','capture');\n    if($binding.schema -cne 'verity-codex-binding-v1' -or $binding.capture -isnot [bool]) { throw 'Unsupported binding schema; no Python invoked' };\n    Fields $binding.profile @('host','os','python','evaluator');\n    if($binding.profile.host -cne '0.153.4' -or $binding.profile.os -cne 'windows' -or $binding.profile.python -cne '3.14.6' -or $binding.profile.evaluator -cne '0.16.0') { throw 'Unsupported selected profile; no Python invoked' };\n    Fields $binding.decision @('id','status','option');\n    if($binding.decision.id -cne 'DEC-PLG-001' -or $binding.decision.status -cne 'decided' -or $binding.decision.option -cne 'prove-supported-route') { throw 'No positively selected Codex route; no Python invoked' };\n    Ordinary $binding.environment; Ordinary $binding.repo;\n    $envPath=[IO.Path]::GetFullPath($binding.environment).TrimEnd('\\');\n    $repoPath=[IO.Path]::GetFullPath($binding.repo).TrimEnd('\\');\n    if($envPath -eq $repoPath -or $envPath.StartsWith($repoPath+'\\',[StringComparison]::OrdinalIgnoreCase) -or $repoPath.StartsWith($envPath+'\\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Evaluator environment must be outside the repository' };\n    $python=Join-Path $binding.environment 'Scripts/python.exe'; Ordinary $python;\n    if(!(Test-Path -LiteralPath $python -PathType Leaf)) { throw 'Setup required: selected interpreter absent; no Python invoked' };\n    $script=Join-Path $env:PLUGIN_ROOT 'scripts/codex-dispatch.py'; Ordinary $script;\n    if(!(Test-Path -LiteralPath $script -PathType Leaf)) { throw 'Adapter dispatcher missing; no successful check' };\n    $raw|& $python -I -B $script --data $data --event $kind;\n    if($LASTEXITCODE -ne 0) { throw 'Adapter launch/script failed; inspect effects before retry' };\n    exit 0\n} catch {\n    $message='Verity Plane UNREADY: '+$_.Exception.Message+'. Already-authorized setup remains available through ordinary host permissions. No successful governance check is claimed.';\n    if($kind -eq 'PreToolUse') {\n        @{hookSpecificOutput=@{hookEventName='PreToolUse';permissionDecision='deny';permissionDecisionReason=$message}}|ConvertTo-Json -Depth 4 -Compress\n    } else {\n        @{hookSpecificOutput=@{hookEventName='SessionStart';additionalContext=$message}}|ConvertTo-Json -Depth 4 -Compress\n    };\n    exit 0\n}\n",
+      "async": false,
+      "matcher": "startup|resume|clear|compact",
+      "timeoutSec": 30,
+      "statusMessage": null,
+      "additionalContextLimit": null,
+      "sourcePath": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\verity-plane-codex-fixture\\verity-plane\\0.0.1+codex.20260911195218\\hooks\\hooks.json",
+      "source": "plugin",
+      "pluginId": "verity-plane@verity-plane-codex-fixture",
+      "displayOrder": 3,
+      "enabled": true,
+      "isManaged": false,
+      "currentHash": "sha256:3d24ebbb6f1df466e491ac2738c5895b5bef36d63c5ed24be257517d59c56ab3",
+      "trustStatus": "trusted",
+      "source_sha256": "2b768288dd11dca1510ea250e0b1cf9c7455e1f6d9152e62ed45482336c75a43"
+    }
+  ],
+  "loaded_payload": {
+    "root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\plugin-probe-sandboxes\\codex\\run-001 with spaces\\profile\\codex\\plugins\\cache\\verity-plane-codex-fixture\\verity-plane\\0.0.1+codex.20260911195218",
+    "sha256": {
+      "assembly-inventory.json": "902dec8172cf138ad46452c64673d2e42f92a0ccc9865a993acc236efa1ecdf3",
+      ".codex-plugin/plugin.json": "b255479285fa4e45843715ac43d88418f4e11f62b259f0242b59acd55e82a6b6",
+      "hooks/hooks.json": "2b768288dd11dca1510ea250e0b1cf9c7455e1f6d9152e62ed45482336c75a43",
+      "packages/se_harness-0.16.0-py3-none-any.whl": "a969d6ab9e80acc2c9f9e7b6679a02e7ffab371f1f11cb0c0f4243f208ed9eae",
+      "scripts/check-tool-action.py": "89f2371b0164fcb043d41d06eb3553cc19dd50a49e5329b4208169040ab879d4",
+      "scripts/codex-dispatch.py": "1b24f62da276450ae8b0fa0529dfe8b786b995e137bd737258c16937ee07acae",
+      "scripts/session-context.py": "e07ee9d1515fbd560d0584f84f3fa530be90ca8192f1752643eb7134278547fb",
+      "skills/change/SKILL.md": "95d8a0e35d7a78fc84fc0992004ffa68d1800b97b452474132d666dd71c7eb13",
+      "skills/evidence/SKILL.md": "647c20a982c798c0617145cbcfe2f3356d23b4f827641b6affff9592bf02ad3b",
+      "skills/setup/SKILL.md": "68b3270b2ed4b8ad3651b6ff2ad737a425f8e7e3034df7fc065fb4e0feb03271",
+      "skills/setup/references/environment.md": "1452c0db2c3ec992f8d36fb405722248a7e15c00c4297cf3d7dd4f05ceffef59",
+      "skills/evidence/references/external-actions.md": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+      "skills/evidence/references/records.md": "0c266bef118b904030e1982318763021bdfd699e34b353d4f38e5d9f2f43a20b",
+      "skills/change/references/artifacts.md": "5ae772d1c5091a2af6ded135f928ee4932cf141a0649ee451025454693e695a3",
+      "skills/change/references/authority.md": "0a56efc8a6def00a89f30de3f71ff9892be02ed3f4af9f5bb0b87d0d4566822f",
+      "skills/change/references/work-orders.md": "6de9298990e6b699808fbbc21ba8a88ad8b39950419272e22df5ef72c74d1ed8"
+    }
+  },
+  "thread_id": "01a0923e-44f4-7140-8e2c-5437b450bd17",
+  "prompt": "Reply with READY only. Do not use tools or change files.",
+  "turn": {
+    "method": "turn/completed",
+    "params": {
+      "threadId": "01a0923e-44f4-7140-8e2c-5437b450bd17",
+      "turn": {
+        "id": "01a0923e-451f-7032-82c9-dcaaaaf90f1b",
+        "items": [
+          {
+            "type": "agentMessage",
+            "id": "msg_0b9f971b44d2239a016aa46a121e3c87d2a5a7aef1134258ab",
+            "text": "READY",
+            "phase": "final_answer",
+            "memoryCitation": null,
+            "delivery": null,
+            "questions": null
+          }
+        ],
+        "itemsView": "summary",
+        "status": "completed",
+        "error": null,
+        "startedAt": 1789159949,
+        "completedAt": 1789159954,
+        "durationMs": 4963
+      }
+    },
+    "emittedAtMs": 1789159954585
+  },
+  "cleanup": {
+    "pid": 18548,
+    "method": "owned Windows Job Object",
+    "active_processes": 0
+  },
+  "after": {
+    "governed-target.txt": {
+      "sha256": "c32c7e5d2eae3e433c0d5985a6d60b9e831abab63aac541f9c2bdb10c4bca214",
+      "bytes": "WO-PLG-005 permitted edit\n"
+    },
+    "outside-scope.txt": {
+      "sha256": "d894b72c512f3d8eff30e25bf678620d32ca7adfbcd425678daf84dacb68c3e4",
+      "bytes": "initial fixture target\n"
+    },
+    "café quoted ' target.txt": {
+      "sha256": "b25754b3560a6e57511f96cedf69892f8bd6f2d410432705599810f8c1ad3dc6",
+      "bytes": "WO-PLG-005 Unicode and quoted path edit\n"
+    }
+  },
+  "finished_monotonic": 245971.0133189,
+  "started_monotonic": 245965.3581545,
+  "readers_complete": true
+}

@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-eval-016\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\tests\\plugin_integration\\codex_adapter\\c11_binding_loss.py",
+    "--observe-phase",
+    "ready",
+    "--plan",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-04\\hel\\work\\se-harness-plugin-codex-adapter\\docs\\engineering\\plugin-integration\\evidence\\WO-PLG-005\\C11\\lost-active-binding-01\\plan.json",
+    "--run",
+    "--approved-plan-sha256",
+    "e685c00cbea55f65636e8a3a181055bf8ca9e128247d80a383293383bd5586c9"
+  ],
+  "finished_monotonic": 248372.1401707,
+  "outer_cleanup": {
+    "active_processes": 0,
+    "method": "owned Windows Job Object",
+    "pid": 25128
+  },
+  "returncode": 0,
+  "started_monotonic": 248365.1124965
+}

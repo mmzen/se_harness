@@ -1,0 +1,11 @@
+C02 stderr: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+historical | resume-compact-01/stderr.txt | 706 bytes | sha256 0a665910889c670395797768bc9eb7d7078b2f0b1cba134d4b288e1b77367d1f
+historical | resume-compact-02/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | resume-compact-03/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+current | startup-01/stderr.txt | 0 bytes | sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855

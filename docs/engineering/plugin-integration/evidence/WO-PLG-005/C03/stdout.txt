@@ -1,0 +1,10 @@
+C03 stdout: retained evidence index
+
+This file is an index, not an executed command transcript or process output.
+Original nested files are unchanged. SHA-256 identifies retained file bytes.
+Read each capture metadata for raw-byte retention, sanitization and exit status.
+Paths are relative to this case directory. See observations.json for the assessment.
+
+historical | permitted-edit-01/stdout.txt | 46032 bytes | sha256 d4177a58994dbd74496403259ed5f4167e09ff2d3e9776cbda6ffe4386100119
+current | permitted-edit-02/stdout.txt | 63080 bytes | sha256 b98d8412dec164fed3ccb9c29a67c66ce6cbac3a8fc13b6b2bb60b9fe56171bd
+current | refused-edit-01/stdout.txt | 58040 bytes | sha256 da7497ab8d410c5ae7211d3b8b0c2e6554dbf686507e35ce65a33a41924b7b3e
