@@ -1,0 +1,216 @@
+{
+  "name": "verification-contract-approval-apply",
+  "argv": [
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "transition",
+    ".",
+    "--set",
+    "VER-PLG-019=approved",
+    "--decision",
+    "VER-PLG-019=assurance-owner",
+    "--reason",
+    "VER-PLG-019=The operator replied \"i approve\" to the reviewed packet 29507242f4d17369d242da25f37043fdbdc9f1a3254ff9c01938e6c858845514, explicitly requested under all three owner roles. Record the assurance-owner approval of VER-PLG-019 only; owner-approval.json retains the exact request binding.",
+    "--json",
+    "--apply"
+  ],
+  "started_at": "2026-09-12T07:19:49.986994+00:00",
+  "finished_at": "2026-09-12T07:20:37.918842+00:00",
+  "returncode": 0,
+  "stdout_sha256": "bd6ee97223b54c4174eb461725177aa1aa5fcdd54b2ca8853212338482dac1df",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "result": {
+    "schema": "se-harness-workflow-result-v2",
+    "operation": {
+      "kind": "transition",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "VER-PLG-019",
+      "artifacts": [
+        "VER-PLG-019"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [],
+      "dependencies": [],
+      "declared_paths": [],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "transition",
+      "workflow_rule_id": "WFL-DEFINITION-COMPLETE",
+      "procedure_id": "PROC-DEFINITION-COMPLETE",
+      "status": "pass",
+      "gates": [
+        {
+          "id": "QG-G1-DEFINITION",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGP-G1-GRAPH",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "formal-graph:VER-PLG-019"
+                }
+              ],
+              "message": "The selected formal graph is valid."
+            },
+            {
+              "id": "QGP-G1-INTEGRITY",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "repository-integrity:transition"
+                }
+              ],
+              "message": "No repository-integrity blocker prevents selected evaluation."
+            },
+            {
+              "id": "QGP-G1-AUTHORING",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "VER-PLG-019"
+                }
+              ],
+              "message": "VER-PLG-019 carries no placeholder and no open decision."
+            },
+            {
+              "id": "QGP-G1-DECISION",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "decision-register:VER-PLG-019"
+                }
+              ],
+              "message": "No open decision blocks VER-PLG-019."
+            }
+          ]
+        },
+        {
+          "id": "QG-STRUCTURAL",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGS-EDGE",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "VER-PLG-019"
+                }
+              ],
+              "message": "draft -> approved is a declared lifecycle edge for VER-PLG-019."
+            }
+          ]
+        }
+      ]
+    },
+    "procedure": {
+      "id": "PROC-DEFINITION-COMPLETE",
+      "current_step": "STEP-DEFINITION-COMPLETE",
+      "steps": [
+        {
+          "id": "STEP-DEFINITION-COMPLETE",
+          "kind": "decision",
+          "gate_ids": [
+            "QG-G1-DEFINITION",
+            "QG-G2-ARCHITECTURE"
+          ],
+          "effects": [
+            "Permits a decision on VER-PLG-019 only."
+          ],
+          "non_effects": [
+            "Related definitions remain unchanged unless separately selected."
+          ],
+          "decision_right": "DR-DEFINITION-DECIDE",
+          "role": "definition-owner",
+          "artifact": "VER-PLG-019",
+          "decision": "whether the selected definition is complete",
+          "outcomes": [
+            "implemented",
+            "reject",
+            "stop"
+          ],
+          "response": "Decide the selected definition VER-PLG-019 only."
+        }
+      ]
+    },
+    "state": {
+      "before": [
+        {
+          "id": "VER-PLG-019",
+          "status": "draft"
+        }
+      ],
+      "after": [
+        {
+          "id": "VER-PLG-019",
+          "status": "approved"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 0
+    },
+    "mutation": {
+      "writes": [
+        {
+          "id": "VER-PLG-019",
+          "path": "docs/engineering/plugin-integration/verification/VER-PLG-019.md",
+          "fields": [
+            "lifecycle_events",
+            "status",
+            "updated"
+          ]
+        }
+      ]
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Applied 1 explicit lifecycle transition(s) atomically."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "VER-PLG-019 is approved."
+      ],
+      "decision_required": {
+        "decision_right": "DR-DEFINITION-DECIDE",
+        "role": "definition-owner",
+        "artifact": "VER-PLG-019",
+        "decision": "whether the selected definition is complete",
+        "outcomes": [
+          "implemented",
+          "reject",
+          "stop"
+        ]
+      },
+      "next": {
+        "procedure_id": "PROC-DEFINITION-COMPLETE",
+        "step_id": "STEP-DEFINITION-COMPLETE",
+        "action": "whether the selected definition is complete"
+      },
+      "command_or_response": {
+        "kind": "response",
+        "value": "Decide the selected definition VER-PLG-019 only."
+      },
+      "alternatives": []
+    },
+    "result_sha256": "0c02c531fe70ef3467d901abdb674c95c9cd79aa3d63b17cbe5b4326531d150a"
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-PLG-019",
+    "artifacts": [
+      "WO-PLG-019"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-PLG-002",
+      "ARCH-PLG-002",
+      "CAP-DST-001",
+      "CAP-WEX-001",
+      "INT-DST-001",
+      "INT-WEX-001",
+      "REQ-PLG-008",
+      "REQ-PLG-009",
+      "REQ-PLG-013",
+      "REQ-PLG-014",
+      "SPEC-PLG-005",
+      "SPEC-PLG-006",
+      "SPEC-PLG-008",
+      "VER-PLG-019"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/plugin-integration/decisions/DEC-PLG-006.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-005.md",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-006.md",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-008.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-005.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-006.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-008.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-019.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-019.md"
+    ],
+    "changed_paths": [
+      "docs/engineering/plugin-integration/decisions/DEC-PLG-006.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/operator-request.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/preparation-change-set.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposal-manifest.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposed/SPEC-PLG-005.md.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposed/SPEC-PLG-006.md.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposed/SPEC-PLG-008.md.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposed/VER-PLG-005.md.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposed/VER-PLG-006.md.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/proposed/VER-PLG-008.md.txt",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/qualification-amendments.patch",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/candidate-doctor.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/candidate-doctor.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/candidate-help.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/candidate-help.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/candidate-validate.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/candidate-validate.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/classification-review.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/decision-plan.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/decision-plan.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/definition-approval-plan.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/definition-approval-plan.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/final-proposal-integrity.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/handoff-summary.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/patch-applicability.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/patch-applicability.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/release-distributions.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/release-distributions.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/released-doctor.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/released-doctor.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/released-validate.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/released-validate.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/results.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/scope-check.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/scope-check.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/start-check.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/start-check.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/work-approval-plan.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/review/work-approval-plan.stdout",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-019/sources.json",
+      "docs/engineering/plugin-integration/verification/VER-PLG-019.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-019.md"
+    ],
+    "change_set_complete": true
+  },
+  "compliance": {
+    "checkpoint": "scope",
+    "workflow_rule_id": "WFL-DEFAULT-REVIEW",
+    "procedure_id": "PROC-FOCUS-SELECTED",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4I-SCOPE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-PLG-019:[execution_scope]"
+              }
+            ],
+            "message": "WO-PLG-019 declares 10 normalized scope path(s)."
+          },
+          {
+            "id": "QGP-G4I-COMPLETE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-PLG-019"
+              }
+            ],
+            "message": "The caller explicitly asserted that the declared change set is complete."
+          },
+          {
+            "id": "QGP-G4I-PATHS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-PLG-019"
+              }
+            ],
+            "message": "All 42 declared changed path(s) are within execution scope."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "609c11c4f4df73c5be8954793d094d38376b336dbdbcbd63343af707cf0036e1",
+    "change_set_source": "docs/engineering/plugin-integration/evidence/WO-PLG-019/preparation-change-set.json"
+  },
+  "procedure": {
+    "id": "PROC-FOCUS-SELECTED",
+    "current_step": "STEP-FOCUS-SELECTED",
+    "steps": [
+      {
+        "id": "STEP-FOCUS-SELECTED",
+        "kind": "command",
+        "gate_ids": [],
+        "effects": [
+          "Projected selected state for WO-PLG-019."
+        ],
+        "non_effects": [
+          "Focus changes no lifecycle state."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-PLG-019"
+        ]
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-PLG-019",
+        "status": "draft"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-PLG-019",
+        "status": "draft"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 46
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated scope compliance for WO-PLG-019."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-PLG-019 is draft."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-FOCUS-SELECTED",
+      "step_id": "STEP-FOCUS-SELECTED",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "WO-PLG-019"
+      ]
+    },
+    "alternatives": []
+  },
+  "result_sha256": "9d4a239a5246e6e00d1f8d79d9f60f9b614dfd5cabbb9f674e10c68cc3153062"
+}
