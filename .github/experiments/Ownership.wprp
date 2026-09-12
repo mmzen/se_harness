@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WindowsPerformanceRecorder Version="1.0" Author="Exploratory ownership profiling">
+  <Profiles>
+    <SystemCollector Id="OwnershipCollector" Name="Ownership kernel collector">
+      <BufferSize Value="1024" />
+      <Buffers Value="1024" />
+    </SystemCollector>
+    <SystemProvider Id="OwnershipProvider">
+      <Keywords>
+        <Keyword Value="ProcessThread" />
+        <Keyword Value="Loader" />
+        <Keyword Value="CSwitch" />
+        <Keyword Value="SampledProfile" />
+        <Keyword Value="DiskIO" />
+        <Keyword Value="DiskIOInit" />
+        <Keyword Value="Filename" />
+        <Keyword Value="FileIO" />
+        <Keyword Value="FileIOInit" />
+        <Keyword Value="HardFaults" />
+        <Keyword Value="MemoryInfo" />
+      </Keywords>
+    </SystemProvider>
+    <Profile Id="Ownership.Verbose.Memory" Name="Ownership" Description="CPU, logical and physical I/O, hard faults" LoggingMode="Memory" DetailLevel="Verbose">
+      <Collectors><SystemCollectorId Value="OwnershipCollector"><SystemProviderId Value="OwnershipProvider" /></SystemCollectorId></Collectors>
+    </Profile>
+  </Profiles>
+</WindowsPerformanceRecorder>

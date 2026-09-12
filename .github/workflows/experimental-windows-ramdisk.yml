@@ -1,16 +1,15 @@
-# One-off user-requested performance experiment; never merge or qualify a release.
+# Disposable user-authorized diagnosis; no release or qualification claim.
 name: Experimental Windows RAM disk comparison
 on:
   push:
     branches: [experiment/windows-ownership-ramdisk-20260912]
 permissions:
   contents: read
-  actions: read
 jobs:
-  benchmark:
-    name: Same-runner disk versus NTFS RAM disk
+  trace:
+    name: Trace one recovery loop on disk and RAM
     runs-on: windows-latest
-    timeout-minutes: 100
+    timeout-minutes: 35
     env:
       PYTHONNOUSERSITE: '1'
       PYTHONPATH: ''
@@ -18,24 +17,23 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
-          fetch-depth: 2
+          fetch-depth: 0
           persist-credentials: false
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
-        with:
-          artifact-ids: '10299474643'
-          run-id: '34701328305'
-          github-token: ${{ github.token }}
-          merge-multiple: true
-          path: ${{ runner.temp }}/candidate-dist
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
-        id: python311
-        with:
-          python-version: '3.11'
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         id: python313
         with:
           python-version: '3.13'
-      - name: Prepare verified RAM disk and identical input distributions
+      - name: Build Microsoft TraceEvent analyzer and check candidate isolation
+        shell: pwsh
+        run: |
+          dotnet build .github/experiments/trace-analyzer/TraceAnalyzer.csproj -c Release -o "$env:RUNNER_TEMP/trace-analyzer"
+          if ($LASTEXITCODE -ne 0) { throw 'Analyzer compilation failed' }
+          git diff --exit-code $env:RAMDISK_TESTED_COMMIT HEAD -- se_harness tests templates repository_tools scripts pyproject.toml
+          if ($LASTEXITCODE -ne 0) { throw 'Candidate source changed' }
+          "RAMDISK_PY313=$(Split-Path -Parent '${{ steps.python313.outputs.python-path }}')" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          wpr -profiles .github/experiments/Ownership.wprp
+          if ($LASTEXITCODE -ne 0) { throw 'Profile validation failed' }
+      - name: Prepare verified RAM disk
         id: prepare
         shell: pwsh
         run: |
@@ -68,36 +66,15 @@ jobs:
           $defender = Get-MpComputerStatus
           $preferences = Get-MpPreference
           [ordered]@{image=$env:ImageOS;image_version=$env:ImageVersion;os=$os.Caption;memory_kb=$os.TotalVisibleMemorySize;free_memory_kb=$os.FreePhysicalMemory;real_time_protection=$defender.RealTimeProtectionEnabled;antivirus=$defender.AntivirusEnabled;exclusions=@($preferences.ExclusionPath);driver_version=(Get-Item -LiteralPath $driver).VersionInfo.FileVersion} | ConvertTo-Json -Depth 4
-          $predecessorDirectory = Join-Path $env:RUNNER_TEMP 'predecessor-dist'
-          python -m pip download --disable-pip-version-check --only-binary=:all: --no-deps --dest $predecessorDirectory se-harness==0.17.0
-          if ($LASTEXITCODE -ne 0) { throw 'Predecessor download failed' }
-          $predecessor = Join-Path $predecessorDirectory 'se_harness-0.17.0-py3-none-any.whl'
-          if ((Get-FileHash -Algorithm SHA256 -LiteralPath $predecessor).Hash -ne '305C7CBC79F87BAA76EA3BEA939B134999F9CAD3BFDFA0B4C9C2FD2D9CAACCED') { throw 'Predecessor wheel mismatch' }
-          $candidateDirectory = Join-Path $env:RUNNER_TEMP 'candidate-dist'
-          foreach ($line in Get-Content -LiteralPath (Join-Path $candidateDirectory 'SHA256SUMS')) {
-              $parts = $line -split '\s+', 2
-              if ($parts.Count -ne 2 -or $parts[1] -match '[\\/:]' -or $parts[1].StartsWith('.')) { throw 'Unexpected handover filename' }
-              if ((Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $candidateDirectory $parts[1])).Hash.ToLowerInvariant() -ne $parts[0]) { throw 'Handover bytes mismatch' }
-          }
-          if ((Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $candidateDirectory 'se_harness-0.18.0-py3-none-any.whl')).Hash -ne 'EC2421F9562096E86F1A16C4117358E836541384F0DD32BBABEC8A8357479985') { throw 'Candidate wheel mismatch' }
-      - name: Materialize the disposable benchmark script
+          Get-Partition | Select-Object DiskNumber,PartitionNumber,DriveLetter,Size | ConvertTo-Json
+          Get-CimInstance Win32_PageFileUsage | Select-Object Name,AllocatedBaseSize,CurrentUsage,PeakUsage | ConvertTo-Json
+      - name: Trace source recovery loop on normal disk
         shell: pwsh
-        run: |
-          $script = Join-Path $env:RUNNER_TEMP 'ownership-benchmark.ps1'
-          Copy-Item -LiteralPath (Join-Path $env:GITHUB_WORKSPACE '.github/experiments/windows-ramdisk.ps1') -Destination $script
-          git diff --exit-code 1e062e4db06b6e7131429db15b3d6b9876e600db HEAD -- se_harness tests templates repository_tools scripts pyproject.toml
-          if ($LASTEXITCODE -ne 0) { throw 'Experiment changed candidate code or tests' }
-          Write-Host "EXPERIMENT_COMMIT $env:GITHUB_SHA; IMPLEMENTATION_COMMIT $env:RAMDISK_TESTED_COMMIT"
-          "RAMDISK_PY311=$(Split-Path -Parent '${{ steps.python311.outputs.python-path }}')" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
-          "RAMDISK_PY313=$(Split-Path -Parent '${{ steps.python313.outputs.python-path }}')" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
-      - name: Baseline on normal disk
-        id: disk
-        shell: pwsh
-        run: '& (Join-Path $env:RUNNER_TEMP "ownership-benchmark.ps1") -Storage disk'
-      - name: Same Windows test selection on NTFS RAM disk
+        run: '& "$env:GITHUB_WORKSPACE/.github/experiments/windows-ownership-trace.ps1" -Storage disk'
+      - name: Trace source recovery loop on RAM disk
         if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
         shell: pwsh
-        run: '& (Join-Path $env:RUNNER_TEMP "ownership-benchmark.ps1") -Storage ramdisk'
+        run: '& "$env:GITHUB_WORKSPACE/.github/experiments/windows-ownership-trace.ps1" -Storage ramdisk'
       - name: Dismount this experiment RAM disk
         if: ${{ always() && env.RAMDISK_CREATED == '1' }}
         shell: pwsh
