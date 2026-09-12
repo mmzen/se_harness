@@ -2,7 +2,7 @@
 id = "WO-PLG-020"
 type = "work_order"
 title = "Implement explicit evaluator migration of retained skill ownership"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-12"
 updated = "2026-09-12"
@@ -71,6 +71,13 @@ to = "approved"
 decided_at = "2026-09-12T12:56:34Z"
 decided_by = "engineering-owner"
 reason = "The operator selected the reviewed WO-PLG-020 packet and execution delegation on 2026-09-12 with \"take the delegated route\", then approved its supplemental DEC-PLG-007 reconciliation and amendments with \"i approve DEC-PLG-007\u2019s `narrow-schema4-exception` with amendements\". Record only WO-PLG-020 approval as engineering-owner. The reviewed packet at 2d32b57bcdf805a83d5902fb37a3d2b7580c16e0 supplies the selected scope, eight applicability amendments, and candidate policy text. Implementation, assurance, release, and integration results are not recorded by this approval."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-12T13:27:35Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 6559568e995fc6e28f64e6bc5a6d4a6dc5dcf7de (check-run 103560311357, source github-checks). Begin the approved bounded evaluator migration after PR #461 merged."
 +++
 
 # Work Order: Implement explicit evaluator migration of retained skill ownership
