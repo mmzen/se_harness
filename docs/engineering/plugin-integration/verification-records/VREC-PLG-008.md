@@ -2,10 +2,10 @@
 id = "VREC-PLG-008"
 type = "verification_record"
 title = "Verification candidate for WO-PLG-011"
-status = "ready"
+status = "superseded"
 owners = ["delegated-executor"]
 created = "2026-09-10"
-updated = "2026-09-10"
+updated = "2026-09-12"
 commit = "e9418644e22497e622b706cb228f0cd8b36f3b5b"
 git_object_format = "sha1"
 worktree_state = "clean"
@@ -16,9 +16,19 @@ evidence_paths = ["docs/engineering/plugin-integration/evidence/WO-PLG-011/READM
 evaluator_evidence_path = "docs/engineering/plugin-integration/evidence/VREC-PLG-008-evaluator.json"
 evaluator_evidence_sha256 = "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
 
+superseded_at = "2026-09-12T12:21:17Z"
+supersession_authorized_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-PLG-011"]
 conforms_to = ["VER-PLG-011"]
+superseded_by = ["VREC-PLG-010"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "superseded"
+decided_at = "2026-09-12T12:21:17Z"
+decided_by = "assurance-owner"
+reason = "VREC-PLG-010"
 +++
 
 # Verification Record Candidate
