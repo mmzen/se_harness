@@ -1,0 +1,173 @@
+{
+  "archive": {
+    "bytes": 13402257,
+    "path": "acceptance-source-development-observations.zip",
+    "sha256": "d7fb07976f821a538ef6d4dc23a44984778c59bcab3743fd1a8688dcbce03c04",
+    "verified_member_hashes": true
+  },
+  "checkout": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20",
+  "checkout_head_at_collection": "e33d8c8602bf1b4bb0d8b31ea68ebaa96f3654f5",
+  "classification": "local development observations; not immutable candidate qualification",
+  "collected_at_utc": "2026-09-12T14:28:33.087831+00:00",
+  "event_status_semantics": "API event exit_status is a test-derived projection of the returned passed field, not an OS process exit. CLI/legacy/independent-worker events retain their actual returned status or process exit.",
+  "executed_source_identity": "Source-authority-double: candidate code plus explicit synthetic installed evaluator authority. The legacy subprocess uses the actual isolated released 0.17.0 evaluator.",
+  "fixture_inventory_at_collection": [
+    {
+      "path": "tests/fixtures/skill_ownership/expected.json",
+      "sha256": "a217c324ea82b02bd50c033115216ac8f2d9e0408403bc763c5bbaec492199c8"
+    },
+    {
+      "path": "tests/fixtures/skill_ownership/payload/skills/harness-operator-brief/scripts/check_brief.py",
+      "sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683"
+    },
+    {
+      "path": "tests/fixtures/skill_ownership/payload/skills/harness-operator-brief/skill-contract.json",
+      "sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52"
+    },
+    {
+      "path": "tests/fixtures/skill_ownership/payload/skills/harness-operator-brief/SKILL.md",
+      "sha256": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51"
+    },
+    {
+      "path": "tests/fixtures/skill_ownership/payload/skills/harness-orient/scripts/orient.py",
+      "sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56"
+    },
+    {
+      "path": "tests/fixtures/skill_ownership/payload/skills/harness-orient/skill-contract.json",
+      "sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627"
+    },
+    {
+      "path": "tests/fixtures/skill_ownership/payload/skills/harness-orient/SKILL.md",
+      "sha256": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf"
+    },
+    {
+      "path": "tests/fixtures/skill_ownership/README.md",
+      "sha256": "25100591b2b3ab5be2b0a86f91037df20e05ba5e5c8d26dd807998fe75730d41"
+    },
+    {
+      "path": "tests/fixtures/skill_ownership/transaction_worker.py",
+      "sha256": "d37d5ac9f560be17eb75b759939f2d5b169a6434beb61b0475616b06bb9c7da8"
+    }
+  ],
+  "full_run": {
+    "argv": [
+      "C:\\Python313\\python.exe",
+      "-B",
+      "-m",
+      "unittest",
+      "tests.test_skill_ownership",
+      "-v"
+    ],
+    "console_retention": "Only the explicitly labeled completion tail is copied here; earlier console chunks remain in the tool transcript. Per-case JSON retains command/worker stdout and stderr.",
+    "directory": "acceptance-source-stabilized",
+    "elapsed_seconds": 1646.616,
+    "legacy_gap": "The original init --apply subcase was only a usage refusal because released init writes by default and has no --apply. The raw observation is preserved; it is not evidence of the legacy init lock guard.",
+    "process_exit_status": 0,
+    "tests_run": 41,
+    "unavailable": "Six symbolic-link creation subcases were skipped on Windows because WinError 1314 denied the mechanism. Actual hardlinks and junctions passed. Native host discovery and plugin execution were intentionally unobserved.",
+    "unittest_result": "OK (skipped=6)"
+  },
+  "groups": {
+    "acceptance-source-development": {
+      "case_records": 27,
+      "event_records": 252,
+      "nonpassing_records": [
+        {
+          "case_outcome": "failed",
+          "skipped_subcases": null,
+          "test": "tests.test_skill_ownership.SkillOwnershipAcceptanceTests.test_own02_preserves_owner_content_and_directories",
+          "unavailable_reason": null
+        },
+        {
+          "case_outcome": "unavailable",
+          "skipped_subcases": null,
+          "test": "tests.test_skill_ownership.SkillOwnershipAcceptanceTests.test_own03_symbolic_link_refusal",
+          "unavailable_reason": "symbolic-link mechanism unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\ownership-acceptance-o6d2d7_t\\\\outside-owned-file' -> 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\ownership-acceptance-o6d2d7_t\\\\repository\\\\.agents\\\\skills\\\\harness-operator-brief\\\\SKILL.md'"
+        },
+        {
+          "case_outcome": "failed",
+          "skipped_subcases": null,
+          "test": "tests.test_skill_ownership.SkillOwnershipAcceptanceTests.test_own03_windows_reparse_junction_refusal",
+          "unavailable_reason": null
+        }
+      ],
+      "recorded_modes": [
+        "source-authority-double"
+      ],
+      "recorded_outcomes": {
+        "failed": 2,
+        "passed": 24,
+        "unavailable": 1
+      }
+    },
+    "acceptance-source-focused": {
+      "case_records": 16,
+      "event_records": 100,
+      "nonpassing_records": [],
+      "recorded_modes": [
+        "source-authority-double"
+      ],
+      "recorded_outcomes": {
+        "passed": 16
+      }
+    },
+    "acceptance-source-legacy-corrected": {
+      "case_records": 1,
+      "event_records": 7,
+      "nonpassing_records": [],
+      "recorded_modes": [
+        "source-authority-double"
+      ],
+      "recorded_outcomes": {
+        "passed": 1
+      }
+    },
+    "acceptance-source-stabilized": {
+      "case_records": 41,
+      "event_records": 651,
+      "nonpassing_records": [
+        {
+          "case_outcome": "unavailable",
+          "skipped_subcases": null,
+          "test": "tests.test_skill_ownership.SkillOwnershipAcceptanceTests.test_own03_symbolic_link_refusal",
+          "unavailable_reason": "symbolic-link mechanism unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\ownership-acceptance-3q2jspom\\\\outside-owned-file-0' -> 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\ownership-acceptance-3q2jspom\\\\repository\\\\.agents\\\\skills\\\\harness-operator-brief\\\\SKILL.md'"
+        }
+      ],
+      "recorded_modes": [
+        "source-authority-double"
+      ],
+      "recorded_outcomes": {
+        "passed": 40,
+        "unavailable": 1
+      }
+    }
+  },
+  "legacy_correction": {
+    "case": "test_own07_released_017_cli_format_and_command_refusals",
+    "claim": "An actual 0.17.0 version probe, then doctor/default-writing init/upgrade each refuse unsupported lock schema, and the ownership command is refused as unknown. All four probes preserve repository bytes. These are four CLI probes, not individual CLI coverage of every writer.",
+    "console_log": "acceptance-source-legacy-corrected.log",
+    "directory": "acceptance-source-legacy-corrected",
+    "elapsed_seconds": 10.201,
+    "process_exit_status": 0,
+    "tests_run": 1,
+    "unittest_result": "OK"
+  },
+  "raw_inventory": {
+    "file_count": 87,
+    "path": "acceptance-source-raw-inventory.json",
+    "sha256": "2f8a05a42c6569a3ac338cd3733012b027e14bef6d7ddaf7e66ea5981b24ceb0",
+    "total_bytes": 66601093
+  },
+  "retention": "Original JSON/log files remain unchanged outside the checkout. The ZIP and SHA-256 inventory preserve development, focused, stabilized, and corrected observations separately. Neither the index nor archive is a VREC acceptance or exact-commit CI qualification.",
+  "schema": "wo-plg-020-local-source-observation-index-v1",
+  "source_provenance": [
+    "The stabilized run imported its parent modules before the final schema-3 structural guard/default-upgrade repair reached disk. Child workers may load later source bytes. Ownership transaction and digest semantics did not change during that run.",
+    "Per-case skip reporting was improved on disk during the run. The imported reporter already associated skipped subtests with their test and correctly marked the symlink case unavailable, but retained only its first unavailable reason, not all six subcase records.",
+    "The current module hash is a collection-time hash of the corrected module. It does not identify all bytes executed during the stabilized run.",
+    "Later guard changes have separate targeted default regression observations retained by the parent. Final CI must bind the whole committed candidate and real installed package."
+  ],
+  "test_module_at_collection": {
+    "path": "tests/test_skill_ownership.py",
+    "sha256": "e3961a6ac3f38b6417f17d0b5610db37001971257129e571510c935a2684a718"
+  }
+}

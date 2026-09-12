@@ -1,0 +1,8 @@
+test_agents_only_upgrade_adds_host_surfaces_without_changing_orientation (tests.test_standard_repository_lifecycle.StandardRepositoryLifecycleTests.test_agents_only_upgrade_adds_host_surfaces_without_changing_orientation) ... ok
+test_standard_upgrade_reports_customized_skills_without_overwriting_them (tests.test_standard_repository_lifecycle.StandardRepositoryLifecycleTests.test_standard_upgrade_reports_customized_skills_without_overwriting_them) ... ok
+test_repository_owned_upgrade_still_repairs_a_missing_retained_file (tests.test_harnessctl.HarnessCtlTests.test_repository_owned_upgrade_still_repairs_a_missing_retained_file) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 4.010s
+
+OK

@@ -4,11 +4,13 @@ import hashlib
 import importlib.util
 import io
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
 import tarfile
 import tempfile
+import tomllib
 import unittest
 from unittest import mock
 import zipfile
@@ -31,6 +33,67 @@ def canonical(value: object) -> bytes:
 
 def digest(raw: bytes) -> str:
     return hashlib.sha256(raw).hexdigest()
+
+
+class OwnershipDistributionInventoryTests(unittest.TestCase):
+    """SPEC-PLG-020: ownership support crosses the package boundary intact."""
+
+    MEMBERS = (
+        "se_harness/skill_ownership.py",
+        "se_harness/skill_ownership_contract.json",
+    )
+
+    def test_ownership_runtime_and_data_are_selected_for_both_distributions(self) -> None:
+        project = tomllib.loads((REPOSITORY_ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+        setuptools = project["tool"]["setuptools"]
+        self.assertIn("se_harness*", setuptools["packages"]["find"]["include"])
+        self.assertIn("skill_ownership_contract.json", setuptools["package-data"]["se_harness"])
+        self.assertIn("include se_harness/*.json", (REPOSITORY_ROOT / "MANIFEST.in").read_text(encoding="utf-8"))
+        for member in self.MEMBERS:
+            with self.subTest(member=member):
+                self.assertTrue((REPOSITORY_ROOT / member).is_file())
+
+    @unittest.skipUnless(
+        os.environ.get("SE_HARNESS_OWNERSHIP_WHEEL"),
+        "actual non-promotable wheel is supplied by the package-acceptance lane",
+    )
+    def test_handed_over_wheel_and_backend_source_inventory_include_exact_ownership_bytes(self) -> None:
+        wheel = Path(os.environ["SE_HARNESS_OWNERSHIP_WHEEL"])
+        source_inventory = Path(os.environ["SE_HARNESS_OWNERSHIP_SOURCE_MANIFEST"])
+        selected = source_inventory.read_text(encoding="utf-8").splitlines()
+        with zipfile.ZipFile(wheel) as archive:
+            names = archive.namelist()
+            for member in self.MEMBERS:
+                with self.subTest(member=member):
+                    self.assertEqual(1, names.count(member), "wheel member must be unique")
+                    self.assertEqual(1, selected.count(member), "source distribution selection must be unique")
+                    # git archive builds committed LF text on both runners; the
+                    # Windows checkout may materialize the same file with CRLF.
+                    expected = (REPOSITORY_ROOT / member).read_text(encoding="utf-8").encode("utf-8")
+                    self.assertEqual(expected, archive.read(member))
+            self.assertIsInstance(json.loads(archive.read(self.MEMBERS[1])), dict)
+
+    @unittest.skipUnless(
+        os.environ.get("SE_HARNESS_OWNERSHIP_SDIST"),
+        "actual non-promotable source archive is supplied by the package-acceptance lane",
+    )
+    def test_observed_source_archive_includes_exact_ownership_bytes(self) -> None:
+        archive_path = Path(os.environ["SE_HARNESS_OWNERSHIP_SDIST"])
+        project = tomllib.loads((REPOSITORY_ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]
+        prefix = f"{project['name'].replace('-', '_')}-{project['version']}/"
+        with tarfile.open(archive_path, "r:gz") as archive:
+            members = archive.getmembers()
+            for member in self.MEMBERS:
+                with self.subTest(member=member):
+                    selected = [item for item in members if item.name == prefix + member]
+                    self.assertEqual(1, len(selected), "source member must be unique")
+                    self.assertTrue(selected[0].isfile(), "source member must be an ordinary file")
+                    self.assertLess(selected[0].size, 16 * 1024 * 1024)
+                    payload = archive.extractfile(selected[0])
+                    self.assertIsNotNone(payload)
+                    expected = (REPOSITORY_ROOT / member).read_text(encoding="utf-8").encode("utf-8")
+                    with payload:
+                        self.assertEqual(expected, payload.read())
 
 
 class IntegrationPackageContractTests(unittest.TestCase):

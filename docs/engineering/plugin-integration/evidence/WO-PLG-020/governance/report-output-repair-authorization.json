@@ -1,0 +1,22 @@
+{
+  "schema": "wo-plg-020-report-output-repair-authorization-v1",
+  "recorded_at_utc": "2026-09-12T19:53:20.450681+00:00",
+  "user_instruction": "ok, fix both problems then",
+  "work_order": "WO-PLG-020",
+  "scope_additions": [
+    "se_harness/release_qualification.py",
+    "se_harness/engine/generate_harness_dashboard.py",
+    "se_harness/engine/dashboard_bundle.py",
+    "se_harness/engine/dashboard_snapshot.py",
+    "tests/test_report_output_safety.py"
+  ],
+  "effect": "Implement the two reviewed candidate report-output repairs and retain source/package regressions.",
+  "work_order_observed_sha256": "433418055b00c7cd42cb471b8a3921623a116f4a61bfb95abf07a48b5abfcbd6",
+  "prior_approval_work_order_sha256": "cab8f547cb1f260c05d3fa7c0fc5d4c4309ee8d0a4cadc695d84b3806cba72ea",
+  "hash_semantics": "Prior approval hash is historical application evidence; current WO includes the subsequent authorized repair scope and note.",
+  "four_approved_appendices_unchanged": true,
+  "lifecycle": "in_progress",
+  "new_compatibility_exception": false,
+  "implementation_verification": false,
+  "release_authority": false
+}

@@ -88,3 +88,27 @@ Native activation, C10/C11 enforcement, live repository rollout, and public qual
 The existing preservation rules also apply after interruption. Test changed tracked files, newly created destinations, corrupted snapshots, and tampered/truncated/path-escaping recovery records before attempting recovery.
 Recovery must retain usable diagnostic inputs and preserve unexpected current content; it must not overwrite that content merely to reconstruct the old snapshot.
 These are concrete negative cases for REQ-PLG-030 and PLG-OWN-005 through PLG-OWN-010, not permission to weaken rollback or delete owner changes.
+
+
+## Approved legacy-reader reconciliation — 2026-09-12
+
+The operator approved this exact appendix as `assurance-owner` with the instruction "i approve the 4 amendements". The approval was recorded at `2026-09-12T18:28:18Z` under WO-PLG-020. Its reviewed proposal and decision receipt are retained in that work order's governance evidence. The original definition text, approvals and historical observations remain preserved. This approval does not establish passing acceptance, completion or verification.
+
+### Approved applicability: OWN07 interface census and report boundary
+
+This appendix supersedes only OWN07's unqualified “Every writing path” and universal read-only-refusal wording. Test the real isolated released 0.17 executable against a valid schema-4 fixture and retain a version check, syntactically valid argv, actual process status, diagnostics and complete before/after snapshots. Enumerate every public interface and writing mode that can modify installed files/the lock or create/change formal governance artifacts, including the applicable installer, scaffolding, artifact creation, transition/decision/risk, verification capture and release preparation interfaces. Trace shared direct/delegated entry points separately and identify any coverage inference. Every applicable protected interface MUST refuse before its mutation with an unsupported-lock or evaluator-incompatibility diagnostic. Use a valid fixture for that interface or otherwise prove that the compatibility check caused the refusal. An unrelated lifecycle/input refusal, parser usage error or candidate-only mocked guard is insufficient evidence.
+
+Separately exercise artifact-graph validation, evidence generation, retained check-result generation and derived reporting. Record their actual refusal or successful output generation. Successful generation of the specifically observed evidence/report output may satisfy this boundary observation only when snapshots prove that pre-existing installation/configuration/lock bytes, formal artifact metadata and external provider bytes remain unchanged. It is not a passing unsupported-format refusal and MUST NOT be reported as installation compatibility, governing readiness or matching evaluator-bound assurance. Unexpected additional writes or changes remain failures.
+
+Run the expanded OWN07 selection in the already required Python 3.11 smoke and Python 3.13 full source/package observations on Ubuntu and Windows. Preserve the original four-probe results and the newly observed contrary results; do not rewrite them. All other OWN cases, regression/package requirements, source/package authority distinctions, unavailable-mechanism rules and exact-candidate evidence obligations remain unchanged. Completion and VREC preparation remain pending until the amended observations and existing gates pass.
+
+
+## Approved exclusion of released-0.17 migration acceptance — 2026-09-12
+
+The operator instructed "we don't care about 0.17, just ignore" after review of the old-tool acceptance issue. This instruction authorizes the following scope decision as `assurance-owner`. The receipt was recorded at `2026-09-12T20:57:40.552684+00:00` under WO-PLG-020. Earlier approvals and observations are preserved.
+
+This appendix supersedes the released-0.17 part of OWN07 and the preceding requirement to run the expanded 0.17 interface census in every source/package/platform selection. The nine cases that invoke actual 0.17 against migrated schema-4 fixtures are removed from required acceptance. Their original test definitions, command outputs, snapshots and failures remain available in the retained historical archives. Excluded observations are neither passing tests nor expected failures or skipped required coverage.
+
+The active OWN07 observations exercise the migration-capable candidate: unsupported old/future lock schemas refuse before mutation; qualification output cannot recreate a retired skill on either a supported lock or an inspection-failure path; dashboard output cannot replace installed workflow or retained discovery paths. Keep the candidate report-output unit regressions, ordinary destination success cases and applicable real linked-path/promotion-boundary cases.
+
+Run the revised candidate selection in the existing Python 3.11 smoke and Python 3.13 full source/package observations on Ubuntu and Windows. All remaining OWN01-OWN14 criteria, canonical source regression, package checks, root-pinned released-evaluator governance and ordinary predecessor upgrade rehearsal remain required. This scope change removes the old-0.17 acceptance blocker only; implementation completion, VREC preparation, verification and release still require their own actual results and gates.

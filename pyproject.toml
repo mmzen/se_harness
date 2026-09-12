@@ -31,6 +31,7 @@ se_harness = [
   "workflow_contract.json",
   "quality_gates_contract.json",
   "hash_bound_classes.json",
+  "skill_ownership_contract.json",
   "engine/harness_explorer/index.template.html",
 ]
 

@@ -35,6 +35,7 @@ from se_harness.integrity import (
     parse_lock,
     pretty_json_bytes,
     raw_sha256,
+    validate_output_path_spelling,
 )
 from se_harness.preflight import inspect_installation
 from se_harness.runtime_identity import (
@@ -221,6 +222,11 @@ def write_qualification_result(
 ) -> None:
     """Publish complete canonical bytes through an exclusive same-directory link."""
 
+    try:
+        for candidate in (path, *forbidden_roots):
+            validate_output_path_spelling(candidate)
+    except IntegrityError as exc:
+        raise HarnessError(str(exc)) from exc
     lexical = Path(os.path.abspath(path.expanduser()))
     if lexical.name in {"", ".", ".."}:
         raise HarnessError("qualification output name is invalid")

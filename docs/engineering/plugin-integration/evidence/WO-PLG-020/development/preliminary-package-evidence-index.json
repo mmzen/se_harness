@@ -1,0 +1,811 @@
+{
+  "acceptance_commands": [
+    {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_integration_package.OwnershipDistributionInventoryTests",
+        "-v"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\w20s",
+      "name": "package-inventory",
+      "returncode": 0,
+      "seconds": 0.5241506099700928,
+      "stderr_sha256": "9ea9db9185a47043d02efb93feec4c6b406eee2d6b3763cb0403ba2280677932",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\candidate-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\run-preliminary-acceptance.py",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\w20s\\tests\\test_skill_ownership.py",
+        "package",
+        "smoke",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\package-smoke"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package",
+      "name": "installed-smoke",
+      "returncode": 0,
+      "seconds": 151.93836331367493,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "429c65cf880d28eb4f1499164f691951fa986e928b7e505c07465ba342bdd509"
+    },
+    {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\candidate-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\run-preliminary-acceptance.py",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\w20s\\tests\\test_skill_ownership.py",
+        "package",
+        "full",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\package-full"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package",
+      "name": "installed-full",
+      "returncode": 0,
+      "seconds": 1708.6323826313019,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "cf1660691fe776ba810a229c1f9ba3f7db2683d0da7181d92a82c17a1e31724e"
+    }
+  ],
+  "candidate_commit": null,
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\build-env\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "install",
+        "--disable-pip-version-check",
+        "--no-index",
+        "--no-deps",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\build-tools\\setuptools-84.0.0-py3-none-any.whl"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package",
+      "name": "install-build-backend",
+      "returncode": 0,
+      "seconds": 5.641350269317627,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "f308eb85a7f34cfab3fec74d04e34da602a3c70f296a94ae2276a6f20ecb143f"
+    },
+    {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\build-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-c",
+        "import sys; from setuptools.build_meta import build_wheel; print(build_wheel(sys.argv[1]))",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\dist"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\w20s",
+      "name": "build-one-preliminary-wheel",
+      "returncode": 0,
+      "seconds": 2.0449318885803223,
+      "stderr_sha256": "d384bdb240c003aaf14d3a7460514fd5f2b83b6fba482ce56213cd91ed072e85",
+      "stdout_sha256": "f542f3c522bffe00ce01c6b409b106896f2458a5a486654ec6c2c856e163bac7"
+    },
+    {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\build-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-c",
+        "import sys; from setuptools.build_meta import build_sdist; print(build_sdist(sys.argv[1]))",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\dist"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\w20s",
+      "name": "build-preliminary-sdist",
+      "returncode": 0,
+      "seconds": 2.6132373809814453,
+      "stderr_sha256": "19bbb7f7b63e32b282602097f77f924963627b8b14819b1a0a7d137068fa2d71",
+      "stdout_sha256": "2bd0b02363eea6dea9694f40e0b8e1893d46dcdbb0a066b6e9d9e0d46df28d96"
+    },
+    {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\candidate-env\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "install",
+        "--disable-pip-version-check",
+        "--no-index",
+        "--no-deps",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\dist\\se_harness-0.18.0-py3-none-any.whl"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package",
+      "name": "install-preliminary-candidate",
+      "returncode": 0,
+      "seconds": 4.028673887252808,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "5af7a3bf6567477400a88cb918587822742a4d1c4e3345a29c0ef1a8ba536fb8"
+    },
+    {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\candidate-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "identity",
+        "--role",
+        "candidate-package",
+        "--expected-version",
+        "0.18.0",
+        "--expected-root",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\candidate-env",
+        "--checkout-root",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\w20s",
+        "--entry-point",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\candidate-env\\Scripts\\harnessctl.exe",
+        "--require-isolated-python",
+        "--require-entry-point",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package",
+      "name": "candidate-role-missing-commit",
+      "returncode": 1,
+      "seconds": 0.7942264080047607,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "5c7a7f48bfa1cbe88e92e1bae939eb4d3e2176b67f3af0de7bba7c1e77096eee"
+    },
+    {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\candidate-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-c",
+        "import hashlib,json,pathlib,sys; import se_harness; from se_harness.evaluator_identity import installed_evaluator_identity; identity=installed_evaluator_identity(); wheel=pathlib.Path(sys.argv[1]); assert identity.archive_sha256==hashlib.sha256(wheel.read_bytes()).hexdigest(); assert pathlib.Path(se_harness.__file__).resolve().is_relative_to(pathlib.Path(sys.prefix).resolve()); assert sys.flags.isolated; print(json.dumps({\"preliminary\":True,\"promotable\":False,\"candidate_commit\":None,\"identity\":identity.to_lock(),\"module\":se_harness.__file__,\"prefix\":sys.prefix,\"python\":sys.version,\"argv\":sys.orig_argv,\"isolated\":sys.flags.isolated},sort_keys=True))",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\dist\\se_harness-0.18.0-py3-none-any.whl"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package",
+      "name": "installed-content-identity",
+      "returncode": 0,
+      "seconds": 0.6303403377532959,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "887304953682e69914d4f8a88eab9fac3d3c043f2857647ed278bda038cbc0d2"
+    }
+  ],
+  "exact_committed_candidate": false,
+  "excluded_from_archive": [
+    "venvs",
+    "wheel bytes",
+    "sdist bytes",
+    "partial or complete source trees"
+  ],
+  "frozen_test_module_sha256": "9d0c15fa7f6e19c8b0be3cc55903e1bfb3ed0924933076e547123a361d4a6faf",
+  "full": {
+    "case_records": 41,
+    "cases": [
+      {
+        "events": 5,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own01_cli_plan_apply_stale_refusal_and_restore_json-e1975487.json",
+        "sha256": "86b42b6f0d890296280d6a616dbd868288eb1647b9847676f0bde65ebb135e6c",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own01_cli_plan_apply_stale_refusal_and_restore_json",
+        "unavailable_reason": null
+      },
+      {
+        "events": 12,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own01_exact_catalog_and_each_selected_host-56a76387.json",
+        "sha256": "ffbafea453a230db465313ae836bfe508281a9a983ef03674a029f9cb9711188",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own01_exact_catalog_and_each_selected_host",
+        "unavailable_reason": null
+      },
+      {
+        "events": 2,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own02_preserves_owner_content_and_directories-556d5afb.json",
+        "sha256": "28a543fa204abe9a915e977124713a495e2da9c33b0ebb16b388dc6b8ed6cfce",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own02_preserves_owner_content_and_directories",
+        "unavailable_reason": null
+      },
+      {
+        "events": 1,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own03_actual_aggregate_payload_limit-a6062b5c.json",
+        "sha256": "eba6951d61758aa6943b330acc623567ef9848e5eb011f85159af36fcf8f4bb0",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_actual_aggregate_payload_limit",
+        "unavailable_reason": null
+      },
+      {
+        "events": 1,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own03_actual_external_file_size_limit-27ec27ad.json",
+        "sha256": "24a7d7d70d3440549ee1405f01d1561326255c0080b48a896769afe25ab2716b",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_actual_external_file_size_limit",
+        "unavailable_reason": null
+      },
+      {
+        "events": 2,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own03_assembly_unknown_schema_and_duplicate_keys_refuse-7323f649.json",
+        "sha256": "0e2c554a607a4159bbdf7677cbb8333d5a8626f3abf30fd9b7715915d6ad8bce",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_assembly_unknown_schema_and_duplicate_keys_refuse",
+        "unavailable_reason": null
+      },
+      {
+        "events": 4,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own03_closed_binding_duplicate_keys_and_control_limit-16f0513d.json",
+        "sha256": "d630acd6e5f4253a43e64e8d422336b0af9663fff4baed1ae5c2e39c1be406ec",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_closed_binding_duplicate_keys_and_control_limit",
+        "unavailable_reason": null
+      },
+      {
+        "events": 5,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own03_explicit_hosts_roots_and_closed_expected_fields-53159df8.json",
+        "sha256": "451a1b198620b1db54bbdefc53bbdb47a3d2698671c11c09edab3848d6c9b20c",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_explicit_hosts_roots_and_closed_expected_fields",
+        "unavailable_reason": null
+      },
+      {
+        "events": 2,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own03_external_hard_link_and_unlisted_file_refuse-2cdb8788.json",
+        "sha256": "dfacde7e4693f08a89cbe28563aef08e0850f96952742d058bbe7fda82e621a8",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_external_hard_link_and_unlisted_file_refuse",
+        "unavailable_reason": null
+      },
+      {
+        "events": 6,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own03_hard_link_refusal-9d199033.json",
+        "sha256": "84a75d819d81462ee9e1b0f1418ac6a2d134884c6bce2e5d12b18d2ccb6e4054",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_hard_link_refusal",
+        "unavailable_reason": null
+      },
+      {
+        "events": 2,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own03_inventory_count_and_declared_size_limits-f8e6a3e8.json",
+        "sha256": "0c9bcba0477c9b9ffedab264445bd1b7decc5eceff45e97796408096ec5387bf",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_inventory_count_and_declared_size_limits",
+        "unavailable_reason": null
+      },
+      {
+        "events": 3,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own03_modified_missing_and_unowned_catalog_refuse-4254ef09.json",
+        "sha256": "7e8c65c849b9f44dc578c175b9e6fd74bf756bcbb1550358af0751f6ed590765",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_modified_missing_and_unowned_catalog_refuse",
+        "unavailable_reason": null
+      },
+      {
+        "events": 1,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own03_repository_case_spelling_collision_refuses-0ad0367e.json",
+        "sha256": "99777738dfd5b6116545503dfcd713f61b6ff568ccdb05a34ba6f088270fffdd",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_repository_case_spelling_collision_refuses",
+        "unavailable_reason": null
+      },
+      {
+        "events": 0,
+        "fault_observations": 0,
+        "outcome": "unavailable",
+        "path": "package-full/cases/test_own03_symbolic_link_refusal-495449ed.json",
+        "sha256": "3b6d733c5664d7ee5bab4dba2c50fc989fe05396191200664e716c27945926ef",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_symbolic_link_refusal",
+        "unavailable_reason": "symbolic-link mechanism unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\ownership-acceptance-i59h0b82\\\\outside-owned-file-0' -> 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\ownership-acceptance-i59h0b82\\\\repository\\\\.agents\\\\skills\\\\harness-operator-brief\\\\SKILL.md'"
+      },
+      {
+        "events": 7,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own03_unsafe_inventory_paths_and_case_collisions-2bd7ebb0.json",
+        "sha256": "3e9c81487cb8b2c3eb33756805f24805486262a0fab66eb8c8cd2850853d8fb6",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_unsafe_inventory_paths_and_case_collisions",
+        "unavailable_reason": null
+      },
+      {
+        "events": 3,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own03_windows_reparse_junction_refusal-a1e1d4bd.json",
+        "sha256": "62c55ed1c1ccfada65ce17886fe88c63c7148aa498fe7b69909c58b5d0b0ede8",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_windows_reparse_junction_refusal",
+        "unavailable_reason": null
+      },
+      {
+        "events": 4,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own03_wrong_typed_assembly_values_are_bounded_refusals-1d5fb413.json",
+        "sha256": "b117b8d42b76e16ea666fa26a3f45669fc9e43e2e73796f21824569c8731a08f",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_wrong_typed_assembly_values_are_bounded_refusals",
+        "unavailable_reason": null
+      },
+      {
+        "events": 14,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own04_stale_equal_size_file_lock_binding_and_inventory-60d44ad4.json",
+        "sha256": "98ca4bfe10a81a94f6e44699180b3dc0a9bb19e91ffa419d2070c9d683f39272",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own04_stale_equal_size_file_lock_binding_and_inventory",
+        "unavailable_reason": null
+      },
+      {
+        "events": 3,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own05_direct_installer_junction_alias_cannot_recreate_retired_core-682666ed.json",
+        "sha256": "74cc017518bd33f340baa63770334b970bd8d9e486b5fe68f865ccdbdb8b232d",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own05_direct_installer_junction_alias_cannot_recreate_retired_core",
+        "unavailable_reason": null
+      },
+      {
+        "events": 10,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own05_handcrafted_direct_installer_path_aliases_cannot_recreate_retired_core-4050d864.json",
+        "sha256": "f3dd9390e59aeb82417f44bb9d259b4cf1ee007fb2e65061892ae6020dfbed7a",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own05_handcrafted_direct_installer_path_aliases_cannot_recreate_retired_core",
+        "unavailable_reason": null
+      },
+      {
+        "events": 7,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own05_replay_doctor_and_direct_installer_preserve_binding-575af040.json",
+        "sha256": "ab1c2277c5a4f408977d2e40557f85d0a555f1ba97e676ad76aed237cf637a2c",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own05_replay_doctor_and_direct_installer_preserve_binding",
+        "unavailable_reason": null
+      },
+      {
+        "events": 2,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own06_invalid_ownership_format_upgrade_is_atomic-d1b95ade.json",
+        "sha256": "499b01512f2f1e6ee8ca73257aa50edae83192e7d9cbc2dd342e514e28ea5a80",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own06_invalid_ownership_format_upgrade_is_atomic",
+        "unavailable_reason": null
+      },
+      {
+        "events": 3,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own06_synthetic_compatible_prior_version_upgrades_preserving_binding-b3d93774.json",
+        "sha256": "9f8a5633bc4225e6f21d6507829a03ec230ab7dd350e4ca8ffcda11a1a1c6320",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own06_synthetic_compatible_prior_version_upgrades_preserving_binding",
+        "unavailable_reason": null
+      },
+      {
+        "events": 6,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own07_released_017_reader_refuses_all_writing_entry_points-312473a3.json",
+        "sha256": "9d61d2de67c17bceefc67e37202ce55cc99b9c049ee654122f3adad6141a7e39",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own07_released_017_reader_refuses_all_writing_entry_points",
+        "unavailable_reason": null
+      },
+      {
+        "events": 3,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own07_unsupported_old_lock_refuses_before_writes-5bd736fc.json",
+        "sha256": "9059d63a0d29f102416efdd60d705c2172a172315286667322b1e0071cb9e52a",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own07_unsupported_old_lock_refuses_before_writes",
+        "unavailable_reason": null
+      },
+      {
+        "events": 4,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own08_current_lock_evaluator_evidence_matches_schema4_identity-0285dc2d.json",
+        "sha256": "1010d3162d4d6f4a1990e02b0fdfc437fd6b4b1b71bd523aa74960dbfc8e2ab8",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own08_current_lock_evaluator_evidence_matches_schema4_identity",
+        "unavailable_reason": null
+      },
+      {
+        "events": 8,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own08_reintroduced_copy_and_deleted_or_tampered_binding_fail_integrity-416be02f.json",
+        "sha256": "c4949c340fee1218e22f85de7be7afe27faff73aac4c0948c62b6a6a74c647ef",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own08_reintroduced_copy_and_deleted_or_tampered_binding_fail_integrity",
+        "unavailable_reason": null
+      },
+      {
+        "events": 172,
+        "fault_observations": 85,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own09_exception_at_each_write_and_durable_boundary_rolls_back-8b4128ae.json",
+        "sha256": "b428c75a54239549f33e6b08c2dc0ccd6246efce8e6bd6c01e1f42b55cc8e884",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own09_exception_at_each_write_and_durable_boundary_rolls_back",
+        "unavailable_reason": null
+      },
+      {
+        "events": 5,
+        "fault_observations": 1,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own10_byte_identical_owner_replacement_is_not_recovery_authority-01ec364d.json",
+        "sha256": "fa8dc228d767d8cf48711a363e4e8a2c2e80b65776c5919620964e5f7de1a6d7",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own10_byte_identical_owner_replacement_is_not_recovery_authority",
+        "unavailable_reason": null
+      },
+      {
+        "events": 16,
+        "fault_observations": 4,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own10_durable_commit_and_partial_cleanup_finalize_applied_state-44eac0b7.json",
+        "sha256": "e3a0775e43594aeceb15e068392f7112b5c6d19a6bc5ee23323ab8653f3f6fc3",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own10_durable_commit_and_partial_cleanup_finalize_applied_state",
+        "unavailable_reason": null
+      },
+      {
+        "events": 15,
+        "fault_observations": 3,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own10_intervening_owner_edits_and_new_files_are_preserved-3a5548f5.json",
+        "sha256": "7744b1e87aeb517a7ae538db32ce2bb0f90a5655e1428e81bfb2f22d9fb8b252",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own10_intervening_owner_edits_and_new_files_are_preserved",
+        "unavailable_reason": null
+      },
+      {
+        "events": 270,
+        "fault_observations": 67,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own10_killed_process_recovers_each_durable_boundary-ead3b92b.json",
+        "sha256": "a4c5a5067cfd0293194a1731620eec90f8a9447e4b0810ba899eb83b8e46c385",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own10_killed_process_recovers_each_durable_boundary",
+        "unavailable_reason": null
+      },
+      {
+        "events": 12,
+        "fault_observations": 2,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own10_recovery_write_failure_retains_diagnostics_and_can_retry-9fd793c3.json",
+        "sha256": "e22cb68d8f42485172e128c9227ac61ae6ca5cd0bb659f4fd9a85c70eae538a7",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own10_recovery_write_failure_retains_diagnostics_and_can_retry",
+        "unavailable_reason": null
+      },
+      {
+        "events": 7,
+        "fault_observations": 1,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own10_rehashed_journal_cannot_delete_preexisting_owner_empty_directory-1a4c892d.json",
+        "sha256": "fbca77b7e221cbe163d63b281ec23c97bfefe8bb07fbe681bbfb4f211c370849",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own10_rehashed_journal_cannot_delete_preexisting_owner_empty_directory",
+        "unavailable_reason": null
+      },
+      {
+        "events": 12,
+        "fault_observations": 1,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own10_tampered_truncated_and_escaping_recovery_never_write-a42e3790.json",
+        "sha256": "da1d427e356fa49cca1efaa764e85ae8d4e619d6c06848f0ca90a1902bff6a80",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own10_tampered_truncated_and_escaping_recovery_never_write",
+        "unavailable_reason": null
+      },
+      {
+        "events": 5,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own11_restore_exact_distribution_and_refuse_owner_conflicts-a16aa572.json",
+        "sha256": "c074a5d95c2e6ddedcb364f0be3b8280187117f222cbbcd5d4b15a5bdc18b46d",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own11_restore_exact_distribution_and_refuse_owner_conflicts",
+        "unavailable_reason": null
+      },
+      {
+        "events": 3,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own12_clone_without_plugin_is_integral_and_availability_unobserved-d4965718.json",
+        "sha256": "3b87b25871a3c034d24faa97f64d4b7a007ecc2afbe308137cccb01d6a6984f3",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own12_clone_without_plugin_is_integral_and_availability_unobserved",
+        "unavailable_reason": null
+      },
+      {
+        "events": 3,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own13_independent_processes_refuse_contention_and_stale_plan-91fbb354.json",
+        "sha256": "a32a450d37bd45f0d7c56742a5bb4d1073dd9f08b20126c4e56acadac7fe98d1",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own13_independent_processes_refuse_contention_and_stale_plan",
+        "unavailable_reason": null
+      },
+      {
+        "events": 4,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own14_independent_expected_identity_mismatches_refuse-9d22c63b.json",
+        "sha256": "024e19b5816e89068934b64eb5dfa31008eba51e4441172160acf711dd957ca7",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own14_independent_expected_identity_mismatches_refuse",
+        "unavailable_reason": null
+      },
+      {
+        "events": 5,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own14_missing_payload_core_and_evaluator_identity_refuse-f6547da1.json",
+        "sha256": "494b272cc0f54925c440e0f58d70e2ed7843e1cc10b5f2bb217ebb5e7d1d6814",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own14_missing_payload_core_and_evaluator_identity_refuse",
+        "unavailable_reason": null
+      },
+      {
+        "events": 2,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-full/cases/test_own14_rehashed_modified_retained_contract_or_helper_remains_incompatible-1171bbcd.json",
+        "sha256": "bfa98712215c0ff92c3ca3076e660377dbe7767026fc43b3add73a071b70aab4",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own14_rehashed_modified_retained_contract_or_helper_remains_incompatible",
+        "unavailable_reason": null
+      }
+    ],
+    "outcomes": {
+      "passed": 40,
+      "unavailable": 1
+    },
+    "runtime": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\candidate-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\run-preliminary-acceptance.py",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\w20s\\tests\\test_skill_ownership.py",
+        "package",
+        "full",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\package-full"
+      ],
+      "candidate_commit": null,
+      "candidate_version": "0.18.0",
+      "errors": 0,
+      "exact_committed_candidate": false,
+      "failures": 0,
+      "head_commit": null,
+      "imported_evaluator": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\candidate-env\\Lib\\site-packages\\se_harness\\__init__.py",
+      "isolated": 1,
+      "mode": "package",
+      "platform": "Windows-11-10.0.26100-SP0",
+      "preliminary_content_snapshot": true,
+      "promotable": false,
+      "python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+      "python_executable": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\candidate-env\\Scripts\\python.exe",
+      "run_attempt": null,
+      "run_id": null,
+      "runner_image": null,
+      "runner_image_version": null,
+      "runner_os": null,
+      "schema": "se-harness-skill-ownership-preliminary-v1",
+      "selection": "full",
+      "skipped": [
+        {
+          "reason": "symbolic-link mechanism unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\ownership-acceptance-i59h0b82\\\\outside-owned-file-0' -> 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\ownership-acceptance-i59h0b82\\\\repository\\\\.agents\\\\skills\\\\harness-operator-brief\\\\SKILL.md'",
+          "test": "test_own03_symbolic_link_refusal (ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_symbolic_link_refusal) (selected='repository\\\\.agents\\\\skills\\\\harness-operator-brief\\\\SKILL.md')"
+        },
+        {
+          "reason": "symbolic-link mechanism unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\ownership-acceptance-i59h0b82\\\\outside-owned-file-1' -> 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\ownership-acceptance-i59h0b82\\\\repository\\\\.engineering-harness.lock'",
+          "test": "test_own03_symbolic_link_refusal (ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_symbolic_link_refusal) (selected='repository\\\\.engineering-harness.lock')"
+        },
+        {
+          "reason": "symbolic-link mechanism unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\ownership-acceptance-i59h0b82\\\\outside-owned-file-2' -> 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\ownership-acceptance-i59h0b82\\\\binding.json'",
+          "test": "test_own03_symbolic_link_refusal (ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_symbolic_link_refusal) (selected='binding.json')"
+        },
+        {
+          "reason": "symbolic-link mechanism unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\ownership-acceptance-i59h0b82\\\\outside-owned-file-3' -> 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\ownership-acceptance-i59h0b82\\\\external\\\\codex\\\\verity-plane\\\\assembly-inventory.json'",
+          "test": "test_own03_symbolic_link_refusal (ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_symbolic_link_refusal) (selected='external\\\\codex\\\\verity-plane\\\\assembly-inventory.json')"
+        },
+        {
+          "reason": "symbolic-link mechanism unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\ownership-acceptance-i59h0b82\\\\outside-owned-file-4' -> 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\ownership-acceptance-i59h0b82\\\\external\\\\codex\\\\verity-plane\\\\.codex-plugin\\\\plugin.json'",
+          "test": "test_own03_symbolic_link_refusal (ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_symbolic_link_refusal) (selected='external\\\\codex\\\\verity-plane\\\\.codex-plugin\\\\plugin.json')"
+        },
+        {
+          "reason": "symbolic-link mechanism unavailable: [WinError 1314] A required privilege is not held by the client: 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\ownership-acceptance-i59h0b82\\\\outside-owned-file-5' -> 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\ownership-acceptance-i59h0b82\\\\external\\\\codex\\\\verity-plane\\\\skills\\\\harness-operator-brief\\\\SKILL.md'",
+          "test": "test_own03_symbolic_link_refusal (ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_symbolic_link_refusal) (selected='external\\\\codex\\\\verity-plane\\\\skills\\\\harness-operator-brief\\\\SKILL.md')"
+        }
+      ],
+      "snapshot_manifest_sha256": "2b9214b9fd3a31ef48ede81fab59b1fde3e85cb51bb4b816789927ed3fb4381a",
+      "source_archive_sha256": "63fa7df32d92b0c4e4bc3f3d8c0182f9ffa3d422c785d29e135e0c92b0b0eee3",
+      "source_inventory_sha256": "c012aa8476b08a095a69c317399f77628344fd916026bbba6a86ead21b75fb56",
+      "status": "pass",
+      "test_module_sha256": "9d0c15fa7f6e19c8b0be3cc55903e1bfb3ed0924933076e547123a361d4a6faf",
+      "tests": 41,
+      "wheel_name": "se_harness-0.18.0-py3-none-any.whl",
+      "wheel_sha256": "0685d3f8090b61a12b96eb8838912d54df385b68b88025c4a36372625b270212"
+    },
+    "runtime_path": "package-full/runtime.json",
+    "runtime_sha256": "65626ad9ce89aacd22cc24fb4160f44487daee22f67f6bd10847afbafb3a54a5"
+  },
+  "limitations": {
+    "additional_local_wheel_built": false,
+    "commit_identity_limit": "No exact candidate commit exists for this uncommitted snapshot. Candidate-package role identity returned exit 1 with RID015 for the missing candidate commit; that result is preserved and is not reported as a qualification pass. Installed content identity and isolated acceptance were separately observed.",
+    "exact_committed_candidate": false,
+    "full_run_completion": "The old-freeze full invocation completed before its 1800-second timeout: 41 tests, zero failures/errors, 40 passed case records and one unavailable case containing six Windows symbolic-link subcases. No incomplete full-run result or process cleanup was required.",
+    "local_platform_coverage": "Observed Windows 11 / Python 3.13.3 only. Linux and the final Python 3.11/3.13 CI matrix remain unobserved here.",
+    "observation_use": "Preliminary old-freeze evidence only; not acceptance of later source fixes or final CI.",
+    "original_artifacts_and_failures_retained": true,
+    "parent_reported_subsequent_findings": [
+      "Default schema-3 read-only installation planning raises on customized retained skills instead of classifying the change.",
+      "An agent-only six-core standard repository cannot add its missing Claude adapter through ordinary installation."
+    ],
+    "promotable": false,
+    "schema": "se-harness-preliminary-package-limitations-v1",
+    "snapshot_manifest_sha256": "2b9214b9fd3a31ef48ede81fab59b1fde3e85cb51bb4b816789927ed3fb4381a",
+    "source_changed_after_snapshot": true,
+    "superseding_source_fix_status": "In progress at notification; not included in this already-built wheel.",
+    "test_observation_gaps": [
+      {
+        "case": "OWN-07 released 0.17 reader",
+        "disposition": "Preserve original raw evidence; final corrected test module and focused actual-0.17 observation required. No candidate wheel rebuild for test-only correction.",
+        "effect": "The old-freeze init observation is an argument-usage refusal, not proof of the supported init writing entry point rejecting schema-4 before writes.",
+        "probe": "init with unsupported --apply option"
+      }
+    ]
+  },
+  "observation_use": "Preliminary old content snapshot only; no final candidate or verification verdict.",
+  "outer_process": {
+    "exit_code": 0,
+    "full_invocation_timeout_seconds": 1800,
+    "status": "completed"
+  },
+  "package": {
+    "artifacts": {
+      "SOURCES.txt": {
+        "bytes": 7580,
+        "sha256": "c012aa8476b08a095a69c317399f77628344fd916026bbba6a86ead21b75fb56"
+      },
+      "se_harness-0.18.0-py3-none-any.whl": {
+        "bytes": 501858,
+        "sha256": "0685d3f8090b61a12b96eb8838912d54df385b68b88025c4a36372625b270212"
+      },
+      "se_harness-0.18.0.tar.gz": {
+        "bytes": 803747,
+        "sha256": "63fa7df32d92b0c4e4bc3f3d8c0182f9ffa3d422c785d29e135e0c92b0b0eee3"
+      }
+    },
+    "backend": {
+      "name": "setuptools-84.0.0-py3-none-any.whl",
+      "sha256": "51a52592b3b99e102b609654876bd65f19f999935166d1352678931132b0c670"
+    },
+    "base_commit": "e33d8c8602bf1b4bb0d8b31ea68ebaa96f3654f5",
+    "candidate_commit": null,
+    "exact_committed_candidate": false,
+    "promotable": false,
+    "schema": "se-harness-preliminary-package-observation-v1",
+    "snapshot_manifest_sha256": "2b9214b9fd3a31ef48ede81fab59b1fde3e85cb51bb4b816789927ed3fb4381a",
+    "source_snapshot": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\w20s"
+  },
+  "promotable": false,
+  "raw_evidence_archive": {
+    "bytes": 10620127,
+    "member_manifest_sha256": "bec46923ed907adf23c421b8de8c0f0fcf3aa736e9a8206cbd44df7ab29a4e3f",
+    "members": 94,
+    "name": "preliminary-package-raw-evidence.zip",
+    "sha256": "2a26d47f50d011fc2269d5850126ada3be429d9525d13fc251acea51fbe34585"
+  },
+  "schema": "se-harness-preliminary-package-evidence-index-v1",
+  "smoke": {
+    "case_records": 7,
+    "cases": [
+      {
+        "events": 5,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-smoke/cases/test_own01_cli_plan_apply_stale_refusal_and_restore_json-6f9f0f57.json",
+        "sha256": "f6aa6d96039d8971605d3b410ae468bf8351a6f934cb4175b91d19979af4151d",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own01_cli_plan_apply_stale_refusal_and_restore_json",
+        "unavailable_reason": null
+      },
+      {
+        "events": 12,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-smoke/cases/test_own01_exact_catalog_and_each_selected_host-f19bd010.json",
+        "sha256": "5b6427fbe3618c22ac07c181dc204172b202c21633ed9638e33454607e8f9369",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own01_exact_catalog_and_each_selected_host",
+        "unavailable_reason": null
+      },
+      {
+        "events": 7,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-smoke/cases/test_own05_replay_doctor_and_direct_installer_preserve_binding-86de3c71.json",
+        "sha256": "c8dbfd49580daac90b6cc171f5d86f399c69c87f096dfa0aa06668da810d9563",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own05_replay_doctor_and_direct_installer_preserve_binding",
+        "unavailable_reason": null
+      },
+      {
+        "events": 6,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-smoke/cases/test_own07_released_017_reader_refuses_all_writing_entry_points-5ac7c089.json",
+        "sha256": "41b148f936c08f9e44392ed7dfcc63da2f9ff3bd709aa9c2b034d4694965b4e7",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own07_released_017_reader_refuses_all_writing_entry_points",
+        "unavailable_reason": null
+      },
+      {
+        "events": 3,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-smoke/cases/test_own07_unsupported_old_lock_refuses_before_writes-a75cffd0.json",
+        "sha256": "0d2bea1bbc21093bc8356f6e3190a9f4c449acb4eabbc5ea61dfdabe346f49d1",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own07_unsupported_old_lock_refuses_before_writes",
+        "unavailable_reason": null
+      },
+      {
+        "events": 5,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-smoke/cases/test_own11_restore_exact_distribution_and_refuse_owner_conflicts-4e9a451c.json",
+        "sha256": "4bff5607a14061d13791c2dc852c6a158914bec651b743589699476ab161eb21",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own11_restore_exact_distribution_and_refuse_owner_conflicts",
+        "unavailable_reason": null
+      },
+      {
+        "events": 3,
+        "fault_observations": 0,
+        "outcome": "passed",
+        "path": "package-smoke/cases/test_own12_clone_without_plugin_is_integral_and_availability_unobserved-1f6da3d0.json",
+        "sha256": "f3fc043d221c0767902467c730b61ae83a2d2553553fd3f67a8869d5e5dc434d",
+        "test": "ownership_acceptance.SkillOwnershipAcceptanceTests.test_own12_clone_without_plugin_is_integral_and_availability_unobserved",
+        "unavailable_reason": null
+      }
+    ],
+    "outcomes": {
+      "passed": 7
+    },
+    "runtime": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\candidate-env\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\run-preliminary-acceptance.py",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\w20s\\tests\\test_skill_ownership.py",
+        "package",
+        "smoke",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\package-smoke"
+      ],
+      "candidate_commit": null,
+      "candidate_version": "0.18.0",
+      "errors": 0,
+      "exact_committed_candidate": false,
+      "failures": 0,
+      "head_commit": null,
+      "imported_evaluator": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\candidate-env\\Lib\\site-packages\\se_harness\\__init__.py",
+      "isolated": 1,
+      "mode": "package",
+      "platform": "Windows-11-10.0.26100-SP0",
+      "preliminary_content_snapshot": true,
+      "promotable": false,
+      "python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+      "python_executable": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\local-package\\candidate-env\\Scripts\\python.exe",
+      "run_attempt": null,
+      "run_id": null,
+      "runner_image": null,
+      "runner_image_version": null,
+      "runner_os": null,
+      "schema": "se-harness-skill-ownership-preliminary-v1",
+      "selection": "smoke",
+      "skipped": [],
+      "snapshot_manifest_sha256": "2b9214b9fd3a31ef48ede81fab59b1fde3e85cb51bb4b816789927ed3fb4381a",
+      "source_archive_sha256": "63fa7df32d92b0c4e4bc3f3d8c0182f9ffa3d422c785d29e135e0c92b0b0eee3",
+      "source_inventory_sha256": "c012aa8476b08a095a69c317399f77628344fd916026bbba6a86ead21b75fb56",
+      "status": "pass",
+      "test_module_sha256": "9d0c15fa7f6e19c8b0be3cc55903e1bfb3ed0924933076e547123a361d4a6faf",
+      "tests": 7,
+      "wheel_name": "se_harness-0.18.0-py3-none-any.whl",
+      "wheel_sha256": "0685d3f8090b61a12b96eb8838912d54df385b68b88025c4a36372625b270212"
+    },
+    "runtime_path": "package-smoke/runtime.json",
+    "runtime_sha256": "d20f824e32f1c420a6a684b134a51b235bc6b4a06b5902f8af007cef937cb015"
+  },
+  "source_manifest_sha256": "2b9214b9fd3a31ef48ede81fab59b1fde3e85cb51bb4b816789927ed3fb4381a"
+}

@@ -24,7 +24,8 @@ Four rules hold on every subcommand (`WO-ECP-022`):
 - **The repository is the positional `TARGET`**, default `.`, on every
   command that reads or writes one. `select-work-order` reads an event file,
   `identity` reads a runtime environment and `qualify candidate-package`
-  reads a wheel, so they take none.
+  reads a wheel, so they take none. `skill-ownership` requires an explicit
+  positional `TARGET` under SPEC-PLG-020; it has no implicit repository selection.
 - **Naming.** `--artifact` selects an existing artifact; `--id` names the
   record a command creates; an option that names a relation of that record
   keeps the relation's name (`--work-order`, `--verification`,
@@ -37,7 +38,7 @@ Four rules hold on every subcommand (`WO-ECP-022`):
   `se-harness-command-result-v1` object with the same facts as its human
   output.
 - **Plan and write.** A command that changes existing governed state
-  (`transition`, `decide`, `upgrade`) plans by
+  (`transition`, `decide`, `upgrade`, `skill-ownership`) plans by
   default and writes only with `--apply`. A command that adds content
   (`init`, `scaffold-domain`, `create-artifact`) writes by default and
   plans with `--dry-run`; `init` into a target with content appends the
@@ -66,6 +67,7 @@ Four rules hold on every subcommand (`WO-ECP-022`):
 | `risks` | human or agent | read-only | list the risks threatening one artifact and its governing chain, with score, state and pending decision |
 | `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
 | `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
+| `skill-ownership` | repository owner or explicitly authorized agent | plan is read-only; reviewed application changes only the selected repository ownership transaction and its bounded recovery data | migrate the seven retained repository skill files to a validated portable plugin binding, restore repository ownership, or review and complete pending recovery; external availability and native loading remain unobserved |
 | `scaffold-domain` | coding agent | writes owner-controlled directories and a seed index; dry-run is read-only | create the canonical organization for one engineering domain |
 | `create-artifact` | coding agent | writes one incomplete `draft`; dry-run is read-only | create a formal artifact from its canonical template and path mapping |
 | `release-unit` | release owner or coding agent drafting a release contract | read-only | measure a release unit's work-order census from the commit trailers between the previous release tag and a candidate commit, and compare it with a contract (`E-CIP-001`) |
@@ -318,6 +320,15 @@ harnessctl upgrade [TARGET] --apply --work-order WO-... --evidence-output docs/e
 The first form is a read-only plan. `--apply` is an explicit transactional repository mutation. Same-identity managed repair needs no new lifecycle packet. When the installed target evaluator differs from the standard lock, apply additionally requires a distinct approved or in-progress work order with an exact `[evaluator_upgrade]` packet and a work-order-keyed JSON evidence path. The packet binds the prior lock SHA-256 and exact immutable target archive/payload identity with `scope = "standard-root-only"`; a product release decision cannot substitute for it.
 
 Apply requires the already-published target evaluator installed from exact wheel bytes outside the checkout, changes only eligible managed content, and stops without a partial managed update when identity, authority, customization, or conflict prevents a safe plan. Transition evidence, managed files, and the lock share the recoverable transaction, and successful replay must be a no-op. Every repository, including the `se_harness` implementation repository, follows this transaction and uses one exact released evaluator. GitHub discovers the managed workflow beside existing repository-owned workflows, while required-check and workflow-ordering policy remains external. See [installation and safe upgrades](harness-installation-and-upgrades.md).
+
+## Retained skill ownership
+
+```text
+harnessctl skill-ownership TARGET --provider plugin --binding-input FILE [--apply --expected-plan-sha256 HASH] [--json]
+harnessctl skill-ownership TARGET --provider repository [--apply --expected-plan-sha256 HASH] [--json]
+```
+
+This candidate operation is unavailable in released 0.17.0. It requires a migration-capable installed evaluator governing the selected repository, and does not install or activate a plugin. A recovery plan distinguishes restoring prior state from finalizing cleanup of an already committed state.
 
 ## Predecessor-to-successor migration rehearsal
 

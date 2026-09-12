@@ -1,0 +1,111 @@
+{
+  "schema": "wo-plg-020-repair-restitution-v1",
+  "commands": [
+    {
+      "checkpoint": "scope",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20",
+        "--artifact",
+        "WO-PLG-020",
+        "--checkpoint",
+        "scope",
+        "--from-git",
+        "6559568e995fc6e28f64e6bc5a6d4a6dc5dcf7de",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\report-output-repair",
+      "exit": 0,
+      "seconds": 8.018362100003287,
+      "operation": {
+        "kind": "check",
+        "outcome": "completed"
+      },
+      "decision": "No lifecycle transition taken; continuation only.",
+      "decision_required": {
+        "decision_right": "DR-WO-COMPLETE",
+        "role": "delegated-executor",
+        "artifact": "WO-PLG-020",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "delegation": {
+          "class": "execution",
+          "gate": "success",
+          "check_run_id": "103597730923",
+          "head": "69e655686fdc460cb2da7bb882645e2471aecdc9"
+        }
+      },
+      "typed_next_step": {
+        "procedure_id": "PROC-WO-IMPLEMENT",
+        "step_id": "STEP-WO-IMPLEMENT-DECIDE",
+        "action": "whether the authorized implementation and evidence are complete"
+      }
+    },
+    {
+      "checkpoint": "handoff",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+        "-I",
+        "-B",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20",
+        "--artifact",
+        "WO-PLG-020",
+        "--checkpoint",
+        "handoff",
+        "--from-git",
+        "6559568e995fc6e28f64e6bc5a6d4a6dc5dcf7de",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\report-output-repair",
+      "exit": 0,
+      "seconds": 12.972099700011313,
+      "operation": {
+        "kind": "check",
+        "outcome": "completed"
+      },
+      "decision": "No lifecycle transition taken; continuation only.",
+      "decision_required": {
+        "decision_right": "DR-WO-COMPLETE",
+        "role": "delegated-executor",
+        "artifact": "WO-PLG-020",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "delegation": {
+          "class": "execution",
+          "gate": "success",
+          "check_run_id": "103597730923",
+          "head": "69e655686fdc460cb2da7bb882645e2471aecdc9"
+        }
+      },
+      "typed_next_step": {
+        "procedure_id": "PROC-WO-IMPLEMENT",
+        "step_id": "STEP-WO-IMPLEMENT-DECIDE",
+        "action": "whether the authorized implementation and evidence are complete"
+      },
+      "selected_outcome": "continue",
+      "reason": "Required unpatched 0.17 protection tests still fail and complete immutable-candidate acceptance is pending."
+    }
+  ],
+  "lifecycle": "in_progress",
+  "implementation_verified": false,
+  "release": false,
+  "caveat": "The exact old HEAD check cannot qualify the subsequent uncommitted repair or waive required legacy failures.",
+  "selected_outcome": "continue",
+  "effect": "Keep WO-PLG-020 in_progress; no lifecycle transition or VREC preparation."
+}

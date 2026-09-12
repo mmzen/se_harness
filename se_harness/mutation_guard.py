@@ -28,6 +28,7 @@ _HUMAN_MUTATION_OPERATIONS = frozenset(
         "capture-verification",
         "create-artifact",
         "installed-root-apply",
+        "skill-ownership-apply",
         "prepare-release",
         "scaffold-domain",
         "transition-apply",
@@ -47,7 +48,7 @@ def evaluator_transition_required(
     """Return whether applying the installed distribution changes evaluator identity."""
 
     return not (
-        old_lock.get("schema") == 3
+        old_lock.get("schema") in {3, 4}
         and old_lock.get("tool_version") == target_identity.version
         and old_lock.get("evaluator") == target_identity.to_lock()
     )
@@ -144,7 +145,12 @@ def require_mutation_authority(
     root = ensure_target(repository, must_exist=True)
     try:
         lock = load_lock(root)
-    except HarnessError as exc:
+        if operation != "skill-ownership-apply":
+            from se_harness.skill_ownership import assert_ownership_state, ensure_no_pending_recovery
+
+            ensure_no_pending_recovery(root)
+            assert_ownership_state(root, lock)
+    except (HarnessError, IntegrityError) as exc:
         raise _failure(MG001, operation, f"cannot read the standard lock: {exc}") from exc
     configured_version = _configured_version(root, operation)
     locked_version = lock.get("tool_version")

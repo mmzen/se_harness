@@ -1,0 +1,321 @@
+{
+  "approval_receipt_hash_semantics": "before_sha256 and after_sha256 are raw working-copy hashes at application time.",
+  "classification": "Working-copy observations mapped to staged Git blobs; not qualification or a new approval.",
+  "evidence_hash_semantics": "Raw committed Git blobs or ZIP member bytes; ordinary checkout conversion is not authoritative.",
+  "files": [
+    {
+      "git_blob_bytes": 44370,
+      "git_blob_sha256": "fa1299e8a6be8031194ec94bc0ea90a49f1689ffea644ee2c6b278477cf28c97",
+      "path": ".github/workflows/candidate-evidence.yml",
+      "transport": "identical",
+      "working_copy_bytes": 44370,
+      "working_copy_sha256": "fa1299e8a6be8031194ec94bc0ea90a49f1689ffea644ee2c6b278477cf28c97"
+    },
+    {
+      "git_blob_bytes": 4939,
+      "git_blob_sha256": "1e9eb36bf2af3534a94afa03fc575e50709d2a991df634384d5414502bfcd031",
+      "path": "docs/engineering/ci-pipeline/requirements/REQ-CIP-009.md",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 5005,
+      "working_copy_sha256": "5c8290b22d312b0a1c07d1e023bdc64cbb094b860ba6928a9fc05a9ee34148c0"
+    },
+    {
+      "git_blob_bytes": 9676,
+      "git_blob_sha256": "1280569868b81a64d261988134b6fe341992038643b68e9e9800ce0e262627b5",
+      "path": "docs/engineering/ci-pipeline/specifications/SPEC-CIP-003.md",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 9838,
+      "working_copy_sha256": "7f3cc3f9d2f9b8d268b2f5dc0c7508e579ee130f93e55883f71f865accfca3bf"
+    },
+    {
+      "git_blob_bytes": 7650,
+      "git_blob_sha256": "82e780b6a61bae2ae544f88038920e004ca262dd7e2e786c4deae28f7d5f475b",
+      "path": "docs/engineering/ci-pipeline/verification/VER-CIP-003.md",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 7732,
+      "working_copy_sha256": "2a7301a3a3b6a2c15ca0faaf67c120ae8db0473955bdd614546971aca28d8879"
+    },
+    {
+      "git_blob_bytes": 5930,
+      "git_blob_sha256": "60a22e5215d90d99dc3abe5246630ae02afb681d18838e99571514e848f45954",
+      "path": "docs/engineering/execution-control-plane/requirements/REQ-ECP-027.md",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 6037,
+      "working_copy_sha256": "434b915707c5e03514e9d46e35e3e8d475014efec1eb64f12a51ee7a31e4e74b"
+    },
+    {
+      "git_blob_bytes": 11458,
+      "git_blob_sha256": "92b9aee4660af84f1fe0e40974295126a7f08243d350bd663a864fea290add0b",
+      "path": "docs/engineering/execution-control-plane/specifications/SPEC-ECP-016.md",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 11620,
+      "working_copy_sha256": "72d17b962742f4911650f841186132c22469d1c2a8f899b35c870f174a623e31"
+    },
+    {
+      "git_blob_bytes": 7915,
+      "git_blob_sha256": "50c524d89a8d1d46dd8dca514e743f3a82f0595e5d1533e7be931fd80e555d9a",
+      "path": "docs/engineering/plugin-integration/README.md",
+      "transport": "identical",
+      "working_copy_bytes": 7915,
+      "working_copy_sha256": "50c524d89a8d1d46dd8dca514e743f3a82f0595e5d1533e7be931fd80e555d9a"
+    },
+    {
+      "git_blob_bytes": 12228,
+      "git_blob_sha256": "45b4b807d25b8afa2abc7b63c0ba7abeba3be1aa67414ff6e92980edf67c6952",
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-020.md",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 12397,
+      "working_copy_sha256": "f08edc50b1fb95ff9ea14b1ae9d9b7ec797dedb36663d5ef42a56e3c6d3c5e7b"
+    },
+    {
+      "git_blob_bytes": 22375,
+      "git_blob_sha256": "88c5138289389820558682866277944316f9f2462c488570fabebc8081f1be76",
+      "path": "docs/notes/ci-pipeline.md",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 22722,
+      "working_copy_sha256": "76fd3ed3f89cc710a058eae200fd0a653e2472085e5d3c8fce4ec7e4f2e6052f"
+    },
+    {
+      "git_blob_bytes": 36804,
+      "git_blob_sha256": "d30d62e231bcb7cc830190d68f74d1a860aa924f94bc9f0d85886be5d6858298",
+      "path": "docs/notes/developing-se-harness.md",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 36986,
+      "working_copy_sha256": "7b1e28b31597e0ed9c3102ec16fbbd6ebbb178da0f20baa5a0a8b108322cd65c"
+    },
+    {
+      "git_blob_bytes": 45848,
+      "git_blob_sha256": "9fc541adc89b4d9f3b2162b992cd30f6d738bbba23b08ad01a3a60754c9a0074",
+      "path": "docs/notes/harnessctl-reference.md",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 46297,
+      "working_copy_sha256": "95890e979dda5a5e0b4a5ee448dd1ce932a69a4c70c13f1435fa766500749cde"
+    },
+    {
+      "git_blob_bytes": 15343,
+      "git_blob_sha256": "293757da8043de87eb59a9d4e0905d449f05ec077274bd9b6eae0ce4abfd57b7",
+      "path": "docs/notes/plugin-ownership-migration-2026-09-12.md",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 15463,
+      "working_copy_sha256": "783b65d3d840e835d895495e37fee7d0cb9eadef08367a6053c56683c5dcc983"
+    },
+    {
+      "git_blob_bytes": 3640,
+      "git_blob_sha256": "4214c6f75fb291475525525742fcc7995c5cb135154f666dbfb2eda0b1b7e3e7",
+      "path": "pyproject.toml",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 3717,
+      "working_copy_sha256": "802788876b13a828e78b41b9e7508ed84e7bf47f919fb8e539d5d11d2975acba"
+    },
+    {
+      "git_blob_bytes": 59269,
+      "git_blob_sha256": "6d3feba1c5ee46113371345f0d2d391a20da597fe59041b4d128d3c2757a53aa",
+      "path": "se_harness/cli.py",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 60448,
+      "working_copy_sha256": "e316b36cc2b2c58b554deefefc7034fea33030e10ca28d6c78b10cf99a88ad51"
+    },
+    {
+      "git_blob_bytes": 24419,
+      "git_blob_sha256": "b1093291b0a0bd17a3af715fec3195bb3c9ebec2fefb82c905669b0f080fd067",
+      "path": "se_harness/engine/validation_evidence.py",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 24999,
+      "working_copy_sha256": "929b1f7435e4ac8697267c9632e24c8113c9a857a27e70d7597f68f2921f463f"
+    },
+    {
+      "git_blob_bytes": 31682,
+      "git_blob_sha256": "57b818453eb5d06fda606a7a0daa449357cbac2ed47e4038e15b91257b29441f",
+      "path": "se_harness/installer.py",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 32364,
+      "working_copy_sha256": "11cb4c3241fa1e9729f42be5695b46aead7702296c2c33bcaabd58fed3277524"
+    },
+    {
+      "git_blob_bytes": 11031,
+      "git_blob_sha256": "4dd33ad8a9f73d3cfd39aa9ec6cef0cf887e8166c30099d7984a38d107f79f05",
+      "path": "se_harness/integrity.py",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 11280,
+      "working_copy_sha256": "da21ccf1f9311853eb7ea06f4bae697337459716446d843a5ed8bf2bd8215c19"
+    },
+    {
+      "git_blob_bytes": 8607,
+      "git_blob_sha256": "41c3f5cea53df785fe3638ef9b8cc614bc842831227560d98639468cb5f925ba",
+      "path": "se_harness/mutation_guard.py",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 8810,
+      "working_copy_sha256": "a87f3a8ea307cedd4c5683066dc204b82916a1152a8b51a85b5465a4fdff4e7d"
+    },
+    {
+      "git_blob_bytes": 29378,
+      "git_blob_sha256": "8d9f47244ab0b24d81f4d2e1e31731b48ac48b5dfac2f38ead410b803a8247b1",
+      "path": "se_harness/preflight.py",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 30113,
+      "working_copy_sha256": "9eefd69fc2739ef5f8c81961fd2429da48031a2f8aa2dd3adee0bb00cbc279a7"
+    },
+    {
+      "git_blob_bytes": 62416,
+      "git_blob_sha256": "9fe1090083d88ab8b7c140915229e76fc6cadbc78802e1167dc7e064a219cdf2",
+      "path": "se_harness/skill_ownership.py",
+      "transport": "identical",
+      "working_copy_bytes": 62416,
+      "working_copy_sha256": "9fe1090083d88ab8b7c140915229e76fc6cadbc78802e1167dc7e064a219cdf2"
+    },
+    {
+      "git_blob_bytes": 1432,
+      "git_blob_sha256": "362060810f1c9830513f8aaf3170fbb620c7f75c47265f5fc01ff9d66bc2ffd1",
+      "path": "se_harness/skill_ownership_contract.json",
+      "transport": "identical",
+      "working_copy_bytes": 1432,
+      "working_copy_sha256": "362060810f1c9830513f8aaf3170fbb620c7f75c47265f5fc01ff9d66bc2ffd1"
+    },
+    {
+      "git_blob_bytes": 20762,
+      "git_blob_sha256": "e1685e161b24ea23bfaef764974f90f8de2372f7d617a8009c822755a5872c14",
+      "path": "templates/repository/standard/docs/engineering/WORKFLOW.md",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 21053,
+      "working_copy_sha256": "d32afd40d7dcedff27fc11713c1ca1f0727f42dd07bbbe2814c2284296b896d6"
+    },
+    {
+      "git_blob_bytes": 2234,
+      "git_blob_sha256": "25100591b2b3ab5be2b0a86f91037df20e05ba5e5c8d26dd807998fe75730d41",
+      "path": "tests/fixtures/skill_ownership/README.md",
+      "transport": "identical",
+      "working_copy_bytes": 2234,
+      "working_copy_sha256": "25100591b2b3ab5be2b0a86f91037df20e05ba5e5c8d26dd807998fe75730d41"
+    },
+    {
+      "git_blob_bytes": 1825,
+      "git_blob_sha256": "a217c324ea82b02bd50c033115216ac8f2d9e0408403bc763c5bbaec492199c8",
+      "path": "tests/fixtures/skill_ownership/expected.json",
+      "transport": "identical",
+      "working_copy_bytes": 1825,
+      "working_copy_sha256": "a217c324ea82b02bd50c033115216ac8f2d9e0408403bc763c5bbaec492199c8"
+    },
+    {
+      "git_blob_bytes": 5860,
+      "git_blob_sha256": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51",
+      "path": "tests/fixtures/skill_ownership/payload/skills/harness-operator-brief/SKILL.md",
+      "transport": "identical",
+      "working_copy_bytes": 5860,
+      "working_copy_sha256": "3e39fc61f7dfb41ca2b54d2c78f03ef2a7f3391402492dcd3ccef39a50a4af51"
+    },
+    {
+      "git_blob_bytes": 9175,
+      "git_blob_sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+      "path": "tests/fixtures/skill_ownership/payload/skills/harness-operator-brief/scripts/check_brief.py",
+      "transport": "identical",
+      "working_copy_bytes": 9175,
+      "working_copy_sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683"
+    },
+    {
+      "git_blob_bytes": 4376,
+      "git_blob_sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+      "path": "tests/fixtures/skill_ownership/payload/skills/harness-operator-brief/skill-contract.json",
+      "transport": "identical",
+      "working_copy_bytes": 4376,
+      "working_copy_sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52"
+    },
+    {
+      "git_blob_bytes": 4745,
+      "git_blob_sha256": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf",
+      "path": "tests/fixtures/skill_ownership/payload/skills/harness-orient/SKILL.md",
+      "transport": "identical",
+      "working_copy_bytes": 4745,
+      "working_copy_sha256": "7f084f0c5f92856c7112daaad9b9013b55c00880a6094da7c2163ecd20c18abf"
+    },
+    {
+      "git_blob_bytes": 36278,
+      "git_blob_sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
+      "path": "tests/fixtures/skill_ownership/payload/skills/harness-orient/scripts/orient.py",
+      "transport": "identical",
+      "working_copy_bytes": 36278,
+      "working_copy_sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56"
+    },
+    {
+      "git_blob_bytes": 2921,
+      "git_blob_sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+      "path": "tests/fixtures/skill_ownership/payload/skills/harness-orient/skill-contract.json",
+      "transport": "identical",
+      "working_copy_bytes": 2921,
+      "working_copy_sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627"
+    },
+    {
+      "git_blob_bytes": 3781,
+      "git_blob_sha256": "d37d5ac9f560be17eb75b759939f2d5b169a6434beb61b0475616b06bb9c7da8",
+      "path": "tests/fixtures/skill_ownership/transaction_worker.py",
+      "transport": "identical",
+      "working_copy_bytes": 3781,
+      "working_copy_sha256": "d37d5ac9f560be17eb75b759939f2d5b169a6434beb61b0475616b06bb9c7da8"
+    },
+    {
+      "git_blob_bytes": 51401,
+      "git_blob_sha256": "b831d940ffc3d1e919bf8d8362cbb00b04165f77b94f792f992f837112e52f48",
+      "path": "tests/test_ci_pipeline.py",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 52151,
+      "working_copy_sha256": "3f4812b7ed4ddbbc2fbad877ed4b3714fa7112ac86d9daef84917233acb4d044"
+    },
+    {
+      "git_blob_bytes": 23623,
+      "git_blob_sha256": "509cb27bb8398f524b76d27ffccd31c3d7935e8f4da2f2df30ea1f0898ad12b1",
+      "path": "tests/test_cli_shape.py",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 23962,
+      "working_copy_sha256": "238711d743667bc52a963bd34ed5f9a6a22ccbfdd315b45f93a25eb151305d71"
+    },
+    {
+      "git_blob_bytes": 36394,
+      "git_blob_sha256": "d63f2e1322edcef6863e22167d060b62caa0a867449bef94b3a2d459c80b7e36",
+      "path": "tests/test_harnessctl.py",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 37012,
+      "working_copy_sha256": "689199a14960a3ebea97021223046d4ec82382de267facbde27411ec35c5dbe7"
+    },
+    {
+      "git_blob_bytes": 30186,
+      "git_blob_sha256": "2c1897f0a50f0606db8ba4bcd06f0fb00351a8dd1f1f84baa1170165be2aecaf",
+      "path": "tests/test_integration_package.py",
+      "transport": "identical",
+      "working_copy_bytes": 30186,
+      "working_copy_sha256": "2c1897f0a50f0606db8ba4bcd06f0fb00351a8dd1f1f84baa1170165be2aecaf"
+    },
+    {
+      "git_blob_bytes": 12430,
+      "git_blob_sha256": "bb9cd714335fa2d941a609ef94247900e6a9f88ded1a337768da2b9c95d6a792",
+      "path": "tests/test_integrity_primitives.py",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 12607,
+      "working_copy_sha256": "cd67176a682369ebd3d9c73da8f660fd1c07b1fa41019a293c08fa107f5fa8b7"
+    },
+    {
+      "git_blob_bytes": 25033,
+      "git_blob_sha256": "31321889779ad18fbd651c4ded75519dc6cf050a41edcac3d9341a5281052398",
+      "path": "tests/test_mutation_guard.py",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 25529,
+      "working_copy_sha256": "345187efc896d24df34c4c7a2aebb48c5260d57669d63f1ff0fa002a1b584c40"
+    },
+    {
+      "git_blob_bytes": 69132,
+      "git_blob_sha256": "e3961a6ac3f38b6417f17d0b5610db37001971257129e571510c935a2684a718",
+      "path": "tests/test_skill_ownership.py",
+      "transport": "identical",
+      "working_copy_bytes": 69132,
+      "working_copy_sha256": "e3961a6ac3f38b6417f17d0b5610db37001971257129e571510c935a2684a718"
+    },
+    {
+      "git_blob_bytes": 11734,
+      "git_blob_sha256": "1ddfd37dfe84cdf00fe353ecb67cd8f0d5c7b42ffaa85eb18a8e94887908e110",
+      "path": "tests/test_workflow_documentation_contract.py",
+      "transport": "CRLF-to-LF normalization only",
+      "working_copy_bytes": 11926,
+      "working_copy_sha256": "257a1adb1d822822cb9ae4d7934c1967d1e643d976466a272fa41aae8bdd8db5"
+    }
+  ],
+  "parent_commit": "e33d8c8602bf1b4bb0d8b31ea68ebaa96f3654f5",
+  "schema": "wo-plg-020-implementation-byte-transport-v1"
+}

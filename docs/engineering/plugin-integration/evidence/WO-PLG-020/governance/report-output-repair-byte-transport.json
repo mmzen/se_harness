@@ -1,0 +1,320 @@
+{
+  "schema": "wo-plg-020-report-output-repair-byte-transport-v1",
+  "parent_commit": "69e655686fdc460cb2da7bb882645e2471aecdc9",
+  "user_instruction": "push and create the PR first",
+  "pull_request": 462,
+  "classification": "Publication transport for local development observations; not immutable-candidate qualification.",
+  "four_approved_appendices_verified_before_staging": true,
+  "prior_observation_hashes": "Historical raw working-copy or ZIP member hashes remain unchanged.",
+  "files": [
+    {
+      "path": "docs/engineering/plugin-integration/architecture/ARCH-PLG-003.md",
+      "working_copy_bytes": 6466,
+      "working_copy_sha256": "dcceb9715543ca4e097108979350db2ed9dfabc2183c7d88c2a4b96b9fd824c3",
+      "git_blob_bytes": 6382,
+      "git_blob_sha256": "88728622858f50bc2d0c47e6c244c5d0dfcbc11027aa4f2b8cc6cf742a094731",
+      "transport": "CRLF-to-LF normalization only"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-003.md",
+      "working_copy_bytes": 7081,
+      "working_copy_sha256": "45ee80a3bbd65b2151e69f4352503fd2b2c640c0d98f69e0ba4f96e09a874a1c",
+      "git_blob_bytes": 6994,
+      "git_blob_sha256": "1a883ef422d23ffdefde26ce883c36407e36db7f878b7dc32ae6271345bee7c4",
+      "transport": "CRLF-to-LF normalization only"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/README.md",
+      "working_copy_bytes": 16881,
+      "working_copy_sha256": "48cc61cb2c4f13bff85896561198c7e186930b6177c2bcf5a8dd498b0249be47",
+      "git_blob_bytes": 16881,
+      "git_blob_sha256": "48cc61cb2c4f13bff85896561198c7e186930b6177c2bcf5a8dd498b0249be47",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/WO-PLG-020-handoff.md",
+      "working_copy_bytes": 6352,
+      "working_copy_sha256": "0b39c9f740844093ebd97aa80b29118ccde8bd88684d4d7db5068edba4f7a2e7",
+      "git_blob_bytes": 6352,
+      "git_blob_sha256": "0b39c9f740844093ebd97aa80b29118ccde8bd88684d4d7db5068edba4f7a2e7",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/WO-PLG-020-legacy-reader-evidence-index.json",
+      "working_copy_bytes": 587,
+      "working_copy_sha256": "abfe1e1d9689e6b77ad6333c2644ed2589a325ac2c8cd0761559318af8a1f672",
+      "git_blob_bytes": 587,
+      "git_blob_sha256": "abfe1e1d9689e6b77ad6333c2644ed2589a325ac2c8cd0761559318af8a1f672",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/WO-PLG-020-legacy-reader-evidence.zip",
+      "working_copy_bytes": 2966612,
+      "working_copy_sha256": "59d0edc2a8e602416b7cdcc671cc673cf68fecdae25ff785a313b831884172f7",
+      "git_blob_bytes": 2966612,
+      "git_blob_sha256": "59d0edc2a8e602416b7cdcc671cc673cf68fecdae25ff785a313b831884172f7",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/legacy-reader-census.md",
+      "working_copy_bytes": 19267,
+      "working_copy_sha256": "093359d967548cbad0377a9943b138a55e6407d1ded1597269ea8cc22bd34e7e",
+      "git_blob_bytes": 19267,
+      "git_blob_sha256": "093359d967548cbad0377a9943b138a55e6407d1ded1597269ea8cc22bd34e7e",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/legacy-reader-expanded-index.json",
+      "working_copy_bytes": 32688,
+      "working_copy_sha256": "1c1010597d89c449bd35c027e4f848b6da7e89ef222bf50a812bfce5707a92b4",
+      "git_blob_bytes": 32688,
+      "git_blob_sha256": "1c1010597d89c449bd35c027e4f848b6da7e89ef222bf50a812bfce5707a92b4",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/legacy-reader-expanded-observations.zip",
+      "working_copy_bytes": 2849652,
+      "working_copy_sha256": "9f7795a56f5ca978a1f72d866f75c71d11a64541b5e70ddaa69c9bda48dee095",
+      "git_blob_bytes": 2849652,
+      "git_blob_sha256": "9f7795a56f5ca978a1f72d866f75c71d11a64541b5e70ddaa69c9bda48dee095",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/report-output-repair-index.json",
+      "working_copy_bytes": 15657,
+      "working_copy_sha256": "3ca5bbf0d881a6ac85e934621bede9bec4dea8bcc72caac47868634700137526",
+      "git_blob_bytes": 15657,
+      "git_blob_sha256": "3ca5bbf0d881a6ac85e934621bede9bec4dea8bcc72caac47868634700137526",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/report-output-repair-observations.zip",
+      "working_copy_bytes": 645405,
+      "working_copy_sha256": "bffcee4bd31e0afba18fb30f1ed2f537a60364d3ed47549b812cfb75cd429466",
+      "git_blob_bytes": 645405,
+      "git_blob_sha256": "bffcee4bd31e0afba18fb30f1ed2f537a60364d3ed47549b812cfb75cd429466",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/legacy-reader-doctor.json",
+      "working_copy_bytes": 25718,
+      "working_copy_sha256": "7b8f4d772e23f7a8de817bcbd01e3ccfd6213450c85e84f5cb4297758d9b644f",
+      "git_blob_bytes": 25718,
+      "git_blob_sha256": "7b8f4d772e23f7a8de817bcbd01e3ccfd6213450c85e84f5cb4297758d9b644f",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/legacy-reader-handoff.json",
+      "working_copy_bytes": 19696,
+      "working_copy_sha256": "8e2f15ffb4b5cf2786ce2493d4874523ba679da413477adc1277e003c9a9d867",
+      "git_blob_bytes": 19696,
+      "git_blob_sha256": "8e2f15ffb4b5cf2786ce2493d4874523ba679da413477adc1277e003c9a9d867",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/legacy-reader-preflight.json",
+      "working_copy_bytes": 1675,
+      "working_copy_sha256": "5e3b2d2e78d66c3fc09521dcab9f0e7b7c5f3ecef3e91705aa2993d0b63c8a2e",
+      "git_blob_bytes": 1675,
+      "git_blob_sha256": "5e3b2d2e78d66c3fc09521dcab9f0e7b7c5f3ecef3e91705aa2993d0b63c8a2e",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/legacy-reader-reconciliation-approval.json",
+      "working_copy_bytes": 3217,
+      "working_copy_sha256": "9d3fcbf5262dbc68992bda5151c23a816bb808dec3a2279da944d947153c2fc9",
+      "git_blob_bytes": 3217,
+      "git_blob_sha256": "9d3fcbf5262dbc68992bda5151c23a816bb808dec3a2279da944d947153c2fc9",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/legacy-reader-reconciliation-proposal.md",
+      "working_copy_bytes": 11999,
+      "working_copy_sha256": "c7224fdd0dc6136753a1e2d42528a571ef2ffae185693e2f34a0b9ab9c7c2020",
+      "git_blob_bytes": 11999,
+      "git_blob_sha256": "c7224fdd0dc6136753a1e2d42528a571ef2ffae185693e2f34a0b9ab9c7c2020",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/legacy-reader-scope.json",
+      "working_copy_bytes": 17321,
+      "working_copy_sha256": "8a9d41e31808094afe2d69eefe9e9c44985d7a4919d977b3dcc5f6ac7ba2659a",
+      "git_blob_bytes": 17321,
+      "git_blob_sha256": "8a9d41e31808094afe2d69eefe9e9c44985d7a4919d977b3dcc5f6ac7ba2659a",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/legacy-reader-validation.json",
+      "working_copy_bytes": 309613,
+      "working_copy_sha256": "708b0420145c6002b0839e7283543cd772eae137da9388df1021c24055dcefde",
+      "git_blob_bytes": 309613,
+      "git_blob_sha256": "708b0420145c6002b0839e7283543cd772eae137da9388df1021c24055dcefde",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/report-output-repair-authorization.json",
+      "working_copy_bytes": 1140,
+      "working_copy_sha256": "a8031601291497c82c3149e3241989fbde8d3b398a6bb2128ec0e6d3559e7d37",
+      "git_blob_bytes": 1140,
+      "git_blob_sha256": "a8031601291497c82c3149e3241989fbde8d3b398a6bb2128ec0e6d3559e7d37",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/report-output-repair-commands.json",
+      "working_copy_bytes": 3708,
+      "working_copy_sha256": "107ec5e98688077a49a0fa3bbaadf99cc0167530a42d23afc1e156ca97b56c46",
+      "git_blob_bytes": 3708,
+      "git_blob_sha256": "107ec5e98688077a49a0fa3bbaadf99cc0167530a42d23afc1e156ca97b56c46",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/report-output-repair-doctor.json",
+      "working_copy_bytes": 25718,
+      "working_copy_sha256": "7b8f4d772e23f7a8de817bcbd01e3ccfd6213450c85e84f5cb4297758d9b644f",
+      "git_blob_bytes": 25718,
+      "git_blob_sha256": "7b8f4d772e23f7a8de817bcbd01e3ccfd6213450c85e84f5cb4297758d9b644f",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/report-output-repair-handoff.json",
+      "working_copy_bytes": 21442,
+      "working_copy_sha256": "04789a181f22e2b84eb48445aa43ee2eff5a9303b892878cc2171e0f26c1de1b",
+      "git_blob_bytes": 21442,
+      "git_blob_sha256": "04789a181f22e2b84eb48445aa43ee2eff5a9303b892878cc2171e0f26c1de1b",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/report-output-repair-preflight.json",
+      "working_copy_bytes": 1675,
+      "working_copy_sha256": "5e3b2d2e78d66c3fc09521dcab9f0e7b7c5f3ecef3e91705aa2993d0b63c8a2e",
+      "git_blob_bytes": 1675,
+      "git_blob_sha256": "5e3b2d2e78d66c3fc09521dcab9f0e7b7c5f3ecef3e91705aa2993d0b63c8a2e",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/report-output-repair-scope.json",
+      "working_copy_bytes": 18907,
+      "working_copy_sha256": "94766dac8a0121c0680bf5b0cd2efa895851f3beaa972badc15f603aeb8d1436",
+      "git_blob_bytes": 18907,
+      "git_blob_sha256": "94766dac8a0121c0680bf5b0cd2efa895851f3beaa972badc15f603aeb8d1436",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/report-output-repair-validation.json",
+      "working_copy_bytes": 309613,
+      "working_copy_sha256": "708b0420145c6002b0839e7283543cd772eae137da9388df1021c24055dcefde",
+      "git_blob_bytes": 309613,
+      "git_blob_sha256": "708b0420145c6002b0839e7283543cd772eae137da9388df1021c24055dcefde",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/handoff.json",
+      "working_copy_bytes": 20629,
+      "working_copy_sha256": "f1ccd542be25d384652a679f53d67578efddb3043e98e66b7fa43100c8920a09",
+      "git_blob_bytes": 20629,
+      "git_blob_sha256": "f1ccd542be25d384652a679f53d67578efddb3043e98e66b7fa43100c8920a09",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-020.md",
+      "working_copy_bytes": 12198,
+      "working_copy_sha256": "cf6a1ac47e78a03ef21257acdccb8d85ffab2fb582c0142da55c33efbbe09727",
+      "git_blob_bytes": 12045,
+      "git_blob_sha256": "3730f1bf710cf929ba7415e194f526e2745b3bf5d643625554e2b29e2997b0a0",
+      "transport": "CRLF-to-LF normalization only"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-020.md",
+      "working_copy_bytes": 11835,
+      "working_copy_sha256": "1092a6a72b87700e77785c95063b6c4e87ccc880c224ae3ed1ad7ec6fbf4a357",
+      "git_blob_bytes": 11745,
+      "git_blob_sha256": "bdecdac4bb6ecfa2b756b8644645f573f47718f29235959985fe601e4ce9f6fd",
+      "transport": "CRLF-to-LF normalization only"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-020.md",
+      "working_copy_bytes": 14812,
+      "working_copy_sha256": "433418055b00c7cd42cb471b8a3921623a116f4a61bfb95abf07a48b5abfcbd6",
+      "git_blob_bytes": 14645,
+      "git_blob_sha256": "f0da964511be3489ec2cf4421550fa94fa0161f5821fbd92fd0af20c5e583c24",
+      "transport": "CRLF-to-LF normalization only"
+    },
+    {
+      "path": "se_harness/cli.py",
+      "working_copy_bytes": 60432,
+      "working_copy_sha256": "c71080cd47eefb5f32f694785d67c74193040681238f44e2f0cd76b4e91333a9",
+      "git_blob_bytes": 59269,
+      "git_blob_sha256": "b4642b9f52b31a677f15a7e799a99dec867df21070e12defd57f03d4cc06fa80",
+      "transport": "CRLF-to-LF normalization only"
+    },
+    {
+      "path": "se_harness/engine/dashboard_bundle.py",
+      "working_copy_bytes": 33422,
+      "working_copy_sha256": "be78fad2c7c0d23684c3f3478a6d4c5227644c5fba9f3fd9ab241b5bb0df1b68",
+      "git_blob_bytes": 32660,
+      "git_blob_sha256": "bb2965c29370a7293164448f9e0bc713ad7fa66f3b15c26f3c3bf3a07b66f48e",
+      "transport": "CRLF-to-LF normalization only"
+    },
+    {
+      "path": "se_harness/engine/dashboard_snapshot.py",
+      "working_copy_bytes": 91450,
+      "working_copy_sha256": "9e08919ccaef5b13f68bad2e0b7f390cfcba013908e83551528617690fd98f4a",
+      "git_blob_bytes": 89322,
+      "git_blob_sha256": "1265235a9c2bbcc0b75eb8e506afb498d5fa06262fd498dcb89b03d6ce8b0891",
+      "transport": "CRLF-to-LF normalization only"
+    },
+    {
+      "path": "se_harness/engine/generate_harness_dashboard.py",
+      "working_copy_bytes": 9766,
+      "working_copy_sha256": "075ab90285bd19c8a4cb952b05811d8c8bd8fa4372fb3339d3b7a8e492a9076c",
+      "git_blob_bytes": 9534,
+      "git_blob_sha256": "e639f0b4d3418e14819ec1c8add6c15426d32505b5ceda5dadbeb84af9883a25",
+      "transport": "CRLF-to-LF normalization only"
+    },
+    {
+      "path": "se_harness/integrity.py",
+      "working_copy_bytes": 11852,
+      "working_copy_sha256": "347ffa84bc9264bfa460e17ba8769e3e5da8b5284f447199237585f507a8d35a",
+      "git_blob_bytes": 11605,
+      "git_blob_sha256": "ead8d49c1ae0eff8039830c5fadc2f4977da67b6be340492486d60d892432f15",
+      "transport": "CRLF-to-LF normalization only"
+    },
+    {
+      "path": "se_harness/release_qualification.py",
+      "working_copy_bytes": 27617,
+      "working_copy_sha256": "33a5cec663445e924ebb25b66cd80828a0037b710f200ae178cb163b3e9408c5",
+      "git_blob_bytes": 26926,
+      "git_blob_sha256": "b20a9529dc9225d5eefb9ce6a48948247867365ca4aec84283a9d746512aff3c",
+      "transport": "CRLF-to-LF normalization only"
+    },
+    {
+      "path": "tests/fixtures/skill_ownership/legacy_reader.py",
+      "working_copy_bytes": 18896,
+      "working_copy_sha256": "b0b2701524883fff2618e4cbcfc18f7f50fb023b57344e1a75755809b1f6e74e",
+      "git_blob_bytes": 18896,
+      "git_blob_sha256": "b0b2701524883fff2618e4cbcfc18f7f50fb023b57344e1a75755809b1f6e74e",
+      "transport": "identical"
+    },
+    {
+      "path": "tests/test_report_output_safety.py",
+      "working_copy_bytes": 11639,
+      "working_copy_sha256": "f885682a1fd5bb583de1ed8232ecfccd07cfef0ea0bbd0f81b9468f9b7afc6b8",
+      "git_blob_bytes": 11639,
+      "git_blob_sha256": "f885682a1fd5bb583de1ed8232ecfccd07cfef0ea0bbd0f81b9468f9b7afc6b8",
+      "transport": "identical"
+    },
+    {
+      "path": "tests/test_skill_ownership.py",
+      "working_copy_bytes": 78727,
+      "working_copy_sha256": "415d2083332dfd5041835599e91dba13ab87218945c41bf23716c53a8fc11cdb",
+      "git_blob_bytes": 78727,
+      "git_blob_sha256": "415d2083332dfd5041835599e91dba13ab87218945c41bf23716c53a8fc11cdb",
+      "transport": "identical"
+    }
+  ],
+  "self_excluded": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/report-output-repair-byte-transport.json",
+  "lifecycle": "in_progress",
+  "verification_record_prepared": false,
+  "whitespace_check": "PASS with cr-at-eol: preserve original CRLF evidence while checking actual trailing spaces and blank EOF lines.",
+  "local_publication_handoff_sha256": "9abb3b1fe8a898a702eb2f211c80603e6fb9d6d4b27c732fb76de9643f9a821f"
+}

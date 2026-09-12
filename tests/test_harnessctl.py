@@ -105,6 +105,71 @@ class HarnessCtlTests(unittest.TestCase):
         with self.assertRaises(IntegrityError):
             canonical_text_bytes(b"\xff")
 
+    def test_ownership_cli_requires_explicit_selection_and_reviewed_apply_digest(self) -> None:
+        target = self.root / "ownership-cli"
+        target.mkdir()
+        owner_file = target / "owner.txt"
+        owner_file.write_bytes(b"preserve owner bytes\n")
+        for arguments in (
+            ("skill-ownership",),
+            ("skill-ownership", str(target)),
+            ("skill-ownership", str(target), "--provider", "automatic"),
+        ):
+            with self.subTest(arguments=arguments):
+                code, output, error = invoke(*arguments)
+                self.assertEqual(2, code)
+                self.assertFalse(output)
+                self.assertIn("error:", error)
+        for extra, expected in (
+            (("--apply",), "invalid SHA-256"),
+            (("--apply", "--expected-plan-sha256", "not-a-digest"), "invalid SHA-256"),
+            (("--expected-plan-sha256", "a" * 64), "requires --apply"),
+        ):
+            with self.subTest(extra=extra):
+                code, output, error = invoke(
+                    "skill-ownership", str(target), "--provider", "repository", "--json", *extra
+                )
+                self.assertEqual(1, code, error)
+                result = json.loads(output)
+                self.assertEqual("se-harness-command-result-v1", result["schema"])
+                self.assertEqual("failed", result["outcome"])
+                self.assertFalse(result["passed"])
+                self.assertIn(expected, result["error"])
+        self.assertEqual([owner_file], list(target.iterdir()))
+        self.assertEqual(b"preserve owner bytes\n", owner_file.read_bytes())
+
+    def test_pending_ownership_recovery_is_a_bounded_cli_refusal(self) -> None:
+        target = self.root / "pending-ownership"
+        target.mkdir()
+        pending = target / ".engineering-harness.skill-ownership.pending.json"
+        pending.write_bytes(b"incomplete recovery record\n")
+        for command in ("init", "upgrade"):
+            with self.subTest(command=command):
+                code, output, error = invoke(command, str(target), "--json")
+                self.assertEqual(2, code)
+                self.assertIn("pending skill-ownership recovery", error)
+                self.assertNotIn("Traceback", output + error)
+        code, output, error = invoke("skill-ownership", str(target), "--provider", "repository", "--json")
+        self.assertEqual(1, code, error)
+        self.assertFalse(json.loads(output)["passed"])
+        self.assertEqual([pending], list(target.iterdir()))
+        self.assertEqual(b"incomplete recovery record\n", pending.read_bytes())
+
+    def test_repository_owned_upgrade_still_repairs_a_missing_retained_file(self) -> None:
+        target = self.root / "repository-owned-repair"
+        self.assertEqual(0, invoke("init", str(target))[0])
+        relative = ".agents/skills/harness-orient/SKILL.md"
+        selected = target / relative
+        original = selected.read_bytes()
+        selected.unlink()
+        code, output, error = invoke("upgrade", str(target), "--json")
+        self.assertEqual(0, code, error)
+        self.assertIn({"action": "add", "path": relative}, json.loads(output)["changes"])
+        self.assertFalse(selected.exists(), "upgrade planning must stay read-only")
+        code, output, error = invoke("upgrade", str(target), "--apply", "--json")
+        self.assertEqual(0, code, output + error)
+        self.assertEqual(original, selected.read_bytes())
+
     def test_lock_schema_validation_rejects_ambiguous_or_unsupported_input(self) -> None:
         with self.assertRaisesRegex(IntegrityError, "duplicate JSON key"):
             parse_lock('{"schema": 1, "schema": 1, "files": {}}')

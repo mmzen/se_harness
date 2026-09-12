@@ -1,0 +1,110 @@
+{
+  "schema": "wo-plg-020-retired-reader-scope-transport-v1",
+  "parent_commit": "113bec75c8e985b1306ff896cb236db093f99642",
+  "user_instruction": "we don't care about 0.17, just ignore",
+  "scope_decision": "exclude old 0.17 migration behavior from required acceptance",
+  "files": [
+    {
+      "path": "docs/engineering/plugin-integration/architecture/ARCH-PLG-003.md",
+      "working_sha256": "c5fb7fdb20a24707c56e3f7ab2952e0e92300c9e20b98c18fcf7519f152c9760",
+      "git_blob_sha256": "66a9f166bb24ea65e2cf08d06593f90fb93913b082bc1ee8cff6e5488e1c6f34",
+      "transport": "CRLF-to-LF normalization only"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-003.md",
+      "working_sha256": "df64c15fcdecdfea5be05322623ad6df6999299cc1b144fe175c69dde5267540",
+      "git_blob_sha256": "8328aeca2fb94f0cdf3cc608d1f6440ce7982973db763e983777f478efdb49da",
+      "transport": "CRLF-to-LF normalization only"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/README.md",
+      "working_sha256": "c68c7fc8094c9d11e02c3e152490b1b27afd779335b75136460b57414f340855",
+      "git_blob_sha256": "c68c7fc8094c9d11e02c3e152490b1b27afd779335b75136460b57414f340855",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/WO-PLG-020-handoff.md",
+      "working_sha256": "f7640443c857ee9b3962884352db5f95b582cdd640cf810ee766bee572d659d4",
+      "git_blob_sha256": "f7640443c857ee9b3962884352db5f95b582cdd640cf810ee766bee572d659d4",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/retired-reader-scope-index.json",
+      "working_sha256": "0e0969db0079cc937429b16e10d4dafeb2140c7caad5fbab8ea41278d66154a1",
+      "git_blob_sha256": "0e0969db0079cc937429b16e10d4dafeb2140c7caad5fbab8ea41278d66154a1",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/development/retired-reader-scope-observations.zip",
+      "working_sha256": "89c0ce398fdf7e97c048462a13d8b3a94cddf1f903eb8bf0ac062e8c7c9acea3",
+      "git_blob_sha256": "89c0ce398fdf7e97c048462a13d8b3a94cddf1f903eb8bf0ac062e8c7c9acea3",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/retired-reader-scope-approval.json",
+      "working_sha256": "c3d2c0d93691574a3c9bb2b9664a15e20d6a26a285490fa24a6d41f93eb25842",
+      "git_blob_sha256": "c3d2c0d93691574a3c9bb2b9664a15e20d6a26a285490fa24a6d41f93eb25842",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/retired-reader-scope-doctor.json",
+      "working_sha256": "7b8f4d772e23f7a8de817bcbd01e3ccfd6213450c85e84f5cb4297758d9b644f",
+      "git_blob_sha256": "7b8f4d772e23f7a8de817bcbd01e3ccfd6213450c85e84f5cb4297758d9b644f",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/retired-reader-scope-preflight.json",
+      "working_sha256": "5e3b2d2e78d66c3fc09521dcab9f0e7b7c5f3ecef3e91705aa2993d0b63c8a2e",
+      "git_blob_sha256": "5e3b2d2e78d66c3fc09521dcab9f0e7b7c5f3ecef3e91705aa2993d0b63c8a2e",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/retired-reader-scope-validation.json",
+      "working_sha256": "708b0420145c6002b0839e7283543cd772eae137da9388df1021c24055dcefde",
+      "git_blob_sha256": "708b0420145c6002b0839e7283543cd772eae137da9388df1021c24055dcefde",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/handoff.json",
+      "working_sha256": "81044ffab83b5f51b4837e0497b809503114fc527b68cdc30ba8a9e51819b7da",
+      "git_blob_sha256": "81044ffab83b5f51b4837e0497b809503114fc527b68cdc30ba8a9e51819b7da",
+      "transport": "identical"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-020.md",
+      "working_sha256": "68d847f4b144364b3e11a69d1f3b2ed320b56486ad034716fcbdbae723c2ffcc",
+      "git_blob_sha256": "dbb271e24865ad03c8db308884514bdfadb4ca8abffa43082088542f109b4837",
+      "transport": "CRLF-to-LF normalization only"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-020.md",
+      "working_sha256": "4d62c8da35f2cc71c5f4cad4e717ed075f878f622e9f76cbe48bd98f06c7ae9c",
+      "git_blob_sha256": "7cd9fe00660fbe17a4c44dd3a229715b1ee6a09ab6a3812178702b4ebd7e2d5b",
+      "transport": "CRLF-to-LF normalization only"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-020.md",
+      "working_sha256": "2e16cfa01496234754f5a1e2dbd054c2ab403224f58da50da2bb186ded536ed2",
+      "git_blob_sha256": "d13bad66220c4cc63c34bee89bd9e87064292d3635685993fe72177b3a339cc8",
+      "transport": "CRLF-to-LF normalization only"
+    },
+    {
+      "path": "tests/fixtures/skill_ownership/README.md",
+      "working_sha256": "039491a76ad1328e83310d33b130dc021c7bb1e358054e796f72d016a5b4fd3b",
+      "git_blob_sha256": "039491a76ad1328e83310d33b130dc021c7bb1e358054e796f72d016a5b4fd3b",
+      "transport": "identical"
+    },
+    {
+      "path": "tests/test_skill_ownership.py",
+      "working_sha256": "6096e7ff5d97b985f816784aa9bee2790bce8bc79c5f58e7edb27a572d2aee6b",
+      "git_blob_sha256": "6096e7ff5d97b985f816784aa9bee2790bce8bc79c5f58e7edb27a572d2aee6b",
+      "transport": "identical"
+    }
+  ],
+  "self_excluded": "docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/retired-reader-scope-byte-transport.json",
+  "local_handoff_result_sha256": "bc498d09f86a12068108b745c7c51e9fd434dc9624dedbf935f1b59dd8b08fe0",
+  "hygiene_checker_and_product_source_unchanged": true,
+  "historical_failures_preserved": true,
+  "lifecycle": "in_progress",
+  "vrec_prepared": false
+}

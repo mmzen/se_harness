@@ -64,3 +64,12 @@ callers with different groups can deploy at once.
 **When** the suite runs,
 
 **Then** the duplicate-check test names the step.
+
+
+## Approved supplemental reconciliation — 2026-09-12
+
+The operator approved WO-PLG-020 supplement revision 2 as `requirements-steward` at `2026-09-12T14:49:44Z`. The recorded instruction was: "i approve supplement revision 2 to reconcile the CI/CLI contracts and ten required scope additions". The retained proposal and decision receipt are in WO-PLG-020's governance evidence. This records only the selected definition amendment; historical approvals and observations remain unchanged.
+
+### Applicability amendment — WO-PLG-020 ownership acceptance
+
+For VER-PLG-020 ownership acceptance only, the one-Python-version clauses in this requirement's statement, measure, and behavior permit the additional `"3.13"` selection bounded by SPEC-CIP-003's WO-PLG-020 applicability amendment. It is used only for the full ownership and fault matrix in the existing Ubuntu and Windows `upgrade-rehearsal` job; the general workflow selection, ownership compatibility smoke, candidate wheel production, complete-candidate qualification, canonical full repository suite, integration packaging, and predecessor upgrade rehearsals remain on `"3.11"`. All action-pin, duplicate-check, tool-inventory, queue, probe, and retired-name requirements remain unchanged. This exception introduces no second full repository-suite run or complete-candidate qualification.

@@ -160,3 +160,12 @@ scope checkpoint writes no packet.
 ## Amendment record
 
 **`ECP-CLI-001`, `ECP-CLI-003` and `ECP-CLI-008` are amended, under `WO-ECP-030` (`SPEC-ECP-022`), proposed 2026-09-07 on the owner decisions recorded on issue #381 (`ECP-DEL-021`, `ECP-DEL-031`).** `renumber-artifacts` and `rehearse-recovery` leave the command list, the own-object list of `--json` and the list of subcommands tested through `main()`; `rehearse-recovery`'s reserved `output` and `--repository` shape (issue #221) is moot. Nothing else changes.
+
+
+## Approved supplemental reconciliation — 2026-09-12
+
+The operator approved WO-PLG-020 supplement revision 2 as `technical-owner` at `2026-09-12T14:49:44Z`. The recorded instruction was: "i approve supplement revision 2 to reconcile the CI/CLI contracts and ten required scope additions". The retained proposal and decision receipt are in WO-PLG-020's governance evidence. This records only the selected definition amendment; historical approvals and observations remain unchanged.
+
+### Applicability amendment — WO-PLG-020 ownership command
+
+ECP-CLI-001 includes `skill-ownership` in the repository-command set. As selected by SPEC-PLG-020 and the corresponding REQ-ECP-027 amendment, only this command requires an explicit positional `target`; it has no implicit `.` default and no alternate repository-target option. ECP-CLI-003 includes this command in the existing `se-harness-command-result-v1` envelope. Its transaction outcome is one of `planned`, `applied`, `rolled-back`, `recovery-required`, or `unchanged`; a bounded input refusal uses `failed`. Its result retains the source identity, selected and resulting provider as applicable, reviewed plan digest, exact ownership changes, actual effects, conflicts, recovery state, and explicitly unobserved external availability/native discovery as specified by SPEC-PLG-020 and ADR-PLG-003. Planning is read-only; applying requires `--apply --expected-plan-sha256 HASH`. ECP-CLI-004's 0/1/2 convention and all other rules remain unchanged. This amendment grants no lifecycle, verification, release, or external-action authority.

@@ -160,3 +160,12 @@ identity step runs, **then** the probe omits the flag and the step passes
   "after" figures.
 - Whether the owner updates a repository ruleset that named a renamed job; a
   GitHub setting is the owner's.
+
+
+## Approved supplemental reconciliation — 2026-09-12
+
+The operator approved WO-PLG-020 supplement revision 2 as `technical-owner` at `2026-09-12T14:49:44Z`. The recorded instruction was: "i approve supplement revision 2 to reconcile the CI/CLI contracts and ten required scope additions". The retained proposal and decision receipt are in WO-PLG-020's governance evidence. This records only the selected definition amendment; historical approvals and observations remain unchanged.
+
+### Applicability amendment — WO-PLG-020 ownership acceptance
+
+For the ownership acceptance required by VER-PLG-020, CIP-ONE-005 permits one additional pinned major/minor interpreter selection, `"3.13"`, in the existing `upgrade-rehearsal` job of `.github/workflows/candidate-evidence.yml`. The additional interpreter runs only the complete WO-PLG-020 source and isolated installed-candidate ownership and fault matrix on Ubuntu and Windows. Existing qualification, the canonical complete candidate-source regression, candidate wheel production, integration packaging, and predecessor-to-successor upgrade rehearsals retain Python `"3.11"`; ownership interface and compatibility smoke also runs on `"3.11"`. Every acceptance consumer uses the same verified non-promotable candidate wheel built once by `candidate-source`; this exception authorizes no additional release build, qualification duplicate, new job, publication, or adoption. As a bounded exception to CIP-ONE-002, the same `upgrade-rehearsal` job may run only these WO-PLG-020 ownership acceptance subsets; complete-candidate qualification and the canonical full repository test suite still run once in `candidate-source`. Every other application of CIP-ONE-002 and CIP-ONE-005, and all other SPEC-CIP-003 rules, remain unchanged.

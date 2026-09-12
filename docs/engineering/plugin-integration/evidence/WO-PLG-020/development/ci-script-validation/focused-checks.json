@@ -1,0 +1,64 @@
+{
+  "schema": "se-harness-ci-focused-development-checks-v1",
+  "qualification_claim": false,
+  "inputs": {
+    ".github/workflows/candidate-evidence.yml": "fa1299e8a6be8031194ec94bc0ea90a49f1689ffea644ee2c6b278477cf28c97",
+    "tests/test_ci_pipeline.py": "3f4812b7ed4ddbbc2fbad877ed4b3714fa7112ac86d9daef84917233acb4d044"
+  },
+  "checks": [
+    {
+      "name": "ci-contract-tests",
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_ci_pipeline",
+        "-q"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20",
+      "started_utc": "2026-09-12T14:56:33.577188+00:00",
+      "finished_utc": "2026-09-12T14:56:41.632576+00:00",
+      "returncode": 0,
+      "stdout": "ci-contract-tests.stdout.log",
+      "stderr": "ci-contract-tests.stderr.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "0be214c9c9542f7f0ba4f3afe2b481bc54f844dcb9dc62cea9f0d86c2d6fa4e2"
+    },
+    {
+      "name": "embedded-python-compilation",
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-B",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\ci-script-validation\\compile_embedded_scripts.py"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20",
+      "started_utc": "2026-09-12T14:56:41.637581+00:00",
+      "finished_utc": "2026-09-12T14:56:41.848062+00:00",
+      "returncode": 0,
+      "stdout": "embedded-python-compilation.stdout.log",
+      "stderr": "embedded-python-compilation.stderr.log",
+      "stdout_sha256": "5ef834589d33f7016126dca7a9525e068a6f83481d88e7c6e3517bdd47e97152",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "powershell-parsing",
+      "argv": [
+        "C:\\Users\\hok\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.EXE",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-File",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\ci-script-validation\\validate_powershell.ps1"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20",
+      "started_utc": "2026-09-12T14:56:41.852549+00:00",
+      "finished_utc": "2026-09-12T14:56:42.873290+00:00",
+      "returncode": 0,
+      "stdout": "powershell-parsing.stdout.log",
+      "stderr": "powershell-parsing.stderr.log",
+      "stdout_sha256": "92d86db341e5fbf9bdc7058aa417953fc119e79a9bbe0f3668e1ef94f7618b7c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

@@ -82,3 +82,21 @@ No optional governance profile, reduced integrity mode, or implicit host support
 
 ADR-PLG-003 selects the ownership representation, effective-inventory boundary, and transactional recovery architecture.
 The eight approved prior-contract applicability amendments listed in the packet review reconcile the selected locations and schema-floor exception, including DEC-PLG-007.
+
+
+## Approved legacy-reader reconciliation — 2026-09-12
+
+The operator approved this exact appendix as `technical-owner` with the instruction "i approve the 4 amendements". The approval was recorded at `2026-09-12T18:28:18Z` under WO-PLG-020. Its reviewed proposal and decision receipt are retained in that work order's governance evidence. The original definition text, approvals and historical observations remain preserved. This approval does not establish passing acceptance, completion or verification.
+
+### Approved applicability: old-reader compatibility
+
+The Compatibility section's statement that schema 4 makes old released evaluators fail closed applies to the complete class of interfaces that modify installed files/the lock or create/change formal governance artifacts, as defined in SPEC-PLG-020 and VER-PLG-020. It is not a universal filesystem write barrier. Released 0.17 can still inspect an artifact graph and generate evidence/report outputs without accepting schema 4 as an installation format. Those outputs carry no inferred authority to govern a plugin-owned target. SPEC-PLG-020's explicit legacy-reader boundary and VER-PLG-020's separately observed interface census govern this distinction.
+
+
+## Approved exclusion of released-0.17 migration acceptance — 2026-09-12
+
+The operator instructed "we don't care about 0.17, just ignore" after review of the old-tool acceptance issue. This instruction authorizes the following scope decision as `technical-owner`. The receipt was recorded at `2026-09-12T20:57:40.552684+00:00` under WO-PLG-020. Earlier approvals and observations are preserved.
+
+This appendix supersedes the Compatibility section and preceding legacy-reader appendix only where they require already distributed 0.17 to refuse operations on plugin-owned schema 4. The supported migration architecture depends on the migration-capable evaluator. A versioned lock describes and validates that evaluator's ownership boundary; it does not harden an executable already distributed without those checks.
+
+Released 0.17 behavior on migrated targets is outside this work order's acceptance scope, as selected by the operator. Preserve the old observations without a supported-compatibility claim. Schema-3 defaults, schema-4 ownership, candidate refusal/preservation rules, transactions, recovery and all other architectural decisions remain unchanged. The root-pinned development governor and ordinary predecessor upgrade rehearsal retain their separate roles.

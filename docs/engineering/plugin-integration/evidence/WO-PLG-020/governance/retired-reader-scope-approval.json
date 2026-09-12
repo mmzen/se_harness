@@ -1,0 +1,62 @@
+{
+  "schema": "wo-plg-020-retired-reader-scope-v1",
+  "recorded_at_utc": "2026-09-12T20:57:40.552684+00:00",
+  "user_instruction": "we don't care about 0.17, just ignore",
+  "parent_commit": "113bec75c8e985b1306ff896cb236db093f99642",
+  "effects": [
+    {
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-020.md",
+      "role": "technical-owner",
+      "before_sha256": "cf6a1ac47e78a03ef21257acdccb8d85ffab2fb582c0142da55c33efbbe09727",
+      "after_sha256": "68d847f4b144364b3e11a69d1f3b2ed320b56486ad034716fcbdbae723c2ffcc",
+      "appendix_sha256": "ada0239e4df89537c6d7e65aec0e8fa40468ee35f0ebe1f54bd9a69adcde90c5",
+      "historical_prefix_preserved": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/architecture/ARCH-PLG-003.md",
+      "role": "technical-owner",
+      "before_sha256": "dcceb9715543ca4e097108979350db2ed9dfabc2183c7d88c2a4b96b9fd824c3",
+      "after_sha256": "c5fb7fdb20a24707c56e3f7ab2952e0e92300c9e20b98c18fcf7519f152c9760",
+      "appendix_sha256": "83712d9ac4c088b7ca00e4e022654cbf1a76f6bc1581050c3f29071a49c02316",
+      "historical_prefix_preserved": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-003.md",
+      "role": "technical-owner",
+      "before_sha256": "45ee80a3bbd65b2151e69f4352503fd2b2c640c0d98f69e0ba4f96e09a874a1c",
+      "after_sha256": "df64c15fcdecdfea5be05322623ad6df6999299cc1b144fe175c69dde5267540",
+      "appendix_sha256": "54fe0209a4029e2a20816016531cb557c5d32a9f66bd39cc993d35ea17094fa1",
+      "historical_prefix_preserved": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-020.md",
+      "role": "assurance-owner",
+      "before_sha256": "1092a6a72b87700e77785c95063b6c4e87ccc880c224ae3ed1ad7ec6fbf4a357",
+      "after_sha256": "4d62c8da35f2cc71c5f4cad4e717ed075f878f622e9f76cbe48bd98f06c7ae9c",
+      "appendix_sha256": "13e4e8a8665cee20869c49423d9d6951be699173a5cc4244f3efbeff2843b60b",
+      "historical_prefix_preserved": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-020.md",
+      "role": "engineering-owner",
+      "before_sha256": "433418055b00c7cd42cb471b8a3921623a116f4a61bfb95abf07a48b5abfcbd6",
+      "after_sha256": "2e16cfa01496234754f5a1e2dbd054c2ab403224f58da50da2bb186ded536ed2",
+      "appendix_sha256": "bbb591dcfd1f6c28ba16d7d060f6e9109cd94cbf57fcd01f901372c63fde0e68",
+      "historical_prefix_preserved": true
+    }
+  ],
+  "scope": "Already distributed 0.17 behavior against migrated schema-4 targets is not required candidate acceptance.",
+  "removed_required_cases": 9,
+  "candidate_protections_required": true,
+  "historical_failures_reclassified_as_passes": false,
+  "lifecycle": "in_progress",
+  "vrec_prepared": false,
+  "unchanged": [
+    "root-pinned 0.17 governor",
+    "ordinary predecessor upgrade rehearsal",
+    "released-verifier package lane",
+    "candidate ownership/integrity/recovery and protected output",
+    "verification/release/adoption decisions",
+    "C10/C11 limitation"
+  ]
+}

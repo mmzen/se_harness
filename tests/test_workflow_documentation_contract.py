@@ -21,6 +21,23 @@ INSTALLED_GATES = ENGINEERING_ROOT / "QUALITY_GATES.json"
 
 
 class WorkflowDocumentationContractTests(unittest.TestCase):
+    def test_integrity_policy_keeps_default_schema_and_bounded_plugin_exception(self) -> None:
+        # DEC-PLG-007 approves this applicability text under SPEC-PLG-020;
+        # the installed root policy belongs to its released evaluator.
+        workflow = (ENGINEERING_ROOT / "WORKFLOW.md").read_text(encoding="utf-8")
+        integrity = next(line for line in workflow.splitlines() if line.startswith("Managed-file integrity "))
+        for phrase in (
+            "Schema 3 is the default repository format.",
+            "Schema 4 is supported only with a validated explicit plugin ownership binding under SPEC-PLG-020.",
+            "Schemas 1 and 2 are refused before writes.",
+            "Ordinary mutation requires the exact evaluator identity bound by the selected supported lock.",
+            "LF, CRLF, and CR are equivalent line terminators; all other content distinctions remain significant.",
+            "`doctor` and mutation plans are read-only",
+        ):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, integrity)
+        self.assertNotIn("locks remain readable", integrity)
+
     def test_runtime_and_installed_contracts_are_byte_identical(self) -> None:
         self.assertEqual(RUNTIME_CONTRACT.read_bytes(), INSTALLED_CONTRACT.read_bytes())
         self.assertEqual(RUNTIME_GATES.read_bytes(), INSTALLED_GATES.read_bytes())

@@ -340,6 +340,48 @@ What else changed:
   `create_manifest` refuses `build_recipe=None`: no schema-1 bundle manifest
   can be written. Reading one is unchanged, for the records that carry it.
 
+### After `WO-PLG-020`
+
+The approved ownership-acceptance increment extends `candidate-evidence.yml`
+within its existing six job definitions. The baseline below is the definition
+packet merged in PR #461 at `6559568e`; the after column describes the candidate
+workflow. Hosted counts and timings remain pending until its implementation PR
+runs. Earlier measured increments above retain their historical meaning.
+
+| Work for one pull-request candidate | Before WO-PLG-020 | After WO-PLG-020 |
+| --- | ---: | ---: |
+| Job definitions in `candidate-evidence.yml` | 6 | 6 |
+| Complete-candidate qualification | 1 | 1 |
+| Canonical full repository suite, in `candidate-source` | 1 | 1 |
+| Shared non-promotable candidate wheel build | 1 | 1 |
+| Non-promotable source archive for package inventory | 0 | 1 |
+| Existing predecessor-to-successor rehearsal runs | 4: twice per OS | 4: twice per OS |
+| Separate ownership smoke subsets on Python 3.11 | 0 | 4: source and installed package on each OS |
+| Separate full ownership/fault subsets on Python 3.13 | 0 | 4: source and installed package on each OS |
+
+The additional subsets run after the existing rehearsals in `upgrade-rehearsal`
+on Ubuntu and Windows. A single named, pinned setup-python step selects 3.13
+only for the full ownership/fault acceptance required by VER-PLG-020. Existing
+qualification, the canonical suite, wheel production, integration packaging,
+predecessor rehearsals, and ownership compatibility smoke keep Python 3.11.
+The approved REQ-CIP-009, SPEC-CIP-003, and VER-CIP-003 applicability amendments
+bound that interpreter exception and preserve the one-full-suite rule.
+
+The wheel and source archive come from the same Git export in `candidate-source`.
+Every consumer verifies the shared artifact hashes; the additional package
+environments install that wheel outside the checkout and never build another.
+The shared ownership runner records the tested `GITHUB_SHA` separately from the
+PR head, interpreter/platform identity, wheel and archive hashes, per-case
+results, subprocess logs, snapshots, and recovery metadata. An initial
+`incomplete` record survives a stopped run. An unavailable filesystem mechanism
+stays explicitly unavailable, and a test failure fails the existing job.
+
+The per-platform `skill-ownership-Linux` and `skill-ownership-Windows` artifacts
+retain these observations. The [WO-PLG-020 evidence index](../engineering/plugin-integration/evidence/WO-PLG-020/README.md)
+separates preliminary local runs from the required committed-candidate CI.
+This increment changes candidate acceptance; release recipe replay, publication,
+root-evaluator adoption, and native plugin qualification remain separately governed.
+
 ## What stays
 
 The N-1 to N migration rehearsal, the acceptance of the candidate by the

@@ -151,3 +151,27 @@ The baseline has seven managed files: three per retained core and one Claude ori
 Retired writing skills are excluded.
 The [packet review](../../../notes/plugin-ownership-migration-2026-09-12.md) records the eight approved location and schema-floor amendments; DEC-PLG-007 selects the narrow schema-4 exception.
 DEC-PLG-004 and DEC-PLG-006 remain unchanged.
+
+
+## Approved legacy-reader reconciliation — 2026-09-12
+
+The operator approved this exact appendix as `technical-owner` with the instruction "i approve the 4 amendements". The approval was recorded at `2026-09-12T18:28:18Z` under WO-PLG-020. Its reviewed proposal and decision receipt are retained in that work order's governance evidence. The original definition text, approvals and historical observations remain preserved. This approval does not establish passing acceptance, completion or verification.
+
+### Approved applicability: migration-unaware evaluator boundary
+
+For PLG-OWN-012 and its old-evaluator failure row, rejection before mutation applies to installed-file or lock changes and creation or state changes of formal governance artifacts through migration-unaware evaluator interfaces. Each applicable interface MUST refuse a plugin-owned schema-4 target before those mutations and identify unsupported lock format or evaluator incompatibility as the cause. An unrelated input, lifecycle or policy refusal is not evidence of that boundary. No such refusal may be replaced by a usage error, a mocked authority failure, or an observation of a different interface.
+
+Released 0.17 has a narrower observed boundary than rejection of every filesystem-writing command: artifact-graph inspection, evidence-packet generation and derived reporting do not universally consult the installation lock parser. Retained check-result generation is an additional source-inspection concern whose actual behavior remains to be separately probed; no dynamic result for it is claimed here. They may read a schema-4 repository or write their specific evidence/report outputs. This is an explicit compatibility limitation, not installation support or governing authority. An evidence/report command's successful exit MUST NOT be treated as proof that the old evaluator accepts the installed ownership format, can govern the target, or supplies matching evaluator-bound assurance.
+
+The candidate MUST preserve the selected ownership binding and installed bytes through the operations it supports. The distinction above grants no exception for modification of the lock, installed files, formal artifact creation or lifecycle decisions by an incompatible evaluator. PLG-OWN-013 through PLG-OWN-028 retain their existing obligations.
+
+
+## Approved exclusion of released-0.17 migration acceptance — 2026-09-12
+
+The operator instructed "we don't care about 0.17, just ignore" after review of the old-tool acceptance issue. This instruction authorizes the following scope decision as `technical-owner`. The receipt was recorded at `2026-09-12T20:57:40.552684+00:00` under WO-PLG-020. Earlier approvals and observations are preserved.
+
+This appendix supersedes the released-0.17 obligations in PLG-OWN-012, its old-evaluator failure row and the preceding legacy-reader reconciliation. Already distributed 0.17 executables acting on plugin-owned schema-4 repositories are outside this migration's supported and required acceptance scope. Their refusal, reporting and mutation behavior does not block WO-PLG-020. No claim is made that those executables preserve the migrated installation or that the new candidate repairs them.
+
+The explicit versioned lock remains required. The migration-capable candidate MUST reject unsupported lock inputs before mutation, preserve ownership during supported operations and refuse qualification/dashboard outputs that overlap protected installation or discovery paths. The two candidate report-output repairs and their regression coverage remain required. All other candidate ownership, integrity, recovery and path-preservation obligations remain unchanged.
+
+This decision does not change the evaluator currently governing the implementation checkout, ordinary predecessor-to-candidate upgrade rehearsal, the released-verifier package lane, or release/adoption authority. Historical 0.17 failures remain failures in retained evidence; they are excluded observations, not successful acceptance results.

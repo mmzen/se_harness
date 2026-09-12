@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -159,6 +160,14 @@ def _paths_overlap(first: Path, second: Path) -> bool:
     return is_within(first, second) or is_within(second, first)
 
 
+def _portable_paths_overlap(first: Path, second: Path) -> bool:
+    """Compare complete components, including portable case collisions."""
+    left = tuple(part.casefold() for part in first.parts)
+    right = tuple(part.casefold() for part in second.parts)
+    common = min(len(left), len(right))
+    return left[:common] == right[:common]
+
+
 def resolve_repository_root(value: Path) -> Path:
     root = value.resolve()
     if not root.exists() or not root.is_dir():
@@ -179,12 +188,40 @@ def resolve_output_root(
     artifact_root: Path,
     value: Path | None,
 ) -> Path:
+    from se_harness.artifact_layout import validate_existing_chain
+    from se_harness.installer import HarnessError, LOCK_NAME, template_files
+    from se_harness.integrity import IntegrityError, validate_output_path_spelling
+    from se_harness.skill_ownership import DISCOVERY_PATHS, MUTEX_NAME, RECOVERY_NAME
+
     candidate = value or DEFAULT_OUTPUT_ROOT
-    resolved = candidate.resolve() if candidate.is_absolute() else (repository_root / candidate).resolve()
+    try:
+        validate_output_path_spelling(repository_root)
+        validate_output_path_spelling(candidate)
+    except IntegrityError as exc:
+        raise GenerationError(str(exc)) from exc
+    lexical = Path(os.path.abspath(candidate if candidate.is_absolute() else repository_root / candidate))
+    resolved = lexical.resolve()
     if _paths_overlap(resolved, repository_root) and not is_within(resolved, repository_root):
         raise GenerationError("output root must not contain the repository root")
     if resolved == repository_root or _paths_overlap(resolved, artifact_root):
         raise GenerationError("output root must not overlap the repository or artifact root")
+    # The effective schema-4 inventory omits precisely the retired files that
+    # must stay absent. Protect the full trusted distribution and discovery set.
+    protected = {item.target for item in template_files()}
+    protected.update(Path(name) for name in DISCOVERY_PATHS)
+    protected.update(Path(name) for name in (LOCK_NAME, RECOVERY_NAME, MUTEX_NAME, ".git"))
+    for relative in protected:
+        installed = repository_root / relative
+        if any(_portable_paths_overlap(output_path, protected_path)
+               for output_path in (lexical, resolved)
+               for protected_path in (installed, installed.resolve())):
+            raise GenerationError("output root must not overlap protected installation or discovery paths")
+    try:
+        # Resolution hides symlinks and Windows junctions. Check the original
+        # path, including an external output's existing parents, before writing.
+        validate_existing_chain(Path(lexical.anchor), lexical.relative_to(lexical.anchor), final_kind="directory")
+    except HarnessError as exc:
+        raise GenerationError(f"unsafe output root: {exc}") from exc
     if resolved.exists() and resolved.is_symlink():
         raise GenerationError("output root must not be a symbolic link")
     if resolved.exists() and not resolved.is_dir():
