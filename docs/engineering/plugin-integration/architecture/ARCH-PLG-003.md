@@ -2,7 +2,7 @@
 id = "ARCH-PLG-003"
 type = "architecture"
 title = "Evaluator-owned transactions for external skill ownership"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-12"
 updated = "2026-09-12"
@@ -15,6 +15,13 @@ assessed_by = "implementation-planner"
 [relations]
 addresses = ["REQ-PLG-028", "REQ-PLG-029", "REQ-PLG-030", "REQ-PLG-031"]
 conforms_to = ["SPEC-PLG-020", "SPEC-PLG-012"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-12T12:56:34Z"
+decided_by = "technical-owner"
+reason = "The operator selected the reviewed WO-PLG-020 packet and execution delegation on 2026-09-12 with \"take the delegated route\", then approved its supplemental DEC-PLG-007 reconciliation and amendments with \"i approve DEC-PLG-007\u2019s `narrow-schema4-exception` with amendements\". Record only ARCH-PLG-003 approval as technical-owner. The reviewed packet at 2d32b57bcdf805a83d5902fb37a3d2b7580c16e0 supplies the selected scope, eight applicability amendments, and candidate policy text. Implementation, assurance, release, and integration results are not recorded by this approval."
 +++
 
 # Architecture: Evaluator-owned transactions for external skill ownership
@@ -23,7 +30,7 @@ conforms_to = ["SPEC-PLG-020", "SPEC-PLG-012"]
 
 The evaluator owns repository installation and its lock. Native plugins own their external packages.
 The migration bridges those ownership records without transferring governance authority to plugin code.
-The proposed design is subject to technical-owner approval through ADR-PLG-003.
+ADR-PLG-003 records the technical-owner choice of this design.
 
 ## Components and responsibilities
 
@@ -74,4 +81,4 @@ No optional governance profile, reduced integrity mode, or implicit host support
 ## Required decision
 
 ADR-PLG-003 selects the ownership representation, effective-inventory boundary, and transactional recovery architecture.
-The four prior-contract applicability amendments listed in the packet review must be accepted before implementation starts.
+The eight approved prior-contract applicability amendments listed in the packet review reconcile the selected locations and schema-floor exception, including DEC-PLG-007.

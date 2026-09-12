@@ -2,7 +2,7 @@
 id = "WO-PLG-020"
 type = "work_order"
 title = "Implement explicit evaluator migration of retained skill ownership"
-status = "draft"
+status = "approved"
 owners = ["engineering-owner"]
 created = "2026-09-12"
 updated = "2026-09-12"
@@ -64,6 +64,13 @@ implements = ["REQ-PLG-028", "REQ-PLG-029", "REQ-PLG-030", "REQ-PLG-031"]
 specifications = ["SPEC-PLG-020"]
 architecture = ["ARCH-PLG-003", "ADR-PLG-003"]
 verification = ["VER-PLG-020"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-12T12:56:34Z"
+decided_by = "engineering-owner"
+reason = "The operator selected the reviewed WO-PLG-020 packet and execution delegation on 2026-09-12 with \"take the delegated route\", then approved its supplemental DEC-PLG-007 reconciliation and amendments with \"i approve DEC-PLG-007\u2019s `narrow-schema4-exception` with amendements\". Record only WO-PLG-020 approval as engineering-owner. The reviewed packet at 2d32b57bcdf805a83d5902fb37a3d2b7580c16e0 supplies the selected scope, eight applicability amendments, and candidate policy text. Implementation, assurance, release, and integration results are not recorded by this approval."
 +++
 
 # Work Order: Implement explicit evaluator migration of retained skill ownership
@@ -71,7 +78,8 @@ verification = ["VER-PLG-020"]
 ## Lifecycle
 
 The operator selected "take the delegated route" on 2026-09-12 in response to the reviewed packet approval and implementation question.
-This selects the execution delegation class for WO-PLG-020. Lifecycle approval remains unapplied while DEC-PLG-007 resolves the additional lock-schema contract conflict found during review.
+This selects the execution delegation class for WO-PLG-020. On 2026-09-12 the operator also approved DEC-PLG-007 and its amendments, resolving the additional lock-schema conflict.
+The released evaluator records the nine selected packet approvals; the class can take effect only at the PR base with the required live candidate check.
 Once this class-bearing WO is approved at the PR base and the exact candidate has a successful live GitHub validate check, delegated-executor may start, complete, and prepare the ready verification record.
 Verification, release, integration, and external actions remain separately authorized decisions. A branch cannot activate its own delegation.
 
@@ -87,7 +95,7 @@ The implementation includes safe restoration and ownership-aware integrity and u
 - Default installation regression, stale-input and concurrency protection, Windows/Linux fault injection, and non-promotable candidate package acceptance.
 - Exact applicability amendments listed in the packet review, including the additional schema-floor reconciliation governed by DEC-PLG-007.
 - Evaluator-evidence matching on a plugin-owned lock and recovery refusal after intervening owner changes or hostile recovery metadata.
-- This work order's draft chain, retained evidence, and concise domain index entry.
+- This work order's governing chain, retained evidence, and concise domain index entry.
 
 ## Out of scope
 
@@ -101,7 +109,7 @@ The implementation includes safe restoration and ownership-aware integrity and u
 After approval and an eligible delegated start, choose implementation decomposition, internal names, fixtures, and diagnostics within SPEC-PLG-020 and ADR-PLG-003.
 Keep one standard governance contract; ownership is an explicit installation property, not an alternative policy profile.
 Do not choose a new owner decision, weaken a refusal, widen the catalog, or silently add another installer mode.
-The schema-4 exception needs the additional accountable reconciliation in DEC-PLG-007 before implementation. All other reviewed design choices retain their selected meaning.
+DEC-PLG-007 selects the approved narrow schema-4 exception, recorded in all eight prior-contract applicability amendments. All other reviewed design choices retain their selected meaning.
 
 ## Constraints and dependencies
 
@@ -131,7 +139,7 @@ Record Windows/Linux evidence and leave native host qualification explicitly out
 ## Evidence to record
 
 Retain exact inputs, plan digests, before/after bytes, refusal outputs, crash/recovery observations, command arguments, candidate identities, and CI references under this WO's evidence directory.
-Preparation notes and this packet are not implementation evidence or approval.
+Preparation notes and this packet are not implementation evidence; accountable definition approvals are recorded in the selected artifacts.
 
 ## Stop and escalate conditions
 

@@ -67,3 +67,12 @@ No live pre-3 consumer root is available to test against; the fixtures are
 constructed from the schema definitions the retired code carried. The
 released 0.11.0 root evaluator keeps its own read paths until the next
 root adoption, so this repository's gate behavior is unchanged until then.
+
+
+## Amendment record
+
+### Approved plugin ownership applicability — 2026-09-12
+
+Approved under **WO-PLG-020** by the operator acting as **assurance-owner, security-owner**. The reviewed delegated packet was selected with "take the delegated route"; the additional schema-floor reconciliation was approved through DEC-PLG-007 with "i approve DEC-PLG-007’s `narrow-schema4-exception` with amendements".
+
+The existing schema-3 writer observations remain the required default-repository cases and retain their historical results. Explicit schema-4 plugin ownership is verified by VER-PLG-020, including valid and invalid bindings, unchanged evaluator-evidence matching, legacy-reader refusal, upgrade preservation, and safe restoration. Every pre-3 refusal, deleted-symbol prohibition, digest-semantic check, and reserved MG002 criterion remains in force.

@@ -2,13 +2,20 @@
 id = "VER-PLG-020"
 type = "verification"
 title = "Verify safe evaluator skill ownership migration and restoration"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner"]
 created = "2026-09-12"
 updated = "2026-09-12"
 
 [relations]
 verifies = ["REQ-PLG-028", "REQ-PLG-029", "REQ-PLG-030", "REQ-PLG-031"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-12T12:56:34Z"
+decided_by = "assurance-owner"
+reason = "The operator selected the reviewed WO-PLG-020 packet and execution delegation on 2026-09-12 with \"take the delegated route\", then approved its supplemental DEC-PLG-007 reconciliation and amendments with \"i approve DEC-PLG-007\u2019s `narrow-schema4-exception` with amendements\". Record only VER-PLG-020 approval as assurance-owner. The reviewed packet at 2d32b57bcdf805a83d5902fb37a3d2b7580c16e0 supplies the selected scope, eight applicability amendments, and candidate policy text. Implementation, assurance, release, and integration results are not recorded by this approval."
 +++
 
 # Verification Contract: Verify safe evaluator skill ownership migration and restoration
@@ -17,7 +24,7 @@ verifies = ["REQ-PLG-028", "REQ-PLG-029", "REQ-PLG-030", "REQ-PLG-031"]
 
 Expected file sets, bytes, identities, digests, and refusals come from SPEC-PLG-020 and fixed fixture inputs.
 The assurance owner approves this contract before implementation. Candidate output never defines its expected result.
-No evidence or implementation success is claimed by this draft.
+This contract states acceptance criteria; it claims no observed implementation success.
 
 ## Requirement-to-evidence matrix
 

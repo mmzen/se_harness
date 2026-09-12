@@ -2,7 +2,7 @@
 id = "SPEC-PLG-020"
 type = "specification"
 title = "Explicit evaluator ownership migration for retained plugin skills"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-12"
 updated = "2026-09-12"
@@ -10,6 +10,13 @@ contract = "Explicit evaluator transactions transfer retained skill ownership wh
 
 [relations]
 specifies = ["REQ-PLG-028", "REQ-PLG-029", "REQ-PLG-030", "REQ-PLG-031"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-12T12:56:34Z"
+decided_by = "technical-owner"
+reason = "The operator selected the reviewed WO-PLG-020 packet and execution delegation on 2026-09-12 with \"take the delegated route\", then approved its supplemental DEC-PLG-007 reconciliation and amendments with \"i approve DEC-PLG-007\u2019s `narrow-schema4-exception` with amendements\". Record only SPEC-PLG-020 approval as technical-owner. The reviewed packet at 2d32b57bcdf805a83d5902fb37a3d2b7580c16e0 supplies the selected scope, eight applicability amendments, and candidate policy text. Implementation, assurance, release, and integration results are not recorded by this approval."
 +++
 
 # Specification: Explicit evaluator ownership migration for retained plugin skills
@@ -127,14 +134,14 @@ WO-PLG-009 supplies native connection and discovery.
 
 ## Data and interface contracts
 
-Proposed CLI, unavailable in 0.17.0:
+Selected CLI contract, unavailable in 0.17.0:
 
 `harnessctl skill-ownership TARGET --provider plugin --binding-input FILE [--apply --expected-plan-sha256 HASH] [--json]`
 
 `harnessctl skill-ownership TARGET --provider repository [--apply --expected-plan-sha256 HASH] [--json]`
 
 Application requires the exact plan digest; otherwise the command is read-only.
-ADR-PLG-003 defines the proposed binding representation and transaction interface.
+ADR-PLG-003 defines the binding representation and transaction interface.
 Limits: 1 MiB/control document, 2,000 inventory files, 16 MiB/file, 128 MiB/aggregate payload.
 Only reviewed regular files are removed; only proven-empty repository directories are pruned.
 
@@ -142,5 +149,5 @@ Only reviewed regular files are removed; only proven-empty repository directorie
 
 The baseline has seven managed files: three per retained core and one Claude orientation adapter.
 Retired writing skills are excluded.
-The [packet review](../../../notes/plugin-ownership-migration-2026-09-12.md) contains required location and schema-floor amendments; DEC-PLG-007 blocks approval until reconciliation.
+The [packet review](../../../notes/plugin-ownership-migration-2026-09-12.md) records the eight approved location and schema-floor amendments; DEC-PLG-007 selects the narrow schema-4 exception.
 DEC-PLG-004 and DEC-PLG-006 remain unchanged.

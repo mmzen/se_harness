@@ -2,20 +2,27 @@
 id = "ADR-PLG-003"
 type = "adr"
 title = "Represent plugin ownership explicitly in the evaluator lock"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-12"
 updated = "2026-09-12"
 
 [relations]
 decides = ["ARCH-PLG-003"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-12T12:56:34Z"
+decided_by = "technical-owner"
+reason = "The operator selected the reviewed WO-PLG-020 packet and execution delegation on 2026-09-12 with \"take the delegated route\", then approved its supplemental DEC-PLG-007 reconciliation and amendments with \"i approve DEC-PLG-007\u2019s `narrow-schema4-exception` with amendements\". Record only ADR-PLG-003 approval as technical-owner. The reviewed packet at 2d32b57bcdf805a83d5902fb37a3d2b7580c16e0 supplies the selected scope, eight applicability amendments, and candidate policy text. Implementation, assurance, release, and integration results are not recorded by this approval."
 +++
 
 # ADR: Represent plugin ownership explicitly in the evaluator lock
 
 ## Status
 
-Draft architecture choice for technical-owner review. No decision has been applied.
+The artifact lifecycle records the technical-owner decision. Implementation and its assurance remain separate.
 
 ## Context
 
@@ -37,7 +44,7 @@ One authoritative ownership record, fail-closed old readers, safe customization 
 | Add an ignored schema-3 metadata field | Old evaluators can ignore the ownership meaning; correctness would depend on incidental missing-file failures. |
 | Explicit schema-4 binding and shared effective inventory | Makes ownership visible to every reader, forces old readers to refuse, and supports reviewed migration and restoration. |
 
-## Proposed decision
+## Decision
 
 Select the explicit schema-4 binding and shared effective inventory for plugin ownership.
 Keep schema 3 and the existing behavior for default repository ownership.
@@ -58,7 +65,7 @@ WO-PLG-009 remains responsible for proving one active route in the native host, 
 VER-PLG-020 requires matched before/after snapshots, plugin byte-mutation cases, upgrade replay, old-reader refusal, concurrent operations, and crash/recovery fault injection on Windows and Linux.
 The current accepted C10/C11 limitation is not resolved or widened by this decision.
 
-## Proposed data and transaction interface
+## Data and transaction interface
 
 Both ownership CLI forms plan by default; application requires the exact reviewed plan digest.
 Restoration uses the installed evaluator's retained standard skill inventory, never arbitrary replacement files.

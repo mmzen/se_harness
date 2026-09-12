@@ -1,7 +1,7 @@
-# Evaluator skill ownership migration: proposed packet
+# Evaluator skill ownership migration: approved definition packet
 
 Prepared 2026-09-12 against main `3bf0ef2a7a2b4008efaa3cb79431d526d3f6f600`.
-The operator selected delegated execution on 2026-09-12. The nine implementation artifacts remain draft while the newly discovered schema-floor conflict awaits DEC-PLG-007. No implementation or prior-contract amendment has been applied.
+The operator selected delegated execution and approved DEC-PLG-007 with its amendments on 2026-09-12. The released evaluator records the nine packet approvals, and all eight exact applicability amendments are appended to their target contracts. Implementation remains unstarted pending integration of these definitions and the live candidate gate.
 
 ## Why this work is next
 
@@ -14,7 +14,7 @@ The three old writing skills were retired by the earlier ECP work; they are not 
 Current installer planning and doctor both derive their managed set from the standard template.
 Deleting the retained skills alone breaks integrity and allows an upgrade to recreate them.
 
-## Proposed packet
+## Selected packet
 
 | Artifact | Owner decision | Purpose |
 | --- | --- | --- |
@@ -27,7 +27,7 @@ Deleting the retained skills alone breaks integrity and allows an upgrade to rec
 | VER-PLG-020 | assurance-owner | Windows/Linux identity, failure, race, recovery, and regression criteria |
 | WO-PLG-020 | engineering-owner | Bounded evaluator implementation scope |
 
-## Design for review
+## Selected design
 
 1. Keep the single standard harness and ordinary repository ownership as the default.
 2. Add an explicit plan/apply/restore operation for an independently selected plugin binding.
@@ -37,14 +37,12 @@ Deleting the retained skills alone breaks integrity and allows an upgrade to rec
 6. Keep portable provider identities in the lock; external machine paths remain local inputs.
 7. Let credential-free CI validate repository ownership without falsely proving external plugin availability.
 
-The operator selected the reviewed packet through delegated execution. The additional existing schema-floor contradiction below needs an accountable decision before that selection can be activated.
+The operator selected the reviewed packet through delegated execution. DEC-PLG-007 resolves the additional schema-floor contradiction through the narrow exception below.
 Native host discovery is deliberately a later observed result under WO-PLG-009; package inventory checks cannot establish it.
 
-## Exact proposed prior-contract amendments
+## Approved prior-contract amendments
 
-These four append-only applicability amendments are part of the approval package. Their target files remain unchanged in this draft.
-On approval, retain their existing statements, rules, lifecycle history, and historical observations, and append the corresponding text under `Amendment record`.
-The new amendment must identify WO-PLG-020 and the actual approval date and accountable actor.
+These four applicability amendments are appended under `Amendment record` in their target contracts. Each identifies WO-PLG-020, the approval date, and accountable role; all preceding bytes, lifecycle history, and historical observations are preserved.
 
 ### REQ-AEX-009 — repository host discovery
 
@@ -68,13 +66,13 @@ DEC-PLG-004's terminal disposition and DEC-PLG-006's accepted C10/C11 limitation
 
 ## Delivery sequence and current boundary
 
-Resolve DEC-PLG-007 and accept the four additional amendments below, then record approval of the selected nine-artifact packet and all eight applicability amendments.
+DEC-PLG-007 is decided as `narrow-schema4-exception`; the selected nine-artifact packet and all eight applicability amendments are approved.
 Integrate the approved class-bearing definitions into main. Start WO-PLG-020 through delegated execution only after the required live check succeeds for the exact implementation candidate.
 Implement and verify the evaluator change; later select its release and adoption through appropriate governed work.
 Only after that prerequisite is available can WO-PLG-009 connect live repositories, followed by WO-PLG-013 maintenance.
 WO-PLG-015 qualification and WO-PLG-016 released guidance remain separate work.
 
-No new release version, live migration, native host reconfiguration, public publication, or lifecycle decision is authorized by this draft.
+These definition approvals do not select a release version, live migration, native host reconfiguration, public publication, verification decision, or PR merge.
 
 ## Delegated route selected
 
@@ -87,8 +85,8 @@ The class does not grant definition decisions, assurance, release, merge, creden
 ## Additional schema-floor reconciliation
 
 The preparation review found a gap in the original packet: the following current contracts explicitly limit reads and writes to schema 3.
-DEC-PLG-007 blocks SPEC-PLG-020 until its technical owner resolves this contradiction.
-The original four location amendments above remain part of the selected packet. The following four additional amendments require accountable acceptance.
+The technical-owner decision in DEC-PLG-007 resolves this contradiction with `narrow-schema4-exception`.
+The original four location amendments above remain part of the selected packet. The following four additional amendments were approved by the operator as the named accountable owners on 2026-09-12.
 
 ### REQ-HUP-024 — repository-owner, engineering-owner, security-owner
 
@@ -120,7 +118,7 @@ Require positive/mismatch evaluator-evidence cases on a plugin-owned lock.
 Require interrupted recovery to preserve intervening owner edits/new files and refuse tampered, truncated, or path-escaping recovery records.
 These additions implement the packet's existing preservation and unchanged-governance obligations; no new product behavior or relaxed acceptance criterion is introduced.
 
-### Accountable action
+### Recorded owner action
 
-Select DEC-PLG-007 option `narrow-schema4-exception`, approve the four additional applicability amendments and candidate policy text above, and include the named scope/acceptance corrections in WO-PLG-020.
-After that decision, record the selected packet approvals with the released evaluator and deliver the class-bearing definitions to main before delegated implementation.
+The operator approved DEC-PLG-007 option `narrow-schema4-exception`, the four additional applicability amendments, the candidate policy text, and the named scope/acceptance corrections with "i approve DEC-PLG-007’s `narrow-schema4-exception` with amendements".
+The earlier "take the delegated route" selection authorizes the reviewed packet approvals and its execution class. The released evaluator records the selected approvals; deliver the class-bearing definitions to main before delegated implementation.

@@ -154,3 +154,12 @@ Before approval, the specification and ADR must close the exact canonical-to-
 host mapping, host-native activation policy, adapter content boundary, package
 inventory, integrity checks, upgrade behavior, supported-host test method, and
 migration from repositories that contain only `.agents/skills`.
+
+
+## Amendment record
+
+### Approved plugin ownership applicability — 2026-09-12
+
+Approved under **WO-PLG-020** by the operator acting as **requirements-steward**. The reviewed delegated packet was selected with "take the delegated route"; the additional schema-floor reconciliation was approved through DEC-PLG-007 with "i approve DEC-PLG-007’s `narrow-schema4-exception` with amendements".
+
+For an explicit plugin ownership selection conforming to SPEC-PLG-020, repository-local installation and canonical-location clauses apply to the unselected default repository route only. The selected retained skills are represented by the evaluator's plugin ownership binding instead. Invocation policy, evaluator authority, customization protection, and atomicity remain required. Native discovery must be observed separately under WO-PLG-009. This amendment does not restore retired writing skills or alter historical host observations.

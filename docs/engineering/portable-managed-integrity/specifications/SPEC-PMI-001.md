@@ -137,3 +137,10 @@ read before any write, and the emitted lock is always the current schema
 identity). The canonical `utf8-text-lf-v1` semantics this specification
 defined are unchanged and remain the digest contract of the schema-3 lock.
 Nothing else in this specification changes.
+
+
+### Approved plugin ownership applicability — 2026-09-12
+
+Approved under **WO-PLG-020** by the operator acting as **engineering-owner, quality-owner, security-owner**. The reviewed delegated packet was selected with "take the delegated route"; the additional schema-floor reconciliation was approved through DEC-PLG-007 with "i approve DEC-PLG-007’s `narrow-schema4-exception` with amendements".
+
+The schema-3-only applicability stated by the WO-HUP-012 amendment now includes the narrowly validated schema-4 plugin ownership exception of SPEC-PLG-020 and the corresponding SPEC-HUP-012 amendment. The historical reason for retiring schema-1 and schema-2 handling is preserved. No digest canonicalization, fragment semantics, historical evidence, or default schema-3 behavior changes.

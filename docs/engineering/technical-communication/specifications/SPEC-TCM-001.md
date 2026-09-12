@@ -339,3 +339,12 @@ classes, test fixture organization, concise policy examples, and diagnostic
 numbers within the reserved `TCM` family. It may not change policy precedence,
 profile names, protected classes, skill activation, mutation class, public
 claim, no-download boundary, source limits, output schemas, or stop behavior.
+
+
+## Amendment record
+
+### Approved plugin ownership applicability — 2026-09-12
+
+Approved under **WO-PLG-020** by the operator acting as **technical-owner**. The reviewed delegated packet was selected with "take the delegated route"; the additional schema-floor reconciliation was approved through DEC-PLG-007 with "i approve DEC-PLG-007’s `narrow-schema4-exception` with amendements".
+
+For explicit plugin ownership conforming to SPEC-PLG-020, TCM-SKL-001's managed installed location is supplied by the validated provider binding. Its canonical distribution source and retained core identity remain unchanged. TCM-SKL-002 through TCM-SKL-006 and every other unaffected rule remain in force. This exception does not authorize edits to the retained core or any new skill effect.

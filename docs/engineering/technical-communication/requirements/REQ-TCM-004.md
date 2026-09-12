@@ -114,3 +114,12 @@ the request as work authorization.
 Before approval, technical and assurance owners must accept the closed contract,
 supported source kinds, helper boundary, result fields, stop outcomes, and
 compatibility behavior in `SPEC-TCM-001` and `VER-TCM-001`.
+
+
+## Amendment record
+
+### Approved plugin ownership applicability — 2026-09-12
+
+Approved under **WO-PLG-020** by the operator acting as **requirements-steward**. The reviewed delegated packet was selected with "take the delegated route"; the additional schema-floor reconciliation was approved through DEC-PLG-007 with "i approve DEC-PLG-007’s `narrow-schema4-exception` with amendements".
+
+When SPEC-PLG-020 explicitly selects plugin ownership, the operator-brief skill may be loaded from the bound plugin package instead of its repository-managed location. Its exact retained core identity, explicit invocation requirement, bounded source, read-only effects, and evaluator checks remain unchanged. The default repository-owned location remains unchanged.
