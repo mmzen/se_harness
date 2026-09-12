@@ -1,0 +1,107 @@
+# One-off user-requested performance experiment; never merge or qualify a release.
+name: Experimental Windows RAM disk comparison
+on:
+  push:
+    branches: [experiment/windows-ownership-ramdisk-20260912]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  benchmark:
+    name: Same-runner disk versus NTFS RAM disk
+    runs-on: windows-latest
+    timeout-minutes: 100
+    env:
+      PYTHONNOUSERSITE: '1'
+      PYTHONPATH: ''
+      RAMDISK_TESTED_COMMIT: 1e062e4db06b6e7131429db15b3d6b9876e600db
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          artifact-ids: '10299474643'
+          run-id: '34701328305'
+          github-token: ${{ github.token }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/candidate-dist
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        id: python311
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        id: python313
+        with:
+          python-version: '3.13'
+      - name: Prepare verified RAM disk and identical input distributions
+        id: prepare
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if (Test-Path -LiteralPath 'R:\') { throw 'R: is already in use' }
+          $driverDirectory = Join-Path $env:RUNNER_TEMP 'ramdisk-driver'
+          New-Item -ItemType Directory -Path $driverDirectory | Out-Null
+          $archive = Join-Path $driverDirectory 'imdisk.zip'
+          Invoke-WebRequest -Uri 'https://static.ltr-data.se/files/imdisk.zip' -OutFile $archive
+          if ((Get-FileHash -Algorithm SHA256 -LiteralPath $archive).Hash -ne 'B799B5C8DB1C49BB4BBE58BF6D2C5146D9CA0D35DF282F30189A5AE38BAA7859') { throw 'Driver package changed' }
+          $files = Join-Path $driverDirectory 'files'
+          Expand-Archive -LiteralPath $archive -DestinationPath $files
+          $driver = Join-Path $files 'sys/amd64/imdisk.sys'
+          $signature = Get-AuthenticodeSignature -LiteralPath $driver
+          Write-Host ('DRIVER_SIGNATURE ' + $signature.Status + ' ' + $signature.SignerCertificate.Subject)
+          if ($signature.Status -ne 'Valid') { throw 'Driver signature is not valid' }
+          $inf = Join-Path $files 'imdisk.inf'
+          $install = Start-Process -FilePath "$env:SystemRoot\System32\rundll32.exe" -ArgumentList @('setupapi.dll,InstallHinfSection', 'DefaultInstall', '132', $inf) -WindowStyle Hidden -Wait -PassThru
+          if ($install.ExitCode -ne 0) { throw 'Driver installation failed' }
+          Start-Service imdisk
+          $imdisk = Join-Path $env:SystemRoot 'System32/imdisk.exe'
+          & $imdisk -a -t vm -s 4G -m R: -p '/fs:ntfs /q /y /v:OWNERSHIP_RAM'
+          if ($LASTEXITCODE -ne 0) { throw 'RAM disk creation failed' }
+          if (-not (Test-Path -LiteralPath 'R:\')) { throw 'RAM disk is not mounted' }
+          'RAMDISK_CREATED=1' | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          & $imdisk -l -m R:
+          & fsutil fsinfo volumeinfo R:
+          if ($LASTEXITCODE -ne 0) { throw 'NTFS inspection failed' }
+          $os = Get-CimInstance Win32_OperatingSystem
+          $defender = Get-MpComputerStatus
+          $preferences = Get-MpPreference
+          [ordered]@{image=$env:ImageOS;image_version=$env:ImageVersion;os=$os.Caption;memory_kb=$os.TotalVisibleMemorySize;free_memory_kb=$os.FreePhysicalMemory;real_time_protection=$defender.RealTimeProtectionEnabled;antivirus=$defender.AntivirusEnabled;exclusions=@($preferences.ExclusionPath);driver_version=(Get-Item -LiteralPath $driver).VersionInfo.FileVersion} | ConvertTo-Json -Depth 4
+          $predecessorDirectory = Join-Path $env:RUNNER_TEMP 'predecessor-dist'
+          python -m pip download --disable-pip-version-check --only-binary=:all: --no-deps --dest $predecessorDirectory se-harness==0.17.0
+          if ($LASTEXITCODE -ne 0) { throw 'Predecessor download failed' }
+          $predecessor = Join-Path $predecessorDirectory 'se_harness-0.17.0-py3-none-any.whl'
+          if ((Get-FileHash -Algorithm SHA256 -LiteralPath $predecessor).Hash -ne '305C7CBC79F87BAA76EA3BEA939B134999F9CAD3BFDFA0B4C9C2FD2D9CAACCED') { throw 'Predecessor wheel mismatch' }
+          $candidateDirectory = Join-Path $env:RUNNER_TEMP 'candidate-dist'
+          foreach ($line in Get-Content -LiteralPath (Join-Path $candidateDirectory 'SHA256SUMS')) {
+              $parts = $line -split '\s+', 2
+              if ($parts.Count -ne 2 -or $parts[1] -match '[\\/:]' -or $parts[1].StartsWith('.')) { throw 'Unexpected handover filename' }
+              if ((Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $candidateDirectory $parts[1])).Hash.ToLowerInvariant() -ne $parts[0]) { throw 'Handover bytes mismatch' }
+          }
+          if ((Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $candidateDirectory 'se_harness-0.18.0-py3-none-any.whl')).Hash -ne 'EC2421F9562096E86F1A16C4117358E836541384F0DD32BBABEC8A8357479985') { throw 'Candidate wheel mismatch' }
+      - name: Materialize the disposable benchmark script
+        shell: pwsh
+        run: |
+          $script = Join-Path $env:RUNNER_TEMP 'ownership-benchmark.ps1'
+          Copy-Item -LiteralPath (Join-Path $env:GITHUB_WORKSPACE '.github/experiments/windows-ramdisk.ps1') -Destination $script
+          git diff --exit-code 1e062e4db06b6e7131429db15b3d6b9876e600db HEAD -- se_harness tests templates repository_tools scripts pyproject.toml
+          if ($LASTEXITCODE -ne 0) { throw 'Experiment changed candidate code or tests' }
+          Write-Host "EXPERIMENT_COMMIT $env:GITHUB_SHA; IMPLEMENTATION_COMMIT $env:RAMDISK_TESTED_COMMIT"
+          "RAMDISK_PY311=$(Split-Path -Parent '${{ steps.python311.outputs.python-path }}')" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          "RAMDISK_PY313=$(Split-Path -Parent '${{ steps.python313.outputs.python-path }}')" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+      - name: Baseline on normal disk
+        id: disk
+        shell: pwsh
+        run: '& (Join-Path $env:RUNNER_TEMP "ownership-benchmark.ps1") -Storage disk'
+      - name: Same Windows test selection on NTFS RAM disk
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        shell: pwsh
+        run: '& (Join-Path $env:RUNNER_TEMP "ownership-benchmark.ps1") -Storage ramdisk'
+      - name: Dismount this experiment RAM disk
+        if: ${{ always() && env.RAMDISK_CREATED == '1' }}
+        shell: pwsh
+        run: |
+          Set-Location -LiteralPath $env:GITHUB_WORKSPACE
+          & "$env:SystemRoot/System32/imdisk.exe" -d -m R:
+          if ($LASTEXITCODE -ne 0) { throw 'RAM disk dismount failed' }
