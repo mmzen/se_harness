@@ -1,0 +1,18 @@
+{
+  "name": "final-candidate-help",
+  "argv": [
+    "C:\\Python313\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "se_harness",
+    "--help"
+  ],
+  "returncode": 0,
+  "stdout_sha256": "bd6eb5ee50cb73d0c1e5d736a1318fe1a80c554eb03b8b926ef75431b5fa9fef",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "result": {
+    "text": "heckpoints, and emit canonical\r\n                        restitution\r\n    evidence            write or rebind one work order's evidence packet to\r\n                        the current formal snapshot\r\n    pr-body             emit the LF-terminated pull-request body for one work\r\n                        order\r\n    transition          plan or atomically apply explicit lifecycle\r\n                        transitions\r\n    decide              dispose one pending decision with a declared option,\r\n                        under DR-DECISION-DISPOSE\r\n    raise-risk          record one measured threat as a raised risk artifact,\r\n                        optionally with the decision that stops the threatened\r\n                        work\r\n    risks               list the risks threatening one artifact and its\r\n                        governing chain; writes nothing\r\n    select-work-order   select one structured work-order field from a GitHub\r\n                        pull-request event\r\n    upgrade             plan or apply safe managed-file upgrades\r\n    scaffold-domain     safely create the canonical organization for one\r\n                        engineering domain\r\n    create-artifact     create one incomplete draft from the canonical\r\n                        artifact template\r\n    release-unit        derive a release unit's work-order census from the\r\n                        commits between the previous release tag and a\r\n                        candidate commit\r\n    identity            emit and verify one evaluator or candidate runtime\r\n                        identity\r\n    qualify             run one typed, provenance-bound release qualification\r\n                        operation\r\n    capture-verification\r\n                        prepare a ready commit-bound verification record\r\n    prepare-release     prepare a ready commit-bound release record\r\n\r\noptions:\r\n  -h, --help            show this help message and exit\r\n  --version             show program's version number and exit\r\n"
+  }
+}

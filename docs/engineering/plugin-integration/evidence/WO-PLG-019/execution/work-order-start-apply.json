@@ -1,0 +1,332 @@
+{
+  "name": "work-order-start-apply",
+  "argv": [
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "transition",
+    ".",
+    "--set",
+    "WO-PLG-019=in_progress",
+    "--decision",
+    "WO-PLG-019=engineering-owner",
+    "--reason",
+    "WO-PLG-019=The operator approved packet 29507242f4d17369d242da25f37043fdbdc9f1a3254ff9c01938e6c858845514, explicitly authorizing WO-PLG-019 to start. Record only this selected work-order start after passing released start checks.",
+    "--json",
+    "--apply"
+  ],
+  "started_at": "2026-09-12T07:24:35.678237+00:00",
+  "finished_at": "2026-09-12T07:25:15.489236+00:00",
+  "returncode": 0,
+  "stdout_sha256": "f8ebe329668a0be4a2179f8743d4ee558a00461092d98d619200db1b73a9469d",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "result": {
+    "schema": "se-harness-workflow-result-v2",
+    "operation": {
+      "kind": "transition",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "WO-PLG-019",
+      "artifacts": [
+        "WO-PLG-019"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [],
+      "dependencies": [],
+      "declared_paths": [
+        "docs/engineering/plugin-integration/decisions/DEC-PLG-006.md",
+        "docs/engineering/plugin-integration/evidence/WO-PLG-019/",
+        "docs/engineering/plugin-integration/specifications/SPEC-PLG-005.md",
+        "docs/engineering/plugin-integration/specifications/SPEC-PLG-006.md",
+        "docs/engineering/plugin-integration/specifications/SPEC-PLG-008.md",
+        "docs/engineering/plugin-integration/verification/VER-PLG-005.md",
+        "docs/engineering/plugin-integration/verification/VER-PLG-006.md",
+        "docs/engineering/plugin-integration/verification/VER-PLG-008.md",
+        "docs/engineering/plugin-integration/verification/VER-PLG-019.md",
+        "docs/engineering/plugin-integration/work-orders/WO-PLG-019.md"
+      ],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "transition",
+      "workflow_rule_id": "WFL-WO-IMPLEMENT",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "status": "pass",
+      "gates": [
+        {
+          "id": "QG-G3-WORK-AUTHORIZATION",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGP-G3-STATUS",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "WO-PLG-019"
+                }
+              ],
+              "message": "WO-PLG-019 status is approved."
+            },
+            {
+              "id": "QGP-G3-GRAPH",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "formal-graph:WO-PLG-019"
+                }
+              ],
+              "message": "The selected formal graph is valid."
+            },
+            {
+              "id": "QGP-G3-INTEGRITY",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "repository-integrity:transition"
+                }
+              ],
+              "message": "No repository-integrity blocker prevents selected evaluation."
+            },
+            {
+              "id": "QGP-G3-SCOPE",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "WO-PLG-019:[execution_scope]"
+                }
+              ],
+              "message": "WO-PLG-019 declares 10 normalized scope path(s)."
+            },
+            {
+              "id": "QGP-G3-PREFLIGHT",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "preflight:WO-PLG-019:start"
+                }
+              ],
+              "message": "Released-installation start preflight inputs are ready."
+            },
+            {
+              "id": "QGP-G3-DECISION",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "decision-register:WO-PLG-019"
+                }
+              ],
+              "message": "No open decision blocks WO-PLG-019."
+            }
+          ]
+        },
+        {
+          "id": "QG-STRUCTURAL",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGS-EDGE",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "WO-PLG-019"
+                }
+              ],
+              "message": "approved -> in_progress is a declared lifecycle edge for WO-PLG-019."
+            }
+          ]
+        }
+      ]
+    },
+    "procedure": {
+      "id": "PROC-WO-IMPLEMENT",
+      "current_step": "STEP-WO-IMPLEMENT-CHECK",
+      "steps": [
+        {
+          "id": "STEP-WO-IMPLEMENT-CHECK",
+          "kind": "command",
+          "gate_ids": [
+            "QG-G4-IMPLEMENTATION-EVIDENCE"
+          ],
+          "effects": [
+            "Evaluated implementation handoff for WO-PLG-019."
+          ],
+          "non_effects": [
+            "A checkpoint does not complete or verify work."
+          ],
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "WO-PLG-019",
+            "--checkpoint",
+            "handoff"
+          ],
+          "corrective": {
+            "QGP-G4I-STATUS": {
+              "kind": "escalation",
+              "decision_right": "DR-WO-START"
+            },
+            "QGP-G4I-GRAPH": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-INTEGRITY": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-SCOPE": {
+              "kind": "escalation",
+              "decision_right": "DR-WO-SELECT"
+            },
+            "QGP-G4I-COMPLETE": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "WO-PLG-019",
+                "--checkpoint",
+                "handoff",
+                "--from-git",
+                "<base>"
+              ]
+            },
+            "QGP-G4I-PATHS": {
+              "kind": "escalation",
+              "decision_right": "DR-REMEDIATION-SCOPE"
+            },
+            "QGP-G4I-PREFLIGHT": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "preflight",
+                ".",
+                "--work-order",
+                "WO-PLG-019",
+                "--phase",
+                "review"
+              ]
+            },
+            "QGP-G4I-EVIDENCE": {
+              "kind": "command",
+              "argv": [
+                "harnessctl",
+                "evidence",
+                ".",
+                "--artifact",
+                "WO-PLG-019",
+                "--checkpoint",
+                "handoff"
+              ]
+            },
+            "QGP-G4I-DECISION": {
+              "kind": "escalation",
+              "decision_right": "DR-DECISION-DISPOSE"
+            }
+          }
+        },
+        {
+          "id": "STEP-WO-IMPLEMENT-DECIDE",
+          "kind": "decision",
+          "gate_ids": [
+            "QG-G4-IMPLEMENTATION-EVIDENCE"
+          ],
+          "effects": [
+            "An explicit completion decision permits only WO-PLG-019 to become implemented."
+          ],
+          "non_effects": [
+            "Completion does not verify or release the work."
+          ],
+          "decision_right": "DR-WO-COMPLETE",
+          "role": "engineering-owner",
+          "artifact": "WO-PLG-019",
+          "decision": "whether the authorized implementation and evidence are complete",
+          "outcomes": [
+            "implemented",
+            "continue",
+            "reject"
+          ],
+          "response": "Mark WO-PLG-019 implemented."
+        }
+      ]
+    },
+    "state": {
+      "before": [
+        {
+          "id": "WO-PLG-019",
+          "status": "approved"
+        }
+      ],
+      "after": [
+        {
+          "id": "WO-PLG-019",
+          "status": "in_progress"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 0
+    },
+    "mutation": {
+      "writes": [
+        {
+          "id": "WO-PLG-019",
+          "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-019.md",
+          "fields": [
+            "lifecycle_events",
+            "status",
+            "updated"
+          ]
+        }
+      ]
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Applied 1 explicit lifecycle transition(s) atomically."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "WO-PLG-019 is in_progress."
+      ],
+      "decision_required": null,
+      "next": {
+        "procedure_id": "PROC-WO-IMPLEMENT",
+        "step_id": "STEP-WO-IMPLEMENT-CHECK",
+        "action": "Run the bound command"
+      },
+      "command_or_response": {
+        "kind": "command",
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-PLG-019",
+          "--checkpoint",
+          "handoff"
+        ]
+      },
+      "alternatives": []
+    },
+    "result_sha256": "7d5b27f08c0849b6a543e62a04f88395ef5eb77927fc9999c93aacffa46fe459"
+  }
+}

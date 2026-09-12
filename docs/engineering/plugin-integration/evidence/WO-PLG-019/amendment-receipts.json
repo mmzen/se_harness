@@ -1,0 +1,71 @@
+{
+  "kind": "definition-amendment-decisions",
+  "recorded_at": "2026-09-12T07:26:23.914859+00:00",
+  "manifest_sha256": "29507242f4d17369d242da25f37043fdbdc9f1a3254ff9c01938e6c858845514",
+  "approval_evidence": "owner-approval.json",
+  "approval_evidence_sha256": "6959d35b1a4a46b31201930c024ca1d29b6f1f49c39c4693b3a817e0aaa2770f",
+  "instruction_verbatim": "i approve",
+  "recording_actor": "implementation-agent",
+  "decisions": [
+    {
+      "artifact": "SPEC-PLG-005",
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-005.md",
+      "role": "technical-owner",
+      "accountable_actor": "operator",
+      "decision": "approve exact amendment",
+      "base_sha256": "7cfcd4b4bc2d79b2d9ec48a44d437df25cb70eb94f56a20861b9e1abf9682566",
+      "approved_sha256": "c4ad191725f88119ce27bc62e8eb611e76f27b78de9f83e0e76b1dbc24be0902",
+      "meaning": "Apply the exact reviewed qualification criteria; retain failed enforcement and historical evidence. Includes the sole Codex unavailable-case exclusion where declared."
+    },
+    {
+      "artifact": "SPEC-PLG-006",
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-006.md",
+      "role": "technical-owner",
+      "accountable_actor": "operator",
+      "decision": "approve exact amendment",
+      "base_sha256": "cb237ad6db5d8d1e43d276d872b2a47c468aa61c4c967995dc8fc450be774a44",
+      "approved_sha256": "380e80e99063b36d8809c6ab5a93c53e68d44e6238e3a8dc47e1026e1296175b",
+      "meaning": "Apply the exact reviewed qualification criteria; retain failed enforcement and historical evidence. Includes the sole Codex unavailable-case exclusion where declared."
+    },
+    {
+      "artifact": "SPEC-PLG-008",
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-008.md",
+      "role": "technical-owner",
+      "accountable_actor": "operator",
+      "decision": "approve exact amendment",
+      "base_sha256": "1d947031399fd278593a55aec2c892538d1392f6cc0bf0079494de31769930ca",
+      "approved_sha256": "ce09d9d8e81e4bf8f14eee1c4975b7d4eadb6670ba35c2adc7a5cb4ea4b89ddc",
+      "meaning": "Apply the exact reviewed qualification criteria; retain failed enforcement and historical evidence. Includes the sole Codex unavailable-case exclusion where declared."
+    },
+    {
+      "artifact": "VER-PLG-005",
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-005.md",
+      "role": "assurance-owner",
+      "accountable_actor": "operator",
+      "decision": "approve exact amendment",
+      "base_sha256": "dea7963993a1be26b41bfa4d7a6c1199f2c19613940c01eeaef5d4ead9301e30",
+      "approved_sha256": "60ed352159a13deb6b4c7c483c80306511439ea0e57475105c1e62aa2c19c73e",
+      "meaning": "Apply the exact reviewed qualification criteria; retain failed enforcement and historical evidence. Includes the sole Codex unavailable-case exclusion where declared."
+    },
+    {
+      "artifact": "VER-PLG-006",
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-006.md",
+      "role": "assurance-owner",
+      "accountable_actor": "operator",
+      "decision": "approve exact amendment",
+      "base_sha256": "9bbaeca063d48dcec31d760ae4a58c0a6da741587941f1ccdbfdc5b205c94b48",
+      "approved_sha256": "917ae0df654f467c128fd2bbd6d6ed7d4c8ad816895ee11e09525f14d65a6c85",
+      "meaning": "Apply the exact reviewed qualification criteria; retain failed enforcement and historical evidence. Includes the sole Codex unavailable-case exclusion where declared."
+    },
+    {
+      "artifact": "VER-PLG-008",
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-008.md",
+      "role": "assurance-owner",
+      "accountable_actor": "operator",
+      "decision": "approve exact amendment",
+      "base_sha256": "4af301690279b65a5296dedc094aad7a54b404af15280d818b8a9c3a696fabad",
+      "approved_sha256": "c19e65cccd19ad7c25fa9301eb3fb3d57b9bf18ff8a75aacc6fb0b92e32324af",
+      "meaning": "Apply the exact reviewed qualification criteria; retain failed enforcement and historical evidence. Includes the sole Codex unavailable-case exclusion where declared."
+    }
+  ]
+}

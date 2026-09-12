@@ -1,0 +1,69 @@
+{
+  "kind": "operator-approval-evidence",
+  "recorded_at": "2026-09-12T07:18:45.804546+00:00",
+  "instruction_verbatim": "i approve",
+  "instruction_source": "Current Codex task, in direct response to the exact qualification packet approval request under the technical, assurance and engineering owner roles.",
+  "approved_manifest_sha256": "29507242f4d17369d242da25f37043fdbdc9f1a3254ff9c01938e6c858845514",
+  "approved_revisit": "Before the first public plugin release, any supported host-profile expansion, or introduction of remote acceptance controls.",
+  "accepted_limitation_reason_verbatim": "I accept the hook failure as a documented local limitation",
+  "accountable_actor": "operator",
+  "recording_actor": "implementation-agent",
+  "decisions": [
+    {
+      "role": "technical-owner",
+      "artifacts": [
+        "SPEC-PLG-005",
+        "SPEC-PLG-006",
+        "SPEC-PLG-008"
+      ],
+      "action": "approve exact manifest-bound amendments"
+    },
+    {
+      "role": "technical-owner",
+      "artifact": "DEC-PLG-006",
+      "target": "decided",
+      "option": "accept",
+      "reason": "I accept the hook failure as a documented local limitation",
+      "revisit": "Before the first public plugin release, any supported host-profile expansion, or introduction of remote acceptance controls."
+    },
+    {
+      "role": "assurance-owner",
+      "artifacts": [
+        "VER-PLG-005",
+        "VER-PLG-006",
+        "VER-PLG-008"
+      ],
+      "action": "approve exact manifest-bound amendments, including the sole Codex literal OS shell-start unavailable-case exclusion"
+    },
+    {
+      "role": "assurance-owner",
+      "artifact": "VER-PLG-019",
+      "target": "approved"
+    },
+    {
+      "role": "engineering-owner",
+      "artifact": "WO-PLG-019",
+      "target": "approved"
+    },
+    {
+      "role": "engineering-owner",
+      "artifact": "WO-PLG-019",
+      "target": "in_progress"
+    },
+    {
+      "role": "engineering-owner",
+      "artifact": "WO-PLG-019",
+      "target": "implemented",
+      "condition": "only after required checks pass"
+    }
+  ],
+  "excluded_actions": [
+    "adapter qualification",
+    "original work-order state changes",
+    "VREC assurance",
+    "merge",
+    "release",
+    "publication",
+    "deployment"
+  ]
+}

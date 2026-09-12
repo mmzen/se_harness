@@ -1,0 +1,329 @@
+--- a/docs/engineering/plugin-integration/specifications/SPEC-PLG-005.md
++++ b/docs/engineering/plugin-integration/specifications/SPEC-PLG-005.md
+@@ -5,7 +5,7 @@
+ status = "approved"
+ owners = ["technical-owner"]
+ created = "2026-09-08"
+-updated = "2026-09-10"
++updated = "2026-09-12"
+ contract = "The host adapter exposes the selected shared skills and connects supported host events to the shared scripts through the approved activation sequence."
+ 
+ [relations]
+@@ -48,13 +48,15 @@
+ 
+ **PLG-CDXA-006.** Missing runtime or required fields, failed scripts, or inactive bindings MUST report unready; interpreter existence alone MUST NOT establish readiness.
+ 
+-**PLG-CDXA-007.** The adapter MUST report absent coverage; effects escaping required refusal MUST remain unqualified under SPEC-PLG-008.
++**PLG-CDXA-007.** The adapter MUST report absent coverage; effects escaping required refusal MUST remain unqualified for enforcement under SPEC-PLG-008.
+ 
+ **PLG-CDXA-008.** Unready guards MUST preserve ordinary host permissions and already-authorized setup access without checked-success claims or permission overrides.
+ 
+ **PLG-CDXA-009.** Before-tool bindings MUST run synchronously with explicit host timeouts exceeding SPEC-PLG-008's inner deadline plus measured startup, cancellation and response margins.
+ 
+ **PLG-CDXA-010.** Qualification MUST observe guard startup and accepted denial on each claimed profile; host timeout, launch failure or missing output MUST NOT imply prevented effects.
++
++**PLG-CDXA-011.** Qualification with a documented local limitation MUST follow SPEC-PLG-008 and the host verification contract while retaining failed and unavailable enforcement observations.
+ 
+ ## Failure behaviour
+ 
+@@ -73,9 +75,16 @@
+ 
+ | Requirement | Rules |
+ | --- | --- |
+-| `REQ-PLG-008` | PLG-CDXA-001, PLG-CDXA-002, PLG-CDXA-003, PLG-CDXA-004, PLG-CDXA-005, PLG-CDXA-006, PLG-CDXA-007, PLG-CDXA-008, PLG-CDXA-009, PLG-CDXA-010 |
++| `REQ-PLG-008` | PLG-CDXA-001, PLG-CDXA-002, PLG-CDXA-003, PLG-CDXA-004, PLG-CDXA-005, PLG-CDXA-006, PLG-CDXA-007, PLG-CDXA-008, PLG-CDXA-009, PLG-CDXA-010, PLG-CDXA-011 |
+ 
+ ## Not decided here
+ 
+ - Setup eligibility remains instruction-level, without an authority classifier.
+ - Host responses follow the assessed [official reference](https://learn.chatgpt.com/docs/hooks#pretooluse); qualification establishes actual behavior, not future availability.
++
++## Amendment record — 2026-09-12
++
++WO-PLG-019 defines this qualification distinction and its evidence-preserving criteria.
++Its evidence directory retains proposal-manifest.json and amendment-receipts.json, binding the exact amendment and the technical-owner decision.
++Existing lifecycle events describe the original approval; the separate receipt covers this amendment.
++Historical records remain bound to their original commits and criteria. Adapter completion and assurance remain separate.
+--- a/docs/engineering/plugin-integration/specifications/SPEC-PLG-006.md
++++ b/docs/engineering/plugin-integration/specifications/SPEC-PLG-006.md
+@@ -5,7 +5,7 @@
+ status = "approved"
+ owners = ["technical-owner"]
+ created = "2026-09-08"
+-updated = "2026-09-10"
++updated = "2026-09-12"
+ contract = "The host adapter exposes the selected shared skills and connects supported host events to the shared scripts through the approved activation sequence."
+ 
+ [relations]
+@@ -48,13 +48,15 @@
+ 
+ **PLG-CLCA-006.** Missing runtime or required fields, failed scripts, or inactive bindings MUST report unready; interpreter existence alone MUST NOT establish readiness.
+ 
+-**PLG-CLCA-007.** The adapter MUST report absent coverage; effects escaping required refusal MUST remain unqualified under SPEC-PLG-008.
++**PLG-CLCA-007.** The adapter MUST report absent coverage; effects escaping required refusal MUST remain unqualified for enforcement under SPEC-PLG-008.
+ 
+ **PLG-CLCA-008.** Unready guards MUST preserve ordinary host permissions and already-authorized setup access without checked-success claims or permission overrides.
+ 
+ **PLG-CLCA-009.** Before-tool bindings MUST run synchronously with explicit host timeouts exceeding SPEC-PLG-008's inner deadline plus measured startup, cancellation and response margins.
+ 
+ **PLG-CLCA-010.** Qualification MUST observe guard startup and accepted denial on each claimed profile; host timeout, launch failure or missing output MUST NOT imply prevented effects.
++
++**PLG-CLCA-011.** Qualification with a documented local limitation MUST follow SPEC-PLG-008 and the host verification contract while retaining failed and unavailable enforcement observations.
+ 
+ ## Failure behaviour
+ 
+@@ -73,9 +75,16 @@
+ 
+ | Requirement | Rules |
+ | --- | --- |
+-| `REQ-PLG-009` | PLG-CLCA-001, PLG-CLCA-002, PLG-CLCA-003, PLG-CLCA-004, PLG-CLCA-005, PLG-CLCA-006, PLG-CLCA-007, PLG-CLCA-008, PLG-CLCA-009, PLG-CLCA-010 |
++| `REQ-PLG-009` | PLG-CLCA-001, PLG-CLCA-002, PLG-CLCA-003, PLG-CLCA-004, PLG-CLCA-005, PLG-CLCA-006, PLG-CLCA-007, PLG-CLCA-008, PLG-CLCA-009, PLG-CLCA-010, PLG-CLCA-011 |
+ 
+ ## Not decided here
+ 
+ - Setup eligibility remains instruction-level, without an authority classifier.
+ - Host responses follow the assessed [official reference](https://code.claude.com/docs/en/hooks#timeouts); qualification establishes actual behavior, not future availability.
++
++## Amendment record — 2026-09-12
++
++WO-PLG-019 defines this qualification distinction and its evidence-preserving criteria.
++Its evidence directory retains proposal-manifest.json and amendment-receipts.json, binding the exact amendment and the technical-owner decision.
++Existing lifecycle events describe the original approval; the separate receipt covers this amendment.
++Historical records remain bound to their original commits and criteria. Adapter completion and assurance remain separate.
+--- a/docs/engineering/plugin-integration/specifications/SPEC-PLG-008.md
++++ b/docs/engineering/plugin-integration/specifications/SPEC-PLG-008.md
+@@ -5,7 +5,7 @@
+ status = "approved"
+ owners = ["technical-owner"]
+ created = "2026-09-08"
+-updated = "2026-09-10"
++updated = "2026-09-12"
+ contract = "Supported tool actions receive current evaluator checks before their effects, while unsupported routes remain explicit coverage gaps."
+ 
+ [relations]
+@@ -52,7 +52,13 @@
+ 
+ **PLG-HOOK-008.** On inner expiry or evaluator failure, the running handler MUST stop evaluator process trees, collect exits and emit supported refusal before the host deadline.
+ 
+-**PLG-HOOK-009.** Host timeout, launch failure or missing required denial MUST trigger effect inspection before retry; escaped required refusal MUST remain unqualified.
++**PLG-HOOK-009.** Host timeout, launch failure or missing required denial MUST trigger effect inspection before retry; escaped required refusal MUST remain unqualified for enforcement.
++
++**PLG-HOOK-010.** An adapter MAY receive qualification with a documented local limitation only under a standing accepted deviation covering its exact profile and failed local-hook refusal conditions.
++
++**PLG-HOOK-011.** Limited qualification MUST meet VER-PLG-008's classification criteria without granting governed readiness to an unenforced route or treating absent output as refusal.
++
++**PLG-HOOK-012.** Local qualification MUST NOT imply independent authorization for protected-code integration, external actions, assurance, merge, release, or deployment.
+ 
+ ## Failure behaviour
+ 
+@@ -72,10 +78,17 @@
+ 
+ | Requirement | Rules |
+ | --- | --- |
+-| `REQ-PLG-013` | PLG-HOOK-001, PLG-HOOK-002, PLG-HOOK-005, PLG-HOOK-007, PLG-HOOK-008, PLG-HOOK-009 |
+-| `REQ-PLG-014` | PLG-HOOK-003, PLG-HOOK-004, PLG-HOOK-006, PLG-HOOK-009 |
++| `REQ-PLG-013` | PLG-HOOK-001, PLG-HOOK-002, PLG-HOOK-005, PLG-HOOK-007, PLG-HOOK-008, PLG-HOOK-009, PLG-HOOK-010, PLG-HOOK-011, PLG-HOOK-012 |
++| `REQ-PLG-014` | PLG-HOOK-003, PLG-HOOK-004, PLG-HOOK-006, PLG-HOOK-009, PLG-HOOK-010, PLG-HOOK-011, PLG-HOOK-012 |
+ 
+ ## Not decided here
+ 
+ - Exact timing values and live host qualification.
+ - Independent external authorization: issue #347.
++
++## Amendment record — 2026-09-12
++
++WO-PLG-019 defines this qualification distinction and its evidence-preserving criteria.
++Its evidence directory retains proposal-manifest.json and amendment-receipts.json, binding the exact amendment and the technical-owner decision.
++Existing lifecycle events describe the original approval; the separate receipt covers this amendment.
++Historical records remain bound to their original commits and criteria. Adapter completion and assurance remain separate.
+--- a/docs/engineering/plugin-integration/verification/VER-PLG-005.md
++++ b/docs/engineering/plugin-integration/verification/VER-PLG-005.md
+@@ -5,7 +5,7 @@
+ status = "approved"
+ owners = ["assurance-owner"]
+ created = "2026-09-08"
+-updated = "2026-09-10"
++updated = "2026-09-12"
+ 
+ [relations]
+ verifies = ["REQ-PLG-008"]
+@@ -28,7 +28,7 @@
+ 
+ | Requirement | Method | Cases | Pass condition |
+ | --- | --- | --- | --- |
+-| REQ-PLG-008 | test, inspection | C01–C12 | Accepted discovery/invocation mapping and timely refusal hold; missing required enforcement or invalid timing refuses qualification. |
++| REQ-PLG-008 | test, inspection | C01–C12 | Accepted discovery/invocation mapping and timely refusal hold; missing required enforcement refuses enforcement qualification; limited qualification follows the classification below; invalid active timing refuses both. |
+ 
+ ## Acceptance scenarios
+ 
+@@ -46,9 +46,22 @@
+ | C07 | Excluded or unaccepted host profile; changed decision status without a positive route | Attempt to qualify the production adapter. | No supported-profile result is issued; repository lifecycle states and helper-spawn log remain unchanged. | profile decision; result; state snapshots; spawn log |
+ | C08 | Thin host guard; interpreter absent, then present with wrong evaluator identity | Trigger startup before setup, after removal and with the wrong environment. | Absent runtime produces setup-required guidance without a Python call; existing runtime runs full identity/context checks and cannot report ready on identity failure. | guard output; interpreter invocation count; identity refusal; context output |
+ | C09 | Live accepted host profile; synchronous binding; fixed host/inner budgets; separately failed, interrupted and stalled evaluator children | Repeat VER-PLG-008 C03 through the real host's mapped edit tool | Running handler stops its evaluator process tree and returns the documented denial before the host timeout; target SHA-256 unchanged, effect count zero | configured budgets; monotonic startup/evaluator/cleanup/response timestamps; child exits; raw denial; independent target hashes/effect count |
+-| C10 | Live disposable profile; handler hangs past the configured host timeout | Repeat VER-PLG-008 C08; observe the pending edit after host cancellation | Record host timeout and actual effects without assuming denial; absent required refusal marks the route unqualified; inspect before retry | host cancellation/output trace; independent target hashes/effect count; qualification result |
+-| C11 | Live disposable profile; guard cannot start, is removed after readiness, or returns missing/invalid denial output | Repeat VER-PLG-008 C09 through the real host | Missing output proves no refusal; record which control, if any, prevented the effect; missing required enforcement fails qualification | launch/host error; raw output; independent before/after SHA-256/effect count; blocking-control identity |
++| C10 | Live disposable profile; handler hangs past the configured host timeout | Repeat VER-PLG-008 C08; observe the pending edit after host cancellation | Record host timeout and actual effects without assuming denial; absent required refusal marks the route unqualified for enforcement; inspect before retry | host cancellation/output trace; independent target hashes/effect count; qualification result |
++| C11 | Live disposable profile; guard cannot start, is removed after readiness, or returns missing/invalid denial output | Repeat VER-PLG-008 C09 through the real host | Missing output proves no refusal; record which control, if any, prevented the effect; missing required enforcement fails enforcement qualification | launch/host error; raw output; independent before/after SHA-256/effect count; blocking-control identity |
+ | C12 | Disposable live-host bindings with insufficient timeout margin or asynchronous before-tool execution | Load each binding and evaluate it against VER-PLG-008 C10 and the adapter timing rule | Actual configured mode/budgets are retained; asynchronous or insufficient-budget routes cannot qualify, even if an isolated check passes | loaded binding; host configuration; timing comparison; rejected qualification result |
++
++## Qualification classification
++
++Apply VER-PLG-008's Qualification classifications without changing the C01-C12 observations or their original conclusions.
++Qualification with a documented local limitation is confined to the exact positive activation profile and standing accepted DEC-PLG-006.
++All C01-C09 criteria remain mandatory. C10/C11 retain failed enforcement; C12 records unsafe variants as ineligible for qualification, independently of whether the host executes them.
++Any new assessment names this contract's amended revision and the exact source, package and loaded identities supporting the selected candidate.
++The assurance owner decides the resulting adapter qualification separately; this amendment grants no completion, verification, merge or release decision.
++
++The only permitted unavailable C11 subcase for this limited claim is literal OS shell-start failure on the accepted Codex Windows profile.
++It remains unavailable and outside enforcement qualification; injection, binding loss and earlier readiness do not establish its behavior.
++C10 timeout and C11 missing-output, invalid-output and binding-loss observations remain required. No other unavailable case is admitted.
++Before profile expansion or a stronger enforcement claim, obtain new evidence for every newly claimed condition.
+ 
+ ## Property and invariant tests
+ 
+@@ -78,3 +91,10 @@
+ ## Residual uncertainty
+ 
+ A truthful failure observation is not a passing enforcement result. Native interception covers only demonstrated behavior and does not guarantee future startability. Independent privileged-action controls in issue #347 remain separate.
++
++## Amendment record — 2026-09-12
++
++WO-PLG-019 defines this qualification distinction and its evidence-preserving criteria.
++Its evidence directory retains proposal-manifest.json and amendment-receipts.json, binding the exact amendment and the assurance-owner decision.
++Existing lifecycle events describe the original approval; the separate receipt covers this amendment.
++Historical records remain bound to their original commits and criteria. Adapter completion and assurance remain separate.
+--- a/docs/engineering/plugin-integration/verification/VER-PLG-006.md
++++ b/docs/engineering/plugin-integration/verification/VER-PLG-006.md
+@@ -5,7 +5,7 @@
+ status = "approved"
+ owners = ["assurance-owner"]
+ created = "2026-09-08"
+-updated = "2026-09-10"
++updated = "2026-09-12"
+ 
+ [relations]
+ verifies = ["REQ-PLG-009"]
+@@ -28,7 +28,7 @@
+ 
+ | Requirement | Method | Cases | Pass condition |
+ | --- | --- | --- | --- |
+-| REQ-PLG-009 | test, inspection | C01–C12 | Accepted discovery/invocation mapping and timely refusal hold; missing required enforcement or invalid timing refuses qualification. |
++| REQ-PLG-009 | test, inspection | C01–C12 | Accepted discovery/invocation mapping and timely refusal hold; missing required enforcement refuses enforcement qualification; limited qualification follows the classification below; invalid active timing refuses both. |
+ 
+ ## Acceptance scenarios
+ 
+@@ -46,9 +46,20 @@
+ | C07 | Excluded or unaccepted host profile; changed decision status without a positive route | Attempt to qualify the production adapter. | No supported-profile result is issued; repository lifecycle states and helper-spawn log remain unchanged. | profile decision; result; state snapshots; spawn log |
+ | C08 | Thin host guard; interpreter absent, then present with wrong evaluator identity | Trigger startup before setup, after removal and with the wrong environment. | Absent runtime produces setup-required guidance without a Python call; existing runtime runs full identity/context checks and cannot report ready on identity failure. | guard output; interpreter invocation count; identity refusal; context output |
+ | C09 | Live accepted host profile; synchronous binding; fixed host/inner budgets; separately failed, interrupted and stalled evaluator children | Repeat VER-PLG-008 C03 through the real host's mapped edit tool | Running handler stops its evaluator process tree and returns the documented denial before the host timeout; target SHA-256 unchanged, effect count zero | configured budgets; monotonic startup/evaluator/cleanup/response timestamps; child exits; raw denial; independent target hashes/effect count |
+-| C10 | Live disposable profile; handler hangs past the configured host timeout | Repeat VER-PLG-008 C08; observe the pending edit after host cancellation | Record host timeout and actual effects without assuming denial; absent required refusal marks the route unqualified; inspect before retry | host cancellation/output trace; independent target hashes/effect count; qualification result |
+-| C11 | Live disposable profile; guard cannot start, is removed after readiness, or returns missing/invalid denial output | Repeat VER-PLG-008 C09 through the real host | Missing output proves no refusal; record which control, if any, prevented the effect; missing required enforcement fails qualification | launch/host error; raw output; independent before/after SHA-256/effect count; blocking-control identity |
++| C10 | Live disposable profile; handler hangs past the configured host timeout | Repeat VER-PLG-008 C08; observe the pending edit after host cancellation | Record host timeout and actual effects without assuming denial; absent required refusal marks the route unqualified for enforcement; inspect before retry | host cancellation/output trace; independent target hashes/effect count; qualification result |
++| C11 | Live disposable profile; guard cannot start, is removed after readiness, or returns missing/invalid denial output | Repeat VER-PLG-008 C09 through the real host | Missing output proves no refusal; record which control, if any, prevented the effect; missing required enforcement fails enforcement qualification | launch/host error; raw output; independent before/after SHA-256/effect count; blocking-control identity |
+ | C12 | Disposable live-host bindings with insufficient timeout margin or asynchronous before-tool execution | Load each binding and evaluate it against VER-PLG-008 C10 and the adapter timing rule | Actual configured mode/budgets are retained; asynchronous or insufficient-budget routes cannot qualify, even if an isolated check passes | loaded binding; host configuration; timing comparison; rejected qualification result |
++
++## Qualification classification
++
++Apply VER-PLG-008's Qualification classifications without changing the C01-C12 observations or their original conclusions.
++Qualification with a documented local limitation is confined to the exact positive activation profile and standing accepted DEC-PLG-006.
++All C01-C09 criteria remain mandatory. C10/C11 retain failed enforcement; C12 records unsafe variants as ineligible for qualification, independently of whether the host executes them.
++Any new assessment names this contract's amended revision and the exact source, package and loaded identities supporting the selected candidate.
++The assurance owner decides the resulting adapter qualification separately; this amendment grants no completion, verification, merge or release decision.
++
++No unavailable C10/C11 subcase is admitted for this Claude profile. Retain the observed launch-failure, missing-output, invalid-output and binding-loss cases.
++Binding-loss evidence across a new activation does not establish same-process hot reload or future availability.
+ 
+ ## Property and invariant tests
+ 
+@@ -78,3 +89,10 @@
+ ## Residual uncertainty
+ 
+ A truthful failure observation is not a passing enforcement result. Native interception covers only demonstrated behavior and does not guarantee future startability. Independent privileged-action controls in issue #347 remain separate.
++
++## Amendment record — 2026-09-12
++
++WO-PLG-019 defines this qualification distinction and its evidence-preserving criteria.
++Its evidence directory retains proposal-manifest.json and amendment-receipts.json, binding the exact amendment and the assurance-owner decision.
++Existing lifecycle events describe the original approval; the separate receipt covers this amendment.
++Historical records remain bound to their original commits and criteria. Adapter completion and assurance remain separate.
+--- a/docs/engineering/plugin-integration/verification/VER-PLG-008.md
++++ b/docs/engineering/plugin-integration/verification/VER-PLG-008.md
+@@ -5,7 +5,7 @@
+ status = "approved"
+ owners = ["assurance-owner"]
+ created = "2026-09-08"
+-updated = "2026-09-10"
++updated = "2026-09-12"
+ 
+ [relations]
+ verifies = ["REQ-PLG-013", "REQ-PLG-014"]
+@@ -28,7 +28,7 @@
+ 
+ | Requirement | Method | Cases | Pass condition |
+ | --- | --- | --- | --- |
+-| REQ-PLG-013 | test, inspection | C01–C03, C06–C10 | Current checks precede effects; inner failures produce timely refusals; missing enforcement cannot pass qualification. |
++| REQ-PLG-013 | test, inspection | C01–C03, C06–C10 | Current checks precede effects; inner failures produce timely refusals; missing enforcement cannot pass enforcement qualification; limited qualification follows Qualification classifications. |
+ | REQ-PLG-014 | test, inspection | C04, C05, C07–C09 | Refusal-capable routes refuse; missing/unenforced routes remain explicit gaps with observed effects. |
+ 
+ ## Acceptance scenarios
+@@ -43,10 +43,37 @@
+ | C04 | Malformed or ambiguous governed event; refusal-capable protocol | Replay missing fields and ambiguous shell writes | Response refuses and reports unavailable coverage; target unchanged, effect count zero | events; refusal; hashes; effect count |
+ | C05 | Unmappable event; protocol cannot enforce refusal | Replay event and observe target independently | Output identifies unenforced route; actual target hash/effect count retained even if the effect occurs; no readiness or checked-success claim | protocol definition; output; before/after hashes; effect count |
+ | C06 | Prior pass; artifact, checkpoint or path then changes | Replay changed action | Fresh check uses changed inputs; prior result cannot permit it | old/new argv; invocation count; result bindings |
+-| C07 | Spoofed path, recursion marker, unobserved tool or continuing shell session | Attempt unrelated governed effect through each gap | Marker grants no exemption; actual hashes/effect counts distinguish refusal from escaped or unobserved effects; escaped required refusal fails qualification | event/recursion traces; before/after target SHA-256; effect count; coverage conclusion |
+-| C08 | Handler hangs beyond host timeout; no accepted refusal reaches host | Let protocol fixture cancel the hook, then observe pending tool behavior | Host timeout recorded separately from inner expiry; actual effects inspected before retry; no guaranteed no-effect result; absent required denial fails qualification | host timeout/output trace; target hashes; effect count; refusal-observation flag |
+-| C09 | Guard fails to start, disappears after readiness, or produces invalid/missing refusal output | Attempt pending governed effect for each variant | No successful guard execution or denial inferred; target/effect observations retained; missing enforcement marks route unqualified | launch/host error; raw output; hashes; effect count |
++| C07 | Spoofed path, recursion marker, unobserved tool or continuing shell session | Attempt unrelated governed effect through each gap | Marker grants no exemption; actual hashes/effect counts distinguish refusal from escaped or unobserved effects; escaped required refusal fails enforcement qualification | event/recursion traces; before/after target SHA-256; effect count; coverage conclusion |
++| C08 | Handler hangs beyond host timeout; no accepted refusal reaches host | Let protocol fixture cancel the hook, then observe pending tool behavior | Host timeout recorded separately from inner expiry; actual effects inspected before retry; no guaranteed no-effect result; absent required denial fails enforcement qualification | host timeout/output trace; target hashes; effect count; refusal-observation flag |
++| C09 | Guard fails to start, disappears after readiness, or produces invalid/missing refusal output | Attempt pending governed effect for each variant | No successful guard execution or denial inferred; target/effect observations retained; missing enforcement marks the route unqualified for enforcement | launch/host error; raw output; hashes; effect count |
+ | C10 | Inner budget plus startup/cleanup/output margins reaches or exceeds host timeout | Inspect binding configuration and attempt qualification | Invalid timing relationship refuses qualification; no claim that late output protects effects | configured budgets; rejection; qualification result |
++
++
++## Qualification classifications
++
++This section separates host enforcement from qualification for use with a documented local limitation.
++These are assurance assessment outcomes, not new evaluator lifecycle states or a new runtime API.
++
++**Enforcement qualification** requires observed current checks and accepted timely refusals on every claimed route and failure condition.
++Missing refusal, an escaped effect, or an unavailable required observation cannot pass enforcement qualification.
++
++**Qualification with a documented local limitation** may be assessed only when all of the following hold:
++
++1. The assessed host, OS, Python and evaluator match the exact positive activation decision and a standing accepted deviation's declared profile.
++2. Every applicable host C01-C09 criterion passes on its prescribed route, including complete context, current identity, actual permitted/refused effects and C09 cleanup/timely denial. Other applicable shared-component verification obligations remain mandatory outside the precisely declared host hook-loss conditions.
++3. Healthy production bindings are active, synchronous and have the verified timing margins. Host C12 records unsafe variants as ineligible for qualification; observed host execution and effects remain separate facts.
++4. Host C10/C11 retain actual observations, target hashes, host responses and case conclusions. Failed enforcement remains failed, and unavailable observations remain unavailable.
++5. A standing accepted deviation covers the precise local hook-loss conditions and concerns the selected work order. Its revisit trigger and failed routes are visible in the assessment.
++6. Each host contract explicitly names any unavailable subcase excluded from this limited claim. No other missing required observation is permitted.
++7. A new assessment binds the exact candidate, current definition revisions, evidence source revisions, package and recorded loaded identities. Any changed relevant input requires a fresh assessment.
++8. The assessment names the decision, tested routes, failures, unavailable cases, runtime prerequisites and ordinary permission boundary together. It makes no unqualified support or enforcement claim.
++
++The accepted deviation does not waive a healthy-path failure, malformed action handling, scope checking, identity checking, process cleanup or unsafe active configuration.
++It does not cover unsupported shell/MCP effects or create independent authorization for protected-code integration, remote actions, assurance, merge, release or deployment.
++
++Old raw records, case verdicts, reports and verification/release decisions retain their bytes and original contract meaning.
++A later assessment may cite them under the amended criteria only after checking every identity and observation required above.
++Recording the deviation or passing this classification review does not itself qualify an adapter or change any work-order state.
+ 
+ ## Property and invariant tests
+ 
+@@ -54,7 +81,7 @@
+ 
+ ## Static and architecture checks
+ 
+-Map cases to PLG-HOOK-001–009 and ARCH-PLG-002/ADR-PLG-002. Verify synchronous bindings and exact host refusal schema. Both references document `hookSpecificOutput` with `hookEventName: PreToolUse`, `permissionDecision: deny` and `permissionDecisionReason`; arbitrary error exits are not substitutes.
++Map cases to PLG-HOOK-001–012 and ARCH-PLG-002/ADR-PLG-002. Verify synchronous bindings and exact host refusal schema. Both references document `hookSpecificOutput` with `hookEventName: PreToolUse`, `permissionDecision: deny` and `permissionDecisionReason`; arbitrary error exits are not substitutes.
+ 
+ ## Security and privacy checks
+ 
+@@ -75,3 +102,10 @@
+ ## Residual uncertainty
+ 
+ Claude command-hook timeout and start failure are non-blocking under its [reference](https://code.claude.com/docs/en/hooks#timeouts). The [Codex reference](https://learn.chatgpt.com/docs/hooks#pretooluse) documents denial forms and unsupported-output failure; timeout/start behavior still requires exact-profile observation. Inner deadlines reduce timeout risk without proving future availability or independent authorization.
++
++## Amendment record — 2026-09-12
++
++WO-PLG-019 defines this qualification distinction and its evidence-preserving criteria.
++Its evidence directory retains proposal-manifest.json and amendment-receipts.json, binding the exact amendment and the assurance-owner decision.
++Existing lifecycle events describe the original approval; the separate receipt covers this amendment.
++Historical records remain bound to their original commits and criteria. Adapter completion and assurance remain separate.

@@ -1,0 +1,5 @@
+# Preserve the exact bytes of this work order's retained evidence and hashes.
+# CRLF is part of native Windows captures and serialized result records.
+* -text whitespace=cr-at-eol
+# Unified-diff context lines intentionally carry a leading space.
+*.patch -whitespace
