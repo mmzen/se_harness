@@ -190,6 +190,10 @@ def export_tracked_tree(repository: Path, destination: Path, runner: Runner = ru
                 observation.update(entries=len(members), files=sum(member.isfile() for member in members))
     for identifier, argv in (
         ("git-init", ["git", "init", "-q", "-b", "main"]),
+        # These repositories are deleted immediately after the replay.
+        # Automatic maintenance must not outlive the command that starts it.
+        ("git-config-maintenance", ["git", "config", "maintenance.auto", "false"]),
+        ("git-config-gc", ["git", "config", "gc.auto", "0"]),
         ("git-config-autocrlf", ["git", "config", "core.autocrlf", "false"]),
         ("git-config-email", ["git", "config", "user.email", "rehearsal@example.invalid"]),
         ("git-config-name", ["git", "config", "user.name", "upgrade rehearsal"]),

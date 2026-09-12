@@ -152,6 +152,24 @@ class UpgradeRehearsalTests(unittest.TestCase):
         self.assertEqual("pass", result["overall_result"], result["failure"])
         self.assertIn(("successor-validate-after", "pass"), [(step["id"], step["outcome"]) for step in result["steps"]])
 
+    def test_maintenance_configuration_failure_stops_before_staging_and_is_measured(self) -> None:
+        # WO-CIP-010 CLN03: a rejected safety setting cannot fall through to commit.
+        for key, stage in (("maintenance.auto", "git-config-maintenance"), ("gc.auto", "git-config-gc")):
+            with self.subTest(key=key):
+                fake = FakeEvaluators()
+                output = self.output.with_name(key)
+                def runner(argv, cwd):
+                    if list(argv[:3]) == ["git", "config", key]:
+                        return Completed(1, "", "configuration refused")
+                    return fake(argv, cwd)
+                with redirect_stderr(io.StringIO()), self.assertRaisesRegex(UpgradeRehearsalError, "configuration refused"):
+                    rehearse(self.repository, predecessor_python=PREDECESSOR, successor_python=SUCCESSOR,
+                             output=output, runner=runner, workspace=self.workspace, timings=True)
+                self.assertFalse(any(argv[:2] in (["git", "add"], ["git", "commit"]) for argv in fake.calls))
+                timing = json.loads((output / upgrade_rehearsal.TIMING_NAME).read_text())
+                self.assertFalse(timing["complete"])
+                self.assertEqual("error", next(item for item in timing["stages"] if item["id"] == stage)["status"])
+                self.assertEqual([], list(self.workspace.iterdir()))
     def test_the_predecessor_must_own_the_root_before_the_upgrade(self) -> None:
         result = self.run_rehearsal(FakeEvaluators(predecessor_doctor_before=1))
         self.assertEqual("fail", result["overall_result"])
