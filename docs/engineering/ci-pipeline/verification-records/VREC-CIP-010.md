@@ -2,7 +2,7 @@
 id = "VREC-CIP-010"
 type = "verification_record"
 title = "Verification candidate for WO-CIP-010"
-status = "ready"
+status = "verified"
 owners = ["codex-preparation-actor"]
 created = "2026-09-12"
 updated = "2026-09-12"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/ci-pipeline/evidence/WO-CIP-010/WO-CIP-010-h
 evaluator_evidence_path = "docs/engineering/ci-pipeline/evidence/VREC-CIP-010-evaluator.json"
 evaluator_evidence_sha256 = "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
 
+verified_at = "2026-09-12T11:38:44Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-CIP-010"]
 conforms_to = ["VER-CIP-006"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-12T11:38:44Z"
+decided_by = "assurance-owner"
+reason = "i verify VREC-CIP-010"
 +++
 
 # Verification Record Candidate
@@ -133,3 +142,15 @@ qualification criterion, accepted C10/C11 limitation, or existing VREC/RLS was c
 VREC-CIP-010 remains ready; WO-CIP-010 remains implemented and VER-CIP-006
 remains approved. The next step is the assurance owner's decision on this
 record. No verification, merge or release decision is recorded by preparation.
+
+## Assurance decision
+
+The accountable operator explicitly stated "i verify VREC-CIP-010".
+The released 0.17.0 evaluator applied the assurance-owner decision at
+2026-09-12T11:38:44Z, changing only VREC-CIP-010 from ready to verified.
+The candidate remains `07fb188b24f73187671439f34d6c39c611f83fa1` and all preparation
+bindings and retained evidence remain unchanged. The pending-decision
+text above describes the earlier preparation state.
+
+WO-CIP-010 remains implemented; VER-CIP-006 remains approved.
+Repository integration and release remain separate decisions.
