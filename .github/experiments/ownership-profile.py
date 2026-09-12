@@ -3,6 +3,7 @@ import cProfile
 import ctypes
 import datetime
 import importlib.util
+import hashlib
 import json
 import os
 import pathlib
@@ -43,7 +44,10 @@ sampler.start()
 utc = lambda: datetime.datetime.now(datetime.timezone.utc).isoformat()
 facts = dict(pid=os.getpid(), thread_id=threading.get_native_id(), start_utc=utc(),
              python=sys.executable, source=str(source), temp=os.environ['TEMP'],
-             candidate=os.environ['RAMDISK_TESTED_COMMIT'], method=name)
+             candidate=os.environ['RAMDISK_TESTED_COMMIT'], method=name,
+             variant=os.environ.get('READ_VARIANT'),
+             module_sha256=hashlib.sha256((source / 'se_harness/skill_ownership.py').read_bytes()).hexdigest(),
+             test_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
 started, cpu = time.perf_counter(), time.process_time()
 profile = cProfile.Profile()
 profile.enable()

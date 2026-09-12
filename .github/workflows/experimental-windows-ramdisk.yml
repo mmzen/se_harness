@@ -7,13 +7,13 @@ permissions:
   contents: read
 jobs:
   trace:
-    name: Trace one recovery loop on disk and RAM
+    name: Compare bounded reads on disk and RAM
     runs-on: windows-latest
     timeout-minutes: 35
     env:
       PYTHONNOUSERSITE: '1'
       PYTHONPATH: ''
-      RAMDISK_TESTED_COMMIT: 1e062e4db06b6e7131429db15b3d6b9876e600db
+      RAMDISK_BASELINE_COMMIT: 1e062e4db06b6e7131429db15b3d6b9876e600db
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -28,8 +28,8 @@ jobs:
         run: |
           dotnet build .github/experiments/trace-analyzer/TraceAnalyzer.csproj -c Release -o "$env:RUNNER_TEMP/trace-analyzer"
           if ($LASTEXITCODE -ne 0) { throw 'Analyzer compilation failed' }
-          git diff --exit-code $env:RAMDISK_TESTED_COMMIT HEAD -- se_harness tests templates repository_tools scripts pyproject.toml
-          if ($LASTEXITCODE -ne 0) { throw 'Candidate source changed' }
+          python -I -B .github/experiments/check-reader-diff.py
+          if ($LASTEXITCODE -ne 0) { throw 'Unexpected candidate source changes' }
           "RAMDISK_PY313=$(Split-Path -Parent '${{ steps.python313.outputs.python-path }}')" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
           wpr -profiles .github/experiments/Ownership.wprp
           if ($LASTEXITCODE -ne 0) { throw 'Profile validation failed' }
@@ -68,13 +68,21 @@ jobs:
           [ordered]@{image=$env:ImageOS;image_version=$env:ImageVersion;os=$os.Caption;memory_kb=$os.TotalVisibleMemorySize;free_memory_kb=$os.FreePhysicalMemory;real_time_protection=$defender.RealTimeProtectionEnabled;antivirus=$defender.AntivirusEnabled;exclusions=@($preferences.ExclusionPath);driver_version=(Get-Item -LiteralPath $driver).VersionInfo.FileVersion} | ConvertTo-Json -Depth 4
           Get-Partition | Select-Object DiskNumber,PartitionNumber,DriveLetter,Size | ConvertTo-Json
           Get-CimInstance Win32_PageFileUsage | Select-Object Name,AllocatedBaseSize,CurrentUsage,PeakUsage | ConvertTo-Json
-      - name: Trace source recovery loop on normal disk
+      - name: Original reader on normal disk
         shell: pwsh
-        run: '& "$env:GITHUB_WORKSPACE/.github/experiments/windows-ownership-trace.ps1" -Storage disk'
-      - name: Trace source recovery loop on RAM disk
+        run: '& "$env:GITHUB_WORKSPACE/.github/experiments/windows-ownership-trace.ps1" -Storage disk -Variant baseline'
+      - name: Chunked reader on normal disk
         if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
         shell: pwsh
-        run: '& "$env:GITHUB_WORKSPACE/.github/experiments/windows-ownership-trace.ps1" -Storage ramdisk'
+        run: '& "$env:GITHUB_WORKSPACE/.github/experiments/windows-ownership-trace.ps1" -Storage disk -Variant chunked'
+      - name: Chunked reader on RAM disk
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        shell: pwsh
+        run: '& "$env:GITHUB_WORKSPACE/.github/experiments/windows-ownership-trace.ps1" -Storage ramdisk -Variant chunked'
+      - name: Original reader on RAM disk
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        shell: pwsh
+        run: '& "$env:GITHUB_WORKSPACE/.github/experiments/windows-ownership-trace.ps1" -Storage ramdisk -Variant baseline'
       - name: Dismount this experiment RAM disk
         if: ${{ always() && env.RAMDISK_CREATED == '1' }}
         shell: pwsh
