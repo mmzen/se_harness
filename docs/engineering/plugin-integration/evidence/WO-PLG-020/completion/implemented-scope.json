@@ -1,0 +1,257 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-PLG-020",
+    "artifacts": [
+      "WO-PLG-020"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-PLG-003",
+      "ARCH-PLG-003",
+      "CAP-DST-001",
+      "INT-DST-001",
+      "REQ-PLG-028",
+      "REQ-PLG-029",
+      "REQ-PLG-030",
+      "REQ-PLG-031",
+      "SPEC-PLG-020",
+      "VER-PLG-020"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      ".github/workflows/candidate-evidence.yml",
+      "docs/engineering/agentic-execution/requirements/REQ-AEX-009.md",
+      "docs/engineering/agentic-execution/specifications/SPEC-AEX-005.md",
+      "docs/engineering/ci-pipeline/requirements/REQ-CIP-009.md",
+      "docs/engineering/ci-pipeline/specifications/SPEC-CIP-003.md",
+      "docs/engineering/ci-pipeline/verification/VER-CIP-003.md",
+      "docs/engineering/execution-control-plane/requirements/REQ-ECP-027.md",
+      "docs/engineering/execution-control-plane/specifications/SPEC-ECP-016.md",
+      "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-003.md",
+      "docs/engineering/plugin-integration/architecture/ARCH-PLG-003.md",
+      "docs/engineering/plugin-integration/decisions/DEC-PLG-007.md",
+      "docs/engineering/plugin-integration/evidence/VREC-PLG-015-evaluator.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-028.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-029.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-030.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-031.md",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-020.md",
+      "docs/engineering/plugin-integration/verification-records/VREC-PLG-015.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-020.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-020.md",
+      "docs/engineering/portable-managed-integrity/specifications/SPEC-PMI-001.md",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-024.md",
+      "docs/engineering/repository-harness-upgrade/specifications/SPEC-HUP-012.md",
+      "docs/engineering/repository-harness-upgrade/verification/VER-HUP-012.md",
+      "docs/engineering/technical-communication/requirements/REQ-TCM-004.md",
+      "docs/engineering/technical-communication/specifications/SPEC-TCM-001.md",
+      "docs/notes/ci-pipeline.md",
+      "docs/notes/developing-se-harness.md",
+      "docs/notes/harnessctl-reference.md",
+      "docs/notes/plugin-ownership-migration-2026-09-12.md",
+      "pyproject.toml",
+      "se_harness/cli.py",
+      "se_harness/engine/dashboard_bundle.py",
+      "se_harness/engine/dashboard_snapshot.py",
+      "se_harness/engine/generate_harness_dashboard.py",
+      "se_harness/engine/validation_evidence.py",
+      "se_harness/installer.py",
+      "se_harness/integrity.py",
+      "se_harness/mutation_guard.py",
+      "se_harness/preflight.py",
+      "se_harness/release_qualification.py",
+      "se_harness/skill_ownership.py",
+      "se_harness/skill_ownership_contract.json",
+      "templates/repository/standard/docs/engineering/WORKFLOW.md",
+      "tests/fixtures/skill_ownership/",
+      "tests/test_ci_pipeline.py",
+      "tests/test_cli_shape.py",
+      "tests/test_harnessctl.py",
+      "tests/test_integration_package.py",
+      "tests/test_integrity_primitives.py",
+      "tests/test_mutation_guard.py",
+      "tests/test_report_output_safety.py",
+      "tests/test_skill_ownership.py",
+      "tests/test_workflow_documentation_contract.py"
+    ],
+    "changed_paths": [
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/acceptance-summary.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/assessment.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/audit-ci-evidence.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/cancelled-attempt.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/cancelled-attempt.zip",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/case-index.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/completion-apply-command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/completion-apply.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/completion-apply.stderr.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/completion-handoff-command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/completion-handoff.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/completion-handoff.stderr.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/completion-preview-command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/completion-preview.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/completion-preview.stderr.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/doctor-command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/doctor.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/doctor.stderr.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/local-checks.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/merged-candidate-ci.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/merged-candidate-ci.zip",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/preflight-command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/preflight.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/preflight.stderr.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/validation-command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/validation.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/validation.stderr.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/handoff.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/README.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/WO-PLG-020-handoff.md",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-020.md"
+    ],
+    "change_set_complete": true
+  },
+  "compliance": {
+    "checkpoint": "scope",
+    "workflow_rule_id": "WFL-WO-PREPARE-VREC",
+    "procedure_id": "PROC-WO-PREPARE-VREC",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4I-SCOPE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-PLG-020:[execution_scope]"
+              }
+            ],
+            "message": "WO-PLG-020 declares 56 normalized scope path(s)."
+          },
+          {
+            "id": "QGP-G4I-COMPLETE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-PLG-020"
+              }
+            ],
+            "message": "The caller explicitly asserted that the declared change set is complete."
+          },
+          {
+            "id": "QGP-G4I-PATHS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-PLG-020"
+              }
+            ],
+            "message": "All 32 declared changed path(s) are within execution scope."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "062f39bff3ee4b907d08aa1efb2852bdaf79b06e9df6cd98adccc872df928675",
+    "change_set_source": "git"
+  },
+  "procedure": {
+    "id": "PROC-WO-PREPARE-VREC",
+    "current_step": "STEP-WO-PREPARE-VREC-DECIDE",
+    "steps": [
+      {
+        "id": "STEP-WO-PREPARE-VREC-DECIDE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-CANDIDATE-READY"
+        ],
+        "effects": [
+          "Permits preparation of one ready VREC."
+        ],
+        "non_effects": [
+          "Preparation does not verify WO-PLG-020."
+        ],
+        "decision_right": "DR-VREC-PREPARE",
+        "role": "engineering-owner",
+        "artifact": "WO-PLG-020",
+        "decision": "whether to prepare one ready verification record with exact approved inputs",
+        "outcomes": [
+          "prepare",
+          "stop"
+        ],
+        "response": "Prepare one ready VREC for WO-PLG-020 with the exact approved verification contract and retained evidence."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-PLG-020",
+        "status": "implemented"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-PLG-020",
+        "status": "implemented"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 46
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated scope compliance for WO-PLG-020."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-PLG-020 is implemented."
+    ],
+    "decision_required": {
+      "decision_right": "DR-VREC-PREPARE",
+      "role": "delegated-executor",
+      "artifact": "WO-PLG-020",
+      "decision": "whether to prepare one ready verification record with exact approved inputs",
+      "outcomes": [
+        "prepare",
+        "stop"
+      ],
+      "delegation": {
+        "class": "execution",
+        "gate": "not passing"
+      }
+    },
+    "next": {
+      "procedure_id": "PROC-WO-PREPARE-VREC",
+      "step_id": "STEP-WO-PREPARE-VREC-DECIDE",
+      "action": "whether to prepare one ready verification record with exact approved inputs"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Wait for or repair the required check before the delegated DR-VREC-PREPARE: gate source error for 9acdd08: <urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>"
+    },
+    "alternatives": []
+  },
+  "result_sha256": "8a50359339aa45ba50f8b53137be00129d9f30745b192912e2031909e80b5147"
+}

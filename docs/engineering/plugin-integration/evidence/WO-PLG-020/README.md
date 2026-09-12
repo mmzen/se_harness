@@ -1,6 +1,15 @@
 # WO-PLG-020 evidence index
 
-Status: implementation in progress. No VREC-PLG-015 is prepared by this index.
+Status: WO-PLG-020 implemented. VREC-PLG-015 preparation follows from the clean completion candidate; no verification is claimed.
+
+## Final merged-candidate acceptance for completion
+
+The final [completion assessment](completion/assessment.md) and
+[audited CI results](completion/acceptance-summary.json) supersede the earlier
+pending-acceptance statements below. Required candidate acceptance now passes
+for merged commit `9acdd08e6507d4433bc27f3888d2743d1eea13da`.
+The old-0.17 scope exclusion remains unchanged. Historical failures and canceled
+attempts remain preserved; neither is counted as passing acceptance.
 
 ## Current acceptance after the operator's 0.17 exclusion
 

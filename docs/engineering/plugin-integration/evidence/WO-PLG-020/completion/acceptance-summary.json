@@ -1,0 +1,181 @@
+{
+  "candidate_commit": "9acdd08e6507d4433bc27f3888d2743d1eea13da",
+  "candidate_tree": "e90a85deed574bc71da9a4b95c6a3df4961f5526",
+  "workflow_run": "https://github.com/mmzen/se_harness/actions/runs/34719970877",
+  "workflow_attempt": 2,
+  "wheel_sha256": "3387717c4090e04076a934d62e01c8050c29d49fe8a4b79a3c874568339574b2",
+  "test_module_git_blob_sha256": "6096e7ff5d97b985f816784aa9bee2790bce8bc79c5f58e7edb27a572d2aee6b",
+  "test_module_crlf_sha256": "b85d52d0bb50fbec672ba05780b20d216d78eb2cd00e080477e8c66b010ed223",
+  "source_tests": 1240,
+  "source_seconds": 93.634,
+  "source_skips": 9,
+  "ownership_selections": [
+    {
+      "platform": "Linux",
+      "python": "3.11",
+      "mode": "source",
+      "tests": 8,
+      "skipped": [],
+      "seconds": 3.918,
+      "retained_case_records": 8,
+      "read_boundary_unit_tests": 0,
+      "runtime": "skill-ownership-Linux/3.11/source/runtime.json",
+      "test_module_sha256": "6096e7ff5d97b985f816784aa9bee2790bce8bc79c5f58e7edb27a572d2aee6b",
+      "test_module_transport": "identical Git LF bytes",
+      "run_attempt": "2"
+    },
+    {
+      "platform": "Linux",
+      "python": "3.11",
+      "mode": "package",
+      "tests": 8,
+      "skipped": [],
+      "seconds": 5.684,
+      "retained_case_records": 8,
+      "read_boundary_unit_tests": 0,
+      "runtime": "skill-ownership-Linux/3.11/package/runtime.json",
+      "test_module_sha256": "6096e7ff5d97b985f816784aa9bee2790bce8bc79c5f58e7edb27a572d2aee6b",
+      "test_module_transport": "identical Git LF bytes",
+      "run_attempt": "2"
+    },
+    {
+      "platform": "Linux",
+      "python": "3.13",
+      "mode": "source",
+      "tests": 53,
+      "skipped": [
+        {
+          "reason": "Windows junction fixture unavailable on this platform",
+          "test": "test_own03_windows_reparse_junction_refusal (ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_windows_reparse_junction_refusal)"
+        },
+        {
+          "reason": "Windows junction alias fixture unavailable on this platform",
+          "test": "test_own05_direct_installer_junction_alias_cannot_recreate_retired_core (ownership_acceptance.SkillOwnershipAcceptanceTests.test_own05_direct_installer_junction_alias_cannot_recreate_retired_core)"
+        }
+      ],
+      "seconds": 90.906,
+      "retained_case_records": 40,
+      "read_boundary_unit_tests": 11,
+      "runtime": "skill-ownership-Linux/3.13/source/runtime.json",
+      "test_module_sha256": "6096e7ff5d97b985f816784aa9bee2790bce8bc79c5f58e7edb27a572d2aee6b",
+      "test_module_transport": "identical Git LF bytes",
+      "run_attempt": "2"
+    },
+    {
+      "platform": "Linux",
+      "python": "3.13",
+      "mode": "package",
+      "tests": 53,
+      "skipped": [
+        {
+          "reason": "Windows junction fixture unavailable on this platform",
+          "test": "test_own03_windows_reparse_junction_refusal (ownership_acceptance.SkillOwnershipAcceptanceTests.test_own03_windows_reparse_junction_refusal)"
+        },
+        {
+          "reason": "Windows junction alias fixture unavailable on this platform",
+          "test": "test_own05_direct_installer_junction_alias_cannot_recreate_retired_core (ownership_acceptance.SkillOwnershipAcceptanceTests.test_own05_direct_installer_junction_alias_cannot_recreate_retired_core)"
+        }
+      ],
+      "seconds": 98.499,
+      "retained_case_records": 40,
+      "read_boundary_unit_tests": 11,
+      "runtime": "skill-ownership-Linux/3.13/package/runtime.json",
+      "test_module_sha256": "6096e7ff5d97b985f816784aa9bee2790bce8bc79c5f58e7edb27a572d2aee6b",
+      "test_module_transport": "identical Git LF bytes",
+      "run_attempt": "2"
+    },
+    {
+      "platform": "Windows",
+      "python": "3.11",
+      "mode": "source",
+      "tests": 8,
+      "skipped": [],
+      "seconds": 22.432,
+      "retained_case_records": 8,
+      "read_boundary_unit_tests": 0,
+      "runtime": "skill-ownership-Windows/3.11/source/runtime.json",
+      "test_module_sha256": "b85d52d0bb50fbec672ba05780b20d216d78eb2cd00e080477e8c66b010ed223",
+      "test_module_transport": "Git LF-to-CRLF only",
+      "run_attempt": "2"
+    },
+    {
+      "platform": "Windows",
+      "python": "3.11",
+      "mode": "package",
+      "tests": 8,
+      "skipped": [],
+      "seconds": 34.846,
+      "retained_case_records": 8,
+      "read_boundary_unit_tests": 0,
+      "runtime": "skill-ownership-Windows/3.11/package/runtime.json",
+      "test_module_sha256": "b85d52d0bb50fbec672ba05780b20d216d78eb2cd00e080477e8c66b010ed223",
+      "test_module_transport": "Git LF-to-CRLF only",
+      "run_attempt": "2"
+    },
+    {
+      "platform": "Windows",
+      "python": "3.13",
+      "mode": "source",
+      "tests": 53,
+      "skipped": [],
+      "seconds": 273.236,
+      "retained_case_records": 42,
+      "read_boundary_unit_tests": 11,
+      "runtime": "skill-ownership-Windows/3.13/source/runtime.json",
+      "test_module_sha256": "b85d52d0bb50fbec672ba05780b20d216d78eb2cd00e080477e8c66b010ed223",
+      "test_module_transport": "Git LF-to-CRLF only",
+      "run_attempt": "2"
+    },
+    {
+      "platform": "Windows",
+      "python": "3.13",
+      "mode": "package",
+      "tests": 53,
+      "skipped": [],
+      "seconds": 382.397,
+      "retained_case_records": 42,
+      "read_boundary_unit_tests": 11,
+      "runtime": "skill-ownership-Windows/3.13/package/runtime.json",
+      "test_module_sha256": "b85d52d0bb50fbec672ba05780b20d216d78eb2cd00e080477e8c66b010ed223",
+      "test_module_transport": "Git LF-to-CRLF only",
+      "run_attempt": "2"
+    }
+  ],
+  "ownership_test_executions": 244,
+  "case_count": 196,
+  "case_outcomes": {
+    "passed": 196
+  },
+  "upgrade_replays": [
+    {
+      "platform": "Linux",
+      "replay": 1,
+      "semantic_sha256": "004295fe7b31e376c5549d1315f0cdc2134c12bc320f809d29cced92ad445dc4"
+    },
+    {
+      "platform": "Linux",
+      "replay": 2,
+      "semantic_sha256": "004295fe7b31e376c5549d1315f0cdc2134c12bc320f809d29cced92ad445dc4"
+    },
+    {
+      "platform": "Windows",
+      "replay": 1,
+      "semantic_sha256": "004295fe7b31e376c5549d1315f0cdc2134c12bc320f809d29cced92ad445dc4"
+    },
+    {
+      "platform": "Windows",
+      "replay": 2,
+      "semantic_sha256": "004295fe7b31e376c5549d1315f0cdc2134c12bc320f809d29cced92ad445dc4"
+    }
+  ],
+  "governing_evaluator_version": "0.17.0",
+  "old_017_migration_acceptance": "excluded by explicit approved scope; historical failures preserved",
+  "first_attempt": "cancelled and incomplete; not acceptance",
+  "candidate_ci_passed": true,
+  "scope": "WO-PLG-020 only",
+  "limits": [
+    "No native-host qualification, macOS acceptance, release, adoption or live WO-PLG-009 migration.",
+    "C10/C11 accepted enforcement limitation remains.",
+    "Installed wheel is non-promotable; source observations are candidate-controlled."
+  ]
+}
