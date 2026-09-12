@@ -85,12 +85,35 @@ The failed development log is retained outside the checkout, not relabelled.
 
 ## Hosted acceptance and scope
 
-The normal repair PR workflow will run the Linux source suite and both upgrade
-replays on Windows and Linux. CLN05 requires four passing replay results with
-matching semantic digests. No hosted result is claimed by this pre-run packet.
-Exact head, tested merge, run/job IDs and replay evidence will be retained once
-the PR jobs finish. Historical release replays continue to execute their exact
-old candidate; this repair does not rewrite their fixture code.
+Implementation head `73cd1b4a4f62efa1c260863e60901fa9a321f79b` passed all 17 checks on
+[PR #459](https://github.com/mmzen/se_harness/pull/459).
+Run 34688718324, attempt 1, tested merge `9a9e844af85d2da69cf1ec6158991dfffc8d27b6`.
+The Linux full-scale source suite passed 1,163 tests with 4 skips in 27.506s,
+including the same real-Git positive controls that passed locally on Windows.
+Managed validation, package acceptance, both publication rehearsals and both
+integration-package platform checks also passed.
+
+| Platform | Replay | Total seconds | Cleanup seconds | Verdict |
+| --- | --- | --- | --- | --- |
+| Linux | 1 | 11.421 | 0.410 | pass |
+| Linux | 2 | 11.274 | 0.409 | pass |
+| Windows | 1 | 30.386 | 2.755 | pass |
+| Windows | 2 | 30.283 | 2.643 | pass |
+
+All four results have semantic digest
+`400b4712935c72fe70040cd372c6c1e988edfc8a3c97df99b730dacbcd84be87`.
+Both new configuration stages and cleanup finished in all four replays; all
+six evaluator checks retained their expected outcomes. Runtime facts, original
+result/timing JSON, hashes, check URLs and run identities are retained in
+`hosted/` and `hosted-checks.json`. Cross-host durations are observations,
+not a controlled performance comparison.
+Git storage uses UTF-8/LF; the index records both retained and original-download
+hashes. Original downloaded bytes remain outside the checkout.
+
+This evidence binds the implementation head above. The later commit adding
+these records has its own normal PR checks, which must finish before delivery.
+Historical release replays continue to execute their exact old candidate;
+this repair does not rewrite their fixture code.
 
 Only WO-CIP-010 paths change. PR #456 and #457 and their verified records remain
 unchanged. WO-CIP-010 is in_progress; this packet does not record completion,

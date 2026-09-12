@@ -1,0 +1,269 @@
+{
+  "implementation_head": "73cd1b4a4f62efa1c260863e60901fa9a321f79b",
+  "pull_request": "https://github.com/mmzen/se_harness/pull/459",
+  "ci": {
+    "headRefOid": "73cd1b4a4f62efa1c260863e60901fa9a321f79b",
+    "mergeStateStatus": "CLEAN",
+    "number": 459,
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-12T10:33:51Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34688717731/job/103540140621",
+        "name": "Analyze (actions)",
+        "startedAt": "2026-09-12T10:33:08Z",
+        "status": "COMPLETED",
+        "workflowName": "CodeQL"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-12T10:33:02Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34688718309/job/103540140287",
+        "name": "validate",
+        "startedAt": "2026-09-12T10:32:34Z",
+        "status": "COMPLETED",
+        "workflowName": "Engineering Harness"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-12T10:32:42Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34688718310/job/103540140410",
+        "name": "Predecessor evaluator assessment",
+        "startedAt": "2026-09-12T10:32:31Z",
+        "status": "COMPLETED",
+        "workflowName": "Predecessor Evaluator Assessment"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-12T10:32:38Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34688718444/job/103540140795",
+        "name": "Select the release record to rehearse",
+        "startedAt": "2026-09-12T10:32:31Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-12T10:33:14Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34688718324/job/103540140496",
+        "name": "Candidate source evidence",
+        "startedAt": "2026-09-12T10:32:31Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-12T10:33:42Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34688717731/job/103540140640",
+        "name": "Analyze (javascript-typescript)",
+        "startedAt": "2026-09-12T10:32:32Z",
+        "status": "COMPLETED",
+        "workflowName": "CodeQL"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-12T10:33:36Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34688717731/job/103540140533",
+        "name": "Analyze (python)",
+        "startedAt": "2026-09-12T10:32:31Z",
+        "status": "COMPLETED",
+        "workflowName": "CodeQL"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-12T10:33:03Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34688718444/job/103540141022",
+        "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+        "startedAt": "2026-09-12T10:32:32Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-12T10:33:47Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34688718324/job/103540231016",
+        "name": "Candidate package evidence",
+        "startedAt": "2026-09-12T10:33:17Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-12T10:34:20Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34688718444/job/103540159562",
+        "name": "Rehearse the qualification of the release record / Qualify and replay (release-record)",
+        "startedAt": "2026-09-12T10:32:41Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-12T10:34:48Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34688718324/job/103540292123",
+        "name": "Upgrade rehearsal (Linux)",
+        "startedAt": "2026-09-12T10:33:52Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-12T10:35:42Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34688718324/job/103540292118",
+        "name": "Upgrade rehearsal (Windows)",
+        "startedAt": "2026-09-12T10:33:51Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-12T10:36:05Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34688718324/job/103540505410",
+        "name": "Build deterministic integration package",
+        "startedAt": "2026-09-12T10:35:45Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-12T10:36:29Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34688718324/job/103540546902",
+        "name": "Verify integration package (Linux)",
+        "startedAt": "2026-09-12T10:36:08Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-12T10:36:54Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34688718324/job/103540547000",
+        "name": "Verify integration package (Windows)",
+        "startedAt": "2026-09-12T10:36:08Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-12T10:37:09Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34688718324/job/103540637421",
+        "name": "Retain verified integration package",
+        "startedAt": "2026-09-12T10:36:57Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-12T10:33:29Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/runs/103540252953",
+        "name": "CodeQL",
+        "startedAt": "2026-09-12T10:33:27Z",
+        "status": "COMPLETED",
+        "workflowName": ""
+      }
+    ],
+    "url": "https://github.com/mmzen/se_harness/pull/459"
+  },
+  "replays": [
+    {
+      "platform": "Linux",
+      "replay": 1,
+      "run_id": "34688718324",
+      "run_attempt": "1",
+      "tested_sha": "9a9e844af85d2da69cf1ec6158991dfffc8d27b6",
+      "python": "Python 3.11.16",
+      "git": "git version 2.55.0",
+      "overall_result": "pass",
+      "semantic_sha256": "400b4712935c72fe70040cd372c6c1e988edfc8a3c97df99b730dacbcd84be87",
+      "cleanup_seconds": 0.4095912739999932,
+      "replay_seconds": 11.420650688000002
+    },
+    {
+      "platform": "Linux",
+      "replay": 2,
+      "run_id": "34688718324",
+      "run_attempt": "1",
+      "tested_sha": "9a9e844af85d2da69cf1ec6158991dfffc8d27b6",
+      "python": "Python 3.11.16",
+      "git": "git version 2.55.0",
+      "overall_result": "pass",
+      "semantic_sha256": "400b4712935c72fe70040cd372c6c1e988edfc8a3c97df99b730dacbcd84be87",
+      "cleanup_seconds": 0.4088237419999956,
+      "replay_seconds": 11.273579919
+    },
+    {
+      "platform": "Windows",
+      "replay": 1,
+      "run_id": "34688718324",
+      "run_attempt": "1",
+      "tested_sha": "9a9e844af85d2da69cf1ec6158991dfffc8d27b6",
+      "python": "Python 3.11.9",
+      "git": "git version 2.55.0.windows.5",
+      "overall_result": "pass",
+      "semantic_sha256": "400b4712935c72fe70040cd372c6c1e988edfc8a3c97df99b730dacbcd84be87",
+      "cleanup_seconds": 2.755321400000014,
+      "replay_seconds": 30.386305800000002
+    },
+    {
+      "platform": "Windows",
+      "replay": 2,
+      "run_id": "34688718324",
+      "run_attempt": "1",
+      "tested_sha": "9a9e844af85d2da69cf1ec6158991dfffc8d27b6",
+      "python": "Python 3.11.9",
+      "git": "git version 2.55.0.windows.5",
+      "overall_result": "pass",
+      "semantic_sha256": "400b4712935c72fe70040cd372c6c1e988edfc8a3c97df99b730dacbcd84be87",
+      "cleanup_seconds": 2.6428948999999875,
+      "replay_seconds": 30.282648299999977
+    }
+  ],
+  "artifact_sha256": {
+    "hosted/Linux/upgrade-rehearsal-runtime.json": "4fe4c7fab46df2b99662d2d187ad841bed7f341b8f11eca6818b2116c1a87e6b",
+    "hosted/Linux/rehearsal-result-1/upgrade-rehearsal-result.json": "69cdb5f1812f965b82db53b40df9f3a9a2c0b1b365f74cc732436dc12cd3b9c9",
+    "hosted/Linux/rehearsal-result-1/upgrade-rehearsal-timing.json": "799babe8dddd06e006d004789d88e445ed08e4d0e4056e5f396246b791076e47",
+    "hosted/Linux/rehearsal-result-2/upgrade-rehearsal-result.json": "69cdb5f1812f965b82db53b40df9f3a9a2c0b1b365f74cc732436dc12cd3b9c9",
+    "hosted/Linux/rehearsal-result-2/upgrade-rehearsal-timing.json": "99085d81f35da59828720ffee690e88870404efff1b2d7f92cff58fd5417f98b",
+    "hosted/Windows/upgrade-rehearsal-runtime.json": "6a35ddea0f564526493dc86d1909053a1f48a306664ff9ebb1850577ee845580",
+    "hosted/Windows/rehearsal-result-1/upgrade-rehearsal-result.json": "81e6a1530c0c156f6fa924f179d7b56cf2856dfb127acc5a8dac5c03de7216d6",
+    "hosted/Windows/rehearsal-result-1/upgrade-rehearsal-timing.json": "4f9523bb4c39da0ac80f5e1b89bdad2b96cabdbef733b207c97fbd0336814a5f",
+    "hosted/Windows/rehearsal-result-2/upgrade-rehearsal-result.json": "81e6a1530c0c156f6fa924f179d7b56cf2856dfb127acc5a8dac5c03de7216d6",
+    "hosted/Windows/rehearsal-result-2/upgrade-rehearsal-timing.json": "18d9a22e5854f3e2a39a6a5fd6bfe16e62970802b4b38865a5e696c3a080ddc3"
+  },
+  "downloaded_artifact_sha256": {
+    "hosted/Linux/upgrade-rehearsal-runtime.json": "4fe4c7fab46df2b99662d2d187ad841bed7f341b8f11eca6818b2116c1a87e6b",
+    "hosted/Linux/rehearsal-result-1/upgrade-rehearsal-result.json": "69cdb5f1812f965b82db53b40df9f3a9a2c0b1b365f74cc732436dc12cd3b9c9",
+    "hosted/Linux/rehearsal-result-1/upgrade-rehearsal-timing.json": "799babe8dddd06e006d004789d88e445ed08e4d0e4056e5f396246b791076e47",
+    "hosted/Linux/rehearsal-result-2/upgrade-rehearsal-result.json": "69cdb5f1812f965b82db53b40df9f3a9a2c0b1b365f74cc732436dc12cd3b9c9",
+    "hosted/Linux/rehearsal-result-2/upgrade-rehearsal-timing.json": "99085d81f35da59828720ffee690e88870404efff1b2d7f92cff58fd5417f98b",
+    "hosted/Windows/upgrade-rehearsal-runtime.json": "ab99763e119faf50eccc9094ec5f10fd66faf9b65783d19bd33613b2b7161e76",
+    "hosted/Windows/rehearsal-result-1/upgrade-rehearsal-result.json": "81e6a1530c0c156f6fa924f179d7b56cf2856dfb127acc5a8dac5c03de7216d6",
+    "hosted/Windows/rehearsal-result-1/upgrade-rehearsal-timing.json": "4f9523bb4c39da0ac80f5e1b89bdad2b96cabdbef733b207c97fbd0336814a5f",
+    "hosted/Windows/rehearsal-result-2/upgrade-rehearsal-result.json": "81e6a1530c0c156f6fa924f179d7b56cf2856dfb127acc5a8dac5c03de7216d6",
+    "hosted/Windows/rehearsal-result-2/upgrade-rehearsal-timing.json": "18d9a22e5854f3e2a39a6a5fd6bfe16e62970802b4b38865a5e696c3a080ddc3"
+  },
+  "retention_encoding": "UTF-8 with LF for Git storage; original downloaded bytes retained outside the checkout.",
+  "linux_suite": {
+    "tests": 1163,
+    "skips": 4,
+    "outcome": "pass",
+    "seconds": 27.506,
+    "job_url": "https://github.com/mmzen/se_harness/actions/runs/34688718324/job/103540140496",
+    "retained_log_sha256": "1a159201f82139eba5de81c99e09cb518b9e99884a2109ca4924a949d0b8da12"
+  }
+}

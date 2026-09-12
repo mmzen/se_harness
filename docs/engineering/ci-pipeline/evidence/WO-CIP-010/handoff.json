@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 10 declared changed path(s) are within execution scope.",
+            "message": "All 21 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -273,12 +273,23 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "d57e8b1a011a6c7bb4d7fe165a9c3ec847a95ece247e0a15b626672be687f995",
+  "result_sha256": "745526eaf8d32c15b07bc85c0dba9e70c82b64695bcaae9bbdc421239518e449",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
     "changed_paths": [
       "docs/engineering/ci-pipeline/evidence/WO-CIP-010/handoff.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted-checks.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Linux/rehearsal-result-1/upgrade-rehearsal-result.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Linux/rehearsal-result-1/upgrade-rehearsal-timing.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Linux/rehearsal-result-2/upgrade-rehearsal-result.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Linux/rehearsal-result-2/upgrade-rehearsal-timing.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Linux/upgrade-rehearsal-runtime.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Windows/rehearsal-result-1/upgrade-rehearsal-result.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Windows/rehearsal-result-1/upgrade-rehearsal-timing.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Windows/rehearsal-result-2/upgrade-rehearsal-result.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Windows/rehearsal-result-2/upgrade-rehearsal-timing.json",
+      "docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Windows/upgrade-rehearsal-runtime.json",
       "docs/engineering/ci-pipeline/evidence/WO-CIP-010/local-checks.json",
       "docs/engineering/ci-pipeline/evidence/WO-CIP-010/process-observations.json",
       "docs/engineering/ci-pipeline/evidence/WO-CIP-010/WO-CIP-010-handoff.md",
