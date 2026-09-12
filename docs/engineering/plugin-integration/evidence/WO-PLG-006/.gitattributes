@@ -1,0 +1,4 @@
+# Machine evidence packets must keep their LF headers readable.
+WO-PLG-006-pre-action.md text eol=lf
+WO-PLG-006-handoff.md text eol=lf
+handoff.json text eol=lf

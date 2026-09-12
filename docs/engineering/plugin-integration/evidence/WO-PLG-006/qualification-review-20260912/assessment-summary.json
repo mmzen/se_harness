@@ -1,0 +1,10 @@
+{
+  "work_order": "WO-PLG-006",
+  "assessed_source_and_definition_commit": "2885712ad815e80eba601d9129759961d5797739",
+  "engineering_assessment": "ready for independent assurance of qualification with documented local limitation",
+  "enforcement_qualification": "failed",
+  "assurance_decision": null,
+  "standing_deviation": "DEC-PLG-006",
+  "revisit": "Before the first public plugin release, any supported host-profile expansion, or introduction of remote acceptance controls.",
+  "new_native_host_runs": false
+}
