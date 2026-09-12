@@ -1,0 +1,971 @@
+{
+  "archive": "merged-candidate-ci.zip",
+  "sha256": "fe4225b7308b93d9d9a6e887fed281addfc9c764b2d01288f8ea830cc9a39fc3",
+  "bytes": 38637157,
+  "members": {
+    "artifacts/candidate-package-qualification-0.17.0/candidate-package-qualification.json": {
+      "bytes": 1748,
+      "sha256": "6f306ec9c3b1931779d11572c1126fea7f1c107586055e3c0002b692696fb2cd"
+    },
+    "artifacts/candidate-wheel-non-promotable-9acdd08e6507d4433bc27f3888d2743d1eea13da/SHA256SUMS": {
+      "bytes": 270,
+      "sha256": "5745f205b6df6ffbfebd224d29918f36edd312f510b4abc474c0a1c1ecbafdc3"
+    },
+    "artifacts/candidate-wheel-non-promotable-9acdd08e6507d4433bc27f3888d2743d1eea13da/SOURCES.txt": {
+      "bytes": 7615,
+      "sha256": "c63b8e756b12665ee02d9b7248bac4ddc323bbd50009b50ef6d4c01ad16aad1d"
+    },
+    "artifacts/complete-candidate-qualification/complete-candidate.json": {
+      "bytes": 1519,
+      "sha256": "9776c259439cc77723b57f395580b212e5e03dd53871741ff7df45ccbb4230bb"
+    },
+    "artifacts/integration-package-staging-9acdd08e6507d4433bc27f3888d2743d1eea13da/SHA256SUMS": {
+      "bytes": 212,
+      "sha256": "bc4899053ced223b6506a3382ad99c78e7a28632b451d7f5df102311e5a47cbf"
+    },
+    "artifacts/integration-package-staging-9acdd08e6507d4433bc27f3888d2743d1eea13da/integration-manifest.json": {
+      "bytes": 1121,
+      "sha256": "f36205e6fdcce0465ed733101164e975efec55edddbb427c9ee2718b497d9170"
+    },
+    "artifacts/se-harness-integration-9acdd08e6507d4433bc27f3888d2743d1eea13da/SHA256SUMS": {
+      "bytes": 212,
+      "sha256": "bc4899053ced223b6506a3382ad99c78e7a28632b451d7f5df102311e5a47cbf"
+    },
+    "artifacts/se-harness-integration-9acdd08e6507d4433bc27f3888d2743d1eea13da/integration-manifest.json": {
+      "bytes": 1121,
+      "sha256": "f36205e6fdcce0465ed733101164e975efec55edddbb427c9ee2718b497d9170"
+    },
+    "artifacts/skill-ownership-Linux/3.11/package/cases/test_own01_cli_plan_apply_stale_refusal_and_restore_json-60513441.json": {
+      "bytes": 223018,
+      "sha256": "cf1fdd63cafd08128bac38f90d5330a3dec8e240a87962c1a6bbadac9ec7bdf5"
+    },
+    "artifacts/skill-ownership-Linux/3.11/package/cases/test_own01_exact_catalog_and_each_selected_host-81e53f03.json": {
+      "bytes": 663739,
+      "sha256": "479e628e79ac7c0bcabdbd4e4176f9447db02073470c1759f69dec9fa73049ba"
+    },
+    "artifacts/skill-ownership-Linux/3.11/package/cases/test_own05_replay_doctor_and_direct_installer_preserve_binding-52486d89.json": {
+      "bytes": 369009,
+      "sha256": "b9657a4fcc3201f2d484389ae33cedc033ddb12e040d9477e626da36c16822f0"
+    },
+    "artifacts/skill-ownership-Linux/3.11/package/cases/test_own07_candidate_dashboard_output_preserves_installed_workflow-029b0973.json": {
+      "bytes": 200222,
+      "sha256": "a135be93357150d1c902c5b970ab76eaba350975bee5f7e1a7d81676421185c6"
+    },
+    "artifacts/skill-ownership-Linux/3.11/package/cases/test_own07_candidate_qualification_output_preserves_retired_skill-74816c2f.json": {
+      "bytes": 179710,
+      "sha256": "44f51199c8e19e45b913894b9c04d49b228404d4eb77777a3186240a87bb04dc"
+    },
+    "artifacts/skill-ownership-Linux/3.11/package/cases/test_own07_unsupported_old_lock_refuses_before_writes-2d22f5b4.json": {
+      "bytes": 139343,
+      "sha256": "7b7922217f96db433b261ef756d375b0e03574b5d42ca49be2d5545689716b2c"
+    },
+    "artifacts/skill-ownership-Linux/3.11/package/cases/test_own11_restore_exact_distribution_and_refuse_owner_conflicts-0d25c067.json": {
+      "bytes": 284404,
+      "sha256": "3b6318fff2c176874e38a2aac60c5583323ee7101ee316ffdb0cff587a3a0f15"
+    },
+    "artifacts/skill-ownership-Linux/3.11/package/cases/test_own12_clone_without_plugin_is_integral_and_availability_unobserved-19fc90fb.json": {
+      "bytes": 203811,
+      "sha256": "0912041a1a5518439fe3966e1ac52c9b47eb262628eb80861697810bb3bd4a95"
+    },
+    "artifacts/skill-ownership-Linux/3.11/package/runtime.json": {
+      "bytes": 1593,
+      "sha256": "5f9954d7330fbc7567dc37d347a8f7257951907e222ea178d4fe8d714d265309"
+    },
+    "artifacts/skill-ownership-Linux/3.11/package/test-output.log": {
+      "bytes": 1562,
+      "sha256": "4f6a97595d7cd3b3185cd51ca4588d610f8b1950421f809dea4c1dfdab9c8994"
+    },
+    "artifacts/skill-ownership-Linux/3.11/source/cases/test_own01_cli_plan_apply_stale_refusal_and_restore_json-32bf94c9.json": {
+      "bytes": 222936,
+      "sha256": "d347b3170748a3c26c6f6ddbf7b52ded88cdfe4b5a8be94b1266cd82102c6703"
+    },
+    "artifacts/skill-ownership-Linux/3.11/source/cases/test_own01_exact_catalog_and_each_selected_host-5a3c6240.json": {
+      "bytes": 663545,
+      "sha256": "cce4b76ca84cbfe5f30a450d4f810c8d0a451cfc125c50b2934b3129f6cc7257"
+    },
+    "artifacts/skill-ownership-Linux/3.11/source/cases/test_own05_replay_doctor_and_direct_installer_preserve_binding-f7bb2913.json": {
+      "bytes": 368911,
+      "sha256": "96aaef1210952b51741231409e75dd196e3c683c96bdbfeaeac63cf289208928"
+    },
+    "artifacts/skill-ownership-Linux/3.11/source/cases/test_own07_candidate_dashboard_output_preserves_installed_workflow-005c049e.json": {
+      "bytes": 199903,
+      "sha256": "20e023dd3c4c85ddc19991aa6a1b0ea686ea349f8bf4b3745594f7e3d4ecb9a0"
+    },
+    "artifacts/skill-ownership-Linux/3.11/source/cases/test_own07_candidate_qualification_output_preserves_retired_skill-13098a17.json": {
+      "bytes": 179486,
+      "sha256": "010904e1b4ae3c09718452d60325f75190cc5501248ad274d0e9e736414c5ada"
+    },
+    "artifacts/skill-ownership-Linux/3.11/source/cases/test_own07_unsupported_old_lock_refuses_before_writes-1fa13d8d.json": {
+      "bytes": 139293,
+      "sha256": "3322973ee61c3e211b0fafc57e8fc7f403e7220373079f3ee89533987b686062"
+    },
+    "artifacts/skill-ownership-Linux/3.11/source/cases/test_own11_restore_exact_distribution_and_refuse_owner_conflicts-30b63bb6.json": {
+      "bytes": 284322,
+      "sha256": "088d97aded62306b295ee0256e9ac5ebd469c6ea726a5f24eef8bb8d512117ba"
+    },
+    "artifacts/skill-ownership-Linux/3.11/source/cases/test_own12_clone_without_plugin_is_integral_and_availability_unobserved-993e598c.json": {
+      "bytes": 203761,
+      "sha256": "f97469449c81433a193315e34fb1d6cebfd387bcc43ff1ff988247874c3ce1b6"
+    },
+    "artifacts/skill-ownership-Linux/3.11/source/runtime.json": {
+      "bytes": 1557,
+      "sha256": "6112b597fb8412012b7e959d8d349394438e5dbdcda80daa48d798c0477f6e39"
+    },
+    "artifacts/skill-ownership-Linux/3.11/source/test-output.log": {
+      "bytes": 1562,
+      "sha256": "eb3315a2f20f105fd94a28c68080d811877ec77f4c2b8266533085b602409092"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own01_cli_plan_apply_stale_refusal_and_restore_json-4635436a.json": {
+      "bytes": 223031,
+      "sha256": "40bcb4924193365e9f028fca9203ee36b14af7a976d06d324f1498739ec9134b"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own01_exact_catalog_and_each_selected_host-8317c80e.json": {
+      "bytes": 663752,
+      "sha256": "d313b2b1c0d3d70f1604da3aab10b5ef5d76a682dd5b632ff05defafd4891926"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own02_preserves_owner_content_and_directories-473f9940.json": {
+      "bytes": 131803,
+      "sha256": "8a2c072803edfd1f4fe8b0a4072fc3de1b800682f94fad5ac4cc01a3da91e1ac"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own03_actual_aggregate_payload_limit-35636743.json": {
+      "bytes": 63198,
+      "sha256": "dc27554a05f02a6336ac0a5a1467b0cb6837827891fb216096939f2c3344980a"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own03_actual_external_file_size_limit-89a6da2e.json": {
+      "bytes": 58799,
+      "sha256": "b22a13f05ca4dac425454fa268c0968308087125b1cc3e10adb22e00533aa1ff"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own03_assembly_unknown_schema_and_duplicate_keys_refuse-49b51678.json": {
+      "bytes": 103541,
+      "sha256": "4e610492f5eabc6e1371df94f7003c5b503bf071a42b81f01b08ff3328babf9d"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own03_closed_binding_duplicate_keys_and_control_limit-edc4336e.json": {
+      "bytes": 193257,
+      "sha256": "2a1bf4e581af01a28ae4dc42ef372f035fe4a510d3a81fcbe1b7241a1a7928dc"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own03_explicit_hosts_roots_and_closed_expected_fields-18f7f3c8.json": {
+      "bytes": 238120,
+      "sha256": "bc68fa0469d715fe90929a0e3fafa93ad72fe5bcd9e63b1f1c410dc7f0cad512"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own03_external_hard_link_and_unlisted_file_refuse-04423794.json": {
+      "bytes": 104358,
+      "sha256": "d3e3e23a5f26604485f4cb9e355a059c1236e963533be0ae69761dffefb5e273"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own03_hard_link_refusal-e4f02988.json": {
+      "bytes": 284916,
+      "sha256": "a47a56a66379974a3be77b0b9e416ffbc2e5d6ad3695fbfe4fd89eb5d260e8ba"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own03_inventory_count_and_declared_size_limits-2a8d5e68.json": {
+      "bytes": 103569,
+      "sha256": "1ccb1d79dc235e61c8e35ad9509c883fd6b7772a799f2021480ef51d2110f320"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own03_modified_missing_and_unowned_catalog_refuse-7103c257.json": {
+      "bytes": 144738,
+      "sha256": "cf485ba95f571b5a727f03cc657e445e227a97c47faaebed905c20412e75a520"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own03_repository_case_spelling_collision_refuses-39e867d1.json": {
+      "bytes": 58760,
+      "sha256": "7123e6aa0cfa310510e6aa24895388e591bc967beb999d00a4e9f16bedc6c72b"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own03_symbolic_link_refusal-7da448d0.json": {
+      "bytes": 289262,
+      "sha256": "6e0bd042ca402aaac5466139451be96abebacb624bc9b57c56f81c707bb80082"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own03_unsafe_inventory_paths_and_case_collisions-8b1bb1d9.json": {
+      "bytes": 327764,
+      "sha256": "c5f5b1483352d045b3c0cf55919076720b07b6f61c292f416175becec1b3e25e"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own03_wrong_typed_assembly_values_are_bounded_refusals-9ace91c0.json": {
+      "bytes": 193249,
+      "sha256": "494b3c842579b244f7b9722b101dd4ea4c7b42a572edfd0d5f6caa0f93c9a0b1"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own04_stale_equal_size_file_lock_binding_and_inventory-60ef0fec.json": {
+      "bytes": 742566,
+      "sha256": "e3c41bf4a20ae022b7cb821a32db003fc4e590992d44c951afc9f8523371a314"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own05_handcrafted_direct_installer_path_aliases_cannot_recreate_retired_core-49c1752f.json": {
+      "bytes": 221111,
+      "sha256": "d2b1e8936abe1caa1c12d671fe79e25ad23e1b5e8833ddb752e4426fe23c6c44"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own05_replay_doctor_and_direct_installer_preserve_binding-5c5a40ab.json": {
+      "bytes": 369022,
+      "sha256": "001909bbde249577a0f46715b2b6e53cb92c786874f3119a9b3c1a8488ae0dfe"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own06_invalid_ownership_format_upgrade_is_atomic-98f831a4.json": {
+      "bytes": 128658,
+      "sha256": "d15b1cb8ae9a3da1b351b465abfa0f88c14a21273c84f89c1d41df9c11cd0cef"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own06_synthetic_compatible_prior_version_upgrades_preserving_binding-516c5e20.json": {
+      "bytes": 161274,
+      "sha256": "ef3cefef6d4f4ae2a9a78c952025ade13bab7e481aaef38db934ead20cf5e862"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own07_candidate_dashboard_output_preserves_installed_workflow-0bb1856a.json": {
+      "bytes": 200277,
+      "sha256": "ed7effb7a6edb6e0c8021698d9d4c7c3a4e9925338442c010b7826ddf8fd4d0a"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own07_candidate_qualification_output_preserves_retired_skill-d6210dce.json": {
+      "bytes": 179751,
+      "sha256": "63850511312783f9c8aa2f4ff399f9ff79f25d061ba7a07885f97ca71c241cb2"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own07_unsupported_old_lock_refuses_before_writes-26041179.json": {
+      "bytes": 139356,
+      "sha256": "d2a2d6799401daaf4222b085d0b97e01cecbfd8d10805e0545167bcf261d9420"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own08_current_lock_evaluator_evidence_matches_schema4_identity-2afe15f1.json": {
+      "bytes": 129463,
+      "sha256": "e2d032191f132109d70db1fe79e97d7b8e56efde81ac5ba9e5ec2c7320b856a3"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own08_reintroduced_copy_and_deleted_or_tampered_binding_fail_integrity-cb1dc101.json": {
+      "bytes": 384411,
+      "sha256": "f876cb495d4a78fd9379a28aeaadda68b7cae593694b862fc804cf945d5bcb8d"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own09_exception_at_each_write_and_durable_boundary_rolls_back-7ca04e00.json": {
+      "bytes": 9433047,
+      "sha256": "131bf35f90a9da7b30312f5c6b390424bc471c02d3ef5ac44f4ddafcea1c481d"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own10_byte_identical_owner_replacement_is_not_recovery_authority-4de65b1f.json": {
+      "bytes": 390128,
+      "sha256": "c7086b259fd63cb0a13ccc40f894a7cc4fb3e6ec98228eb07ef948c13d47c408"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own10_durable_commit_and_partial_cleanup_finalize_applied_state-59991733.json": {
+      "bytes": 1304317,
+      "sha256": "4ea1deb81fb92252a2791408394796f928e5a3b1df4bf1d5282e1ee719d938ce"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own10_intervening_owner_edits_and_new_files_are_preserved-5126d98e.json": {
+      "bytes": 1146236,
+      "sha256": "15ab27045ac56daad3885010c31c4e5c8c54d2d36415b36ed4529f2f16307899"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own10_killed_process_recovers_each_durable_boundary-0b507c6c.json": {
+      "bytes": 23719687,
+      "sha256": "3057ceb70fbb8afda1eac1cb7af68c5290e55b27725530e9e9cb21694d61daaa"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own10_recovery_write_failure_retains_diagnostics_and_can_retry-ad90dd10.json": {
+      "bytes": 868760,
+      "sha256": "d22560edd38801ac61bdff2efb6c83b32bee4a96b013e4285473ad42b90c85f0"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own10_rehashed_journal_cannot_delete_preexisting_owner_empty_directory-963c81f4.json": {
+      "bytes": 484049,
+      "sha256": "f0dce62a597f52176d8c6bef2fca93d3ef18aacfef34311892b5df461c4c8764"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own10_tampered_truncated_and_escaping_recovery_never_write-e9b1bc2f.json": {
+      "bytes": 730242,
+      "sha256": "a71e3fa3ad2307b1f0bf16e51f6e1b1421cb94a1259296b9b28bb07c7e99f270"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own11_restore_exact_distribution_and_refuse_owner_conflicts-64d560e5.json": {
+      "bytes": 284417,
+      "sha256": "54c1501a7019ac50bb0b612649a32a4c9de25619c18cfc4a6015b00de084764e"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own12_clone_without_plugin_is_integral_and_availability_unobserved-b27aad14.json": {
+      "bytes": 203824,
+      "sha256": "cc4b034a7ee893257c67468fbf0830f64057f3cbf9ea91710afe4efebca6dcb9"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own13_independent_processes_refuse_contention_and_stale_plan-d6e2c310.json": {
+      "bytes": 85710,
+      "sha256": "3d18bd2979484284383c8e486e3c204fcc2411ea395ecb5ceff2e8987a017773"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own14_independent_expected_identity_mismatches_refuse-761b0685.json": {
+      "bytes": 193326,
+      "sha256": "8d241f7c28338af4a2f52fc959ef93320fa8b63506aac79ba13982961a4bfac9"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own14_missing_payload_core_and_evaluator_identity_refuse-c58dd810.json": {
+      "bytes": 237489,
+      "sha256": "8d9707d02c864e6ff2239d8c4daf78a98ab5550a131a98569807218707c89288"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/cases/test_own14_rehashed_modified_retained_contract_or_helper_remains_incompatible-fd1c4d0e.json": {
+      "bytes": 103682,
+      "sha256": "0eb708ba6d442849bd85214fcc6fe55985e5fe9c26f65367430977bc85153257"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/runtime.json": {
+      "bytes": 2184,
+      "sha256": "97f29eb8fffed8a9d1dccddfc994eb72545479a619676d3b9cbe8293c34776cf"
+    },
+    "artifacts/skill-ownership-Linux/3.13/package/test-output.log": {
+      "bytes": 9275,
+      "sha256": "7bc6bc77cfb38799a6cbdac47eec7d22f7518409584b0887bbbb1dd7f0290de8"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own01_cli_plan_apply_stale_refusal_and_restore_json-8a50c03e.json": {
+      "bytes": 222935,
+      "sha256": "a1e939e91ddf031a4f2bd5e17971b77afba3df59889d8b46591b2c8984a1f60a"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own01_exact_catalog_and_each_selected_host-19e9f831.json": {
+      "bytes": 663544,
+      "sha256": "730d1d097d0a754327fa54b408bcd57d327b88205bb2593930fe0a67fcfa30b1"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own02_preserves_owner_content_and_directories-497f8d06.json": {
+      "bytes": 131755,
+      "sha256": "87d8dcffb45325b4a6159b2d772ed64fa3a2dad4da61582de45cab39a61be9b5"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own03_actual_aggregate_payload_limit-0a97a368.json": {
+      "bytes": 63166,
+      "sha256": "9e089c69a3387f9eb72a1e34d833082075e76a68d060bd42b60301ada8e2272a"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own03_actual_external_file_size_limit-65ef3ba5.json": {
+      "bytes": 58767,
+      "sha256": "0a57c0285bd705696979564312197a023cea21008a19944ff461f4c9420fdcdf"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own03_assembly_unknown_schema_and_duplicate_keys_refuse-4cfeeeb1.json": {
+      "bytes": 103493,
+      "sha256": "68421b3359995b4bf130b8e6c7a45e7ad521620cd00a3513a1aba1e4d974beed"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own03_closed_binding_duplicate_keys_and_control_limit-b81e7555.json": {
+      "bytes": 193177,
+      "sha256": "e7f9fc1970b67b80acaa08ed35859cdbdd6f858d700ce3f7808d45e66ee842e0"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own03_explicit_hosts_roots_and_closed_expected_fields-4ef16bc5.json": {
+      "bytes": 238024,
+      "sha256": "121628e04043fec96ba7dd419eca329de498919da7c6787bdba6f72ef3bc1e59"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own03_external_hard_link_and_unlisted_file_refuse-026027ff.json": {
+      "bytes": 104310,
+      "sha256": "e7a2328e08144d9f68bce9590e7b5b7227349919de8db2795a51b6e52c702b26"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own03_hard_link_refusal-feca2a26.json": {
+      "bytes": 284804,
+      "sha256": "7ddec221452badc9b1eec3340d7a22160fb8123588b9a79ad83f4835e782a50f"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own03_inventory_count_and_declared_size_limits-42dd44ee.json": {
+      "bytes": 103521,
+      "sha256": "9166d9e55c5c3d6723119b248ecff0a5ffba92edd141a56ba09ea13b6d6b1660"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own03_modified_missing_and_unowned_catalog_refuse-79e3ed7c.json": {
+      "bytes": 144674,
+      "sha256": "8260e122652de206e99a320f44bc400b5d402a6f156b43959ba6d74db0e93e93"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own03_repository_case_spelling_collision_refuses-9497dbfe.json": {
+      "bytes": 58728,
+      "sha256": "dbf74fd47f8b49c6cb7e8cc3c91c0e2fb4a4f1e5cd8e8e98e81cfa55801f2ddb"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own03_symbolic_link_refusal-9cad2868.json": {
+      "bytes": 289150,
+      "sha256": "5783b675236f12bbd7897b8371c502529d40639bc41d92492eb6da6d371270a2"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own03_unsafe_inventory_paths_and_case_collisions-ae094074.json": {
+      "bytes": 327636,
+      "sha256": "8e3c7adcc26f80ec7cab0993e0b0c672bf95aa5516bb66b07d4ee229e0878581"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own03_wrong_typed_assembly_values_are_bounded_refusals-267fd2ab.json": {
+      "bytes": 193169,
+      "sha256": "0ffbf37005651b66df7ad0b72ca56842965621b39ee6522b180aba08daa3ebcf"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own04_stale_equal_size_file_lock_binding_and_inventory-0acdbecc.json": {
+      "bytes": 742298,
+      "sha256": "530786d54d33425442923fb7464e81ad9806fd6eea408ad0b38e3c86af8f3b53"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own05_handcrafted_direct_installer_path_aliases_cannot_recreate_retired_core-a9796158.json": {
+      "bytes": 221063,
+      "sha256": "f2206eb6de7344fd93fcc9b23422b0538369ed6f380f2daeae499a76a1919a8c"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own05_replay_doctor_and_direct_installer_preserve_binding-44350fa2.json": {
+      "bytes": 368910,
+      "sha256": "5f42d3abac75116d8f043020f2b5c4a91af34e5b058ac18a0434b1ed83619d55"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own06_invalid_ownership_format_upgrade_is_atomic-7b573e38.json": {
+      "bytes": 128610,
+      "sha256": "31ac2091d8aabb1c1d5201ce0ef453c85431702d12d4ae7543391974ad9b354b"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own06_synthetic_compatible_prior_version_upgrades_preserving_binding-3c5b8a9f.json": {
+      "bytes": 161226,
+      "sha256": "04a10dba8978b1a93230a51948cca193b077da09475c07deb9368b7782406d48"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own07_candidate_dashboard_output_preserves_installed_workflow-7e167910.json": {
+      "bytes": 199902,
+      "sha256": "3eade43c0dd325eaf91317b113629c6a17d9a785f740f2758f12462019e45395"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own07_candidate_qualification_output_preserves_retired_skill-2b86ddf1.json": {
+      "bytes": 179485,
+      "sha256": "941367f223fa803f9c77bdbb3f42ccb02bcd64dca0d7110cf2d9bf9daa7e7fa6"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own07_unsupported_old_lock_refuses_before_writes-4ba1d542.json": {
+      "bytes": 139292,
+      "sha256": "fb2072ba82b6384955f40fd26f6100da30cefb74c5a40a7f7c7d216d222b2364"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own08_current_lock_evaluator_evidence_matches_schema4_identity-52fb0e4c.json": {
+      "bytes": 129415,
+      "sha256": "89af849e86890a9347bfba6c60c0c0aff74dc2afb7c52b05b891a395c3925683"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own08_reintroduced_copy_and_deleted_or_tampered_binding_fail_integrity-0abdd26e.json": {
+      "bytes": 384267,
+      "sha256": "8a5831ff08aa2053f8c2954591e18774581be0b57ae0ec6be05352297f2fb331"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own09_exception_at_each_write_and_durable_boundary_rolls_back-0d85b850.json": {
+      "bytes": 9430279,
+      "sha256": "8c5d66718121ff52ee1781dc6227712acd7ee0dd6da9319383dc364e8d97f847"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own10_byte_identical_owner_replacement_is_not_recovery_authority-f6ee6abd.json": {
+      "bytes": 390094,
+      "sha256": "d2134b37c44a403a6191b750f5a4aeea69e8b9df142e6aac7691c3b07240ea14"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own10_durable_commit_and_partial_cleanup_finalize_applied_state-edefa6ed.json": {
+      "bytes": 1304293,
+      "sha256": "84e738aa5694ddafeb3623af1f89a951d495bca2962bf47c027c3beaa237382b"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own10_intervening_owner_edits_and_new_files_are_preserved-4345619e.json": {
+      "bytes": 1146166,
+      "sha256": "9ae34429bab88a882d3b2f753c412f3e5592998f6c91878a6e901771793be7fd"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own10_killed_process_recovers_each_durable_boundary-0c01063a.json": {
+      "bytes": 23719505,
+      "sha256": "1279809f8b9fa882eeeeebf088cf8fd01de2ef10d7078f2646a15d78d0ed1792"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own10_recovery_write_failure_retains_diagnostics_and_can_retry-9f39f530.json": {
+      "bytes": 868676,
+      "sha256": "795c989cad4a90ddd5e47923eb46753b4211b9c64632fca948eadcf8ee513aeb"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own10_rehashed_journal_cannot_delete_preexisting_owner_empty_directory-2dc56ce3.json": {
+      "bytes": 483983,
+      "sha256": "7ba8245f1515d6c9458b226205e1aff4570e99c5bab96e00199ae0633c1af457"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own10_tampered_truncated_and_escaping_recovery_never_write-1abbf0b0.json": {
+      "bytes": 730096,
+      "sha256": "bc0ded3ecd58e860496c38a04cbcb84c6ccc5c68c172e5531b7103659c1584f7"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own11_restore_exact_distribution_and_refuse_owner_conflicts-adb02aa2.json": {
+      "bytes": 284321,
+      "sha256": "d978bbbf08b15f5a9c887c5bede572c550342e50fbe930341fe6931b9a95697a"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own12_clone_without_plugin_is_integral_and_availability_unobserved-a79b5a6f.json": {
+      "bytes": 203760,
+      "sha256": "1444459ba79bcc3081dc217f26e599210fb29297fd27d8caef5c6dfd4001e384"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own13_independent_processes_refuse_contention_and_stale_plan-8cdbe655.json": {
+      "bytes": 85770,
+      "sha256": "e62453eee248d70895df16ec22d0ec3ce342045aa84cba00e5a69b70db522b8e"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own14_independent_expected_identity_mismatches_refuse-b66f87ed.json": {
+      "bytes": 193246,
+      "sha256": "0c1e5e23228cd1bc205f31094a3feb90e911455ace4a801f093a18fda3d0f5ec"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own14_missing_payload_core_and_evaluator_identity_refuse-6e916dac.json": {
+      "bytes": 237401,
+      "sha256": "6a755c54383a830544d02a46d7951711c22669a404aabc2de5c41b2f6a51c044"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/cases/test_own14_rehashed_modified_retained_contract_or_helper_remains_incompatible-0a125a97.json": {
+      "bytes": 103634,
+      "sha256": "9078566f89a5543419e4e519871c823af114fc82bf5cc4edbad5c443c45c55bd"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/runtime.json": {
+      "bytes": 2106,
+      "sha256": "3607dbaa79c80709d40181ff4da5e019ca8637009cfde33bf0e80727abc8afb3"
+    },
+    "artifacts/skill-ownership-Linux/3.13/source/test-output.log": {
+      "bytes": 9275,
+      "sha256": "b1fd33edd10053e3d5aee36005394ab8359bdbc9cd302a194f67f84a2e48bb64"
+    },
+    "artifacts/skill-ownership-Linux/run-acceptance.py": {
+      "bytes": 3929,
+      "sha256": "6c0246a91d3c7dce649e5e1c88b6ac9750c0cf733f337b670405f93478b60dfc"
+    },
+    "artifacts/skill-ownership-Windows/3.11/package/cases/test_own01_cli_plan_apply_stale_refusal_and_restore_json-65180539.json": {
+      "bytes": 224267,
+      "sha256": "a8d2957229c0fea5e94ab652e75735283aac15edecc542da9abb7669ae97b70d"
+    },
+    "artifacts/skill-ownership-Windows/3.11/package/cases/test_own01_exact_catalog_and_each_selected_host-e606fb1e.json": {
+      "bytes": 665472,
+      "sha256": "39787445ad84764d0a4590ccfd2ed417902a1be09d2cea1b7b43f96bfbfd6662"
+    },
+    "artifacts/skill-ownership-Windows/3.11/package/cases/test_own05_replay_doctor_and_direct_installer_preserve_binding-7ac936c4.json": {
+      "bytes": 370421,
+      "sha256": "595d76fc687614564ca018b565e3646e003d302f0c0d17a0540466c687d26b47"
+    },
+    "artifacts/skill-ownership-Windows/3.11/package/cases/test_own07_candidate_dashboard_output_preserves_installed_workflow-c289664a.json": {
+      "bytes": 200800,
+      "sha256": "4a9615f926265669bfc74e93b640c2aaccfdfaa67d36fa432a722875f3eb5b3a"
+    },
+    "artifacts/skill-ownership-Windows/3.11/package/cases/test_own07_candidate_qualification_output_preserves_retired_skill-8dfb8c65.json": {
+      "bytes": 180335,
+      "sha256": "4a0c2f0c80a0d7d0a6fd2d2b0e53233ab1e3aa23c2485c59db60ea3f57f1be95"
+    },
+    "artifacts/skill-ownership-Windows/3.11/package/cases/test_own07_unsupported_old_lock_refuses_before_writes-14c57bb7.json": {
+      "bytes": 139562,
+      "sha256": "10c78c7c9d7a0fd18cfd6df77a6a439efa15a0eccfaa1bf36a64b1e844da43b2"
+    },
+    "artifacts/skill-ownership-Windows/3.11/package/cases/test_own11_restore_exact_distribution_and_refuse_owner_conflicts-4b4d58cb.json": {
+      "bytes": 285060,
+      "sha256": "a2e5244abeb29d04c00eb9972ef3307bc521f768386282b0710d7974a1e14169"
+    },
+    "artifacts/skill-ownership-Windows/3.11/package/cases/test_own12_clone_without_plugin_is_integral_and_availability_unobserved-b1744ef2.json": {
+      "bytes": 204352,
+      "sha256": "5105c7ca3f5c3e430c11874980484ae7390ecb2e8cdc6bfe0bc310df768276d4"
+    },
+    "artifacts/skill-ownership-Windows/3.11/package/runtime.json": {
+      "bytes": 1619,
+      "sha256": "62131b1826cde73e44ed3cdcc40493b74ca6576957315aef4c6c0a2bfbdff229"
+    },
+    "artifacts/skill-ownership-Windows/3.11/package/test-output.log": {
+      "bytes": 1576,
+      "sha256": "b19c11b2a145b712b17f89400a09f6ecd033f8e2a78ef3c406aba95ed751b822"
+    },
+    "artifacts/skill-ownership-Windows/3.11/source/cases/test_own01_cli_plan_apply_stale_refusal_and_restore_json-bb9af427.json": {
+      "bytes": 224196,
+      "sha256": "8f03b588699465d84b6e8a9108ea084bd79f57a8294496604d5dd6baac75b0ab"
+    },
+    "artifacts/skill-ownership-Windows/3.11/source/cases/test_own01_exact_catalog_and_each_selected_host-9e08e697.json": {
+      "bytes": 665289,
+      "sha256": "14df20ce665591f1ae545bd84408e8edef0fd55aaf14779371cbff3cd48bcfec"
+    },
+    "artifacts/skill-ownership-Windows/3.11/source/cases/test_own05_replay_doctor_and_direct_installer_preserve_binding-4ab6d752.json": {
+      "bytes": 370334,
+      "sha256": "0f0305b977e3cd8d8899949560255ec7f8a837788385cf2be9f2f4ff720273d9"
+    },
+    "artifacts/skill-ownership-Windows/3.11/source/cases/test_own07_candidate_dashboard_output_preserves_installed_workflow-71ff3fdb.json": {
+      "bytes": 200492,
+      "sha256": "fdc43c78163bbaa4eb961edd520d187550f3f2bfb19b4324445ed72108a56dc8"
+    },
+    "artifacts/skill-ownership-Windows/3.11/source/cases/test_own07_candidate_qualification_output_preserves_retired_skill-0cb0245b.json": {
+      "bytes": 180122,
+      "sha256": "fd1e06e991a997062fbda980364a21b31905b558503a24156f35bd084ddcc770"
+    },
+    "artifacts/skill-ownership-Windows/3.11/source/cases/test_own07_unsupported_old_lock_refuses_before_writes-1471e5ac.json": {
+      "bytes": 139523,
+      "sha256": "57970d26e30c542b8e3f6401987fd3de66e56de4402b6603bb3c262c350ab951"
+    },
+    "artifacts/skill-ownership-Windows/3.11/source/cases/test_own11_restore_exact_distribution_and_refuse_owner_conflicts-29267830.json": {
+      "bytes": 284989,
+      "sha256": "dacea5bd05989fb4247e2a95daeecd87ebb87031e168eb130a41fb2d0badbb19"
+    },
+    "artifacts/skill-ownership-Windows/3.11/source/cases/test_own12_clone_without_plugin_is_integral_and_availability_unobserved-5b933de1.json": {
+      "bytes": 204313,
+      "sha256": "829157cbd03f920f87322ede847e2e34c1b86e9d3b1fda5f3211c6b35bbf4bad"
+    },
+    "artifacts/skill-ownership-Windows/3.11/source/runtime.json": {
+      "bytes": 1600,
+      "sha256": "bbfce7809b9f95e07ec4c6f8a7a9b8b52ee09731763aad389649f3aed216fed6"
+    },
+    "artifacts/skill-ownership-Windows/3.11/source/test-output.log": {
+      "bytes": 1576,
+      "sha256": "3acaf24dc858f4a12901fbefc262798677388155a5ccfe4c9e95567b372edcac"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own01_cli_plan_apply_stale_refusal_and_restore_json-7bca0e79.json": {
+      "bytes": 224290,
+      "sha256": "cc7a1e3ee43c52238ba1c4fe8fb922645ed7eae9ba533f5ece61644449cf3139"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own01_exact_catalog_and_each_selected_host-01f007d0.json": {
+      "bytes": 665495,
+      "sha256": "a02bedc21d4f373b18d3a1f3b83a3e2aa72c42cdc25cc2ba59f1c8527432fbf6"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own02_preserves_owner_content_and_directories-c757af07.json": {
+      "bytes": 132274,
+      "sha256": "966bb5687be352d526dff638a7184f754cbeefdd3d0237a2ae377fcbd8944bc7"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own03_actual_aggregate_payload_limit-fe2a34e5.json": {
+      "bytes": 63271,
+      "sha256": "869dfa77700f5ab3c9f56ba978edc9b7bd80a0923f30ada9307fef6bd6277bf8"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own03_actual_external_file_size_limit-2a10de7f.json": {
+      "bytes": 58916,
+      "sha256": "9e1955de428ab69a4029b70f62b9238063a3b74e6aace2efcec8b8272cde8197"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own03_assembly_unknown_schema_and_duplicate_keys_refuse-bb32f4c5.json": {
+      "bytes": 103692,
+      "sha256": "0625f1e82ecc13435142da976e6a1f8ea73c31e552f5b6a62481ce9aa5af56b8"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own03_closed_binding_duplicate_keys_and_control_limit-d8c85ffb.json": {
+      "bytes": 193603,
+      "sha256": "637fdd0e726aea93ffe834fd42a436742271f092e887799b3129e0a4c4330f67"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own03_explicit_hosts_roots_and_closed_expected_fields-5637a826.json": {
+      "bytes": 238505,
+      "sha256": "b932b69e2ff443ef9f5848f8065a1219d38ff563f9732e910bf97fbd7cd96ca4"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own03_external_hard_link_and_unlisted_file_refuse-4cc52375.json": {
+      "bytes": 104553,
+      "sha256": "d6879b1837cac605f56e2f9b44be9b0f24a88081a74a0b5edf9e748de7cbcb62"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own03_hard_link_refusal-0844997a.json": {
+      "bytes": 285633,
+      "sha256": "64ddc1eb9a2f48f1773d22c8a501d049e8aebd8c47ace26a3d092f7040a9d41a"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own03_inventory_count_and_declared_size_limits-3304a148.json": {
+      "bytes": 103720,
+      "sha256": "0521ea4cb0aafdfb6271d1809af002511e5121bbbeb9fe1e188cfb9053e6cd87"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own03_modified_missing_and_unowned_catalog_refuse-3b5edb4b.json": {
+      "bytes": 144967,
+      "sha256": "cbc39d579c2da66c98e35688f388cbca4cafbd2ed8fa81515d29cd4833434a04"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own03_repository_case_spelling_collision_refuses-3de66a7e.json": {
+      "bytes": 58815,
+      "sha256": "f9d69e4c116c591822dad6ca535665e659cb952ea53a43866a959b664200d403"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own03_symbolic_link_refusal-44d7e0e5.json": {
+      "bytes": 290531,
+      "sha256": "36f63ca6ab9fc7edf753bdabbc4b3cd63e7d104434ae7a2b6e26e067f5917558"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own03_unsafe_inventory_paths_and_case_collisions-d8050842.json": {
+      "bytes": 328305,
+      "sha256": "4882a28c841be1ff9c52aadeec07c2d67f63442d60bdbe838200a0ac200c2371"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own03_windows_reparse_junction_refusal-d7d16689.json": {
+      "bytes": 151029,
+      "sha256": "794957f2e7ae9ffecd98a17791e2e024f690882ee4b9fbacac9b9235cc7a1bb3"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own03_wrong_typed_assembly_values_are_bounded_refusals-085c2022.json": {
+      "bytes": 193556,
+      "sha256": "df940a3c5283b661c071f421f18fa735dc464795ad5883604b83fbed658f9116"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own04_stale_equal_size_file_lock_binding_and_inventory-6f265cba.json": {
+      "bytes": 744775,
+      "sha256": "d8151d300477997cc0016b3b405dcbf22403d083f9165c35036f9a405ed0e870"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own05_direct_installer_junction_alias_cannot_recreate_retired_core-50f0d9b9.json": {
+      "bytes": 141041,
+      "sha256": "fe8f047c9867e89e58dfe4401621f2b64fa6c53886b074e3f30ea8621d47c6d9"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own05_handcrafted_direct_installer_path_aliases_cannot_recreate_retired_core-18b3d77b.json": {
+      "bytes": 221582,
+      "sha256": "fd9d982d4c0929fa96f9995053eac27bedf270f84f4c19f6814d404d640ef322"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own05_replay_doctor_and_direct_installer_preserve_binding-d6030f47.json": {
+      "bytes": 370445,
+      "sha256": "7e793c951968eb023d4cf77158e2b8dc846193457690a2fe2ea1e7279f4036ed"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own06_invalid_ownership_format_upgrade_is_atomic-604581e2.json": {
+      "bytes": 129129,
+      "sha256": "ba4328a58a45229986135d0dcc829f9c5430c249e5e1ac05975a7f358e163942"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own06_synthetic_compatible_prior_version_upgrades_preserving_binding-2c0d8e7c.json": {
+      "bytes": 161827,
+      "sha256": "70e070b8b207c919f382efa4f67552f71b48c00ff4eb610ff6aed25ccb221d35"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own07_candidate_dashboard_output_preserves_installed_workflow-0a5558c8.json": {
+      "bytes": 200865,
+      "sha256": "e5558a6c1fdee2addb6459f5e68dd2afd8fb32d8446f37d637ae5f5028d04a95"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own07_candidate_qualification_output_preserves_retired_skill-a4f93fbf.json": {
+      "bytes": 180386,
+      "sha256": "f9c5c7673dbaa98a6a5840990530126c945c353991286e817545940c310f827e"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own07_unsupported_old_lock_refuses_before_writes-f6e346cd.json": {
+      "bytes": 139585,
+      "sha256": "fdda0f036c3c3521bbb5414578ba63c880661a6e86d2b3986deec387fcaf74e3"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own08_current_lock_evaluator_evidence_matches_schema4_identity-bffd1c78.json": {
+      "bytes": 129934,
+      "sha256": "0dedcab8917eb6920f68ced23b0dc7ee8907b0047bdce67fb09d8d39d1b57371"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own08_reintroduced_copy_and_deleted_or_tampered_binding_fail_integrity-7af94e78.json": {
+      "bytes": 385116,
+      "sha256": "4426012a8f38befd32b9db1d13248067f60e4b657971152ffacb4bc68135c386"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own09_exception_at_each_write_and_durable_boundary_rolls_back-1032491a.json": {
+      "bytes": 9458938,
+      "sha256": "54924a5ff50bc665dfc344557dd87ed8ea86bfb459a4541d8a4a690a159a4461"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own10_byte_identical_owner_replacement_is_not_recovery_authority-671e32d1.json": {
+      "bytes": 391777,
+      "sha256": "6715c0650b215b084f05d7c29e3b60e2acd0d13e6586050ce55e2c276939a919"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own10_durable_commit_and_partial_cleanup_finalize_applied_state-d5cbefc1.json": {
+      "bytes": 1309490,
+      "sha256": "9c4923118d45ab73d238f63db743b9a094643e5c76eb80b6a4f97bd14483894e"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own10_intervening_owner_edits_and_new_files_are_preserved-ab271647.json": {
+      "bytes": 1151241,
+      "sha256": "ddcb8c5c923aa5ef016b3a1381ffff9a3bf449f8e582d51b34f5ee88abe83f15"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own10_killed_process_recovers_each_durable_boundary-01a339a9.json": {
+      "bytes": 23797591,
+      "sha256": "cf568cf2a26e3698fb70cb0407b165817e8627509398ae1dcfbb813d3121310f"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own10_recovery_write_failure_retains_diagnostics_and_can_retry-33f7b460.json": {
+      "bytes": 872345,
+      "sha256": "b98bfc64dc2596dac9a9372cb69b2820eb55d69f9d1aa3c197be85f453cbfb05"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own10_rehashed_journal_cannot_delete_preexisting_owner_empty_directory-f9d07121.json": {
+      "bytes": 485047,
+      "sha256": "787363094b3def513f37d795dfb4bfe20d8341e6822ec5ba8b9b6dd390d84d62"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own10_tampered_truncated_and_escaping_recovery_never_write-3d7759b2.json": {
+      "bytes": 732426,
+      "sha256": "5513440e63c8966a1b041e78a7609e4d78113e543cd7ab0dd02ca5e8bf2401ba"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own11_restore_exact_distribution_and_refuse_owner_conflicts-0cb4733c.json": {
+      "bytes": 285083,
+      "sha256": "e4635f8178870ed49220fd3c149f016b649e30a0b0d834161e0b51bdb35ea244"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own12_clone_without_plugin_is_integral_and_availability_unobserved-7feef327.json": {
+      "bytes": 204375,
+      "sha256": "33f9ac0736d36dce8aa710d6d642074c402d0300e0acd500df54a010a527a06a"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own13_independent_processes_refuse_contention_and_stale_plan-a6020337.json": {
+      "bytes": 86374,
+      "sha256": "dceaf3b36e279690240fa259e9f5261078406901075c9d21d9fe24f45d8647cf"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own14_independent_expected_identity_mismatches_refuse-5460a61d.json": {
+      "bytes": 193633,
+      "sha256": "7a2fdce413894f49fcf301e638eaff507d1762483cff5221f6ea5067a27e651f"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own14_missing_payload_core_and_evaluator_identity_refuse-1573d2c5.json": {
+      "bytes": 237874,
+      "sha256": "35857a0ea13c5ef78a7c73282d267a0ec0cb8b5050f40ed00d647e319a69d20b"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/cases/test_own14_rehashed_modified_retained_contract_or_helper_remains_incompatible-c7cfc3b0.json": {
+      "bytes": 103833,
+      "sha256": "96208ba8329e2170138d01e467d575f8245031f38e546e9661d953e0621bd12a"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/runtime.json": {
+      "bytes": 1657,
+      "sha256": "39dc74fe593f59bc7c8fce4ce7673fc7f7a9d4e1a3c7e22cb9507e8a8d3623f4"
+    },
+    "artifacts/skill-ownership-Windows/3.13/package/test-output.log": {
+      "bytes": 9194,
+      "sha256": "9ff5b293979b5bff3789a3760c2bcdf7c4cd9bb8d574140500595b2a690f3ba0"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own01_cli_plan_apply_stale_refusal_and_restore_json-0710a087.json": {
+      "bytes": 224206,
+      "sha256": "458fc47d0e777e041cbb9920ca8d8bf4d6bab9ca8fc0a61cf597ba6aed87774f"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own01_exact_catalog_and_each_selected_host-402f2470.json": {
+      "bytes": 665299,
+      "sha256": "0a6d1ae2e267478abb4c09433a9fd9277e9ef632e9157f7f5bad43dedf64d1b1"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own02_preserves_owner_content_and_directories-e96f3835.json": {
+      "bytes": 132238,
+      "sha256": "79221ae4cfd8de574a6b4b645d00f92f771a3cb91e43fc42e48e6269e56c3d1b"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own03_actual_aggregate_payload_limit-981bfd8b.json": {
+      "bytes": 63251,
+      "sha256": "52ac4cdba064549c03c1607815a583b01cd3a310533d5ffd14410a7633c56023"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own03_actual_external_file_size_limit-27cb2861.json": {
+      "bytes": 58896,
+      "sha256": "9bc24d46185ebb0e6110b4996b803b1d78c3f9b3da26c088a655caf2ac8a52b2"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own03_assembly_unknown_schema_and_duplicate_keys_refuse-f3086e15.json": {
+      "bytes": 103656,
+      "sha256": "9843616d399f391c008218befa707296a1e070d87a2d3679037bac46e18151ac"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own03_closed_binding_duplicate_keys_and_control_limit-1d6e2120.json": {
+      "bytes": 193535,
+      "sha256": "43904353791dd8b32848b57266e293e309d84f5e32db051e8f0c5f393aaefa11"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own03_explicit_hosts_roots_and_closed_expected_fields-b4415fd2.json": {
+      "bytes": 238421,
+      "sha256": "1c72b1ff60d722df8f48ed13143e86bec7cbfaa36053e5a2bda6b3fdf52cba1c"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own03_external_hard_link_and_unlisted_file_refuse-1b5eb319.json": {
+      "bytes": 104517,
+      "sha256": "51826df0525acf49727380614620b03fd626b4783bd4897370cc7435edd63c70"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own03_hard_link_refusal-0fe1b0ab.json": {
+      "bytes": 285533,
+      "sha256": "b0954a8bb0ae599f5f445d954725528fd54becf1451da1982f94f7c6fe6ee88e"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own03_inventory_count_and_declared_size_limits-e842326a.json": {
+      "bytes": 103684,
+      "sha256": "f8db627c9e45ea245d7569d63b187b539705a18f8fabe04cf464838f55e84c7f"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own03_modified_missing_and_unowned_catalog_refuse-b8c7299f.json": {
+      "bytes": 144915,
+      "sha256": "38dd087d7dcc8abee9ecfefa262fc9d8ea6842a8f5510b1455678877b73981d3"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own03_repository_case_spelling_collision_refuses-828f260d.json": {
+      "bytes": 58795,
+      "sha256": "6fe51caf0066dca7fc173266766afa7aa8684c144c4e295054584bdcd3dbfe17"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own03_symbolic_link_refusal-071c68c7.json": {
+      "bytes": 290431,
+      "sha256": "0100ac94e70b6986a0c74f7d42953de1f38742bb53b6b98103d534f8e6fa41e6"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own03_unsafe_inventory_paths_and_case_collisions-f094792a.json": {
+      "bytes": 328189,
+      "sha256": "1fdd869412e3abb354a7d216e3c007f0bea1a3b6ce4db645989dfe1a7652a193"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own03_windows_reparse_junction_refusal-45a355f9.json": {
+      "bytes": 150977,
+      "sha256": "b8a602dfef42d5422441b4945bd5a3e3dfbc61de1910e54318cd7371e9643888"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own03_wrong_typed_assembly_values_are_bounded_refusals-71c62e9c.json": {
+      "bytes": 193488,
+      "sha256": "7a45b54496a5a45949208d139516c011afb69da0ce0716e8f5caffe5796bffe1"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own04_stale_equal_size_file_lock_binding_and_inventory-25e6ed66.json": {
+      "bytes": 744519,
+      "sha256": "49027d77eaac9a0cfef248bbe92a3ad51a65f579b4c78b759b4ccd70759f51dc"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own05_direct_installer_junction_alias_cannot_recreate_retired_core-0ee7374d.json": {
+      "bytes": 141005,
+      "sha256": "23746599912ca35aab9fe7652048103ae32c1cb51cc6c5e62fa16bb35f0c47e6"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own05_handcrafted_direct_installer_path_aliases_cannot_recreate_retired_core-1a3f7908.json": {
+      "bytes": 221546,
+      "sha256": "35cb1584d52d73da38ead8d7609282a13b96dd77bbff205233a3fcb386132f8d"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own05_replay_doctor_and_direct_installer_preserve_binding-de0bf937.json": {
+      "bytes": 370345,
+      "sha256": "07cbf0a1f735daf8239edb01954f1c9504849d26dc5f1fa02bf8f4e32d25154d"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own06_invalid_ownership_format_upgrade_is_atomic-58b94003.json": {
+      "bytes": 129093,
+      "sha256": "43b15fd79f831d26a3ceabc65d482e1c8de57ad75d54167b31c322a2eefec592"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own06_synthetic_compatible_prior_version_upgrades_preserving_binding-18180ec5.json": {
+      "bytes": 161791,
+      "sha256": "b6bb3d08ca7643b3e0c3cd06b2783b925cf6a5691a9deb67e7e04844d975b9d6"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own07_candidate_dashboard_output_preserves_installed_workflow-904963a6.json": {
+      "bytes": 200502,
+      "sha256": "f4b1663b0985a3c9b029a4bef3e06040bd1f43fa23a063b27c1d11c946f5f0bb"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own07_candidate_qualification_output_preserves_retired_skill-15f07111.json": {
+      "bytes": 180132,
+      "sha256": "bc6125ccdaed4748b9bc698ac8bf5bbd02e85da2044b68f14cdf2e3efed20016"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own07_unsupported_old_lock_refuses_before_writes-fe42270d.json": {
+      "bytes": 139533,
+      "sha256": "b08cc71078a07c1dbbf052984e19a6c7181710c304ce58adbc905d18a04bf174"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own08_current_lock_evaluator_evidence_matches_schema4_identity-d43c8dd3.json": {
+      "bytes": 129898,
+      "sha256": "4b1cafdc4aa994529110648df5ed7d4698633ce409197997101079179489cee7"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own08_reintroduced_copy_and_deleted_or_tampered_binding_fail_integrity-30b8f524.json": {
+      "bytes": 384984,
+      "sha256": "980724aee57f2f02f2b50aebfe583a0a42d8f960f8a15f3f2b61bdc8e5273681"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own09_exception_at_each_write_and_durable_boundary_rolls_back-53d079a6.json": {
+      "bytes": 9456182,
+      "sha256": "ce77c186edf935886deecca17010af379fe4a1b935de66791c39143b4f956d00"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own10_byte_identical_owner_replacement_is_not_recovery_authority-0b65cb96.json": {
+      "bytes": 391785,
+      "sha256": "60f7582a14ffaa5e1f6725e690ba8bc94f8be7fb91127ec5d5c6004d74b7f7ec"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own10_durable_commit_and_partial_cleanup_finalize_applied_state-9a795910.json": {
+      "bytes": 1309542,
+      "sha256": "2964209526305557c2c092baaa497c52f79d652be1fd82588acc7fd607f6b89d"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own10_intervening_owner_edits_and_new_files_are_preserved-0c7ecd95.json": {
+      "bytes": 1151225,
+      "sha256": "9cdf5747866ff822dc838df3c5b439517d4a2b49fbc48c4f5e534363f046eb6f"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own10_killed_process_recovers_each_durable_boundary-f5f99643.json": {
+      "bytes": 23797695,
+      "sha256": "eafa2dd6824249492f6a8f4fe405f6b08ae8937f3853054c9b6c8b17d5224fb1"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own10_recovery_write_failure_retains_diagnostics_and_can_retry-fd56b075.json": {
+      "bytes": 872285,
+      "sha256": "8c7092f57dbd366185b1029809991922e29d86ae0e4bd2e50070f799e1e274d3"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own10_rehashed_journal_cannot_delete_preexisting_owner_empty_directory-f45693c6.json": {
+      "bytes": 484995,
+      "sha256": "7efd5078a28c194dcfd92bcb6327666ff30d4f81c2b2733f2205308402733a97"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own10_tampered_truncated_and_escaping_recovery_never_write-8dd707df.json": {
+      "bytes": 732294,
+      "sha256": "730f887249f49af43d0c70122e94089b850c767c2679ba524dd5752e155c8dfe"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own11_restore_exact_distribution_and_refuse_owner_conflicts-e6e521f4.json": {
+      "bytes": 284999,
+      "sha256": "3b9deb7d8a99eea1b167fe57b499242ee7daa210f50526e67de8d0b515297347"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own12_clone_without_plugin_is_integral_and_availability_unobserved-0f34c92d.json": {
+      "bytes": 204323,
+      "sha256": "ef7d11e242afcbdce360a2111e2b8f60cc5f22391540446f88bc860c3224f34b"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own13_independent_processes_refuse_contention_and_stale_plan-41445754.json": {
+      "bytes": 86450,
+      "sha256": "63f2b261eb1a228489db68587e4d665cc294f4efba9f2bc3e9cbe3e5e4e9be5b"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own14_independent_expected_identity_mismatches_refuse-257fdcbb.json": {
+      "bytes": 193565,
+      "sha256": "7b3c56f3a460d6786b359ac9069979b721f386e37e8b888a50a4d0dc88e2e8d9"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own14_missing_payload_core_and_evaluator_identity_refuse-1f1ec367.json": {
+      "bytes": 237798,
+      "sha256": "ff87595691897a197ab8e420348480a989b8d5a0a8fe1bc49dfeb6e5b05fd86f"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/cases/test_own14_rehashed_modified_retained_contract_or_helper_remains_incompatible-601c8a86.json": {
+      "bytes": 103797,
+      "sha256": "05c83629ebc2d5940bca1319afd89bfe7fc51999833897ab0d376bcf59f04563"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/runtime.json": {
+      "bytes": 1611,
+      "sha256": "748ed09ea709d6b7c899917d9b652e5cff3724ad12090086adb6b23e0a4e051f"
+    },
+    "artifacts/skill-ownership-Windows/3.13/source/test-output.log": {
+      "bytes": 9194,
+      "sha256": "7ca512300921708f40730e6fb0c0602baa411fe0ef9048a53daff349b08b4391"
+    },
+    "artifacts/skill-ownership-Windows/run-acceptance.py": {
+      "bytes": 4007,
+      "sha256": "631bf2132acbfe91d1c2182dd755e44e501c33ca05bef323c0b10bcac2e543d0"
+    },
+    "artifacts/upgrade-rehearsal-Linux/rehearsal-result-1/upgrade-rehearsal-result.json": {
+      "bytes": 3763,
+      "sha256": "53f4c1a43310537156e0b22dd2562339956d38b88bf48f3a697b51c702ef831b"
+    },
+    "artifacts/upgrade-rehearsal-Linux/rehearsal-result-1/upgrade-rehearsal-timing.json": {
+      "bytes": 4959,
+      "sha256": "fd3989e39186cbfd222acbc04728e70fdd3b55771601d4105c40baddde3758aa"
+    },
+    "artifacts/upgrade-rehearsal-Linux/rehearsal-result-2/upgrade-rehearsal-result.json": {
+      "bytes": 3763,
+      "sha256": "53f4c1a43310537156e0b22dd2562339956d38b88bf48f3a697b51c702ef831b"
+    },
+    "artifacts/upgrade-rehearsal-Linux/rehearsal-result-2/upgrade-rehearsal-timing.json": {
+      "bytes": 4954,
+      "sha256": "deec28128f1b53d368ac716258b01c30f2f4b164254c9cc57a5ea1fcfcf5f964"
+    },
+    "artifacts/upgrade-rehearsal-Linux/upgrade-rehearsal-runtime.json": {
+      "bytes": 616,
+      "sha256": "5c4d96d95ca5c9e23b9dc898bd887d9f9e28db5a8760e667e929ad874be3dd22"
+    },
+    "artifacts/upgrade-rehearsal-Windows/rehearsal-result-1/upgrade-rehearsal-result.json": {
+      "bytes": 3769,
+      "sha256": "bf0aaf573f809bd9d0efcbe7805b04e44480d24dedcdcf180bc5fc00d7883b04"
+    },
+    "artifacts/upgrade-rehearsal-Windows/rehearsal-result-1/upgrade-rehearsal-timing.json": {
+      "bytes": 4983,
+      "sha256": "1446931c39aeb1f21a95694fe2f718a785624be1387df95b8e9b2f9cfe44c2f9"
+    },
+    "artifacts/upgrade-rehearsal-Windows/rehearsal-result-2/upgrade-rehearsal-result.json": {
+      "bytes": 3769,
+      "sha256": "bf0aaf573f809bd9d0efcbe7805b04e44480d24dedcdcf180bc5fc00d7883b04"
+    },
+    "artifacts/upgrade-rehearsal-Windows/rehearsal-result-2/upgrade-rehearsal-timing.json": {
+      "bytes": 4982,
+      "sha256": "1e267c6249a0ad9dbce805acc47ef3cd3535206228fb5fafb248fd7449fac4ff"
+    },
+    "artifacts/upgrade-rehearsal-Windows/upgrade-rehearsal-runtime.json": {
+      "bytes": 856,
+      "sha256": "218396e708dbe100153a4590700cdfc6d6567daed1f62737292ee1b1c0cc61a4"
+    },
+    "github/artifact-selection.json": {
+      "bytes": 3990,
+      "sha256": "103c05f838699c6349eb3a03fcbca3dd3621387b57e0052d8cf38924f01c2388"
+    },
+    "github/artifacts.json": {
+      "bytes": 8390,
+      "sha256": "d93b97fd3cda3c891287b90a13de3ccfecabe9dd17ca2adcc0666779351677c1"
+    },
+    "github/attempt-1.json": {
+      "bytes": 11869,
+      "sha256": "2de20896dc7c800e53521a1a474ec06b9035c2933a8406324e6a676f3631fc8c"
+    },
+    "github/candidate-run.json": {
+      "bytes": 23786,
+      "sha256": "2c236d7971ef5a27a841ca7d291586b24e92f57126a75122a5a1c9ddf39a7fef"
+    },
+    "github/download.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "github/merged-checks.json": {
+      "bytes": 52178,
+      "sha256": "9420588aae389e6f6aee24dff39e8d79d2a71c764b495e5899907456f455f5d8"
+    },
+    "github/pull-request.json": {
+      "bytes": 371,
+      "sha256": "4d4ff2491e02ad4b945c6d45520b28c929a85d920d943df61b058c3ccad8031e"
+    },
+    "github/run-api.json": {
+      "bytes": 11924,
+      "sha256": "e648a9f75bb5e904ab1d45a81fb9901bfbcd2001a65a34616edf25157ad0262d"
+    },
+    "github/workflow.log": {
+      "bytes": 803081,
+      "sha256": "ea5610c2809b22bbb54277c873f8cb276fa6012d97d82aa35c6bc39a9b09f513"
+    }
+  }
+}

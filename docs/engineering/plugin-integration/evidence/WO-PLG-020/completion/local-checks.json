@@ -1,0 +1,27 @@
+{
+  "source": "commands executed during completion preparation",
+  "candidate_commit": "9acdd08e6507d4433bc27f3888d2743d1eea13da",
+  "checks": [
+    {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-B",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "observed_result": "PASS (14 distribution-bearing records)"
+    },
+    {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-B",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "observed_result": "exit 0; includes skill-ownership"
+    }
+  ],
+  "full_source_and_ownership_results": "retained hosted CI, no redundant local full suite rerun"
+}

@@ -1,0 +1,19 @@
+{
+  "command": [
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "preflight",
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20",
+    "--work-order",
+    "WO-PLG-020",
+    "--phase",
+    "review",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\completion",
+  "exit": 0,
+  "seconds": 7.700604900019243
+}

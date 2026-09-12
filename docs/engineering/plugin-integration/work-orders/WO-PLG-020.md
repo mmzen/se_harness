@@ -2,7 +2,7 @@
 id = "WO-PLG-020"
 type = "work_order"
 title = "Implement explicit evaluator migration of retained skill ownership"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-12"
 updated = "2026-09-12"
@@ -93,6 +93,13 @@ to = "in_progress"
 decided_at = "2026-09-12T13:27:35Z"
 decided_by = "delegated-executor"
 reason = "Delegated DR-WO-START under [delegation] class 'execution': required check 'validate' success at 6559568e995fc6e28f64e6bc5a6d4a6dc5dcf7de (check-run 103560311357, source github-checks). Begin the approved bounded evaluator migration after PR #461 merged."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-12T21:55:36Z"
+decided_by = "engineering-owner"
+reason = "The operator instructed \"mark work order implemented and prepare verification record\". Complete only WO-PLG-020 after the retained passing acceptance for merged implementation 9acdd08e6507d4433bc27f3888d2743d1eea13da, Candidate Evidence run 34719970877, and released-evaluator integrity, graph, scope and handoff checks. The approved old-0.17 exclusion remains in force; candidate protections remain required. Canceled observations remain incomplete. No assurance, release, adoption or WO-PLG-009 decision is made."
 +++
 
 # Work Order: Implement explicit evaluator migration of retained skill ownership
@@ -217,3 +224,18 @@ The operator instructed "we don't care about 0.17, just ignore" after review of 
 The operator explicitly excluded old 0.17 from migration acceptance after reviewing its two report-output failures. Apply the corresponding SPEC-PLG-020, ARCH-PLG-003, ADR-PLG-003 and VER-PLG-020 scope amendments above the preserved historical definitions. Remove the nine old-reader migration cases from active acceptance while retaining the two candidate report-output cases and unsupported-lock refusal coverage.
 
 Removing the inherited eight-case census also resolves the published test-discovery mismatch without changing or weakening suite hygiene. Existing execution scope already includes the governing documents, ownership test module, fixtures, notes and evidence. No additional path or lifecycle change is required. Publish this continuation through PR #462 under the operator's existing publication authorization. WO-PLG-020 remains in progress until the revised candidate acceptance and completion gates pass; VREC-PLG-015 remains unprepared.
+
+
+## Recorded implementation completion
+
+The operator explicitly requested implementation completion and preparation of
+VREC-PLG-015. The released evaluator applied the engineering-owner decision after
+the exact transition preview and handoff gate passed. The final acceptance is
+retained in [the completion assessment](../evidence/WO-PLG-020/completion/assessment.md)
+and its raw CI archive, case index and transition receipts.
+
+The work order is implemented. Historical pending statements above describe
+earlier iterations. VREC preparation follows from a clean completion candidate;
+the assurance owner's verification, release/adoption and WO-PLG-009 integration
+remain separate decisions. The approved 0.17 exclusion and C10/C11 limitation
+are unchanged.

@@ -1,0 +1,408 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-PLG-020",
+    "artifacts": [
+      "WO-PLG-020"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-PLG-003",
+      "ARCH-PLG-003",
+      "CAP-DST-001",
+      "INT-DST-001",
+      "REQ-PLG-028",
+      "REQ-PLG-029",
+      "REQ-PLG-030",
+      "REQ-PLG-031",
+      "SPEC-PLG-020",
+      "VER-PLG-020"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      ".github/workflows/candidate-evidence.yml",
+      "docs/engineering/agentic-execution/requirements/REQ-AEX-009.md",
+      "docs/engineering/agentic-execution/specifications/SPEC-AEX-005.md",
+      "docs/engineering/ci-pipeline/requirements/REQ-CIP-009.md",
+      "docs/engineering/ci-pipeline/specifications/SPEC-CIP-003.md",
+      "docs/engineering/ci-pipeline/verification/VER-CIP-003.md",
+      "docs/engineering/execution-control-plane/requirements/REQ-ECP-027.md",
+      "docs/engineering/execution-control-plane/specifications/SPEC-ECP-016.md",
+      "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-003.md",
+      "docs/engineering/plugin-integration/architecture/ARCH-PLG-003.md",
+      "docs/engineering/plugin-integration/decisions/DEC-PLG-007.md",
+      "docs/engineering/plugin-integration/evidence/VREC-PLG-015-evaluator.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-028.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-029.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-030.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-031.md",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-020.md",
+      "docs/engineering/plugin-integration/verification-records/VREC-PLG-015.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-020.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-020.md",
+      "docs/engineering/portable-managed-integrity/specifications/SPEC-PMI-001.md",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-024.md",
+      "docs/engineering/repository-harness-upgrade/specifications/SPEC-HUP-012.md",
+      "docs/engineering/repository-harness-upgrade/verification/VER-HUP-012.md",
+      "docs/engineering/technical-communication/requirements/REQ-TCM-004.md",
+      "docs/engineering/technical-communication/specifications/SPEC-TCM-001.md",
+      "docs/notes/ci-pipeline.md",
+      "docs/notes/developing-se-harness.md",
+      "docs/notes/harnessctl-reference.md",
+      "docs/notes/plugin-ownership-migration-2026-09-12.md",
+      "pyproject.toml",
+      "se_harness/cli.py",
+      "se_harness/engine/dashboard_bundle.py",
+      "se_harness/engine/dashboard_snapshot.py",
+      "se_harness/engine/generate_harness_dashboard.py",
+      "se_harness/engine/validation_evidence.py",
+      "se_harness/installer.py",
+      "se_harness/integrity.py",
+      "se_harness/mutation_guard.py",
+      "se_harness/preflight.py",
+      "se_harness/release_qualification.py",
+      "se_harness/skill_ownership.py",
+      "se_harness/skill_ownership_contract.json",
+      "templates/repository/standard/docs/engineering/WORKFLOW.md",
+      "tests/fixtures/skill_ownership/",
+      "tests/test_ci_pipeline.py",
+      "tests/test_cli_shape.py",
+      "tests/test_harnessctl.py",
+      "tests/test_integration_package.py",
+      "tests/test_integrity_primitives.py",
+      "tests/test_mutation_guard.py",
+      "tests/test_report_output_safety.py",
+      "tests/test_skill_ownership.py",
+      "tests/test_workflow_documentation_contract.py"
+    ],
+    "changed_paths": [
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/acceptance-summary.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/assessment.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/audit-ci-evidence.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/cancelled-attempt.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/cancelled-attempt.zip",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/case-index.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/doctor-command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/doctor.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/doctor.stderr.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/local-checks.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/merged-candidate-ci.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/merged-candidate-ci.zip",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/preflight-command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/preflight.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/preflight.stderr.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/validation-command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/validation.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/completion/validation.stderr.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/handoff.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/README.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-020/WO-PLG-020-handoff.md"
+    ],
+    "change_set_complete": true
+  },
+  "compliance": {
+    "checkpoint": "handoff",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT",
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4I-STATUS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-PLG-020"
+              }
+            ],
+            "message": "WO-PLG-020 status is in_progress."
+          },
+          {
+            "id": "QGP-G4I-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-PLG-020"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G4I-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G4I-SCOPE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-PLG-020:[execution_scope]"
+              }
+            ],
+            "message": "WO-PLG-020 declares 56 normalized scope path(s)."
+          },
+          {
+            "id": "QGP-G4I-COMPLETE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-PLG-020"
+              }
+            ],
+            "message": "The caller explicitly asserted that the declared change set is complete."
+          },
+          {
+            "id": "QGP-G4I-PATHS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-PLG-020"
+              }
+            ],
+            "message": "All 21 declared changed path(s) are within execution scope."
+          },
+          {
+            "id": "QGP-G4I-PREFLIGHT",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-PLG-020:review"
+              }
+            ],
+            "message": "Released-installation review preflight inputs are ready."
+          },
+          {
+            "id": "QGP-G4I-EVIDENCE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-PLG-020"
+              }
+            ],
+            "message": "Fresh retained evidence is bound at docs/engineering/plugin-integration/evidence/WO-PLG-020/WO-PLG-020-handoff.md."
+          },
+          {
+            "id": "QGP-G4I-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-PLG-020"
+              }
+            ],
+            "message": "No open decision blocks WO-PLG-020."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "c2dd2d9c75e4f96b485e478bccbbdd434ccc8254577ad7f49f14f5902dff11d3",
+    "change_set_source": "git"
+  },
+  "procedure": {
+    "id": "PROC-WO-IMPLEMENT",
+    "current_step": "STEP-WO-IMPLEMENT-DECIDE",
+    "steps": [
+      {
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "Evaluated implementation handoff for WO-PLG-020."
+        ],
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-PLG-020",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-START"
+          },
+          "QGP-G4I-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G4I-COMPLETE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-PLG-020",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ]
+          },
+          "QGP-G4I-PATHS": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-PLG-020",
+              "--phase",
+              "review"
+            ]
+          },
+          "QGP-G4I-EVIDENCE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-PLG-020",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "QGP-G4I-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-IMPLEMENT-DECIDE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "An explicit completion decision permits only WO-PLG-020 to become implemented."
+        ],
+        "non_effects": [
+          "Completion does not verify or release the work."
+        ],
+        "decision_right": "DR-WO-COMPLETE",
+        "role": "engineering-owner",
+        "artifact": "WO-PLG-020",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "response": "Mark WO-PLG-020 implemented."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-PLG-020",
+        "status": "in_progress"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-PLG-020",
+        "status": "in_progress"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 46
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "WO-PLG-020",
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-020/handoff.json",
+        "fields": [
+          "result_sha256"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated handoff compliance for WO-PLG-020."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-PLG-020 is in_progress."
+    ],
+    "decision_required": {
+      "decision_right": "DR-WO-COMPLETE",
+      "role": "delegated-executor",
+      "artifact": "WO-PLG-020",
+      "decision": "whether the authorized implementation and evidence are complete",
+      "outcomes": [
+        "implemented",
+        "continue",
+        "reject"
+      ],
+      "delegation": {
+        "class": "execution",
+        "gate": "not passing"
+      }
+    },
+    "next": {
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-DECIDE",
+      "action": "whether the authorized implementation and evidence are complete"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Wait for or repair the required check before the delegated DR-WO-COMPLETE: gate source error for 9acdd08: <urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>"
+    },
+    "alternatives": []
+  },
+  "result_sha256": "d3a9b997dcf99c483e70c5b6e942f41926fb1b802df9e2967bce5ebece52caaf"
+}

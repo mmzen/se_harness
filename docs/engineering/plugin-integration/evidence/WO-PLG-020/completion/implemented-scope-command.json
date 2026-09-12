@@ -1,0 +1,21 @@
+{
+  "command": [
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "check",
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20",
+    "--artifact",
+    "WO-PLG-020",
+    "--checkpoint",
+    "scope",
+    "--from-git",
+    "9acdd08e6507d4433bc27f3888d2743d1eea13da",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\completion",
+  "exit": 0,
+  "seconds": 12.323100400040857
+}

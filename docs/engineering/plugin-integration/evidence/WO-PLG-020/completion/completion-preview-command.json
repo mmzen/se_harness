@@ -1,0 +1,21 @@
+{
+  "command": [
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\evaluator-017\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "transition",
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20",
+    "--set",
+    "WO-PLG-020=implemented",
+    "--decision",
+    "WO-PLG-020=engineering-owner",
+    "--reason",
+    "WO-PLG-020=The operator instructed \"mark work order implemented and prepare verification record\". Complete only WO-PLG-020 after the retained passing acceptance for merged implementation 9acdd08e6507d4433bc27f3888d2743d1eea13da, Candidate Evidence run 34719970877, and released-evaluator integrity, graph, scope and handoff checks. The approved old-0.17 exclusion remains in force; candidate protections remain required. Canceled observations remain incomplete. No assurance, release, adoption or WO-PLG-009 decision is made.",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\completion",
+  "exit": 0,
+  "seconds": 17.662490699905902
+}

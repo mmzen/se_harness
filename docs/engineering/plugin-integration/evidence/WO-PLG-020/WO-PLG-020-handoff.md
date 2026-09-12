@@ -1,13 +1,22 @@
 ```toml
 artifact = "WO-PLG-020"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "c2dd2d9c75e4f96b485e478bccbbdd434ccc8254577ad7f49f14f5902dff11d3"
-rebound_at = "2026-09-12T21:19:28Z"
+formal_snapshot_sha256 = "062f39bff3ee4b907d08aa1efb2852bdaf79b06e9df6cd98adccc872df928675"
+rebound_at = "2026-09-12T21:57:47Z"
 ```
 
 # WO-PLG-020 handoff evidence
 
 Retained by `harnessctl evidence`; body content is owner-authored.
+
+## Final merged-candidate acceptance for completion
+
+The final [completion assessment](completion/assessment.md) and
+[audited CI results](completion/acceptance-summary.json) supersede the earlier
+pending-acceptance statements below. Required candidate acceptance now passes
+for merged commit `9acdd08e6507d4433bc27f3888d2743d1eea13da`.
+The old-0.17 scope exclusion remains unchanged. Historical failures and canceled
+attempts remain preserved; neither is counted as passing acceptance.
 
 ## Current acceptance after the operator's 0.17 exclusion
 
