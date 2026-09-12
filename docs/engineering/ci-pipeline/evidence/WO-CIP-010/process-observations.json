@@ -1,0 +1,100 @@
+[
+  {
+    "label": "unchanged full export",
+    "source_head": "fef18f3188febf95049c6ede077f68178cccb13f",
+    "git_version": "git version 2.52.0.windows.1",
+    "config_override": {},
+    "object_count": "count: 0\nsize: 0\nin-pack: 7523\npacks: 1\nsize-pack: 33821\nprune-packable: 0\ngarbage: 0\nsize-garbage: 0\n",
+    "child_commands": [
+      [
+        "git",
+        "maintenance",
+        "run",
+        "--auto",
+        "--quiet",
+        "--detach"
+      ],
+      [
+        "git",
+        "pack-refs",
+        "--all",
+        "--prune",
+        "--auto"
+      ],
+      [
+        "git",
+        "reflog",
+        "expire",
+        "--all"
+      ],
+      [
+        "git",
+        "gc",
+        "--auto",
+        "--quiet",
+        "--no-detach",
+        "--skip-foreground-tasks"
+      ],
+      [
+        "git",
+        "repack",
+        "-d",
+        "-l",
+        "-q",
+        "--no-write-bitmap-index"
+      ],
+      [
+        "git",
+        "pack-objects",
+        "--local",
+        "--quiet",
+        "--delta-base-offset",
+        "--honor-pack-keep",
+        ".git/objects/pack/.tmp-36156-pack",
+        "--keep-true-parents",
+        "--non-empty",
+        "--all",
+        "--reflog",
+        "--indexed-objects",
+        "--unpacked",
+        "--incremental"
+      ],
+      [
+        "git",
+        "prune",
+        "--expire",
+        "2.weeks.ago",
+        "--no-progress"
+      ],
+      [
+        "git",
+        "worktree",
+        "prune",
+        "--expire",
+        "3.months.ago"
+      ],
+      [
+        "git",
+        "rerere",
+        "gc"
+      ]
+    ],
+    "tree": "852bf1f760e4a2eedfa8d15ac19b9e46ab2b04fd",
+    "raw_trace": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\cleanup-investigation\\c269a-trace.jsonl",
+    "raw_trace_sha256": "3057f2d756ab4a1639cffd34c1100f3c77ad39a750535f25eeb50b825ef8955c"
+  },
+  {
+    "label": "full export with proposed disposable settings",
+    "source_head": "fef18f3188febf95049c6ede077f68178cccb13f",
+    "git_version": "git version 2.52.0.windows.1",
+    "config_override": {
+      "gc.auto": "0",
+      "maintenance.auto": "false"
+    },
+    "object_count": "count: 7523\nsize: 50277\nin-pack: 0\npacks: 0\nsize-pack: 0\nprune-packable: 0\ngarbage: 0\nsize-garbage: 0\n",
+    "child_commands": [],
+    "tree": "852bf1f760e4a2eedfa8d15ac19b9e46ab2b04fd",
+    "raw_trace": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\cleanup-investigation\\c269b-trace.jsonl",
+    "raw_trace_sha256": "e76e6ad335e99e5dc365f2a1b2e6787d5e3019111ad702eb8ce8622037ef5230"
+  }
+]

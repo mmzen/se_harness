@@ -3,7 +3,8 @@
 Every Git launch in the suite goes through `run_git`, `git` or
 `init_repository`: UTF-8 output, a fixture identity given by environment so no
 repository needs it configured, and commit signing turned off so a
-signing-enabled workstation runs the suite unchanged.
+signing-enabled workstation runs the suite unchanged. Automatic maintenance
+is disabled for each fixture command so it cannot race temporary cleanup.
 """
 
 from __future__ import annotations
@@ -33,7 +34,9 @@ def run_git(
 ) -> subprocess.CompletedProcess[bytes]:
     """Run `git -C root ...` with the fixture identity and signing off; the one launch site of the suite."""
     return subprocess.run(
-        ["git", "-C", str(root), "-c", "commit.gpgsign=false", *arguments],
+        # Fixture cleanup must not race Git maintenance spawned by a commit.
+        ["git", "-C", str(root), "-c", "commit.gpgsign=false",
+         "-c", "maintenance.auto=false", "-c", "gc.auto=0", *arguments],
         capture_output=True,
         check=check,
         env={**os.environ, **IDENTITY, **(env or {})},

@@ -1,0 +1,20 @@
+{
+  "schema": "se-harness-rehearsal-runtime-v1",
+  "run_id": "34688718324",
+  "run_attempt": "1",
+  "head_sha": "73cd1b4a4f62efa1c260863e60901fa9a321f79b",
+  "tested_sha": "9a9e844af85d2da69cf1ec6158991dfffc8d27b6",
+  "checkout_sha": "9a9e844af85d2da69cf1ec6158991dfffc8d27b6",
+  "runner_os": "Linux",
+  "image_os": "ubuntu24",
+  "image_version": "20260907.300.1",
+  "os_version": "Ubuntu 24.04.5 LTS",
+  "python_version": "Python 3.11.16",
+  "git_version": "git version 2.55.0",
+  "defender_status": {
+    "availability": "not_applicable"
+  },
+  "defender_preferences": {
+    "availability": "not_applicable"
+  }
+}

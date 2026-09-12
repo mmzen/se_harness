@@ -1,0 +1,187 @@
+{
+  "complete": true,
+  "diagnostic_errors": [],
+  "identity": {
+    "GITHUB_JOB": "upgrade-rehearsal",
+    "GITHUB_RUN_ATTEMPT": "1",
+    "GITHUB_RUN_ID": "34688718324",
+    "GITHUB_SHA": "9a9e844af85d2da69cf1ec6158991dfffc8d27b6",
+    "ImageOS": "ubuntu24",
+    "ImageVersion": "20260907.300.1",
+    "REHEARSAL_HEAD_SHA": "73cd1b4a4f62efa1c260863e60901fa9a321f79b",
+    "RUNNER_OS": "Linux"
+  },
+  "schema": "se-harness-upgrade-timing-v1",
+  "stages": [
+    {
+      "elapsed_seconds": 11.273579919,
+      "handover_result": "pass",
+      "id": "replay",
+      "parent": null,
+      "status": "finished"
+    },
+    {
+      "archive_bytes": 161013760,
+      "elapsed_seconds": 0.46587155500000677,
+      "id": "git-archive",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 2.3904344409999965,
+      "entries": 10235,
+      "files": 8521,
+      "id": "archive-extraction",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 0.00916565500000388,
+      "exit_code": 0,
+      "id": "git-init",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 0.0022261069999984784,
+      "exit_code": 0,
+      "id": "git-config-maintenance",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 0.001979644999991592,
+      "exit_code": 0,
+      "id": "git-config-gc",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 0.0019588360000000193,
+      "exit_code": 0,
+      "id": "git-config-autocrlf",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 0.0019477150000000165,
+      "exit_code": 0,
+      "id": "git-config-email",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 0.0019942320000012614,
+      "exit_code": 0,
+      "id": "git-config-name",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 0.0019921290000013414,
+      "exit_code": 0,
+      "id": "git-config-signing",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 2.938147905000008,
+      "exit_code": 0,
+      "id": "git-add",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 0.23041321099999834,
+      "exit_code": 0,
+      "id": "git-commit",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 0.0022315469999938387,
+      "exit_code": 0,
+      "id": "git-storage-paths",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 0.14787763400001097,
+      "id": "predecessor-version",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 0.14795647200000417,
+      "id": "successor-version",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 0.9469272520000089,
+      "exit_code": 0,
+      "id": "predecessor-doctor-before",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 0.1609376729999923,
+      "exit_code": 0,
+      "id": "successor-upgrade-plan",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 0.23159142800000154,
+      "exit_code": 0,
+      "id": "successor-upgrade-apply",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 0.949665593000006,
+      "exit_code": 0,
+      "id": "successor-doctor-after",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 1.265245164999996,
+      "exit_code": 1,
+      "id": "successor-validate-after",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 0.9429256479999992,
+      "exit_code": 1,
+      "id": "predecessor-doctor-after",
+      "parent": "replay",
+      "status": "finished"
+    },
+    {
+      "elapsed_seconds": 0.4088237419999956,
+      "id": "scratch-cleanup",
+      "parent": "replay",
+      "status": "finished"
+    }
+  ],
+  "storage": {
+    "git_directory": "/home/runner/work/_temp/upgrade-rehearsal-7l5a09dh/repository/.git",
+    "index_file": "/home/runner/work/_temp/upgrade-rehearsal-7l5a09dh/repository/.git/index",
+    "object_directory": "/home/runner/work/_temp/upgrade-rehearsal-7l5a09dh/repository/.git/objects",
+    "operational_repository": "/home/runner/work/se_harness/se_harness",
+    "python_default_temp": "/tmp",
+    "repository_directory": "/home/runner/work/_temp/upgrade-rehearsal-7l5a09dh/repository",
+    "scratch_directory": "/home/runner/work/_temp/upgrade-rehearsal-7l5a09dh",
+    "selection": "explicit",
+    "temp_environment": {
+      "RUNNER_TEMP": "/home/runner/work/_temp",
+      "TEMP": null,
+      "TMP": null,
+      "TMPDIR": null
+    },
+    "workspace_root": "/home/runner/work/_temp"
+  },
+  "unaccounted_seconds": 0.023266333999984568
+}
