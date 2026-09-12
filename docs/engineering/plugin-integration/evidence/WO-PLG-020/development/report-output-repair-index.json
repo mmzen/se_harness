@@ -1,0 +1,396 @@
+{
+  "classification": "local candidate repair evidence; not qualification",
+  "archive": "report-output-repair-observations.zip",
+  "archive_sha256": "bffcee4bd31e0afba18fb30f1ed2f537a60364d3ed47549b812cfb75cd429466",
+  "bytes": 645405,
+  "audit": {
+    "classification": "local candidate repair evidence; not qualification",
+    "package": {
+      "classification": "local non-promotable development wheel; not a qualified committed candidate",
+      "created_at": "2026-09-12T19:45:54.501800+00:00",
+      "candidate_commit": null,
+      "promotable": false,
+      "base_commit": "69e655686fdc460cb2da7bb882645e2471aecdc9",
+      "wheel": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20-control\\report-output-repair\\dist-final\\se_harness-0.18.0-py3-none-any.whl",
+      "wheel_sha256": "353d1f72a624426b89a048b673ef17959e1f8e12f77928f86b96b820cc8abf29",
+      "source_manifest_sha256": "913eac6edc257a643202a79ccdf437339061b979041af794e01bed91ebcb6e71"
+    },
+    "frozen_product_and_test_bytes_match": true,
+    "wheel_product_bytes_match_source": true,
+    "original_legacy_test_source_unchanged_since_build": true,
+    "four_approved_appendices_unchanged": true,
+    "ownership_suite_counts": {
+      "smoke": 17,
+      "full": 62
+    },
+    "source_regression": {
+      "run": 116,
+      "passed": 115,
+      "skipped": 1,
+      "failed": 0
+    },
+    "source_migration_cases": 2,
+    "validation_reuse_cases": 2,
+    "installed_cases": 12,
+    "report_snapshot_comparisons": [
+      {
+        "mode": "source",
+        "case": "tests.test_skill_ownership.SkillOwnershipAcceptanceTests.test_own07_candidate_dashboard_output_preserves_installed_workflow",
+        "report_commands": 3,
+        "snapshots_unchanged": true,
+        "evidence": "candidate-source-cases/test_own07_candidate_dashboard_output_preserves_installed_workflow-1281128c.json"
+      },
+      {
+        "mode": "source",
+        "case": "tests.test_skill_ownership.SkillOwnershipAcceptanceTests.test_own07_candidate_qualification_output_preserves_retired_skill",
+        "report_commands": 2,
+        "snapshots_unchanged": true,
+        "evidence": "candidate-source-cases/test_own07_candidate_qualification_output_preserves_retired_skill-82745072.json"
+      },
+      {
+        "mode": "installed",
+        "case": "installed_ownership_reports.SkillOwnershipAcceptanceTests.test_own07_candidate_dashboard_output_preserves_installed_workflow",
+        "report_commands": 3,
+        "snapshots_unchanged": true,
+        "evidence": "installed-cases/test_own07_candidate_dashboard_output_preserves_installed_workflow-3a536859.json"
+      },
+      {
+        "mode": "installed",
+        "case": "installed_ownership_reports.SkillOwnershipAcceptanceTests.test_own07_candidate_qualification_output_preserves_retired_skill",
+        "report_commands": 2,
+        "snapshots_unchanged": true,
+        "evidence": "installed-cases/test_own07_candidate_qualification_output_preserves_retired_skill-34a64099.json"
+      }
+    ],
+    "checks": [
+      {
+        "label": "candidate-help",
+        "argv": [
+          "C:\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "se_harness",
+          "--help"
+        ],
+        "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20",
+        "exit": 0,
+        "seconds": 0.5344201999250799
+      },
+      {
+        "label": "release-distributions",
+        "argv": [
+          "C:\\Python313\\python.exe",
+          "-B",
+          "scripts/validate_release_distributions.py",
+          "--root",
+          "."
+        ],
+        "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20",
+        "exit": 0,
+        "seconds": 16.07863110001199
+      },
+      {
+        "label": "validation-reuse",
+        "argv": [
+          "C:\\Python313\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "tests.test_one_validation.ValidationCountTests.test_each_governance_command_validates_at_most_once",
+          "tests.test_one_validation.ReportTravelsTests.test_the_snapshot_builder_and_qualification_take_the_report",
+          "-v"
+        ],
+        "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-12\\clo\\work\\wo20",
+        "exit": 0,
+        "seconds": 16.723640700103715
+      }
+    ],
+    "source_hashes": {
+      "se_harness/cli.py": {
+        "bytes": 60432,
+        "sha256": "c71080cd47eefb5f32f694785d67c74193040681238f44e2f0cd76b4e91333a9"
+      },
+      "se_harness/integrity.py": {
+        "bytes": 11852,
+        "sha256": "347ffa84bc9264bfa460e17ba8769e3e5da8b5284f447199237585f507a8d35a"
+      },
+      "se_harness/release_qualification.py": {
+        "bytes": 27617,
+        "sha256": "33a5cec663445e924ebb25b66cd80828a0037b710f200ae178cb163b3e9408c5"
+      },
+      "se_harness/engine/dashboard_bundle.py": {
+        "bytes": 33422,
+        "sha256": "be78fad2c7c0d23684c3f3478a6d4c5227644c5fba9f3fd9ab241b5bb0df1b68"
+      },
+      "se_harness/engine/dashboard_snapshot.py": {
+        "bytes": 91450,
+        "sha256": "9e08919ccaef5b13f68bad2e0b7f390cfcba013908e83551528617690fd98f4a"
+      },
+      "se_harness/engine/generate_harness_dashboard.py": {
+        "bytes": 9766,
+        "sha256": "075ab90285bd19c8a4cb952b05811d8c8bd8fa4372fb3339d3b7a8e492a9076c"
+      },
+      "tests/test_report_output_safety.py": {
+        "bytes": 11639,
+        "sha256": "f885682a1fd5bb583de1ed8232ecfccd07cfef0ea0bbd0f81b9468f9b7afc6b8"
+      },
+      "tests/test_skill_ownership.py": {
+        "bytes": 78727,
+        "sha256": "415d2083332dfd5041835599e91dba13ab87218945c41bf23716c53a8fc11cdb"
+      },
+      "tests/fixtures/skill_ownership/legacy_reader.py": {
+        "bytes": 18896,
+        "sha256": "b0b2701524883fff2618e4cbcfc18f7f50fb023b57344e1a75755809b1f6e74e"
+      }
+    },
+    "lifecycle": "in_progress",
+    "vrec_prepared": false,
+    "published": false
+  },
+  "members": {
+    "after-unit.stderr.log": {
+      "bytes": 1695,
+      "sha256": "1bdf8336c5423f471a95ba0149beb5f62ab583aaa8783a252ef0d17bbafef3fc"
+    },
+    "after-unit.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "authorization.json": {
+      "bytes": 1140,
+      "sha256": "a8031601291497c82c3149e3241989fbde8d3b398a6bb2128ec0e6d3559e7d37"
+    },
+    "before-valid-fixture.stderr.log": {
+      "bytes": 19675,
+      "sha256": "b5c835e692fe0aa482ee6849a193fb52ccbf42fe34f396593d13d9760d83c13c"
+    },
+    "before-valid-fixture.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "before.stderr.log": {
+      "bytes": 26374,
+      "sha256": "6e81fa6b08ab39a5598e9f6820959af2a390f6ee146c88e5d814c223ea912911"
+    },
+    "before.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "build-candidate-wheel.stderr.log": {
+      "bytes": 1002,
+      "sha256": "d384bdb240c003aaf14d3a7460514fd5f2b83b6fba482ce56213cd91ed072e85"
+    },
+    "build-candidate-wheel.stdout.log": {
+      "bytes": 28454,
+      "sha256": "a22c5f1aabd65bd9346524310012610bb5a7e63da3ff9f7f0bd877162c1129e9"
+    },
+    "build_candidate.py": {
+      "bytes": 3558,
+      "sha256": "056b6905b18a96de63dec890676068a9049b068b64892b2edbbb696dbc692913"
+    },
+    "candidate-help.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidate-help.stdout.log": {
+      "bytes": 3342,
+      "sha256": "7f172cf19c42f4a72ca85dedf9857cf5d4545b142ce889b5fbdb7132785ae9c3"
+    },
+    "candidate-package.json": {
+      "bytes": 612,
+      "sha256": "ca55b38baacc6b1e40f9a1ad3b442584d48729b98b95fb29bef4a1e16858462e"
+    },
+    "candidate-repair.diff": {
+      "bytes": 15661,
+      "sha256": "afd61bd14b8bc4719890dd58815a154bc24b9d4b2a68f6b0399dc14805bb889d"
+    },
+    "candidate-source-cases/test_own07_candidate_dashboard_output_preserves_installed_workflow-1281128c.json": {
+      "bytes": 200452,
+      "sha256": "bbfd83fbb43dc5ab2c37c20f98165352af7f9f78b73b111931f9a898f0ca758e"
+    },
+    "candidate-source-cases/test_own07_candidate_qualification_output_preserves_retired_skill-82745072.json": {
+      "bytes": 180077,
+      "sha256": "52e72395ed604708e653d3a44f0393f20211dc6c9bad449c4ed306ecd6046bc8"
+    },
+    "candidate-source.json": {
+      "bytes": 525,
+      "sha256": "906aa047f7b8f96198fdf2706095817d3ea38661c3fd912fec961c36237fc82d"
+    },
+    "candidate-source.stderr.log": {
+      "bytes": 504,
+      "sha256": "7bb97abef30c3f0858c43964d75ce62841453029705197a229c47cf9e7c73af3"
+    },
+    "candidate-source.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "create-candidate-env.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "create-candidate-env.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "dashboard-review.md": {
+      "bytes": 12385,
+      "sha256": "e27fc70d3119950c5ad03e4827ad3ca0d131af06598bf58a4da31844a1f76d2f"
+    },
+    "doctor.json": {
+      "bytes": 25718,
+      "sha256": "7b8f4d772e23f7a8de817bcbd01e3ccfd6213450c85e84f5cb4297758d9b644f"
+    },
+    "finish_checks.py": {
+      "bytes": 1347,
+      "sha256": "ec26bf3bbeaeb9b92174d8d77b9fa296f00f04f0d0e198bab1cdb19abe3a5502"
+    },
+    "focused.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "focused.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "install-candidate-wheel.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "install-candidate-wheel.stdout.log": {
+      "bytes": 226,
+      "sha256": "aac24ecb97b0a8d1945abe791362e071b343df2c6b88db7c90a9dbca7e15b54b"
+    },
+    "installed-cases/test_own07_candidate_dashboard_output_preserves_installed_workflow-3a536859.json": {
+      "bytes": 200918,
+      "sha256": "9574bb1820e50bb38a75970519e4b1a2fb15310c294d39d48f5c88189f27b9f6"
+    },
+    "installed-cases/test_own07_candidate_qualification_output_preserves_retired_skill-34a64099.json": {
+      "bytes": 180369,
+      "sha256": "24d99ba470b357d996e56b3a70cd72e8b374fb8b9025519c14366ace755b93a1"
+    },
+    "installed-identity.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "installed-identity.stdout.log": {
+      "bytes": 483,
+      "sha256": "e9cf01b0e159c3d12ed1443119e598ba16001368675f284f5d3c9a1c3ea4b137"
+    },
+    "installed-result.json": {
+      "bytes": 761,
+      "sha256": "019345140c313993789e7a3b8afbc70e62f768a6f637b21342fc47e60f9f9472"
+    },
+    "installed-tests.log": {
+      "bytes": 2425,
+      "sha256": "f10f952a0c5d7d80eec143d2e46076cd35d05a9fd12b0367f3b78a4e460f863e"
+    },
+    "observation-notes.md": {
+      "bytes": 2915,
+      "sha256": "30ca6ccbb0154ec3683b5b1ed2e66e77300791db14addbabeef37b273eaddbf3"
+    },
+    "package-commands.json": {
+      "bytes": 2968,
+      "sha256": "cc7727e3f68c61d8f314fd1f3850960dba5eeefed06404763d20b1dba193c6c6"
+    },
+    "preflight.json": {
+      "bytes": 1675,
+      "sha256": "5e3b2d2e78d66c3fc09521dcab9f0e7b7c5f3ecef3e91705aa2993d0b63c8a2e"
+    },
+    "release-distributions.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "release-distributions.stdout.log": {
+      "bytes": 84,
+      "sha256": "c27f0712b4a9b2c06498e19445ce3d7bc4970af7b4c8178b62c9b7f8c74b7987"
+    },
+    "repair-audit.json": {
+      "bytes": 5497,
+      "sha256": "f1810c8e85525e8f872125f3a1f3f0804ae75cdc3d32779fb90a92c26c1af224"
+    },
+    "report-regressions.json": {
+      "bytes": 489,
+      "sha256": "d831a42d2aff55fa4e152401d8c914bb8792f0a37f81817204e7a397d3a824b2"
+    },
+    "report-regressions.stderr.log": {
+      "bytes": 21483,
+      "sha256": "ec6d1bb99fb94fa81776ca045cc25eda12f3a61a5ad9e882ef27d03af95b3dbe"
+    },
+    "report-regressions.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "repository-checks.json": {
+      "bytes": 1140,
+      "sha256": "aa51731e9b1b9c1473be44b47041ba55f388d13dd73903fc291461446a2269d8"
+    },
+    "retain_repair.py": {
+      "bytes": 10546,
+      "sha256": "02ab2a6bd1a374d5b7c4dfeeca389457bf4f93c549c19a28e155df6ba210da21"
+    },
+    "run_checks.py": {
+      "bytes": 1179,
+      "sha256": "e29bf6987a00d211dd29983312366dd17d05c1f3b2dfdcdc78d46b54a82c0d9f"
+    },
+    "run_installed.py": {
+      "bytes": 2732,
+      "sha256": "35185e5f295f232b79b5e2c931c974d5f8f8144297e23a964a74fb0ee6993750"
+    },
+    "source-manifest.json": {
+      "bytes": 2136648,
+      "sha256": "913eac6edc257a643202a79ccdf437339061b979041af794e01bed91ebcb6e71"
+    },
+    "tested-source/docs/engineering/plugin-integration/work-orders/WO-PLG-020.md": {
+      "bytes": 14812,
+      "sha256": "433418055b00c7cd42cb471b8a3921623a116f4a61bfb95abf07a48b5abfcbd6"
+    },
+    "tested-source/se_harness/cli.py": {
+      "bytes": 60432,
+      "sha256": "c71080cd47eefb5f32f694785d67c74193040681238f44e2f0cd76b4e91333a9"
+    },
+    "tested-source/se_harness/engine/dashboard_bundle.py": {
+      "bytes": 33422,
+      "sha256": "be78fad2c7c0d23684c3f3478a6d4c5227644c5fba9f3fd9ab241b5bb0df1b68"
+    },
+    "tested-source/se_harness/engine/dashboard_snapshot.py": {
+      "bytes": 91450,
+      "sha256": "9e08919ccaef5b13f68bad2e0b7f390cfcba013908e83551528617690fd98f4a"
+    },
+    "tested-source/se_harness/engine/generate_harness_dashboard.py": {
+      "bytes": 9766,
+      "sha256": "075ab90285bd19c8a4cb952b05811d8c8bd8fa4372fb3339d3b7a8e492a9076c"
+    },
+    "tested-source/se_harness/integrity.py": {
+      "bytes": 11852,
+      "sha256": "347ffa84bc9264bfa460e17ba8769e3e5da8b5284f447199237585f507a8d35a"
+    },
+    "tested-source/se_harness/release_qualification.py": {
+      "bytes": 27617,
+      "sha256": "33a5cec663445e924ebb25b66cd80828a0037b710f200ae178cb163b3e9408c5"
+    },
+    "tested-source/tests/fixtures/skill_ownership/legacy_reader.py": {
+      "bytes": 18896,
+      "sha256": "b0b2701524883fff2618e4cbcfc18f7f50fb023b57344e1a75755809b1f6e74e"
+    },
+    "tested-source/tests/test_report_output_safety.py": {
+      "bytes": 11639,
+      "sha256": "f885682a1fd5bb583de1ed8232ecfccd07cfef0ea0bbd0f81b9468f9b7afc6b8"
+    },
+    "tested-source/tests/test_skill_ownership.py": {
+      "bytes": 78727,
+      "sha256": "415d2083332dfd5041835599e91dba13ab87218945c41bf23716c53a8fc11cdb"
+    },
+    "validation-reuse.stderr.log": {
+      "bytes": 440,
+      "sha256": "ff4889ce24af9aebfce40f21211efe6156025c477debb6b83bab5272852a868c"
+    },
+    "validation-reuse.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "validation.json": {
+      "bytes": 309613,
+      "sha256": "708b0420145c6002b0839e7283543cd772eae137da9388df1021c24055dcefde"
+    }
+  }
+}

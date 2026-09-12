@@ -221,7 +221,15 @@ class OwnershipReadBoundaryTests(unittest.TestCase):
             ownership._read(self.path)
 
 
-class SkillOwnershipAcceptanceTests(unittest.TestCase):
+_legacy_reader_spec = importlib.util.spec_from_file_location("ownership_legacy_reader", FIXTURES / "legacy_reader.py")
+_legacy_reader = importlib.util.module_from_spec(_legacy_reader_spec)
+_legacy_reader_spec.loader.exec_module(_legacy_reader)
+
+
+class SkillOwnershipAcceptanceTests(_legacy_reader.LegacyReaderCases, unittest.TestCase):
+    _legacy_source_root = ROOT
+    _legacy_snapshot = staticmethod(snapshot)
+
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory(prefix="ownership-acceptance-")
         self.base = Path(self.temporary.name)
@@ -854,6 +862,56 @@ class SkillOwnershipAcceptanceTests(unittest.TestCase):
                 (self.root / LOCK).write_bytes(canonical(value))
                 self.refuse_unchanged()
 
+    def _candidate_report_command(self, arguments):
+        before = snapshot(self.base)
+        if PACKAGE:
+            argv = [sys.executable, "-I", "-B", "-m", "se_harness", *map(str, arguments)]
+            process = subprocess.run(argv, cwd=self.base, capture_output=True, text=True, timeout=120)
+            code, stdout, stderr = process.returncode, process.stdout, process.stderr
+        else:
+            spec = importlib.util.spec_from_file_location("ownership_report_cli_support", ROOT / "tests/cli_support.py")
+            support = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(support)
+            argv = list(map(str, arguments))
+            code, stdout, stderr = support.invoke(*argv)
+        after = snapshot(self.base)
+        self.events.append({"operation": "candidate-report-output", "arguments": argv,
+                            "exit_status": code, "stdout": stdout, "stderr": stderr,
+                            "before": before, "after": after})
+        self.assertEqual(before, after)
+        return code, stdout, stderr
+
+    def test_own07_candidate_qualification_output_preserves_retired_skill(self) -> None:
+        (self.root / ".agents/skills/harness-orient/owner-note.txt").write_bytes(b"Keep this owner directory.\n")
+        self.migrate()
+        target = self.root / ".agents/skills/harness-orient/SKILL.md"
+        lock = self.root / LOCK
+        original = lock.read_bytes()
+        try:
+            for schema in (4, 99):
+                with self.subTest(schema=schema):
+                    if schema == 99:
+                        invalid = json.loads(original)
+                        invalid["schema"] = 99
+                        lock.write_bytes(canonical(invalid))
+                    self.assertFalse(target.exists())
+                    code, stdout, stderr = self._candidate_report_command(
+                        ["qualify", "released-root", self.root, "--output", target, "--json"])
+                    self.assertEqual(1, code, stderr)
+                    self.assertEqual("RQ002", json.loads(stdout)["checks"][0]["id"])
+                    self.assertFalse(target.exists())
+        finally:
+            lock.write_bytes(original)
+
+    def test_own07_candidate_dashboard_output_preserves_installed_workflow(self) -> None:
+        self.migrate()
+        for destination in (".github", ".github/workflows", ".agents/skills/harness-orient"):
+            with self.subTest(output=destination):
+                code, stdout, stderr = self._candidate_report_command(
+                    ["dashboard", self.root, "--output", destination, "--json"])
+                self.assertEqual(2, code, stdout + stderr)
+                self.assertIn("protected", stderr)
+
     def test_own07_released_017_cli_format_and_command_refusals(self) -> None:
         legacy = os.environ.get("SE_HARNESS_OWNERSHIP_LEGACY_PYTHON")
         if not legacy:
@@ -1332,11 +1390,21 @@ class SkillOwnershipAcceptanceTests(unittest.TestCase):
 
 
 SMOKE_TESTS = {
+    "test_own07_candidate_qualification_output_preserves_retired_skill",
+    "test_own07_candidate_dashboard_output_preserves_installed_workflow",
     "test_own01_cli_plan_apply_stale_refusal_and_restore_json",
     "test_own01_exact_catalog_and_each_selected_host",
     "test_own05_replay_doctor_and_direct_installer_preserve_binding",
     "test_own07_unsupported_old_lock_refuses_before_writes",
     "test_own07_released_017_cli_format_and_command_refusals",
+    "test_own07_released_017_protected_authoring_interfaces",
+    "test_own07_released_017_ordinary_transitions_and_decisions",
+    "test_own07_released_017_default_reports_preserve_protected_bytes",
+    "test_own07_released_017_delegated_start",
+    "test_own07_released_017_delegated_completion",
+    "test_own07_released_017_retained_check_output_preserves_protected_bytes",
+    "test_own07_released_017_qualification_output_cannot_recreate_retired_core",
+    "test_own07_released_017_dashboard_output_cannot_replace_installed_workflow",
     "test_own11_restore_exact_distribution_and_refuse_owner_conflicts",
     "test_own12_clone_without_plugin_is_integral_and_availability_unobserved",
 }

@@ -823,17 +823,18 @@ def _qualify(args: argparse.Namespace) -> int:
     try:
         if operation == "released-root":
             root = Path(args.target)
-            result = qualify_released_root(root)
             forbidden_roots = (root.expanduser().resolve(),)
+            result = qualify_released_root(root)
         elif operation == "complete-candidate":
             root = Path(args.target)
+            forbidden_roots = (root.expanduser().resolve(),)
             result = qualify_complete_candidate(
                 root,
                 candidate_commit=args.candidate_commit,
             )
-            forbidden_roots = (root.expanduser().resolve(),)
         elif operation == "candidate-package":
             checkout = Path(args.checkout_root) if args.checkout_root else None
+            forbidden_roots = (checkout.expanduser().resolve(),) if checkout is not None else ()
             result = qualify_candidate_package(
                 Path(args.candidate_wheel),
                 candidate_commit=args.candidate_commit,
@@ -841,9 +842,9 @@ def _qualify(args: argparse.Namespace) -> int:
                 verifier_wheel_sha256=args.verifier_wheel_sha256,
                 checkout_root=checkout,
             )
-            forbidden_roots = (checkout.expanduser().resolve(),) if checkout is not None else ()
         elif operation == "public-install":
             root = Path(args.target)
+            forbidden_roots = (root.expanduser().resolve(),)
             result = qualify_public_install(
                 root,
                 release_record_id=args.release_record,
@@ -851,7 +852,6 @@ def _qualify(args: argparse.Namespace) -> int:
                 public_wheel_sha256=args.public_wheel_sha256,
                 payload_sha256=args.payload_sha256,
             )
-            forbidden_roots = (root.expanduser().resolve(),)
         else:
             raise HarnessError("qualification operation is unsupported")
     except (HarnessError, OSError, ValueError) as exc:

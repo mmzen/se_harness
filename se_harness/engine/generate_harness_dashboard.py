@@ -144,6 +144,10 @@ def generate_bundle(
     repository_root = resolve_repository_root(repository_root)
     artifact_root = resolve_artifact_root(repository_root, artifact_root)
     output_root = resolve_output_root(repository_root, artifact_root, output)
+
+    def validate_output() -> None:
+        if resolve_output_root(repository_root, artifact_root, output) != output_root:
+            raise GenerationError("output root changed during generation")
     if report is None:
         report = validate_repository(repository_root, artifact_root)
     snapshot = build_snapshot(repository_root, artifact_root, report)
@@ -205,6 +209,7 @@ def generate_bundle(
             "index.html": dashboard_text,
             **resource_files,
         },
+        validate_output=validate_output,
     )
     return report, snapshot, summary
 

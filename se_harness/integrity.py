@@ -36,6 +36,19 @@ class IntegrityError(ValueError):
     """A bounded managed-integrity error."""
 
 
+def validate_output_path_spelling(path: Path) -> None:
+    """Reject Windows aliases that can defeat lexical containment checks."""
+    if os.name != "nt":
+        return
+    if str(path).startswith(("\\\\?\\", "\\\\.\\")):
+        raise IntegrityError("report paths must not use Windows device namespaces")
+    for part in path.parts:
+        if part == path.anchor or part in {".", ".."}:
+            continue
+        if ":" in part or part.endswith((".", " ")):
+            raise IntegrityError("report paths must not use Windows stream or trailing-dot/space aliases")
+
+
 def raw_sha256(value: bytes) -> str:
     """Return the exact-byte SHA-256 digest (hash-bound raw mode)."""
 

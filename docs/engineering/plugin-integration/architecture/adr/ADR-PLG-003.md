@@ -85,3 +85,12 @@ Names and paths follow existing portable assembly rules; selected roots must be 
 Remove only reviewed files, then prune proven-empty directories inside the repository; never recursively delete a skill directory.
 The plugin's additional operator-brief Codex metadata remains provider-owned; migration creates no corresponding repository file.
 Unexpected remnants of retired writing skills require separate assessment.
+
+
+## Approved legacy-reader reconciliation — 2026-09-12
+
+The operator approved this exact appendix as `technical-owner` with the instruction "i approve the 4 amendements". The approval was recorded at `2026-09-12T18:28:18Z` under WO-PLG-020. Its reviewed proposal and decision receipt are retained in that work order's governance evidence. The original definition text, approvals and historical observations remain preserved. This approval does not establish passing acceptance, completion or verification.
+
+### Approved applicability: consequence of the versioned-lock choice
+
+The selected schema-4 design and default schema-3 behavior remain in force. The decision drivers, option comparison and Consequences statements about old readers are qualified as follows: a versioned lock makes migration-unaware installation readers and applicable installed-state/formal-artifact mutation interfaces reject the unsupported format; it cannot make already distributed code consult a lock on paths that never did so. Released 0.17 evidence/report generation and artifact-graph inspection remain an observed exception to universal old-reader refusal. This exception authorizes no ownership mutation, lifecycle decision, evaluator adoption, release or native-host readiness claim. Acceptance MUST retain the contrary observations and apply the precise boundary in SPEC-PLG-020 and VER-PLG-020 rather than describe all old commands as refused.

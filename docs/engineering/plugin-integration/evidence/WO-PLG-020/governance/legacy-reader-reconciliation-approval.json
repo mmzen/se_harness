@@ -1,0 +1,57 @@
+{
+  "assurance_decision_on_implementation": false,
+  "effects": [
+    {
+      "after_sha256": "cf6a1ac47e78a03ef21257acdccb8d85ffab2fb582c0142da55c33efbbe09727",
+      "appendix_sha256": "f54456d53253d91846afa48812bc187a0ffeea4ef7dca1f657c0684704e37d45",
+      "artifact": "SPEC-PLG-020",
+      "before_sha256": "5b8b52b948ff9362637c335e315ad9edcc605bcec4b77b6b3303a4bed48db64a",
+      "effect": "append exact approved applicability text; front matter and historical prefix unchanged",
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-020.md",
+      "role": "technical-owner"
+    },
+    {
+      "after_sha256": "dcceb9715543ca4e097108979350db2ed9dfabc2183c7d88c2a4b96b9fd824c3",
+      "appendix_sha256": "c9555aa3995a43acab54113f55516f64e64377f7dbcd4d585c411f2de4efd282",
+      "artifact": "ARCH-PLG-003",
+      "before_sha256": "5cbff098065b9d7b4d8e755177d5ba9bc58906bd47352ff6b984125b41bef218",
+      "effect": "append exact approved applicability text; front matter and historical prefix unchanged",
+      "path": "docs/engineering/plugin-integration/architecture/ARCH-PLG-003.md",
+      "role": "technical-owner"
+    },
+    {
+      "after_sha256": "45ee80a3bbd65b2151e69f4352503fd2b2c640c0d98f69e0ba4f96e09a874a1c",
+      "appendix_sha256": "84c02686dc220a2a3fd04f0284178fa9e789e91ba24100c07755b896d0e0a8cd",
+      "artifact": "ADR-PLG-003",
+      "before_sha256": "d77451f1d7bf0a9b5e4e3cbbac1ac1f76a1b3f524ef3a6354d79c57af4cd2a77",
+      "effect": "append exact approved applicability text; front matter and historical prefix unchanged",
+      "path": "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-003.md",
+      "role": "technical-owner"
+    },
+    {
+      "after_sha256": "1092a6a72b87700e77785c95063b6c4e87ccc880c224ae3ed1ad7ec6fbf4a357",
+      "appendix_sha256": "188eb987c245a52da127d297cb06a4b2d80bd84545cc0fbd6cac92aeca3c543c",
+      "artifact": "VER-PLG-020",
+      "before_sha256": "5c7de0a6dbcb5e6ff2523c226def64cf805f79ea455b76200cea40c29227d6de",
+      "effect": "append exact approved applicability text; front matter and historical prefix unchanged",
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-020.md",
+      "role": "assurance-owner"
+    },
+    {
+      "after_sha256": "cab8f547cb1f260c05d3fa7c0fc5d4c4309ee8d0a4cadc695d84b3806cba72ea",
+      "artifact": "WO-PLG-020",
+      "before_sha256": "f08edc50b1fb95ff9ea14b1ae9d9b7ec797dedb36663d5ef42a56e3c6d3c5e7b",
+      "effect": "record the four approved definition amendments; lifecycle and scope unchanged",
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-020.md"
+    }
+  ],
+  "hash_semantics": "Raw local bytes at approval application; original prefixes and front matter preserved exactly.",
+  "lifecycle_after": "in_progress",
+  "lifecycle_before": "in_progress",
+  "proposal_path": "legacy-reader-reconciliation-proposal.md",
+  "proposal_sha256": "c7224fdd0dc6136753a1e2d42528a571ef2ffae185693e2f34a0b9ab9c7c2020",
+  "recorded_at_utc": "2026-09-12T18:28:18Z",
+  "release_decision": false,
+  "schema": "wo-plg-020-legacy-reader-approval-v1",
+  "user_instruction": "i approve the 4 amendements"
+}

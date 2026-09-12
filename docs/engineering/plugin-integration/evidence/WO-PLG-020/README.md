@@ -177,8 +177,101 @@ do not relax that contract.
 
 ## Completion boundary
 
+The four OWN07 applicability appendices were approved and applied on 2026-09-12.
+The exact proposal and receipt are retained under `governance/legacy-reader-*`.
+The earlier report-output counterexamples remain unchanged in
+`development/WO-PLG-020-legacy-reader-evidence.zip` and its index.
+
+The expanded census now has two required protected-output failures. Actual
+released 0.17 recreates a retired `SKILL.md` through qualification `--output`,
+despite exit 1 / RQ001, and deletes the installed workflow/template through
+`dashboard --output .github`. Both were reproduced on disposable valid fixtures
+made by optimized CI wheel SHA-256
+`50ad9892255aaf881f643c52e07e237022090393c82054b7983d9cbca58735fe`.
+Candidate doctor and released graph validation passed before each probe.
+
+The eight added OWN07 cases were run locally against source and the isolated
+installed candidate on Windows/Python 3.13: six passed and the same two failed
+in each mode, with no errors or skips. These are focused development observations,
+using the earlier exact CI wheel with subsequent test changes. They do not
+qualify the new branch revision or replace Linux, Python 3.11, or full acceptance.
+The eight cases were included in the existing smoke and full selections, which
+at that observation contained 15 and 60 tests respectively. No CI scheduling
+change was made through that amendment.
+
+See `development/legacy-reader-census.md` for command modes, shared direct and
+delegated paths, coverage inference and remaining observations. The new raw
+observations and test sources are retained in
+`development/legacy-reader-expanded-observations.zip`, with member hashes in
+`development/legacy-reader-expanded-index.json`. Fixture-design probes copied
+from an older candidate are explicitly separated from optimized-candidate tests.
+No failing case is waived, skipped, or reclassified as an expected success.
+
+The approved exception requires report output to preserve protected bytes, so
+these findings keep implementation incomplete. Modifying candidate 0.18 cannot
+repair an already distributed 0.17 executable. Resolving that boundary needs an
+explicit technical decision; the four amendments authorize no further exception.
+
 Complete WO-PLG-020 only after its required observations pass and the released
 evaluator confirms the delegated completion gate for the exact committed head.
 Prepare VREC-PLG-015 afterward under its separate preparation right. Verification,
 release, adoption, live WO-PLG-009 connection, and the accepted C10/C11 enforcement
 limitation remain outside this implementation result.
+
+## Candidate report-output repair — 2026-09-12
+
+The operator subsequently instructed "ok, fix both problems then". The candidate
+now preserves the inspected-repository output exclusion when qualification
+raises an inspection error. Dashboard generation refuses an output tree that
+overlaps installed templates, ownership controls, Git metadata or retained-skill
+discovery paths, including paths absent after migration. It checks the full
+trusted template inventory rather than the filtered schema-4 lock. The CLI and
+direct generation API share this check; normal report destinations remain usable.
+
+The repair also rejects Windows device/stream/trailing-dot/space spellings and
+unsafe existing output parents. Destination checks run before staging and again
+before promotion. The regression cases cover real Windows junctions and aliases
+introduced during projection or staging; they do not assert elimination of
+arbitrary hostile OS-level races.
+
+The six changed product modules and three retained test sources match the frozen
+build input. The non-promotable development wheel has SHA-256
+`353d1f72a624426b89a048b673ef17959e1f8e12f77928f86b96b820cc8abf29`.
+Its source has no immutable candidate commit. Windows/Python 3.13 observations:
+
+- Source report/dashboard/qualification/CLI regressions: 115 passed, one existing
+  symlink-privilege skip, no failures; 116 tests in 266.521 seconds.
+- Two real source migration/report cases passed. Two validation-reuse cases also
+  passed, preserving the single graph-validation behavior.
+- Isolated installed candidate: ten output tests plus two real migrated CLI
+  cases, all 12 passed with no skips, in 21.104 seconds.
+- Ten actual candidate-report observations across source and package retained
+  identical before/after snapshots, including external-provider bytes.
+
+The two candidate ownership cases are in smoke and full, now 17 and 62 tests.
+Original released-0.17 failure tests and the four approved appendices are
+unchanged. These local candidate repairs do not satisfy the incompatible-reader
+contract for unpatched 0.17 or establish complete acceptance on Linux/Python 3.11.
+
+See [repair index](development/report-output-repair-index.json) and
+[raw observations](development/report-output-repair-observations.zip). The ZIP
+contains 61 byte-verified members, SHA-256
+`bffcee4bd31e0afba18fb30f1ed2f537a60364d3ed47549b812cfb75cd429466`.
+It retains baseline failures, fixture errors, an interrupted run, successful
+replacement runs, source hashes, installed identity, review notes and scope
+authorization. The four approved applicability appendices remain byte-identical.
+The repair authorization and subsequent released-evaluator checks are retained
+under `governance/report-output-repair-*`.
+
+At the end of the local repair iteration, WO-PLG-020 remained `in_progress`,
+VREC-PLG-015 remained unprepared, and the changes were local and unpublished.
+Required complete candidate acceptance and disposition of the actual 0.17
+report-output failures remain outstanding.
+
+The operator subsequently instructed "push and create the PR first". Publish the
+approved amendments, retained observations and repairs through the existing
+implementation PR #462. This publication leaves the work order in progress and
+does not mark the required legacy failures as passing. The prior local records
+remain historical observations. The [publication transport manifest](governance/report-output-repair-byte-transport.json)
+maps tested working-copy bytes to staged Git blobs; evidence bytes are preserved
+exactly, and ordinary source/document conversion changes line endings only.

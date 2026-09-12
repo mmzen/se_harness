@@ -1,8 +1,8 @@
 ```toml
 artifact = "WO-PLG-020"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "9fafd34d95bb96416bd1cbc5ca9e9754dba5df0632c23393f46d1c5becb9ced1"
-rebound_at = "2026-09-12T14:57:25Z"
+formal_snapshot_sha256 = "9b27224dcfb8391618665bdc8f59e3c0be172df321803beba6cc7b49b0fe36ef"
+rebound_at = "2026-09-12T19:55:26Z"
 ```
 
 # WO-PLG-020 handoff evidence
@@ -43,7 +43,65 @@ Windows: Python 3.11 source/package smoke and Python 3.13 full ownership/fault
 coverage. Completion requires those observations and the live successful
 `validate` check for the exact candidate. VREC-PLG-015 remains unprepared.
 
-## Boundaries
+## Subsequent OWN07 approval and stop condition — 2026-09-12
+
+The technical-owner approved the exact SPEC-PLG-020, ARCH-PLG-003 and ADR-PLG-003
+appendices, and the assurance-owner approved the VER-PLG-020 appendix, with
+"i approve the 4 amendements". Their historical definition text and lifecycle
+events remain intact. The receipt and exact reviewed proposal are retained.
+
+The expanded real released-0.17 tests fail the newly approved protected-output
+criteria: qualification output can recreate a retired `SKILL.md`, and dashboard
+output directed to `.github` can remove the installed workflow and template.
+Complete raw snapshots and changed bytes are retained. Only disposable migrated
+fixtures were affected. The eight added Windows/Python 3.13 cases produce six
+passes and two failures in each source/package mode, with no errors or skips.
+Default reports and retained-check output are separately observed; their passing
+boundary observations do not cancel the protected-output failures.
+
+The earlier optimized selection passed CI run 34709421653 at merge candidate
+`a21c3db2151cdf6ed2358ff484d48ccb19493413`, identical in tree to optimization head
+`69e655686fdc460cb2da7bb882645e2471aecdc9`. That result precedes the expanded
+census and cannot establish satisfaction of the amended contract.
+
+Required-test failure is the stop condition. WO-PLG-020 remains `in_progress`;
+VREC-PLG-015 remains unprepared. The next substantive accountable step is
+technical-owner disposition of the released-reader protection gap. Candidate
+changes cannot alter an already distributed 0.17 executable, and no additional
+exception has been approved. Full revised candidate acceptance remains pending.
+
+## Subsequent candidate repair — 2026-09-12
+
+The operator authorized repair with "ok, fix both problems then". Qualification
+now retains repository output protection on inspection failure. Dashboard output
+now refuses protected installation/discovery trees, including absent retired
+skills and `.github`, and rejects unsafe Windows aliases and output parents.
+Generation rechecks the destination before staging and promotion.
+
+The local non-promotable wheel has SHA-256
+`353d1f72a624426b89a048b673ef17959e1f8e12f77928f86b96b820cc8abf29`.
+It matches the frozen product source but has no immutable candidate commit.
+Source regression completed with 115 passes and one existing Windows symlink
+privilege skip; two migration/report cases and two validation-reuse cases also
+passed. All 12 isolated installed-candidate tests passed without skips. Their
+before/after snapshots prove preservation for the original repaired scenarios.
+The archive and exact limits are linked in the evidence index.
+
+The repair leaves actual released 0.17 and its failing tests unchanged. It does
+not supply another compatibility exception, complete the required acceptance
+matrix, or qualify the candidate. The four approved appendices retain their
+exact bytes. Smoke/full ownership selections now contain 17/62 tests, including
+the two new candidate cases and the original required legacy failures.
+
+The local implementation iteration is complete; WO-PLG-020 remains `in_progress`
+and VREC-PLG-015 unprepared. Select `continue` at the completion decision while
+the released-reader gap and complete candidate acceptance remain unresolved.
+No commit, push, release, adoption or live migration occurred during that local
+repair iteration. The operator subsequently instructed "push and create the PR
+first", authorizing publication through existing implementation PR #462. Keep
+the work order in progress and the required legacy failures visible during review.
+
+## Continuing boundaries
 
 The root remains governed by released 0.17.0 and has not been migrated. No plugin
 installation, native-host activation, C10/C11 enforcement improvement, release,

@@ -1,0 +1,15 @@
+{
+  "archive": "WO-PLG-020-legacy-reader-evidence.zip",
+  "bytes": 2966612,
+  "excludes": [
+    "virtual environments",
+    "distribution bytes; exact wheel hash retained",
+    "preliminary fixture tree; original observations retained"
+  ],
+  "finding": "legacy-writer-probe/finding.json",
+  "finding_member": "finding.json",
+  "hashed_members": 248,
+  "member_manifest_sha256": "abac9e16beed1f0021f13664bad0ff3f060e5af171be5e8e304e36e1abd91b45",
+  "sha256": "59d0edc2a8e602416b7cdcc671cc673cf68fecdae25ff785a313b831884172f7",
+  "source_archive_name": "legacy-reader-raw-evidence.zip"
+}

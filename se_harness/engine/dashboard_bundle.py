@@ -11,7 +11,7 @@ import tempfile
 from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path, PurePosixPath
-from typing import Any
+from typing import Any, Callable
 
 from se_harness.engine.dashboard_snapshot import GenerationError, is_within, text_list, text_value
 
@@ -697,7 +697,14 @@ def verify_serialized_bundle(files: dict[str, bytes]) -> None:
         raise GenerationError("dashboard bootstrap differs from its manifest")
 
 
-def write_output_transactionally(output_root: Path, files: dict[str, str]) -> None:
+def write_output_transactionally(
+    output_root: Path,
+    files: dict[str, str],
+    *,
+    validate_output: Callable[[], None] | None = None,
+) -> None:
+    if validate_output is not None:
+        validate_output()
     output_parent = output_root.parent.resolve()
     output_parent.mkdir(parents=True, exist_ok=True)
     if output_root.exists() and output_root.is_symlink():
@@ -746,6 +753,8 @@ def write_output_transactionally(output_root: Path, files: dict[str, str]) -> No
                 }
             )
 
+        if validate_output is not None:
+            validate_output()
         if output_root.exists():
             backup = Path(tempfile.mkdtemp(prefix=f".{output_root.name}.previous-", dir=output_parent))
             backup.rmdir()

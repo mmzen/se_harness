@@ -16,6 +16,11 @@ decided_by = "engineering-owner"
 
 [execution_scope]
 paths = [
+  "se_harness/release_qualification.py",
+  "se_harness/engine/generate_harness_dashboard.py",
+  "se_harness/engine/dashboard_bundle.py",
+  "se_harness/engine/dashboard_snapshot.py",
+  "tests/test_report_output_safety.py",
   "se_harness/engine/validation_evidence.py",
   "templates/repository/standard/docs/engineering/WORKFLOW.md",
   "tests/test_harnessctl.py",
@@ -175,3 +180,31 @@ Do not claim release availability, WO-PLG-009 completion, native discovery, or a
 At `2026-09-12T14:49:44Z`, the operator approved supplement revision 2 as engineering-owner for its ten exact scope additions, requirements-steward for REQ-ECP-027 and REQ-CIP-009, technical-owner for SPEC-ECP-016 and SPEC-CIP-003, and assurance-owner for VER-CIP-003's applicability amendment. The recorded instruction was: "i approve supplement revision 2 to reconcile the CI/CLI contracts and ten required scope additions".
 
 The approved proposal has SHA-256 `6fa1ee1b63c28cb4a406834987911822659792194f100f45a856a89561814ff1` and is retained with the decision receipt under `docs/engineering/plugin-integration/evidence/WO-PLG-020/governance/`. The additional paths reconcile the Python 3.13 ownership acceptance, explicit command target and transaction outcomes, and corresponding CI/CLI documentation and tests. VER-PLG-020 remains unchanged. This approval records definitions and scope only; WO-PLG-020 remains in progress. Delegated completion and VREC preparation still require their live candidate gates; verification and release remain separate decisions.
+
+
+## Approved legacy-reader reconciliation — 2026-09-12
+
+The operator approved the four exact OWN07 appendices with "i approve the 4 amendements"; the approval was recorded at `2026-09-12T18:28:18Z`. The technical-owner decisions apply to SPEC-PLG-020, ARCH-PLG-003 and ADR-PLG-003, and the assurance-owner decision applies to VER-PLG-020. The reviewed proposal has SHA-256 `c7224fdd0dc6136753a1e2d42528a571ef2ffae185693e2f34a0b9ab9c7c2020`. Its exact bytes and the approval receipt are retained under this work order's governance evidence.
+
+The approved boundary permits only the separately observed evidence/report behavior while retaining required refusal of installation, lock and formal-artifact mutations by the incompatible evaluator. The expanded real-command census and the required source/package/platform acceptance must pass before completion or VREC preparation. No lifecycle state, execution-scope path, release authority or native-host claim changes through this approval.
+
+## Authorized report-output repair — 2026-09-12
+
+After reviewing the two reproduced output-path failures, the operator instructed
+"ok, fix both problems then". This authorizes repairing qualification output
+protection on failure and dashboard output overlap protection in the candidate.
+The necessary additional execution paths are
+`se_harness/engine/dashboard_snapshot.py`,
+`se_harness/release_qualification.py`,
+`se_harness/engine/generate_harness_dashboard.py`,
+`se_harness/engine/dashboard_bundle.py` and `tests/test_report_output_safety.py`;
+the CLI, ownership acceptance tests, notes and this evidence directory are
+already within scope. This records the concrete repair scope under the user's
+instruction; it is not another compatibility exception or an assurance decision.
+
+Keep normal report destinations usable, refuse protected destinations before
+writing and recheck before output promotion, and retain candidate-source and
+isolated-package regression evidence.
+Published 0.17 bytes and their contrary observations remain unchanged. This
+repair cannot establish that unpatched 0.17 now refuses those operations.
+WO-PLG-020 remains in progress and its existing completion conditions remain.
