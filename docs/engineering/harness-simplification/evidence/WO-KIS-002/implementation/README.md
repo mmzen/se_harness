@@ -38,3 +38,11 @@ The implementation retires CI-provider simulations and embedded-workflow-reader 
 The suite initially found a shared snapshot regression affecting definition/risk
 transitions and obsolete documentation expectations; both were fixed before this
 committed passing run. No tests were disabled to obtain the pass.
+
+## Ready verification record
+
+The released evaluator prepared VREC-KIS-002 against `7cae3a4cf098a5be73562507b558c03f1d100dd2`.
+The required `validate` check passed on that commit; see `ci-verification-candidate.json`.
+The full hosted suite passed before the completion metadata was added; see `ci-implementation.json`.
+Source, templates and tests are unchanged from the locally tested source commit.
+The record is ready for the assurance owner, not yet verified.

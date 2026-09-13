@@ -24,4 +24,4 @@ The intended order is sequential because several slices share code. Each work or
 This definition packet starts none of them. Current root governance remains released 0.17.0; the proposed local-delegation rule is future candidate behavior.
 Historical archive work assesses existing bundles and shrinks new evidence; it does not silently delete old bound evidence.
 
-[WO-KIS-002 implementation evidence](evidence/WO-KIS-002/implementation/README.md) records seven cuts and passing local source/package checks. Hosted CI passed. Verification preparation is next; assurance remains an owner decision.
+[WO-KIS-002 implementation evidence](evidence/WO-KIS-002/implementation/README.md) records seven cuts and passing local source/package checks. Hosted CI passed. [VREC-KIS-002](verification-records/VREC-KIS-002.md) is ready for the owner verification decision.

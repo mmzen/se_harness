@@ -51,4 +51,4 @@ Rows map the authorized work. WO-KIS-001 is implemented with [local and hosted e
 | KISS-44 | All applicable slices | KIS-KEEP-044 | Retained protection | Make the owner’s approval explicit |
 | KISS-45 | All applicable slices | KIS-KEEP-045 | Retained protection | Identify the checker and the candidate being tested |
 
-WO-KIS-002: all seven selected outcomes are implemented and pass local checks; see [evidence](evidence/WO-KIS-002/implementation/README.md). Hosted CI passed; assurance is pending.
+WO-KIS-002: all seven selected outcomes are implemented and pass local checks; see [evidence](evidence/WO-KIS-002/implementation/README.md). Hosted CI passed; [VREC-KIS-002](verification-records/VREC-KIS-002.md) is ready for owner verification.
