@@ -131,6 +131,7 @@ class ContextRoutingRetirementTests(unittest.TestCase):
     def test_router_stop_conditions_retain_the_baseline_without_repository_context(self) -> None:
         section = self.router_text().split("## Stop conditions", 1)[1]
         for condition in BASELINE_STOP_CONDITIONS:
+            condition = condition.replace("the formal graph is invalid", "the selected governing chain is invalid or artifact IDs are ambiguous")
             with self.subTest(condition=condition):
                 self.assertIn(condition, section)
         for withdrawn in ("REPOSITORY_CONTEXT", "repository context", "context is incomplete", "context is missing"):

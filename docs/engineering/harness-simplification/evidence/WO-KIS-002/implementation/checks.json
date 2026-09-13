@@ -1,0 +1,466 @@
+{
+  "work_order": "WO-KIS-002",
+  "commit": "6f946632626ddcbdb63222a16a295a2450aad9e5",
+  "source_tests": {
+    "run": 1173,
+    "skipped": 25,
+    "result": "pass",
+    "seconds": 127.095
+  },
+  "wheel_sha256": "3ec6f7458c4112dbd8f7931e16fee13a841c7a565cd964947ededc0ab40d29d0",
+  "changes": {
+    "guidance": {
+      "added": 117,
+      "removed": 148
+    },
+    "source": {
+      "added": 288,
+      "removed": 316
+    },
+    "tests": {
+      "added": 206,
+      "removed": 536
+    }
+  },
+  "line_counts": {
+    "se_harness/gate_source.py": {
+      "before": 352,
+      "after": 147
+    },
+    "templates/repository/standard/.github/workflows/engineering-harness.yml": {
+      "before": 197,
+      "after": 91
+    }
+  },
+  "commands": [
+    {
+      "name": "candidate-venv",
+      "argv": [
+        "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-m",
+        "venv",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed"
+      ],
+      "exit_code": 0,
+      "seconds": 8.812
+    },
+    {
+      "name": "candidate-wheel-build",
+      "argv": [
+        "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-m",
+        "pip",
+        "wheel",
+        "--no-deps",
+        "--no-build-isolation",
+        "--wheel-dir",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\non-promotable",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\source"
+      ],
+      "exit_code": 0,
+      "seconds": 5.616
+    },
+    {
+      "name": "candidate-wheel-install",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "pip",
+        "install",
+        "--no-index",
+        "--no-deps",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\non-promotable\\se_harness-0.18.0-py3-none-any.whl"
+      ],
+      "exit_code": 0,
+      "seconds": 2.816
+    },
+    {
+      "name": "governing-evidence",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "evidence",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+        "--artifact",
+        "WO-KIS-002",
+        "--checkpoint",
+        "handoff",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 3.607
+    },
+    {
+      "name": "installed-committed-capture",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "capture-verification",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\local-work-acceptance",
+        "--id",
+        "VREC-PRD-001",
+        "--work-order",
+        "WO-PRD-001",
+        "--verification",
+        "VER-001",
+        "--evidence",
+        "docs/engineering/product/evidence/WO-PRD-001/WO-PRD-001-handoff.md",
+        "--owner",
+        "delegated-executor",
+        "--candidate-commit",
+        "6d87357ed69b18f52251daf113a4665ca6f8f530",
+        "--json",
+        "--test-command",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "from pathlib import Path; assert Path('src/check.txt').read_text() == 'checked\\n'; assert not Path('local-note.txt').exists(); print('Committed input test passed')"
+      ],
+      "exit_code": 0,
+      "seconds": 1.072
+    },
+    {
+      "name": "installed-local-approve",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\local-work-acceptance",
+        "--set",
+        "WO-PRD-001=approved",
+        "--decision",
+        "WO-PRD-001=engineering-owner",
+        "--apply",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.423
+    },
+    {
+      "name": "installed-local-complete",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\local-work-acceptance",
+        "--set",
+        "WO-PRD-001=implemented",
+        "--decision",
+        "WO-PRD-001=delegated-executor",
+        "--apply",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.673
+    },
+    {
+      "name": "installed-local-evidence",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "evidence",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\local-work-acceptance",
+        "--artifact",
+        "WO-PRD-001",
+        "--checkpoint",
+        "handoff",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.337
+    },
+    {
+      "name": "installed-local-final-validate",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\local-work-acceptance",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.28
+    },
+    {
+      "name": "installed-local-handoff",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\local-work-acceptance",
+        "--artifact",
+        "WO-PRD-001",
+        "--checkpoint",
+        "handoff",
+        "--from-git",
+        "HEAD",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.578
+    },
+    {
+      "name": "installed-local-init",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\local-work-acceptance",
+        "--project-name",
+        "Local KISS acceptance",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.631
+    },
+    {
+      "name": "installed-local-start",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\local-work-acceptance",
+        "--set",
+        "WO-PRD-001=in_progress",
+        "--decision",
+        "WO-PRD-001=delegated-executor",
+        "--apply",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.539
+    },
+    {
+      "name": "package-doctor",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\acceptance-target",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.467
+    },
+    {
+      "name": "package-identity",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "identity",
+        "--role",
+        "candidate-package",
+        "--expected-version",
+        "0.18.0",
+        "--expected-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed",
+        "--checkout-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+        "--candidate-commit",
+        "6f946632626ddcbdb63222a16a295a2450aad9e5",
+        "--require-isolated-python",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.381
+    },
+    {
+      "name": "package-init",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\acceptance-target",
+        "--project-name",
+        "KISS acceptance",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.977
+    },
+    {
+      "name": "package-risk",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "raise-risk",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\acceptance-target",
+        "--domain",
+        "product",
+        "--title",
+        "Setup elsewhere",
+        "--description",
+        "Only one machine has been tried. Another may behave differently.",
+        "--action",
+        "Try setup on the next development machine.",
+        "--owner",
+        "engineering-owner",
+        "--id",
+        "RISK-PRD-001",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.511
+    },
+    {
+      "name": "package-selector-crlf",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "select-work-order",
+        "--event",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\crlf.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.361
+    },
+    {
+      "name": "package-selector-lf",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "select-work-order",
+        "--event",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\lf.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.357
+    },
+    {
+      "name": "package-validate",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis002-package-6f946632626d\\acceptance-target",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.389
+    }
+  ],
+  "ci": {
+    "head": "ccc8782e7b3cecff8865c1bd85cf1bc14ee36437",
+    "pull_request": "https://github.com/mmzen/se_harness/pull/468",
+    "checks": [
+      {
+        "name": "Analyze (actions)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34775200376/job/103771939013"
+      },
+      {
+        "name": "validate",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34775201360/job/103771940162"
+      },
+      {
+        "name": "Predecessor evaluator assessment",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34775201374/job/103771939991"
+      },
+      {
+        "name": "Select the release record to rehearse",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34775201486/job/103771940290"
+      },
+      {
+        "name": "Candidate source evidence",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34775201378/job/103771940163"
+      },
+      {
+        "name": "Analyze (javascript-typescript)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34775200376/job/103771939070"
+      },
+      {
+        "name": "Analyze (python)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34775200376/job/103771939114"
+      },
+      {
+        "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34775201486/job/103771940401"
+      },
+      {
+        "name": "Candidate package evidence",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34775201378/job/103772084077"
+      },
+      {
+        "name": "Rehearse the qualification of the release record / Qualify and replay (release-record)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34775201486/job/103771969179"
+      },
+      {
+        "name": "Upgrade rehearsal (Linux)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34775201378/job/103772146460"
+      },
+      {
+        "name": "Upgrade rehearsal (Windows)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34775201378/job/103772146476"
+      },
+      {
+        "name": "Build deterministic integration package",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34775201378/job/103772565420"
+      },
+      {
+        "name": "Verify integration package (Linux)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34775201378/job/103772638826"
+      },
+      {
+        "name": "Verify integration package (Windows)",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34775201378/job/103772638816"
+      },
+      {
+        "name": "Retain verified integration package",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34775201378/job/103772775042"
+      },
+      {
+        "name": "CodeQL",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/runs/103772030733"
+      }
+    ]
+  }
+}

@@ -122,7 +122,7 @@ paths = ["src/"]
         from se_harness.workflow_evidence_packet import parse_evidence_header, render_evidence_header
 
         _, report = validated_repository(self.root)
-        snapshot = formal_snapshot_digest(self.root, report.artifacts)
+        snapshot = formal_snapshot_digest(self.root, report.artifacts, [work_order_id])
         path = self.root / f"docs/engineering/product/evidence/{work_order_id}-verification.md"
         path.parent.mkdir(parents=True, exist_ok=True)
         # SPEC-AUT-004 AUT-WIN-007: the predicate reads the machine header only, so

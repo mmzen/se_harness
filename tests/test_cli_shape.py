@@ -25,6 +25,7 @@ from tests.cli_support import invoke
 #: ECP-CLI-001: the repository commands take the positional `target`; the
 #: non-repository commands take none (WO-ECP-030 retired rehearse-recovery and renumber-artifacts).
 REPOSITORY_COMMANDS = {
+    "check-pr",
     "init", "validate", "inspect", "dashboard", "doctor", "preflight", "check", "evidence",
     "pr-body", "transition", "upgrade", "skill-ownership", "scaffold-domain", "create-artifact",
     "release-unit", "capture-verification", "prepare-release", "decide", "raise-risk", "risks",
@@ -389,3 +390,35 @@ class MockedCommandShapeTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CombinedWorkOrderTests(unittest.TestCase):
+    def test_selection_accepts_plural_and_rejects_ambiguous_declarations(self):
+        from se_harness.github_ci import select_work_orders, SelectionError
+        self.assertEqual(["WO-PRD-001","WO-PRD-002"],select_work_orders("Harness-Work-Orders: WO-PRD-001, WO-PRD-002\r\n"))
+        for body in ("Harness-Work-Orders: WO-PRD-001, WO-PRD-001", "Harness-Work-Orders: WO-PRD-001, wrong", "Harness-Work-Order: WO-PRD-001\nHarness-Work-Orders: WO-PRD-002", "Harness-Work-Orders: "):
+            with self.subTest(body=body),self.assertRaises(SelectionError): select_work_orders(body)
+
+    def test_pr_uses_union_and_rejects_unapproved_work_or_outside_path(self):
+        import json
+        from tests.test_delegation_class import DelegationFixture
+        from se_harness.github_ci import check_pull_request, SelectionError
+        fixture=DelegationFixture();fixture.setUp();self.addCleanup(fixture.doCleanups)
+        root=fixture.root
+        one=fixture.work_order
+        one.write_text(one.read_text().replace('paths = ["src/"]','paths = ["src/one.py"]'))
+        two=one.with_name("WO-PRD-002.md")
+        two.write_text(one.read_text().replace("WO-PRD-001","WO-PRD-002").replace("src/one.py","src/two.py"))
+        event=root/"event.json"
+        event.write_text(json.dumps({"pull_request":{"body":"Harness-Work-Orders: WO-PRD-001, WO-PRD-002"}}))
+        base=fixture.commit("two approved work orders")
+        (root/"src").mkdir(exist_ok=True)
+        (root/"src/one.py").write_text("one = 1")
+        (root/"src/two.py").write_text("two = 2")
+        result=check_pull_request(root,event,base)
+        self.assertEqual(["src/one.py","src/two.py"],sorted(result["changed_paths"]))
+        outside=root/"outside.txt";outside.write_text("outside")
+        with self.assertRaisesRegex(SelectionError,"outside every"): check_pull_request(root,event,base)
+        outside.unlink()
+        two.write_text(two.read_text().replace('status = "approved"','status = "draft"'))
+        with self.assertRaisesRegex(SelectionError,"not an approved"): check_pull_request(root,event,base)

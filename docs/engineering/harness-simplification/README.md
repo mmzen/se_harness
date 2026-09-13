@@ -16,10 +16,12 @@ The packet includes one shared replacement specification, an architecture decisi
 - [Exact coverage](coverage.md), [replacement rules and compatibility](specifications/SPEC-KIS-001.md), [verification plan](verification/VER-KIS-001.md).
 - [Recorded request](evidence/WO-KIS-001/governance/owner-request.md) and [accepted review](evidence/WO-KIS-001/governance/accepted-review.md).
 
-The owner started WO-KIS-001 after merging the approved packet. It is implemented; WO-KIS-002 through WO-KIS-007 remain approved and have not started.
+The owner started WO-KIS-001 after merging the approved packet. It is implemented, owner-verified and merged. WO-KIS-002 is implemented and owner-verified; WO-KIS-003 through WO-KIS-007 remain approved and have not started.
 
-[WO-KIS-001 implementation evidence](evidence/WO-KIS-001/implementation/README.md) records the first eight cuts, passing local checks and passing hosted CI. [VREC-KIS-001](verification-records/VREC-KIS-001.md) is ready for the assurance owner; it binds the completion commit whose hosted checks all passed.
+[WO-KIS-001 implementation evidence](evidence/WO-KIS-001/implementation/README.md) records the first eight cuts, passing local checks and passing hosted CI. [VREC-KIS-001](verification-records/VREC-KIS-001.md) was verified by the owner and merged in PR #467; it binds the completion commit whose hosted checks all passed.
 
 The intended order is sequential because several slices share code. Each work order remains separately selected and assessed.
 This definition packet starts none of them. Current root governance remains released 0.17.0; the proposed local-delegation rule is future candidate behavior.
 Historical archive work assesses existing bundles and shrinks new evidence; it does not silently delete old bound evidence.
+
+[WO-KIS-002 implementation evidence](evidence/WO-KIS-002/implementation/README.md) records seven cuts and passing local source/package checks. Hosted CI passed. [VREC-KIS-002](verification-records/VREC-KIS-002.md) is verified by the owner. Repository integration is pending in PR #468.

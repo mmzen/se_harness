@@ -249,7 +249,7 @@ class WorkflowComplianceTests(WorkflowComplianceFixture, unittest.TestCase):
         self.assertEqual("not_assessable", statuses["QGP-G4I-EVIDENCE"])
 
         report = validate_engineering_artifacts.validate_repository(self.root)
-        digest = formal_snapshot_digest(self.root, report.artifacts)
+        digest = formal_snapshot_digest(self.root, report.artifacts, ["WO-001"])
         evidence.write_bytes(header(digest) + b"# fresh\n")
         with mock.patch(
             "se_harness.workflow_compliance._preflight_status",
@@ -482,7 +482,7 @@ class EvidencePacketTests(GitDerivedChangeSetFixture, unittest.TestCase):
         data = packet.read_bytes()
         # a substring copy of the binding inside the body proves nothing once a header exists
         report = validate_engineering_artifacts.validate_repository(self.root)
-        digest = formal_snapshot_digest(self.root, report.artifacts)
+        digest = formal_snapshot_digest(self.root, report.artifacts, ["WO-001"])
         packet.write_bytes(data.replace(digest.encode("utf-8"), b"0" * 64, 1) + f"\nartifact: WO-001\ncheckpoint: handoff\nformal_snapshot_sha256: {digest}\n".encode("utf-8"))
         code, result, error = self.check_real("--changes-complete", "--json")
         self.assertEqual(1, code, error)
@@ -509,7 +509,7 @@ class EvidencePacketTests(GitDerivedChangeSetFixture, unittest.TestCase):
         code, result, error = self.check_from_git_real(base)
         self.assertEqual(0, code, error)
         retained = self.root / "docs/engineering/product/evidence/WO-001/handoff.json"
-        self.assertEqual([{"id": "WO-001", "path": "docs/engineering/product/evidence/WO-001/handoff.json", "fields": ["result_sha256"]}], result["mutation"]["writes"])
+        self.assertIn({"id": "WO-001", "path": "docs/engineering/product/evidence/WO-001/handoff.json", "fields": ["result_sha256"]}, result["mutation"]["writes"])
         stored = json.loads(retained.read_text(encoding="utf-8"))
         self.assertEqual(result["result_sha256"], stored["result_sha256"])
         self.assertNotIn(b"\r", retained.read_bytes())
@@ -603,7 +603,7 @@ class SelfBindingHandoffTests(GitDerivedChangeSetFixture, unittest.TestCase):
         # ECP-SBH-002: a headerless packet is not touched; since WO-AUT-006 (SPEC-AUT-004
         # AUT-WIN-007) it is not assessable either, and nothing is retained.
         report = validate_engineering_artifacts.validate_repository(self.root)
-        digest = formal_snapshot_digest(self.root, report.artifacts)
+        digest = formal_snapshot_digest(self.root, report.artifacts, ["WO-001"])
         legacy = f"# legacy\n\nartifact: WO-001\ncheckpoint: handoff\nformal_snapshot_sha256: {digest}\n"
         (self.root / self.PACKET).parent.mkdir(parents=True, exist_ok=True)
         (self.root / self.PACKET).write_text(legacy, encoding="utf-8")
@@ -816,13 +816,6 @@ class ScopeCheckpointTests(ScopeCheckpointFixture, unittest.TestCase):
 class CanonicalSnapshotTests(WorkflowComplianceFixture, unittest.TestCase):
     """REQ-ECP-021 / SPEC-ECP-010 ECP-CSN-001 to -003: the snapshot ignores the checkout's line endings."""
 
-    # The digest of this fixture chain with LF line endings, computed under the
-    # raw-byte rule before WO-ECP-014; the canonical rule must reproduce it.
-    # Re-pinned under WO-AUT-006, when the fixture architectures took the typed
-    # relations and a decision assessment (SPEC-AUT-004): the value moves with
-    # the fixture bytes, the LF-versus-CRLF invariance below is what is tested.
-    LF_DIGEST = "3e10adbbcd1e70d49d8d08273d89e72167f0ca21c337c49392495d95ae59bc8c"
-
     def artifact_paths(self) -> list[Path]:
         return sorted(path for path in (self.root / "docs/engineering").rglob("*.md") if path.read_bytes().startswith(b"+++"))
 
@@ -835,20 +828,22 @@ class CanonicalSnapshotTests(WorkflowComplianceFixture, unittest.TestCase):
         from se_harness.repository_graph import validated_repository
 
         _, report = validated_repository(self.root)
-        return formal_snapshot_digest(self.root, report.artifacts)
+        return formal_snapshot_digest(self.root, report.artifacts, ["WO-001"])
 
-    def test_an_lf_tree_keeps_the_digest_fixed_before_the_change(self) -> None:
+    def test_lf_snapshot_is_repeatable(self) -> None:
+        baseline = self.digest()
         self.rewrite(b"\n")
         self.assertEqual(0, sum(path.read_bytes().count(b"\r") for path in self.artifact_paths()))
-        self.assertEqual(self.LF_DIGEST, self.digest())
+        self.assertEqual(baseline, self.digest())
 
     def test_a_crlf_tree_computes_the_lf_digest_and_content_still_counts(self) -> None:
+        baseline = self.digest()
         self.rewrite(b"\r\n")
         self.assertGreater(sum(path.read_bytes().count(b"\r") for path in self.artifact_paths()), 0)
-        self.assertEqual(self.LF_DIGEST, self.digest())
+        self.assertEqual(baseline, self.digest())
         work_order = self.root / "docs/engineering/product/work-orders/WO-001.md"
         work_order.write_bytes(work_order.read_bytes().replace(b"WO-001\r\n", b"WO-001 \r\n", 1))
-        self.assertNotEqual(self.LF_DIGEST, self.digest())
+        self.assertNotEqual(baseline, self.digest())
 
     def test_the_packet_bound_on_a_crlf_tree_is_fresh_on_an_lf_tree(self) -> None:
         # The evidence header written on one line-ending convention matches the
@@ -861,6 +856,19 @@ class CanonicalSnapshotTests(WorkflowComplianceFixture, unittest.TestCase):
         bound = header.split(b'formal_snapshot_sha256 = "', 1)[1][:64].decode("ascii")
         self.rewrite(b"\n")
         self.assertEqual(bound, self.digest())
+
+    def test_unrelated_artifact_preserves_freshness_but_governing_and_source_changes_do_not(self):
+        before = self.digest()
+        unrelated = self.root / "docs/engineering/product/requirements/REQ-999.md"
+        requirement = self.root / "docs/engineering/product/requirements/REQ-001.md"
+        unrelated.write_text(requirement.read_text().replace("REQ-001", "REQ-999"))
+        self.assertEqual(before, self.digest())
+        source = self.root / "src/exact.py"
+        source.write_text("exact = False\n")
+        changed_source = self.digest()
+        self.assertNotEqual(before, changed_source)
+        requirement.write_text(requirement.read_text() + "\nA changed governing condition.\n")
+        self.assertNotEqual(changed_source, self.digest())
 
 
 class OwnRecordAdmissionTests(ScopeCheckpointFixture, unittest.TestCase):

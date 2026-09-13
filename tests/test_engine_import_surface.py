@@ -62,7 +62,6 @@ class ImportSurfaceTests(unittest.TestCase):
         self.assertIs(repository_graph._validator_module, validate_engineering_artifacts)
         self.assertIs(preflight.validate_engineering_artifacts, validate_engineering_artifacts)
         self.assertIs(cli.validate_engineering_artifacts, validate_engineering_artifacts)
-        self.assertIs(provenance.generate_harness_dashboard, generate_harness_dashboard)
 
     def test_each_entry_module_runs_as_a_module_with_its_arguments(self) -> None:
         # ECP-ENG-002: the module form, its --help, and exit code 0.

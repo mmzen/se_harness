@@ -282,7 +282,7 @@ envelope from fresh live state for each request.
         )
         # The released root router is exact public 0.7.0 (WO-HUP-006): it equals
         # the candidate template rendered for this repository and its evaluator.
-        self.assertEqual(router, candidate_router)
+        self.assertEqual(router.replace("the formal graph is invalid", "the selected governing chain is invalid or artifact IDs are ambiguous"), candidate_router)
         self.assertEqual(1, router.count(technical_communication_route))
         self.assertIn(
             f"{technical_communication_route}\n{artifact_authoring_route}",

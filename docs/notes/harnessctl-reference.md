@@ -60,6 +60,7 @@ Four rules hold on every subcommand (`WO-ECP-022`):
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
 | `evidence` | coding agent at a checkpoint | writes or rebinds one evidence packet header | write the work order's evidence packet with a machine header bound to the current formal snapshot, keeping the owner-authored body byte for byte |
 | `pr-body` | coding agent opening a pull request | read-only | emit the LF-terminated pull-request body: the work-order line, the restitution line when a Git-derived handoff result is retained, and the evidence list; an unknown artifact is a failed result on standard output, exit 1, as for `check` and `evidence` |
+| `check-pr` | managed GitHub CI | scope check; may rebind an in-progress handoff | check one or several approved work orders and their combined diff |
 | `check` | coding agent, first call on a work order; the managed gate | read-only, except the self-binding Git-derived handoff checkpoint, which rebinds the packet header and retains its completed result | without a checkpoint, return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result, selecting the single in_progress work order when none is named; with a checkpoint, evaluate one fixed checkpoint and emit canonical restitution |
 | `transition` | authorized operator, or `delegated-executor` for a class-bearing work order's start and completion while the required check is green (see [the delegation class](delegation-class.md)) | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
 | `decide` | the role that holds `DR-DECISION-DISPOSE` for the blocked artifact: its owner, or for a deviation the owner of the specification it departs from | plan is read-only; `--apply` writes the decision's `[disposition]` table and one lifecycle event, and moves every raised risk the decision concerns in the same act | answer, defer, or withdraw one open decision artifact so the artifacts it blocks can move again |
@@ -120,7 +121,21 @@ harnessctl select-work-order --event GITHUB_EVENT_PATH [--json]
 
 `start` is the default phase. Preflight checks lifecycle eligibility, the governing chain, and the selected work order's explicit `[assurance]` declaration, then displays the classification, rationale, and deciding role with the reading manifest. A selected work order without a valid declaration fails even when completed legacy validation remains compatible. Passing proves structural readiness only; it does not prove comprehension, semantic scope fit, implementation correctness, the truth of the rationale or role claim, assurance, or release.
 
-`select-work-order` is the narrow automation-facing parser used by the managed consumer workflow. It accepts one bounded GitHub event file and emits one exact `WO-...` ID only when the pull-request body contains exactly one standalone `Harness-Work-Order:` field. It does not inspect branches, diffs, commits, or artifact eligibility and grants no work authority.
+`select-work-order` reads one bounded event file. A body uses either
+`Harness-Work-Order: WO-AAA-001` or
+`Harness-Work-Orders: WO-AAA-001, WO-BBB-002`. Use `--field work-orders`
+for one ID per output line. LF and CRLF are equivalent. Both declarations
+together, duplicate IDs and malformed IDs are rejected.
+
+```sh
+harnessctl check-pr [TARGET] --event EVENT.json --from-git BASE [--json]
+```
+
+`check-pr` evaluates every selected approved work order and the complete diff
+against their combined scope. Unrelated changes are not admitted by listing
+another work order; that work order must actually cover the path. In-progress
+work also needs passing local handoff checks. CI calls this command directly.
+
 
 ## Selected-scope workflow execution
 
@@ -472,3 +487,9 @@ Only `ready` and `released` release records claim a version. Valid rejected reco
 | human transition to `released` | release authorization for that same candidate |
 
 For lifecycle timing, see [operational phasing](harness-operational-phasing.md). For complete examples, see [practical SE Harness examples](harness-lineage-example.md).
+
+
+To capture while keeping local edits, add `--candidate-commit COMMIT` and put
+`--test-command EXECUTABLE ARGUMENTS...` last. Capture tests that commit in a
+temporary checkout and retains the command result in the record. A failed test
+writes no record; uncommitted caller content is not used as tested evidence.

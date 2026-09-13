@@ -6,7 +6,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Mapping
 
-from se_harness.codes import E001, E003, WEX200
+from se_harness.codes import E003, WEX200
 from se_harness.decisions import against_reference
 from se_harness.engine import validate_engineering_artifacts as _validator_module
 from se_harness.engine.validation_core import relation_targets
@@ -15,7 +15,7 @@ from se_harness.installer import HarnessError, safe_destination
 
 PRIMARY_TYPES = {"work_order", "verification_record", "release_record", "decision"}
 #: The codes that make a repository unevaluable for any selected scope (ECP-KRN-004).
-REPOSITORY_ERROR_CODES = {E001, E003}
+REPOSITORY_ERROR_CODES = {E003}
 
 
 class RepositoryWorkflowError(HarnessError):

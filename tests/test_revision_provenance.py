@@ -772,21 +772,45 @@ class RevisionCliTests(unittest.TestCase):
         self.assertEqual(1, output.count("WEX302"), output)  # ECP-CLI-006/-007: one code, the cause class
         self.assertFalse((self.root / "docs/engineering/product/verification-records/VREC-001.md").exists())
 
-    def test_capture_names_the_evidence_class_when_the_dashboard_generator_fails(self) -> None:
-        # ECP-CLI-007: an evaluator-evidence failure is WEX303, not the state code.
-        from se_harness.provenance import EvidenceRefusal
-
+    def test_capture_is_independent_of_dashboard_generation(self) -> None:
         self.initialize_candidate()
-        with mock.patch("se_harness.provenance._generate_snapshot", side_effect=EvidenceRefusal("dashboard generation must pass before recording verification")):
+        with mock.patch("se_harness.engine.generate_harness_dashboard.generate_bundle", side_effect=AssertionError("dashboard called")):
             code, output, error = invoke(
                 "capture-verification", str(self.root), "--id", "VREC-002",
                 "--work-order", "WO-001", "--verification", "VER-001",
                 "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
             )
-        self.assertEqual(1, code)
-        self.assertEqual("", error)
-        self.assertIn("WEX303: dashboard generation must pass", output)
-        self.assertEqual(1, output.count("WEX303"))
+        self.assertEqual(0, code, output + error)
+        self.assertFalse((self.root / "target/harness-dashboard").exists())
+
+    def test_explicit_candidate_ignores_dirty_caller_and_runs_tests(self):
+        import sys
+        candidate = self.initialize_candidate()
+        dirty = self.root / "dirty.txt"
+        dirty.write_text("local note")
+        command = [sys.executable, "-c", "from pathlib import Path; assert not Path('dirty.txt').exists(); print('candidate tests passed')"]
+        code, output, error = invoke(
+            "capture-verification", str(self.root), "--id", "VREC-003", "--work-order", "WO-001",
+            "--verification", "VER-001", "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
+            "--candidate-commit", candidate, "--test-command", *command)
+        self.assertEqual(0, code, output + error)
+        record=(self.root / "docs/engineering/product/verification-records/VREC-003.md").read_text()
+        self.assertIn(f'commit = "{candidate}"', record)
+        self.assertIn("candidate tests passed", record)
+        self.assertEqual("local note", dirty.read_text())
+        self.assertEqual(1, git(self.root, "worktree", "list", "--porcelain").count("worktree "))
+
+    def test_explicit_candidate_failed_tests_write_no_record(self):
+        import sys
+        candidate=self.initialize_candidate()
+        code, output, error=invoke(
+            "capture-verification",str(self.root),"--id","VREC-003","--work-order","WO-001",
+            "--verification","VER-001","--evidence","docs/engineering/product/evidence/WO-001-verification.md",
+            "--candidate-commit",candidate,"--test-command",sys.executable,"-c","raise SystemExit(3)")
+        self.assertEqual(1,code,output+error)
+        self.assertIn("tests failed",output)
+        self.assertFalse((self.root/"docs/engineering/product/verification-records/VREC-003.md").exists())
+        self.assertEqual(1,git(self.root,"worktree","list","--porcelain").count("worktree "))
 
     def test_capture_requires_implemented_work_order(self) -> None:
         self.initialize_candidate()

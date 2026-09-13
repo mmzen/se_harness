@@ -193,7 +193,7 @@ but are not diagnostics and are not listed here.
 
 | Code | Message text in the source |
 | --- | --- |
-| `W-ECP-005` | `W-ECP-005`; `W-ECP-005: delegation.gate_source is local-file outside a rehearsal; the gate this run reads is not the CI pr…` |
+| `W-ECP-005` | `W-ECP-005` |
 
 ### `W-REB` — installed validator
 
@@ -238,7 +238,7 @@ but are not diagnostics and are not listed here.
 
 | Code | Message text in the source |
 | --- | --- |
-| `A001` | `A001`; `A001: validator unavailable: {…}` |
+| `A001` | `A001`; `A001: docs/engineering` (+1 more) |
 
 ### `I` — preflight
 
@@ -286,10 +286,10 @@ but are not diagnostics and are not listed here.
 | `WEX-ECP-012` | `WEX-ECP-012`; `WEX-ECP-012: the working tree selects {…} (the one in_progress work order), not {…}` |
 | `WEX-ECP-013` | `WEX-ECP-013`; `WEX-ECP-013: domain {…} has no artifact to read its identifier token from; pass --id explicitly` (+4 more) |
 | `WEX-ECP-014` | `A coded selection refusal (W-ADS-001, WEX-ECP-014): a `SelectionError` that carries its code.`; `WEX-ECP-014` (+5 more) |
-| `WEX-ECP-022` | `WEX-ECP-022`; `WEX-ECP-022: {…} carries no [delegation] class at the base {…}; a branch cannot widen its own delegation` (+2 more) |
+| `WEX-ECP-022` | `WEX-ECP-022`; `WEX-ECP-022: {…} declares no execution delegation` (+4 more) |
 | `WEX-ECP-030` | `WEX-ECP-030`; `WEX-ECP-030: duplicate transition binding {…}:{…}` (+10 more) |
 | `WEX-ECP-031` | `Read and validate `agentic_operations` (ECP-PRM-019, ECP-PRM-023). Every entry carries exactly the seven fiel…`; `WEX-ECP-031` |
-| `WEX-ECP-040` | `WEX-ECP-040`; `WEX-ECP-040: check {…} is missing at head {…}` (+13 more) |
+| `WEX-ECP-040` | `WEX-ECP-040` |
 
 ### `MG` — mutation guard
 

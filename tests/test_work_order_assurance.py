@@ -128,3 +128,28 @@ class WorkOrderAssuranceValidationTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class LocalScopePreflightTests(unittest.TestCase):
+    def test_unrelated_errors_are_background_but_selected_errors_and_duplicate_ids_block(self):
+        from tests.test_delegation_class import DelegationFixture
+        from se_harness.preflight import run_preflight
+        fixture = DelegationFixture()
+        fixture.setUp()
+        self.addCleanup(fixture.doCleanups)
+        root=fixture.root
+        other=fixture.work_order.with_name("WO-PRD-999.md")
+        other.write_text(fixture.work_order.read_text().replace("WO-PRD-001","WO-PRD-999").replace('status = "approved"','status = "draft"').replace('implements = ["REQ-001"]','implements = []'))
+        report=run_preflight(root,work_order_id="WO-PRD-001")
+        self.assertTrue(report.ready,report.diagnostics)
+        self.assertTrue(report.background)
+        other.write_text("+++\nid = ")
+        report=run_preflight(root,work_order_id="WO-PRD-001")
+        self.assertTrue(report.ready,report.diagnostics)
+        self.assertTrue(report.background)
+        other.write_text(fixture.work_order.read_text())
+        self.assertFalse(run_preflight(root,work_order_id="WO-PRD-001").ready)
+        other.unlink()
+        req=root/"docs/engineering/product/requirements/REQ-001.md"
+        req.write_text(req.read_text().replace('type = "requirement"','type = "unknown"',1))
+        self.assertFalse(run_preflight(root,work_order_id="WO-PRD-001").ready)

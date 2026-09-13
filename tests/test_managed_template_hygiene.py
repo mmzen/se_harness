@@ -40,9 +40,9 @@ ENGINEERING_ROOT = REPOSITORY_ROOT / "docs/engineering"
 PIN_FORM = re.compile(r"^[\w.-]+/[\w./-]+@[0-9a-f]{40} # v\d+\.\d+\.\d+(?:\.post\d+)?$")
 
 #: DST-MWF-011: the environment names read under se_harness/ today, each named in a
-#: specification. SE_HARNESS_REHEARSAL and GITHUB_TOKEN belong to the delegation
-#: gate (SPEC-ECP-006); PYTHONPATH is read by the runtime identity (SPEC-ECP-023).
-SPECIFIED_ENVIRONMENT_NAMES = frozenset({"SE_HARNESS_REHEARSAL", "GITHUB_TOKEN", "PYTHONPATH"})
+#: specification. PYTHONPATH is read by runtime identity; local delegation
+#: no longer reads a rehearsal flag or GitHub token (WO-KIS-002).
+SPECIFIED_ENVIRONMENT_NAMES = frozenset({"PYTHONPATH"})
 ENVIRONMENT_READ = re.compile(r"""os\.(?:environ\.get|getenv)\(\s*["']([A-Z_][A-Z0-9_]*)["']|os\.environ\[\s*["']([A-Z_][A-Z0-9_]*)["']\s*\]""")
 
 
@@ -69,11 +69,6 @@ def _uses_lines(text: str) -> list[str]:
     return re.findall(r"(?m)^\s+- uses: (.+)$", text)
 
 
-def _embedded_reader(text: str, after: str) -> str:
-    """The Python heredoc that follows ``after`` in the template, dedented."""
-
-    body = text.split(after, 1)[1].split("<<'PY'\n", 1)[1].split("\n          PY\n", 1)[0]
-    return "\n".join(line[10:] if line.startswith("          ") else line for line in body.splitlines()) + "\n"
 
 
 class ManagedWorkflowTemplateTests(unittest.TestCase):
@@ -87,7 +82,7 @@ class ManagedWorkflowTemplateTests(unittest.TestCase):
         # the two steps the file stopped running are not.
         header = _header(self.text).lower()
         steps = _step_names(self.text)
-        self.assertEqual(7, len(steps), steps)
+        self.assertEqual(5, len(steps), steps)
         for step in steps:
             with self.subTest(step=step):
                 self.assertIn(step.lower(), header)
@@ -110,133 +105,15 @@ class ManagedWorkflowTemplateTests(unittest.TestCase):
             [line.split("@", 1)[0] for line in uses],
         )
 
-    def test_the_check_steps_capture_status_and_stderr(self) -> None:
-        # DST-MWF-001: neither check appends `|| true`; each records its status and
-        # redirects its stderr to a file the reader receives.
-        self.assertNotIn("|| true", self.text)
-        for checkpoint, status, stderr in (
-            ("scope", "scope_status", "scope.stderr"),
-            ("handoff", "handoff_status", "restitution.stderr"),
-        ):
-            with self.subTest(checkpoint=checkpoint):
-                step = self.text.split(f"--checkpoint {checkpoint}", 1)[1].split("<<'PY'", 1)[0]
-                self.assertIn(f'2> "$RUNNER_TEMP/{stderr}" || {status}=$?', step)
-                self.assertIn(f'"$RUNNER_TEMP/{stderr}" "${status}" <<', step + "<<")
-                self.assertIn(f"{status}=0", self.text.split(f"--checkpoint {checkpoint}", 1)[0][-1200:])
 
-    def _run_reader(self, reader: str, *arguments: str) -> subprocess.CompletedProcess[str]:
-        with tempfile.TemporaryDirectory() as temporary:
-            script = Path(temporary) / "reader.py"
-            script.write_text(reader, encoding="utf-8")
-            return subprocess.run(
-                [sys.executable, "-I", str(script), *arguments],
-                capture_output=True,
-                text=True,
-                encoding="utf-8",
-                cwd=temporary,
-                check=False,
-            )
 
-    def test_the_readers_fail_with_the_captured_status_and_text_on_an_empty_result(self) -> None:
-        # DST-MWF-002: an empty result file is the shape of a refusal; the reader
-        # prints the captured stderr and exits with the captured status, never with
-        # a decoder traceback.
-        with tempfile.TemporaryDirectory() as temporary:
-            root = Path(temporary)
-            empty = root / "empty.json"
-            empty.write_bytes(b"")
-            refusal = root / "refusal.stderr"
-            refusal.write_text("MG005: runtime identity is not the released evaluator\n", encoding="utf-8")
-            not_json = root / "not.json"
-            not_json.write_text("usage: harnessctl check [-h]\n", encoding="utf-8")
-            cases = (
-                ("scope", _embedded_reader(self.text, "--checkpoint scope"), (str(refusal), "2"), 2),
-                ("handoff", _embedded_reader(self.text, "--checkpoint handoff"), ("", str(refusal), "3"), 3),
-            )
-            for name, reader, tail, status in cases:
-                with self.subTest(reader=name, result="empty"):
-                    completed = self._run_reader(reader, str(empty), *tail)
-                    self.assertEqual(status, completed.returncode, completed.stderr)
-                    self.assertIn("MG005: runtime identity is not the released evaluator", completed.stderr)
-                    self.assertIn(f"wrote no result (exit status {status})", completed.stderr)
-                    self.assertNotIn("Traceback", completed.stderr)
-                    self.assertEqual("", completed.stdout)
-                with self.subTest(reader=name, result="not-json"):
-                    completed = self._run_reader(reader, str(not_json), *tail)
-                    self.assertEqual(status, completed.returncode, completed.stderr)
-                    self.assertNotIn("Traceback", completed.stderr)
-                with self.subTest(reader=name, result="empty-with-status-zero"):
-                    zero_tail = tail[:-1] + ("0",)
-                    completed = self._run_reader(reader, str(empty), *zero_tail)
-                    self.assertEqual(1, completed.returncode, "an empty result with status 0 must still fail")
-                    self.assertNotIn("Traceback", completed.stderr)
 
-    def test_the_readers_judge_a_parsed_result_as_before(self) -> None:
-        # DST-MWF-003: a parsed result is evaluated on QGP-G4I-PATHS, the outcome,
-        # the blockers and the declared digest, with the same messages as before.
-        scope_reader = _embedded_reader(self.text, "--checkpoint scope")
-        handoff_reader = _embedded_reader(self.text, "--checkpoint handoff")
-        completed_result = {
-            "operation": {"outcome": "completed"},
-            "compliance": {"gates": [{"predicates": [{"id": "QGP-G4I-PATHS", "status": "pass"}]}]},
-            "restitution": {"blocked_by": [], "current_lifecycle_state": ["WO-X is in_progress."]},
-            "result_sha256": "a" * 64,
-        }
-        blocked_result = {
-            "operation": {"outcome": "blocked"},
-            "compliance": {"gates": [{"predicates": [{"id": "QGP-G4I-PATHS", "status": "pass"}]}]},
-            "restitution": {"blocked_by": ["QGP-G4I-EVIDENCE: No readable evidence"], "current_lifecycle_state": []},
-        }
-        violation_result = {
-            "operation": {"outcome": "blocked"},
-            "compliance": {"gates": [{"predicates": [{"id": "QGP-G4I-PATHS", "status": "fail", "message": "1 path outside scope"}]}]},
-            "restitution": {"blocked_by": ["QGP-G4I-PATHS: WEX201"], "current_lifecycle_state": []},
-        }
-        implemented_result = json.loads(json.dumps(completed_result))
-        implemented_result["restitution"]["current_lifecycle_state"] = ["WO-X is implemented."]
-        with tempfile.TemporaryDirectory() as temporary:
-            root = Path(temporary)
-            quiet = root / "quiet.stderr"
-            quiet.write_bytes(b"")
-            results = {}
-            for name, payload in (
-                ("completed", completed_result),
-                ("blocked", blocked_result),
-                ("violation", violation_result),
-                ("implemented", implemented_result),
-            ):
-                results[name] = root / f"{name}.json"
-                results[name].write_text(json.dumps(payload), encoding="utf-8")
 
-            run = self._run_reader(scope_reader, str(results["completed"]), str(quiet), "0")
-            self.assertEqual((0, "yes\n"), (run.returncode, run.stdout), run.stderr)
-            run = self._run_reader(scope_reader, str(results["implemented"]), str(quiet), "0")
-            self.assertEqual((0, "no\n"), (run.returncode, run.stdout), run.stderr)
-            run = self._run_reader(scope_reader, str(results["blocked"]), str(quiet), "1")
-            self.assertEqual(1, run.returncode)
-            self.assertIn("blocked: QGP-G4I-EVIDENCE: No readable evidence", run.stderr)
-            self.assertIn("The scope check did not complete (outcome blocked).", run.stderr)
-            run = self._run_reader(scope_reader, str(results["violation"]), str(quiet), "1")
-            self.assertEqual(1, run.returncode)
-            self.assertIn("scope: 1 path outside scope", run.stderr)
-            self.assertIn("The pull request's diff leaves the work order's declared scope.", run.stderr)
-
-            run = self._run_reader(handoff_reader, str(results["completed"]), "", str(quiet), "0")
-            self.assertEqual(0, run.returncode, run.stderr)
-            self.assertIn("inside the declared scope; no restitution digest was declared.", run.stdout)
-            run = self._run_reader(handoff_reader, str(results["completed"]), "a" * 64, str(quiet), "0")
-            self.assertEqual(0, run.returncode, run.stderr)
-            self.assertIn("the declared restitution digest matches.", run.stdout)
-            run = self._run_reader(handoff_reader, str(results["completed"]), "b" * 64, str(quiet), "0")
-            self.assertEqual(1, run.returncode)
-            self.assertIn("does not match the recomputed result_sha256", run.stderr)
-            run = self._run_reader(handoff_reader, str(results["blocked"]), "", str(quiet), "1")
-            self.assertEqual(1, run.returncode)
-            self.assertIn("blocked: QGP-G4I-EVIDENCE: No readable evidence", run.stderr)
-            self.assertIn("The handoff check did not complete (outcome blocked).", run.stderr)
-            for name in results:
-                with self.subTest(result=name):
-                    self.assertNotIn("Traceback", self._run_reader(scope_reader, str(results[name]), str(quiet), "1").stderr)
+    def test_pr_check_propagates_its_exit_status_directly(self):
+        step = self.text.split("      - name: Check the selected work orders", 1)[1].split("      - name:",1)[0]
+        self.assertIn("-I -m se_harness check-pr .",step)
+        self.assertNotIn("||",step)
+        self.assertNotIn("json.load",step)
 
 
 class GitignoreMarkerTests(unittest.TestCase):

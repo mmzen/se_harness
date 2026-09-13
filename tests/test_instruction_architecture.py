@@ -716,7 +716,7 @@ class InstructionArchitectureTests(unittest.TestCase):
             event.write_text(json.dumps({"pull_request": {"body": body}}), encoding="utf-8")
             code, _, error = invoke("select-work-order", "--event", str(event))
             self.assertEqual(2, code)
-            self.assertIn("expected exactly one", error)
+            self.assertIn("work-order selection", error)
 
         event.write_text(
             '{"pull_request":{"body":"Harness-Work-Order: WO-IAR-001"},'
@@ -772,10 +772,9 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertIn("permissions:\n  contents: read\n  pull-requests: read", workflow)
         self.assertNotIn("-I -c", workflow)
         self.assertNotIn("'role':'consumer-evaluator'", workflow)
-        self.assertIn("select-work-order --event", workflow)
+        self.assertIn("se_harness check-pr .", workflow)
         self.assertNotIn("GITHUB_EVENT_PATH", workflow)
-        self.assertIn("--phase review", workflow)
-        self.assertIn("-I -m se_harness preflight .", workflow)
+        self.assertIn('--event "$RUNNER_TEMP/live-event.json" --from-git "$HARNESS_BASE_SHA"', workflow)
         self.assertIn("qualify released-root \"$GITHUB_WORKSPACE\"", workflow)
         self.assertIn("released-root-qualification.json", workflow)
         self.assertNotIn("-I -m se_harness doctor .", workflow)
