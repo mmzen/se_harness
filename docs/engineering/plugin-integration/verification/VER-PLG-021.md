@@ -35,7 +35,7 @@ The earlier local prototype is a starting point, not evidence that this whole wo
 | REQ-PLG-034 | Test | K06 | Schema-4 compatibility, doctor, upgrade and plugin-free clone checks preserve the provider choice. |
 | REQ-PLG-035 | Test and inspection | K07 | Setup creates, reuses and repairs its own environment; actual failures are reported. |
 | REQ-PLG-036 | Test and inspection | K08, K09 | No blocking hooks or exact-version allowlists remain; instructions invoke the selected checker; required failures remain visible. |
-| REQ-PLG-037 | Test and inspection | K10, K11, K12 | Development rebuilds are bounded; release checks remain; CI duplication and obsolete contracts are removed. |
+| REQ-PLG-037 | Test and inspection | K10, K11, K12, K13 | Development rebuilds are bounded; release checks remain; CI duplication and obsolete contracts are removed. |
 
 ## Acceptance scenarios
 
@@ -53,6 +53,7 @@ The earlier local prototype is a starting point, not evidence that this whole wo
 | K10 Development build | Build from local source and a local wheel, rebuild its output, and target an unrelated nonempty directory. | Both host archives contain required skills and development labeling; rebuilding works; the unrelated directory survives. |
 | K11 Publication boundary | Run existing publication validation against development inputs and valid existing release fixtures. | Local output does not qualify itself as a release; existing valid release inputs remain accepted. |
 | K12 Removal review | Review the diff against all 50 proposal scenarios, current docs and CI steps. | Every accepted removal is delivered or identified as a failing criterion; seven retained protections remain covered. |
+| K13 Minimal checkout | Reproduce the configured sparse checkout from the real candidate commit; run the package job and its downstream checks. | Only the required script is materialized; the checkout stays unchanged; package acceptance passes without the snapshot-size refusal. |
 
 These are behavior groups, not a required count of separate test functions.
 Use small fixtures and direct assertions; do not add per-case filesystem archives or a new evidence framework.
@@ -81,3 +82,8 @@ All matrix criteria pass, required checks pass, and no changed path leaves the a
 The diff removes the abandoned machinery and its obsolete tests instead of retaining a second supported route.
 Historical VREC, RLS, decided DEC and evidence bytes remain unchanged.
 Implementation completion and a later commit-bound verification record follow the existing workflow.
+
+## CI prerequisite amendment — 2026-09-13
+
+The owner accepted the minimal-checkout fix with "ok go", including rerunning package acceptance and downstream checks.
+This records the assurance-contract decision for K13, not a verification result for the whole work order.

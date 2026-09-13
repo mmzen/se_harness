@@ -121,7 +121,7 @@ The assurance decision remains with the assurance owner.
 ## WO-PLG-021: accepted plugin simplification
 
 The owner accepted the KISS proposal on 2026-09-13 and selected execution delegation.
-[WO-PLG-021](work-orders/WO-PLG-021.md) and its governing definitions are approved.
+[WO-PLG-021](work-orders/WO-PLG-021.md) has an approved governing packet. The owner-directed minimal-checkout CI prerequisite is in progress.
 The packet replaces disposable skill copies, simplifies setup, removes automatic blocking hooks, and reduces local packaging and CI duplication.
 
 - [Requirements](requirements/REQ-PLG-032.md): REQ-PLG-032 through REQ-PLG-037.
@@ -129,6 +129,6 @@ The packet replaces disposable skill copies, simplifies setup, removes automatic
 - [Architecture](architecture/ARCH-PLG-004.md), [decision](architecture/adr/ADR-PLG-004.md), and [verification plan](verification/VER-PLG-021.md).
 - [All 50 proposal scenarios](evidence/WO-PLG-021/governance/proposal-coverage.md) and [recorded owner request](evidence/WO-PLG-021/governance/owner-request.md).
 
-Implementation starts separately after the approved packet reaches the PR base and the required live check passes.
+The remaining delegated plugin implementation follows after the approved packet reaches the PR base and the required live check passes.
 The earlier prototype is an input to that work, not a completion or assurance result for this packet.
 Historical work orders, decisions, verification records, releases and their evidence remain unchanged.

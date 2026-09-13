@@ -112,6 +112,8 @@ Other installation integrity remains unchanged. A file-cleanup result grants no 
 
 **PLG-KIS-032.** Removed behavior MUST have its obsolete tests and current documentation removed or rewritten in the same work order.
 
+**PLG-KIS-033.** The candidate-package job MUST check out only its portability script while consuming the built wheel; source and governance jobs retain full checkouts.
+
 ## Failure behaviour
 
 | Trigger | Response | Diagnostic |
@@ -142,7 +144,7 @@ Other installation integrity remains unchanged. A file-cleanup result grants no 
 | REQ-PLG-034 | PLG-KIS-009, PLG-KIS-010, PLG-KIS-012 |
 | REQ-PLG-035 | PLG-KIS-014, PLG-KIS-015, PLG-KIS-016, PLG-KIS-017 |
 | REQ-PLG-036 | PLG-KIS-017, PLG-KIS-018, PLG-KIS-019, PLG-KIS-020, PLG-KIS-021, PLG-KIS-022, PLG-KIS-023 |
-| REQ-PLG-037 | PLG-KIS-001, PLG-KIS-024, PLG-KIS-025, PLG-KIS-026, PLG-KIS-027, PLG-KIS-028, PLG-KIS-029, PLG-KIS-030, PLG-KIS-031, PLG-KIS-032 |
+| REQ-PLG-037 | PLG-KIS-001, PLG-KIS-024, PLG-KIS-025, PLG-KIS-026, PLG-KIS-027, PLG-KIS-028, PLG-KIS-029, PLG-KIS-030, PLG-KIS-031, PLG-KIS-032, PLG-KIS-033 |
 
 ### Previous contract coverage
 
@@ -170,3 +172,8 @@ Unfinished older work orders are not automatically started, completed, or widene
 - General lifecycle decisions and release eligibility stay with the existing evaluator.
 - Actual plugin installation and migration of the owner's projects require their selected execution requests.
 - Internal function names and test organization belong to the implementation.
+
+## CI prerequisite amendment — 2026-09-13
+
+The owner accepted the minimal-checkout fix with "ok go", exercising the technical-owner decision for PLG-KIS-033.
+Package acceptance and the released verifier remain unchanged. This removes unrelated repository history from that job's working files.

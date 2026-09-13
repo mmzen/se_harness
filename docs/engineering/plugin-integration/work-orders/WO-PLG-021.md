@@ -2,7 +2,7 @@
 id = "WO-PLG-021"
 type = "work_order"
 title = "Simplify plugin migration, setup and checks"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-13"
 updated = "2026-09-13"
@@ -77,6 +77,13 @@ to = "approved"
 decided_at = "2026-09-13T06:30:56Z"
 decided_by = "engineering-owner"
 reason = "The owner accepted the complete plugin simplification proposal on 2026-09-13 and requested its artifact packet and work order through the delegated route: \"i accept this proposal, let's go you can create the artifact packet and work order (delegated route)\". Record the engineering-owner approval of WO-PLG-021 for that accepted scope, including explicit checks instead of blocking hooks and SPEC-PLG-021's applicability table. The retained proposal and 50-scenario coverage map identify the accepted behavior. This approves a definition or the bounded execution delegation only; it records no implementation start, completion, verification result, release, merge, publication or live adoption."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-13T07:26:30Z"
+decided_by = "engineering-owner"
+reason = "The owner selected the exact minimal package-checkout CI fix with \"ok go\" on 2026-09-13. Start only this owner-directed prerequisite under the recorded scope amendment. The remaining plugin work retains its delegated route; this decision does not complete or verify the work order."
 +++
 
 # Work Order: Simplify plugin migration, setup and checks
@@ -158,3 +165,13 @@ Do not label unavailable host acceptance, unrun platforms or incomplete implemen
 State what became simpler, the observed code/test/CI reduction, the checks that passed, and any material limitation.
 Use the released evaluator's schema-2 handoff for WO-PLG-021 and report exactly its next action.
 Completion is not assurance, release, publication, live adoption or repository integration.
+
+## Owner-directed CI prerequisite — 2026-09-13
+
+After the package job exceeded the released verifier's snapshot limit, the owner selected the proposed minimal checkout with "ok go".
+This records the engineering-owner scope amendment and direct start instruction for that bounded prerequisite.
+The candidate-package job checks out only scripts/check_portable_release_surface.py and consumes the already-built wheel.
+Source and governance jobs retain their full checkouts. Package identity, acceptance, checkout immutability and downstream checks remain enabled.
+The workflow and CI test paths are already in execution_scope; SPEC-PLG-021 PLG-KIS-033 and VER-PLG-021 K13 state the added behavior.
+This owner-directed prerequisite may start before the packet reaches main. It does not activate branch-local delegation.
+The remaining plugin implementation retains the selected delegated route. Completing this prerequisite does not complete the whole work order.
