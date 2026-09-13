@@ -1,5 +1,7 @@
 # Installation and upgrades
 
+<!-- Target expertise: 5/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
+
 Installing the Python package makes a checker available. Updating a repository
 is a separate, explicit `harnessctl upgrade --apply` operation.
 
@@ -39,12 +41,17 @@ copies are installed under the target's `scripts/` directory.
 
 ## Review and apply an upgrade
 
-Install the exact new released package in the external environment, then:
+Install the new released package in the external environment, review the
+read-only plan, apply it, then check the result:
 
 ```text
+python -m pip install --upgrade se-harness
 python -m se_harness upgrade /path/to/repository
 python -m se_harness upgrade /path/to/repository --apply
+python -m se_harness doctor /path/to/repository
 ```
+
+Installing the package does **not** silently rewrite a repository.
 
 Guidance, templates, CI and owner settings are kept by default, including edits
 made while an older lock treated them as managed files. To take a supplied

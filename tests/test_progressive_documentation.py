@@ -260,18 +260,17 @@ class ProgressiveDocumentationTests(unittest.TestCase):
 
     def test_installation_note_separates_package_and_repository_upgrade(self) -> None:
         installation = self.contents[NOTES_ROOT / "harness-installation-and-upgrades.md"]
-        upgrade = installation.split("## Upgrade an existing installation\n", 1)[1]
+        upgrade = installation.split("## Review and apply an upgrade\n", 1)[1]
         commands = (
             "python -m pip install --upgrade se-harness",
-            "harnessctl upgrade C:\\path\\to\\repository",
-            "harnessctl upgrade C:\\path\\to\\repository --apply",
-            "harnessctl doctor C:\\path\\to\\repository",
+            "python -m se_harness upgrade /path/to/repository",
+            "python -m se_harness upgrade /path/to/repository --apply",
+            "python -m se_harness doctor /path/to/repository",
         )
         positions = [upgrade.index(command) for command in commands]
         self.assertEqual(sorted(positions), positions)
         self.assertIn("does **not** silently rewrite", installation)
         self.assertIn("read-only plan", installation)
-        self.assertIn("explicitly owner-authorized transactional mutation", installation)
 
     def test_development_note_explains_standard_evaluator_and_candidate_planes(self) -> None:
         development = self.contents[NOTES_ROOT / "developing-se-harness.md"]

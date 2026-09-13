@@ -92,6 +92,7 @@ paths = [
   "tests/test_predecessor_bootstrap_retirement.py",
   "docs/notes/diagnostic-codes.md",
   "tests/test_configuration_surface.py",
+  "tests/test_progressive_documentation.py",
   "tests/test_evaluator_identity.py",
   "tests/test_governor_transition.py",
   "tests/test_harnessctl.py",
