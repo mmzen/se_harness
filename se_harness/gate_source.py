@@ -1,32 +1,15 @@
-"""The delegation class: who may delegate, and the gate that unlocks it.
+"""Local execution delegation from the work order's recorded owner approval.
 
-`SPEC-ECP-006` (`ECP-DLG-001` to `ECP-DLG-007`, `ECP-DLG-009`, `ECP-DLG-010`):
-a work order that carries ``[delegation] class = "execution"`` *at the base of
-the pull request* lets the ``delegated-executor`` role apply exactly
-``DR-WO-START``, ``DR-WO-COMPLETE`` and ``DR-VREC-PREPARE`` while the required
-pull-request check for the candidate head reads ``success``. The gate is read
-from the configured source by commit id — the CI provider, or a local file in a
-rehearsal — never from a request body, an environment variable, a token or an
-actor name.
+Local gates are evaluated by the caller. CI remains an integration/publication
+check and is never contacted to authorize a local transition.
 """
-
 from __future__ import annotations
-
-import json
-import os
-import sys
-import tomllib
-from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Mapping
-from urllib.error import HTTPError, URLError
-from urllib.parse import quote
-from urllib.request import Request, urlopen
-
 from se_harness import front_matter
-from se_harness._process import run_git, text as _text
+from se_harness._process import run_git, text
 from se_harness.workflow_contract import DelegatedOperation, delegated_operations
-from se_harness.codes import CodedError, WEX_ECP_022, WEX_ECP_040, W_ECP_005
+from se_harness.codes import CodedError, WEX_ECP_022
 
 DELEGATED_ROLE = "delegated-executor"
 DELEGATION_CLASS = "execution"
@@ -50,220 +33,62 @@ def delegated_operation(right: str) -> DelegatedOperation:
         if operation.decision_right == right:
             return operation
     raise KeyError(right)
-GITHUB_API = "https://api.github.com"
-#: Owner-controlled configuration, beside the managed `.engineering-harness.toml` and never
-#: inside it: the managed file is hash-locked, and a consumer editing it reads as customization.
-CONFIGURATION_NAME = ".engineering-harness.delegation.toml"
-
 
 class DelegationError(CodedError):
-    """A coded refusal of the delegated route; the code is the check that refused."""
-
     def __init__(self, code: str, message: str) -> None:
         super().__init__(code, message)
         self.predicate_id = code
 
 
-@dataclass(frozen=True)
-class DelegationConfiguration:
-    gate_source: str
-    check_name: str
-    repository: str | None
-    base_ref: str
-    local_file: str | None
-
-
-@dataclass(frozen=True)
-class GateReading:
-    sha: str
-    conclusion: str
-    check_run_id: str
-    check_name: str
-    source: str
-
-    @property
-    def passing(self) -> bool:
-        return self.conclusion == "success"
-
-
-def load_configuration(root: Path) -> DelegationConfiguration | None:
-    """The `[delegation]` table of `.engineering-harness.delegation.toml`, or `None` when absent."""
-
-    path = root / CONFIGURATION_NAME
-    try:
-        data = tomllib.loads(path.read_text(encoding="utf-8-sig"))
-    except (OSError, UnicodeError, tomllib.TOMLDecodeError):
-        return None
-    table = data.get("delegation")
-    if not isinstance(table, dict):
-        return None
-    source = table.get("gate_source")
-    if source not in {"github-checks", "local-file"}:
-        raise DelegationError(WEX_ECP_040, f"delegation.gate_source must be github-checks or local-file, not {source!r}")
-    check_name = table.get("check_name")
-    if not isinstance(check_name, str) or not check_name.strip():
-        raise DelegationError(WEX_ECP_040, "delegation.check_name must name the required check")
-    repository = table.get("repository")
-    base_ref = table.get("base_ref", "origin/main")
-    local_file = table.get("local_file")
-    if source == "local-file":
-        if not isinstance(local_file, str) or not local_file:
-            raise DelegationError(WEX_ECP_040, "delegation.local_file is required for the local-file source")
-        if os.environ.get("SE_HARNESS_REHEARSAL") != "1":
-            # ECP-DLG-004: the local-file source exists for tests and rehearsals only.
-            print(
-                f"{W_ECP_005}: delegation.gate_source is local-file outside a rehearsal; "
-                "the gate this run reads is not the CI provider's",
-                file=sys.stderr,
-            )
-    return DelegationConfiguration(
-        gate_source=str(source),
-        check_name=check_name.strip(),
-        repository=str(repository) if isinstance(repository, str) and repository else None,
-        base_ref=str(base_ref),
-        local_file=str(local_file) if isinstance(local_file, str) else None,
-    )
-
-
-def _git(root: Path, *arguments: str) -> str:
-    # ECP-COR-013, ECP-PRM-003: bounded through the one launcher; a start failure is the gate's own refusal.
-    completed = run_git(
-        root, *arguments, timeout=60,
-        error=lambda message: DelegationError(WEX_ECP_040, f"git {' '.join(arguments)} could not run: {message}"),
-    )
-    if completed.returncode != 0:
-        raise DelegationError(WEX_ECP_040, f"git {' '.join(arguments)} failed: {_text(completed.stderr).strip()[:200]}")
-    return _text(completed.stdout).strip()
-
-
-def candidate_head(root: Path) -> str:
-    return _git(root, "rev-parse", "HEAD")
-
-
-def _repository_from_origin(root: Path) -> str | None:
-    try:
-        url = _git(root, "remote", "get-url", "origin")
-    except DelegationError:
-        return None
-    for prefix in ("git@github.com:", "https://github.com/", "ssh://git@github.com/"):
-        if url.startswith(prefix):
-            return url[len(prefix):].removesuffix(".git")
-    return None
-
-
-def class_at_base(root: Path, configuration: DelegationConfiguration, work_order_path: Path) -> bool:
-    """Whether the work order carries the class in the pull request's base copy (never the branch's)."""
-
-    relative = work_order_path.resolve().relative_to(root.resolve()).as_posix()
-    try:
-        base = _git(root, "merge-base", "HEAD", configuration.base_ref)
-        content = _git(root, "show", f"{base}:{relative}")
-    except DelegationError:
-        return False
-    # ECP-PRM-005: the one parser, line-anchored; the earlier split matched a +++ anywhere in the body.
-    try:
-        metadata = front_matter.parse(content)
-    except front_matter.FrontMatterError:
-        return False
+def declares_class(metadata: Mapping[str, Any]) -> bool:
     table = metadata.get("delegation")
     return isinstance(table, dict) and table.get("class") == DELEGATION_CLASS
 
 
-def declares_class(metadata: Mapping[str, Any]) -> bool:
-    table = metadata.get("delegation")
-    return isinstance(table, dict) and set(table) == {"class"} and table.get("class") == DELEGATION_CLASS
+def _approved_scope(root: Path, path: Path, metadata: Mapping[str, Any]) -> Mapping[str, Any]:
+    approvals = [e for e in metadata.get("lifecycle_events", [])
+                 if e.get("to") == "approved" and e.get("decided_by") == "engineering-owner"]
+    if not approvals:
+        raise DelegationError(WEX_ECP_022, f"{path.name} has no recorded engineering-owner approval")
+    approval = approvals[-1]
+    if "scope_paths" in approval:
+        return {"execution_scope": {"paths": approval["scope_paths"]},
+                "delegation": {"class": approval.get("delegation_class")}}
+    # Older approval events did not include scope. Read their original committed
+    # document, on any local branch; no base-branch merge or network is needed.
+    relative = path.resolve().relative_to(root.resolve()).as_posix()
+    history = run_git(root, "log", "--reverse", "--format=%H", "HEAD", "--", relative,
+                      error=lambda message: DelegationError(WEX_ECP_022, message))
+    if history.returncode == 0:
+        for commit in text(history.stdout).splitlines():
+            result = run_git(root, "show", f"{commit}:{relative}",
+                             error=lambda message: DelegationError(WEX_ECP_022, message))
+            if result.returncode:
+                continue
+            try:
+                previous = front_matter.parse(text(result.stdout))
+            except front_matter.FrontMatterError:
+                continue
+            if approval in previous.get("lifecycle_events", []):
+                return previous
+    raise DelegationError(WEX_ECP_022, f"{path.name} needs a recorded approval of its scope")
 
 
-def read_gate(root: Path, configuration: DelegationConfiguration, sha: str) -> GateReading:
-    """The required check's conclusion for `sha` from the configured source (ECP-DLG-003/-004)."""
-
-    if configuration.gate_source == "local-file":
-        path = root / str(configuration.local_file)
-        try:
-            value = json.loads(path.read_text(encoding="utf-8"))
-        except (OSError, UnicodeError, ValueError) as exc:
-            raise DelegationError(WEX_ECP_040, f"gate source {path.name} unreadable at {sha[:7]}: {exc}") from exc
-        if not isinstance(value, dict) or value.get("sha") != sha:
-            raise DelegationError(WEX_ECP_040, f"gate source names no check for head {sha[:7]} (head not found)")
-        conclusion = str(value.get("conclusion", "missing"))
-        reading = GateReading(sha, conclusion, str(value.get("check_run_id", "local")), configuration.check_name, "local-file")
-    else:
-        repository = configuration.repository or _repository_from_origin(root)
-        if repository is None:
-            raise DelegationError(WEX_ECP_040, "delegation.repository is not configured and origin is not a GitHub remote")
-        url = f"{GITHUB_API}/repos/{repository}/commits/{quote(sha, safe='')}/check-runs?check_name={quote(configuration.check_name, safe='')}"
-        headers = {"Accept": "application/vnd.github+json", "User-Agent": "se-harness"}
-        token = os.environ.get("GITHUB_TOKEN")
-        if token:
-            headers["Authorization"] = f"Bearer {token}"
-        try:
-            with urlopen(Request(url, headers=headers), timeout=30) as response:  # noqa: S310 - fixed https host
-                payload = json.loads(response.read().decode("utf-8"))
-        except HTTPError as exc:
-            if exc.code == 404:
-                raise DelegationError(WEX_ECP_040, f"head {sha[:7]} not found on {repository}") from exc
-            raise DelegationError(WEX_ECP_040, f"gate source error for {sha[:7]}: HTTP {exc.code}") from exc
-        except (URLError, OSError, ValueError) as exc:
-            raise DelegationError(WEX_ECP_040, f"gate source error for {sha[:7]}: {exc}") from exc
-        runs = [item for item in payload.get("check_runs", []) if item.get("name") == configuration.check_name]
-        if not runs:
-            raise DelegationError(WEX_ECP_040, f"check {configuration.check_name!r} is missing at head {sha[:7]}")
-        latest = runs[0]
-        conclusion = str(latest.get("conclusion") or latest.get("status") or "missing")
-        reading = GateReading(sha, conclusion, str(latest.get("id", "")), configuration.check_name, "github-checks")
-    return reading
-
-
-def require_passing_gate(root: Path, configuration: DelegationConfiguration, sha: str) -> GateReading:
-    reading = read_gate(root, configuration, sha)
-    if not reading.passing:
-        raise DelegationError(
-            WEX_ECP_040,
-            f"required check {reading.check_name!r} at head {sha[:7]} is {reading.conclusion}, not success",
-        )
-    return reading
-
-
-def delegated_reason(right: str, reading: GateReading, supplied: str | None) -> str:
-    """The lifecycle event's reason: the class, the check-run id and the head sha (ECP-DLG-005)."""
-
-    evidence = (
-        f"Delegated {right} under [delegation] class {DELEGATION_CLASS!r}: required check "
-        f"{reading.check_name!r} success at {reading.sha} (check-run {reading.check_run_id}, source {reading.source})."
-    )
-    return evidence if not supplied else f"{evidence} {supplied}"
-
-
-def authorize_delegated_right(
-    root: Path,
-    *,
-    work_order_metadata: Mapping[str, Any],
-    work_order_path: Path,
-    right: str | None,
-) -> GateReading:
-    """Admit the delegated role for one right, or refuse with the coded reason.
-
-    Order (ECP-DLG-002/-003/-006/-007): the right must be one of the three;
-    the work order must declare the class and carry it at the base; the gate
-    must read success for the candidate head.
-    """
-
+def authorize_delegated_right(root: Path, *, work_order_metadata: Mapping[str, Any],
+                              work_order_path: Path, right: str | None) -> str:
     if right not in DELEGATED_RIGHTS:
-        raise DelegationError(
-            WEX_ECP_022,
-            f"{DELEGATED_ROLE} may apply only {', '.join(DELEGATED_RIGHTS)}; {right or 'this transition'} is a human decision right",
-        )
+        raise DelegationError(WEX_ECP_022, f"{right or 'This transition'} remains an owner decision")
     if not declares_class(work_order_metadata):
-        raise DelegationError(WEX_ECP_022, f"{work_order_path.name} declares no [delegation] class; {DELEGATED_ROLE} is refused")
-    configuration = load_configuration(root)
-    if configuration is None:
-        raise DelegationError(WEX_ECP_040, f"no [delegation] gate source is configured in {CONFIGURATION_NAME}")
-    if not class_at_base(root, configuration, work_order_path):
-        raise DelegationError(
-            WEX_ECP_022,
-            f"{work_order_path.name} carries no [delegation] class at the base {configuration.base_ref}; a branch cannot widen its own delegation",
-        )
-    return require_passing_gate(root, configuration, candidate_head(root))
+        raise DelegationError(WEX_ECP_022, f"{work_order_path.name} declares no execution delegation")
+    approved = _approved_scope(root, work_order_path, work_order_metadata)
+    if not declares_class(approved) or approved.get("execution_scope") != work_order_metadata.get("execution_scope"):
+        raise DelegationError(WEX_ECP_022, f"{work_order_path.name} delegation or scope changed since owner approval")
+    return "recorded engineering-owner approval"
+
+
+def delegated_reason(right: str, approval: str, supplied: str | None) -> str:
+    reason = f"Delegated {right} under execution class and {approval}; relevant local gates passed."
+    return reason if not supplied else f"{reason} {supplied}"
 
 
 def delegation_overlay(
@@ -301,20 +126,11 @@ def delegation_overlay(
         return restitution
     if not declares_class(work_order_metadata):
         return restitution
-    configuration = load_configuration(root)
-    if configuration is None or not class_at_base(root, configuration, work_order_path):
-        return restitution
     try:
-        reading = require_passing_gate(root, configuration, candidate_head(root))
-    except DelegationError as exc:
-        return {
-            **restitution,
-            "decision_required": {**decision, "role": DELEGATED_ROLE, "delegation": {"class": DELEGATION_CLASS, "gate": "not passing"}},
-            "command_or_response": {
-                "kind": "response",
-                "value": f"Wait for or repair the required check before the delegated {right}: {exc.message}",
-            },
-        }
+        authorize_delegated_right(root, work_order_metadata=work_order_metadata,
+                                 work_order_path=work_order_path, right=right)
+    except DelegationError:
+        return restitution
     operation = delegated_operation(right)
     if operation.transition is not None:
         argv = ["harnessctl", "transition", ".", "--set", f"{artifact_id}={operation.result_status}", "--decision", f"{artifact_id}={DELEGATED_ROLE}", "--apply"]
@@ -325,28 +141,7 @@ def delegation_overlay(
         "decision_required": {
             **decision,
             "role": DELEGATED_ROLE,
-            "delegation": {"class": DELEGATION_CLASS, "gate": "success", "check_run_id": reading.check_run_id, "head": reading.sha},
+            "delegation": {"class": DELEGATION_CLASS, "source": "owner-approval"},
         },
         "command_or_response": {"kind": "command", "argv": argv},
     }
-
-
-__all__ = [
-    "DELEGATED_RIGHTS",
-    "DELEGATED_ROLE",
-    "DELEGATED_TRANSITIONS",
-    "DELEGATION_CLASS",
-    "DelegationConfiguration",
-    "DelegationError",
-    "GateReading",
-    "authorize_delegated_right",
-    "candidate_head",
-    "class_at_base",
-    "declares_class",
-    "delegated_operation",
-    "delegated_reason",
-    "delegation_overlay",
-    "load_configuration",
-    "read_gate",
-    "require_passing_gate",
-]

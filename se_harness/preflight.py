@@ -123,6 +123,7 @@ class PreflightReport:
     #: ECP-ENG-014: candidate-versus-released skew, reported but never blocking; the one
     #: classifier serves this report and `check --checkpoint start`.
     skew: tuple[PreflightDiagnostic, ...] = ()
+    background: tuple[PreflightDiagnostic, ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -133,6 +134,7 @@ class PreflightReport:
             "assurance": self.assurance,
             "diagnostics": [asdict(item) for item in self.diagnostics],
             "skew": [asdict(item) for item in self.skew],
+            "background": [asdict(item) for item in self.background],
             "reading_manifest": list(self.reading_manifest),
             "authority_boundary": AUTHORITY_BOUNDARY,
         }
@@ -537,15 +539,13 @@ def run_preflight(
             diagnostics.append(PreflightDiagnostic(I001, check.name, check.detail))
 
     artifacts: list[Any] = []
+    validation = None
+    background: list[PreflightDiagnostic] = []
     validator: ModuleType | None = None
     try:
         validator = validate_engineering_artifacts  # ECP-ENG-003: the engine is imported, not loaded by path
         validation = report if report is not None else validator.validate_repository(root)
         artifacts = list(validation.artifacts)
-        diagnostics.extend(
-            PreflightDiagnostic(f"A-{item.code}", item.path, item.message)
-            for item in validation.errors
-        )
     except Exception as exc:
         diagnostics.append(PreflightDiagnostic(A001, "docs/engineering", f"validator unavailable: {exc}"))
 
@@ -553,7 +553,19 @@ def run_preflight(
         work_order_id, artifacts, validator, root, phase, diagnostics
     )
 
+    from se_harness.repository_graph import artifact_catalog, classify_diagnostics, RepositoryWorkflowError
     catalog = {item.artifact_id: item for item in artifacts}
+    if validation is not None:
+        try:
+            catalog = artifact_catalog(validation)
+        except RepositoryWorkflowError as exc:
+            diagnostics.append(PreflightDiagnostic(A001, "docs/engineering", str(exc)))
+        if work_order is not None:
+            scoped, global_errors, _ = classify_diagnostics(validation, catalog, work_order, root)
+            blocking = {(item["code"], item["path"], item["message"]) for item in scoped + global_errors}
+            for item in validation.errors:
+                destination = diagnostics if (item.code, item.path, item.message) in blocking else background
+                destination.append(PreflightDiagnostic(f"A-{item.code}", item.path, item.message))
 
     def require_targets(
         source: Any,
@@ -705,6 +717,7 @@ def run_preflight(
         diagnostics=relevant,
         reading_manifest=manifest,
         skew=skew,
+        background=tuple(background),
     )
 
 
@@ -732,6 +745,9 @@ def render_preflight(report: PreflightReport) -> str:
             f"- [{item.code}] {item.path}: {item.message}"
             for item in report.skew
         )
+    if report.background:
+        lines.extend(["", "Unrelated diagnostics (not blocking):"])
+        lines.extend(f"- [{item.code}] {item.path}: {item.message}" for item in report.background)
     if report.reading_manifest:
         lines.extend(["", "Reading manifest:"])
         lines.extend(f"- {path}" for path in report.reading_manifest)

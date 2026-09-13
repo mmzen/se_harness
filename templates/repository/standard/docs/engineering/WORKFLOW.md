@@ -44,13 +44,10 @@ Lifecycle transition apply, non-dry-run domain and artifact authoring, verificat
 
 ## Delegated operations
 
-`WORKFLOW.json` schema v4 defines the three delegated operations of the
-delegation class. A work order that carries `[delegation] class =
-"execution"` at the base of its pull request lets the `delegated-executor`
-role apply them, one at a time, only while the required pull-request check
-for the candidate head reads `success` from the CI provider; the decision
-record names the check-run id and the head sha. Absence from this table
-denies an operation; every other decision right stays human.
+`WORKFLOW.json` defines three delegated operations. The owner approves the
+execution class and scope on the work order. The executor can then apply
+these operations when their local gates pass, without a base-branch merge
+or live CI request. Every other decision right stays with its owner.
 
 | Operation | Decision right | Current WO state | Result |
 | --- | --- | --- | --- |
@@ -58,13 +55,16 @@ denies an operation; every other decision right stays human.
 | `delegated-work-order-complete` | `DR-WO-COMPLETE` | `in_progress` | Existing legal transition to `implemented`, behind the same handoff gate as the human decision |
 | `delegated-vrec-prepare` | `DR-VREC-PREPARE` | `implemented` | One undecided ready VREC; no assurance decision |
 
-`harnessctl check` tells the actor when a decision due is delegated to it:
-`decision_required` names `delegated-executor` and the command to run when
-the gate is `success`, and a response naming the check, the head and the
-conclusion observed otherwise. Verification preparation MUST stop before Git
-when a required candidate commit is absent; the response requests the exact
-repository-owner action and performs no staging, commit, branch, push,
-merge, assurance, release, credential, network, or external effect.
+`harnessctl check` offers the delegated command when the recorded approval
+covers its scope. It still reports failed local gates. CI is assessed separately
+when integrating or publishing the candidate.
+
+Verification capture hashes selected artifacts directly. It does not build a
+dashboard. To capture a committed candidate while keeping local edits, use
+`capture-verification --candidate-commit <commit> --test-command <executable> <args>`.
+The test command runs without a shell in a temporary checkout; a failed command
+or tracked test mutation prevents the record. The record keeps its actual commit
+and test result, and the temporary checkout is removed.
 
 ## State model
 

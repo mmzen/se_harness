@@ -6,6 +6,7 @@ import json
 import re
 import shutil
 import subprocess
+import tempfile
 from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
 from typing import Any
@@ -17,7 +18,7 @@ from se_harness._process import run as _launch, text as _text
 from se_harness.gate_source import DELEGATED_RIGHTS, DELEGATED_ROLE, DelegationError, authorize_delegated_right, delegated_reason
 from se_harness.hash_bound import HashBoundError, declared_digest
 from se_harness.artifact_layout import ID_PATTERN, common_artifact_domain, repository_record_relative_path, validate_domain
-from se_harness.engine import generate_harness_dashboard, validate_engineering_artifacts
+from se_harness.engine import validate_engineering_artifacts
 from se_harness.engine.validate_engineering_artifacts import evidence_work_order_keys
 from se_harness.installer import HarnessError, ensure_target, safe_destination
 from se_harness.workflow_contract import IMPLEMENTED_OR_LATER_STATUSES, load_lifecycle_registry
@@ -136,14 +137,25 @@ def standing_deviations_for_work(root: Path, catalog: dict[str, Any], work_ids: 
     )
 
 
-def _validation_catalog(repository_root: Path, report: Any | None = None) -> dict[str, Any]:
-    """The validated artifacts by id (ECP-ENG-010, ECP-ENG-011): the caller's report, or one validation."""
-
+def _validation_catalog(repository_root: Path, report: Any | None = None,
+                        selected_ids: list[str] | None = None) -> dict[str, Any]:
+    from se_harness.repository_graph import artifact_catalog, classify_diagnostics
     validation = report if report is not None else validate_engineering_artifacts.validate_repository(repository_root)
-    if not validation.valid:
-        first = validation.errors[0].message if validation.errors else "artifact graph is invalid"
-        raise StateRefusal(f"artifact graph must be valid before recording provenance: {first}")
-    return {artifact.artifact_id: artifact for artifact in validation.artifacts}
+    catalog = artifact_catalog(validation)
+    errors = validation.errors
+    if selected_ids is not None:
+        errors = []
+        for identifier in selected_ids:
+            if identifier not in catalog:
+                raise StateRefusal(f"unknown selected work order: {identifier}")
+            scoped, global_errors, _ = classify_diagnostics(validation, catalog, catalog[identifier], repository_root)
+            errors.extend(scoped + global_errors)
+    if errors:
+        first = errors[0]
+        message = first["message"] if isinstance(first, dict) else first.message
+        raise StateRefusal(f"artifact graph must be valid before recording provenance: {message}")
+    return catalog
+
 
 
 def _require_artifact(catalog: dict[str, Any], artifact_id: str, artifact_type: str) -> Any:
@@ -331,21 +343,52 @@ def _timestamp() -> str:
     return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def _generate_snapshot(repository_root: Path, report: Any) -> str:
-    # ECP-ENG-003, ECP-ENG-015: the generator runs in-process from the validation this
-    # command already holds; a generation fault or an invalid graph refuses.
-    try:
-        generate_harness_dashboard.generate_bundle(repository_root, report=report)
-    except (generate_harness_dashboard.GenerationError, OSError, UnicodeError, json.JSONDecodeError) as exc:
-        raise EvidenceRefusal(f"dashboard generation must pass before recording verification: {exc}") from exc
-    if not report.valid:
-        raise EvidenceRefusal("dashboard generation must pass before recording verification")
-    manifest = repository_root / "target" / "harness-dashboard" / "dashboard-manifest.json"
-    if not manifest.is_file():
-        raise EvidenceRefusal("dashboard generator did not create dashboard-manifest.json")
-    # The v2 manifest recursively binds every deterministic artifact, relation,
-    # readiness, provenance, and retained-content resource for this revision.
-    return raw_sha256(manifest.read_bytes())
+def _generate_snapshot(repository_root: Path, report: Any, selected_ids: list[str]) -> str:
+    from se_harness.workflow_change_set import formal_snapshot_digest
+    return formal_snapshot_digest(repository_root, report.artifacts, selected_ids)
+
+
+
+def capture_committed_verification(repository: Path, *, candidate_commit: str,
+                                   test_command: list[str], **options: Any) -> Path:
+    root = ensure_target(repository, must_exist=True)
+    if not candidate_commit or candidate_commit.startswith("-") or not test_command:
+        raise InputRefusal("an explicit candidate needs a commit and --test-command argv")
+    mutation_guard.require_mutation_authority(root, operation="capture-verification")
+    from se_harness.repository_graph import artifact_catalog
+    caller_catalog = artifact_catalog(validate_engineering_artifacts.validate_repository(root))
+    if options["record_id"] in caller_catalog:
+        raise InputRefusal(f"artifact ID already exists: {options['record_id']}")
+    options.pop("report", None)  # The temporary checkout gets its own validation.
+    commit = _git(root, "rev-parse", "--verify", f"{candidate_commit}^{{commit}}")
+    # Git creates and removes only this newly allocated temporary checkout.
+    with tempfile.TemporaryDirectory(prefix="se-harness-candidate-") as directory:
+        checkout = Path(directory).resolve() / "checkout"
+        _git(root, "worktree", "add", "--detach", str(checkout), commit)
+        try:
+            checked = _launch(test_command, cwd=checkout, timeout=3600, error=EvidenceRefusal)
+            if checked.returncode:
+                raise EvidenceRefusal(f"candidate tests failed (exit {checked.returncode}): "
+                                      + _text(checked.stderr or checked.stdout)[-2000:])
+            # Test-created outputs must be ignored, not silently included in evidence.
+            require_clean_worktree(checkout)
+            record = capture_verification(checkout, **options)
+            from se_harness.front_matter import parse
+            metadata = parse(record.read_text(encoding="utf-8"))
+            destination = _output_path(root, record.relative_to(checkout).as_posix(), record)
+            evidence_relative = metadata["evaluator_evidence_path"]
+            evidence_destination = safe_destination(root, Path(evidence_relative))
+            content = record.read_text(encoding="utf-8")
+            content += "\n## Candidate test run\n\nCommit: `" + commit + "`. Exit status: 0.\n\n"
+            content += "Command arguments: `" + json.dumps(test_command) + "`.\n\n"
+            content += "```text\n" + _text(checked.stdout + checked.stderr)[-6000:].replace("```", "~~~") + "\n```\n"
+            evidence_bytes = (checkout / evidence_relative).read_bytes()
+        finally:
+            # The target is the allocated checkout, never a caller-supplied directory.
+            checkout.resolve().relative_to(Path(directory).resolve())
+            _git(root, "worktree", "remove", "--force", str(checkout))
+    _write_record_and_evidence(destination, content, evidence_destination, evidence_bytes)
+    return destination
 
 
 def capture_verification(
@@ -379,7 +422,7 @@ def capture_verification(
     # the CLI hands in the one it took for the prepared result.
     report = report if report is not None else validate_engineering_artifacts.validate_repository(root)
     ensure_governed_checkpoint(root, selected_work, report=report)
-    catalog = _validation_catalog(root, report)
+    catalog = _validation_catalog(root, report, selected_work)
     if record_id in catalog:
         raise InputRefusal(f"artifact ID already exists: {record_id}")
     declared_verification: set[str] = set()
@@ -439,7 +482,7 @@ def capture_verification(
     evidence_sha256 = _evidence_digest(evaluator_evidence_path, authority.evidence_bytes)
     require_clean_worktree(root)
     commit, object_format = git_identity(root)
-    snapshot_hash = _generate_snapshot(root, report)
+    snapshot_hash = _generate_snapshot(root, report, selected_work)
     require_clean_worktree(root)
     now = _timestamp()
     title_scope = selected_work[0] if len(selected_work) == 1 else f"{len(selected_work)} work orders"

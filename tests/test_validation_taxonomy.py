@@ -108,7 +108,9 @@ class ValidationTaxonomyTests(unittest.TestCase):
             self.assertIn("| risk |", canonical_quality)
         elif "`scope`" in quality:
             # The root carries WO-ECP-013's scope checkpoint: it is the candidate template.
-            self.assertEqual(canonical_quality, quality)
+            old = "Work-order-keyed evidence names the selected artifact and checkpoint and binds the current formal-snapshot digest."
+            new = "A work-order evidence reference names a nonempty file, or a header binds the selected checkpoint and relevant-input digest. Unrelated artifacts do not change that digest."
+            self.assertEqual(canonical_quality, quality.replace(old, new))
         else:
             # WO-ECP-013: the candidate template amended QG-010 and QG-011 for the
             # scope checkpoint; a root released before it lacks exactly those two

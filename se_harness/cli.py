@@ -27,7 +27,7 @@ from se_harness.installer import (
 from se_harness.github_ci import SelectionError, select_from_event
 from se_harness.mutation_guard import MutationGuardError
 from se_harness.preflight import inspect_installation, render_preflight, render_preflight_json, run_preflight
-from se_harness.provenance import capture_verification, prepare_release
+from se_harness.provenance import capture_verification, capture_committed_verification, prepare_release
 from se_harness.risks import OPTION_TARGETS
 from se_harness.release_qualification import (
     failed_qualification,
@@ -476,11 +476,28 @@ def _select_work_order(args: argparse.Namespace) -> int:
     return 0
 
 
+def _check_pr(args: argparse.Namespace) -> int:
+    from se_harness.github_ci import check_pull_request
+    try:
+        result = check_pull_request(Path(args.target), Path(args.event), args.from_git)
+    except (HarnessError, SelectionError) as exc:
+        raise HarnessError(f"pull-request check: {exc}") from exc
+    if args.json:
+        _print_json(_command_result("check-pr", "completed", **result))
+    else:
+        print("PR scope and handoff passed: " + ", ".join(result["work_orders"]))
+    return 0
+
+
 def _capture_verification(args: argparse.Namespace) -> int:
     try:
         # ECP-ENG-010: the one validation of this command, handed to the writer and the result.
         report = validate_engineering_artifacts.validate_repository(ensure_target(Path(args.target), must_exist=True))
-        output = capture_verification(
+        if args.test_command and not args.candidate_commit:
+            raise HarnessError("--test-command requires --candidate-commit")
+        capture = capture_committed_verification if args.candidate_commit else capture_verification
+        candidate_options = {"candidate_commit": args.candidate_commit, "test_command": args.test_command} if args.candidate_commit else {"report": report}
+        output = capture(
             Path(args.target),
             record_id=args.record_id,
             work_order_ids=args.work_order,
@@ -489,7 +506,7 @@ def _capture_verification(args: argparse.Namespace) -> int:
             owner=args.owner,
             output=args.output,
             domain=args.domain,
-            report=report,
+            **candidate_options,
         )
         result = preparation_result(Path(args.target), args.record_id, "capture-verification", output, report)
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
@@ -1056,13 +1073,20 @@ def build_parser() -> argparse.ArgumentParser:
     risks.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
     risks.set_defaults(handler=_risks)
 
+    check_pr = commands.add_parser("check-pr", help="check a PR against its selected work orders and their combined scope")
+    check_pr.add_argument("target", nargs="?", default=".")
+    check_pr.add_argument("--event", required=True)
+    check_pr.add_argument("--from-git", required=True)
+    check_pr.add_argument("--json", action="store_true")
+    check_pr.set_defaults(handler=_check_pr)
+
     select_work = commands.add_parser(
         "select-work-order",
         help="select one structured work-order field from a GitHub pull-request event",
     )
     select_work.add_argument("--event", required=True)
     select_work.add_argument(
-        "--field", choices=("work-order", "restitution-digest"), default="work-order",
+        "--field", choices=("work-order", "work-orders", "restitution-digest"), default="work-order",
         help="declared field to select; restitution-digest prints empty text when absent",
     )
     select_work.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
@@ -1186,6 +1210,8 @@ def build_parser() -> argparse.ArgumentParser:
     capture.add_argument("--output")
     capture.add_argument("--domain", help="place the record in an explicit engineering domain")
     capture.add_argument("--json", action="store_true", help="emit the canonical workflow result as JSON")
+    capture.add_argument("--candidate-commit", help="test and capture this committed candidate in a temporary checkout")
+    capture.add_argument("--test-command", nargs=argparse.REMAINDER, help="test command and arguments for --candidate-commit; put this option last")
     capture.set_defaults(handler=_capture_verification)
 
     release = commands.add_parser("prepare-release", help="prepare a ready commit-bound release record")

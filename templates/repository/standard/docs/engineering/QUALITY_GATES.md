@@ -57,7 +57,7 @@ shell command, or repository-provided executable.
 | `changed_paths_within_scope` | Every path in a complete declared change set matches one exact path or component-boundary directory prefix. |
 | `start_preflight_ready` | Start preflight has no lifecycle-relevant blocker. |
 | `review_preflight_ready` | Review preflight has no lifecycle-relevant blocker. |
-| `review_evidence_available` | Work-order-keyed evidence names the selected artifact and checkpoint and binds the current formal-snapshot digest. |
+| `review_evidence_available` | A work-order evidence reference names a nonempty file, or a header binds the selected checkpoint and relevant-input digest. Unrelated artifacts do not change that digest. |
 | `authoring_ready` | The selected definition carries no template placeholder outside code and its `Open decisions` section, when present, reads `None`. Evaluated when a definition leaves `draft`. |
 | `decision_gate_clear` | No `open` decision names the selected artifact in `blocks`, and no `deferred` decision names it without a scope admitting the requested transition. The failure names the decision, its options, the deciding role and the `harnessctl decide` command. |
 | `release_unit_ready` | A release contract that names a `candidate_commit` declares in `gates` exactly the work-order census derived from the `Harness-Work-Order` trailers between `previous_release_tag` and that commit; a contract without a candidate commit passes unmeasured. Evaluated when a release contract leaves `draft`. |

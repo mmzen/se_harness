@@ -215,11 +215,38 @@ def _snapshot_content(raw: bytes) -> bytes:
         return raw
 
 
-def formal_snapshot_digest(root: Path, artifacts: Iterable[Any]) -> str:
+def formal_snapshot_digest(root: Path, artifacts: Iterable[Any], selected_ids: Iterable[str] | None = None) -> str:
+    if selected_ids is not None:
+        from se_harness.repository_graph import project_scope, PRIMARY_TYPES
+        catalog = {item.artifact_id: item for item in artifacts}
+        selected = set(selected_ids)
+        for identifier in tuple(selected):
+            if catalog[identifier].artifact_type not in PRIMARY_TYPES:
+                continue
+            governing, _ = project_scope(catalog, catalog[identifier])
+            selected.update(governing)
+        artifacts = [catalog[identifier] for identifier in selected if identifier in catalog]
+    artifacts = list(artifacts)
+    paths = {item.path for item in artifacts}
+    if selected_ids is not None:
+        for item in artifacts:
+            if item.artifact_type != "work_order":
+                continue
+            for entry in execution_scope(item) if "execution_scope" in item.metadata else ():
+                destination = safe_destination(root, Path(entry.rstrip("/")))
+                candidates = destination.rglob("*") if entry.endswith("/") and destination.is_dir() else [destination]
+                for path in candidates:
+                    relative = path.relative_to(root).as_posix()
+                    # Formal inputs are selected above; generated evidence is an output.
+                    if relative.startswith("docs/engineering/") or "__pycache__" in path.parts:
+                        continue
+                    if path.is_file():
+                        path.resolve().relative_to(root.resolve())
+                        paths.add(path)
     digest = hashlib.sha256()
-    for artifact in sorted(artifacts, key=lambda item: item.path.relative_to(root).as_posix()):
-        relative = artifact.path.relative_to(root).as_posix().encode("utf-8")
-        content = _snapshot_content(artifact.path.read_bytes())
+    for path in sorted(paths, key=lambda item: item.relative_to(root).as_posix()):
+        relative = path.relative_to(root).as_posix().encode("utf-8")
+        content = _snapshot_content(path.read_bytes())
         digest.update(len(relative).to_bytes(8, "big"))
         digest.update(relative)
         digest.update(len(content).to_bytes(8, "big"))

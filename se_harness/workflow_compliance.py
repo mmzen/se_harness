@@ -159,7 +159,7 @@ def write_evidence_packet(
     conversion = line_ending_conversion(root, relative)
     if conversion is not None:
         raise CodedError(WEX_ECP_011, f"a .gitattributes rule would convert line endings of {relative} ({conversion})")
-    snapshot = formal_snapshot_digest(root, report.artifacts)
+    snapshot = formal_snapshot_digest(root, report.artifacts, [primary.artifact_id])
     header = {
         "artifact": artifact_id,
         "checkpoint": checkpoint,
@@ -348,7 +348,7 @@ def build_context(
         ),
         change_set=change_set,
         checkpoint=checkpoint,
-        formal_snapshot_sha256=formal_snapshot_digest(root, report.artifacts),
+        formal_snapshot_sha256=formal_snapshot_digest(root, report.artifacts, [primary.artifact_id]),
         target=target,
     )
 
@@ -412,7 +412,7 @@ def _resolve_change_set(
         rebound = rebind_handoff_packet(
             root,
             primary,
-            formal_snapshot_digest(root, report.artifacts),
+            formal_snapshot_digest(root, report.artifacts, [primary.artifact_id]),
             datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         )
     if from_git is not None:

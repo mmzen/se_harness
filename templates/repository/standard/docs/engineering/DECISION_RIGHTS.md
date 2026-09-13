@@ -76,15 +76,14 @@ Holding one role does not grant another role. One person MAY hold several roles 
 
 ## Governed delegated execution
 
-**DR-015:** A work order MAY carry `[delegation] class = "execution"`. While
-the required pull-request check for the candidate head is `success`, read
-from the CI provider by commit id, the `delegated-executor` role MAY apply
-exactly the work-order start, work-order completion and VREC-preparation
-rights of the catalog above for that work order; the class is read at the
-base of the pull request, never from the branch. The class MUST NOT activate verification, release, delivery, Git,
-credential, network or external authority, or any definition decision, and
-delegation MUST NOT be inferred from an environment, a token or an actor
-name. Approving the work order that carries the class is the delegating
-act under `DR-007`.
+**DR-015:** An engineering owner MAY approve a work order with
+`[delegation] class = "execution"`. That recorded approval delegates only
+work-order start, completion and VREC preparation for the approved scope.
+The same local gates apply to the owner and executor. A preliminary merge
+and a live CI response are not required. Scope or delegation changes need
+owner approval. The existing approval event records those approved values;
+older events can be read from their original local Git document.
+Verification, release, delivery and external actions remain owner decisions.
+A class label, environment value, test pass or actor name alone grants no authority.
 
 Workflow order is defined by [WORKFLOW.md](WORKFLOW.md). Gate predicates are defined by [QUALITY_GATES.md](QUALITY_GATES.md). Artifact relations are defined by [TRACEABILITY.md](TRACEABILITY.md).

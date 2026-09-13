@@ -2,7 +2,7 @@
 id = "WO-KIS-002"
 type = "work_order"
 title = "Let local work progress on its own evidence"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-13"
 updated = "2026-09-13"
@@ -71,6 +71,16 @@ paths = [
   "templates/repository/standard/docs/engineering/WORKFLOW.json",
   "templates/repository/standard/docs/engineering/WORKFLOW.md",
   "templates/repository/standard/docs/engineering/templates/",
+  "tests/test_artifact_catalog.py",
+  "tests/test_context_routing_retirement.py",
+  "tests/test_repository_context_retirement.py",
+  "tests/test_validation_taxonomy.py",
+  "tests/test_managed_template_hygiene.py",
+  "docs/notes/harnessctl-reference.md",
+  "tests/test_engine_import_surface.py",
+  "tests/test_ci_pipeline.py",
+  "tests/test_codes_and_contract_tables.py",
+  "docs/notes/diagnostic-codes.md",
   "tests/test_agentic_execution.py",
   "tests/test_cli_shape.py",
   "tests/test_delegation_class.py",
@@ -98,6 +108,13 @@ to = "approved"
 decided_at = "2026-09-13T16:40:43Z"
 decided_by = "engineering-owner"
 reason = "The owner accepted all 38 candidates in the retained 2026-09-13 codebase KISS review and requested the work orders: \"OK ! Let's create the work orders to implement all candidates\". Record the engineering-owner approval of WO-KIS-002 within that accepted scope and the established delegated route. SPEC-KIS-001 makes the replacement contracts and seven retained protections explicit; the coverage map assigns all candidates. This records definition approval or bounded execution delegation only, not implementation start, completion, verification, release, merge, publication, live adoption or historical evidence deletion."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-13T18:09:09Z"
+decided_by = "engineering-owner"
+reason = "The owner confirmed PR 467 is merged, continuing the accepted sequential implementation of all KISS candidates. Start WO-KIS-002 after WO-KIS-001 integration at 47c3667655f83d3aa1bd08f18ff2a7ac30cf77f0. Retain the approved delegated execution route for completion and preparation."
 +++
 
 # Let local work progress on its own evidence
@@ -176,3 +193,11 @@ An unavailable platform is untested; a proposed record is not verified; a green 
 State the simpler behavior, accepted candidates completed, checks run, observed reduction and material remaining limitation.
 Obtain the released evaluator's schema-2 handoff for WO-KIS-002 and report its actual state and one next action.
 Leave assurance, release, publication, merge and live adoption decisions to their explicit accountable actions.
+
+
+## Implementation scope clarification
+
+The authorized seven cuts also include the existing CI caller tests, the obsolete
+provenance-to-dashboard import assertion, and the generated diagnostic index and
+its contract test. These directly describe the retired behavior in this slice;
+no additional product behavior or work order is authorized by this correction.

@@ -201,3 +201,33 @@ Use `python scripts/build_plugin_archives.py develop --repository . --wheel ABSO
 This development-only route reads the current working source and can rebuild its
 own output folder. Release build/check keeps its existing provenance inputs.
 See [simple plugin operation](plugin-simplification-2026-09-13.md).
+
+
+## Local work after WO-KIS-002
+
+Candidate commands use the recorded owner approval and relevant local gates for
+execution delegation. They do not call GitHub or require a base-branch merge.
+CI still checks integration and publication. New work-order approval events
+retain the approved paths and class; older events use their original local Git
+copy, so a later scope change cannot silently extend an approval.
+
+For a combined PR, use one `Harness-Work-Orders: WO-AAA-001, WO-BBB-002` line.
+`harnessctl check-pr . --event event.json --from-git <base>` checks each selected
+work order and the complete diff against their union. A draft or outside path fails.
+
+Evidence freshness covers the selected governing chain and files in the work
+order's code scope. Unrelated artifact diagnostics appear separately in preflight.
+Verification capture is independent of dashboard generation. With local edits,
+select a committed candidate and a test command, with the test command last:
+
+```sh
+harnessctl capture-verification . --id VREC-AAA-001 --work-order WO-AAA-001 \
+  --verification VER-AAA-001 --evidence docs/engineering/product/evidence/checks.md \
+  --candidate-commit HEAD --test-command python -m unittest discover -s tests
+```
+
+This creates a temporary checkout, runs that command there, retains the commit and
+result in the ready record, and removes the temporary checkout. Local edits are
+preserved. No record is written when the tests fail. Ordinary capture without an
+explicit candidate still requires a clean checkout. A ready record needs the
+owner's verification decision.

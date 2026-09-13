@@ -377,6 +377,9 @@ def _mutate(
         _set_relation(front, "superseded_by", [reason])
         fields.update({"superseded_at", "supersession_authorized_by", "relations.superseded_by"})
     _append_event(front, artifact.status, target, actor, now, reason)
+    if artifact.artifact_type == "work_order" and target == "approved":
+        front.append("scope_paths = " + json.dumps(artifact.metadata.get("execution_scope", {}).get("paths", [])))
+        front.append("delegation_class = " + json.dumps(artifact.metadata.get("delegation", {}).get("class", "")))
     output = opening + newline.join(front) + newline + "+++" + newline + body
     return output.encode("utf-8"), tuple(sorted(fields))
 

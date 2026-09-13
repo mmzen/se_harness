@@ -96,7 +96,7 @@ def review_evidence(context: CheckpointContext) -> tuple[str, str]:
 def pull_request_body_findings(root: Path, body_path: Path) -> list[str]:
     """Check that a supplied pull-request body is readable and selects one work order."""
 
-    from se_harness.github_ci import MAX_EVENT_BYTES, SelectionError, select_work_order
+    from se_harness.github_ci import MAX_EVENT_BYTES, SelectionError, select_work_orders
 
     try:
         with body_path.open("rb") as handle:
@@ -110,7 +110,7 @@ def pull_request_body_findings(root: Path, body_path: Path) -> list[str]:
     except UnicodeDecodeError as exc:
         raise CodedError(WEX200, "pull-request body must be UTF-8") from exc
     try:
-        select_work_order(body)
+        select_work_orders(body)
     except SelectionError as exc:
         return [str(exc)]
     return []

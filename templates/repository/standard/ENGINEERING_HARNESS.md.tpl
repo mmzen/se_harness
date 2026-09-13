@@ -112,7 +112,7 @@ The actor MUST stop before changing state or scope when any of these conditions
 is true:
 
 - managed integrity fails;
-- the formal graph is invalid;
+- the selected governing chain is invalid or artifact IDs are ambiguous;
 - no phase-eligible selected work order exists;
 - a required governing artifact or gate is missing;
 - a required check fails;

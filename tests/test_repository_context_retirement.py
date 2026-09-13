@@ -159,6 +159,7 @@ class RepositoryContextRetirementTests(unittest.TestCase):
         # WO-ECP-035 (SPEC-ECP-024 ECP-ENG-014): the payload reports candidate-versus-released
         # skew apart from the blocking diagnostics, one additive member after them.
         expected.insert(expected.index("diagnostics") + 1, "skew")
+        expected.insert(expected.index("skew") + 1, "background")
         self.assertEqual(expected, list(payload))
         self.assertEqual("se-harness-preflight-v2", payload["schema"])
         self.assertNotEqual(BASELINE["preflight"]["schema"], payload["schema"])
