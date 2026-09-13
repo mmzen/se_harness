@@ -270,11 +270,7 @@ def plan_install(
     if mode not in {"init", "upgrade"}:
         raise HarnessError(f"unknown installation mode {mode!r}; expected init or upgrade")
     target = ensure_target(target, must_exist=(mode == "upgrade"))
-    from se_harness.skill_ownership import assert_ownership_state, ensure_no_pending_recovery
-
-    ensure_no_pending_recovery(target)
     old_lock = _load_lock(target) if target.exists() else {"schema": LOCK_SCHEMA, "tool_version": None, "files": {}}
-    assert_ownership_state(target, old_lock, templates=_templates())
     installed_at = None
     configured_project_name = None
     config_path = target / CONFIG_NAME
@@ -529,54 +525,7 @@ def apply_changes(
     allow_updates: bool,
     evidence_output: Path | None = None,
 ) -> dict:
-    # Ordinary installed-root writes serialize with ownership transfer. Planning
-    # remains read-only; the locked path rechecks inputs before any mutation.
-    from se_harness.skill_ownership import ownership_mutex
-
-    if (target / LOCK_NAME).exists():
-        with ownership_mutex(target):
-            return _apply_changes_locked(
-                target, changes, old_lock, allow_updates=allow_updates,
-                evidence_output=evidence_output,
-            )
-    return _apply_changes_locked(
-        target, changes, old_lock, allow_updates=allow_updates,
-        evidence_output=evidence_output,
-    )
-
-
-def _apply_changes_locked(
-    target: Path,
-    changes: Iterable[Change],
-    old_lock: dict,
-    *,
-    allow_updates: bool,
-    evidence_output: Path | None = None,
-) -> dict:
     changes = list(changes)
-    from se_harness.skill_ownership import (
-        DISCOVERY_PATHS, assert_ownership_state, ensure_no_pending_recovery,
-    )
-
-    ensure_no_pending_recovery(target)
-    actual_lock = _load_lock(target)
-    if old_lock.get("schema") == 4 or actual_lock.get("schema") == 4:
-        if actual_lock != old_lock:
-            raise HarnessError("ownership lock changed before apply; no files were written")
-        assert_ownership_state(target, actual_lock, templates=_templates())
-        protected = {path.casefold() for path in DISCOVERY_PATHS}
-        for item in changes:
-            # Caller-supplied Change objects are not necessarily planner output.
-            # Refuse aliases before the OS can normalize them into a retired
-            # destination, including Windows separators, streams and suffixes.
-            if not isinstance(item.path, str) or "\\" in item.path or ":" in item.path or any(
-                part in {"", ".", ".."} or part.endswith((".", " "))
-                for part in item.path.split("/")
-            ):
-                raise HarnessError("plugin-owned installation requires canonical portable change paths")
-            resolved = safe_destination(target, Path(item.path)).relative_to(target.resolve()).as_posix()
-            if item.path.casefold() in protected or resolved.casefold() in protected:
-                raise HarnessError("ordinary installation cannot write the plugin-owned catalog")
     transition = False
     target_identity = None
     prior_lock_sha256: str | None = None

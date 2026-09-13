@@ -62,15 +62,11 @@ python -m se_harness doctor .
 
 Run phase-appropriate work-order preflight and focused checks required by the governing verification contract. No formatter or linter is currently declared as a repository gate.
 
-For retained-skill ownership changes, `tests/test_skill_ownership.py` exposes the
-shared `acceptance_suite(smoke=...)` used by source and isolated installed-package
-acceptance. Ordinary test discovery includes the full class. Source mode uses
-an explicit installed-authority fixture; package mode uses the real installed
-identity and mutation guard. Keep candidate package environments, disposable
-repositories, and the explicit `SE_HARNESS_OWNERSHIP_EVIDENCE` directory outside
-the checkout. VER-PLG-020 requires Python 3.11 interface/compatibility smoke and
-the complete Python 3.13 ownership/fault matrix on both Ubuntu and Windows.
-Record unavailable filesystem mechanisms separately from passed refusals.
+Plugin migration tests run with the ordinary source suite. CI also runs
+`tests/test_skill_ownership.py` directly with the already installed candidate
+on Windows and Linux. These tests cover replacement of disposable skills,
+missing replacements, retry after interruption, and unrelated-file preservation.
+The installer integration test checks doctor and upgrade after migration.
 
 Generated dashboards, bytecode, environments, raw build output, normalized distributions, and disposable acceptance repositories are derived and must not become formal authority.
 
@@ -90,25 +86,11 @@ Trigger policy (`WO-CIP-001`, `SPEC-CIP-001` CIP-TRG): the candidate-evidence wo
 
 The candidate wheel is built once, in `candidate-source`, from a Git export of the exact commit, and handed to `candidate-package` and to both `upgrade-rehearsal` legs as the one-day artifact `candidate-wheel-non-promotable-<sha>` with a `SHA256SUMS` file that every consumer verifies before use (`SPEC-CIP-001` CIP-ART). No consumer runs `pip wheel` or `python -m build`. The artifact is candidate evidence, not a distribution; the promotable build is still the recipe replay under a released record.
 
-WO-PLG-020 adds a non-promotable source archive from that same export so inventory
-tests inspect actual wheel and sdist members. Both hashes and the source-member
-list accompany the one shared wheel. After the existing upgrade rehearsals,
-each `upgrade-rehearsal` platform runs the same ownership acceptance runner on
-source and on an isolated installed candidate: smoke on Python 3.11, then the
-full ownership/fault matrix on Python 3.13. The latter uses separately named
-external candidate and predecessor environments and installs the already
-verified wheel. The approved narrow CI applicability amendment permits that
-additional interpreter step; complete-candidate qualification and the canonical
-full repository suite still run once in `candidate-source` on Python 3.11.
-
-Ownership evidence starts with an explicit `incomplete` runtime record and
-retains exact interpreter/platform, tested Git commit and PR head, wheel and
-archive hashes, per-case JSON, subprocess logs, recursive snapshots, and raw
-recovery metadata under `skill-ownership-Linux` or `skill-ownership-Windows`.
-Package runs use isolated Python outside the checkout; source runs identify
-their authority fixture explicitly. A missing observation is not a passed
-refusal. These are candidate acceptance results and do not change the release
-sequences, the root-evaluator adoption procedure, or native host qualification.
+Plugin migration reuses the Python 3.11 candidate environment already prepared
+by each upgrade-rehearsal job. The source suite tests the source implementation;
+one direct test run per operating system tests the installed implementation.
+There are no separate ownership environments, crash matrices, per-case recursive
+snapshots, or ownership evidence archives.
 
 The predecessor evaluator's facts are derived, not restated (`WO-CIP-003`, `SPEC-CIP-001` CIP-PRE). Before any network step, `candidate-source` runs `python -m repository_tools.evaluator_facts derive --repository . --github-output "$GITHUB_OUTPUT"`, which reads the declared root — `tool_version` in `.engineering-harness.toml`, the `evaluator` block of `.engineering-harness.lock` (version, `archive_name`, `archive_sha256`, `payload_sha256`) — and the candidate's own `pyproject.toml` version, and exports them as job outputs. `candidate-package` and both `upgrade-rehearsal` legs take every predecessor value from those outputs; the repository-owned workflows carry no version or digest literal for the evaluator, and `tests/test_ci_pipeline.py` asserts that. The derivation fails closed with a `PRE0nn` code naming what is missing. Since `WO-ECP-010` no migration scenario exists: the `upgrade-rehearsal` legs run `repository_tools.upgrade_rehearsal`, the successor's real `upgrade --apply` against a throwaway export holding the predecessor's lock (see [rehearsing the root-evaluator handover](evaluator-migration-rehearsal.md)).
 
@@ -212,3 +194,10 @@ This repository integrates reviewed work through branches and pull requests with
 Candidate success never changes the root evaluator. The current root is exact public 0.17.0 under a schema-3 identity lock, adopted by `WO-HUP-018` through the simple upgrade from a wheel-file install whose digest equals the wheel bound in `RLS-SEH-026`, so the lock records the archive pair; it took the five-key configuration, the hardened managed workflow, the hash-marked ignore block and the risk template into the root. `WO-HUP-017` had adopted 0.16.0 the same way, the first adoption in which files left the managed set (the eight retired script copies); `WO-HUP-016`, `WO-HUP-015`, `WO-HUP-014`, `WO-HUP-013`, `WO-HUP-011`, `WO-HUP-010`, `WO-HUP-009` and `WO-HUP-008` had adopted 0.15.0, 0.14.0, 0.13.0, 0.12.0, 0.11.0, 0.10.0, 0.9.0 and 0.8.0 the same way. `WO-HUP-007` had adopted 0.7.1 the same way from an index install with a `null` pair; that `null` later blocked `prepare-release` (`MG004`) until a same-version refresh from a wheel-file install wrote the pair (`REL-SEH-019`), which is why this repository now installs the root from the digest-verified wheel file. After a later SE Harness version is immutably published, maintainers install that exact release outside the checkout — an ordinary `pip install "se-harness==X"` is enough, from the index or from a wheel file — review `harnessctl upgrade .`, and run `harnessctl upgrade . --apply --evidence-output docs/engineering/<domain>/evidence/<name>.json`. The `--evidence-output` path is not optional for this repository: `.github/workflows/predecessor-evaluator-assessment.yml` accepts a root transition only when the target commit retains exactly one transaction document under `docs/engineering/**/evidence/` whose prior lock digest and prior version match the base root and whose target identity matches the new lock (`scripts/validate_governor_transition.py`, `_select_transition`); without it the lane refuses the pull request. The lane also requires the base commit to hold exactly one released `RLS-*` record for the target version and downloads that record's wheel to run `identity`, `doctor`, `validate`, and `qualify released-root` with the exact target evaluator; `WO-HUP-007` passed it that way on 2026-08-27. The installed evaluator's version and installed-payload digest become the lock's identity; the archive digest is recorded when the installation carries one and `null` otherwise (`WO-REB-027`, `SPEC-REB-012`). No evaluator-upgrade packet is required any more; a wheel-file install is not required by the upgrade either, but it is what records the archive pair `prepare-release` reads, so this repository uses it. Which repository change is authorized is this repository's own policy: the changed managed files land under a normal work order. The standard upgrade transaction preserves repository-owned content and fails closed on customization or integrity ambiguity.
 
 See the current [standard repository lifecycle guide](../engineering/self-hosting-boundary/SELF_HOSTING.md), the owner-controlled region of [`AGENTS.md`](../../AGENTS.md), and managed [`ENGINEERING_HARNESS.md`](../../ENGINEERING_HARNESS.md).
+
+## Local plugin development
+
+Use `python scripts/build_plugin_archives.py develop --repository . --wheel ABSOLUTE_LOCAL_WHEEL --output-directory ABSOLUTE_EXTERNAL_OUTPUT`.
+This development-only route reads the current working source and can rebuild its
+own output folder. Release build/check keeps its existing provenance inputs.
+See [simple plugin operation](plugin-simplification-2026-09-13.md).

@@ -1,0 +1,78 @@
+{
+  "run_id": "34750034482",
+  "url": "https://github.com/mmzen/se_harness/actions/runs/34750034482",
+  "head": "9fbec8b6741c757d57f45dad02a079c2b307b186",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "Candidate source evidence",
+      "conclusion": "success",
+      "seconds": 52,
+      "steps": []
+    },
+    {
+      "name": "Candidate package evidence",
+      "conclusion": "success",
+      "seconds": 23,
+      "steps": []
+    },
+    {
+      "name": "Upgrade rehearsal (Windows)",
+      "conclusion": "success",
+      "seconds": 149,
+      "steps": [
+        {
+          "name": "Check plugin migration with the installed candidate",
+          "conclusion": "success",
+          "seconds": 1
+        },
+        {
+          "name": "Check plugin setup and development packages",
+          "conclusion": "success",
+          "seconds": 28
+        }
+      ]
+    },
+    {
+      "name": "Upgrade rehearsal (Linux)",
+      "conclusion": "success",
+      "seconds": 64,
+      "steps": [
+        {
+          "name": "Check plugin migration with the installed candidate",
+          "conclusion": "success",
+          "seconds": 1
+        },
+        {
+          "name": "Check plugin setup and development packages",
+          "conclusion": "success",
+          "seconds": 10
+        }
+      ]
+    },
+    {
+      "name": "Build deterministic integration package",
+      "conclusion": "success",
+      "seconds": 19,
+      "steps": []
+    },
+    {
+      "name": "Verify integration package (Windows)",
+      "conclusion": "success",
+      "seconds": 47,
+      "steps": []
+    },
+    {
+      "name": "Verify integration package (Linux)",
+      "conclusion": "success",
+      "seconds": 22,
+      "steps": []
+    },
+    {
+      "name": "Retain verified integration package",
+      "conclusion": "success",
+      "seconds": 13,
+      "steps": []
+    }
+  ]
+}

@@ -225,26 +225,14 @@ def _upgrade(args: argparse.Namespace) -> int:
 
 def _skill_ownership(args: argparse.Namespace) -> int:
     from se_harness.skill_ownership import (
-        OwnershipError, apply_skill_ownership, plan_skill_ownership,
+        apply_skill_ownership, plan_skill_ownership,
     )
 
     target = Path(args.target)
-    binding_input = Path(args.binding_input) if args.binding_input else None
+    plugin_root = Path(args.plugin_root) if args.plugin_root else None
     try:
-        if args.apply:
-            result = apply_skill_ownership(
-                target, provider=args.provider, binding_input=binding_input,
-                expected_plan_sha256=args.expected_plan_sha256,
-            )
-        else:
-            if args.expected_plan_sha256:
-                raise OwnershipError("--expected-plan-sha256 requires --apply")
-            result = plan_skill_ownership(
-                target, provider=args.provider, binding_input=binding_input,
-            )
-    except MutationGuardError:
-        # Keep the existing environment-refusal exit code at the CLI boundary.
-        raise
+        operation = apply_skill_ownership if args.apply else plan_skill_ownership
+        result = operation(target, provider=args.provider, plugin_root=plugin_root)
     except (IntegrityError, HarnessError, OSError) as exc:
         result = _command_result(
             "skill-ownership", "failed", passed=False, error=str(exc),
@@ -254,8 +242,6 @@ def _skill_ownership(args: argparse.Namespace) -> int:
         _print_json(result)
     else:
         print(f"skill ownership: {result['outcome']}")
-        if result.get("plan_sha256"):
-            print(f"reviewed plan SHA-256: {result['plan_sha256']}")
         for change in result.get("changes", []):
             print(f"  {change}")
         for conflict in result.get("conflicts", []):
@@ -932,9 +918,8 @@ def build_parser() -> argparse.ArgumentParser:
     ownership = commands.add_parser("skill-ownership", help="plan, apply, or restore explicit retained skill ownership")
     ownership.add_argument("target")
     ownership.add_argument("--provider", choices=("plugin", "repository"), required=True)
-    ownership.add_argument("--binding-input")
+    ownership.add_argument("--plugin-root", help="installed plugin directory containing skills/")
     ownership.add_argument("--apply", action="store_true")
-    ownership.add_argument("--expected-plan-sha256")
     ownership.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
     ownership.set_defaults(handler=_skill_ownership)
 

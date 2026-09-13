@@ -1,0 +1,19 @@
+WEX_SCALE artifacts=100 validation=0.145947s focus=0.294601s plan=0.292682s
+WEX_SCALE artifacts=500 validation=0.646296s focus=0.786016s plan=1.323049s
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-m4bn0my6\private\verity-plane\evaluator\Scripts\python.exe
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-m4bn0my6\private\verity-plane\evaluator\Scripts\python.exe
+--workers must be at least 1
+docs/notes/diagnostic-codes.md matches the source
+======================================================================
+FAIL: test_instruction_architecture.OwnerInstructionRegionTests.test_owner_region_stays_within_the_size_bound
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-12\clo\se_harness-packet-20260913-f0cd48ea\tests\test_instruction_architecture.py", line 945, in test_owner_region_stays_within_the_size_bound
+    self.assertLess(size, OWNER_REGION_SIZE_LIMIT, f"owner region is {size} bytes")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 6024 not less than 6000 : owner region is 6024 bytes
+
+----------------------------------------------------------------------
+Ran 1203 tests in 92.015s (188 classes, 8 workers)
+
+FAILED (failures=1, skipped=25)

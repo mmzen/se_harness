@@ -8,26 +8,17 @@ description: Retain observed checks and prepare SE Harness verification or relea
 Make the selected candidate and its observed results reviewable. Preparation
 leaves the assurance or release decision with its accountable owner.
 
-## Establish context and select the procedure
+## Repository context
 
-Before a governed write, require the current repository's freshly verified
-released evaluator, passing managed integrity, and complete governance context
-read in this session. Read the managed `AGENTS.md` gate, `ENGINEERING_HARNESS.md`,
-operating card and selected phase reading manifest. A summary, lifecycle
-projection or stale handler receipt does not establish readiness.
+Read the selected repository's AGENTS.md and ENGINEERING_HARNESS.md on entry,
+after compaction, and after switching repositories. Read the operating card and
+the reading manifest for the selected work. Use normal file reads.
 
-If that context is absent, stale or incomplete, stop governed writes and recover
-through `setup`. Setup prepares the evaluator environment; it does not itself
-deliver complete context. Where supported, read `session-context.py` delivery
-through its matching `END VERIFIED GOVERNANCE` marker, including the exact
-full-read argument array if requested. Report unavailable verified delivery as
-a readiness blocker. Do not bypass it with a directly runnable mutation.
-
-Use setup's verified absolute environment Python with `-I -m se_harness`, from
-outside the checkout, with cleared `PYTHONPATH` and that environment's `Scripts`
-or `bin` first in the process PATH. Expand returned `harnessctl` argument arrays
-to that invocation; preserve every argument and the absolute repository path.
-Confirm operations against the selected release's help and `WORKFLOW.json`.
+Use the repository-selected released evaluator in its private environment,
+through the absolute Python path with `-I -m se_harness`. Run
+`check ABSOLUTE_REPOSITORY --artifact ID --json` when beginning governed work,
+then follow its procedure and required checkpoints. Preserve its actual result,
+including failures. Run setup if the evaluator environment needs repair.
 
 Select one WO, VREC or RLS with checkpoint-free `check --artifact ID`. Follow
 its actual procedure and gates. For an already supplied decision, compare the

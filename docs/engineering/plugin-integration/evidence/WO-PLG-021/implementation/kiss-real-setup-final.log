@@ -1,0 +1,6 @@
+test_real_setup_create_reuse_and_repair (tests.plugin_integration.test_simple_plugin.SimplePluginTests.test_real_setup_create_reuse_and_repair) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 23.425s
+
+OK

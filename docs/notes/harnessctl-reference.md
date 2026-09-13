@@ -67,7 +67,7 @@ Four rules hold on every subcommand (`WO-ECP-022`):
 | `risks` | human or agent | read-only | list the risks threatening one artifact and its governing chain, with score, state and pending decision |
 | `select-work-order` | managed GitHub CI | read-only | select exactly one standalone work-order declaration from a bounded pull-request event through released package logic |
 | `upgrade` | repository owner or explicitly authorized agent | plan is read-only; `--apply` mutates managed content transactionally | update an initialized/adopted repository after separately updating the package |
-| `skill-ownership` | repository owner or explicitly authorized agent | plan is read-only; reviewed application changes only the selected repository ownership transaction and its bounded recovery data | migrate the seven retained repository skill files to a validated portable plugin binding, restore repository ownership, or review and complete pending recovery; external availability and native loading remain unobserved |
+| `skill-ownership` | repository owner or authorized agent | preview is read-only; apply replaces disposable copies and saves the provider last | select plugin skills or restore repository skills; rerun after an interruption |
 | `scaffold-domain` | coding agent | writes owner-controlled directories and a seed index; dry-run is read-only | create the canonical organization for one engineering domain |
 | `create-artifact` | coding agent | writes one incomplete `draft`; dry-run is read-only | create a formal artifact from its canonical template and path mapping |
 | `release-unit` | release owner or coding agent drafting a release contract | read-only | measure a release unit's work-order census from the commit trailers between the previous release tag and a candidate commit, and compare it with a contract (`E-CIP-001`) |
@@ -324,11 +324,19 @@ Apply requires the already-published target evaluator installed from exact wheel
 ## Retained skill ownership
 
 ```text
-harnessctl skill-ownership TARGET --provider plugin --binding-input FILE [--apply --expected-plan-sha256 HASH] [--json]
-harnessctl skill-ownership TARGET --provider repository [--apply --expected-plan-sha256 HASH] [--json]
+harnessctl skill-ownership TARGET --provider plugin --plugin-root DIRECTORY [--apply] [--json]
+harnessctl skill-ownership TARGET --provider repository [--apply] [--json]
 ```
 
-This candidate operation is unavailable in released 0.17.0. It requires a migration-capable installed evaluator governing the selected repository, and does not install or activate a plugin. A recovery plan distinguishes restoring prior state from finalizing cleanup of an already committed state.
+This candidate command is unavailable in released 0.17.0. It removes the two
+named harness skill directories under .agents/skills and .claude/skills,
+including edits and extra files. Other skill directories remain unchanged.
+The replacement must contain a Verity Plane manifest and the six required files.
+Preview is optional. Apply reads current inputs, deletes the old copies, and
+saves the portable provider choice last. Rerun the command after an interruption.
+Restoration copies the current repository templates over disposable old copies.
+This file-only operation grants no lifecycle authority and does not install a
+plugin or change host settings. See [the current design](plugin-simplification-2026-09-13.md).
 
 ## Predecessor-to-successor migration rehearsal
 

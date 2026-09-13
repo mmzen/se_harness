@@ -391,7 +391,6 @@ class MutationGuardTests(unittest.TestCase):
         self.assertEqual(before, self._snapshot(root))
 
     def test_every_public_mutator_rejects_before_any_target_write(self) -> None:
-        from se_harness.skill_ownership import apply_skill_ownership
 
         root = self.base / "all-mutators"
         changes, old_lock = plan_install(root, project_name="All Mutators", mode="init")
@@ -447,9 +446,6 @@ class MutationGuardTests(unittest.TestCase):
                 ),
                 lambda: apply_changes(root, [], {"tool_version": __version__}, allow_updates=False),
                 lambda: apply_changes(root, upgrade_changes, upgrade_lock, allow_updates=True),
-                lambda: apply_skill_ownership(
-                    root, provider="repository", expected_plan_sha256="0" * 64,
-                ),
                 lambda: apply_transition(SimpleNamespace(root=root)),
                 lambda: capture_verification(
                     root,
@@ -489,7 +485,6 @@ class MutationGuardTests(unittest.TestCase):
                 "create-artifact",
                 "installed-root-apply",
                 "upgrade-apply",
-                "skill-ownership-apply",
                 "transition-apply",
                 "capture-verification",
                 "prepare-release",

@@ -16,24 +16,18 @@ exact external released evaluator, its expected version and installation root,
 and an optional selected artifact. Do not discover an executable in the target
 checkout or silently use one from `PATH`.
 
-Read the applicable repository instructions and this file completely. Validate
-the retained `skill-contract.json` before executing the procedure.
+Read the selected repository's AGENTS.md and ENGINEERING_HARNESS.md on entry,
+after compaction, and after switching repositories. Read the operating card and
+the reading manifest for the selected work. Use normal file reads.
 
-## Procedure
+Use the repository-selected released evaluator in its private environment,
+through the absolute Python path with `-I -m se_harness`. The helper reports the selected artifact when one was requested. Preserve its actual result,
+including failures. If the evaluator needs repair, report setup as the next
+step; orientation itself stays read-only.
 
-Use the absolute environment Python and release identity already verified by
-`setup`. Before running a helper, directly repeat `--version`, released-evaluator
-`identity` and `doctor` for this target with that launcher. Match the expected
-version, environment root, payload and archive against the target's governing
-lock. Stop if a check fails; orientation does not perform setup or repair.
-
-Separately verify this installed plugin core against the previously trusted
-plugin package identity, including its contract and helper bytes. Repository
-`doctor` verifies managed repository content; it does not authenticate these
-plugin copies. Use the absolute helper path under that verified plugin root.
-Do not trust a path or digest merely because the target repository supplies it,
-fall back to its managed helper, or execute an unverified helper to validate
-itself. Missing trusted plugin identity blocks the procedure.
+For this read-only orientation, use the helper below with the selected
+evaluator version and environment root. It performs the required identity and
+repository checks; do not repeat them before calling it.
 
 Then run the plugin's `scripts/orient.py` with the same structured inputs. Supply the
 evaluator launcher as a JSON array, never as a shell command string. The script

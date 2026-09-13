@@ -340,7 +340,7 @@ What else changed:
   `create_manifest` refuses `build_recipe=None`: no schema-1 bundle manifest
   can be written. Reading one is unchanged, for the records that carry it.
 
-### After `WO-PLG-020`
+### Historical `WO-PLG-020` acceptance (replaced by WO-PLG-021)
 
 The approved ownership-acceptance increment extends `candidate-evidence.yml`
 within its existing six job definitions. The baseline below is the definition
@@ -388,3 +388,17 @@ The N-1 to N migration rehearsal, the acceptance of the candidate by the
 public predecessor evaluator, the byte-identical recipe replay, and the
 `pypi` environment decision. They protect a user; they were only run too
 often.
+
+## WO-PLG-021: smaller plugin checks
+
+The current source suite runs once and includes the small plugin migration tests.
+Each existing Windows/Ubuntu upgrade environment runs the installed migration
+tests once with Python 3.11, followed by focused setup and development-build tests.
+The additional Python 3.13 environments, duplicate source runs, ownership-only
+source archive, per-case snapshots and runner investigation step are removed.
+Required checks and the existing publication and integration jobs remain.
+
+The candidate-package job materializes only its portability script and consumes
+the shared wheel. Old evidence remains in Git without entering that job's snapshot.
+This also resolves the released verifier's 250 MiB checkout limit.
+Timings are reported from actual CI runs in WO-PLG-021 evidence, not estimated here.
