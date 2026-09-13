@@ -1,0 +1,56 @@
+{
+  "run_id": "34745652601",
+  "url": "https://github.com/mmzen/se_harness/actions/runs/34745652601",
+  "head": "31dc3d1291697cbd8d8688b704c5f2940abe351e",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "Candidate source evidence",
+      "conclusion": "success",
+      "seconds": 99,
+      "steps": []
+    },
+    {
+      "name": "Candidate package evidence",
+      "conclusion": "success",
+      "seconds": 26,
+      "steps": []
+    },
+    {
+      "name": "Upgrade rehearsal (Windows)",
+      "conclusion": "success",
+      "seconds": 902,
+      "steps": []
+    },
+    {
+      "name": "Upgrade rehearsal (Linux)",
+      "conclusion": "success",
+      "seconds": 283,
+      "steps": []
+    },
+    {
+      "name": "Build deterministic integration package",
+      "conclusion": "success",
+      "seconds": 18,
+      "steps": []
+    },
+    {
+      "name": "Verify integration package (Linux)",
+      "conclusion": "success",
+      "seconds": 17,
+      "steps": []
+    },
+    {
+      "name": "Verify integration package (Windows)",
+      "conclusion": "success",
+      "seconds": 44,
+      "steps": []
+    },
+    {
+      "name": "Retain verified integration package",
+      "conclusion": "success",
+      "seconds": 14,
+      "steps": []
+    }
+  ]
+}

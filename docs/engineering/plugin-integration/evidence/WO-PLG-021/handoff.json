@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 223 declared changed path(s) are within execution scope.",
+            "message": "All 228 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -265,10 +265,10 @@
       "decision": "whether the authorized implementation and evidence are complete",
       "decision_right": "DR-WO-COMPLETE",
       "delegation": {
-        "check_run_id": "103702227165",
+        "check_run_id": "103704796744",
         "class": "execution",
         "gate": "success",
-        "head": "d01eb765d80234bc55803cc00039483969f5f84d"
+        "head": "9fbec8b6741c757d57f45dad02a079c2b307b186"
       },
       "outcomes": [
         "implemented",
@@ -288,20 +288,25 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "231e2039d4cd501500a368cce1180dfe78a786f3e3dec5eaf09f54f9829d6f2b",
+  "result_sha256": "1ff1754a4c881a3b257a62c6362f418110f68dd00b47a98e15c018f905fafb34",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
     "changed_paths": [
       ".github/workflows/candidate-evidence.yml",
       "docs/engineering/plugin-integration/evidence/WO-PLG-021/handoff.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-021/implementation/ci-34745652601.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-021/implementation/ci-34749784336.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-021/implementation/ci-34750034482.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-021/implementation/coverage.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-021/implementation/final-head-checks.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-021/implementation/kiss-full-suite.log",
       "docs/engineering/plugin-integration/evidence/WO-PLG-021/implementation/kiss-integration-tests.log",
       "docs/engineering/plugin-integration/evidence/WO-PLG-021/implementation/kiss-publication-tests-retry.log",
       "docs/engineering/plugin-integration/evidence/WO-PLG-021/implementation/kiss-real-setup-final.log",
       "docs/engineering/plugin-integration/evidence/WO-PLG-021/implementation/local-checks.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-021/implementation/native-discovery.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-021/implementation/package-qualification.json",
       "docs/engineering/plugin-integration/evidence/WO-PLG-021/implementation/README.md",
       "docs/engineering/plugin-integration/evidence/WO-PLG-021/WO-PLG-021-handoff.md",
       "docs/engineering/plugin-integration/evidence/WO-PLG-021/WO-PLG-021-pre-action.md",

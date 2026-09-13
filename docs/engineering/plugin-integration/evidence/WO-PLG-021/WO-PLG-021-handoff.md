@@ -17,5 +17,6 @@ host qualification, duplicate ownership CI and obsolete fixtures. It retains
 bounded deletion, ordinary retries, provider-aware doctor/upgrade and publication
 checks, with repairable setup and a development build route.
 
-WO-PLG-021 remains in_progress. Final hosted checks and delegated completion
-are pending. No verification record, release, merge or live adoption is claimed.
+Hosted checks pass on the final implementation head 9fbec8b6. The released evaluator
+applied delegated completion: WO-PLG-021 is implemented. See implementation/completion.json.
+Next: prepare VREC-PLG-016 against the committed candidate for assurance-owner review.

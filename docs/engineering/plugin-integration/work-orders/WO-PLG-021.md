@@ -2,7 +2,7 @@
 id = "WO-PLG-021"
 type = "work_order"
 title = "Simplify plugin migration, setup and checks"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-13"
 updated = "2026-09-13"
@@ -84,6 +84,13 @@ to = "in_progress"
 decided_at = "2026-09-13T07:26:30Z"
 decided_by = "engineering-owner"
 reason = "The owner selected the exact minimal package-checkout CI fix with \"ok go\" on 2026-09-13. Start only this owner-directed prerequisite under the recorded scope amendment. The remaining plugin work retains its delegated route; this decision does not complete or verify the work order."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-13T09:48:17Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 9fbec8b6741c757d57f45dad02a079c2b307b186 (check-run 103704796744, source github-checks). All accepted KISS outcomes and retained protections are implemented. Native discovery, local checks and final hosted acceptance pass. Complete the work order under its base-recorded execution delegation; assurance, merge, release and live adoption remain separate."
 +++
 
 # Work Order: Simplify plugin migration, setup and checks

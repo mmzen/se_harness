@@ -1,6 +1,6 @@
 # Implementation coverage
 
-The 50 accepted scenarios are mapped below to implementation and acceptance. Hosted final-head results are pending; this is not a verification decision.
+The 50 accepted scenarios are mapped below to implementation and acceptance. Hosted final-head results pass; this coverage is evidence, not an assurance decision.
 
 | # | Scenario | Implemented behavior and checks |
 | --- | --- | --- |
