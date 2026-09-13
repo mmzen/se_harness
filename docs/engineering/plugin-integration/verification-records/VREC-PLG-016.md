@@ -2,7 +2,7 @@
 id = "VREC-PLG-016"
 type = "verification_record"
 title = "Verification candidate for WO-PLG-021"
-status = "ready"
+status = "verified"
 owners = ["delegated-executor"]
 created = "2026-09-13"
 updated = "2026-09-13"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/plugin-integration/evidence/WO-PLG-021/imple
 evaluator_evidence_path = "docs/engineering/plugin-integration/evidence/VREC-PLG-016-evaluator.json"
 evaluator_evidence_sha256 = "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
 
+verified_at = "2026-09-13T10:21:49Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-PLG-021"]
 conforms_to = ["VER-PLG-021"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-13T10:21:49Z"
+decided_by = "assurance-owner"
+reason = "The owner explicitly stated on 2026-09-13: \"i verify VREC-PLG-016.\" Record that assurance decision for the exact candidate and retained evidence bound by this record. This does not authorize merge, release or live adoption."
 +++
 
 # Verification Record Candidate
