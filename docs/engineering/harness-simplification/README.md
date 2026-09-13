@@ -18,7 +18,7 @@ The packet includes one shared replacement specification, an architecture decisi
 
 The owner started WO-KIS-001 after merging the approved packet. It is implemented; WO-KIS-002 through WO-KIS-007 remain approved and have not started.
 
-[WO-KIS-001 implementation evidence](evidence/WO-KIS-001/implementation/README.md) records the first eight cuts, passing local checks and passing hosted CI. Verification-record preparation is next; assurance remains an owner decision.
+[WO-KIS-001 implementation evidence](evidence/WO-KIS-001/implementation/README.md) records the first eight cuts, passing local checks and passing hosted CI. [VREC-KIS-001](verification-records/VREC-KIS-001.md) is ready for the assurance owner; it binds the completion commit whose hosted checks all passed.
 
 The intended order is sequential because several slices share code. Each work order remains separately selected and assessed.
 This definition packet starts none of them. Current root governance remains released 0.17.0; the proposed local-delegation rule is future candidate behavior.

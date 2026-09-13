@@ -45,3 +45,12 @@ committed run above. Tests enforcing the removed restrictions were deleted or up
 not disabled. Local Windows checks and every hosted CI check passed, including the Ubuntu source suite,
 both platform upgrade rehearsals, and both integration-package acceptance jobs.
 The exact hosted head and check URLs are retained in `ci-implementation.json`. No assurance or release decision is claimed here.
+
+## Ready verification record
+
+The released evaluator prepared `VREC-KIS-001` against completion commit
+`d66ad841f23e2f8199895e3b26e5c7e39b115a0e`. Every CI check passed on that exact commit; the check URLs
+are in `ci-verification-candidate.json`. Product source and tests are unchanged
+from the locally tested source commit above; the intervening commits only retain
+evidence and record completion. The verification record remains **ready**, not verified.
+Its assurance-owner decision is the next step.

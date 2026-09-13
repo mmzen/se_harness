@@ -1,7 +1,7 @@
 # Accepted review coverage
 
 All 38 simplification candidates are assigned exactly once. Seven protections remain applicable across the affected slices.
-Rows map the authorized work. WO-KIS-001 is implemented with [local and hosted evidence for all eight checks](evidence/WO-KIS-001/implementation/README.md); all CI checks passed and assurance is pending. The other work orders have not started. Shared helper changes run sequentially in the work-order order.
+Rows map the authorized work. WO-KIS-001 is implemented with [local and hosted evidence for all eight checks](evidence/WO-KIS-001/implementation/README.md); all CI checks passed and [VREC-KIS-001](verification-records/VREC-KIS-001.md) is ready for owner verification. The other work orders have not started. Shared helper changes run sequentially in the work-order order.
 
 | Review item | Work order | Specification rule | Verification check | Subject |
 | --- | --- | --- | --- | --- |
