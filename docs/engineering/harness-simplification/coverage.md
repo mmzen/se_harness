@@ -1,7 +1,7 @@
 # Accepted review coverage
 
 All 38 simplification candidates are assigned exactly once. Seven protections remain applicable across the affected slices.
-Rows map the authorized work. WO-KIS-001 is implemented with [local and hosted evidence for all eight checks](evidence/WO-KIS-001/implementation/README.md); all CI checks passed and [VREC-KIS-001](verification-records/VREC-KIS-001.md) is ready for owner verification. The other work orders have not started. Shared helper changes run sequentially in the work-order order.
+Rows map the authorized work. See the [domain index](README.md) for current progress. Shared helper changes run sequentially in the work-order order.
 
 | Review item | Work order | Specification rule | Verification check | Subject |
 | --- | --- | --- | --- | --- |
@@ -51,4 +51,4 @@ Rows map the authorized work. WO-KIS-001 is implemented with [local and hosted e
 | KISS-44 | All applicable slices | KIS-KEEP-044 | Retained protection | Make the owner’s approval explicit |
 | KISS-45 | All applicable slices | KIS-KEEP-045 | Retained protection | Identify the checker and the candidate being tested |
 
-WO-KIS-002: all seven selected outcomes are implemented and pass local checks; see [evidence](evidence/WO-KIS-002/implementation/README.md). Hosted CI passed; [VREC-KIS-002](verification-records/VREC-KIS-002.md) is ready for owner verification.
+WO-KIS-002: all seven selected outcomes are implemented and pass local checks; see [evidence](evidence/WO-KIS-002/implementation/README.md). Hosted CI passed; [VREC-KIS-002](verification-records/VREC-KIS-002.md) is verified by the owner. Repository integration is pending in PR #468.

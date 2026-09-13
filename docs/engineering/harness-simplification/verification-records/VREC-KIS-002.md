@@ -2,7 +2,7 @@
 id = "VREC-KIS-002"
 type = "verification_record"
 title = "Verification candidate for WO-KIS-002"
-status = "ready"
+status = "verified"
 owners = ["delegated-executor"]
 created = "2026-09-13"
 updated = "2026-09-13"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/harness-simplification/evidence/WO-KIS-002/i
 evaluator_evidence_path = "docs/engineering/harness-simplification/evidence/VREC-KIS-002-evaluator.json"
 evaluator_evidence_sha256 = "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
 
+verified_at = "2026-09-13T19:02:55Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-KIS-002"]
 conforms_to = ["VER-KIS-001"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-13T19:02:55Z"
+decided_by = "assurance-owner"
+reason = "The owner explicitly stated on 2026-09-13: i verify VREC-KIS-002. Record that assurance decision for exact candidate 7cae3a4cf098a5be73562507b558c03f1d100dd2 and the retained evidence bound by VREC-KIS-002. This decision does not authorize merge, release or live adoption."
 +++
 
 # Verification Record Candidate
