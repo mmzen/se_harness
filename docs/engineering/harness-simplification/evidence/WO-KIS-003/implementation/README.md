@@ -1,7 +1,7 @@
 # WO-KIS-003 implementation evidence
 
 Candidate: `e0670743bfee3d452d5707d2479f8a8f361576da`. Base: `573c5f3c0f49c009aa13c9a3b0d8a9c9ff76162f`. Governing checker: isolated released 0.17.0.
-Work is in progress pending hosted checks and delegated completion.
+Work is implemented through delegated completion; owner verification is pending.
 
 | Check | Observed result | Evidence |
 | --- | --- | --- |
@@ -27,7 +27,7 @@ PYTHONPATH and installs by package name without a wheel receipt. Its ready relea
 test data only. No project release or verification decision was made.
 
 The released doctor, graph, review and scope checks passed. Candidate graph validation
-and all 14 release-distribution records passed. Hosted Linux/Windows results are pending.
+and all 14 release-distribution records passed. All hosted checks passed, including Linux and Windows upgrade and integration-package checks. Exact check URLs are in ci-implementation.json.
 Root managed files and historical VREC/RLS records are unchanged; the installed root
 still uses 0.17.0. Owner approval, path boundaries, atomic rollback and published package
 hashes remain checked.

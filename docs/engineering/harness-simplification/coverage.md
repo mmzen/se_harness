@@ -48,9 +48,9 @@ Rows map the authorized work. See the [domain index](README.md) for current prog
 | KISS-41 | All applicable slices | KIS-KEEP-041 | Retained protection | Write each file atomically and handle an ordinary failure |
 | KISS-42 | All applicable slices | KIS-KEEP-042 | Retained protection | Detect wrong or corrupt published packages |
 | KISS-43 | All applicable slices | KIS-KEEP-043 | Retained protection | Keep publication credentials out of candidate test jobs |
-| KISS-44 | All applicable slices | KIS-KEEP-044 | Retained protection | Make the ownerâ€™s approval explicit |
+| KISS-44 | All applicable slices | KIS-KEEP-044 | Retained protection | Make the ownerÃ¢â‚¬â„¢s approval explicit |
 | KISS-45 | All applicable slices | KIS-KEEP-045 | Retained protection | Identify the checker and the candidate being tested |
 
 WO-KIS-002: all seven selected outcomes are implemented and pass local checks; see [evidence](evidence/WO-KIS-002/implementation/README.md). Hosted CI passed; [VREC-KIS-002](verification-records/VREC-KIS-002.md) is verified by the owner. Integrated in PR #468.
 
-[WO-KIS-003 implementation evidence](evidence/WO-KIS-003/implementation/README.md) records ten cuts and passing local source/package checks. Hosted checks and owner verification are pending.
+[WO-KIS-003 implementation evidence](evidence/WO-KIS-003/implementation/README.md) records ten cuts and passing local source/package checks. Hosted checks passed; verification preparation is next.
