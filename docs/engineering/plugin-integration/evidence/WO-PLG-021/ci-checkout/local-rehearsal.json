@@ -1,0 +1,13 @@
+{
+  "commit": "f662c73a724a1e73dee9b66d5cd4e90c3ee222f5",
+  "sparse_pattern": "scripts/check_portable_release_surface.py",
+  "materialized_files": [
+    "scripts/check_portable_release_surface.py"
+  ],
+  "snapshot_bytes": 9955,
+  "released_evaluator": "0.17.0",
+  "snapshot": {
+    "scripts/check_portable_release_surface.py": "ec83614e552a1652df8d9ae159bf61e684d26e6d954c7d78f5b9cd04ee9e8714"
+  },
+  "git_status": "clean"
+}

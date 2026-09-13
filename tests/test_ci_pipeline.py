@@ -62,6 +62,40 @@ def _step_blocks(job: str) -> list[str]:
     return re.split(r"(?m)^      - ", job)[1:]
 
 
+class CandidatePackageCheckoutTests(unittest.TestCase):
+    def test_sparse_checkout_keeps_the_package_helper_and_git_change_detection(self) -> None:
+        jobs = _job_blocks((WORKFLOWS / "candidate-evidence.yml").read_text(encoding="utf-8"))
+        package = jobs["candidate-package"]
+        pattern = re.search(r"(?m)^          sparse-checkout: (.+)$", package).group(1)
+        self.assertIn("sparse-checkout-cone-mode: false", package)
+        self.assertNotIn("sparse-checkout:", jobs["candidate-source"])
+        helper = "scripts/check_portable_release_surface.py"
+        history = "docs/engineering/example/evidence/old-run.log"
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            init_repository(root)
+            for path, content in (
+                (helper, (REPOSITORY_ROOT / helper).read_bytes()),
+                (history, b"retained historical evidence\n"),
+                ("README.md", b"source checkout only\n"),
+            ):
+                target = root / path
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(content)
+            git(root, "add", ".")
+            git(root, "commit", "-qm", "fixture")
+            git(root, "sparse-checkout", "set", "--no-cone", pattern)
+            materialized = {p.relative_to(root).as_posix() for p in root.rglob("*")
+                            if p.is_file() and ".git" not in p.relative_to(root).parts}
+            self.assertEqual({helper}, materialized)
+            self.assertIn(history, git(root, "ls-files").splitlines())
+            result = subprocess.run([sys.executable, "-I", helper, "--help"], cwd=root, capture_output=True)
+            self.assertEqual(0, result.returncode, result.stderr)
+            self.assertEqual("", git(root, "status", "--porcelain=v1", "--untracked-files=all"))
+            (root / helper).write_bytes(b"changed\n")
+            self.assertEqual(helper, git(root, "diff", "--name-only"))
+
+
 class TriggerPolicyTests(unittest.TestCase):
     """REQ-CIP-001 / SPEC-CIP-001 CIP-TRG."""
 
