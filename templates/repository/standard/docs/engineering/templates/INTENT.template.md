@@ -6,9 +6,7 @@ status = "draft"
 owners = ["<accountable product/domain role>"]
 created = "YYYY-MM-DD"
 updated = "YYYY-MM-DD"
-# One sentence, at most 30 words, no code identifier: who can do or observe
-# what after delivery. It names no solution. The Explorer shows it under the
-# title, so it is the line most readers see.
+# The desired outcome and who benefits. The Explorer shows this summary under the title.
 outcome = "<WHO> can <observable result after delivery>."
 
 [relations]
@@ -24,12 +22,7 @@ root, which this repository writes.>
 
 ## Problem
 
-<At most five sentences: what happens today, to whom, and why it is worth
-changing. No file, identifier or command. The evidence belongs in a note,
-an RCA or an ADR, cited by link. Who the actors are belongs in the
-capability; the principles later decisions must keep belong in a
-specification rule or an ADR; a risk is a risk artifact; an open question
-is a `DEC-` artifact.>
+<What happens today, to whom, and why it needs to change. Link useful evidence.>
 
 ## Success measures
 

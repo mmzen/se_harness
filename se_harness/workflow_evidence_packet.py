@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 import tomllib
 from pathlib import Path
@@ -26,7 +27,7 @@ def parse_evidence_header(data: bytes) -> tuple[dict[str, str] | None, bytes]:
     """Split a packet into its machine header and retained body (ECP-EVD-002, -004).
 
     Returns `(None, data)` when no fenced TOML block starts at byte offset 0.
-    A block that starts there but is not valid TOML with exactly the four
+    A block that starts there but is not valid TOML with the four required
     header keys raises `WEX-ECP-010`.
     """
 
@@ -40,15 +41,15 @@ def parse_evidence_header(data: bytes) -> tuple[dict[str, str] | None, bytes]:
         parsed = tomllib.loads(raw.decode("utf-8"))
     except (UnicodeDecodeError, tomllib.TOMLDecodeError) as exc:
         raise CodedError(WEX_ECP_010, f"the evidence packet header is not valid TOML: {exc}") from exc
-    if set(parsed) != set(EVIDENCE_HEADER_KEYS) or not all(isinstance(parsed[key], str) for key in EVIDENCE_HEADER_KEYS):
-        raise CodedError(WEX_ECP_010, "the evidence packet header must carry exactly "
+    if not set(EVIDENCE_HEADER_KEYS) <= set(parsed) or not all(isinstance(value, str) for value in parsed.values()):
+        raise CodedError(WEX_ECP_010, "the evidence packet header must carry "
             + ", ".join(EVIDENCE_HEADER_KEYS)
         )
-    return {key: parsed[key] for key in EVIDENCE_HEADER_KEYS}, data[end + len(_HEADER_CLOSE):]
+    return parsed, data[end + len(_HEADER_CLOSE):]
 
 
 def render_evidence_header(fields: Mapping[str, str]) -> bytes:
-    lines = [f'{key} = "{fields[key]}"' for key in EVIDENCE_HEADER_KEYS]
+    lines = [f"{key if re.fullmatch(r'[A-Za-z0-9_-]+', key) else json.dumps(key)} = {json.dumps(value, ensure_ascii=False)}" for key, value in fields.items()]
     return _HEADER_OPEN + "\n".join(lines).encode("utf-8") + _HEADER_CLOSE
 
 
@@ -114,6 +115,7 @@ def rebind_handoff_packet(root: Path, artifact: Any, snapshot: str, now: str) ->
     if conversion is not None:
         raise CodedError(WEX_ECP_011, f"a .gitattributes rule would convert line endings of {relative} ({conversion})")
     header = {
+        **existing,
         "artifact": artifact.artifact_id,
         "checkpoint": "handoff",
         "formal_snapshot_sha256": snapshot,

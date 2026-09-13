@@ -89,7 +89,6 @@ class WorkflowComplianceTests(WorkflowComplianceFixture, unittest.TestCase):
             "/absolute.py",
             "C:/drive.py",
             "src\\alternate.py",
-            "src/*.py",
             "src/./dot.py",
             "CON.txt",
             "src/control\n.py",
@@ -152,16 +151,13 @@ class WorkflowComplianceTests(WorkflowComplianceFixture, unittest.TestCase):
             result["restitution"]["command_or_response"],
         )
 
-    def test_pre_action_requires_selected_procedure(self) -> None:
-        code, output, _ = invoke(
-            "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "pre-action", "--json"
-        )
-        self.assertEqual(1, code)
-        self.assertIn("--procedure is required", output)
-        code, output, _ = invoke(
-            "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "pre-action",
-            "--procedure", "PROC-WO-START", "--json",
-        )
+    def test_pre_action_selects_the_procedure_and_rejects_unrelated_override(self) -> None:
+        code, output, error = invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "pre-action", "--json")
+        self.assertIn(code, (0, 1), error)
+        result = json.loads(output)
+        self.assertEqual("PROC-WO-IMPLEMENT", result["procedure"]["id"])
+        self.assertNotIn("--procedure is required", output)
+        code, output, _ = invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "pre-action", "--procedure", "PROC-WO-START", "--json")
         self.assertEqual(1, code)
         self.assertIn("not selected by workflow rule", output)
 
@@ -439,10 +435,9 @@ class EvidencePacketTests(GitDerivedChangeSetFixture, unittest.TestCase):
         packet = self.root / self.PACKET
         original = packet.read_bytes()
         for tampered, needle in (
-            (b"# no header\n" + original, "no evidence packet header"),
             (original.replace(b'artifact = "WO-001"', b'artifact = "WO-009"', 1), "is the packet of WO-009"),
             (b"```toml\nartifact = \n```\n", "not valid TOML"),
-            (b"```toml\nartifact = \"WO-001\"\ncheckpoint = \"handoff\"\nextra = 1\n```\n", "must carry exactly"),
+            (b"```toml\nartifact = \"WO-001\"\ncheckpoint = \"handoff\"\nextra = 1\n```\n", "must carry"),
         ):
             with self.subTest(needle=needle):
                 packet.write_bytes(tampered)
@@ -1002,3 +997,75 @@ class OwnRecordAdmissionTests(ScopeCheckpointFixture, unittest.TestCase):
         # ECP-ADM-001: exact paths, never a directory prefix.
         self.assertFalse(any(path.endswith("/") for path in admitted))
         self.assertEqual((), own_record_paths(root, catalog, "WO-004"))
+
+
+class OrdinaryInputsTests(WorkflowComplianceFixture, unittest.TestCase):
+    def test_literal_brackets_and_native_cli_path_are_in_scope(self) -> None:
+        relative = "src/component/check[1].py"
+        (self.root / relative).write_text("ok = True\n", encoding="utf-8")
+        code, result, error = self.check("--changed-path", str(Path(relative)), "--changes-complete")
+        self.assertEqual(0, code, error + str(result))
+        self.assertTrue(path_is_admitted(relative, (relative,)))
+        self.assertFalse(path_is_admitted("src/component/check1.py", (relative,)))
+
+    def test_explicit_plain_evidence_reference_is_read_without_a_header(self) -> None:
+        from se_harness.workflow_predicates import review_evidence
+        from types import SimpleNamespace
+        note = "docs/engineering/product/evidence/WO-001/checks.md"
+        path = self.root / note
+        path.parent.mkdir(parents=True, exist_ok=True)
+        body = b"# Check results\n\nRan setup and then the command: exit 0, expected files present.\n"
+        path.write_bytes(body)
+        artifact = SimpleNamespace(artifact_type="work_order", artifact_id="WO-001", metadata={"evidence_paths": [note]})
+        context = SimpleNamespace(root=self.root, artifact=artifact, checkpoint="handoff", formal_snapshot_sha256="a"*64)
+        self.assertEqual("pass", review_evidence(context)[0])
+        self.assertEqual(body, path.read_bytes())
+        for bad in ("../outside.md", "docs/missing.md"):
+            artifact.metadata["evidence_paths"] = [bad]
+            self.assertEqual("not_assessable", review_evidence(context)[0])
+
+    def test_plain_reference_is_used_by_the_public_handoff_check(self) -> None:
+        note = "docs/engineering/product/evidence/WO-001/ordinary.md"
+        path = self.root / note
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("Setup passed; output contained the expected files.\n", encoding="utf-8")
+        wo = self.root / "docs/engineering/product/work-orders/WO-001.md"
+        # Top-level metadata precedes every TOML table.
+        text = wo.read_text(encoding="utf-8").replace('status = "in_progress"', f'status = "in_progress"\nevidence_paths = ["{note}"]', 1)
+        wo.write_text(text, encoding="utf-8")
+        with mock.patch("se_harness.workflow_compliance._preflight_status", return_value=("pass", "Fixture is ready.")):
+            code, output, error = invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--changes-complete", "--json")
+        self.assertEqual(0, code, output + error)
+        self.assertIn(note, output)
+        path.unlink()
+        with mock.patch("se_harness.workflow_compliance._preflight_status", return_value=("pass", "Fixture is ready.")):
+            code, output, error = invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--changes-complete", "--json")
+        self.assertEqual(1, code, output + error)
+        self.assertIn("Cannot read evidence", output)
+
+    def test_git_reports_literal_brackets_and_still_refuses_escape_paths(self) -> None:
+        from se_harness.workflow_change_set import git_change_set
+        git(self.root, "init", "-q")
+        git(self.root, "add", "-A")
+        git(self.root, "commit", "-q", "-m", "base")
+        relative = "src/component/check[1].py"
+        (self.root / relative).write_text("ok = True\n", encoding="utf-8")
+        self.assertEqual((relative,), git_change_set(self.root, "HEAD").paths)
+        with mock.patch("se_harness.workflow_change_set._git_lines", side_effect=[["a"*40], ["A", "../escape.py"], []]):
+            with self.assertRaisesRegex(Exception, "Git change set"):
+                git_change_set(self.root, "HEAD")
+
+    def test_optional_header_description_survives_rebinding(self) -> None:
+        from se_harness.workflow_evidence_packet import parse_evidence_header, render_evidence_header, rebind_handoff_packet, evidence_packet_path
+        report = validate_engineering_artifacts.validate_repository(self.root)
+        artifact = next(a for a in report.artifacts if a.artifact_id == "WO-001")
+        path = evidence_packet_path(self.root, artifact, "handoff")
+        path.parent.mkdir(parents=True, exist_ok=True)
+        body = b"\nThe actual check results stay here.\n"
+        fields = dict(artifact="WO-001", checkpoint="handoff", formal_snapshot_sha256="a"*64, rebound_at="2026-09-13T12:00:00Z", description='Setup on the owner\'s machine, with "quotes".')
+        path.write_bytes(render_evidence_header(fields) + body)
+        rebind_handoff_packet(self.root, artifact, "b"*64, "2026-09-13T12:01:00Z")
+        header, after = parse_evidence_header(path.read_bytes())
+        self.assertEqual(fields["description"], header["description"])
+        self.assertEqual("b"*64, header["formal_snapshot_sha256"])
+        self.assertEqual(body, after)

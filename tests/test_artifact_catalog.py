@@ -190,6 +190,13 @@ envelope from fresh live state for each request.
         candidate_traceability = (
             REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/TRACEABILITY.md"
         ).read_text(encoding="utf-8")
+        # WO-KIS-001 changes only these two applicability rows. The released root
+        # stays untouched; all other rows still compare against the released copy.
+        for prefix in ("| `requirement` |", "| `risk` |"):
+            previous = next((line for line in released_traceability.splitlines() if line.startswith(prefix)), None)
+            current = next(line for line in candidate_traceability.splitlines() if line.startswith(prefix))
+            if previous is not None:
+                candidate_traceability = candidate_traceability.replace(current, previous)
         # WO-DST-027 (SPEC-DST-028 DST-TPL-001 to DST-TPL-003, DST-TPL-006): the candidate
         # rewrites TRC-008 for the retired relation; a root released before it (0.17.0)
         # carries the compatibility-only reading, declared here; a root released with the

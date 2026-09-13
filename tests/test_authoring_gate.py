@@ -1,9 +1,4 @@
-"""Evidence for REQ-TCM-017 (WO-TCM-011, SPEC-TCM-007): authoring advisories refuse approval of a definition draft.
-
-Each test names the VER-TCM-007 row it serves. Fixture drafts are written with a known number
-of advisories; the gate's message is compared with the validator's own diagnostics for the same
-fixture; the budgets are read from the validator and asserted unchanged.
-"""
+"""Approval checks content and decisions, without policing writing style (WO-KIS-001)."""
 
 from __future__ import annotations
 
@@ -141,188 +136,41 @@ class AuthoringGateFixture(unittest.TestCase):
         return None
 
 
-class AuthoringAdvisoriesFunctionTests(AuthoringGateFixture):
-    """VER-TCM-007 row 'function' (TCM-RFB-001, TCM-RFB-002, TCM-RFB-006)."""
-
-    def test_a_clean_draft_returns_no_advisory(self) -> None:
-        self.requirement(CLEAN_STATEMENT)
-        self.assertEqual([], validate_engineering_artifacts.authoring_advisories(self.artifact("REQ-002"), self.root))
-
-    def test_an_over_budget_draft_returns_exactly_the_validators_diagnostics(self) -> None:
-        self.requirement(LONG_STATEMENT)
-        found = [(i.code, i.message) for i in validate_engineering_artifacts.authoring_advisories(self.artifact("REQ-002"), self.root)]
-        self.assertEqual(self.validator_advisories("REQ-002"), found)
-        self.assertEqual([codes.W_AUT_003], [code for code, _ in found])
-        self.assertRegex(found[0][1], r"statement is 3[0-9] words; the budget is 30")
-
-    def test_an_approved_body_is_read_as_a_draft(self) -> None:
-        self.requirement(LONG_STATEMENT, status="approved")
-        approved = self.artifact("REQ-002")
-        self.assertEqual([], self.validator_advisories("REQ-002"))  # AUT-ADV-002: validate is silent on an approved artifact
-        found = [(i.code, i.message) for i in validate_engineering_artifacts.authoring_advisories(approved, self.root)]
-        self.assertEqual([codes.W_AUT_003], [code for code, _ in found])
-
-    def test_the_other_types_return_none_without_reading_the_passes(self) -> None:
-        for artifact_id in ("ARCH-001", "ADR-001", "VER-001", "WO-001", "REL-001", "OPS-001"):
-            with self.subTest(artifact=artifact_id), mock.patch.object(validation_authoring, "validate_authoring", side_effect=AssertionError("read")):
-                self.assertEqual([], validate_engineering_artifacts.authoring_advisories(self.artifact(artifact_id), self.root))
-
-    def test_the_entry_module_and_the_seam_expose_one_function(self) -> None:
-        self.assertIs(validate_engineering_artifacts.authoring_advisories, validation_authoring.authoring_advisories)
-
-
-class AuthoringGateRefusalTests(AuthoringGateFixture):
-    """VER-TCM-007 rows 'refusal', 'order', 'other types and targets' (TCM-RFB-003 to TCM-RFB-006, TCM-RFB-010, TCM-RFB-012)."""
-
-    def assert_refused(self, artifact_id: str, predicate_id: str, expected_codes: list[str]) -> None:
-        path = self.artifact(artifact_id).path
-        before = path.read_bytes()
-        for apply in (False, True):
-            with self.subTest(apply=apply):
-                code, result = self.transition(artifact_id, "approved", apply=apply)
-                self.assertEqual(1, code)
-                self.assertEqual("blocked", result["operation"]["outcome"])
-                blockers = [item for item in result["restitution"]["blocked_by"] if item.startswith(f"{predicate_id}: ")]
-                self.assertEqual(1, len(blockers), result["restitution"])
-                message = blockers[0].split(": ", 1)[1]
-                if not apply:
-                    # the preview carries the gate table; the applied refusal carries the blocker alone
-                    predicate = self.predicate(result, predicate_id)
-                    self.assertIsNotNone(predicate, result["compliance"])
-                    self.assertEqual("fail", predicate["status"], predicate)
-                    self.assertEqual(message, predicate["message"])
-                self.assertTrue(message.endswith(CLOSING), message)
-                listed = re.findall(r"W-AUT-\d{3}", message)
-                self.assertEqual(expected_codes, listed, message)
-                self.assertEqual([c for c, _ in self.validator_advisories(artifact_id)], listed)
-        self.assertEqual(before, path.read_bytes())  # TCM-RFB-010: nothing written
-        self.assertIn('status = "draft"', path.read_text(encoding="utf-8"))
-
-    def test_a_requirement_draft_with_a_35_word_statement_is_refused(self) -> None:
-        self.requirement(LONG_STATEMENT)
-        self.assert_refused("REQ-002", "QGP-G1-AUTHORING", [codes.W_AUT_003])
-
-    def test_an_intent_draft_with_a_40_word_outcome_is_refused(self) -> None:
-        self.intent(LONG_OUTCOME)
-        self.assert_refused("INT-002", "QGP-G1-AUTHORING", [codes.W_AUT_011])
-
-    def test_a_capability_draft_without_under_is_refused(self) -> None:
-        self.capability(NO_UNDER_ABILITY)
-        self.assert_refused("CAP-002", "QGP-G1-AUTHORING", [codes.W_AUT_016])
-
-    def test_a_specification_draft_with_two_long_rules_is_refused_naming_each(self) -> None:
-        self.specification(LONG_RULES)
-        self.assert_refused("SPEC-002", "QGP-G2-AUTHORING", [codes.W_AUT_021, codes.W_AUT_021])
-
-    def test_a_clean_draft_passes_the_authoring_predicate(self) -> None:
-        self.requirement(CLEAN_STATEMENT)
-        self.intent(CLEAN_OUTCOME)
-        self.capability(CLEAN_ABILITY)
-        self.specification(SHORT_RULES)
-        for artifact_id, predicate_id in (("REQ-002", "QGP-G1-AUTHORING"), ("INT-002", "QGP-G1-AUTHORING"), ("CAP-002", "QGP-G1-AUTHORING"), ("SPEC-002", "QGP-G2-AUTHORING")):
-            with self.subTest(artifact=artifact_id):
-                _, result = self.transition(artifact_id, "approved")
-                predicate = self.predicate(result, predicate_id)
-                self.assertEqual("pass", predicate["status"], predicate)
-                self.assertIn("no authoring advisory", predicate["message"])
-
-    def test_the_placeholder_failure_is_reported_before_the_advisory(self) -> None:
-        # TCM-RFB-003
-        self.requirement(LONG_STATEMENT, body=REQUIREMENT_BODY + "\n## Notes\n\n<Describe the notes here>\n")
-        status, message = authoring_ready(self.artifact("REQ-002"), self.root)
-        self.assertEqual("fail", status)
-        self.assertIn("template placeholder", message)
-        self.assertNotIn("W-AUT", message)
-
-    def test_other_types_pass_without_reading_the_validator(self) -> None:
-        # TCM-RFB-006
-        write(self.product / "verification/VER-002.md", formal("VER-002", "verification", "draft", {"verifies": ["REQ-001"]}) + "\n## Cases\n\n- One.\n")
-        write(self.product / "architecture/ARCH-002.md", formal("ARCH-002", "architecture", "draft", {"addresses": ["REQ-001"]}) + "\n## Shape\n\nOne.\n")
-        write(self.product / "architecture/adr/ADR-002.md", formal("ADR-002", "adr", "draft", {"decides": ["ARCH-002"]}) + "\n## Decision\n\nOne.\n")
-        for artifact_id in ("VER-002", "ARCH-002", "ADR-002"):
-            with self.subTest(artifact=artifact_id), mock.patch.object(validate_engineering_artifacts, "authoring_advisories", side_effect=AssertionError("read")):
-                status, message = authoring_ready(self.artifact(artifact_id), self.root)
-                self.assertEqual("pass", status, message)
-
-    def test_a_placeholder_in_a_verification_draft_is_refused_without_reading_an_advisory(self) -> None:
-        write(self.product / "verification/VER-002.md", formal("VER-002", "verification", "draft", {"verifies": ["REQ-001"]}) + "\n## Cases\n\n<List the cases>\n")
-        with mock.patch.object(validate_engineering_artifacts, "authoring_advisories", side_effect=AssertionError("read")):
-            status, message = authoring_ready(self.artifact("VER-002"), self.root)
-        self.assertEqual("fail", status)
-        self.assertIn("template placeholder", message)
-
-    def test_an_implementation_transition_reads_no_advisory(self) -> None:
-        # TCM-RFB-012: no authoring predicate is bound to a target other than approved
-        self.requirement(LONG_STATEMENT, status="approved")
-        with mock.patch.object(validate_engineering_artifacts, "authoring_advisories", side_effect=AssertionError("read")):
-            code, output, error = invoke("check", str(self.root), "--artifact", "REQ-002", "--checkpoint", "transition", "--target", "implemented", "--json")
-        result = json.loads(output)
-        self.assertIsNone(self.predicate(result, "QGP-G1-AUTHORING"), result["compliance"])
-        self.assertIsNone(self.predicate(result, "QGP-G2-AUTHORING"), result["compliance"])
-
-    def test_an_unreadable_validator_is_not_assessable(self) -> None:
-        self.requirement(CLEAN_STATEMENT)
-        with mock.patch.object(validate_engineering_artifacts, "authoring_advisories", side_effect=RuntimeError("cannot load")):
-            status, message = authoring_ready(self.artifact("REQ-002"), self.root)
-        self.assertEqual("not_assessable", status)
-        self.assertIn("cannot load", message)
-
-
-class ValidationAndBudgetsUnchangedTests(AuthoringGateFixture):
-    """VER-TCM-007 rows 'validation unchanged', 'budgets unchanged', 'one module', 'checklist' (TCM-RFB-007 to TCM-RFB-009, TCM-RFB-011)."""
-
-    def test_validate_keeps_passing_with_advisories_listed_apart(self) -> None:
-        self.requirement(LONG_STATEMENT)
+class SimpleAuthoringTests(AuthoringGateFixture):
+    def test_ordinary_prose_is_approvable_for_all_four_definitions(self) -> None:
+        self.requirement("The command returns the reading manifest.")
         self.intent(LONG_OUTCOME)
         self.capability(NO_UNDER_ABILITY)
         self.specification(LONG_RULES)
-        code, output, error = invoke("validate", str(self.root), "--json", "--advisories")
-        self.assertEqual(0, code, error)
-        report = json.loads(output)
-        self.assertEqual(0, report["error_count"] if "error_count" in report else len(report["errors"]))
-        self.assertGreaterEqual(report["advisory_count"], 5)
-        self.assertEqual(report["advisory_count"], len(report["advisories"]))
-
-    def test_the_budgets_and_codes_of_the_four_families_are_unchanged(self) -> None:
-        expected = {
-            "AUTHORING_STATEMENT_LIMIT": 30, "AUTHORING_BODY_LIMIT": 250, "AUTHORING_WHY_WORD_LIMIT": 120, "AUTHORING_WHY_SENTENCE_LIMIT": 5,
-            "AUTHORING_SENTENCE_LIMIT": 25, "AUTHORING_CODE_IDENTIFIER_LIMIT": 3, "AUTHORING_PLAIN_WORDS_SENTENCE_LIMIT": 2,
-            "INTENT_OUTCOME_LIMIT": 30, "INTENT_BODY_LIMIT": 200, "INTENT_PROBLEM_WORD_LIMIT": 120, "INTENT_PROBLEM_SENTENCE_LIMIT": 5, "INTENT_CODE_IDENTIFIER_LIMIT": 2,
-            "CAPABILITY_ABILITY_LIMIT": 30, "CAPABILITY_BODY_LIMIT": 150, "CAPABILITY_NEED_WORD_LIMIT": 60, "CAPABILITY_NEED_SENTENCE_LIMIT": 3, "CAPABILITY_CODE_IDENTIFIER_LIMIT": 2,
-            "SPECIFICATION_CONTRACT_LIMIT": 30, "SPECIFICATION_RULE_LIMIT": 30, "SPECIFICATION_PROSE_LIMIT": 300,
-        }
-        self.assertEqual(expected, {name: getattr(validation_authoring, name) for name in expected})
-        self.assertEqual([f"W-AUT-{index:03d}" for index in range(1, 24)], [getattr(codes, f"W_AUT_{index:03d}") for index in range(1, 24)])
-
-    def test_the_gate_reads_the_validator_module_and_holds_no_budget(self) -> None:
-        # TCM-RFB-007
-        source = (REPOSITORY_ROOT / "se_harness/workflow_predicates.py").read_text(encoding="utf-8")
-        self.assertIn("validate_engineering_artifacts.authoring_advisories(", source)
-        for path in sorted((REPOSITORY_ROOT / "se_harness").glob("*.py")):
-            with self.subTest(module=path.name):
-                self.assertNotRegex(path.read_text(encoding="utf-8"), r"^(AUTHORING|INTENT|CAPABILITY|SPECIFICATION)_[A-Z_]*LIMIT = ", "a budget constant outside the validator")
-        self.assertIs(workflow_predicates.validate_engineering_artifacts, validate_engineering_artifacts)
-
-    def test_the_four_definition_checklists_state_the_gate(self) -> None:
-        # TCM-RFB-011
-        text = GUIDE.read_text(encoding="utf-8")
-        for kind, predicate in (("requirement", "QGP-G1-AUTHORING"), ("intent", "QGP-G1-AUTHORING"), ("capability", "QGP-G1-AUTHORING"), ("specification", "QGP-G2-AUTHORING")):
-            with self.subTest(kind=kind):
-                section = text.split(f"\n## {kind}\n", 1)[1].split("\n## ", 1)[0]
-                self.assertIn("A draft that still draws an advisory is not approved until it is fixed", section)
-                self.assertIn(predicate, section)
-
-
-class CorpusTests(unittest.TestCase):
-    """VER-TCM-007 row 'corpus': the packet's own definitions are clean under the gate they built."""
-
-    def test_the_packet_definitions_draw_no_advisory_as_drafts(self) -> None:
-        report = validate_engineering_artifacts.validate_repository(REPOSITORY_ROOT)
-        for artifact_id in ("REQ-TCM-017", "SPEC-TCM-007"):
+        for artifact_id in ("REQ-002", "INT-002", "CAP-002", "SPEC-002"):
             with self.subTest(artifact=artifact_id):
-                artifact = next(item for item in report.artifacts if item.artifact_id == artifact_id)
-                self.assertEqual([], [(i.code, i.message) for i in validate_engineering_artifacts.authoring_advisories(artifact, REPOSITORY_ROOT)])
+                code, result = self.transition(artifact_id, "approved")
+                self.assertEqual(0, code, result)
 
+    def test_missing_acceptance_and_unfinished_content_still_refuse(self) -> None:
+        self.requirement("The command returns the reading manifest.", body="")
+        artifact = self.artifact("REQ-002")
+        self.assertEqual("fail", authoring_ready(artifact, self.root)[0])
+        self.requirement("The command returns <fill in the result>.")
+        code, result = self.transition("REQ-002", "approved")
+        self.assertEqual(1, code, result)
+        self.assertIn("placeholder", str(result))
 
-if __name__ == "__main__":
-    unittest.main()
+    def test_linked_verification_can_supply_the_acceptance_condition(self) -> None:
+        self.requirement("The command returns the reading manifest.", body="")
+        write(self.product / "verification/VER-001.md", formal("VER-001", "verification", "approved", {"verifies": ["REQ-001", "REQ-002"]}) + "\nRun the command and compare its returned paths with the work order's required inputs.\n")
+        code, result = self.transition("REQ-002", "approved")
+        self.assertEqual(0, code, result)
+
+    def test_optional_hint_does_not_block_owner_approval(self) -> None:
+        path = self.intent(CLEAN_OUTCOME)
+        path.write_text(path.read_text(encoding="utf-8").replace(f'outcome = "{CLEAN_OUTCOME}"\n', ''), encoding="utf-8")
+        self.assertIn(codes.W_AUT_011, [i.code for i in self.report().advisories])
+        code, result = self.transition("INT-002", "approved")
+        self.assertEqual(0, code, result)
+
+    def test_duplicate_rule_reference_is_a_hint(self) -> None:
+        self.specification(SHORT_RULES + SHORT_RULES)
+        self.assertIn(codes.W_AUT_020, [i.code for i in self.report().advisories])
+        code, result = self.transition("SPEC-002", "approved")
+        self.assertEqual(0, code, result)

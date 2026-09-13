@@ -2,7 +2,7 @@
 id = "WO-KIS-001"
 type = "work_order"
 title = "Remove everyday input and writing blockers"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-13"
 updated = "2026-09-13"
@@ -61,6 +61,11 @@ paths = [
   "se_harness/workflow_contract.py",
   "se_harness/workflow_evidence_packet.py",
   "se_harness/workflow_procedures.py",
+  "se_harness/workflow_predicates.py",
+    "docs/notes/diagnostic-codes.md",
+    "tests/test_codes_and_contract_tables.py",
+    "tests/test_artifact_catalog.py",
+    "tests/test_retired_surface.py",
   "se_harness/workflow_result.py",
   "templates/repository/standard/.engineering-harness.toml.tpl",
   "templates/repository/standard/.github/workflows/engineering-harness.yml",
@@ -109,6 +114,20 @@ to = "approved"
 decided_at = "2026-09-13T16:40:43Z"
 decided_by = "engineering-owner"
 reason = "The owner accepted all 38 candidates in the retained 2026-09-13 codebase KISS review and requested the work orders: \"OK ! Let's create the work orders to implement all candidates\". Record the engineering-owner approval of WO-KIS-001 within that accepted scope and the established delegated route. SPEC-KIS-001 makes the replacement contracts and seven retained protections explicit; the coverage map assigns all candidates. This records definition approval or bounded execution delegation only, not implementation start, completion, verification, release, merge, publication, live adoption or historical evidence deletion."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-13T17:04:36Z"
+decided_by = "engineering-owner"
+reason = "The owner confirmed the approved packet is merged and explicitly instructed start: i merged, you can start. Begin WO-KIS-001 only, as the first sequential work order. The delegated completion and verification-preparation route is retained."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-13T17:47:14Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 0890d8fcd88c0877d00ce0b2ef5c8c5ac6325c59 (check-run 103763906633, source github-checks). All eight selected cuts are implemented in source commit 4793c7bb95ff718d0b05c6de7c1c585e477e445c. The committed Windows suite passed 1179 tests with 25 skips; installed-wheel acceptance and released doctor, graph and handoff passed. PR 467 head 0890d8fcd88c0877d00ce0b2ef5c8c5ac6325c59 passed every CI check, including both platform upgrade and integration-package tests. Retained evidence is under WO-KIS-001/implementation. Record delegated completion only; assurance, release and merge remain owner decisions."
 +++
 
 # Remove everyday input and writing blockers
@@ -188,3 +207,19 @@ An unavailable platform is untested; a proposed record is not verified; a green 
 State the simpler behavior, accepted candidates completed, checks run, observed reduction and material remaining limitation.
 Obtain the released evaluator's schema-2 handoff for WO-KIS-001 and report its actual state and one next action.
 Leave assurance, release, publication, merge and live adoption decisions to their explicit accountable actions.
+
+## Scope clarification during the authorized start
+
+The owner's instruction, "i merged, you can start", authorizes implementation of the eight selected cuts.
+The execution scope includes `se_harness/workflow_predicates.py`, which owns the header, CRLF and authoring-approval checks named by those cuts.
+This corrects an omitted implementation file in the packet; it adds no behavior, work order or decision right.
+
+The generated `docs/notes/diagnostic-codes.md` index is also included because removing
+the selected diagnostic emitters requires its normal regeneration. This is a
+derived-document update for the same eight cuts.
+
+Three existing test files are included for direct consequences of these cuts:
+`test_codes_and_contract_tables.py` drops the removed CRLF diagnostic expectation;
+`test_artifact_catalog.py` declares the two changed candidate applicability rows;
+`test_retired_surface.py` checks actual retired commands instead of banning the word
+"next" from all help prose. Other test behavior stays in its existing work-order scope.

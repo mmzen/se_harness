@@ -42,7 +42,7 @@ _pairs = unique_object_hook(lambda key: CodedError(WEX200, f"duplicate JSON key 
 def normalize_path(value: object, *, directory_allowed: bool = False) -> str:
     if not isinstance(value, str) or not value or len(value) > 4096:
         raise CodedError(WEX200, "path must be non-empty UTF-8 text of at most 4096 characters")
-    if _CONTROL.search(value) or "\\" in value or ":" in value or any(token in value for token in ("*", "?", "[", "]")):
+    if _CONTROL.search(value) or "\\" in value or ":" in value:
         raise CodedError(WEX200, f"path is not a normalized repository path: {value!r}")
     directory = value.endswith("/")
     if directory and not directory_allowed:

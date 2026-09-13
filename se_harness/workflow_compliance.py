@@ -38,6 +38,7 @@ from se_harness.workflow_edges import structural_precondition_results
 from se_harness.workflow_result import build_result
 from se_harness.codes import (
     CodedError,
+    WEX200,
     WEX201,
     WEX210,
     WEX220,
@@ -46,7 +47,6 @@ from se_harness.codes import (
     WEX_ECP_010,
     WEX_ECP_011,
     WEX_ECP_012,
-    W_ADS_001,
     W_ADS_002,
 )
 
@@ -171,12 +171,11 @@ def write_evidence_packet(
         if path.is_symlink() or not path.is_file():
             raise CodedError(WEX_ECP_010, f"{relative} is not an ordinary file")
         existing, body = parse_evidence_header(path.read_bytes())
-        if existing is None:
-            raise CodedError(WEX_ECP_010, f"{relative} carries no evidence packet header at byte offset 0")
-        if existing["artifact"] != artifact_id or existing["checkpoint"] != checkpoint:
+        if existing is not None and (existing["artifact"] != artifact_id or existing["checkpoint"] != checkpoint):
             raise CodedError(WEX_ECP_010, f"{relative} is the packet of {existing['artifact']} at {existing['checkpoint']}, "
                 f"not {artifact_id} at {checkpoint}"
             )
+        header = {**(existing or {}), **header}
         action = "rebind"
     else:
         body = (
@@ -241,7 +240,7 @@ def _evaluate(name: str, predicate: Mapping[str, Any], context: CheckpointContex
     if name == "review_evidence_available":
         return review_evidence(context)
     if name == "authoring_ready":
-        return authoring_ready(context.artifact, context.root)
+        return authoring_ready(context.artifact, context.root, context.catalog)
     if name == "release_unit_ready":
         return release_unit_ready(context.artifact, context.root, context.catalog)
     if name == "decision_gate_clear":
@@ -449,7 +448,7 @@ def _handoff_trap_blockers(
             f"{W_ADS_002}: {message}" for message in orphaned_ready_records(root, catalog.values(), artifact_id)
         )
         if pull_request_body is not None:
-            trap_blockers.extend(f"{W_ADS_001}: {message}" for message in pull_request_body_findings(root, pull_request_body))
+            trap_blockers.extend(f"{WEX200}: {message}" for message in pull_request_body_findings(root, pull_request_body))
     return trap_blockers
 
 
@@ -533,8 +532,6 @@ def check_workflow(
     rule, rule_context = select_rule(rules, primary, related=related)
     selected_procedure = str(rule["procedure_id"])
     alternatives = list(rule.get("alternative_procedure_ids", []))
-    if checkpoint == "pre-action" and procedure_id is None:
-        raise CodedError(WEX220, "--procedure is required for pre-action")
     if procedure_id is not None:
         if procedure_id not in {selected_procedure, *alternatives}:
             raise CodedError(WEX220, f"procedure {procedure_id} is not selected by workflow rule {rule['id']}")

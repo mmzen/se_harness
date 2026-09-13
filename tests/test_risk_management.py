@@ -106,8 +106,8 @@ def pairing_decision_text(decision_id: str = "DEC-PRD-001", *, risk_id: str = "R
 class RiskFixture(unittest.TestCase):
     RAISE = (
         "--domain", "product", "--title", "Config drift", "--stage", "release", "--category", "process",
-        "--cause", "A consumer pins the harness and never upgrades.",
-        "--effect", "The consumer keeps writing keys the evaluator no longer reads.",
+        "--description", "A consumer pins the harness and never upgrades. It keeps using old configuration keys.",
+        "--action", "Check the pinned version before the next release.",
         "--threatens", "WO-001", "--raised-by", "implementation-agent",
     )
 
@@ -218,7 +218,7 @@ class RiskArtifactTests(RiskFixture):
     def test_each_missing_field_draws_e_rsk_001_naming_it_and_no_other_code(self) -> None:
         # RSK-MGT-002: the eight declared fields.
         write(self.root / DECISION_PATH, pairing_decision_text())
-        for field_name in ("cause", "effect", "stage", "category", "likelihood", "impact", "score", "raised_by"):
+        for field_name in ("cause", "effect", "likelihood", "impact", "score", "raised_by"):
             write(self.root / RISK_PATH, risk_text(drop=(field_name,)))
             with self.subTest(field=field_name):
                 found = self.codes()
@@ -228,18 +228,11 @@ class RiskArtifactTests(RiskFixture):
         write(self.root / RISK_PATH, risk_text())
         self.assertEqual([], self.codes())
 
-    def test_stage_category_one_sentence_and_no_decision_field(self) -> None:
-        # RSK-MGT-004, RSK-MGT-005, RSK-MGT-006 and ARCH-RSK-010 conformance check 3.
-        write(self.root / DECISION_PATH, pairing_decision_text())
-        write(self.root / RISK_PATH, risk_text().replace('stage = "release"', 'stage = "deployment"'))
-        self.assertTrue(any("E-RSK-001" in item and "'stage' must name one of" in item for item in self.codes()), self.codes())
-        write(self.root / RISK_PATH, risk_text().replace('category = "process"', 'category = "budget"'))
-        self.assertTrue(any("E-RSK-001" in item and "'category' must name one of" in item for item in self.codes()), self.codes())
-        write(self.root / RISK_PATH, risk_text().replace(
-            'cause = "A consumer pins the harness and never upgrades."', 'cause = "A consumer pins the harness. It never upgrades."'))
-        self.assertTrue(any("'cause' must be one sentence" in item for item in self.codes()), self.codes())
+    def test_optional_taxonomy_and_multisentence_description_are_accepted(self) -> None:
+        write(self.root / RISK_PATH, risk_text().replace('stage = "release"', 'stage = "deployment"').replace('category = "process"', 'category = "budget"').replace('cause = "A consumer pins the harness and never upgrades."', 'cause = "A consumer pins the harness. It never upgrades."'))
+        self.assertEqual([], self.codes())
         write(self.root / RISK_PATH, risk_text(extra='question = "Which option?"'))
-        self.assertTrue(any("decision field 'question'" in item for item in self.codes()), self.codes())
+        self.assertTrue(any("decision field 'question'" in item for item in self.codes()))
 
     def test_the_workflow_contract_declares_the_family_with_exactly_the_state_model(self) -> None:
         # RSK-MGT-007 and RSK-MGT-008, on the package copy and the template copy alike.
@@ -284,17 +277,18 @@ class RaiseTests(RiskFixture):
                 self.assertEqual(before, sorted(path.as_posix() for path in (self.root / "docs/engineering/product").rglob("*.md")))
         self.assertNotIn("6", self.risk_file().read_text(encoding="utf-8").split("likelihood = ")[1][:1])
 
-    def test_a_raise_without_a_decision_names_the_corrective_command_and_dry_run_writes_nothing(self) -> None:
-        code, output, error = self.raise_risk("--dry-run", decision_id=None)
-        self.assertEqual(0, code, error)
-        self.assertIn("dry run", output)
+    def test_risk_without_scores_or_decision_is_valid_and_dry_run_writes_nothing(self) -> None:
+        args = ("raise-risk", str(self.root), "--domain", "product", "--title", "One user", "--description", "Only the owner has tried setup. Other environments may differ.", "--action", "Try setup on the next development machine.", "--owner", "owner", "--id", "RISK-PRD-001")
+        code, output, error = invoke(*args, "--dry-run", "--json")
+        self.assertEqual(0, code, output + error)
         self.assertFalse(self.risk_file().exists())
-        code, output, error = self.raise_risk(decision_id=None)
-        self.assertEqual(0, code, error)
-        self.assertIn("E-RSK-003", output)
-        found = self.codes("E-RSK-003")
-        self.assertEqual(1, len(found), found)
-        self.assertIn("--with-decision", found[0])
+        code, output, error = invoke(*args, "--json")
+        self.assertEqual(0, code, output + error)
+        self.assertIsNone(json.loads(output)["score"])
+        self.assertIsNone(json.loads(output)["decision"])
+        self.assertFalse(self.decision_file().exists())
+        self.assertEqual([], self.codes())
+        self.assertEqual([], [i for i in self.validate().errors if i.path.endswith("RISK-PRD-001.md")])
 
     def test_no_configuration_key_governs_the_raise(self) -> None:
         # RSK-MGT-011: no threshold is read from anywhere; the installed template keeps its keys.
@@ -362,12 +356,11 @@ class BorrowedStopTests(RiskFixture):
         self.assertEqual((risk_before, decision_before), (self.risk_file().read_bytes(), self.decision_file().read_bytes()))
         self.assertIn('status = "in_progress"', (self.root / "docs/engineering/product/work-orders/WO-001.md").read_text(encoding="utf-8"))
 
-    def test_a_raised_risk_needs_exactly_one_pending_decision_whose_blocks_equal_its_threatens(self) -> None:
+    def test_an_optional_blocking_decision_must_match_the_threatened_work(self) -> None:
         # RSK-MGT-012 and RSK-MGT-013.
         write(self.root / RISK_PATH, risk_text())
         found = self.codes("E-RSK-003")
-        self.assertEqual(1, len(found), found)
-        self.assertIn("no open or deferred decision", found[0])
+        self.assertEqual([], found)
         write(self.root / DECISION_PATH, pairing_decision_text(blocks=("REQ-001",)))
         found = self.codes("E-RSK-004")
         self.assertEqual(1, len(found), found)
@@ -633,9 +626,9 @@ class SecurityTests(RiskFixture):
         code, output, error = invoke("risks", str(self.root), "--artifact", "WO-001", "--json")
         self.assertEqual(0, code, error)
         self.assertEqual(hostile, json.loads(output)["risks"][0]["title"])
-        code, output, error = invoke("raise-risk", str(self.root), *self.RAISE, "--likelihood", "1", "--impact", "1", "--id", "RISK-PRD-002", "--cause", "Line one\nline two")
-        self.assertEqual(2, code)
-        self.assertIn("single-line", error)
+        code, output, error = invoke("raise-risk", str(self.root), *self.RAISE, "--likelihood", "1", "--impact", "1", "--id", "RISK-PRD-002", "--description", "Line one\nline two")
+        self.assertEqual(0, code, error + output)
+        self.assertEqual([], self.codes())
 
     def test_the_raise_carries_no_authority_and_the_raiser_cannot_answer(self) -> None:
         code, _, error = self.raise_risk("--raised-by", "nobody-with-a-right")
@@ -708,7 +701,7 @@ class ScopeAdmissionTests(RiskFixture):
         self.commit_all("risk recorded")
         self.assertEqual("pass", self.predicates(self.checkpoint("scope", "--from-git", "HEAD"))["QGP-G4I-PATHS"]["status"])
         risk = self.risk_file()
-        risk.write_text(risk.read_text(encoding="utf-8").replace('residual = ""', 'residual = "edited by hand"'), encoding="utf-8")
+        risk.write_text(risk.read_text(encoding="utf-8").replace('action = "Check the pinned version before the next release."', 'action = "Try setup again."'), encoding="utf-8")
         paths = self.predicates(self.checkpoint("scope", "--from-git", "HEAD"))["QGP-G4I-PATHS"]
         self.assertEqual("fail", paths["status"])
         self.assertIn(RISK_PATH, paths["message"])

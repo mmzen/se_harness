@@ -1079,51 +1079,30 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionFixture, unittest.TestCase):
         self.assertEqual(["ENGINEERING_HARNESS.md", "docs/engineering/OPERATING_CARD.md", "AGENTS.md"], manifest[:3])
         self.assertNotIn("docs/engineering/WORKFLOW.md", manifest)
 
-    def test_carriage_return_trailer_is_named_with_its_offset(self) -> None:
-        from se_harness.github_ci import (
-            SelectionError,
-            carriage_return_trailer_offsets,
-            select_restitution_digest,
-            select_work_order,
-        )
+    def test_lf_and_crlf_pr_fields_select_the_same_values(self) -> None:
+        from se_harness.github_ci import SelectionError, select_work_order, select_restitution_digest
+        digest = "a" * 64
+        for newline in ("\n", "\r\n"):
+            body = newline.join(("Résumé", "", "Harness-Work-Order: WO-EX-001", f"Harness-Restitution: {digest}", ""))
+            self.assertEqual("WO-EX-001", select_work_order(body))
+            self.assertEqual(digest, select_restitution_digest(body))
+            with self.assertRaises(SelectionError):
+                select_work_order(body + "Harness-Work-Order: WO-EX-002" + newline)
+            with self.assertRaises(SelectionError):
+                select_restitution_digest(body + f"Harness-Restitution: {digest}" + newline)
+            event = self.root / "event.json"
+            event.write_text(json.dumps({"pull_request": {"body": body}}), encoding="utf-8")
+            code, output, error = invoke("select-work-order", "--event", str(event))
+            self.assertEqual(0, code, error)
+            self.assertEqual("WO-EX-001", output.strip())
 
-        body = "Summary\r\n\r\nHarness-Work-Order: WO-EX-001\r\n"
-        self.assertEqual([len("Summary\r\n\r\nHarness-Work-Order: WO-EX-001")], carriage_return_trailer_offsets(body))
-        with self.assertRaises(SelectionError) as raised:
-            select_work_order(body)
-        self.assertIn("W-ADS-001", str(raised.exception))
-        self.assertIn("byte offset", str(raised.exception))
-        self.assertEqual("WO-EX-001", select_work_order(body.replace("\r\n", "\n")))
-        self.assertEqual("", select_restitution_digest("Harness-Work-Order: WO-EX-001\n"))
-        digest = "0" * 64
-        self.assertEqual(digest, select_restitution_digest(f"Harness-Restitution: {digest}\n"))
-        with self.assertRaises(SelectionError):
-            select_restitution_digest(f"Harness-Restitution: {digest}\nHarness-Restitution: {digest}\n")
-
-        event = self.root / "event.json"
-        event.write_text(
-            json.dumps({"pull_request": {"body": f"Harness-Work-Order: WO-EX-001\nHarness-Restitution: {digest}\n"}}),
-            encoding="utf-8",
-        )
-        code, output, error = invoke("select-work-order", "--event", str(event), "--field", "restitution-digest")
-        self.assertEqual(0, code, error)
-        self.assertEqual(digest, output.strip())
-        event.write_text(json.dumps({"pull_request": {"body": "Harness-Work-Order: WO-EX-001\n"}}), encoding="utf-8")
-        code, output, _ = invoke("select-work-order", "--event", str(event), "--field", "restitution-digest")
-        self.assertEqual(0, code)
-        self.assertEqual("", output.strip())
-
-    def test_handoff_check_reports_a_carriage_return_trailer_from_a_body_file(self) -> None:
+    def test_handoff_accepts_crlf_pr_body(self) -> None:
         self.in_progress_work_order()
         body = self.root / "body.md"
         body.write_bytes(b"Harness-Work-Order: WO-EX-001\r\n")
-        code, output, error = invoke(
-            "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff",
-            "--pull-request-body", str(body), "--json",
-        )
-        self.assertEqual(1, code, error)
-        blockers = json.loads(output)["restitution"]["blocked_by"]
-        self.assertTrue(any(item.startswith("W-ADS-001:") for item in blockers), blockers)
+        code, output, error = invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--pull-request-body", str(body), "--json")
+        self.assertIn(code, (0, 1), error)
+        self.assertFalse(any("carriage return" in item or item.startswith("WEX200:") for item in json.loads(output)["restitution"]["blocked_by"]))
 
     def test_orphaned_ready_record_blocks_review_preflight_and_handoff(self) -> None:
         import shutil
@@ -1387,7 +1366,7 @@ class PullRequestBodyTests(unittest.TestCase):
         return code, buffer.getvalue(), error.getvalue()
 
     def test_body_round_trips_through_the_selector_with_lf_only_and_the_retained_digest(self) -> None:
-        from se_harness.github_ci import carriage_return_trailer_offsets, select_restitution_digest, select_work_order
+        from se_harness.github_ci import select_restitution_digest, select_work_order
 
         self.in_progress_work_order()
         code, raw, error = self.body()
@@ -1398,7 +1377,6 @@ class PullRequestBodyTests(unittest.TestCase):
         self.assertEqual("Harness-Work-Order: WO-PRD-001", text.splitlines()[0])
         self.assertEqual("WO-PRD-001", select_work_order(text))
         self.assertEqual("", select_restitution_digest(text))
-        self.assertEqual([], carriage_return_trailer_offsets(text))
         self.assertIn("## Summary\n", text)
         self.assertIn("## Verification\n", text)
         self.assertIn("- No retained evidence under the packet directory yet.", text)

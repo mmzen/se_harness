@@ -1,156 +1,29 @@
 # Artifact authoring
 
-<!-- Target expertise: 5/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
+Write what someone needs to understand, implement and check the change. The harness
+does not count words, sentences or code references, and does not require `SHALL`.
+Candidate checklists live in `templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md`.
+The installed root policies remain governed by the currently released checker.
 
-> Non-authoritative operator guidance. The installed harness, the exact released
-> evaluator, the formal artifacts, and accountable decisions remain authoritative.
+A requirement needs a non-empty statement and an acceptance condition: an example,
+a measure, verification notes or a linked verification contract. An intent explains
+the desired outcome; a capability says what the actor can do; a specification gives
+the behavior and meaningful failure cases. Draft hints about missing summaries or
+ambiguous rule references help review but do not block approval.
 
-`docs/engineering/ARTIFACT_AUTHORING.md` is the managed policy that says how
-each formal artifact type is written. It has one section per type with a
-checklist (what a reviewer checks) and guidance (how to think about it).
-Rules the tool can enforce are marked *mechanical* and live in the validator
-or a gate; the rest are judgement rules.
+Unfilled placeholders, invalid references and unresolved blocking decisions still
+need attention. Owner approval remains an explicit lifecycle decision.
 
-## Where you meet it
+For handoff evidence, a work order may list ordinary repository files in top-level
+`evidence_paths = ["docs/engineering/product/evidence/WO-PRD-001/checks.md"]`.
+Files must exist, contain evidence and stay inside the repository. No special header
+is required. Generated headers still work and may include descriptive text fields.
 
-- `harnessctl create-artifact` prints the checklist for the type it just
-  created; `--quiet` suppresses it.
-- The managed router lists it under "Authoring rules for formal artifacts".
+`harnessctl check . --artifact WO-PRD-001` shows the next action. A `pre-action`
+checkpoint selects the procedure automatically; `--procedure` is only an optional
+override among the selected rule's alternatives. PR declarations accept LF and CRLF.
+Literal filenames such as `src/check[1].py` are accepted; native path separators are
+normalized at the CLI boundary. Paths outside the repository are refused.
 
-## Requirements
-
-The requirement template offers the five EARS shapes — always, event
-(`WHEN`), state (`WHILE`), unwanted (`IF … THEN`), optional feature
-(`WHERE`) — and asks for one obligation per requirement. The validator
-signals, as maintenance warnings that never block:
-
-- `W-AUT-001` — the statement opens with none of the five shapes;
-- `W-AUT-002` — the statement carries more than one `SHALL`;
-- `W-AUT-003` — the statement is longer than 300 characters;
-- `W-AUT-004` — `verification_method` is still a free-text string.
-
-`verification_method` may now be an array from `test`, `analysis`,
-`inspection`, `demonstration`, with free text in `verification_notes`; the
-one-time migration of existing strings and the approval predicates against
-leftover placeholders and open decisions are `WO-AUT-002`. Three optional
-attributes are validated when present: `priority` (`must`, `should`,
-`could`), `source`, and `measure`.
-
-The template body was six headings until `WO-TCM-005` (SPEC-TCM-003):
-Rationale, Behavior, Assumptions and dependencies, Acceptance examples, Open
-decisions. It is now four: `In plain words`, `Why`, `Behavior` (a table of
-trigger, response, on failure) and `Examples` (one normal, one failure).
-The acceptance cases live in the verification contract; the method lives in
-the specification; pending decisions are `DEC-` artifacts, so the `Open
-decisions` section is gone. Six more draft-time advisories guard the
-budgets: `W-AUT-003` at 30 words for the statement, `W-AUT-005` body over
-250 words, `W-AUT-006` Why over five sentences or 120 words, `W-AUT-007` a
-sentence over 25 words, `W-AUT-008` more than three code identifiers,
-`W-AUT-009` a missing or long In plain words, `W-AUT-010` a WHEN whose
-event is the act of evaluating. Approved requirements are not rewritten.
-
-## Intents
-
-`WO-TCM-007` (SPEC-TCM-004) gave the intent the same treatment. The template
-has four sections, `In plain words`, `Problem`, `Success measures` (a table
-of measure, today, when reached, observed) and `Not this`, and a front-matter
-`outcome`: one sentence naming who can do or observe what after delivery,
-which the Explorer shows under the title. Actors belong to the capability,
-principles to a specification or an ADR, risks and open questions to their
-own artifacts. Draft-time advisories guard it: `W-AUT-011` a missing, long
-or solution-naming outcome, `W-AUT-012` Problem over five sentences or 120
-words, `W-AUT-013` a success measure observed by a CI run, test, validator,
-verification or implementation review (an acceptance check, which belongs
-in the verification contract), `W-AUT-014` a measures table with no row,
-`W-AUT-015` a repository path or source line range cited in the body; the
-shared `W-AUT-005`, `W-AUT-007`, `W-AUT-008` and `W-AUT-009` fire on intent
-drafts with the intent budgets (200 words, 25 words, two identifiers). An
-`outcome` that is present but empty is `E-AUT-002`. Approved intents are not
-rewritten; the Explorer's G0 intent-quality condition reads `satisfied` only
-for an intent that carries an outcome and at least one measure row.
-
-## Approval predicates
-
-Two predicates, `QGP-G1-AUTHORING` and `QGP-G2-AUTHORING`, fail a definition's
-approval when the file still carries a template placeholder (`<…>` outside
-code) or when a legacy `Open decisions` section says anything but `None`
-or a list of `DEC-` identifiers. They
-are evaluated by `harnessctl transition` when a definition leaves `draft`.
-
-## Why a policy and not a skill
-
-`ADR-AUT-001`: rules in a skill apply only while the skill runs; rules in a
-managed policy apply on every route, and rules in the validator apply
-whether anyone read the policy or not. No per-type writing skill is planned.
-
-## Capabilities
-
-`WO-TCM-008` (SPEC-TCM-005) gave the capability the same treatment. The
-template is an `ability` field, one sentence of at most 30 words with an
-actor, `can` and `under`, and three sections: `In plain words`, `Actor and
-need`, `Not decided here`. The `Capability statement`, `Boundaries`,
-`Outcomes` and `Candidate requirements` sections are gone: the statement is
-the field, the boundaries are `Not decided here`, the outcomes belong to
-the intent and the requirements, and what derives from a capability is read
-from the graph and shown by the Explorer under the ability. On capability
-drafts, `W-AUT-016` guards the ability, `W-AUT-017` the `Actor and need`
-budget (three sentences, 60 words), `W-AUT-018` a legacy requirement list,
-and the shared `W-AUT-005`, `W-AUT-007`, `W-AUT-008` and `W-AUT-009` fire
-with the capability budgets (150 words, 25 words, two identifiers). An
-`ability` that is present but empty is `E-AUT-002`. Approved capabilities
-are not rewritten.
-
-## Specifications
-
-`WO-TCM-009` (SPEC-TCM-006) gave the specification the same treatment,
-with one difference: its rules are the substance, so code identifiers are
-not budgeted there. The template is a `contract` field, one sentence of at
-most 30 words saying what an implementation must do to conform, and eight
-sections: `In plain words`, `Scope`, `Terms`, `Rules`, `Failure behaviour`,
-`Examples`, `Coverage`, `Not decided here`. Every rule leads with a stable
-identifier (`<PREFIX>-<AREA>-NNN`) in bold and is one sentence of at most
-30 words with MUST, MUST NOT, SHALL, SHALL NOT, MAY or refuses; the
-identifier is the rule's name in verification contracts, work orders,
-evidence and a deviation's `against`, and it never moves. The `Coverage`
-table maps each specified requirement to the rules that meet it; the
-validator reads it and the Explorer shows it on the specification and, as
-`Covered by`, on each requirement. The nine former sections (actors, inputs,
-outputs, state model, data contracts, security, performance, observability,
-compatibility) are optional and the guide says when each earns its place.
-On specification drafts, `W-AUT-019` guards the contract, `W-AUT-020` the
-rule identity, `W-AUT-021` the rule shape, `W-AUT-022` the coverage table,
-`W-AUT-023` a legacy `Behavioral rules`, `Open decisions` or `Approval`
-heading, and the shared `W-AUT-005`, `W-AUT-007` and `W-AUT-009` fire with
-the specification budgets (300 words of prose outside the rules, failure,
-examples and coverage sections; 25 words per sentence outside the rules).
-A deviation whose `against` fragment names no rule identifier of its
-specification is `E-DCM-005`. Approved specifications are not rewritten;
-one that is amended for another reason adopts identifiers then, keeping
-each former number in a note beside the identifier.
-
-## The approval gate
-
-`WO-TCM-011` (SPEC-TCM-007) closes the regime the owner chose four times:
-advisory for one release, then blocking at approval. Since 0.18.0 the
-approval transition of a draft intent, capability, requirement or
-specification reads the draft's advisories through the validator and refuses
-while any remains, naming each code and message in the validator's order and
-ending with "fix the draft and run the transition again". Nothing else
-moves: `validate` still passes with advisories present and lists them apart,
-approved artifacts are not re-read, the budgets and codes of the four
-families are unchanged, and the other transitions read no advisory. The
-checklists of `ARTIFACT_AUTHORING.md` say so in one sentence each.
-
-## Permanent branches
-
-Two tolerances of the validator are permanent, by the owner decision of
-2026-09-07 on issue #381 (`SPEC-AUT-004` `AUT-WIN-012`). A verification or
-release record decided before preparation existed carries no `prepared_at`,
-and its decision timestamp is read from its last lifecycle event instead:
-84 of 230 records on `main` at `b11ea537`. A work order approved
-before the scope contract carries no `[execution_scope]`, and a checkpoint
-over it is not assessable rather than refused: 111 of 261 work orders
-at the same base. Both are historical facts of this repository; neither
-branch closes, and each carries a comment naming this section. The four
-windows that did close under `WO-AUT-006` (`W014`, `W015`, `W019`,
-`W-ECP-002`) tolerated shapes the corpus no longer held after `WO-AUT-005`.
+Keep owner instructions brief enough to read easily. Length is review advice,
+not a byte limit or a failing test; the managed fragment is checked independently.

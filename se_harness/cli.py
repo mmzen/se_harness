@@ -28,7 +28,7 @@ from se_harness.github_ci import SelectionError, select_from_event
 from se_harness.mutation_guard import MutationGuardError
 from se_harness.preflight import inspect_installation, render_preflight, render_preflight_json, run_preflight
 from se_harness.provenance import capture_verification, prepare_release
-from se_harness.risks import OPTION_TARGETS, RISK_CATEGORIES, RISK_STAGES
+from se_harness.risks import OPTION_TARGETS
 from se_harness.release_qualification import (
     failed_qualification,
     qualify_candidate_package,
@@ -56,7 +56,6 @@ from se_harness.workflow import (
 from se_harness.codes import (
     CodedError,
     E_CIP_001,
-    E_RSK_003,
     RELEASE_RECORD_REFUSALS,
     RQ001,
     RQ002,
@@ -402,7 +401,7 @@ def _check(args: argparse.Namespace) -> int:
             artifact_id=args.artifact,
             checkpoint=args.checkpoint,
             procedure_id=args.procedure,
-            changed_paths=args.changed_path,
+            changed_paths=[Path(value).as_posix() for value in (args.changed_path or [])],
             changes_complete=args.changes_complete,
             change_manifest=Path(args.change_manifest) if args.change_manifest else None,
             pull_request_body=Path(args.pull_request_body) if args.pull_request_body else None,
@@ -635,11 +634,11 @@ def _raise_risk(args: argparse.Namespace) -> int:
         title=args.title,
         stage=args.stage,
         category=args.category,
-        cause=args.cause,
-        effect=args.effect,
+        description=args.description,
+        action=args.action,
         likelihood=args.likelihood,
         impact=args.impact,
-        threatens=tuple(args.threatens),
+        threatens=tuple(args.threatens or ()),
         raised_by=args.raised_by,
         owners=tuple(args.owner or ()),
         artifact_id=args.artifact_id,
@@ -657,11 +656,11 @@ def _raise_risk(args: argparse.Namespace) -> int:
         return 0
     for change in result.changes:
         print(f"{change.action:8} {change.path}")
-    print(f"{result.risk_id}: likelihood {args.likelihood} times impact {args.impact} is score {result.score}; raised")
+    print(f"{result.risk_id}: raised" + (f"; score {result.score}" if result.score is not None else ""))
     if result.decision_id is not None:
         print(f"{result.decision_id} blocks {', '.join(args.threatens)} until it is disposed with harnessctl decide")
     else:
-        print(f"no decision names this risk yet: the validator reports {E_RSK_003} until one does")
+        print("No blocking decision was requested; this risk does not stop work.")
     if args.dry_run:
         print("dry run: no files were written")
     return 0
@@ -954,7 +953,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     check.add_argument(
         "--procedure",
-        help="selected PROC ID; required for pre-action and limited to declared alternatives",
+        help="optional procedure override, limited to declared alternatives; otherwise selected automatically",
     )
     check.add_argument(
         "--changed-path", action="append", default=[],
@@ -1026,19 +1025,19 @@ def build_parser() -> argparse.ArgumentParser:
 
     raise_risk = commands.add_parser(
         "raise-risk",
-        help="record one measured threat as a raised risk artifact, optionally with the decision that stops the threatened work",
+        help="record a risk description, owner and next action; optionally request a blocking decision",
     )
     raise_risk.add_argument("target", nargs="?", default=".")
     raise_risk.add_argument("--domain", required=True, help="the engineering domain slug, or the identifier token of exactly one domain")
     raise_risk.add_argument("--title", required=True, help="the threat, as a noun phrase")
-    raise_risk.add_argument("--stage", required=True, choices=RISK_STAGES, help="the stage the threat would damage")
-    raise_risk.add_argument("--category", required=True, choices=RISK_CATEGORIES)
-    raise_risk.add_argument("--cause", required=True, help="one sentence: the event that would start the damage")
-    raise_risk.add_argument("--effect", required=True, help="one sentence: the damage to governed work if it happened")
-    raise_risk.add_argument("--likelihood", required=True, type=int, help="an integer from 1 to 5")
-    raise_risk.add_argument("--impact", required=True, type=int, help="an integer from 1 to 5")
-    raise_risk.add_argument("--threatens", required=True, action="append", help="an artifact the threat would damage; repeat per artifact")
-    raise_risk.add_argument("--raised-by", required=True, dest="raised_by", help="the actor or role recording the threat; no decision right is needed")
+    raise_risk.add_argument("--stage", help="the stage the threat would damage")
+    raise_risk.add_argument("--category")
+    raise_risk.add_argument("--description", required=True, help="what could go wrong and why it matters")
+    raise_risk.add_argument("--action", required=True, help="the next action the owner will take")
+    raise_risk.add_argument("--likelihood", type=int, help="an integer from 1 to 5")
+    raise_risk.add_argument("--impact", type=int, help="an integer from 1 to 5")
+    raise_risk.add_argument("--threatens", action="append", help="an artifact the threat would damage; repeat per artifact")
+    raise_risk.add_argument("--raised-by", default="operator", dest="raised_by", help="the actor or role recording the threat; no decision right is needed")
     raise_risk.add_argument("--owner", action="append", help="an owner of the risk; omitted, the owners of the threatened artifacts")
     raise_risk.add_argument("--id", dest="artifact_id", help="explicit RISK-DOMAIN-NNN; omitted, the lowest free identifier across every local ref is allocated")
     raise_risk.add_argument(

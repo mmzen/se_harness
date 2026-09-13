@@ -71,7 +71,7 @@ but are not diagnostics and are not listed here.
 | `E002` | `E002`; `E002: field '{…}' must be a non-empty string` (+4 more) |
 | `E003` | `E003`; `E003: duplicate id '{…}' also declared in {…}` |
 | `E004` | `E004`; `E004: id '{…}' must start with '{…}' for type '{…}'` |
-| `E005` | `E005`; `E005: requirement statement must contain normative keyword SHALL` |
+| `E005` | `E005` |
 | `E006` | `E006`; `E006: artifact '{…}' must not reference itself via '{…}'` (+4 more) |
 | `E007` | `E007`; `E007: active requirement '{…}' has no active specification coverage` |
 | `E008` | `E008`; `E008: active requirement '{…}' has no active verification coverage` |
@@ -92,7 +92,7 @@ but are not diagnostics and are not listed here.
 | Code | Message text in the source |
 | --- | --- |
 | `E-AUT-001` | `E-AUT-001`; `E-AUT-001: verification_method must list 1-4 distinct values from {…}` |
-| `E-AUT-002` | `E-AUT-002`; `E-AUT-002: ability must be a non-empty string when present` (+7 more) |
+| `E-AUT-002` | `E-AUT-002`; `E-AUT-002: measure must be a non-empty string when present` (+5 more) |
 
 ### `E-CIP` — installed validator
 
@@ -120,9 +120,9 @@ but are not diagnostics and are not listed here.
 
 | Code | Message text in the source |
 | --- | --- |
-| `E-RSK-001` | `E-RSK-001`; `E-RSK-001: risk declares the decision field '{…}'; the question, the options and the decider live on the pair…` (+4 more) |
+| `E-RSK-001` | `E-RSK-001`; `E-RSK-001: risk declares the decision field '{…}'; the question, the options and the decider live on the pair…` (+3 more) |
 | `E-RSK-002` | `E-RSK-002`; `E-RSK-002: risk field 'score' is {…}; likelihood {…} times impact {…} is {…}` (+2 more) |
-| `E-RSK-003` | `E-RSK-003`; `E-RSK-003: raised risk {…} is named in concerns by no open or deferred decision; raise it again with harnessc…` (+1 more) |
+| `E-RSK-003` | `E-RSK-003`; `E-RSK-003: raised risk {…} is named in concerns by {…} pending decisions ({…}); exactly one answers it` |
 | `E-RSK-004` | `E-RSK-004`; `E-RSK-004: {…} blocks {…} but {…} threatens {…}; the two sets must be equal` |
 | `E-RSK-005` | `E-RSK-005`; `E-RSK-005: a disposition without a lifecycle event was written by hand` (+7 more) |
 
@@ -151,36 +151,36 @@ but are not diagnostics and are not listed here.
 
 | Code | Message text in the source |
 | --- | --- |
-| `W-ADS-001` | `A coded selection refusal (W-ADS-001, WEX-ECP-014): a `SelectionError` that carries its code.`; `Report W-ADS-001 for a pull-request body whose trailer carries a carriage return.` (+4 more) |
+| `W-ADS-001` | `A coded selection refusal (W-ADS-001, WEX-ECP-014): a `SelectionError` that carries its code.`; `W-ADS-001` |
 | `W-ADS-002` | `W-ADS-002`; `W-ADS-002: ready verification records for the work order whose candidate left HEAD.` (+1 more) |
 
 ### `W-AUT` — installed validator
 
 | Code | Message text in the source |
 | --- | --- |
-| `W-AUT-001` | `W-AUT-001`; `W-AUT-001: statement does not open with one of the five shapes (THE SYSTEM SHALL, WHEN, WHILE, IF ... THEN, W…` |
-| `W-AUT-002` | `W-AUT-002`; `W-AUT-002: statement carries {…} SHALL obligations; one requirement states one obligation` |
-| `W-AUT-003` | `W-AUT-003`; `W-AUT-003: statement is {…} words; the budget is {…}` |
-| `W-AUT-004` | `W-AUT-004`; `W-AUT-004: verification_method is a free-text string; the closed vocabulary is an array of test, analysis, in…` |
-| `W-AUT-005` | `W-AUT-005`; `W-AUT-005: body is {…} words; the budget is {…}` (+1 more) |
-| `W-AUT-006` | `W-AUT-006`; `W-AUT-006: Why is {…} words in {…} sentences; the budget is {…} words or {…} sentences` |
-| `W-AUT-007` | `W-AUT-007`; `W-AUT-007: a body sentence is {…} words; the budget is {…}` |
-| `W-AUT-008` | `W-AUT-008`; `W-AUT-008: body cites {…} code identifiers; the budget is {…}, the evidence belongs in a note, an RCA or an A…` (+2 more) |
-| `W-AUT-009` | `W-AUT-009`; `W-AUT-009: In plain words has {…} sentences; the budget is {…}` (+1 more) |
-| `W-AUT-010` | `W-AUT-010`; `W-AUT-010: statement opens WHEN on an event of evaluation with no other condition; an invariant reads THE SYS…` |
-| `W-AUT-011` | `W-AUT-011`; `W-AUT-011: intent has no outcome; one sentence names who can do or observe what after delivery` (+2 more) |
-| `W-AUT-012` | `W-AUT-012`; `W-AUT-012: Problem is {…} words in {…} sentences; the budget is {…} words or {…} sentences` |
-| `W-AUT-013` | `W-AUT-013`; `W-AUT-013: success measure '{…}' is observed by {…}; an acceptance check belongs in the verification contract` |
-| `W-AUT-014` | `W-AUT-014`; `W-AUT-014: Success measures has no row; a success measure is what an operator can count or time after delivery` |
-| `W-AUT-015` | `W-AUT-015`; `W-AUT-015: body cites {…} repository paths or source line ranges; evidence is cited by link to a note, an RCA…` |
-| `W-AUT-016` | `W-AUT-016`; `W-AUT-016: ability cites {…} code identifiers; the ability names what an actor can do, not how` (+4 more) |
-| `W-AUT-017` | `W-AUT-017`; `W-AUT-017: Actor and need is {…} words in {…} sentences; the budget is {…} words or {…} sentences` |
-| `W-AUT-018` | `W-AUT-018`; `W-AUT-018: body carries a {…} list; the requirements that derive from a capability are read from the graph an…` |
-| `W-AUT-019` | `W-AUT-019`; `W-AUT-019: contract cites {…} code identifiers; the contract says what conformance is, the rules say how` (+3 more) |
-| `W-AUT-020` | `W-AUT-020`; `W-AUT-020: a rule opens with no identifier: {…}; every rule leads with <PREFIX>-<AREA>-NNN in bold` (+1 more) |
-| `W-AUT-021` | `W-AUT-021`; `W-AUT-021: rule {…} carries no MUST, MUST NOT, SHALL, SHALL NOT, MAY or refuses; a rule is a sentence someone…` (+2 more) |
-| `W-AUT-022` | `W-AUT-022`; `W-AUT-022: Coverage has no row for {…}, which this specification specifies` (+2 more) |
-| `W-AUT-023` | `W-AUT-023`; `W-AUT-023: body carries a {…} heading; the reader-first shape names the section Rules and records decisions a…` |
+| `W-AUT-001` | `W-AUT-001` |
+| `W-AUT-002` | `W-AUT-002` |
+| `W-AUT-003` | `W-AUT-003` |
+| `W-AUT-004` | `W-AUT-004` |
+| `W-AUT-005` | `W-AUT-005` |
+| `W-AUT-006` | `W-AUT-006` |
+| `W-AUT-007` | `W-AUT-007` |
+| `W-AUT-008` | `W-AUT-008` |
+| `W-AUT-009` | `W-AUT-009` |
+| `W-AUT-010` | `W-AUT-010` |
+| `W-AUT-011` | `W-AUT-011` |
+| `W-AUT-012` | `W-AUT-012` |
+| `W-AUT-013` | `W-AUT-013` |
+| `W-AUT-014` | `W-AUT-014` |
+| `W-AUT-015` | `W-AUT-015` |
+| `W-AUT-016` | `W-AUT-016` |
+| `W-AUT-017` | `W-AUT-017` |
+| `W-AUT-018` | `W-AUT-018` |
+| `W-AUT-019` | `W-AUT-019` |
+| `W-AUT-020` | `W-AUT-020`; `W-AUT-020: A rule identifier is defined more than once; references would be ambiguous.` |
+| `W-AUT-021` | `W-AUT-021` |
+| `W-AUT-022` | `W-AUT-022`; `W-AUT-022: Coverage row {…} names undefined rule {…}.` |
+| `W-AUT-023` | `W-AUT-023` |
 
 ### `W-DCM` — installed validator
 
@@ -252,10 +252,10 @@ but are not diagnostics and are not listed here.
 | --- | --- |
 | `WEX001` | `WEX001` |
 | `WEX190` | `WEX190` |
-| `WEX200` | `WEX200`; `WEX200: --change-manifest is mutually exclusive with --changed-path and --changes-complete` (+23 more) |
+| `WEX200` | `WEX200`; `WEX200: --change-manifest is mutually exclusive with --changed-path and --changes-complete` (+24 more) |
 | `WEX201` | `Generate the diagnostic-code index note from the candidate source. `WO-TCM-003` (`REQ-TCM-005`, `SPEC-TCM-002…`; `WEX201` (+2 more) |
 | `WEX210` | `Generate the diagnostic-code index note from the candidate source. `WO-TCM-003` (`REQ-TCM-005`, `SPEC-TCM-002…`; `WEX210` (+16 more) |
-| `WEX220` | `WEX220`; `WEX220: --procedure is required for pre-action` (+3 more) |
+| `WEX220` | `WEX220`; `WEX220: procedure {…} has no steps` (+2 more) |
 | `WEX221` | `WEX221`; `WEX221: optional procedure parameter {…} has an invalid value` (+8 more) |
 | `WEX230` | `A schema-2 result or restitution that does not hold (WEX230); a `ValueError` to its callers.`; `WEX230` (+15 more) |
 | `WEX301` | `WEX301` |
@@ -281,7 +281,7 @@ but are not diagnostics and are not listed here.
 | `WEX-ECP-001` | `WEX-ECP-001` |
 | `WEX-ECP-002` | `WEX-ECP-002`; `WEX-ECP-002: --from-git is mutually exclusive with --changed-path, --changes-complete and --change-manifest` |
 | `WEX-ECP-003` | `Derive the change set from Git (ECP-CHG-002 to -004). The set is the union of `git diff --name-only BASE` aga…`; `WEX-ECP-003` (+4 more) |
-| `WEX-ECP-010` | `Split a packet into its machine header and retained body (ECP-EVD-002, -004). Returns `(None, data)` when no …`; `WEX-ECP-010` (+13 more) |
+| `WEX-ECP-010` | `Split a packet into its machine header and retained body (ECP-EVD-002, -004). Returns `(None, data)` when no …`; `WEX-ECP-010` (+12 more) |
 | `WEX-ECP-011` | `WEX-ECP-011`; `WEX-ECP-011: a .gitattributes rule would convert line endings of {…} ({…})` |
 | `WEX-ECP-012` | `WEX-ECP-012`; `WEX-ECP-012: the working tree selects {…} (the one in_progress work order), not {…}` |
 | `WEX-ECP-013` | `WEX-ECP-013`; `WEX-ECP-013: domain {…} has no artifact to read its identifier token from; pass --id explicitly` (+4 more) |
