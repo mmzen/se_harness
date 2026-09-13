@@ -16,7 +16,9 @@ The packet includes one shared replacement specification, an architecture decisi
 - [Exact coverage](coverage.md), [replacement rules and compatibility](specifications/SPEC-KIS-001.md), [verification plan](verification/VER-KIS-001.md).
 - [Recorded request](evidence/WO-KIS-001/governance/owner-request.md) and [accepted review](evidence/WO-KIS-001/governance/accepted-review.md).
 
-All 20 definitions and work orders are approved through the isolated released evaluator; none is in progress.
+The owner started WO-KIS-001 after merging the approved packet. It is in progress; WO-KIS-002 through WO-KIS-007 remain approved and have not started.
+
+[WO-KIS-001 implementation evidence](evidence/WO-KIS-001/implementation/README.md) records the first eight cuts and local results; hosted CI and assurance are pending.
 
 The intended order is sequential because several slices share code. Each work order remains separately selected and assessed.
 This definition packet starts none of them. Current root governance remains released 0.17.0; the proposed local-delegation rule is future candidate behavior.

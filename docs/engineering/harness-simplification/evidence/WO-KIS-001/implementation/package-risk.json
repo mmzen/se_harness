@@ -1,0 +1,15 @@
+{
+  "changes": [
+    {
+      "action": "create",
+      "path": "docs/engineering/product/risks/RISK-PRD-001.md"
+    }
+  ],
+  "command": "raise-risk",
+  "decision": null,
+  "dry_run": false,
+  "outcome": "completed",
+  "risk": "RISK-PRD-001",
+  "schema": "se-harness-command-result-v1",
+  "score": null
+}

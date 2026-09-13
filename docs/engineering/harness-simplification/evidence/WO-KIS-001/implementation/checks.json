@@ -1,0 +1,245 @@
+{
+  "work_order": "WO-KIS-001",
+  "candidate_commit": "4793c7bb95ff718d0b05c6de7c1c585e477e445c",
+  "platform": "Windows",
+  "source_python": "3.14",
+  "package_python": "3.12",
+  "source_tests": {
+    "run": 1179,
+    "skipped": 25,
+    "result": "pass",
+    "seconds": 132.539
+  },
+  "package": {
+    "commit": "4793c7bb95ff718d0b05c6de7c1c585e477e445c",
+    "wheel": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\non-promotable\\se_harness-0.18.0-py3-none-any.whl",
+    "sha256": "cdce471420afa9f47750c967af8c86e31339cabf7a2e53928e715b82efe1e22b",
+    "python": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\installed\\Scripts\\python.exe",
+    "base": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff",
+    "source": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\source",
+    "promotable": false
+  },
+  "checks": [
+    {
+      "name": "candidate-venv",
+      "argv": [
+        "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-m",
+        "venv",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\installed"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff",
+      "exit_code": 0,
+      "seconds": 9.638
+    },
+    {
+      "name": "candidate-wheel-build",
+      "argv": [
+        "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-m",
+        "pip",
+        "wheel",
+        "--no-deps",
+        "--no-build-isolation",
+        "--wheel-dir",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\non-promotable",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\source"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff",
+      "exit_code": 0,
+      "seconds": 6.223
+    },
+    {
+      "name": "candidate-wheel-install",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "pip",
+        "install",
+        "--no-index",
+        "--no-deps",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\non-promotable\\se_harness-0.18.0-py3-none-any.whl"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff",
+      "exit_code": 0,
+      "seconds": 2.912
+    },
+    {
+      "name": "package-doctor",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\acceptance-target",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff",
+      "exit_code": 0,
+      "seconds": 0.488
+    },
+    {
+      "name": "package-identity",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "identity",
+        "--role",
+        "candidate-package",
+        "--expected-version",
+        "0.18.0",
+        "--expected-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\installed",
+        "--checkout-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+        "--candidate-commit",
+        "4793c7bb95ff718d0b05c6de7c1c585e477e445c",
+        "--require-isolated-python",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff",
+      "exit_code": 0,
+      "seconds": 0.433
+    },
+    {
+      "name": "package-init",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\acceptance-target",
+        "--project-name",
+        "KISS acceptance",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff",
+      "exit_code": 0,
+      "seconds": 1.17
+    },
+    {
+      "name": "package-risk",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "raise-risk",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\acceptance-target",
+        "--domain",
+        "product",
+        "--title",
+        "Setup elsewhere",
+        "--description",
+        "Only one machine has been tried. Another may behave differently.",
+        "--action",
+        "Try setup on the next development machine.",
+        "--owner",
+        "engineering-owner",
+        "--id",
+        "RISK-PRD-001",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff",
+      "exit_code": 0,
+      "seconds": 0.494
+    },
+    {
+      "name": "package-selector-crlf",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "select-work-order",
+        "--event",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\crlf.json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff",
+      "exit_code": 0,
+      "seconds": 0.328
+    },
+    {
+      "name": "package-selector-lf",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "select-work-order",
+        "--event",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\lf.json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff",
+      "exit_code": 0,
+      "seconds": 0.351
+    },
+    {
+      "name": "package-validate",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff\\acceptance-target",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis001-package-4793c7bb95ff",
+      "exit_code": 0,
+      "seconds": 0.391
+    }
+  ],
+  "governing": {
+    "kis001-governing-graph": {
+      "exit_code": 0,
+      "artifact_count": 1596,
+      "error_count": 0,
+      "warning_count": 46
+    },
+    "kis001-review-preflight": {
+      "exit_code": 0,
+      "ready": true,
+      "warning_count": 0,
+      "skew": []
+    },
+    "kis001-governing-doctor": {
+      "exit_code": 0
+    }
+  },
+  "line_counts": {
+    "se_harness/engine/validation_authoring.py": {
+      "before_lines": 543,
+      "after_lines": 124
+    },
+    "se_harness/risks.py": {
+      "before_lines": 700,
+      "after_lines": 632
+    }
+  },
+  "changes": {
+    "guidance_and_work_order": {
+      "added": 159,
+      "removed": 473
+    },
+    "source": {
+      "added": 168,
+      "removed": 729
+    },
+    "tests": {
+      "added": 212,
+      "removed": 708
+    }
+  },
+  "changed_test_methods": {
+    "before": 299,
+    "after": 273
+  },
+  "ci": "pending",
+  "assurance": "not yet verified"
+}

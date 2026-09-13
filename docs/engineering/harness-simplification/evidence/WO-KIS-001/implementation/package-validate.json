@@ -1,0 +1,37 @@
+{
+  "advisories": [],
+  "advisory_count": 0,
+  "artifact_count": 1,
+  "artifacts": [
+    {
+      "id": "RISK-PRD-001",
+      "path": "docs/engineering/product/risks/RISK-PRD-001.md",
+      "status": "raised",
+      "type": "risk"
+    }
+  ],
+  "error_count": 0,
+  "errors": [],
+  "plane_counts": {
+    "governance": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "maintenance": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "policy": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "structure": {
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "taxonomy": "se-harness-validation-taxonomy-v1",
+  "valid": true,
+  "warning_count": 0,
+  "warnings": []
+}
