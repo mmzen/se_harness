@@ -1,0 +1,36 @@
+{
+  "kind": "Compact summary of released-evaluator applied transition result",
+  "governing_evaluator": "se-harness 0.17.0, isolated external environment",
+  "operation": {
+    "kind": "transition",
+    "outcome": "completed"
+  },
+  "compliance_status": "pass",
+  "applied_effect": [
+    "Applied 20 explicit lifecycle transition(s) atomically."
+  ],
+  "approved_artifacts": [
+    "ADR-KIS-001",
+    "ARCH-KIS-001",
+    "CAP-KIS-001",
+    "INT-KIS-001",
+    "REQ-KIS-001",
+    "REQ-KIS-002",
+    "REQ-KIS-003",
+    "REQ-KIS-004",
+    "REQ-KIS-005",
+    "REQ-KIS-006",
+    "REQ-KIS-007",
+    "SPEC-KIS-001",
+    "VER-KIS-001",
+    "WO-KIS-001",
+    "WO-KIS-002",
+    "WO-KIS-003",
+    "WO-KIS-004",
+    "WO-KIS-005",
+    "WO-KIS-006",
+    "WO-KIS-007"
+  ],
+  "recorded_decisions": "Each formal artifact retains its role, timestamp and verbatim reason in lifecycle_events; owner-request.md retains the accepted request.",
+  "implementation_started": false
+}

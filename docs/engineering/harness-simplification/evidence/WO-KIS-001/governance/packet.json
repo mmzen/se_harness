@@ -1,0 +1,240 @@
+{
+  "base": "93677e69dacb08367a7079e3372118c5064087c8",
+  "date": "2026-09-13",
+  "owner_request": "OK ! Let's create the work orders to implement all candidates",
+  "status": "approved; implementation not started",
+  "artifacts": [
+    {
+      "id": "INT-KIS-001",
+      "type": "intent",
+      "owner": "product-owner",
+      "path": "docs/engineering/harness-simplification/intent/INT-KIS-001.md",
+      "status": "approved"
+    },
+    {
+      "id": "CAP-KIS-001",
+      "type": "capability",
+      "owner": "product-owner",
+      "path": "docs/engineering/harness-simplification/capabilities/CAP-KIS-001.md",
+      "status": "approved"
+    },
+    {
+      "id": "REQ-KIS-001",
+      "type": "requirement",
+      "owner": "requirements-steward",
+      "path": "docs/engineering/harness-simplification/requirements/REQ-KIS-001.md",
+      "status": "approved"
+    },
+    {
+      "id": "REQ-KIS-002",
+      "type": "requirement",
+      "owner": "requirements-steward",
+      "path": "docs/engineering/harness-simplification/requirements/REQ-KIS-002.md",
+      "status": "approved"
+    },
+    {
+      "id": "REQ-KIS-003",
+      "type": "requirement",
+      "owner": "requirements-steward",
+      "path": "docs/engineering/harness-simplification/requirements/REQ-KIS-003.md",
+      "status": "approved"
+    },
+    {
+      "id": "REQ-KIS-004",
+      "type": "requirement",
+      "owner": "requirements-steward",
+      "path": "docs/engineering/harness-simplification/requirements/REQ-KIS-004.md",
+      "status": "approved"
+    },
+    {
+      "id": "REQ-KIS-005",
+      "type": "requirement",
+      "owner": "requirements-steward",
+      "path": "docs/engineering/harness-simplification/requirements/REQ-KIS-005.md",
+      "status": "approved"
+    },
+    {
+      "id": "REQ-KIS-006",
+      "type": "requirement",
+      "owner": "requirements-steward",
+      "path": "docs/engineering/harness-simplification/requirements/REQ-KIS-006.md",
+      "status": "approved"
+    },
+    {
+      "id": "REQ-KIS-007",
+      "type": "requirement",
+      "owner": "requirements-steward",
+      "path": "docs/engineering/harness-simplification/requirements/REQ-KIS-007.md",
+      "status": "approved"
+    },
+    {
+      "id": "SPEC-KIS-001",
+      "type": "specification",
+      "owner": "technical-owner",
+      "path": "docs/engineering/harness-simplification/specifications/SPEC-KIS-001.md",
+      "status": "approved"
+    },
+    {
+      "id": "ARCH-KIS-001",
+      "type": "architecture",
+      "owner": "technical-owner",
+      "path": "docs/engineering/harness-simplification/architecture/ARCH-KIS-001.md",
+      "status": "approved"
+    },
+    {
+      "id": "ADR-KIS-001",
+      "type": "adr",
+      "owner": "technical-owner",
+      "path": "docs/engineering/harness-simplification/architecture/adr/ADR-KIS-001.md",
+      "status": "approved"
+    },
+    {
+      "id": "VER-KIS-001",
+      "type": "verification",
+      "owner": "assurance-owner",
+      "path": "docs/engineering/harness-simplification/verification/VER-KIS-001.md",
+      "status": "approved"
+    },
+    {
+      "id": "WO-KIS-001",
+      "type": "work_order",
+      "owner": "engineering-owner",
+      "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-001.md",
+      "status": "approved"
+    },
+    {
+      "id": "WO-KIS-002",
+      "type": "work_order",
+      "owner": "engineering-owner",
+      "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-002.md",
+      "status": "approved"
+    },
+    {
+      "id": "WO-KIS-003",
+      "type": "work_order",
+      "owner": "engineering-owner",
+      "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-003.md",
+      "status": "approved"
+    },
+    {
+      "id": "WO-KIS-004",
+      "type": "work_order",
+      "owner": "engineering-owner",
+      "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-004.md",
+      "status": "approved"
+    },
+    {
+      "id": "WO-KIS-005",
+      "type": "work_order",
+      "owner": "engineering-owner",
+      "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-005.md",
+      "status": "approved"
+    },
+    {
+      "id": "WO-KIS-006",
+      "type": "work_order",
+      "owner": "engineering-owner",
+      "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-006.md",
+      "status": "approved"
+    },
+    {
+      "id": "WO-KIS-007",
+      "type": "work_order",
+      "owner": "engineering-owner",
+      "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-007.md",
+      "status": "approved"
+    }
+  ],
+  "work_orders": [
+    {
+      "n": 1,
+      "title": "Remove everyday input and writing blockers",
+      "ids": [
+        1,
+        2,
+        3,
+        7,
+        11,
+        35,
+        36,
+        37
+      ],
+      "result": "Normal Windows text, literal paths, clear notes and short risk descriptions work without special formatting."
+    },
+    {
+      "n": 2,
+      "title": "Let local work progress on its own evidence",
+      "ids": [
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        12
+      ],
+      "result": "An approved local task can progress offline; unrelated work and dashboard generation do not block it."
+    },
+    {
+      "n": 3,
+      "title": "Cut repeated identity proofs and locked guidance",
+      "ids": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "result": "Ordinary commands check the selected checker version and origin; full package checks happen at meaningful boundaries."
+    },
+    {
+      "n": 4,
+      "title": "Simplify verification and release records",
+      "ids": [
+        23,
+        24,
+        30,
+        38
+      ],
+      "result": "One final candidate verification can use earlier work evidence; a harmless rebase and wording edit need no repeated proof."
+    },
+    {
+      "n": 5,
+      "title": "Shorten CI and resume interrupted publication",
+      "ids": [
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "result": "Normal pull requests avoid release rehearsals; an unpublished draft resumes by uploading only missing required assets."
+    },
+    {
+      "n": 6,
+      "title": "Keep new evidence small and assess historical archives",
+      "ids": [
+        31
+      ],
+      "result": "New runs retain useful summaries and downloadable logs; the owner gets an inventory of existing large bundles."
+    },
+    {
+      "n": 7,
+      "title": "Delete tests for the restrictions we removed",
+      "ids": [
+        32,
+        33,
+        34
+      ],
+      "result": "Tests check supported behavior and real failures without internal-name inventories, synthetic capability matrices or aggressive Git cleanup."
+    }
+  ],
+  "candidates": 38,
+  "retained_protections": 7,
+  "implementation_started": false
+}
