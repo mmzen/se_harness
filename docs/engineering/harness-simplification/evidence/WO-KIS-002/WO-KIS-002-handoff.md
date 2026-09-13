@@ -8,7 +8,7 @@ rebound_at = "2026-09-13T18:36:21Z"
 # WO-KIS-002 implementation evidence
 
 Source candidate: `6f946632626ddcbdb63222a16a295a2450aad9e5`. Governing checker: isolated released 0.17.0.
-This covers seven cuts. Work is in progress pending hosted checks and delegated completion.
+This covers seven cuts. Work is implemented through delegated completion; owner verification is pending.
 
 | Check | Observed result | Evidence |
 | --- | --- | --- |
@@ -33,7 +33,7 @@ commit and left one Git worktree. Wheel SHA-256: `3ec6f7458c4112dbd8f7931e16fee1
 Released doctor and review preflight passed. Source graph validation passed; release
 distribution validation passed for all 14 distribution-bearing records. The root remains
 on 0.17.0. Historical records, package integrity, file boundaries and owner verification
-rights remain intact. Hosted Linux/Windows results will be retained from CI.
+rights remain intact. All hosted checks passed, including Linux/Windows upgrade and integration-package acceptance. Exact head and check URLs are retained in `ci-implementation.json`.
 
 Source: 288 lines added, 316 removed.
 Tests: 206 added, 536 removed.

@@ -2,7 +2,7 @@
 id = "WO-KIS-002"
 type = "work_order"
 title = "Let local work progress on its own evidence"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-13"
 updated = "2026-09-13"
@@ -115,6 +115,13 @@ to = "in_progress"
 decided_at = "2026-09-13T18:09:09Z"
 decided_by = "engineering-owner"
 reason = "The owner confirmed PR 467 is merged, continuing the accepted sequential implementation of all KISS candidates. Start WO-KIS-002 after WO-KIS-001 integration at 47c3667655f83d3aa1bd08f18ff2a7ac30cf77f0. Retain the approved delegated execution route for completion and preparation."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-13T18:45:42Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at ccc8782e7b3cecff8865c1bd85cf1bc14ee36437 (check-run 103771940162, source github-checks). All seven selected cuts are implemented in source commit 6f946632626ddcbdb63222a16a295a2450aad9e5. The committed candidate passed 1173 tests with 25 skipped; installed package acceptance and all hosted checks at ccc8782e7b3cecff8865c1bd85cf1bc14ee36437 passed. Evidence is retained under evidence/WO-KIS-002/implementation. Record bounded delegated completion under the approved work order; owner assurance and integration remain pending."
 +++
 
 # Let local work progress on its own evidence
