@@ -2,7 +2,7 @@
 id = "WO-KIS-001"
 type = "work_order"
 title = "Remove everyday input and writing blockers"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-13"
 updated = "2026-09-13"
@@ -121,6 +121,13 @@ to = "in_progress"
 decided_at = "2026-09-13T17:04:36Z"
 decided_by = "engineering-owner"
 reason = "The owner confirmed the approved packet is merged and explicitly instructed start: i merged, you can start. Begin WO-KIS-001 only, as the first sequential work order. The delegated completion and verification-preparation route is retained."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-13T17:47:14Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 0890d8fcd88c0877d00ce0b2ef5c8c5ac6325c59 (check-run 103763906633, source github-checks). All eight selected cuts are implemented in source commit 4793c7bb95ff718d0b05c6de7c1c585e477e445c. The committed Windows suite passed 1179 tests with 25 skips; installed-wheel acceptance and released doctor, graph and handoff passed. PR 467 head 0890d8fcd88c0877d00ce0b2ef5c8c5ac6325c59 passed every CI check, including both platform upgrade and integration-package tests. Retained evidence is under WO-KIS-001/implementation. Record delegated completion only; assurance, release and merge remain owner decisions."
 +++
 
 # Remove everyday input and writing blockers

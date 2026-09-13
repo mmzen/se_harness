@@ -1,7 +1,7 @@
 # WO-KIS-001 implementation evidence
 
 Tested source commit: `4793c7bb95ff718d0b05c6de7c1c585e477e445c`. Governing checker: isolated released 0.17.0.
-This record covers the first eight cuts only. The work order is in progress; assurance is not yet verified.
+This record covers the first eight cuts only. The work order is implemented through the delegated completion. Assurance is not yet verified.
 
 | Check | Observation | Evidence |
 | --- | --- | --- |
@@ -42,5 +42,6 @@ identity. Workflow permissions were not changed. Historical VREC/RLS records wer
 The full source run initially exposed obsolete style/CRLF expectations, a missing input-code
 import and a root/candidate documentation comparison. Those were corrected before the
 committed run above. Tests enforcing the removed restrictions were deleted or updated,
-not disabled. Local Windows checks are complete; Ubuntu and hosted integration results
-will be recorded from CI. No assurance or release decision is claimed here.
+not disabled. Local Windows checks and every hosted CI check passed, including the Ubuntu source suite,
+both platform upgrade rehearsals, and both integration-package acceptance jobs.
+The exact hosted head and check URLs are retained in `ci-implementation.json`. No assurance or release decision is claimed here.
