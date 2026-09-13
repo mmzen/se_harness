@@ -27,7 +27,7 @@ from se_harness.codes import (
     W_DCM_002,
     W_RSK_001,
 )
-from se_harness.engine.validation_authoring import sentences, specification_rules
+from se_harness.engine.validation_authoring import specification_rules
 from se_harness.engine.validation_core import (
     Artifact,
     Diagnostic,
@@ -81,14 +81,7 @@ DEVIATION_OPTIONS = frozenset({"amend", "supersede", "accept", "stop"})
 
 DECISION_TERMINAL = frozenset({"decided", "withdrawn"})
 
-#: SPEC-RSK-010 RSK-MGT-002 to RSK-MGT-005: the risk's declared fields, the closed
-#: stage and category sets, and the five-by-five measurement.
-RISK_REQUIRED_FIELDS = ("cause", "effect", "stage", "category", "likelihood", "impact", "score", "raised_by")
-
-RISK_STAGES = frozenset({"definition", "architecture", "implementation", "verification", "release", "operation"})
-
-RISK_CATEGORIES = frozenset({"safety", "security", "compliance", "process", "schedule", "quality"})
-
+# Optional scoring remains a pair of integers from 1 to 5.
 RISK_MEASUREMENT_RANGE = range(1, 6)
 
 #: RSK-MGT-008: the retained end states; RSK-MGT-018: the states a disposition writes.
@@ -664,6 +657,8 @@ def _check_risk_measurement(
     report_root: Path,
 ) -> None:
     """Check the risk measurement: likelihood, impact and score are integers and score is their product."""
+    if not any(name in metadata for name in ("likelihood", "impact", "score")):
+        return
     measurement: dict[str, int] = {}
     for field_name in ("likelihood", "impact", "score"):
         value = metadata.get(field_name)
@@ -688,21 +683,16 @@ def _check_risk_pairing(
     errors: list[Diagnostic],
     report_root: Path,
 ) -> None:
-    """Check that a raised risk is answered by exactly one pending decision blocking what it threatens."""
+    """When a blocking decision was requested, check that it names the threatened work."""
     threatens = artifact.relations.get("threatens", [])
     threatened = {item for item in threatens if isinstance(item, str)} if isinstance(threatens, list) else set()
     if artifact.status == "raised":
         pending = [item for item in concerned.get(artifact.artifact_id, []) if item.status in {"open", "deferred"}]
-        if not pending:
-            add_error(errors, artifact, report_root, E_RSK_003,
-                f"raised risk {artifact.artifact_id} is named in concerns by no open or deferred decision; raise it again with "
-                f"harnessctl raise-risk --with-decision, or create a decision that names it in concerns and blocks exactly the artifacts it threatens",
-                plane="governance")
-        elif len(pending) > 1:
+        if len(pending) > 1:
             names = ", ".join(sorted(item.artifact_id for item in pending))
             add_error(errors, artifact, report_root, E_RSK_003,
                 f"raised risk {artifact.artifact_id} is named in concerns by {len(pending)} pending decisions ({names}); exactly one answers it", plane="governance")
-        else:
+        elif pending:
             blocks = pending[0].relations.get("blocks", [])
             blocked = {item for item in blocks if isinstance(item, str)} if isinstance(blocks, list) else set()
             if blocked != threatened:
@@ -777,19 +767,15 @@ def validate_risks(artifacts: list[Artifact], report_root: Path) -> tuple[list[D
         if artifact.artifact_type != "risk":
             continue
         metadata = artifact.metadata
-        for field_name in ("cause", "effect", "stage", "category", "raised_by"):
+        # Read retained cause/effect records without rewriting their history.
+        required = ("description", "action") if "description" in metadata or "action" in metadata else ("cause", "effect", "raised_by")
+        for field_name in required:
             value = metadata.get(field_name)
             if not isinstance(value, str) or not value.strip():
                 add_error(errors, artifact, report_root, E_RSK_001, f"risk field '{field_name}' must be a non-empty string", plane="structure")
-        for field_name, allowed in (("stage", RISK_STAGES), ("category", RISK_CATEGORIES)):
-            value = metadata.get(field_name)
-            if isinstance(value, str) and value.strip() and value not in allowed:
-                add_error(errors, artifact, report_root, E_RSK_001,
-                    f"risk field '{field_name}' must name one of {', '.join(sorted(allowed))}, not '{value}'", plane="structure")
-        for field_name in ("cause", "effect"):
-            value = metadata.get(field_name)
-            if isinstance(value, str) and len(sentences(value)) > 1:
-                add_error(errors, artifact, report_root, E_RSK_001, f"risk field '{field_name}' must be one sentence", plane="structure")
+        for field_name in ("stage", "category", "raised_by"):
+            if field_name in metadata and (not isinstance(metadata[field_name], str) or not metadata[field_name].strip()):
+                add_error(errors, artifact, report_root, E_RSK_001, f"risk field '{field_name}' must be non-empty text when present", plane="structure")
         for field_name in ("question", "options", "recommendation", "decided_by"):
             # ARCH-RSK-010 conformance check 3: the answer lives on the paired decision.
             if field_name in metadata:

@@ -7,16 +7,12 @@ import re
 from pathlib import Path
 from typing import Any
 from se_harness.integrity import unique_object_hook
-from se_harness.codes import CodedError, WEX_ECP_014, W_ADS_001
+from se_harness.codes import CodedError, WEX_ECP_014
 
 
 MAX_EVENT_BYTES = 2 * 1024 * 1024
 WORK_ORDER_LINE = re.compile(
     r"^Harness-Work-Order:[ \t]*(WO-[A-Z][A-Z0-9-]*-\d{3})[ \t]*$",
-    re.MULTILINE,
-)
-_WORK_ORDER_LINE_WITH_CR = re.compile(
-    r"^Harness-Work-Order:[ \t]*WO-[A-Z][A-Z0-9-]*-\d{3}[ \t]*(\r)$",
     re.MULTILINE,
 )
 RESTITUTION_LINE = re.compile(
@@ -37,29 +33,17 @@ class SelectionRefusal(CodedError, SelectionError):
 _unique_object = unique_object_hook(lambda key: SelectionError(f"duplicate JSON key: {key}"))
 
 
-def carriage_return_trailer_offsets(body: str) -> list[int]:
-    """UTF-8 byte offsets of a carriage return that ends a Harness-Work-Order line (W-ADS-001)."""
-
-    return [
-        len(body[: match.start(1)].encode("utf-8"))
-        for match in _WORK_ORDER_LINE_WITH_CR.finditer(body)
-    ]
-
-
 def select_work_order(body: str) -> str:
     """Select exactly one standalone work-order declaration."""
 
     if not isinstance(body, str):
         raise SelectionError("pull-request body must be text")
+    body = body.replace("\r\n", "\n")
+    declarations = [line for line in body.split("\n") if line.startswith("Harness-Work-Order:")]
     matches = WORK_ORDER_LINE.findall(body)
-    if len(matches) != 1:
-        offsets = carriage_return_trailer_offsets(body)
-        if offsets:
-            raise SelectionRefusal(W_ADS_001, f"the Harness-Work-Order line ends with a carriage return at byte offset {offsets[0]}; "
-                "write the body with LF line endings (newline=\"\\n\" in Python, or core.autocrlf=false) and push again"
-            )
+    if len(declarations) != 1 or len(matches) != 1:
         raise SelectionError(
-            f"expected exactly one standalone Harness-Work-Order field; found {len(matches)}"
+            f"expected exactly one standalone Harness-Work-Order field with a valid ID; found {len(declarations)} declarations ({len(matches)} valid)"
         )
     return matches[0]
 
@@ -69,7 +53,7 @@ def select_restitution_digest(body: str) -> str:
 
     if not isinstance(body, str):
         raise SelectionError("pull-request body must be text")
-    matches = RESTITUTION_LINE.findall(body)
+    matches = RESTITUTION_LINE.findall(body.replace("\r\n", "\n"))
     if len(matches) > 1:
         raise SelectionError(f"expected at most one standalone Harness-Restitution field; found {len(matches)}")
     return matches[0] if matches else ""
@@ -131,7 +115,7 @@ def render_pull_request_body(root: Path, artifact: Any, *, packet_directory: Pat
     ) if packet_directory.is_dir() else []
     lines.extend([f"- {path}" for path in evidence] or ["- No retained evidence under the packet directory yet."])
     body = "\n".join(lines).replace("\r", "") + "\n"
-    if select_work_order(body) != artifact.artifact_id or carriage_return_trailer_offsets(body):
+    if select_work_order(body) != artifact.artifact_id:
         raise SelectionRefusal(WEX_ECP_014, "the generated body does not round-trip through the selector")
     return body
 

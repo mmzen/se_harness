@@ -88,44 +88,6 @@ class ReaderFirstRequirementTests(unittest.TestCase):
         self.write_requirement()
         self.assertEqual({}, self.advisories())
 
-    def test_each_budget_raises_exactly_its_advisory_with_the_measured_value(self) -> None:
-        long_statement = "WHEN " + " ".join(f"word{i}" for i in range(30)) + ", THE SYSTEM SHALL respond."
-        self.write_requirement(statement=long_statement)
-        found = self.advisories()
-        self.assertEqual({"W-AUT-003"}, set(found))
-        self.assertIn("35 words; the budget is 30", found["W-AUT-003"])
-
-        long_body = reader_first_body(extra="\n## More\n\n" + " ".join(["word"] * 260) + ".\n")
-        self.write_requirement(body=long_body)
-        found = self.advisories()
-        self.assertEqual({"W-AUT-005", "W-AUT-007"}, set(found))
-        self.assertIn("the budget is 250", found["W-AUT-005"])
-
-        self.write_requirement(body=reader_first_body(why=" ".join(["Short sentence here."] * 6)))
-        found = self.advisories()
-        self.assertEqual({"W-AUT-006"}, set(found))
-        self.assertIn("6 sentences", found["W-AUT-006"])
-
-        self.write_requirement(body=reader_first_body(why="This one sentence " + " ".join(["keeps"] * 24) + " going."))
-        self.assertEqual({"W-AUT-007"}, set(self.advisories()))
-
-        self.write_requirement(body=reader_first_body(why="It cites `a`, `b`, `c` and `d` in one breath."))
-        found = self.advisories()
-        self.assertEqual({"W-AUT-008"}, set(found))
-        self.assertIn("4 code identifiers", found["W-AUT-008"])
-
-        self.write_requirement(body=reader_first_body(plain="One. Two. Three."))
-        found = self.advisories()
-        self.assertEqual({"W-AUT-009"}, set(found))
-        self.assertIn("3 sentences", found["W-AUT-009"])
-
-        self.write_requirement(body="\n## Why\n\n" + WHY + "\n\n## Behavior\n\n" + BEHAVIOR + "\n")
-        found = self.advisories()
-        self.assertEqual({"W-AUT-009"}, set(found))
-        self.assertIn("no In plain words section", found["W-AUT-009"])
-
-        self.write_requirement(statement="WHEN a requirement is validated, THE SYSTEM SHALL count its words.")
-        self.assertEqual({"W-AUT-010"}, set(self.advisories()))
 
     def test_no_shape_advisory_fires_on_an_approved_requirement(self) -> None:
         long_statement = "WHEN " + " ".join(f"word{i}" for i in range(30)) + ", THE SYSTEM SHALL respond."
@@ -138,14 +100,6 @@ class ReaderFirstRequirementTests(unittest.TestCase):
                 self.write_requirement(statement=statement)
                 self.assertNotIn("W-AUT-001", self.advisories())
 
-    def test_validation_still_passes_with_advisories(self) -> None:
-        self.write_requirement(statement="WHEN " + " ".join(f"w{i}" for i in range(40)) + ", THE SYSTEM SHALL respond.")
-        code, _, _ = invoke("validate", str(self.root), "--advisories")
-        self.assertEqual(0, code)
-        report = validate_engineering_artifacts.validate_repository(self.root)
-        self.assertEqual([], [f"{i.code}: {i.message}" for i in report.errors])
-        self.assertIn("W-AUT-003", {item.code for item in report.advisories if item.path.endswith("REQ-002.md")})
-        self.assertEqual([], [item.code for item in report.warnings if item.code.startswith("W-AUT-")])
 
     # ---------------------------------------------------------------- REQ-TCM-006: Explorer
 

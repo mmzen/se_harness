@@ -347,7 +347,6 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
         "release_record": ("satisfies", "includes_verification", "releases_work"),
         "operating_contract": ("assures",),
         "decision": ("concerns", "blocks"),
-        "risk": ("threatens",),
     }
 
     for artifact in artifacts:
@@ -356,19 +355,9 @@ def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path
             continue
 
         if artifact_type == "requirement":
-            statement = require_non_empty_string(artifact, "statement", errors, report_root)
+            require_non_empty_string(artifact, "statement", errors, report_root)
             if not isinstance(artifact.metadata.get("verification_method"), list):
                 require_non_empty_string(artifact, "verification_method", errors, report_root)
-            if statement is not None and re.search(r"\bSHALL\b", statement) is None:
-                add_error(
-                    errors,
-                    artifact,
-                    report_root,
-                    E005,
-                    "requirement statement must contain normative keyword SHALL",
-                    plane="structure",
-                )
-
         if artifact_type == "verification_record":
             _validate_git_identity(artifact, errors, report_root)
             worktree_state = require_non_empty_string(

@@ -76,6 +76,22 @@ class InstructionArchitectureTests(unittest.TestCase):
         standard_repository(target)
         return target
 
+    def test_large_owner_instructions_accept_both_line_endings_and_preserve_markers(self) -> None:
+        target = self.installed_target()
+        path = target / "AGENTS.md"
+        original = path.read_text(encoding="utf-8")
+        owner = "Owner notes about using this repository.\n" * 180
+        self.assertGreater(len(owner.encode("utf-8")), 6000)
+        for newline in ("\n", "\r\n"):
+            content = (owner + original).replace("\r\n", "\n").replace("\n", newline).encode("utf-8")
+            path.write_bytes(content)
+            code, output, error = invoke("doctor", str(target))
+            self.assertEqual(0, code, output + error)
+            self.assertEqual(content, path.read_bytes())
+        path.write_bytes(content.replace(b"se-harness:begin", b"se-harness:broken", 1))
+        code, output, error = invoke("doctor", str(target))
+        self.assertNotEqual(0, code, output + error)
+
     def add_active_packet(self, target: Path, *, status: str = "in_progress") -> None:
         destination = target / "docs" / "engineering" / "instruction-architecture"
         shutil.copytree(PACKET_ROOT, destination)
@@ -882,7 +898,6 @@ class InstructionArchitectureTests(unittest.TestCase):
 
 AGENTS = REPOSITORY_ROOT / "AGENTS.md"
 LOCK = REPOSITORY_ROOT / ".engineering-harness.lock"
-OWNER_REGION_SIZE_LIMIT = 6_000
 OWNER_EDITABLE_SCRIPTS = (
     "bind_release_distribution.py",
     "check_portable_release_surface.py",
@@ -940,9 +955,6 @@ class OwnerInstructionRegionTests(unittest.TestCase):
         self.assertEqual(1, self.text.count(END_MARKER))
         self.assertLess(self.text.index(BEGIN_MARKER), self.text.index(END_MARKER))
 
-    def test_owner_region_stays_within_the_size_bound(self) -> None:
-        size = len(self.owner_region().encode("utf-8"))
-        self.assertLess(size, OWNER_REGION_SIZE_LIMIT, f"owner region is {size} bytes")
 
     def test_owner_region_carries_the_required_operational_facts(self) -> None:
         region = self.owner_region()

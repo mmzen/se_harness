@@ -1,16 +1,4 @@
-"""The risk artifact: one measured threat, raised for an answer (SPEC-RSK-010).
-
-A risk (`RISK-`) records one cause, one effect, the stage it threatens and a
-five-by-five measurement (RSK-MGT-002 to RSK-MGT-006). `raise-risk` computes
-the score, writes the file and raises it in one act (RSK-MGT-009); with
-`--with-decision` it writes the paired decision beside it (RSK-MGT-015). A
-raised risk stops nothing by itself: the decision that names it in `concerns`
-blocks the artifacts the risk threatens, and the decision family's own stop
-holds them (RSK-MGT-012 to RSK-MGT-014). Disposing that decision moves the
-risk in the same journalled act and copies the answer onto it (RSK-MGT-016 to
-RSK-MGT-020). The dependency runs one way: this module reads decisions, and
-`decisions.py` never reads risks (ARCH-RSK-010).
-"""
+"""Record a risk as a description, owner and next action. A blocking decision is optional."""
 
 from __future__ import annotations
 
@@ -46,9 +34,6 @@ from se_harness.codes import E001, E003
 #: reason, before any file is written.
 BLOCKABLE_TYPES = frozenset({"requirement", "specification", "verification", "architecture", "adr", "work_order"})
 
-#: RSK-MGT-004 and RSK-MGT-005: the closed stage and category sets.
-RISK_STAGES = ("definition", "architecture", "implementation", "verification", "release", "operation")
-RISK_CATEGORIES = ("safety", "security", "compliance", "process", "schedule", "quality")
 #: RSK-MGT-003: each measurement is an integer from 1 to 5; the score is their product.
 MEASUREMENT = range(1, 6)
 #: RSK-MGT-015: the three answers a paired decision declares, and RSK-MGT-016: the
@@ -63,14 +48,13 @@ WITHDRAWN_LABEL = "Withdrawn with the decision that concerned it."
 PENDING = frozenset({"open", "deferred"})
 _TOKEN = re.compile(r"^[A-Z][A-Z0-9]*$")
 _CONTROL = re.compile(r"[\x00-\x1f\x7f]")
-_SENTENCE_BREAK = re.compile(r"[.!?]\s+\S")
 
 
 @dataclass(frozen=True)
 class RaiseResult:
     risk_id: str
     decision_id: str | None
-    score: int
+    score: int | None
     changes: tuple[AuthoringChange, ...] = field(default_factory=tuple)
 
 
@@ -83,14 +67,14 @@ def compute_score(likelihood: object, impact: object) -> int:
     return int(likelihood) * int(impact)  # type: ignore[call-overload]
 
 
-def _text(value: object, label: str, *, limit: int = 2000, one_sentence: bool = False) -> str:
+def _text(value: object, label: str, *, limit: int | None = None) -> str:
     if not isinstance(value, str) or not value.strip():
         raise HarnessError(f"{label} must be non-empty text")
     text = value.strip()
-    if len(text) > limit or _CONTROL.search(text):
+    if "\x00" in text:
+        raise HarnessError(f"{label} must not contain NUL")
+    if limit is not None and (len(text) > limit or _CONTROL.search(text)):
         raise HarnessError(f"{label} must be single-line text of at most {limit} characters")
-    if one_sentence and _SENTENCE_BREAK.search(text):
-        raise HarnessError(f"{label} must be one sentence")
     return text
 
 
@@ -199,72 +183,24 @@ def _free_identifier(root: Path, artifact_id: str, artifact_type: str) -> str:
 
 
 def _render_risk(
-    *,
-    risk_id: str,
-    title: str,
-    owners: list[str],
-    today: str,
-    now: str,
-    stage: str,
-    category: str,
-    cause: str,
-    effect: str,
-    likelihood: int,
-    impact: int,
-    score: int,
-    raised_by: str,
+    *, risk_id: str, title: str, owners: list[str], today: str, now: str,
+    description: str, action: str, stage: str | None, category: str | None,
+    likelihood: object, impact: object, score: int | None, raised_by: str,
     threatens: list[str],
 ) -> bytes:
-    front = [
-        "+++",
-        f"id = {_toml(risk_id)}",
-        'type = "risk"',
-        f"title = {_toml(title)}",
-        'status = "raised"',
-        f"owners = {_toml(owners)}",
-        f"created = {_toml(today)}",
-        f"updated = {_toml(today)}",
-        f"stage = {_toml(stage)}",
-        f"category = {_toml(category)}",
-        f"cause = {_toml(cause)}",
-        f"effect = {_toml(effect)}",
-        f"likelihood = {likelihood}",
-        f"impact = {impact}",
-        f"score = {score}",
-        f"raised_by = {_toml(raised_by)}",
-        'residual = ""',
-        "",
-        "[relations]",
-        f"threatens = {_toml(threatens)}",
-        "",
-        "[[lifecycle_events]]",
-        'from = "identified"',
-        'to = "raised"',
-        f"decided_at = {_toml(now)}",
-        f"decided_by = {_toml(raised_by)}",
-        f"reason = {_toml(f'Recorded by harnessctl raise-risk; the score is likelihood {likelihood} times impact {impact}.')}",
-        "+++",
-        "",
-        f"# Risk: {title}",
-        "",
-        "## Threat",
-        "",
-        f"- Cause: {cause}",
-        f"- Effect: {effect}",
-        "",
-        "## Measurement",
-        "",
-        f"Likelihood {likelihood} of 5 and impact {impact} of 5: score {score} of 25, on the",
-        "five-by-five scale.",
-        "",
-        "## Answer",
-        "",
-        "Written by `harnessctl decide` on the decision that names this risk in",
-        "`concerns`; the disposition table repeats the option, the role, the time and",
-        "the verbatim reason. Do not edit it by hand.",
-        "",
-    ]
-    return "\n".join(front).encode("utf-8")
+    fields = dict(id=risk_id, type="risk", title=title, status="raised", owners=owners,
+                  created=today, updated=today, description=description, action=action,
+                  raised_by=raised_by)
+    fields.update({key: value for key, value in dict(stage=stage, category=category,
+                   likelihood=likelihood, impact=impact, score=score).items() if value is not None})
+    lines = ["+++", *(f"{key} = {_toml(value)}" for key, value in fields.items()), "",
+             "[relations]", f"threatens = {_toml(threatens)}", "",
+             "[[lifecycle_events]]", 'from = "identified"', 'to = "raised"',
+             f"decided_at = {_toml(now)}", f"decided_by = {_toml(raised_by)}",
+             'reason = "Recorded by harnessctl raise-risk."', "+++", "",
+             f"# Risk: {title}", "", "## Description", "", description, "",
+             "## Next action", "", action, ""]
+    return "\n".join(lines).encode("utf-8")
 
 
 def _render_decision(
@@ -274,12 +210,12 @@ def _render_decision(
     title: str,
     owners: list[str],
     today: str,
-    score: int,
+    score: int | None,
     raised_by: str,
     recommendation: str,
     threatens: list[str],
 ) -> bytes:
-    question = f"How is the threat '{title}' (score {score}) answered: accept, avoid or mitigate?"
+    question = f"How is the threat '{title}' answered: accept, avoid or mitigate?"
     front = [
         "+++",
         f"id = {_toml(decision_id)}",
@@ -307,7 +243,7 @@ def _render_decision(
         "",
         "## Question",
         "",
-        f"{question} The measurement and the threatened artifacts are on {risk_id}.",
+        f"{question} The description and the threatened artifacts are on {risk_id}.",
         "",
         "## Options",
         "",
@@ -334,14 +270,14 @@ def raise_risk(
     *,
     domain: str,
     title: str,
-    stage: str,
-    category: str,
-    cause: str,
-    effect: str,
-    likelihood: object,
-    impact: object,
-    threatens: Iterable[str],
-    raised_by: str,
+    description: str,
+    action: str,
+    stage: str | None = None,
+    category: str | None = None,
+    likelihood: object = None,
+    impact: object = None,
+    threatens: Iterable[str] = (),
+    raised_by: str = "operator",
     owners: Iterable[str] = (),
     artifact_id: str | None = None,
     with_decision: bool = False,
@@ -349,7 +285,7 @@ def raise_risk(
     recommendation: str = "mitigate",
     dry_run: bool = False,
 ) -> RaiseResult:
-    """RSK-MGT-009: compute the score, write the risk and raise it in one act.
+    """Write the risk and raise it in one act; compute a score only when requested.
 
     With `with_decision` the paired decision is written beside it (RSK-MGT-015).
     Every refusal happens before any file is written (RSK-MGT-010); the raise
@@ -361,24 +297,22 @@ def raise_risk(
     root = ensure_target(repository, must_exist=True)
     selected_domain = resolve_domain(root, domain)
     selected_title = _text(title, "title", limit=128)
-    if stage not in RISK_STAGES:
-        raise HarnessError(f"stage must be one of {', '.join(RISK_STAGES)}, not {stage!r}")
-    if category not in RISK_CATEGORIES:
-        raise HarnessError(f"category must be one of {', '.join(RISK_CATEGORIES)}, not {category!r}")
-    selected_cause = _text(cause, "cause", one_sentence=True)
-    selected_effect = _text(effect, "effect", one_sentence=True)
+    selected_description = _text(description, "description")
+    selected_action = _text(action, "action")
+    stage = _text(stage, "stage") if stage is not None else None
+    category = _text(category, "category") if category is not None else None
     selected_raiser = _text(raised_by, "raised-by", limit=128)
     if recommendation not in OPTION_TARGETS:
         raise HarnessError(f"recommend must be one of {', '.join(OPTION_TARGETS)}, not {recommendation!r}")
-    score = compute_score(likelihood, impact)
+    score = compute_score(likelihood, impact) if likelihood is not None or impact is not None else None
     threatened: list[str] = []
     for item in threatens:
         if not isinstance(item, str) or ID_PATTERN.fullmatch(item.strip()) is None:
             raise HarnessError(f"threatens must name artifact identifiers, not {item!r}")
         if item.strip() not in threatened:
             threatened.append(item.strip())
-    if not threatened:
-        raise HarnessError("a risk threatens at least one artifact; pass --threatens")
+    if with_decision and not threatened:
+        raise HarnessError("a blocking decision needs at least one artifact; pass --threatens")
 
     _, report = validated_repository(root)
     if any(item.code in {E001, E003} for item in report.errors):
@@ -432,8 +366,8 @@ def raise_risk(
     today = now[:10]
     risk_bytes = _render_risk(
         risk_id=risk_id, title=selected_title, owners=selected_owners, today=today, now=now, stage=stage,
-        category=category, cause=selected_cause, effect=selected_effect, likelihood=int(likelihood),  # type: ignore[call-overload]
-        impact=int(impact), score=score, raised_by=selected_raiser, threatens=threatened,  # type: ignore[call-overload]
+        category=category, description=selected_description, action=selected_action, likelihood=likelihood,
+        impact=impact, score=score, raised_by=selected_raiser, threatens=threatened,
     )
     decision_bytes = (
         _render_decision(
@@ -683,9 +617,7 @@ def risks_threatening(repository: Path, artifact_id: str) -> list[dict[str, Any]
 __all__ = [
     "MEASUREMENT",
     "OPTION_TARGETS",
-    "RISK_CATEGORIES",
     "RISK_OPTIONS",
-    "RISK_STAGES",
     "RaiseResult",
     "compute_score",
     "dispose_decision_with_risks",

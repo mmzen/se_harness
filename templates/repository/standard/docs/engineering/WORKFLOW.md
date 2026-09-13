@@ -153,6 +153,13 @@ Conformance tests MUST fail on such a difference.
 
 ## Bound procedures
 
+Use `harnessctl check . --artifact ARTIFACT-ID` to see the next action. Checks,
+including `--checkpoint pre-action`, select their procedure automatically.
+`--procedure` is optional and selects only a declared alternative.
+A work order may list ordinary evidence files in its top-level `evidence_paths`;
+those files need no machine header and must exist inside the repository.
+Generated evidence headers remain supported, including extra descriptive text fields.
+
 Each row names its exact procedure in `WORKFLOW.json`. `harnessctl check`
 resolves the first matching workflow row and that procedure. An actor MUST NOT
 replace a procedure with an unbound instruction such as "run preflight" or

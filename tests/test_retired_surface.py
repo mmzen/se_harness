@@ -386,10 +386,10 @@ class RetiredSurfaceTests(unittest.TestCase):
             for option in options:
                 with self.subTest(command=command, option=option):
                     self.assertNotIn(option, help_text)
-        _, help_text, _ = invoke("--help")
-        for retired in ABSENT_FROM_HELP:
+        commands = next(action.choices for action in cli.build_parser()._actions if action.dest == "command")
+        for retired in REFUSED_COMMANDS:
             with self.subTest(retired=retired):
-                self.assertNotIn(retired, help_text)
+                self.assertNotIn(retired, commands)
         with tempfile.TemporaryDirectory() as temporary:
             for command in REFUSED_COMMANDS:
                 with self.subTest(command=command):

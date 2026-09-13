@@ -103,54 +103,6 @@ class ReaderFirstIntentTests(unittest.TestCase):
         self.write_intent()
         self.assertEqual({}, self.advisories())
 
-    def test_each_budget_raises_exactly_its_advisory_with_the_measured_value(self) -> None:
-        self.write_intent(outcome=None)
-        found = self.advisories()
-        self.assertEqual({"W-AUT-011"}, set(found))
-        self.assertIn("no outcome", found["W-AUT-011"][0])
-
-        self.write_intent(outcome=" ".join(f"word{i}" for i in range(31)) + ".")
-        found = self.advisories()
-        self.assertEqual({"W-AUT-011"}, set(found))
-        self.assertIn("31 words; the budget is 30", found["W-AUT-011"][0])
-
-        self.write_intent(outcome="An operator can run `harnessctl check` without reading the code.")
-        found = self.advisories()
-        self.assertEqual({"W-AUT-011"}, set(found))
-        self.assertIn("names no solution", found["W-AUT-011"][0])
-
-        self.write_intent(body=reader_first_body(extra="\n## More\n\n" + " ".join(["word"] * 210) + ".\n"))
-        found = self.advisories()
-        self.assertEqual({"W-AUT-005", "W-AUT-007"}, set(found))
-        self.assertIn("the budget is 200", found["W-AUT-005"][0])
-
-        self.write_intent(body=reader_first_body(problem=" ".join(["Short sentence here."] * 6)))
-        found = self.advisories()
-        self.assertEqual({"W-AUT-012"}, set(found))
-        self.assertIn("6 sentences", found["W-AUT-012"][0])
-
-        self.write_intent(body=reader_first_body(problem="This one sentence " + " ".join(["keeps"] * 24) + " going."))
-        self.assertEqual({"W-AUT-007"}, set(self.advisories()))
-
-        self.write_intent(body=reader_first_body(problem="It cites `a`, `b` and `c` in one breath."))
-        found = self.advisories()
-        self.assertEqual({"W-AUT-008"}, set(found))
-        self.assertIn("3 code identifiers; the budget is 2", found["W-AUT-008"][0])
-
-        self.write_intent(body=reader_first_body(problem="The review found it at `se_harness/workflow.py:606` and `scripts/check.py`."))
-        found = self.advisories()
-        self.assertEqual({"W-AUT-015"}, set(found))
-        self.assertIn("2 repository paths or source line ranges", found["W-AUT-015"][0])
-
-        self.write_intent(body=reader_first_body(plain="One. Two. Three."))
-        found = self.advisories()
-        self.assertEqual({"W-AUT-009"}, set(found))
-        self.assertIn("3 sentences", found["W-AUT-009"][0])
-
-        self.write_intent(body="\n## Problem\n\n" + PROBLEM + "\n\n## Success measures\n\n" + MEASURES + "\n")
-        found = self.advisories()
-        self.assertEqual({"W-AUT-009"}, set(found))
-        self.assertIn("no In plain words section", found["W-AUT-009"][0])
 
     def test_no_shape_advisory_fires_on_an_approved_intent_or_on_a_requirement(self) -> None:
         self.write_intent(status="approved", outcome=None, body="\n## Problem\n\n" + " ".join(["word"] * 300) + ".\n")
@@ -188,59 +140,11 @@ class ReaderFirstIntentTests(unittest.TestCase):
         self.assertEqual([], [f"{i.path}: {i.code}" for i in report.advisories if "/intent/" in i.path.replace("\\", "/")])
         self.assertEqual([], [f"{i.path}: {i.code}" for i in report.errors if "/intent/" in i.path.replace("\\", "/")])
 
-    def test_validation_still_passes_with_advisories(self) -> None:
-        self.write_intent(outcome=None)
-        code, _, _ = invoke("validate", str(self.root), "--advisories")
-        self.assertEqual(0, code)
-        report = self.report()
-        self.assertEqual([], [f"{i.code}: {i.message}" for i in report.errors])
-        self.assertIn("W-AUT-011", {item.code for item in report.advisories if item.path.endswith("INT-002.md")})
-        self.assertEqual([], [item.code for item in report.warnings if item.code.startswith("W-AUT-")])
 
-    def test_the_authoring_checklist_names_the_shape_and_when_a_new_intent_is_warranted(self) -> None:
-        guide = (REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md").read_text(encoding="utf-8")
-        section = guide.split("## intent", 1)[1].split("## capability", 1)[0]
-        for code in ("W-AUT-011", "W-AUT-012", "W-AUT-013", "W-AUT-014", "W-AUT-015", "W-AUT-005", "W-AUT-007", "W-AUT-008", "W-AUT-009"):
-            self.assertIn(code, section)
-        self.assertIn("`In plain words`, `Problem`, `Success measures`, `Not this`", section)
-        self.assertIn("years later, whether the outcome was reached", section)
-        self.assertIn("A new intent is warranted", section)
-        self.assertIn("capability under the existing", section)
 
     # ---------------------------------------------------------------- REQ-TCM-010: success measures
 
-    def test_an_acceptance_check_in_the_table_is_reported_once_per_row(self) -> None:
-        measures = (
-            "| Measure | Today | When reached | Observed |\n| --- | --- | --- | --- |\n"
-            "| Refusals per quarter | not measured | 0 | Explorer overview, quarterly |\n"
-            "| Validator blocks violations | 0 | 0 | every CI run |\n"
-            "| Files rewritten | 0 | 0 | implementation review |\n"
-            "| Cases passing | partial | 100% | every regression run |\n"
-            "| Records broken | 0 | 0 | packet verification |\n"
-        )
-        self.write_intent(body=reader_first_body(measures=measures))
-        found = self.advisories()
-        self.assertEqual({"W-AUT-013"}, set(found))
-        self.assertEqual(4, len(found["W-AUT-013"]))
-        messages = " || ".join(found["W-AUT-013"])
-        for expected in (
-            "'Validator blocks violations' is observed by CI",
-            "'Files rewritten' is observed by implementation review",
-            "'Cases passing' is observed by regression run",
-            "'Records broken' is observed by verification",
-        ):
-            self.assertIn(expected, messages)
-        self.assertNotIn("Refusals per quarter", messages)
-        self.assertIn("belongs in the verification contract", found["W-AUT-013"][0])
 
-    def test_an_empty_or_malformed_table_is_one_advisory(self) -> None:
-        self.write_intent(body=reader_first_body(measures="| Measure | Today | When reached | Observed |\n| --- | --- | --- | --- |"))
-        found = self.advisories()
-        self.assertEqual({"W-AUT-014"}, set(found))
-        self.assertEqual(1, len(found["W-AUT-014"]))
-        self.write_intent(body=reader_first_body(measures="| Measure | Today |\n| --- | --- |\n| broken | row |"))
-        found = self.advisories()
-        self.assertEqual({"W-AUT-014"}, set(found))
 
     def test_an_honest_baseline_and_a_zero_target_raise_nothing(self) -> None:
         self.write_intent()

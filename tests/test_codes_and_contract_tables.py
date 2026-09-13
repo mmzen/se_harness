@@ -122,7 +122,6 @@ class IndexTests(unittest.TestCase):
         self.assertEqual(_registry_codes(), names)
         indexed = scan(REPOSITORY_ROOT)
         self.assertTrue(any("check --checkpoint accepts only" in message for message in indexed["WEX"]["WEX210"]))
-        self.assertTrue(any(message.startswith("W-ADS-001: the Harness-Work-Order line") for message in indexed["W-ADS"]["W-ADS-001"]))
         self.assertIn("WEX-ECP-031", indexed["WEX-ECP"])
         self.assertIn("WEX301", indexed["WEX"])
 

@@ -10,11 +10,10 @@ from typing import Any, Mapping
 
 from se_harness import front_matter
 from se_harness.codes import CodedError, E_CIP_001, E_DCM_004, WEX200
-from se_harness.engine import validate_engineering_artifacts
-from se_harness.installer import HarnessError
+from se_harness.installer import HarnessError, safe_destination
 from se_harness.integrity import canonical_text
 from se_harness.workflow_contract import Checkpoint
-from se_harness.workflow_change_set import ChangeSet
+from se_harness.workflow_change_set import ChangeSet, normalize_path
 from se_harness.workflow_evidence_packet import parse_evidence_header
 
 
@@ -39,6 +38,22 @@ class CheckpointContext:
 def review_evidence(context: CheckpointContext) -> tuple[str, str]:
     if context.artifact.artifact_type != "work_order":
         return "pass", "Work-order implementation evidence does not apply to this artifact type."
+    # A work order can point directly at ordinary evidence files. No machine header
+    # is required. Old generated packets remain readable through the path below.
+    references = context.artifact.metadata.get("evidence_paths")
+    if references is not None:
+        if not isinstance(references, list) or not references:
+            return "not_assessable", "evidence_paths must list at least one repository file."
+        for reference in references:
+            try:
+                relative = normalize_path(reference)
+                path = safe_destination(context.root, Path(relative))
+                path.resolve(strict=True).relative_to(context.root.resolve())
+                if not path.is_file() or not path.read_bytes().strip():
+                    return "not_assessable", f"Evidence {relative} is missing or empty."
+            except (HarnessError, OSError, ValueError) as exc:
+                return "not_assessable", f"Cannot read evidence {reference!r}: {exc}"
+        return "pass", "Retained evidence: " + ", ".join(references) + "."
     evidence_root = context.root / "docs" / "engineering"
     candidates = [
         path for path in evidence_root.rglob("*")
@@ -79,9 +94,9 @@ def review_evidence(context: CheckpointContext) -> tuple[str, str]:
 
 
 def pull_request_body_findings(root: Path, body_path: Path) -> list[str]:
-    """Report W-ADS-001 for a pull-request body whose trailer carries a carriage return."""
+    """Check that a supplied pull-request body is readable and selects one work order."""
 
-    from se_harness.github_ci import MAX_EVENT_BYTES, carriage_return_trailer_offsets
+    from se_harness.github_ci import MAX_EVENT_BYTES, SelectionError, select_work_order
 
     try:
         with body_path.open("rb") as handle:
@@ -94,13 +109,11 @@ def pull_request_body_findings(root: Path, body_path: Path) -> list[str]:
         body = raw.decode("utf-8")
     except UnicodeDecodeError as exc:
         raise CodedError(WEX200, "pull-request body must be UTF-8") from exc
-    return [
-        (
-            f"the Harness-Work-Order line ends with a carriage return at byte offset {offset}; "
-            "write the body with LF line endings (newline=\"\\n\" in Python, or core.autocrlf=false) before pushing"
-        )
-        for offset in carriage_return_trailer_offsets(body)
-    ]
+    try:
+        select_work_order(body)
+    except SelectionError as exc:
+        return [str(exc)]
+    return []
 
 
 _PLACEHOLDER = re.compile(r"<[A-Za-z][^>\n]{2,80}>")
@@ -112,18 +125,8 @@ _INLINE_CODE = re.compile(r"`[^`\n]*`")
 _DECISION_LINE = re.compile(r"^-?\s*`?DEC-(?:[A-Z0-9]+-)*\d{3}`?(?:\s*\((?:open|deferred|decided|withdrawn)\))?\.?$")
 
 
-#: SPEC-TCM-007: the four artifact types with an authoring-advisory family.
-DEFINITION_KINDS = frozenset({"intent", "capability", "requirement", "specification"})
-
-
-def authoring_ready(artifact: Any, root: Path | None = None) -> tuple[str, str]:
-    """AUT-GTE-001: no leftover template placeholder, and Open decisions closed.
-
-    SPEC-TCM-007 (TCM-RFB-003 to TCM-RFB-007): after those two checks, a draft of one of the
-    four definition kinds fails while it still draws an authoring advisory; the advisories
-    are read through the validator module preflight loads, never through a second copy of
-    the budgets. Any other type passes this check without reading the validator.
-    """
+def authoring_ready(artifact: Any, root: Path | None = None, catalog: Mapping[str, Any] | None = None) -> tuple[str, str]:
+    """Refuse unfinished content or decisions; leave writing style to the author."""
 
     try:
         text = artifact.path.read_text(encoding="utf-8-sig")
@@ -157,19 +160,19 @@ def authoring_ready(artifact: Any, root: Path | None = None) -> tuple[str, str]:
                     f"(the Open decisions section reads exactly None, or lists DEC- identifiers)"
                 )
             break
-    if artifact.artifact_type in DEFINITION_KINDS:
-        try:
-            advisories = validate_engineering_artifacts.authoring_advisories(artifact, root)
-        except Exception as exc:  # the validator could not read the draft: not a pass, not a refusal
-            return "not_assessable", f"{artifact.artifact_id}: the authoring advisories cannot be read: {exc}"
-        if advisories:
-            listed = "; ".join(f"{item.code}: {item.message}" for item in advisories)
-            noun = "advisory" if len(advisories) == 1 else "advisories"
-            return "fail", (
-                f"{artifact.artifact_id} still draws {len(advisories)} authoring {noun}: {listed}; "
-                "fix the draft and run the transition again"
-            )
-    return "pass", f"{artifact.artifact_id} carries no placeholder, no open decision and no authoring advisory."
+    if artifact.artifact_type == "requirement":
+        statement = artifact.metadata.get("statement")
+        if not isinstance(statement, str) or not statement.strip():
+            return "fail", f"{artifact.artifact_id} needs a non-empty statement."
+        sections = front_matter.body_sections(artifact.body)
+        acceptance = [sections.get("Examples"), sections.get("Acceptance"), sections.get("Acceptance criteria"),
+                      artifact.metadata.get("measure"), artifact.metadata.get("verification_notes")]
+        linked = [item.body for item in (catalog or {}).values()
+                  if item.artifact_type == "verification" and artifact.artifact_id in item.relations.get("verifies", [])]
+        if not any(isinstance(item, str) and item.strip() for item in acceptance + linked):
+            return "fail", f"{artifact.artifact_id} needs an acceptance condition: add an example, measure, verification notes or a linked verification contract."
+    return "pass", f"{artifact.artifact_id} has no unfinished content or unresolved decision text."
+
 
 
 def blocking_decisions(catalog: Mapping[str, Any], artifact: Any, target: str | None) -> list[Any]:

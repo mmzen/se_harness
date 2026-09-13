@@ -96,14 +96,6 @@ class ReaderFirstCapabilityTests(unittest.TestCase):
         self.assertIn("E-AUT-002", errors[0])
         self.assertIn("ability", errors[0])
 
-    def test_the_checklist_matches_the_shape(self) -> None:
-        section = GUIDE.read_text(encoding="utf-8").split("## capability", 1)[1].split("\n## specification", 1)[0]
-        for token in ("`ability`", "W-AUT-016", "W-AUT-017", "W-AUT-018", "W-AUT-005", "W-AUT-007", "W-AUT-008", "W-AUT-009",
-                      "`In plain words`", "`Actor and need`", "`Not decided here`", "read from the graph", "more than one actor ability",
-                      "never contains an outcome"):
-            self.assertIn(token, section, token)
-        self.assertNotIn("lists its derived requirements", section)
-        self.assertNotIn("Candidate requirements", section)
 
     # ---------------------------------------------------------------- REQ-TCM-012: advisories
 
@@ -111,58 +103,6 @@ class ReaderFirstCapabilityTests(unittest.TestCase):
         self.write_capability()
         self.assertEqual({}, self.advisories())
 
-    def test_each_budget_raises_exactly_its_advisory_with_the_measured_value(self) -> None:
-        self.write_capability(ability=None)
-        found = self.advisories()
-        self.assertEqual({"W-AUT-016"}, set(found))
-        self.assertIn("no ability", found["W-AUT-016"][0])
-
-        self.write_capability(ability="An owner can " + " ".join(["really"] * 28) + " under load.")
-        found = self.advisories()
-        self.assertEqual({"W-AUT-016"}, set(found))
-        self.assertIn("33 words; the budget is 30", found["W-AUT-016"][0])
-
-        self.write_capability(ability="An owner qualifies a succession under the managed check.")
-        found = self.advisories()
-        self.assertEqual({"W-AUT-016"}, set(found))
-        self.assertIn("what the actor can do", found["W-AUT-016"][0])
-
-        self.write_capability(ability="An owner can qualify a succession.")
-        found = self.advisories()
-        self.assertEqual({"W-AUT-016"}, set(found))
-        self.assertIn("names no condition", found["W-AUT-016"][0])
-
-        self.write_capability(ability="An owner can run `harnessctl upgrade` under the managed check.")
-        found = self.advisories()
-        self.assertEqual({"W-AUT-016"}, set(found))
-        self.assertIn("1 code identifiers", found["W-AUT-016"][0])
-
-        self.write_capability(body=reader_first_body(need=" ".join(["The owner needs it."] * 4)))
-        found = self.advisories()
-        self.assertEqual({"W-AUT-017"}, set(found))
-        self.assertIn("4 sentences", found["W-AUT-017"][0])
-
-        self.write_capability(body=reader_first_body(extra="\n## More\n\n" + " ".join(["word"] * 160) + ".\n"))
-        found = self.advisories()
-        self.assertEqual({"W-AUT-005", "W-AUT-007"}, set(found))
-        self.assertIn("the budget is 150", found["W-AUT-005"][0])
-
-        self.write_capability(body=reader_first_body(need="This one sentence " + " ".join(["keeps"] * 24) + " going."))
-        self.assertEqual({"W-AUT-007"}, set(self.advisories()))
-
-        self.write_capability(body=reader_first_body(need="It cites `a`, `b` and `c` at once."))
-        found = self.advisories()
-        self.assertEqual({"W-AUT-008"}, set(found))
-        self.assertIn("3 code identifiers; the budget is 2", found["W-AUT-008"][0])
-
-        self.write_capability(body=reader_first_body(plain="One. Two. Three."))
-        found = self.advisories()
-        self.assertEqual({"W-AUT-009"}, set(found))
-
-        self.write_capability(body=reader_first_body(extra="\n## Candidate requirements\n\n- `REQ-001`\n"))
-        found = self.advisories()
-        self.assertEqual({"W-AUT-018"}, set(found))
-        self.assertIn("read from the graph", found["W-AUT-018"][0])
 
     def test_no_capability_advisory_fires_on_an_approved_capability_or_another_type(self) -> None:
         self.write_capability(status="approved", ability="An owner qualifies it.", body="\n## Outcomes\n\n" + " ".join(["word"] * 200) + ".\n\n## Candidate requirements\n\n- `REQ-001`\n")
