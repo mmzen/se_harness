@@ -191,7 +191,7 @@ def resolve_output_root(
     from se_harness.artifact_layout import validate_existing_chain
     from se_harness.installer import HarnessError, LOCK_NAME, template_files
     from se_harness.integrity import IntegrityError, validate_output_path_spelling
-    from se_harness.skill_ownership import DISCOVERY_PATHS, MUTEX_NAME, RECOVERY_NAME
+    from se_harness.skill_ownership import DISCOVERY_PATHS
 
     candidate = value or DEFAULT_OUTPUT_ROOT
     try:
@@ -209,7 +209,7 @@ def resolve_output_root(
     # must stay absent. Protect the full trusted distribution and discovery set.
     protected = {item.target for item in template_files()}
     protected.update(Path(name) for name in DISCOVERY_PATHS)
-    protected.update(Path(name) for name in (LOCK_NAME, RECOVERY_NAME, MUTEX_NAME, ".git"))
+    protected.update(Path(name) for name in (LOCK_NAME, ".git"))
     for relative in protected:
         installed = repository_root / relative
         if any(_portable_paths_overlap(output_path, protected_path)

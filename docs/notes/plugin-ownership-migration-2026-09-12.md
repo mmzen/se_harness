@@ -1,5 +1,11 @@
 # Evaluator skill ownership migration: definitions and implementation
 
+Historical design note. The owner requested a simpler migration on 2026-09-13.
+See [the current procedure](plugin-simplification-2026-09-13.md).
+The plan hashes, provider content hashes, mutex, recovery journal and full
+ownership fault matrix described below have been removed from candidate code.
+The dated decisions and observations below describe the previous design.
+
 Prepared 2026-09-12 against main `3bf0ef2a7a2b4008efaa3cb79431d526d3f6f600`.
 The operator selected delegated execution and approved DEC-PLG-007 with its amendments on 2026-09-12. The released evaluator records the nine packet approvals, and all eight exact applicability amendments are appended to their target contracts. PR #461 integrated them at `6559568e995fc6e28f64e6bc5a6d4a6dc5dcf7de`. The required live `validate` check passed there, and the delegated start was recorded at `e33d8c86`; WO-PLG-020 is now in progress. Development observations are retained in the [evidence index](../engineering/plugin-integration/evidence/WO-PLG-020/README.md); completion and verification preparation require the remaining acceptance and live candidate gates.
 

@@ -28,7 +28,6 @@ _HUMAN_MUTATION_OPERATIONS = frozenset(
         "capture-verification",
         "create-artifact",
         "installed-root-apply",
-        "skill-ownership-apply",
         "prepare-release",
         "scaffold-domain",
         "transition-apply",
@@ -145,11 +144,6 @@ def require_mutation_authority(
     root = ensure_target(repository, must_exist=True)
     try:
         lock = load_lock(root)
-        if operation != "skill-ownership-apply":
-            from se_harness.skill_ownership import assert_ownership_state, ensure_no_pending_recovery
-
-            ensure_no_pending_recovery(root)
-            assert_ownership_state(root, lock)
     except (HarnessError, IntegrityError) as exc:
         raise _failure(MG001, operation, f"cannot read the standard lock: {exc}") from exc
     configured_version = _configured_version(root, operation)

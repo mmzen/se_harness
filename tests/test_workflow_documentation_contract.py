@@ -22,13 +22,13 @@ INSTALLED_GATES = ENGINEERING_ROOT / "QUALITY_GATES.json"
 
 class WorkflowDocumentationContractTests(unittest.TestCase):
     def test_integrity_policy_keeps_default_schema_and_bounded_plugin_exception(self) -> None:
-        # DEC-PLG-007 approves this applicability text under SPEC-PLG-020;
+        # SPEC-PLG-021 replaces the plugin exception for this delivery;
         # the installed root policy belongs to its released evaluator.
         workflow = (ENGINEERING_ROOT / "WORKFLOW.md").read_text(encoding="utf-8")
         integrity = next(line for line in workflow.splitlines() if line.startswith("Managed-file integrity "))
         for phrase in (
             "Schema 3 is the default repository format.",
-            "Schema 4 is supported only with a validated explicit plugin ownership binding under SPEC-PLG-020.",
+            "Schema 4 selects plugin skills with a portable provider record under SPEC-PLG-021.",
             "Schemas 1 and 2 are refused before writes.",
             "Ordinary mutation requires the exact evaluator identity bound by the selected supported lock.",
             "LF, CRLF, and CR are equivalent line terminators; all other content distinctions remain significant.",

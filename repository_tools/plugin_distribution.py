@@ -13,6 +13,7 @@ import json
 import os
 from pathlib import Path
 import re
+import shutil
 import stat
 import subprocess
 import tempfile
@@ -248,7 +249,7 @@ def _safe_directory(path: Path) -> None:
             continue
         # FILE_ATTRIBUTE_REPARSE_POINT also covers junctions on Python 3.11,
         # where Path.is_junction is not available.
-        if part.is_symlink() or attributes & stat.FILE_ATTRIBUTE_REPARSE_POINT:
+        if attributes & stat.FILE_ATTRIBUTE_REPARSE_POINT or part.is_symlink():
             raise AssemblyError(f"linked output destination: {part}")
 
 
@@ -332,3 +333,63 @@ def build(assembly: Assembly, output: Path) -> dict:
         _write(output / host / assembly.name / INVENTORY, json_bytes(assembly.inventory(host)))
         _write(output / f"{assembly.name}-{host}.zip", _archive(assembly, host))
     return accept(assembly, output)
+
+
+def develop(repository: Path, wheel: Path, output: Path) -> dict:
+    """Copy current plugin sources and a local wheel into rebuildable development packages."""
+    repository = repository.resolve(strict=True)
+    wheel = wheel.resolve(strict=True)
+    output = output.absolute()
+    _safe_directory(output)
+    if output == repository or repository.is_relative_to(output) or output.is_relative_to(repository):
+        raise AssemblyError("choose a build output outside the source repository")
+    if wheel.is_relative_to(output):
+        raise AssemblyError("the selected wheel must be outside the output being replaced")
+    with zipfile.ZipFile(wheel) as archive:
+        metadata_paths = [n for n in archive.namelist() if n.endswith('.dist-info/METADATA')]
+        if len(metadata_paths) != 1 or '\nName: se-harness\n' not in '\n' + archive.read(metadata_paths[0]).decode():
+            raise AssemblyError("select a se-harness wheel")
+    source = repository / "plugins/verity-plane"
+    payloads = {}
+    for host, directory in (("codex", "codex"), ("claude", "claude-code")):
+        entries = {}
+        for base in (source / "common", source / directory):
+            for path in sorted(base.rglob('*')):
+                relative = path.relative_to(base)
+                if '__pycache__' in relative.parts or path.suffix == '.pyc':
+                    continue
+                if path.is_file():
+                    entries[relative.as_posix()] = path.read_bytes()
+        # One content check before any output replacement.
+        manifest = json.loads(entries.get(HOSTS[host], b'{}'))
+        if manifest.get('name') != 'verity-plane' or 'hooks' in manifest or any(p.startswith('hooks/') for p in entries):
+            raise AssemblyError(f"invalid explicit-check {host} manifest")
+        for relative in ('skills/harness-orient/SKILL.md', 'skills/harness-orient/skill-contract.json',
+                         'skills/harness-orient/scripts/orient.py', 'skills/harness-operator-brief/SKILL.md',
+                         'skills/harness-operator-brief/skill-contract.json', 'skills/harness-operator-brief/scripts/check_brief.py',
+                         'skills/setup/SKILL.md', 'scripts/setup.py'):
+            if not entries.get(relative):
+                raise AssemblyError(f"missing package content: {relative}")
+        entries['packages/' + wheel.name] = wheel.read_bytes()
+        entries['DEVELOPMENT.md'] = b'Development-only package. Not a release or publication artifact.\n'
+        payloads[host] = entries
+    marker = output / '.verity-plane-development'
+    marker_bytes = b'verity-plane-development-output-v1\n'
+    if output.exists():
+        if not marker.is_file() or marker.read_bytes() != marker_bytes:
+            raise AssemblyError("output is not owned by this development build; choose another directory")
+        shutil.rmtree(output)
+    output.mkdir(parents=True)
+    marker.write_bytes(marker_bytes)
+    archives = []
+    for host, entries in payloads.items():
+        package = output / host / 'verity-plane'
+        archive_path = output / f'verity-plane-{host}.zip'
+        with zipfile.ZipFile(archive_path, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
+            for relative, raw in sorted(entries.items()):
+                destination = package / relative
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                destination.write_bytes(raw)
+                archive.writestr('verity-plane/' + relative, raw)
+        archives.append(str(archive_path))
+    return {'development_only': True, 'promotable': False, 'archives': archives}

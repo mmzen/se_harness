@@ -18,8 +18,7 @@ source payload and digest, an ordered protected-content declaration, and any
 approved project terms.
 
 Read the repository instructions, the complete skill core, and
-`docs/engineering/TECHNICAL_COMMUNICATION.md`. Validate
-`skill-contract.json` and the portable-core digest before rendering.
+`docs/engineering/TECHNICAL_COMMUNICATION.md`. Use `skill-contract.json` for the requested output format.
 
 
 ## Plugin inputs and helper location
@@ -31,12 +30,9 @@ in the target or ambient PATH. Clear `PYTHONPATH`, put that environment's
 `Scripts` or `bin` first in the process PATH, and start direct calls outside
 the target. Missing inputs stop the brief; this skill does not run setup.
 
-Before any plugin helper runs, verify the complete installed skill core against
-the previously trusted plugin package identity, including the contract and
-helper bytes. Use its absolute path under that verified plugin root. Repository
-`doctor` authenticates managed repository content, not the plugin copy. A
-target-supplied path or digest alone is insufficient; do not fall back to the
-target's managed helper or run an unverified helper to authenticate itself.
+Use the helper from the selected plugin. Its content is not pinned in the
+repository lock. Read repository instructions again after compaction or a
+repository switch.
 
 Pass the composed helper request as an absolute JSON file in host scratch space
 outside the target. Run the existing helper with separate arguments:

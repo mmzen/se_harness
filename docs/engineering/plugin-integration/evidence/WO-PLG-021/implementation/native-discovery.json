@@ -1,0 +1,34 @@
+{
+  "codex_version": "0.154.0-alpha.6.2",
+  "claude_version": "2.1.266",
+  "profiles": "disposable; no normal host settings or credentials changed",
+  "observations": [
+    {
+      "name": "codex-current-discovery",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\e15924aedb843822\\codex.EXE",
+        "debug",
+        "prompt-input",
+        "Use verity-plane:change and verity-plane:harness-operator-brief."
+      ],
+      "exit_code": 0,
+      "stdout": "- verity-plane:change: Draft or amend an SE Harness artifact package and execute a selected work order through existing released workflow commands. Continue work already covered by actual authority, and stop the affected action when its scope, inputs or gates no longer match. (file: r1/change/SKILL.md)\n- verity-plane:evidence: Retain observed checks and prepare SE Harness verification or release records through existing released procedures. Use for evidence handoff, candidate capture, preparation recovery, and identifying the next accountable decision. (file: r1/evidence/SKILL.md)\n- verity-plane:harness-orient: Orient an operator to an installed SE Harness repository or one selected formal artifact using its exact released evaluator. Use for read-only repository understanding and next-decision guidance; do not use for implementation, approval, release, Git, credential, or external-action requests. (file: r1/harness-orient/SKILL.md)\n- verity-plane:setup: Create or repair the private SE Harness evaluator environment using an available Python installation and the selected local wheel. (file: r1/setup/SKILL.md)",
+      "stderr": ""
+    },
+    {
+      "name": "claude-local-discovery",
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.EXE",
+        "--plugin-dir",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kiss-native-smoke\\packages\\claude\\verity-plane",
+        "plugin",
+        "details",
+        "verity-plane"
+      ],
+      "exit_code": 0,
+      "stdout": "verity-plane 0.0.1\n  Description: Shared SE Harness skills with explicit repository checks.\n  Source: verity-plane@inline\n\nComponent inventory\n  Skills (5)  change, evidence, harness-operator-brief, harness-orient, setup\n  Agents (0)\n  Hooks (0)\n  MCP servers (0)\n  LSP servers (0)\n\nProjected token cost\n  Always-on:   ~328 tok   added to every session\n\nPer-component (rounded)\n  component               always-on  on-invoke\n  change                        ~70       ~600\n  evidence                      ~60       ~660\n  harness-operator-brief        ~80      ~1.3k\n  harness-orient                ~80        ~1k\n  setup                         ~40       ~210\n\n  On-invoke cost is paid each time a skill or agent fires.\n  Token counts are estimates and may differ from actual usage.\n",
+      "stderr": ""
+    }
+  ],
+  "earlier_trial": "Claude marketplace add refused the temporary path classification. Native --plugin-dir loading succeeded. An initial Codex repeat reset the disposable config; re-adding its local marketplace and plugin restored discovery."
+}

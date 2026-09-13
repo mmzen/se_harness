@@ -9,28 +9,17 @@ Turn the selected change into a coherent artifact package or carry its work
 order forward. The installed harness decides lifecycle legality; this skill
 connects its existing procedures to the operator's request.
 
-## Establish context
+## Repository context
 
-Before a governed write, require the current repository's verified governance
-context: a freshly verified released evaluator, passing managed integrity, and
-the complete managed `AGENTS.md` gate and `ENGINEERING_HARNESS.md` router read in
-this session. A prior summary, successful lifecycle projection, or handler
-receipt alone is insufficient. After compaction, a repository switch or changed
-governance inputs, recover through `setup` and fresh context delivery first.
+Read the selected repository's AGENTS.md and ENGINEERING_HARNESS.md on entry,
+after compaction, and after switching repositories. Read the operating card and
+the reading manifest for the selected work. Use normal file reads.
 
-`setup` currently prepares the evaluator environment. It does not initialize a
-repository or establish complete context by itself. Where the host supports
-`session-context.py`, read its entire verified delivery through the matching
-`END VERIFIED GOVERNANCE` marker; execute its exact full-read argument array
-when requested. If verified delivery is unavailable, report that readiness
-blocker. Do not invent a ready flag or bypass it by running a mutation directly.
-
-Use setup's verified absolute environment Python with `-I -m se_harness` from
-outside the checkout, with cleared `PYTHONPATH` and that environment's `Scripts`
-or `bin` first in the process PATH. Here, `harnessctl` in returned argument arrays
-means this invocation, not an ambient executable. Preserve argument boundaries
-and use the absolute repository path. Inspect the selected release's command
-help before first use; stop if an operation is unsupported.
+Use the repository-selected released evaluator in its private environment,
+through the absolute Python path with `-I -m se_harness`. Run
+`check ABSOLUTE_REPOSITORY --artifact ID --json` when beginning governed work,
+then follow its procedure and required checkpoints. Preserve its actual result,
+including failures. Run setup if the evaluator environment needs repair.
 
 ## Follow the selected operation
 

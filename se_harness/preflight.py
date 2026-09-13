@@ -230,7 +230,7 @@ def inspect_installation(target: Path) -> list[InstallationCheck]:
         if lock.get("schema") == 4:
             checks.append(InstallationCheck(
                 "skill-ownership", True,
-                "validated plugin ownership; external availability and native loading are unobserved",
+                "skills are provided by the plugin",
             ))
         lock_files = lock.get("files", {})
 

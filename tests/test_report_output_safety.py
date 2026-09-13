@@ -104,8 +104,7 @@ class ReportOutputSafetyTests(unittest.TestCase):
 
     def test_dashboard_refuses_absent_retired_and_case_variant_destinations(self):
         for value in (".agents", ".agents/skills/harness-orient", ".agents/skills/harness-orient/SKILL.md",
-                      ".claude/skills/harness-operator-brief", ".GITHUB", ".git", ".engineering-harness.lock",
-                      ".engineering-harness.skill-ownership.pending.json", ".engineering-harness.skill-ownership.mutex"):
+                      ".claude/skills/harness-operator-brief", ".GITHUB", ".git", ".engineering-harness.lock"):
             with self.subTest(output=value):
                 before = self.snapshot()
                 with self.assertRaises(GenerationError):
