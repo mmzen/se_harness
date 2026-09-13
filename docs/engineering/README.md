@@ -4,6 +4,8 @@
 
 ## Product and governance domains
 
+- [harness-simplification/](harness-simplification/README.md): accepted codebase KISS review, seven bounded work orders covering all 38 simplification candidates and seven retained protections.
+
 - [plugin-integration/](plugin-integration/README.md): compatibility probes for native coding-agent plugins, introduced through separate bounded work orders.
 - `test-suite/`: draft proposal for a repository-owned parallel test runner over unittest, a marker for the scale tests, and a cached fixture install, keeping the serial run canonical.
 - `ci-pipeline/`: draft proposal to run each CI check once per commit, define the release qualification once for the rehearsal and the release, and freeze a release unit by candidate commit rather than by work-order allow-list.
