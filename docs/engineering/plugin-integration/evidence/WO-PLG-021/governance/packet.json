@@ -1,0 +1,122 @@
+{
+  "work_order": "WO-PLG-021",
+  "base": "66a4b8a43409320d01cfe5c67cc9657600ed4681",
+  "artifacts": [
+    {
+      "id": "REQ-PLG-032",
+      "type": "requirement",
+      "owner": "requirements-steward",
+      "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-032.md"
+    },
+    {
+      "id": "REQ-PLG-033",
+      "type": "requirement",
+      "owner": "requirements-steward",
+      "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-033.md"
+    },
+    {
+      "id": "REQ-PLG-034",
+      "type": "requirement",
+      "owner": "requirements-steward",
+      "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-034.md"
+    },
+    {
+      "id": "REQ-PLG-035",
+      "type": "requirement",
+      "owner": "requirements-steward",
+      "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-035.md"
+    },
+    {
+      "id": "REQ-PLG-036",
+      "type": "requirement",
+      "owner": "requirements-steward",
+      "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-036.md"
+    },
+    {
+      "id": "REQ-PLG-037",
+      "type": "requirement",
+      "owner": "requirements-steward",
+      "path": "docs/engineering/plugin-integration/requirements/REQ-PLG-037.md"
+    },
+    {
+      "id": "SPEC-PLG-021",
+      "type": "specification",
+      "owner": "technical-owner",
+      "path": "docs/engineering/plugin-integration/specifications/SPEC-PLG-021.md"
+    },
+    {
+      "id": "ARCH-PLG-004",
+      "type": "architecture",
+      "owner": "technical-owner",
+      "path": "docs/engineering/plugin-integration/architecture/ARCH-PLG-004.md"
+    },
+    {
+      "id": "ADR-PLG-004",
+      "type": "adr",
+      "owner": "technical-owner",
+      "path": "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-004.md"
+    },
+    {
+      "id": "VER-PLG-021",
+      "type": "verification",
+      "owner": "assurance-owner",
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-021.md"
+    },
+    {
+      "id": "WO-PLG-021",
+      "type": "work_order",
+      "owner": "engineering-owner",
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-021.md"
+    }
+  ],
+  "reserved_verification_record": "VREC-PLG-016",
+  "proposal_scenarios": 50,
+  "execution_scope": [
+    "docs/engineering/plugin-integration/requirements/REQ-PLG-032.md",
+    "docs/engineering/plugin-integration/requirements/REQ-PLG-033.md",
+    "docs/engineering/plugin-integration/requirements/REQ-PLG-034.md",
+    "docs/engineering/plugin-integration/requirements/REQ-PLG-035.md",
+    "docs/engineering/plugin-integration/requirements/REQ-PLG-036.md",
+    "docs/engineering/plugin-integration/requirements/REQ-PLG-037.md",
+    "docs/engineering/plugin-integration/specifications/SPEC-PLG-021.md",
+    "docs/engineering/plugin-integration/architecture/ARCH-PLG-004.md",
+    "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-004.md",
+    "docs/engineering/plugin-integration/verification/VER-PLG-021.md",
+    "docs/engineering/plugin-integration/work-orders/WO-PLG-021.md",
+    "docs/engineering/plugin-integration/README.md",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-021/",
+    "docs/engineering/plugin-integration/verification-records/VREC-PLG-016.md",
+    "docs/engineering/plugin-integration/evidence/VREC-PLG-016-evaluator.json",
+    "se_harness/cli.py",
+    "se_harness/installer.py",
+    "se_harness/integrity.py",
+    "se_harness/preflight.py",
+    "se_harness/mutation_guard.py",
+    "se_harness/skill_ownership.py",
+    "se_harness/skill_ownership_contract.json",
+    "se_harness/engine/dashboard_snapshot.py",
+    "repository_tools/plugin_distribution.py",
+    "scripts/build_plugin_archives.py",
+    "pyproject.toml",
+    "plugins/verity-plane/",
+    "tests/plugin_integration/",
+    "tests/test_skill_ownership.py",
+    "tests/fixtures/skill_ownership/",
+    "tests/test_harnessctl.py",
+    "tests/test_mutation_guard.py",
+    "tests/test_report_output_safety.py",
+    "tests/test_integration_package.py",
+    "tests/test_cli_shape.py",
+    "tests/test_ci_pipeline.py",
+    "tests/test_integrity_primitives.py",
+    "tests/test_workflow_documentation_contract.py",
+    ".github/workflows/candidate-evidence.yml",
+    "templates/repository/standard/docs/engineering/WORKFLOW.md",
+    "docs/notes/plugin-simplification-2026-09-13.md",
+    "docs/notes/plugin-simplification-work-order-2026-09-13.md",
+    "docs/notes/plugin-ownership-migration-2026-09-12.md",
+    "docs/notes/developing-se-harness.md",
+    "docs/notes/harnessctl-reference.md",
+    "docs/notes/ci-pipeline.md"
+  ]
+}
