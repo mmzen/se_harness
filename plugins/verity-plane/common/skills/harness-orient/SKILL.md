@@ -22,7 +22,8 @@ the reading manifest for the selected work. Use normal file reads.
 
 Use the repository-selected released evaluator in its private environment,
 through the absolute Python path with `-I -m se_harness`. The helper reports the selected artifact when one was requested. Preserve its actual result,
-including failures. Run setup if the evaluator environment needs repair.
+including failures. If the evaluator needs repair, report setup as the next
+step; orientation itself stays read-only.
 
 For this read-only orientation, use the helper below with the selected
 evaluator version and environment root. It performs the required identity and
