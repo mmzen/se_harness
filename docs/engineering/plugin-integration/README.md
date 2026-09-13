@@ -129,6 +129,6 @@ The packet replaces disposable skill copies, simplifies setup, removes automatic
 - [Architecture](architecture/ARCH-PLG-004.md), [decision](architecture/adr/ADR-PLG-004.md), and [verification plan](verification/VER-PLG-021.md).
 - [All 50 proposal scenarios](evidence/WO-PLG-021/governance/proposal-coverage.md) and [recorded owner request](evidence/WO-PLG-021/governance/owner-request.md).
 
-The approved packet is at the PR base. Hosted acceptance passed and delegated completion is recorded. Commit-bound verification preparation follows; the assurance decision remains separate.
+The approved packet is at the PR base. Hosted acceptance passed and delegated completion is recorded. [VREC-PLG-016](verification-records/VREC-PLG-016.md) is ready and binds candidate 8da029ce. The assurance decision remains with the owner.
 The earlier prototype is an input to that work, not a completion or assurance result for this packet.
 Historical work orders, decisions, verification records, releases and their evidence remain unchanged.
