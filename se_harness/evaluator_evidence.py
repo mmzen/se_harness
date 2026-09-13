@@ -83,6 +83,10 @@ def _normalized_origin(raw: str, evaluator_root: Path) -> str:
     path = Path(raw)
     relative = _lexical_relative(path, evaluator_root)
     if relative is None:
+        # Resolve an environment-directory alias without following bin/python's
+        # terminal link out to the system interpreter in a POSIX virtualenv.
+        relative = _lexical_relative(path.parent.resolve() / path.name, evaluator_root.resolve())
+    if relative is None:
         relative = _resolved_relative(path, evaluator_root)
     if relative is None or any(part in {"", ".", ".."} for part in relative.parts):
         raise EvaluatorEvidenceError("runtime origin is outside the evaluator root")

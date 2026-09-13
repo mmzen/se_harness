@@ -48,6 +48,12 @@ class InterpreterPathsTests(unittest.TestCase):
             self.assertTrue(value["passed"])
             self.assertIsNone(value["entry_point_origin"])
             self.assertNotIn("python_binary_sha256", value)
+            evidence_code = "from pathlib import Path; import sys; from se_harness.runtime_identity import inspect_runtime_identity; from se_harness.evaluator_evidence import build_evaluator_evidence; r=inspect_runtime_identity(role='released-evaluator',expected_version=sys.argv[1],expected_root=Path(sys.argv[2]),checkout_root=Path(sys.argv[3]),verify_payload=False); print(build_evaluator_evidence(r).canonical_bytes.decode())"
+            result = subprocess.run([str(selected), "-I", "-c", evidence_code, runtime_identity.__version__, str(real), str(REPOSITORY_ROOT)], env={**os.environ, "PYTHONPATH": str(REPOSITORY_ROOT)}, cwd=root, capture_output=True, text=True)
+            self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+            value = json.loads(result.stdout)
+            self.assertTrue(value["origins"]["python_executable"].startswith("<evaluator-root>/"))
+            self.assertEqual("origin-version", value["inspection"])
 
     def test_linked_environment_retains_its_entry_point(self):
         with tempfile.TemporaryDirectory() as temporary:
