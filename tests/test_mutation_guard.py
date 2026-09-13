@@ -90,7 +90,7 @@ class MutationGuardTests(unittest.TestCase):
                 destination.write_bytes(content)
                 lock["files"][relative] = {
                     "mode": template.mode,
-                    "sha256": canonical_sha256(content),
+                    "state": "present",
                 }
             lock["evaluator"] = {
                 "version": __version__,
@@ -108,7 +108,7 @@ class MutationGuardTests(unittest.TestCase):
     def _passing_identity(self, root: Path) -> RuntimeIdentity:
         environment = self.base / "released-evaluator"
         return RuntimeIdentity(
-            schema="se-harness-runtime-identity-v3",
+            schema="se-harness-runtime-identity-v4",
             passed=True,
             role="released-evaluator",
             python_executable=str(environment / "Scripts" / "python.exe"),
@@ -131,7 +131,6 @@ class MutationGuardTests(unittest.TestCase):
             pythonpath_present=False,
             python_entry_is_link=False,
             python_binary_position="within-expected-root",
-            python_binary_sha256="c" * 64,
             diagnostics=(),
         )
 
@@ -146,6 +145,27 @@ class MutationGuardTests(unittest.TestCase):
         self.assertNotIn(str(self.base), rendered)
         self.assertIn("<evaluator-root>/", rendered)
         self.assertEqual([], parsed.value["diagnostics"])
+
+    def test_ordinary_authority_records_version_without_claiming_a_payload_measurement(self):
+        root = self._write_identity_root()
+        identity = replace(self._passing_identity(root), evaluator_payload_manifest=None,
+                           evaluator_payload_sha256=None, evaluator_archive_name=None,
+                           evaluator_archive_sha256=None, entry_point_origin=None,
+                           pythonpath_present=True)
+        with mock.patch("se_harness.mutation_guard._runtime_report", return_value=identity) as inspect:
+            authority = require_mutation_authority(root, operation="create-artifact")
+        self.assertFalse(inspect.call_args.kwargs["verify_payload"])
+        self.assertEqual("origin-version", authority.evidence.value["inspection"])
+        expected = json.loads((root / ".engineering-harness.lock").read_text())["evaluator"]
+        pretty = json.dumps(authority.evidence.value, indent=4).encode()
+        self.assertEqual(authority.evidence_sha256, parse_evaluator_evidence(pretty, expected_evaluator=expected).sha256)
+        changed = json.loads(pretty)
+        changed["evaluator"]["version"] = "999.0.0"
+        with self.assertRaisesRegex(EvaluatorEvidenceError, "differs from the standard lock"):
+            parse_evaluator_evidence(json.dumps(changed).encode(), expected_evaluator=expected)
+        with self.assertRaisesRegex(EvaluatorEvidenceError, "duplicate"):
+            parse_evaluator_evidence(pretty.replace(b'"role":', b'"role": "released-evaluator", "role":'))
+
 
     def test_lock_and_upgrade_transition_failures_have_stable_diagnostics(self) -> None:
         missing = self.base / "missing-lock"
@@ -199,12 +219,9 @@ class MutationGuardTests(unittest.TestCase):
         lock["evaluator"].pop("archive_name")
         lock["evaluator"].pop("archive_sha256")
         lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-        with self.assertRaisesRegex(HarnessError, r"MG004 \(prepare-release\)"):
-            require_mutation_authority(
-                target,
-                operation="prepare-release",
-                require_archive=True,
-            )
+        with mock.patch("se_harness.mutation_guard._runtime_report", return_value=replace(self._passing_identity(target), evaluator_archive_name=None, evaluator_archive_sha256=None)):
+            authority = require_mutation_authority(target, operation="prepare-release")
+        self.assertIsNone(authority.evidence.value["evaluator"]["archive_name"])
 
     def test_evaluator_transition_applies_without_a_packet_and_retains_optional_evidence(self) -> None:
         # SPEC-REB-012 rules 2-4: the installed released evaluator is the target
@@ -349,7 +366,8 @@ class MutationGuardTests(unittest.TestCase):
         canonical = build_evaluator_evidence(self._passing_identity(root)).canonical_bytes
         value = json.loads(canonical)
         cases: list[bytes] = []
-        cases.append(json.dumps(value, indent=2, sort_keys=True).encode("utf-8"))
+        reformatted = json.dumps(value, indent=2, sort_keys=True).encode("utf-8")
+        self.assertEqual(parse_evaluator_evidence(canonical).sha256, parse_evaluator_evidence(reformatted).sha256)
         candidate = json.loads(canonical)
         candidate["role"] = "candidate-source"
         cases.append((json.dumps(candidate, separators=(",", ":"), sort_keys=True) + "\n").encode())
@@ -360,7 +378,7 @@ class MutationGuardTests(unittest.TestCase):
         traversal["origins"]["module"] = "<evaluator-root>/../outside.py"
         cases.append((json.dumps(traversal, separators=(",", ":"), sort_keys=True) + "\n").encode())
         contaminated = json.loads(canonical)
-        contaminated["environment"]["pythonpath_present"] = True
+        contaminated["environment"]["checkout_excluded"] = False
         cases.append((json.dumps(contaminated, separators=(",", ":"), sort_keys=True) + "\n").encode())
         duplicate = canonical.decode("utf-8").replace(
             '"role":"released-evaluator"',

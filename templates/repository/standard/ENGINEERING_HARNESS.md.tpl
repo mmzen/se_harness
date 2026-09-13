@@ -12,7 +12,7 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,
 This harness makes engineering authority explicit, limits execution to approved
 scope, binds assurance and release claims to exact evidence, and gives every
 actor the same deterministic next step. These goals are informative; the rules
-below and the routed policies are normative.
+below and the installed evaluator's machine policy are normative.
 
 ## Global invariants
 
@@ -67,10 +67,18 @@ the evaluator; an agent is not required to read them to act.
 
 ## Routing
 
-Each subject has one policy owner. Other documents MUST reference the owner and
-MUST NOT restate its rules.
+The installed evaluator owns executable policy. Its machine `WORKFLOW.json`
+and `QUALITY_GATES.json`, this router, and the instruction/ignore fragments are
+locked. Human explanations, artifact templates, CI and owner settings are
+editable files. Editing the selected version is not an upgrade; it must agree
+with the installation record.
 
-| Subject | Normative owner |
+An explicit upgrade keeps editable files by default. Use `--replace-file PATH`
+for each editable file that should receive the supplied template. Owner content
+beside managed fragments is preserved. The guides below explain policy; they
+do not replace the installed evaluator's decisions.
+
+| Subject | Guide and machine policy |
 | --- | --- |
 | Lifecycle states, transitions, procedures, next actions, and handoff fields | `docs/engineering/WORKFLOW.md` and its machine-readable `WORKFLOW.json` |
 | Roles, accountabilities, delegation, and reserved decisions | `docs/engineering/DECISION_RIGHTS.md` |

@@ -180,7 +180,7 @@ def _install(args: argparse.Namespace) -> int:
 
 def _upgrade(args: argparse.Namespace) -> int:
     target = ensure_target(Path(args.target), must_exist=True)
-    changes, old_lock = plan_install(target, project_name=None, mode="upgrade")
+    changes, old_lock = plan_install(target, project_name=None, mode="upgrade", replace_files=args.replace_file)
     listed = [{"action": item.action, "path": item.path} for item in changes]
     if not args.json:
         print(format_plan(changes))
@@ -207,6 +207,7 @@ def _upgrade(args: argparse.Namespace) -> int:
         old_lock,
         allow_updates=True,
         evidence_output=Path(args.evidence_output) if args.evidence_output else None,
+        replace_files=args.replace_file,
     )
     if args.json:
         _print_json(_command_result(
@@ -296,7 +297,7 @@ def _inspect_repository(args: argparse.Namespace) -> int:
 
 def _doctor(args: argparse.Namespace) -> int:
     target = ensure_target(Path(args.target), must_exist=True)
-    checks = inspect_installation(target)
+    checks = inspect_installation(target, verify_payload=True)
     if not args.json:
         for check in checks:
             print(f"{'PASS' if check.passed else 'FAIL'} {check.name}: {check.detail}")
@@ -1092,7 +1093,8 @@ def build_parser() -> argparse.ArgumentParser:
     select_work.add_argument("--json", action="store_true", help="emit one se-harness-command-result-v1 object")
     select_work.set_defaults(handler=_select_work_order)
 
-    upgrade = commands.add_parser("upgrade", help="plan or apply safe managed-file upgrades")
+    upgrade = commands.add_parser("upgrade", help="plan or apply safe harness upgrades")
+    upgrade.add_argument("--replace-file", action="append", default=[], metavar="PATH", help="replace this editable seeded file with the current template; repeat for more files")
     upgrade.add_argument("target", nargs="?", default=".")
     upgrade.add_argument("--apply", action="store_true", help="apply safe changes; customized files remain untouched")
     upgrade.add_argument(
@@ -1143,7 +1145,7 @@ def build_parser() -> argparse.ArgumentParser:
     identity.add_argument("--entry-point")
     identity.add_argument("--require-isolated-python", action="store_true")
     identity.add_argument("--require-entry-point", action="store_true")
-    identity.add_argument("--json", action="store_true", help="emit the se-harness-runtime-identity-v3 object")
+    identity.add_argument("--json", action="store_true", help="emit the se-harness-runtime-identity-v4 object")
     identity.set_defaults(handler=_identity)
 
     qualify = commands.add_parser(

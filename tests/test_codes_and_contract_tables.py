@@ -204,21 +204,11 @@ class ContractTableTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "WEX230"):
             workflow_result._validate_restitution(restitution, "completed")
 
-    def test_the_two_writers_hash_through_the_declared_digest(self) -> None:
-        content = b'{"a": 1}\n'
-        for relative in ("docs/engineering/evidence/VREC-X-001-evaluator.json", "docs/engineering/some-domain/evidence/RLS-X-001-evaluator.json"):
-            with self.subTest(relative=relative):
-                self.assertEqual(raw_sha256(content), declared_digest(relative, content))
+    def test_lock_digest_keeps_its_text_rule_and_evidence_validates_its_own_format(self):
+        from se_harness.evaluator_evidence import EvaluatorEvidenceError
         self.assertEqual(canonical_sha256(b"{\r\n}\r\n"), declared_digest(LOCK_RELATIVE, b"{\r\n}\r\n"))
-        self.assertEqual(raw_sha256(content), provenance._evidence_digest("docs/engineering/evidence/VREC-X-001-evaluator.json", content))
-        with self.assertRaises(provenance.EvidenceRefusal):
-            provenance._evidence_digest("README.md", content)
-        provenance_source = (REPOSITORY_ROOT / "se_harness" / "provenance.py").read_text(encoding="utf-8")
-        installer_source = (REPOSITORY_ROOT / "se_harness" / "installer.py").read_text(encoding="utf-8")
-        self.assertNotIn("{authority.evidence_sha256}", provenance_source)
-        self.assertEqual(2, provenance_source.count("evidence_sha256 = _evidence_digest(evaluator_evidence_path, authority.evidence_bytes)"))
-        self.assertIn("declared_digest(LOCK_NAME, lock_file.read_bytes())", installer_source)
-        self.assertNotIn("raw_sha256(lock_file", installer_source)
+        with self.assertRaises(EvaluatorEvidenceError):
+            provenance._evidence_digest("docs/engineering/evidence/VREC-X-001-evaluator.json", b'{"a": 1}\n')
 
     def test_no_package_module_keeps_a_copy_of_the_tables(self) -> None:
         offenders: list[str] = []

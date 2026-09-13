@@ -297,7 +297,7 @@ but are not diagnostics and are not listed here.
 | --- | --- |
 | `MG001` | `MG001`; `MG001: cannot read the standard config: {…}` (+6 more) |
 | `MG003` | `MG003`; `MG003: standard config and lock tool versions differ` |
-| `MG004` | `MG004`; `MG004: cannot identify the target evaluator: {…}` (+1 more) |
+| `MG004` | `MG004`; `MG004: cannot identify the target evaluator: {…}` |
 | `MG005` | `MG005` |
 | `MG006` | `MG006`; `MG006: cannot canonicalize evaluator evidence: {…}` |
 
@@ -313,7 +313,7 @@ but are not diagnostics and are not listed here.
 | `RID005` | `RID005`; `RID005: checkout boundary is required` |
 | `RID006` | `RID006`; `RID006: installed runtime launcher is inside the checkout` (+1 more) |
 | `RID007` | `RID007`; `RID007: effective import search contains the checkout` |
-| `RID008` | `RID008`; `RID008: runtime inherited PYTHONPATH` |
+| `RID008` | `RID008` |
 | `RID009` | `RID009`; `RID009: runtime enables user site-packages` |
 | `RID010` | `RID010`; `RID010: harnessctl resolves outside the environment` |
 | `RID011` | `RID011`; `RID011: harnessctl entry point is unavailable` |
@@ -345,7 +345,7 @@ but are not diagnostics and are not listed here.
 | `EPS008` | `EPS008` |
 | `EPS009` | `EPS009` |
 | `EPS010` | `EPS010` |
-| `EPS011` | `EPS011`; `Report whether this runtime can classify a path as a symbolic link or junction. Symbolic-link detection is pr…` |
+| `EPS011` | `EPS011` |
 
 ### `PRE` — evaluator-facts derivation
 

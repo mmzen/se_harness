@@ -2,9 +2,7 @@
 
 from __future__ import annotations
 
-import os
 import sys
-import sysconfig
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -104,11 +102,9 @@ def _configured_version(root: Path, operation: str) -> str:
 
 
 def _entry_point() -> Path | None:
-    scripts = Path(sysconfig.get_path("scripts"))
-    candidates = [scripts / "harnessctl"]
-    if os.name == "nt":
-        candidates.insert(0, scripts / "harnessctl.exe")
-    return next((item for item in candidates if item.is_file()), None)
+    """Check the console route only when it is the route being invoked."""
+    selected = Path(sys.argv[0]) if sys.argv else None
+    return selected if selected is not None and selected.name in {"harnessctl", "harnessctl.exe"} else None
 
 
 def _runtime_report(
@@ -117,6 +113,7 @@ def _runtime_report(
     version: str,
     payload_sha256: str,
     archive_sha256: str | None,
+    verify_payload: bool,
 ) -> RuntimeIdentity:
     return inspect_runtime_identity(
         role="released-evaluator",
@@ -126,7 +123,7 @@ def _runtime_report(
         evaluator_payload_sha256=payload_sha256,
         evaluator_wheel_sha256=archive_sha256,
         entry_point=_entry_point(),
-        require_entry_point=True,
+        verify_payload=verify_payload,
     )
 
 
@@ -135,7 +132,6 @@ def require_mutation_authority(
     *,
     operation: str,
     allow_upgrade_transition: bool = False,
-    require_archive: bool = False,
 ) -> MutationAuthority:
     """Prove released-evaluator identity before an installed-root write."""
 
@@ -167,6 +163,7 @@ def require_mutation_authority(
             version=__version__,
             payload_sha256=target_identity.payload_sha256,
             archive_sha256=target_identity.archive_sha256,
+            verify_payload=True,
         )
         transition = evaluator_transition_required(lock, target_identity)
     else:
@@ -183,17 +180,12 @@ def require_mutation_authority(
             raise _failure(MG001, operation, "the standard lock evaluator identity is incomplete")
         if archive_sha256 is not None and not isinstance(archive_sha256, str):
             raise _failure(MG001, operation, "the standard lock evaluator archive identity is invalid")
-        if require_archive and archive_sha256 is None:
-            raise _failure(
-                MG004,
-                operation,
-                "this mutation requires a locked evaluator archive identity",
-            )
         report = _runtime_report(
             root,
             version=version,
             payload_sha256=payload_sha256,
             archive_sha256=archive_sha256,
+            verify_payload=operation in {"prepare-release", "installed-root-apply", "upgrade-apply"},
         )
     if report.diagnostics:
         detail = "; ".join(

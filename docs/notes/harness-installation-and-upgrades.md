@@ -1,201 +1,101 @@
-# Installing and safely upgrading SE Harness
+# Installation and upgrades
 
-<!-- Target expertise: 5/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
+Installing the Python package makes a checker available. Updating a repository
+is a separate, explicit `harnessctl upgrade --apply` operation.
 
-> This is non-authoritative operator guidance. It does not approve repository changes. Follow `ENGINEERING_HARNESS.md`, repository policy, and accountable owner decisions when operating an installed harness.
+This guide describes the candidate behavior from WO-KIS-003. An existing
+repository keeps its installed evaluator and lock until an explicit upgrade.
+The SE Harness development repository still uses released 0.17.0.
 
-## Two things are installed
+## What is kept under control
 
-SE Harness has two related but separate installation surfaces:
+| Files | Treatment |
+| --- | --- |
+| `ENGINEERING_HARNESS.md`, machine `WORKFLOW.json` and `QUALITY_GATES.json` | Locked machine policy and router. Actual changes fail integrity checks. |
+| Marked blocks in `AGENTS.md`, `CLAUDE.md`, `.gitignore` and `.gitattributes` | Only the supplied block is locked. Owner text around it is preserved. |
+| Human policy guides, artifact templates, CI workflow and `.engineering-harness.toml` | Editable files, supplied on first installation and kept on later upgrades. |
+| Repository skill copies | Editable supplied files when using repository ownership; disposable when switching to the plugin. |
 
-1. the released Python package and `harnessctl` launcher inside a selected Python environment;
-2. the managed and owner-seeded files written into a target repository by `init`, `adopt`, or an explicitly applied upgrade.
+The installed evaluator owns executable policy. Its selected version must match
+both `[harness].tool_version` and the installation record. Editing that setting
+does not select a different checker or perform an upgrade.
 
-Updating the Python package changes the CLI and canonical distribution available in that environment. It does **not** silently rewrite a repository that was initialized or adopted earlier.
+## Install into a repository
 
-The evaluator's own scripts, the graph validator, the Explorer generator and
-the inspector, belong to the first surface only. They ship inside the package
-and are never written into a repository (`SPEC-DST-025`). Releases up to
-0.15.0 wrote eight files under `scripts/`: `validate_engineering_artifacts.py`,
-`generate_harness_dashboard.py`, `inspect_engineering_artifacts.py`,
-`select_harness_work_order.py`, `artifact_layout_registry.py`,
-`check_engineering_harness.sh`, `check_engineering_harness.ps1` and
-`harness_explorer/index.template.html`. The next applied upgrade removes them
-under the rule below for managed files that leave the managed set;
-`harnessctl validate .` and `harnessctl dashboard .` replace the two wrappers.
+Use an external Python environment containing the selected released package:
 
-The repository-managed surface includes two portable skill cores under
-`.agents/skills/`: the read-only `harness-orient` orientation skill and the
-explicit-only `harness-operator-brief` communication skill. Each core's
-`SKILL.md`, strict `skill-contract.json`, and standard-library helper are
-managed files, and a thin Claude Code adapter for `harness-orient` is
-installed under `.claude/skills/`. Every file is upgraded through
-the same ownership-aware transaction as other managed template content;
-installing only the Python package does not add them to an existing repository.
-
-After initial installation, mutating commands use the repository's `.engineering-harness.lock` as the expected released-evaluator identity. Run them from a dedicated environment outside the target checkout. The guard rejects a source checkout, editable install, wrong payload or archive, unresolved or foreign launcher, enabled user site, inherited `PYTHONPATH`, and other ambiguous origins before it creates a directory, temporary file, or formal record. Read-only planning and inspection remain available when mutation authority is unavailable.
-
-## Windows PowerShell
-
-SE Harness requires Python 3.11 or later. From the directory where you want to own the tool environment:
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install se-harness
-harnessctl --version
+```text
+python -m se_harness init /path/to/repository
+python -m se_harness doctor /path/to/repository
 ```
 
-For an exact released version:
+An existing repository keeps its editable files. The installer inserts the
+bounded instruction/ignore fragments and records observations in an adoption
+report. It does not overwrite an existing CI workflow or configure GitHub
+permissions, branch protection or publishing credentials.
 
-```powershell
-python -m pip install "se-harness==0.4.1"
+The evaluator's executable scripts ship inside its package. No executable
+copies are installed under the target's `scripts/` directory.
+
+## Review and apply an upgrade
+
+Install the exact new released package in the external environment, then:
+
+```text
+python -m se_harness upgrade /path/to/repository
+python -m se_harness upgrade /path/to/repository --apply
 ```
 
-Activation adds `.venv\Scripts` to command discovery for the current shell. The launcher remains `.venv\Scripts\harnessctl.exe`; activation does not move it. Without activation:
+Guidance, templates, CI and owner settings are kept by default, including edits
+made while an older lock treated them as managed files. To take a supplied
+replacement, name that file explicitly:
 
-```powershell
-.\.venv\Scripts\harnessctl.exe --version
+```text
+python -m se_harness upgrade /path/to/repository --replace-file docs/engineering/WORKFLOW.md
+python -m se_harness upgrade /path/to/repository --apply --replace-file docs/engineering/WORKFLOW.md
 ```
 
-If the Python launcher reports that a requested runtime is absent, install an available Python 3.11-or-later runtime first. Do not assume a version-specific alias exists merely because `python` is installed.
+Repeat `--replace-file` for each editable file to replace. An intentionally
+removed editable file stays removed unless explicitly selected. The upgrade
+updates the selected checker version while preserving other owner settings.
+Replacing customized machine policy remains a separate repair decision.
 
-## Linux and macOS
+Use `--evidence-output docs/engineering/<domain>/evidence/upgrade.json` when the
+repository needs a retained transaction record. The SE Harness development
+repository requires that record for its root upgrade workflow.
 
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install se-harness
-harnessctl --version
-```
+Writes stay inside the selected repository. Atomic replacement and bounded
+rollback protect against ordinary write failures. A fresh plan is required if
+the files changed after planning.
 
-The launcher is `.venv/bin/harnessctl` and can be invoked directly:
+## Which identity checks run
 
-```bash
-.venv/bin/harnessctl --version
-```
+Ordinary writes check the actual imported checker origin and version. They do
+not reread the complete installed package, hash the Python binary, require an
+unused console launcher or reject an ignored `PYTHONPATH`. A linked external
+environment is allowed; importing candidate source as the released checker is
+still refused.
 
-On every platform, the selected interpreter can invoke the package without relying on launcher discovery:
+Installation, upgrade, release preparation, `doctor` and explicit `identity`
+inspection check the full checker payload. Release preparation accepts an index
+installation with no receipt for the checker's original wheel. It still checks
+the installed payload and the release's required artifacts.
 
-```powershell
-python -m se_harness --version
-```
+New evaluator evidence uses schema v2 and hashes its validated canonical values.
+Equivalent JSON whitespace has the same identity; duplicate fields, changed
+required values and a wrong checker still fail. Legacy v1 evidence keeps its
+original canonical-byte rule. Published archive hashes remain byte hashes.
 
-## Initialize or adopt a repository
+There is no registry of every metadata field ending in `_sha256`. The format
+that consumes a checksum validates it. Git attributes are assessed by their
+effective values, wherever their rule is written.
 
-Run the one installation command:
+## Earlier migrations and retained history
 
-```powershell
-harnessctl init C:\path\to\repository --project-name my-project
-```
-
-- An absent or empty target receives the complete standard harness.
-- A target with content keeps its ordinary files; `init` inserts bounded managed fragments where supported and writes `docs/engineering/ADOPTION_REPORT.md` with observations. A differing ordinary file is a conflict and nothing is written.
-- `--dry-run` resolves and reports the complete plan without writing.
-- The command invents no approved product facts. Record build, test, verification, ownership, and boundary facts in the owner-controlled region of `AGENTS.md`, and establish the first formal chain through accountable review.
-
-For GitHub repositories, `init` installs one dedicated managed `.github/workflows/engineering-harness.yml`. GitHub automatically discovers it beside zero or more existing workflows; SE Harness does not edit unrelated workflow files. Workflow presence does not configure branch protection, required checks, deployment ordering, or any other hosting policy.
-
-If that exact destination already contains unknown content, installation reports a conflict and writes nothing. Preserve repository-specific CI under another workflow filename, then rerun installation. GitHub does not assign execution meaning to the filename itself.
-
-After installation:
-
-```powershell
-harnessctl doctor C:\path\to\repository
-harnessctl validate C:\path\to\repository
-harnessctl inspect C:\path\to\repository
-harnessctl dashboard C:\path\to\repository
-```
-
-Explorer is a progressive static bundle. Serve `target/harness-dashboard/` over HTTP rather than opening `index.html` directly; for example, run `python -m http.server 8000 --directory target/harness-dashboard` from the repository and open `http://localhost:8000/`.
-
-Codex discovers the canonical skills directly under `.agents/skills`. Claude
-Code discovers thin adapters under `.claude/skills`, which load the matching
-canonical core and stop if that binding is invalid. The orientation skill
-requires a structured launcher for the exact external released evaluator and
-returns its execution receipt inline; it does not install an evaluator or
-retain evidence in the target. See
-[read-only agent orientation](harness-orient.md) for the complete procedure.
-
-`harness-operator-brief` is an explicit-only, single-agent communication
-skill: on an explicit request it produces one decision-ready operator brief
-from a bounded supplied source under the managed technical-communication
-policy, and it changes no repository path. See
-[clear technical communication](technical-communication.md). The earlier
-`harness-draft-change`, `harness-execute-work-order`, and
-`harness-prepare-assurance` writing skills were retired and are no longer
-installed; the retained
-[Phase 4 writing-skill integration](agentic-execution-phase4-skills.md) and
-[Phase 3 MVP contract](agentic-execution-skills-mvp.md) notes record that
-design. The [repository host adapter guide](agentic-execution-host-adapters.md)
-explains why the Claude files are discovery-only.
-
-## Upgrade an existing installation
-
-The package-only shorthand remains useful for obtaining read-only planning and inspection behavior:
-
-```powershell
-python -m pip install --upgrade se-harness
-```
-
-That index install alone is not archive proof for an applied repository upgrade. Before apply, acquire the already-published target wheel into a directory outside the repository, independently check the digest selected by the release process, and install those exact local bytes into the external evaluator environment. A direct wheel install preserves the archive identity needed by upgrade apply and release preparation:
-
-```powershell
-python -m pip download --only-binary=:all: --no-deps "se-harness==VERSION" --dest C:\path\to\download
-Get-FileHash C:\path\to\download\se_harness-VERSION-py3-none-any.whl -Algorithm SHA256
-python -m pip install --upgrade C:\path\to\download\se_harness-VERSION-py3-none-any.whl
-```
-
-Use the equivalent `sha256sum` and path syntax on Linux or macOS. Do not treat a version string, an unverified index install, or candidate wheel as the selected archive proof.
-
-Then inspect the repository upgrade as a read-only plan:
-
-```powershell
-harnessctl upgrade C:\path\to\repository
-```
-
-Review that plan. The `--apply` form is an explicitly owner-authorized transactional mutation. Only after an accountable owner authorizes it, apply the plan and recheck integrity:
-
-```powershell
-harnessctl upgrade C:\path\to\repository --apply
-harnessctl doctor C:\path\to\repository
-```
-
-The command above remains sufficient for same-identity managed repair. If apply would change evaluator identity, it stops unless a separate approved or in-progress evaluator-upgrade work order binds the exact prior lock and immutable target identity. After reviewing the plan, the authorized transition uses a work-order-keyed evidence destination:
-
-```powershell
-harnessctl upgrade C:\path\to\repository --apply --work-order WO-... --evidence-output docs/engineering/DOMAIN/evidence/WO-...-evaluator-upgrade.json
-```
-
-Product implementation or release authorization does not authorize this later root adoption. See the [bounded evaluator recovery runbook](evaluator-recovery-runbook.md) for the maintainer-only deadlock procedure and disposable rehearsal.
-
-The apply operation is transactional: customized, conflicting, or ambiguous managed content blocks the operation without a partial managed-file update. A missing unmodified managed file may be restored when the reviewed plan classifies it as `add`. Owner-controlled content and managed fragments outside their bounded markers are preserved.
-
-The markers of a fragment follow its file's comment syntax. `.gitattributes` and, since `WO-DST-026`, `.gitignore` bound their block with `# se-harness:begin` and `# se-harness:end`, which Git reads as comments; `AGENTS.md` and `CLAUDE.md` keep the HTML-comment pair. A repository whose `.gitignore` block still carries the HTML pair is planned as `update` in `fragment` mode at its next `upgrade`, and `--apply` rewrites only the block between the markers, so every owner line outside it is byte-identical afterwards. A block edited inside is `customized`, as for any fragment, and nothing is written.
-
-This rule also covers every managed `.agents/skills/` core, Codex policy file,
-and `.claude/skills/` adapter. If a repository edits a managed skill surface,
-the upgrade plan reports it as customized and preserves the bytes. Move
-repository-specific instructions outside the managed surface or restore the
-exact locked content before reviewing a fresh upgrade plan.
-
-Installing candidate package bytes alone changes nothing in an existing
-repository: its installed skills, managed files and lock stay as the lock
-records them. A newer managed surface reaches a repository only through a
-separately governed release, an exact external evaluator installation of
-that release, and an explicit transactional repository upgrade. Until then,
-the current installed contract and lock remain authoritative; do not copy
-candidate files into place.
-
-The managed consumer workflow follows the same upgrade transaction; there is no separate consumer CI reconciliation command. An unmodified older workflow advances to the newly installed package version. A customized workflow blocks apply: move repository-specific behavior into another workflow, restore or remove the managed destination, review a fresh plan, and retry. GitHub continues running the previously committed workflow until the upgrade changes are reviewed, committed, pushed, and merged.
-
-The managed workflow runs `qualify released-root`. That command derives the expected evaluator version, archive digest, and installed-payload digest from the repository lock, proves the current environment owns those exact bytes, and then performs managed-file and complete-graph checks. A candidate template may carry newer behavior before the installed root adopts it; template availability does not itself change root authority.
-
-The lock compares canonical UTF-8 text hashes so ordinary LF/CRLF checkout representation does not create false customization. This portability rule does not excuse a real content mismatch.
-
-Schema 3 is the floor: a lock whose schema is 1 or 2 is not read by any operation, including `doctor` and `upgrade` (`WO-HUP-012`, on the owner's decision of 2026-08-30). The one diagnostic names the route — remove the stale `.engineering-harness.lock` and re-adopt the repository with `adopt`, whose existing non-overwrite behavior protects customized files. Ordinary mutation requires exact agreement with the schema-3 lock. `capture-verification` writes a canonical normalized evaluator-evidence JSON file beside the ready VREC; `prepare-release` does the same for the ready RLS and requires the locked archive name and SHA-256. Retain each evidence file with its record—editing or removing it invalidates the binding.
+Schema 3 remains the lock floor; schema 4 selects plugin-provided skills. Old
+release and verification records retain their recorded meaning. The following
+notes describe earlier migrations; they do not restore the retired restrictions
+for new operations.
 
 ### Managed files that leave the managed set are removed on upgrade
 

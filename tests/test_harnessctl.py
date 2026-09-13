@@ -136,11 +136,11 @@ class HarnessCtlTests(unittest.TestCase):
         selected = target / relative
         original = selected.read_bytes()
         selected.unlink()
-        code, output, error = invoke("upgrade", str(target), "--json")
+        code, output, error = invoke("upgrade", str(target), "--json", "--replace-file", relative)
         self.assertEqual(0, code, error)
         self.assertIn({"action": "add", "path": relative}, json.loads(output)["changes"])
         self.assertFalse(selected.exists(), "upgrade planning must stay read-only")
-        code, output, error = invoke("upgrade", str(target), "--apply", "--json")
+        code, output, error = invoke("upgrade", str(target), "--apply", "--json", "--replace-file", relative)
         self.assertEqual(0, code, output + error)
         self.assertEqual(original, selected.read_bytes())
 
@@ -265,20 +265,14 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertTrue(managed.is_file())
         self.assertIn(f'SE_HARNESS_VERSION: "{__version__}"', managed.read_text(encoding="utf-8"))
 
-    def test_adopt_rejects_unknown_dedicated_workflow_without_writes(self) -> None:
-        target = self.root / "workflow-conflict"
-        workflows = target / ".github" / "workflows"
-        workflows.mkdir(parents=True)
-        managed = workflows / "engineering-harness.yml"
-        original = b"name: Repository owned\non: [push]\n"
-        managed.write_bytes(original)
-
-        code, output, error = invoke("init", str(target))
-        self.assertEqual(1, code)
-        self.assertIn("conflict", output)
-        self.assertIn("another workflow filename", output)
-        self.assertEqual(original, managed.read_bytes())
-        self.assertFalse((target / ".engineering-harness.lock").exists())
+    def test_adopt_keeps_an_existing_dedicated_workflow(self) -> None:
+        target = self.root / "existing-workflow"
+        workflow = target / ".github/workflows/engineering-harness.yml"
+        workflow.parent.mkdir(parents=True)
+        workflow.write_bytes(b"name: Owner workflow\n")
+        code, _, error = invoke("init", str(target))
+        self.assertEqual(0, code, error)
+        self.assertEqual(b"name: Owner workflow\n", workflow.read_bytes())
 
     def test_adopt_conflict_causes_no_partial_writes(self) -> None:
         target = self.root / "conflict"
@@ -328,13 +322,13 @@ class HarnessCtlTests(unittest.TestCase):
         managed = target / "ENGINEERING_HARNESS.md"
         managed.write_text(managed.read_text(encoding="utf-8") + "\nLocal policy.\n", encoding="utf-8")
         original = managed.read_bytes()
-        missing = target / "docs/engineering/TRACEABILITY.md"
+        missing = target / "docs/engineering/QUALITY_GATES.json"
         missing.unlink()
 
         code, output, error = invoke("upgrade", str(target))
         self.assertEqual(0, code, error)
         self.assertIn("customized ENGINEERING_HARNESS.md", output)
-        self.assertIn("add        docs/engineering/TRACEABILITY.md", output)
+        self.assertIn("add        docs/engineering/QUALITY_GATES.json", output)
         self.assertFalse(missing.exists())
 
         code, output, _ = invoke("upgrade", str(target), "--apply")
@@ -344,32 +338,23 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertFalse(missing.exists())
         self.assertIn('project_name = "Stable Name"', (target / ".engineering-harness.toml").read_text(encoding="utf-8"))
 
-    def test_upgrade_migrates_unmodified_consumer_workflow_and_blocks_customization(self) -> None:
-        target = self.root / "workflow-upgrade"
+    def test_upgrade_keeps_customized_guidance_and_replaces_only_selected_files(self) -> None:
+        target = self.root / "editable-upgrade"
         self.assertEqual(0, invoke("init", str(target))[0])
-        workflow = target / ".github" / "workflows" / "engineering-harness.yml"
-        lock_path = target / ".engineering-harness.lock"
-        lock = json.loads(lock_path.read_text(encoding="utf-8"))
-        legacy = b"name: Legacy managed consumer workflow\non: [push]\n"
-        workflow.write_bytes(legacy)
-        lock["files"][".github/workflows/engineering-harness.yml"]["sha256"] = canonical_sha256(legacy)
-        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-
-        code, output, error = invoke("upgrade", str(target), "--apply")
-        self.assertEqual(0, code, error)
-        self.assertIn("update     .github/workflows/engineering-harness.yml", output)
-        self.assertIn(f'SE_HARNESS_VERSION: "{__version__}"', workflow.read_text(encoding="utf-8"))
+        paths = ["docs/engineering/WORKFLOW.md", "docs/engineering/templates/REQUIREMENT.template.md", ".github/workflows/engineering-harness.yml"]
+        for path in paths:
+            (target / path).write_bytes(b"Owner content\n")
+        config = target / ".engineering-harness.toml"
+        config.write_text(config.read_text(encoding="utf-8") + '\n[owner]\nnote = "keep"\n', encoding="utf-8")
+        self.assertEqual(0, invoke("doctor", str(target))[0])
         self.assertEqual(0, invoke("upgrade", str(target), "--apply")[0])
-
-        workflow.write_text(workflow.read_text(encoding="utf-8") + "\n# Owner edit\n", encoding="utf-8")
-        original = workflow.read_bytes()
-        missing = target / "docs" / "engineering" / "TRACEABILITY.md"
-        missing.unlink()
-        code, output, _ = invoke("upgrade", str(target), "--apply")
-        self.assertEqual(1, code)
-        self.assertIn("separate workflow", output)
-        self.assertEqual(original, workflow.read_bytes())
-        self.assertFalse(missing.exists())
+        for path in paths:
+            self.assertEqual(b"Owner content\n", (target / path).read_bytes())
+        code, _, error = invoke("upgrade", str(target), "--apply", "--replace-file", paths[0])
+        self.assertEqual(0, code, error)
+        self.assertNotEqual(b"Owner content\n", (target / paths[0]).read_bytes())
+        self.assertEqual(b"Owner content\n", (target / paths[1]).read_bytes())
+        self.assertIn('note = "keep"', config.read_text(encoding="utf-8"))
 
     def test_invalid_project_name_and_malformed_markers_fail_closed(self) -> None:
         invalid = self.root / "invalid-name"
@@ -502,22 +487,22 @@ class HarnessCtlTests(unittest.TestCase):
         target = self.root / "doctor"
         self.assertEqual(0, invoke("init", str(target))[0])
         self.assertEqual(0, invoke("doctor", str(target))[0])
-        path = target / "docs/engineering/WORKFLOW.md"
+        path = target / "docs/engineering/WORKFLOW.json"
         path.write_text("changed\n", encoding="utf-8")
         code, output, _ = invoke("doctor", str(target))
         self.assertEqual(1, code)
-        self.assertIn("FAIL managed:docs/engineering/WORKFLOW.md", output)
+        self.assertIn("FAIL managed:docs/engineering/WORKFLOW.json", output)
 
     def test_doctor_detects_stale_canonical_lock_digest(self) -> None:
         target = self.root / "stale-lock"
         self.assertEqual(0, invoke("init", str(target))[0])
         lock_path = target / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
-        lock["files"]["docs/engineering/WORKFLOW.md"]["sha256"] = "0" * 64
+        lock["files"]["docs/engineering/WORKFLOW.json"]["sha256"] = "0" * 64
         lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         code, output, _ = invoke("doctor", str(target))
         self.assertEqual(1, code)
-        self.assertIn("FAIL managed:docs/engineering/WORKFLOW.md", output)
+        self.assertIn("FAIL managed:docs/engineering/WORKFLOW.json", output)
 
     def test_doctor_detects_missing_claude_import_and_ignores_the_retired_path(self) -> None:
         target = self.root / "doctor-instructions"

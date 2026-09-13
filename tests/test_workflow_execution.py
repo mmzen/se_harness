@@ -68,7 +68,6 @@ evidence_paths = ["docs/engineering/product/evidence/WO-001-verification.md"]'''
         authority = trusted_mutation_authority(
             self.root,
             operation="prepare-release",
-            require_archive=True,
         )
         evidence_path = self.root / evaluator_evidence
         evidence_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1071,7 +1070,7 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionFixture, unittest.TestCase):
         installed = self.root / "docs/engineering/OPERATING_CARD.md"
         self.assertTrue(installed.is_file())
         lock = json.loads((self.root / ".engineering-harness.lock").read_text(encoding="utf-8"))
-        self.assertEqual("managed", lock["files"]["docs/engineering/OPERATING_CARD.md"]["mode"])
+        self.assertEqual("seed", lock["files"]["docs/engineering/OPERATING_CARD.md"]["mode"])
         code, output, error = invoke(
             "preflight", str(self.root), "--work-order", "WO-001", "--phase", "review", "--json"
         )

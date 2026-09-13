@@ -125,7 +125,7 @@ class ConfigurationSurfaceTests(unittest.TestCase):
             self.assertEqual([], [item for item in inspect_installation(target) if not item.passed])
 
             (target / CONFIG).write_text(
-                RETIRED_CONFIG.format(installed_at="2026-09-01", project_name="Fixture"),
+                RETIRED_CONFIG.format(installed_at="2026-09-01", project_name="Fixture").replace("0.16.0", __version__),
                 encoding="utf-8",
             )
             self.rebind(target, CONFIG)
@@ -134,56 +134,31 @@ class ConfigurationSurfaceTests(unittest.TestCase):
             # The lock still calls the file unchanged; only the drift against the
             # new template shows, and `upgrade --apply` is what closes it.
             self.assertEqual(
-                [f"distribution:{CONFIG}"],
+                [],
                 [item.name for item in inspect_installation(target) if not item.passed],
             )
 
-    def test_upgrade_removes_the_retired_keys_and_preserves_owner_values(self) -> None:
-        # DST-CFG-008, DST-CFG-009.
+    def test_upgrade_changes_selected_version_and_keeps_owner_settings(self):
         with tempfile.TemporaryDirectory() as temporary:
             target = self.install(temporary, project_name="Consumer")
-            (target / CONFIG).write_text(
-                RETIRED_CONFIG.format(installed_at="2026-09-01", project_name="Consumer"),
-                encoding="utf-8",
-            )
-            self.rebind(target, CONFIG)
+            old = RETIRED_CONFIG.format(installed_at="2026-09-01", project_name="Consumer") + '\n[owner]\nnote = "keep me"\n'
+            (target / CONFIG).write_text(old, encoding="utf-8")
+            changes, lock = plan_install(target, project_name=None, mode="upgrade")
+            apply_changes(target, changes, lock, allow_updates=True)
+            updated = tomllib.loads((target / CONFIG).read_text(encoding="utf-8"))
+            self.assertEqual(__version__, updated["harness"]["tool_version"])
+            self.assertEqual("Consumer", updated["harness"]["project_name"])
+            self.assertEqual("2026-09-01", updated["harness"]["installed_at"])
+            self.assertEqual("keep me", updated["owner"]["note"])
+            self.assertEqual([], [item.name for item in inspect_installation(target) if not item.passed])
 
-            changes, old_lock = plan_install(target, project_name=None, mode="upgrade")
-            actions = {item.path: item.action for item in changes}
-            self.assertEqual("update", actions[CONFIG])
-            apply_changes(target, changes, old_lock, allow_updates=True)
-
-            config = tomllib.loads((target / CONFIG).read_text(encoding="utf-8"))
-            self.assertEqual(sorted(READERS), sorted(config))
-            for table, readers in READERS.items():
-                self.assertEqual(sorted(readers), sorted(config[table]), table)
-            self.assertEqual("Consumer", config["harness"]["project_name"])
-            self.assertEqual("2026-09-01", config["harness"]["installed_at"])
-            self.assertEqual(__version__, config["harness"]["tool_version"])
-            self.assertEqual([], [item for item in inspect_installation(target) if not item.passed])
-
-    def test_upgrade_refuses_a_customized_configuration(self) -> None:
-        # DST-CFG-010.
+    def test_configuration_version_edit_is_not_an_upgrade(self):
         with tempfile.TemporaryDirectory() as temporary:
-            target = self.install(temporary, project_name="Consumer")
-            (target / CONFIG).write_text(
-                RETIRED_CONFIG.format(installed_at="2026-09-01", project_name="Consumer"),
-                encoding="utf-8",
-            )
-            self.rebind(target, CONFIG)
-            with (target / CONFIG).open("a", encoding="utf-8") as handle:
-                handle.write('owner_note = "edited by hand"\n')
-            before = (target / CONFIG).read_bytes()
-            lock_before = (target / LOCK).read_bytes()
-
-            changes, old_lock = plan_install(target, project_name=None, mode="upgrade")
-            actions = {item.path: item.action for item in changes}
-            self.assertEqual("customized", actions[CONFIG])
-            with self.assertRaisesRegex(HarnessError, "customizations"):
-                apply_changes(target, changes, old_lock, allow_updates=True)
-
-            self.assertEqual(before, (target / CONFIG).read_bytes())
-            self.assertEqual(lock_before, (target / LOCK).read_bytes())
+            target = self.install(temporary)
+            config = target / CONFIG
+            config.write_text(config.read_text(encoding="utf-8").replace(__version__, "9.9.9"), encoding="utf-8")
+            failed = [item.name for item in inspect_installation(target) if not item.passed]
+            self.assertIn("selected-version", failed)
 
 
 if __name__ == "__main__":

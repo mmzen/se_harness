@@ -96,7 +96,7 @@ class TwinTests(unittest.TestCase):
         self.assertEqual(set(evaluator_evidence.EVIDENCE_REASONS), set(validate_engineering_artifacts.EVIDENCE_MESSAGES))
         self.assertIs(validate_engineering_artifacts.validate_evaluator_evidence, evaluator_evidence.validate_evaluator_evidence)
         valid = {
-            "schema": evaluator_evidence.EVIDENCE_SCHEMA,
+            "schema": evaluator_evidence.LEGACY_EVIDENCE_SCHEMA,
             "role": "released-evaluator",
             "evaluator": {
                 "version": "0.16.0", "payload_manifest": "se-harness-installed-payload-v1",

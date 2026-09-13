@@ -46,7 +46,7 @@ from se_harness.codes import (
 )
 
 
-IDENTITY_SCHEMA = "se-harness-runtime-identity-v3"
+IDENTITY_SCHEMA = "se-harness-runtime-identity-v4"
 ROLES = {"released-evaluator", "candidate-source", "candidate-package"}
 #: Roles whose launcher must sit inside its own declared environment and
 #: outside the checkout. Only these roles turn an interpreter-safety refusal
@@ -89,7 +89,6 @@ class RuntimeIdentity:
     pythonpath_present: bool
     python_entry_is_link: bool | None
     python_binary_position: str | None
-    python_binary_sha256: str | None
     diagnostics: tuple[IdentityDiagnostic, ...]
 
     def to_dict(self) -> dict[str, object]:
@@ -158,6 +157,7 @@ def inspect_runtime_identity(
     entry_point: Path | None = None,
     require_isolated_python: bool = False,
     require_entry_point: bool = False,
+    verify_payload: bool = True,
 ) -> RuntimeIdentity:
     """Inspect and verify one declared runtime role without exposing environment data."""
 
@@ -169,7 +169,7 @@ def inspect_runtime_identity(
     templates = _resolved(template_root())
     executable = _absolute(Path(sys.executable))
     runtime_prefix = _resolved(Path(sys.prefix))
-    discovered_entry_point = shutil.which("harnessctl") or shutil.which("harnessctl.exe")
+    discovered_entry_point = (shutil.which("harnessctl") or shutil.which("harnessctl.exe")) if require_entry_point else None
     resolved_entry_point = (
         _resolved(entry_point)
         if entry_point is not None
@@ -192,7 +192,6 @@ def inspect_runtime_identity(
     entry_refusal: str | None = None
     entry_is_link: bool | None = None
     binary_position: str | None = None
-    binary_sha256: str | None = None
     try:
         entry = interpreter_safety.evaluate(
             executable,
@@ -204,7 +203,6 @@ def inspect_runtime_identity(
     else:
         entry_is_link = entry.entry_is_link
         binary_position = entry.binary_position
-        binary_sha256 = entry.binary_sha256
 
     if role not in ROLES:
         diagnostics.append(IdentityDiagnostic(RID001, "role", "unsupported runtime role"))
@@ -215,10 +213,6 @@ def inspect_runtime_identity(
                 "harness_version",
                 f"resolved {__version__!r}; expected {expected_version!r}",
             )
-        )
-    if pythonpath_present:
-        diagnostics.append(
-            IdentityDiagnostic(RID008, "PYTHONPATH", "runtime inherited PYTHONPATH")
         )
     if user_site_enabled:
         diagnostics.append(
@@ -243,7 +237,7 @@ def inspect_runtime_identity(
             diagnostics.append(
                 IdentityDiagnostic(RID004, "runtime_prefix", "runtime prefix differs from the expected environment")
             )
-        if not _lexically_within(executable, expected):
+        if not _within(executable.parent, expected):
             diagnostics.append(
                 IdentityDiagnostic(RID004, "python_executable", "virtualenv launcher is outside its environment")
             )
@@ -276,7 +270,7 @@ def inspect_runtime_identity(
             diagnostics.append(
                 IdentityDiagnostic(RID010, "entry_point_origin", "harnessctl resolves outside the environment")
             )
-        if require_entry_point and resolved_entry_point is None:
+        if (require_entry_point or entry_point is not None) and (resolved_entry_point is None or not resolved_entry_point.is_file()):
             diagnostics.append(
                 IdentityDiagnostic(RID011, "entry_point_origin", "harnessctl entry point is unavailable")
             )
@@ -293,7 +287,7 @@ def inspect_runtime_identity(
                 IdentityDiagnostic(RID018, "distribution_origin", "source distribution metadata resolves outside the checkout")
             )
 
-    if role == "released-evaluator":
+    if role == "released-evaluator" and verify_payload:
         try:
             evaluator = installed_evaluator_identity()
         except EvaluatorIdentityError as exc:
@@ -359,6 +353,9 @@ def inspect_runtime_identity(
                 IdentityDiagnostic(RID023, "evaluator_payload_sha256", "candidate identity cannot claim a released evaluator payload")
             )
 
+    if role == "released-evaluator" and not verify_payload and candidate_commit is not None:
+        diagnostics.append(IdentityDiagnostic(RID014, "candidate_commit", "released evaluator identity cannot claim a candidate commit"))
+
     if require_isolated_python and not isolated:
         diagnostics.append(
             IdentityDiagnostic(RID017, "isolated_python", "Python isolated mode is required")
@@ -389,7 +386,6 @@ def inspect_runtime_identity(
         pythonpath_present=pythonpath_present,
         python_entry_is_link=entry_is_link,
         python_binary_position=binary_position,
-        python_binary_sha256=binary_sha256,
         diagnostics=ordered,
     )
 

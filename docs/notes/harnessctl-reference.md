@@ -493,3 +493,16 @@ To capture while keeping local edits, add `--candidate-commit COMMIT` and put
 `--test-command EXECUTABLE ARGUMENTS...` last. Capture tests that commit in a
 temporary checkout and retains the command result in the record. A failed test
 writes no record; uncommitted caller content is not used as tested evidence.
+
+## Editable files and lightweight identity (WO-KIS-003)
+
+`harnessctl upgrade TARGET --replace-file PATH` previews replacement of one
+editable supplied file. Add `--apply` to write it; repeat the option for more
+files. Other guidance, templates, CI and owner settings are kept. The selected
+checker version still has to match the installation record.
+
+Ordinary writes use checker origin/version. `doctor`, explicit `identity`,
+installation, upgrade and release preparation check the full installed payload.
+The module route works without a console launcher. Runtime identity schema v4
+reports Python version without hashing the executable. New evaluator evidence
+schema v2 binds canonical validated values; legacy schema v1 remains readable.

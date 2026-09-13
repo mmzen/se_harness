@@ -12,11 +12,10 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 
-from se_harness.integrity import atomic_create_bytes, raw_sha256
+from se_harness.integrity import atomic_create_bytes
 from se_harness import mutation_guard
 from se_harness._process import run as _launch, text as _text
 from se_harness.gate_source import DELEGATED_RIGHTS, DELEGATED_ROLE, DelegationError, authorize_delegated_right, delegated_reason
-from se_harness.hash_bound import HashBoundError, declared_digest
 from se_harness.artifact_layout import ID_PATTERN, common_artifact_domain, repository_record_relative_path, validate_domain
 from se_harness.engine import validate_engineering_artifacts
 from se_harness.engine.validate_engineering_artifacts import evidence_work_order_keys
@@ -309,12 +308,10 @@ def _evaluator_evidence_output(
 
 
 def _evidence_digest(relative: str, content: bytes) -> str:
-    """ECP-PRM-022: the evidence digest under the mode `hash_bound_classes.json` declares for its path."""
+    from se_harness.evaluator_evidence import parse_evaluator_evidence
+    return parse_evaluator_evidence(content).sha256
 
-    try:
-        return declared_digest(relative, content)
-    except HashBoundError as exc:
-        raise EvidenceRefusal(f"cannot hash evaluator evidence {relative}: {exc}") from exc
+
 
 
 def _write_record_and_evidence(
@@ -561,7 +558,6 @@ def prepare_release(
     authority = mutation_guard.require_mutation_authority(
         root,
         operation="prepare-release",
-        require_archive=True,
     )
     from se_harness.workflow_compliance import ensure_governed_checkpoint
 

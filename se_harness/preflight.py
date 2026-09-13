@@ -191,7 +191,7 @@ def _hash_bound_checks(target: Path) -> list[InstallationCheck]:
     return [InstallationCheck(*result) for result in assess_hash_bound(target)]
 
 
-def inspect_installation(target: Path) -> list[InstallationCheck]:
+def inspect_installation(target: Path, *, verify_payload: bool = False) -> list[InstallationCheck]:
     """Return deterministic read-only installation and managed-integrity checks."""
 
     target = ensure_target(target, must_exist=True)
@@ -226,6 +226,15 @@ def inspect_installation(target: Path) -> list[InstallationCheck]:
 
     try:
         lock = load_lock(target)
+        from se_harness import __version__
+        from se_harness.integrity import read_toml
+        configured_version = read_toml(target / CONFIG_NAME).get("harness", {}).get("tool_version")
+        checks.append(InstallationCheck("selected-version", configured_version == lock.get("tool_version") == __version__, "config, installation and running checker versions must agree"))
+        if verify_payload:
+            from se_harness.evaluator_identity import installed_evaluator_identity
+            observed = installed_evaluator_identity()
+            expected = lock.get("evaluator", {})
+            checks.append(InstallationCheck("evaluator-payload", observed.version == expected.get("version") and observed.payload_sha256 == expected.get("payload_sha256"), "installed checker payload matches its installation record"))
         changes, _ = plan_install(target, project_name=None, mode="upgrade")
         desired_by_path = {item.path: item for item in changes}
         expected_by_path = {item.target.as_posix(): item for item in effective_template_files(lock)}
@@ -295,7 +304,7 @@ def inspect_installation(target: Path) -> list[InstallationCheck]:
         for relative in sorted(set(lock_files) - set(expected_by_path)):
             safe_destination(target, Path(relative))
             checks.append(InstallationCheck(f"lock-extra:{relative}", False, "not in standard template"))
-    except (OSError, UnicodeError, IntegrityError, HarnessError, AttributeError) as exc:
+    except (OSError, UnicodeError, IntegrityError, HarnessError, AttributeError, ValueError) as exc:
         checks.append(InstallationCheck("lock-schema", False, str(exc)))
     return sorted(checks) + _hash_bound_checks(target)
 

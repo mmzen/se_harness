@@ -151,7 +151,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertEqual("managed", lock["files"]["ENGINEERING_HARNESS.md"]["mode"])
         self.assertEqual("seed", lock["files"]["docs/engineering/README.md"]["mode"])
         self.assertEqual(
-            "managed", lock["files"]["docs/engineering/TECHNICAL_COMMUNICATION.md"]["mode"]
+            "seed", lock["files"]["docs/engineering/TECHNICAL_COMMUNICATION.md"]["mode"]
         )
         self.assertTrue((target / "docs/engineering/TECHNICAL_COMMUNICATION.md").is_file())
         self.assertNotIn("docs/engineering/REPOSITORY_CONTEXT.md", lock["files"])
@@ -315,14 +315,14 @@ class InstructionArchitectureTests(unittest.TestCase):
         )
         lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
-        code, output, error = invoke("upgrade", str(target), "--apply")
+        code, output, error = invoke("upgrade", str(target), "--apply", "--replace-file", "docs/engineering/WORKFLOW.md")
         self.assertEqual(0, code, error)
         self.assertIn("update     ENGINEERING_HARNESS.md", output)
         self.assertIn("update     docs/engineering/WORKFLOW.md", output)
         self.assertEqual(desired_router, router_path.read_text(encoding="utf-8"))
         self.assertEqual(desired_workflow, workflow_path.read_text(encoding="utf-8"))
         first_lock = lock_path.read_bytes()
-        self.assertEqual(0, invoke("upgrade", str(target), "--apply")[0])
+        self.assertEqual(0, invoke("upgrade", str(target), "--apply", "--replace-file", "docs/engineering/WORKFLOW.md")[0])
         self.assertEqual(first_lock, lock_path.read_bytes())
 
     def test_router_responsibility_refinement_upgrades_safely(self) -> None:
@@ -388,139 +388,22 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertIn(WORKFLOW_REVIEW_STEP, workflow)
         self.assertNotIn(OLD_WORKFLOW_REVIEW_STEP, workflow)
 
-    def test_review_routing_upgrade_is_transactional_and_idempotent(self) -> None:
-        target = self.installed_target("prior-review-routing")
-        router_path = target / "ENGINEERING_HARNESS.md"
-        workflow_path = target / "docs" / "engineering" / "WORKFLOW.md"
-        desired_router = router_path.read_text(encoding="utf-8")
-        desired_workflow = workflow_path.read_text(encoding="utf-8")
-        prior_router = desired_router.replace(ROUTER_REVIEW_SUMMARY, OLD_REVIEW_PROCEDURE)
-        prior_workflow = desired_workflow.replace(WORKFLOW_REVIEW_STEP, OLD_WORKFLOW_REVIEW_STEP)
-        self.assertNotEqual(desired_router, prior_router)
-        self.assertNotEqual(desired_workflow, prior_workflow)
-        router_path.write_text(prior_router, encoding="utf-8")
-        workflow_path.write_text(prior_workflow, encoding="utf-8")
+
+    def test_old_locked_guidance_becomes_editable_without_losing_owner_content(self):
+        target = self.installed_target("old-locked-guidance")
+        relative = "docs/engineering/README.md"
+        path = target / relative
+        path.write_bytes(b"Owner-edited index\n")
         lock_path = target / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
-        lock["files"]["ENGINEERING_HARNESS.md"]["sha256"] = canonical_sha256(
-            prior_router.encode("utf-8")
-        )
-        lock["files"]["docs/engineering/WORKFLOW.md"]["sha256"] = canonical_sha256(
-            prior_workflow.encode("utf-8")
-        )
-        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-
-        code, output, error = invoke("upgrade", str(target), "--apply")
+        lock["files"][relative] = {"mode": "managed", "sha256": canonical_sha256(b"Original supplied index\n")}
+        lock_path.write_text(json.dumps(lock), encoding="utf-8")
+        code, _, error = invoke("upgrade", str(target), "--apply")
         self.assertEqual(0, code, error)
-        self.assertIn("update     ENGINEERING_HARNESS.md", output)
-        self.assertIn("update     docs/engineering/WORKFLOW.md", output)
-        self.assertEqual(desired_router, router_path.read_text(encoding="utf-8"))
-        self.assertEqual(desired_workflow, workflow_path.read_text(encoding="utf-8"))
-        first_lock = lock_path.read_bytes()
-        self.assertEqual(0, invoke("upgrade", str(target), "--apply")[0])
-        self.assertEqual(first_lock, lock_path.read_bytes())
-
-        customized = self.installed_target("customized-review-routing")
-        customized_router = customized / "ENGINEERING_HARNESS.md"
-        customized_workflow = customized / "docs" / "engineering" / "WORKFLOW.md"
-        desired_router = customized_router.read_text(encoding="utf-8")
-        desired_workflow = customized_workflow.read_text(encoding="utf-8")
-        prior_router = desired_router.replace(ROUTER_REVIEW_SUMMARY, OLD_REVIEW_PROCEDURE)
-        prior_workflow = desired_workflow.replace(WORKFLOW_REVIEW_STEP, OLD_WORKFLOW_REVIEW_STEP)
-        customized_router.write_text(prior_router, encoding="utf-8")
-        customized_workflow.write_text(
-            prior_workflow + "\nRepository-local edit inside managed workflow.\n",
-            encoding="utf-8",
-        )
-        customized_lock_path = customized / ".engineering-harness.lock"
-        customized_lock = json.loads(customized_lock_path.read_text(encoding="utf-8"))
-        customized_lock["files"]["ENGINEERING_HARNESS.md"]["sha256"] = canonical_sha256(
-            prior_router.encode("utf-8")
-        )
-        customized_lock["files"]["docs/engineering/WORKFLOW.md"]["sha256"] = canonical_sha256(
-            prior_workflow.encode("utf-8")
-        )
-        customized_lock_path.write_text(
-            json.dumps(customized_lock, indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
-        )
-        original_router = customized_router.read_bytes()
-        original_workflow = customized_workflow.read_bytes()
-        original_lock = customized_lock_path.read_bytes()
-
-        code, output, error = invoke("upgrade", str(customized), "--apply")
-        self.assertEqual(1, code)
-        self.assertIn("customized docs/engineering/WORKFLOW.md", output)
-        self.assertIn("no files were written", output)  # ECP-CLI-005: the failed result is on standard output
-        self.assertEqual(original_router, customized_router.read_bytes())
-        self.assertEqual(original_workflow, customized_workflow.read_bytes())
-        self.assertEqual(original_lock, customized_lock_path.read_bytes())
-
-    def test_managed_readme_to_seed_migration_is_safe_and_transactional(self) -> None:
-        target = self.installed_target("exact")
-        readme = target / "docs" / "engineering" / "README.md"
-        old_managed = b"# Old managed engineering index\n"
-        readme.write_bytes(old_managed)
-        lock_path = target / ".engineering-harness.lock"
-        lock = json.loads(lock_path.read_text(encoding="utf-8"))
-        lock["files"]["docs/engineering/README.md"] = {
-            "mode": "managed",
-            "sha256": canonical_sha256(old_managed),
-        }
-        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-
-        changes, _ = plan_install(target, project_name=None, mode="upgrade")
-        action = {item.path: item.action for item in changes}
-        self.assertEqual("update", action["docs/engineering/README.md"])
-        code, output, error = invoke("upgrade", str(target), "--apply")
-        self.assertEqual(0, code, error)
-        self.assertIn("update     docs/engineering/README.md", output)
-        self.assertIn("Repository-owned after installation", readme.read_text(encoding="utf-8"))
-        migrated = json.loads(lock_path.read_text(encoding="utf-8"))
-        self.assertEqual({"mode": "seed", "state": "present"}, migrated["files"]["docs/engineering/README.md"])
-        self.assertEqual(0, invoke("upgrade", str(target), "--apply")[0])
-
-        customized = self.installed_target("customized")
-        customized_readme = customized / "docs" / "engineering" / "README.md"
-        customized_readme.write_bytes(old_managed + b"Owner customization.\n")
-        customized_lock_path = customized / ".engineering-harness.lock"
-        customized_lock = json.loads(customized_lock_path.read_text(encoding="utf-8"))
-        customized_lock["files"]["docs/engineering/README.md"] = {
-            "mode": "managed",
-            "sha256": canonical_sha256(old_managed),
-        }
-        customized_lock_path.write_text(
-            json.dumps(customized_lock, indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
-        )
-        missing = customized / "docs" / "engineering" / "TRACEABILITY.md"
-        missing.unlink()
-        original_readme = customized_readme.read_bytes()
-        original_lock = customized_lock_path.read_bytes()
-
-        code, output, error = invoke("upgrade", str(customized), "--apply")
-        self.assertEqual(1, code)
-        self.assertIn("customized docs/engineering/README.md", output)
-        self.assertIn("no files were written", output)  # ECP-CLI-005: the failed result is on standard output
-        self.assertEqual(original_readme, customized_readme.read_bytes())
-        self.assertEqual(original_lock, customized_lock_path.read_bytes())
-        self.assertFalse(missing.exists())
-
-        # WO-HUP-012 (HUP-LSF-001): a schema-1 lock is no longer planned over;
-        # the read refuses with the floor diagnostic and nothing is written.
-        legacy = self.installed_target("legacy-newlines")
-        legacy_lock_path = legacy / ".engineering-harness.lock"
-        legacy_lock = json.loads(legacy_lock_path.read_text(encoding="utf-8"))
-        legacy_lock["schema"] = 1
-        legacy_lock.pop("hash_algorithm", None)
-        legacy_lock.pop("hash_mode", None)
-        legacy_lock.pop("evaluator", None)
-        legacy_lock_path.write_text(
-            json.dumps(legacy_lock, indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
-        )
-        with self.assertRaisesRegex(HarnessError, r"predates the supported floor \(schema 3\)"):
-            plan_install(legacy, project_name=None, mode="upgrade")
+        self.assertEqual(b"Owner-edited index\n", path.read_bytes())
+        self.assertEqual("seed", json.loads(lock_path.read_text(encoding="utf-8"))["files"][relative]["mode"])
+        self.assertEqual(0, invoke("upgrade", str(target), "--apply", "--replace-file", relative)[0])
+        self.assertNotEqual(b"Owner-edited index\n", path.read_bytes())
 
     def test_preflight_returns_deterministic_reading_manifest_without_writes(self) -> None:
         target = self.installed_target()
@@ -828,7 +711,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertFalse((REPOSITORY_ROOT / "se_harness/skills").exists())
         lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
         for relative in ("SKILL.md", "scripts/orient.py", "skill-contract.json"):
-            self.assertEqual("managed", lock["files"][f".agents/skills/harness-orient/{relative}"]["mode"])
+            self.assertEqual("seed", lock["files"][f".agents/skills/harness-orient/{relative}"]["mode"])
 
         # WO-ECP-006 (REQ-ECP-014): the three writing skills that stubbed the evaluator
         # are retired; the operator brief is the one remaining scripted skill beside orient.
@@ -878,7 +761,7 @@ class InstructionArchitectureTests(unittest.TestCase):
                 else:
                     self.assertFalse((root / "agents/openai.yaml").exists())
                 for relative in expected_files:
-                    self.assertEqual("managed", lock["files"][f".agents/skills/{name}/{relative}"]["mode"])
+                    self.assertEqual("seed", lock["files"][f".agents/skills/{name}/{relative}"]["mode"])
 
         claude_root = target / ".claude/skills"
         self.assertEqual(
@@ -892,7 +775,7 @@ class InstructionArchitectureTests(unittest.TestCase):
                 raw = adapter.read_text(encoding="utf-8")
                 self.assertIn(f"canonical-path: .agents/skills/{name}", raw)
                 self.assertEqual(name != "harness-orient", "disable-model-invocation: true" in raw)
-                self.assertEqual("managed", lock["files"][f".claude/skills/{name}/SKILL.md"]["mode"])
+                self.assertEqual("seed", lock["files"][f".claude/skills/{name}/SKILL.md"]["mode"])
 
 
 AGENTS = REPOSITORY_ROOT / "AGENTS.md"
@@ -976,7 +859,7 @@ class OwnerInstructionRegionTests(unittest.TestCase):
         # root's version, not to this test. It is derived, never pinned (SPEC-TST-002
         # TST-HYG-015): every path the root manages is a managed template of the candidate,
         # and the root manages at least one file.
-        candidate_managed = {item.target.as_posix() for item in template_files() if item.mode == "managed"}
+        candidate_managed = {item.target.as_posix() for item in template_files()}
         self.assertTrue(managed)
         self.assertEqual([], sorted(set(managed) - candidate_managed))
         self.assertIn("docs/engineering/", region)
@@ -1080,7 +963,7 @@ class AgentDirectiveSurfaceRouterTests(unittest.TestCase):
         self.assertTrue(card.is_file())
         self.assertLessEqual(len(card.read_bytes()), 1024)
         lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
-        self.assertEqual("managed", lock["files"]["docs/engineering/OPERATING_CARD.md"]["mode"])
+        self.assertEqual("seed", lock["files"]["docs/engineering/OPERATING_CARD.md"]["mode"])
 
     def test_review_preflight_reports_an_orphaned_ready_record_for_the_selected_work_order(self) -> None:
         import shutil

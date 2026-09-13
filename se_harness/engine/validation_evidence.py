@@ -284,16 +284,13 @@ def _validate_evaluator_evidence_binding(
     if not raw or len(raw) > MAX_EVIDENCE_BYTES:
         _evaluator_binding_error(artifact, errors, repository_root, "evaluator evidence size is invalid")
         return
-    if raw_sha256(raw) != raw_digest:
-        _evaluator_binding_error(artifact, errors, repository_root, "evaluator evidence digest does not match its bytes")
-        return
     try:
         value = json.loads(raw.decode("utf-8"), object_pairs_hook=unique_evidence_object)
     except (UnicodeDecodeError, json.JSONDecodeError, ValueError) as exc:
         _evaluator_binding_error(artifact, errors, repository_root, f"invalid evaluator evidence JSON: {exc}")
         return
     canonical = canonical_evidence_bytes(value)
-    if raw != canonical or not isinstance(value, dict):
+    if not isinstance(value, dict) or (value.get("schema") == "se-harness-evaluator-evidence-v1" and raw != canonical):
         _evaluator_binding_error(artifact, errors, repository_root, "evaluator evidence bytes are not canonical")
         return
     # ECP-ENG-006: one validator of the document; the engine renders its own message per reason.
@@ -301,6 +298,9 @@ def _validate_evaluator_evidence_binding(
         validate_evaluator_evidence(value, require_archive=require_archive, require_isolated_python=True)
     except EvaluatorEvidenceError as exc:
         _evaluator_binding_error(artifact, errors, repository_root, EVIDENCE_MESSAGES.get(exc.reason, str(exc)))
+        return
+    if raw_sha256(canonical) != raw_digest:
+        _evaluator_binding_error(artifact, errors, repository_root, "evaluator evidence digest does not match its values")
         return
     if not match_current_lock:
         return
@@ -327,8 +327,10 @@ def _validate_evaluator_evidence_binding(
     ):
         _evaluator_binding_error(artifact, errors, repository_root, "standard evaluator lock identity is invalid")
         return
-    if value["evaluator"] != normalize_evaluator_identity(expected_evaluator):
-        _evaluator_binding_error(artifact, errors, repository_root, EVIDENCE_MESSAGES["lock"])
+    try:
+        validate_evaluator_evidence(value, expected_evaluator=expected_evaluator)
+    except EvaluatorEvidenceError as exc:
+        _evaluator_binding_error(artifact, errors, repository_root, EVIDENCE_MESSAGES.get(exc.reason, str(exc)))
 
 
 def validate_type_specific_metadata(artifacts: list[Artifact], report_root: Path) -> list[Diagnostic]:

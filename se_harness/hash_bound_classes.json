@@ -1,73 +1,21 @@
 {
   "classes": [
     {
-      "bindings": [
-        "evaluator_evidence_sha256",
-        "preparation_view_evidence_sha256"
-      ],
       "id": "evaluator-evidence",
       "mode": "raw",
       "patterns": [
         "docs/engineering/**/evidence/*.json"
       ],
-      "region": "template",
       "required_attribute": "text eol=lf"
     },
     {
-      "bindings": [
-        "from_lock_sha256",
-        "prior_lock_sha256"
-      ],
       "id": "standard-lock",
       "mode": "utf8-text-lf-v1",
       "patterns": [
         ".engineering-harness.lock"
       ],
-      "region": "template",
       "required_attribute": null
     }
   ],
-  "schema": "se-harness-hash-bound-classes-v1",
-  "unbound_digest_fields": [
-    {
-      "field": "artifact_snapshot_sha256",
-      "reason": "generated dashboard manifest; not committed text"
-    },
-    {
-      "field": "build_recipe_sha256",
-      "reason": "repository-owned release recipe digest; validated by repository policy"
-    },
-    {
-      "field": "checksums_sha256",
-      "reason": "uncommitted release-bundle checksum text"
-    },
-    {
-      "field": "evaluator_archive_sha256",
-      "reason": "binary wheel archive"
-    },
-    {
-      "field": "implementation_sha256",
-      "reason": "bound in harness data; pinned by owner-controlled gitattributes content"
-    },
-    {
-      "field": "sdist_sha256",
-      "reason": "binary source archive"
-    },
-    {
-      "field": "source_manifest_sha256",
-      "reason": "uncommitted release-bundle manifest text"
-    },
-    {
-      "field": "target_archive_sha256",
-      "reason": "binary wheel archive"
-    },
-    {
-      "field": "target_payload_sha256",
-      "reason": "installed payload manifest digest; not a committed file"
-    },
-    {
-      "field": "wheel_sha256",
-      "reason": "binary wheel archive"
-    }
-  ]
+  "schema": "se-harness-hash-bound-classes-v1"
 }

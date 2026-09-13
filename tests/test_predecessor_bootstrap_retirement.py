@@ -298,25 +298,6 @@ class RetainedHistoryTests(unittest.TestCase):
                     fields[digest_field], hashlib.sha256(bound.read_bytes()).hexdigest()
                 )
 
-    def test_the_hash_bound_declaration_still_carries_the_retired_path_fields(self) -> None:
-        # Product-source read (TST-HYG-011): SPEC-REB-013 rule 8 and VER-REB-013 case 5, the
-        # retained bindings keep verifying after the producer is gone.
-        # Retiring the producer must not retire the binding: an unclaimed digest
-        # field in a retained record would stop being checked at all.
-        declaration = (REPOSITORY_ROOT / "se_harness" / "hash_bound_classes.json").read_text(
-            encoding="utf-8"
-        )
-        for field in (
-            "evaluator_evidence_sha256",
-            "preparation_view_evidence_sha256",
-            "from_lock_sha256",
-        ):
-            with self.subTest(field=field):
-                self.assertIn(f'"{field}"', declaration)
-        hash_bound = (REPOSITORY_ROOT / "se_harness" / "hash_bound.py").read_text(encoding="utf-8")
-        for module in DELETED_MODULES:
-            with self.subTest(module=module):
-                self.assertNotIn(module, hash_bound)
 
     def test_the_predecessor_lock_digest_of_the_closed_contract_is_unchanged(self) -> None:
         fields = _fields("docs/engineering/release-0-6-0/release/REL-SEH-011.md")

@@ -66,7 +66,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                 ],
                 [item.path for item in skill_changes],
             )
-            self.assertTrue(all(item.mode == "managed" and item.action == "add" for item in skill_changes))
+            self.assertTrue(all(item.mode == "seed" and item.action == "add" for item in skill_changes))
             adapter_changes = [item for item in changes if item.path.startswith(".claude/skills/")]
             self.assertEqual(
                 [
@@ -74,7 +74,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                 ],
                 [item.path for item in adapter_changes],
             )
-            self.assertTrue(all(item.mode == "managed" and item.action == "add" for item in adapter_changes))
+            self.assertTrue(all(item.mode == "seed" and item.action == "add" for item in adapter_changes))
 
             apply_changes(target, changes, old_lock, allow_updates=False)
             for name in ("harness-orient", "harness-operator-brief"):
@@ -85,7 +85,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                 self.assertEqual(name, contract["name"])
             lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
             self.assertTrue(
-                all(lock["files"][item.path]["mode"] == "managed" for item in skill_changes + adapter_changes)
+                all(lock["files"][item.path]["mode"] == "seed" for item in skill_changes + adapter_changes)
             )
             replay, _ = plan_install(target, project_name=None, mode="upgrade")
             replay_actions = {item.path: item.action for item in replay}
@@ -125,7 +125,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             }
             self.assertEqual(orientation_before, orientation_after)
             lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
-            self.assertTrue(all(lock["files"][relative]["mode"] == "managed" for relative in expected_additions))
+            self.assertTrue(all(lock["files"][relative]["mode"] == "seed" for relative in expected_additions))
 
     def test_standard_upgrade_reports_customized_skills_without_overwriting_them(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -146,7 +146,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             changes, _ = plan_install(target, project_name=None, mode="upgrade")
             actions = {item.path: item.action for item in changes}
             for relative, customized in customized_files.items():
-                self.assertEqual("customized", actions[relative])
+                self.assertEqual("unchanged", actions[relative])
                 self.assertEqual(customized, (target / relative).read_bytes())
 
     def test_standard_upgrade_detects_a_customized_technical_communication_policy(self) -> None:
@@ -163,10 +163,10 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                 item.path: item.action
                 for item in changes
             }["docs/engineering/TECHNICAL_COMMUNICATION.md"]
-            self.assertEqual("customized", action)
+            self.assertEqual("unchanged", action)
             self.assertEqual(customized, policy.read_bytes())
             checks = {item.name: item for item in inspect_installation(target)}
-            self.assertFalse(checks["managed:docs/engineering/TECHNICAL_COMMUNICATION.md"].passed)
+            self.assertTrue(checks["seed:docs/engineering/TECHNICAL_COMMUNICATION.md"].passed)
 
     # The fifteen managed paths of the three skills 0.11.0 retired from the
     # 0.10.0 template; the SPEC-DST-022 DST-UPR-007 conformance pair.
@@ -413,17 +413,17 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            changes, old_lock = plan_install(target, project_name=None, mode="upgrade")
+            changes, old_lock = plan_install(target, project_name=None, mode="upgrade", replace_files=[".github/workflows/engineering-harness.yml"])
             actions = {item.path: item.action for item in changes}
             self.assertEqual(
                 {relative: "update" for relative in legacy_paths},
                 {relative: actions[relative] for relative in legacy_paths},
             )
-            apply_changes(target, changes, old_lock, allow_updates=True)
+            apply_changes(target, changes, old_lock, allow_updates=True, replace_files=[".github/workflows/engineering-harness.yml"])
             descriptor.unlink()
 
             config = tomllib.loads((target / ".engineering-harness.toml").read_text(encoding="utf-8"))
-            self.assertNotIn("self_hosting", config)
+            self.assertTrue(config["self_hosting"]["enabled"])
             self.assertEqual(__version__, config["harness"]["tool_version"])
             workflow = (target / ".github/workflows/engineering-harness.yml").read_text(encoding="utf-8")
             self.assertEqual(1, workflow.count(f'SE_HARNESS_VERSION: "{__version__}"'))
@@ -632,9 +632,8 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             lock = json.loads(lock_path.read_text(encoding="utf-8"))
             managed = (
                 "ENGINEERING_HARNESS.md",
-                "docs/engineering/QUALITY_GATES.md",
-                ".agents/skills/harness-orient/SKILL.md",
-                ".agents/skills/harness-operator-brief/skill-contract.json",
+                "docs/engineering/QUALITY_GATES.json",
+                "docs/engineering/WORKFLOW.json",
             )
             for relative in managed:
                 path = target / relative
@@ -655,7 +654,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
 
             def interrupt_once(source: str | bytes | os.PathLike[str] | os.PathLike[bytes], destination: str | bytes | os.PathLike[str] | os.PathLike[bytes]) -> None:
                 nonlocal failed
-                if not failed and Path(destination).name == "QUALITY_GATES.md":
+                if not failed and Path(destination).name == "QUALITY_GATES.json":
                     failed = True
                     raise OSError("injected transaction interruption")
                 real_replace(source, destination)
@@ -738,7 +737,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
         )
         self.assertIn("RID010", {item.code for item in identity.diagnostics})
 
-    def test_released_evaluator_rejects_inherited_pythonpath(self) -> None:
+    def test_released_evaluator_checks_effective_imports_despite_pythonpath(self) -> None:
         with mock.patch.dict(os.environ, {"PYTHONPATH": str(REPOSITORY_ROOT)}):
             identity = inspect_runtime_identity(
                 role="released-evaluator",
@@ -747,7 +746,8 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                 checkout_root=REPOSITORY_ROOT,
                 evaluator_wheel_sha256="c" * 64,
             )
-        self.assertIn("RID008", {item.code for item in identity.diagnostics})
+        self.assertNotIn("RID008", {item.code for item in identity.diagnostics})
+        self.assertIn("RID006", {item.code for item in identity.diagnostics})
 
     def test_candidate_identity_cannot_claim_released_evaluator_digest(self) -> None:
         identity = inspect_runtime_identity(
