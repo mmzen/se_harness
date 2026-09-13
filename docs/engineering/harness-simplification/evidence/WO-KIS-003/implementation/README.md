@@ -44,3 +44,5 @@ census and designated attribute regions. Tests for supported environments and re
 failures remain. Initial test runs exposed obsolete ownership/documentation expectations
 and a config newline issue; those were corrected before this passing run. Review also
 found and fixed POSIX linked-launcher evidence normalization.
+
+VREC-KIS-003 is ready, bound to `51ac3e43e53bed21f71432839d30f9e02bdf11a7`. Required CI passed on that candidate; source, templates and tests are unchanged from the fully tested source. Owner verification is pending.
