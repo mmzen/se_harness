@@ -1,0 +1,357 @@
+{
+  "base": "08d7a312f4698c5b05b504afc2630b4910a86d0e",
+  "wheel_runtime_source": "08d7a312f4698c5b05b504afc2630b4910a86d0e",
+  "checks": {
+    "full009": {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "scripts/run_tests.py"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "focused009": {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "unittest",
+        "tests.plugin_integration.test_simple_plugin",
+        "tests.test_skill_ownership"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "distribution009": {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "doctor009": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        ".",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "graph009": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        ".",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "preflight009": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        ".",
+        "--work-order",
+        "WO-PLG-009",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "help009": {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    }
+  },
+  "walkthrough": {
+    "outcome": "passed",
+    "wheel": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\non-promotable\\se_harness-0.18.0-py3-none-any.whl",
+    "wheel_sha256": "3f8a49f83659dee4da1d6f17ff5997828f55b2e1e11a5591eb2bc1e8cbc72fc6",
+    "released_wheel": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-dist\\se_harness-0.17.0-py3-none-any.whl",
+    "checks": 16,
+    "project": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\existing-project",
+    "python": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\private\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "plugin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\plugins\\codex\\verity-plane",
+    "claims": "Disposable connection/repair/upgrade commands; no native host or published plugin acceptance."
+  },
+  "steps": [
+    {
+      "name": "new-project-setup",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-I",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\plugins\\codex\\verity-plane\\scripts\\setup.py",
+        "--target",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\project",
+        "--data-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\private",
+        "--wheel",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\non-promotable\\se_harness-0.18.0-py3-none-any.whl"
+      ],
+      "exit_code": 1,
+      "expected": "nonzero"
+    },
+    {
+      "name": "init-preview",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\private\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\project",
+        "--project-name",
+        "Plugin acceptance",
+        "--dry-run",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "init",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\private\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\project",
+        "--project-name",
+        "Plugin acceptance",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "switch-preview",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\private\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "skill-ownership",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\project",
+        "--provider",
+        "plugin",
+        "--plugin-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\plugins\\codex\\verity-plane",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "switch",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\private\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "skill-ownership",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\project",
+        "--provider",
+        "plugin",
+        "--plugin-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\plugins\\codex\\verity-plane",
+        "--apply",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "connected-doctor",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\private\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\project",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "reuse",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-I",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\plugins\\codex\\verity-plane\\scripts\\setup.py",
+        "--target",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\project",
+        "--data-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\private",
+        "--wheel",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\non-promotable\\se_harness-0.18.0-py3-none-any.whl"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "repair",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-I",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\plugins\\codex\\verity-plane\\scripts\\setup.py",
+        "--target",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\project",
+        "--data-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\private",
+        "--wheel",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\non-promotable\\se_harness-0.18.0-py3-none-any.whl"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "released-setup",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-I",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\plugins\\codex\\verity-plane\\scripts\\setup.py",
+        "--target",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\existing-project",
+        "--data-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\private",
+        "--wheel",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-dist\\se_harness-0.17.0-py3-none-any.whl"
+      ],
+      "exit_code": 1,
+      "expected": "nonzero"
+    },
+    {
+      "name": "released-init",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\private\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\existing-project",
+        "--project-name",
+        "Existing project",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "released-doctor",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\private\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\existing-project",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "upgrade-checker",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-I",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\plugins\\codex\\verity-plane\\scripts\\setup.py",
+        "--target",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\existing-project",
+        "--data-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\private",
+        "--wheel",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\non-promotable\\se_harness-0.18.0-py3-none-any.whl"
+      ],
+      "exit_code": 1,
+      "expected": "nonzero"
+    },
+    {
+      "name": "upgrade-preview",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\private\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\existing-project",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "upgrade",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\private\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\existing-project",
+        "--apply",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "existing-switch",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\private\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "skill-ownership",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\existing-project",
+        "--provider",
+        "plugin",
+        "--plugin-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\plugins\\codex\\verity-plane",
+        "--apply",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "upgraded-doctor",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\private\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\walkthrough-2\\existing-project",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    }
+  ]
+}

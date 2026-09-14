@@ -2,7 +2,7 @@
 id = "REQ-PLG-016"
 type = "requirement"
 title = "Use plugin skills without duplicate repository copies"
-status = "draft"
+status = "approved"
 owners = ["requirements-steward"]
 created = "2026-09-14"
 updated = "2026-09-14"
@@ -14,6 +14,13 @@ source = "Owner-directed KISS amendment, 2026-09-14; existing PR #416 identifier
 
 [relations]
 derives_from = ["CAP-DST-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-14T22:05:14Z"
+decided_by = "requirements-steward"
+reason = "The owner reviewed and approved completion of the KISS backlog amendment and explicitly said \"you can start WO-PLG-009 and WO-PLG-016\" on 2026-09-15. This accepts the selected rewritten definition chain and authorizes its bounded routine execution, checks and evidence under the installed evaluator. No result-specific assurance, merge, release or live host/project installation is inferred."
 +++
 
 # Use plugin skills without duplicate repository copies
