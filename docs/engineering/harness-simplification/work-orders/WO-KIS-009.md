@@ -2,7 +2,7 @@
 id = "WO-KIS-009"
 type = "work_order"
 title = "Make delegated execution the single route"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-14"
 updated = "2026-09-14"
@@ -106,6 +106,13 @@ to = "in_progress"
 decided_at = "2026-09-14T20:39:42Z"
 decided_by = "engineering-owner"
 reason = "The owner accepted the single execution route proposal and explicitly instructed implementation with \"yes: go\". Start the approved selected work; the current released governor continues to apply."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-14T21:24:26Z"
+decided_by = "engineering-owner"
+reason = "The owner explicitly said \"i approve completion + prepare verification record + I verify verification record\" after the WO-KIS-009 implementation report and PR #476. Record the engineering-owner completion decision for reviewed candidate 5c52d7ca21de0850608f3f6f19572bb92c40a230. The final local suite passed 1067 tests with 15 skips; all hosted checks passed or were intentionally skipped. This transition marks WO-KIS-009 implemented. Preparation and the separately supplied assurance decision will be applied in order to the resulting VREC; no merge, release or adoption is authorized."
 +++
 
 # Make delegated execution the single route
