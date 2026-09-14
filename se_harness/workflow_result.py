@@ -145,6 +145,9 @@ def machine_fields(result: Mapping[str, Any]) -> dict[str, Any]:
     compliance = result.get("compliance", {})
     restitution = result.get("restitution", {})
     command = restitution.get("command_or_response", {})
+    decision = restitution.get("decision_required")
+    if decision is not None and not isinstance(decision, Mapping):
+        raise RestitutionError(WEX230, "decision_required must be null or an object")
     return {
         **fields(result, ("schema", "digest_format", "candidate", "operation", "selection", "scope", "state")),
         "compliance": {
@@ -157,7 +160,10 @@ def machine_fields(result: Mapping[str, Any]) -> dict[str, Any]:
         "context": fields(result.get("context", {}), ("state", "governing", "declared_paths", "reading_manifest", "next")),
         "findings": {key: [fields(item, ("code", "artifact", "path", "plane")) for item in result.get("findings", {}).get(key, [])]
                      for key in ("scoped_blockers", "repository_blockers")},
-        "decision_required": restitution.get("decision_required"),
+        "decision_required": None if decision is None else {
+            **fields(decision, ("decision_right", "role", "artifact", "outcomes")),
+            "delegation": fields(decision.get("delegation", {}), ("class", "gate")),
+        },
         "next": fields(restitution.get("next", {}), ("procedure_id", "step_id")),
         "command": fields(command, ("kind", "argv")),
     }

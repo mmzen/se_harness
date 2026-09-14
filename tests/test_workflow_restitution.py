@@ -70,11 +70,14 @@ class WorkflowRestitutionTests(unittest.TestCase):
         result = self.result()
         result["candidate"] = {"commit": "a" * 40, "git_object_format": "sha1"}
         result["state"]["after"] = [{"id": "WO-001", "status": "implemented"}]
+        result["restitution"]["decision_required"] = {"decision_right": "DR-WO-COMPLETE", "role": "engineering-owner",
+            "artifact": "WO-001", "decision": "whether implementation is complete", "outcomes": ["implemented", "continue"]}
         baseline = restitution_digest(result)
         wording = deepcopy(result)
         wording["restitution"]["done"] = ["Checks passed. Now review the evidence."]
         wording["restitution"]["next"]["action"] = "Review this next"
         wording["restitution"]["current_lifecycle_state"] = ["The work is implemented."]
+        wording["restitution"]["decision_required"]["decision"] = "whether the work is done"
         self.assertNotEqual(render_human(result), render_human(wording))
         self.assertEqual(baseline, restitution_digest(wording))
         for change in ("candidate", "state", "argv"):
