@@ -1,0 +1,103 @@
+{
+  "base": "cc03b381f7d80eaf7f79da90f0dab8c462434a61",
+  "review": {
+    "base": "cc03b381f7d80eaf7f79da90f0dab8c462434a61",
+    "changed_files": 21,
+    "scope": "pass",
+    "local_links_checked": 25,
+    "broken_links": [],
+    "historical_records_or_evidence_changed": [],
+    "helper_approval_history": "unchanged",
+    "future_implementation_states": "draft",
+    "old_pending_chain_words": 9219,
+    "revised_remaining_chain_words": 3836,
+    "measurement_scope": "REQ/SPEC/VER/WO documents for the five old pending packets; excludes index and amendment evidence"
+  },
+  "checks": {
+    "distribution": {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "graph": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        ".",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "doctor": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        ".",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "preflight-review": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        ".",
+        "--work-order",
+        "WO-PLG-022",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "help": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "candidate-graph": {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "se_harness",
+        "validate",
+        ".",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    }
+  },
+  "source_suite": {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "scripts/run_tests.py"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+    "exit_code": 0
+  },
+  "source_suite_result": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-lnvlfgqt\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-lnvlfgqt\\private\\verity-plane\\evaluator\\Scripts\\python.exe\ndocs/notes/diagnostic-codes.md matches the source\nWEX_SCALE artifacts=100 validation=0.142748s focus=0.246372s plan=0.266279s\nWEX_SCALE artifacts=500 validation=0.693888s focus=0.756330s plan=1.245825s\n----------------------------------------------------------------------\nRan 1067 tests in 94.236s (171 classes, 8 workers)\n\nOK (skipped=15)\n--workers must be at least 1\n"
+}
