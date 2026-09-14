@@ -44,3 +44,8 @@ generic simplicity rule and integration proposal. Its [specification](specificat
 and [verification plan](verification/VER-KIS-002.md) cover reusable authoring and review
 guidance for every governed project, including SE Harness. This is a new scope after
 the seven original cuts; their recorded approvals and evidence remain unchanged.
+
+
+[VREC-KIS-008](verification-records/VREC-KIS-008.md) is ready after the owner's
+explicit completion and preparation instructions. WO-KIS-008 is implemented;
+assurance review and PR #474 integration remain pending.
