@@ -1,6 +1,6 @@
 # WO-KIS-004 implementation evidence
 
-Source candidate: `6d7a0b34f1b9a38e8019dde45f840c2d84d1d58b`. Base: `4ca68474a7b3c6c74c932732a75b297aff8ba89d`. Governing checker: isolated released 0.17.0.
+Source candidate: `7b31e8296a90709bcd8ffcbb89db11d5a82c2635`. Base: `4ca68474a7b3c6c74c932732a75b297aff8ba89d`. Governing checker: isolated released 0.17.0.
 Work is in progress pending hosted checks and delegated completion.
 
 | Check | Change | Observed result |
@@ -12,13 +12,12 @@ Work is in progress pending hosted checks and delegated completion.
 
 The committed source passed **1,085 tests, 16 skipped**, with full scale on
 Windows/Python 3.14. Command: `python scripts/run_tests.py --workers 4 --scale full --timings ../work/kis004-source-timings.json`.
-Recorded duration: 118.142 seconds; no speedup claim is made.
+Recorded duration: 124.783 seconds; no speedup claim is made.
 
 Real installed-wheel acceptance passed under isolated Python 3.12 in disposable
-repositories. Wheel source: `b1960259a7808716f67bda18262d3b3ca2ea6e40`; wheel SHA-256:
-`ab0d6e93c9dd5bf2f8c9674fc5847608e93a6d3bf93550bf708c6fa66a88b0b6`. The later source commit only removed an obsolete test pin
-and added that test path to the work order. Runtime, templates and pyproject bytes
-are unchanged. Installed acceptance is retained against its actual source commit.
+repositories. Wheel source: `7b31e8296a90709bcd8ffcbb89db11d5a82c2635`; wheel SHA-256:
+`9175b5a7f20f3f79001118399c6d00da9d2dbede507cd11f5583714eccdd2fa4`. Source tests and installed acceptance identify their actual
+commits; runtime, templates and pyproject bytes match the selected candidate.
 The wheel is non-promotable and remains outside the repository.
 
 Released doctor, graph, review and scope checks passed. Candidate graph and all

@@ -1,11 +1,11 @@
 --workers must be at least 1
-Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-m58439zj\private\verity-plane\evaluator\Scripts\python.exe
-Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-m58439zj\private\verity-plane\evaluator\Scripts\python.exe
-WEX_SCALE artifacts=100 validation=0.090642s focus=0.175513s plan=0.178840s
-WEX_SCALE artifacts=500 validation=0.457187s focus=0.534104s plan=0.850626s
-WEX_SCALE artifacts=1000 validation=0.887550s focus=0.961925s plan=1.649343s
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-lozqd4gu\private\verity-plane\evaluator\Scripts\python.exe
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-lozqd4gu\private\verity-plane\evaluator\Scripts\python.exe
 docs/notes/diagnostic-codes.md matches the source
+WEX_SCALE artifacts=100 validation=0.105594s focus=0.201130s plan=0.191226s
+WEX_SCALE artifacts=500 validation=0.539531s focus=0.569821s plan=0.905705s
+WEX_SCALE artifacts=1000 validation=1.088323s focus=1.146806s plan=1.886835s
 ----------------------------------------------------------------------
-Ran 1085 tests in 118.142s (175 classes, 4 workers)
+Ran 1085 tests in 124.783s (175 classes, 4 workers)
 
 OK (skipped=16)
