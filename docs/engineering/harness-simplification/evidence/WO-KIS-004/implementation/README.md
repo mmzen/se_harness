@@ -1,7 +1,7 @@
 # WO-KIS-004 implementation evidence
 
 Source candidate: `7fc826459bffaa2faec880340bf05a0a8274a7b8`. Base: `4ca68474a7b3c6c74c932732a75b297aff8ba89d`. Governing checker: isolated released 0.17.0.
-Work is in progress pending hosted checks and delegated completion.
+Work is implemented through delegated completion; owner verification is pending.
 
 | Check | Change | Observed result |
 | --- | --- | --- |
@@ -21,7 +21,7 @@ commits; runtime, templates and pyproject bytes match the selected candidate.
 The wheel is non-promotable and remains outside the repository.
 
 Released doctor, graph, review and scope checks passed. Candidate graph and all
-14 distribution records passed. Hosted Linux/Windows results are pending.
+14 distribution records passed. All hosted checks passed, including Linux and Windows upgrade and integration-package checks. Exact check URLs are in ci-implementation.json.
 
 Missing owner verification and incomplete release scope still fail. Existing
 path-boundary, atomic-write and corrupt-package tests passed. No workflow

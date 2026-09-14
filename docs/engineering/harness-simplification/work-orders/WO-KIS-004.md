@@ -2,7 +2,7 @@
 id = "WO-KIS-004"
 type = "work_order"
 title = "Simplify verification and release records"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-13"
 updated = "2026-09-14"
@@ -112,6 +112,13 @@ to = "in_progress"
 decided_at = "2026-09-14T05:05:09Z"
 decided_by = "engineering-owner"
 reason = "The owner confirmed PR 469 is merged, continuing the accepted sequential implementation of all KISS candidates. Start WO-KIS-004 after WO-KIS-003 integration at 4ca68474a7b3c6c74c932732a75b297aff8ba89d. Retain the approved delegated execution route for completion and preparation."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-14T06:02:50Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at bb14d130c3f1acdaf8d8ab51c64e6a8f64bed485 (check-run 103873389130, source github-checks). All four selected cuts are implemented in source commit 7fc826459bffaa2faec880340bf05a0a8274a7b8. The exact candidate passed 1085 tests with 16 skipped, installed wheel acceptance and all hosted checks at bb14d130c3f1acdaf8d8ab51c64e6a8f64bed485. Evidence is retained under evidence/WO-KIS-004/implementation. Record bounded delegated completion under the approved work order; owner assurance and integration remain pending."
 +++
 
 # Simplify verification and release records
