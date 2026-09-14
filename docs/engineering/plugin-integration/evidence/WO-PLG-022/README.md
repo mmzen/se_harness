@@ -49,6 +49,7 @@ the amendment and its hosted checks. This later evidence commit adds no runtime 
 
 ## Decision boundary
 
-WO-PLG-022 remains in progress pending the installed 0.17.0 evaluator's completion
-decision. No VREC-PLG-022 exists yet. This review establishes the revised plan,
+On 2026-09-15 the owner explicitly approved completion of WO-PLG-022 and authorized
+starting WO-PLG-009 and WO-PLG-016. The released evaluator recorded WO-PLG-022 as
+implemented. No VREC-PLG-022 exists yet. This review establishes the revised plan,
 not runtime implementation, native installation, publication or live adoption.

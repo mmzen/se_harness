@@ -2,7 +2,7 @@
 id = "WO-PLG-022"
 type = "work_order"
 title = "Apply accepted KISS rules to the remaining plugin plan"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-14"
 updated = "2026-09-14"
@@ -56,6 +56,13 @@ to = "in_progress"
 decided_at = "2026-09-14T21:41:04Z"
 decided_by = "engineering-owner"
 reason = "The owner explicitly requested making the remaining plugin work orders compliant with all accepted KISS work on 2026-09-14. Record the bounded planning-amendment start decision only. Future plugin implementation, completion, assurance, release and adoption remain unperformed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-14T22:03:01Z"
+decided_by = "engineering-owner"
+reason = "The owner explicitly approved completion of WO-PLG-022 after reviewing PR #477 and the KISS backlog report, and separately authorized starting WO-PLG-009 and WO-PLG-016. Record completion of the planning amendment only; no assurance or release decision is inferred."
 +++
 
 # Apply accepted KISS rules to the remaining plugin plan
