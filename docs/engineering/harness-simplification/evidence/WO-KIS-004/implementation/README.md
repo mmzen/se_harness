@@ -1,6 +1,6 @@
 # WO-KIS-004 implementation evidence
 
-Source candidate: `7b31e8296a90709bcd8ffcbb89db11d5a82c2635`. Base: `4ca68474a7b3c6c74c932732a75b297aff8ba89d`. Governing checker: isolated released 0.17.0.
+Source candidate: `7fc826459bffaa2faec880340bf05a0a8274a7b8`. Base: `4ca68474a7b3c6c74c932732a75b297aff8ba89d`. Governing checker: isolated released 0.17.0.
 Work is in progress pending hosted checks and delegated completion.
 
 | Check | Change | Observed result |
@@ -12,11 +12,11 @@ Work is in progress pending hosted checks and delegated completion.
 
 The committed source passed **1,085 tests, 16 skipped**, with full scale on
 Windows/Python 3.14. Command: `python scripts/run_tests.py --workers 4 --scale full --timings ../work/kis004-source-timings.json`.
-Recorded duration: 124.783 seconds; no speedup claim is made.
+Recorded duration: 124.668 seconds; no speedup claim is made.
 
 Real installed-wheel acceptance passed under isolated Python 3.12 in disposable
-repositories. Wheel source: `7b31e8296a90709bcd8ffcbb89db11d5a82c2635`; wheel SHA-256:
-`9175b5a7f20f3f79001118399c6d00da9d2dbede507cd11f5583714eccdd2fa4`. Source tests and installed acceptance identify their actual
+repositories. Wheel source: `7fc826459bffaa2faec880340bf05a0a8274a7b8`; wheel SHA-256:
+`e1b77c5503c5a404db2451b58a2aaa3fc5d79cf83e53e11b9ead2747e72717c8`. Source tests and installed acceptance identify their actual
 commits; runtime, templates and pyproject bytes match the selected candidate.
 The wheel is non-promotable and remains outside the repository.
 
@@ -29,8 +29,8 @@ permissions changed. Root managed files and historical VREC/RLS records are
 unchanged. New ready records, historical readers and the installed 0.17.0 root
 retain their distinct authority; this patch does not upgrade the live root.
 
-Source lines: 157 added, 99 removed.
-Test lines: 185 added, 325 removed.
+Source lines: 163 added, 99 removed.
+Test lines: 188 added, 325 removed.
 The explicit refresh operation adds code; removing the release gate and prose
 pins reduces the restrictions. No new receipt store or background watcher exists.
 

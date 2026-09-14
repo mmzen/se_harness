@@ -1,19 +1,19 @@
 {
-  "commit": "7b31e8296a90709bcd8ffcbb89db11d5a82c2635",
-  "wheel_sha256": "9175b5a7f20f3f79001118399c6d00da9d2dbede507cd11f5583714eccdd2fa4",
+  "commit": "7fc826459bffaa2faec880340bf05a0a8274a7b8",
+  "wheel_sha256": "e1b77c5503c5a404db2451b58a2aaa3fc5d79cf83e53e11b9ead2747e72717c8",
   "platform": "Windows",
   "checks": "passed",
   "earlier_commits": [
-    "5cba5613fe07d21302fea3a245d813576573feb7",
-    "11b66c4237408fd8b3cff75f77c6905ccd061dd7"
+    "b919c750c519270d11fd65b29442d92e27808d21",
+    "0a34e204cc97bab776779f03eb994d612f055057"
   ],
-  "final_candidate": "d9e62f7303548649f483d10d0d76ecc580085ff6",
+  "final_candidate": "84fcde8ae5405e3e72124ff5a4164b3e630e78e2",
   "final_release": "ready fixture only",
   "incomplete_and_unverified_release_refused": true,
   "advisory_untrailed_commits": 4,
   "rebase_candidates": [
-    "7d235c57ff6198139ad31bda5bcdff2c3b024c0a",
-    "b28b535ba9c121c5dd68989c1a30803dbc2cc09c"
+    "26b4c92c01bf224efcaecbc637b073d3a39075aa",
+    "89b1b2828677111e050f7cba579f3519f057660b"
   ],
   "original_record_and_evidence_unchanged": true,
   "refreshed_record": "ready fixture only",
