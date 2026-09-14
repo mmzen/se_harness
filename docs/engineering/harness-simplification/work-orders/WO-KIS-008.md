@@ -2,7 +2,7 @@
 id = "WO-KIS-008"
 type = "work_order"
 title = "Apply generic KISS guidance to authoring and review"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-14"
 updated = "2026-09-14"
@@ -67,6 +67,13 @@ to = "in_progress"
 decided_at = "2026-09-14T19:45:59Z"
 decided_by = "engineering-owner"
 reason = "The owner explicitly instructed implementation of the accepted generic authoring and review modification: \"OK, go for this modification then\". Start this approved bounded work on that instruction; completion and assurance remain separate."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-14T20:09:10Z"
+decided_by = "engineering-owner"
+reason = "The owner explicitly said \"i approve completion of WO-KIS-008\" after reviewing PR #474 and the implementation report. Record the engineering-owner completion decision for the shared KISS authoring/review policy and its instruction routes at fe33643d7300a5c9cb4e63c72bf75e8f2220cbb8. All 1063 local tests passed (15 skips), 53 focused tests passed, and all 18 hosted checks passed or were intentionally skipped. This changes only WO-KIS-008 to implemented; it records no assurance, merge, release or live policy adoption decision."
 +++
 
 # Apply generic KISS guidance to authoring and review

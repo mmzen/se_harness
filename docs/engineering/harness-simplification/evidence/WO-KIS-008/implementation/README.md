@@ -1,9 +1,10 @@
 # WO-KIS-008 implementation evidence
 
 Source candidate: `fd91636743ab7c8e8cd8df3395a438a1e14ef566`. Base: `e1eb96bf0909d9fdb62a177657af343dc24e9286`.
-The work order is `in_progress`: edits and local verification are ready for review.
-Completion and VREC preparation have not been recorded. Hosted CI is obtained through
-the PR for this candidate and its evidence commit.
+The owner explicitly approved completion of WO-KIS-008 and the released evaluator
+recorded it as `implemented`. All hosted checks for PR head `fe33643d7300a5c9cb4e63c72bf75e8f2220cbb8`
+passed or were intentionally skipped; `ci-implementation.json` retains their URLs.
+Verification preparation follows this completion decision; no assurance decision is recorded.
 
 ## Result against VER-KIS-002
 
@@ -59,8 +60,8 @@ The policy reaches existing projects, including SE Harness itself, through a lat
 ordinary release and explicit upgrade. Editable guidance/templates require an explicit
 replacement choice; a plugin update alone does not adopt the policy.
 
-The owner approved the proposal and explicitly started implementation. Under current
-DR-015, a new branch-only work order does not yet qualify for delegated completion because
-its execution class is absent from the PR base. Obtain the actual engineering-owner
-completion decision after review; do not manufacture it from passing tests. Verification,
-merge, release and live adoption remain separate actions.
+The owner approved the proposal, explicitly started implementation, and then approved
+completion after reviewing the finished change and passing checks. The released 0.17.0
+evaluator recorded that completion decision. Its next step requests the preparation
+decision for one ready VREC. No VREC or assurance decision has yet been recorded;
+merge, release and live adoption remain separate.
