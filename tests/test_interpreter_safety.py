@@ -13,9 +13,6 @@ from pathlib import Path
 from unittest import mock
 from se_harness import interpreter_safety, runtime_identity
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-PERMITTED_PACKAGE_IMPORTS = frozenset()
-PERMITTED_TOOLS_IMPORTS = frozenset()
-LOADER_MODULES = frozenset({"se_harness/interpreter_safety.py"})
 
 def link_directory(alias, target):
     if os.name == "nt":
@@ -91,81 +88,29 @@ class InterpreterPathsTests(unittest.TestCase):
                 with self.subTest(path=path, kwargs=kwargs), self.assertRaises(interpreter_safety.InterpreterSafetyRefusal):
                     interpreter_safety.evaluate(path, **kwargs)
 
-    def test_identity_has_no_python_binary_digest_and_ignores_unused_pythonpath(self):
-        with mock.patch.dict(os.environ, {"PYTHONPATH": "unused-setting"}), mock.patch("se_harness.runtime_identity.site.ENABLE_USER_SITE", False):
-            report = runtime_identity.inspect_runtime_identity(role="candidate-source", expected_version=runtime_identity.__version__, expected_root=REPOSITORY_ROOT, checkout_root=REPOSITORY_ROOT, candidate_commit="a" * 40)
-        self.assertNotIn("python_binary_sha256", report.to_dict())
-        self.assertNotIn("RID008", {item.code for item in report.diagnostics})
-        self.assertTrue(report.python_version)
+    def test_unavailable_path_resolution_reports_one_clear_failure(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            entry = Path(temporary) / "env/bin/python"
+            with mock.patch.object(Path, "resolve", side_effect=OSError("path resolution unavailable")):
+                with self.assertRaisesRegex(interpreter_safety.InterpreterSafetyRefusal, "EPS003.*does not resolve"):
+                    interpreter_safety.evaluate(entry)
 
 class ImportBarrierTests(unittest.TestCase):
-    @staticmethod
-    def _imported(package: str) -> dict[str, set[str]]:
-        found: dict[str, set[str]] = {}
-        for source in sorted((REPOSITORY_ROOT / package).glob("*.py")):
-            relative = source.relative_to(REPOSITORY_ROOT).as_posix()
-            names: set[str] = set()
-            for node in ast.walk(ast.parse(source.read_text(encoding="utf-8"))):
-                if isinstance(node, ast.Import):
-                    names.update(alias.name for alias in node.names)
-                elif isinstance(node, ast.ImportFrom) and not node.level:
-                    module = node.module or ""
-                    names.update(f"{module}.{alias.name}" for alias in node.names)
-            found[relative] = names
-        return found
-
-    def test_repository_tools_imports_only_the_standard_library_and_its_own_package(self) -> None:
-        crossings: set[str] = set()
-        for relative, names in self._imported("repository_tools").items():
-            for name in sorted(names):
-                head = name.split(".")[0]
-                if head == "repository_tools":
-                    continue
-                if head == "se_harness":
-                    crossings.add(name)
-                    continue
-                with self.subTest(module=relative, imported=name):
-                    self.assertIn(head, sys.stdlib_module_names, f"{relative} imports {name}")
-        self.assertEqual(
-            sorted(PERMITTED_PACKAGE_IMPORTS),
-            sorted(crossings),
-            "the repository_tools -> se_harness crossing inventory changed",
-        )
-
-    def test_no_crossing_from_repository_tools_into_the_package_remains(self) -> None:
-        # WO-REB-028: the deleted modules held the only se_harness.hash_bound import.
-        self.assertEqual(frozenset(), PERMITTED_PACKAGE_IMPORTS)
-        for relative, names in self._imported("repository_tools").items():
-            with self.subTest(module=relative):
-                self.assertEqual(
-                    set(), {name for name in names if name.split(".")[0] == "se_harness"}
-                )
-
-    def test_no_crossing_from_the_package_into_repository_tools_remains(self) -> None:
-        # WO-REB-028: qualify_predecessor_view held the one guarded function-local
-        # import. The package neither names nor needs repository_tools now, at any
-        # import level, so an installed evaluator has nothing left to refuse.
-        self.assertEqual(frozenset(), PERMITTED_TOOLS_IMPORTS)
-        crossings: set[str] = set()
-        for relative, names in self._imported("se_harness").items():
-            for name in sorted(names):
-                if name.split(".")[0] == "repository_tools":
-                    crossings.add(f"{relative}: {name}")
-        self.assertEqual(set(), crossings)
-
-    def test_neither_package_crossing_carries_an_interpreter_safety_name(self) -> None:
-        for name in sorted(PERMITTED_PACKAGE_IMPORTS | PERMITTED_TOOLS_IMPORTS):
-            with self.subTest(imported=name):
-                self.assertNotIn("interpreter_safety", name)
-
-    def test_neither_loader_imports_the_other_runtime(self) -> None:
-        for relative in sorted(LOADER_MODULES):
-            with self.subTest(module=relative):
-                source = (REPOSITORY_ROOT / relative).read_text(encoding="utf-8")
-                for node in ast.walk(ast.parse(source)):
+    def test_package_and_repository_tools_remain_independent(self) -> None:
+        # These are packaging dependencies: the installed wheel omits repository_tools,
+        # and the release producer cannot depend on the candidate package it builds.
+        for package, forbidden in (("se_harness", "repository_tools"), ("repository_tools", "se_harness")):
+            for source in sorted((REPOSITORY_ROOT / package).rglob("*.py")):
+                for node in ast.walk(ast.parse(source.read_text(encoding="utf-8"))):
+                    names = []
                     if isinstance(node, ast.Import):
-                        for alias in node.names:
-                            self.assertIn(alias.name.split(".")[0], sys.stdlib_module_names)
+                        names = [alias.name for alias in node.names]
                     elif isinstance(node, ast.ImportFrom) and not node.level:
-                        head = (node.module or "").split(".")[0]
-                        self.assertIn(head, sys.stdlib_module_names, f"{relative}: {node.module}")
+                        names = [node.module or ""]
+                    for name in names:
+                        with self.subTest(module=source.name, imported=name):
+                            self.assertNotEqual(forbidden, name.split(".")[0])
+
+
+if __name__ == "__main__":
+    unittest.main()

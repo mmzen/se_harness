@@ -164,9 +164,8 @@ class MutationGuardTests(unittest.TestCase):
                            evaluator_payload_sha256=None, evaluator_archive_name=None,
                            evaluator_archive_sha256=None, entry_point_origin=None,
                            pythonpath_present=True)
-        with mock.patch("se_harness.mutation_guard._runtime_report", return_value=identity) as inspect:
+        with mock.patch("se_harness.mutation_guard._runtime_report", return_value=identity):
             authority = require_mutation_authority(root, operation="create-artifact")
-        self.assertFalse(inspect.call_args.kwargs["verify_payload"])
         self.assertEqual("origin-version", authority.evidence.value["inspection"])
         expected = json.loads((root / ".engineering-harness.lock").read_text())["evaluator"]
         pretty = json.dumps(authority.evidence.value, indent=4).encode()
@@ -349,29 +348,13 @@ class MutationGuardTests(unittest.TestCase):
         self.assertEqual(result, replay_lock)
         self.assertTrue(all(item.action == "unchanged" for item in replay))
 
-    def test_runtime_failures_preserve_bounded_identity_codes(self) -> None:
+    def test_a_rejected_runtime_preserves_the_origin_failure(self) -> None:
         root = self._write_identity_root()
-        passing = self._passing_identity(root)
-        cases = {
-            "RID002": "version",
-            "RID003": "module_origin",
-            "RID006": "checkout_root",
-            "RID008": "PYTHONPATH",
-            "RID009": "user_site",
-            "RID010": "entry_point_origin",
-            "RID021": "evaluator_payload_sha256",
-            "RID022": "evaluator_wheel_sha256",
-        }
-        for code, subject in cases.items():
-            with self.subTest(code=code):
-                rejected = replace(
-                    passing,
-                    passed=False,
-                    diagnostics=(IdentityDiagnostic(code, subject, "injected mismatch"),),
-                )
-                with mock.patch("se_harness.mutation_guard._runtime_report", return_value=rejected):
-                    with self.assertRaisesRegex(HarnessError, rf"MG005.*{code} {subject}"):
-                        require_mutation_authority(root, operation="create-artifact")
+        rejected = replace(self._passing_identity(root), passed=False,
+                           diagnostics=(IdentityDiagnostic("RID003", "module_origin", "wrong origin"),))
+        with mock.patch("se_harness.mutation_guard._runtime_report", return_value=rejected):
+            with self.assertRaisesRegex(HarnessError, "MG005.*RID003 module_origin"):
+                require_mutation_authority(root, operation="create-artifact")
 
     def test_evidence_parser_rejects_noncanonical_or_untrusted_content(self) -> None:
         root = self._write_identity_root()

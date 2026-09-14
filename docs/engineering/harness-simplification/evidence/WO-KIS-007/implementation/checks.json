@@ -1,0 +1,137 @@
+{
+  "candidate": "9f734ab129d2328c89baddb549c4c40d60b8bec3",
+  "base": "c3d361353d0e5dea00078dd2413544395d593652",
+  "tests": {
+    "local_windows": {
+      "run": 1063,
+      "seconds": 139.734,
+      "skipped": 15
+    },
+    "hosted_linux": {
+      "run": 1063,
+      "seconds": 32.317,
+      "skipped": 2
+    },
+    "hosted_windows": {
+      "run": 6,
+      "seconds": 1.141,
+      "skipped": 1
+    }
+  },
+  "checks": [
+    {
+      "name": "distribution",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "seconds": 4.057
+    },
+    {
+      "name": "cli-help",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "seconds": 0.289
+    },
+    {
+      "name": "source-graph",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "se_harness",
+        "validate",
+        ".",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "seconds": 4.381
+    },
+    {
+      "name": "released-graph",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "seconds": 4.842
+    },
+    {
+      "name": "released-review",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+        "--work-order",
+        "WO-KIS-007",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "seconds": 4.94
+    },
+    {
+      "name": "released-scope",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+        "--artifact",
+        "WO-KIS-007",
+        "--checkpoint",
+        "scope",
+        "--from-git",
+        "c3d361353d0e5dea00078dd2413544395d593652",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "seconds": 5.709
+    },
+    {
+      "name": "released-handoff-source",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+        "--artifact",
+        "WO-KIS-007",
+        "--checkpoint",
+        "handoff",
+        "--from-git",
+        "c3d361353d0e5dea00078dd2413544395d593652",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "seconds": 5.621
+    }
+  ]
+}

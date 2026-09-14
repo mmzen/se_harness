@@ -1,0 +1,152 @@
+{
+  "base": "c3d361353d0e5dea00078dd2413544395d593652",
+  "candidate": "9f734ab129d2328c89baddb549c4c40d60b8bec3",
+  "test_lines_added": 59,
+  "test_lines_removed": 709,
+  "net_test_methods_removed": 33,
+  "files": [
+    {
+      "path": "tests/test_configuration_surface.py",
+      "lines_added": 1,
+      "lines_removed": 27,
+      "test_methods_before": 5,
+      "test_methods_after": 5,
+      "removed_methods": [
+        "ConfigurationSurfaceTests.test_installed_configuration_declares_only_keys_a_reader_uses"
+      ],
+      "added_methods": [
+        "ConfigurationSurfaceTests.test_installed_configuration_has_the_requested_values"
+      ]
+    },
+    {
+      "path": "tests/test_engine_import_surface.py",
+      "lines_added": 3,
+      "lines_removed": 168,
+      "test_methods_before": 8,
+      "test_methods_after": 1,
+      "removed_methods": [
+        "EngineCodeTests.test_the_engine_spells_no_code_and_the_index_attributes_it_by_name",
+        "ImportSurfaceTests.test_the_engine_modules_import_their_siblings_and_the_package_by_name",
+        "ImportSurfaceTests.test_the_package_loads_no_engine_module_by_path",
+        "TwinTests.test_one_evidence_validator_serves_the_engine_with_its_own_messages",
+        "TwinTests.test_the_layout_tables_have_one_definition",
+        "TwinTests.test_the_lifecycle_registry_has_one_loader",
+        "TwinTests.test_the_status_set_the_body_parser_and_the_id_pattern_have_one_home"
+      ],
+      "added_methods": []
+    },
+    {
+      "path": "tests/test_hash_bound_integrity.py",
+      "lines_added": 20,
+      "lines_removed": 150,
+      "test_methods_before": 64,
+      "test_methods_after": 56,
+      "removed_methods": [
+        "CheckContractTests.test_no_new_diagnostic_code_family",
+        "FreshCheckoutMatrixTests.test_canonical_class_tolerates_a_crlf_checkout",
+        "FreshCheckoutMatrixTests.test_effective_git_info_attributes_are_accepted",
+        "FreshCheckoutMatrixTests.test_every_clone_passes_every_check",
+        "FreshCheckoutMatrixTests.test_raw_class_bytes_survive_every_checkout_configuration",
+        "LockCallerAgreementTests.test_no_lock_caller_decides_the_mode_locally",
+        "ProducerNewlineTests.test_every_lock_text_write_declares_its_newline",
+        "ProducerNewlineTests.test_the_installer_writes_the_lock_as_explicit_bytes",
+        "SafetyTests.test_no_repository_content_reaches_a_shell",
+        "UnmodifiedBehaviourTests.test_preflight_diagnostic_codes_are_unchanged"
+      ],
+      "added_methods": [
+        "FreshCheckoutTests.test_checkout_preserves_raw_evidence_and_canonical_lock_identity",
+        "FreshCheckoutTests.test_effective_git_info_attributes_are_accepted"
+      ]
+    },
+    {
+      "path": "tests/test_integrity_primitives.py",
+      "lines_added": 4,
+      "lines_removed": 91,
+      "test_methods_before": 19,
+      "test_methods_after": 13,
+      "removed_methods": [
+        "AtomicWriterTests.test_directory_flush_closes_on_failure_and_windows_uses_no_directory_handle",
+        "AtomicWriterTests.test_no_package_module_keeps_a_private_atomic_writer_or_a_tmp_stage",
+        "ClosedSetTests.test_checkpoint_and_definition_type_sets_have_one_definition",
+        "ClosedSetTests.test_typed_value_sets_exist",
+        "ConfigurationReaderTests.test_the_package_reads_the_configuration_through_one_reader",
+        "DigestPreservationTests.test_no_package_module_hashes_or_serializes_privately",
+        "GrammarAndEnvironmentTests.test_both_wheel_parsers_apply_one_grammar",
+        "GrammarAndEnvironmentTests.test_one_environment_builder_denies_pythonpath_and_user_site_for_both_runtimes"
+      ],
+      "added_methods": [
+        "GrammarAndEnvironmentTests.test_package_command_environments_exclude_ambient_pythonpath_and_secrets",
+        "GrammarAndEnvironmentTests.test_supported_wheel_version_spelling"
+      ]
+    },
+    {
+      "path": "tests/test_interpreter_safety.py",
+      "lines_added": 22,
+      "lines_removed": 77,
+      "test_methods_before": 10,
+      "test_methods_after": 6,
+      "removed_methods": [
+        "ImportBarrierTests.test_neither_loader_imports_the_other_runtime",
+        "ImportBarrierTests.test_neither_package_crossing_carries_an_interpreter_safety_name",
+        "ImportBarrierTests.test_no_crossing_from_repository_tools_into_the_package_remains",
+        "ImportBarrierTests.test_no_crossing_from_the_package_into_repository_tools_remains",
+        "ImportBarrierTests.test_repository_tools_imports_only_the_standard_library_and_its_own_package",
+        "InterpreterPathsTests.test_identity_has_no_python_binary_digest_and_ignores_unused_pythonpath"
+      ],
+      "added_methods": [
+        "ImportBarrierTests.test_package_and_repository_tools_remain_independent",
+        "InterpreterPathsTests.test_unavailable_path_resolution_reports_one_clear_failure"
+      ]
+    },
+    {
+      "path": "tests/test_managed_template_hygiene.py",
+      "lines_added": 1,
+      "lines_removed": 55,
+      "test_methods_before": 9,
+      "test_methods_after": 7,
+      "removed_methods": [
+        "EnvironmentInventoryTests.test_every_environment_variable_read_under_the_package_is_specified",
+        "EnvironmentInventoryTests.test_the_rehearsal_marker_is_named_where_its_exemption_lives"
+      ],
+      "added_methods": []
+    },
+    {
+      "path": "tests/test_module_seams.py",
+      "lines_added": 0,
+      "lines_removed": 114,
+      "test_methods_before": 6,
+      "test_methods_after": 0,
+      "removed_methods": [
+        "SeamTests.test_each_workflow_graph_name_has_one_public_home",
+        "SeamTests.test_no_function_exceeds_complexity_sixty",
+        "SeamTests.test_no_module_imports_a_private_name_across_the_package",
+        "SeamTests.test_the_compliance_module_is_split_and_the_workflow_cycle_is_gone",
+        "SeamTests.test_the_generator_is_split_at_its_two_seams",
+        "SeamTests.test_the_validator_is_split_along_its_eight_seams"
+      ],
+      "added_methods": []
+    },
+    {
+      "path": "tests/test_mutation_guard.py",
+      "lines_added": 7,
+      "lines_removed": 24,
+      "test_methods_before": 12,
+      "test_methods_after": 12,
+      "removed_methods": [
+        "MutationGuardTests.test_runtime_failures_preserve_bounded_identity_codes"
+      ],
+      "added_methods": [
+        "MutationGuardTests.test_a_rejected_runtime_preserves_the_origin_failure"
+      ]
+    },
+    {
+      "path": "tests/test_one_validation.py",
+      "lines_added": 1,
+      "lines_removed": 3,
+      "test_methods_before": 5,
+      "test_methods_after": 5,
+      "removed_methods": [],
+      "added_methods": []
+    }
+  ]
+}

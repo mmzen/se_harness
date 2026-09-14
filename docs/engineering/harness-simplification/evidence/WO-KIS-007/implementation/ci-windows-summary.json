@@ -1,0 +1,42 @@
+{
+  "candidate": "4769aae3f58028ff435037ff03e6c4333fd1fe88",
+  "working_tree": "clean",
+  "command": [
+    "C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\python.exe",
+    "-m",
+    "unittest",
+    "tests.test_hash_bound_integrity.FreshCheckoutTests.test_checkout_preserves_raw_evidence_and_canonical_lock_identity",
+    "tests.test_interpreter_safety.InterpreterPathsTests",
+    "-q"
+  ],
+  "cwd": "D:\\a\\se_harness\\se_harness",
+  "checker": {
+    "version": "0.18.0",
+    "origin": "D:\\a\\se_harness\\se_harness\\se_harness\\__init__.py"
+  },
+  "started_at": "2026-09-14T18:55:20.200013+00:00",
+  "exit_code": 0,
+  "result": "pass",
+  "output_tail": "----------------------------------------------------------------------\r\nRan 6 tests in 1.141s\r\n\r\nOK (skipped=1)\r\n",
+  "raw": {
+    "file": "output.log",
+    "bytes": 113,
+    "artifact": "upgrade-rehearsal-Windows",
+    "repository": "mmzen/se_harness",
+    "run_id": "34883443071",
+    "run_url": "https://github.com/mmzen/se_harness/actions/runs/34883443071",
+    "retention_days": 14,
+    "estimated_expiry": "2026-09-28T18:55:20.200013+00:00",
+    "availability": "local; upload not yet confirmed",
+    "download_command": [
+      "gh",
+      "run",
+      "download",
+      "34883443071",
+      "--repo",
+      "mmzen/se_harness",
+      "--name",
+      "upgrade-rehearsal-Windows"
+    ]
+  }
+}
