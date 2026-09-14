@@ -185,12 +185,9 @@ def raw_lock_declaration() -> hash_bound.Declaration:
                 item.patterns,
                 RAW_MODE if item.class_id == "standard-lock" else item.mode,
                 item.required_attribute,
-                item.region,
-                item.bindings,
             )
             for item in declared.classes
         ),
-        unbound_digest_fields=declared.unbound_digest_fields,
     )
 
 
@@ -241,12 +238,9 @@ def repository_declaration() -> hash_bound.Declaration:
         (SYNTHETIC_REPOSITORY_PATTERN,),
         RAW_MODE,
         "text eol=lf",
-        "repository",
-        ("notes_sha256",),
     )
     return hash_bound.Declaration(
         classes=(*declared.classes, extra),
-        unbound_digest_fields=declared.unbound_digest_fields,
     )
 
 
@@ -262,65 +256,6 @@ def worktree_state(root: Path) -> dict[str, bytes]:
     }
 
 
-class DeclarationShapeTests(unittest.TestCase):
-    def test_declares_exactly_the_specified_classes(self) -> None:
-        declaration = load_declaration()
-        observed = {
-            item.class_id: (item.patterns, item.mode, item.required_attribute, item.region)
-            for item in declaration.classes
-        }
-        self.assertEqual(SPECIFIED_CLASSES, observed)
-
-    def test_declaration_is_data_only(self) -> None:
-        raw = DECLARATION_PATH.read_bytes()
-        self.assertNotIn(b"\r", raw)
-        document = json.loads(raw.decode("utf-8"))
-        self.assertEqual({"classes", "schema", "unbound_digest_fields"}, set(document))
-        for entry in document["classes"]:
-            self.assertEqual(
-                {"bindings", "id", "mode", "patterns", "region", "required_attribute"},
-                set(entry),
-            )
-        operative = _leaf_strings(document["classes"]) + [document["schema"]] + [
-            entry["field"] for entry in document["unbound_digest_fields"]
-        ]
-        for value in operative:
-            with self.subTest(value=value):
-                # No import path, no expression, no command, no executable name.
-                self.assertIsNone(re.search(r"[:;|&`$<>\\()\[\]{}!'\"]", value))
-                self.assertIsNone(re.search(r"\.(?:exe|bat|cmd|sh|ps1|dll)$", value))
-                self.assertNotIn("import", value.lower().split(" "))
-                self.assertNotIn("python", value.lower().split(" "))
-        for entry in document["unbound_digest_fields"]:
-            # Reasons are prose for a human reader and are never interpreted.
-            self.assertIsNone(re.search(r"[|&`$<>\\{}]", entry["reason"]))
-
-    def test_every_declared_pattern_is_repository_relative(self) -> None:
-        for item in load_declaration().classes:
-            for pattern in item.patterns:
-                self.assertFalse(pattern.startswith("/"), pattern)
-                self.assertNotIn("..", pattern.split("/"), pattern)
-
-    def test_raw_classes_require_an_attribute_and_canonical_classes_do_not(self) -> None:
-        for item in load_declaration().classes:
-            if item.mode == RAW_MODE:
-                self.assertEqual("text eol=lf", item.required_attribute, item.class_id)
-            else:
-                self.assertIsNone(item.required_attribute, item.class_id)
-
-    def test_package_data_declares_the_declaration_file(self) -> None:
-        pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
-        self.assertIn('"hash_bound_classes.json"', pyproject)
-        self.assertIn("include se_harness/*.json", (ROOT / "MANIFEST.in").read_text(encoding="utf-8"))
-
-    def test_repository_build_recipe_digest_is_explicitly_inventoried(self) -> None:
-        self.assertIn(
-            (
-                "build_recipe_sha256",
-                "repository-owned release recipe digest; validated by repository policy",
-            ),
-            load_declaration().unbound_digest_fields,
-        )
 
 
 def _leaf_strings(value: object) -> list[str]:
@@ -345,16 +280,16 @@ class LoaderFailClosedTests(unittest.TestCase):
         "unknown-class-field.json": "fields must be exactly",
     }
 
-    def test_declaration_defects_are_refused(self) -> None:
-        for name, fragment in self.cases.items():
-            with self.subTest(fixture=name):
-                path = FIXTURES / name
-                if fragment is None:
+    def test_declaration_defects_are_refused(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "classes.json"
+            source = json.loads(DECLARATION_PATH.read_text(encoding="utf-8"))
+            for field, value in [("mode", "invalid"), ("patterns", ["../outside"]), ("required_attribute", None)]:
+                candidate = json.loads(json.dumps(source))
+                candidate["classes"][0][field] = value
+                path.write_text(json.dumps(candidate), encoding="utf-8")
+                with self.subTest(field=field), self.assertRaises(HashBoundError):
                     load_declaration(path)
-                    continue
-                with self.assertRaises(HashBoundError) as caught:
-                    load_declaration(path)
-                self.assertIn(fragment, str(caught.exception))
 
     def test_missing_declaration_fails_closed(self) -> None:
         with self.assertRaises(HashBoundError):
@@ -363,7 +298,7 @@ class LoaderFailClosedTests(unittest.TestCase):
     def test_wrong_schema_fails_closed(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "d.json"
-            path.write_bytes(b'{"schema": "other", "classes": [], "unbound_digest_fields": []}')
+            path.write_bytes(b'{"schema": "other", "classes": [], "removed_field": []}')
             with self.assertRaises(HashBoundError) as caught:
                 load_declaration(path)
             self.assertIn("must use schema", str(caught.exception))
@@ -436,7 +371,6 @@ class ResolutionTests(unittest.TestCase):
         declaration = load_declaration()
         reversed_declaration = hash_bound.Declaration(
             classes=tuple(reversed(declaration.classes)),
-            unbound_digest_fields=tuple(reversed(declaration.unbound_digest_fields)),
         )
         for relative in (".engineering-harness.lock", "docs/engineering/x/evidence/a.json"):
             self.assertEqual(
@@ -630,171 +564,8 @@ class ByteExactSurfaceTests(unittest.TestCase):
             self.assertEqual("unspecified", outside.get("text"), outside)
 
 
-class InventoryReconciliationTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        declaration = load_declaration()
-        cls.claimed = set(declaration.binding_owner()) | set(declaration.unbound_names())
-
-    def observed_fields(self) -> dict[str, str]:
-        found: dict[str, str] = {}
-        for path in sorted((ROOT / "docs" / "engineering").rglob("*.md")):
-            text = path.read_bytes().decode("utf-8").replace("\r\n", "\n")
-            if not text.startswith("+++\n"):
-                continue
-            front = text.split("+++", 2)[1]
-            for match in DIGEST_FIELD.finditer(front):
-                found.setdefault(match.group(1), path.relative_to(ROOT).as_posix())
-        return found
-
-    def test_every_recorded_digest_field_is_claimed(self) -> None:
-        unclaimed = {
-            field: path
-            for field, path in self.observed_fields().items()
-            if field not in self.claimed
-        }
-        self.assertEqual({}, unclaimed)
-
-    def test_declared_bindings_are_actually_recorded_somewhere(self) -> None:
-        observed = set(self.observed_fields())
-        declaration = load_declaration()
-        for item in declaration.classes:
-            for binding in item.bindings:
-                self.assertIn(binding, observed, binding)
-
-    def test_the_harness_data_digest_is_declared_out_of_scope_not_bound(self) -> None:
-        # `implementation_sha256` is recorded in harness data, not in a governed
-        # artifact, and its bytes are pinned by owner-controlled `.gitattributes`
-        # content rather than by a shipped class (WO-HBI-005, REQ-HBI-004).
-        declaration = load_declaration()
-        self.assertIn("implementation_sha256", declaration.unbound_names())
-        self.assertNotIn("implementation_sha256", declaration.binding_owner())
-
-    def test_an_undeclared_hash_bound_field_fails_the_declared_check(self) -> None:
-        declaration = load_declaration()
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory) / "repo"
-            root.mkdir()
-            build_source(root, committed_attributes())
-            artifact = root / "docs" / "engineering" / "x" / "WO-XXX-001.md"
-            artifact.write_bytes(
-                b'+++\nid = "WO-XXX-001"\nnovel_payload_sha256 = "0" \n+++\n\n# new\n'
-            )
-            git(root, "add", "-A")
-            git(root, "-c", "core.autocrlf=false", "commit", "-q", "-m", "undeclared")
-            passed, detail = results(root, declaration)[CHECK_CLASS_DECLARED]
-        self.assertFalse(passed)
-        self.assertIn("novel_payload_sha256", detail)
-        self.assertIn("docs/engineering/x/WO-XXX-001.md", detail)
-
-    def test_an_untracked_artifact_cannot_introduce_a_field(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory) / "repo"
-            root.mkdir()
-            build_source(root, committed_attributes())
-            artifact = root / "docs" / "engineering" / "x" / "WO-YYY-001.md"
-            artifact.parent.mkdir(parents=True, exist_ok=True)
-            artifact.write_bytes(b'+++\nuncommitted_sha256 = "0"\n+++\n')
-            passed, detail = results(root)[CHECK_CLASS_DECLARED]
-        self.assertTrue(passed, detail)
-
-    def test_front_matter_beyond_the_bounded_read_is_still_scanned(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory) / "repo"
-            root.mkdir()
-            build_source(root, committed_attributes())
-            artifact = root / "docs" / "engineering" / "x" / "WO-ZZZ-001.md"
-            padding = b"".join(b'comment_%04d = "x"\n' % index for index in range(600))
-            artifact.write_bytes(b"+++\n" + padding + b'late_payload_sha256 = "0"\n+++\n')
-            git(root, "add", "-A")
-            git(root, "-c", "core.autocrlf=false", "commit", "-q", "-m", "long")
-            self.assertGreater(artifact.stat().st_size, hash_bound._FRONT_MATTER_LIMIT)
-            passed, detail = results(root)[CHECK_CLASS_DECLARED]
-        self.assertFalse(passed)
-        self.assertIn("late_payload_sha256", detail)
-
-    def test_unterminated_front_matter_fails_closed(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory) / "repo"
-            root.mkdir()
-            build_source(root, committed_attributes())
-            artifact = root / "docs" / "engineering" / "x" / "WO-QQQ-001.md"
-            artifact.write_bytes(b'+++\nid = "WO-QQQ-001"\n')
-            git(root, "add", "-A")
-            git(root, "-c", "core.autocrlf=false", "commit", "-q", "-m", "unterminated")
-            passed, detail = results(root)[CHECK_CLASS_DECLARED]
-        self.assertFalse(passed)
-        self.assertIn("front matter is unterminated", detail)
-
-    def test_invalid_utf8_artifact_fails_closed(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory) / "repo"
-            root.mkdir()
-            build_source(root, committed_attributes())
-            artifact = root / "docs" / "engineering" / "x" / "WO-RRR-001.md"
-            artifact.write_bytes(b'+++\nid = "\xff"\n+++\n')
-            git(root, "add", "-A")
-            git(root, "-c", "core.autocrlf=false", "commit", "-q", "-m", "invalid")
-            passed, detail = results(root)[CHECK_CLASS_DECLARED]
-        self.assertFalse(passed)
-        self.assertIn("invalid UTF-8", detail)
 
 
-class TemplateParityTests(unittest.TestCase):
-    def test_template_region_classes_are_present_in_the_canonical_fragment(self) -> None:
-        # The fragment is not itself hash-bound, so its worktree newlines vary by
-        # platform; parity is asserted over newline-canonical text.
-        fragment = TEMPLATE_FRAGMENT.read_bytes().decode("utf-8").replace("\r\n", "\n")
-        lines = [line.strip() for line in fragment.split("\n") if line.strip()]
-        for item in load_declaration().classes:
-            if item.region != "template" or item.required_attribute is None:
-                continue
-            for pattern in item.patterns:
-                self.assertIn(f"{pattern} {item.required_attribute}", lines, pattern)
-
-    def test_repository_region_classes_live_in_owner_content(self) -> None:
-        owner = [line.split()[0] for line in hash_bound.attribute_regions(ROOT)["repository"]]
-        self.assertTrue(owner)
-        for item in load_declaration().classes:
-            if item.region != "repository":
-                continue
-            for pattern in item.patterns:
-                self.assertIn(pattern, owner, pattern)
-
-    def test_shipped_surface_names_no_candidate_only_path(self) -> None:
-        """REQ-HBI-004: a consumer can satisfy every shipped pattern and fragment rule.
-
-        The class table and the fragment travel in the wheel and are installed into
-        every consumer. A pattern under `se_harness/`, `tests/` or
-        `repository_tools/` exists in exactly one repository, this one, and fails
-        both `hash-bound-class-declared` and `hash-bound-attribute-effective`
-        everywhere else (issue #207).
-        """
-
-        offending: list[str] = []
-        for item in load_declaration().classes:
-            for pattern in item.patterns:
-                if pattern.startswith(CANDIDATE_ONLY_PREFIXES):
-                    offending.append(f"{item.class_id}: {pattern}")
-        fragment = TEMPLATE_FRAGMENT.read_bytes().decode("utf-8").replace("\r\n", "\n")
-        for line in fragment.split("\n"):
-            if line.strip() and not line.startswith("#") and line.split()[0].startswith(CANDIDATE_ONLY_PREFIXES):
-                offending.append(f"fragment: {line.split()[0]}")
-        self.assertEqual([], offending)
-
-    def test_the_canonical_fragment_carries_only_template_region_rules(self) -> None:
-        # SPEC-HBI-001 rule 10, first amendment: a `repository`-region pattern in the
-        # fragment would install into every consumer a rule the shipped table says
-        # belongs to owner content.
-        fragment = TEMPLATE_FRAGMENT.read_bytes().decode("utf-8").replace("\r\n", "\n")
-        rules = [line.split()[0] for line in fragment.split("\n") if line.strip() and not line.startswith("#")]
-        template_patterns = {
-            pattern
-            for item in load_declaration().classes
-            if item.region == "template" and item.required_attribute is not None
-            for pattern in item.patterns
-        }
-        self.assertEqual(sorted(template_patterns), sorted(rules))
 
 
 @unittest.skipUnless(git_available(), "git is unavailable")
@@ -854,7 +625,7 @@ class FreshCheckoutMatrixTests(unittest.TestCase):
                 with self.subTest(autocrlf=value, check=name):
                     self.assertTrue(passed, detail)
 
-    def test_local_autocrlf_false_does_not_make_an_ineffective_class_effective(self) -> None:
+    def test_effective_git_info_attributes_are_accepted(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             base = Path(directory)
             source = base / "source"
@@ -871,8 +642,7 @@ class FreshCheckoutMatrixTests(unittest.TestCase):
                 b"tests/fixtures/governance_migration/*.json text eol=lf\n"
             )
             passed, detail = results(root)[CHECK_ATTRIBUTE_EFFECTIVE]
-        self.assertFalse(passed)
-        self.assertIn("requires the", detail)
+        self.assertTrue(passed, detail)
 
 
 @unittest.skipUnless(git_available(), "git is unavailable")
@@ -895,8 +665,7 @@ class AttributeEffectivenessTests(unittest.TestCase):
         passed, detail = self.assess_with_attributes(attributes)[CHECK_ATTRIBUTE_EFFECTIVE]
         self.assertFalse(passed)
         self.assertIn("evaluator-evidence", detail)
-        self.assertIn("docs/engineering/**/evidence/*.json", detail)
-        self.assertIn("template", detail)
+        self.assertIn("docs/engineering/x/evidence/a.json", detail)
 
     def test_more_specific_negated_text_override_is_ineffective(self) -> None:
         attributes = committed_attributes() + b"docs/engineering/x/evidence/*.json -text\n"
@@ -913,16 +682,6 @@ class AttributeEffectivenessTests(unittest.TestCase):
         self.assertFalse(passed)
         self.assertIn("eol=crlf", detail)
 
-    def test_template_class_present_only_in_owner_content_is_ineffective(self) -> None:
-        attributes = (
-            b"# se-harness:begin\n# se-harness:end\n"
-            b"docs/engineering/**/evidence/*.json text eol=lf\n"
-        )
-        passed, detail = self.assess_with_attributes(attributes)[CHECK_ATTRIBUTE_EFFECTIVE]
-        self.assertFalse(passed)
-        self.assertIn("evaluator-evidence", detail)
-        self.assertIn("repository", detail)
-        self.assertIn("requires the template region", detail)
 
     def assess_repository_class(self, attributes: bytes) -> dict[str, tuple[bool, str]]:
         files = {**SYNTHETIC_FILES, "notes/a.txt": b"owner note\n"}
@@ -932,22 +691,6 @@ class AttributeEffectivenessTests(unittest.TestCase):
             build_source(root, attributes, files)
             return results(root, repository_declaration())
 
-    def test_repository_class_present_only_in_the_managed_block_is_ineffective(self) -> None:
-        # VER-HBI-001 misplaced-class row: the pattern does match tracked paths, so
-        # `hash-bound-class-declared` passes, and the misplacement still fails
-        # `hash-bound-attribute-effective` (issue #207 acceptance criterion 3).
-        attributes = (
-            b"# se-harness:begin\n"
-            b"docs/engineering/**/evidence/*.json text eol=lf\n"
-            b"notes/*.txt text eol=lf\n"
-            b"# se-harness:end\n"
-        )
-        observed = self.assess_repository_class(attributes)
-        self.assertTrue(observed[CHECK_CLASS_DECLARED][0], observed[CHECK_CLASS_DECLARED][1])
-        passed, detail = observed[CHECK_ATTRIBUTE_EFFECTIVE]
-        self.assertFalse(passed)
-        self.assertIn(SYNTHETIC_REPOSITORY_CLASS, detail)
-        self.assertIn("requires the repository region", detail)
 
     def test_repository_class_in_owner_content_is_effective(self) -> None:
         attributes = (
@@ -983,176 +726,8 @@ class AttributeEffectivenessTests(unittest.TestCase):
         self.assertFalse((Path.cwd() / "pwned").exists())
 
 
-@unittest.skipUnless(git_available(), "git is unavailable")
-class FailClosedTests(unittest.TestCase):
-    def repository(self, directory: str, attributes: bytes | None = None) -> Path:
-        root = Path(directory) / "repo"
-        root.mkdir()
-        build_source(root, committed_attributes() if attributes is None else attributes)
-        return root
-
-    def test_absent_attributes_file_fails_closed(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            root = self.repository(directory)
-            (root / ".gitattributes").unlink()
-            passed, detail = results(root)[CHECK_ATTRIBUTE_EFFECTIVE]
-        self.assertFalse(passed)
-        self.assertIn(".gitattributes is absent", detail)
-
-    def test_unreadable_attributes_file_fails_closed(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            root = self.repository(directory)
-            (root / ".gitattributes").unlink()
-            (root / ".gitattributes").mkdir()
-            passed, detail = results(root)[CHECK_ATTRIBUTE_EFFECTIVE]
-        self.assertFalse(passed)
-        self.assertIn(".gitattributes", detail)
-
-    def test_invalid_utf8_attributes_file_fails_closed(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            root = self.repository(directory)
-            (root / ".gitattributes").write_bytes(b"docs/**/evidence/*.json text \xff\n")
-            passed, detail = results(root)[CHECK_ATTRIBUTE_EFFECTIVE]
-        self.assertFalse(passed)
-        self.assertIn("cannot read .gitattributes", detail)
-
-    def test_unbalanced_managed_markers_fail_closed(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            root = self.repository(directory, b"# se-harness:begin\ndocs/a text\n")
-            passed, detail = results(root)[CHECK_ATTRIBUTE_EFFECTIVE]
-        self.assertFalse(passed)
-        self.assertIn("unbalanced", detail)
-
-    def test_duplicated_managed_markers_fail_closed(self) -> None:
-        attributes = b"# se-harness:begin\n# se-harness:begin\ndocs/a text\n# se-harness:end\n"
-        with tempfile.TemporaryDirectory() as directory:
-            root = self.repository(directory, attributes)
-            passed, detail = results(root)[CHECK_ATTRIBUTE_EFFECTIVE]
-        self.assertFalse(passed)
-        self.assertIn("duplicated", detail)
-
-    def test_untracked_declared_path_fails_closed(self) -> None:
-        # A `repository`-region class whose pattern covers nothing is a stale
-        # owner declaration and fails closed (SPEC-HBI-001 rule 9, unchanged).
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory) / "repo"
-            root.mkdir()
-            build_source(root, committed_attributes() + b"notes/*.txt text eol=lf\n")
-            passed, detail = results(root, repository_declaration())[CHECK_CLASS_DECLARED]
-        self.assertFalse(passed)
-        self.assertIn(SYNTHETIC_REPOSITORY_PATTERN, detail)
-        self.assertIn("matches no tracked path", detail)
-
-    def test_empty_template_class_is_vacuously_declared(self) -> None:
-        # REQ-HBI-003: before its first verification record a repository holds no
-        # evidence file. `hash-bound-class-declared` passes naming the class and
-        # `0 tracked paths`; the attribute rule is still required (rule 10).
-        files = dict(SYNTHETIC_FILES)
-        files.pop("docs/engineering/x/evidence/a.json")
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory) / "repo"
-            root.mkdir()
-            build_source(root, committed_attributes(), files)
-            observed = results(root)
-        passed, detail = observed[CHECK_CLASS_DECLARED]
-        self.assertTrue(passed, detail)
-        self.assertIn("evaluator-evidence: 0 tracked paths", detail)
-        self.assertTrue(observed[CHECK_ATTRIBUTE_EFFECTIVE][0], observed[CHECK_ATTRIBUTE_EFFECTIVE][1])
-        self.assertTrue(observed[CHECK_MODE_CONSISTENT][0], observed[CHECK_MODE_CONSISTENT][1])
-
-    def test_empty_template_class_still_requires_its_attribute_rule(self) -> None:
-        files = dict(SYNTHETIC_FILES)
-        files.pop("docs/engineering/x/evidence/a.json")
-        attributes = committed_attributes().replace(
-            b"docs/engineering/**/evidence/*.json text eol=lf\n", b""
-        )
-        with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory) / "repo"
-            root.mkdir()
-            build_source(root, attributes, files)
-            observed = results(root)
-        self.assertTrue(observed[CHECK_CLASS_DECLARED][0], observed[CHECK_CLASS_DECLARED][1])
-        passed, detail = observed[CHECK_ATTRIBUTE_EFFECTIVE]
-        self.assertFalse(passed)
-        self.assertIn("evaluator-evidence", detail)
-        self.assertIn("requires the template region", detail)
-
-    def test_unavailable_git_fails_closed(self) -> None:
-        with mock.patch.object(hash_bound.shutil, "which", return_value=None):
-            observed = results(ROOT)
-        for name in (CHECK_CLASS_DECLARED, CHECK_ATTRIBUTE_EFFECTIVE):
-            passed, detail = observed[name]
-            self.assertFalse(passed, name)
-            self.assertIn("git executable is unavailable", detail)
-
-    def test_failed_attribute_resolution_fails_closed(self) -> None:
-        with mock.patch.object(
-            hash_bound,
-            "resolved_attributes",
-            side_effect=HashBoundError("git check-attr exited 128: fatal"),
-        ):
-            passed, detail = results(ROOT)[CHECK_ATTRIBUTE_EFFECTIVE]
-        self.assertFalse(passed)
-        self.assertIn("check-attr exited 128", detail)
-
-    def test_failed_enumeration_fails_closed(self) -> None:
-        with mock.patch.object(
-            hash_bound, "tracked_paths", side_effect=HashBoundError("git ls-files exited 128: fatal")
-        ):
-            observed = results(ROOT)
-        self.assertFalse(observed[CHECK_CLASS_DECLARED][0])
-        self.assertFalse(observed[CHECK_ATTRIBUTE_EFFECTIVE][0])
-        self.assertTrue(observed[CHECK_MODE_CONSISTENT][0])
-
-    def test_no_condition_is_advisory(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            root = self.repository(directory)
-            (root / ".gitattributes").unlink()
-            for name, passed, detail in assess(root):
-                if not passed:
-                    lowered = detail.lower()
-                    self.assertNotIn("warn", lowered, name)
-                    self.assertNotIn("advisory", lowered, name)
 
 
-class ModeConsistencyTests(unittest.TestCase):
-    def test_declaration_is_mode_consistent(self) -> None:
-        passed, detail = results(ROOT)[CHECK_MODE_CONSISTENT]
-        self.assertTrue(passed, detail)
-        self.assertIn("standard-lock=utf8-text-lf-v1", detail)
-
-    def test_two_classes_binding_one_field_is_a_defect(self) -> None:
-        declaration = hash_bound.Declaration(
-            classes=(
-                hash_bound.HashBoundClass("left", ("a",), RAW_MODE, "text eol=lf", "repository", ("s_sha256",)),
-                hash_bound.HashBoundClass("right", ("b",), RAW_MODE, "text eol=lf", "repository", ("s_sha256",)),
-            ),
-            unbound_digest_fields=(),
-        )
-        passed, detail = hash_bound._mode_consistent(declaration)
-        self.assertFalse(passed)
-        self.assertIn("s_sha256", detail)
-        self.assertIn("left", detail)
-        self.assertIn("right", detail)
-
-    def test_canonical_mode_with_an_attribute_is_a_defect(self) -> None:
-        declaration = hash_bound.Declaration(
-            classes=(
-                hash_bound.HashBoundClass(
-                    "only", ("a",), CANONICAL_MODE, "text eol=lf", "template", ()
-                ),
-            ),
-            unbound_digest_fields=(),
-        )
-        passed, detail = hash_bound._mode_consistent(declaration)
-        self.assertFalse(passed)
-        self.assertIn("must not require a Git attribute", detail)
-
-    def test_shared_pattern_between_classes_is_a_defect(self) -> None:
-        declaration = load_declaration(FIXTURES / "overlapping-classes.json")
-        passed, detail = hash_bound._mode_consistent(declaration)
-        self.assertFalse(passed)
-        self.assertIn("both declare", detail)
 
 
 class ModeArbitrationTests(unittest.TestCase):
@@ -1387,7 +962,7 @@ class SafetyTests(unittest.TestCase):
                                     }
                                 ],
                                 "schema": "se-harness-hash-bound-classes-v1",
-                                "unbound_digest_fields": [],
+                                "removed_field": [],
                             }
                         ),
                         encoding="utf-8",
@@ -1443,3 +1018,26 @@ class UnmodifiedBehaviourTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+@unittest.skipUnless(git_available(), "git is unavailable")
+class LocalFormatTests(unittest.TestCase):
+    def test_new_checksum_field_needs_no_registry(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            build_source(root, committed_attributes())
+            path = root / "docs/engineering/note.md"
+            path.write_text('+++\nid = "NOTE-001"\nunrelated_sha256 = "not a consumed checksum"\n+++\n', encoding="utf-8")
+            git(root, "add", ".")
+            self.assertTrue(results(root)[CHECK_CLASS_DECLARED][0])
+
+    def test_equivalent_attribute_locations_have_the_same_result(self):
+        rule = b"docs/engineering/**/evidence/*.json text eol=lf\n"
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            build_source(root, b"# se-harness:begin\n" + rule + b"# se-harness:end\n")
+            before = results(root)[CHECK_ATTRIBUTE_EFFECTIVE]
+            (root / ".gitattributes").write_bytes(b"# se-harness:begin\n# se-harness:end\n" + rule)
+            after = results(root)[CHECK_ATTRIBUTE_EFFECTIVE]
+            self.assertTrue(before[0], before[1])
+            self.assertEqual(before, after)

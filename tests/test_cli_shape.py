@@ -370,11 +370,11 @@ class MockedCommandShapeTests(unittest.TestCase):
     def test_identity_json_is_the_runtime_identity_object(self) -> None:
         # ECP-CLI-008 / -003.
         report = mock.Mock(passed=False)
-        report.to_dict.return_value = {"schema": "se-harness-runtime-identity-v3", "passed": False}
+        report.to_dict.return_value = {"schema": "se-harness-runtime-identity-v4", "passed": False}
         with mock.patch("se_harness.cli.inspect_runtime_identity", return_value=report) as inspect:
             code, output, error = invoke("identity", "--role", "released-evaluator", "--expected-version", "0.11.0", "--expected-root", "x", "--json")
         self.assertEqual(1, code)
-        self.assertEqual({"schema": "se-harness-runtime-identity-v3", "passed": False}, json.loads(output))
+        self.assertEqual({"schema": "se-harness-runtime-identity-v4", "passed": False}, json.loads(output))
         self.assertEqual("released-evaluator", inspect.call_args.kwargs["role"])
 
     def test_qualify_exits_one_on_a_failed_result_and_prints_its_json(self) -> None:

@@ -146,7 +146,7 @@ class ContextRoutingRetirementTests(unittest.TestCase):
     def test_routing_table_gives_every_subject_exactly_one_owner(self) -> None:
         rows = [
             line
-            for line in self.router_text().split("| Subject | Normative owner |", 1)[1].splitlines()
+            for line in self.router_text().split("| Subject | Guide and machine policy |", 1)[1].splitlines()
             if line.startswith("|") and not line.startswith("| ---")
         ]
         parsed_rows: list[tuple[str, str]] = []

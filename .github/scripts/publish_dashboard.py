@@ -327,23 +327,26 @@ def _validated_evaluator_binding(
     raw = text.encode("utf-8")
     if not raw or len(raw) > EVALUATOR_EVIDENCE_MAX_BYTES:
         raise PublicationError(f"release record {record_id} evaluator evidence size is invalid")
-    if _sha256(raw) != digest:
-        raise PublicationError(f"release record {record_id} evaluator evidence digest differs")
     value = _loads_json_bytes(raw, label=f"{evidence_commit}:{path}")
     canonical = (json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n").encode("utf-8")
-    if raw != canonical:
-        raise PublicationError(f"release record {record_id} evaluator evidence is not canonical")
-    if set(value) != {"schema", "role", "evaluator", "origins", "environment", "diagnostics"}:
+    legacy = value.get("schema") == EVALUATOR_EVIDENCE_SCHEMA
+    if _sha256(canonical) != digest or (legacy and raw != canonical):
+        raise PublicationError(f"release record {record_id} evaluator evidence digest differs")
+    fields = {"schema", "role", "evaluator", "origins", "environment", "diagnostics"}
+    if not legacy:
+        fields.add("inspection")
+    if set(value) != fields:
         raise PublicationError(f"release record {record_id} evaluator evidence field set differs")
     evaluator = value.get("evaluator")
     origins = value.get("origins")
     environment = value.get("environment")
-    if value.get("schema") != EVALUATOR_EVIDENCE_SCHEMA or value.get("role") != "released-evaluator":
+    if value.get("schema") not in {EVALUATOR_EVIDENCE_SCHEMA, "se-harness-evaluator-evidence-v2"} or value.get("role") != "released-evaluator":
         raise PublicationError(f"release record {record_id} evaluator evidence role is invalid")
     if (
         not isinstance(evaluator, dict)
         or set(evaluator) != {"version", "payload_manifest", "payload_sha256", "archive_name", "archive_sha256"}
         or evaluator.get("payload_manifest") != EVALUATOR_PAYLOAD_MANIFEST
+        or (not legacy and value.get("inspection") != "full-payload")
     ):
         raise PublicationError(f"release record {record_id} evaluator identity is invalid")
     evaluator_version = evaluator.get("version")
@@ -355,7 +358,7 @@ def _validated_evaluator_binding(
         or not isinstance(evaluator.get("payload_sha256"), str)
         or re.fullmatch(r"[0-9a-f]{64}", evaluator["payload_sha256"]) is None
         or (archive_name is None) != (archive_sha256 is None)
-        or archive_name is None
+        or (legacy and archive_name is None)
         or (
             archive_name is not None
             and (
@@ -369,7 +372,7 @@ def _validated_evaluator_binding(
     if (
         not isinstance(origins, dict)
         or set(origins) != {"python_executable", "module", "distribution", "templates", "entry_point"}
-        or any(not _valid_evaluator_origin(item) for item in origins.values())
+        or any(not _valid_evaluator_origin(item) for key, item in origins.items() if legacy or key != "entry_point" or item is not None)
     ):
         raise PublicationError(f"release record {record_id} evaluator origins are invalid")
     environment_fields = {
@@ -385,8 +388,9 @@ def _validated_evaluator_binding(
         or any(type(environment.get(field)) is not bool for field in environment_fields)
         or not environment.get("isolated_python")
         or environment.get("user_site_enabled")
-        or environment.get("pythonpath_present")
-        or not environment.get("entry_point_resolved")
+        or (legacy and environment.get("pythonpath_present"))
+        or (legacy and not environment.get("entry_point_resolved"))
+        or environment.get("entry_point_resolved") != (origins.get("entry_point") is not None)
         or not environment.get("checkout_excluded")
         or value.get("diagnostics") != []
     ):

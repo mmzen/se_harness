@@ -41,6 +41,7 @@ FRAGMENT_TARGETS = {
     "gitignore.fragment": ".gitignore",
 }
 SEED_SUFFIX = ".seed"
+MACHINE_POLICY = frozenset({"ENGINEERING_HARNESS.md", "docs/engineering/WORKFLOW.json", "docs/engineering/QUALITY_GATES.json"})
 
 
 class HarnessError(RuntimeError):
@@ -122,9 +123,10 @@ def _templates() -> list[TemplateFile]:
         elif name.endswith(SEED_SUFFIX):
             result.append(TemplateFile(source, relative.with_name(name[: -len(SEED_SUFFIX)]), "seed"))
         elif name.endswith(".tpl"):
-            result.append(TemplateFile(source, relative.with_name(name[:-4]), "managed"))
+            target = relative.with_name(name[:-4])
+            result.append(TemplateFile(source, target, "managed" if target.as_posix() in MACHINE_POLICY else "seed"))
         else:
-            result.append(TemplateFile(source, relative, "managed"))
+            result.append(TemplateFile(source, relative, "managed" if relative.as_posix() in MACHINE_POLICY else "seed"))
     return result
 
 
@@ -258,12 +260,25 @@ def _variables(target: Path, project_name: str | None, installed_at: str | None 
     }
 
 
+def _updated_config(current: bytes, version: str) -> bytes:
+    """An explicit upgrade updates the selected version and keeps owner settings."""
+    text = current.decode("utf-8").replace("\r\n", "\n").replace("\r", "\n")
+    section = re.search(r"(?ms)^\[harness\][ \t]*(?:\#.*)?$.*?(?=^\[|\Z)", text)
+    if section is None:
+        raise HarnessError("use --replace-file .engineering-harness.toml to replace a config without a [harness] section")
+    value, count = re.subn(r"(?m)^(tool_version[ \t]*=[ \t]*).*$", lambda match: match[1] + '"' + version + '"', section[0])
+    if count != 1:
+        raise HarnessError("the [harness] section must identify one tool_version")
+    return (text[:section.start()] + value + text[section.end():]).encode("utf-8")
+
+
 def plan_install(
     target: Path,
     *,
     project_name: str | None,
     mode: str,
     adoption_report: bytes | None = None,
+    replace_files: Iterable[str] = (),
 ) -> tuple[list[Change], dict]:
     # ECP-INS-004: two modes, "init" (installation into any target) and
     # "upgrade". A target with content is installed into, not refused.
@@ -273,6 +288,7 @@ def plan_install(
     old_lock = _load_lock(target) if target.exists() else {"schema": LOCK_SCHEMA, "tool_version": None, "files": {}}
     installed_at = None
     configured_project_name = None
+    harness_config = {}
     config_path = target / CONFIG_NAME
     if config_path.exists():
         try:
@@ -283,9 +299,14 @@ def plan_install(
             installed_at = None
     variables = _variables(target, project_name or configured_project_name, installed_at)
     changes: list[Change] = []
+    replacements = {Path(path).as_posix() for path in replace_files}
+    templates = effective_template_files(old_lock)
+    editable = {item.target.as_posix() for item in templates if item.mode == "seed"}
+    if replacements - editable:
+        raise HarnessError("--replace-file must name a seeded file: " + ", ".join(sorted(replacements - editable)))
     old_files = old_lock.get("files", {})
 
-    for item in effective_template_files(old_lock):
+    for item in templates:
         destination = safe_destination(target, item.target)
         current = destination.read_bytes() if destination.exists() else None
         rendered = _render(item.source.read_bytes(), variables)
@@ -294,32 +315,15 @@ def plan_install(
         old_entry = old_files.get(relative, {}) if isinstance(old_files.get(relative, {}), dict) else {}
 
         if item.mode == "seed":
-            # Seed files become repository-owned as soon as they are installed.
-            # A prior seed entry remembers intentional removal and prevents later
-            # upgrades from recreating the file. A prior managed entry is an
-            # explicit ownership-mode migration and is safe only when the old
-            # managed bytes still match their lock entry.
-            old_mode = old_entry.get("mode")
-            if old_mode == "seed":
-                action = "unchanged"
-            elif old_mode in {"managed", "fragment"}:
-                if current is None:
-                    action = "customized"
-                else:
-                    try:
-                        old_tracked = tracked_content(str(old_mode), current)
-                        if old_tracked is None:
-                            raise HarnessError(f"prior managed content is unavailable: {relative}")
-                        match = compare_lock_entry(old_entry, old_tracked)
-                    except IntegrityError as exc:
-                        raise HarnessError(f"invalid managed text at {relative}: {exc}") from exc
-                    action = "update" if mode == "upgrade" and match != "mismatch" else "customized"
+            if relative in replacements:
+                action = "update" if current is not None and current != desired else ("add" if current is None else "unchanged")
             elif current is None:
-                action = "add"
+                action = "unchanged" if old_entry.get("mode") == "seed" else "add"
+            elif relative == CONFIG_NAME and mode == "upgrade" and harness_config.get("tool_version") != __version__:
+                desired = _updated_config(current, __version__)
+                action = "update"
             else:
-                # Existing untracked content is explicitly adopted as an
-                # owner-controlled seed. Its bytes are never replaced.
-                action = "adopt"
+                action = "unchanged" if old_entry.get("mode") == "seed" else "adopt"
         elif current is None:
             action = "add"
         elif current == desired:
@@ -524,6 +528,7 @@ def apply_changes(
     *,
     allow_updates: bool,
     evidence_output: Path | None = None,
+    replace_files: Iterable[str] = (),
 ) -> dict:
     changes = list(changes)
     transition = False
@@ -534,6 +539,7 @@ def apply_changes(
             target,
             project_name=None,
             mode="upgrade",
+            replace_files=replace_files,
         )
         if old_lock != refreshed_lock or changes != refreshed_changes:
             raise HarnessError("upgrade plan or installed root changed before apply; no files were written")

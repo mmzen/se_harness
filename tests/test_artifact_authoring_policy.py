@@ -57,7 +57,7 @@ class ArtifactAuthoringPolicyTests(ArtifactAuthoringPolicyFixture, unittest.Test
         self.assertTrue(installed.is_file())
         self.assertEqual(POLICY.read_bytes().replace(b"\r\n", b"\n"), installed.read_bytes().replace(b"\r\n", b"\n"))
         lock = json.loads((self.root / ".engineering-harness.lock").read_text(encoding="utf-8"))
-        self.assertEqual("managed", lock["files"]["docs/engineering/ARTIFACT_AUTHORING.md"]["mode"])
+        self.assertEqual("seed", lock["files"]["docs/engineering/ARTIFACT_AUTHORING.md"]["mode"])
         router = (self.root / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
         self.assertEqual(1, router.count("docs/engineering/ARTIFACT_AUTHORING.md"))
         self.assertIn("| Authoring rules for formal artifacts |", router)

@@ -189,6 +189,27 @@ releases_work = ["WO-TST-001"]
         with self.assertRaisesRegex(PUBLICATION.PublicationError, "no canonical evaluator evidence binding"):
             self.resolve()
 
+    def test_new_evidence_accepts_whitespace_and_no_unused_archive_or_console(self):
+        value = json.loads(self.evaluator_evidence)
+        value.update(schema="se-harness-evaluator-evidence-v2", inspection="full-payload")
+        value["evaluator"].update(archive_name=None, archive_sha256=None)
+        value["origins"]["entry_point"] = None
+        value["environment"].update(entry_point_resolved=False, pythonpath_present=True)
+        canonical = (json.dumps(value, ensure_ascii=True, separators=(",", ":"), sort_keys=True) + "\n").encode("utf-8")
+        self.evaluator_evidence_sha256 = sha256(canonical)
+        write(self.root / self.evaluator_evidence_path, json.dumps(value, indent=4))
+        lock_path = self.root / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        lock["evaluator"] = value["evaluator"]
+        write(lock_path, json.dumps(lock))
+        write(self.root / self.record_path, self.release_record("RLS-TST-001"))
+        self.commit("bind new evaluator evidence")
+        result = PUBLICATION._validated_evaluator_binding(self.root, "HEAD", {
+            "id": "RLS-TST-001", "evaluator_evidence_path": self.evaluator_evidence_path,
+            "evaluator_evidence_sha256": self.evaluator_evidence_sha256,
+        })
+        self.assertEqual(self.evaluator_evidence_sha256, result["sha256"])
+
     def test_modified_evaluator_evidence_fails_publication_replay(self) -> None:
         value = json.loads(self.evaluator_evidence)
         value["environment"]["isolated_python"] = False

@@ -8,6 +8,24 @@ The one-time emergency bootstrap published version 0.5.0a1 and used that exact e
 
 The checkout and the locked root now report different versions, and they were always different identities. Candidate source in this checkout reports version 0.18.0, the version this candidate proposes to publish. The standard root installation remains governed by exact public 0.17.0, the `tool_version` recorded in `.engineering-harness.toml`, and both statements are true at the same time: the candidate version never replaces the root evaluator version, and neither replaces the other in this note. The schema-3 lock binds that released 0.17.0 version's immutable public wheel and installed-payload digests; checkout source includes later development changes and remains candidate evidence. A matching version string never granted verification, release, publication, deployment, or repository-upgrade authority, and a leading candidate version does not either — 0.18.0 is a proposal until a separately authorized release publishes it and a separately approved upgrade work order adopts it.
 
+## Candidate identity and editable files (WO-KIS-003)
+
+Ordinary candidate commands check the actual checker origin and version. Full
+payload checks remain at installation, upgrade, release, doctor and explicit
+identity inspection. Module invocation does not need an unused console launcher;
+linked external environments and an ignored PYTHONPATH are accepted. New internal
+evaluator evidence hashes canonical validated JSON; historical evidence retains
+its recorded rule. Release preparation no longer requires an archive receipt
+when the installed checker payload is valid.
+
+The candidate installer locks the router, the two machine policy JSON files and
+the existing marked instruction/ignore fragments. It seeds human guidance,
+artifact templates, CI and owner settings as editable files. Upgrades keep those
+files; `--replace-file PATH` explicitly takes a supplied replacement. See the
+[installation guide](harness-installation-and-upgrades.md). This development
+root remains on 0.17.0; the historical root-adoption notes below still describe
+the evaluator that governs this checkout.
+
 ## Development environment
 
 SE Harness requires Python 3.11 or later and has no runtime dependencies outside the standard library. From a trusted source checkout, install candidate source into a dedicated environment:

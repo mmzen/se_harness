@@ -1,0 +1,11 @@
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-mte6whel\private\verity-plane\evaluator\Scripts\python.exe
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-mte6whel\private\verity-plane\evaluator\Scripts\python.exe
+--workers must be at least 1
+docs/notes/diagnostic-codes.md matches the source
+WEX_SCALE artifacts=100 validation=0.109702s focus=0.191690s plan=0.240387s
+WEX_SCALE artifacts=500 validation=0.504564s focus=0.555672s plan=0.950018s
+WEX_SCALE artifacts=1000 validation=1.090997s focus=1.125644s plan=1.786069s
+----------------------------------------------------------------------
+Ran 1085 tests in 138.496s (175 classes, 4 workers)
+
+OK (skipped=16)

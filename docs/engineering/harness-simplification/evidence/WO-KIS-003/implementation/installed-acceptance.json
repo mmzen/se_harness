@@ -1,0 +1,23 @@
+{
+  "commit": "e0670743bfee3d452d5707d2479f8a8f361576da",
+  "wheel_sha256": "e075ca9baee2f31de34c25384ea119ec77662339379773354fe44ee81d5b82de",
+  "platform": "Windows",
+  "checks": "passed",
+  "index_install_without_receipt": true,
+  "locked_files": [
+    ".gitattributes",
+    ".gitignore",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "ENGINEERING_HARNESS.md",
+    "docs/engineering/QUALITY_GATES.json",
+    "docs/engineering/WORKFLOW.json"
+  ],
+  "linked_environment": true,
+  "unused_console_absent": true,
+  "ignored_pythonpath": true,
+  "release_preparation": "ready fixture only",
+  "guidance_keep_and_replace": true,
+  "changed_payload_detected_by_doctor": true,
+  "candidate_import_refused": true
+}

@@ -113,7 +113,7 @@ def _prepare(target: Path, provider: str, plugin_root: Path | None) -> tuple[Pat
                 continue
             destination = _destination(root, path)
             raw = item.source.read_bytes()
-            after["files"][path] = {"mode": "managed", "sha256": canonical_sha256(raw)}
+            after["files"][path] = {"mode": "seed", "state": "present"}
             if not destination.is_file() or destination.read_bytes() != raw:
                 writes[path] = raw
                 changes.append({"path": path, "action": "replace"})

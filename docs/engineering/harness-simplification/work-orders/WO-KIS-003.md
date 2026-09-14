@@ -2,7 +2,7 @@
 id = "WO-KIS-003"
 type = "work_order"
 title = "Cut repeated identity proofs and locked guidance"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-13"
 updated = "2026-09-13"
@@ -78,7 +78,21 @@ paths = [
   "templates/repository/standard/docs/engineering/templates/",
   "templates/repository/standard/gitattributes.fragment",
   "templates/repository/standard/gitignore.fragment",
+  "tests/test_engine_import_surface.py",
+  "tests/test_cli_shape.py",
+  "tests/test_workflow_execution.py",
+  "tests/fixtures/hash_bound/overlapping-classes.json",
+  ".github/scripts/publish_dashboard.py",
+  "tests/test_dashboard_publication.py",
+  "docs/notes/harnessctl-reference.md",
+  "tests/test_artifact_catalog.py",
+  "tests/test_artifact_authoring_policy.py",
+  "tests/test_context_routing_retirement.py",
+  "tests/test_codes_and_contract_tables.py",
+  "tests/test_predecessor_bootstrap_retirement.py",
+  "docs/notes/diagnostic-codes.md",
   "tests/test_configuration_surface.py",
+  "tests/test_progressive_documentation.py",
   "tests/test_evaluator_identity.py",
   "tests/test_governor_transition.py",
   "tests/test_harnessctl.py",
@@ -108,6 +122,20 @@ to = "approved"
 decided_at = "2026-09-13T16:40:43Z"
 decided_by = "engineering-owner"
 reason = "The owner accepted all 38 candidates in the retained 2026-09-13 codebase KISS review and requested the work orders: \"OK ! Let's create the work orders to implement all candidates\". Record the engineering-owner approval of WO-KIS-003 within that accepted scope and the established delegated route. SPEC-KIS-001 makes the replacement contracts and seven retained protections explicit; the coverage map assigns all candidates. This records definition approval or bounded execution delegation only, not implementation start, completion, verification, release, merge, publication, live adoption or historical evidence deletion."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-13T19:07:48Z"
+decided_by = "engineering-owner"
+reason = "The owner confirmed PR 468 is merged, continuing the accepted sequential implementation of all KISS candidates. Start WO-KIS-003 after WO-KIS-002 integration at 573c5f3c0f49c009aa13c9a3b0d8a9c9ff76162f. Retain the approved delegated execution route for completion and preparation."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-13T19:50:14Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 40a355a20bf7a1b2d8b1340995b7b25ff34cc985 (check-run 103781293120, source github-checks). All ten selected cuts are implemented in source commit e0670743bfee3d452d5707d2479f8a8f361576da. The exact candidate passed 1085 tests with 16 skipped, installed wheel acceptance and all hosted checks at 40a355a20bf7a1b2d8b1340995b7b25ff34cc985. Evidence is retained under evidence/WO-KIS-003/implementation. Record bounded delegated completion under the approved work order; owner assurance and integration remain pending."
 +++
 
 # Cut repeated identity proofs and locked guidance
@@ -189,3 +217,10 @@ An unavailable platform is untested; a proposed record is not verified; a green 
 State the simpler behavior, accepted candidates completed, checks run, observed reduction and material remaining limitation.
 Obtain the released evaluator's schema-2 handoff for WO-KIS-003 and report its actual state and one next action.
 Leave assurance, release, publication, merge and live adoption decisions to their explicit accountable actions.
+
+## Implementation scope clarification
+
+The identity format change includes its existing dashboard publication reader,
+shared engine/CLI test fixtures, and the hash-format fixture. These are direct
+consumers of the ten accepted replacements. The command reference documents
+the explicit seeded-file replacement option. No further product behavior is added.

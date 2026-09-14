@@ -14,7 +14,8 @@ from se_harness.runtime_identity import RuntimeIdentity
 from se_harness.integrity import VERSION_PATTERN, canonical_json_bytes, raw_sha256, unique_object_hook
 
 
-EVIDENCE_SCHEMA = "se-harness-evaluator-evidence-v1"
+LEGACY_EVIDENCE_SCHEMA = "se-harness-evaluator-evidence-v1"
+EVIDENCE_SCHEMA = "se-harness-evaluator-evidence-v2"
 MAX_EVIDENCE_BYTES = 64 * 1024
 SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
 NORMALIZED_ORIGIN_PATTERN = re.compile(r"<evaluator-root>(?:/[A-Za-z0-9._+()@ -]+)*")
@@ -82,6 +83,10 @@ def _normalized_origin(raw: str, evaluator_root: Path) -> str:
     path = Path(raw)
     relative = _lexical_relative(path, evaluator_root)
     if relative is None:
+        # Resolve an environment-directory alias without following bin/python's
+        # terminal link out to the system interpreter in a POSIX virtualenv.
+        relative = _lexical_relative(path.parent.resolve() / path.name, evaluator_root.resolve())
+    if relative is None:
         relative = _resolved_relative(path, evaluator_root)
     if relative is None or any(part in {"", ".", ".."} for part in relative.parts):
         raise EvaluatorEvidenceError("runtime origin is outside the evaluator root")
@@ -132,25 +137,31 @@ def validate_evaluator_evidence(
 ) -> dict[str, Any]:
     """The one validator of an evaluator-evidence document (ECP-ENG-006).
 
-    Checks run in the engine's order; each refusal carries its `reason`. The
-    engine requires an isolated interpreter and, for a release record, an archive;
-    the package's own readers take the defaults.
+    Checks run in the engine's order; each refusal carries its `reason`.
+    The engine requires an isolated interpreter. The historical ``require_archive``
+    option keeps the v1 archive rule; v2 release evidence requires full payload
+    inspection and accepts index installations without an archive receipt.
     """
 
-    evidence = _validate_field_set(value, TOP_LEVEL_FIELDS, "evaluator evidence", "field_set")
-    if evidence.get("schema") != EVIDENCE_SCHEMA:
+    legacy = isinstance(value, dict) and value.get("schema") == LEGACY_EVIDENCE_SCHEMA
+    fields = TOP_LEVEL_FIELDS if legacy else TOP_LEVEL_FIELDS | {"inspection"}
+    evidence = _validate_field_set(value, fields, "evaluator evidence", "field_set")
+    if evidence.get("schema") not in {EVIDENCE_SCHEMA, LEGACY_EVIDENCE_SCHEMA}:
         raise EvaluatorEvidenceError("unsupported evaluator evidence schema", "schema")
     if evidence.get("role") != "released-evaluator":
         raise EvaluatorEvidenceError("evaluator evidence role must be released-evaluator", "role")
 
     evaluator = _validate_field_set(evidence.get("evaluator"), EVALUATOR_FIELDS, "evaluator identity", "identity_field_set")
-    if evaluator.get("payload_manifest") != PAYLOAD_MANIFEST:
+    full = legacy or evidence.get("inspection") == "full-payload"
+    if not legacy and evidence.get("inspection") not in {"full-payload", "origin-version"}:
+        raise EvaluatorEvidenceError("unsupported evaluator inspection", "schema")
+    if evaluator.get("payload_manifest") != (PAYLOAD_MANIFEST if full else None):
         raise EvaluatorEvidenceError("unsupported evaluator evidence payload manifest", "payload_manifest")
     version = evaluator.get("version")
     if not isinstance(version, str) or VERSION_PATTERN.fullmatch(version) is None:
         raise EvaluatorEvidenceError("invalid evaluator evidence version", "version")
     payload_sha256 = evaluator.get("payload_sha256")
-    if not isinstance(payload_sha256, str) or SHA256_PATTERN.fullmatch(payload_sha256) is None:
+    if (full and (not isinstance(payload_sha256, str) or SHA256_PATTERN.fullmatch(payload_sha256) is None)) or (not full and payload_sha256 is not None):
         raise EvaluatorEvidenceError("invalid evaluator evidence payload SHA-256", "payload_sha256")
     archive_name = evaluator.get("archive_name")
     archive_sha256 = evaluator.get("archive_sha256")
@@ -162,12 +173,18 @@ def validate_evaluator_evidence(
             raise EvaluatorEvidenceError("invalid evaluator evidence archive name", "archive_name")
         if not isinstance(archive_sha256, str) or SHA256_PATTERN.fullmatch(archive_sha256) is None:
             raise EvaluatorEvidenceError("invalid evaluator evidence archive SHA-256", "archive_sha256")
-    if require_archive and archive_name is None:
-        raise EvaluatorEvidenceError("release evaluator evidence requires an archive name and SHA-256", "archive_required")
+    if require_archive and legacy and archive_name is None:
+        raise EvaluatorEvidenceError("legacy release evaluator evidence requires an archive name and SHA-256", "archive_required")
+    if require_archive and not full:
+        raise EvaluatorEvidenceError("release evaluator evidence requires full payload inspection", "payload_sha256")
+    if not full and archive_name is not None:
+        raise EvaluatorEvidenceError("ordinary inspection does not claim an archive identity", "archive_pair")
 
     origins = _validate_field_set(evidence.get("origins"), ORIGIN_FIELDS, "evaluator origins", "origins_field_set")
     for label in sorted(ORIGIN_FIELDS):
         origin = origins.get(label)
+        if label == "entry_point" and origin is None and not legacy:
+            continue
         if not _is_normalized_origin(origin):
             raise EvaluatorEvidenceError(f"evaluator evidence origin is not normalized: {label}", "origin")
 
@@ -180,15 +197,18 @@ def validate_evaluator_evidence(
         raise EvaluatorEvidenceError("evaluator evidence was not produced under an isolated interpreter", "isolated_python")
     if environment["user_site_enabled"]:
         raise EvaluatorEvidenceError("evaluator evidence enables user site-packages", "user_site")
-    if environment["pythonpath_present"]:
+    if legacy and environment["pythonpath_present"]:
         raise EvaluatorEvidenceError("evaluator evidence inherited PYTHONPATH", "pythonpath")
-    if not environment["entry_point_resolved"]:
+    if environment["entry_point_resolved"] != (origins["entry_point"] is not None) or (legacy and not environment["entry_point_resolved"]):
         raise EvaluatorEvidenceError("evaluator evidence has no resolved entry point", "entry_point")
     if not environment["checkout_excluded"]:
         raise EvaluatorEvidenceError("evaluator evidence does not exclude the checkout", "checkout")
     if evidence.get("diagnostics") != []:
         raise EvaluatorEvidenceError("authoritative evaluator evidence must have no diagnostics", "diagnostics")
-    if expected_evaluator is not None and evaluator != normalize_evaluator_identity(expected_evaluator):
+    expected_identity = normalize_evaluator_identity(expected_evaluator) if expected_evaluator is not None else None
+    if expected_identity is not None and not full:
+        expected_identity = {key: (expected_identity[key] if key == "version" else None) for key in EVALUATOR_FIELDS}
+    if expected_identity is not None and evaluator != expected_identity:
         raise EvaluatorEvidenceError("evaluator evidence differs from the standard lock", "lock")
     return evidence
 
@@ -206,7 +226,7 @@ def parse_evaluator_evidence(
         raise EvaluatorEvidenceError("evaluator evidence is not canonical UTF-8 JSON", "json") from exc
     validated = validate_evaluator_evidence(value, expected_evaluator=expected_evaluator)
     canonical = canonical_evidence_bytes(validated)
-    if raw != canonical:
+    if validated["schema"] == LEGACY_EVIDENCE_SCHEMA and raw != canonical:
         raise EvaluatorEvidenceError("evaluator evidence bytes are not canonical", "canonical")
     return EvaluatorEvidence(validated, canonical, raw_sha256(canonical))
 
@@ -214,13 +234,10 @@ def parse_evaluator_evidence(
 def build_evaluator_evidence(identity: RuntimeIdentity) -> EvaluatorEvidence:
     if not identity.passed or identity.role != "released-evaluator" or identity.diagnostics:
         raise EvaluatorEvidenceError("only a passing released evaluator can produce authority evidence")
-    if identity.entry_point_origin is None:
-        raise EvaluatorEvidenceError("released evaluator entry point is unavailable")
-    if identity.evaluator_payload_manifest is None or identity.evaluator_payload_sha256 is None:
-        raise EvaluatorEvidenceError("released evaluator payload identity is unavailable")
     evaluator_root = Path(identity.expected_root)
     value: dict[str, Any] = {
         "schema": EVIDENCE_SCHEMA,
+        "inspection": "full-payload" if identity.evaluator_payload_sha256 is not None else "origin-version",
         "role": "released-evaluator",
         "evaluator": {
             "version": identity.harness_version,
@@ -234,7 +251,7 @@ def build_evaluator_evidence(identity: RuntimeIdentity) -> EvaluatorEvidence:
             "module": _normalized_origin(identity.module_origin, evaluator_root),
             "distribution": _normalized_origin(identity.distribution_origin, evaluator_root),
             "templates": _normalized_origin(identity.template_origin, evaluator_root),
-            "entry_point": _normalized_origin(identity.entry_point_origin, evaluator_root),
+            "entry_point": _normalized_origin(identity.entry_point_origin, evaluator_root) if identity.entry_point_origin is not None else None,
         },
         "environment": {
             "isolated_python": identity.isolated_python,
