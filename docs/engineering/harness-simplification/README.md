@@ -34,4 +34,4 @@ Historical archive work assesses existing bundles and shrinks new evidence; it d
 
 [WO-KIS-006 implementation evidence](evidence/WO-KIS-006/implementation/README.md) records small summaries, downloadable raw results and the historical archive assessment. Hosted checks passed; [VREC-KIS-006](verification-records/VREC-KIS-006.md) is verified by the owner. Integrated in PR #472.
 
-[WO-KIS-007 implementation evidence](evidence/WO-KIS-007/implementation/README.md) records the test cuts. Full validation and hosted checks passed; verification preparation is next.
+[WO-KIS-007 implementation evidence](evidence/WO-KIS-007/implementation/README.md) records the test cuts. Full validation and hosted checks passed; [VREC-KIS-007](verification-records/VREC-KIS-007.md) is ready for owner verification.

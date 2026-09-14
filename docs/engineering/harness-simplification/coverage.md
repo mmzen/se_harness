@@ -61,4 +61,4 @@ WO-KIS-002: all seven selected outcomes are implemented and pass local checks; s
 
 [WO-KIS-006 implementation evidence](evidence/WO-KIS-006/implementation/README.md) records small summaries, downloadable raw results and the historical archive assessment. Hosted checks passed; [VREC-KIS-006](verification-records/VREC-KIS-006.md) is verified by the owner. Integrated in PR #472.
 
-[WO-KIS-007 implementation evidence](evidence/WO-KIS-007/implementation/README.md) records the test cuts. Full validation and hosted checks passed; verification preparation is next.
+[WO-KIS-007 implementation evidence](evidence/WO-KIS-007/implementation/README.md) records the test cuts. Full validation and hosted checks passed; [VREC-KIS-007](verification-records/VREC-KIS-007.md) is ready for owner verification.
