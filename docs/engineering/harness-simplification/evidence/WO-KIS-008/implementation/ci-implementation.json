@@ -1,0 +1,97 @@
+{
+  "head": "fe33643d7300a5c9cb4e63c72bf75e8f2220cbb8",
+  "base": "e1eb96bf0909d9fdb62a177657af343dc24e9286",
+  "pull_request": "https://github.com/mmzen/se_harness/pull/474",
+  "checks": [
+    {
+      "name": "Analyze (actions)",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34890147988/job/104130505546"
+    },
+    {
+      "name": "validate",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34890156089/job/104130529851"
+    },
+    {
+      "name": "Predecessor evaluator assessment",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34890156155/job/104130529783"
+    },
+    {
+      "name": "Select release rehearsals",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34890156904/job/104130533546"
+    },
+    {
+      "name": "Candidate source evidence",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34890155941/job/104130529443"
+    },
+    {
+      "name": "Analyze (javascript-typescript)",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34890147988/job/104130505413"
+    },
+    {
+      "name": "Analyze (python)",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34890147988/job/104130505945"
+    },
+    {
+      "name": "Rehearse the qualification of this candidate",
+      "conclusion": "SKIPPED",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34890156904/job/104130618480"
+    },
+    {
+      "name": "Candidate package evidence",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34890155941/job/104130908442"
+    },
+    {
+      "name": "Rehearse the qualification of the release record",
+      "conclusion": "SKIPPED",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34890156904/job/104130618092"
+    },
+    {
+      "name": "Upgrade rehearsal (Linux)",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34890155941/job/104131098798"
+    },
+    {
+      "name": "Upgrade rehearsal (Windows)",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34890155941/job/104131098780"
+    },
+    {
+      "name": "Publication rehearsal",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34890156904/job/104130616968"
+    },
+    {
+      "name": "Build deterministic integration package",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34890155941/job/104132013195"
+    },
+    {
+      "name": "Verify integration package (Linux)",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34890155941/job/104132154963"
+    },
+    {
+      "name": "Verify integration package (Windows)",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34890155941/job/104132154900"
+    },
+    {
+      "name": "Retain verified integration package",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34890155941/job/104132435207"
+    },
+    {
+      "name": "CodeQL",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/runs/104130709147"
+    }
+  ]
+}

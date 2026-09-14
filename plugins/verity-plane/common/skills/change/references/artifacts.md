@@ -1,7 +1,8 @@
 # Artifact packages
 
-1. Read the installed `docs/engineering/ARTIFACT_AUTHORING.md` entries and
-   templates for the requested types. Inspect the existing domain and related
+1. Read the installed `docs/engineering/ARTIFACT_AUTHORING.md` shared design
+   principle, entries and templates for the requested types before drafting.
+   Inspect the existing domain and related
    records. Keep each obligation and its corresponding implementation scope
    small; reuse applicable records instead of copying their policy.
 2. Select the exact domain, types and IDs. Inspect all available Git refs for
@@ -21,7 +22,9 @@
    checklists. Definitions and WOs stay `draft`; a DEC stays `open`. Record
    creation neither approves definitions nor disposes decisions. Run the
    released `validate REPO` and retain findings, including incomplete drafts.
-5. Present the exact reviewable IDs, content and SHA-256 digests. Apply an
+5. Before presenting definitions for approval, apply the shared policy's relevant
+   review questions and resolve material findings through the existing process.
+   Present the exact reviewable IDs, content and SHA-256 digests. Apply an
    approval only when an actual accountable decision covers those inputs;
    follow [Continuing authority](authority.md). Preview the selected transaction
    with `transition`, then apply once while the reviewed inputs still match.

@@ -15,6 +15,10 @@ Read the selected repository's AGENTS.md and ENGINEERING_HARNESS.md on entry,
 after compaction, and after switching repositories. Read the operating card and
 the reading manifest for the selected work. Use normal file reads.
 
+For drafting, design and review, read and apply the selected repository's
+`docs/engineering/ARTIFACT_AUTHORING.md`: its shared design principle and the
+questions relevant to the current artifact or review of implemented changes.
+
 Use the repository-selected released evaluator in its private environment,
 through the absolute Python path with `-I -m se_harness`. Run
 `check ABSOLUTE_REPOSITORY --artifact ID --json` when beginning governed work,

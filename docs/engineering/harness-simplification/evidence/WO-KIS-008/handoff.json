@@ -1,0 +1,379 @@
+{
+  "compliance": {
+    "change_set_source": "git",
+    "checkpoint": "handoff",
+    "formal_snapshot_sha256": "813499553f5d6960c08d4dfac309a8678d5cf852eb85c91095211b7ebedf4c58",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "predicates": [
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-KIS-008"
+              }
+            ],
+            "id": "QGP-G4I-STATUS",
+            "message": "WO-KIS-008 status is in_progress.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-KIS-008"
+              }
+            ],
+            "id": "QGP-G4I-GRAPH",
+            "message": "The selected formal graph is valid.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "id": "QGP-G4I-INTEGRITY",
+            "message": "No repository-integrity blocker prevents selected evaluation.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-KIS-008:[execution_scope]"
+              }
+            ],
+            "id": "QGP-G4I-SCOPE",
+            "message": "WO-KIS-008 declares 30 normalized scope path(s).",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-KIS-008"
+              }
+            ],
+            "id": "QGP-G4I-COMPLETE",
+            "message": "The caller explicitly asserted that the declared change set is complete.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-KIS-008"
+              }
+            ],
+            "id": "QGP-G4I-PATHS",
+            "message": "All 35 declared changed path(s) are within execution scope.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-KIS-008:review"
+              }
+            ],
+            "id": "QGP-G4I-PREFLIGHT",
+            "message": "Released-installation review preflight inputs are ready.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-KIS-008"
+              }
+            ],
+            "id": "QGP-G4I-EVIDENCE",
+            "message": "Fresh retained evidence is bound at docs/engineering/harness-simplification/evidence/WO-KIS-008/WO-KIS-008-handoff.md.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-KIS-008"
+              }
+            ],
+            "id": "QGP-G4I-DECISION",
+            "message": "No open decision blocks WO-KIS-008.",
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      }
+    ],
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT"
+  },
+  "findings": {
+    "repository_blockers": [],
+    "scoped_blockers": [],
+    "unrelated_count": 46
+  },
+  "mutation": {
+    "writes": []
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "procedure": {
+    "current_step": "STEP-WO-IMPLEMENT-DECIDE",
+    "id": "PROC-WO-IMPLEMENT",
+    "steps": [
+      {
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-KIS-008",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-KIS-008",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-DECISION": {
+            "decision_right": "DR-DECISION-DISPOSE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-KIS-008",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-KIS-008",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Evaluated implementation handoff for WO-KIS-008."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ]
+      },
+      {
+        "artifact": "WO-KIS-008",
+        "decision": "whether the authorized implementation and evidence are complete",
+        "decision_right": "DR-WO-COMPLETE",
+        "effects": [
+          "An explicit completion decision permits only WO-KIS-008 to become implemented."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-DECIDE",
+        "kind": "decision",
+        "non_effects": [
+          "Completion does not verify or release the work."
+        ],
+        "outcomes": [
+          "implemented",
+          "continue",
+          "reject"
+        ],
+        "response": "Mark WO-KIS-008 implemented.",
+        "role": "engineering-owner"
+      }
+    ]
+  },
+  "restitution": {
+    "alternatives": [],
+    "blocked_by": [],
+    "command_or_response": {
+      "kind": "response",
+      "value": "Mark WO-KIS-008 implemented."
+    },
+    "current_lifecycle_state": [
+      "WO-KIS-008 is in_progress."
+    ],
+    "decision_required": {
+      "artifact": "WO-KIS-008",
+      "decision": "whether the authorized implementation and evidence are complete",
+      "decision_right": "DR-WO-COMPLETE",
+      "outcomes": [
+        "implemented",
+        "continue",
+        "reject"
+      ],
+      "role": "engineering-owner"
+    },
+    "done": [
+      "Evaluated handoff compliance for WO-KIS-008."
+    ],
+    "next": {
+      "action": "whether the authorized implementation and evidence are complete",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-DECIDE"
+    },
+    "not_done": [],
+    "outcome": "completed"
+  },
+  "result_sha256": "c95ec9ed271d1dae757f15a1e5325872658c5e76df7a350f51585ea71ed098a0",
+  "schema": "se-harness-workflow-result-v2",
+  "scope": {
+    "change_set_complete": true,
+    "changed_paths": [
+      "docs/engineering/harness-simplification/capabilities/CAP-KIS-002.md",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-008/governance/accepted-proposal.md",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-008/governance/owner-request.md",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-008/governance/packet.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-008/governance/test-path-discovery.md",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-008/handoff.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-008/implementation/checks.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-008/implementation/README.md",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-008/WO-KIS-008-handoff.md",
+      "docs/engineering/harness-simplification/intent/INT-KIS-002.md",
+      "docs/engineering/harness-simplification/README.md",
+      "docs/engineering/harness-simplification/requirements/REQ-KIS-008.md",
+      "docs/engineering/harness-simplification/specifications/SPEC-KIS-002.md",
+      "docs/engineering/harness-simplification/verification/VER-KIS-002.md",
+      "docs/engineering/harness-simplification/work-orders/WO-KIS-008.md",
+      "docs/notes/design-simplicity.md",
+      "plugins/verity-plane/common/skills/change/references/artifacts.md",
+      "plugins/verity-plane/common/skills/change/references/work-orders.md",
+      "plugins/verity-plane/common/skills/change/SKILL.md",
+      "plugins/verity-plane/common/skills/evidence/references/records.md",
+      "se_harness/preflight.py",
+      "templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md",
+      "templates/repository/standard/docs/engineering/templates/ADR.template.md",
+      "templates/repository/standard/docs/engineering/templates/ARCHITECTURE.template.md",
+      "templates/repository/standard/docs/engineering/templates/CAPABILITY.template.md",
+      "templates/repository/standard/docs/engineering/templates/INTENT.template.md",
+      "templates/repository/standard/docs/engineering/templates/REQUIREMENT.template.md",
+      "templates/repository/standard/docs/engineering/templates/SPECIFICATION.template.md",
+      "templates/repository/standard/docs/engineering/templates/VERIFICATION.template.md",
+      "templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md",
+      "templates/repository/standard/ENGINEERING_HARNESS.md.tpl",
+      "tests/test_artifact_authoring_policy.py",
+      "tests/test_artifact_catalog.py",
+      "tests/test_context_routing_retirement.py",
+      "tests/test_instruction_architecture.py"
+    ],
+    "declared_paths": [
+      "docs/engineering/harness-simplification/capabilities/CAP-KIS-002.md",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-008/",
+      "docs/engineering/harness-simplification/intent/INT-KIS-002.md",
+      "docs/engineering/harness-simplification/README.md",
+      "docs/engineering/harness-simplification/requirements/REQ-KIS-008.md",
+      "docs/engineering/harness-simplification/specifications/SPEC-KIS-002.md",
+      "docs/engineering/harness-simplification/verification-records/VREC-KIS-008.evaluator-evidence.json",
+      "docs/engineering/harness-simplification/verification-records/VREC-KIS-008.md",
+      "docs/engineering/harness-simplification/verification/VER-KIS-002.md",
+      "docs/engineering/harness-simplification/work-orders/WO-KIS-008.md",
+      "docs/notes/design-simplicity.md",
+      "plugins/verity-plane/common/skills/change/references/artifacts.md",
+      "plugins/verity-plane/common/skills/change/references/work-orders.md",
+      "plugins/verity-plane/common/skills/change/SKILL.md",
+      "plugins/verity-plane/common/skills/evidence/references/records.md",
+      "se_harness/preflight.py",
+      "templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md",
+      "templates/repository/standard/docs/engineering/templates/ADR.template.md",
+      "templates/repository/standard/docs/engineering/templates/ARCHITECTURE.template.md",
+      "templates/repository/standard/docs/engineering/templates/CAPABILITY.template.md",
+      "templates/repository/standard/docs/engineering/templates/INTENT.template.md",
+      "templates/repository/standard/docs/engineering/templates/REQUIREMENT.template.md",
+      "templates/repository/standard/docs/engineering/templates/SPECIFICATION.template.md",
+      "templates/repository/standard/docs/engineering/templates/VERIFICATION.template.md",
+      "templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md",
+      "templates/repository/standard/ENGINEERING_HARNESS.md.tpl",
+      "tests/test_artifact_authoring_policy.py",
+      "tests/test_artifact_catalog.py",
+      "tests/test_context_routing_retirement.py",
+      "tests/test_instruction_architecture.py"
+    ],
+    "dependencies": [],
+    "governing": [
+      "CAP-KIS-002",
+      "INT-KIS-002",
+      "REQ-KIS-008",
+      "SPEC-KIS-002",
+      "VER-KIS-002"
+    ],
+    "mode": "selected"
+  },
+  "selection": {
+    "artifacts": [
+      "WO-KIS-008"
+    ],
+    "primary": "WO-KIS-008"
+  },
+  "state": {
+    "after": [
+      {
+        "id": "WO-KIS-008",
+        "status": "in_progress"
+      }
+    ],
+    "before": [
+      {
+        "id": "WO-KIS-008",
+        "status": "in_progress"
+      }
+    ]
+  }
+}

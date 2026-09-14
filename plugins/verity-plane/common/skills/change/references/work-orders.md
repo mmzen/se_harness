@@ -40,7 +40,10 @@ validation. A path allowed by a directory prefix does not authorize unrelated
 behavior. Stop an out-of-scope action before invoking its editing tool.
 
 Run the selected verification contract and repository checks. Retain actual
-commands, outcomes and failed attempts. Use the installed handoff procedure and
+commands, outcomes and failed attempts. Review the diff and tests, then apply
+`docs/engineering/ARTIFACT_AUTHORING.md#review-of-implemented-changes` before
+proposing completion. Resolve material findings through the existing process.
+Use the installed handoff procedure and
 its trusted Git base, including the complete change set. Be aware that
 `check --checkpoint handoff --from-git BASE` and `evidence` can write retained
 evidence: they need covered preparation authority and scoped destinations.

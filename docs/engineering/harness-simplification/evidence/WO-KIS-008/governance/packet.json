@@ -1,0 +1,42 @@
+{
+  "base": "e1eb96bf0909d9fdb62a177657af343dc24e9286",
+  "artifacts": [
+    {
+      "id": "INT-KIS-002",
+      "type": "intent",
+      "owner": "product-owner",
+      "path": "docs/engineering/harness-simplification/intent/INT-KIS-002.md"
+    },
+    {
+      "id": "CAP-KIS-002",
+      "type": "capability",
+      "owner": "product-owner",
+      "path": "docs/engineering/harness-simplification/capabilities/CAP-KIS-002.md"
+    },
+    {
+      "id": "REQ-KIS-008",
+      "type": "requirement",
+      "owner": "product-owner",
+      "path": "docs/engineering/harness-simplification/requirements/REQ-KIS-008.md"
+    },
+    {
+      "id": "SPEC-KIS-002",
+      "type": "specification",
+      "owner": "technical-owner",
+      "path": "docs/engineering/harness-simplification/specifications/SPEC-KIS-002.md"
+    },
+    {
+      "id": "VER-KIS-002",
+      "type": "verification",
+      "owner": "assurance-owner",
+      "path": "docs/engineering/harness-simplification/verification/VER-KIS-002.md"
+    },
+    {
+      "id": "WO-KIS-008",
+      "type": "work_order",
+      "owner": "engineering-owner",
+      "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-008.md"
+    }
+  ],
+  "reserved_vrec": "VREC-KIS-008"
+}

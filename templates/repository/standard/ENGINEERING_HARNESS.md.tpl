@@ -62,8 +62,11 @@ a formal result.
 
 Before acting on a lifecycle stage, read `docs/engineering/OPERATING_CARD.md`,
 the selected work order, and every governing artifact listed by the phase
-reading manifest. The routed policies below are reference for humans and for
-the evaluator; an agent is not required to read them to act.
+reading manifest. For authoring, design or review, also read and apply
+[the authoring and review policy](docs/engineering/ARTIFACT_AUTHORING.md), including
+its shared design principle and the questions relevant to the selected work.
+This applies whether or not a skill is used. Other routed policies below are
+reference material unless the selected procedure requires them.
 
 ## Routing
 
@@ -86,7 +89,7 @@ do not replace the installed evaluator's decisions.
 | Normative chain, artifact applicability, relation types, and coverage | `docs/engineering/TRACEABILITY.md` |
 | Eligible operator and technical-artifact English prose | `docs/engineering/TECHNICAL_COMMUNICATION.md` |
 | Artifact authoring locations and templates | `docs/engineering/templates/README.md` |
-| Authoring rules for formal artifacts | `docs/engineering/ARTIFACT_AUTHORING.md` |
+| Authoring, design simplicity and review questions | `docs/engineering/ARTIFACT_AUTHORING.md` |
 | Repository-specific facts and commands | the owner-controlled region of `AGENTS.md` |
 
 `docs/engineering/README.md` is an index. It MUST NOT become a second policy
