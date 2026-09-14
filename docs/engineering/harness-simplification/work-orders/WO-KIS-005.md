@@ -2,10 +2,10 @@
 id = "WO-KIS-005"
 type = "work_order"
 title = "Shorten CI and resume interrupted publication"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-13"
-updated = "2026-09-13"
+updated = "2026-09-14"
 
 [delegation]
 class = "execution"
@@ -78,6 +78,13 @@ to = "approved"
 decided_at = "2026-09-13T16:40:43Z"
 decided_by = "engineering-owner"
 reason = "The owner accepted all 38 candidates in the retained 2026-09-13 codebase KISS review and requested the work orders: \"OK ! Let's create the work orders to implement all candidates\". Record the engineering-owner approval of WO-KIS-005 within that accepted scope and the established delegated route. SPEC-KIS-001 makes the replacement contracts and seven retained protections explicit; the coverage map assigns all candidates. This records definition approval or bounded execution delegation only, not implementation start, completion, verification, release, merge, publication, live adoption or historical evidence deletion."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-14T08:35:03Z"
+decided_by = "engineering-owner"
+reason = "The owner confirmed PR 470 is merged, continuing the accepted sequential implementation of all KISS candidates. Start WO-KIS-005 after WO-KIS-004 integration at 0f9aa9bae7795034b21b5743a0e51e5c12b6133b. Retain the approved delegated execution route for completion and preparation."
 +++
 
 # Shorten CI and resume interrupted publication

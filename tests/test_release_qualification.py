@@ -1,13 +1,16 @@
 from __future__ import annotations
 
 import contextlib
+import hashlib
 import io
 import json
 import tempfile
 import unittest
+import zipfile
 from pathlib import Path
 from types import SimpleNamespace
 from unittest import mock
+from se_harness import candidate_acceptance as acceptance
 
 from se_harness import __version__
 from se_harness.cli import build_parser
@@ -26,6 +29,55 @@ from se_harness.release_qualification import (
     qualify_released_root,
     write_qualification_result,
 )
+
+
+class DisposablePackageAcceptanceTests(unittest.TestCase):
+    def test_unrelated_checkout_size_does_not_expand_acceptance_snapshots(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            checkout = root / "checkout"
+            checkout.mkdir()
+            (checkout / "unrelated.bin").write_bytes(b"x" * 65536)
+            wheel = root / "se_harness-1.2.3-py3-none-any.whl"
+            with zipfile.ZipFile(wheel, "w") as archive:
+                archive.writestr("se_harness-1.2.3.dist-info/METADATA", "Name: se-harness\nVersion: 1.2.3\n")
+            def command(argv, **kwargs):
+                code = 0
+                if len(argv) > 2 and argv[1] == "init":
+                    target = Path(argv[2])
+                    target.mkdir(exist_ok=True)
+                    (target / "ENGINEERING_HARNESS.md").write_text("router\n", encoding="utf-8")
+                    (target / ".engineering-harness.lock").write_text(json.dumps({"files": {"ENGINEERING_HARNESS.md": {"sha256": "a" * 64}}}), encoding="utf-8")
+                elif len(argv) > 2 and argv[1] == "approve":
+                    code = 2
+                elif len(argv) > 2 and Path(argv[2]).name in {"customized", "corrupted"}:
+                    code = 1
+                return SimpleNamespace(returncode=code, stdout=b"", stderr=b"")
+            # Only the disposable repositories fit this budget; the supplied checkout does not.
+            def environment(path):
+                (path / "bin").mkdir(parents=True)
+                for name in ("python", "harnessctl"):
+                    (path / "bin" / name).touch()
+            with mock.patch.object(acceptance.venv.EnvBuilder, "create", side_effect=environment), mock.patch.object(acceptance, "_launch", side_effect=command), \
+                    mock.patch.object(acceptance, "MAX_SNAPSHOT_BYTES", 1024):
+                result = acceptance.assess_candidate_wheel(wheel, candidate_commit="b" * 40,
+                    candidate_wheel_sha256=hashlib.sha256(wheel.read_bytes()).hexdigest(),
+                    verifier_wheel_sha256="a" * 64, checkout_root=checkout)
+            self.assertTrue(all(s.outcome == "passed" for s in result.scenarios))
+
+    def test_scenario_refuses_an_outside_target_before_launch(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            target = root / "disposable"
+            target.mkdir()
+            outside = root / "owner-file"
+            outside.write_text("keep\n", encoding="utf-8")
+            with mock.patch.object(acceptance, "_launch") as launch:
+                with self.assertRaisesRegex(HarnessError, "outside the disposable target"):
+                    acceptance._run("init", ["harnessctl", "init", str(outside)], cwd=target,
+                                    temporary=target, wheel=root / "candidate.whl", checkout=None)
+                launch.assert_not_called()
+            self.assertEqual("keep\n", outside.read_text())
 
 
 def runtime_identity(*, passed: bool, role: str, commit: str | None = None) -> SimpleNamespace:

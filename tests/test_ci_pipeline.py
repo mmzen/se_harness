@@ -439,12 +439,13 @@ class QualificationDefinitionTests(unittest.TestCase):
         self.assertIn("mode: release-record", self.release)
         self.assertIn("require_status: ${{ needs.select.outputs.status }}", self.rehearsal)
         self.assertIn("default_ref: refs/remotes/origin/main", self.rehearsal)
-        self.assertIn("publish_release.py select-rehearsal-record", self.rehearsal)
-        # WO-CIP-006 (SPEC-CIP-002 CIP-REH-003): a pull request reads the records at its base.
-        self.assertIn("if: github.event_name == 'pull_request'", self.rehearsal)
-        self.assertIn('git fetch --no-tags --depth=1 origin "+refs/heads/$BASE_REF:refs/remotes/origin/$BASE_REF"', self.rehearsal)
-        self.assertIn("BASE_REF: ${{ github.event_name == 'pull_request' && format('refs/remotes/origin/{0}', github.base_ref) || '' }}", self.rehearsal)
-        self.assertIn('--base-ref "$BASE_REF"', self.rehearsal)
+        self.assertIn("publish_release.py select-rehearsals", self.rehearsal)
+        jobs = _job_blocks(self.rehearsal)
+        self.assertIn("needs: select", jobs["rehearse-candidate"])
+        self.assertIn("if: needs.select.outputs.candidate == 'true'", jobs["rehearse-candidate"])
+        self.assertIn("if: needs.select.outputs.release_record != ''", jobs["rehearse-record"])
+        self.assertIn("if: always()", jobs["result"])
+        self.assertIn("success|skipped", jobs["result"])
         self.assertNotIn("matrix", self.rehearsal)
         for absent in ("rehearse_publication", "publication_rehearsal_mechanics", "check-divergence", "PyYAML", "windows-2022"):
             self.assertNotIn(absent, self.rehearsal)
@@ -453,6 +454,52 @@ class QualificationDefinitionTests(unittest.TestCase):
         # WO-TST-003 (REQ-TST-002, TST-SCL 2): the release qualification sets the marker.
         self.assertIn("SE_HARNESS_TEST_SCALE: full", self.definition)
         self.assertIn("python -m unittest discover -s tests -p 'test_*.py'", self.definition)
+
+    def test_rehearsals_follow_changed_inputs_and_explicit_preparation(self) -> None:
+        module = load_module(REPOSITORY_ROOT / ".github/scripts/publish_release.py", "rehearsal_changes_test")
+        for paths, expected in [
+            (["docs/notes/usage.md", "se_harness/workflow.py"], (False, False)),
+            (["pyproject.toml"], (True, False)),
+            (["release/build-recipe.json"], (True, False)),
+            (["repository_tools/release_build.py"], (True, False)),
+            (["tests/test_release_orchestration.py"], (True, False)),
+            ([".github/workflows/publish-pypi.yml"], (True, True)),
+            ([".github/scripts/publish_release.py"], (True, True)),
+        ]:
+            with self.subTest(paths=paths):
+                result = module.rehearsal_changes(paths)
+                self.assertEqual(expected, (result["candidate"], result["record"]))
+        explicit = module.rehearsal_changes([], explicit=True)
+        self.assertTrue(explicit["candidate"] and explicit["record"])
+
+    def test_rehearsal_cli_reads_git_changes_and_reports_successful_skip(self) -> None:
+        module = load_module(REPOSITORY_ROOT / ".github/scripts/publish_release.py", "rehearsal_events_test")
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            init_repository(root)
+            (root / "pyproject.toml").write_text("build input\n", encoding="utf-8")
+            git(root, "add", "."); git(root, "commit", "-qm", "base")
+            base = git(root, "rev-parse", "HEAD")
+            (root / "README.md").write_text("ordinary documentation\n", encoding="utf-8")
+            git(root, "add", "."); git(root, "commit", "-qm", "documentation")
+            event = {"pull_request": {"base": {"sha": base}}}
+            event_path = root / "event.json"
+            event_path.write_text(json.dumps(event), encoding="utf-8")
+            completed = subprocess.run([sys.executable, str(REPOSITORY_ROOT / ".github/scripts/publish_release.py"),
+                "select-rehearsals", "--repository", str(root), "--event", str(event_path), "--event-name", "pull_request",
+                "--github-output", str(root / "outputs"), "--summary", str(root / "summary")], capture_output=True, text=True)
+            self.assertEqual(0, completed.returncode, completed.stderr)
+            self.assertFalse(json.loads(completed.stdout)["candidate"])
+            self.assertIn("skipped", (root / "summary").read_text())
+            self.assertIn("candidate=false\n", (root / "outputs").read_text())
+            git(root, "mv", "pyproject.toml", "retired-build.txt")
+            git(root, "commit", "-qm", "remove build input")
+            self.assertTrue(module.select_rehearsals(root, event, "pull_request")["candidate"])
+            self.assertTrue(module.select_rehearsals(root, {"before": base}, "push")["candidate"])
+            explicit = module.select_rehearsals(root, {}, "workflow_dispatch")
+            self.assertTrue(explicit["candidate"] and explicit["record"])
+            with self.assertRaises(module.ReleaseError):
+                module.select_rehearsals(root, {"before": "f" * 40}, "push")
 
     def test_the_definition_holds_no_authority(self) -> None:
         head = self.definition.split("\njobs:\n", 1)[0]

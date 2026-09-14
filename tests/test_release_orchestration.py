@@ -708,7 +708,7 @@ class ReleaseStateTests(unittest.TestCase):
             with self.assertRaisesRegex(RELEASE.ReleaseError, "file set"):
                 RELEASE.verify_bundle(selected, root)
 
-    def test_github_exact_draft_is_replayable_but_partial_is_not(self) -> None:
+    def test_github_required_assets_allow_partial_drafts_and_unrelated_attachments(self) -> None:
         selected = plan()
         assets = [
             {"name": selected.wheel, "digest": f"sha256:{selected.wheel_sha256}"},
@@ -722,7 +722,64 @@ class ReleaseStateTests(unittest.TestCase):
         metadata["assets"] = []
         self.assertEqual("partial", RELEASE.classify_github(selected, metadata)["state"])
         metadata["assets"] = assets[:1]
-        self.assertEqual("partial", RELEASE.classify_github(selected, metadata)["state"])
+        partial = RELEASE.classify_github(selected, metadata)
+        self.assertEqual("partial", partial["state"])
+        self.assertEqual(sorted([selected.sdist, selected.checksums]), partial["missing"])
+        metadata["assets"] = assets + [{"name": "screenshot.png"}]
+        self.assertEqual("exact", RELEASE.classify_github(selected, metadata)["state"])
+        metadata["assets"][0] = {"name": selected.wheel, "digest": "sha256:" + "0" * 64}
+        self.assertEqual("mismatched", RELEASE.classify_github(selected, metadata)["state"])
+
+    def make_github_bundle(self):
+        scratch = tempfile.TemporaryDirectory()
+        self.addCleanup(scratch.cleanup)
+        root = Path(scratch.name)
+        selected = plan()
+        wheel_hash, sdist_hash = hashlib.sha256(b"wheel").hexdigest(), hashlib.sha256(b"sdist").hexdigest()
+        checksums = checksum_manifest_bytes(selected.version, wheel_hash, sdist_hash)
+        selected = RELEASE.ReleasePlan(**{**RELEASE.asdict(selected), "wheel_sha256": wheel_hash,
+            "sdist_sha256": sdist_hash, "checksums_sha256": hashlib.sha256(checksums).hexdigest()})
+        for name, content in [(selected.wheel, b"wheel"), (selected.sdist, b"sdist"), (selected.checksums, checksums)]:
+            (root / name).write_bytes(content)
+        metadata = {"tagName": selected.tag, "isDraft": True, "isPrerelease": False,
+                    "assets": [{"name": selected.wheel, "digest": "sha256:" + wheel_hash}, {"name": "screenshot.png"}]}
+        return root, selected, metadata
+
+    def test_interrupted_upload_resumes_only_missing_assets(self) -> None:
+        root, selected, metadata = self.make_github_bundle()
+        uploaded = []
+        interrupted = False
+        def upload(argv, **kwargs):
+            nonlocal interrupted
+            self.assertEqual(["gh", "release", "upload", selected.tag], argv[:4])
+            self.assertNotIn("--clobber", argv)
+            path = Path(argv[4])
+            if path.name == selected.sdist and not interrupted:
+                interrupted = True
+                return subprocess.CompletedProcess(argv, 1, "", "interrupted")
+            uploaded.append(path.name)
+            metadata["assets"].append({"name": path.name, "digest": "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()})
+            return subprocess.CompletedProcess(argv, 0, "", "")
+        with mock.patch.object(RELEASE.subprocess, "run", side_effect=upload):
+            with self.assertRaisesRegex(RELEASE.ReleaseError, "upload failed"):
+                RELEASE.resume_github(selected, root, metadata)
+            self.assertEqual([selected.checksums], uploaded)
+            self.assertEqual([selected.sdist], RELEASE.resume_github(selected, root, metadata)["uploaded"])
+            metadata["isDraft"] = False
+            self.assertEqual([], RELEASE.resume_github(selected, root, metadata)["uploaded"])
+        self.assertEqual([selected.checksums, selected.sdist], uploaded)
+
+    def test_resume_refuses_published_partial_or_conflicting_required_asset(self) -> None:
+        root, selected, metadata = self.make_github_bundle()
+        with mock.patch.object(RELEASE.subprocess, "run") as upload:
+            metadata["isDraft"] = False
+            with self.assertRaisesRegex(RELEASE.ReleaseError, "unpublished draft"):
+                RELEASE.resume_github(selected, root, metadata)
+            metadata["isDraft"] = True
+            metadata["assets"][0]["digest"] = "sha256:" + "0" * 64
+            with self.assertRaisesRegex(RELEASE.ReleaseError, "mismatched"):
+                RELEASE.resume_github(selected, root, metadata)
+            upload.assert_not_called()
 
     def test_result_keeps_stages_and_denies_lifecycle_authority(self) -> None:
         stages = {"resolution": {"state": "exact"}, "github": {"state": "failed"}}
