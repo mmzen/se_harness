@@ -257,12 +257,11 @@ jobs:
           if [[ "$state" = absent ]]; then
             python .github/scripts/publish_release.py notes --plan "$PLAN" --output "$RUNNER_TEMP/release-notes.md"
             gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --draft --latest=false \
-              --title "SE Harness $VERSION" --notes-file "$RUNNER_TEMP/release-notes.md" \
-              "$BUNDLE/${{ needs.resolve.outputs.wheel }}" "$BUNDLE/${{ needs.resolve.outputs.sdist }}" "$BUNDLE/${{ needs.resolve.outputs.checksums }}"
-          elif [[ "$state" != exact ]]; then
-            echo "GitHub Release is $state; immutable state was not changed" >&2
-            exit 1
+              --title "SE Harness $VERSION" --notes-file "$RUNNER_TEMP/release-notes.md"
           fi
+          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json tagName,isDraft,isPrerelease,assets >"$metadata"
+          python .github/scripts/publish_release.py resume-github \
+            --plan "$PLAN" --directory "$BUNDLE" --metadata "$metadata"
           gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json tagName,isDraft,isPrerelease,assets >"$metadata"
           python .github/scripts/publish_release.py classify-github --plan "$PLAN" --metadata "$metadata" --output "$RUNNER_TEMP/github-state.json"
           test "$(jq -r '.state' "$RUNNER_TEMP/github-state.json")" = exact
@@ -335,7 +334,8 @@ jobs:
         run: |
           set -euo pipefail
           mkdir release-assets dist
-          gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --dir release-assets
+          gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --dir release-assets \
+            --pattern "$WHEEL" --pattern "$SDIST" --pattern SHA256SUMS
           test "$(find release-assets -maxdepth 1 -type f | wc -l)" -eq 3
           printf '%s  %s\n%s  %s\n%s  %s\n' "$WHEEL_SHA256" "release-assets/$WHEEL" "$SDIST_SHA256" "release-assets/$SDIST" "$CHECKSUMS_SHA256" "release-assets/SHA256SUMS" | sha256sum --check -
           printf '%s  %s\n%s  %s\n' "$WHEEL_SHA256" "$WHEEL" "$SDIST_SHA256" "$SDIST" | cmp --silent - release-assets/SHA256SUMS

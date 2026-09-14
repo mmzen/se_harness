@@ -201,6 +201,11 @@ def _run(
     checkout: Path | None,
     expected_returncode: int = 0,
 ) -> ScenarioResult:
+    if not _within(cwd, temporary):
+        raise HarnessError("candidate scenario working directory is outside the disposable target")
+    if command[1] in {"init", "doctor", "validate", "dashboard", "upgrade", "approve"}:
+        if not _within(Path(command[2]), temporary):
+            raise HarnessError("candidate scenario path is outside the disposable target")
     # ECP-PRM-001: the one launcher, decoded as UTF-8 so the acceptance never depends on the locale.
     completed = _launch(
         command, cwd=cwd, env=_environment(), timeout=120,
@@ -238,8 +243,8 @@ def _snapshot(root: Path) -> dict[str, str]:
         relative = path.relative_to(root)
         if any(part in excluded or part.endswith(".egg-info") for part in relative.parts):
             continue
-        if path.is_symlink():
-            raise HarnessError(f"candidate checkout snapshot contains a symbolic link: {relative.as_posix()}")
+        if path.is_symlink() or not _within(path, root):
+            raise HarnessError(f"disposable target snapshot contains a link escape: {relative.as_posix()}")
         if not path.is_file():
             continue
         if len(result) >= MAX_SNAPSHOT_FILES:
@@ -279,7 +284,6 @@ def assess_candidate_wheel(
     if candidate_digest != candidate_wheel_sha256:
         raise HarnessError("candidate wheel SHA-256 mismatch")
     candidate_version = _wheel_version(wheel, wheel_bytes)
-    checkout_before = _snapshot(checkout) if checkout is not None else None
     with tempfile.TemporaryDirectory(prefix="se-harness-acceptance-") as temporary_name:
         temporary = Path(temporary_name).resolve()
         environment = temporary / "candidate-env"
@@ -406,8 +410,6 @@ def assess_candidate_wheel(
         if _snapshot(initialized) != consumer_before:
             authority = ScenarioResult(authority.scenario_id, "failed", authority.output_sha256)
         results.append(authority)
-    if checkout is not None and _snapshot(checkout) != checkout_before:
-        raise HarnessError("candidate acceptance modified the checkout")
     if tuple(item.scenario_id for item in results) != SCENARIO_IDS:
         raise HarnessError("candidate acceptance scenario set is incomplete")
     failed = [item.scenario_id for item in results if item.outcome != "passed"]

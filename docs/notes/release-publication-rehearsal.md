@@ -1,38 +1,57 @@
-# Rehearsing the credential-free publication path
+# Release rehearsals
 
-<!-- Target expertise: 6/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
+Ordinary PRs keep source tests, installed-package checks on Windows and Ubuntu,
+and managed validation. They skip the two release rehearsals when build and
+publication inputs have not changed (WO-KIS-005).
 
-> This is a repository-specific control for `mmzen/se_harness`. It is not installed into consumer repositories, `harnessctl` exposes no rehearsal command, and a rehearsal result grants no verification, release, publication, deployment, or evaluator-adoption authority.
+| Change | Candidate build replay | Earlier release rehearsal |
+| --- | --- | --- |
+| Documentation or ordinary runtime code | Skip | Skip |
+| Packaging, build recipe, build scripts, or publication tests | Run | Skip |
+| Publication implementation or workflows | Run | Run |
+| Manual release preparation | Run | Run |
 
-## One definition, two callers
+`.github/scripts/publish_release.py select-rehearsals` makes one decision from
+the changed Git paths. It compares the PR base commit with the checked-out merge
+commit, or the previous main commit with the new main commit. Removed and renamed
+inputs count too. An unreadable comparison fails instead of claiming a skip.
+The workflow uses a shallow checkout and fetches only the comparison commit.
 
-The credential-free half of a release — resolve the record, qualify the exact candidate, replay its bound recipe twice, verify the rebuilt bundle against the record — is written once, as the reusable workflow `.github/workflows/release-qualification.yml`. Two workflows call it:
+The `Publication rehearsal` check runs even when neither leg is needed. It reports
+a successful skip, or fails if a selected leg fails. No scheduled run is added.
 
-- `.github/workflows/publish-pypi.yml`, the authorized last mile, calls it in `release-record` mode for the released record it was dispatched with. That job has no steps of its own.
-- `.github/workflows/publication-rehearsal.yml` calls it on every pull request and push to `main`, in `candidate` mode for the commit under review, and in `release-record` mode against the newest ready or released schema-2 record when one exists (or the one a dispatch names). On a pull request the record is the newest one the base branch already holds, read at `refs/remotes/origin/BASE`, so a release pull request rehearses the previous published record and its record lane can be green before its own merge; the push to `main` that carries the new record rehearses that one (`WO-CIP-006`, `SPEC-CIP-002`).
+Both selected legs still use `.github/workflows/release-qualification.yml`.
+Candidate mode builds twice and compares bytes. Record mode qualifies and tests
+the recorded candidate, replays its recipe, and checks the recorded hashes.
+On a PR, the earlier record comes from its base commit. If no suitable record
+exists, that leg is skipped with an explanation.
 
-Because the release invokes the definition rather than a copy of it, what was rehearsed is what runs. This replaced, under `WO-CIP-002` and `ADR-CIP-001`, the mechanism `WO-RLO-005` introduced: a Python re-implementation of the qualification (`rehearse_publication.py`, 3,187 lines) kept aligned with the orchestrator by a hand-written YAML reader and a file of per-step digests that every workflow edit had to refresh. `CAP-RLO-003` — rehearse the last mile before release approval — is now evidenced by the rehearsal run itself, not by a digest comparison.
-
-## What a rehearsal proves
-
-- `candidate` mode: the commit's own `release/build-recipe.json` produces byte-identical distributions across two fresh builds on the pinned Linux/amd64 producer. A candidate that could not be released by recipe fails here, on the pull request, not during a release. Since `WO-CIP-007` (`SPEC-CIP-003` `CIP-ONE-001`) the leg replays the recipe and nothing else: `candidate-evidence.yml` has already qualified the same commit as candidate-controlled and run its suite, and a pull request qualifies and tests its commit once.
-- `release-record` mode: the record resolves to one plan, the bound recipe replays byte-identically, and the rebuilt bundle matches the record's declared digests. Without a schema-2 ready or released record the job is skipped and the run's summary says why; it is not a failure.
-
-The definition runs on `ubuntu-latest` only. The recipe producer is a Linux/amd64 container, and the release runs the same definition on the same runner type; the Windows leg of the earlier rehearsal exercised the legacy schema-1 build path, which no longer exists.
-
-## Running it yourself
+Before release, explicitly run both legs:
 
 ```bash
-gh workflow run publication-rehearsal.yml --ref <branch>
-gh workflow run publication-rehearsal.yml --ref <branch> -f release_record=RLS-SEH-013
+gh workflow run publication-rehearsal.yml --ref <release-branch>
+gh workflow run publication-rehearsal.yml --ref <release-branch> -f release_record=RLS-SEH-013
 ```
 
-Retained artifacts: `qualification-candidate-<sha>` and, in record mode, `qualification-release-record-<RLS>` and `release-bundle-<RLS>` (inert bytes, two-day retention).
+The authorized publication workflow continues to qualify the released record
+before any publishing job. Rehearsals use read-only permission and have no
+publication credentials or protected environment. They do not approve or publish.
+The recipe runs on Linux; ordinary installed-package coverage retains both
+Windows and Ubuntu.
 
-## What it does not prove
+Results stay in the existing CI artifacts: `qualification-candidate-<sha>`,
+`qualification-release-record-<RLS>` and `release-bundle-<RLS>` (two-day retention).
 
-It does not exercise the credentialed jobs — tag and GitHub Release, PyPI, Pages — which are reviewed as code and run only under the release dispatch and its environment decisions. It does not make any lifecycle transition.
+## Retry an interrupted draft
 
-## Operational boundary
+Rerun the authorized publication workflow. It checks the existing required assets
+by name and SHA-256, then uploads only missing files to an unpublished draft.
+Matching files and unrelated attachments are left alone. A conflicting required
+file stops the attempt and names the file. Missing files on an already published
+release cannot be added through this retry path.
 
-`contents: read`, no secret input, no environment. The reusable definition declares the same and refuses a schema-1 record.
+The workflow checks the complete required set again before publishing the draft.
+The PyPI job downloads only the required wheel, source archive and checksum file;
+a screenshot attached to the GitHub Release does not become a package error.
+Published package bytes remain immutable, and PyPI keeps its existing protected
+environment and owner decision.

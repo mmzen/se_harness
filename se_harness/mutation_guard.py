@@ -104,6 +104,11 @@ def _configured_version(root: Path, operation: str) -> str:
 def _entry_point() -> Path | None:
     """Check the console route only when it is the route being invoked."""
     selected = Path(sys.argv[0]) if sys.argv else None
+    # Windows console wrappers remove .exe from argv[0] before calling main.
+    if selected is not None and selected.name == "harnessctl" and sys.platform == "win32" and not selected.is_file():
+        executable = selected.with_suffix(".exe")
+        if executable.is_file():
+            return executable
     return selected if selected is not None and selected.name in {"harnessctl", "harnessctl.exe"} else None
 
 

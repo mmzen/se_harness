@@ -71,3 +71,7 @@ Newly built versions kept `accept-candidate` only as a one-cycle alias to the ty
 ## Root/template adoption boundary
 
 The managed-workflow template uses `qualify released-root`, and this repository's installed root workflow has run it since the root adopted exact public 0.7.1 (`WO-HUP-007`); every later root adoption, through `WO-HUP-015` and exact public 0.14.0, carried it forward. A candidate template may still lead the installed root: that drift is expected until a separately authorized upgrade adopts the new released bytes, and the installed root workflow is never edited by a candidate change.
+
+## Small package-acceptance targets
+
+With WO-KIS-005, candidate-package acceptance installs the exact wheel into a temporary environment and exercises small disposable repositories. Before/after snapshots cover those repositories. The supplied checkout identifies the import boundary; its unrelated files and historical evidence are not copied or hashed. Scenario write targets must resolve inside the disposable directory. Required wheel hashes and checker origin/version checks remain in place. The installed 0.17.0 evaluator retains its released behavior until a separately authorized upgrade.

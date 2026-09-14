@@ -2,10 +2,10 @@
 id = "WO-KIS-005"
 type = "work_order"
 title = "Shorten CI and resume interrupted publication"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-13"
-updated = "2026-09-13"
+updated = "2026-09-14"
 
 [delegation]
 class = "execution"
@@ -55,6 +55,7 @@ paths = [
   "scripts/validate_release_distributions.py",
   "se_harness/candidate_acceptance.py",
   "se_harness/codes.py",
+  "se_harness/mutation_guard.py",
   "se_harness/release_qualification.py",
   "tests/test_ci_pipeline.py",
   "tests/test_integration_package.py",
@@ -78,6 +79,20 @@ to = "approved"
 decided_at = "2026-09-13T16:40:43Z"
 decided_by = "engineering-owner"
 reason = "The owner accepted all 38 candidates in the retained 2026-09-13 codebase KISS review and requested the work orders: \"OK ! Let's create the work orders to implement all candidates\". Record the engineering-owner approval of WO-KIS-005 within that accepted scope and the established delegated route. SPEC-KIS-001 makes the replacement contracts and seven retained protections explicit; the coverage map assigns all candidates. This records definition approval or bounded execution delegation only, not implementation start, completion, verification, release, merge, publication, live adoption or historical evidence deletion."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-14T08:35:03Z"
+decided_by = "engineering-owner"
+reason = "The owner confirmed PR 470 is merged, continuing the accepted sequential implementation of all KISS candidates. Start WO-KIS-005 after WO-KIS-004 integration at 0f9aa9bae7795034b21b5743a0e51e5c12b6133b. Retain the approved delegated execution route for completion and preparation."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-14T09:06:06Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 0c7d02fb36bd5d2048a543bb13ddd8686bab7d01 (check-run 103916978569, source github-checks). The five selected cuts are implemented in source 3c4da9abda8cdd77da21dbf83bd4fa1cffc640dd. The final full suite ran 1092 tests with 16 skipped; real installed acceptance passed with a 256 MiB unrelated checkout file and an outside-target refusal. All hosted checks passed at 0c7d02fb36bd5d2048a543bb13ddd8686bab7d01. Record delegated completion under the approved work order, including its bounded Windows launcher correction; owner assurance and integration remain pending."
 +++
 
 # Shorten CI and resume interrupted publication
@@ -124,6 +139,14 @@ Historical records remain unchanged; the new applicability table states which ol
 Any additional required implementation file needs a bounded scope amendment, not a blanket repository-wide allowance.
 
 ## Constraints and expected change surface
+
+Bounded scope amendment, 2026-09-14: include `se_harness/mutation_guard.py` to fix
+the Windows console-path lookup found by K25's real installed-wheel acceptance.
+The generated launcher strips `.exe` from `sys.argv[0]`; the guard must inspect
+the existing executable beside that path. This completes the accepted selected-route
+behavior (K18) needed by this slice's upgrade scenario and retains the actual
+origin check. Only this additional implementation file is included; its tests
+already belong to this work order. The installed root is unchanged.
 
 The reviewed baseline is 93677e69dacb08367a7079e3372118c5064087c8. The isolated governing evaluator is released 0.17.0.
 Read this work order, INT-KIS-001, CAP-KIS-001, REQ-KIS-005, SPEC-KIS-001, VER-KIS-001 and the selected architecture/ADR when listed.

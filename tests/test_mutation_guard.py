@@ -32,6 +32,18 @@ from se_harness.workflow import apply_transition
 
 
 class MutationGuardTests(unittest.TestCase):
+    def test_windows_console_wrapper_resolves_its_existing_executable(self) -> None:
+        from se_harness.mutation_guard import _entry_point
+        with tempfile.TemporaryDirectory() as temporary:
+            executable = Path(temporary)/"harnessctl.exe"
+            executable.write_bytes(b"launcher")
+            reported = executable.with_suffix("")
+            with mock.patch("se_harness.mutation_guard.sys.argv", [str(reported)]), \
+                    mock.patch("se_harness.mutation_guard.sys.platform", "win32"):
+                self.assertEqual(executable, _entry_point())
+                executable.unlink()
+                self.assertEqual(reported, _entry_point())
+
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.base = Path(self.temporary.name)

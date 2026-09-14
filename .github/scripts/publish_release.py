@@ -428,10 +428,66 @@ def select_rehearsal_record(repository: Path, requested: str | None, base_ref: s
     return {"release_record": identifier, "status": status, "reason": f"newest ready or released schema-2 record{where}"}
 
 
+# Shared trigger policy for both rehearsal legs (WO-KIS-005).
+PUBLICATION_INPUTS = {
+    ".github/scripts/publish_release.py", ".github/scripts/publish_dashboard.py",
+    ".github/scripts/reconcile_maintenance_branch.py",
+    ".github/workflows/publication-rehearsal.yml", ".github/workflows/release-qualification.yml",
+    ".github/workflows/release-candidate-replay.yml", ".github/workflows/publish-pypi.yml",
+    ".github/workflows/pages-publication.yml", ".github/workflows/publish-dashboard-pages.yml",
+    "repository_tools/release_distribution.py", "repository_tools/json_bytes.py",
+    "repository_tools/evaluator_facts.py", "se_harness/release_qualification.py",
+}
+BUILD_INPUTS = {
+    "pyproject.toml", "MANIFEST.in", "repository_tools/release_build.py",
+    "scripts/bind_release_distribution.py", "scripts/create_release_bundle_manifest.py",
+    "scripts/normalize_sdist.py", "scripts/replay_release_build.py",
+    "scripts/check_portable_release_surface.py", "scripts/validate_release_distributions.py",
+    "scripts/build_plugin_archives.py",
+    "repository_tools/plugin_distribution.py", "se_harness/candidate_acceptance.py",
+    "tests/test_ci_pipeline.py", "tests/test_release_orchestration.py",
+    "tests/test_release_build.py", "tests/test_release_qualification.py",
+    "tests/test_pypi_publishing.py", "tests/test_release_evidence_audit.py",
+}
+
+
+def rehearsal_changes(paths: Iterable[str], *, explicit: bool = False) -> dict[str, Any]:
+    changed = set(paths)
+    publication = explicit or bool(changed & PUBLICATION_INPUTS)
+    candidate = publication or bool(changed & BUILD_INPUTS) or any(p.startswith("release/") for p in changed)
+    return {"candidate": candidate, "record": publication,
+            "reason": "explicit release preparation" if explicit else
+            ("build or publication inputs changed" if candidate else "skipped: no build or publication inputs changed")}
+
+
+def select_rehearsals(repository: Path, event: dict[str, Any], event_name: str, requested: str = "") -> dict[str, Any]:
+    base_ref = None
+    if event_name == "workflow_dispatch":
+        decision = rehearsal_changes((), explicit=True)
+    else:
+        if event_name == "pull_request":
+            base_ref = event["pull_request"]["base"]["sha"]
+        elif event_name == "push":
+            base_ref = event["before"]
+        else:
+            raise ReleaseError(f"unsupported rehearsal event: {event_name}")
+        if not isinstance(base_ref, str) or re.fullmatch(r"[0-9a-f]{40}|[0-9a-f]{64}", base_ref) is None:
+            raise ReleaseError("rehearsal base must be a full Git object ID")
+        # A new branch has no previous commit: inspect all its paths.
+        arguments = ("ls-tree", "-r", "--name-only", "-z", "HEAD") if set(base_ref) == {"0"} else (
+            "diff", "--name-only", "--no-renames", "-z", base_ref, "HEAD", "--")
+        paths = _run_git(repository, *arguments).stdout.decode("utf-8").rstrip("\0").split("\0")
+        decision = rehearsal_changes(paths)
+    record = {"release_record": "", "status": ""}
+    if decision["record"]:
+        record = select_rehearsal_record(repository, requested or None, base_ref if event_name == "pull_request" else None)
+    return {**record, **decision}
+
+
 def classify_github(plan: ReleasePlan, metadata: dict[str, Any]) -> dict[str, Any]:
     if metadata.get("absent") is True:
         return {"state": "absent", "draft": None, "files": []}
-    if metadata.get("tagName") != plan.tag or metadata.get("isPrerelease") is not False:
+    if metadata.get("tagName") != plan.tag or metadata.get("isPrerelease") is not False or not isinstance(metadata.get("isDraft"), bool):
         return {"state": "mismatched", "draft": metadata.get("isDraft"), "files": []}
     assets = metadata.get("assets")
     if not isinstance(assets, list):
@@ -441,17 +497,32 @@ def classify_github(plan: ReleasePlan, metadata: dict[str, Any]) -> dict[str, An
     for asset in assets:
         if not isinstance(asset, dict) or not isinstance(asset.get("name"), str):
             return {"state": "mismatched", "draft": metadata.get("isDraft"), "files": []}
+        if asset["name"] not in expected:
+            continue
         digest = asset.get("digest")
-        if not isinstance(digest, str) or not digest.startswith("sha256:"):
-            return {"state": "mismatched", "draft": metadata.get("isDraft"), "files": sorted(observed)}
+        if asset["name"] in observed or not isinstance(digest, str) or digest != "sha256:" + expected[asset["name"]]:
+            return {"state": "mismatched", "draft": metadata.get("isDraft"), "files": sorted(observed), "conflict": asset["name"]}
         observed[asset["name"]] = digest.removeprefix("sha256:")
-    if any(name not in expected for name in observed) or any(observed.get(name) not in {None, digest} for name, digest in expected.items()):
-        state = "mismatched"
-    elif observed == expected:
-        state = "exact"
-    else:
-        state = "partial"
-    return {"state": state, "draft": metadata.get("isDraft"), "files": sorted(observed)}
+    missing = sorted(expected.keys() - observed.keys())
+    return {"state": "partial" if missing else "exact", "draft": metadata["isDraft"],
+            "files": sorted(observed), "missing": missing}
+
+
+def resume_github(plan: ReleasePlan, directory: Path, metadata: dict[str, Any]) -> dict[str, Any]:
+    """Upload only missing required assets of a matching unpublished draft."""
+    verify_bundle(plan, directory)
+    state = classify_github(plan, metadata)
+    if state["state"] == "exact":
+        return {"uploaded": []}
+    if state["state"] != "partial" or state["draft"] is not True:
+        detail = f" ({state['conflict']})" if "conflict" in state else ""
+        raise ReleaseError(f"GitHub Release is {state['state']}{detail}; only a matching unpublished draft can resume")
+    for name in state["missing"]:
+        result = subprocess.run(["gh", "release", "upload", plan.tag, str(directory / name), "--repo", plan.repository],
+                                capture_output=True, text=True)
+        if result.returncode:
+            raise ReleaseError(f"upload failed for {name}: {result.stderr.strip()}")
+    return {"uploaded": state["missing"]}
 
 
 def release_notes(plan: ReleasePlan) -> str:
@@ -532,6 +603,17 @@ def build_parser() -> argparse.ArgumentParser:
     select.add_argument("--github-output", type=Path)
     select.add_argument("--summary", type=Path)
     select.add_argument("--base-ref", default=None, help="read the records at this ref (a pull request's base) instead of the checkout")
+    rehearsals = commands.add_parser("select-rehearsals")
+    rehearsals.add_argument("--repository", type=Path, required=True)
+    rehearsals.add_argument("--event", type=Path, required=True)
+    rehearsals.add_argument("--event-name", required=True)
+    rehearsals.add_argument("--release-record", default="")
+    rehearsals.add_argument("--github-output", type=Path)
+    rehearsals.add_argument("--summary", type=Path)
+    resume = commands.add_parser("resume-github")
+    resume.add_argument("--plan", type=Path, required=True)
+    resume.add_argument("--directory", type=Path, required=True)
+    resume.add_argument("--metadata", type=Path, required=True)
     github = commands.add_parser("classify-github")
     github.add_argument("--plan", type=Path, required=True)
     github.add_argument("--metadata", type=Path, required=True)
@@ -565,6 +647,14 @@ def main(argv: Iterable[str] | None = None) -> int:
                 with args.summary.open("a", encoding="utf-8", newline="\n") as stream:
                     stream.write(f"- Release-record rehearsal subject: `{selection['release_record'] or 'none'}` ({selection['reason']})\n")
             sys.stdout.write(_json_bytes(selection).decode("utf-8"))
+        elif args.command == "select-rehearsals":
+            selection = select_rehearsals(args.repository, _read_json(args.event), args.event_name, args.release_record)
+            _emit(selection, None, args.github_output)
+            if args.summary is not None:
+                with args.summary.open("a", encoding="utf-8", newline="\n") as stream:
+                    stream.write(f"- Rehearsals: {selection['reason']}. Candidate: {selection['candidate']}; older record: {selection['release_record'] or 'skipped'}.\n")
+        elif args.command == "resume-github":
+            _emit(resume_github(read_plan(args.plan), args.directory, _read_json(args.metadata)), None, None)
         elif args.command == "classify-github":
             _emit(classify_github(read_plan(args.plan), _read_json(args.metadata)), args.output, args.github_output)
         elif args.command == "notes":
