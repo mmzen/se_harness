@@ -75,6 +75,7 @@ Four rules hold on every subcommand (`WO-ECP-022`):
 | `identity` | CI or advanced contributor | read-only identity report/check | prove released-evaluator, candidate-source, or candidate-package runtime origin and boundary |
 | `qualify` | release CI, maintainer, or released evaluator | read-only except for one exclusive evidence output outside the inspected repository | run one of four fixed evaluator/target qualification roles and emit provenance-bound, non-authoritative evidence |
 | `capture-verification` | coding agent after an authorized clean candidate | writes one `ready` VREC plus canonical evaluator evidence | bind selected work, verification contracts, evidence, evaluator identity, snapshot, and exact clean `HEAD` |
+| `refresh-verification` | coding agent after an unchanged rebase | writes a new `ready` VREC | compare relevant Git entries and reuse evidence while preserving the original |
 | `prepare-release` | coding agent after verification and release-preparation authority | writes one `ready` RLS plus canonical evaluator evidence | bind release policy, eligible VRECs, exact work coverage, released evaluator wheel identity, version, and the same candidate commit |
 
 ## Repository setup and inspection
@@ -262,8 +263,9 @@ differs from the evaluated one (for example the handoff check with
 `--changed-path` and `--changes-complete`), an escalation naming a decision
 right, or a response describing the evidence to retain. The evaluated command
 is never rendered as its own retry. Every schema-2 result carries
-`result_sha256`, the SHA-256 of the canonical human block (UTF-8, LF, no
-trailing whitespace); a pull-request body may declare it on one standalone
+`result_sha256`. New results declare `digest_format = "machine-fields-v1"`
+and hash stable machine fields rather than human wording. Retained results
+without the marker keep their original human-block digest; a pull-request body may declare it on one standalone
 `Harness-Restitution:` line for CI to recompute. At `handoff`, a work order
 whose `ready` verification record binds a commit no longer reachable from
 `HEAD` is blocked with `W-ADS-002`; `--pull-request-body` additionally reports
@@ -386,7 +388,12 @@ Non-dry-run authoring uses the common pre-write mutation guard. The invoking env
 harnessctl release-unit [TARGET] --from TAG --to COMMIT [--exempt SHA ...] [--contract REL-ID] [--json | --toml]
 ```
 
-Measures a release unit (`WO-CIP-004`, `ADR-CIP-002`): walks the first-parent history from the previous release tag to the candidate commit, reads the `Harness-Work-Order` trailers — a merge contributes the trailers of the commits it merged — and reports one row per work order with its lifecycle status and whether its execution scope touches the packaged surface (`se_harness/`, `templates/repository/standard/`, `pyproject.toml`). A commit with no trailer is `untraced`. The command exits 1 when a commit is untraced and not `--exempt`ed, when a listed work order is not `implemented`, or, with `--contract`, when the contract's `candidate_commit`, `previous_release_tag` or `gates` differ from the measurement (`E-CIP-001`). `--toml` prints only the `gates` array to paste into the contract. It mutates nothing, needs no network, and freezes nothing: the release owner's approval of the contract does that.
+Measures the work-order trailers between the previous release tag and a
+candidate commit, including merged work. The JSON shape remains compatible.
+Untraced commits, incomplete census information, and contract differences are
+advisory and exit successfully; invalid Git refs or command inputs still fail.
+`--exempt` remains readable for old invocations but is unnecessary. The owner
+approves final release scope, and the final candidate still needs verification.
 
 ## Runtime identity
 
@@ -448,7 +455,20 @@ harnessctl capture-verification [TARGET] \
   [--owner ROLE] [--domain DOMAIN] [--output PATH] [--json]
 ```
 
-A refusal names its cause class: `WEX301` the artifact's state (a work order not `implemented`, an invalid graph), `WEX302` revision provenance (Git, `HEAD`, a dirty worktree), `WEX303` the evaluator evidence (a managed script missing, failing or timing out), `WEX304` a record input (id, owner, evidence or output path). Repeat `--work-order`, `--verification`, and `--evidence` for an aggregate candidate. Every selected work order must be exactly `implemented`, the selected verification contracts must equal their declared union, and evidence must cover each work order. Before any derived output or record write, the command proves the locked released evaluator. It then requires a clean Git worktree, derives the full `HEAD` object identity, generates the deterministic Explorer bundle, stores the SHA-256 of its recursively binding `dashboard-manifest.json` as `artifact_snapshot_sha256`, writes canonical normalized evaluator evidence under the selected domain's `evidence/` directory, and binds that file's repository-relative path and SHA-256 in the `status = "ready"` VREC. The record contains `prepared_at` and `prepared_by`, never `verified_at` or `verified_by`.
+Refusals distinguish invalid state (`WEX301`), Git provenance (`WEX302`),
+evidence (`WEX303`), and record inputs (`WEX304`). Repeat work orders, contracts,
+and evidence paths for a final aggregate candidate. Work may be implemented,
+verified, or released; all declared verification contracts must be selected.
+Evidence may be a shared integration report plus earlier verification records.
+The command writes a ready VREC and evaluator evidence. It does not verify it.
+Use `--candidate-commit COMMIT --test-command <argv...>` to test the exact final
+integration in a temporary checkout, including when the caller has local edits.
+
+For a harmless rebase, use
+`harnessctl refresh-verification . --from VREC-OLD-001 --id VREC-NEW-001`.
+This compares relevant Git tree entries, governing inputs, and retained evidence.
+It preserves the old ready record and writes a new ready successor. Changed
+relevant files require fresh tests; verified records cannot be refreshed.
 
 An accountable assurance owner reviews the retained evidence and separately decides whether to transition the VREC to `verified`. The record lives in later governance history and continues to bind the earlier candidate commit C.
 
@@ -467,7 +487,12 @@ harnessctl prepare-release [TARGET] \
   [--tag TAG] [--domain DOMAIN] [--output PATH] [--json]
 ```
 
-The same four cause classes are `WEX401` to `WEX404`. Repeat `--verification-record` and `--work-order` for aggregate releases. Every included VREC must be exactly `verified`, the selected release contract must gate the work, `releases_work` must equal the included VREC coverage union, and every record must bind the same candidate commit.
+The corresponding release refusal codes are `WEX401` to `WEX404`. Select one
+verified or released final-candidate VREC and repeat `--work-order` for the
+release scope. The final record must cover exactly that work and all its
+verification contracts. The RLS binds its exact candidate commit. Earlier
+records may be cited as supporting evidence at different commits; passing
+their individual checks cannot replace final integration verification.
 
 Before writing, the command proves the locked released evaluator including its wheel filename and SHA-256. It writes canonical normalized evaluator evidence and binds the evidence path and digest in the `status = "ready"` RLS. The record contains `prepared_at` and `prepared_by`; it omits `released_at` and `authorized_by` until a separate release transition. The managed `.gitattributes` fragment applies exactly `docs/engineering/**/evidence/*.json text eol=lf`, preserving canonical evidence bytes across supported checkouts so the raw SHA-256 survives. Independent validation and publication replay reject missing, changed, noncanonical, candidate-role, host-path-leaking, or lock-mismatched evidence. A rejected contract can support only its exact rejected RLS as terminal history and remains invalid for preparation, binding, release, publication, or credential-bearing use. The command does not transition the record to `released`, commit, push, tag, create a GitHub Release, publish to PyPI, or deploy.
 

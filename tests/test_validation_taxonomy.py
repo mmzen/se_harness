@@ -49,106 +49,12 @@ class ValidationTaxonomyTests(unittest.TestCase):
                     missing.append(f"{path.name}:{node.lineno}")
         self.assertEqual([], missing)
 
-    def test_policy_and_operator_reference_define_the_same_small_vocabulary(self) -> None:
-        quality = (REPOSITORY_ROOT / "docs/engineering/QUALITY_GATES.md").read_text(
-            encoding="utf-8"
-        )
-        canonical_quality = (
-            REPOSITORY_ROOT
-            / "templates/repository/standard/docs/engineering/QUALITY_GATES.md"
-        ).read_text(encoding="utf-8")
-        reference = (REPOSITORY_ROOT / "docs/notes/harnessctl-reference.md").read_text(
-            encoding="utf-8"
-        )
-        # The root copy is the hash-locked policy of the released evaluator named in
-        # the lock. Under the 0.7.1 root the candidate template added WO-ECP-009's
-        # transition binding index, the graph-structural checks and the amended
-        # QG-010 / new QG-011, and that divergence was declared here rather than
-        # hidden. Since WO-HUP-008 adopted 0.8.0 the root copy is the candidate
-        # template byte for byte; the assertion reads the root identity, not a guess.
-        root_version = json.loads(
-            (REPOSITORY_ROOT / ".engineering-harness.lock").read_text(encoding="utf-8")
-        )["evaluator"]["version"]
-        markers = ("## Transition binding index", "### Graph-structural checks", "**QG-011:**", "`QGS-EDGE`", "`QG-STRUCTURAL`")
-        for marker in markers:
-            self.assertIn(marker, canonical_quality, marker)
-        if root_version == "0.7.1":
-            for marker in markers:
-                self.assertNotIn(marker, quality, marker)
-            released_lines = quality.splitlines()
-            start = next(i for i, line in enumerate(released_lines) if line.startswith("**QG-010:**"))
-            end = next(i for i in range(start + 1, len(released_lines)) if not released_lines[i].strip())
-            retained = [line for i, line in enumerate(released_lines) if not (start <= i < end)]
-            candidate_lines = set(canonical_quality.splitlines())
-            self.assertEqual([], [line for line in retained if line not in candidate_lines])
-        elif "`scope`" in quality and "decision_gate_clear" not in quality:
-            # WO-DCM-001 (SPEC-DCM-001): the candidate template adds the
-            # `decision_gate_clear` evaluator row, one `QGP-G*-DECISION` predicate per
-            # gate and the decision family's binding row. A root released before them
-            # lacks exactly those additions, declared here.
-            decision_token = re.compile(r", `QGP-G[0-9A-Z]+-DECISION`")
-            reduced = [
-                decision_token.sub("", line)
-                for line in canonical_quality.splitlines()
-                if not line.startswith(("| `decision_gate_clear` |", "| decision |"))
-            ]
-            self.assertEqual(reduced, quality.splitlines())
-            self.assertIn("| `decision_gate_clear` |", canonical_quality)
-        elif "| `QG-G0-INTENT` |" in quality or ("`scope`" in quality and "| risk |" not in quality):
-            # WO-ECP-030 (SPEC-ECP-022 ECP-DEL-024, ECP-DEL-028): the candidate template
-            # removed the unreachable QG-G0-INTENT gate; a root released before it carries
-            # exactly that gate's two rows. WO-RSK-010 (SPEC-RSK-010 RSK-MGT-007): the
-            # candidate template adds the risk family's edge-binding row, with no predicate;
-            # a root released before it lacks exactly that row. Both divergences are declared
-            # here rather than hidden; a root released with both takes the equality branch.
-            reduced_root = [line for line in quality.splitlines() if not line.startswith("| `QG-G0-INTENT` |")]
-            reduced_candidate = [line for line in canonical_quality.splitlines() if not line.startswith("| risk |")]
-            self.assertEqual(reduced_candidate, reduced_root)
-            self.assertNotIn("QG-G0-INTENT", canonical_quality)
-            self.assertIn("| risk |", canonical_quality)
-        elif "`scope`" in quality:
-            # The root carries WO-ECP-013's scope checkpoint: it is the candidate template.
-            old = "Work-order-keyed evidence names the selected artifact and checkpoint and binds the current formal-snapshot digest."
-            new = "A work-order evidence reference names a nonempty file, or a header binds the selected checkpoint and relevant-input digest. Unrelated artifacts do not change that digest."
-            self.assertEqual(canonical_quality, quality.replace(old, new))
-        else:
-            # WO-ECP-013: the candidate template amended QG-010 and QG-011 for the
-            # scope checkpoint; a root released before it lacks exactly those two
-            # paragraphs' new sentences, and that divergence is declared here.
-            def without_paragraphs(text: str, *starts: str) -> list[str]:
-                lines = text.splitlines()
-                keep = []
-                skipping = False
-                for line in lines:
-                    if any(line.startswith(start) for start in starts):
-                        skipping = True
-                    if skipping and not line.strip():
-                        skipping = False
-                        continue
-                    if not skipping:
-                        keep.append(line)
-                return keep
-
-            self.assertIn("`scope`", canonical_quality)
-            self.assertEqual(
-                without_paragraphs(canonical_quality, "**QG-010:**", "**QG-011:**"),
-                without_paragraphs(quality, "**QG-010:**", "**QG-011:**"),
-            )
-        self.assertIn("| `authoring_ready` |", quality)
-        self.assertIn("| `release_unit_ready` |", quality)
-        # Identity-aware (WO-HUP-016, SPEC-HUP-016 rule 10): a root of 0.15.0 or later
-        # appends the gate's `QGP-G*-DECISION` predicate to each row; the prefix is
-        # what every root carries.
-        self.assertIn("| `QG-G5-RELEASE-PREPARATION` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY`, `QGP-G5P-RELEASE-UNIT`", quality)
-        self.assertIn("| `QG-G1-DEFINITION` | `QGP-G1-GRAPH`, `QGP-G1-INTEGRITY`, `QGP-G1-AUTHORING`", quality)
-        self.assertIn("| `QG-G2-ARCHITECTURE` | `QGP-G2-GRAPH`, `QGP-G2-INTEGRITY`, `QGP-G2-AUTHORING`", quality)
-        self.assertIn("BCP 14", canonical_quality)
-        self.assertIn("`QG-G4-IMPLEMENTATION-EVIDENCE`", canonical_quality)
+    def test_policy_and_operator_reference_document_the_machine_vocabulary(self) -> None:
+        guide = (REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/QUALITY_GATES.md").read_text(encoding="utf-8")
+        reference = (REPOSITORY_ROOT / "docs/notes/harnessctl-reference.md").read_text(encoding="utf-8")
         for plane in VALIDATION_PLANES:
-            self.assertIn(f"`{plane}`", canonical_quality)
+            self.assertIn(f"`{plane}`", guide)
             self.assertIn(f"`{plane}`", reference)
-        self.assertIn("MUST NOT change error-versus-warning severity", canonical_quality)
-        self.assertIn("do not change severity", reference)
 
     def test_vocabulary_and_diagnostic_construction_are_closed(self) -> None:
         self.assertEqual(

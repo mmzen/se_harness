@@ -98,7 +98,7 @@ but are not diagnostics and are not listed here.
 
 | Code | Message text in the source |
 | --- | --- |
-| `E-CIP-001` | `CIP-RLU: a release contract that names a candidate commit declares the census the history yields. A contract …`; `E-CIP-001` (+7 more) |
+| `E-CIP-001` | `E-CIP-001`; `E-CIP-001: contract candidate_commit {…} is not the derived candidate {…}` (+4 more) |
 
 ### `E-DCM` — installed validator
 
@@ -257,7 +257,7 @@ but are not diagnostics and are not listed here.
 | `WEX210` | `Generate the diagnostic-code index note from the candidate source. `WO-TCM-003` (`REQ-TCM-005`, `SPEC-TCM-002…`; `WEX210` (+16 more) |
 | `WEX220` | `WEX220`; `WEX220: procedure {…} has no steps` (+2 more) |
 | `WEX221` | `WEX221`; `WEX221: optional procedure parameter {…} has an invalid value` (+8 more) |
-| `WEX230` | `A schema-2 result or restitution that does not hold (WEX230); a `ValueError` to its callers.`; `WEX230` (+15 more) |
+| `WEX230` | `A schema-2 result or restitution that does not hold (WEX230); a `ValueError` to its callers.`; `WEX230` (+16 more) |
 | `WEX301` | `WEX301` |
 | `WEX302` | `WEX302` |
 | `WEX303` | `WEX303` |

@@ -82,7 +82,6 @@
       "predicates": [
         {"id": "QGP-G5P-GRAPH", "evaluator": "formal_graph_valid", "required_evidence": [{"kind": "result", "reference": "formal-graph:{artifact_id}"}]},
         {"id": "QGP-G5P-INTEGRITY", "evaluator": "repository_integrity", "required_evidence": [{"kind": "result", "reference": "repository-integrity:{checkpoint}"}]},
-        {"id": "QGP-G5P-RELEASE-UNIT", "evaluator": "release_unit_ready", "required_evidence": [{"kind": "artifact", "reference": "{artifact_id}"}]},
         {"id": "QGP-G5P-DECISION", "evaluator": "decision_gate_clear", "required_evidence": [{"kind": "result", "reference": "decision-register:{artifact_id}"}]}
       ]
     },
@@ -109,7 +108,7 @@
   "transition_bindings": [
     {"family": "definition", "target": "approved", "artifact_types": ["intent", "capability", "requirement", "verification", "operating_contract"], "predicates": ["QGP-G1-GRAPH", "QGP-G1-INTEGRITY", "QGP-G1-AUTHORING", "QGP-G1-DECISION"], "structural": ["QGS-EDGE"]},
     {"family": "definition", "target": "approved", "artifact_types": ["specification", "architecture", "adr"], "predicates": ["QGP-G2-GRAPH", "QGP-G2-INTEGRITY", "QGP-G2-AUTHORING", "QGP-G2-DECISION"], "structural": ["QGS-EDGE"]},
-    {"family": "definition", "target": "approved", "artifact_types": ["release_contract"], "predicates": ["QGP-G5P-GRAPH", "QGP-G5P-INTEGRITY", "QGP-G5P-RELEASE-UNIT", "QGP-G5P-DECISION"], "structural": ["QGS-EDGE"]},
+    {"family": "definition", "target": "approved", "artifact_types": ["release_contract"], "predicates": ["QGP-G5P-GRAPH", "QGP-G5P-INTEGRITY", "QGP-G5P-DECISION"], "structural": ["QGS-EDGE"]},
     {"family": "definition", "target": "implemented", "predicates": [], "structural": ["QGS-EDGE"]},
     {"family": "definition", "target": "rejected", "predicates": [], "structural": ["QGS-EDGE"]},
     {"family": "work_order", "target": "approved", "predicates": ["QGP-G3-GRAPH", "QGP-G3-INTEGRITY", "QGP-G3-DECISION"], "structural": ["QGS-EDGE", "QGS-ASSURANCE"]},

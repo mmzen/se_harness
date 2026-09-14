@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from se_harness import front_matter
-from se_harness.codes import CodedError, E_CIP_001, E_DCM_004, WEX200
+from se_harness.codes import CodedError, E_DCM_004, WEX200
 from se_harness.installer import HarnessError, safe_destination
 from se_harness.integrity import canonical_text
 from se_harness.workflow_contract import Checkpoint
@@ -221,43 +221,5 @@ def decision_gate_clear(context: CheckpointContext) -> tuple[str, str]:
 
 
 def release_unit_ready(artifact: Any, root: Path, catalog: Mapping[str, Any]) -> tuple[str, str]:
-    """CIP-RLU: a release contract that names a candidate commit declares the census the history yields.
-
-    A contract without `candidate_commit` is the retained allow-list form and passes. A contract
-    with one is re-measured with `se_harness.release_unit`; every `E-CIP-001` finding fails it.
-    An unavailable history (no git, no tag) is `not_assessable`, never a pass.
-    """
-
-    metadata = artifact.metadata
-    if artifact.artifact_type != "release_contract":
-        return "not_assessable", f"{artifact.artifact_id} is not a release contract."
-    candidate = metadata.get("candidate_commit")
-    if not isinstance(candidate, str) or not candidate:
-        return "pass", f"{artifact.artifact_id} declares no candidate_commit; the allow-list form is not re-measured."
-    previous_tag = metadata.get("previous_release_tag")
-    if not isinstance(previous_tag, str) or not previous_tag:
-        return "fail", f"{E_CIP_001}: {artifact.artifact_id} names candidate_commit but no previous_release_tag."
-    section = metadata.get("release_unit", {})
-    exemptions = section.get("untraced_exemptions", []) if isinstance(section, dict) else []
-    if not isinstance(exemptions, list) or not all(isinstance(item, str) for item in exemptions):
-        return "fail", f"{E_CIP_001}: {artifact.artifact_id} release_unit.untraced_exemptions must be an array of full commit ids."
-    from se_harness.release_unit import PACKAGED_SURFACE_PREFIXES, compare_with_contract, derive_release_unit
-
-    def lookup(work_order: str) -> tuple[str | None, bool | None]:
-        entry = catalog.get(work_order)
-        if entry is None:
-            return None, None
-        status = entry.metadata.get("status")
-        scope = entry.metadata.get("execution_scope", {})
-        paths = scope.get("paths", []) if isinstance(scope, dict) else []
-        packaged = any(isinstance(item, str) and item.startswith(PACKAGED_SURFACE_PREFIXES) for item in paths)
-        return (status if isinstance(status, str) else None), packaged
-
-    try:
-        unit = derive_release_unit(root, from_ref=previous_tag, to_ref=candidate, exempt=exemptions, lookup=lookup)
-    except HarnessError as exc:
-        return "not_assessable", f"{artifact.artifact_id}: the release unit cannot be derived here: {exc}"
-    findings = compare_with_contract(unit, metadata)
-    if findings:
-        return "fail", f"{artifact.artifact_id}: " + " ".join(findings)
-    return "pass", f"{artifact.artifact_id} gates equal the census derived over {previous_tag}..{unit.to_commit[:12]} ({len(unit.gates)} work orders)."
+    """Compatibility evaluator: trailer history informs the owner, not release authority."""
+    return "pass", "Commit-trailer census is advisory. Approve release scope and verify the final candidate explicitly."

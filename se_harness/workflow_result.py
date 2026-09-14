@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import shlex
 from typing import Any, Iterable, Mapping
-from se_harness.integrity import raw_sha256
+from se_harness.integrity import canonical_json_bytes, raw_sha256
 from se_harness.workflow_contract import RESULT_STATUSES, restitution_fields
 from se_harness.codes import CodedError, WEX230
 
@@ -82,6 +82,7 @@ def build_result(
     repository_blockers: Iterable[Mapping[str, Any]] = (),
     unrelated_count: int = 0,
     writes: Iterable[Mapping[str, Any]] = (),
+    candidate: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     if outcome not in OUTCOMES:
         raise RestitutionError(WEX230, f"invalid schema-2 outcome {outcome!r}")
@@ -91,6 +92,8 @@ def build_result(
     _validate_restitution(restitution, outcome)
     result = {
         "schema": SCHEMA,
+        "digest_format": "machine-fields-v1",
+        "candidate": dict(candidate or {}),
         "operation": {"kind": operation, "outcome": outcome},
         "selection": {"primary": primary, "artifacts": sorted(set(artifacts))},
         "scope": {
@@ -126,7 +129,38 @@ def canonical_block_bytes(result: Mapping[str, Any]) -> bytes:
 
 
 def restitution_digest(result: Mapping[str, Any]) -> str:
-    return raw_sha256(canonical_block_bytes(result))
+    if "digest_format" not in result:
+        # Retained schema-2 results used the human rendering. Keep that reader.
+        return raw_sha256(canonical_block_bytes(result))
+    if result["digest_format"] != "machine-fields-v1":
+        raise RestitutionError(WEX230, "unsupported workflow digest format")
+    return raw_sha256(canonical_json_bytes(machine_fields(result), ensure_ascii=True))
+
+
+def machine_fields(result: Mapping[str, Any]) -> dict[str, Any]:
+    """The stable machine result; explanatory prose and write receipts are not its identity."""
+    def fields(value: Mapping[str, Any], names: tuple[str, ...]) -> dict[str, Any]:
+        return {key: value[key] for key in names if key in value}
+
+    compliance = result.get("compliance", {})
+    restitution = result.get("restitution", {})
+    command = restitution.get("command_or_response", {})
+    return {
+        **fields(result, ("schema", "digest_format", "candidate", "operation", "selection", "scope", "state")),
+        "compliance": {
+            **fields(compliance, ("checkpoint", "workflow_rule_id", "procedure_id", "status", "formal_snapshot_sha256", "change_set_source")),
+            "gates": [{**fields(gate, ("id", "status")),
+                       "predicates": [fields(item, ("id", "status")) for item in gate.get("predicates", [])]}
+                      for gate in compliance.get("gates", [])],
+        },
+        "procedure": fields(result.get("procedure", {}), ("id", "current_step")),
+        "context": fields(result.get("context", {}), ("state", "governing", "declared_paths", "reading_manifest", "next")),
+        "findings": {key: [fields(item, ("code", "artifact", "path", "plane")) for item in result.get("findings", {}).get(key, [])]
+                     for key in ("scoped_blockers", "repository_blockers")},
+        "decision_required": restitution.get("decision_required"),
+        "next": fields(restitution.get("next", {}), ("procedure_id", "step_id")),
+        "command": fields(command, ("kind", "argv")),
+    }
 
 
 def render_json(result: Mapping[str, Any]) -> str:

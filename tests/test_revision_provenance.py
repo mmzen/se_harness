@@ -272,7 +272,7 @@ class RevisionValidatorTests(unittest.TestCase):
         write(self.root / "docs/engineering/releases/RLS-002.md", release)
         self.assertIn("E010", self.errors())
 
-    def test_aggregate_records_reject_duplicate_and_unkeyed_evidence(self) -> None:
+    def test_aggregate_records_reject_duplicate_scope_but_accept_shared_evidence(self) -> None:
         create_additional_chain(self.root, work_order_status="released")
         duplicate = aggregate_verification_record("a" * 40).replace(
             'verifies_work_order = ["WO-001", "WO-002"]',
@@ -286,7 +286,7 @@ class RevisionValidatorTests(unittest.TestCase):
             'evidence_paths = ["docs/engineering/product/evidence/WO-001-verification.md"]',
         )
         write(self.root / "docs/engineering/product/verification-records/VREC-002.md", unkeyed)
-        self.assertIn("E010", self.errors())
+        self.assertEqual(set(), self.errors())
 
     def test_dashboard_projects_declared_commit_and_checkout_state(self) -> None:
         write(self.root / "docs/engineering/product/verification-records/VREC-001.md", verification_record("a" * 40))
@@ -979,41 +979,52 @@ class RevisionCliTests(unittest.TestCase):
         self.assertEqual(1, output.count("WEX304"), output)  # ECP-CLI-006/-007: one code, the cause class
         self.assertFalse((self.root / "docs/engineering/product/verification-records/VREC-002.md").exists())
 
-    def test_prepare_release_combines_multiple_records_at_one_commit(self) -> None:
+    def test_final_tested_candidate_covers_earlier_records_at_different_commits(self) -> None:
         candidate = self.initialize_candidate(aggregate=True)
-        first = verification_record(candidate)
-        second = (
-            verification_record(candidate)
-            .replace("VREC-001", "VREC-002")
-            .replace("WO-001", "WO-002")
-            .replace("VER-001", "VER-002")
-        )
+        git(self.root, "config", "user.name", "Harness Test")
+        git(self.root, "config", "user.email", "harness@example.invalid")
         first_path = self.root / "docs/engineering/product/verification-records/VREC-001.md"
-        second_path = self.root / "docs/engineering/product/verification-records/VREC-002.md"
-        write(first_path, first)
-        write(second_path, second)
-        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(first_path), str(second_path))
-        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "verification governance")
-
-        code, _, error = invoke(
-            "prepare-release",
-            str(self.root),
-            "--id", "RLS-002",
-            "--release-contract", "REL-001",
-            "--verification-record", "VREC-002",
-            "--verification-record", "VREC-001",
-            "--work-order", "WO-002",
-            "--work-order", "WO-001",
-            "--version", "2.0.0",
-            "--owner", "release-owner",
-        )
-        self.assertEqual(0, code, error)
+        second_path = first_path.with_name("VREC-002.md")
+        write(first_path, verification_record(candidate))
+        write(self.root / "part-one.txt", "first feature")
+        git(self.root, "add", ".")
+        git(self.root, "commit", "-m", "first work, without a trailer")
+        second_commit = git(self.root, "rev-parse", "HEAD")
+        write(second_path, verification_record(second_commit).replace("VREC-001", "VREC-002").replace("WO-001", "WO-002").replace("VER-001", "VER-002"))
+        write(self.root / "part-two.txt", "second feature")
+        evidence = "docs/engineering/product/evidence/final-integration.md"
+        write(self.root / evidence, "Review VREC-001 and VREC-002, then test both features together at the final candidate.")
+        git(self.root, "add", ".")
+        git(self.root, "commit", "-m", "integrated candidate without trailers or exemptions")
+        final_commit = git(self.root, "rev-parse", "HEAD")
+        originals = {p: p.read_bytes() for p in (first_path, second_path)}
+        release_args = ["prepare-release", str(self.root), "--id", "RLS-002", "--release-contract", "REL-001",
+                        "--work-order", "WO-001", "--work-order", "WO-002", "--version", "2.0.0", "--owner", "release-owner"]
+        code, output, error = invoke(*release_args, "--verification-record", "VREC-001")
+        self.assertEqual(1, code, output + error)  # Earlier partial assurance cannot release the whole integration.
+        test = [sys.executable, "-c", "from pathlib import Path; assert Path('part-one.txt').read_text().strip() == 'first feature'; assert Path('part-two.txt').read_text().strip() == 'second feature'; print('both integrated features passed')"]
+        code, output, error = invoke("capture-verification", str(self.root), "--id", "VREC-003",
+            "--work-order", "WO-001", "--work-order", "WO-002", "--verification", "VER-001", "--verification", "VER-002",
+            "--evidence", evidence, "--evidence", first_path.relative_to(self.root).as_posix(), "--evidence", second_path.relative_to(self.root).as_posix(),
+            "--candidate-commit", final_commit, "--test-command", *test)
+        self.assertEqual(0, code, output + error)
+        final = first_path.with_name("VREC-003.md")
+        self.assertIn("both integrated features passed", final.read_text(encoding="utf-8"))
+        code, output, error = invoke(*release_args, "--verification-record", "VREC-003")
+        self.assertEqual(1, code, output + error)  # Passing tests still require an explicit assurance decision.
+        code, output, error = invoke("transition", str(self.root), "--set", "VREC-003=verified", "--decision", "VREC-003=quality-owner", "--apply")
+        self.assertEqual(0, code, output + error)
+        git(self.root, "add", ".")
+        git(self.root, "commit", "-m", "owner verified final integration")
+        code, output, error = invoke(*release_args, "--verification-record", "VREC-003")
+        self.assertEqual(0, code, output + error)
         release = (self.root / "docs/engineering/product/releases/RLS-002.md").read_text(encoding="utf-8")
-        self.assertIn('includes_verification = ["VREC-001", "VREC-002"]', release)
-        self.assertIn('releases_work = ["WO-001", "WO-002"]', release)
+        self.assertIn(f'commit = "{final_commit}"', release)
+        self.assertIn('includes_verification = ["VREC-003"]', release)
+        self.assertEqual(originals, {p: p.read_bytes() for p in originals})
         self.assertTrue(validate_engineering_artifacts.validate_repository(self.root).valid)
 
-    def test_prepare_release_rejects_verification_records_at_different_commits(self) -> None:
+    def test_prepare_release_requires_one_final_record(self) -> None:
         candidate = self.initialize_candidate(aggregate=True)
         first_path = self.root / "docs/engineering/product/verification-records/VREC-001.md"
         second_path = self.root / "docs/engineering/product/verification-records/VREC-002.md"
@@ -1041,7 +1052,7 @@ class RevisionCliTests(unittest.TestCase):
             "--owner", "release-owner",
         )
         self.assertEqual(1, code)
-        self.assertIn("one candidate commit", output)
+        self.assertIn("one final-candidate verification record", output)
         self.assertEqual(1, output.count("WEX404"), output)  # ECP-CLI-006/-007: one code, the cause class
         self.assertFalse((self.root / "docs/engineering/product/releases/RLS-002.md").exists())
 
@@ -1095,6 +1106,82 @@ class RevisionCliTests(unittest.TestCase):
         self.assertEqual(1, code)
         self.assertIn("must be verified", output)
         self.assertEqual(1, output.count("WEX401"), output)  # ECP-CLI-006/-007: one code, the cause class
+
+    def ready_rebase(self) -> tuple[Path, Path]:
+        base = self.initialize_candidate()
+        git(self.root, "config", "user.name", "Harness Test")
+        git(self.root, "config", "user.email", "harness@example.invalid")
+        work = self.root / "docs/engineering/product/work-orders/WO-001.md"
+        write(work, work.read_text(encoding="utf-8").replace("[relations]", '[execution_scope]\npaths = ["src/", "docs/engineering/product/"]\n\n[relations]'))
+        write(self.root / "src/runtime.py", "answer = 42")
+        git(self.root, "add", ".")
+        git(self.root, "commit", "-m", "feature")
+        code, output, error = invoke("capture-verification", str(self.root), "--id", "VREC-001", "--work-order", "WO-001",
+            "--verification", "VER-001", "--evidence", "docs/engineering/product/evidence/WO-001-verification.md")
+        self.assertEqual(0, code, output + error)
+        git(self.root, "add", ".")
+        git(self.root, "commit", "-m", "ready evidence")
+        git(self.root, "checkout", "-b", "upstream", base)
+        write(self.root / "unrelated.txt", "unrelated integration")
+        git(self.root, "add", ".")
+        git(self.root, "commit", "-m", "unrelated change")
+        git(self.root, "rebase", "--onto", "upstream", base, "main")
+        return (self.root / "docs/engineering/product/verification-records/VREC-001.md",
+                self.root / "docs/engineering/product/evidence/VREC-001-evaluator.json")
+
+    def test_refresh_after_rebase_preserves_original_and_creates_ready_successor(self) -> None:
+        from se_harness.front_matter import parse
+        from se_harness.preflight import orphaned_ready_records
+        record, evidence = self.ready_rebase()
+        original = {p: p.read_bytes() for p in (record, evidence)}
+        report = validate_engineering_artifacts.validate_repository(self.root)
+        self.assertEqual(1, len(orphaned_ready_records(self.root, report.artifacts, "WO-001")))
+        candidate = git(self.root, "rev-parse", "HEAD")
+        code, output, error = invoke("refresh-verification", str(self.root), "--from", "VREC-001", "--id", "VREC-002", "--json")
+        self.assertEqual(0, code, output + error)
+        successor = record.with_name("VREC-002.md").read_text(encoding="utf-8")
+        metadata = parse(successor)
+        self.assertEqual(candidate, metadata["commit"])
+        self.assertEqual("ready", metadata["status"])
+        self.assertEqual("VREC-001", metadata["refreshed_from"])
+        self.assertNotIn("verified_at", metadata)
+        self.assertIn("No tests were rerun", successor)
+        self.assertEqual(original, {p: p.read_bytes() for p in original})
+        report = validate_engineering_artifacts.validate_repository(self.root)
+        self.assertTrue(report.valid, report.errors)
+        self.assertEqual([], orphaned_ready_records(self.root, report.artifacts, "WO-001"))
+        self.assertEqual(candidate, json.loads(output)["candidate"]["commit"])
+
+    def test_refresh_refuses_changed_code_governing_input_or_evidence(self) -> None:
+        record, evidence = self.ready_rebase()
+        original = {p: p.read_bytes() for p in (record, evidence)}
+        candidate = git(self.root, "rev-parse", "HEAD")
+        for relative in ("src/runtime.py", "AGENTS.md", "docs/engineering/product/requirements/REQ-001.md",
+                         "docs/engineering/product/evidence/WO-001-verification.md"):
+            with self.subTest(path=relative):
+                path = self.root / relative
+                write(path, path.read_text(encoding="utf-8") + "\nChanged relevant input.\n")
+                git(self.root, "add", ".")
+                git(self.root, "commit", "-m", "changed relevant input")
+                code, output, error = invoke("refresh-verification", str(self.root), "--from", "VREC-001", "--id", "VREC-002")
+                self.assertEqual(1, code, output + error)
+                self.assertIn("run fresh candidate tests", output)
+                self.assertFalse(record.with_name("VREC-002.md").exists())
+                self.assertFalse(evidence.with_name("VREC-002-evaluator.json").exists())
+                self.assertEqual(original, {p: p.read_bytes() for p in original})
+                git(self.root, "reset", "--hard", candidate)  # Disposable fixture only.
+
+    def test_refresh_refuses_verified_history(self) -> None:
+        record, evidence = self.ready_rebase()
+        code, output, error = invoke("transition", str(self.root), "--set", "VREC-001=verified", "--decision", "VREC-001=quality-owner", "--apply")
+        self.assertEqual(0, code, output + error)
+        git(self.root, "add", ".")
+        git(self.root, "commit", "-m", "owner decision")
+        original = record.read_bytes()
+        code, output, error = invoke("refresh-verification", str(self.root), "--from", "VREC-001", "--id", "VREC-002")
+        self.assertEqual(1, code, output + error)
+        self.assertIn("refresh requires a ready verification record", output)
+        self.assertEqual(original, record.read_bytes())
 
     def test_capture_refuses_existing_output(self) -> None:
         self.initialize_candidate()

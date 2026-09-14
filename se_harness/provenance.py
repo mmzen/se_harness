@@ -18,7 +18,6 @@ from se_harness._process import run as _launch, text as _text
 from se_harness.gate_source import DELEGATED_RIGHTS, DELEGATED_ROLE, DelegationError, authorize_delegated_right, delegated_reason
 from se_harness.artifact_layout import ID_PATTERN, common_artifact_domain, repository_record_relative_path, validate_domain
 from se_harness.engine import validate_engineering_artifacts
-from se_harness.engine.validate_engineering_artifacts import evidence_work_order_keys
 from se_harness.installer import HarnessError, ensure_target, safe_destination
 from se_harness.workflow_contract import IMPLEMENTED_OR_LATER_STATUSES, load_lifecycle_registry
 
@@ -218,8 +217,7 @@ def _toml_array(values: list[str]) -> str:
     return "[" + ", ".join(json.dumps(item) for item in values) + "]"
 
 
-def _evidence_is_keyed_to(evidence_path: str, work_order_id: str) -> bool:
-    return work_order_id in evidence_work_order_keys(evidence_path)
+
 
 
 def _supported_commit(metadata: dict[str, Any], record_id: str) -> tuple[str, str]:
@@ -345,6 +343,53 @@ def _generate_snapshot(repository_root: Path, report: Any, selected_ids: list[st
     return formal_snapshot_digest(repository_root, report.artifacts, selected_ids)
 
 
+def _refresh_note(root: Path, catalog: dict[str, Any], source_id: str,
+                  work: list[str], verification: list[str], evidence: list[str]) -> str:
+    """Reuse a ready record only after comparing its relevant Git tree entries."""
+    from se_harness.installer import load_lock
+    from se_harness.repository_graph import project_scope
+    from se_harness.workflow_change_set import execution_scope, own_record_paths, path_is_admitted
+
+    source = _require_artifact(catalog, source_id, "verification_record")
+    if source.status != "ready":
+        raise StateRefusal("refresh requires a ready verification record; verified history is immutable")
+    if (set(work) != _relation_targets(source.metadata, "verifies_work_order")
+            or set(verification) != _relation_targets(source.metadata, "conforms_to")
+            or set(evidence) != set(source.metadata.get("evidence_paths", []))):
+        raise InputRefusal("refresh must retain the original work, contracts, and evidence selection")
+    commit, _ = _supported_commit(source.metadata, source_id)
+    current, _ = git_identity(root)
+    scope = {".engineering-harness.toml", ".engineering-harness.lock", ".gitattributes",
+             "AGENTS.md", "CLAUDE.md", "ENGINEERING_HARNESS.md", *load_lock(root)["files"], *evidence}
+    outputs: set[str] = set()
+    for identifier in work:
+        artifact = catalog[identifier]
+        governing, _ = project_scope(catalog, artifact)
+        scope.update(_relative_path(root, catalog[item]) for item in {*governing, identifier})
+        scope.update(execution_scope(artifact))
+        outputs.update(own_record_paths(root, catalog, identifier))
+
+    def entries(revision: str) -> dict[str, str]:
+        rows = _git(root, "ls-tree", "-r", "-z", revision).split("\0")
+        result = {}
+        for row in rows:
+            if not row:
+                continue
+            identity, path = row.split("\t", 1)
+            if path_is_admitted(path, scope) and (path not in outputs or path in evidence):
+                result[path] = identity  # mode, object type, and blob ID; no checkout newline conversion
+        return result
+
+    previous, latest = entries(commit), entries(current)
+    changed = sorted(path for path in previous.keys() | latest.keys() if previous.get(path) != latest.get(path))
+    if changed:
+        raise EvidenceRefusal("relevant files changed; run fresh candidate tests: " + ", ".join(changed))
+    return (f"\n\n## Evidence reused after explicit refresh\n\n"
+            f"Source: `{source_id}` at `{commit}`. New candidate: `{current}`. "
+            f"Compared {len(latest)} relevant Git tree entries, including governing inputs and retained evidence; all are unchanged. "
+            "The original record and evidence were preserved. No tests were rerun and neither record was verified by this command.")
+
+
 
 def capture_committed_verification(repository: Path, *, candidate_commit: str,
                                    test_command: list[str], **options: Any) -> Path:
@@ -399,6 +444,7 @@ def capture_verification(
     output: str | None,
     domain: str | None = None,
     report: Any | None = None,
+    refresh_from: str | None = None,
 ) -> Path:
     root = ensure_target(repository, must_exist=True)
     _validate_id(record_id, "VREC-")
@@ -425,8 +471,8 @@ def capture_verification(
     declared_verification: set[str] = set()
     for work_order_id in selected_work:
         work_order = _require_artifact(catalog, work_order_id, "work_order")
-        if work_order.status != "implemented":
-            raise StateRefusal(f"work order {work_order_id} must be implemented")
+        if work_order.status not in IMPLEMENTED_OR_LATER_STATUSES:
+            raise StateRefusal(f"work order {work_order_id} must be implemented, verified, or released")
         work_order_metadata = _load_metadata(root, work_order)
         declared_verification.update(_relation_targets(work_order_metadata, "verification"))
         if delegated:
@@ -457,14 +503,7 @@ def capture_verification(
             details.append(f"not declared by selected work {', '.join(sorted(extra_verification))}")
         raise InputRefusal(f"verification contract selection does not match selected work orders: {'; '.join(details)}")
     normalized_evidence = [_relative_file(root, evidence)[1] for evidence in selected_evidence]
-    if len(selected_work) > 1:
-        uncovered = [
-            work_order_id
-            for work_order_id in selected_work
-            if not any(_evidence_is_keyed_to(evidence, work_order_id) for evidence in normalized_evidence)
-        ]
-        if uncovered:
-            raise InputRefusal(f"aggregate evidence is not keyed to work orders: {', '.join(uncovered)}")
+    reuse_note = _refresh_note(root, catalog, refresh_from, selected_work, selected_verification, normalized_evidence) if refresh_from else ""
     selected_domain = _record_domain(root, catalog, selected_work, domain)
     destination = _output_path(
         root,
@@ -487,6 +526,7 @@ def capture_verification(
     work_array = _toml_array(selected_work)
     verification_array = _toml_array(selected_verification)
     readable_work = ", ".join(f"`{item}`" for item in selected_work)
+    refresh_line = f'\nrefreshed_from = "{refresh_from}"' if refresh_from else ""
     deviations = standing_deviations_for_work(root, catalog, selected_work)
     deviation_section = (
         "\n\n## Standing deviations\n\nAccepted deviations standing on the selected work at this candidate; each names the rule it departs from and is retained here for the assurance decision:\n\n"
@@ -510,7 +550,7 @@ prepared_by = "{owner}"
 artifact_snapshot_sha256 = "{snapshot_hash}"
 evidence_paths = {evidence_array}
 evaluator_evidence_path = "{evaluator_evidence_path}"
-evaluator_evidence_sha256 = "{evidence_sha256}"
+evaluator_evidence_sha256 = "{evidence_sha256}"{refresh_line}
 
 [relations]
 verifies_work_order = {work_array}
@@ -521,7 +561,7 @@ conforms_to = {verification_array}
 
 This ready record binds retained evidence for {readable_work} to candidate commit `{commit}`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.{delegated_sentence}
 
-The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.{deviation_section}
+The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.{deviation_section}{reuse_note}
 '''
     _write_record_and_evidence(
         destination,
@@ -554,6 +594,8 @@ def prepare_release(
     if tag is not None and TAG_PATTERN.fullmatch(tag) is None:
         raise InputRefusal("tag contains unsupported characters")
     selected_verification_records = _normalized_unique(verification_record_ids, "verification records")
+    if len(selected_verification_records) != 1:
+        raise InputRefusal("select one final-candidate verification record covering the complete release; earlier records remain supporting evidence")
     selected_work = _normalized_unique(work_order_ids, "work orders")
     authority = mutation_guard.require_mutation_authority(
         root,
@@ -587,17 +629,18 @@ def prepare_release(
     ungated = set(selected_work) - _relation_targets(contract_metadata, "gates")
     if ungated:
         raise InputRefusal(f"release contract {release_contract_id} does not gate work orders: {', '.join(sorted(ungated))}")
-    verification_work: set[str] = set()
-    identities: set[tuple[str, str]] = set()
-    for verification_record_id in selected_verification_records:
-        verification_record = _require_artifact(catalog, verification_record_id, "verification_record")
-        if not _grants_authority("verification_record", verification_record.status):
-            raise StateRefusal(
-                f"verification record {verification_record_id} must be verified or released authority"
-            )
-        verification_metadata = _load_metadata(root, verification_record)
-        verification_work.update(_relation_targets(verification_metadata, "verifies_work_order"))
-        identities.add(_supported_commit(verification_metadata, verification_record_id))
+    verification_record_id = selected_verification_records[0]
+    verification_record = _require_artifact(catalog, verification_record_id, "verification_record")
+    if not _grants_authority("verification_record", verification_record.status):
+        raise StateRefusal(f"verification record {verification_record_id} must be verified or released authority")
+    verification_metadata = _load_metadata(root, verification_record)
+    verification_work = _relation_targets(verification_metadata, "verifies_work_order")
+    required_contracts = set().union(*(_relation_targets(catalog[item].metadata, "verification") for item in selected_work))
+    if _relation_targets(verification_metadata, "conforms_to") != required_contracts:
+        raise InputRefusal("the final verification must cover every verification contract declared by released work")
+    commit, object_format = _supported_commit(verification_metadata, verification_record_id)
+    if contract_metadata.get("candidate_commit", commit) != commit:
+        raise InputRefusal("the final verification does not identify the release contract's candidate commit")
     released_work = set(selected_work)
     verified_only = verification_work - released_work
     released_only = released_work - verification_work
@@ -608,9 +651,6 @@ def prepare_release(
         if released_only:
             details.append(f"released but not verified {', '.join(sorted(released_only))}")
         raise InputRefusal(f"released work does not match verification coverage: {'; '.join(details)}")
-    if len(identities) != 1:
-        raise InputRefusal("included verification records do not identify one candidate commit and object format")
-    commit, object_format = next(iter(identities))
     selected_domain = _record_domain(root, catalog, selected_work, domain)
     destination = _output_path(
         root,

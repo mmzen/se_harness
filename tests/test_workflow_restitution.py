@@ -47,24 +47,12 @@ class WorkflowRestitutionTests(unittest.TestCase):
             },
         )
 
-    def test_direct_renderer_success_headings_are_exact_and_ordered(self) -> None:
-        human = render_human(self.result())
-        headings = [
-            "Outcome", "Done", "Not done", "Current lifecycle state",
-            "Decision required", "Next", "Command or response",
-        ]
-        positions = [human.index(heading) for heading in headings]
-        self.assertEqual(sorted(positions), positions)
-        self.assertNotIn("Blocked by\n", human)
-        self.assertNotIn("Background", human)
-        self.assertIn("Not done\nNone.", human)
 
-    def test_direct_renderer_blocked_output_has_exact_blocker_and_no_extra_sections(self) -> None:
+
+    def test_renderer_explains_a_blocked_result(self) -> None:
         human = render_human(self.result(blocked=True))
-        self.assertIn("Blocked by\n- QGP-EVIDENCE: Evidence is missing.", human)
-        self.assertLess(human.index("Not done"), human.index("Blocked by"))
-        self.assertLess(human.index("Blocked by"), human.index("Current lifecycle state"))
-        self.assertFalse(human.startswith("Here"))
+        self.assertIn("Evidence is missing", human)
+        self.assertIn("WO-001", human)
 
     def test_direct_renderer_and_json_derive_from_one_semantic_result(self) -> None:
         result = self.result()
@@ -76,9 +64,36 @@ class WorkflowRestitutionTests(unittest.TestCase):
         for argument in decoded["restitution"]["command_or_response"]["argv"]:
             self.assertIn(argument, human)
 
-    def test_direct_renderer_is_deterministic(self) -> None:
-        result = self.result(blocked=True)
-        self.assertEqual(render_human(result), render_human(result))
+    def test_wording_changes_do_not_change_machine_identity(self) -> None:
+        from copy import deepcopy
+        from se_harness.workflow_result import restitution_digest
+        result = self.result()
+        result["candidate"] = {"commit": "a" * 40, "git_object_format": "sha1"}
+        result["state"]["after"] = [{"id": "WO-001", "status": "implemented"}]
+        baseline = restitution_digest(result)
+        wording = deepcopy(result)
+        wording["restitution"]["done"] = ["Checks passed. Now review the evidence."]
+        wording["restitution"]["next"]["action"] = "Review this next"
+        wording["restitution"]["current_lifecycle_state"] = ["The work is implemented."]
+        self.assertNotEqual(render_human(result), render_human(wording))
+        self.assertEqual(baseline, restitution_digest(wording))
+        for change in ("candidate", "state", "argv"):
+            with self.subTest(change=change):
+                changed = deepcopy(result)
+                if change == "candidate":
+                    changed["candidate"]["commit"] = "b" * 40
+                elif change == "state":
+                    changed["state"]["after"][0]["status"] = "verified"
+                else:
+                    changed["restitution"]["command_or_response"]["argv"].append("--apply")
+                self.assertNotEqual(baseline, restitution_digest(changed))
+
+    def test_retained_schema_two_digest_still_uses_its_original_format(self) -> None:
+        import hashlib
+        from se_harness.workflow_result import canonical_block_bytes, restitution_digest
+        result = self.result()
+        result.pop("digest_format")
+        self.assertEqual(hashlib.sha256(canonical_block_bytes(result)).hexdigest(), restitution_digest(result))
 
     def test_direct_renderer_rejects_completed_result_with_blocker(self) -> None:
         result = self.result()

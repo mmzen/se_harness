@@ -151,7 +151,6 @@ class TwinTests(unittest.TestCase):
         self.assertIs(generate_harness_dashboard.coverage_rows, validate_engineering_artifacts.coverage_rows)
         for module in (validate_engineering_artifacts, provenance, workflow_procedures):
             self.assertIs(artifact_layout.ID_PATTERN, module.ID_PATTERN)
-        self.assertIs(provenance.evidence_work_order_keys, validate_engineering_artifacts.evidence_work_order_keys)
         offenders: list[str] = []
         for path in sorted((REPOSITORY_ROOT / "se_harness").rglob("*.py")):
             source = path.read_text(encoding="utf-8")

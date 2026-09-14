@@ -28,7 +28,7 @@ REPOSITORY_COMMANDS = {
     "check-pr",
     "init", "validate", "inspect", "dashboard", "doctor", "preflight", "check", "evidence",
     "pr-body", "transition", "upgrade", "skill-ownership", "scaffold-domain", "create-artifact",
-    "release-unit", "capture-verification", "prepare-release", "decide", "raise-risk", "risks",
+    "release-unit", "capture-verification", "refresh-verification", "prepare-release", "decide", "raise-risk", "risks",
 }
 NON_REPOSITORY_COMMANDS = {"select-work-order", "identity"}
 REPOSITORY_QUALIFY_ROLES = {"released-root", "complete-candidate", "public-install"}

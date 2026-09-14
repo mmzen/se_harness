@@ -14,7 +14,6 @@ from se_harness.engine.validation_core import (
     duplicate_strings,
     relation_targets,
 )
-from se_harness.engine.validation_evidence import evidence_path_is_keyed_to
 from se_harness.engine.validation_lifecycle import active_record_status, grants_authority, reserves_version
 
 
@@ -106,23 +105,6 @@ def _check_verification_record(
             f"verification record includes contracts not declared by selected work: {', '.join(sorted(extra_verification))}",
             plane="governance",
         )
-    if len(work_order_ids) > 1:
-        evidence_paths = artifact.metadata.get("evidence_paths", [])
-        normalized_paths = [item for item in evidence_paths if isinstance(item, str)] if isinstance(evidence_paths, list) else []
-        uncovered = [
-            work_order_id
-            for work_order_id in sorted(work_order_ids)
-            if not any(evidence_path_is_keyed_to(path, work_order_id) for path in normalized_paths)
-        ]
-        if uncovered:
-            add_error(
-                errors,
-                artifact,
-                report_root,
-                E010,
-                f"aggregate evidence is not keyed to work orders: {', '.join(uncovered)}",
-                plane="governance",
-            )
     if artifact.status == "superseded":
         successor_ids = sorted(relation_targets(artifact, "superseded_by"))
         if len(successor_ids) == 1:
@@ -200,6 +182,14 @@ def _check_release_record(
                 f"active release record requires implemented, verified, or released work order '{work_order_id}'",
                 plane="governance",
             )
+    if artifact.status == "ready":
+        final_ids = relation_targets(artifact, "includes_verification")
+        required_contracts = set().union(*(relation_targets(catalog[item], "verification") for item in released_work if item in catalog))
+        final = catalog.get(next(iter(final_ids))) if len(final_ids) == 1 else None
+        if final is None or not grants_authority(final.artifact_type, final.status) or relation_targets(final, "conforms_to") != required_contracts:
+            add_error(errors, artifact, report_root, E010,
+                      "ready release requires one verified final-candidate record covering every released work order and verification contract",
+                      plane="governance")
     verification_work: set[str] = set()
     for verification_id in relation_targets(artifact, "includes_verification"):
         verification = catalog.get(verification_id)
