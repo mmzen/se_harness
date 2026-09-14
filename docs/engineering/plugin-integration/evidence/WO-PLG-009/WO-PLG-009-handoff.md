@@ -7,4 +7,4 @@ rebound_at = "2026-09-14T22:15:29Z"
 
 # WO-PLG-009 handoff evidence
 
-Retained by `harnessctl evidence`; body content is owner-authored.
+See [implementation and acceptance](README.md) and [actual check results](checks.json).
