@@ -140,7 +140,7 @@ gate passes and no repository-level error is present.
 | `QG-G4-CANDIDATE-READY` | `pre-action`, `transition` | `QGP-G4C-STATUS`, `QGP-G4C-GRAPH`, `QGP-G4C-INTEGRITY` |
 | `QG-G4-ASSURANCE-DECISION` | `pre-action`, `transition` | `QGP-G4A-GRAPH`, `QGP-G4A-INTEGRITY` |
 | `QG-G4-VERIFIED-COVERAGE` | `pre-action`, `transition` | `QGP-G4V-GRAPH`, `QGP-G4V-INTEGRITY` |
-| `QG-G5-RELEASE-PREPARATION` | `pre-action`, `transition` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY`, `QGP-G5P-RELEASE-UNIT` |
+| `QG-G5-RELEASE-PREPARATION` | `pre-action`, `transition` | `QGP-G5P-GRAPH`, `QGP-G5P-INTEGRITY` |
 | `QG-G5-RELEASE-DECISION` | `pre-action`, `transition` | `QGP-G5D-STATUS`, `QGP-G5D-GRAPH`, `QGP-G5D-INTEGRITY` |
 | `QG-G5-EXTERNAL-ACTION` | `pre-action` | `QGP-G5E-STATUS`, `QGP-G5E-GRAPH`, `QGP-G5E-INTEGRITY` |
 

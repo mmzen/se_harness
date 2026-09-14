@@ -1,0 +1,11 @@
+--workers must be at least 1
+WEX_SCALE artifacts=100 validation=0.104325s focus=0.207503s plan=0.212341s
+WEX_SCALE artifacts=500 validation=0.496302s focus=0.568385s plan=0.920526s
+WEX_SCALE artifacts=1000 validation=1.061408s focus=1.161503s plan=1.965540s
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-rqsgtc10\private\verity-plane\evaluator\Scripts\python.exe
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-rqsgtc10\private\verity-plane\evaluator\Scripts\python.exe
+docs/notes/diagnostic-codes.md matches the source
+----------------------------------------------------------------------
+Ran 1085 tests in 124.668s (175 classes, 4 workers)
+
+OK (skipped=16)

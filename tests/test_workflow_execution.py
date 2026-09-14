@@ -1030,23 +1030,13 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionFixture, unittest.TestCase):
         human = invoke("check", str(self.root), "--artifact", "WO-001")[1]
         self.assertTrue(human.startswith("Outcome\n"))
 
-    def test_result_digest_binds_the_canonical_block_bytes(self) -> None:
-        import hashlib
-
-        from se_harness.workflow_result import canonical_block_bytes, render_human
-
+    def test_result_digest_uses_versioned_machine_fields(self) -> None:
+        from se_harness.workflow_result import restitution_digest
         code, output, error = invoke("check", str(self.root), "--artifact", "WO-001", "--json")
         self.assertEqual(0, code, error)
         result = json.loads(output)
-        digest = result["result_sha256"]
-        self.assertRegex(digest, r"^[0-9a-f]{64}$")
-        block = canonical_block_bytes(result)
-        self.assertEqual(hashlib.sha256(block).hexdigest(), digest)
-        self.assertNotIn(b"\r", block)
-        self.assertTrue(block.endswith(b"\n") and not block.endswith(b"\n\n"))
-        self.assertEqual(block.decode("utf-8").rstrip("\n") + "\n", render_human(result))
-        human = invoke("check", str(self.root), "--artifact", "WO-001")[1]
-        self.assertEqual(digest, hashlib.sha256(human.replace("\r\n", "\n").encode("utf-8")).hexdigest())
+        self.assertEqual("machine-fields-v1", result["digest_format"])
+        self.assertEqual(result["result_sha256"], restitution_digest(result))
 
     def test_operating_card_template_equals_its_contract_rendering_and_stays_bounded(self) -> None:
         from se_harness.workflow_contract import (
@@ -1152,27 +1142,7 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionFixture, unittest.TestCase):
         self.assertTrue(any(item.startswith("W-ADS-002:") for item in blockers), blockers)
         self.assertTrue(any(orphan in item for item in blockers), blockers)
 
-    def test_projection_digest_equals_the_released_evaluator_golden(self) -> None:
-        """Issue #212 criterion 3: an unchanged repository keeps its result_sha256.
 
-        The constant was read from the exact public se-harness 0.7.1 evaluator's
-        `focus --json` on this fixture before WO-ECP-005 removed schema 1
-        (d22f5e48…) and reproduced by the candidate until 2026-08-28, when
-        WO-ECP-003 widened the canonical block with the change set and every
-        predicate status (ECP-DIG-001): every result_sha256 changes at that
-        upgrade by specification, and the pin moves to the widened block. The
-        criterion holds within one block definition. On 2026-08-29 WO-ECP-019
-        folded the execution context into the projection (ECP-CTX-003): the
-        block gains the Context section and the pin moves again, from
-        b8ccd288… to the value below.
-        """
-
-        code, output, error = invoke("check", str(self.root), "--artifact", "WO-001", "--json")
-        self.assertEqual(0, code, error)
-        self.assertEqual(
-            "c307910acec83b544f8c43748355db3a3e70276195f9c02c46b0c8017435bd69",
-            json.loads(output)["result_sha256"],
-        )
 
     def test_every_workflow_command_refuses_the_retired_result_schema_option(self) -> None:
         for command in (
@@ -1412,30 +1382,16 @@ class PullRequestBodyTests(unittest.TestCase):
 class DigestCoverageTests(WorkflowExecutionFixture, unittest.TestCase):
     """REQ-ECP-007 / ECP-DIG-001 to -004: the digest binds the change set and the gates."""
 
-    def test_the_block_carries_the_change_set_and_every_predicate_status(self) -> None:
-        from se_harness.workflow_result import canonical_block_bytes
-
+    def test_machine_evidence_carries_the_change_set_and_predicate_statuses(self) -> None:
+        from se_harness.workflow_result import machine_fields
         self.in_progress_work_order()
-        (self.root / "src").mkdir(exist_ok=True)
-        (self.root / "src/main.py").write_text("x = 1\n", encoding="utf-8")
-        code, output, error = invoke(
-            "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff",
-            "--changed-path", "src/main.py", "--changed-path", "src/a.py", "--changes-complete", "--json",
-        )
+        code, output, error = invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff",
+            "--changed-path", "src/main.py", "--changed-path", "src/a.py", "--changes-complete", "--json")
         result = json.loads(output)
-        block = canonical_block_bytes(result).decode("utf-8")
-        self.assertIn("\nChange set\n- src/a.py\n- src/main.py\ncomplete: true\n", block)
-        gates = block.split("\nGates\n", 1)[1].split("\n\n", 1)[0].splitlines()
-        expected = [f"{p['id']}: {p['status']}" for g in result["compliance"]["gates"] for p in g["predicates"]]
-        self.assertEqual(expected, gates)
-        self.assertIn("QGP-G4I-PATHS: ", "\n".join(gates))
-        self.assertLess(block.index("Command or response"), block.index("\nChange set\n"))
-        self.assertLess(block.index("\nChange set\n"), block.index("\nGates\n"))
-        human = invoke("check", str(self.root), "--artifact", "WO-001")[1]
-        self.assertIn("\nChange set\nNone.\ncomplete: false\n", human)
-        self.assertIn("\nGates\n", human)
-        human = invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--changed-path", "src/main.py", "--changed-path", "src/a.py", "--changes-complete")[1]
-        self.assertEqual(block, human.replace("\r\n", "\n"))
+        machine = machine_fields(result)
+        self.assertEqual(result["scope"], machine["scope"])
+        self.assertEqual([p["status"] for g in result["compliance"]["gates"] for p in g["predicates"]],
+                         [p["status"] for g in machine["compliance"]["gates"] for p in g["predicates"]])
 
     def test_one_changed_path_one_completeness_flip_or_one_predicate_status_changes_the_digest(self) -> None:
         import copy
@@ -1458,9 +1414,9 @@ class DigestCoverageTests(WorkflowExecutionFixture, unittest.TestCase):
         predicate["status"] = "fail" if predicate["status"] != "fail" else "pass"
         digests = {restitution_digest(item) for item in (base, path_edit, complete_edit, status_edit)}
         self.assertEqual(4, len(digests))
-        # identical inputs share one digest whether the block is rendered LF or CRLF
-        crlf = canonical_block_bytes(base).decode("utf-8").replace("\n", "\r\n").replace("\r\n", "\n")
-        self.assertEqual(base["result_sha256"], __import__("hashlib").sha256(crlf.encode("utf-8")).hexdigest())
+        wording = copy.deepcopy(base)
+        wording["restitution"]["done"] = ["A clearer explanation."]
+        self.assertEqual(base["result_sha256"], restitution_digest(wording))
 
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]

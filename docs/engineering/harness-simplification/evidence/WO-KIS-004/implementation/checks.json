@@ -1,0 +1,777 @@
+{
+  "work_order": "WO-KIS-004",
+  "commit": "7fc826459bffaa2faec880340bf05a0a8274a7b8",
+  "source_tests": {
+    "run": 1085,
+    "skipped": 16,
+    "seconds": 124.668,
+    "result": "pass"
+  },
+  "package_source": "7fc826459bffaa2faec880340bf05a0a8274a7b8",
+  "wheel_sha256": "e1b77c5503c5a404db2451b58a2aaa3fc5d79cf83e53e11b9ead2747e72717c8",
+  "changes": {
+    "docs_and_support": {
+      "added": 1341,
+      "removed": 50
+    },
+    "source": {
+      "added": 163,
+      "removed": 99
+    },
+    "tests": {
+      "added": 188,
+      "removed": 325
+    }
+  },
+  "commands": [
+    {
+      "name": "candidate-graph",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "se_harness",
+        "validate",
+        ".",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 4.902
+    },
+    {
+      "name": "candidate-venv",
+      "argv": [
+        "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-m",
+        "venv",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed"
+      ],
+      "exit_code": 0,
+      "seconds": 8.277
+    },
+    {
+      "name": "candidate-wheel-build",
+      "argv": [
+        "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-m",
+        "pip",
+        "wheel",
+        "--no-deps",
+        "--no-build-isolation",
+        "--wheel-dir",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\non-promotable",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\source"
+      ],
+      "exit_code": 0,
+      "seconds": 5.368
+    },
+    {
+      "name": "candidate-wheel-install",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "pip",
+        "install",
+        "--no-index",
+        "--no-deps",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\non-promotable\\se_harness-0.18.0-py3-none-any.whl"
+      ],
+      "exit_code": 0,
+      "seconds": 2.54
+    },
+    {
+      "name": "cli-help",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "exit_code": 0,
+      "seconds": 0.395
+    },
+    {
+      "name": "diagnostic-index",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "repository_tools.diagnostic_code_index",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 1.568
+    },
+    {
+      "name": "distribution-records",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 3.712
+    },
+    {
+      "name": "final-integration-init",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\final-integration",
+        "--project-name",
+        "KISS disposable acceptance",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.65
+    },
+    {
+      "name": "installed-advisory-census",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "release-unit",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\final-integration",
+        "--from",
+        "v0",
+        "--to",
+        "84fcde8ae5405e3e72124ff5a4164b3e630e78e2",
+        "--contract",
+        "REL-001",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.494
+    },
+    {
+      "name": "installed-changed-refresh-refused",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "refresh-verification",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\unchanged-rebase",
+        "--from",
+        "VREC-002",
+        "--id",
+        "VREC-003"
+      ],
+      "exit_code": 1,
+      "seconds": 0.57
+    },
+    {
+      "name": "installed-final-doctor",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\unchanged-rebase",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.652
+    },
+    {
+      "name": "installed-final-release",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "prepare-release",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\final-integration",
+        "--id",
+        "RLS-001",
+        "--release-contract",
+        "REL-001",
+        "--work-order",
+        "WO-001",
+        "--work-order",
+        "WO-002",
+        "--version",
+        "1.0.0",
+        "--owner",
+        "release-owner",
+        "--json",
+        "--verification-record",
+        "VREC-003"
+      ],
+      "exit_code": 0,
+      "seconds": 0.506
+    },
+    {
+      "name": "installed-final-validation",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\final-integration",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.392
+    },
+    {
+      "name": "installed-incomplete-release-refused",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "prepare-release",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\final-integration",
+        "--id",
+        "RLS-001",
+        "--release-contract",
+        "REL-001",
+        "--work-order",
+        "WO-001",
+        "--work-order",
+        "WO-002",
+        "--version",
+        "1.0.0",
+        "--owner",
+        "release-owner",
+        "--json",
+        "--verification-record",
+        "VREC-001"
+      ],
+      "exit_code": 1,
+      "seconds": 0.401
+    },
+    {
+      "name": "installed-refresh",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "refresh-verification",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\unchanged-rebase",
+        "--from",
+        "VREC-001",
+        "--id",
+        "VREC-002",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.701
+    },
+    {
+      "name": "installed-semantic-digest",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import copy,json,sys\nfrom pathlib import Path\nfrom se_harness.workflow_result import restitution_digest,render_human\noriginal=json.loads(Path(sys.argv[1]).read_text())\nwording=copy.deepcopy(original)\nwording['restitution']['done']=['A shorter explanation.']\nif wording['restitution']['decision_required'] is not None:\n    wording['restitution']['decision_required']['decision']='A clearer decision label.'\nassert render_human(original)!=render_human(wording)\nassert restitution_digest(original)==restitution_digest(wording)==original['result_sha256']\nfor name in ('candidate','state','argv'):\n    changed=copy.deepcopy(original)\n    if name=='candidate': changed['candidate']['commit']='f'*40\n    elif name=='state': changed['state']['after'][0]['status']='verified'\n    else: changed['restitution']['command_or_response']={'kind':'command','argv':['harnessctl','check','.','--apply']}\n    assert restitution_digest(changed)!=original['result_sha256']\nprint('wording ignored; candidate, state and argv bound')\n",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\refresh-result.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.226
+    },
+    {
+      "name": "installed-unverified-final-refused",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "prepare-release",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\final-integration",
+        "--id",
+        "RLS-001",
+        "--release-contract",
+        "REL-001",
+        "--work-order",
+        "WO-001",
+        "--work-order",
+        "WO-002",
+        "--version",
+        "1.0.0",
+        "--owner",
+        "release-owner",
+        "--json",
+        "--verification-record",
+        "VREC-003"
+      ],
+      "exit_code": 1,
+      "seconds": 0.409
+    },
+    {
+      "name": "installed-VREC-001-capture",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "capture-verification",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\unchanged-rebase",
+        "--id",
+        "VREC-001",
+        "--work-order",
+        "WO-001",
+        "--verification",
+        "VER-001",
+        "--evidence",
+        "docs/engineering/product/evidence/WO-001-verification.md",
+        "--json",
+        "--candidate-commit",
+        "26b4c92c01bf224efcaecbc637b073d3a39075aa",
+        "--test-command",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "from pathlib import Path; assert Path('src/part1.txt').read_text().strip() == 'feature 1'; print('selected integration passed')"
+      ],
+      "exit_code": 0,
+      "seconds": 1.204
+    },
+    {
+      "name": "installed-VREC-001-verify",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\final-integration",
+        "--set",
+        "VREC-001=verified",
+        "--decision",
+        "VREC-001=quality-owner",
+        "--apply",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.468
+    },
+    {
+      "name": "installed-VREC-002-capture",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "capture-verification",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\final-integration",
+        "--id",
+        "VREC-002",
+        "--work-order",
+        "WO-002",
+        "--verification",
+        "VER-002",
+        "--evidence",
+        "docs/engineering/product/evidence/WO-002-verification.md",
+        "--json",
+        "--candidate-commit",
+        "0a34e204cc97bab776779f03eb994d612f055057",
+        "--test-command",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "from pathlib import Path; assert Path('src/part2.txt').read_text().strip() == 'feature 2'; print('selected integration passed')"
+      ],
+      "exit_code": 0,
+      "seconds": 1.151
+    },
+    {
+      "name": "installed-VREC-002-verify",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\final-integration",
+        "--set",
+        "VREC-002=verified",
+        "--decision",
+        "VREC-002=quality-owner",
+        "--apply",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.503
+    },
+    {
+      "name": "installed-VREC-003-capture",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "capture-verification",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\final-integration",
+        "--id",
+        "VREC-003",
+        "--work-order",
+        "WO-001",
+        "--verification",
+        "VER-001",
+        "--evidence",
+        "docs/engineering/product/evidence/WO-001-verification.md",
+        "--work-order",
+        "WO-002",
+        "--verification",
+        "VER-002",
+        "--evidence",
+        "docs/engineering/product/evidence/WO-002-verification.md",
+        "--evidence",
+        "docs/engineering/product/verification-records/VREC-001.md",
+        "--evidence",
+        "docs/engineering/product/verification-records/VREC-002.md",
+        "--json",
+        "--candidate-commit",
+        "84fcde8ae5405e3e72124ff5a4164b3e630e78e2",
+        "--test-command",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "from pathlib import Path; assert Path('src/part1.txt').read_text().strip() == 'feature 1'; assert Path('src/part2.txt').read_text().strip() == 'feature 2'; print('selected integration passed')"
+      ],
+      "exit_code": 0,
+      "seconds": 1.149
+    },
+    {
+      "name": "installed-VREC-003-verify",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\final-integration",
+        "--set",
+        "VREC-003=verified",
+        "--decision",
+        "VREC-003=quality-owner",
+        "--apply",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.599
+    },
+    {
+      "name": "package-doctor",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\acceptance-target",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.545
+    },
+    {
+      "name": "package-identity",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "identity",
+        "--role",
+        "candidate-package",
+        "--expected-version",
+        "0.18.0",
+        "--expected-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed",
+        "--checkout-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+        "--candidate-commit",
+        "7fc826459bffaa2faec880340bf05a0a8274a7b8",
+        "--require-isolated-python",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.319
+    },
+    {
+      "name": "package-init",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\acceptance-target",
+        "--project-name",
+        "KISS acceptance",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.84
+    },
+    {
+      "name": "package-risk",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "raise-risk",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\acceptance-target",
+        "--domain",
+        "product",
+        "--title",
+        "Setup elsewhere",
+        "--description",
+        "Only one machine has been tried. Another may behave differently.",
+        "--action",
+        "Try setup on the next development machine.",
+        "--owner",
+        "engineering-owner",
+        "--id",
+        "RISK-PRD-001",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.396
+    },
+    {
+      "name": "package-selector-crlf",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "select-work-order",
+        "--event",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\crlf.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.306
+    },
+    {
+      "name": "package-selector-lf",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "select-work-order",
+        "--event",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\lf.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.311
+    },
+    {
+      "name": "package-validate",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\acceptance-target",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.349
+    },
+    {
+      "name": "released-doctor",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 3.524
+    },
+    {
+      "name": "released-graph",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 5.622
+    },
+    {
+      "name": "released-review",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+        "--work-order",
+        "WO-KIS-004",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 5.807
+    },
+    {
+      "name": "released-scope",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+        "--artifact",
+        "WO-KIS-004",
+        "--checkpoint",
+        "scope",
+        "--from-git",
+        "4ca68474a7b3c6c74c932732a75b297aff8ba89d",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 6.242
+    },
+    {
+      "name": "unchanged-rebase-init",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\installed\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis004-package-7fc826459bff\\unchanged-rebase",
+        "--project-name",
+        "KISS disposable acceptance",
+        "--json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.626
+    }
+  ],
+  "ci": {
+    "head": "bb14d130c3f1acdaf8d8ab51c64e6a8f64bed485",
+    "pull_request": "https://github.com/mmzen/se_harness/pull/470",
+    "checks": [
+      {
+        "name": "Analyze (actions)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34811424829/job/103873382961"
+      },
+      {
+        "name": "validate",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34811427542/job/103873389130"
+      },
+      {
+        "name": "Predecessor evaluator assessment",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34811427517/job/103873388818"
+      },
+      {
+        "name": "Select the release record to rehearse",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34811427708/job/103873389262"
+      },
+      {
+        "name": "Candidate source evidence",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34811427596/job/103873389450"
+      },
+      {
+        "name": "Analyze (javascript-typescript)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34811424829/job/103873382798"
+      },
+      {
+        "name": "Analyze (python)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34811424829/job/103873382933"
+      },
+      {
+        "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34811427708/job/103873389494"
+      },
+      {
+        "name": "Candidate package evidence",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34811427596/job/103873573763"
+      },
+      {
+        "name": "Rehearse the qualification of the release record / Qualify and replay (release-record)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34811427708/job/103873426021"
+      },
+      {
+        "name": "Upgrade rehearsal (Linux)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34811427596/job/103873640125"
+      },
+      {
+        "name": "Upgrade rehearsal (Windows)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34811427596/job/103873640103"
+      },
+      {
+        "name": "Build deterministic integration package",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34811427596/job/103873921371"
+      },
+      {
+        "name": "Verify integration package (Linux)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34811427596/job/103873992813"
+      },
+      {
+        "name": "Verify integration package (Windows)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34811427596/job/103873992808"
+      },
+      {
+        "name": "Retain verified integration package",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/34811427596/job/103874196555"
+      },
+      {
+        "name": "CodeQL",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS",
+        "url": "https://github.com/mmzen/se_harness/runs/103873507026"
+      }
+    ]
+  }
+}

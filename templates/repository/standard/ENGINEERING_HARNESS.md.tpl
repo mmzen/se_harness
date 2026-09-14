@@ -109,9 +109,9 @@ work from remaining work, identify any required accountable decision, and
 recommend exactly one next action. Complete alternatives MAY be shown
 separately. It MUST NOT add an unrelated finding or another recommendation.
 
-When exact headings or bytes are required, the application or automation MUST
-invoke the deterministic human renderer directly. Model transcription MUST NOT
-be used as the enforcement mechanism. The complete procedure is
+Automation reads the structured JSON result. Human wording is not evidence
+identity: new result digests bind machine fields, including candidate, lifecycle
+state, and command arguments. The complete handoff procedure is
 `WORKFLOW.md#lifecycle-handoff-procedure`.
 
 ## Stop conditions

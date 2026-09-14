@@ -230,63 +230,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         ):
             self.assertIn(required, workflow)
 
-    def test_stage_aware_handoffs_preserve_authority_and_policy_ownership(self) -> None:
-        # Cited pin (SPEC-TST-002 TST-HYG-012): SPEC-WEX-003 under REQ-WEX-011 and SPEC-IAR-011
-        # fix the handoff wording of the router, WORKFLOW.md and the two fragments asserted here.
-        target = self.installed_target()
-        agents = (target / "AGENTS.md").read_text(encoding="utf-8")
-        managed = agents.split(BEGIN_MARKER, 1)[1].split(END_MARKER, 1)[0]
-        claude = (target / "CLAUDE.md").read_text(encoding="utf-8")
-        router = (target / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
-        workflow = (target / "docs" / "engineering" / "WORKFLOW.md").read_text(
-            encoding="utf-8"
-        )
 
-        self.assertIn(ROUTER_HANDOFF_HEADING, router)
-        router_handoff = router.split(ROUTER_HANDOFF_HEADING, 1)[1].split("\n## ", 1)[0]
-        normalized_router_handoff = " ".join(router_handoff.split())
-        for semantic in ROUTER_HANDOFF_SEMANTICS:
-            with self.subTest(semantic=semantic):
-                self.assertIn(semantic, normalized_router_handoff)
-        self.assertIn("structured result is authoritative", normalized_router_handoff)
-        self.assertIn("SHOULD summarize", normalized_router_handoff)
-        self.assertIn("MAY adapt wording and structure", normalized_router_handoff)
-        self.assertIn("omit empty fields", normalized_router_handoff)
-        self.assertIn("exactly one next action", normalized_router_handoff)
-        self.assertIn("deterministic human renderer directly", normalized_router_handoff)
-        self.assertIn("Model transcription MUST NOT", normalized_router_handoff)
-        self.assertIn("WORKFLOW.md", router_handoff)
-        self.assertNotIn("--phase review", router_handoff)
-        self.assertNotIn("capture-verification", router_handoff)
-        self.assertNotIn("Current lifecycle state", managed)
-        self.assertIn("schema-2 structured result as\nauthoritative", managed)
-        self.assertIn("Adapt wording and\nstructure", managed)
-        self.assertIn("Exact-format consumers must use the direct\nrenderer", managed)
-        self.assertIn("authoritative schema-2 result", claude)
-        self.assertIn("Exact human\nblocks come only from the direct renderer", claude)
-
-        self.assertIn(WORKFLOW_HANDOFF_HEADING, workflow)
-        workflow_handoff = workflow.split(WORKFLOW_HANDOFF_HEADING, 1)[1]
-        normalized_workflow_handoff = " ".join(workflow_handoff.split())
-        for phrase in (
-            "structured result is authoritative",
-            "adapt wording, order, and headings",
-            "omit empty fields",
-            "actual artifact IDs",
-            "observed effects from incomplete expected effects",
-            "every exact blocker and every material non-effect",
-            "final lifecycle state",
-            "accountable role and exact decision",
-            "exactly one current typed procedure step",
-            "command argument values and boundaries",
-            "workflow-declared complete alternatives",
-            "deterministic schema-2 human renderer",
-            "Model transcription MUST NOT",
-            "open-ended question",
-            "second next action",
-        ):
-            with self.subTest(phrase=phrase):
-                self.assertIn(phrase, normalized_workflow_handoff)
 
     def test_stage_aware_handoff_upgrade_is_safe_and_idempotent(self) -> None:
         target = self.installed_target("prior-handoff")

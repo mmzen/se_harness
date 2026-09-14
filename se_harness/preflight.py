@@ -334,7 +334,19 @@ def orphaned_ready_records(root: Path, artifacts: Iterable[Any], work_order_id: 
     ""f"{W_ADS_002}: ready verification records for the work order whose candidate left HEAD."""
 
     messages: list[str] = []
-    for artifact in sorted(artifacts, key=lambda item: item.artifact_id):
+    records = {item.artifact_id: item for item in artifacts if item.artifact_type == "verification_record"
+               and work_order_id in _targets(item, "verifies_work_order")}
+    current = [item for item in records.values() if item.status in {"ready", "verified", "released"}
+               and _commit_is_ancestor(root, str(item.metadata.get("commit", ""))) is True]
+    refreshed: set[str] = set()
+    for successor in current:
+        source = successor.metadata.get("refreshed_from")
+        while isinstance(source, str) and source in records and source not in refreshed:
+            refreshed.add(source)
+            source = records[source].metadata.get("refreshed_from")
+    for artifact in sorted(records.values(), key=lambda item: item.artifact_id):
+        if artifact.artifact_id in refreshed:
+            continue
         if artifact.artifact_type != "verification_record" or artifact.status != "ready":
             continue
         if work_order_id not in _targets(artifact, "verifies_work_order"):

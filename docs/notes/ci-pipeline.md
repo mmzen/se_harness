@@ -402,3 +402,9 @@ The candidate-package job materializes only its portability script and consumes
 the shared wheel. Old evidence remains in Git without entering that job's snapshot.
 This also resolves the released verifier's 250 MiB checkout limit.
 Timings are reported from actual CI runs in WO-PLG-021 evidence, not estimated here.
+
+## Candidate release scope after WO-KIS-004
+
+The trailer census is advisory. The new candidate removes its release-approval
+gate; the owner approves scope and verifies one final integration candidate.
+Earlier released evaluators retain their original gate until upgraded.

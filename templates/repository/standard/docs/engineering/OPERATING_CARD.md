@@ -21,4 +21,4 @@ Then report the failing rule, the unchanged state, and the corrective step.
 - PRs name one `Harness-Work-Order` or comma-separated `Harness-Work-Orders`; CI checks the combined scope.
 - A VREC or RLS binds an earlier commit; it lives in a later governance commit and is never rewritten.
 - Artifact IDs are shared across branches and sessions; check every ref before numbering.
-- A `ready` VREC whose candidate leaves `HEAD` (rebase, merge below it) is orphaned; verify, reject, or succeed it.
+- An unchanged rebase permits `refresh-verification --from OLD --id NEW`; changed inputs need fresh tests.

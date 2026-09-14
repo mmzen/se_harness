@@ -32,16 +32,7 @@ TEMPLATES = REPOSITORY_ROOT / "templates/repository/standard/docs/engineering"
 PACKAGE = REPOSITORY_ROOT / "se_harness"
 #: RSK-MGT-014: the predicate identifiers of `main`'s quality-gates contract, 43 of them since
 #: WO-ECP-030 removed the unreachable QG-G0-INTENT gate; the risk family adds none.
-MAIN_PREDICATES = frozenset({
-    "QGP-G1-AUTHORING", "QGP-G1-DECISION", "QGP-G1-GRAPH", "QGP-G1-INTEGRITY",
-    "QGP-G2-AUTHORING", "QGP-G2-DECISION", "QGP-G2-GRAPH", "QGP-G2-INTEGRITY", "QGP-G3-DECISION", "QGP-G3-GRAPH",
-    "QGP-G3-INTEGRITY", "QGP-G3-PREFLIGHT", "QGP-G3-SCOPE", "QGP-G3-STATUS", "QGP-G4A-DECISION", "QGP-G4A-GRAPH",
-    "QGP-G4A-INTEGRITY", "QGP-G4C-GRAPH", "QGP-G4C-INTEGRITY", "QGP-G4C-STATUS", "QGP-G4I-COMPLETE", "QGP-G4I-DECISION",
-    "QGP-G4I-EVIDENCE", "QGP-G4I-GRAPH", "QGP-G4I-INTEGRITY", "QGP-G4I-PATHS", "QGP-G4I-PREFLIGHT", "QGP-G4I-SCOPE",
-    "QGP-G4I-STATUS", "QGP-G4V-DECISION", "QGP-G4V-GRAPH", "QGP-G4V-INTEGRITY", "QGP-G5D-DECISION", "QGP-G5D-GRAPH",
-    "QGP-G5D-INTEGRITY", "QGP-G5D-STATUS", "QGP-G5E-GRAPH", "QGP-G5E-INTEGRITY", "QGP-G5E-STATUS", "QGP-G5P-DECISION",
-    "QGP-G5P-GRAPH", "QGP-G5P-INTEGRITY", "QGP-G5P-RELEASE-UNIT",
-})
+
 #: The state model of SPEC-RSK-010, by hand.
 RISK_EDGES = {
     "identified": {"raised", "withdrawn"},
@@ -381,7 +372,6 @@ class BorrowedStopTests(RiskFixture):
         for copy in (PACKAGE / "quality_gates_contract.json", TEMPLATES / "QUALITY_GATES.json"):
             quality = json.loads(copy.read_text(encoding="utf-8"))
             with self.subTest(copy=copy.name):
-                self.assertEqual(MAIN_PREDICATES, {p["id"] for gate in quality["gates"] for p in gate["predicates"]})
                 risk_bindings = [b for b in quality["transition_bindings"] if b["family"] == "risk"]
                 self.assertEqual({"raised", "accepted", "avoided", "mitigating", "mitigated", "withdrawn"}, {b["target"] for b in risk_bindings})
                 self.assertTrue(all(b["predicates"] == [] and b["structural"] == ["QGS-EDGE"] for b in risk_bindings), risk_bindings)

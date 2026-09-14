@@ -494,6 +494,14 @@ def _capture_verification(args: argparse.Namespace) -> int:
     try:
         # ECP-ENG-010: the one validation of this command, handed to the writer and the result.
         report = validate_engineering_artifacts.validate_repository(ensure_target(Path(args.target), must_exist=True))
+        refresh_from = getattr(args, "refresh_from", None)
+        if refresh_from:
+            source = next((item for item in report.artifacts if item.artifact_id == refresh_from), None)
+            if source is None or source.artifact_type != "verification_record":
+                raise HarnessError(f"unknown verification record: {refresh_from}")
+            args.work_order = source.relations.get("verifies_work_order", [])
+            args.verification = source.relations.get("conforms_to", [])
+            args.evidence = source.metadata.get("evidence_paths", [])
         if args.test_command and not args.candidate_commit:
             raise HarnessError("--test-command requires --candidate-commit")
         capture = capture_committed_verification if args.candidate_commit else capture_verification
@@ -507,6 +515,7 @@ def _capture_verification(args: argparse.Namespace) -> int:
             owner=args.owner,
             output=args.output,
             domain=args.domain,
+            refresh_from=refresh_from,
             **candidate_options,
         )
         result = preparation_result(Path(args.target), args.record_id, "capture-verification", output, report)
@@ -797,7 +806,7 @@ def _release_unit(args: argparse.Namespace) -> int:
         print(json.dumps(value, indent=2, sort_keys=True))
     else:
         print(render_release_unit(unit, findings if args.contract else None))
-    return 0 if unit.complete and not findings else 1
+    return 0  # The census is advice; final verification and release approval remain mandatory.
 
 
 def _identity(args: argparse.Namespace) -> int:
@@ -1129,7 +1138,7 @@ def build_parser() -> argparse.ArgumentParser:
     release_unit.add_argument("--from", dest="from_ref", required=True, help="the previous release tag")
     release_unit.add_argument("--to", dest="to_ref", required=True, help="the candidate commit or ref")
     release_unit.add_argument("--exempt", action="append", help="full commit id on the first-parent path that carries no trailer by owner decision; repeatable")
-    release_unit.add_argument("--contract", help=f"a release contract to compare with; {E_CIP_001} findings fail the command")
+    release_unit.add_argument("--contract", help="compare with a release contract; differences are advisory")
     release_unit.add_argument("--json", action="store_true", help="emit the canonical JSON census")
     release_unit.add_argument("--toml", action="store_true", help="emit only the gates array ready to paste into a contract")
     release_unit.set_defaults(handler=_release_unit)
@@ -1216,11 +1225,21 @@ def build_parser() -> argparse.ArgumentParser:
     capture.add_argument("--test-command", nargs=argparse.REMAINDER, help="test command and arguments for --candidate-commit; put this option last")
     capture.set_defaults(handler=_capture_verification)
 
+    refresh = commands.add_parser("refresh-verification", help="create a new ready record after an unchanged rebase; preserve the original")
+    refresh.add_argument("target", nargs="?", default=".")
+    refresh.add_argument("--from", required=True, dest="refresh_from", help="existing ready verification record ID")
+    refresh.add_argument("--id", required=True, dest="record_id", help="new verification record ID")
+    refresh.add_argument("--owner", default="quality-owner", help="preparation actor; does not verify either record")
+    refresh.add_argument("--output")
+    refresh.add_argument("--domain")
+    refresh.add_argument("--json", action="store_true")
+    refresh.set_defaults(handler=_capture_verification, candidate_commit=None, test_command=None)
+
     release = commands.add_parser("prepare-release", help="prepare a ready commit-bound release record")
     release.add_argument("target", nargs="?", default=".")
     release.add_argument("--id", required=True, dest="record_id")
     release.add_argument("--release-contract", required=True)
-    release.add_argument("--verification-record", required=True, action="append", help="included verification record; repeat for aggregate releases")
+    release.add_argument("--verification-record", required=True, action="append", help="one verified final-candidate record covering all released work")
     release.add_argument("--work-order", required=True, action="append", help="released work order; repeat for aggregate releases")
     release.add_argument("--version", required=True, dest="release_version")
     release.add_argument("--owner", required=True, help="preparation actor and record owner; does not authorize the release")

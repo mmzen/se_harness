@@ -2,10 +2,10 @@
 id = "WO-KIS-004"
 type = "work_order"
 title = "Simplify verification and release records"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-13"
-updated = "2026-09-13"
+updated = "2026-09-14"
 
 [delegation]
 class = "execution"
@@ -40,6 +40,8 @@ paths = [
   "docs/engineering/harness-simplification/work-orders/WO-KIS-004.md",
   "docs/notes/codebase-kiss-work-orders-2026-09-13.md",
   "docs/notes/developing-se-harness.md",
+  "docs/notes/diagnostic-codes.md",
+  "docs/notes/harnessctl-reference.md",
   "repository_tools/release_distribution.py",
   "se_harness/cli.py",
   "se_harness/codes.py",
@@ -71,7 +73,15 @@ paths = [
   "templates/repository/standard/docs/engineering/WORKFLOW.json",
   "templates/repository/standard/docs/engineering/WORKFLOW.md",
   "templates/repository/standard/docs/engineering/templates/",
+  "docs/notes/harnessctl-check.md",
+  "docs/notes/ci-pipeline.md",
+  "tests/test_engine_import_surface.py",
+  "tests/test_instruction_architecture.py",
+  "tests/test_workflow_documentation_contract.py",
+  "tests/test_validation_taxonomy.py",
+  "tests/test_risk_management.py",
   "tests/test_cli_shape.py",
+  "tests/test_context_routing_retirement.py",
   "tests/test_dashboard_publication.py",
   "tests/test_operating_contract_readiness.py",
   "tests/test_release_unit.py",
@@ -95,6 +105,20 @@ to = "approved"
 decided_at = "2026-09-13T16:40:43Z"
 decided_by = "engineering-owner"
 reason = "The owner accepted all 38 candidates in the retained 2026-09-13 codebase KISS review and requested the work orders: \"OK ! Let's create the work orders to implement all candidates\". Record the engineering-owner approval of WO-KIS-004 within that accepted scope and the established delegated route. SPEC-KIS-001 makes the replacement contracts and seven retained protections explicit; the coverage map assigns all candidates. This records definition approval or bounded execution delegation only, not implementation start, completion, verification, release, merge, publication, live adoption or historical evidence deletion."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-14T05:05:09Z"
+decided_by = "engineering-owner"
+reason = "The owner confirmed PR 469 is merged, continuing the accepted sequential implementation of all KISS candidates. Start WO-KIS-004 after WO-KIS-003 integration at 4ca68474a7b3c6c74c932732a75b297aff8ba89d. Retain the approved delegated execution route for completion and preparation."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-14T06:02:50Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at bb14d130c3f1acdaf8d8ab51c64e6a8f64bed485 (check-run 103873389130, source github-checks). All four selected cuts are implemented in source commit 7fc826459bffaa2faec880340bf05a0a8274a7b8. The exact candidate passed 1085 tests with 16 skipped, installed wheel acceptance and all hosted checks at bb14d130c3f1acdaf8d8ab51c64e6a8f64bed485. Evidence is retained under evidence/WO-KIS-004/implementation. Record bounded delegated completion under the approved work order; owner assurance and integration remain pending."
 +++
 
 # Simplify verification and release records
@@ -170,3 +194,11 @@ An unavailable platform is untested; a proposed record is not verified; a green 
 State the simpler behavior, accepted candidates completed, checks run, observed reduction and material remaining limitation.
 Obtain the released evaluator's schema-2 handoff for WO-KIS-004 and report its actual state and one next action.
 Leave assurance, release, publication, merge and live adoption decisions to their explicit accountable actions.
+
+## Implementation scope clarification
+
+The accepted K23/K24/K30/K38 changes also touch their direct command-reference,
+gate-reference and existing test consumers listed in execution_scope. These
+bounded additions remove obsolete wording/alias assertions, update the command
+inventory and regenerate the diagnostic index. They add no candidate or work
+order to this slice. Root managed files and historical records remain unchanged.

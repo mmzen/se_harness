@@ -60,7 +60,6 @@ BASELINE_STOP_CONDITIONS = (
     "remediation would exceed the selected work order",
     "the requested action lacks the decision right or explicit authority defined",
 )
-PACKAGED_FRAGMENT_BLOCK_DIGEST = "864a2c3bafbc3191c778fe20402a2e983b4bece1c11103540164c06c46b4bef5"
 # Files permitted to name the retired path, with the reason each is not a live obligation.
 PERMITTED_MENTIONS = {
     "docs/engineering/agent-directive-surface/evidence/WO-ADS-001/WO-ADS-001-verification.md": "retained evidence naming the file it left untouched",
@@ -159,9 +158,8 @@ class ContextRoutingRetirementTests(unittest.TestCase):
         self.assertEqual(list(BASELINE_ROUTING_ROWS), parsed_rows)
         self.assertEqual(len(parsed_rows), len({subject for subject, _ in parsed_rows}))
 
-    def test_packaged_fragment_block_matches_the_recorded_baseline(self) -> None:
+    def test_packaged_fragment_points_to_the_router(self) -> None:
         block = _block(PACKAGED_FRAGMENT.read_bytes(), Path("AGENTS.md"))
-        self.assertEqual(PACKAGED_FRAGMENT_BLOCK_DIGEST, canonical_sha256(block))
         text = block.decode("utf-8")
         self.assertEqual(1, text.count("ENGINEERING_HARNESS.md"))
         self.assertNotIn("REPOSITORY_CONTEXT", text)

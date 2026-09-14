@@ -196,7 +196,7 @@ def render_release_unit(unit: ReleaseUnit, findings: list[str] | None = None) ->
         lines.append(f"- untraced: {sha}")
     if unit.reasons:
         lines.append("")
-        lines.append("Blockers")
+        lines.append("Advisory findings")
         lines.extend(f"- {reason}" for reason in unit.reasons)
     if findings:
         lines.append("")
@@ -205,5 +205,5 @@ def render_release_unit(unit: ReleaseUnit, findings: list[str] | None = None) ->
     lines.append("")
     lines.append(render_gates_toml(unit).rstrip())
     lines.append("")
-    lines.append("Authority: measurement only; the release owner's approval of the contract freezes the unit.")
+    lines.append("Authority: advisory census only. The owner approves scope and verifies the final candidate before release.")
     return "\n".join(lines)

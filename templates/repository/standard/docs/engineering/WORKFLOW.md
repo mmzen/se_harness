@@ -279,11 +279,12 @@ or next action; add a repository-wide finding to the selected result; ask an
 open-ended question instead of presenting the selected recommendation; or turn
 an alternative into a second next action.
 
-When exact headings, field order, whitespace, or bytes are required, the
-application or automation MUST invoke the deterministic schema-2 human renderer
-directly and use its output unchanged. Model transcription MUST NOT be used for
-exact rendering. The direct renderer's existing headings and empty-value rules
-remain its contract; they do not constrain an adaptive agent handoff.
+For automation, read the schema-2 JSON result. New results declare
+`digest_format = "machine-fields-v1"`; their hash binds machine fields such as
+candidate identity, scope, state, gate status, and command arguments. Explanatory
+wording is excluded. Retained results without this marker still use their
+original digest format. Human headings and wording can evolve without changing
+machine evidence identity.
 
 ## Failure procedure
 

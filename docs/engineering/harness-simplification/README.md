@@ -16,7 +16,7 @@ The packet includes one shared replacement specification, an architecture decisi
 - [Exact coverage](coverage.md), [replacement rules and compatibility](specifications/SPEC-KIS-001.md), [verification plan](verification/VER-KIS-001.md).
 - [Recorded request](evidence/WO-KIS-001/governance/owner-request.md) and [accepted review](evidence/WO-KIS-001/governance/accepted-review.md).
 
-The owner started WO-KIS-001 after merging the approved packet. It is implemented, owner-verified and merged. WO-KIS-002 is implemented, owner-verified and merged. WO-KIS-003 is implemented and owner-verified; WO-KIS-004 through WO-KIS-007 remain approved and have not started.
+The owner started WO-KIS-001 after merging the approved packet. It is implemented, owner-verified and merged. WO-KIS-002 is implemented, owner-verified and merged. WO-KIS-003 is implemented, owner-verified and merged. WO-KIS-004 is implemented and owner-verified; WO-KIS-005 through WO-KIS-007 remain approved and have not started.
 
 [WO-KIS-001 implementation evidence](evidence/WO-KIS-001/implementation/README.md) records the first eight cuts, passing local checks and passing hosted CI. [VREC-KIS-001](verification-records/VREC-KIS-001.md) was verified by the owner and merged in PR #467; it binds the completion commit whose hosted checks all passed.
 
@@ -26,4 +26,6 @@ Historical archive work assesses existing bundles and shrinks new evidence; it d
 
 [WO-KIS-002 implementation evidence](evidence/WO-KIS-002/implementation/README.md) records seven cuts and passing local source/package checks. Hosted CI passed. [VREC-KIS-002](verification-records/VREC-KIS-002.md) is verified by the owner. Integrated in PR #468.
 
-[WO-KIS-003 implementation evidence](evidence/WO-KIS-003/implementation/README.md) records ten cuts and passing local source/package checks. Hosted checks passed; [VREC-KIS-003](verification-records/VREC-KIS-003.md) is verified by the owner. Repository integration is pending in PR #469.
+[WO-KIS-003 implementation evidence](evidence/WO-KIS-003/implementation/README.md) records ten cuts and passing local source/package checks. Hosted checks passed; [VREC-KIS-003](verification-records/VREC-KIS-003.md) is verified by the owner. Integrated in PR #469.
+
+[WO-KIS-004 implementation evidence](evidence/WO-KIS-004/implementation/README.md) records four cuts and passing local source/package checks. Hosted checks passed; [VREC-KIS-004](verification-records/VREC-KIS-004.md) is verified by the owner. Repository integration is pending in PR #470.

@@ -119,8 +119,7 @@ class ReleaseUnitDerivationTests(unittest.TestCase):
         self.assertIn('candidate_commit = "<full commit id, 40 or 64 hex>"', template)
         self.assertIn('previous_release_tag = "v<version>"', template)
         self.assertIn("harnessctl release-unit", template)
-        self.assertIn("E-CIP-001", template)
-        self.assertIn("A merge to `main` after the cut changes nothing about this unit.", template)
+        self.assertIn("One explicitly verified final-candidate VREC", template)
 
     def test_cli_derives_against_the_repository_catalog(self) -> None:
         # the command's own catalog lookup, on a fixture history, with the catalog stubbed
@@ -192,15 +191,8 @@ class ApprovalPredicateTests(unittest.TestCase):
         code, output, error = invoke("transition", str(self.root), "--set", "REL-001=approved", "--decision", "REL-001=release-owner", "--apply")
         return code, output + error
 
-    def test_a_differing_census_is_refused_and_a_matching_one_is_approved(self) -> None:
+    def test_owner_can_approve_scope_that_differs_from_the_trailer_census(self) -> None:
         self.contract(gates=["WO-001", "WO-002"])
-        code, message = self.approve()
-        self.assertEqual(1, code)
-        self.assertIn("QGP-G5P-RELEASE-UNIT", message)
-        self.assertIn("E-CIP-001", message)
-        self.assertIn("not in the derivation: WO-002", message)
-        self.assertIn('status = "draft"', (self.root / "docs/engineering/product/release/REL-001.md").read_text(encoding="utf-8"))
-        self.contract(gates=["WO-001"])
         code, message = self.approve()
         self.assertEqual(0, code, message)
         self.assertIn('status = "approved"', (self.root / "docs/engineering/product/release/REL-001.md").read_text(encoding="utf-8"))
@@ -210,26 +202,26 @@ class ApprovalPredicateTests(unittest.TestCase):
         code, message = self.approve()
         self.assertEqual(0, code, message)
 
-    def test_an_untraced_commit_needs_an_exemption(self) -> None:
+    def test_untrailed_commit_needs_no_exemption(self) -> None:
         (self.root / "note.txt").write_text("untraced", encoding="utf-8")
         git(self.root, "add", "-A")
         git(self.root, "commit", "-q", "-m", "no trailer")
         self.candidate = git(self.root, "rev-parse", "HEAD")
-        untraced = self.candidate
         self.contract(gates=["WO-001"])
         code, message = self.approve()
-        self.assertEqual(1, code)
-        self.assertIn("carry no Harness-Work-Order trailer", message)
-        self.contract(gates=["WO-001"], exemptions=[untraced])
-        code, message = self.approve()
         self.assertEqual(0, code, message)
+        code, output, error = invoke("release-unit", str(self.root), "--from", "v1", "--to", "HEAD", "--contract", "REL-001", "--json")
+        self.assertEqual(0, code, output + error)
+        value = __import__("json").loads(output)
+        self.assertIn(self.candidate, value["untraced"])
+        self.assertTrue(value["contract"]["findings"])  # The owner still sees differences.
 
     def test_evaluator_is_in_the_contract_inventory(self) -> None:
         from se_harness.workflow_contract import EVALUATORS, load_validated_contracts
 
         self.assertIn("release_unit_ready", EVALUATORS)
         _, _, _, _, gates = load_validated_contracts()
-        self.assertIn("QGP-G5P-RELEASE-UNIT", [p["id"] for p in gates["QG-G5-RELEASE-PREPARATION"]["predicates"]])
+        self.assertNotIn("QGP-G5P-RELEASE-UNIT", [p["id"] for p in gates["QG-G5-RELEASE-PREPARATION"]["predicates"]])
 
 
 if __name__ == "__main__":
