@@ -341,7 +341,7 @@ def orphaned_ready_records(root: Path, artifacts: Iterable[Any], work_order_id: 
     refreshed: set[str] = set()
     for successor in current:
         source = successor.metadata.get("refreshed_from")
-        while source in records and source not in refreshed:
+        while isinstance(source, str) and source in records and source not in refreshed:
             refreshed.add(source)
             source = records[source].metadata.get("refreshed_from")
     for artifact in sorted(records.values(), key=lambda item: item.artifact_id):
