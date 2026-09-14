@@ -2,7 +2,7 @@
 id = "WO-KIS-005"
 type = "work_order"
 title = "Shorten CI and resume interrupted publication"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-13"
 updated = "2026-09-14"
@@ -86,6 +86,13 @@ to = "in_progress"
 decided_at = "2026-09-14T08:35:03Z"
 decided_by = "engineering-owner"
 reason = "The owner confirmed PR 470 is merged, continuing the accepted sequential implementation of all KISS candidates. Start WO-KIS-005 after WO-KIS-004 integration at 0f9aa9bae7795034b21b5743a0e51e5c12b6133b. Retain the approved delegated execution route for completion and preparation."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-14T09:06:06Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at 0c7d02fb36bd5d2048a543bb13ddd8686bab7d01 (check-run 103916978569, source github-checks). The five selected cuts are implemented in source 3c4da9abda8cdd77da21dbf83bd4fa1cffc640dd. The final full suite ran 1092 tests with 16 skipped; real installed acceptance passed with a 256 MiB unrelated checkout file and an outside-target refusal. All hosted checks passed at 0c7d02fb36bd5d2048a543bb13ddd8686bab7d01. Record delegated completion under the approved work order, including its bounded Windows launcher correction; owner assurance and integration remain pending."
 +++
 
 # Shorten CI and resume interrupted publication

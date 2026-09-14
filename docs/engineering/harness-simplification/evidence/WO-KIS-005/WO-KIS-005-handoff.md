@@ -8,7 +8,7 @@ rebound_at = "2026-09-14T08:55:26Z"
 # WO-KIS-005 implementation evidence
 
 Source candidate: `3c4da9abda8cdd77da21dbf83bd4fa1cffc640dd`. Base: `0f9aa9bae7795034b21b5743a0e51e5c12b6133b`. Governing checker: isolated released 0.17.0.
-Work is in progress pending hosted checks and delegated completion.
+Work is implemented through delegated completion; owner verification is pending.
 
 | Check | Simpler behavior | Observed result |
 | --- | --- | --- |
@@ -38,7 +38,7 @@ header assertion; the short header now states its trigger policy.
 
 Candidate/released graph, released review/scope and all 14 distribution records
 passed. Root managed files and historical VREC/RLS records are unchanged.
-Hosted Linux/Windows checks are pending.
+All hosted checks passed, including Linux and Windows package/upgrade checks and both release rehearsals. Exact check URLs are in ci-implementation.json.
 
 Ordinary PRs now skip up to four deterministic release builds and the earlier
 release's qualification/tests. This PR changes publication code, so it should
