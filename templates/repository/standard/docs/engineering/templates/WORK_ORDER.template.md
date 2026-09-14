@@ -31,6 +31,9 @@ verification = ["VER-xxx"]
 
 # Work Order: <title>
 
+Before approval, apply the shared design principle and `work_order` checklist in
+`docs/engineering/ARTIFACT_AUTHORING.md`.
+
 ## Lifecycle
 
 Use `approved` to authorize bounded execution and `implemented` after the work and retained evidence are complete. Governance-only work normally stops at `implemented`. Use `verified` or `released` only when an eligible commit-bound VREC explicitly covers this work order under the repository's configured provenance policy.

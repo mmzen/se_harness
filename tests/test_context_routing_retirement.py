@@ -42,7 +42,7 @@ BASELINE_ROUTING_ROWS = (
         "`docs/engineering/templates/README.md`",
     ),
     (
-        "Authoring rules for formal artifacts",
+        "Authoring, design simplicity and review questions",
         "`docs/engineering/ARTIFACT_AUTHORING.md`",
     ),
     (

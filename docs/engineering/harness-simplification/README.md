@@ -35,3 +35,12 @@ Historical archive work assesses existing bundles and shrinks new evidence; it d
 [WO-KIS-006 implementation evidence](evidence/WO-KIS-006/implementation/README.md) records small summaries, downloadable raw results and the historical archive assessment. Hosted checks passed; [VREC-KIS-006](verification-records/VREC-KIS-006.md) is verified by the owner. Integrated in PR #472.
 
 [WO-KIS-007 implementation evidence](evidence/WO-KIS-007/implementation/README.md) records the test cuts. Full validation and hosted checks passed; [VREC-KIS-007](verification-records/VREC-KIS-007.md) is verified by the owner. Repository integration is pending in PR #473.
+
+
+## Generic design and review guidance
+
+[WO-KIS-008](work-orders/WO-KIS-008.md) implements the owner's separately accepted
+generic simplicity rule and integration proposal. Its [specification](specifications/SPEC-KIS-002.md)
+and [verification plan](verification/VER-KIS-002.md) cover reusable authoring and review
+guidance for every governed project, including SE Harness. This is a new scope after
+the seven original cuts; their recorded approvals and evidence remain unchanged.

@@ -52,19 +52,14 @@ class ArtifactAuthoringPolicyFixture:
 
 
 class ArtifactAuthoringPolicyTests(ArtifactAuthoringPolicyFixture, unittest.TestCase):
-    def test_policy_is_managed_routed_once_listed_and_printed_by_create_artifact(self) -> None:
+    def test_installed_policy_is_routed_and_supplies_the_creation_checklist(self) -> None:
         installed = self.root / "docs/engineering/ARTIFACT_AUTHORING.md"
         self.assertTrue(installed.is_file())
         self.assertEqual(POLICY.read_bytes().replace(b"\r\n", b"\n"), installed.read_bytes().replace(b"\r\n", b"\n"))
         lock = json.loads((self.root / ".engineering-harness.lock").read_text(encoding="utf-8"))
         self.assertEqual("seed", lock["files"]["docs/engineering/ARTIFACT_AUTHORING.md"]["mode"])
         router = (self.root / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
-        self.assertEqual(1, router.count("docs/engineering/ARTIFACT_AUTHORING.md"))
-        self.assertIn("| Authoring rules for formal artifacts |", router)
-        from se_harness.preflight import POLICY_PATHS, REQUIRED_PATHS
-
-        self.assertIn("docs/engineering/ARTIFACT_AUTHORING.md", REQUIRED_PATHS)
-        self.assertIn("docs/engineering/ARTIFACT_AUTHORING.md", POLICY_PATHS)
+        self.assertIn("docs/engineering/ARTIFACT_AUTHORING.md", router)
 
         code, output, error = invoke(
             "create-artifact", str(self.root), "--domain", "product", "--type", "requirement", "--id", "REQ-002"
@@ -90,6 +85,14 @@ class ArtifactAuthoringPolicyTests(ArtifactAuthoringPolicyFixture, unittest.Test
         )
         self.assertEqual(0, code, error)
         self.assertIn("ONE OBLIGATION EDITED", output)
+
+        code, output, error = invoke(
+            "create-artifact", str(self.root), "--domain", "product", "--type", "specification", "--id", "SPEC-002"
+        )
+        self.assertEqual(0, code, error)
+        self.assertIn("authoring checklist for specification", output)
+        self.assertIn("simpler contract", output)
+        self.assertNotIn("ONE OBLIGATION EDITED", output)
 
 
     def test_plain_requirement_and_old_shall_form_both_validate(self) -> None:

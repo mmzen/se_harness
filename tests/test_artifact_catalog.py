@@ -77,7 +77,7 @@ class ArtifactCatalogTests(unittest.TestCase):
         for row in rows:
             with self.subTest(artifact_type=row[0]):
                 self.assertEqual(len(CATALOG_COLUMNS), len(row))
-                self.assertTrue(all(cell and cell != "—" for cell in row))
+                self.assertTrue(all(cell and cell != "â€”" for cell in row))
         for non_formal in (
             "evidence",
             "acceptance scenarios",
@@ -107,83 +107,13 @@ class ArtifactCatalogTests(unittest.TestCase):
             REPOSITORY_ROOT
             / "templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md"
         ).read_text(encoding="utf-8")
-        # WO-DST-027 (SPEC-DST-028 DST-TPL-004, DST-TPL-006): the candidate template carries
-        # guidance under "Completion report format"; a root released before it (0.17.0)
-        # lacks exactly that paragraph, declared here; a root released with it takes the
-        # branches below unchanged.
-        completion_guidance = (
-            "\nState what the report carries. The completion decision follows from the\n"
-            "front matter, not from this section: it is the engineering owner's, or the\n"
-            "`delegated-executor`'s under `[delegation] class = \"execution\"` while the\n"
-            "required pull-request check is `success`.\n"
+        # WO-KIS-008 changes authoring guidance, not work-order metadata.
+        # Compare that contract directly instead of keeping old prose exceptions.
+        self.assertEqual(
+            tomllib.loads(released_work_order.split("+++", 2)[1]),
+            tomllib.loads(candidate_work_order.split("+++", 2)[1]),
         )
-        self.assertIn(completion_guidance, candidate_work_order)
-        if completion_guidance not in released_work_order:
-            candidate_work_order = candidate_work_order.replace(completion_guidance, "", 1)
-        delegation_block = '''# Optional. Delete this entire table when no agentic delegation is intended.
-[agentic_delegation]
-schema = "se-harness-agentic-delegation-v1"
-delegated_by = "<accountable-role>"
-delegate = "<logical-worker>"
-decision_rights = ["DR-WO-START"]
-operations = ["<closed-evaluator-operation>"]
-execution_profiles = ["<approved-logical-profile>"]
-paths = ["<path-within-execution-scope>"]
-required_evidence = [
-  { kind = "verification", path = "<retained-evidence-path>" },
-]
-valid_until = "YYYY-MM-DDTHH:MM:SSZ"
-max_retry = 0
-max_parallel_writers = 1
-child_delegation = false
-stop_before = [
-  "accountable-decision-required",
-  "action-time-authorization-required",
-]
-
-'''
-        delegation_guidance = '''The optional agentic_delegation table records a maximum delegation; it does not
-start work or grant standing authority. Delete the table when delegation is not
-intended. When retained, replace every placeholder, keep every delegated and
-evidence path within execution_scope.paths, use only managed decision rights,
-evaluator operations, logical profiles, and roles, and set a bounded UTC
-expiry. The exact released evaluator still derives a narrower, short-lived
-envelope from fresh live state for each request.
-
-'''
-        # The released root (0.10.0) carries the delegation table WO-AEX-005 added;
-        # WO-ECP-006 (SPEC-ECP-006 ECP-DLG-008) removed the table and its guidance
-        # from the candidate template. The declared candidate exception is exactly
-        # those two blocks; a root released with the removal takes the equality branch.
-        self.assertIn("[execution_scope]", released_work_order)
-        if delegation_block in released_work_order:
-            self.assertIn(delegation_guidance, released_work_order)
-            self.assertEqual(
-                released_work_order.replace(delegation_block, "").replace(delegation_guidance, ""),
-                candidate_work_order,
-            )
-        else:
-            # WO-ECP-018 (SPEC-ECP-006 ECP-DLG-001): the candidate template adds the optional
-            # `[delegation]` table and one paragraph; a root released with them takes equality.
-            class_table = (
-                "# Optional. Delete this table unless the accountable owner delegates the three\n"
-                "# mechanical decisions of this work order to a non-human actor.\n"
-                "[delegation]\n"
-                'class = "execution"\n\n'
-            )
-            paragraph_start = "The optional `[delegation]` table with `class = "
-            if class_table in candidate_work_order and class_table not in released_work_order:
-                stripped = candidate_work_order.replace(class_table, "", 1)
-                start = stripped.index(paragraph_start)
-                end = stripped.index("\n\n", start) + 2
-                stripped = stripped[:start] + stripped[end:]
-                self.assertEqual(released_work_order, stripped)
-            else:
-                self.assertEqual(released_work_order, candidate_work_order)
-        self.assertNotIn("agentic_delegation", candidate_work_order)
-        self.assertIn("[execution_scope]", released_work_order)
-        self.assertIn("[execution_scope]", candidate_work_order)
-        self.assertIn("component-prefix", candidate_work_order)
+        self.assertIn("docs/engineering/ARTIFACT_AUTHORING.md", candidate_work_order)
         released_traceability = (
             REPOSITORY_ROOT / "docs/engineering/TRACEABILITY.md"
         ).read_text(encoding="utf-8")

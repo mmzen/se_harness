@@ -379,6 +379,7 @@ class InstructionArchitectureTests(unittest.TestCase):
             report["reading_manifest"][:3],
         )
         for path in (
+            "docs/engineering/ARTIFACT_AUTHORING.md",
             "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
             "docs/engineering/instruction-architecture/work-orders/WO-IAR-001.md",
         ):
@@ -386,6 +387,14 @@ class InstructionArchitectureTests(unittest.TestCase):
         for policy in ("docs/engineering/WORKFLOW.md", "docs/engineering/TECHNICAL_COMMUNICATION.md"):
             self.assertNotIn(policy, report["reading_manifest"])
         self.assertNotIn("repository_commands", report)
+        code, output, error = invoke(
+            "preflight", str(target), "--work-order", "WO-IAR-001", "--phase", "review", "--json"
+        )
+        self.assertEqual(0, code, error)
+        review = json.loads(output)
+        self.assertTrue(review["ready"])
+        self.assertEqual("review", review["phase"])
+        self.assertIn("docs/engineering/ARTIFACT_AUTHORING.md", review["reading_manifest"])
         after = {
             path.relative_to(target).as_posix(): path.read_bytes()
             for path in target.rglob("*")
@@ -900,7 +909,7 @@ class AgentDirectiveSurfaceRouterTests(unittest.TestCase):
             "no finding is presented as\na formal result",
             "docs/engineering/OPERATING_CARD.md",
             "listed by the phase\nreading manifest",
-            "not required to read them to act",
+            "docs/engineering/ARTIFACT_AUTHORING.md",
         ):
             self.assertIn(phrase, section)
         card = target / "docs/engineering/OPERATING_CARD.md"

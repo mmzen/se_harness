@@ -79,6 +79,7 @@ READING_PATHS = (
     "ENGINEERING_HARNESS.md",
     "docs/engineering/OPERATING_CARD.md",
     "AGENTS.md",
+    "docs/engineering/ARTIFACT_AUTHORING.md",
 )
 POLICY_PATHS = (
     "ENGINEERING_HARNESS.md",

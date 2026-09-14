@@ -24,6 +24,11 @@ authority does not grant assurance, release, Git or external action rights.
 
 ## Verification preparation
 
+Retain the existing review's material findings, resolutions and design rationale
+with normal evidence, following the selected repository's
+`docs/engineering/ARTIFACT_AUTHORING.md#review-of-implemented-changes`.
+Reuse that review; evidence preparation adds no second review or KISS receipt.
+
 Confirm the exact WO set, approved verification contracts, preparation actor
 and evidence files. Check all repository refs before allocating a new VREC ID.
 Inspect the selected candidate and working tree before capture. Where

@@ -15,6 +15,9 @@ specifies = ["REQ-xxx"]
 
 # Specification: <title>
 
+Before approval, apply the shared design principle and `specification` checklist in
+`docs/engineering/ARTIFACT_AUTHORING.md`.
+
 ## In plain words
 
 <One or two sentences a newcomer understands. A project term used here is
