@@ -1,0 +1,178 @@
+{
+  "source_candidate": "1bc5c67c1647080d6522dcf012c85ce356e277bf",
+  "base": "001612615191da499775cebb1a59f65480e9ce4a",
+  "governing_version": "0.17.0",
+  "checks": [
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "unittest",
+        "tests.test_delegation_class",
+        "tests.test_workflow_execution",
+        "tests.test_workflow_compliance",
+        "tests.test_workflow_procedures",
+        "tests.test_workflow_restitution",
+        "tests.test_revision_provenance",
+        "tests.test_workflow_documentation_contract",
+        "tests.test_codes_and_contract_tables"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "name": "focused",
+      "result_tail": "WEX_SCALE artifacts=100 validation=0.110988s focus=0.174719s plan=0.329186s\nWEX_SCALE artifacts=500 validation=0.578916s focus=0.912633s plan=1.032179s\n........................................................................s.........................................................................................................s..........................\n----------------------------------------------------------------------\nRan 205 tests in 112.052s\n\nOK (skipped=2)\n",
+      "source_basis": "Run during this implementation; the final complete suite includes the focused cases and subsequent documentation/procedure fixes."
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "scripts/run_tests.py"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "name": "full",
+      "result_tail": ".exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-7t0u06lt\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nWEX_SCALE artifacts=100 validation=0.167022s focus=0.276632s plan=0.320157s\nWEX_SCALE artifacts=500 validation=0.663288s focus=0.729460s plan=1.230632s\ndocs/notes/diagnostic-codes.md matches the source\n----------------------------------------------------------------------\nRan 1067 tests in 95.329s (171 classes, 8 workers)\n\nOK (skipped=15)\n--workers must be at least 1\n",
+      "source_basis": "Final complete suite ran on the source bytes committed in the source_candidate; later changes are evidence only."
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "name": "distribution",
+      "result_tail": "SE Harness release distribution validation: PASS (14 distribution-bearing records)\n\n",
+      "source_basis": "Run during this implementation; the final complete suite includes the focused cases and subsequent documentation/procedure fixes."
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "se_harness",
+        "validate",
+        ".",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "name": "candidate-graph",
+      "result": {
+        "valid": true,
+        "error_count": 0,
+        "warning_count": 46,
+        "artifact_count": 1618
+      },
+      "source_basis": "Run during this implementation; the final complete suite includes the focused cases and subsequent documentation/procedure fixes."
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "name": "help",
+      "source_basis": "Run during this implementation; the final complete suite includes the focused cases and subsequent documentation/procedure fixes."
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "se_harness",
+        "doctor",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 1,
+      "name": "candidate-doctor",
+      "result": "Expected candidate 0.18.0 versus installed-root 0.17.0 skew: template, ownership mode, payload and selected-version differences. Released doctor passes; no root file was changed.",
+      "source_basis": "Run during this implementation; the final complete suite includes the focused cases and subsequent documentation/procedure fixes."
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "name": "released-doctor",
+      "source_basis": "Run during this implementation; the final complete suite includes the focused cases and subsequent documentation/procedure fixes."
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        ".",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "name": "released-validate",
+      "result": {
+        "valid": true,
+        "error_count": 0,
+        "warning_count": 46,
+        "artifact_count": 1618
+      },
+      "source_basis": "Run during this implementation; the final complete suite includes the focused cases and subsequent documentation/procedure fixes."
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        ".",
+        "--work-order",
+        "WO-KIS-009",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "name": "released-review",
+      "result": {
+        "ready": true
+      },
+      "source_basis": "Run during this implementation; the final complete suite includes the focused cases and subsequent documentation/procedure fixes."
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "C:\\Users\\mathi\\.codex\\skills\\.system\\skill-creator\\scripts\\quick_validate.py",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea\\plugins\\verity-plane\\common\\skills\\change"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "name": "skill-change",
+      "result_tail": "Skill is valid!\n\n",
+      "source_basis": "Run during this implementation; the final complete suite includes the focused cases and subsequent documentation/procedure fixes."
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "C:\\Users\\mathi\\.codex\\skills\\.system\\skill-creator\\scripts\\quick_validate.py",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea\\plugins\\verity-plane\\common\\skills\\evidence"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "name": "skill-evidence",
+      "result_tail": "Skill is valid!\n\n",
+      "source_basis": "Run during this implementation; the final complete suite includes the focused cases and subsequent documentation/procedure fixes."
+    }
+  ]
+}
