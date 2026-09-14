@@ -156,6 +156,7 @@ jobs:
         if: always()
         with:
           name: predecessor-evaluator-assessment
+          retention-days: 14
           if-no-files-found: warn
           path: |
             ${{ runner.temp }}/evaluator-transition-plan.json

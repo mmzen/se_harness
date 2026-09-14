@@ -85,7 +85,26 @@ jobs:
           restore-keys: |
             test-timings-${{ runner.os }}-
       - name: Run complete candidate-source regression
-        run: python scripts/run_tests.py --workers 4 --scale full --timings target/test-timings.json
+        shell: bash
+        run: |
+          python scripts/record_evidence.py --candidate "$GITHUB_SHA" \
+            --output "$RUNNER_TEMP/source-evidence" --artifact candidate-source-raw \
+            --retention-days 14 -- \
+            scripts/run_tests.py --workers 4 --scale full --timings target/test-timings.json
+      - name: Retain the source summary and full test log
+        if: always()
+        id: source_evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: candidate-source-raw
+          path: ${{ runner.temp }}/source-evidence/
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Link the downloadable source evidence
+        if: always() && steps.source_evidence.outputs.artifact-url != ''
+        env:
+          ARTIFACT_URL: ${{ steps.source_evidence.outputs.artifact-url }}
+        run: echo "Source summary and full test log (14 days; deletion may expire it earlier): $ARTIFACT_URL" >> "$GITHUB_STEP_SUMMARY"
       - name: Export and build the one non-promotable candidate wheel
         env:
           CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}
@@ -117,6 +136,7 @@ jobs:
           name: complete-candidate-qualification
           path: ${{ runner.temp }}/complete-candidate.json
           if-no-files-found: warn
+          retention-days: 14
 
   candidate-package:
     name: Candidate package evidence
@@ -262,6 +282,7 @@ jobs:
           name: candidate-package-qualification-${{ needs.candidate-source.outputs.predecessor_version }}
           path: ${{ runner.temp }}/candidate-package-qualification.json
           if-no-files-found: warn
+          retention-days: 14
 
   upgrade-rehearsal:
     name: Upgrade rehearsal (${{ matrix.platform }})
@@ -376,6 +397,7 @@ jobs:
             ${{ runner.temp }}/rehearsal-result-*/upgrade-rehearsal-result.json
             ${{ runner.temp }}/rehearsal-result-*/upgrade-rehearsal-timing.json
           if-no-files-found: warn
+          retention-days: 14
       - name: Check plugin migration with the installed candidate
         shell: pwsh
         run: |

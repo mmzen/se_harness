@@ -251,3 +251,7 @@ explicit candidate still requires a clean checkout. A ready record needs the
 owner's verification decision.
 
 With WO-KIS-005, an interrupted unpublished GitHub draft resumes by checking existing required hashes and uploading only missing files. Unrelated attachments are ignored. A conflicting required file or an incomplete published release is refused. The protected PyPI decision and immutable package checks remain in place.
+
+## Small evidence for new runs
+
+Follow [evidence retention](evidence-retention.md): retain a short command/result summary and downloadable raw CI logs with an explicit expiry. New work does not commit temporary checkouts or entire raw trees. Historical archive movement is a separate owner decision after its references and destination are reviewable.

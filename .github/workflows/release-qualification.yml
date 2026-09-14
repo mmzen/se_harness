@@ -136,7 +136,11 @@ jobs:
             --candidate-commit "$CANDIDATE_COMMIT" \
             --output "$RUNNER_TEMP/complete-candidate-qualification.json" \
             --json
-          python -m unittest discover -s tests -p 'test_*.py'
+          python "$GITHUB_WORKSPACE/scripts/record_evidence.py" \
+            --repository "$RUNNER_TEMP/candidate-checkout" --candidate "$CANDIDATE_COMMIT" \
+            --output "$RUNNER_TEMP/release-test-evidence" \
+            --artifact "qualification-$MODE-$RELEASE_RECORD" --retention-days 14 -- \
+            -m unittest discover -s tests -p 'test_*.py'
           python -m se_harness --help >/dev/null
 
       - name: Replay the exact recipe twice
@@ -196,6 +200,7 @@ jobs:
           name: qualification-${{ inputs.mode }}-${{ inputs.release_record || github.sha }}
           path: |
             ${{ runner.temp }}/complete-candidate-qualification.json
+            ${{ runner.temp }}/release-test-evidence/
             ${{ runner.temp }}/release-build-replay.json
             ${{ runner.temp }}/qualification.json
           if-no-files-found: warn

@@ -453,7 +453,7 @@ class QualificationDefinitionTests(unittest.TestCase):
     def test_the_definition_runs_the_scale_tests_at_full_size(self) -> None:
         # WO-TST-003 (REQ-TST-002, TST-SCL 2): the release qualification sets the marker.
         self.assertIn("SE_HARNESS_TEST_SCALE: full", self.definition)
-        self.assertIn("python -m unittest discover -s tests -p 'test_*.py'", self.definition)
+        self.assertIn("-m unittest discover -s tests -p 'test_*.py'", self.definition)
 
     def test_rehearsals_follow_changed_inputs_and_explicit_preparation(self) -> None:
         module = load_module(REPOSITORY_ROOT / ".github/scripts/publish_release.py", "rehearsal_changes_test")
@@ -612,6 +612,21 @@ class PipelineHygieneTests(unittest.TestCase):
 
     def setUp(self) -> None:
         self.texts = {path.name: path.read_text(encoding="utf-8") for path in REPOSITORY_OWNED}
+
+    def test_test_logs_are_uploaded_on_failure_with_explicit_retention(self) -> None:
+        source = _job_blocks(self.texts["candidate-evidence.yml"])["candidate-source"]
+        run = next(step for step in _step_blocks(source) if "scripts/run_tests.py" in step)
+        upload = next(step for step in _step_blocks(source) if "name: candidate-source-raw\n" in step)
+        self.assertIn("scripts/record_evidence.py", run)
+        self.assertIn('--output "$RUNNER_TEMP/source-evidence"', run)
+        self.assertIn("${{ runner.temp }}/source-evidence/", upload)
+        self.assertIn("if: always()", upload)
+        self.assertIn("retention-days: 14", upload)
+        release = self.texts["release-qualification.yml"]
+        self.assertIn('--output "$RUNNER_TEMP/release-test-evidence"', release)
+        upload = next(step for step in _step_blocks(release) if "${{ runner.temp }}/release-test-evidence/" in step)
+        self.assertIn("if: always()", upload)
+        self.assertIn("retention-days: 14", upload)
 
     def test_the_qualification_definition_qualifies_and_tests_release_records_only(self) -> None:
         # CIP-ONE-001: candidate mode replays the recipe; the qualification, the

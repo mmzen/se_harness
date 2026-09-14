@@ -2,10 +2,10 @@
 id = "WO-KIS-006"
 type = "work_order"
 title = "Keep new evidence small and assess historical archives"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-13"
-updated = "2026-09-13"
+updated = "2026-09-14"
 
 [delegation]
 class = "execution"
@@ -48,6 +48,7 @@ paths = [
   "docs/notes/evidence-retention.md",
   "repository_tools/release_distribution.py",
   "scripts/inventory_evidence.py",
+  "scripts/record_evidence.py",
   "scripts/validate_release_distributions.py",
   "se_harness/release_qualification.py",
   "tests/test_ci_pipeline.py",
@@ -67,6 +68,13 @@ to = "approved"
 decided_at = "2026-09-13T16:40:43Z"
 decided_by = "engineering-owner"
 reason = "The owner accepted all 38 candidates in the retained 2026-09-13 codebase KISS review and requested the work orders: \"OK ! Let's create the work orders to implement all candidates\". Record the engineering-owner approval of WO-KIS-006 within that accepted scope and the established delegated route. SPEC-KIS-001 makes the replacement contracts and seven retained protections explicit; the coverage map assigns all candidates. This records definition approval or bounded execution delegation only, not implementation start, completion, verification, release, merge, publication, live adoption or historical evidence deletion."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-14T18:07:00Z"
+decided_by = "engineering-owner"
+reason = "The owner confirmed PR #471 merged and continues the approved sequential implementation route. Start the next approved WO-KIS-006 after WO-KIS-005 integration at d52e6a88efb819bc36d082503813d55a995f6aa8. Implement concise future evidence and assess historical archives within the accepted K31 scope; no archive deletion, release or owner assurance is authorized."
 +++
 
 # Keep new evidence small and assess historical archives
@@ -139,3 +147,7 @@ An unavailable platform is untested; a proposed record is not verified; a green 
 State the simpler behavior, accepted candidates completed, checks run, observed reduction and material remaining limitation.
 Obtain the released evaluator's schema-2 handoff for WO-KIS-006 and report its actual state and one next action.
 Leave assurance, release, publication, merge and live adoption decisions to their explicit accountable actions.
+
+## Bounded implementation scope amendment — 2026-09-14
+
+The accepted K31 implementation uses `scripts/record_evidence.py` beside the inventory command to capture a short summary and a separate full test log. Add this exact repository-owned helper to the execution scope under the approved decision envelope. It implements the existing retention contract without changing assurance, publication, or historical archive authority.
