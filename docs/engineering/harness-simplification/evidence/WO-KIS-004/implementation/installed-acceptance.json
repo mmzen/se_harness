@@ -1,0 +1,22 @@
+{
+  "commit": "b1960259a7808716f67bda18262d3b3ca2ea6e40",
+  "wheel_sha256": "ab0d6e93c9dd5bf2f8c9674fc5847608e93a6d3bf93550bf708c6fa66a88b0b6",
+  "platform": "Windows",
+  "checks": "passed",
+  "earlier_commits": [
+    "5dd8cfc64a1a71785ec250373ff805e041677009",
+    "0bf3d2e3837be074cfbb06cb48127e4ddb4279f9"
+  ],
+  "final_candidate": "9e1d31cdd62641ceaaa98d20b30532fce70807fc",
+  "final_release": "ready fixture only",
+  "incomplete_and_unverified_release_refused": true,
+  "advisory_untrailed_commits": 4,
+  "rebase_candidates": [
+    "9813d8c7e3ee2943047965c312375f4dab724e40",
+    "898b9d2ad6cbd14685960d16e0fd7bb21bb96062"
+  ],
+  "original_record_and_evidence_unchanged": true,
+  "refreshed_record": "ready fixture only",
+  "changed_content_requires_tests": true,
+  "machine_digest_ignores_wording": true
+}

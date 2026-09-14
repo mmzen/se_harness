@@ -53,4 +53,6 @@ Rows map the authorized work. See the [domain index](README.md) for current prog
 
 WO-KIS-002: all seven selected outcomes are implemented and pass local checks; see [evidence](evidence/WO-KIS-002/implementation/README.md). Hosted CI passed; [VREC-KIS-002](verification-records/VREC-KIS-002.md) is verified by the owner. Integrated in PR #468.
 
-[WO-KIS-003 implementation evidence](evidence/WO-KIS-003/implementation/README.md) records ten cuts and passing local source/package checks. Hosted checks passed; [VREC-KIS-003](verification-records/VREC-KIS-003.md) is verified by the owner. Repository integration is pending in PR #469.
+[WO-KIS-003 implementation evidence](evidence/WO-KIS-003/implementation/README.md) records ten cuts and passing local source/package checks. Hosted checks passed; [VREC-KIS-003](verification-records/VREC-KIS-003.md) is verified by the owner. Integrated in PR #469.
+
+[WO-KIS-004 implementation evidence](evidence/WO-KIS-004/implementation/README.md) records four cuts and passing local source/package checks. Hosted checks and owner verification are pending.
