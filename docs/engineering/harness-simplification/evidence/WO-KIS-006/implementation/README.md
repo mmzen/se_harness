@@ -1,10 +1,3 @@
-```toml
-artifact = "WO-KIS-006"
-checkpoint = "handoff"
-formal_snapshot_sha256 = "6532620b8e3ec4c15762e3d59042fbd69070071ef7ed990e9697513b013b7717"
-rebound_at = "2026-09-14T18:19:16Z"
-```
-
 # WO-KIS-006 implementation evidence
 
 Source candidate: `b0405a575e9cd5e7bef12625ec4342c763ed51a5`. Governing evaluator: isolated released 0.17.0.

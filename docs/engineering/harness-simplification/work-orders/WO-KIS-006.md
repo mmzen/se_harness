@@ -2,7 +2,7 @@
 id = "WO-KIS-006"
 type = "work_order"
 title = "Keep new evidence small and assess historical archives"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-13"
 updated = "2026-09-14"
@@ -76,6 +76,13 @@ to = "in_progress"
 decided_at = "2026-09-14T18:07:00Z"
 decided_by = "engineering-owner"
 reason = "The owner confirmed PR #471 merged and continues the approved sequential implementation route. Start the next approved WO-KIS-006 after WO-KIS-005 integration at d52e6a88efb819bc36d082503813d55a995f6aa8. Implement concise future evidence and assess historical archives within the accepted K31 scope; no archive deletion, release or owner assurance is authorized."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-14T18:25:42Z"
+decided_by = "delegated-executor"
+reason = "Delegated DR-WO-COMPLETE under [delegation] class 'execution': required check 'validate' success at b0405a575e9cd5e7bef12625ec4342c763ed51a5 (check-run 104097052575, source github-checks). K31 is implemented in source b0405a575e9cd5e7bef12625ec4342c763ed51a5. The full Windows suite passed 1096 tests with 16 skipped; all 18 hosted checks passed. The real hosted source log and summary were downloaded, their candidate compared, and expiry checked. Historical archive sizes and reference-preserving options are retained; no bound history was deleted or rewritten. Record delegated completion under the approved scope; assurance, archive movement and repository integration remain owner decisions."
 +++
 
 # Keep new evidence small and assess historical archives
