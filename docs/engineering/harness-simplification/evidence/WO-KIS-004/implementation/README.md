@@ -36,3 +36,5 @@ pins reduces the restrictions. No new receipt store or background watcher exists
 
 Initial failures came from obsolete census/wording expectations and the generated
 diagnostic index. The final source run above is the passing result.
+
+VREC-KIS-004 is ready, bound to `80b205abaa6c1f656dde0c4b7bf93ca849b3dff2`. Required CI passed on that candidate; source, templates and tests are unchanged from the fully tested source. Owner verification is pending.
