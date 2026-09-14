@@ -42,22 +42,36 @@ Managed-file integrity uses SHA-256 over the versioned `utf8-text-lf-v1` represe
 
 Lifecycle transition apply, non-dry-run domain and artifact authoring, verification capture, and release preparation all acquire the same evaluator authority before writing. Verification capture retains canonical normalized evaluator evidence and binds its path and SHA-256 in the ready VREC. Release preparation repeats that observation, requires the locked wheel name and digest, and binds it in the ready RLS. Changing, removing, or substituting those evidence bytes invalidates the record; the evidence is technical provenance, not an assurance or release decision.
 
-## Delegated operations
+## Approved execution
 
-`WORKFLOW.json` defines three delegated operations. The owner approves the
-execution class and scope on the work order. The executor can then apply
-these operations when their local gates pass, without a base-branch merge
-or live CI request. Every other decision right stays with its owner.
+Work-order approval grants the execution operations in
+`DECISION_RIGHTS.md#approved-execution`. A person or agent follows the same
+procedure with the same local approval, scope and evidence checks. The existing
+operation identifiers below remain stable; they do not select different routes.
 
 | Operation | Decision right | Current WO state | Result |
 | --- | --- | --- | --- |
-| `delegated-work-order-start` | `DR-WO-START` | `approved` | Existing legal transition to `in_progress` |
-| `delegated-work-order-complete` | `DR-WO-COMPLETE` | `in_progress` | Existing legal transition to `implemented`, behind the same handoff gate as the human decision |
-| `delegated-vrec-prepare` | `DR-VREC-PREPARE` | `implemented` | One undecided ready VREC; no assurance decision |
+| `delegated-work-order-start` | `DR-WO-START` | `approved` | Executor applies the selected transition to `in_progress`. |
+| `delegated-work-order-complete` | `DR-WO-COMPLETE` | `in_progress` | Executor records `implemented` after the required handoff checks. |
+| `delegated-vrec-prepare` | `DR-VREC-PREPARE` | `implemented` | Executor prepares one ready VREC from the explicitly selected WO set. |
 
-`harnessctl check` offers the delegated command when the recorded approval
-covers its scope. It still reports failed local gates. CI is assessed separately
-when integrating or publishing the candidate.
+`harnessctl check` returns the next procedure command directly. It does not
+request another owner start, completion or preparation decision. Commands still
+check actual approval and local gates before writing. A missing grant, changed
+scope or failed check blocks the affected operation; there is no owner-route
+bypass. CI is assessed separately at integration and publication.
+
+For an approved selected WO, run start preflight, preview the start transition,
+apply it, then inspect the resulting state. For completion, run handoff checks,
+preview the completion transition and apply it. Prepare required verification
+using the returned capture command with inspected record ID, verification and
+evidence inputs. Substitute the actual executor identity for the example
+`delegated-executor` actor when appropriate; identity never changes the checks.
+
+An implemented WO classified `not_required` needs no new VREC. Execution is
+complete; report that result and follow any already authorized delivery. Do not
+interpret the read-only completion projection as another execution loop.
+Existing explicitly prepared records remain eligible for their owner decisions.
 
 Verification capture hashes selected artifacts directly. It does not build a
 dashboard. To capture a committed candidate while keeping local edits, use
@@ -170,9 +184,10 @@ contract's `non_effects` remain mandatory.
 | --- | --- | --- | --- | --- |
 | `WFL-WO-READY-VREC` | Focused WO is `implemented`; a related VREC is `ready`. | `QG-G4-ASSURANCE-DECISION` / `DR-VREC-DECIDE` | `PROC-FOCUS-RELATED` | Focus the ready VREC. The assurance owner decides only that VREC; the WO remains `implemented`. |
 | `WFL-WO-VERIFIED-VREC` | Focused WO is `implemented`; a related VREC is `verified` or `released`. | `QG-G4-VERIFIED-COVERAGE` / `DR-DELIVERY-SELECT` | `PROC-DELIVERY-SELECT` | Selection changes neither record. Complete alternatives are `PROC-REPOSITORY-INTEGRATION` and `PROC-PREPARE-RELEASE`. |
-| `WFL-WO-PREPARE-VREC` | Focused WO is `implemented`; no ready, verified, or released VREC covers it. | `QG-G4-CANDIDATE-READY` / `DR-VREC-PREPARE` | `PROC-WO-PREPARE-VREC` | Create one ready VREC; do not change or verify the WO. |
-| `WFL-WO-START` | Focused WO is `approved`. | `QG-G3-WORK-AUTHORIZATION` / `DR-WO-START` | `PROC-WO-START` | Execute the six ordered typed steps. Only the selected WO may become `in_progress`. |
-| `WFL-WO-IMPLEMENT` | Focused WO is `in_progress`. | `QG-G4-IMPLEMENTATION-EVIDENCE` / `DR-WO-COMPLETE` | `PROC-WO-IMPLEMENT` | Completion changes only the WO to `implemented`; it does not verify work. |
+| `WFL-WO-NO-VREC` | Focused WO is `implemented` and assurance is `not_required`. | No new assurance gate / `DR-RELATED-RECORD-SELECT` | `PROC-FOCUS-SELECTED` | Report completed execution; no VREC is required. |
+| `WFL-WO-PREPARE-VREC` | Focused WO is `implemented`; no ready, verified, or released VREC covers it. | `QG-G4-CANDIDATE-READY` / `DR-VREC-PREPARE` | `PROC-WO-PREPARE-VREC` | `STEP-WO-PREPARE-VREC-CAPTURE` command under the selected work-order approvals. |
+| `WFL-WO-START` | Focused WO is `approved`. | `QG-G3-WORK-AUTHORIZATION` / `DR-WO-START` | `PROC-WO-START` | `STEP-WO-START-PREFLIGHT` command, `STEP-WO-START-PREVIEW` command, `STEP-WO-START-APPLY` command, `STEP-WO-START-FINAL-FOCUS` command. |
+| `WFL-WO-IMPLEMENT` | Focused WO is `in_progress`. | `QG-G4-IMPLEMENTATION-EVIDENCE` / `DR-WO-COMPLETE` | `PROC-WO-IMPLEMENT` | `STEP-WO-IMPLEMENT-CHECK` command, `STEP-WO-IMPLEMENT-PREVIEW` command, `STEP-WO-IMPLEMENT-APPLY` command. |
 | `WFL-WO-COMPLETED` | Focused WO is `verified` or `released`. | No gate / `DR-RELATED-RECORD-SELECT` | `PROC-FOCUS-SELECTED` | Projection changes nothing. |
 | `WFL-VREC-DECIDE` | Focused VREC is `ready`. | `QG-G4-ASSURANCE-DECISION` / `DR-VREC-DECIDE` | `PROC-VREC-DECIDE` | Change only the VREC. Complete alternatives are `PROC-VREC-REJECT` and `PROC-VREC-SUPERSEDE`. |
 | `WFL-VREC-DELIVER` | Focused VREC is `verified` or `released`. | `QG-G4-VERIFIED-COVERAGE` / `DR-DELIVERY-SELECT` | `PROC-DELIVERY-SELECT` | Selection changes nothing. `PROC-REPOSITORY-INTEGRATION` is a complete alternative. |
@@ -195,9 +210,9 @@ outcomes, and response values.
 
 | Procedure ID | Ordered typed steps |
 | --- | --- |
-| `PROC-WO-START` | `STEP-WO-START-FOCUS` command `harnessctl check . --artifact {artifact_id}`; `STEP-WO-START-PREFLIGHT` command `harnessctl preflight . --work-order {artifact_id} --phase start`; `STEP-WO-START-DECIDE` decision `DR-WO-START`; `STEP-WO-START-PREVIEW` transition-preview command; `STEP-WO-START-APPLY` transition-apply command; `STEP-WO-START-FINAL-FOCUS` command `harnessctl check . --artifact {artifact_id}`. |
-| `PROC-WO-IMPLEMENT` | `STEP-WO-IMPLEMENT-CHECK` command `harnessctl check . --artifact {artifact_id} --checkpoint handoff` (the `scope` checkpoint evaluates the scope predicates alone, in any state, for the pull-request gate); `STEP-WO-IMPLEMENT-DECIDE` decision `DR-WO-COMPLETE`. |
-| `PROC-WO-PREPARE-VREC` | `STEP-WO-PREPARE-VREC-DECIDE` decision `DR-VREC-PREPARE`. |
+| `PROC-WO-START` | `STEP-WO-START-PREFLIGHT`, `STEP-WO-START-PREVIEW`, `STEP-WO-START-APPLY`, `STEP-WO-START-FINAL-FOCUS`: commands using recorded approval, without another owner start decision. |
+| `PROC-WO-IMPLEMENT` | `STEP-WO-IMPLEMENT-CHECK`, `STEP-WO-IMPLEMENT-PREVIEW`, `STEP-WO-IMPLEMENT-APPLY`: handoff, preview and completion commands under the existing grant. |
+| `PROC-WO-PREPARE-VREC` | `STEP-WO-PREPARE-VREC-CAPTURE`: prepare using inspected inputs and each selected WO approval. |
 | `PROC-FOCUS-SELECTED` | `STEP-FOCUS-SELECTED` command `harnessctl check . --artifact {artifact_id}`. |
 | `PROC-FOCUS-RELATED` | `STEP-FOCUS-RELATED` command `harnessctl check . --artifact {related_id}`. |
 | `PROC-VREC-DECIDE` | `STEP-VREC-DECIDE` decision `DR-VREC-DECIDE`. |

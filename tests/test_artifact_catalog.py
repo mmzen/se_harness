@@ -107,11 +107,15 @@ class ArtifactCatalogTests(unittest.TestCase):
             REPOSITORY_ROOT
             / "templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md"
         ).read_text(encoding="utf-8")
-        # WO-KIS-008 changes authoring guidance, not work-order metadata.
-        # Compare that contract directly instead of keeping old prose exceptions.
+        # WO-KIS-009 removes the optional delegation switch prospectively.
+        # All other metadata still matches the installed template.
+        released_metadata = tomllib.loads(released_work_order.split("+++", 2)[1])
+        released_metadata.pop("delegation", None)
+        candidate_metadata = tomllib.loads(candidate_work_order.split("+++", 2)[1])
+        self.assertNotIn("delegation", candidate_metadata)
         self.assertEqual(
-            tomllib.loads(released_work_order.split("+++", 2)[1]),
-            tomllib.loads(candidate_work_order.split("+++", 2)[1]),
+            released_metadata,
+            candidate_metadata,
         )
         self.assertIn("docs/engineering/ARTIFACT_AUTHORING.md", candidate_work_order)
         released_traceability = (

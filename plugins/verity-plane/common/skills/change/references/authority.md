@@ -7,7 +7,7 @@ affected mutation, compare the following against the reviewed inputs:
 | Action | Inputs that must still match |
 | --- | --- |
 | Definition transition | Exact artifact IDs, target state, accountable right and SHA-256 of each reviewed artifact's complete bytes against its current bytes. |
-| WO execution | WO ID, approved behavioral and path scope, and actual start authority, including the installed limits on delegation. Ordinary in-scope code commits do not invalidate WO approval. |
+| WO execution | WO ID, approved behavioral and path scope, and the execution grant defined by the installed decision-rights policy. Ordinary in-scope code commits do not invalidate WO approval. |
 | Assurance decision | VREC ID, full candidate commit, retained evidence digests and accountable assurance right. |
 | External action | Exact action, full commit or release identity, repository/ref or registry destination, current gates and demonstrated independent enforcement for that action. |
 

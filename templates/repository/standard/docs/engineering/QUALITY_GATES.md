@@ -52,7 +52,7 @@ shell command, or repository-provided executable.
 | `artifact_status` | Selected artifact status is one of the predicate's declared statuses. |
 | `formal_graph_valid` | No blocking diagnostic affects the selected governing scope. |
 | `repository_integrity` | No fixed repository-integrity blocker prevents reliable selected evaluation. |
-| `execution_scope_declared` | The selected WO has one valid normalized `[execution_scope].paths` array. |
+| `execution_scope_declared` | Execution requires normalized scope paths matching recorded approval, for every executor. The read-only `scope` checkpoint checks path scope in any state and grants no execution authority. |
 | `change_set_complete` | The caller explicitly asserted that the supplied changed-path set is complete. |
 | `changed_paths_within_scope` | Every path in a complete declared change set matches one exact path or component-boundary directory prefix. |
 | `start_preflight_ready` | Start preflight has no lifecycle-relevant blocker. |

@@ -12,23 +12,17 @@ class WorkflowProcedureTests(unittest.TestCase):
     def test_standard_start_procedure_has_exact_order_and_argv(self) -> None:
         _, _, _, procedures, _ = load_validated_contracts()
         resolved = resolve_procedure(procedures, "PROC-WO-START", {"artifact_id": "WO-ABC-001"})
-        self.assertEqual(
-            [
-                "STEP-WO-START-FOCUS",
-                "STEP-WO-START-PREFLIGHT",
-                "STEP-WO-START-DECIDE",
-                "STEP-WO-START-PREVIEW",
-                "STEP-WO-START-APPLY",
-                "STEP-WO-START-FINAL-FOCUS",
-            ],
-            [step["id"] for step in resolved["steps"]],
-        )
+        steps = resolved["steps"]
+        self.assertTrue(all(step["kind"] == "command" for step in steps))
         self.assertEqual(
             ["harnessctl", "preflight", ".", "--work-order", "WO-ABC-001", "--phase", "start"],
-            resolved["steps"][1]["argv"],
+            steps[0]["argv"],
         )
-        self.assertEqual("decision", resolved["steps"][2]["kind"])
-        self.assertEqual("DR-WO-START", resolved["steps"][2]["decision_right"])
+        preview = next(step["argv"] for step in steps if "transition" in step.get("argv", []) and "--apply" not in step["argv"])
+        apply = next(step["argv"] for step in steps if "--apply" in step.get("argv", []))
+        self.assertEqual(preview + ["--apply"], apply)
+        self.assertIn("WO-ABC-001=in_progress", apply)
+        self.assertIn("WO-ABC-001=delegated-executor", apply)
 
     def test_shell_metacharacters_remain_one_inert_text_argument(self) -> None:
         procedure = {

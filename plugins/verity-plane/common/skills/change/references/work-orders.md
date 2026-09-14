@@ -1,69 +1,55 @@
 # Work orders
 
-Select one WO. Use `check REPO --artifact WO-ID --json` without a checkpoint
-to inspect its state and procedure. Read its approved behavior, exact path
-scope, constraints, verification contract and the phase reading manifest.
-Projection itself is read only and establishes neither readiness nor authority.
+Select one WO and read its approved behavior, paths, constraints, verification
+contract and phase reading manifest. Use `check REPO --artifact WO-ID --json`
+to inspect its actual state and procedure. Projection is read only.
 
-## Approval and start
+## Approval and execution
 
-Approval and start are separate decisions. Apply only the selected transition
-covered by the operator; approval alone leaves a WO `approved`.
+Read the installed `DECISION_RIGHTS.md` and `WORKFLOW.json` for the grant made
+by work-order approval. Follow their execution procedure and returned commands;
+do not maintain a second authorization test in this skill. Where approval
+covers execution, continue the selected eligible work without requesting another
+start, completion or required verification-preparation decision. A person or
+agent follows the same procedure; no additional agent needs to be launched.
 
-For an approved WO, follow `PROC-WO-START` from installed `WORKFLOW.json`:
-focus, run `preflight REPO --work-order WO-ID --phase start --json`, resolve the
-actual start right, preview the exact transition, apply it, then inspect state.
-Use the evaluator-returned actor for a qualifying delegated route; otherwise
-the accountable owner's actual start decision is required. Passing preflight
-or writing `--decision WO-ID=engineering-owner` cannot provide that decision.
-
-Example argument shapes after the actual decision and passing gates:
-
-```text
-harnessctl transition REPO --set WO-ID=in_progress --decision WO-ID=ACTOR --reason WO-ID=REASON --json
-harnessctl transition REPO --set WO-ID=in_progress --decision WO-ID=ACTOR --reason WO-ID=REASON --apply --json
-```
-
-Each `ID=value` is one argument. Replace only with inspected, selected values.
-No implementation begins from a preview alone.
+Approval itself leaves a WO approved until start is applied. Run the required
+start preflight, preview and apply the selected transition, then inspect state.
+Use the actual executor identity; a role argument cannot create missing approval.
+Each `ID=value` remains one argument. A preview does not start implementation.
 
 ## Implement and complete
 
-Once start is applied, continue edits and ordinary commits within the approved
-WO without asking for its approval again. Compare every proposed edit with
-both its behavioral scope and declared paths. Use the `scope` checkpoint with
-the complete change set, including intended paths before an edit. Use
-`pre-action` when the selected procedure calls for it; do not introduce
-`pre-action --procedure PROC-WO-IMPLEMENT` as a new gate before every edit.
-That checkpoint requires evidence and is not a replacement for edit-scope
-validation. A path allowed by a directory prefix does not authorize unrelated
-behavior. Stop an out-of-scope action before invoking its editing tool.
+Continue edits and ordinary local commits within the approved scope. Compare
+proposed behavior and paths with that scope. Use the `scope` checkpoint with
+the complete change set and intended paths. Use `pre-action` when the installed
+procedure calls for it, rather than adding a new gate before every edit.
+An allowed directory does not authorize unrelated behavior.
 
-Run the selected verification contract and repository checks. Retain actual
-commands, outcomes and failed attempts. Review the diff and tests, then apply
-`docs/engineering/ARTIFACT_AUTHORING.md#review-of-implemented-changes` before
-proposing completion. Resolve material findings through the existing process.
-Use the installed handoff procedure and
-its trusted Git base, including the complete change set. Be aware that
-`check --checkpoint handoff --from-git BASE` and `evidence` can write retained
-evidence: they need covered preparation authority and scoped destinations.
+Run the selected verification contract and repository checks, retain actual
+outcomes and relevant failures, and review the diff and tests. Apply
+`docs/engineering/ARTIFACT_AUTHORING.md#review-of-implemented-changes` during
+that review. Retain material findings and their resolution with ordinary evidence.
 
-When implementation and required evidence are complete, follow
-`PROC-WO-IMPLEMENT` and its actual completion decision. Preview and apply only
-the selected WO's `implemented` transition. A passing check alone cannot mark
-it complete. Then follow the returned preparation step if already authorized;
-otherwise hand off that exact missing decision. Ready VREC preparation,
-assurance, release and external delivery remain distinct operations.
+Follow the installed handoff procedure using its trusted Git base and complete
+change set. Handoff and evidence commands can write retained evidence; check
+their actual destinations against the approved preparation scope.
+Once work and required evidence are complete, preview and apply the selected
+completion transition. Record only work actually completed.
 
-## Execution delegation
+Follow required verification preparation already covered by approval without
+another request. An implemented WO classified `not_required` needs no new VREC:
+report completion and follow the authorized delivery instruction, if any.
+Preparation, owner acceptance and external delivery remain distinct actions.
 
-Use DR-015 only as the installed evaluator qualifies it: execution class must
-exist at the configured PR base, and the required check must be live and
-successful for the exact current HEAD. It permits only `DR-WO-START`,
-`DR-WO-COMPLETE` and `DR-VREC-PREPARE`, through `delegated-executor`.
+## Stops and continuation
 
-Retain its check identity and candidate in the result. After a new commit,
-wait for that commit's required result before a delegated mutation. Never move
-the configured base, write a local passing gate, or add branch-only delegation
-to unlock a blocked action. Delegation grants no definition approval,
-assurance, release, merge, publication or other external authority.
+An actual missing grant, changed scope or failed gate stops the affected action.
+Repair an in-scope failure and reuse unchanged authority. Ask the accountable
+owner for a scope change when necessary; do not switch execution routes or
+claim an owner decision to bypass a refusal. Follow the installed evaluator's
+actual requirements while a repository still uses an earlier release.
+
+Use [Continuing authority](authority.md) for already supplied decisions. No
+execution grant permits self-verification, release, merge or publication.
+Reuse a separately authorized delivery action when its inputs still match.

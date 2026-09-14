@@ -17,8 +17,6 @@ from se_harness.gate_source import (
     DELEGATED_RIGHTS,
     DELEGATED_ROLE,
     DELEGATED_TRANSITIONS,
-    DelegationError,
-    authorize_delegated_right,
     delegated_reason,
 )
 from dataclasses import dataclass
@@ -44,7 +42,7 @@ from se_harness.workflow_compliance import (
     transition_gate_results,
 )
 from se_harness.workflow_result import restitution_digest
-from se_harness.codes import CodedError, E001, E003, WEX001, WEX190, WEX_ECP_001
+from se_harness.codes import CodedError, E001, E003, WEX001, WEX190, WEX_ECP_001, WEX_ECP_022
 
 # The seams of this module (SPEC-ECP-024 ECP-ENG-019, ECP-ENG-020): every public name stays importable here.
 from se_harness.repository_graph import (  # noqa: F401
@@ -379,7 +377,6 @@ def _mutate(
     _append_event(front, artifact.status, target, actor, now, reason)
     if artifact.artifact_type == "work_order" and target == "approved":
         front.append("scope_paths = " + json.dumps(artifact.metadata.get("execution_scope", {}).get("paths", [])))
-        front.append("delegation_class = " + json.dumps(artifact.metadata.get("delegation", {}).get("class", "")))
     output = opening + newline.join(front) + newline + "+++" + newline + body
     return output.encode("utf-8"), tuple(sorted(fields))
 
@@ -503,18 +500,14 @@ def plan_transition(
         if artifact.artifact_type == "risk" and disposition_fields is None:
             # SPEC-RSK-010 RSK-MGT-021: raised or answered through its commands only.
             refuse_bare_risk_transition(artifact, target, reasons.get(artifact_id))
-        if decisions[artifact_id] == DELEGATED_ROLE:
-            # SPEC-ECP-006 ECP-DLG-002/-003/-005/-006/-007: the delegated route.
-            right = DELEGATED_TRANSITIONS.get((lifecycle_family(artifact.artifact_type), artifact.status, target))
-            try:
-                reading = authorize_delegated_right(
-                    root, work_order_metadata=artifact.metadata, work_order_path=artifact.path, right=right,
-                )
-            except DelegationError as exc:
-                raise PreconditionError(exc.code, exc.message) from exc
+        right = DELEGATED_TRANSITIONS.get((lifecycle_family(artifact.artifact_type), artifact.status, target))
+        if right is None and decisions[artifact_id] == DELEGATED_ROLE:
+            raise PreconditionError(WEX_ECP_022, "This transition remains an owner decision")
+        if right is not None:
+            # Approval and scope are checked by the shared scope predicate below.
             if apply:
                 mutation_guard.require_mutation_authority(root, operation=DELEGATED_RIGHTS[str(right)])
-            effective_reasons[artifact_id] = delegated_reason(str(right), reading, reasons.get(artifact_id))
+            effective_reasons[artifact_id] = delegated_reason(str(right), "recorded engineering-owner approval", reasons.get(artifact_id))
         path = safe_destination(root, artifact.path.relative_to(root))
         original = path.read_bytes()
         # Plans intentionally expose no execution timestamp. A fixed valid value

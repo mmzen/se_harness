@@ -317,7 +317,7 @@ def validate_work_order_delegation(
     artifacts: list[Artifact],
     report_root: Path,
 ) -> list[Diagnostic]:
-    """SPEC-ECP-006 ECP-DLG-001: `[delegation]` carries exactly `class = "execution"` on a work order."""
+    """Read retained SPEC-ECP-006 delegation metadata; new approvals need no table."""
 
     errors: list[Diagnostic] = []
     for artifact in artifacts:

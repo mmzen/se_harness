@@ -15,7 +15,7 @@ from typing import Any
 from se_harness.integrity import atomic_create_bytes
 from se_harness import mutation_guard
 from se_harness._process import run as _launch, text as _text
-from se_harness.gate_source import DELEGATED_RIGHTS, DELEGATED_ROLE, DelegationError, authorize_delegated_right, delegated_reason
+from se_harness.gate_source import DelegationError, authorize_delegated_right
 from se_harness.artifact_layout import ID_PATTERN, common_artifact_domain, repository_record_relative_path, validate_domain
 from se_harness.engine import validate_engineering_artifacts
 from se_harness.installer import HarnessError, ensure_target, safe_destination
@@ -450,9 +450,6 @@ def capture_verification(
     _validate_id(record_id, "VREC-")
     _validate_owner(owner)
     selected_work = _normalized_unique(work_order_ids, "work orders")
-    delegated = owner == DELEGATED_ROLE
-    if delegated and len(selected_work) != 1:
-        raise InputRefusal(f"{DELEGATED_ROLE} may prepare a record for exactly one work order")
     selected_verification = _normalized_unique(verification_ids, "verification contracts")
     selected_evidence = _normalized_unique(evidence_paths, "evidence paths")
     authority = mutation_guard.require_mutation_authority(
@@ -475,19 +472,13 @@ def capture_verification(
             raise StateRefusal(f"work order {work_order_id} must be implemented, verified, or released")
         work_order_metadata = _load_metadata(root, work_order)
         declared_verification.update(_relation_targets(work_order_metadata, "verification"))
-        if delegated:
-            # SPEC-ECP-006 ECP-DLG-002/-003: the delegated DR-VREC-PREPARE.
-            try:
-                gate = authorize_delegated_right(
-                    root, work_order_metadata=work_order_metadata,
-                    work_order_path=work_order.path, right="DR-VREC-PREPARE",
-                )
-            except DelegationError as exc:
-                raise StateRefusal(f"{exc.code}: {exc.message}") from exc
-            mutation_guard.require_mutation_authority(root, operation=DELEGATED_RIGHTS["DR-VREC-PREPARE"])
-            delegated_sentence = " " + delegated_reason("DR-VREC-PREPARE", gate, None)
-        else:
-            delegated_sentence = ""
+        try:
+            authorize_delegated_right(
+                root, work_order_metadata=work_order_metadata,
+                work_order_path=work_order.path, right="DR-VREC-PREPARE",
+            )
+        except DelegationError as exc:
+            raise StateRefusal(f"{exc.code}: {exc.message}") from exc
     for verification_id in selected_verification:
         verification = _require_artifact(catalog, verification_id, "verification")
         if not _grants_authority("definition", verification.status):
@@ -559,7 +550,7 @@ conforms_to = {verification_array}
 
 # Verification Record Candidate
 
-This ready record binds retained evidence for {readable_work} to candidate commit `{commit}`. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.{delegated_sentence}
+This ready record binds retained evidence for {readable_work} to candidate commit `{commit}`. Preparation uses each selected work order's recorded execution approval. An accountable assurance owner must review the evidence and transition the record to `verified`; this command did not approve, commit, tag, release, or publish anything.
 
 The record is intentionally created after the candidate commit it names, avoiding self-referential commit metadata.{deviation_section}{reuse_note}
 '''

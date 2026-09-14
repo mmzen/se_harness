@@ -33,6 +33,7 @@ _evidence_work_order_keys = evidence_work_order_keys  # one function serves the 
 from tests.fixture_support import standard_repository
 from tests.artifact_support import (
     RELEASED_EVALUATOR_EVIDENCE,
+    record_execution_approval,
     RELEASED_EVALUATOR_EVIDENCE_BYTES,
     RELEASED_EVALUATOR_EVIDENCE_PATH,
     RELEASED_EVALUATOR_EVIDENCE_SHA256,
@@ -509,6 +510,8 @@ class RevisionCliTests(unittest.TestCase):
         create_base_chain(self.root, operating_contract_status="draft")
         if aggregate:
             create_additional_chain(self.root)
+        for path in (self.root / "docs/engineering/product/work-orders").glob("*.md"):
+            record_execution_approval(path)
         git(self.root, "init", "-b", "main")
         git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", ".")
         git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "candidate")
@@ -826,6 +829,7 @@ class RevisionCliTests(unittest.TestCase):
             ),
             encoding="utf-8",
         )
+        record_execution_approval(path)
         git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "add", str(path))
         git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "approved work only")
         code, output, error = invoke(
@@ -838,6 +842,25 @@ class RevisionCliTests(unittest.TestCase):
         self.assertEqual(1, code)
         self.assertIn("must be implemented", output)
         self.assertEqual(1, output.count("WEX301"), output)  # ECP-CLI-006/-007: one code, the cause class
+
+    def test_aggregate_capture_requires_execution_approval_for_every_work_order(self) -> None:
+        self.initialize_candidate(aggregate=True)
+        work = self.root / "docs/engineering/product/work-orders/WO-002.md"
+        content = work.read_text(encoding="utf-8")
+        write(work, content.replace('scope_paths = ["src/"]', 'scope_paths = ["src/"]\ndelegation_class = ""', 1))
+        git(self.root, "add", ".")
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid", "commit", "-m", "old approval does not grant execution")
+        code, output, error = invoke(
+            "capture-verification", str(self.root), "--id", "VREC-002",
+            "--work-order", "WO-001", "--work-order", "WO-002",
+            "--verification", "VER-001", "--verification", "VER-002",
+            "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
+            "--evidence", "docs/engineering/product/evidence/WO-002-verification.md",
+            "--owner", "engineering-owner",
+        )
+        self.assertEqual(1, code, output + error)
+        self.assertIn("WO-002.md needs owner approval of remaining execution", output)
+        self.assertFalse((self.root / "docs/engineering/product/verification-records/VREC-002.md").exists())
 
     def test_capture_and_prepare_mixed_layout_aggregate_scope_deterministically(self) -> None:
         self.initialize_candidate(aggregate=True)
@@ -868,6 +891,7 @@ class RevisionCliTests(unittest.TestCase):
             "--verification", "VER-001",
             "--evidence", directory_evidence,
             "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
+            "--owner", "delegated-executor",
         )
         self.assertEqual(0, code, error)
         self.assertIn("ready verification record", output)
@@ -875,6 +899,7 @@ class RevisionCliTests(unittest.TestCase):
         vrec = vrec_path.read_text(encoding="utf-8")
         self.assertIn(f'commit = "{candidate}"', vrec)
         self.assertIn('verifies_work_order = ["WO-001", "WO-002"]', vrec)
+        self.assertIn('prepared_by = "delegated-executor"', vrec)
         self.assertIn('conforms_to = ["VER-001", "VER-002"]', vrec)
         self.assertIn(directory_evidence, vrec)
         self.assertTrue(validate_engineering_artifacts.validate_repository(self.root).valid)
@@ -1112,7 +1137,8 @@ class RevisionCliTests(unittest.TestCase):
         git(self.root, "config", "user.name", "Harness Test")
         git(self.root, "config", "user.email", "harness@example.invalid")
         work = self.root / "docs/engineering/product/work-orders/WO-001.md"
-        write(work, work.read_text(encoding="utf-8").replace("[relations]", '[execution_scope]\npaths = ["src/", "docs/engineering/product/"]\n\n[relations]'))
+        write(work, work.read_text(encoding="utf-8").replace('paths = ["src/"]', 'paths = ["src/", "docs/engineering/product/"]', 1))
+        record_execution_approval(work)
         write(self.root / "src/runtime.py", "answer = 42")
         git(self.root, "add", ".")
         git(self.root, "commit", "-m", "feature")
@@ -1203,6 +1229,7 @@ class RevisionCliTests(unittest.TestCase):
     def test_capture_fails_when_repository_has_no_head(self) -> None:
         standard_repository(self.root)
         create_base_chain(self.root, operating_contract_status="draft")
+        record_execution_approval(self.root / "docs/engineering/product/work-orders/WO-001.md")
         git(self.root, "init", "-b", "main")
         info_exclude = self.root / ".git/info/exclude"
         info_exclude.write_text("*\n", encoding="utf-8")

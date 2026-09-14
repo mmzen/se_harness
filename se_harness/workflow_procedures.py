@@ -139,6 +139,8 @@ def select_current_step(
     steps = procedure.get("steps", [])
     if not isinstance(steps, list) or not steps:
         raise ProcedureError(WEX220, f"procedure {procedure.get('id')} has no steps")
+    if passed and checkpoint in {"start", "scope", "handoff"} and procedure.get("id") in {"PROC-WO-START", "PROC-WO-IMPLEMENT"}:
+        return next(step for step in steps if "transition" in step.get("argv", []))
     if checkpoint == "start":
         if passed:
             return next((step for step in steps if step.get("kind") == "decision"), steps[-1])

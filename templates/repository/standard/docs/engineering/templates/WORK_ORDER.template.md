@@ -18,11 +18,6 @@ paths = [
   "<repository-relative/component-prefix/>",
 ]
 
-# Optional. Delete this table unless the accountable owner delegates the three
-# mechanical decisions of this work order to a non-human actor.
-[delegation]
-class = "execution"
-
 [relations]
 implements = ["REQ-xxx"]
 specifications = ["SPEC-xxx"]
@@ -46,13 +41,13 @@ admits one exact repository-relative path. Do not use absolute paths,
 backslashes, wildcards, dot components, drive prefixes, URIs, or duplicate
 case variants.
 
-The optional `[delegation]` table with `class = "execution"` lets the
-`delegated-executor` role apply `DR-WO-START`, `DR-WO-COMPLETE` and
-`DR-VREC-PREPARE` for this work order, and nothing else, only while the
-required pull-request check for the candidate head is `success`; the class
-is read from the base of the pull request, so a branch cannot add it to
-itself. Approving a work order that carries the table is the act of
-delegating. Delete the table when every decision stays human.
+Approval authorizes routine execution through the single procedure in
+`docs/engineering/DECISION_RIGHTS.md#approved-execution`. The selected person or
+agent can start, implement, check, record completion and prepare required
+verification within this scope without separate permission for those steps.
+Record completion only after the work and evidence are complete. Owner
+acceptance and delivery remain distinct. Specify any authorized push/PR action
+and destination in the decision envelope; do not imply merge or publication.
 
 Add `architecture = ["ARCH-xxx", "ADR-xxx"]` under `[relations]` when architecture applies. The relation selects every applicable architecture plus every required deciding ADR. An ADR may be omitted only for a selected architecture whose accepted `decision_assessment` is `no_significant_decision`; every `adr_required` architecture needs at least one selected active ADR that decides it.
 
@@ -82,7 +77,6 @@ Use components rather than guessed files when the code has not yet been inspecte
 
 ## Completion report format
 
-State what the report carries. The completion decision follows from the
-front matter, not from this section: it is the engineering owner's, or the
-`delegated-executor`'s under `[delegation] class = "execution"` while the
-required pull-request check is `success`.
+State the completed behavior, actual checks, relevant limitations and next
+accountable decision. Follow the installed workflow and shared approval rule;
+do not require a separate owner completion decision for already approved work.

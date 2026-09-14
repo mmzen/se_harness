@@ -22,6 +22,7 @@ from se_harness.workflow_compliance import (
 from tests.artifact_support import (
     RELEASED_EVALUATOR_EVIDENCE,
     create_base_chain,
+    record_execution_approval,
     formal,
     write,
 )
@@ -53,6 +54,7 @@ paths = ["src/exact.py", "src/component/", "changes.json"]
             1,
         )
         work_order.write_text(text, encoding="utf-8")
+        record_execution_approval(work_order)
         (self.root / "src/component").mkdir(parents=True)
         (self.root / "src/exact.py").write_text("exact = True\n", encoding="utf-8")
         (self.root / "src/component/inside.py").write_text("inside = True\n", encoding="utf-8")
@@ -124,7 +126,10 @@ class WorkflowComplianceTests(WorkflowComplianceFixture, unittest.TestCase):
         self.assertEqual("pass", result["compliance"]["status"])
         self.assertEqual("selected", result["scope"]["mode"])
         self.assertEqual("PROC-WO-IMPLEMENT", result["procedure"]["id"])
-        self.assertEqual("STEP-WO-IMPLEMENT-DECIDE", result["procedure"]["current_step"])
+        self.assertEqual("STEP-WO-IMPLEMENT-PREVIEW", result["procedure"]["current_step"])
+        command = result["restitution"]["command_or_response"]["argv"]
+        self.assertIn("WO-001=implemented", command)
+        self.assertNotIn("--apply", command)
 
     def test_start_checkpoint_resolves_exact_start_decision(self) -> None:
         work_order = self.root / "docs/engineering/product/work-orders/WO-001.md"
@@ -134,6 +139,7 @@ class WorkflowComplianceTests(WorkflowComplianceFixture, unittest.TestCase):
             ),
             encoding="utf-8",
         )
+        record_execution_approval(work_order)
         with mock.patch(
             "se_harness.workflow_compliance._preflight_status",
             return_value=("pass", "Start preflight is ready."),
@@ -144,12 +150,12 @@ class WorkflowComplianceTests(WorkflowComplianceFixture, unittest.TestCase):
         self.assertEqual(0, code, error)
         result = json.loads(output)
         self.assertEqual("PROC-WO-START", result["procedure"]["id"])
-        self.assertEqual("STEP-WO-START-DECIDE", result["procedure"]["current_step"])
-        self.assertEqual("DR-WO-START", result["restitution"]["decision_required"]["decision_right"])
-        self.assertEqual(
-            {"kind": "response", "value": "Start WO-001 implementation."},
-            result["restitution"]["command_or_response"],
-        )
+        self.assertEqual("STEP-WO-START-PREVIEW", result["procedure"]["current_step"])
+        self.assertIsNone(result["restitution"]["decision_required"])
+        command = result["restitution"]["command_or_response"]
+        self.assertEqual("command", command["kind"])
+        self.assertIn("WO-001=in_progress", command["argv"])
+        self.assertNotIn("--apply", command["argv"])
 
     def test_pre_action_selects_the_procedure_and_rejects_unrelated_override(self) -> None:
         code, output, error = invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "pre-action", "--json")
@@ -726,6 +732,7 @@ class ScopeCheckpointFixture(GitDerivedChangeSetFixture):
         work_order = self.root / "docs/engineering/product/work-orders/WO-001.md"
         text = work_order.read_text(encoding="utf-8")
         work_order.write_text(re.sub(r'(?m)^status = "[a-z_]+"$', f'status = "{status}"', text, count=1), encoding="utf-8")
+        record_execution_approval(work_order)
         record = self.root / "docs/engineering/product/verification-records/VREC-001.md"
         if status == "verified":
             self.write_record("verified")

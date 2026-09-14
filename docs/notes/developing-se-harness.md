@@ -223,13 +223,17 @@ own output folder. Release build/check keeps its existing provenance inputs.
 See [simple plugin operation](plugin-simplification-2026-09-13.md).
 
 
-## Local work after WO-KIS-002
+## Local work after WO-KIS-009
 
-Candidate commands use the recorded owner approval and relevant local gates for
-execution delegation. They do not call GitHub or require a base-branch merge.
-CI still checks integration and publication. New work-order approval events
-retain the approved paths and class; older events use their original local Git
-copy, so a later scope change cannot silently extend an approval.
+Candidate commands use one execution procedure for a person or agent, under
+the work order's recorded approval and relevant local gates. The approval
+meaning is maintained in the candidate `DECISION_RIGHTS.md#approved-execution`;
+skills and templates refer to that policy. Local execution needs no GitHub
+response or preliminary merge. CI still checks integration and publication.
+New approval events retain approved paths without an optional delegation class.
+Historical explicit execution grants remain usable; older approvals without
+that grant need approval of remaining execution through the existing amendment
+process. This repository follows its installed 0.17.0 until authorized adoption.
 
 For a combined PR, use one `Harness-Work-Orders: WO-AAA-001, WO-BBB-002` line.
 `harnessctl check-pr . --event event.json --from-git <base>` checks each selected
