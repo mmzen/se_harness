@@ -55,3 +55,6 @@ WO-KIS-008 is implemented. Repository integration remains pending in PR #474.
 [WO-KIS-009](work-orders/WO-KIS-009.md) implements the accepted proposal to make
 bounded execution part of work-order approval. [SPEC-KIS-003](specifications/SPEC-KIS-003.md)
 defines one route for people and agents, with owner acceptance retained.
+
+[VREC-KIS-009](verification-records/VREC-KIS-009.md) is verified by the owner.
+WO-KIS-009 is implemented. Repository integration remains pending in PR #476.
