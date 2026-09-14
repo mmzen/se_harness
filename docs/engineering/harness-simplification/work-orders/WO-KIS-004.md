@@ -81,6 +81,7 @@ paths = [
   "tests/test_validation_taxonomy.py",
   "tests/test_risk_management.py",
   "tests/test_cli_shape.py",
+  "tests/test_context_routing_retirement.py",
   "tests/test_dashboard_publication.py",
   "tests/test_operating_contract_readiness.py",
   "tests/test_release_unit.py",
