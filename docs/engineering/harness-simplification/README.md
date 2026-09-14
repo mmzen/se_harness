@@ -46,6 +46,5 @@ guidance for every governed project, including SE Harness. This is a new scope a
 the seven original cuts; their recorded approvals and evidence remain unchanged.
 
 
-[VREC-KIS-008](verification-records/VREC-KIS-008.md) is ready after the owner's
-explicit completion and preparation instructions. WO-KIS-008 is implemented;
-assurance review and PR #474 integration remain pending.
+[VREC-KIS-008](verification-records/VREC-KIS-008.md) is verified by the owner.
+WO-KIS-008 is implemented. Repository integration remains pending in PR #474.
