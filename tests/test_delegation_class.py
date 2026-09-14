@@ -6,7 +6,7 @@ from unittest import mock
 from se_harness.gate_source import DELEGATED_ROLE
 from tests.fixture_support import standard_repository
 from tests.mutation_guard_support import patch_mutation_authority
-from tests.artifact_support import create_base_chain, write
+from tests.artifact_support import create_base_chain, write, record_execution_approval
 from tests.cli_support import invoke
 from tests.git_support import git
 
@@ -73,7 +73,6 @@ class DelegationFixture(unittest.TestCase):
 
     def approve_delegation(self) -> None:
         text = self.work_order.read_text(encoding="utf-8").replace('status = "approved"', 'status = "draft"', 1)
-        text = text.replace("[relations]", '[delegation]\nclass = "execution"\n\n[relations]', 1)
         self.work_order.write_text(text, encoding="utf-8")
         code, result, err = self.transition("approved", "engineering-owner")
         self.assertEqual(0, code, self.blockers(result, err))
@@ -88,6 +87,13 @@ class LocalDelegationTests(DelegationFixture):
         self.assertEqual(0, code, self.blockers(result, err))
         self.assertEqual("in_progress", self.status())
         self.assertIn("recorded engineering-owner approval", self.work_order.read_text())
+        self.assertNotIn("[delegation]", self.work_order.read_text())
+
+    def test_human_executor_uses_the_same_grant_and_records_its_identity(self):
+        self.approve_delegation()
+        code, result, err = self.transition("in_progress", "mathi")
+        self.assertEqual(0, code, self.blockers(result, err))
+        self.assertIn('decided_by = "mathi"', self.work_order.read_text())
 
     def test_class_label_without_owner_approval_is_refused(self):
         text=self.work_order.read_text().replace("[relations]", '[delegation]\nclass = "execution"\n\n[relations]',1)
@@ -100,17 +106,32 @@ class LocalDelegationTests(DelegationFixture):
     def test_changed_scope_needs_owner_approval(self):
         self.approve_delegation()
         self.work_order.write_text(self.work_order.read_text().replace('paths = ["src/"]','paths = ["src/", "outside/"]',1))
-        code,result,err=self.transition("in_progress")
-        self.assertNotEqual(0,code)
-        self.assertIn("scope changed",self.blockers(result,err))
+        for actor in (DELEGATED_ROLE, "engineering-owner", "mathi"):
+            with self.subTest(actor=actor):
+                code,result,err=self.transition("in_progress", actor)
+                self.assertNotEqual(0,code)
+                self.assertIn("scope changed",self.blockers(result,err))
+                self.assertEqual("approved", self.status())
 
     def test_legacy_approval_can_be_read_from_local_git_history(self):
         self.approve_delegation()
         text=re.sub(r'(?m)^(scope_paths|delegation_class) = .*\n','',self.work_order.read_text())
+        text=text.replace("[relations]", '[delegation]\nclass = "execution"\n\n[relations]', 1)
         self.work_order.write_text(text)
         self.commit("local owner approval")
         code,result,err=self.transition("in_progress")
         self.assertEqual(0,code,self.blockers(result,err))
+
+    def test_old_approval_without_execution_is_not_silently_expanded(self):
+        self.approve_delegation()
+        text=self.work_order.read_text().replace('scope_paths = ["src/"]', 'scope_paths = ["src/"]\ndelegation_class = ""')
+        self.work_order.write_text(text)
+        for actor in (DELEGATED_ROLE, "engineering-owner"):
+            with self.subTest(actor=actor):
+                code,result,err=self.transition("in_progress", actor)
+                self.assertNotEqual(0,code)
+                self.assertIn("approval of remaining execution",self.blockers(result,err))
+        self.assertEqual(text, self.work_order.read_text())
 
     def test_failed_local_completion_gate_still_blocks(self):
         self.approve_delegation()
@@ -131,5 +152,19 @@ class LocalDelegationTests(DelegationFixture):
         code,out,err=invoke("check",str(self.root),"--artifact","WO-PRD-001","--json")
         self.assertEqual(0,code,err)
         result=json.loads(out)
-        self.assertEqual(DELEGATED_ROLE,result["restitution"]["decision_required"]["role"])
+        self.assertIsNone(result["restitution"]["decision_required"])
         self.assertEqual("command",result["restitution"]["command_or_response"]["kind"])
+        self.assertIn("preflight", result["restitution"]["command_or_response"]["argv"])
+
+    def test_completed_work_without_required_assurance_does_not_request_vrec(self):
+        self.approve_delegation()
+        text=self.work_order.read_text().replace('status = "approved"', 'status = "implemented"', 1)
+        text=text.replace('commit_bound_verification = "required"', 'commit_bound_verification = "not_required"', 1)
+        self.work_order.write_text(text)
+        record_execution_approval(self.work_order)
+        code,out,err=invoke("check",str(self.root),"--artifact","WO-PRD-001","--json")
+        self.assertEqual(0,code,err)
+        result=json.loads(out)
+        self.assertIsNone(result["restitution"]["decision_required"])
+        self.assertNotIn("capture-verification", result["restitution"]["command_or_response"].get("argv", []))
+        self.assertIn("requires no new VREC", " ".join(result["restitution"]["done"]))

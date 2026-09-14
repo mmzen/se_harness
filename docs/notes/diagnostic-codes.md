@@ -286,7 +286,7 @@ but are not diagnostics and are not listed here.
 | `WEX-ECP-012` | `WEX-ECP-012`; `WEX-ECP-012: the working tree selects {…} (the one in_progress work order), not {…}` |
 | `WEX-ECP-013` | `WEX-ECP-013`; `WEX-ECP-013: domain {…} has no artifact to read its identifier token from; pass --id explicitly` (+4 more) |
 | `WEX-ECP-014` | `A coded selection refusal (W-ADS-001, WEX-ECP-014): a `SelectionError` that carries its code.`; `WEX-ECP-014` (+5 more) |
-| `WEX-ECP-022` | `WEX-ECP-022`; `WEX-ECP-022: {…} declares no execution delegation` (+4 more) |
+| `WEX-ECP-022` | `WEX-ECP-022`; `WEX-ECP-022: This transition remains an owner decision` (+5 more) |
 | `WEX-ECP-030` | `WEX-ECP-030`; `WEX-ECP-030: duplicate transition binding {…}:{…}` (+10 more) |
 | `WEX-ECP-031` | `Read and validate `agentic_operations` (ECP-PRM-019, ECP-PRM-023). Every entry carries exactly the seven fiel…`; `WEX-ECP-031` |
 | `WEX-ECP-040` | `WEX-ECP-040` |

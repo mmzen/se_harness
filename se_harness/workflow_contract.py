@@ -816,6 +816,9 @@ def select_rule(
             continue
         if not contract_match(status, selector.get("statuses")):
             continue
+        assurance = selector.get("commit_bound_verification")
+        if assurance is not None and primary.metadata.get("assurance", {}).get("commit_bound_verification") != assurance:
+            continue
         related_type = selector.get("related_artifact_type")
         if related_type is not None:
             candidates = [

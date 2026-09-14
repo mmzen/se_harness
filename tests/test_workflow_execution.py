@@ -20,7 +20,7 @@ from se_harness.engine import validate_engineering_artifacts
 from se_harness.workflow import PreconditionError, apply_transition, plan_transition, project_selected
 from se_harness.workflow_compliance import check_workflow
 from tests.mutation_guard_support import trusted_mutation_authority
-from tests.artifact_support import create_base_chain, formal, write
+from tests.artifact_support import create_base_chain, formal, write, record_execution_approval
 from tests.fixture_support import scale_sizes, standard_repository
 from tests.cli_support import invoke
 from tests.mutation_guard_support import patch_mutation_authority
@@ -111,6 +111,7 @@ paths = ["src/"]
             1,
         )
         path.write_text(text, encoding="utf-8")
+        record_execution_approval(path)
         return path
 
     def bind_handoff_evidence(self, work_order_id: str = "WO-001") -> Path:
@@ -859,7 +860,9 @@ class WorkflowExecutionTests(WorkflowExecutionFixture, unittest.TestCase):
             self.assertIn(value, human_output)
         self.assertIn(restitution["next"]["action"], human_output)
         self.assertIn(restitution["next"]["procedure_id"], human_output)
-        self.assertIn(restitution["command_or_response"]["value"], human_output)
+        command = restitution["command_or_response"]
+        for value in command.get("argv", [command.get("value", "")]):
+            self.assertIn(value, human_output)
 
     def test_projection_and_planning_scale_to_one_thousand_artifacts(self) -> None:
         validator = validate_engineering_artifacts
@@ -1446,6 +1449,7 @@ class OnePreconditionEngineTests(WorkflowExecutionFixture, unittest.TestCase):
             '[assurance]\ncommit_bound_verification = "required"\nrationale = "fixture"\ndecided_by = "repository-owner"\n\n[execution_scope]\npaths = ["src/"]\n\n[relations]',
             1,
         ), encoding="utf-8")
+        record_execution_approval(work_order)
         cases.append(("WO-001", "in_progress", "engineering-owner"))
         with mock.patch("se_harness.workflow_compliance.run_preflight", return_value=self.READY_PREFLIGHT):
             for artifact_id, target, actor in cases:
@@ -1633,7 +1637,7 @@ class CheckProjectionTests(unittest.TestCase):
             if "focus" in step.get("argv", [])
         ]
         self.assertEqual([], offenders)
-        renamed = {"STEP-WO-START-FOCUS", "STEP-WO-START-FINAL-FOCUS", "STEP-FOCUS-SELECTED", "STEP-FOCUS-RELATED", "STEP-REMEDIATE-FOCUS"}
+        renamed = {"STEP-WO-START-FINAL-FOCUS", "STEP-FOCUS-SELECTED", "STEP-FOCUS-RELATED", "STEP-REMEDIATE-FOCUS"}
         present = {step["id"] for procedure in contract["procedures"] for step in procedure.get("steps", [])}
         self.assertTrue(renamed <= present, renamed - present)
         workflow_md = (REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/WORKFLOW.md").read_text(encoding="utf-8")

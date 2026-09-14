@@ -11,12 +11,10 @@ operations write files, even when their names sound like inspection:
 | `capture-verification` | Generates the candidate snapshot/export and writes one ready VREC and evaluator evidence after `DR-VREC-PREPARE` and candidate-readiness gates. |
 | `prepare-release` | Writes one ready RLS and evaluator evidence after `DR-RLS-PREPARE` and release-preparation gates. |
 
-Classify each actual invocation and its installed write destinations before
-dispatch, including generated or ignored files. Released 0.16.0 capture, for
-example, refreshes `target/harness-dashboard/` before writing the record. Git's
-clean/dirty status alone does not account for those effects. Confirm that the
-actual preparation authority covers that footprint and retain the observed
-generated writes, including any left by a failed operation.
+Inspect each invocation's actual write destinations, including generated or
+ignored files, against approved preparation scope. Retain relevant generated
+writes and any partial effects of a failed operation. Git status alone does
+not describe an operation's full write footprint.
 
 Passing read-only preflight does not grant these writing rights. Evidence work
 already covered by the selected WO needs no redundant prompt. Preparation
@@ -50,11 +48,13 @@ an index are not recursive evidence selections. Compare the full candidate
 commit and retained file digests with the supplied preparation inputs again
 before the write. If they changed, stop reuse of the earlier decision.
 
-For installed DR-015 execution delegation, use `delegated-executor` only when
-the class is present at the configured PR base and the real required check
-passes for the exact HEAD. A new code commit needs a fresh check, not a renewed
-WO approval. That route permits VREC preparation, never verification or RLS
-preparation. Let the released evaluator enforce its actual gate.
+Use the installed `DECISION_RIGHTS.md` execution grant and actual workflow
+result for preparation. Apply the same checks to every explicitly selected WO;
+do not impose an additional actor-specific selection limit. Preparation already
+covered by the approval needs no renewed owner request. Follow the installed
+evaluator's actual checks, including on an earlier release; this skill does not
+reimplement its authorization policy. Preparation never supplies verification,
+release or external-action authority.
 
 After capture, inspect the VREC file and checkpoint-free projection. It must
 bind the intended clean candidate C and remain `ready`; related WO states are

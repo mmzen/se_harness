@@ -220,7 +220,18 @@ def _evaluate(name: str, predicate: Mapping[str, Any], context: CheckpointContex
         return "pass", "No repository-integrity blocker prevents selected evaluation."
     if name == "execution_scope_declared":
         if context.declared_scope:
-            return "pass", f"{context.artifact.artifact_id} declares {len(context.declared_scope)} normalized scope path(s)."
+            if context.checkpoint == "scope":
+                return "pass", f"{context.artifact.artifact_id} declares {len(context.declared_scope)} normalized scope path(s); this inspection grants no execution authority."
+            from se_harness.gate_source import DelegationError, authorize_delegated_right
+
+            try:
+                authorize_delegated_right(
+                    context.root, work_order_metadata=context.artifact.metadata,
+                    work_order_path=context.artifact.path, right="DR-WO-START",
+                )
+            except DelegationError as exc:
+                return "fail", str(exc)
+            return "pass", f"{context.artifact.artifact_id} has recorded execution approval for its {len(context.declared_scope)} scope path(s)."
         return "not_assessable", f"{context.artifact.artifact_id} has no assessable execution scope."
     if name == "change_set_complete":
         if context.change_set.complete:
@@ -471,6 +482,15 @@ def _corrective_action(
         None,
     )
     corrective_step = current_step
+    if checkpoint == "transition" and first_failing is not None:
+        # A transition checkpoint evaluates its target's predicates, which can
+        # differ from the current state's next procedure. Keep the real failure.
+        declared_forms = dict(current_step.get("corrective") or {})
+        declared_forms.setdefault(first_failing["id"], {
+            "kind": "response",
+            "value": f"Resolve {first_failing['id']} for {artifact_id}: {first_failing['message']}",
+        })
+        corrective_step = {**current_step, "corrective": declared_forms}
     if checkpoint == "scope":
         declared_forms = dict(current_step.get("corrective") or {})
         for predicate_id, form in SCOPE_CHECKPOINT_CORRECTIVE.items():
@@ -625,19 +645,6 @@ def check_workflow(
         "command_or_response": next_command,
         "alternatives": [f"Use complete alternative procedure {identifier}." for identifier in alternatives],
     }
-    if primary.artifact_type == "work_order" and passed:
-        # ECP-DLG-010: a class-bearing work order is told when the decision due is delegated.
-        from se_harness.gate_source import DelegationError, delegation_overlay
-
-        try:
-            restitution = delegation_overlay(
-                root, work_order_metadata=primary.metadata, work_order_path=primary.path,
-                artifact_id=artifact_id, restitution=restitution,
-            )
-        except DelegationError:
-            # A misconfigured gate source never turns a completed projection into a blocked
-            # one; the delegated route itself refuses with the coded reason when attempted.
-            pass
     result = build_result(
         operation="check",
         outcome=outcome,
@@ -760,17 +767,6 @@ def selected_result(
             for identifier in rule.get("alternative_procedure_ids", [])
         ],
     }
-    if operation == "check" and primary.artifact_type == "work_order" and not blocked:
-        # ECP-DLG-010: the projection tells a class-bearing work order when its decision is delegated.
-        from se_harness.gate_source import DelegationError, delegation_overlay
-
-        try:
-            restitution = delegation_overlay(
-                root, work_order_metadata=primary.metadata, work_order_path=primary.path,
-                artifact_id=primary.artifact_id, restitution=restitution,
-            )
-        except DelegationError:
-            pass
     return build_result(
         operation=operation,
         outcome="blocked" if blocked else "completed",

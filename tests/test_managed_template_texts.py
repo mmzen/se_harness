@@ -70,18 +70,17 @@ class RetiredRelationRuleTests(unittest.TestCase):
 
 
 class CompletionDeciderGuidanceTests(unittest.TestCase):
-    """DST-TPL-004 on the standard WORK_ORDER.template.md."""
+    """KIS-EXE-006 replaces the optional-route wording from DST-TPL-004."""
 
     def setUp(self) -> None:
         self.text = WORK_ORDER.read_text(encoding="utf-8")
         self.section = " ".join(_section(self.text, "Completion report format").split())
 
-    def test_the_heading_carries_guidance_naming_both_deciders(self) -> None:
+    def test_completion_uses_the_shared_approval_rule(self) -> None:
         self.assertTrue(self.section, "the Completion report format heading has nothing under it")
-        self.assertIn("engineering owner", self.section)
-        self.assertIn("`delegated-executor`", self.section)
-        self.assertIn('`[delegation] class = "execution"`', self.section)
-        self.assertIn("`success`", self.section)
+        self.assertIn("installed workflow and shared approval rule", self.section)
+        self.assertIn("actual checks", self.section)
+        self.assertNotIn("[delegation]", self.text)
 
     def test_the_guidance_gives_completion_to_no_single_decider(self) -> None:
         self.assertNotIn("the completion decision is the engineering owner's", self.text)
@@ -119,8 +118,8 @@ class DraftedWorkOrderTests(unittest.TestCase):
             drafted = next((target / "docs/engineering/scratch-domain").rglob("WO-SCR-001.md"))
             text = drafted.read_text(encoding="utf-8")
         section = " ".join(_section(text, "Completion report format").split())
-        self.assertIn("engineering owner", section)
-        self.assertIn("`delegated-executor`", section)
+        self.assertIn("installed workflow and shared approval rule", section)
+        self.assertNotIn("[delegation]", text)
         self.assertNotIn("the completion decision is the engineering owner's", text)
 
 

@@ -10,6 +10,12 @@
 
 ## Purpose
 
+The phases below retain the historical plan and implementation record. The
+current execution direction is [one execution route](delegation-class.md),
+specified by WO-KIS-009: work-order approval grants routine execution without an
+optional class or a second owner route. Earlier coordinator, envelope and
+fallback proposals below are not instructions to recreate those mechanisms.
+
 This roadmap describes a staged transformation of SE Harness from a primarily
 command-driven operating model into a skill-driven, agent-executed model. The
 target is to delegate routine engineering execution as far as safely possible

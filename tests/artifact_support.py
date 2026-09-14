@@ -167,6 +167,33 @@ required_for_release = false''',
     )
 
 
+def record_execution_approval(path: Path) -> None:
+    """Give an execution fixture the owner approval its scenario assumes.
+
+    This prepares test input only. Approval behavior itself is exercised through
+    the CLI in test_delegation_class; production files never use this helper.
+    """
+    from se_harness import front_matter
+
+    content = path.read_text(encoding="utf-8")
+    metadata = front_matter.parse(content)
+    paths = metadata.get("execution_scope", {}).get("paths", ["src/"])
+    if "execution_scope" not in metadata:
+        content = content.replace("[relations]", '[execution_scope]\npaths = ' + json.dumps(paths) + '\n\n[relations]', 1)
+    import re
+
+    content = re.sub(r'\n\[\[lifecycle_events\]\].*?(?=\n\+\+\+)', '', content, flags=re.S)
+    status = metadata['status']
+    stages = ['approved', 'in_progress', 'implemented', 'verified', 'released']
+    event, previous = '', 'draft'
+    for index, target in enumerate(stages[:0 if status == 'draft' else stages.index(status) + 1]):
+        event += f'\n[[lifecycle_events]]\nfrom = "{previous}"\nto = "{target}"\ndecided_at = "2026-09-14T00:00:{index:02}Z"\ndecided_by = "engineering-owner"\nreason = "Fixture history for the selected work."\n'
+        if target == 'approved':
+            event += 'scope_paths = ' + json.dumps(paths) + '\n'
+        previous = target
+    write(path, content.replace("\n+++\n", event + "\n+++\n", 1))
+
+
 #: SPEC-AUT-004 (WO-AUT-006): the fixture architectures carry the typed relations
 #: and a decision assessment, the shape the validator admits since the
 #: compatibility windows closed; each is decided by the ADR beside it.

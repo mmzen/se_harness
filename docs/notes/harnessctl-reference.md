@@ -62,7 +62,7 @@ Four rules hold on every subcommand (`WO-ECP-022`):
 | `pr-body` | coding agent opening a pull request | read-only | emit the LF-terminated pull-request body: the work-order line, the restitution line when a Git-derived handoff result is retained, and the evidence list; an unknown artifact is a failed result on standard output, exit 1, as for `check` and `evidence` |
 | `check-pr` | managed GitHub CI | scope check; may rebind an in-progress handoff | check one or several approved work orders and their combined diff |
 | `check` | coding agent, first call on a work order; the managed gate | read-only, except the self-binding Git-derived handoff checkpoint, which rebinds the packet header and retains its completed result | without a checkpoint, return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result, selecting the single in_progress work order when none is named; with a checkpoint, evaluate one fixed checkpoint and emit canonical restitution |
-| `transition` | authorized operator, or `delegated-executor` for a class-bearing work order's start and completion while the required check is green (see [the delegation class](delegation-class.md)) | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
+| `transition` | authorized actor; a person or agent uses the same recorded WO approval for start and completion after local checks pass (see [one execution route](delegation-class.md)) | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
 | `decide` | the role that holds `DR-DECISION-DISPOSE` for the blocked artifact: its owner, or for a deviation the owner of the specification it departs from | plan is read-only; `--apply` writes the decision's `[disposition]` table and one lifecycle event, and moves every raised risk the decision concerns in the same act | answer, defer, or withdraw one open decision artifact so the artifacts it blocks can move again |
 | `raise-risk` | anyone working: a reviewer, an implementer, or an agent mid-execution; no decision right is needed | writes one risk artifact in `raised`, and with `--with-decision` the open decision that blocks the threatened artifacts; dry-run is read-only | record one measured threat to governed work so that an owner answers it before the threatened stage moves |
 | `risks` | human or agent | read-only | list the risks threatening one artifact and its governing chain, with score, state and pending decision |
@@ -429,21 +429,6 @@ explicitly labeled bootstrap evidence in the candidate workflow's legacy branch,
 verifier without `qualify`. That historical output is not converted into or described as canonical
 qualification evidence.
 
-Repeat `--changed-path`, `--delete-path`, `--verification`, `--evidence`, and
-`--residual-uncertainty` where applicable. JSON options name retained input
-files, not trusted assertions: the coordinator re-observes live state, checks
-the exact released-evaluator identity and nonce-bound delegation envelope,
-requires successful gates and tests, and rejects receipt gaps or path drift.
-`execute` derives and applies one change bundle through the separately guarded
-effect broker, advances only the declared work order, and returns the canonical
-candidate-commit decision packet instead of running Git. Its start and
-completion outputs retain the receipt, envelope, and before/after observations
-as one lifecycle proof. `prepare-vrec` starts only from that complete proof and
-a clean exact candidate commit; it
-prepares an undecided `ready` record and returns an assurance decision packet.
-Neither command approves work, decides assurance, commits, pushes, opens a pull
-request, releases, publishes, deploys, or uses credentials.
-
 ## Commit-bound verification preparation
 
 ```text
@@ -461,6 +446,11 @@ and evidence paths for a final aggregate candidate. Work may be implemented,
 verified, or released; all declared verification contracts must be selected.
 Evidence may be a shared integration report plus earlier verification records.
 The command writes a ready VREC and evaluator evidence. It does not verify it.
+
+After WO-KIS-009, each selected WO's recorded execution approval and unchanged
+scope authorize preparation for either a person or an agent. There is no
+actor-specific single-WO limit. Use the installed evaluator's procedure on a
+repository still governed by an earlier release until normal upgrade.
 Use `--candidate-commit COMMIT --test-command <argv...>` to test the exact final
 integration in a temporary checkout, including when the caller has local edits.
 

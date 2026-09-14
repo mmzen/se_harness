@@ -9,6 +9,10 @@ are authoritative, and nothing here grants approval, verification, or release
 authority. The command surface is listed in the
 [`harnessctl` reference](harnessctl-reference.md).
 
+The execution examples below describe the candidate after WO-KIS-009. A repository
+still governed by an earlier release must follow its installed procedure until
+normal upgrade; this note grants no new meaning to an older approval.
+
 ## What the command does
 
 `harnessctl check` answers one question about one selected artifact at one
@@ -36,7 +40,7 @@ harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... \
 What it does **not** do:
 
 - it changes no lifecycle state; `harnessctl transition --apply` does that,
-  after the accountable person decides;
+  under the authority required by the installed policy;
 - it approves, verifies, releases, commits, pushes, or publishes nothing;
 - without a checkpoint it picks the single `in_progress` work order when you
   name none, and carries the execution context (reading manifest, governing
@@ -47,12 +51,10 @@ What it does **not** do:
   rule, procedure and next step (the former `focus` command, kept as an alias
   through 0.10.0 and removed after it; since 0.15.0 the parser refuses the
   name as it refuses any unknown command);
-- it does not decide; it names the decision that is due and who owns it;
-  for a work order carrying `[delegation] class = "execution"` at the pull
-  request's base it also says whether that decision is the actor's own: the
-  delegated command when the required check is green, a response naming
-  the check and its conclusion when it is not (see
-  [the delegation class](delegation-class.md)).
+- it does not decide; it names the next command or accountable decision.
+  New work-order approval authorizes routine execution for a person or agent.
+  Local checks read that approval and its scope, with no route switch or live
+  CI dependency (see [one execution route](delegation-class.md)).
 
 ## The five checkpoints
 
@@ -66,7 +68,7 @@ one needs different inputs and evaluates different gates.
 | `transition` | to preview exactly what `transition --set ID=STATE` will evaluate | `--target STATE` | the predicates bound to that artifact family and target state in `QUALITY_GATES.json`, plus the structural `QGS-*` checks |
 | `handoff` | when an `in_progress` work order's implementation is offered for completion | a change set (see below) | `QG-G4-IMPLEMENTATION-EVIDENCE`: status, graph, integrity, scope, change-set completeness, path scope, review preflight, evidence packet |
 | `scope` | on every pull request, whatever the work order's state; also by hand, to ask "is this diff inside scope?" | a change set (see below) | the three scope predicates of `QG-G4-IMPLEMENTATION-EVIDENCE` only: `QGP-G4I-SCOPE`, `QGP-G4I-COMPLETE`, `QGP-G4I-PATHS`; nothing is written |
-| *(none)* | to ask "which rule applies and what is next?" without evaluating anything — the procedure steps `STEP-WO-START-FOCUS`, `STEP-FOCUS-SELECTED`, `STEP-FOCUS-RELATED`, `STEP-REMEDIATE-FOCUS` | `--include-background` optionally | no gate; the rule, procedure, current step, decision required and background count |
+| *(none)* | to ask "which rule applies and what is next?" without evaluating anything — the procedure steps `STEP-WO-START-FINAL-FOCUS`, `STEP-FOCUS-SELECTED`, `STEP-FOCUS-RELATED`, `STEP-REMEDIATE-FOCUS` | `--include-background` optionally | no gate; the rule, procedure, current step, decision required and background count |
 
 Each gate declares the checkpoints at which it applies. A rule whose gate is
 not declared for the requested checkpoint is refused with `WEX210: gate
@@ -93,6 +95,7 @@ verification record selects `WFL-WO-READY-VREC`, never `WFL-WO-PREPARE-VREC`.
 | --- | --- | --- | --- | --- | --- | --- |
 | `WFL-WO-READY-VREC` | work order | `implemented` | VREC `ready` | `PROC-FOCUS-RELATED` | `QG-G4-ASSURANCE-DECISION` | `DR-VREC-DECIDE` |
 | `WFL-WO-VERIFIED-VREC` | work order | `implemented` | VREC `verified` or `released` | `PROC-DELIVERY-SELECT` (`PROC-REPOSITORY-INTEGRATION`, `PROC-PREPARE-RELEASE`) | `QG-G4-VERIFIED-COVERAGE` | `DR-DELIVERY-SELECT` |
+| `WFL-WO-NO-VREC` | work order | `implemented`, assurance `not_required` | no ready or accepted VREC | `PROC-FOCUS-SELECTED` | none | `DR-RELATED-RECORD-SELECT` |
 | `WFL-WO-PREPARE-VREC` | work order | `implemented` | none | `PROC-WO-PREPARE-VREC` | `QG-G4-CANDIDATE-READY` | `DR-VREC-PREPARE` |
 | `WFL-WO-START` | work order | `approved` | | `PROC-WO-START` | `QG-G3-WORK-AUTHORIZATION` | `DR-WO-START` |
 | `WFL-WO-IMPLEMENT` | work order | `in_progress` | | `PROC-WO-IMPLEMENT` | `QG-G4-IMPLEMENTATION-EVIDENCE` | `DR-WO-COMPLETE` |
@@ -120,9 +123,10 @@ them.
 
 The procedure is a typed list of steps, each either a `command` (an argument
 array the harness can run) or a `decision` (a decision right and its permitted
-outcomes). `check` reports the step the procedure is at: after a passing
-`start` or `handoff` check that is the decision step; after a blocked one it
-is the command to retry (the preflight or the check itself).
+outcomes). `check` reports the next step: a passing `start` check leads to the
+transition preview, and a passing `handoff` check leads to completion preview.
+A blocked check gives the correction or retry. Execution completion does not
+grant owner assurance acceptance. Work classified `not_required` needs no new VREC.
 
 ## Gates and predicates by checkpoint
 
@@ -150,6 +154,8 @@ The predicate names say what they read:
 - `*-GRAPH`: the formal artifact graph validates with no error;
 - `*-INTEGRITY`: the installed managed files match the lock (`doctor`);
 - `*-SCOPE`: the work order declares a non-empty `[execution_scope].paths`;
+  execution checkpoints also require its recorded owner approval and unchanged
+  scope. The read-only `scope` checkpoint grants no execution authority;
 - `*-PREFLIGHT`: the start or review preflight of the work order is clean;
 - `*-AUTHORING`: the definition meets the authoring policy;
 - `G4I-COMPLETE`, `G4I-PATHS`: the change set is complete and inside scope;
@@ -199,7 +205,7 @@ The result has exactly two outcomes.
 - **Completed.** Every gate passed and no repository-level error was
   present. The block names the decision now due (`Decision required`), the
   decision right, the permitted outcomes, and one `Command or response` — for
-  a handoff, `Mark WO-... implemented`. With `--from-git`, the result is
+  a handoff, the completion preview command under the recorded approval. With `--from-git`, the result is
   retained as `handoff.json` beside the evidence packet, and its
   `result_sha256` is the value a pull-request body declares as
   `Harness-Restitution`. The retained path is a member of the evaluated
@@ -244,11 +250,11 @@ same checkout did not raise it.
 1. The work order is `approved`. `harnessctl check . --artifact WO-X` selects
    it and names `PROC-WO-START`.
 2. `harnessctl check . --artifact WO-X --checkpoint start` evaluates
-   `QG-G3-WORK-AUTHORIZATION`. Completed: the decision `DR-WO-START` is due.
-3. The accountable person decides; `harnessctl transition . --set
-   WO-X=in_progress --decision WO-X=engineering-owner --apply` applies it
-   after evaluating the same predicates as `check --checkpoint transition
-   --target in_progress`.
+   `QG-G3-WORK-AUTHORIZATION`, including recorded approval and unchanged scope.
+3. The executor previews, then applies `harnessctl transition . --set
+   WO-X=in_progress --decision WO-X=delegated-executor --apply` under that
+   approval. Use the actual executor identity when known. Apply evaluates the
+   same predicates as `check --checkpoint transition --target in_progress`.
 4. Implementation happens inside the declared scope.
 5. `harnessctl evidence . --artifact WO-X --checkpoint handoff` writes the
    packet header bound to the current formal snapshot; the body is written by
@@ -258,14 +264,14 @@ same checkout did not raise it.
 6. `harnessctl check . --artifact WO-X --checkpoint handoff --from-git
    main` rebinds the packet if the formal snapshot moved, then evaluates
    `QG-G4-IMPLEMENTATION-EVIDENCE` over the Git-derived change set with the
-   retained result path included. Completed: `DR-WO-COMPLETE` is due;
+   retained result path included. A passing result gives the completion preview;
    `handoff.json` is retained; this one run's `result_sha256` is the declared
    digest, and `harnessctl pr-body` emits the body carrying it.
-7. The accountable person decides; `transition --set WO-X=implemented
-   --apply`. From here the rule for the work order changes
-   (`WFL-WO-PREPARE-VREC`), and the handoff checkpoint no longer applies to
-   it: the next checks are `pre-action` checks of the verification
-   procedures, on the verification record. The pull request's managed gate
+7. The executor previews, then applies `transition . --set WO-X=implemented
+   --decision WO-X=delegated-executor --apply`. Required verification preparation
+   follows `WFL-WO-PREPARE-VREC`; assurance `not_required` instead selects
+   `WFL-WO-NO-VREC` and execution is complete. Owner acceptance of a prepared
+   record remains a separate decision. The pull request's managed gate
    keeps running `check --checkpoint scope --from-git` on every push, so
    the completion commit, the verification record and its verification are
    still held to the declared scope; only the digest comparison stops.

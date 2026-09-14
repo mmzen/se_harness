@@ -12,29 +12,19 @@ arguments, stdout/stderr, state readbacks and hashes remain reviewable. A fresh
 behavioral repeat needs an agent, the skill, those raw inputs and isolated tool
 access. It must record actual calls and effects, including absent actions.
 
-## Live delegation supplement
+## Execution checks
 
-Run `run_live_delegation.py` with an independently verified external 0.16.0 or
-0.17.0 evaluator's absolute Python and `-I -B`, from outside the checkout. Pass
-`--source ABSOLUTE_CHECKOUT --sandbox NEW_DIRECTORY --evidence NEW_DIRECTORY`.
-The source must contain the fixed historical commits named in the script.
+Current candidate execution is covered by the public workflow and capture tests
+in `tests/test_delegation_class.py` and `tests/test_revision_provenance.py`.
+They exercise local approval, unchanged scope, normal execution and preparation
+without requiring GitHub. Skill review follows the installed policy and returned
+commands; a scripted command replay is not independent evidence of model behavior.
 
-This runner clones locally, changes refs only in disposable clones, and reads
-real public GitHub check results. It never pushes a fixture or changes lifecycle
-state. It probes the existing released guard's three delegated rights, four
-non-delegated rights, branch-only class and unpublished-head refusals. It is
-explicitly separate from observing an agent's choices and from actually applying
-start, completion or VREC preparation.
-
-The frozen published commit is historical evidence. If its remote check is no
-longer available, the run fails; it must not substitute a fabricated passing
-check or another commit. Requires Git, local checkout access and GitHub read
-access. The temporary child-process Git config trusts only the exact source
-checkout/Git-directory paths; it does not change the user's Git configuration.
-
-Retain failed setup attempts and successful repeats separately. Neither this
-runner nor command replay registers native host hooks or qualifies live plugin
-activation.
+The previous live-CI guard supplement tested the retired 0.16/0.17 execution
+restriction. Its runner was removed by WO-KIS-009; the original source remains
+in Git history before this work order, and its recorded observations remain
+historical evidence under WO-PLG-010. Do not rerun that old oracle as a current
+execution qualification.
 
 ## Portable command replay
 

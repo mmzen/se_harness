@@ -39,7 +39,8 @@ An unchecked next step supplies no decision. These references route to
 `WORKFLOW.json`, `DECISION_RIGHTS.md` and `ARTIFACT_AUTHORING.md`; they neither
 replace those contracts nor authenticate their inputs.
 
-Continue covered work without another skill invocation or duplicate approval.
+Continue the selected approved execution under its installed policy without
+another skill invocation or duplicate start, completion or preparation approval.
 If an operation is interrupted, inspect current files and lifecycle history
 before retrying. For a WO, VREC, RLS or DEC, also use checkpoint-free
 `check --artifact ID`; that command does not accept definition artifacts.
