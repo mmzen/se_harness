@@ -104,7 +104,8 @@ jobs:
         if: always() && steps.source_evidence.outputs.artifact-url != ''
         env:
           ARTIFACT_URL: ${{ steps.source_evidence.outputs.artifact-url }}
-        run: echo "Source summary and full test log (14 days; deletion may expire it earlier): $ARTIFACT_URL" >> "$GITHUB_STEP_SUMMARY"
+        run: |
+          echo "Source summary and full test log (14 days; deletion may expire it earlier): $ARTIFACT_URL" >> "$GITHUB_STEP_SUMMARY"
       - name: Export and build the one non-promotable candidate wheel
         env:
           CANDIDATE_VERSION: ${{ steps.candidate.outputs.version }}

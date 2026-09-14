@@ -55,6 +55,7 @@ paths = [
   "tests/test_evidence_inventory.py",
   "tests/test_release_evidence_audit.py",
   "tests/test_release_qualification.py",
+  "tests/test_standard_repository_lifecycle.py",
 ]
 
 [relations]
@@ -151,3 +152,5 @@ Leave assurance, release, publication, merge and live adoption decisions to thei
 ## Bounded implementation scope amendment — 2026-09-14
 
 The accepted K31 implementation uses `scripts/record_evidence.py` beside the inventory command to capture a short summary and a separate full test log. Add this exact repository-owned helper to the execution scope under the approved decision envelope. It implements the existing retention contract without changing assurance, publication, or historical archive authority.
+
+The full suite also identified one workflow command-spelling assertion in `tests/test_standard_repository_lifecycle.py`. Add that exact test file to scope to allow the existing full-suite command to run through the evidence helper. Its test count, worker count, full scale and non-authoritative role remain checked.
