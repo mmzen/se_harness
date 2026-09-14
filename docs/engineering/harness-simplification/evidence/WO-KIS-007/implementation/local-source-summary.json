@@ -1,0 +1,35 @@
+{
+  "candidate": "9f734ab129d2328c89baddb549c4c40d60b8bec3",
+  "working_tree": "clean",
+  "command": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "scripts/run_tests.py",
+    "--workers",
+    "4",
+    "--scale",
+    "full",
+    "--timings",
+    "../work/kis007-final-timings.json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+  "checker": {
+    "version": "0.18.0",
+    "origin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea\\se_harness\\__init__.py"
+  },
+  "started_at": "2026-09-14T18:49:29.330799+00:00",
+  "exit_code": 0,
+  "result": "pass",
+  "output_tail": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-h99s1_10\\private\\verity-plane\\evaluator\\Scripts\\python.exe\r\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-h99s1_10\\private\\verity-plane\\evaluator\\Scripts\\python.exe\r\n--workers must be at least 1\r\nWEX_SCALE artifacts=100 validation=0.102210s focus=0.174564s plan=0.194269s\r\nWEX_SCALE artifacts=500 validation=0.442751s focus=0.500554s plan=0.917602s\r\nWEX_SCALE artifacts=1000 validation=0.970338s focus=1.041967s plan=1.776553s\r\ndocs/notes/diagnostic-codes.md matches the source\r\n----------------------------------------------------------------------\r\nRan 1063 tests in 139.734s (171 classes, 4 workers)\r\n\r\nOK (skipped=15)\r\n",
+  "raw": {
+    "file": "output.log",
+    "bytes": 709,
+    "artifact": "candidate-source-raw",
+    "repository": null,
+    "run_id": null,
+    "run_url": null,
+    "retention_days": 14,
+    "estimated_expiry": "2026-09-28T18:49:29.330799+00:00",
+    "availability": "local only",
+    "download_command": null
+  }
+}

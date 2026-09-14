@@ -1,0 +1,50 @@
+[
+  {
+    "id": 10363459021,
+    "node_id": "MDg6QXJ0aWZhY3QxMDM2MzQ1OTAyMQ==",
+    "name": "candidate-source-raw",
+    "size_in_bytes": 1356,
+    "url": "https://github.com/mmzen/se_harness/actions/runs/34883443071/artifacts/10363459021",
+    "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/10363459021/zip",
+    "expired": false,
+    "digest": "sha256:ac30be15e242cbf27438d71412740ebb96e16b46763e587e3860fa37352335d7",
+    "created_at": "2026-09-14T18:53:08Z",
+    "updated_at": "2026-09-14T18:53:08Z",
+    "expires_at": "2026-09-28T18:53:07Z",
+    "workflow_run": {
+      "id": 34883443071,
+      "repository_id": 1330601788,
+      "head_repository_id": 1330601788,
+      "head_branch": "work/kiss-007-test-cuts-20260914-f0cd48ea",
+      "head_sha": "9f734ab129d2328c89baddb549c4c40d60b8bec3"
+    },
+    "observed_at": "2026-09-14T18:58:41.727363+00:00",
+    "download_verified": true,
+    "head_commit": "9f734ab129d2328c89baddb549c4c40d60b8bec3",
+    "tested_merge_commit": "4769aae3f58028ff435037ff03e6c4333fd1fe88"
+  },
+  {
+    "id": 10363756648,
+    "node_id": "MDg6QXJ0aWZhY3QxMDM2Mzc1NjY0OA==",
+    "name": "upgrade-rehearsal-Windows",
+    "size_in_bytes": 5931,
+    "url": "https://github.com/mmzen/se_harness/actions/runs/34883443071/artifacts/10363756648",
+    "archive_download_url": "https://api.github.com/repos/mmzen/se_harness/actions/artifacts/10363756648/zip",
+    "expired": false,
+    "digest": "sha256:cc126d0603affd7952d62268795143c7c7d62806bcad4ed741b265c0174fc834",
+    "created_at": "2026-09-14T18:55:22Z",
+    "updated_at": "2026-09-14T18:55:22Z",
+    "expires_at": "2026-09-28T18:55:22Z",
+    "workflow_run": {
+      "id": 34883443071,
+      "repository_id": 1330601788,
+      "head_repository_id": 1330601788,
+      "head_branch": "work/kiss-007-test-cuts-20260914-f0cd48ea",
+      "head_sha": "9f734ab129d2328c89baddb549c4c40d60b8bec3"
+    },
+    "observed_at": "2026-09-14T18:58:41.728282+00:00",
+    "download_verified": true,
+    "head_commit": "9f734ab129d2328c89baddb549c4c40d60b8bec3",
+    "tested_merge_commit": "4769aae3f58028ff435037ff03e6c4333fd1fe88"
+  }
+]
