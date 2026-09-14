@@ -16,7 +16,7 @@ The packet includes one shared replacement specification, an architecture decisi
 - [Exact coverage](coverage.md), [replacement rules and compatibility](specifications/SPEC-KIS-001.md), [verification plan](verification/VER-KIS-001.md).
 - [Recorded request](evidence/WO-KIS-001/governance/owner-request.md) and [accepted review](evidence/WO-KIS-001/governance/accepted-review.md).
 
-The owner started WO-KIS-001 after merging the approved packet. It is implemented, owner-verified and merged. WO-KIS-002 is implemented, owner-verified and merged. WO-KIS-003 is implemented, owner-verified and merged. WO-KIS-004 is implemented, owner-verified and merged. WO-KIS-005 is implemented, owner-verified and merged. WO-KIS-006 is implemented, owner-verified and merged. WO-KIS-007 is implemented; it is the final approved work order.
+The owner started WO-KIS-001 after merging the approved packet. It is implemented, owner-verified and merged. WO-KIS-002 is implemented, owner-verified and merged. WO-KIS-003 is implemented, owner-verified and merged. WO-KIS-004 is implemented, owner-verified and merged. WO-KIS-005 is implemented, owner-verified and merged. WO-KIS-006 is implemented, owner-verified and merged. WO-KIS-007 is implemented and owner-verified; it is the final approved work order.
 
 [WO-KIS-001 implementation evidence](evidence/WO-KIS-001/implementation/README.md) records the first eight cuts, passing local checks and passing hosted CI. [VREC-KIS-001](verification-records/VREC-KIS-001.md) was verified by the owner and merged in PR #467; it binds the completion commit whose hosted checks all passed.
 
@@ -34,4 +34,4 @@ Historical archive work assesses existing bundles and shrinks new evidence; it d
 
 [WO-KIS-006 implementation evidence](evidence/WO-KIS-006/implementation/README.md) records small summaries, downloadable raw results and the historical archive assessment. Hosted checks passed; [VREC-KIS-006](verification-records/VREC-KIS-006.md) is verified by the owner. Integrated in PR #472.
 
-[WO-KIS-007 implementation evidence](evidence/WO-KIS-007/implementation/README.md) records the test cuts. Full validation and hosted checks passed; [VREC-KIS-007](verification-records/VREC-KIS-007.md) is ready for owner verification.
+[WO-KIS-007 implementation evidence](evidence/WO-KIS-007/implementation/README.md) records the test cuts. Full validation and hosted checks passed; [VREC-KIS-007](verification-records/VREC-KIS-007.md) is verified by the owner. Repository integration is pending in PR #473.
