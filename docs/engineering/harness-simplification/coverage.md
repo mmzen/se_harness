@@ -56,3 +56,5 @@ WO-KIS-002: all seven selected outcomes are implemented and pass local checks; s
 [WO-KIS-003 implementation evidence](evidence/WO-KIS-003/implementation/README.md) records ten cuts and passing local source/package checks. Hosted checks passed; [VREC-KIS-003](verification-records/VREC-KIS-003.md) is verified by the owner. Integrated in PR #469.
 
 [WO-KIS-004 implementation evidence](evidence/WO-KIS-004/implementation/README.md) records four cuts and passing local source/package checks. Hosted checks passed; [VREC-KIS-004](verification-records/VREC-KIS-004.md) is verified by the owner. Integrated in PR #470.
+
+[WO-KIS-005 implementation evidence](evidence/WO-KIS-005/implementation/README.md) records five cuts and passing local source/package checks. Hosted checks and owner verification are pending.

@@ -1,0 +1,44 @@
+{
+  "candidate": "3c4da9abda8cdd77da21dbf83bd4fa1cffc640dd",
+  "checker_version": "0.18.0",
+  "checker_origin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\kis005-package-3c4da9abda8c\\installed\\Lib\\site-packages\\se_harness\\candidate_acceptance.py",
+  "wheel_sha256": "cfc53430122344bb1c58a88cc9c888dccb13caf8716ebe90403e6cbad27d5f20",
+  "unrelated_bytes": 268435456,
+  "snapshots": [
+    {
+      "target": "customized",
+      "files": 42,
+      "bytes": 228470
+    },
+    {
+      "target": "customized",
+      "files": 42,
+      "bytes": 228470
+    },
+    {
+      "target": "initialized",
+      "files": 42,
+      "bytes": 228443
+    },
+    {
+      "target": "initialized",
+      "files": 42,
+      "bytes": 228443
+    }
+  ],
+  "scenarios": [
+    "installed-identity",
+    "init",
+    "adopt",
+    "doctor",
+    "validate",
+    "dashboard",
+    "safe-upgrade",
+    "customized-content-refusal",
+    "corrupted-integrity-refusal",
+    "authority-denial"
+  ],
+  "outside_target_refused": true,
+  "seconds": 14.281,
+  "purpose": "Installed candidate test of the new acceptance runner; no governing authority"
+}
