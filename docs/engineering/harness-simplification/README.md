@@ -30,4 +30,4 @@ Historical archive work assesses existing bundles and shrinks new evidence; it d
 
 [WO-KIS-004 implementation evidence](evidence/WO-KIS-004/implementation/README.md) records four cuts and passing local source/package checks. Hosted checks passed; [VREC-KIS-004](verification-records/VREC-KIS-004.md) is verified by the owner. Integrated in PR #470.
 
-[WO-KIS-005 implementation evidence](evidence/WO-KIS-005/implementation/README.md) records five cuts and passing local source/package checks. Hosted checks passed; verification preparation is next.
+[WO-KIS-005 implementation evidence](evidence/WO-KIS-005/implementation/README.md) records five cuts and passing local source/package checks. Hosted checks passed; [VREC-KIS-005](verification-records/VREC-KIS-005.md) is ready for owner verification.
