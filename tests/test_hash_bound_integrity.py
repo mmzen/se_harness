@@ -1,15 +1,14 @@
 """Assurance for declared hash-bound text classes and their doctor assessment.
 
 Digests asserted here are computed over bytes this module reads itself, never
-over a value the implementation under test reports. The expected inventory is
-derived from digest fields recorded in governed artifacts rather than from the
-declaration, so a class missing from the declaration is visible rather than
-definitionally absent.
+over a value the implementation under test reports. Small byte examples cover
+LF/CRLF equivalence; one real checkout exercises each supported host OS.
 """
 
 from __future__ import annotations
 
 import json
+import os
 import re
 import subprocess
 import sys
@@ -52,8 +51,6 @@ DECLARATION_PATH = ROOT / "se_harness" / "hash_bound_classes.json"
 TEMPLATE_FRAGMENT = ROOT / "templates" / "repository" / "standard" / "gitattributes.fragment"
 ATTRIBUTES = ROOT / ".gitattributes"
 LOCK = ROOT / ".engineering-harness.lock"
-AUTOCRLF_VALUES = ("true", "input", "false")
-DIGEST_FIELD = re.compile(r"^\s*([a-z][a-z0-9_]*_sha256)\s*=", re.MULTILINE)
 SPECIFIED_CLASSES = {
     "evaluator-evidence": (
         ("docs/engineering/**/evidence/*.json",),
@@ -89,8 +86,6 @@ UPGRADE_WORK_ORDER = (
 # artifact and the commit is the tree it was taken over.
 RECORDED_PRIOR_LOCK_SHA256 = "c4c4191998cad431620324dba2ad205c190fcf2802847278cabec92e853989af"
 RECORDED_PRIOR_LOCK_COMMIT = "842ad90869ac153dc7aa407611992f066de78dd5"
-LOCK_PRODUCERS = ("se_harness", "repository_tools", "scripts")
-LOCK_WRITE = re.compile(r"([\w.\[\]\"'()]*[Ll]ock[\w.\[\]\"'()]*)\.write_text\(")
 SYNTHETIC_FILES = {
     "docs/engineering/x/evidence/a.json": b'{"a": 1}\n',
     ".engineering-harness.lock": b'{"schema": 3}\n',
@@ -256,18 +251,6 @@ def worktree_state(root: Path) -> dict[str, bytes]:
     }
 
 
-
-
-def _leaf_strings(value: object) -> list[str]:
-    if isinstance(value, str):
-        return [value]
-    if isinstance(value, list):
-        return [item for entry in value for item in _leaf_strings(entry)]
-    if isinstance(value, dict):
-        return [item for entry in value.values() for item in _leaf_strings(entry)]
-    return []
-
-
 class LoaderFailClosedTests(unittest.TestCase):
     cases = {
         "overlapping-classes.json": None,
@@ -391,11 +374,6 @@ class CheckContractTests(unittest.TestCase):
         )
         self.assertEqual(CHECK_NAMES, tuple(name for name, _, _ in assess(ROOT)))
 
-    def test_no_new_diagnostic_code_family(self) -> None:
-        # Product-source read (TST-HYG-011): SPEC-HBI-001 rule 8, the assessment introduces no
-        # diagnostic code family of its own.
-        source = (ROOT / "se_harness" / "hash_bound.py").read_text(encoding="utf-8")
-        self.assertIsNone(re.search(r"\b[A-Z]{2,}\d{3}\b", source))
 
     @unittest.skipUnless(git_available(), "git is unavailable")
     def test_doctor_surfaces_the_checks_in_order(self) -> None:
@@ -564,65 +542,25 @@ class ByteExactSurfaceTests(unittest.TestCase):
             self.assertEqual("unspecified", outside.get("text"), outside)
 
 
-
-
-
-
 @unittest.skipUnless(git_available(), "git is unavailable")
-class FreshCheckoutMatrixTests(unittest.TestCase):
-    """Clone a committed repository per core.autocrlf value and read the bytes."""
+class FreshCheckoutTests(unittest.TestCase):
+    """One real checkout on the running OS, plus small byte-level newline checks."""
 
-    @classmethod
-    def setUpClass(cls) -> None:
-        cls.directory = tempfile.TemporaryDirectory()
-        base = Path(cls.directory.name)
-        cls.source = base / "source"
-        cls.source.mkdir()
-        build_source(cls.source, committed_attributes())
-        cls.clones = {}
-        for value in AUTOCRLF_VALUES:
-            cls.clones[value] = clone(cls.source, base / f"clone-{value}", value)
-
-    @classmethod
-    def tearDownClass(cls) -> None:
-        for value in AUTOCRLF_VALUES:
-            git(cls.clones[value], "gc", "--aggressive", "--prune=now", check=False)
-        try:
-            cls.directory.cleanup()
-        except OSError:
-            pass
-
-    def test_raw_class_bytes_survive_every_checkout_configuration(self) -> None:
-        declaration = load_declaration()
-        for value in AUTOCRLF_VALUES:
-            root = self.clones[value]
-            for relative in hash_bound.tracked_paths(root):
-                if relative == ".gitattributes" or relative == "README.md":
-                    continue
-                item = resolve_class(relative, declaration)
-                blob = git(root, "cat-file", "blob", f"HEAD:{relative}", binary=True)
-                worktree = (root / relative).read_bytes()
-                with self.subTest(autocrlf=value, path=relative, mode=item.mode):
-                    if item.mode == RAW_MODE:
-                        self.assertEqual(blob, worktree)
-                        self.assertEqual(raw_sha256(blob), raw_sha256(worktree))
-                    else:
-                        self.assertEqual(
-                            canonical_sha256(blob), canonical_sha256(worktree)
-                        )
-
-    def test_canonical_class_tolerates_a_crlf_checkout(self) -> None:
-        root = self.clones["true"]
-        worktree = (root / ".engineering-harness.lock").read_bytes()
-        blob = git(root, "cat-file", "blob", "HEAD:.engineering-harness.lock", binary=True)
-        self.assertEqual(b"\r\n", worktree[-2:])
-        self.assertNotEqual(raw_sha256(blob), raw_sha256(worktree))
-        self.assertEqual(canonical_sha256(blob), canonical_sha256(worktree))
-
-    def test_every_clone_passes_every_check(self) -> None:
-        for value in AUTOCRLF_VALUES:
-            for name, (passed, detail) in results(self.clones[value]).items():
-                with self.subTest(autocrlf=value, check=name):
+    def test_checkout_preserves_raw_evidence_and_canonical_lock_identity(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            source = base / "source"
+            source.mkdir()
+            build_source(source, committed_attributes())
+            autocrlf = "true" if os.name == "nt" else "input"
+            checkout = clone(source, base / "checkout", autocrlf)
+            raw_path = "docs/engineering/x/evidence/a.json"
+            blob = git(checkout, "cat-file", "blob", f"HEAD:{raw_path}", binary=True)
+            self.assertEqual(blob, (checkout / raw_path).read_bytes())
+            lock_blob = git(checkout, "cat-file", "blob", "HEAD:.engineering-harness.lock", binary=True)
+            self.assertEqual(canonical_sha256(lock_blob), canonical_sha256((checkout / ".engineering-harness.lock").read_bytes()))
+            for name, (passed, detail) in results(checkout).items():
+                with self.subTest(check=name):
                     self.assertTrue(passed, detail)
 
     def test_effective_git_info_attributes_are_accepted(self) -> None:
@@ -724,10 +662,6 @@ class AttributeEffectivenessTests(unittest.TestCase):
             self.assertEqual(before, worktree_state(root))
         self.assertTrue(observed[CHECK_ATTRIBUTE_EFFECTIVE][0], observed[CHECK_ATTRIBUTE_EFFECTIVE][1])
         self.assertFalse((Path.cwd() / "pwned").exists())
-
-
-
-
 
 
 class ModeArbitrationTests(unittest.TestCase):
@@ -860,52 +794,9 @@ class LegacyNewlineRetirementTests(unittest.TestCase):
         )
 
 
-class LockCallerAgreementTests(unittest.TestCase):
-    """The remaining lock callers take their mode from the declaration."""
-
-    def test_no_lock_caller_decides_the_mode_locally(self) -> None:
-        # Product-source read (TST-HYG-011): SPEC-HBI-001 rule 5, every caller obtains the mode
-        # from the declared class and none compares digests of its own.
-        # The upgrade-authorization packet loader was retired by WO-REB-027 and the
-        # release-bootstrap old-root validation by WO-REB-028, which deleted the
-        # module that carried the last repository-owned lock comparison. The
-        # mutation guard is the remaining caller and still holds no digest of its
-        # own, and still names the declared path from the declaration's constant.
-        guard = (ROOT / "se_harness" / "mutation_guard.py").read_text(encoding="utf-8")
-        self.assertNotIn("hashlib", guard)
-        self.assertNotIn('".engineering-harness.lock"', guard)
-        for relative in (
-            "repository_tools/release_bootstrap.py",
-            "repository_tools/predecessor_preparation.py",
-            "repository_tools/predecessor_publication.py",
-            "repository_tools/predecessor_assessment.py",
-        ):
-            with self.subTest(module=relative):
-                self.assertFalse((ROOT / relative).exists())
-
-
 class ProducerNewlineTests(unittest.TestCase):
     """A producer of hash-bound text fixes its newlines instead of the platform."""
 
-    def test_every_lock_text_write_declares_its_newline(self) -> None:
-        observed = 0
-        for package in LOCK_PRODUCERS:
-            for path in sorted((ROOT / package).rglob("*.py")):
-                source = path.read_text(encoding="utf-8")
-                for match in LOCK_WRITE.finditer(source):
-                    observed += 1
-                    window = source[match.end() : match.end() + 320]
-                    with self.subTest(path=path.name, receiver=match.group(1)):
-                        self.assertIn('newline="\\n"', window)
-        self.assertGreater(observed, 0)
-
-    def test_the_installer_writes_the_lock_as_explicit_bytes(self) -> None:
-        # Product-source read (TST-HYG-011): SPEC-HBI-001 rule 13, the producer writes explicit
-        # bytes and newlines, through the one serializer (SPEC-ECP-023 ECP-PRM-006).
-        source = (ROOT / "se_harness" / "installer.py").read_text(encoding="utf-8")
-        # WO-ECP-032 (SPEC-ECP-023 ECP-PRM-006): the lock bytes come from integrity's one pretty serializer.
-        self.assertIn("lock_bytes = pretty_json_bytes(lock, ensure_ascii=True)", source)
-        self.assertIn("_atomic_write(lock_path, lock_bytes)", source)
 
     @unittest.skipUnless(git_available(), "git is unavailable")
     def test_an_initialized_lock_carries_no_carriage_return(self) -> None:
@@ -927,21 +818,6 @@ class ProducerNewlineTests(unittest.TestCase):
 
 
 class SafetyTests(unittest.TestCase):
-    def test_no_repository_content_reaches_a_shell(self) -> None:
-        # Product-source read (TST-HYG-011): SPEC-HBI-001 rule 3, a declaration is data and no
-        # repository content reaches a shell.
-        source = (ROOT / "se_harness" / "hash_bound.py").read_text(encoding="utf-8")
-        # WO-ECP-031 (SPEC-ECP-023 ECP-PRM-003): the launch lives in the one launcher, which fixes shell=False.
-        launcher = (ROOT / "se_harness" / "_process.py").read_text(encoding="utf-8")
-        self.assertIn("from se_harness._process import run_git", source)
-        self.assertIn("shell=False", launcher)
-        self.assertNotIn("shell=True", launcher)
-        self.assertNotIn("shell=True", source)
-        self.assertNotIn("os.system", source)
-        self.assertNotIn("os.popen", source)
-        self.assertNotIn("importlib", source)
-        self.assertNotIn("__import__", source)
-
     @unittest.skipUnless(git_available(), "git is unavailable")
     def test_unsafe_declared_path_shapes_are_refused(self) -> None:
         for pattern in ("/docs/a.json", "docs/../a.json", "docs/a\nb.json", "docs/a;b.json"):
@@ -997,12 +873,6 @@ class UnmodifiedBehaviourTests(unittest.TestCase):
         self.assertEqual(CANONICAL_MODE, integrity.HASH_MODE)
         self.assertEqual(3, integrity.LOCK_SCHEMA)
 
-    def test_preflight_diagnostic_codes_are_unchanged(self) -> None:
-        # Product-source read (TST-HYG-011): SPEC-HBI-001 rule 14, the assessment adds nothing to
-        # preflight's codes; the code is the registry's name (SPEC-ECP-023 ECP-PRM-016).
-        source = (ROOT / "se_harness" / "preflight.py").read_text(encoding="utf-8")
-        self.assertIn("PreflightDiagnostic(I001", source)  # the code is the registry's name (ECP-PRM-016)
-        self.assertNotIn("hash-bound", source.split("def _hash_bound_checks")[0])
 
     @unittest.skipUnless(git_available(), "git is unavailable")
     def test_cli_help_still_lists_doctor(self) -> None:

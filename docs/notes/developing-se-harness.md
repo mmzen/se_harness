@@ -66,6 +66,8 @@ Since `WO-DST-024` (`SPEC-DST-025`) the candidate's validator, Explorer generato
 
 ## Ordinary development checks
 
+See [what the tests should protect](test-suite.md) for the simplified test scope and the Windows/Linux checks.
+
 Use the commands confirmed by the owner-controlled region of `AGENTS.md`:
 
 ```powershell

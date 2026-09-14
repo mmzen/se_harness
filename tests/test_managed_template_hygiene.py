@@ -1,11 +1,4 @@
-"""REQ-DST-072 to REQ-DST-075 / SPEC-DST-027 (WO-DST-026): the managed template's
-failure surface, header and pins, the gitignore markers, the environment inventory.
-
-DST-MWF-012 pins rules 001 to 008 by parsing the standard template and by driving
-the installer; DST-MWF-011 pins the inventory of environment variables the package
-reads against the specifications that name them.
-"""
-
+"""Managed workflow behavior, action pins and preservation of owner gitignore content."""
 from __future__ import annotations
 
 import json
@@ -33,18 +26,9 @@ from tests.mutation_guard_support import patch_mutation_authority
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE = REPOSITORY_ROOT / "templates/repository/standard/.github/workflows/engineering-harness.yml"
-PACKAGE_ROOT = REPOSITORY_ROOT / "se_harness"
-ENGINEERING_ROOT = REPOSITORY_ROOT / "docs/engineering"
 
 #: SPEC-CIP-003 CIP-ONE-006, reused by DST-MWF-005: a full commit digest and the exact tag.
 PIN_FORM = re.compile(r"^[\w.-]+/[\w./-]+@[0-9a-f]{40} # v\d+\.\d+\.\d+(?:\.post\d+)?$")
-
-#: DST-MWF-011: the environment names read under se_harness/ today, each named in a
-#: specification. PYTHONPATH is read by runtime identity; local delegation
-#: no longer reads a rehearsal flag or GitHub token (WO-KIS-002).
-SPECIFIED_ENVIRONMENT_NAMES = frozenset({"PYTHONPATH"})
-ENVIRONMENT_READ = re.compile(r"""os\.(?:environ\.get|getenv)\(\s*["']([A-Z_][A-Z0-9_]*)["']|os\.environ\[\s*["']([A-Z_][A-Z0-9_]*)["']\s*\]""")
-
 
 def _template_text() -> str:
     return TEMPLATE.read_text(encoding="utf-8")
@@ -67,8 +51,6 @@ def _step_names(text: str) -> list[str]:
 
 def _uses_lines(text: str) -> list[str]:
     return re.findall(r"(?m)^\s+- uses: (.+)$", text)
-
-
 
 
 class ManagedWorkflowTemplateTests(unittest.TestCase):
@@ -104,9 +86,6 @@ class ManagedWorkflowTemplateTests(unittest.TestCase):
             ["actions/checkout", "actions/setup-python", "actions/upload-artifact"],
             [line.split("@", 1)[0] for line in uses],
         )
-
-
-
 
 
     def test_pr_check_propagates_its_exit_status_directly(self):
@@ -215,39 +194,6 @@ class GitignoreMarkerTests(unittest.TestCase):
         self.assertEqual(1, code)
         self.assertIn("no files were written", output)
         self.assertEqual(edited, (target / ".gitignore").read_bytes())
-
-
-class EnvironmentInventoryTests(unittest.TestCase):
-    """DST-MWF-011: every environment variable read under se_harness/ is specified."""
-
-    def test_every_environment_variable_read_under_the_package_is_specified(self) -> None:
-        found: dict[str, set[str]] = {}
-        for path in sorted(PACKAGE_ROOT.rglob("*.py")):
-            if "__pycache__" in path.parts:
-                continue
-            for match in ENVIRONMENT_READ.finditer(path.read_text(encoding="utf-8")):
-                name = match.group(1) or match.group(2)
-                found.setdefault(name, set()).add(path.relative_to(REPOSITORY_ROOT).as_posix())
-        self.assertEqual(SPECIFIED_ENVIRONMENT_NAMES, set(found), found)
-        specifications = sorted(ENGINEERING_ROOT.glob("*/specifications/SPEC-*.md"))
-        self.assertGreater(len(specifications), 20)
-        for name in sorted(found):
-            with self.subTest(variable=name, read_in=sorted(found[name])):
-                naming = [path.name for path in specifications if name in path.read_text(encoding="utf-8")]
-                self.assertTrue(naming, f"{name} is read but named in no specification")
-
-    def test_the_rehearsal_marker_is_named_where_its_exemption_lives(self) -> None:
-        # DST-MWF-009, DST-MWF-010: the amendment record on SPEC-ECP-006 and the
-        # delegation note both name the variable beside the local-file source.
-        specification = (ENGINEERING_ROOT / "execution-control-plane/specifications/SPEC-ECP-006.md").read_text(encoding="utf-8")
-        self.assertIn("SE_HARNESS_REHEARSAL", specification)
-        self.assertIn("## Amendment record", specification)
-        amendment = specification.split("**`SE_HARNESS_REHEARSAL`", 1)[1]
-        self.assertIn("ECP-DLG-004", amendment)
-        self.assertIn("gate_source.load_configuration", amendment)
-        note = (REPOSITORY_ROOT / "docs/notes/delegation-class.md").read_text(encoding="utf-8")
-        local_file = note.split("`local-file` exists for tests and rehearsals", 1)[1][:400]
-        self.assertIn("SE_HARNESS_REHEARSAL=1", local_file)
 
 
 if __name__ == "__main__":

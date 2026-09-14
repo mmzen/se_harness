@@ -1,26 +1,15 @@
-"""WO-ECP-032 (SPEC-ECP-023 ECP-PRM-006 to ECP-PRM-015): the integrity primitives in one home.
-
-Every byte form a caller wrote before is reproduced by the shared primitive; the
-atomic writers leave a target untouched when interrupted; the closed sets have one
-definition; both wheel parsers apply one grammar; one environment builder serves the
-two qualification runtimes.
-"""
+"""Public byte formats, atomic writes, configuration and package boundaries."""
 
 from __future__ import annotations
 
-import ast
 import json
 import os
-import re
 import tempfile
 import unittest
 from pathlib import Path
 from unittest import mock
 
-from se_harness import candidate_acceptance, integrity, release_qualification, workflow_contract
-from se_harness.installer import HarnessError
-
-REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+from se_harness import candidate_acceptance, integrity, release_qualification
 
 
 class Refusal(RuntimeError):
@@ -73,21 +62,6 @@ class OwnershipLockBoundaryTests(unittest.TestCase):
 
 
 class AtomicWriterTests(unittest.TestCase):
-    def test_directory_flush_closes_on_failure_and_windows_uses_no_directory_handle(self) -> None:
-        directory = Path("unused")
-        with mock.patch.object(integrity.os, "name", "posix"), mock.patch.object(
-            integrity.os, "open", return_value=42
-        ) as opened, mock.patch.object(integrity.os, "fsync", side_effect=OSError("flush failed")), mock.patch.object(
-            integrity.os, "close"
-        ) as closed:
-            with self.assertRaisesRegex(OSError, "flush failed"):
-                integrity.fsync_directory(directory)
-            opened.assert_called_once()
-            closed.assert_called_once_with(42)
-        with mock.patch.object(integrity.os, "name", "nt"), mock.patch.object(integrity.os, "open") as opened:
-            integrity.fsync_directory(directory)
-            opened.assert_not_called()
-
     def test_atomic_write_replaces_and_leaves_the_target_untouched_when_the_replace_fails(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary) / "nested" / "file.txt"
@@ -111,16 +85,6 @@ class AtomicWriterTests(unittest.TestCase):
             self.assertEqual(b"first", target.read_bytes())
             self.assertEqual(["record.md"], sorted(item.name for item in target.parent.iterdir()))
 
-    def test_no_package_module_keeps_a_private_atomic_writer_or_a_tmp_stage(self) -> None:
-        offenders: list[str] = []
-        for path in sorted((REPOSITORY_ROOT / "se_harness").glob("*.py")):
-            if path.name == "integrity.py":
-                continue
-            source = path.read_text(encoding="utf-8")
-            if "mkstemp(" in source or 'with_name(path.name + ".tmp")' in source or "os.fsync(" in source:
-                offenders.append(path.name)
-        self.assertEqual([], offenders)
-
 
 class ConfigurationReaderTests(unittest.TestCase):
     def test_read_toml_tolerates_a_bom_and_names_every_failure(self) -> None:
@@ -134,59 +98,20 @@ class ConfigurationReaderTests(unittest.TestCase):
             with self.assertRaisesRegex(integrity.IntegrityError, "cannot read"):
                 integrity.read_toml(Path(temporary) / "absent.toml")
 
-    def test_the_package_reads_the_configuration_through_one_reader(self) -> None:
-        offenders: list[str] = []
-        for path in sorted((REPOSITORY_ROOT / "se_harness").glob("*.py")):
-            if path.name in {"integrity.py", "front_matter.py", "gate_source.py"}:
-                continue  # the front-matter parser and the owner-owned delegation file have their own TOML loads
-            source = path.read_text(encoding="utf-8")
-            if re.search(r"tomllib\.loads\([^\n]*read_text", source):
-                offenders.append(path.name)
-        self.assertEqual([], offenders)
-
-
-class ClosedSetTests(unittest.TestCase):
-    def test_checkpoint_and_definition_type_sets_have_one_definition(self) -> None:
-        self.assertEqual(("start", "pre-action", "transition", "handoff", "scope"), workflow_contract.CHECKPOINT_ORDER)
-        self.assertEqual(frozenset(workflow_contract.CHECKPOINT_ORDER), workflow_contract.CHECKPOINTS)
-        self.assertEqual(("start", "pre-action", "transition", "handoff"), workflow_contract.EVIDENCE_CHECKPOINTS)
-        offenders: list[str] = []
-        for path in sorted((REPOSITORY_ROOT / "se_harness").glob("*.py")):
-            if path.name == "workflow_contract.py":
-                continue
-            tree = ast.parse(path.read_text(encoding="utf-8"))
-            for node in ast.walk(tree):
-                if isinstance(node, (ast.Set, ast.Tuple, ast.List)) and len(node.elts) >= 4:
-                    values = {item.value for item in node.elts if isinstance(item, ast.Constant)}
-                    if {"start", "pre-action", "transition", "handoff"} <= values or {"intent", "capability", "requirement", "specification", "architecture"} <= values:
-                        offenders.append(f"{path.name}:{node.lineno}")
-        self.assertEqual([], offenders)
-
-    def test_typed_value_sets_exist(self) -> None:
-        from se_harness import installer, preflight
-
-        self.assertEqual({"init", "upgrade"}, set(installer.InstallMode.__args__))
-        self.assertEqual({"start", "review"}, set(preflight.Phase.__args__))
-        self.assertEqual(set(workflow_contract.CHECKPOINT_ORDER), set(workflow_contract.Checkpoint.__args__))
-        self.assertIn("remove", installer.ChangeAction.__args__)
-
 
 class GrammarAndEnvironmentTests(unittest.TestCase):
-    def test_both_wheel_parsers_apply_one_grammar(self) -> None:
-        self.assertIs(candidate_acceptance.VERSION_PATTERN, integrity.WHEEL_VERSION_PATTERN)
-        self.assertIs(release_qualification.VERSION_PATTERN, integrity.WHEEL_VERSION_PATTERN)
+    def test_supported_wheel_version_spelling(self) -> None:
         for version, accepted in (("0.16.0", True), ("0.17.0rc1", True), ("0.5.0a1", True), ("1.2", False), ("v1.2.3", False)):
             with self.subTest(version=version):
                 self.assertEqual(accepted, integrity.WHEEL_VERSION_PATTERN.fullmatch(version) is not None)
 
-    def test_one_environment_builder_denies_pythonpath_and_user_site_for_both_runtimes(self) -> None:
+    def test_package_command_environments_exclude_ambient_pythonpath_and_secrets(self) -> None:
         with mock.patch.dict(os.environ, {"PYTHONPATH": "evil", "PATH": os.environ.get("PATH", ""), "SECRET_TOKEN": "x"}, clear=False):
             for built in (candidate_acceptance.safe_environment(), release_qualification._safe_environment(), candidate_acceptance._environment()):
                 with self.subTest(keys=sorted(built)):
                     self.assertNotIn("PYTHONPATH", built)
                     self.assertNotIn("SECRET_TOKEN", built)
                     self.assertEqual("1", built["PYTHONNOUSERSITE"])
-        self.assertIs(release_qualification._safe_environment, candidate_acceptance.safe_environment)
         self.assertEqual("1", candidate_acceptance._environment()["PIP_NO_INPUT"])
 
 
@@ -197,18 +122,6 @@ class DigestPreservationTests(unittest.TestCase):
             json.dumps({"schema": candidate_acceptance.ACCEPTANCE_SCHEMA, "scenarios": candidate_acceptance.SCENARIO_IDS}, sort_keys=True).encode("utf-8")
         )
         self.assertEqual(recorded, candidate_acceptance.CONTRACT_SHA256)
-
-    def test_no_package_module_hashes_or_serializes_privately(self) -> None:
-        offenders: list[str] = []
-        for path in sorted((REPOSITORY_ROOT / "se_harness").glob("*.py")):
-            if path.name in {"integrity.py", "interpreter_safety.py"}:
-                continue  # SPEC-REB-015 rule 2: the loader imports the standard library only, so it keeps one private digest
-            source = path.read_text(encoding="utf-8")
-            if re.search(r"hashlib\.sha256\([^)]", source):
-                offenders.append(f"{path.name}: sha256")
-            if re.search(r"separators=\(\",\", \":\"\)", source):
-                offenders.append(f"{path.name}: compact json")
-        self.assertEqual([], offenders)
 
 
 if __name__ == "__main__":

@@ -2,10 +2,10 @@
 id = "WO-KIS-007"
 type = "work_order"
 title = "Delete tests for the restrictions we removed"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-13"
-updated = "2026-09-13"
+updated = "2026-09-14"
 
 [delegation]
 class = "execution"
@@ -72,6 +72,13 @@ to = "approved"
 decided_at = "2026-09-13T16:40:43Z"
 decided_by = "engineering-owner"
 reason = "The owner accepted all 38 candidates in the retained 2026-09-13 codebase KISS review and requested the work orders: \"OK ! Let's create the work orders to implement all candidates\". Record the engineering-owner approval of WO-KIS-007 within that accepted scope and the established delegated route. SPEC-KIS-001 makes the replacement contracts and seven retained protections explicit; the coverage map assigns all candidates. This records definition approval or bounded execution delegation only, not implementation start, completion, verification, release, merge, publication, live adoption or historical evidence deletion."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-14T18:37:40Z"
+decided_by = "engineering-owner"
+reason = "The owner confirmed PR #472 merged and continues the approved sequential KISS implementation route. Start the final approved WO-KIS-007 after WO-KIS-006 integration at c3d361353d0e5dea00078dd2413544395d593652. Remove internal-name and obsolete runtime/checkout test restrictions within K32-K34 while retaining public behavior, package import boundaries and real file safety checks."
 +++
 
 # Delete tests for the restrictions we removed

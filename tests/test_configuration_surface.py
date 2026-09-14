@@ -22,25 +22,6 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ".engineering-harness.toml"
 LOCK = ".engineering-harness.lock"
 
-#: SPEC-DST-026 DST-CFG-013: every declared key, beside the module that reads it.
-#: A key with no reader does not belong in a hash-locked file, because the
-#: integrity check would then defend a promise the tool never keeps.
-READERS = {
-    "harness": {
-        # mutation_guard._configured_version; a missing value is MG001.
-        "tool_version": "se_harness/mutation_guard.py",
-        # installer.plan_install carries both values across an upgrade.
-        "installed_at": "se_harness/installer.py",
-        "project_name": "se_harness/installer.py",
-    },
-    "revision_provenance": {
-        # load_revision_policy; E010 for an uncovered verified work order.
-        "required_for_verified_work": "se_harness/engine/validate_engineering_artifacts.py",
-        # workflow_edges.revision_policy; QGS-EDGE closes the release transition.
-        "required_for_release": "se_harness/workflow_edges.py",
-    },
-}
-
 #: SPEC-DST-026 DST-CFG-003 to DST-CFG-005: the keys WO-DST-025 removed, in the
 #: shape released 0.16.0 wrote them.
 RETIRED_CONFIG = (
@@ -90,18 +71,11 @@ class ConfigurationSurfaceTests(unittest.TestCase):
         lock["files"][relative]["sha256"] = canonical_sha256((target / relative).read_bytes())
         lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
-    def test_installed_configuration_declares_only_keys_a_reader_uses(self) -> None:
+    def test_installed_configuration_has_the_requested_values(self) -> None:
         # DST-CFG-001, DST-CFG-002, DST-CFG-012, DST-CFG-013.
         with tempfile.TemporaryDirectory() as temporary:
             target = self.install(temporary, project_name="Example")
             config = tomllib.loads((target / CONFIG).read_text(encoding="utf-8"))
-
-            self.assertEqual(sorted(READERS), sorted(config))
-            for table, readers in READERS.items():
-                self.assertEqual(sorted(readers), sorted(config[table]), table)
-                for key, reader in readers.items():
-                    source = REPOSITORY_ROOT / reader
-                    self.assertIn(key, source.read_text(encoding="utf-8"), f"{key} has no reader in {reader}")
 
             self.assertEqual(__version__, config["harness"]["tool_version"])
             self.assertEqual("Example", config["harness"]["project_name"])

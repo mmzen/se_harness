@@ -389,6 +389,12 @@ jobs:
         run: |
           $result = Get-Content -Raw -LiteralPath (Join-Path (Join-Path '${{ runner.temp }}' 'rehearsal-result-1') 'upgrade-rehearsal-result.json') | ConvertFrom-Json
           "${{ matrix.platform }}=$($result.semantic_sha256)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+      - name: Check Windows checkout and interpreter paths
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          python scripts/record_evidence.py --candidate $env:GITHUB_SHA --output "$env:RUNNER_TEMP/windows-check-evidence" --artifact upgrade-rehearsal-Windows --retention-days 14 -- -m unittest tests.test_hash_bound_integrity.FreshCheckoutTests.test_checkout_preserves_raw_evidence_and_canonical_lock_identity tests.test_interpreter_safety.InterpreterPathsTests -q
+          if ($LASTEXITCODE -ne 0) { throw 'Windows checkout or interpreter path check failed' }
       - name: Retain the bounded upgrade rehearsal evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -397,6 +403,7 @@ jobs:
           path: |
             ${{ runner.temp }}/rehearsal-result-*/upgrade-rehearsal-result.json
             ${{ runner.temp }}/rehearsal-result-*/upgrade-rehearsal-timing.json
+            ${{ runner.temp }}/windows-check-evidence/
           if-no-files-found: warn
           retention-days: 14
       - name: Check plugin migration with the installed candidate
