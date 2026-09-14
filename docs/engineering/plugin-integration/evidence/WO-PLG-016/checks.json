@@ -1,0 +1,416 @@
+{
+  "base": "c047fd865090bba1237df5db6ee18bbc9866348e",
+  "source_suite": {
+    "tests": 1068,
+    "skipped": 15,
+    "outcome": "passed"
+  },
+  "checks": {
+    "full016": {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "scripts/run_tests.py"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "distribution016": {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "graph016-attempt-1": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        ".",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "doctor016": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        ".",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "preflight016": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        ".",
+        "--work-order",
+        "WO-PLG-016",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "help016": {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "onboarding016": {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "tests/plugin_integration/onboarding/run_acceptance.py",
+        "--wheel",
+        "C:/Users/mathi/Documents/Codex/2026-09-12/clo/work/plugin-connect-acceptance-20260915/non-promotable/se_harness-0.18.0-py3-none-any.whl",
+        "--output",
+        "C:/Users/mathi/Documents/Codex/2026-09-12/clo/work/plugin-onboarding-acceptance-20260915"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    }
+  },
+  "walkthrough": {
+    "outcome": "passed",
+    "platform": "win32",
+    "python": "3.14.6",
+    "wheel": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-connect-acceptance-20260915\\non-promotable\\se_harness-0.18.0-py3-none-any.whl",
+    "wheel_sha256": "3f8a49f83659dee4da1d6f17ff5997828f55b2e1e11a5591eb2bc1e8cbc72fc6",
+    "hosts": [
+      {
+        "host": "codex",
+        "version": "codex-cli 0.154.0-alpha.6.2",
+        "checker": "0.18.0",
+        "plugin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\profile\\codex\\plugins\\cache\\verity-local\\verity-plane\\0.0.1+codex.20260911195218",
+        "project": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\project",
+        "load_route": "local marketplace installation",
+        "outcome": "native discovery and direct setup/connection/doctor passed"
+      },
+      {
+        "host": "claude",
+        "version": "2.1.266 (Claude Code)",
+        "checker": "0.18.0",
+        "plugin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\packages\\claude\\verity-plane",
+        "project": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\claude\\project",
+        "load_route": "session --plugin-dir",
+        "outcome": "native discovery and direct setup/connection/doctor passed"
+      }
+    ],
+    "commands": 20,
+    "limits": "Development packages in fresh profiles; no model-driven session, public installation or other-platform claim."
+  },
+  "commands": [
+    {
+      "name": "codex-version",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\bffc5354119c8421\\codex.EXE",
+        "--version"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "codex-marketplace",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\bffc5354119c8421\\codex.EXE",
+        "plugin",
+        "marketplace",
+        "add",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\packages",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "codex-install",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\bffc5354119c8421\\codex.EXE",
+        "plugin",
+        "add",
+        "verity-plane@verity-local",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "codex-discovery",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\bffc5354119c8421\\codex.EXE",
+        "debug",
+        "prompt-input",
+        "Use verity-plane:setup to connect this disposable project."
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "codex-setup",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-I",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\profile\\codex\\plugins\\cache\\verity-local\\verity-plane\\0.0.1+codex.20260911195218\\scripts\\setup.py",
+        "--target",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\project",
+        "--data-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\profile\\plugin-data",
+        "--wheel",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\profile\\codex\\plugins\\cache\\verity-local\\verity-plane\\0.0.1+codex.20260911195218\\packages\\se_harness-0.18.0-py3-none-any.whl"
+      ],
+      "exit_code": 1,
+      "expected": "missing harness"
+    },
+    {
+      "name": "codex-checker-version",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "--version"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "codex-init-preview",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\project",
+        "--project-name",
+        "Plugin walkthrough",
+        "--dry-run",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "codex-init",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\project",
+        "--project-name",
+        "Plugin walkthrough",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "codex-provider-preview",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "skill-ownership",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\project",
+        "--provider",
+        "plugin",
+        "--plugin-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\profile\\codex\\plugins\\cache\\verity-local\\verity-plane\\0.0.1+codex.20260911195218",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "codex-provider",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "skill-ownership",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\project",
+        "--provider",
+        "plugin",
+        "--plugin-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\profile\\codex\\plugins\\cache\\verity-local\\verity-plane\\0.0.1+codex.20260911195218",
+        "--apply",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "codex-doctor",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\codex\\project",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "claude-version",
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.EXE",
+        "--version"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "claude-discovery",
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.EXE",
+        "--plugin-dir",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\packages\\claude\\verity-plane",
+        "plugin",
+        "details",
+        "verity-plane"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "claude-setup",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-I",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\packages\\claude\\verity-plane\\scripts\\setup.py",
+        "--target",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\claude\\project",
+        "--data-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\claude\\profile\\plugin-data",
+        "--wheel",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\packages\\claude\\verity-plane\\packages\\se_harness-0.18.0-py3-none-any.whl"
+      ],
+      "exit_code": 1,
+      "expected": "missing harness"
+    },
+    {
+      "name": "claude-checker-version",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\claude\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "--version"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "claude-init-preview",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\claude\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\claude\\project",
+        "--project-name",
+        "Plugin walkthrough",
+        "--dry-run",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "claude-init",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\claude\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\claude\\project",
+        "--project-name",
+        "Plugin walkthrough",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "claude-provider-preview",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\claude\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "skill-ownership",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\claude\\project",
+        "--provider",
+        "plugin",
+        "--plugin-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\packages\\claude\\verity-plane",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "claude-provider",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\claude\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "skill-ownership",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\claude\\project",
+        "--provider",
+        "plugin",
+        "--plugin-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\packages\\claude\\verity-plane",
+        "--apply",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    },
+    {
+      "name": "claude-doctor",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\claude\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\plugin-onboarding-acceptance-20260915\\claude\\project",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected": 0
+    }
+  ],
+  "corrected_invocation": "The first graph command used an unsupported graph subcommand; the actual released validate command then passed. No repository test was disabled."
+}
