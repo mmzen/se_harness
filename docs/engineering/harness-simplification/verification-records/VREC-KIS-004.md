@@ -2,7 +2,7 @@
 id = "VREC-KIS-004"
 type = "verification_record"
 title = "Verification candidate for WO-KIS-004"
-status = "ready"
+status = "verified"
 owners = ["delegated-executor"]
 created = "2026-09-14"
 updated = "2026-09-14"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/harness-simplification/evidence/WO-KIS-004/i
 evaluator_evidence_path = "docs/engineering/harness-simplification/evidence/VREC-KIS-004-evaluator.json"
 evaluator_evidence_sha256 = "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
 
+verified_at = "2026-09-14T08:30:12Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-KIS-004"]
 conforms_to = ["VER-KIS-001"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-14T08:30:12Z"
+decided_by = "assurance-owner"
+reason = "The owner explicitly decided \"i verify VREC-KIS-004\" on 2026-09-14. Record that assurance-owner decision for candidate 80b205abaa6c1f656dde0c4b7bf93ca849b3dff2 and its retained evidence. All 17 hosted checks passed on ready-record commit eb41c54096242394f386671311b74edc5750842a. Implementation, bound candidate and retained evidence are unchanged; repository integration remains pending in PR #470."
 +++
 
 # Verification Record Candidate
