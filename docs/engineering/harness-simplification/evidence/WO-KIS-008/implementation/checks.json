@@ -1,0 +1,80 @@
+{
+  "source_candidate": "fd91636743ab7c8e8cd8df3395a438a1e14ef566",
+  "base": "e1eb96bf0909d9fdb62a177657af343dc24e9286",
+  "governing_evaluator": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+  "governing_version": "0.17.0",
+  "checks": [
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "unittest",
+        "tests.test_artifact_authoring_policy",
+        "tests.test_instruction_architecture",
+        "tests.test_artifact_catalog",
+        "tests.test_context_routing_retirement"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "name": "focused",
+      "candidate": "fd91636743ab7c8e8cd8df3395a438a1e14ef566",
+      "result_tail": "\n.....................................................\n----------------------------------------------------------------------\nRan 53 tests in 11.728s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "scripts/run_tests.py"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "name": "full",
+      "candidate": "fd91636743ab7c8e8cd8df3395a438a1e14ef566",
+      "result_tail": ".exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-yz2w4oan\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nWEX_SCALE artifacts=100 validation=0.141010s focus=0.226773s plan=0.260349s\nWEX_SCALE artifacts=500 validation=0.704985s focus=0.789081s plan=1.208722s\ndocs/notes/diagnostic-codes.md matches the source\n----------------------------------------------------------------------\nRan 1063 tests in 99.151s (171 classes, 8 workers)\n\nOK (skipped=15)\n--workers must be at least 1\n"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "name": "distribution",
+      "reuse_basis": "Run during this change before the source commit; the distribution records and CLI parser it checks are unchanged.",
+      "result_tail": "SE Harness release distribution validation: PASS (14 distribution-bearing records)\n\n"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "se_harness",
+        "validate",
+        ".",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "name": "candidate-graph",
+      "candidate": "fd91636743ab7c8e8cd8df3395a438a1e14ef566",
+      "result": {
+        "valid": true,
+        "error_count": 0,
+        "warning_count": 46,
+        "artifact_count": 1609
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0,
+      "name": "help",
+      "reuse_basis": "Run during this change before the source commit; the distribution records and CLI parser it checks are unchanged."
+    }
+  ]
+}
