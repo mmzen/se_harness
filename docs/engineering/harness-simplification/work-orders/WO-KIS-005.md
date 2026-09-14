@@ -55,6 +55,7 @@ paths = [
   "scripts/validate_release_distributions.py",
   "se_harness/candidate_acceptance.py",
   "se_harness/codes.py",
+  "se_harness/mutation_guard.py",
   "se_harness/release_qualification.py",
   "tests/test_ci_pipeline.py",
   "tests/test_integration_package.py",
@@ -131,6 +132,14 @@ Historical records remain unchanged; the new applicability table states which ol
 Any additional required implementation file needs a bounded scope amendment, not a blanket repository-wide allowance.
 
 ## Constraints and expected change surface
+
+Bounded scope amendment, 2026-09-14: include `se_harness/mutation_guard.py` to fix
+the Windows console-path lookup found by K25's real installed-wheel acceptance.
+The generated launcher strips `.exe` from `sys.argv[0]`; the guard must inspect
+the existing executable beside that path. This completes the accepted selected-route
+behavior (K18) needed by this slice's upgrade scenario and retains the actual
+origin check. Only this additional implementation file is included; its tests
+already belong to this work order. The installed root is unchanged.
 
 The reviewed baseline is 93677e69dacb08367a7079e3372118c5064087c8. The isolated governing evaluator is released 0.17.0.
 Read this work order, INT-KIS-001, CAP-KIS-001, REQ-KIS-005, SPEC-KIS-001, VER-KIS-001 and the selected architecture/ADR when listed.
