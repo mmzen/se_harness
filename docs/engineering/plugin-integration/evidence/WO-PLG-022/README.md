@@ -26,7 +26,8 @@ old packets and every accepted KISS work order to the amended obligations.
 - The existing source suite passed: 1,067 tests, 15 skips.
 - Distribution validation passed for all 14 distribution-bearing records.
 - Released and candidate graph validation, released doctor, CLI help and review
-  preflight passed. Existing historical-layout warnings remain unrelated.
+  preflight passed. Historical-layout warnings and the old evaluator's writing-style
+  advisories do not block the amendment; candidate checks apply the accepted KISS policy.
 - Local Markdown links, complete changed-path scope and unchanged helper lifecycle
   histories were checked. No historical VREC/RLS or bound evidence file changed.
 
@@ -40,6 +41,11 @@ See [check results](check-results.json) for actual commands and results. Raw loc
 attempts are retained outside the repository in work/plugin-backlog-checks; this
 is a local retention location, not a permanent public archive. Hosted results
 are available through the eventual PR checks.
+
+The released evaluator's [handoff result](handoff.json) passed at candidate
+`c46fa151a165bb3b617c2ec571cacc4c7414d038`. Its next action is the engineering-owner
+completion decision. [PR #477](https://github.com/mmzen/se_harness/pull/477) carries
+the amendment and its hosted checks. This later evidence commit adds no runtime change.
 
 ## Decision boundary
 
