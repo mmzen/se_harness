@@ -1,0 +1,72 @@
+{
+  "head": "9a9cd0dc4630681ea7b842b9078597b703162adf",
+  "pull_request": "https://github.com/mmzen/se_harness/pull/472",
+  "checks": [
+    {
+      "name": "Analyze (actions)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880871076/job/104099552736"
+    },
+    {
+      "name": "validate",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880874869/job/104099560842"
+    },
+    {
+      "name": "Predecessor evaluator assessment",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880874877/job/104099560779"
+    },
+    {
+      "name": "Select release rehearsals",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880875099/job/104099561417"
+    },
+    {
+      "name": "Candidate source evidence",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880874827/job/104099562215"
+    },
+    {
+      "name": "Analyze (javascript-typescript)",
+      "status": "IN_PROGRESS",
+      "conclusion": "",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880871076/job/104099552718"
+    },
+    {
+      "name": "Analyze (python)",
+      "status": "IN_PROGRESS",
+      "conclusion": "",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880871076/job/104099552452"
+    },
+    {
+      "name": "Candidate package evidence",
+      "status": "IN_PROGRESS",
+      "conclusion": "",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880874827/job/104099925666"
+    },
+    {
+      "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880875099/job/104099640271"
+    },
+    {
+      "name": "Rehearse the qualification of the release record / Qualify and replay (release-record)",
+      "status": "IN_PROGRESS",
+      "conclusion": "",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880875099/job/104099640252"
+    },
+    {
+      "name": "CodeQL",
+      "status": "COMPLETED",
+      "conclusion": "NEUTRAL",
+      "url": "https://github.com/mmzen/se_harness/runs/104099763061"
+    }
+  ]
+}

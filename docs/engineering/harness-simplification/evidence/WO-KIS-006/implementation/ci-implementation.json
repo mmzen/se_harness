@@ -1,0 +1,114 @@
+{
+  "head": "b0405a575e9cd5e7bef12625ec4342c763ed51a5",
+  "pull_request": "https://github.com/mmzen/se_harness/pull/472",
+  "checks": [
+    {
+      "name": "Analyze (actions)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880117128/job/104097042072"
+    },
+    {
+      "name": "validate",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880121526/job/104097052575"
+    },
+    {
+      "name": "Predecessor evaluator assessment",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880121864/job/104097054407"
+    },
+    {
+      "name": "Select release rehearsals",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880121886/job/104097053946"
+    },
+    {
+      "name": "Candidate source evidence",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880121535/job/104097052773"
+    },
+    {
+      "name": "Analyze (javascript-typescript)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880117128/job/104097041793"
+    },
+    {
+      "name": "Analyze (python)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880117128/job/104097042206"
+    },
+    {
+      "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880121886/job/104097138580"
+    },
+    {
+      "name": "Candidate package evidence",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880121535/job/104097399787"
+    },
+    {
+      "name": "Rehearse the qualification of the release record / Qualify and replay (release-record)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880121886/job/104097138713"
+    },
+    {
+      "name": "Upgrade rehearsal (Linux)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880121535/job/104097587633"
+    },
+    {
+      "name": "Upgrade rehearsal (Windows)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880121535/job/104097587525"
+    },
+    {
+      "name": "Publication rehearsal",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880121886/job/104097769675"
+    },
+    {
+      "name": "Build deterministic integration package",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880121535/job/104098249502"
+    },
+    {
+      "name": "Verify integration package (Linux)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880121535/job/104098380528"
+    },
+    {
+      "name": "Verify integration package (Windows)",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880121535/job/104098380605"
+    },
+    {
+      "name": "Retain verified integration package",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34880121535/job/104098693591"
+    },
+    {
+      "name": "CodeQL",
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/runs/104097281693"
+    }
+  ]
+}

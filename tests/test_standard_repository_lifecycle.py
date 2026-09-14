@@ -449,7 +449,7 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
         self.assertIn("needs.upgrade-rehearsal.outputs.Linux", workflow)
         self.assertIn("git archive \"$GITHUB_SHA\"", workflow)
         self.assertIn("non-promotable candidate wheel", workflow)
-        self.assertIn("python scripts/run_tests.py --workers 4 --scale full", workflow)  # WO-TST-001
+        self.assertIn("scripts/run_tests.py --workers 4 --scale full", workflow)  # WO-TST-001; K31 captures its output.
         self.assertIn("qualify complete-candidate", workflow)
         self.assertIn("--candidate-commit \"$GITHUB_SHA\"", workflow)
         self.assertIn("complete-candidate-qualification", workflow)
