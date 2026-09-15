@@ -56,7 +56,10 @@ for host, executable in hosts.items():
         print(label, result.returncode, flush=True)
         if expect == "missing-harness":
             assert result.returncode != 0 and not (project / ".engineering-harness.toml").exists(), result.stdout + result.stderr
-            doctor = json.loads(result.stdout)
+            # Setup prints pip progress and its Python path before doctor JSON.
+            _progress, marker, report = result.stdout.partition("\n{")
+            assert marker, result.stdout + result.stderr
+            doctor = json.loads("{" + report)
             assert any(c.get("name") == "ENGINEERING_HARNESS.md" and not c.get("passed") for c in doctor["checks"]), doctor
         else:
             assert result.returncode == expect, result.stdout + result.stderr

@@ -1,0 +1,1222 @@
+{
+  "source_commit": "041e2584e8ed91d05af0ade13b92ab07cfbeea3b",
+  "raw_retention": "Local workspace only; no CI upload claimed.",
+  "commands": [
+    {
+      "label": "marketplace-build",
+      "argv": [
+        "C:/Python313/python.exe",
+        "scripts/build_plugin_marketplace.py",
+        "build",
+        "--repository",
+        ".",
+        "--revision",
+        "041e2584e8ed91d05af0ade13b92ab07cfbeea3b",
+        "--release-revision",
+        "e9db30d930e704ec3e40f3f0bf5e7d18799c0d4d",
+        "--release-record",
+        "docs/engineering/release-0-18-0/releases/RLS-SEH-027.md",
+        "--expected-wheel-sha256",
+        "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+        "--wheel",
+        "C:/Users/hok/Documents/Codex/2026-09-15/clo/work/evaluator-upgrade-018/se_harness-0.18.0-py3-none-any.whl",
+        "--evaluator-python",
+        "C:/Users/hok/Documents/Codex/2026-09-15/clo/work/evaluator-018/Scripts/python.exe",
+        "--output-directory",
+        "C:/Users/hok/Documents/Codex/2026-09-15/clo/outputs/verity-plane-marketplace-governed-0.1.0"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "exit_code": 0,
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\marketplace-build.json",
+        "bytes": 1198,
+        "sha256": "1c71697e9dca447b817bb54914df4b15e91993f3e61660f2c27bd4c601e790a1",
+        "tail": "{\n  \"accepted\": true,\n  \"archives\": {\n    \"verity-plane-claude.zip\": \"a3426cf16607c8cb6b7ea9f8ec5982d8a569028139aace4554bdc3eb4f66e2b5\",\n    \"verity-plane-codex.zip\": \"717e4e567c738d18419a7d2b5f66e7173951b5ce4a9c219b225dc75a12c8388e\"\n  },\n  \"claim\": \"Contents only; native host testing and publication remain separate.\",\n  \"evaluator\": {\n    \"archive\": \"se_harness-0.18.0-py3-none-any.whl\",\n    \"archive_sha256\": \"a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54\",\n    \"payload_sha256\": \"cf28e03f21a0e474af8c415499c69193ab2a20e08a95c0ad3514758a84cff54d\",\n    \"release_record\": \"docs/engineering/release-0-18-0/releases/RLS-SEH-027.md\",\n    \"release_record_sha256\": \"ffddc34a5afd1a050f33ef9a890d99cac11860a847e5af819f4831dac46f6e3f\",\n    \"release_revision\": \"e9db30d930e704ec3e40f3f0bf5e7d18799c0d4d\",\n    \"version\": \"0.18.0\"\n  },\n  \"identity_sha256\": \"78b6f990a2be1523e5264e7dd01af0c1bb7141fc47ae75addb1a50e83b043f90\",\n  \"plugin_version\": \"0.1.0\",\n  \"source\": {\n    \"plan\": \"release/plugin-assembly.json\",\n    \"plan_sha256\": \"c1d83c9dcd03564db80c503beb23e6f2b44741b74493fb7962584f89194ac7fb\",\n    \"revision\": \"041e2584e8ed91d05af0ade13b92ab07cfbeea3b\"\n  }\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\marketplace-build.stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      },
+      "timing_note": "Build timings were not captured; check timings are separate."
+    },
+    {
+      "label": "marketplace-check",
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\scripts\\build_plugin_marketplace.py",
+        "check",
+        "--repository",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--revision",
+        "041e2584e8ed91d05af0ade13b92ab07cfbeea3b",
+        "--release-revision",
+        "e9db30d930e704ec3e40f3f0bf5e7d18799c0d4d",
+        "--release-record",
+        "docs/engineering/release-0-18-0/releases/RLS-SEH-027.md",
+        "--expected-wheel-sha256",
+        "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+        "--wheel",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-upgrade-018\\se_harness-0.18.0-py3-none-any.whl",
+        "--evaluator-python",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "--output-directory",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-governed-0.1.0"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "exit_code": 0,
+      "started_at_unix": 1789481460.8112755,
+      "elapsed_seconds": 40.795,
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\marketplace-check.stdout",
+        "bytes": 1198,
+        "sha256": "1c71697e9dca447b817bb54914df4b15e91993f3e61660f2c27bd4c601e790a1",
+        "tail": "{\n  \"accepted\": true,\n  \"archives\": {\n    \"verity-plane-claude.zip\": \"a3426cf16607c8cb6b7ea9f8ec5982d8a569028139aace4554bdc3eb4f66e2b5\",\n    \"verity-plane-codex.zip\": \"717e4e567c738d18419a7d2b5f66e7173951b5ce4a9c219b225dc75a12c8388e\"\n  },\n  \"claim\": \"Contents only; native host testing and publication remain separate.\",\n  \"evaluator\": {\n    \"archive\": \"se_harness-0.18.0-py3-none-any.whl\",\n    \"archive_sha256\": \"a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54\",\n    \"payload_sha256\": \"cf28e03f21a0e474af8c415499c69193ab2a20e08a95c0ad3514758a84cff54d\",\n    \"release_record\": \"docs/engineering/release-0-18-0/releases/RLS-SEH-027.md\",\n    \"release_record_sha256\": \"ffddc34a5afd1a050f33ef9a890d99cac11860a847e5af819f4831dac46f6e3f\",\n    \"release_revision\": \"e9db30d930e704ec3e40f3f0bf5e7d18799c0d4d\",\n    \"version\": \"0.18.0\"\n  },\n  \"identity_sha256\": \"78b6f990a2be1523e5264e7dd01af0c1bb7141fc47ae75addb1a50e83b043f90\",\n  \"plugin_version\": \"0.1.0\",\n  \"source\": {\n    \"plan\": \"release/plugin-assembly.json\",\n    \"plan_sha256\": \"c1d83c9dcd03564db80c503beb23e6f2b44741b74493fb7962584f89194ac7fb\",\n    \"revision\": \"041e2584e8ed91d05af0ade13b92ab07cfbeea3b\"\n  }\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\marketplace-check.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "codex-plugin-validator",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-validator-env\\Scripts\\python.exe",
+        "C:\\Users\\hok\\.codex\\skills\\.system\\plugin-creator\\scripts\\validate_plugin.py",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-governed-0.1.0\\packages\\codex\\verity-plane"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "exit_code": 0,
+      "started_at_unix": 1789481501.6094613,
+      "elapsed_seconds": 0.423,
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\codex-plugin-validator.stdout",
+        "bytes": 147,
+        "sha256": "72c1ad159009c6020a3687bab55087754494a29c916091e405c3d251dc35a090",
+        "tail": "Plugin validation passed: C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-governed-0.1.0\\packages\\codex\\verity-plane\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\codex-plugin-validator.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "claude-plugin-validator",
+      "argv": [
+        "C:\\Users\\hok\\.local\\bin\\claude.exe",
+        "plugin",
+        "validate",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-governed-0.1.0\\packages\\claude\\verity-plane"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "exit_code": 0,
+      "started_at_unix": 1789481502.035439,
+      "elapsed_seconds": 1.22,
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\claude-plugin-validator.stdout",
+        "bytes": 202,
+        "sha256": "fac85b0a29120aa235929d87592fb13efa89b2eac98c90b33db13eb2de809bbc",
+        "tail": "Validating plugin manifest: C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-governed-0.1.0\\packages\\claude\\verity-plane\\.claude-plugin\\plugin.json\n\n\u221a Validation passed\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\claude-plugin-validator.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "claude-marketplace-validator",
+      "argv": [
+        "C:/Users/hok/.local/bin/claude.exe",
+        "plugin",
+        "validate",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-governed-0.1.0"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\claude-marketplace-validator.stdout",
+        "bytes": 180,
+        "sha256": "bdcf516a6a8647fa0c6eaee131bac52cd9eaf84ed96f15e74e93a8c2a59062f2",
+        "tail": "Validating marketplace manifest: C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-governed-0.1.0\\.claude-plugin\\marketplace.json\n\n\u221a Validation passed\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\claude-marketplace-validator.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "full-source-suite",
+      "argv": [
+        "C:/Python313/python.exe",
+        "scripts/run_tests.py",
+        "--workers",
+        "4",
+        "--scale",
+        "full",
+        "--timings",
+        "C:/Users/hok/Documents/Codex/2026-09-15/clo/work/plugin-publication-governance/test-timings.json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "exit_code": 0,
+      "output": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\full-suite.log",
+        "bytes": 706,
+        "sha256": "f0d628cfe0ed01c295f89f0adf461520d7a761fdf09aa0d64dc4e348d4da90e2",
+        "tail": "docs/notes/diagnostic-codes.md matches the source\nEvaluator Python: C:\\Users\\hok\\AppData\\Local\\Temp\\simple-plugin-0cizs6zz\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\hok\\AppData\\Local\\Temp\\simple-plugin-0cizs6zz\\private\\verity-plane\\evaluator\\Scripts\\python.exe\n--workers must be at least 1\nWEX_SCALE artifacts=100 validation=0.622883s focus=1.041950s plan=1.217331s\nWEX_SCALE artifacts=500 validation=2.816995s focus=3.027147s plan=5.388578s\nWEX_SCALE artifacts=1000 validation=6.202619s focus=6.194442s plan=12.443503s\n----------------------------------------------------------------------\nRan 1068 tests in 864.431s (171 classes, 4 workers)\n\nOK (skipped=15)\n"
+      },
+      "source_note": "Began with implementation dirty at base e9db30d9; those same files were committed as 041e2584e8ed91d05af0ade13b92ab07cfbeea3b during the run. No implementation files changed while the suite ran."
+    },
+    {
+      "label": "release-distribution-validation",
+      "argv": [
+        "C:/Python313/python.exe",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "exit_code": 0,
+      "output": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\distribution-validation.log",
+        "bytes": 84,
+        "sha256": "7b46d8f310b1e4fc7216b69ae9eeeb2da845e1f0c445a843f7f5d5bfb90e805b",
+        "tail": "SE Harness release distribution validation: PASS (15 distribution-bearing records)\n"
+      }
+    },
+    {
+      "label": "candidate-help",
+      "argv": [
+        "C:/Python313/python.exe",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "exit_code": 0,
+      "output": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\candidate-help-retained.log",
+        "bytes": 3617,
+        "sha256": "721718c6a64371c984e64e9c5bbb6a27efc22727147bb755a691c4625ebbe684",
+        "tail": "      prepare a ready commit-bound verification record\n    refresh-verification\n                        create a new ready record after an unchanged rebase;\n                        preserve the original\n    prepare-release     prepare a ready commit-bound release record\n\noptions:\n  -h, --help            show this help message and exit\n  --version             show program's version number and exit\n"
+      }
+    },
+    {
+      "label": "implementation-doctor",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "output": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\implementation-doctor.json",
+        "bytes": 21593,
+        "sha256": "6228a1bfb2bfd5880856ee6d09b0943100452f19a13b8b61574cfe4032788bb0"
+      },
+      "result": {
+        "doctor_checks": 70,
+        "artifact_count": null,
+        "error_count": null,
+        "warning_count": null,
+        "ready": null
+      }
+    },
+    {
+      "label": "implementation-graph",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "output": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\implementation-graph.json",
+        "bytes": 326056,
+        "sha256": "0e46ba50a5c321d4c5a23d2622d70021ef3a12321cdda0cd62e3483d0448fd98"
+      },
+      "result": {
+        "doctor_checks": 0,
+        "artifact_count": 1647,
+        "error_count": 0,
+        "warning_count": 48,
+        "ready": null
+      }
+    },
+    {
+      "label": "review-preflight",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--work-order",
+        "WO-PLG-023",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "output": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\review-preflight.json",
+        "bytes": 2074,
+        "sha256": "7d7c88bfc999282c760d1869685a4a930a6f08bd80aee9bcd776227eacb37b35"
+      },
+      "result": {
+        "doctor_checks": 0,
+        "artifact_count": null,
+        "error_count": null,
+        "warning_count": null,
+        "ready": true
+      }
+    },
+    {
+      "label": "codex-version",
+      "argv": [
+        "C:\\Users\\hok\\AppData\\Local\\OpenAI\\Codex\\bin\\12219cbfbcbddde7\\codex.exe",
+        "--version"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "initial",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex-version.stdout",
+        "bytes": 29,
+        "sha256": "2f4d46e2b9752bb877269dd8ee668e3edddd4a6850ca0f7683332c4858829ee5",
+        "tail": "codex-cli 0.154.0-alpha.6.2\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "codex-marketplace-add",
+      "argv": [
+        "C:\\Users\\hok\\AppData\\Local\\OpenAI\\Codex\\bin\\12219cbfbcbddde7\\codex.exe",
+        "plugin",
+        "marketplace",
+        "add",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-governed-0.1.0",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "initial",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex-marketplace-add.stdout",
+        "bytes": 190,
+        "sha256": "92ddb2e3dbecaa1abdc65e1ecec18c9e998d1c781759026481f915e94369f4c2",
+        "tail": "{\n  \"marketplaceName\": \"se-harness\",\n  \"installedRoot\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\outputs\\\\verity-plane-marketplace-governed-0.1.0\",\n  \"alreadyAdded\": false\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex-marketplace-add.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "codex-install",
+      "argv": [
+        "C:\\Users\\hok\\AppData\\Local\\OpenAI\\Codex\\bin\\12219cbfbcbddde7\\codex.exe",
+        "plugin",
+        "add",
+        "verity-plane@se-harness",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "initial",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex-install.stdout",
+        "bytes": 355,
+        "sha256": "ba2ffbb70a4f8f95079a1f9cd16f46af4a22f1d2317a9f12d9af7c7741bf4d94",
+        "tail": "{\n  \"pluginId\": \"verity-plane@se-harness\",\n  \"name\": \"verity-plane\",\n  \"marketplaceName\": \"se-harness\",\n  \"version\": \"0.1.0\",\n  \"installedPath\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\plugin-marketplace-governed-acceptance\\\\codex\\\\profile\\\\codex\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.1.0\",\n  \"authPolicy\": \"ON_INSTALL\"\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex-install.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "codex-native-discovery",
+      "argv": [
+        "C:\\Users\\hok\\AppData\\Local\\OpenAI\\Codex\\bin\\12219cbfbcbddde7\\codex.exe",
+        "debug",
+        "prompt-input",
+        "Use verity-plane:setup to connect this disposable project."
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "initial",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex-native-discovery.stdout",
+        "bytes": 15100,
+        "sha256": "370425e8c0bd29c8bdef432a445ef882a594ed22acbb05c7fea17f1ab58413d9",
+        "tail": "   ]\n    }\n  },\n  {\n    \"type\": \"message\",\n    \"id\": \"msg_01a0a568-62ae-70e3-adb2-159239ba1ac7\",\n    \"role\": \"user\",\n    \"content\": [\n      {\n        \"type\": \"input_text\",\n        \"text\": \"<environment_context>\\n  <cwd>C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\plugin-marketplace-governed-acceptance\\\\codex\\\\project</cwd>\\n  <shell>powershell</shell>\\n  <current_date>2026-09-15</current_date>\\n  <timezone>Europe/Paris</timezone>\\n  <filesystem><workspace_roots><root>C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\plugin-marketplace-governed-acceptance\\\\codex\\\\project</root></workspace_roots><permission_profile type=\\\"managed\\\"><file_system type=\\\"restricted\\\"><entry access=\\\"read\\\"><special>:root</special></entry></file_system></permission_profile></filesystem>\\n</environment_context>\"\n      }\n    ],\n    \"internal_chat_message_metadata_passthrough\": {\n      \"turn_id\": \"auto-compact-0\",\n      \"create_time\": 1789481476.7828994,\n      \"content_item_kinds\": [\n        \"environments.environment_context\"\n      ]\n    }\n  },\n  {\n    \"type\": \"message\",\n    \"id\": \"msg_01a0a568-62af-7953-bad3-0c169ec0944c\",\n    \"role\": \"user\",\n    \"content\": [\n      {\n        \"type\": \"input_text\",\n        \"text\": \"Use verity-plane:setup to connect this disposable project.\"\n      }\n    ],\n    \"internal_chat_message_metadata_passthrough\": {\n      \"turn_id\": \"auto-compact-0\",\n      \"create_time\": 1789481476.7831383,\n      \"content_item_kinds\": [\n        \"user.text\"\n      ]\n    }\n  }\n]\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex-native-discovery.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "codex-setup-empty-project",
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-I",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex\\profile\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.1.0\\scripts\\setup.py",
+        "--target",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex\\project",
+        "--data-root",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex\\profile\\plugin-data",
+        "--wheel",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex\\profile\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.1.0\\packages\\se_harness-0.18.0-py3-none-any.whl"
+      ],
+      "exit_code": 1,
+      "expect": "missing-harness",
+      "attempt": "initial",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex-setup-empty-project.stdout",
+        "bytes": 2402,
+        "sha256": "25a68252d0efa2153f8ee9e13ed464f2b24ce6773fd337d3580b19d095b7f9fd",
+        "tail": "l\",\n      \"name\": \"config\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/ARTIFACT_AUTHORING.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/DECISION_RIGHTS.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/OPERATING_CARD.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/QUALITY_GATES.json\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/QUALITY_GATES.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/README.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/TECHNICAL_COMMUNICATION.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/TRACEABILITY.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/WORKFLOW.json\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/WORKFLOW.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"3.13.3\",\n      \"name\": \"python\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"failed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance\\codex-setup-empty-project.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "codex-version",
+      "argv": [
+        "C:\\Users\\hok\\AppData\\Local\\OpenAI\\Codex\\bin\\12219cbfbcbddde7\\codex.exe",
+        "--version"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-version.stdout",
+        "bytes": 29,
+        "sha256": "2f4d46e2b9752bb877269dd8ee668e3edddd4a6850ca0f7683332c4858829ee5",
+        "tail": "codex-cli 0.154.0-alpha.6.2\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "codex-marketplace-add",
+      "argv": [
+        "C:\\Users\\hok\\AppData\\Local\\OpenAI\\Codex\\bin\\12219cbfbcbddde7\\codex.exe",
+        "plugin",
+        "marketplace",
+        "add",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-governed-0.1.0",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-marketplace-add.stdout",
+        "bytes": 190,
+        "sha256": "92ddb2e3dbecaa1abdc65e1ecec18c9e998d1c781759026481f915e94369f4c2",
+        "tail": "{\n  \"marketplaceName\": \"se-harness\",\n  \"installedRoot\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\outputs\\\\verity-plane-marketplace-governed-0.1.0\",\n  \"alreadyAdded\": false\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-marketplace-add.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "codex-install",
+      "argv": [
+        "C:\\Users\\hok\\AppData\\Local\\OpenAI\\Codex\\bin\\12219cbfbcbddde7\\codex.exe",
+        "plugin",
+        "add",
+        "verity-plane@se-harness",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-install.stdout",
+        "bytes": 361,
+        "sha256": "7f4bd35b5ce37fbd47087c577d89b42a7a635ce72c66fe90e83adc638c024efc",
+        "tail": "{\n  \"pluginId\": \"verity-plane@se-harness\",\n  \"name\": \"verity-plane\",\n  \"marketplaceName\": \"se-harness\",\n  \"version\": \"0.1.0\",\n  \"installedPath\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\plugin-marketplace-governed-acceptance-retry\\\\codex\\\\profile\\\\codex\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.1.0\",\n  \"authPolicy\": \"ON_INSTALL\"\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-install.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "codex-native-discovery",
+      "argv": [
+        "C:\\Users\\hok\\AppData\\Local\\OpenAI\\Codex\\bin\\12219cbfbcbddde7\\codex.exe",
+        "debug",
+        "prompt-input",
+        "Use verity-plane:setup to connect this disposable project."
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-native-discovery.stdout",
+        "bytes": 15125,
+        "sha256": "cb75b175af3e8210aa374b7bc6f08bf2f7395f5d4f89844462f77ce47a3c4904",
+        "tail": " },\n  {\n    \"type\": \"message\",\n    \"id\": \"msg_01a0a56a-3fb0-7001-853d-d75ba406c868\",\n    \"role\": \"user\",\n    \"content\": [\n      {\n        \"type\": \"input_text\",\n        \"text\": \"<environment_context>\\n  <cwd>C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\plugin-marketplace-governed-acceptance-retry\\\\codex\\\\project</cwd>\\n  <shell>powershell</shell>\\n  <current_date>2026-09-15</current_date>\\n  <timezone>Europe/Paris</timezone>\\n  <filesystem><workspace_roots><root>C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\plugin-marketplace-governed-acceptance-retry\\\\codex\\\\project</root></workspace_roots><permission_profile type=\\\"managed\\\"><file_system type=\\\"restricted\\\"><entry access=\\\"read\\\"><special>:root</special></entry></file_system></permission_profile></filesystem>\\n</environment_context>\"\n      }\n    ],\n    \"internal_chat_message_metadata_passthrough\": {\n      \"turn_id\": \"auto-compact-0\",\n      \"create_time\": 1789481598.8965976,\n      \"content_item_kinds\": [\n        \"environments.environment_context\"\n      ]\n    }\n  },\n  {\n    \"type\": \"message\",\n    \"id\": \"msg_01a0a56a-3fb0-7001-853d-d7621f949885\",\n    \"role\": \"user\",\n    \"content\": [\n      {\n        \"type\": \"input_text\",\n        \"text\": \"Use verity-plane:setup to connect this disposable project.\"\n      }\n    ],\n    \"internal_chat_message_metadata_passthrough\": {\n      \"turn_id\": \"auto-compact-0\",\n      \"create_time\": 1789481598.8968346,\n      \"content_item_kinds\": [\n        \"user.text\"\n      ]\n    }\n  }\n]\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-native-discovery.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "codex-setup-empty-project",
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-I",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\profile\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.1.0\\scripts\\setup.py",
+        "--target",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+        "--data-root",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\profile\\plugin-data",
+        "--wheel",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\profile\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.1.0\\packages\\se_harness-0.18.0-py3-none-any.whl"
+      ],
+      "exit_code": 1,
+      "expect": "missing-harness",
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-setup-empty-project.stdout",
+        "bytes": 2414,
+        "sha256": "cd2d85511a2234d6865e4ecf6c931f55db42e882996ad8f783f420ca154b4f80",
+        "tail": "l\",\n      \"name\": \"config\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/ARTIFACT_AUTHORING.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/DECISION_RIGHTS.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/OPERATING_CARD.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/QUALITY_GATES.json\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/QUALITY_GATES.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/README.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/TECHNICAL_COMMUNICATION.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/TRACEABILITY.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/WORKFLOW.json\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/WORKFLOW.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"3.13.3\",\n      \"name\": \"python\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"failed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-setup-empty-project.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "codex-checker-version",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "--version"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-checker-version.stdout",
+        "bytes": 8,
+        "sha256": "7aada4daae1879ef282de249051c13ff4e912fcf670f4461676802653793ed38",
+        "tail": "0.18.0\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-checker-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "codex-init-preview",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+        "--project-name",
+        "Marketplace acceptance",
+        "--dry-run",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-init-preview.stdout",
+        "bytes": 4058,
+        "sha256": "28ba0e5efc89c774a9602952bf2065d3ee87dfa075b9976a53161e0eda1a6846",
+        "tail": "eering/templates/ARCHITECTURE.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/CAPABILITY.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/DECISION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/INTENT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/OPERATING_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/README.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RELEASE_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RELEASE_RECORD.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/REQUIREMENT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RISK.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/SPECIFICATION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/VERIFICATION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/VERIFICATION_RECORD.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/WORK_ORDER.template.md\"\n    }\n  ],\n  \"command\": \"init\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": false\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-init-preview.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "codex-init",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+        "--project-name",
+        "Marketplace acceptance",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-init.stdout",
+        "bytes": 4057,
+        "sha256": "b3642652c6f3abdafb16e8b6cfeb15f33675e428dfde165a4b2f367397ade3b4",
+        "tail": "neering/templates/ARCHITECTURE.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/CAPABILITY.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/DECISION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/INTENT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/OPERATING_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/README.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RELEASE_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RELEASE_RECORD.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/REQUIREMENT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RISK.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/SPECIFICATION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/VERIFICATION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/VERIFICATION_RECORD.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/WORK_ORDER.template.md\"\n    }\n  ],\n  \"command\": \"init\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": true\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-init.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "codex-provider-preview",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "skill-ownership",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+        "--provider",
+        "plugin",
+        "--plugin-root",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\profile\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.1.0",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-provider-preview.stdout",
+        "bytes": 688,
+        "sha256": "c0d23e1ad5f154d4a2da37e29ad2c35a77b53abe4e2f59cc4420158f83d26ac1",
+        "tail": "{\n  \"changes\": [\n    {\n      \"action\": \"remove\",\n      \"path\": \".agents/skills/harness-orient\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \".agents/skills/harness-operator-brief\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \".claude/skills/harness-orient\"\n    },\n    {\n      \"action\": \"update\",\n      \"path\": \".engineering-harness.lock\"\n    }\n  ],\n  \"command\": \"skill-ownership\",\n  \"outcome\": \"planned\",\n  \"passed\": true,\n  \"provider\": \"plugin\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"target\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\plugin-marketplace-governed-acceptance-retry\\\\codex\\\\project\",\n  \"written\": false\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-provider-preview.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "codex-provider",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "skill-ownership",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+        "--provider",
+        "plugin",
+        "--plugin-root",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\profile\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.1.0",
+        "--apply",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-provider.stdout",
+        "bytes": 687,
+        "sha256": "0944261c5deb4123c03271bbf97a29fc244beb3fc064adf6d5b03426d2605ef6",
+        "tail": "{\n  \"changes\": [\n    {\n      \"action\": \"remove\",\n      \"path\": \".agents/skills/harness-orient\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \".agents/skills/harness-operator-brief\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \".claude/skills/harness-orient\"\n    },\n    {\n      \"action\": \"update\",\n      \"path\": \".engineering-harness.lock\"\n    }\n  ],\n  \"command\": \"skill-ownership\",\n  \"outcome\": \"applied\",\n  \"passed\": true,\n  \"provider\": \"plugin\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"target\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\plugin-marketplace-governed-acceptance-retry\\\\codex\\\\project\",\n  \"written\": true\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-provider.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "codex-doctor",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-doctor.stdout",
+        "bytes": 7656,
+        "sha256": "e5efa94d7c85ef2e6790617b1bcf115dfa834939aa3ef1aa9f56612d0741b3c1",
+        "tail": "md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/RELEASE_CONTRACT.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/RELEASE_RECORD.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/REQUIREMENT.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/RISK.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/SPECIFICATION.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/VERIFICATION.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/VERIFICATION_RECORD.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/WORK_ORDER.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"config, installation and running checker versions must agree\",\n      \"name\": \"selected-version\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"skills are provided by the plugin\",\n      \"name\": \"skill-ownership\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-doctor.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "codex-setup-repeat",
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-I",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\profile\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.1.0\\scripts\\setup.py",
+        "--target",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+        "--data-root",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\profile\\plugin-data",
+        "--wheel",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\profile\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.1.0\\packages\\se_harness-0.18.0-py3-none-any.whl"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-setup-repeat.stdout",
+        "bytes": 8311,
+        "sha256": "da9e0dc1e4f00a085ab257e03648d699f87f983ab23360fb1d8be5c4b436ae8f",
+        "tail": "md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/RELEASE_CONTRACT.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/RELEASE_RECORD.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/REQUIREMENT.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/RISK.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/SPECIFICATION.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/VERIFICATION.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/VERIFICATION_RECORD.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/WORK_ORDER.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"config, installation and running checker versions must agree\",\n      \"name\": \"selected-version\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"skills are provided by the plugin\",\n      \"name\": \"skill-ownership\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex-setup-repeat.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "claude-version",
+      "argv": [
+        "C:\\Users\\hok\\.local\\bin\\claude.exe",
+        "--version"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-version.stdout",
+        "bytes": 23,
+        "sha256": "48b718f1e2831ef701b7cfaf69b978195172d4c10a3d00c279a662e0c9c5fe40",
+        "tail": "2.1.269 (Claude Code)\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "claude-marketplace-validate",
+      "argv": [
+        "C:\\Users\\hok\\.local\\bin\\claude.exe",
+        "plugin",
+        "validate",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-governed-0.1.0"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-marketplace-validate.stdout",
+        "bytes": 183,
+        "sha256": "d742934b85bdc6c42ee4d1cc5b69b7d58a4ea78c010f7a898b13329d3195c6c1",
+        "tail": "Validating marketplace manifest: C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-governed-0.1.0\\.claude-plugin\\marketplace.json\n\n\u221a Validation passed\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-marketplace-validate.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "claude-marketplace-add",
+      "argv": [
+        "C:\\Users\\hok\\.local\\bin\\claude.exe",
+        "plugin",
+        "marketplace",
+        "add",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-governed-0.1.0"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-marketplace-add.stdout",
+        "bytes": 97,
+        "sha256": "6f76761a7e50a2c64b452ebbc131cd673cb5362a406abef456f9097ae53c6845",
+        "tail": "Adding marketplace\u2026\u221a Successfully added marketplace: se-harness (declared in user settings)\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-marketplace-add.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "claude-install",
+      "argv": [
+        "C:\\Users\\hok\\.local\\bin\\claude.exe",
+        "plugin",
+        "install",
+        "verity-plane@se-harness"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-install.stdout",
+        "bytes": 120,
+        "sha256": "2c589620539ac43bc6e8344ec0b659f2f637eaac866e9c76a1bd51925575538f",
+        "tail": "Installing plugin \"verity-plane@se-harness\"...\u221a Successfully installed plugin: verity-plane@se-harness (scope: user)\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-install.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "claude-installed-list",
+      "argv": [
+        "C:\\Users\\hok\\.local\\bin\\claude.exe",
+        "plugin",
+        "list",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-installed-list.stdout",
+        "bytes": 417,
+        "sha256": "db33adf2d4c6e8a7d5c5cc766d7ea14710308f4f1566a35757239eaf44406a93",
+        "tail": "[\n  {\n    \"id\": \"verity-plane@se-harness\",\n    \"version\": \"0.1.0\",\n    \"scope\": \"user\",\n    \"enabled\": true,\n    \"installPath\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\plugin-marketplace-governed-acceptance-retry\\\\claude\\\\profile\\\\claude\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.1.0\",\n    \"installedAt\": \"2026-09-15T14:13:52.348Z\",\n    \"lastUpdated\": \"2026-09-15T14:13:52.348Z\"\n  }\n]\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-installed-list.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "claude-native-discovery",
+      "argv": [
+        "C:\\Users\\hok\\.local\\bin\\claude.exe",
+        "plugin",
+        "details",
+        "verity-plane@se-harness"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-native-discovery.stdout",
+        "bytes": 841,
+        "sha256": "9a148cae9a996957ecdbc38f940fbd70060e3a6c59822cb79e422131a1a34aa1",
+        "tail": "verity-plane 0.1.0\n  Description: Use SE Harness skills for repository setup, governed changes and verification evidence.\n  Source: verity-plane@se-harness\n\nComponent inventory\n  Skills (5)  change, evidence, harness-operator-brief, harness-orient, setup\n  Agents (0)\n  Hooks (0)\n  MCP servers (0)\n  LSP servers (0)\n\nProjected token cost\n  Always-on:   ~331 tok   added to every session\n\nPer-component (rounded)\n  component               always-on  on-invoke\n  change                        ~70       ~680\n  evidence                      ~60       ~660\n  harness-operator-brief        ~80      ~1.3k\n  harness-orient                ~80        ~1k\n  setup                         ~40       ~310\n\n  On-invoke cost is paid each time a skill or agent fires.\n  Token counts are estimates and may differ from actual usage.\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-native-discovery.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "claude-setup-empty-project",
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-I",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\profile\\claude\\plugins\\cache\\se-harness\\verity-plane\\0.1.0\\scripts\\setup.py",
+        "--target",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+        "--data-root",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\profile\\plugin-data",
+        "--wheel",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\profile\\claude\\plugins\\cache\\se-harness\\verity-plane\\0.1.0\\packages\\se_harness-0.18.0-py3-none-any.whl"
+      ],
+      "exit_code": 1,
+      "expect": "missing-harness",
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-setup-empty-project.stdout",
+        "bytes": 2417,
+        "sha256": "6cdf9b271fccaff9a0c592ea1e71a6026f3a4bbb069f580554f0251e8794f93f",
+        "tail": "l\",\n      \"name\": \"config\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/ARTIFACT_AUTHORING.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/DECISION_RIGHTS.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/OPERATING_CARD.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/QUALITY_GATES.json\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/QUALITY_GATES.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/README.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/TECHNICAL_COMMUNICATION.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/TRACEABILITY.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/WORKFLOW.json\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/WORKFLOW.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"3.13.3\",\n      \"name\": \"python\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"failed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-setup-empty-project.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "claude-checker-version",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "--version"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-checker-version.stdout",
+        "bytes": 8,
+        "sha256": "7aada4daae1879ef282de249051c13ff4e912fcf670f4461676802653793ed38",
+        "tail": "0.18.0\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-checker-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "claude-init-preview",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+        "--project-name",
+        "Marketplace acceptance",
+        "--dry-run",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-init-preview.stdout",
+        "bytes": 4058,
+        "sha256": "28ba0e5efc89c774a9602952bf2065d3ee87dfa075b9976a53161e0eda1a6846",
+        "tail": "eering/templates/ARCHITECTURE.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/CAPABILITY.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/DECISION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/INTENT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/OPERATING_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/README.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RELEASE_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RELEASE_RECORD.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/REQUIREMENT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RISK.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/SPECIFICATION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/VERIFICATION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/VERIFICATION_RECORD.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/WORK_ORDER.template.md\"\n    }\n  ],\n  \"command\": \"init\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": false\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-init-preview.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "claude-init",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+        "--project-name",
+        "Marketplace acceptance",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-init.stdout",
+        "bytes": 4057,
+        "sha256": "b3642652c6f3abdafb16e8b6cfeb15f33675e428dfde165a4b2f367397ade3b4",
+        "tail": "neering/templates/ARCHITECTURE.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/CAPABILITY.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/DECISION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/INTENT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/OPERATING_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/README.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RELEASE_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RELEASE_RECORD.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/REQUIREMENT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RISK.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/SPECIFICATION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/VERIFICATION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/VERIFICATION_RECORD.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/WORK_ORDER.template.md\"\n    }\n  ],\n  \"command\": \"init\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": true\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-init.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "claude-provider-preview",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "skill-ownership",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+        "--provider",
+        "plugin",
+        "--plugin-root",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\profile\\claude\\plugins\\cache\\se-harness\\verity-plane\\0.1.0",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-provider-preview.stdout",
+        "bytes": 689,
+        "sha256": "21585c922c9a0327511efc797a6477bcfbf17e74aa4c4e9a5cb3c8265b45265c",
+        "tail": "{\n  \"changes\": [\n    {\n      \"action\": \"remove\",\n      \"path\": \".agents/skills/harness-orient\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \".agents/skills/harness-operator-brief\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \".claude/skills/harness-orient\"\n    },\n    {\n      \"action\": \"update\",\n      \"path\": \".engineering-harness.lock\"\n    }\n  ],\n  \"command\": \"skill-ownership\",\n  \"outcome\": \"planned\",\n  \"passed\": true,\n  \"provider\": \"plugin\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"target\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\plugin-marketplace-governed-acceptance-retry\\\\claude\\\\project\",\n  \"written\": false\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-provider-preview.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "claude-provider",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "skill-ownership",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+        "--provider",
+        "plugin",
+        "--plugin-root",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\profile\\claude\\plugins\\cache\\se-harness\\verity-plane\\0.1.0",
+        "--apply",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-provider.stdout",
+        "bytes": 688,
+        "sha256": "787a640f7a9b95cedffb9c9b0f9658e58257ecb02cf1da515e9aef6a7843f3ac",
+        "tail": "{\n  \"changes\": [\n    {\n      \"action\": \"remove\",\n      \"path\": \".agents/skills/harness-orient\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \".agents/skills/harness-operator-brief\"\n    },\n    {\n      \"action\": \"remove\",\n      \"path\": \".claude/skills/harness-orient\"\n    },\n    {\n      \"action\": \"update\",\n      \"path\": \".engineering-harness.lock\"\n    }\n  ],\n  \"command\": \"skill-ownership\",\n  \"outcome\": \"applied\",\n  \"passed\": true,\n  \"provider\": \"plugin\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"target\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\plugin-marketplace-governed-acceptance-retry\\\\claude\\\\project\",\n  \"written\": true\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-provider.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "claude-doctor",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\profile\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-doctor.stdout",
+        "bytes": 7656,
+        "sha256": "e5efa94d7c85ef2e6790617b1bcf115dfa834939aa3ef1aa9f56612d0741b3c1",
+        "tail": "md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/RELEASE_CONTRACT.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/RELEASE_RECORD.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/REQUIREMENT.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/RISK.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/SPECIFICATION.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/VERIFICATION.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/VERIFICATION_RECORD.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/WORK_ORDER.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"config, installation and running checker versions must agree\",\n      \"name\": \"selected-version\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"skills are provided by the plugin\",\n      \"name\": \"skill-ownership\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-doctor.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "claude-setup-repeat",
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-I",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\profile\\claude\\plugins\\cache\\se-harness\\verity-plane\\0.1.0\\scripts\\setup.py",
+        "--target",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+        "--data-root",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\profile\\plugin-data",
+        "--wheel",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\profile\\claude\\plugins\\cache\\se-harness\\verity-plane\\0.1.0\\packages\\se_harness-0.18.0-py3-none-any.whl"
+      ],
+      "exit_code": 0,
+      "expect": 0,
+      "attempt": "corrected",
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\project",
+      "stdout": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-setup-repeat.stdout",
+        "bytes": 8314,
+        "sha256": "8c683da6ce7c4b823cdba6a1cb74f346f6b3a6df7a2c58e87172e35ae3841fb7",
+        "tail": "md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/RELEASE_CONTRACT.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/RELEASE_RECORD.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/REQUIREMENT.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/RISK.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/SPECIFICATION.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/VERIFICATION.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/VERIFICATION_RECORD.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"present\",\n      \"name\": \"seed:docs/engineering/templates/WORK_ORDER.template.md\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"config, installation and running checker versions must agree\",\n      \"name\": \"selected-version\",\n      \"passed\": true\n    },\n    {\n      \"detail\": \"skills are provided by the plugin\",\n      \"name\": \"skill-ownership\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n"
+      },
+      "stderr": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude-setup-repeat.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tail": ""
+      }
+    },
+    {
+      "label": "packaging-input-equivalence",
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "041e2584e8ed91d05af0ade13b92ab07cfbeea3b",
+        "--",
+        "plugins/verity-plane",
+        "release/plugin-assembly.json",
+        "release/plugin-marketplace",
+        "LICENSE",
+        "docs/images/verity-plane-logo.png",
+        "scripts/build_plugin_marketplace.py",
+        "repository_tools/plugin_distribution.py"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "initial_acceptance_failure": {
+    "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\native-acceptance.stderr.txt",
+    "bytes": 1277,
+    "sha256": "a22f83c9b1ff28d3e1c967299c9c63d29af648bf443283521d53b25ed8045902",
+    "tail": "Traceback (most recent call last):\n  File \"C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\tests\\plugin_integration\\package_assembly\\run_marketplace_acceptance.py\", line 104, in <module>\n    run(\"setup-empty-project\", [sys.executable, \"-I\", plugin / \"scripts/setup.py\", \"--target\", project,\n    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        \"--data-root\", data, \"--wheel\", wheel], expect=\"missing-harness\")\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\tests\\plugin_integration\\package_assembly\\run_marketplace_acceptance.py\", line 59, in run\n    doctor = json.loads(result.stdout)\n  File \"C:\\Python313\\Lib\\json\\__init__.py\", line 346, in loads\n    return _default_decoder.decode(s)\n           ~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"C:\\Python313\\Lib\\json\\decoder.py\", line 345, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python313\\Lib\\json\\decoder.py\", line 363, in raw_decode\n    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n"
+  },
+  "focused_wrong_interpreter": {
+    "command": {
+      "argv": [
+        "C:/Python313/python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/plugin_integration/package_assembly",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at_unix": 1789481790.8320525,
+      "elapsed_seconds": 243.044,
+      "exit_code": 1,
+      "source_commit": "041e2584e8ed91d05af0ade13b92ab07cfbeea3b",
+      "worktree_difference": "Only run_marketplace_acceptance.py has the separately exercised JSON parser correction; it is not imported by these tests."
+    },
+    "output": {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\focused-retained.stderr",
+      "bytes": 40814,
+      "sha256": "94b3dd36e9daf69869467158c4b37a5daa72df05b053ac36651d7905934d7e45",
+      "tail": "5, in test_unsafe_paths_preserve_outside_sentinel\n    with self.subTest(path=path), self.assertRaisesRegex(pkg.AssemblyError, \"unsafe path\"):\n                                  ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: \"unsafe path\" does not match \"released evaluator could not compute canonical wheel payload SHA-256\"\n\n======================================================================\nFAIL: test_unsafe_paths_preserve_outside_sentinel (test_package_assembly.PackageAssemblyTests.test_unsafe_paths_preserve_outside_sentinel) (path='scripts//name.py')\n----------------------------------------------------------------------\nrepository_tools.plugin_distribution.AssemblyError: released evaluator could not compute canonical wheel payload SHA-256\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\tests\\plugin_integration\\package_assembly\\test_package_assembly.py\", line 195, in test_unsafe_paths_preserve_outside_sentinel\n    with self.subTest(path=path), self.assertRaisesRegex(pkg.AssemblyError, \"unsafe path\"):\n                                  ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: \"unsafe path\" does not match \"released evaluator could not compute canonical wheel payload SHA-256\"\n\n----------------------------------------------------------------------\nRan 22 tests in 242.061s\n\nFAILED (failures=23, errors=8)\n"
+    },
+    "resolution": "The suite requires the released evaluator environment for isolated payload hashing. Rerun with its Python; no production change."
+  },
+  "temporary_wrapper_failure": "UnicodeEncodeError writing Claude success glyph to cp1252 stdout after the third successful check; results saved before printing. Remaining catalog check ran separately.",
+  "initial_focused_run": {
+    "result": "22 passed in 439.206 seconds",
+    "raw": {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\focused-tests.log",
+      "bytes": 3360,
+      "sha256": "b0d6ace3b71b9f60ac2a593a21073f0b09005942c18da886afc60b846d0597d5",
+      "tail": "duplicate_json_key_and_malformed_release) ... ok\ntest_extra_file_archive_change_and_false_inventory_digest (test_package_assembly.PackageAssemblyTests.test_extra_file_archive_change_and_false_inventory_digest) ... ok\ntest_forbidden_inputs (test_package_assembly.PackageAssemblyTests.test_forbidden_inputs) ... ok\ntest_git_executable_mode_and_host_only_scripts (test_package_assembly.PackageAssemblyTests.test_git_executable_mode_and_host_only_scripts) ... ok\ntest_git_symlink_is_not_read (test_package_assembly.PackageAssemblyTests.test_git_symlink_is_not_read) ... ok\ntest_independent_release_identity_required (test_package_assembly.PackageAssemblyTests.test_independent_release_identity_required) ... ok\ntest_interruption_is_not_accepted_and_fresh_retry_rechecked (test_package_assembly.PackageAssemblyTests.test_interruption_is_not_accepted_and_fresh_retry_rechecked) ... ok\ntest_missing_and_corrupt_wheel (test_package_assembly.PackageAssemblyTests.test_missing_and_corrupt_wheel) ... ok\ntest_output_links_are_rejected (test_package_assembly.PackageAssemblyTests.test_output_links_are_rejected) ... ok\ntest_same_source_wheel_and_deterministic_archives (test_package_assembly.PackageAssemblyTests.test_same_source_wheel_and_deterministic_archives) ... ok\ntest_unsafe_paths_preserve_outside_sentinel (test_package_assembly.PackageAssemblyTests.test_unsafe_paths_preserve_outside_sentinel) ... ok\n\n----------------------------------------------------------------------\nRan 22 tests in 439.206s\n\nOK\n"
+    },
+    "note": "Exact argv was not separately captured for this preliminary run; focused-retained.json binds the subsequent recorded run."
+  }
+}

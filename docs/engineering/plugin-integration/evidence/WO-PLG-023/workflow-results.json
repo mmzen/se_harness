@@ -1,0 +1,298 @@
+[
+  {
+    "label": "final-handoff",
+    "local_raw_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\final-handoff.json",
+    "raw_sha256": "babd248db103b0dfbc68ec3df498eb855d8bd0d36fef7d13c7506c059a125fec",
+    "operation": {
+      "kind": "check",
+      "outcome": "blocked"
+    },
+    "state": {
+      "before": [
+        {
+          "id": "WO-PLG-023",
+          "status": "in_progress"
+        }
+      ],
+      "after": [
+        {
+          "id": "WO-PLG-023",
+          "status": "in_progress"
+        }
+      ]
+    },
+    "restitution": {
+      "outcome": "blocked",
+      "done": [
+        "Evaluated handoff compliance for WO-PLG-023."
+      ],
+      "not_done": [
+        "The handoff checkpoint did not pass."
+      ],
+      "blocked_by": [
+        "QGP-G4I-EVIDENCE: No readable evidence for WO-PLG-023, checkpoint handoff, and formal snapshot 4f77c74d3e936591ac5f4b10593c9ee6a57a140afd7150da225f7e91ceedb19c is available; write the header with harnessctl evidence . --artifact WO-PLG-023 --checkpoint handoff."
+      ],
+      "current_lifecycle_state": [
+        "WO-PLG-023 is in_progress."
+      ],
+      "decision_required": null,
+      "next": {
+        "procedure_id": "PROC-WO-IMPLEMENT",
+        "step_id": "STEP-WO-IMPLEMENT-CHECK",
+        "action": "Supply the corrective input for QGP-G4I-EVIDENCE"
+      },
+      "command_or_response": {
+        "kind": "command",
+        "argv": [
+          "harnessctl",
+          "evidence",
+          ".",
+          "--artifact",
+          "WO-PLG-023",
+          "--checkpoint",
+          "handoff"
+        ]
+      },
+      "alternatives": []
+    },
+    "compliance": {
+      "checkpoint": "handoff",
+      "status": "not_assessable"
+    }
+  },
+  {
+    "label": "handoff-evidence",
+    "local_raw_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\handoff-evidence.json",
+    "raw_sha256": "398402c7c994ae61e173968ac19cb243f1f1af23bb3a0b877991bde96e6dea08",
+    "operation": {
+      "kind": "evidence",
+      "outcome": "completed"
+    },
+    "state": {
+      "before": [],
+      "after": [
+        {
+          "id": "WO-PLG-023",
+          "status": "in_progress"
+        }
+      ]
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Wrote the handoff evidence packet of WO-PLG-023 at docs/engineering/plugin-integration/evidence/WO-PLG-023/WO-PLG-023-handoff.md to formal snapshot 4f77c74d3e936591ac5f4b10593c9ee6a57a140afd7150da225f7e91ceedb19c."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "WO-PLG-023 is in_progress."
+      ],
+      "decision_required": null,
+      "next": {
+        "procedure_id": "PROC-WO-IMPLEMENT",
+        "step_id": "STEP-WO-IMPLEMENT-CHECK",
+        "action": "Run the bound command"
+      },
+      "command_or_response": {
+        "kind": "command",
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-PLG-023",
+          "--checkpoint",
+          "handoff"
+        ]
+      },
+      "alternatives": []
+    },
+    "compliance": {
+      "checkpoint": "pre-action",
+      "status": "not_assessable"
+    }
+  },
+  {
+    "label": "final-handoff-retry",
+    "local_raw_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\final-handoff-retry.json",
+    "raw_sha256": "50fd6be484f56dc97f9c79ce73ae8f16c38314e1a6a43801106a8866bed173c5",
+    "operation": {
+      "kind": "check",
+      "outcome": "completed"
+    },
+    "state": {
+      "before": [
+        {
+          "id": "WO-PLG-023",
+          "status": "in_progress"
+        }
+      ],
+      "after": [
+        {
+          "id": "WO-PLG-023",
+          "status": "in_progress"
+        }
+      ]
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Evaluated handoff compliance for WO-PLG-023."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "WO-PLG-023 is in_progress."
+      ],
+      "decision_required": null,
+      "next": {
+        "procedure_id": "PROC-WO-IMPLEMENT",
+        "step_id": "STEP-WO-IMPLEMENT-PREVIEW",
+        "action": "Run the bound command"
+      },
+      "command_or_response": {
+        "kind": "command",
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-PLG-023=implemented",
+          "--decision",
+          "WO-PLG-023=delegated-executor"
+        ]
+      },
+      "alternatives": []
+    },
+    "compliance": {
+      "checkpoint": "handoff",
+      "status": "pass"
+    }
+  },
+  {
+    "label": "completion-preview",
+    "local_raw_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\completion-preview.json",
+    "raw_sha256": "ff6a2ee3d19be304750167869b7ed529536cbb51470576fe69f4076a22ba268f",
+    "operation": {
+      "kind": "transition",
+      "outcome": "completed"
+    },
+    "state": {
+      "before": [
+        {
+          "id": "WO-PLG-023",
+          "status": "in_progress"
+        }
+      ],
+      "after": [
+        {
+          "id": "WO-PLG-023",
+          "status": "implemented"
+        }
+      ]
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Planned 1 explicit lifecycle transition(s); no files were written."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "WO-PLG-023 is implemented."
+      ],
+      "decision_required": null,
+      "next": {
+        "procedure_id": "PROC-WO-PREPARE-VREC",
+        "step_id": "STEP-WO-PREPARE-VREC-CAPTURE",
+        "action": "Run the bound command"
+      },
+      "command_or_response": {
+        "kind": "command",
+        "argv": [
+          "harnessctl",
+          "capture-verification",
+          ".",
+          "--work-order",
+          "WO-PLG-023",
+          "--owner",
+          "delegated-executor",
+          "--id",
+          "VREC-...",
+          "--verification",
+          "VER-...",
+          "--evidence",
+          "..."
+        ]
+      },
+      "alternatives": []
+    },
+    "compliance": {
+      "checkpoint": "transition",
+      "status": "pass"
+    }
+  },
+  {
+    "label": "completion-applied",
+    "local_raw_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\completion-applied.json",
+    "raw_sha256": "04ea8e88fb495bb367ce446efb34ac6654e2bcca5d7ea5160f0f349365e84a4a",
+    "operation": {
+      "kind": "transition",
+      "outcome": "completed"
+    },
+    "state": {
+      "before": [
+        {
+          "id": "WO-PLG-023",
+          "status": "in_progress"
+        }
+      ],
+      "after": [
+        {
+          "id": "WO-PLG-023",
+          "status": "implemented"
+        }
+      ]
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Applied 1 explicit lifecycle transition(s) atomically."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "WO-PLG-023 is implemented."
+      ],
+      "decision_required": null,
+      "next": {
+        "procedure_id": "PROC-WO-PREPARE-VREC",
+        "step_id": "STEP-WO-PREPARE-VREC-CAPTURE",
+        "action": "Run the bound command"
+      },
+      "command_or_response": {
+        "kind": "command",
+        "argv": [
+          "harnessctl",
+          "capture-verification",
+          ".",
+          "--work-order",
+          "WO-PLG-023",
+          "--owner",
+          "delegated-executor",
+          "--id",
+          "VREC-...",
+          "--verification",
+          "VER-...",
+          "--evidence",
+          "..."
+        ]
+      },
+      "alternatives": []
+    },
+    "compliance": {
+      "checkpoint": "transition",
+      "status": "pass"
+    }
+  }
+]

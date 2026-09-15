@@ -2,7 +2,7 @@
 id = "WO-PLG-023"
 type = "work_order"
 title = "Prepare Verity Plane marketplace publication"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-15"
 updated = "2026-09-15"
@@ -53,6 +53,13 @@ to = "in_progress"
 decided_at = "2026-09-15T13:43:42Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex starts the approved scope under DR-015 after the owner said OK i approve the artifacts you can start and the start checkpoint passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-15T14:33:37Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Codex completed the approved scope under DR-015. Required package and source checks, both native Windows marketplace installations, offline setup walkthroughs and M01-M04 review passed. The retained handoff passed; M05 and accountable assurance/publication decisions remain separate."
 +++
 
 # Prepare Verity Plane marketplace publication
