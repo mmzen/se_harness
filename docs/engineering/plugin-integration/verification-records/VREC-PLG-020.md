@@ -2,7 +2,7 @@
 id = "VREC-PLG-020"
 type = "verification_record"
 title = "Verification candidate for WO-PLG-023"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-15"
 updated = "2026-09-15"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/plugin-integration/evidence/WO-PLG-023/READM
 evaluator_evidence_path = "docs/engineering/plugin-integration/evidence/VREC-PLG-020-evaluator.json"
 evaluator_evidence_sha256 = "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f"
 
+verified_at = "2026-09-15T15:57:01Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-PLG-023"]
 conforms_to = ["VER-PLG-001", "VER-PLG-016", "VER-PLG-023"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-15T15:57:01Z"
+decided_by = "assurance-owner"
+reason = "The owner explicitly stated \"I verify VREC-PLG-020 as assurance owner\" on 2026-09-15. This verifies candidate 7f32dcbd18b50254a0d4e43e2dfdd9789dc9b78e and its retained evidence. Apply only this VREC decision; existing publication instructions remain separate."
 +++
 
 # Verification Record Candidate
