@@ -55,3 +55,10 @@ Delegation can hide additional effects or confuse accountability. Actual permiss
 **When** assistance is requested.
 
 **Then** the main agent continues without spawning a helper.
+
+## Current applicability — 2026-09-14
+
+This remains conditional: no helper is required to complete plugin installation or use.
+WO-PLG-014 stays deferred until the owner names a useful task that warrants a helper.
+Its prospective specification and verification plan have been narrowed under WO-PLG-022.
+Read-only findings still require real host permissions; a prompt is not a permission boundary.

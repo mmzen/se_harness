@@ -1,5 +1,12 @@
 # Deliver the plugin definitions in eleven closed groups
 
+> Historical plan. Remaining groups D08-D11 are replaced by the
+> [2026-09-14 KISS backlog amendment](plugin-backlog-kiss-2026-09-14.md).
+> Use its two rewritten packets and deferred helper scope; do not execute the old
+> umbrella matrix or import its retired decision prerequisites. The text below
+> preserves the original delivery context and is not the current queue.
+
+
 <!-- Target expertise: 3.5/10. This score describes the knowledge expected from the reader. -->
 
 This is the definition-delivery plan for the 16 implementation packets in [PR #416](https://github.com/mmzen/se_harness/pull/416).
