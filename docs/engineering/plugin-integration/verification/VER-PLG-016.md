@@ -2,13 +2,20 @@
 id = "VER-PLG-016"
 type = "verification"
 title = "Verify the installation guide against actual use"
-status = "draft"
+status = "approved"
 owners = ["assurance-owner"]
 created = "2026-09-14"
 updated = "2026-09-14"
 
 [relations]
 verifies = ["REQ-PLG-027"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-14T22:16:55Z"
+decided_by = "assurance-owner"
+reason = "The owner reviewed and approved completion of the KISS backlog amendment and explicitly said \"you can start WO-PLG-009 and WO-PLG-016\" on 2026-09-15. This accepts the selected rewritten definition chain and authorizes its bounded routine execution, checks and evidence under the installed evaluator. No result-specific assurance, merge, release or live host/project installation is inferred."
 +++
 
 # Verify the installation guide against actual use

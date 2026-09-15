@@ -5,8 +5,13 @@
 The current plan applies the merged plugin and codebase KISS changes. The old
 [umbrella PR #416](https://github.com/mmzen/se_harness/pull/416) is historical input,
 not an implementation queue. The owner approved WO-PLG-022 completion and authorized
-WO-PLG-009 and WO-PLG-016 on 2026-09-15. WO-PLG-009 is in progress; WO-PLG-016 follows
-its settled connection instructions. Helpers remain deferred.
+WO-PLG-009 and WO-PLG-016 on 2026-09-15. Both work orders are now implemented after the owner approved completion.
+[VREC-PLG-017](verification-records/VREC-PLG-017.md) covers WO-PLG-009 and
+[VREC-PLG-018](verification-records/VREC-PLG-018.md) covers WO-PLG-016; both
+records are verified by the owner. Integration remains pending in PRs #478 and #479. Start with the
+[local installation guide](../../notes/plugin-installation-guide.md), then see
+[connection evidence](evidence/WO-PLG-009/README.md) and
+[host walkthrough evidence](evidence/WO-PLG-016/README.md). Helpers remain deferred.
 
 | Order | Work order | Result |
 | --- | --- | --- |

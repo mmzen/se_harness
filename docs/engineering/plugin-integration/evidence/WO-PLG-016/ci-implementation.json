@@ -1,0 +1,76 @@
+{
+  "commit": "c08970e5d9a601363704ee6dc6dee2cadc226667",
+  "url": "https://github.com/mmzen/se_harness/pull/479",
+  "checks": [
+    {
+      "name": "validate",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34904270235/job/104177166494"
+    },
+    {
+      "name": "Predecessor evaluator assessment",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34904270261/job/104177166402"
+    },
+    {
+      "name": "Select release rehearsals",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34904270715/job/104177168276"
+    },
+    {
+      "name": "Candidate source evidence",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34904270323/job/104177166662"
+    },
+    {
+      "name": "Rehearse the qualification of this candidate",
+      "conclusion": "SKIPPED",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34904270715/job/104177240233"
+    },
+    {
+      "name": "Candidate package evidence",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34904270323/job/104177476942"
+    },
+    {
+      "name": "Rehearse the qualification of the release record",
+      "conclusion": "SKIPPED",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34904270715/job/104177240064"
+    },
+    {
+      "name": "Upgrade rehearsal (Linux)",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34904270323/job/104177585676"
+    },
+    {
+      "name": "Upgrade rehearsal (Windows)",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34904270323/job/104177585656"
+    },
+    {
+      "name": "Publication rehearsal",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34904270715/job/104177239170"
+    },
+    {
+      "name": "Build deterministic integration package",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34904270323/job/104178034888"
+    },
+    {
+      "name": "Verify integration package (Linux)",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34904270323/job/104178144063"
+    },
+    {
+      "name": "Verify integration package (Windows)",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34904270323/job/104178144081"
+    },
+    {
+      "name": "Retain verified integration package",
+      "conclusion": "SUCCESS",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34904270323/job/104178362070"
+    }
+  ]
+}

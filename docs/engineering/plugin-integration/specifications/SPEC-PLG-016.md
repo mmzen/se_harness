@@ -2,7 +2,7 @@
 id = "SPEC-PLG-016"
 type = "specification"
 title = "Write and exercise one practical installation guide"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-14"
 updated = "2026-09-14"
@@ -10,6 +10,13 @@ contract = "Provide a short installation guide whose availability and host claim
 
 [relations]
 specifies = ["REQ-PLG-027"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-14T22:16:55Z"
+decided_by = "technical-owner"
+reason = "The owner reviewed and approved completion of the KISS backlog amendment and explicitly said \"you can start WO-PLG-009 and WO-PLG-016\" on 2026-09-15. This accepts the selected rewritten definition chain and authorizes its bounded routine execution, checks and evidence under the installed evaluator. No result-specific assurance, merge, release or live host/project installation is inferred."
 +++
 
 # Write and exercise one practical installation guide

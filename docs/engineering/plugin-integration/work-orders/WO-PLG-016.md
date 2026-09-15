@@ -2,10 +2,10 @@
 id = "WO-PLG-016"
 type = "work_order"
 title = "Document installation and check ordinary host use"
-status = "draft"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-14"
-updated = "2026-09-14"
+updated = "2026-09-15"
 
 [assurance]
 commit_bound_verification = "required"
@@ -28,6 +28,27 @@ paths = [
 implements = ["REQ-PLG-027"]
 specifications = ["SPEC-PLG-016"]
 verification = ["VER-PLG-016"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-14T22:16:55Z"
+decided_by = "engineering-owner"
+reason = "The owner reviewed and approved completion of the KISS backlog amendment and explicitly said \"you can start WO-PLG-009 and WO-PLG-016\" on 2026-09-15. This accepts the selected rewritten definition chain and authorizes its bounded routine execution, checks and evidence under the installed evaluator. No result-specific assurance, merge, release or live host/project installation is inferred."
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-14T22:20:07Z"
+decided_by = "engineering-owner"
+reason = "The owner explicitly authorized starting this rewritten work order on 2026-09-15. Record that selected start; use existing mechanisms and retain the KISS scope."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-15T05:29:13Z"
+decided_by = "engineering-owner"
+reason = "The owner reviewed the completed implementations and said \"i approve WO-PLG-009 and WO-PLG-016\" in response to the explicit completion request. Record that engineering-owner completion approval for WO-PLG-016. Its full local suite and documented walkthroughs passed; the implementation PR checks passed or were intentionally skipped. This approval does not verify a record, merge, release, publish or change a live project."
 +++
 
 # Document installation and check ordinary host use
@@ -59,7 +80,7 @@ separate actions. A development-only result must remain labeled as such.
 
 ## Execution and acceptance
 
-This packet is draft. Approval of its selected scope authorizes the normal execution
+Approval of this selected scope authorizes the normal execution
 procedure: start, implement, check, record completion and prepare required verification.
 Use the installed evaluator and its actual returned commands; do not add a delegation
 class, separate routine permission, forced subagent or live-CI condition for local work.
