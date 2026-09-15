@@ -1,0 +1,44 @@
+[
+  {
+    "path": "work\\plugin-publication-governance\\git-fixed-check.stdout",
+    "sha256": "da7985417b390412d6984cdb244e75232419767c7e5a46e55f451c258970798f",
+    "bytes": 1198,
+    "excerpt": "{\r\n  \"accepted\": true,\r\n  \"archives\": {\r\n    \"verity-plane-claude.zip\": \"d29d82a3e90bf30cf9cce290384f68c20c5c6756a8a1af4004b604954fee32ea\",\r\n    \"verity-plane-codex.zip\": \"d957dd535956281f3ed8f8c0216756e1ae462e9a5f67d50b8a14bc4a8e554713\"\r\n  },\r\n  \"claim\": \"Contents only; native host testing and publication remain separate.\",\r\n  \"evaluator\": {\r\n    \"archive\": \"se_harness-0.18.0-py3-none-any.whl\",\r\n    \"archive_sha256\": \"a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54\",\r\n    \"payload_sha256\": \"cf28e03f21a0e474af8c415499c69193ab2a20e08a95c0ad3514758a84cff54d\",\r\n    \"release_record\": \"docs/engineering/release-0-18-0/releases/RLS-SEH-027.md\",\r\n    \"release_record_sha256\": \"ffddc34a5afd1a050f33ef9a890d99cac11860a847e5af819f4831dac46f6e3f\",\r\n    \"release_revision\": \"e9db30d930e704ec3e40f3f0bf5e7d18799c0d4d\",\r\n    \"version\": \"0.18.0\"\r\n  },\r\n  \"identity_sha256\": \"fc9d0c585b104e6ef2ba4598e38ffeade0191e3aeae1658f9df4830244b37e58\",\r\n  \"plugin_version\": \"0.1.0\",\r\n  \"source\": {\r\n    \"plan\": \"release/plugin-assembly.json\",\r\n    \"plan_sha256\": \"c1d83c9dcd03564db80c503beb23e6f2b44741b74493fb7962584f89194ac7fb\",\r\n    \"revision\": \"e813e0c78341dd108013a0e59d3cbcbce275cae5\"\r\n  }\r\n}\r\n",
+    "excerpt_truncated": false
+  },
+  {
+    "path": "work\\plugin-publication-governance\\git-fixed-codex-validator.stdout",
+    "sha256": "79bbdef91c8300fef312d528b2c1e37fd6e035598d4efd116280996d2f863209",
+    "bytes": 148,
+    "excerpt": "Plugin validation passed: C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-git-fixed-0.1.0\\packages\\codex\\verity-plane\r\n",
+    "excerpt_truncated": false
+  },
+  {
+    "path": "work\\plugin-publication-governance\\git-fixed-claude-validator.stdout",
+    "sha256": "9cd8329bb962ef62204434ef897a1b2e128419884f2974045bbebed0a00fc5b1",
+    "bytes": 203,
+    "excerpt": "Validating plugin manifest: C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-git-fixed-0.1.0\\packages\\claude\\verity-plane\\.claude-plugin\\plugin.json\r\n\r\n\u221a Validation passed\r\n",
+    "excerpt_truncated": false
+  },
+  {
+    "path": "work\\plugin-publication-governance\\git-fixed-catalog-validator.stdout",
+    "sha256": "f0e190ee4b6692e1b44a32166a5d9bc5ca501d1669f4a427b956fbe01216cfdf",
+    "bytes": 184,
+    "excerpt": "Validating marketplace manifest: C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-git-fixed-0.1.0\\.claude-plugin\\marketplace.json\r\n\r\n\u221a Validation passed\r\n",
+    "excerpt_truncated": false
+  },
+  {
+    "path": "work\\plugin-publication-governance\\repair-distributions.stdout",
+    "sha256": "7b46d8f310b1e4fc7216b69ae9eeeb2da845e1f0c445a843f7f5d5bfb90e805b",
+    "bytes": 84,
+    "excerpt": "SE Harness release distribution validation: PASS (15 distribution-bearing records)\r\n",
+    "excerpt_truncated": false
+  },
+  {
+    "path": "work\\plugin-publication-governance\\repair-candidate-help.stdout",
+    "sha256": "721718c6a64371c984e64e9c5bbb6a27efc22727147bb755a691c4625ebbe684",
+    "bytes": 3617,
+    "excerpt": "usage: harnessctl [-h] [--version]\r\n                  {init,validate,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release} ...\r\n\r\nInstall and operate the standard software-engineering harness.\r\n\r\npositional arguments:\r\n  {init,validate,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release}\r\n    init                install the standard harness into an absent, empty or\r\n                        existing repository\r\n    validate            validate the repository artifact graph\r\n    inspect             inspect repository-wide attention and lifecycle queues\r\n    dashboard           generate the repository Harness Explorer\r\n    doctor              check an installed harness\r\n    skill-ownership     plan, apply, or restore explicit retained skill\r\n                        ownership\r\n    preflight           check work-order implementation or review readiness\r\n    check               project one selected WO, VREC, or RLS scope, or\r\n                        evaluate one of its checkpoints, and emit canonical\r\n                        restitution\r\n    evidence            write or rebind one work order's evidence packet to\r\n                        the current formal snapshot\r\n    pr-body             emit the LF-terminated pull-request body for one work\r\n                        order\r\n    transition          plan or atomically apply explicit lifecycle\r\n                        transitions\r\n    decide              dispose one pending decision with a declared option,\r\n                        under DR-DECISION-DISPOSE\r\n    raise-risk          record a risk description, owner and next action;\r\n                        optionally request a blocking decision\r\n    risks               list the risks threatening one artifact and its\r\n                        governing chain; writes nothing\r\n    check-pr            check a PR against its selected work orders and their\r\n                        combined scope\r\n    select-work-order   select one structured work-order field from a GitHub\r\n                        pull-request event\r\n    upgrade             plan or apply safe harness upgrades\r\n    scaffold-domain     safely create the canonical organization for one\r\n                        engineering domain\r\n    create-artifact     create one incomplete draft from the canonical\r\n                        artifact template\r\n    release-unit        derive a release unit's work-order census from the\r\n                        commits between the previous release tag and a\r\n                        candidate commit\r\n    identity            emit and verify one evaluator or candidate runtime\r\n                        identity\r\n    qualify             run one typed, provenance-bound release qualification\r\n                        operation\r\n    capture-verification\r\n                        prepare a ready commit-bound verification record\r\n    refresh-verification\r\n                        create a new ready record after an unchanged rebase;\r\n                        preserve the original\r\n    prepare-release     prepare a ready commit-bound release record\r\n\r\noptions:\r\n  -h, --help            show this help message and exit\r\n  --version             show program's version number and exit\r\n",
+    "excerpt_truncated": false
+  }
+]

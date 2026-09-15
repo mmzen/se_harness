@@ -1,0 +1,58 @@
+[
+  {
+    "path": "work\\plugin-publication-governance\\local-git-acceptance.log",
+    "sha256": "da24f3743a38bb30eb2763749da61fb092e3529000013ef57b1346b154a5c6fa",
+    "bytes": 42,
+    "excerpt": "codex-version 0\r\ncodex-marketplace-add 1\r\n",
+    "excerpt_truncated": false
+  },
+  {
+    "path": "work\\plugin-publication-governance\\local-git-acceptance.stderr.txt",
+    "sha256": "41330a538d8d7d49a0f1fa00348e88fbd005a8d05d78ded23ca510bddaccd20f",
+    "bytes": 853,
+    "excerpt": "Traceback (most recent call last):\r\n  File \"C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\tests\\plugin_integration\\package_assembly\\run_marketplace_acceptance.py\", line 70, in <module>\r\n    run(\"marketplace-add\", [executable, \"plugin\", \"marketplace\", \"add\", source, *([\"--ref\", args.ref] if args.ref else []), \"--json\"])\r\n    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\tests\\plugin_integration\\package_assembly\\run_marketplace_acceptance.py\", line 65, in run\r\n    assert result.returncode == expect, result.stdout + result.stderr\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nAssertionError: Error: invalid marketplace source format; expected owner/repo, a git URL, or a local marketplace path\r\n\r\n",
+    "excerpt_truncated": false
+  },
+  {
+    "path": "work\\plugin-publication-governance\\http-git-acceptance.command.json",
+    "sha256": "299e3190f57fedb9a9ad22d84299f86e70abfe7be190a8dbdd0dc04b6a74ad31",
+    "bytes": 1006,
+    "excerpt": "{\r\n  \"argv\": [\r\n    \"C:/Python313/python.exe\",\r\n    \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\se_harness\\\\tests\\\\plugin_integration\\\\package_assembly\\\\run_marketplace_acceptance.py\",\r\n    \"--marketplace\",\r\n    \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\outputs\\\\verity-plane-marketplace-governed-0.1.0\",\r\n    \"--output\",\r\n    \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\plugin-marketplace-http-check\",\r\n    \"--codex\",\r\n    \"C:/Users/hok/AppData/Local/OpenAI/Codex/bin/12219cbfbcbddde7/codex.exe\",\r\n    \"--claude\",\r\n    \"C:/Users/hok/.local/bin/claude.exe\",\r\n    \"--expected-wheel-sha256\",\r\n    \"a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54\",\r\n    \"--source\",\r\n    \"http://127.0.0.1:51147/verity-plane.git\",\r\n    \"--ref\",\r\n    \"plugin-marketplace\",\r\n    \"--install-only\"\r\n  ],\r\n  \"cwd\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\",\r\n  \"exit_code\": 1,\r\n  \"scope\": \"Loopback HTTP Git origin only; this does not satisfy public observation M05.\"\r\n}\r\n",
+    "excerpt_truncated": false
+  },
+  {
+    "path": "work\\plugin-publication-governance\\http-git-acceptance.stderr",
+    "sha256": "07b174ac15990664d9986d172eb216929dda927dabe14e4964ea10f9530b555c",
+    "bytes": 422,
+    "excerpt": "Traceback (most recent call last):\r\n  File \"C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\tests\\plugin_integration\\package_assembly\\run_marketplace_acceptance.py\", line 90, in <module>\r\n    assert (plugin / relative).read_bytes() == expected_file.read_bytes(), (host, str(relative))\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nAssertionError: ('codex', 'assembly-inventory.json')\r\n",
+    "excerpt_truncated": false
+  },
+  {
+    "path": "work\\plugin-publication-governance\\fixed-http-git-acceptance.command.json",
+    "sha256": "e22c757befd7e6b1d01e391367f71eee38a62bdc713c53387d7da222b19136f4",
+    "bytes": 1013,
+    "excerpt": "{\r\n  \"argv\": [\r\n    \"C:/Python313/python.exe\",\r\n    \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\se_harness\\\\tests\\\\plugin_integration\\\\package_assembly\\\\run_marketplace_acceptance.py\",\r\n    \"--marketplace\",\r\n    \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\outputs\\\\verity-plane-marketplace-git-fixed-0.1.0\",\r\n    \"--output\",\r\n    \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\plugin-marketplace-http-fixed-check\",\r\n    \"--codex\",\r\n    \"C:/Users/hok/AppData/Local/OpenAI/Codex/bin/12219cbfbcbddde7/codex.exe\",\r\n    \"--claude\",\r\n    \"C:/Users/hok/.local/bin/claude.exe\",\r\n    \"--expected-wheel-sha256\",\r\n    \"a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54\",\r\n    \"--source\",\r\n    \"http://127.0.0.1:55934/verity-plane.git\",\r\n    \"--ref\",\r\n    \"plugin-marketplace\",\r\n    \"--install-only\"\r\n  ],\r\n  \"cwd\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\",\r\n  \"exit_code\": 1,\r\n  \"scope\": \"Loopback HTTP Git origin only; this does not satisfy public observation M05.\"\r\n}\r\n",
+    "excerpt_truncated": false
+  },
+  {
+    "path": "work\\plugin-publication-governance\\fixed-http-git-acceptance.stderr",
+    "sha256": "99621411fa8645d5559659d38d7107cd34740c3c6922deaead6a4d3ec674c4d4",
+    "bytes": 990,
+    "excerpt": "Traceback (most recent call last):\r\n  File \"C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\tests\\plugin_integration\\package_assembly\\run_marketplace_acceptance.py\", line 77, in <module>\r\n    run(\"marketplace-add\", [executable, \"plugin\", \"marketplace\", \"add\", source + (\"@\" + args.ref if args.ref else \"\")])\r\n    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\tests\\plugin_integration\\package_assembly\\run_marketplace_acceptance.py\", line 65, in run\r\n    assert result.returncode == expect, result.stdout + result.stderr\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nAssertionError: Adding marketplace\u2026\r\n\u00d7 Failed to add marketplace: HTTP 404 error while downloading marketplace from http://127.0.0.1:55934/verity-plane.git@plugin-marketplace. The marketplace file may not exist at this URL.\r\n\r\nTechnical details: Request failed with status code 404\r\n\r\n",
+    "excerpt_truncated": false
+  },
+  {
+    "path": "work\\plugin-publication-governance\\ref-fixed-http-git-acceptance.command.json",
+    "sha256": "e88f6149d1922bdf70982183d8b57f1b1fecc581e844473b22817bfe74375af8",
+    "bytes": 1017,
+    "excerpt": "{\r\n  \"argv\": [\r\n    \"C:/Python313/python.exe\",\r\n    \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\se_harness\\\\tests\\\\plugin_integration\\\\package_assembly\\\\run_marketplace_acceptance.py\",\r\n    \"--marketplace\",\r\n    \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\outputs\\\\verity-plane-marketplace-git-fixed-0.1.0\",\r\n    \"--output\",\r\n    \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\plugin-marketplace-http-ref-fixed-check\",\r\n    \"--codex\",\r\n    \"C:/Users/hok/AppData/Local/OpenAI/Codex/bin/12219cbfbcbddde7/codex.exe\",\r\n    \"--claude\",\r\n    \"C:/Users/hok/.local/bin/claude.exe\",\r\n    \"--expected-wheel-sha256\",\r\n    \"a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54\",\r\n    \"--source\",\r\n    \"http://127.0.0.1:54617/verity-plane.git\",\r\n    \"--ref\",\r\n    \"plugin-marketplace\",\r\n    \"--install-only\"\r\n  ],\r\n  \"cwd\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\",\r\n  \"exit_code\": 1,\r\n  \"scope\": \"Loopback HTTP Git origin only; this does not satisfy public observation M05.\"\r\n}\r\n",
+    "excerpt_truncated": false
+  },
+  {
+    "path": "work\\plugin-publication-governance\\ref-fixed-http-git-acceptance.stderr",
+    "sha256": "100bc19240495a5244b6e56787ecfaa3307ac8245a6c4c4fe1e967af364c1bf7",
+    "bytes": 996,
+    "excerpt": "Traceback (most recent call last):\r\n  File \"C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\tests\\plugin_integration\\package_assembly\\run_marketplace_acceptance.py\", line 79, in <module>\r\n    run(\"marketplace-add\", [executable, \"plugin\", \"marketplace\", \"add\", claude_source])\r\n    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\tests\\plugin_integration\\package_assembly\\run_marketplace_acceptance.py\", line 65, in run\r\n    assert result.returncode == expect, result.stdout + result.stderr\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nAssertionError: Adding marketplace\u2026\r\n\u00d7 Failed to add marketplace: Failed to clone marketplace repository: Cloning into 'C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-http-ref-fixed-check\\claude\\profile\\claude\\plugins\\marketplaces\\temp_git_1789486939836_3q68t9'...\r\nfatal: dumb http transport does not support shallow capabilities\r\n\r\n",
+    "excerpt_truncated": false
+  }
+]

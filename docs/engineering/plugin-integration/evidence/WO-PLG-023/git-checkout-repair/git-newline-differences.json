@@ -1,0 +1,140 @@
+[
+  {
+    "file": "assembly-inventory.json",
+    "expected_sha256": "84fc49c6883fcdad9d341133fe125038f9dc8c1ee8fe3792b40f54b9102e44ed",
+    "installed_sha256": "81324aa4f37ee193a774606ff66fb1322a7d301467741483c9326c8e89e83687",
+    "crlf_only": true
+  },
+  {
+    "file": "LICENSE",
+    "expected_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "installed_sha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+    "crlf_only": true
+  },
+  {
+    "file": "README.md",
+    "expected_sha256": "88fc283dccec6801319c42dc7f7ef01ddc5e645b87a5852d464695badf871e15",
+    "installed_sha256": "88a3ad792fca973c90e0a17eb10147738a668c7da2925aad71fdddaa02140e10",
+    "crlf_only": true
+  },
+  {
+    "file": ".codex-plugin\\plugin.json",
+    "expected_sha256": "097079fa3f7cc3bb2b07cd47cf04c9cc41498d2896e937601d0eb86e653214fe",
+    "installed_sha256": "16553429d9a8876afb130a627bc063ee9dc50666ea191cc4e90b622d8ffa0d50",
+    "crlf_only": true
+  },
+  {
+    "file": "scripts\\setup.py",
+    "expected_sha256": "6955a2e58404b2ec9914076470210e20485eaa29d949220017a42085dcc3bb9c",
+    "installed_sha256": "27794f799031bad01f67c2d3049c3bf65ea6be5f2ab7e5026a175a35bbf68f8d",
+    "crlf_only": true
+  },
+  {
+    "file": "skills\\change\\SKILL.md",
+    "expected_sha256": "f529b45eb5b131aaf731fc62009180b132144fde472b70803ec8a105aa0ed9f2",
+    "installed_sha256": "69a5a5190b7b6470d17920bfa787106924ac3df8add84b14cc849c03abe9c2b6",
+    "crlf_only": true
+  },
+  {
+    "file": "skills\\evidence\\SKILL.md",
+    "expected_sha256": "22b494fc70cdc454a342cb39489bc2d0a7d9c7fde48aa3e248a0135b16dcc134",
+    "installed_sha256": "e1d17a497ce2e84f0e93689723516fbc9bcbe1459dd2cd73c4ef2ebb8b596ea8",
+    "crlf_only": true
+  },
+  {
+    "file": "skills\\harness-operator-brief\\skill-contract.json",
+    "expected_sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+    "installed_sha256": "5bb8bdcc254132489e6f67e8091dbea7f69404b6eb66434a98592a949483a842",
+    "crlf_only": true
+  },
+  {
+    "file": "skills\\harness-operator-brief\\SKILL.md",
+    "expected_sha256": "ed663add535e6dd54e76ac91d542bea72972076f625f08e13971953c5e94b110",
+    "installed_sha256": "57b91ab6b847b60227f2fd446d7095daa9fda68806f87b7fa534f6cb190c8bfb",
+    "crlf_only": true
+  },
+  {
+    "file": "skills\\harness-orient\\skill-contract.json",
+    "expected_sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+    "installed_sha256": "6dd5ad01256553328715df74924d1cce6ea6d368701681b48e1d045560eb7606",
+    "crlf_only": true
+  },
+  {
+    "file": "skills\\harness-orient\\SKILL.md",
+    "expected_sha256": "7ee1ea21be9a1845277d84a83262f6ba6d24ecbb2350f0b84a4ea4e519d5565c",
+    "installed_sha256": "274b96577afa6704a724cb38a33b1b0bb7dc25c0b5381a1e84fd4cb3b28c761c",
+    "crlf_only": true
+  },
+  {
+    "file": "skills\\setup\\SKILL.md",
+    "expected_sha256": "d2f610dac282dd0eb202dcec2888e522cf10d44797431e729b30a111ea95cf85",
+    "installed_sha256": "14bcb8cfc1ccca2c81336bfcb613f32aec5491f19149f9d7bfc40d65026549b6",
+    "crlf_only": true
+  },
+  {
+    "file": "skills\\setup\\references\\environment.md",
+    "expected_sha256": "a08792de5ee01ed718ea3b156cf09a4773dd203dc655ee6df3f04d40ec458363",
+    "installed_sha256": "5252a5549e350ea3de301bd001db9d591629cbf4db07da96a0d344fab6f9c5a0",
+    "crlf_only": true
+  },
+  {
+    "file": "skills\\setup\\references\\maintenance.md",
+    "expected_sha256": "0af3999894f5ba1f71ce973a4484a9d8fabed14926e2f1b27e22ffa7cba5faeb",
+    "installed_sha256": "f0ea7b09acf9a17e09a09946cb045fb86e732dd0ec1f6d85dc6c2efa285a1bcf",
+    "crlf_only": true
+  },
+  {
+    "file": "skills\\setup\\references\\repository.md",
+    "expected_sha256": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3",
+    "installed_sha256": "7a03d71898a91f9de98bc10b1207506e2f61ffafd269d9108d59ca6e800c5ed0",
+    "crlf_only": true
+  },
+  {
+    "file": "skills\\harness-orient\\scripts\\orient.py",
+    "expected_sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
+    "installed_sha256": "7afc745c30a3a990c4bb4eb0fe2db8bf5862b242dc5a0916c6c4c2b4ede970d6",
+    "crlf_only": true
+  },
+  {
+    "file": "skills\\harness-operator-brief\\agents\\openai.yaml",
+    "expected_sha256": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4",
+    "installed_sha256": "3b82e13fbe48a36d1095e2ff2f3eddd54499c3ab3709d51483dd79ab73776def",
+    "crlf_only": true
+  },
+  {
+    "file": "skills\\harness-operator-brief\\scripts\\check_brief.py",
+    "expected_sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+    "installed_sha256": "ae83b40b199a3613de42f48c6d7480b45890116c5f9454b26bc05b4688777274",
+    "crlf_only": true
+  },
+  {
+    "file": "skills\\evidence\\references\\external-actions.md",
+    "expected_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+    "installed_sha256": "99c8c7dbc30cd19caad6ce3ab42c46bb8820caff8f78b575abb76320ecb2c695",
+    "crlf_only": true
+  },
+  {
+    "file": "skills\\evidence\\references\\records.md",
+    "expected_sha256": "37078c43f1f3dcd1640ade8b21fbc7069bbf9c2d7bc8f4850d0cda6dfa4dd18b",
+    "installed_sha256": "19dd871b32871f58b192ed8f9c18170233c735c573c95a9b9632f1bcf628bddd",
+    "crlf_only": true
+  },
+  {
+    "file": "skills\\change\\references\\artifacts.md",
+    "expected_sha256": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6",
+    "installed_sha256": "0f515452b55aa4f35dfb5886a0a3607c533592059b8424233437b60c4a341e91",
+    "crlf_only": true
+  },
+  {
+    "file": "skills\\change\\references\\authority.md",
+    "expected_sha256": "d47f035e764c8db30ba51c90840ed45b47c344e5a353d0da85ed6586f72d56a2",
+    "installed_sha256": "f02db9bf1bc8c7add7e036e67d63abee6d60830804a651544b35f1b5d1c4963f",
+    "crlf_only": true
+  },
+  {
+    "file": "skills\\change\\references\\work-orders.md",
+    "expected_sha256": "79e843a8f722d438ed3c378efcea02e2fe1e390b16adc34279e6772a76b18f1c",
+    "installed_sha256": "c9f27ab19ff2aa9774400a8c539f827868a1c3172d0bee9d5d373a4bfb7c0482",
+    "crlf_only": true
+  }
+]

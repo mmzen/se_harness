@@ -1,0 +1,68 @@
+[
+  {
+    "label": "git-fixed-check",
+    "argv": [
+      "C:\\Python313\\python.exe",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\scripts\\build_plugin_marketplace.py",
+      "check",
+      "--repository",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "--revision",
+      "e813e0c78341dd108013a0e59d3cbcbce275cae5",
+      "--release-revision",
+      "e9db30d930e704ec3e40f3f0bf5e7d18799c0d4d",
+      "--release-record",
+      "docs/engineering/release-0-18-0/releases/RLS-SEH-027.md",
+      "--expected-wheel-sha256",
+      "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+      "--wheel",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-upgrade-018\\se_harness-0.18.0-py3-none-any.whl",
+      "--evaluator-python",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+      "--output-directory",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-git-fixed-0.1.0"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+    "exit_code": 0,
+    "started_at_unix": 1789486469.8938978,
+    "elapsed_seconds": 71.497
+  },
+  {
+    "label": "git-fixed-codex-validator",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-validator-env\\Scripts\\python.exe",
+      "C:\\Users\\hok\\.codex\\skills\\.system\\plugin-creator\\scripts\\validate_plugin.py",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-git-fixed-0.1.0\\packages\\codex\\verity-plane"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+    "exit_code": 0,
+    "started_at_unix": 1789486541.3979447,
+    "elapsed_seconds": 0.683
+  },
+  {
+    "label": "git-fixed-claude-validator",
+    "argv": [
+      "C:\\Users\\hok\\.local\\bin\\claude.exe",
+      "plugin",
+      "validate",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-git-fixed-0.1.0\\packages\\claude\\verity-plane"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+    "exit_code": 0,
+    "started_at_unix": 1789486542.0845382,
+    "elapsed_seconds": 1.755
+  },
+  {
+    "label": "git-fixed-catalog-validator",
+    "argv": [
+      "C:\\Users\\hok\\.local\\bin\\claude.exe",
+      "plugin",
+      "validate",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-git-fixed-0.1.0"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+    "exit_code": 0,
+    "started_at_unix": 1789486543.844579,
+    "elapsed_seconds": 1.778
+  }
+]

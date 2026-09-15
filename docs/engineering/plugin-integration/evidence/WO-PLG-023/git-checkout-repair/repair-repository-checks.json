@@ -1,0 +1,26 @@
+[
+  {
+    "label": "repair-distributions",
+    "argv": [
+      "C:/Python313/python.exe",
+      "scripts/validate_release_distributions.py",
+      "--root",
+      "."
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+    "exit_code": 0,
+    "elapsed_seconds": 22.311044931411743
+  },
+  {
+    "label": "repair-candidate-help",
+    "argv": [
+      "C:/Python313/python.exe",
+      "-m",
+      "se_harness",
+      "--help"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+    "exit_code": 0,
+    "elapsed_seconds": 0.9125187397003174
+  }
+]

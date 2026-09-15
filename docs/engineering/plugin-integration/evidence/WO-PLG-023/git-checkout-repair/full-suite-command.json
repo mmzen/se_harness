@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "C:/Python313/python.exe",
+    "scripts/run_tests.py",
+    "--workers",
+    "4",
+    "--scale",
+    "full",
+    "--timings",
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\git-repair-timings.json"
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+  "exit_code": 0,
+  "retention": "Argument array and exit status retained from observed tool invocation; combined output is git-repair-full-suite.log.",
+  "tested_source": "e813e0c78341dd108013a0e59d3cbcbce275cae5",
+  "limits": "Packaged and discovered-suite files were unchanged during execution. The separately exercised native runner ref correction is outside source discovery."
+}

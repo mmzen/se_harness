@@ -1,0 +1,251 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-PLG-023",
+    "artifacts": [
+      "WO-PLG-023"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-PLG-001",
+      "ARCH-PLG-001",
+      "CAP-DST-001",
+      "INT-DST-001",
+      "REQ-PLG-001",
+      "REQ-PLG-002",
+      "REQ-PLG-027",
+      "REQ-PLG-038",
+      "SPEC-PLG-001",
+      "SPEC-PLG-016",
+      "SPEC-PLG-021",
+      "SPEC-PLG-022",
+      "VER-PLG-001",
+      "VER-PLG-016",
+      "VER-PLG-023"
+    ],
+    "dependencies": [
+      "VREC-PLG-019"
+    ],
+    "declared_paths": [
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-038.md",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-022.md",
+      "docs/engineering/plugin-integration/verification-records/",
+      "docs/engineering/plugin-integration/verification/VER-PLG-023.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-023.md",
+      "docs/notes/plugin-installation-guide.md",
+      "docs/notes/plugin-marketplace-publication.md",
+      "plugins/verity-plane/claude-code/README.md",
+      "plugins/verity-plane/codex/README.md",
+      "plugins/verity-plane/common/skills/harness-operator-brief/agents/openai.yaml",
+      "release/plugin-assembly.json",
+      "release/plugin-marketplace/",
+      "repository_tools/plugin_distribution.py",
+      "scripts/build_plugin_marketplace.py",
+      "tests/plugin_integration/package_assembly/"
+    ],
+    "changed_paths": [
+      "docs/engineering/plugin-integration/evidence/VREC-PLG-019-evaluator.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/commands.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/evaluator-identity.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/focused-retained.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/focused-retained.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/full-suite.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/check-outputs.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/distribution-git-fixed.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/failed-rehearsals.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/full-suite-command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/git-fixed-build.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/git-fixed-checks.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/git-newline-differences.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/git-regression-retained.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/git-regression-retained.stderr",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/git-repair-full-suite.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/git-repair-preflight.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/git-repair-tests.log",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/governing-checks.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/native-git-summary.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/native-trials.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/PACKAGE-IDENTITY.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/README.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/repair-input-comparison.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/repair-repository-checks.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/git-checkout-repair/smart-http-git-acceptance.command.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/handoff.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/marketplace-build.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/native-summary.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/PACKAGE-IDENTITY.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/README.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/review-preflight.json",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/WO-PLG-023-handoff.md",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-023/workflow-results.json",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-038.md",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-022.md",
+      "docs/engineering/plugin-integration/verification-records/VREC-PLG-019.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-023.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-023.md",
+      "docs/notes/plugin-installation-guide.md",
+      "docs/notes/plugin-marketplace-publication.md",
+      "plugins/verity-plane/claude-code/README.md",
+      "plugins/verity-plane/codex/README.md",
+      "plugins/verity-plane/common/skills/harness-operator-brief/agents/openai.yaml",
+      "release/plugin-assembly.json",
+      "release/plugin-marketplace/.agents/plugins/marketplace.json",
+      "release/plugin-marketplace/.claude-plugin/marketplace.json",
+      "release/plugin-marketplace/.gitattributes",
+      "release/plugin-marketplace/README.md",
+      "release/plugin-marketplace/submissions/README.md",
+      "release/plugin-marketplace/submissions/reviewer-test-cases.md",
+      "scripts/build_plugin_marketplace.py",
+      "tests/plugin_integration/package_assembly/run_marketplace_acceptance.py",
+      "tests/plugin_integration/package_assembly/test_marketplace.py"
+    ],
+    "change_set_complete": true
+  },
+  "compliance": {
+    "checkpoint": "scope",
+    "workflow_rule_id": "WFL-WO-VERIFIED-VREC",
+    "procedure_id": "PROC-DELIVERY-SELECT",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4I-SCOPE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-PLG-023:[execution_scope]"
+              }
+            ],
+            "message": "WO-PLG-023 declares 17 normalized scope path(s); this inspection grants no execution authority."
+          },
+          {
+            "id": "QGP-G4I-COMPLETE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-PLG-023"
+              }
+            ],
+            "message": "The caller explicitly asserted that the declared change set is complete."
+          },
+          {
+            "id": "QGP-G4I-PATHS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-PLG-023"
+              }
+            ],
+            "message": "All 55 declared changed path(s) are within execution scope."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "2d372024a8dcd5e9fcdc5d44f2a738ed53203ae3a29f71eee5b7af5eab98772a",
+    "change_set_source": "git"
+  },
+  "procedure": {
+    "id": "PROC-DELIVERY-SELECT",
+    "current_step": "STEP-DELIVERY-SELECT",
+    "steps": [
+      {
+        "id": "STEP-DELIVERY-SELECT",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-VERIFIED-COVERAGE"
+        ],
+        "effects": [
+          "Selects one delivery path."
+        ],
+        "non_effects": [
+          "Selection performs no repository or release action."
+        ],
+        "decision_right": "DR-DELIVERY-SELECT",
+        "role": "repository-owner or release-owner",
+        "artifact": "WO-PLG-023",
+        "decision": "which separately authorized delivery path to select",
+        "outcomes": [
+          "repository-integration",
+          "release-preparation",
+          "stop"
+        ],
+        "response": "Select one separately authorized delivery path for WO-PLG-023."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-PLG-023",
+        "status": "implemented"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-PLG-023",
+        "status": "implemented"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 48
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated scope compliance for WO-PLG-023."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-PLG-023 is implemented."
+    ],
+    "decision_required": {
+      "decision_right": "DR-DELIVERY-SELECT",
+      "role": "repository-owner or release-owner",
+      "artifact": "WO-PLG-023",
+      "decision": "which separately authorized delivery path to select",
+      "outcomes": [
+        "repository-integration",
+        "release-preparation",
+        "stop"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-DELIVERY-SELECT",
+      "step_id": "STEP-DELIVERY-SELECT",
+      "action": "which separately authorized delivery path to select"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Select one separately authorized delivery path for WO-PLG-023."
+    },
+    "alternatives": [
+      "Use complete alternative procedure PROC-REPOSITORY-INTEGRATION.",
+      "Use complete alternative procedure PROC-PREPARE-RELEASE."
+    ]
+  },
+  "result_sha256": "674f20b117cc70472f0eb58c2dc980789a701cab9041f016c2a32f0e7da931ba"
+}

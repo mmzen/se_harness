@@ -1,0 +1,185 @@
+[
+  {
+    "label": "repair-doctor",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "doctor",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+    "exit_code": 0,
+    "output": {
+      "path": "work\\plugin-publication-governance\\repair-doctor.json",
+      "sha256": "7cd583d6ff5ce9cc87675e4e3e868beff7722e061211a2c441b7868423de5794",
+      "bytes": 21593,
+      "excerpt": "",
+      "excerpt_truncated": true
+    },
+    "summary": {},
+    "failed_checks": [],
+    "check_count": 70
+  },
+  {
+    "label": "repair-graph",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "validate",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+    "exit_code": 0,
+    "output": {
+      "path": "work\\plugin-publication-governance\\repair-graph.json",
+      "sha256": "deda1675ec8e789c17ca185f7c9d3c28ce0d110be462539e37e9043018e82d3c",
+      "bytes": 326257,
+      "excerpt": "",
+      "excerpt_truncated": true
+    },
+    "summary": {
+      "valid": true,
+      "artifact_count": 1648,
+      "error_count": 0,
+      "warning_count": 48
+    },
+    "failed_checks": [],
+    "check_count": 0
+  },
+  {
+    "label": "git-repair-preflight",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "preflight",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "--work-order",
+      "WO-PLG-023",
+      "--phase",
+      "review",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+    "exit_code": 0,
+    "output": {
+      "path": "work\\plugin-publication-governance\\git-repair-preflight.json",
+      "sha256": "a62ae9ccadb19af9661dffacad17e58a1e03dafd7da977d570e108b6c6028834",
+      "bytes": 2074,
+      "excerpt": "",
+      "excerpt_truncated": true
+    },
+    "summary": {
+      "diagnostics": [],
+      "ready": true
+    },
+    "failed_checks": [],
+    "check_count": 0
+  },
+  {
+    "label": "git-repair-scope",
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "check",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "--artifact",
+      "WO-PLG-023",
+      "--checkpoint",
+      "scope",
+      "--changed-path",
+      "release/plugin-marketplace/.gitattributes",
+      "--changed-path",
+      "scripts/build_plugin_marketplace.py",
+      "--changed-path",
+      "tests/plugin_integration/package_assembly/test_marketplace.py",
+      "--changes-complete",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+    "exit_code": 0,
+    "output": {
+      "path": "work\\plugin-publication-governance\\git-repair-scope.json",
+      "sha256": "95375c358ac1123a23e5563bf3e1ebcf5eb16c3cf75514b5addd469704c6d8b6",
+      "bytes": 6051,
+      "excerpt": "",
+      "excerpt_truncated": true
+    },
+    "summary": {
+      "state": {
+        "before": [
+          {
+            "id": "WO-PLG-023",
+            "status": "implemented"
+          }
+        ],
+        "after": [
+          {
+            "id": "WO-PLG-023",
+            "status": "implemented"
+          }
+        ]
+      },
+      "compliance": {
+        "checkpoint": "scope",
+        "workflow_rule_id": "WFL-WO-VERIFIED-VREC",
+        "procedure_id": "PROC-DELIVERY-SELECT",
+        "status": "pass",
+        "gates": [
+          {
+            "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+            "status": "pass",
+            "predicates": [
+              {
+                "id": "QGP-G4I-SCOPE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "artifact",
+                    "reference": "WO-PLG-023:[execution_scope]"
+                  }
+                ],
+                "message": "WO-PLG-023 declares 17 normalized scope path(s); this inspection grants no execution authority."
+              },
+              {
+                "id": "QGP-G4I-COMPLETE",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "result",
+                    "reference": "declared-change-set:WO-PLG-023"
+                  }
+                ],
+                "message": "The caller explicitly asserted that the declared change set is complete."
+              },
+              {
+                "id": "QGP-G4I-PATHS",
+                "status": "pass",
+                "evidence": [
+                  {
+                    "kind": "path",
+                    "reference": "declared-change-set:WO-PLG-023"
+                  }
+                ],
+                "message": "All 3 declared changed path(s) are within execution scope."
+              }
+            ]
+          }
+        ],
+        "formal_snapshot_sha256": "f6d929bd90affc7165ec348beb8c97370cfc5071bb47d3a792941082bceeb211",
+        "change_set_source": "arguments"
+      }
+    },
+    "failed_checks": [],
+    "check_count": 0
+  }
+]

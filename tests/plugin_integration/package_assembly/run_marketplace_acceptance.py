@@ -74,7 +74,9 @@ for host, executable in hosts.items():
         assert "verity-plane:setup" in discovered
     else:
         run("marketplace-validate", [executable, "plugin", "validate", market])
-        run("marketplace-add", [executable, "plugin", "marketplace", "add", source + ("@" + args.ref if args.ref else "")])
+        ref_separator = "#" if "://" in source or source.startswith("git@") else "@"
+        claude_source = source + (ref_separator + args.ref if args.ref else "")
+        run("marketplace-add", [executable, "plugin", "marketplace", "add", claude_source])
         run("install", [executable, "plugin", "install", "verity-plane@se-harness"])
         run("installed-list", [executable, "plugin", "list", "--json"])
         discovered = run("native-discovery", [executable, "plugin", "details", "verity-plane@se-harness"])
