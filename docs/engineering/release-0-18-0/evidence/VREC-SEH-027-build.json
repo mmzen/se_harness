@@ -1,0 +1,14 @@
+{
+  "verification_record": "VREC-SEH-027",
+  "candidate": "353da23881fdf045a52322a313c1e67341f7a9b1",
+  "run_id": 34937286163,
+  "run_url": "https://github.com/mmzen/se_harness/actions/runs/34937286163",
+  "result": "passed",
+  "builds": "two matching pinned Linux/amd64 recipe builds",
+  "wheel_sha256": "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+  "sdist_sha256": "757c63cd5ef6caf536fb8f07e5144706aafe373e8ac490c74f239a4acb9c6cbd",
+  "raw_replay_sha256": "1c6fd9702e55abdbecbd739dbf1db5c2576c5055d4d730a34d9513da5dd88bbe",
+  "artifact_name": "qualification-candidate-353da23881fdf045a52322a313c1e67341f7a9b1",
+  "artifact_retention_days": 14,
+  "authority": "Technical replay matching the ready VREC candidate. No verification or release decision."
+}

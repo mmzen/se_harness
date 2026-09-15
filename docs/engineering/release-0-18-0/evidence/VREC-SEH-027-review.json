@@ -1,0 +1,46 @@
+{
+  "kind": "independent read-only preparation review; no assurance decision",
+  "state": "passed",
+  "candidate": "353da23881fdf045a52322a313c1e67341f7a9b1",
+  "baseline": "fa493ceb1c78a1bf79dadab3560cb36167557ce1",
+  "record": {
+    "id": "VREC-SEH-027",
+    "status": "ready",
+    "path": "docs/engineering/release-0-18-0/verification-records/VREC-SEH-027.md",
+    "prepared_at": "2026-09-15T06:32:52Z"
+  },
+  "counts": {
+    "work_orders": 39,
+    "verification_contracts": 31,
+    "evidence_paths": 39
+  },
+  "checks": {
+    "candidate_resolves_exactly": true,
+    "contract_has_exact_39_members": true,
+    "plan_has_exact_work_selection": true,
+    "plan_has_exact_31_verifications": true,
+    "all_members_implemented_at_candidate": true,
+    "historical_evidence_and_records_unchanged": true,
+    "plan_has_39_existing_evidence_files": true,
+    "every_work_has_keyed_evidence": true,
+    "record_is_requested_ready_candidate": true,
+    "record_has_exact_work_selection": true,
+    "record_has_exact_verifications": true,
+    "record_has_exact_evidence_selection": true,
+    "record_reports_clean_capture": true,
+    "preparation_does_not_claim_assurance": true,
+    "evaluator_evidence_hash_matches": true,
+    "evaluator_is_isolated_released_017": true,
+    "no_historical_worktree_edit": true
+  },
+  "changed_historical_paths": [],
+  "claim_review": [
+    "The selected release evidence distinguishes prior hosted candidate 02d7958d and its unbound bundle from this later completion candidate.",
+    "Matching hosted qualification and recipe replay for this candidate are required before presenting assurance; root agent is handling them separately.",
+    "Final plugin assembly still requires released checker/public wheel; no final plugin release or public installation is claimed.",
+    "Root remains governed by installed 0.17.0; no publication, live adoption, model-driven-session or broader host claim is made.",
+    "Existing WO-ECP-037, WO-ECP-038 and WO-PLG-022 summaries support aggregate review without claiming individual verified records.",
+    "The generated record carries standing deviation DEC-PLG-006 against SPEC-PLG-008#PLG-HOOK-002; retain that historical fact and explain current KISS applicability without reinstating removed hooks."
+  ],
+  "findings": []
+}
