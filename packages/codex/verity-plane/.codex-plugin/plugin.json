@@ -1,0 +1,24 @@
+{
+  "name": "verity-plane",
+  "version": "0.1.0",
+  "description": "Shared SE Harness skills with explicit repository checks.",
+  "skills": "./skills/",
+  "author": {
+    "name": "SE Harness"
+  },
+  "interface": {
+    "displayName": "Verity Plane",
+    "shortDescription": "Use the repository-selected evaluator.",
+    "longDescription": "Read repository instructions and run explicit checks at governed work checkpoints.",
+    "developerName": "SE Harness",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Prepare evaluator environment",
+      "Orient to governed work",
+      "Run explicit checks"
+    ],
+    "defaultPrompt": [
+      "Read this repository’s instructions and show the selected work’s next step."
+    ]
+  }
+}

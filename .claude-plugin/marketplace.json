@@ -1,0 +1,17 @@
+{
+  "name": "se-harness",
+  "metadata": {
+    "description": "SE Harness skills for project setup, governed coding and verification evidence."
+  },
+  "owner": {
+    "name": "SE Harness"
+  },
+  "plugins": [
+    {
+      "name": "verity-plane",
+      "source": "./packages/claude/verity-plane",
+      "description": "Use SE Harness skills for repository setup, governed changes and verification evidence.",
+      "category": "development"
+    }
+  ]
+}

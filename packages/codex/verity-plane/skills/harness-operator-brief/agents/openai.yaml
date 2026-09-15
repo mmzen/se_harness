@@ -1,0 +1,5 @@
+interface:
+  display_name: "Harness Operator Brief"
+  short_description: "Prepare an explicitly requested engineering decision brief."
+policy:
+  allow_implicit_invocation: false
