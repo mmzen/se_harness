@@ -70,7 +70,7 @@
               }
             ],
             "id": "QGP-G4I-PATHS",
-            "message": "All 13 declared changed path(s) are within execution scope.",
+            "message": "All 16 declared changed path(s) are within execution scope.",
             "status": "pass"
           },
           {
@@ -273,14 +273,17 @@
     "not_done": [],
     "outcome": "completed"
   },
-  "result_sha256": "5a49f12d9c5e5bb82738c015e5dbc8e4d18b272ffbfc967ec5d7f2a7d29f83bd",
+  "result_sha256": "17dddb878bbd279f55ffb21f6fb330da4baec4a72a48c55ad3723a4598519af0",
   "schema": "se-harness-workflow-result-v2",
   "scope": {
     "change_set_complete": true,
     "changed_paths": [
       "docs/engineering/README.md",
+      "docs/engineering/release-0-18-0/evidence/WO-RLS-024/build-summary.json",
+      "docs/engineering/release-0-18-0/evidence/WO-RLS-024/candidate-bundle.json",
       "docs/engineering/release-0-18-0/evidence/WO-RLS-024/coverage.md",
       "docs/engineering/release-0-18-0/evidence/WO-RLS-024/handoff.json",
+      "docs/engineering/release-0-18-0/evidence/WO-RLS-024/hosted-ci.json",
       "docs/engineering/release-0-18-0/evidence/WO-RLS-024/local-checks.json",
       "docs/engineering/release-0-18-0/evidence/WO-RLS-024/README.md",
       "docs/engineering/release-0-18-0/evidence/WO-RLS-024/WO-RLS-024-handoff.md",

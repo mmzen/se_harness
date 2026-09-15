@@ -25,12 +25,22 @@ behavior; historical records keep their original meaning.
 
 ## Hosted candidate qualification
 
-The branch push runs the existing candidate-source suite, package checks and
-Windows/Ubuntu predecessor-upgrade acceptance. The existing publication rehearsal
-provides the candidate's two pinned Linux recipe builds. Their exact commits,
-run links and bundle manifest will be retained after the runs finish.
-This workstation has no Docker; its earlier non-promotable native wheels are
-not substitutes for that release build.
+Exact source candidate: 02d7958d61821a6fca20eab0173bf9b33be961aa.
+The branch-push [candidate workflow](https://github.com/mmzen/se_harness/actions/runs/34935510844)
+passed: source qualification, the full Linux suite, candidate package acceptance,
+and both Windows and Linux predecessor-upgrade/plugin checks. The
+[job results](hosted-ci.json) retain actual step conclusions, including skips.
+
+The manual [publication rehearsal](https://github.com/mmzen/se_harness/actions/runs/34935534971)
+passed. Its two pinned Linux builds produced identical checker wheel and source
+archive bytes. The [build summary](build-summary.json) identifies the exact run,
+candidate, recipe and digests; [candidate-bundle.json](candidate-bundle.json)
+retains the original bundle manifest. This is unbound preparation evidence.
+It must not be silently rebound to a later verification candidate.
+
+This workstation has no Docker. Its earlier non-promotable native wheels were
+not used as the release build. The released-record leg in the same rehearsal
+checked existing RLS-SEH-026; it is not a replay of a new 0.18.0 release record.
 
 ## Decision boundary
 

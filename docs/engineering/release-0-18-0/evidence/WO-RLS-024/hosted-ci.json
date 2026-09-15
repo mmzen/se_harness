@@ -1,0 +1,122 @@
+{
+  "conclusion": "success",
+  "event": "push",
+  "headSha": "02d7958d61821a6fca20eab0173bf9b33be961aa",
+  "jobs": [
+    {
+      "name": "Candidate source evidence",
+      "conclusion": "success",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34935510844/job/104272425614",
+      "checks": [
+        {
+          "name": "Qualify the complete candidate graph as candidate-controlled",
+          "conclusion": "success"
+        },
+        {
+          "name": "Prove active evaluator surface",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run complete candidate-source regression",
+          "conclusion": "success"
+        },
+        {
+          "name": "Prove candidate source made no checkout change",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "Candidate package evidence",
+      "conclusion": "success",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34935510844/job/104272625440",
+      "checks": [
+        {
+          "name": "Prove candidate wheel has the portable standard surface",
+          "conclusion": "success"
+        },
+        {
+          "name": "Qualify the candidate package with the released verifier",
+          "conclusion": "success"
+        },
+        {
+          "name": "Prove package evidence made no checkout change",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "Upgrade rehearsal (Windows)",
+      "conclusion": "success",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34935510844/job/104272716823",
+      "checks": [
+        {
+          "name": "Rehearse the real predecessor-to-successor upgrade twice",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows checkout and interpreter paths",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check plugin migration with the installed candidate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check plugin setup and development packages",
+          "conclusion": "success"
+        },
+        {
+          "name": "Prove the upgrade rehearsal made no checkout change",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "Upgrade rehearsal (Linux)",
+      "conclusion": "success",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34935510844/job/104272716828",
+      "checks": [
+        {
+          "name": "Rehearse the real predecessor-to-successor upgrade twice",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows checkout and interpreter paths",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Check plugin migration with the installed candidate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check plugin setup and development packages",
+          "conclusion": "success"
+        },
+        {
+          "name": "Prove the upgrade rehearsal made no checkout change",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "Build deterministic integration package",
+      "conclusion": "skipped",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34935510844/job/104273210604",
+      "checks": []
+    },
+    {
+      "name": "Verify integration package (${{ matrix.platform }})",
+      "conclusion": "skipped",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34935510844/job/104273211034",
+      "checks": []
+    },
+    {
+      "name": "Retain verified integration package",
+      "conclusion": "skipped",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34935510844/job/104273211093",
+      "checks": []
+    }
+  ],
+  "url": "https://github.com/mmzen/se_harness/actions/runs/34935510844"
+}

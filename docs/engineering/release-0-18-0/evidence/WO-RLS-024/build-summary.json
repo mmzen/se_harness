@@ -1,0 +1,18 @@
+{
+  "candidate": "02d7958d61821a6fca20eab0173bf9b33be961aa",
+  "run_id": 34935534971,
+  "run_url": "https://github.com/mmzen/se_harness/actions/runs/34935534971",
+  "workflow": "publication-rehearsal.yml",
+  "event": "workflow_dispatch",
+  "conclusion": "success",
+  "builds": "two matching pinned linux/amd64 recipe builds",
+  "version": "0.18.0",
+  "wheel_sha256": "6dacbf6b0f9c24bb304dcd26eae45ea14ddd296084df69682c2159d7caab243c",
+  "sdist_sha256": "4923339a9c639d01c46cbae2008658bcec4c51fd8fdd678a77cbfe5e912be22a",
+  "build_recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc",
+  "source_manifest_sha256": "188c2fa22a2a06f11e58b900abea77b4ceea74157fb8cc42cdb5808d09a25d7d",
+  "raw_replay_sha256": "b1569cdc7986966540364b7c216e6928b8b5b6d6338be061dca6b874828347d1",
+  "artifact_name": "qualification-candidate-02d7958d61821a6fca20eab0173bf9b33be961aa",
+  "artifact_retention_days": 14,
+  "authority": "Technical build evidence only. No final VREC or RLS is bound yet."
+}
