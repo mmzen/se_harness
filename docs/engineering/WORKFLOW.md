@@ -38,33 +38,47 @@ and an applied permitted transition change lifecycle state.
 to a ready VREC with one eligible successor. Historical lifecycle events MUST
 remain append-only.
 
-Managed-file integrity uses schema-3 SHA-256 over the versioned `utf8-text-lf-v1` representation and binds the installed released-evaluator payload plus its archive when available. LF, CRLF, and CR are equivalent line terminators; all other content distinctions remain significant. Schema-1 and schema-2 locks remain readable, but ordinary mutation requires a schema-3 evaluator match; older locks migrate only through a separately reviewed upgrade whose target evaluator is installed from already-published wheel bytes. `doctor` and mutation plans are read-only, and customized, ambiguous, or identity-mismatched content is never overwritten.
+Managed-file integrity uses SHA-256 over the versioned `utf8-text-lf-v1` representation and binds the installed released-evaluator payload plus its archive when available. LF, CRLF, and CR are equivalent line terminators; all other content distinctions remain significant. Schema 3 is the default repository format. Schema 4 selects plugin skills with a portable provider record under SPEC-PLG-021. Skill replacement is file-only cleanup with atomic lock saving and ordinary retries; it grants no lifecycle authority. Schemas 1 and 2 are refused before writes. Ordinary mutation requires the exact evaluator identity bound by the selected supported lock. `doctor` and mutation plans are read-only, and customized, ambiguous, or identity-mismatched content is never overwritten.
 
 Lifecycle transition apply, non-dry-run domain and artifact authoring, verification capture, and release preparation all acquire the same evaluator authority before writing. Verification capture retains canonical normalized evaluator evidence and binds its path and SHA-256 in the ready VREC. Release preparation repeats that observation, requires the locked wheel name and digest, and binds it in the ready RLS. Changing, removing, or substituting those evidence bytes invalidates the record; the evidence is technical provenance, not an assurance or release decision.
 
-## Delegated operations
+## Approved execution
 
-`WORKFLOW.json` schema v4 defines the three delegated operations of the
-delegation class. A work order that carries `[delegation] class =
-"execution"` at the base of its pull request lets the `delegated-executor`
-role apply them, one at a time, only while the required pull-request check
-for the candidate head reads `success` from the CI provider; the decision
-record names the check-run id and the head sha. Absence from this table
-denies an operation; every other decision right stays human.
+Work-order approval grants the execution operations in
+`DECISION_RIGHTS.md#approved-execution`. A person or agent follows the same
+procedure with the same local approval, scope and evidence checks. The existing
+operation identifiers below remain stable; they do not select different routes.
 
 | Operation | Decision right | Current WO state | Result |
 | --- | --- | --- | --- |
-| `delegated-work-order-start` | `DR-WO-START` | `approved` | Existing legal transition to `in_progress` |
-| `delegated-work-order-complete` | `DR-WO-COMPLETE` | `in_progress` | Existing legal transition to `implemented`, behind the same handoff gate as the human decision |
-| `delegated-vrec-prepare` | `DR-VREC-PREPARE` | `implemented` | One undecided ready VREC; no assurance decision |
+| `delegated-work-order-start` | `DR-WO-START` | `approved` | Executor applies the selected transition to `in_progress`. |
+| `delegated-work-order-complete` | `DR-WO-COMPLETE` | `in_progress` | Executor records `implemented` after the required handoff checks. |
+| `delegated-vrec-prepare` | `DR-VREC-PREPARE` | `implemented` | Executor prepares one ready VREC from the explicitly selected WO set. |
 
-`harnessctl check` tells the actor when a decision due is delegated to it:
-`decision_required` names `delegated-executor` and the command to run when
-the gate is `success`, and a response naming the check, the head and the
-conclusion observed otherwise. Verification preparation MUST stop before Git
-when a required candidate commit is absent; the response requests the exact
-repository-owner action and performs no staging, commit, branch, push,
-merge, assurance, release, credential, network, or external effect.
+`harnessctl check` returns the next procedure command directly. It does not
+request another owner start, completion or preparation decision. Commands still
+check actual approval and local gates before writing. A missing grant, changed
+scope or failed check blocks the affected operation; there is no owner-route
+bypass. CI is assessed separately at integration and publication.
+
+For an approved selected WO, run start preflight, preview the start transition,
+apply it, then inspect the resulting state. For completion, run handoff checks,
+preview the completion transition and apply it. Prepare required verification
+using the returned capture command with inspected record ID, verification and
+evidence inputs. Substitute the actual executor identity for the example
+`delegated-executor` actor when appropriate; identity never changes the checks.
+
+An implemented WO classified `not_required` needs no new VREC. Execution is
+complete; report that result and follow any already authorized delivery. Do not
+interpret the read-only completion projection as another execution loop.
+Existing explicitly prepared records remain eligible for their owner decisions.
+
+Verification capture hashes selected artifacts directly. It does not build a
+dashboard. To capture a committed candidate while keeping local edits, use
+`capture-verification --candidate-commit <commit> --test-command <executable> <args>`.
+The test command runs without a shell in a temporary checkout; a failed command
+or tracked test mutation prevents the record. The record keeps its actual commit
+and test result, and the temporary checkout is removed.
 
 ## State model
 
@@ -153,6 +167,13 @@ Conformance tests MUST fail on such a difference.
 
 ## Bound procedures
 
+Use `harnessctl check . --artifact ARTIFACT-ID` to see the next action. Checks,
+including `--checkpoint pre-action`, select their procedure automatically.
+`--procedure` is optional and selects only a declared alternative.
+A work order may list ordinary evidence files in its top-level `evidence_paths`;
+those files need no machine header and must exist inside the repository.
+Generated evidence headers remain supported, including extra descriptive text fields.
+
 Each row names its exact procedure in `WORKFLOW.json`. `harnessctl check`
 resolves the first matching workflow row and that procedure. An actor MUST NOT
 replace a procedure with an unbound instruction such as "run preflight" or
@@ -163,9 +184,10 @@ contract's `non_effects` remain mandatory.
 | --- | --- | --- | --- | --- |
 | `WFL-WO-READY-VREC` | Focused WO is `implemented`; a related VREC is `ready`. | `QG-G4-ASSURANCE-DECISION` / `DR-VREC-DECIDE` | `PROC-FOCUS-RELATED` | Focus the ready VREC. The assurance owner decides only that VREC; the WO remains `implemented`. |
 | `WFL-WO-VERIFIED-VREC` | Focused WO is `implemented`; a related VREC is `verified` or `released`. | `QG-G4-VERIFIED-COVERAGE` / `DR-DELIVERY-SELECT` | `PROC-DELIVERY-SELECT` | Selection changes neither record. Complete alternatives are `PROC-REPOSITORY-INTEGRATION` and `PROC-PREPARE-RELEASE`. |
-| `WFL-WO-PREPARE-VREC` | Focused WO is `implemented`; no ready, verified, or released VREC covers it. | `QG-G4-CANDIDATE-READY` / `DR-VREC-PREPARE` | `PROC-WO-PREPARE-VREC` | Create one ready VREC; do not change or verify the WO. |
-| `WFL-WO-START` | Focused WO is `approved`. | `QG-G3-WORK-AUTHORIZATION` / `DR-WO-START` | `PROC-WO-START` | Execute the six ordered typed steps. Only the selected WO may become `in_progress`. |
-| `WFL-WO-IMPLEMENT` | Focused WO is `in_progress`. | `QG-G4-IMPLEMENTATION-EVIDENCE` / `DR-WO-COMPLETE` | `PROC-WO-IMPLEMENT` | Completion changes only the WO to `implemented`; it does not verify work. |
+| `WFL-WO-NO-VREC` | Focused WO is `implemented` and assurance is `not_required`. | No new assurance gate / `DR-RELATED-RECORD-SELECT` | `PROC-FOCUS-SELECTED` | Report completed execution; no VREC is required. |
+| `WFL-WO-PREPARE-VREC` | Focused WO is `implemented`; no ready, verified, or released VREC covers it. | `QG-G4-CANDIDATE-READY` / `DR-VREC-PREPARE` | `PROC-WO-PREPARE-VREC` | `STEP-WO-PREPARE-VREC-CAPTURE` command under the selected work-order approvals. |
+| `WFL-WO-START` | Focused WO is `approved`. | `QG-G3-WORK-AUTHORIZATION` / `DR-WO-START` | `PROC-WO-START` | `STEP-WO-START-PREFLIGHT` command, `STEP-WO-START-PREVIEW` command, `STEP-WO-START-APPLY` command, `STEP-WO-START-FINAL-FOCUS` command. |
+| `WFL-WO-IMPLEMENT` | Focused WO is `in_progress`. | `QG-G4-IMPLEMENTATION-EVIDENCE` / `DR-WO-COMPLETE` | `PROC-WO-IMPLEMENT` | `STEP-WO-IMPLEMENT-CHECK` command, `STEP-WO-IMPLEMENT-PREVIEW` command, `STEP-WO-IMPLEMENT-APPLY` command. |
 | `WFL-WO-COMPLETED` | Focused WO is `verified` or `released`. | No gate / `DR-RELATED-RECORD-SELECT` | `PROC-FOCUS-SELECTED` | Projection changes nothing. |
 | `WFL-VREC-DECIDE` | Focused VREC is `ready`. | `QG-G4-ASSURANCE-DECISION` / `DR-VREC-DECIDE` | `PROC-VREC-DECIDE` | Change only the VREC. Complete alternatives are `PROC-VREC-REJECT` and `PROC-VREC-SUPERSEDE`. |
 | `WFL-VREC-DELIVER` | Focused VREC is `verified` or `released`. | `QG-G4-VERIFIED-COVERAGE` / `DR-DELIVERY-SELECT` | `PROC-DELIVERY-SELECT` | Selection changes nothing. `PROC-REPOSITORY-INTEGRATION` is a complete alternative. |
@@ -188,9 +210,9 @@ outcomes, and response values.
 
 | Procedure ID | Ordered typed steps |
 | --- | --- |
-| `PROC-WO-START` | `STEP-WO-START-FOCUS` command `harnessctl check . --artifact {artifact_id}`; `STEP-WO-START-PREFLIGHT` command `harnessctl preflight . --work-order {artifact_id} --phase start`; `STEP-WO-START-DECIDE` decision `DR-WO-START`; `STEP-WO-START-PREVIEW` transition-preview command; `STEP-WO-START-APPLY` transition-apply command; `STEP-WO-START-FINAL-FOCUS` command `harnessctl check . --artifact {artifact_id}`. |
-| `PROC-WO-IMPLEMENT` | `STEP-WO-IMPLEMENT-CHECK` command `harnessctl check . --artifact {artifact_id} --checkpoint handoff` (the `scope` checkpoint evaluates the scope predicates alone, in any state, for the pull-request gate); `STEP-WO-IMPLEMENT-DECIDE` decision `DR-WO-COMPLETE`. |
-| `PROC-WO-PREPARE-VREC` | `STEP-WO-PREPARE-VREC-DECIDE` decision `DR-VREC-PREPARE`. |
+| `PROC-WO-START` | `STEP-WO-START-PREFLIGHT`, `STEP-WO-START-PREVIEW`, `STEP-WO-START-APPLY`, `STEP-WO-START-FINAL-FOCUS`: commands using recorded approval, without another owner start decision. |
+| `PROC-WO-IMPLEMENT` | `STEP-WO-IMPLEMENT-CHECK`, `STEP-WO-IMPLEMENT-PREVIEW`, `STEP-WO-IMPLEMENT-APPLY`: handoff, preview and completion commands under the existing grant. |
+| `PROC-WO-PREPARE-VREC` | `STEP-WO-PREPARE-VREC-CAPTURE`: prepare using inspected inputs and each selected WO approval. |
 | `PROC-FOCUS-SELECTED` | `STEP-FOCUS-SELECTED` command `harnessctl check . --artifact {artifact_id}`. |
 | `PROC-FOCUS-RELATED` | `STEP-FOCUS-RELATED` command `harnessctl check . --artifact {related_id}`. |
 | `PROC-VREC-DECIDE` | `STEP-VREC-DECIDE` decision `DR-VREC-DECIDE`. |
@@ -272,11 +294,12 @@ or next action; add a repository-wide finding to the selected result; ask an
 open-ended question instead of presenting the selected recommendation; or turn
 an alternative into a second next action.
 
-When exact headings, field order, whitespace, or bytes are required, the
-application or automation MUST invoke the deterministic schema-2 human renderer
-directly and use its output unchanged. Model transcription MUST NOT be used for
-exact rendering. The direct renderer's existing headings and empty-value rules
-remain its contract; they do not constrain an adaptive agent handoff.
+For automation, read the schema-2 JSON result. New results declare
+`digest_format = "machine-fields-v1"`; their hash binds machine fields such as
+candidate identity, scope, state, gate status, and command arguments. Explanatory
+wording is excluded. Retained results without this marker still use their
+original digest format. Human headings and wording can evolve without changing
+machine evidence identity.
 
 ## Failure procedure
 

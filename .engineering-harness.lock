@@ -1,43 +1,43 @@
 {
   "evaluator": {
-    "archive_name": "se_harness-0.17.0-py3-none-any.whl",
-    "archive_sha256": "305c7cbc79f87baa76ea3bea939b134999f9cad3bfdfa0b4c9c2fd2d9caacced",
+    "archive_name": "se_harness-0.18.0-py3-none-any.whl",
+    "archive_sha256": "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
     "payload_manifest": "se-harness-installed-payload-v1",
-    "payload_sha256": "dd48b16b69d90a04412f458c756876ec22a687c99282075e69d0f58316c43405",
-    "version": "0.17.0"
+    "payload_sha256": "cf28e03f21a0e474af8c415499c69193ab2a20e08a95c0ad3514758a84cff54d",
+    "version": "0.18.0"
   },
   "files": {
     ".agents/skills/harness-operator-brief/SKILL.md": {
-      "mode": "managed",
-      "sha256": "b7502217f5aac07c4bb3bd185f52e82d47c8f12fc0f4690efcb58eb8e42e5fd3"
+      "mode": "seed",
+      "state": "present"
     },
     ".agents/skills/harness-operator-brief/scripts/check_brief.py": {
-      "mode": "managed",
-      "sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683"
+      "mode": "seed",
+      "state": "present"
     },
     ".agents/skills/harness-operator-brief/skill-contract.json": {
-      "mode": "managed",
-      "sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52"
+      "mode": "seed",
+      "state": "present"
     },
     ".agents/skills/harness-orient/SKILL.md": {
-      "mode": "managed",
-      "sha256": "0cf64a75e7df251d44bc9f362c31cdb606ed8582165c0309c0984c5743b253ca"
+      "mode": "seed",
+      "state": "present"
     },
     ".agents/skills/harness-orient/scripts/orient.py": {
-      "mode": "managed",
-      "sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56"
+      "mode": "seed",
+      "state": "present"
     },
     ".agents/skills/harness-orient/skill-contract.json": {
-      "mode": "managed",
-      "sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627"
+      "mode": "seed",
+      "state": "present"
     },
     ".claude/skills/harness-orient/SKILL.md": {
-      "mode": "managed",
-      "sha256": "8da58e3e22b3e9d7a7fc332aaf1df1fd45463b65208c3798c30b0d99d9548295"
+      "mode": "seed",
+      "state": "present"
     },
     ".engineering-harness.toml": {
-      "mode": "managed",
-      "sha256": "b17e1a31c8d14144d9a7f2084994f9f2bec52746918b775c3148aba219ce064a"
+      "mode": "seed",
+      "state": "present"
     },
     ".gitattributes": {
       "mode": "fragment",
@@ -48,8 +48,8 @@
       "state": "present"
     },
     ".github/workflows/engineering-harness.yml": {
-      "mode": "managed",
-      "sha256": "461a41e18df263831272deb7ec6a305767e7c9878eb7cd80fe23d136267381a8"
+      "mode": "seed",
+      "state": "present"
     },
     ".gitignore": {
       "mode": "fragment",
@@ -57,123 +57,123 @@
     },
     "AGENTS.md": {
       "mode": "fragment",
-      "sha256": "864a2c3bafbc3191c778fe20402a2e983b4bece1c11103540164c06c46b4bef5"
+      "sha256": "7737185418ba21d818037bfa06d680474591396cb5f9000029fda1d02d261e71"
     },
     "CLAUDE.md": {
       "mode": "fragment",
-      "sha256": "459bf70b6e9b45726ebcd48c1d93b64f603e36c1d22d94d4daccc08181a59f26"
+      "sha256": "3cd722a660483f23790bbbed081e71c9dfee56111c4d5f953e1234f21d4b7a3b"
     },
     "ENGINEERING_HARNESS.md": {
       "mode": "managed",
-      "sha256": "2eba66c086611568ca2bed91ce89f278d78c7f2c5096ba5fea20fc4b6f21e4d8"
+      "sha256": "d201d7732e0ad46406940b42669b1337e5402fa9bb1dcb10903a7f0ea133db55"
     },
     "GLOSSARY.md": {
       "mode": "seed",
       "state": "present"
     },
     "docs/engineering/ARTIFACT_AUTHORING.md": {
-      "mode": "managed",
-      "sha256": "8559db739e38a4a6871bea57243c98f35d1e3a27b8df2371bacee9be33fd0ace"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/DECISION_RIGHTS.md": {
-      "mode": "managed",
-      "sha256": "cab44d7cd079fb5598f83987b15cba2cf605b241288c684b1bda4d8c82d60709"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/OPERATING_CARD.md": {
-      "mode": "managed",
-      "sha256": "1b9f6dcd497b07f9b1658eeebea09ab915e250a69090634b8f738c59ada95baf"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/QUALITY_GATES.json": {
       "mode": "managed",
-      "sha256": "4cbf80f9130630a591c76a42b43486e2db2fa83d64de2ad8bd32f22204661c5c"
+      "sha256": "532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2"
     },
     "docs/engineering/QUALITY_GATES.md": {
-      "mode": "managed",
-      "sha256": "caaf231d883d3b0b6007d7945f9610f208a3fedff86af3c2df27972643ee01d5"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/README.md": {
       "mode": "seed",
       "state": "present"
     },
     "docs/engineering/TECHNICAL_COMMUNICATION.md": {
-      "mode": "managed",
-      "sha256": "0f710e2a53f65e63e8904214531e6d8ca8c24487e7e14b9210b62a53db37c245"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/TRACEABILITY.md": {
-      "mode": "managed",
-      "sha256": "4f116876ffcfd3abaddd946fd41b969636048c095afea46881ebd1672b506f20"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/WORKFLOW.json": {
       "mode": "managed",
-      "sha256": "f866cf32423ce1b41a635d7c2dbc35c8294923006a3297bcea66a3b4ece0f48f"
+      "sha256": "310b35d4f07a071258d220d1c3d751f603c4eee74cea83467f7ba2f74b594516"
     },
     "docs/engineering/WORKFLOW.md": {
-      "mode": "managed",
-      "sha256": "286bb8759eb031306c571ad034d0da2bd42ab4cf6a5b0163dbff77f43627b651"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/templates/ADR.template.md": {
-      "mode": "managed",
-      "sha256": "e93969569c4942053b177bd985552c80a724ef150ef1bac6b5bb07251a292569"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/templates/ARCHITECTURE.template.md": {
-      "mode": "managed",
-      "sha256": "cbef4107518714c8589e56bcdd0a26c8370f0beec910a5d8d36a9b72a733264e"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/templates/CAPABILITY.template.md": {
-      "mode": "managed",
-      "sha256": "ae839e6a46fe79f0941981d1bd1b5031c3ace642f7d4ce7a54ce5d5560392436"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/templates/DECISION.template.md": {
-      "mode": "managed",
-      "sha256": "7eee2639aed2960b7f3537641b1a1112fa19c2901a76dbd6f994f8db3901953e"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/templates/INTENT.template.md": {
-      "mode": "managed",
-      "sha256": "37861b9ff3caad2c971cb47d35e561a4d151ecb6c404afad8e700518fc9e094c"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/templates/OPERATING_CONTRACT.template.md": {
-      "mode": "managed",
-      "sha256": "c43646bead3c08b0bee0cdf1326c7a95b95ceb8b9141bf0a5ac7418c48613468"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/templates/README.md": {
-      "mode": "managed",
-      "sha256": "7d0b822af791a7cdf8601bff4b6b6566a002f1b2d3e2b8fab5fb93e491a3cf74"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/templates/RELEASE_CONTRACT.template.md": {
-      "mode": "managed",
-      "sha256": "2ea05c0c0b0ffa529c2999350609d125c584e9ad8a0c866402f9350b5213a3b6"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/templates/RELEASE_RECORD.template.md": {
-      "mode": "managed",
-      "sha256": "24e90652e4b9582b56ec5ab28b69208a4389fbe5524d50f36e1cc0a7d827a1ff"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/templates/REQUIREMENT.template.md": {
-      "mode": "managed",
-      "sha256": "09c88ffc221a6bce8c0ae698f1ecefa39ef91cb54de6ecbf79f18df317e249ee"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/templates/RISK.template.md": {
-      "mode": "managed",
-      "sha256": "05f30f5f78e3677750a8da51d458c0b2de26018aff73ac79a8fe8abda0484f3a"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/templates/SPECIFICATION.template.md": {
-      "mode": "managed",
-      "sha256": "66e18f26ebcbe0deb06202ae51e833ebabf2d9d71a0c6cf0842d424ef8980814"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/templates/VERIFICATION.template.md": {
-      "mode": "managed",
-      "sha256": "ee6ca379624742dda1db745761d1e487667fcd4964cc7855e2f9267d95c4699c"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/templates/VERIFICATION_RECORD.template.md": {
-      "mode": "managed",
-      "sha256": "5223be7b6c0c1243a7d00dcab37474fda634f110e85c891b2a87da9312fa32f5"
+      "mode": "seed",
+      "state": "present"
     },
     "docs/engineering/templates/WORK_ORDER.template.md": {
-      "mode": "managed",
-      "sha256": "5a271993bf90ad3eddc1e08ff0e9ff62c8876b717dd1ff402d4354e073ff1d4b"
+      "mode": "seed",
+      "state": "present"
     }
   },
   "hash_algorithm": "sha256",
   "hash_mode": "utf8-text-lf-v1",
   "schema": 3,
-  "tool_version": "0.17.0"
+  "tool_version": "0.18.0"
 }

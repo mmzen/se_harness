@@ -5,9 +5,9 @@
 Installing the Python package makes a checker available. Updating a repository
 is a separate, explicit `harnessctl upgrade --apply` operation.
 
-This guide describes the candidate behavior from WO-KIS-003. An existing
+This guide describes behavior released in 0.18.0 from WO-KIS-003. An existing
 repository keeps its installed evaluator and lock until an explicit upgrade.
-The SE Harness development repository still uses released 0.17.0.
+The SE Harness development repository adopted released 0.18.0 under WO-HUP-019.
 
 ## What is kept under control
 

@@ -214,8 +214,8 @@ class ArtifactCatalogTests(unittest.TestCase):
             "| Artifact authoring locations and templates | "
             "`docs/engineering/templates/README.md` |"
         )
-        # The released root router is exact public 0.7.0 (WO-HUP-006): it equals
-        # the candidate template rendered for this repository and its evaluator.
+        # The released root follows its adopted evaluator, independently of the
+        # candidate version (WO-HUP-019).
         self.assertIn("the selected governing chain is invalid or artifact IDs are ambiguous", candidate_router)
         self.assertIn("The installed evaluator owns executable policy", candidate_router)
         self.assertIn("--replace-file PATH", candidate_router)
@@ -227,7 +227,10 @@ class ArtifactCatalogTests(unittest.TestCase):
         self.assertIn("## Lifecycle handoff", router)
         self.assertNotIn("## Lifecycle restitution", router)
         self.assertIn("The structured\nresult is authoritative", router)
-        self.assertIn("Model transcription MUST NOT", router)
+        if tuple(int(part) for part in evaluator_version.split(".")) >= (0, 18, 0):
+            self.assertIn("It MUST NOT claim an effect, decision, or authority absent", router)
+        else:
+            self.assertIn("Model transcription MUST NOT", router)
         self.assertNotIn("harnessctl focus", router)
         self.assertNotIn("harnessctl preflight", router)
         self.assertIn("WORKFLOW.json", router)
