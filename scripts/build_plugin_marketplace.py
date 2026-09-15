@@ -13,7 +13,7 @@ from repository_tools import plugin_distribution as pkg
 
 CATALOGS = {"codex": ".agents/plugins/marketplace.json", "claude": ".claude-plugin/marketplace.json"}
 ASSETS = {path: "release/plugin-marketplace/" + path for path in (
-    *CATALOGS.values(), "README.md", "submissions/README.md", "submissions/reviewer-test-cases.md")}
+    *CATALOGS.values(), ".gitattributes", "README.md", "submissions/README.md", "submissions/reviewer-test-cases.md")}
 ASSETS.update({"LICENSE": "LICENSE", "submissions/verity-plane-logo.png": "docs/images/verity-plane-logo.png"})
 IDENTITY = "PACKAGE-IDENTITY.json"
 SKILLS = ("setup", "change", "evidence", "harness-orient", "harness-operator-brief")

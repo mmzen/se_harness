@@ -32,6 +32,8 @@ class MarketplaceTests(unittest.TestCase):
                 "source": "./packages/claude/verity-plane"}]}}
         for name in ("README.md", "submissions/README.md", "submissions/reviewer-test-cases.md"):
             self.write("release/plugin-marketplace/" + name, "Committed fixture " + name)
+        self.write("release/plugin-marketplace/.gitattributes",
+                   (ROOT / "release/plugin-marketplace/.gitattributes").read_bytes())
         self.write("LICENSE", "Fixture license")
         self.write("docs/images/verity-plane-logo.png", b"fixture image")
         self.commit_catalogs()
@@ -103,7 +105,7 @@ class MarketplaceTests(unittest.TestCase):
 
     def test_modified_wrapper_native_archive_and_unexpected_directory_are_refused(self):
         market.compose(self.repo, self.assembly, self.output)
-        for name in ("README.md", "PACKAGE-IDENTITY.json", ".claude-plugin/marketplace.json", "packages/verity-plane-codex.zip"):
+        for name in (".gitattributes", "README.md", "PACKAGE-IDENTITY.json", ".claude-plugin/marketplace.json", "packages/verity-plane-codex.zip"):
             path = self.output / name
             original = path.read_bytes()
             path.write_bytes(original + b"modified")
@@ -113,6 +115,22 @@ class MarketplaceTests(unittest.TestCase):
         (self.output / "unexpected").mkdir()
         with self.assertRaisesRegex(pkg.AssemblyError, "unexpected marketplace directory"):
             market.compose(self.repo, self.assembly, self.output, check=True)
+
+    def test_git_checkout_preserves_distribution_bytes_with_autocrlf(self):
+        market.compose(self.repo, self.assembly, self.output)
+        expected = {path.relative_to(self.output): path.read_bytes()
+                    for path in self.output.rglob("*") if path.is_file()}
+        def git(*args):
+            return subprocess.run(["git", "-C", str(self.output), "-c", "core.autocrlf=true", *args],
+                                  check=True, capture_output=True)
+        git("init", "-q")
+        git("add", ".")
+        git("-c", "user.name=Fixture", "-c", "user.email=fixture@example.invalid",
+            "commit", "-qm", "distribution fixture")
+        clone = self.base / "clone"
+        git("clone", "--no-local", str(self.output), str(clone))
+        for path, raw in expected.items():
+            self.assertEqual((clone / path).read_bytes(), raw, str(path))
 
     def test_existing_output_and_source_overlap_preserve_sentinel(self):
         self.output.mkdir()
