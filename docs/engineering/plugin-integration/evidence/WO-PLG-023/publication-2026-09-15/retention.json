@@ -1,0 +1,11 @@
+{
+  "raw_copy_directories": {
+    "home-depth": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\public-020-retained-raw\\home-depth",
+    "direct-short": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\public-020-retained-raw\\direct-short"
+  },
+  "temporary_directories_for_cleanup": [
+    "C:/seh020",
+    "C:/p020"
+  ],
+  "published_ref_unchanged": "ed68b30c88043773be929540b7b10ae537957c2d\trefs/heads/plugin-marketplace"
+}

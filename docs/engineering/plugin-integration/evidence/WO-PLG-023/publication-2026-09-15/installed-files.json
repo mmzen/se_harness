@@ -1,0 +1,293 @@
+{
+  "remote": "ed68b30c88043773be929540b7b10ae537957c2d\trefs/heads/plugin-marketplace",
+  "comparisons": [
+    {
+      "host": "codex",
+      "path": ".codex-plugin/plugin.json",
+      "expected_sha256": "097079fa3f7cc3bb2b07cd47cf04c9cc41498d2896e937601d0eb86e653214fe",
+      "installed_sha256": "097079fa3f7cc3bb2b07cd47cf04c9cc41498d2896e937601d0eb86e653214fe"
+    },
+    {
+      "host": "codex",
+      "path": "assembly-inventory.json",
+      "expected_sha256": "5f526db4b5aa2fd0b7790d5d9249d46a78058675de3b4c6a971c780e2e576e86",
+      "installed_sha256": "5f526db4b5aa2fd0b7790d5d9249d46a78058675de3b4c6a971c780e2e576e86"
+    },
+    {
+      "host": "codex",
+      "path": "LICENSE",
+      "expected_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "installed_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "host": "codex",
+      "path": "packages/se_harness-0.18.0-py3-none-any.whl",
+      "expected_sha256": "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+      "installed_sha256": "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54"
+    },
+    {
+      "host": "codex",
+      "path": "README.md",
+      "expected_sha256": "88fc283dccec6801319c42dc7f7ef01ddc5e645b87a5852d464695badf871e15",
+      "installed_sha256": "88fc283dccec6801319c42dc7f7ef01ddc5e645b87a5852d464695badf871e15"
+    },
+    {
+      "host": "codex",
+      "path": "scripts/setup.py",
+      "expected_sha256": "6955a2e58404b2ec9914076470210e20485eaa29d949220017a42085dcc3bb9c",
+      "installed_sha256": "6955a2e58404b2ec9914076470210e20485eaa29d949220017a42085dcc3bb9c"
+    },
+    {
+      "host": "codex",
+      "path": "skills/change/references/artifacts.md",
+      "expected_sha256": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6",
+      "installed_sha256": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6"
+    },
+    {
+      "host": "codex",
+      "path": "skills/change/references/authority.md",
+      "expected_sha256": "d47f035e764c8db30ba51c90840ed45b47c344e5a353d0da85ed6586f72d56a2",
+      "installed_sha256": "d47f035e764c8db30ba51c90840ed45b47c344e5a353d0da85ed6586f72d56a2"
+    },
+    {
+      "host": "codex",
+      "path": "skills/change/references/work-orders.md",
+      "expected_sha256": "79e843a8f722d438ed3c378efcea02e2fe1e390b16adc34279e6772a76b18f1c",
+      "installed_sha256": "79e843a8f722d438ed3c378efcea02e2fe1e390b16adc34279e6772a76b18f1c"
+    },
+    {
+      "host": "codex",
+      "path": "skills/change/SKILL.md",
+      "expected_sha256": "f529b45eb5b131aaf731fc62009180b132144fde472b70803ec8a105aa0ed9f2",
+      "installed_sha256": "f529b45eb5b131aaf731fc62009180b132144fde472b70803ec8a105aa0ed9f2"
+    },
+    {
+      "host": "codex",
+      "path": "skills/evidence/references/external-actions.md",
+      "expected_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+      "installed_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69"
+    },
+    {
+      "host": "codex",
+      "path": "skills/evidence/references/records.md",
+      "expected_sha256": "37078c43f1f3dcd1640ade8b21fbc7069bbf9c2d7bc8f4850d0cda6dfa4dd18b",
+      "installed_sha256": "37078c43f1f3dcd1640ade8b21fbc7069bbf9c2d7bc8f4850d0cda6dfa4dd18b"
+    },
+    {
+      "host": "codex",
+      "path": "skills/evidence/SKILL.md",
+      "expected_sha256": "22b494fc70cdc454a342cb39489bc2d0a7d9c7fde48aa3e248a0135b16dcc134",
+      "installed_sha256": "22b494fc70cdc454a342cb39489bc2d0a7d9c7fde48aa3e248a0135b16dcc134"
+    },
+    {
+      "host": "codex",
+      "path": "skills/harness-operator-brief/agents/openai.yaml",
+      "expected_sha256": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4",
+      "installed_sha256": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4"
+    },
+    {
+      "host": "codex",
+      "path": "skills/harness-operator-brief/scripts/check_brief.py",
+      "expected_sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+      "installed_sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683"
+    },
+    {
+      "host": "codex",
+      "path": "skills/harness-operator-brief/skill-contract.json",
+      "expected_sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+      "installed_sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52"
+    },
+    {
+      "host": "codex",
+      "path": "skills/harness-operator-brief/SKILL.md",
+      "expected_sha256": "ed663add535e6dd54e76ac91d542bea72972076f625f08e13971953c5e94b110",
+      "installed_sha256": "ed663add535e6dd54e76ac91d542bea72972076f625f08e13971953c5e94b110"
+    },
+    {
+      "host": "codex",
+      "path": "skills/harness-orient/scripts/orient.py",
+      "expected_sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
+      "installed_sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56"
+    },
+    {
+      "host": "codex",
+      "path": "skills/harness-orient/skill-contract.json",
+      "expected_sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+      "installed_sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627"
+    },
+    {
+      "host": "codex",
+      "path": "skills/harness-orient/SKILL.md",
+      "expected_sha256": "7ee1ea21be9a1845277d84a83262f6ba6d24ecbb2350f0b84a4ea4e519d5565c",
+      "installed_sha256": "7ee1ea21be9a1845277d84a83262f6ba6d24ecbb2350f0b84a4ea4e519d5565c"
+    },
+    {
+      "host": "codex",
+      "path": "skills/setup/references/environment.md",
+      "expected_sha256": "a08792de5ee01ed718ea3b156cf09a4773dd203dc655ee6df3f04d40ec458363",
+      "installed_sha256": "a08792de5ee01ed718ea3b156cf09a4773dd203dc655ee6df3f04d40ec458363"
+    },
+    {
+      "host": "codex",
+      "path": "skills/setup/references/maintenance.md",
+      "expected_sha256": "0af3999894f5ba1f71ce973a4484a9d8fabed14926e2f1b27e22ffa7cba5faeb",
+      "installed_sha256": "0af3999894f5ba1f71ce973a4484a9d8fabed14926e2f1b27e22ffa7cba5faeb"
+    },
+    {
+      "host": "codex",
+      "path": "skills/setup/references/repository.md",
+      "expected_sha256": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3",
+      "installed_sha256": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3"
+    },
+    {
+      "host": "codex",
+      "path": "skills/setup/SKILL.md",
+      "expected_sha256": "d2f610dac282dd0eb202dcec2888e522cf10d44797431e729b30a111ea95cf85",
+      "installed_sha256": "d2f610dac282dd0eb202dcec2888e522cf10d44797431e729b30a111ea95cf85"
+    },
+    {
+      "host": "claude",
+      "path": ".claude-plugin/plugin.json",
+      "expected_sha256": "1ebd13705b2c35630ed1c690c1723932280c9d2497bd830d00fcfb954a3056b6",
+      "installed_sha256": "1ebd13705b2c35630ed1c690c1723932280c9d2497bd830d00fcfb954a3056b6"
+    },
+    {
+      "host": "claude",
+      "path": "assembly-inventory.json",
+      "expected_sha256": "9e271dd6d5c076b4c1c6aed6edc82401de34b6396cb4b08ec827205f7c316a4c",
+      "installed_sha256": "9e271dd6d5c076b4c1c6aed6edc82401de34b6396cb4b08ec827205f7c316a4c"
+    },
+    {
+      "host": "claude",
+      "path": "LICENSE",
+      "expected_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "installed_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "host": "claude",
+      "path": "packages/se_harness-0.18.0-py3-none-any.whl",
+      "expected_sha256": "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+      "installed_sha256": "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54"
+    },
+    {
+      "host": "claude",
+      "path": "README.md",
+      "expected_sha256": "88fc283dccec6801319c42dc7f7ef01ddc5e645b87a5852d464695badf871e15",
+      "installed_sha256": "88fc283dccec6801319c42dc7f7ef01ddc5e645b87a5852d464695badf871e15"
+    },
+    {
+      "host": "claude",
+      "path": "scripts/setup.py",
+      "expected_sha256": "6955a2e58404b2ec9914076470210e20485eaa29d949220017a42085dcc3bb9c",
+      "installed_sha256": "6955a2e58404b2ec9914076470210e20485eaa29d949220017a42085dcc3bb9c"
+    },
+    {
+      "host": "claude",
+      "path": "skills/change/references/artifacts.md",
+      "expected_sha256": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6",
+      "installed_sha256": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6"
+    },
+    {
+      "host": "claude",
+      "path": "skills/change/references/authority.md",
+      "expected_sha256": "d47f035e764c8db30ba51c90840ed45b47c344e5a353d0da85ed6586f72d56a2",
+      "installed_sha256": "d47f035e764c8db30ba51c90840ed45b47c344e5a353d0da85ed6586f72d56a2"
+    },
+    {
+      "host": "claude",
+      "path": "skills/change/references/work-orders.md",
+      "expected_sha256": "79e843a8f722d438ed3c378efcea02e2fe1e390b16adc34279e6772a76b18f1c",
+      "installed_sha256": "79e843a8f722d438ed3c378efcea02e2fe1e390b16adc34279e6772a76b18f1c"
+    },
+    {
+      "host": "claude",
+      "path": "skills/change/SKILL.md",
+      "expected_sha256": "f529b45eb5b131aaf731fc62009180b132144fde472b70803ec8a105aa0ed9f2",
+      "installed_sha256": "f529b45eb5b131aaf731fc62009180b132144fde472b70803ec8a105aa0ed9f2"
+    },
+    {
+      "host": "claude",
+      "path": "skills/evidence/references/external-actions.md",
+      "expected_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+      "installed_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69"
+    },
+    {
+      "host": "claude",
+      "path": "skills/evidence/references/records.md",
+      "expected_sha256": "37078c43f1f3dcd1640ade8b21fbc7069bbf9c2d7bc8f4850d0cda6dfa4dd18b",
+      "installed_sha256": "37078c43f1f3dcd1640ade8b21fbc7069bbf9c2d7bc8f4850d0cda6dfa4dd18b"
+    },
+    {
+      "host": "claude",
+      "path": "skills/evidence/SKILL.md",
+      "expected_sha256": "22b494fc70cdc454a342cb39489bc2d0a7d9c7fde48aa3e248a0135b16dcc134",
+      "installed_sha256": "22b494fc70cdc454a342cb39489bc2d0a7d9c7fde48aa3e248a0135b16dcc134"
+    },
+    {
+      "host": "claude",
+      "path": "skills/harness-operator-brief/agents/openai.yaml",
+      "expected_sha256": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4",
+      "installed_sha256": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4"
+    },
+    {
+      "host": "claude",
+      "path": "skills/harness-operator-brief/scripts/check_brief.py",
+      "expected_sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+      "installed_sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683"
+    },
+    {
+      "host": "claude",
+      "path": "skills/harness-operator-brief/skill-contract.json",
+      "expected_sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+      "installed_sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52"
+    },
+    {
+      "host": "claude",
+      "path": "skills/harness-operator-brief/SKILL.md",
+      "expected_sha256": "ed663add535e6dd54e76ac91d542bea72972076f625f08e13971953c5e94b110",
+      "installed_sha256": "ed663add535e6dd54e76ac91d542bea72972076f625f08e13971953c5e94b110"
+    },
+    {
+      "host": "claude",
+      "path": "skills/harness-orient/scripts/orient.py",
+      "expected_sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
+      "installed_sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56"
+    },
+    {
+      "host": "claude",
+      "path": "skills/harness-orient/skill-contract.json",
+      "expected_sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+      "installed_sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627"
+    },
+    {
+      "host": "claude",
+      "path": "skills/harness-orient/SKILL.md",
+      "expected_sha256": "7ee1ea21be9a1845277d84a83262f6ba6d24ecbb2350f0b84a4ea4e519d5565c",
+      "installed_sha256": "7ee1ea21be9a1845277d84a83262f6ba6d24ecbb2350f0b84a4ea4e519d5565c"
+    },
+    {
+      "host": "claude",
+      "path": "skills/setup/references/environment.md",
+      "expected_sha256": "a08792de5ee01ed718ea3b156cf09a4773dd203dc655ee6df3f04d40ec458363",
+      "installed_sha256": "a08792de5ee01ed718ea3b156cf09a4773dd203dc655ee6df3f04d40ec458363"
+    },
+    {
+      "host": "claude",
+      "path": "skills/setup/references/maintenance.md",
+      "expected_sha256": "0af3999894f5ba1f71ce973a4484a9d8fabed14926e2f1b27e22ffa7cba5faeb",
+      "installed_sha256": "0af3999894f5ba1f71ce973a4484a9d8fabed14926e2f1b27e22ffa7cba5faeb"
+    },
+    {
+      "host": "claude",
+      "path": "skills/setup/references/repository.md",
+      "expected_sha256": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3",
+      "installed_sha256": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3"
+    },
+    {
+      "host": "claude",
+      "path": "skills/setup/SKILL.md",
+      "expected_sha256": "d2f610dac282dd0eb202dcec2888e522cf10d44797431e729b30a111ea95cf85",
+      "installed_sha256": "d2f610dac282dd0eb202dcec2888e522cf10d44797431e729b30a111ea95cf85"
+    }
+  ]
+}

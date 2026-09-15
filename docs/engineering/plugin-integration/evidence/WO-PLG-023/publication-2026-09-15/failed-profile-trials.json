@@ -1,0 +1,258 @@
+[
+  {
+    "label": "deep-profile",
+    "result": {
+      "argv": [
+        "C:/Python313/python.exe",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\tests\\plugin_integration\\package_assembly\\run_marketplace_acceptance.py",
+        "--marketplace",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-git-fixed-0.1.0",
+        "--output",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-public-020-check",
+        "--codex",
+        "C:/Users/hok/AppData/Local/OpenAI/Codex/bin/12219cbfbcbddde7/codex.exe",
+        "--claude",
+        "C:/Users/hok/.local/bin/claude.exe",
+        "--expected-wheel-sha256",
+        "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+        "--source",
+        "mmzen/se_harness",
+        "--ref",
+        "plugin-marketplace",
+        "--install-only"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 1,
+      "started_at_unix": 1789488409.4829018,
+      "elapsed_seconds": 13.00886845588684,
+      "remote": "ed68b30c88043773be929540b7b10ae537957c2d\trefs/heads/plugin-marketplace",
+      "contract": "VER-PLG-023 M05"
+    },
+    "commands": [
+      {
+        "label": "codex-version",
+        "argv": [
+          "C:\\Users\\hok\\AppData\\Local\\OpenAI\\Codex\\bin\\12219cbfbcbddde7\\codex.exe",
+          "--version"
+        ],
+        "exit_code": 0,
+        "expect": 0
+      },
+      {
+        "label": "codex-marketplace-add",
+        "argv": [
+          "C:\\Users\\hok\\AppData\\Local\\OpenAI\\Codex\\bin\\12219cbfbcbddde7\\codex.exe",
+          "plugin",
+          "marketplace",
+          "add",
+          "mmzen/se_harness",
+          "--ref",
+          "plugin-marketplace",
+          "--json"
+        ],
+        "exit_code": 1,
+        "expect": 0
+      }
+    ],
+    "stderr": {
+      "path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-public-020-check\\codex-marketplace-add.stderr",
+      "sha256": "af4b04e074e5a2347988a9a14792d7665cfc8595e8dad4cc7d29e4afebeb4af0",
+      "bytes": 12391,
+      "error_lines": [
+        "Error: git clone https://github.com/mmzen/se_harness.git C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-public-020-check\\codex\\profile\\codex\\.tmp/marketplaces\\.staging\\marketplace-add-SMuj2N failed with status exit code: 128",
+        "error: unable to create file docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Linux/rehearsal-result-1/upgrade-rehearsal-result.json: Filename too long",
+        "error: unable to create file docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Linux/rehearsal-result-1/upgrade-rehearsal-timing.json: Filename too long",
+        "error: unable to create file docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Linux/rehearsal-result-2/upgrade-rehearsal-result.json: Filename too long",
+        "error: unable to create file docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Linux/rehearsal-result-2/upgrade-rehearsal-timing.json: Filename too long",
+        "error: unable to create file docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Windows/rehearsal-result-1/upgrade-rehearsal-result.json: Filename too long",
+        "error: unable to create file docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Windows/rehearsal-result-1/upgrade-rehearsal-timing.json: Filename too long",
+        "error: unable to create file docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Windows/rehearsal-result-2/upgrade-rehearsal-result.json: Filename too long",
+        "error: unable to create file docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Windows/rehearsal-result-2/upgrade-rehearsal-timing.json: Filename too long",
+        "error: unable to create file docs/engineering/execution-control-plane/evidence/WO-ECP-003/demonstration/in-scope-declared-mismatch-stderr.txt: Filename too long",
+        "error: unable to create file docs/engineering/execution-control-plane/evidence/WO-ECP-003/demonstration/in-scope-run3-declared-match-stdout.txt: Filename too long",
+        "error: unable to create file docs/engineering/harness-simplification/evidence/WO-KIS-001/implementation/ci-verification-candidate.json: Filename too long",
+        "error: unable to create file docs/engineering/harness-simplification/evidence/WO-KIS-002/implementation/ci-verification-candidate.json: Filename too long",
+        "error: unable to create file docs/engineering/harness-simplification/evidence/WO-KIS-003/implementation/ci-verification-candidate.json: Filename too long",
+        "error: unable to create file docs/engineering/harness-simplification/evidence/WO-KIS-004/implementation/ci-verification-candidate.json: Filename too long",
+        "error: unable to create file docs/engineering/harness-simplification/evidence/WO-KIS-005/implementation/ci-verification-candidate.json: Filename too long",
+        "error: unable to create file docs/engineering/harness-simplification/evidence/WO-KIS-006/implementation/ci-verification-candidate.json: Filename too long",
+        "error: unable to create file docs/engineering/harness-simplification/evidence/WO-KIS-007/implementation/ci-verification-candidate.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/attempts/acceptance-01/C01/independent-calculations.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/attempts/acceptance-01/C04/divergent-digests.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/attempts/acceptance-01/C06/sentinel-before-after.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/attempts/acceptance-01/C07/independent-listing.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/attempts/acceptance-01/C07/omitted-inventory.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/attempts/acceptance-01/C08/interruption-trace.txt: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/approve-definitions-preview.stderr.txt: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/completion-applied-01.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/completion-applied-01.stderr.txt: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/completion-candidate-ci.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/completion-ci.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/completion-doctor-01.json: Filename too long"
+      ]
+    }
+  },
+  {
+    "label": "drive-alias",
+    "result": {
+      "argv": [
+        "C:/Python313/python.exe",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\tests\\plugin_integration\\package_assembly\\run_marketplace_acceptance.py",
+        "--marketplace",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-git-fixed-0.1.0",
+        "--output",
+        "Z:/p",
+        "--codex",
+        "C:/Users/hok/AppData/Local/OpenAI/Codex/bin/12219cbfbcbddde7/codex.exe",
+        "--claude",
+        "C:/Users/hok/.local/bin/claude.exe",
+        "--expected-wheel-sha256",
+        "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+        "--source",
+        "mmzen/se_harness",
+        "--ref",
+        "plugin-marketplace",
+        "--install-only"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 1,
+      "elapsed_seconds": 16.78619360923767,
+      "remote": "ed68b30c88043773be929540b7b10ae537957c2d\trefs/heads/plugin-marketplace",
+      "contract": "VER-PLG-023 M05",
+      "physical_output": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\public-marketplace-short-profile\\p",
+      "temporary_drive": "Z:",
+      "temporary_drive_removed": true,
+      "profile_note": "Short disposable profile path exercises ordinary Windows Git path limits without changing user or system Git settings."
+    },
+    "commands": [
+      {
+        "label": "codex-version",
+        "argv": [
+          "C:\\Users\\hok\\AppData\\Local\\OpenAI\\Codex\\bin\\12219cbfbcbddde7\\codex.exe",
+          "--version"
+        ],
+        "exit_code": 0,
+        "expect": 0
+      },
+      {
+        "label": "codex-marketplace-add",
+        "argv": [
+          "C:\\Users\\hok\\AppData\\Local\\OpenAI\\Codex\\bin\\12219cbfbcbddde7\\codex.exe",
+          "plugin",
+          "marketplace",
+          "add",
+          "mmzen/se_harness",
+          "--ref",
+          "plugin-marketplace",
+          "--json"
+        ],
+        "exit_code": 1,
+        "expect": 0
+      }
+    ],
+    "stderr": {
+      "path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\public-marketplace-short-profile\\p\\codex-marketplace-add.stderr",
+      "sha256": "d83c8e75bd5534e50ec452b2ab08ecfbf910f7328e812af1312cfd24018b438f",
+      "bytes": 10408,
+      "error_lines": [
+        "Error: git clone https://github.com/mmzen/se_harness.git C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\public-marketplace-short-profile\\p\\codex\\profile\\codex\\.tmp/marketplaces\\.staging\\marketplace-add-HBGRba failed with status exit code: 128",
+        "error: unable to create file docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Linux/rehearsal-result-1/upgrade-rehearsal-result.json: Filename too long",
+        "error: unable to create file docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Linux/rehearsal-result-1/upgrade-rehearsal-timing.json: Filename too long",
+        "error: unable to create file docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Linux/rehearsal-result-2/upgrade-rehearsal-result.json: Filename too long",
+        "error: unable to create file docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Linux/rehearsal-result-2/upgrade-rehearsal-timing.json: Filename too long",
+        "error: unable to create file docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Windows/rehearsal-result-1/upgrade-rehearsal-result.json: Filename too long",
+        "error: unable to create file docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Windows/rehearsal-result-1/upgrade-rehearsal-timing.json: Filename too long",
+        "error: unable to create file docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Windows/rehearsal-result-2/upgrade-rehearsal-result.json: Filename too long",
+        "error: unable to create file docs/engineering/ci-pipeline/evidence/WO-CIP-010/hosted/Windows/rehearsal-result-2/upgrade-rehearsal-timing.json: Filename too long",
+        "error: unable to create file docs/engineering/execution-control-plane/evidence/WO-ECP-003/demonstration/in-scope-declared-mismatch-stderr.txt: Filename too long",
+        "error: unable to create file docs/engineering/execution-control-plane/evidence/WO-ECP-003/demonstration/in-scope-run3-declared-match-stdout.txt: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/attempts/acceptance-01/C01/independent-calculations.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/attempts/acceptance-01/C06/sentinel-before-after.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/attempts/acceptance-01/C07/independent-listing.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/completion-applied-01.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/completion-applied-01.stderr.txt: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/completion-candidate-ci.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/completion-doctor-01.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/completion-doctor-01.stderr.txt: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/completion-plan-01.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/completion-plan-01.stderr.txt: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/completion-precheck-01.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/completion-precheck-01.stderr.txt: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/completion-scope-01.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/completion-scope-01.stderr.txt: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/completion-validate-01.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/completion-validate-01.stderr.txt: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/operator-decision.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/completion-20260909/previous-handoff.json: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-001/governance/verification-20260909/assurance-plg003-applied.json: Filename too long"
+      ]
+    }
+  },
+  {
+    "label": "direct-short-nested",
+    "result": {
+      "argv": [
+        "C:/Python313/python.exe",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\tests\\plugin_integration\\package_assembly\\run_marketplace_acceptance.py",
+        "--marketplace",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-git-fixed-0.1.0",
+        "--output",
+        "C:\\seh020",
+        "--codex",
+        "C:/Users/hok/AppData/Local/OpenAI/Codex/bin/12219cbfbcbddde7/codex.exe",
+        "--claude",
+        "C:/Users/hok/.local/bin/claude.exe",
+        "--expected-wheel-sha256",
+        "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+        "--source",
+        "mmzen/se_harness",
+        "--ref",
+        "plugin-marketplace",
+        "--install-only"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 1,
+      "elapsed_seconds": 40.66409635543823,
+      "physical_output": "C:\\seh020",
+      "contract": "VER-PLG-023 M05",
+      "profile_note": "Direct short disposable directory; no drive alias or Git configuration change."
+    },
+    "commands": [
+      {
+        "label": "codex-version",
+        "argv": [
+          "C:\\Users\\hok\\AppData\\Local\\OpenAI\\Codex\\bin\\12219cbfbcbddde7\\codex.exe",
+          "--version"
+        ],
+        "exit_code": 0,
+        "expect": 0
+      },
+      {
+        "label": "codex-marketplace-add",
+        "argv": [
+          "C:\\Users\\hok\\AppData\\Local\\OpenAI\\Codex\\bin\\12219cbfbcbddde7\\codex.exe",
+          "plugin",
+          "marketplace",
+          "add",
+          "mmzen/se_harness",
+          "--ref",
+          "plugin-marketplace",
+          "--json"
+        ],
+        "exit_code": 1,
+        "expect": 0
+      }
+    ],
+    "stderr": {
+      "path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\public-020-retained-raw\\direct-short\\codex-marketplace-add.stderr",
+      "sha256": "5b9f664e115b6be268745174551eb3b8087752b10164cbea78b5354f60b94206",
+      "bytes": 5395,
+      "error_lines": [
+        "Error: git clone https://github.com/mmzen/se_harness.git C:\\seh020\\codex\\profile\\codex\\.tmp/marketplaces\\.staging\\marketplace-add-6MKIwu failed with status exit code: 128",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-003/20260909-live/readiness-fixture-inputs/synthetic-inputs/docs/engineering/readiness-probe/specifications/SPEC-PROBE-001.md.txt: Filename too long",
+        "error: unable to create file docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/linux-replay-attempt2/external-control-state/external-cases/evd04-merge-control-unproven/request-and-decision.json: Filename too long",
+        "fatal: unable to checkout working tree"
+      ]
+    }
+  }
+]
