@@ -1,0 +1,150 @@
+{
+  "baseline": "fa493ceb1c78a1bf79dadab3560cb36167557ce1",
+  "governing_evaluator": "0.17.0",
+  "candidate_version": "0.18.0",
+  "checks": {
+    "graph": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "doctor": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "distribution": {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "help": {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "review-preflight": {
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\work\\governing-evaluator-017-f0cd48ea\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        ".",
+        "--work-order",
+        "WO-RLS-024",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "portable": {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "scripts/check_portable_release_surface.py",
+        "--repository",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    },
+    "full-suite": {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "scripts/run_tests.py",
+        "--workers",
+        "4",
+        "--scale",
+        "full"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea",
+      "exit_code": 0
+    }
+  },
+  "suite_result": "WEX_SCALE artifacts=100 validation=0.085321s focus=0.143072s plan=0.160895s\nWEX_SCALE artifacts=500 validation=0.390607s focus=0.465351s plan=0.743806s\nWEX_SCALE artifacts=1000 validation=0.778291s focus=0.856157s plan=1.483511s\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-hr0t9caq\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-hr0t9caq\\private\\verity-plane\\evaluator\\Scripts\\python.exe\ndocs/notes/diagnostic-codes.md matches the source\n----------------------------------------------------------------------\nRan 1068 tests in 126.261s (171 classes, 4 workers)\n\nOK (skipped=15)\n--workers must be at least 1\n",
+  "plugin_plan": {
+    "work_order": "WO-RLS-024",
+    "observed_at": "2026-09-15T06:01:10.822366+00:00",
+    "result": "passed",
+    "claim": "Production assembly inputs and plugin manifests prepared; no release archive assembled or released-install claim.",
+    "plan": "release/plugin-assembly.json",
+    "plan_sha256": "f769f07e0b6b5efdea353b89002b869a374ff4bc313a100846f78177812d6b5b",
+    "hosts": {
+      "codex": {
+        "source_files": 21,
+        "shared_files": 19,
+        "host_files": 2,
+        "manifest": ".codex-plugin/plugin.json",
+        "version": "0.1.0",
+        "hooks": false
+      },
+      "claude": {
+        "source_files": 21,
+        "shared_files": 19,
+        "host_files": 2,
+        "manifest": ".claude-plugin/plugin.json",
+        "version": "0.1.0",
+        "hooks": false
+      }
+    },
+    "checks": [
+      "Existing duplicate-key JSON loader accepts the production plan and its existing schema.",
+      "All 19 tracked common source files are selected exactly once at their relative package paths.",
+      "Both native manifests name verity-plane 0.1.0; each plan selects only its own manifest and README.",
+      "Existing payload path/content validation accepts every selected file; no case-folded or parent-child destination conflicts exist.",
+      "Plugin-creator manifest validation passes for the Codex source manifest; this source-overlay check is not assembled-package or host acceptance."
+    ],
+    "manifest_validator": {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "C:\\Users\\mathi\\.codex\\skills\\.system\\plugin-creator\\scripts\\validate_plugin.py",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea\\plugins\\verity-plane\\codex"
+      ],
+      "exit_code": 0,
+      "stdout": "Plugin validation passed: C:\\Users\\mathi\\Documents\\Codex\\2026-09-12\\clo\\se_harness-packet-20260913-f0cd48ea\\plugins\\verity-plane\\codex",
+      "stderr": ""
+    },
+    "retained_boundary": "build/check still require a committed released checker record, its public wheel and independently obtained wheel digest. A ready checker record is not sufficient.",
+    "follow_up": "After checker 0.18.0 is released and published, run existing build/check against the committed production plan and exact public wheel; record final archive acceptance separately.",
+    "not_run": [
+      "full test suite (parent executor)",
+      "promotable plugin build/check",
+      "host installation",
+      "model session",
+      "publication"
+    ]
+  },
+  "independent_review": {
+    "result": "passed",
+    "members": 39,
+    "verification_contracts": 31,
+    "coverage_links": "all resolve",
+    "claims": "preparation and stated Windows host evidence only"
+  }
+}

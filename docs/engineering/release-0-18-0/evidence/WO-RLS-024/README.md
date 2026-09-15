@@ -1,0 +1,52 @@
+# Release preparation evidence
+
+Baseline: main fa493ceb1c78a1bf79dadab3560cb36167557ce1. Checker source is
+0.18.0; the isolated repository-selected evaluator remains 0.17.0.
+
+## Prepared and checked
+
+- Both native manifests select verity-plane 0.1.0. The production plan selects
+  all 19 tracked common files plus each host's own manifest and README. Existing
+  plan/path/content validation passed; no final release archive is claimed.
+- The full Windows source suite passed. Distribution validation, portable
+  source checks, CLI help, released graph and doctor, and review preflight pass.
+  [Actual local commands and results](local-checks.json) retain the suite count,
+  skips and the evaluator used. Existing historical-layout warnings remain.
+- Independent review checked the complete release packet, its 39 work orders,
+  exact 31-contract union and every coverage link; no blocking issue was found.
+  [Coverage](coverage.md) reuses the existing member evidence.
+
+The initial start preflight identified an omitted applicable architecture link.
+Selecting existing ARCH-PLG-004 and ADR-PLG-004 resolved it before execution.
+Legacy VER-DST-001 adoption coverage uses current init for existing repositories,
+as established by SPEC-ECP-022 ECP-DEL-015–019 and WO-ECP-029. The retired adopt
+alias is not a release requirement. Current KISS amendments govern current
+behavior; historical records keep their original meaning.
+
+## Hosted candidate qualification
+
+The branch push runs the existing candidate-source suite, package checks and
+Windows/Ubuntu predecessor-upgrade acceptance. The existing publication rehearsal
+provides the candidate's two pinned Linux recipe builds. Their exact commits,
+run links and bundle manifest will be retained after the runs finish.
+This workstation has no Docker; its earlier non-promotable native wheels are
+not substitutes for that release build.
+
+## Decision boundary
+
+WO-RLS-024 is in progress. The owner selected and started this bounded release
+preparation through the delegated route on 2026-09-15; no result-specific
+completion, new aggregate verification or release decision has been recorded.
+The installed 0.17.0 evaluator still determines those lifecycle steps. Root
+adoption of the candidate's simpler route is a later explicit upgrade.
+
+After completion, prepare one aggregate VREC for all 39 members, using their
+existing evidence and this integration summary. Its accountable verification
+precedes release-record preparation and binding. The final selected commit must
+have matching hosted build evidence. Final plugin assembly consumes the checker
+only after its released record and public wheel are available.
+
+Raw local attempts are retained outside Git in work/release018-checks. Hosted
+artifacts have their workflow's retention period; retain the concise build
+manifest and run identity in this packet before they expire. No tag, release,
+publication, live installation or root upgrade was performed.
