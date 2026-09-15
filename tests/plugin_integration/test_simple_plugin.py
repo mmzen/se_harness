@@ -62,6 +62,16 @@ class SimplePluginTests(unittest.TestCase):
         self.assertNotEqual(0, result.returncode)
         self.assertIn(b'release build/check requires', result.stderr)
 
+    def test_development_build_accepts_windows_wheel_metadata(self):
+        with zipfile.ZipFile(self.wheel, 'w') as archive:
+            archive.writestr('se_harness-0.0.0.dist-info/METADATA',
+                             b'Metadata-Version: 2.1\r\nName: se-harness\r\nVersion: 0.0.0\r\n')
+        output = self.base/'windows-wheel'
+        result = develop(ROOT, self.wheel, output)
+        self.assertFalse(result['promotable'])
+        with zipfile.ZipFile(output/'verity-plane-codex.zip') as archive:
+            self.assertEqual(self.wheel.read_bytes(), archive.read('verity-plane/packages/'+self.wheel.name))
+
     def test_setup_retries_the_same_environment_and_preserves_the_checker_result(self):
         data = self.base/'private'
         calls=[]

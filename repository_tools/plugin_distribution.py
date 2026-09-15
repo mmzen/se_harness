@@ -347,7 +347,7 @@ def develop(repository: Path, wheel: Path, output: Path) -> dict:
         raise AssemblyError("the selected wheel must be outside the output being replaced")
     with zipfile.ZipFile(wheel) as archive:
         metadata_paths = [n for n in archive.namelist() if n.endswith('.dist-info/METADATA')]
-        if len(metadata_paths) != 1 or '\nName: se-harness\n' not in '\n' + archive.read(metadata_paths[0]).decode():
+        if len(metadata_paths) != 1 or 'Name: se-harness' not in archive.read(metadata_paths[0]).decode().splitlines():
             raise AssemblyError("select a se-harness wheel")
     source = repository / "plugins/verity-plane"
     payloads = {}

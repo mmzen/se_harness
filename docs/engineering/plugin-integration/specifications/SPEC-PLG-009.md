@@ -2,7 +2,7 @@
 id = "SPEC-PLG-009"
 type = "specification"
 title = "Connect and maintain projects through the existing setup route"
-status = "draft"
+status = "approved"
 owners = ["technical-owner"]
 created = "2026-09-14"
 updated = "2026-09-14"
@@ -10,6 +10,13 @@ contract = "Connect and maintain a project through the existing setup and instal
 
 [relations]
 specifies = ["REQ-PLG-015", "REQ-PLG-016"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-14T22:05:14Z"
+decided_by = "technical-owner"
+reason = "The owner reviewed and approved completion of the KISS backlog amendment and explicitly said \"you can start WO-PLG-009 and WO-PLG-016\" on 2026-09-15. This accepts the selected rewritten definition chain and authorizes its bounded routine execution, checks and evidence under the installed evaluator. No result-specific assurance, merge, release or live host/project installation is inferred."
 +++
 
 # Connect and maintain projects through the existing setup route
