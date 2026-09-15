@@ -6,9 +6,7 @@ status = "draft"
 owners = ["<technical/domain owner>"]
 created = "YYYY-MM-DD"
 updated = "YYYY-MM-DD"
-# One sentence, at most 30 words, no code identifier: what an implementation
-# must do to conform. The Explorer shows it under the title, so it is the
-# line most readers see.
+# What an implementation must do to conform. The Explorer shows this summary under the title.
 contract = "<One sentence: what an implementation must do to conform.>"
 
 [relations]
@@ -16,6 +14,9 @@ specifies = ["REQ-xxx"]
 +++
 
 # Specification: <title>
+
+Before approval, apply the shared design principle and `specification` checklist in
+`docs/engineering/ARTIFACT_AUTHORING.md`.
 
 ## In plain words
 
@@ -25,8 +26,7 @@ root, which this repository writes.>
 
 ## Scope
 
-<At most three sentences: what this specification governs and what it
-leaves to another artifact. Name the neighbours by id.>
+<What this specification governs and what it leaves to another artifact.>
 
 ## Terms
 
@@ -35,11 +35,8 @@ leaves to another artifact. Name the neighbours by id.>
 
 ## Rules
 
-<Every rule leads with a stable identifier `<PREFIX>-<AREA>-NNN` in bold,
-then one testable sentence of at most 30 words carrying MUST, MUST NOT,
-SHALL, SHALL NOT, MAY or refuses. The identifier is the rule's name in
-verification contracts, work orders, evidence and deviations; it never
-moves and is never reused. Code identifiers belong here.>
+<Describe testable behavior. Give a rule a stable identifier when another artifact
+needs to refer to it. Include failure behavior and examples below.>
 
 **<PREFIX>-<AREA>-001.** <The implementation MUST ...>
 

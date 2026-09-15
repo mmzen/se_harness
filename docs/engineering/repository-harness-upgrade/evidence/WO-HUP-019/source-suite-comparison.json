@@ -1,0 +1,77 @@
+{
+  "control": {
+    "argv": [
+      "C:\\Python313\\python.exe",
+      "-B",
+      "scripts/run_tests.py",
+      "--workers",
+      "4"
+    ],
+    "exit_code": 1,
+    "seconds": 1058.52,
+    "failures": [
+      "test_dashboard_webui.DashboardWebUIContractTests.test_release_proof_fields_reach_the_summary_and_compact_topology"
+    ],
+    "errors": [],
+    "tests": 1068,
+    "verdict": "FAILED (failures=1, skipped=15)",
+    "log_sha256": "8cf9454424007ed4b93fed5bfa4761f8f12527d92f552e41985dd95b23a7d289"
+  },
+  "initial_upgraded": {
+    "argv": [
+      "C:\\Python313\\python.exe",
+      "-B",
+      "scripts/run_tests.py",
+      "--workers",
+      "4"
+    ],
+    "exit_code": 1,
+    "seconds": 1037.55,
+    "failures": [
+      "test_artifact_catalog.ArtifactCatalogTests.test_released_policy_copies_match_with_declared_candidate_exceptions"
+    ],
+    "errors": [
+      "test_ci_pipeline.TriggerPolicyTests.test_root_managed_copy_is_untouched"
+    ],
+    "tests": 1068,
+    "verdict": "FAILED (failures=1, errors=1, skipped=15)",
+    "log_sha256": "13512fc452917033e8d1fd06eaa185dc4444f919c58200122d96d44eb779a8ce"
+  },
+  "corrected": {
+    "argv": [
+      "C:\\Python313\\python.exe",
+      "-B",
+      "scripts/run_tests.py",
+      "--workers",
+      "8"
+    ],
+    "exit_code": 0,
+    "seconds": 668.21,
+    "failures": [],
+    "errors": [],
+    "tests": 1068,
+    "verdict": "OK (skipped=15)",
+    "log_sha256": "8653d7df7bfbfc78bbeb29434ce26ae6a0ebb1a187318d5cd6bd309f5aa62e19"
+  },
+  "no_new_failures_or_errors": true,
+  "new_failures": [],
+  "new_errors": [],
+  "platform": "Windows, CPython 3.13.3; default reduced scale; control and initial run: four workers; corrected run: eight workers",
+  "baseline_commit": "386b5b9673e28f91650c05b152503e52c55e23e8",
+  "control_remote_recheck": {
+    "argv": [
+      "C:\\Python313\\python.exe",
+      "-B",
+      "-m",
+      "unittest",
+      "tests.test_dashboard_webui.DashboardWebUIContractTests.test_release_proof_fields_reach_the_summary_and_compact_topology"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ".\n----------------------------------------------------------------------\nRan 1 test in 102.054s\n\nOK\n",
+    "original_remote": "C:/Users/hok/Documents/Codex/2026-09-15/clo/se_harness",
+    "test_remote": "https://github.com/mmzen/se_harness.git",
+    "remote_restored": true,
+    "tracked_files_unchanged": true
+  }
+}

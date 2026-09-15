@@ -1,15 +1,8 @@
-# Managed by SE Harness. One job runs the exact released evaluator outside the
-# checkout. Its steps: Install the exact released evaluator; on a pull request,
-# Read the live pull-request body, Select the pull-request work order, run the
-# Review preflight and Enforce the work-order scope on the pull request's diff
-# (the handoff check runs inside that step while the work order is in
-# progress); then Qualify the root with its exact released evaluator, Generate
-# Harness Explorer, and upload the Explorer with the qualification result as
-# the harness-dashboard artifact. The declarations are selected from the pull
-# request's current body, read from the API during the run, so a corrected
-# body needs a re-run, not a push. Trigger policy: pull requests, and pushes to
-# main, release/** and candidate/** only; a newer push to the same ref cancels
-# the older run.
+# Install the exact released evaluator. Read the live pull-request body.
+# Check the selected work orders and combined PR scope. Qualify the root with
+# its exact released evaluator. Generate Harness Explorer. Upload the
+# harness-dashboard artifact. Trigger policy: pull requests, and pushes to
+# main, release/** and candidate/** only; newer runs cancel older ones.
 name: Engineering Harness
 
 on:
@@ -29,7 +22,7 @@ permissions:
   pull-requests: read
 
 env:
-  SE_HARNESS_VERSION: "0.17.0"
+  SE_HARNESS_VERSION: "0.18.0"
 
 jobs:
   validate:
@@ -68,114 +61,15 @@ jobs:
           with open(sys.argv[2], "w", encoding="utf-8") as target:
               json.dump({"pull_request": {"body": pull_request.get("body")}}, target)
           PY
-      - name: Select the pull-request work order
-        if: github.event_name == 'pull_request'
-        id: work_order
-        shell: bash
-        run: |
-          work_order="$("$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness \
-            select-work-order --event "$RUNNER_TEMP/live-event.json")"
-          printf 'work_order=%s\n' "$work_order" >> "$GITHUB_OUTPUT"
-      - name: Review preflight
+      - name: Check the selected work orders and combined PR scope
         if: github.event_name == 'pull_request'
         env:
-          HARNESS_WORK_ORDER: ${{ steps.work_order.outputs.work_order }}
-        run: >-
-          "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness preflight .
-          --work-order "$HARNESS_WORK_ORDER" --phase review
-      - name: Enforce the work-order scope on the pull request's diff
-        if: github.event_name == 'pull_request'
-        env:
-          HARNESS_WORK_ORDER: ${{ steps.work_order.outputs.work_order }}
           HARNESS_BASE_SHA: ${{ github.event.pull_request.base.sha }}
         shell: bash
         run: |
-          # ECP-SCP-006 to -009: the scope check runs on every pull request over the
-          # diff Git reports, with the released evaluator from the lock, whatever the
-          # work order's lifecycle state; the handoff check and the comparison of a
-          # declared Harness-Restitution line run only while it is still being
-          # implemented, and
-          # neither a declared line nor a lifecycle state relaxes the scope verdict.
           git fetch --depth=1 origin "$HARNESS_BASE_SHA"
-          # DST-MWF-001, -002: the check's exit status and stderr are captured, so a
-          # refusal that writes no result (a guard or identity code such as MG005)
-          # reaches the log as the evaluator's own text and fails the step with the
-          # check's status, never as a decoder traceback. A parsed result is judged
-          # exactly as before.
-          scope_status=0
-          "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness check . \
-            --artifact "$HARNESS_WORK_ORDER" --checkpoint scope \
-            --from-git "$HARNESS_BASE_SHA" --json \
-            > "$RUNNER_TEMP/scope.json" 2> "$RUNNER_TEMP/scope.stderr" || scope_status=$?
-          in_progress="$("$RUNNER_TEMP/se-harness-env/bin/python" - "$RUNNER_TEMP/scope.json" "$RUNNER_TEMP/scope.stderr" "$scope_status" <<'PY'
-          import json, sys
-          with open(sys.argv[2], encoding="utf-8", errors="replace") as captured:
-              check_stderr = captured.read()
-          if check_stderr:
-              sys.stderr.write(check_stderr)
-          try:
-              with open(sys.argv[1], encoding="utf-8") as source:
-                  result = json.load(source)
-          except (OSError, ValueError):
-              print(f"The scope check wrote no result (exit status {sys.argv[3]}).", file=sys.stderr)
-              sys.exit(int(sys.argv[3]) or 1)
-          outcome = result.get("operation", {}).get("outcome")
-          failures = [
-              predicate for gate in result.get("compliance", {}).get("gates", [])
-              for predicate in gate.get("predicates", [])
-              if predicate.get("id") == "QGP-G4I-PATHS" and predicate.get("status") != "pass"
-          ]
-          for predicate in failures:
-              print(f"scope: {predicate.get('message', '')}", file=sys.stderr)
-          if failures:
-              sys.exit("The pull request's diff leaves the work order's declared scope.")
-          if outcome != "completed":
-              for blocker in result.get("restitution", {}).get("blocked_by", []):
-                  print(f"blocked: {blocker}", file=sys.stderr)
-              sys.exit(f"The scope check did not complete (outcome {outcome}).")
-          states = result.get("restitution", {}).get("current_lifecycle_state", [])
-          print("yes" if any(item.endswith(" is in_progress.") for item in states) else "no")
-          PY
-          )"
-          declared="$("$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness \
-            select-work-order --event "$RUNNER_TEMP/live-event.json" --field restitution-digest)"
-          if [ "$in_progress" != "yes" ]; then
-            if [ -n "$declared" ]; then
-              echo "The pull request's diff is inside the declared scope; the declared Harness-Restitution $declared was bound at handoff and is not recomputed after completion."
-            else
-              echo "The pull request's diff is inside the declared scope; no restitution digest was declared."
-            fi
-          else
-          handoff_status=0
-          "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness check . \
-            --artifact "$HARNESS_WORK_ORDER" --checkpoint handoff \
-            --from-git "$HARNESS_BASE_SHA" --json \
-            > "$RUNNER_TEMP/restitution.json" 2> "$RUNNER_TEMP/restitution.stderr" || handoff_status=$?
-          "$RUNNER_TEMP/se-harness-env/bin/python" - "$RUNNER_TEMP/restitution.json" "$declared" "$RUNNER_TEMP/restitution.stderr" "$handoff_status" <<'PY'
-          import json, sys
-          with open(sys.argv[3], encoding="utf-8", errors="replace") as captured:
-              check_stderr = captured.read()
-          if check_stderr:
-              sys.stderr.write(check_stderr)
-          try:
-              with open(sys.argv[1], encoding="utf-8") as source:
-                  result = json.load(source)
-          except (OSError, ValueError):
-              print(f"The handoff check wrote no result (exit status {sys.argv[4]}).", file=sys.stderr)
-              sys.exit(int(sys.argv[4]) or 1)
-          declared = sys.argv[2]
-          outcome = result.get("operation", {}).get("outcome")
-          if outcome != "completed":
-              for blocker in result.get("restitution", {}).get("blocked_by", []):
-                  print(f"blocked: {blocker}", file=sys.stderr)
-              sys.exit(f"The handoff check did not complete (outcome {outcome}).")
-          recomputed = result.get("result_sha256", "")
-          if declared and declared != recomputed:
-              sys.exit(f"Declared Harness-Restitution {declared} does not match the recomputed result_sha256 {recomputed}.")
-          print("The pull request's diff is inside the declared scope"
-                + (" and the declared restitution digest matches." if declared else "; no restitution digest was declared."))
-          PY
-          fi
+          "$RUNNER_TEMP/se-harness-env/bin/python" -I -m se_harness check-pr . \
+            --event "$RUNNER_TEMP/live-event.json" --from-git "$HARNESS_BASE_SHA" --json
       - name: Qualify the root with its exact released evaluator
         shell: bash
         run: |

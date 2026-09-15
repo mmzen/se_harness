@@ -156,3 +156,18 @@ suite's failure set equals its same-commit 0.16.0 control's. The candidate
 is 0.18.0; `SPEC-IAR-012` carries its amendment record. Evidence in
 `evidence/WO-HUP-018/`; the record is `VREC-HUP-017`.
 
+## Adopting 0.18.0 (2026-09-15)
+
+The owner approved `REQ-HUP-037`, `REQ-HUP-038`, `SPEC-HUP-019`,
+`ARCH-HUP-013`, `VER-HUP-019` and `WO-HUP-019` with "i approve evaluator
+upgrade". `WO-HUP-019` is implemented. The checksum-verified public 0.18.0
+wheel from `RLS-SEH-027` now governs the root; candidate source is 0.19.0.
+The installer applied the reviewed 25 updates, 11 preserved editable
+adoptions and five unchanged files, including 19 explicitly selected
+editable replacements. Owner text was preserved during the transaction,
+then the current owner instructions were updated within the approved scope.
+The transaction is retained as `evidence/WO-HUP-019-evaluator-upgrade.json`.
+Released-evaluator checks and the corrected full source suite pass (1,068
+tests, zero failures or errors, 15 skips). Completion is recorded in the work
+order; the detailed evidence is under `evidence/WO-HUP-019/`. Verification-record
+preparation binds the completed candidate; independent assurance remains separate.

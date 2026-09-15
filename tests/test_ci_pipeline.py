@@ -119,13 +119,10 @@ class TriggerPolicyTests(unittest.TestCase):
                 text = (WORKFLOWS / filename).read_text(encoding="utf-8")
                 self.assertIn("cancel-in-progress: false", text)
 
-    def test_root_managed_copy_is_untouched(self) -> None:
-        # The root engineering-harness.yml is the hash-locked copy of the released
-        # governor, which carries WO-CIP-001's trigger policy; a work order changes
-        # the standard template only, and the root follows on the next upgrade.
-        # Since WO-ECP-003 the template carries the unconditional scope gate that
-        # the released root does not, so the two are byte-identical only while
-        # the root is the release that shipped the current template.
+    def test_root_workflow_respects_installed_ownership(self) -> None:
+        # WO-HUP-019 adopts 0.18.0's editable CI seed. Earlier root evaluators
+        # lock the workflow bytes; the current seed still selects the adopted
+        # evaluator and retains the repository's trigger policy.
         from se_harness import __version__
         from se_harness.installer import tracked_content
         from se_harness.integrity import canonical_sha256
@@ -136,7 +133,12 @@ class TriggerPolicyTests(unittest.TestCase):
         lock = json.loads((REPOSITORY_ROOT / ".engineering-harness.lock").read_bytes())
         evaluator_version = lock["evaluator"]["version"]
         entry = lock["files"][".github/workflows/engineering-harness.yml"]
-        self.assertEqual(entry["sha256"], canonical_sha256(tracked_content(entry["mode"], root_path.read_bytes())))
+        if tuple(int(part) for part in evaluator_version.split(".")) < (0, 18, 0):
+            self.assertEqual("managed", entry["mode"])
+            self.assertEqual(entry["sha256"], canonical_sha256(tracked_content(entry["mode"], root_path.read_bytes())))
+        else:
+            self.assertEqual({"mode": "seed", "state": "present"}, entry)
+        self.assertIn(f'SE_HARNESS_VERSION: "{evaluator_version}"', root)
         if evaluator_version == __version__:
             self.assertEqual(template.replace("{{HARNESS_VERSION}}", evaluator_version), root)
         else:

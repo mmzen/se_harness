@@ -6,15 +6,8 @@ status = "draft"
 owners = ["<product/domain owner>"]
 created = "YYYY-MM-DD"
 updated = "YYYY-MM-DD"
-# One obligation per requirement; split on "and SHALL". At most 30 words.
-# Name the concrete component when one exists (THE VALIDATOR, THE INSTALLER);
-# keep THE SYSTEM for an obligation that spans components. Pick one shape:
-#   THE SYSTEM SHALL <response>.                          (always)
-#   WHEN <event>, THE SYSTEM SHALL <response>.            (event)
-#   WHILE <state>, THE SYSTEM SHALL <response>.           (state)
-#   IF <unwanted condition>, THEN THE SYSTEM SHALL <response>.   (unwanted)
-#   WHERE <feature is present>, THE SYSTEM SHALL <response>.     (optional feature)
-statement = "WHEN <event>, THE SYSTEM SHALL <observable response>."
+# State an observable behavior. SHALL is optional.
+statement = "<The observable behavior the system provides.>"
 verification_method = ["test"]
 priority = "must"
 source = "<stakeholder, standard clause, incident, or artifact ID>"
@@ -26,6 +19,9 @@ derives_from = ["CAP-xxx"]
 
 # Requirement: <title>
 
+Before approval, apply the shared design principle and `requirement` checklist in
+`docs/engineering/ARTIFACT_AUTHORING.md`.
+
 ## In plain words
 
 <One or two sentences a newcomer understands. A project term used here is
@@ -34,7 +30,7 @@ root, which this repository writes.>
 
 ## Why
 
-<At most five sentences. Why the obligation exists, not what it does. How
+<Why the obligation exists. How
 it is met belongs in the specification that specifies this requirement.>
 
 ## Behavior

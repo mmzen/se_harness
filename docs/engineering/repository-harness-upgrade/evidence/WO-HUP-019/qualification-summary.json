@@ -1,0 +1,180 @@
+{
+  "released_doctor": {
+    "checks": 70,
+    "failed": 0,
+    "warnings": 48
+  },
+  "graph": {
+    "artifact_count": 1642,
+    "error_count": 0,
+    "warning_count": 48,
+    "advisory_count": 0
+  },
+  "released_root_qualification": [
+    {
+      "id": "RR001",
+      "message": "runtime matches the target root lock",
+      "passed": true,
+      "subject": "released-evaluator"
+    },
+    {
+      "id": "RR002",
+      "message": "69/69 managed checks passed",
+      "passed": true,
+      "subject": "managed-root"
+    },
+    {
+      "id": "RR003",
+      "message": "artifacts=1642; errors=0; warnings=48",
+      "passed": true,
+      "subject": "engineering-graph"
+    },
+    {
+      "id": "RR004",
+      "message": "target state is unchanged",
+      "passed": true,
+      "subject": "repository-state"
+    }
+  ],
+  "candidate_doctor": {
+    "argv": [
+      "C:\\Python313\\python.exe",
+      "-B",
+      "-m",
+      "se_harness",
+      "doctor",
+      ".",
+      "--json"
+    ],
+    "exit_code": 1,
+    "stderr": "",
+    "result_summary": {},
+    "failed_checks": [
+      {
+        "detail": "differs from distribution template",
+        "name": "distribution:ENGINEERING_HARNESS.md",
+        "passed": false
+      },
+      {
+        "detail": "installed checker payload matches its installation record",
+        "name": "evaluator-payload",
+        "passed": false
+      },
+      {
+        "detail": "config, installation and running checker versions must agree",
+        "name": "selected-version",
+        "passed": false
+      }
+    ]
+  },
+  "candidate_and_evaluator": {
+    "candidate_version": "0.19.0",
+    "payload_sha256": "cf28e03f21a0e474af8c415499c69193ab2a20e08a95c0ad3514758a84cff54d",
+    "schema": "se-harness-evaluator-facts-v1",
+    "version": "0.18.0",
+    "wheel": "se_harness-0.18.0-py3-none-any.whl",
+    "wheel_sha256": "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54"
+  },
+  "equal_version_refusal": {
+    "passed": true,
+    "expected_refusal": "PRE008",
+    "message": "PRE008: the candidate version 0.18.0 equals the declared root version; there is no predecessor pair to rehearse",
+    "main_checkout_unchanged": true
+  },
+  "scope_and_preservation": {
+    "passed": true,
+    "changed_paths": [
+      ".engineering-harness.lock",
+      ".engineering-harness.toml",
+      ".github/workflows/engineering-harness.yml",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "ENGINEERING_HARNESS.md",
+      "docs/engineering/ARTIFACT_AUTHORING.md",
+      "docs/engineering/DECISION_RIGHTS.md",
+      "docs/engineering/OPERATING_CARD.md",
+      "docs/engineering/QUALITY_GATES.json",
+      "docs/engineering/QUALITY_GATES.md",
+      "docs/engineering/TRACEABILITY.md",
+      "docs/engineering/WORKFLOW.json",
+      "docs/engineering/WORKFLOW.md",
+      "docs/engineering/repository-harness-upgrade/README.md",
+      "docs/engineering/repository-harness-upgrade/architecture/ARCH-HUP-013.md",
+      "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-019-evaluator-upgrade.json",
+      "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-019/WO-HUP-019-handoff.md",
+      "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-019/qualification-summary.json",
+      "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-019/source-suite-comparison.json",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-037.md",
+      "docs/engineering/repository-harness-upgrade/requirements/REQ-HUP-038.md",
+      "docs/engineering/repository-harness-upgrade/specifications/SPEC-HUP-019.md",
+      "docs/engineering/repository-harness-upgrade/verification/VER-HUP-019.md",
+      "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-019.md",
+      "docs/engineering/templates/ADR.template.md",
+      "docs/engineering/templates/ARCHITECTURE.template.md",
+      "docs/engineering/templates/CAPABILITY.template.md",
+      "docs/engineering/templates/INTENT.template.md",
+      "docs/engineering/templates/RELEASE_CONTRACT.template.md",
+      "docs/engineering/templates/RELEASE_RECORD.template.md",
+      "docs/engineering/templates/REQUIREMENT.template.md",
+      "docs/engineering/templates/RISK.template.md",
+      "docs/engineering/templates/SPECIFICATION.template.md",
+      "docs/engineering/templates/VERIFICATION.template.md",
+      "docs/engineering/templates/VERIFICATION_RECORD.template.md",
+      "docs/engineering/templates/WORK_ORDER.template.md",
+      "docs/notes/developing-se-harness.md",
+      "docs/notes/harness-installation-and-upgrades.md",
+      "pyproject.toml",
+      "se_harness/__init__.py",
+      "tests/test_artifact_catalog.py",
+      "tests/test_ci_pipeline.py"
+    ],
+    "outside_scope": [],
+    "unchanged_historical_records": true,
+    "unchanged_candidate_templates": true,
+    "product_source_changes": [
+      "se_harness/__init__.py: version only"
+    ],
+    "preserved_adopted_and_unchanged_paths": [
+      ".agents/skills/harness-operator-brief/SKILL.md",
+      ".agents/skills/harness-operator-brief/scripts/check_brief.py",
+      ".agents/skills/harness-operator-brief/skill-contract.json",
+      ".agents/skills/harness-orient/SKILL.md",
+      ".agents/skills/harness-orient/scripts/orient.py",
+      ".agents/skills/harness-orient/skill-contract.json",
+      ".claude/skills/harness-orient/SKILL.md",
+      ".gitattributes",
+      ".github/PULL_REQUEST_TEMPLATE.md",
+      ".gitignore",
+      "GLOSSARY.md",
+      "docs/engineering/README.md",
+      "docs/engineering/TECHNICAL_COMMUNICATION.md",
+      "docs/engineering/templates/DECISION.template.md",
+      "docs/engineering/templates/OPERATING_CONTRACT.template.md",
+      "docs/engineering/templates/README.md"
+    ],
+    "baseline_warning_count": 48,
+    "upgraded_warning_count": 48,
+    "warning_sets_equal": true,
+    "prior_lock_sha256": "ac614b2bb0c9910df078a7025bef72b6da3074aa84e6728c0ecc0539bd9efc15",
+    "target_lock_sha256": "5a0e14ccfe2b143850ba7658943710b0e5e8583b421fda4518d88a2989478615"
+  },
+  "raw_log_directory": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-upgrade-018",
+  "raw_log_hashes": {
+    "root-upgrade-applied.json": "5d8680aba2b50a12dd10fd790955a05488cbc017560097cb03e9b29c57dba88a",
+    "final-doctor.json": "8aca49b1513848d6f1ee1bf6f9b0501baec7076a08081476560da006972d7fd8",
+    "final-validation.json": "36d7f6503efad40914b2806b999c94dcf8a4cdbed687b6b2a00a6c04da75cb37",
+    "final-qualification.json": "eb46641f1d807fc09bc49bfdce6178f568e95917dc33daf37fccd29dbb3be9e3",
+    "review-preflight.json": "d167c3d26ee6e48039a6eeb1f5d0ea2ee59cd2d41bacbe3ffcb19e7640bdaba3",
+    "candidate-help.stdout": "721718c6a64371c984e64e9c5bbb6a27efc22727147bb755a691c4625ebbe684",
+    "candidate-doctor.json": "6745272966855b53e4c1086876d185f3a001db30a2d02bb7c743c5bc9db954cf",
+    "final-derive.json": "6ae88f2bf41d63e815614fa131a1b803ba7512cb2f2437c82d16694c19f5ee0b",
+    "final-distribution-validation.stdout": "7b46d8f310b1e4fc7216b69ae9eeeb2da845e1f0c445a843f7f5d5bfb90e805b",
+    "final-replay.json": "314ba07d53438904eb41572feabe87491ce8af366e10718584d73c8b8166ec34",
+    "scope-and-preservation.json": "f31da1464777de29bc53c252cbd20dcaf9e438513feb5f718c8cef80f289c082",
+    "approval-applied.json": "b2077b7c49ee72c433c3cefb75a5169d1d65fbdf8bce916d682423514309b110",
+    "started.json": "8bf14175fb1f70c6b3ef1df392b6ce393734a8cc472762c73c8a14da6931515d",
+    "control-suite.log": "8cf9454424007ed4b93fed5bfa4761f8f12527d92f552e41985dd95b23a7d289",
+    "upgraded-suite.log": "13512fc452917033e8d1fd06eaa185dc4444f919c58200122d96d44eb779a8ce",
+    "corrected-suite.log": "8653d7df7bfbfc78bbeb29434ce26ae6a0ebb1a187318d5cd6bd309f5aa62e19"
+  }
+}
