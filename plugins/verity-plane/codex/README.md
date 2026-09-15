@@ -13,3 +13,15 @@ without an exact host or Python patch-version allowlist.
 The setup environment is outside the checkout. Development archives are labeled
 DEVELOPMENT.md and cannot establish release eligibility. Installation into the
 owner's real host settings is a separate action.
+
+## Setup after native installation
+
+Use Python 3.11+ with venv and ensurepip. Invoke verity-plane:setup with your
+project and a persistent data directory outside it. Setup installs the supplied
+wheel offline in its private environment. Plugin installation alone does not
+download SE Harness from PyPI, initialize a project or approve an upgrade.
+An existing project's selected evaluator remains authoritative.
+
+See [setup](skills/setup/SKILL.md) and its shared references for initialization,
+connection and repair. Read `assembly-inventory.json` for this package's exact
+source and released-wheel identity when using a release assembly.
