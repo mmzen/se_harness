@@ -1,0 +1,396 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "RLS-SEH-027",
+    "artifacts": [
+      "RLS-SEH-027"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-DST-001",
+      "ADR-IPK-001",
+      "ADR-KIS-001",
+      "ADR-KIS-002",
+      "ADR-PLG-001",
+      "ADR-PLG-002",
+      "ADR-PLG-003",
+      "ADR-PLG-004",
+      "ADR-RLO-001",
+      "ARCH-DST-001",
+      "ARCH-HUP-012",
+      "ARCH-IPK-001",
+      "ARCH-KIS-001",
+      "ARCH-KIS-002",
+      "ARCH-PLG-001",
+      "ARCH-PLG-002",
+      "ARCH-PLG-003",
+      "ARCH-PLG-004",
+      "ARCH-RLO-001",
+      "CAP-AUT-001",
+      "CAP-CIP-001",
+      "CAP-DST-001",
+      "CAP-ECP-003",
+      "CAP-HUP-002",
+      "CAP-IAR-001",
+      "CAP-IPK-001",
+      "CAP-KIS-001",
+      "CAP-KIS-002",
+      "CAP-KIS-003",
+      "CAP-RLO-001",
+      "CAP-TCM-001",
+      "CAP-TST-001",
+      "CAP-WEX-001",
+      "INT-AUT-001",
+      "INT-CIP-001",
+      "INT-DST-001",
+      "INT-ECP-001",
+      "INT-HUP-002",
+      "INT-IAR-001",
+      "INT-IPK-001",
+      "INT-KIS-001",
+      "INT-KIS-002",
+      "INT-KIS-003",
+      "INT-RLO-001",
+      "INT-TCM-001",
+      "INT-TST-001",
+      "INT-WEX-001",
+      "REL-SEH-029",
+      "REQ-AUT-009",
+      "REQ-CIP-010",
+      "REQ-DST-006",
+      "REQ-DST-076",
+      "REQ-DST-077",
+      "REQ-ECP-012",
+      "REQ-ECP-034",
+      "REQ-HUP-035",
+      "REQ-HUP-036",
+      "REQ-IPK-001",
+      "REQ-KIS-001",
+      "REQ-KIS-002",
+      "REQ-KIS-003",
+      "REQ-KIS-004",
+      "REQ-KIS-005",
+      "REQ-KIS-006",
+      "REQ-KIS-007",
+      "REQ-KIS-008",
+      "REQ-KIS-009",
+      "REQ-PLG-001",
+      "REQ-PLG-002",
+      "REQ-PLG-003",
+      "REQ-PLG-004",
+      "REQ-PLG-005",
+      "REQ-PLG-006",
+      "REQ-PLG-007",
+      "REQ-PLG-008",
+      "REQ-PLG-009",
+      "REQ-PLG-010",
+      "REQ-PLG-011",
+      "REQ-PLG-012",
+      "REQ-PLG-013",
+      "REQ-PLG-014",
+      "REQ-PLG-015",
+      "REQ-PLG-016",
+      "REQ-PLG-017",
+      "REQ-PLG-018",
+      "REQ-PLG-019",
+      "REQ-PLG-020",
+      "REQ-PLG-021",
+      "REQ-PLG-027",
+      "REQ-PLG-028",
+      "REQ-PLG-029",
+      "REQ-PLG-030",
+      "REQ-PLG-031",
+      "REQ-PLG-032",
+      "REQ-PLG-033",
+      "REQ-PLG-034",
+      "REQ-PLG-035",
+      "REQ-PLG-036",
+      "REQ-PLG-037",
+      "REQ-RLO-001",
+      "REQ-TCM-017",
+      "REQ-TST-004",
+      "SPEC-AUT-004",
+      "SPEC-CIP-004",
+      "SPEC-DST-001",
+      "SPEC-DST-028",
+      "SPEC-ECP-007",
+      "SPEC-ECP-023",
+      "SPEC-HUP-018",
+      "SPEC-IPK-001",
+      "SPEC-KIS-001",
+      "SPEC-KIS-002",
+      "SPEC-KIS-003",
+      "SPEC-PLG-001",
+      "SPEC-PLG-002",
+      "SPEC-PLG-003",
+      "SPEC-PLG-004",
+      "SPEC-PLG-005",
+      "SPEC-PLG-006",
+      "SPEC-PLG-007",
+      "SPEC-PLG-008",
+      "SPEC-PLG-009",
+      "SPEC-PLG-010",
+      "SPEC-PLG-011",
+      "SPEC-PLG-012",
+      "SPEC-PLG-016",
+      "SPEC-PLG-020",
+      "SPEC-PLG-021",
+      "SPEC-RLO-001",
+      "SPEC-TCM-007",
+      "SPEC-TST-002",
+      "VER-AUT-004",
+      "VER-CIP-004",
+      "VER-CIP-005",
+      "VER-CIP-006",
+      "VER-DST-001",
+      "VER-DST-028",
+      "VER-ECP-025",
+      "VER-HUP-018",
+      "VER-KIS-001",
+      "VER-KIS-002",
+      "VER-KIS-003",
+      "VER-PLG-001",
+      "VER-PLG-002",
+      "VER-PLG-003",
+      "VER-PLG-004",
+      "VER-PLG-005",
+      "VER-PLG-006",
+      "VER-PLG-007",
+      "VER-PLG-008",
+      "VER-PLG-009",
+      "VER-PLG-010",
+      "VER-PLG-011",
+      "VER-PLG-012",
+      "VER-PLG-016",
+      "VER-PLG-018",
+      "VER-PLG-019",
+      "VER-PLG-020",
+      "VER-PLG-021",
+      "VER-PLG-022",
+      "VER-RLO-006",
+      "VER-TCM-007",
+      "VREC-SEH-027",
+      "WO-AUT-006",
+      "WO-CIP-008",
+      "WO-CIP-009",
+      "WO-CIP-010",
+      "WO-DST-027",
+      "WO-ECP-037",
+      "WO-ECP-038",
+      "WO-HUP-018",
+      "WO-KIS-001",
+      "WO-KIS-002",
+      "WO-KIS-003",
+      "WO-KIS-004",
+      "WO-KIS-005",
+      "WO-KIS-006",
+      "WO-KIS-007",
+      "WO-KIS-008",
+      "WO-KIS-009",
+      "WO-PLG-001",
+      "WO-PLG-002",
+      "WO-PLG-003",
+      "WO-PLG-004",
+      "WO-PLG-005",
+      "WO-PLG-006",
+      "WO-PLG-007",
+      "WO-PLG-008",
+      "WO-PLG-009",
+      "WO-PLG-010",
+      "WO-PLG-011",
+      "WO-PLG-012",
+      "WO-PLG-016",
+      "WO-PLG-017",
+      "WO-PLG-018",
+      "WO-PLG-019",
+      "WO-PLG-020",
+      "WO-PLG-021",
+      "WO-PLG-022",
+      "WO-RLO-009",
+      "WO-RLS-024",
+      "WO-TCM-011"
+    ],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "transition",
+    "workflow_rule_id": "WFL-RLS-DECIDE",
+    "procedure_id": "PROC-RLS-DECIDE",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G5-RELEASE-DECISION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G5D-STATUS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "RLS-SEH-027"
+              }
+            ],
+            "message": "RLS-SEH-027 status is ready."
+          },
+          {
+            "id": "QGP-G5D-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:RLS-SEH-027"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G5D-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G5D-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:RLS-SEH-027"
+              }
+            ],
+            "message": "No open decision blocks RLS-SEH-027."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "RLS-SEH-027"
+              }
+            ],
+            "message": "ready -> released is a declared lifecycle edge for RLS-SEH-027."
+          },
+          {
+            "id": "QGS-VERIFIED-INCLUSION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "RLS-SEH-027"
+              }
+            ],
+            "message": "Every verification record RLS-SEH-027 includes is verified."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "8b3505763b889dcd56a7f1afaca00b2ebd40ca64a47a41c746b99393d965178f",
+    "change_set_source": "arguments"
+  },
+  "procedure": {
+    "id": "PROC-RLS-DECIDE",
+    "current_step": "STEP-RLS-DECIDE",
+    "steps": [
+      {
+        "id": "STEP-RLS-DECIDE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G5-RELEASE-DECISION"
+        ],
+        "effects": [
+          "Permits an explicit decision on RLS-SEH-027 only."
+        ],
+        "non_effects": [
+          "Release status performs no external action."
+        ],
+        "decision_right": "DR-RLS-DECIDE",
+        "role": "release-owner",
+        "artifact": "RLS-SEH-027",
+        "decision": "whether the exact candidate is authorized for release",
+        "outcomes": [
+          "released",
+          "reject"
+        ],
+        "response": "I authorize release record RLS-SEH-027."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "RLS-SEH-027",
+        "status": "ready"
+      }
+    ],
+    "after": [
+      {
+        "id": "RLS-SEH-027",
+        "status": "ready"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 46
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated transition compliance for RLS-SEH-027."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "RLS-SEH-027 is ready."
+    ],
+    "decision_required": {
+      "decision_right": "DR-RLS-DECIDE",
+      "role": "release-owner",
+      "artifact": "RLS-SEH-027",
+      "decision": "whether the exact candidate is authorized for release",
+      "outcomes": [
+        "released",
+        "reject"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-RLS-DECIDE",
+      "step_id": "STEP-RLS-DECIDE",
+      "action": "whether the exact candidate is authorized for release"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "I authorize release record RLS-SEH-027."
+    },
+    "alternatives": [
+      "Use complete alternative procedure PROC-RLS-REJECT."
+    ]
+  },
+  "result_sha256": "1e14b6aa7b824c352810b636056eb6f79e85946524921786528ca66974d92fa0"
+}

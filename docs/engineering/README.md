@@ -56,6 +56,7 @@
 - `release-0-15-0/`: aggregate qualification, provenance, and release records for version 0.15.0.
 - `release-0-16-0/`: aggregate qualification, provenance, and release records for version 0.16.0.
 - `release-0-17-0/`: aggregate qualification, provenance, and release records for version 0.17.0.
+- [release-0-18-0/](release-0-18-0/README.md): checker 0.18.0 and first plugin release preparation.
 
 ## Repository-specific engineering documentation
 

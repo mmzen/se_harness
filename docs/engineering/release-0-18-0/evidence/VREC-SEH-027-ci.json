@@ -1,0 +1,43 @@
+{
+  "conclusion": "success",
+  "event": "push",
+  "headSha": "353da23881fdf045a52322a313c1e67341f7a9b1",
+  "jobs": [
+    {
+      "name": "Candidate source evidence",
+      "conclusion": "success",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34937264190/job/104277785380"
+    },
+    {
+      "name": "Candidate package evidence",
+      "conclusion": "success",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34937264190/job/104278048709"
+    },
+    {
+      "name": "Upgrade rehearsal (Linux)",
+      "conclusion": "success",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34937264190/job/104278192453"
+    },
+    {
+      "name": "Upgrade rehearsal (Windows)",
+      "conclusion": "success",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34937264190/job/104278192481"
+    },
+    {
+      "name": "Build deterministic integration package",
+      "conclusion": "skipped",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34937264190/job/104278793339"
+    },
+    {
+      "name": "Verify integration package (${{ matrix.platform }})",
+      "conclusion": "skipped",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34937264190/job/104278793729"
+    },
+    {
+      "name": "Retain verified integration package",
+      "conclusion": "skipped",
+      "url": "https://github.com/mmzen/se_harness/actions/runs/34937264190/job/104278793735"
+    }
+  ],
+  "url": "https://github.com/mmzen/se_harness/actions/runs/34937264190"
+}
