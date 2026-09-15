@@ -2,10 +2,10 @@
 id = "WO-PLG-016"
 type = "work_order"
 title = "Document installation and check ordinary host use"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-14"
-updated = "2026-09-14"
+updated = "2026-09-15"
 
 [assurance]
 commit_bound_verification = "required"
@@ -42,6 +42,13 @@ to = "in_progress"
 decided_at = "2026-09-14T22:20:07Z"
 decided_by = "engineering-owner"
 reason = "The owner explicitly authorized starting this rewritten work order on 2026-09-15. Record that selected start; use existing mechanisms and retain the KISS scope."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-15T05:29:13Z"
+decided_by = "engineering-owner"
+reason = "The owner reviewed the completed implementations and said \"i approve WO-PLG-009 and WO-PLG-016\" in response to the explicit completion request. Record that engineering-owner completion approval for WO-PLG-016. Its full local suite and documented walkthroughs passed; the implementation PR checks passed or were intentionally skipped. This approval does not verify a record, merge, release, publish or change a live project."
 +++
 
 # Document installation and check ordinary host use

@@ -51,5 +51,13 @@ outside Git. The full suite passed: 1,068 tests, 15 skipped. Distribution valida
 released doctor, graph validation and review preflight, and CLI help passed.
 See [commands and results](checks.json). The first graph invocation used an
 unsupported subcommand; the corrected released validate command passed. Existing
-historical-layout warnings remain nonblocking. Implementation completion,
-accountable verification, release and live adoption remain distinct decisions.
+historical-layout warnings remain nonblocking. The owner approved completion and the released evaluator recorded WO-PLG-016
+as implemented. Required verification preparation follows; accountable
+verification, release and live adoption remain distinct decisions.
+
+## Completion approval
+
+The owner said: "i approve WO-PLG-009 and WO-PLG-016" after the completed
+implementation handoff. That approval is recorded for this work order.
+[Hosted results](ci-implementation.json) identify the tested implementation PR
+head; subsequent completion/preparation edits change engineering records only.
