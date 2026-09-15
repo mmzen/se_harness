@@ -2,10 +2,10 @@
 id = "WO-PLG-009"
 type = "work_order"
 title = "Connect and maintain projects with plugin skills"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-14"
-updated = "2026-09-14"
+updated = "2026-09-15"
 
 [assurance]
 commit_bound_verification = "required"
@@ -49,6 +49,13 @@ to = "in_progress"
 decided_at = "2026-09-14T22:06:01Z"
 decided_by = "engineering-owner"
 reason = "The owner explicitly authorized starting this rewritten work order on 2026-09-15. Record that selected start; use existing mechanisms and retain the KISS scope."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-15T05:22:53Z"
+decided_by = "engineering-owner"
+reason = "The owner reviewed the completed implementations and said \"i approve WO-PLG-009 and WO-PLG-016\" in response to the explicit completion request. Record that engineering-owner completion approval for WO-PLG-009. Its full local suite and documented walkthroughs passed; the implementation PR checks passed or were intentionally skipped. This approval does not verify a record, merge, release, publish or change a live project."
 +++
 
 # Connect and maintain projects with plugin skills

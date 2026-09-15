@@ -43,5 +43,13 @@ a live repository migration. See [commands and results](checks.json). Raw local
 logs and disposable fixtures remain under work/plugin-remaining-checks and
 work/plugin-connect-acceptance-20260915 outside Git; hosted checks remain on the PR.
 
-Implementation and evidence are ready for the installed evaluator's completion
-decision. No assurance, release, host installation or live adoption is recorded.
+The owner approved completion and the released evaluator recorded WO-PLG-009
+as implemented. Required verification preparation follows; no assurance, release
+or live adoption is recorded.
+
+## Completion approval
+
+The owner said: "i approve WO-PLG-009 and WO-PLG-016" after the completed
+implementation handoff. That approval is recorded for this work order.
+[Hosted results](ci-implementation.json) identify the tested implementation PR
+head; subsequent completion/preparation edits change engineering records only.
