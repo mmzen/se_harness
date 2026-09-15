@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "C:/Python313/python.exe",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/plugin_integration/package_assembly",
+    "-p",
+    "test_marketplace.py",
+    "-k",
+    "test_git_checkout_preserves_distribution_bytes_with_autocrlf",
+    "-v"
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+  "exit_code": 0,
+  "elapsed_seconds": 15.372223377227783
+}

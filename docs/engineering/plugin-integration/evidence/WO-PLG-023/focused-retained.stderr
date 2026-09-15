@@ -1,0 +1,27 @@
+test_complete_composition_preserves_native_output_and_committed_assets (test_marketplace.MarketplaceTests.test_complete_composition_preserves_native_output_and_committed_assets) ... ok
+test_existing_output_and_source_overlap_preserve_sentinel (test_marketplace.MarketplaceTests.test_existing_output_and_source_overlap_preserve_sentinel) ... ok
+test_incomplete_package_and_version_disagreement_fail_before_output (test_marketplace.MarketplaceTests.test_incomplete_package_and_version_disagreement_fail_before_output) ... ok
+test_missing_escaping_and_wrong_host_sources_fail_before_output (test_marketplace.MarketplaceTests.test_missing_escaping_and_wrong_host_sources_fail_before_output) ... ok
+test_modified_wrapper_native_archive_and_unexpected_directory_are_refused (test_marketplace.MarketplaceTests.test_modified_wrapper_native_archive_and_unexpected_directory_are_refused) ... ok
+test_redirected_and_interrupted_output_are_not_accepted (test_marketplace.MarketplaceTests.test_redirected_and_interrupted_output_are_not_accepted) ... ok
+test_altered_output_and_omitted_inventory_entry (test_package_assembly.PackageAssemblyTests.test_altered_output_and_omitted_inventory_entry) ... ok
+test_candidate_evaluator_is_never_imported (test_package_assembly.PackageAssemblyTests.test_candidate_evaluator_is_never_imported) ... ok
+test_cli_build_check_and_refusal (test_package_assembly.PackageAssemblyTests.test_cli_build_check_and_refusal) ... ok
+test_committed_source_only_and_missing_source (test_package_assembly.PackageAssemblyTests.test_committed_source_only_and_missing_source) ... ok
+test_conflicts_host_separation_and_manifest_name (test_package_assembly.PackageAssemblyTests.test_conflicts_host_separation_and_manifest_name) ... ok
+test_duplicate_json_key_and_malformed_release (test_package_assembly.PackageAssemblyTests.test_duplicate_json_key_and_malformed_release) ... ok
+test_extra_file_archive_change_and_false_inventory_digest (test_package_assembly.PackageAssemblyTests.test_extra_file_archive_change_and_false_inventory_digest) ... ok
+test_forbidden_inputs (test_package_assembly.PackageAssemblyTests.test_forbidden_inputs) ... ok
+test_git_executable_mode_and_host_only_scripts (test_package_assembly.PackageAssemblyTests.test_git_executable_mode_and_host_only_scripts) ... ok
+test_git_symlink_is_not_read (test_package_assembly.PackageAssemblyTests.test_git_symlink_is_not_read) ... ok
+test_independent_release_identity_required (test_package_assembly.PackageAssemblyTests.test_independent_release_identity_required) ... ok
+test_interruption_is_not_accepted_and_fresh_retry_rechecked (test_package_assembly.PackageAssemblyTests.test_interruption_is_not_accepted_and_fresh_retry_rechecked) ... ok
+test_missing_and_corrupt_wheel (test_package_assembly.PackageAssemblyTests.test_missing_and_corrupt_wheel) ... ok
+test_output_links_are_rejected (test_package_assembly.PackageAssemblyTests.test_output_links_are_rejected) ... ok
+test_same_source_wheel_and_deterministic_archives (test_package_assembly.PackageAssemblyTests.test_same_source_wheel_and_deterministic_archives) ... ok
+test_unsafe_paths_preserve_outside_sentinel (test_package_assembly.PackageAssemblyTests.test_unsafe_paths_preserve_outside_sentinel) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 368.682s
+
+OK

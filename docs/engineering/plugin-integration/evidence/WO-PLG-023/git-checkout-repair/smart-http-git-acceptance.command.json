@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "C:/Python313/python.exe",
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\tests\\plugin_integration\\package_assembly\\run_marketplace_acceptance.py",
+    "--marketplace",
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-git-fixed-0.1.0",
+    "--output",
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-smart-http-check",
+    "--codex",
+    "C:/Users/hok/AppData/Local/OpenAI/Codex/bin/12219cbfbcbddde7/codex.exe",
+    "--claude",
+    "C:/Users/hok/.local/bin/claude.exe",
+    "--expected-wheel-sha256",
+    "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+    "--source",
+    "http://127.0.0.1:58062/verity-plane.git",
+    "--ref",
+    "plugin-marketplace",
+    "--install-only"
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+  "exit_code": 0,
+  "scope": "Loopback HTTP Git origin using git http-backend; no public observation M05."
+}

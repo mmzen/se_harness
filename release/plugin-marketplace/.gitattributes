@@ -1,0 +1,2 @@
+# Preserve the accepted distribution bytes in every Git checkout.
+* -text

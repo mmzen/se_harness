@@ -1,0 +1,204 @@
+{
+  "authorization": "User selected \"Authorize this one publication with existing Git permissions\" in response to the question naming this exact commit and ref, as a one-time exception to the Evidence skill separate-enforcement prerequisite.",
+  "verification": "VREC-PLG-020",
+  "source_candidate": "7f32dcbd18b50254a0d4e43e2dfdd9789dc9b78e",
+  "argv": [
+    "git",
+    "push",
+    "--force-with-lease=refs/heads/plugin-marketplace:",
+    "https://github.com/mmzen/se_harness.git",
+    "ed68b30c88043773be929540b7b10ae537957c2d:refs/heads/plugin-marketplace"
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\verity-plane-marketplace-git-fixed",
+  "commit": "ed68b30c88043773be929540b7b10ae537957c2d",
+  "ref": "refs/heads/plugin-marketplace",
+  "remote": "https://github.com/mmzen/se_harness.git",
+  "before": "",
+  "files_checked": 59,
+  "pr": {
+    "headRefOid": "c44a290d0a29747d7caa4116c726eefbea78df81",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-15T16:00:15Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34992088193/job/104459037180",
+        "name": "Analyze (actions)",
+        "startedAt": "2026-09-15T15:59:29Z",
+        "status": "COMPLETED",
+        "workflowName": "CodeQL"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-15T15:59:57Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34992091973/job/104459048770",
+        "name": "validate",
+        "startedAt": "2026-09-15T15:59:30Z",
+        "status": "COMPLETED",
+        "workflowName": "Engineering Harness"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-15T15:59:40Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34992091861/job/104459048396",
+        "name": "Predecessor evaluator assessment",
+        "startedAt": "2026-09-15T15:59:31Z",
+        "status": "COMPLETED",
+        "workflowName": "Predecessor Evaluator Assessment"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-15T15:59:42Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34992092759/job/104459051345",
+        "name": "Select release rehearsals",
+        "startedAt": "2026-09-15T15:59:31Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-15T16:00:26Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34992091784/job/104459048876",
+        "name": "Candidate source evidence",
+        "startedAt": "2026-09-15T15:59:30Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-15T16:00:38Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34992088193/job/104459037247",
+        "name": "Analyze (javascript-typescript)",
+        "startedAt": "2026-09-15T15:59:29Z",
+        "status": "COMPLETED",
+        "workflowName": "CodeQL"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-15T16:00:34Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34992088193/job/104459036874",
+        "name": "Analyze (python)",
+        "startedAt": "2026-09-15T15:59:29Z",
+        "status": "COMPLETED",
+        "workflowName": "CodeQL"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-15T16:00:20Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34992092759/job/104459136822",
+        "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+        "startedAt": "2026-09-15T15:59:45Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-15T16:00:56Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34992091784/job/104459401199",
+        "name": "Candidate package evidence",
+        "startedAt": "2026-09-15T16:00:29Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-15T15:59:42Z",
+        "conclusion": "SKIPPED",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34992092759/job/104459137960",
+        "name": "Rehearse the qualification of the release record",
+        "startedAt": "2026-09-15T15:59:43Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-15T16:02:15Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34992091784/job/104459592991",
+        "name": "Upgrade rehearsal (Linux)",
+        "startedAt": "2026-09-15T16:00:59Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-15T16:02:42Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34992091784/job/104459593054",
+        "name": "Upgrade rehearsal (Windows)",
+        "startedAt": "2026-09-15T16:00:59Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-15T16:00:28Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34992092759/job/104459365391",
+        "name": "Publication rehearsal",
+        "startedAt": "2026-09-15T16:00:23Z",
+        "status": "COMPLETED",
+        "workflowName": "Publication Rehearsal"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-15T16:03:15Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34992091784/job/104460265097",
+        "name": "Build deterministic integration package",
+        "startedAt": "2026-09-15T16:02:46Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-15T16:03:45Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34992091784/job/104460466071",
+        "name": "Verify integration package (Linux)",
+        "startedAt": "2026-09-15T16:03:18Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-15T16:04:52Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34992091784/job/104460466164",
+        "name": "Verify integration package (Windows)",
+        "startedAt": "2026-09-15T16:03:18Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-15T16:05:04Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/actions/runs/34992091784/job/104461059993",
+        "name": "Retain verified integration package",
+        "startedAt": "2026-09-15T16:04:55Z",
+        "status": "COMPLETED",
+        "workflowName": "SE Harness Candidate Evidence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-15T16:00:10Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mmzen/se_harness/runs/104459280996",
+        "name": "CodeQL",
+        "startedAt": "2026-09-15T16:00:06Z",
+        "status": "COMPLETED",
+        "workflowName": ""
+      }
+    ]
+  },
+  "started_at": "2026-09-15T16:06:16.256211+00:00"
+}

@@ -1,0 +1,34 @@
+{
+  "argv": [
+    "C:/Python313/python.exe",
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\public-020-fixture\\tests\\plugin_integration\\package_assembly\\run_marketplace_acceptance.py",
+    "--marketplace",
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\verity-plane-marketplace-git-fixed-0.1.0",
+    "--output",
+    "C:\\p020",
+    "--codex",
+    "C:/Users/hok/AppData/Local/OpenAI/Codex/bin/12219cbfbcbddde7/codex.exe",
+    "--claude",
+    "C:/Users/hok/.local/bin/claude.exe",
+    "--expected-wheel-sha256",
+    "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+    "--source",
+    "mmzen/se_harness",
+    "--ref",
+    "plugin-marketplace",
+    "--install-only"
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+  "exit_code": 0,
+  "elapsed_seconds": 66.74082899093628,
+  "physical_output": "C:\\p020",
+  "contract": "VER-PLG-023 M05",
+  "fixture_source": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\tests\\plugin_integration\\package_assembly\\run_marketplace_acceptance.py",
+  "fixture_source_sha256": "e638e7f4f2782d1124c09d6f51262c834d3d0849f60e42dad7e0e5f4e0057a18",
+  "fixture_sha256": "4a9076a40248508cc63b7a1c3efd722d89c38658cfed3a4d283650b527a813ea",
+  "only_fixture_change": {
+    "before": "    profile = out / host / \"profile\"",
+    "after": "    profile = out / host"
+  },
+  "profile_note": "Codex home C:/p020/codex/codex has the same path length as C:/Users/hok/.codex. No Git settings or native command results were changed."
+}

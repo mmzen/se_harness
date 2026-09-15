@@ -1,4 +1,12 @@
-# Try the Verity Plane plugin locally
+# Install or try the Verity Plane plugin
+
+For the standard marketplace route, use the [distribution guide](../../release/plugin-marketplace/README.md).
+[WO-PLG-023](../engineering/plugin-integration/work-orders/WO-PLG-023.md) prepares
+its committed catalogs, packages and native acceptance. Its evidence records
+publication status; the source guide alone does not establish a public listing.
+Maintainers use the [marketplace composition procedure](plugin-marketplace-publication.md).
+
+## Development walkthrough
 
 This guide covers **development packages on Windows**. It does not claim that the
 current plugin is published in a public catalog. The checked package contains the

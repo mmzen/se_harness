@@ -2,6 +2,7 @@
   "schema": "se-harness-plugin-assembly-v1",
   "name": "verity-plane",
   "shared": {
+    "LICENSE": "LICENSE",
     "scripts/setup.py": "plugins/verity-plane/common/scripts/setup.py",
     "skills/change/SKILL.md": "plugins/verity-plane/common/skills/change/SKILL.md",
     "skills/change/references/artifacts.md": "plugins/verity-plane/common/skills/change/references/artifacts.md",

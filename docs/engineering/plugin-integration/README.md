@@ -1,6 +1,15 @@
 # Plugin integration
 
-## Remaining work
+## Marketplace publication
+
+[WO-PLG-023](work-orders/WO-PLG-023.md) prepares the complete Codex and Claude
+marketplaces, native installation evidence and provider submission drafts.
+[SPEC-PLG-022](specifications/SPEC-PLG-022.md) defines the composition;
+[VER-PLG-023](verification/VER-PLG-023.md) separates local acceptance from later
+public Git observation. See the [publication procedure](../../notes/plugin-marketplace-publication.md).
+Preparation does not establish a public catalog listing.
+
+## Earlier connection work
 
 The current plan applies the merged plugin and codebase KISS changes. The old
 [umbrella PR #416](https://github.com/mmzen/se_harness/pull/416) is historical input,
@@ -8,7 +17,7 @@ not an implementation queue. The owner approved WO-PLG-022 completion and author
 WO-PLG-009 and WO-PLG-016 on 2026-09-15. Both work orders are now implemented after the owner approved completion.
 [VREC-PLG-017](verification-records/VREC-PLG-017.md) covers WO-PLG-009 and
 [VREC-PLG-018](verification-records/VREC-PLG-018.md) covers WO-PLG-016; both
-records are verified by the owner. Integration remains pending in PRs #478 and #479. Start with the
+records are verified by the owner. Their implementations are merged in PRs #478 and #479. Start with the
 [local installation guide](../../notes/plugin-installation-guide.md), then see
 [connection evidence](evidence/WO-PLG-009/README.md) and
 [host walkthrough evidence](evidence/WO-PLG-016/README.md). Helpers remain deferred.
@@ -32,7 +41,7 @@ disposable skill replacement, one repairable environment, explicit checks,
 proportionate evidence and one execution route. Optional helpers are not a prerequisite.
 
 Merged source is not automatically a published plugin or an adopted evaluator.
-This repository still uses released 0.17.0 until an explicit release/adoption action.
+This repository uses released 0.18.0 following WO-HUP-019. Plugin marketplace delivery is separate.
 
 ## Historical records
 

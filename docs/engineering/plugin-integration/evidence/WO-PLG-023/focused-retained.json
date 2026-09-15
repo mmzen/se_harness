@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/plugin_integration/package_assembly",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+  "started_at_unix": 1789482141.0106814,
+  "elapsed_seconds": 369.415,
+  "exit_code": 0,
+  "source_commit": "041e2584e8ed91d05af0ade13b92ab07cfbeea3b",
+  "worktree_difference": "Only run_marketplace_acceptance.py has the separately exercised JSON parser correction; it is not imported by these tests."
+}

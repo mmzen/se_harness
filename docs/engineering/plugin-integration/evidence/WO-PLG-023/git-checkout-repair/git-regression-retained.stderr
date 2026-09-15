@@ -1,0 +1,6 @@
+test_git_checkout_preserves_distribution_bytes_with_autocrlf (test_marketplace.MarketplaceTests.test_git_checkout_preserves_distribution_bytes_with_autocrlf) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 14.768s
+
+OK

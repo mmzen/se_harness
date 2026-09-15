@@ -1,0 +1,42 @@
+{
+  "result": "passed",
+  "platform": "win32",
+  "python": "3.13.3",
+  "hosts": [
+    {
+      "host": "codex",
+      "version": "codex-cli 0.154.0-alpha.6.2",
+      "route": "persistent native marketplace installation",
+      "skills": [
+        "change",
+        "evidence",
+        "harness-operator-brief",
+        "harness-orient",
+        "setup"
+      ],
+      "result": "passed",
+      "installed_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-smart-http-check\\codex\\profile\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.1.0",
+      "compared_files": 24
+    },
+    {
+      "host": "claude",
+      "version": "2.1.269 (Claude Code)",
+      "route": "persistent native marketplace installation",
+      "skills": [
+        "change",
+        "evidence",
+        "harness-operator-brief",
+        "harness-orient",
+        "setup"
+      ],
+      "result": "passed",
+      "installed_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-smart-http-check\\claude\\profile\\claude\\plugins\\cache\\se-harness\\verity-plane\\0.1.0",
+      "compared_files": 24
+    }
+  ],
+  "install_only": true,
+  "source": "http://127.0.0.1:58062/verity-plane.git",
+  "ref": "plugin-marketplace",
+  "commands": 10,
+  "limits": "Fresh Windows profiles; no model calls, official portal validation, or changes to real host settings. Public Git use is recorded by source/ref."
+}
