@@ -2,7 +2,7 @@
 id = "VREC-HUP-018"
 type = "verification_record"
 title = "Verification candidate for WO-HUP-019"
-status = "ready"
+status = "verified"
 owners = ["codex"]
 created = "2026-09-15"
 updated = "2026-09-15"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/repository-harness-upgrade/evidence/WO-HUP-0
 evaluator_evidence_path = "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-018-evaluator.json"
 evaluator_evidence_sha256 = "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f"
 
+verified_at = "2026-09-15T11:51:54Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-HUP-019"]
 conforms_to = ["VER-HUP-019"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-15T11:51:54Z"
+decided_by = "assurance-owner"
+reason = "The accountable assurance owner explicitly instructed \"i verify `VREC-HUP-018`\" on 2026-09-15 after receiving the completed upgrade and ready-record handoff. This records that owner verification decision for candidate c6351117cdaf6786226baa7fc61ff9541477fdfb and its retained VER-HUP-019 evidence, using the released 0.18.0 evaluator."
 +++
 
 # Verification Record Candidate
