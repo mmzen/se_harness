@@ -2,7 +2,7 @@
 id = "RLS-SEH-027"
 type = "release_record"
 title = "Release candidate 0.18.0"
-status = "ready"
+status = "released"
 owners = ["release-owner"]
 created = "2026-09-15"
 updated = "2026-09-15"
@@ -15,6 +15,8 @@ evaluator_evidence_path = "docs/engineering/release-0-18-0/evidence/RLS-SEH-027-
 evaluator_evidence_sha256 = "44d4b74d9febe03a0828dfeee8cd8322fd02db74ff866d7191440e17164e7abb"
 tag = "v0.18.0"
 
+released_at = "2026-09-15T07:20:40Z"
+authorized_by = "release-owner"
 [distribution]
 schema = 2
 kind = "python-wheel-sdist"
@@ -34,6 +36,13 @@ build_recipe_sha256 = "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92
 satisfies = ["REL-SEH-029"]
 includes_verification = ["VREC-SEH-027"]
 releases_work = ["WO-AUT-006", "WO-CIP-008", "WO-CIP-009", "WO-CIP-010", "WO-DST-027", "WO-ECP-037", "WO-ECP-038", "WO-HUP-018", "WO-KIS-001", "WO-KIS-002", "WO-KIS-003", "WO-KIS-004", "WO-KIS-005", "WO-KIS-006", "WO-KIS-007", "WO-KIS-008", "WO-KIS-009", "WO-PLG-001", "WO-PLG-002", "WO-PLG-003", "WO-PLG-004", "WO-PLG-005", "WO-PLG-006", "WO-PLG-007", "WO-PLG-008", "WO-PLG-009", "WO-PLG-010", "WO-PLG-011", "WO-PLG-012", "WO-PLG-016", "WO-PLG-017", "WO-PLG-018", "WO-PLG-019", "WO-PLG-020", "WO-PLG-021", "WO-PLG-022", "WO-RLO-009", "WO-RLS-024", "WO-TCM-011"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "released"
+decided_at = "2026-09-15T07:20:40Z"
+decided_by = "release-owner"
+reason = "The owner replied \"i authorize\" to the explicit next decision \"I authorize release record RLS-SEH-027.\" Record that release-owner authorization of checker 0.18.0 at verified candidate 353da23881fdf045a52322a313c1e67341f7a9b1. The ready-record replay, independent review and release-decision gate passed, and all PR checks passed or were intentionally skipped before this decision. This transition records release authorization; merging and external publication remain subsequent actions."
 +++
 
 # Release Record Candidate

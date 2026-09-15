@@ -2,7 +2,8 @@
 
 - [WO-RLS-024](work-orders/WO-RLS-024.md): implemented; owner completion recorded.
 - [VREC-SEH-027](verification-records/VREC-SEH-027.md): verified aggregate record for the final candidate.
-- [RLS-SEH-027](releases/RLS-SEH-027.md): ready checker 0.18.0 record with the matching build manifest.
+- [RLS-SEH-027](releases/RLS-SEH-027.md): released checker 0.18.0 record; owner authorization recorded, publication pending.
+- [Owner release authorization](evidence/WO-RLS-024/owner-release-authorization.md): decision recorded after the successful replay and review.
 - [Release preparation](evidence/WO-RLS-024/release-preparation.md): binding checks and the remaining release decision.
 - [Verification preparation](evidence/WO-RLS-024/verification-preparation.md): exact-candidate CI, replay and scope review.
 - [REL-SEH-029](release/REL-SEH-029.md): checker release scope and acceptance.
