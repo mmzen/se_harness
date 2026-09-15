@@ -42,21 +42,26 @@ This workstation has no Docker. Its earlier non-promotable native wheels were
 not used as the release build. The released-record leg in the same rehearsal
 checked existing RLS-SEH-026; it is not a replay of a new 0.18.0 release record.
 
-## Decision boundary
+## Completion and aggregate verification preparation
 
-WO-RLS-024 is in progress. The owner selected and started this bounded release
-preparation through the delegated route on 2026-09-15; no result-specific
-completion, new aggregate verification or release decision has been recorded.
-The installed 0.17.0 evaluator still determines those lifecycle steps. Root
-adoption of the candidate's simpler route is a later explicit upgrade.
+The owner approved completion of WO-RLS-024 and requested the verification
+record. The [instruction](owner-completion.md) records the actual request.
+WO-RLS-024 is implemented. No new aggregate verification decision has been made.
 
-After completion, prepare one aggregate VREC for all 39 members, using their
-existing evidence and this integration summary. Its accountable verification
-precedes release-record preparation and binding. The final selected commit must
-have matching hosted build evidence. Final plugin assembly consumes the checker
-only after its released record and public wheel are available.
+The final preparation candidate adds this completion decision and evidence to
+the checked preparation head 8b82153d00af8ab9119494880f4999fff00c81be. Its product
+and build inputs remain unchanged from the qualified source candidate above.
+The aggregate record covers all 39 selected work orders and 31 verification
+contracts, with one existing evidence path for each. Historical member evidence
+retains its stated candidate and limitations.
 
-Raw local attempts are retained outside Git in work/release018-checks. Hosted
-artifacts have their workflow's retention period; retain the concise build
-manifest and run identity in this packet before they expire. No tag, release,
-publication, live installation or root upgrade was performed.
+The record binds the clean completion candidate. Before presenting it for
+verification, check that candidate's existing hosted qualification and obtain
+its matching recipe replay. Retain those run identities in the accompanying
+preparation note; do not change the earlier bundle manifest or claim it is bound
+to this later candidate. New release-record preparation follows actual
+verification. Final plugin assembly still needs the released checker and its
+public wheel. Root evaluator 0.17.0 and live installations remain unchanged.
+
+Raw local attempts remain outside Git in work/release018-checks. No tag,
+release, publication, live installation or root upgrade was performed.

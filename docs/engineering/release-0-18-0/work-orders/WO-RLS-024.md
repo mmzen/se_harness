@@ -2,7 +2,7 @@
 id = "WO-RLS-024"
 type = "work_order"
 title = "Prepare checker 0.18.0 and the first plugin release"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "release-owner"]
 created = "2026-09-15"
 updated = "2026-09-15"
@@ -40,6 +40,13 @@ to = "in_progress"
 decided_at = "2026-09-15T05:58:10Z"
 decided_by = "engineering-owner"
 reason = "The owner explicitly instructed release preparation through the delegated route. Record the requested start of this bounded preparation after passing start preflight with the complete governing chain."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-15T06:29:02Z"
+decided_by = "engineering-owner"
+reason = "The owner reviewed release preparation in PR #480 and the report, then replied \"I approve you can prepare the verification record\" to the pending WO-RLS-024 completion question. Record that explicit engineering-owner completion approval and permission to prepare the aggregate VREC. The full local suite, exact-source candidate CI, final evidence-commit CI and two pinned recipe builds passed. This decision does not verify the future record, release, publish, merge or adopt a checker."
 +++
 
 # Prepare checker 0.18.0 and the first plugin release
