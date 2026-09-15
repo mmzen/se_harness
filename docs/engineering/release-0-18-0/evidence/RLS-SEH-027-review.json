@@ -1,0 +1,48 @@
+{
+  "kind": "independent read-only ready-release review; no lifecycle decision",
+  "state": "passed",
+  "release_record": "RLS-SEH-027",
+  "release_state": "ready",
+  "verification_record": "VREC-SEH-027",
+  "verification_state": "verified",
+  "candidate": "353da23881fdf045a52322a313c1e67341f7a9b1",
+  "counts": {
+    "work_orders": 39,
+    "verification_contracts": 31,
+    "evidence_paths": 39
+  },
+  "checks": {
+    "ready_release_for_expected_version_tag": true,
+    "assurance_record_is_verified_by_owner": true,
+    "candidate_equals_vrec_and_bundle": true,
+    "git_object_format_agrees": true,
+    "exact_39_work_orders_equal_contract_and_vrec": true,
+    "exact_31_verification_contracts": true,
+    "release_includes_only_selected_verification_and_contract": true,
+    "contract_is_approved": true,
+    "verification_transition_preserved_candidate_and_evidence": true,
+    "exact_39_evidence_paths_preserved": true,
+    "historical_selected_evidence_unchanged": true,
+    "schema2_distribution_matches_bundle": true,
+    "bundle_version_matches_release": true,
+    "checksums_content_matches_bound_hash": true,
+    "checksums_content_names_exact_bound_files": true,
+    "source_manifest_matches_candidate_git_tree": true,
+    "source_date_epoch_matches_candidate": true,
+    "build_recipe_hash_matches_candidate": true,
+    "evaluator_sidecars_equal_and_hashes_match": true,
+    "governing_evaluator_matches_candidate_lock": true,
+    "governing_evaluator_is_released_017_isolated": true,
+    "release_decision_not_recorded": true
+  },
+  "findings": [],
+  "changed_selected_evidence": [],
+  "changed_historical_selected_evidence": [],
+  "bound_digests": {
+    "wheel_sha256": "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+    "sdist_sha256": "757c63cd5ef6caf536fb8f07e5144706aafe373e8ac490c74f239a4acb9c6cbd",
+    "checksums_sha256": "1a47a92996fdff8f9ff21ae4dd8d8b60e17f127bcd3be523390f039cb43b852a"
+  },
+  "remaining_boundary": "Root agent is checking the existing ready-record replay and local gates. Accountable release decision remains required; merging, publication and live adoption remain separate authorized actions. This review transitions, rebuilds and publishes nothing.",
+  "claim_limits": "The ready record proposes checker 0.18.0. Plugin inputs are prepared, while final native archives still need the published checker and their own assembly/acceptance. Historical host evidence retains its existing Windows discovery/direct-check limitations."
+}

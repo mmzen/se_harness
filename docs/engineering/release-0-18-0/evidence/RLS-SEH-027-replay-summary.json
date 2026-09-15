@@ -1,0 +1,19 @@
+{
+  "release_record": "RLS-SEH-027",
+  "release_record_status": "ready",
+  "verification_record": "VREC-SEH-027",
+  "verification_record_status": "verified",
+  "candidate": "353da23881fdf045a52322a313c1e67341f7a9b1",
+  "version": "0.18.0",
+  "run_id": 34939337745,
+  "run_url": "https://github.com/mmzen/se_harness/actions/runs/34939337745",
+  "review_head": "b0e8f2afef95177cf6c21ce9cff9dff04e5cc7a9",
+  "result": "passed",
+  "builds": "two pinned Linux/amd64 builds match the ready record",
+  "wheel_sha256": "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+  "sdist_sha256": "757c63cd5ef6caf536fb8f07e5144706aafe373e8ac490c74f239a4acb9c6cbd",
+  "raw_replay_sha256": "cd178f7691b00dfb7a02461f5357f60c9228129bdf1baa9664166e7a9a99f143",
+  "artifact_name": "release-build-replay-RLS-SEH-027",
+  "artifact_retention_days": 90,
+  "authority": "Technical replay only. Release-owner authorization remains outstanding."
+}

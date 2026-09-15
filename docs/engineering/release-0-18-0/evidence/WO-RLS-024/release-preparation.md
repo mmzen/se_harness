@@ -16,9 +16,12 @@ scoped or repository blockers. Distribution validation passes for all 15
 distribution-bearing records, including RLS-SEH-027. Candidate CI and the prior
 verification-record delivery checks passed. No source or package inputs changed.
 
-Dispatch the existing ready-record replay on the pushed review branch to check
-this record's exact bound outputs before presenting the release decision.
-Its result will be retained alongside this note.
+The [ready-record replay](https://github.com/mmzen/se_harness/actions/runs/34939337745) passed on review head
+b0e8f2afef95177cf6c21ce9cff9dff04e5cc7a9. Both fresh builds matched the ready record's
+wheel and source archive hashes. The retained [replay](../RLS-SEH-027-replay.json),
+[summary](../RLS-SEH-027-replay-summary.json), [independent review](../RLS-SEH-027-review.json)
+and [readiness result](../RLS-SEH-027-readiness.json) make that result reviewable.
+Independent review found no blocking issue in scope, provenance or binding.
 
 RLS-SEH-027 remains ready. The next accountable decision is:
 
