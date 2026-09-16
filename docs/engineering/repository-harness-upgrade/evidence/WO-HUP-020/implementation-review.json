@@ -1,0 +1,177 @@
+{
+  "observed_at": "2026-09-16T14:20:10.540427+00:00",
+  "passed": true,
+  "baseline": "0dadc352b3a5e6c64c721e1c688cc215438ddd7f",
+  "pr_base": "f05c478a29c39f94968fdc842a34c861d30a42ac",
+  "work_order": "WO-HUP-020",
+  "changed_paths": [
+    "docs/engineering/repository-harness-upgrade/README.md",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/draft-review.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/draft-review.md",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/original-planner-failure.json",
+    "docs/engineering/repository-harness-upgrade/specifications/SPEC-HUP-020.md",
+    "docs/engineering/repository-harness-upgrade/verification/VER-HUP-020.md",
+    "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-020.md",
+    "scripts/validate_governor_transition.py",
+    "tests/test_governor_transition.py"
+  ],
+  "approved_scope_covers_complete_diff": true,
+  "protected_files": [
+    {
+      "path": ".engineering-harness.lock",
+      "sha256": "8ac3b3ea5025009b93a3b1f2abffc8b8316c2b2f17868b276d78aafc06ab58be"
+    },
+    {
+      "path": ".engineering-harness.toml",
+      "sha256": "873189d93fd3b03bd698a01079bae5688a9399ea24834d56b8eba23315508e87"
+    },
+    {
+      "path": "ENGINEERING_HARNESS.md",
+      "sha256": "f4ca72da840c7b6aa3008152a7f908f37756082bc3503068a62df7a8911ff23b"
+    },
+    {
+      "path": "README.md",
+      "sha256": "240bf535c917234225d19e0efe1b48521322eb6f6504c5b7a5619a9e866546dc"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "20c8c644acb1d26c7fb5652bcacf5ac63a04bc6a92c616a48922bb483b36cc77"
+    },
+    {
+      "path": "tests/test_public_onboarding.py",
+      "sha256": "2d0c384d7e6d5f9817a2f5201fc0b22533cb18a2a8ef6ba76dd269ee45e3194a"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/verification-records/VREC-PLG-022.md",
+      "sha256": "c70aa68b61d2e50b48018d2ee505440913e0207e55eb94a4d16de809ffb4d3bb"
+    }
+  ],
+  "preserved_product_template_plugin_release_workflow_files": 142,
+  "preserved_branches": {
+    "refs/remotes/origin/plugin-marketplace": "ed68b30c88043773be929540b7b10ae537957c2d",
+    "refs/heads/work/plugin-marketplace-publication": "192c422ae1d7465198276796defef10fb1f7332e"
+  },
+  "remote_marketplace_ref": "ed68b30c88043773be929540b7b10ae537957c2d",
+  "evidence_reuse": {
+    "previous_candidate": "35648f5a70724cf990a2623f9e43bc403c359e78",
+    "previous_record": "VREC-PLG-022",
+    "verified_original_evidence": [
+      {
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/checks.json",
+        "sha256": "e31a26f73e1161dff73baa143a07398db6af099f7968cd47d8d65bb23452df89"
+      },
+      {
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/readme-remediation.diff",
+        "sha256": "06bda0bbe1df25b1a3078fb2c72cb59993ad1c573dae6cee38c7a878756e7d95"
+      },
+      {
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+        "sha256": "c7c051396b89268ee5f970fd2abdaf9def9febf6509ddeaae12ec572ca183cf8"
+      },
+      {
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/scope-after-readme-repair.json",
+        "sha256": "bc9b18a4d0f09a1def052dc52fd3db2b4fdca1b8214346850f20a182943da7d9"
+      },
+      {
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/source-suite-readme-repair.log",
+        "sha256": "8c0d5b25a135be7c60196e6227a1c6a877b7bee5f0f1a4a25f712e18ac63ee78"
+      },
+      {
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/source-suite.log",
+        "sha256": "4ea389fb7ff0caae41c23a445022272893e5270ca1c90cd38d723993b5f52185"
+      },
+      {
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/verification-preparation-readiness.command.json",
+        "sha256": "d306691da8b8a444e98627f7d02768dc5546fda34273fd31834a16e234e5d0a7"
+      },
+      {
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/verification-preparation-readiness.json",
+        "sha256": "46e4864ee3ecae2124b367ed279f1444c790b2736b7eb1202cfc8b86fde45f75"
+      },
+      {
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-025/checks.json",
+        "sha256": "a5960490118d6c3d9882e5c3c5950dd91c8539573d7fc619758b4ddb869f73c5"
+      },
+      {
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-025/draft-review.json",
+        "sha256": "5cf8e8cd87d4edd28a31f0dc8f8aa1696821292e75c7e4dd935fc439cd2bb835"
+      },
+      {
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-025/handoff.json",
+        "sha256": "2476f37690c81fd44875ed5f1558f5b37f55d92622b96c7fed4d7f37c3366f4d"
+      },
+      {
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-025/implementation-review.json",
+        "sha256": "4b9e150071b7353cc764dd799909fcc364267379d4f11fdb7ae35c9e85a20375"
+      },
+      {
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-025/implementation.md",
+        "sha256": "0275654ac7b2c4a6a35c6c2de68d1ecc88ce97d4d6cf0b2d4cd32600b3674a1f"
+      },
+      {
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-025/README.md",
+        "sha256": "63546f4e795df18d022af3e0ce9bb00d5724487fd805c8cf38861d712444a51d"
+      },
+      {
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-025/source-suite.log",
+        "sha256": "19f13eb8c50e6fbf7266cc8776a9c74613cd57887553730ff480d37cd36b20e9"
+      },
+      {
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-025/WO-PLG-025-handoff.md",
+        "sha256": "69904a9a4df466c994944c8e2c88ca776b6d7adafec8d98f89f562af5d27b01c"
+      },
+      {
+        "path": "docs/engineering/plugin-integration/evidence/WO-PLG-023/PACKAGE-IDENTITY.json",
+        "sha256": "f47b3281d2a6182a91f5a3b59129e04316258906070dc39b90a347a48c06fc05"
+      }
+    ],
+    "cleanup_inputs_match": true,
+    "released_payload_rechecked": true,
+    "replacement_package_inputs_match": true,
+    "disposable_native_package_files_match": {
+      "codex": 24,
+      "claude": 24
+    },
+    "previous_hosts": [
+      {
+        "host": "codex",
+        "version": "codex-cli 0.154.0-alpha.6.2",
+        "discovered_skills": [
+          "change",
+          "evidence",
+          "harness-orient",
+          "setup"
+        ],
+        "package_files_matching_previous_acceptance": 24,
+        "passed": true
+      },
+      {
+        "host": "claude",
+        "version": "2.1.269 (Claude Code)",
+        "discovered_skills": [
+          "change",
+          "evidence",
+          "harness-orient",
+          "setup",
+          "harness-operator-brief"
+        ],
+        "package_files_matching_previous_acceptance": 24,
+        "passed": true
+      }
+    ],
+    "retained_limits": {
+      "runtime_and_discovery_inputs_identical": true,
+      "compared_files": 21,
+      "other_differences": "Installed package README lacks the later setup appendix, LICENSE differs only by line endings, and assembly-inventory.json is absent. Full package equality was not established or required for this file-only adoption.",
+      "native_discovery": "Both native disposable-profile probes passed; their complete 24-file packages match the retained acceptance. The actual migration replacement has identical manifest, skills, setup and wheel."
+    },
+    "new_host_execution_claimed": false
+  },
+  "review": [
+    "The existing assessor has one bounded ownership comparison and reads the existing catalogue from the trusted base as data.",
+    "Schema/provider failures and non-seed catalogue entries cannot take the exception; unrelated lock fields remain exact canonical JSON.",
+    "Review corrected Python true/1 equality to JSON equality; the changed refusal case is selected for a fresh final-candidate test run.",
+    "No workflow, dependency, duplicate catalogue, candidate import or general migration mechanism was added.",
+    "The original CI failure, draft observations and earlier cleanup evidence remain separate retained facts."
+  ]
+}

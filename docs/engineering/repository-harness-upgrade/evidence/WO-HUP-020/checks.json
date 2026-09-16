@@ -1,0 +1,359 @@
+{
+  "observed_at": "2026-09-16T14:33:18.329661+00:00",
+  "platform": "Windows-11-10.0.26100-SP0",
+  "python": "3.13.3",
+  "work_order": "WO-HUP-020",
+  "verification": "VER-HUP-020",
+  "checks": {
+    "focused": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "tests.test_governor_transition",
+        "-v"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T14:09:31.327401+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 447.815,
+      "finished_at": "2026-09-16T14:16:59.146729+00:00",
+      "output": {
+        "path": "work/assessor-020-checks/focused.log",
+        "sha256": "6ef345996904db96f20977a33bbc94333f5177558c98d8f3cb3b583c245f7457"
+      }
+    },
+    "source-suite": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "scripts/run_tests.py"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T14:13:22.686930+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 927.021,
+      "finished_at": "2026-09-16T14:28:49.727329+00:00",
+      "output": {
+        "path": "work/assessor-020-checks/source-suite.log",
+        "sha256": "822fad4c0d30a741ace0693adbcb4f9bc8763da4e03e73c9f0fb24d852431e50"
+      }
+    },
+    "comparison-regression": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "tests.test_governor_transition.GovernorTransitionTests.test_ownership_switch_does_not_excuse_other_lock_changes",
+        "tests.test_governor_transition.GovernorTransitionTests.test_incomplete_seed_switches_and_same_provider_edits_are_rejected",
+        "tests.test_governor_transition.GovernorTransitionTests.test_schema_and_provider_errors_are_rejected",
+        "-v"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T14:19:55.795667+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 286.538,
+      "finished_at": "2026-09-16T14:24:42.339053+00:00",
+      "output": {
+        "path": "work/assessor-020-checks/comparison-regression.log",
+        "sha256": "6d85a39b33340588e7a95deef04e5bf1e56dba31dbdb2782ab78acc38300cee0"
+      }
+    },
+    "distributions": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T14:10:36.715687+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 21.26,
+      "finished_at": "2026-09-16T14:10:57.979709+00:00",
+      "output": {
+        "path": "work/assessor-020-checks/distributions.log",
+        "sha256": "7b46d8f310b1e4fc7216b69ae9eeeb2da845e1f0c445a843f7f5d5bfb90e805b"
+      }
+    },
+    "cli-help": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T14:10:58.213655+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 0.556,
+      "finished_at": "2026-09-16T14:10:58.771793+00:00",
+      "output": {
+        "path": "work/assessor-020-checks/cli-help.log",
+        "sha256": "721718c6a64371c984e64e9c5bbb6a27efc22727147bb755a691c4625ebbe684"
+      }
+    },
+    "candidate-doctor": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "se_harness",
+        "doctor",
+        ".",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T14:13:19.061746+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 18.156,
+      "finished_at": "2026-09-16T14:13:37.219460+00:00",
+      "output": {
+        "path": "work/assessor-020-checks/candidate-doctor.log",
+        "sha256": "e6aa30289ff770b25e6f6f0a415ba82c848ad0a10f91095ed96f644d3f8f26d5"
+      },
+      "expected_identity_skew": [
+        {
+          "detail": "differs from distribution template",
+          "name": "distribution:ENGINEERING_HARNESS.md",
+          "passed": false
+        },
+        {
+          "detail": "installed checker payload matches its installation record",
+          "name": "evaluator-payload",
+          "passed": false
+        },
+        {
+          "detail": "config, installation and running checker versions must agree",
+          "name": "selected-version",
+          "passed": false
+        }
+      ]
+    },
+    "implementation-review": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "work/review_assessor_implementation.py"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "started_at": "2026-09-16T14:19:55.429379+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 15.244,
+      "finished_at": "2026-09-16T14:20:10.678552+00:00",
+      "output": {
+        "path": "work/assessor-020-checks/implementation-review.log",
+        "sha256": "9ac35c3db507e11383f00c8231f174655b594ff96f408a42c2332693b0142b13"
+      }
+    }
+  },
+  "governing": {
+    "assessor-owner-approval-apply": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--set",
+        "SPEC-HUP-020=approved",
+        "--decision",
+        "SPEC-HUP-020=technical-owner",
+        "--reason",
+        "SPEC-HUP-020=The owner approved this exact reviewed package with \"i approve\" on 2026-09-16, exercising the technical-owner decision for SPEC-HUP-020. Reviewed SHA-256 27e0357c5775bf78f1b3386ac9db52a02802be7dd9a79c36735bda870079b64d. This approves the definition or bounded execution scope; it records no assurance or external-delivery decision.",
+        "--set",
+        "VER-HUP-020=approved",
+        "--decision",
+        "VER-HUP-020=assurance-owner",
+        "--reason",
+        "VER-HUP-020=The owner approved this exact reviewed package with \"i approve\" on 2026-09-16, exercising the assurance-owner decision for VER-HUP-020. Reviewed SHA-256 edb0c5c5eaf1617f689da8f0ff15138cccb4a7f5e3818210caa057b90345b15f. This approves the definition or bounded execution scope; it records no assurance or external-delivery decision.",
+        "--set",
+        "WO-HUP-020=approved",
+        "--decision",
+        "WO-HUP-020=engineering-owner",
+        "--reason",
+        "WO-HUP-020=The owner approved this exact reviewed package with \"i approve\" on 2026-09-16, exercising the engineering-owner decision for WO-HUP-020. Reviewed SHA-256 c245f873e89869a6f4464c1ef15d4070ecc0b1f1b41f3b0c6e9b76e8e1861661. This approves the definition or bounded execution scope; it records no assurance or external-delivery decision.",
+        "--json",
+        "--apply"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "summary": {
+        "checkpoint_status": "pass"
+      },
+      "output": {
+        "path": "work/plugin-publication-governance/assessor-owner-approval-apply.json",
+        "sha256": "609562ce7a2baf87ebcb71db580e7f11457460787026d5a6e30b40170ff6162f"
+      }
+    },
+    "assessor-start-preflight": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--work-order",
+        "WO-HUP-020",
+        "--phase",
+        "start",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "summary": {
+        "ready": true
+      },
+      "output": {
+        "path": "work/plugin-publication-governance/assessor-start-preflight.json",
+        "sha256": "42926cbbba7b6092d9d166ce1b0ff9fd4905ea2ec622aeed7ee4c7bf2b317ff5"
+      }
+    },
+    "assessor-start-apply": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--set",
+        "WO-HUP-020=in_progress",
+        "--decision",
+        "WO-HUP-020=Codex",
+        "--reason",
+        "WO-HUP-020=Start the approved bounded assessor correction under DR-015 after passing start preflight; reviewed owner approval is recorded.",
+        "--apply",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "summary": {
+        "checkpoint_status": "pass"
+      },
+      "output": {
+        "path": "work/plugin-publication-governance/assessor-start-apply.json",
+        "sha256": "36f900b98ccdd21544eefaf7b38e71ac3b52235656cf2b90c37285659315adac"
+      }
+    },
+    "assessor-implementation-doctor": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "summary": {
+        "checks": 64,
+        "failed": []
+      },
+      "output": {
+        "path": "work/plugin-publication-governance/assessor-implementation-doctor.json",
+        "sha256": "9b2bab6375f5f42b5d4fd9d11b5f9493d428e303d4ec8b238f844f3c97f6ed61"
+      }
+    },
+    "assessor-implementation-validate": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "summary": {
+        "valid": true,
+        "artifact_count": 1661,
+        "error_count": 0,
+        "warning_count": 48
+      },
+      "output": {
+        "path": "work/plugin-publication-governance/assessor-implementation-validate.json",
+        "sha256": "142ab4634b836a1991ae5b39f5f2a1a16aed4f5161cab55e7a9d29cba261900c"
+      }
+    },
+    "assessor-review-preflight": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--work-order",
+        "WO-HUP-020",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "summary": {
+        "ready": true
+      },
+      "output": {
+        "path": "work/plugin-publication-governance/assessor-review-preflight.json",
+        "sha256": "cec56067c9e73025d9421758b9544fa7e900cc7d78b11fdbb4a0b78f2f8f3631"
+      }
+    },
+    "assessor-current-scope": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--artifact",
+        "WO-HUP-020",
+        "--checkpoint",
+        "scope",
+        "--from-git",
+        "0dadc352b3a5e6c64c721e1c688cc215438ddd7f",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "summary": {
+        "checkpoint_status": "pass"
+      },
+      "output": {
+        "path": "work/plugin-publication-governance/assessor-current-scope.json",
+        "sha256": "9de01b01556d6358893b220d747e09e57d3912c3f5cab01634ecefb00f108fb0"
+      }
+    },
+    "assessor-combined-pr-scope": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check-pr",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--event",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\assessor-pr-scope-event.json",
+        "--from-git",
+        "f05c478a29c39f94968fdc842a34c861d30a42ac",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 2,
+      "stderr": "harnessctl: pull-request check: WO-HUP-020: QGP-G4I-EVIDENCE: No readable evidence for WO-HUP-020, checkpoint handoff, and formal snapshot b8702e76757a080244b01b46af11999507def9de69d92cf114d3a7975b4a3883 is available; write the header with harnessctl evidence . --artifact WO-HUP-020 --checkpoint handoff.\n",
+      "interpretation": "Premature combined scope check before the new WO handoff was bound. The observed refusal is retained; rerun after normal handoff preparation."
+    }
+  },
+  "final_source_inputs": {
+    "scripts/validate_governor_transition.py": "6a752ab94853d82f986716973867b8324c8b5786edf75e0c7f7887907f1bd372",
+    "tests/test_governor_transition.py": "6953533b0786b873d8ccaee32eadd995cf0bc55172855fc81c45e6f68c24dcdb"
+  },
+  "source_suite_timing_note": "This local suite began before the final JSON-type comparison refinement. The comparison-regression run checks the final refusal cases. A fresh complete suite and exact CI replay will run on the final committed candidate during capture; the generated VREC retains their actual output.",
+  "source_suite_summary": "--workers must be at least 1\nEvaluator Python: C:\\Users\\hok\\AppData\\Local\\Temp\\simple-plugin-633lk8w9\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\hok\\AppData\\Local\\Temp\\simple-plugin-633lk8w9\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nWEX_SCALE artifacts=100 validation=1.741740s focus=3.039382s plan=4.944421s\nWEX_SCALE artifacts=500 validation=12.201814s focus=14.363294s plan=13.635408s\ndocs/notes/diagnostic-codes.md matches the source\n----------------------------------------------------------------------\nRan 1078 tests in 919.132s (171 classes, 8 workers)\n\nOK (skipped=15)",
+  "hosted_ci": "Not rerun for this unpushed correction; required before integration."
+}
