@@ -42,34 +42,6 @@ Plugin **0.1.0** bundles released **SE Harness 0.18.0**. Running setup installs 
 
 See the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).
 
-### With the CLI
-
-Create a tool environment **outside your repository** and install the released package:
-
-```sh
-# Linux / macOS
-python3 -m venv se-harness-env
-source se-harness-env/bin/activate
-python -m pip install se-harness
-```
-
-```powershell
-# Windows PowerShell
-python -m venv se-harness-env
-.\se-harness-env\Scripts\Activate.ps1
-python -m pip install se-harness
-```
-
-Initialize a project and check its installation:
-
-```sh
-harnessctl init my-project --project-name my-project
-harnessctl doctor my-project
-```
-
-The same `init` command adopts an existing project: it preserves your files and records what it finds in `docs/engineering/ADOPTION_REPORT.md`. Follow the [getting-started guide](docs/notes/getting-started.md) to prepare your first work order.
-
-**Already using SE Harness?** Use the released version pinned by that repository. Updating the Python package leaves its managed files unchanged; follow the [repository upgrade procedure](docs/notes/harness-installation-and-upgrades.md).
 
 ## How it works today
 
