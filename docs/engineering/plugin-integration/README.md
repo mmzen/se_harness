@@ -1,5 +1,28 @@
 # Plugin integration
 
+## Replacement cleanup package
+
+[WO-PLG-025](work-orders/WO-PLG-025.md) is implemented, completing the existing cleanup
+with the required onboarding-test and documentation corrections. Its
+[implementation evidence](evidence/WO-PLG-025/implementation.md) records passing
+regression and handoff checks; assurance is a separate decision.
+[VER-PLG-025](verification/VER-PLG-025.md) defines final acceptance, and
+[SPEC-DST-029](../harness-distribution/specifications/SPEC-DST-029.md) describes
+the plugin-first README presentation. Both definitions are approved.
+WO-PLG-024 is rejected as replaced; its history and observations are preserved.
+
+## Root cleanup and plugin ownership
+
+[WO-PLG-024](work-orders/WO-PLG-024.md) adopts plugin ownership in this checkout,
+removes the obsolete delegation configuration and corrects selected contributor
+guidance. [VER-PLG-024](verification/VER-PLG-024.md) defines its bounded checks.
+The verification contract remains approved historical input; the work order is
+closed as replaced by WO-PLG-025. [Retained checks](evidence/WO-PLG-024/README.md)
+describe the earlier onboarding failures and scope-recording blocker after the
+owner-approved README repair. See
+[contributor setup and restoration](../../notes/developing-se-harness.md#agent-skills-for-this-checkout).
+This adoption does not change the published plugin or earlier assurance records.
+
 ## Marketplace publication
 
 [WO-PLG-023](work-orders/WO-PLG-023.md) prepares the complete Codex and Claude

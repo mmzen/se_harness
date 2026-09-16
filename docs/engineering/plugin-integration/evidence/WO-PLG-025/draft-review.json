@@ -1,0 +1,167 @@
+{
+  "baseline": "f05c478a29c39f94968fdc842a34c861d30a42ac",
+  "draft_only": true,
+  "reviewed_artifacts": [
+    {
+      "id": "SPEC-DST-029",
+      "path": "docs/engineering/harness-distribution/specifications/SPEC-DST-029.md",
+      "bytes": 3988,
+      "sha256": "838730f9bd4ae442fdb3b7ab0c2be9b3363e78bf86bbc3925d07dba6772d94d0",
+      "state": "draft",
+      "proposed_target": "approved",
+      "accountable_role": "technical-owner"
+    },
+    {
+      "id": "VER-PLG-025",
+      "path": "docs/engineering/plugin-integration/verification/VER-PLG-025.md",
+      "bytes": 7729,
+      "sha256": "983ef679bb25e71af4f8bf1784c79760dbcd4b08c3a1e6fc40aa00d8254d3013",
+      "state": "draft",
+      "proposed_target": "approved",
+      "accountable_role": "assurance-owner"
+    },
+    {
+      "id": "WO-PLG-025",
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-025.md",
+      "bytes": 9329,
+      "sha256": "c1729a68823febb66a11162761f32eac83087d35b871a3780d624a9d400f66c5",
+      "state": "draft",
+      "proposed_target": "approved",
+      "accountable_role": "engineering-owner"
+    },
+    {
+      "id": "WO-PLG-024",
+      "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-024.md",
+      "bytes": 11148,
+      "sha256": "f60874ab8c6477d7e1a3ae5f60780d6be4c9e0574a6f46698a7be8bc7919ff7d",
+      "state": "in_progress",
+      "proposed_target": "rejected",
+      "accountable_role": "engineering-owner"
+    }
+  ],
+  "declared_paths": [
+    ".engineering-harness.delegation.toml",
+    ".engineering-harness.lock",
+    ".agents/skills/harness-operator-brief/SKILL.md",
+    ".agents/skills/harness-operator-brief/scripts/check_brief.py",
+    ".agents/skills/harness-operator-brief/skill-contract.json",
+    ".agents/skills/harness-orient/SKILL.md",
+    ".agents/skills/harness-orient/scripts/orient.py",
+    ".agents/skills/harness-orient/skill-contract.json",
+    ".claude/skills/harness-orient/SKILL.md",
+    "AGENTS.md",
+    "docs/notes/developing-se-harness.md",
+    "docs/notes/README.md",
+    "docs/notes/delegation-class.md",
+    "docs/notes/agentic-execution-plugin-distribution.md",
+    "docs/notes/codebase-kiss-work-orders-2026-09-13.md",
+    "docs/engineering/plugin-integration/README.md",
+    "docs/engineering/plugin-integration/work-orders/WO-PLG-024.md",
+    "docs/engineering/plugin-integration/verification/VER-PLG-024.md",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-024/",
+    "README.md",
+    "tests/test_public_onboarding.py",
+    "docs/notes/technical-communication.md",
+    "docs/notes/agentic-execution-phase4-skills.md",
+    "docs/engineering/harness-distribution/README.md",
+    "docs/engineering/harness-distribution/specifications/SPEC-DST-029.md",
+    "docs/engineering/plugin-integration/work-orders/WO-PLG-025.md",
+    "docs/engineering/plugin-integration/verification/VER-PLG-025.md",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-025/",
+    "docs/engineering/plugin-integration/verification-records/VREC-PLG-022.md",
+    "docs/engineering/plugin-integration/evidence/VREC-PLG-022-evaluator.json"
+  ],
+  "observed_changed_paths": [
+    ".agents/skills/harness-operator-brief/SKILL.md",
+    ".agents/skills/harness-operator-brief/scripts/check_brief.py",
+    ".agents/skills/harness-operator-brief/skill-contract.json",
+    ".agents/skills/harness-orient/SKILL.md",
+    ".agents/skills/harness-orient/scripts/orient.py",
+    ".agents/skills/harness-orient/skill-contract.json",
+    ".claude/skills/harness-orient/SKILL.md",
+    ".engineering-harness.delegation.toml",
+    ".engineering-harness.lock",
+    "AGENTS.md",
+    "README.md",
+    "docs/engineering/harness-distribution/README.md",
+    "docs/engineering/harness-distribution/specifications/SPEC-DST-029.md",
+    "docs/engineering/plugin-integration/README.md",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-024/checks.json",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-024/readme-remediation.diff",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-024/scope-after-readme-repair.json",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-024/source-suite-readme-repair.log",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-024/source-suite.log",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-024/verification-preparation-readiness.command.json",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-024/verification-preparation-readiness.json",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-025/README.md",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-025/draft-review.json",
+    "docs/engineering/plugin-integration/verification/VER-PLG-024.md",
+    "docs/engineering/plugin-integration/verification/VER-PLG-025.md",
+    "docs/engineering/plugin-integration/work-orders/WO-PLG-024.md",
+    "docs/engineering/plugin-integration/work-orders/WO-PLG-025.md",
+    "docs/notes/README.md",
+    "docs/notes/agentic-execution-plugin-distribution.md",
+    "docs/notes/codebase-kiss-work-orders-2026-09-13.md",
+    "docs/notes/delegation-class.md",
+    "docs/notes/developing-se-harness.md"
+  ],
+  "proposed_scope_covers_complete_diff": true,
+  "scope_comparison_grants_no_approval": true,
+  "graph": {
+    "valid": true,
+    "artifact_count": 1657,
+    "error_count": 0,
+    "warning_count": 48
+  },
+  "graph_output_sha256": "973d8251f34d2706f4f14015ca5c17bad27f36d3c2de4809f289aedb929399a2",
+  "identity_allocation": "105 available refs checked for WO-PLG-025, VER-PLG-025 and VREC-PLG-022; released allocator selected SPEC-DST-029 after SPEC-DST-025 was found occupied.",
+  "approval_preview": {
+    "status": "not_run",
+    "reason": "Automatic approval review rejected the no-apply transition command because it interpreted the approval/rejection arguments as not yet explicitly authorized. No workaround or transition was executed."
+  },
+  "implementation": "No new test or corrective-note changes applied; existing README bytes preserved.",
+  "new_vrec_created": false,
+  "retained_original_evidence": [
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/checks.json",
+      "bytes": 65731,
+      "sha256": "e31a26f73e1161dff73baa143a07398db6af099f7968cd47d8d65bb23452df89"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/readme-remediation.diff",
+      "bytes": 409,
+      "sha256": "06bda0bbe1df25b1a3078fb2c72cb59993ad1c573dae6cee38c7a878756e7d95"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+      "bytes": 8811,
+      "sha256": "c7c051396b89268ee5f970fd2abdaf9def9febf6509ddeaae12ec572ca183cf8"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/scope-after-readme-repair.json",
+      "bytes": 13437,
+      "sha256": "bc9b18a4d0f09a1def052dc52fd3db2b4fdca1b8214346850f20a182943da7d9"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/source-suite-readme-repair.log",
+      "bytes": 17581,
+      "sha256": "8c0d5b25a135be7c60196e6227a1c6a877b7bee5f0f1a4a25f712e18ac63ee78"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/source-suite.log",
+      "bytes": 5254,
+      "sha256": "4ea389fb7ff0caae41c23a445022272893e5270ca1c90cd38d723993b5f52185"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/verification-preparation-readiness.command.json",
+      "bytes": 528,
+      "sha256": "d306691da8b8a444e98627f7d02768dc5546fda34273fd31834a16e234e5d0a7"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/verification-preparation-readiness.json",
+      "bytes": 15827,
+      "sha256": "46e4864ee3ecae2124b367ed279f1444c790b2736b7eb1202cfc8b86fde45f75"
+    }
+  ]
+}
