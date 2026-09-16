@@ -1,0 +1,10 @@
+{
+  "readme_sha256": "d9cb469ccda4438134ee23b46852a58ecc91595dd2ce87437f4967a4ea1a7c8b",
+  "review": "The owner-reviewed local Edge render is reused because README and all three image bytes are unchanged from that review. The two screenshots were visually inspected; all images loaded, headings and command blocks were readable, and no horizontal page overflow was observed.",
+  "files": {
+    "outputs/README-preview.html": "5d9ea1a43a64bdd04d7b008980b2bbf7c48904ce322a2e84a0e60b44e0352f72",
+    "outputs/README-preview-top.png": "93de7fd962bba73b507db672501250f6ba4a10da7441d024cde39c8238fd8e29",
+    "outputs/README-preview-lower.png": "4cdb01e427b51252a5f6056bbfc397156d17a90ee43f8b80467f7fa70d54888e"
+  },
+  "limits": "Local HTML review, not a live GitHub rendering or publication check. These output paths are relative to the authoring workspace."
+}

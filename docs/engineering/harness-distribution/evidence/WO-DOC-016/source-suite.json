@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "C:/Python313/python.exe",
+    "scripts/run_tests.py"
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+  "started_at": "2026-09-16T05:56:41.749083+00:00",
+  "exit_code": 0,
+  "elapsed_seconds": 516.737,
+  "finished_at": "2026-09-16T06:05:18.576320+00:00"
+}

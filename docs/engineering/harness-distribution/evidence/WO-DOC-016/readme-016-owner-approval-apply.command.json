@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "transition",
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+    "--set",
+    "WO-DOC-016=approved",
+    "--set",
+    "VER-DST-029=approved",
+    "--decision",
+    "WO-DOC-016=engineering-owner",
+    "--decision",
+    "VER-DST-029=assurance-owner",
+    "--reason",
+    "WO-DOC-016=The owner approved the reviewed README and both named artifacts by replying i approve to the exact approval package; all three reviewed SHA-256 inputs still match.",
+    "--reason",
+    "VER-DST-029=The assurance owner approved the named verification contract in the same explicit approval response; reviewed bytes still match.",
+    "--apply",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+  "exit_code": 0
+}

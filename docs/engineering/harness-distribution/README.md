@@ -182,3 +182,16 @@ Issue #433 managed-template leftovers:
 `INT-DST-001` -> `CAP-DST-001` -> `REQ-DST-076..077` -> `SPEC-DST-028`, `VER-DST-028` -> `WO-DST-027`.
 
 Drafted 2026-09-10 for issue #433 (findings 1 and 3). Rule `TRC-008` of the managed `TRACEABILITY.md` still calls `ARCH.constrains` compatibility-only and promises a classification and a migration report, while the validator has refused every `constrains` relation with `E016` since `WO-AUT-006`; the owner kept the template out of that work order (`SPEC-AUT-004` `AUT-WIN-018`). The "Completion report format" heading of the managed `WORK_ORDER.template.md` carries no guidance, so 79 work orders copied "the completion decision is the engineering owner's" from one another, 14 of them under `[delegation] class = "execution"`, which gives that decision to the delegated executor while the required check is green. `WO-DST-027` rewrites `TRC-008` for the retired relation, puts one guidance sentence under the template heading naming who decides completion, corrects the sentence of `docs/notes/harness-uml-model.md`, declares both changes in the parity test and pins them. The historical work orders are records of their time and are not rewritten. Every root managed byte of this repository changes only at the root adoption of the carrying release. The two `ci-pipeline` definitions of finding 2 are `WO-CIP-008`'s. Delegated route; approved 2026-09-10 (#437) and implemented the same day on `wo/dst-027-managed-templates` (#440): `TRC-008` of the standard template says the relation is retired and refused with `E016`, the standard work-order template carries guidance under its completion heading naming both deciders, the UML note follows, the parity test declares both changes against the 0.17.0 root and `tests/test_managed_template_texts.py` pins them with a drafted work order as scenario B. The root adoption obligation `DST-TPL-009` is carried to the root-adoption work order of the carrying release. Evidence: `evidence/WO-DST-027-verification.md`.
+
+
+Published-plugin README onboarding:
+
+`REQ-DST-069` -> `SPEC-DST-024`, `VER-DST-029` -> `WO-DOC-016`.
+
+The owner approved the reviewed README and this bounded packet on 2026-09-16.
+The root introduces the SE Harness checker and Verity Plane plugin, leads with
+native Codex and Claude Code installation, explains the bundled offline checker,
+and retains the PyPI path, branding, Explorer images and authority boundaries.
+The existing requirement and presentation specification are reused unchanged;
+VER-DST-029 supplies the current review and evidence contract. Evidence belongs
+under `evidence/WO-DOC-016/`.

@@ -1,0 +1,508 @@
+{
+  "candidate": {},
+  "compliance": {
+    "change_set_source": "git",
+    "checkpoint": "handoff",
+    "formal_snapshot_sha256": "487630a368c6868ba705bfad1f537970d23dac0a554f3757ba9b6a5e0fa06b00",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "predicates": [
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-DOC-016"
+              }
+            ],
+            "id": "QGP-G4I-STATUS",
+            "message": "WO-DOC-016 status is in_progress.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-DOC-016"
+              }
+            ],
+            "id": "QGP-G4I-GRAPH",
+            "message": "The selected formal graph is valid.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "id": "QGP-G4I-INTEGRITY",
+            "message": "No repository-integrity blocker prevents selected evaluation.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-DOC-016:[execution_scope]"
+              }
+            ],
+            "id": "QGP-G4I-SCOPE",
+            "message": "WO-DOC-016 has recorded execution approval for its 7 scope path(s).",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-DOC-016"
+              }
+            ],
+            "id": "QGP-G4I-COMPLETE",
+            "message": "The caller explicitly asserted that the declared change set is complete.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-DOC-016"
+              }
+            ],
+            "id": "QGP-G4I-PATHS",
+            "message": "All 37 declared changed path(s) are within execution scope.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-DOC-016:review"
+              }
+            ],
+            "id": "QGP-G4I-PREFLIGHT",
+            "message": "Released-installation review preflight inputs are ready.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-DOC-016"
+              }
+            ],
+            "id": "QGP-G4I-EVIDENCE",
+            "message": "Fresh retained evidence is bound at docs/engineering/harness-distribution/evidence/WO-DOC-016/WO-DOC-016-handoff.md.",
+            "status": "pass"
+          },
+          {
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-DOC-016"
+              }
+            ],
+            "id": "QGP-G4I-DECISION",
+            "message": "No open decision blocks WO-DOC-016.",
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      }
+    ],
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT"
+  },
+  "digest_format": "machine-fields-v1",
+  "findings": {
+    "repository_blockers": [],
+    "scoped_blockers": [],
+    "unrelated_count": 48
+  },
+  "mutation": {
+    "writes": []
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "procedure": {
+    "current_step": "STEP-WO-IMPLEMENT-PREVIEW",
+    "id": "PROC-WO-IMPLEMENT",
+    "steps": [
+      {
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-DOC-016",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-DOC-016",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-DECISION": {
+            "decision_right": "DR-DECISION-DISPOSE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-DOC-016",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-DOC-016",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Evaluated implementation handoff for WO-DOC-016."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ]
+      },
+      {
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-DOC-016=implemented",
+          "--decision",
+          "WO-DOC-016=delegated-executor"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-DOC-016",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-DECISION": {
+            "decision_right": "DR-DECISION-DISPOSE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-DOC-016",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-DOC-016",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Plan completion of WO-DOC-016."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-PREVIEW",
+        "kind": "command",
+        "non_effects": [
+          "Completion does not verify, release or deliver the work."
+        ]
+      },
+      {
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-DOC-016=implemented",
+          "--decision",
+          "WO-DOC-016=delegated-executor",
+          "--apply"
+        ],
+        "corrective": {
+          "QGP-G4I-COMPLETE": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-DOC-016",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-DECISION": {
+            "decision_right": "DR-DECISION-DISPOSE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-EVIDENCE": {
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-DOC-016",
+              "--checkpoint",
+              "handoff"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-GRAPH": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PATHS": {
+            "decision_right": "DR-REMEDIATION-SCOPE",
+            "kind": "escalation"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-DOC-016",
+              "--phase",
+              "review"
+            ],
+            "kind": "command"
+          },
+          "QGP-G4I-SCOPE": {
+            "decision_right": "DR-WO-SELECT",
+            "kind": "escalation"
+          },
+          "QGP-G4I-STATUS": {
+            "decision_right": "DR-WO-START",
+            "kind": "escalation"
+          }
+        },
+        "effects": [
+          "Record completion of only WO-DOC-016 under its approved execution scope."
+        ],
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "id": "STEP-WO-IMPLEMENT-APPLY",
+        "kind": "command",
+        "non_effects": [
+          "Completion does not verify, release or deliver the work."
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "alternatives": [],
+    "blocked_by": [],
+    "command_or_response": {
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-DOC-016=implemented",
+        "--decision",
+        "WO-DOC-016=delegated-executor"
+      ],
+      "kind": "command"
+    },
+    "current_lifecycle_state": [
+      "WO-DOC-016 is in_progress."
+    ],
+    "decision_required": null,
+    "done": [
+      "Evaluated handoff compliance for WO-DOC-016."
+    ],
+    "next": {
+      "action": "Run the bound command",
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-PREVIEW"
+    },
+    "not_done": [],
+    "outcome": "completed"
+  },
+  "result_sha256": "c11abeb6933bd2bbcbdf10f7db19a0fc0c71dd5fbe4ec71a5a5a8713bb3e050c",
+  "schema": "se-harness-workflow-result-v2",
+  "scope": {
+    "change_set_complete": true,
+    "changed_paths": [
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/approved-readme.md",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/candidate-help.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/candidate-help.log",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/diff-review.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/diff-review.log",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/distribution-validator.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/distribution-validator.log",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/documentation-tests.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/documentation-tests.log",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/handoff.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/input-comparison.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/input-comparison.log",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/readme-016-doctor.command.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/readme-016-doctor.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/readme-016-graph.command.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/readme-016-graph.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/readme-016-owner-approval-apply.command.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/readme-016-owner-approval-apply.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/readme-016-review-preflight.command.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/readme-016-review-preflight.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/readme-016-scope.command.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/readme-016-scope.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/readme-016-start-apply.command.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/readme-016-start-apply.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/readme-016-start-preflight.command.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/readme-016-start-preflight.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/released-command-syntax.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/released-command-syntax.log",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/render-review.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/reviewed-inputs.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/source-suite.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/source-suite.log",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/WO-DOC-016-handoff.md",
+      "docs/engineering/harness-distribution/README.md",
+      "docs/engineering/harness-distribution/verification/VER-DST-029.md",
+      "docs/engineering/harness-distribution/work-orders/WO-DOC-016.md",
+      "README.md"
+    ],
+    "declared_paths": [
+      "docs/engineering/harness-distribution/evidence/VREC-DOC-008-evaluator.json",
+      "docs/engineering/harness-distribution/evidence/WO-DOC-016/",
+      "docs/engineering/harness-distribution/README.md",
+      "docs/engineering/harness-distribution/verification-records/VREC-DOC-008.md",
+      "docs/engineering/harness-distribution/verification/VER-DST-029.md",
+      "docs/engineering/harness-distribution/work-orders/WO-DOC-016.md",
+      "README.md"
+    ],
+    "dependencies": [],
+    "governing": [
+      "CAP-DST-001",
+      "INT-DST-001",
+      "REQ-DST-069",
+      "SPEC-DST-024",
+      "VER-DST-029"
+    ],
+    "mode": "selected"
+  },
+  "selection": {
+    "artifacts": [
+      "WO-DOC-016"
+    ],
+    "primary": "WO-DOC-016"
+  },
+  "state": {
+    "after": [
+      {
+        "id": "WO-DOC-016",
+        "status": "in_progress"
+      }
+    ],
+    "before": [
+      {
+        "id": "WO-DOC-016",
+        "status": "in_progress"
+      }
+    ]
+  }
+}
