@@ -2,7 +2,7 @@
 id = "WO-ECP-039"
 type = "work_order"
 title = "Correct the plugin-owned upgrade rehearsal assertion"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-16"
 updated = "2026-09-16"
@@ -44,6 +44,13 @@ to = "in_progress"
 decided_at = "2026-09-16T16:58:21Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Start the approved rehearsal correction under DR-015 after passing start preflight."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-16T18:16:02Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Complete the approved correction under DR-015: 1081 tests pass with 15 skips, two real upgrade replays pass with identical lock digests, required integrity and scope checks pass, and failed attempts remain retained. Owner assurance and hosted CI remain separate."
 +++
 
 # Correct the plugin-owned upgrade rehearsal assertion

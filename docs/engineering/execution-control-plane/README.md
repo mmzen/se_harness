@@ -131,5 +131,5 @@ their accountable owners. Each artifact's own front matter is its state.
 remaining Linux/Windows rehearsal failures. They replace the helper's fixed
 schema-3 assertion with supported ownership and preservation checks, retaining
 the real evaluator handover. Diagnosis and original failures are under
-`evidence/WO-ECP-039/`. The work order is in progress; verification remains a
-separate accountable decision.
+`evidence/WO-ECP-039/`. Local acceptance is complete; the work order records
+its lifecycle state. Verification remains a separate accountable decision.

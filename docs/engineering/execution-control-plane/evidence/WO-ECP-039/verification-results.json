@@ -1,0 +1,947 @@
+{
+  "tested_implementation_commit": "2d79e0108084dfcd15efa16187e555a99ed70689",
+  "platform": "Windows-11-10.0.26100-SP0",
+  "python": "3.13.3",
+  "checks": {
+    "focused": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "tests.test_upgrade_rehearsal",
+        "-q"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T17:01:12.694230+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 331.145,
+      "finished_at": "2026-09-16T17:06:43.843381+00:00",
+      "output": "----------------------------------------------------------------------\nRan 34 tests in 330.487s\n\nOK\n"
+    },
+    "source-suite": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "scripts/run_tests.py"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T17:11:06.815057+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 2374.958,
+      "finished_at": "2026-09-16T17:50:41.781758+00:00",
+      "output": "--workers must be at least 1\nEvaluator Python: C:\\Users\\hok\\AppData\\Local\\Temp\\simple-plugin-_oncwzxm\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\hok\\AppData\\Local\\Temp\\simple-plugin-_oncwzxm\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nWEX_SCALE artifacts=100 validation=0.843207s focus=1.857679s plan=1.707994s\nWEX_SCALE artifacts=500 validation=3.760772s focus=4.945430s plan=8.176133s\ndocs/notes/diagnostic-codes.md matches the source\n======================================================================\nFAIL: test_governor_transition.GovernorTransitionTests.test_ownership_switch_requires_trusted_base_catalogue (catalog=b'{\"catalog\":[\"a\",\"a\"]}')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\scripts\\validate_governor_transition.py\", line 83, in _run\n    completed = subprocess.run(\n        list(command),\n    ...<6 lines>...\n        timeout=timeout,\n    )\n  File \"C:\\Python313\\Lib\\subprocess.py\", line 556, in run\n    stdout, stderr = process.communicate(input, timeout=timeout)\n                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python313\\Lib\\subprocess.py\", line 1241, in communicate\n    sts = self.wait(timeout=self._remaining_time(endtime))\n  File \"C:\\Python313\\Lib\\subprocess.py\", line 1277, in wait\n    return self._wait(timeout=timeout)\n           ~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Python313\\Lib\\subprocess.py\", line 1606, in _wait\n    raise TimeoutExpired(self.args, timeout)\nsubprocess.TimeoutExpired: Command '['git', '-C', 'C:\\\\Users\\\\hok\\\\AppData\\\\Local\\\\Temp\\\\tmp0mymk33h', 'status', '--porcelain=v1', '--untracked-files=all']' timed out after -1078.2760180998594 seconds\n\nThe above exception was the direct cause of the following exception:\n\nvalidate_governor_transition.GovernorTransitionError: command could not complete: git\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\tests\\test_governor_transition.py\", line 420, in test_ownership_switch_requires_trusted_base_catalogue\n    with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, \"catalogue\"):\n         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: \"catalogue\" does not match \"command could not complete: git\"\n\n----------------------------------------------------------------------\nRan 1081 tests in 2372.619s (171 classes, 8 workers)\n\nFAILED (failures=1, skipped=15)\n"
+    },
+    "timeout-regression": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "tests.test_governor_transition.GovernorTransitionTests.test_ownership_switch_requires_trusted_base_catalogue",
+        "-v"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T17:51:32.039068+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 30.428,
+      "finished_at": "2026-09-16T17:52:02.469899+00:00",
+      "output": "test_ownership_switch_requires_trusted_base_catalogue (tests.test_governor_transition.GovernorTransitionTests.test_ownership_switch_requires_trusted_base_catalogue) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 30.021s\n\nOK\n"
+    },
+    "source-suite-retry": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "scripts/run_tests.py"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T17:59:24.713621+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 765.806,
+      "finished_at": "2026-09-16T18:12:10.530741+00:00",
+      "output": "--workers must be at least 1\nEvaluator Python: C:\\Users\\hok\\AppData\\Local\\Temp\\simple-plugin-_yqd6gzb\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\hok\\AppData\\Local\\Temp\\simple-plugin-_yqd6gzb\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nWEX_SCALE artifacts=100 validation=0.695068s focus=1.304008s plan=1.412612s\nWEX_SCALE artifacts=500 validation=3.363935s focus=4.251168s plan=7.814571s\ndocs/notes/diagnostic-codes.md matches the source\n----------------------------------------------------------------------\nRan 1081 tests in 763.617s (171 classes, 8 workers)\n\nOK (skipped=15)\n"
+    },
+    "distributions": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T17:03:46.551914+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 24.554,
+      "finished_at": "2026-09-16T17:04:11.109201+00:00",
+      "output": "SE Harness release distribution validation: PASS (15 distribution-bearing records)\n"
+    },
+    "cli-help": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T17:03:44.642787+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 0.713,
+      "finished_at": "2026-09-16T17:03:45.359014+00:00",
+      "output": "usage: harnessctl [-h] [--version]\n                  {init,validate,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release} ...\n\nInstall and operate the standard software-engineering harness.\n\npositional arguments:\n  {init,validate,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release}\n    init                install the standard harness into an absent, empty or\n                        existing repository\n    validate            validate the repository artifact graph\n    inspect             inspect repository-wide attention and lifecycle queues\n    dashboard           generate the repository Harness Explorer\n    doctor              check an installed harness\n    skill-ownership     plan, apply, or restore explicit retained skill\n                        ownership\n    preflight           check work-order implementation or review readiness\n    check               project one selected WO, VREC, or RLS scope, or\n                        evaluate one of its checkpoints, and emit canonical\n                        restitution\n    evidence            write or rebind one work order's evidence packet to\n                        the current formal snapshot\n    pr-body             emit the LF-terminated pull-request body for one work\n                        order\n    transition          plan or atomically apply explicit lifecycle\n                        transitions\n    decide              dispose one pending decision with a declared option,\n                        under DR-DECISION-DISPOSE\n    raise-risk          record a risk description, owner and next action;\n                        optionally request a blocking decision\n    risks               list the risks threatening one artifact and its\n                        governing chain; writes nothing\n    check-pr            check a PR against its selected work orders and their\n                        combined scope\n    select-work-order   select one structured work-order field from a GitHub\n                        pull-request event\n    upgrade             plan or apply safe harness upgrades\n    scaffold-domain     safely create the canonical organization for one\n                        engineering domain\n    create-artifact     create one incomplete draft from the canonical\n                        artifact template\n    release-unit        derive a release unit's work-order census from the\n                        commits between the previous release tag and a\n                        candidate commit\n    identity            emit and verify one evaluator or candidate runtime\n                        identity\n    qualify             run one typed, provenance-bound release qualification\n                        operation\n    capture-verification\n                        prepare a ready commit-bound verification record\n    refresh-verification\n                        create a new ready record after an unchanged rebase;\n                        preserve the original\n    prepare-release     prepare a ready commit-bound release record\n\noptions:\n  -h, --help            show this help message and exit\n  --version             show program's version number and exit\n"
+    },
+    "candidate-doctor": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "se_harness",
+        "doctor",
+        "."
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T17:03:50.594875+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 13.381,
+      "finished_at": "2026-09-16T17:04:03.978237+00:00",
+      "output": "PASS AGENTS.md: required\nPASS CLAUDE.md: required\nPASS ENGINEERING_HARNESS.md: required\nPASS claude-import: @AGENTS.md\nPASS config: .engineering-harness.toml\nPASS distribution:.gitattributes: matches distribution\nPASS distribution:.gitignore: matches distribution\nPASS distribution:AGENTS.md: matches distribution\nPASS distribution:CLAUDE.md: matches distribution\nFAIL distribution:ENGINEERING_HARNESS.md: differs from distribution template\nPASS distribution:docs/engineering/QUALITY_GATES.json: matches distribution\nPASS distribution:docs/engineering/WORKFLOW.json: matches distribution\nPASS docs/engineering/ARTIFACT_AUTHORING.md: required\nPASS docs/engineering/DECISION_RIGHTS.md: required\nPASS docs/engineering/OPERATING_CARD.md: required\nPASS docs/engineering/QUALITY_GATES.json: required\nPASS docs/engineering/QUALITY_GATES.md: required\nPASS docs/engineering/README.md: required\nPASS docs/engineering/TECHNICAL_COMMUNICATION.md: required\nPASS docs/engineering/TRACEABILITY.md: required\nPASS docs/engineering/WORKFLOW.json: required\nPASS docs/engineering/WORKFLOW.md: required\nFAIL evaluator-payload: installed checker payload matches its installation record\nPASS lock: .engineering-harness.lock\nPASS managed:.gitattributes: unchanged\nPASS managed:.gitignore: unchanged\nPASS managed:AGENTS.md: unchanged\nPASS managed:CLAUDE.md: unchanged\nPASS managed:ENGINEERING_HARNESS.md: unchanged\nPASS managed:docs/engineering/QUALITY_GATES.json: unchanged\nPASS managed:docs/engineering/WORKFLOW.json: unchanged\nPASS python: 3.13.3\nPASS seed:.engineering-harness.toml: present\nPASS seed:.github/PULL_REQUEST_TEMPLATE.md: present\nPASS seed:.github/workflows/engineering-harness.yml: present\nPASS seed:GLOSSARY.md: present\nPASS seed:docs/engineering/ARTIFACT_AUTHORING.md: present\nPASS seed:docs/engineering/DECISION_RIGHTS.md: present\nPASS seed:docs/engineering/OPERATING_CARD.md: present\nPASS seed:docs/engineering/QUALITY_GATES.md: present\nPASS seed:docs/engineering/README.md: present\nPASS seed:docs/engineering/TECHNICAL_COMMUNICATION.md: present\nPASS seed:docs/engineering/TRACEABILITY.md: present\nPASS seed:docs/engineering/WORKFLOW.md: present\nPASS seed:docs/engineering/templates/ADR.template.md: present\nPASS seed:docs/engineering/templates/ARCHITECTURE.template.md: present\nPASS seed:docs/engineering/templates/CAPABILITY.template.md: present\nPASS seed:docs/engineering/templates/DECISION.template.md: present\nPASS seed:docs/engineering/templates/INTENT.template.md: present\nPASS seed:docs/engineering/templates/OPERATING_CONTRACT.template.md: present\nPASS seed:docs/engineering/templates/README.md: present\nPASS seed:docs/engineering/templates/RELEASE_CONTRACT.template.md: present\nPASS seed:docs/engineering/templates/RELEASE_RECORD.template.md: present\nPASS seed:docs/engineering/templates/REQUIREMENT.template.md: present\nPASS seed:docs/engineering/templates/RISK.template.md: present\nPASS seed:docs/engineering/templates/SPECIFICATION.template.md: present\nPASS seed:docs/engineering/templates/VERIFICATION.template.md: present\nPASS seed:docs/engineering/templates/VERIFICATION_RECORD.template.md: present\nPASS seed:docs/engineering/templates/WORK_ORDER.template.md: present\nFAIL selected-version: config, installation and running checker versions must agree\nPASS skill-ownership: skills are provided by the plugin\nPASS hash-bound-class-declared: 2 file formats declared; consuming formats validate their own fields\nPASS hash-bound-attribute-effective: 1 raw classes effective for 225 tracked paths\nPASS hash-bound-mode-consistent: one mode per class: evaluator-evidence=raw, standard-lock=utf8-text-lf-v1\nWARN W013: docs/engineering/portable-managed-integrity/verification-records/VREC-PMI-001.md: artifact 'VREC-PMI-001' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-PMI-001.md'\nWARN W013: docs/engineering/release-0-10-0/releases/RLS-SEH-019.md: artifact 'RLS-SEH-019' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-019.md'\nWARN W013: docs/engineering/release-0-10-0/verification-records/VREC-SEH-019.md: artifact 'VREC-SEH-019' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-019.md'\nWARN W013: docs/engineering/release-0-11-0/releases/RLS-SEH-020.md: artifact 'RLS-SEH-020' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-020.md'\nWARN W013: docs/engineering/release-0-11-0/verification-records/VREC-SEH-020.md: artifact 'VREC-SEH-020' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-020.md'\nWARN W013: docs/engineering/release-0-12-0/releases/RLS-SEH-021.md: artifact 'RLS-SEH-021' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-021.md'\nWARN W013: docs/engineering/release-0-12-0/verification-records/VREC-SEH-021.md: artifact 'VREC-SEH-021' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-021.md'\nWARN W013: docs/engineering/release-0-13-0/releases/RLS-SEH-022.md: artifact 'RLS-SEH-022' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-022.md'\nWARN W013: docs/engineering/release-0-13-0/verification-records/VREC-SEH-022.md: artifact 'VREC-SEH-022' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-022.md'\nWARN W013: docs/engineering/release-0-14-0/releases/RLS-SEH-023.md: artifact 'RLS-SEH-023' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-023.md'\nWARN W013: docs/engineering/release-0-14-0/verification-records/VREC-SEH-023.md: artifact 'VREC-SEH-023' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-023.md'\nWARN W013: docs/engineering/release-0-15-0/releases/RLS-SEH-024.md: artifact 'RLS-SEH-024' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-024.md'\nWARN W013: docs/engineering/release-0-15-0/verification-records/VREC-SEH-024.md: artifact 'VREC-SEH-024' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-024.md'\nWARN W013: docs/engineering/release-0-16-0/releases/RLS-SEH-025.md: artifact 'RLS-SEH-025' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-025.md'\nWARN W013: docs/engineering/release-0-16-0/verification-records/VREC-SEH-025.md: artifact 'VREC-SEH-025' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-025.md'\nWARN W013: docs/engineering/release-0-17-0/releases/RLS-SEH-026.md: artifact 'RLS-SEH-026' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-026.md'\nWARN W013: docs/engineering/release-0-17-0/verification-records/VREC-SEH-026.md: artifact 'VREC-SEH-026' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-026.md'\nWARN W013: docs/engineering/release-0-18-0/releases/RLS-SEH-027.md: artifact 'RLS-SEH-027' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-027.md'\nWARN W013: docs/engineering/release-0-18-0/verification-records/VREC-SEH-027.md: artifact 'VREC-SEH-027' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-027.md'\nWARN W013: docs/engineering/release-0-6-0/releases/RLS-SEH-009.md: artifact 'RLS-SEH-009' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-009.md'\nWARN W013: docs/engineering/release-0-6-0/releases/RLS-SEH-012.md: artifact 'RLS-SEH-012' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-012.md'\nWARN W013: docs/engineering/release-0-6-0/verification-records/VREC-SEH-008.md: artifact 'VREC-SEH-008' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-008.md'\nWARN W013: docs/engineering/release-0-6-0/verification-records/VREC-SEH-009.md: artifact 'VREC-SEH-009' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-009.md'\nWARN W013: docs/engineering/release-0-6-0/verification-records/VREC-SEH-010.md: artifact 'VREC-SEH-010' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-010.md'\nWARN W013: docs/engineering/release-0-6-0/verification-records/VREC-SEH-012.md: artifact 'VREC-SEH-012' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-012.md'\nWARN W013: docs/engineering/release-0-7-0/releases/RLS-SEH-014.md: artifact 'RLS-SEH-014' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-014.md'\nWARN W013: docs/engineering/release-0-7-0/releases/RLS-SEH-015.md: artifact 'RLS-SEH-015' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-015.md'\nWARN W013: docs/engineering/release-0-7-0/verification-records/VREC-SEH-014.md: artifact 'VREC-SEH-014' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-014.md'\nWARN W013: docs/engineering/release-0-7-1/releases/RLS-SEH-016.md: artifact 'RLS-SEH-016' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-016.md'\nWARN W013: docs/engineering/release-0-7-1/verification-records/VREC-SEH-015.md: artifact 'VREC-SEH-015' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-015.md'\nWARN W013: docs/engineering/release-0-8-0/releases/RLS-SEH-017.md: artifact 'RLS-SEH-017' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-017.md'\nWARN W013: docs/engineering/release-0-8-0/verification-records/VREC-SEH-017.md: artifact 'VREC-SEH-017' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-017.md'\nWARN W013: docs/engineering/release-0-9-0/releases/RLS-SEH-018.md: artifact 'RLS-SEH-018' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-018.md'\nWARN W013: docs/engineering/release-0-9-0/verification-records/VREC-SEH-018.md: artifact 'VREC-SEH-018' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-018.md'\nWARN W013: docs/engineering/release-0.2.0/releases/RLS-SEH-001.md: artifact 'RLS-SEH-001' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-001.md'\nWARN W013: docs/engineering/release-0.2.0/verification-records/VREC-SEH-001.md: artifact 'VREC-SEH-001' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-001.md'\nWARN W013: docs/engineering/release-0.2.1/releases/RLS-SEH-002.md: artifact 'RLS-SEH-002' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-002.md'\nWARN W013: docs/engineering/release-0.2.1/verification-records/VREC-SEH-002.md: artifact 'VREC-SEH-002' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-002.md'\nWARN W013: docs/engineering/release-0.2.2/releases/RLS-SEH-004.md: artifact 'RLS-SEH-004' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-004.md'\nWARN W013: docs/engineering/release-0.2.2/verification-records/VREC-SEH-004.md: artifact 'VREC-SEH-004' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-004.md'\nWARN W013: docs/engineering/release-0.3.0/releases/RLS-SEH-005.md: artifact 'RLS-SEH-005' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-005.md'\nWARN W013: docs/engineering/release-0.3.0/verification-records/VREC-SEH-005.md: artifact 'VREC-SEH-005' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-005.md'\nWARN W013: docs/engineering/release-0.4.0/releases/RLS-SEH-006.md: artifact 'RLS-SEH-006' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-006.md'\nWARN W013: docs/engineering/release-0.4.0/verification-records/VREC-SEH-006.md: artifact 'VREC-SEH-006' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-006.md'\nWARN W013: docs/engineering/release-0.4.1/releases/RLS-SEH-007.md: artifact 'RLS-SEH-007' is valid outside its canonical location; expected 'docs/engineering/releases/RLS-SEH-007.md'\nWARN W013: docs/engineering/release-0.4.1/verification-records/VREC-SEH-007.md: artifact 'VREC-SEH-007' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-SEH-007.md'\nWARN W013: docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-019.md: artifact 'VREC-HUP-019' is valid outside its canonical location; expected 'docs/engineering/verification-records/VREC-HUP-019.md'\nWARN W013: docs/engineering/verification-records/VREC-DOC-003.md: artifact 'VREC-DOC-003' is valid outside its canonical location; expected 'docs/engineering/harness-distribution/verification-records/VREC-DOC-003.md'\nWARN W013: docs/engineering/verification-records/VREC-DOC-005.md: artifact 'VREC-DOC-005' is valid outside its canonical location; expected 'docs/engineering/harness-distribution/verification-records/VREC-DOC-005.md'\n"
+    },
+    "prepare-runtime": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "work\\prepare_rehearsal_runtime.py"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "started_at": "2026-09-16T17:02:21.083716+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 29.534,
+      "finished_at": "2026-09-16T17:02:50.621020+00:00",
+      "output": "Processing c:\\users\\hok\\documents\\codex\\2026-09-15\\clo\\work\\rehearsal-ci-wheel\\se_harness-0.19.0-py3-none-any.whl\nInstalling collected packages: se-harness\nSuccessfully installed se-harness-0.19.0\n{\n  \"ci_run\": 35118827011,\n  \"ci_build_commit\": \"c31cca6ecd7a1350459766dc829241a57331850b\",\n  \"artifact_id\": 10456771832,\n  \"artifact_name\": \"candidate-wheel-non-promotable-c31cca6ecd7a1350459766dc829241a57331850b\",\n  \"wheel_path\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\rehearsal-ci-wheel\\\\se_harness-0.19.0-py3-none-any.whl\",\n  \"wheel_sha256\": \"cc921ebf03d659310e626b8460771eedc86adc0f1a9274e9ff43aeadadd7b324\",\n  \"promotable\": false,\n  \"comparison\": {\n    \"argv\": [\n      \"git\",\n      \"diff\",\n      \"--exit-code\",\n      \"c31cca6ecd7a1350459766dc829241a57331850b\",\n      \"HEAD\",\n      \"--\",\n      \"se_harness\",\n      \"templates\",\n      \"pyproject.toml\",\n      \"MANIFEST.in\",\n      \"setup.cfg\",\n      \"setup.py\"\n    ],\n    \"cwd\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\se_harness\",\n    \"exit_code\": 0,\n    \"stdout\": \"\",\n    \"stderr\": \"\"\n  },\n  \"runtime\": \"3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]\\nC:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\rehearsal-successor-env\\\\Scripts\\\\python.exe\\nC:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\rehearsal-successor-env\\\\Lib\\\\site-packages\\\\se_harness\\\\__init__.py\\n0.19.0\\n\",\n  \"python\": \"C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\rehearsal-successor-env\\\\Scripts\\\\python.exe\"\n}\n"
+    },
+    "replay-1": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "repository_tools.upgrade_rehearsal",
+        "--repository",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--predecessor-python",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "--successor-python",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-successor-env\\Scripts\\python.exe",
+        "--output",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-real-1",
+        "--workspace",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-scratch",
+        "--timings"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T17:11:08.855362+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 74.563,
+      "finished_at": "2026-09-16T17:12:23.420129+00:00",
+      "output": "upgrade timing: start replay\nupgrade timing: start git-archive\nupgrade timing: end git-archive: 5.895336s (finished)\nupgrade timing: start archive-extraction\nupgrade timing: end archive-extraction: 49.079703s (error)\nupgrade timing: start scratch-cleanup\nupgrade timing: end scratch-cleanup: 18.937216s (finished)\nupgrade timing: end replay: 74.114375s (error)\nTraceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\repository_tools\\upgrade_rehearsal.py\", line 461, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\repository_tools\\upgrade_rehearsal.py\", line 438, in main\n    result = rehearse(\n        Path(args.repository),\n    ...<4 lines>...\n        timings=args.timings,\n    )\n  File \"C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\repository_tools\\upgrade_rehearsal.py\", line 302, in rehearse\n    result = _rehearse(repository, predecessor_python, successor_python, output, runner, selected_workspace, timing)\n  File \"C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\repository_tools\\upgrade_rehearsal.py\", line 348, in _rehearse\n    export_tracked_tree(repository, copy, runner, timing=timing)\n    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\repository_tools\\upgrade_rehearsal.py\", line 188, in export_tracked_tree\n    tar.extractall(destination, filter=\"data\")\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python313\\Lib\\tarfile.py\", line 2334, in extractall\n    self._extract_one(tarinfo, path, set_attrs=not tarinfo.isdir(),\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                      numeric_owner=numeric_owner)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python313\\Lib\\tarfile.py\", line 2401, in _extract_one\n    self._handle_fatal_error(e)\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"C:\\Python313\\Lib\\tarfile.py\", line 2397, in _extract_one\n    self._extract_member(tarinfo, os.path.join(path, tarinfo.name),\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                         set_attrs=set_attrs,\n                         ^^^^^^^^^^^^^^^^^^^^\n                         numeric_owner=numeric_owner)\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python313\\Lib\\tarfile.py\", line 2482, in _extract_member\n    self.makedir(tarinfo, targetpath)\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python313\\Lib\\tarfile.py\", line 2511, in makedir\n    os.mkdir(targetpath)\n    ~~~~~~~~^^^^^^^^^^^^\nFileNotFoundError: [WinError 206] The filename or extension is too long: 'C:\\\\Users\\\\hok\\\\Documents\\\\Codex\\\\2026-09-15\\\\clo\\\\work\\\\rehearsal-scratch\\\\upgrade-rehearsal-w4ue9e5f\\\\repository\\\\docs\\\\engineering\\\\plugin-integration\\\\evidence\\\\WO-PLG-003\\\\20260909-live\\\\readiness-fixture-inputs\\\\synthetic-inputs\\\\docs\\\\engineering\\\\readiness-probe'\n"
+    },
+    "replay-short-1": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "repository_tools.upgrade_rehearsal",
+        "--repository",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--predecessor-python",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "--successor-python",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-successor-env\\Scripts\\python.exe",
+        "--output",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-real-short-1",
+        "--workspace",
+        "C:\\Users\\hok\\AppData\\Local\\Temp\\e39",
+        "--timings"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T17:15:02.628855+00:00",
+      "exit_code": 2,
+      "elapsed_seconds": 2019.282,
+      "finished_at": "2026-09-16T17:48:41.927020+00:00",
+      "output": "upgrade timing: start replay\nupgrade timing: start git-archive\nupgrade timing: end git-archive: 12.694911s (finished)\nupgrade timing: start archive-extraction\nupgrade timing: end archive-extraction: 266.640952s (finished)\nupgrade timing: start git-init\nupgrade timing: end git-init: 2.413387s (finished)\nupgrade timing: start git-config-maintenance\nupgrade timing: end git-config-maintenance: 1.278134s (finished)\nupgrade timing: start git-config-gc\nupgrade timing: end git-config-gc: 1.534775s (finished)\nupgrade timing: start git-config-autocrlf\nupgrade timing: end git-config-autocrlf: 0.934778s (finished)\nupgrade timing: start git-config-email\nupgrade timing: end git-config-email: 1.243730s (finished)\nupgrade timing: start git-config-name\nupgrade timing: end git-config-name: 1.599644s (finished)\nupgrade timing: start git-config-signing\nupgrade timing: end git-config-signing: 1.299862s (finished)\nupgrade timing: start git-add\nupgrade timing: end git-add: 1675.828330s (error)\nupgrade timing: start scratch-cleanup\nupgrade timing: end scratch-cleanup: 51.299230s (finished)\nupgrade timing: end replay: 2018.077509s (error)\nupgrade rehearsal: cannot prepare the throwaway repository: git add -A: git timed out after 600 seconds\n"
+    },
+    "replay-serial-1": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "repository_tools.upgrade_rehearsal",
+        "--repository",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--predecessor-python",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "--successor-python",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-successor-env\\Scripts\\python.exe",
+        "--output",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-real-serial-1",
+        "--workspace",
+        "C:\\Users\\hok\\AppData\\Local\\Temp\\e39",
+        "--timings"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T17:53:05.553755+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 191.859,
+      "finished_at": "2026-09-16T17:56:17.515379+00:00",
+      "output": "upgrade timing: start replay\nupgrade timing: start git-archive\nupgrade timing: end git-archive: 3.364196s (finished)\nupgrade timing: start archive-extraction\nupgrade timing: end archive-extraction: 54.885434s (finished)\nupgrade timing: start git-init\nupgrade timing: end git-init: 0.316403s (finished)\nupgrade timing: start git-config-maintenance\nupgrade timing: end git-config-maintenance: 0.256866s (finished)\nupgrade timing: start git-config-gc\nupgrade timing: end git-config-gc: 0.214559s (finished)\nupgrade timing: start git-config-autocrlf\nupgrade timing: end git-config-autocrlf: 0.199369s (finished)\nupgrade timing: start git-config-email\nupgrade timing: end git-config-email: 0.217637s (finished)\nupgrade timing: start git-config-name\nupgrade timing: end git-config-name: 0.253918s (finished)\nupgrade timing: start git-config-signing\nupgrade timing: end git-config-signing: 0.241443s (finished)\nupgrade timing: start git-add\nupgrade timing: end git-add: 56.443474s (finished)\nupgrade timing: start git-commit\nupgrade timing: end git-commit: 13.144973s (finished)\nupgrade timing: start git-storage-paths\nupgrade timing: end git-storage-paths: 0.300143s (finished)\nupgrade timing: start predecessor-version\nupgrade timing: end predecessor-version: 0.793622s (finished)\nupgrade timing: start successor-version\nupgrade timing: end successor-version: 0.780666s (finished)\nupgrade timing: start predecessor-doctor-before\nupgrade timing: end predecessor-doctor-before: 5.764019s (finished)\nupgrade timing: start successor-upgrade-plan\nupgrade timing: end successor-upgrade-plan: 0.873501s (finished)\nupgrade timing: start successor-upgrade-apply\nupgrade timing: end successor-upgrade-apply: 1.406614s (finished)\nupgrade timing: start successor-doctor-after\nupgrade timing: end successor-doctor-after: 5.859279s (finished)\nupgrade timing: start successor-validate-after\nupgrade timing: end successor-validate-after: 9.402030s (finished)\nupgrade timing: start predecessor-doctor-after\nupgrade timing: end predecessor-doctor-after: 6.119336s (finished)\nupgrade timing: start scratch-cleanup\nupgrade timing: end scratch-cleanup: 30.229117s (finished)\nupgrade timing: end replay: 191.536751s (finished)\nupgrade rehearsal: PASS (0.18.0 -> 0.19.0)\nsemantic_sha256: 62882e246417e780120ddf5c706e0c5a5d41d6425270707e9276cfac92f756f3\n"
+    },
+    "replay-serial-2": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "repository_tools.upgrade_rehearsal",
+        "--repository",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--predecessor-python",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "--successor-python",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-successor-env\\Scripts\\python.exe",
+        "--output",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-real-serial-2",
+        "--workspace",
+        "C:\\Users\\hok\\AppData\\Local\\Temp\\e39",
+        "--timings"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T17:56:18.847047+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 162.966,
+      "finished_at": "2026-09-16T17:59:01.874167+00:00",
+      "output": "upgrade timing: start replay\nupgrade timing: start git-archive\nupgrade timing: end git-archive: 3.858195s (finished)\nupgrade timing: start archive-extraction\nupgrade timing: end archive-extraction: 57.875317s (finished)\nupgrade timing: start git-init\nupgrade timing: end git-init: 0.325662s (finished)\nupgrade timing: start git-config-maintenance\nupgrade timing: end git-config-maintenance: 0.252687s (finished)\nupgrade timing: start git-config-gc\nupgrade timing: end git-config-gc: 0.217542s (finished)\nupgrade timing: start git-config-autocrlf\nupgrade timing: end git-config-autocrlf: 0.202675s (finished)\nupgrade timing: start git-config-email\nupgrade timing: end git-config-email: 0.222590s (finished)\nupgrade timing: start git-config-name\nupgrade timing: end git-config-name: 0.234038s (finished)\nupgrade timing: start git-config-signing\nupgrade timing: end git-config-signing: 0.267958s (finished)\nupgrade timing: start git-add\nupgrade timing: end git-add: 46.782321s (finished)\nupgrade timing: start git-commit\nupgrade timing: end git-commit: 8.219382s (finished)\nupgrade timing: start git-storage-paths\nupgrade timing: end git-storage-paths: 0.192540s (finished)\nupgrade timing: start predecessor-version\nupgrade timing: end predecessor-version: 0.481566s (finished)\nupgrade timing: start successor-version\nupgrade timing: end successor-version: 0.424706s (finished)\nupgrade timing: start predecessor-doctor-before\nupgrade timing: end predecessor-doctor-before: 3.688128s (finished)\nupgrade timing: start successor-upgrade-plan\nupgrade timing: end successor-upgrade-plan: 0.486609s (finished)\nupgrade timing: start successor-upgrade-apply\nupgrade timing: end successor-upgrade-apply: 0.835340s (finished)\nupgrade timing: start successor-doctor-after\nupgrade timing: end successor-doctor-after: 3.506739s (finished)\nupgrade timing: start successor-validate-after\nupgrade timing: end successor-validate-after: 5.521914s (finished)\nupgrade timing: start predecessor-doctor-after\nupgrade timing: end predecessor-doctor-after: 3.695046s (finished)\nupgrade timing: start scratch-cleanup\nupgrade timing: end scratch-cleanup: 23.793982s (finished)\nupgrade timing: end replay: 161.696454s (finished)\nupgrade rehearsal: PASS (0.18.0 -> 0.19.0)\nsemantic_sha256: 62882e246417e780120ddf5c706e0c5a5d41d6425270707e9276cfac92f756f3\n"
+    }
+  },
+  "governor": {
+    "rehearsal-owner-approval-apply": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--set",
+        "SPEC-ECP-025=approved",
+        "--decision",
+        "SPEC-ECP-025=technical-owner",
+        "--reason",
+        "SPEC-ECP-025=The owner approved the presented SPEC-ECP-025, VER-ECP-027 and WO-ECP-039 package with \"i apprive\" on 2026-09-16, exercising the technical-owner decision for SPEC-ECP-025. Reviewed SHA-256 5fb747ca2bb885570c46de8124be5eae787e6ebb2c0a617355db25fabe95f0c0. This records definition and bounded execution approval, not assurance or external delivery.",
+        "--set",
+        "VER-ECP-027=approved",
+        "--decision",
+        "VER-ECP-027=assurance-owner",
+        "--reason",
+        "VER-ECP-027=The owner approved the presented SPEC-ECP-025, VER-ECP-027 and WO-ECP-039 package with \"i apprive\" on 2026-09-16, exercising the assurance-owner decision for VER-ECP-027. Reviewed SHA-256 13b9827b2ca1db801ff1eae828693aae4ecb20ccee75eeceb19e6fb6179a5d1e. This records definition and bounded execution approval, not assurance or external delivery.",
+        "--set",
+        "WO-ECP-039=approved",
+        "--decision",
+        "WO-ECP-039=engineering-owner",
+        "--reason",
+        "WO-ECP-039=The owner approved the presented SPEC-ECP-025, VER-ECP-027 and WO-ECP-039 package with \"i apprive\" on 2026-09-16, exercising the engineering-owner decision for WO-ECP-039. Reviewed SHA-256 df418ee693c62109a3b455f651ca7ecda38ec51aa25e65f18ae60d1830a53c80. This records definition and bounded execution approval, not assurance or external delivery.",
+        "--json",
+        "--apply"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "summary": {
+        "state": {
+          "before": [
+            {
+              "id": "SPEC-ECP-025",
+              "status": "draft"
+            },
+            {
+              "id": "VER-ECP-027",
+              "status": "draft"
+            },
+            {
+              "id": "WO-ECP-039",
+              "status": "draft"
+            }
+          ],
+          "after": [
+            {
+              "id": "SPEC-ECP-025",
+              "status": "approved"
+            },
+            {
+              "id": "VER-ECP-027",
+              "status": "approved"
+            },
+            {
+              "id": "WO-ECP-039",
+              "status": "approved"
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Applied 3 explicit lifecycle transition(s) atomically."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "SPEC-ECP-025 is approved."
+          ],
+          "decision_required": {
+            "decision_right": "DR-DEFINITION-DECIDE",
+            "role": "definition-owner",
+            "artifact": "SPEC-ECP-025",
+            "decision": "whether the selected definition is complete",
+            "outcomes": [
+              "implemented",
+              "reject",
+              "stop"
+            ]
+          },
+          "next": {
+            "procedure_id": "PROC-DEFINITION-COMPLETE",
+            "step_id": "STEP-DEFINITION-COMPLETE",
+            "action": "whether the selected definition is complete"
+          },
+          "command_or_response": {
+            "kind": "response",
+            "value": "Decide the selected definition SPEC-ECP-025 only."
+          },
+          "alternatives": []
+        },
+        "compliance": "pass"
+      },
+      "result_sha256": "c4a6e86e210c923f38d9aa0126e64a6807400bc3fc63581a4e85be9f78dfc14d"
+    },
+    "rehearsal-start-preflight": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--work-order",
+        "WO-ECP-039",
+        "--phase",
+        "start",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "summary": {
+        "ready": true
+      },
+      "result_sha256": "13e1b8e240ad63297878d0e905e618373de32d0789b673e088ca42fa46a50676"
+    },
+    "rehearsal-start-apply": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--set",
+        "WO-ECP-039=in_progress",
+        "--decision",
+        "WO-ECP-039=Codex",
+        "--reason",
+        "WO-ECP-039=Start the approved rehearsal correction under DR-015 after passing start preflight.",
+        "--apply",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "summary": {
+        "state": {
+          "before": [
+            {
+              "id": "WO-ECP-039",
+              "status": "approved"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-ECP-039",
+              "status": "in_progress"
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Applied 1 explicit lifecycle transition(s) atomically."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "WO-ECP-039 is in_progress."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-WO-IMPLEMENT",
+            "step_id": "STEP-WO-IMPLEMENT-CHECK",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-ECP-039",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "alternatives": []
+        },
+        "compliance": "pass"
+      },
+      "result_sha256": "df0d27c8667412397992accc643ead470fd0207acebf1e72722e6b99ac923118"
+    },
+    "rehearsal-released-doctor": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "summary": {
+        "checks": 64,
+        "failed": []
+      },
+      "result_sha256": "2d2551f42f7526d0f51f42734892d8e04b79519d36077734adc826be3d5cd926"
+    },
+    "rehearsal-implementation-graph": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "summary": {
+        "valid": true,
+        "artifact_count": 1665,
+        "error_count": 0,
+        "warning_count": 49
+      },
+      "result_sha256": "7c02962deeb990e20c521decf0fd69cc5f4052d2dc42bbea8ad2e5482b0bcaa3"
+    },
+    "rehearsal-review-preflight": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--work-order",
+        "WO-ECP-039",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "summary": {
+        "ready": true
+      },
+      "result_sha256": "3e4a774e92c05770c4ed64d4e6e192ce1a4b78d09ad17942a33177f1b548501d"
+    },
+    "rehearsal-implementation-scope": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--artifact",
+        "WO-ECP-039",
+        "--checkpoint",
+        "scope",
+        "--from-git",
+        "7268011f19753bf7d5a42b9bc829c3ea33f682aa",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "summary": {
+        "state": {
+          "before": [
+            {
+              "id": "WO-ECP-039",
+              "status": "in_progress"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-ECP-039",
+              "status": "in_progress"
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Evaluated scope compliance for WO-ECP-039."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "WO-ECP-039 is in_progress."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-WO-IMPLEMENT",
+            "step_id": "STEP-WO-IMPLEMENT-PREVIEW",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "transition",
+              ".",
+              "--set",
+              "WO-ECP-039=implemented",
+              "--decision",
+              "WO-ECP-039=delegated-executor"
+            ]
+          },
+          "alternatives": []
+        },
+        "compliance": "pass"
+      },
+      "result_sha256": "10f4972af684f4e8b3bfd6a31012050c5275cb65fe649888b6bd8c4067e719e8"
+    }
+  },
+  "real_replays": {
+    "candidate": "2d79e0108084dfcd15efa16187e555a99ed70689",
+    "runtime": {
+      "ci_run": 35118827011,
+      "ci_build_commit": "c31cca6ecd7a1350459766dc829241a57331850b",
+      "artifact_id": 10456771832,
+      "artifact_name": "candidate-wheel-non-promotable-c31cca6ecd7a1350459766dc829241a57331850b",
+      "wheel_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-ci-wheel\\se_harness-0.19.0-py3-none-any.whl",
+      "wheel_sha256": "cc921ebf03d659310e626b8460771eedc86adc0f1a9274e9ff43aeadadd7b324",
+      "promotable": false,
+      "comparison": {
+        "argv": [
+          "git",
+          "diff",
+          "--exit-code",
+          "c31cca6ecd7a1350459766dc829241a57331850b",
+          "HEAD",
+          "--",
+          "se_harness",
+          "templates",
+          "pyproject.toml",
+          "MANIFEST.in",
+          "setup.cfg",
+          "setup.py"
+        ],
+        "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "runtime": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]\nC:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-successor-env\\Scripts\\python.exe\nC:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-successor-env\\Lib\\site-packages\\se_harness\\__init__.py\n0.19.0\n",
+      "python": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-successor-env\\Scripts\\python.exe"
+    },
+    "platform": "win32",
+    "python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+    "results": [
+      {
+        "failure": null,
+        "lock": {
+          "canonical_sha256": "62882e246417e780120ddf5c706e0c5a5d41d6425270707e9276cfac92f756f3",
+          "evaluator": {
+            "payload_sha256": "7e82e7256b64fcf514c8da97dd0a94328216929efd3dbe3415705bdef304588b",
+            "version": "0.19.0"
+          },
+          "schema": 4,
+          "tool_version": "0.19.0"
+        },
+        "overall_result": "pass",
+        "predecessor": {
+          "version": "0.18.0"
+        },
+        "schema": "se-harness-upgrade-rehearsal-v1",
+        "semantic_sha256": "62882e246417e780120ddf5c706e0c5a5d41d6425270707e9276cfac92f756f3",
+        "steps": [
+          {
+            "argv": [
+              "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "doctor",
+              "<copy>\\repository"
+            ],
+            "exit_code": 0,
+            "expect": "success",
+            "id": "predecessor-doctor-before",
+            "outcome": "pass",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "db23dafaeaef2eaa71abb9bf4a6827c263ea99d1cbbdad22636a23cdd2124eb5"
+          },
+          {
+            "argv": [
+              "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-successor-env\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "upgrade",
+              "<copy>\\repository"
+            ],
+            "exit_code": 0,
+            "expect": "success",
+            "id": "successor-upgrade-plan",
+            "outcome": "pass",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "01ecd7bfd445a6648e2468e876baa9fa65c45f7f2fc5a942f6bf782e1ffae582"
+          },
+          {
+            "argv": [
+              "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-successor-env\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "upgrade",
+              "<copy>\\repository",
+              "--apply",
+              "--evidence-output",
+              "docs/engineering/evidence/upgrade-rehearsal-transaction.json"
+            ],
+            "exit_code": 0,
+            "expect": "success",
+            "id": "successor-upgrade-apply",
+            "outcome": "pass",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "4d80c258f6448510a7270228fc8b9be68fa2523134fe9a685e438d640c56c893"
+          },
+          {
+            "argv": [
+              "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-successor-env\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "doctor",
+              "<copy>\\repository"
+            ],
+            "exit_code": 0,
+            "expect": "success",
+            "id": "successor-doctor-after",
+            "outcome": "pass",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "db23dafaeaef2eaa71abb9bf4a6827c263ea99d1cbbdad22636a23cdd2124eb5"
+          },
+          {
+            "argv": [
+              "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-successor-env\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "validate",
+              "<copy>\\repository"
+            ],
+            "exit_code": 0,
+            "expect": "any",
+            "id": "successor-validate-after",
+            "outcome": "pass",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "8b39bfbcebaa1b19843a2821007ba36d720fcdbfa83d06e226bdb0aa3217916b"
+          },
+          {
+            "argv": [
+              "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "doctor",
+              "<copy>\\repository"
+            ],
+            "exit_code": 1,
+            "expect": "failure",
+            "id": "predecessor-doctor-after",
+            "outcome": "pass",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "1b238f0b70ced82756d0e8aeed2394c305130bd95374294fcd1e1e547502d6cb"
+          }
+        ],
+        "successor": {
+          "version": "0.19.0"
+        },
+        "tolerated_diagnostics": [],
+        "validation": {
+          "artifacts": 1665,
+          "errors": 0,
+          "warnings": 49
+        }
+      },
+      {
+        "failure": null,
+        "lock": {
+          "canonical_sha256": "62882e246417e780120ddf5c706e0c5a5d41d6425270707e9276cfac92f756f3",
+          "evaluator": {
+            "payload_sha256": "7e82e7256b64fcf514c8da97dd0a94328216929efd3dbe3415705bdef304588b",
+            "version": "0.19.0"
+          },
+          "schema": 4,
+          "tool_version": "0.19.0"
+        },
+        "overall_result": "pass",
+        "predecessor": {
+          "version": "0.18.0"
+        },
+        "schema": "se-harness-upgrade-rehearsal-v1",
+        "semantic_sha256": "62882e246417e780120ddf5c706e0c5a5d41d6425270707e9276cfac92f756f3",
+        "steps": [
+          {
+            "argv": [
+              "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "doctor",
+              "<copy>\\repository"
+            ],
+            "exit_code": 0,
+            "expect": "success",
+            "id": "predecessor-doctor-before",
+            "outcome": "pass",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "db23dafaeaef2eaa71abb9bf4a6827c263ea99d1cbbdad22636a23cdd2124eb5"
+          },
+          {
+            "argv": [
+              "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-successor-env\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "upgrade",
+              "<copy>\\repository"
+            ],
+            "exit_code": 0,
+            "expect": "success",
+            "id": "successor-upgrade-plan",
+            "outcome": "pass",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "01ecd7bfd445a6648e2468e876baa9fa65c45f7f2fc5a942f6bf782e1ffae582"
+          },
+          {
+            "argv": [
+              "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-successor-env\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "upgrade",
+              "<copy>\\repository",
+              "--apply",
+              "--evidence-output",
+              "docs/engineering/evidence/upgrade-rehearsal-transaction.json"
+            ],
+            "exit_code": 0,
+            "expect": "success",
+            "id": "successor-upgrade-apply",
+            "outcome": "pass",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "4d80c258f6448510a7270228fc8b9be68fa2523134fe9a685e438d640c56c893"
+          },
+          {
+            "argv": [
+              "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-successor-env\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "doctor",
+              "<copy>\\repository"
+            ],
+            "exit_code": 0,
+            "expect": "success",
+            "id": "successor-doctor-after",
+            "outcome": "pass",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "db23dafaeaef2eaa71abb9bf4a6827c263ea99d1cbbdad22636a23cdd2124eb5"
+          },
+          {
+            "argv": [
+              "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\rehearsal-successor-env\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "validate",
+              "<copy>\\repository"
+            ],
+            "exit_code": 0,
+            "expect": "any",
+            "id": "successor-validate-after",
+            "outcome": "pass",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "8b39bfbcebaa1b19843a2821007ba36d720fcdbfa83d06e226bdb0aa3217916b"
+          },
+          {
+            "argv": [
+              "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+              "-I",
+              "-m",
+              "se_harness",
+              "doctor",
+              "<copy>\\repository"
+            ],
+            "exit_code": 1,
+            "expect": "failure",
+            "id": "predecessor-doctor-after",
+            "outcome": "pass",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdout_sha256": "1b238f0b70ced82756d0e8aeed2394c305130bd95374294fcd1e1e547502d6cb"
+          }
+        ],
+        "successor": {
+          "version": "0.19.0"
+        },
+        "tolerated_diagnostics": [],
+        "validation": {
+          "artifacts": 1665,
+          "errors": 0,
+          "warnings": 49
+        }
+      }
+    ],
+    "semantic_sha256": "62882e246417e780120ddf5c706e0c5a5d41d6425270707e9276cfac92f756f3",
+    "operational_checkout_clean": true,
+    "operational_lock_sha256_unchanged": "8ac3b3ea5025009b93a3b1f2abffc8b8316c2b2f17868b276d78aafc06ab58be",
+    "scratch_clean": true
+  },
+  "earlier_evidence_unchanged": [
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/checks.json",
+      "sha256": "e31a26f73e1161dff73baa143a07398db6af099f7968cd47d8d65bb23452df89"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/readme-remediation.diff",
+      "sha256": "06bda0bbe1df25b1a3078fb2c72cb59993ad1c573dae6cee38c7a878756e7d95"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+      "sha256": "c7c051396b89268ee5f970fd2abdaf9def9febf6509ddeaae12ec572ca183cf8"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/scope-after-readme-repair.json",
+      "sha256": "bc9b18a4d0f09a1def052dc52fd3db2b4fdca1b8214346850f20a182943da7d9"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/source-suite-readme-repair.log",
+      "sha256": "8c0d5b25a135be7c60196e6227a1c6a877b7bee5f0f1a4a25f712e18ac63ee78"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/source-suite.log",
+      "sha256": "4ea389fb7ff0caae41c23a445022272893e5270ca1c90cd38d723993b5f52185"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/verification-preparation-readiness.command.json",
+      "sha256": "d306691da8b8a444e98627f7d02768dc5546fda34273fd31834a16e234e5d0a7"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/verification-preparation-readiness.json",
+      "sha256": "46e4864ee3ecae2124b367ed279f1444c790b2736b7eb1202cfc8b86fde45f75"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-025/checks.json",
+      "sha256": "a5960490118d6c3d9882e5c3c5950dd91c8539573d7fc619758b4ddb869f73c5"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-025/draft-review.json",
+      "sha256": "5cf8e8cd87d4edd28a31f0dc8f8aa1696821292e75c7e4dd935fc439cd2bb835"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-025/handoff.json",
+      "sha256": "2476f37690c81fd44875ed5f1558f5b37f55d92622b96c7fed4d7f37c3366f4d"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-025/implementation-review.json",
+      "sha256": "4b9e150071b7353cc764dd799909fcc364267379d4f11fdb7ae35c9e85a20375"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-025/implementation.md",
+      "sha256": "0275654ac7b2c4a6a35c6c2de68d1ecc88ce97d4d6cf0b2d4cd32600b3674a1f"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-025/README.md",
+      "sha256": "63546f4e795df18d022af3e0ce9bb00d5724487fd805c8cf38861d712444a51d"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-025/source-suite.log",
+      "sha256": "19f13eb8c50e6fbf7266cc8776a9c74613cd57887553730ff480d37cd36b20e9"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-025/WO-PLG-025-handoff.md",
+      "sha256": "69904a9a4df466c994944c8e2c88ca776b6d7adafec8d98f89f562af5d27b01c"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-023/PACKAGE-IDENTITY.json",
+      "sha256": "f47b3281d2a6182a91f5a3b59129e04316258906070dc39b90a347a48c06fc05"
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/checks.json",
+      "sha256": "309f02be99dbf7f40b4e2d411898e3bf79151b6ba75011fdadc58ed8d46ba84d"
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/committed-assess.json",
+      "sha256": "f55622a254a152c46c8170e54b347abf45049a582ac7a64478f522b7e32bf7a6"
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/committed-plan.json",
+      "sha256": "e4ad746375689fa83b7bcc866bebf7722d5749d3005e83e046034cb062e7ebfa"
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/comparison-regression.log",
+      "sha256": "6d85a39b33340588e7a95deef04e5bf1e56dba31dbdb2782ab78acc38300cee0"
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/draft-review.json",
+      "sha256": "771f48ccbc2ed5b6690270b602b717fd5f01d73b1d5c21e2514dff28269f5d33"
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/draft-review.md",
+      "sha256": "7f7f6c1dd6e5ac55e24f861c5283cf9cc3e02c6fe72caa850c773752ffb80b45"
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/handoff.json",
+      "sha256": "156621fd214193fef5db8792c82b1b0700eb0808b9dda88b4cdc20d3b30c226f"
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/implementation-review.json",
+      "sha256": "5846264e62836ddc648d34bb3da76143ab168fe1e4ee33ea9a5fc60411cefd4e"
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/implementation.md",
+      "sha256": "9238d0fd6e5a2b225f6ea681a4578b7da1bc067619f36561a8515dcdb792d8af"
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/original-planner-failure.json",
+      "sha256": "4a40d8e1a366ed99e64dcf7a3c426fbbc20eaef20839a1de044d38ef2ffc282d"
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/source-suite.log",
+      "sha256": "822fad4c0d30a741ace0693adbcb4f9bc8763da4e03e73c9f0fb24d852431e50"
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/WO-HUP-020-handoff.md",
+      "sha256": "742cee2663677698ec535bf9a6fcf83226e0d3c9c03a934c3307d9f74c44aa00"
+    }
+  ],
+  "source_suite_note": "The complete suite ran after the final implementation and final metadata-retention test case, on this clean implementation commit. Only scoped lifecycle, index and evidence changes follow; final source comparison and fresh governing checks establish reuse at the final candidate.",
+  "source_suite_recovery": "The first 1081-test run had one failure caused by a Git status timeout in the existing trusted-base catalogue test. That test and the full suite were rerun successfully without changing code or timeout limits. The failed output is retained.",
+  "replay_recovery": "The initial replay failed during archive extraction with Windows error 206. Its first short-path retry timed out during git add while the source suite was also active. Both failed before evaluator operations; their logs remain visible. The two successful replays use the same short private temporary path after the full suite, with no code or timeout change. Both clean up their disposable exports.",
+  "hosted_ci": "Pending separately authorized delivery; both hosted platforms and dependent integration package checks must pass before merge."
+}
