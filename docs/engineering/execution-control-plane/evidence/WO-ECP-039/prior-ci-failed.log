@@ -1,0 +1,1047 @@
+Upgrade rehearsal (Windows)	UNKNOWN STEP	﻿2026-09-16T13:25:07.6825656Z Current runner version: '2.337.0'
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6850113Z ##[group]Runner Image Provisioner
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6851207Z Hosted Compute Agent
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6851762Z Version: 20260828.587
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6852674Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6853387Z Build Date: 2026-08-28T16:44:25Z
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6854031Z Worker ID: {56cfa659-6728-491b-a46b-db4adb7e3648}
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6854718Z Azure Region: westus
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6855234Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6856681Z ##[group]Operating System
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6857346Z Microsoft Windows Server 2025
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6857917Z 10.0.26100
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6858453Z Datacenter
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6858988Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6859557Z ##[group]Runner Image
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6860122Z Image: windows-2025-vs2026
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6860669Z Version: 20260907.229.1
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6862104Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20260907.229/images/windows/Windows2025-VS2026-Readme.md
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6863717Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20260907.229
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6864798Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6865852Z ##[group]GITHUB_TOKEN Permissions
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6867657Z Contents: read
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6868221Z Metadata: read
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6868760Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6870950Z Secret source: Actions
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6871961Z Cache mode: write
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.6872875Z Prepare workflow directory
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.7438086Z Prepare all required actions
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:07.7489498Z Getting action download info
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:08.1000686Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:08.2280895Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:08.3797134Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:08.8152104Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.1563096Z Complete job name: Upgrade rehearsal (Windows)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3047670Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3056820Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3127743Z with:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3128224Z   fetch-depth: 0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3128678Z   persist-credentials: false
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3129202Z   repository: mmzen/se_harness
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3133039Z   token: ***
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3133443Z   ssh-strict: true
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3133852Z   ssh-user: git
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3134252Z   clean: true
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3134654Z   sparse-checkout-cone-mode: true
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3135144Z   fetch-tags: false
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3135548Z   show-progress: true
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3136000Z   lfs: false
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3136403Z   submodules: false
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3137036Z   set-safe-directory: true
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3137541Z   allow-unsafe-pr-checkout: false
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3138526Z env:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3138966Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3139751Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3140688Z   REHEARSAL_HEAD_SHA: 0dadc352b3a5e6c64c721e1c688cc215438ddd7f
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3141312Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3141729Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.3144013Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.4572754Z Syncing repository: mmzen/se_harness
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.4574493Z ##[group]Getting Git version info
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.4575161Z Working directory is 'D:\a\se_harness\se_harness'
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.5612776Z [command]"C:\Program Files\Git\bin\git.exe" version
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.9769378Z git version 2.55.0.windows.5
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.9816267Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.9835620Z Temporarily overriding HOME='D:\a\_temp\1efc5d96-1997-40c4-9025-61c692514459' before making global git config changes
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.9837175Z Adding repository directory to the temporary git global config as a safe directory
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:09.9846162Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\se_harness\se_harness
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:10.0514669Z Deleting the contents of 'D:\a\se_harness\se_harness'
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:10.0520630Z ##[group]Initializing the repository
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:10.0529534Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\se_harness\se_harness
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:10.1382089Z Initialized empty Git repository in D:/a/se_harness/se_harness/.git/
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:10.1427984Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/mmzen/se_harness
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:10.2057533Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:10.2058301Z ##[group]Disabling automatic garbage collection
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:10.2067362Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:10.2349486Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:10.2350208Z ##[group]Setting up auth
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:10.2361885Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:10.2650712Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:11.7560953Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:11.7867384Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:12.2966051Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:12.3287503Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:12.8708478Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:12.9006682Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:12.9007577Z ##[group]Fetching the repository
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:12.9020812Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +bf852b844d4fb33e2b7492109201757bac31f55a:refs/remotes/pull/487/merge
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6178534Z From https://github.com/mmzen/se_harness
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6179824Z  * [new branch]        artifacts/plugin-implementation          -> origin/artifacts/plugin-implementation
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6182217Z  * [new branch]        docs/readme-plugin-onboarding            -> origin/docs/readme-plugin-onboarding
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6183255Z  * [new branch]        main                                     -> origin/main
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6184864Z  * [new branch]        mmzen-patch-1                            -> origin/mmzen-patch-1
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6186154Z  * [new branch]        mmzen-patch-2                            -> origin/mmzen-patch-2
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6187071Z  * [new branch]        mmzen-patch-3                            -> origin/mmzen-patch-3
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6189120Z  * [new branch]        mmzen-patch-4                            -> origin/mmzen-patch-4
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6190067Z  * [new branch]        plugin-marketplace                       -> origin/plugin-marketplace
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6190994Z  * [new branch]        release/0.10                             -> origin/release/0.10
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6191837Z  * [new branch]        release/0.11                             -> origin/release/0.11
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6192700Z  * [new branch]        release/0.12                             -> origin/release/0.12
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6193576Z  * [new branch]        release/0.12.0                           -> origin/release/0.12.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6194834Z  * [new branch]        release/0.13                             -> origin/release/0.13
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6195447Z  * [new branch]        release/0.13.0                           -> origin/release/0.13.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6195934Z  * [new branch]        release/0.14                             -> origin/release/0.14
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6196469Z  * [new branch]        release/0.14.0                           -> origin/release/0.14.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6196936Z  * [new branch]        release/0.15                             -> origin/release/0.15
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6197387Z  * [new branch]        release/0.15.0                           -> origin/release/0.15.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6197842Z  * [new branch]        release/0.16                             -> origin/release/0.16
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6198277Z  * [new branch]        release/0.16.0                           -> origin/release/0.16.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6198732Z  * [new branch]        release/0.17                             -> origin/release/0.17
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6199234Z  * [new branch]        release/0.17.0                           -> origin/release/0.17.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6199703Z  * [new branch]        release/0.18                             -> origin/release/0.18
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6200156Z  * [new branch]        release/0.2.0                            -> origin/release/0.2.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6200627Z  * [new branch]        release/0.2.1                            -> origin/release/0.2.1
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6201069Z  * [new branch]        release/0.2.2                            -> origin/release/0.2.2
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6202218Z  * [new branch]        release/0.3.0                            -> origin/release/0.3.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6202770Z  * [new branch]        release/0.4.0                            -> origin/release/0.4.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6203252Z  * [new branch]        release/0.6                              -> origin/release/0.6
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6203727Z  * [new branch]        release/0.7                              -> origin/release/0.7
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6204587Z  * [new branch]        release/0.8                              -> origin/release/0.8
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6205023Z  * [new branch]        release/0.9                              -> origin/release/0.9
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6205666Z  * [new branch]        work/plugin-marketplace-publication      -> origin/work/plugin-marketplace-publication
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6206766Z  * [new branch]        work/repository-cleanup                  -> origin/work/repository-cleanup
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6207506Z  * [new tag]           last                                     -> last
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6207938Z  * [new tag]           v0.10.0                                  -> v0.10.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6208301Z  * [new tag]           v0.11.0                                  -> v0.11.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6208658Z  * [new tag]           v0.12.0                                  -> v0.12.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6208999Z  * [new tag]           v0.13.0                                  -> v0.13.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6209335Z  * [new tag]           v0.14.0                                  -> v0.14.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6209671Z  * [new tag]           v0.15.0                                  -> v0.15.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6210184Z  * [new tag]           v0.16.0                                  -> v0.16.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6210527Z  * [new tag]           v0.17.0                                  -> v0.17.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6210864Z  * [new tag]           v0.18.0                                  -> v0.18.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6211209Z  * [new tag]           v0.2.0                                   -> v0.2.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6211568Z  * [new tag]           v0.2.1                                   -> v0.2.1
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6211908Z  * [new tag]           v0.2.2                                   -> v0.2.2
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6212278Z  * [new tag]           v0.3.0                                   -> v0.3.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6212638Z  * [new tag]           v0.4.0                                   -> v0.4.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6212979Z  * [new tag]           v0.4.1                                   -> v0.4.1
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6213313Z  * [new tag]           v0.5.0                                   -> v0.5.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6213667Z  * [new tag]           v0.5.0a1                                 -> v0.5.0a1
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6214017Z  * [new tag]           v0.6.0                                   -> v0.6.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6214355Z  * [new tag]           v0.7.0                                   -> v0.7.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6214692Z  * [new tag]           v0.7.1                                   -> v0.7.1
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6215033Z  * [new tag]           v0.8.0                                   -> v0.8.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6215364Z  * [new tag]           v0.9.0                                   -> v0.9.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6215761Z  * [new ref]           bf852b844d4fb33e2b7492109201757bac31f55a -> pull/487/merge
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6230254Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6231719Z ##[group]Determining the checkout info
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6232586Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6242423Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6711411Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6988238Z ##[group]Checking out the ref
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:17.6996633Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force refs/remotes/pull/487/merge
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:18.7569646Z Updating files:  34% (3632/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:18.7826369Z Updating files:  35% (3656/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:18.8088547Z Updating files:  36% (3760/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:18.8332802Z Updating files:  37% (3864/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.0375199Z Updating files:  38% (3969/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.0650291Z Updating files:  39% (4073/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.0908582Z Updating files:  40% (4178/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.1280262Z Updating files:  41% (4282/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.1615201Z Updating files:  42% (4387/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.1949317Z Updating files:  43% (4491/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.2268969Z Updating files:  44% (4595/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.2554533Z Updating files:  45% (4700/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.2809491Z Updating files:  46% (4804/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.3047406Z Updating files:  47% (4909/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.3281750Z Updating files:  48% (5013/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.3525253Z Updating files:  49% (5118/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.3749166Z Updating files:  50% (5222/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.4045418Z Updating files:  51% (5326/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.4319505Z Updating files:  52% (5431/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.4606530Z Updating files:  53% (5535/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.4905985Z Updating files:  54% (5640/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.5203261Z Updating files:  55% (5744/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.5941696Z Updating files:  56% (5849/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.6209508Z Updating files:  57% (5953/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.6489906Z Updating files:  58% (6057/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.6800681Z Updating files:  59% (6162/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.7075173Z Updating files:  60% (6266/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.7334911Z Updating files:  61% (6371/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.7631366Z Updating files:  62% (6475/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.7643288Z Updating files:  63% (6580/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.7985044Z Updating files:  63% (6584/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.8234222Z Updating files:  64% (6684/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.8477676Z Updating files:  65% (6788/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.8717875Z Updating files:  66% (6893/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.8969324Z Updating files:  67% (6997/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.9223500Z Updating files:  68% (7102/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.9695468Z Updating files:  69% (7206/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:19.9972985Z Updating files:  70% (7311/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:20.0221736Z Updating files:  71% (7415/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:20.0537979Z Updating files:  72% (7519/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:20.0804288Z Updating files:  73% (7624/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:20.1533506Z Updating files:  74% (7728/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:20.1893671Z Updating files:  75% (7833/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:20.3520330Z Updating files:  76% (7937/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:20.3765013Z Updating files:  77% (8042/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:20.4184272Z Updating files:  78% (8146/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:20.4677789Z Updating files:  79% (8250/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:20.8247917Z Updating files:  80% (8355/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:20.9372606Z Updating files:  80% (8378/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:20.9627859Z Updating files:  81% (8459/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:20.9903645Z Updating files:  82% (8564/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.0222583Z Updating files:  83% (8668/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.0734763Z Updating files:  84% (8773/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.1179430Z Updating files:  85% (8877/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.1480010Z Updating files:  86% (8981/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.1736913Z Updating files:  87% (9086/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.2000163Z Updating files:  88% (9190/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.2268286Z Updating files:  89% (9295/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.2568438Z Updating files:  90% (9399/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.2848427Z Updating files:  91% (9504/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.3143534Z Updating files:  92% (9608/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.3614782Z Updating files:  93% (9712/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.3970115Z Updating files:  94% (9817/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.4267517Z Updating files:  95% (9921/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.4614673Z Updating files:  96% (10026/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.4936988Z Updating files:  97% (10130/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5268830Z Updating files:  98% (10235/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5632222Z Updating files:  99% (10339/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5632735Z Updating files: 100% (10443/10443)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5633146Z Updating files: 100% (10443/10443), done.
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5949136Z Note: switching to 'refs/remotes/pull/487/merge'.
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5949568Z 
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5949916Z You are in 'detached HEAD' state. You can look around, make experimental
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5950764Z changes and commit them, and you can discard any commits you make in this
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5953380Z state without impacting any branches by switching back to a branch.
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5953904Z 
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5956391Z If you want to create a new branch to retain commits you create, you may
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5957747Z do so (now or later) by using -c with the switch command. Example:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5958780Z 
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5959296Z   git switch -c <new-branch-name>
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5959645Z 
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5959832Z Or undo this operation with:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5960109Z 
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5960252Z   git switch -
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5960448Z 
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5960814Z Turn off this advice by setting config variable advice.detachedHead to false
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5962223Z 
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.5963403Z HEAD is now at bf852b84 Merge 0dadc352b3a5e6c64c721e1c688cc215438ddd7f into f05c478a29c39f94968fdc842a34c861d30a42ac
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.6497859Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.6983792Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.7239259Z bf852b844d4fb33e2b7492109201757bac31f55a
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.7277990Z ##[group]Removing auth
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.7287171Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:21.7567383Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:22.2752170Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:22.3001920Z http.https://github.com/.extraheader
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:22.3044203Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:22.3336436Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:22.8409427Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:22.8694523Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.3847139Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.4260829Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.4262922Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.4263301Z with:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.4263478Z   python-version: 3.11
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.4263698Z   check-latest: false
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.4266190Z   token: ***
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.4266384Z   update-environment: true
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.4266610Z   allow-prereleases: false
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.4266813Z   freethreaded: false
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.4266993Z env:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.4267160Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.4267559Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.4268101Z   REHEARSAL_HEAD_SHA: 0dadc352b3a5e6c64c721e1c688cc215438ddd7f
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.4268416Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.4268608Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.4268774Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.5829398Z ##[group]Installed versions
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.6102084Z (node:3416) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.6103349Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.6104180Z Successfully set up CPython (3.11.9)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.6104922Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.6417661Z ##[group]Run if (-not $env:PREDECESSOR_VERSION -or -not $env:PREDECESSOR_WHEEL_SHA256) {
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.6418389Z [36;1mif (-not $env:PREDECESSOR_VERSION -or -not $env:PREDECESSOR_WHEEL_SHA256) {[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.6418913Z [36;1m  throw 'predecessor facts were not derived by candidate-source'[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.6419262Z [36;1m}[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.7299170Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.7299540Z env:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.7299733Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.7300174Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.7300714Z   REHEARSAL_HEAD_SHA: 0dadc352b3a5e6c64c721e1c688cc215438ddd7f
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.7301043Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.7301241Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.7301501Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.7302791Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.7303271Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.7303672Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.7304062Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:23.7304412Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.1983523Z ##[group]Run $predecessorDist = Join-Path 'D:\a\_temp' 'predecessor-dist'
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.1984226Z [36;1m$predecessorDist = Join-Path 'D:\a\_temp' 'predecessor-dist'[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.1984735Z [36;1mNew-Item -ItemType Directory -Path $predecessorDist | Out-Null[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.1985300Z [36;1mpython -m pip download --disable-pip-version-check --only-binary=:all: --no-deps `[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.1985855Z [36;1m  --dest $predecessorDist "se-harness==$env:PREDECESSOR_VERSION"[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.1986349Z [36;1m$wheel = Get-ChildItem -LiteralPath $predecessorDist -Filter '*.whl'[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.1986849Z [36;1mif ($wheel.Count -ne 1) { throw 'expected exactly one predecessor wheel' }[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.1987444Z [36;1m$actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $wheel.FullName).Hash.ToLowerInvariant()[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.1988129Z [36;1mif ($actual -ne $env:PREDECESSOR_WHEEL_SHA256) { throw 'predecessor wheel digest mismatch' }[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.2061378Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.2061710Z env:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.2061887Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.2062755Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.2063298Z   REHEARSAL_HEAD_SHA: 0dadc352b3a5e6c64c721e1c688cc215438ddd7f
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.2063616Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.2063806Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.2064069Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.2064491Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.2064918Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.2065309Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.2065686Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:24.2065994Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:29.3750519Z Collecting se-harness==0.18.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:29.5783908Z   Downloading se_harness-0.18.0-py3-none-any.whl.metadata (45 kB)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:29.6915535Z Downloading se_harness-0.18.0-py3-none-any.whl (479 kB)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:29.8268991Z Saved d:\a\_temp\predecessor-dist\se_harness-0.18.0-py3-none-any.whl
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:29.8270928Z Successfully downloaded se-harness
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0012645Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0014173Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0014778Z with:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0015123Z   name: candidate-wheel-non-promotable-bf852b844d4fb33e2b7492109201757bac31f55a
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0015540Z   path: D:\a\_temp/candidate-dist
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0015775Z   merge-multiple: false
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0015978Z   repository: mmzen/se_harness
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0016185Z   run-id: 35101599343
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0016358Z env:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0016524Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0016958Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0017458Z   REHEARSAL_HEAD_SHA: 0dadc352b3a5e6c64c721e1c688cc215438ddd7f
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0018320Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0018517Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0018773Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0019202Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0019638Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0020025Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0020408Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.0020706Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.1768170Z Downloading single artifact
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.1998356Z (node:9104) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.1999412Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.4860660Z Preparing to download the following artifacts:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.4862411Z - candidate-wheel-non-promotable-bf852b844d4fb33e2b7492109201757bac31f55a (ID: 10448686696, Size: 465779, Expected Digest: sha256:d416ac2b6dfcf6002fee8f665fc539e2f0899252e06fab7a9bbb7459c7028fc7)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.7508856Z Redirecting to blob download url: https://productionresultssa0.blob.core.windows.net/actions-results/a2a8429e-d16f-4aa6-a4a6-8a9cdf121c39/workflow-job-run-dbb00d8b-1bd6-5fa8-ae25-627adad0968a/artifacts/f1eb62b39a296f8c594bb6034039fb34fa67968d2d31b07e296f7e20906e7e31.zip
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:30.7511291Z Starting download of artifact to: D:\a\_temp\candidate-dist
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.0444326Z (node:9104) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.2998850Z SHA256 digest of downloaded artifact is d416ac2b6dfcf6002fee8f665fc539e2f0899252e06fab7a9bbb7459c7028fc7
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.2999981Z Artifact download completed successfully.
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3000521Z Total of 1 artifact(s) downloaded
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3008878Z Download artifact has finished successfully
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3308072Z ##[group]Run $candidateDist = Join-Path 'D:\a\_temp' 'candidate-dist'
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3308662Z [36;1m$candidateDist = Join-Path 'D:\a\_temp' 'candidate-dist'[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3309134Z [36;1m$wheel = Get-ChildItem -LiteralPath $candidateDist -Filter '*.whl'[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3309633Z [36;1mif ($wheel.Count -ne 1) { throw 'expected exactly one successor wheel' }[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3310361Z [36;1m$expected = (Get-Content -LiteralPath (Join-Path $candidateDist 'SHA256SUMS') | Where-Object { $_ -match [regex]::Escape($wheel.Name) })[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3311093Z [36;1mif (-not $expected) { throw 'SHA256SUMS does not name the successor wheel' }[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3311588Z [36;1m$expectedDigest = ($expected -split '\s+')[0].ToLowerInvariant()[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3312169Z [36;1m$actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $wheel.FullName).Hash.ToLowerInvariant()[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3312954Z [36;1mif ($actual -ne $expectedDigest) { throw "successor wheel digest mismatch: expected $expectedDigest, got $actual" }[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3383464Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3383808Z env:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3383994Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3384415Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3384934Z   REHEARSAL_HEAD_SHA: 0dadc352b3a5e6c64c721e1c688cc215438ddd7f
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3385249Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3385451Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3385989Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3386440Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3386883Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3387710Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3388204Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.3388537Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7824065Z ##[group]Run $predecessorRoot = Join-Path 'D:\a\_temp' 'predecessor-env'
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7824710Z [36;1m$predecessorRoot = Join-Path 'D:\a\_temp' 'predecessor-env'[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7825155Z [36;1m$successorRoot = Join-Path 'D:\a\_temp' 'successor-env'[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7825523Z [36;1mpython -m venv $predecessorRoot[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7825805Z [36;1mpython -m venv $successorRoot[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7826202Z [36;1m$predecessorPython = Join-Path $predecessorRoot 'Scripts/python.exe'[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7826702Z [36;1m$successorPython = Join-Path $successorRoot 'Scripts/python.exe'[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7827369Z [36;1m$predecessorWheel = (Get-ChildItem -LiteralPath (Join-Path 'D:\a\_temp' 'predecessor-dist') -Filter '*.whl').FullName[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7828189Z [36;1m$successorWheel = (Get-ChildItem -LiteralPath (Join-Path 'D:\a\_temp' 'candidate-dist') -Filter '*.whl').FullName[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7829029Z [36;1m& $predecessorPython -m pip install --disable-pip-version-check --no-index --no-deps $predecessorWheel[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7829771Z [36;1m& $successorPython -m pip install --disable-pip-version-check --no-index --no-deps $successorWheel[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7900281Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7900626Z env:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7900804Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7901224Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7901741Z   REHEARSAL_HEAD_SHA: 0dadc352b3a5e6c64c721e1c688cc215438ddd7f
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7902057Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7902255Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7902536Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7902974Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7903424Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7903825Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7904216Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:31.7904535Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:42.6202934Z Processing d:\a\_temp\predecessor-dist\se_harness-0.18.0-py3-none-any.whl
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:42.6633399Z Installing collected packages: se-harness
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:42.9653572Z Successfully installed se-harness-0.18.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.0016936Z Processing d:\a\_temp\candidate-dist\se_harness-0.19.0-py3-none-any.whl
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.0319018Z Installing collected packages: se-harness
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.2968283Z Successfully installed se-harness-0.19.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3883300Z ##[group]Run # WO-ECP-010 (REQ-ECP-012, ECP-PRD-008): the successor's own upgrade --apply
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3884033Z [36;1m# WO-ECP-010 (REQ-ECP-012, ECP-PRD-008): the successor's own upgrade --apply[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3884609Z [36;1m# against a throwaway export whose lock is the released predecessor's, judged[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3885143Z [36;1m# by both evaluators' doctor and by the resulting lock. No per-release[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3885623Z [36;1m# fixture, no network inside the rehearsal, no write to this checkout.[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3886192Z [36;1m$predecessorPython = Join-Path (Join-Path 'D:\a\_temp' 'predecessor-env') 'Scripts/python.exe'[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3886852Z [36;1m$successorPython = Join-Path (Join-Path 'D:\a\_temp' 'successor-env') 'Scripts/python.exe'[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3887358Z [36;1m$first = Join-Path 'D:\a\_temp' 'rehearsal-result-1'[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3887780Z [36;1m$second = Join-Path 'D:\a\_temp' 'rehearsal-result-2'[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3888763Z [36;1mpython -m repository_tools.upgrade_rehearsal --repository . `[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3889492Z [36;1m  --predecessor-python $predecessorPython --successor-python $successorPython --output $first --workspace $env:RUNNER_TEMP --timings[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3890227Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'first upgrade rehearsal failed' }[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3890688Z [36;1mpython -m repository_tools.upgrade_rehearsal --repository . `[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3891394Z [36;1m  --predecessor-python $predecessorPython --successor-python $successorPython --output $second --workspace $env:RUNNER_TEMP --timings[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3892128Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'second upgrade rehearsal failed' }[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3892780Z [36;1m$firstResult = Get-Content -Raw -LiteralPath (Join-Path $first 'upgrade-rehearsal-result.json') | ConvertFrom-Json[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3893612Z [36;1m$secondResult = Get-Content -Raw -LiteralPath (Join-Path $second 'upgrade-rehearsal-result.json') | ConvertFrom-Json[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3894849Z [36;1mif ($firstResult.semantic_sha256 -ne $secondResult.semantic_sha256) { throw 'upgrade rehearsal replay digest differs' }[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3895749Z [36;1mif ($firstResult.overall_result -ne 'pass' -or $secondResult.overall_result -ne 'pass') { throw 'upgrade rehearsal did not pass' }[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3964590Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3964938Z env:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3965116Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3965535Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3966051Z   REHEARSAL_HEAD_SHA: 0dadc352b3a5e6c64c721e1c688cc215438ddd7f
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3966376Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3966571Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3966829Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3967289Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3967741Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3968137Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3968532Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.3968840Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.8059383Z upgrade timing: start replay
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:44.8075412Z upgrade timing: start git-archive
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:47.3176824Z upgrade timing: end git-archive: 2.510065s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:47.3187121Z upgrade timing: start archive-extraction
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:55.8664255Z upgrade timing: end archive-extraction: 8.547678s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:55.8673609Z upgrade timing: start git-init
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:55.9054421Z upgrade timing: end git-init: 0.038017s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:55.9064371Z upgrade timing: start git-config-maintenance
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:55.9345714Z upgrade timing: end git-config-maintenance: 0.027878s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:55.9352871Z upgrade timing: start git-config-gc
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:55.9625146Z upgrade timing: end git-config-gc: 0.027189s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:55.9635923Z upgrade timing: start git-config-autocrlf
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:55.9910908Z upgrade timing: end git-config-autocrlf: 0.027402s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:55.9921761Z upgrade timing: start git-config-email
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:56.0202689Z upgrade timing: end git-config-email: 0.028042s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:56.0213102Z upgrade timing: start git-config-name
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:56.0489757Z upgrade timing: end git-config-name: 0.027620s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:56.0499600Z upgrade timing: start git-config-signing
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:56.0779729Z upgrade timing: end git-config-signing: 0.027957s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:25:56.0790540Z upgrade timing: start git-add
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:07.0990518Z upgrade timing: end git-add: 11.020018s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:07.1005845Z upgrade timing: start git-commit
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:08.5289256Z upgrade timing: end git-commit: 1.428258s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:08.5300219Z upgrade timing: start git-storage-paths
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:08.5587478Z upgrade timing: end git-storage-paths: 0.028667s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:08.5707203Z upgrade timing: start predecessor-version
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:08.7536658Z upgrade timing: end predecessor-version: 0.182846s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:08.7548307Z upgrade timing: start successor-version
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:08.9445716Z upgrade timing: end successor-version: 0.189638s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:08.9459141Z upgrade timing: start predecessor-doctor-before
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:10.9776141Z upgrade timing: end predecessor-doctor-before: 2.031631s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:10.9790426Z upgrade timing: start successor-upgrade-plan
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:11.2050197Z upgrade timing: end successor-upgrade-plan: 0.225884s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:11.2063566Z upgrade timing: start successor-upgrade-apply
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:11.5690298Z upgrade timing: end successor-upgrade-apply: 0.362576s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:11.5703177Z upgrade timing: start successor-doctor-after
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:13.6063505Z upgrade timing: end successor-doctor-after: 2.035983s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:13.6077167Z upgrade timing: start successor-validate-after
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:17.3417514Z upgrade timing: end successor-validate-after: 3.733995s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:17.3431745Z upgrade timing: start predecessor-doctor-after
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:19.3651790Z upgrade timing: end predecessor-doctor-after: 2.021897s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:19.3668663Z upgrade timing: start scratch-cleanup
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:22.8277293Z upgrade timing: end scratch-cleanup: 3.460808s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:22.8289700Z upgrade timing: end replay: 38.023514s (finished)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:22.8305291Z upgrade rehearsal: FAIL (0.18.0 -> 0.19.0)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:22.8305800Z failure: the resulting lock is schema 4, not 3
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.0789879Z [31;1mException: [0mD:\a\_temp\431c869c-4765-4b2b-86ff-76b2c788119b.ps1:12[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.0790693Z [31;1m[0m[36;1mLine |[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.0791616Z [31;1m[0m[36;1m[36;1m  12 | [0m if ($LASTEXITCODE -ne 0) { [36;1mthrow 'first upgrade rehearsal failed'[0m }[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.0792912Z [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.0794126Z [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mfirst upgrade rehearsal failed[0m
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1016343Z ##[error]Process completed with exit code 1.
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1227463Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1228973Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1229350Z with:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1229535Z   name: upgrade-rehearsal-Windows
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1230293Z   path: D:\a\_temp/rehearsal-result-*/upgrade-rehearsal-result.json
+Upgrade rehearsal (Windows)	UNKNOWN STEP	D:\a\_temp/rehearsal-result-*/upgrade-rehearsal-timing.json
+Upgrade rehearsal (Windows)	UNKNOWN STEP	D:\a\_temp/windows-check-evidence/
+Upgrade rehearsal (Windows)	UNKNOWN STEP	
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1231032Z   if-no-files-found: warn
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1231251Z   retention-days: 14
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1231458Z   compression-level: 6
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1232178Z   overwrite: false
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1232541Z   include-hidden-files: false
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1232967Z env:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1233168Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1233591Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1234128Z   REHEARSAL_HEAD_SHA: 0dadc352b3a5e6c64c721e1c688cc215438ddd7f
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1234458Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1234887Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1235155Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1235599Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1236058Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1236457Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1236852Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.1237172Z ##[endgroup]
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.3251832Z (node:1628) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.3252564Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.3332410Z With the provided path, there will be 2 files uploaded
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.3338278Z Artifact name is valid!
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.3340330Z Root directory input is valid!
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.7224531Z Beginning upload of artifact content to blob storage
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:23.7469604Z (node:1628) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:24.0343675Z Uploaded bytes 2451
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:24.1152512Z Finished uploading artifact content to blob storage!
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:24.1154188Z SHA256 digest of uploaded artifact zip is d5065d17499c99b8476bb12c7c204721c7af6bfdd9727b3c678f5aea1d318c47
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:24.1156555Z Finalizing artifact upload
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:24.4403100Z Artifact upgrade-rehearsal-Windows.zip successfully finalized. Artifact ID 10448078198
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:24.4404358Z Artifact upgrade-rehearsal-Windows has been successfully uploaded! Final size is 2451 bytes. Artifact ID is 10448078198
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:24.4414230Z Artifact download URL: https://github.com/mmzen/se_harness/actions/runs/35101599343/artifacts/10448078198
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:24.4769245Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:24.4770604Z Post job cleanup.
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:24.6708726Z [command]"C:\Program Files\Git\bin\git.exe" version
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:24.6990189Z git version 2.55.0.windows.5
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:24.7055928Z Temporarily overriding HOME='D:\a\_temp\32229e3e-d0ca-4983-9013-28c2f977c4fc' before making global git config changes
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:24.7057058Z Adding repository directory to the temporary git global config as a safe directory
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:24.7067132Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\se_harness\se_harness
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:24.7361116Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:24.7652086Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:25.2967909Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:25.3279597Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:25.8550691Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:25.8837630Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:26.4926844Z Evaluate and set job outputs
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:26.4935033Z Cleaning up orphan processes
+Upgrade rehearsal (Windows)	UNKNOWN STEP	2026-09-16T13:26:26.5078883Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Linux)	UNKNOWN STEP	﻿2026-09-16T13:25:06.5710778Z Current runner version: '2.337.0'
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5737838Z ##[group]Runner Image Provisioner
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5738739Z Hosted Compute Agent
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5739446Z Version: 20260828.587
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5740106Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5740874Z Build Date: 2026-08-28T16:44:25Z
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5741683Z Worker ID: {00f86223-4583-4920-852b-df44e21f2506}
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5742467Z Azure Region: eastus
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5743297Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5744802Z ##[group]Operating System
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5745524Z Ubuntu
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5746290Z 24.04.5
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5746855Z LTS
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5747436Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5747997Z ##[group]Runner Image
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5748581Z Image: ubuntu-24.04
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5749329Z Version: 20260907.300.1
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5750696Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260907.300/images/ubuntu/Ubuntu2404-Readme.md
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5752315Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260907.300
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5753337Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5754493Z ##[group]GITHUB_TOKEN Permissions
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5757203Z Contents: read
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5757858Z Metadata: read
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5758519Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5760760Z Secret source: Actions
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5761728Z Cache mode: write
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.5762572Z Prepare workflow directory
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.6320371Z Prepare all required actions
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.6370910Z Getting action download info
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:06.8851403Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.0397209Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.1261896Z Download action repository 'actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.2962481Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.5361856Z Complete job name: Upgrade rehearsal (Linux)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6431498Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6444029Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6445718Z with:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6446749Z   fetch-depth: 0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6447636Z   persist-credentials: false
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6448654Z   repository: mmzen/se_harness
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6457638Z   token: ***
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6458499Z   ssh-strict: true
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6459351Z   ssh-user: git
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6460611Z   clean: true
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6461522Z   sparse-checkout-cone-mode: true
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6462568Z   fetch-tags: false
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6463440Z   show-progress: true
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6464388Z   lfs: false
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6465201Z   submodules: false
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6466436Z   set-safe-directory: true
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6467481Z   allow-unsafe-pr-checkout: false
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6468925Z env:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6469738Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6471371Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6473445Z   REHEARSAL_HEAD_SHA: 0dadc352b3a5e6c64c721e1c688cc215438ddd7f
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6474864Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6552958Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.6554510Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.7644980Z Syncing repository: mmzen/se_harness
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.7649983Z ##[group]Getting Git version info
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.7652193Z Working directory is '/home/runner/work/se_harness/se_harness'
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.7655354Z [command]/usr/bin/git version
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.7739736Z git version 2.55.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.7766240Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.7783273Z Temporarily overriding HOME='/home/runner/work/_temp/48d0119c-fa6a-4c61-bff4-69e5797ec241' before making global git config changes
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.7787200Z Adding repository directory to the temporary git global config as a safe directory
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.7791093Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/se_harness/se_harness
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.7850672Z Deleting the contents of '/home/runner/work/se_harness/se_harness'
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.7857598Z ##[group]Initializing the repository
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.7862853Z [command]/usr/bin/git init /home/runner/work/se_harness/se_harness
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8014432Z hint: Using 'master' as the name for the initial branch. This default branch name
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8017519Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8020705Z hint: to use in all of your new repositories, which will suppress this warning,
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8023149Z hint: call:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8024071Z hint:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8025619Z hint: 	git config --global init.defaultBranch <name>
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8027234Z hint:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8028335Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8030140Z hint: 'development'. The just-created branch can be renamed via this command:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8031573Z hint:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8032530Z hint: 	git branch -m <name>
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8033612Z hint:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8035057Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8037641Z Initialized empty Git repository in /home/runner/work/se_harness/se_harness/.git/
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8041006Z [command]/usr/bin/git remote add origin https://github.com/mmzen/se_harness
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8097887Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8103963Z ##[group]Disabling automatic garbage collection
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8112489Z [command]/usr/bin/git config --local gc.auto 0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8142285Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8143965Z ##[group]Setting up auth
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8151670Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8190597Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8632454Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8671973Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8923190Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.8964511Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.9226401Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.9271246Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.9272782Z ##[group]Fetching the repository
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:07.9283542Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/* +bf852b844d4fb33e2b7492109201757bac31f55a:refs/remotes/pull/487/merge
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4937597Z From https://github.com/mmzen/se_harness
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4938989Z  * [new branch]        artifacts/plugin-implementation          -> origin/artifacts/plugin-implementation
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4941205Z  * [new branch]        docs/readme-plugin-onboarding            -> origin/docs/readme-plugin-onboarding
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4942425Z  * [new branch]        main                                     -> origin/main
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4943438Z  * [new branch]        mmzen-patch-1                            -> origin/mmzen-patch-1
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4944489Z  * [new branch]        mmzen-patch-2                            -> origin/mmzen-patch-2
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4945676Z  * [new branch]        mmzen-patch-3                            -> origin/mmzen-patch-3
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4947043Z  * [new branch]        mmzen-patch-4                            -> origin/mmzen-patch-4
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4948088Z  * [new branch]        plugin-marketplace                       -> origin/plugin-marketplace
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4949158Z  * [new branch]        release/0.10                             -> origin/release/0.10
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4950206Z  * [new branch]        release/0.11                             -> origin/release/0.11
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4951278Z  * [new branch]        release/0.12                             -> origin/release/0.12
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4952379Z  * [new branch]        release/0.12.0                           -> origin/release/0.12.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4953556Z  * [new branch]        release/0.13                             -> origin/release/0.13
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4954728Z  * [new branch]        release/0.13.0                           -> origin/release/0.13.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4955798Z  * [new branch]        release/0.14                             -> origin/release/0.14
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4957074Z  * [new branch]        release/0.14.0                           -> origin/release/0.14.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4958088Z  * [new branch]        release/0.15                             -> origin/release/0.15
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4959085Z  * [new branch]        release/0.15.0                           -> origin/release/0.15.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4960074Z  * [new branch]        release/0.16                             -> origin/release/0.16
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4961234Z  * [new branch]        release/0.16.0                           -> origin/release/0.16.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4962503Z  * [new branch]        release/0.17                             -> origin/release/0.17
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4964013Z  * [new branch]        release/0.17.0                           -> origin/release/0.17.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4965204Z  * [new branch]        release/0.18                             -> origin/release/0.18
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4966558Z  * [new branch]        release/0.2.0                            -> origin/release/0.2.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4967463Z  * [new branch]        release/0.2.1                            -> origin/release/0.2.1
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4968366Z  * [new branch]        release/0.2.2                            -> origin/release/0.2.2
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4969281Z  * [new branch]        release/0.3.0                            -> origin/release/0.3.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4970187Z  * [new branch]        release/0.4.0                            -> origin/release/0.4.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4971129Z  * [new branch]        release/0.6                              -> origin/release/0.6
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4972256Z  * [new branch]        release/0.7                              -> origin/release/0.7
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4973149Z  * [new branch]        release/0.8                              -> origin/release/0.8
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4974073Z  * [new branch]        release/0.9                              -> origin/release/0.9
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4975312Z  * [new branch]        work/plugin-marketplace-publication      -> origin/work/plugin-marketplace-publication
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4976398Z  * [new branch]        work/repository-cleanup                  -> origin/work/repository-cleanup
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4976980Z  * [new tag]           last                                     -> last
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4977430Z  * [new tag]           v0.10.0                                  -> v0.10.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4978196Z  * [new tag]           v0.11.0                                  -> v0.11.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4978621Z  * [new tag]           v0.12.0                                  -> v0.12.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4979047Z  * [new tag]           v0.13.0                                  -> v0.13.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4979512Z  * [new tag]           v0.14.0                                  -> v0.14.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4979946Z  * [new tag]           v0.15.0                                  -> v0.15.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4980365Z  * [new tag]           v0.16.0                                  -> v0.16.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4980783Z  * [new tag]           v0.17.0                                  -> v0.17.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4981220Z  * [new tag]           v0.18.0                                  -> v0.18.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4981656Z  * [new tag]           v0.2.0                                   -> v0.2.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4982084Z  * [new tag]           v0.2.1                                   -> v0.2.1
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4982528Z  * [new tag]           v0.2.2                                   -> v0.2.2
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4982952Z  * [new tag]           v0.3.0                                   -> v0.3.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4983380Z  * [new tag]           v0.4.0                                   -> v0.4.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4984059Z  * [new tag]           v0.4.1                                   -> v0.4.1
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4984850Z  * [new tag]           v0.5.0                                   -> v0.5.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4985754Z  * [new tag]           v0.5.0a1                                 -> v0.5.0a1
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4986770Z  * [new tag]           v0.6.0                                   -> v0.6.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4987232Z  * [new tag]           v0.7.0                                   -> v0.7.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4987673Z  * [new tag]           v0.7.1                                   -> v0.7.1
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4988130Z  * [new tag]           v0.8.0                                   -> v0.8.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4988591Z  * [new tag]           v0.9.0                                   -> v0.9.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4989092Z  * [new ref]           bf852b844d4fb33e2b7492109201757bac31f55a -> pull/487/merge
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4990621Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4991290Z ##[group]Determining the checkout info
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4991804Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.4992118Z [command]/usr/bin/git sparse-checkout disable
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.5027749Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.5070821Z ##[group]Checking out the ref
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:10.5076397Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/487/merge
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.5257754Z Updating files:  89% (9349/10443)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.5334098Z Updating files:  90% (9399/10443)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.5406527Z Updating files:  91% (9504/10443)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.5481188Z Updating files:  92% (9608/10443)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.5680029Z Updating files:  93% (9712/10443)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.5791526Z Updating files:  94% (9817/10443)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.5870316Z Updating files:  95% (9921/10443)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.5938737Z Updating files:  96% (10026/10443)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6007293Z Updating files:  97% (10130/10443)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6081087Z Updating files:  98% (10235/10443)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6200289Z Updating files:  99% (10339/10443)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6200879Z Updating files: 100% (10443/10443)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6201336Z Updating files: 100% (10443/10443), done.
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6331661Z Note: switching to 'refs/remotes/pull/487/merge'.
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6332161Z 
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6332524Z You are in 'detached HEAD' state. You can look around, make experimental
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6333374Z changes and commit them, and you can discard any commits you make in this
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6334179Z state without impacting any branches by switching back to a branch.
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6334667Z 
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6334980Z If you want to create a new branch to retain commits you create, you may
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6336191Z do so (now or later) by using -c with the switch command. Example:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6336495Z 
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6336609Z   git switch -c <new-branch-name>
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6336791Z 
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6336892Z Or undo this operation with:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6337070Z 
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6337159Z   git switch -
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6337285Z 
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6337497Z Turn off this advice by setting config variable advice.detachedHead to false
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6337886Z 
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6338235Z HEAD is now at bf852b84 Merge 0dadc352b3a5e6c64c721e1c688cc215438ddd7f into f05c478a29c39f94968fdc842a34c861d30a42ac
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6441746Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6491931Z [command]/usr/bin/git log -1 --format=%H
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6523445Z bf852b844d4fb33e2b7492109201757bac31f55a
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6536980Z ##[group]Removing auth
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6541373Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6578823Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6839241Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6871357Z http.https://github.com/.extraheader
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6907200Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.6921550Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7191984Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7237057Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7515047Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7771834Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7773725Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7774101Z with:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7774311Z   python-version: 3.11
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7774534Z   check-latest: false
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7777481Z   token: ***
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7777716Z   update-environment: true
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7777967Z   allow-prereleases: false
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7778205Z   freethreaded: false
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7778407Z env:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7778603Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7779037Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7779607Z   REHEARSAL_HEAD_SHA: 0dadc352b3a5e6c64c721e1c688cc215438ddd7f
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7779940Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7780152Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.7780341Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9182292Z ##[group]Installed versions
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9304045Z (node:2367) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9304757Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9306125Z Successfully set up CPython (3.11.16)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9307060Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9461063Z ##[group]Run if (-not $env:PREDECESSOR_VERSION -or -not $env:PREDECESSOR_WHEEL_SHA256) {
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9461794Z [36;1mif (-not $env:PREDECESSOR_VERSION -or -not $env:PREDECESSOR_WHEEL_SHA256) {[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9462328Z [36;1m  throw 'predecessor facts were not derived by candidate-source'[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9462891Z [36;1m}[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9533258Z shell: /usr/bin/pwsh -command ". '{0}'"
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9533600Z env:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9533827Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9534284Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9534844Z   REHEARSAL_HEAD_SHA: 0dadc352b3a5e6c64c721e1c688cc215438ddd7f
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9535195Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9535419Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9535688Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9536749Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9537483Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9537959Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9538356Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9538857Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:11.9539225Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:15.9975559Z ##[group]Run $predecessorDist = Join-Path '/home/runner/work/_temp' 'predecessor-dist'
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:15.9976627Z [36;1m$predecessorDist = Join-Path '/home/runner/work/_temp' 'predecessor-dist'[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:15.9977163Z [36;1mNew-Item -ItemType Directory -Path $predecessorDist | Out-Null[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:15.9977726Z [36;1mpython -m pip download --disable-pip-version-check --only-binary=:all: --no-deps `[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:15.9978294Z [36;1m  --dest $predecessorDist "se-harness==$env:PREDECESSOR_VERSION"[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:15.9978783Z [36;1m$wheel = Get-ChildItem -LiteralPath $predecessorDist -Filter '*.whl'[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:15.9979297Z [36;1mif ($wheel.Count -ne 1) { throw 'expected exactly one predecessor wheel' }[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:15.9979916Z [36;1m$actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $wheel.FullName).Hash.ToLowerInvariant()[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:15.9980640Z [36;1mif ($actual -ne $env:PREDECESSOR_WHEEL_SHA256) { throw 'predecessor wheel digest mismatch' }[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:16.0021366Z shell: /usr/bin/pwsh -command ". '{0}'"
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:16.0021653Z env:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:16.0021857Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:16.0022294Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:16.0022829Z   REHEARSAL_HEAD_SHA: 0dadc352b3a5e6c64c721e1c688cc215438ddd7f
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:16.0023169Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:16.0023387Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:16.0023656Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:16.0024080Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:16.0024492Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:16.0024863Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:16.0025243Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:16.0025632Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:16.0026210Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:18.6106633Z Collecting se-harness==0.18.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:18.6635721Z   Downloading se_harness-0.18.0-py3-none-any.whl.metadata (45 kB)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:18.6921691Z Downloading se_harness-0.18.0-py3-none-any.whl (479 kB)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:18.7232348Z Saved /home/runner/work/_temp/predecessor-dist/se_harness-0.18.0-py3-none-any.whl
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:18.7233363Z Successfully downloaded se-harness
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0923508Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0924922Z ##[group]Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0925546Z with:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0926854Z   name: candidate-wheel-non-promotable-bf852b844d4fb33e2b7492109201757bac31f55a
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0927471Z   path: /home/runner/work/_temp/candidate-dist
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0927765Z   merge-multiple: false
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0927999Z   repository: mmzen/se_harness
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0928238Z   run-id: 35101599343
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0928434Z env:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0928624Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0929076Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0929601Z   REHEARSAL_HEAD_SHA: 0dadc352b3a5e6c64c721e1c688cc215438ddd7f
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0929932Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0930144Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0930410Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0930836Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0931265Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0931639Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0932014Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0932386Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.0932697Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.2865111Z Downloading single artifact
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.3041674Z (node:2437) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.3043242Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.3881182Z Preparing to download the following artifacts:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.3883305Z - candidate-wheel-non-promotable-bf852b844d4fb33e2b7492109201757bac31f55a (ID: 10448686696, Size: 465779, Expected Digest: sha256:d416ac2b6dfcf6002fee8f665fc539e2f0899252e06fab7a9bbb7459c7028fc7)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5064661Z Redirecting to blob download url: https://productionresultssa0.blob.core.windows.net/actions-results/a2a8429e-d16f-4aa6-a4a6-8a9cdf121c39/workflow-job-run-dbb00d8b-1bd6-5fa8-ae25-627adad0968a/artifacts/f1eb62b39a296f8c594bb6034039fb34fa67968d2d31b07e296f7e20906e7e31.zip
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5067425Z Starting download of artifact to: /home/runner/work/_temp/candidate-dist
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5507162Z (node:2437) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5689470Z SHA256 digest of downloaded artifact is d416ac2b6dfcf6002fee8f665fc539e2f0899252e06fab7a9bbb7459c7028fc7
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5690603Z Artifact download completed successfully.
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5691156Z Total of 1 artifact(s) downloaded
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5696182Z Download artifact has finished successfully
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5816657Z ##[group]Run $candidateDist = Join-Path '/home/runner/work/_temp' 'candidate-dist'
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5817334Z [36;1m$candidateDist = Join-Path '/home/runner/work/_temp' 'candidate-dist'[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5817842Z [36;1m$wheel = Get-ChildItem -LiteralPath $candidateDist -Filter '*.whl'[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5818341Z [36;1mif ($wheel.Count -ne 1) { throw 'expected exactly one successor wheel' }[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5819095Z [36;1m$expected = (Get-Content -LiteralPath (Join-Path $candidateDist 'SHA256SUMS') | Where-Object { $_ -match [regex]::Escape($wheel.Name) })[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5819843Z [36;1mif (-not $expected) { throw 'SHA256SUMS does not name the successor wheel' }[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5820366Z [36;1m$expectedDigest = ($expected -split '\s+')[0].ToLowerInvariant()[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5820954Z [36;1m$actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $wheel.FullName).Hash.ToLowerInvariant()[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5821746Z [36;1mif ($actual -ne $expectedDigest) { throw "successor wheel digest mismatch: expected $expectedDigest, got $actual" }[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5863022Z shell: /usr/bin/pwsh -command ". '{0}'"
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5863327Z env:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5863542Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5863973Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5864498Z   REHEARSAL_HEAD_SHA: 0dadc352b3a5e6c64c721e1c688cc215438ddd7f
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5864841Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5865065Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5865342Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5865791Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5866592Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5866987Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5867385Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5867778Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:19.5868119Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4435029Z ##[group]Run $predecessorRoot = Join-Path '/home/runner/work/_temp' 'predecessor-env'
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4435688Z [36;1m$predecessorRoot = Join-Path '/home/runner/work/_temp' 'predecessor-env'[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4436642Z [36;1m$successorRoot = Join-Path '/home/runner/work/_temp' 'successor-env'[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4437078Z [36;1mpython -m venv $predecessorRoot[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4437386Z [36;1mpython -m venv $successorRoot[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4437797Z [36;1m$predecessorPython = Join-Path $predecessorRoot 'bin/python'[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4438281Z [36;1m$successorPython = Join-Path $successorRoot 'bin/python'[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4438985Z [36;1m$predecessorWheel = (Get-ChildItem -LiteralPath (Join-Path '/home/runner/work/_temp' 'predecessor-dist') -Filter '*.whl').FullName[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4439893Z [36;1m$successorWheel = (Get-ChildItem -LiteralPath (Join-Path '/home/runner/work/_temp' 'candidate-dist') -Filter '*.whl').FullName[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4440812Z [36;1m& $predecessorPython -m pip install --disable-pip-version-check --no-index --no-deps $predecessorWheel[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4441545Z [36;1m& $successorPython -m pip install --disable-pip-version-check --no-index --no-deps $successorWheel[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4482071Z shell: /usr/bin/pwsh -command ". '{0}'"
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4482376Z env:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4482595Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4483045Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4483581Z   REHEARSAL_HEAD_SHA: 0dadc352b3a5e6c64c721e1c688cc215438ddd7f
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4483929Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4484154Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4484421Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4484844Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4485281Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4485678Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4486450Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4486843Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:20.4487173Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.0622748Z Processing /home/runner/work/_temp/predecessor-dist/se_harness-0.18.0-py3-none-any.whl
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.0728785Z Installing collected packages: se-harness
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.2754576Z Successfully installed se-harness-0.18.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.6646503Z Processing /home/runner/work/_temp/candidate-dist/se_harness-0.19.0-py3-none-any.whl
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.6743258Z Installing collected packages: se-harness
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.8722942Z Successfully installed se-harness-0.19.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9753534Z ##[group]Run # WO-ECP-010 (REQ-ECP-012, ECP-PRD-008): the successor's own upgrade --apply
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9754385Z [36;1m# WO-ECP-010 (REQ-ECP-012, ECP-PRD-008): the successor's own upgrade --apply[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9754947Z [36;1m# against a throwaway export whose lock is the released predecessor's, judged[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9755479Z [36;1m# by both evaluators' doctor and by the resulting lock. No per-release[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9756296Z [36;1m# fixture, no network inside the rehearsal, no write to this checkout.[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9756928Z [36;1m$predecessorPython = Join-Path (Join-Path '/home/runner/work/_temp' 'predecessor-env') 'bin/python'[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9757627Z [36;1m$successorPython = Join-Path (Join-Path '/home/runner/work/_temp' 'successor-env') 'bin/python'[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9758198Z [36;1m$first = Join-Path '/home/runner/work/_temp' 'rehearsal-result-1'[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9758748Z [36;1m$second = Join-Path '/home/runner/work/_temp' 'rehearsal-result-2'[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9759233Z [36;1mpython -m repository_tools.upgrade_rehearsal --repository . `[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9759969Z [36;1m  --predecessor-python $predecessorPython --successor-python $successorPython --output $first --workspace $env:RUNNER_TEMP --timings[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9760700Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'first upgrade rehearsal failed' }[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9761180Z [36;1mpython -m repository_tools.upgrade_rehearsal --repository . `[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9761894Z [36;1m  --predecessor-python $predecessorPython --successor-python $successorPython --output $second --workspace $env:RUNNER_TEMP --timings[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9762629Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'second upgrade rehearsal failed' }[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9763296Z [36;1m$firstResult = Get-Content -Raw -LiteralPath (Join-Path $first 'upgrade-rehearsal-result.json') | ConvertFrom-Json[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9764122Z [36;1m$secondResult = Get-Content -Raw -LiteralPath (Join-Path $second 'upgrade-rehearsal-result.json') | ConvertFrom-Json[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9764981Z [36;1mif ($firstResult.semantic_sha256 -ne $secondResult.semantic_sha256) { throw 'upgrade rehearsal replay digest differs' }[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9766092Z [36;1mif ($firstResult.overall_result -ne 'pass' -or $secondResult.overall_result -ne 'pass') { throw 'upgrade rehearsal did not pass' }[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9806240Z shell: /usr/bin/pwsh -command ". '{0}'"
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9806533Z env:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9806791Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9807232Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9807768Z   REHEARSAL_HEAD_SHA: 0dadc352b3a5e6c64c721e1c688cc215438ddd7f
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9808133Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9808368Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9808646Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9809102Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9809535Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9809933Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9810315Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9810701Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:29.9811025Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:30.7225416Z upgrade timing: start replay
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:30.7232466Z upgrade timing: start git-archive
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:31.5695317Z upgrade timing: end git-archive: 0.846142s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:31.5701683Z upgrade timing: start archive-extraction
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:34.4582049Z upgrade timing: end archive-extraction: 2.887878s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:34.4587731Z upgrade timing: start git-init
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:34.4628946Z upgrade timing: end git-init: 0.004115s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:34.4634713Z upgrade timing: start git-config-maintenance
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:34.4656155Z upgrade timing: end git-config-maintenance: 0.002143s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:34.4662493Z upgrade timing: start git-config-gc
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:34.4682855Z upgrade timing: end git-config-gc: 0.002011s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:34.4688305Z upgrade timing: start git-config-autocrlf
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:34.4708258Z upgrade timing: end git-config-autocrlf: 0.001968s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:34.4713784Z upgrade timing: start git-config-email
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:34.4733575Z upgrade timing: end git-config-email: 0.001948s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:34.4739556Z upgrade timing: start git-config-name
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:34.4759414Z upgrade timing: end git-config-name: 0.001953s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:34.4764961Z upgrade timing: start git-config-signing
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:34.4785071Z upgrade timing: end git-config-signing: 0.001982s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:34.4791065Z upgrade timing: start git-add
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:40.1602026Z upgrade timing: end git-add: 5.680947s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:40.1609833Z upgrade timing: start git-commit
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:40.4451298Z upgrade timing: end git-commit: 0.284046s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:40.4459386Z upgrade timing: start git-storage-paths
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:40.4483894Z upgrade timing: end git-storage-paths: 0.002436s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:40.4567184Z upgrade timing: start predecessor-version
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:40.6107605Z upgrade timing: end predecessor-version: 0.154009s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:40.6119476Z upgrade timing: start successor-version
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:40.7671994Z upgrade timing: end successor-version: 0.155097s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:40.7954641Z upgrade timing: start predecessor-doctor-before
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:41.8469756Z upgrade timing: end predecessor-doctor-before: 1.051471s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:41.8478280Z upgrade timing: start successor-upgrade-plan
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:41.9944276Z upgrade timing: end successor-upgrade-plan: 0.146525s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:41.9954147Z upgrade timing: start successor-upgrade-apply
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:42.1952784Z upgrade timing: end successor-upgrade-apply: 0.199765s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:42.1960605Z upgrade timing: start successor-doctor-after
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:43.1251100Z upgrade timing: end successor-doctor-after: 0.928912s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:43.1260056Z upgrade timing: start successor-validate-after
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:44.6534892Z upgrade timing: end successor-validate-after: 1.527363s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:44.6544010Z upgrade timing: start predecessor-doctor-after
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:45.5890103Z upgrade timing: end predecessor-doctor-after: 0.934503s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:45.5901831Z upgrade timing: start scratch-cleanup
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.1703668Z upgrade timing: end scratch-cleanup: 0.580094s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.1710385Z upgrade timing: end replay: 15.448598s (finished)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.1718654Z upgrade rehearsal: FAIL (0.18.0 -> 0.19.0)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.1719209Z failure: the resulting lock is schema 4, not 3
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.3984265Z [31;1mException: [0m/home/runner/work/_temp/9524a242-68ca-43d8-a836-009c0f123d0c.ps1:12[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.3984906Z [31;1m[0m[36;1mLine |[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.3985550Z [31;1m[0m[36;1m[36;1m  12 | [0m if ($LASTEXITCODE -ne 0) { [36;1mthrow 'first upgrade rehearsal failed'[0m }[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.3986762Z [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4397297Z [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mfirst upgrade rehearsal failed[0m
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4408776Z ##[error]Process completed with exit code 1.
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4508226Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4509595Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4510165Z with:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4510379Z   name: upgrade-rehearsal-Linux
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4511211Z   path: /home/runner/work/_temp/rehearsal-result-*/upgrade-rehearsal-result.json
+Upgrade rehearsal (Linux)	UNKNOWN STEP	/home/runner/work/_temp/rehearsal-result-*/upgrade-rehearsal-timing.json
+Upgrade rehearsal (Linux)	UNKNOWN STEP	/home/runner/work/_temp/windows-check-evidence/
+Upgrade rehearsal (Linux)	UNKNOWN STEP	
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4512082Z   if-no-files-found: warn
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4512321Z   retention-days: 14
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4512540Z   compression-level: 6
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4512758Z   overwrite: false
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4513015Z   include-hidden-files: false
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4513268Z env:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4513466Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4513885Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4514407Z   REHEARSAL_HEAD_SHA: 0dadc352b3a5e6c64c721e1c688cc215438ddd7f
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4514751Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4514966Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4515244Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4515665Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4516519Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4516917Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4517300Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4517687Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.4518006Z ##[endgroup]
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.6241312Z (node:2676) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.6242505Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.6328165Z With the provided path, there will be 2 files uploaded
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.6337067Z Artifact name is valid!
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.6337606Z Root directory input is valid!
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.8159672Z Beginning upload of artifact content to blob storage
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.8377321Z (node:2676) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.8710588Z Uploaded bytes 2422
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.8862758Z Finished uploading artifact content to blob storage!
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.8864083Z SHA256 digest of uploaded artifact zip is 9c99bd35dfe2ac9e643207beb5326f12820745814d6f1e511a10e15d9f08a9c6
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:46.8865273Z Finalizing artifact upload
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.0861187Z Artifact upgrade-rehearsal-Linux.zip successfully finalized. Artifact ID 10448617175
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.0862599Z Artifact upgrade-rehearsal-Linux has been successfully uploaded! Final size is 2422 bytes. Artifact ID is 10448617175
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.0869039Z Artifact download URL: https://github.com/mmzen/se_harness/actions/runs/35101599343/artifacts/10448617175
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.1096607Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.1097858Z Post job cleanup.
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.1974848Z [command]/usr/bin/git version
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.2022807Z git version 2.55.0
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.2069493Z Temporarily overriding HOME='/home/runner/work/_temp/149f83ce-734d-4ca9-b126-e7358bc997fe' before making global git config changes
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.2070929Z Adding repository directory to the temporary git global config as a safe directory
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.2076214Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/se_harness/se_harness
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.2123133Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.2161931Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.2463052Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.2509151Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.2814575Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.2857772Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.3300018Z Evaluate and set job outputs
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.3306498Z Cleaning up orphan processes
+Upgrade rehearsal (Linux)	UNKNOWN STEP	2026-09-16T13:25:47.3606319Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
