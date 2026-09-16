@@ -1,0 +1,1500 @@
+{
+  "migration-after": {
+    "lock_comparison_passed": true,
+    "removed_files": [
+      ".agents/skills/harness-operator-brief/SKILL.md",
+      ".agents/skills/harness-operator-brief/scripts/check_brief.py",
+      ".agents/skills/harness-operator-brief/skill-contract.json",
+      ".agents/skills/harness-orient/SKILL.md",
+      ".agents/skills/harness-orient/scripts/orient.py",
+      ".agents/skills/harness-orient/skill-contract.json",
+      ".claude/skills/harness-orient/SKILL.md",
+      ".engineering-harness.delegation.toml"
+    ],
+    "unrelated_lock_entries_and_evaluator_unchanged": true,
+    "provider": {
+      "provider": "plugin"
+    },
+    "schema": 4
+  },
+  "portability-summary": {
+    "passed": true,
+    "fixture": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-portability",
+    "copied_files": 10422,
+    "governor": "0.18.0",
+    "plugin_path_required_for_doctor_or_upgrade": false,
+    "same_release_upgrade_preserved_provider_and_inventory": true,
+    "restoration_matches_released_templates": true,
+    "repeated_switch_converges": true,
+    "limit": "Windows local copy without Git metadata; no new platform or host qualification claim."
+  },
+  "portability-commands": [
+    {
+      "label": "doctor-without-plugin-path",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-portability",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "elapsed_seconds": 32.477
+    },
+    {
+      "label": "upgrade-preview",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-portability",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "elapsed_seconds": 1.68
+    },
+    {
+      "label": "upgrade-apply",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-portability",
+        "--apply",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "elapsed_seconds": 2.913
+    },
+    {
+      "label": "restore-preview",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "skill-ownership",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-portability",
+        "--provider",
+        "repository",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "elapsed_seconds": 1.47
+    },
+    {
+      "label": "restore-apply",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "skill-ownership",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-portability",
+        "--provider",
+        "repository",
+        "--apply",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "elapsed_seconds": 2.024
+    },
+    {
+      "label": "restored-doctor",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-portability",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "elapsed_seconds": 35.826
+    },
+    {
+      "label": "switch-preview",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "skill-ownership",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-portability",
+        "--provider",
+        "plugin",
+        "--plugin-root",
+        "C:\\Users\\hok\\.codex\\plugins\\cache\\se-harness\\verity-plane\\0.1.0",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "elapsed_seconds": 1.539
+    },
+    {
+      "label": "switch-apply",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "skill-ownership",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-portability",
+        "--provider",
+        "plugin",
+        "--plugin-root",
+        "C:\\Users\\hok\\.codex\\plugins\\cache\\se-harness\\verity-plane\\0.1.0",
+        "--apply",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "elapsed_seconds": 1.497
+    },
+    {
+      "label": "repeat-switch",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "skill-ownership",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-portability",
+        "--provider",
+        "plugin",
+        "--plugin-root",
+        "C:\\Users\\hok\\.codex\\plugins\\cache\\se-harness\\verity-plane\\0.1.0",
+        "--apply",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "elapsed_seconds": 1.61
+    },
+    {
+      "label": "final-doctor",
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-portability",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "elapsed_seconds": 21.018
+    }
+  ],
+  "portability-helper-failure": {
+    "disposition": "Preserve the successful command records; resume only the comparison and remaining switch checks from the restored fixture.",
+    "error": "AssertionError: checker helper looked for templates in Lib/site-packages/templates/repository/standard",
+    "phase": "released-template comparison after successful restoration",
+    "actual_template_path": "work/evaluator-018/share/se-harness/templates/repository/standard",
+    "applied_operations": [
+      "upgrade",
+      "repository restoration"
+    ]
+  },
+  "discovery-summary": {
+    "passed": true,
+    "hosts": [
+      {
+        "host": "codex",
+        "version": "codex-cli 0.154.0-alpha.6.2",
+        "discovered_skills": [
+          "change",
+          "evidence",
+          "harness-orient",
+          "setup"
+        ],
+        "package_files_matching_previous_acceptance": 24,
+        "passed": true
+      },
+      {
+        "host": "claude",
+        "version": "2.1.269 (Claude Code)",
+        "discovered_skills": [
+          "change",
+          "evidence",
+          "harness-orient",
+          "setup",
+          "harness-operator-brief"
+        ],
+        "package_files_matching_previous_acceptance": 24,
+        "passed": true
+      }
+    ],
+    "package_identity_source": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\docs\\engineering\\plugin-integration\\evidence\\WO-PLG-023\\PACKAGE-IDENTITY.json",
+    "package_identity_sha256": "f47b3281d2a6182a91f5a3b59129e04316258906070dc39b90a347a48c06fc05",
+    "limits": "Native discovery in previously disposable profiles against the cleaned checkout; no install, model call or persistent user-profile change. Codex briefing is explicit-only."
+  },
+  "discovery-commands": [
+    {
+      "label": "codex-version",
+      "argv": [
+        "C:\\Users\\hok\\AppData\\Local\\OpenAI\\Codex\\bin\\12219cbfbcbddde7\\codex.exe",
+        "--version"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "profile": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\profile",
+      "exit_code": 0
+    },
+    {
+      "label": "codex-discovery",
+      "argv": [
+        "C:\\Users\\hok\\AppData\\Local\\OpenAI\\Codex\\bin\\12219cbfbcbddde7\\codex.exe",
+        "debug",
+        "prompt-input",
+        "Use verity-plane:setup to inspect this repository."
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "profile": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\codex\\profile",
+      "exit_code": 0
+    },
+    {
+      "label": "claude-version",
+      "argv": [
+        "C:\\Users\\hok\\.local\\bin\\claude.exe",
+        "--version"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "profile": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\profile",
+      "exit_code": 0
+    },
+    {
+      "label": "claude-discovery",
+      "argv": [
+        "C:\\Users\\hok\\.local\\bin\\claude.exe",
+        "plugin",
+        "details",
+        "verity-plane@se-harness"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "profile": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-marketplace-governed-acceptance-retry\\claude\\profile",
+      "exit_code": 0
+    }
+  ],
+  "diff-review": {
+    "passed": true,
+    "baseline": "f05c478a29c39f94968fdc842a34c861d30a42ac",
+    "changed_paths": [
+      ".agents/skills/harness-operator-brief/SKILL.md",
+      ".agents/skills/harness-operator-brief/scripts/check_brief.py",
+      ".agents/skills/harness-operator-brief/skill-contract.json",
+      ".agents/skills/harness-orient/SKILL.md",
+      ".agents/skills/harness-orient/scripts/orient.py",
+      ".agents/skills/harness-orient/skill-contract.json",
+      ".claude/skills/harness-orient/SKILL.md",
+      ".engineering-harness.delegation.toml",
+      ".engineering-harness.lock",
+      "AGENTS.md",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-024.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-024.md",
+      "docs/notes/README.md",
+      "docs/notes/agentic-execution-plugin-distribution.md",
+      "docs/notes/codebase-kiss-work-orders-2026-09-13.md",
+      "docs/notes/delegation-class.md",
+      "docs/notes/developing-se-harness.md"
+    ],
+    "exact_scope_passed": true,
+    "managed_agents_fragment_unchanged": true,
+    "historical_bodies_unchanged": [
+      "docs/notes/agentic-execution-plugin-distribution.md",
+      "docs/notes/codebase-kiss-work-orders-2026-09-13.md"
+    ],
+    "new_local_links_checked": [
+      {
+        "source": "AGENTS.md",
+        "target": "docs/notes/developing-se-harness.md#agent-skills-for-this-checkout"
+      },
+      {
+        "source": "AGENTS.md",
+        "target": "release/plugin-marketplace/README.md"
+      },
+      {
+        "source": "docs/engineering/plugin-integration/README.md",
+        "target": "../../notes/developing-se-harness.md#agent-skills-for-this-checkout"
+      },
+      {
+        "source": "docs/engineering/plugin-integration/README.md",
+        "target": "verification/VER-PLG-024.md"
+      },
+      {
+        "source": "docs/engineering/plugin-integration/README.md",
+        "target": "work-orders/WO-PLG-024.md"
+      },
+      {
+        "source": "docs/notes/README.md",
+        "target": "../../release/plugin-marketplace/README.md"
+      },
+      {
+        "source": "docs/notes/agentic-execution-plugin-distribution.md",
+        "target": "../../release/plugin-marketplace/README.md"
+      },
+      {
+        "source": "docs/notes/agentic-execution-plugin-distribution.md",
+        "target": "../engineering/plugin-integration/README.md"
+      },
+      {
+        "source": "docs/notes/agentic-execution-plugin-distribution.md",
+        "target": "developing-se-harness.md#agent-skills-for-this-checkout"
+      },
+      {
+        "source": "docs/notes/codebase-kiss-work-orders-2026-09-13.md",
+        "target": "../engineering/repository-harness-upgrade/work-orders/WO-HUP-019.md"
+      },
+      {
+        "source": "docs/notes/codebase-kiss-work-orders-2026-09-13.md",
+        "target": "developing-se-harness.md"
+      },
+      {
+        "source": "docs/notes/delegation-class.md",
+        "target": "../engineering/DECISION_RIGHTS.md#approved-execution"
+      },
+      {
+        "source": "docs/notes/delegation-class.md",
+        "target": "../engineering/WORKFLOW.md#approved-execution"
+      },
+      {
+        "source": "docs/notes/developing-se-harness.md",
+        "target": "../../release/plugin-marketplace/README.md"
+      },
+      {
+        "source": "docs/notes/developing-se-harness.md",
+        "target": "delegation-class.md"
+      },
+      {
+        "source": "docs/notes/developing-se-harness.md",
+        "target": "plugin-installation-guide.md"
+      }
+    ],
+    "owner_readme_and_value_proposition_changes_preserved": true,
+    "source_tests_templates_plugin_distribution_and_prior_evidence_unchanged": true
+  },
+  "readme-remediation": {
+    "baseline": "f05c478a29c39f94968fdc842a34c861d30a42ac",
+    "readme_and_test_unchanged_since_baseline": true,
+    "current_readme_sha256": "eb8b2454d97b3de943c913c9881a622f5df61d3de4f30a6186726984c7f8ff62",
+    "proposal_sha256": "240bf535c917234225d19e0efe1b48521322eb6f6504c5b7a5619a9e866546dc",
+    "proposal_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\outputs\\README-cleanup-repair-proposed.md",
+    "results": {
+      "baseline": {
+        "tests": 1,
+        "failures": 2,
+        "errors": 0,
+        "passed": false
+      },
+      "proposed": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "passed": true
+      }
+    },
+    "effect": "Two-link proposal only; repository README remains unchanged.",
+    "full_suite_limit": "The first run observed this failure; its local logging wrapper then raised UnicodeEncodeError while printing the failure. No full-suite pass or complete aggregate result is claimed."
+  },
+  "replacement-package-comparison": {
+    "files": [
+      {
+        "path": ".codex-plugin/plugin.json",
+        "accepted_sha256": "097079fa3f7cc3bb2b07cd47cf04c9cc41498d2896e937601d0eb86e653214fe",
+        "installed_sha256": "097079fa3f7cc3bb2b07cd47cf04c9cc41498d2896e937601d0eb86e653214fe",
+        "comparison": "identical"
+      },
+      {
+        "path": "LICENSE",
+        "accepted_sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+        "installed_sha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+        "comparison": "CRLF/LF only"
+      },
+      {
+        "path": "README.md",
+        "accepted_sha256": "88fc283dccec6801319c42dc7f7ef01ddc5e645b87a5852d464695badf871e15",
+        "installed_sha256": "c223a48d5c9b292f057ec17177e3dbb701f8d21fbc56c251e2045c278650a8dd",
+        "comparison": "different"
+      },
+      {
+        "path": "assembly-inventory.json",
+        "accepted_sha256": "84fc49c6883fcdad9d341133fe125038f9dc8c1ee8fe3792b40f54b9102e44ed",
+        "comparison": "absent"
+      },
+      {
+        "path": "packages/se_harness-0.18.0-py3-none-any.whl",
+        "accepted_sha256": "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+        "installed_sha256": "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+        "comparison": "identical"
+      },
+      {
+        "path": "scripts/setup.py",
+        "accepted_sha256": "6955a2e58404b2ec9914076470210e20485eaa29d949220017a42085dcc3bb9c",
+        "installed_sha256": "6955a2e58404b2ec9914076470210e20485eaa29d949220017a42085dcc3bb9c",
+        "comparison": "identical"
+      },
+      {
+        "path": "skills/change/SKILL.md",
+        "accepted_sha256": "f529b45eb5b131aaf731fc62009180b132144fde472b70803ec8a105aa0ed9f2",
+        "installed_sha256": "f529b45eb5b131aaf731fc62009180b132144fde472b70803ec8a105aa0ed9f2",
+        "comparison": "identical"
+      },
+      {
+        "path": "skills/change/references/artifacts.md",
+        "accepted_sha256": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6",
+        "installed_sha256": "7315dc92e77f2f79d9e90f9819c876d85f6badfcbb2b496851149f2de9eb36d6",
+        "comparison": "identical"
+      },
+      {
+        "path": "skills/change/references/authority.md",
+        "accepted_sha256": "d47f035e764c8db30ba51c90840ed45b47c344e5a353d0da85ed6586f72d56a2",
+        "installed_sha256": "d47f035e764c8db30ba51c90840ed45b47c344e5a353d0da85ed6586f72d56a2",
+        "comparison": "identical"
+      },
+      {
+        "path": "skills/change/references/work-orders.md",
+        "accepted_sha256": "79e843a8f722d438ed3c378efcea02e2fe1e390b16adc34279e6772a76b18f1c",
+        "installed_sha256": "79e843a8f722d438ed3c378efcea02e2fe1e390b16adc34279e6772a76b18f1c",
+        "comparison": "identical"
+      },
+      {
+        "path": "skills/evidence/SKILL.md",
+        "accepted_sha256": "22b494fc70cdc454a342cb39489bc2d0a7d9c7fde48aa3e248a0135b16dcc134",
+        "installed_sha256": "22b494fc70cdc454a342cb39489bc2d0a7d9c7fde48aa3e248a0135b16dcc134",
+        "comparison": "identical"
+      },
+      {
+        "path": "skills/evidence/references/external-actions.md",
+        "accepted_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+        "installed_sha256": "ec0fd8f071f2bb0d5ae294594df7f118a817d0c62c8616c26e22285281acbb69",
+        "comparison": "identical"
+      },
+      {
+        "path": "skills/evidence/references/records.md",
+        "accepted_sha256": "37078c43f1f3dcd1640ade8b21fbc7069bbf9c2d7bc8f4850d0cda6dfa4dd18b",
+        "installed_sha256": "37078c43f1f3dcd1640ade8b21fbc7069bbf9c2d7bc8f4850d0cda6dfa4dd18b",
+        "comparison": "identical"
+      },
+      {
+        "path": "skills/harness-operator-brief/SKILL.md",
+        "accepted_sha256": "ed663add535e6dd54e76ac91d542bea72972076f625f08e13971953c5e94b110",
+        "installed_sha256": "ed663add535e6dd54e76ac91d542bea72972076f625f08e13971953c5e94b110",
+        "comparison": "identical"
+      },
+      {
+        "path": "skills/harness-operator-brief/agents/openai.yaml",
+        "accepted_sha256": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4",
+        "installed_sha256": "a684adb9eee7fd0a5985e3cc1184181767706d6944dc9c92a6591c55d1b8dde4",
+        "comparison": "identical"
+      },
+      {
+        "path": "skills/harness-operator-brief/scripts/check_brief.py",
+        "accepted_sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+        "installed_sha256": "b7a8a83d70f18cd8fd21ca0bc619131a80cc41413e84aa5ce3a4044c77f11683",
+        "comparison": "identical"
+      },
+      {
+        "path": "skills/harness-operator-brief/skill-contract.json",
+        "accepted_sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+        "installed_sha256": "e5cf54b4ae635dad0087fdb800bbd0d72c31453de0d91b45d7bac9f5ce423e52",
+        "comparison": "identical"
+      },
+      {
+        "path": "skills/harness-orient/SKILL.md",
+        "accepted_sha256": "7ee1ea21be9a1845277d84a83262f6ba6d24ecbb2350f0b84a4ea4e519d5565c",
+        "installed_sha256": "7ee1ea21be9a1845277d84a83262f6ba6d24ecbb2350f0b84a4ea4e519d5565c",
+        "comparison": "identical"
+      },
+      {
+        "path": "skills/harness-orient/scripts/orient.py",
+        "accepted_sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
+        "installed_sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56",
+        "comparison": "identical"
+      },
+      {
+        "path": "skills/harness-orient/skill-contract.json",
+        "accepted_sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+        "installed_sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627",
+        "comparison": "identical"
+      },
+      {
+        "path": "skills/setup/SKILL.md",
+        "accepted_sha256": "d2f610dac282dd0eb202dcec2888e522cf10d44797431e729b30a111ea95cf85",
+        "installed_sha256": "d2f610dac282dd0eb202dcec2888e522cf10d44797431e729b30a111ea95cf85",
+        "comparison": "identical"
+      },
+      {
+        "path": "skills/setup/references/environment.md",
+        "accepted_sha256": "a08792de5ee01ed718ea3b156cf09a4773dd203dc655ee6df3f04d40ec458363",
+        "installed_sha256": "a08792de5ee01ed718ea3b156cf09a4773dd203dc655ee6df3f04d40ec458363",
+        "comparison": "identical"
+      },
+      {
+        "path": "skills/setup/references/maintenance.md",
+        "accepted_sha256": "0af3999894f5ba1f71ce973a4484a9d8fabed14926e2f1b27e22ffa7cba5faeb",
+        "installed_sha256": "0af3999894f5ba1f71ce973a4484a9d8fabed14926e2f1b27e22ffa7cba5faeb",
+        "comparison": "identical"
+      },
+      {
+        "path": "skills/setup/references/repository.md",
+        "accepted_sha256": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3",
+        "installed_sha256": "bea57dc6d8b6df5d255702f62fda373c798b792f0ada163f0b89ec63f78a26e3",
+        "comparison": "identical"
+      }
+    ],
+    "initial_exact_byte_comparison": "Failed at LICENSE; the first comparison helper then stopped at the absent assembly-inventory.json. Both observations are retained here.",
+    "passed_text_equivalence_and_binary_identity": false,
+    "claim": "Compare skill/discovery and runtime inputs. The local cache omits the assembly inventory and may convert text line endings; this is not identical-archive or authenticity evidence."
+  },
+  "distribution-validator": {
+    "argv": [
+      "C:\\Python313\\python.exe",
+      "scripts\\validate_release_distributions.py",
+      "--root",
+      "."
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+    "started_at": "2026-09-16T09:14:29.015430+00:00",
+    "exit_code": 0,
+    "elapsed_seconds": 46.221,
+    "finished_at": "2026-09-16T09:15:15.240862+00:00"
+  },
+  "candidate-help": {
+    "argv": [
+      "C:\\Python313\\python.exe",
+      "-m",
+      "se_harness",
+      "--help"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+    "started_at": "2026-09-16T09:14:34.628411+00:00",
+    "exit_code": 0,
+    "elapsed_seconds": 1.042,
+    "finished_at": "2026-09-16T09:14:35.679501+00:00"
+  },
+  "candidate-doctor": {
+    "argv": [
+      "C:\\Python313\\python.exe",
+      "-m",
+      "se_harness",
+      "doctor",
+      ".",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+    "started_at": "2026-09-16T09:17:04.469520+00:00",
+    "exit_code": 1,
+    "elapsed_seconds": 39.577,
+    "finished_at": "2026-09-16T09:17:44.050945+00:00",
+    "failed_checks": [
+      {
+        "detail": "differs from distribution template",
+        "name": "distribution:ENGINEERING_HARNESS.md",
+        "passed": false
+      },
+      {
+        "detail": "installed checker payload matches its installation record",
+        "name": "evaluator-payload",
+        "passed": false
+      },
+      {
+        "detail": "config, installation and running checker versions must agree",
+        "name": "selected-version",
+        "passed": false
+      }
+    ],
+    "assessment": "Expected candidate 0.19.0 versus selected released 0.18.0 boundary; governing doctor passes."
+  },
+  "source_suite": {
+    "argv": [
+      "C:\\Python313\\python.exe",
+      "scripts\\run_tests.py"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+    "started_at": "2026-09-16T09:13:25.400763+00:00",
+    "status": "failed-observation-and-incomplete-aggregate",
+    "observed_failure": "PublicOnboardingTests.test_deeper_guidance_remains_directly_discoverable",
+    "logging_failure": "The local wrapper raised UnicodeEncodeError printing the test failure; the aggregate verdict was not retained. It now uses UTF-8. No full-suite pass is claimed.",
+    "partial_log": {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\source-suite.log",
+      "bytes": 5254,
+      "sha256": "4ea389fb7ff0caae41c23a445022272893e5270ca1c90cd38d723993b5f52185"
+    }
+  },
+  "replacement_package_assessment": {
+    "runtime_and_discovery_inputs_identical": true,
+    "compared_files": 21,
+    "other_differences": "Installed package README lacks the later setup appendix, LICENSE differs only by line endings, and assembly-inventory.json is absent. Full package equality was not established or required for this file-only adoption.",
+    "native_discovery": "Both native disposable-profile probes passed; their complete 24-file packages match the retained acceptance. The actual migration replacement has identical manifest, skills, setup and wheel."
+  },
+  "released_governor": {
+    "cleanup-024-doctor": {
+      "command": {
+        "argv": [
+          "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "se_harness",
+          "doctor",
+          "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+        "exit_code": 0
+      },
+      "result": {
+        "checks": 64,
+        "failed": []
+      },
+      "raw_result": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\cleanup-024-doctor.json",
+        "bytes": 20760,
+        "sha256": "d4d8220fa68a97544ffa49ebcc5029b5e14d8ae437296deaa93ab19e68923087"
+      }
+    },
+    "cleanup-024-implementation-graph": {
+      "command": {
+        "argv": [
+          "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "se_harness",
+          "validate",
+          "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+        "exit_code": 0
+      },
+      "result": {
+        "valid": true,
+        "artifact_count": 1654,
+        "error_count": 0,
+        "warning_count": 48,
+        "errors": []
+      },
+      "raw_result": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\cleanup-024-implementation-graph.json",
+        "bytes": 327397,
+        "sha256": "14af8e00766dfb9ac73e33282ce0a46349376a71745b8e42d5134d8527a93f4e"
+      }
+    },
+    "cleanup-024-review-preflight": {
+      "command": {
+        "argv": [
+          "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "se_harness",
+          "preflight",
+          "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+          "--work-order",
+          "WO-PLG-024",
+          "--phase",
+          "review",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+        "exit_code": 0
+      },
+      "result": {
+        "assurance": {
+          "commit_bound_verification": "required",
+          "decided_by": "engineering-owner",
+          "rationale": "Later checks and contributors will rely on the changed skill-provider lock, root skill inventory and operational guidance."
+        },
+        "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+        "background": [],
+        "diagnostics": [],
+        "phase": "review",
+        "reading_manifest": [
+          "ENGINEERING_HARNESS.md",
+          "docs/engineering/OPERATING_CARD.md",
+          "AGENTS.md",
+          "docs/engineering/ARTIFACT_AUTHORING.md",
+          "docs/engineering/harness-distribution/intent/INT-DST-001.md",
+          "docs/engineering/harness-simplification/intent/INT-KIS-003.md",
+          "docs/engineering/harness-distribution/capabilities/CAP-DST-001.md",
+          "docs/engineering/harness-simplification/capabilities/CAP-KIS-003.md",
+          "docs/engineering/harness-simplification/requirements/REQ-KIS-009.md",
+          "docs/engineering/plugin-integration/requirements/REQ-PLG-032.md",
+          "docs/engineering/plugin-integration/requirements/REQ-PLG-033.md",
+          "docs/engineering/plugin-integration/requirements/REQ-PLG-034.md",
+          "docs/engineering/harness-simplification/specifications/SPEC-KIS-003.md",
+          "docs/engineering/plugin-integration/specifications/SPEC-PLG-021.md",
+          "docs/engineering/harness-simplification/architecture/ARCH-KIS-002.md",
+          "docs/engineering/plugin-integration/architecture/ARCH-PLG-004.md",
+          "docs/engineering/harness-simplification/architecture/adr/ADR-KIS-002.md",
+          "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-004.md",
+          "docs/engineering/plugin-integration/verification/VER-PLG-024.md",
+          "docs/engineering/plugin-integration/work-orders/WO-PLG-024.md"
+        ],
+        "ready": true,
+        "schema": "se-harness-preflight-v2",
+        "skew": [],
+        "work_order": {
+          "id": "WO-PLG-024",
+          "path": "docs/engineering/plugin-integration/work-orders/WO-PLG-024.md",
+          "status": "in_progress"
+        }
+      },
+      "raw_result": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\cleanup-024-review-preflight.json",
+        "bytes": 2093,
+        "sha256": "09bc7377cb3b4c257712e6913c2de36193b8e9ae645cd26a54e727763528db68"
+      }
+    },
+    "cleanup-024-migration-preview": {
+      "command": {
+        "argv": [
+          "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "se_harness",
+          "skill-ownership",
+          "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+          "--provider",
+          "plugin",
+          "--plugin-root",
+          "C:\\Users\\hok\\.codex\\plugins\\cache\\se-harness\\verity-plane\\0.1.0",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+        "exit_code": 0
+      },
+      "result": {
+        "changes": [
+          {
+            "action": "remove",
+            "path": ".agents/skills/harness-orient"
+          },
+          {
+            "action": "remove",
+            "path": ".agents/skills/harness-operator-brief"
+          },
+          {
+            "action": "remove",
+            "path": ".claude/skills/harness-orient"
+          },
+          {
+            "action": "update",
+            "path": ".engineering-harness.lock"
+          }
+        ],
+        "command": "skill-ownership",
+        "outcome": "planned",
+        "passed": true,
+        "provider": "plugin",
+        "schema": "se-harness-command-result-v1",
+        "target": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "written": false
+      },
+      "raw_result": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\cleanup-024-migration-preview.json",
+        "bytes": 632,
+        "sha256": "ac8cd7dd201308aa7de54871b21e13c340ec0c4bc40a0ee90e6d0a071ffd980d"
+      }
+    },
+    "cleanup-024-migration-apply": {
+      "command": {
+        "argv": [
+          "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "se_harness",
+          "skill-ownership",
+          "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+          "--provider",
+          "plugin",
+          "--plugin-root",
+          "C:\\Users\\hok\\.codex\\plugins\\cache\\se-harness\\verity-plane\\0.1.0",
+          "--apply",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+        "exit_code": 0
+      },
+      "result": {
+        "changes": [
+          {
+            "action": "remove",
+            "path": ".agents/skills/harness-orient"
+          },
+          {
+            "action": "remove",
+            "path": ".agents/skills/harness-operator-brief"
+          },
+          {
+            "action": "remove",
+            "path": ".claude/skills/harness-orient"
+          },
+          {
+            "action": "update",
+            "path": ".engineering-harness.lock"
+          }
+        ],
+        "command": "skill-ownership",
+        "outcome": "applied",
+        "passed": true,
+        "provider": "plugin",
+        "schema": "se-harness-command-result-v1",
+        "target": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "written": true
+      },
+      "raw_result": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\plugin-publication-governance\\cleanup-024-migration-apply.json",
+        "bytes": 631,
+        "sha256": "c8b04a812edb208a7dbc4ac769da7e9836733ce9f0bc23b53cf492d9d46dad8e"
+      }
+    }
+  },
+  "raw_observations": [
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\candidate-doctor.json",
+      "bytes": 358,
+      "sha256": "a057392b61bde50ea4ce4f849b5eac206a99f680bb5ce66f837a4398ced30b70"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\candidate-doctor.log",
+      "bytes": 20774,
+      "sha256": "99dc0cbc88f3dc3ff073bbf0490f08be05a3bbbc40fc038fd17dadb2b8a64efa"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\candidate-help.json",
+      "bytes": 332,
+      "sha256": "98a69f5c4f587fe4b9fedc0ce1a1a5dc20ed380c8844c0e23bbc6ebaaf241d73"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\candidate-help.log",
+      "bytes": 3617,
+      "sha256": "721718c6a64371c984e64e9c5bbb6a27efc22727147bb755a691c4625ebbe684"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\claude-discovery.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\claude-discovery.stdout",
+      "bytes": 841,
+      "sha256": "9a148cae9a996957ecdbc38f940fbd70060e3a6c59822cb79e422131a1a34aa1"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\claude-version.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\claude-version.stdout",
+      "bytes": 23,
+      "sha256": "48b718f1e2831ef701b7cfaf69b978195172d4c10a3d00c279a662e0c9c5fe40"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\codex-discovery.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\codex-discovery.stdout",
+      "bytes": 23220,
+      "sha256": "9b180710ec7e81c6f49af747a2614f760acef95456a6db6d403c94c6c1c79ee2"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\codex-version.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\codex-version.stdout",
+      "bytes": 29,
+      "sha256": "2f4d46e2b9752bb877269dd8ee668e3edddd4a6850ca0f7683332c4858829ee5"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\diff-review.json",
+      "bytes": 3622,
+      "sha256": "74a728d5189f2fe9f5b58ed136b052b0a41a62a632439b30cb817e8fe0a4c2e5"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\discovery-commands.json",
+      "bytes": 1694,
+      "sha256": "fc5179e10e7c5def789247b1172047bef3eaae1f1d904bccbe72c1a465a68da2"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\discovery-summary.json",
+      "bytes": 1120,
+      "sha256": "f14ad6424c3f1d2978e494331103f52c5eb7a53eb6d64dd1f1bcc510d457a4c7"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\distribution-validator.json",
+      "bytes": 364,
+      "sha256": "6174b294cdc19ce8919544f60aff516bb7c0a848bfe53b17f219e340f1f5d05a"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\distribution-validator.log",
+      "bytes": 84,
+      "sha256": "7b46d8f310b1e4fc7216b69ae9eeeb2da845e1f0c445a843f7f5d5bfb90e805b"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\migration-after.json",
+      "bytes": 634,
+      "sha256": "4ab03b4ec791acb1721e7196ab669792af1544227e5eb38aabd973c660aa8319"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\migration-before.json",
+      "bytes": 7782,
+      "sha256": "ae1ab6536baabe5db4d1bb6afb7d0f99e92a05f2947ecc65ac7ec8563cdc8921"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-commands.json",
+      "bytes": 5198,
+      "sha256": "5df2634df17a696ec04f1f041d89cd7c069286e9d03b7b25f3ba608b8087c1eb"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-doctor-without-plugin-path.json",
+      "bytes": 20262,
+      "sha256": "7588a33ee1baeb9e9e1e3ea5ed9c7013abaaaf8133563bbb3efb6870c397b592"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-doctor-without-plugin-path.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-final-doctor.json",
+      "bytes": 20262,
+      "sha256": "7588a33ee1baeb9e9e1e3ea5ed9c7013abaaaf8133563bbb3efb6870c397b592"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-final-doctor.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-helper-failure.json",
+      "bytes": 515,
+      "sha256": "6bae82c4edf88ea8e8f2a161e27b49e9745271605c44bd72b0c73ebaccd4b847"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-original-script.py",
+      "bytes": 4287,
+      "sha256": "d434ed371cf90be337c5729c400786e6e23adb6acd7a0d174fe7e93ce6019eca"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-repeat-switch.json",
+      "bytes": 290,
+      "sha256": "f496339f7dfad943a4b0a2ef8fea83830505c32b9d70e731a0b85ba5cd299c97"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-repeat-switch.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-restore-apply.json",
+      "bytes": 1141,
+      "sha256": "a6bb72b928a8f49b19187af14c33e3b69529b3f52d98e92db4a6a0bff13f3a7c"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-restore-apply.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-restore-preview.json",
+      "bytes": 1142,
+      "sha256": "e0d06cb0d6c93c8362538ad284acbb92d201a56a697e9eda8f8556a1187248dc"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-restore-preview.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-restored-doctor.json",
+      "bytes": 21095,
+      "sha256": "16f4a2d6b2fb0b6ae5d8d08b084ae61f96eb6e8b3ef223db4ae189ac399c585f"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-restored-doctor.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-resume.json",
+      "bytes": 345,
+      "sha256": "c789ecc292b417c8cb38f04dd1c0f397b5cb80f2d392a098b9d24a9245e0edbb"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-resume.log",
+      "bytes": 240,
+      "sha256": "46c5e2ddd0c7752222b1cc2e63d302d7b7ca4fd74be4ac25fa09c8f5a8dd2542"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-summary.json",
+      "bytes": 485,
+      "sha256": "6d290adabe93276e3513997d1d823f725001c8e605fcc242ace301ee9f43de92"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-switch-apply.json",
+      "bytes": 650,
+      "sha256": "2a9bc173f48074a5b2b52572885db0e7a5b49bd4c515f7b46eacab311b7bb761"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-switch-apply.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-switch-preview.json",
+      "bytes": 651,
+      "sha256": "ae5e31f3ade67755357581f0de0bf2b7c24927575b78db0ca6228a064f0c0325"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-switch-preview.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-upgrade-apply.json",
+      "bytes": 3558,
+      "sha256": "97a0a7f73ed242c0a9ca5ba1bd87ac1ec8460cf1147aa12cec654333c6e8c2c6"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-upgrade-apply.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-upgrade-preview.json",
+      "bytes": 3531,
+      "sha256": "c1e6835c2ca5515693b31a1cd075267f729d51d25276172596e4b8fe74bf9935"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\portability-upgrade-preview.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\readme-focused-baseline.log",
+      "bytes": 10400,
+      "sha256": "c9080c30983b398d13a27ccd6f2f7553911491d8a6398aad88c87ff4ec253f2e"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\readme-focused-proposed.log",
+      "bytes": 265,
+      "sha256": "6ad48ec93826ac7b104de08b7efcb1dcbd40d95cb99645c2cc78aebb47ea7e81"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\readme-remediation.diff",
+      "bytes": 409,
+      "sha256": "06bda0bbe1df25b1a3078fb2c72cb59993ad1c573dae6cee38c7a878756e7d95"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\readme-remediation.json",
+      "bytes": 947,
+      "sha256": "ad39f3193a23d6f65b0ab1ada2bb0dab3eb8a52bfd686d01314d84f8fc40a1fe"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\replacement-package-comparison.json",
+      "bytes": 7296,
+      "sha256": "1ae642fabab44abfcdb6d73ccbf07baa1c78ef2be04563e9f87422868d3d3c0d"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\source-suite.json",
+      "bytes": 213,
+      "sha256": "e24440ca29ddab550def26a506d121ff2bcf8b81bd0df5ecfc0ab203f91b517d"
+    },
+    {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\source-suite.log",
+      "bytes": 5254,
+      "sha256": "4ea389fb7ff0caae41c23a445022272893e5270ca1c90cd38d723993b5f52185"
+    }
+  ],
+  "readme_followup": {
+    "owner_authorization": {
+      "date": "2026-09-16",
+      "quote": "you can include this exact README repair in the authorized work",
+      "meaning": "Engineering owner authorizes the exact previously presented two-link README repair; no extra test, specification or evaluator change is inferred."
+    },
+    "applied_readme": {
+      "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness\\README.md",
+      "bytes": 4172,
+      "sha256": "240bf535c917234225d19e0efe1b48521322eb6f6504c5b7a5619a9e866546dc"
+    },
+    "expected_sha256": "240bf535c917234225d19e0efe1b48521322eb6f6504c5b7a5619a9e866546dc",
+    "source_suite": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "scripts/run_tests.py"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T10:29:29.946188+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 724.841,
+      "finished_at": "2026-09-16T10:41:34.793813+00:00",
+      "tests_run": 1068,
+      "final_summary": [
+        "'init'",
+        "",
+        "----------------------------------------------------------------------",
+        "Ran 1068 tests in 721.729s (171 classes, 8 workers)",
+        "",
+        "FAILED (failures=12, skipped=15)"
+      ],
+      "log": {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\source-suite-readme-repair.log",
+        "bytes": 17581,
+        "sha256": "8c0d5b25a135be7c60196e6227a1c6a877b7bee5f0f1a4a25f712e18ac63ee78"
+      }
+    },
+    "focused_onboarding": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_public_onboarding.py"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T10:30:32.872470+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 19.606,
+      "finished_at": "2026-09-16T10:30:52.482079+00:00"
+    },
+    "baseline_reproduction": {
+      "baseline": "f05c478a29c39f94968fdc842a34c861d30a42ac",
+      "argv": [
+        "git",
+        "-C",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "archive",
+        "--format=zip",
+        "f05c478a29c39f94968fdc842a34c861d30a42ac",
+        "README.md",
+        "pyproject.toml",
+        "LICENSE",
+        "docs/notes",
+        "docs/images",
+        ".agents"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "fixture": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-onboarding-baseline-complete",
+      "fixture_source": "Git archive of selected baseline paths",
+      "test_source_unchanged": true,
+      "candidate_cli_import": "Unchanged current source; only the PublicOnboardingTests class is selected.",
+      "tests_run": 13,
+      "failures": [
+        "test_deeper_guidance_remains_directly_discoverable (tests.test_public_onboarding.PublicOnboardingTests.test_deeper_guidance_remains_directly_discoverable) (target='docs/notes/getting-started.md')",
+        "test_deeper_guidance_remains_directly_discoverable (tests.test_public_onboarding.PublicOnboardingTests.test_deeper_guidance_remains_directly_discoverable) (target='docs/notes/harness-installation-and-upgrades.md')",
+        "test_fenced_commands_remain_on_the_public_operational_surface (tests.test_public_onboarding.PublicOnboardingTests.test_fenced_commands_remain_on_the_public_operational_surface)",
+        "test_installation_uses_a_released_package_and_separate_repository_upgrade (tests.test_public_onboarding.PublicOnboardingTests.test_installation_uses_a_released_package_and_separate_repository_upgrade) (text='outside your repository')",
+        "test_installation_uses_a_released_package_and_separate_repository_upgrade (tests.test_public_onboarding.PublicOnboardingTests.test_installation_uses_a_released_package_and_separate_repository_upgrade) (text='-m venv')",
+        "test_installation_uses_a_released_package_and_separate_repository_upgrade (tests.test_public_onboarding.PublicOnboardingTests.test_installation_uses_a_released_package_and_separate_repository_upgrade) (text='python -m pip install se-harness')",
+        "test_installation_uses_a_released_package_and_separate_repository_upgrade (tests.test_public_onboarding.PublicOnboardingTests.test_installation_uses_a_released_package_and_separate_repository_upgrade) (text='bin/activate')",
+        "test_installation_uses_a_released_package_and_separate_repository_upgrade (tests.test_public_onboarding.PublicOnboardingTests.test_installation_uses_a_released_package_and_separate_repository_upgrade) (text='Scripts\\\\Activate.ps1')",
+        "test_installation_uses_a_released_package_and_separate_repository_upgrade (tests.test_public_onboarding.PublicOnboardingTests.test_installation_uses_a_released_package_and_separate_repository_upgrade) (text='pinned by that repository')",
+        "test_installation_uses_a_released_package_and_separate_repository_upgrade (tests.test_public_onboarding.PublicOnboardingTests.test_installation_uses_a_released_package_and_separate_repository_upgrade) (text='leaves its managed files unchanged')",
+        "test_installation_uses_a_released_package_and_separate_repository_upgrade (tests.test_public_onboarding.PublicOnboardingTests.test_installation_uses_a_released_package_and_separate_repository_upgrade) (text='harness-installation-and-upgrades.md')",
+        "test_quick_start_commands_parse_against_the_current_cli (tests.test_public_onboarding.PublicOnboardingTests.test_quick_start_commands_parse_against_the_current_cli)"
+      ],
+      "errors": [],
+      "skipped": [],
+      "passed": false,
+      "repaired_readme_sha256": "240bf535c917234225d19e0efe1b48521322eb6f6504c5b7a5619a9e866546dc"
+    },
+    "first_baseline_fixture_limit": "The first disposable archive omitted LICENSE and therefore introduced one extra link failure. Its outputs are preserved outside the checkout; the complete fixture includes LICENSE and is the baseline comparison used here.",
+    "diff_review": {
+      "passed": true,
+      "baseline": "f05c478a29c39f94968fdc842a34c861d30a42ac",
+      "changed_paths": [
+        ".agents/skills/harness-operator-brief/SKILL.md",
+        ".agents/skills/harness-operator-brief/scripts/check_brief.py",
+        ".agents/skills/harness-operator-brief/skill-contract.json",
+        ".agents/skills/harness-orient/SKILL.md",
+        ".agents/skills/harness-orient/scripts/orient.py",
+        ".agents/skills/harness-orient/skill-contract.json",
+        ".claude/skills/harness-orient/SKILL.md",
+        ".engineering-harness.delegation.toml",
+        ".engineering-harness.lock",
+        "AGENTS.md",
+        "README.md",
+        "docs/engineering/plugin-integration/README.md",
+        "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+        "docs/engineering/plugin-integration/evidence/WO-PLG-024/checks.json",
+        "docs/engineering/plugin-integration/evidence/WO-PLG-024/readme-remediation.diff",
+        "docs/engineering/plugin-integration/evidence/WO-PLG-024/scope-after-readme-repair.json",
+        "docs/engineering/plugin-integration/evidence/WO-PLG-024/source-suite-readme-repair.log",
+        "docs/engineering/plugin-integration/evidence/WO-PLG-024/source-suite.log",
+        "docs/engineering/plugin-integration/verification/VER-PLG-024.md",
+        "docs/engineering/plugin-integration/work-orders/WO-PLG-024.md",
+        "docs/notes/README.md",
+        "docs/notes/agentic-execution-plugin-distribution.md",
+        "docs/notes/codebase-kiss-work-orders-2026-09-13.md",
+        "docs/notes/delegation-class.md",
+        "docs/notes/developing-se-harness.md"
+      ],
+      "matches_original_scope_plus_explicit_owner_readme_authorization": true,
+      "formal_scope_checkpoint_passed": false,
+      "managed_agents_fragment_unchanged": true,
+      "historical_bodies_unchanged": [
+        "docs/notes/agentic-execution-plugin-distribution.md",
+        "docs/notes/codebase-kiss-work-orders-2026-09-13.md"
+      ],
+      "new_local_links_checked": [
+        {
+          "source": "AGENTS.md",
+          "target": "docs/notes/developing-se-harness.md#agent-skills-for-this-checkout"
+        },
+        {
+          "source": "AGENTS.md",
+          "target": "release/plugin-marketplace/README.md"
+        },
+        {
+          "source": "README.md",
+          "target": "docs/notes/getting-started.md"
+        },
+        {
+          "source": "README.md",
+          "target": "docs/notes/harness-installation-and-upgrades.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "../../notes/developing-se-harness.md#agent-skills-for-this-checkout"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "evidence/WO-PLG-024/README.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "verification/VER-PLG-024.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/README.md",
+          "target": "work-orders/WO-PLG-024.md"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+          "target": "checks.json"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+          "target": "readme-remediation.diff"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+          "target": "scope-after-readme-repair.json"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+          "target": "source-suite-readme-repair.log"
+        },
+        {
+          "source": "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+          "target": "source-suite.log"
+        },
+        {
+          "source": "docs/notes/README.md",
+          "target": "../../release/plugin-marketplace/README.md"
+        },
+        {
+          "source": "docs/notes/agentic-execution-plugin-distribution.md",
+          "target": "../../release/plugin-marketplace/README.md"
+        },
+        {
+          "source": "docs/notes/agentic-execution-plugin-distribution.md",
+          "target": "../engineering/plugin-integration/README.md"
+        },
+        {
+          "source": "docs/notes/agentic-execution-plugin-distribution.md",
+          "target": "developing-se-harness.md#agent-skills-for-this-checkout"
+        },
+        {
+          "source": "docs/notes/codebase-kiss-work-orders-2026-09-13.md",
+          "target": "../engineering/repository-harness-upgrade/work-orders/WO-HUP-019.md"
+        },
+        {
+          "source": "docs/notes/codebase-kiss-work-orders-2026-09-13.md",
+          "target": "developing-se-harness.md"
+        },
+        {
+          "source": "docs/notes/delegation-class.md",
+          "target": "../engineering/DECISION_RIGHTS.md#approved-execution"
+        },
+        {
+          "source": "docs/notes/delegation-class.md",
+          "target": "../engineering/WORKFLOW.md#approved-execution"
+        },
+        {
+          "source": "docs/notes/developing-se-harness.md",
+          "target": "../../release/plugin-marketplace/README.md"
+        },
+        {
+          "source": "docs/notes/developing-se-harness.md",
+          "target": "delegation-class.md"
+        },
+        {
+          "source": "docs/notes/developing-se-harness.md",
+          "target": "plugin-installation-guide.md"
+        }
+      ],
+      "owner_readme_preserved_except_exact_approved_two_links": true,
+      "value_proposition_deletions_preserved": true,
+      "source_tests_templates_plugin_distribution_and_prior_evidence_unchanged": true
+    },
+    "scope_amendment_inspection": {
+      "evaluator_version": "0.18.0",
+      "python": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+      "mode": "read-only in-memory scope comparison; no repository metadata or lifecycle mutation",
+      "original_scope_authorization": "recorded engineering-owner approval",
+      "proposed_addition": [
+        "README.md"
+      ],
+      "proposed_scope_result": {
+        "accepted": false,
+        "type": "DelegationError",
+        "predicate": "WEX-ECP-022",
+        "message": "WEX-ECP-022: WO-PLG-024.md scope changed since owner approval"
+      },
+      "workflow_top_level_keys": [
+        "schema",
+        "normative_language",
+        "restitution_fields",
+        "agentic_operations",
+        "lifecycles",
+        "failure",
+        "recommendations",
+        "procedures"
+      ],
+      "sources": {
+        "workflow_contract.json": {
+          "path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Lib\\site-packages\\se_harness\\workflow_contract.json",
+          "sha256": "310b35d4f07a071258d220d1c3d751f603c4eee74cea83467f7ba2f74b594516"
+        },
+        "gate_source.py": {
+          "path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Lib\\site-packages\\se_harness\\gate_source.py",
+          "sha256": "9c6920bdfeece804fad652f07b005d6ea3dc68336becd8482b4fa573c7e909f5"
+        },
+        "workflow.py": {
+          "path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Lib\\site-packages\\se_harness\\workflow.py",
+          "sha256": "77ac27feec1d9bdfa753deac7c4efe2a06df457775154415266cae33811d21e0"
+        },
+        "workflow_edges.py": {
+          "path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Lib\\site-packages\\se_harness\\workflow_edges.py",
+          "sha256": "2672a96916c20d80e419704299cc9cffa6a8eb56e1c3a34ba882e52512d128e0"
+        }
+      },
+      "conclusion": "The released CLI has no amend command; its work-order lifecycle allows only implemented or rejected from in_progress. The approval scope comparison rejects adding README.md without a new recorded approval. Current approval events remain untouched."
+    },
+    "scope_checkpoint": {
+      "command": {
+        "argv": [
+          "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "se_harness",
+          "check",
+          "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+          "--artifact",
+          "WO-PLG-024",
+          "--checkpoint",
+          "scope",
+          "--from-git",
+          "f05c478a29c39f94968fdc842a34c861d30a42ac",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+        "exit_code": 1
+      },
+      "restitution": {
+        "outcome": "blocked",
+        "done": [
+          "Evaluated scope compliance for WO-PLG-024."
+        ],
+        "not_done": [
+          "The scope checkpoint did not pass."
+        ],
+        "blocked_by": [
+          "QGP-G4I-PATHS: WEX201: changed path is outside execution scope: README.md"
+        ],
+        "current_lifecycle_state": [
+          "WO-PLG-024 is in_progress."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-WO-IMPLEMENT",
+          "step_id": "STEP-WO-IMPLEMENT-CHECK",
+          "action": "Escalate QGP-G4I-PATHS under DR-REMEDIATION-SCOPE"
+        },
+        "command_or_response": {
+          "kind": "response",
+          "value": "Escalate to the accountable owner under DR-REMEDIATION-SCOPE: WEX201: changed path is outside execution scope: README.md"
+        },
+        "alternatives": []
+      },
+      "retained_result": "scope-after-readme-repair.json"
+    },
+    "released_doctor": {
+      "command": {
+        "argv": [
+          "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+          "-I",
+          "-m",
+          "se_harness",
+          "doctor",
+          "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+          "--json"
+        ],
+        "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+        "exit_code": 0
+      },
+      "checks": 64,
+      "failed": []
+    },
+    "state": "WO-PLG-024 in_progress; VER-PLG-024 approved; no VREC, completion, commit, push or PR.",
+    "raw_observations": [
+      {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\readme-repair-focused.log",
+        "bytes": 17954,
+        "sha256": "76658ef8e7c0259e04d67a203e334aa7c36057838a136ad016ec774e1de8160c"
+      },
+      {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\onboarding-baseline.log",
+        "bytes": 31906,
+        "sha256": "07bf1cf11fb648efecb3fbf2aa492facb7aa71050fc58b4a51e06864808c2402"
+      },
+      {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\onboarding-baseline-complete.log",
+        "bytes": 30849,
+        "sha256": "689316c5f90aefcec28dafe82626bc03046e7ee682002e49d599401ce32f1e31"
+      },
+      {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\diff-review-readme-repair.json",
+        "bytes": 5341,
+        "sha256": "cb88dcd27c04462b9525b59366260ae1540d0e34a4635f96b1f2b15a0686d361"
+      },
+      {
+        "local_path": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\cleanup-024-checks\\scope-amendment-inspection.json",
+        "bytes": 2104,
+        "sha256": "0a5ee5f564f76ea28a413fd3b3ae99affd5038edbbb488c5ad88566e9db2fb6a"
+      }
+    ]
+  }
+}

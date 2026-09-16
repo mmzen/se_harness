@@ -171,3 +171,18 @@ Released-evaluator checks and the corrected full source suite pass (1,068
 tests, zero failures or errors, 15 skips). Completion is recorded in the work
 order; the detailed evidence is under `evidence/WO-HUP-019/`. Verification-record
 preparation binds the completed candidate; independent assurance remains separate.
+
+## Plugin ownership in transition assessment (2026-09-16)
+
+[WO-HUP-020](work-orders/WO-HUP-020.md),
+[SPEC-HUP-020](specifications/SPEC-HUP-020.md) and
+[VER-HUP-020](verification/VER-HUP-020.md) are approved for PR #487's
+schema-4 predecessor-assessment failure. The assessor uses the existing
+trusted-base skill catalogue to distinguish an ownership-only switch from
+evaluator or unrelated lock changes. Evaluator 0.18.0 and the existing workflow
+remain. WO-HUP-020 is implemented. The local suite passes 1,078 tests with 15
+skips; final comparison regressions, clean committed CI replay and combined PR
+scope pass. Evidence is retained under `evidence/WO-HUP-020/`. Fresh aggregate
+VREC-HUP-019 preparation will bind this correction and WO-PLG-025 to the completed
+candidate, including a final full-suite and CI replay. Earlier VREC-PLG-022
+remains unchanged; owner assurance and hosted CI follow preparation and delivery.

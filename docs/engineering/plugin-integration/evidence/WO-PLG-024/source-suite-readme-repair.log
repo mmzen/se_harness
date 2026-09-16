@@ -1,0 +1,120 @@
+--workers must be at least 1
+Evaluator Python: C:\Users\hok\AppData\Local\Temp\simple-plugin-kb8u3lye\private\verity-plane\evaluator\Scripts\python.exe
+Evaluator Python: C:\Users\hok\AppData\Local\Temp\simple-plugin-kb8u3lye\private\verity-plane\evaluator\Scripts\python.exe
+WEX_SCALE artifacts=100 validation=1.438592s focus=2.971980s plan=2.991417s
+WEX_SCALE artifacts=500 validation=5.427805s focus=6.932416s plan=13.240356s
+docs/notes/diagnostic-codes.md matches the source
+======================================================================
+FAIL: test_public_onboarding.PublicOnboardingTests.test_fenced_commands_remain_on_the_public_operational_surface
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-15\clo\se_harness\tests\test_public_onboarding.py", line 104, in test_fenced_commands_remain_on_the_public_operational_surface
+    self.assertTrue({"init", "doctor"}.issubset(commands))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_public_onboarding.PublicOnboardingTests.test_installation_uses_a_released_package_and_separate_repository_upgrade (text='outside your repository')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-15\clo\se_harness\tests\test_public_onboarding.py", line 84, in test_installation_uses_a_released_package_and_separate_repository_upgrade
+    self.assertIn(text, install)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+AssertionError: 'outside your repository' not found in "\nRequires **Python 3.11+**. The checker runs on Windows, Linux, and macOS using the Python standard library. No hosted service is required for the checker.\n\n### With Codex or Claude Code\n\nInstall from the project's published Git marketplace using your host's CLI:\n\n**Codex**\n\n```sh\ncodex plugin marketplace add mmzen/se_harness --ref plugin-marketplace\ncodex plugin add verity-plane@se-harness\n```\n\n**Claude Code**\n\n```sh\nclaude plugin marketplace add mmzen/se_harness@plugin-marketplace\nclaude plugin install verity-plane@se-harness\n```\n\nStart a new task or session, then invoke **verity-plane:setup** with your project path and a persistent data directory outside it.\n\nPlugin **0.1.0** bundles released **SE Harness 0.18.0**. Running setup installs that wheel **offline** into a private environment; it does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.\n\nSee the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).\n\n"
+
+======================================================================
+FAIL: test_public_onboarding.PublicOnboardingTests.test_installation_uses_a_released_package_and_separate_repository_upgrade (text='-m venv')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-15\clo\se_harness\tests\test_public_onboarding.py", line 84, in test_installation_uses_a_released_package_and_separate_repository_upgrade
+    self.assertIn(text, install)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+AssertionError: '-m venv' not found in "\nRequires **Python 3.11+**. The checker runs on Windows, Linux, and macOS using the Python standard library. No hosted service is required for the checker.\n\n### With Codex or Claude Code\n\nInstall from the project's published Git marketplace using your host's CLI:\n\n**Codex**\n\n```sh\ncodex plugin marketplace add mmzen/se_harness --ref plugin-marketplace\ncodex plugin add verity-plane@se-harness\n```\n\n**Claude Code**\n\n```sh\nclaude plugin marketplace add mmzen/se_harness@plugin-marketplace\nclaude plugin install verity-plane@se-harness\n```\n\nStart a new task or session, then invoke **verity-plane:setup** with your project path and a persistent data directory outside it.\n\nPlugin **0.1.0** bundles released **SE Harness 0.18.0**. Running setup installs that wheel **offline** into a private environment; it does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.\n\nSee the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).\n\n"
+
+======================================================================
+FAIL: test_public_onboarding.PublicOnboardingTests.test_installation_uses_a_released_package_and_separate_repository_upgrade (text='python -m pip install se-harness')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-15\clo\se_harness\tests\test_public_onboarding.py", line 84, in test_installation_uses_a_released_package_and_separate_repository_upgrade
+    self.assertIn(text, install)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+AssertionError: 'python -m pip install se-harness' not found in "\nRequires **Python 3.11+**. The checker runs on Windows, Linux, and macOS using the Python standard library. No hosted service is required for the checker.\n\n### With Codex or Claude Code\n\nInstall from the project's published Git marketplace using your host's CLI:\n\n**Codex**\n\n```sh\ncodex plugin marketplace add mmzen/se_harness --ref plugin-marketplace\ncodex plugin add verity-plane@se-harness\n```\n\n**Claude Code**\n\n```sh\nclaude plugin marketplace add mmzen/se_harness@plugin-marketplace\nclaude plugin install verity-plane@se-harness\n```\n\nStart a new task or session, then invoke **verity-plane:setup** with your project path and a persistent data directory outside it.\n\nPlugin **0.1.0** bundles released **SE Harness 0.18.0**. Running setup installs that wheel **offline** into a private environment; it does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.\n\nSee the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).\n\n"
+
+======================================================================
+FAIL: test_public_onboarding.PublicOnboardingTests.test_installation_uses_a_released_package_and_separate_repository_upgrade (text='bin/activate')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-15\clo\se_harness\tests\test_public_onboarding.py", line 84, in test_installation_uses_a_released_package_and_separate_repository_upgrade
+    self.assertIn(text, install)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+AssertionError: 'bin/activate' not found in "\nRequires **Python 3.11+**. The checker runs on Windows, Linux, and macOS using the Python standard library. No hosted service is required for the checker.\n\n### With Codex or Claude Code\n\nInstall from the project's published Git marketplace using your host's CLI:\n\n**Codex**\n\n```sh\ncodex plugin marketplace add mmzen/se_harness --ref plugin-marketplace\ncodex plugin add verity-plane@se-harness\n```\n\n**Claude Code**\n\n```sh\nclaude plugin marketplace add mmzen/se_harness@plugin-marketplace\nclaude plugin install verity-plane@se-harness\n```\n\nStart a new task or session, then invoke **verity-plane:setup** with your project path and a persistent data directory outside it.\n\nPlugin **0.1.0** bundles released **SE Harness 0.18.0**. Running setup installs that wheel **offline** into a private environment; it does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.\n\nSee the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).\n\n"
+
+======================================================================
+FAIL: test_public_onboarding.PublicOnboardingTests.test_installation_uses_a_released_package_and_separate_repository_upgrade (text='Scripts\\Activate.ps1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-15\clo\se_harness\tests\test_public_onboarding.py", line 84, in test_installation_uses_a_released_package_and_separate_repository_upgrade
+    self.assertIn(text, install)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+AssertionError: 'Scripts\\Activate.ps1' not found in "\nRequires **Python 3.11+**. The checker runs on Windows, Linux, and macOS using the Python standard library. No hosted service is required for the checker.\n\n### With Codex or Claude Code\n\nInstall from the project's published Git marketplace using your host's CLI:\n\n**Codex**\n\n```sh\ncodex plugin marketplace add mmzen/se_harness --ref plugin-marketplace\ncodex plugin add verity-plane@se-harness\n```\n\n**Claude Code**\n\n```sh\nclaude plugin marketplace add mmzen/se_harness@plugin-marketplace\nclaude plugin install verity-plane@se-harness\n```\n\nStart a new task or session, then invoke **verity-plane:setup** with your project path and a persistent data directory outside it.\n\nPlugin **0.1.0** bundles released **SE Harness 0.18.0**. Running setup installs that wheel **offline** into a private environment; it does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.\n\nSee the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).\n\n"
+
+======================================================================
+FAIL: test_public_onboarding.PublicOnboardingTests.test_installation_uses_a_released_package_and_separate_repository_upgrade (text='pinned by that repository')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-15\clo\se_harness\tests\test_public_onboarding.py", line 84, in test_installation_uses_a_released_package_and_separate_repository_upgrade
+    self.assertIn(text, install)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+AssertionError: 'pinned by that repository' not found in "\nRequires **Python 3.11+**. The checker runs on Windows, Linux, and macOS using the Python standard library. No hosted service is required for the checker.\n\n### With Codex or Claude Code\n\nInstall from the project's published Git marketplace using your host's CLI:\n\n**Codex**\n\n```sh\ncodex plugin marketplace add mmzen/se_harness --ref plugin-marketplace\ncodex plugin add verity-plane@se-harness\n```\n\n**Claude Code**\n\n```sh\nclaude plugin marketplace add mmzen/se_harness@plugin-marketplace\nclaude plugin install verity-plane@se-harness\n```\n\nStart a new task or session, then invoke **verity-plane:setup** with your project path and a persistent data directory outside it.\n\nPlugin **0.1.0** bundles released **SE Harness 0.18.0**. Running setup installs that wheel **offline** into a private environment; it does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.\n\nSee the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).\n\n"
+
+======================================================================
+FAIL: test_public_onboarding.PublicOnboardingTests.test_installation_uses_a_released_package_and_separate_repository_upgrade (text='leaves its managed files unchanged')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-15\clo\se_harness\tests\test_public_onboarding.py", line 84, in test_installation_uses_a_released_package_and_separate_repository_upgrade
+    self.assertIn(text, install)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+AssertionError: 'leaves its managed files unchanged' not found in "\nRequires **Python 3.11+**. The checker runs on Windows, Linux, and macOS using the Python standard library. No hosted service is required for the checker.\n\n### With Codex or Claude Code\n\nInstall from the project's published Git marketplace using your host's CLI:\n\n**Codex**\n\n```sh\ncodex plugin marketplace add mmzen/se_harness --ref plugin-marketplace\ncodex plugin add verity-plane@se-harness\n```\n\n**Claude Code**\n\n```sh\nclaude plugin marketplace add mmzen/se_harness@plugin-marketplace\nclaude plugin install verity-plane@se-harness\n```\n\nStart a new task or session, then invoke **verity-plane:setup** with your project path and a persistent data directory outside it.\n\nPlugin **0.1.0** bundles released **SE Harness 0.18.0**. Running setup installs that wheel **offline** into a private environment; it does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.\n\nSee the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).\n\n"
+
+======================================================================
+FAIL: test_public_onboarding.PublicOnboardingTests.test_installation_uses_a_released_package_and_separate_repository_upgrade (text='harness-installation-and-upgrades.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-15\clo\se_harness\tests\test_public_onboarding.py", line 84, in test_installation_uses_a_released_package_and_separate_repository_upgrade
+    self.assertIn(text, install)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+AssertionError: 'harness-installation-and-upgrades.md' not found in "\nRequires **Python 3.11+**. The checker runs on Windows, Linux, and macOS using the Python standard library. No hosted service is required for the checker.\n\n### With Codex or Claude Code\n\nInstall from the project's published Git marketplace using your host's CLI:\n\n**Codex**\n\n```sh\ncodex plugin marketplace add mmzen/se_harness --ref plugin-marketplace\ncodex plugin add verity-plane@se-harness\n```\n\n**Claude Code**\n\n```sh\nclaude plugin marketplace add mmzen/se_harness@plugin-marketplace\nclaude plugin install verity-plane@se-harness\n```\n\nStart a new task or session, then invoke **verity-plane:setup** with your project path and a persistent data directory outside it.\n\nPlugin **0.1.0** bundles released **SE Harness 0.18.0**. Running setup installs that wheel **offline** into a private environment; it does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.\n\nSee the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).\n\n"
+
+======================================================================
+FAIL: test_public_onboarding.PublicOnboardingTests.test_operator_notes_are_indexed_sectioned_and_point_at_shipped_paths (note='technical-communication.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-15\clo\se_harness\tests\test_public_onboarding.py", line 183, in test_operator_notes_are_indexed_sectioned_and_point_at_shipped_paths
+    self.assertTrue((REPOSITORY_ROOT / relative).exists(), relative)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : .agents/skills/harness-operator-brief
+
+======================================================================
+FAIL: test_public_onboarding.PublicOnboardingTests.test_operator_notes_are_indexed_sectioned_and_point_at_shipped_paths (note='agentic-execution-phase4-skills.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-15\clo\se_harness\tests\test_public_onboarding.py", line 183, in test_operator_notes_are_indexed_sectioned_and_point_at_shipped_paths
+    self.assertTrue((REPOSITORY_ROOT / relative).exists(), relative)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : .agents/skills/harness-orient
+
+======================================================================
+FAIL: test_public_onboarding.PublicOnboardingTests.test_quick_start_commands_parse_against_the_current_cli
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hok\Documents\Codex\2026-09-15\clo\se_harness\tests\test_public_onboarding.py", line 96, in test_quick_start_commands_parse_against_the_current_cli
+    self.assertEqual({"init", "doctor"}, {shlex.split(command)[1] for command in commands})
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the first set but not the second:
+'doctor'
+'init'
+
+----------------------------------------------------------------------
+Ran 1068 tests in 721.729s (171 classes, 8 workers)
+
+FAILED (failures=12, skipped=15)

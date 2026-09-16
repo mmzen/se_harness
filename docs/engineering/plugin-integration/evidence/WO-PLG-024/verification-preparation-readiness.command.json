@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "check",
+    "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+    "--artifact",
+    "WO-PLG-024",
+    "--checkpoint",
+    "transition",
+    "--target",
+    "implemented",
+    "--from-git",
+    "f05c478a29c39f94968fdc842a34c861d30a42ac",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+  "exit_code": 1
+}

@@ -1,6 +1,6 @@
 # Phase 4 writing-skill integration
 
-> Historical record from 2026-08-25, at `0bcbea1`. Kept for the decision trail; it describes the tool as it was then. The `delegated-workflow` command and the three retired writing skills it describes were replaced by the [delegation class](delegation-class.md) and the journaled apply.
+> Historical record from 2026-08-25, at `0bcbea1`. Kept for the decision trail; it describes the tool as it was then. Current skills come from the [Verity Plane plugin](../../release/plugin-marketplace/README.md), including the tracked [harness-orient source](../../plugins/verity-plane/common/skills/harness-orient/SKILL.md). See [contributor setup and restoration](developing-se-harness.md#agent-skills-for-this-checkout) for this checkout's provider choice.
 
 <!-- Target expertise: 5/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 

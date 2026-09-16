@@ -1,0 +1,1090 @@
+{
+  "observed_at": "2026-09-16T13:04:44.406021+00:00",
+  "platform": "Windows-11-10.0.26100-SP0",
+  "python": "3.13.3",
+  "baseline": "f05c478a29c39f94968fdc842a34c861d30a42ac",
+  "work_order": "WO-PLG-025",
+  "verification": "VER-PLG-025",
+  "implementation_input_digests": [
+    {
+      "path": "se_harness\\tests\\test_public_onboarding.py",
+      "bytes": 15532,
+      "sha256": "2d0c384d7e6d5f9817a2f5201fc0b22533cb18a2a8ef6ba76dd269ee45e3194a"
+    },
+    {
+      "path": "se_harness\\README.md",
+      "bytes": 4172,
+      "sha256": "240bf535c917234225d19e0efe1b48521322eb6f6504c5b7a5619a9e866546dc"
+    },
+    {
+      "path": "se_harness\\.engineering-harness.lock",
+      "bytes": 4375,
+      "sha256": "8ac3b3ea5025009b93a3b1f2abffc8b8316c2b2f17868b276d78aafc06ab58be"
+    },
+    {
+      "path": "se_harness\\docs\\notes\\technical-communication.md",
+      "bytes": 4460,
+      "sha256": "05166861c72267e57a8484eaaa9ceb96d77ae1b41f331a1718d14b9b80e54ad0"
+    },
+    {
+      "path": "se_harness\\docs\\notes\\agentic-execution-phase4-skills.md",
+      "bytes": 5471,
+      "sha256": "14ab5cc2ad4c28ef8b3bf16a4f3946d397cca012dc877366572e08fffd0204bb"
+    }
+  ],
+  "checks": {
+    "onboarding-focused": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "tests.test_public_onboarding"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T12:47:49.963310+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 7.22,
+      "finished_at": "2026-09-16T12:47:57.184868+00:00",
+      "output": {
+        "path": "work\\cleanup-025-checks\\onboarding-focused.log",
+        "bytes": 119,
+        "sha256": "84e09040944c73a11c537a9a3e7ba569849a86dfb1f8b471bdc31e9cd6a6ebc6"
+      }
+    },
+    "source-suite": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "scripts\\run_tests.py"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T12:48:20.697513+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 545.838,
+      "finished_at": "2026-09-16T12:57:26.538155+00:00",
+      "output": {
+        "path": "work\\cleanup-025-checks\\source-suite.log",
+        "bytes": 628,
+        "sha256": "19f13eb8c50e6fbf7266cc8776a9c74613cd57887553730ff480d37cd36b20e9"
+      },
+      "summary": "--workers must be at least 1\nEvaluator Python: C:\\Users\\hok\\AppData\\Local\\Temp\\simple-plugin-t6z3rhb7\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\hok\\AppData\\Local\\Temp\\simple-plugin-t6z3rhb7\\private\\verity-plane\\evaluator\\Scripts\\python.exe\ndocs/notes/diagnostic-codes.md matches the source\nWEX_SCALE artifacts=100 validation=1.351054s focus=1.911512s plan=1.492903s\nWEX_SCALE artifacts=500 validation=3.932932s focus=6.192397s plan=11.644515s\n----------------------------------------------------------------------\nRan 1068 tests in 544.008s (171 classes, 8 workers)\n\nOK (skipped=15)\n"
+    },
+    "distribution-validator": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "scripts\\validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T12:48:36.818097+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 32.224,
+      "finished_at": "2026-09-16T12:49:09.043900+00:00",
+      "output": {
+        "path": "work\\cleanup-025-checks\\distribution-validator.log",
+        "bytes": 84,
+        "sha256": "7b46d8f310b1e4fc7216b69ae9eeeb2da845e1f0c445a843f7f5d5bfb90e805b"
+      }
+    },
+    "candidate-help": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T12:48:34.714942+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 0.624,
+      "finished_at": "2026-09-16T12:48:35.342704+00:00",
+      "output": {
+        "path": "work\\cleanup-025-checks\\candidate-help.log",
+        "bytes": 3617,
+        "sha256": "721718c6a64371c984e64e9c5bbb6a27efc22727147bb755a691c4625ebbe684"
+      }
+    },
+    "candidate-doctor": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "se_harness",
+        "doctor",
+        ".",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T12:48:37.246166+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 25.416,
+      "finished_at": "2026-09-16T12:49:02.664539+00:00",
+      "output": {
+        "path": "work\\cleanup-025-checks\\candidate-doctor.log",
+        "bytes": 20774,
+        "sha256": "99dc0cbc88f3dc3ff073bbf0490f08be05a3bbbc40fc038fd17dadb2b8a64efa"
+      },
+      "expected_boundary_failures": [
+        {
+          "detail": "differs from distribution template",
+          "name": "distribution:ENGINEERING_HARNESS.md",
+          "passed": false
+        },
+        {
+          "detail": "installed checker payload matches its installation record",
+          "name": "evaluator-payload",
+          "passed": false
+        },
+        {
+          "detail": "config, installation and running checker versions must agree",
+          "name": "selected-version",
+          "passed": false
+        }
+      ]
+    },
+    "implementation-review": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "work\\review_cleanup_025.py"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "started_at": "2026-09-16T12:52:25.758875+00:00",
+      "exit_code": 1,
+      "elapsed_seconds": 14.565,
+      "finished_at": "2026-09-16T12:52:40.327597+00:00",
+      "output": {
+        "path": "work\\cleanup-025-checks\\implementation-review.log",
+        "bytes": 1239,
+        "sha256": "c930cd92872ecb36e86a7cfcbdf51251b8c3e0c9d5497d9342aa305c66d8d641"
+      }
+    },
+    "implementation-review-corrected": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "work\\review_cleanup_025.py"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "started_at": "2026-09-16T12:54:20.812715+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 18.245,
+      "finished_at": "2026-09-16T12:54:39.061494+00:00",
+      "output": {
+        "path": "work\\cleanup-025-checks\\implementation-review-corrected.log",
+        "bytes": 1831,
+        "sha256": "b459e59c605380f9ef989445623866cfd4ef67eac4c4babc373a91b56906c134"
+      }
+    },
+    "final-diff-review": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "work\\review_cleanup_025.py"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "started_at": "2026-09-16T13:01:43.931411+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 9.141,
+      "finished_at": "2026-09-16T13:01:53.073915+00:00",
+      "output": {
+        "path": "work\\cleanup-025-checks\\final-diff-review.log",
+        "bytes": 1831,
+        "sha256": "92d62a32b7e25e9678affe397e734dd87bc43d7a77b8d0227a7253a65c642704"
+      }
+    }
+  },
+  "governing_evaluator": {
+    "owner-approval-preview": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--set",
+        "SPEC-DST-029=approved",
+        "--decision",
+        "SPEC-DST-029=technical-owner",
+        "--reason",
+        "SPEC-DST-029=The owner approved the reviewed replacement package with \"i approve\" on 2026-09-16, exercising the named technical-owner decision for SPEC-DST-029. Reviewed SHA-256 838730f9bd4ae442fdb3b7ab0c2be9b3363e78bf86bbc3925d07dba6772d94d0. This records the definition or execution-scope approval; it makes no assurance or external-delivery decision.",
+        "--set",
+        "VER-PLG-025=approved",
+        "--decision",
+        "VER-PLG-025=assurance-owner",
+        "--reason",
+        "VER-PLG-025=The owner approved the reviewed replacement package with \"i approve\" on 2026-09-16, exercising the named assurance-owner decision for VER-PLG-025. Reviewed SHA-256 983ef679bb25e71af4f8bf1784c79760dbcd4b08c3a1e6fc40aa00d8254d3013. This records the definition or execution-scope approval; it makes no assurance or external-delivery decision.",
+        "--set",
+        "WO-PLG-025=approved",
+        "--decision",
+        "WO-PLG-025=engineering-owner",
+        "--reason",
+        "WO-PLG-025=The owner approved the reviewed replacement package with \"i approve\" on 2026-09-16, exercising the named engineering-owner decision for WO-PLG-025. Reviewed SHA-256 c1729a68823febb66a11162761f32eac83087d35b871a3780d624a9d400f66c5. This records the definition or execution-scope approval; it makes no assurance or external-delivery decision.",
+        "--set",
+        "WO-PLG-024=rejected",
+        "--decision",
+        "WO-PLG-024=engineering-owner",
+        "--reason",
+        "WO-PLG-024=Remaining execution is replaced by WO-PLG-025 because the original scope omitted required README, test and documentation corrections. Preserve the already applied cleanup and all observations. This disposition closes the original work authorization; it neither marks that work complete nor rejects the released plugin-ownership behavior. The owner approved this exact replacement disposition with \"i approve\" on 2026-09-16.",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "result": {
+        "operation": {
+          "kind": "transition",
+          "outcome": "completed"
+        },
+        "state": {
+          "before": [
+            {
+              "id": "SPEC-DST-029",
+              "status": "draft"
+            },
+            {
+              "id": "VER-PLG-025",
+              "status": "draft"
+            },
+            {
+              "id": "WO-PLG-024",
+              "status": "in_progress"
+            },
+            {
+              "id": "WO-PLG-025",
+              "status": "draft"
+            }
+          ],
+          "after": [
+            {
+              "id": "SPEC-DST-029",
+              "status": "approved"
+            },
+            {
+              "id": "VER-PLG-025",
+              "status": "approved"
+            },
+            {
+              "id": "WO-PLG-024",
+              "status": "rejected"
+            },
+            {
+              "id": "WO-PLG-025",
+              "status": "approved"
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Planned 4 explicit lifecycle transition(s); no files were written."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "SPEC-DST-029 is approved."
+          ],
+          "decision_required": {
+            "decision_right": "DR-DEFINITION-DECIDE",
+            "role": "definition-owner",
+            "artifact": "SPEC-DST-029",
+            "decision": "whether the selected definition is complete",
+            "outcomes": [
+              "implemented",
+              "reject",
+              "stop"
+            ]
+          },
+          "next": {
+            "procedure_id": "PROC-DEFINITION-COMPLETE",
+            "step_id": "STEP-DEFINITION-COMPLETE",
+            "action": "whether the selected definition is complete"
+          },
+          "command_or_response": {
+            "kind": "response",
+            "value": "Decide the selected definition SPEC-DST-029 only."
+          },
+          "alternatives": []
+        }
+      },
+      "output": {
+        "path": "work\\plugin-publication-governance\\cleanup-025-owner-approval-preview.json",
+        "bytes": 10781,
+        "sha256": "9ce8ad6b3e50268fc8de6a32b54fd5c5f20485cec4d98dca77e634b8c667fe37"
+      }
+    },
+    "owner-approval-apply": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--set",
+        "SPEC-DST-029=approved",
+        "--decision",
+        "SPEC-DST-029=technical-owner",
+        "--reason",
+        "SPEC-DST-029=The owner approved the reviewed replacement package with \"i approve\" on 2026-09-16, exercising the named technical-owner decision for SPEC-DST-029. Reviewed SHA-256 838730f9bd4ae442fdb3b7ab0c2be9b3363e78bf86bbc3925d07dba6772d94d0. This records the definition or execution-scope approval; it makes no assurance or external-delivery decision.",
+        "--set",
+        "VER-PLG-025=approved",
+        "--decision",
+        "VER-PLG-025=assurance-owner",
+        "--reason",
+        "VER-PLG-025=The owner approved the reviewed replacement package with \"i approve\" on 2026-09-16, exercising the named assurance-owner decision for VER-PLG-025. Reviewed SHA-256 983ef679bb25e71af4f8bf1784c79760dbcd4b08c3a1e6fc40aa00d8254d3013. This records the definition or execution-scope approval; it makes no assurance or external-delivery decision.",
+        "--set",
+        "WO-PLG-025=approved",
+        "--decision",
+        "WO-PLG-025=engineering-owner",
+        "--reason",
+        "WO-PLG-025=The owner approved the reviewed replacement package with \"i approve\" on 2026-09-16, exercising the named engineering-owner decision for WO-PLG-025. Reviewed SHA-256 c1729a68823febb66a11162761f32eac83087d35b871a3780d624a9d400f66c5. This records the definition or execution-scope approval; it makes no assurance or external-delivery decision.",
+        "--set",
+        "WO-PLG-024=rejected",
+        "--decision",
+        "WO-PLG-024=engineering-owner",
+        "--reason",
+        "WO-PLG-024=Remaining execution is replaced by WO-PLG-025 because the original scope omitted required README, test and documentation corrections. Preserve the already applied cleanup and all observations. This disposition closes the original work authorization; it neither marks that work complete nor rejects the released plugin-ownership behavior. The owner approved this exact replacement disposition with \"i approve\" on 2026-09-16.",
+        "--json",
+        "--apply"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "result": {
+        "operation": {
+          "kind": "transition",
+          "outcome": "completed"
+        },
+        "state": {
+          "before": [
+            {
+              "id": "SPEC-DST-029",
+              "status": "draft"
+            },
+            {
+              "id": "VER-PLG-025",
+              "status": "draft"
+            },
+            {
+              "id": "WO-PLG-024",
+              "status": "in_progress"
+            },
+            {
+              "id": "WO-PLG-025",
+              "status": "draft"
+            }
+          ],
+          "after": [
+            {
+              "id": "SPEC-DST-029",
+              "status": "approved"
+            },
+            {
+              "id": "VER-PLG-025",
+              "status": "approved"
+            },
+            {
+              "id": "WO-PLG-024",
+              "status": "rejected"
+            },
+            {
+              "id": "WO-PLG-025",
+              "status": "approved"
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Applied 4 explicit lifecycle transition(s) atomically."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "SPEC-DST-029 is approved."
+          ],
+          "decision_required": {
+            "decision_right": "DR-DEFINITION-DECIDE",
+            "role": "definition-owner",
+            "artifact": "SPEC-DST-029",
+            "decision": "whether the selected definition is complete",
+            "outcomes": [
+              "implemented",
+              "reject",
+              "stop"
+            ]
+          },
+          "next": {
+            "procedure_id": "PROC-DEFINITION-COMPLETE",
+            "step_id": "STEP-DEFINITION-COMPLETE",
+            "action": "whether the selected definition is complete"
+          },
+          "command_or_response": {
+            "kind": "response",
+            "value": "Decide the selected definition SPEC-DST-029 only."
+          },
+          "alternatives": []
+        }
+      },
+      "output": {
+        "path": "work\\plugin-publication-governance\\cleanup-025-owner-approval-apply.json",
+        "bytes": 10769,
+        "sha256": "9be665e7ce61c537541a59b00566a86b13adaa907bb0c0f16acd221e6ce6a3e7"
+      }
+    },
+    "start-preflight": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--work-order",
+        "WO-PLG-025",
+        "--phase",
+        "start",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "result": {
+        "ready": true,
+        "diagnostics": [],
+        "phase": "start"
+      },
+      "output": {
+        "path": "work\\plugin-publication-governance\\cleanup-025-start-preflight.json",
+        "bytes": 2360,
+        "sha256": "87ac10ba30636e088376c6f0fbc6d5565fce3805a1f0ca5c996ae2117f27edf7"
+      }
+    },
+    "approved-selection": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--artifact",
+        "WO-PLG-025",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "result": {
+        "operation": {
+          "kind": "check",
+          "outcome": "completed"
+        },
+        "state": {
+          "before": [
+            {
+              "id": "WO-PLG-025",
+              "status": "approved"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-PLG-025",
+              "status": "approved"
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Projected the selected scope for WO-PLG-025."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "WO-PLG-025 is approved."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-WO-START",
+            "step_id": "STEP-WO-START-PREFLIGHT",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-PLG-025",
+              "--phase",
+              "start"
+            ]
+          },
+          "alternatives": []
+        }
+      },
+      "output": {
+        "path": "work\\plugin-publication-governance\\cleanup-025-approved-selection.json",
+        "bytes": 13187,
+        "sha256": "f0a3b24e640007ca13e885763a7fcea258b8821c73640e12384fdd62be385f2d"
+      }
+    },
+    "start-preview-corrected": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--set",
+        "WO-PLG-025=in_progress",
+        "--decision",
+        "WO-PLG-025=Codex",
+        "--reason",
+        "WO-PLG-025=Start routine execution of the owner-approved replacement cleanup work order after passing start preflight.",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "result": {
+        "operation": {
+          "kind": "transition",
+          "outcome": "completed"
+        },
+        "state": {
+          "before": [
+            {
+              "id": "WO-PLG-025",
+              "status": "approved"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-PLG-025",
+              "status": "in_progress"
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Planned 1 explicit lifecycle transition(s); no files were written."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "WO-PLG-025 is in_progress."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-WO-IMPLEMENT",
+            "step_id": "STEP-WO-IMPLEMENT-CHECK",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-PLG-025",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "alternatives": []
+        }
+      },
+      "output": {
+        "path": "work\\plugin-publication-governance\\cleanup-025-start-preview-corrected.json",
+        "bytes": 13682,
+        "sha256": "8fc1b0f44fbc8a6381e9f77c4dd38e34551a938137b9145c7740297751eb3ab4"
+      }
+    },
+    "start-apply": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--set",
+        "WO-PLG-025=in_progress",
+        "--decision",
+        "WO-PLG-025=Codex",
+        "--reason",
+        "WO-PLG-025=Start routine execution of the owner-approved replacement cleanup work order after passing start preflight.",
+        "--apply",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "result": {
+        "operation": {
+          "kind": "transition",
+          "outcome": "completed"
+        },
+        "state": {
+          "before": [
+            {
+              "id": "WO-PLG-025",
+              "status": "approved"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-PLG-025",
+              "status": "in_progress"
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Applied 1 explicit lifecycle transition(s) atomically."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "WO-PLG-025 is in_progress."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-WO-IMPLEMENT",
+            "step_id": "STEP-WO-IMPLEMENT-CHECK",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-PLG-025",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "alternatives": []
+        }
+      },
+      "output": {
+        "path": "work\\plugin-publication-governance\\cleanup-025-start-apply.json",
+        "bytes": 13670,
+        "sha256": "429ec9ed0d259cbabc472d5d4a628f0f3b8a286b02032caf912eab1ecd3d471a"
+      }
+    },
+    "started-scope": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--artifact",
+        "WO-PLG-025",
+        "--checkpoint",
+        "scope",
+        "--from-git",
+        "f05c478a29c39f94968fdc842a34c861d30a42ac",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "result": {
+        "operation": {
+          "kind": "check",
+          "outcome": "completed"
+        },
+        "state": {
+          "before": [
+            {
+              "id": "WO-PLG-025",
+              "status": "in_progress"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-PLG-025",
+              "status": "in_progress"
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Evaluated scope compliance for WO-PLG-025."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "WO-PLG-025 is in_progress."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-WO-IMPLEMENT",
+            "step_id": "STEP-WO-IMPLEMENT-PREVIEW",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "transition",
+              ".",
+              "--set",
+              "WO-PLG-025=implemented",
+              "--decision",
+              "WO-PLG-025=delegated-executor"
+            ]
+          },
+          "alternatives": []
+        }
+      },
+      "output": {
+        "path": "work\\plugin-publication-governance\\cleanup-025-started-scope.json",
+        "bytes": 14783,
+        "sha256": "88e60ab1a6406be8112e546ec8fac8ecdc2f56433d27594086a1c3750ea49e3a"
+      }
+    },
+    "governing-doctor": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "result": {
+        "checks": 64,
+        "failed": []
+      },
+      "output": {
+        "path": "work\\plugin-publication-governance\\cleanup-025-governing-doctor.json",
+        "bytes": 20760,
+        "sha256": "d4d8220fa68a97544ffa49ebcc5029b5e14d8ae437296deaa93ab19e68923087"
+      }
+    },
+    "implementation-graph": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "result": {
+        "valid": true,
+        "artifact_count": 1657,
+        "error_count": 0,
+        "warning_count": 48
+      },
+      "output": {
+        "path": "work\\plugin-publication-governance\\cleanup-025-implementation-graph.json",
+        "bytes": 327951,
+        "sha256": "64c72c1e045f5e83fcee3b7f0636aa135862ab6e69d8025e98036361272d81b8"
+      }
+    },
+    "review-preflight": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--work-order",
+        "WO-PLG-025",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "result": {
+        "ready": true,
+        "diagnostics": [],
+        "phase": "review"
+      },
+      "output": {
+        "path": "work\\plugin-publication-governance\\cleanup-025-review-preflight.json",
+        "bytes": 2364,
+        "sha256": "c62ba4f188de1f7ddb991b1373a55ec7a3215ba2c3e0a57ce6ece3fd80a1b49b"
+      }
+    },
+    "final-handoff": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--artifact",
+        "WO-PLG-025",
+        "--checkpoint",
+        "handoff",
+        "--from-git",
+        "f05c478a29c39f94968fdc842a34c861d30a42ac",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "result": {
+        "operation": {
+          "kind": "check",
+          "outcome": "completed"
+        },
+        "state": {
+          "before": [
+            {
+              "id": "WO-PLG-025",
+              "status": "in_progress"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-PLG-025",
+              "status": "in_progress"
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Evaluated handoff compliance for WO-PLG-025."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "WO-PLG-025 is in_progress."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-WO-IMPLEMENT",
+            "step_id": "STEP-WO-IMPLEMENT-PREVIEW",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "transition",
+              ".",
+              "--set",
+              "WO-PLG-025=implemented",
+              "--decision",
+              "WO-PLG-025=delegated-executor"
+            ]
+          },
+          "alternatives": []
+        }
+      },
+      "output": {
+        "path": "work\\plugin-publication-governance\\cleanup-025-final-handoff.json",
+        "bytes": 17703,
+        "sha256": "78470ecfa545f73b455878ed6e402cf778886f7fd785758393b025600368cf7b"
+      }
+    },
+    "complete-preview": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--set",
+        "WO-PLG-025=implemented",
+        "--decision",
+        "WO-PLG-025=Codex",
+        "--reason",
+        "WO-PLG-025=Completed the approved cleanup and onboarding corrections. The full 1068-test suite passes with 15 skips; required integrity, graph, distribution, review and Git-derived handoff checks pass. Earlier failures and reuse comparisons are retained under the approved evidence scope.",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "result": {
+        "operation": {
+          "kind": "transition",
+          "outcome": "completed"
+        },
+        "state": {
+          "before": [
+            {
+              "id": "WO-PLG-025",
+              "status": "in_progress"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-PLG-025",
+              "status": "implemented"
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Planned 1 explicit lifecycle transition(s); no files were written."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "WO-PLG-025 is implemented."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-WO-PREPARE-VREC",
+            "step_id": "STEP-WO-PREPARE-VREC-CAPTURE",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "capture-verification",
+              ".",
+              "--work-order",
+              "WO-PLG-025",
+              "--owner",
+              "delegated-executor",
+              "--id",
+              "VREC-...",
+              "--verification",
+              "VER-...",
+              "--evidence",
+              "..."
+            ]
+          },
+          "alternatives": []
+        }
+      },
+      "output": {
+        "path": "work\\plugin-publication-governance\\cleanup-025-complete-preview.json",
+        "bytes": 8614,
+        "sha256": "66d0a0eec5e2ad9463cdf29d6ff4d39a697fd5d8896dcfbe67335a68d1d1936e"
+      }
+    },
+    "complete-apply": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--set",
+        "WO-PLG-025=implemented",
+        "--decision",
+        "WO-PLG-025=Codex",
+        "--reason",
+        "WO-PLG-025=Completed the approved cleanup and onboarding corrections. The full 1068-test suite passes with 15 skips; required integrity, graph, distribution, review and Git-derived handoff checks pass. Earlier failures and reuse comparisons are retained under the approved evidence scope.",
+        "--apply",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "result": {
+        "operation": {
+          "kind": "transition",
+          "outcome": "completed"
+        },
+        "state": {
+          "before": [
+            {
+              "id": "WO-PLG-025",
+              "status": "in_progress"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-PLG-025",
+              "status": "implemented"
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Applied 1 explicit lifecycle transition(s) atomically."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "WO-PLG-025 is implemented."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-WO-PREPARE-VREC",
+            "step_id": "STEP-WO-PREPARE-VREC-CAPTURE",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "capture-verification",
+              ".",
+              "--work-order",
+              "WO-PLG-025",
+              "--owner",
+              "delegated-executor",
+              "--id",
+              "VREC-...",
+              "--verification",
+              "VER-...",
+              "--evidence",
+              "..."
+            ]
+          },
+          "alternatives": []
+        }
+      },
+      "output": {
+        "path": "work\\plugin-publication-governance\\cleanup-025-complete-apply.json",
+        "bytes": 8602,
+        "sha256": "62199ff1456612d7d8fa37873e9638aa137861381499321dcb429f54bbc3f2fc"
+      }
+    }
+  },
+  "retained_failed_start_syntax": {
+    "argv": [
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "transition",
+      "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "--set",
+      "WO-PLG-025=in_progress",
+      "--decision",
+      "WO-PLG-025=Codex",
+      "--reason",
+      "Start routine execution of the owner-approved replacement cleanup work order after passing start preflight.",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+    "exit_code": 2,
+    "error": "harnessctl: --reason must use ID=VALUE\n",
+    "effect": "No transition; corrected ID=reason preview and apply passed."
+  },
+  "review_helper_correction": "The first review used a nonexistent local plugin-marketplace ref. The observed ref is refs/remotes/origin/plugin-marketplace; correcting this read-only comparison passed. No ref was created or changed.",
+  "prior_failures": {
+    "source_run": "../WO-PLG-024/source-suite-readme-repair.log",
+    "tests": 1068,
+    "failures": 12,
+    "skips": 15,
+    "resolution": "SPEC-DST-029 prospectively approves linked manual setup. Three tests now check native setup/commands and linked manual examples; the operator-note test resolves retained shipped sources. All 15 focused tests pass."
+  },
+  "limits": "Windows/Python 3.13.3 local checks. No new host installation, remote CI, public catalog approval, push or PR. Migration and native discovery are reused only after input comparisons in implementation-review.json."
+}

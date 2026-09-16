@@ -59,6 +59,20 @@ def lock(version: str, *, schema: int, identity: dict[str, str] | None) -> bytes
     return json.dumps(value, indent=2, sort_keys=True).encode("utf-8") + b"\n"
 
 
+SKILL = ".agents/skills/harness-orient/SKILL.md"
+CATALOG_PATH = "se_harness/skill_ownership_contract.json"
+
+
+def ownership_locks() -> tuple[dict, dict]:
+    repository = json.loads(lock("7.4.0", schema=3, identity=evaluator("7.4.0")))
+    plugin = json.loads(lock("7.4.0", schema=4, identity=evaluator("7.4.0")))
+    for value in (repository, plugin):
+        value["files"]["ENGINEERING_HARNESS.md"] = {"mode": "managed", "sha256": "c" * 64}
+    repository["files"][SKILL] = {"mode": "seed", "state": "present"}
+    plugin["skill_ownership"] = {"provider": "plugin"}
+    return repository, plugin
+
+
 class RepositoryFixture:
     def __init__(self, root: Path) -> None:
         self.root = root
@@ -252,6 +266,194 @@ class GovernorTransitionTests(unittest.TestCase):
             write(fixture.root / ".engineering-harness.lock", canonical_json(changed))
             fixture.commit("drift")
             with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, "same-version"):
+                TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+
+    def test_provider_switch_and_restoration_need_no_evaluator_transition(self) -> None:
+        repository, plugin = ownership_locks()
+        for before, after in ((repository, plugin), (plugin, repository)):
+            with self.subTest(target_schema=after["schema"]):
+                temporary, fixture = self.fixture()
+                with temporary:
+                    fixture.base()
+                    write(fixture.root / CATALOG_PATH, canonical_json({"catalog": [SKILL]}))
+                    write(fixture.root / ".engineering-harness.lock", canonical_json(before))
+                    base = fixture.commit("initial ownership")
+                    write(fixture.root / ".engineering-harness.lock", canonical_json(after))
+                    head = fixture.commit("switch ownership")
+                    result = TRANSITION.assess(str(fixture.root), base, "refs/remotes/origin/main", None, None, None)
+                    self.assertFalse(result["transition_required"])
+                    self.assertEqual("not_applicable", result["assessment"])
+                    self.assertEqual({}, result["commands"])
+                    self.assertEqual(head, result["target"]["commit"])
+                    self.assertEqual("", git(fixture.root, "status", "--porcelain"))
+
+    def test_plugin_switch_accepts_absent_or_removed_old_seeds(self) -> None:
+        for seed in (None, {"mode": "seed", "state": "removed"}):
+            with self.subTest(seed=seed):
+                temporary, fixture = self.fixture()
+                with temporary:
+                    fixture.base()
+                    repository, plugin = ownership_locks()
+                    repository["files"].pop(SKILL)
+                    if seed is not None:
+                        repository["files"][SKILL] = seed
+                    write(fixture.root / CATALOG_PATH, canonical_json({"catalog": [SKILL]}))
+                    write(fixture.root / ".engineering-harness.lock", canonical_json(repository))
+                    base = fixture.commit("old seed state")
+                    write(fixture.root / ".engineering-harness.lock", canonical_json(plugin))
+                    fixture.commit("plugin ownership")
+                    self.assertFalse(TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")["transition_required"])
+
+    def test_unchanged_plugin_lock_accepts_current_and_previous_binding_fields(self) -> None:
+        for binding in ({"provider": "plugin"}, {"provider": "plugin", "plugin_version": "0.1.0"}):
+            with self.subTest(binding=binding):
+                temporary, fixture = self.fixture()
+                with temporary:
+                    fixture.base()
+                    _, plugin = ownership_locks()
+                    plugin["skill_ownership"] = binding
+                    write(fixture.root / ".engineering-harness.lock", canonical_json(plugin))
+                    base = fixture.commit("plugin ownership")
+                    write(fixture.root / "notes.txt", b"ordinary change\n")
+                    fixture.commit("ordinary")
+                    self.assertFalse(TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")["transition_required"])
+
+    def test_schema_and_provider_errors_are_rejected(self) -> None:
+        cases = [(schema, {"provider": "plugin"}) for schema in (1, 2, 5, "4", 4.0)]
+        cases += [(4, value) for value in (None, [], {}, {"provider": "repository"})]
+        cases.append((3, {"provider": "plugin"}))
+        for schema, binding in cases:
+            with self.subTest(schema=schema, binding=binding):
+                temporary, fixture = self.fixture()
+                with temporary:
+                    base = fixture.base()
+                    _, value = ownership_locks()
+                    value.update(schema=schema, skill_ownership=binding)
+                    write(fixture.root / ".engineering-harness.lock", canonical_json(value))
+                    fixture.commit("invalid ownership")
+                    with self.assertRaises(TRANSITION.GovernorTransitionError) as caught:
+                        TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+                    if schema in (1, 2):
+                        self.assertIn("schema-3 floor", str(caught.exception))
+                        self.assertIn("harnessctl init", str(caught.exception))
+
+    def test_incomplete_seed_switches_and_same_provider_edits_are_rejected(self) -> None:
+        repository, plugin = ownership_locks()
+        retained = json.loads(canonical_json(plugin))
+        retained["files"][SKILL] = {"mode": "seed", "state": "present"}
+        missing = json.loads(canonical_json(repository))
+        missing["files"].pop(SKILL)
+        drift = json.loads(canonical_json(plugin))
+        drift["files"]["unrelated.md"] = {"mode": "seed", "state": "present"}
+        for before, after in ((repository, retained), (plugin, missing), (plugin, drift)):
+            with self.subTest(before=before["schema"], after=after["schema"]):
+                temporary, fixture = self.fixture()
+                with temporary:
+                    fixture.base()
+                    write(fixture.root / CATALOG_PATH, canonical_json({"catalog": [SKILL]}))
+                    write(fixture.root / ".engineering-harness.lock", canonical_json(before))
+                    base = fixture.commit("initial ownership")
+                    write(fixture.root / ".engineering-harness.lock", canonical_json(after))
+                    fixture.commit("invalid ownership change")
+                    with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, "same-version"):
+                        TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+
+    def test_ownership_switch_does_not_excuse_other_lock_changes(self) -> None:
+        changes = (
+            ("evaluator", "payload_sha256", "d" * 64),
+            ("evaluator", "archive_sha256", "d" * 64),
+            ("evaluator", "version", "7.5.0"),
+            ("evaluator", "payload_sha256", "invalid"),
+            ("files", "ENGINEERING_HARNESS.md", {"mode": "managed", "sha256": "d" * 64}),
+            (None, "hash_mode", "raw"),
+            (None, "tool_version", "7.5.0"),
+            (None, "unrelated", True),
+        )
+        for section, field, value in changes:
+            with self.subTest(section=section, field=field, value=value):
+                temporary, fixture = self.fixture()
+                with temporary:
+                    fixture.base()
+                    repository, plugin = ownership_locks()
+                    # JSON true must not compare equal to an unrelated numeric value.
+                    if field == "unrelated":
+                        repository["unrelated"] = 1
+                    write(fixture.root / CATALOG_PATH, canonical_json({"catalog": [SKILL]}))
+                    write(fixture.root / ".engineering-harness.lock", canonical_json(repository))
+                    base = fixture.commit("repository ownership")
+                    (plugin if section is None else plugin[section])[field] = value
+                    write(fixture.root / ".engineering-harness.lock", canonical_json(plugin))
+                    fixture.commit("ownership with drift")
+                    with self.assertRaises(TRANSITION.GovernorTransitionError):
+                        TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+
+    def test_catalogue_membership_does_not_excuse_managed_entry_removal(self) -> None:
+        for mode in ("managed", "fragment"):
+            with self.subTest(mode=mode):
+                temporary, fixture = self.fixture()
+                with temporary:
+                    fixture.base()
+                    repository, plugin = ownership_locks()
+                    repository["files"][SKILL] = {"mode": mode, "sha256": "c" * 64}
+                    write(fixture.root / CATALOG_PATH, canonical_json({"catalog": [SKILL]}))
+                    write(fixture.root / ".engineering-harness.lock", canonical_json(repository))
+                    base = fixture.commit("locked skill")
+                    write(fixture.root / ".engineering-harness.lock", canonical_json(plugin))
+                    fixture.commit("remove locked skill")
+                    with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, "same-version"):
+                        TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+
+    def test_ownership_switch_requires_trusted_base_catalogue(self) -> None:
+        for catalog in (None, b"invalid", b'{"catalog":[]}', b'{"catalog":[7]}', b'{"catalog":["a","a"]}'):
+            with self.subTest(catalog=catalog):
+                temporary, fixture = self.fixture()
+                with temporary:
+                    fixture.base()
+                    repository, plugin = ownership_locks()
+                    if catalog is not None:
+                        write(fixture.root / CATALOG_PATH, catalog)
+                    write(fixture.root / ".engineering-harness.lock", canonical_json(repository))
+                    base = fixture.commit("bad base catalogue")
+                    write(fixture.root / CATALOG_PATH, canonical_json({"catalog": [SKILL]}))
+                    write(fixture.root / ".engineering-harness.lock", canonical_json(plugin))
+                    fixture.commit("target cannot replace trusted input")
+                    with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, "catalogue"):
+                        TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+
+    def test_target_catalogue_cannot_expand_ownership_exception(self) -> None:
+        temporary, fixture = self.fixture()
+        with temporary:
+            fixture.base()
+            repository, plugin = ownership_locks()
+            repository["files"]["unrelated.md"] = {"mode": "seed", "state": "present"}
+            write(fixture.root / CATALOG_PATH, canonical_json({"catalog": [SKILL]}))
+            write(fixture.root / ".engineering-harness.lock", canonical_json(repository))
+            base = fixture.commit("trusted catalogue")
+            write(fixture.root / CATALOG_PATH, canonical_json({"catalog": [SKILL, "unrelated.md"]}))
+            write(fixture.root / ".engineering-harness.lock", canonical_json(plugin))
+            fixture.commit("expanded target catalogue")
+            with self.assertRaisesRegex(TRANSITION.GovernorTransitionError, "same-version"):
+                TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+
+    def test_evaluator_upgrade_with_plugin_ownership_keeps_transition_evidence_checks(self) -> None:
+        temporary, fixture = self.fixture()
+        with temporary:
+            fixture.base()
+            _, plugin = ownership_locks()
+            write(fixture.root / ".engineering-harness.lock", canonical_json(plugin))
+            base = fixture.commit("plugin base")
+            fixture.target(base)
+            value = json.loads((fixture.root / ".engineering-harness.lock").read_text())
+            value.update(schema=4, skill_ownership={"provider": "plugin"})
+            write(fixture.root / ".engineering-harness.lock", canonical_json(value))
+            fixture.commit("upgraded plugin root")
+            plan = TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
+            self.assertTrue(plan["transition_required"])
+            self.assertEqual("RLS-TST-001", plan["transition"]["trusted_release"]["id"])
+            value["evaluator"]["payload_sha256"] = "d" * 64
+            write(fixture.root / ".engineering-harness.lock", canonical_json(value))
+            fixture.commit("tamper with upgrade payload")
+            with self.assertRaises(TRANSITION.GovernorTransitionError):
                 TRANSITION.build_plan(str(fixture.root), base, "refs/remotes/origin/main")
 
     def test_wrong_prior_lock_fails_closed(self) -> None:

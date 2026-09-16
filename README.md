@@ -72,6 +72,8 @@ Verity Plane Explorer shows the connections between requirements, work, evidence
 
 ## Go further
 
+- [Start with the checker](docs/notes/getting-started.md)
+- [Install or upgrade a project](docs/notes/harness-installation-and-upgrades.md)
 - [Understand the model](docs/notes/harness-overview.md)
 - [Follow a complete example](docs/notes/harness-lineage-example.md)
 - [Look up a command](docs/notes/harnessctl-reference.md)

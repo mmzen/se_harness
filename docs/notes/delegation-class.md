@@ -1,10 +1,12 @@
 # One execution route
 
-This note describes candidate behavior under SPEC-KIS-003. A repository follows
-its installed release until an authorized upgrade; this source repository still
-uses 0.17.0. The policy owner is the candidate
-[DECISION_RIGHTS.md](../../templates/repository/standard/docs/engineering/DECISION_RIGHTS.md#approved-execution),
-and the procedure is [WORKFLOW.md](../../templates/repository/standard/docs/engineering/WORKFLOW.md#approved-execution).
+This note describes the execution route adopted by this repository with
+released SE Harness 0.18.0 under WO-HUP-019. The installed policy owner is
+[DECISION_RIGHTS.md](../engineering/DECISION_RIGHTS.md#approved-execution),
+and the procedure is [WORKFLOW.md](../engineering/WORKFLOW.md#approved-execution).
+Other repositories follow their own installed release until an authorized upgrade.
+The filename is retained for existing links; no delegation class or root
+`.engineering-harness.delegation.toml` setting is needed for this route.
 
 Approve the work once. Its selected executor then starts, implements, tests,
 records completion and prepares required verification within the approved scope.
