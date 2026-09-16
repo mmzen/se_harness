@@ -2,7 +2,7 @@
 id = "VREC-HUP-019"
 type = "verification_record"
 title = "Verification candidate for 2 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-16"
 updated = "2026-09-16"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/plugin-integration/evidence/WO-PLG-023/PACKA
 evaluator_evidence_path = "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-019-evaluator.json"
 evaluator_evidence_sha256 = "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f"
 
+verified_at = "2026-09-16T15:49:55Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-HUP-020", "WO-PLG-025"]
 conforms_to = ["VER-HUP-020", "VER-PLG-025"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-16T15:49:55Z"
+decided_by = "assurance-owner"
+reason = "The user explicitly decided \"I verify VREC-HUP-019\" in response to the requested assurance-owner decision. Record that decision for candidate 4bfb76b038ef52b9360bca3af671a955e4b660f4 after confirming all 29 retained evidence files and the evaluator sidecar are unchanged and the assurance gates pass. This records assurance only; hosted CI and external delivery remain separate."
 +++
 
 # Verification Record Candidate
