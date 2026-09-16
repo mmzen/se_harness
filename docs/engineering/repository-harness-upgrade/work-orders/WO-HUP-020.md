@@ -2,7 +2,7 @@
 id = "WO-HUP-020"
 type = "work_order"
 title = "Support plugin ownership in the existing CI assessor"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-16"
 updated = "2026-09-16"
@@ -45,6 +45,13 @@ to = "in_progress"
 decided_at = "2026-09-16T14:05:43Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Start the approved bounded assessor correction under DR-015 after passing start preflight; reviewed owner approval is recorded."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-16T14:39:13Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Complete the approved bounded correction under DR-015: review, 1078-test local suite, final comparison regressions, required checks, committed CI replay and combined scope pass. Retained evidence distinguishes the final candidate capture and pending hosted CI."
 +++
 
 # Support plugin ownership in the existing CI assessor

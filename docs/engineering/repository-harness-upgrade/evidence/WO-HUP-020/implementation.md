@@ -9,7 +9,7 @@ The plugin side has no catalogued entries; restoration reinstates seed entries.
 Managed/fragment changes, malformed ownership and unrelated drift still fail.
 Real evaluator upgrades retain their existing exact release/evidence checks.
 
-Local code and checks are complete. The clean committed CI replay is the next check.
+The clean implementation commit passes both the actual CI planner and assessor against the PR base. The assessor reports not_applicable and invokes no evaluator upgrade.
 
 ## Observed checks
 
@@ -21,7 +21,7 @@ Local code and checks are complete. The clean committed CI replay is the next ch
   complete source suite and both CI commands run again on the exact final
   committed candidate during capture; their observed output belongs in the VREC.
 - Released evaluator 0.18.0 doctor: 64 checks pass. Graph: 1,661 artifacts,
-  zero errors, 48 warnings. Review preflight passes. Current WO scope passes. The combined PR check initially refused missing handoff evidence; its normal handoff and retry follow integration checks.
+  zero errors, 48 warnings. Review preflight passes. Current WO and combined PR scope pass. The initial combined PR refusal for missing handoff evidence is retained alongside its successful retry.
 - Distribution validation: 15 records pass. Candidate CLI help passes.
 - Candidate doctor reports the existing source 0.19.0 versus selected 0.18.0
   differences in router, payload and selected version. Released doctor passes.

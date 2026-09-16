@@ -180,5 +180,9 @@ preparation binds the completed candidate; independent assurance remains separat
 schema-4 predecessor-assessment failure. The assessor uses the existing
 trusted-base skill catalogue to distinguish an ownership-only switch from
 evaluator or unrelated lock changes. Evaluator 0.18.0 and the existing workflow
-remain. WO-HUP-020 is in progress; its checks and fresh aggregate verification
-record are being prepared. Earlier VREC-PLG-022 remains unchanged.
+remain. WO-HUP-020 is implemented. The local suite passes 1,078 tests with 15
+skips; final comparison regressions, clean committed CI replay and combined PR
+scope pass. Evidence is retained under `evidence/WO-HUP-020/`. Fresh aggregate
+VREC-HUP-019 preparation will bind this correction and WO-PLG-025 to the completed
+candidate, including a final full-suite and CI replay. Earlier VREC-PLG-022
+remains unchanged; owner assurance and hosted CI follow preparation and delivery.

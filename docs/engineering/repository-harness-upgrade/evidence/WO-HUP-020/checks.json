@@ -1,5 +1,5 @@
 {
-  "observed_at": "2026-09-16T14:33:18.329661+00:00",
+  "observed_at": "2026-09-16T14:37:13.369034+00:00",
   "platform": "Windows-11-10.0.26100-SP0",
   "python": "3.13.3",
   "work_order": "WO-HUP-020",
@@ -141,6 +141,58 @@
       "output": {
         "path": "work/assessor-020-checks/implementation-review.log",
         "sha256": "9ac35c3db507e11383f00c8231f174655b594ff96f408a42c2332693b0142b13"
+      }
+    },
+    "committed-plan": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-S",
+        "scripts/validate_governor_transition.py",
+        "plan",
+        "--repository",
+        ".",
+        "--base-revision",
+        "f05c478a29c39f94968fdc842a34c861d30a42ac",
+        "--default-branch-ref",
+        "refs/remotes/origin/main",
+        "--output",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\assessor-committed-plan.json",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T14:33:44.391848+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 2.521,
+      "finished_at": "2026-09-16T14:33:46.920489+00:00",
+      "output": {
+        "path": "work/assessor-020-checks/committed-plan.log",
+        "sha256": "2da2f509fa800a88418b02f0f90fd57bb3ed261cc09f58d4a2d6fbad869cc7d4"
+      }
+    },
+    "committed-assess": {
+      "argv": [
+        "C:\\Python313\\python.exe",
+        "-S",
+        "scripts/validate_governor_transition.py",
+        "assess",
+        "--repository",
+        ".",
+        "--base-revision",
+        "f05c478a29c39f94968fdc842a34c861d30a42ac",
+        "--default-branch-ref",
+        "refs/remotes/origin/main",
+        "--output",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\assessor-committed-assess.json",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+      "started_at": "2026-09-16T14:33:45.741638+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 3.16,
+      "finished_at": "2026-09-16T14:33:48.904151+00:00",
+      "output": {
+        "path": "work/assessor-020-checks/committed-assess.log",
+        "sha256": "7e69dae51b3b6e7c14a5a2ef51b297e41441112f96b8de7517a2f1b1d797b2a2"
       }
     }
   },
@@ -347,6 +399,1010 @@
       "exit_code": 2,
       "stderr": "harnessctl: pull-request check: WO-HUP-020: QGP-G4I-EVIDENCE: No readable evidence for WO-HUP-020, checkpoint handoff, and formal snapshot b8702e76757a080244b01b46af11999507def9de69d92cf114d3a7975b4a3883 is available; write the header with harnessctl evidence . --artifact WO-HUP-020 --checkpoint handoff.\n",
       "interpretation": "Premature combined scope check before the new WO handoff was bound. The observed refusal is retained; rerun after normal handoff preparation."
+    },
+    "assessor-integration-handoff": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--artifact",
+        "WO-HUP-020",
+        "--checkpoint",
+        "handoff",
+        "--from-git",
+        "0dadc352b3a5e6c64c721e1c688cc215438ddd7f",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 1,
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "digest_format": "machine-fields-v1",
+        "candidate": {},
+        "operation": {
+          "kind": "check",
+          "outcome": "blocked"
+        },
+        "selection": {
+          "primary": "WO-HUP-020",
+          "artifacts": [
+            "WO-HUP-020"
+          ]
+        },
+        "scope": {
+          "mode": "selected",
+          "governing": [
+            "ADR-HUP-001",
+            "ARCH-HUP-003",
+            "CAP-HUP-002",
+            "CAP-HUP-003",
+            "INT-HUP-002",
+            "INT-HUP-003",
+            "REQ-HUP-008",
+            "REQ-HUP-024",
+            "SPEC-HUP-004",
+            "SPEC-HUP-012",
+            "SPEC-HUP-020",
+            "VER-HUP-020"
+          ],
+          "dependencies": [],
+          "declared_paths": [
+            "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-019-evaluator.json",
+            "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/",
+            "docs/engineering/repository-harness-upgrade/README.md",
+            "docs/engineering/repository-harness-upgrade/specifications/SPEC-HUP-020.md",
+            "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-019.md",
+            "docs/engineering/repository-harness-upgrade/verification/VER-HUP-020.md",
+            "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-020.md",
+            "scripts/validate_governor_transition.py",
+            "tests/test_governor_transition.py"
+          ],
+          "changed_paths": [
+            "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/checks.json",
+            "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/committed-assess.json",
+            "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/committed-plan.json",
+            "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/comparison-regression.log",
+            "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/draft-review.json",
+            "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/draft-review.md",
+            "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/handoff.json",
+            "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/implementation-review.json",
+            "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/implementation.md",
+            "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/original-planner-failure.json",
+            "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/source-suite.log",
+            "docs/engineering/repository-harness-upgrade/README.md",
+            "docs/engineering/repository-harness-upgrade/specifications/SPEC-HUP-020.md",
+            "docs/engineering/repository-harness-upgrade/verification/VER-HUP-020.md",
+            "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-020.md",
+            "scripts/validate_governor_transition.py",
+            "tests/test_governor_transition.py"
+          ],
+          "change_set_complete": true
+        },
+        "compliance": {
+          "checkpoint": "handoff",
+          "workflow_rule_id": "WFL-WO-IMPLEMENT",
+          "procedure_id": "PROC-WO-IMPLEMENT",
+          "status": "not_assessable",
+          "gates": [
+            {
+              "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+              "status": "not_assessable",
+              "predicates": [
+                {
+                  "id": "QGP-G4I-STATUS",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "WO-HUP-020"
+                    }
+                  ],
+                  "message": "WO-HUP-020 status is in_progress."
+                },
+                {
+                  "id": "QGP-G4I-GRAPH",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "formal-graph:WO-HUP-020"
+                    }
+                  ],
+                  "message": "The selected formal graph is valid."
+                },
+                {
+                  "id": "QGP-G4I-INTEGRITY",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "repository-integrity:handoff"
+                    }
+                  ],
+                  "message": "No repository-integrity blocker prevents selected evaluation."
+                },
+                {
+                  "id": "QGP-G4I-SCOPE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "artifact",
+                      "reference": "WO-HUP-020:[execution_scope]"
+                    }
+                  ],
+                  "message": "WO-HUP-020 has recorded execution approval for its 9 scope path(s)."
+                },
+                {
+                  "id": "QGP-G4I-COMPLETE",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "declared-change-set:WO-HUP-020"
+                    }
+                  ],
+                  "message": "The caller explicitly asserted that the declared change set is complete."
+                },
+                {
+                  "id": "QGP-G4I-PATHS",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "path",
+                      "reference": "declared-change-set:WO-HUP-020"
+                    }
+                  ],
+                  "message": "All 17 declared changed path(s) are within execution scope."
+                },
+                {
+                  "id": "QGP-G4I-PREFLIGHT",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "preflight:WO-HUP-020:review"
+                    }
+                  ],
+                  "message": "Released-installation review preflight inputs are ready."
+                },
+                {
+                  "id": "QGP-G4I-EVIDENCE",
+                  "status": "not_assessable",
+                  "evidence": [
+                    {
+                      "kind": "path",
+                      "reference": "work-order-evidence:WO-HUP-020"
+                    }
+                  ],
+                  "message": "No readable evidence for WO-HUP-020, checkpoint handoff, and formal snapshot b8702e76757a080244b01b46af11999507def9de69d92cf114d3a7975b4a3883 is available; write the header with harnessctl evidence . --artifact WO-HUP-020 --checkpoint handoff."
+                },
+                {
+                  "id": "QGP-G4I-DECISION",
+                  "status": "pass",
+                  "evidence": [
+                    {
+                      "kind": "result",
+                      "reference": "decision-register:WO-HUP-020"
+                    }
+                  ],
+                  "message": "No open decision blocks WO-HUP-020."
+                }
+              ]
+            }
+          ],
+          "formal_snapshot_sha256": "b8702e76757a080244b01b46af11999507def9de69d92cf114d3a7975b4a3883",
+          "change_set_source": "git"
+        },
+        "procedure": {
+          "id": "PROC-WO-IMPLEMENT",
+          "current_step": "STEP-WO-IMPLEMENT-CHECK",
+          "steps": [
+            {
+              "id": "STEP-WO-IMPLEMENT-CHECK",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Evaluated implementation handoff for WO-HUP-020."
+              ],
+              "non_effects": [
+                "A checkpoint does not complete or verify work."
+              ],
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "WO-HUP-020",
+                "--checkpoint",
+                "handoff"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-HUP-020",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-HUP-020",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-HUP-020",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            },
+            {
+              "id": "STEP-WO-IMPLEMENT-PREVIEW",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Plan completion of WO-HUP-020."
+              ],
+              "non_effects": [
+                "Completion does not verify, release or deliver the work."
+              ],
+              "argv": [
+                "harnessctl",
+                "transition",
+                ".",
+                "--set",
+                "WO-HUP-020=implemented",
+                "--decision",
+                "WO-HUP-020=delegated-executor"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-HUP-020",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-HUP-020",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-HUP-020",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            },
+            {
+              "id": "STEP-WO-IMPLEMENT-APPLY",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Record completion of only WO-HUP-020 under its approved execution scope."
+              ],
+              "non_effects": [
+                "Completion does not verify, release or deliver the work."
+              ],
+              "argv": [
+                "harnessctl",
+                "transition",
+                ".",
+                "--set",
+                "WO-HUP-020=implemented",
+                "--decision",
+                "WO-HUP-020=delegated-executor",
+                "--apply"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-HUP-020",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-HUP-020",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-HUP-020",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            }
+          ]
+        },
+        "state": {
+          "before": [
+            {
+              "id": "WO-HUP-020",
+              "status": "in_progress"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-HUP-020",
+              "status": "in_progress"
+            }
+          ]
+        },
+        "findings": {
+          "scoped_blockers": [],
+          "repository_blockers": [],
+          "unrelated_count": 48
+        },
+        "mutation": {
+          "writes": []
+        },
+        "restitution": {
+          "outcome": "blocked",
+          "done": [
+            "Evaluated handoff compliance for WO-HUP-020."
+          ],
+          "not_done": [
+            "The handoff checkpoint did not pass."
+          ],
+          "blocked_by": [
+            "QGP-G4I-EVIDENCE: No readable evidence for WO-HUP-020, checkpoint handoff, and formal snapshot b8702e76757a080244b01b46af11999507def9de69d92cf114d3a7975b4a3883 is available; write the header with harnessctl evidence . --artifact WO-HUP-020 --checkpoint handoff."
+          ],
+          "current_lifecycle_state": [
+            "WO-HUP-020 is in_progress."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-WO-IMPLEMENT",
+            "step_id": "STEP-WO-IMPLEMENT-CHECK",
+            "action": "Supply the corrective input for QGP-G4I-EVIDENCE"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-HUP-020",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "alternatives": []
+        },
+        "result_sha256": "b6a9e2287378f3893bc0392d1ae689fc49f9a58dd41e0d7fc463617448eb563f"
+      }
+    },
+    "assessor-bind-handoff": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "evidence",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--artifact",
+        "WO-HUP-020",
+        "--checkpoint",
+        "handoff",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "digest_format": "machine-fields-v1",
+        "candidate": {},
+        "operation": {
+          "kind": "evidence",
+          "outcome": "completed"
+        },
+        "selection": {
+          "primary": "WO-HUP-020",
+          "artifacts": [
+            "WO-HUP-020"
+          ]
+        },
+        "scope": {
+          "mode": "selected",
+          "governing": [
+            "ADR-HUP-001",
+            "ARCH-HUP-003",
+            "CAP-HUP-002",
+            "CAP-HUP-003",
+            "INT-HUP-002",
+            "INT-HUP-003",
+            "REQ-HUP-008",
+            "REQ-HUP-024",
+            "SPEC-HUP-004",
+            "SPEC-HUP-012",
+            "SPEC-HUP-020",
+            "VER-HUP-020"
+          ],
+          "dependencies": [],
+          "declared_paths": [
+            "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-019-evaluator.json",
+            "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/",
+            "docs/engineering/repository-harness-upgrade/README.md",
+            "docs/engineering/repository-harness-upgrade/specifications/SPEC-HUP-020.md",
+            "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-019.md",
+            "docs/engineering/repository-harness-upgrade/verification/VER-HUP-020.md",
+            "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-020.md",
+            "scripts/validate_governor_transition.py",
+            "tests/test_governor_transition.py"
+          ],
+          "changed_paths": [],
+          "change_set_complete": false
+        },
+        "compliance": {
+          "checkpoint": "pre-action",
+          "workflow_rule_id": "WFL-WO-IMPLEMENT",
+          "procedure_id": "PROC-WO-IMPLEMENT",
+          "status": "not_assessable",
+          "gates": []
+        },
+        "procedure": {
+          "id": "PROC-WO-IMPLEMENT",
+          "current_step": "STEP-WO-IMPLEMENT-CHECK",
+          "steps": [
+            {
+              "id": "STEP-WO-IMPLEMENT-CHECK",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Evaluated implementation handoff for WO-HUP-020."
+              ],
+              "non_effects": [
+                "A checkpoint does not complete or verify work."
+              ],
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "WO-HUP-020",
+                "--checkpoint",
+                "handoff"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-HUP-020",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-HUP-020",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-HUP-020",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            },
+            {
+              "id": "STEP-WO-IMPLEMENT-PREVIEW",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Plan completion of WO-HUP-020."
+              ],
+              "non_effects": [
+                "Completion does not verify, release or deliver the work."
+              ],
+              "argv": [
+                "harnessctl",
+                "transition",
+                ".",
+                "--set",
+                "WO-HUP-020=implemented",
+                "--decision",
+                "WO-HUP-020=delegated-executor"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-HUP-020",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-HUP-020",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-HUP-020",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            },
+            {
+              "id": "STEP-WO-IMPLEMENT-APPLY",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Record completion of only WO-HUP-020 under its approved execution scope."
+              ],
+              "non_effects": [
+                "Completion does not verify, release or deliver the work."
+              ],
+              "argv": [
+                "harnessctl",
+                "transition",
+                ".",
+                "--set",
+                "WO-HUP-020=implemented",
+                "--decision",
+                "WO-HUP-020=delegated-executor",
+                "--apply"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-HUP-020",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-HUP-020",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-HUP-020",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            }
+          ]
+        },
+        "state": {
+          "before": [],
+          "after": [
+            {
+              "id": "WO-HUP-020",
+              "status": "in_progress"
+            }
+          ]
+        },
+        "findings": {
+          "scoped_blockers": [],
+          "repository_blockers": [],
+          "unrelated_count": 0
+        },
+        "mutation": {
+          "writes": [
+            {
+              "id": "WO-HUP-020",
+              "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/WO-HUP-020-handoff.md",
+              "fields": [
+                "artifact",
+                "checkpoint",
+                "formal_snapshot_sha256",
+                "rebound_at"
+              ]
+            }
+          ]
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Wrote the handoff evidence packet of WO-HUP-020 at docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/WO-HUP-020-handoff.md to formal snapshot b8702e76757a080244b01b46af11999507def9de69d92cf114d3a7975b4a3883."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "WO-HUP-020 is in_progress."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-WO-IMPLEMENT",
+            "step_id": "STEP-WO-IMPLEMENT-CHECK",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-HUP-020",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "alternatives": []
+        },
+        "result_sha256": "c8378d82771ed15b8a08eef6987eb1fd505767dbd521160262c2c641a1050b06"
+      }
+    },
+    "assessor-combined-pr-scope-ready": {
+      "argv": [
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\evaluator-018\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check-pr",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+        "--event",
+        "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\work\\assessor-pr-scope-event.json",
+        "--from-git",
+        "f05c478a29c39f94968fdc842a34c861d30a42ac",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo",
+      "exit_code": 0,
+      "result": {
+        "changed_paths": [
+          ".agents/skills/harness-operator-brief/SKILL.md",
+          ".agents/skills/harness-operator-brief/scripts/check_brief.py",
+          ".agents/skills/harness-operator-brief/skill-contract.json",
+          ".agents/skills/harness-orient/SKILL.md",
+          ".agents/skills/harness-orient/scripts/orient.py",
+          ".agents/skills/harness-orient/skill-contract.json",
+          ".claude/skills/harness-orient/SKILL.md",
+          ".engineering-harness.delegation.toml",
+          ".engineering-harness.lock",
+          "AGENTS.md",
+          "README.md",
+          "docs/engineering/harness-distribution/README.md",
+          "docs/engineering/harness-distribution/specifications/SPEC-DST-029.md",
+          "docs/engineering/plugin-integration/README.md",
+          "docs/engineering/plugin-integration/evidence/VREC-PLG-022-evaluator.json",
+          "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+          "docs/engineering/plugin-integration/evidence/WO-PLG-024/checks.json",
+          "docs/engineering/plugin-integration/evidence/WO-PLG-024/readme-remediation.diff",
+          "docs/engineering/plugin-integration/evidence/WO-PLG-024/scope-after-readme-repair.json",
+          "docs/engineering/plugin-integration/evidence/WO-PLG-024/source-suite-readme-repair.log",
+          "docs/engineering/plugin-integration/evidence/WO-PLG-024/source-suite.log",
+          "docs/engineering/plugin-integration/evidence/WO-PLG-024/verification-preparation-readiness.command.json",
+          "docs/engineering/plugin-integration/evidence/WO-PLG-024/verification-preparation-readiness.json",
+          "docs/engineering/plugin-integration/evidence/WO-PLG-025/README.md",
+          "docs/engineering/plugin-integration/evidence/WO-PLG-025/WO-PLG-025-handoff.md",
+          "docs/engineering/plugin-integration/evidence/WO-PLG-025/checks.json",
+          "docs/engineering/plugin-integration/evidence/WO-PLG-025/draft-review.json",
+          "docs/engineering/plugin-integration/evidence/WO-PLG-025/handoff.json",
+          "docs/engineering/plugin-integration/evidence/WO-PLG-025/implementation-review.json",
+          "docs/engineering/plugin-integration/evidence/WO-PLG-025/implementation.md",
+          "docs/engineering/plugin-integration/evidence/WO-PLG-025/source-suite.log",
+          "docs/engineering/plugin-integration/verification-records/VREC-PLG-022.md",
+          "docs/engineering/plugin-integration/verification/VER-PLG-024.md",
+          "docs/engineering/plugin-integration/verification/VER-PLG-025.md",
+          "docs/engineering/plugin-integration/work-orders/WO-PLG-024.md",
+          "docs/engineering/plugin-integration/work-orders/WO-PLG-025.md",
+          "docs/engineering/repository-harness-upgrade/README.md",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/checks.json",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/comparison-regression.log",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/draft-review.json",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/draft-review.md",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/implementation-review.json",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/implementation.md",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/original-planner-failure.json",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/source-suite.log",
+          "docs/engineering/repository-harness-upgrade/specifications/SPEC-HUP-020.md",
+          "docs/engineering/repository-harness-upgrade/verification/VER-HUP-020.md",
+          "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-020.md",
+          "docs/notes/README.md",
+          "docs/notes/agentic-execution-phase4-skills.md",
+          "docs/notes/agentic-execution-plugin-distribution.md",
+          "docs/notes/codebase-kiss-work-orders-2026-09-13.md",
+          "docs/notes/delegation-class.md",
+          "docs/notes/developing-se-harness.md",
+          "docs/notes/technical-communication.md",
+          "scripts/validate_governor_transition.py",
+          "tests/test_governor_transition.py",
+          "tests/test_public_onboarding.py",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/WO-HUP-020-handoff.md",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/committed-assess.json",
+          "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/committed-plan.json"
+        ],
+        "command": "check-pr",
+        "outcome": "completed",
+        "schema": "se-harness-command-result-v1",
+        "status": "pass",
+        "work_orders": [
+          "WO-PLG-025",
+          "WO-HUP-020"
+        ]
+      }
     }
   },
   "final_source_inputs": {
@@ -355,5 +1411,110 @@
   },
   "source_suite_timing_note": "This local suite began before the final JSON-type comparison refinement. The comparison-regression run checks the final refusal cases. A fresh complete suite and exact CI replay will run on the final committed candidate during capture; the generated VREC retains their actual output.",
   "source_suite_summary": "--workers must be at least 1\nEvaluator Python: C:\\Users\\hok\\AppData\\Local\\Temp\\simple-plugin-633lk8w9\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\hok\\AppData\\Local\\Temp\\simple-plugin-633lk8w9\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nWEX_SCALE artifacts=100 validation=1.741740s focus=3.039382s plan=4.944421s\nWEX_SCALE artifacts=500 validation=12.201814s focus=14.363294s plan=13.635408s\ndocs/notes/diagnostic-codes.md matches the source\n----------------------------------------------------------------------\nRan 1078 tests in 919.132s (171 classes, 8 workers)\n\nOK (skipped=15)",
-  "hosted_ci": "Not rerun for this unpushed correction; required before integration."
+  "hosted_ci": "Not rerun for this unpushed correction; required before integration.",
+  "committed_integration": {
+    "commit": "2965d70780958248ce9ef4653e289d5b6e861667",
+    "results": {
+      "plan": {
+        "applied": false,
+        "base": {
+          "canonical_lock_sha256": "5a0e14ccfe2b143850ba7658943710b0e5e8583b421fda4518d88a2989478615",
+          "commit": "f05c478a29c39f94968fdc842a34c861d30a42ac",
+          "evaluator": {
+            "archive_name": "se_harness-0.18.0-py3-none-any.whl",
+            "archive_sha256": "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+            "payload_manifest": "se-harness-installed-payload-v1",
+            "payload_sha256": "cf28e03f21a0e474af8c415499c69193ab2a20e08a95c0ad3514758a84cff54d",
+            "version": "0.18.0"
+          },
+          "lock_materialization_sha256": {
+            "crlf": "50fb684faddf1c6afde89e602b84619158449b77c100bcd349c9555bf40fa9c3",
+            "git": "5a0e14ccfe2b143850ba7658943710b0e5e8583b421fda4518d88a2989478615",
+            "lf": "5a0e14ccfe2b143850ba7658943710b0e5e8583b421fda4518d88a2989478615"
+          },
+          "lock_schema": 3,
+          "lock_sha256": "5a0e14ccfe2b143850ba7658943710b0e5e8583b421fda4518d88a2989478615",
+          "version": "0.18.0"
+        },
+        "base_source": "event",
+        "diagnostics": [],
+        "object_format": "sha1",
+        "passed": true,
+        "phase": "plan",
+        "schema": "se-harness-governor-transition-v1",
+        "target": {
+          "canonical_lock_sha256": "8ac3b3ea5025009b93a3b1f2abffc8b8316c2b2f17868b276d78aafc06ab58be",
+          "commit": "2965d70780958248ce9ef4653e289d5b6e861667",
+          "evaluator": {
+            "archive_name": "se_harness-0.18.0-py3-none-any.whl",
+            "archive_sha256": "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+            "payload_manifest": "se-harness-installed-payload-v1",
+            "payload_sha256": "cf28e03f21a0e474af8c415499c69193ab2a20e08a95c0ad3514758a84cff54d",
+            "version": "0.18.0"
+          },
+          "lock_materialization_sha256": {
+            "crlf": "894991906e9a8b53b4f4110aba9df1c5b47603244909b2460de6584254f1d1ca",
+            "git": "8ac3b3ea5025009b93a3b1f2abffc8b8316c2b2f17868b276d78aafc06ab58be",
+            "lf": "8ac3b3ea5025009b93a3b1f2abffc8b8316c2b2f17868b276d78aafc06ab58be"
+          },
+          "lock_schema": 4,
+          "lock_sha256": "8ac3b3ea5025009b93a3b1f2abffc8b8316c2b2f17868b276d78aafc06ab58be",
+          "version": "0.18.0"
+        },
+        "transition": null,
+        "transition_required": false
+      },
+      "assess": {
+        "applied": false,
+        "assessment": "not_applicable",
+        "base": {
+          "canonical_lock_sha256": "5a0e14ccfe2b143850ba7658943710b0e5e8583b421fda4518d88a2989478615",
+          "commit": "f05c478a29c39f94968fdc842a34c861d30a42ac",
+          "evaluator": {
+            "archive_name": "se_harness-0.18.0-py3-none-any.whl",
+            "archive_sha256": "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+            "payload_manifest": "se-harness-installed-payload-v1",
+            "payload_sha256": "cf28e03f21a0e474af8c415499c69193ab2a20e08a95c0ad3514758a84cff54d",
+            "version": "0.18.0"
+          },
+          "lock_materialization_sha256": {
+            "crlf": "50fb684faddf1c6afde89e602b84619158449b77c100bcd349c9555bf40fa9c3",
+            "git": "5a0e14ccfe2b143850ba7658943710b0e5e8583b421fda4518d88a2989478615",
+            "lf": "5a0e14ccfe2b143850ba7658943710b0e5e8583b421fda4518d88a2989478615"
+          },
+          "lock_schema": 3,
+          "lock_sha256": "5a0e14ccfe2b143850ba7658943710b0e5e8583b421fda4518d88a2989478615",
+          "version": "0.18.0"
+        },
+        "base_source": "event",
+        "commands": {},
+        "diagnostics": [],
+        "object_format": "sha1",
+        "passed": true,
+        "phase": "assessment",
+        "schema": "se-harness-governor-transition-v1",
+        "target": {
+          "canonical_lock_sha256": "8ac3b3ea5025009b93a3b1f2abffc8b8316c2b2f17868b276d78aafc06ab58be",
+          "commit": "2965d70780958248ce9ef4653e289d5b6e861667",
+          "evaluator": {
+            "archive_name": "se_harness-0.18.0-py3-none-any.whl",
+            "archive_sha256": "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+            "payload_manifest": "se-harness-installed-payload-v1",
+            "payload_sha256": "cf28e03f21a0e474af8c415499c69193ab2a20e08a95c0ad3514758a84cff54d",
+            "version": "0.18.0"
+          },
+          "lock_materialization_sha256": {
+            "crlf": "894991906e9a8b53b4f4110aba9df1c5b47603244909b2460de6584254f1d1ca",
+            "git": "8ac3b3ea5025009b93a3b1f2abffc8b8316c2b2f17868b276d78aafc06ab58be",
+            "lf": "8ac3b3ea5025009b93a3b1f2abffc8b8316c2b2f17868b276d78aafc06ab58be"
+          },
+          "lock_schema": 4,
+          "lock_sha256": "8ac3b3ea5025009b93a3b1f2abffc8b8316c2b2f17868b276d78aafc06ab58be",
+          "version": "0.18.0"
+        },
+        "transition": null,
+        "transition_required": false
+      }
+    }
+  }
 }
