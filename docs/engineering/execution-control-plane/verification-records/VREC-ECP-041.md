@@ -2,7 +2,7 @@
 id = "VREC-ECP-041"
 type = "verification_record"
 title = "Verification candidate for 3 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-16"
 updated = "2026-09-16"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/execution-control-plane/evidence/WO-ECP-039/
 evaluator_evidence_path = "docs/engineering/execution-control-plane/evidence/VREC-ECP-041-evaluator.json"
 evaluator_evidence_sha256 = "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f"
 
+verified_at = "2026-09-16T18:41:39Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-ECP-039", "WO-HUP-020", "WO-PLG-025"]
 conforms_to = ["VER-ECP-027", "VER-HUP-020", "VER-PLG-025"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-16T18:41:39Z"
+decided_by = "assurance-owner"
+reason = "The user explicitly decided \"i verify the verification record\" in reply to the presented request to verify VREC-ECP-041 as assurance owner. Record that decision for candidate 4bc92a9f4823c1d0e7d62206a1777ceccac39f7a after confirming all 44 retained evidence files and the evaluator sidecar are unchanged and the assurance gates pass. This records assurance only; hosted CI and external delivery remain separate."
 +++
 
 # Verification Record Candidate
