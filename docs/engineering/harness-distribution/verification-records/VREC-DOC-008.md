@@ -2,7 +2,7 @@
 id = "VREC-DOC-008"
 type = "verification_record"
 title = "Verification candidate for WO-DOC-016"
-status = "ready"
+status = "verified"
 owners = ["codex-executor"]
 created = "2026-09-16"
 updated = "2026-09-16"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/harness-distribution/evidence/WO-DOC-016/WO-
 evaluator_evidence_path = "docs/engineering/harness-distribution/evidence/VREC-DOC-008-evaluator.json"
 evaluator_evidence_sha256 = "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f"
 
+verified_at = "2026-09-16T06:27:06Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-DOC-016"]
 conforms_to = ["VER-DST-029"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-16T06:27:06Z"
+decided_by = "assurance-owner"
+reason = "Record the explicit owner response: I verify VREC-DOC-008 as assurance owner. The exact candidate cf4df7be04b5b046c88b0fdf8094ad0ceaeb09d8 and all 33 retained evidence files still match the reviewed record."
 +++
 
 # Verification Record Candidate
