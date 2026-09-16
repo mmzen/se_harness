@@ -2,7 +2,7 @@
 id = "VREC-PLG-022"
 type = "verification_record"
 title = "Verification candidate for WO-PLG-025"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-16"
 updated = "2026-09-16"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/plugin-integration/evidence/WO-PLG-023/PACKA
 evaluator_evidence_path = "docs/engineering/plugin-integration/evidence/VREC-PLG-022-evaluator.json"
 evaluator_evidence_sha256 = "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f"
 
+verified_at = "2026-09-16T13:15:29Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-PLG-025"]
 conforms_to = ["VER-PLG-025"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-16T13:15:29Z"
+decided_by = "assurance-owner"
+reason = "The user explicitly decided: \"I verify VREC-PLG-022 as assurance owner.\" Record that decision for candidate 35648f5a70724cf990a2623f9e43bc403c359e78 after confirming all 17 retained evidence files are unchanged and the assurance gates pass. No external delivery decision is inferred."
 +++
 
 # Verification Record Candidate
