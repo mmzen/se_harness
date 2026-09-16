@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "C:/Python313/python.exe",
+    "-m",
+    "se_harness",
+    "--help"
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+  "started_at": "2026-09-16T05:57:13.498836+00:00",
+  "exit_code": 0,
+  "elapsed_seconds": 0.361,
+  "finished_at": "2026-09-16T05:57:13.860831+00:00"
+}

@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "C:/Python313/python.exe",
+    "scripts/validate_release_distributions.py",
+    "--root",
+    "."
+  ],
+  "cwd": "C:\\Users\\hok\\Documents\\Codex\\2026-09-15\\clo\\se_harness",
+  "started_at": "2026-09-16T05:57:21.234080+00:00",
+  "exit_code": 0,
+  "elapsed_seconds": 11.662,
+  "finished_at": "2026-09-16T05:57:32.906394+00:00"
+}

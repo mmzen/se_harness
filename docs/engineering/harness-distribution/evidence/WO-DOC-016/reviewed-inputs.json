@@ -1,0 +1,27 @@
+{
+  "user_response": "i approve",
+  "approved_artifacts": [
+    "VER-DST-029",
+    "WO-DOC-016"
+  ],
+  "inputs": [
+    {
+      "id": "Proposed README",
+      "sha256": "d9cb469ccda4438134ee23b46852a58ecc91595dd2ce87437f4967a4ea1a7c8b",
+      "reviewed_file": "README-proposed.md"
+    },
+    {
+      "id": "VER-DST-029",
+      "sha256": "fdfa1b18ae74f050e344115a321d4d7d6cfbc474aed0625c0b13b8a2a3652aef",
+      "state": "draft",
+      "reviewed_file": "VER-DST-029.md"
+    },
+    {
+      "id": "WO-DOC-016",
+      "sha256": "5c6186d5c14eea2bb913131292a6fa237e6f483294e8fce7ba4c9725653387ab",
+      "state": "draft",
+      "reviewed_file": "WO-DOC-016.md"
+    }
+  ],
+  "approval_result": "Owner approval was applied by the released evaluator to both artifacts on 2026-09-16; no assurance decision on a candidate was supplied."
+}

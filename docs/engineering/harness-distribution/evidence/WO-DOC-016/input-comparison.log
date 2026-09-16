@@ -1,0 +1,37 @@
+{
+  "platform": "Windows-11-10.0.26100-SP0",
+  "python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+  "python_executable": "C:\\Python313\\python.exe",
+  "candidate_version": "0.19.0",
+  "governing_version": "0.18.0",
+  "base_commit": "851afecbb2faac1b12e94f9d74bd24b3129fced8",
+  "readme_sha256": "d9cb469ccda4438134ee23b46852a58ecc91595dd2ce87437f4967a4ea1a7c8b",
+  "approved_input_matches": true,
+  "preserved_images": {
+    "docs/images/verity-plane-logo.png": "38356603c1fe30a53f02d615b988d6c3d150e7894c5988e431287023cda9e870",
+    "docs/images/harness-explorer-lineage.png": "c96e7d2e97282f73b69407de589eff681c2844ac93f799b21090a473f21826d0",
+    "docs/images/harness-explorer-virtual-twin.png": "98947cf557e6d0b2da47678ceea89a2337bf8b45825dc7ed97d057afb7737ba3"
+  },
+  "published_commit": "ed68b30c88043773be929540b7b10ae537957c2d",
+  "package_identity_sha256": "fc9d0c585b104e6ef2ba4598e38ffeade0191e3aeae1658f9df4830244b37e58",
+  "plugin_version": "0.1.0",
+  "bundled_evaluator": {
+    "archive": "se_harness-0.18.0-py3-none-any.whl",
+    "archive_sha256": "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+    "payload_sha256": "cf28e03f21a0e474af8c415499c69193ab2a20e08a95c0ad3514758a84cff54d",
+    "release_record": "docs/engineering/release-0-18-0/releases/RLS-SEH-027.md",
+    "release_record_sha256": "ffddc34a5afd1a050f33ef9a890d99cac11860a847e5af819f4831dac46f6e3f",
+    "release_revision": "e9db30d930e704ec3e40f3f0bf5e7d18799c0d4d",
+    "version": "0.18.0"
+  },
+  "native_commands_match_published_and_observed": [
+    "codex plugin marketplace add mmzen/se_harness --ref plugin-marketplace",
+    "codex plugin add verity-plane@se-harness",
+    "claude plugin marketplace add mmzen/se_harness@plugin-marketplace",
+    "claude plugin install verity-plane@se-harness"
+  ],
+  "native_evidence": "docs/engineering/plugin-integration/evidence/WO-PLG-023/publication-2026-09-15/README.md",
+  "setup_sha256": "6955a2e58404b2ec9914076470210e20485eaa29d949220017a42085dcc3bb9c",
+  "setup_offline_flags_present": true,
+  "limits": "Comparison reuses recorded Windows native acceptance; no fresh installation or model session was run."
+}
