@@ -1,0 +1,275 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "transition",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-KIS-015",
+    "artifacts": [
+      "WO-KIS-015"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/harness-simplification/decisions/DEC-KIS-001.md",
+      "docs/engineering/harness-simplification/evidence/recovery-2026-09-19/README.md",
+      "docs/engineering/harness-simplification/evidence/recovery-2026-09-19/se-harness-assessment-evidence.zip",
+      "docs/engineering/harness-simplification/evidence/recovery-2026-09-19/se-harness-assessment.html",
+      "docs/engineering/harness-simplification/evidence/recovery-2026-09-19/se-harness-assessment.md",
+      "docs/engineering/harness-simplification/evidence/recovery-2026-09-19/se-harness-recovery-plan.html",
+      "docs/engineering/harness-simplification/evidence/VREC-KIS-015-evaluator.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-015/",
+      "docs/engineering/harness-simplification/README.md",
+      "docs/engineering/harness-simplification/recovery-2026-09-19.md",
+      "docs/engineering/harness-simplification/requirements/REQ-KIS-011.md",
+      "docs/engineering/harness-simplification/requirements/REQ-KIS-012.md",
+      "docs/engineering/harness-simplification/requirements/REQ-KIS-013.md",
+      "docs/engineering/harness-simplification/specifications/SPEC-KIS-005.md",
+      "docs/engineering/harness-simplification/specifications/SPEC-KIS-006.md",
+      "docs/engineering/harness-simplification/specifications/SPEC-KIS-007.md",
+      "docs/engineering/harness-simplification/verification-records/VREC-KIS-015.md",
+      "docs/engineering/harness-simplification/verification/VER-KIS-005.md",
+      "docs/engineering/harness-simplification/verification/VER-KIS-006.md",
+      "docs/engineering/harness-simplification/verification/VER-KIS-007.md",
+      "docs/engineering/harness-simplification/verification/VER-KIS-008.md",
+      "docs/engineering/harness-simplification/work-orders/WO-KIS-011.md",
+      "docs/engineering/harness-simplification/work-orders/WO-KIS-012.md",
+      "docs/engineering/harness-simplification/work-orders/WO-KIS-013.md",
+      "docs/engineering/harness-simplification/work-orders/WO-KIS-015.md",
+      "tests/test_public_onboarding.py"
+    ],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "transition",
+    "workflow_rule_id": "WFL-WO-PREPARE-VREC",
+    "procedure_id": "PROC-WO-PREPARE-VREC",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4I-STATUS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-KIS-015"
+              }
+            ],
+            "message": "WO-KIS-015 status is in_progress."
+          },
+          {
+            "id": "QGP-G4I-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-KIS-015"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G4I-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G4I-SCOPE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-KIS-015:[execution_scope]"
+              }
+            ],
+            "message": "WO-KIS-015 has recorded execution approval for its 26 scope path(s)."
+          },
+          {
+            "id": "QGP-G4I-PREFLIGHT",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-KIS-015:review"
+              }
+            ],
+            "message": "Released-installation review preflight inputs are ready."
+          },
+          {
+            "id": "QGP-G4I-EVIDENCE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-KIS-015"
+              }
+            ],
+            "message": "Fresh retained evidence is bound at docs/engineering/harness-simplification/evidence/WO-KIS-015/WO-KIS-015-handoff.md."
+          },
+          {
+            "id": "QGP-G4I-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-KIS-015"
+              }
+            ],
+            "message": "No open decision blocks WO-KIS-015."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-KIS-015"
+              }
+            ],
+            "message": "in_progress -> implemented is a declared lifecycle edge for WO-KIS-015."
+          }
+        ]
+      }
+    ]
+  },
+  "procedure": {
+    "id": "PROC-WO-PREPARE-VREC",
+    "current_step": "STEP-WO-PREPARE-VREC-CAPTURE",
+    "steps": [
+      {
+        "id": "STEP-WO-PREPARE-VREC-CAPTURE",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-CANDIDATE-READY"
+        ],
+        "effects": [
+          "Prepare one ready VREC using the selected approved inputs."
+        ],
+        "non_effects": [
+          "Substitute inspected record, verification and evidence inputs before running this command. Preparation does not verify WO-KIS-015."
+        ],
+        "argv": [
+          "harnessctl",
+          "capture-verification",
+          ".",
+          "--work-order",
+          "WO-KIS-015",
+          "--owner",
+          "delegated-executor",
+          "--id",
+          "VREC-...",
+          "--verification",
+          "VER-...",
+          "--evidence",
+          "..."
+        ],
+        "corrective": {
+          "QGP-G4C-STATUS": {
+            "kind": "response",
+            "value": "Resolve QGP-G4C-STATUS for WO-KIS-015 using the reported candidate-readiness failure, then retry preparation."
+          },
+          "QGP-G4C-GRAPH": {
+            "kind": "response",
+            "value": "Resolve QGP-G4C-GRAPH for WO-KIS-015 using the reported candidate-readiness failure, then retry preparation."
+          },
+          "QGP-G4C-INTEGRITY": {
+            "kind": "response",
+            "value": "Resolve QGP-G4C-INTEGRITY for WO-KIS-015 using the reported candidate-readiness failure, then retry preparation."
+          }
+        }
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-KIS-015",
+        "status": "in_progress"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-KIS-015",
+        "status": "implemented"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "WO-KIS-015",
+        "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-015.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Applied 1 explicit lifecycle transition(s) atomically."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-KIS-015 is implemented."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-WO-PREPARE-VREC",
+      "step_id": "STEP-WO-PREPARE-VREC-CAPTURE",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "capture-verification",
+        ".",
+        "--work-order",
+        "WO-KIS-015",
+        "--owner",
+        "delegated-executor",
+        "--id",
+        "VREC-...",
+        "--verification",
+        "VER-...",
+        "--evidence",
+        "..."
+      ]
+    },
+    "alternatives": []
+  },
+  "result_sha256": "f294a33df3e816619f364d2ba85a79e7624faf6df8884bce6f64dcd89341727e"
+}

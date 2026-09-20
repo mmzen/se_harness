@@ -2,7 +2,7 @@
 id = "WO-KIS-015"
 type = "work_order"
 title = "Resolve recovery PR scope and onboarding integration"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-20"
 updated = "2026-09-20"
@@ -61,6 +61,13 @@ to = "in_progress"
 decided_at = "2026-09-20T15:28:46Z"
 decided_by = "delegated-executor"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex starts the bounded PR #488 integration correction under the owner instruction to resolve it and the recorded scope approval."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-20T15:40:01Z"
+decided_by = "delegated-executor"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Codex completed the bounded PR #488 correction. All applicable hosted checks pass on f55db0962a812a9b4a79bc543feca4d74f652d7f; the full Windows 1094-test suite and focused/rejection checks pass. Full PR scope is checked against actual main with the three declared work orders. Accepted README, existing definitions, decisions and verified-record evidence are preserved. No new assurance acceptance or merge is inferred."
 +++
 
 # Resolve recovery PR scope and onboarding integration
