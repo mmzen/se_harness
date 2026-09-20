@@ -2,7 +2,7 @@
 id = "VREC-DOC-009"
 type = "verification_record"
 title = "Verification candidate for WO-DOC-017"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-20"
 updated = "2026-09-20"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/harness-distribution/evidence/WO-DOC-017/REA
 evaluator_evidence_path = "docs/engineering/harness-distribution/evidence/VREC-DOC-009-evaluator.json"
 evaluator_evidence_sha256 = "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f"
 
+verified_at = "2026-09-20T14:43:36Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-DOC-017"]
 conforms_to = ["VER-DST-030"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-20T14:43:36Z"
+decided_by = "assurance-owner"
+reason = "On 2026-09-20 the owner explicitly stated \"i accept VREC-DOC-009 and VREC-KIS-014\" in response to the presented owner-assurance decision. Record that supplied acceptance as assurance owner for VREC-DOC-009 and exact candidate cc6b420255bb7054f09ccfa691cd56802cdce7ae. Reviewed ready-record SHA-256: d5a30cd7677fd5f711c03a8bcb3cd582970ca8f13a995d3e60c461c22be18ce3. Retained evidence digests were compared immediately before application. Codex records the owner decision; it does not claim independent review. This decision changes only the selected VRECs and grants no external delivery."
 +++
 
 # Verification Record Candidate
