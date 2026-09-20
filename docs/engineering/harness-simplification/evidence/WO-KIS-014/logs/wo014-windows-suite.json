@@ -1,0 +1,18 @@
+{
+  "command": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "scripts/run_tests.py",
+    "--workers",
+    "4",
+    "--timings",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\work\\wo014-timings-windows.json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\se_harness-20260916-200124-c3056d0b",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "head": "b81b9d930b07a70cc7e28f86b196b111fdf17c52",
+  "working_tree": " M docs/engineering/harness-simplification/work-orders/WO-KIS-010.md\n M docs/notes/diagnostic-codes.md\n M tests/test_workflow_execution.py\n?? docs/engineering/harness-simplification/work-orders/WO-KIS-014.md\n",
+  "exit": 1,
+  "elapsed_seconds": 183.44,
+  "log": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\work\\wo014-windows-suite.log"
+}

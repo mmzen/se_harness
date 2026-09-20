@@ -281,7 +281,7 @@ but are not diagnostics and are not listed here.
 | `WEX-ECP-001` | `WEX-ECP-001` |
 | `WEX-ECP-002` | `WEX-ECP-002`; `WEX-ECP-002: --from-git is mutually exclusive with --changed-path, --changes-complete and --change-manifest` |
 | `WEX-ECP-003` | `Derive the change set from Git (ECP-CHG-002 to -004). The set is the union of `git diff --name-only BASE` aga…`; `WEX-ECP-003` (+4 more) |
-| `WEX-ECP-010` | `Split a packet into its machine header and retained body (ECP-EVD-002, -004). Returns `(None, data)` when no …`; `WEX-ECP-010` (+12 more) |
+| `WEX-ECP-010` | `Split a packet into its machine header and retained body (ECP-EVD-002, -004). Returns `(None, data)` when no …`; `WEX-ECP-010` (+32 more) |
 | `WEX-ECP-011` | `WEX-ECP-011`; `WEX-ECP-011: a .gitattributes rule would convert line endings of {…} ({…})` |
 | `WEX-ECP-012` | `WEX-ECP-012`; `WEX-ECP-012: the working tree selects {…} (the one in_progress work order), not {…}` |
 | `WEX-ECP-013` | `WEX-ECP-013`; `WEX-ECP-013: domain {…} has no artifact to read its identifier token from; pass --id explicitly` (+4 more) |

@@ -1,0 +1,13 @@
+{
+  "attempt": "wo014-linux-suite",
+  "status": "interrupted",
+  "reason": "Test workers were waiting on I/O in the Windows-mounted source tree; rerun the same inputs on a native temporary Linux filesystem.",
+  "verified_process": [
+    "python3",
+    "/mnt/c/Users/mathi/Documents/Codex/2026-09-16/reclone-https-github-com-mmzen-se/work/check_wo014.py",
+    "linux"
+  ],
+  "process_group": 306,
+  "signal": "SIGINT",
+  "original_log": "wo014-linux-suite.log"
+}

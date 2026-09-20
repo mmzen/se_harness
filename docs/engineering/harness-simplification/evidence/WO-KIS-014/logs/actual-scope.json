@@ -1,0 +1,502 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-KIS-014",
+    "artifacts": [
+      "WO-KIS-014"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "CAP-KIS-001",
+      "INT-KIS-001",
+      "REQ-KIS-010",
+      "SPEC-KIS-004",
+      "VER-KIS-004"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/",
+      "docs/engineering/harness-simplification/requirements/REQ-KIS-010.md",
+      "docs/engineering/harness-simplification/specifications/SPEC-KIS-004.md",
+      "docs/engineering/harness-simplification/verification-records/VREC-KIS-010.md",
+      "docs/engineering/harness-simplification/verification-records/VREC-KIS-014.md",
+      "docs/engineering/harness-simplification/verification/VER-KIS-004.md",
+      "docs/engineering/harness-simplification/work-orders/WO-KIS-010.md",
+      "docs/engineering/harness-simplification/work-orders/WO-KIS-014.md",
+      "docs/notes/diagnostic-codes.md",
+      "docs/notes/harnessctl-check.md",
+      "docs/notes/harnessctl-reference.md",
+      "se_harness/cli.py",
+      "se_harness/engine/validation_evidence.py",
+      "se_harness/evaluator_evidence.py",
+      "se_harness/provenance.py",
+      "se_harness/quality_gates_contract.json",
+      "se_harness/workflow_compliance.py",
+      "se_harness/workflow_contract.json",
+      "se_harness/workflow_evidence_packet.py",
+      "se_harness/workflow_predicates.py",
+      "se_harness/workflow_result.py",
+      "templates/repository/standard/docs/engineering/QUALITY_GATES.json",
+      "templates/repository/standard/docs/engineering/QUALITY_GATES.md",
+      "templates/repository/standard/docs/engineering/WORKFLOW.json",
+      "templates/repository/standard/docs/engineering/WORKFLOW.md",
+      "tests/test_revision_provenance.py",
+      "tests/test_workflow_compliance.py",
+      "tests/test_workflow_execution.py",
+      "tests/test_workflow_restitution.py"
+    ],
+    "changed_paths": [
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/actual-scope.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/diff-check.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/documentation.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/proposed-scope.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/wo-kis-010-basic-0.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/wo-kis-010-basic-1.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/wo-kis-010-basic-2.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/wo-kis-010-basic-3.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/wo-kis-010-basic-4.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/wo-kis-010-basic-results.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/wo-kis-010-focused-0.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/wo-kis-010-focused-results.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/wo-kis-010-suite-0.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/wo-kis-010-suite-results.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/wo010-baseline-comparison.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/wo010-baseline-comparison.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/wo010-governing-doctor.stdout",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/wo010-governing-review.stdout",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/wo010-governing-scope.stdout",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/wo010-governing-validate.stdout",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/wo010-proposal-validation.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/logs/wo010-proposal-validation.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/README.md",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-010/working-inputs.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-candidate-doctor.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-candidate-doctor.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-candidate-graph.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-candidate-graph.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-candidate-review.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-candidate-review.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-cli.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-cli.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-diff-check.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-diff-check.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-distribution.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-distribution.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-doctor.stdout",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-graph.stdout",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-linux-bundle-setup.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-linux-bundle-suite.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-linux-bundle-suite.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-linux-bundle-v2-setup.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-linux-bundle-v2-suite.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-linux-bundle-v2-suite.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-linux-input.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-linux-interrupted.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-linux-suite.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-replacement-apply.stdout",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-replacement-preview.stdout",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-review.stdout",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-reviewed-inputs.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-scope.stdout",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-start-apply.stdout",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-start-preflight.stdout",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-start-preview.stdout",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-windows-suite.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/logs/wo014-windows-suite.log",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/README.md",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-014/tested-working-inputs.json",
+      "docs/engineering/harness-simplification/work-orders/WO-KIS-010.md",
+      "docs/engineering/harness-simplification/work-orders/WO-KIS-014.md",
+      "docs/notes/diagnostic-codes.md",
+      "docs/notes/harnessctl-check.md",
+      "docs/notes/harnessctl-reference.md",
+      "se_harness/cli.py",
+      "se_harness/workflow_compliance.py",
+      "se_harness/workflow_contract.json",
+      "se_harness/workflow_evidence_packet.py",
+      "se_harness/workflow_predicates.py",
+      "templates/repository/standard/docs/engineering/QUALITY_GATES.md",
+      "templates/repository/standard/docs/engineering/WORKFLOW.json",
+      "templates/repository/standard/docs/engineering/WORKFLOW.md",
+      "tests/test_workflow_compliance.py",
+      "tests/test_workflow_execution.py"
+    ],
+    "change_set_complete": true
+  },
+  "compliance": {
+    "checkpoint": "scope",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT",
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4I-SCOPE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-KIS-014:[execution_scope]"
+              }
+            ],
+            "message": "WO-KIS-014 declares 30 normalized scope path(s); this inspection grants no execution authority."
+          },
+          {
+            "id": "QGP-G4I-COMPLETE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-KIS-014"
+              }
+            ],
+            "message": "The caller explicitly asserted that the declared change set is complete."
+          },
+          {
+            "id": "QGP-G4I-PATHS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-KIS-014"
+              }
+            ],
+            "message": "All 74 declared changed path(s) are within execution scope."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "b1ec8848f32e4e9fc415e916340f856320933754cde637674db091ce4bc68aca",
+    "change_set_source": "git"
+  },
+  "procedure": {
+    "id": "PROC-WO-IMPLEMENT",
+    "current_step": "STEP-WO-IMPLEMENT-PREVIEW",
+    "steps": [
+      {
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "Evaluated implementation handoff for WO-KIS-014."
+        ],
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-KIS-014",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-START"
+          },
+          "QGP-G4I-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G4I-COMPLETE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-KIS-014",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ]
+          },
+          "QGP-G4I-PATHS": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-KIS-014",
+              "--phase",
+              "review"
+            ]
+          },
+          "QGP-G4I-EVIDENCE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-KIS-014",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "QGP-G4I-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-IMPLEMENT-PREVIEW",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "Plan completion of WO-KIS-014."
+        ],
+        "non_effects": [
+          "Completion does not verify, release or deliver the work."
+        ],
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-KIS-014=implemented",
+          "--decision",
+          "WO-KIS-014=delegated-executor"
+        ],
+        "corrective": {
+          "QGP-G4I-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-START"
+          },
+          "QGP-G4I-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G4I-COMPLETE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-KIS-014",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ]
+          },
+          "QGP-G4I-PATHS": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-KIS-014",
+              "--phase",
+              "review"
+            ]
+          },
+          "QGP-G4I-EVIDENCE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-KIS-014",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "QGP-G4I-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-IMPLEMENT-APPLY",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "Record completion of only WO-KIS-014 under its approved execution scope."
+        ],
+        "non_effects": [
+          "Completion does not verify, release or deliver the work."
+        ],
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-KIS-014=implemented",
+          "--decision",
+          "WO-KIS-014=delegated-executor",
+          "--apply"
+        ],
+        "corrective": {
+          "QGP-G4I-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-START"
+          },
+          "QGP-G4I-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G4I-COMPLETE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-KIS-014",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ]
+          },
+          "QGP-G4I-PATHS": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-KIS-014",
+              "--phase",
+              "review"
+            ]
+          },
+          "QGP-G4I-EVIDENCE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-KIS-014",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "QGP-G4I-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-KIS-014",
+        "status": "in_progress"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-KIS-014",
+        "status": "in_progress"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 48
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated scope compliance for WO-KIS-014."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-KIS-014 is in_progress."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-PREVIEW",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-KIS-014=implemented",
+        "--decision",
+        "WO-KIS-014=delegated-executor"
+      ]
+    },
+    "alternatives": []
+  },
+  "result_sha256": "5a9a0c1036e317342a63c7f50a01720d001fbddb42fe55c53e6aae06535f2845"
+}

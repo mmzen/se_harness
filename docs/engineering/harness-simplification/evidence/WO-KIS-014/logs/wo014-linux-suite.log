@@ -1,0 +1,75 @@
+Evaluator Python: /tmp/simple-plugin-quz7k2n2/private/verity-plane/evaluator/bin/python
+Evaluator Python: /tmp/simple-plugin-quz7k2n2/private/verity-plane/evaluator/bin/python
+--workers must be at least 1
+WEX_SCALE artifacts=100 validation=0.066284s focus=1.231684s plan=0.170409s
+WEX_SCALE artifacts=500 validation=0.372126s focus=1.284992s plan=0.658099s
+Process ForkProcess-2:
+Process ForkProcess-4:
+Process ForkProcess-1:
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/lib/python3.12/concurrent/futures/process.py", line 251, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/process.py", line 251, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/process.py", line 251, in _process_worker
+    call_item = call_queue.get(block=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+  File "/usr/lib/python3.12/multiprocessing/queues.py", line 102, in get
+    with self._rlock:
+  File "/usr/lib/python3.12/multiprocessing/queues.py", line 103, in get
+    res = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/multiprocessing/connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+KeyboardInterrupt
+  File "/usr/lib/python3.12/multiprocessing/connection.py", line 430, in _recv_bytes
+    buf = self._recv(4)
+          ^^^^^^^^^^^^^
+docs/notes/diagnostic-codes.md matches the source
+  File "/usr/lib/python3.12/multiprocessing/connection.py", line 395, in _recv
+    chunk = read(handle, remaining)
+            ^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-16/reclone-https-github-com-mmzen-se/se_harness-20260916-200124-c3056d0b/scripts/run_tests.py", line 256, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-16/reclone-https-github-com-mmzen-se/se_harness-20260916-200124-c3056d0b/scripts/run_tests.py", line 250, in main
+    code, _ = run(plan, workers=args.workers, timings_path=Path(args.timings) if args.timings else None)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/mathi/Documents/Codex/2026-09-16/reclone-https-github-com-mmzen-se/se_harness-20260916-200124-c3056d0b/scripts/run_tests.py", line 194, in run
+    for future in concurrent.futures.as_completed(pending):
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 243, in as_completed
+    waiter.event.wait(wait_timeout)
+  File "/usr/lib/python3.12/threading.py", line 655, in wait
+    signaled = self._cond.wait(timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/threading.py", line 355, in wait
+    waiter.acquire()
+KeyboardInterrupt

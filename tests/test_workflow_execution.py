@@ -115,29 +115,28 @@ paths = ["src/"]
         return path
 
     def bind_handoff_evidence(self, work_order_id: str = "WO-001") -> Path:
-        """Retain evidence bound to the handoff checkpoint at the current formal snapshot."""
-
+        """Supply the real assessment fixture needed by completion-gate tests."""
         from se_harness.repository_graph import validated_repository
-        from se_harness.workflow_compliance import formal_snapshot_digest
-        from se_harness.workflow_evidence_packet import parse_evidence_header, render_evidence_header
+        from se_harness.workflow_evidence_packet import capture_check_observation
 
-        _, report = validated_repository(self.root)
-        snapshot = formal_snapshot_digest(self.root, report.artifacts, [work_order_id])
+        verification = self.root / "docs/engineering/product/verification/VER-001.md"
+        content = verification.read_text(encoding="utf-8")
+        content = content.replace("[relations]", '[[checks]]\nid = "fixture-review"\nmethod = "inspection"\n\n[relations]', 1)
+        verification.write_text(content, encoding="utf-8")
+        work_order = self.root / f"docs/engineering/product/work-orders/{work_order_id}.md"
+        directory = f"docs/engineering/product/evidence/{work_order_id}/"
+        content = work_order.read_text(encoding="utf-8").replace('paths = ["src/"]',
+            'paths = ["src/", ' + json.dumps(directory) + ']')
+        work_order.write_text(content, encoding="utf-8")
+        record_execution_approval(work_order)  # Test input, not a production approval.
         path = self.root / f"docs/engineering/product/evidence/{work_order_id}-verification.md"
         path.parent.mkdir(parents=True, exist_ok=True)
-        # SPEC-AUT-004 AUT-WIN-007: the predicate reads the machine header only, so
-        # the fixture binds through it; an existing header is replaced, the body kept.
-        existing = path.read_bytes() if path.exists() else f"# {work_order_id} evidence\n".encode("utf-8")
-        _, body = parse_evidence_header(existing)
-        header = render_evidence_header(
-            {
-                "artifact": work_order_id,
-                "checkpoint": "handoff",
-                "formal_snapshot_sha256": snapshot,
-                "rebound_at": "2026-09-09T00:00:00Z",
-            }
-        )
-        path.write_bytes(header + body)
+        path.write_text("Fixture review: required conditions met.\n", encoding="utf-8")
+        _, report = validated_repository(self.root)
+        artifact = next(item for item in report.artifacts if item.artifact_id == work_order_id)
+        capture_check_observation(self.root, artifact, report, verification="VER-001",
+            check_id="fixture-review", outcome="success", assessor="fixture-reviewer",
+            reason="Fixture review conditions met", output_ref=path.relative_to(self.root).as_posix())
         return path
 
 

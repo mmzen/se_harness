@@ -1,0 +1,1 @@
+{"command": ["C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe", "-m", "se_harness", "preflight", ".", "--work-order", "WO-KIS-014", "--phase", "review", "--json"], "exit": 1}

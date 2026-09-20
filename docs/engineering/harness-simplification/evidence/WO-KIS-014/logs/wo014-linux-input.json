@@ -1,0 +1,12 @@
+{
+  "head": "b81b9d930b07a70cc7e28f86b196b111fdf17c52",
+  "source": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\se_harness-20260916-200124-c3056d0b",
+  "bundle_sha256": "4550be17c942913171e37656391bd46ba06b4b80b1c1310c3c1cc12a6c4b1253",
+  "overlay_sha256": "1313b58335008a644b17c4d0c49e49ccc65446c0380bac7bc4e7deeacdac2971",
+  "working_files": {
+    "docs/engineering/harness-simplification/work-orders/WO-KIS-010.md": "34283fb470752f13f13b6a5011e1c8cf1cc170bb207b7cf7b29cf57c4d0915af",
+    "docs/engineering/harness-simplification/work-orders/WO-KIS-014.md": "2ba97f02359d7c0d9f6e2e7741a4dad7b91d20e1dc56bfaaa69e3d080a2642e0",
+    "docs/notes/diagnostic-codes.md": "321596f4fee3977d0c5df42fbc6f3b94f6121645e9a12d1fb0a5d39e1708c785",
+    "tests/test_workflow_execution.py": "262bce037ccf13cea9a34826472bf3172d734ca7a62c7e346d7eb39d90d73cba"
+  }
+}

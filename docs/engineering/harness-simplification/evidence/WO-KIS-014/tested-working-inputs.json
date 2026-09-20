@@ -1,0 +1,34 @@
+{
+  "head": "b81b9d930b07a70cc7e28f86b196b111fdf17c52",
+  "identity": "working tree tested before the continuation commit; not a VREC",
+  "changed_paths": {
+    "docs/engineering/harness-simplification/work-orders/WO-KIS-010.md": "34283fb470752f13f13b6a5011e1c8cf1cc170bb207b7cf7b29cf57c4d0915af",
+    "docs/engineering/harness-simplification/work-orders/WO-KIS-014.md": "2ba97f02359d7c0d9f6e2e7741a4dad7b91d20e1dc56bfaaa69e3d080a2642e0",
+    "docs/notes/diagnostic-codes.md": "321596f4fee3977d0c5df42fbc6f3b94f6121645e9a12d1fb0a5d39e1708c785",
+    "tests/test_workflow_execution.py": "262bce037ccf13cea9a34826472bf3172d734ca7a62c7e346d7eb39d90d73cba"
+  },
+  "governing_evaluator": "0.18.0",
+  "candidate_source": "0.19.0",
+  "results": {
+    "windows": {
+      "tests": 1081,
+      "seconds": 181.846,
+      "failure_assertions": 12,
+      "skipped": 15,
+      "matches_baseline_failures": true,
+      "exit": 1,
+      "platform": "Windows-11-10.0.26200-SP0",
+      "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]"
+    },
+    "linux": {
+      "tests": 1081,
+      "seconds": 32.126,
+      "failure_assertions": 12,
+      "skipped": 2,
+      "matches_baseline_failures": true,
+      "exit": 1,
+      "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]"
+    }
+  }
+}

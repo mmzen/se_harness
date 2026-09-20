@@ -2,11 +2,14 @@
 id = "WO-KIS-010"
 type = "work_order"
 title = "Keep evidence outcomes truthful"
-status = "in_progress"
+status = "rejected"
 owners = ["engineering-owner"]
 created = "2026-09-19"
 updated = "2026-09-20"
 
+rejected_at = "2026-09-20T07:15:43Z"
+rejected_by = "engineering-owner"
+rejection_reason = "On 2026-09-20 the owner explicitly answered \"Approve replacement scope and closure\" to approval of the prepared WO-KIS-014 and closure of WO-KIS-010 as replaced. Reviewed WO-KIS-014 full-byte SHA-256: 57cc3a020d9e54abd79a5fe78a5e096e30bf613402e7f87af1b2acae9e51fdf9. Preserve partial implementation and history. Existing onboarding failures remain unresolved. This decision grants no assurance acceptance or external delivery. This closes the superseded execution envelope, not a failed verification verdict."
 [assurance]
 commit_bound_verification = "required"
 rationale = "Later engineering and assurance decisions rely on the changed checks, policy or agent guidance; classification takes effect on actual WO approval."
@@ -61,6 +64,13 @@ to = "in_progress"
 decided_at = "2026-09-20T06:33:31Z"
 decided_by = "delegated-executor"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex starts the approved WO-KIS-010 scope under the owner instruction start dated 2026-09-20."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "rejected"
+decided_at = "2026-09-20T07:15:43Z"
+decided_by = "engineering-owner"
+reason = "On 2026-09-20 the owner explicitly answered \"Approve replacement scope and closure\" to approval of the prepared WO-KIS-014 and closure of WO-KIS-010 as replaced. Reviewed WO-KIS-014 full-byte SHA-256: 57cc3a020d9e54abd79a5fe78a5e096e30bf613402e7f87af1b2acae9e51fdf9. Preserve partial implementation and history. Existing onboarding failures remain unresolved. This decision grants no assurance acceptance or external delivery. This closes the superseded execution envelope, not a failed verification verdict."
 +++
 
 # Keep evidence outcomes truthful
