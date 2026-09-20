@@ -18,16 +18,13 @@ normal upgrade; this note grants no new meaning to an older approval.
 `harnessctl check` answers one question about one selected artifact at one
 moment: *at this checkpoint, do the gates the workflow requires pass?* It
 reads the repository, evaluates predicates, and prints the result as the
-canonical schema-2 block (`--json` for the machine form). It is read-only in
-every respect but one: the handoff check derived from Git is self-binding
-(`ECP-SBH-001` to `-006`). Before evaluating, it rebinds an existing evidence
-packet header to the current formal snapshot — body preserved byte for byte,
-with the same guards and refusal codes as `harnessctl evidence` — and it
-evaluates the change set with the retained result path included, so that a
-completed run retains its own result as `handoff.json` in the work order's
-evidence directory and one run is the declared, digest-stable result. A
-missing packet is never created, and every other checkpoint and change-set
-form stays read-only.
+canonical schema-2 block (`--json` for the machine form). Every check is read-only,
+including Git-derived handoff. It never relabels an old observation or creates
+`handoff.json`. To retain a passing handoff explicitly, use
+`harnessctl evidence . --artifact WO-... --checkpoint handoff --from-git BASE`.
+
+This behavior is candidate policy under WO-KIS-010. A project on an earlier
+released evaluator still follows that release until explicit adoption.
 
 ```text
 harnessctl check [TARGET] --artifact WO-...|VREC-...|RLS-... [--include-background] [--json]
@@ -159,10 +156,10 @@ The predicate names say what they read:
 - `*-PREFLIGHT`: the start or review preflight of the work order is clean;
 - `*-AUTHORING`: the definition meets the authoring policy;
 - `G4I-COMPLETE`, `G4I-PATHS`: the change set is complete and inside scope;
-- `G4I-EVIDENCE`: an evidence packet for this work order and checkpoint is
-  bound to the current formal snapshot, a digest over every formal
-  artifact's line-ending-canonical bytes, so a packet bound on a CRLF
-  checkout matches the LF runner;
+- `G4I-EVIDENCE`: the latest retained observation of each declared verification
+  check matches the current relevant inputs and reports success, or a
+  contract-supported not-applicable conclusion. Failed, missing, unavailable
+  and stale checks block; attachments alone prove no result;
 - `G5P-RELEASE-UNIT`: the release unit's census resolves.
 
 For `--checkpoint transition --target STATE`, the predicates come from the
@@ -205,12 +202,12 @@ The result has exactly two outcomes.
 - **Completed.** Every gate passed and no repository-level error was
   present. The block names the decision now due (`Decision required`), the
   decision right, the permitted outcomes, and one `Command or response` — for
-  a handoff, the completion preview command under the recorded approval. With `--from-git`, the result is
-  retained as `handoff.json` beside the evidence packet, and its
-  `result_sha256` is the value a pull-request body declares as
-  `Harness-Restitution`. The retained path is a member of the evaluated
-  change set from the first run, so the first completed run is the declared
-  result and a repeat over the unchanged tree prints the same digest.
+  a handoff, the completion preview command under the recorded approval.
+  The check prints its result without writing files. An explicit
+  `evidence --checkpoint handoff --from-git BASE` can retain a passing result
+  as `handoff.json`; `pr-body` then reads its digest for `Harness-Restitution`.
+  That capture evaluates its planned output path as part of the scope, so a
+  later read over the unchanged tree produces the same digest.
 - **Blocked.** At least one predicate did not pass, or a scoped error
   exists. `Blocked by` lists each refusing predicate by its own identifier
   with its message (for example `QGP-G4I-EVIDENCE: No readable evidence for
@@ -237,7 +234,7 @@ source can emit, across all commands.
 | `WEX-ECP-002` | `--from-git` combined with `--changed-path`, `--changes-complete`, or `--change-manifest` |
 | `WEX-ECP-003` | `--from-git` outside a Git checkout, with a base Git cannot resolve, or after any Git failure; no predicate is evaluated as `pass` |
 | `WEX-ECP-010` | the evidence packet path cannot be derived or the packet is malformed: the work order is not under a domain directory, the header at byte offset 0 is unclosed, not TOML, or carries the wrong keys, or names another artifact or checkpoint |
-| `WEX-ECP-011` | a `.gitattributes` rule would convert the packet's line endings, so the self-binding handoff check refuses to rewrite the header, exactly as `evidence` refuses to |
+| `WEX-ECP-011` | the explicit legacy attachment writer refuses a `.gitattributes` rule that would convert packet line endings; read-only checks do not rewrite that header |
 | `WEX-ECP-014` | `--artifact` names an unknown identifier |
 
 Before se-harness 0.10.0, `WEX-ECP-010: ... is not under a domain directory`
@@ -256,17 +253,16 @@ same checkout did not raise it.
    approval. Use the actual executor identity when known. Apply evaluates the
    same predicates as `check --checkpoint transition --target in_progress`.
 4. Implementation happens inside the declared scope.
-5. `harnessctl evidence . --artifact WO-X --checkpoint handoff` writes the
-   packet header bound to the current formal snapshot; the body is written by
-   the implementer. This first write is the only manual binding: after a
-   later merge from the base branch, the next handoff check rebinds the
-   header itself.
-6. `harnessctl check . --artifact WO-X --checkpoint handoff --from-git
-   main` rebinds the packet if the formal snapshot moved, then evaluates
-   `QG-G4-IMPLEMENTATION-EVIDENCE` over the Git-derived change set with the
-   retained result path included. A passing result gives the completion preview;
-   `handoff.json` is retained; this one run's `result_sha256` is the declared
-   digest, and `harnessctl pr-body` emits the body carrying it.
+5. Capture each required check with `harnessctl evidence --verification VER-ID
+   --check CHECK-ID`, using the declared command or a contract-authorized manual
+   assessment. See the [capture guide](../../templates/repository/standard/docs/engineering/QUALITY_GATES.md#required-check-observations).
+   Ordinary attachments remain supporting material; updating their header cannot
+   turn a failed or stale result into a passing one.
+6. `harnessctl check . --artifact WO-X --checkpoint handoff --from-git BASE`
+   evaluates the real diff and required observations without writing files.
+   A passing result gives the completion preview. When a retained result is
+   needed, explicitly use `harnessctl evidence . --artifact WO-X --checkpoint
+   handoff --from-git BASE`, then `harnessctl pr-body` to read it.
 7. The executor previews, then applies `transition . --set WO-X=implemented
    --decision WO-X=delegated-executor --apply`. Required verification preparation
    follows `WFL-WO-PREPARE-VREC`; assurance `not_required` instead selects

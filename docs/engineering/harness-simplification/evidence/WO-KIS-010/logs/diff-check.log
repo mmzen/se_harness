@@ -1,0 +1,14 @@
+Command: ["git", "diff", "--check"]
+Exit: 0
+warning: in the working copy of 'docs/engineering/harness-simplification/work-orders/WO-KIS-010.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/notes/harnessctl-check.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/notes/harnessctl-reference.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'se_harness/cli.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'se_harness/workflow_compliance.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'se_harness/workflow_contract.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'se_harness/workflow_evidence_packet.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'se_harness/workflow_predicates.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'templates/repository/standard/docs/engineering/QUALITY_GATES.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'templates/repository/standard/docs/engineering/WORKFLOW.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'templates/repository/standard/docs/engineering/WORKFLOW.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/test_workflow_compliance.py', LF will be replaced by CRLF the next time Git touches it

@@ -1,0 +1,14 @@
+[
+  {
+    "command": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "scripts/run_tests.py",
+      "--workers",
+      "4"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\se_harness-20260916-200124-c3056d0b",
+    "exit": 1,
+    "elapsed_seconds": 167.06,
+    "log": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\work\\wo-kis-010-suite-0.log"
+  }
+]

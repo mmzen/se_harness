@@ -1,0 +1,17 @@
+[
+  {
+    "command": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-m",
+      "unittest",
+      "tests.test_workflow_compliance",
+      "tests.test_workflow_restitution",
+      "tests.test_revision_provenance",
+      "-q"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\se_harness-20260916-200124-c3056d0b",
+    "exit": 0,
+    "elapsed_seconds": 83.04,
+    "log": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\work\\wo-kis-010-focused-0.log"
+  }
+]

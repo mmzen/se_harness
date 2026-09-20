@@ -57,7 +57,7 @@ shell command, or repository-provided executable.
 | `changed_paths_within_scope` | Every path in a complete declared change set matches one exact path or component-boundary directory prefix. |
 | `start_preflight_ready` | Start preflight has no lifecycle-relevant blocker. |
 | `review_preflight_ready` | Review preflight has no lifecycle-relevant blocker. |
-| `review_evidence_available` | A work-order evidence reference names a nonempty file, or a header binds the selected checkpoint and relevant-input digest. Unrelated artifacts do not change that digest. |
+| `review_evidence_available` | Each required check declared by the selected verification contracts has a current successful observation or a contract-supported not-applicable assessment. Failed, missing, stale and unavailable observations block. Attachment availability alone proves no result. |
 | `authoring_ready` | The selected definition carries no template placeholder outside code and its `Open decisions` section, when present, reads `None`. Evaluated when a definition leaves `draft`. |
 | `decision_gate_clear` | No `open` decision names the selected artifact in `blocks`, and no `deferred` decision names it without a scope admitting the requested transition. The failure names the decision, its options, the deciding role and the `harnessctl decide` command. |
 
@@ -106,9 +106,10 @@ graph-structural checks that stay in the evaluator. Contract loading fails with
 | decision | `decided`, `deferred`, `withdrawn` | none | `QGS-EDGE` |
 | risk | `raised`, `accepted`, `avoided`, `mitigating`, `mitigated`, `withdrawn` | none | `QGS-EDGE` |
 
-At the `transition` checkpoint `review_evidence_available` accepts the
-work-order evidence bound to the `handoff` checkpoint at the same formal
-snapshot, so a transition never passes on weaker evidence than `check` saw.
+At the `transition` checkpoint `review_evidence_available` assesses the same
+required observations as handoff. It never relabels old inputs or treats an
+attachment as a successful check. This evidence predicate does not establish
+that other completion predicates received a complete change set.
 
 ### Graph-structural checks
 
@@ -164,3 +165,87 @@ The G0-G5 labels group related gates for reporting. They MUST NOT replace the ex
 **QG-008:** A tool MUST report the exact failed predicate. It MUST NOT report only a generic message such as "quality is insufficient."
 
 Workflow actions reference these gate IDs from [WORKFLOW.json](WORKFLOW.json). Decision ownership is defined by [DECISION_RIGHTS.md](DECISION_RIGHTS.md).
+
+
+## Required check observations
+
+The evidence gate separates an attachment from a result.
+Ordinary notes and old packet headers remain readable. Neither a nonempty file
+nor a fresh header proves that a required check succeeded.
+
+Declare the required checks in the existing verification contract's TOML front
+matter. Each entry needs a stable ID and a method. A test also names the exact
+command arguments; a manual check uses `inspection`, `analysis` or
+`demonstration`. All declared checks are required. For example:
+
+```toml
+[[checks]]
+id = "unit"
+method = "test"
+command = ["python", "-m", "unittest", "tests.test_example"]
+
+[[checks]]
+id = "review"
+method = "inspection"
+```
+
+The contract owner chooses checks that establish its acceptance conditions.
+An irrelevant command that differs from the declared command is refused.
+Matching a declared command cannot prove that the contract itself is adequate;
+that remains part of reviewing the verification plan. Existing contracts with
+only prose remain valid records but cannot yield an automatic evidence pass.
+Declare their checks through the ordinary amendment process before adopting
+this behavior. Do not rewrite historical approvals or evidence.
+
+Capture a real test run through the existing explicit evidence command:
+
+```text
+harnessctl evidence . --artifact WO-EX-001 --checkpoint handoff \
+  --verification VER-EX-001 --check unit --json \
+  --command python -m unittest tests.test_example
+```
+
+`--command` must be last. The command runs without a shell in the selected
+working tree. Capture requires an in-progress WO, unchanged approved path scope,
+and an admitted evidence directory. The record retains the working-input digest,
+the original HEAD (which may differ from the working tree), checker identity,
+exact arguments, exit code and both output byte streams. Output streams are
+base64 encoded in the JSON record. A failed command is retained as `failure`;
+an unavailable command or inputs changed during capture are `unavailable`.
+Successful capture reports that it saved an observation; it does not mean the
+observed check passed. The evidence gate evaluates the recorded outcome.
+
+For a contract-authorized manual check:
+
+```text
+harnessctl evidence . --artifact WO-EX-001 --checkpoint handoff \
+  --verification VER-EX-001 --check review --outcome success \
+  --assessor reviewer --reason "All stated review conditions met" \
+  --output-ref docs/engineering/example/evidence/WO-EX-001/review.md
+```
+
+Manual outcomes are `success`, `failure`, `not_run`, `unavailable` and
+`not_applicable`. A manual assertion cannot replace a declared test run.
+Successful manual assessment needs the assessor, conclusion and unchanged
+retained output. Not applicable requires an exact `not_applicable_reason`
+declared in the contract; missing output never supplies that reason.
+
+Observations are separate immutable files inside the existing WO evidence
+directory. The latest observation for each declared check is assessed; an old
+pass cannot hide a newer failure. Changed relevant code, contracts or policy
+require a fresh affected check. An unrelated note does not force another run.
+Original observed inputs and output are preserved. Local records and names are
+assertions, not authenticated identity or independent assurance.
+
+Every `check` invocation is read-only. To save a passing handoff result for
+`pr-body` or later review, explicitly run:
+
+```text
+harnessctl evidence . --artifact WO-EX-001 --checkpoint handoff --from-git BASE
+```
+
+This checks the real diff plus its planned output path and writes `handoff.json`
+only if handoff passes and the destination is admitted. The result lists that write. It does not change
+lifecycle state. Without capture options, `evidence` keeps its old attachment
+writer: it may update an attachment header and preserves its body, but never
+updates an observation or establishes successful verification.

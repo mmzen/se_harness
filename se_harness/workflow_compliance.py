@@ -132,6 +132,14 @@ def write_evidence_packet(
     artifact_id: str,
     checkpoint: str,
     now: str,
+    verification: str | None = None,
+    check_id: str | None = None,
+    command: list[str] | None = None,
+    outcome: str | None = None,
+    assessor: str | None = None,
+    reason: str | None = None,
+    output_ref: str | None = None,
+    from_git: str | None = None,
 ) -> dict[str, Any]:
     """Write or rebind one evidence packet and return the schema-2 result (ECP-EVD-001 to -007)."""
 
@@ -154,6 +162,34 @@ def write_evidence_packet(
     if len(in_progress) == 1 and in_progress[0] != artifact_id:
         raise CodedError(WEX_ECP_012, f"the working tree selects {in_progress[0]} (the one in_progress work order), not {artifact_id}"
         )
+    if verification or check_id or command is not None or outcome or assessor or reason or output_ref:
+        if not verification or not check_id or from_git is not None or checkpoint != "handoff":
+            raise CodedError(WEX_ECP_010, "Check capture requires --verification and --check at handoff, without --from-git")
+        from se_harness.workflow_evidence_packet import capture_check_observation
+        relative, observation = capture_check_observation(
+            root, primary, report, verification=verification, check_id=check_id,
+            command=command, outcome=outcome, assessor=assessor, reason=reason, output_ref=output_ref,
+        )
+        return selected_result(root, operation="evidence", primary=primary,
+            done=[f"Retained {verification}#{check_id}: {observation['outcome']} at {relative}. "
+                  "This is a local observation; no assurance decision was made."],
+            after=[{"id": artifact_id, "status": primary.status}],
+            writes=[{"id": artifact_id, "path": relative, "fields": ["observation"]}])
+    if from_git is not None:
+        if checkpoint != "handoff":
+            raise CodedError(WEX_ECP_010, "--from-git retains a handoff result only")
+        destination = evidence_packet_path(root, primary, "handoff").with_name("handoff.json")
+        if not path_is_admitted(destination.relative_to(root).as_posix(), execution_scope(primary)):
+            raise CodedError(WEX_ECP_010, "Retained handoff output is outside the approved scope")
+        result = check_workflow(root, artifact_id=artifact_id, checkpoint="handoff", from_git=from_git,
+                                retain_handoff=True)
+        if result["operation"]["outcome"] != "completed":
+            return result
+        retained = retain_handoff_result(root, primary, result)
+        return selected_result(root, operation="evidence", primary=primary,
+            done=[f"Explicitly retained the evaluated handoff result at {retained}. No lifecycle state changed."],
+            after=[{"id": artifact_id, "status": primary.status}],
+            writes=[{"id": artifact_id, "path": retained, "fields": ["result_sha256"]}])
     path = evidence_packet_path(root, primary, checkpoint)
     relative = path.relative_to(root).as_posix()
     conversion = line_ending_conversion(root, relative)
@@ -198,6 +234,7 @@ def write_evidence_packet(
         done=[
             f"{'Rebound' if action == 'rebind' else 'Wrote'} the {checkpoint} evidence packet of {artifact_id} "
             f"at {relative} to formal snapshot {snapshot}."
+            " This binds an attachment only; it records no observed check outcome."
         ],
         after=[{"id": artifact_id, "status": primary.status}],
         writes=[{"id": artifact_id, "path": relative, "fields": list(EVIDENCE_HEADER_KEYS)}],
@@ -411,36 +448,15 @@ def _resolve_change_set(
     change_manifest: Path | None,
     changed_paths: Iterable[str],
     changes_complete: bool,
-) -> tuple[str | None, bool, ChangeSet]:
-    """Rebind a self-binding handoff packet, derive the change set, and retain the handoff result path in it."""
-    rebound: str | None = None
-    self_binding = checkpoint == "handoff" and from_git is not None and primary.artifact_type == "work_order"
-    if self_binding:
-        # ECP-SBH-001: the run binds the packet to the snapshot it evaluates, before Git
-        # derives the change set, so a rewritten packet is a change-set member like any other.
-        from datetime import datetime, timezone
-
-        rebound = rebind_handoff_packet(
-            root,
-            primary,
-            formal_snapshot_digest(root, report.artifacts, [primary.artifact_id]),
-            datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        )
+) -> ChangeSet:
+    """Derive the actual change set without changing evidence or adding synthetic paths."""
     if from_git is not None:
         change_set = git_change_set(root, from_git)
     elif change_manifest is not None:
         change_set = parse_change_manifest(root, change_manifest)
     else:
         change_set = declared_change_set(changed_paths, complete=changes_complete)
-    if self_binding:
-        # ECP-SBH-004: the retained result path is evaluated as a member whether or not
-        # this run's write happened yet, so the first completed run is the fixed point.
-        retained = evidence_packet_path(root, primary, "handoff").with_name("handoff.json").relative_to(root).as_posix()
-        if retained not in change_set.paths:
-            change_set = ChangeSet(
-                paths=(*change_set.paths, retained), complete=change_set.complete, source=change_set.source, added=change_set.added
-            )
-    return rebound, self_binding, change_set
+    return change_set
 
 
 def _handoff_trap_blockers(
@@ -522,6 +538,8 @@ def check_workflow(
     from_git: str | None = None,
     retain_handoff: bool = False,
 ) -> dict[str, Any]:
+    # The explicit writer includes its planned output in the evaluated scope.
+    # This function remains read-only, including for callers using the old flag.
     if from_git is not None and (list(changed_paths) or changes_complete or change_manifest is not None):
         raise CodedError(WEX_ECP_002, "--from-git is mutually exclusive with --changed-path, --changes-complete and --change-manifest"
         )
@@ -556,7 +574,7 @@ def check_workflow(
         if procedure_id not in {selected_procedure, *alternatives}:
             raise CodedError(WEX220, f"procedure {procedure_id} is not selected by workflow rule {rule['id']}")
         selected_procedure = procedure_id
-    rebound, self_binding, change_set = _resolve_change_set(
+    change_set = _resolve_change_set(
         root,
         report,
         primary,
@@ -566,6 +584,10 @@ def check_workflow(
         changed_paths=changed_paths,
         changes_complete=changes_complete,
     )
+    if retain_handoff and from_git is not None and checkpoint == "handoff":
+        retained = evidence_packet_path(root, primary, "handoff").with_name("handoff.json").relative_to(root).as_posix()
+        change_set = ChangeSet(paths=tuple(sorted({*change_set.paths, retained})), complete=change_set.complete,
+                               source=change_set.source, added=change_set.added)
     validate_changed_targets(root, change_set)
     context = build_context(
         root, report, catalog, primary, checkpoint=checkpoint, change_set=change_set, target=target
@@ -672,24 +694,8 @@ def check_workflow(
         scoped_blockers=scoped,
         repository_blockers=repository_errors,
         unrelated_count=unrelated,
-        # ECP-SBH-005: the rebind is reported outside the canonical restitution block,
-        # so run one (which rebinds) and a repeat (which does not) share one digest.
-        writes=(
-            [{"id": artifact_id, "path": rebound, "fields": ["formal_snapshot_sha256", "rebound_at"]}]
-            if rebound is not None
-            else []
-        ),
+        writes=[],
     )
-    if retain_handoff and self_binding and result["operation"]["outcome"] == "completed":
-        # ECP-PRB-002 (amended): a completed Git-derived handoff result is retained beside
-        # the packet by the harness, never authored by the agent; ECP-ENG-010: from this
-        # run's own catalog, not a second validation. ECP-SBH-005: the retained entry
-        # joins the rebind entry rather than replacing it.
-        retained = retain_handoff_result(root.resolve(), primary, result)
-        result["mutation"]["writes"] = [
-            *result["mutation"]["writes"],
-            {"id": artifact_id, "path": retained, "fields": ["result_sha256"]},
-        ]
     return result
 
 

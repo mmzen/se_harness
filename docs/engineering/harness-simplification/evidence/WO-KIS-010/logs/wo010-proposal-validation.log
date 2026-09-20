@@ -1,0 +1,7 @@
+----------------------------------------------------------------------
+Ran 87 tests in 42.452s
+
+OK (skipped=1)
+WEX_SCALE artifacts=100 validation=0.117506s focus=0.246272s plan=0.363732s
+WEX_SCALE artifacts=500 validation=0.685241s focus=0.895065s plan=1.383801s
+docs/notes/diagnostic-codes.md matches the source

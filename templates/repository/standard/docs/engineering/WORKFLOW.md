@@ -80,6 +80,19 @@ The test command runs without a shell in a temporary checkout; a failed command
 or tracked test mutation prevents the record. The record keeps its actual commit
 and test result, and the temporary checkout is removed.
 
+## Read-only checks and explicit evidence capture
+
+Every `check` invocation projects state or evaluates readiness without writing
+files. Handoff does not rebind observations or save its result implicitly.
+Use `evidence --from-git BASE` at handoff to evaluate and explicitly retain a
+passing result. Its output lists the actual write.
+
+Verification contracts declare required checks. `evidence --verification VER-ID
+--check CHECK-ID --command ARGV...` captures the exact declared test command;
+manual checks retain their responsible assessment and output reference.
+Capture does not approve the result. The evidence gate evaluates the recorded
+outcome and relevant inputs; see `QUALITY_GATES.md#required-check-observations`.
+
 ## State model
 
 The `lifecycles` object in `WORKFLOW.json` is the single machine-readable state

@@ -1,0 +1,6 @@
+Command: ["C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe", "-m", "unittest", "tests.test_progressive_documentation", "-q"]
+Exit: 0
+----------------------------------------------------------------------
+Ran 17 tests in 0.071s
+
+OK

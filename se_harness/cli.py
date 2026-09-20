@@ -408,9 +408,6 @@ def _check(args: argparse.Namespace) -> int:
             pull_request_body=Path(args.pull_request_body) if args.pull_request_body else None,
             target=args.target_state,
             from_git=args.from_git,
-            # ECP-PRB-002 (amended), ECP-ENG-010: the completed Git-derived handoff result is
-            # retained by the run that produced it, from the one validation it holds.
-            retain_handoff=args.from_git is not None and args.checkpoint == "handoff",
         )
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
         # ECP-COR-001: one splitter, so no line carries a code twice.
@@ -427,6 +424,9 @@ def _evidence(args: argparse.Namespace) -> int:
     try:
         result = write_evidence_packet(
             Path(args.target), artifact_id=args.artifact, checkpoint=args.checkpoint, now=now,
+            verification=args.verification, check_id=args.check_id, command=args.command,
+            outcome=args.outcome, assessor=args.assessor, reason=args.reason,
+            output_ref=args.output_ref, from_git=args.from_git,
         )
     except (HarnessError, ContractError, ProcedureError, ValueError) as exc:
         code, message = _split_code(exc, WEX_ECP_010)
@@ -1005,12 +1005,20 @@ def build_parser() -> argparse.ArgumentParser:
     check.add_argument("--json", action="store_true", help="emit se-harness-workflow-result-v2 JSON")
     check.set_defaults(handler=_check)
 
-    evidence = commands.add_parser("evidence", help="write or rebind one work order's evidence packet to the current formal snapshot")
+    evidence = commands.add_parser("evidence", help="explicitly retain a check observation, handoff result or attachment")
     evidence.add_argument("target", nargs="?", default=".")
     evidence.add_argument("--artifact", required=True, help="the work order the packet is keyed by")
     evidence.add_argument("--checkpoint", required=True, choices=EVIDENCE_CHECKPOINTS)  # ECP-PRM-012
     evidence.add_argument("--rebound-at", help="RFC 3339 UTC timestamp to record; defaults to now")
     evidence.add_argument("--json", action="store_true", help="emit se-harness-workflow-result-v2 JSON")
+    evidence.add_argument("--verification", help="the work order's verification contract")
+    evidence.add_argument("--check", dest="check_id", help="required check ID declared by that contract")
+    evidence.add_argument("--outcome", choices=("success", "failure", "not_run", "unavailable", "not_applicable"))
+    evidence.add_argument("--assessor", help="responsible person or agent for a manual assessment")
+    evidence.add_argument("--reason", help="manual conclusion or contract-declared not-applicable reason")
+    evidence.add_argument("--output-ref", help="repository file supporting a manual assessment")
+    evidence.add_argument("--from-git", help="explicitly retain the checked handoff against this baseline")
+    evidence.add_argument("--command", nargs=argparse.REMAINDER, help="run the contract's exact command; must be last")
     evidence.set_defaults(handler=_evidence)
 
     pr_body = commands.add_parser("pr-body", help="emit the LF-terminated pull-request body for one work order")

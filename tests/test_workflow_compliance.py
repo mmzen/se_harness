@@ -4,6 +4,7 @@ import contextlib
 import io
 import json
 import subprocess
+import sys
 import tempfile
 import time
 import unittest
@@ -227,7 +228,7 @@ class WorkflowComplianceTests(WorkflowComplianceFixture, unittest.TestCase):
         self.assertEqual("blocked", result["operation"]["outcome"])
         self.assertNotIn("extra", result["scope"])
 
-    def test_evidence_freshness_requires_artifact_checkpoint_and_snapshot(self) -> None:
+    def test_fresh_header_alone_does_not_prove_a_successful_check(self) -> None:
         from se_harness.workflow_evidence_packet import render_evidence_header
 
         def header(digest: str) -> bytes:
@@ -265,8 +266,8 @@ class WorkflowComplianceTests(WorkflowComplianceFixture, unittest.TestCase):
                 "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff",
                 "--changes-complete", "--json",
             )
-        self.assertEqual(0, code, error)
-        self.assertEqual("pass", json.loads(output)["compliance"]["status"])
+        self.assertEqual(1, code, error)
+        self.assertEqual("not_assessable", json.loads(output)["compliance"]["status"])
 
     def test_unrelated_diagnostics_are_counted_without_details(self) -> None:
         write(
@@ -301,7 +302,8 @@ class GitDerivedChangeSetFixture(WorkflowComplianceFixture):
         git(self.root, "config", "user.email", "fixture@example.invalid")
         git(self.root, "config", "user.name", "Fixture")
         git(self.root, "config", "core.autocrlf", "false")
-        (self.root / ".gitignore").write_text("*.log\n", encoding="utf-8")
+        ignore = self.root / ".gitignore"
+        ignore.write_text(ignore.read_text(encoding="utf-8") + "\n*.log\n", encoding="utf-8")
         (self.root / "src/component/renamed_from.py").write_text("old = True\n", encoding="utf-8")
         (self.root / "src/component/deleted.py").write_text("gone = True\n", encoding="utf-8")
         git(self.root, "add", "-A")
@@ -324,9 +326,6 @@ class GitDerivedChangeSetTests(GitDerivedChangeSetFixture, unittest.TestCase):
         self.assertEqual(0, code, error)
         self.assertEqual(
             [
-                # ECP-SBH-004: the retained result path is a member of every Git-derived
-                # handoff change set, whether or not the run's own write happened yet.
-                "docs/engineering/product/evidence/WO-001/handoff.json",
                 "src/component/deleted.py",
                 "src/component/new.py",
                 "src/component/renamed_from.py",
@@ -477,12 +476,12 @@ class EvidencePacketTests(GitDerivedChangeSetFixture, unittest.TestCase):
         self.assertEqual(1, code, error)
         self.assertIn("WEX-ECP-012: the working tree selects WO-002", json.loads(output)["restitution"]["blocked_by"][0])
 
-    def test_the_predicate_reads_the_header_never_substrings_and_refuses_a_header_less_packet(self) -> None:
+    def test_no_attachment_header_or_prose_proves_an_observation(self) -> None:
         from se_harness.workflow_compliance import formal_snapshot_digest
 
         self.evidence("--rebound-at", "2026-08-28T20:00:00Z")
         code, result, error = self.check_real("--changes-complete", "--json")
-        self.assertEqual(0, code, error)
+        self.assertEqual(1, code, error)
         self.assertNotIn("W-ECP-002", json.dumps(result))
         packet = self.root / self.PACKET
         data = packet.read_bytes()
@@ -503,36 +502,22 @@ class EvidencePacketTests(GitDerivedChangeSetFixture, unittest.TestCase):
         self.assertEqual("not_assessable", statuses["QGP-G4I-EVIDENCE"])
         messages = [p["message"] for g in result["compliance"]["gates"] for p in g["predicates"] if p["id"] == "QGP-G4I-EVIDENCE"]
         self.assertNotIn("W-ECP-002", json.dumps(result))
-        self.assertIn("harnessctl evidence . --artifact WO-001 --checkpoint handoff", messages[0])
+        self.assertIn("attachment availability is not an assessment", messages[0])
 
     def check_from_git_real(self, base: str) -> tuple[int, dict, str]:
         return self.check_real("--from-git", base, "--json")
 
-    def test_a_completed_git_derived_handoff_retains_its_result_in_the_packet_directory(self) -> None:
+    def test_handoff_does_not_retain_or_relabel_attachment_evidence(self) -> None:
         base = self.commit_base()
-        self.evidence("--rebound-at", "2026-08-28T20:00:00Z")
+        self.evidence()
+        packet = self.root / self.PACKET
+        before = packet.read_bytes()
         (self.root / "src/exact.py").write_text("exact = False\n", encoding="utf-8")
-        code, result, error = self.check_from_git_real(base)
-        self.assertEqual(0, code, error)
-        retained = self.root / "docs/engineering/product/evidence/WO-001/handoff.json"
-        self.assertIn({"id": "WO-001", "path": "docs/engineering/product/evidence/WO-001/handoff.json", "fields": ["result_sha256"]}, result["mutation"]["writes"])
-        stored = json.loads(retained.read_text(encoding="utf-8"))
-        self.assertEqual(result["result_sha256"], stored["result_sha256"])
-        self.assertNotIn(b"\r", retained.read_bytes())
-        # ECP-SBH-004: the first run already evaluates the retained path, so it is the
-        # declared result; the repeat confirms the same digest over the same set.
-        self.assertIn("docs/engineering/product/evidence/WO-001/handoff.json", result["scope"]["changed_paths"])
-        code, second, error = self.check_from_git_real(base)
-        self.assertEqual(0, code, error)
-        self.assertIn("docs/engineering/product/evidence/WO-001/handoff.json", second["scope"]["changed_paths"])
-        self.assertEqual(result["result_sha256"], second["result_sha256"])
-        # a blocked handoff retains nothing
-        (self.root / "outside.md").write_text("x\n", encoding="utf-8")
-        before = retained.read_bytes()
         code, result, error = self.check_from_git_real(base)
         self.assertEqual(1, code, error)
         self.assertEqual([], result["mutation"]["writes"])
-        self.assertEqual(before, retained.read_bytes())
+        self.assertEqual(before, packet.read_bytes())
+        self.assertFalse(packet.with_name("handoff.json").exists())
 
 
 
@@ -560,43 +545,20 @@ class SelfBindingHandoffTests(GitDerivedChangeSetFixture, unittest.TestCase):
         work_order = self.root / "docs/engineering/product/work-orders/WO-001.md"
         work_order.write_text(work_order.read_text(encoding="utf-8") + "\n<!-- moved -->\n", encoding="utf-8")
 
-    def test_one_run_after_the_snapshot_moves_is_the_declared_result(self) -> None:
-        from se_harness.workflow_compliance import parse_evidence_header
-
+    def test_changed_inputs_never_rebind_an_old_failure(self) -> None:
         base = self.commit_base()
-        self.evidence("--rebound-at", "2026-08-31T08:00:00Z")
+        self.evidence()
         packet = self.root / self.PACKET
-        header_before, body_before = parse_evidence_header(packet.read_bytes())
+        packet.write_bytes(packet.read_bytes() + b"\nFAIL: required tests did not run.\n")
+        before = packet.read_bytes()
         self.move_snapshot()
         (self.root / "src/exact.py").write_text("exact = False\n", encoding="utf-8")
         code, first, error = self.check_real(base)
-        self.assertEqual(0, code, error)
-        # ECP-SBH-001: the header moved to the current snapshot; the body did not.
-        header_after, body_after = parse_evidence_header(packet.read_bytes())
-        self.assertEqual(body_before, body_after)
-        self.assertNotEqual(header_before["formal_snapshot_sha256"], header_after["formal_snapshot_sha256"])
-        self.assertNotEqual("2026-08-31T08:00:00Z", header_after["rebound_at"])
-        self.assertIn(self.RETAINED, first["scope"]["changed_paths"])
-        # ECP-SBH-005: the rebind entry beside the retained entry, outside the digest.
-        self.assertEqual(
-            [
-                {"id": "WO-001", "path": self.PACKET, "fields": ["formal_snapshot_sha256", "rebound_at"]},
-                {"id": "WO-001", "path": self.RETAINED, "fields": ["result_sha256"]},
-            ],
-            first["mutation"]["writes"],
-        )
-        bytes_after_first = packet.read_bytes()
-        code, second, error = self.check_real(base)
-        self.assertEqual(0, code, error)
-        # ECP-SBH-004: the first run is the declared result; the repeat only confirms it.
-        self.assertEqual(first["result_sha256"], second["result_sha256"])
-        self.assertEqual(first["scope"]["changed_paths"], second["scope"]["changed_paths"])
-        # ECP-SBH-001: a packet already bound to the current snapshot keeps its exact bytes.
-        self.assertEqual(bytes_after_first, packet.read_bytes())
-        self.assertEqual(
-            [{"id": "WO-001", "path": self.RETAINED, "fields": ["result_sha256"]}],
-            second["mutation"]["writes"],
-        )
+        self.assertEqual(1, code, error)
+        self.assertEqual([], first["mutation"]["writes"])
+        self.assertEqual(before, packet.read_bytes())
+        self.assertNotIn(self.RETAINED, first["scope"]["changed_paths"])
+
 
     def test_without_a_packet_nothing_is_created_and_a_headerless_packet_is_not_rewritten(self) -> None:
         base = self.commit_base()
@@ -630,14 +592,14 @@ class SelfBindingHandoffTests(GitDerivedChangeSetFixture, unittest.TestCase):
         tampered = packet.read_bytes()
         code, result, error = self.check_real(base)
         self.assertEqual(1, code, error)
-        self.assertTrue(result["restitution"]["blocked_by"][0].startswith("WEX-ECP-010"), result["restitution"]["blocked_by"])
+        self.assertEqual([], result["mutation"]["writes"])
         self.assertEqual(tampered, packet.read_bytes())
         packet.write_bytes(original)
         self.move_snapshot()
         (self.root / ".gitattributes").write_text("*.md text eol=crlf\n", encoding="utf-8")
         code, result, error = self.check_real(base)
         self.assertEqual(1, code, error)
-        self.assertTrue(result["restitution"]["blocked_by"][0].startswith("WEX-ECP-011"), result["restitution"]["blocked_by"])
+        self.assertEqual([], result["mutation"]["writes"])
         self.assertEqual(original, packet.read_bytes())
 
     def test_declared_change_sets_stay_read_only(self) -> None:
@@ -785,8 +747,8 @@ class ScopeCheckpointTests(ScopeCheckpointFixture, unittest.TestCase):
                 self.assertEqual("response", result["restitution"]["command_or_response"]["kind"])
                 self.assertIn("DR-REMEDIATION-SCOPE", result["restitution"]["command_or_response"]["value"])
 
-    def test_the_scope_checkpoint_writes_nothing_and_handoff_still_retains_its_result(self) -> None:
-        # ECP-SCP-004: only the handoff checkpoint retains handoff.json.
+    def test_scope_and_handoff_both_write_nothing(self) -> None:
+        # KIS-EVD-003: both checkpoints are read-only.
         base = self.commit_base()
         (self.root / "src/exact.py").write_text("exact = False\n", encoding="utf-8")
         retained = self.root / "docs/engineering/product/evidence/WO-001/handoff.json"
@@ -796,7 +758,7 @@ class ScopeCheckpointTests(ScopeCheckpointFixture, unittest.TestCase):
         self.assertEqual([], result["mutation"]["writes"])
         code, result, error = self.check_from_git(base)
         self.assertEqual(0, code, error)
-        self.assertTrue(retained.exists())
+        self.assertFalse(retained.exists())
 
     def test_the_scope_checkpoint_is_a_work_order_checkpoint(self) -> None:
         # ECP-SCP-001: a verification or release record is refused with WEX210.
@@ -1023,7 +985,7 @@ class OrdinaryInputsTests(WorkflowComplianceFixture, unittest.TestCase):
         self.assertTrue(path_is_admitted(relative, (relative,)))
         self.assertFalse(path_is_admitted("src/component/check1.py", (relative,)))
 
-    def test_explicit_plain_evidence_reference_is_read_without_a_header(self) -> None:
+    def test_plain_attachment_is_available_but_unassessed(self) -> None:
         from se_harness.workflow_predicates import review_evidence
         from types import SimpleNamespace
         note = "docs/engineering/product/evidence/WO-001/checks.md"
@@ -1031,15 +993,16 @@ class OrdinaryInputsTests(WorkflowComplianceFixture, unittest.TestCase):
         path.parent.mkdir(parents=True, exist_ok=True)
         body = b"# Check results\n\nRan setup and then the command: exit 0, expected files present.\n"
         path.write_bytes(body)
-        artifact = SimpleNamespace(artifact_type="work_order", artifact_id="WO-001", metadata={"evidence_paths": [note]})
-        context = SimpleNamespace(root=self.root, artifact=artifact, checkpoint="handoff", formal_snapshot_sha256="a"*64)
-        self.assertEqual("pass", review_evidence(context)[0])
+        artifact = SimpleNamespace(artifact_type="work_order", artifact_id="WO-001", metadata={"evidence_paths": [note]}, relations={"verification": ["VER-001"]})
+        report = validate_engineering_artifacts.validate_repository(self.root)
+        context = SimpleNamespace(root=self.root, artifact=artifact, checkpoint="handoff", formal_snapshot_sha256="a"*64, report=report, catalog={a.artifact_id:a for a in report.artifacts})
+        self.assertEqual("not_assessable", review_evidence(context)[0])
         self.assertEqual(body, path.read_bytes())
         for bad in ("../outside.md", "docs/missing.md"):
             artifact.metadata["evidence_paths"] = [bad]
             self.assertEqual("not_assessable", review_evidence(context)[0])
 
-    def test_plain_reference_is_used_by_the_public_handoff_check(self) -> None:
+    def test_plain_attachment_is_not_a_public_handoff_pass(self) -> None:
         note = "docs/engineering/product/evidence/WO-001/ordinary.md"
         path = self.root / note
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -1050,8 +1013,8 @@ class OrdinaryInputsTests(WorkflowComplianceFixture, unittest.TestCase):
         wo.write_text(text, encoding="utf-8")
         with mock.patch("se_harness.workflow_compliance._preflight_status", return_value=("pass", "Fixture is ready.")):
             code, output, error = invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--changes-complete", "--json")
-        self.assertEqual(0, code, output + error)
-        self.assertIn(note, output)
+        self.assertEqual(1, code, output + error)
+        self.assertIn("attachment availability is not an assessment", output)
         path.unlink()
         with mock.patch("se_harness.workflow_compliance._preflight_status", return_value=("pass", "Fixture is ready.")):
             code, output, error = invoke("check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff", "--changes-complete", "--json")
@@ -1084,3 +1047,185 @@ class OrdinaryInputsTests(WorkflowComplianceFixture, unittest.TestCase):
         self.assertEqual(fields["description"], header["description"])
         self.assertEqual("b"*64, header["formal_snapshot_sha256"])
         self.assertEqual(body, after)
+
+
+class ObservedEvidenceTests(GitDerivedChangeSetFixture, unittest.TestCase):
+    """SPEC-KIS-004: real command observations and read-only evidence assessment."""
+
+    def setUp(self):
+        super().setUp()
+        for path in (self.root / "docs/engineering").rglob("*.md"):
+            path.write_text(path.read_text(encoding="utf-8").replace("WO-001", "WO-TST-001"), encoding="utf-8")
+            if path.name == "WO-001.md":
+                path.rename(path.with_name("WO-TST-001.md"))
+        self.command = [sys.executable, "-c", "print('required check passed')"]
+        self.ver = self.root / "docs/engineering/product/verification/VER-001.md"
+        self.ver_base = self.ver.read_text(encoding="utf-8")
+        self.set_checks([{ "id": "unit", "method": "test", "command": self.command }])
+        wo = self.root / "docs/engineering/product/work-orders/WO-TST-001.md"
+        wo.write_text(wo.read_text(encoding="utf-8").replace('"changes.json"]',
+            '"changes.json", "docs/engineering/product/evidence/WO-TST-001/", "docs/engineering/product/verification/VER-001.md"]'), encoding="utf-8")
+        record_execution_approval(wo)
+        self.base = self.commit_base()
+
+    def set_checks(self, checks):
+        text = "\n".join("[[checks]]\n" + "\n".join(f"{key} = {json.dumps(value)}" for key, value in check.items()) for check in checks)
+        self.ver.write_text(self.ver_base.replace("[relations]", text + "\n\n[relations]", 1), encoding="utf-8")
+
+    def observe(self, *extra):
+        code, raw, error = invoke("evidence", str(self.root), "--artifact", "WO-TST-001", "--checkpoint", "handoff",
+            "--verification", "VER-001", "--check", "unit", "--json", *extra)
+        result = json.loads(raw)
+        self.assertEqual(0, code, error + str(result.get("restitution")))
+        return result
+
+    def handoff(self):
+        code, raw, error = invoke("check", str(self.root), "--artifact", "WO-TST-001", "--checkpoint", "handoff",
+            "--from-git", self.base, "--json")
+        result = json.loads(raw)
+        self.assertEqual([], result["mutation"]["writes"])
+        return code, result
+
+    def observations(self):
+        return {p:p.read_bytes() for p in (self.root / "docs/engineering/product/evidence/WO-TST-001").glob("observation-*.json")}
+
+    def test_missing_and_failed_plain_text_are_not_success(self):
+        code, result = self.handoff()
+        self.assertEqual(1, code)
+        self.assertIn("not_run", str(result["restitution"]["blocked_by"]))
+        wo = self.root / "docs/engineering/product/work-orders/WO-TST-001.md"
+        path = "docs/engineering/product/evidence/WO-TST-001/failure.md"
+        write(self.root / path, "FAIL: the required tests did not run; there is no passing test result.")
+        wo.write_text(wo.read_text().replace('[assurance]', f'evidence_paths = ["{path}"]\n\n[assurance]', 1))
+        code, result = self.handoff()
+        self.assertEqual(1, code)
+        self.assertIn("not_run", str(result["restitution"]["blocked_by"]))
+
+    def test_actual_success_read_only_checks_and_explicit_retention(self):
+        self.observe("--command", *self.command)
+        before = self.observations()
+        code, result = self.handoff()
+        self.assertEqual(0, code, str(result["restitution"]["blocked_by"]))
+        self.assertIn("local-command", str(result["compliance"]))
+        retained = self.root / "docs/engineering/product/evidence/WO-TST-001/handoff.json"
+        self.assertFalse(retained.exists())
+        code, raw, error = invoke("evidence", str(self.root), "--artifact", "WO-TST-001", "--checkpoint", "handoff",
+            "--from-git", self.base, "--json")
+        self.assertEqual(0, code, raw + error)
+        self.assertTrue(retained.exists())
+        self.assertEqual(1, len(json.loads(raw)["mutation"]["writes"]))
+        self.assertEqual(before, self.observations())
+        self.assertEqual(json.loads(retained.read_text())["result_sha256"], self.handoff()[1]["result_sha256"])
+        files = {p: p.read_bytes() for p in self.root.rglob("*") if p.is_file() and ".git" not in p.parts}
+        for options in ((), ("--checkpoint", "scope", "--from-git", self.base),
+                        ("--checkpoint", "handoff", "--from-git", self.base)):
+            code, raw, error = invoke("check", str(self.root), "--artifact", "WO-TST-001", "--json", *options)
+            self.assertEqual(0, code, raw + error)
+            self.assertEqual([], json.loads(raw)["mutation"]["writes"])
+        self.assertEqual(files, {p: p.read_bytes() for p in self.root.rglob("*") if p.is_file() and ".git" not in p.parts})
+
+    def test_stale_success_cannot_be_repaired_by_rebinding(self):
+        self.observe("--command", *self.command)
+        before = self.observations()
+        (self.root / "src/exact.py").write_text("changed = True\n")
+        code, result = self.handoff()
+        self.assertEqual(1, code)
+        self.assertIn("stale", str(result["restitution"]["blocked_by"]))
+        invoke("evidence", str(self.root), "--artifact", "WO-TST-001", "--checkpoint", "handoff")
+        self.assertEqual(1, self.handoff()[0])
+        self.assertEqual(before, self.observations())
+
+    def test_unrelated_note_reuses_original_observation(self):
+        self.observe("--command", *self.command)
+        before = self.observations()
+        write(self.root / "docs/notes/unrelated.md", "An unrelated note.\n")
+        git(self.root, "add", "docs/notes/unrelated.md")
+        git(self.root, "commit", "-q", "-m", "unrelated note")
+        # Scope is evaluated separately: use the new baseline to isolate the evidence question.
+        self.base = git(self.root, "rev-parse", "HEAD").strip()
+        code, result = self.handoff()
+        self.assertEqual(0, code, str(result["restitution"]["blocked_by"]))
+        self.assertEqual(before, self.observations())
+
+    def test_failure_exit_and_output_are_retained(self):
+        command = [sys.executable, "-c", "print('required test failed'); raise SystemExit(7)"]
+        self.set_checks([{ "id": "unit", "method": "test", "command": command }])
+        self.observe("--command", *command)
+        item = json.loads(next(iter(self.observations().values())))
+        self.assertEqual(7, item["exit_code"])
+        self.assertEqual("failure", item["outcome"])
+        import base64
+        self.assertIn(b"required test failed", base64.b64decode(item["stdout"]))
+        code, result = self.handoff()
+        self.assertEqual(1, code)
+        self.assertIn("failure retained", str(result["restitution"]["blocked_by"]))
+
+    def test_irrelevant_command_and_supplied_success_are_refused(self):
+        for extra in (("--command", sys.executable, "-c", "print('irrelevant')"),
+                      ("--outcome", "success", "--assessor", "executor", "--reason", "I assume it passed")):
+            code, raw, _ = invoke("evidence", str(self.root), "--artifact", "WO-TST-001", "--checkpoint", "handoff",
+                "--verification", "VER-001", "--check", "unit", "--json", *extra)
+            self.assertEqual(1, code, raw)
+        self.assertFalse(self.observations())
+
+    def test_unavailable_and_not_run_are_distinct(self):
+        self.observe("--outcome", "not_run", "--assessor", "executor", "--reason", "The command has not been run")
+        self.assertIn("not_run", str(self.handoff()[1]["restitution"]["blocked_by"]))
+        command = [str(self.root / "missing-program")]
+        self.set_checks([{ "id": "unit", "method": "test", "command": command }])
+        self.observe("--command", *command)
+        self.assertIn("unavailable", str(self.handoff()[1]["restitution"]["blocked_by"]))
+
+    def test_manual_assessment_and_missing_output(self):
+        self.set_checks([{ "id": "unit", "method": "inspection" }])
+        path = "docs/engineering/product/evidence/WO-TST-001/review.md"
+        write(self.root / path, "Compared the behavior with the contract; all criteria met.\n")
+        self.observe("--outcome", "success", "--assessor", "reviewer", "--reason", "All contract criteria met", "--output-ref", path)
+        code, result = self.handoff()
+        self.assertEqual(0, code, str(result["restitution"]["blocked_by"]))
+        (self.root / path).unlink()
+        code, result = self.handoff()
+        self.assertEqual(1, code)
+        self.assertIn("unavailable or changed", str(result["restitution"]["blocked_by"]))
+
+    def test_not_applicable_needs_the_contract_reason(self):
+        code, raw, _ = invoke("evidence", str(self.root), "--artifact", "WO-TST-001", "--checkpoint", "handoff",
+            "--verification", "VER-001", "--check", "unit", "--outcome", "not_applicable",
+            "--assessor", "reviewer", "--reason", "No output", "--json")
+        self.assertEqual(1, code, raw)
+        self.set_checks([{ "id": "unit", "method": "inspection", "not_applicable_reason": "No platform-specific feature in this contract" }])
+        self.observe("--outcome", "not_applicable", "--assessor", "reviewer", "--reason", "No platform-specific feature in this contract")
+        code, result = self.handoff()
+        self.assertEqual(0, code, str(result["restitution"]["blocked_by"]))
+
+    def test_inputs_changed_by_command_are_unavailable(self):
+        command = [sys.executable, "-c", "from pathlib import Path; Path('src/exact.py').write_text('changed = True\\n')"]
+        self.set_checks([{"id": "unit", "method": "test", "command": command}])
+        self.observe("--command", *command)
+        item = json.loads(next(iter(self.observations().values())))
+        self.assertEqual("unavailable", item["outcome"])
+        self.assertIn("changed", item["reason"])
+        self.assertEqual(1, self.handoff()[0])
+
+    def test_latest_failure_cannot_reuse_old_success(self):
+        self.set_checks([{"id": "unit", "method": "inspection"}])
+        path = "docs/engineering/product/evidence/WO-TST-001/review.md"
+        write(self.root / path, "Inspection notes.\n")
+        self.observe("--outcome", "success", "--assessor", "reviewer", "--reason", "Initial review passed", "--output-ref", path)
+        self.observe("--outcome", "failure", "--assessor", "reviewer", "--reason", "Further review found a defect", "--output-ref", path)
+        self.assertEqual(2, len(self.observations()))
+        self.assertIn("failure retained", str(self.handoff()[1]["restitution"]["blocked_by"]))
+
+    def test_changed_observation_is_refused(self):
+        self.observe("--command", *self.command)
+        path = next(iter(self.observations()))
+        path.write_bytes(path.read_bytes() + b"\n")
+        self.assertIn("Retained observation changed", str(self.handoff()[1]["restitution"]["blocked_by"]))
+
+    def test_capture_requires_unchanged_approved_scope(self):
+        wo = self.root / "docs/engineering/product/work-orders/WO-TST-001.md"
+        wo.write_text(wo.read_text().replace('"src/exact.py"', '"src/unapproved.py"', 1))
+        code, raw, _ = invoke("evidence", str(self.root), "--artifact", "WO-TST-001", "--checkpoint", "handoff",
+            "--verification", "VER-001", "--check", "unit", "--json", "--command", *self.command)
+        self.assertEqual(1, code, raw)
+        self.assertFalse(self.observations())

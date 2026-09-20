@@ -4,6 +4,9 @@
 from __future__ import annotations
 
 import re
+import json
+import hashlib
+import base64
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Mapping
@@ -14,7 +17,9 @@ from se_harness.installer import HarnessError, safe_destination
 from se_harness.integrity import canonical_text
 from se_harness.workflow_contract import Checkpoint
 from se_harness.workflow_change_set import ChangeSet, normalize_path
-from se_harness.workflow_evidence_packet import parse_evidence_header
+from se_harness.workflow_evidence_packet import (
+    OBSERVATION_SCHEMA, evidence_packet_path, observation_inputs, required_checks,
+)
 
 
 @dataclass
@@ -38,8 +43,7 @@ class CheckpointContext:
 def review_evidence(context: CheckpointContext) -> tuple[str, str]:
     if context.artifact.artifact_type != "work_order":
         return "pass", "Work-order implementation evidence does not apply to this artifact type."
-    # A work order can point directly at ordinary evidence files. No machine header
-    # is required. Old generated packets remain readable through the path below.
+    # Attachments remain ordinary files. Availability does not establish an outcome.
     references = context.artifact.metadata.get("evidence_paths")
     if references is not None:
         if not isinstance(references, list) or not references:
@@ -53,44 +57,70 @@ def review_evidence(context: CheckpointContext) -> tuple[str, str]:
                     return "not_assessable", f"Evidence {relative} is missing or empty."
             except (HarnessError, OSError, ValueError) as exc:
                 return "not_assessable", f"Cannot read evidence {reference!r}: {exc}"
-        return "pass", "Retained evidence: " + ", ".join(references) + "."
-    evidence_root = context.root / "docs" / "engineering"
-    candidates = [
-        path for path in evidence_root.rglob("*")
-        if path.is_file()
-        and "evidence" in path.parts
-        and any(part.startswith(context.artifact.artifact_id) for part in path.parts[path.parts.index("evidence") + 1 :])
-    ]
-    # The handoff checkpoint is the one that retains evidence; a transition to
-    # implemented accepts the handoff-bound document for the same snapshot, so
-    # the transition can never pass on weaker evidence than check evaluated.
-    checkpoint = "handoff" if context.checkpoint == "transition" else context.checkpoint
-    for path in sorted(candidates):
-        try:
-            data = path.read_bytes()
-        except OSError:
-            continue
-        relative = path.relative_to(context.root).as_posix()
-        # ECP-EVD-005: the machine header is read through the TOML parser, never by
-        # substring. A packet without one is not assessable (SPEC-AUT-004 AUT-WIN-007);
-        # the substring grace of W-ECP-002 closed under WO-AUT-006.
-        try:
-            header, _ = parse_evidence_header(data)
-        except HarnessError:
-            continue
-        if header is None:
-            continue
-        if (
-            header["artifact"] == context.artifact.artifact_id
-            and header["checkpoint"] == checkpoint
-            and header["formal_snapshot_sha256"] == context.formal_snapshot_sha256
-        ):
-            return "pass", f"Fresh retained evidence is bound at {relative}."
-    return "not_assessable", (
-        f"No readable evidence for {context.artifact.artifact_id}, checkpoint {checkpoint}, "
-        f"and formal snapshot {context.formal_snapshot_sha256} is available; write the header with "
-        f"harnessctl evidence . --artifact {context.artifact.artifact_id} --checkpoint {checkpoint}."
-    )
+    try:
+        checks = required_checks(context.artifact, context.catalog)
+        current = observation_inputs(context.root, context.artifact, context.report)
+        directory = evidence_packet_path(context.root, context.artifact, "handoff").parent
+        records: dict[tuple[str, str], list[tuple[str, dict[str, Any]]]] = {}
+        for path in sorted(directory.glob("observation-*.json")):
+            safe = safe_destination(context.root, path.relative_to(context.root))
+            raw = safe.read_bytes()
+            if path.name != "observation-" + hashlib.sha256(raw).hexdigest() + ".json":
+                return "fail", f"Retained observation changed: {path.relative_to(context.root).as_posix()}."
+            item = json.loads(raw)
+            if not isinstance(item, dict) or item.get("schema") != OBSERVATION_SCHEMA:
+                return "not_assessable", "Unreadable check observation."
+            if item.get("artifact") != context.artifact.artifact_id:
+                return "fail", "Observation names a different work order."
+            key = (item.get("verification"), item.get("check"))
+            if key in checks:
+                records.setdefault(key, []).append((path.relative_to(context.root).as_posix(), item))
+        assessed = []
+        for key, check in checks.items():
+            label = "#".join(key)
+            candidates = records.get(key, [])
+            if not candidates:
+                return "not_assessable", f"{label}: not_run; capture its required observation with harnessctl evidence."
+            if any(not isinstance(item.get("observed_at"), str) for _, item in candidates):
+                return "not_assessable", f"{label}: observation time is unavailable."
+            candidates.sort(key=lambda pair: pair[1]["observed_at"])
+            relative, item = candidates[-1]
+            if len(candidates) > 1 and candidates[-2][1]["observed_at"] == item["observed_at"]:
+                return "not_assessable", f"{label}: latest observation is ambiguous."
+            if item.get("input_sha256") != current:
+                return "not_assessable", f"{label}: stale observation at {relative}; relevant inputs changed."
+            checker = item.get("checker")
+            if (item.get("method") != check["method"] or not isinstance(checker, dict)
+                    or not all(isinstance(checker.get(key), str) and checker[key].strip()
+                               for key in ("version", "python", "module", "module_sha256"))):
+                return "not_assessable", f"{label}: method or checker identity is unavailable."
+            outcome = item.get("outcome")
+            if outcome == "failure":
+                return "fail", f"{label}: failure retained at {relative}."
+            if outcome not in {"success", "not_applicable"}:
+                return "not_assessable", f"{label}: {outcome or 'unavailable'} at {relative}."
+            if outcome == "not_applicable":
+                if (not check.get("not_applicable_reason") or item.get("reason") != check["not_applicable_reason"]
+                        or item.get("origin") != "local-assessment" or not item.get("assessor")):
+                    return "fail", f"{label}: not applicable is not supported by its contract."
+            elif check["method"] == "test":
+                if (item.get("command") != check["command"] or type(item.get("exit_code")) is not int
+                        or item["exit_code"] != 0 or item.get("origin") != "local-command"):
+                    return "fail", f"{label}: no successful run of the required command."
+                # Successful captures retain both complete byte streams, including empty output.
+                for stream in ("stdout", "stderr"):
+                    base64.b64decode(item[stream], validate=True)
+            elif (item.get("origin") != "local-assessment" or not item.get("assessor")
+                  or not item.get("reason") or not item.get("output_ref")):
+                return "not_assessable", f"{label}: responsible manual assessment is missing."
+            if item.get("output_ref"):
+                output = safe_destination(context.root, Path(normalize_path(item["output_ref"])))
+                if not output.is_file() or hashlib.sha256(output.read_bytes()).hexdigest() != item.get("output_sha256"):
+                    return "not_assessable", f"{label}: assessment output is unavailable or changed."
+            assessed.append(f"{label}: {outcome} ({item.get('origin')}, {relative})")
+        return "pass", "Assessed required checks: " + "; ".join(assessed) + ". Local observations do not establish independent assurance."
+    except (HarnessError, OSError, ValueError, KeyError, TypeError) as exc:
+        return "not_assessable", f"Cannot assess required evidence: {exc}"
 
 
 def pull_request_body_findings(root: Path, body_path: Path) -> list[str]:

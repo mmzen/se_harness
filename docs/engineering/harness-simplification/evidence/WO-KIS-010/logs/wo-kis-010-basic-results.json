@@ -1,0 +1,72 @@
+[
+  {
+    "command": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "scripts/validate_release_distributions.py",
+      "--root",
+      "."
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\se_harness-20260916-200124-c3056d0b",
+    "exit": 0,
+    "elapsed_seconds": 5.18,
+    "log": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\work\\wo-kis-010-basic-0.log"
+  },
+  {
+    "command": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-m",
+      "se_harness",
+      "--help"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\se_harness-20260916-200124-c3056d0b",
+    "exit": 0,
+    "elapsed_seconds": 0.4,
+    "log": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\work\\wo-kis-010-basic-1.log"
+  },
+  {
+    "command": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-m",
+      "se_harness",
+      "validate",
+      ".",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\se_harness-20260916-200124-c3056d0b",
+    "exit": 0,
+    "elapsed_seconds": 5.65,
+    "log": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\work\\wo-kis-010-basic-2.log"
+  },
+  {
+    "command": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-m",
+      "se_harness",
+      "doctor",
+      ".",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\se_harness-20260916-200124-c3056d0b",
+    "exit": 1,
+    "elapsed_seconds": 2.91,
+    "log": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\work\\wo-kis-010-basic-3.log"
+  },
+  {
+    "command": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-m",
+      "se_harness",
+      "preflight",
+      ".",
+      "--work-order",
+      "WO-KIS-010",
+      "--phase",
+      "review",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\se_harness-20260916-200124-c3056d0b",
+    "exit": 1,
+    "elapsed_seconds": 5.31,
+    "log": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\work\\wo-kis-010-basic-4.log"
+  }
+]

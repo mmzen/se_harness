@@ -1,0 +1,16 @@
+{
+  "purpose": "Preview only: proposed changes are NOT applied to the working repository",
+  "command": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-m",
+    "unittest",
+    "tests.test_workflow_execution",
+    "tests.test_diagnostic_code_index",
+    "tests.test_compatibility_windows",
+    "-q"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\work\\wo010-proposal-validation",
+  "exit": 0,
+  "elapsed_seconds": 43.81,
+  "log": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\work\\wo010-proposal-validation.log"
+}

@@ -1,0 +1,21 @@
+{
+  "baseline_commit": "cc211403b7d37b3eb74ea170deea418f0aee3dab",
+  "identity": "working-tree content, not commit-bound verification",
+  "python": "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+  "source_version": "0.19.0",
+  "governing_version": "0.18.0",
+  "paths": {
+    "docs/engineering/harness-simplification/work-orders/WO-KIS-010.md": "f789175e117bb80649a1df69992ac7e57aabd8d8a9c177e9df4538a464ca43d1",
+    "docs/notes/harnessctl-check.md": "b696ff6b4417b432d441195bc1a89e66ce0c8f02105ec25ebe29f625a6472ada",
+    "docs/notes/harnessctl-reference.md": "37a68f55780e4aee8f66d7602ab5de368ee15a325841b5a92ffeab0d298d9856",
+    "se_harness/cli.py": "f8c8e0ba80b6bf856e8933264947b02ac83f8ac627c0b1834b5c08ef360f8b5e",
+    "se_harness/workflow_compliance.py": "3f1a05406c4e964fb278cfd6ee7db5dc37e055ce7e41225871121876bbd96ad6",
+    "se_harness/workflow_contract.json": "35cf4426bcc71850e80a79162cb254c436520d510b6d0cb3147cf3ef96702c0f",
+    "se_harness/workflow_evidence_packet.py": "e814442edd32a8af860e0fd1d8803316540ce197830cfd8294cc0cef78249052",
+    "se_harness/workflow_predicates.py": "a5502d4d77c035084947fb7f001ccb52417afa2586f55612cee3ed9b0527ee50",
+    "templates/repository/standard/docs/engineering/QUALITY_GATES.md": "34fda8ef8621ea841e121e4571a03ab4f84d44f0faf6dd49c86f61ee05888880",
+    "templates/repository/standard/docs/engineering/WORKFLOW.json": "35cf4426bcc71850e80a79162cb254c436520d510b6d0cb3147cf3ef96702c0f",
+    "templates/repository/standard/docs/engineering/WORKFLOW.md": "1faee8c3d38a096f70ddb478d528202de96460dd125219e69039f79758df0abb",
+    "tests/test_workflow_compliance.py": "be101d85fc22f6202bfa655d377945dc2b31e079cc94fa8c119272eec8cd1a20"
+  }
+}

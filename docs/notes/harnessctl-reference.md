@@ -58,10 +58,10 @@ Four rules hold on every subcommand (`WO-ECP-022`):
 | `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer; under `--json` an engine refusal exits 2 and a failed generation carries the engine's standard error in `error` |
 | `doctor` | human or agent | read-only | inspect required files, managed hashes, distribution parity, owner seeds, and scripts |
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
-| `evidence` | coding agent at a checkpoint | writes or rebinds one evidence packet header | write the work order's evidence packet with a machine header bound to the current formal snapshot, keeping the owner-authored body byte for byte |
+| `evidence` | coding agent at a checkpoint | explicit writes | capture a required check, retain a passing handoff result, or update a legacy attachment header; report the actual writes |
 | `pr-body` | coding agent opening a pull request | read-only | emit the LF-terminated pull-request body: the work-order line, the restitution line when a Git-derived handoff result is retained, and the evidence list; an unknown artifact is a failed result on standard output, exit 1, as for `check` and `evidence` |
-| `check-pr` | managed GitHub CI | scope check; may rebind an in-progress handoff | check one or several approved work orders and their combined diff |
-| `check` | coding agent, first call on a work order; the managed gate | read-only, except the self-binding Git-derived handoff checkpoint, which rebinds the packet header and retains its completed result | without a checkpoint, return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result, selecting the single in_progress work order when none is named; with a checkpoint, evaluate one fixed checkpoint and emit canonical restitution |
+| `check-pr` | managed GitHub CI | read-only scope and handoff checks | check one or several approved work orders and their combined diff |
+| `check` | coding agent, first call on a work order; the managed gate | read-only at every checkpoint | without a checkpoint, return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result, selecting the single in_progress work order when none is named; with a checkpoint, evaluate one fixed checkpoint and emit canonical restitution |
 | `transition` | authorized actor; a person or agent uses the same recorded WO approval for start and completion after local checks pass (see [one execution route](delegation-class.md)) | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
 | `decide` | the role that holds `DR-DECISION-DISPOSE` for the blocked artifact: its owner, or for a deviation the owner of the specification it departs from | plan is read-only; `--apply` writes the decision's `[disposition]` table and one lifecycle event, and moves every raised risk the decision concerns in the same act | answer, defer, or withdraw one open decision artifact so the artifacts it blocks can move again |
 | `raise-risk` | anyone working: a reviewer, an implementer, or an agent mid-execution; no decision right is needed | writes one risk artifact in `raised`, and with `--with-decision` the open decision that blocks the threatened artifacts; dry-run is read-only | record one measured threat to governed work so that an owner answers it before the threatened stage moves |
@@ -209,26 +209,24 @@ with `WEX-ECP-003` and evaluates no predicate as `pass`. The selected work
 order's own artifact file, written by its lifecycle transitions and so always
 in the diff, is admitted to its scope by construction (`ECP-CHG-007`).
 
-`evidence` writes `DOMAIN/evidence/WO-ID/WO-ID-CHECKPOINT.md` (`WO-ECP-002`):
-a fenced TOML header at byte offset 0 with exactly `artifact`, `checkpoint`,
-`formal_snapshot_sha256` and `rebound_at`, followed by an owner-authored
-body. On an existing packet only the header bytes change; the body is
-retained byte for byte, and a file without a header at offset 0, with a
-header naming another artifact or checkpoint, or with invalid TOML is refused
-(`WEX-ECP-010`). It refuses when a `.gitattributes` rule would convert the
-packet's line endings (`WEX-ECP-011`) and when the single `in_progress` work
-order is not the one named (`WEX-ECP-012`). `QGP-G4I-EVIDENCE` reads that
-header through a TOML parser; a packet without one is not assessable, and
-the message names the `evidence` command that writes the header (the
-one-release substring grace closed under `WO-AUT-006`). `check --checkpoint handoff
---from-git BASE` is self-binding (`ECP-SBH-001` to `-006`): it rebinds an
-existing packet header to the current formal snapshot before evaluating —
-body preserved, `evidence`'s `WEX-ECP-010`/`WEX-ECP-011` guards unchanged,
-no packet created — and evaluates the change set with the retained result
-path included, so one run is the declared, digest-stable result. A
-completed run retains its schema-2 result as `handoff.json` in the same
-directory, written by the harness; that directory is admitted to the work
-order's scope by construction.
+## Retaining check results
+
+Candidate behavior under WO-KIS-010 separates attachments from results.
+An attachment proves availability. A required result needs an observed command
+run or the responsible assessment called for by its verification contract.
+Missing, failed, unavailable and stale results block completion.
+
+The [capture guide](../../templates/repository/standard/docs/engineering/QUALITY_GATES.md#required-check-observations)
+defines check metadata, command capture, manual assessment and reuse. Capture
+uses the existing `evidence` command and WO evidence directory. Existing
+prose-only contracts remain readable; declare their checks through the normal
+amendment process before adopting the stricter evidence gate.
+
+Every `check` is read-only. Explicitly retain a passing handoff with
+`harnessctl evidence . --artifact WO-X --checkpoint handoff --from-git BASE`.
+Capture reports its writes; it grants no assurance approval. Without capture
+options, `evidence` still writes a legacy attachment header, which cannot prove
+successful verification or change an existing observation.
 
 `pr-body` emits the pull-request body for an approved or later work order
 (`WEX-ECP-014` otherwise): the standalone `Harness-Work-Order` line first, one

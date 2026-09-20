@@ -2,7 +2,7 @@
 id = "WO-KIS-010"
 type = "work_order"
 title = "Keep evidence outcomes truthful"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-19"
 updated = "2026-09-20"
@@ -54,6 +54,13 @@ decided_at = "2026-09-20T06:27:29Z"
 decided_by = "engineering-owner"
 reason = "On 2026-09-20 the owner approved the presented recovery artifact package with \"i approve\". Record approval of this reviewed artifact in the named owner role. Reviewed full-byte SHA-256: ff54233ced59d8c3e0d68bc060d42545b0b569ac8f7b6d6c12ecf2b1b8296ff0. DEC-KIS-001 separately records the explicit owner-review choice. WO approval grants the bounded execution operations in DR-015; this transition records no implementation result, assurance acceptance or external action."
 scope_paths = ["docs/engineering/harness-simplification/evidence/WO-KIS-010/", "docs/engineering/harness-simplification/requirements/REQ-KIS-010.md", "docs/engineering/harness-simplification/specifications/SPEC-KIS-004.md", "docs/engineering/harness-simplification/verification-records/VREC-KIS-010.md", "docs/engineering/harness-simplification/verification/VER-KIS-004.md", "docs/engineering/harness-simplification/work-orders/WO-KIS-010.md", "docs/notes/harnessctl-check.md", "docs/notes/harnessctl-reference.md", "se_harness/cli.py", "se_harness/engine/validation_evidence.py", "se_harness/evaluator_evidence.py", "se_harness/provenance.py", "se_harness/quality_gates_contract.json", "se_harness/workflow_compliance.py", "se_harness/workflow_contract.json", "se_harness/workflow_evidence_packet.py", "se_harness/workflow_predicates.py", "se_harness/workflow_result.py", "templates/repository/standard/docs/engineering/QUALITY_GATES.json", "templates/repository/standard/docs/engineering/QUALITY_GATES.md", "templates/repository/standard/docs/engineering/WORKFLOW.json", "templates/repository/standard/docs/engineering/WORKFLOW.md", "tests/test_revision_provenance.py", "tests/test_workflow_compliance.py", "tests/test_workflow_restitution.py", "tests/workflow_support.py"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-20T06:33:31Z"
+decided_by = "delegated-executor"
+reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex starts the approved WO-KIS-010 scope under the owner instruction start dated 2026-09-20."
 +++
 
 # Keep evidence outcomes truthful
