@@ -58,3 +58,13 @@ defines one route for people and agents, with owner acceptance retained.
 
 [VREC-KIS-009](verification-records/VREC-KIS-009.md) is verified by the owner.
 WO-KIS-009 is implemented. Repository integration remains pending in PR #476.
+
+
+## Recovery package from the September 16 assessment
+
+[Recovery package — 19 September 2026](recovery-2026-09-19.md) contains four approved
+requirement/specification/verification/work-order chains for truthful evidence,
+complete handoff checks, owner-controlled integration, and consistent agent
+guidance. On 20 September, the owner approved all 16 records and selected
+owner review in DEC-KIS-001. All four work orders are approved; implementation
+has not started. Earlier approvals and historical evidence remain unchanged.

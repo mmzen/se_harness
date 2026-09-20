@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="A KISS recovery plan for SE Harness: four focused repairs, acceptance checks and clear trust limits."><title>SE Harness — A KISS recovery plan</title><style>
+:root{--ink:#182b39;--muted:#536774;--blue:#245a75;--line:#d9e2e7;--paper:#fff;--wash:#f3f6f7}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.7 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--blue);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}a:focus-visible,summary:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:3px solid #c17429;outline-offset:5px}.skip-link{position:absolute;top:-100px;left:20px;padding:10px 15px;background:#fff;z-index:9}.skip-link:focus{top:15px}.report-header{max-width:1220px;margin:auto;padding:74px 58px 48px;border-bottom:1px solid var(--line)}.eyebrow,.section-number,.nav-title,.finding-meta{text-transform:uppercase;letter-spacing:.09em;font-size:12px;font-weight:700}.eyebrow{color:var(--blue);margin:0 0 20px}h1{font-size:clamp(34px,4.3vw,54px);line-height:1.14;letter-spacing:-.035em;margin:0 0 25px;max-width:960px;color:#122631}.subtitle{font-size:20px;line-height:1.6;max-width:800px;margin:0 0 24px;color:#405765}.meta{font-size:13px;color:var(--muted);margin:0}.meta span{padding:0 9px}.layout{display:grid;grid-template-columns:208px minmax(0,800px);gap:55px;max-width:1220px;margin:auto;padding:50px 58px 0}.sidebar{position:sticky;top:30px;align-self:start;max-height:calc(100vh - 60px);overflow:auto}.nav-title{margin:0 0 16px;color:var(--muted)}nav a{display:block;text-decoration:none;color:#4b606e;font-size:14px;line-height:1.5;padding:7px 0}nav a:hover{color:#112b3b;text-decoration:underline}.print-button{margin:22px 0 10px;border:1px solid #81939f;padding:10px 14px;border-radius:4px;background:white;color:var(--ink);font:600 13px system-ui;cursor:pointer}main{min-width:0}section{margin:0 0 60px;scroll-margin-top:28px}section+section{border-top:1px solid var(--line);padding-top:38px}.section-number{color:var(--blue);margin:0 0 14px}h2{font-size:30px;line-height:1.26;letter-spacing:-.02em;margin:0 0 24px;font-weight:700}h3{font-size:22px;line-height:1.35;letter-spacing:-.012em;margin:28px 0 14px}p{margin:0 0 18px}.lead{font-size:20px;line-height:1.65}strong{font-weight:650}ul,ol{padding-left:24px;margin:16px 0 23px}li{padding-left:4px;margin:7px 0}.spaced-list li{margin:14px 0}.workflow{list-style:none;counter-reset:steps;padding:0}.workflow>li{position:relative;counter-increment:steps;padding:0 0 18px 52px;margin:0 0 20px;border-bottom:1px solid #e5ebef}.workflow>li::before{content:counter(steps,decimal-leading-zero);position:absolute;left:0;top:0;font-size:18px;font-weight:700;color:var(--blue)}.workflow h3{font-size:20px;margin:0 0 8px}.workflow p{margin:0}.finding{padding:30px 0 16px;border-top:1px solid var(--line);scroll-margin-top:25px}.finding-meta{color:var(--blue);margin:0 0 10px}.finding-meta span{color:var(--muted);font-size:11px;margin-left:12px;letter-spacing:.055em}.finding h3{font-size:25px;margin:0 0 21px}.refs{white-space:normal;font-size:12px;font-weight:500}.refs a{white-space:nowrap;text-decoration:none;color:#476978}.refs a:hover{text-decoration:underline}blockquote{margin:20px 0 24px;padding:2px 0 2px 22px;border-left:3px solid #a6bdc9;font-size:20px;line-height:1.6;color:#294858}code{font: .84em/1.6 ui-monospace,Consolas,"Liberation Mono",monospace;color:#314f61;overflow-wrap:anywhere}details{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin:26px 0;font-size:15px}summary{font-weight:650;color:var(--blue);cursor:pointer;line-height:1.5}details[open] summary{margin-bottom:18px}details p:last-child{margin-bottom:2px}dl{display:grid;grid-template-columns:125px 1fr;gap:12px 20px;margin:18px 0 3px}dt{font-weight:650}dd{margin:0}.table-wrap{overflow:auto;margin:24px 0 28px;overscroll-behavior-inline:contain}table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.55;text-align:left}th{padding:13px 14px;background:#21485e;color:#fff;font-weight:600;vertical-align:top}td{padding:14px;vertical-align:top;border-bottom:1px solid var(--line)}tbody tr:nth-child(even){background:var(--wash)}th:first-child{width:24%}#evidence th:first-child{width:49%}#repairs th:first-child{width:12%}.source-list{padding:0;list-style:none;font-size:14px;line-height:1.6}.source-list li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;padding:16px 0;margin:0;border-top:1px solid #e5ebef;scroll-margin-top:20px}.source-id{font-weight:700;color:var(--blue);font-size:12px;padding-top:2px}.source-list p{margin:0 0 7px}.source-links{font-size:12px;overflow-wrap:anywhere}.report-footer{padding:25px 0 45px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:12px}.report-footer p{margin:0}
+@media(max-width:1000px){.report-header{padding:50px 32px 38px}.layout{padding:35px 32px 0;grid-template-columns:165px minmax(0,1fr);gap:30px}.finding-meta span{display:block;margin:5px 0 0}h2{font-size:27px}}
+@media(max-width:720px){body{font-size:16px}.report-header{padding:40px 22px 30px}h1{font-size:36px}.subtitle{font-size:18px}.layout{display:block;padding:26px 22px 0}.sidebar{position:static;max-height:none;overflow:visible;padding-bottom:24px;margin-bottom:32px;border-bottom:1px solid var(--line)}nav{display:flex;flex-wrap:wrap;gap:5px 18px}.nav-title{width:100%;margin-bottom:7px}nav a{font-size:13px;padding:4px 0}.print-button{display:none}h2{font-size:27px}.finding h3{font-size:23px}.lead{font-size:18px}.workflow>li{padding-left:40px}.table-wrap table{min-width:440px}dl{display:block}dt{margin-top:15px}dd{margin-top:4px}section{margin-bottom:42px}.report-footer{display:block}.report-footer p+p{margin-top:9px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{@page{size:A4;margin:17mm}body{font-size:10.5pt;line-height:1.5;color:#000}.skip-link,.sidebar{display:none}.report-header{padding:0 0 20px;max-width:none}.layout{display:block;padding:25px 0 0;max-width:none}h1{font-size:30pt}.subtitle{font-size:13pt}.meta{font-size:9pt}.lead{font-size:12pt}h2{font-size:20pt}h3,.finding h3{font-size:15pt}h2,h3,summary{break-after:avoid}p,li{orphans:3;widows:3}section{margin-bottom:28px}section+section{padding-top:25px}.finding{padding-top:20px}.table-wrap{overflow:visible}table{font-size:9pt;min-width:0!important}thead{display:table-header-group}tr{break-inside:avoid}th{background:#e7edf0;color:#000}th,td{padding:8px}details{font-size:10pt;break-inside:auto}details:not([open])>:not(summary){display:block}details summary{margin-bottom:12px}details dl{display:grid!important}.source-list{font-size:9pt}.source-list li{break-inside:avoid}.source-links{font-size:8pt}a{color:inherit}.report-footer{font-size:8pt}blockquote{font-size:12pt}.finding-meta span{font-size:8pt}}
+
+.decision{border-left:4px solid var(--blue);background:var(--wash);padding:22px 24px;margin:24px 0}.decision p:last-child{margin-bottom:0}.package{border-top:1px solid var(--line);padding-top:28px;margin-top:32px;scroll-margin-top:24px}.package h3{margin-top:0}.package-meta{font-size:13px;color:var(--muted)}.acceptance{padding:16px 20px;background:var(--wash);margin:20px 0}.acceptance p:last-child{margin-bottom:0}.small{font-size:14px;color:var(--muted)}#coverage th:first-child{width:13%}#order th:first-child{width:17%}.route{font-size:19px;font-weight:600;color:var(--blue)}
+</style></head><body><a class="skip-link" href="#main-content">Skip to the plan</a>
+<header class="report-header" id="top">
+  <p class="eyebrow">SE Harness · Proposed recovery plan</p>
+  <h1>Make the existing checks<br>mean what they say</h1>
+  <p class="subtitle">Four focused repairs, using the tools and workflow already in place.</p>
+  <p class="meta">Proposed: 19 September 2026 <span aria-hidden="true">·</span> Based on the <a href="se-harness-assessment.html">16 September assessment</a></p>
+</header>
+<div class="layout">
+<aside class="sidebar"><nav aria-label="Plan contents">
+  <p class="nav-title">In this plan</p>
+  <a href="#recommendation">The recommendation</a>
+  <a href="#kiss">What KISS means here</a>
+  <a href="#order">The order of work</a>
+  <a href="#repairs">The four repairs</a>
+  <a href="#adoption">Release and adoption</a>
+  <a href="#coverage">Coverage and limits</a>
+  <a href="#sources">Basis and sources</a>
+</nav><button type="button" class="print-button" onclick="window.print()">Print this plan</button></aside>
+<main id="main-content">
+
+<section id="recommendation" aria-labelledby="recommendation-title">
+  <p class="section-number">01 / Recommendation</p>
+  <h2 id="recommendation-title">Keep the harness. Repair the meaning of its results.</h2>
+  <p class="lead">Use the harness to guide a trusted agent and catch mistakes. Use protected GitHub checks and human review to control what enters the shared project and what gets published.</p>
+  <p>This is one workflow with clear limits. It does not need a second operating mode, a new approval service, or a larger set of records.</p>
+  <div class="decision"><p><strong>The rule to design around:</strong> a file being present means “attached”; a successful test run means “tested”; a recorded name means “claimed by”; and a real owner decision means “approved.” The system should keep these meanings separate.</p></div>
+  <p>A normal task should still move from approval to implementation without repeated permission requests. Preparing a review or release record should still be allowed under the existing work approval. The actual review and release decisions remain with their owners.</p>
+  <p><strong>Scope:</strong> this is a proposal, not an implementation or a formal lifecycle result. It uses the September 16 findings. Current code and GitHub settings must be checked before applying the repairs; they have not been re-audited for this plan.</p>
+</section>
+
+<section id="kiss" aria-labelledby="kiss-title">
+  <p class="section-number">02 / KISS</p>
+  <h2 id="kiss-title">Fix each problem at the smallest useful place</h2>
+  <p>The repository’s simplicity policy asks for the least complex design that meets the agreed need. It also counts the work imposed on users and maintainers. A shorter implementation is not simpler if it creates repeated approvals or manual checking.</p>
+  <ul class="spaced-list">
+    <li><strong>Reuse existing parts.</strong> Improve the current evidence capture, handoff checks, workflow result and GitHub jobs.</li>
+    <li><strong>Put each rule in one place.</strong> Handoff and completion should call the same checks. Guides should point to one short explanation.</li>
+    <li><strong>Keep local work local.</strong> Starting or continuing an approved task should not depend on a live CI run or an unrelated draft record.</li>
+    <li><strong>Preserve useful work.</strong> Keep valid results for unchanged inputs. Rerun affected tests when behavior changes.</li>
+    <li><strong>Remove obsolete rules with their tests.</strong> A fix is incomplete if the old guide still asks for the opposite behavior.</li>
+  </ul>
+  <p>For this recovery, defer a custom identity system, signed receipts, an approval database, a policy-generation framework, an ID-allocation service, and a new dashboard. No separate KISS approval or score is needed.</p>
+</section>
+
+<section id="order" aria-labelledby="order-title">
+  <p class="section-number">03 / Sequence</p>
+  <h2 id="order-title">Close the largest gaps first</h2>
+  <div class="table-wrap" role="region" aria-label="Order of work" tabindex="0"><table><thead><tr><th scope="col">When</th><th scope="col">Work</th><th scope="col">Finish when</th></tr></thead><tbody>
+    <tr><td><strong>Start now</strong></td><td>Recheck GitHub’s existing merge and publishing controls. Apply the settings part of Repair 3 where the needed jobs and reviewers already exist.</td><td>A missing required test or review blocks the normal merge route. Record any remaining bypass.</td></tr>
+    <tr><td><strong>First patch</strong></td><td>Repair 1: make evidence results truthful.</td><td>Failed, missing and stale tests cannot become a success through relabelling.</td></tr>
+    <tr><td><strong>Second patch</strong></td><td>Repair 2: use the full checks at completion.</td><td>A failed current handoff cannot be bypassed by a direct completion command.</td></tr>
+    <tr><td><strong>Then</strong></td><td>Finish Repair 3’s approval and workflow-review rules; complete Repair 4’s short instructions.</td><td>The owner knows what was approved, and a fresh agent can follow one consistent route.</td></tr>
+    <tr><td><strong>Adopt</strong></td><td>Release the repaired checker and upgrade projects through the existing route.</td><td>The installed released checker passes the failure examples and the normal successful task.</td></tr>
+  </tbody></table></div>
+  <p>These are four work packages, not a request for four new kinds of records. Use the existing work-order process and small reviewable changes. Fix misleading wording alongside each code repair; do not wait until the final documentation pass.</p>
+</section>
+
+<section id="repairs" aria-labelledby="repairs-title">
+  <p class="section-number">04 / The repairs</p>
+  <h2 id="repairs-title">A concrete change and a clear test for each gap</h2>
+
+  <article class="package" id="repair-1">
+    <p class="package-meta">Repair 1 · Findings <a href="se-harness-assessment.html#F3">F3</a> and <a href="se-harness-assessment.html#F9">F9</a> · Owner: harness maintainer</p>
+    <h3>Report what the evidence actually proves</h3>
+    <p><strong>Change:</strong> stop a handoff check from updating an old report to look newly tested. Checking readiness should read the evidence; creating or updating evidence should be an explicit capture action.</p>
+    <p>Reuse the existing test-capture path. Keep the saved software version, test command, result and output reference together. Use the current record format where it already supports those facts. Add only the missing information.</p>
+    <p>The existing verification plan says which checks matter. A test that was required but never ran stays “not run.” A failed test stays “failed.” An attached document stays “attached” until its relevant contents have been assessed. A manual inspection can still count when the plan calls for it; it needs the responsible reviewer’s conclusion.</p>
+    <p>The result should say whether it merely suggests a next step, checks readiness, or changes files. Reuse the existing output fields and add a plain sentence where needed. A summary such as “Evidence attached; test outcome not assessed” is useful even when the attachment itself is valid.</p>
+    <p><strong>Reuse rule:</strong> an unchanged result keeps its original tested version. Reuse it when the relevant inputs are demonstrably unchanged. If that cannot be established, rerun the affected check. Never relabel old output as a new run.</p>
+    <div class="acceptance"><p><strong>Done when:</strong> the F3 failure report and stale-report examples no longer satisfy a required successful-test check. A read-only check leaves files unchanged. A real successful capture still works. A harmless notes edit does not force a full test rerun.</p></div>
+    <p class="small">This improves correctness; a locally writable test record is still not independent proof. Protected CI supplies that stronger check at integration.</p>
+  </article>
+
+  <article class="package" id="repair-2">
+    <p class="package-meta">Repair 2 · Findings <a href="se-harness-assessment.html#F4">F4</a> and <a href="se-harness-assessment.html#F8">F8</a> · Owner: harness maintainer</p>
+    <h3>Give handoff and completion the same answer</h3>
+    <p><strong>Change:</strong> the command that marks work <code>implemented</code> must run the same current scope and evidence checks as the handoff. Share the existing checking code instead of maintaining a weaker second path.</p>
+    <p>Use Git to obtain the real changed files against the agreed starting version. Include pending edits when the operation supports them. Use the same baseline throughout the task; choosing a later starting point must not hide earlier changes. If the command lacks the context it needs, refuse completion and name the missing input.</p>
+    <p>Rerun the cheap checks immediately before changing state. Do not build a new system of stored “handoff passed” certificates. Do not rerun expensive tests just because completion was requested; Repair 1 determines whether the existing results still apply.</p>
+    <p>Use one rule for which errors block the selected task. Errors in its records, dependencies, or shared integrity block it. An unrelated incomplete draft does not. Preview, planning and applying the change should use this same rule.</p>
+    <div class="acceptance"><p><strong>Done when:</strong> the F4 out-of-scope edit blocks both handoff and direct completion. A new relevant edit after a passing handoff is checked again. The F8 unrelated draft no longer gives different answers in preview and apply. A valid task still completes normally.</p></div>
+    <p class="small">“Implemented” means the agreed completion checks passed. It still does not mean independent assurance or permission to release.</p>
+  </article>
+
+  <article class="package" id="repair-3">
+    <p class="package-meta">Repair 3 · Findings <a href="se-harness-assessment.html#F1">F1</a>, <a href="se-harness-assessment.html#F2">F2</a>, <a href="se-harness-assessment.html#F5">F5</a> and <a href="se-harness-assessment.html#F6">F6</a> · Owner: repository owner, with the responsible reviewer</p>
+    <h3>Use GitHub to protect the shared project</h3>
+    <p><strong>Change:</strong> require the existing jobs that actually test acceptance, alongside the harness validation job. Select their real status names after inspecting the current workflow. Do not duplicate the candidate test pipeline.</p>
+    <p>Require a fresh human approval for the version being merged. Review changes to workflow files, checker selection, ownership rules and approval records as control changes. An edit that replaces checking with “print pass” must not merge through the ordinary route.</p>
+    <p>Use existing review and ownership features. Check bypass permissions and keep routine agent credentials from changing protection rules or bypassing them. Apply the same principle to each publishing route the project actually uses.</p>
+    <p><strong>For approvals:</strong> a typed actor name remains a recorded claim. Where an owner decision is required, retain a reference to the actual decision and the reviewed version in the existing record. At review, compare the work description, allowed paths and governing requirements with that version. Editing the record cannot supply the missing human decision.</p>
+    <p>Normal coding inside the approved task reuses its approval. A changed purpose, wider scope, weaker acceptance rule or changed governing requirement needs an amendment decision. Use the existing approval step for that amendment; do not require a fresh approval for every implementation edit.</p>
+    <div class="acceptance"><p><strong>Done when:</strong> a controlled test change cannot merge with missing tests, missing current review, or an unapproved change to the checking workflow. A broadened work description is sent back for approval. A local actor label is never presented as authenticated permission.</p></div>
+    <p><strong>Limit:</strong> human review of an editable workflow is an owner-controlled safeguard. It is not an independent guarantee that the expected job ran. If stronger prevention is an agreed need, place the required checking entry point outside the proposed change’s control using supported GitHub features. Verify that route before claiming the gap is closed.</p>
+    <p>If only one human can review, say “owner-reviewed.” Do not call that independent assurance or invent a second identity. Independence needs a second qualified person; the plan cannot create one.</p>
+  </article>
+
+  <article class="package" id="repair-4">
+    <p class="package-meta">Repair 4 · Findings <a href="se-harness-assessment.html#F7">F7</a>, <a href="se-harness-assessment.html#F9">F9</a> and <a href="se-harness-assessment.html#F10">F10</a> · Owner: workflow and plugin maintainer</p>
+    <h3>Give the agent one short, consistent route</h3>
+    <p><strong>Change:</strong> edit the existing operating card and conflicting guide passages. Keep one small table for each action: who may do it, which existing approval covers it, and whether it needs a new decision. Remove duplicate explanations rather than adding another policy document.</p>
+    <p class="route">Read the task → carry out approved work → capture results → check completion → request only the decisions still needed.</p>
+    <p>Put a short task brief at the top of the existing workflow result: selected work, governing checker version, allowed next action, blockers and any decision still needed. Link to the full sources. Keep the requirement and acceptance details that affect this task; shorten repeated policy text.</p>
+    <p>Clearly distinguish starting work from asking for permission to start. The approved executor can start, implement and record completion after passing checks. Preparing a review or release record does not approve it.</p>
+    <p><strong>For concurrent agents:</strong> use the existing coordinator to assign non-overlapping blocks of record numbers once per active task, recorded in the current task allocation. Confirm the blocks against the shared project and active allocations. Keep duplicate detection before merge. Do not build an allocation service unless this simple arrangement proves inadequate.</p>
+    <div class="acceptance"><p><strong>Done when:</strong> an observed fresh-agent walkthrough and a resumed-agent walkthrough both use the right checker, complete routine approved steps without unnecessary permission requests, and stop at the real review decision. Two concurrent tasks receive different record numbers.</p></div>
+    <p class="small">Use the existing agent acceptance setup. Scripted command tests alone cannot show that an agent understands the instructions. Number blocks are a coordination rule, not a guarantee for uncoordinated writers.</p>
+  </article>
+</section>
+
+<section id="adoption" aria-labelledby="adoption-title">
+  <p class="section-number">05 / Adoption</p>
+  <h2 id="adoption-title">Prove the fixes, then adopt them normally</h2>
+  <ol class="spaced-list">
+    <li><strong>Confirm the starting point.</strong> Recheck the current code and effective GitHub settings. Keep only findings still present. Reuse the saved reproduction cases.</li>
+    <li><strong>Test both refusal and success.</strong> Each code repair needs its observed failure example and a valid task that still passes. Include an unchanged-evidence reuse case. Use existing test files; avoid a new test framework.</li>
+    <li><strong>Run the required project checks.</strong> Focused checks support each patch. Run the repository’s required regression and package checks before accepting the combined change, using the existing CI route.</li>
+    <li><strong>Release and upgrade through the current process.</strong> Candidate code does not change an installed checker. Publish only under the existing release authority, then explicitly upgrade projects. Reconcile editable guides and CI files; the normal upgrade may preserve them.</li>
+    <li><strong>Keep history accurate.</strong> Preserve old approvals, review records and test evidence. For current unfinished work, missing or stale evidence stays unassessed until the relevant checks run. Do not rewrite old reports to manufacture compliance.</li>
+  </ol>
+  <p><strong>Stop condition for the recovery:</strong> all applicable acceptance examples pass on the installed released version; the ordinary task remains simple; and the remaining trust limits are stated plainly. Do not expand into a wider harness redesign.</p>
+  <p>If adoption fails, use the existing upgrade or rollback route and retain the failure evidence. Do not solve the failure by turning off required checks.</p>
+</section>
+
+<section id="coverage" aria-labelledby="coverage-title">
+  <p class="section-number">06 / Coverage and limits</p>
+  <h2 id="coverage-title">What this plan fixes—and what still needs trust</h2>
+  <div class="table-wrap" role="region" aria-label="Finding coverage" tabindex="0"><table><thead><tr><th scope="col">Finding</th><th scope="col">Repair</th><th scope="col">Expected result and limit</th></tr></thead><tbody>
+    <tr><td>F1</td><td>3</td><td>Names are labelled as claims; real approvals are checked at the protected decision boundary. Local records do not become authenticated.</td></tr>
+    <tr><td>F2</td><td>3</td><td>Review checks the approved purpose and version. Meaningful scope changes need an amendment. Local work still trusts the executor.</td></tr>
+    <tr><td>F3</td><td>1</td><td>No false success from a missing, failed or relabelled run.</td></tr>
+    <tr><td>F4</td><td>2</td><td>Direct completion cannot skip the current handoff checks.</td></tr>
+    <tr><td>F5</td><td>3</td><td>The required tests and chosen review policy block the normal merge route. Independence depends on available reviewers.</td></tr>
+    <tr><td>F6</td><td>3</td><td>Control changes require review. Stronger automatic protection remains conditional on a checking route outside the candidate’s control.</td></tr>
+    <tr><td>F7</td><td>4</td><td>One consistent explanation of executor and owner actions.</td></tr>
+    <tr><td>F8</td><td>2</td><td>Selected-task checks, planning and completion agree on blockers.</td></tr>
+    <tr><td>F9</td><td>1, 4</td><td>Output states what was checked and changed; a projection is labelled as a projection.</td></tr>
+    <tr><td>F10</td><td>4</td><td>Less repeated reading and simpler number allocation. Concurrent work still needs coordination.</td></tr>
+  </tbody></table></div>
+  <p><strong>Recommended first implementation scope:</strong> stop stale evidence from being relabelled as current, and make completion call the full handoff checks. Those two changes remove the clearest false-success paths without adding another layer of process.</p>
+</section>
+
+<section id="sources" aria-labelledby="sources-title">
+  <p class="section-number">07 / Basis and sources</p>
+  <h2 id="sources-title">Grounded in the assessment and existing KISS work</h2>
+  <ul>
+    <li><a href="se-harness-assessment.html">Plain-language assessment</a> — all ten findings, evidence and source links.</li>
+    <li><a href="se-harness-assessment-evidence.zip">Saved assessment evidence</a> — the original reproduction material.</li>
+    <li><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/docs/engineering/ARTIFACT_AUTHORING.md#design-simplicity">Design simplicity policy</a> — least complex adequate solution; no extra KISS artifact, score or approval.</li>
+    <li><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/docs/notes/plugin-backlog-kiss-2026-09-14.md#alignment-with-every-accepted-simplification">Accepted KISS simplifications</a> — local progress, evidence reuse, existing release jobs, and no repeated routine permission.</li>
+    <li><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/docs/notes/design-simplicity.md">How the simplicity policy is adopted</a> — normal release and explicit project upgrade.</li>
+  </ul>
+  <p class="small">The recommended repairs are design proposals. Their acceptance examples have not been run against a repaired product. Code links refer to the assessed commit, not to today’s main branch.</p>
+</section>
+<footer class="report-footer"><p>SE Harness recovery plan · Proposed 19 September 2026</p><p><a href="#top">Back to the top</a></p></footer>
+</main></div>
+</body></html>

@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A plain-language review of SE Harness: its workflow, ten enforcement gaps, tests and recommended repairs.">
+<title>SE Harness — A plain-language assessment</title>
+<style>
+:root{--ink:#182b39;--muted:#536774;--blue:#245a75;--line:#d9e2e7;--paper:#fff;--wash:#f3f6f7}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.7 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--blue);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}a:focus-visible,summary:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:3px solid #c17429;outline-offset:5px}.skip-link{position:absolute;top:-100px;left:20px;padding:10px 15px;background:#fff;z-index:9}.skip-link:focus{top:15px}.report-header{max-width:1220px;margin:auto;padding:74px 58px 48px;border-bottom:1px solid var(--line)}.eyebrow,.section-number,.nav-title,.finding-meta{text-transform:uppercase;letter-spacing:.09em;font-size:12px;font-weight:700}.eyebrow{color:var(--blue);margin:0 0 20px}h1{font-size:clamp(34px,4.3vw,54px);line-height:1.14;letter-spacing:-.035em;margin:0 0 25px;max-width:960px;color:#122631}.subtitle{font-size:20px;line-height:1.6;max-width:800px;margin:0 0 24px;color:#405765}.meta{font-size:13px;color:var(--muted);margin:0}.meta span{padding:0 9px}.layout{display:grid;grid-template-columns:208px minmax(0,800px);gap:55px;max-width:1220px;margin:auto;padding:50px 58px 0}.sidebar{position:sticky;top:30px;align-self:start;max-height:calc(100vh - 60px);overflow:auto}.nav-title{margin:0 0 16px;color:var(--muted)}nav a{display:block;text-decoration:none;color:#4b606e;font-size:14px;line-height:1.5;padding:7px 0}nav a:hover{color:#112b3b;text-decoration:underline}.print-button{margin:22px 0 10px;border:1px solid #81939f;padding:10px 14px;border-radius:4px;background:white;color:var(--ink);font:600 13px system-ui;cursor:pointer}main{min-width:0}section{margin:0 0 60px;scroll-margin-top:28px}section+section{border-top:1px solid var(--line);padding-top:38px}.section-number{color:var(--blue);margin:0 0 14px}h2{font-size:30px;line-height:1.26;letter-spacing:-.02em;margin:0 0 24px;font-weight:700}h3{font-size:22px;line-height:1.35;letter-spacing:-.012em;margin:28px 0 14px}p{margin:0 0 18px}.lead{font-size:20px;line-height:1.65}strong{font-weight:650}ul,ol{padding-left:24px;margin:16px 0 23px}li{padding-left:4px;margin:7px 0}.spaced-list li{margin:14px 0}.workflow{list-style:none;counter-reset:steps;padding:0}.workflow>li{position:relative;counter-increment:steps;padding:0 0 18px 52px;margin:0 0 20px;border-bottom:1px solid #e5ebef}.workflow>li::before{content:counter(steps,decimal-leading-zero);position:absolute;left:0;top:0;font-size:18px;font-weight:700;color:var(--blue)}.workflow h3{font-size:20px;margin:0 0 8px}.workflow p{margin:0}.finding{padding:30px 0 16px;border-top:1px solid var(--line);scroll-margin-top:25px}.finding-meta{color:var(--blue);margin:0 0 10px}.finding-meta span{color:var(--muted);font-size:11px;margin-left:12px;letter-spacing:.055em}.finding h3{font-size:25px;margin:0 0 21px}.refs{white-space:normal;font-size:12px;font-weight:500}.refs a{white-space:nowrap;text-decoration:none;color:#476978}.refs a:hover{text-decoration:underline}blockquote{margin:20px 0 24px;padding:2px 0 2px 22px;border-left:3px solid #a6bdc9;font-size:20px;line-height:1.6;color:#294858}code{font: .84em/1.6 ui-monospace,Consolas,"Liberation Mono",monospace;color:#314f61;overflow-wrap:anywhere}details{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin:26px 0;font-size:15px}summary{font-weight:650;color:var(--blue);cursor:pointer;line-height:1.5}details[open] summary{margin-bottom:18px}details p:last-child{margin-bottom:2px}dl{display:grid;grid-template-columns:125px 1fr;gap:12px 20px;margin:18px 0 3px}dt{font-weight:650}dd{margin:0}.table-wrap{overflow:auto;margin:24px 0 28px;overscroll-behavior-inline:contain}table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.55;text-align:left}th{padding:13px 14px;background:#21485e;color:#fff;font-weight:600;vertical-align:top}td{padding:14px;vertical-align:top;border-bottom:1px solid var(--line)}tbody tr:nth-child(even){background:var(--wash)}th:first-child{width:24%}#evidence th:first-child{width:49%}#repairs th:first-child{width:12%}.source-list{padding:0;list-style:none;font-size:14px;line-height:1.6}.source-list li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;padding:16px 0;margin:0;border-top:1px solid #e5ebef;scroll-margin-top:20px}.source-id{font-weight:700;color:var(--blue);font-size:12px;padding-top:2px}.source-list p{margin:0 0 7px}.source-links{font-size:12px;overflow-wrap:anywhere}.report-footer{padding:25px 0 45px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:12px}.report-footer p{margin:0}
+@media(max-width:1000px){.report-header{padding:50px 32px 38px}.layout{padding:35px 32px 0;grid-template-columns:165px minmax(0,1fr);gap:30px}.finding-meta span{display:block;margin:5px 0 0}h2{font-size:27px}}
+@media(max-width:720px){body{font-size:16px}.report-header{padding:40px 22px 30px}h1{font-size:36px}.subtitle{font-size:18px}.layout{display:block;padding:26px 22px 0}.sidebar{position:static;max-height:none;overflow:visible;padding-bottom:24px;margin-bottom:32px;border-bottom:1px solid var(--line)}nav{display:flex;flex-wrap:wrap;gap:5px 18px}.nav-title{width:100%;margin-bottom:7px}nav a{font-size:13px;padding:4px 0}.print-button{display:none}h2{font-size:27px}.finding h3{font-size:23px}.lead{font-size:18px}.workflow>li{padding-left:40px}.table-wrap table{min-width:440px}dl{display:block}dt{margin-top:15px}dd{margin-top:4px}section{margin-bottom:42px}.report-footer{display:block}.report-footer p+p{margin-top:9px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{@page{size:A4;margin:17mm}body{font-size:10.5pt;line-height:1.5;color:#000}.skip-link,.sidebar{display:none}.report-header{padding:0 0 20px;max-width:none}.layout{display:block;padding:25px 0 0;max-width:none}h1{font-size:30pt}.subtitle{font-size:13pt}.meta{font-size:9pt}.lead{font-size:12pt}h2{font-size:20pt}h3,.finding h3{font-size:15pt}h2,h3,summary{break-after:avoid}p,li{orphans:3;widows:3}section{margin-bottom:28px}section+section{padding-top:25px}.finding{padding-top:20px}.table-wrap{overflow:visible}table{font-size:9pt;min-width:0!important}thead{display:table-header-group}tr{break-inside:avoid}th{background:#e7edf0;color:#000}th,td{padding:8px}details{font-size:10pt;break-inside:auto}details:not([open])>:not(summary){display:block}details summary{margin-bottom:12px}details dl{display:grid!important}.source-list{font-size:9pt}.source-list li{break-inside:avoid}.source-links{font-size:8pt}a{color:inherit}.report-footer{font-size:8pt}blockquote{font-size:12pt}.finding-meta span{font-size:8pt}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to the report</a>
+
+<header class="report-header" id="top">
+  <p class="eyebrow">SE Harness · Independent assessment</p>
+  <h1>How the harness works<br>and where it falls short</h1>
+  <p class="subtitle">A plain-language review of the workflow, the checks that support it, and the gaps that can mislead an AI agent.</p>
+  <p class="meta">Review date: 16 September 2026 <span aria-hidden="true">·</span> Project: <a href="https://github.com/mmzen/se_harness">mmzen/se_harness</a></p>
+</header>
+<div class="layout">
+<aside class="sidebar">
+  <nav aria-label="Report contents">
+    <p class="nav-title">In this report</p>
+    <a href="#assessment">The main finding</a>
+    <a href="#workflow">The intended workflow</a>
+    <a href="#controls">What stops mistakes</a>
+    <a href="#findings">The 10 findings</a>
+    <a href="#strengths">What works well</a>
+    <a href="#repairs">What to fix first</a>
+    <a href="#evidence">What was tested</a>
+    <a href="#questions">Questions to resolve</a>
+    <a href="#sources">Sources</a>
+  </nav>
+  <button type="button" class="print-button" onclick="window.print()">Print this report</button>
+</aside>
+<main id="main-content">
+<section id="assessment" aria-labelledby="assessment-title">
+  <p class="section-number">01 / Assessment</p>
+  <h2 id="assessment-title">The records are checked more strongly than the decisions behind them</h2>
+  <p class="lead">SE Harness helps an AI agent follow a software development process. It records what should be built, who approved the work, what was tested, and whether the result may be released.</p>
+  <p>It does a useful job of checking that these records fit together. But it often trusts what someone writes in them. That leaves a gap between <strong>“the record says this happened”</strong> and <strong>“the system has proof that it happened.”</strong></p>
+  <p>In separate test projects, the released checker accepted:</p>
+  <ul>
+    <li>An approval entered under a name that was not listed as the record’s owner.</li>
+    <li>An evidence file that plainly said the required tests had not run.</li>
+    <li>A work item marked complete after another check had rejected an unapproved file change.</li>
+  </ul>
+  <p>The harness therefore works best when the owner trusts the agent to follow the process honestly. It does not, by itself, stop an agent from skipping steps or writing its own claims of approval.</p>
+  <p>These findings show weaknesses in the checks. They do <strong>not</strong> show that real approvals were forged or real releases were faulty.</p>
+  <details class="terms">
+    <summary>A few terms used in this report</summary>
+    <dl>
+      <dt>AI agent</dt><dd>An AI system that can read files, change code and run commands.</dd>
+      <dt>Repository</dt><dd>The project’s files and their saved change history.</dd>
+      <dt>Git</dt><dd>The tool that saves versions of the project and tracks which files changed. GitHub hosts projects that use it.</dd>
+      <dt>Checker</dt><dd>The harness program that reads the records and applies its rules. Its command name is <code>harnessctl</code>.</dd>
+      <dt>Gate</dt><dd>A check that must pass before the next step is allowed.</dd>
+      <dt>Evidence</dt><dd>Saved observations, such as test commands and their results, used to judge the work.</dd>
+      <dt>Commit</dt><dd>A saved version of the project, with a unique identifier.</dd>
+      <dt>Pull request</dt><dd>A proposal to add changes to the shared project. Accepting those changes is called merging.</dd>
+      <dt>CI</dt><dd>Automatic jobs, often run by GitHub, that check proposed changes.</dd>
+      <dt>Plugin</dt><dd>An add-on that gives the AI application extra instructions or tools.</dd>
+    </dl>
+  </details>
+</section>
+
+<section id="workflow" aria-labelledby="workflow-title">
+  <p class="section-number">02 / The intended workflow</p>
+  <h2 id="workflow-title">From a clear request to an approved release</h2>
+  <p>The harness asks the team to keep connected records. A requirement explains what the software must do. A work order says what may be changed. A review record links the evidence to the exact saved version being reviewed. The connections must be written into the records; a chat message or filename is not enough. <span class="refs"><a href="#S01" aria-label="Source 1">[S01]</a> <a href="#S02" aria-label="Source 2">[S02]</a></span></p>
+  <ol class="workflow">
+    <li><h3>Read the rules</h3><p>The agent reads the project instructions and the documents needed for the selected work. It uses the checker version chosen by the project and checks that protected rules have not been changed.</p></li>
+    <li><h3>Define and approve the work</h3><p>The team records the expected result, the design where needed, and how success will be tested. The responsible owners approve those parts. An engineering owner approves a work order with clear limits.</p></li>
+    <li><h3>Start and carry out the approved work</h3><p>The agent confirms that its permission still applies, marks the work as started, makes the allowed changes, runs the required checks and saves their results. It should not need fresh permission for every ordinary step already covered by the approval.</p></li>
+    <li><h3>Check the finished work</h3><p>A handoff check reviews the work before it is marked complete. It should check the changed files and the saved evidence. <strong>Finished coding is not the same as independent approval of the result.</strong></p></li>
+    <li><h3>Review the evidence</h3><p>When the work requires it, the agent prepares a review record for an exact saved version. The person responsible for assurance—judging whether the evidence supports the result—then approves or rejects that record.</p></li>
+    <li><h3>Decide how to deliver it</h3><p>Adding the changes to the shared project and preparing a release are separate choices. A release owner makes the release decision. Publishing or deploying the software still needs permission for that specific action.</p></li>
+  </ol>
+  <p>Preparing a review or release record does not approve it. Approving one record does not silently approve the others. The harness also allows rejection and, in some cases, replacement of an earlier review. <span class="refs"><a href="#S03" aria-label="Source 3">[S03]</a> <a href="#S04" aria-label="Source 4">[S04]</a> <a href="#S17" aria-label="Source 17">[S17]</a></span></p>
+  <details>
+    <summary>The record names used in the repository</summary>
+    <div class="table-wrap" role="region" aria-label="Record names" tabindex="0">
+    <table><thead><tr><th scope="col">Name</th><th scope="col">Plain meaning</th><th scope="col">Who decides</th></tr></thead><tbody>
+      <tr><td>INT, CAP</td><td>Why the change matters and what it should make possible</td><td>Product or domain owner</td></tr>
+      <tr><td>REQ</td><td>What the software must do</td><td>Product or domain owner</td></tr>
+      <tr><td>SPEC, ARCH, ADR</td><td>How it should work and important design choices</td><td>Technical owner</td></tr>
+      <tr><td>VER</td><td>How the result will be checked</td><td>Assurance owner</td></tr>
+      <tr><td>WO</td><td>The work order: permission to make a limited set of changes</td><td>Engineering owner approves; the executor carries out the work</td></tr>
+      <tr><td>VREC</td><td>The review record for a particular saved version</td><td>Assurance owner</td></tr>
+      <tr><td>REL, RLS</td><td>The release requirements and the record of a release decision</td><td>Release owner</td></tr>
+      <tr><td>OPS</td><td>How the software should be operated and monitored</td><td>Service owner</td></tr>
+      <tr><td>DEC, RISK</td><td>An unresolved choice or a recorded risk</td><td>The owner responsible for the affected work</td></tr>
+    </tbody></table></div>
+    <p>Not every change needs every kind of record. The rules say not to invent architecture records for routine work. The work order also states whether a review tied to an exact saved version is required.</p>
+    <p>A review or release record is saved after the version it describes. Otherwise, it would have to include its own final identifier before that identifier exists.</p>
+  </details>
+</section>
+
+<section id="controls" aria-labelledby="controls-title">
+  <p class="section-number">03 / What stops mistakes</p>
+  <h2 id="controls-title">A written rule is not the same as a blocking check</h2>
+  <p>The harness uses three kinds of control. Their strength is different.</p>
+  <div class="table-wrap" role="region" aria-label="Three kinds of control" tabindex="0">
+  <table><thead><tr><th scope="col">Control</th><th scope="col">What it does</th><th scope="col">Its limit</th></tr></thead><tbody>
+    <tr><td><strong>Instructions</strong></td><td>Tell the agent what to read, when to stop and whose approval is needed.</td><td>The agent must remember and follow them. The reviewed plugin does not automatically check every tool action.</td></tr>
+    <tr><td><strong>Harness checks</strong></td><td>Check records, allowed status changes, files and saved version identifiers.</td><td>They run when called. Some inputs are claims supplied by the same agent they are meant to guide.</td></tr>
+    <tr><td><strong>Server rules</strong></td><td>Can block a merge or publication even if local instructions are ignored.</td><td>Only the rules actually enabled on the server apply. Required jobs and reviewer settings matter.</td></tr>
+  </tbody></table></div>
+  <p>The strongest checks concern facts a program can compare directly: which files changed, whether record IDs match, and whether protected file content has changed. The weaker checks concern human claims: who really approved something, whether the right tests passed, and whether a reviewer was independent. <span class="refs"><a href="#S05" aria-label="Source 5">[S05]</a> <a href="#S07" aria-label="Source 7">[S07]</a> <a href="#S08" aria-label="Source 8">[S08]</a> <a href="#S11" aria-label="Source 11">[S11]</a> <a href="#S16" aria-label="Source 16">[S16]</a> <a href="#S17" aria-label="Source 17">[S17]</a> <a href="#S18" aria-label="Source 18">[S18]</a></span></p>
+  <details>
+    <summary>What a passing result does—and does not—tell you</summary>
+    <ul>
+      <li>Matching record links do not prove that the code meets the written requirement.</li>
+      <li>Changing only approved files does not prove that the changes have the approved purpose.</li>
+      <li>An evidence file being present does not prove that its tests passed.</li>
+      <li>A saved version identifier tells you which software is being discussed. It does not tell you whether that software is good enough.</li>
+      <li>A healthy checker installation does not prove that GitHub will run all necessary checks or require an independent reviewer.</li>
+    </ul>
+  </details>
+</section>
+
+<section id="findings" aria-labelledby="findings-title">
+  <p class="section-number">04 / The findings</p>
+  <h2 id="findings-title">Ten places where the process can break down</h2>
+  <p><strong>High</strong> means the gap can undermine an important approval or completion claim. <strong>Medium</strong> means it can cause confusion or weaken reliability. These are review priorities, not formal security scores.</p>
+  <p>“Shown in tests” means the behavior happened in a separate test project using the checker’s normal rules. “Observed” means it was found in code, instructions or GitHub settings. Possible effects on an AI agent are explained as risks, not measured failure rates.</p>
+
+  <article id="F1" class="finding">
+    <p class="finding-meta">F1 <span>High · Shown in tests</span></p>
+    <h3>A typed name can stand in for real approval</h3>
+    <p><strong>What happened:</strong> a draft record listed one owner. The checker still approved it when given a different, unrelated name as the person making the decision.</p>
+    <p>The checker accepted the name as text. It did not prove that the named person was present or had the right to approve this record. Review and release records have some extra owner checks, but their owner lists are also editable project content. <span class="refs"><a href="#S05" aria-label="Source 5">[S05]</a> <a href="#S06" aria-label="Source 6">[S06]</a> <a href="#S15" aria-label="Source 15">[S15]</a></span></p>
+    <p><strong>Why it matters:</strong> an agent may copy a suggested command containing an owner’s name and mistake that name for permission. The plugin warns against this, but the command itself can still succeed. <span class="refs"><a href="#S17" aria-label="Source 17">[S17]</a></span></p>
+    <p><strong>Improve it:</strong> obtain important approvals through a protected channel that confirms who approved what. Keep the display name separate from proof of permission. If a name is only a user-supplied claim, say so.</p>
+  </article>
+
+  <article id="F2" class="finding">
+    <p class="finding-meta">F2 <span>High · Shown in tests</span></p>
+    <h3>The approved file list can stay the same while the purpose changes</h3>
+    <p><strong>What happened:</strong> an approval written directly into a test work order was accepted. The test project did not even need saved Git history for that approval to be recognized. Adding new instructions to the work order, while keeping the approved file list unchanged, still allowed the handoff check to pass.</p>
+    <p>The current approval check compares file lists. It does not preserve proof of the full work description and design that the owner originally reviewed. Decision-history checks mainly test whether the entries fit together; that is not the same as proving they have never been rewritten. <span class="refs"><a href="#S06" aria-label="Source 6">[S06]</a> <a href="#S07" aria-label="Source 7">[S07]</a></span></p>
+    <p><strong>Why it matters:</strong> “you may edit these files” is weaker than “you may make this specific change.” An agent could change the meaning of the task while keeping the same file list.</p>
+    <p><strong>Improve it:</strong> save the reviewed work description and design version with the approval. Define which changes need renewed approval. Normal coding within the original task should still be allowed without repeated requests.</p>
+  </article>
+
+  <article id="F3" class="finding">
+    <p class="finding-meta">F3 <span>High · Shown in two tests</span></p>
+    <h3>A failed or old test report can still count as available evidence</h3>
+    <p><strong>What happened:</strong> a handoff passed with an evidence file that said:</p>
+    <blockquote>FAIL: the required tests did not run; there is no passing test result.</blockquote>
+    <p>For this kind of evidence file, the check looks for a readable, nonempty file. It does not check whether the text records a successful test. <span class="refs"><a href="#S08" aria-label="Source 8">[S08]</a></span></p>
+    <p>A second test changed the code, then ran a handoff check. The checker updated the old report’s label to match the new code. It kept the failure text unchanged and still passed. <strong>It did not rerun the tests.</strong> <span class="refs"><a href="#S09" aria-label="Source 9">[S09]</a> <a href="#S10" aria-label="Source 10">[S10]</a></span></p>
+    <p><strong>Why it matters:</strong> a current-looking label can make old evidence seem fresh. The label proves that the report was linked to the new code, not that anyone tested that code.</p>
+    <p><strong>Improve it:</strong> keep the actual test run separate from the file attached as evidence. Record which version was tested, which test ran, and its result. Updating an attachment must not make an old test result count as a new one.</p>
+    <details><summary>A useful feature to build on</summary><p>The development version already has a way to run a supplied test command against a saved candidate version. That can provide stronger evidence. The project still needs to define which tests are required; running an easy but irrelevant command would not be enough. <span class="refs"><a href="#S14" aria-label="Source 14">[S14]</a></span></p></details>
+  </article>
+
+  <article id="F4" class="finding">
+    <p class="finding-meta">F4 <span>High · Shown in tests</span></p>
+    <h3>Work can be marked complete after its handoff fails</h3>
+    <p><strong>What happened:</strong> the test changed one approved file and one unapproved file. A check that read the real changes from Git correctly rejected the handoff. The separate command to mark the work as implemented then succeeded.</p>
+    <p>The completion command does not perform the full file-change check. It also does not require a successful, up-to-date handoff result. <span class="refs"><a href="#S10" aria-label="Source 10">[S10]</a> <a href="#S11" aria-label="Source 11">[S11]</a></span></p>
+    <p><strong>Why it matters:</strong> the process says “stop,” but another route still lets the agent record “done.” A later GitHub check may catch the bad change, yet the local completion record is already misleading.</p>
+    <p><strong>Improve it:</strong> make completion depend on the full check for the current changes. Missing, failed or outdated handoff results must block completion.</p>
+  </article>
+
+  <article id="F5" class="finding">
+    <p class="finding-meta">F5 <span>High · Observed in GitHub settings</span></p>
+    <h3>The shared project does not require all the review and test steps</h3>
+    <p><strong>What was found:</strong> on 16 September 2026, the main branch required a pull request and a check named <code>validate</code>. It required <strong>zero approving reviews</strong>. The separate jobs that test the proposed software were not listed as required checks.</p>
+    <p>The required <code>validate</code> job checks harness records and allowed changes. It is not the full software test suite. The server settings therefore do not prove that every merged change passed those tests or received an independent review. This is a finding about settings, not evidence of a bad merge. <span class="refs"><a href="#S12" aria-label="Source 12">[S12]</a> <a href="#S13" aria-label="Source 13">[S13]</a> <a href="#S18" aria-label="Source 18">[S18]</a></span></p>
+    <p>Publishing to PyPI, the Python package service, does require a reviewer. But the setting allows self-review, so that protection alone does not guarantee a second person checked the release. <span class="refs"><a href="#S19" aria-label="Source 19">[S19]</a></span></p>
+    <p><strong>Improve it:</strong> make the required test jobs and reviewer rules match the process the project promises. If one owner is allowed to play several roles, describe that clearly.</p>
+    <details><summary>Other settings recorded during the review</summary><p>The main-branch rules also blocked deletion and forced rewriting of history. They did not require a code-owner review, approval of the latest push, removal of old approvals after a new push, or strict up-to-date checks. An allowed repository role could bypass rules through a pull request. The separate release and plugin-marketplace rulesets were disabled.</p><p>PyPI publishing was allowed from <code>main</code>. These are dated observations; the settings may change. <span class="refs"><a href="#S18" aria-label="Source 18">[S18]</a> <a href="#S19" aria-label="Source 19">[S19]</a></span></p></details>
+  </article>
+
+  <article id="F6" class="finding">
+    <p class="finding-meta">F6 <span>High if the agent is not trusted; otherwise medium · Shown in tests</span></p>
+    <h3>A healthy installation does not mean its automatic checks are useful</h3>
+    <p><strong>What happened:</strong> the test replaced the supplied GitHub checking job with one that only printed “pass.” The harness installation-health command, called <code>doctor</code>, still passed.</p>
+    <p>This GitHub job is meant to be editable. The health check confirms that the file is present, rather than proving that it still runs the expected checks. By contrast, an unauthorized edit to a protected harness rule file was correctly rejected. <span class="refs"><a href="#S03" aria-label="Source 3">[S03]</a> <a href="#S12" aria-label="Source 12">[S12]</a> <a href="#S16" aria-label="Source 16">[S16]</a></span></p>
+    <p><strong>Why it matters:</strong> if an agent can weaken the checking job, requiring a successful job with the same name may not protect the project.</p>
+    <p><strong>Improve it:</strong> protect changes to the checking jobs, or run the trusted checks from a place the proposed change cannot replace. Report installation health separately from the strength of GitHub’s protections.</p>
+  </article>
+
+  <article id="F7" class="finding">
+    <p class="finding-meta">F7 <span>High for clear instructions · Observed in the guides</span></p>
+    <h3>The guides disagree about who may start and finish work</h3>
+    <p><strong>What was found:</strong> one rule says that approving a work order gives the executor permission to start, code, check and record completion without asking again. Another part of the workflow asks for an explicit start decision and says the engineering owner may mark the work implemented. <span class="refs"><a href="#S04" aria-label="Source 4">[S04]</a></span></p>
+    <p>A “start decision” might simply mean the executor records that work has started. The guide does not make this clear. The different descriptions of who records completion are harder to reconcile.</p>
+    <p><strong>Why it matters:</strong> an agent may keep asking for permission it already has. Or it may read a broad permission as covering a decision reserved for an owner.</p>
+    <p><strong>Improve it:</strong> use one short table that states who may perform each action and whether existing approval is enough. Keep the guides and program rules aligned.</p>
+  </article>
+
+  <article id="F8" class="finding">
+    <p class="finding-meta">F8 <span>Medium · Shown in both checker versions</span></p>
+    <h3>A readiness check and the next command can disagree</h3>
+    <p><strong>What happened:</strong> an unrelated draft record was missing its owner. The check for completing the selected work order passed. Planning that same completion then failed because the planner rejected the unrelated record error. <span class="refs"><a href="#S05" aria-label="Source 5">[S05]</a> <a href="#S10" aria-label="Source 10">[S10]</a></span></p>
+    <p><strong>Why it matters:</strong> the agent is told that its next step is acceptable, then refused for a different reason. This can send it into unrelated repairs and expand the task beyond what was approved.</p>
+    <p><strong>Improve it:</strong> use the same rules for what blocks a selected task in the check, the plan and the final action. Some errors really affect the whole project; those exceptions should be named clearly.</p>
+  </article>
+
+  <article id="F9" class="finding">
+    <p class="finding-meta">F9 <span>Medium · Observed and partly shown in tests</span></p>
+    <h3>The word “check” promises more than some checks do</h3>
+    <p><strong>What was found:</strong> the same command name covers several different operations:</p>
+    <ul>
+      <li>Showing the current stage and suggested next step, without testing whether the required checks pass.</li>
+      <li>Checking the file list, without granting permission to do the work.</li>
+      <li>Checking a handoff and sometimes updating saved evidence files.</li>
+    </ul>
+    <p><strong>Why it matters:</strong> an agent may report “the check passed” when it only received a next-step suggestion. It may also assume that a check only reads files. A gate with “assurance decision” in its name can sound as though independent review has happened, even though its automatic checks mainly examine records. <span class="refs"><a href="#S09" aria-label="Source 9">[S09]</a> <a href="#S10" aria-label="Source 10">[S10]</a> <a href="#S11" aria-label="Source 11">[S11]</a> <a href="#S20" aria-label="Source 20">[S20]</a></span></p>
+    <p><strong>Improve it:</strong> state the limit directly in each result: “Next-step suggestion only,” “Evidence found; test success not checked,” or “These files were updated.” Name exactly what a passing result proves.</p>
+  </article>
+
+  <article id="F10" class="finding">
+    <p class="finding-meta">F10 <span>Medium · Reading size measured; agent risk inferred</span></p>
+    <h3>The agent has a lot to remember, across several versions of the rules</h3>
+    <p><strong>What was found:</strong> the nine main instruction and policy files contained about 95 KB of text. One work order’s required reading covered 21 files and about 151 KB. The project contained 1,652 formal records.</p>
+    <p>The agent must read rules at the start, read more for the selected stage, and reread important context after a long conversation is shortened. Rules also appear in several places. The project uses released checker version 0.18.0 while the development code says 0.19.0. Keeping those separate protects the checker, but makes it easier to run a plausible command with the wrong version. <span class="refs"><a href="#S01" aria-label="Source 1">[S01]</a> <a href="#S03" aria-label="Source 3">[S03]</a> <a href="#S17" aria-label="Source 17">[S17]</a></span></p>
+    <p>Similar record names add to the burden: a test plan is not a test result, and a prepared release record is not release approval. Two agents can also choose the same next record number. Checking existing branches does not reserve that number.</p>
+    <p><strong>Improve it:</strong> give the agent a short brief for its current stage: the rules it must follow, what is already approved, what remains undecided, and the next action. Link to the full documents. Add a reliable way for parallel agents to reserve record IDs.</p>
+    <details><summary>Exact reading measurements</summary><div class="table-wrap" role="region" aria-label="Reading measurements" tabindex="0"><table><thead><tr><th scope="col">Work order</th><th scope="col">Files</th><th scope="col">Bytes</th></tr></thead><tbody><tr><td>WO-CIP-006</td><td>10</td><td>48,718</td></tr><tr><td>WO-DST-023</td><td>21</td><td>151,076</td></tr><tr><td>WO-KIS-009</td><td>12</td><td>49,985</td></tr></tbody></table></div><p>The nine central instruction and policy files totalled 95,114 bytes. These are file sizes, not measurements of how much an AI model understood or remembered.</p></details>
+  </article>
+</section>
+
+<section id="strengths" aria-labelledby="strengths-title">
+  <p class="section-number">05 / What works well</p>
+  <h2 id="strengths-title">There are useful controls worth keeping</h2>
+  <ul class="spaced-list">
+    <li><strong>Connected records make the reasoning visible.</strong> The team can trace work back to requirements and decisions.</li>
+    <li><strong>The released checker is separate from the code being developed.</strong> This helps stop a change from quietly redefining its own checks.</li>
+    <li><strong>Some important failures are caught.</strong> The tests caught an unapproved file change when Git supplied the real file list. They also caught an edit to a protected rule file.</li>
+    <li><strong>Preparation and approval are separate.</strong> Creating a review or release record does not automatically approve it or change all related records.</li>
+    <li><strong>Saved version links are useful.</strong> They help reviewers establish which software and evidence a decision refers to.</li>
+    <li><strong>The project tests its behavior.</strong> The focused run completed 158 tests, with one skipped and no failures. The project also recognizes that replaying commands is different from testing how an AI agent chooses its actions.</li>
+  </ul>
+  <p>The plugin openly states that it does not intercept every action. The improvement needed is to make the strength of each result equally clear. <span class="refs"><a href="#S01" aria-label="Source 1">[S01]</a> <a href="#S11" aria-label="Source 11">[S11]</a> <a href="#S14" aria-label="Source 14">[S14]</a> <a href="#S16" aria-label="Source 16">[S16]</a> <a href="#S17" aria-label="Source 17">[S17]</a> <a href="#S21" aria-label="Source 21">[S21]</a></span></p>
+</section>
+
+<section id="repairs" aria-labelledby="repairs-title">
+  <p class="section-number">06 / What to fix first</p>
+  <h2 id="repairs-title">Make “approved,” “tested” and “complete” more reliable</h2>
+  <div class="table-wrap" role="region" aria-label="Recommended repair order" tabindex="0"><table><thead><tr><th scope="col">Order</th><th scope="col">Change</th><th scope="col">How to know it works</th></tr></thead><tbody>
+    <tr><td><strong>First</strong></td><td>Require the full handoff before completion.</td><td>The failed-handoff example can no longer end with the work marked complete.</td></tr>
+    <tr><td><strong>First</strong></td><td>Check actual test runs, not just attached files.</td><td>A missing, failed or old test stays unproven when its attachment is updated.</td></tr>
+    <tr><td><strong>First</strong></td><td>Require the right GitHub jobs and reviews.</td><td>The normal merge route blocks changes that lack the required tests or review.</td></tr>
+    <tr><td><strong>Next</strong></td><td>Confirm who approved the work and preserve what they reviewed.</td><td>Editing a record cannot create permission or silently broaden it.</td></tr>
+    <tr><td><strong>Next</strong></td><td>Protect the automatic checking jobs.</td><td>A replacement job that merely prints “pass” cannot satisfy the trusted check.</td></tr>
+    <tr><td><strong>Next</strong></td><td>Make guides and commands agree.</td><td>The agent gets the same answer about permission and blockers at each step.</td></tr>
+    <tr><td><strong>Then</strong></td><td>Shorten the reading brief and reserve record numbers.</td><td>Fresh agents can find the right next action; parallel agents get different IDs.</td></tr>
+  </tbody></table></div>
+  <p>“First” means before presenting these checks as strong barriers against incorrect agent actions. It does not mean all project work must stop.</p>
+  <h3>Decide how much the system is allowed to trust the agent</h3>
+  <p><strong>If the agent is trusted,</strong> the harness can organize its work, catch mistakes and preserve a useful history. Claims entered by the agent should still be labelled as claims.</p>
+  <p><strong>If the agent must be constrained,</strong> it cannot control its own approval, evidence and checker. Some protection must sit outside the files and settings it can edit—for example, protected reviews and server-run checks.</p>
+  <p>The project owner may remain the trusted final authority. If that owner can change every protection, the harness cannot also claim to independently constrain that same owner.</p>
+  <h3>Test the decisions an agent makes</h3>
+  <p>Keep the failure examples in this report as repeatable tests. Also test a fresh agent, an agent resuming a shortened conversation, two agents working at once, an old approval applied to changed work, and a command whose success is uncertain. Record what the agent actually did. A script that simply replays expected commands cannot show that an AI agent will choose them correctly. <span class="refs"><a href="#S21" aria-label="Source 21">[S21]</a></span></p>
+</section>
+
+<section id="evidence" aria-labelledby="evidence-title">
+  <p class="section-number">07 / What was tested</p>
+  <h2 id="evidence-title">The strongest findings were reproduced with the released checker</h2>
+  <p>The review used the project’s released checker, version 0.18.0, and examined the development code, version 0.19.0. Experiments ran in separate, disposable projects. <strong>The checker’s approval and evidence checks were not turned off.</strong> No project settings, release records or repository code were changed.</p>
+  <div class="table-wrap" role="region" aria-label="Observed test results" tabindex="0"><table><thead><tr><th scope="col">Experiment</th><th scope="col">Observed result</th></tr></thead><tbody>
+    <tr><td>Check the original project’s installation and records</td><td>Passed: 1,652 records, zero errors and 48 maintenance warnings.</td></tr>
+    <tr><td>Approve a draft using an unrelated name</td><td>Approval was applied.</td></tr>
+    <tr><td>Write a current-format approval directly into a work order</td><td>Accepted as permission, even without Git history.</td></tr>
+    <tr><td>Provide evidence that says tests did not run</td><td>Handoff passed.</td></tr>
+    <tr><td>Leave out an unapproved file and claim the list is complete</td><td>The file-scope check passed.</td></tr>
+    <tr><td>Let Git provide the real list of changed files</td><td>The unapproved file was correctly rejected.</td></tr>
+    <tr><td>Mark work complete after that rejection</td><td>Completion was applied.</td></tr>
+    <tr><td>Change the work description but keep the approved file list</td><td>Handoff passed.</td></tr>
+    <tr><td>Add an error to an unrelated draft record</td><td>The selected readiness check passed; the next planning command failed.</td></tr>
+    <tr><td>Replace the automatic checking job with “print pass”</td><td>Installation health still passed.</td></tr>
+    <tr><td>Change a protected harness rule file</td><td>Installation health correctly failed.</td></tr>
+    <tr><td>Change code, then update the label on an old failure report</td><td>Handoff passed; the failure report’s body stayed unchanged.</td></tr>
+  </tbody></table></div>
+  <p>The development-code checks reproduced the matching planning and check results. Changes to record status in these experiments were applied only through the released checker.</p>
+  <p>A separate focused run covered <strong>158 tests: one skipped, no failures</strong>, in about 74 seconds. It was not the full test suite. The review did not try a real publication or attempt to merge around GitHub’s protections.</p>
+  <p>The GitHub findings describe settings observed on <strong>16 September 2026</strong>. They were not rechecked for this plain-language edition. Actual behavior by future agents, and every possible route to publishing software, were not measured.</p>
+  <details><summary>More detail about the test method</summary>
+    <p>The synthetic records were created with helpers from the repository’s test suite. No real owner approval was claimed. The first trial used an old work-order ID format and was correctly refused. The corrected run used <code>WO-AUD-001</code> and started with zero record-validation errors. Both the exploratory and corrected results were kept.</p>
+    <p>The focused test files were <code>test_workflow_execution</code>, <code>test_workflow_compliance</code>, <code>test_authoring_gate</code>, <code>test_instruction_architecture</code> and <code>test_workflow_documentation_contract</code>. Some existing unit tests replace parts of the system with test substitutes. The separate reproduction experiments did not replace the approval, evidence or permission checks.</p>
+    <p>The review checked GitHub’s effective branch rules, not only the older protection API. The older API reported no protection, but an active ruleset did protect the main branch. It would be wrong to say the branch had no protection at all.</p>
+    <p>Reviewed source version: <code class="commit">f05c478a29c39f94968fdc842a34c861d30a42ac</code>. The original evidence archive contains the scripts, saved results, test log and GitHub responses.</p>
+  </details>
+</section>
+
+<section id="questions" aria-labelledby="questions-title">
+  <p class="section-number">08 / Questions to resolve</p>
+  <h2 id="questions-title">Six decisions would make the design clearer</h2>
+  <ol class="spaced-list">
+    <li>Is the harness helping a trusted agent, or stopping an agent from giving itself permission?</li>
+    <li>What proof is required before work can be called complete, verified or released?</li>
+    <li>Why should updating a report’s label make old test results count for changed code?</li>
+    <li>Exactly what did the owner approve, and what changes require a new decision?</li>
+    <li>What must GitHub refuse even if the agent skips every local instruction?</li>
+    <li>Can a fresh agent find the right next action without reading conflicting guides or learning through repeated refusals?</li>
+  </ol>
+  <p>Answering these questions and fixing the first six findings would strengthen the existing workflow more than adding more record types or instructions.</p>
+</section>
+
+<section id="sources" aria-labelledby="sources-title">
+  <p class="section-number">09 / Sources</p>
+  <h2 id="sources-title">Follow a finding back to the project</h2>
+  <p>Source links point to the code and documents examined in the original review. The GitHub settings links show live pages, which may have changed since then. The test results described above come from the saved review evidence.</p>
+  <ol class="source-list"><li id="S01"><span class="source-id">S01</span><div><p>The main rules, when to stop, and how to report results.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/ENGINEERING_HARNESS.md#L17">Managed engineering contract</a></p></div></li>
+<li id="S02"><span class="source-id">S02</span><div><p>Which records are needed and how they connect.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/docs/engineering/TRACEABILITY.md#L12">Traceability policy</a></p></div></li>
+<li id="S03"><span class="source-id">S03</span><div><p>Local instructions, approved checker versions, and record numbering.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/AGENTS.md">Repository instructions</a></p></div></li>
+<li id="S04"><span class="source-id">S04</span><div><p>Who may decide what. Compare the execution permission with workflow steps 5 and 7.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/docs/engineering/DECISION_RIGHTS.md">Decision rights</a> · <a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/docs/engineering/WORKFLOW.md#L127">workflow procedure</a></p></div></li>
+<li id="S05"><span class="source-id">S05</span><div><p>How the program accepts a decision name and plans a change of status.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/se_harness/workflow_edges.py#L82">Transition actor validation</a> · <a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/se_harness/workflow.py#L433">transition planner</a></p></div></li>
+<li id="S06"><span class="source-id">S06</span><div><p>How the program checks the decision history written in a record.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/se_harness/engine/validation_lifecycle.py#L162">Lifecycle event validation</a></p></div></li>
+<li id="S07"><span class="source-id">S07</span><div><p>How the program reads the approval to carry out work.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/se_harness/gate_source.py#L43">Execution grant lookup</a></p></div></li>
+<li id="S08"><span class="source-id">S08</span><div><p>How the program decides that evidence is available.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/se_harness/workflow_predicates.py#L38">Evidence availability predicate</a></p></div></li>
+<li id="S09"><span class="source-id">S09</span><div><p>How an old evidence file gets a new label while its body stays unchanged.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/se_harness/workflow_evidence_packet.py#L90">Packet rebind</a></p></div></li>
+<li id="S10"><span class="source-id">S10</span><div><p>What each kind of check actually tests.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/se_harness/workflow_compliance.py#L207">Checkpoint evaluation</a></p></div></li>
+<li id="S11"><span class="source-id">S11</span><div><p>The checks required at each stage, including completion.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/se_harness/quality_gates_contract.json">Executable quality gates</a> · <a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/docs/engineering/QUALITY_GATES.md#L27">gate explanations</a></p></div></li>
+<li id="S12"><span class="source-id">S12</span><div><p>The automatic GitHub check required for the project.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/.github/workflows/engineering-harness.yml">Required governance workflow</a> · <a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/se_harness/github_ci.py#L136">PR evaluator</a></p></div></li>
+<li id="S13"><span class="source-id">S13</span><div><p>The separate jobs that test the proposed software.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/.github/workflows/candidate-evidence.yml#L35">Candidate evidence workflow</a></p></div></li>
+<li id="S14"><span class="source-id">S14</span><div><p>How evidence is linked to a saved software version.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/se_harness/provenance.py#L394">Verification capture</a></p></div></li>
+<li id="S15"><span class="source-id">S15</span><div><p>Extra owner and evidence rules for review and release records.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/se_harness/engine/validation_evidence.py">Evidence and owner validation</a></p></div></li>
+<li id="S16"><span class="source-id">S16</span><div><p>Installation health, protected files, and use of the right checker.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/se_harness/preflight.py#L195">Installation inspection</a> · <a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/se_harness/mutation_guard.py#L135">mutation guard</a></p></div></li>
+<li id="S17"><span class="source-id">S17</span><div><p>What the plugin can control, how to reuse approval, and rules for delivery.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/plugins/verity-plane/codex/README.md#L3">Plugin boundary</a> · <a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/plugins/verity-plane/common/skills/change/references/authority.md">continuing authority</a> · <a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/plugins/verity-plane/common/skills/evidence/references/external-actions.md">external actions</a></p></div></li>
+<li id="S18"><span class="source-id">S18</span><div><p>GitHub rules observed on 16 September 2026. These settings can change.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/rules/20693381">Live main ruleset</a> · <a href="https://api.github.com/repos/mmzen/se_harness/rules/branches/main">effective branch rules endpoint</a> · <a href="https://api.github.com/repos/mmzen/se_harness/rulesets">ruleset listing</a></p></div></li>
+<li id="S19"><span class="source-id">S19</span><div><p>Publishing protections observed on 16 September 2026. Some links need repository access.</p><p class="source-links"><a href="https://api.github.com/repos/mmzen/se_harness/environments/pypi">PyPI environment endpoint</a> · <a href="https://api.github.com/repos/mmzen/se_harness/environments/pypi/deployment-branch-policies">deployment branches endpoint</a> · <a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/.github/workflows/publish-pypi.yml#L309">publication workflow</a></p></div></li>
+<li id="S20"><span class="source-id">S20</span><div><p>Why the check command can show a next step, test readiness, or update evidence.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/docs/notes/harnessctl-check.md#L17">Check command explanation</a></p></div></li>
+<li id="S21"><span class="source-id">S21</span><div><p>The difference between testing program commands and testing an AI agent’s behavior.</p><p class="source-links"><a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/tests/plugin_integration/change_skill/README.md">Agent acceptance versus replay</a> · <a href="https://github.com/mmzen/se_harness/blob/f05c478a29c39f94968fdc842a34c861d30a42ac/tests/test_workflow_compliance.py#L68">workflow compliance fixtures</a></p></div></li></ol>
+</section>
+<footer class="report-footer"><p>SE Harness assessment · Review dated 16 September 2026</p><p><a href="#top">Back to the top</a></p></footer>
+</main>
+</div>
+
+</body>
+</html>
