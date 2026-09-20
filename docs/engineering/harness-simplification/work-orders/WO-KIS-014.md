@@ -2,7 +2,7 @@
 id = "WO-KIS-014"
 type = "work_order"
 title = "Finish truthful evidence with the complete test scope"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-20"
 updated = "2026-09-20"
@@ -65,6 +65,13 @@ to = "in_progress"
 decided_at = "2026-09-20T07:17:36Z"
 decided_by = "delegated-executor"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex continues the owner-approved replacement scope after the explicit approval and closure decision dated 2026-09-20."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-20T08:43:00Z"
+decided_by = "delegated-executor"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Codex completed the approved evidence repair. Both 1081-test Windows/Linux source suites pass after the separately approved WO-DOC-017 README correction; the released combined-order check passed against the original recovery base. Original failures, full scope and current results are retained. No assurance or external delivery is inferred."
 +++
 
 # Finish truthful evidence with the complete test scope

@@ -1,0 +1,11 @@
+{
+  "command": [
+    "git",
+    "diff",
+    "--cached",
+    "--check"
+  ],
+  "exit": 2,
+  "stdout": "docs/engineering/harness-distribution/evidence/WO-DOC-017/README.patch:4: trailing whitespace.\n+ \ndocs/engineering/harness-distribution/evidence/WO-DOC-017/README.patch:6: trailing whitespace.\n+ \ndocs/engineering/harness-distribution/evidence/WO-DOC-017/README.patch:35: trailing whitespace.\n+ \ndocs/engineering/harness-distribution/evidence/WO-DOC-017/README.patch:37: trailing whitespace.\n+ \ndocs/engineering/harness-distribution/evidence/WO-DOC-017/README.patch:39: trailing whitespace.\n+ \ndocs/engineering/harness-distribution/evidence/WO-DOC-017/README.patch:41: trailing whitespace.\n+ \n",
+  "resolution": "Archive the exact reviewed diff bytes; do not edit or discard them. Product Markdown has no whitespace findings."
+}

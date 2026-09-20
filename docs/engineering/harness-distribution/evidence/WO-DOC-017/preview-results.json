@@ -1,0 +1,15 @@
+{
+  "kind": "proposal preview; README.md was not changed",
+  "method": "Run unchanged existing modules with only their README_PATH input redirected to README-proposed.md; repository assets/notes and expected assertions unchanged.",
+  "tests": 32,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "released_parser_exit": 0,
+  "readme_words": 604,
+  "readme_lines": 110,
+  "headings": 6,
+  "readme_sha256": "6566a636021d3aaa29345094ad19362289cd26efe01b3684a26da57e7c2d2c9d",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "full_suite": "not rerun on the proposal; required after application"
+}

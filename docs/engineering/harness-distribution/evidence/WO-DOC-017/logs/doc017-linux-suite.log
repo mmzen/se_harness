@@ -1,0 +1,10 @@
+Evaluator Python: /tmp/simple-plugin-l6l7n8z7/private/verity-plane/evaluator/bin/python
+Evaluator Python: /tmp/simple-plugin-l6l7n8z7/private/verity-plane/evaluator/bin/python
+--workers must be at least 1
+WEX_SCALE artifacts=100 validation=0.062401s focus=0.091091s plan=0.105896s
+WEX_SCALE artifacts=500 validation=0.226678s focus=0.240260s plan=0.470541s
+docs/notes/diagnostic-codes.md matches the source
+----------------------------------------------------------------------
+Ran 1081 tests in 49.996s (172 classes, 4 workers)
+
+OK (skipped=2)

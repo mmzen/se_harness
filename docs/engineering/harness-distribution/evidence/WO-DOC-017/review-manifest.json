@@ -1,0 +1,25 @@
+{
+  "source_commit": "c90a3dbf7d56c2554aeca0f9fa87010f24960062",
+  "ref_scan": "../../work/readme-ref-scan.json",
+  "proposal_status": "draft; not applied to README.md",
+  "proposed_readme_sha256": "6566a636021d3aaa29345094ad19362289cd26efe01b3684a26da57e7c2d2c9d",
+  "historical_readme_lf_sha256": "d9cb469ccda4438134ee23b46852a58ecc91595dd2ce87437f4967a4ea1a7c8b",
+  "upstream_commit": "2b87e04490b933a71a9986c0235ea8b201b3bffc",
+  "current_readme_sha256": "eb8b2454d97b3de943c913c9881a622f5df61d3de4f30a6186726984c7f8ff62",
+  "inputs": {
+    "README-proposed.md": "6566a636021d3aaa29345094ad19362289cd26efe01b3684a26da57e7c2d2c9d",
+    "README.patch": "1cf8b6bbafd5361c9292666761e1aff01762b3db59780d8b84bdf0d284f00d0a",
+    "VER-DST-030.md": "544e40d5ee363baf654ed958bd96e2f07ca2f17d7ef765903a6126f354f3f39d",
+    "WO-DOC-017.md": "3a501912ad01097a4dffdb18aceea958be4e61ef6f1dd8b16f3c36d11eb295cb"
+  },
+  "proposed_decisions": {
+    "VER-DST-030": {
+      "state": "approved",
+      "actor": "assurance-owner"
+    },
+    "WO-DOC-017": {
+      "state": "approved",
+      "actor": "engineering-owner"
+    }
+  }
+}

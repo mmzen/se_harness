@@ -1,0 +1,11 @@
+{
+  "head": "c90a3dbf7d56c2554aeca0f9fa87010f24960062",
+  "origin": "https://github.com/mmzen/se_harness.git",
+  "bundle_sha256": "89dceb906bae702ecbcda7bb78b49201ab61f5baba1637bf011e9cfbefd36f44",
+  "overlay_sha256": "efedec742bfadac2a18911ece7e6d6abc3ae92c22e4ba412dcee1e4218209059",
+  "working_files": {
+    "README.md": "6566a636021d3aaa29345094ad19362289cd26efe01b3684a26da57e7c2d2c9d",
+    "docs/engineering/harness-distribution/verification/VER-DST-030.md": "78c998c79f5cac4917178d6eb3ec655939b1dad87a0a4de499c46a6643b4f39a",
+    "docs/engineering/harness-distribution/work-orders/WO-DOC-017.md": "a4692aca74442309a4da576904d515875e4992a0c1b96cf5ac6239ac7f5fd866"
+  }
+}
