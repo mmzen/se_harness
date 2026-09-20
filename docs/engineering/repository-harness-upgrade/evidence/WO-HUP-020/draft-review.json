@@ -1,0 +1,82 @@
+{
+  "baseline": "0dadc352b3a5e6c64c721e1c688cc215438ddd7f",
+  "draft_only": true,
+  "reviewed_artifacts": [
+    {
+      "id": "SPEC-HUP-020",
+      "path": "docs/engineering/repository-harness-upgrade/specifications/SPEC-HUP-020.md",
+      "sha256": "27e0357c5775bf78f1b3386ac9db52a02802be7dd9a79c36735bda870079b64d",
+      "bytes": 5161,
+      "state": "draft",
+      "proposed_target": "approved",
+      "accountable_role": "technical-owner"
+    },
+    {
+      "id": "VER-HUP-020",
+      "path": "docs/engineering/repository-harness-upgrade/verification/VER-HUP-020.md",
+      "sha256": "edb0c5c5eaf1617f689da8f0ff15138cccb4a7f5e3818210caa057b90345b15f",
+      "bytes": 4854,
+      "state": "draft",
+      "proposed_target": "approved",
+      "accountable_role": "assurance-owner"
+    },
+    {
+      "id": "WO-HUP-020",
+      "path": "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-020.md",
+      "sha256": "c245f873e89869a6f4464c1ef15d4070ecc0b1f1b41f3b0c6e9b76e8e1861661",
+      "bytes": 5575,
+      "state": "draft",
+      "proposed_target": "approved",
+      "accountable_role": "engineering-owner"
+    }
+  ],
+  "id_scan": {
+    "refs_checked": 106,
+    "path": "work/assessor-fix-id-scan.json"
+  },
+  "observed_changed_paths": [
+    "docs/engineering/repository-harness-upgrade/README.md",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/draft-review.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/draft-review.md",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/original-planner-failure.json",
+    "docs/engineering/repository-harness-upgrade/specifications/SPEC-HUP-020.md",
+    "docs/engineering/repository-harness-upgrade/verification/VER-HUP-020.md",
+    "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-020.md"
+  ],
+  "proposed_scope_covers_complete_diff": true,
+  "scope_comparison_grants_no_approval": true,
+  "graph": {
+    "valid": true,
+    "artifact_count": 1661,
+    "error_count": 0,
+    "warning_count": 48
+  },
+  "doctor": {
+    "checks": 64,
+    "failed": 0
+  },
+  "approval_preview": {
+    "status": "pass",
+    "applied": false
+  },
+  "raw_outputs": [
+    {
+      "path": "work/plugin-publication-governance/assessor-final-drafts-validate.json",
+      "sha256": "45b66fb2c7570d98990479ecfdf5f2e053cbe623bf59e0c15419824138344d02"
+    },
+    {
+      "path": "work/plugin-publication-governance/assessor-drafts-doctor.json",
+      "sha256": "32663aea58294b9550fbbdd6c0688aecc696be172faa1912a3e5aaf31e9cc49f"
+    },
+    {
+      "path": "work/plugin-publication-governance/assessor-drafts-doctor-host.json",
+      "sha256": "9b2bab6375f5f42b5d4fd9d11b5f9493d428e303d4ec8b238f844f3c97f6ed61"
+    },
+    {
+      "path": "work/plugin-publication-governance/assessor-approval-readiness-preview.json",
+      "sha256": "9b17c6c5ddcb325faf84cdbe8c1181a54829f172279f05e701f5fc86d502ffb9"
+    }
+  ],
+  "implementation_changed": false,
+  "verification_record_created": false
+}

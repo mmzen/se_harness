@@ -122,3 +122,14 @@ release, or external action; the amendments it names on
 `WO-ECP-007` only after those work orders are approved and started by
 their accountable owners. Each artifact's own front matter is its state.
 - `REQ-ECP-030`, `SPEC-ECP-019`, `VER-ECP-021` and `WO-ECP-025` are approved (2026-09-02, the delegating act) and `WO-ECP-025` executes on the delegated route to close issue #310, assessment item #285c: the `focus`, `next`, `accept-candidate` and `prepare-release --authorized-by` tombstone guards leave `main()` three releases after their removals shipped, argparse refuses the names as unknown, the rules that described the guards close by dated amendment, and the work order travels the delegated route.
+
+## Plugin ownership in upgrade rehearsal (2026-09-16)
+
+[SPEC-ECP-025](specifications/SPEC-ECP-025.md),
+[VER-ECP-027](verification/VER-ECP-027.md) and
+[WO-ECP-039](work-orders/WO-ECP-039.md) are the approved correction for PR #487's
+remaining Linux/Windows rehearsal failures. They replace the helper's fixed
+schema-3 assertion with supported ownership and preservation checks, retaining
+the real evaluator handover. Diagnosis and original failures are under
+`evidence/WO-ECP-039/`. Local acceptance is complete; the work order records
+its lifecycle state. Verification remains a separate accountable decision.

@@ -7,34 +7,6 @@
     "version": "0.18.0"
   },
   "files": {
-    ".agents/skills/harness-operator-brief/SKILL.md": {
-      "mode": "seed",
-      "state": "present"
-    },
-    ".agents/skills/harness-operator-brief/scripts/check_brief.py": {
-      "mode": "seed",
-      "state": "present"
-    },
-    ".agents/skills/harness-operator-brief/skill-contract.json": {
-      "mode": "seed",
-      "state": "present"
-    },
-    ".agents/skills/harness-orient/SKILL.md": {
-      "mode": "seed",
-      "state": "present"
-    },
-    ".agents/skills/harness-orient/scripts/orient.py": {
-      "mode": "seed",
-      "state": "present"
-    },
-    ".agents/skills/harness-orient/skill-contract.json": {
-      "mode": "seed",
-      "state": "present"
-    },
-    ".claude/skills/harness-orient/SKILL.md": {
-      "mode": "seed",
-      "state": "present"
-    },
     ".engineering-harness.toml": {
       "mode": "seed",
       "state": "present"
@@ -174,6 +146,9 @@
   },
   "hash_algorithm": "sha256",
   "hash_mode": "utf8-text-lf-v1",
-  "schema": 3,
+  "schema": 4,
+  "skill_ownership": {
+    "provider": "plugin"
+  },
   "tool_version": "0.18.0"
 }

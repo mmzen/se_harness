@@ -2,6 +2,15 @@
 
 This packet governs the reusable `se-harness` repository and its single standard installation. It explicitly excludes `minimal`, `offline`, and other selectable profiles.
 
+## Public-onboarding addendum
+
+[SPEC-DST-029](specifications/SPEC-DST-029.md) approves keeping the current
+plugin-first README and linking manual checker details. It belongs to the
+[WO-PLG-025 replacement cleanup package](../plugin-integration/work-orders/WO-PLG-025.md)
+and is approved; SPEC-DST-024 and earlier decisions retain their recorded history.
+
+## Artifact chains
+
 Artifact chain:
 
 Base distribution chain:

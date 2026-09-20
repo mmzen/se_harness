@@ -205,7 +205,7 @@ def _metadata(raw: bytes, label: str) -> dict[str, Any]:
     return value
 
 
-def _root_identity(root: Path, revision: str, label: str) -> dict[str, Any]:
+def _root_identity(root: Path, revision: str, label: str) -> tuple[dict[str, Any], dict[str, Any]]:
     config_raw = _blob(root, revision, ".engineering-harness.toml", f"{label} configuration")
     lock_raw = _blob(root, revision, ".engineering-harness.lock", f"{label} lock")
     try:
@@ -220,7 +220,21 @@ def _root_identity(root: Path, revision: str, label: str) -> dict[str, Any]:
     if not isinstance(version, str) or VERSION.fullmatch(version) is None:
         raise GovernorTransitionError(f"{label} configured governor version is invalid")
     schema = lock.get("schema")
-    if schema != 3 or lock.get("tool_version") != version:
+    if type(schema) is int and schema < 3:
+        raise GovernorTransitionError(
+            f"{label} lock predates the schema-3 floor; remove the stale lock and re-adopt with harnessctl init"
+        )
+    if type(schema) is not int or schema not in (3, 4):
+        raise GovernorTransitionError(f"{label} lock schema is unsupported (minimum schema 3)")
+    ownership = lock.get("skill_ownership")
+    if schema == 4:
+        if not isinstance(ownership, dict) or ownership.get("provider") != "plugin":
+            raise GovernorTransitionError(f"{label} plugin ownership record is invalid")
+    elif "skill_ownership" in lock:
+        raise GovernorTransitionError(f"{label} repository lock cannot declare plugin ownership")
+    if not isinstance(lock.get("files"), dict):
+        raise GovernorTransitionError(f"{label} lock files must be an object")
+    if lock.get("tool_version") != version:
         raise GovernorTransitionError(f"{label} configuration and lock disagree")
     if lock.get("hash_algorithm") != "sha256" or lock.get("hash_mode") != "utf8-text-lf-v1":
         raise GovernorTransitionError(f"{label} lock hash contract is unsupported")
@@ -239,7 +253,47 @@ def _root_identity(root: Path, revision: str, label: str) -> dict[str, Any]:
             "crlf": _sha256(lock_crlf),
         },
         "evaluator": evaluator,
-    }
+    }, lock
+
+
+def _ownership_only_change(root: Path, base_revision: str, before: dict, after: dict) -> bool:
+    """Allow the supported provider switch, using only the trusted base's catalogue."""
+    if {before["schema"], after["schema"]} != {3, 4}:
+        return False
+    for label, value in (("base", before), ("target", after)):
+        identity = _evaluator(value.get("evaluator"), f"{label} evaluator")
+        if identity["version"] != value["tool_version"]:
+            raise GovernorTransitionError(f"{label} evaluator version disagrees with the lock")
+    catalog = _json(
+        _blob(root, base_revision, "se_harness/skill_ownership_contract.json", "base skill catalogue"),
+        "base skill catalogue",
+    ).get("catalog")
+    if (
+        not isinstance(catalog, list) or not catalog
+        or any(not isinstance(path, str) or not path for path in catalog)
+        or len(set(catalog)) != len(catalog)
+    ):
+        raise GovernorTransitionError("base skill catalogue is invalid")
+    repository = before if before["schema"] == 3 else after
+    plugin = before if before["schema"] == 4 else after
+    for path in catalog:
+        if path in plugin["files"]:
+            return False
+        entry = repository["files"].get(path)
+        if after["schema"] == 3:
+            if entry != {"mode": "seed", "state": "present"}:
+                return False
+        elif path in repository["files"] and entry not in (
+            {"mode": "seed", "state": "present"}, {"mode": "seed", "state": "removed"},
+        ):
+            return False
+    # Everything except the provider representation and its disposable seeds is exact.
+    remaining = []
+    for value in (before, after):
+        other = {key: item for key, item in value.items() if key not in {"schema", "skill_ownership", "files"}}
+        other["files"] = {path: entry for path, entry in value["files"].items() if path not in catalog}
+        remaining.append(other)
+    return _canonical_json(remaining[0]) == _canonical_json(remaining[1])
 
 
 def _evaluator(value: Any, label: str) -> dict[str, str | None]:
@@ -452,14 +506,14 @@ def build_plan(
     base_commit, base_source = _resolve_base(
         root, head, base_revision, default_branch_ref, pattern
     )
-    base = _root_identity(root, base_commit, "base")
-    target = _root_identity(root, head, "target")
+    base, base_lock = _root_identity(root, base_commit, "base")
+    target, target_lock = _root_identity(root, head, "target")
     transition = base["version"] != target["version"]
     if not transition:
         if (
             base["lock_sha256"] != target["lock_sha256"]
             or base["canonical_lock_sha256"] != target["canonical_lock_sha256"]
-        ):
+        ) and not _ownership_only_change(root, base_commit, base_lock, target_lock):
             raise GovernorTransitionError("same-version candidate changed the standard governor lock")
         upgrade: dict[str, Any] | None = None
     else:

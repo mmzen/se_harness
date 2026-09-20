@@ -6,7 +6,7 @@
 
 The one-time emergency bootstrap published version 0.5.0a1 and used that exact external release to convert this checkout from its retired self-hosted evaluator controls. Exact public 0.5.0 later governed the 0.6.0 release through the ordinary standard repository lifecycle. On 2026-08-23, the separately governed `WO-HUP-002` transaction adopted exact public 0.6.0 as the standard root evaluator. No self-hosting installation profile, evaluator descriptor, or special promotion command was introduced. Candidate source and packages remain evidence only and must not create formal artifacts, run root preflight, or manage lifecycle state.
 
-Candidate source in this checkout reports version 0.19.0. The standard root is governed by exact public 0.18.0, adopted under `WO-HUP-019` and recorded in `.engineering-harness.toml`. The schema-3 lock binds that release's immutable public wheel and installed-payload digests. Candidate source remains development evidence; its version does not select the governing evaluator or grant release authority.
+Candidate source in this checkout reports version 0.19.0. The standard root is governed by exact public 0.18.0, adopted under `WO-HUP-019` and recorded in `.engineering-harness.toml`. The schema-4 lock retains that release's immutable public wheel and installed-payload digests and selects plugin ownership under `WO-PLG-024`. Candidate source remains development evidence; its version does not select the governing evaluator or grant release authority.
 
 ## Candidate identity and editable files (WO-KIS-003)
 
@@ -25,6 +25,37 @@ files; `--replace-file PATH` explicitly takes a supplied replacement. See the
 [installation guide](harness-installation-and-upgrades.md). This development
 root adopted 0.18.0 under `WO-HUP-019`, explicitly replacing 19 supplied editable
 files while preserving the remaining editable files and owner fragments.
+
+## Agent skills for this checkout
+
+This repository gets its agent skills from the Verity Plane plugin. Install it
+in each Codex or Claude Code host using the [marketplace guide](../../release/plugin-marketplace/README.md).
+The [installation walkthrough](plugin-installation-guide.md) explains setup and
+the separate evaluator environment. Installing the plugin alone does not
+install or upgrade this repository's evaluator.
+
+The portable lock records only `skill_ownership.provider = "plugin"`; it does
+not store a local plugin path. The generated root copies under `.agents/skills/`
+and `.claude/skills/` are absent. A clone can run the selected evaluator and
+`doctor` without the plugin; plugin skill invocation needs the host installation.
+Ordinary upgrades preserve the provider choice. Product templates still supply
+repository skills for projects that select repository ownership.
+
+To restore repository skills in a project that needs them, preview and then
+apply the released ownership command under that project's approved scope:
+
+```powershell
+& "CHECKER" -I -m se_harness skill-ownership "PROJECT" --provider repository --json
+& "CHECKER" -I -m se_harness skill-ownership "PROJECT" --provider repository --apply --json
+& "CHECKER" -I -m se_harness doctor "PROJECT" --json
+```
+
+`CHECKER` is the absolute Python executable of the project's selected released
+evaluator; `PROJECT` is the absolute repository path. Run from outside the
+checkout. Restoration writes the released repository skill templates and
+ordinary lock inventory. See the installation walkthrough for switching back
+to plugin ownership. The cleanup does not change the installed harness policy
+or the [single approved execution route](delegation-class.md).
 
 ## Development environment
 

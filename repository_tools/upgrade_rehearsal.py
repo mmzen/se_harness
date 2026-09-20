@@ -10,8 +10,9 @@ to a throwaway directory whose lock is the released predecessor's, and then:
    other than `E012` on a `ready` record, the one consequence a root change
    has on records prepared under the previous evaluator;
 4. the predecessor's `doctor` must now fail (it no longer owns the root);
-5. the resulting lock must be schema 3 naming the successor's version and
-   installed-payload digest.
+5. the resulting lock must preserve supported repository or plugin ownership
+   and name the successor's version and installed-payload digest
+   (`WO-ECP-039`, `SPEC-ECP-025`).
 
 The result's `semantic_sha256` is the canonical `utf8-text-lf-v1` digest of
 the resulting lock, the value two runs and two platforms must agree on. The
@@ -228,6 +229,18 @@ def _evaluator(python: Path) -> list[str]:
     return [str(python), "-I", "-m", "se_harness"]
 
 
+def _ownership(lock: dict[str, Any]) -> str | None:
+    schema = lock.get("schema")
+    if type(schema) is not int:
+        return None
+    if schema == 3 and "skill_ownership" not in lock:
+        return "repository"
+    ownership = lock.get("skill_ownership")
+    if schema == 4 and isinstance(ownership, dict) and ownership.get("provider") == "plugin":
+        return "plugin"
+    return None
+
+
 def _version(python: Path, runner: Runner, cwd: Path) -> str:
     completed = runner([*_evaluator(python), "--version"], cwd)
     version = completed.stdout.strip().splitlines()[-1].strip() if completed.stdout.strip() else ""
@@ -354,6 +367,8 @@ def _rehearse(repository, predecessor_python, successor_python, output, runner, 
             prior_lock = json.loads((copy / LOCK_NAME).read_text(encoding="utf-8"))
             if prior_lock.get("evaluator", {}).get("version") != predecessor_version:
                 failure = f"the exported lock names evaluator {prior_lock.get('evaluator', {}).get('version')}, not the predecessor {predecessor_version}"
+            elif _ownership(prior_lock) is None:
+                failure = f"the exported lock has unsupported ownership for schema {prior_lock.get('schema')!r}"
         if failure is None:
             step("predecessor-doctor-before", [*_evaluator(predecessor_python), "doctor", str(copy)], Path(scratch))
         if failure is None:
@@ -392,8 +407,11 @@ def _rehearse(repository, predecessor_python, successor_python, output, runner, 
                 "evaluator": {"version": evaluator.get("version"), "payload_sha256": evaluator.get("payload_sha256")},
                 "canonical_sha256": canonical_sha256(raw),
             }
-            if lock.get("schema") != 3:
-                failure = f"the resulting lock is schema {lock.get('schema')!r}, not 3"
+            ownership = _ownership(lock)
+            if ownership is None:
+                failure = f"the resulting lock has unsupported ownership for schema {lock.get('schema')!r}"
+            elif ownership != _ownership(prior_lock):
+                failure = f"the resulting lock changes skill ownership from {_ownership(prior_lock)} to {ownership}"
             elif evaluator.get("version") != successor_version or lock.get("tool_version") != successor_version:
                 failure = f"the resulting lock names {evaluator.get('version')!r}/{lock.get('tool_version')!r}, not the successor {successor_version}"
             elif not isinstance(evaluator.get("payload_sha256"), str) or evaluator.get("payload_sha256") != expected_payload:

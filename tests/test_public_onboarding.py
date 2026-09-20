@@ -23,17 +23,26 @@ PYPROJECT_PATH = REPOSITORY_ROOT / "pyproject.toml"
 
 
 class PublicOnboardingTests(unittest.TestCase):
-    """Public presentation contract in REQ-DST-069 and SPEC-DST-024."""
+    """Public presentation in REQ-DST-069, SPEC-DST-024 and SPEC-DST-029."""
 
     @classmethod
     def setUpClass(cls) -> None:
         cls.readme = README_PATH.read_text(encoding="utf-8")
         cls.project = tomllib.loads(PYPROJECT_PATH.read_text(encoding="utf-8"))["project"]
+        cls.marketplace = (REPOSITORY_ROOT / "release/plugin-marketplace/README.md").read_text(encoding="utf-8")
+        cls.getting_started = (REPOSITORY_ROOT / "docs/notes/getting-started.md").read_text(encoding="utf-8")
+        cls.installation = (REPOSITORY_ROOT / "docs/notes/harness-installation-and-upgrades.md").read_text(encoding="utf-8")
 
-    def section(self, heading: str) -> str:
+    def section(self, heading: str, content: str | None = None) -> str:
+        content = self.readme if content is None else content
         marker = f"## {heading}\n"
-        self.assertEqual(1, self.readme.count(marker), f"expected one {marker.strip()} section")
-        return self.readme.split(marker, 1)[1].split("\n## ", 1)[0]
+        self.assertEqual(1, content.count(marker), f"expected one {marker.strip()} section")
+        return content.split(marker, 1)[1].split("\n## ", 1)[0]
+
+    @staticmethod
+    def fenced_commands(content: str) -> list[list[str]]:
+        blocks = re.findall(r"```[^\n]*\n(.*?)\n```", content, re.DOTALL)
+        return [shlex.split(line) for block in blocks for line in block.splitlines() if line.strip()]
 
     def test_root_is_a_bounded_human_entry_point(self) -> None:
         self.assertLessEqual(len(self.readme.split()), 650)
@@ -72,37 +81,55 @@ class PublicOnboardingTests(unittest.TestCase):
             with self.subTest(concept=concept):
                 self.assertIn(concept, vision)
 
-    def test_installation_uses_a_released_package_and_separate_repository_upgrade(self) -> None:
+    def test_plugin_setup_uses_a_released_wheel_and_keeps_project_changes_explicit(self) -> None:
         install = self.section("Get started")
         for text in (
-            "Python 3.11+", "outside your repository", "-m venv",
-            "python -m pip install se-harness", "bin/activate",
-            r"Scripts\Activate.ps1", "pinned by that repository",
-            "leaves its managed files unchanged", "harness-installation-and-upgrades.md",
+            "Python 3.11+", "`venv`", "`ensurepip`", "verity-plane:setup",
+            "project path", "persistent data directory outside it", "private environment",
+            "wheel **offline**", "does not download the harness from PyPI",
+            "Plugin installation alone does not initialize or upgrade a project",
         ):
             with self.subTest(text=text):
                 self.assertIn(text, install)
+        # Published identities come from the retained marketplace, not candidate __version__.
+        published = " ".join(self.marketplace.split())
+        plugin = re.search(r"Plugin \*\*(\d+\.\d+\.\d+)\*\*", published)
+        checker = re.search(r"\*\*SE Harness (\d+\.\d+\.\d+)\*\*", published)
+        self.assertIsNotNone(plugin)
+        self.assertIsNotNone(checker)
+        self.assertIn(f"Plugin **{plugin[1]}**", install)
+        self.assertIn(f"released **SE Harness {checker[1]}**", install)
         self.assertNotRegex(install, r"pip install\s+se-harness==")
         self.assertNotIn("python -m pip install .", install)
         self.assertNotIn("harnessctl upgrade", install)
         self.assertEqual(self.project["version"], __version__)
 
-    def test_quick_start_commands_parse_against_the_current_cli(self) -> None:
+    def test_linked_manual_installation_examples_parse_against_the_current_cli(self) -> None:
         from se_harness.cli import build_parser
 
-        blocks = "\n".join(re.findall(r"```[^\n]*\n(.*?)\n```", self.readme, re.DOTALL))
-        commands = re.findall(r"(?m)^harnessctl [^\r\n]+", blocks)
-        # WO-ECP-026 (ECP-INS-009): the quick start shows the one installation command.
-        self.assertEqual({"init", "doctor"}, {shlex.split(command)[1] for command in commands})
+        commands = self.fenced_commands(self.section("Install into a repository", self.installation))
+        self.assertEqual(2, len(commands))
+        self.assertEqual({"init", "doctor"}, {command[3] for command in commands})
         for command in commands:
             with self.subTest(command=command):
-                build_parser().parse_args(shlex.split(command)[1:])
+                self.assertEqual(["python", "-m", "se_harness"], command[:3])
+                build_parser().parse_args(command[3:])
+        for text in ("outside", "python -m venv", "-m pip install", "se-harness==", "version your repository pins"):
+            with self.subTest(text=text):
+                self.assertIn(text, self.getting_started)
+        for text in ("external Python environment", "selected released package", "separate, explicit", "harnessctl upgrade --apply"):
+            with self.subTest(text=text):
+                self.assertIn(text, self.installation)
 
-    def test_fenced_commands_remain_on_the_public_operational_surface(self) -> None:
-        blocks = "\n".join(re.findall(r"```[^\n]*\n(.*?)\n```", self.readme, re.DOTALL))
-        commands = set(re.findall(r"(?m)^harnessctl\s+([a-z][a-z-]*)\b", blocks))
-        self.assertTrue({"init", "doctor"}.issubset(commands))
-        self.assertTrue(commands.issubset({"init", "adopt", "doctor", "validate", "inspect", "dashboard"}))
+    def test_native_commands_match_the_published_git_installation_routes(self) -> None:
+        expected = self.fenced_commands(self.section("Install from Git", self.marketplace))
+        self.assertEqual(4, len(expected))
+        self.assertEqual(
+            [["codex", "plugin", "marketplace", "add"], ["codex", "plugin", "add"],
+             ["claude", "plugin", "marketplace", "add"], ["claude", "plugin", "install"]],
+            [command[:4] if "marketplace" in command else command[:3] for command in expected],
+        )
+        self.assertEqual(expected, self.fenced_commands(self.readme))
 
     def test_explorer_images_are_readable_repository_owned_pngs(self) -> None:
         examples = self.section("See the whole change")
@@ -160,12 +187,14 @@ class PublicOnboardingTests(unittest.TestCase):
         "technical-communication.md": (
             "5/10",
             ("## What the policy changes", "## What the policy protects", "## Using `harness-operator-brief`", "## Boundaries", "## Contributor checks"),
-            (".agents/skills/harness-operator-brief", ".agents/skills/harness-orient"),
+            ("plugins/verity-plane/common/skills/harness-operator-brief",
+             "plugins/verity-plane/common/skills/harness-orient",
+             "templates/repository/standard/.agents/skills/harness-operator-brief"),
         ),
         "agentic-execution-phase4-skills.md": (
             None,
             ("## What changed", "## Client boundary", "## Capability and compatibility", "## Host parity and stops", "## Package qualification"),
-            (".agents/skills/harness-orient",),
+            ("plugins/verity-plane/common/skills/harness-orient",),
         ),
     }
 
@@ -180,7 +209,7 @@ class PublicOnboardingTests(unittest.TestCase):
                 for heading in headings:
                     self.assertIn(f"\n{heading}\n", content)
                 for relative in shipped:
-                    self.assertTrue((REPOSITORY_ROOT / relative).exists(), relative)
+                    self.assertTrue((REPOSITORY_ROOT / relative / "SKILL.md").is_file(), relative)
                     self.assertIn(Path(relative).name, content)
 
     def test_release_links_and_public_project_routes_remain(self) -> None:

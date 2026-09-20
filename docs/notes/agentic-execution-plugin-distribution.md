@@ -1,5 +1,11 @@
 # Distributing SE Harness skills as a coding-agent plugin
 
+> **Historical exploration — status note added 2026-09-16.** The analysis below
+> predates the delivered Verity Plane plugin and retains its original assumptions.
+> For current use, follow the [marketplace installation guide](../../release/plugin-marketplace/README.md)
+> and [this checkout's skill-provider guidance](developing-se-harness.md#agent-skills-for-this-checkout).
+> The [plugin domain index](../engineering/plugin-integration/README.md) links the delivery records.
+
 <!-- Target expertise: 5/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
 > This is a non-authoritative exploration note. It approves nothing, authorizes

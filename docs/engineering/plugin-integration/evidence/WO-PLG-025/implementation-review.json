@@ -1,0 +1,386 @@
+{
+  "observed_at": "2026-09-16T13:01:51.268334+00:00",
+  "passed": true,
+  "baseline": "f05c478a29c39f94968fdc842a34c861d30a42ac",
+  "changed_paths": [
+    ".agents/skills/harness-operator-brief/SKILL.md",
+    ".agents/skills/harness-operator-brief/scripts/check_brief.py",
+    ".agents/skills/harness-operator-brief/skill-contract.json",
+    ".agents/skills/harness-orient/SKILL.md",
+    ".agents/skills/harness-orient/scripts/orient.py",
+    ".agents/skills/harness-orient/skill-contract.json",
+    ".claude/skills/harness-orient/SKILL.md",
+    ".engineering-harness.delegation.toml",
+    ".engineering-harness.lock",
+    "AGENTS.md",
+    "README.md",
+    "docs/engineering/harness-distribution/README.md",
+    "docs/engineering/harness-distribution/specifications/SPEC-DST-029.md",
+    "docs/engineering/plugin-integration/README.md",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-024/checks.json",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-024/readme-remediation.diff",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-024/scope-after-readme-repair.json",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-024/source-suite-readme-repair.log",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-024/source-suite.log",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-024/verification-preparation-readiness.command.json",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-024/verification-preparation-readiness.json",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-025/README.md",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-025/WO-PLG-025-handoff.md",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-025/checks.json",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-025/draft-review.json",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-025/handoff.json",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-025/implementation-review.json",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-025/implementation.md",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-025/source-suite.log",
+    "docs/engineering/plugin-integration/verification/VER-PLG-024.md",
+    "docs/engineering/plugin-integration/verification/VER-PLG-025.md",
+    "docs/engineering/plugin-integration/work-orders/WO-PLG-024.md",
+    "docs/engineering/plugin-integration/work-orders/WO-PLG-025.md",
+    "docs/notes/README.md",
+    "docs/notes/agentic-execution-phase4-skills.md",
+    "docs/notes/agentic-execution-plugin-distribution.md",
+    "docs/notes/codebase-kiss-work-orders-2026-09-13.md",
+    "docs/notes/delegation-class.md",
+    "docs/notes/developing-se-harness.md",
+    "docs/notes/technical-communication.md",
+    "tests/test_public_onboarding.py"
+  ],
+  "approved_scope_covers_complete_diff": true,
+  "deleted_paths": [
+    ".agents/skills/harness-operator-brief/SKILL.md",
+    ".agents/skills/harness-operator-brief/scripts/check_brief.py",
+    ".agents/skills/harness-operator-brief/skill-contract.json",
+    ".agents/skills/harness-orient/SKILL.md",
+    ".agents/skills/harness-orient/scripts/orient.py",
+    ".agents/skills/harness-orient/skill-contract.json",
+    ".claude/skills/harness-orient/SKILL.md",
+    ".engineering-harness.delegation.toml"
+  ],
+  "removed_git_blob_bytes": 61153,
+  "lock": {
+    "schema": 4,
+    "skill_ownership": {
+      "provider": "plugin"
+    },
+    "evaluator": {
+      "archive_name": "se_harness-0.18.0-py3-none-any.whl",
+      "archive_sha256": "a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54",
+      "payload_manifest": "se-harness-installed-payload-v1",
+      "payload_sha256": "cf28e03f21a0e474af8c415499c69193ab2a20e08a95c0ad3514758a84cff54d",
+      "version": "0.18.0"
+    },
+    "other_values_unchanged": true
+  },
+  "readme_reviewed_bytes_preserved": true,
+  "managed_agents_fragment_preserved": true,
+  "historical_bodies_preserved": [
+    "docs/notes/agentic-execution-plugin-distribution.md",
+    "docs/notes/codebase-kiss-work-orders-2026-09-13.md",
+    "docs/notes/agentic-execution-phase4-skills.md"
+  ],
+  "old_wo_body_scope_events_preserved": true,
+  "old_ver_bytes_match_original_portability_fixture": true,
+  "original_evidence_hashes_preserved": [
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/checks.json",
+      "bytes": 65731,
+      "sha256": "e31a26f73e1161dff73baa143a07398db6af099f7968cd47d8d65bb23452df89"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/readme-remediation.diff",
+      "bytes": 409,
+      "sha256": "06bda0bbe1df25b1a3078fb2c72cb59993ad1c573dae6cee38c7a878756e7d95"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+      "bytes": 8811,
+      "sha256": "c7c051396b89268ee5f970fd2abdaf9def9febf6509ddeaae12ec572ca183cf8"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/scope-after-readme-repair.json",
+      "bytes": 13437,
+      "sha256": "bc9b18a4d0f09a1def052dc52fd3db2b4fdca1b8214346850f20a182943da7d9"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/source-suite-readme-repair.log",
+      "bytes": 17581,
+      "sha256": "8c0d5b25a135be7c60196e6227a1c6a877b7bee5f0f1a4a25f712e18ac63ee78"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/source-suite.log",
+      "bytes": 5254,
+      "sha256": "4ea389fb7ff0caae41c23a445022272893e5270ca1c90cd38d723993b5f52185"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/verification-preparation-readiness.command.json",
+      "bytes": 528,
+      "sha256": "d306691da8b8a444e98627f7d02768dc5546fda34273fd31834a16e234e5d0a7"
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-024/verification-preparation-readiness.json",
+      "bytes": 15827,
+      "sha256": "46e4864ee3ecae2124b367ed279f1444c790b2736b7eb1202cfc8b86fde45f75"
+    }
+  ],
+  "preserved_branches": {
+    "refs/remotes/origin/plugin-marketplace": "ed68b30c88043773be929540b7b10ae537957c2d",
+    "refs/heads/work/plugin-marketplace-publication": "192c422ae1d7465198276796defef10fb1f7332e"
+  },
+  "new_local_links": [
+    {
+      "source": "AGENTS.md",
+      "target": "docs/notes/developing-se-harness.md#agent-skills-for-this-checkout"
+    },
+    {
+      "source": "AGENTS.md",
+      "target": "release/plugin-marketplace/README.md"
+    },
+    {
+      "source": "README.md",
+      "target": "docs/notes/getting-started.md"
+    },
+    {
+      "source": "README.md",
+      "target": "docs/notes/harness-installation-and-upgrades.md"
+    },
+    {
+      "source": "docs/engineering/harness-distribution/README.md",
+      "target": "../plugin-integration/work-orders/WO-PLG-025.md"
+    },
+    {
+      "source": "docs/engineering/harness-distribution/README.md",
+      "target": "specifications/SPEC-DST-029.md"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/README.md",
+      "target": "../../notes/developing-se-harness.md#agent-skills-for-this-checkout"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/README.md",
+      "target": "../harness-distribution/specifications/SPEC-DST-029.md"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/README.md",
+      "target": "evidence/WO-PLG-024/README.md"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/README.md",
+      "target": "verification/VER-PLG-024.md"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/README.md",
+      "target": "verification/VER-PLG-025.md"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/README.md",
+      "target": "work-orders/WO-PLG-024.md"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/README.md",
+      "target": "work-orders/WO-PLG-025.md"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+      "target": "checks.json"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+      "target": "readme-remediation.diff"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+      "target": "scope-after-readme-repair.json"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+      "target": "source-suite-readme-repair.log"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+      "target": "source-suite.log"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+      "target": "verification-preparation-readiness.command.json"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-024/README.md",
+      "target": "verification-preparation-readiness.json"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-025/README.md",
+      "target": "WO-PLG-025-handoff.md"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-025/README.md",
+      "target": "draft-review.json"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-025/README.md",
+      "target": "implementation.md"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-025/WO-PLG-025-handoff.md",
+      "target": "checks.json"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-025/WO-PLG-025-handoff.md",
+      "target": "implementation-review.json"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-025/WO-PLG-025-handoff.md",
+      "target": "implementation.md"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-025/WO-PLG-025-handoff.md",
+      "target": "source-suite.log"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-025/implementation.md",
+      "target": "../WO-PLG-024/README.md"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-025/implementation.md",
+      "target": "../WO-PLG-024/checks.json"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-025/implementation.md",
+      "target": "checks.json"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-025/implementation.md",
+      "target": "implementation-review.json"
+    },
+    {
+      "source": "docs/engineering/plugin-integration/evidence/WO-PLG-025/implementation.md",
+      "target": "source-suite.log"
+    },
+    {
+      "source": "docs/notes/README.md",
+      "target": "../../release/plugin-marketplace/README.md"
+    },
+    {
+      "source": "docs/notes/agentic-execution-phase4-skills.md",
+      "target": "../../plugins/verity-plane/common/skills/harness-orient/SKILL.md"
+    },
+    {
+      "source": "docs/notes/agentic-execution-phase4-skills.md",
+      "target": "../../release/plugin-marketplace/README.md"
+    },
+    {
+      "source": "docs/notes/agentic-execution-phase4-skills.md",
+      "target": "developing-se-harness.md#agent-skills-for-this-checkout"
+    },
+    {
+      "source": "docs/notes/agentic-execution-plugin-distribution.md",
+      "target": "../../release/plugin-marketplace/README.md"
+    },
+    {
+      "source": "docs/notes/agentic-execution-plugin-distribution.md",
+      "target": "../engineering/plugin-integration/README.md"
+    },
+    {
+      "source": "docs/notes/agentic-execution-plugin-distribution.md",
+      "target": "developing-se-harness.md#agent-skills-for-this-checkout"
+    },
+    {
+      "source": "docs/notes/codebase-kiss-work-orders-2026-09-13.md",
+      "target": "../engineering/repository-harness-upgrade/work-orders/WO-HUP-019.md"
+    },
+    {
+      "source": "docs/notes/codebase-kiss-work-orders-2026-09-13.md",
+      "target": "developing-se-harness.md"
+    },
+    {
+      "source": "docs/notes/delegation-class.md",
+      "target": "../engineering/DECISION_RIGHTS.md#approved-execution"
+    },
+    {
+      "source": "docs/notes/delegation-class.md",
+      "target": "../engineering/WORKFLOW.md#approved-execution"
+    },
+    {
+      "source": "docs/notes/developing-se-harness.md",
+      "target": "../../release/plugin-marketplace/README.md"
+    },
+    {
+      "source": "docs/notes/developing-se-harness.md",
+      "target": "delegation-class.md"
+    },
+    {
+      "source": "docs/notes/developing-se-harness.md",
+      "target": "plugin-installation-guide.md"
+    },
+    {
+      "source": "docs/notes/technical-communication.md",
+      "target": "../../plugins/verity-plane/common/skills/harness-operator-brief/SKILL.md"
+    },
+    {
+      "source": "docs/notes/technical-communication.md",
+      "target": "../../plugins/verity-plane/common/skills/harness-orient/SKILL.md"
+    },
+    {
+      "source": "docs/notes/technical-communication.md",
+      "target": "../../templates/repository/standard/.agents/skills/harness-operator-brief/SKILL.md"
+    },
+    {
+      "source": "docs/notes/technical-communication.md",
+      "target": "developing-se-harness.md#agent-skills-for-this-checkout"
+    }
+  ],
+  "reuse": {
+    "reused": [
+      "migration",
+      "portability/restoration/repeat-switch",
+      "native discovery"
+    ],
+    "source_template_plugin_release_files_unchanged_from_baseline": 128,
+    "released_payload_checked_again": true,
+    "installed_replacement_files_unchanged": true,
+    "disposable_native_package_files_unchanged": {
+      "codex": 24,
+      "claude": 24
+    },
+    "previous_hosts": [
+      {
+        "host": "codex",
+        "version": "codex-cli 0.154.0-alpha.6.2",
+        "discovered_skills": [
+          "change",
+          "evidence",
+          "harness-orient",
+          "setup"
+        ],
+        "package_files_matching_previous_acceptance": 24,
+        "passed": true
+      },
+      {
+        "host": "claude",
+        "version": "2.1.269 (Claude Code)",
+        "discovered_skills": [
+          "change",
+          "evidence",
+          "harness-orient",
+          "setup",
+          "harness-operator-brief"
+        ],
+        "package_files_matching_previous_acceptance": 24,
+        "passed": true
+      }
+    ],
+    "retained_limits": {
+      "runtime_and_discovery_inputs_identical": true,
+      "compared_files": 21,
+      "other_differences": "Installed package README lacks the later setup appendix, LICENSE differs only by line endings, and assembly-inventory.json is absent. Full package equality was not established or required for this file-only adoption.",
+      "native_discovery": "Both native disposable-profile probes passed; their complete 24-file packages match the retained acceptance. The actual migration replacement has identical manifest, skills, setup and wheel."
+    },
+    "new_host_execution_claimed": false
+  },
+  "review": [
+    "Existing tests and guides implement the approved onboarding contract without a new framework.",
+    "Native commands require four expected routes; linked harness examples require init and doctor before parser checks.",
+    "Missing shipped SKILL.md files remain failures; repository root copies are no longer prerequisites.",
+    "The previous 12 failures remain in WO-PLG-024 evidence; focused corrected checks pass. Full regression acceptance is reported separately."
+  ]
+}

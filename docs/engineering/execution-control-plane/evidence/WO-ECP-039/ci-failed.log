@@ -1,0 +1,169 @@
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	﻿2026-09-16T16:00:09.1756140Z ##[group]Run # WO-ECP-010 (REQ-ECP-012, ECP-PRD-008): the successor's own upgrade --apply
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1757609Z [36;1m# WO-ECP-010 (REQ-ECP-012, ECP-PRD-008): the successor's own upgrade --apply[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1758598Z [36;1m# against a throwaway export whose lock is the released predecessor's, judged[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1759535Z [36;1m# by both evaluators' doctor and by the resulting lock. No per-release[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1760403Z [36;1m# fixture, no network inside the rehearsal, no write to this checkout.[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1761449Z [36;1m$predecessorPython = Join-Path (Join-Path 'D:\a\_temp' 'predecessor-env') 'Scripts/python.exe'[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1762632Z [36;1m$successorPython = Join-Path (Join-Path 'D:\a\_temp' 'successor-env') 'Scripts/python.exe'[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1763444Z [36;1m$first = Join-Path 'D:\a\_temp' 'rehearsal-result-1'[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1764009Z [36;1m$second = Join-Path 'D:\a\_temp' 'rehearsal-result-2'[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1765380Z [36;1mpython -m repository_tools.upgrade_rehearsal --repository . `[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1766127Z [36;1m  --predecessor-python $predecessorPython --successor-python $successorPython --output $first --workspace $env:RUNNER_TEMP --timings[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1767127Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'first upgrade rehearsal failed' }[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1767610Z [36;1mpython -m repository_tools.upgrade_rehearsal --repository . `[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1768344Z [36;1m  --predecessor-python $predecessorPython --successor-python $successorPython --output $second --workspace $env:RUNNER_TEMP --timings[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1769081Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'second upgrade rehearsal failed' }[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1769755Z [36;1m$firstResult = Get-Content -Raw -LiteralPath (Join-Path $first 'upgrade-rehearsal-result.json') | ConvertFrom-Json[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1770589Z [36;1m$secondResult = Get-Content -Raw -LiteralPath (Join-Path $second 'upgrade-rehearsal-result.json') | ConvertFrom-Json[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1771428Z [36;1mif ($firstResult.semantic_sha256 -ne $secondResult.semantic_sha256) { throw 'upgrade rehearsal replay digest differs' }[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1772290Z [36;1mif ($firstResult.overall_result -ne 'pass' -or $secondResult.overall_result -ne 'pass') { throw 'upgrade rehearsal did not pass' }[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1841643Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1841999Z env:
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1842183Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1842643Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1843161Z   REHEARSAL_HEAD_SHA: 7268011f19753bf7d5a42b9bc829c3ea33f682aa
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1843481Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1843681Z   PYTHONPATH: 
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1843949Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1844396Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.11.9\x64/lib/pkgconfig
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1844844Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1845237Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1845632Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.11.9\x64
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.1845941Z ##[endgroup]
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.5963730Z upgrade timing: start replay
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:09.5983521Z upgrade timing: start git-archive
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:12.1286759Z upgrade timing: end git-archive: 2.530203s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:12.1297305Z upgrade timing: start archive-extraction
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:20.6526613Z upgrade timing: end archive-extraction: 8.522768s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:20.6537193Z upgrade timing: start git-init
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:20.6940612Z upgrade timing: end git-init: 0.040245s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:20.6950635Z upgrade timing: start git-config-maintenance
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:20.7242023Z upgrade timing: end git-config-maintenance: 0.029059s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:20.7251713Z upgrade timing: start git-config-gc
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:20.7624186Z upgrade timing: end git-config-gc: 0.036750s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:20.7708357Z upgrade timing: start git-config-autocrlf
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:20.8274180Z upgrade timing: end git-config-autocrlf: 0.056518s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:20.8284169Z upgrade timing: start git-config-email
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:20.8650515Z upgrade timing: end git-config-email: 0.036505s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:20.8663716Z upgrade timing: start git-config-name
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:20.8959570Z upgrade timing: end git-config-name: 0.029521s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:20.8970192Z upgrade timing: start git-config-signing
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:20.9251546Z upgrade timing: end git-config-signing: 0.028048s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:20.9262559Z upgrade timing: start git-add
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:32.0285137Z upgrade timing: end git-add: 11.101974s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:32.0296231Z upgrade timing: start git-commit
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:33.5105708Z upgrade timing: end git-commit: 1.480842s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:33.5117213Z upgrade timing: start git-storage-paths
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:33.5409460Z upgrade timing: end git-storage-paths: 0.029122s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:33.5533722Z upgrade timing: start predecessor-version
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:33.7445142Z upgrade timing: end predecessor-version: 0.191054s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:33.7457159Z upgrade timing: start successor-version
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:33.9288699Z upgrade timing: end successor-version: 0.183059s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:33.9302610Z upgrade timing: start predecessor-doctor-before
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:35.9824827Z upgrade timing: end predecessor-doctor-before: 2.052097s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:35.9837959Z upgrade timing: start successor-upgrade-plan
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:36.2049044Z upgrade timing: end successor-upgrade-plan: 0.221007s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:36.2062781Z upgrade timing: start successor-upgrade-apply
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:36.5658180Z upgrade timing: end successor-upgrade-apply: 0.359342s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:36.5670404Z upgrade timing: start successor-doctor-after
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:38.6130068Z upgrade timing: end successor-doctor-after: 2.045831s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:38.6143785Z upgrade timing: start successor-validate-after
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:42.3335250Z upgrade timing: end successor-validate-after: 3.718986s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:42.3349602Z upgrade timing: start predecessor-doctor-after
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:44.3394903Z upgrade timing: end predecessor-doctor-after: 2.004391s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:44.3412819Z upgrade timing: start scratch-cleanup
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:47.6618350Z upgrade timing: end scratch-cleanup: 3.320414s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:47.6631141Z upgrade timing: end replay: 38.066316s (finished)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:47.6645140Z upgrade rehearsal: FAIL (0.18.0 -> 0.19.0)
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:47.6645501Z failure: the resulting lock is schema 4, not 3
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:47.9165334Z [31;1mException: [0mD:\a\_temp\cfcc3852-0fe4-4de0-be1b-cdba078d37c3.ps1:12[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:47.9166216Z [31;1m[0m[36;1mLine |[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:47.9167245Z [31;1m[0m[36;1m[36;1m  12 | [0m if ($LASTEXITCODE -ne 0) { [36;1mthrow 'first upgrade rehearsal failed'[0m }[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:47.9168677Z [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:47.9169922Z [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mfirst upgrade rehearsal failed[0m
+Upgrade rehearsal (Windows)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:47.9521753Z ##[error]Process completed with exit code 1.
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	﻿2026-09-16T15:59:55.5791426Z ##[group]Run # WO-ECP-010 (REQ-ECP-012, ECP-PRD-008): the successor's own upgrade --apply
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5792009Z [36;1m# WO-ECP-010 (REQ-ECP-012, ECP-PRD-008): the successor's own upgrade --apply[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5792483Z [36;1m# against a throwaway export whose lock is the released predecessor's, judged[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5792900Z [36;1m# by both evaluators' doctor and by the resulting lock. No per-release[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5794326Z [36;1m# fixture, no network inside the rehearsal, no write to this checkout.[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5794811Z [36;1m$predecessorPython = Join-Path (Join-Path '/home/runner/work/_temp' 'predecessor-env') 'bin/python'[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5795351Z [36;1m$successorPython = Join-Path (Join-Path '/home/runner/work/_temp' 'successor-env') 'bin/python'[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5795788Z [36;1m$first = Join-Path '/home/runner/work/_temp' 'rehearsal-result-1'[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5796322Z [36;1m$second = Join-Path '/home/runner/work/_temp' 'rehearsal-result-2'[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5796727Z [36;1mpython -m repository_tools.upgrade_rehearsal --repository . `[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5797283Z [36;1m  --predecessor-python $predecessorPython --successor-python $successorPython --output $first --workspace $env:RUNNER_TEMP --timings[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5797843Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'first upgrade rehearsal failed' }[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5798202Z [36;1mpython -m repository_tools.upgrade_rehearsal --repository . `[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5798732Z [36;1m  --predecessor-python $predecessorPython --successor-python $successorPython --output $second --workspace $env:RUNNER_TEMP --timings[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5799275Z [36;1mif ($LASTEXITCODE -ne 0) { throw 'second upgrade rehearsal failed' }[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5799787Z [36;1m$firstResult = Get-Content -Raw -LiteralPath (Join-Path $first 'upgrade-rehearsal-result.json') | ConvertFrom-Json[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5800409Z [36;1m$secondResult = Get-Content -Raw -LiteralPath (Join-Path $second 'upgrade-rehearsal-result.json') | ConvertFrom-Json[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5801044Z [36;1mif ($firstResult.semantic_sha256 -ne $secondResult.semantic_sha256) { throw 'upgrade rehearsal replay digest differs' }[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5801691Z [36;1mif ($firstResult.overall_result -ne 'pass' -or $secondResult.overall_result -ne 'pass') { throw 'upgrade rehearsal did not pass' }[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5837506Z shell: /usr/bin/pwsh -command ". '{0}'"
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5837762Z env:
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5837936Z   PREDECESSOR_VERSION: 0.18.0
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5838287Z   PREDECESSOR_WHEEL_SHA256: a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5838703Z   REHEARSAL_HEAD_SHA: 7268011f19753bf7d5a42b9bc829c3ea33f682aa
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5838969Z   PYTHONNOUSERSITE: 1
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5839150Z   PYTHONPATH: 
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5839369Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5839709Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5840052Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5840351Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5840647Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5840966Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:55.5841229Z ##[endgroup]
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:56.1950699Z upgrade timing: start replay
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:56.1955556Z upgrade timing: start git-archive
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:56.9521137Z upgrade timing: end git-archive: 0.756430s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:56.9622021Z upgrade timing: start archive-extraction
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:58.9761233Z upgrade timing: end archive-extraction: 2.013832s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:58.9766292Z upgrade timing: start git-init
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:58.9800010Z upgrade timing: end git-init: 0.003352s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:58.9804071Z upgrade timing: start git-config-maintenance
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:58.9820830Z upgrade timing: end git-config-maintenance: 0.001664s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:58.9825587Z upgrade timing: start git-config-gc
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:58.9841621Z upgrade timing: end git-config-gc: 0.001579s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:58.9845531Z upgrade timing: start git-config-autocrlf
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:58.9861585Z upgrade timing: end git-config-autocrlf: 0.001588s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:58.9865615Z upgrade timing: start git-config-email
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:58.9881731Z upgrade timing: end git-config-email: 0.001578s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:58.9885920Z upgrade timing: start git-config-name
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:58.9901843Z upgrade timing: end git-config-name: 0.001579s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:58.9906124Z upgrade timing: start git-config-signing
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:58.9922392Z upgrade timing: end git-config-signing: 0.001606s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T15:59:58.9926780Z upgrade timing: start git-add
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:03.6624617Z upgrade timing: end git-add: 4.669672s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:03.6629944Z upgrade timing: start git-commit
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:03.8963400Z upgrade timing: end git-commit: 0.233231s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:03.9000728Z upgrade timing: start git-storage-paths
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:03.9019414Z upgrade timing: end git-storage-paths: 0.001862s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:03.9080444Z upgrade timing: start predecessor-version
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:04.0071558Z upgrade timing: end predecessor-version: 0.099005s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:04.0077036Z upgrade timing: start successor-version
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:04.1070401Z upgrade timing: end successor-version: 0.099205s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:04.1076739Z upgrade timing: start predecessor-doctor-before
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:04.8153643Z upgrade timing: end predecessor-doctor-before: 0.707573s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:04.8160015Z upgrade timing: start successor-upgrade-plan
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:04.9242557Z upgrade timing: end successor-upgrade-plan: 0.108180s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:04.9249703Z upgrade timing: start successor-upgrade-apply
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:05.1235353Z upgrade timing: end successor-upgrade-apply: 0.198459s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:05.1241001Z upgrade timing: start successor-doctor-after
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:05.8141929Z upgrade timing: end successor-doctor-after: 0.690015s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:05.8148591Z upgrade timing: start successor-validate-after
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:06.9540383Z upgrade timing: end successor-validate-after: 1.139060s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:07.0698896Z upgrade timing: start predecessor-doctor-after
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:07.7514427Z upgrade timing: end predecessor-doctor-after: 0.681560s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:07.7522100Z upgrade timing: start scratch-cleanup
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:08.1525059Z upgrade timing: end scratch-cleanup: 0.400124s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:08.1530680Z upgrade timing: end replay: 11.958029s (finished)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:08.1537056Z upgrade rehearsal: FAIL (0.18.0 -> 0.19.0)
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:08.1537506Z failure: the resulting lock is schema 4, not 3
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:08.4711399Z [31;1mException: [0m/home/runner/work/_temp/5b9fedff-853c-47fc-81cc-5cabe3d94678.ps1:12[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:08.4711909Z [31;1m[0m[36;1mLine |[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:08.4712361Z [31;1m[0m[36;1m[36;1m  12 | [0m if ($LASTEXITCODE -ne 0) { [36;1mthrow 'first upgrade rehearsal failed'[0m }[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:08.4713110Z [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:08.4713956Z [31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mfirst upgrade rehearsal failed[0m
+Upgrade rehearsal (Linux)	Rehearse the real predecessor-to-successor upgrade twice	2026-09-16T16:00:08.5069410Z ##[error]Process completed with exit code 1.

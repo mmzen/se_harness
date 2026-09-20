@@ -39,8 +39,14 @@ weaker requirement or a changed command.
 
 ## Using `harness-operator-brief`
 
-The installed portable core is
-`.agents/skills/harness-operator-brief/`. Invoke it by exact name and supply:
+This checkout uses the Verity Plane plugin installed in the selected agent host.
+The tracked shared sources are
+[`harness-operator-brief`](../../plugins/verity-plane/common/skills/harness-operator-brief/SKILL.md)
+and [`harness-orient`](../../plugins/verity-plane/common/skills/harness-orient/SKILL.md).
+Default repository-owned installations receive the
+[brief skill template](../../templates/repository/standard/.agents/skills/harness-operator-brief/SKILL.md)
+under `.agents/skills/`. See [contributor setup and restoration](developing-se-harness.md#agent-skills-for-this-checkout)
+for the provider choice. Invoke `harness-operator-brief` explicitly and supply:
 
 - the repository and exact released-evaluator identity;
 - one requested explanation and its non-effects;
@@ -77,9 +83,10 @@ communication rules. The skill and this note only explain and apply that policy.
 
 When changing this capability:
 
-1. keep the canonical policy and skill under
+1. keep the supplied policy and repository skill templates under
    `templates/repository/standard/`;
-2. preserve the existing four skill cores byte for byte;
+2. keep the shared plugin skills under `plugins/verity-plane/common/skills/`
+   consistent with their approved behavior;
 3. test installation and upgrade in isolated targets;
 4. run protected-byte, activation, offline, package, and no-write tests; and
 5. review representative output for unchanged actor, condition, force, scope,

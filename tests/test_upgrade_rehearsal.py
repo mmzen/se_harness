@@ -24,6 +24,7 @@ from tests.git_support import git
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 PREDECESSOR = Path("/env/predecessor/bin/python")
 SUCCESSOR = Path("/env/successor/bin/python")
+ABSENT = object()
 
 
 @dataclass
@@ -43,7 +44,8 @@ class FakeEvaluators:
     successor_doctor_after: int = 0
     validate_lines: list[str] = field(default_factory=list)
     four_number_summary: bool = False
-    lock_schema: int = 3
+    lock_schema: object = 3
+    lock_ownership: object = ABSENT
     lock_version: str | None = None
     lock_payload: str | None = None
     calls: list[list[str]] = field(default_factory=list)
@@ -74,6 +76,9 @@ class FakeEvaluators:
             lock_path = copy / ".engineering-harness.lock"
             lock = json.loads(lock_path.read_text(encoding="utf-8"))
             lock["schema"] = self.lock_schema
+            lock.pop("skill_ownership", None)
+            if self.lock_ownership is not ABSENT:
+                lock["skill_ownership"] = self.lock_ownership
             lock["tool_version"] = self.lock_version or self.successor_version
             lock["evaluator"] = {
                 "version": self.lock_version or self.successor_version,
@@ -125,6 +130,68 @@ class UpgradeRehearsalTests(unittest.TestCase):
             self.repository, predecessor_python=PREDECESSOR, successor_python=SUCCESSOR,
             output=self.output, runner=fake, workspace=self.workspace,
         )
+
+    def set_initial_ownership(self, schema, ownership=ABSENT) -> None:
+        path = self.repository / ".engineering-harness.lock"
+        lock = json.loads(path.read_text(encoding="utf-8"))
+        lock["schema"] = schema
+        lock.pop("skill_ownership", None)
+        if ownership is not ABSENT:
+            lock["skill_ownership"] = ownership
+        path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
+        git(self.repository, "add", str(path))
+        git(self.repository, "commit", "-q", "--allow-empty", "-m", "initial ownership")
+
+    def test_plugin_ownership_passes_with_current_or_earlier_binding_metadata(self) -> None:
+        current = {"provider": "plugin"}
+        earlier = {"provider": "plugin", "plugin_id": "verity-plane", "version": "0.1.0"}
+        for index, (initial, resulting) in enumerate(((current, current), (earlier, earlier), (earlier, current))):
+            with self.subTest(initial=initial, resulting=resulting):
+                self.set_initial_ownership(4, initial)
+                self.output = self.output.with_name(f"plugin-{index}")
+                before = (self.repository / ".engineering-harness.lock").read_bytes()
+                result = self.run_rehearsal(FakeEvaluators(lock_schema=4, lock_ownership=resulting))
+                self.assertEqual("pass", result["overall_result"], result["failure"])
+                self.assertEqual(4, result["lock"]["schema"])
+                self.assertTrue(all(step["outcome"] == "pass" for step in result["steps"]))
+                self.assertEqual(6, len(result["steps"]))
+                self.assertEqual(result["lock"]["canonical_sha256"], result["semantic_sha256"])
+                self.assertEqual(before, (self.repository / ".engineering-harness.lock").read_bytes())
+                self.assertEqual("", git(self.repository, "status", "--porcelain"))
+
+    def test_unsupported_ownership_fails_for_initial_and_resulting_locks(self) -> None:
+        cases = ((2, ABSENT), (5, ABSENT), (3.0, ABSENT), ("4", {"provider": "plugin"}),
+                 (True, ABSENT), (None, ABSENT), (3, {"provider": "plugin"}), (3, None),
+                 (4, ABSENT), (4, None), (4, []), (4, {}), (4, {"provider": "repository"}))
+        for stage in ("exported", "resulting"):
+            for index, (schema, ownership) in enumerate(cases):
+                with self.subTest(stage=stage, schema=schema, ownership=ownership):
+                    self.output = self.output.with_name(f"invalid-{stage}-{index}")
+                    if stage == "exported":
+                        self.set_initial_ownership(schema, ownership)
+                        fake = FakeEvaluators()
+                    else:
+                        self.set_initial_ownership(3)
+                        fake = FakeEvaluators(lock_schema=schema, lock_ownership=ownership)
+                    result = self.run_rehearsal(fake)
+                    self.assertEqual("fail", result["overall_result"])
+                    self.assertIn(f"the {stage} lock has unsupported ownership", result["failure"])
+                    self.assertIsNone(result["semantic_sha256"])
+                    if stage == "exported":
+                        self.assertFalse(fake.upgraded)
+
+    def test_an_upgrade_cannot_switch_ownership_in_either_direction(self) -> None:
+        for initial_schema, initial_owner, result_schema, result_owner in (
+            (3, ABSENT, 4, {"provider": "plugin"}),
+            (4, {"provider": "plugin"}, 3, ABSENT),
+        ):
+            with self.subTest(initial_schema=initial_schema):
+                self.set_initial_ownership(initial_schema, initial_owner)
+                self.output = self.output.with_name(f"switch-{initial_schema}")
+                result = self.run_rehearsal(FakeEvaluators(lock_schema=result_schema, lock_ownership=result_owner))
+                self.assertEqual("fail", result["overall_result"])
+                self.assertIn("changes skill ownership", result["failure"])
+                self.assertIsNone(result["semantic_sha256"])
 
     def test_the_real_handover_passes_and_binds_the_resulting_lock(self) -> None:
         fake = FakeEvaluators(validate_lines=["- [E012] [governance] docs/engineering/x/verification-records/VREC-X-001.md: evaluator evidence differs from the standard lock"])
@@ -191,17 +258,18 @@ class UpgradeRehearsalTests(unittest.TestCase):
         self.assertIn("beyond E012", result["failure"])
         self.assertIn("E010", result["failure"])
 
-    def test_the_lock_must_end_at_schema_three_naming_the_successor(self) -> None:
-        for knob, expected in (
-            ({"lock_schema": 2}, "schema 2"),
-            ({"lock_version": "0.7.1"}, "not the successor 0.8.0"),
-            ({"lock_payload": "c" * 64}, "installed-payload digest"),
-        ):
-            with self.subTest(knob=knob):
-                shutil.rmtree(self.output, ignore_errors=True)
-                result = self.run_rehearsal(FakeEvaluators(**knob))
-                self.assertEqual("fail", result["overall_result"])
-                self.assertIn(expected, result["failure"])
+    def test_both_ownership_modes_must_name_the_successor_and_its_payload(self) -> None:
+        for schema, ownership in ((3, ABSENT), (4, {"provider": "plugin"})):
+            self.set_initial_ownership(schema, ownership)
+            for knob, expected in (
+                ({"lock_version": "0.7.1"}, "not the successor 0.8.0"),
+                ({"lock_payload": "c" * 64}, "installed-payload digest"),
+            ):
+                with self.subTest(schema=schema, knob=knob):
+                    self.output = self.output.with_name(f"identity-{schema}-{next(iter(knob))}")
+                    result = self.run_rehearsal(FakeEvaluators(lock_schema=schema, lock_ownership=ownership, **knob))
+                    self.assertEqual("fail", result["overall_result"])
+                    self.assertIn(expected, result["failure"])
 
     def test_same_version_is_no_handover(self) -> None:
         result = self.run_rehearsal(FakeEvaluators(successor_version="0.7.1"))

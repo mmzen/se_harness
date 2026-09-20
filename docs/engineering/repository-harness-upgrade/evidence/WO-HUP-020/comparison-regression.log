@@ -1,0 +1,8 @@
+test_ownership_switch_does_not_excuse_other_lock_changes (tests.test_governor_transition.GovernorTransitionTests.test_ownership_switch_does_not_excuse_other_lock_changes) ... ok
+test_incomplete_seed_switches_and_same_provider_edits_are_rejected (tests.test_governor_transition.GovernorTransitionTests.test_incomplete_seed_switches_and_same_provider_edits_are_rejected) ... ok
+test_schema_and_provider_errors_are_rejected (tests.test_governor_transition.GovernorTransitionTests.test_schema_and_provider_errors_are_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 285.331s
+
+OK

@@ -1,0 +1,62 @@
+{
+  "observed_at": "2026-09-16T16:23:31.972692+00:00",
+  "baseline": "7268011f19753bf7d5a42b9bc829c3ea33f682aa",
+  "reviewed_artifact_sha256": {
+    "docs/engineering/execution-control-plane/specifications/SPEC-ECP-025.md": "5fb747ca2bb885570c46de8124be5eae787e6ebb2c0a617355db25fabe95f0c0",
+    "docs/engineering/execution-control-plane/verification/VER-ECP-027.md": "13b9827b2ca1db801ff1eae828693aae4ecb20ccee75eeceb19e6fb6179a5d1e",
+    "docs/engineering/execution-control-plane/work-orders/WO-ECP-039.md": "df418ee693c62109a3b455f651ca7ecda38ec51aa25e65f18ae60d1830a53c80"
+  },
+  "refs_checked": 63,
+  "retained_evidence_files_unchanged": 29,
+  "graph": {
+    "valid": true,
+    "artifact_count": 1665,
+    "error_count": 0,
+    "warning_count": 49
+  },
+  "active_architectures_addressing_requirement": [],
+  "ci_observations": {
+    "linux": {
+      "failure": "the resulting lock is schema 4, not 3",
+      "passed_steps": 6,
+      "lock": {
+        "canonical_sha256": "62882e246417e780120ddf5c706e0c5a5d41d6425270707e9276cfac92f756f3",
+        "evaluator": {
+          "payload_sha256": "7e82e7256b64fcf514c8da97dd0a94328216929efd3dbe3415705bdef304588b",
+          "version": "0.19.0"
+        },
+        "schema": 4,
+        "tool_version": "0.19.0"
+      },
+      "sha256": "1232fd3a57b28458a41887e35452a3f47f452e586e2d85de2a1ad26e3e39db89"
+    },
+    "windows": {
+      "failure": "the resulting lock is schema 4, not 3",
+      "passed_steps": 6,
+      "lock": {
+        "canonical_sha256": "62882e246417e780120ddf5c706e0c5a5d41d6425270707e9276cfac92f756f3",
+        "evaluator": {
+          "payload_sha256": "7e82e7256b64fcf514c8da97dd0a94328216929efd3dbe3415705bdef304588b",
+          "version": "0.19.0"
+        },
+        "schema": 4,
+        "tool_version": "0.19.0"
+      },
+      "sha256": "997a31d928d0c835534f14e9d6121006331b8671f21e7635a837fade26e58f61"
+    }
+  },
+  "changed_paths": [
+    "docs/engineering/execution-control-plane/README.md",
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-039/ci-checks.json",
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-039/ci-failed.log",
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-039/ci-linux-failure.json",
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-039/ci-windows-failure.json",
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-039/diagnosis.md",
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-039/prior-ci-failed.log",
+    "docs/engineering/execution-control-plane/specifications/SPEC-ECP-025.md",
+    "docs/engineering/execution-control-plane/verification/VER-ECP-027.md",
+    "docs/engineering/execution-control-plane/work-orders/WO-ECP-039.md"
+  ],
+  "review": "Bounded existing assertion and fixture; preserves evaluator and integrity checks; validates ownership preservation; no new workflow, dependency or generalized parser. Aggregate preparation location is explicitly permitted prospectively. All implementation waits for the three selected draft approvals.",
+  "state": "draft; no implementation or approval applied"
+}
