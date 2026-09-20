@@ -33,11 +33,11 @@ class PublicOnboardingTests(unittest.TestCase):
         cls.getting_started = (REPOSITORY_ROOT / "docs/notes/getting-started.md").read_text(encoding="utf-8")
         cls.installation = (REPOSITORY_ROOT / "docs/notes/harness-installation-and-upgrades.md").read_text(encoding="utf-8")
 
-    def section(self, heading: str, content: str | None = None) -> str:
+    def section(self, heading: str, content: str | None = None, *, level: int = 2) -> str:
         content = self.readme if content is None else content
-        marker = f"## {heading}\n"
+        marker = f"{'#' * level} {heading}\n"
         self.assertEqual(1, content.count(marker), f"expected one {marker.strip()} section")
-        return content.split(marker, 1)[1].split("\n## ", 1)[0]
+        return re.split(rf"\n#{{1,{level}}} ", content.split(marker, 1)[1], maxsplit=1)[0]
 
     @staticmethod
     def fenced_commands(content: str) -> list[list[str]]:
@@ -129,7 +129,8 @@ class PublicOnboardingTests(unittest.TestCase):
              ["claude", "plugin", "marketplace", "add"], ["claude", "plugin", "install"]],
             [command[:4] if "marketplace" in command else command[:3] for command in expected],
         )
-        self.assertEqual(expected, self.fenced_commands(self.readme))
+        plugin = self.section("With Codex or Claude Code", level=3)
+        self.assertEqual(expected, self.fenced_commands(plugin))
 
     def test_explorer_images_are_readable_repository_owned_pngs(self) -> None:
         examples = self.section("See the whole change")

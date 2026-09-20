@@ -1,0 +1,46 @@
+[
+  {
+    "check": "doctor",
+    "exit": 0,
+    "blocked_by": []
+  },
+  {
+    "check": "graph",
+    "exit": 0,
+    "blocked_by": []
+  },
+  {
+    "check": "review",
+    "exit": 0,
+    "blocked_by": []
+  },
+  {
+    "check": "scope",
+    "exit": 0,
+    "blocked_by": []
+  },
+  {
+    "check": "distribution",
+    "command": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "scripts/validate_release_distributions.py",
+      "--root",
+      "."
+    ],
+    "exit": 0
+  },
+  {
+    "check": "cli",
+    "command": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-m",
+      "se_harness",
+      "--help"
+    ],
+    "exit": 0
+  },
+  {
+    "check": "git diff --check",
+    "exit": 0
+  }
+]

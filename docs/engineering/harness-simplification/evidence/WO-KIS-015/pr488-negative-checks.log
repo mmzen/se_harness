@@ -1,0 +1,18 @@
+[
+  {
+    "case": "plugin and separate CLI routes",
+    "result": "passed"
+  },
+  {
+    "case": "missing native install",
+    "result": "rejected as expected"
+  },
+  {
+    "case": "wrong marketplace ref",
+    "result": "rejected as expected"
+  },
+  {
+    "case": "missing plugin subsection",
+    "result": "rejected as expected"
+  }
+]

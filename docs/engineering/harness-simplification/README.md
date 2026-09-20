@@ -66,5 +66,12 @@ WO-KIS-009 is implemented. Repository integration remains pending in PR #476.
 requirement/specification/verification/work-order chains for truthful evidence,
 complete handoff checks, owner-controlled integration, and consistent agent
 guidance. On 20 September, the owner approved all 16 records and selected
-owner review in DEC-KIS-001. All four work orders are approved; implementation
-has not started. Earlier approvals and historical evidence remain unchanged.
+owner review in DEC-KIS-001. WO-KIS-014 replaces WO-KIS-010 and is implemented;
+VREC-KIS-014 records owner acceptance of its candidate. The separate README
+repair WO-DOC-017 is implemented with verified VREC-DOC-009. WO-KIS-011,
+WO-KIS-012 and WO-KIS-013 remain approved and unstarted.
+
+[WO-KIS-015](work-orders/WO-KIS-015.md) covers the PR #488 integration correction:
+carry the original approved planning package in the complete PR scope and keep
+plugin-command checks separate from the accepted README's CLI examples.
+Earlier approvals and historical evidence remain unchanged.

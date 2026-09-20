@@ -1,0 +1,25 @@
+{
+  "label": "windows-full",
+  "command": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "scripts/run_tests.py",
+    "--workers",
+    "4",
+    "--scale",
+    "full",
+    "--timings",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\work\\pr488-windows-timings.json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\se_harness-20260916-200124-c3056d0b",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "exit": 0,
+  "seconds": 156.53,
+  "inputs": {
+    "head": "cab250f802a20e6932156ac174aa3e42f321831f",
+    "working_inputs": {
+      "docs/engineering/harness-simplification/README.md": "e120b526b4f01f67bc8af8e79a282d06cd21b5add9a2e4dc5b7bef7626e83716",
+      "docs/engineering/harness-simplification/recovery-2026-09-19.md": "6a75df6a316d603b98dcfd2779b78823b5ea4a624bee4834dead590638fd17d9",
+      "tests/test_public_onboarding.py": "d7d8595b590b72edc6f9cb9fd0452100d1465d02086f2dd2e85bf0daa90d8142"
+    }
+  }
+}

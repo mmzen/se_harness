@@ -1,0 +1,9 @@
+{
+  "command": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-c",
+    "\nimport json\nfrom tests.test_public_onboarding import PublicOnboardingTests\nC=PublicOnboardingTests\nC.setUpClass()\noriginal=C.readme\nobserved=[]\nfor label,content,should_fail in [\n    (\"plugin and separate CLI routes\",original,False),\n    (\"missing native install\",original.replace(\"codex plugin add verity-plane@se-harness\\n\",\"\"),True),\n    (\"wrong marketplace ref\",original.replace(\"--ref plugin-marketplace\",\"--ref incorrect\"),True),\n    (\"missing plugin subsection\",original.replace(\"### With Codex or Claude Code\",\"### Missing native setup\"),True),\n]:\n    C.readme=content\n    case=C(\"test_native_commands_match_the_published_git_installation_routes\")\n    try:\n        case.test_native_commands_match_the_published_git_installation_routes()\n        failed=False\n    except AssertionError:\n        failed=True\n    assert failed==should_fail,(label,failed,should_fail)\n    observed.append({\"case\":label,\"result\":\"rejected as expected\" if failed else \"passed\"})\nC.readme=original\nprint(json.dumps(observed,indent=2))\n"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-16\\reclone-https-github-com-mmzen-se\\se_harness-20260916-200124-c3056d0b",
+  "exit": 0
+}
