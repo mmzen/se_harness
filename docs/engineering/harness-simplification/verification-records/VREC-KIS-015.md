@@ -2,7 +2,7 @@
 id = "VREC-KIS-015"
 type = "verification_record"
 title = "Verification candidate for WO-KIS-015"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-20"
 updated = "2026-09-20"
@@ -16,9 +16,18 @@ evidence_paths = ["README.md", "docs/engineering/harness-simplification/evidence
 evaluator_evidence_path = "docs/engineering/harness-simplification/evidence/VREC-KIS-015-evaluator.json"
 evaluator_evidence_sha256 = "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f"
 
+verified_at = "2026-09-20T16:29:34Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-KIS-015"]
 conforms_to = ["VER-KIS-008"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-20T16:29:34Z"
+decided_by = "assurance-owner"
+reason = "On 2026-09-20 the owner explicitly stated \"i accept VREC-KIS-015\" after the record and updated report were presented. Record that supplied assurance-owner acceptance for VREC-KIS-015 and exact candidate 94195afbbd69c85ec846611524376dc9d98eec32. Reviewed ready-record SHA-256: 42c51c9d82da93c6b648ea4ff9b8423252cb948d7569a3723efbbac281647091. All retained evidence digests were compared immediately before application. Codex records the owner decision under the selected owner-review policy; it claims no independent review. Only this VREC changes state; no merge, release or publication is authorized by this decision."
 +++
 
 # Verification Record Candidate
