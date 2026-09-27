@@ -2,7 +2,7 @@
 id = "VREC-IAR-012"
 type = "verification_record"
 title = "Verification candidate for 3 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-27"
 updated = "2026-09-27"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/instruction-architecture/acceptance/progress
 evaluator_evidence_path = "docs/engineering/instruction-architecture/evidence/VREC-IAR-012-evaluator.json"
 evaluator_evidence_sha256 = "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f"
 
+verified_at = "2026-09-27T17:15:51Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-IAR-013", "WO-IAR-014", "WO-IAR-016"]
 conforms_to = ["VER-IAR-014"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-27T17:15:51Z"
+decided_by = "assurance-owner"
+reason = "Human user decision: I verify VREC-IAR-012. Codex applies the recorded assurance-owner decision for WO-IAR-013, WO-IAR-014 and WO-IAR-016 at candidate 772c9101e81aacc6929832d5dcc3813c4a5abfa2, with the retained closeout evidence and documented platform and native-host limitations. Only this verification record changes state; related work orders remain unchanged. This decision grants no merge, release, publication or repository adoption authority."
 +++
 
 # Verification Record Candidate
