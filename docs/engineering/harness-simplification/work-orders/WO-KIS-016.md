@@ -2,7 +2,7 @@
 id = "WO-KIS-016"
 type = "work_order"
 title = "Recognize work approval under the human decision-maker identity"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-27"
 updated = "2026-09-27"
@@ -47,6 +47,13 @@ to = "in_progress"
 decided_at = "2026-09-27T21:06:11Z"
 decided_by = "Codex agent"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Start the approved bounded correction under the human-confirmed scope, assurance and compatibility encoding."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-27T21:20:09Z"
+decided_by = "Codex agent"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Completed the approved identity correction and focused tests. The corrected full Windows suite passed 1131 tests with 16 skips at b09556ad4234c7001a4647c5522c84b5db1bc0e9; 129 initial focused tests and 32 diagnostic-correction tests passed. Released validation, doctor, review preflight and complete Git-derived handoff passed. Earlier diagnostic-index and operational failures are retained with their corrections. Hosted CI remains for integration. This records implementation completion only, not verification acceptance, release or adoption."
 +++
 
 # Recognize work approval under the human decision-maker identity

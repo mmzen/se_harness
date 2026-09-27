@@ -1,0 +1,35 @@
+{
+  "tested_commit": "b09556ad4234c7001a4647c5522c84b5db1bc0e9",
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-B",
+    "scripts/run_tests.py",
+    "--scale",
+    "full",
+    "--workers",
+    "4"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\identityfix-verification",
+  "git_settings": [
+    [
+      "safe.directory",
+      "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness"
+    ],
+    [
+      "safe.directory",
+      "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/identityfix-verification"
+    ],
+    [
+      "core.autocrlf",
+      "false"
+    ],
+    [
+      "core.longpaths",
+      "true"
+    ]
+  ],
+  "exit_code": 0,
+  "seconds": 192.49,
+  "stdout": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-z203mznq\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-z203mznq\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nWEX_SCALE artifacts=100 validation=0.123109s focus=0.287683s plan=0.224569s\nWEX_SCALE artifacts=500 validation=0.560900s focus=0.717860s plan=1.068612s\nWEX_SCALE artifacts=1000 validation=1.105316s focus=1.278220s plan=2.032776s\ndocs/notes/diagnostic-codes.md matches the source\n----------------------------------------------------------------------\nRan 1131 tests in 190.650s (175 classes, 4 workers)\n\nOK (skipped=16)\n",
+  "stderr": "--workers must be at least 1\n"
+}

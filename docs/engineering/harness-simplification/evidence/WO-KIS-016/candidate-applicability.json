@@ -1,0 +1,16 @@
+{
+  "tested_commit": "b09556ad4234c7001a4647c5522c84b5db1bc0e9",
+  "tested_source_full_suite": {
+    "tests": 1131,
+    "skipped": 16,
+    "exit_code": 0
+  },
+  "tracked_changes_since_tested_commit": [
+    "docs/engineering/harness-simplification/work-orders/WO-KIS-016.md"
+  ],
+  "allowed_later_changes": [
+    "docs/engineering/harness-simplification/work-orders/WO-KIS-016.md",
+    "docs/engineering/harness-simplification/evidence/WO-KIS-016/"
+  ],
+  "assessment": "Runtime source, tests, candidate note, governing definitions and VER-KIS-009 are unchanged from the passed full-suite commit. Later changes only retain evidence and the evaluator-applied WO completion. The candidate is the next clean commit containing this assessment; VREC-KIS-016 will bind its full SHA."
+}
