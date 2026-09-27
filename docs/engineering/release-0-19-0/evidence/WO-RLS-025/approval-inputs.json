@@ -1,0 +1,31 @@
+{
+  "artifacts": [
+    {
+      "id": "REL-SEH-030",
+      "path": "docs/engineering/release-0-19-0/release/REL-SEH-030.md",
+      "status": "draft",
+      "sha256": "934eb56d4683ed37c1a264d5916cd07345cf6e22726eacb86784339e2d8eff3b"
+    },
+    {
+      "id": "WO-RLS-025",
+      "path": "docs/engineering/release-0-19-0/work-orders/WO-RLS-025.md",
+      "status": "draft",
+      "sha256": "625632d99db3733f1a4ac593cacf82168836acff58336f7215718fc7fd23df96"
+    }
+  ],
+  "base_commit": "fbc47dfdcff2b355ee973acb5be09bcdf7cefe78",
+  "evaluator_python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+  "evaluator_version": "0.18.0",
+  "validation": {
+    "valid": true,
+    "errors": 0,
+    "unrelated_maintenance_warnings": 50
+  },
+  "doctor_exit_code": 0,
+  "approval_preview": {
+    "compliance": "pass",
+    "applied": false,
+    "result_sha256": "43d8600be9e96705a17c28ff6685832a7c3d1978c6772f10f03e9953b248e462"
+  },
+  "linked_files_exist": true
+}

@@ -21,16 +21,19 @@
     "skills/setup/SKILL.md": "plugins/verity-plane/common/skills/setup/SKILL.md",
     "skills/setup/references/environment.md": "plugins/verity-plane/common/skills/setup/references/environment.md",
     "skills/setup/references/maintenance.md": "plugins/verity-plane/common/skills/setup/references/maintenance.md",
-    "skills/setup/references/repository.md": "plugins/verity-plane/common/skills/setup/references/repository.md"
+    "skills/setup/references/repository.md": "plugins/verity-plane/common/skills/setup/references/repository.md",
+    "scripts/inject_instructions.py": "plugins/verity-plane/common/scripts/inject_instructions.py"
   },
   "hosts": {
     "codex": {
       ".codex-plugin/plugin.json": "plugins/verity-plane/codex/.codex-plugin/plugin.json",
-      "README.md": "plugins/verity-plane/codex/README.md"
+      "README.md": "plugins/verity-plane/codex/README.md",
+      "hooks/hooks.json": "plugins/verity-plane/codex/hooks/hooks.json"
     },
     "claude": {
       ".claude-plugin/plugin.json": "plugins/verity-plane/claude-code/.claude-plugin/plugin.json",
-      "README.md": "plugins/verity-plane/claude-code/README.md"
+      "README.md": "plugins/verity-plane/claude-code/README.md",
+      "hooks/hooks.json": "plugins/verity-plane/claude-code/hooks/hooks.json"
     }
   }
 }
