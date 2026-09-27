@@ -2,7 +2,7 @@
 id = "VREC-HUP-021"
 type = "verification_record"
 title = "Verification candidate for 2 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-27"
 updated = "2026-09-27"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/repository-harness-upgrade/evidence/WO-HUP-0
 evaluator_evidence_path = "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-021-evaluator.json"
 evaluator_evidence_sha256 = "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2"
 
+verified_at = "2026-09-27T20:47:34Z"
+verified_by = "Requesting human in this conversation (assurance owner)"
 [relations]
 verifies_work_order = ["WO-HUP-021", "WO-HUP-023"]
 conforms_to = ["VER-HUP-021"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-27T20:47:34Z"
+decided_by = "Requesting human in this conversation (assurance owner)"
+reason = "The requesting human, acting as accountable assurance owner, stated: I verify VREC-HUP-021. This decision accepts the retained evidence for candidate 05aa49a4a639a028b2122ee6fb64a16e58b6273c covering WO-HUP-021 and WO-HUP-023. Codex applies that human decision; it makes no assurance decision itself."
 +++
 
 # Verification Record Candidate
