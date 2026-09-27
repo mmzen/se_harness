@@ -1,0 +1,268 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {
+    "commit": "06b27bef95ee78a7880b87de2d7aa4870379fbef",
+    "git_object_format": "sha1"
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "VREC-KIS-016",
+    "artifacts": [
+      "VREC-KIS-016"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-KIS-002",
+      "ARCH-KIS-002",
+      "CAP-KIS-003",
+      "INT-KIS-003",
+      "REQ-KIS-009",
+      "SPEC-KIS-003",
+      "VER-KIS-009",
+      "WO-KIS-016"
+    ],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "transition",
+    "workflow_rule_id": "WFL-VREC-DECIDE",
+    "procedure_id": "PROC-VREC-DECIDE",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-ASSURANCE-DECISION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4A-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:VREC-KIS-016"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G4A-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G4A-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:VREC-KIS-016"
+              }
+            ],
+            "message": "No open decision blocks VREC-KIS-016."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "VREC-KIS-016"
+              }
+            ],
+            "message": "ready -> verified is a declared lifecycle edge for VREC-KIS-016."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "06519a6cb01a71a442edb85d1cb65efc1461a46285f50262e75da4d292e7efef",
+    "change_set_source": "arguments"
+  },
+  "procedure": {
+    "id": "PROC-VREC-DECIDE",
+    "current_step": "STEP-VREC-DECIDE",
+    "steps": [
+      {
+        "id": "STEP-VREC-DECIDE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-ASSURANCE-DECISION"
+        ],
+        "effects": [
+          "Permits an explicit decision on VREC-KIS-016 only."
+        ],
+        "non_effects": [
+          "Referenced work orders remain unchanged."
+        ],
+        "decision_right": "DR-VREC-DECIDE",
+        "role": "assurance-owner",
+        "artifact": "VREC-KIS-016",
+        "decision": "whether the retained evidence verifies the exact candidate",
+        "outcomes": [
+          "verified",
+          "reject",
+          "supersede"
+        ],
+        "response": "I verify VREC-KIS-016 as assurance owner."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "VREC-KIS-016",
+        "status": "ready"
+      }
+    ],
+    "after": [
+      {
+        "id": "VREC-KIS-016",
+        "status": "ready"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 52
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated transition compliance for VREC-KIS-016."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "VREC-KIS-016 is ready."
+    ],
+    "decision_required": {
+      "decision_right": "DR-VREC-DECIDE",
+      "role": "assurance-owner",
+      "artifact": "VREC-KIS-016",
+      "decision": "whether the retained evidence verifies the exact candidate",
+      "outcomes": [
+        "verified",
+        "reject",
+        "supersede"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-VREC-DECIDE",
+      "step_id": "STEP-VREC-DECIDE",
+      "action": "whether the retained evidence verifies the exact candidate"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "I verify VREC-KIS-016 as assurance owner."
+    },
+    "alternatives": [
+      "Use complete alternative procedure PROC-VREC-REJECT.",
+      "Use complete alternative procedure PROC-VREC-SUPERSEDE."
+    ]
+  },
+  "instruction_discovery": {
+    "schema": "se-harness-instruction-discovery-v1",
+    "status": "available",
+    "agent_instructions": {
+      "entry": {
+        "file": "ENGINEERING_HARNESS.md",
+        "heading": "read-by-task"
+      },
+      "shared_prerequisites": [
+        {
+          "file": "docs/engineering/harness/COMMUNICATION.md",
+          "heading": "communication",
+          "when": "Before the first eligible English explanation in a fresh context."
+        },
+        {
+          "file": "docs/engineering/harness/RESULTS.md",
+          "heading": "report-a-lifecycle-result",
+          "when": "Before reporting a lifecycle result."
+        }
+      ],
+      "procedure": {
+        "id": "PROC-VREC-DECIDE",
+        "location": {
+          "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+          "heading": "obtain-the-humans-verification-decision"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "decision-rights",
+            "when": "Before obtaining or applying an accountable decision."
+          }
+        ],
+        "steps": {
+          "STEP-VREC-DECIDE": {
+            "location": {
+              "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+              "heading": "obtain-the-humans-verification-decision"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision."
+              }
+            ]
+          }
+        }
+      },
+      "current_step": {
+        "id": "STEP-VREC-DECIDE",
+        "location": {
+          "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+          "heading": "obtain-the-humans-verification-decision"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "decision-rights",
+            "when": "Before obtaining or applying an accountable decision."
+          }
+        ]
+      }
+    },
+    "formal_artifact_ids": [
+      "ADR-KIS-002",
+      "ARCH-KIS-002",
+      "CAP-KIS-003",
+      "INT-KIS-003",
+      "REQ-KIS-009",
+      "SPEC-KIS-003",
+      "VER-KIS-009",
+      "VREC-KIS-016",
+      "WO-KIS-016"
+    ],
+    "evaluator_only_inputs": [
+      "docs/engineering/WORKFLOW.json",
+      "docs/engineering/QUALITY_GATES.json"
+    ]
+  },
+  "result_sha256": "090d5856b1503f75c7f9d598f23fc20619ebaf832c35d3adc5cc125074264aa8"
+}
