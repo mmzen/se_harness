@@ -1,0 +1,188 @@
+{
+  "invocation": {
+    "args": [
+      "check",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "--artifact",
+      "VREC-RLO-010",
+      "--checkpoint",
+      "pre-action",
+      "--json"
+    ],
+    "exit_code": 0,
+    "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+  },
+  "result": {
+    "schema": "se-harness-workflow-result-v2",
+    "digest_format": "machine-fields-v1",
+    "candidate": {
+      "commit": "ca5a52cdbb1dc0563c4b67c0a7f116f070ce472e",
+      "git_object_format": "sha1"
+    },
+    "operation": {
+      "kind": "check",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "VREC-RLO-010",
+      "artifacts": [
+        "VREC-RLO-010"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [
+        "ADR-RLO-001",
+        "ARCH-RLO-001",
+        "CAP-RLO-001",
+        "INT-RLO-001",
+        "REQ-RLO-001",
+        "SPEC-PLG-021",
+        "SPEC-RLO-001",
+        "VER-RLO-007",
+        "WO-RLO-010"
+      ],
+      "dependencies": [],
+      "declared_paths": [],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "pre-action",
+      "workflow_rule_id": "WFL-VREC-DECIDE",
+      "procedure_id": "PROC-VREC-DECIDE",
+      "status": "pass",
+      "gates": [
+        {
+          "id": "QG-G4-ASSURANCE-DECISION",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGP-G4A-GRAPH",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "formal-graph:VREC-RLO-010"
+                }
+              ],
+              "message": "The selected formal graph is valid."
+            },
+            {
+              "id": "QGP-G4A-INTEGRITY",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "repository-integrity:pre-action"
+                }
+              ],
+              "message": "No repository-integrity blocker prevents selected evaluation."
+            },
+            {
+              "id": "QGP-G4A-DECISION",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "decision-register:VREC-RLO-010"
+                }
+              ],
+              "message": "No open decision blocks VREC-RLO-010."
+            }
+          ]
+        }
+      ],
+      "formal_snapshot_sha256": "ad532930e9abef4ba1ac7592020a8b91dab234ec56d68351223b55a20bea6051",
+      "change_set_source": "arguments"
+    },
+    "procedure": {
+      "id": "PROC-VREC-DECIDE",
+      "current_step": "STEP-VREC-DECIDE",
+      "steps": [
+        {
+          "id": "STEP-VREC-DECIDE",
+          "kind": "decision",
+          "gate_ids": [
+            "QG-G4-ASSURANCE-DECISION"
+          ],
+          "effects": [
+            "Permits an explicit decision on VREC-RLO-010 only."
+          ],
+          "non_effects": [
+            "Referenced work orders remain unchanged."
+          ],
+          "decision_right": "DR-VREC-DECIDE",
+          "role": "assurance-owner",
+          "artifact": "VREC-RLO-010",
+          "decision": "whether the retained evidence verifies the exact candidate",
+          "outcomes": [
+            "verified",
+            "reject",
+            "supersede"
+          ],
+          "response": "I verify VREC-RLO-010 as assurance owner."
+        }
+      ]
+    },
+    "state": {
+      "before": [
+        {
+          "id": "VREC-RLO-010",
+          "status": "ready"
+        }
+      ],
+      "after": [
+        {
+          "id": "VREC-RLO-010",
+          "status": "ready"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 52
+    },
+    "mutation": {
+      "writes": []
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Evaluated pre-action compliance for VREC-RLO-010."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "VREC-RLO-010 is ready."
+      ],
+      "decision_required": {
+        "decision_right": "DR-VREC-DECIDE",
+        "role": "assurance-owner",
+        "artifact": "VREC-RLO-010",
+        "decision": "whether the retained evidence verifies the exact candidate",
+        "outcomes": [
+          "verified",
+          "reject",
+          "supersede"
+        ]
+      },
+      "next": {
+        "procedure_id": "PROC-VREC-DECIDE",
+        "step_id": "STEP-VREC-DECIDE",
+        "action": "whether the retained evidence verifies the exact candidate"
+      },
+      "command_or_response": {
+        "kind": "response",
+        "value": "I verify VREC-RLO-010 as assurance owner."
+      },
+      "alternatives": [
+        "Use complete alternative procedure PROC-VREC-REJECT.",
+        "Use complete alternative procedure PROC-VREC-SUPERSEDE."
+      ]
+    },
+    "result_sha256": "380df781ce9006081f5bf2c39f6b63bfa28dbbf3c2453700a24e7673607c4cdb"
+  }
+}
