@@ -1,0 +1,36 @@
+{
+  "baseline": "523ff825773e05c970c041ecee5c22bfabedaa3f",
+  "implementation_commit": "8ac5a9d0aafb4f15b54f8907b081eb2c84e25d33",
+  "changes": [
+    "M\t.github/scripts/publish_dashboard.py",
+    "A\tdocs/engineering/release-orchestration/evidence/WO-RLO-010/approval-inputs.json",
+    "A\tdocs/engineering/release-orchestration/evidence/WO-RLO-010/baseline-regressions.json",
+    "A\tdocs/engineering/release-orchestration/evidence/WO-RLO-010/focused-tests.json",
+    "A\tdocs/engineering/release-orchestration/evidence/WO-RLO-010/r019-postmerge-publication-diagnosis.json",
+    "A\tdocs/engineering/release-orchestration/evidence/WO-RLO-010/r019-publication-correction-proposal.md",
+    "A\tdocs/engineering/release-orchestration/evidence/WO-RLO-010/r019-publication-plan-inspection.json",
+    "A\tdocs/engineering/release-orchestration/verification/VER-RLO-007.md",
+    "A\tdocs/engineering/release-orchestration/work-orders/WO-RLO-010.md",
+    "M\ttests/test_dashboard_publication.py",
+    "M\ttests/test_release_orchestration.py"
+  ],
+  "preserved_blob_ids": {
+    ".engineering-harness.lock": [
+      "3582c67c403307a96ad5a526f288b061a3292c1b",
+      "3582c67c403307a96ad5a526f288b061a3292c1b"
+    ],
+    "docs/engineering/release-0-19-0/releases/RLS-SEH-028.md": [
+      "587a72c39be866e54a857a099a1361f0a544d70c",
+      "587a72c39be866e54a857a099a1361f0a544d70c"
+    ],
+    "docs/engineering/release-0-19-0/verification-records/VREC-SEH-028.md": [
+      "96b1db7860d46d534ce63be135367ca96460621b",
+      "96b1db7860d46d534ce63be135367ca96460621b"
+    ],
+    "docs/engineering/release-0-19-0/evidence/RLS-SEH-028-evaluator.json": [
+      "1bff71be138d08615bb8f1df8ed42078b894349e",
+      "1bff71be138d08615bb8f1df8ed42078b894349e"
+    ]
+  },
+  "review": "Two callers share one local reader for lock schema and plugin provider. Existing evaluator equality, sidecar digest, integrity and provenance checks remain. No candidate package import, plugin access, new policy or workflow change. Four new regression methods cover the actual failure and refusal boundaries; existing suites remain intact."
+}

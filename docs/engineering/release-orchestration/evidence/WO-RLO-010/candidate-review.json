@@ -1,0 +1,37 @@
+{
+  "tested_implementation": "8ac5a9d0aafb4f15b54f8907b081eb2c84e25d33",
+  "unchanged_tracked_executable_bytes": true,
+  "changes_after_tests": [
+    "docs/engineering/release-orchestration/work-orders/WO-RLO-010.md"
+  ],
+  "new_evidence_paths": [
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/REPORT.md",
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/WO-RLO-010-handoff.md",
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/completion-invocation.json",
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/completion-result.json",
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/doctor-result.json",
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/evaluator-descriptor.json",
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/full-source-tests.json",
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/handoff-passed.json",
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/handoff-result.json",
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/handoff.json",
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/preservation-review.json",
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/pubfix-approval-apply.invocation.json",
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/pubfix-approval-apply.stdout",
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/pubfix-start-apply.invocation.json",
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/pubfix-start-apply.stdout",
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/read-only-checks.json",
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/release-plan.json",
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/review-preflight-result.json",
+    "docs/engineering/release-orchestration/evidence/WO-RLO-010/validate-result.json"
+  ],
+  "vrec_id": "VREC-RLO-010",
+  "existing_ref_collision": false,
+  "scope_base": "523ff825773e05c970c041ecee5c22bfabedaa3f",
+  "completion": "implemented; handoff and completion gates pass",
+  "limits": [
+    "Hosted CI has not run for this correction.",
+    "Human verification has not been applied.",
+    "No release candidate, archive, historical record or root lock has changed."
+  ]
+}

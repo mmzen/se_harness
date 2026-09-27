@@ -2,7 +2,7 @@
 id = "WO-RLO-010"
 type = "work_order"
 title = "Support plugin-owned evaluator locks in publication readers"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-27"
 updated = "2026-09-27"
@@ -44,6 +44,13 @@ to = "in_progress"
 decided_at = "2026-09-27T19:07:41Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex starts the human-approved publication lock compatibility correction under DR-015 after released start preflight passes."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-27T19:18:41Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Codex records scoped implementation completion under the human-approved WO and DR-015. The 65 focused tests, full 1126-test suite with 16 existing skips, frozen-main readers, repository checks and bound handoff passed. No candidate verification or publication is applied."
 +++
 
 # Support plugin-owned evaluator locks in publication readers
