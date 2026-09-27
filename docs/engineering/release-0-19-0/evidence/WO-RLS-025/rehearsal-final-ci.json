@@ -1,0 +1,86 @@
+{
+  "candidate": "30d4dba2a088c4f83756c1241b76cdab40f796bd",
+  "url": "https://github.com/mmzen/se_harness/actions/runs/36339047270",
+  "event": "workflow_dispatch",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "Select release rehearsals",
+      "conclusion": "success"
+    },
+    {
+      "name": "Rehearse the qualification of the release record / Qualify and replay (release-record)",
+      "conclusion": "success"
+    },
+    {
+      "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+      "conclusion": "success"
+    },
+    {
+      "name": "Publication rehearsal",
+      "conclusion": "success"
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "qualification-release-record-RLS-SEH-027",
+      "id": 10938720525,
+      "expires_at": "2026-10-11T18:03:54Z",
+      "expired": false
+    },
+    {
+      "name": "qualification-candidate-30d4dba2a088c4f83756c1241b76cdab40f796bd",
+      "id": 10938476576,
+      "expires_at": "2026-10-11T18:01:42Z",
+      "expired": false
+    },
+    {
+      "name": "release-bundle-RLS-SEH-027",
+      "id": 10938268626,
+      "expires_at": "2026-09-29T18:03:55Z",
+      "expired": false
+    }
+  ],
+  "download_command": [
+    "gh",
+    "run",
+    "download",
+    "36339047270",
+    "--repo",
+    "mmzen/se_harness",
+    "--name",
+    "ARTIFACT_NAME"
+  ],
+  "downloaded_files": [
+    {
+      "path": "qualification-candidate-30d4dba2a088c4f83756c1241b76cdab40f796bd/release-build-replay.json",
+      "sha256": "94aaa751b52ab8f9356c99becb1d494f04010e5bc85633e71a8c707472a3e3e4",
+      "bytes": 7097
+    },
+    {
+      "path": "qualification-release-record-RLS-SEH-027/complete-candidate-qualification.json",
+      "sha256": "0e1b9f86775112a61b0909eb8be60cf3b0b8eb9b18d49f292495cb18b181733a",
+      "bytes": 1519
+    },
+    {
+      "path": "qualification-release-record-RLS-SEH-027/qualification.json",
+      "sha256": "c87f926f9b72ac07cf00c753104e79fbdf1e05cf73854819685cee32f3609324",
+      "bytes": 446
+    },
+    {
+      "path": "qualification-release-record-RLS-SEH-027/release-build-replay.json",
+      "sha256": "cd178f7691b00dfb7a02461f5357f60c9228129bdf1baa9664166e7a9a99f143",
+      "bytes": 7256
+    },
+    {
+      "path": "qualification-release-record-RLS-SEH-027/release-test-evidence/output.log",
+      "sha256": "c06cd8505bcd01a60b5cba5c78010663f9b133f133038541c97f664aa5b2fc35",
+      "bytes": 1589
+    },
+    {
+      "path": "qualification-release-record-RLS-SEH-027/release-test-evidence/summary.json",
+      "sha256": "a2cffa6e77eb63ea4209ce2ec6638461cf9da583fbc783a8d2082e1627490318",
+      "bytes": 2762
+    }
+  ]
+}

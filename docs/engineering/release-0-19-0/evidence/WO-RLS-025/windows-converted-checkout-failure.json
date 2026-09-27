@@ -1,0 +1,34 @@
+{
+  "candidate": "30d4dba2a088c4f83756c1241b76cdab40f796bd",
+  "working_tree": "clean",
+  "command": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-B",
+    "scripts/run_tests.py",
+    "--workers",
+    "4",
+    "--scale",
+    "full"
+  ],
+  "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-dwycyil_\\checkout",
+  "checker": {
+    "version": "0.19.0",
+    "origin": "C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-dwycyil_\\checkout\\se_harness\\__init__.py"
+  },
+  "started_at": "2026-09-27T18:12:25.365498+00:00",
+  "exit_code": 1,
+  "result": "fail",
+  "output_tail": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-h2w8vdry\\private\\verity-plane\\evaluator\\Scripts\\python.exe\r\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-h2w8vdry\\private\\verity-plane\\evaluator\\Scripts\\python.exe\r\n--workers must be at least 1\r\nWEX_SCALE artifacts=100 validation=0.110627s focus=0.263763s plan=0.213635s\r\nWEX_SCALE artifacts=500 validation=0.564835s focus=0.682282s plan=0.972985s\r\nWEX_SCALE artifacts=1000 validation=1.103182s focus=1.181715s plan=1.948298s\r\ndocs/notes/diagnostic-codes.md matches the source\r\n======================================================================\r\nERROR: test_installer.InstructionMigrationTests.test_recognized_fragments_preserve_all_owner_bytes (newline=b'\\r\\n')\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-dwycyil_\\checkout\\tests\\test_installer.py\", line 140, in test_recognized_fragments_preserve_all_owner_bytes\r\n    lock=self.apply()\r\n  File \"C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-dwycyil_\\checkout\\tests\\test_installer.py\", line 55, in apply\r\n    return installer.apply_changes(self.root,changes,lock,allow_updates=True,instruction_delivery_evidence=evidence,**kwargs)\r\n           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\mathi\\AppData\\Local\\Temp\\se-harness-candidate-dwycyil_\\checkout\\se_harness\\installer.py\", line 611, in apply_changes\r\n    raise HarnessError(\"installation has conflicts or customizations; no files were written\")\r\nse_harness.installer.HarnessError: installation has conflicts or customizations; no files were written\r\n\r\n----------------------------------------------------------------------\r\nRan 1122 tests in 203.337s (175 classes, 4 workers)\r\n\r\nFAILED (errors=1, skipped=16)\r\n",
+  "raw": {
+    "file": "output.log",
+    "bytes": 1932,
+    "artifact": "r019-final-local-source",
+    "repository": null,
+    "run_id": null,
+    "run_url": null,
+    "retention_days": 14,
+    "estimated_expiry": "2026-10-11T18:12:25.365498+00:00",
+    "availability": "local only",
+    "download_command": null
+  }
+}
