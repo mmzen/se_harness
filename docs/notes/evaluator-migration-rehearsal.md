@@ -20,6 +20,23 @@ It replaced the governance-migration rehearsal of 0.6.0 and 0.7.x — nine stage
 
 The result file `upgrade-rehearsal-result.json` records each step's exit code and output digests, the tolerated diagnostics, the resulting lock's identity, and `semantic_sha256`, the canonical `utf8-text-lf-v1` digest of that lock. The lane runs the rehearsal twice per platform and requires the digest to agree between the runs and between Linux and Windows.
 
+### Instruction retirement test inputs
+
+When the successor's JSON preview requires instruction-delivery evidence, the
+rehearsal first checks that applying without it refuses with the expected
+diagnostic and leaves every file and link in the disposable repository unchanged.
+It then creates an explicitly synthetic receipt and trace outside that export,
+using the installed successor's planning API to bind the planned entry. The real
+upgrade receives this test input through `--instruction-delivery-evidence`;
+all subsequent handover checks still run. A failed real upgrade still fails CI.
+
+The result labels this input `synthetic-fixture` and reports native host delivery
+as `not_assessed`. These fixtures are deleted with the temporary workspace and
+are not shipped or usable as observed adoption evidence. They test installer
+behavior, not native startup or compaction. Actual host qualification remains
+separate required evidence under `VER-IAR-014`; a passing rehearsal cannot
+satisfy that requirement. The production guard is unchanged (`WO-IAR-019`).
+
 ## Running it yourself
 
 Install the released predecessor and the successor candidate into two environments outside the checkout, then:

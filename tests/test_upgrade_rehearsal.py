@@ -9,6 +9,7 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 import unittest
 import unittest.mock
@@ -50,6 +51,13 @@ class FakeEvaluators:
     lock_payload: str | None = None
     calls: list[list[str]] = field(default_factory=list)
     upgraded: bool = False
+    delivery_required: object = ABSENT
+    refusal_code: int = 2
+    refusal_message: str = "harnessctl: legacy entry retirement requires --instruction-delivery-evidence; no files were written"
+    refusal_writes: bool = False
+    positive_upgrade_code: int = 0
+    fixture_code: int = 0
+    delivery_receipt: dict | None = None
 
     def __call__(self, argv, cwd) -> Completed:
         argv = [str(item) for item in argv]
@@ -57,6 +65,12 @@ class FakeEvaluators:
         if argv[0] == "git":
             completed = subprocess.run(argv, cwd=cwd, capture_output=True, text=True, check=False)
             return Completed(completed.returncode, completed.stdout, completed.stderr)
+        if argv[1:3] == ["-I", "-c"]:
+            if self.fixture_code:
+                return Completed(self.fixture_code, "", "fixture planning failed")
+            with unittest.mock.patch.object(sys, "argv", ["-c", *argv[4:]]):
+                exec(compile(argv[3], "<synthetic-delivery-fixture>", "exec"), {"__name__": "__main__"})
+            return Completed(0, "", "")
         python = Path(argv[0])
         version = self.predecessor_version if python == PREDECESSOR else self.successor_version
         command = argv[4]
@@ -70,8 +84,18 @@ class FakeEvaluators:
                 code = self.successor_doctor_after
             return Completed(code, "PASS lock\n" if code == 0 else "FAIL managed:x: changed\n", "")
         if command == "upgrade" and "--apply" not in argv:
-            return Completed(0, "summary: 1 files, 0 unchanged\n", "")
+            plan = {} if self.delivery_required is ABSENT else {"instruction_delivery_required": self.delivery_required}
+            return Completed(0, json.dumps(plan), "")
         if command == "upgrade":
+            if self.delivery_required is True and "--instruction-delivery-evidence" not in argv:
+                if self.refusal_writes:
+                    (copy / "unexpected-write").write_text("unexpected")
+                return Completed(self.refusal_code, "", self.refusal_message)
+            if self.positive_upgrade_code:
+                return Completed(self.positive_upgrade_code, "", "positive upgrade failed")
+            if "--instruction-delivery-evidence" in argv:
+                receipt = Path(argv[argv.index("--instruction-delivery-evidence") + 1])
+                self.delivery_receipt = json.loads(receipt.read_text(encoding="utf-8"))
             self.upgraded = True
             lock_path = copy / ".engineering-harness.lock"
             lock = json.loads(lock_path.read_text(encoding="utf-8"))
@@ -218,6 +242,52 @@ class UpgradeRehearsalTests(unittest.TestCase):
         result = self.run_rehearsal(FakeEvaluators(four_number_summary=True))
         self.assertEqual("pass", result["overall_result"], result["failure"])
         self.assertIn(("successor-validate-after", "pass"), [(step["id"], step["outcome"]) for step in result["steps"]])
+
+    def test_guarded_upgrade_uses_disposable_synthetic_input_and_denies_native_qualification(self) -> None:
+        fake = FakeEvaluators(delivery_required=True)
+        result = self.run_rehearsal(fake)
+        self.assertEqual("pass", result["overall_result"], result["failure"])
+        self.assertEqual({"input": "synthetic-fixture", "native_host_delivery": "not_assessed",
+                          "refusal_preserved_repository": True}, result["instruction_delivery"])
+        self.assertEqual(["predecessor-doctor-before", "successor-upgrade-plan", "successor-upgrade-without-delivery",
+                          "prepare-synthetic-delivery", "successor-upgrade-apply", "successor-doctor-after",
+                          "successor-validate-after", "predecessor-doctor-after"], [step["id"] for step in result["steps"]])
+        self.assertTrue(fake.delivery_receipt["test_fixture"])
+        self.assertEqual("not_assessed", fake.delivery_receipt["native_host_delivery"])
+        self.assertEqual("synthetic-fixture", fake.delivery_receipt["host_version"])
+        self.assertEqual(canonical_sha256((self.repository / "ENGINEERING_HARNESS.md").read_bytes()),
+                         fake.delivery_receipt["entry_sha256"])
+        self.assertEqual([], list(self.workspace.iterdir()))
+        self.assertEqual("", git(self.repository, "status", "--porcelain"))
+        self.assertEqual([upgrade_rehearsal.RESULT_NAME], [path.name for path in self.output.iterdir()])
+
+    def test_guarded_upgrade_keeps_refusal_fixture_and_positive_failures_visible(self) -> None:
+        for index, (knobs, expected) in enumerate((
+            ({"refusal_code": 0}, "expected failure"),
+            ({"refusal_code": 124}, "expected the missing-delivery refusal"),
+            ({"refusal_message": "another refusal"}, "expected the missing-delivery refusal"),
+            ({"refusal_writes": True}, "refusal changed"),
+            ({"fixture_code": 1}, "prepare-synthetic-delivery"),
+            ({"positive_upgrade_code": 1}, "successor-upgrade-apply"),
+        )):
+            with self.subTest(knobs=knobs):
+                self.output = self.output.with_name(f"guard-failure-{index}")
+                fake = FakeEvaluators(delivery_required=True, **knobs)
+                result = self.run_rehearsal(fake)
+                self.assertEqual("fail", result["overall_result"])
+                self.assertIn(expected, result["failure"])
+                self.assertIsNone(result["semantic_sha256"])
+                self.assertFalse(fake.upgraded)
+                self.assertEqual([], list(self.workspace.iterdir()))
+
+    def test_preview_flag_is_optional_but_must_be_boolean(self) -> None:
+        for index, flag in enumerate((ABSENT, False, "true", 1, None)):
+            with self.subTest(flag=flag):
+                self.output = self.output.with_name(f"preview-{index}")
+                result = self.run_rehearsal(FakeEvaluators(delivery_required=flag))
+                self.assertEqual("pass" if flag is ABSENT or flag is False else "fail", result["overall_result"])
+                self.assertEqual("none", result["instruction_delivery"]["input"])
+                self.assertEqual("not_assessed", result["instruction_delivery"]["native_host_delivery"])
 
     def test_maintenance_configuration_failure_stops_before_staging_and_is_measured(self) -> None:
         # WO-CIP-010 CLN03: a rejected safety setting cannot fall through to commit.

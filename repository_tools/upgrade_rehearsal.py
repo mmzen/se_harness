@@ -19,6 +19,10 @@ the resulting lock, the value two runs and two platforms must agree on. The
 module uses the standard library only, imports nothing from `se_harness`, and
 opens no network connection; both evaluators run with `-I` from their own
 environments with credential-bearing variables stripped.
+
+WO-IAR-019: guarded instruction retirement uses an explicitly synthetic receipt
+after a no-evidence refusal control. This tests the real installer transaction;
+native startup/compaction delivery is not assessed by this rehearsal.
 """
 
 from __future__ import annotations
@@ -44,6 +48,35 @@ RESULT_NAME = "upgrade-rehearsal-result.json"
 TIMING_NAME = "upgrade-rehearsal-timing.json"
 LOCK_NAME = ".engineering-harness.lock"
 TRANSACTION_EVIDENCE = "docs/engineering/evidence/upgrade-rehearsal-transaction.json"
+# Test-only input, created outside the exported repository and deleted with it.
+# Execute in the installed successor's isolated interpreter to reuse its plan.
+SYNTHETIC_DELIVERY_SCRIPT = r'''
+import hashlib, json, sys
+from pathlib import Path
+from se_harness import __version__
+from se_harness.installer import plan_install
+from se_harness.integrity import canonical_sha256
+
+target, receipt = (Path(value) for value in sys.argv[1:])
+changes, _ = plan_install(target, project_name=None, mode="upgrade")
+entry = next(change.desired for change in changes if change.path == "ENGINEERING_HARNESS.md")
+receipt.parent.mkdir()
+trace = receipt.parent / "synthetic-delivery.txt"
+trace.write_bytes(b"SYNTHETIC installer-test input. No native host event was observed.\n")
+entry_hash = canonical_sha256(entry)
+value = {
+    "schema": "se-harness-native-instruction-delivery-v1",
+    "test_fixture": True, "native_host_delivery": "not_assessed",
+    "repository": str(target.resolve()), "target_version": __version__,
+    "prior_lock_sha256": canonical_sha256((target / ".engineering-harness.lock").read_bytes()),
+    "entry_sha256": entry_hash, "host": "claude", "host_version": "synthetic-fixture",
+    "events": {event: {"origin": "native-host", "delivered_root_sha256": entry_hash,
+                       "trace": trace.name, "trace_sha256": hashlib.sha256(trace.read_bytes()).hexdigest()}
+               for event in ("startup", "compact")},
+}
+# The native-host discriminator is a simulated protocol value, not an observation.
+receipt.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
+'''
 #: The one validator error a root change legitimately produces: a `ready`
 #: record binds the evaluator identity of the lock it was prepared under.
 TOLERATED_ERROR = re.compile(r"^- \[E012\] .* evaluator evidence differs from the standard lock$")
@@ -229,6 +262,20 @@ def _evaluator(python: Path) -> list[str]:
     return [str(python), "-I", "-m", "se_harness"]
 
 
+def _snapshot(root: Path) -> dict[str, tuple[str, str]]:
+    """Compare all files and links, including Git metadata, without following links."""
+    result = {}
+    for path in root.rglob("*"):
+        name = path.relative_to(root).as_posix()
+        if path.is_symlink():
+            result[name] = ("link", os.readlink(path))
+        elif path.is_file():
+            result[name] = ("file", hashlib.sha256(path.read_bytes()).hexdigest())
+        elif path.is_dir():
+            result[name] = ("directory", "")
+    return result
+
+
 def _ownership(lock: dict[str, Any]) -> str | None:
     schema = lock.get("schema")
     if type(schema) is not int:
@@ -360,6 +407,7 @@ def _rehearse(repository, predecessor_python, successor_python, output, runner, 
             "semantic_sha256": None,
             "overall_result": "fail",
             "failure": None,
+            "instruction_delivery": {"input": "none", "native_host_delivery": "not_assessed"},
         }
         if predecessor_version == successor_version:
             failure = f"the predecessor and successor are the same version {successor_version}; there is no handover to rehearse"
@@ -372,12 +420,38 @@ def _rehearse(repository, predecessor_python, successor_python, output, runner, 
         if failure is None:
             step("predecessor-doctor-before", [*_evaluator(predecessor_python), "doctor", str(copy)], Path(scratch))
         if failure is None:
-            step("successor-upgrade-plan", [*_evaluator(successor_python), "upgrade", str(copy)], Path(scratch))
+            preview = step("successor-upgrade-plan", [*_evaluator(successor_python), "upgrade", str(copy), "--json"], Path(scratch))
+        delivery_arguments: list[str] = []
+        if failure is None:
+            try:
+                plan = json.loads(preview.stdout)
+                if not isinstance(plan, dict) or type(plan.get("instruction_delivery_required", False)) is not bool:
+                    raise ValueError("invalid instruction_delivery_required flag")
+            except ValueError as exc:
+                failure = f"successor-upgrade-plan: invalid JSON preview: {exc}"
+        if failure is None and plan.get("instruction_delivery_required", False):
+            before = _snapshot(copy)
+            refused = step("successor-upgrade-without-delivery",
+                           [*_evaluator(successor_python), "upgrade", str(copy), "--apply", "--json"],
+                           Path(scratch), expect="failure")
+            unchanged = before == _snapshot(copy)
+            result["instruction_delivery"]["refusal_preserved_repository"] = unchanged
+            if failure is None and (refused.exit_code != 2 or "requires --instruction-delivery-evidence" not in refused.stderr):
+                failure = "successor-upgrade-without-delivery: expected the missing-delivery refusal (exit 2)"
+            if failure is None and not unchanged:
+                failure = "successor-upgrade-without-delivery: the refusal changed the disposable repository"
+            if failure is None:
+                receipt = Path(scratch) / "synthetic-delivery" / "receipt.json"
+                step("prepare-synthetic-delivery",
+                     [str(successor_python), "-I", "-c", SYNTHETIC_DELIVERY_SCRIPT, str(copy), str(receipt)], Path(scratch))
+                if failure is None:
+                    result["instruction_delivery"]["input"] = "synthetic-fixture"
+                    delivery_arguments = ["--instruction-delivery-evidence", str(receipt)]
         if failure is None:
             (copy / TRANSACTION_EVIDENCE).parent.mkdir(parents=True, exist_ok=True)
             step(
                 "successor-upgrade-apply",
-                [*_evaluator(successor_python), "upgrade", str(copy), "--apply", "--evidence-output", TRANSACTION_EVIDENCE],
+                [*_evaluator(successor_python), "upgrade", str(copy), "--apply", "--evidence-output", TRANSACTION_EVIDENCE, *delivery_arguments],
                 Path(scratch),
             )
         if failure is None:
