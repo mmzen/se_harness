@@ -13,6 +13,7 @@ import sys
 from pathlib import Path
 
 from se_harness.integrity import IntegrityError, pretty_json_bytes, raw_sha256
+from se_harness.instruction_discovery import DiscoveryError
 from se_harness.workflow_contract import CHECKPOINT_ORDER, EVIDENCE_CHECKPOINTS
 from se_harness import __version__
 from se_harness.artifact_layout import create_artifact, scaffold_domain
@@ -1261,6 +1262,7 @@ def main(argv: list[str] | None = None) -> int:
         return int(args.handler(args))
     except (
         ContractError,
+        DiscoveryError,
         HarnessError,
         IntegrityError,
         ProcedureError,

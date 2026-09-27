@@ -1,0 +1,21 @@
+{
+  "args": [
+    "check",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--artifact",
+    "WO-IAR-014",
+    "--checkpoint",
+    "scope",
+    "--changed-file",
+    "se_harness/cli.py",
+    "--changed-file",
+    "tests/test_installer.py",
+    "--changed-file",
+    "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci",
+    "--change-set-complete",
+    "--json"
+  ],
+  "exit_code": 2,
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+}

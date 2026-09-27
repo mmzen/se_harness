@@ -1,12 +1,14 @@
 """Independent 0.18.0 instruction-retirement fixtures and transactional checks."""
 import json
 import hashlib
+import contextlib
+import io
 from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
 
-from se_harness import __version__, installer
+from se_harness import __version__, cli, installer
 from se_harness.integrity import canonical_sha256
 from se_harness.preflight import inspect_installation
 from tests.fixture_support import standard_repository
@@ -105,6 +107,30 @@ class InstructionMigrationTests(unittest.TestCase):
         self.assertTrue(all(c.passed for c in inspect_installation(self.root)))
         self.apply()
         self.assertEqual(b'Owner bytes \xff\r\n',(self.root/'AGENTS.md').read_bytes())
+
+    def test_upgrade_cli_reports_delivery_refusal_without_writes(self):
+        self.prior(b'Owner\r\n')
+        changes, _ = installer.plan_install(self.root, project_name=None, mode='upgrade')
+        evidence = self.delivery_fixture(changes)
+        stale = json.loads(evidence.read_bytes())
+        stale['entry_sha256'] = '0' * 64
+        evidence.write_text(json.dumps(stale), encoding='utf-8')
+        before = self.snapshot()
+        cases = [
+            ([], 'requires --instruction-delivery-evidence'),
+            (['--instruction-delivery-evidence', str(evidence)], 'does not bind'),
+        ]
+        for arguments, diagnostic in cases:
+            with self.subTest(arguments=arguments):
+                stdout, stderr = io.StringIO(), io.StringIO()
+                with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
+                    code = cli.main(['upgrade', str(self.root), '--apply', '--json', *arguments])
+                self.assertEqual(2, code)
+                self.assertIn('harnessctl: ', stderr.getvalue())
+                self.assertIn(diagnostic, stderr.getvalue())
+                self.assertNotIn('Traceback', stderr.getvalue())
+                self.assertEqual('', stdout.getvalue())
+                self.assertEqual(before, self.snapshot())
 
     def test_recognized_fragments_preserve_all_owner_bytes(self):
         for newline, owner, suffix in [(b'\n',b'\xef\xbb\xbfOwner \xff\n',b'Tail\n'),
