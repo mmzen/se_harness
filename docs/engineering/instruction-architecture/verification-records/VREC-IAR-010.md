@@ -2,7 +2,7 @@
 id = "VREC-IAR-010"
 type = "verification_record"
 title = "Verification candidate for WO-IAR-019"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-27"
 updated = "2026-09-27"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/instruction-architecture/evidence/WO-IAR-019
 evaluator_evidence_path = "docs/engineering/instruction-architecture/evidence/VREC-IAR-010-evaluator.json"
 evaluator_evidence_sha256 = "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f"
 
+verified_at = "2026-09-27T10:57:08Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-IAR-019"]
 conforms_to = ["VER-ECP-027", "VER-IAR-014"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-27T10:57:08Z"
+decided_by = "assurance-owner"
+reason = "Human user decision: I verify VREC-IAR-010. Codex applies the recorded assurance-owner decision to WO-IAR-019 at candidate 5e30efb0f31f174479708dc940ed07ebe1678be7. This decision covers only the selected CI rehearsal correction record; it does not verify native host delivery or authorize merge or release."
 +++
 
 # Verification Record Candidate
