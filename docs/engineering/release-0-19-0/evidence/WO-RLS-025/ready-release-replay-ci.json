@@ -1,0 +1,31 @@
+{
+  "record": "RLS-SEH-028",
+  "candidate": "30d4dba2a088c4f83756c1241b76cdab40f796bd",
+  "review_ref_commit": "e156c5a59347d231c56b34644facef65790a3c8b",
+  "workflow_url": "https://github.com/mmzen/se_harness/actions/runs/36340880463",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "Replay exact candidate twice without credentials",
+      "conclusion": "success"
+    }
+  ],
+  "artifact": {
+    "name": "release-build-replay-RLS-SEH-028",
+    "id": 10938817713,
+    "expires_at": "2026-12-26T18:30:13Z",
+    "expired": false
+  },
+  "download_command": [
+    "gh",
+    "run",
+    "download",
+    "36340880463",
+    "--repo",
+    "mmzen/se_harness",
+    "--name",
+    "release-build-replay-RLS-SEH-028"
+  ],
+  "replay_sha256": "c1b751cd2c2aefd109377fa187d827c93d944689fa6df7c1bad61aa0bc94f361",
+  "result": "Two builds match both bound distribution hashes."
+}

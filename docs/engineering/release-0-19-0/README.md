@@ -15,5 +15,5 @@ typed relations and lifecycle decisions.
 
 The human approved REL-SEH-030 and WO-RLS-025 on 2026-09-27. The work order
 is implemented. The human verified VREC-SEH-028 on 2026-09-27.
-RLS-SEH-028 is ready; its exact-record hosted replay is the remaining check.
+RLS-SEH-028 is ready. Its exact-record replay passed; the next step is the human release decision.
 Verification acceptance and release remain separate decisions.

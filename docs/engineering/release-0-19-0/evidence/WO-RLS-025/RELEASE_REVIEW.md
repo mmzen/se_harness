@@ -44,3 +44,16 @@ latest-marker promotion, live plugin installation or root adoption.
 After the exact-record replay passes, the release owner decides whether to
 authorize RLS-SEH-028. The verification decision and passing checks do not
 supply that release decision. External delivery requires its own authorization.
+
+## Exact-record replay result
+
+The [ready-record replay](https://github.com/mmzen/se_harness/actions/runs/36340880463)
+passed on review commit `e156c5a59347d231c56b34644facef65790a3c8b`. It validated
+the complete ready record, rebuilt its exact candidate twice and matched both
+bound archive hashes. `ready-release-replay.json` retains the producer, recipe,
+toolchain, expected hashes and both observed builds. `ready-release-replay-ci.json`
+retains the run identity and retrieval details. The hosted artifact expires at
+`2026-12-26T18:30:13Z`; its replay document is also retained in this repository.
+
+All required release-preparation checks are complete. RLS-SEH-028 remains ready
+for the human release decision. No release transition or publication occurred.
