@@ -1,0 +1,469 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "transition",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-KIS-016",
+    "artifacts": [
+      "WO-KIS-016"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/harness-simplification/evidence/VREC-KIS-016-evaluator.json",
+      "docs/engineering/harness-simplification/evidence/WO-KIS-016/",
+      "docs/engineering/harness-simplification/verification-records/VREC-KIS-016.md",
+      "docs/engineering/harness-simplification/verification/VER-KIS-009.md",
+      "docs/engineering/harness-simplification/work-orders/WO-KIS-016.md",
+      "docs/notes/delegation-class.md",
+      "se_harness/gate_source.py",
+      "se_harness/workflow.py",
+      "tests/test_delegation_class.py",
+      "tests/test_revision_provenance.py",
+      "tests/test_workflow_execution.py"
+    ],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "transition",
+    "workflow_rule_id": "WFL-WO-START",
+    "procedure_id": "PROC-WO-START",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G3-WORK-AUTHORIZATION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G3-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-KIS-016"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G3-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G3-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-KIS-016"
+              }
+            ],
+            "message": "No open decision blocks WO-KIS-016."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-KIS-016"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for WO-KIS-016."
+          },
+          {
+            "id": "QGS-ASSURANCE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-KIS-016"
+              }
+            ],
+            "message": "WO-KIS-016 classifies commit-bound verification as required."
+          }
+        ]
+      }
+    ]
+  },
+  "procedure": {
+    "id": "PROC-WO-START",
+    "current_step": "STEP-WO-START-PREFLIGHT",
+    "steps": [
+      {
+        "id": "STEP-WO-START-PREFLIGHT",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G3-WORK-AUTHORIZATION"
+        ],
+        "effects": [
+          "Evaluated start readiness for WO-KIS-016."
+        ],
+        "non_effects": [
+          "Preflight does not authorize or start implementation."
+        ],
+        "argv": [
+          "harnessctl",
+          "preflight",
+          ".",
+          "--work-order",
+          "WO-KIS-016",
+          "--phase",
+          "start"
+        ],
+        "corrective": {
+          "QGP-G3-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-PREFLIGHT": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-START-PREVIEW",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G3-WORK-AUTHORIZATION"
+        ],
+        "effects": [
+          "Planned the explicit transition for WO-KIS-016."
+        ],
+        "non_effects": [
+          "A preview does not change lifecycle state."
+        ],
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-KIS-016=in_progress",
+          "--decision",
+          "WO-KIS-016=delegated-executor"
+        ],
+        "corrective": {
+          "QGP-G3-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-KIS-016",
+              "--phase",
+              "start"
+            ]
+          },
+          "QGP-G3-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-START-APPLY",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G3-WORK-AUTHORIZATION"
+        ],
+        "effects": [
+          "Changed only WO-KIS-016 to in_progress."
+        ],
+        "non_effects": [
+          "Related artifacts remain unchanged."
+        ],
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-KIS-016=in_progress",
+          "--decision",
+          "WO-KIS-016=delegated-executor",
+          "--apply"
+        ],
+        "corrective": {
+          "QGP-G3-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-KIS-016",
+              "--phase",
+              "start"
+            ]
+          },
+          "QGP-G3-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-START-FINAL-FOCUS",
+        "kind": "command",
+        "gate_ids": [],
+        "effects": [
+          "Projected the resulting state for WO-KIS-016."
+        ],
+        "non_effects": [
+          "Focus does not change lifecycle state."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-KIS-016"
+        ]
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-KIS-016",
+        "status": "draft"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-KIS-016",
+        "status": "approved"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "WO-KIS-016",
+        "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-016.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Planned 1 explicit lifecycle transition(s); no files were written."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-KIS-016 is approved."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-WO-START",
+      "step_id": "STEP-WO-START-PREFLIGHT",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "preflight",
+        ".",
+        "--work-order",
+        "WO-KIS-016",
+        "--phase",
+        "start"
+      ]
+    },
+    "alternatives": []
+  },
+  "instruction_discovery": {
+    "schema": "se-harness-instruction-discovery-v1",
+    "status": "available",
+    "agent_instructions": {
+      "entry": {
+        "file": "ENGINEERING_HARNESS.md",
+        "heading": "read-by-task"
+      },
+      "shared_prerequisites": [
+        {
+          "file": "docs/engineering/harness/COMMUNICATION.md",
+          "heading": "communication",
+          "when": "Before the first eligible English explanation in a fresh context."
+        },
+        {
+          "file": "docs/engineering/harness/RESULTS.md",
+          "heading": "report-a-lifecycle-result",
+          "when": "Before reporting a lifecycle result."
+        }
+      ],
+      "procedure": {
+        "id": "PROC-WO-START",
+        "location": {
+          "file": "docs/engineering/harness/EXECUTE_WORK.md",
+          "heading": "start-the-selected-work"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "authority-from-work-approval",
+            "when": "Before using the selected work order's execution grant."
+          }
+        ],
+        "steps": {
+          "STEP-WO-START-PREFLIGHT": {
+            "location": {
+              "file": "docs/engineering/harness/EXECUTE_WORK.md",
+              "heading": "establish-the-execution-context"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "when": "Before using the selected work order's execution grant."
+              }
+            ]
+          },
+          "STEP-WO-START-PREVIEW": {
+            "location": {
+              "file": "docs/engineering/harness/EXECUTE_WORK.md",
+              "heading": "start-the-selected-work"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "when": "Before using the selected work order's execution grant."
+              }
+            ]
+          },
+          "STEP-WO-START-APPLY": {
+            "location": {
+              "file": "docs/engineering/harness/EXECUTE_WORK.md",
+              "heading": "start-the-selected-work"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "when": "Before using the selected work order's execution grant."
+              }
+            ]
+          },
+          "STEP-WO-START-FINAL-FOCUS": {
+            "location": {
+              "file": "docs/engineering/harness/CONTINUE.md",
+              "heading": "continue-selected-work"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "when": "Before using the selected work order's execution grant."
+              }
+            ]
+          }
+        }
+      },
+      "current_step": {
+        "id": "STEP-WO-START-PREFLIGHT",
+        "location": {
+          "file": "docs/engineering/harness/EXECUTE_WORK.md",
+          "heading": "establish-the-execution-context"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "authority-from-work-approval",
+            "when": "Before using the selected work order's execution grant."
+          }
+        ]
+      }
+    },
+    "formal_artifact_ids": [
+      "WO-KIS-016"
+    ],
+    "evaluator_only_inputs": [
+      "docs/engineering/WORKFLOW.json",
+      "docs/engineering/QUALITY_GATES.json"
+    ]
+  },
+  "result_sha256": "0893f9b6267757f05d3a8c08763f4c9829b61ae5e5ad31920562137346ccefde"
+}

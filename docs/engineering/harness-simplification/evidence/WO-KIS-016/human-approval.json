@@ -1,0 +1,60 @@
+{
+  "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "base_commit": "1992eda5c80f31d6e760558b3d428b12cf84ce16",
+  "branch": "work/approval-identity",
+  "artifacts": [
+    {
+      "id": "INT-KIS-003",
+      "path": "docs/engineering/harness-simplification/intent/INT-KIS-003.md",
+      "sha256": "744baa0a32d688009a0caa4d30af090bde1697cb08aca8a338900d9a1b2726fa"
+    },
+    {
+      "id": "CAP-KIS-003",
+      "path": "docs/engineering/harness-simplification/capabilities/CAP-KIS-003.md",
+      "sha256": "f3815ed2f8248db87f909c2764862fa5ce15a5c855a099c147ac9a8b63c7d571"
+    },
+    {
+      "id": "REQ-KIS-009",
+      "path": "docs/engineering/harness-simplification/requirements/REQ-KIS-009.md",
+      "sha256": "b7c25e3db645aeaa4a65cc3b978a1e965eaa39f115da0c26bd61660ca00cbcc8"
+    },
+    {
+      "id": "SPEC-KIS-003",
+      "path": "docs/engineering/harness-simplification/specifications/SPEC-KIS-003.md",
+      "sha256": "d4e4037d938ca44ed19b250dcb598a27edd62ded51f426090853c4ceb1aa193b"
+    },
+    {
+      "id": "ARCH-KIS-002",
+      "path": "docs/engineering/harness-simplification/architecture/ARCH-KIS-002.md",
+      "sha256": "7c5416511ca22df59f062c308231fb8dc2f77c6fda544c90643ff4e578730961"
+    },
+    {
+      "id": "ADR-KIS-002",
+      "path": "docs/engineering/harness-simplification/architecture/adr/ADR-KIS-002.md",
+      "sha256": "97b4849537c3a2904797499185a109a07f60a6e33e125999582fc4ae95931f2b"
+    },
+    {
+      "id": "VER-KIS-009",
+      "path": "docs/engineering/harness-simplification/verification/VER-KIS-009.md",
+      "sha256": "d0d756c218d4341429ef8b2a97dc22b4e9d8c61dd67dc525278326efa8bf7b8f"
+    },
+    {
+      "id": "WO-KIS-016",
+      "path": "docs/engineering/harness-simplification/work-orders/WO-KIS-016.md",
+      "sha256": "ac8a1b207a511c497288cffeb25fbf24e851c7229e0d08c64bf77326cea87876"
+    }
+  ],
+  "decisions_pending": [
+    "Approve VER-KIS-009",
+    "Confirm required commit-bound assurance for WO-KIS-016",
+    "Approve WO-KIS-016 with disclosed 0.19.0 compatibility label and actual human identity retained in the reason"
+  ],
+  "authorized_metadata_completion": "On human confirmation, record that human in assurance.decided_by and replace the proposed rationale with the confirmed rationale before approval preview; record the reviewed and resulting hashes.",
+  "confirmation": {
+    "question": "Approve WO-KIS-016 and VER-KIS-009 in the prepared review, including required commit-bound assurance and the temporary 0.19.0 approval encoding (`engineering-owner`, with your actual identity retained in the reason)? This authorizes the bounded implementation and verification preparation.",
+    "answer": "Approve package and compatibility encoding",
+    "human": "Requesting human in this conversation (repository owner)",
+    "approval_actor_for_wo": "engineering-owner",
+    "work_order_sha256_after_confirmed_assurance": "27bed5d4ddd6d81f075cd93596d36ac4ce0a23aeddaa2ea45c19d791a5d33c69"
+  }
+}

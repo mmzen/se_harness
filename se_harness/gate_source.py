@@ -42,10 +42,16 @@ class DelegationError(CodedError):
 
 def _approved_scope(root: Path, path: Path, metadata: Mapping[str, Any]) -> Mapping[str, Any]:
     approvals = [e for e in metadata.get("lifecycle_events", [])
-                 if e.get("to") == "approved" and e.get("decided_by") == "engineering-owner"]
+                 if e.get("to") == "approved"]
     if not approvals:
-        raise DelegationError(WEX_ECP_022, f"{path.name} has no recorded engineering-owner approval")
+        raise DelegationError(WEX_ECP_022, f"{path.name} has no recorded work-order approval")
     approval = approvals[-1]
+    # The event records the decision-maker, not a required role-name string.
+    # Attribution does not authenticate authority; the existing decision and
+    # lifecycle checks still govern recording and using this approval.
+    actor = approval.get("decided_by")
+    if not isinstance(actor, str) or not actor.strip():
+        raise DelegationError(WEX_ECP_022, f"{path.name} approval needs a recorded decision-maker identity")
     if "scope_paths" in approval:
         # New approvals grant execution directly. Older scoped events always
         # recorded delegation_class, including an empty value for no grant.
@@ -81,7 +87,7 @@ def authorize_delegated_right(root: Path, *, work_order_metadata: Mapping[str, A
     approved = _approved_scope(root, work_order_path, work_order_metadata)
     if approved != work_order_metadata.get("execution_scope"):
         raise DelegationError(WEX_ECP_022, f"{work_order_path.name} scope changed since owner approval")
-    return "recorded engineering-owner approval"
+    return "recorded work-order approval"
 
 
 def delegated_reason(right: str, approval: str, supplied: str | None) -> str:

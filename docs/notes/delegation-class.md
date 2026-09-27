@@ -1,9 +1,9 @@
 # One execution route
 
-This note describes the execution route adopted by this repository with
-released SE Harness 0.18.0 under WO-HUP-019. The installed policy owner is
-[DECISION_RIGHTS.md](../engineering/DECISION_RIGHTS.md#approved-execution),
-and the procedure is [WORKFLOW.md](../engineering/WORKFLOW.md#approved-execution).
+This repository uses released SE Harness 0.19.0 under WO-HUP-021. The
+installed policy owner is
+[AUTHORITY.md](../engineering/harness/AUTHORITY.md#authority-from-work-approval),
+and the procedure is [EXECUTE_WORK.md](../engineering/harness/EXECUTE_WORK.md#procedure).
 Other repositories follow their own installed release until an authorized upgrade.
 The filename is retained for existing links; no delegation class or root
 `.engineering-harness.delegation.toml` setting is needed for this route.
@@ -27,3 +27,18 @@ Do not rewrite historical evidence or add a legacy execution mode.
 The existing CLI keeps `delegated-executor` as an example executor identity and
 stable operation IDs for compatibility. They are not separate authorization
 routes. Supply the actor actually performing the work.
+
+## Approval identity correction
+
+WO-KIS-016 corrects candidate grant checks to recognize the human identity in
+the recorded approval event. The approver need not be named `engineering-owner`.
+The executor's identity remains separate. Both identities are attribution;
+neither proves authority by itself. The existing human decision, scope, gate
+and legacy-grant requirements still apply. Role-labelled historical approvals
+remain readable without rewriting them.
+
+The installed 0.19.0 evaluator still requires the literal `engineering-owner`
+for its execution-grant lookup. WO-HUP-022 exposed this mismatch. WO-KIS-016
+uses the human-approved compatibility encoding, retaining the actual human in
+the approval reason. Candidate tests do not upgrade the installed evaluator;
+release and adoption are separate governed actions.

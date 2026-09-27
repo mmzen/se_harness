@@ -71,14 +71,54 @@ class DelegationFixture(unittest.TestCase):
         return " ".join(result.get("restitution", {}).get("blocked_by", [])) + err
 
 
-    def approve_delegation(self) -> None:
+    def approve_delegation(self, actor: str = "engineering-owner") -> None:
         text = self.work_order.read_text(encoding="utf-8").replace('status = "approved"', 'status = "draft"', 1)
         self.work_order.write_text(text, encoding="utf-8")
-        code, result, err = self.transition("approved", "engineering-owner")
+        code, result, err = self.transition("approved", actor)
         self.assertEqual(0, code, self.blockers(result, err))
 
 
 class LocalDelegationTests(DelegationFixture):
+    def test_named_human_approval_starts_for_either_executor(self):
+        from se_harness import front_matter
+
+        self.approve_delegation("Alex Reviewer")
+        approved = self.work_order.read_bytes()
+        approval = front_matter.parse(approved.decode("utf-8"))["lifecycle_events"][-1]
+        for executor in ("Jordan Developer", "Codex fixture agent"):
+            with self.subTest(executor=executor):
+                code, result, err = self.transition("in_progress", executor, apply=False)
+                self.assertEqual(0, code, self.blockers(result, err))
+                self.assertEqual(approved, self.work_order.read_bytes())
+        code, result, err = self.transition("in_progress", "Codex fixture agent")
+        self.assertEqual(0, code, self.blockers(result, err))
+        events = front_matter.parse(self.work_order.read_text(encoding="utf-8"))["lifecycle_events"]
+        self.assertEqual(approval, events[-2])
+        self.assertEqual("Alex Reviewer", approval["decided_by"])
+        self.assertEqual("Codex fixture agent", events[-1]["decided_by"])
+
+    def test_invalid_approval_identity_cannot_grant_execution(self):
+        from se_harness.gate_source import authorize_delegated_right, DelegationError
+
+        for actor in (None, "", "  ", 42):
+            with self.subTest(actor=actor), self.assertRaises(DelegationError):
+                authorize_delegated_right(
+                    self.root, work_order_path=self.work_order, right="DR-WO-START",
+                    work_order_metadata={"execution_scope": {"paths": ["src/"]},
+                        "lifecycle_events": [{"to": "approved", "decided_by": actor,
+                                              "scope_paths": ["src/"]}]},
+                )
+
+    def test_named_approval_without_retained_scope_is_refused(self):
+        from se_harness.gate_source import authorize_delegated_right, DelegationError
+
+        with self.assertRaises(DelegationError):
+            authorize_delegated_right(
+                self.root, work_order_path=self.work_order, right="DR-WO-START",
+                work_order_metadata={"execution_scope": {"paths": ["src/"]},
+                    "lifecycle_events": [{"to": "approved", "decided_by": "Alex Reviewer"}]},
+            )
+
     def test_owner_approval_on_local_branch_starts_without_ci_or_base_merge(self):
         self.commit("initial"); self.branch()
         self.approve_delegation()
@@ -86,7 +126,7 @@ class LocalDelegationTests(DelegationFixture):
             code, result, err = self.transition("in_progress")
         self.assertEqual(0, code, self.blockers(result, err))
         self.assertEqual("in_progress", self.status())
-        self.assertIn("recorded engineering-owner approval", self.work_order.read_text())
+        self.assertIn("recorded work-order approval", self.work_order.read_text())
         self.assertNotIn("[delegation]", self.work_order.read_text())
 
     def test_human_executor_uses_the_same_grant_and_records_its_identity(self):
@@ -121,6 +161,16 @@ class LocalDelegationTests(DelegationFixture):
         self.commit("local owner approval")
         code,result,err=self.transition("in_progress")
         self.assertEqual(0,code,self.blockers(result,err))
+
+    def test_named_legacy_approval_preserves_its_explicit_grant(self):
+        self.approve_delegation("Alex Reviewer")
+        text = re.sub(r'(?m)^(scope_paths|delegation_class) = .*\n', '', self.work_order.read_text())
+        text = text.replace("[relations]", '[delegation]\nclass = "execution"\n\n[relations]', 1)
+        self.work_order.write_text(text)
+        self.commit("named owner approval with historical execution grant")
+        code, result, err = self.transition("in_progress")
+        self.assertEqual(0, code, self.blockers(result, err))
+        self.assertIn('decided_by = "Alex Reviewer"', self.work_order.read_text())
 
     def test_old_approval_without_execution_is_not_silently_expanded(self):
         self.approve_delegation()

@@ -1434,6 +1434,26 @@ class OnePreconditionEngineTests(WorkflowExecutionFixture, unittest.TestCase):
 
     READY_PREFLIGHT = SimpleNamespace(ready=True, diagnostics=[])
 
+    def test_named_human_approval_allows_completion_after_handoff(self) -> None:
+        work = self.in_progress_work_order()
+        write(work, work.read_text(encoding="utf-8").replace(
+            'decided_by = "engineering-owner"', 'decided_by = "Alex Reviewer"', 1))
+        self.bind_handoff_evidence()
+        with mock.patch("se_harness.workflow_compliance.run_preflight", return_value=self.READY_PREFLIGHT):
+            code, output, error = invoke(
+                "check", str(self.root), "--artifact", "WO-001", "--checkpoint", "handoff",
+                "--changed-path", "src/a.py", "--changes-complete", "--json")
+            self.assertEqual(0, code, output + error)
+            code, output, error = invoke(
+                "transition", str(self.root), "--set", "WO-001=implemented",
+                "--decision", "WO-001=Jordan Developer", "--apply", "--json")
+            self.assertEqual(0, code, output + error)
+        content = work.read_text(encoding="utf-8")
+        self.assertIn('status = "implemented"', content)
+        self.assertIn('decided_by = "Alex Reviewer"', content)
+        self.assertIn('decided_by = "Jordan Developer"', content)
+        self.assertNotIn('status = "verified"', content)
+
     def gates_of(self, result: dict) -> list[tuple[str, str, str]]:
         return [
             (gate["id"], predicate["id"], predicate["status"])
