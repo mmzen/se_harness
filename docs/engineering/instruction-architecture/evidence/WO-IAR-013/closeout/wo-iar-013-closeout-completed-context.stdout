@@ -1,0 +1,221 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-IAR-013",
+    "artifacts": [
+      "WO-IAR-013"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-IAR-011",
+      "ARCH-IAR-011",
+      "CAP-IAR-002",
+      "INT-IAR-001",
+      "REQ-IAR-022",
+      "REQ-IAR-023",
+      "REQ-IAR-027",
+      "SPEC-IAR-014",
+      "VER-IAR-014"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/instruction-architecture/acceptance/progressive-discovery/",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-013/",
+      "docs/engineering/instruction-architecture/README.md",
+      "docs/engineering/instruction-architecture/work-orders/WO-IAR-013.md",
+      "templates/repository/standard/docs/engineering/",
+      "templates/repository/standard/ENGINEERING_HARNESS.md.tpl",
+      "tests/test_instruction_architecture.py",
+      "tests/test_progressive_instruction_discovery.py",
+      "tests/test_workflow_documentation_contract.py"
+    ],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-WO-PREPARE-VREC",
+    "procedure_id": "PROC-WO-PREPARE-VREC",
+    "status": "not_assessable",
+    "gates": []
+  },
+  "procedure": {
+    "id": "PROC-WO-PREPARE-VREC",
+    "current_step": "STEP-WO-PREPARE-VREC-CAPTURE",
+    "steps": [
+      {
+        "id": "STEP-WO-PREPARE-VREC-CAPTURE",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-CANDIDATE-READY"
+        ],
+        "effects": [
+          "Prepare one ready VREC using the selected approved inputs."
+        ],
+        "non_effects": [
+          "Substitute inspected record, verification and evidence inputs before running this command. Preparation does not verify WO-IAR-013."
+        ],
+        "argv": [
+          "harnessctl",
+          "capture-verification",
+          ".",
+          "--work-order",
+          "WO-IAR-013",
+          "--owner",
+          "delegated-executor",
+          "--id",
+          "VREC-...",
+          "--verification",
+          "VER-...",
+          "--evidence",
+          "..."
+        ],
+        "corrective": {
+          "QGP-G4C-STATUS": {
+            "kind": "response",
+            "value": "Resolve QGP-G4C-STATUS for WO-IAR-013 using the reported candidate-readiness failure, then retry preparation."
+          },
+          "QGP-G4C-GRAPH": {
+            "kind": "response",
+            "value": "Resolve QGP-G4C-GRAPH for WO-IAR-013 using the reported candidate-readiness failure, then retry preparation."
+          },
+          "QGP-G4C-INTEGRITY": {
+            "kind": "response",
+            "value": "Resolve QGP-G4C-INTEGRITY for WO-IAR-013 using the reported candidate-readiness failure, then retry preparation."
+          }
+        }
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-IAR-013",
+        "status": "implemented"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-IAR-013",
+        "status": "implemented"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 50
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "WO-IAR-013 is implemented; no assurance decision was inferred."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-IAR-013 is implemented."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-WO-PREPARE-VREC",
+      "step_id": "STEP-WO-PREPARE-VREC-CAPTURE",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "capture-verification",
+        ".",
+        "--work-order",
+        "WO-IAR-013",
+        "--owner",
+        "delegated-executor",
+        "--id",
+        "VREC-...",
+        "--verification",
+        "VER-...",
+        "--evidence",
+        "..."
+      ]
+    },
+    "alternatives": []
+  },
+  "result_sha256": "89b0579fd39db3f5089c55a8a6bfdac3d72fb804308c2ee6b42ed9dada98fa25",
+  "context": {
+    "reading_manifest": [
+      "ENGINEERING_HARNESS.md",
+      "docs/engineering/OPERATING_CARD.md",
+      "AGENTS.md",
+      "docs/engineering/ARTIFACT_AUTHORING.md",
+      "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
+      "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-022.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-023.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-027.md",
+      "docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md",
+      "docs/engineering/instruction-architecture/architecture/ARCH-IAR-011.md",
+      "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-011.md",
+      "docs/engineering/instruction-architecture/verification/VER-IAR-014.md",
+      "docs/engineering/instruction-architecture/work-orders/WO-IAR-013.md"
+    ],
+    "governing": [
+      "ADR-IAR-011",
+      "ARCH-IAR-011",
+      "CAP-IAR-002",
+      "INT-IAR-001",
+      "REQ-IAR-022",
+      "REQ-IAR-023",
+      "REQ-IAR-027",
+      "SPEC-IAR-014",
+      "VER-IAR-014"
+    ],
+    "declared_paths": [
+      "templates/repository/standard/ENGINEERING_HARNESS.md.tpl",
+      "templates/repository/standard/docs/engineering/",
+      "tests/test_instruction_architecture.py",
+      "tests/test_workflow_documentation_contract.py",
+      "tests/test_progressive_instruction_discovery.py",
+      "docs/engineering/instruction-architecture/acceptance/progressive-discovery/",
+      "docs/engineering/instruction-architecture/README.md",
+      "docs/engineering/instruction-architecture/work-orders/WO-IAR-013.md",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-013/"
+    ],
+    "state": {
+      "status": "implemented",
+      "family": "work_order"
+    },
+    "next": {
+      "argv": [
+        "harnessctl",
+        "capture-verification",
+        ".",
+        "--work-order",
+        "WO-IAR-013",
+        "--owner",
+        "delegated-executor",
+        "--id",
+        "VREC-...",
+        "--verification",
+        "VER-...",
+        "--evidence",
+        "..."
+      ],
+      "procedure_id": "PROC-WO-PREPARE-VREC",
+      "step_id": "STEP-WO-PREPARE-VREC-CAPTURE"
+    },
+    "decision_required": null
+  }
+}

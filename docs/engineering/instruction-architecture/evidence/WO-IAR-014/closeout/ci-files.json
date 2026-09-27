@@ -1,0 +1,177 @@
+[
+  {
+    "source": "artifacts.invocation.json",
+    "retained": "ci-01.json",
+    "sha256": "5fc97e46af42792b6841fbdc609b6e03f2645c6fb85518dbe5f5afe5469120ab"
+  },
+  {
+    "source": "artifacts.stderr",
+    "retained": "ci-02.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "artifacts.stdout",
+    "retained": "ci-03.stdout",
+    "sha256": "e4cc891be2fa4756d986fb78726ebc490d4d0032939839eef16133dc416de4ee"
+  },
+  {
+    "source": "candidate-package-qualification-0.18.0/candidate-package-qualification.json",
+    "retained": "ci-04.json",
+    "sha256": "53bf1022d7af6ee18e8ef4d57d1c3bbe5c2abd9ac2862da9ac1054f44d2c3434"
+  },
+  {
+    "source": "candidate-source-raw/output.log",
+    "retained": "ci-05.log",
+    "sha256": "0059509c310b7255edd90884df0812cda4c7fc1dcf0687a091c749ad1057e26a"
+  },
+  {
+    "source": "candidate-source-raw/summary.json",
+    "retained": "ci-06.json",
+    "sha256": "d94301ecdd607a2e26bc9f024299c6d6acd03af0cbe8038aa6d43135d4a8a410"
+  },
+  {
+    "source": "complete-candidate-qualification/complete-candidate.json",
+    "retained": "ci-07.json",
+    "sha256": "8cb88e76dacdc8d824fe383e38030b87018f903a5233e12875455479ca6d948d"
+  },
+  {
+    "source": "download-candidate-package-qualification-0.18.0.invocation.json",
+    "retained": "ci-08.json",
+    "sha256": "0d6c89017952e755e721fec0327ec61c17c2a56abd579bd8b03c8b4b6664b7a3"
+  },
+  {
+    "source": "download-candidate-package-qualification-0.18.0.stderr",
+    "retained": "ci-09.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "download-candidate-package-qualification-0.18.0.stdout",
+    "retained": "ci-10.stdout",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "download-candidate-source-raw.invocation.json",
+    "retained": "ci-11.json",
+    "sha256": "28fca1ed897e6a8e1bd7f1c70c4c4fb1df8aa771822d1698df9735454020030b"
+  },
+  {
+    "source": "download-candidate-source-raw.stderr",
+    "retained": "ci-12.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "download-candidate-source-raw.stdout",
+    "retained": "ci-13.stdout",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "download-complete-candidate-qualification.invocation.json",
+    "retained": "ci-14.json",
+    "sha256": "1953b5e7f678cf4c87c6247c508edbe9c6bfd5d63964cdfe48c90736dec3be5b"
+  },
+  {
+    "source": "download-complete-candidate-qualification.stderr",
+    "retained": "ci-15.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "download-complete-candidate-qualification.stdout",
+    "retained": "ci-16.stdout",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "download-upgrade-rehearsal-Linux.invocation.json",
+    "retained": "ci-17.json",
+    "sha256": "c1c952e2675c9f9f722e3a163f6312f87d63381277817f2ad0889075c9c5fbea"
+  },
+  {
+    "source": "download-upgrade-rehearsal-Linux.stderr",
+    "retained": "ci-18.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "download-upgrade-rehearsal-Linux.stdout",
+    "retained": "ci-19.stdout",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "download-upgrade-rehearsal-Windows.invocation.json",
+    "retained": "ci-20.json",
+    "sha256": "559140e45915f2af69f20b3ebfda3a212494f5e8f7d505befaabc4753d7ae7c5"
+  },
+  {
+    "source": "download-upgrade-rehearsal-Windows.stderr",
+    "retained": "ci-21.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "download-upgrade-rehearsal-Windows.stdout",
+    "retained": "ci-22.stdout",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "run.invocation.json",
+    "retained": "ci-23.json",
+    "sha256": "f60a601c0bbaec8e77faa7013f3e3efdc042f9fc4a469d110cfae56e5965de24"
+  },
+  {
+    "source": "run.stderr",
+    "retained": "ci-24.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "run.stdout",
+    "retained": "ci-25.stdout",
+    "sha256": "0455e07eaa38ca572e72a6d4d4f4f97374f83b6de9e940cfddd1c280cac30b26"
+  },
+  {
+    "source": "upgrade-rehearsal-Linux/rehearsal-result-1/upgrade-rehearsal-result.json",
+    "retained": "ci-26.json",
+    "sha256": "428aea24a9ba6b84817bb0a6733baaf7af11a3075b56c9704110b90cfb8d0b5a"
+  },
+  {
+    "source": "upgrade-rehearsal-Linux/rehearsal-result-1/upgrade-rehearsal-timing.json",
+    "retained": "ci-27.json",
+    "sha256": "3fa1b1a9349c5bc2f85fd8a24aebdd24832d53e384807a369598e20968bb886d"
+  },
+  {
+    "source": "upgrade-rehearsal-Linux/rehearsal-result-2/upgrade-rehearsal-result.json",
+    "retained": "ci-28.json",
+    "sha256": "428aea24a9ba6b84817bb0a6733baaf7af11a3075b56c9704110b90cfb8d0b5a"
+  },
+  {
+    "source": "upgrade-rehearsal-Linux/rehearsal-result-2/upgrade-rehearsal-timing.json",
+    "retained": "ci-29.json",
+    "sha256": "3644bf68107d184751cbbace6b637685845d03b20bfca3e9714f96cf2663f2f2"
+  },
+  {
+    "source": "upgrade-rehearsal-Windows/rehearsal-result-1/upgrade-rehearsal-result.json",
+    "retained": "ci-30.json",
+    "sha256": "4c8a6f3d016fd81c474b0ffdd3b7bcc7f2ba90b2903153736068517a45f567e7"
+  },
+  {
+    "source": "upgrade-rehearsal-Windows/rehearsal-result-1/upgrade-rehearsal-timing.json",
+    "retained": "ci-31.json",
+    "sha256": "347e59b6ed1670837c942db324aab723d2553e15b239d6e908f9d53eb0bee4d8"
+  },
+  {
+    "source": "upgrade-rehearsal-Windows/rehearsal-result-2/upgrade-rehearsal-result.json",
+    "retained": "ci-32.json",
+    "sha256": "4c8a6f3d016fd81c474b0ffdd3b7bcc7f2ba90b2903153736068517a45f567e7"
+  },
+  {
+    "source": "upgrade-rehearsal-Windows/rehearsal-result-2/upgrade-rehearsal-timing.json",
+    "retained": "ci-33.json",
+    "sha256": "4dc94b243e7bfac86cc1577e7b4af31590a74113a2d9daff91420e9d0b5c1713"
+  },
+  {
+    "source": "upgrade-rehearsal-Windows/windows-check-evidence/output.log",
+    "retained": "ci-34.log",
+    "sha256": "ab5b7708ae6e1b53e42d3a56ad7651f4303826b1a660e14c63885553cb2fe0a2"
+  },
+  {
+    "source": "upgrade-rehearsal-Windows/windows-check-evidence/summary.json",
+    "retained": "ci-35.json",
+    "sha256": "7331129f909e0b01f62e7527bd2e564809b45f7c8ce040897bf90e4c6cd7af0c"
+  }
+]

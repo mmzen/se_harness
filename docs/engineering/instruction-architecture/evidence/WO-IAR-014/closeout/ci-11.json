@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "C:\\Program Files\\GitHub CLI\\gh.exe",
+    "run",
+    "download",
+    "36334454733",
+    "--repo",
+    "mmzen/se_harness",
+    "--name",
+    "candidate-source-raw",
+    "--dir",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\iar-closeout-ci\\candidate-source-raw"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se",
+  "exit_code": 0,
+  "observed_at": "2026-09-27T16:59:25.082841+00:00"
+}

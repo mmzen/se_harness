@@ -1,0 +1,17 @@
+{
+  "args": [
+    "transition",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--set",
+    "WO-IAR-014=implemented",
+    "--decision",
+    "WO-IAR-014=Codex",
+    "--reason",
+    "WO-IAR-014=Codex records completion under the existing approved scope after the retained closeout review, current required checks and passing handoff. Source identity, full regressions, exact lifecycle comparison, platform installer evidence and separate native qualification are retained with explicit limitations. No verification, merge, release or adoption is inferred.",
+    "--json",
+    "--apply"
+  ],
+  "exit_code": 0,
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+}

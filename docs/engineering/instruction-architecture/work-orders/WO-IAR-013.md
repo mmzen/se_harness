@@ -2,7 +2,7 @@
 id = "WO-IAR-013"
 type = "work_order"
 title = "Split the agent instructions and preserve their meaning"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "repository-owner", "quality-owner"]
 created = "2026-09-20"
 updated = "2026-09-27"
@@ -45,6 +45,13 @@ to = "in_progress"
 decided_at = "2026-09-27T07:43:56Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Execute the reviewed approved work orders as requested by the human on 2026-09-27; native host/platform qualification remains required before completion."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-27T17:05:52Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Codex records completion under the existing approved scope after the retained closeout review, current required checks and passing handoff. Source identity, full regressions, exact lifecycle comparison, platform installer evidence and separate native qualification are retained with explicit limitations. No verification, merge, release or adoption is inferred."
 +++
 
 # Split the agent instructions and preserve their meaning
