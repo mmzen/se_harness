@@ -39,6 +39,7 @@ import tarfile
 import tempfile
 import time
 from contextlib import contextmanager, nullcontext
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Sequence
@@ -52,10 +53,13 @@ TRANSACTION_EVIDENCE = "docs/engineering/evidence/upgrade-rehearsal-transaction.
 # Execute in the installed successor's isolated interpreter to reuse its plan.
 SYNTHETIC_DELIVERY_SCRIPT = r'''
 import hashlib, json, sys
+from importlib import import_module
 from pathlib import Path
-from se_harness import __version__
-from se_harness.installer import plan_install
-from se_harness.integrity import canonical_sha256
+
+# These modules are loaded only by the installed successor's interpreter.
+candidate = import_module("se_harness")
+plan_install = import_module("se_harness.installer").plan_install
+canonical_sha256 = import_module("se_harness.integrity").canonical_sha256
 
 target, receipt = (Path(value) for value in sys.argv[1:])
 changes, _ = plan_install(target, project_name=None, mode="upgrade")
@@ -67,7 +71,7 @@ entry_hash = canonical_sha256(entry)
 value = {
     "schema": "se-harness-native-instruction-delivery-v1",
     "test_fixture": True, "native_host_delivery": "not_assessed",
-    "repository": str(target.resolve()), "target_version": __version__,
+    "repository": str(target.resolve()), "target_version": candidate.__version__,
     "prior_lock_sha256": canonical_sha256((target / ".engineering-harness.lock").read_bytes()),
     "entry_sha256": entry_hash, "host": "claude", "host_version": "synthetic-fixture",
     "events": {event: {"origin": "native-host", "delivered_root_sha256": entry_hash,
@@ -264,16 +268,18 @@ def _evaluator(python: Path) -> list[str]:
 
 def _snapshot(root: Path) -> dict[str, tuple[str, str]]:
     """Compare all files and links, including Git metadata, without following links."""
-    result = {}
-    for path in root.rglob("*"):
+    def fingerprint(path: Path) -> tuple[str, tuple[str, str]]:
         name = path.relative_to(root).as_posix()
         if path.is_symlink():
-            result[name] = ("link", os.readlink(path))
-        elif path.is_file():
-            result[name] = ("file", hashlib.sha256(path.read_bytes()).hexdigest())
-        elif path.is_dir():
-            result[name] = ("directory", "")
-    return result
+            return name, ("link", os.readlink(path))
+        if path.is_file():
+            return name, ("file", hashlib.sha256(path.read_bytes()).hexdigest())
+        return name, ("directory", "")
+
+    # Windows file-open latency dominates this whole-export comparison. Bound
+    # concurrent reads; retain every file instead of weakening the byte check.
+    with ThreadPoolExecutor(max_workers=8) as readers:
+        return dict(readers.map(fingerprint, root.rglob("*")))
 
 
 def _ownership(lock: dict[str, Any]) -> str | None:
@@ -430,11 +436,13 @@ def _rehearse(repository, predecessor_python, successor_python, output, runner, 
             except ValueError as exc:
                 failure = f"successor-upgrade-plan: invalid JSON preview: {exc}"
         if failure is None and plan.get("instruction_delivery_required", False):
-            before = _snapshot(copy)
+            with _measure(timing, "delivery-refusal-snapshot-before"):
+                before = _snapshot(copy)
             refused = step("successor-upgrade-without-delivery",
                            [*_evaluator(successor_python), "upgrade", str(copy), "--apply", "--json"],
                            Path(scratch), expect="failure")
-            unchanged = before == _snapshot(copy)
+            with _measure(timing, "delivery-refusal-snapshot-after"):
+                unchanged = before == _snapshot(copy)
             result["instruction_delivery"]["refusal_preserved_repository"] = unchanged
             if failure is None and (refused.exit_code != 2 or "requires --instruction-delivery-evidence" not in refused.stderr):
                 failure = "successor-upgrade-without-delivery: expected the missing-delivery refusal (exit 2)"
