@@ -1,0 +1,17 @@
+{
+  "args": [
+    "transition",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--set",
+    "VREC-SEH-028=verified",
+    "--decision",
+    "VREC-SEH-028=assurance-owner",
+    "--reason",
+    "VREC-SEH-028=Human decision in this task: I verify VREC-SEH-028. Codex applies that assurance decision to the reviewed record at candidate 30d4dba2a088c4f83756c1241b76cdab40f796bd with its retained evidence and disclosed Windows checkout and native-host limits. This changes only the VREC; release and external actions remain separate.",
+    "--json",
+    "--apply"
+  ],
+  "exit_code": 0,
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+}

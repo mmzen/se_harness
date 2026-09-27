@@ -1,0 +1,102 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "check",
+    "outcome": "blocked"
+  },
+  "selection": {
+    "primary": "VREC-SEH-028",
+    "artifacts": [
+      "VREC-SEH-028"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-FAIL-REMEDIATE",
+    "procedure_id": "PROC-REMEDIATE",
+    "status": "fail",
+    "gates": []
+  },
+  "procedure": {
+    "id": "PROC-REMEDIATE",
+    "current_step": "STEP-REMEDIATE-FOCUS",
+    "steps": [
+      {
+        "id": "STEP-REMEDIATE-FOCUS",
+        "kind": "command",
+        "gate_ids": [],
+        "effects": [
+          "Re-evaluated selected state for VREC-SEH-028."
+        ],
+        "non_effects": [
+          "Remediation does not expand scope or change state."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "VREC-SEH-028"
+        ]
+      }
+    ]
+  },
+  "state": {
+    "before": [],
+    "after": []
+  },
+  "findings": {
+    "scoped_blockers": [
+      {
+        "code": "WEX220",
+        "message": "procedure PROC-PREPARE-RELEASE is not selected by workflow rule WFL-VREC-DELIVER"
+      }
+    ],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "blocked",
+    "done": [],
+    "not_done": [
+      "The requested workflow operation remains incomplete."
+    ],
+    "blocked_by": [
+      "WEX220: procedure PROC-PREPARE-RELEASE is not selected by workflow rule WFL-VREC-DELIVER"
+    ],
+    "current_lifecycle_state": [
+      "No lifecycle state was changed."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-REMEDIATE",
+      "step_id": "STEP-REMEDIATE-FOCUS",
+      "action": "remediate"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "VREC-SEH-028"
+      ]
+    },
+    "alternatives": []
+  },
+  "result_sha256": "2be91a2c57faf3e17ac26c4f355c02f496370f519e420566372c7ec6e3cf2230"
+}

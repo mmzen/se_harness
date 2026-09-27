@@ -2,7 +2,7 @@
 id = "VREC-SEH-028"
 type = "verification_record"
 title = "Verification candidate for 14 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-27"
 updated = "2026-09-27"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/execution-control-plane/evidence/VREC-ECP-04
 evaluator_evidence_path = "docs/engineering/release-0-19-0/evidence/VREC-SEH-028-evaluator.json"
 evaluator_evidence_sha256 = "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f"
 
+verified_at = "2026-09-27T18:27:07Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-DOC-016", "WO-ECP-039", "WO-HUP-019", "WO-HUP-020", "WO-IAR-013", "WO-IAR-014", "WO-IAR-015", "WO-IAR-016", "WO-IAR-017", "WO-IAR-018", "WO-IAR-019", "WO-PLG-023", "WO-PLG-025", "WO-RLS-025"]
 conforms_to = ["VER-DST-001", "VER-DST-029", "VER-ECP-027", "VER-HUP-019", "VER-HUP-020", "VER-IAR-014", "VER-PLG-001", "VER-PLG-016", "VER-PLG-021", "VER-PLG-023", "VER-PLG-025"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-27T18:27:07Z"
+decided_by = "assurance-owner"
+reason = "Human decision in this task: I verify VREC-SEH-028. Codex applies that assurance decision to the reviewed record at candidate 30d4dba2a088c4f83756c1241b76cdab40f796bd with its retained evidence and disclosed Windows checkout and native-host limits. This changes only the VREC; release and external actions remain separate."
 +++
 
 # Verification Record Candidate

@@ -1,0 +1,249 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {
+    "commit": "30d4dba2a088c4f83756c1241b76cdab40f796bd",
+    "git_object_format": "sha1"
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "VREC-SEH-028",
+    "artifacts": [
+      "VREC-SEH-028"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-DST-001",
+      "ADR-HUP-001",
+      "ADR-IAR-011",
+      "ADR-KIS-002",
+      "ADR-PLG-001",
+      "ADR-PLG-004",
+      "ARCH-DST-001",
+      "ARCH-HUP-003",
+      "ARCH-HUP-013",
+      "ARCH-IAR-011",
+      "ARCH-KIS-002",
+      "ARCH-PLG-001",
+      "ARCH-PLG-004",
+      "CAP-DST-001",
+      "CAP-ECP-003",
+      "CAP-HUP-002",
+      "CAP-HUP-003",
+      "CAP-IAR-002",
+      "CAP-KIS-003",
+      "INT-DST-001",
+      "INT-ECP-001",
+      "INT-HUP-002",
+      "INT-HUP-003",
+      "INT-IAR-001",
+      "INT-KIS-003",
+      "REQ-DST-006",
+      "REQ-DST-069",
+      "REQ-ECP-012",
+      "REQ-HUP-008",
+      "REQ-HUP-024",
+      "REQ-HUP-037",
+      "REQ-HUP-038",
+      "REQ-IAR-022",
+      "REQ-IAR-023",
+      "REQ-IAR-024",
+      "REQ-IAR-025",
+      "REQ-IAR-026",
+      "REQ-IAR-027",
+      "REQ-KIS-009",
+      "REQ-PLG-001",
+      "REQ-PLG-002",
+      "REQ-PLG-027",
+      "REQ-PLG-032",
+      "REQ-PLG-033",
+      "REQ-PLG-034",
+      "REQ-PLG-037",
+      "REQ-PLG-038",
+      "SPEC-DST-001",
+      "SPEC-DST-024",
+      "SPEC-DST-029",
+      "SPEC-ECP-007",
+      "SPEC-ECP-025",
+      "SPEC-HUP-004",
+      "SPEC-HUP-012",
+      "SPEC-HUP-019",
+      "SPEC-HUP-020",
+      "SPEC-IAR-014",
+      "SPEC-KIS-003",
+      "SPEC-PLG-001",
+      "SPEC-PLG-016",
+      "SPEC-PLG-021",
+      "SPEC-PLG-022",
+      "VER-DST-001",
+      "VER-DST-029",
+      "VER-ECP-027",
+      "VER-HUP-019",
+      "VER-HUP-020",
+      "VER-IAR-014",
+      "VER-PLG-001",
+      "VER-PLG-016",
+      "VER-PLG-021",
+      "VER-PLG-023",
+      "VER-PLG-025",
+      "WO-DOC-016",
+      "WO-ECP-039",
+      "WO-HUP-019",
+      "WO-HUP-020",
+      "WO-IAR-013",
+      "WO-IAR-014",
+      "WO-IAR-015",
+      "WO-IAR-016",
+      "WO-IAR-017",
+      "WO-IAR-018",
+      "WO-IAR-019",
+      "WO-PLG-023",
+      "WO-PLG-025",
+      "WO-RLS-025"
+    ],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-VREC-DELIVER",
+    "procedure_id": "PROC-DELIVERY-SELECT",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-VERIFIED-COVERAGE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4V-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:VREC-SEH-028"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G4V-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:pre-action"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G4V-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:VREC-SEH-028"
+              }
+            ],
+            "message": "No open decision blocks VREC-SEH-028."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "ad4d13f4f13a17bcad2d95bbeac33ede816ae21a59f5272c6d2b81dddee1c717",
+    "change_set_source": "arguments"
+  },
+  "procedure": {
+    "id": "PROC-DELIVERY-SELECT",
+    "current_step": "STEP-DELIVERY-SELECT",
+    "steps": [
+      {
+        "id": "STEP-DELIVERY-SELECT",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-VERIFIED-COVERAGE"
+        ],
+        "effects": [
+          "Selects one delivery path."
+        ],
+        "non_effects": [
+          "Selection performs no repository or release action."
+        ],
+        "decision_right": "DR-DELIVERY-SELECT",
+        "role": "repository-owner or release-owner",
+        "artifact": "VREC-SEH-028",
+        "decision": "which separately authorized delivery path to select",
+        "outcomes": [
+          "repository-integration",
+          "release-preparation",
+          "stop"
+        ],
+        "response": "Select one separately authorized delivery path for VREC-SEH-028."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "VREC-SEH-028",
+        "status": "verified"
+      }
+    ],
+    "after": [
+      {
+        "id": "VREC-SEH-028",
+        "status": "verified"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 50
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated pre-action compliance for VREC-SEH-028."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "VREC-SEH-028 is verified."
+    ],
+    "decision_required": {
+      "decision_right": "DR-DELIVERY-SELECT",
+      "role": "repository-owner or release-owner",
+      "artifact": "VREC-SEH-028",
+      "decision": "which separately authorized delivery path to select",
+      "outcomes": [
+        "repository-integration",
+        "release-preparation",
+        "stop"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-DELIVERY-SELECT",
+      "step_id": "STEP-DELIVERY-SELECT",
+      "action": "which separately authorized delivery path to select"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Select one separately authorized delivery path for VREC-SEH-028."
+    },
+    "alternatives": [
+      "Use complete alternative procedure PROC-REPOSITORY-INTEGRATION."
+    ]
+  },
+  "result_sha256": "00d077034f28d542333657484b0dfb0f964839e8f4e7524136514d6a173a384c"
+}
