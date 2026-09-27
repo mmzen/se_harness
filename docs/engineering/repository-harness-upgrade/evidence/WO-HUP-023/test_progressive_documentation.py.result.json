@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\bin\\python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_progressive_documentation.py"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "exit_code": 0,
+  "seconds": 0.521709680557251,
+  "stdout": "",
+  "stderr": ".................\n----------------------------------------------------------------------\nRan 17 tests in 0.075s\n\nOK\n"
+}

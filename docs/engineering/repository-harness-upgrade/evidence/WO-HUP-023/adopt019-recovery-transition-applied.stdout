@@ -1,0 +1,281 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "transition",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-HUP-022",
+    "artifacts": [
+      "WO-HUP-022",
+      "WO-HUP-023"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [],
+    "dependencies": [],
+    "declared_paths": [
+      ".github/workflows/engineering-harness.yml",
+      "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-022/",
+      "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-022.md",
+      "tests/test_progressive_documentation.py"
+    ],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "transition",
+    "workflow_rule_id": "WFL-REJECTED",
+    "procedure_id": "PROC-REMEDIATE",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-HUP-022"
+              }
+            ],
+            "message": "approved -> rejected is a declared lifecycle edge for WO-HUP-022."
+          }
+        ]
+      },
+      {
+        "id": "QG-G3-WORK-AUTHORIZATION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G3-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-HUP-023"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G3-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G3-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-HUP-023"
+              }
+            ],
+            "message": "No open decision blocks WO-HUP-023."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-HUP-023"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for WO-HUP-023."
+          },
+          {
+            "id": "QGS-ASSURANCE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-HUP-023"
+              }
+            ],
+            "message": "WO-HUP-023 classifies commit-bound verification as required."
+          }
+        ]
+      }
+    ]
+  },
+  "procedure": {
+    "id": "PROC-REMEDIATE",
+    "current_step": "STEP-REMEDIATE-FOCUS",
+    "steps": [
+      {
+        "id": "STEP-REMEDIATE-FOCUS",
+        "kind": "command",
+        "gate_ids": [],
+        "effects": [
+          "Re-evaluated selected state for WO-HUP-022."
+        ],
+        "non_effects": [
+          "Remediation does not expand scope or change state."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-HUP-022"
+        ]
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-HUP-022",
+        "status": "approved"
+      },
+      {
+        "id": "WO-HUP-023",
+        "status": "draft"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-HUP-022",
+        "status": "rejected"
+      },
+      {
+        "id": "WO-HUP-023",
+        "status": "approved"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "WO-HUP-022",
+        "path": "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-022.md",
+        "fields": [
+          "lifecycle_events",
+          "rejected_at",
+          "rejected_by",
+          "rejection_reason",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "WO-HUP-023",
+        "path": "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-023.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Applied 2 explicit lifecycle transition(s) atomically."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-HUP-022 is rejected and terminal."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-REMEDIATE",
+      "step_id": "STEP-REMEDIATE-FOCUS",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "WO-HUP-022"
+      ]
+    },
+    "alternatives": []
+  },
+  "instruction_discovery": {
+    "schema": "se-harness-instruction-discovery-v1",
+    "status": "available",
+    "agent_instructions": {
+      "entry": {
+        "file": "ENGINEERING_HARNESS.md",
+        "heading": "read-by-task"
+      },
+      "shared_prerequisites": [
+        {
+          "file": "docs/engineering/harness/COMMUNICATION.md",
+          "heading": "communication",
+          "when": "Before the first eligible English explanation in a fresh context."
+        },
+        {
+          "file": "docs/engineering/harness/RESULTS.md",
+          "heading": "report-a-lifecycle-result",
+          "when": "Before reporting a lifecycle result."
+        }
+      ],
+      "procedure": {
+        "id": "PROC-REMEDIATE",
+        "location": {
+          "file": "docs/engineering/harness/RESULTS.md",
+          "heading": "if-a-procedure-is-blocked"
+        },
+        "prerequisites": [],
+        "steps": {
+          "STEP-REMEDIATE-FOCUS": {
+            "location": {
+              "file": "docs/engineering/harness/RESULTS.md",
+              "heading": "if-a-procedure-is-blocked"
+            },
+            "prerequisites": []
+          }
+        }
+      },
+      "current_step": {
+        "id": "STEP-REMEDIATE-FOCUS",
+        "location": {
+          "file": "docs/engineering/harness/RESULTS.md",
+          "heading": "if-a-procedure-is-blocked"
+        },
+        "prerequisites": []
+      }
+    },
+    "formal_artifact_ids": [
+      "WO-HUP-022",
+      "WO-HUP-023"
+    ],
+    "evaluator_only_inputs": [
+      "docs/engineering/WORKFLOW.json",
+      "docs/engineering/QUALITY_GATES.json"
+    ]
+  },
+  "result_sha256": "4ce2945fec6c1fdd4e4a396d1c5f880d7615ec8bae34c17ac67ebfe26929effb"
+}

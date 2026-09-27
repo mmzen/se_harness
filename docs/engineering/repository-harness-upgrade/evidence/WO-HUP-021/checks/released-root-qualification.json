@@ -1,0 +1,57 @@
+{
+  "authority": "evidence-only; no lifecycle or external action authorized",
+  "checks": [
+    {
+      "id": "RR001",
+      "message": "runtime matches the target root lock",
+      "passed": true,
+      "subject": "released-evaluator"
+    },
+    {
+      "id": "RR002",
+      "message": "101/101 managed checks passed",
+      "passed": true,
+      "subject": "managed-root"
+    },
+    {
+      "id": "RR003",
+      "message": "artifacts=1698; errors=0; warnings=52",
+      "passed": true,
+      "subject": "engineering-graph"
+    },
+    {
+      "id": "RR004",
+      "message": "target state is unchanged",
+      "passed": true,
+      "subject": "repository-state"
+    }
+  ],
+  "completion": "completed",
+  "evaluator": {
+    "diagnostics": [],
+    "distribution": "se-harness",
+    "entry_point_sha256": "d82a4afd41cbf0d7e33d79c9fe86d9ac3f7687adc48f33188c7b0b5695df53a1",
+    "evaluator_archive_name": "se_harness-0.19.0-py3-none-any.whl",
+    "evaluator_archive_sha256": "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8",
+    "evaluator_payload_manifest": "se-harness-installed-payload-v1",
+    "evaluator_payload_sha256": "71c951a74d2f9c242d594fdbc419dcb173b87d51d25694db6a54a9b6cfc6c356",
+    "identity_sha256": "ef49b1402450c63da8a271fb5453694c59f5d97b40f02a48bdffc0f652522b8d",
+    "isolated_python": true,
+    "pythonpath_present": false,
+    "role": "released-evaluator",
+    "user_site_enabled": false,
+    "version": "0.19.0"
+  },
+  "independence": "released-evaluator",
+  "operation": "released-root",
+  "passed": true,
+  "schema": "se-harness-release-qualification-v1",
+  "target": {
+    "head": "2e43b1594596efb9abcf8325e23c0b17331e0ed3",
+    "identity_sha256": "ff122be9795f65c20876baabaf16b983b75774acac8adedaede3cbb4b9371a65",
+    "kind": "released-root",
+    "lock_schema": 4,
+    "lock_sha256": "9596f8940992968f4670ef717b6063df4e649d9912b83020a8ec3cb0714f2bd4",
+    "tree": "0edb04045a4a8c11f604fb23b6f9291684730326"
+  }
+}
