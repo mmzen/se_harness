@@ -1,0 +1,187 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {
+    "commit": "c40da0920f6e6c42ffff685a8cd396c3f6a1a4b2",
+    "git_object_format": "sha1"
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "VREC-IAR-011",
+    "artifacts": [
+      "VREC-IAR-011"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-IAR-011",
+      "ARCH-IAR-011",
+      "CAP-IAR-002",
+      "INT-IAR-001",
+      "REQ-IAR-022",
+      "REQ-IAR-023",
+      "REQ-IAR-024",
+      "REQ-IAR-026",
+      "REQ-IAR-027",
+      "SPEC-IAR-014",
+      "VER-IAR-014",
+      "WO-IAR-015"
+    ],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-VREC-DELIVER",
+    "procedure_id": "PROC-DELIVERY-SELECT",
+    "status": "not_assessable",
+    "gates": []
+  },
+  "procedure": {
+    "id": "PROC-DELIVERY-SELECT",
+    "current_step": "STEP-DELIVERY-SELECT",
+    "steps": [
+      {
+        "id": "STEP-DELIVERY-SELECT",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-VERIFIED-COVERAGE"
+        ],
+        "effects": [
+          "Selects one delivery path."
+        ],
+        "non_effects": [
+          "Selection performs no repository or release action."
+        ],
+        "decision_right": "DR-DELIVERY-SELECT",
+        "role": "repository-owner or release-owner",
+        "artifact": "VREC-IAR-011",
+        "decision": "which separately authorized delivery path to select",
+        "outcomes": [
+          "repository-integration",
+          "release-preparation",
+          "stop"
+        ],
+        "response": "Select one separately authorized delivery path for VREC-IAR-011."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "VREC-IAR-011",
+        "status": "verified"
+      }
+    ],
+    "after": [
+      {
+        "id": "VREC-IAR-011",
+        "status": "verified"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 50
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Recorded the assurance decision for VREC-IAR-011; referenced work orders were not changed."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "VREC-IAR-011 is verified."
+    ],
+    "decision_required": {
+      "decision_right": "DR-DELIVERY-SELECT",
+      "role": "repository-owner or release-owner",
+      "artifact": "VREC-IAR-011",
+      "decision": "which separately authorized delivery path to select",
+      "outcomes": [
+        "repository-integration",
+        "release-preparation",
+        "stop"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-DELIVERY-SELECT",
+      "step_id": "STEP-DELIVERY-SELECT",
+      "action": "which separately authorized delivery path to select"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Select one separately authorized delivery path for VREC-IAR-011."
+    },
+    "alternatives": [
+      "Use complete alternative procedure PROC-REPOSITORY-INTEGRATION."
+    ]
+  },
+  "result_sha256": "bfd8ec1695c2e74d8c816e116d9171ba69daf88de85b6f7adc04fa0ea05a442d",
+  "context": {
+    "reading_manifest": [
+      "ENGINEERING_HARNESS.md",
+      "docs/engineering/OPERATING_CARD.md",
+      "AGENTS.md",
+      "docs/engineering/ARTIFACT_AUTHORING.md",
+      "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
+      "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-022.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-023.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-024.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-026.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-027.md",
+      "docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md",
+      "docs/engineering/instruction-architecture/architecture/ARCH-IAR-011.md",
+      "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-011.md",
+      "docs/engineering/instruction-architecture/verification/VER-IAR-014.md",
+      "docs/engineering/instruction-architecture/work-orders/WO-IAR-015.md"
+    ],
+    "governing": [
+      "ADR-IAR-011",
+      "ARCH-IAR-011",
+      "CAP-IAR-002",
+      "INT-IAR-001",
+      "REQ-IAR-022",
+      "REQ-IAR-023",
+      "REQ-IAR-024",
+      "REQ-IAR-026",
+      "REQ-IAR-027",
+      "SPEC-IAR-014",
+      "VER-IAR-014",
+      "WO-IAR-015"
+    ],
+    "declared_paths": [],
+    "state": {
+      "status": "verified",
+      "family": "verification_record"
+    },
+    "next": {
+      "argv": [],
+      "procedure_id": "PROC-DELIVERY-SELECT",
+      "step_id": "STEP-DELIVERY-SELECT"
+    },
+    "decision_required": {
+      "decision_right": "DR-DELIVERY-SELECT",
+      "role": "repository-owner or release-owner",
+      "artifact": "VREC-IAR-011",
+      "decision": "which separately authorized delivery path to select",
+      "outcomes": [
+        "repository-integration",
+        "release-preparation",
+        "stop"
+      ]
+    }
+  }
+}

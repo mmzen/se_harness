@@ -2,7 +2,7 @@
 id = "VREC-IAR-011"
 type = "verification_record"
 title = "Verification candidate for WO-IAR-015"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-27"
 updated = "2026-09-27"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/instruction-architecture/evidence/WO-IAR-015
 evaluator_evidence_path = "docs/engineering/instruction-architecture/evidence/VREC-IAR-011-evaluator.json"
 evaluator_evidence_sha256 = "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f"
 
+verified_at = "2026-09-27T16:44:28Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-IAR-015"]
 conforms_to = ["VER-IAR-014"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-27T16:44:28Z"
+decided_by = "assurance-owner"
+reason = "Human user decision: I verify VREC-IAR-011. Codex applies the recorded assurance-owner decision for WO-IAR-015 at candidate c40da0920f6e6c42ffff685a8cd396c3f6a1a4b2, with the retained native-host surfaces, failed attempts and documented limitations. This decision verifies only the selected record; it does not change related work-order states or authorize merge, release, publication or adoption."
 +++
 
 # Verification Record Candidate
