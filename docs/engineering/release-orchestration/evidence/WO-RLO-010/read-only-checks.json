@@ -1,0 +1,70 @@
+[
+  {
+    "name": "evaluator",
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-B",
+      ".github/scripts/publish_dashboard.py",
+      "evaluator",
+      "--repository",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "--output",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\docs\\engineering\\release-orchestration\\evidence\\WO-RLO-010\\evaluator-descriptor.json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "exit_code": 0,
+    "stdout": "{\"payload_manifest\": \"se-harness-installed-payload-v1\", \"payload_sha256\": \"cf28e03f21a0e474af8c415499c69193ab2a20e08a95c0ad3514758a84cff54d\", \"sha256\": \"a683dbdf485d42aa20ea8502122c171a4c61c7d60f85db5b5f264bd336371c54\", \"tag\": \"v0.18.0\", \"url\": \"https://github.com/mmzen/se_harness/releases/download/v0.18.0/se_harness-0.18.0-py3-none-any.whl\", \"version\": \"0.18.0\", \"wheel\": \"se_harness-0.18.0-py3-none-any.whl\"}\n",
+    "stderr": ""
+  },
+  {
+    "name": "plan",
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-B",
+      ".github/scripts/publish_release.py",
+      "resolve",
+      "--repository",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "--release-record",
+      "RLS-SEH-028",
+      "--default-ref",
+      "refs/remotes/origin/main",
+      "--output",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\docs\\engineering\\release-orchestration\\evidence\\WO-RLO-010\\release-plan.json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "exit_code": 0,
+    "stdout": "{\"build_recipe\": \"release/build-recipe.json\", \"build_recipe_schema\": \"se-harness-release-build-recipe/v1\", \"build_recipe_sha256\": \"0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc\", \"candidate_commit\": \"30d4dba2a088c4f83756c1241b76cdab40f796bd\", \"checksums\": \"SHA256SUMS\", \"checksums_sha256\": \"90c870a856bb1bb07c8186585ce8045618f4589abbd71f20acc27cd7c02771d3\", \"distribution_schema\": 2, \"evaluator_evidence_path\": \"docs/engineering/release-0-19-0/evidence/RLS-SEH-028-evaluator.json\", \"evaluator_evidence_sha256\": \"81eef664cc9b26a839508163c924fc82fe531a4a9eaa8c8cc35ff3488f858c85\", \"git_object_format\": \"sha1\", \"governance_commit\": \"523ff825773e05c970c041ecee5c22bfabedaa3f\", \"release_contract\": \"REL-SEH-030\", \"release_record\": \"RLS-SEH-028\", \"release_record_path\": \"docs/engineering/release-0-19-0/releases/RLS-SEH-028.md\", \"released_at\": \"2026-09-27T18:44:21Z\", \"released_work\": [\"WO-DOC-016\", \"WO-ECP-039\", \"WO-HUP-019\", \"WO-HUP-020\", \"WO-IAR-013\", \"WO-IAR-014\", \"WO-IAR-015\", \"WO-IAR-016\", \"WO-IAR-017\", \"WO-IAR-018\", \"WO-IAR-019\", \"WO-PLG-023\", \"WO-PLG-025\", \"WO-RLS-025\"], \"repository\": \"mmzen/se_harness\", \"schema\": \"se-harness-release-plan/v2\", \"sdist\": \"se_harness-0.19.0.tar.gz\", \"sdist_sha256\": \"e8aae38d4f6896078739902491a9268cf3ebdfc199af05a7ae6d74cda7daaffe\", \"source_date_epoch\": 1790532014, \"source_manifest_sha256\": \"b9c8ba4e42f9387722d8512f2454500ba06de50c1c33006dfca48dacf6a6a0ee\", \"tag\": \"v0.19.0\", \"verification_records\": [\"VREC-SEH-028\"], \"version\": \"0.19.0\", \"wheel\": \"se_harness-0.19.0-py3-none-any.whl\", \"wheel_sha256\": \"43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8\"}\n",
+    "stderr": ""
+  },
+  {
+    "name": "distributions",
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-B",
+      "scripts/validate_release_distributions.py",
+      "--root",
+      ".",
+      "--require-record",
+      "RLS-SEH-028"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "exit_code": 0,
+    "stdout": "SE Harness release distribution validation: PASS (16 distribution-bearing records)\n",
+    "stderr": ""
+  },
+  {
+    "name": "cli-help",
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-B",
+      "-m",
+      "se_harness",
+      "--help"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "exit_code": 0,
+    "stdout": "usage: harnessctl [-h] [--version]\n                  {init,validate,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release} ...\n\nInstall and operate the standard software-engineering harness.\n\npositional arguments:\n  {init,validate,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release}\n    init                install the standard harness into an absent, empty or\n                        existing repository\n    validate            validate the repository artifact graph\n    inspect             inspect repository-wide attention and lifecycle queues\n    dashboard           generate the repository Harness Explorer\n    doctor              check an installed harness\n    skill-ownership     plan, apply, or restore explicit retained skill\n                        ownership\n    preflight           check work-order implementation or review readiness\n    check               project one selected WO, VREC, or RLS scope, or\n                        evaluate one of its checkpoints, and emit canonical\n                        restitution\n    evidence            write or rebind one work order's evidence packet to\n                        the current formal snapshot\n    pr-body             emit the LF-terminated pull-request body for one work\n                        order\n    transition          plan or atomically apply explicit lifecycle\n                        transitions\n    decide              dispose one pending decision with a declared option,\n                        under DR-DECISION-DISPOSE\n    raise-risk          record a risk description, owner and next action;\n                        optionally request a blocking decision\n    risks               list the risks threatening one artifact and its\n                        governing chain; writes nothing\n    check-pr            check a PR against its selected work orders and their\n                        combined scope\n    select-work-order   select one structured work-order field from a GitHub\n                        pull-request event\n    upgrade             plan or apply safe harness upgrades\n    scaffold-domain     safely create the canonical organization for one\n                        engineering domain\n    create-artifact     create one incomplete draft from the canonical\n                        artifact template\n    release-unit        derive a release unit's work-order census from the\n                        commits between the previous release tag and a\n                        candidate commit\n    identity            emit and verify one evaluator or candidate runtime\n                        identity\n    qualify             run one typed, provenance-bound release qualification\n                        operation\n    capture-verification\n                        prepare a ready commit-bound verification record\n    refresh-verification\n                        create a new ready record after an unchanged rebase;\n                        preserve the original\n    prepare-release     prepare a ready commit-bound release record\n\noptions:\n  -h, --help            show this help message and exit\n  --version             show program's version number and exit\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,245 @@
+{
+  "decision": {
+    "candidate": "ca5a52cdbb1dc0563c4b67c0a7f116f070ce472e",
+    "work_order": "WO-RLO-010",
+    "verification": "VER-RLO-007",
+    "evidence": {
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/approval-inputs.json": "fb556b25e7e46bdf407a674f3a052e59eb5c6bb1af92f497836fdd21c21d3c15",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/baseline-regressions.json": "317d4edb8723c013db7fddda3b82b5609c69dc42629d21d896710533d125852c",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/candidate-review.json": "6d624d1acedbce85351a779738dbf464c6196e9490a7d950043e06b8a8f75847",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/completion-invocation.json": "18ac44d2629b1cd8d26d5a1accd6460c7eb81fa3728dff18872f4141dd138f4a",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/completion-result.json": "06382ac9ff326b7e6fe4bc38b9fba80e3dc93603fea23a22c9480c9fb343c66e",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/doctor-result.json": "f94dd52a02b8aaea4a32451f0f76cbc8fb0068a2034028852811b28c4ebe798e",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/evaluator-descriptor.json": "fad67a9b3579d544130b08f3a095d687336b18f72141497f08de11414fe539d3",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/focused-tests.json": "4df500b20b687271b62a9c2114ccb0cbb180f1de7bba4a6e7f5b47fa7a7bd676",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/full-source-tests.json": "30863479746037e52a16f457aba5b229c4cda6f36445c76d9cd398c76b7ec47c",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/handoff-passed.json": "b725cab20e2df6f410edf708ee6d79e29e615e1d086352044847e4d61b542b49",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/handoff-result.json": "8914d130976b324f08ba54fa7c3953cb06402cf0feb2c78c9540483bdddfb39d",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/handoff.json": "98a3d5a095050f98eca035f2fd434eb06fc68daa8217f38386507a268e503d74",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/preservation-review.json": "09417ced7d16ad0be1bd8a49536424752d9499be10fa3e7efea13cd2a363a114",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/pubfix-approval-apply.invocation.json": "69d8b5ef9e5624394cdef149b9ac7e5524902f1f88ba020bd8f9fbaebe8a402d",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/pubfix-approval-apply.stdout": "b09e9fd3cd269327816f6137846ba89de2ac50ebff39b01ffca0e8711a735382",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/pubfix-start-apply.invocation.json": "6d68e75ba5d8163fb298bfc04c96868ad040614e0592fefa082999ce61d1d8cf",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/pubfix-start-apply.stdout": "93380d7cd34333c71e3df75e637e55574b2184a9b0aca0116da0e45f822fa1dd",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/r019-postmerge-publication-diagnosis.json": "fef9bf9f64b9f93566c9b6fffc344a18b12f2d0ee2ed8e33e4c11e13ab20820c",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/r019-publication-correction-proposal.md": "f5a26585e4ab9695579b884fe988f2626a5502f5a4e6f395d8913f953afcc216",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/r019-publication-plan-inspection.json": "9cb70805eb6f2ad83ccb1ba24290b7f80de499d4d06db7723dc8e182f22ff4be",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/read-only-checks.json": "3e216e1769deeabd5a8714c9f9e4e6620b2b213ab9150e09653939637e230def",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/release-plan.json": "ec9434dfbcf8ca37d9564ec1b25f1ab3aaa7e85d5b82d6c06435f8633541270a",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/REPORT.md": "93a2ae53438911655cc05f9de311bdda9b1771f5c79b27ba4de447ef39782eef",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/review-preflight-result.json": "57215684e55c81e9875a7a9923612c31f415d40dcfb54b1d84af745c08c625ec",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/validate-result.json": "154b0e4e2693616c289e8bfefe005a06dbb2c795a21306ce2150a59076b35703",
+      "docs/engineering/release-orchestration/evidence/WO-RLO-010/WO-RLO-010-handoff.md": "9ead168a8c0c06f478a2c17acd7566ad5f5c146a708bcbaa00085a49a949d22a"
+    },
+    "user_decision": "I verify vrec-rlo-010",
+    "record_sha256_before": "1a7fef6065f0e061c154595759c92c9b0da328b3ac3420d8de3e51a3f8a443e0",
+    "evaluator_evidence_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f",
+    "actor": "assurance-owner",
+    "applied_by": "Codex"
+  },
+  "invocation": {
+    "args": [
+      "transition",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "--set",
+      "VREC-RLO-010=verified",
+      "--decision",
+      "VREC-RLO-010=assurance-owner",
+      "--reason",
+      "VREC-RLO-010=The human assurance owner explicitly decided in this task: I verify vrec-rlo-010. Codex applies that decision to candidate ca5a52cdbb1dc0563c4b67c0a7f116f070ce472e after confirming the retained evidence digests are unchanged and the assurance gates pass.",
+      "--json",
+      "--apply"
+    ],
+    "exit_code": 0,
+    "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+  },
+  "result": {
+    "schema": "se-harness-workflow-result-v2",
+    "digest_format": "machine-fields-v1",
+    "candidate": {
+      "commit": "ca5a52cdbb1dc0563c4b67c0a7f116f070ce472e",
+      "git_object_format": "sha1"
+    },
+    "operation": {
+      "kind": "transition",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "VREC-RLO-010",
+      "artifacts": [
+        "VREC-RLO-010"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [],
+      "dependencies": [],
+      "declared_paths": [],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "transition",
+      "workflow_rule_id": "WFL-VREC-DELIVER",
+      "procedure_id": "PROC-DELIVERY-SELECT",
+      "status": "pass",
+      "gates": [
+        {
+          "id": "QG-G4-ASSURANCE-DECISION",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGP-G4A-GRAPH",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "formal-graph:VREC-RLO-010"
+                }
+              ],
+              "message": "The selected formal graph is valid."
+            },
+            {
+              "id": "QGP-G4A-INTEGRITY",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "repository-integrity:transition"
+                }
+              ],
+              "message": "No repository-integrity blocker prevents selected evaluation."
+            },
+            {
+              "id": "QGP-G4A-DECISION",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "decision-register:VREC-RLO-010"
+                }
+              ],
+              "message": "No open decision blocks VREC-RLO-010."
+            }
+          ]
+        },
+        {
+          "id": "QG-STRUCTURAL",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGS-EDGE",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "VREC-RLO-010"
+                }
+              ],
+              "message": "ready -> verified is a declared lifecycle edge for VREC-RLO-010."
+            }
+          ]
+        }
+      ]
+    },
+    "procedure": {
+      "id": "PROC-DELIVERY-SELECT",
+      "current_step": "STEP-DELIVERY-SELECT",
+      "steps": [
+        {
+          "id": "STEP-DELIVERY-SELECT",
+          "kind": "decision",
+          "gate_ids": [
+            "QG-G4-VERIFIED-COVERAGE"
+          ],
+          "effects": [
+            "Selects one delivery path."
+          ],
+          "non_effects": [
+            "Selection performs no repository or release action."
+          ],
+          "decision_right": "DR-DELIVERY-SELECT",
+          "role": "repository-owner or release-owner",
+          "artifact": "VREC-RLO-010",
+          "decision": "which separately authorized delivery path to select",
+          "outcomes": [
+            "repository-integration",
+            "release-preparation",
+            "stop"
+          ],
+          "response": "Select one separately authorized delivery path for VREC-RLO-010."
+        }
+      ]
+    },
+    "state": {
+      "before": [
+        {
+          "id": "VREC-RLO-010",
+          "status": "ready"
+        }
+      ],
+      "after": [
+        {
+          "id": "VREC-RLO-010",
+          "status": "verified"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 0
+    },
+    "mutation": {
+      "writes": [
+        {
+          "id": "VREC-RLO-010",
+          "path": "docs/engineering/release-orchestration/verification-records/VREC-RLO-010.md",
+          "fields": [
+            "lifecycle_events",
+            "status",
+            "updated",
+            "verified_at",
+            "verified_by"
+          ]
+        }
+      ]
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Applied 1 explicit lifecycle transition(s) atomically."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "VREC-RLO-010 is verified."
+      ],
+      "decision_required": {
+        "decision_right": "DR-DELIVERY-SELECT",
+        "role": "repository-owner or release-owner",
+        "artifact": "VREC-RLO-010",
+        "decision": "which separately authorized delivery path to select",
+        "outcomes": [
+          "repository-integration",
+          "release-preparation",
+          "stop"
+        ]
+      },
+      "next": {
+        "procedure_id": "PROC-DELIVERY-SELECT",
+        "step_id": "STEP-DELIVERY-SELECT",
+        "action": "which separately authorized delivery path to select"
+      },
+      "command_or_response": {
+        "kind": "response",
+        "value": "Select one separately authorized delivery path for VREC-RLO-010."
+      },
+      "alternatives": [
+        "Use complete alternative procedure PROC-REPOSITORY-INTEGRATION."
+      ]
+    },
+    "result_sha256": "ef389c331d2b71ce1230acbf1e323a25352ad9602d3991b957851889698b954c"
+  }
+}

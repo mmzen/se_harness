@@ -294,6 +294,22 @@ def _validated_release_record(metadata: dict[str, Any], path: str, tag: str) -> 
 
 
 
+def _locked_evaluator(lock: dict[str, Any]) -> dict[str, Any]:
+    schema = lock.get("schema")
+    if type(schema) is not int or schema not in {3, 4}:
+        raise PublicationError("publication requires a schema-3 or schema-4 evaluator lock")
+    if schema == 4:
+        ownership = lock.get("skill_ownership")
+        # SPEC-PLG-021: older binding fields remain readable. Publication needs
+        # only the provider choice and must not load candidate or plugin code.
+        if not isinstance(ownership, dict) or ownership.get("provider") != "plugin":
+            raise PublicationError("schema-4 evaluator lock must select plugin ownership")
+    evaluator = lock.get("evaluator")
+    if not isinstance(evaluator, dict):
+        raise PublicationError("standard evaluator lock has no evaluator identity")
+    return evaluator
+
+
 def _validated_evaluator_binding(
     repository: Path,
     evidence_commit: str,
@@ -403,19 +419,15 @@ def _validated_evaluator_binding(
         lock_text.encode("utf-8"),
         label=f"{selected_lock_commit}:.engineering-harness.lock",
     )
-    locked = lock.get("evaluator") if lock.get("schema") == 3 else None
-    expected = (
-        {
-            "version": locked.get("version"),
-            "payload_manifest": locked.get("payload_manifest"),
-            "payload_sha256": locked.get("payload_sha256"),
-            "archive_name": locked.get("archive_name"),
-            "archive_sha256": locked.get("archive_sha256"),
-        }
-        if isinstance(locked, dict)
-        else None
-    )
-    if expected is None or evaluator != expected:
+    locked = _locked_evaluator(lock)
+    expected = {
+        "version": locked.get("version"),
+        "payload_manifest": locked.get("payload_manifest"),
+        "payload_sha256": locked.get("payload_sha256"),
+        "archive_name": locked.get("archive_name"),
+        "archive_sha256": locked.get("archive_sha256"),
+    }
+    if evaluator != expected:
         raise PublicationError(f"release record {record_id} evaluator evidence differs from the standard lock")
     return {"path": path, "sha256": digest}
 
@@ -556,13 +568,7 @@ def read_evaluator(repository: Path) -> EvaluatorDescriptor:
         raise PublicationError("standard configuration has no valid tool version")
     if lock.get("hash_algorithm") != "sha256" or lock.get("hash_mode") != "utf8-text-lf-v1":
         raise PublicationError("standard evaluator lock uses unsupported integrity semantics")
-    evaluator: Any
-    if lock.get("schema") == 3:
-        evaluator = lock.get("evaluator")
-        if not isinstance(evaluator, dict):
-            raise PublicationError("standard evaluator lock has no evaluator identity")
-    else:
-        raise PublicationError("publication requires a schema-3 evaluator lock")
+    evaluator = _locked_evaluator(lock)
     allowed = {
         "version",
         "payload_manifest",

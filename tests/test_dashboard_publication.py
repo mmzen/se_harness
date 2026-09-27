@@ -243,6 +243,42 @@ releases_work = ["WO-TST-001"]
         self.assertEqual(self.governance, result.governance_commit)
         self.assertEqual(self.evaluator_evidence_sha256, result.evaluator_evidence_sha256)
 
+    def test_plugin_lock_binding_preserves_identity_and_evidence_checks(self) -> None:
+        lock_path = self.root / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        lock.update(schema=4, skill_ownership={"provider": "plugin"})
+        metadata = {
+            "id": "RLS-TST-001", "evaluator_evidence_path": self.evaluator_evidence_path,
+            "evaluator_evidence_sha256": self.evaluator_evidence_sha256,
+        }
+
+        def assess():
+            write(lock_path, json.dumps(lock))
+            self.commit("assess plugin lock binding")
+            return PUBLICATION._validated_evaluator_binding(self.root, "HEAD", metadata)
+
+        self.assertEqual(self.evaluator_evidence_sha256, assess()["sha256"])
+        lock["evaluator"]["payload_sha256"] = "c" * 64
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "differs from the standard lock"):
+            assess()
+        lock["evaluator"] = json.loads(self.evaluator_evidence)["evaluator"]
+        for ownership in (None, [], {}, {"provider": "repository"}, {"provider": 4}):
+            with self.subTest(ownership=ownership):
+                lock["skill_ownership"] = ownership
+                with self.assertRaisesRegex(PUBLICATION.PublicationError, "plugin ownership"):
+                    assess()
+        lock["skill_ownership"] = {"provider": "plugin", "historical_binding": {"path": "unused"}}
+        self.assertEqual(self.evaluator_evidence_sha256, assess()["sha256"])
+        for schema in (2, 5, "4", 4.0):
+            with self.subTest(schema=schema):
+                lock["schema"] = schema
+                with self.assertRaisesRegex(PUBLICATION.PublicationError, "schema-3.*schema-4"):
+                    assess()
+        lock["schema"] = 4
+        write(self.root / self.evaluator_evidence_path, "{}\n")
+        with self.assertRaisesRegex(PUBLICATION.PublicationError, "evidence digest differs"):
+            assess()
+
 
 class EvaluatorDescriptorTests(unittest.TestCase):
     def setUp(self) -> None:
@@ -293,6 +329,38 @@ class EvaluatorDescriptorTests(unittest.TestCase):
             "v0.5.0/se_harness-0.5.0-py3-none-any.whl",
             descriptor.url,
         )
+
+    def test_plugin_owned_evaluator_preserves_schema3_identity(self) -> None:
+        expected = PUBLICATION.read_evaluator(self.root)
+        lock_path = self.root / ".engineering-harness.lock"
+        lock = json.loads(lock_path.read_text(encoding="utf-8"))
+        for ownership in ({"provider": "plugin"},
+                          {"provider": "plugin", "historical_binding": {"path": "unused"}}):
+            with self.subTest(ownership=ownership):
+                lock.update(schema=4, skill_ownership=ownership)
+                write(lock_path, json.dumps(lock))
+                self.assertEqual(expected, PUBLICATION.read_evaluator(self.root))
+
+    def test_plugin_owned_evaluator_rejects_invalid_inputs(self) -> None:
+        lock_path = self.root / ".engineering-harness.lock"
+        original = json.loads(lock_path.read_text(encoding="utf-8"))
+        invalid = [
+            ({"schema": schema}, "schema-3.*schema-4")
+            for schema in (2, 5, "4", 4.0)
+        ] + [
+            ({"schema": 4, "skill_ownership": ownership}, "plugin ownership")
+            for ownership in (None, [], {}, {"provider": "repository"}, {"provider": 4})
+        ] + [
+            ({"hash_mode": "unknown"}, "integrity semantics"),
+            ({"tool_version": "0.4.1"}, "versions differ"),
+            ({"evaluator": {**original["evaluator"], "archive_sha256": None}}, "complete.*archive identity"),
+        ]
+        for changes, message in invalid:
+            with self.subTest(changes=changes):
+                lock = {**original, "schema": 4, "skill_ownership": {"provider": "plugin"}, **changes}
+                write(lock_path, json.dumps(lock))
+                with self.assertRaisesRegex(PUBLICATION.PublicationError, message):
+                    PUBLICATION.read_evaluator(self.root)
 
     def test_legacy_or_incomplete_lock_is_rejected(self) -> None:
         lock_path = self.root / ".engineering-harness.lock"

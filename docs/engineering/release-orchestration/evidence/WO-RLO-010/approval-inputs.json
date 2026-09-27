@@ -1,0 +1,10 @@
+{
+  "human_decision": "Ok for the correction",
+  "accepted_proposal_sha256": "f5a26585e4ab9695579b884fe988f2626a5502f5a4e6f395d8913f953afcc216",
+  "formalization_sha256": {
+    "docs/engineering/release-orchestration/work-orders/WO-RLO-010.md": "5eef1a972f74ad528c645d9d8422219a2f34cb39368d4774d25d8c5e50e7c3e5",
+    "docs/engineering/release-orchestration/verification/VER-RLO-007.md": "ab523a4c2c61eeafdfb1b19f9abed7ca57c82ff14c31e4a7fc7a1478bba20621"
+  },
+  "all_ref_history_id_collisions": [],
+  "scope_review": "The two artifacts formalize the accepted shared-helper correction and its regression checks. No amendment, release-input change or publication is selected."
+}

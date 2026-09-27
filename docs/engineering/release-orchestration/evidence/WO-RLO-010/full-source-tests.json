@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-B",
+    "scripts/run_tests.py",
+    "--workers",
+    "4",
+    "--scale",
+    "full"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\pubfix-verification",
+  "commit": "8ac5a9d0aafb4f15b54f8907b081eb2c84e25d33",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "win32",
+  "environment_overrides": {
+    "GIT_CONFIG_COUNT": "3",
+    "GIT_CONFIG_KEY_0": "safe.directory",
+    "GIT_CONFIG_VALUE_0": "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/pubfix-verification",
+    "GIT_CONFIG_KEY_1": "core.autocrlf",
+    "GIT_CONFIG_VALUE_1": "false",
+    "GIT_CONFIG_KEY_2": "core.longpaths",
+    "GIT_CONFIG_VALUE_2": "true"
+  },
+  "seconds": 211.51149679999799,
+  "exit_code": 0,
+  "stdout": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-d732z02y\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-d732z02y\\private\\verity-plane\\evaluator\\Scripts\\python.exe\ndocs/notes/diagnostic-codes.md matches the source\nWEX_SCALE artifacts=100 validation=0.118682s focus=0.266175s plan=0.219226s\nWEX_SCALE artifacts=500 validation=0.519854s focus=0.696005s plan=0.970671s\nWEX_SCALE artifacts=1000 validation=1.029592s focus=1.273060s plan=2.056277s\n----------------------------------------------------------------------\nRan 1126 tests in 207.515s (175 classes, 4 workers)\n\nOK (skipped=16)\n",
+  "stderr": "--workers must be at least 1\n",
+  "checkout_preparation": "First isolated-checkout attempt failed on a historical long path and Git cleaned it up. Retried with command-local core.longpaths=true and core.autocrlf=false; no persistent Git setting or fixture changed."
+}
