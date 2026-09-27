@@ -1,0 +1,134 @@
+[
+  {
+    "artifact_path": "upgrade-rehearsal-Linux/rehearsal-result-1/upgrade-rehearsal-result.json",
+    "failure": null,
+    "instruction_delivery": {
+      "input": "synthetic-fixture",
+      "native_host_delivery": "not_assessed",
+      "refusal_preserved_repository": true
+    },
+    "lock": {
+      "canonical_sha256": "0a5f771dea167ccd224d736c4bba18b8e9a38e68765e8101aeac1f5552399776",
+      "evaluator": {
+        "payload_sha256": "71c951a74d2f9c242d594fdbc419dcb173b87d51d25694db6a54a9b6cfc6c356",
+        "version": "0.19.0"
+      },
+      "schema": 4,
+      "tool_version": "0.19.0"
+    },
+    "overall_result": "pass",
+    "predecessor": {
+      "version": "0.18.0"
+    },
+    "schema": "se-harness-upgrade-rehearsal-v1",
+    "semantic_sha256": "0a5f771dea167ccd224d736c4bba18b8e9a38e68765e8101aeac1f5552399776",
+    "successor": {
+      "version": "0.19.0"
+    },
+    "tolerated_diagnostics": [],
+    "validation": {
+      "artifacts": 1691,
+      "errors": 0,
+      "warnings": 50
+    }
+  },
+  {
+    "artifact_path": "upgrade-rehearsal-Linux/rehearsal-result-2/upgrade-rehearsal-result.json",
+    "failure": null,
+    "instruction_delivery": {
+      "input": "synthetic-fixture",
+      "native_host_delivery": "not_assessed",
+      "refusal_preserved_repository": true
+    },
+    "lock": {
+      "canonical_sha256": "0a5f771dea167ccd224d736c4bba18b8e9a38e68765e8101aeac1f5552399776",
+      "evaluator": {
+        "payload_sha256": "71c951a74d2f9c242d594fdbc419dcb173b87d51d25694db6a54a9b6cfc6c356",
+        "version": "0.19.0"
+      },
+      "schema": 4,
+      "tool_version": "0.19.0"
+    },
+    "overall_result": "pass",
+    "predecessor": {
+      "version": "0.18.0"
+    },
+    "schema": "se-harness-upgrade-rehearsal-v1",
+    "semantic_sha256": "0a5f771dea167ccd224d736c4bba18b8e9a38e68765e8101aeac1f5552399776",
+    "successor": {
+      "version": "0.19.0"
+    },
+    "tolerated_diagnostics": [],
+    "validation": {
+      "artifacts": 1691,
+      "errors": 0,
+      "warnings": 50
+    }
+  },
+  {
+    "artifact_path": "upgrade-rehearsal-Windows/rehearsal-result-1/upgrade-rehearsal-result.json",
+    "failure": null,
+    "instruction_delivery": {
+      "input": "synthetic-fixture",
+      "native_host_delivery": "not_assessed",
+      "refusal_preserved_repository": true
+    },
+    "lock": {
+      "canonical_sha256": "0a5f771dea167ccd224d736c4bba18b8e9a38e68765e8101aeac1f5552399776",
+      "evaluator": {
+        "payload_sha256": "71c951a74d2f9c242d594fdbc419dcb173b87d51d25694db6a54a9b6cfc6c356",
+        "version": "0.19.0"
+      },
+      "schema": 4,
+      "tool_version": "0.19.0"
+    },
+    "overall_result": "pass",
+    "predecessor": {
+      "version": "0.18.0"
+    },
+    "schema": "se-harness-upgrade-rehearsal-v1",
+    "semantic_sha256": "0a5f771dea167ccd224d736c4bba18b8e9a38e68765e8101aeac1f5552399776",
+    "successor": {
+      "version": "0.19.0"
+    },
+    "tolerated_diagnostics": [],
+    "validation": {
+      "artifacts": 1691,
+      "errors": 0,
+      "warnings": 50
+    }
+  },
+  {
+    "artifact_path": "upgrade-rehearsal-Windows/rehearsal-result-2/upgrade-rehearsal-result.json",
+    "failure": null,
+    "instruction_delivery": {
+      "input": "synthetic-fixture",
+      "native_host_delivery": "not_assessed",
+      "refusal_preserved_repository": true
+    },
+    "lock": {
+      "canonical_sha256": "0a5f771dea167ccd224d736c4bba18b8e9a38e68765e8101aeac1f5552399776",
+      "evaluator": {
+        "payload_sha256": "71c951a74d2f9c242d594fdbc419dcb173b87d51d25694db6a54a9b6cfc6c356",
+        "version": "0.19.0"
+      },
+      "schema": 4,
+      "tool_version": "0.19.0"
+    },
+    "overall_result": "pass",
+    "predecessor": {
+      "version": "0.18.0"
+    },
+    "schema": "se-harness-upgrade-rehearsal-v1",
+    "semantic_sha256": "0a5f771dea167ccd224d736c4bba18b8e9a38e68765e8101aeac1f5552399776",
+    "successor": {
+      "version": "0.19.0"
+    },
+    "tolerated_diagnostics": [],
+    "validation": {
+      "artifacts": 1691,
+      "errors": 0,
+      "warnings": 50
+    }
+  }
+]

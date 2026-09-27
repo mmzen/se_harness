@@ -1,0 +1,584 @@
+{
+  "candidate": "30d4dba2a088c4f83756c1241b76cdab40f796bd",
+  "inputs": {
+    "work_orders": [
+      "WO-DOC-016",
+      "WO-ECP-039",
+      "WO-HUP-019",
+      "WO-HUP-020",
+      "WO-IAR-013",
+      "WO-IAR-014",
+      "WO-IAR-015",
+      "WO-IAR-016",
+      "WO-IAR-017",
+      "WO-IAR-018",
+      "WO-IAR-019",
+      "WO-PLG-023",
+      "WO-PLG-025",
+      "WO-RLS-025"
+    ],
+    "verification_contracts": [
+      "VER-DST-001",
+      "VER-DST-029",
+      "VER-ECP-027",
+      "VER-HUP-019",
+      "VER-HUP-020",
+      "VER-IAR-014",
+      "VER-PLG-001",
+      "VER-PLG-016",
+      "VER-PLG-021",
+      "VER-PLG-023",
+      "VER-PLG-025"
+    ],
+    "paths": [
+      "docs\\engineering\\harness-distribution\\verification\\VER-DST-001.md",
+      "docs\\engineering\\harness-distribution\\verification\\VER-DST-029.md",
+      "docs\\engineering\\execution-control-plane\\verification\\VER-ECP-027.md",
+      "docs\\engineering\\repository-harness-upgrade\\verification\\VER-HUP-019.md",
+      "docs\\engineering\\repository-harness-upgrade\\verification\\VER-HUP-020.md",
+      "docs\\engineering\\instruction-architecture\\verification\\VER-IAR-014.md",
+      "docs\\engineering\\plugin-integration\\verification\\VER-PLG-001.md",
+      "docs\\engineering\\plugin-integration\\verification\\VER-PLG-016.md",
+      "docs\\engineering\\plugin-integration\\verification\\VER-PLG-021.md",
+      "docs\\engineering\\plugin-integration\\verification\\VER-PLG-023.md",
+      "docs\\engineering\\plugin-integration\\verification\\VER-PLG-025.md"
+    ]
+  },
+  "evidence": [
+    {
+      "path": "docs/engineering/execution-control-plane/evidence/VREC-ECP-041-evaluator.json",
+      "committed_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f",
+      "checkout_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/execution-control-plane/evidence/WO-ECP-039/WO-ECP-039-handoff.md",
+      "committed_sha256": "f99499706a0bd21bbf493bb4c52cdc9a250a610dd709d432077d1de7a6119b2a",
+      "checkout_sha256": "e487d9ca940b7abeca5f33cbfddf027d19b0cecd54bfd13ad0fe6e169c2ca12c",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/execution-control-plane/verification-records/VREC-ECP-041.md",
+      "committed_sha256": "5cb42b67f9eaa56dfaafecadf47b766e46a094b37f69d589177ff92f286f8dd0",
+      "checkout_sha256": "e291a7c99d4c794f4778f93ded82b630f57dc5883c2e4ccaeb46fab9995c4ec5",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/harness-distribution/evidence/VREC-DOC-008-evaluator.json",
+      "committed_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f",
+      "checkout_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/harness-distribution/evidence/WO-DOC-016/WO-DOC-016-handoff.md",
+      "committed_sha256": "43bb42e983270c15c37144b2c71cb9aa4fd473d41958853ca17cebb520f4f878",
+      "checkout_sha256": "c4d15e6c7c64e70cbd9fd7691bf3f7dfce1cf392fa4426aa706d74570c540046",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/harness-distribution/verification-records/VREC-DOC-008.md",
+      "committed_sha256": "af47f92081dcf4bd162cb9a6e5b34dc081215567d7c5b50e359a5e4a09a6d007",
+      "checkout_sha256": "043ac20f415c53a621117d738320c192b4eaffa8fdae9624de5fb00402f738c7",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/VREC-IAR-009-evaluator.json",
+      "committed_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f",
+      "checkout_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/VREC-IAR-010-evaluator.json",
+      "committed_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f",
+      "checkout_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/VREC-IAR-011-evaluator.json",
+      "committed_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f",
+      "checkout_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/VREC-IAR-012-evaluator.json",
+      "committed_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f",
+      "checkout_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-013/WO-IAR-013-handoff.md",
+      "committed_sha256": "800087d89632da23bf63fd73da51c54d74de402471d446e4fd5bc2d09d24cf3f",
+      "checkout_sha256": "800087d89632da23bf63fd73da51c54d74de402471d446e4fd5bc2d09d24cf3f",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-013/closeout/REPORT.md",
+      "committed_sha256": "d27adf6d04fd3c4db608c128a3bf0d54e4a3ae10de12973effd5cb74f7794afc",
+      "checkout_sha256": "d27adf6d04fd3c4db608c128a3bf0d54e4a3ae10de12973effd5cb74f7794afc",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-014/WO-IAR-014-handoff.md",
+      "committed_sha256": "31d67a9e53618e1962471bf27803917fa7cc81012d8cb9654364e86949db1dae",
+      "checkout_sha256": "31d67a9e53618e1962471bf27803917fa7cc81012d8cb9654364e86949db1dae",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/REPORT.md",
+      "committed_sha256": "1399827b8028b1f31ab18327203966eadc23fe57e17959c624a5b53970e8fa58",
+      "checkout_sha256": "1399827b8028b1f31ab18327203966eadc23fe57e17959c624a5b53970e8fa58",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-015/WO-IAR-015-handoff.md",
+      "committed_sha256": "d38b104efebbe3fdbc4c45d51285f6428f9427ccaed2d5b1f3adf516019f7950",
+      "checkout_sha256": "d38b104efebbe3fdbc4c45d51285f6428f9427ccaed2d5b1f3adf516019f7950",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/README.md",
+      "committed_sha256": "f7166c1dcbe50f641f6e9e82a9ff671e579d46b91c905c116051804c9935593a",
+      "checkout_sha256": "f7166c1dcbe50f641f6e9e82a9ff671e579d46b91c905c116051804c9935593a",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-016/WO-IAR-016-handoff.md",
+      "committed_sha256": "6c939eb9fc40747b791fb0993be7c6dcbcb5494263f778fd58367f6802ca923d",
+      "checkout_sha256": "6c939eb9fc40747b791fb0993be7c6dcbcb5494263f778fd58367f6802ca923d",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-016/closeout/REPORT.md",
+      "committed_sha256": "3389f0b6254f83b8e192eaa4b4981a06ebc795c3f161e9dc66f490dd03b05faa",
+      "checkout_sha256": "3389f0b6254f83b8e192eaa4b4981a06ebc795c3f161e9dc66f490dd03b05faa",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-017/WO-IAR-017-handoff.md",
+      "committed_sha256": "33ade3b62eeacbbbf224aaee6d3547814ebb30723bec00057e9cb1868822c3b0",
+      "checkout_sha256": "33ade3b62eeacbbbf224aaee6d3547814ebb30723bec00057e9cb1868822c3b0",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-018/WO-IAR-018-handoff.md",
+      "committed_sha256": "fbf04fc2a57851c5bd26faed60c52d2e13bdc88743c239dd8a08af05621f892c",
+      "checkout_sha256": "fbf04fc2a57851c5bd26faed60c52d2e13bdc88743c239dd8a08af05621f892c",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-019/WO-IAR-019-handoff.md",
+      "committed_sha256": "52df6b3c191ba3dae919d9dc953b7e85530c1fc6ce8f79a4544be44bf93b451d",
+      "checkout_sha256": "52df6b3c191ba3dae919d9dc953b7e85530c1fc6ce8f79a4544be44bf93b451d",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/verification-records/VREC-IAR-009.md",
+      "committed_sha256": "007f49b9491b2696697d13453eeda63d3cb85a88c5e1200738ad586e64401cc6",
+      "checkout_sha256": "007f49b9491b2696697d13453eeda63d3cb85a88c5e1200738ad586e64401cc6",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/verification-records/VREC-IAR-010.md",
+      "committed_sha256": "81eedbf98926065a249c24c27ef7b345d64ea904f2df2b3d4b70ef45bbd401c7",
+      "checkout_sha256": "81eedbf98926065a249c24c27ef7b345d64ea904f2df2b3d4b70ef45bbd401c7",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/verification-records/VREC-IAR-011.md",
+      "committed_sha256": "61c986bdb78b3caee5b315a6ad3c0a0d92153e292b3917e5a9ceb3a89f74c504",
+      "checkout_sha256": "61c986bdb78b3caee5b315a6ad3c0a0d92153e292b3917e5a9ceb3a89f74c504",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/verification-records/VREC-IAR-012.md",
+      "committed_sha256": "6003c545c03b9394234e8abe39db40c77bd3e49cf0733033e9e502365eae0988",
+      "checkout_sha256": "6003c545c03b9394234e8abe39db40c77bd3e49cf0733033e9e502365eae0988",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/VREC-PLG-020-evaluator.json",
+      "committed_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f",
+      "checkout_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-023/WO-PLG-023-handoff.md",
+      "committed_sha256": "d9aae4cdcb7d5cd0638c8f90e918d1e3cbf2a4fb93eb0789a1608c1279daf290",
+      "checkout_sha256": "445ce45a90d14699252f5bd3cfe3d70c7e3bfb0f07f4ecdebc226c8601a94639",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-023/publication-2026-09-15/README.md",
+      "committed_sha256": "303e4d2ae011ec7b4cda4d2d65465f8da3d97db2af7c2d9e02793f01c5ff80ba",
+      "checkout_sha256": "4256cb71338093eb6785f6550212d95f07d14e4ba64fb30ae6959caec0f16e43",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/evidence/WO-PLG-025/WO-PLG-025-handoff.md",
+      "committed_sha256": "69904a9a4df466c994944c8e2c88ca776b6d7adafec8d98f89f562af5d27b01c",
+      "checkout_sha256": "d035018aa78037973241577b50e2297ecd4ac43a0fc208424191b88546d21136",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/verification-records/VREC-PLG-020.md",
+      "committed_sha256": "f6cfab4daa3694cfb5c51940b9ecd3158dad3cce781abb614aa96175decbfd39",
+      "checkout_sha256": "5581e49c7b5aad9b6b3a15e093fabbb8f4cd1ab900059c41d47c582fb3cc8b31",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/RELEASE_NOTES.md",
+      "committed_sha256": "ba3f3d0f521a30917a78f440d3ac44ad5495c06bc4f8b5a9ac873d21281fd8dc",
+      "checkout_sha256": "ba3f3d0f521a30917a78f440d3ac44ad5495c06bc4f8b5a9ac873d21281fd8dc",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/coverage.md",
+      "committed_sha256": "bce1b7081b454300e236593c561b4a13eb8a776e8b6cf5666c879f783152dd12",
+      "checkout_sha256": "bce1b7081b454300e236593c561b4a13eb8a776e8b6cf5666c879f783152dd12",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/REPORT.md",
+      "committed_sha256": "825624783aa8e39371e3cefb8248339f32455be97569cbf38d42a48909353a8e",
+      "checkout_sha256": "825624783aa8e39371e3cefb8248339f32455be97569cbf38d42a48909353a8e",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/WO-RLS-025-handoff.md",
+      "committed_sha256": "a6e894f64acfe2d104caf2bb7f279ab85b9706bb2c0163ea9ab7799ed1b8667c",
+      "checkout_sha256": "a6e894f64acfe2d104caf2bb7f279ab85b9706bb2c0163ea9ab7799ed1b8667c",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/approval-inputs.json",
+      "committed_sha256": "9cbe2747475555dd40b68edd844b4e5da1b37f7bfe6a9309dda5f2bd9a91feeb",
+      "checkout_sha256": "9cbe2747475555dd40b68edd844b4e5da1b37f7bfe6a9309dda5f2bd9a91feeb",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/build-initial.json",
+      "committed_sha256": "54634b70f4103a4ce5551b6608e58bfa9fd509b4993f77a0a2c7fc810fd6664a",
+      "checkout_sha256": "54634b70f4103a4ce5551b6608e58bfa9fd509b4993f77a0a2c7fc810fd6664a",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/candidate-initial-ci.json",
+      "committed_sha256": "1126e106badf85b5b328df95d8f7453093f2920be200ad4d45c9ba3041677787",
+      "checkout_sha256": "1126e106badf85b5b328df95d8f7453093f2920be200ad4d45c9ba3041677787",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/ci-tree-equivalence.json",
+      "committed_sha256": "2679bee7fa9dd75f236b64c74a431b9ca7fc8d248a832c3eaff5e05f60de5a19",
+      "checkout_sha256": "2679bee7fa9dd75f236b64c74a431b9ca7fc8d248a832c3eaff5e05f60de5a19",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/cli-help.json",
+      "committed_sha256": "a8da14d2f1a18a28205849bffaf8a87ccab460ae4e9c1429b75d346220cd18ba",
+      "checkout_sha256": "a8da14d2f1a18a28205849bffaf8a87ccab460ae4e9c1429b75d346220cd18ba",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/completion-checks.json",
+      "committed_sha256": "9eccd188649322e7ff6ce85e4b0865cb9424f42bc6600a54de9f8ddf185bb03a",
+      "checkout_sha256": "9eccd188649322e7ff6ce85e4b0865cb9424f42bc6600a54de9f8ddf185bb03a",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/development-inspection.json",
+      "committed_sha256": "300b7519290b8f3f9a6d9e0a13e25127baebac836371b7220ccfba99a65f7029",
+      "checkout_sha256": "300b7519290b8f3f9a6d9e0a13e25127baebac836371b7220ccfba99a65f7029",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/development.command.json",
+      "committed_sha256": "31433b0cf3746f37c212b6df68b8d1c23d6c798f553a3c2564ddaadc2bcf9476",
+      "checkout_sha256": "31433b0cf3746f37c212b6df68b8d1c23d6c798f553a3c2564ddaadc2bcf9476",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/distributions.json",
+      "committed_sha256": "2bf70ee31a98aa673be318098743c1d4681abc651169881409c4d48975f8d0fa",
+      "checkout_sha256": "2bf70ee31a98aa673be318098743c1d4681abc651169881409c4d48975f8d0fa",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/focused.json",
+      "committed_sha256": "b01499c707f283d96bb148b16b8701f7ae12402d231689631de950c2e1090f98",
+      "checkout_sha256": "b01499c707f283d96bb148b16b8701f7ae12402d231689631de950c2e1090f98",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/handoff.json",
+      "committed_sha256": "81cf4250bbfc9f1003beb75cdc2b0912965f6e3951fe4bfcd9b5a7056198bb83",
+      "checkout_sha256": "81cf4250bbfc9f1003beb75cdc2b0912965f6e3951fe4bfcd9b5a7056198bb83",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/historical-evidence-review.json",
+      "committed_sha256": "8579b00f5ccdb4e079bb453bdccced4518d9d33075804baa6631b66829456a09",
+      "checkout_sha256": "8579b00f5ccdb4e079bb453bdccced4518d9d33075804baa6631b66829456a09",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/linux-source-initial.json",
+      "committed_sha256": "bd024f56c07e4beace28b3dac7c101870e4dcfc001b6a829dc8b54dfa8631695",
+      "checkout_sha256": "bd024f56c07e4beace28b3dac7c101870e4dcfc001b6a829dc8b54dfa8631695",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/production-plan.json",
+      "committed_sha256": "1a564f008d7fec54af17b315313bb0619806d771f41e58017cc1027f7e867e78",
+      "checkout_sha256": "1a564f008d7fec54af17b315313bb0619806d771f41e58017cc1027f7e867e78",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/r019-approval-apply.invocation.json",
+      "committed_sha256": "43a9d90e62d6e4a7f83d83d681f4b84eaf5e065ef0a8faeb8c1f9c6d40b37a6b",
+      "checkout_sha256": "43a9d90e62d6e4a7f83d83d681f4b84eaf5e065ef0a8faeb8c1f9c6d40b37a6b",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/r019-approval-apply.stdout",
+      "committed_sha256": "587d92678629b5a53d0b855067f63fe8089a7904725f9ba28ccad024cb9eb2fb",
+      "checkout_sha256": "587d92678629b5a53d0b855067f63fe8089a7904725f9ba28ccad024cb9eb2fb",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/r019-start-apply.invocation.json",
+      "committed_sha256": "d53f3702f587ff7bda69764960e723be640efcedb247d8294ca4efc8f9cf3622",
+      "checkout_sha256": "d53f3702f587ff7bda69764960e723be640efcedb247d8294ca4efc8f9cf3622",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/r019-start-apply.stdout",
+      "committed_sha256": "f5d6fd8a4ddd47f436dbd00a2161210cc3f8ced46e9b1439a019f32aa213fbb4",
+      "checkout_sha256": "f5d6fd8a4ddd47f436dbd00a2161210cc3f8ced46e9b1439a019f32aa213fbb4",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/rehearsal-initial-ci.json",
+      "committed_sha256": "641505c096949411276aeab3b61775147829515ac4371e6a51a89a3c1e22885f",
+      "checkout_sha256": "641505c096949411276aeab3b61775147829515ac4371e6a51a89a3c1e22885f",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/release-0-19-0/evidence/WO-RLS-025/windows-source-initial.json",
+      "committed_sha256": "3ed503633ed10ee2b55220a8e90c3b75ceae115d0ec505c59eb3155aecc580d3",
+      "checkout_sha256": "3ed503633ed10ee2b55220a8e90c3b75ceae115d0ec505c59eb3155aecc580d3",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-018-evaluator.json",
+      "committed_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f",
+      "checkout_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-019/WO-HUP-019-handoff.md",
+      "committed_sha256": "777e1b133ea8d330f08e94d52b0438b7e7a88a172de487ee59e8554fd26aa5f0",
+      "checkout_sha256": "a2a93b3a7dff7aabafb1b3e08dc57b3b9a8368c500ff159c1e7f1f74f8917d4e",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/WO-HUP-020-handoff.md",
+      "committed_sha256": "742cee2663677698ec535bf9a6fcf83226e0d3c9c03a934c3307d9f74c44aa00",
+      "checkout_sha256": "a061c65533e1772883746c3f1e1cd13d00af591c92eabbb7155b0ed760b04de6",
+      "only_line_endings_may_differ": true
+    },
+    {
+      "path": "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-018.md",
+      "committed_sha256": "362965b3fc0d24872a090fb83e6b4fffd736470271365f74e33146b3901efd39",
+      "checkout_sha256": "31fda1b7e9a0f87d2ce918cfb4e112c36da9dbc2a2e26ee62ff46e6d906a436c",
+      "only_line_endings_may_differ": true
+    }
+  ],
+  "args": [
+    "capture-verification",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--id",
+    "VREC-SEH-028",
+    "--owner",
+    "Codex",
+    "--domain",
+    "release-0-19-0",
+    "--json",
+    "--work-order",
+    "WO-DOC-016",
+    "--work-order",
+    "WO-ECP-039",
+    "--work-order",
+    "WO-HUP-019",
+    "--work-order",
+    "WO-HUP-020",
+    "--work-order",
+    "WO-IAR-013",
+    "--work-order",
+    "WO-IAR-014",
+    "--work-order",
+    "WO-IAR-015",
+    "--work-order",
+    "WO-IAR-016",
+    "--work-order",
+    "WO-IAR-017",
+    "--work-order",
+    "WO-IAR-018",
+    "--work-order",
+    "WO-IAR-019",
+    "--work-order",
+    "WO-PLG-023",
+    "--work-order",
+    "WO-PLG-025",
+    "--work-order",
+    "WO-RLS-025",
+    "--verification",
+    "VER-DST-001",
+    "--verification",
+    "VER-DST-029",
+    "--verification",
+    "VER-ECP-027",
+    "--verification",
+    "VER-HUP-019",
+    "--verification",
+    "VER-HUP-020",
+    "--verification",
+    "VER-IAR-014",
+    "--verification",
+    "VER-PLG-001",
+    "--verification",
+    "VER-PLG-016",
+    "--verification",
+    "VER-PLG-021",
+    "--verification",
+    "VER-PLG-023",
+    "--verification",
+    "VER-PLG-025",
+    "--evidence",
+    "docs/engineering/execution-control-plane/evidence/VREC-ECP-041-evaluator.json",
+    "--evidence",
+    "docs/engineering/execution-control-plane/evidence/WO-ECP-039/WO-ECP-039-handoff.md",
+    "--evidence",
+    "docs/engineering/execution-control-plane/verification-records/VREC-ECP-041.md",
+    "--evidence",
+    "docs/engineering/harness-distribution/evidence/VREC-DOC-008-evaluator.json",
+    "--evidence",
+    "docs/engineering/harness-distribution/evidence/WO-DOC-016/WO-DOC-016-handoff.md",
+    "--evidence",
+    "docs/engineering/harness-distribution/verification-records/VREC-DOC-008.md",
+    "--evidence",
+    "docs/engineering/instruction-architecture/evidence/VREC-IAR-009-evaluator.json",
+    "--evidence",
+    "docs/engineering/instruction-architecture/evidence/VREC-IAR-010-evaluator.json",
+    "--evidence",
+    "docs/engineering/instruction-architecture/evidence/VREC-IAR-011-evaluator.json",
+    "--evidence",
+    "docs/engineering/instruction-architecture/evidence/VREC-IAR-012-evaluator.json",
+    "--evidence",
+    "docs/engineering/instruction-architecture/evidence/WO-IAR-013/WO-IAR-013-handoff.md",
+    "--evidence",
+    "docs/engineering/instruction-architecture/evidence/WO-IAR-013/closeout/REPORT.md",
+    "--evidence",
+    "docs/engineering/instruction-architecture/evidence/WO-IAR-014/WO-IAR-014-handoff.md",
+    "--evidence",
+    "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/REPORT.md",
+    "--evidence",
+    "docs/engineering/instruction-architecture/evidence/WO-IAR-015/WO-IAR-015-handoff.md",
+    "--evidence",
+    "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/README.md",
+    "--evidence",
+    "docs/engineering/instruction-architecture/evidence/WO-IAR-016/WO-IAR-016-handoff.md",
+    "--evidence",
+    "docs/engineering/instruction-architecture/evidence/WO-IAR-016/closeout/REPORT.md",
+    "--evidence",
+    "docs/engineering/instruction-architecture/evidence/WO-IAR-017/WO-IAR-017-handoff.md",
+    "--evidence",
+    "docs/engineering/instruction-architecture/evidence/WO-IAR-018/WO-IAR-018-handoff.md",
+    "--evidence",
+    "docs/engineering/instruction-architecture/evidence/WO-IAR-019/WO-IAR-019-handoff.md",
+    "--evidence",
+    "docs/engineering/instruction-architecture/verification-records/VREC-IAR-009.md",
+    "--evidence",
+    "docs/engineering/instruction-architecture/verification-records/VREC-IAR-010.md",
+    "--evidence",
+    "docs/engineering/instruction-architecture/verification-records/VREC-IAR-011.md",
+    "--evidence",
+    "docs/engineering/instruction-architecture/verification-records/VREC-IAR-012.md",
+    "--evidence",
+    "docs/engineering/plugin-integration/evidence/VREC-PLG-020-evaluator.json",
+    "--evidence",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-023/WO-PLG-023-handoff.md",
+    "--evidence",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-023/publication-2026-09-15/README.md",
+    "--evidence",
+    "docs/engineering/plugin-integration/evidence/WO-PLG-025/WO-PLG-025-handoff.md",
+    "--evidence",
+    "docs/engineering/plugin-integration/verification-records/VREC-PLG-020.md",
+    "--evidence",
+    "docs/engineering/release-0-19-0/RELEASE_NOTES.md",
+    "--evidence",
+    "docs/engineering/release-0-19-0/coverage.md",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/REPORT.md",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/WO-RLS-025-handoff.md",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/approval-inputs.json",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/build-initial.json",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/candidate-initial-ci.json",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/ci-tree-equivalence.json",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/cli-help.json",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/completion-checks.json",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/development-inspection.json",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/development.command.json",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/distributions.json",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/focused.json",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/handoff.json",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/historical-evidence-review.json",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/linux-source-initial.json",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/production-plan.json",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/r019-approval-apply.invocation.json",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/r019-approval-apply.stdout",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/r019-start-apply.invocation.json",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/r019-start-apply.stdout",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/rehearsal-initial-ci.json",
+    "--evidence",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/windows-source-initial.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-018-evaluator.json",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-019/WO-HUP-019-handoff.md",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-020/WO-HUP-020-handoff.md",
+    "--evidence",
+    "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-018.md",
+    "--candidate-commit",
+    "30d4dba2a088c4f83756c1241b76cdab40f796bd",
+    "--test-command",
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\bin\\python.exe",
+    "-B",
+    "scripts/run_tests.py",
+    "--workers",
+    "4",
+    "--scale",
+    "full"
+  ]
+}

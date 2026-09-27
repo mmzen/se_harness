@@ -1,0 +1,166 @@
+[
+  {
+    "label": "r019-complete-doctor",
+    "invocation": {
+      "args": [
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--json"
+      ],
+      "exit_code": 0,
+      "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+    },
+    "result_sha256": "a3dfde46d5150966ee550b998b01c98e2b422beee2713474d48c35a9b346f38c",
+    "compliance": null,
+    "state": null,
+    "raw_local_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\evolution-evidence\\r019-complete-doctor.stdout"
+  },
+  {
+    "label": "r019-complete-validate",
+    "invocation": {
+      "args": [
+        "validate",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--json"
+      ],
+      "exit_code": 0,
+      "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+    },
+    "result_sha256": "e5312effbc163721d3ade690570a59281997fd105932ecb5ba0afe0fedf5ef41",
+    "compliance": null,
+    "state": null,
+    "raw_local_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\evolution-evidence\\r019-complete-validate.stdout"
+  },
+  {
+    "label": "r019-complete-preflight",
+    "invocation": {
+      "args": [
+        "preflight",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--work-order",
+        "WO-RLS-025",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "exit_code": 0,
+      "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+    },
+    "result_sha256": "d882d6d2e9d6ddb0bcc1bb38feca812e5498d43aea24bea5d7ac005add34274a",
+    "compliance": null,
+    "state": null,
+    "raw_local_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\evolution-evidence\\r019-complete-preflight.stdout"
+  },
+  {
+    "label": "r019-complete-handoff",
+    "invocation": {
+      "args": [
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--artifact",
+        "WO-RLS-025",
+        "--checkpoint",
+        "handoff",
+        "--from-git",
+        "fbc47dfdcff2b355ee973acb5be09bcdf7cefe78",
+        "--json"
+      ],
+      "exit_code": 0,
+      "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+    },
+    "result_sha256": "6055a0b169778e69cdb7dd0ca95431197a25369d2236594dd59b3426f0adadc3",
+    "compliance": "pass",
+    "state": {
+      "before": [
+        {
+          "id": "WO-RLS-025",
+          "status": "in_progress"
+        }
+      ],
+      "after": [
+        {
+          "id": "WO-RLS-025",
+          "status": "in_progress"
+        }
+      ]
+    },
+    "raw_local_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\evolution-evidence\\r019-complete-handoff.stdout"
+  },
+  {
+    "label": "r019-complete-preview",
+    "invocation": {
+      "args": [
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--set",
+        "WO-RLS-025=implemented",
+        "--decision",
+        "WO-RLS-025=Codex",
+        "--reason",
+        "WO-RLS-025=Codex records implementation completion under the human-approved scope after local regressions, cross-platform candidate CI, both manual release rehearsals and the complete released handoff passed. The next immutable candidate will retain this completion and evidence. Its exact build and aggregate verification preparation continue under the approved scope; human verification and release remain separate.",
+        "--json"
+      ],
+      "exit_code": 0,
+      "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+    },
+    "result_sha256": "1104d40c68c530fff3090aa7abeb291c332227f993d35c5889f77bca5bc51a40",
+    "compliance": "pass",
+    "state": {
+      "before": [
+        {
+          "id": "WO-RLS-025",
+          "status": "in_progress"
+        }
+      ],
+      "after": [
+        {
+          "id": "WO-RLS-025",
+          "status": "implemented"
+        }
+      ]
+    },
+    "raw_local_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\evolution-evidence\\r019-complete-preview.stdout"
+  },
+  {
+    "label": "r019-complete-apply",
+    "invocation": {
+      "args": [
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--set",
+        "WO-RLS-025=implemented",
+        "--decision",
+        "WO-RLS-025=Codex",
+        "--reason",
+        "WO-RLS-025=Codex records implementation completion under the human-approved scope after local regressions, cross-platform candidate CI, both manual release rehearsals and the complete released handoff passed. The next immutable candidate will retain this completion and evidence. Its exact build and aggregate verification preparation continue under the approved scope; human verification and release remain separate.",
+        "--json",
+        "--apply"
+      ],
+      "exit_code": 0,
+      "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+    },
+    "result_sha256": "44fb622b75240a625eeddcc4ffeb332233c59e23dc32653d5c7436eba0fd43ca",
+    "compliance": "pass",
+    "state": {
+      "before": [
+        {
+          "id": "WO-RLS-025",
+          "status": "in_progress"
+        }
+      ],
+      "after": [
+        {
+          "id": "WO-RLS-025",
+          "status": "implemented"
+        }
+      ]
+    },
+    "raw_local_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\evolution-evidence\\r019-complete-apply.stdout"
+  }
+]

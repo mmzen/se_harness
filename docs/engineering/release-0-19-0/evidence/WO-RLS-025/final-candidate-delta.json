@@ -1,0 +1,23 @@
+{
+  "initial_test_candidate": "f77e95be5060528e22289ee33370a75733bddc08",
+  "final_candidate": "30d4dba2a088c4f83756c1241b76cdab40f796bd",
+  "changes": [
+    "docs/engineering/release-0-19-0/README.md",
+    "docs/engineering/release-0-19-0/REVIEW.md",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/REPORT.md",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/WO-RLS-025-handoff.md",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/build-initial.json",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/candidate-initial-ci.json",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/ci-tree-equivalence.json",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/completion-checks.json",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/development-inspection.json",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/development.command.json",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/handoff.json",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/historical-evidence-review.json",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/linux-source-initial.json",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/rehearsal-initial-ci.json",
+    "docs/engineering/release-0-19-0/evidence/WO-RLS-025/windows-source-initial.json",
+    "docs/engineering/release-0-19-0/work-orders/WO-RLS-025.md"
+  ],
+  "all_changes_are_release_preparation_records": true
+}

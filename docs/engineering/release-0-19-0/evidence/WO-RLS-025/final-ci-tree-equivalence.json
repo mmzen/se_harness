@@ -1,0 +1,8 @@
+{
+  "candidate": "30d4dba2a088c4f83756c1241b76cdab40f796bd",
+  "ci_merge": "9024e66e422081063e347f5a78648f4beaa92564",
+  "candidate_tree": "49ab96c718ed3c17b6e509268fd41ed3ad5d6158",
+  "ci_tree": "49ab96c718ed3c17b6e509268fd41ed3ad5d6158",
+  "equal": true,
+  "ci_run": "https://github.com/mmzen/se_harness/actions/runs/36339045183"
+}

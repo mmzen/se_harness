@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\bin\\python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "tests.plugin_integration.package_assembly.test_package_assembly",
+    "tests.plugin_integration.test_simple_plugin",
+    "tests.plugin_integration.progressive_discovery.test_delivery"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "exit_code": 0,
+  "seconds": 46.75,
+  "output_tail": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-hrhghnxv\\private\\verity-plane\\evaluator\\Scripts\\python.exe\r\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-hrhghnxv\\private\\verity-plane\\evaluator\\Scripts\\python.exe\r\n......................s.......s....\r\n----------------------------------------------------------------------\r\nRan 35 tests in 46.441s\r\n\r\nOK (skipped=2)\r\n"
+}

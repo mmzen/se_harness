@@ -1,0 +1,96 @@
+{
+  "invocation": {
+    "args": [
+      "check",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "--artifact",
+      "RLS-SEH-028",
+      "--checkpoint",
+      "pre-action",
+      "--json"
+    ],
+    "exit_code": 0,
+    "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-RLS-DECIDE",
+    "procedure_id": "PROC-RLS-DECIDE",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G5-RELEASE-DECISION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G5D-STATUS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "RLS-SEH-028"
+              }
+            ],
+            "message": "RLS-SEH-028 status is ready."
+          },
+          {
+            "id": "QGP-G5D-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:RLS-SEH-028"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G5D-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:pre-action"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G5D-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:RLS-SEH-028"
+              }
+            ],
+            "message": "No open decision blocks RLS-SEH-028."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "6414bdf1052ede61b1f0a3da3871be69e7f6f4bd460027746b087ee70ba7260c",
+    "change_set_source": "arguments"
+  },
+  "state": {
+    "before": [
+      {
+        "id": "RLS-SEH-028",
+        "status": "ready"
+      }
+    ],
+    "after": [
+      {
+        "id": "RLS-SEH-028",
+        "status": "ready"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 50
+  },
+  "result_sha256": "2d1d0c09f29b1b8c075ec82b1f8e4a3706e7e0310adcbbd7cf6813a4fe06982c"
+}

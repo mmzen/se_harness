@@ -1,0 +1,22 @@
+[
+  {
+    "path": "tests/fixtures/progressive-discovery/released-0.18.0/AGENTS.md",
+    "committed_crlf": 0,
+    "committed_lf": 13,
+    "converted_crlf": 13,
+    "converted_lf": 13,
+    "double_cr_after_test_conversion": 13,
+    "committed_sha256": "7737185418ba21d818037bfa06d680474591396cb5f9000029fda1d02d261e71",
+    "converted_sha256": "3449266f3184df0e88bc025b6dca7b9b740901043d42c984191aafec1773a8ab"
+  },
+  {
+    "path": "tests/fixtures/progressive-discovery/released-0.18.0/CLAUDE.md",
+    "committed_crlf": 0,
+    "committed_lf": 8,
+    "converted_crlf": 8,
+    "converted_lf": 8,
+    "double_cr_after_test_conversion": 8,
+    "committed_sha256": "3cd722a660483f23790bbbed081e71c9dfee56111c4d5f953e1234f21d4b7a3b",
+    "converted_sha256": "2980a7db7df5462df906ed7447fffb9e7a44adf691d5c8abf5ece3eef17cabf8"
+  }
+]

@@ -1,0 +1,3 @@
+usage: harnessctl [-h] [--version]
+                  {init,validate,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release} ...
+harnessctl: error: unrecognized arguments: -- -B scripts/run_tests.py --workers 4 --scale full

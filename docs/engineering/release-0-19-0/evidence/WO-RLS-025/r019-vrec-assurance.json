@@ -1,0 +1,86 @@
+{
+  "invocation": {
+    "args": [
+      "check",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "--artifact",
+      "VREC-SEH-028",
+      "--checkpoint",
+      "pre-action",
+      "--json"
+    ],
+    "exit_code": 0,
+    "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+  },
+  "result_sha256": "4a46735e5ce8a5aeb675362205c09eb94b7348f18e3b2f94cef167f7dcaec7bd",
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-VREC-DECIDE",
+    "procedure_id": "PROC-VREC-DECIDE",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-ASSURANCE-DECISION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4A-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:VREC-SEH-028"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G4A-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:pre-action"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G4A-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:VREC-SEH-028"
+              }
+            ],
+            "message": "No open decision blocks VREC-SEH-028."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "8644a1dd9e09055b0623f741ba129a0f468e4903449dcb856a186f94438222f3",
+    "change_set_source": "arguments"
+  },
+  "state": {
+    "before": [
+      {
+        "id": "VREC-SEH-028",
+        "status": "ready"
+      }
+    ],
+    "after": [
+      {
+        "id": "VREC-SEH-028",
+        "status": "ready"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 50
+  },
+  "raw_local_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\evolution-evidence\\r019-vrec-assurance.stdout"
+}

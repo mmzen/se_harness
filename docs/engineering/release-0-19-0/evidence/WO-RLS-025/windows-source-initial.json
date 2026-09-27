@@ -1,0 +1,32 @@
+{
+  "candidate": "f77e95be5060528e22289ee33370a75733bddc08",
+  "working_tree": "clean",
+  "command": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-B",
+    "scripts/run_tests.py",
+    "--workers",
+    "4"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "checker": {
+    "version": "0.19.0",
+    "origin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\se_harness\\__init__.py"
+  },
+  "started_at": "2026-09-27T17:51:12.247991+00:00",
+  "exit_code": 0,
+  "result": "pass",
+  "output_tail": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-zgxgz7lv\\private\\verity-plane\\evaluator\\Scripts\\python.exe\r\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-zgxgz7lv\\private\\verity-plane\\evaluator\\Scripts\\python.exe\r\n--workers must be at least 1\r\ndocs/notes/diagnostic-codes.md matches the source\r\nWEX_SCALE artifacts=100 validation=0.123532s focus=0.286984s plan=0.228418s\r\nWEX_SCALE artifacts=500 validation=0.595874s focus=0.721310s plan=1.046467s\r\n----------------------------------------------------------------------\r\nRan 1122 tests in 186.308s (175 classes, 4 workers)\r\n\r\nOK (skipped=16)\r\n",
+  "raw": {
+    "file": "output.log",
+    "bytes": 631,
+    "artifact": "r019-local-source",
+    "repository": null,
+    "run_id": null,
+    "run_url": null,
+    "retention_days": 14,
+    "estimated_expiry": "2026-10-11T17:51:12.247991+00:00",
+    "availability": "local only",
+    "download_command": null
+  }
+}

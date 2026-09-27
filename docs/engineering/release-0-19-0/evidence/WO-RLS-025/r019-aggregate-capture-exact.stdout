@@ -1,0 +1,227 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {
+    "commit": "30d4dba2a088c4f83756c1241b76cdab40f796bd",
+    "git_object_format": "sha1"
+  },
+  "operation": {
+    "kind": "capture-verification",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "VREC-SEH-028",
+    "artifacts": [
+      "VREC-SEH-028"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-DST-001",
+      "ADR-HUP-001",
+      "ADR-IAR-011",
+      "ADR-KIS-002",
+      "ADR-PLG-001",
+      "ADR-PLG-004",
+      "ARCH-DST-001",
+      "ARCH-HUP-003",
+      "ARCH-HUP-013",
+      "ARCH-IAR-011",
+      "ARCH-KIS-002",
+      "ARCH-PLG-001",
+      "ARCH-PLG-004",
+      "CAP-DST-001",
+      "CAP-ECP-003",
+      "CAP-HUP-002",
+      "CAP-HUP-003",
+      "CAP-IAR-002",
+      "CAP-KIS-003",
+      "INT-DST-001",
+      "INT-ECP-001",
+      "INT-HUP-002",
+      "INT-HUP-003",
+      "INT-IAR-001",
+      "INT-KIS-003",
+      "REQ-DST-006",
+      "REQ-DST-069",
+      "REQ-ECP-012",
+      "REQ-HUP-008",
+      "REQ-HUP-024",
+      "REQ-HUP-037",
+      "REQ-HUP-038",
+      "REQ-IAR-022",
+      "REQ-IAR-023",
+      "REQ-IAR-024",
+      "REQ-IAR-025",
+      "REQ-IAR-026",
+      "REQ-IAR-027",
+      "REQ-KIS-009",
+      "REQ-PLG-001",
+      "REQ-PLG-002",
+      "REQ-PLG-027",
+      "REQ-PLG-032",
+      "REQ-PLG-033",
+      "REQ-PLG-034",
+      "REQ-PLG-037",
+      "REQ-PLG-038",
+      "SPEC-DST-001",
+      "SPEC-DST-024",
+      "SPEC-DST-029",
+      "SPEC-ECP-007",
+      "SPEC-ECP-025",
+      "SPEC-HUP-004",
+      "SPEC-HUP-012",
+      "SPEC-HUP-019",
+      "SPEC-HUP-020",
+      "SPEC-IAR-014",
+      "SPEC-KIS-003",
+      "SPEC-PLG-001",
+      "SPEC-PLG-016",
+      "SPEC-PLG-021",
+      "SPEC-PLG-022",
+      "VER-DST-001",
+      "VER-DST-029",
+      "VER-ECP-027",
+      "VER-HUP-019",
+      "VER-HUP-020",
+      "VER-IAR-014",
+      "VER-PLG-001",
+      "VER-PLG-016",
+      "VER-PLG-021",
+      "VER-PLG-023",
+      "VER-PLG-025",
+      "WO-DOC-016",
+      "WO-ECP-039",
+      "WO-HUP-019",
+      "WO-HUP-020",
+      "WO-IAR-013",
+      "WO-IAR-014",
+      "WO-IAR-015",
+      "WO-IAR-016",
+      "WO-IAR-017",
+      "WO-IAR-018",
+      "WO-IAR-019",
+      "WO-PLG-023",
+      "WO-PLG-025",
+      "WO-RLS-025"
+    ],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-VREC-DECIDE",
+    "procedure_id": "PROC-VREC-DECIDE",
+    "status": "not_assessable",
+    "gates": []
+  },
+  "procedure": {
+    "id": "PROC-VREC-DECIDE",
+    "current_step": "STEP-VREC-DECIDE",
+    "steps": [
+      {
+        "id": "STEP-VREC-DECIDE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-ASSURANCE-DECISION"
+        ],
+        "effects": [
+          "Permits an explicit decision on VREC-SEH-028 only."
+        ],
+        "non_effects": [
+          "Referenced work orders remain unchanged."
+        ],
+        "decision_right": "DR-VREC-DECIDE",
+        "role": "assurance-owner",
+        "artifact": "VREC-SEH-028",
+        "decision": "whether the retained evidence verifies the exact candidate",
+        "outcomes": [
+          "verified",
+          "reject",
+          "supersede"
+        ],
+        "response": "I verify VREC-SEH-028 as assurance owner."
+      }
+    ]
+  },
+  "state": {
+    "before": [],
+    "after": [
+      {
+        "id": "VREC-SEH-028",
+        "status": "ready"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "VREC-SEH-028",
+        "path": "docs/engineering/release-0-19-0/verification-records/VREC-SEH-028.md",
+        "fields": [
+          "artifact_snapshot_sha256",
+          "commit",
+          "created",
+          "evaluator_evidence_path",
+          "evaluator_evidence_sha256",
+          "evidence_paths",
+          "git_object_format",
+          "id",
+          "owners",
+          "prepared_at",
+          "prepared_by",
+          "relations",
+          "status",
+          "title",
+          "type",
+          "updated",
+          "worktree_state"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Prepared ready verification record VREC-SEH-028 at docs/engineering/release-0-19-0/verification-records/VREC-SEH-028.md."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "VREC-SEH-028 is ready; referenced work orders were not changed."
+    ],
+    "decision_required": {
+      "decision_right": "DR-VREC-DECIDE",
+      "role": "assurance-owner",
+      "artifact": "VREC-SEH-028",
+      "decision": "whether the retained evidence verifies the exact candidate",
+      "outcomes": [
+        "verified",
+        "reject",
+        "supersede"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-VREC-DECIDE",
+      "step_id": "STEP-VREC-DECIDE",
+      "action": "whether the retained evidence verifies the exact candidate"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "I verify VREC-SEH-028 as assurance owner."
+    },
+    "alternatives": [
+      "Use complete alternative procedure PROC-VREC-REJECT.",
+      "Use complete alternative procedure PROC-VREC-SUPERSEDE."
+    ]
+  },
+  "result_sha256": "f1c8d495662cc052ebb9247d540ce57a0f7f87e4fceaae60b47d5b493d857665"
+}
