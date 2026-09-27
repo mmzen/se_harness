@@ -59,7 +59,10 @@ class ArtifactAuthoringPolicyTests(ArtifactAuthoringPolicyFixture, unittest.Test
         lock = json.loads((self.root / ".engineering-harness.lock").read_text(encoding="utf-8"))
         self.assertEqual("seed", lock["files"]["docs/engineering/ARTIFACT_AUTHORING.md"]["mode"])
         router = (self.root / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
-        self.assertIn("docs/engineering/ARTIFACT_AUTHORING.md", router)
+        self.assertIn("docs/engineering/harness/DEFINE_CHANGE.md", router)
+        drafting = (self.root / "docs/engineering/harness/DRAFT_DEFINITIONS.md").read_text(encoding="utf-8")
+        self.assertIn("../ARTIFACT_AUTHORING.md#requirement", drafting)
+        self.assertIn("../ARTIFACT_AUTHORING.md#verification", drafting)
 
         code, output, error = invoke(
             "create-artifact", str(self.root), "--domain", "product", "--type", "requirement", "--id", "REQ-002"

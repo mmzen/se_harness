@@ -1,0 +1,60 @@
+{
+  "schema": "se-harness-progressive-discovery-skill-vectors-v1",
+  "origin": "WO-IAR-015 / WO-IAR-017: reviewed instruction routes and additive discovery passthrough; retained phase-5 identities are unchanged.",
+  "previous_fixture_sha256": "9a9af1576061b78300291823a4ead3cfbe35cd1e89f00476055efa1433893023",
+  "portable_core": {
+    "previous": {
+      "files": [
+        {
+          "mode": "utf8-text-lf-v1",
+          "path": "SKILL.md",
+          "sha256": "0cf64a75e7df251d44bc9f362c31cdb606ed8582165c0309c0984c5743b253ca"
+        },
+        {
+          "mode": "utf8-text-lf-v1",
+          "path": "scripts/orient.py",
+          "sha256": "e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56"
+        },
+        {
+          "mode": "utf8-text-lf-v1",
+          "path": "skill-contract.json",
+          "sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627"
+        }
+      ],
+      "manifest_sha256": "0ce5d5a1a75537da853aebe7b41d4920c6bbc29073ac83cc61d2a4cd1aa02328"
+    },
+    "current": {
+      "files": [
+        {
+          "mode": "utf8-text-lf-v1",
+          "path": "SKILL.md",
+          "sha256": "6368a89f46174805f0700d9c100cf2094c212210ef88f63dfff3d276971dbdfc"
+        },
+        {
+          "mode": "utf8-text-lf-v1",
+          "path": "scripts/orient.py",
+          "sha256": "4e0f37c799b2a8da2a18d7ebb56e833ea3fd0ded72365c10277bd9cbd699e78f"
+        },
+        {
+          "mode": "utf8-text-lf-v1",
+          "path": "skill-contract.json",
+          "sha256": "8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627"
+        }
+      ],
+      "manifest_sha256": "ca240893e2ae532d9ccad28a79e0d0caa345fec2dbcb23960cd4b0a6335b56e0"
+    }
+  },
+  "orientation": {
+    "previous": {
+      "contract_sha256": "2c73e513c4b0b9189e32e6cfd485fe3148acb07014882f760cf2b2f2c67c72a3",
+      "manifest_sha256": "0ce5d5a1a75537da853aebe7b41d4920c6bbc29073ac83cc61d2a4cd1aa02328",
+      "schema": "se-harness-skill-contract-v1"
+    },
+    "current": {
+      "schema": "se-harness-skill-contract-v1",
+      "contract_sha256": "2c73e513c4b0b9189e32e6cfd485fe3148acb07014882f760cf2b2f2c67c72a3",
+      "manifest_sha256": "ca240893e2ae532d9ccad28a79e0d0caa345fec2dbcb23960cd4b0a6335b56e0"
+    }
+  },
+  "previous_fixture_hash_mode": "utf8-text-lf-v1"
+}

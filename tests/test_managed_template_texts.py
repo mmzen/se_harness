@@ -18,7 +18,7 @@ from tests.mutation_guard_support import patch_mutation_authority
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 STANDARD = REPOSITORY_ROOT / "templates/repository/standard/docs/engineering"
-TRACEABILITY = STANDARD / "TRACEABILITY.md"
+TRACEABILITY = REPOSITORY_ROOT / "tests/fixtures/progressive-discovery/released-0.18.0/TRACEABILITY.md"
 WORK_ORDER = STANDARD / "templates/WORK_ORDER.template.md"
 UML_NOTE = REPOSITORY_ROOT / "docs/notes/harness-uml-model.md"
 
@@ -38,12 +38,16 @@ def _section(text: str, heading: str) -> str:
     return text[start : end if end != -1 else None]
 
 
-class RetiredRelationRuleTests(unittest.TestCase):
-    """DST-TPL-001 to DST-TPL-003 on the standard TRACEABILITY.md."""
+class HistoricalRetiredRelationRuleTests(unittest.TestCase):
+    """Preserved 0.18.0 wording; IAR-DIS-013 retains its historical meaning."""
 
     def setUp(self) -> None:
         self.text = TRACEABILITY.read_text(encoding="utf-8")
         self.rule = _paragraph(self.text, "`TRC-008`")
+        mapping = (STANDARD / "harness/migration/REFERENCE_MAP.md").read_text(encoding="utf-8")
+        self.assertIn("| `TRC-008` |", mapping)
+        self.assertIn("Historical-link exposition omitted by agreement", mapping)
+        self.assertIn("Preserve completed and rejected records", (STANDARD / "harness/RESULTS.md").read_text(encoding="utf-8"))
 
     def test_the_rule_names_the_relation_retired_and_refused(self) -> None:
         # DST-TPL-001.

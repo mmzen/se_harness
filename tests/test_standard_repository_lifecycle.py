@@ -158,13 +158,17 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
             customized = policy.read_bytes() + b"\nRepository-owned customization.\n"
             policy.write_bytes(customized)
 
-            changes, _ = plan_install(target, project_name=None, mode="upgrade")
+            changes, old_lock = plan_install(target, project_name=None, mode="upgrade")
             action = {
                 item.path: item.action
                 for item in changes
             }["docs/engineering/TECHNICAL_COMMUNICATION.md"]
-            self.assertEqual("unchanged", action)
+            self.assertEqual("customized", action)
             self.assertEqual(customized, policy.read_bytes())
+            before = {p.relative_to(target): p.read_bytes() for p in target.rglob("*") if p.is_file()}
+            with self.assertRaisesRegex(HarnessError, "conflicts or customizations; no files were written"):
+                apply_changes(target, changes, old_lock, allow_updates=True)
+            self.assertEqual(before, {p.relative_to(target): p.read_bytes() for p in target.rglob("*") if p.is_file()})
             checks = {item.name: item for item in inspect_installation(target)}
             self.assertTrue(checks["seed:docs/engineering/TECHNICAL_COMMUNICATION.md"].passed)
 

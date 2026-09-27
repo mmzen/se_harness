@@ -558,10 +558,14 @@ class DecisionGateFamilyTests(DecisionManagementFixture, unittest.TestCase):
             if gated and binding.get("family") != "decision":
                 with self.subTest(binding=binding):
                     self.assertTrue(any(pid.endswith("-DECISION") for pid in gated), binding)
-        self.assertIn("| `DR-DECISION-DISPOSE` |", (templates / "DECISION_RIGHTS.md").read_text(encoding="utf-8"))
-        traceability = (templates / "TRACEABILITY.md").read_text(encoding="utf-8")
-        for token in ("`TRC-REL-020`", "`TRC-REL-021`", "`TRC-REL-022`", "| `decision` | `DEC-` |", "`TRC-015`"):
-            self.assertIn(token, traceability)
+        authority = " ".join((templates / "harness/AUTHORITY.md").read_text(encoding="utf-8").split())
+        self.assertIn("| `DR-DECISION-DISPOSE` | Human accountable", authority)
+        types = " ".join((templates / "harness/ARTIFACTS.md").read_text(encoding="utf-8").split())
+        self.assertIn("| `decision` | `DEC-` |", types)
+        links = " ".join((templates / "harness/RISKS_AND_DECISIONS.md").read_text(encoding="utf-8").split())
+        for token in ("| `concerns` |", "| `blocks` |", "| `produces` |",
+                      "in `open` blocks every transition", "Each must also appear in `concerns`"):
+            self.assertIn(token, links)
         self.assertIn("## decision", (templates / "ARTIFACT_AUTHORING.md").read_text(encoding="utf-8"))
 
     def test_only_the_transition_path_writes_a_disposition(self) -> None:

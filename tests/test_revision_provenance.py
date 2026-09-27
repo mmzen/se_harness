@@ -501,6 +501,7 @@ class RevisionCliTests(unittest.TestCase):
 
     def initialize_candidate(self, *, aggregate: bool = False) -> str:
         standard_repository(self.root)
+        write(self.root / "AGENTS.md", "# Owner instructions\nUse the approved work scope.\n")
         lock_path = self.root / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
         evaluator = lock["evaluator"]

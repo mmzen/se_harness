@@ -42,6 +42,7 @@ PHASE3_VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/phase3/port
 PHASE4_SKILL_VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/phase4/skills/portable-vectors.json"
 PHASE5_SKILL_VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/phase5/portable-vectors.json"
 PHASE4_SKILL_CASES = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/phase4/skills/client-cases.json"
+DISCOVERY_SKILL_VECTORS = REPOSITORY_ROOT / "tests/fixtures/progressive-discovery/skill-vectors.json"
 HOST_SURFACE_VECTORS = REPOSITORY_ROOT / "tests/fixtures/agentic_execution/host_activation/expected_surfaces.json"
 CLAUDE_SKILLS_ROOT = REPOSITORY_ROOT / "templates/repository/standard/.claude/skills"
 ALL_SKILL_NAMES = {"harness-orient"}
@@ -72,13 +73,17 @@ class SkillContractTests(unittest.TestCase):
             [item["path"] for item in manifest.value["files"]],
         )
         self.assertRegex(manifest.sha256, r"^[0-9a-f]{64}$")
-        # ECP-RMV-005: the phase-1 portable core is retained history; the live core is
-        # the phase-5 row, whose `previous` is that history.
+        # ECP-RMV-005 / IAR-DIS-013: phase-1 and phase-5 remain history;
+        # the successor vector binds the reviewed discovery-aware core.
         phase5 = json.loads(PHASE5_SKILL_VECTORS.read_text(encoding="utf-8"))
         self.assertEqual("se-harness-phase5-skill-vectors-v1", phase5["schema"])
         self.assertEqual(vectors["portable_core"], phase5["portable_core"]["previous"])
-        self.assertEqual(phase5["portable_core"]["current"]["files"], manifest.value["files"])
-        self.assertEqual(phase5["portable_core"]["current"]["manifest_sha256"], manifest.sha256)
+        successor = json.loads(DISCOVERY_SKILL_VECTORS.read_text(encoding="utf-8"))
+        self.assertEqual("se-harness-progressive-discovery-skill-vectors-v1", successor["schema"])
+        self.assertEqual(successor["previous_fixture_sha256"], hashlib.sha256(PHASE5_SKILL_VECTORS.read_text(encoding="utf-8").encode("utf-8")).hexdigest())
+        self.assertEqual(phase5["portable_core"]["current"], successor["portable_core"]["previous"])
+        self.assertEqual(successor["portable_core"]["current"]["files"], manifest.value["files"])
+        self.assertEqual(successor["portable_core"]["current"]["manifest_sha256"], manifest.sha256)
 
     def test_contract_rejects_duplicate_and_unknown_fields(self) -> None:
         raw = (SKILL_ROOT / "skill-contract.json").read_bytes()
@@ -117,10 +122,12 @@ class SkillContractTests(unittest.TestCase):
                 self.assertFalse((SKILLS_ROOT / name).exists())
                 self.assertFalse((CLAUDE_SKILLS_ROOT / name).exists())
         # ECP-RMV-005: the phase-4 orientation identity is retained as the phase-5
-        # row's `previous`; the live harness-orient core equals its `current`.
+        # row's `previous`; the discovery successor retains phase-5 in turn.
         phase5 = json.loads(PHASE5_SKILL_VECTORS.read_text(encoding="utf-8"))
         self.assertEqual(phase4["orientation"], phase5["orientation"]["previous"])
-        expected = phase5["orientation"]["current"]
+        successor = json.loads(DISCOVERY_SKILL_VECTORS.read_text(encoding="utf-8"))
+        self.assertEqual(phase5["orientation"]["current"], successor["orientation"]["previous"])
+        expected = successor["orientation"]["current"]
         contract = load_skill_contract(SKILL_ROOT / "skill-contract.json")
         self.assertEqual(expected["schema"], contract.value["schema"])
         self.assertEqual(expected["manifest_sha256"], build_skill_manifest(SKILL_ROOT).sha256)

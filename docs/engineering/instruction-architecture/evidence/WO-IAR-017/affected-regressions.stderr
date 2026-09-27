@@ -1,0 +1,23 @@
+...F.....F..............s............................................................................................................s......................s.s............................................................................................................................s........................
+======================================================================
+FAIL: test_adopt_preserves_existing_content_and_labels_observations (tests.test_harnessctl.HarnessCtlTests.test_adopt_preserves_existing_content_and_labels_observations)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_harnessctl.py", line 233, in test_adopt_preserves_existing_content_and_labels_observations
+    self.assertIn(BEGIN_MARKER, ignored)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '<!-- se-harness:begin -->' not found in '/build/\n\n# se-harness:begin\n# Generated SE Harness output\n/target/harness-dashboard/\n__pycache__/\n*.py[cod]\n# se-harness:end\n'
+
+======================================================================
+FAIL: test_doctor_hashes_only_the_remaining_managed_fragment (tests.test_harnessctl.HarnessCtlTests.test_doctor_hashes_only_the_remaining_managed_fragment)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_harnessctl.py", line 490, in test_doctor_hashes_only_the_remaining_managed_fragment
+    self.assertEqual(1, code)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^
+AssertionError: 1 != 0
+
+----------------------------------------------------------------------
+Ran 308 tests in 162.936s
+
+FAILED (failures=2, skipped=5)

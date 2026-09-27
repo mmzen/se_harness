@@ -50,7 +50,7 @@ class ValidationTaxonomyTests(unittest.TestCase):
         self.assertEqual([], missing)
 
     def test_policy_and_operator_reference_document_the_machine_vocabulary(self) -> None:
-        guide = (REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/QUALITY_GATES.md").read_text(encoding="utf-8")
+        guide = (REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/harness/RESULTS.md").read_text(encoding="utf-8")
         reference = (REPOSITORY_ROOT / "docs/notes/harnessctl-reference.md").read_text(encoding="utf-8")
         for plane in VALIDATION_PLANES:
             self.assertIn(f"`{plane}`", guide)

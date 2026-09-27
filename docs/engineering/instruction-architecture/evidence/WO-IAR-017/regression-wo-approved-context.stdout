@@ -1,0 +1,343 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-IAR-017",
+    "artifacts": [
+      "WO-IAR-017"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-IAR-011",
+      "ARCH-IAR-011",
+      "CAP-IAR-002",
+      "INT-IAR-001",
+      "REQ-IAR-022",
+      "REQ-IAR-023",
+      "REQ-IAR-024",
+      "REQ-IAR-025",
+      "REQ-IAR-026",
+      "REQ-IAR-027",
+      "SPEC-IAR-014",
+      "VER-IAR-014"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-017/",
+      "docs/engineering/instruction-architecture/work-orders/WO-IAR-017.md",
+      "tests/"
+    ],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-WO-START",
+    "procedure_id": "PROC-WO-START",
+    "status": "not_assessable",
+    "gates": []
+  },
+  "procedure": {
+    "id": "PROC-WO-START",
+    "current_step": "STEP-WO-START-PREFLIGHT",
+    "steps": [
+      {
+        "id": "STEP-WO-START-PREFLIGHT",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G3-WORK-AUTHORIZATION"
+        ],
+        "effects": [
+          "Evaluated start readiness for WO-IAR-017."
+        ],
+        "non_effects": [
+          "Preflight does not authorize or start implementation."
+        ],
+        "argv": [
+          "harnessctl",
+          "preflight",
+          ".",
+          "--work-order",
+          "WO-IAR-017",
+          "--phase",
+          "start"
+        ],
+        "corrective": {
+          "QGP-G3-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-PREFLIGHT": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-START-PREVIEW",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G3-WORK-AUTHORIZATION"
+        ],
+        "effects": [
+          "Planned the explicit transition for WO-IAR-017."
+        ],
+        "non_effects": [
+          "A preview does not change lifecycle state."
+        ],
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-IAR-017=in_progress",
+          "--decision",
+          "WO-IAR-017=delegated-executor"
+        ],
+        "corrective": {
+          "QGP-G3-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-IAR-017",
+              "--phase",
+              "start"
+            ]
+          },
+          "QGP-G3-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-START-APPLY",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G3-WORK-AUTHORIZATION"
+        ],
+        "effects": [
+          "Changed only WO-IAR-017 to in_progress."
+        ],
+        "non_effects": [
+          "Related artifacts remain unchanged."
+        ],
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-IAR-017=in_progress",
+          "--decision",
+          "WO-IAR-017=delegated-executor",
+          "--apply"
+        ],
+        "corrective": {
+          "QGP-G3-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G3-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G3-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-IAR-017",
+              "--phase",
+              "start"
+            ]
+          },
+          "QGP-G3-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-START-FINAL-FOCUS",
+        "kind": "command",
+        "gate_ids": [],
+        "effects": [
+          "Projected the resulting state for WO-IAR-017."
+        ],
+        "non_effects": [
+          "Focus does not change lifecycle state."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-IAR-017"
+        ]
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-IAR-017",
+        "status": "approved"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-IAR-017",
+        "status": "approved"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 50
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Projected the selected scope for WO-IAR-017."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-IAR-017 is approved."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-WO-START",
+      "step_id": "STEP-WO-START-PREFLIGHT",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "preflight",
+        ".",
+        "--work-order",
+        "WO-IAR-017",
+        "--phase",
+        "start"
+      ]
+    },
+    "alternatives": []
+  },
+  "result_sha256": "ad6201b56f47a72b2302434823901aee7df318be64b74f6e8891ffba70c6bc74",
+  "context": {
+    "reading_manifest": [
+      "ENGINEERING_HARNESS.md",
+      "docs/engineering/OPERATING_CARD.md",
+      "AGENTS.md",
+      "docs/engineering/ARTIFACT_AUTHORING.md",
+      "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
+      "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-022.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-023.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-024.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-025.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-026.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-027.md",
+      "docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md",
+      "docs/engineering/instruction-architecture/architecture/ARCH-IAR-011.md",
+      "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-011.md",
+      "docs/engineering/instruction-architecture/verification/VER-IAR-014.md",
+      "docs/engineering/instruction-architecture/work-orders/WO-IAR-017.md"
+    ],
+    "governing": [
+      "ADR-IAR-011",
+      "ARCH-IAR-011",
+      "CAP-IAR-002",
+      "INT-IAR-001",
+      "REQ-IAR-022",
+      "REQ-IAR-023",
+      "REQ-IAR-024",
+      "REQ-IAR-025",
+      "REQ-IAR-026",
+      "REQ-IAR-027",
+      "SPEC-IAR-014",
+      "VER-IAR-014"
+    ],
+    "declared_paths": [
+      "tests/",
+      "docs/engineering/instruction-architecture/work-orders/WO-IAR-017.md",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-017/"
+    ],
+    "state": {
+      "status": "approved",
+      "family": "work_order"
+    },
+    "next": {
+      "argv": [
+        "harnessctl",
+        "preflight",
+        ".",
+        "--work-order",
+        "WO-IAR-017",
+        "--phase",
+        "start"
+      ],
+      "procedure_id": "PROC-WO-START",
+      "step_id": "STEP-WO-START-PREFLIGHT"
+    },
+    "decision_required": null
+  }
+}

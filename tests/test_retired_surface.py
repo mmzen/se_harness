@@ -29,6 +29,9 @@ EXPLORER_TEMPLATE = ROOT / "se_harness" / "engine" / "harness_explorer" / "index
 
 #: Paths a retirement deleted; a file reappearing under one of them is the retired path returning.
 ABSENT_PATHS = (
+    # WO-IAR-014: owner files are no longer harness fragment templates.
+    "templates/repository/standard/AGENTS.md.fragment",
+    "templates/repository/standard/CLAUDE.md.fragment",
     # WO-REB-028: the predecessor bootstrap path
     "repository_tools/release_bootstrap.py",
     "repository_tools/predecessor_preparation.py",
@@ -88,8 +91,7 @@ ABSENT_TEXT: dict[str, tuple[str, ...]] = {
     "templates/repository/standard/.engineering-harness.toml.tpl": ("[risk",),
     # WO-WEX-011: the handoff policy names no verbatim block
     "templates/repository/standard/ENGINEERING_HARNESS.md.tpl": ("block verbatim", "restitution verbatim"),
-    "templates/repository/standard/AGENTS.md.fragment": ("block verbatim", "restitution verbatim"),
-    "templates/repository/standard/CLAUDE.md.fragment": ("block verbatim", "restitution verbatim"),
+    "templates/repository/standard/docs/engineering/harness/RESULTS.md": ("block verbatim", "restitution verbatim"),
     # ECP-CTX-007 as amended under WO-ECP-020: nothing names next or accept-candidate as a command
     "templates/repository/standard/docs/engineering/WORKFLOW.md": ("block verbatim", "restitution verbatim", "harnessctl next"),
     "docs/notes/harnessctl-reference.md": ("| `next` |", "harnessctl next [", "| `accept-candidate` |", "harnessctl accept-candidate"),
