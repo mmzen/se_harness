@@ -1,0 +1,394 @@
+[
+  {
+    "path": "codex-cli/native-context-extract.jsonl",
+    "source_sha256": "6d433864d90e79f8068287aeb14c55c14159e99ed3c7a02f2f7564c815fbb683",
+    "retained_sha256": "6d433864d90e79f8068287aeb14c55c14159e99ed3c7a02f2f7564c815fbb683",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-cli/observation.json",
+    "source_sha256": "bae5287df51c7c130ab05a45316a1b963326cc70c801bd95211611ab8000f9cf",
+    "retained_sha256": "bae5287df51c7c130ab05a45316a1b963326cc70c801bd95211611ab8000f9cf",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-cli/REPORT.md",
+    "source_sha256": "e2db3b56afc34b977177838fab1e8e724525a9808a76cf4cf732df97a0c18c64",
+    "retained_sha256": "a33c109e7481f9d35e69c79868a72ffd55df1dd76f8faaad8c0248b2fc98b457",
+    "private_reasoning_removed": false,
+    "relative_links_updated": true
+  },
+  {
+    "path": "claude-cli/native-demonstration-hook-extract.log",
+    "source_sha256": "ec7aa73d58b38dfbe5b1f3bffc9b4fea23002c5f3536d0c7c5ef5de349eada23",
+    "retained_sha256": "ec7aa73d58b38dfbe5b1f3bffc9b4fea23002c5f3536d0c7c5ef5de349eada23",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-cli/native-demonstration-observation.json",
+    "source_sha256": "23dc4d476129f824bfe1084bb9e92ab0ae4b4cf516d372e7aac6775dba455f95",
+    "retained_sha256": "23dc4d476129f824bfe1084bb9e92ab0ae4b4cf516d372e7aac6775dba455f95",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-cli/native-demonstration-transcript-extract.json",
+    "source_sha256": "90ada04b4a36ad6e266a69820595ea3f620cc02b7e30cde9d748f5d608dc945c",
+    "retained_sha256": "90ada04b4a36ad6e266a69820595ea3f620cc02b7e30cde9d748f5d608dc945c",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-cli/native-startup-extract.log",
+    "source_sha256": "f3bd40e3daf191ea5484688c50cf3f822952ca1c39befc1470a5b1e71a127e61",
+    "retained_sha256": "f3bd40e3daf191ea5484688c50cf3f822952ca1c39befc1470a5b1e71a127e61",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-cli/observation.json",
+    "source_sha256": "f4353aeb7707ba19632d330d77eaee1d70b5fe1f17d28817a464c0803fa4d3f5",
+    "retained_sha256": "f4353aeb7707ba19632d330d77eaee1d70b5fe1f17d28817a464c0803fa4d3f5",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-cli/REPORT.md",
+    "source_sha256": "84fac5bb4b9f3c636af04ff774f71fe1c3037f2b256d1cb6cdb6dd4e00fb9084",
+    "retained_sha256": "84fac5bb4b9f3c636af04ff774f71fe1c3037f2b256d1cb6cdb6dd4e00fb9084",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-callback-first/native-events.jsonl",
+    "source_sha256": "9a2aaf26c9f986d433876e854c78aa031fd3889373aed4bf8c2b2ec21449b7d5",
+    "retained_sha256": "9a2aaf26c9f986d433876e854c78aa031fd3889373aed4bf8c2b2ec21449b7d5",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-callback-first/observation.json",
+    "source_sha256": "429547d2b8844f76c231646f041614c6a1dafc8503f339eaddb7752066117503",
+    "retained_sha256": "429547d2b8844f76c231646f041614c6a1dafc8503f339eaddb7752066117503",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-callback/native-events.jsonl",
+    "source_sha256": "14245759af079e101ec46847c521acf0ec511a69fea7658bc876fc98ba5c3bae",
+    "retained_sha256": "14245759af079e101ec46847c521acf0ec511a69fea7658bc876fc98ba5c3bae",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-callback/observation.json",
+    "source_sha256": "e32680541bf2fd19d994361e8a7166fd605e295ac2206318294d63ee10adbe4b",
+    "retained_sha256": "e32680541bf2fd19d994361e8a7166fd605e295ac2206318294d63ee10adbe4b",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-callback/REPORT.md",
+    "source_sha256": "e46d2fd676919f0f2591791f490f0402c84fa350f4faef67a8c0b1451ae5dd8d",
+    "retained_sha256": "447c71c3a6b7d9c9e5b4725f8d288ee9b28f3452dd61e27ec45f0928796ff17d",
+    "private_reasoning_removed": false,
+    "relative_links_updated": true
+  },
+  {
+    "path": "claude-probe-refusal/current.events.json",
+    "source_sha256": "4f01dd1319537cd61a1cde4b924c590e9903c4b0a03affcc5594b1b75e05c4b6",
+    "retained_sha256": "4f01dd1319537cd61a1cde4b924c590e9903c4b0a03affcc5594b1b75e05c4b6",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-probe-refusal/current.hooks.log",
+    "source_sha256": "96be938d7aa3bd5fb94dff307b3fbf3188123bb21e627f99eab3605fc46c3953",
+    "retained_sha256": "96be938d7aa3bd5fb94dff307b3fbf3188123bb21e627f99eab3605fc46c3953",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-probe-refusal/current.invocation.json",
+    "source_sha256": "4a6b778d1c560ffc88c386d1e0d37467966b90d973dda5a8dcc373df9facc4fb",
+    "retained_sha256": "4a6b778d1c560ffc88c386d1e0d37467966b90d973dda5a8dcc373df9facc4fb",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-probe-refusal/observation.json",
+    "source_sha256": "99a3f633d4dd303132264bf2a37863e07aac6cc59519c651e103410aa83a4836",
+    "retained_sha256": "99a3f633d4dd303132264bf2a37863e07aac6cc59519c651e103410aa83a4836",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-probe-refusal/released-fixture-init.json",
+    "source_sha256": "f876926d9d35b7ea7c6986328e2a5d433cad0251314de8aea9df8352e44a3318",
+    "retained_sha256": "f876926d9d35b7ea7c6986328e2a5d433cad0251314de8aea9df8352e44a3318",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/altered.events.json",
+    "source_sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+    "retained_sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/altered.hooks.log",
+    "source_sha256": "50896264c81b449bfd6873501f229d090ec814de203ea8a37c2992afae9f5f80",
+    "retained_sha256": "50896264c81b449bfd6873501f229d090ec814de203ea8a37c2992afae9f5f80",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/altered.invocation.json",
+    "source_sha256": "a4bda792e14c9b8638e264635187eb3da98196a69716e1995907c0e7a68e445e",
+    "retained_sha256": "a4bda792e14c9b8638e264635187eb3da98196a69716e1995907c0e7a68e445e",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/current-return.events.json",
+    "source_sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+    "retained_sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/current-return.hooks.log",
+    "source_sha256": "de80ac6add46ef72975841438885afa94eaf8c38571777dca615f483b3a1e326",
+    "retained_sha256": "de80ac6add46ef72975841438885afa94eaf8c38571777dca615f483b3a1e326",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/current-return.invocation.json",
+    "source_sha256": "d3aee5b7fce07a31808389a3422090349347e0fabbe54e6a8147672aea247ec9",
+    "retained_sha256": "d3aee5b7fce07a31808389a3422090349347e0fabbe54e6a8147672aea247ec9",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/current.events.json",
+    "source_sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+    "retained_sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/current.hooks.log",
+    "source_sha256": "904dcc1f6960fa74bb37f61415e49c07290dfd231d8f54d1d0aa27ab008b33bd",
+    "retained_sha256": "904dcc1f6960fa74bb37f61415e49c07290dfd231d8f54d1d0aa27ab008b33bd",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/current.invocation.json",
+    "source_sha256": "2df309533f2eab216faccacc78b80fb3e76cbb3d63d211f3c5c69261386f4038",
+    "retained_sha256": "2df309533f2eab216faccacc78b80fb3e76cbb3d63d211f3c5c69261386f4038",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/mismatch.events.json",
+    "source_sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+    "retained_sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/mismatch.hooks.log",
+    "source_sha256": "f13c764e77f06cb6af020b3363169f80cc3bae8528b8f1e1bf8a65a0ff296ad6",
+    "retained_sha256": "f13c764e77f06cb6af020b3363169f80cc3bae8528b8f1e1bf8a65a0ff296ad6",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/mismatch.invocation.json",
+    "source_sha256": "0de7bd322925f040b5a60aa062ec2a2f5f3eb7d883fba49ea5ae538e43a160e6",
+    "retained_sha256": "0de7bd322925f040b5a60aa062ec2a2f5f3eb7d883fba49ea5ae538e43a160e6",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/missing.events.json",
+    "source_sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+    "retained_sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/missing.hooks.log",
+    "source_sha256": "883eb37d8fdf15ab12495b1343e72e375ec108cfd2ba8c1e37639f4326a98c36",
+    "retained_sha256": "883eb37d8fdf15ab12495b1343e72e375ec108cfd2ba8c1e37639f4326a98c36",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/missing.invocation.json",
+    "source_sha256": "17ca5b474b87345a0e89f216c7acc88d522a76b9b3cdf2d1731ff9ecaa136506",
+    "retained_sha256": "17ca5b474b87345a0e89f216c7acc88d522a76b9b3cdf2d1731ff9ecaa136506",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/observation.json",
+    "source_sha256": "47d9673d96010d7bbc5477b29c0e2a6ba8157a1abaca62dfded326275cb4c810",
+    "retained_sha256": "47d9673d96010d7bbc5477b29c0e2a6ba8157a1abaca62dfded326275cb4c810",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/released-018.events.json",
+    "source_sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+    "retained_sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/released-018.hooks.log",
+    "source_sha256": "5cf45d3452daa2cc51573ab0ebadb432a272e4ddb9d222768faf877ffbada556",
+    "retained_sha256": "5cf45d3452daa2cc51573ab0ebadb432a272e4ddb9d222768faf877ffbada556",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/released-018.invocation.json",
+    "source_sha256": "6b9575e4c6f6f9697196ca64fd3dcdfd3f5fe41f2596623ba21c5da36e9e35e8",
+    "retained_sha256": "6b9575e4c6f6f9697196ca64fd3dcdfd3f5fe41f2596623ba21c5da36e9e35e8",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-boundaries/released-fixture-init.json",
+    "source_sha256": "d5bcc89c543140c55ae40018b2c5c073ed93f22108cfa21bb8872cdd6ceef4e2",
+    "retained_sha256": "d5bcc89c543140c55ae40018b2c5c073ed93f22108cfa21bb8872cdd6ceef4e2",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-boundaries/native-events.jsonl",
+    "source_sha256": "b7b5b36fcf2bca0f0d3a2a987b015e67cb79651fb02faa482af2000ed6be4669",
+    "retained_sha256": "b7b5b36fcf2bca0f0d3a2a987b015e67cb79651fb02faa482af2000ed6be4669",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-boundaries/observation.json",
+    "source_sha256": "89df0d14f0ccaf610e0f90c986bc54273f0fdbf2d8af5b95958170db269db950",
+    "retained_sha256": "89df0d14f0ccaf610e0f90c986bc54273f0fdbf2d8af5b95958170db269db950",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-boundaries/released-fixture-init.json",
+    "source_sha256": "94fe4db977921505f2e4904258774ce986b9b147efd751cbf6a08808e7026b66",
+    "retained_sha256": "94fe4db977921505f2e4904258774ce986b9b147efd751cbf6a08808e7026b66",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-recovery/observation.json",
+    "source_sha256": "97ef30507fd5499e75837ebcb3a395d742dd344ac9bcfc9b768e44bc3e363f5d",
+    "retained_sha256": "97ef30507fd5499e75837ebcb3a395d742dd344ac9bcfc9b768e44bc3e363f5d",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-recovery/original-write.json",
+    "source_sha256": "65d3b37ee2b05ceb451995f393008988b6d67cf644bb9716511ce7e25f60781f",
+    "retained_sha256": "65d3b37ee2b05ceb451995f393008988b6d67cf644bb9716511ce7e25f60781f",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-recovery/recovery.events.json",
+    "source_sha256": "45d4e3bbc1f1b0c86773c0f1d5670ed523bde3c28df9f16d22415f6316c6e9c0",
+    "retained_sha256": "45d4e3bbc1f1b0c86773c0f1d5670ed523bde3c28df9f16d22415f6316c6e9c0",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-recovery/recovery.hooks.log",
+    "source_sha256": "cc62f57d688878a7776da5ae5c1ee8468d3dfd77f82101e7fc6a57e968fe278f",
+    "retained_sha256": "cc62f57d688878a7776da5ae5c1ee8468d3dfd77f82101e7fc6a57e968fe278f",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "claude-recovery/recovery.invocation.json",
+    "source_sha256": "2c0b475abeb9ff07be62e8ccd0c84dbb0a5b5199fecf8effae09de2b8f9822ef",
+    "retained_sha256": "2c0b475abeb9ff07be62e8ccd0c84dbb0a5b5199fecf8effae09de2b8f9822ef",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-recovery-first/native-events.jsonl",
+    "source_sha256": "c609d58ca020b5d3df5d6e50fe63c639a9c37a77fb90b5baf97ccd4aa4fca722",
+    "retained_sha256": "c609d58ca020b5d3df5d6e50fe63c639a9c37a77fb90b5baf97ccd4aa4fca722",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-recovery-first/observation.json",
+    "source_sha256": "dd4af370cf8c20c6e8c39191d925fe0f205ee0f04949ff200df141ac795eb202",
+    "retained_sha256": "dd4af370cf8c20c6e8c39191d925fe0f205ee0f04949ff200df141ac795eb202",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-recovery-first/original-write.json",
+    "source_sha256": "bc95c9302b3272e50b29b0b68b146907cde520c9bc1e481836d3a5929f0d7b20",
+    "retained_sha256": "bc95c9302b3272e50b29b0b68b146907cde520c9bc1e481836d3a5929f0d7b20",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-recovery/command-01.json",
+    "source_sha256": "429d6a377d62e353c12920f9d57eeb0acef89c30f07a4b5ac4482dac28850c9d",
+    "retained_sha256": "429d6a377d62e353c12920f9d57eeb0acef89c30f07a4b5ac4482dac28850c9d",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-recovery/command-02.json",
+    "source_sha256": "7edef2e26615cc24517fa6cfd521e698e651da40acdb7b659b50821ced483df4",
+    "retained_sha256": "7edef2e26615cc24517fa6cfd521e698e651da40acdb7b659b50821ced483df4",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-recovery/command-03.json",
+    "source_sha256": "40e619c18a7bb32ab6ef8b6850b31d9bdeb238d8ead8bb86f981d3cb7d3e1252",
+    "retained_sha256": "40e619c18a7bb32ab6ef8b6850b31d9bdeb238d8ead8bb86f981d3cb7d3e1252",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-recovery/command-04.json",
+    "source_sha256": "b0e87561378e32c2ccbb0bf06a592ee77c1c59abf86108da537e3166d1b03655",
+    "retained_sha256": "b0e87561378e32c2ccbb0bf06a592ee77c1c59abf86108da537e3166d1b03655",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-recovery/command-05.json",
+    "source_sha256": "80069f485cd44bb89f74aca11cc8968a13c697b8bada353dd71765da13fed65e",
+    "retained_sha256": "80069f485cd44bb89f74aca11cc8968a13c697b8bada353dd71765da13fed65e",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-recovery/command-06.json",
+    "source_sha256": "be70c85ae94b02a2490346a61ab35d5f00083a253ae3145125631138340fbbc5",
+    "retained_sha256": "be70c85ae94b02a2490346a61ab35d5f00083a253ae3145125631138340fbbc5",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-recovery/command-07.json",
+    "source_sha256": "6bcab2d06a33f9abd9696cefcdbe850006f6d6ad17f239804dcadf79f7cb1951",
+    "retained_sha256": "6bcab2d06a33f9abd9696cefcdbe850006f6d6ad17f239804dcadf79f7cb1951",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-recovery/native-events.jsonl",
+    "source_sha256": "931b11be53d0a16faf0e46b83aad0490a998d18901a0c4628776b19d59f40296",
+    "retained_sha256": "931b11be53d0a16faf0e46b83aad0490a998d18901a0c4628776b19d59f40296",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-recovery/observation.json",
+    "source_sha256": "bf4627cc3cfd0d28db59441836a06057e69e9badde7e8808bb2b04f3d3c73c71",
+    "retained_sha256": "bf4627cc3cfd0d28db59441836a06057e69e9badde7e8808bb2b04f3d3c73c71",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "codex-recovery/original-write.json",
+    "source_sha256": "3c7358b3f16f45c4a1580bc9c2bf6c38004cfed8fedd2ef113333d679ef692b0",
+    "retained_sha256": "3c7358b3f16f45c4a1580bc9c2bf6c38004cfed8fedd2ef113333d679ef692b0",
+    "private_reasoning_removed": false
+  },
+  {
+    "path": "provenance/acceptance_native.py",
+    "retained_sha256": "fc3463f7f9119b62f10e8359dd9d4831f447a58abf5705019c70808606baee58",
+    "note": "Collector source retained for inspection. It originally ran outside the repository; intermediate collector revisions are described in the report."
+  },
+  {
+    "path": "provenance/acceptance_recovery.py",
+    "retained_sha256": "25ed8718df66f6b2b71f7a7a25c6223c1b40fa17fa175d9d1e5e1c6f2c4ea1a3",
+    "note": "Collector source retained for inspection. It originally ran outside the repository; intermediate collector revisions are described in the report."
+  },
+  {
+    "path": "provenance/capture_codex_hooks.py",
+    "retained_sha256": "475413e13c12c76c5680d0010caf7fad9d4232751f5c7f9def590ddc65873a74",
+    "note": "Collector source retained for inspection. It originally ran outside the repository; intermediate collector revisions are described in the report."
+  },
+  {
+    "path": "provenance/run_demo.py",
+    "retained_sha256": "a898613fa3644623f2f26e98b918c833ba1f1cf439640bf4e41209e004484f86",
+    "note": "Collector source retained for inspection. It originally ran outside the repository; intermediate collector revisions are described in the report."
+  },
+  {
+    "path": "provenance/reading-recheck.json",
+    "retained_sha256": "f013ae98f59ae29d17d453da33aaec797a5f9398a91f018f82155e7cb6ef579f",
+    "note": "Collector source retained for inspection. It originally ran outside the repository; intermediate collector revisions are described in the report."
+  },
+  {
+    "path": "provenance/prepared-demo.json",
+    "retained_sha256": "24a3d05ef0b91e1a9c90964f31bdb964dc12d1bc3d8e644bcbadd3b44ffddb5a",
+    "note": "Collector source retained for inspection. It originally ran outside the repository; intermediate collector revisions are described in the report."
+  }
+]

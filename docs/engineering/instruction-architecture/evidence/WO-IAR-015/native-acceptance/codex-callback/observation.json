@@ -1,0 +1,59 @@
+{
+  "status": "captured",
+  "source_thread": "01a0e37f-a778-7b71-a39b-93a898d33f6f",
+  "surface": "Codex native app-server over stdio; ephemeral fork of the CLI demo",
+  "host_version": "codex-cli 0.155.0-alpha.16.4",
+  "platform": "Windows",
+  "output": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\iar-demo-tools\\observations\\codex-hooks-20260927T155616Z-969360",
+  "instruction_file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\codex\\ENGINEERING_HARNESS.md",
+  "expected_entry_sha256": "b55a88ab900a7466b372ec32a4bc80ca47fa26a79ec0f8bc703aba58174bfaab",
+  "replay_thread": "01a0e394-d4c0-7852-9618-0e70c05a894d",
+  "ephemeral": true,
+  "model": "gpt-6-astra",
+  "hook_runs": [
+    {
+      "phase": "after_compaction",
+      "id": "session-start:0:C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.1.0\\hooks\\hooks.json",
+      "eventName": "sessionStart",
+      "source": "plugin",
+      "sourcePath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.1.0\\hooks\\hooks.json",
+      "status": "completed",
+      "startedAt": 1790524646,
+      "completedAt": 1790524646,
+      "complete_root_matches": true,
+      "entry_sha256": "b55a88ab900a7466b372ec32a4bc80ca47fa26a79ec0f8bc703aba58174bfaab"
+    }
+  ],
+  "protected_demo_inputs_unchanged": true,
+  "limits": "Native app-server replay; earlier CLI session remains a separate observation. No formal verification acceptance or lifecycle transition.",
+  "stderr_lines_received": 0,
+  "plugin_identity_checks": {
+    "hooks/hooks.json": {
+      "installed_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.1.0\\hooks\\hooks.json",
+      "sha256": "af3ca23736b437c0bfce27fcc2352c3f88bbb3dde6148c9501bba6fa1fa549f2",
+      "matches_assembled_candidate": true
+    },
+    "scripts/inject_instructions.py": {
+      "installed_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.1.0\\scripts\\inject_instructions.py",
+      "sha256": "98e47de370f0a54dff5b1f3f68bbea40739420da6b1d9197825f569c5b6932ba",
+      "matches_assembled_candidate": true
+    }
+  },
+  "original_cli_rollout_unchanged": true,
+  "post_compaction_probe": {
+    "instruction_file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\codex\\ENGINEERING_HARNESS.md",
+    "harness_version": "0.19.0",
+    "entry_sha256": "b55a88ab900a7466b372ec32a4bc80ca47fa26a79ec0f8bc703aba58174bfaab",
+    "final_heading": "After compaction",
+    "delivery_gap": false
+  },
+  "native_sequence_lines": {
+    "compaction_completed": 10,
+    "hook_started": 14,
+    "hook_completed": 15,
+    "post_compaction_reply": 16
+  },
+  "event_trace_sha256": "14245759af079e101ec46847c521acf0ec511a69fea7658bc876fc98ba5c3bae",
+  "trigger_evidence": "A sessionStart plugin callback starts and completes after thread/compact/start and contextCompaction completion, before the next reply. The notification does not expose the hook input source string.",
+  "formal_lifecycle_effect": "none"
+}

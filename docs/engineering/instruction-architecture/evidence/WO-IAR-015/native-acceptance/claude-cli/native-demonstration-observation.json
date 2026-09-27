@@ -1,0 +1,92 @@
+{
+  "kind": "transient-demo-observation",
+  "host": "Claude Code",
+  "host_versions_in_transcript": [
+    "2.1.273"
+  ],
+  "platform": "Windows",
+  "session_id": "5623d905-2596-437c-bef3-6407a4434707",
+  "source_log": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\evidence\\claude-20260927-174154.log",
+  "source_log_sha256_at_capture": "28fdc39faa8498b30db762902ea1415e66d6978422c2dcb901f66febc570e1d9",
+  "source_transcript": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\claude\\claude\\projects\\C--Users-mathi-AppData-Local-Temp-iar-instruction-demo-bztgja2p-repositories-claude\\5623d905-2596-437c-bef3-6407a4434707.jsonl",
+  "source_transcript_sha256_at_capture": "731d284d8c5d49a180590bbbfb97482ac7c6dfea177f35f6a749c0f63891010c",
+  "instruction_file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\claude\\ENGINEERING_HARNESS.md",
+  "entry_sha256": "be7c525c4cc2e4ec91186453353d3c2889c25e1cfa5f47ab52902acce57c6fae",
+  "events": [
+    {
+      "event": "SessionStart:startup",
+      "timestamp": "2026-09-27T15:41:56.050Z",
+      "success_line": 130,
+      "accepted_context_line": 131,
+      "complete_file_matches": true,
+      "context_characters": 8927,
+      "entry_sha256": "be7c525c4cc2e4ec91186453353d3c2889c25e1cfa5f47ab52902acce57c6fae"
+    },
+    {
+      "event": "SessionStart:compact",
+      "timestamp": "2026-09-27T15:49:47.255Z",
+      "success_line": 454,
+      "accepted_context_line": 455,
+      "complete_file_matches": true,
+      "context_characters": 8927,
+      "entry_sha256": "be7c525c4cc2e4ec91186453353d3c2889c25e1cfa5f47ab52902acce57c6fae"
+    }
+  ],
+  "actual_file_reads": [
+    {
+      "line": 44,
+      "timestamp": "2026-09-27T15:45:37.030Z",
+      "tool": "Read",
+      "input": {
+        "file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\claude\\docs\\engineering\\harness\\COMMUNICATION.md"
+      }
+    },
+    {
+      "line": 48,
+      "timestamp": "2026-09-27T15:45:39.695Z",
+      "tool": "Read",
+      "input": {
+        "file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\claude\\docs\\engineering\\harness\\DEFINE_CHANGE.md"
+      }
+    }
+  ],
+  "compaction_boundaries": [
+    {
+      "line": 73,
+      "timestamp": "2026-09-27T15:49:47.262Z",
+      "subtype": "compact_boundary",
+      "trigger": "manual"
+    }
+  ],
+  "corrected_probe_results": [
+    {
+      "line": 38,
+      "timestamp": "2026-09-27T15:45:10.138Z",
+      "probe_result": {
+        "instruction_file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\claude\\ENGINEERING_HARNESS.md",
+        "harness_version": "0.19.0",
+        "entry_sha256": "be7c525c4cc2e4ec91186453353d3c2889c25e1cfa5f47ab52902acce57c6fae",
+        "final_heading": "After compaction",
+        "delivery_gap": false
+      }
+    },
+    {
+      "line": 102,
+      "timestamp": "2026-09-27T15:50:21.956Z",
+      "probe_result": {
+        "instruction_file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\claude\\ENGINEERING_HARNESS.md",
+        "harness_version": "0.19.0",
+        "entry_sha256": "be7c525c4cc2e4ec91186453353d3c2889c25e1cfa5f47ab52902acce57c6fae",
+        "final_heading": "After compaction",
+        "delivery_gap": false
+      }
+    }
+  ],
+  "result": "Observed startup delivery, expected progressive reading, and explicit post-compaction hook execution with complete matching instruction content.",
+  "limits": [
+    "Windows Claude Code CLI and manual compaction in this one selected repository only.",
+    "Missing or altered instruction files and repository-switch behavior are not assessed.",
+    "No formal verification acceptance or work-order transition was applied."
+  ],
+  "formal_lifecycle_effect": "none"
+}

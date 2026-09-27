@@ -2,7 +2,7 @@
 id = "WO-IAR-015"
 type = "work_order"
 title = "Deliver current instructions at startup and after compaction"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "repository-owner", "quality-owner"]
 created = "2026-09-20"
 updated = "2026-09-27"
@@ -53,6 +53,13 @@ to = "in_progress"
 decided_at = "2026-09-27T07:43:56Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Execute the reviewed approved work orders as requested by the human on 2026-09-27; native host/platform qualification remains required before completion."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-27T16:37:52Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Codex records completion of approved WO-IAR-015 after retained native startup, manual-compaction, repository-switch, unavailable-input and uncertain-write observations, reproducible reading measurements, passing required tests and released handoff. The report preserves exact surfaces, partial attempts and limitations; no verification or release is inferred."
 +++
 
 # Deliver current instructions at startup and after compaction

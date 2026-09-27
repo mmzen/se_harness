@@ -1,0 +1,10 @@
+{
+  "status": "incomplete",
+  "host": "claude",
+  "base": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-boundaries-0e9qvzdb",
+  "source_candidate": "2b45556ee23aff46e2cb131ac08992dc59131709",
+  "host_version": "2.1.273 (Claude Code)",
+  "cases": [],
+  "limits": "Windows native host. Disposable repository fixtures. No production lifecycle authority or verification acceptance.",
+  "error": "Claude exited 1: "
+}

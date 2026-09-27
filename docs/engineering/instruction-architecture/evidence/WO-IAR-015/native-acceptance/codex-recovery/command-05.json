@@ -1,0 +1,6 @@
+{
+  "sha256": "b0785878a9f7e05139e1bdf35c877b1d24a1da6682ddeb1147d40ec858c26978",
+  "decision": "accept",
+  "reviewed_by": "Codex acceptance executor",
+  "authority": "Approved test; exact command reads EXECUTE_WORK.md and extracts the current procedure section with a regex. No file writes."
+}

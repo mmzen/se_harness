@@ -1,0 +1,6 @@
+{
+  "sha256": "f67468dbdeced7f651f976cc2bfcbbef6e590a19f6e2a932853fb74cad8da415",
+  "decision": "accept",
+  "reviewed_by": "Codex acceptance executor",
+  "authority": "Approved acceptance test; rg only lists fixture files matching the selected work order or risk title."
+}

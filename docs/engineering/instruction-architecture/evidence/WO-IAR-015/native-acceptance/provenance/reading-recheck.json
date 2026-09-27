@@ -1,0 +1,33 @@
+{
+  "matched_existing_measurements": true,
+  "source_words": 21888,
+  "root_words": 1191,
+  "cases": [
+    {
+      "case": "New requirement draft",
+      "unique_instruction_words": 5049
+    },
+    {
+      "case": "Resumed implementation",
+      "unique_instruction_words": 3385
+    },
+    {
+      "case": "Verification decision",
+      "unique_instruction_words": 3952
+    },
+    {
+      "case": "PR preparation",
+      "unique_instruction_words": 4692
+    },
+    {
+      "case": "Blocker recovery",
+      "unique_instruction_words": 3680
+    },
+    {
+      "case": "Evaluator setup",
+      "unique_instruction_words": 2406
+    }
+  ],
+  "measurement_script_sha256": "ffd88eefd48198b65961f06ea8c68a7aaac5331457cb38253dfd8906371b4ebe",
+  "qualifier": "Deterministic instruction reading walks; native reads are reported separately."
+}

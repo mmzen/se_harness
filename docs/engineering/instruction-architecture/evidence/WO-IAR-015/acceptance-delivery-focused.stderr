@@ -1,0 +1,14 @@
+test_cli_emits_one_json_result_and_changes_no_repository_files (tests.plugin_integration.progressive_discovery.test_delivery.InstructionDeliveryTests.test_cli_emits_one_json_result_and_changes_no_repository_files) ... ok
+test_concurrent_selection_change_refuses_mixed_inputs (tests.plugin_integration.progressive_discovery.test_delivery.InstructionDeliveryTests.test_concurrent_selection_change_refuses_mixed_inputs) ... ok
+test_each_supported_event_returns_the_complete_current_root (tests.plugin_integration.progressive_discovery.test_delivery.InstructionDeliveryTests.test_each_supported_event_returns_the_complete_current_root) ... ok
+test_limits_refuse_instead_of_truncating_policy (tests.plugin_integration.progressive_discovery.test_delivery.InstructionDeliveryTests.test_limits_refuse_instead_of_truncating_policy) ... ok
+test_linked_entry_is_not_followed (tests.plugin_integration.progressive_discovery.test_delivery.InstructionDeliveryTests.test_linked_entry_is_not_followed) ... skipped "platform cannot create test symlink: [WinError 1314] Le client ne dispose pas d’un privilège nécessaire: 'C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\instruction-delivery-1fy5fsir\\\\saved.md' -> 'C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\instruction-delivery-1fy5fsir\\\\first\\\\ENGINEERING_HARNESS.md'"
+test_nested_damaged_selection_and_git_boundary_never_borrow_parent (tests.plugin_integration.progressive_discovery.test_delivery.InstructionDeliveryTests.test_nested_damaged_selection_and_git_boundary_never_borrow_parent) ... ok
+test_relative_paths_and_unsupported_events_refuse (tests.plugin_integration.progressive_discovery.test_delivery.InstructionDeliveryTests.test_relative_paths_and_unsupported_events_refuse) ... ok
+test_repository_switch_and_compaction_do_not_reuse_cached_policy (tests.plugin_integration.progressive_discovery.test_delivery.InstructionDeliveryTests.test_repository_switch_and_compaction_do_not_reuse_cached_policy) ... ok
+test_tampered_missing_and_mismatched_inputs_report_delivery_gap (tests.plugin_integration.progressive_discovery.test_delivery.InstructionDeliveryTests.test_tampered_missing_and_mismatched_inputs_report_delivery_gap) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 1.163s
+
+OK (skipped=1)

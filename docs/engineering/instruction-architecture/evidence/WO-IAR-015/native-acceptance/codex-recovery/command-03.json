@@ -1,0 +1,6 @@
+{
+  "sha256": "599e916dfda8c61c3bfee21135df3346f382adb3bc805c0cb79c375dc2ce1885",
+  "decision": "accept",
+  "reviewed_by": "Codex acceptance executor",
+  "authority": "Approved acceptance test; PowerShell only enumerates and searches fixture documentation. No writes or policy amendment."
+}

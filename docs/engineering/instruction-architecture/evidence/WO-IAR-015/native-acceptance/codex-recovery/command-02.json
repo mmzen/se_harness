@@ -1,0 +1,6 @@
+{
+  "sha256": "47b120af1daba376d63d72e0a2163d1b7263f0655246409dfca42b98179b6abe",
+  "decision": "accept",
+  "reviewed_by": "Codex acceptance executor",
+  "authority": "Approved acceptance test; exact command reads the fixture risk and work-order records and searches risk references only."
+}

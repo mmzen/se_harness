@@ -1,0 +1,6 @@
+{
+  "sha256": "0c72cec8565870fadb163390a94648471dd15d66bb8c1539b3a62c0cb01a212e",
+  "decision": "accept",
+  "reviewed_by": "Codex acceptance executor",
+  "authority": "Approved recovery test; exact selected candidate Python executes checkpoint-free check on the disposable WO-IAR-015 only, with -I -B and no writing checkpoint."
+}

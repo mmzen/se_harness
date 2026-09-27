@@ -1,0 +1,89 @@
+{
+  "kind": "transient-demo-observation",
+  "session_id": "01a0e37f-a778-7b71-a39b-93a898d33f6f",
+  "host": "Codex CLI",
+  "host_version": "0.155.0-alpha.16.4",
+  "platform": "Windows",
+  "source_rollout": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex\\sessions\\2026\\09\\27\\rollout-2026-09-27T17-33-09-01a0e37f-a778-7b71-a39b-93a898d33f6f.jsonl",
+  "source_rollout_sha256_at_capture": "d848026a396de6868fccdfc34125f222142422954cb025b3ae86989eb2a4a7ae",
+  "root_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\codex\\ENGINEERING_HARNESS.md",
+  "root_sha256": "b55a88ab900a7466b372ec32a4bc80ca47fa26a79ec0f8bc703aba58174bfaab",
+  "deliveries": [
+    {
+      "line": 9,
+      "timestamp": "2026-09-27T15:33:37.516Z",
+      "role": "developer",
+      "complete_root_matches": true,
+      "delivered_characters": 8925,
+      "root_characters": 8605,
+      "sha256": "b55a88ab900a7466b372ec32a4bc80ca47fa26a79ec0f8bc703aba58174bfaab"
+    },
+    {
+      "line": 58,
+      "timestamp": "2026-09-27T15:37:12.057Z",
+      "role": "developer",
+      "complete_root_matches": true,
+      "delivered_characters": 8925,
+      "root_characters": 8605,
+      "sha256": "b55a88ab900a7466b372ec32a4bc80ca47fa26a79ec0f8bc703aba58174bfaab"
+    }
+  ],
+  "completed_compactions": [
+    {
+      "line": 48,
+      "timestamp": "2026-09-27T15:36:30.074Z",
+      "type": "ContextCompaction completed"
+    }
+  ],
+  "actual_read_commands": [
+    {
+      "line": 34,
+      "timestamp": "2026-09-27T15:34:32.844Z",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-Command",
+        "Get-Content -LiteralPath 'docs/engineering/harness/COMMUNICATION.md'"
+      ],
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "line": 35,
+      "timestamp": "2026-09-27T15:34:34.708Z",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-Command",
+        "Get-Content -LiteralPath 'docs/engineering/harness/DEFINE_CHANGE.md'"
+      ],
+      "exit_code": 0,
+      "status": "completed"
+    }
+  ],
+  "probe_results": [
+    {
+      "line": 15,
+      "timestamp": "2026-09-27T15:33:43.760Z",
+      "result": {
+        "root_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\codex\\ENGINEERING_HARNESS.md",
+        "harness_version": "0.19.0",
+        "root_sha256": "b55a88ab900a7466b372ec32a4bc80ca47fa26a79ec0f8bc703aba58174bfaab",
+        "final_heading": "After compaction",
+        "delivery_gap": false
+      }
+    },
+    {
+      "line": 62,
+      "timestamp": "2026-09-27T15:37:17.525Z",
+      "result": {
+        "root_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\codex\\ENGINEERING_HARNESS.md",
+        "harness_version": "0.19.0",
+        "root_sha256": "b55a88ab900a7466b372ec32a4bc80ca47fa26a79ec0f8bc703aba58174bfaab",
+        "final_heading": "After compaction",
+        "delivery_gap": false
+      }
+    }
+  ],
+  "observed": "Complete matching root recorded as a developer message at startup and again after completed compaction, before the post-compaction probe.",
+  "not_observed": "No explicit SessionStart:compact hook invocation record in the rollout or inspected native log database. Fresh callback execution is not independently established.",
+  "formal_lifecycle_effect": "none"
+}

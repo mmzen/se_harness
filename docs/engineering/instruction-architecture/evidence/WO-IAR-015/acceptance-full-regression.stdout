@@ -1,0 +1,10 @@
+WEX_SCALE artifacts=100 validation=0.137308s focus=0.350940s plan=0.276726s
+WEX_SCALE artifacts=500 validation=0.648130s focus=0.973528s plan=1.242552s
+WEX_SCALE artifacts=1000 validation=1.408475s focus=1.566861s plan=2.532430s
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-v7dbh173\private\verity-plane\evaluator\Scripts\python.exe
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-v7dbh173\private\verity-plane\evaluator\Scripts\python.exe
+docs/notes/diagnostic-codes.md matches the source
+----------------------------------------------------------------------
+Ran 1122 tests in 150.059s (175 classes, 6 workers)
+
+OK (skipped=16)
