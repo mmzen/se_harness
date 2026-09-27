@@ -80,3 +80,25 @@ its original WO-IAR-017 candidate only.
 WO-IAR-019's complete Git change set uses baseline 2f339039fe4f6189334fcd10632e20360cfa389f, immediately
 after the separately committed WO-IAR-014 diagnostic correction. The combined
 PR still declares all seven work orders for the full main-to-branch diff.
+
+## Hosted completion evidence
+
+Run 36312369557 completed successfully for PR head 959410a358a00863609ae8b6cbf64d0469dbf5fe.
+Its candidate was the PR merge d52dcf698cf9ae8e34d4741fc56e5277286de324.
+All eight candidate-evidence jobs passed, including two replays on each of
+Linux and Windows and the dependent build, verification and retention of the
+integration package. All four replay results explicitly identify synthetic
+input and native host delivery not assessed. Their canonical lock digest is
+8f2dbfa6f5e341a795b6067391bf95ef13694cfe1766a1e27ba04a068a609112.
+
+The run, job details, PR check readback, four replay results and timings are
+retained in hosted-36312369557/. The remaining PR checks also passed; the
+unselected release-record rehearsal was skipped as intended. This evidence
+completes WO-IAR-019's hosted checks; it does not provide native startup or
+compaction proof or an assurance decision for any work order.
+
+The intermediate combined PR check required WO-IAR-014's handoff header to be
+rebound after its CLI correction. The released evaluator performed that rebind,
+preserving its body. ci19-pr-after-rebind records the passing combined check.
+That separate WO-IAR-014 evidence update is excluded from the WO-IAR-019
+change inventory by its recorded scope and remains in the full combined PR check.

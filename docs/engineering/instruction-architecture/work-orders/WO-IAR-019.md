@@ -2,7 +2,7 @@
 id = "WO-IAR-019"
 type = "work_order"
 title = "Exercise guarded instruction retirement in the upgrade rehearsal"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-27"
 updated = "2026-09-27"
@@ -41,6 +41,13 @@ to = "in_progress"
 decided_at = "2026-09-27T10:02:28Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex starts execution under the recorded human scope approval and DR-WO-START."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-27T10:31:16Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Codex records completion under the approved execution scope after full regression, real local and hosted replays, integration-package checks and the released handoff passed. Synthetic delivery inputs do not qualify native host behavior."
 +++
 
 # Exercise guarded instruction retirement in the upgrade rehearsal
