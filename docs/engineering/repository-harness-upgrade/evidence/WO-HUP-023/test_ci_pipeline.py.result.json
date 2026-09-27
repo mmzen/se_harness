@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\bin\\python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_ci_pipeline.py"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "exit_code": 0,
+  "seconds": 5.286897420883179,
+  "stdout": "",
+  "stderr": "........................................\n----------------------------------------------------------------------\nRan 40 tests in 5.009s\n\nOK\n"
+}

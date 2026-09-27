@@ -1,0 +1,22 @@
+--- a/.github/workflows/engineering-harness.yml
++++ b/.github/workflows/engineering-harness.yml
+@@ -22,7 +22,7 @@
+   pull-requests: read
+ 
+ env:
+-  SE_HARNESS_VERSION: "0.18.0"
++  SE_HARNESS_VERSION: "0.19.0"
+ 
+ jobs:
+   validate:
+--- a/tests/test_progressive_documentation.py
++++ b/tests/test_progressive_documentation.py
+@@ -113,7 +113,7 @@
+         self.assertIn("omits its `architecture` relation", model)
+         self.assertNotIn("Current limitation", model)
+         self.assertIn(
+-            "../engineering/TRACEABILITY.md#artifact-applicability-catalog",
++            "../engineering/harness/ARTIFACTS.md#artifact-types",
+             model,
+         )
+ 

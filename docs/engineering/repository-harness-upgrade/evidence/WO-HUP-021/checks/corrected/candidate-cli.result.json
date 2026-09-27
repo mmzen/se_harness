@@ -1,0 +1,33 @@
+{
+  "tested_commit": "0b40d1a1eb6994508fd9d629c0bdca16e2c6e0c2",
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\bin\\python.exe",
+    "-B",
+    "-m",
+    "se_harness",
+    "--help"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adopt019-verification",
+  "exit_code": 0,
+  "seconds": 0.6,
+  "stdout": "usage: harnessctl [-h] [--version]\n                  {init,validate,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release} ...\n\nInstall and operate the standard software-engineering harness.\n\npositional arguments:\n  {init,validate,inspect,dashboard,doctor,skill-ownership,preflight,check,evidence,pr-body,transition,decide,raise-risk,risks,check-pr,select-work-order,upgrade,scaffold-domain,create-artifact,release-unit,identity,qualify,capture-verification,refresh-verification,prepare-release}\n    init                install the standard harness into an absent, empty or\n                        existing repository\n    validate            validate the repository artifact graph\n    inspect             inspect repository-wide attention and lifecycle queues\n    dashboard           generate the repository Harness Explorer\n    doctor              check an installed harness\n    skill-ownership     plan, apply, or restore explicit retained skill\n                        ownership\n    preflight           check work-order implementation or review readiness\n    check               project one selected WO, VREC, or RLS scope, or\n                        evaluate one of its checkpoints, and emit canonical\n                        restitution\n    evidence            write or rebind one work order's evidence packet to\n                        the current formal snapshot\n    pr-body             emit the LF-terminated pull-request body for one work\n                        order\n    transition          plan or atomically apply explicit lifecycle\n                        transitions\n    decide              dispose one pending decision with a declared option,\n                        under DR-DECISION-DISPOSE\n    raise-risk          record a risk description, owner and next action;\n                        optionally request a blocking decision\n    risks               list the risks threatening one artifact and its\n                        governing chain; writes nothing\n    check-pr            check a PR against its selected work orders and their\n                        combined scope\n    select-work-order   select one structured work-order field from a GitHub\n                        pull-request event\n    upgrade             plan or apply safe harness upgrades\n    scaffold-domain     safely create the canonical organization for one\n                        engineering domain\n    create-artifact     create one incomplete draft from the canonical\n                        artifact template\n    release-unit        derive a release unit's work-order census from the\n                        commits between the previous release tag and a\n                        candidate commit\n    identity            emit and verify one evaluator or candidate runtime\n                        identity\n    qualify             run one typed, provenance-bound release qualification\n                        operation\n    capture-verification\n                        prepare a ready commit-bound verification record\n    refresh-verification\n                        create a new ready record after an unchanged rebase;\n                        preserve the original\n    prepare-release     prepare a ready commit-bound release record\n\noptions:\n  -h, --help            show this help message and exit\n  --version             show program's version number and exit\n",
+  "stderr": "",
+  "git_settings": [
+    [
+      "safe.directory",
+      "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness"
+    ],
+    [
+      "safe.directory",
+      "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/adopt019-verification"
+    ],
+    [
+      "core.autocrlf",
+      "false"
+    ],
+    [
+      "core.longpaths",
+      "true"
+    ]
+  ]
+}

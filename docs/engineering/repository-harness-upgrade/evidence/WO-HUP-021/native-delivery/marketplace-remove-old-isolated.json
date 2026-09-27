@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\13995fba801849b0\\codex.exe",
+    "plugin",
+    "marketplace",
+    "remove",
+    "se-harness",
+    "--json"
+  ],
+  "isolated_profile": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex",
+  "exit_code": 0,
+  "stdout": "{\n  \"marketplaceName\": \"se-harness\",\n  \"installedRoot\": null\n}\n",
+  "stderr": ""
+}

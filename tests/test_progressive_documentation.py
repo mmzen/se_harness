@@ -113,7 +113,7 @@ class ProgressiveDocumentationTests(unittest.TestCase):
         self.assertIn("omits its `architecture` relation", model)
         self.assertNotIn("Current limitation", model)
         self.assertIn(
-            "../engineering/TRACEABILITY.md#artifact-applicability-catalog",
+            "../engineering/harness/ARTIFACTS.md#artifact-types",
             model,
         )
 

@@ -1,0 +1,35 @@
+{
+  "tested_commit": "0b40d1a1eb6994508fd9d629c0bdca16e2c6e0c2",
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\bin\\python.exe",
+    "-B",
+    "scripts/run_tests.py",
+    "--scale",
+    "full",
+    "--workers",
+    "4"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adopt019-verification",
+  "exit_code": 0,
+  "seconds": 193.26,
+  "stdout": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-c51m3yw4\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-c51m3yw4\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nWEX_SCALE artifacts=100 validation=0.134069s focus=0.337830s plan=0.242997s\nWEX_SCALE artifacts=500 validation=0.629743s focus=0.822498s plan=1.105965s\nWEX_SCALE artifacts=1000 validation=1.293718s focus=1.373553s plan=2.204195s\ndocs/notes/diagnostic-codes.md matches the source\n----------------------------------------------------------------------\nRan 1125 tests in 191.416s (175 classes, 4 workers)\n\nOK (skipped=16)\n",
+  "stderr": "--workers must be at least 1\n",
+  "git_settings": [
+    [
+      "safe.directory",
+      "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness"
+    ],
+    [
+      "safe.directory",
+      "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/adopt019-verification"
+    ],
+    [
+      "core.autocrlf",
+      "false"
+    ],
+    [
+      "core.longpaths",
+      "true"
+    ]
+  ]
+}

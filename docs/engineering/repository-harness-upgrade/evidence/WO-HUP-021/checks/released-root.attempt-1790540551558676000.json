@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "qualify",
+    "released-root",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--output",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adopt019-checks\\released-root-qualification.json",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 1,
+  "seconds": 0.43,
+  "stdout": "{\n  \"authority\": \"evidence-only; no lifecycle or external action authorized\",\n  \"checks\": [\n    {\n      \"id\": \"RQ001\",\n      \"message\": \"Git observation failed: rev-parse --verify\",\n      \"passed\": false,\n      \"subject\": \"qualification-input\"\n    }\n  ],\n  \"completion\": \"completed\",\n  \"evaluator\": {\n    \"identity_sha256\": \"e84ca6b6ccfcb719bec8ec69d7f70c61c3f9b71aa4262b1b7f18bdf046faff4d\",\n    \"role\": \"released-evaluator\",\n    \"status\": \"unbound\"\n  },\n  \"independence\": \"released-evaluator\",\n  \"operation\": \"released-root\",\n  \"passed\": false,\n  \"schema\": \"se-harness-release-qualification-v1\",\n  \"target\": {\n    \"identity_sha256\": \"8db8449f89bb7e66bed8a90354a0e24823b37a51cef8e34ce5cf3eaf152210ed\",\n    \"kind\": \"released-root\",\n    \"status\": \"unbound\"\n  }\n}\n",
+  "stderr": "",
+  "git_settings": {
+    "safe.directory": "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/adopt019-verification",
+    "core.autocrlf": "false",
+    "core.longpaths": "true"
+  }
+}

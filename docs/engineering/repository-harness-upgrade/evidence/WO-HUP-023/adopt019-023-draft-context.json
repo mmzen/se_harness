@@ -1,0 +1,270 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "check",
+    "outcome": "blocked"
+  },
+  "selection": {
+    "primary": "WO-HUP-023",
+    "artifacts": [
+      "WO-HUP-023"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-IAR-011",
+      "ARCH-IAR-011",
+      "CAP-IAR-002",
+      "INT-IAR-001",
+      "REQ-IAR-024",
+      "SPEC-IAR-014",
+      "VER-HUP-021"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      ".github/workflows/engineering-harness.yml",
+      "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-022/",
+      "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-023/",
+      "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-022.md",
+      "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-023.md",
+      "tests/test_progressive_documentation.py"
+    ],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-DEFAULT-REVIEW",
+    "procedure_id": "PROC-FOCUS-SELECTED",
+    "status": "fail",
+    "gates": []
+  },
+  "procedure": {
+    "id": "PROC-FOCUS-SELECTED",
+    "current_step": "STEP-FOCUS-SELECTED",
+    "steps": [
+      {
+        "id": "STEP-FOCUS-SELECTED",
+        "kind": "command",
+        "gate_ids": [],
+        "effects": [
+          "Projected selected state for WO-HUP-023."
+        ],
+        "non_effects": [
+          "Focus changes no lifecycle state."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-HUP-023"
+        ]
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-HUP-023",
+        "status": "draft"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-HUP-023",
+        "status": "draft"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [
+      {
+        "code": "E019",
+        "path": "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-023.md",
+        "message": "assurance decided_by must be a non-empty string",
+        "plane": "governance"
+      }
+    ],
+    "repository_blockers": [],
+    "unrelated_count": 52
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "blocked",
+    "done": [],
+    "not_done": [
+      "The selected check operation remains incomplete."
+    ],
+    "blocked_by": [
+      "E019: assurance decided_by must be a non-empty string"
+    ],
+    "current_lifecycle_state": [
+      "No lifecycle state was changed."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-FOCUS-SELECTED",
+      "step_id": "STEP-FOCUS-SELECTED",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "WO-HUP-023"
+      ]
+    },
+    "alternatives": []
+  },
+  "instruction_discovery": {
+    "schema": "se-harness-instruction-discovery-v1",
+    "status": "available",
+    "agent_instructions": {
+      "entry": {
+        "file": "ENGINEERING_HARNESS.md",
+        "heading": "read-by-task"
+      },
+      "shared_prerequisites": [
+        {
+          "file": "docs/engineering/harness/COMMUNICATION.md",
+          "heading": "communication",
+          "when": "Before the first eligible English explanation in a fresh context."
+        },
+        {
+          "file": "docs/engineering/harness/RESULTS.md",
+          "heading": "report-a-lifecycle-result",
+          "when": "Before reporting a lifecycle result."
+        }
+      ],
+      "procedure": {
+        "id": "PROC-FOCUS-SELECTED",
+        "location": {
+          "file": "docs/engineering/harness/CONTINUE.md",
+          "heading": "continue-selected-work"
+        },
+        "prerequisites": [],
+        "steps": {
+          "STEP-FOCUS-SELECTED": {
+            "location": {
+              "file": "docs/engineering/harness/CONTINUE.md",
+              "heading": "continue-selected-work"
+            },
+            "prerequisites": []
+          }
+        }
+      },
+      "current_step": {
+        "id": "STEP-FOCUS-SELECTED",
+        "location": {
+          "file": "docs/engineering/harness/CONTINUE.md",
+          "heading": "continue-selected-work"
+        },
+        "prerequisites": []
+      }
+    },
+    "formal_artifact_ids": [
+      "ADR-IAR-011",
+      "ARCH-IAR-011",
+      "CAP-IAR-002",
+      "INT-IAR-001",
+      "REQ-IAR-024",
+      "SPEC-IAR-014",
+      "VER-HUP-021",
+      "WO-HUP-023"
+    ],
+    "evaluator_only_inputs": [
+      "docs/engineering/WORKFLOW.json",
+      "docs/engineering/QUALITY_GATES.json"
+    ],
+    "formal_artifacts": [
+      {
+        "id": "ADR-IAR-011",
+        "file": "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-011.md"
+      },
+      {
+        "id": "ARCH-IAR-011",
+        "file": "docs/engineering/instruction-architecture/architecture/ARCH-IAR-011.md"
+      },
+      {
+        "id": "CAP-IAR-002",
+        "file": "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md"
+      },
+      {
+        "id": "INT-IAR-001",
+        "file": "docs/engineering/instruction-architecture/intent/INT-IAR-001.md"
+      },
+      {
+        "id": "REQ-IAR-024",
+        "file": "docs/engineering/instruction-architecture/requirements/REQ-IAR-024.md"
+      },
+      {
+        "id": "SPEC-IAR-014",
+        "file": "docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md"
+      },
+      {
+        "id": "VER-HUP-021",
+        "file": "docs/engineering/repository-harness-upgrade/verification/VER-HUP-021.md"
+      },
+      {
+        "id": "WO-HUP-023",
+        "file": "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-023.md"
+      }
+    ]
+  },
+  "result_sha256": "8965095fdd6c552843e43c41468771fd38710f77fc08c0afd7c6c1765b372673",
+  "context": {
+    "reading_manifest": [
+      "ENGINEERING_HARNESS.md",
+      "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
+      "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-024.md",
+      "docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md",
+      "docs/engineering/instruction-architecture/architecture/ARCH-IAR-011.md",
+      "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-011.md",
+      "docs/engineering/repository-harness-upgrade/verification/VER-HUP-021.md",
+      "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-023.md"
+    ],
+    "governing": [
+      "ADR-IAR-011",
+      "ARCH-IAR-011",
+      "CAP-IAR-002",
+      "INT-IAR-001",
+      "REQ-IAR-024",
+      "SPEC-IAR-014",
+      "VER-HUP-021"
+    ],
+    "declared_paths": [
+      ".github/workflows/engineering-harness.yml",
+      "tests/test_progressive_documentation.py",
+      "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-022.md",
+      "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-022/",
+      "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-023.md",
+      "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-023/"
+    ],
+    "state": {
+      "status": "draft",
+      "family": "work_order"
+    },
+    "next": {
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "WO-HUP-023"
+      ],
+      "procedure_id": "PROC-FOCUS-SELECTED",
+      "step_id": "STEP-FOCUS-SELECTED"
+    },
+    "decision_required": null
+  }
+}

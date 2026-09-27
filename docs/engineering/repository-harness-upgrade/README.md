@@ -186,3 +186,16 @@ scope pass. Evidence is retained under `evidence/WO-HUP-020/`. Fresh aggregate
 VREC-HUP-019 preparation will bind this correction and WO-PLG-025 to the completed
 candidate, including a final full-suite and CI replay. Earlier VREC-PLG-022
 remains unchanged; owner assurance and hosted CI follow preparation and delivery.
+
+## Adopting 0.19.0 (2026-09-27)
+
+WO-HUP-021 is in progress under the owner's approval of it and VER-HUP-021.
+The owner reviewed the retained native Codex CLI startup/compaction evidence
+and authorized legacy-entry retirement. The public RLS-SEH-028 wheel upgraded
+the root to 0.19.0; the separate reviewed AGENTS edit leaves repository facts
+and commands. The installer removed the empty CLAUDE.md. Development source is
+0.20.0. Implementation verification and its later human acceptance remain pending.
+
+The exact transaction is `evidence/WO-HUP-021-evaluator-upgrade.json`; the owner
+edit, host limitations and delivery traces are under `evidence/WO-HUP-021/`.
+The selected approved IAR successor definitions remain unchanged.

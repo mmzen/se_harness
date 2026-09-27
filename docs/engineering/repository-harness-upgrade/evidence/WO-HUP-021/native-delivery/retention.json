@@ -1,0 +1,17 @@
+{
+  "transport": "Retain native JSON using LF to match repository evidence attributes; native event objects and context strings are unchanged. Original capture files remain outside the repository.",
+  "traces": [
+    {
+      "event": "startup",
+      "source_raw_sha256": "626b108744839d3dae56667f76614f8cd8595a6de4a03da08d26a62a7e5ff2d5",
+      "retained_lf_sha256": "46c09f6147fa8c1cdd964129f7c479d57d1317aef8bd0a1b7b8358f428234f77",
+      "event_content_unchanged": true
+    },
+    {
+      "event": "compact",
+      "source_raw_sha256": "47b8693a6e2365b11458f008f9195a3079eccdb9391b5795f94c17d5460a36a1",
+      "retained_lf_sha256": "3a4b5864b17e115a1a5585c05f75e7c58b6cb6b89756c1b6de5bb25d72a1d8d0",
+      "event_content_unchanged": true
+    }
+  ]
+}

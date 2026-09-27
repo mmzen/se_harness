@@ -1,0 +1,166 @@
+{
+  "implementation_commit": "2e43b1594596efb9abcf8325e23c0b17331e0ed3",
+  "checks": [
+    {
+      "check": "owner_proposal_applied",
+      "passed": true,
+      "detail": "Actual AGENTS equals reviewed proposal after LF canonicalization."
+    },
+    {
+      "check": "retired_entries",
+      "passed": true,
+      "detail": "Both entries absent from lock; empty CLAUDE file absent."
+    },
+    {
+      "check": "docs/engineering/harness/AMEND_DEFINITIONS.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/ARTIFACTS.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/AUTHORITY.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/AUTHORIZE_WORK.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/COMMUNICATION.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/CONTINUE.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/DEFINE_CHANGE.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/DEFINITION_LINKS.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/DELIVER_RESULT.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/DRAFT_DEFINITIONS.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/DRAFT_WORK_ORDERS.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/EXCEPTIONS.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/EXECUTE_WORK.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/PULL_REQUEST.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/RECORD_STATE.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/RELEASE.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/RESULTS.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/RISKS_AND_DECISIONS.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/SETUP.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/SKILL_PROVIDER.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/UPGRADE.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/VERIFY_OUTCOME.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "docs/engineering/harness/migration/REFERENCE_MAP.md",
+      "passed": true,
+      "detail": "Matches published wheel."
+    },
+    {
+      "check": "guide_count",
+      "passed": true,
+      "detail": 25
+    },
+    {
+      "check": "startup_committed_trace",
+      "passed": true,
+      "detail": "46c09f6147fa8c1cdd964129f7c479d57d1317aef8bd0a1b7b8358f428234f77"
+    },
+    {
+      "check": "compact_committed_trace",
+      "passed": true,
+      "detail": "3a4b5864b17e115a1a5585c05f75e7c58b6cb6b89756c1b6de5bb25d72a1d8d0"
+    },
+    {
+      "check": "accepted_history_unchanged",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "owner_settings_preserved",
+      "passed": true,
+      "detail": "Only selected tool_version changed."
+    }
+  ],
+  "passed": true
+}

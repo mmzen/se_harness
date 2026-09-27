@@ -1,0 +1,24 @@
+{
+  "answer": "Approve rejection and WO-HUP-023",
+  "actor": "Requesting human in this conversation (repository owner)",
+  "legacy_command_actor": "engineering-owner",
+  "classified_work_order_sha256": "93bac6befc3e9217e88b1ff135cc065014cba058a4b4b8563d59a8e4d2025e42",
+  "original_022_sha256": "4d407ae9ff874d343bd67ff45fa4300ffb9579fe7cabe5dd0ad315d2cc7db3bc",
+  "transition_arguments": [
+    "transition",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--set",
+    "WO-HUP-022=rejected",
+    "--decision",
+    "WO-HUP-022=engineering-owner",
+    "--reason",
+    "WO-HUP-022=The requesting human in this conversation approved rejection and WO-HUP-023. Reject this unusable work authorization because released 0.19.0 cannot start its named-human approval; preserve the original event and failed evidence.",
+    "--set",
+    "WO-HUP-023=approved",
+    "--decision",
+    "WO-HUP-023=engineering-owner",
+    "--reason",
+    "WO-HUP-023=Decision by the requesting human in this conversation, acting as repository and engineering owner: Approve rejection and WO-HUP-023. Approve the reviewed two-line correction, recovery scope and required commit-bound assurance. engineering-owner is the released evaluator legacy encoding for this human decision.",
+    "--json"
+  ]
+}

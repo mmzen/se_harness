@@ -1,0 +1,41 @@
+{
+  "selected_evaluator": "0.18.0",
+  "validation": {
+    "artifact_count": 1698,
+    "error_count": 0,
+    "warning_count": 52,
+    "advisory_count": 0,
+    "errors": []
+  },
+  "warnings_match_baseline_doctor": false,
+  "upgrade_preview": "upgrade-preview.json",
+  "plugin_check": "plugin-package-check.json",
+  "native_delivery": "not_assessed",
+  "actual_upgrade": "not_applied",
+  "approval_preview": {
+    "applied": false,
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass"
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass"
+      },
+      {
+        "id": "QG-G3-WORK-AUTHORIZATION",
+        "status": "pass"
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass"
+      }
+    ],
+    "actual_states": {
+      "WO-HUP-021": "draft",
+      "VER-HUP-021": "draft"
+    }
+  }
+}

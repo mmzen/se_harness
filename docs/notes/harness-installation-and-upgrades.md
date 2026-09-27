@@ -5,17 +5,18 @@
 Installing the Python package makes a checker available. Updating a repository
 is a separate, explicit `harnessctl upgrade --apply` operation.
 
-This guide describes behavior released in 0.18.0 from WO-KIS-003. An existing
+This guide describes the 0.19.0 installation and instruction-delivery model. An existing
 repository keeps its installed evaluator and lock until an explicit upgrade.
-The SE Harness development repository adopted released 0.18.0 under WO-HUP-019.
+The SE Harness development repository adopted released 0.19.0 under WO-HUP-021.
 
 ## What is kept under control
 
 | Files | Treatment |
 | --- | --- |
-| `ENGINEERING_HARNESS.md`, machine `WORKFLOW.json` and `QUALITY_GATES.json` | Locked machine policy and router. Actual changes fail integrity checks. |
-| Marked blocks in `AGENTS.md`, `CLAUDE.md`, `.gitignore` and `.gitattributes` | Only the supplied block is locked. Owner text around it is preserved. |
-| Human policy guides, artifact templates, CI workflow and `.engineering-harness.toml` | Editable files, supplied on first installation and kept on later upgrades. |
+| `ENGINEERING_HARNESS.md`, `docs/engineering/harness/`, machine `WORKFLOW.json` and `QUALITY_GATES.json` | Locked entry, conditional instructions and machine policy. Actual changes fail integrity checks. |
+| Marked blocks in `.gitignore` and `.gitattributes` | Only the supplied block is locked. Owner text around it is preserved. |
+| `AGENTS.md` and any owner-created `CLAUDE.md` | Repository-owned. The harness installs no entry block in these files. |
+| Compatibility pointers, artifact templates, CI workflow and `.engineering-harness.toml` | Editable supplied files; customized content needs an explicit migration decision. |
 | Repository skill copies | Editable supplied files when using repository ownership; disposable when switching to the plugin. |
 
 The installed evaluator owns executable policy. Its selected version must match
@@ -32,9 +33,13 @@ python -m se_harness doctor /path/to/repository
 ```
 
 An existing repository keeps its editable files. The installer inserts the
-bounded instruction/ignore fragments and records observations in an adoption
+bounded ignore/attribute fragments and records observations in an adoption
 report. It does not overwrite an existing CI workflow or configure GitHub
 permissions, branch protection or publishing credentials.
+
+The compact root needs native delivery through a compatible, enabled and trusted
+host plugin. A successful installation or doctor check does not prove that the
+host injected it. See [setup](../engineering/harness/SETUP.md).
 
 The evaluator's executable scripts ship inside its package. No executable
 copies are installed under the target's `scripts/` directory.
@@ -53,7 +58,7 @@ python -m se_harness doctor /path/to/repository
 
 Installing the package does **not** silently rewrite a repository.
 
-Guidance, templates, CI and owner settings are kept by default, including edits
+Editable guidance, templates, CI and owner settings are kept by default, including edits
 made while an older lock treated them as managed files. To take a supplied
 replacement, name that file explicitly:
 
@@ -66,6 +71,15 @@ Repeat `--replace-file` for each editable file to replace. An intentionally
 removed editable file stays removed unless explicitly selected. The upgrade
 updates the selected checker version while preserving other owner settings.
 Replacing customized machine policy remains a separate repair decision.
+
+Before retiring an old AGENTS.md or CLAUDE.md block, rehearse the exact planned
+root and review native startup and post-compaction traces. Pass the resulting
+repository-bound receipt with `--instruction-delivery-evidence PATH` on apply.
+Missing or stale evidence leaves the old blocks unchanged. Canonical old guides
+become compatibility pointers; customized guides require an explicit plan.
+See [the upgrade procedure](../engineering/harness/UPGRADE.md#legacy-entry-delivery-evidence).
+The installer preserves owner bytes outside the old blocks. An approved separate
+owner edit is needed to remove harness prose previously copied into that region.
 
 Use `--evidence-output docs/engineering/<domain>/evidence/upgrade.json` when the
 repository needs a retained transaction record. The SE Harness development

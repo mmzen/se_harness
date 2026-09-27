@@ -1,0 +1,9 @@
+{
+  "work_order": "WO-HUP-022",
+  "human": "Requesting human in this conversation (repository owner)",
+  "answer": "Approve WO-HUP-022 and required assurance",
+  "reviewed_work_order_sha256": "0efb3f9ce712ab07d72e0699cf3b392edc3bd966f2b3ff80a5f857ed721f2bb4",
+  "patch_sha256": "41cfb8a70d9bb7f8b936f9c21eb745e57e5120ab76ea5b089708072376746c98",
+  "classified_work_order_sha256": "30e8c61fc01d81f6beadef626e54718142eaef8268562dba2b4974bdc4562975",
+  "change_since_review": "Only the approved assurance confirmation and actual human identity were recorded."
+}

@@ -1,0 +1,9 @@
+{
+  "installed_entry_sha256": "aee9ed33d732c27ec06de7676450baaa9a05ea54e39906cca3791745be538d74",
+  "matches_native_rehearsal": true,
+  "lock_matches": true,
+  "governance_version": "0.19.0",
+  "native_evidence": "native-delivery/observation.json",
+  "additional_actual_repository_native_probe": "not_run_auto_review_rejected",
+  "reason": "Potential external transmission of actual repository context; retained the required isolated native proof and used local byte comparison for the actual installation."
+}

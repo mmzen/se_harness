@@ -1,0 +1,39 @@
+{
+  "tested_commit": "0b40d1a1eb6994508fd9d629c0bdca16e2c6e0c2",
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "preflight",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--work-order",
+    "WO-HUP-023",
+    "--phase",
+    "review",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "seconds": 5.41,
+  "stdout": "{\n  \"assurance\": {\n    \"commit_bound_verification\": \"required\",\n    \"decided_by\": \"Requesting human in this conversation (repository owner)\",\n    \"rationale\": \"Later decisions depend on CI evaluator selection and the documentation check; the requesting human confirmed required commit-bound verification for this work order.\"\n  },\n  \"authority_boundary\": \"Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.\",\n  \"background\": [],\n  \"diagnostics\": [],\n  \"phase\": \"review\",\n  \"reading_manifest\": [\n    \"ENGINEERING_HARNESS.md\",\n    \"docs/engineering/instruction-architecture/intent/INT-IAR-001.md\",\n    \"docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md\",\n    \"docs/engineering/instruction-architecture/requirements/REQ-IAR-024.md\",\n    \"docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md\",\n    \"docs/engineering/instruction-architecture/architecture/ARCH-IAR-011.md\",\n    \"docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-011.md\",\n    \"docs/engineering/repository-harness-upgrade/verification/VER-HUP-021.md\",\n    \"docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-023.md\"\n  ],\n  \"ready\": true,\n  \"schema\": \"se-harness-preflight-v2\",\n  \"skew\": [],\n  \"work_order\": {\n    \"id\": \"WO-HUP-023\",\n    \"path\": \"docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-023.md\",\n    \"status\": \"in_progress\"\n  }\n}\n",
+  "stderr": "",
+  "git_settings": [
+    [
+      "safe.directory",
+      "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness"
+    ],
+    [
+      "safe.directory",
+      "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/adopt019-verification"
+    ],
+    [
+      "core.autocrlf",
+      "false"
+    ],
+    [
+      "core.longpaths",
+      "true"
+    ]
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\bin\\python.exe",
+    "-B",
+    "-m",
+    "repository_tools.evaluator_facts",
+    "derive",
+    "--repository",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adopt019-verification"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 1,
+  "seconds": 0.1,
+  "stdout": "",
+  "stderr": "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe: Error while finding module specification for 'repository_tools.evaluator_facts' (ModuleNotFoundError: No module named 'repository_tools')\n",
+  "git_settings": {
+    "safe.directory": "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/adopt019-verification",
+    "core.autocrlf": "false",
+    "core.longpaths": "true"
+  }
+}

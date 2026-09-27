@@ -1,0 +1,15 @@
+{
+  "profile": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex",
+  "host": "codex-cli 0.155.0-alpha.16.4",
+  "plugin_version": "0.2.0",
+  "plugin_enabled": true,
+  "rehearsal_repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adopt019-native\\repository",
+  "actual_repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "global_marketplace_changed": false,
+  "project_trust_configured": [
+    "rehearsal_repository",
+    "actual_repository"
+  ],
+  "hook_trust": "Existing native trust retained; hooks/hooks.json and scripts/inject_instructions.py exactly match the previously trusted delivery assets.",
+  "evaluator_restored": "0.18.0"
+}

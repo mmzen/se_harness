@@ -1,0 +1,14 @@
+{
+  "proposed_work_order": "WO-HUP-023",
+  "work_order_sha256": "16380d36556081ed8bbe066fd9f475f07ddcbe93bb08a4bb5a002650230f2c6e",
+  "preserved_approved_work_order": "WO-HUP-022",
+  "preserved_work_order_sha256": "4d407ae9ff874d343bd67ff45fa4300ffb9579fe7cabe5dd0ad315d2cc7db3bc",
+  "patch_sha256": "41cfb8a70d9bb7f8b936f9c21eb745e57e5120ab76ea5b089708072376746c98",
+  "requested_decisions": [
+    "Reject WO-HUP-022 because released 0.19.0 cannot execute its named-human approval; preserve its history.",
+    "Approve WO-HUP-023 with required commit-bound verification; use the legacy engineering-owner encoding and identify the human in the reason."
+  ],
+  "approval_pending": true,
+  "implementation_changes_applied": false,
+  "evaluator_python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe"
+}

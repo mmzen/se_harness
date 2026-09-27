@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\13995fba801849b0\\codex.exe",
+    "--version"
+  ],
+  "isolated_profile": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex",
+  "exit_code": 0,
+  "stdout": "codex-cli 0.155.0-alpha.16.4\n",
+  "stderr": ""
+}

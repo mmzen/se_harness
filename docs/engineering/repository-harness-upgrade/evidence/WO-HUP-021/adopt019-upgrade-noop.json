@@ -1,0 +1,237 @@
+{
+  "changes": [
+    {
+      "action": "unchanged",
+      "path": ".engineering-harness.toml"
+    },
+    {
+      "action": "unchanged",
+      "path": ".gitattributes"
+    },
+    {
+      "action": "unchanged",
+      "path": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "action": "unchanged",
+      "path": ".github/workflows/engineering-harness.yml"
+    },
+    {
+      "action": "unchanged",
+      "path": ".gitignore"
+    },
+    {
+      "action": "unchanged",
+      "path": "ENGINEERING_HARNESS.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "GLOSSARY.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/ARTIFACT_AUTHORING.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/DECISION_RIGHTS.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/OPERATING_CARD.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/QUALITY_GATES.json"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/QUALITY_GATES.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/README.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/TECHNICAL_COMMUNICATION.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/TRACEABILITY.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/WORKFLOW.json"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/WORKFLOW.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/AMEND_DEFINITIONS.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/ARTIFACTS.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/AUTHORITY.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/AUTHORIZE_WORK.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/COMMUNICATION.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/CONTINUE.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/DEFINE_CHANGE.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/DEFINITION_LINKS.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/DELIVER_RESULT.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/DRAFT_DEFINITIONS.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/DRAFT_WORK_ORDERS.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/EXCEPTIONS.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/EXECUTE_WORK.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/PULL_REQUEST.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/RECORD_STATE.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/RELEASE.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/RESULTS.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/RISKS_AND_DECISIONS.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/SETUP.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/SKILL_PROVIDER.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/UPGRADE.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/VERIFY_OUTCOME.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/WORK_AND_EVIDENCE.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/harness/migration/REFERENCE_MAP.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/templates/ADR.template.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/templates/ARCHITECTURE.template.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/templates/CAPABILITY.template.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/templates/DECISION.template.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/templates/INTENT.template.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/templates/OPERATING_CONTRACT.template.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/templates/README.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/templates/RELEASE_CONTRACT.template.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/templates/RELEASE_RECORD.template.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/templates/REQUIREMENT.template.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/templates/RISK.template.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/templates/SPECIFICATION.template.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/templates/VERIFICATION.template.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/templates/VERIFICATION_RECORD.template.md"
+    },
+    {
+      "action": "unchanged",
+      "path": "docs/engineering/templates/WORK_ORDER.template.md"
+    }
+  ],
+  "command": "upgrade",
+  "instruction_delivery_required": false,
+  "outcome": "completed",
+  "schema": "se-harness-command-result-v1",
+  "written": false
+}
