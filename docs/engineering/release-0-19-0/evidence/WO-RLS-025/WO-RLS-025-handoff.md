@@ -26,3 +26,9 @@ The released evidence command has now created that header. This is preparation
 for the approved draft PR; the work remains in_progress. Full final integration,
 Windows/Ubuntu package acceptance and the two pinned release builds are pending.
 No implementation completion, verification acceptance or release is claimed.
+
+## Implementation completion review
+
+REPORT.md supersedes the initial pending-check observation above. All described
+implementation checks have now passed. Final-candidate build and verification
+preparation remain separately identified; no assurance is inferred.

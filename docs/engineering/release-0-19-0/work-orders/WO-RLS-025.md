@@ -2,7 +2,7 @@
 id = "WO-RLS-025"
 type = "work_order"
 title = "Prepare checker 0.19.0 and plugin 0.2.0 release inputs"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner", "release-owner"]
 created = "2026-09-27"
 updated = "2026-09-27"
@@ -43,6 +43,13 @@ to = "in_progress"
 decided_at = "2026-09-27T17:46:58Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex starts the approved release preparation under DR-015 after passing released start checks. The human approved the exact REL-SEH-030 and WO-RLS-025 package in this task."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-27T18:00:06Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Codex records implementation completion under the human-approved scope after local regressions, cross-platform candidate CI, both manual release rehearsals and the complete released handoff passed. The next immutable candidate will retain this completion and evidence. Its exact build and aggregate verification preparation continue under the approved scope; human verification and release remain separate."
 +++
 
 # Prepare checker 0.19.0 and plugin 0.2.0 release inputs

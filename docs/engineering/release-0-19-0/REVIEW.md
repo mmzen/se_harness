@@ -1,4 +1,7 @@
-# Release preparation review
+# Reviewed preparation proposal
+
+The user approved these reviewed inputs on 2026-09-27. The text below records
+the proposal at review time; current states are in the formal artifacts.
 
 The proposed release is **SE Harness 0.19.0**. The companion plugin inputs
 would become **Verity Plane 0.2.0** for Codex and Claude Code.

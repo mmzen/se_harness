@@ -10,4 +10,4 @@ typed relations and lifecycle decisions.
 - [Reviewed proposal](REVIEW.md)
 
 The human approved REL-SEH-030 and WO-RLS-025 on 2026-09-27. The work order
-is in progress. Verification acceptance and release remain separate decisions.
+is implemented; final-candidate verification preparation continues. Verification acceptance and release remain separate decisions.
