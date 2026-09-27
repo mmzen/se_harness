@@ -1,0 +1,38 @@
+[
+  {
+    "label": "package-build",
+    "argv": [
+      "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "-c",
+      "from setuptools.build_meta import build_wheel; import sys; build_wheel(sys.argv[1])",
+      "C:\\Users\\mathi\\AppData\\Local\\Temp\\ci19-nonpromotable-ro2h35qx\\wheel"
+    ],
+    "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\ci19-nonpromotable-ro2h35qx\\source",
+    "exit_code": 0
+  },
+  {
+    "label": "package-venv",
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-m",
+      "venv",
+      "C:\\Users\\mathi\\AppData\\Local\\Temp\\ci19-nonpromotable-ro2h35qx\\evaluator"
+    ],
+    "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\ci19-nonpromotable-ro2h35qx",
+    "exit_code": 0
+  },
+  {
+    "label": "package-install",
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Temp\\ci19-nonpromotable-ro2h35qx\\evaluator\\Scripts\\python.exe",
+      "-m",
+      "pip",
+      "install",
+      "--no-index",
+      "--no-deps",
+      "C:\\Users\\mathi\\AppData\\Local\\Temp\\ci19-nonpromotable-ro2h35qx\\wheel\\se_harness-0.19.0-py3-none-any.whl"
+    ],
+    "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\ci19-nonpromotable-ro2h35qx",
+    "exit_code": 0
+  }
+]

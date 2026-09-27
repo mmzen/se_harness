@@ -1,0 +1,36 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "repository_tools.upgrade_rehearsal",
+    "--repository",
+    ".",
+    "--predecessor-python",
+    "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "--successor-python",
+    "C:\\Users\\mathi\\AppData\\Local\\Temp\\ci19-nonpromotable-ro2h35qx\\evaluator\\Scripts\\python.exe",
+    "--output",
+    "C:\\Users\\mathi\\AppData\\Local\\Temp\\ci19-nonpromotable-ro2h35qx\\final-replay-98e307ae34cf-2",
+    "--workspace",
+    "C:\\Users\\mathi\\AppData\\Local\\Temp\\ci19-nonpromotable-ro2h35qx",
+    "--timings",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "commit": "98e307ae34cfd908441cd7f1c12ae5757c25e3a1",
+  "exit_code": 0,
+  "package": {
+    "promotable": false,
+    "package_source_commit": "2f339039fe4f6189334fcd10632e20360cfa389f",
+    "wheel": "C:\\Users\\mathi\\AppData\\Local\\Temp\\ci19-nonpromotable-ro2h35qx\\wheel\\se_harness-0.19.0-py3-none-any.whl",
+    "sha256": "3b45680ee7f76509e09a933a4d061ff522d29c25b236201985861376221f5b3f",
+    "python": "C:\\Users\\mathi\\AppData\\Local\\Temp\\ci19-nonpromotable-ro2h35qx\\evaluator\\Scripts\\python.exe",
+    "workspace": "C:\\Users\\mathi\\AppData\\Local\\Temp\\ci19-nonpromotable-ro2h35qx"
+  },
+  "package_inputs_unchanged_since_build": true,
+  "process_only_git_settings": {
+    "core.longpaths": "true"
+  }
+}

@@ -1,0 +1,33 @@
+upgrade timing: start replay
+upgrade timing: start git-archive
+upgrade timing: end git-archive: 2.803437s (finished)
+upgrade timing: start archive-extraction
+upgrade timing: end archive-extraction: 30.949616s (finished)
+upgrade timing: start git-init
+upgrade timing: end git-init: 0.099365s (finished)
+upgrade timing: start git-config-maintenance
+upgrade timing: end git-config-maintenance: 0.039701s (finished)
+upgrade timing: start git-config-gc
+upgrade timing: end git-config-gc: 0.040822s (finished)
+upgrade timing: start git-config-autocrlf
+upgrade timing: end git-config-autocrlf: 0.038810s (finished)
+upgrade timing: start git-config-email
+upgrade timing: end git-config-email: 0.038059s (finished)
+upgrade timing: start git-config-name
+upgrade timing: end git-config-name: 0.150911s (finished)
+upgrade timing: start git-config-signing
+upgrade timing: end git-config-signing: 0.035862s (finished)
+upgrade timing: start git-add
+upgrade timing: end git-add: 20.544045s (error)
+upgrade timing: start scratch-cleanup
+upgrade timing: end scratch-cleanup: 7.977654s (finished)
+upgrade timing: end replay: 62.761201s (error)
+upgrade rehearsal: cannot prepare the throwaway repository: git add -A: warning: unable to access 'C:\Users\mathi/.config/git/ignore': Permission denied
+warning: could not open directory 'docs/engineering/plugin-integration/evidence/WO-PLG-003/20260909-live/readiness-fixture-inputs/synthetic-inputs/docs/engineering/readiness-probe/specifications/': Filename too long
+warning: could not open directory 'docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/recorder-errors-linux/external-missing-executable/run/fixtures/external-control-calibration/': Filename too long
+warning: could not open directory 'docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/recorder-errors-linux/external-missing-executable/run/fixtures/external-control-gate-failure/': Filename too long
+warning: could not open directory 'docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/recorder-errors-windows/external-missing-executable/run/fixtures/external-control-calibration/': Filename too long
+warning: could not open directory 'docs/engineering/plugin-integration/evidence/WO-PLG-011/acceptance/recorder-errors-windows/external-missing-executable/run/fixtures/external-control-gate-failure/': Filename too long
+error: open("docs/engineering/plugin-integration/evidence/WO-PLG-003/20260909-live/readiness-fixture-inputs/synthetic-inputs/docs/engineering/readiness-probe/capabilities/CAP-PROBE-001.md.txt"): Filename too long
+error: unable to index file 'docs/engineering/plugin-integration/evidence/WO-PLG-003/20260909-live/readiness-fixture-inputs/synthetic-inputs/docs/engineering/readiness-probe/capabilities/CAP-PROBE-001.md.txt'
+fatal: adding files failed

@@ -1,0 +1,52 @@
+upgrade timing: start replay
+upgrade timing: start git-archive
+upgrade timing: end git-archive: 2.390589s (finished)
+upgrade timing: start archive-extraction
+upgrade timing: end archive-extraction: 26.620595s (finished)
+upgrade timing: start git-init
+upgrade timing: end git-init: 0.074380s (finished)
+upgrade timing: start git-config-maintenance
+upgrade timing: end git-config-maintenance: 0.041784s (finished)
+upgrade timing: start git-config-gc
+upgrade timing: end git-config-gc: 0.040677s (finished)
+upgrade timing: start git-config-autocrlf
+upgrade timing: end git-config-autocrlf: 0.041071s (finished)
+upgrade timing: start git-config-email
+upgrade timing: end git-config-email: 0.041748s (finished)
+upgrade timing: start git-config-name
+upgrade timing: end git-config-name: 0.041556s (finished)
+upgrade timing: start git-config-signing
+upgrade timing: end git-config-signing: 0.050560s (finished)
+upgrade timing: start git-add
+upgrade timing: end git-add: 68.917932s (finished)
+upgrade timing: start git-commit
+upgrade timing: end git-commit: 14.147288s (finished)
+upgrade timing: start git-storage-paths
+upgrade timing: end git-storage-paths: 0.032597s (finished)
+upgrade timing: start predecessor-version
+upgrade timing: end predecessor-version: 0.293431s (finished)
+upgrade timing: start successor-version
+upgrade timing: end successor-version: 0.297043s (finished)
+upgrade timing: start predecessor-doctor-before
+upgrade timing: end predecessor-doctor-before: 20.549285s (finished)
+upgrade timing: start successor-upgrade-plan
+upgrade timing: end successor-upgrade-plan: 0.369887s (finished)
+upgrade timing: start delivery-refusal-snapshot-before
+upgrade timing: end delivery-refusal-snapshot-before: 16.954787s (finished)
+upgrade timing: start successor-upgrade-without-delivery
+upgrade timing: end successor-upgrade-without-delivery: 0.493973s (finished)
+upgrade timing: start delivery-refusal-snapshot-after
+upgrade timing: end delivery-refusal-snapshot-after: 2.753474s (finished)
+upgrade timing: start prepare-synthetic-delivery
+upgrade timing: end prepare-synthetic-delivery: 0.300078s (finished)
+upgrade timing: start successor-upgrade-apply
+upgrade timing: end successor-upgrade-apply: 1.273839s (finished)
+upgrade timing: start successor-doctor-after
+upgrade timing: end successor-doctor-after: 2.254011s (finished)
+upgrade timing: start successor-validate-after
+upgrade timing: end successor-validate-after: 3.666241s (finished)
+upgrade timing: start predecessor-doctor-after
+upgrade timing: end predecessor-doctor-after: 2.281091s (finished)
+upgrade timing: start scratch-cleanup
+upgrade timing: end scratch-cleanup: 9.146502s (finished)
+upgrade timing: end replay: 173.188299s (finished)

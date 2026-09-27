@@ -1,0 +1,17 @@
+{
+  "args": [
+    "transition",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--set",
+    "WO-IAR-019=approved",
+    "--decision",
+    "WO-IAR-019=engineering-owner",
+    "--reason",
+    "WO-IAR-019=The human replied I approve to the presented WO-IAR-019 scope and required assurance classification. Reviewed SHA-256 c8829fdc143a4d6ffaab70f7943b76597b6aeec88314d252a83d55d84ce65dc6. Codex applies that recorded decision; no native qualification, merge or release is approved.",
+    "--json",
+    "--apply"
+  ],
+  "exit_code": 0,
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+}
