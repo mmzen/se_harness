@@ -1,0 +1,161 @@
+{
+  "outcome": "failed",
+  "failed_checks": [
+    {
+      "detail": "differs from distribution template",
+      "name": "distribution:ENGINEERING_HARNESS.md",
+      "passed": false
+    },
+    {
+      "detail": "installed checker payload matches its installation record",
+      "name": "evaluator-payload",
+      "passed": false
+    },
+    {
+      "detail": "required instruction heading is missing: ENGINEERING_HARNESS.md#read-by-task",
+      "name": "instruction-discovery",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/AMEND_DEFINITIONS.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/ARTIFACTS.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/AUTHORITY.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/AUTHORIZE_WORK.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/COMMUNICATION.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/CONTINUE.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/DEFINE_CHANGE.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/DEFINITION_LINKS.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/DELIVER_RESULT.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/DRAFT_DEFINITIONS.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/DRAFT_WORK_ORDERS.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/EXCEPTIONS.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/EXECUTE_WORK.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/PULL_REQUEST.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/RECORD_STATE.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/RELEASE.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/RESULTS.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/RISKS_AND_DECISIONS.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/SETUP.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/SKILL_PROVIDER.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/UPGRADE.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/VERIFY_OUTCOME.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/WORK_AND_EVIDENCE.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md",
+      "passed": false
+    },
+    {
+      "detail": "missing",
+      "name": "lock-entry:docs/engineering/harness/migration/REFERENCE_MAP.md",
+      "passed": false
+    },
+    {
+      "detail": "not in standard template",
+      "name": "lock-extra:AGENTS.md",
+      "passed": false
+    },
+    {
+      "detail": "not in standard template",
+      "name": "lock-extra:CLAUDE.md",
+      "passed": false
+    },
+    {
+      "detail": "config, installation and running checker versions must agree",
+      "name": "selected-version",
+      "passed": false
+    }
+  ],
+  "assessment": "Expected 0.19.0 evaluator against intact 0.18.0 installation: root/version/payload mismatch, absent new-guide locks and retired entries. The matching 0.18.0 evaluator was restored and doctor passed."
+}

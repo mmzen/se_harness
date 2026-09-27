@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\13995fba801849b0\\codex.exe",
+    "plugin",
+    "marketplace",
+    "add",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adopt019-native\\marketplace",
+    "--json"
+  ],
+  "isolated_profile": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex",
+  "exit_code": 0,
+  "stdout": "{\n  \"marketplaceName\": \"se-harness\",\n  \"installedRoot\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\adopt019-native\\\\marketplace\",\n  \"alreadyAdded\": false\n}\n",
+  "stderr": ""
+}

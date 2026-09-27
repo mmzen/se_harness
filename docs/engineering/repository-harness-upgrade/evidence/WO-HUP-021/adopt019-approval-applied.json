@@ -1,0 +1,278 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "transition",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "VER-HUP-021",
+    "artifacts": [
+      "VER-HUP-021",
+      "WO-HUP-021"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "transition",
+    "workflow_rule_id": "WFL-DEFINITION-COMPLETE",
+    "procedure_id": "PROC-DEFINITION-COMPLETE",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:VER-HUP-021"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "VER-HUP-021"
+              }
+            ],
+            "message": "VER-HUP-021 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:VER-HUP-021"
+              }
+            ],
+            "message": "No open decision blocks VER-HUP-021."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "VER-HUP-021"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for VER-HUP-021."
+          }
+        ]
+      },
+      {
+        "id": "QG-G3-WORK-AUTHORIZATION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G3-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-HUP-021"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G3-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G3-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-HUP-021"
+              }
+            ],
+            "message": "No open decision blocks WO-HUP-021."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-HUP-021"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for WO-HUP-021."
+          },
+          {
+            "id": "QGS-ASSURANCE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-HUP-021"
+              }
+            ],
+            "message": "WO-HUP-021 classifies commit-bound verification as required."
+          }
+        ]
+      }
+    ]
+  },
+  "procedure": {
+    "id": "PROC-DEFINITION-COMPLETE",
+    "current_step": "STEP-DEFINITION-COMPLETE",
+    "steps": [
+      {
+        "id": "STEP-DEFINITION-COMPLETE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G1-DEFINITION",
+          "QG-G2-ARCHITECTURE"
+        ],
+        "effects": [
+          "Permits a decision on VER-HUP-021 only."
+        ],
+        "non_effects": [
+          "Related definitions remain unchanged unless separately selected."
+        ],
+        "decision_right": "DR-DEFINITION-DECIDE",
+        "role": "definition-owner",
+        "artifact": "VER-HUP-021",
+        "decision": "whether the selected definition is complete",
+        "outcomes": [
+          "implemented",
+          "reject",
+          "stop"
+        ],
+        "response": "Decide the selected definition VER-HUP-021 only."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "VER-HUP-021",
+        "status": "draft"
+      },
+      {
+        "id": "WO-HUP-021",
+        "status": "draft"
+      }
+    ],
+    "after": [
+      {
+        "id": "VER-HUP-021",
+        "status": "approved"
+      },
+      {
+        "id": "WO-HUP-021",
+        "status": "approved"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "VER-HUP-021",
+        "path": "docs/engineering/repository-harness-upgrade/verification/VER-HUP-021.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "WO-HUP-021",
+        "path": "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-021.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Applied 2 explicit lifecycle transition(s) atomically."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "VER-HUP-021 is approved."
+    ],
+    "decision_required": {
+      "decision_right": "DR-DEFINITION-DECIDE",
+      "role": "definition-owner",
+      "artifact": "VER-HUP-021",
+      "decision": "whether the selected definition is complete",
+      "outcomes": [
+        "implemented",
+        "reject",
+        "stop"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-DEFINITION-COMPLETE",
+      "step_id": "STEP-DEFINITION-COMPLETE",
+      "action": "whether the selected definition is complete"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Decide the selected definition VER-HUP-021 only."
+    },
+    "alternatives": []
+  },
+  "result_sha256": "1cc287819b80f326bfafe8df1806dee917a920fb3182d970617b24d2caa43f76"
+}

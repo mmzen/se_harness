@@ -1,0 +1,23 @@
+{
+  "schema": "se-harness-native-instruction-delivery-v1",
+  "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "target_version": "0.19.0",
+  "prior_lock_sha256": "8ac3b3ea5025009b93a3b1f2abffc8b8316c2b2f17868b276d78aafc06ab58be",
+  "entry_sha256": "aee9ed33d732c27ec06de7676450baaa9a05ea54e39906cca3791745be538d74",
+  "host": "codex",
+  "host_version": "codex-cli 0.155.0-alpha.16.4",
+  "events": {
+    "startup": {
+      "origin": "native-host",
+      "delivered_root_sha256": "aee9ed33d732c27ec06de7676450baaa9a05ea54e39906cca3791745be538d74",
+      "trace": "native-delivery/startup.events.json",
+      "trace_sha256": "46c09f6147fa8c1cdd964129f7c479d57d1317aef8bd0a1b7b8358f428234f77"
+    },
+    "compact": {
+      "origin": "native-host",
+      "delivered_root_sha256": "aee9ed33d732c27ec06de7676450baaa9a05ea54e39906cca3791745be538d74",
+      "trace": "native-delivery/compact.events.json",
+      "trace_sha256": "3a4b5864b17e115a1a5585c05f75e7c58b6cb6b89756c1b6de5bb25d72a1d8d0"
+    }
+  }
+}

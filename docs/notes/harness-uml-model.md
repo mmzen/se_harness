@@ -170,7 +170,7 @@ A work order omits its `architecture` relation when no active architecture
 addresses any implemented requirement. When architecture applies, the work
 order selects every applicable architecture and each ADR its decision
 assessment requires. The authoritative
-[artifact applicability catalog](../engineering/TRACEABILITY.md#artifact-applicability-catalog)
+[artifact applicability catalog](../engineering/harness/ARTIFACTS.md#artifact-types)
 defines the complete required, omission and reuse rules for every type.
 
 Since the 0.4.1 version of this note, a work order gained three tables:

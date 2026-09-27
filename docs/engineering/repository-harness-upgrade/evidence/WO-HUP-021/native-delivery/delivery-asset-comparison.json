@@ -1,0 +1,12 @@
+{
+  "hooks/hooks.json": {
+    "same_bytes": true,
+    "old_sha256": "af3ca23736b437c0bfce27fcc2352c3f88bbb3dde6148c9501bba6fa1fa549f2",
+    "new_sha256": "af3ca23736b437c0bfce27fcc2352c3f88bbb3dde6148c9501bba6fa1fa549f2"
+  },
+  "scripts/inject_instructions.py": {
+    "same_bytes": true,
+    "old_sha256": "98e47de370f0a54dff5b1f3f68bbea40739420da6b1d9197825f569c5b6932ba",
+    "new_sha256": "98e47de370f0a54dff5b1f3f68bbea40739420da6b1d9197825f569c5b6932ba"
+  }
+}

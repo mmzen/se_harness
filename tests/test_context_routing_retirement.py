@@ -163,7 +163,9 @@ class ContextRoutingRetirementTests(unittest.TestCase):
                 self.assertEqual(entry["sha256"], canonical_sha256(tracked_content("fragment", content)))
 
     def test_owner_region_content_changes_no_digest_or_diagnostic(self) -> None:
-        agents = (REPOSITORY_ROOT / "AGENTS.md").read_bytes()
+        # Fragment isolation remains an upgrade guarantee for the retained
+        # legacy input; the adopted root's AGENTS.md is entirely owner-controlled.
+        agents = (REPOSITORY_ROOT / "tests/fixtures/progressive-discovery/released-0.18.0/AGENTS.md").read_bytes()
         baseline = canonical_sha256(tracked_content("fragment", agents))
         head, marker, tail = agents.decode("utf-8").partition("<!-- se-harness:begin -->")
         self.assertTrue(marker)

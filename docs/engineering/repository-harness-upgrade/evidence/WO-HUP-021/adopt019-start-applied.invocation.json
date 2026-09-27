@@ -1,0 +1,17 @@
+{
+  "args": [
+    "transition",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--set",
+    "WO-HUP-021=in_progress",
+    "--decision",
+    "WO-HUP-021=Codex executor under approved WO-HUP-021",
+    "--reason",
+    "WO-HUP-021=Start the approved bounded adoption and native delivery preparation under DR-015.",
+    "--json",
+    "--apply"
+  ],
+  "exit_code": 0,
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+}

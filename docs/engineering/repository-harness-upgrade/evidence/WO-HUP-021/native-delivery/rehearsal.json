@@ -1,0 +1,9 @@
+{
+  "rehearsal_repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adopt019-native\\repository",
+  "actual_repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "entry_sha256": "aee9ed33d732c27ec06de7676450baaa9a05ea54e39906cca3791745be538d74",
+  "wheel_sha256": "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8",
+  "target_version": "0.19.0",
+  "prepared_by": "released evaluator init and plugin-ownership commands",
+  "actual_repository_upgraded": false
+}

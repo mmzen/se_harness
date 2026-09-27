@@ -1,0 +1,23 @@
+{
+  "args": [
+    "transition",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--set",
+    "VER-HUP-021=approved",
+    "--decision",
+    "VER-HUP-021=assurance-owner",
+    "--reason",
+    "VER-HUP-021=User: I approve both wo-hup-021 and ver-hup-021",
+    "--set",
+    "WO-HUP-021=approved",
+    "--decision",
+    "WO-HUP-021=engineering-owner",
+    "--reason",
+    "WO-HUP-021=User: I approve both wo-hup-021 and ver-hup-021",
+    "--json",
+    "--apply"
+  ],
+  "exit_code": 0,
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+}
