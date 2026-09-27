@@ -1,0 +1,31 @@
+{
+  "repository": "mmzen/se_harness",
+  "merge_commit": "523ff825773e05c970c041ecee5c22bfabedaa3f",
+  "release_record": "RLS-SEH-028",
+  "state": "released",
+  "candidate": "30d4dba2a088c4f83756c1241b76cdab40f796bd",
+  "lock_schema": 4,
+  "skill_ownership": {
+    "provider": "plugin"
+  },
+  "evaluator_identity_matches": true,
+  "evidence_digest_matches": true,
+  "publication_plan_inspection": "r019-publication-plan-inspection.json",
+  "evaluator_inspection": {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-B",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\.github\\scripts\\publish_dashboard.py",
+      "evaluator",
+      "--repository",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "--output",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\r019-publication-evaluator.json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "dashboard publication: publication requires a schema-3 evaluator lock\n"
+  },
+  "publication_dispatched": false
+}

@@ -124,6 +124,23 @@ class ReleaseArtifactDiscoveryTests(unittest.TestCase):
     def resolve(self):
         return RELEASE.resolve_plan(self.root, "RLS-TST-001", "refs/heads/main")
 
+    def test_plugin_owned_governance_resolves_the_same_bound_release(self) -> None:
+        lock = json.loads(git(self.root, "show", f"{self.fixture.governance}:.engineering-harness.lock"))
+        lock.update(schema=4, skill_ownership={"provider": "plugin"})
+        git(self.root, "checkout", "-b", "plugin-governance", self.fixture.candidate)
+        write(self.root / ".engineering-harness.lock", json.dumps(lock))
+        write(self.root / self.fixture.evaluator_evidence_path, self.fixture.evaluator_evidence)
+        self.write_live_records()
+        self.fixture.commit("integrate release with plugin-owned evaluator")
+        governance = git(self.root, "rev-parse", "HEAD")
+        git(self.root, "update-ref", "refs/heads/main", governance)
+        for result in (self.resolve(), RELEASE.dashboard.resolve_release(
+                self.root, "v1.2.3", default_ref="refs/heads/main")):
+            self.assertEqual(governance, result.governance_commit)
+            self.assertEqual(self.fixture.candidate, result.candidate_commit)
+            self.assertEqual(self.fixture.evaluator_evidence_sha256, result.evaluator_evidence_sha256)
+        self.assertEqual(self.distribution["wheel_sha256"], self.resolve().wheel_sha256)
+
     def test_path_boundary_matches_the_validator_without_substring_exclusions(self) -> None:
         from se_harness.engine.validation_core import EXCLUDED_DIRECTORY_NAMES, _is_excluded
 
