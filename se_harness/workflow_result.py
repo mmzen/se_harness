@@ -115,6 +115,20 @@ def build_result(
         "mutation": {"writes": list(writes)},
         "restitution": dict(restitution),
     }
+    from se_harness.instruction_discovery import DiscoveryError, describe
+    try:
+        result["instruction_discovery"] = describe(
+            procedure,
+            [*result["selection"]["artifacts"], *result["scope"]["governing"], *result["scope"]["dependencies"]],
+        )
+    except DiscoveryError as exc:
+        # Keep refusal results renderable even when the mapping itself is damaged.
+        # This explicit mismatch grants no fallback reading or action authority.
+        result["instruction_discovery"] = {
+            "schema": "se-harness-instruction-discovery-v1",
+            "status": "incompatible",
+            "reason": str(exc),
+        }
     result["result_sha256"] = restitution_digest(result)
     return result
 
@@ -149,7 +163,7 @@ def machine_fields(result: Mapping[str, Any]) -> dict[str, Any]:
     if decision is not None and not isinstance(decision, Mapping):
         raise RestitutionError(WEX230, "decision_required must be null or an object")
     return {
-        **fields(result, ("schema", "digest_format", "candidate", "operation", "selection", "scope", "state")),
+        **fields(result, ("schema", "digest_format", "candidate", "operation", "selection", "scope", "state", "instruction_discovery")),
         "compliance": {
             **fields(compliance, ("checkpoint", "workflow_rule_id", "procedure_id", "status", "formal_snapshot_sha256", "change_set_source")),
             "gates": [{**fields(gate, ("id", "status")),

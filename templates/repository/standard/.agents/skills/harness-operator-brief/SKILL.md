@@ -17,8 +17,8 @@ outcome, declared non-effects, one supported source kind, one bounded UTF-8
 source payload and digest, an ordered protected-content declaration, and any
 approved project terms.
 
-Read the repository instructions, the complete skill core, and
-`docs/engineering/TECHNICAL_COMMUNICATION.md`. Validate
+Read the selected root's communication guide,
+`docs/engineering/harness/COMMUNICATION.md`, and this complete skill core. Validate
 `skill-contract.json` and the portable-core digest before rendering.
 
 ## Procedure

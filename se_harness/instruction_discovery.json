@@ -1,0 +1,613 @@
+{
+  "schema": "se-harness-instruction-discovery-v1",
+  "entry": {
+    "file": "ENGINEERING_HARNESS.md",
+    "heading": "read-by-task"
+  },
+  "shared_prerequisites": [
+    {
+      "file": "docs/engineering/harness/COMMUNICATION.md",
+      "heading": "communication",
+      "when": "Before the first eligible English explanation in a fresh context."
+    },
+    {
+      "file": "docs/engineering/harness/RESULTS.md",
+      "heading": "report-a-lifecycle-result",
+      "when": "Before reporting a lifecycle result."
+    }
+  ],
+  "evaluator_only_inputs": [
+    "docs/engineering/WORKFLOW.json",
+    "docs/engineering/QUALITY_GATES.json"
+  ],
+  "procedures": {
+    "PROC-WO-START": {
+      "location": {
+        "file": "docs/engineering/harness/EXECUTE_WORK.md",
+        "heading": "start-the-selected-work"
+      },
+      "prerequisites": [
+        {
+          "file": "docs/engineering/harness/AUTHORITY.md",
+          "heading": "authority-from-work-approval",
+          "when": "Before using the selected work order's execution grant."
+        }
+      ],
+      "steps": {
+        "STEP-WO-START-PREFLIGHT": {
+          "location": {
+            "file": "docs/engineering/harness/EXECUTE_WORK.md",
+            "heading": "establish-the-execution-context"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "authority-from-work-approval",
+              "when": "Before using the selected work order's execution grant."
+            }
+          ]
+        },
+        "STEP-WO-START-PREVIEW": {
+          "location": {
+            "file": "docs/engineering/harness/EXECUTE_WORK.md",
+            "heading": "start-the-selected-work"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "authority-from-work-approval",
+              "when": "Before using the selected work order's execution grant."
+            }
+          ]
+        },
+        "STEP-WO-START-APPLY": {
+          "location": {
+            "file": "docs/engineering/harness/EXECUTE_WORK.md",
+            "heading": "start-the-selected-work"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "authority-from-work-approval",
+              "when": "Before using the selected work order's execution grant."
+            }
+          ]
+        },
+        "STEP-WO-START-FINAL-FOCUS": {
+          "location": {
+            "file": "docs/engineering/harness/CONTINUE.md",
+            "heading": "continue-selected-work"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "authority-from-work-approval",
+              "when": "Before using the selected work order's execution grant."
+            }
+          ]
+        }
+      }
+    },
+    "PROC-WO-IMPLEMENT": {
+      "location": {
+        "file": "docs/engineering/harness/EXECUTE_WORK.md",
+        "heading": "retain-the-implementation-evidence"
+      },
+      "prerequisites": [
+        {
+          "file": "docs/engineering/harness/AUTHORITY.md",
+          "heading": "authority-from-work-approval",
+          "when": "Before using the selected work order's execution grant."
+        }
+      ],
+      "steps": {
+        "STEP-WO-IMPLEMENT-CHECK": {
+          "location": {
+            "file": "docs/engineering/harness/EXECUTE_WORK.md",
+            "heading": "retain-the-implementation-evidence"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "authority-from-work-approval",
+              "when": "Before using the selected work order's execution grant."
+            }
+          ]
+        },
+        "STEP-WO-IMPLEMENT-PREVIEW": {
+          "location": {
+            "file": "docs/engineering/harness/EXECUTE_WORK.md",
+            "heading": "record-implementation-completion"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "authority-from-work-approval",
+              "when": "Before using the selected work order's execution grant."
+            }
+          ]
+        },
+        "STEP-WO-IMPLEMENT-APPLY": {
+          "location": {
+            "file": "docs/engineering/harness/EXECUTE_WORK.md",
+            "heading": "record-implementation-completion"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "authority-from-work-approval",
+              "when": "Before using the selected work order's execution grant."
+            }
+          ]
+        }
+      }
+    },
+    "PROC-WO-PREPARE-VREC": {
+      "location": {
+        "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+        "heading": "prepare-the-verification-record"
+      },
+      "prerequisites": [
+        {
+          "file": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+          "heading": "verification-coverage",
+          "when": "Before preparing the verification record."
+        }
+      ],
+      "steps": {
+        "STEP-WO-PREPARE-VREC-CAPTURE": {
+          "location": {
+            "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+            "heading": "prepare-the-verification-record"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+              "heading": "verification-coverage",
+              "when": "Before preparing the verification record."
+            }
+          ]
+        }
+      }
+    },
+    "PROC-FOCUS-SELECTED": {
+      "location": {
+        "file": "docs/engineering/harness/CONTINUE.md",
+        "heading": "continue-selected-work"
+      },
+      "prerequisites": [],
+      "steps": {
+        "STEP-FOCUS-SELECTED": {
+          "location": {
+            "file": "docs/engineering/harness/CONTINUE.md",
+            "heading": "continue-selected-work"
+          },
+          "prerequisites": []
+        }
+      }
+    },
+    "PROC-FOCUS-RELATED": {
+      "location": {
+        "file": "docs/engineering/harness/CONTINUE.md",
+        "heading": "continue-selected-work"
+      },
+      "prerequisites": [],
+      "steps": {
+        "STEP-FOCUS-RELATED": {
+          "location": {
+            "file": "docs/engineering/harness/CONTINUE.md",
+            "heading": "continue-selected-work"
+          },
+          "prerequisites": []
+        }
+      }
+    },
+    "PROC-VREC-DECIDE": {
+      "location": {
+        "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+        "heading": "obtain-the-humans-verification-decision"
+      },
+      "prerequisites": [
+        {
+          "file": "docs/engineering/harness/AUTHORITY.md",
+          "heading": "decision-rights",
+          "when": "Before obtaining or applying an accountable decision."
+        }
+      ],
+      "steps": {
+        "STEP-VREC-DECIDE": {
+          "location": {
+            "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+            "heading": "obtain-the-humans-verification-decision"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            }
+          ]
+        }
+      }
+    },
+    "PROC-VREC-REJECT": {
+      "location": {
+        "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+        "heading": "record-the-verification-decision"
+      },
+      "prerequisites": [
+        {
+          "file": "docs/engineering/harness/AUTHORITY.md",
+          "heading": "decision-rights",
+          "when": "Before obtaining or applying an accountable decision."
+        }
+      ],
+      "steps": {
+        "STEP-VREC-REJECT": {
+          "location": {
+            "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+            "heading": "record-the-verification-decision"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            }
+          ]
+        }
+      }
+    },
+    "PROC-VREC-SUPERSEDE": {
+      "location": {
+        "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+        "heading": "record-the-verification-decision"
+      },
+      "prerequisites": [
+        {
+          "file": "docs/engineering/harness/AUTHORITY.md",
+          "heading": "decision-rights",
+          "when": "Before obtaining or applying an accountable decision."
+        },
+        {
+          "file": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+          "heading": "successor-coverage",
+          "when": "Before selecting the successor verification record."
+        }
+      ],
+      "steps": {
+        "STEP-VREC-SUPERSEDE": {
+          "location": {
+            "file": "docs/engineering/harness/VERIFY_OUTCOME.md",
+            "heading": "record-the-verification-decision"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            },
+            {
+              "file": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+              "heading": "successor-coverage",
+              "when": "Before selecting the successor verification record."
+            }
+          ]
+        }
+      }
+    },
+    "PROC-DELIVERY-SELECT": {
+      "location": {
+        "file": "docs/engineering/harness/DELIVER_RESULT.md",
+        "heading": "select-the-delivery-action"
+      },
+      "prerequisites": [
+        {
+          "file": "docs/engineering/harness/AUTHORITY.md",
+          "heading": "decision-rights",
+          "when": "Before obtaining or applying an accountable decision."
+        }
+      ],
+      "steps": {
+        "STEP-DELIVERY-SELECT": {
+          "location": {
+            "file": "docs/engineering/harness/DELIVER_RESULT.md",
+            "heading": "select-the-delivery-action"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            }
+          ]
+        }
+      }
+    },
+    "PROC-REPOSITORY-INTEGRATION": {
+      "location": {
+        "file": "docs/engineering/harness/DELIVER_RESULT.md",
+        "heading": "confirm-authority-for-the-external-action"
+      },
+      "prerequisites": [
+        {
+          "file": "docs/engineering/harness/AUTHORITY.md",
+          "heading": "decision-rights",
+          "when": "Before obtaining or applying an accountable decision."
+        },
+        {
+          "file": "docs/engineering/harness/PULL_REQUEST.md",
+          "heading": "check-a-governed-pull-request",
+          "when": "When the selected external action prepares or checks a pull request."
+        }
+      ],
+      "steps": {
+        "STEP-REPOSITORY-INTEGRATION": {
+          "location": {
+            "file": "docs/engineering/harness/DELIVER_RESULT.md",
+            "heading": "confirm-authority-for-the-external-action"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            },
+            {
+              "file": "docs/engineering/harness/PULL_REQUEST.md",
+              "heading": "check-a-governed-pull-request",
+              "when": "When the selected external action prepares or checks a pull request."
+            }
+          ]
+        }
+      }
+    },
+    "PROC-PREPARE-RELEASE": {
+      "location": {
+        "file": "docs/engineering/harness/RELEASE.md",
+        "heading": "prepare-a-release-record"
+      },
+      "prerequisites": [
+        {
+          "file": "docs/engineering/harness/AUTHORITY.md",
+          "heading": "decision-rights",
+          "when": "Before obtaining or applying an accountable decision."
+        },
+        {
+          "file": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+          "heading": "release-coverage",
+          "when": "Before selecting release preparation inputs."
+        }
+      ],
+      "steps": {
+        "STEP-PREPARE-RELEASE": {
+          "location": {
+            "file": "docs/engineering/harness/RELEASE.md",
+            "heading": "prepare-a-release-record"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            },
+            {
+              "file": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+              "heading": "release-coverage",
+              "when": "Before selecting release preparation inputs."
+            }
+          ]
+        }
+      }
+    },
+    "PROC-RLS-DECIDE": {
+      "location": {
+        "file": "docs/engineering/harness/RELEASE.md",
+        "heading": "obtain-the-release-decision-when-required"
+      },
+      "prerequisites": [
+        {
+          "file": "docs/engineering/harness/AUTHORITY.md",
+          "heading": "decision-rights",
+          "when": "Before obtaining or applying an accountable decision."
+        }
+      ],
+      "steps": {
+        "STEP-RLS-DECIDE": {
+          "location": {
+            "file": "docs/engineering/harness/RELEASE.md",
+            "heading": "obtain-the-release-decision-when-required"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            }
+          ]
+        }
+      }
+    },
+    "PROC-RLS-REJECT": {
+      "location": {
+        "file": "docs/engineering/harness/RELEASE.md",
+        "heading": "record-the-release-decision-when-required"
+      },
+      "prerequisites": [
+        {
+          "file": "docs/engineering/harness/AUTHORITY.md",
+          "heading": "decision-rights",
+          "when": "Before obtaining or applying an accountable decision."
+        }
+      ],
+      "steps": {
+        "STEP-RLS-REJECT": {
+          "location": {
+            "file": "docs/engineering/harness/RELEASE.md",
+            "heading": "record-the-release-decision-when-required"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            }
+          ]
+        }
+      }
+    },
+    "PROC-EXTERNAL-ACTION": {
+      "location": {
+        "file": "docs/engineering/harness/DELIVER_RESULT.md",
+        "heading": "confirm-authority-for-the-external-action"
+      },
+      "prerequisites": [
+        {
+          "file": "docs/engineering/harness/AUTHORITY.md",
+          "heading": "decision-rights",
+          "when": "Before obtaining or applying an accountable decision."
+        }
+      ],
+      "steps": {
+        "STEP-EXTERNAL-ACTION": {
+          "location": {
+            "file": "docs/engineering/harness/DELIVER_RESULT.md",
+            "heading": "confirm-authority-for-the-external-action"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            }
+          ]
+        }
+      }
+    },
+    "PROC-REMEDIATE": {
+      "location": {
+        "file": "docs/engineering/harness/RESULTS.md",
+        "heading": "if-a-procedure-is-blocked"
+      },
+      "prerequisites": [],
+      "steps": {
+        "STEP-REMEDIATE-FOCUS": {
+          "location": {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "if-a-procedure-is-blocked"
+          },
+          "prerequisites": []
+        }
+      }
+    },
+    "PROC-DEFINITION-COMPLETE": {
+      "location": {
+        "file": "docs/engineering/harness/RECORD_STATE.md",
+        "heading": "complete-a-selected-definition"
+      },
+      "prerequisites": [
+        {
+          "file": "docs/engineering/harness/AUTHORITY.md",
+          "heading": "decision-rights",
+          "when": "Before obtaining or applying an accountable decision."
+        }
+      ],
+      "steps": {
+        "STEP-DEFINITION-COMPLETE": {
+          "location": {
+            "file": "docs/engineering/harness/RECORD_STATE.md",
+            "heading": "complete-a-selected-definition"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            }
+          ]
+        }
+      }
+    },
+    "PROC-DEFINITION-WORK": {
+      "location": {
+        "file": "docs/engineering/harness/CONTINUE.md",
+        "heading": "continue-selected-work"
+      },
+      "prerequisites": [
+        {
+          "file": "docs/engineering/harness/AUTHORITY.md",
+          "heading": "decision-rights",
+          "when": "Before obtaining or applying an accountable decision."
+        }
+      ],
+      "steps": {
+        "STEP-DEFINITION-WORK": {
+          "location": {
+            "file": "docs/engineering/harness/CONTINUE.md",
+            "heading": "continue-selected-work"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            }
+          ]
+        }
+      }
+    },
+    "PROC-DEC-DISPOSE": {
+      "location": {
+        "file": "docs/engineering/harness/AUTHORIZE_WORK.md",
+        "heading": "resolve-approval-blockers"
+      },
+      "prerequisites": [
+        {
+          "file": "docs/engineering/harness/AUTHORITY.md",
+          "heading": "decision-rights",
+          "when": "Before obtaining or applying an accountable decision."
+        },
+        {
+          "file": "docs/engineering/harness/RISKS_AND_DECISIONS.md",
+          "heading": "blocking-decisions",
+          "when": "Before disposing the selected blocking decision."
+        }
+      ],
+      "steps": {
+        "STEP-DEC-DISPOSE": {
+          "location": {
+            "file": "docs/engineering/harness/AUTHORIZE_WORK.md",
+            "heading": "resolve-approval-blockers"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            },
+            {
+              "file": "docs/engineering/harness/RISKS_AND_DECISIONS.md",
+              "heading": "blocking-decisions",
+              "when": "Before disposing the selected blocking decision."
+            }
+          ]
+        }
+      }
+    }
+  },
+  "migration": {
+    "source_version": "0.18.0",
+    "fragments": {
+      "AGENTS.md": "7737185418ba21d818037bfa06d680474591396cb5f9000029fda1d02d261e71",
+      "CLAUDE.md": "3cd722a660483f23790bbbed081e71c9dfee56111c4d5f953e1234f21d4b7a3b"
+    },
+    "editable_guides": {
+      "docs/engineering/WORKFLOW.md": "5d4b36d7cf615cb42e56642bc6695c6f02bb5d3111277f03bfd2729fe75ad2ef",
+      "docs/engineering/DECISION_RIGHTS.md": "0254028b158afb150f6055975391b7cf0897c2b643d74310f2ab10a78d6c6c7a",
+      "docs/engineering/QUALITY_GATES.md": "78f344817ea7e3bd271d793e93108afc0c171396226afc8daae08c8c725677d2",
+      "docs/engineering/TRACEABILITY.md": "31c5e5908d200892897489a57d44ebc735e4084da7a97d1d4c8f4b41bf977cbf",
+      "docs/engineering/TECHNICAL_COMMUNICATION.md": "0f710e2a53f65e63e8904214531e6d8ca8c24487e7e14b9210b62a53db37c245",
+      "docs/engineering/OPERATING_CARD.md": "27d8ee9eb7c74460cc0a0506524c56555da4f0b79d2f7d57463faf6999deea94"
+    }
+  }
+}

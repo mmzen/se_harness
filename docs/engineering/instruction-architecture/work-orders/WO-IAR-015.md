@@ -2,7 +2,7 @@
 id = "WO-IAR-015"
 type = "work_order"
 title = "Deliver current instructions at startup and after compaction"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner", "repository-owner", "quality-owner"]
 created = "2026-09-20"
 updated = "2026-09-27"
@@ -46,6 +46,13 @@ decided_at = "2026-09-27T07:37:39Z"
 decided_by = "engineering-owner"
 reason = "User instruction: so let's start the work orders. Apply the reviewed package under DEC-IAR-001 versioned-successor; selected 0.18.0 governance remains installed until separate release/adoption."
 scope_paths = ["templates/repository/standard/.agents/skills/", "templates/repository/standard/.claude/skills/", "plugins/verity-plane/common/", "plugins/verity-plane/codex/", "plugins/verity-plane/claude-code/", "scripts/build_plugin_archives.py", "scripts/build_plugin_marketplace.py", "tests/plugin_integration/progressive_discovery/", "tests/plugin_integration/test_simple_plugin.py", "tests/plugin_integration/package_assembly/", "tests/plugin_integration/change_skill/", "tests/plugin_integration/evidence-skill/", "tests/plugin_integration/repository_connection/", "tests/plugin_integration/onboarding/", "docs/engineering/instruction-architecture/README.md", "docs/engineering/instruction-architecture/work-orders/WO-IAR-015.md", "docs/engineering/instruction-architecture/evidence/WO-IAR-015/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-27T07:43:56Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Execute the reviewed approved work orders as requested by the human on 2026-09-27; native host/platform qualification remains required before completion."
 +++
 
 # Deliver current instructions at startup and after compaction

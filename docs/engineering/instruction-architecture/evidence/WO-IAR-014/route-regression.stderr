@@ -1,0 +1,29 @@
+...E.................................F.......
+======================================================================
+ERROR: test_distribution_comparison_detects_coordinated_file_and_lock_change (tests.test_instruction_architecture.InstructionArchitectureTests.test_distribution_comparison_detects_coordinated_file_and_lock_change)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_instruction_architecture.py", line 450, in test_distribution_comparison_detects_coordinated_file_and_lock_change
+    agents.read_text(encoding="utf-8").replace(
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 787, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\mathi\\AppData\\Local\\Temp\\tmp9ihmovea\\target\\AGENTS.md'
+
+======================================================================
+FAIL: test_routing_table_gives_every_subject_exactly_one_owner (tests.test_context_routing_retirement.ContextRoutingRetirementTests.test_routing_table_gives_every_subject_exactly_one_owner)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_context_routing_retirement.py", line 146, in test_routing_table_gives_every_subject_exactly_one_owner
+    self.assertGreater(len(subjects),8)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: 8 not greater than 8
+
+----------------------------------------------------------------------
+Ran 45 tests in 14.129s
+
+FAILED (failures=1, errors=1)

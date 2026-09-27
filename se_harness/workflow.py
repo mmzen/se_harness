@@ -215,6 +215,18 @@ def project_selected(
         },
         "decision_required": projected["restitution"]["decision_required"],
     }
+    discovery = result.get("instruction_discovery", {})
+    if discovery.get("status") == "available":
+        # Preserve the flat compatibility manifest. Give new consumers explicit
+        # formal records without mistaking policy or machine inputs for records.
+        selected = set(discovery["formal_artifact_ids"])
+        selected.add(artifact_id)
+        paths = set(result["context"]["reading_manifest"])
+        discovery["formal_artifacts"] = [
+            {"id": key, "file": item.path.relative_to(root).as_posix()}
+            for key, item in sorted(catalog.items())
+            if key in selected or item.path.relative_to(root).as_posix() in paths
+        ]
     result["result_sha256"] = restitution_digest(result)
     return result
 

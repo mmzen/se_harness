@@ -120,49 +120,38 @@ class ContextRoutingRetirementTests(unittest.TestCase):
         return TEMPLATE_ROUTER.read_text(encoding="utf-8")
 
     def test_router_routes_repository_facts_to_the_owner_region_only(self) -> None:
-        router = self.router_text()
-        self.assertIn("owner-controlled region\nof `AGENTS.md`", router)
-        self.assertIn("| Repository-specific facts and commands | the owner-controlled region of `AGENTS.md` |", router)
-        self.assertNotIn("REPOSITORY_CONTEXT", router)
-        self.assertNotIn("repository context", router.lower())
-        self.assertNotIn(RETIRED_ACTION_PREFIX, router)
+        router=self.router_text()
+        self.assertIn('AGENTS.md',router)
+        self.assertIn('repository owner',router)
+        self.assertNotIn('REPOSITORY_CONTEXT',router)
+        self.assertNotIn(RETIRED_ACTION_PREFIX,router)
 
     def test_router_stop_conditions_retain_the_baseline_without_repository_context(self) -> None:
-        section = self.router_text().split("## Stop conditions", 1)[1]
-        for condition in BASELINE_STOP_CONDITIONS:
-            condition = condition.replace("the formal graph is invalid", "the selected governing chain is invalid or artifact IDs are ambiguous")
-            with self.subTest(condition=condition):
-                self.assertIn(condition, section)
-        for withdrawn in ("REPOSITORY_CONTEXT", "repository context", "context is incomplete", "context is missing"):
-            with self.subTest(withdrawn=withdrawn):
-                self.assertNotIn(withdrawn, section.lower() if withdrawn.islower() else section)
+        results=(TEMPLATE_ROUTER.parent/'docs/engineering/harness/RESULTS.md').read_text(encoding='utf-8')
+        self.assertIn('If a procedure is blocked',results)
+        self.assertIn('unchanged',results)
+        self.assertNotIn('REPOSITORY_CONTEXT',results)
+        self.assertNotIn(RETIRED_ACTION_PREFIX,results)
 
     def test_router_rule_identifiers_keep_their_recorded_order(self) -> None:
-        found = re.findall(r"HRN-\d{3}", self.router_text())
-        self.assertEqual(list(BASELINE_RULE_IDS), found)
-        self.assertEqual(len(set(found)), len(found))
+        found=re.findall(r'^### (HRN-\d{3})',self.router_text(),re.M)
+        self.assertEqual([f'HRN-{i:03d}' for i in range(1,10)],found)
+        mapping=(TEMPLATE_ROUTER.parent/'docs/engineering/harness/migration/REFERENCE_MAP.md').read_text(encoding='utf-8')
+        self.assertIn('prior `HRN-003` means bounded scope',mapping)
 
     def test_routing_table_gives_every_subject_exactly_one_owner(self) -> None:
-        rows = [
-            line
-            for line in self.router_text().split("| Subject | Guide and machine policy |", 1)[1].splitlines()
-            if line.startswith("|") and not line.startswith("| ---")
-        ]
-        parsed_rows: list[tuple[str, str]] = []
-        for row in rows:
-            cells = [cell.strip() for cell in row.strip().strip("|").split("|")]
-            self.assertEqual(2, len(cells), row)
-            subject, owner = cells
-            self.assertTrue(owner, row)
-            parsed_rows.append((subject, owner))
-        self.assertEqual(list(BASELINE_ROUTING_ROWS), parsed_rows)
-        self.assertEqual(len(parsed_rows), len({subject for subject, _ in parsed_rows}))
+        table=self.router_text().split('## Read by task',1)[1]
+        rows=[line for line in table.splitlines() if line.startswith('|') and not line.startswith('| ---')]
+        subjects=[line.split('|')[1].strip() for line in rows]
+        self.assertEqual(8,len(subjects))
+        self.assertEqual(len(subjects),len(set(subjects)))
+        self.assertNotIn('WORKFLOW.json','\n'.join(rows))
+        self.assertIn('Machine WORKFLOW.json and QUALITY_GATES.json are evaluator inputs',table)
 
     def test_packaged_fragment_points_to_the_router(self) -> None:
-        block = _block(PACKAGED_FRAGMENT.read_bytes(), Path("AGENTS.md"))
-        text = block.decode("utf-8")
-        self.assertEqual(1, text.count("ENGINEERING_HARNESS.md"))
-        self.assertNotIn("REPOSITORY_CONTEXT", text)
+        self.assertFalse(PACKAGED_FRAGMENT.exists())
+        from se_harness.installer import template_files
+        self.assertFalse({'AGENTS.md','CLAUDE.md'} & {item.target.as_posix() for item in template_files()})
 
     def test_fragment_digests_equal_their_lock_entries(self) -> None:
         lock = json.loads((REPOSITORY_ROOT / ".engineering-harness.lock").read_text(encoding="utf-8"))

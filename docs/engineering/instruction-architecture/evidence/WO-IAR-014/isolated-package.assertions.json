@@ -1,0 +1,13 @@
+{
+  "promotable": false,
+  "platform": "nt",
+  "wheel": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\wheel\\se_harness-0.19.0-py3-none-any.whl",
+  "archive_sha256": "a9bcbbdbd8923b00e841c02e0b1e4f2b6bce36678529576cbd8df038c8bea300",
+  "python": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\evaluator\\Scripts\\python.exe",
+  "clean_install": "passed",
+  "from_0_18_0": "passed",
+  "owner_bytes_preserved": true,
+  "repeat": "unchanged",
+  "linux": "unverified",
+  "native_delivery": "separate evidence"
+}

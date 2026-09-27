@@ -731,6 +731,8 @@ def run_orientation(args: argparse.Namespace) -> tuple[dict[str, Any], int]:
         "selected": _focus_projection(focus, artifact),
         "validation": validation,
     }
+    if isinstance(focus, dict) and "instruction_discovery" in focus:
+        orientation["instruction_discovery"] = focus["instruction_discovery"]
     return orientation, 0 if outcome in {"completed", "degraded"} else 2
 
 

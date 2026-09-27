@@ -6,8 +6,8 @@ to inspect its actual state and procedure. Projection is read only.
 
 ## Approval and execution
 
-Read the installed `DECISION_RIGHTS.md` and `WORKFLOW.json` for the grant made
-by work-order approval. Follow their execution procedure and returned commands;
+Read the installed human decision-rights guide for the grant made by work-order
+approval. Follow the selected evaluator's execution procedure and returned commands;
 do not maintain a second authorization test in this skill. Where approval
 covers execution, continue the selected eligible work without requesting another
 start, completion or required verification-preparation decision. A person or

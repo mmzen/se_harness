@@ -1,0 +1,28 @@
+{
+  "args": [
+    "transition",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--json",
+    "--set",
+    "WO-IAR-013=in_progress",
+    "--decision",
+    "WO-IAR-013=Codex",
+    "--reason",
+    "WO-IAR-013=Execute the reviewed approved work orders as requested by the human on 2026-09-27; native host/platform qualification remains required before completion.",
+    "--set",
+    "WO-IAR-014=in_progress",
+    "--decision",
+    "WO-IAR-014=Codex",
+    "--reason",
+    "WO-IAR-014=Execute the reviewed approved work orders as requested by the human on 2026-09-27; native host/platform qualification remains required before completion.",
+    "--set",
+    "WO-IAR-015=in_progress",
+    "--decision",
+    "WO-IAR-015=Codex",
+    "--reason",
+    "WO-IAR-015=Execute the reviewed approved work orders as requested by the human on 2026-09-27; native host/platform qualification remains required before completion."
+  ],
+  "exit_code": 0,
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+}

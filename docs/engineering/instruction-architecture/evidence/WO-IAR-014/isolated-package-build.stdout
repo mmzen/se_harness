@@ -1,0 +1,349 @@
+running bdist_wheel
+running build
+running build_py
+creating build\lib\se_harness
+copying se_harness\artifact_layout.py -> build\lib\se_harness
+copying se_harness\candidate_acceptance.py -> build\lib\se_harness
+copying se_harness\cli.py -> build\lib\se_harness
+copying se_harness\codes.py -> build\lib\se_harness
+copying se_harness\decisions.py -> build\lib\se_harness
+copying se_harness\evaluator_evidence.py -> build\lib\se_harness
+copying se_harness\evaluator_identity.py -> build\lib\se_harness
+copying se_harness\front_matter.py -> build\lib\se_harness
+copying se_harness\gate_source.py -> build\lib\se_harness
+copying se_harness\github_ci.py -> build\lib\se_harness
+copying se_harness\hash_bound.py -> build\lib\se_harness
+copying se_harness\installer.py -> build\lib\se_harness
+copying se_harness\instruction_discovery.py -> build\lib\se_harness
+copying se_harness\integrity.py -> build\lib\se_harness
+copying se_harness\interpreter_safety.py -> build\lib\se_harness
+copying se_harness\mutation_guard.py -> build\lib\se_harness
+copying se_harness\preflight.py -> build\lib\se_harness
+copying se_harness\provenance.py -> build\lib\se_harness
+copying se_harness\release_qualification.py -> build\lib\se_harness
+copying se_harness\release_unit.py -> build\lib\se_harness
+copying se_harness\repository_graph.py -> build\lib\se_harness
+copying se_harness\risks.py -> build\lib\se_harness
+copying se_harness\runtime_identity.py -> build\lib\se_harness
+copying se_harness\skill_ownership.py -> build\lib\se_harness
+copying se_harness\workflow.py -> build\lib\se_harness
+copying se_harness\workflow_change_set.py -> build\lib\se_harness
+copying se_harness\workflow_compliance.py -> build\lib\se_harness
+copying se_harness\workflow_contract.py -> build\lib\se_harness
+copying se_harness\workflow_edges.py -> build\lib\se_harness
+copying se_harness\workflow_evidence_packet.py -> build\lib\se_harness
+copying se_harness\workflow_predicates.py -> build\lib\se_harness
+copying se_harness\workflow_procedures.py -> build\lib\se_harness
+copying se_harness\workflow_result.py -> build\lib\se_harness
+copying se_harness\_process.py -> build\lib\se_harness
+copying se_harness\__init__.py -> build\lib\se_harness
+copying se_harness\__main__.py -> build\lib\se_harness
+creating build\lib\se_harness\engine
+copying se_harness\engine\dashboard_bundle.py -> build\lib\se_harness\engine
+copying se_harness\engine\dashboard_snapshot.py -> build\lib\se_harness\engine
+copying se_harness\engine\generate_harness_dashboard.py -> build\lib\se_harness\engine
+copying se_harness\engine\inspect_engineering_artifacts.py -> build\lib\se_harness\engine
+copying se_harness\engine\validate_engineering_artifacts.py -> build\lib\se_harness\engine
+copying se_harness\engine\validation_architecture.py -> build\lib\se_harness\engine
+copying se_harness\engine\validation_authoring.py -> build\lib\se_harness\engine
+copying se_harness\engine\validation_core.py -> build\lib\se_harness\engine
+copying se_harness\engine\validation_decisions.py -> build\lib\se_harness\engine
+copying se_harness\engine\validation_evidence.py -> build\lib\se_harness\engine
+copying se_harness\engine\validation_layout.py -> build\lib\se_harness\engine
+copying se_harness\engine\validation_lifecycle.py -> build\lib\se_harness\engine
+copying se_harness\engine\validation_report.py -> build\lib\se_harness\engine
+copying se_harness\engine\validation_revision.py -> build\lib\se_harness\engine
+copying se_harness\engine\__init__.py -> build\lib\se_harness\engine
+running egg_info
+creating se_harness.egg-info
+writing se_harness.egg-info\PKG-INFO
+writing dependency_links to se_harness.egg-info\dependency_links.txt
+writing entry points to se_harness.egg-info\entry_points.txt
+writing top-level names to se_harness.egg-info\top_level.txt
+writing manifest file 'se_harness.egg-info\SOURCES.txt'
+reading manifest file 'se_harness.egg-info\SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'se_harness.egg-info\SOURCES.txt'
+copying se_harness\hash_bound_classes.json -> build\lib\se_harness
+copying se_harness\instruction_discovery.json -> build\lib\se_harness
+copying se_harness\quality_gates_contract.json -> build\lib\se_harness
+copying se_harness\skill_ownership_contract.json -> build\lib\se_harness
+copying se_harness\workflow_contract.json -> build\lib\se_harness
+creating build\lib\se_harness\engine\harness_explorer
+copying se_harness\engine\harness_explorer\index.template.html -> build\lib\se_harness\engine\harness_explorer
+installing to build\bdist.win-amd64\wheel
+running install
+running install_lib
+creating build\bdist.win-amd64\wheel
+creating build\bdist.win-amd64\wheel\se_harness
+copying build\lib\se_harness\artifact_layout.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\candidate_acceptance.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\cli.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\codes.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\decisions.py -> build\bdist.win-amd64\wheel\.\se_harness
+creating build\bdist.win-amd64\wheel\se_harness\engine
+copying build\lib\se_harness\engine\dashboard_bundle.py -> build\bdist.win-amd64\wheel\.\se_harness\engine
+copying build\lib\se_harness\engine\dashboard_snapshot.py -> build\bdist.win-amd64\wheel\.\se_harness\engine
+copying build\lib\se_harness\engine\generate_harness_dashboard.py -> build\bdist.win-amd64\wheel\.\se_harness\engine
+creating build\bdist.win-amd64\wheel\se_harness\engine\harness_explorer
+copying build\lib\se_harness\engine\harness_explorer\index.template.html -> build\bdist.win-amd64\wheel\.\se_harness\engine\harness_explorer
+copying build\lib\se_harness\engine\inspect_engineering_artifacts.py -> build\bdist.win-amd64\wheel\.\se_harness\engine
+copying build\lib\se_harness\engine\validate_engineering_artifacts.py -> build\bdist.win-amd64\wheel\.\se_harness\engine
+copying build\lib\se_harness\engine\validation_architecture.py -> build\bdist.win-amd64\wheel\.\se_harness\engine
+copying build\lib\se_harness\engine\validation_authoring.py -> build\bdist.win-amd64\wheel\.\se_harness\engine
+copying build\lib\se_harness\engine\validation_core.py -> build\bdist.win-amd64\wheel\.\se_harness\engine
+copying build\lib\se_harness\engine\validation_decisions.py -> build\bdist.win-amd64\wheel\.\se_harness\engine
+copying build\lib\se_harness\engine\validation_evidence.py -> build\bdist.win-amd64\wheel\.\se_harness\engine
+copying build\lib\se_harness\engine\validation_layout.py -> build\bdist.win-amd64\wheel\.\se_harness\engine
+copying build\lib\se_harness\engine\validation_lifecycle.py -> build\bdist.win-amd64\wheel\.\se_harness\engine
+copying build\lib\se_harness\engine\validation_report.py -> build\bdist.win-amd64\wheel\.\se_harness\engine
+copying build\lib\se_harness\engine\validation_revision.py -> build\bdist.win-amd64\wheel\.\se_harness\engine
+copying build\lib\se_harness\engine\__init__.py -> build\bdist.win-amd64\wheel\.\se_harness\engine
+copying build\lib\se_harness\evaluator_evidence.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\evaluator_identity.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\front_matter.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\gate_source.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\github_ci.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\hash_bound.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\hash_bound_classes.json -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\installer.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\instruction_discovery.json -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\instruction_discovery.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\integrity.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\interpreter_safety.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\mutation_guard.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\preflight.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\provenance.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\quality_gates_contract.json -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\release_qualification.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\release_unit.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\repository_graph.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\risks.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\runtime_identity.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\skill_ownership.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\skill_ownership_contract.json -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\workflow.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\workflow_change_set.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\workflow_compliance.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\workflow_contract.json -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\workflow_contract.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\workflow_edges.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\workflow_evidence_packet.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\workflow_predicates.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\workflow_procedures.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\workflow_result.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\_process.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\__init__.py -> build\bdist.win-amd64\wheel\.\se_harness
+copying build\lib\se_harness\__main__.py -> build\bdist.win-amd64\wheel\.\se_harness
+running install_data
+creating build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data
+creating build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard
+copying templates\repository\standard\.engineering-harness.toml.tpl -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard
+copying templates\repository\standard\ENGINEERING_HARNESS.md.tpl -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard
+copying templates\repository\standard\GLOSSARY.md.seed -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard
+copying templates\repository\standard\gitattributes.fragment -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard
+copying templates\repository\standard\gitignore.fragment -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard
+creating build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering
+copying templates\repository\standard\docs\engineering\DECISION_RIGHTS.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering
+copying templates\repository\standard\docs\engineering\QUALITY_GATES.json -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering
+copying templates\repository\standard\docs\engineering\QUALITY_GATES.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering
+copying templates\repository\standard\docs\engineering\README.md.seed -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering
+copying templates\repository\standard\docs\engineering\TECHNICAL_COMMUNICATION.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering
+copying templates\repository\standard\docs\engineering\ARTIFACT_AUTHORING.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering
+copying templates\repository\standard\docs\engineering\OPERATING_CARD.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering
+copying templates\repository\standard\docs\engineering\TRACEABILITY.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering
+copying templates\repository\standard\docs\engineering\WORKFLOW.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering
+copying templates\repository\standard\docs\engineering\WORKFLOW.json -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering
+creating build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\templates
+copying templates\repository\standard\docs\engineering\templates\ADR.template.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\templates
+copying templates\repository\standard\docs\engineering\templates\ARCHITECTURE.template.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\templates
+copying templates\repository\standard\docs\engineering\templates\CAPABILITY.template.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\templates
+copying templates\repository\standard\docs\engineering\templates\DECISION.template.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\templates
+copying templates\repository\standard\docs\engineering\templates\INTENT.template.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\templates
+copying templates\repository\standard\docs\engineering\templates\OPERATING_CONTRACT.template.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\templates
+copying templates\repository\standard\docs\engineering\templates\README.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\templates
+copying templates\repository\standard\docs\engineering\templates\RELEASE_CONTRACT.template.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\templates
+copying templates\repository\standard\docs\engineering\templates\RELEASE_RECORD.template.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\templates
+copying templates\repository\standard\docs\engineering\templates\REQUIREMENT.template.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\templates
+copying templates\repository\standard\docs\engineering\templates\RISK.template.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\templates
+copying templates\repository\standard\docs\engineering\templates\SPECIFICATION.template.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\templates
+copying templates\repository\standard\docs\engineering\templates\VERIFICATION.template.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\templates
+copying templates\repository\standard\docs\engineering\templates\VERIFICATION_RECORD.template.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\templates
+copying templates\repository\standard\docs\engineering\templates\WORK_ORDER.template.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\templates
+creating build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\AMEND_DEFINITIONS.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\ARTIFACTS.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\AUTHORITY.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\AUTHORIZE_WORK.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\COMMUNICATION.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\CONTINUE.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\DEFINE_CHANGE.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\DEFINITION_LINKS.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\DELIVER_RESULT.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\DRAFT_DEFINITIONS.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\DRAFT_WORK_ORDERS.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\EXCEPTIONS.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\EXECUTE_WORK.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\PULL_REQUEST.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\RECORD_STATE.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\RELEASE.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\RESULTS.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\RISKS_AND_DECISIONS.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\SETUP.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\SKILL_PROVIDER.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\UPGRADE.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\VERIFY_OUTCOME.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+copying templates\repository\standard\docs\engineering\harness\WORK_AND_EVIDENCE.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness
+creating build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness\migration
+copying templates\repository\standard\docs\engineering\harness\migration\IMPLEMENTATION_PLAN.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness\migration
+copying templates\repository\standard\docs\engineering\harness\migration\REFERENCE_MAP.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\docs\engineering\harness\migration
+creating build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\.github
+copying templates\repository\standard\.github\PULL_REQUEST_TEMPLATE.md.seed -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\.github
+creating build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\.github\workflows
+copying templates\repository\standard\.github\workflows\engineering-harness.yml -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\.github\workflows
+creating build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\.agents\skills\harness-orient
+copying templates\repository\standard\.agents\skills\harness-orient\SKILL.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\.agents\skills\harness-orient
+copying templates\repository\standard\.agents\skills\harness-orient\skill-contract.json -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\.agents\skills\harness-orient
+creating build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\.agents\skills\harness-orient\scripts
+copying templates\repository\standard\.agents\skills\harness-orient\scripts\orient.py -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\.agents\skills\harness-orient\scripts
+creating build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\.agents\skills\harness-operator-brief
+copying templates\repository\standard\.agents\skills\harness-operator-brief\SKILL.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\.agents\skills\harness-operator-brief
+copying templates\repository\standard\.agents\skills\harness-operator-brief\skill-contract.json -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\.agents\skills\harness-operator-brief
+creating build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\.agents\skills\harness-operator-brief\scripts
+copying templates\repository\standard\.agents\skills\harness-operator-brief\scripts\check_brief.py -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\.agents\skills\harness-operator-brief\scripts
+creating build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\.claude\skills\harness-orient
+copying templates\repository\standard\.claude\skills\harness-orient\SKILL.md -> build\bdist.win-amd64\wheel\se_harness-0.19.0.data\data\share\se-harness\templates\repository\standard\.claude\skills\harness-orient
+running install_egg_info
+Copying se_harness.egg-info to build\bdist.win-amd64\wheel\.\se_harness-0.19.0-py3.12.egg-info
+running install_scripts
+creating build\bdist.win-amd64\wheel\se_harness-0.19.0.dist-info\WHEEL
+creating 'C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\wheel\\.tmp-lv5x0q33\\se_harness-0.19.0-py3-none-any.whl' and adding 'build\\bdist.win-amd64\\wheel' to it
+adding 'se_harness/__init__.py'
+adding 'se_harness/__main__.py'
+adding 'se_harness/_process.py'
+adding 'se_harness/artifact_layout.py'
+adding 'se_harness/candidate_acceptance.py'
+adding 'se_harness/cli.py'
+adding 'se_harness/codes.py'
+adding 'se_harness/decisions.py'
+adding 'se_harness/evaluator_evidence.py'
+adding 'se_harness/evaluator_identity.py'
+adding 'se_harness/front_matter.py'
+adding 'se_harness/gate_source.py'
+adding 'se_harness/github_ci.py'
+adding 'se_harness/hash_bound.py'
+adding 'se_harness/hash_bound_classes.json'
+adding 'se_harness/installer.py'
+adding 'se_harness/instruction_discovery.json'
+adding 'se_harness/instruction_discovery.py'
+adding 'se_harness/integrity.py'
+adding 'se_harness/interpreter_safety.py'
+adding 'se_harness/mutation_guard.py'
+adding 'se_harness/preflight.py'
+adding 'se_harness/provenance.py'
+adding 'se_harness/quality_gates_contract.json'
+adding 'se_harness/release_qualification.py'
+adding 'se_harness/release_unit.py'
+adding 'se_harness/repository_graph.py'
+adding 'se_harness/risks.py'
+adding 'se_harness/runtime_identity.py'
+adding 'se_harness/skill_ownership.py'
+adding 'se_harness/skill_ownership_contract.json'
+adding 'se_harness/workflow.py'
+adding 'se_harness/workflow_change_set.py'
+adding 'se_harness/workflow_compliance.py'
+adding 'se_harness/workflow_contract.json'
+adding 'se_harness/workflow_contract.py'
+adding 'se_harness/workflow_edges.py'
+adding 'se_harness/workflow_evidence_packet.py'
+adding 'se_harness/workflow_predicates.py'
+adding 'se_harness/workflow_procedures.py'
+adding 'se_harness/workflow_result.py'
+adding 'se_harness/engine/__init__.py'
+adding 'se_harness/engine/dashboard_bundle.py'
+adding 'se_harness/engine/dashboard_snapshot.py'
+adding 'se_harness/engine/generate_harness_dashboard.py'
+adding 'se_harness/engine/inspect_engineering_artifacts.py'
+adding 'se_harness/engine/validate_engineering_artifacts.py'
+adding 'se_harness/engine/validation_architecture.py'
+adding 'se_harness/engine/validation_authoring.py'
+adding 'se_harness/engine/validation_core.py'
+adding 'se_harness/engine/validation_decisions.py'
+adding 'se_harness/engine/validation_evidence.py'
+adding 'se_harness/engine/validation_layout.py'
+adding 'se_harness/engine/validation_lifecycle.py'
+adding 'se_harness/engine/validation_report.py'
+adding 'se_harness/engine/validation_revision.py'
+adding 'se_harness/engine/harness_explorer/index.template.html'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/.engineering-harness.toml.tpl'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/ENGINEERING_HARNESS.md.tpl'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/GLOSSARY.md.seed'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/gitattributes.fragment'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/gitignore.fragment'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/.agents/skills/harness-operator-brief/SKILL.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/.agents/skills/harness-operator-brief/skill-contract.json'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/.agents/skills/harness-operator-brief/scripts/check_brief.py'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/.agents/skills/harness-orient/SKILL.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/.agents/skills/harness-orient/skill-contract.json'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/.agents/skills/harness-orient/scripts/orient.py'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/.claude/skills/harness-orient/SKILL.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/.github/PULL_REQUEST_TEMPLATE.md.seed'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/.github/workflows/engineering-harness.yml'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/ARTIFACT_AUTHORING.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/DECISION_RIGHTS.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/OPERATING_CARD.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/QUALITY_GATES.json'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/QUALITY_GATES.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/README.md.seed'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/TECHNICAL_COMMUNICATION.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/TRACEABILITY.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/WORKFLOW.json'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/WORKFLOW.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/AMEND_DEFINITIONS.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/ARTIFACTS.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/AUTHORITY.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/AUTHORIZE_WORK.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/COMMUNICATION.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/CONTINUE.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/DEFINE_CHANGE.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/DEFINITION_LINKS.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/DELIVER_RESULT.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/DRAFT_DEFINITIONS.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/DRAFT_WORK_ORDERS.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/EXCEPTIONS.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/EXECUTE_WORK.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/PULL_REQUEST.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/RECORD_STATE.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/RELEASE.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/RESULTS.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/RISKS_AND_DECISIONS.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/SETUP.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/SKILL_PROVIDER.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/UPGRADE.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/VERIFY_OUTCOME.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/WORK_AND_EVIDENCE.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/harness/migration/REFERENCE_MAP.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/ADR.template.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/ARCHITECTURE.template.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/CAPABILITY.template.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/DECISION.template.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/INTENT.template.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/OPERATING_CONTRACT.template.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/README.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/RELEASE_CONTRACT.template.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/RELEASE_RECORD.template.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/REQUIREMENT.template.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/RISK.template.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/SPECIFICATION.template.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/VERIFICATION.template.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/VERIFICATION_RECORD.template.md'
+adding 'se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md'
+adding 'se_harness-0.19.0.dist-info/licenses/LICENSE'
+adding 'se_harness-0.19.0.dist-info/METADATA'
+adding 'se_harness-0.19.0.dist-info/WHEEL'
+adding 'se_harness-0.19.0.dist-info/entry_points.txt'
+adding 'se_harness-0.19.0.dist-info/top_level.txt'
+adding 'se_harness-0.19.0.dist-info/RECORD'
+removing build\bdist.win-amd64\wheel

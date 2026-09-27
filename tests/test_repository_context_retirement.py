@@ -134,6 +134,11 @@ class RepositoryContextRetirementTests(unittest.TestCase):
             "scripts/validate_engineering_artifacts.py",
             "scripts/generate_harness_dashboard.py",
             "scripts/harness_explorer/index.template.html",
+            # WO-IAR-014 retires entry fragments and unconditional legacy guides.
+            "AGENTS.md", "CLAUDE.md", "docs/engineering/OPERATING_CARD.md",
+            "docs/engineering/WORKFLOW.md", "docs/engineering/DECISION_RIGHTS.md",
+            "docs/engineering/QUALITY_GATES.md", "docs/engineering/TRACEABILITY.md",
+            "docs/engineering/TECHNICAL_COMMUNICATION.md",
         }
         self.assert_ordered_subsequence(
             [item for item in BASELINE["preflight"]["required_paths"] if item != RETIRED_PATH and item not in retired_scripts],

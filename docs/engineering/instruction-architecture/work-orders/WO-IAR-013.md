@@ -2,7 +2,7 @@
 id = "WO-IAR-013"
 type = "work_order"
 title = "Split the agent instructions and preserve their meaning"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner", "repository-owner", "quality-owner"]
 created = "2026-09-20"
 updated = "2026-09-27"
@@ -38,6 +38,13 @@ decided_at = "2026-09-27T07:37:39Z"
 decided_by = "engineering-owner"
 reason = "User instruction: so let's start the work orders. Apply the reviewed package under DEC-IAR-001 versioned-successor; selected 0.18.0 governance remains installed until separate release/adoption."
 scope_paths = ["templates/repository/standard/ENGINEERING_HARNESS.md.tpl", "templates/repository/standard/docs/engineering/", "tests/test_instruction_architecture.py", "tests/test_workflow_documentation_contract.py", "tests/test_progressive_instruction_discovery.py", "docs/engineering/instruction-architecture/acceptance/progressive-discovery/", "docs/engineering/instruction-architecture/README.md", "docs/engineering/instruction-architecture/work-orders/WO-IAR-013.md", "docs/engineering/instruction-architecture/evidence/WO-IAR-013/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-27T07:43:56Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Execute the reviewed approved work orders as requested by the human on 2026-09-27; native host/platform qualification remains required before completion."
 +++
 
 # Split the agent instructions and preserve their meaning

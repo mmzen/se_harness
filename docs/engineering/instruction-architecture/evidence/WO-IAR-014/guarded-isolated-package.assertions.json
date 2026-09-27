@@ -1,0 +1,13 @@
+{
+  "promotable": false,
+  "platform": "nt",
+  "wheel": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-uvunsb9f\\wheel\\se_harness-0.19.0-py3-none-any.whl",
+  "archive_sha256": "f8ff055798b4fc4d6b0ab00b62f6bfacb152631b185d91a53b325a84f6478222",
+  "python": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-uvunsb9f\\evaluator\\Scripts\\python.exe",
+  "clean_install": "passed",
+  "from_0_18_0": "refused without delivery evidence",
+  "all_prior_bytes_preserved": true,
+  "native_upgrade": "not qualified",
+  "linux": "unverified",
+  "native_delivery": "separate evidence"
+}

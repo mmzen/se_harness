@@ -16,9 +16,20 @@ exact external released evaluator, its expected version and installation root,
 and an optional selected artifact. Do not discover an executable in the target
 checkout or silently use one from `PATH`.
 
-Read the selected repository's AGENTS.md and ENGINEERING_HARNESS.md on entry,
-after compaction, and after switching repositories. Read the operating card and
-the reading manifest for the selected work. Use normal file reads.
+Use this repository's ENGINEERING_HARNESS.md in the current context. Read it
+when it is absent, after switching repositories, or when its selected release
+changes. Follow its task router and read applicable owner instructions when
+present. AGENTS.md is not a plugin installation or instruction-delivery requirement.
+
+When a result includes `instruction_discovery`, require `status = "available"`.
+Read its current step's exact file and heading and each prerequisite whose
+condition applies. Read the selected formal records separately. The
+`evaluator_only_inputs` are not normal agent reading. An incompatible result
+stops the affected action; report the version/discovery gap.
+
+For a released result without this field, use that installed root's procedure
+router and reading manifest. Do not apply candidate instructions to an older
+selected release. A manual root read does not prove automatic host delivery.
 
 Use the repository-selected released evaluator in its private environment,
 through the absolute Python path with `-I -m se_harness`. The helper reports the selected artifact when one was requested. Preserve its actual result,

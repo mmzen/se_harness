@@ -35,13 +35,17 @@ END_MARKER = "<!-- se-harness:end -->"
 ATTRIBUTE_BEGIN_MARKER = "# se-harness:begin"
 ATTRIBUTE_END_MARKER = "# se-harness:end"
 FRAGMENT_TARGETS = {
-    "AGENTS.md.fragment": "AGENTS.md",
-    "CLAUDE.md.fragment": "CLAUDE.md",
     "gitattributes.fragment": ".gitattributes",
     "gitignore.fragment": ".gitignore",
 }
 SEED_SUFFIX = ".seed"
 MACHINE_POLICY = frozenset({"ENGINEERING_HARNESS.md", "docs/engineering/WORKFLOW.json", "docs/engineering/QUALITY_GATES.json"})
+INSTRUCTION_PREFIX = "docs/engineering/harness/"
+RETIRED_ENTRIES = frozenset({"AGENTS.md", "CLAUDE.md"})
+
+
+def _managed(path: Path) -> bool:
+    return path.as_posix() in MACHINE_POLICY or path.as_posix().startswith(INSTRUCTION_PREFIX)
 
 
 class HarnessError(RuntimeError):
@@ -124,9 +128,9 @@ def _templates() -> list[TemplateFile]:
             result.append(TemplateFile(source, relative.with_name(name[: -len(SEED_SUFFIX)]), "seed"))
         elif name.endswith(".tpl"):
             target = relative.with_name(name[:-4])
-            result.append(TemplateFile(source, target, "managed" if target.as_posix() in MACHINE_POLICY else "seed"))
+            result.append(TemplateFile(source, target, "managed" if _managed(target) else "seed"))
         else:
-            result.append(TemplateFile(source, relative, "managed" if relative.as_posix() in MACHINE_POLICY else "seed"))
+            result.append(TemplateFile(source, relative, "managed" if _managed(relative) else "seed"))
     return result
 
 
@@ -305,6 +309,9 @@ def plan_install(
     if replacements - editable:
         raise HarnessError("--replace-file must name a seeded file: " + ", ".join(sorted(replacements - editable)))
     old_files = old_lock.get("files", {})
+    from se_harness.instruction_discovery import load_catalog, validate_collection
+    migration = load_catalog().get("migration", {})
+    legacy_guides = migration.get("editable_guides", {})
 
     for item in templates:
         destination = safe_destination(target, item.target)
@@ -322,6 +329,12 @@ def plan_install(
             elif relative == CONFIG_NAME and mode == "upgrade" and harness_config.get("tool_version") != __version__:
                 desired = _updated_config(current, __version__)
                 action = "update"
+            elif relative in legacy_guides and not canonical_text_equal(current, desired):
+                # A retained explanatory guide becomes a pointer, never a second
+                # current policy. Customized owner seeds need an explicit choice.
+                recognized = (old_lock.get("tool_version") == migration.get("source_version")
+                              and canonical_sha256(current) == legacy_guides[relative])
+                action = "update" if mode == "upgrade" and recognized else "customized"
             else:
                 action = "unchanged" if old_entry.get("mode") == "seed" else "adopt"
         elif current is None:
@@ -370,6 +383,14 @@ def plan_install(
     if mode == "upgrade":
         changes.extend(_plan_leaving_set(target, old_lock, old_files))
 
+    # Check the replacement entry and every mapped action before any old entry
+    # can be retired. Atomic apply installs this complete collection before
+    # removing fragments. Native host qualification is a separate release check.
+    planned = {item.path: (item.current if item.action in {"unchanged", "adopt", "customized", "conflict"}
+                          else item.desired) for item in changes}
+    if not any(item.action in {"customized", "conflict"} for item in changes):
+        validate_collection({path: raw for path, raw in planned.items() if raw is not None})
+
     if adoption_report is not None:
         relative = "docs/engineering/ADOPTION_REPORT.md"
         destination = safe_destination(target, Path(relative))
@@ -392,6 +413,8 @@ def _plan_leaving_set(target: Path, old_lock: dict, old_files: dict) -> list[Cha
     """
 
     managed_targets = {item.target.as_posix() for item in effective_template_files(old_lock)}
+    from se_harness.instruction_discovery import load_catalog
+    migration = load_catalog().get("migration", {})
     changes: list[Change] = []
     for relative in sorted(set(old_files) - managed_targets):
         old_entry = old_files.get(relative)
@@ -414,10 +437,17 @@ def _plan_leaving_set(target: Path, old_lock: dict, old_files: dict) -> list[Cha
         if match == "mismatch":
             changes.append(Change(relative, "customized", str(old_mode), current, current))
             continue
+        if relative in RETIRED_ENTRIES:
+            recognized = (old_mode == "fragment"
+                          and old_lock.get("tool_version") == migration.get("source_version")
+                          and canonical_sha256(tracked) == migration.get("fragments", {}).get(relative))
+            if not recognized:
+                changes.append(Change(relative, "customized", str(old_mode), current, current))
+                continue
         if old_mode == "fragment":
             start = current.find(tracked)
             remainder = current[:start] + current[start + len(tracked) :]
-            desired = b"" if not remainder.strip() else remainder
+            desired = remainder  # Whitespace is owner content too.
         else:
             desired = b""
         changes.append(Change(relative, "remove", str(old_mode), desired, current))
@@ -529,6 +559,7 @@ def apply_changes(
     allow_updates: bool,
     evidence_output: Path | None = None,
     replace_files: Iterable[str] = (),
+    instruction_delivery_evidence: Path | None = None,
 ) -> dict:
     changes = list(changes)
     transition = False
@@ -575,10 +606,14 @@ def apply_changes(
             target,
             operation="installed-root-apply",
         )
-    target.mkdir(parents=True, exist_ok=True)
     blocking = {"conflict", "customized"}
     if any(item.action in blocking for item in changes):
         raise HarnessError("installation has conflicts or customizations; no files were written")
+    if allow_updates and any(item.action == "remove" and item.path in RETIRED_ENTRIES for item in changes):
+        from se_harness.instruction_discovery import validate_delivery_evidence
+        entry = next(item.desired for item in changes if item.path == "ENGINEERING_HARNESS.md")
+        validate_delivery_evidence(instruction_delivery_evidence, target, entry, (target / LOCK_NAME).read_bytes())
+    target.mkdir(parents=True, exist_ok=True)
 
     safe_actions = {"add", "integrate"}
     if allow_updates:

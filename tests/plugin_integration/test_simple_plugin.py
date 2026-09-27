@@ -2,6 +2,7 @@
 import importlib.util
 import json
 import os
+import shutil
 from pathlib import Path
 import subprocess
 import sys
@@ -42,7 +43,9 @@ class SimplePluginTests(unittest.TestCase):
                 self.assertIn('verity-plane/packages/'+self.wheel.name, names)
                 self.assertEqual((ROOT/'plugins/verity-plane/common/skills/change/SKILL.md').read_bytes(),
                                  archive.read('verity-plane/skills/change/SKILL.md'))
-                self.assertFalse(any('/hooks/' in name for name in names))
+                self.assertIn('verity-plane/hooks/hooks.json', names)
+                self.assertEqual((ROOT/'plugins/verity-plane/common/scripts/inject_instructions.py').read_bytes(),
+                                 archive.read('verity-plane/scripts/inject_instructions.py'))
                 manifest = '.codex-plugin' if host == 'codex' else '.claude-plugin'
                 self.assertNotIn('hooks', json.loads(archive.read(f'verity-plane/{manifest}/plugin.json')))
         (output/'old-build-file').write_text('obsolete')
@@ -54,6 +57,42 @@ class SimplePluginTests(unittest.TestCase):
         with self.assertRaisesRegex(AssemblyError, 'not owned'):
             develop(ROOT, self.wheel, unrelated)
         self.assertEqual('user content', (unrelated/'keep').read_text())
+
+    def test_invalid_hooks_leave_an_existing_development_output_unchanged(self):
+        source = self.base/'source'
+        shutil.copytree(ROOT/'plugins/verity-plane', source/'plugins/verity-plane')
+        output = self.base/'development'
+        develop(source, self.wheel, output)
+        before = {p.relative_to(output): p.read_bytes() for p in output.rglob('*') if p.is_file()}
+        config = source/'plugins/verity-plane/codex/hooks/hooks.json'
+        original = config.read_bytes()
+        helper = source/'plugins/verity-plane/common/scripts/inject_instructions.py'
+        helper_bytes = helper.read_bytes()
+        invalid = [b'{', original.replace(b'SessionStart', b'PreToolUse'),
+                   original.replace(b'--host codex', b'--host claude'),
+                   original.replace(b'5000', b'0')]
+        for raw in invalid:
+            with self.subTest(raw=raw[:80]):
+                config.write_bytes(raw)
+                with self.assertRaises(AssemblyError):
+                    develop(source, self.wheel, output)
+                self.assertEqual(before, {p.relative_to(output): p.read_bytes() for p in output.rglob('*') if p.is_file()})
+        config.write_bytes(original)
+        helper.unlink()
+        with self.assertRaisesRegex(AssemblyError, 'incomplete'):
+            develop(source, self.wheel, output)
+        self.assertEqual(before, {p.relative_to(output): p.read_bytes() for p in output.rglob('*') if p.is_file()})
+        helper.write_bytes(helper_bytes)
+
+    def test_development_wrapper_packages_both_host_hooks(self):
+        output = self.base/'wrapper'
+        result = subprocess.run([sys.executable, str(ROOT/'scripts/build_plugin_archives.py'), 'develop',
+                                 '--wheel', str(self.wheel), '--output-directory', str(output)],
+                                cwd=ROOT, capture_output=True)
+        self.assertEqual(0, result.returncode, result.stderr.decode(errors='replace'))
+        for host in ('codex', 'claude'):
+            with zipfile.ZipFile(output/f'verity-plane-{host}.zip') as archive:
+                self.assertIn('verity-plane/hooks/hooks.json', archive.namelist())
 
     def test_development_archive_cannot_use_the_release_check_without_release_inputs(self):
         result = subprocess.run([sys.executable, str(ROOT/'scripts/build_plugin_archives.py'), 'check',

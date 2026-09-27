@@ -2,7 +2,7 @@
 id = "WO-IAR-014"
 type = "work_order"
 title = "Implement evaluator discovery and safe installer migration"
-status = "approved"
+status = "in_progress"
 owners = ["engineering-owner", "repository-owner", "quality-owner"]
 created = "2026-09-20"
 updated = "2026-09-27"
@@ -60,6 +60,13 @@ decided_at = "2026-09-27T07:37:39Z"
 decided_by = "engineering-owner"
 reason = "User instruction: so let's start the work orders. Apply the reviewed package under DEC-IAR-001 versioned-successor; selected 0.18.0 governance remains installed until separate release/adoption."
 scope_paths = ["se_harness/installer.py", "se_harness/preflight.py", "se_harness/workflow.py", "se_harness/workflow_result.py", "se_harness/workflow_procedures.py", "se_harness/workflow_contract.json", "se_harness/workflow_contract.py", "se_harness/instruction_discovery.py", "se_harness/instruction_discovery.json", "se_harness/codes.py", "se_harness/integrity.py", "se_harness/cli.py", "se_harness/skill_ownership.py", "se_harness/skill_ownership_contract.json", "templates/repository/standard/AGENTS.md.fragment", "templates/repository/standard/CLAUDE.md.fragment", "tests/test_instruction_discovery.py", "tests/test_instruction_architecture.py", "tests/test_repository_context_retirement.py", "tests/test_context_routing_retirement.py", "tests/test_installer.py", "tests/test_preflight.py", "tests/test_workflow_restitution.py", "tests/test_workflow_procedures.py", "tests/test_skill_ownership.py", "tests/fixtures/progressive-discovery/", "pyproject.toml", "MANIFEST.in", "docs/engineering/instruction-architecture/README.md", "docs/engineering/instruction-architecture/work-orders/WO-IAR-014.md", "docs/engineering/instruction-architecture/evidence/WO-IAR-014/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-27T07:43:56Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Execute the reviewed approved work orders as requested by the human on 2026-09-27; native host/platform qualification remains required before completion."
 +++
 
 # Implement evaluator discovery and safe installer migration

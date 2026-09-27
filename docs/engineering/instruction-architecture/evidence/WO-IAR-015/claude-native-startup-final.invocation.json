@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "C:/Users/mathi/.local/bin/claude.exe",
+    "--init-only",
+    "--plugin-dir",
+    "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-startup-d_10rscv\\plugin",
+    "--setting-sources",
+    "project",
+    "--settings",
+    "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-startup-d_10rscv\\settings.json",
+    "--strict-mcp-config",
+    "--debug-file",
+    "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-startup-d_10rscv\\native.log"
+  ],
+  "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-startup-d_10rscv\\repository",
+  "isolated_config": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-startup-d_10rscv\\config",
+  "started_at": "2026-09-27T08:32:23.470739+00:00",
+  "exit_code": 0,
+  "root_sha256": "3b2ac768448d6fba816c7c4e2a478bee93ff041ddb0cc2852372ead499ab4dd6",
+  "fixture": "Protocol installation only; no evaluator acceptance is implied.",
+  "event": "startup",
+  "helper_sha256": "98e47de370f0a54dff5b1f3f68bbea40739420da6b1d9197825f569c5b6932ba",
+  "native_post_compaction": "not tested"
+}

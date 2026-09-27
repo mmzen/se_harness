@@ -7,6 +7,7 @@ selects a trusted released record and an independently obtained wheel digest.
 from __future__ import annotations
 
 from dataclasses import dataclass
+import ast
 import hashlib
 import io
 import json
@@ -149,6 +150,36 @@ def _payload_hash(python: Path, repository: Path, wheel_bytes: bytes, name: str,
     return value
 
 
+def _instruction_hooks(entries: dict[str, bytes], host: str, manifest: dict) -> None:
+    """Accept only the reviewed root-delivery event and its packaged helper.
+
+    Older explicit-command packages remain valid. This is content validation,
+    not evidence that a host executed the hook or delivered its context.
+    """
+    config = "hooks/hooks.json"
+    helper = "scripts/inject_instructions.py"
+    hook_paths = {path for path in entries if path.startswith("hooks/")}
+    if "hooks" in manifest:
+        raise AssemblyError(f"{host} manifest must use the default hook file")
+    if not hook_paths and helper not in entries:
+        return
+    if hook_paths != {config} or not entries.get(helper, b"").strip():
+        raise AssemblyError(f"incomplete or unsupported {host} instruction hook assets")
+    sources = "startup|resume|clear|compact" + ("|fork" if host == "claude" else "")
+    command = {"type": "command", "command":
+               f'python "${{CLAUDE_PLUGIN_ROOT}}/{helper}" --host {host}', "timeout": 10}
+    if host == "codex":
+        command["additionalContextLimit"] = 5000
+    expected = {"hooks": {"SessionStart": [{"matcher": f"^({sources})$", "hooks": [command]}]}}
+    if _json(entries[config]) != expected:
+        raise AssemblyError(f"unsupported {host} instruction hook configuration")
+    _asset(helper, entries[helper], host)
+    try:
+        ast.parse(entries[helper].decode("utf8"), filename=helper)
+    except (SyntaxError, UnicodeError) as exc:
+        raise AssemblyError(f"invalid instruction delivery helper: {exc}") from exc
+
+
 @dataclass
 class Assembly:
     name: str
@@ -231,6 +262,7 @@ def prepare(repository: Path, revision: str, plan_path: str, release_revision: s
         manifest = _json(entries[HOSTS[host]][0])
         if manifest.get("name") != plan["name"]:
             raise AssemblyError(f"{host} manifest name differs from plugin directory")
+        _instruction_hooks({path: value[0] for path, value in entries.items()}, host, manifest)
         entries[f"packages/{name}"] = (wheel_bytes, 0o644, "evaluator")
         if len(entries) > MAX_FILES or total > MAX_TOTAL:
             raise AssemblyError("assembly input exceeds file or byte limit")
@@ -361,9 +393,10 @@ def develop(repository: Path, wheel: Path, output: Path) -> dict:
                 if path.is_file():
                     entries[relative.as_posix()] = path.read_bytes()
         # One content check before any output replacement.
-        manifest = json.loads(entries.get(HOSTS[host], b'{}'))
-        if manifest.get('name') != 'verity-plane' or 'hooks' in manifest or any(p.startswith('hooks/') for p in entries):
-            raise AssemblyError(f"invalid explicit-check {host} manifest")
+        manifest = _json(entries.get(HOSTS[host], b'{}'))
+        if manifest.get('name') != 'verity-plane':
+            raise AssemblyError(f"invalid {host} manifest")
+        _instruction_hooks(entries, host, manifest)
         for relative in ('skills/harness-orient/SKILL.md', 'skills/harness-orient/skill-contract.json',
                          'skills/harness-orient/scripts/orient.py', 'skills/harness-operator-brief/SKILL.md',
                          'skills/harness-operator-brief/skill-contract.json', 'skills/harness-operator-brief/scripts/check_brief.py',
