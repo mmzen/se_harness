@@ -2,7 +2,7 @@
 id = "VREC-RLO-010"
 type = "verification_record"
 title = "Verification candidate for WO-RLO-010"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-27"
 updated = "2026-09-27"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-orchestration/evidence/WO-RLO-010/RE
 evaluator_evidence_path = "docs/engineering/release-orchestration/evidence/VREC-RLO-010-evaluator.json"
 evaluator_evidence_sha256 = "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f"
 
+verified_at = "2026-09-27T19:26:47Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-RLO-010"]
 conforms_to = ["VER-RLO-007"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-27T19:26:47Z"
+decided_by = "assurance-owner"
+reason = "The human assurance owner explicitly decided in this task: I verify vrec-rlo-010. Codex applies that decision to candidate ca5a52cdbb1dc0563c4b67c0a7f116f070ce472e after confirming the retained evidence digests are unchanged and the assurance gates pass."
 +++
 
 # Verification Record Candidate
