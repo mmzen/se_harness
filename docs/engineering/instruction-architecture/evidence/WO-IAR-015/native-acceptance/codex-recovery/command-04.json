@@ -1,0 +1,6 @@
+{
+  "sha256": "9cb39e2ffa064c792b7592db9be52d11ff788ce0938d3c7b662bf8f16265a85a",
+  "decision": "accept",
+  "reviewed_by": "Codex acceptance executor",
+  "authority": "Approved acceptance test; command only searches and prints fixture paths, text matches, and the risk instruction file. No writes or persistent rule."
+}

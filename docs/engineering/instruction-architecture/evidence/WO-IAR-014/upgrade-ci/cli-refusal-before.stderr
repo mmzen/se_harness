@@ -1,0 +1,60 @@
+test_upgrade_cli_reports_delivery_refusal_without_writes (tests.test_installer.InstructionMigrationTests.test_upgrade_cli_reports_delivery_refusal_without_writes) ... 
+  test_upgrade_cli_reports_delivery_refusal_without_writes (tests.test_installer.InstructionMigrationTests.test_upgrade_cli_reports_delivery_refusal_without_writes) (arguments=[]) ... ERROR
+  test_upgrade_cli_reports_delivery_refusal_without_writes (tests.test_installer.InstructionMigrationTests.test_upgrade_cli_reports_delivery_refusal_without_writes) (arguments=['--instruction-delivery-evidence', 'C:\\Users\\mathi\\AppData\\Local\\Temp\\instruction-migration-v_88m3o6\\delivery.json']) ... ERROR
+
+======================================================================
+ERROR: test_upgrade_cli_reports_delivery_refusal_without_writes (tests.test_installer.InstructionMigrationTests.test_upgrade_cli_reports_delivery_refusal_without_writes) (arguments=[])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_installer.py", line 127, in test_upgrade_cli_reports_delivery_refusal_without_writes
+    code = cli.main(['upgrade', str(self.root), '--apply', '--json', *arguments])
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\se_harness\cli.py", line 1261, in main
+    return int(args.handler(args))
+               ~~~~~~~~~~~~^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\se_harness\cli.py", line 206, in _upgrade
+    apply_changes(
+    ~~~~~~~~~~~~~^
+        target,
+        ^^^^^^^
+    ...<5 lines>...
+        instruction_delivery_evidence=Path(args.instruction_delivery_evidence) if args.instruction_delivery_evidence else None,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\se_harness\installer.py", line 615, in apply_changes
+    validate_delivery_evidence(instruction_delivery_evidence, target, entry, (target / LOCK_NAME).read_bytes())
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\se_harness\instruction_discovery.py", line 122, in validate_delivery_evidence
+    raise DiscoveryError("legacy entry retirement requires --instruction-delivery-evidence; no files were written")
+se_harness.instruction_discovery.DiscoveryError: legacy entry retirement requires --instruction-delivery-evidence; no files were written
+
+======================================================================
+ERROR: test_upgrade_cli_reports_delivery_refusal_without_writes (tests.test_installer.InstructionMigrationTests.test_upgrade_cli_reports_delivery_refusal_without_writes) (arguments=['--instruction-delivery-evidence', 'C:\\Users\\mathi\\AppData\\Local\\Temp\\instruction-migration-v_88m3o6\\delivery.json'])
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_installer.py", line 127, in test_upgrade_cli_reports_delivery_refusal_without_writes
+    code = cli.main(['upgrade', str(self.root), '--apply', '--json', *arguments])
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\se_harness\cli.py", line 1261, in main
+    return int(args.handler(args))
+               ~~~~~~~~~~~~^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\se_harness\cli.py", line 206, in _upgrade
+    apply_changes(
+    ~~~~~~~~~~~~~^
+        target,
+        ^^^^^^^
+    ...<5 lines>...
+        instruction_delivery_evidence=Path(args.instruction_delivery_evidence) if args.instruction_delivery_evidence else None,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\se_harness\installer.py", line 615, in apply_changes
+    validate_delivery_evidence(instruction_delivery_evidence, target, entry, (target / LOCK_NAME).read_bytes())
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\se_harness\instruction_discovery.py", line 138, in validate_delivery_evidence
+    raise DiscoveryError("instruction-delivery evidence does not bind this repository, prior lock and planned entry")
+se_harness.instruction_discovery.DiscoveryError: instruction-delivery evidence does not bind this repository, prior lock and planned entry
+
+----------------------------------------------------------------------
+Ran 1 test in 1.216s
+
+FAILED (errors=2)

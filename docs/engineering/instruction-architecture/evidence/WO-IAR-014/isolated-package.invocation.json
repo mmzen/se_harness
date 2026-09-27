@@ -1,0 +1,154 @@
+{
+  "promotable": false,
+  "base": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9",
+  "checks": [
+    {
+      "label": "isolated-package-build",
+      "argv": [
+        "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-c",
+        "from setuptools.build_meta import build_wheel; build_wheel(r'C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\wheel')"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\source",
+      "started_at": "2026-09-27T08:33:31.256739+00:00",
+      "exit_code": 0
+    },
+    {
+      "label": "isolated-package-venv",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\bin\\python.exe",
+        "-m",
+        "venv",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\evaluator"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9",
+      "started_at": "2026-09-27T08:33:34.068314+00:00",
+      "exit_code": 0
+    },
+    {
+      "label": "isolated-package-install",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\evaluator\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "install",
+        "--no-index",
+        "--no-deps",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\wheel\\se_harness-0.19.0-py3-none-any.whl"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9",
+      "started_at": "2026-09-27T08:33:43.077267+00:00",
+      "exit_code": 0
+    },
+    {
+      "label": "isolated-clean-init",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\clean",
+        "--project-name",
+        "Isolated acceptance",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9",
+      "started_at": "2026-09-27T08:33:46.112491+00:00",
+      "exit_code": 0
+    },
+    {
+      "label": "isolated-clean-doctor",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\clean",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9",
+      "started_at": "2026-09-27T08:33:47.932875+00:00",
+      "exit_code": 0
+    },
+    {
+      "label": "isolated-prior-init",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\from-0.18.0",
+        "--project-name",
+        "Upgrade acceptance",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9",
+      "started_at": "2026-09-27T08:33:48.746205+00:00",
+      "exit_code": 0
+    },
+    {
+      "label": "isolated-upgrade-preview",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\from-0.18.0",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9",
+      "started_at": "2026-09-27T08:33:49.825983+00:00",
+      "exit_code": 0
+    },
+    {
+      "label": "isolated-upgrade-apply",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\from-0.18.0",
+        "--apply",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9",
+      "started_at": "2026-09-27T08:33:50.517533+00:00",
+      "exit_code": 0
+    },
+    {
+      "label": "isolated-upgrade-doctor",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\from-0.18.0",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9",
+      "started_at": "2026-09-27T08:33:51.956607+00:00",
+      "exit_code": 0
+    },
+    {
+      "label": "isolated-upgrade-repeat",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9\\from-0.18.0",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-nonpromotable-qy7shla9",
+      "started_at": "2026-09-27T08:33:52.686394+00:00",
+      "exit_code": 0
+    }
+  ]
+}

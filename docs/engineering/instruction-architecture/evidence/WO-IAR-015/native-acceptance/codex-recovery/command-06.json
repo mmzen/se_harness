@@ -1,0 +1,6 @@
+{
+  "sha256": "dd2819a80cac42791ac65e62ca994218e55fba80c86ef6965781df084e380b3d",
+  "decision": "accept",
+  "reviewed_by": "Codex acceptance executor",
+  "authority": "User authorized these native acceptance tests; exact command reads three fixture instruction files only. No persistent rule or lifecycle authority granted."
+}

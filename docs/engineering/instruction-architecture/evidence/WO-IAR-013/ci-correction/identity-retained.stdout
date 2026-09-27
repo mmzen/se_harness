@@ -1,0 +1,42 @@
+{
+  "method": "Invoke the actual source-identity test with temporary input files; no source file is rewritten.",
+  "platform": "win32",
+  "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "cases": [
+    {
+      "case": "git-lf",
+      "sha256": "4c210e7e0bb975c3b67cc673bf1986792a2ee46fc37eb5e6722769666d6ff300",
+      "expected_acceptance": true,
+      "accepted": true,
+      "matches_expected": true
+    },
+    {
+      "case": "windows-crlf",
+      "sha256": "9811b1770fa81e20f19890cb45de6d991aa463cf60a4338b39251d9d4c978a28",
+      "expected_acceptance": true,
+      "accepted": true,
+      "matches_expected": true
+    },
+    {
+      "case": "content-change",
+      "sha256": "69d1fc46c3988b1bfb286f4883f914c0dff39b8c9b175453af591decfeb3c18c",
+      "expected_acceptance": false,
+      "accepted": false,
+      "matches_expected": true
+    },
+    {
+      "case": "whitespace-change",
+      "sha256": "6e77a221b48b1ed6ecae9d8a29f2eca589a3d6d2d5a9c992648d4ace31fc24bf",
+      "expected_acceptance": false,
+      "accepted": false,
+      "matches_expected": true
+    },
+    {
+      "case": "bare-cr-change",
+      "sha256": "a78928ca83d168da93750eec72ca6f969a8047ca239ed545889d6586c1f92d34",
+      "expected_acceptance": false,
+      "accepted": false,
+      "matches_expected": true
+    }
+  ]
+}

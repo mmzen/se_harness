@@ -1,0 +1,38 @@
+{
+  "assurance": {
+    "commit_bound_verification": "required",
+    "decided_by": "engineering-owner",
+    "rationale": "Proposed classification for human review: future acceptance relies on regression and fixture correctness."
+  },
+  "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+  "background": [],
+  "diagnostics": [],
+  "phase": "review",
+  "reading_manifest": [
+    "ENGINEERING_HARNESS.md",
+    "docs/engineering/OPERATING_CARD.md",
+    "AGENTS.md",
+    "docs/engineering/ARTIFACT_AUTHORING.md",
+    "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
+    "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md",
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-022.md",
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-023.md",
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-024.md",
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-025.md",
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-026.md",
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-027.md",
+    "docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md",
+    "docs/engineering/instruction-architecture/architecture/ARCH-IAR-011.md",
+    "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-011.md",
+    "docs/engineering/instruction-architecture/verification/VER-IAR-014.md",
+    "docs/engineering/instruction-architecture/work-orders/WO-IAR-017.md"
+  ],
+  "ready": true,
+  "schema": "se-harness-preflight-v2",
+  "skew": [],
+  "work_order": {
+    "id": "WO-IAR-017",
+    "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-017.md",
+    "status": "in_progress"
+  }
+}

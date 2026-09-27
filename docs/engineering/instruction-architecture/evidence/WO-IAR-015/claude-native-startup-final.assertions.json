@@ -1,0 +1,11 @@
+{
+  "host": "Claude Code",
+  "host_version": "2.1.273",
+  "platform": "Windows",
+  "event": "SessionStart:startup",
+  "complete_root_matched": true,
+  "context_characters": 8904,
+  "root_sha256": "3b2ac768448d6fba816c7c4e2a478bee93ff041ddb0cc2852372ead499ab4dd6",
+  "helper_sha256": "98e47de370f0a54dff5b1f3f68bbea40739420da6b1d9197825f569c5b6932ba",
+  "native_post_compaction": "unverified"
+}

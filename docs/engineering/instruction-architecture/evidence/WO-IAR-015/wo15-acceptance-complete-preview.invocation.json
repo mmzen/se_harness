@@ -1,0 +1,16 @@
+{
+  "args": [
+    "transition",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--set",
+    "WO-IAR-015=implemented",
+    "--decision",
+    "WO-IAR-015=Codex",
+    "--reason",
+    "WO-IAR-015=Codex records completion of approved WO-IAR-015 after retained native startup, manual-compaction, repository-switch, unavailable-input and uncertain-write observations, reproducible reading measurements, passing required tests and released handoff. The report preserves exact surfaces, partial attempts and limitations; no verification or release is inferred.",
+    "--json"
+  ],
+  "exit_code": 0,
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+}

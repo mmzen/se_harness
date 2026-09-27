@@ -1,0 +1,35 @@
+{
+  "assurance": {
+    "commit_bound_verification": "required",
+    "decided_by": "engineering-owner",
+    "rationale": "Later engineering and governance decisions rely on the instruction, discovery and ownership behavior; verification must bind the exact candidate commit. The reviewed required classification is adopted by the user's instruction to start these work orders."
+  },
+  "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+  "background": [],
+  "diagnostics": [],
+  "phase": "review",
+  "reading_manifest": [
+    "ENGINEERING_HARNESS.md",
+    "docs/engineering/OPERATING_CARD.md",
+    "AGENTS.md",
+    "docs/engineering/ARTIFACT_AUTHORING.md",
+    "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
+    "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md",
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-022.md",
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-023.md",
+    "docs/engineering/instruction-architecture/requirements/REQ-IAR-027.md",
+    "docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md",
+    "docs/engineering/instruction-architecture/architecture/ARCH-IAR-011.md",
+    "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-011.md",
+    "docs/engineering/instruction-architecture/verification/VER-IAR-014.md",
+    "docs/engineering/instruction-architecture/work-orders/WO-IAR-013.md"
+  ],
+  "ready": true,
+  "schema": "se-harness-preflight-v2",
+  "skew": [],
+  "work_order": {
+    "id": "WO-IAR-013",
+    "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-013.md",
+    "status": "in_progress"
+  }
+}

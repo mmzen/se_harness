@@ -1,0 +1,1479 @@
+{
+  "source": "docs/engineering/instruction-architecture/proposals/progressive-discovery/instruction-review-source.md",
+  "source_sha256": "9811b1770fa81e20f19890cb45de6d991aa463cf60a4338b39251d9d4c978a28",
+  "headings": [
+    {
+      "line": 1,
+      "heading": "# Engineering Harness for se_harness",
+      "allocations": [
+        {
+          "first_line": 1,
+          "last_line": 97,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 10,
+      "heading": "## Goals",
+      "allocations": [
+        {
+          "first_line": 1,
+          "last_line": 97,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 17,
+      "heading": "## Policy / Global invariants",
+      "allocations": [
+        {
+          "first_line": 1,
+          "last_line": 97,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 19,
+      "heading": "### HRN-001 — Formal authority",
+      "allocations": [
+        {
+          "first_line": 1,
+          "last_line": 97,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 27,
+      "heading": "### HRN-002 — Change control",
+      "allocations": [
+        {
+          "first_line": 1,
+          "last_line": 97,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 41,
+      "heading": "### HRN-003 — Lifecycle authority",
+      "allocations": [
+        {
+          "first_line": 1,
+          "last_line": 97,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 49,
+      "heading": "### HRN-004 — Bounded scope",
+      "allocations": [
+        {
+          "first_line": 1,
+          "last_line": 97,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 58,
+      "heading": "### HRN-005 — Explicit decisions",
+      "allocations": [
+        {
+          "first_line": 1,
+          "last_line": 97,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 68,
+      "heading": "### HRN-006 — Targeted transitions",
+      "allocations": [
+        {
+          "first_line": 1,
+          "last_line": 97,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 74,
+      "heading": "### HRN-007 — Repository ownership",
+      "allocations": [
+        {
+          "first_line": 1,
+          "last_line": 97,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 80,
+      "heading": "### HRN-008 — Rule precedence",
+      "allocations": [
+        {
+          "first_line": 1,
+          "last_line": 97,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 92,
+      "heading": "### HRN-009 — Required checks",
+      "allocations": [
+        {
+          "first_line": 1,
+          "last_line": 97,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 98,
+      "heading": "## Shared policy",
+      "allocations": [
+        {
+          "first_line": 98,
+          "last_line": 99,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "retained",
+          "note": "Shared applicability, command/retention convention or structural container is consolidated in the root and per-action entry."
+        }
+      ]
+    },
+    {
+      "line": 100,
+      "heading": "### Scope of these rules",
+      "allocations": [
+        {
+          "first_line": 100,
+          "last_line": 118,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 119,
+      "heading": "### Repository-owned exceptions",
+      "allocations": [
+        {
+          "first_line": 119,
+          "last_line": 122,
+          "destination": "docs/engineering/harness/EXCEPTIONS.md",
+          "disposition": "corrected by recorded review",
+          "note": "SPEC-IAR-014 IAR-DIS-012 replaces the empty draft placeholder with the supported limitation."
+        }
+      ]
+    },
+    {
+      "line": 123,
+      "heading": "### Communication",
+      "allocations": [
+        {
+          "first_line": 123,
+          "last_line": 124,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "retained",
+          "note": "Shared applicability, command/retention convention or structural container is consolidated in the root and per-action entry."
+        }
+      ]
+    },
+    {
+      "line": 125,
+      "heading": "#### Purpose and claim",
+      "allocations": [
+        {
+          "first_line": 125,
+          "last_line": 170,
+          "destination": "docs/engineering/harness/COMMUNICATION.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 135,
+      "heading": "#### Eligible prose",
+      "allocations": [
+        {
+          "first_line": 125,
+          "last_line": 170,
+          "destination": "docs/engineering/harness/COMMUNICATION.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 154,
+      "heading": "#### Protected content",
+      "allocations": [
+        {
+          "first_line": 125,
+          "last_line": 170,
+          "destination": "docs/engineering/harness/COMMUNICATION.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 171,
+      "heading": "### Gates",
+      "allocations": [
+        {
+          "first_line": 171,
+          "last_line": 176,
+          "destination": "docs/engineering/harness/RESULTS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 177,
+      "heading": "## Actors and decision rights",
+      "allocations": [
+        {
+          "first_line": 177,
+          "last_line": 302,
+          "destination": "docs/engineering/harness/AUTHORITY.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 182,
+      "heading": "### Roles and accountabilities",
+      "allocations": [
+        {
+          "first_line": 177,
+          "last_line": 302,
+          "destination": "docs/engineering/harness/AUTHORITY.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 195,
+      "heading": "### Decision rights",
+      "allocations": [
+        {
+          "first_line": 177,
+          "last_line": 302,
+          "destination": "docs/engineering/harness/AUTHORITY.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 245,
+      "heading": "### Delegation and separation",
+      "allocations": [
+        {
+          "first_line": 177,
+          "last_line": 302,
+          "destination": "docs/engineering/harness/AUTHORITY.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 268,
+      "heading": "### Authority from work approval",
+      "allocations": [
+        {
+          "first_line": 177,
+          "last_line": 302,
+          "destination": "docs/engineering/harness/AUTHORITY.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 303,
+      "heading": "## Processes and Procedures",
+      "allocations": [
+        {
+          "first_line": 303,
+          "last_line": 318,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "retained",
+          "note": "Shared applicability, command/retention convention or structural container is consolidated in the root and per-action entry."
+        }
+      ]
+    },
+    {
+      "line": 319,
+      "heading": "### Artifact data model",
+      "allocations": [
+        {
+          "first_line": 319,
+          "last_line": 415,
+          "destination": "docs/engineering/harness/ARTIFACTS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 333,
+      "heading": "#### Artifact types",
+      "allocations": [
+        {
+          "first_line": 319,
+          "last_line": 415,
+          "destination": "docs/engineering/harness/ARTIFACTS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 381,
+      "heading": "#### Artifact locations",
+      "allocations": [
+        {
+          "first_line": 319,
+          "last_line": 415,
+          "destination": "docs/engineering/harness/ARTIFACTS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 416,
+      "heading": "#### Links between definitions",
+      "allocations": [
+        {
+          "first_line": 416,
+          "last_line": 441,
+          "destination": "docs/engineering/harness/DEFINITION_LINKS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 442,
+      "heading": "#### Links from work orders (WO)",
+      "allocations": [
+        {
+          "first_line": 442,
+          "last_line": 485,
+          "destination": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 468,
+      "heading": "#### Links for verification, release, and operation",
+      "allocations": [
+        {
+          "first_line": 442,
+          "last_line": 485,
+          "destination": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 486,
+      "heading": "#### Links for decisions and risks",
+      "allocations": [
+        {
+          "first_line": 486,
+          "last_line": 503,
+          "destination": "docs/engineering/harness/RISKS_AND_DECISIONS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 504,
+      "heading": "#### Coverage and consistency rules",
+      "allocations": [
+        {
+          "first_line": 504,
+          "last_line": 506,
+          "destination": "docs/engineering/harness/DEFINITION_LINKS.md",
+          "disposition": "moved",
+          "note": "Container split into addressable coverage topics."
+        }
+      ]
+    },
+    {
+      "line": 631,
+      "heading": "### 1. Define the change",
+      "allocations": [
+        {
+          "first_line": 631,
+          "last_line": 652,
+          "destination": "docs/engineering/harness/DEFINE_CHANGE.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 653,
+      "heading": "#### Procedure",
+      "allocations": [
+        {
+          "first_line": 653,
+          "last_line": 672,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "retained",
+          "note": "Shared applicability, command/retention convention or structural container is consolidated in the root and per-action entry."
+        }
+      ]
+    },
+    {
+      "line": 1224,
+      "heading": "### 2. Authorize the work",
+      "allocations": [
+        {
+          "first_line": 1224,
+          "last_line": 1242,
+          "destination": "docs/engineering/harness/AUTHORIZE_WORK.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 1243,
+      "heading": "#### Procedure",
+      "allocations": [
+        {
+          "first_line": 1243,
+          "last_line": 1261,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "retained",
+          "note": "Shared applicability, command/retention convention or structural container is consolidated in the root and per-action entry."
+        }
+      ]
+    },
+    {
+      "line": 1500,
+      "heading": "### 3. Execute the work",
+      "allocations": [
+        {
+          "first_line": 1500,
+          "last_line": 1518,
+          "destination": "docs/engineering/harness/EXECUTE_WORK.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 1519,
+      "heading": "#### Procedure",
+      "allocations": [
+        {
+          "first_line": 1519,
+          "last_line": 1523,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "retained",
+          "note": "Shared applicability, command/retention convention or structural container is consolidated in the root and per-action entry."
+        }
+      ]
+    },
+    {
+      "line": 1741,
+      "heading": "### 4. Verify the outcome",
+      "allocations": [
+        {
+          "first_line": 1741,
+          "last_line": 1759,
+          "destination": "docs/engineering/harness/VERIFY_OUTCOME.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 1760,
+      "heading": "#### Procedure",
+      "allocations": [
+        {
+          "first_line": 1760,
+          "last_line": 1766,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "retained",
+          "note": "Shared applicability, command/retention convention or structural container is consolidated in the root and per-action entry."
+        }
+      ]
+    },
+    {
+      "line": 1989,
+      "heading": "### 5. Deliver the result",
+      "allocations": [
+        {
+          "first_line": 1989,
+          "last_line": 2011,
+          "destination": "docs/engineering/harness/DELIVER_RESULT.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 2012,
+      "heading": "#### Procedure",
+      "allocations": [
+        {
+          "first_line": 2012,
+          "last_line": 2017,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "retained",
+          "note": "Shared applicability, command/retention convention or structural container is consolidated in the root and per-action entry."
+        }
+      ]
+    },
+    {
+      "line": 2318,
+      "heading": "### Supporting procedures",
+      "allocations": [
+        {
+          "first_line": 2318,
+          "last_line": 2324,
+          "destination": "ENGINEERING_HARNESS.md",
+          "disposition": "retained",
+          "note": "Shared applicability, command/retention convention or structural container is consolidated in the root and per-action entry."
+        }
+      ]
+    },
+    {
+      "line": 2325,
+      "heading": "#### Continue selected work",
+      "allocations": [
+        {
+          "first_line": 2325,
+          "last_line": 2395,
+          "destination": "docs/engineering/harness/CONTINUE.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 2396,
+      "heading": "#### Prepare or repair the released evaluator",
+      "allocations": [
+        {
+          "first_line": 2396,
+          "last_line": 2476,
+          "destination": "docs/engineering/harness/SETUP.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 2477,
+      "heading": "#### Upgrade the installed harness",
+      "allocations": [
+        {
+          "first_line": 2477,
+          "last_line": 2542,
+          "destination": "docs/engineering/harness/UPGRADE.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 2543,
+      "heading": "#### Select or restore the skill provider",
+      "allocations": [
+        {
+          "first_line": 2543,
+          "last_line": 2589,
+          "destination": "docs/engineering/harness/SKILL_PROVIDER.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 2590,
+      "heading": "#### Prepare a release or operating contract",
+      "allocations": [
+        {
+          "first_line": 2590,
+          "last_line": 2644,
+          "destination": "docs/engineering/harness/DRAFT_DEFINITIONS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 2645,
+      "heading": "#### Complete a selected definition",
+      "allocations": [
+        {
+          "first_line": 2645,
+          "last_line": 2682,
+          "destination": "docs/engineering/harness/RECORD_STATE.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 2683,
+      "heading": "#### Record work-order verification or release",
+      "allocations": [
+        {
+          "first_line": 2683,
+          "last_line": 2726,
+          "destination": "docs/engineering/harness/RECORD_STATE.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 2727,
+      "heading": "#### Refresh verification after an unchanged rebase",
+      "allocations": [
+        {
+          "first_line": 2727,
+          "last_line": 2777,
+          "destination": "docs/engineering/harness/VERIFY_OUTCOME.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 2778,
+      "heading": "#### Check a governed pull request",
+      "allocations": [
+        {
+          "first_line": 2778,
+          "last_line": 2855,
+          "destination": "docs/engineering/harness/PULL_REQUEST.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 2856,
+      "heading": "### Report a lifecycle result",
+      "allocations": [
+        {
+          "first_line": 2856,
+          "last_line": 2889,
+          "destination": "docs/engineering/harness/RESULTS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 2890,
+      "heading": "### If a procedure is blocked",
+      "allocations": [
+        {
+          "first_line": 2890,
+          "last_line": 2934,
+          "destination": "docs/engineering/harness/RESULTS.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 2935,
+      "heading": "## Rule reference mapping",
+      "allocations": [
+        {
+          "first_line": 2935,
+          "last_line": 3014,
+          "destination": "docs/engineering/harness/migration/REFERENCE_MAP.md",
+          "disposition": "moved",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "line": 3015,
+      "heading": "## Implementation dependencies",
+      "allocations": [
+        {
+          "first_line": 3015,
+          "last_line": 3060,
+          "destination": "docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md",
+          "disposition": "corrected by recorded review",
+          "note": "DEC-IAR-001 and SPEC-IAR-014 separate candidate delivery, later adoption and deferred exception/revision engines."
+        }
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "source_group": "define",
+      "source_step": 1,
+      "destination": "docs/engineering/harness/DEFINE_CHANGE.md#describe-the-intended-outcome"
+    },
+    {
+      "source_group": "define",
+      "source_step": 2,
+      "destination": "docs/engineering/harness/DEFINE_CHANGE.md#define-the-limits-of-the-change"
+    },
+    {
+      "source_group": "define",
+      "source_step": 3,
+      "destination": "docs/engineering/harness/DEFINE_CHANGE.md#identify-the-existing-artifacts-that-apply-to-the-change"
+    },
+    {
+      "source_group": "define",
+      "source_step": 4,
+      "destination": "docs/engineering/harness/DRAFT_DEFINITIONS.md#draft-any-missing-definitions"
+    },
+    {
+      "source_group": "define",
+      "source_step": 5,
+      "destination": "docs/engineering/harness/AMEND_DEFINITIONS.md#propose-any-needed-amendments-to-existing-definitions"
+    },
+    {
+      "source_group": "define",
+      "source_step": 6,
+      "destination": "docs/engineering/harness/DRAFT_DEFINITIONS.md#define-how-the-result-will-be-verified"
+    },
+    {
+      "source_group": "define",
+      "source_step": 7,
+      "destination": "docs/engineering/harness/RISKS_AND_DECISIONS.md#record-risks-risk-affecting-the-change"
+    },
+    {
+      "source_group": "define",
+      "source_step": 8,
+      "destination": "docs/engineering/harness/RISKS_AND_DECISIONS.md#record-unresolved-decisions-dec"
+    },
+    {
+      "source_group": "define",
+      "source_step": 9,
+      "destination": "docs/engineering/harness/DRAFT_WORK_ORDERS.md#prepare-work-orders-wo-linking-the-definitions-scope-planned-work-and-verification-requirements"
+    },
+    {
+      "source_group": "authorize",
+      "source_step": 1,
+      "destination": "docs/engineering/harness/AUTHORIZE_WORK.md#assess-the-proposed-artifact-package"
+    },
+    {
+      "source_group": "authorize",
+      "source_step": 2,
+      "destination": "docs/engineering/harness/AUTHORIZE_WORK.md#resolve-approval-blockers"
+    },
+    {
+      "source_group": "authorize",
+      "source_step": 3,
+      "destination": "docs/engineering/harness/AUTHORIZE_WORK.md#obtain-the-humans-decision"
+    },
+    {
+      "source_group": "authorize",
+      "source_step": 4,
+      "destination": "docs/engineering/harness/AUTHORIZE_WORK.md#apply-the-selected-transitions"
+    },
+    {
+      "source_group": "authorize",
+      "source_step": 5,
+      "destination": "docs/engineering/harness/AUTHORIZE_WORK.md#confirm-the-authorization-result"
+    },
+    {
+      "source_group": "execute",
+      "source_step": 1,
+      "destination": "docs/engineering/harness/EXECUTE_WORK.md#establish-the-execution-context"
+    },
+    {
+      "source_group": "execute",
+      "source_step": 2,
+      "destination": "docs/engineering/harness/EXECUTE_WORK.md#start-the-selected-work"
+    },
+    {
+      "source_group": "execute",
+      "source_step": 3,
+      "destination": "docs/engineering/harness/EXECUTE_WORK.md#implement-the-approved-scope"
+    },
+    {
+      "source_group": "execute",
+      "source_step": 4,
+      "destination": "docs/engineering/harness/EXECUTE_WORK.md#retain-the-implementation-evidence"
+    },
+    {
+      "source_group": "execute",
+      "source_step": 5,
+      "destination": "docs/engineering/harness/EXECUTE_WORK.md#record-implementation-completion"
+    },
+    {
+      "source_group": "verify",
+      "source_step": 1,
+      "destination": "docs/engineering/harness/VERIFY_OUTCOME.md#establish-the-verification-scope"
+    },
+    {
+      "source_group": "verify",
+      "source_step": 2,
+      "destination": "docs/engineering/harness/VERIFY_OUTCOME.md#assess-the-verification-evidence"
+    },
+    {
+      "source_group": "verify",
+      "source_step": 3,
+      "destination": "docs/engineering/harness/VERIFY_OUTCOME.md#prepare-the-verification-record"
+    },
+    {
+      "source_group": "verify",
+      "source_step": 4,
+      "destination": "docs/engineering/harness/VERIFY_OUTCOME.md#obtain-the-humans-verification-decision"
+    },
+    {
+      "source_group": "verify",
+      "source_step": 5,
+      "destination": "docs/engineering/harness/VERIFY_OUTCOME.md#record-the-verification-decision"
+    },
+    {
+      "source_group": "deliver",
+      "source_step": 1,
+      "destination": "docs/engineering/harness/DELIVER_RESULT.md#select-the-delivery-action"
+    },
+    {
+      "source_group": "deliver",
+      "source_step": 2,
+      "destination": "docs/engineering/harness/DELIVER_RESULT.md#prepare-the-delivery-package"
+    },
+    {
+      "source_group": "deliver",
+      "source_step": 3,
+      "destination": "docs/engineering/harness/RELEASE.md#obtain-the-release-decision-when-required"
+    },
+    {
+      "source_group": "deliver",
+      "source_step": 4,
+      "destination": "docs/engineering/harness/RELEASE.md#record-the-release-decision-when-required"
+    },
+    {
+      "source_group": "deliver",
+      "source_step": 5,
+      "destination": "docs/engineering/harness/DELIVER_RESULT.md#confirm-authority-for-the-external-action"
+    },
+    {
+      "source_group": "deliver",
+      "source_step": 6,
+      "destination": "docs/engineering/harness/DELIVER_RESULT.md#perform-the-authorized-delivery"
+    },
+    {
+      "source_group": "deliver",
+      "source_step": 7,
+      "destination": "docs/engineering/harness/DELIVER_RESULT.md#confirm-the-delivery-result"
+    }
+  ],
+  "allocations": [
+    {
+      "first_line": 1,
+      "last_line": 97,
+      "destination": "ENGINEERING_HARNESS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 100,
+      "last_line": 118,
+      "destination": "ENGINEERING_HARNESS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 673,
+      "last_line": 712,
+      "destination": "docs/engineering/harness/DEFINE_CHANGE.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 713,
+      "last_line": 744,
+      "destination": "docs/engineering/harness/DEFINE_CHANGE.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 745,
+      "last_line": 812,
+      "destination": "docs/engineering/harness/DEFINE_CHANGE.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 813,
+      "last_line": 892,
+      "destination": "docs/engineering/harness/DRAFT_DEFINITIONS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 893,
+      "last_line": 952,
+      "destination": "docs/engineering/harness/AMEND_DEFINITIONS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 953,
+      "last_line": 1009,
+      "destination": "docs/engineering/harness/DRAFT_DEFINITIONS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1010,
+      "last_line": 1062,
+      "destination": "docs/engineering/harness/RISKS_AND_DECISIONS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1063,
+      "last_line": 1125,
+      "destination": "docs/engineering/harness/RISKS_AND_DECISIONS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1126,
+      "last_line": 1223,
+      "destination": "docs/engineering/harness/DRAFT_WORK_ORDERS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1262,
+      "last_line": 1313,
+      "destination": "docs/engineering/harness/AUTHORIZE_WORK.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1314,
+      "last_line": 1379,
+      "destination": "docs/engineering/harness/AUTHORIZE_WORK.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1380,
+      "last_line": 1414,
+      "destination": "docs/engineering/harness/AUTHORIZE_WORK.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1415,
+      "last_line": 1464,
+      "destination": "docs/engineering/harness/AUTHORIZE_WORK.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1465,
+      "last_line": 1499,
+      "destination": "docs/engineering/harness/AUTHORIZE_WORK.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1524,
+      "last_line": 1557,
+      "destination": "docs/engineering/harness/EXECUTE_WORK.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1558,
+      "last_line": 1592,
+      "destination": "docs/engineering/harness/EXECUTE_WORK.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1593,
+      "last_line": 1642,
+      "destination": "docs/engineering/harness/EXECUTE_WORK.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1643,
+      "last_line": 1698,
+      "destination": "docs/engineering/harness/EXECUTE_WORK.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1699,
+      "last_line": 1740,
+      "destination": "docs/engineering/harness/EXECUTE_WORK.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1767,
+      "last_line": 1804,
+      "destination": "docs/engineering/harness/VERIFY_OUTCOME.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1805,
+      "last_line": 1842,
+      "destination": "docs/engineering/harness/VERIFY_OUTCOME.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1843,
+      "last_line": 1904,
+      "destination": "docs/engineering/harness/VERIFY_OUTCOME.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1905,
+      "last_line": 1944,
+      "destination": "docs/engineering/harness/VERIFY_OUTCOME.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1945,
+      "last_line": 1988,
+      "destination": "docs/engineering/harness/VERIFY_OUTCOME.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 2018,
+      "last_line": 2054,
+      "destination": "docs/engineering/harness/DELIVER_RESULT.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 2055,
+      "last_line": 2128,
+      "destination": "docs/engineering/harness/DELIVER_RESULT.md",
+      "disposition": "moved",
+      "note": "Shared branch selection here; release-only preparation in RELEASE.md and integration preparation in PULL_REQUEST.md. Exact source commands preserved."
+    },
+    {
+      "first_line": 2129,
+      "last_line": 2162,
+      "destination": "docs/engineering/harness/RELEASE.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 2163,
+      "last_line": 2199,
+      "destination": "docs/engineering/harness/RELEASE.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 2200,
+      "last_line": 2247,
+      "destination": "docs/engineering/harness/DELIVER_RESULT.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 2248,
+      "last_line": 2277,
+      "destination": "docs/engineering/harness/DELIVER_RESULT.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 2278,
+      "last_line": 2317,
+      "destination": "docs/engineering/harness/DELIVER_RESULT.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 2325,
+      "last_line": 2395,
+      "destination": "docs/engineering/harness/CONTINUE.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 2396,
+      "last_line": 2476,
+      "destination": "docs/engineering/harness/SETUP.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 2477,
+      "last_line": 2542,
+      "destination": "docs/engineering/harness/UPGRADE.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 2543,
+      "last_line": 2589,
+      "destination": "docs/engineering/harness/SKILL_PROVIDER.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 2590,
+      "last_line": 2644,
+      "destination": "docs/engineering/harness/DRAFT_DEFINITIONS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 2645,
+      "last_line": 2682,
+      "destination": "docs/engineering/harness/RECORD_STATE.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 2683,
+      "last_line": 2726,
+      "destination": "docs/engineering/harness/RECORD_STATE.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 2727,
+      "last_line": 2777,
+      "destination": "docs/engineering/harness/VERIFY_OUTCOME.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 2778,
+      "last_line": 2855,
+      "destination": "docs/engineering/harness/PULL_REQUEST.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 2856,
+      "last_line": 2889,
+      "destination": "docs/engineering/harness/RESULTS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 2890,
+      "last_line": 2934,
+      "destination": "docs/engineering/harness/RESULTS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 631,
+      "last_line": 652,
+      "destination": "docs/engineering/harness/DEFINE_CHANGE.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1224,
+      "last_line": 1242,
+      "destination": "docs/engineering/harness/AUTHORIZE_WORK.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1500,
+      "last_line": 1518,
+      "destination": "docs/engineering/harness/EXECUTE_WORK.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1741,
+      "last_line": 1759,
+      "destination": "docs/engineering/harness/VERIFY_OUTCOME.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 1989,
+      "last_line": 2011,
+      "destination": "docs/engineering/harness/DELIVER_RESULT.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 125,
+      "last_line": 170,
+      "destination": "docs/engineering/harness/COMMUNICATION.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 177,
+      "last_line": 302,
+      "destination": "docs/engineering/harness/AUTHORITY.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 319,
+      "last_line": 415,
+      "destination": "docs/engineering/harness/ARTIFACTS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 416,
+      "last_line": 441,
+      "destination": "docs/engineering/harness/DEFINITION_LINKS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 442,
+      "last_line": 485,
+      "destination": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 486,
+      "last_line": 503,
+      "destination": "docs/engineering/harness/RISKS_AND_DECISIONS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 506,
+      "last_line": 510,
+      "destination": "docs/engineering/harness/DEFINITION_LINKS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 511,
+      "last_line": 515,
+      "destination": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 516,
+      "last_line": 521,
+      "destination": "docs/engineering/harness/DEFINITION_LINKS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 522,
+      "last_line": 528,
+      "destination": "docs/engineering/harness/DEFINITION_LINKS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 529,
+      "last_line": 557,
+      "destination": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 558,
+      "last_line": 562,
+      "destination": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 563,
+      "last_line": 568,
+      "destination": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 569,
+      "last_line": 583,
+      "destination": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 584,
+      "last_line": 607,
+      "destination": "docs/engineering/harness/RISKS_AND_DECISIONS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 608,
+      "last_line": 618,
+      "destination": "docs/engineering/harness/RISKS_AND_DECISIONS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 619,
+      "last_line": 630,
+      "destination": "docs/engineering/harness/WORK_AND_EVIDENCE.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 504,
+      "last_line": 506,
+      "destination": "docs/engineering/harness/DEFINITION_LINKS.md",
+      "disposition": "moved",
+      "note": "Container split into addressable coverage topics."
+    },
+    {
+      "first_line": 171,
+      "last_line": 176,
+      "destination": "docs/engineering/harness/RESULTS.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 119,
+      "last_line": 122,
+      "destination": "docs/engineering/harness/EXCEPTIONS.md",
+      "disposition": "corrected by recorded review",
+      "note": "SPEC-IAR-014 IAR-DIS-012 replaces the empty draft placeholder with the supported limitation."
+    },
+    {
+      "first_line": 2935,
+      "last_line": 3014,
+      "destination": "docs/engineering/harness/migration/REFERENCE_MAP.md",
+      "disposition": "moved",
+      "note": ""
+    },
+    {
+      "first_line": 3015,
+      "last_line": 3060,
+      "destination": "docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md",
+      "disposition": "corrected by recorded review",
+      "note": "DEC-IAR-001 and SPEC-IAR-014 separate candidate delivery, later adoption and deferred exception/revision engines."
+    },
+    {
+      "first_line": 98,
+      "last_line": 99,
+      "destination": "ENGINEERING_HARNESS.md",
+      "disposition": "retained",
+      "note": "Shared applicability, command/retention convention or structural container is consolidated in the root and per-action entry."
+    },
+    {
+      "first_line": 123,
+      "last_line": 124,
+      "destination": "ENGINEERING_HARNESS.md",
+      "disposition": "retained",
+      "note": "Shared applicability, command/retention convention or structural container is consolidated in the root and per-action entry."
+    },
+    {
+      "first_line": 303,
+      "last_line": 318,
+      "destination": "ENGINEERING_HARNESS.md",
+      "disposition": "retained",
+      "note": "Shared applicability, command/retention convention or structural container is consolidated in the root and per-action entry."
+    },
+    {
+      "first_line": 653,
+      "last_line": 672,
+      "destination": "ENGINEERING_HARNESS.md",
+      "disposition": "retained",
+      "note": "Shared applicability, command/retention convention or structural container is consolidated in the root and per-action entry."
+    },
+    {
+      "first_line": 1243,
+      "last_line": 1261,
+      "destination": "ENGINEERING_HARNESS.md",
+      "disposition": "retained",
+      "note": "Shared applicability, command/retention convention or structural container is consolidated in the root and per-action entry."
+    },
+    {
+      "first_line": 1519,
+      "last_line": 1523,
+      "destination": "ENGINEERING_HARNESS.md",
+      "disposition": "retained",
+      "note": "Shared applicability, command/retention convention or structural container is consolidated in the root and per-action entry."
+    },
+    {
+      "first_line": 1760,
+      "last_line": 1766,
+      "destination": "ENGINEERING_HARNESS.md",
+      "disposition": "retained",
+      "note": "Shared applicability, command/retention convention or structural container is consolidated in the root and per-action entry."
+    },
+    {
+      "first_line": 2012,
+      "last_line": 2017,
+      "destination": "ENGINEERING_HARNESS.md",
+      "disposition": "retained",
+      "note": "Shared applicability, command/retention convention or structural container is consolidated in the root and per-action entry."
+    },
+    {
+      "first_line": 2318,
+      "last_line": 2324,
+      "destination": "ENGINEERING_HARNESS.md",
+      "disposition": "retained",
+      "note": "Shared applicability, command/retention convention or structural container is consolidated in the root and per-action entry."
+    }
+  ]
+}

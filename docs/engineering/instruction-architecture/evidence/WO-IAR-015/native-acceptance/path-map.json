@@ -1,0 +1,24 @@
+{
+  "reason": "Short evidence paths support Windows Git without changing global long-path settings. Original IDs and source paths remain in the observations.",
+  "directories": {
+    "01a0e37f-a778-7b71-a39b-93a898d33f6f": "codex-cli",
+    "claude-5623d905-2596-437c-bef3-6407a4434707": "claude-cli",
+    "codex-hooks-20260927T155602Z-adb647": "codex-callback-first",
+    "codex-hooks-20260927T155616Z-969360": "codex-callback",
+    "claude-boundaries-20260927T162239Z-d4880a": "claude-probe-refusal",
+    "claude-boundaries-20260927T162339Z-0f70c1": "claude-boundaries",
+    "codex-boundaries-20260927T162242Z-1a7e8c": "codex-boundaries",
+    "claude-recovery-20260927T162504Z-178e44": "claude-recovery",
+    "codex-recovery-20260927T162613Z-d7c2c5": "codex-recovery-first",
+    "codex-recovery-20260927T162912Z-d26396": "codex-recovery"
+  },
+  "command_review_files": {
+    "codex-recovery/0c72cec8565870fadb163390a94648471dd15d66bb8c1539b3a62c0cb01a212e.decision.json": "codex-recovery/command-01.json",
+    "codex-recovery/47b120af1daba376d63d72e0a2163d1b7263f0655246409dfca42b98179b6abe.decision.json": "codex-recovery/command-02.json",
+    "codex-recovery/599e916dfda8c61c3bfee21135df3346f382adb3bc805c0cb79c375dc2ce1885.decision.json": "codex-recovery/command-03.json",
+    "codex-recovery/9cb39e2ffa064c792b7592db9be52d11ff788ce0938d3c7b662bf8f16265a85a.decision.json": "codex-recovery/command-04.json",
+    "codex-recovery/b0785878a9f7e05139e1bdf35c877b1d24a1da6682ddeb1147d40ec858c26978.decision.json": "codex-recovery/command-05.json",
+    "codex-recovery/dd2819a80cac42791ac65e62ca994218e55fba80c86ef6965781df084e380b3d.decision.json": "codex-recovery/command-06.json",
+    "codex-recovery/f67468dbdeced7f651f976cc2bfcbbef6e590a19f6e2a932853fb74cad8da415.decision.json": "codex-recovery/command-07.json"
+  }
+}

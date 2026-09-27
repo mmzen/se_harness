@@ -325,12 +325,12 @@ class ArchitectureTraceabilityTests(unittest.TestCase):
                 "architecturally significant requirement",
                 "selected specifications",
             ),
-            "docs/engineering/TRACEABILITY.md": (
-                "`ARCH.addresses -> REQ`",
-                "`ARCH.conforms_to -> SPEC`",
-            ),
-            "docs/engineering/QUALITY_GATES.md": (
-                "architecturally significant requirement drivers",
+            "docs/engineering/harness/DEFINITION_LINKS.md": (
+                "Architecture (ARCH) → Requirement (REQ) | `addresses`",
+                "Architecture (ARCH) → Specification (SPEC) | `conforms_to`",
+                "directly addresses a selected requirement (REQ) and is active",
+                "Routine work MUST NOT",
+                "receive invented links",
             ),
         }
         for relative, phrases in expectations.items():

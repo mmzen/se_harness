@@ -61,25 +61,14 @@ AUTHORITY_BOUNDARY = (
     "authorize a diff, verify work, release software, commit, push, tag, publish, or deploy."
 )
 REQUIRED_PATHS = (
-    "AGENTS.md",
-    "CLAUDE.md",
     "ENGINEERING_HARNESS.md",
     "docs/engineering/README.md",
-    "docs/engineering/WORKFLOW.md",
     "docs/engineering/WORKFLOW.json",
-    "docs/engineering/DECISION_RIGHTS.md",
-    "docs/engineering/QUALITY_GATES.md",
     "docs/engineering/QUALITY_GATES.json",
-    "docs/engineering/TRACEABILITY.md",
-    "docs/engineering/TECHNICAL_COMMUNICATION.md",
-    "docs/engineering/OPERATING_CARD.md",
     "docs/engineering/ARTIFACT_AUTHORING.md",
 )
 READING_PATHS = (
     "ENGINEERING_HARNESS.md",
-    "docs/engineering/OPERATING_CARD.md",
-    "AGENTS.md",
-    "docs/engineering/ARTIFACT_AUTHORING.md",
 )
 POLICY_PATHS = (
     "ENGINEERING_HARNESS.md",
@@ -204,22 +193,17 @@ def inspect_installation(target: Path, *, verify_payload: bool = False) -> list[
     for relative in REQUIRED_PATHS:
         checks.append(InstallationCheck(relative, (target / relative).is_file(), "required"))
 
-    claude_path = target / "CLAUDE.md"
-    if claude_path.is_file():
-        try:
-            import_count = sum(
-                line.strip() == "@AGENTS.md"
-                for line in claude_path.read_text(encoding="utf-8").splitlines()
-            )
-            checks.append(
-                InstallationCheck(
-                    "claude-import",
-                    import_count == 1,
-                    "@AGENTS.md" if import_count == 1 else f"expected one standalone import; found {import_count}",
-                )
-            )
-        except (OSError, UnicodeError) as exc:
-            checks.append(InstallationCheck("claude-import", False, str(exc)))
+    try:
+        from se_harness.instruction_discovery import locations, validate_collection
+        contents = {}
+        for relative in {item["file"] for item in locations()}:
+            path = safe_destination(target, Path(relative))
+            if path.is_file():
+                contents[relative] = path.read_bytes()
+        validate_collection(contents)
+        checks.append(InstallationCheck("instruction-discovery", True, "declared instruction headings are available"))
+    except (OSError, UnicodeError, HarnessError, ValueError) as exc:
+        checks.append(InstallationCheck("instruction-discovery", False, str(exc)))
 
     lock_path = target / LOCK_NAME
     if not lock_path.is_file():

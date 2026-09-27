@@ -1,0 +1,762 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-IAR-014",
+    "artifacts": [
+      "WO-IAR-014"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-IAR-011",
+      "ARCH-IAR-011",
+      "CAP-IAR-002",
+      "INT-IAR-001",
+      "REQ-IAR-024",
+      "REQ-IAR-025",
+      "REQ-IAR-027",
+      "SPEC-IAR-014",
+      "VER-IAR-014"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/",
+      "docs/engineering/instruction-architecture/README.md",
+      "docs/engineering/instruction-architecture/work-orders/WO-IAR-014.md",
+      "MANIFEST.in",
+      "pyproject.toml",
+      "se_harness/cli.py",
+      "se_harness/codes.py",
+      "se_harness/installer.py",
+      "se_harness/instruction_discovery.json",
+      "se_harness/instruction_discovery.py",
+      "se_harness/integrity.py",
+      "se_harness/preflight.py",
+      "se_harness/skill_ownership.py",
+      "se_harness/skill_ownership_contract.json",
+      "se_harness/workflow.py",
+      "se_harness/workflow_contract.json",
+      "se_harness/workflow_contract.py",
+      "se_harness/workflow_procedures.py",
+      "se_harness/workflow_result.py",
+      "templates/repository/standard/AGENTS.md.fragment",
+      "templates/repository/standard/CLAUDE.md.fragment",
+      "tests/fixtures/progressive-discovery/",
+      "tests/test_context_routing_retirement.py",
+      "tests/test_installer.py",
+      "tests/test_instruction_architecture.py",
+      "tests/test_instruction_discovery.py",
+      "tests/test_preflight.py",
+      "tests/test_repository_context_retirement.py",
+      "tests/test_skill_ownership.py",
+      "tests/test_workflow_procedures.py",
+      "tests/test_workflow_restitution.py"
+    ],
+    "changed_paths": [
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/candidate-doctor.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/candidate-doctor.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/candidate-doctor.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/ci-handoff-WO-IAR-014-context.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/ci-handoff-WO-IAR-014-context.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/ci-handoff-WO-IAR-014-context.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/ci-handoff-WO-IAR-014-evidence.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/ci-handoff-WO-IAR-014-evidence.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/ci-handoff-WO-IAR-014-evidence.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout-focused.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout-focused.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout-focused.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/.gitattributes",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/change-inventory.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-01.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-02.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-03.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-04.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-05.log",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-06.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-07.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-08.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-09.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-10.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-11.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-12.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-13.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-14.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-15.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-16.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-17.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-18.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-19.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-20.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-21.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-22.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-23.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-24.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-25.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-26.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-27.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-28.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-29.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-30.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-31.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-32.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-33.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-34.log",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-35.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-collector.py",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/ci-files.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/closeout-doctor.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/closeout-doctor.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/closeout-doctor.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/closeout-validate.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/closeout-validate.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/closeout-validate.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/comparison-final-probe.py",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/comparison-probe.py",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/lifecycle-comparison.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/lifecycle-final-comparison.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/lifecycle-final-observations.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/lifecycle-observations.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/REPORT.md",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/source-identity.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/verification-id-scan.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-complete-apply.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-complete-apply.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-complete-apply.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-complete-preview.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-complete-preview.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-complete-preview.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-completed-context.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-completed-context.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-completed-context.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-entry.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-entry.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-entry.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-handoff.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-handoff.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-handoff.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-rebind.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-rebind.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-rebind.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-review.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-review.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/closeout/wo-iar-014-closeout-review.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/discovery-migration-regression.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/discovery-migration-regression.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/discovery-migration-regression.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/final-cli-boundaries.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/final-cli-boundaries.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/final-cli-boundaries.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/full-tests-after-migration.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/full-tests-after-migration.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/full-tests-after-migration.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/full-tests-review-snapshot.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/full-tests-review-snapshot.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/full-tests-review-snapshot.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/full-tests-with-retirement-guard.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/full-tests-with-retirement-guard.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/full-tests-with-retirement-guard.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-clean-doctor.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-clean-doctor.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-clean-init.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-clean-init.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-package-build.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-package-build.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-package-install.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-package-install.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-package-venv.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-package-venv.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-package.assertions.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-package.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-package.source.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-prior-init.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-prior-init.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-upgrade-preview.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-upgrade-preview.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-upgrade-refusal.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/guarded-isolated-upgrade-refusal.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/iar-start-apply.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/iar-start-apply.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/iar-start-apply.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/iar-start-approve.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/iar-start-approve.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/iar-start-approve.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/iar-start-preview.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/iar-start-preview.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/iar-start-preview.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/implementation-review.md",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/initial-full-tests.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/initial-full-tests.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/initial-full-tests.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-clean-doctor.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-clean-doctor.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-clean-init.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-clean-init.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-package-build.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-package-build.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-package-install.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-package-install.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-package-venv.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-package-venv.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-package.assertions.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-package.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-package.source.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-prior-init.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-prior-init.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-upgrade-apply.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-upgrade-apply.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-upgrade-doctor.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-upgrade-doctor.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-upgrade-preview.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-upgrade-preview.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-upgrade-repeat.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/isolated-upgrade-repeat.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/migration-final-focused.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/migration-final-focused.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/migration-final-focused.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/README.md",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/regression-scope-proposal.md",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/required-cli-help.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/required-cli-help.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/required-cli-help.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/required-distributions.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/required-distributions.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/required-distributions.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/required-upgrade-help.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/required-upgrade-help.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/required-upgrade-help.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/retirement-evidence-guard.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/retirement-evidence-guard.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/retirement-evidence-guard.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/review-path-inventory.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/review-released-doctor.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/review-released-doctor.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/review-released-doctor.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/review-released-validation.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/review-released-validation.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/review-released-validation.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/review-WO-IAR-014-context.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/review-WO-IAR-014-context.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/review-WO-IAR-014-context.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/review-WO-IAR-014-review.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/review-WO-IAR-014-review.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/review-WO-IAR-014-review.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/route-regression.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/route-regression.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/route-regression.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/ci19-rebind-wo14.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/ci19-rebind-wo14.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/ci19-rebind-wo14.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/cli-help.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/cli-help.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/cli-help.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/cli-refusal-before.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/cli-refusal-before.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/cli-refusal-before.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/distributions.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/distributions.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/distributions.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/doctor.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/doctor.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/doctor.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/focused.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/focused.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/focused.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/full-regression.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/full-regression.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/full-regression.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/hosted-reproduction.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/hosted-upgrade-refusal.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/hosted-upgrade-refusal.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/review.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/review.md",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/review.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/review.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/validate.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/validate.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/validate.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/wo14-context.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/wo14-context.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/wo14-context.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/wo14-scope-valid.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/wo14-scope-valid.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/wo14-scope-valid.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/wo14-scope.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/wo14-scope.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/upgrade-ci/wo14-scope.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/WO-IAR-014-handoff.md",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/WO-IAR-014-start-preflight.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/WO-IAR-014-start-preflight.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/WO-IAR-014-start-preflight.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/WO-IAR-014-started-context.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/WO-IAR-014-started-context.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-014/WO-IAR-014-started-context.stdout",
+      "docs/engineering/instruction-architecture/README.md",
+      "docs/engineering/instruction-architecture/work-orders/WO-IAR-014.md",
+      "pyproject.toml",
+      "se_harness/cli.py",
+      "se_harness/installer.py",
+      "se_harness/instruction_discovery.json",
+      "se_harness/instruction_discovery.py",
+      "se_harness/preflight.py",
+      "se_harness/workflow.py",
+      "se_harness/workflow_contract.py",
+      "se_harness/workflow_result.py",
+      "tests/fixtures/progressive-discovery/released-0.18.0/AGENTS.md",
+      "tests/fixtures/progressive-discovery/released-0.18.0/CLAUDE.md",
+      "tests/fixtures/progressive-discovery/released-0.18.0/DECISION_RIGHTS.md",
+      "tests/fixtures/progressive-discovery/released-0.18.0/OPERATING_CARD.md",
+      "tests/fixtures/progressive-discovery/released-0.18.0/provenance.json",
+      "tests/fixtures/progressive-discovery/released-0.18.0/QUALITY_GATES.md",
+      "tests/fixtures/progressive-discovery/released-0.18.0/TECHNICAL_COMMUNICATION.md",
+      "tests/fixtures/progressive-discovery/released-0.18.0/TRACEABILITY.md",
+      "tests/fixtures/progressive-discovery/released-0.18.0/WORKFLOW.md",
+      "tests/fixtures/progressive-discovery/skill-vectors.json",
+      "tests/test_context_routing_retirement.py",
+      "tests/test_installer.py",
+      "tests/test_instruction_architecture.py",
+      "tests/test_instruction_discovery.py",
+      "tests/test_repository_context_retirement.py"
+    ],
+    "change_set_complete": true
+  },
+  "compliance": {
+    "checkpoint": "handoff",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT",
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4I-STATUS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-IAR-014"
+              }
+            ],
+            "message": "WO-IAR-014 status is in_progress."
+          },
+          {
+            "id": "QGP-G4I-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-IAR-014"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G4I-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G4I-SCOPE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-IAR-014:[execution_scope]"
+              }
+            ],
+            "message": "WO-IAR-014 has recorded execution approval for its 31 scope path(s)."
+          },
+          {
+            "id": "QGP-G4I-COMPLETE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-IAR-014"
+              }
+            ],
+            "message": "The caller explicitly asserted that the declared change set is complete."
+          },
+          {
+            "id": "QGP-G4I-PATHS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-IAR-014"
+              }
+            ],
+            "message": "All 263 declared changed path(s) are within execution scope."
+          },
+          {
+            "id": "QGP-G4I-PREFLIGHT",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-IAR-014:review"
+              }
+            ],
+            "message": "Released-installation review preflight inputs are ready."
+          },
+          {
+            "id": "QGP-G4I-EVIDENCE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-IAR-014"
+              }
+            ],
+            "message": "Fresh retained evidence is bound at docs/engineering/instruction-architecture/evidence/WO-IAR-014/WO-IAR-014-handoff.md."
+          },
+          {
+            "id": "QGP-G4I-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-IAR-014"
+              }
+            ],
+            "message": "No open decision blocks WO-IAR-014."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "3685616bbdbacd260fc575caadfe0ce494ef25d40e8349e68d1acba4ce643ae9",
+    "change_set_source": "arguments"
+  },
+  "procedure": {
+    "id": "PROC-WO-IMPLEMENT",
+    "current_step": "STEP-WO-IMPLEMENT-PREVIEW",
+    "steps": [
+      {
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "Evaluated implementation handoff for WO-IAR-014."
+        ],
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-IAR-014",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-START"
+          },
+          "QGP-G4I-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G4I-COMPLETE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-IAR-014",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ]
+          },
+          "QGP-G4I-PATHS": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-IAR-014",
+              "--phase",
+              "review"
+            ]
+          },
+          "QGP-G4I-EVIDENCE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-IAR-014",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "QGP-G4I-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-IMPLEMENT-PREVIEW",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "Plan completion of WO-IAR-014."
+        ],
+        "non_effects": [
+          "Completion does not verify, release or deliver the work."
+        ],
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-IAR-014=implemented",
+          "--decision",
+          "WO-IAR-014=delegated-executor"
+        ],
+        "corrective": {
+          "QGP-G4I-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-START"
+          },
+          "QGP-G4I-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G4I-COMPLETE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-IAR-014",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ]
+          },
+          "QGP-G4I-PATHS": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-IAR-014",
+              "--phase",
+              "review"
+            ]
+          },
+          "QGP-G4I-EVIDENCE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-IAR-014",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "QGP-G4I-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-IMPLEMENT-APPLY",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "Record completion of only WO-IAR-014 under its approved execution scope."
+        ],
+        "non_effects": [
+          "Completion does not verify, release or deliver the work."
+        ],
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-IAR-014=implemented",
+          "--decision",
+          "WO-IAR-014=delegated-executor",
+          "--apply"
+        ],
+        "corrective": {
+          "QGP-G4I-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-START"
+          },
+          "QGP-G4I-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G4I-COMPLETE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-IAR-014",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ]
+          },
+          "QGP-G4I-PATHS": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-IAR-014",
+              "--phase",
+              "review"
+            ]
+          },
+          "QGP-G4I-EVIDENCE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-IAR-014",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "QGP-G4I-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-IAR-014",
+        "status": "in_progress"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-IAR-014",
+        "status": "in_progress"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 50
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated handoff compliance for WO-IAR-014."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-IAR-014 is in_progress."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-PREVIEW",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-IAR-014=implemented",
+        "--decision",
+        "WO-IAR-014=delegated-executor"
+      ]
+    },
+    "alternatives": []
+  },
+  "result_sha256": "e6c5e58d070d5ed4ecc7c4d7063d62f801dfa6439ad25f53c4b1572c59d4cd7c"
+}

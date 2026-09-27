@@ -1,0 +1,154 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {
+    "commit": "5e30efb0f31f174479708dc940ed07ebe1678be7",
+    "git_object_format": "sha1"
+  },
+  "operation": {
+    "kind": "capture-verification",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "VREC-IAR-010",
+    "artifacts": [
+      "VREC-IAR-010"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-IAR-011",
+      "ARCH-IAR-011",
+      "CAP-ECP-003",
+      "CAP-IAR-002",
+      "INT-ECP-001",
+      "INT-IAR-001",
+      "REQ-ECP-012",
+      "REQ-IAR-025",
+      "SPEC-ECP-007",
+      "SPEC-ECP-025",
+      "SPEC-IAR-014",
+      "VER-ECP-027",
+      "VER-IAR-014",
+      "WO-IAR-019"
+    ],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-VREC-DECIDE",
+    "procedure_id": "PROC-VREC-DECIDE",
+    "status": "not_assessable",
+    "gates": []
+  },
+  "procedure": {
+    "id": "PROC-VREC-DECIDE",
+    "current_step": "STEP-VREC-DECIDE",
+    "steps": [
+      {
+        "id": "STEP-VREC-DECIDE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-ASSURANCE-DECISION"
+        ],
+        "effects": [
+          "Permits an explicit decision on VREC-IAR-010 only."
+        ],
+        "non_effects": [
+          "Referenced work orders remain unchanged."
+        ],
+        "decision_right": "DR-VREC-DECIDE",
+        "role": "assurance-owner",
+        "artifact": "VREC-IAR-010",
+        "decision": "whether the retained evidence verifies the exact candidate",
+        "outcomes": [
+          "verified",
+          "reject",
+          "supersede"
+        ],
+        "response": "I verify VREC-IAR-010 as assurance owner."
+      }
+    ]
+  },
+  "state": {
+    "before": [],
+    "after": [
+      {
+        "id": "VREC-IAR-010",
+        "status": "ready"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "VREC-IAR-010",
+        "path": "docs/engineering/instruction-architecture/verification-records/VREC-IAR-010.md",
+        "fields": [
+          "artifact_snapshot_sha256",
+          "commit",
+          "created",
+          "evaluator_evidence_path",
+          "evaluator_evidence_sha256",
+          "evidence_paths",
+          "git_object_format",
+          "id",
+          "owners",
+          "prepared_at",
+          "prepared_by",
+          "relations",
+          "status",
+          "title",
+          "type",
+          "updated",
+          "worktree_state"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Prepared ready verification record VREC-IAR-010 at docs/engineering/instruction-architecture/verification-records/VREC-IAR-010.md."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "VREC-IAR-010 is ready; referenced work orders were not changed."
+    ],
+    "decision_required": {
+      "decision_right": "DR-VREC-DECIDE",
+      "role": "assurance-owner",
+      "artifact": "VREC-IAR-010",
+      "decision": "whether the retained evidence verifies the exact candidate",
+      "outcomes": [
+        "verified",
+        "reject",
+        "supersede"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-VREC-DECIDE",
+      "step_id": "STEP-VREC-DECIDE",
+      "action": "whether the retained evidence verifies the exact candidate"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "I verify VREC-IAR-010 as assurance owner."
+    },
+    "alternatives": [
+      "Use complete alternative procedure PROC-VREC-REJECT.",
+      "Use complete alternative procedure PROC-VREC-SUPERSEDE."
+    ]
+  },
+  "result_sha256": "61c8906f0936337126d2182318116cba57d076fcfab1f3152493fc2522b96c24"
+}

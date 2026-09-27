@@ -16,8 +16,12 @@ exact external released evaluator, its expected version and installation root,
 and an optional selected artifact. Do not discover an executable in the target
 checkout or silently use one from `PATH`.
 
-Read the applicable repository instructions and this file completely. Validate
-the retained `skill-contract.json` before executing the procedure.
+Read the selected ENGINEERING_HARNESS.md and use its task router. Read
+applicable repository-owner instructions when present. For a result carrying
+`instruction_discovery`, read its selected file/heading and applicable
+prerequisites; an incompatible mapping stops the affected action. Formal records
+remain separate inputs, and evaluator-only contracts are not normal agent reads.
+Validate the retained `skill-contract.json` before executing the procedure.
 
 ## Procedure
 

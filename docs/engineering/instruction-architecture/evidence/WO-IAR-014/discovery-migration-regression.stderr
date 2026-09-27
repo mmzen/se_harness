@@ -1,0 +1,14 @@
+..............................................................F.....................
+======================================================================
+FAIL: test_routing_table_gives_every_subject_exactly_one_owner (tests.test_context_routing_retirement.ContextRoutingRetirementTests.test_routing_table_gives_every_subject_exactly_one_owner)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_context_routing_retirement.py", line 148, in test_routing_table_gives_every_subject_exactly_one_owner
+    self.assertNotIn('WORKFLOW.json',table)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'WORKFLOW.json' unexpectedly found in "\n\nRead the selected file's entry conditions and current step. Read its required\nreferences before the action they govern. A link alone does not require reading\nits target. Do not load all procedures or future stages in advance.\n\n| Current need | Read first |\n| --- | --- |\n| Discuss or explain without a lifecycle action | Only the source sections needed to answer. |\n| Define a new change | [DEFINE_CHANGE.md](docs/engineering/harness/DEFINE_CHANGE.md#read-this-when) |\n| Continue selected work or recover after compaction | [CONTINUE.md](docs/engineering/harness/CONTINUE.md#read-this-when) |\n| Resolve decision authority | [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights) |\n| Report a lifecycle result, failed check or uncertain write | [RESULTS.md](docs/engineering/harness/RESULTS.md#read-this-when) |\n| Assess an owner-defined exception | [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability) |\n| Prepare or repair the evaluator | [SETUP.md](docs/engineering/harness/SETUP.md#read-this-when) |\n\nBefore the first eligible English explanation in a fresh context, read\n[COMMUNICATION.md](docs/engineering/harness/COMMUNICATION.md#communication).\nReuse it while retained in context. This applies to ordinary answers too.\nMachine WORKFLOW.json and QUALITY_GATES.json are evaluator inputs; read them only\nwhen changing or investigating their contracts. Use evaluator results in normal\nwork. Missing instructions or an unknown returned procedure stop the affected\naction: report the exact discovery gap in RESULTS.md.\n\n## After compaction\n\nRecover the repository, selected IDs, objective, existing authority and pending\naction from the summary. For governed work, obtain fresh context through\nCONTINUE.md and reread the current procedure and prerequisites lost from context.\nA summary preserves pointers and decisions, not current lifecycle truth. Inspect\nuncertain writes or external effects before retrying. Resume only unapplied work.\n"
+
+----------------------------------------------------------------------
+Ran 84 tests in 38.476s
+
+FAILED (failures=1)

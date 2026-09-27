@@ -1,0 +1,110 @@
+{
+  "method": "Whitespace word counts over the union of selected line ranges, once per file. Root and the entire Communication policy are included in every fresh context. Selected actions include their entry conditions and conditional prerequisites for the named scenario. Whole-file reads are conservative where listed. No tokenizer or token-saving guarantee is used.",
+  "source_words": 21888,
+  "root_words": 1191,
+  "cases": [
+    {
+      "case": "New requirement draft",
+      "unique_instruction_words": 5049,
+      "references": [
+        "ENGINEERING_HARNESS.md",
+        "docs/engineering/harness/COMMUNICATION.md",
+        "docs/engineering/harness/DEFINE_CHANGE.md",
+        "docs/engineering/harness/DRAFT_DEFINITIONS.md#draft-any-missing-definitions",
+        "docs/engineering/harness/DRAFT_DEFINITIONS.md#read-this-when",
+        "docs/engineering/harness/DRAFT_DEFINITIONS.md#before-this-action",
+        "docs/engineering/harness/DRAFT_DEFINITIONS.md#type-checklists",
+        "docs/engineering/harness/ARTIFACTS.md#artifact-types",
+        "docs/engineering/harness/ARTIFACTS.md#artifact-locations",
+        "docs/engineering/harness/DEFINITION_LINKS.md",
+        "docs/engineering/ARTIFACT_AUTHORING.md#design-simplicity",
+        "docs/engineering/ARTIFACT_AUTHORING.md#requirement"
+      ],
+      "formal_artifact_reading": "Separate, variable input: selected records and governing artifacts returned by the evaluator; exact evidence/candidate records when the action requires them. No formal-artifact word count is assumed."
+    },
+    {
+      "case": "Resumed implementation",
+      "unique_instruction_words": 3385,
+      "references": [
+        "ENGINEERING_HARNESS.md",
+        "docs/engineering/harness/COMMUNICATION.md",
+        "docs/engineering/harness/CONTINUE.md",
+        "docs/engineering/harness/EXECUTE_WORK.md#establish-the-execution-context",
+        "docs/engineering/harness/EXECUTE_WORK.md#read-this-when",
+        "docs/engineering/harness/EXECUTE_WORK.md#before-this-action",
+        "docs/engineering/harness/EXECUTE_WORK.md#implement-the-approved-scope",
+        "docs/engineering/harness/AUTHORITY.md#authority-from-work-approval",
+        "docs/engineering/ARTIFACT_AUTHORING.md#review-of-implemented-changes",
+        "docs/engineering/harness/RESULTS.md#report-a-lifecycle-result",
+        "docs/engineering/harness/RESULTS.md#read-this-when",
+        "docs/engineering/harness/RESULTS.md#before-this-action"
+      ],
+      "formal_artifact_reading": "Separate, variable input: selected records and governing artifacts returned by the evaluator; exact evidence/candidate records when the action requires them. No formal-artifact word count is assumed."
+    },
+    {
+      "case": "Verification decision",
+      "unique_instruction_words": 3952,
+      "references": [
+        "ENGINEERING_HARNESS.md",
+        "docs/engineering/harness/COMMUNICATION.md",
+        "docs/engineering/harness/CONTINUE.md",
+        "docs/engineering/harness/VERIFY_OUTCOME.md#obtain-the-humans-verification-decision",
+        "docs/engineering/harness/VERIFY_OUTCOME.md#read-this-when",
+        "docs/engineering/harness/VERIFY_OUTCOME.md#before-this-action",
+        "docs/engineering/harness/VERIFY_OUTCOME.md#record-the-verification-decision",
+        "docs/engineering/harness/AUTHORITY.md#decision-rights",
+        "docs/engineering/harness/AUTHORITY.md#delegation-and-separation",
+        "docs/engineering/harness/RESULTS.md#report-a-lifecycle-result",
+        "docs/engineering/harness/RESULTS.md#read-this-when",
+        "docs/engineering/harness/RESULTS.md#before-this-action"
+      ],
+      "formal_artifact_reading": "Separate, variable input: selected records and governing artifacts returned by the evaluator; exact evidence/candidate records when the action requires them. No formal-artifact word count is assumed."
+    },
+    {
+      "case": "PR preparation",
+      "unique_instruction_words": 4692,
+      "references": [
+        "ENGINEERING_HARNESS.md",
+        "docs/engineering/harness/COMMUNICATION.md",
+        "docs/engineering/harness/CONTINUE.md",
+        "docs/engineering/harness/DELIVER_RESULT.md#select-the-delivery-action",
+        "docs/engineering/harness/DELIVER_RESULT.md#read-this-when",
+        "docs/engineering/harness/DELIVER_RESULT.md#before-this-action",
+        "docs/engineering/harness/DELIVER_RESULT.md#prepare-the-delivery-package",
+        "docs/engineering/harness/PULL_REQUEST.md",
+        "docs/engineering/harness/AUTHORITY.md#decision-rights",
+        "docs/engineering/harness/DELIVER_RESULT.md#confirm-authority-for-the-external-action",
+        "docs/engineering/harness/RESULTS.md#report-a-lifecycle-result",
+        "docs/engineering/harness/RESULTS.md#read-this-when",
+        "docs/engineering/harness/RESULTS.md#before-this-action"
+      ],
+      "formal_artifact_reading": "Separate, variable input: selected records and governing artifacts returned by the evaluator; exact evidence/candidate records when the action requires them. No formal-artifact word count is assumed."
+    },
+    {
+      "case": "Blocker recovery",
+      "unique_instruction_words": 3680,
+      "references": [
+        "ENGINEERING_HARNESS.md",
+        "docs/engineering/harness/COMMUNICATION.md",
+        "docs/engineering/harness/CONTINUE.md",
+        "docs/engineering/harness/RESULTS.md",
+        "docs/engineering/harness/AUTHORITY.md#decision-rights"
+      ],
+      "formal_artifact_reading": "Separate, variable input: selected records and governing artifacts returned by the evaluator; exact evidence/candidate records when the action requires them. No formal-artifact word count is assumed."
+    },
+    {
+      "case": "Evaluator setup",
+      "unique_instruction_words": 2406,
+      "references": [
+        "ENGINEERING_HARNESS.md",
+        "docs/engineering/harness/COMMUNICATION.md",
+        "docs/engineering/harness/SETUP.md",
+        "docs/engineering/harness/RESULTS.md#report-a-lifecycle-result",
+        "docs/engineering/harness/RESULTS.md#read-this-when",
+        "docs/engineering/harness/RESULTS.md#before-this-action"
+      ],
+      "formal_artifact_reading": "Separate, variable input: selected records and governing artifacts returned by the evaluator; exact evidence/candidate records when the action requires them. No formal-artifact word count is assumed."
+    }
+  ],
+  "qualification": "Reading walks over candidate content, not native-host traces or a completed migration. File integrity and automatic injection are separate work-order checks."
+}

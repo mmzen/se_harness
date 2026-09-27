@@ -1,0 +1,2 @@
+WEX_SCALE artifacts=100 validation=0.095501s focus=0.215175s plan=0.176706s
+WEX_SCALE artifacts=500 validation=0.462851s focus=0.550732s plan=0.797160s

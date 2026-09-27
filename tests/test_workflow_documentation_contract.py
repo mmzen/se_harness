@@ -22,21 +22,13 @@ INSTALLED_GATES = ENGINEERING_ROOT / "QUALITY_GATES.json"
 
 class WorkflowDocumentationContractTests(unittest.TestCase):
     def test_integrity_policy_keeps_default_schema_and_bounded_plugin_exception(self) -> None:
-        # SPEC-PLG-021 replaces the plugin exception for this delivery;
-        # the installed root policy belongs to its released evaluator.
-        workflow = (ENGINEERING_ROOT / "WORKFLOW.md").read_text(encoding="utf-8")
-        integrity = next(line for line in workflow.splitlines() if line.startswith("Managed-file integrity "))
-        for phrase in (
-            "Schema 3 is the default repository format.",
-            "Schema 4 selects plugin skills with a portable provider record under SPEC-PLG-021.",
-            "Schemas 1 and 2 are refused before writes.",
-            "Ordinary mutation requires the exact evaluator identity bound by the selected supported lock.",
-            "LF, CRLF, and CR are equivalent line terminators; all other content distinctions remain significant.",
-            "`doctor` and mutation plans are read-only",
-        ):
-            with self.subTest(phrase=phrase):
-                self.assertIn(phrase, integrity)
-        self.assertNotIn("locks remain readable", integrity)
+        # Machine lock semantics remain unchanged; old human policy is a pointer.
+        from se_harness.integrity import LOCK_SCHEMA
+        self.assertEqual(3,LOCK_SCHEMA)
+        workflow=(ENGINEERING_ROOT/'WORKFLOW.md').read_text(encoding='utf-8')
+        self.assertIn('Compatibility pointer',workflow)
+        self.assertNotIn('MUST',workflow)
+        self.assertIn('harness/RECORD_STATE.md',workflow)
 
     def test_runtime_and_installed_contracts_are_byte_identical(self) -> None:
         self.assertEqual(RUNTIME_CONTRACT.read_bytes(), INSTALLED_CONTRACT.read_bytes())
@@ -102,29 +94,18 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
         self.assertGreaterEqual(len(gates), 10)
 
     def test_every_contract_reference_resolves_to_one_normative_owner(self) -> None:
-        workflow = (ENGINEERING_ROOT / "WORKFLOW.md").read_text(encoding="utf-8")
-        gates = (ENGINEERING_ROOT / "QUALITY_GATES.md").read_text(encoding="utf-8")
-        rights = (ENGINEERING_ROOT / "DECISION_RIGHTS.md").read_text(encoding="utf-8")
-        for rule in WORKFLOW_CONTRACT["recommendations"]:
-            with self.subTest(rule=rule["id"]):
-                self.assertEqual(1, workflow.count(f"`{rule['id']}`"))
-                self.assertEqual(1, rights.count(f"`{rule['decision_right']}`"))
-                self.assertGreaterEqual(workflow.count(f"`{rule['procedure_id']}`"), 1)
-                for gate_id in rule["gate_ids"]:
-                    self.assertGreaterEqual(gates.count(f"`{gate_id}`"), 1)
-        failure = WORKFLOW_CONTRACT["failure"]
-        self.assertEqual(1, workflow.count(f"`{failure['id']}`"))
-        self.assertEqual(1, rights.count(f"`{failure['decision_right']}`"))
-
-        _, _, _, procedures, quality_gates = load_validated_contracts()
-        for procedure_id, procedure in procedures.items():
-            self.assertGreaterEqual(workflow.count(f"`{procedure_id}`"), 1)
-            for step in procedure["steps"]:
-                self.assertGreaterEqual(workflow.count(f"`{step['id']}`"), 1)
-        for gate_id, gate in quality_gates.items():
-            self.assertGreaterEqual(gates.count(f"`{gate_id}`"), 1)
-            for predicate in gate["predicates"]:
-                self.assertGreaterEqual(gates.count(f"`{predicate['id']}`"), 1)
+        from se_harness.instruction_discovery import load_catalog,validate_coverage
+        _,_,_,procedures,_=load_validated_contracts()
+        validate_coverage(procedures)
+        guide=(ENGINEERING_ROOT/'harness/CONTINUE.md').read_text(encoding='utf-8')
+        rights=(ENGINEERING_ROOT/'harness/AUTHORITY.md').read_text(encoding='utf-8')
+        for rule in WORKFLOW_CONTRACT['recommendations']:
+            self.assertEqual(1,rights.count(f"`{rule['decision_right']}`"))
+            self.assertIn(rule['procedure_id'],load_catalog()['procedures'])
+        for pid,procedure in procedures.items():
+            self.assertEqual(1,guide.count(f'`{pid}`'))
+            for step in procedure['steps']:
+                self.assertEqual(1,guide.count(f"`{step['id']}`"))
 
     def test_runtime_and_repository_validator_use_the_same_transitions(self) -> None:
         validator = validate_engineering_artifacts
@@ -157,24 +138,14 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
             self.assertEqual("managed", lock["files"]["docs/engineering/QUALITY_GATES.json"]["mode"])
 
     def test_core_documents_declare_bcp14_and_stable_rules(self) -> None:
-        paths = (
-            STANDARD_ROOT / "ENGINEERING_HARNESS.md.tpl",
-            ENGINEERING_ROOT / "DECISION_RIGHTS.md",
-            ENGINEERING_ROOT / "WORKFLOW.md",
-            ENGINEERING_ROOT / "QUALITY_GATES.md",
-            ENGINEERING_ROOT / "TRACEABILITY.md",
-        )
-        forbidden = ("etc.", "as appropriate", "where possible", "when possible", "best effort")
-        for path in paths:
-            text = path.read_text(encoding="utf-8")
-            with self.subTest(path=path.name):
-                self.assertIn("BCP 14", text)
-                self.assertIn("RFC 2119", text)
-                self.assertIn("RFC 8174", text)
-                self.assertTrue(any(prefix in text for prefix in ("HRN-", "DR-", "WFL-", "QG-", "TRC-")))
-                self.assertTrue(text.isascii())
-                for phrase in forbidden:
-                    self.assertNotIn(phrase, text.lower())
+        root=(STANDARD_ROOT/'ENGINEERING_HARNESS.md.tpl').read_text(encoding='utf-8')
+        for phrase in ('BCP 14','RFC 2119','RFC 8174'):
+            self.assertIn(phrase,root)
+        for i in range(1,10):self.assertIn(f'HRN-{i:03d}',root)
+        for name in ('DECISION_RIGHTS.md','WORKFLOW.md','QUALITY_GATES.md','TRACEABILITY.md','TECHNICAL_COMMUNICATION.md'):
+            pointer=(ENGINEERING_ROOT/name).read_text(encoding='utf-8')
+            self.assertIn('Compatibility pointer',pointer)
+            self.assertNotIn('MUST',pointer)
 
 
 

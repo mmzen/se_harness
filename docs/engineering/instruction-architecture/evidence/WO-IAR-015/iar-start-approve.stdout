@@ -1,0 +1,1298 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "transition",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "ADR-IAR-011",
+    "artifacts": [
+      "ADR-IAR-011",
+      "ARCH-IAR-011",
+      "CAP-IAR-002",
+      "REQ-IAR-022",
+      "REQ-IAR-023",
+      "REQ-IAR-024",
+      "REQ-IAR-025",
+      "REQ-IAR-026",
+      "REQ-IAR-027",
+      "SPEC-IAR-014",
+      "VER-IAR-014",
+      "WO-IAR-013",
+      "WO-IAR-014",
+      "WO-IAR-015"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "transition",
+    "workflow_rule_id": "WFL-DEFINITION-COMPLETE",
+    "procedure_id": "PROC-DEFINITION-COMPLETE",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G2-ARCHITECTURE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G2-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:ADR-IAR-011"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G2-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G2-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "ADR-IAR-011"
+              }
+            ],
+            "message": "ADR-IAR-011 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G2-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:ADR-IAR-011"
+              }
+            ],
+            "message": "No open decision blocks ADR-IAR-011."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "ADR-IAR-011"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for ADR-IAR-011."
+          }
+        ]
+      },
+      {
+        "id": "QG-G2-ARCHITECTURE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G2-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:ARCH-IAR-011"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G2-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G2-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "ARCH-IAR-011"
+              }
+            ],
+            "message": "ARCH-IAR-011 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G2-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:ARCH-IAR-011"
+              }
+            ],
+            "message": "No open decision blocks ARCH-IAR-011."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "ARCH-IAR-011"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for ARCH-IAR-011."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:CAP-IAR-002"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "CAP-IAR-002"
+              }
+            ],
+            "message": "CAP-IAR-002 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:CAP-IAR-002"
+              }
+            ],
+            "message": "No open decision blocks CAP-IAR-002."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "CAP-IAR-002"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for CAP-IAR-002."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-IAR-022"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-IAR-022"
+              }
+            ],
+            "message": "REQ-IAR-022 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-IAR-022"
+              }
+            ],
+            "message": "No open decision blocks REQ-IAR-022."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-IAR-022"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-IAR-022."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-IAR-023"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-IAR-023"
+              }
+            ],
+            "message": "REQ-IAR-023 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-IAR-023"
+              }
+            ],
+            "message": "No open decision blocks REQ-IAR-023."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-IAR-023"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-IAR-023."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-IAR-024"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-IAR-024"
+              }
+            ],
+            "message": "REQ-IAR-024 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-IAR-024"
+              }
+            ],
+            "message": "No open decision blocks REQ-IAR-024."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-IAR-024"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-IAR-024."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-IAR-025"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-IAR-025"
+              }
+            ],
+            "message": "REQ-IAR-025 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-IAR-025"
+              }
+            ],
+            "message": "No open decision blocks REQ-IAR-025."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-IAR-025"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-IAR-025."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-IAR-026"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-IAR-026"
+              }
+            ],
+            "message": "REQ-IAR-026 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-IAR-026"
+              }
+            ],
+            "message": "No open decision blocks REQ-IAR-026."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-IAR-026"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-IAR-026."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:REQ-IAR-027"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-IAR-027"
+              }
+            ],
+            "message": "REQ-IAR-027 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:REQ-IAR-027"
+              }
+            ],
+            "message": "No open decision blocks REQ-IAR-027."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "REQ-IAR-027"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for REQ-IAR-027."
+          }
+        ]
+      },
+      {
+        "id": "QG-G2-ARCHITECTURE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G2-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:SPEC-IAR-014"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G2-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G2-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "SPEC-IAR-014"
+              }
+            ],
+            "message": "SPEC-IAR-014 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G2-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:SPEC-IAR-014"
+              }
+            ],
+            "message": "No open decision blocks SPEC-IAR-014."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "SPEC-IAR-014"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for SPEC-IAR-014."
+          }
+        ]
+      },
+      {
+        "id": "QG-G1-DEFINITION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G1-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:VER-IAR-014"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G1-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G1-AUTHORING",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "VER-IAR-014"
+              }
+            ],
+            "message": "VER-IAR-014 has no unfinished content or unresolved decision text."
+          },
+          {
+            "id": "QGP-G1-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:VER-IAR-014"
+              }
+            ],
+            "message": "No open decision blocks VER-IAR-014."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "VER-IAR-014"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for VER-IAR-014."
+          }
+        ]
+      },
+      {
+        "id": "QG-G3-WORK-AUTHORIZATION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G3-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-IAR-013"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G3-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G3-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-IAR-013"
+              }
+            ],
+            "message": "No open decision blocks WO-IAR-013."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-IAR-013"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for WO-IAR-013."
+          },
+          {
+            "id": "QGS-ASSURANCE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-IAR-013"
+              }
+            ],
+            "message": "WO-IAR-013 classifies commit-bound verification as required."
+          }
+        ]
+      },
+      {
+        "id": "QG-G3-WORK-AUTHORIZATION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G3-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-IAR-014"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G3-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G3-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-IAR-014"
+              }
+            ],
+            "message": "No open decision blocks WO-IAR-014."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-IAR-014"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for WO-IAR-014."
+          },
+          {
+            "id": "QGS-ASSURANCE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-IAR-014"
+              }
+            ],
+            "message": "WO-IAR-014 classifies commit-bound verification as required."
+          }
+        ]
+      },
+      {
+        "id": "QG-G3-WORK-AUTHORIZATION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G3-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-IAR-015"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G3-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G3-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-IAR-015"
+              }
+            ],
+            "message": "No open decision blocks WO-IAR-015."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-IAR-015"
+              }
+            ],
+            "message": "draft -> approved is a declared lifecycle edge for WO-IAR-015."
+          },
+          {
+            "id": "QGS-ASSURANCE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-IAR-015"
+              }
+            ],
+            "message": "WO-IAR-015 classifies commit-bound verification as required."
+          }
+        ]
+      }
+    ]
+  },
+  "procedure": {
+    "id": "PROC-DEFINITION-COMPLETE",
+    "current_step": "STEP-DEFINITION-COMPLETE",
+    "steps": [
+      {
+        "id": "STEP-DEFINITION-COMPLETE",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G1-DEFINITION",
+          "QG-G2-ARCHITECTURE"
+        ],
+        "effects": [
+          "Permits a decision on ADR-IAR-011 only."
+        ],
+        "non_effects": [
+          "Related definitions remain unchanged unless separately selected."
+        ],
+        "decision_right": "DR-DEFINITION-DECIDE",
+        "role": "definition-owner",
+        "artifact": "ADR-IAR-011",
+        "decision": "whether the selected definition is complete",
+        "outcomes": [
+          "implemented",
+          "reject",
+          "stop"
+        ],
+        "response": "Decide the selected definition ADR-IAR-011 only."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "ADR-IAR-011",
+        "status": "draft"
+      },
+      {
+        "id": "ARCH-IAR-011",
+        "status": "draft"
+      },
+      {
+        "id": "CAP-IAR-002",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-IAR-022",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-IAR-023",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-IAR-024",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-IAR-025",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-IAR-026",
+        "status": "draft"
+      },
+      {
+        "id": "REQ-IAR-027",
+        "status": "draft"
+      },
+      {
+        "id": "SPEC-IAR-014",
+        "status": "draft"
+      },
+      {
+        "id": "VER-IAR-014",
+        "status": "draft"
+      },
+      {
+        "id": "WO-IAR-013",
+        "status": "draft"
+      },
+      {
+        "id": "WO-IAR-014",
+        "status": "draft"
+      },
+      {
+        "id": "WO-IAR-015",
+        "status": "draft"
+      }
+    ],
+    "after": [
+      {
+        "id": "ADR-IAR-011",
+        "status": "approved"
+      },
+      {
+        "id": "ARCH-IAR-011",
+        "status": "approved"
+      },
+      {
+        "id": "CAP-IAR-002",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-IAR-022",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-IAR-023",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-IAR-024",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-IAR-025",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-IAR-026",
+        "status": "approved"
+      },
+      {
+        "id": "REQ-IAR-027",
+        "status": "approved"
+      },
+      {
+        "id": "SPEC-IAR-014",
+        "status": "approved"
+      },
+      {
+        "id": "VER-IAR-014",
+        "status": "approved"
+      },
+      {
+        "id": "WO-IAR-013",
+        "status": "approved"
+      },
+      {
+        "id": "WO-IAR-014",
+        "status": "approved"
+      },
+      {
+        "id": "WO-IAR-015",
+        "status": "approved"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "ADR-IAR-011",
+        "path": "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-011.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "ARCH-IAR-011",
+        "path": "docs/engineering/instruction-architecture/architecture/ARCH-IAR-011.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "CAP-IAR-002",
+        "path": "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-IAR-022",
+        "path": "docs/engineering/instruction-architecture/requirements/REQ-IAR-022.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-IAR-023",
+        "path": "docs/engineering/instruction-architecture/requirements/REQ-IAR-023.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-IAR-024",
+        "path": "docs/engineering/instruction-architecture/requirements/REQ-IAR-024.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-IAR-025",
+        "path": "docs/engineering/instruction-architecture/requirements/REQ-IAR-025.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-IAR-026",
+        "path": "docs/engineering/instruction-architecture/requirements/REQ-IAR-026.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "REQ-IAR-027",
+        "path": "docs/engineering/instruction-architecture/requirements/REQ-IAR-027.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "SPEC-IAR-014",
+        "path": "docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "VER-IAR-014",
+        "path": "docs/engineering/instruction-architecture/verification/VER-IAR-014.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "WO-IAR-013",
+        "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-013.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "WO-IAR-014",
+        "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-014.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      },
+      {
+        "id": "WO-IAR-015",
+        "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-015.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Applied 14 explicit lifecycle transition(s) atomically."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "ADR-IAR-011 is approved."
+    ],
+    "decision_required": {
+      "decision_right": "DR-DEFINITION-DECIDE",
+      "role": "definition-owner",
+      "artifact": "ADR-IAR-011",
+      "decision": "whether the selected definition is complete",
+      "outcomes": [
+        "implemented",
+        "reject",
+        "stop"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-DEFINITION-COMPLETE",
+      "step_id": "STEP-DEFINITION-COMPLETE",
+      "action": "whether the selected definition is complete"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Decide the selected definition ADR-IAR-011 only."
+    },
+    "alternatives": []
+  },
+  "result_sha256": "00ef10bd737e3853f8c8ee4d3b6f4cd570d338397e5cb1cfd2e60641c07ecd4a"
+}

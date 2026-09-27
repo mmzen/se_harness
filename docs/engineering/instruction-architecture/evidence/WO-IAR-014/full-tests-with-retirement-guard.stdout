@@ -1,0 +1,366 @@
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-5um1gt2m\private\verity-plane\evaluator\Scripts\python.exe
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-5um1gt2m\private\verity-plane\evaluator\Scripts\python.exe
+WEX_SCALE artifacts=100 validation=0.136680s focus=0.330483s plan=0.279573s
+WEX_SCALE artifacts=500 validation=0.670128s focus=0.849754s plan=1.220979s
+WEX_SCALE artifacts=1000 validation=1.307695s focus=1.531696s plan=2.364948s
+docs/notes/diagnostic-codes.md matches the source
+======================================================================
+FAIL: test_standard_repository_lifecycle.StandardRepositoryLifecycleTests.test_standard_upgrade_detects_a_customized_technical_communication_policy
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_standard_repository_lifecycle.py", line 166, in test_standard_upgrade_detects_a_customized_technical_communication_policy
+    self.assertEqual("unchanged", action)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'unchanged' != 'customized'
+- unchanged
++ customized
+
+
+======================================================================
+FAIL: test_harnessctl.HarnessCtlTests.test_adopt_preserves_existing_content_and_labels_observations
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_harnessctl.py", line 231, in test_adopt_preserves_existing_content_and_labels_observations
+    self.assertIn(BEGIN_MARKER, agents)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '<!-- se-harness:begin -->' not found in '# Existing agent rules\n'
+
+======================================================================
+FAIL: test_harnessctl.HarnessCtlTests.test_init_installs_complete_valid_harness_and_dashboard
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_harnessctl.py", line 196, in test_init_installs_complete_valid_harness_and_dashboard
+    self.assertTrue((target / relative).is_file(), relative)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : AGENTS.md
+
+======================================================================
+FAIL: test_harnessctl.HarnessCtlTests.test_invalid_project_name_and_malformed_markers_fail_closed
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_harnessctl.py", line 370, in test_invalid_project_name_and_malformed_markers_fail_closed
+    self.assertEqual(2, code)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^
+AssertionError: 2 != 0
+
+======================================================================
+FAIL: test_harnessctl.HarnessCtlTests.test_upgrade_keeps_customized_guidance_and_replaces_only_selected_files
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_harnessctl.py", line 350, in test_upgrade_keeps_customized_guidance_and_replaces_only_selected_files
+    self.assertEqual(0, invoke("upgrade", str(target), "--apply")[0])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_architecture_traceability.ArchitectureTraceabilityTests.test_managed_authoring_guidance_uses_typed_relations (path='docs/engineering/TRACEABILITY.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_architecture_traceability.py", line 340, in test_managed_authoring_guidance_uses_typed_relations
+    self.assertIn(phrase, content)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: '`ARCH.addresses -> REQ`' not found in '# Traceability\n\nCompatibility pointer. The current instructions are in the following files;\nthis file contains no additional policy. Read only the section selected by\nthe root router or the evaluator result.\n\n- [ARTIFACTS.md](harness/ARTIFACTS.md)\n- [DEFINITION_LINKS.md](harness/DEFINITION_LINKS.md)\n- [WORK_AND_EVIDENCE.md](harness/WORK_AND_EVIDENCE.md)\n'
+
+======================================================================
+FAIL: test_architecture_traceability.ArchitectureTraceabilityTests.test_managed_authoring_guidance_uses_typed_relations (path='docs/engineering/QUALITY_GATES.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_architecture_traceability.py", line 340, in test_managed_authoring_guidance_uses_typed_relations
+    self.assertIn(phrase, content)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: 'architecturally significant requirement drivers' not found in '# Quality gates\n\nCompatibility pointer. The current instructions are in the following files;\nthis file contains no additional policy. Read only the section selected by\nthe root router or the evaluator result.\n\n- [RESULTS.md](harness/RESULTS.md)\n'
+
+======================================================================
+FAIL: test_workflow_execution.AgentDirectiveSurfaceTests.test_operating_card_template_equals_its_contract_rendering_and_stays_bounded
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_workflow_execution.py", line 1056, in test_operating_card_template_equals_its_contract_rendering_and_stays_bounded
+    self.assertEqual([b"## Stop when", b"## Traps"], re.findall(rb"^## .*$", rendered, flags=re.MULTILINE))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [b'## Stop when', b'## Traps'] != []
+
+First list contains 2 additional elements.
+First extra element 0:
+b'## Stop when'
+
+- [b'## Stop when', b'## Traps']
++ []
+
+======================================================================
+FAIL: test_agentic_execution.SkillContractTests.test_canonical_harness_orient_contract_and_manifest_validate
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_agentic_execution.py", line 80, in test_canonical_harness_orient_contract_and_manifest_validate
+    self.assertEqual(phase5["portable_core"]["current"]["files"], manifest.value["files"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [{'mo[50 chars]6': '0cf64a75e7df251d44bc9f362c31cdb606ed85821[295 chars]27'}] != [{'mo[50 chars]6': '6368a89f46174805f0700d9c100cf2094c212210e[295 chars]27'}]
+
+First differing element 0:
+{'mod[49 chars]6': '0cf64a75e7df251d44bc9f362c31cdb606ed85821[20 chars]3ca'}
+{'mod[49 chars]6': '6368a89f46174805f0700d9c100cf2094c212210e[20 chars]dfc'}
+
+  [{'mode': 'utf8-text-lf-v1',
+    'path': 'SKILL.md',
+-   'sha256': '0cf64a75e7df251d44bc9f362c31cdb606ed8582165c0309c0984c5743b253ca'},
++   'sha256': '6368a89f46174805f0700d9c100cf2094c212210ef88f63dfff3d276971dbdfc'},
+   {'mode': 'utf8-text-lf-v1',
+    'path': 'scripts/orient.py',
+-   'sha256': 'e99c622d74a329d6748b0db25b230b5c53752fe16617eeb0d089333ef19dec56'},
++   'sha256': '4e0f37c799b2a8da2a18d7ebb56e833ea3fd0ded72365c10277bd9cbd699e78f'},
+   {'mode': 'utf8-text-lf-v1',
+    'path': 'skill-contract.json',
+    'sha256': '8e51bcc50b00edbd834a443f134835e04b655ccfaf02a3953c03a45287386627'}]
+
+======================================================================
+FAIL: test_agentic_execution.SkillContractTests.test_retained_phase3_vectors_are_preserved_and_orientation_is_byte_exact
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_agentic_execution.py", line 126, in test_retained_phase3_vectors_are_preserved_and_orientation_is_byte_exact
+    self.assertEqual(expected["manifest_sha256"], build_skill_manifest(SKILL_ROOT).sha256)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '0ce5d5a1a75537da853aebe7b41d4920c6bbc29073ac83cc61d2a4cd1aa02328' != 'ca240893e2ae532d9ccad28a79e0d0caa345fec2dbcb23960cd4b0a6335b56e0'
+- 0ce5d5a1a75537da853aebe7b41d4920c6bbc29073ac83cc61d2a4cd1aa02328
++ ca240893e2ae532d9ccad28a79e0d0caa345fec2dbcb23960cd4b0a6335b56e0
+
+
+======================================================================
+FAIL: test_adr_applicability.AdrApplicabilityTests.test_managed_authoring_guidance_is_distributed (path='docs/engineering/WORKFLOW.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_adr_applicability.py", line 300, in test_managed_authoring_guidance_is_distributed
+    self.assertIn(phrase, content)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: 'decision applicability' not found in '# Workflow\n\nCompatibility pointer. The current instructions are in the following files;\nthis file contains no additional policy. Read only the section selected by\nthe root router or the evaluator result.\n\n- [CONTINUE.md](harness/CONTINUE.md)\n- [RECORD_STATE.md](harness/RECORD_STATE.md)\n- [RESULTS.md](harness/RESULTS.md)\n'
+
+======================================================================
+FAIL: test_adr_applicability.AdrApplicabilityTests.test_managed_authoring_guidance_is_distributed (path='docs/engineering/DECISION_RIGHTS.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_adr_applicability.py", line 300, in test_managed_authoring_guidance_is_distributed
+    self.assertIn(phrase, content)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: 'MUST NOT approve its own architecture decision assessment' not found in '# Decision rights\n\nCompatibility pointer. The current instructions are in the following files;\nthis file contains no additional policy. Read only the section selected by\nthe root router or the evaluator result.\n\n- [AUTHORITY.md](harness/AUTHORITY.md)\n'
+
+======================================================================
+FAIL: test_adr_applicability.AdrApplicabilityTests.test_managed_authoring_guidance_is_distributed (path='docs/engineering/QUALITY_GATES.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_adr_applicability.py", line 300, in test_managed_authoring_guidance_is_distributed
+    self.assertIn(phrase, content)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: 'each `adr_required` architecture has active deciding ADR coverage' not found in '# Quality gates\n\nCompatibility pointer. The current instructions are in the following files;\nthis file contains no additional policy. Read only the section selected by\nthe root router or the evaluator result.\n\n- [RESULTS.md](harness/RESULTS.md)\n'
+
+======================================================================
+FAIL: test_adr_applicability.AdrApplicabilityTests.test_managed_authoring_guidance_is_distributed (path='docs/engineering/TRACEABILITY.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_adr_applicability.py", line 300, in test_managed_authoring_guidance_is_distributed
+    self.assertIn(phrase, content)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: '`ADR.decides -> ARCH` establishes coverage' not found in '# Traceability\n\nCompatibility pointer. The current instructions are in the following files;\nthis file contains no additional policy. Read only the section selected by\nthe root router or the evaluator result.\n\n- [ARTIFACTS.md](harness/ARTIFACTS.md)\n- [DEFINITION_LINKS.md](harness/DEFINITION_LINKS.md)\n- [WORK_AND_EVIDENCE.md](harness/WORK_AND_EVIDENCE.md)\n'
+
+======================================================================
+FAIL: test_decision_management.DecisionGateFamilyTests.test_contract_copies_carry_the_family_the_predicates_and_the_policy_rows
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_decision_management.py", line 561, in test_contract_copies_carry_the_family_the_predicates_and_the_policy_rows
+    self.assertIn("| `DR-DECISION-DISPOSE` |", (templates / "DECISION_RIGHTS.md").read_text(encoding="utf-8"))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '| `DR-DECISION-DISPOSE` |' not found in '# Decision rights\n\nCompatibility pointer. The current instructions are in the following files;\nthis file contains no additional policy. Read only the section selected by\nthe root router or the evaluator result.\n\n- [AUTHORITY.md](harness/AUTHORITY.md)\n'
+
+======================================================================
+FAIL: test_risk_management.RiskArtifactTests.test_layout_registry_templates_and_policy_route_the_risk_type
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_risk_management.py", line 176, in test_layout_registry_templates_and_policy_route_the_risk_type
+    self.assertIn(token, traceability)  # RSK-MGT-031
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '| `risk` | `RISK-` |' not found in '# Traceability\n\nCompatibility pointer. The current instructions are in the following files;\nthis file contains no additional policy. Read only the section selected by\nthe root router or the evaluator result.\n\n- [ARTIFACTS.md](harness/ARTIFACTS.md)\n- [DEFINITION_LINKS.md](harness/DEFINITION_LINKS.md)\n- [WORK_AND_EVIDENCE.md](harness/WORK_AND_EVIDENCE.md)\n'
+
+======================================================================
+FAIL: test_risk_management.RiskArtifactTests.test_the_workflow_contract_declares_the_family_with_exactly_the_state_model
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_risk_management.py", line 239, in test_the_workflow_contract_declares_the_family_with_exactly_the_state_model
+    self.assertIn(row, workflow_policy)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '| Risk | `identified` | `raised`, `withdrawn` |' not found in '# Workflow\n\nCompatibility pointer. The current instructions are in the following files;\nthis file contains no additional policy. Read only the section selected by\nthe root router or the evaluator result.\n\n- [CONTINUE.md](harness/CONTINUE.md)\n- [RECORD_STATE.md](harness/RECORD_STATE.md)\n- [RESULTS.md](harness/RESULTS.md)\n'
+
+======================================================================
+FAIL: test_validation_taxonomy.ValidationTaxonomyTests.test_policy_and_operator_reference_document_the_machine_vocabulary
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_validation_taxonomy.py", line 56, in test_policy_and_operator_reference_document_the_machine_vocabulary
+    self.assertIn(f"`{plane}`", guide)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '`structure`' not found in '# Quality gates\n\nCompatibility pointer. The current instructions are in the following files;\nthis file contains no additional policy. Read only the section selected by\nthe root router or the evaluator result.\n\n- [RESULTS.md](harness/RESULTS.md)\n'
+
+======================================================================
+FAIL: test_artifact_authoring_policy.ArtifactAuthoringPolicyTests.test_installed_policy_is_routed_and_supplies_the_creation_checklist
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_artifact_authoring_policy.py", line 62, in test_installed_policy_is_routed_and_supplies_the_creation_checklist
+    self.assertIn("docs/engineering/ARTIFACT_AUTHORING.md", router)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'docs/engineering/ARTIFACT_AUTHORING.md' not found in "# Engineering Harness for Fixture\n\nThis repository uses SE Harness 0.19.0.\n\nThe keywords **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,\n**SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and\n**OPTIONAL** in this document are to be interpreted as described in BCP 14\n(RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.\n\n## Goals\n\nThis harness makes engineering authority explicit, limits execution to approved\nscope, binds assurance and release claims to exact evidence, and gives every\nactor the same deterministic next step. These goals are informative; the rules\nbelow and the installed evaluator's machine policy are normative.\n\n## Policy / Global invariants\n\n### HRN-001 — Formal authority\n\nFormal artifacts under `docs/engineering/` are the authoritative\nrecords of product intent, requirements, architecture decisions, work authority,\nverification contracts, risks, assurance decisions, and release decisions. Code,\ntests, commits, tickets, dashboards, and conversation text are evidence or\nobservations; they MUST NOT substitute for formal authority.\n\n### HRN-002 — Change control\n\nFormal artifacts MAY be drafted, reviewed, and validated before a work order\nis approved. This preparation MUST NOT authorize implementation.\n\nAccepted formal artifacts MUST define the change before implementation starts.\nOne or more approved work orders MUST authorize implementation. A valid\nrepository-owned exception MAY remove the requirement for formal definitions,\nwork orders, or both. It MUST NOT change lifecycle rules or waive required gates.\n\nAny required work orders MUST pass the required validation checks before\nimplementation starts. The result MUST be verified against the accepted\ndefinitions that apply. All required verification checks remain required.\n\n### HRN-003 — Lifecycle authority\n\nArtifacts and the work itself MUST follow a strict lifecycle.\n`harnessctl` MUST be the only source of truth for lifecycle states, allowed\nstate changes and the next action. Actors MUST use its results when reporting\nor taking lifecycle actions. Agent text, prompts, Skills, dashboards, and\nrepository notes MUST NOT work out their own answers or change those results.\n\n### HRN-004 — Bounded scope\n\nAn actor MUST select one clearly defined set of artifacts before\nacting. This set defines the scope. Findings from unrelated work orders MUST\nNOT be presented as findings about the selected scope. An issue outside the\nscope MAY be reported only as an observation that has not been assessed, with\nits artifact ID. It MUST NOT block the selected work unless a recorded\ndependency or gate connects it to that work.\n\n### HRN-005 — Explicit decisions\n\nEach decision MUST identify the accountable human or agent and the authority\nused. Being a human or an agent does not by itself authorize an action.\n\nPreparing, inspecting, validating, or collecting evidence MUST NOT\ncount as an authorized decision. A state change requires the exact artifact,\nthe intended state, and the accountable actor. The required gates MUST pass,\nand an explicit state transition MUST be applied.\n\n### HRN-006 — Targeted transitions\n\nA state transition MUST change only the artifacts explicitly\nselected by the accountable actor. The states of related artifacts MUST NOT\nchange just because they are linked.\n\n### HRN-007 — Repository ownership\n\n`AGENTS.md` MUST belong entirely to the repository owner and contain\nno harness instructions. Repository-specific facts and commands belong in\nthat file. The harness MUST NOT generate, track, or require that owner content.\n\n### HRN-008 — Rule precedence\n\nRepository instructions MAY add stricter rules. They MUST NOT grant authority\nfor product, engineering, assurance, release, or external actions. They MUST\nNOT remove, weaken, or contradict the harness rules.\n\nRepository owners MAY define exceptions through the supported exception\ncapability described in [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability). This changes only the obligations the capability permits\nthem to configure: whether formal definitions and work orders are required.\nLifecycle rules and required gates remain fixed. Repository prose alone MUST\nNOT waive a harness rule.\n\n### HRN-009 — Required checks\n\nManaged-file integrity checks, artifact graph checks, scope checks, and required\ngates MUST all pass before the affected action can proceed. Warnings MUST NOT\ncount as approval or acceptance of a risk.\n\n## Scope of these rules\n\nThe bounded-scope, lifecycle-reporting, and stop rules apply when a human or\nagent performs or reports a governed lifecycle action. Reading, analysis, and\nanswering questions need no work order when they change no lifecycle state,\nexercise no decision right, and present no finding as a formal verdict.\n\nPreparing a proposed artifact package does not require an approved work\norder. A human or agent MAY create and edit drafts, record risks and open\nquestions, review the proposed content, and validate the package. These\nactions MUST follow the authoring procedure and required checks. They MUST\nNOT change an accepted definition, approve a work order, or start\nimplementation. Decisions and lifecycle transitions follow their separate\nauthority rules.\n\nBefore a lifecycle action, select the exact artifacts and read the governing\nfiles returned by the evaluator. A checkpoint-free `check` reports lifecycle\ncontext. It does not evaluate checkpoint gates or authorize work.\n\n## Using these instructions\n\nA human is a person; an agent is an automated system acting under granted\nauthority. Approval, verification acceptance and release decisions require an\nauthorized human. Agents may apply a matching recorded decision. Resolve the\nidentity and right in [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights)\nbefore obtaining or applying a decision.\n\n`harnessctl` means this repository's selected released evaluator, invoked through\nits absolute Python path with `-I -m se_harness`, from outside the checkout.\n`REPO` is the absolute repository path. Replace uppercase placeholders with actual\ninputs. Keep each `ID=value` assignment as one argument. If the executable or\nidentity is unknown, use [SETUP.md](docs/engineering/harness/SETUP.md#procedure).\n\nTransient working material stays in the conversation or temporary storage outside\nthe repository, at the agent's discretion. It has no formal authority and SHALL\nNOT be persisted in the repository. This rule covers working notes, not formal\nartifacts or evidence required at a contract's prescribed durable location.\n\n## Read by task\n\nRead the selected file's entry conditions and current step. Read its required\nreferences before the action they govern. A link alone does not require reading\nits target. Do not load all procedures or future stages in advance.\n\n| Current need | Read first |\n| --- | --- |\n| Discuss or explain without a lifecycle action | Only the source sections needed to answer. |\n| Define a new change | [DEFINE_CHANGE.md](docs/engineering/harness/DEFINE_CHANGE.md#read-this-when) |\n| Continue selected work or recover after compaction | [CONTINUE.md](docs/engineering/harness/CONTINUE.md#read-this-when) |\n| Resolve decision authority | [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights) |\n| Report a lifecycle result, failed check or uncertain write | [RESULTS.md](docs/engineering/harness/RESULTS.md#read-this-when) |\n| Assess an owner-defined exception | [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability) |\n| Prepare or repair the evaluator | [SETUP.md](docs/engineering/harness/SETUP.md#read-this-when) |\n\nBefore the first eligible English explanation in a fresh context, read\n[COMMUNICATION.md](docs/engineering/harness/COMMUNICATION.md#communication).\nReuse it while retained in context. This applies to ordinary answers too.\nMachine WORKFLOW.json and QUALITY_GATES.json are evaluator inputs; read them only\nwhen changing or investigating their contracts. Use evaluator results in normal\nwork. Missing instructions or an unknown returned procedure stop the affected\naction: report the exact discovery gap in RESULTS.md.\n\n## After compaction\n\nRecover the repository, selected IDs, objective, existing authority and pending\naction from the summary. For governed work, obtain fresh context through\nCONTINUE.md and reread the current procedure and prerequisites lost from context.\nA summary preserves pointers and decisions, not current lifecycle truth. Inspect\nuncertain writes or external effects before retrying. Resume only unapplied work.\n"
+
+======================================================================
+FAIL: test_risk_management.BorrowedStopTests.test_no_predicate_or_gate_group_is_added_and_the_risk_edges_bind_none
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_risk_management.py", line 380, in test_no_predicate_or_gate_group_is_added_and_the_risk_edges_bind_none
+    self.assertIn("| risk | `raised`, `accepted`, `avoided`, `mitigating`, `mitigated`, `withdrawn` | none | `QGS-EDGE` |",
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                  (TEMPLATES / "QUALITY_GATES.md").read_text(encoding="utf-8"))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '| risk | `raised`, `accepted`, `avoided`, `mitigating`, `mitigated`, `withdrawn` | none | `QGS-EDGE` |' not found in '# Quality gates\n\nCompatibility pointer. The current instructions are in the following files;\nthis file contains no additional policy. Read only the section selected by\nthe root router or the evaluator result.\n\n- [RESULTS.md](harness/RESULTS.md)\n'
+
+======================================================================
+FAIL: test_workflow_execution.CheckProjectionTests.test_nothing_names_focus_but_the_note_that_records_its_removal
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_workflow_execution.py", line 1644, in test_nothing_names_focus_but_the_note_that_records_its_removal
+    self.assertIn("`WFL-003` - `harnessctl check` and `harnessctl transition` MUST select the first", workflow_md)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '`WFL-003` - `harnessctl check` and `harnessctl transition` MUST select the first' not found in '# Workflow\n\nCompatibility pointer. The current instructions are in the following files;\nthis file contains no additional policy. Read only the section selected by\nthe root router or the evaluator result.\n\n- [CONTINUE.md](harness/CONTINUE.md)\n- [RECORD_STATE.md](harness/RECORD_STATE.md)\n- [RESULTS.md](harness/RESULTS.md)\n'
+
+======================================================================
+ERROR: test_harnessctl.HarnessCtlTests.test_doctor_detects_missing_claude_import_and_ignores_the_retired_path
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_harnessctl.py", line 511, in test_doctor_detects_missing_claude_import_and_ignores_the_retired_path
+    claude_path.write_text(claude_path.read_text(encoding="utf-8").replace("@AGENTS.md", "Claude rules only."), encoding="utf-8")
+                           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 787, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\mathi\\AppData\\Local\\Temp\\tmptf9qk3r8\\doctor-instructions\\CLAUDE.md'
+
+======================================================================
+ERROR: test_harnessctl.HarnessCtlTests.test_doctor_hashes_only_the_managed_fragment
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_harnessctl.py", line 478, in test_doctor_hashes_only_the_managed_fragment
+    agents.write_text("# Owner rules\n\n" + agents.read_text(encoding="utf-8") + "\nOwner tail.\n", encoding="utf-8")
+                                            ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 787, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\mathi\\AppData\\Local\\Temp\\tmplkagz8ym\\fragment-doctor\\AGENTS.md'
+
+======================================================================
+ERROR: test_harnessctl.HarnessCtlTests.test_lock_contains_hashes_without_generated_adoption_report
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_harnessctl.py", line 588, in test_lock_contains_hashes_without_generated_adoption_report
+    self.assertEqual("fragment", lock["files"]["CLAUDE.md"]["mode"])
+                                 ~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'CLAUDE.md'
+
+======================================================================
+ERROR: test_harnessctl.HarnessCtlTests.test_upgrade_adds_cross_agent_files_without_reviving_the_retired_scaffold
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_harnessctl.py", line 387, in test_upgrade_adds_cross_agent_files_without_reviving_the_retired_scaffold
+    claude_path.unlink()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 1042, in unlink
+    os.unlink(self)
+    ~~~~~~~~~^^^^^^
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\mathi\\AppData\\Local\\Temp\\tmpj2ayc4xy\\older-installation\\CLAUDE.md'
+
+======================================================================
+ERROR: test_harnessctl.HarnessCtlTests.test_upgrade_preserves_claude_customization_and_owner_content_at_the_retired_path
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_harnessctl.py", line 409, in test_upgrade_preserves_claude_customization_and_owner_content_at_the_retired_path
+    claude_path.write_text(claude_path.read_text(encoding="utf-8") + "\n## Claude-specific\nKeep this.\n", encoding="utf-8")
+                           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 787, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\mathi\\AppData\\Local\\Temp\\tmpeaeiw287\\repository-owned-context\\CLAUDE.md'
+
+======================================================================
+ERROR: test_revision_provenance.RevisionCliTests.test_refresh_refuses_changed_code_governing_input_or_evidence (path='AGENTS.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_revision_provenance.py", line 1189, in test_refresh_refuses_changed_code_governing_input_or_evidence
+    write(path, path.read_text(encoding="utf-8") + "\nChanged relevant input.\n")
+                ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 787, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\mathi\\AppData\\Local\\Temp\\tmpd810ecip\\repository\\AGENTS.md'
+
+======================================================================
+ERROR: test_retired_surface.RetiredSurfaceTests.test_retired_phrases_are_absent_from_their_files
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_retired_surface.py", line 312, in test_retired_phrases_are_absent_from_their_files
+    text = (ROOT / relative).read_text(encoding="utf-8")
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 787, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\templates\\repository\\standard\\AGENTS.md.fragment'
+
+======================================================================
+ERROR: test_artifact_catalog.ArtifactCatalogTests.test_released_policy_copies_match_with_declared_candidate_exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_artifact_catalog.py", line 131, in test_released_policy_copies_match_with_declared_candidate_exceptions
+    current = next(line for line in candidate_traceability.splitlines() if line.startswith(prefix))
+StopIteration
+
+======================================================================
+ERROR: test_managed_template_texts.RetiredRelationRuleTests.test_the_rule_keeps_its_installation_sentence_and_its_neighbours
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_managed_template_texts.py", line 46, in setUp
+    self.rule = _paragraph(self.text, "`TRC-008`")
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_managed_template_texts.py", line 29, in _paragraph
+    start = text.index(opening)
+ValueError: substring not found
+
+======================================================================
+ERROR: test_managed_template_texts.RetiredRelationRuleTests.test_the_rule_names_the_relation_retired_and_refused
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_managed_template_texts.py", line 46, in setUp
+    self.rule = _paragraph(self.text, "`TRC-008`")
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_managed_template_texts.py", line 29, in _paragraph
+    start = text.index(opening)
+ValueError: substring not found
+
+======================================================================
+ERROR: test_managed_template_texts.RetiredRelationRuleTests.test_the_rule_names_the_typed_pair_and_promises_no_migration
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_managed_template_texts.py", line 46, in setUp
+    self.rule = _paragraph(self.text, "`TRC-008`")
+                ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_managed_template_texts.py", line 29, in _paragraph
+    start = text.index(opening)
+ValueError: substring not found
+
+----------------------------------------------------------------------
+Ran 1118 tests in 146.307s (175 classes, 6 workers)
+
+FAILED (failures=21, errors=11, skipped=16)

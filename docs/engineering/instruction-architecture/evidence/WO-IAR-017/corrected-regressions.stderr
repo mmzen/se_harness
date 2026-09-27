@@ -1,0 +1,56 @@
+........................s.....................s.s.......................................EEE.E.E.
+======================================================================
+ERROR: test_standard_upgrade_removes_a_leaving_set_fragment_block_preserving_owner_content (tests.test_standard_repository_lifecycle.StandardRepositoryLifecycleTests.test_standard_upgrade_removes_a_leaving_set_fragment_block_preserving_owner_content)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_standard_repository_lifecycle.py", line 307, in test_standard_upgrade_removes_a_leaving_set_fragment_block_preserving_owner_content
+    apply_changes(target, changes, old_lock, allow_updates=True)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\se_harness\installer.py", line 576, in apply_changes
+    raise HarnessError("upgrade plan or installed root changed before apply; no files were written")
+se_harness.installer.HarnessError: upgrade plan or installed root changed before apply; no files were written
+
+======================================================================
+ERROR: test_standard_upgrade_removes_managed_files_that_left_the_managed_set (tests.test_standard_repository_lifecycle.StandardRepositoryLifecycleTests.test_standard_upgrade_removes_managed_files_that_left_the_managed_set)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_standard_repository_lifecycle.py", line 222, in test_standard_upgrade_removes_managed_files_that_left_the_managed_set
+    apply_changes(target, changes, old_lock, allow_updates=True)
+                                   ^^^^^^^^
+NameError: name 'old_lock' is not defined
+
+======================================================================
+ERROR: test_standard_upgrade_reports_a_customized_leaving_set_copy_without_writing (tests.test_standard_repository_lifecycle.StandardRepositoryLifecycleTests.test_standard_upgrade_reports_a_customized_leaving_set_copy_without_writing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_standard_repository_lifecycle.py", line 252, in test_standard_upgrade_reports_a_customized_leaving_set_copy_without_writing
+    apply_changes(target, changes, old_lock, allow_updates=True)
+                                   ^^^^^^^^
+NameError: name 'old_lock' is not defined
+
+======================================================================
+ERROR: test_standard_upgrade_restores_every_file_after_interrupted_apply (tests.test_standard_repository_lifecycle.StandardRepositoryLifecycleTests.test_standard_upgrade_restores_every_file_after_interrupted_apply)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_standard_repository_lifecycle.py", line 668, in test_standard_upgrade_restores_every_file_after_interrupted_apply
+    apply_changes(target, changes, old_lock, allow_updates=True)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\se_harness\installer.py", line 576, in apply_changes
+    raise HarnessError("upgrade plan or installed root changed before apply; no files were written")
+se_harness.installer.HarnessError: upgrade plan or installed root changed before apply; no files were written
+
+======================================================================
+ERROR: test_standard_upgrade_retires_seed_and_missing_leaving_set_entries_silently (tests.test_standard_repository_lifecycle.StandardRepositoryLifecycleTests.test_standard_upgrade_retires_seed_and_missing_leaving_set_entries_silently)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_standard_repository_lifecycle.py", line 278, in test_standard_upgrade_retires_seed_and_missing_leaving_set_entries_silently
+    apply_changes(target, changes, old_lock, allow_updates=True)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\se_harness\installer.py", line 576, in apply_changes
+    raise HarnessError("upgrade plan or installed root changed before apply; no files were written")
+se_harness.installer.HarnessError: upgrade plan or installed root changed before apply; no files were written
+
+----------------------------------------------------------------------
+Ran 96 tests in 41.892s
+
+FAILED (errors=5, skipped=3)

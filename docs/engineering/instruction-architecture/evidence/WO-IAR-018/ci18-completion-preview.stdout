@@ -1,0 +1,238 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "transition",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-IAR-018",
+    "artifacts": [
+      "WO-IAR-018"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-011.md",
+      "docs/engineering/instruction-architecture/architecture/ARCH-IAR-011.md",
+      "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md",
+      "docs/engineering/instruction-architecture/decisions/DEC-IAR-001.md",
+      "docs/engineering/instruction-architecture/evidence/VREC-IAR-009-evaluator.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/",
+      "docs/engineering/instruction-architecture/proposals/progressive-discovery/APPLICABILITY.md",
+      "docs/engineering/instruction-architecture/proposals/progressive-discovery/discovery-split-review-source.md",
+      "docs/engineering/instruction-architecture/proposals/progressive-discovery/instruction-review-source.md",
+      "docs/engineering/instruction-architecture/proposals/progressive-discovery/README.md",
+      "docs/engineering/instruction-architecture/proposals/progressive-discovery/sources.json",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-022.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-023.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-024.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-025.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-026.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-027.md",
+      "docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md",
+      "docs/engineering/instruction-architecture/verification-records/VREC-IAR-009.md",
+      "docs/engineering/instruction-architecture/verification/VER-IAR-014.md",
+      "docs/engineering/instruction-architecture/work-orders/WO-IAR-018.md"
+    ],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "transition",
+    "workflow_rule_id": "WFL-WO-NO-VREC",
+    "procedure_id": "PROC-FOCUS-SELECTED",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4I-STATUS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-IAR-018"
+              }
+            ],
+            "message": "WO-IAR-018 status is in_progress."
+          },
+          {
+            "id": "QGP-G4I-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-IAR-018"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G4I-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G4I-SCOPE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-IAR-018:[execution_scope]"
+              }
+            ],
+            "message": "WO-IAR-018 has recorded execution approval for its 21 scope path(s)."
+          },
+          {
+            "id": "QGP-G4I-PREFLIGHT",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-IAR-018:review"
+              }
+            ],
+            "message": "Released-installation review preflight inputs are ready."
+          },
+          {
+            "id": "QGP-G4I-EVIDENCE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-IAR-018"
+              }
+            ],
+            "message": "Fresh retained evidence is bound at docs/engineering/instruction-architecture/evidence/WO-IAR-018/WO-IAR-018-handoff.md."
+          },
+          {
+            "id": "QGP-G4I-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-IAR-018"
+              }
+            ],
+            "message": "No open decision blocks WO-IAR-018."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-IAR-018"
+              }
+            ],
+            "message": "in_progress -> implemented is a declared lifecycle edge for WO-IAR-018."
+          }
+        ]
+      }
+    ]
+  },
+  "procedure": {
+    "id": "PROC-FOCUS-SELECTED",
+    "current_step": "STEP-FOCUS-SELECTED",
+    "steps": [
+      {
+        "id": "STEP-FOCUS-SELECTED",
+        "kind": "command",
+        "gate_ids": [],
+        "effects": [
+          "Projected selected state for WO-IAR-018."
+        ],
+        "non_effects": [
+          "Focus changes no lifecycle state."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-IAR-018"
+        ]
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-IAR-018",
+        "status": "in_progress"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-IAR-018",
+        "status": "implemented"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "WO-IAR-018",
+        "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-018.md",
+        "fields": [
+          "lifecycle_events",
+          "status",
+          "updated"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Planned 1 explicit lifecycle transition(s); no files were written."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-IAR-018 is implemented."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-FOCUS-SELECTED",
+      "step_id": "STEP-FOCUS-SELECTED",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "WO-IAR-018"
+      ]
+    },
+    "alternatives": []
+  },
+  "result_sha256": "1326b8a01d9d195e851bfe17f08a2d6cd4271092cab74b6c5e000e02ae196f0d"
+}

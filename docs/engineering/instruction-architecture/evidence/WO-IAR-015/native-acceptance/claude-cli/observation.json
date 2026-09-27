@@ -1,0 +1,19 @@
+{
+  "kind": "transient-demo-observation",
+  "host": "Claude Code",
+  "session_id": "5623d905-2596-437c-bef3-6407a4434707",
+  "source_log": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\evidence\\claude-20260927-174154.log",
+  "source_log_sha256_at_capture": "71df1023f4e00da94008ce8a7cea4e2104324161b44575c0cab32574194b3cdf",
+  "event": "SessionStart:startup",
+  "event_success_line": 130,
+  "parsed_context_line": 127,
+  "accepted_context_line": 131,
+  "complete_root_matches": true,
+  "context_characters": 8927,
+  "instruction_file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\claude\\ENGINEERING_HARNESS.md",
+  "entry_sha256": "be7c525c4cc2e4ec91186453353d3c2889c25e1cfa5f47ab52902acce57c6fae",
+  "probe_issue": "Probe field names root_path and root_sha256 were ambiguous. Claude reported the repository directory and declined to substitute the delivered entry digest for a root digest.",
+  "corrected_probe": "instruction_file_path and entry_sha256, explicitly mapped to the delivered metadata labels",
+  "post_compaction_in_this_session": "not_assessed",
+  "formal_lifecycle_effect": "none"
+}

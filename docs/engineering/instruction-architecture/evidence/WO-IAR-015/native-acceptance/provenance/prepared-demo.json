@@ -1,0 +1,34 @@
+{
+  "status": "prepared",
+  "demo": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p",
+  "prepared_by": {
+    "principal": "mmzen\\mathi",
+    "sid": "S-1-5-21-778813600-4079903668-2251971101-1001"
+  },
+  "source": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "source_commit": "2b45556ee23aff46e2cb131ac08992dc59131709",
+  "wheel_source_commit": "2f339039fe4f6189334fcd10632e20360cfa389f",
+  "wheel_sha256": "3b45680ee7f76509e09a933a4d061ff522d29c25b236201985861376221f5b3f",
+  "promotable": false,
+  "host_executables": {
+    "codex": "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\13995fba801849b0\\codex.exe",
+    "claude": "C:\\Users\\mathi\\.local\\bin\\claude.exe"
+  },
+  "native_delivery": "not_assessed",
+  "evaluator_version": "0.19.0",
+  "evaluator_python": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\evaluator\\Scripts\\python.exe",
+  "roots": {
+    "codex": {
+      "repository": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\codex",
+      "root_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\codex\\ENGINEERING_HARNESS.md",
+      "root_sha256": "b55a88ab900a7466b372ec32a4bc80ca47fa26a79ec0f8bc703aba58174bfaab",
+      "plugin": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\marketplace\\packages\\codex\\verity-plane"
+    },
+    "claude": {
+      "repository": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\claude",
+      "root_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\claude\\ENGINEERING_HARNESS.md",
+      "root_sha256": "be7c525c4cc2e4ec91186453353d3c2889c25e1cfa5f47ab52902acce57c6fae",
+      "plugin": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\marketplace\\packages\\claude\\verity-plane"
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "run": 36309978980,
+  "head": "253310ad21b967b35311c4f5d1af8ad341e92c1b",
+  "ci_candidate_merge": "fed7587bbe4ee994a1988fc232e187b9f2bb0561",
+  "wheel_sha256": "1f4bd1a08424783b4ef96cf76a1153dd6b2714d26362f77ed85354fa0f0371c8",
+  "environment": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-ci-refusal-w6927s5e",
+  "calls": [
+    {
+      "label": "hosted-venv",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "venv",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-ci-refusal-w6927s5e\\evaluator"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-ci-refusal-w6927s5e",
+      "exit_code": 0
+    },
+    {
+      "label": "hosted-install",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-ci-refusal-w6927s5e\\evaluator\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "install",
+        "--no-index",
+        "--no-deps",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\outputs\\upgrade-ci-failure\\hosted-wheel\\se_harness-0.19.0-py3-none-any.whl"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-ci-refusal-w6927s5e",
+      "exit_code": 0
+    },
+    {
+      "label": "predecessor-init",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "init",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-ci-refusal-w6927s5e\\legacy",
+        "--project-name",
+        "CI refusal reproduction",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-ci-refusal-w6927s5e",
+      "exit_code": 0
+    },
+    {
+      "label": "hosted-upgrade-preview",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-ci-refusal-w6927s5e\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-ci-refusal-w6927s5e\\legacy",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-ci-refusal-w6927s5e",
+      "exit_code": 0
+    },
+    {
+      "label": "hosted-upgrade-refusal",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-ci-refusal-w6927s5e\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-ci-refusal-w6927s5e\\legacy",
+        "--apply",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-ci-refusal-w6927s5e",
+      "exit_code": 1
+    }
+  ],
+  "all_predecessor_bytes_preserved": true,
+  "claim": "Exact hosted candidate wheel, Windows reproduction of missing-evidence refusal; no native delivery qualification."
+}

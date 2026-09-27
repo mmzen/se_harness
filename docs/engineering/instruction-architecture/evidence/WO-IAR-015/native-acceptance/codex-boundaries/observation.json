@@ -1,0 +1,149 @@
+{
+  "status": "passed",
+  "host": "codex",
+  "base": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-boundaries-0mz0h_87",
+  "source_candidate": "2b45556ee23aff46e2cb131ac08992dc59131709",
+  "host_version": "codex-cli 0.155.0-alpha.16.4",
+  "cases": [
+    {
+      "case": "current",
+      "repository": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-boundaries-0mz0h_87\\current",
+      "session": "01a0e3ad-123c-7672-a303-898f20d86855",
+      "passed": true,
+      "context_count": 1,
+      "expected_error": null,
+      "probe": {
+        "instruction_file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-boundaries-0mz0h_87\\current\\ENGINEERING_HARNESS.md",
+        "harness_version": "0.19.0",
+        "entry_sha256": "b55a88ab900a7466b372ec32a4bc80ca47fa26a79ec0f8bc703aba58174bfaab",
+        "final_heading": "After compaction",
+        "delivery_gap": false,
+        "reason": "Instruction delivery succeeded. Delivery changes no lifecycle state and grants no decision authority.",
+        "governed_action_allowed": false
+      },
+      "context_sha256": [
+        "cb4547c197cbe0af3b31ba4a815037f37951b52202f7c22548bff262440a255c"
+      ],
+      "replies": [
+        "{\n  \"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-native-boundaries-0mz0h_87\\\\current\\\\ENGINEERING_HARNESS.md\",\n  \"harness_version\": \"0.19.0\",\n  \"entry_sha256\": \"b55a88ab900a7466b372ec32a4bc80ca47fa26a79ec0f8bc703aba58174bfaab\",\n  \"final_heading\": \"After compaction\",\n  \"delivery_gap\": false,\n  \"reason\": \"Instruction delivery succeeded. Delivery changes no lifecycle state and grants no decision authority.\",\n  \"governed_action_allowed\": false\n}"
+      ]
+    },
+    {
+      "case": "released-018",
+      "repository": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-boundaries-0mz0h_87\\released-018",
+      "session": "01a0e3ad-123c-7672-a303-898f20d86855",
+      "passed": true,
+      "context_count": 1,
+      "expected_error": null,
+      "probe": {
+        "instruction_file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-boundaries-0mz0h_87\\released-018\\ENGINEERING_HARNESS.md",
+        "harness_version": "0.18.0",
+        "entry_sha256": "4cb45a9dde607733aa4546c7afd95a9e1effcda1f820a179153e90074a1e9035",
+        "final_heading": "Stop conditions",
+        "delivery_gap": false,
+        "reason": "Instruction delivery succeeded. Delivery changes no lifecycle state and grants no decision authority.",
+        "governed_action_allowed": false
+      },
+      "context_sha256": [
+        "dfe292389a200f8809cc9f0a82ed8c25c4dbc7d4db9ba4ce1a4da7dc6ac0ff5c"
+      ],
+      "replies": [
+        "{\n  \"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-native-boundaries-0mz0h_87\\\\released-018\\\\ENGINEERING_HARNESS.md\",\n  \"harness_version\": \"0.18.0\",\n  \"entry_sha256\": \"4cb45a9dde607733aa4546c7afd95a9e1effcda1f820a179153e90074a1e9035\",\n  \"final_heading\": \"Stop conditions\",\n  \"delivery_gap\": false,\n  \"reason\": \"Instruction delivery succeeded. Delivery changes no lifecycle state and grants no decision authority.\",\n  \"governed_action_allowed\": false\n}"
+      ]
+    },
+    {
+      "case": "current-return",
+      "repository": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-boundaries-0mz0h_87\\current",
+      "session": "01a0e3ad-123c-7672-a303-898f20d86855",
+      "passed": true,
+      "context_count": 1,
+      "expected_error": null,
+      "probe": {
+        "instruction_file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-boundaries-0mz0h_87\\current\\ENGINEERING_HARNESS.md",
+        "harness_version": "0.19.0",
+        "entry_sha256": "b55a88ab900a7466b372ec32a4bc80ca47fa26a79ec0f8bc703aba58174bfaab",
+        "final_heading": "After compaction",
+        "delivery_gap": false,
+        "reason": "Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.",
+        "governed_action_allowed": false
+      },
+      "context_sha256": [
+        "cb4547c197cbe0af3b31ba4a815037f37951b52202f7c22548bff262440a255c"
+      ],
+      "replies": [
+        "{\n  \"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-native-boundaries-0mz0h_87\\\\current\\\\ENGINEERING_HARNESS.md\",\n  \"harness_version\": \"0.19.0\",\n  \"entry_sha256\": \"b55a88ab900a7466b372ec32a4bc80ca47fa26a79ec0f8bc703aba58174bfaab\",\n  \"final_heading\": \"After compaction\",\n  \"delivery_gap\": false,\n  \"reason\": \"Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.\",\n  \"governed_action_allowed\": false\n}"
+      ]
+    },
+    {
+      "case": "missing",
+      "repository": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-boundaries-0mz0h_87\\missing",
+      "session": "01a0e3ad-123c-7672-a303-898f20d86855",
+      "passed": true,
+      "context_count": 1,
+      "expected_error": "required regular file is unavailable: ENGINEERING_HARNESS.md",
+      "probe": {
+        "instruction_file_path": null,
+        "harness_version": null,
+        "entry_sha256": null,
+        "final_heading": null,
+        "delivery_gap": true,
+        "reason": "SE Harness instruction delivery is unavailable: required regular file is unavailable: ENGINEERING_HARNESS.md.",
+        "governed_action_allowed": false
+      },
+      "context_sha256": [
+        "4d982b5e94e33d803975736b1c9763ff15a8dc98e464ab1cfdcdee603b2c138b"
+      ],
+      "replies": [
+        "{\n  \"instruction_file_path\": null,\n  \"harness_version\": null,\n  \"entry_sha256\": null,\n  \"final_heading\": null,\n  \"delivery_gap\": true,\n  \"reason\": \"SE Harness instruction delivery is unavailable: required regular file is unavailable: ENGINEERING_HARNESS.md.\",\n  \"governed_action_allowed\": false\n}"
+      ]
+    },
+    {
+      "case": "altered",
+      "repository": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-boundaries-0mz0h_87\\altered",
+      "session": "01a0e3ad-123c-7672-a303-898f20d86855",
+      "passed": true,
+      "context_count": 1,
+      "expected_error": "does not match its installed digest",
+      "probe": {
+        "instruction_file_path": null,
+        "harness_version": null,
+        "entry_sha256": null,
+        "final_heading": null,
+        "delivery_gap": true,
+        "reason": "SE Harness instruction delivery is unavailable: ENGINEERING_HARNESS.md does not match its installed digest.",
+        "governed_action_allowed": false
+      },
+      "context_sha256": [
+        "e5586a728e3a96456ef0e24edb5eb1a8daf7d8d7e3c5ba80651adc415fc798be"
+      ],
+      "replies": [
+        "{\n  \"instruction_file_path\": null,\n  \"harness_version\": null,\n  \"entry_sha256\": null,\n  \"final_heading\": null,\n  \"delivery_gap\": true,\n  \"reason\": \"SE Harness instruction delivery is unavailable: ENGINEERING_HARNESS.md does not match its installed digest.\",\n  \"governed_action_allowed\": false\n}"
+      ]
+    },
+    {
+      "case": "mismatch",
+      "repository": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-boundaries-0mz0h_87\\mismatch",
+      "session": "01a0e3ad-123c-7672-a303-898f20d86855",
+      "passed": true,
+      "context_count": 1,
+      "expected_error": "do not select the same supported release",
+      "probe": {
+        "instruction_file_path": null,
+        "harness_version": null,
+        "entry_sha256": null,
+        "final_heading": null,
+        "delivery_gap": true,
+        "reason": "SE Harness instruction delivery is unavailable: configuration and installation record do not select the same supported release.",
+        "governed_action_allowed": false
+      },
+      "context_sha256": [
+        "f553bf4f6e1364fe9edf23e38862af71e0bb0bf3a8541b53a1ef124e71b2ffc7"
+      ],
+      "replies": [
+        "{\n  \"instruction_file_path\": null,\n  \"harness_version\": null,\n  \"entry_sha256\": null,\n  \"final_heading\": null,\n  \"delivery_gap\": true,\n  \"reason\": \"SE Harness instruction delivery is unavailable: configuration and installation record do not select the same supported release.\",\n  \"governed_action_allowed\": false\n}"
+      ]
+    }
+  ],
+  "limits": "Windows native host. Disposable repository fixtures. No production lifecycle authority or verification acceptance.",
+  "unchanged": true
+}

@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "scripts/run_tests.py",
+    "--scale",
+    "full"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "exit_code": 0,
+  "started_at": "2026-09-27T09:53:35.483968+00:00",
+  "ended_at": "2026-09-27T09:55:37.341325+00:00",
+  "stage": "Intermediate implementation; not verification acceptance."
+}

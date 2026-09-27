@@ -1,0 +1,46 @@
+[
+  {
+    "line": 38,
+    "timestamp": "2026-09-27T15:45:10.138Z",
+    "probe_result": {
+      "instruction_file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\claude\\ENGINEERING_HARNESS.md",
+      "harness_version": "0.19.0",
+      "entry_sha256": "be7c525c4cc2e4ec91186453353d3c2889c25e1cfa5f47ab52902acce57c6fae",
+      "final_heading": "After compaction",
+      "delivery_gap": false
+    }
+  },
+  {
+    "line": 44,
+    "timestamp": "2026-09-27T15:45:37.030Z",
+    "tool": "Read",
+    "input": {
+      "file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\claude\\docs\\engineering\\harness\\COMMUNICATION.md"
+    }
+  },
+  {
+    "line": 48,
+    "timestamp": "2026-09-27T15:45:39.695Z",
+    "tool": "Read",
+    "input": {
+      "file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\claude\\docs\\engineering\\harness\\DEFINE_CHANGE.md"
+    }
+  },
+  {
+    "line": 73,
+    "timestamp": "2026-09-27T15:49:47.262Z",
+    "subtype": "compact_boundary",
+    "trigger": "manual"
+  },
+  {
+    "line": 102,
+    "timestamp": "2026-09-27T15:50:21.956Z",
+    "probe_result": {
+      "instruction_file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\claude\\ENGINEERING_HARNESS.md",
+      "harness_version": "0.19.0",
+      "entry_sha256": "be7c525c4cc2e4ec91186453353d3c2889c25e1cfa5f47ab52902acce57c6fae",
+      "final_heading": "After compaction",
+      "delivery_gap": false
+    }
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "scripts/run_tests.py",
+    "--workers",
+    "6",
+    "--scale",
+    "full",
+    "--timings",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\iar-test-timings.json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "started_at": "2026-09-27T08:01:56.409581+00:00",
+  "ended_at": "2026-09-27T08:04:50.746533+00:00",
+  "exit_code": 1,
+  "stage": "Intermediate implementation; not completion evidence."
+}

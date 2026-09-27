@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "C:\\Program Files\\GitHub CLI\\gh.exe",
+    "run",
+    "download",
+    "36334454733",
+    "--repo",
+    "mmzen/se_harness",
+    "--name",
+    "upgrade-rehearsal-Windows",
+    "--dir",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\iar-closeout-ci\\upgrade-rehearsal-Windows"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se",
+  "exit_code": 0,
+  "observed_at": "2026-09-27T16:59:28.322135+00:00"
+}

@@ -1,0 +1,39 @@
+{
+  "baseline_commit": "7b57dae566bd5cce6f8ebeb76c492a1dc185cbbd",
+  "changed_test_paths": [
+    "tests/fixtures/progressive-discovery/skill-vectors.json",
+    "tests/test_adr_applicability.py",
+    "tests/test_agentic_execution.py",
+    "tests/test_architecture_traceability.py",
+    "tests/test_artifact_authoring_policy.py",
+    "tests/test_artifact_catalog.py",
+    "tests/test_decision_management.py",
+    "tests/test_harnessctl.py",
+    "tests/test_managed_template_texts.py",
+    "tests/test_retired_surface.py",
+    "tests/test_revision_provenance.py",
+    "tests/test_risk_management.py",
+    "tests/test_standard_repository_lifecycle.py",
+    "tests/test_validation_taxonomy.py",
+    "tests/test_workflow_execution.py"
+  ],
+  "test_file_sha256": {
+    "tests/fixtures/progressive-discovery/skill-vectors.json": "c1a34f92125aa35e6ca6a75bfdd15c9a49f9b191d08cbc347ce3ef03b00e67fe",
+    "tests/test_adr_applicability.py": "82cb5ba469a0db925ce85205bba3252796b3990b9a3d143be8b753ba52207590",
+    "tests/test_agentic_execution.py": "fb8af0f3167548c13cf0a4adff74015bee091ebc8383142082ce8577fe82e5d5",
+    "tests/test_architecture_traceability.py": "83865761d05fcd2e3f4f1dc648e4dd6a4e8120574c8ecd28950d3886369a7186",
+    "tests/test_artifact_authoring_policy.py": "10f6601cb24032e25b1a6ca7479a9d4bb50829198f10029f2d50b3f36309e91d",
+    "tests/test_artifact_catalog.py": "a733f2e6261a86500b0a8fa5e2513cbbfeb78dc03d82288a9072988b4700215f",
+    "tests/test_decision_management.py": "ca01e51fd7b318644b75f72acd7b34b5f010029159285725380ca6c6a665f3fb",
+    "tests/test_harnessctl.py": "a3fbc736a0eb665a13fa8db25a0731378b16d5d527ff2a898acc9739e233631e",
+    "tests/test_managed_template_texts.py": "4fbdd7441a5a299fe8c5c71714d77a326f9a5705b569658d490721c5f96ee3af",
+    "tests/test_retired_surface.py": "98d8adb4700f8537b8fc09c179d680482f031f519905316357fbe060fcce4ae4",
+    "tests/test_revision_provenance.py": "2ad9904347433a3b031e7ba747246e09e9402db5f9294147803d0358fc2fbb41",
+    "tests/test_risk_management.py": "c31457b1c64aff8c66fb0bb40a6b0bc277207817b6404a01afac51b28b917956",
+    "tests/test_standard_repository_lifecycle.py": "d32660129d82ea17d3fc5e5bda11dee73ab895f2113fda239e1e2210917d0aab",
+    "tests/test_validation_taxonomy.py": "9b6ac574dbd14e7c5cc0b8af1a482e09c206c62c898600d3ff81b83aec6b135d",
+    "tests/test_workflow_execution.py": "5c05eb5a24de3bdcc766d33287158e423639ce0070848846e27d88712b8bb337"
+  },
+  "historical_vector_files_checked": 7,
+  "historical_vectors_unchanged": true
+}

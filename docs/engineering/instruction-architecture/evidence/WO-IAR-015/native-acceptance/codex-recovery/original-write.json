@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-B",
+    "-m",
+    "se_harness",
+    "raise-risk",
+    "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-uncertain-recovery-i3zff_0z\\repository",
+    "--domain",
+    "instruction-architecture",
+    "--title",
+    "Acknowledgement-loss recovery probe",
+    "--description",
+    "A write acknowledgement may be lost during compaction.",
+    "--action",
+    "Inspect actual persisted effects before any retry.",
+    "--owner",
+    "Codex",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-uncertain-recovery-i3zff_0z",
+  "exit_code": 0,
+  "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"create\",\n      \"path\": \"docs/engineering/instruction-architecture/risks/RISK-IAR-001.md\"\n    }\n  ],\n  \"command\": \"raise-risk\",\n  \"decision\": null,\n  \"dry_run\": false,\n  \"outcome\": \"completed\",\n  \"risk\": \"RISK-IAR-001\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"score\": null\n}\n",
+  "stderr": "",
+  "fault_injection": "Successful acknowledgement withheld from native recovery session."
+}

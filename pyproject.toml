@@ -32,14 +32,13 @@ se_harness = [
   "quality_gates_contract.json",
   "hash_bound_classes.json",
   "skill_ownership_contract.json",
+  "instruction_discovery.json",
   "engine/harness_explorer/index.template.html",
 ]
 
 [tool.setuptools.data-files]
 "share/se-harness/templates/repository/standard" = [
   "templates/repository/standard/.engineering-harness.toml.tpl",
-  "templates/repository/standard/AGENTS.md.fragment",
-  "templates/repository/standard/CLAUDE.md.fragment",
   "templates/repository/standard/ENGINEERING_HARNESS.md.tpl",
   "templates/repository/standard/GLOSSARY.md.seed",
   "templates/repository/standard/gitattributes.fragment",
@@ -58,6 +57,8 @@ se_harness = [
   "templates/repository/standard/docs/engineering/WORKFLOW.json",
 ]
 "share/se-harness/templates/repository/standard/docs/engineering/templates" = ["templates/repository/standard/docs/engineering/templates/*"]
+"share/se-harness/templates/repository/standard/docs/engineering/harness" = ["templates/repository/standard/docs/engineering/harness/*.md"]
+"share/se-harness/templates/repository/standard/docs/engineering/harness/migration" = ["templates/repository/standard/docs/engineering/harness/migration/*.md"]
 "share/se-harness/templates/repository/standard/.github" = ["templates/repository/standard/.github/PULL_REQUEST_TEMPLATE.md.seed"]
 "share/se-harness/templates/repository/standard/.github/workflows" = ["templates/repository/standard/.github/workflows/engineering-harness.yml"]
 "share/se-harness/templates/repository/standard/.agents/skills/harness-orient" = [

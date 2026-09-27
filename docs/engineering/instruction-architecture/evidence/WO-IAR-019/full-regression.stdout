@@ -1,0 +1,19 @@
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-ckflch4q\private\verity-plane\evaluator\Scripts\python.exe
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-ckflch4q\private\verity-plane\evaluator\Scripts\python.exe
+docs/notes/diagnostic-codes.md matches the source
+WEX_SCALE artifacts=100 validation=0.167759s focus=0.395629s plan=0.311594s
+WEX_SCALE artifacts=500 validation=0.666821s focus=0.871686s plan=1.200179s
+WEX_SCALE artifacts=1000 validation=1.425581s focus=1.517516s plan=2.436240s
+======================================================================
+FAIL: test_ci_pipeline.PredecessorDerivationTests.test_repository_tools_stay_standard_library_only
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_ci_pipeline.py", line 421, in test_repository_tools_stay_standard_library_only
+    self.assertNotIn("se_harness", imported, relative)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'se_harness' unexpectedly found in ['__future__', 'argparse', 'hashlib', 'io', 'json', 'os', 're', 'subprocess', 'sys', 'tarfile', 'tempfile', 'time', 'contextlib', 'dataclasses', 'pathlib', 'typing', 'hashlib,', 'pathlib', 'se_harness', 'se_harness.installer', 'se_harness.integrity'] : repository_tools/upgrade_rehearsal.py
+
+----------------------------------------------------------------------
+Ran 1122 tests in 154.578s (175 classes, 6 workers)
+
+FAILED (failures=1, skipped=16)

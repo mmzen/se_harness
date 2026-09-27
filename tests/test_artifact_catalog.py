@@ -99,7 +99,7 @@ class ArtifactCatalogTests(unittest.TestCase):
                 self.assertIn(link, content)
                 self.assertNotIn(CATALOG_BEGIN, content)
 
-    def test_released_policy_copies_match_with_declared_candidate_exceptions(self) -> None:
+    def test_released_policy_history_and_successor_routes_remain_explicit(self) -> None:
         released_work_order = (
             REPOSITORY_ROOT / "docs/engineering/templates/WORK_ORDER.template.md"
         ).read_text(encoding="utf-8")
@@ -121,16 +121,18 @@ class ArtifactCatalogTests(unittest.TestCase):
         released_traceability = (
             REPOSITORY_ROOT / "docs/engineering/TRACEABILITY.md"
         ).read_text(encoding="utf-8")
-        candidate_traceability = (
-            REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/TRACEABILITY.md"
+        # IAR-DIS-013: retain prior release comparisons against the archived
+        # text. Current routes are checked separately below.
+        archived_traceability = (
+            REPOSITORY_ROOT / "tests/fixtures/progressive-discovery/released-0.18.0/TRACEABILITY.md"
         ).read_text(encoding="utf-8")
         # WO-KIS-001 changes only these two applicability rows. The released root
         # stays untouched; all other rows still compare against the released copy.
         for prefix in ("| `requirement` |", "| `risk` |"):
             previous = next((line for line in released_traceability.splitlines() if line.startswith(prefix)), None)
-            current = next(line for line in candidate_traceability.splitlines() if line.startswith(prefix))
+            current = next(line for line in archived_traceability.splitlines() if line.startswith(prefix))
             if previous is not None:
-                candidate_traceability = candidate_traceability.replace(current, previous)
+                archived_traceability = archived_traceability.replace(current, previous)
         # WO-DST-027 (SPEC-DST-028 DST-TPL-001 to DST-TPL-003, DST-TPL-006): the candidate
         # rewrites TRC-008 for the retired relation; a root released before it (0.17.0)
         # carries the compatibility-only reading, declared here; a root released with the
@@ -148,15 +150,15 @@ class ArtifactCatalogTests(unittest.TestCase):
             "MUST reject a mixed or ambiguous target set. Installation and upgrade MUST NOT\n"
             "rewrite repository-owned artifacts.\n"
         )
-        self.assertIn(retired_rule, candidate_traceability)
+        self.assertIn(retired_rule, archived_traceability)
         if compatibility_rule in released_traceability:
-            candidate_traceability = candidate_traceability.replace(retired_rule, compatibility_rule, 1)
+            archived_traceability = archived_traceability.replace(retired_rule, compatibility_rule, 1)
         # WO-DCM-001 (SPEC-DCM-001): the candidate TRACEABILITY.md adds the decision
         # artifact's catalog row, relations TRC-REL-020..022 and rule TRC-015. A root
         # released before them lacks exactly those lines, declared here; a root
         # released with them takes the equality branch.
         if "`TRC-REL-023`" in released_traceability:
-            self.assertEqual(released_traceability, candidate_traceability)
+            self.assertEqual(released_traceability, archived_traceability)
         elif "`TRC-REL-020`" in released_traceability:
             # WO-RSK-010 (SPEC-RSK-010): the candidate TRACEABILITY.md adds the risk
             # artifact's catalog row, relations TRC-REL-023..025 and rule TRC-016. A root
@@ -165,7 +167,7 @@ class ArtifactCatalogTests(unittest.TestCase):
             risk_rows = ("| `TRC-REL-023`", "| `TRC-REL-024`", "| `TRC-REL-025`", "| `risk` | `RISK-` |")
             kept: list[str] = []
             skipping = False
-            for line in candidate_traceability.splitlines():
+            for line in archived_traceability.splitlines():
                 if line.startswith("`TRC-016`"):
                     skipping = True
                 if skipping:
@@ -176,12 +178,12 @@ class ArtifactCatalogTests(unittest.TestCase):
                     continue
                 kept.append(line)
             self.assertEqual(released_traceability.splitlines(), kept)
-            self.assertIn("`TRC-016`", candidate_traceability)
+            self.assertIn("`TRC-016`", archived_traceability)
         else:
             decision_rows = ("| `TRC-REL-020`", "| `TRC-REL-021`", "| `TRC-REL-022`", "| `decision` | `DEC-` |")
             kept: list[str] = []
             skipping = False
-            for line in candidate_traceability.splitlines():
+            for line in archived_traceability.splitlines():
                 if line.startswith("`TRC-015`"):
                     skipping = True
                 if skipping:
@@ -192,10 +194,10 @@ class ArtifactCatalogTests(unittest.TestCase):
                     continue
                 kept.append(line)
             self.assertEqual(released_traceability.splitlines(), kept)
-            self.assertIn("`TRC-015`", candidate_traceability)
+            self.assertIn("`TRC-015`", archived_traceability)
         self.assertIn("`TRC-001`", released_traceability)
-        self.assertIn("`TRC-001`", candidate_traceability)
-        self.assertIn("BCP 14", candidate_traceability)
+        self.assertIn("`TRC-001`", archived_traceability)
+        self.assertIn("BCP 14", archived_traceability)
         router = (REPOSITORY_ROOT / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
         router_template = (
             REPOSITORY_ROOT / "templates/repository/standard/ENGINEERING_HARNESS.md.tpl"
@@ -216,9 +218,17 @@ class ArtifactCatalogTests(unittest.TestCase):
         )
         # The released root follows its adopted evaluator, independently of the
         # candidate version (WO-HUP-019).
-        self.assertIn("the selected governing chain is invalid or artifact IDs are ambiguous", candidate_router)
-        self.assertIn("The installed evaluator owns executable policy", candidate_router)
-        self.assertIn("--replace-file PATH", candidate_router)
+        self.assertIn("harnessctl", candidate_router)
+        self.assertIn("MUST be the only source of truth", candidate_router)
+        self.assertIn("docs/engineering/harness/CONTINUE.md", candidate_router)
+        guides = REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/harness"
+        self.assertIn("The selected governing graph is invalid or artifact IDs are ambiguous", (guides / "RESULTS.md").read_text(encoding="utf-8"))
+        self.assertIn("--replace-file PATH", (guides / "UPGRADE.md").read_text(encoding="utf-8"))
+        pointer = (guides.parent / "TRACEABILITY.md").read_text(encoding="utf-8")
+        self.assertIn("Compatibility pointer", pointer)
+        for destination in ("ARTIFACTS.md", "DEFINITION_LINKS.md", "WORK_AND_EVIDENCE.md"):
+            self.assertIn("harness/" + destination, pointer)
+            self.assertTrue((guides / destination).is_file())
         self.assertEqual(1, router.count(technical_communication_route))
         self.assertIn(
             f"{technical_communication_route}\n{artifact_authoring_route}",

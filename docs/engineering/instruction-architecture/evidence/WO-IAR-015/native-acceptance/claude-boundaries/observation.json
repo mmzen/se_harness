@@ -1,0 +1,95 @@
+{
+  "status": "passed",
+  "host": "claude",
+  "base": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-boundaries-1x06x_by",
+  "source_candidate": "2b45556ee23aff46e2cb131ac08992dc59131709",
+  "host_version": "2.1.273 (Claude Code)",
+  "cases": [
+    {
+      "case": "current",
+      "repository": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-boundaries-1x06x_by\\current",
+      "session": null,
+      "passed": true,
+      "context_count": 1,
+      "expected_error": null,
+      "probe": null,
+      "model_response_assessed": false,
+      "context_sha256": [
+        "ee3d8a03cc87d55fe2afdae44652a48155b7a38698505478276f9590dd74f18a"
+      ],
+      "replies": []
+    },
+    {
+      "case": "released-018",
+      "repository": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-boundaries-1x06x_by\\released-018",
+      "session": null,
+      "passed": true,
+      "context_count": 1,
+      "expected_error": null,
+      "probe": null,
+      "model_response_assessed": false,
+      "context_sha256": [
+        "e547ae0b7c69369b546dba9e39a8984debe99c6e037268131f6d4ed38b479b57"
+      ],
+      "replies": []
+    },
+    {
+      "case": "current-return",
+      "repository": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-boundaries-1x06x_by\\current",
+      "session": null,
+      "passed": true,
+      "context_count": 1,
+      "expected_error": null,
+      "probe": null,
+      "model_response_assessed": false,
+      "context_sha256": [
+        "ee3d8a03cc87d55fe2afdae44652a48155b7a38698505478276f9590dd74f18a"
+      ],
+      "replies": []
+    },
+    {
+      "case": "missing",
+      "repository": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-boundaries-1x06x_by\\missing",
+      "session": null,
+      "passed": true,
+      "context_count": 1,
+      "expected_error": "required regular file is unavailable: ENGINEERING_HARNESS.md",
+      "probe": null,
+      "model_response_assessed": false,
+      "context_sha256": [
+        "4d982b5e94e33d803975736b1c9763ff15a8dc98e464ab1cfdcdee603b2c138b"
+      ],
+      "replies": []
+    },
+    {
+      "case": "altered",
+      "repository": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-boundaries-1x06x_by\\altered",
+      "session": null,
+      "passed": true,
+      "context_count": 1,
+      "expected_error": "does not match its installed digest",
+      "probe": null,
+      "model_response_assessed": false,
+      "context_sha256": [
+        "e5586a728e3a96456ef0e24edb5eb1a8daf7d8d7e3c5ba80651adc415fc798be"
+      ],
+      "replies": []
+    },
+    {
+      "case": "mismatch",
+      "repository": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-native-boundaries-1x06x_by\\mismatch",
+      "session": null,
+      "passed": true,
+      "context_count": 1,
+      "expected_error": "do not select the same supported release",
+      "probe": null,
+      "model_response_assessed": false,
+      "context_sha256": [
+        "f553bf4f6e1364fe9edf23e38862af71e0bb0bf3a8541b53a1ef124e71b2ffc7"
+      ],
+      "replies": []
+    }
+  ],
+  "limits": "Windows native host. Disposable repository fixtures. No production lifecycle authority or verification acceptance.",
+  "unchanged": true
+}

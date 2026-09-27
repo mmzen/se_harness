@@ -1,0 +1,22 @@
+usage: harnessctl upgrade [-h] [--replace-file PATH]
+                          [--instruction-delivery-evidence PATH] [--apply]
+                          [--evidence-output EVIDENCE_OUTPUT] [--json]
+                          [target]
+
+positional arguments:
+  target
+
+options:
+  -h, --help            show this help message and exit
+  --replace-file PATH   replace this editable seeded file with the current
+                        template; repeat for more files
+  --instruction-delivery-evidence PATH
+                        reviewed native startup/compaction evidence bound to
+                        this upgrade; required before retiring AGENTS/CLAUDE
+                        harness fragments
+  --apply               apply safe changes; customized files remain untouched
+  --evidence-output EVIDENCE_OUTPUT
+                        optional repository JSON path below
+                        docs/engineering/.../evidence/ for the transaction
+                        evidence
+  --json                emit one se-harness-command-result-v1 object

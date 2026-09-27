@@ -1,0 +1,1218 @@
+[
+  {
+    "type": "system",
+    "subtype": "hook_started",
+    "hook_id": "fa59738b-ebea-47a2-88ee-a4fc4a36ce84",
+    "hook_name": "SessionStart:startup",
+    "hook_event": "SessionStart",
+    "uuid": "d024c70a-4460-40ee-9789-529f0671f892",
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3"
+  },
+  {
+    "type": "system",
+    "subtype": "hook_response",
+    "hook_id": "fa59738b-ebea-47a2-88ee-a4fc4a36ce84",
+    "hook_name": "SessionStart:startup",
+    "hook_event": "SessionStart",
+    "output": "{\"hookSpecificOutput\": {\"hookEventName\": \"SessionStart\", \"additionalContext\": \"SE Harness instruction source: C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-uncertain-recovery-npf8z86u\\\\repository\\\\ENGINEERING_HARNESS.md\\nSelected release: 0.19.0; entry SHA-256: be7c525c4cc2e4ec91186453353d3c2889c25e1cfa5f47ab52902acce57c6fae.\\nThis delivery changes no lifecycle state and grants no decision authority.\\n\\n# Engineering Harness for Instruction delivery demo - claude\\n\\nThis repository uses SE Harness 0.19.0.\\n\\nThe keywords **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,\\n**SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and\\n**OPTIONAL** in this document are to be interpreted as described in BCP 14\\n(RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.\\n\\n## Goals\\n\\nThis harness makes engineering authority explicit, limits execution to approved\\nscope, binds assurance and release claims to exact evidence, and gives every\\nactor the same deterministic next step. These goals are informative; the rules\\nbelow and the installed evaluator's machine policy are normative.\\n\\n## Policy / Global invariants\\n\\n### HRN-001 \\u2014 Formal authority\\n\\nFormal artifacts under `docs/engineering/` are the authoritative\\nrecords of product intent, requirements, architecture decisions, work authority,\\nverification contracts, risks, assurance decisions, and release decisions. Code,\\ntests, commits, tickets, dashboards, and conversation text are evidence or\\nobservations; they MUST NOT substitute for formal authority.\\n\\n### HRN-002 \\u2014 Change control\\n\\nFormal artifacts MAY be drafted, reviewed, and validated before a work order\\nis approved. This preparation MUST NOT authorize implementation.\\n\\nAccepted formal artifacts MUST define the change before implementation starts.\\nOne or more approved work orders MUST authorize implementation. A valid\\nrepository-owned exception MAY remove the requirement for formal definitions,\\nwork orders, or both. It MUST NOT change lifecycle rules or waive required gates.\\n\\nAny required work orders MUST pass the required validation checks before\\nimplementation starts. The result MUST be verified against the accepted\\ndefinitions that apply. All required verification checks remain required.\\n\\n### HRN-003 \\u2014 Lifecycle authority\\n\\nArtifacts and the work itself MUST follow a strict lifecycle.\\n`harnessctl` MUST be the only source of truth for lifecycle states, allowed\\nstate changes and the next action. Actors MUST use its results when reporting\\nor taking lifecycle actions. Agent text, prompts, Skills, dashboards, and\\nrepository notes MUST NOT work out their own answers or change those results.\\n\\n### HRN-004 \\u2014 Bounded scope\\n\\nAn actor MUST select one clearly defined set of artifacts before\\nacting. This set defines the scope. Findings from unrelated work orders MUST\\nNOT be presented as findings about the selected scope. An issue outside the\\nscope MAY be reported only as an observation that has not been assessed, with\\nits artifact ID. It MUST NOT block the selected work unless a recorded\\ndependency or gate connects it to that work.\\n\\n### HRN-005 \\u2014 Explicit decisions\\n\\nEach decision MUST identify the accountable human or agent and the authority\\nused. Being a human or an agent does not by itself authorize an action.\\n\\nPreparing, inspecting, validating, or collecting evidence MUST NOT\\ncount as an authorized decision. A state change requires the exact artifact,\\nthe intended state, and the accountable actor. The required gates MUST pass,\\nand an explicit state transition MUST be applied.\\n\\n### HRN-006 \\u2014 Targeted transitions\\n\\nA state transition MUST change only the artifacts explicitly\\nselected by the accountable actor. The states of related artifacts MUST NOT\\nchange just because they are linked.\\n\\n### HRN-007 \\u2014 Repository ownership\\n\\n`AGENTS.md` MUST belong entirely to the repository owner and contain\\nno harness instructions. Repository-specific facts and commands belong in\\nthat file. The harness MUST NOT generate, track, or require that owner content.\\n\\n### HRN-008 \\u2014 Rule precedence\\n\\nRepository instructions MAY add stricter rules. They MUST NOT grant authority\\nfor product, engineering, assurance, release, or external actions. They MUST\\nNOT remove, weaken, or contradict the harness rules.\\n\\nRepository owners MAY define exceptions through the supported exception\\ncapability described in [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability). This changes only the obligations the capability permits\\nthem to configure: whether formal definitions and work orders are required.\\nLifecycle rules and required gates remain fixed. Repository prose alone MUST\\nNOT waive a harness rule.\\n\\n### HRN-009 \\u2014 Required checks\\n\\nManaged-file integrity checks, artifact graph checks, scope checks, and required\\ngates MUST all pass before the affected action can proceed. Warnings MUST NOT\\ncount as approval or acceptance of a risk.\\n\\n## Scope of these rules\\n\\nThe bounded-scope, lifecycle-reporting, and stop rules apply when a human or\\nagent performs or reports a governed lifecycle action. Reading, analysis, and\\nanswering questions need no work order when they change no lifecycle state,\\nexercise no decision right, and present no finding as a formal verdict.\\n\\nPreparing a proposed artifact package does not require an approved work\\norder. A human or agent MAY create and edit drafts, record risks and open\\nquestions, review the proposed content, and validate the package. These\\nactions MUST follow the authoring procedure and required checks. They MUST\\nNOT change an accepted definition, approve a work order, or start\\nimplementation. Decisions and lifecycle transitions follow their separate\\nauthority rules.\\n\\nBefore a lifecycle action, select the exact artifacts and read the governing\\nfiles returned by the evaluator. A checkpoint-free `check` reports lifecycle\\ncontext. It does not evaluate checkpoint gates or authorize work.\\n\\n## Using these instructions\\n\\nA human is a person; an agent is an automated system acting under granted\\nauthority. Approval, verification acceptance and release decisions require an\\nauthorized human. Agents may apply a matching recorded decision. Resolve the\\nidentity and right in [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights)\\nbefore obtaining or applying a decision.\\n\\n`harnessctl` means this repository's selected released evaluator, invoked through\\nits absolute Python path with `-I -m se_harness`, from outside the checkout.\\n`REPO` is the absolute repository path. Replace uppercase placeholders with actual\\ninputs. Keep each `ID=value` assignment as one argument. If the executable or\\nidentity is unknown, use [SETUP.md](docs/engineering/harness/SETUP.md#procedure).\\n\\nTransient working material stays in the conversation or temporary storage outside\\nthe repository, at the agent's discretion. It has no formal authority and SHALL\\nNOT be persisted in the repository. This rule covers working notes, not formal\\nartifacts or evidence required at a contract's prescribed durable location.\\n\\n## Read by task\\n\\nRead the selected file's entry conditions and current step. Read its required\\nreferences before the action they govern. A link alone does not require reading\\nits target. Do not load all procedures or future stages in advance.\\n\\n| Current need | Read first |\\n| --- | --- |\\n| Discuss or explain without a lifecycle action | Only the source sections needed to answer. |\\n| Define a new change | [DEFINE_CHANGE.md](docs/engineering/harness/DEFINE_CHANGE.md#read-this-when) |\\n| Continue selected work or recover after compaction | [CONTINUE.md](docs/engineering/harness/CONTINUE.md#read-this-when) |\\n| Resolve decision authority | [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights) |\\n| Report a lifecycle result, failed check or uncertain write | [RESULTS.md](docs/engineering/harness/RESULTS.md#read-this-when) |\\n| Assess an owner-defined exception | [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability) |\\n| Prepare or repair the evaluator | [SETUP.md](docs/engineering/harness/SETUP.md#read-this-when) |\\n\\nBefore the first eligible English explanation in a fresh context, read\\n[COMMUNICATION.md](docs/engineering/harness/COMMUNICATION.md#communication).\\nReuse it while retained in context. This applies to ordinary answers too.\\nMachine WORKFLOW.json and QUALITY_GATES.json are evaluator inputs; read them only\\nwhen changing or investigating their contracts. Use evaluator results in normal\\nwork. Missing instructions or an unknown returned procedure stop the affected\\naction: report the exact discovery gap in RESULTS.md.\\n\\n## After compaction\\n\\nRecover the repository, selected IDs, objective, existing authority and pending\\naction from the summary. For governed work, obtain fresh context through\\nCONTINUE.md and reread the current procedure and prerequisites lost from context.\\nA summary preserves pointers and decisions, not current lifecycle truth. Inspect\\nuncertain writes or external effects before retrying. Resume only unapplied work.\\n\"}}\r\n",
+    "stdout": "{\"hookSpecificOutput\": {\"hookEventName\": \"SessionStart\", \"additionalContext\": \"SE Harness instruction source: C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-uncertain-recovery-npf8z86u\\\\repository\\\\ENGINEERING_HARNESS.md\\nSelected release: 0.19.0; entry SHA-256: be7c525c4cc2e4ec91186453353d3c2889c25e1cfa5f47ab52902acce57c6fae.\\nThis delivery changes no lifecycle state and grants no decision authority.\\n\\n# Engineering Harness for Instruction delivery demo - claude\\n\\nThis repository uses SE Harness 0.19.0.\\n\\nThe keywords **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,\\n**SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and\\n**OPTIONAL** in this document are to be interpreted as described in BCP 14\\n(RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.\\n\\n## Goals\\n\\nThis harness makes engineering authority explicit, limits execution to approved\\nscope, binds assurance and release claims to exact evidence, and gives every\\nactor the same deterministic next step. These goals are informative; the rules\\nbelow and the installed evaluator's machine policy are normative.\\n\\n## Policy / Global invariants\\n\\n### HRN-001 \\u2014 Formal authority\\n\\nFormal artifacts under `docs/engineering/` are the authoritative\\nrecords of product intent, requirements, architecture decisions, work authority,\\nverification contracts, risks, assurance decisions, and release decisions. Code,\\ntests, commits, tickets, dashboards, and conversation text are evidence or\\nobservations; they MUST NOT substitute for formal authority.\\n\\n### HRN-002 \\u2014 Change control\\n\\nFormal artifacts MAY be drafted, reviewed, and validated before a work order\\nis approved. This preparation MUST NOT authorize implementation.\\n\\nAccepted formal artifacts MUST define the change before implementation starts.\\nOne or more approved work orders MUST authorize implementation. A valid\\nrepository-owned exception MAY remove the requirement for formal definitions,\\nwork orders, or both. It MUST NOT change lifecycle rules or waive required gates.\\n\\nAny required work orders MUST pass the required validation checks before\\nimplementation starts. The result MUST be verified against the accepted\\ndefinitions that apply. All required verification checks remain required.\\n\\n### HRN-003 \\u2014 Lifecycle authority\\n\\nArtifacts and the work itself MUST follow a strict lifecycle.\\n`harnessctl` MUST be the only source of truth for lifecycle states, allowed\\nstate changes and the next action. Actors MUST use its results when reporting\\nor taking lifecycle actions. Agent text, prompts, Skills, dashboards, and\\nrepository notes MUST NOT work out their own answers or change those results.\\n\\n### HRN-004 \\u2014 Bounded scope\\n\\nAn actor MUST select one clearly defined set of artifacts before\\nacting. This set defines the scope. Findings from unrelated work orders MUST\\nNOT be presented as findings about the selected scope. An issue outside the\\nscope MAY be reported only as an observation that has not been assessed, with\\nits artifact ID. It MUST NOT block the selected work unless a recorded\\ndependency or gate connects it to that work.\\n\\n### HRN-005 \\u2014 Explicit decisions\\n\\nEach decision MUST identify the accountable human or agent and the authority\\nused. Being a human or an agent does not by itself authorize an action.\\n\\nPreparing, inspecting, validating, or collecting evidence MUST NOT\\ncount as an authorized decision. A state change requires the exact artifact,\\nthe intended state, and the accountable actor. The required gates MUST pass,\\nand an explicit state transition MUST be applied.\\n\\n### HRN-006 \\u2014 Targeted transitions\\n\\nA state transition MUST change only the artifacts explicitly\\nselected by the accountable actor. The states of related artifacts MUST NOT\\nchange just because they are linked.\\n\\n### HRN-007 \\u2014 Repository ownership\\n\\n`AGENTS.md` MUST belong entirely to the repository owner and contain\\nno harness instructions. Repository-specific facts and commands belong in\\nthat file. The harness MUST NOT generate, track, or require that owner content.\\n\\n### HRN-008 \\u2014 Rule precedence\\n\\nRepository instructions MAY add stricter rules. They MUST NOT grant authority\\nfor product, engineering, assurance, release, or external actions. They MUST\\nNOT remove, weaken, or contradict the harness rules.\\n\\nRepository owners MAY define exceptions through the supported exception\\ncapability described in [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability). This changes only the obligations the capability permits\\nthem to configure: whether formal definitions and work orders are required.\\nLifecycle rules and required gates remain fixed. Repository prose alone MUST\\nNOT waive a harness rule.\\n\\n### HRN-009 \\u2014 Required checks\\n\\nManaged-file integrity checks, artifact graph checks, scope checks, and required\\ngates MUST all pass before the affected action can proceed. Warnings MUST NOT\\ncount as approval or acceptance of a risk.\\n\\n## Scope of these rules\\n\\nThe bounded-scope, lifecycle-reporting, and stop rules apply when a human or\\nagent performs or reports a governed lifecycle action. Reading, analysis, and\\nanswering questions need no work order when they change no lifecycle state,\\nexercise no decision right, and present no finding as a formal verdict.\\n\\nPreparing a proposed artifact package does not require an approved work\\norder. A human or agent MAY create and edit drafts, record risks and open\\nquestions, review the proposed content, and validate the package. These\\nactions MUST follow the authoring procedure and required checks. They MUST\\nNOT change an accepted definition, approve a work order, or start\\nimplementation. Decisions and lifecycle transitions follow their separate\\nauthority rules.\\n\\nBefore a lifecycle action, select the exact artifacts and read the governing\\nfiles returned by the evaluator. A checkpoint-free `check` reports lifecycle\\ncontext. It does not evaluate checkpoint gates or authorize work.\\n\\n## Using these instructions\\n\\nA human is a person; an agent is an automated system acting under granted\\nauthority. Approval, verification acceptance and release decisions require an\\nauthorized human. Agents may apply a matching recorded decision. Resolve the\\nidentity and right in [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights)\\nbefore obtaining or applying a decision.\\n\\n`harnessctl` means this repository's selected released evaluator, invoked through\\nits absolute Python path with `-I -m se_harness`, from outside the checkout.\\n`REPO` is the absolute repository path. Replace uppercase placeholders with actual\\ninputs. Keep each `ID=value` assignment as one argument. If the executable or\\nidentity is unknown, use [SETUP.md](docs/engineering/harness/SETUP.md#procedure).\\n\\nTransient working material stays in the conversation or temporary storage outside\\nthe repository, at the agent's discretion. It has no formal authority and SHALL\\nNOT be persisted in the repository. This rule covers working notes, not formal\\nartifacts or evidence required at a contract's prescribed durable location.\\n\\n## Read by task\\n\\nRead the selected file's entry conditions and current step. Read its required\\nreferences before the action they govern. A link alone does not require reading\\nits target. Do not load all procedures or future stages in advance.\\n\\n| Current need | Read first |\\n| --- | --- |\\n| Discuss or explain without a lifecycle action | Only the source sections needed to answer. |\\n| Define a new change | [DEFINE_CHANGE.md](docs/engineering/harness/DEFINE_CHANGE.md#read-this-when) |\\n| Continue selected work or recover after compaction | [CONTINUE.md](docs/engineering/harness/CONTINUE.md#read-this-when) |\\n| Resolve decision authority | [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights) |\\n| Report a lifecycle result, failed check or uncertain write | [RESULTS.md](docs/engineering/harness/RESULTS.md#read-this-when) |\\n| Assess an owner-defined exception | [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability) |\\n| Prepare or repair the evaluator | [SETUP.md](docs/engineering/harness/SETUP.md#read-this-when) |\\n\\nBefore the first eligible English explanation in a fresh context, read\\n[COMMUNICATION.md](docs/engineering/harness/COMMUNICATION.md#communication).\\nReuse it while retained in context. This applies to ordinary answers too.\\nMachine WORKFLOW.json and QUALITY_GATES.json are evaluator inputs; read them only\\nwhen changing or investigating their contracts. Use evaluator results in normal\\nwork. Missing instructions or an unknown returned procedure stop the affected\\naction: report the exact discovery gap in RESULTS.md.\\n\\n## After compaction\\n\\nRecover the repository, selected IDs, objective, existing authority and pending\\naction from the summary. For governed work, obtain fresh context through\\nCONTINUE.md and reread the current procedure and prerequisites lost from context.\\nA summary preserves pointers and decisions, not current lifecycle truth. Inspect\\nuncertain writes or external effects before retrying. Resume only unapplied work.\\n\"}}\r\n",
+    "stderr": "",
+    "exit_code": 0,
+    "outcome": "success",
+    "uuid": "872d79ee-fbd7-4185-b948-d0b03b196c5b",
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFmUfyrt1LJZYbb6qo7",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "I'll start by reading the required instructions for this situation: recovery after a lost acknowledgement, plus the communication rules."
+        }
+      ],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 11202,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 11202
+        },
+        "output_tokens": 1,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "75520d2c-7489-46ef-80c7-452d614eb06e",
+    "timestamp": "2026-09-27T16:25:08.784Z",
+    "request_id": "req_011CfUFmTazPavkKHbkESDRc"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFmUfyrt1LJZYbb6qo7",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01F1NsWfiJvc6sMxBrGZbRui",
+          "name": "Read",
+          "input": {
+            "file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-uncertain-recovery-npf8z86u\\repository\\docs\\engineering\\harness\\CONTINUE.md"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 11202,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 11202
+        },
+        "output_tokens": 1,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "93128b36-ffea-4767-b1f1-a83eec994f0a",
+    "timestamp": "2026-09-27T16:25:09.509Z",
+    "request_id": "req_011CfUFmTazPavkKHbkESDRc"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_01F1NsWfiJvc6sMxBrGZbRui",
+          "type": "tool_result",
+          "content": "1\t# Continue selected work\n2\t\n3\t## Read this when\n4\t\n5\tAn existing artifact is selected, including recovery after compaction.\n6\t\n7\t## Before this action\n8\t\n9\tRecover the exact repository, artifact IDs, pending action and existing authority. Obtain the current result; read the selected step and its returned prerequisites before acting. A prior summary does not establish current state.\n10\t\n11\t## Procedure\n12\t\n13\t### Continue selected work\n14\t\n15\t**Inputs:** An exact existing artifact ID, its current record, any existing\n16\tauthority, and the latest evaluator result when one is available.\n17\t\n18\t**Output:**\n19\t\n20\t- **Formal artifacts:** None created or changed by selecting the continuation.\n21\t- **Transient working material:** The current result and the matching procedure\n22\t  file and heading. No new decision or scope is inferred.\n23\t\n24\t**Actions:**\n25\t\n26\t1. Read the selected artifact's type and current state. Do not treat a prior\n27\t   conversation summary as current state.\n28\t2. For a work order, verification record, release record, or decision, obtain\n29\t   its current result with `check`.\n30\t3. For a definition, use its recorded state and the explicitly requested human\n31\t   decision. A permitted transition preview evaluates that decision. The\n32\t   selected release does not accept definition IDs in `check`.\n33\t4. For a risk, read its record and any paired decision. Use [Record risks](RISKS_AND_DECISIONS.md#record-risks-risk-affecting-the-change) for\n34\t   creation and [Resolve approval blockers](AUTHORIZE_WORK.md#resolve-approval-blockers) for a requested decision disposition.\n35\t   Do not infer a work-order stop from an unpaired risk alone.\n36\t5. Read the result's selected procedure and its exact next typed step. Use the\n37\t   index below to find the accompanying human instructions.\n38\t6. Resume the unapplied step under existing authority. Completed operations and\n39\t   terminal records are not invitations to replay earlier transitions.\n40\t7. If a returned command is unsupported by the exact selected release, report\n41\t   that contract/version mismatch. Do not repair it by inventing another next\n42\t   action, changing record state, or running candidate source.\n43\t\n44\t**Harness command:**\n45\t\n46\t```text\n47\tharnessctl check REPO --artifact ARTIFACT-ID --json\n48\t```\n49\t\n50\tUse only the supported types named in action 2. The following is an index of\n51\tthe released procedure IDs, not an independent rule for selecting one:\n52\t\n53\t| Returned procedure ID | Instruction destination |\n54\t| --- | --- |\n55\t| `PROC-WO-START` | [EXECUTE_WORK.md#start-the-selected-work](EXECUTE_WORK.md#start-the-selected-work) |\n56\t| `PROC-WO-IMPLEMENT` | [EXECUTE_WORK.md#retain-the-implementation-evidence](EXECUTE_WORK.md#retain-the-implementation-evidence) |\n57\t| `PROC-WO-PREPARE-VREC` | [VERIFY_OUTCOME.md#prepare-the-verification-record](VERIFY_OUTCOME.md#prepare-the-verification-record) |\n58\t| `PROC-FOCUS-SELECTED` | [CONTINUE.md#continue-selected-work](CONTINUE.md#continue-selected-work) |\n59\t| `PROC-FOCUS-RELATED` | [CONTINUE.md#continue-selected-work](CONTINUE.md#continue-selected-work) |\n60\t| `PROC-VREC-DECIDE` | [VERIFY_OUTCOME.md#obtain-the-humans-verification-decision](VERIFY_OUTCOME.md#obtain-the-humans-verification-decision) |\n61\t| `PROC-VREC-REJECT` | [VERIFY_OUTCOME.md#record-the-verification-decision](VERIFY_OUTCOME.md#record-the-verification-decision) |\n62\t| `PROC-VREC-SUPERSEDE` | [VERIFY_OUTCOME.md#record-the-verification-decision](VERIFY_OUTCOME.md#record-the-verification-decision) |\n63\t| `PROC-DELIVERY-SELECT` | [DELIVER_RESULT.md#select-the-delivery-action](DELIVER_RESULT.md#select-the-delivery-action) |\n64\t| `PROC-REPOSITORY-INTEGRATION` | [DELIVER_RESULT.md#confirm-authority-for-the-external-action](DELIVER_RESULT.md#confirm-authority-for-the-external-action) |\n65\t| `PROC-PREPARE-RELEASE` | [RELEASE.md#prepare-a-release-record](RELEASE.md#prepare-a-release-record) |\n66\t| `PROC-RLS-DECIDE` | [RELEASE.md#obtain-the-release-decision-when-required](RELEASE.md#obtain-the-release-decision-when-required) |\n67\t| `PROC-RLS-REJECT` | [RELEASE.md#record-the-release-decision-when-required](RELEASE.md#record-the-release-decision-when-required) |\n68\t| `PROC-EXTERNAL-ACTION` | [DELIVER_RESULT.md#confirm-authority-for-the-external-action](DELIVER_RESULT.md#confirm-authority-for-the-external-action) |\n69\t| `PROC-REMEDIATE` | [RESULTS.md#if-a-procedure-is-blocked](RESULTS.md#if-a-procedure-is-blocked) |\n70\t| `PROC-DEFINITION-COMPLETE` | [RECORD_STATE.md#complete-a-selected-definition](RECORD_STATE.md#complete-a-selected-definition) |\n71\t| `PROC-DEFINITION-WORK` | [CONTINUE.md#continue-selected-work](CONTINUE.md#continue-selected-work) |\n72\t| `PROC-DEC-DISPOSE` | [AUTHORIZE_WORK.md#resolve-approval-blockers](AUTHORIZE_WORK.md#resolve-approval-blockers) |\n73\t\n74\tThe returned typed step determines where to enter each referenced procedure.\n75\tDo not restart the whole procedure when earlier steps are already complete.\n76\tPreserve any exact decision request or command supplied by the evaluator.\n77\t\n78\t**Completion:** One current next step or one exact blocker is reported for the\n79\tselected scope. Completed and historical records remain unchanged.\n80\t\n81\t**Later use:** Perform the selected step with its inputs and authority, then\n82\treport its actual result under “Report a lifecycle result.”\n83\t\n84\t## Returned typed steps\n85\t\n86\tThis index is rendered from the evaluator's versioned instruction catalogue. It\n87\tmaps selected identifiers; it does not select an action or authorize its execution.\n88\t\n89\t| Returned step | Instruction destination |\n90\t| --- | --- |\n91\t| `STEP-WO-START-PREFLIGHT` | [EXECUTE_WORK.md#establish-the-execution-context](EXECUTE_WORK.md#establish-the-execution-context) |\n92\t| `STEP-WO-START-PREVIEW` | [EXECUTE_WORK.md#start-the-selected-work](EXECUTE_WORK.md#start-the-selected-work) |\n93\t| `STEP-WO-START-APPLY` | [EXECUTE_WORK.md#start-the-selected-work](EXECUTE_WORK.md#start-the-selected-work) |\n94\t| `STEP-WO-START-FINAL-FOCUS` | [CONTINUE.md#continue-selected-work](CONTINUE.md#continue-selected-work) |\n95\t| `STEP-WO-IMPLEMENT-CHECK` | [EXECUTE_WORK.md#retain-the-implementation-evidence](EXECUTE_WORK.md#retain-the-implementation-evidence) |\n96\t| `STEP-WO-IMPLEMENT-PREVIEW` | [EXECUTE_WORK.md#record-implementation-completion](EXECUTE_WORK.md#record-implementation-completion) |\n97\t| `STEP-WO-IMPLEMENT-APPLY` | [EXECUTE_WORK.md#record-implementation-completion](EXECUTE_WORK.md#record-implementation-completion) |\n98\t| `STEP-WO-PREPARE-VREC-CAPTURE` | [VERIFY_OUTCOME.md#prepare-the-verification-record](VERIFY_OUTCOME.md#prepare-the-verification-record) |\n99\t| `STEP-FOCUS-SELECTED` | [CONTINUE.md#continue-selected-work](CONTINUE.md#continue-selected-work) |\n100\t| `STEP-FOCUS-RELATED` | [CONTINUE.md#continue-selected-work](CONTINUE.md#continue-selected-work) |\n101\t| `STEP-VREC-DECIDE` | [VERIFY_OUTCOME.md#obtain-the-humans-verification-decision](VERIFY_OUTCOME.md#obtain-the-humans-verification-decision) |\n102\t| `STEP-VREC-REJECT` | [VERIFY_OUTCOME.md#record-the-verification-decision](VERIFY_OUTCOME.md#record-the-verification-decision) |\n103\t| `STEP-VREC-SUPERSEDE` | [VERIFY_OUTCOME.md#record-the-verification-decision](VERIFY_OUTCOME.md#record-the-verification-decision) |\n104\t| `STEP-DELIVERY-SELECT` | [DELIVER_RESULT.md#select-the-delivery-action](DELIVER_RESULT.md#select-the-delivery-action) |\n105\t| `STEP-REPOSITORY-INTEGRATION` | [DELIVER_RESULT.md#confirm-authority-for-the-external-action](DELIVER_RESULT.md#confirm-authority-for-the-external-action) |\n106\t| `STEP-PREPARE-RELEASE` | [RELEASE.md#prepare-a-release-record](RELEASE.md#prepare-a-release-record) |\n107\t| `STEP-RLS-DECIDE` | [RELEASE.md#obtain-the-release-decision-when-required](RELEASE.md#obtain-the-release-decision-when-required) |\n108\t| `STEP-RLS-REJECT` | [RELEASE.md#record-the-release-decision-when-required](RELEASE.md#record-the-release-decision-when-required) |\n109\t| `STEP-EXTERNAL-ACTION` | [DELIVER_RESULT.md#confirm-authority-for-the-external-action](DELIVER_RESULT.md#confirm-authority-for-the-external-action) |\n110\t| `STEP-REMEDIATE-FOCUS` | [RESULTS.md#if-a-procedure-is-blocked](RESULTS.md#if-a-procedure-is-blocked) |\n111\t| `STEP-DEFINITION-COMPLETE` | [RECORD_STATE.md#complete-a-selected-definition](RECORD_STATE.md#complete-a-selected-definition) |\n112\t| `STEP-DEFINITION-WORK` | [CONTINUE.md#continue-selected-work](CONTINUE.md#continue-selected-work) |\n113\t| `STEP-DEC-DISPOSE` | [AUTHORIZE_WORK.md#resolve-approval-blockers](AUTHORIZE_WORK.md#resolve-approval-blockers) |\n114\t\n115\t## Read next when\n116\t\n117\tUse the returned procedure/step destination in [Continue selected work](CONTINUE.md#continue-selected-work). For a blocker or unknown identifier → [RESULTS.md#if-a-procedure-is-blocked](RESULTS.md#if-a-procedure-is-blocked).\n118\t"
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "e7b45290-4c99-4391-8007-15fcf9b0ba15",
+    "timestamp": "2026-09-27T16:25:09.562Z",
+    "tool_use_result": {
+      "type": "text",
+      "file": {
+        "filePath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-uncertain-recovery-npf8z86u\\repository\\docs\\engineering\\harness\\CONTINUE.md",
+        "content": "# Continue selected work\n\n## Read this when\n\nAn existing artifact is selected, including recovery after compaction.\n\n## Before this action\n\nRecover the exact repository, artifact IDs, pending action and existing authority. Obtain the current result; read the selected step and its returned prerequisites before acting. A prior summary does not establish current state.\n\n## Procedure\n\n### Continue selected work\n\n**Inputs:** An exact existing artifact ID, its current record, any existing\nauthority, and the latest evaluator result when one is available.\n\n**Output:**\n\n- **Formal artifacts:** None created or changed by selecting the continuation.\n- **Transient working material:** The current result and the matching procedure\n  file and heading. No new decision or scope is inferred.\n\n**Actions:**\n\n1. Read the selected artifact's type and current state. Do not treat a prior\n   conversation summary as current state.\n2. For a work order, verification record, release record, or decision, obtain\n   its current result with `check`.\n3. For a definition, use its recorded state and the explicitly requested human\n   decision. A permitted transition preview evaluates that decision. The\n   selected release does not accept definition IDs in `check`.\n4. For a risk, read its record and any paired decision. Use [Record risks](RISKS_AND_DECISIONS.md#record-risks-risk-affecting-the-change) for\n   creation and [Resolve approval blockers](AUTHORIZE_WORK.md#resolve-approval-blockers) for a requested decision disposition.\n   Do not infer a work-order stop from an unpaired risk alone.\n5. Read the result's selected procedure and its exact next typed step. Use the\n   index below to find the accompanying human instructions.\n6. Resume the unapplied step under existing authority. Completed operations and\n   terminal records are not invitations to replay earlier transitions.\n7. If a returned command is unsupported by the exact selected release, report\n   that contract/version mismatch. Do not repair it by inventing another next\n   action, changing record state, or running candidate source.\n\n**Harness command:**\n\n```text\nharnessctl check REPO --artifact ARTIFACT-ID --json\n```\n\nUse only the supported types named in action 2. The following is an index of\nthe released procedure IDs, not an independent rule for selecting one:\n\n| Returned procedure ID | Instruction destination |\n| --- | --- |\n| `PROC-WO-START` | [EXECUTE_WORK.md#start-the-selected-work](EXECUTE_WORK.md#start-the-selected-work) |\n| `PROC-WO-IMPLEMENT` | [EXECUTE_WORK.md#retain-the-implementation-evidence](EXECUTE_WORK.md#retain-the-implementation-evidence) |\n| `PROC-WO-PREPARE-VREC` | [VERIFY_OUTCOME.md#prepare-the-verification-record](VERIFY_OUTCOME.md#prepare-the-verification-record) |\n| `PROC-FOCUS-SELECTED` | [CONTINUE.md#continue-selected-work](CONTINUE.md#continue-selected-work) |\n| `PROC-FOCUS-RELATED` | [CONTINUE.md#continue-selected-work](CONTINUE.md#continue-selected-work) |\n| `PROC-VREC-DECIDE` | [VERIFY_OUTCOME.md#obtain-the-humans-verification-decision](VERIFY_OUTCOME.md#obtain-the-humans-verification-decision) |\n| `PROC-VREC-REJECT` | [VERIFY_OUTCOME.md#record-the-verification-decision](VERIFY_OUTCOME.md#record-the-verification-decision) |\n| `PROC-VREC-SUPERSEDE` | [VERIFY_OUTCOME.md#record-the-verification-decision](VERIFY_OUTCOME.md#record-the-verification-decision) |\n| `PROC-DELIVERY-SELECT` | [DELIVER_RESULT.md#select-the-delivery-action](DELIVER_RESULT.md#select-the-delivery-action) |\n| `PROC-REPOSITORY-INTEGRATION` | [DELIVER_RESULT.md#confirm-authority-for-the-external-action](DELIVER_RESULT.md#confirm-authority-for-the-external-action) |\n| `PROC-PREPARE-RELEASE` | [RELEASE.md#prepare-a-release-record](RELEASE.md#prepare-a-release-record) |\n| `PROC-RLS-DECIDE` | [RELEASE.md#obtain-the-release-decision-when-required](RELEASE.md#obtain-the-release-decision-when-required) |\n| `PROC-RLS-REJECT` | [RELEASE.md#record-the-release-decision-when-required](RELEASE.md#record-the-release-decision-when-required) |\n| `PROC-EXTERNAL-ACTION` | [DELIVER_RESULT.md#confirm-authority-for-the-external-action](DELIVER_RESULT.md#confirm-authority-for-the-external-action) |\n| `PROC-REMEDIATE` | [RESULTS.md#if-a-procedure-is-blocked](RESULTS.md#if-a-procedure-is-blocked) |\n| `PROC-DEFINITION-COMPLETE` | [RECORD_STATE.md#complete-a-selected-definition](RECORD_STATE.md#complete-a-selected-definition) |\n| `PROC-DEFINITION-WORK` | [CONTINUE.md#continue-selected-work](CONTINUE.md#continue-selected-work) |\n| `PROC-DEC-DISPOSE` | [AUTHORIZE_WORK.md#resolve-approval-blockers](AUTHORIZE_WORK.md#resolve-approval-blockers) |\n\nThe returned typed step determines where to enter each referenced procedure.\nDo not restart the whole procedure when earlier steps are already complete.\nPreserve any exact decision request or command supplied by the evaluator.\n\n**Completion:** One current next step or one exact blocker is reported for the\nselected scope. Completed and historical records remain unchanged.\n\n**Later use:** Perform the selected step with its inputs and authority, then\nreport its actual result under “Report a lifecycle result.”\n\n## Returned typed steps\n\nThis index is rendered from the evaluator's versioned instruction catalogue. It\nmaps selected identifiers; it does not select an action or authorize its execution.\n\n| Returned step | Instruction destination |\n| --- | --- |\n| `STEP-WO-START-PREFLIGHT` | [EXECUTE_WORK.md#establish-the-execution-context](EXECUTE_WORK.md#establish-the-execution-context) |\n| `STEP-WO-START-PREVIEW` | [EXECUTE_WORK.md#start-the-selected-work](EXECUTE_WORK.md#start-the-selected-work) |\n| `STEP-WO-START-APPLY` | [EXECUTE_WORK.md#start-the-selected-work](EXECUTE_WORK.md#start-the-selected-work) |\n| `STEP-WO-START-FINAL-FOCUS` | [CONTINUE.md#continue-selected-work](CONTINUE.md#continue-selected-work) |\n| `STEP-WO-IMPLEMENT-CHECK` | [EXECUTE_WORK.md#retain-the-implementation-evidence](EXECUTE_WORK.md#retain-the-implementation-evidence) |\n| `STEP-WO-IMPLEMENT-PREVIEW` | [EXECUTE_WORK.md#record-implementation-completion](EXECUTE_WORK.md#record-implementation-completion) |\n| `STEP-WO-IMPLEMENT-APPLY` | [EXECUTE_WORK.md#record-implementation-completion](EXECUTE_WORK.md#record-implementation-completion) |\n| `STEP-WO-PREPARE-VREC-CAPTURE` | [VERIFY_OUTCOME.md#prepare-the-verification-record](VERIFY_OUTCOME.md#prepare-the-verification-record) |\n| `STEP-FOCUS-SELECTED` | [CONTINUE.md#continue-selected-work](CONTINUE.md#continue-selected-work) |\n| `STEP-FOCUS-RELATED` | [CONTINUE.md#continue-selected-work](CONTINUE.md#continue-selected-work) |\n| `STEP-VREC-DECIDE` | [VERIFY_OUTCOME.md#obtain-the-humans-verification-decision](VERIFY_OUTCOME.md#obtain-the-humans-verification-decision) |\n| `STEP-VREC-REJECT` | [VERIFY_OUTCOME.md#record-the-verification-decision](VERIFY_OUTCOME.md#record-the-verification-decision) |\n| `STEP-VREC-SUPERSEDE` | [VERIFY_OUTCOME.md#record-the-verification-decision](VERIFY_OUTCOME.md#record-the-verification-decision) |\n| `STEP-DELIVERY-SELECT` | [DELIVER_RESULT.md#select-the-delivery-action](DELIVER_RESULT.md#select-the-delivery-action) |\n| `STEP-REPOSITORY-INTEGRATION` | [DELIVER_RESULT.md#confirm-authority-for-the-external-action](DELIVER_RESULT.md#confirm-authority-for-the-external-action) |\n| `STEP-PREPARE-RELEASE` | [RELEASE.md#prepare-a-release-record](RELEASE.md#prepare-a-release-record) |\n| `STEP-RLS-DECIDE` | [RELEASE.md#obtain-the-release-decision-when-required](RELEASE.md#obtain-the-release-decision-when-required) |\n| `STEP-RLS-REJECT` | [RELEASE.md#record-the-release-decision-when-required](RELEASE.md#record-the-release-decision-when-required) |\n| `STEP-EXTERNAL-ACTION` | [DELIVER_RESULT.md#confirm-authority-for-the-external-action](DELIVER_RESULT.md#confirm-authority-for-the-external-action) |\n| `STEP-REMEDIATE-FOCUS` | [RESULTS.md#if-a-procedure-is-blocked](RESULTS.md#if-a-procedure-is-blocked) |\n| `STEP-DEFINITION-COMPLETE` | [RECORD_STATE.md#complete-a-selected-definition](RECORD_STATE.md#complete-a-selected-definition) |\n| `STEP-DEFINITION-WORK` | [CONTINUE.md#continue-selected-work](CONTINUE.md#continue-selected-work) |\n| `STEP-DEC-DISPOSE` | [AUTHORIZE_WORK.md#resolve-approval-blockers](AUTHORIZE_WORK.md#resolve-approval-blockers) |\n\n## Read next when\n\nUse the returned procedure/step destination in [Continue selected work](CONTINUE.md#continue-selected-work). For a blocker or unknown identifier → [RESULTS.md#if-a-procedure-is-blocked](RESULTS.md#if-a-procedure-is-blocked).\n",
+        "numLines": 118,
+        "startLine": 1,
+        "totalLines": 118
+      }
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFmUfyrt1LJZYbb6qo7",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01TrezEsUMcBjrEMUqCDAunn",
+          "name": "Read",
+          "input": {
+            "file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-uncertain-recovery-npf8z86u\\repository\\docs\\engineering\\harness\\COMMUNICATION.md"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 11202,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 11202
+        },
+        "output_tokens": 1,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "fddd8f5b-f2e0-4850-bfeb-1de003aec3c3",
+    "timestamp": "2026-09-27T16:25:10.817Z",
+    "request_id": "req_011CfUFmTazPavkKHbkESDRc"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_01TrezEsUMcBjrEMUqCDAunn",
+          "type": "tool_result",
+          "content": "1\t# Communication\n2\t\n3\t## Purpose and claim\n4\t\n5\tThis policy controls eligible English prose written by agents for operators and\n6\ttechnical artifacts. It uses selected clarity principles based on ASD-STE100.\n7\tIt is not ASD-STE100 compliance, certification, approval, or endorsement.\n8\t\n9\tAn agent MUST NOT download, search for, bundle, reproduce, parse, or attempt to\n10\tstrictly implement ASD-STE100 or a controlled dictionary. The installed policy\n11\tis complete for its declared purpose.\n12\t\n13\t## Eligible prose\n14\t\n15\tEligible prose is agent-authored English explanation that is not protected\n16\tcontent (see next section). For eligible prose, the agent SHOULD:\n17\t\n18\t- use one stable term for one concept;\n19\t- define an uncommon project term before relying on it;\n20\t- identify the responsible actor when responsibility matters;\n21\t- state conditions, actions, and results directly;\n22\t- prefer active voice when it identifies responsibility;\n23\t- keep each sentence focused on one principal action;\n24\t- avoid ambiguous pronouns, decorative synonyms, hidden negation, vague\n25\t  references, and unnecessary introductions; and\n26\t- use a list or table when it clarifies parallel conditions, mappings, or\n27\t  ordered steps.\n28\t\n29\tSentence length is a review signal. It is not a conformance threshold and does\n30\tnot justify removing necessary technical detail.\n31\t\n32\t## Protected content\n33\t\n34\tExact protected content MUST remain byte-identical. It includes:\n35\t\n36\t- code and inline code;\n37\t- commands, paths, identifiers, hashes, version strings, URLs, schemas, and\n38\t  field names;\n39\t- JSON, TOML, YAML, XML, and other machine-readable data;\n40\t- logs, diagnostics, evidence, evaluator output, and canonical restitution\n41\t  blocks;\n42\t- quotations; and\n43\t- operator-supplied text that is presented as supplied text.\n44\t\n45\tProtected content MUST NOT be automatically paraphrased. It includes BCP 14 obligations, \n46\trequirement statements, lifecycle and decision meanings, safety or legal qualifications, \n47\tacceptance thresholds, formulas, and established terminology.\n48\t"
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "e836795e-323f-4b7c-89d9-83abd3bf2d9a",
+    "timestamp": "2026-09-27T16:25:10.849Z",
+    "tool_use_result": {
+      "type": "text",
+      "file": {
+        "filePath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-uncertain-recovery-npf8z86u\\repository\\docs\\engineering\\harness\\COMMUNICATION.md",
+        "content": "# Communication\n\n## Purpose and claim\n\nThis policy controls eligible English prose written by agents for operators and\ntechnical artifacts. It uses selected clarity principles based on ASD-STE100.\nIt is not ASD-STE100 compliance, certification, approval, or endorsement.\n\nAn agent MUST NOT download, search for, bundle, reproduce, parse, or attempt to\nstrictly implement ASD-STE100 or a controlled dictionary. The installed policy\nis complete for its declared purpose.\n\n## Eligible prose\n\nEligible prose is agent-authored English explanation that is not protected\ncontent (see next section). For eligible prose, the agent SHOULD:\n\n- use one stable term for one concept;\n- define an uncommon project term before relying on it;\n- identify the responsible actor when responsibility matters;\n- state conditions, actions, and results directly;\n- prefer active voice when it identifies responsibility;\n- keep each sentence focused on one principal action;\n- avoid ambiguous pronouns, decorative synonyms, hidden negation, vague\n  references, and unnecessary introductions; and\n- use a list or table when it clarifies parallel conditions, mappings, or\n  ordered steps.\n\nSentence length is a review signal. It is not a conformance threshold and does\nnot justify removing necessary technical detail.\n\n## Protected content\n\nExact protected content MUST remain byte-identical. It includes:\n\n- code and inline code;\n- commands, paths, identifiers, hashes, version strings, URLs, schemas, and\n  field names;\n- JSON, TOML, YAML, XML, and other machine-readable data;\n- logs, diagnostics, evidence, evaluator output, and canonical restitution\n  blocks;\n- quotations; and\n- operator-supplied text that is presented as supplied text.\n\nProtected content MUST NOT be automatically paraphrased. It includes BCP 14 obligations, \nrequirement statements, lifecycle and decision meanings, safety or legal qualifications, \nacceptance thresholds, formulas, and established terminology.\n",
+        "numLines": 48,
+        "startLine": 1,
+        "totalLines": 48
+      }
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFmo7VNPXqw62o24XcX",
+      "type": "message",
+      "role": "assistant",
+      "content": [],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 5258,
+        "cache_read_input_tokens": 11202,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 5258
+        },
+        "output_tokens": 6,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "6ab8d35c-25ce-4bd3-99f2-c93731474e17",
+    "timestamp": "2026-09-27T16:25:16.040Z",
+    "request_id": "req_011CfUFmnazMMzHiXRNLZGkC"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFmo7VNPXqw62o24XcX",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_016e529h3fYQJ1yAWUe6HQR4",
+          "name": "Read",
+          "input": {
+            "file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-uncertain-recovery-npf8z86u\\repository\\docs\\engineering\\harness\\RESULTS.md"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 5258,
+        "cache_read_input_tokens": 11202,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 5258
+        },
+        "output_tokens": 6,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "4a38d3cc-975b-4cfb-ba47-4c22f752b2f8",
+    "timestamp": "2026-09-27T16:25:17.266Z",
+    "request_id": "req_011CfUFmnazMMzHiXRNLZGkC"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_016e529h3fYQJ1yAWUe6HQR4",
+          "type": "tool_result",
+          "content": "1\t# Report results and blockers\n2\t\n3\t## Read this when\n4\t\n5\tReport a governed result, handle a refusal or recover an uncertain operation.\n6\t\n7\t## Before this action\n8\t\n9\tRead only the actual selected result and evidence needed to establish its effects. Before eligible English reporting, read [COMMUNICATION.md#communication](COMMUNICATION.md#communication) if it is no longer in context.\n10\t\n11\t## Procedure\n12\t\n13\t### Report a lifecycle result\n14\t\n15\tAfter a lifecycle stage completes or reaches a stop condition, obtain the\n16\tselected evaluator's schema-2 result. The result controls the reported scope,\n17\teffects, blockers, final state, required decision, alternatives, and next step.\n18\tThe human or agent MUST NOT recompute those fields.\n19\t\n20\tFor a human-readable report, lead with the outcome or required decision. The\n21\twording and headings may vary, and empty fields may be omitted. The report\n22\tMUST preserve:\n23\t\n24\t1. The actual artifact IDs and whether the selected operation completed or\n25\t   was blocked.\n26\t2. The observed effects, separately from expected effects that did not occur.\n27\t3. Every exact blocker and every material non-effect. In particular, do not\n28\t   imply approval, a transition, verification, release, a Git action,\n29\t   publication, deployment, or operation that did not occur.\n30\t4. The final lifecycle state and the accountable human or agent. When a\n31\t   decision is required, name the exact decision and authority needed.\n32\t5. Exactly one current typed procedure step from the evaluator.\n33\t6. The command's argument values and boundaries, or the operative meaning of\n34\t   the suggested response.\n35\t\n36\tOnly complete alternatives declared by the workflow may be shown. Present them\n37\tseparately from the primary next step. Do not invent an effect, authority,\n38\tblocker, decision, or alternative. Do not add unrelated repository findings\n39\tto the selected result. Do not replace the returned next step with an\n40\topen-ended question about what to do next.\n41\t\n42\tAutomation MUST read the structured JSON result. New results declare\n43\t`digest_format = \"machine-fields-v1\"`. This digest binds machine fields such\n44\tas candidate identity, scope, state, gates, and command arguments. Explanatory\n45\twording is excluded. Older retained results keep their original digest format.\n46\t\n47\t### If a procedure is blocked\n48\t\n49\tStop the affected action before changing lifecycle state or extending scope\n50\twhen any of these conditions applies:\n51\t\n52\t- Managed-file integrity fails.\n53\t- The selected governing graph is invalid or artifact IDs are ambiguous.\n54\t- The procedure needs a work order, but no selected work order is eligible\n55\t  for that phase.\n56\t- A required governing artifact or gate is missing.\n57\t- A required check fails or cannot be assessed.\n58\t- Repository-owner instructions conflict with the harness contract.\n59\t- Remediation would exceed the selected work-order scope.\n60\t- The action lacks its decision right or explicit authority.\n61\t\n62\tUse the severity and blocking effect reported by `harnessctl`. Do not\n63\treclassify a finding because it is labelled `structure`, `governance`, `policy`,\n64\tor `maintenance`.\n65\t\n66\tReport the exact failed rule or predicate, the unchanged affected lifecycle\n67\tstate, and any effects that already occurred. Preserve the observed evidence.\n68\tUse the evaluator's current result to report one corrective step or one\n69\taccountable escalation.\n70\t\n71\tFor a failed gate, use the corrective form that `harnessctl check` returns for\n72\tthe first failing predicate. Do not substitute an unchanged replay of the\n73\tfailed command. Resolve the missing input, scope, evidence, or decision before\n74\tretrying the affected action. Remediation that changes scope, accepts risk,\n75\tor exercises a reserved decision right requires the corresponding explicit\n76\tdecision.\n77\t\n78\tWhen a correction requires implementation, inspect the proposed work order\n79\twith `harnessctl check REPO --artifact WO-ID --json`. Reuse it only if its\n80\tapproved scope covers the correction and its current state permits execution.\n81\tStart approved work through the start procedure; resume work already in\n82\tprogress. If no eligible work order covers the correction, return to Define\n83\tthe change and Authorize the work to prepare and approve a new work order.\n84\tPreserve completed and rejected records. The selected release provides no\n85\ttransition from `implemented` back to `in_progress`; do not edit a state or\n86\treplay an earlier start to reopen it. A correction that changes an accepted\n87\tdefinition must also follow the linked-revision boundary.\n88\t\n89\tAfter an interrupted write or uncertain external action, inspect the actual\n90\tresult before retrying. Continue only work that has not already occurred.\n91\t\n92\t## Read next when\n93\t\n94\tAfter correcting the exact blocker or confirming uncertain effects → [CONTINUE.md#procedure](CONTINUE.md#procedure). Missing evaluator → [SETUP.md#procedure](SETUP.md#procedure).\n95\t## Gates\n96\t\n97\tA gate is a named check used to determine whether an action meets its required conditions. It contains one or more predicates. A predicate is one exact condition, such as “the work order is approved” or “all declared changed paths are within the permitted scope.”\n98\t\n99\t`harnessctl` evaluates the applicable predicates when a checkpoint is requested, a transition is previewed or applied, or a preparation command runs its required checks. A gate result is not an accountable decision.\n100\t"
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "87916972-93e8-4d98-853f-35bb6e0b5cab",
+    "timestamp": "2026-09-27T16:25:17.298Z",
+    "tool_use_result": {
+      "type": "text",
+      "file": {
+        "filePath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-uncertain-recovery-npf8z86u\\repository\\docs\\engineering\\harness\\RESULTS.md",
+        "content": "# Report results and blockers\n\n## Read this when\n\nReport a governed result, handle a refusal or recover an uncertain operation.\n\n## Before this action\n\nRead only the actual selected result and evidence needed to establish its effects. Before eligible English reporting, read [COMMUNICATION.md#communication](COMMUNICATION.md#communication) if it is no longer in context.\n\n## Procedure\n\n### Report a lifecycle result\n\nAfter a lifecycle stage completes or reaches a stop condition, obtain the\nselected evaluator's schema-2 result. The result controls the reported scope,\neffects, blockers, final state, required decision, alternatives, and next step.\nThe human or agent MUST NOT recompute those fields.\n\nFor a human-readable report, lead with the outcome or required decision. The\nwording and headings may vary, and empty fields may be omitted. The report\nMUST preserve:\n\n1. The actual artifact IDs and whether the selected operation completed or\n   was blocked.\n2. The observed effects, separately from expected effects that did not occur.\n3. Every exact blocker and every material non-effect. In particular, do not\n   imply approval, a transition, verification, release, a Git action,\n   publication, deployment, or operation that did not occur.\n4. The final lifecycle state and the accountable human or agent. When a\n   decision is required, name the exact decision and authority needed.\n5. Exactly one current typed procedure step from the evaluator.\n6. The command's argument values and boundaries, or the operative meaning of\n   the suggested response.\n\nOnly complete alternatives declared by the workflow may be shown. Present them\nseparately from the primary next step. Do not invent an effect, authority,\nblocker, decision, or alternative. Do not add unrelated repository findings\nto the selected result. Do not replace the returned next step with an\nopen-ended question about what to do next.\n\nAutomation MUST read the structured JSON result. New results declare\n`digest_format = \"machine-fields-v1\"`. This digest binds machine fields such\nas candidate identity, scope, state, gates, and command arguments. Explanatory\nwording is excluded. Older retained results keep their original digest format.\n\n### If a procedure is blocked\n\nStop the affected action before changing lifecycle state or extending scope\nwhen any of these conditions applies:\n\n- Managed-file integrity fails.\n- The selected governing graph is invalid or artifact IDs are ambiguous.\n- The procedure needs a work order, but no selected work order is eligible\n  for that phase.\n- A required governing artifact or gate is missing.\n- A required check fails or cannot be assessed.\n- Repository-owner instructions conflict with the harness contract.\n- Remediation would exceed the selected work-order scope.\n- The action lacks its decision right or explicit authority.\n\nUse the severity and blocking effect reported by `harnessctl`. Do not\nreclassify a finding because it is labelled `structure`, `governance`, `policy`,\nor `maintenance`.\n\nReport the exact failed rule or predicate, the unchanged affected lifecycle\nstate, and any effects that already occurred. Preserve the observed evidence.\nUse the evaluator's current result to report one corrective step or one\naccountable escalation.\n\nFor a failed gate, use the corrective form that `harnessctl check` returns for\nthe first failing predicate. Do not substitute an unchanged replay of the\nfailed command. Resolve the missing input, scope, evidence, or decision before\nretrying the affected action. Remediation that changes scope, accepts risk,\nor exercises a reserved decision right requires the corresponding explicit\ndecision.\n\nWhen a correction requires implementation, inspect the proposed work order\nwith `harnessctl check REPO --artifact WO-ID --json`. Reuse it only if its\napproved scope covers the correction and its current state permits execution.\nStart approved work through the start procedure; resume work already in\nprogress. If no eligible work order covers the correction, return to Define\nthe change and Authorize the work to prepare and approve a new work order.\nPreserve completed and rejected records. The selected release provides no\ntransition from `implemented` back to `in_progress`; do not edit a state or\nreplay an earlier start to reopen it. A correction that changes an accepted\ndefinition must also follow the linked-revision boundary.\n\nAfter an interrupted write or uncertain external action, inspect the actual\nresult before retrying. Continue only work that has not already occurred.\n\n## Read next when\n\nAfter correcting the exact blocker or confirming uncertain effects → [CONTINUE.md#procedure](CONTINUE.md#procedure). Missing evaluator → [SETUP.md#procedure](SETUP.md#procedure).\n## Gates\n\nA gate is a named check used to determine whether an action meets its required conditions. It contains one or more predicates. A predicate is one exact condition, such as “the work order is approved” or “all declared changed paths are within the permitted scope.”\n\n`harnessctl` evaluates the applicable predicates when a checkpoint is requested, a transition is previewed or applied, or a preparation command runs its required checks. A gate result is not an accountable decision.\n",
+        "numLines": 100,
+        "startLine": 1,
+        "totalLines": 100
+      }
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFmo7VNPXqw62o24XcX",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_011Pe7VprY8ua5N1bMnSRAzC",
+          "name": "Bash",
+          "input": {
+            "command": "cd \"C:/Users/mathi/AppData/Local/Temp/iar-uncertain-recovery-npf8z86u/repository\" && ls -R docs/engineering | head -80 && echo \"--- toml ---\" && cat .engineering-harness.toml",
+            "description": "List formal records and harness config"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 5258,
+        "cache_read_input_tokens": 11202,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 5258
+        },
+        "output_tokens": 6,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "cc03c5f2-edfe-44ba-9059-38460ccbf50c",
+    "timestamp": "2026-09-27T16:25:18.332Z",
+    "request_id": "req_011CfUFmnazMMzHiXRNLZGkC"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_011Pe7VprY8ua5N1bMnSRAzC",
+          "type": "tool_result",
+          "content": "docs/engineering:\nADOPTION_REPORT.md\nARTIFACT_AUTHORING.md\nDECISION_RIGHTS.md\nOPERATING_CARD.md\nQUALITY_GATES.json\nQUALITY_GATES.md\nREADME.md\nTECHNICAL_COMMUNICATION.md\nTRACEABILITY.md\nWORKFLOW.json\nWORKFLOW.md\nharness\ninstruction-architecture\ntemplates\n\ndocs/engineering/harness:\nAMEND_DEFINITIONS.md\nARTIFACTS.md\nAUTHORITY.md\nAUTHORIZE_WORK.md\nCOMMUNICATION.md\nCONTINUE.md\nDEFINE_CHANGE.md\nDEFINITION_LINKS.md\nDELIVER_RESULT.md\nDRAFT_DEFINITIONS.md\nDRAFT_WORK_ORDERS.md\nEXCEPTIONS.md\nEXECUTE_WORK.md\nPULL_REQUEST.md\nRECORD_STATE.md\nRELEASE.md\nRESULTS.md\nRISKS_AND_DECISIONS.md\nSETUP.md\nSKILL_PROVIDER.md\nUPGRADE.md\nVERIFY_OUTCOME.md\nWORK_AND_EVIDENCE.md\nmigration\n\ndocs/engineering/harness/migration:\nIMPLEMENTATION_PLAN.md\nREFERENCE_MAP.md\n\ndocs/engineering/instruction-architecture:\narchitecture\ncapabilities\nintent\nrequirements\nrisks\nspecifications\nverification\nwork-orders\n\ndocs/engineering/instruction-architecture/architecture:\nARCH-IAR-011.md\nadr\n\ndocs/engineering/instruction-architecture/architecture/adr:\nADR-IAR-011.md\n\ndocs/engineering/instruction-architecture/capabilities:\nCAP-IAR-002.md\n\ndocs/engineering/instruction-architecture/intent:\nINT-IAR-001.md\n\ndocs/engineering/instruction-architecture/requirements:\nREQ-IAR-022.md\nREQ-IAR-023.md\nREQ-IAR-024.md\nREQ-IAR-025.md\nREQ-IAR-026.md\nREQ-IAR-027.md\n\ndocs/engineering/instruction-architecture/risks:\nRISK-IAR-001.md\n\n--- toml ---\n[harness]\ntool_version = \"0.19.0\"\ninstalled_at = \"2026-09-27\"\nproject_name = \"Instruction delivery demo - claude\"\n\n[revision_provenance]\nrequired_for_verified_work = true\nrequired_for_release = true",
+          "is_error": false
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "df79a898-1e1d-428b-8d43-91985bd0e028",
+    "timestamp": "2026-09-27T16:25:19.269Z",
+    "tool_use_result": {
+      "stdout": "docs/engineering:\nADOPTION_REPORT.md\nARTIFACT_AUTHORING.md\nDECISION_RIGHTS.md\nOPERATING_CARD.md\nQUALITY_GATES.json\nQUALITY_GATES.md\nREADME.md\nTECHNICAL_COMMUNICATION.md\nTRACEABILITY.md\nWORKFLOW.json\nWORKFLOW.md\nharness\ninstruction-architecture\ntemplates\n\ndocs/engineering/harness:\nAMEND_DEFINITIONS.md\nARTIFACTS.md\nAUTHORITY.md\nAUTHORIZE_WORK.md\nCOMMUNICATION.md\nCONTINUE.md\nDEFINE_CHANGE.md\nDEFINITION_LINKS.md\nDELIVER_RESULT.md\nDRAFT_DEFINITIONS.md\nDRAFT_WORK_ORDERS.md\nEXCEPTIONS.md\nEXECUTE_WORK.md\nPULL_REQUEST.md\nRECORD_STATE.md\nRELEASE.md\nRESULTS.md\nRISKS_AND_DECISIONS.md\nSETUP.md\nSKILL_PROVIDER.md\nUPGRADE.md\nVERIFY_OUTCOME.md\nWORK_AND_EVIDENCE.md\nmigration\n\ndocs/engineering/harness/migration:\nIMPLEMENTATION_PLAN.md\nREFERENCE_MAP.md\n\ndocs/engineering/instruction-architecture:\narchitecture\ncapabilities\nintent\nrequirements\nrisks\nspecifications\nverification\nwork-orders\n\ndocs/engineering/instruction-architecture/architecture:\nARCH-IAR-011.md\nadr\n\ndocs/engineering/instruction-architecture/architecture/adr:\nADR-IAR-011.md\n\ndocs/engineering/instruction-architecture/capabilities:\nCAP-IAR-002.md\n\ndocs/engineering/instruction-architecture/intent:\nINT-IAR-001.md\n\ndocs/engineering/instruction-architecture/requirements:\nREQ-IAR-022.md\nREQ-IAR-023.md\nREQ-IAR-024.md\nREQ-IAR-025.md\nREQ-IAR-026.md\nREQ-IAR-027.md\n\ndocs/engineering/instruction-architecture/risks:\nRISK-IAR-001.md\n\n--- toml ---\n[harness]\ntool_version = \"0.19.0\"\ninstalled_at = \"2026-09-27\"\nproject_name = \"Instruction delivery demo - claude\"\n\n[revision_provenance]\nrequired_for_verified_work = true\nrequired_for_release = true",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false,
+      "noOutputExpected": false
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFnQsZGaTRFuViphRfv",
+      "type": "message",
+      "role": "assistant",
+      "content": [],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 3386,
+        "cache_read_input_tokens": 16460,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 3386
+        },
+        "output_tokens": 2,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "f9ca9311-65f2-47e6-8de9-f7ae8ffbc75f",
+    "timestamp": "2026-09-27T16:25:28.223Z",
+    "request_id": "req_011CfUFnQT14CXNxaaXsMVtG"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFnQsZGaTRFuViphRfv",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01QtDyu5fS751WpbjXdYaMmz",
+          "name": "Bash",
+          "input": {
+            "command": "cd \"C:/Users/mathi/AppData/Local/Temp/iar-uncertain-recovery-npf8z86u/repository\" && cat .engineering-harness.lock && echo \"=== RISK-IAR-001 ===\" && cat docs/engineering/instruction-architecture/risks/RISK-IAR-001.md && echo \"=== work-orders ===\" && ls docs/engineering/instruction-architecture/work-orders",
+            "description": "Read lock file, existing risk record, and work orders"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 3386,
+        "cache_read_input_tokens": 16460,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 3386
+        },
+        "output_tokens": 2,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "57e6dd6b-160a-44d2-9f4a-3facce9c92df",
+    "timestamp": "2026-09-27T16:25:30.311Z",
+    "request_id": "req_011CfUFnQT14CXNxaaXsMVtG"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_01QtDyu5fS751WpbjXdYaMmz",
+          "type": "tool_result",
+          "content": "{\n  \"evaluator\": {\n    \"archive_name\": \"se_harness-0.19.0-py3-none-any.whl\",\n    \"archive_sha256\": \"3b45680ee7f76509e09a933a4d061ff522d29c25b236201985861376221f5b3f\",\n    \"payload_manifest\": \"se-harness-installed-payload-v1\",\n    \"payload_sha256\": \"8cfc631f38f9a63b998ce90f0acc84a462de860c07f4c8da67dc8d89d380ae32\",\n    \"version\": \"0.19.0\"\n  },\n  \"files\": {\n    \".engineering-harness.toml\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \".gitattributes\": {\n      \"mode\": \"fragment\",\n      \"sha256\": \"fba4cf22b45939f8c705f2a9c3bd964408b5003d0599993e72735ce865b97e3b\"\n    },\n    \".github/PULL_REQUEST_TEMPLATE.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \".github/workflows/engineering-harness.yml\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \".gitignore\": {\n      \"mode\": \"fragment\",\n      \"sha256\": \"6bc923b4d2ef88ea61e997fc03ea4252aae3f2dc885cb82791293698184594f6\"\n    },\n    \"ENGINEERING_HARNESS.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"be7c525c4cc2e4ec91186453353d3c2889c25e1cfa5f47ab52902acce57c6fae\"\n    },\n    \"GLOSSARY.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/ARTIFACT_AUTHORING.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/DECISION_RIGHTS.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/OPERATING_CARD.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/QUALITY_GATES.json\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2\"\n    },\n    \"docs/engineering/QUALITY_GATES.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/README.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/TECHNICAL_COMMUNICATION.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/TRACEABILITY.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/WORKFLOW.json\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"310b35d4f07a071258d220d1c3d751f603c4eee74cea83467f7ba2f74b594516\"\n    },\n    \"docs/engineering/WORKFLOW.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/harness/AMEND_DEFINITIONS.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"bbaf523c782cfd5abeb824d0ccba3d756426d7a8103ac7ad1c6aa6120c9f4272\"\n    },\n    \"docs/engineering/harness/ARTIFACTS.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"2fa84648afedc03f3b811cb0e61d77ee1a1d52421ba3b3fa3eb435c4abd6eb89\"\n    },\n    \"docs/engineering/harness/AUTHORITY.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"5aabce028b1e7c57799f93c90a5ee3067dc6803265ef47b6b79410adbe985c16\"\n    },\n    \"docs/engineering/harness/AUTHORIZE_WORK.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"864410be8a6ce73c78ff215e828ef07a83c53f36ee77a64145149a1ad357f638\"\n    },\n    \"docs/engineering/harness/COMMUNICATION.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"2aa70bc7959c3a1075adf9fd163225a6a8d92216cf8b054cd677fe94e8ea15cf\"\n    },\n    \"docs/engineering/harness/CONTINUE.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"b9acd1e4640c2ffe7208e12671a82b417c2d58f826a9d963ede0e5fe0d28a323\"\n    },\n    \"docs/engineering/harness/DEFINE_CHANGE.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"18ae756eb5f699b342d31441accfc2e38854a9826554fba2e587e6e82a944da5\"\n    },\n    \"docs/engineering/harness/DEFINITION_LINKS.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"40165ae7b7e12406fd2ca572ea8502e5a0e5e443b6b7e42e2239910aa7ac6fcc\"\n    },\n    \"docs/engineering/harness/DELIVER_RESULT.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"3fefcffd5781f69ec47b6bd65d42a59bb6d5f57b909c2af3bbf6a210cfbe0825\"\n    },\n    \"docs/engineering/harness/DRAFT_DEFINITIONS.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"29922839d8c5dca67c299a8bb111c037db9799a4ba28fc8b59d1896eb3a4c41b\"\n    },\n    \"docs/engineering/harness/DRAFT_WORK_ORDERS.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"4daf16a394c63b8b8632c9fc2ceefab9422b5c88883898c74785ce354cd9eab9\"\n    },\n    \"docs/engineering/harness/EXCEPTIONS.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"a11c34a1a0fbcea91ff15e0f536f9e3403ef95c609f92097c94b944c5e39e387\"\n    },\n    \"docs/engineering/harness/EXECUTE_WORK.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"10e46c4965dc0437098fab322d332740991cf5c344752482a1772ddc41a9cf45\"\n    },\n    \"docs/engineering/harness/PULL_REQUEST.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"2f8c42a774235d25decc48fe92eac12dcdf4475df07c84880cd0b52e7b730ffc\"\n    },\n    \"docs/engineering/harness/RECORD_STATE.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"0495c7cd684545b53e3e3f9c12f00334ca1d739bba52d95212a0eb361116cfc2\"\n    },\n    \"docs/engineering/harness/RELEASE.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"1610330cc64c51a17cd8926c4d9b25b46f4a5092a656440387a4749e3a3dd402\"\n    },\n    \"docs/engineering/harness/RESULTS.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"090e0172a78ebedfe4cdbe98e74c171e50215766a4ebbd671844a89af3f72e6e\"\n    },\n    \"docs/engineering/harness/RISKS_AND_DECISIONS.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"8dbc5fb4bb80fc3c2fbf1ec34a2419e8b5856972485226af46ae324fbd9aca5c\"\n    },\n    \"docs/engineering/harness/SETUP.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"3065df36610275464ac583aa85b778b5fe894a5c3c39ae48bacd292cbaf1045a\"\n    },\n    \"docs/engineering/harness/SKILL_PROVIDER.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"45489e395f0ae2588ae5372fd374f35d755dc976141da0ccee383972e17054ec\"\n    },\n    \"docs/engineering/harness/UPGRADE.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"ae4bd44d187b1cc11c0662800c3c7ae827df17b69bc5a33c4dcdba2e96fde05d\"\n    },\n    \"docs/engineering/harness/VERIFY_OUTCOME.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"8f75da8dd0f8886de5609fc9fe174037139c2b535b68516af3937029fedd0872\"\n    },\n    \"docs/engineering/harness/WORK_AND_EVIDENCE.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"37621cb6d0fbcc863e7759e6b6662ae10f4a49b0325fd4f96098d551881da063\"\n    },\n    \"docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"4344e923db88c9f8fc15636a82ce369adc15b9330312db42958992ac30aec761\"\n    },\n    \"docs/engineering/harness/migration/REFERENCE_MAP.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"48d0190021373205103e2f36f49c68d7dccd08d3c7389937f89facd701acd0e4\"\n    },\n    \"docs/engineering/templates/ADR.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/ARCHITECTURE.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/CAPABILITY.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/DECISION.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/INTENT.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/OPERATING_CONTRACT.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/README.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/RELEASE_CONTRACT.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/RELEASE_RECORD.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/REQUIREMENT.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/RISK.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/SPECIFICATION.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/VERIFICATION.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/VERIFICATION_RECORD.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/WORK_ORDER.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    }\n  },\n  \"hash_algorithm\": \"sha256\",\n  \"hash_mode\": \"utf8-text-lf-v1\",\n  \"schema\": 4,\n  \"skill_ownership\": {\n    \"provider\": \"plugin\"\n  },\n  \"tool_version\": \"0.19.0\"\n}\n=== RISK-IAR-001 ===\n+++\nid = \"RISK-IAR-001\"\ntype = \"risk\"\ntitle = \"Acknowledgement-loss recovery probe\"\nstatus = \"raised\"\nowners = [\"Codex\"]\ncreated = \"2026-09-27\"\nupdated = \"2026-09-27\"\ndescription = \"A write acknowledgement may be lost during compaction.\"\naction = \"Inspect actual persisted effects before any retry.\"\nraised_by = \"operator\"\n\n[relations]\nthreatens = []\n\n[[lifecycle_events]]\nfrom = \"identified\"\nto = \"raised\"\ndecided_at = \"2026-09-27T16:25:05Z\"\ndecided_by = \"operator\"\nreason = \"Recorded by harnessctl raise-risk.\"\n+++\n\n# Risk: Acknowledgement-loss recovery probe\n\n## Description\n\nA write acknowledgement may be lost during compaction.\n\n## Next action\n\nInspect actual persisted effects before any retry.\n=== work-orders ===\nWO-IAR-015.md",
+          "is_error": false
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "af057e09-d446-461f-aaaa-446ee2cf792c",
+    "timestamp": "2026-09-27T16:25:30.524Z",
+    "tool_use_result": {
+      "stdout": "{\n  \"evaluator\": {\n    \"archive_name\": \"se_harness-0.19.0-py3-none-any.whl\",\n    \"archive_sha256\": \"3b45680ee7f76509e09a933a4d061ff522d29c25b236201985861376221f5b3f\",\n    \"payload_manifest\": \"se-harness-installed-payload-v1\",\n    \"payload_sha256\": \"8cfc631f38f9a63b998ce90f0acc84a462de860c07f4c8da67dc8d89d380ae32\",\n    \"version\": \"0.19.0\"\n  },\n  \"files\": {\n    \".engineering-harness.toml\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \".gitattributes\": {\n      \"mode\": \"fragment\",\n      \"sha256\": \"fba4cf22b45939f8c705f2a9c3bd964408b5003d0599993e72735ce865b97e3b\"\n    },\n    \".github/PULL_REQUEST_TEMPLATE.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \".github/workflows/engineering-harness.yml\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \".gitignore\": {\n      \"mode\": \"fragment\",\n      \"sha256\": \"6bc923b4d2ef88ea61e997fc03ea4252aae3f2dc885cb82791293698184594f6\"\n    },\n    \"ENGINEERING_HARNESS.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"be7c525c4cc2e4ec91186453353d3c2889c25e1cfa5f47ab52902acce57c6fae\"\n    },\n    \"GLOSSARY.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/ARTIFACT_AUTHORING.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/DECISION_RIGHTS.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/OPERATING_CARD.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/QUALITY_GATES.json\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2\"\n    },\n    \"docs/engineering/QUALITY_GATES.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/README.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/TECHNICAL_COMMUNICATION.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/TRACEABILITY.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/WORKFLOW.json\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"310b35d4f07a071258d220d1c3d751f603c4eee74cea83467f7ba2f74b594516\"\n    },\n    \"docs/engineering/WORKFLOW.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/harness/AMEND_DEFINITIONS.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"bbaf523c782cfd5abeb824d0ccba3d756426d7a8103ac7ad1c6aa6120c9f4272\"\n    },\n    \"docs/engineering/harness/ARTIFACTS.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"2fa84648afedc03f3b811cb0e61d77ee1a1d52421ba3b3fa3eb435c4abd6eb89\"\n    },\n    \"docs/engineering/harness/AUTHORITY.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"5aabce028b1e7c57799f93c90a5ee3067dc6803265ef47b6b79410adbe985c16\"\n    },\n    \"docs/engineering/harness/AUTHORIZE_WORK.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"864410be8a6ce73c78ff215e828ef07a83c53f36ee77a64145149a1ad357f638\"\n    },\n    \"docs/engineering/harness/COMMUNICATION.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"2aa70bc7959c3a1075adf9fd163225a6a8d92216cf8b054cd677fe94e8ea15cf\"\n    },\n    \"docs/engineering/harness/CONTINUE.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"b9acd1e4640c2ffe7208e12671a82b417c2d58f826a9d963ede0e5fe0d28a323\"\n    },\n    \"docs/engineering/harness/DEFINE_CHANGE.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"18ae756eb5f699b342d31441accfc2e38854a9826554fba2e587e6e82a944da5\"\n    },\n    \"docs/engineering/harness/DEFINITION_LINKS.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"40165ae7b7e12406fd2ca572ea8502e5a0e5e443b6b7e42e2239910aa7ac6fcc\"\n    },\n    \"docs/engineering/harness/DELIVER_RESULT.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"3fefcffd5781f69ec47b6bd65d42a59bb6d5f57b909c2af3bbf6a210cfbe0825\"\n    },\n    \"docs/engineering/harness/DRAFT_DEFINITIONS.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"29922839d8c5dca67c299a8bb111c037db9799a4ba28fc8b59d1896eb3a4c41b\"\n    },\n    \"docs/engineering/harness/DRAFT_WORK_ORDERS.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"4daf16a394c63b8b8632c9fc2ceefab9422b5c88883898c74785ce354cd9eab9\"\n    },\n    \"docs/engineering/harness/EXCEPTIONS.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"a11c34a1a0fbcea91ff15e0f536f9e3403ef95c609f92097c94b944c5e39e387\"\n    },\n    \"docs/engineering/harness/EXECUTE_WORK.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"10e46c4965dc0437098fab322d332740991cf5c344752482a1772ddc41a9cf45\"\n    },\n    \"docs/engineering/harness/PULL_REQUEST.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"2f8c42a774235d25decc48fe92eac12dcdf4475df07c84880cd0b52e7b730ffc\"\n    },\n    \"docs/engineering/harness/RECORD_STATE.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"0495c7cd684545b53e3e3f9c12f00334ca1d739bba52d95212a0eb361116cfc2\"\n    },\n    \"docs/engineering/harness/RELEASE.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"1610330cc64c51a17cd8926c4d9b25b46f4a5092a656440387a4749e3a3dd402\"\n    },\n    \"docs/engineering/harness/RESULTS.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"090e0172a78ebedfe4cdbe98e74c171e50215766a4ebbd671844a89af3f72e6e\"\n    },\n    \"docs/engineering/harness/RISKS_AND_DECISIONS.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"8dbc5fb4bb80fc3c2fbf1ec34a2419e8b5856972485226af46ae324fbd9aca5c\"\n    },\n    \"docs/engineering/harness/SETUP.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"3065df36610275464ac583aa85b778b5fe894a5c3c39ae48bacd292cbaf1045a\"\n    },\n    \"docs/engineering/harness/SKILL_PROVIDER.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"45489e395f0ae2588ae5372fd374f35d755dc976141da0ccee383972e17054ec\"\n    },\n    \"docs/engineering/harness/UPGRADE.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"ae4bd44d187b1cc11c0662800c3c7ae827df17b69bc5a33c4dcdba2e96fde05d\"\n    },\n    \"docs/engineering/harness/VERIFY_OUTCOME.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"8f75da8dd0f8886de5609fc9fe174037139c2b535b68516af3937029fedd0872\"\n    },\n    \"docs/engineering/harness/WORK_AND_EVIDENCE.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"37621cb6d0fbcc863e7759e6b6662ae10f4a49b0325fd4f96098d551881da063\"\n    },\n    \"docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"4344e923db88c9f8fc15636a82ce369adc15b9330312db42958992ac30aec761\"\n    },\n    \"docs/engineering/harness/migration/REFERENCE_MAP.md\": {\n      \"mode\": \"managed\",\n      \"sha256\": \"48d0190021373205103e2f36f49c68d7dccd08d3c7389937f89facd701acd0e4\"\n    },\n    \"docs/engineering/templates/ADR.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/ARCHITECTURE.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/CAPABILITY.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/DECISION.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/INTENT.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/OPERATING_CONTRACT.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/README.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/RELEASE_CONTRACT.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/RELEASE_RECORD.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/REQUIREMENT.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/RISK.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/SPECIFICATION.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/VERIFICATION.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/VERIFICATION_RECORD.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    },\n    \"docs/engineering/templates/WORK_ORDER.template.md\": {\n      \"mode\": \"seed\",\n      \"state\": \"present\"\n    }\n  },\n  \"hash_algorithm\": \"sha256\",\n  \"hash_mode\": \"utf8-text-lf-v1\",\n  \"schema\": 4,\n  \"skill_ownership\": {\n    \"provider\": \"plugin\"\n  },\n  \"tool_version\": \"0.19.0\"\n}\n=== RISK-IAR-001 ===\n+++\nid = \"RISK-IAR-001\"\ntype = \"risk\"\ntitle = \"Acknowledgement-loss recovery probe\"\nstatus = \"raised\"\nowners = [\"Codex\"]\ncreated = \"2026-09-27\"\nupdated = \"2026-09-27\"\ndescription = \"A write acknowledgement may be lost during compaction.\"\naction = \"Inspect actual persisted effects before any retry.\"\nraised_by = \"operator\"\n\n[relations]\nthreatens = []\n\n[[lifecycle_events]]\nfrom = \"identified\"\nto = \"raised\"\ndecided_at = \"2026-09-27T16:25:05Z\"\ndecided_by = \"operator\"\nreason = \"Recorded by harnessctl raise-risk.\"\n+++\n\n# Risk: Acknowledgement-loss recovery probe\n\n## Description\n\nA write acknowledgement may be lost during compaction.\n\n## Next action\n\nInspect actual persisted effects before any retry.\n=== work-orders ===\nWO-IAR-015.md",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false,
+      "noOutputExpected": false
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFoF3ycHPSJALUiEpoW",
+      "type": "message",
+      "role": "assistant",
+      "content": [],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 5026,
+        "cache_read_input_tokens": 19846,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 5026
+        },
+        "output_tokens": 2,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "60dbf448-d9e7-41f8-8451-bc37765224b7",
+    "timestamp": "2026-09-27T16:25:37.882Z",
+    "request_id": "req_011CfUFoEbwch5Nugndg2vjb"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFoF3ycHPSJALUiEpoW",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "The risk record already exists. Now let me read SETUP.md to resolve which evaluator is the repository's selected released one before running anything."
+        }
+      ],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 5026,
+        "cache_read_input_tokens": 19846,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 5026
+        },
+        "output_tokens": 2,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "b1f85604-5e01-4e4e-a285-ed213071f83d",
+    "timestamp": "2026-09-27T16:25:38.666Z",
+    "request_id": "req_011CfUFoEbwch5Nugndg2vjb"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFoF3ycHPSJALUiEpoW",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_018syUJSz6coMSvfBVLK936f",
+          "name": "Read",
+          "input": {
+            "file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-uncertain-recovery-npf8z86u\\repository\\docs\\engineering\\harness\\SETUP.md"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 5026,
+        "cache_read_input_tokens": 19846,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 5026
+        },
+        "output_tokens": 2,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "ae4d13aa-aac8-46b5-9dbc-0fa29ba642df",
+    "timestamp": "2026-09-27T16:25:40.030Z",
+    "request_id": "req_011CfUFoEbwch5Nugndg2vjb"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_018syUJSz6coMSvfBVLK936f",
+          "type": "tool_result",
+          "content": "1\t# Prepare or repair the evaluator\n2\t\n3\t## Read this when\n4\t\n5\tThe selected released evaluator is unknown, missing or mismatched.\n6\t\n7\t## Before this action\n8\t\n9\tRead the repository configuration and lock identity fields listed in the procedure. These are setup inputs, not a reason to read the machine lifecycle contracts.\n10\t\n11\t## Procedure\n12\t\n13\t### Prepare or repair the released evaluator\n14\t\n15\t**Inputs:** The absolute repository path, its installed configuration and\n16\tlock, an available Python 3.11 or later with `venv` and `ensurepip`, and the\n17\tselected released wheel.\n18\t\n19\t**Output:**\n20\t\n21\t- **Environment files:** A reusable private evaluator environment outside\n22\t  the repository, with the selected wheel installed.\n23\t- **Repository files and artifacts:** None changed by environment preparation,\n24\t  `identity`, or `doctor`.\n25\t- **Transient working material:** The absolute evaluator Python path, selected\n26\t  version and digests, and actual identity and doctor results.\n27\t\n28\t**Actions:**\n29\t\n30\t1. Read `[harness].tool_version` in `.engineering-harness.toml`. Compare it\n31\t   with `tool_version` and `evaluator.version` in `.engineering-harness.lock`.\n32\t   Read `evaluator.payload_sha256` and, when present,\n33\t   `evaluator.archive_sha256` for the identity checks below. Report any\n34\t   mismatch before continuing with an ordinary repository mutation. Do not\n35\t   edit these values to make them agree.\n36\t2. Obtain the matching released wheel. If the lock records an archive digest,\n37\t   compare the wheel's SHA-256 with it before installation. Do not substitute a\n38\t   development build with the same version label.\n39\t3. Select a reusable environment outside the repository. With Verity Plane,\n40\t   use `DATA_ROOT/verity-plane/evaluator`, where `DATA_ROOT` is the host's\n41\t   persistent plugin data directory. Do not create a new environment for each\n42\t   retry.\n43\t4. Create or repair that environment with the available Python. Install the\n44\t   selected wheel without index lookup or dependencies, replacing the prior\n45\t   installed copy. Verity Plane's helper performs these actions and runs doctor\n46\t   with the command shown below. Without the plugin, perform the same environment\n47\t   actions using Python's standard environment and package tools.\n48\t5. Resolve the environment's absolute Python executable: `Scripts/python.exe`\n49\t   on Windows or `bin/python` on Unix. Use it with `-I -m se_harness` from a\n50\t   working directory outside the checkout.\n51\t6. Inspect runtime identity with the locked version, payload digest, and\n52\t   environment root. Include the locked archive digest when one exists.\n53\t7. Run doctor and inspect every failure. Environment setup success is not a\n54\t   passing repository check.\n55\t8. On interruption, reuse the same environment and selected wheel. When\n56\t   switching repositories, install the newly selected wheel rather than assuming\n57\t   the previously used version applies.\n58\t\n59\t**Harness commands:**\n60\t\n61\tIn these commands `ENV` is the absolute environment directory, `VERSION` is\n62\tthe locked version, and `PAYLOAD-SHA256` is `evaluator.payload_sha256`:\n63\t\n64\t```text\n65\tharnessctl identity --role released-evaluator --expected-version VERSION --expected-root ENV --checkout-root REPO --evaluator-payload-sha256 PAYLOAD-SHA256 --require-isolated-python --json\n66\tharnessctl doctor REPO --json\n67\t```\n68\t\n69\tIf `evaluator.archive_sha256` is present, add\n70\t`--evaluator-wheel-sha256 ARCHIVE-SHA256` to the identity command. The identity\n71\tcheck and doctor must pass before ordinary governed writes; those writes still\n72\tperform their own identity and action checks.\n73\t\n74\tWhen the installed Verity Plane helper is used, its separate setup command is:\n75\t\n76\t```text\n77\tPYTHON ABSOLUTE-PLUGIN/scripts/setup.py --target REPO --data-root DATA-ROOT --wheel ABSOLUTE-WHEEL\n78\t```\n79\t\n80\tHere `PYTHON` is the available Python 3.11+ executable, and every path is an\n81\tactual absolute path supplied as a separate argument. Quote paths containing\n82\tspaces. The helper writes only its private environment and returns its final\n83\tdoctor exit code. It does not install the host plugin or change repository\n84\tpolicy. If the required Python facilities are missing, report that prerequisite;\n85\tdo not silently install Python or change host settings.\n86\t\n87\t**Completion:** The absolute released evaluator and its identity are known.\n88\tThe actual doctor result passes, or the exact environment/installation problem\n89\tis reported. A mismatch alone is not an instruction to upgrade the repository.\n90\t\n91\t**Later use:** All subsequent `harnessctl` examples use this executable. Return\n92\there when its selected release changes or its environment needs repair.\n93\t\n94\t## Read next when\n95\t\n96\tThe exact release is usable → [CONTINUE.md#procedure](CONTINUE.md#procedure). An upgrade is explicitly authorized → [UPGRADE.md#procedure](UPGRADE.md#procedure). A provider repair is requested → [SKILL_PROVIDER.md#procedure](SKILL_PROVIDER.md#procedure).\n97\t"
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "8e2eca9a-667d-4359-b893-397d6b8c7275",
+    "timestamp": "2026-09-27T16:25:40.060Z",
+    "tool_use_result": {
+      "type": "text",
+      "file": {
+        "filePath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-uncertain-recovery-npf8z86u\\repository\\docs\\engineering\\harness\\SETUP.md",
+        "content": "# Prepare or repair the evaluator\n\n## Read this when\n\nThe selected released evaluator is unknown, missing or mismatched.\n\n## Before this action\n\nRead the repository configuration and lock identity fields listed in the procedure. These are setup inputs, not a reason to read the machine lifecycle contracts.\n\n## Procedure\n\n### Prepare or repair the released evaluator\n\n**Inputs:** The absolute repository path, its installed configuration and\nlock, an available Python 3.11 or later with `venv` and `ensurepip`, and the\nselected released wheel.\n\n**Output:**\n\n- **Environment files:** A reusable private evaluator environment outside\n  the repository, with the selected wheel installed.\n- **Repository files and artifacts:** None changed by environment preparation,\n  `identity`, or `doctor`.\n- **Transient working material:** The absolute evaluator Python path, selected\n  version and digests, and actual identity and doctor results.\n\n**Actions:**\n\n1. Read `[harness].tool_version` in `.engineering-harness.toml`. Compare it\n   with `tool_version` and `evaluator.version` in `.engineering-harness.lock`.\n   Read `evaluator.payload_sha256` and, when present,\n   `evaluator.archive_sha256` for the identity checks below. Report any\n   mismatch before continuing with an ordinary repository mutation. Do not\n   edit these values to make them agree.\n2. Obtain the matching released wheel. If the lock records an archive digest,\n   compare the wheel's SHA-256 with it before installation. Do not substitute a\n   development build with the same version label.\n3. Select a reusable environment outside the repository. With Verity Plane,\n   use `DATA_ROOT/verity-plane/evaluator`, where `DATA_ROOT` is the host's\n   persistent plugin data directory. Do not create a new environment for each\n   retry.\n4. Create or repair that environment with the available Python. Install the\n   selected wheel without index lookup or dependencies, replacing the prior\n   installed copy. Verity Plane's helper performs these actions and runs doctor\n   with the command shown below. Without the plugin, perform the same environment\n   actions using Python's standard environment and package tools.\n5. Resolve the environment's absolute Python executable: `Scripts/python.exe`\n   on Windows or `bin/python` on Unix. Use it with `-I -m se_harness` from a\n   working directory outside the checkout.\n6. Inspect runtime identity with the locked version, payload digest, and\n   environment root. Include the locked archive digest when one exists.\n7. Run doctor and inspect every failure. Environment setup success is not a\n   passing repository check.\n8. On interruption, reuse the same environment and selected wheel. When\n   switching repositories, install the newly selected wheel rather than assuming\n   the previously used version applies.\n\n**Harness commands:**\n\nIn these commands `ENV` is the absolute environment directory, `VERSION` is\nthe locked version, and `PAYLOAD-SHA256` is `evaluator.payload_sha256`:\n\n```text\nharnessctl identity --role released-evaluator --expected-version VERSION --expected-root ENV --checkout-root REPO --evaluator-payload-sha256 PAYLOAD-SHA256 --require-isolated-python --json\nharnessctl doctor REPO --json\n```\n\nIf `evaluator.archive_sha256` is present, add\n`--evaluator-wheel-sha256 ARCHIVE-SHA256` to the identity command. The identity\ncheck and doctor must pass before ordinary governed writes; those writes still\nperform their own identity and action checks.\n\nWhen the installed Verity Plane helper is used, its separate setup command is:\n\n```text\nPYTHON ABSOLUTE-PLUGIN/scripts/setup.py --target REPO --data-root DATA-ROOT --wheel ABSOLUTE-WHEEL\n```\n\nHere `PYTHON` is the available Python 3.11+ executable, and every path is an\nactual absolute path supplied as a separate argument. Quote paths containing\nspaces. The helper writes only its private environment and returns its final\ndoctor exit code. It does not install the host plugin or change repository\npolicy. If the required Python facilities are missing, report that prerequisite;\ndo not silently install Python or change host settings.\n\n**Completion:** The absolute released evaluator and its identity are known.\nThe actual doctor result passes, or the exact environment/installation problem\nis reported. A mismatch alone is not an instruction to upgrade the repository.\n\n**Later use:** All subsequent `harnessctl` examples use this executable. Return\nhere when its selected release changes or its environment needs repair.\n\n## Read next when\n\nThe exact release is usable → [CONTINUE.md#procedure](CONTINUE.md#procedure). An upgrade is explicitly authorized → [UPGRADE.md#procedure](UPGRADE.md#procedure). A provider repair is requested → [SKILL_PROVIDER.md#procedure](SKILL_PROVIDER.md#procedure).\n",
+        "numLines": 97,
+        "startLine": 1,
+        "totalLines": 97
+      }
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFowpBArbn9roiqEanX",
+      "type": "message",
+      "role": "assistant",
+      "content": [],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 2550,
+        "cache_read_input_tokens": 24872,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 2550
+        },
+        "output_tokens": 3,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "01be0a5f-5212-41a6-b333-d89716e7fa13",
+    "timestamp": "2026-09-27T16:25:45.161Z",
+    "request_id": "req_011CfUFowP8PVdADAbwtGkxD"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFowpBArbn9roiqEanX",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_016UEgvJgC5L1R7RcPQsnM9S",
+          "name": "Bash",
+          "input": {
+            "command": "cd /tmp && \"C:/Users/mathi/AppData/Local/Temp/iar-instruction-demo-bztgja2p/evaluator/Scripts/python.exe\" -I -B -m se_harness identity --role released-evaluator --expected-version 0.19.0 --expected-root \"C:/Users/mathi/AppData/Local/Temp/iar-instruction-demo-bztgja2p/evaluator\" --checkout-root \"C:/Users/mathi/AppData/Local/Temp/iar-uncertain-recovery-npf8z86u/repository\" --evaluator-payload-sha256 8cfc631f38f9a63b998ce90f0acc84a462de860c07f4c8da67dc8d89d380ae32 --evaluator-wheel-sha256 3b45680ee7f76509e09a933a4d061ff522d29c25b236201985861376221f5b3f --require-isolated-python --json",
+            "description": "Check candidate evaluator identity against locked digests"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 2550,
+        "cache_read_input_tokens": 24872,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 2550
+        },
+        "output_tokens": 3,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "c5c804a2-6e93-47eb-962b-3c15b7a68fac",
+    "timestamp": "2026-09-27T16:25:50.566Z",
+    "request_id": "req_011CfUFowP8PVdADAbwtGkxD"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "type": "tool_result",
+          "content": "Permission for this tool use was denied. It requires approval, and this session has no approval surface — nobody can answer a permission prompt here — so it was denied automatically. The action was NOT performed; do not claim it succeeded, and do not retry it: this action, and anything else that requires approval, will be denied the same way for the rest of this session. Tell the user what was blocked and why you needed it, then continue with the parts of the task that do not require approval. What required approval: This Bash command contains multiple operations. The following parts require approval: cd /tmp, \"C:/Users/mathi/AppData/Local/Temp/iar-instruction-demo-bztgja2p/evaluator/Scripts/python.exe\" -I -B -m se_harness identity --role released-evaluator --expected-version 0.19.0 --expected-root \"C:/Users/mathi/AppData/Local/Temp/iar-instruction-demo-bztgja2p/evaluator\" --checkout-root \"C:/Users/mathi/AppData/Local/Temp/iar-uncertain-recovery-npf8z86u/repository\" --evaluator-payload-sha256 8cfc631f38f9a63b998ce90f0acc84a462de860c07f4c8da67dc8d89d380ae32 --evaluator-wheel-sha256 3b45680ee7f76509e09a933a4d061ff522d29c25b236201985861376221f5b3f --require-isolated-python --json",
+          "is_error": true,
+          "tool_use_id": "toolu_016UEgvJgC5L1R7RcPQsnM9S"
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "5b934471-ec16-448e-8eb4-bf0d249b46cc",
+    "timestamp": "2026-09-27T16:25:50.586Z",
+    "tool_use_result": "Error: Permission for this tool use was denied. It requires approval, and this session has no approval surface — nobody can answer a permission prompt here — so it was denied automatically. The action was NOT performed; do not claim it succeeded, and do not retry it: this action, and anything else that requires approval, will be denied the same way for the rest of this session. Tell the user what was blocked and why you needed it, then continue with the parts of the task that do not require approval. What required approval: This Bash command contains multiple operations. The following parts require approval: cd /tmp, \"C:/Users/mathi/AppData/Local/Temp/iar-instruction-demo-bztgja2p/evaluator/Scripts/python.exe\" -I -B -m se_harness identity --role released-evaluator --expected-version 0.19.0 --expected-root \"C:/Users/mathi/AppData/Local/Temp/iar-instruction-demo-bztgja2p/evaluator\" --checkout-root \"C:/Users/mathi/AppData/Local/Temp/iar-uncertain-recovery-npf8z86u/repository\" --evaluator-payload-sha256 8cfc631f38f9a63b998ce90f0acc84a462de860c07f4c8da67dc8d89d380ae32 --evaluator-wheel-sha256 3b45680ee7f76509e09a933a4d061ff522d29c25b236201985861376221f5b3f --require-isolated-python --json",
+    "tool_result_meta": [
+      {
+        "id": "toolu_016UEgvJgC5L1R7RcPQsnM9S",
+        "non_execution_kind": "permission-rule"
+      }
+    ]
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFpijA2DSsEjhywZAex",
+      "type": "message",
+      "role": "assistant",
+      "content": [],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 1146,
+        "cache_read_input_tokens": 27422,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 1146
+        },
+        "output_tokens": 3,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "29dda8ba-56c4-4556-a49e-a33f66cc489b",
+    "timestamp": "2026-09-27T16:25:59.598Z",
+    "request_id": "req_011CfUFpiGNHbNackzSssmBE"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFpijA2DSsEjhywZAex",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "The evaluator invocation was denied. Let me gather what I can from the actual records."
+        }
+      ],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 1146,
+        "cache_read_input_tokens": 27422,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 1146
+        },
+        "output_tokens": 3,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "eee126d0-42cb-4ba6-86ae-7940868b3ede",
+    "timestamp": "2026-09-27T16:26:00.184Z",
+    "request_id": "req_011CfUFpiGNHbNackzSssmBE"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFpijA2DSsEjhywZAex",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01NLNaeM4xKZ2aHKgpv6CHxt",
+          "name": "Read",
+          "input": {
+            "file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-uncertain-recovery-npf8z86u\\repository\\docs\\engineering\\instruction-architecture\\work-orders\\WO-IAR-015.md"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 1146,
+        "cache_read_input_tokens": 27422,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 1146
+        },
+        "output_tokens": 3,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "90135963-52c1-4c2a-9cf2-c1dfe7880b97",
+    "timestamp": "2026-09-27T16:26:01.248Z",
+    "request_id": "req_011CfUFpiGNHbNackzSssmBE"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_01NLNaeM4xKZ2aHKgpv6CHxt",
+          "type": "tool_result",
+          "content": "1\t+++\n2\tid = \"WO-IAR-015\"\n3\ttype = \"work_order\"\n4\ttitle = \"Deliver current instructions at startup and after compaction\"\n5\tstatus = \"in_progress\"\n6\towners = [\"engineering-owner\", \"repository-owner\", \"quality-owner\"]\n7\tcreated = \"2026-09-20\"\n8\tupdated = \"2026-09-27\"\n9\t\n10\t[assurance]\n11\tcommit_bound_verification = \"required\"\n12\trationale = \"Later engineering and governance decisions rely on the instruction, discovery and ownership behavior; verification must bind the exact candidate commit. The reviewed required classification is adopted by the user's instruction to start these work orders.\"\n13\tdecided_by = \"engineering-owner\"\n14\t\n15\t[execution_scope]\n16\tpaths = [\n17\t  \"templates/repository/standard/.agents/skills/\",\n18\t  \"templates/repository/standard/.claude/skills/\",\n19\t  \"plugins/verity-plane/common/\",\n20\t  \"plugins/verity-plane/codex/\",\n21\t  \"plugins/verity-plane/claude-code/\",\n22\t  \"scripts/build_plugin_archives.py\",\n23\t  \"scripts/build_plugin_marketplace.py\",\n24\t  \"tests/plugin_integration/progressive_discovery/\",\n25\t  \"tests/plugin_integration/test_simple_plugin.py\",\n26\t  \"tests/plugin_integration/package_assembly/\",\n27\t  \"tests/plugin_integration/change_skill/\",\n28\t  \"tests/plugin_integration/evidence-skill/\",\n29\t  \"tests/plugin_integration/repository_connection/\",\n30\t  \"tests/plugin_integration/onboarding/\",\n31\t  \"docs/engineering/instruction-architecture/README.md\",\n32\t  \"docs/engineering/instruction-architecture/work-orders/WO-IAR-015.md\",\n33\t  \"docs/engineering/instruction-architecture/evidence/WO-IAR-015/\",\n34\t]\n35\t\n36\t[relations]\n37\timplements = [\"REQ-IAR-022\", \"REQ-IAR-023\", \"REQ-IAR-024\", \"REQ-IAR-026\", \"REQ-IAR-027\"]\n38\tspecifications = [\"SPEC-IAR-014\"]\n39\tarchitecture = [\"ARCH-IAR-011\", \"ADR-IAR-011\"]\n40\tverification = [\"VER-IAR-014\"]\n41\t\n42\t[[lifecycle_events]]\n43\tfrom = \"draft\"\n44\tto = \"approved\"\n45\tdecided_at = \"2026-09-27T07:37:39Z\"\n46\tdecided_by = \"engineering-owner\"\n47\treason = \"User instruction: so let's start the work orders. Apply the reviewed package under DEC-IAR-001 versioned-successor; selected 0.18.0 governance remains installed until separate release/adoption.\"\n48\tscope_paths = [\"templates/repository/standard/.agents/skills/\", \"templates/repository/standard/.claude/skills/\", \"plugins/verity-plane/common/\", \"plugins/verity-plane/codex/\", \"plugins/verity-plane/claude-code/\", \"scripts/build_plugin_archives.py\", \"scripts/build_plugin_marketplace.py\", \"tests/plugin_integration/progressive_discovery/\", \"tests/plugin_integration/test_simple_plugin.py\", \"tests/plugin_integration/package_assembly/\", \"tests/plugin_integration/change_skill/\", \"tests/plugin_integration/evidence-skill/\", \"tests/plugin_integration/repository_connection/\", \"tests/plugin_integration/onboarding/\", \"docs/engineering/instruction-architecture/README.md\", \"docs/engineering/instruction-architecture/work-orders/WO-IAR-015.md\", \"docs/engineering/instruction-architecture/evidence/WO-IAR-015/\"]\n49\t\n50\t[[lifecycle_events]]\n51\tfrom = \"approved\"\n52\tto = \"in_progress\"\n53\tdecided_at = \"2026-09-27T07:43:56Z\"\n54\tdecided_by = \"Codex\"\n55\treason = \"Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Execute the reviewed approved work orders as requested by the human on 2026-09-27; native host/platform qualification remains required before completion.\"\n56\t+++\n57\t\n58\t# Deliver current instructions at startup and after compaction\n59\t\n60\t## Objective\n61\t\n62\tDeliver current instructions at startup and after compaction. This work order is a draft and grants no execution authority.\n63\t\n64\t## In scope\n65\t\n66\tAdd the smallest host-supported mechanism that delivers the repository's\n67\tselected root at startup and after compaction. Update shared skills and host\n68\tinstructions and alternate repository-owned skill templates to use the current\n69\tprocedure and conditional references. Keep supported provider routes coherent. Preserve\n70\tactual evaluator results, identities and command boundaries. Verify switching\n71\trepositories, unavailable inputs and uncertain-operation recovery. Retain native\n72\tCodex and Claude Code traces for each automatic delivery claim.\n73\t\n74\t## Dependencies and sequencing\n75\t\n76\tConsume the real collection and discovery result from WO-IAR-013 and WO-IAR-014 for integrated acceptance. A host API limitation is an explicit delivery gap, not permission to restore the AGENTS gate.\n77\t\n78\tDEC-IAR-001 records the remaining adoption/legacy-authority question and blocks\n79\twork-order approval while open. All three orders use the same specification,\n80\tarchitecture decision and verification contract.\n81\t\n82\t## Out of scope\n83\t\n84\tNo accepted definition/history rewrite; new exception engine; generic revision\n85\tcommand; changed lifecycle/gate/decision-right semantics; installed root policy,\n86\tAGENTS.md or lock edits; real user host settings; release build, version bump,\n87\tpublication, deployment or self-adoption. An isolated non-promotable package\n88\tbuild for acceptance is permitted only after approval and outside the checkout.\n89\t\n90\t## Authorized decision envelope\n91\t\n92\tAfter approval, the executor may choose code organization and precise wording\n93\twithin the accepted contract and paths. Routine execution uses the existing\n94\tapproved-work procedure and needs no duplicate permission. Additional paths,\n95\tchanged semantics or missing native host support require a bounded proposal.\n96\tNo push, PR creation, merge, release or other external delivery is granted here.\n97\t\n98\t## Assurance classification\n99\t\n100\tCommit-bound verification is required. On 2026-09-27 the human instructed:\n101\t“so let's start the work orders”, adopting the previously reviewed package and\n102\tits proposed required verification classification. The machine table records\n103\tthat classification. Approval and start are applied through harnessctl;\n104\tthis prose does not itself change lifecycle state.\n105\t\n106\t## Required verification\n107\t\n108\tNative event demonstrations, stale/missing input cases, replayed workflow/authority checks and complete reading-set measurements from VER-IAR-014.\n109\tRun applicable repository checks and required phase/handoff checks from that\n110\tcontract. Classify existing unrelated warnings separately. Do not mark missing\n111\thost/platform evidence as passed.\n112\t\n113\t## Evidence and completion\n114\t\n115\tRetain actual outputs, source identities, complete changed paths, selected\n116\tcontract coverage and limitations under evidence/WO-IAR-015/. Report completed\n117\tbehavior, failed/unassessed cases, final evaluator state and its exact next\n118\taction. Prepare required VREC evidence through released commands when eligible.\n119\t\n120\t## Stop conditions\n121\t\n122\tStop the affected action for failed integrity, scope, authority or required\n123\tchecks; a policy conflict; unsafe owner-content migration; or a required input\n124\tthat cannot be obtained. Preserve unrelated changes and prior evidence.\n125\t"
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "acda32c6-ee6a-4681-a4cb-45db5b6c42ff",
+    "timestamp": "2026-09-27T16:26:01.294Z",
+    "tool_use_result": {
+      "type": "text",
+      "file": {
+        "filePath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-uncertain-recovery-npf8z86u\\repository\\docs\\engineering\\instruction-architecture\\work-orders\\WO-IAR-015.md",
+        "content": "+++\nid = \"WO-IAR-015\"\ntype = \"work_order\"\ntitle = \"Deliver current instructions at startup and after compaction\"\nstatus = \"in_progress\"\nowners = [\"engineering-owner\", \"repository-owner\", \"quality-owner\"]\ncreated = \"2026-09-20\"\nupdated = \"2026-09-27\"\n\n[assurance]\ncommit_bound_verification = \"required\"\nrationale = \"Later engineering and governance decisions rely on the instruction, discovery and ownership behavior; verification must bind the exact candidate commit. The reviewed required classification is adopted by the user's instruction to start these work orders.\"\ndecided_by = \"engineering-owner\"\n\n[execution_scope]\npaths = [\n  \"templates/repository/standard/.agents/skills/\",\n  \"templates/repository/standard/.claude/skills/\",\n  \"plugins/verity-plane/common/\",\n  \"plugins/verity-plane/codex/\",\n  \"plugins/verity-plane/claude-code/\",\n  \"scripts/build_plugin_archives.py\",\n  \"scripts/build_plugin_marketplace.py\",\n  \"tests/plugin_integration/progressive_discovery/\",\n  \"tests/plugin_integration/test_simple_plugin.py\",\n  \"tests/plugin_integration/package_assembly/\",\n  \"tests/plugin_integration/change_skill/\",\n  \"tests/plugin_integration/evidence-skill/\",\n  \"tests/plugin_integration/repository_connection/\",\n  \"tests/plugin_integration/onboarding/\",\n  \"docs/engineering/instruction-architecture/README.md\",\n  \"docs/engineering/instruction-architecture/work-orders/WO-IAR-015.md\",\n  \"docs/engineering/instruction-architecture/evidence/WO-IAR-015/\",\n]\n\n[relations]\nimplements = [\"REQ-IAR-022\", \"REQ-IAR-023\", \"REQ-IAR-024\", \"REQ-IAR-026\", \"REQ-IAR-027\"]\nspecifications = [\"SPEC-IAR-014\"]\narchitecture = [\"ARCH-IAR-011\", \"ADR-IAR-011\"]\nverification = [\"VER-IAR-014\"]\n\n[[lifecycle_events]]\nfrom = \"draft\"\nto = \"approved\"\ndecided_at = \"2026-09-27T07:37:39Z\"\ndecided_by = \"engineering-owner\"\nreason = \"User instruction: so let's start the work orders. Apply the reviewed package under DEC-IAR-001 versioned-successor; selected 0.18.0 governance remains installed until separate release/adoption.\"\nscope_paths = [\"templates/repository/standard/.agents/skills/\", \"templates/repository/standard/.claude/skills/\", \"plugins/verity-plane/common/\", \"plugins/verity-plane/codex/\", \"plugins/verity-plane/claude-code/\", \"scripts/build_plugin_archives.py\", \"scripts/build_plugin_marketplace.py\", \"tests/plugin_integration/progressive_discovery/\", \"tests/plugin_integration/test_simple_plugin.py\", \"tests/plugin_integration/package_assembly/\", \"tests/plugin_integration/change_skill/\", \"tests/plugin_integration/evidence-skill/\", \"tests/plugin_integration/repository_connection/\", \"tests/plugin_integration/onboarding/\", \"docs/engineering/instruction-architecture/README.md\", \"docs/engineering/instruction-architecture/work-orders/WO-IAR-015.md\", \"docs/engineering/instruction-architecture/evidence/WO-IAR-015/\"]\n\n[[lifecycle_events]]\nfrom = \"approved\"\nto = \"in_progress\"\ndecided_at = \"2026-09-27T07:43:56Z\"\ndecided_by = \"Codex\"\nreason = \"Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Execute the reviewed approved work orders as requested by the human on 2026-09-27; native host/platform qualification remains required before completion.\"\n+++\n\n# Deliver current instructions at startup and after compaction\n\n## Objective\n\nDeliver current instructions at startup and after compaction. This work order is a draft and grants no execution authority.\n\n## In scope\n\nAdd the smallest host-supported mechanism that delivers the repository's\nselected root at startup and after compaction. Update shared skills and host\ninstructions and alternate repository-owned skill templates to use the current\nprocedure and conditional references. Keep supported provider routes coherent. Preserve\nactual evaluator results, identities and command boundaries. Verify switching\nrepositories, unavailable inputs and uncertain-operation recovery. Retain native\nCodex and Claude Code traces for each automatic delivery claim.\n\n## Dependencies and sequencing\n\nConsume the real collection and discovery result from WO-IAR-013 and WO-IAR-014 for integrated acceptance. A host API limitation is an explicit delivery gap, not permission to restore the AGENTS gate.\n\nDEC-IAR-001 records the remaining adoption/legacy-authority question and blocks\nwork-order approval while open. All three orders use the same specification,\narchitecture decision and verification contract.\n\n## Out of scope\n\nNo accepted definition/history rewrite; new exception engine; generic revision\ncommand; changed lifecycle/gate/decision-right semantics; installed root policy,\nAGENTS.md or lock edits; real user host settings; release build, version bump,\npublication, deployment or self-adoption. An isolated non-promotable package\nbuild for acceptance is permitted only after approval and outside the checkout.\n\n## Authorized decision envelope\n\nAfter approval, the executor may choose code organization and precise wording\nwithin the accepted contract and paths. Routine execution uses the existing\napproved-work procedure and needs no duplicate permission. Additional paths,\nchanged semantics or missing native host support require a bounded proposal.\nNo push, PR creation, merge, release or other external delivery is granted here.\n\n## Assurance classification\n\nCommit-bound verification is required. On 2026-09-27 the human instructed:\n“so let's start the work orders”, adopting the previously reviewed package and\nits proposed required verification classification. The machine table records\nthat classification. Approval and start are applied through harnessctl;\nthis prose does not itself change lifecycle state.\n\n## Required verification\n\nNative event demonstrations, stale/missing input cases, replayed workflow/authority checks and complete reading-set measurements from VER-IAR-014.\nRun applicable repository checks and required phase/handoff checks from that\ncontract. Classify existing unrelated warnings separately. Do not mark missing\nhost/platform evidence as passed.\n\n## Evidence and completion\n\nRetain actual outputs, source identities, complete changed paths, selected\ncontract coverage and limitations under evidence/WO-IAR-015/. Report completed\nbehavior, failed/unassessed cases, final evaluator state and its exact next\naction. Prepare required VREC evidence through released commands when eligible.\n\n## Stop conditions\n\nStop the affected action for failed integrity, scope, authority or required\nchecks; a policy conflict; unsafe owner-content migration; or a required input\nthat cannot be obtained. Preserve unrelated changes and prior evidence.\n",
+        "numLines": 125,
+        "startLine": 1,
+        "totalLines": 125
+      }
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFpijA2DSsEjhywZAex",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01QeXsoaEDey3Bfmr2pyusyB",
+          "name": "Read",
+          "input": {
+            "file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-uncertain-recovery-npf8z86u\\repository\\docs\\engineering\\harness\\RISKS_AND_DECISIONS.md"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 1146,
+        "cache_read_input_tokens": 27422,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 1146
+        },
+        "output_tokens": 3,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "e477cf73-a551-47f4-9c7d-ccc6c3ba8d58",
+    "timestamp": "2026-09-27T16:26:02.018Z",
+    "request_id": "req_011CfUFpiGNHbNackzSssmBE"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_01QeXsoaEDey3Bfmr2pyusyB",
+          "type": "tool_result",
+          "content": "1\t# Record risks and decisions\n2\t\n3\t## Read this when\n4\t\n5\tA risk or unresolved formal question affects the selected change.\n6\t\n7\t## Before this action\n8\t\n9\tBefore writing, read [Links for decisions and risks](RISKS_AND_DECISIONS.md#links-for-decisions-and-risks), [Blocking decisions](RISKS_AND_DECISIONS.md#blocking-decisions) and [Raised risks](RISKS_AND_DECISIONS.md#raised-risks). Apply [../ARTIFACT_AUTHORING.md#risk](../ARTIFACT_AUTHORING.md#risk) or [../ARTIFACT_AUTHORING.md#decision](../ARTIFACT_AUTHORING.md#decision) for the selected record.\n10\t\n11\t## Procedure\n12\t\n13\t### Record risks (RISK) affecting the change\n14\t\n15\t**Inputs:** The outcome, scope, selected definitions, verification coverage,\n16\tand existing risks (RISK) found in [Identify the existing artifacts that apply to the change](DEFINE_CHANGE.md#identify-the-existing-artifacts-that-apply-to-the-change).\n17\t\n18\t**Output:**\n19\t\n20\t- **Formal artifacts:** New risks (RISK) in `raised` for threats not already\n21\t  covered. A paired decision (DEC) in `open` for each risk created with\n22\t  `--with-decision`. None created where existing records cover the threats.\n23\t- **Transient working material:** The selection of reused risks (RISK),\n24\t  review notes, generated IDs and paths, and links awaiting new work order\n25\t  (WO) IDs. If no risks are identified, retain that result with the reviewed\n26\t  scope. Retain this material under the same conditions as [Describe the intended outcome](DEFINE_CHANGE.md#describe-the-intended-outcome).\n27\t\n28\t**Actions:**\n29\t\n30\t1. Identify what could go wrong within the selected change scope.\n31\t2. Check whether an existing risk (RISK) already records each threat and its\n32\t   follow-up. Reference that record instead of creating a duplicate.\n33\t3. For each new risk (RISK), describe the threat and why it matters.\n34\t4. Identify its follow-up owner.\n35\t5. Specify the owner's next action.\n36\t6. Identify the formal artifacts threatened by it.\n37\t7. Determine whether an unresolved decision must block those artifacts.\n38\t8. Preview the risk (RISK) with the command below. Inspect the proposed\n39\t   content, affected IDs, and destination paths.\n40\t9. Run the same command with the same arguments, removing only `--dry-run`.\n41\t10. Read every written file reported by the command. Retain its ID and path\n42\t    for the review handoff.\n43\t\n44\t**Harness command:**\n45\t\n46\tReplace the quoted text and `OWNER` with the risk description and identified\n47\towner. Repeat `--threatens ARTIFACT-ID` for each threatened artifact. Omit that\n48\toption if no affected formal artifact exists yet:\n49\t\n50\t```text\n51\tharnessctl raise-risk REPO --domain DOMAIN --title \"Risk title\" --description \"What could go wrong and why it matters\" --action \"Next follow-up action\" --owner OWNER --threatens ARTIFACT-ID --dry-run --json\n52\t```\n53\t\n54\tAdd `--with-decision` only if action 7 identifies a decision (DEC) that must\n55\tblock the named artifacts. Use the same option in both preview and creation.\n56\tA risk (RISK) alone does not block work.\n57\t\n58\t**Completion:** Identified risks (RISK) have formal records with an owner and\n59\tnext action. If none were identified, retain `None identified` with the\n60\treviewed scope as transient working material.\n61\t\n62\t**Later use:** Review any paired decision (DEC) in [Record unresolved decisions (DEC)](RISKS_AND_DECISIONS.md#record-unresolved-decisions-dec). [Prepare work orders (WO) linking the definitions, scope, planned work, and verification requirements](DRAFT_WORK_ORDERS.md#prepare-work-orders-wo-linking-the-definitions-scope-planned-work-and-verification-requirements) uses the\n63\trisks (RISK) to define work and stop conditions and adds links that depend on\n64\tnew work order (WO) IDs.\n65\t\n66\t### Record unresolved decisions (DEC)\n67\t\n68\t**Inputs:** Unresolved questions from [Describe the intended outcome](DEFINE_CHANGE.md#describe-the-intended-outcome), [Define the limits of the change](DEFINE_CHANGE.md#define-the-limits-of-the-change), [Identify the existing artifacts that apply to the change](DEFINE_CHANGE.md#identify-the-existing-artifacts-that-apply-to-the-change), [Draft any missing definitions](DRAFT_DEFINITIONS.md#draft-any-missing-definitions), [Propose any needed amendments to existing definitions](AMEND_DEFINITIONS.md#propose-any-needed-amendments-to-existing-definitions), [Define how the result will be verified](DRAFT_DEFINITIONS.md#define-how-the-result-will-be-verified), [Record risks (RISK) affecting the change](RISKS_AND_DECISIONS.md#record-risks-risk-affecting-the-change) and existing decisions (DEC),\n69\tincluding any paired records created in [Record risks (RISK) affecting the change](RISKS_AND_DECISIONS.md#record-risks-risk-affecting-the-change).\n70\t\n71\t**Output:**\n72\t\n73\t- **Formal artifacts:** New or completed decisions (DEC) in `open` for\n74\t  unresolved questions requiring a record. None if existing records are\n75\t  sufficient or no formal question remains. Resolved decisions (DEC) and\n76\t  earlier dispositions remain unchanged.\n77\t- **Transient working material:** Clarifications, selected decision (DEC) IDs,\n78\t  and links awaiting new work order (WO) IDs. Retain these under the same\n79\t  conditions as [Describe the intended outcome](DEFINE_CHANGE.md#describe-the-intended-outcome).\n80\t\n81\t**Actions:**\n82\t\n83\t1. Collect unresolved questions affecting the selected scope.\n84\t2. Check whether each question already has a decision (DEC). Reuse that record\n85\t   rather than creating a duplicate.\n86\t3. For a new question, determine whether it blocks an artifact transition,\n87\t   concerns more than one artifact, or must remain recorded after approval.\n88\t4. If none of those conditions applies, resolve the clarification with the\n89\t   requester. Use the answer to complete the affected draft. Retain the\n90\t   question, answer, and affected artifact ID as transient working material\n91\t   for the later approval transition. That transition MUST preserve the\n92\t   answer in its `reason`; the working notes remain transient.\n93\t5. Otherwise, create a decision (DEC) with the commands below.\n94\t6. Complete `kind`, `question`, `raised_by`, and `owners` in each new record.\n95\t7. Define at least two `[[options]]` with distinct IDs and labels.\n96\t8. Set `recommendation` to one option ID. Explain the recommendation and the\n97\t   consequences of each option in the body.\n98\t9. Set `[relations].concerns` to every artifact the question is about.\n99\t10. Set `[relations].blocks` to the artifacts whose transitions must wait for\n100\t    the answer. Include every blocked ID in `concerns`. Use only existing IDs.\n101\t11. For `kind = \"deviation\"`, set `against` to an existing `SPEC-ID#RULE-ID`.\n102\t    Record the fact preventing compliance in `observed`. Choose options from\n103\t    `amend`, `supersede`, `accept`, and `stop`; include `stop`.\n104\t12. Apply `## decision` → `### Checklist` in\n105\t    `docs/engineering/ARTIFACT_AUTHORING.md`, including for paired records\n106\t    created in [Record risks (RISK) affecting the change](RISKS_AND_DECISIONS.md#record-risks-risk-affecting-the-change). Leave `[disposition]` unwritten.\n107\t\n108\t**Harness commands:**\n109\t\n110\tFor each missing decision (DEC), run the creation sequence from [Draft any missing definitions](DRAFT_DEFINITIONS.md#draft-any-missing-definitions).\n111\tInspect the preview before creation; replace `DEC-ID` with its `allocated_id`:\n112\t\n113\t```text\n114\tharnessctl create-artifact REPO --domain DOMAIN --type decision --dry-run --json\n115\tharnessctl create-artifact REPO --domain DOMAIN --type decision --id DEC-ID --json\n116\t```\n117\t\n118\tRecording a question does not answer it. Do not run `harnessctl decide` as\n119\tpart of this step.\n120\t\n121\t**Completion:** Each unresolved question requiring a formal record has a\n122\tdecision (DEC), with options, a recommendation, and the affected artifacts.\n123\tIf no questions remain, retain `None` as transient working material.\n124\t\n125\t**Later use:** [Prepare work orders (WO) linking the definitions, scope, planned work, and verification requirements](DRAFT_WORK_ORDERS.md#prepare-work-orders-wo-linking-the-definitions-scope-planned-work-and-verification-requirements) links newly created work orders (WO) where needed and\n126\tpresents unresolved decisions (DEC) for review. The authorization process\n127\thandles decisions that block approval.\n128\t\n129\t## Read next when\n130\t\n131\tA recorded question needs a human disposition → [AUTHORIZE_WORK.md#resolve-approval-blockers](AUTHORIZE_WORK.md#resolve-approval-blockers). The package is ready for review → [AUTHORIZE_WORK.md#procedure](AUTHORIZE_WORK.md#procedure).\n132\t## Links for decisions and risks\n133\t\n134\t| Source → target | Relation | Meaning and coverage |\n135\t| --- | --- | --- |\n136\t| Decision (DEC) → any artifact type | `concerns` | Names every artifact the question is about. |\n137\t| Decision (DEC) → Requirement (REQ), Specification (SPEC), Verification contract (VER), Architecture (ARCH), Architecture decision (ADR), or Work order (WO) | `blocks` | Names artifacts whose transitions the decision (DEC) blocks. Each must also appear in `concerns`. |\n138\t| Decision (DEC) → Requirement (REQ), Specification (SPEC), Verification contract (VER), Architecture (ARCH), Architecture decision (ADR), or Work order (WO) | `produces` | A decision (DEC) in `decided` names artifacts its answer created or amended, when applicable. |\n139\t| Risk (RISK) → any artifact type | `threatens` | Names the artifacts the risk (RISK) could damage. |\n140\t| Risk (RISK) → Work order (WO) | `mitigated_by` | Names the work orders (WO) reducing a risk (RISK) in `mitigating` or `mitigated`. The decision operation writes this link. |\n141\t| Risk (RISK) → Architecture decision (ADR) or Decision (DEC) | `avoided_by` | Names the single architecture decision (ADR) or decision (DEC) that removes a risk (RISK) in `avoided`. The decision operation writes this link. |\n142\t\n143\tA decision (DEC) records a question that needs an answer or a proposed deviation.\n144\tAn architecture decision (ADR) records a settled design choice. They serve different purposes.\n145\t\n146\tA risk (RISK) does not block work by itself. When a blocking decision (DEC)\n147\tis requested, that decision (DEC) concerns the risk (RISK). The `blocks` set\n148\tof the decision (DEC) matches the `threatens` set of the risk (RISK).\n149\t\n150\t## Blocking decisions\n151\t\n152\tA decision (DEC) in `open` blocks every transition\n153\tof the artifacts in its `blocks` relation. A decision (DEC) in `deferred`\n154\tblocks transitions outside its recorded permitted scope.\n155\t\n156\tFor example, a decision (DEC) names work order (WO) `WO-EXAMPLE-001` in both\n157\t`concerns` and `blocks`. It is deferred with the scope\n158\t`WO-EXAMPLE-001:approved-in_progress`. This deferral\n159\tallows the work order (WO) to move from `approved` to `in_progress` if all\n160\tother checks pass. It still blocks moving that work order (WO) from\n161\t`in_progress` to `implemented`. The deferral also records when the decision\n162\t(DEC) must be revisited. Deferral does not itself start the work.\n163\t\n164\tAn accepted deviation is a decision (DEC) with `kind = \"deviation\"`,\n165\t`status = \"decided\"`, and `disposition.option = \"accept\"`.\n166\tIt records permission to depart from one identified specification (SPEC)\n167\trule; “accepted” is not a separate lifecycle state for the decision (DEC).\n168\t\n169\tThat deviation remains applicable to the affected specification (SPEC),\n170\twork orders (WO), and their verification records (VREC) and release records\n171\t(RLS) until a later decision (DEC) against the same rule reaches\n172\t`status = \"decided\"` with `disposition.option` set to `amend` or\n173\t`supersede`. The disposition is written through `harnessctl decide`, not\n174\tby editing the metadata by hand.\n175\t\n176\t## Raised risks\n177\t\n178\tA risk (RISK) in `raised` may have no paired decision\n179\t(DEC). Recording that risk alone does not block work. Use\n180\t`raise-risk --with-decision` when creating a risk that needs a paired blocking\n181\tdecision.\n182\t\n183\tA raised risk MUST NOT have more than one paired decision in `open` or\n184\t`deferred`. When that decision exists, it names the risk in `concerns`, and\n185\tits `blocks` set MUST equal the risk's `threatens` set. Disposing the paired\n186\tdecision applies its recorded effect to the risk in the same operation.\n187\tThe blocked artifacts change state only through their own transitions.\n188\t"
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "3f9f0d1d-4e95-4ad1-8e57-1aa49a12d0a5",
+    "timestamp": "2026-09-27T16:26:02.059Z",
+    "tool_use_result": {
+      "type": "text",
+      "file": {
+        "filePath": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-uncertain-recovery-npf8z86u\\repository\\docs\\engineering\\harness\\RISKS_AND_DECISIONS.md",
+        "content": "# Record risks and decisions\n\n## Read this when\n\nA risk or unresolved formal question affects the selected change.\n\n## Before this action\n\nBefore writing, read [Links for decisions and risks](RISKS_AND_DECISIONS.md#links-for-decisions-and-risks), [Blocking decisions](RISKS_AND_DECISIONS.md#blocking-decisions) and [Raised risks](RISKS_AND_DECISIONS.md#raised-risks). Apply [../ARTIFACT_AUTHORING.md#risk](../ARTIFACT_AUTHORING.md#risk) or [../ARTIFACT_AUTHORING.md#decision](../ARTIFACT_AUTHORING.md#decision) for the selected record.\n\n## Procedure\n\n### Record risks (RISK) affecting the change\n\n**Inputs:** The outcome, scope, selected definitions, verification coverage,\nand existing risks (RISK) found in [Identify the existing artifacts that apply to the change](DEFINE_CHANGE.md#identify-the-existing-artifacts-that-apply-to-the-change).\n\n**Output:**\n\n- **Formal artifacts:** New risks (RISK) in `raised` for threats not already\n  covered. A paired decision (DEC) in `open` for each risk created with\n  `--with-decision`. None created where existing records cover the threats.\n- **Transient working material:** The selection of reused risks (RISK),\n  review notes, generated IDs and paths, and links awaiting new work order\n  (WO) IDs. If no risks are identified, retain that result with the reviewed\n  scope. Retain this material under the same conditions as [Describe the intended outcome](DEFINE_CHANGE.md#describe-the-intended-outcome).\n\n**Actions:**\n\n1. Identify what could go wrong within the selected change scope.\n2. Check whether an existing risk (RISK) already records each threat and its\n   follow-up. Reference that record instead of creating a duplicate.\n3. For each new risk (RISK), describe the threat and why it matters.\n4. Identify its follow-up owner.\n5. Specify the owner's next action.\n6. Identify the formal artifacts threatened by it.\n7. Determine whether an unresolved decision must block those artifacts.\n8. Preview the risk (RISK) with the command below. Inspect the proposed\n   content, affected IDs, and destination paths.\n9. Run the same command with the same arguments, removing only `--dry-run`.\n10. Read every written file reported by the command. Retain its ID and path\n    for the review handoff.\n\n**Harness command:**\n\nReplace the quoted text and `OWNER` with the risk description and identified\nowner. Repeat `--threatens ARTIFACT-ID` for each threatened artifact. Omit that\noption if no affected formal artifact exists yet:\n\n```text\nharnessctl raise-risk REPO --domain DOMAIN --title \"Risk title\" --description \"What could go wrong and why it matters\" --action \"Next follow-up action\" --owner OWNER --threatens ARTIFACT-ID --dry-run --json\n```\n\nAdd `--with-decision` only if action 7 identifies a decision (DEC) that must\nblock the named artifacts. Use the same option in both preview and creation.\nA risk (RISK) alone does not block work.\n\n**Completion:** Identified risks (RISK) have formal records with an owner and\nnext action. If none were identified, retain `None identified` with the\nreviewed scope as transient working material.\n\n**Later use:** Review any paired decision (DEC) in [Record unresolved decisions (DEC)](RISKS_AND_DECISIONS.md#record-unresolved-decisions-dec). [Prepare work orders (WO) linking the definitions, scope, planned work, and verification requirements](DRAFT_WORK_ORDERS.md#prepare-work-orders-wo-linking-the-definitions-scope-planned-work-and-verification-requirements) uses the\nrisks (RISK) to define work and stop conditions and adds links that depend on\nnew work order (WO) IDs.\n\n### Record unresolved decisions (DEC)\n\n**Inputs:** Unresolved questions from [Describe the intended outcome](DEFINE_CHANGE.md#describe-the-intended-outcome), [Define the limits of the change](DEFINE_CHANGE.md#define-the-limits-of-the-change), [Identify the existing artifacts that apply to the change](DEFINE_CHANGE.md#identify-the-existing-artifacts-that-apply-to-the-change), [Draft any missing definitions](DRAFT_DEFINITIONS.md#draft-any-missing-definitions), [Propose any needed amendments to existing definitions](AMEND_DEFINITIONS.md#propose-any-needed-amendments-to-existing-definitions), [Define how the result will be verified](DRAFT_DEFINITIONS.md#define-how-the-result-will-be-verified), [Record risks (RISK) affecting the change](RISKS_AND_DECISIONS.md#record-risks-risk-affecting-the-change) and existing decisions (DEC),\nincluding any paired records created in [Record risks (RISK) affecting the change](RISKS_AND_DECISIONS.md#record-risks-risk-affecting-the-change).\n\n**Output:**\n\n- **Formal artifacts:** New or completed decisions (DEC) in `open` for\n  unresolved questions requiring a record. None if existing records are\n  sufficient or no formal question remains. Resolved decisions (DEC) and\n  earlier dispositions remain unchanged.\n- **Transient working material:** Clarifications, selected decision (DEC) IDs,\n  and links awaiting new work order (WO) IDs. Retain these under the same\n  conditions as [Describe the intended outcome](DEFINE_CHANGE.md#describe-the-intended-outcome).\n\n**Actions:**\n\n1. Collect unresolved questions affecting the selected scope.\n2. Check whether each question already has a decision (DEC). Reuse that record\n   rather than creating a duplicate.\n3. For a new question, determine whether it blocks an artifact transition,\n   concerns more than one artifact, or must remain recorded after approval.\n4. If none of those conditions applies, resolve the clarification with the\n   requester. Use the answer to complete the affected draft. Retain the\n   question, answer, and affected artifact ID as transient working material\n   for the later approval transition. That transition MUST preserve the\n   answer in its `reason`; the working notes remain transient.\n5. Otherwise, create a decision (DEC) with the commands below.\n6. Complete `kind`, `question`, `raised_by`, and `owners` in each new record.\n7. Define at least two `[[options]]` with distinct IDs and labels.\n8. Set `recommendation` to one option ID. Explain the recommendation and the\n   consequences of each option in the body.\n9. Set `[relations].concerns` to every artifact the question is about.\n10. Set `[relations].blocks` to the artifacts whose transitions must wait for\n    the answer. Include every blocked ID in `concerns`. Use only existing IDs.\n11. For `kind = \"deviation\"`, set `against` to an existing `SPEC-ID#RULE-ID`.\n    Record the fact preventing compliance in `observed`. Choose options from\n    `amend`, `supersede`, `accept`, and `stop`; include `stop`.\n12. Apply `## decision` → `### Checklist` in\n    `docs/engineering/ARTIFACT_AUTHORING.md`, including for paired records\n    created in [Record risks (RISK) affecting the change](RISKS_AND_DECISIONS.md#record-risks-risk-affecting-the-change). Leave `[disposition]` unwritten.\n\n**Harness commands:**\n\nFor each missing decision (DEC), run the creation sequence from [Draft any missing definitions](DRAFT_DEFINITIONS.md#draft-any-missing-definitions).\nInspect the preview before creation; replace `DEC-ID` with its `allocated_id`:\n\n```text\nharnessctl create-artifact REPO --domain DOMAIN --type decision --dry-run --json\nharnessctl create-artifact REPO --domain DOMAIN --type decision --id DEC-ID --json\n```\n\nRecording a question does not answer it. Do not run `harnessctl decide` as\npart of this step.\n\n**Completion:** Each unresolved question requiring a formal record has a\ndecision (DEC), with options, a recommendation, and the affected artifacts.\nIf no questions remain, retain `None` as transient working material.\n\n**Later use:** [Prepare work orders (WO) linking the definitions, scope, planned work, and verification requirements](DRAFT_WORK_ORDERS.md#prepare-work-orders-wo-linking-the-definitions-scope-planned-work-and-verification-requirements) links newly created work orders (WO) where needed and\npresents unresolved decisions (DEC) for review. The authorization process\nhandles decisions that block approval.\n\n## Read next when\n\nA recorded question needs a human disposition → [AUTHORIZE_WORK.md#resolve-approval-blockers](AUTHORIZE_WORK.md#resolve-approval-blockers). The package is ready for review → [AUTHORIZE_WORK.md#procedure](AUTHORIZE_WORK.md#procedure).\n## Links for decisions and risks\n\n| Source → target | Relation | Meaning and coverage |\n| --- | --- | --- |\n| Decision (DEC) → any artifact type | `concerns` | Names every artifact the question is about. |\n| Decision (DEC) → Requirement (REQ), Specification (SPEC), Verification contract (VER), Architecture (ARCH), Architecture decision (ADR), or Work order (WO) | `blocks` | Names artifacts whose transitions the decision (DEC) blocks. Each must also appear in `concerns`. |\n| Decision (DEC) → Requirement (REQ), Specification (SPEC), Verification contract (VER), Architecture (ARCH), Architecture decision (ADR), or Work order (WO) | `produces` | A decision (DEC) in `decided` names artifacts its answer created or amended, when applicable. |\n| Risk (RISK) → any artifact type | `threatens` | Names the artifacts the risk (RISK) could damage. |\n| Risk (RISK) → Work order (WO) | `mitigated_by` | Names the work orders (WO) reducing a risk (RISK) in `mitigating` or `mitigated`. The decision operation writes this link. |\n| Risk (RISK) → Architecture decision (ADR) or Decision (DEC) | `avoided_by` | Names the single architecture decision (ADR) or decision (DEC) that removes a risk (RISK) in `avoided`. The decision operation writes this link. |\n\nA decision (DEC) records a question that needs an answer or a proposed deviation.\nAn architecture decision (ADR) records a settled design choice. They serve different purposes.\n\nA risk (RISK) does not block work by itself. When a blocking decision (DEC)\nis requested, that decision (DEC) concerns the risk (RISK). The `blocks` set\nof the decision (DEC) matches the `threatens` set of the risk (RISK).\n\n## Blocking decisions\n\nA decision (DEC) in `open` blocks every transition\nof the artifacts in its `blocks` relation. A decision (DEC) in `deferred`\nblocks transitions outside its recorded permitted scope.\n\nFor example, a decision (DEC) names work order (WO) `WO-EXAMPLE-001` in both\n`concerns` and `blocks`. It is deferred with the scope\n`WO-EXAMPLE-001:approved-in_progress`. This deferral\nallows the work order (WO) to move from `approved` to `in_progress` if all\nother checks pass. It still blocks moving that work order (WO) from\n`in_progress` to `implemented`. The deferral also records when the decision\n(DEC) must be revisited. Deferral does not itself start the work.\n\nAn accepted deviation is a decision (DEC) with `kind = \"deviation\"`,\n`status = \"decided\"`, and `disposition.option = \"accept\"`.\nIt records permission to depart from one identified specification (SPEC)\nrule; “accepted” is not a separate lifecycle state for the decision (DEC).\n\nThat deviation remains applicable to the affected specification (SPEC),\nwork orders (WO), and their verification records (VREC) and release records\n(RLS) until a later decision (DEC) against the same rule reaches\n`status = \"decided\"` with `disposition.option` set to `amend` or\n`supersede`. The disposition is written through `harnessctl decide`, not\nby editing the metadata by hand.\n\n## Raised risks\n\nA risk (RISK) in `raised` may have no paired decision\n(DEC). Recording that risk alone does not block work. Use\n`raise-risk --with-decision` when creating a risk that needs a paired blocking\ndecision.\n\nA raised risk MUST NOT have more than one paired decision in `open` or\n`deferred`. When that decision exists, it names the risk in `concerns`, and\nits `blocks` set MUST equal the risk's `threatens` set. Disposing the paired\ndecision applies its recorded effect to the risk in the same operation.\nThe blocked artifacts change state only through their own transitions.\n",
+        "numLines": 188,
+        "startLine": 1,
+        "totalLines": 188
+      }
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFqate8SxurC3vLX3NS",
+      "type": "message",
+      "role": "assistant",
+      "content": [],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 8415,
+        "cache_read_input_tokens": 28568,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 8415
+        },
+        "output_tokens": 4,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "1ae9ac56-b5ee-4aa4-9a4d-5c041095dfe4",
+    "timestamp": "2026-09-27T16:26:21.996Z",
+    "request_id": "req_011CfUFqZdEiLaYAfKhgbE1r"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFqate8SxurC3vLX3NS",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_01W88fG9LvDHjthb8UvmECzy",
+          "name": "Bash",
+          "input": {
+            "command": "cd \"C:/Users/mathi/AppData/Local/Temp/iar-uncertain-recovery-npf8z86u/repository\" && ls -l --time-style=full-iso docs/engineering/instruction-architecture/risks/ && ls docs/engineering/instruction-architecture/ && ls docs/engineering/instruction-architecture/verification docs/engineering/instruction-architecture/specifications",
+            "description": "Inspect risk file timestamps and sibling record directories"
+          },
+          "caller": {
+            "type": "direct"
+          }
+        }
+      ],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 8415,
+        "cache_read_input_tokens": 28568,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 8415
+        },
+        "output_tokens": 4,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "74afb417-8f2f-4f25-94f2-4c1e637f0bfe",
+    "timestamp": "2026-09-27T16:26:24.352Z",
+    "request_id": "req_011CfUFqZdEiLaYAfKhgbE1r"
+  },
+  {
+    "type": "user",
+    "message": {
+      "role": "user",
+      "content": [
+        {
+          "tool_use_id": "toolu_01W88fG9LvDHjthb8UvmECzy",
+          "type": "tool_result",
+          "content": "total 4\n-rw-r--r-- 1 mathi 197609 702 2026-09-27 18:25:05.347172400 +0200 RISK-IAR-001.md\narchitecture\ncapabilities\nintent\nrequirements\nrisks\nspecifications\nverification\nwork-orders\ndocs/engineering/instruction-architecture/specifications:\nSPEC-IAR-014.md\n\ndocs/engineering/instruction-architecture/verification:\nVER-IAR-014.md",
+          "is_error": false
+        }
+      ]
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "c8a393b4-b0d8-4576-a3d5-c3d773ca419e",
+    "timestamp": "2026-09-27T16:26:24.614Z",
+    "tool_use_result": {
+      "stdout": "total 4\n-rw-r--r-- 1 mathi 197609 702 2026-09-27 18:25:05.347172400 +0200 RISK-IAR-001.md\narchitecture\ncapabilities\nintent\nrequirements\nrisks\nspecifications\nverification\nwork-orders\ndocs/engineering/instruction-architecture/specifications:\nSPEC-IAR-014.md\n\ndocs/engineering/instruction-architecture/verification:\nVER-IAR-014.md",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false,
+      "noOutputExpected": false
+    }
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFsESdmvTKuHsMVqcDp",
+      "type": "message",
+      "role": "assistant",
+      "content": [],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 1654,
+        "cache_read_input_tokens": 36983,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 1654
+        },
+        "output_tokens": 2,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "3296aff7-2dbe-4cc5-8ceb-a83b6674c05f",
+    "timestamp": "2026-09-27T16:26:31.862Z",
+    "request_id": "req_011CfUFsDrAHPZmJ82eVPsnr"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "model": "claude-opus-5",
+      "id": "msg_011CfUFsESdmvTKuHsMVqcDp",
+      "type": "message",
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "## Observed result: the lost acknowledgement hid a write that did complete\n\nThe intended `raise-risk` operation was applied and persisted. I established this from the actual repository files, not from the session summary.\n\n**Persisted record:** `docs/engineering/instruction-architecture/risks/RISK-IAR-001.md`\n\n| Field | Value in the persisted record | Matches the intended operation |\n| --- | --- | --- |\n| `title` | `\"Acknowledgement-loss recovery probe\"` | yes |\n| domain path | `instruction-architecture/risks/` | yes |\n| `description` | `\"A write acknowledgement may be lost during compaction.\"` | yes |\n| `action` | `\"Inspect actual persisted effects before any retry.\"` | yes |\n| `owners` | `[\"Codex\"]` | yes |\n| `status` | `\"raised\"` | — |\n| `relations.threatens` | `[]` | — |\n\nThe record carries one lifecycle event, `identified` → `raised`, `decided_at = \"2026-09-27T16:25:05Z\"`, `decided_by = \"operator\"`, `reason = \"Recorded by harnessctl raise-risk.\"`. The file's modification time is `2026-09-27 18:25:05.347172400 +0200`, which is the same instant as that event. The write was complete, not partial: the frontmatter, the `## Description` section, and the `## Next action` section are all present.\n\n`risks/` contains no other file, so the operation created no duplicate. No paired decision record exists, which is consistent with a `raise-risk` invocation without `--with-decision`.\n\n**Retry is not appropriate.** The effect already exists. A second `raise-risk` with the same arguments would allocate a new ID and create a duplicate risk, which the record-risks procedure forbids (reference the existing record instead).\n\n## Remaining uncertainty: fresh context for WO-IAR-015 was not obtained\n\nCONTINUE.md action 2 requires the work order's current result from `check`. I could not run it. The evaluator invocation needed permission approval, and this session has no approval surface, so it was denied automatically and will stay denied. Nothing ran; the evaluator produced no output at all.\n\nConsequently I have **no authoritative lifecycle state and no typed next step for WO-IAR-015**. HRN-003 makes `harnessctl` the only source of truth for those fields, so I will not derive them. As file evidence only, the record `WO-IAR-015.md` contains `status = \"in_progress\"` with a last event `approved` → `in_progress` at `2026-09-27T07:43:56Z` by `Codex`. That is stored text, not a current verdict, and it establishes no permitted transition.\n\nI attempted the SETUP.md identity check first, before any use of the candidate fixture evaluator, so that its runtime identity could be compared with the locked digests. That attempt is the call that was denied.\n\n## Discrepancy to flag: the stated evaluator selection\n\nThe task states that the real repository still selects the released 0.18.0 evaluator. This repository's own records disagree:\n\n- `.engineering-harness.toml`: `tool_version = \"0.19.0\"`\n- `.engineering-harness.lock`: `tool_version = \"0.19.0\"`, `evaluator.version = \"0.19.0\"`, `evaluator.payload_sha256 = \"8cfc631f38f9a63b998ce90f0acc84a462de860c07f4c8da67dc8d89d380ae32\"`\n- Session delivery: selected release 0.19.0, entry SHA-256 `be7c525c4cc2e4ec91186453353d3c2889c25e1cfa5f47ab52902acce57c6fae`, which equals the lock's managed hash for `ENGINEERING_HARNESS.md`\n\nThe `0.18.0` string does appear inside WO-IAR-015, in the approval event reason, describing the source repository's installed governance. I did not edit any of these values. SETUP.md action 1 requires reporting a mismatch rather than reconciling it, and CONTINUE.md action 7 forbids repairing a version mismatch by running candidate source. So the candidate fixture evaluator must be identity-checked against the 0.19.0 lock digests before it is trusted for a `check` result.\n\n## Next action\n\nAn operator with an approval surface runs these two commands from a working directory outside the checkout, in this order:\n\n```text\nC:/Users/mathi/AppData/Local/Temp/iar-instruction-demo-bztgja2p/evaluator/Scripts/python.exe -I -B -m se_harness identity --role released-evaluator --expected-version 0.19.0 --expected-root C:/Users/mathi/AppData/Local/Temp/iar-instruction-demo-bztgja2p/evaluator --checkout-root C:/Users/mathi/AppData/Local/Temp/iar-uncertain-recovery-npf8z86u/repository --evaluator-payload-sha256 8cfc631f38f9a63b998ce90f0acc84a462de860c07f4c8da67dc8d89d380ae32 --evaluator-wheel-sha256 3b45680ee7f76509e09a933a4d061ff522d29c25b236201985861376221f5b3f --require-isolated-python --json\n```\n\n```text\nC:/Users/mathi/AppData/Local/Temp/iar-instruction-demo-bztgja2p/evaluator/Scripts/python.exe -I -B -m se_harness check C:/Users/mathi/AppData/Local/Temp/iar-uncertain-recovery-npf8z86u/repository --artifact WO-IAR-015 --json\n```\n\nThe first command establishes whether the candidate fixture evaluator is the payload the lock selects. If it reports a mismatch, the mismatch is the reportable result and the `check` result from that binary is not usable as lifecycle truth.\n\n## Effects that did not occur\n\nNo lifecycle transition was previewed or applied. No implementation was performed. No artifact was created, edited, or deleted by me. No evaluator command executed, so no gate was evaluated and no checkpoint was run. No commit, push, pull request, release, or other external action occurred. The risk record's `raised` state and the work order's stored fields are unchanged from what the earlier operation left."
+        }
+      ],
+      "container": null,
+      "stop_reason": null,
+      "stop_sequence": null,
+      "stop_details": null,
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 1654,
+        "cache_read_input_tokens": 36983,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 1654
+        },
+        "output_tokens": 2,
+        "service_tier": "standard",
+        "inference_geo": "not_available"
+      },
+      "diagnostics": null,
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "uuid": "51b5a2fb-e6ad-435a-b72c-164a90fa2153",
+    "timestamp": "2026-09-27T16:27:00.147Z",
+    "request_id": "req_011CfUFsDrAHPZmJ82eVPsnr"
+  },
+  {
+    "duration_api_ms": 112244,
+    "stop_reason": "end_turn",
+    "session_id": "7a497355-8b7e-4dc0-b62d-8bc4e9fa82e3",
+    "total_cost_usd": 0.6512765,
+    "usage": {
+      "input_tokens": 16,
+      "cache_creation_input_tokens": 38637,
+      "cache_read_input_tokens": 165353,
+      "output_tokens": 7286,
+      "output_tokens_details": {
+        "thinking_tokens": 3440
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 38637,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "not_available",
+      "iterations": [],
+      "speed": "standard"
+    },
+    "modelUsage": {
+      "claude-opus-5[1m]": {
+        "inputTokens": 16,
+        "outputTokens": 7286,
+        "cacheReadInputTokens": 165353,
+        "cacheCreationInputTokens": 38637,
+        "webSearchRequests": 0,
+        "costUSD": 0.6512765,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "thinkingTokens": 3440,
+        "canonicalModel": "claude-opus-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    },
+    "permission_denials": [
+      {
+        "tool_name": "Bash",
+        "tool_use_id": "toolu_016UEgvJgC5L1R7RcPQsnM9S",
+        "tool_input": {
+          "command": "cd /tmp && \"C:/Users/mathi/AppData/Local/Temp/iar-instruction-demo-bztgja2p/evaluator/Scripts/python.exe\" -I -B -m se_harness identity --role released-evaluator --expected-version 0.19.0 --expected-root \"C:/Users/mathi/AppData/Local/Temp/iar-instruction-demo-bztgja2p/evaluator\" --checkout-root \"C:/Users/mathi/AppData/Local/Temp/iar-uncertain-recovery-npf8z86u/repository\" --evaluator-payload-sha256 8cfc631f38f9a63b998ce90f0acc84a462de860c07f4c8da67dc8d89d380ae32 --evaluator-wheel-sha256 3b45680ee7f76509e09a933a4d061ff522d29c25b236201985861376221f5b3f --require-isolated-python --json",
+          "description": "Check candidate evaluator identity against locked digests"
+        }
+      }
+    ],
+    "terminal_reason": "completed",
+    "fast_mode_state": "off",
+    "fast_mode_disabled_reason": "sdk_opt_in_required",
+    "subagent_stats": {
+      "spawned": 0,
+      "requested": {
+        "background": 0,
+        "foreground": 0,
+        "unset": 0
+      },
+      "started_in_background": 0,
+      "max_depth": 0,
+      "spawned_by_subagents": 0,
+      "completed": 0,
+      "failed": 0,
+      "killed": {
+        "parent": 0,
+        "user": 0,
+        "system": 0
+      },
+      "refused": {
+        "depth_limit": 0,
+        "concurrency_limit": 0,
+        "budget": 0
+      },
+      "by_type": {}
+    },
+    "is_error": false,
+    "num_turns": 11,
+    "subtype": "success",
+    "api_error_status": null,
+    "result": "## Observed result: the lost acknowledgement hid a write that did complete\n\nThe intended `raise-risk` operation was applied and persisted. I established this from the actual repository files, not from the session summary.\n\n**Persisted record:** `docs/engineering/instruction-architecture/risks/RISK-IAR-001.md`\n\n| Field | Value in the persisted record | Matches the intended operation |\n| --- | --- | --- |\n| `title` | `\"Acknowledgement-loss recovery probe\"` | yes |\n| domain path | `instruction-architecture/risks/` | yes |\n| `description` | `\"A write acknowledgement may be lost during compaction.\"` | yes |\n| `action` | `\"Inspect actual persisted effects before any retry.\"` | yes |\n| `owners` | `[\"Codex\"]` | yes |\n| `status` | `\"raised\"` | — |\n| `relations.threatens` | `[]` | — |\n\nThe record carries one lifecycle event, `identified` → `raised`, `decided_at = \"2026-09-27T16:25:05Z\"`, `decided_by = \"operator\"`, `reason = \"Recorded by harnessctl raise-risk.\"`. The file's modification time is `2026-09-27 18:25:05.347172400 +0200`, which is the same instant as that event. The write was complete, not partial: the frontmatter, the `## Description` section, and the `## Next action` section are all present.\n\n`risks/` contains no other file, so the operation created no duplicate. No paired decision record exists, which is consistent with a `raise-risk` invocation without `--with-decision`.\n\n**Retry is not appropriate.** The effect already exists. A second `raise-risk` with the same arguments would allocate a new ID and create a duplicate risk, which the record-risks procedure forbids (reference the existing record instead).\n\n## Remaining uncertainty: fresh context for WO-IAR-015 was not obtained\n\nCONTINUE.md action 2 requires the work order's current result from `check`. I could not run it. The evaluator invocation needed permission approval, and this session has no approval surface, so it was denied automatically and will stay denied. Nothing ran; the evaluator produced no output at all.\n\nConsequently I have **no authoritative lifecycle state and no typed next step for WO-IAR-015**. HRN-003 makes `harnessctl` the only source of truth for those fields, so I will not derive them. As file evidence only, the record `WO-IAR-015.md` contains `status = \"in_progress\"` with a last event `approved` → `in_progress` at `2026-09-27T07:43:56Z` by `Codex`. That is stored text, not a current verdict, and it establishes no permitted transition.\n\nI attempted the SETUP.md identity check first, before any use of the candidate fixture evaluator, so that its runtime identity could be compared with the locked digests. That attempt is the call that was denied.\n\n## Discrepancy to flag: the stated evaluator selection\n\nThe task states that the real repository still selects the released 0.18.0 evaluator. This repository's own records disagree:\n\n- `.engineering-harness.toml`: `tool_version = \"0.19.0\"`\n- `.engineering-harness.lock`: `tool_version = \"0.19.0\"`, `evaluator.version = \"0.19.0\"`, `evaluator.payload_sha256 = \"8cfc631f38f9a63b998ce90f0acc84a462de860c07f4c8da67dc8d89d380ae32\"`\n- Session delivery: selected release 0.19.0, entry SHA-256 `be7c525c4cc2e4ec91186453353d3c2889c25e1cfa5f47ab52902acce57c6fae`, which equals the lock's managed hash for `ENGINEERING_HARNESS.md`\n\nThe `0.18.0` string does appear inside WO-IAR-015, in the approval event reason, describing the source repository's installed governance. I did not edit any of these values. SETUP.md action 1 requires reporting a mismatch rather than reconciling it, and CONTINUE.md action 7 forbids repairing a version mismatch by running candidate source. So the candidate fixture evaluator must be identity-checked against the 0.19.0 lock digests before it is trusted for a `check` result.\n\n## Next action\n\nAn operator with an approval surface runs these two commands from a working directory outside the checkout, in this order:\n\n```text\nC:/Users/mathi/AppData/Local/Temp/iar-instruction-demo-bztgja2p/evaluator/Scripts/python.exe -I -B -m se_harness identity --role released-evaluator --expected-version 0.19.0 --expected-root C:/Users/mathi/AppData/Local/Temp/iar-instruction-demo-bztgja2p/evaluator --checkout-root C:/Users/mathi/AppData/Local/Temp/iar-uncertain-recovery-npf8z86u/repository --evaluator-payload-sha256 8cfc631f38f9a63b998ce90f0acc84a462de860c07f4c8da67dc8d89d380ae32 --evaluator-wheel-sha256 3b45680ee7f76509e09a933a4d061ff522d29c25b236201985861376221f5b3f --require-isolated-python --json\n```\n\n```text\nC:/Users/mathi/AppData/Local/Temp/iar-instruction-demo-bztgja2p/evaluator/Scripts/python.exe -I -B -m se_harness check C:/Users/mathi/AppData/Local/Temp/iar-uncertain-recovery-npf8z86u/repository --artifact WO-IAR-015 --json\n```\n\nThe first command establishes whether the candidate fixture evaluator is the payload the lock selects. If it reports a mismatch, the mismatch is the reportable result and the `check` result from that binary is not usable as lifecycle truth.\n\n## Effects that did not occur\n\nNo lifecycle transition was previewed or applied. No implementation was performed. No artifact was created, edited, or deleted by me. No evaluator command executed, so no gate was evaluated and no checkpoint was run. No commit, push, pull request, release, or other external action occurred. The risk record's `raised` state and the work order's stored fields are unchanged from what the earlier operation left.",
+    "ttft_ms": 2435,
+    "type": "result",
+    "duration_ms": 113839,
+    "uuid": "8455f83b-224a-422b-b2ad-6d3e6d28b6a5",
+    "ttft_stream_ms": 1581,
+    "time_to_request_ms": 73,
+    "first_content_frame_ms": 1582,
+    "queued_turn_count": 0,
+    "result_index": 0
+  }
+]

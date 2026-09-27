@@ -10,9 +10,20 @@ leaves the assurance or release decision with its accountable owner.
 
 ## Repository context
 
-Read the selected repository's AGENTS.md and ENGINEERING_HARNESS.md on entry,
-after compaction, and after switching repositories. Read the operating card and
-the reading manifest for the selected work. Use normal file reads.
+Use this repository's ENGINEERING_HARNESS.md in the current context. Read it
+when it is absent, after switching repositories, or when its selected release
+changes. Follow its task router and read applicable owner instructions when
+present. AGENTS.md is not a plugin installation or instruction-delivery requirement.
+
+When a result includes `instruction_discovery`, require `status = "available"`.
+Read its current step's exact file and heading and each prerequisite whose
+condition applies. Read the selected formal records separately. The
+`evaluator_only_inputs` are not normal agent reading. An incompatible result
+stops the affected action; report the version/discovery gap.
+
+For a released result without this field, use that installed root's procedure
+router and reading manifest. Do not apply candidate instructions to an older
+selected release. A manual root read does not prove automatic host delivery.
 
 Use the repository-selected released evaluator in its private environment,
 through the absolute Python path with `-I -m se_harness`. Run
@@ -36,7 +47,9 @@ Keep failed and missing checks visible. Separate a fixture or intercepted tool
 from a real host or external action. Do not invent a result, erase an original
 failure after a successful retry, or turn an unrun check into a pass.
 
-Choose the relevant reference:
+For the new instruction collection, follow its returned verification, release
+or external-action procedure and RESULTS.md for the handoff. Otherwise, choose
+the applicable legacy reference:
 
 - [Prepare evidence and records](references/records.md) for handoff, VREC or RLS.
 - [External actions](references/external-actions.md) if the selected procedure

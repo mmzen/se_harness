@@ -112,6 +112,23 @@ class PackageAssemblyTests(unittest.TestCase):
             self.prepare()
         self.assertFalse(self.out.exists())
 
+    def test_committed_instruction_hooks_are_validated_before_assembly(self):
+        self.write('delivery.py', '# synthetic helper, never executed\n')
+        self.plan['shared']['scripts/inject_instructions.py'] = 'delivery.py'
+        for host, folder in [('codex', 'codex'), ('claude', 'claude-code')]:
+            self.write(f'{host}-hooks.json', (ROOT/f'plugins/verity-plane/{folder}/hooks/hooks.json').read_bytes())
+            self.plan['hosts'][host]['hooks/hooks.json'] = f'{host}-hooks.json'
+        self.commit_plan()
+        assembled = self.prepare()
+        for entries in assembled.files.values():
+            self.assertIn('hooks/hooks.json', entries)
+            self.assertIn('scripts/inject_instructions.py', entries)
+        self.write('claude-hooks.json', '{}')
+        self.commit_plan()
+        with self.assertRaisesRegex(pkg.AssemblyError, 'unsupported claude'):
+            self.prepare()
+        self.assertFalse(self.out.exists())
+
     def test_git_executable_mode_and_host_only_scripts(self):
         for host in pkg.HOSTS:
             self.write(f"{host}.py", f"# {host} integration fixture\n")

@@ -1,0 +1,13 @@
+{
+  "allocated_id": "WO-IAR-016",
+  "changes": [
+    {
+      "action": "create",
+      "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-016.md"
+    }
+  ],
+  "command": "create-artifact",
+  "dry_run": true,
+  "outcome": "completed",
+  "schema": "se-harness-command-result-v1"
+}

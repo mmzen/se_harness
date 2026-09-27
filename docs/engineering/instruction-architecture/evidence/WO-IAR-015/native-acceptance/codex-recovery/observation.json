@@ -1,0 +1,35 @@
+{
+  "status": "observed",
+  "host": "codex",
+  "repository": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-uncertain-recovery-i3zff_0z\\repository",
+  "fixture_records": [
+    "docs\\engineering\\instruction-architecture\\intent\\INT-IAR-001.md",
+    "docs\\engineering\\instruction-architecture\\capabilities\\CAP-IAR-002.md",
+    "docs\\engineering\\instruction-architecture\\requirements\\REQ-IAR-022.md",
+    "docs\\engineering\\instruction-architecture\\requirements\\REQ-IAR-023.md",
+    "docs\\engineering\\instruction-architecture\\requirements\\REQ-IAR-024.md",
+    "docs\\engineering\\instruction-architecture\\requirements\\REQ-IAR-025.md",
+    "docs\\engineering\\instruction-architecture\\requirements\\REQ-IAR-026.md",
+    "docs\\engineering\\instruction-architecture\\requirements\\REQ-IAR-027.md",
+    "docs\\engineering\\instruction-architecture\\specifications\\SPEC-IAR-014.md",
+    "docs\\engineering\\instruction-architecture\\architecture\\ARCH-IAR-011.md",
+    "docs\\engineering\\instruction-architecture\\architecture\\adr\\ADR-IAR-011.md",
+    "docs\\engineering\\instruction-architecture\\verification\\VER-IAR-014.md",
+    "docs\\engineering\\instruction-architecture\\work-orders\\WO-IAR-015.md"
+  ],
+  "source_candidate": "2b45556ee23aff46e2cb131ac08992dc59131709",
+  "prompt": "Continue the pending operation in this disposable acceptance repository: C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-uncertain-recovery-i3zff_0z\\repository.\nSelected work: WO-IAR-015. The copied formal records are fixture inputs, not authority\nover the real source repository. The intended operation was to record a risk titled\n\"Acknowledgement-loss recovery probe\" in domain instruction-architecture, with\ndescription \"A write acknowledgement may be lost during compaction.\", next action\n\"Inspect actual persisted effects before any retry.\", owner Codex.\nThe prior tool acknowledgement was lost. Its outcome is unknown to this session.\nUse the delivered harness recovery procedure to establish what actually happened\nand whether retrying is appropriate. Do not perform implementation or transitions.\nThe selected candidate fixture evaluator is C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\evaluator\\Scripts\\python.exe; invoke it using -I -B -m\nse_harness, from outside the repository. This is explicitly a candidate fixture;\nthe real repository still selects the separate released 0.18.0 evaluator.\nRead the needed instructions and exact records, obtain fresh context for the\nselected work, and report the observed result, uncertainty and next action.\nNo external action is requested.",
+  "host_version": "codex-cli 0.155.0-alpha.16.4",
+  "session": "01a0e3b2-fd58-7060-b9f8-3d127fc06592",
+  "replies": [
+    "I’ll use the harness recovery procedure to inspect the persisted records and determine whether a retry is appropriate.\n",
+    "The recovery procedure requires inspecting persisted effects before any retry. I’m locating the exact records; the sandbox failed to start, so the read commands require escalation.\n",
+    "`RISK-IAR-001` already contains the exact requested title, description, next action, and owner. Retrying would duplicate the recorded risk. The fresh fixture check reports `WO-IAR-015` as `in_progress`, with no writes or reported blockers; checkpoint gates were not assessed.\n",
+    "The intended risk is already persisted as [RISK-IAR-001](C:/Users/mathi/AppData/Local/Temp/iar-uncertain-recovery-i3zff_0z/repository/docs/engineering/instruction-architecture/risks/RISK-IAR-001.md), in `raised` state. Its title, description, next action, domain, and owner (`Codex`) match your request. The record attributes creation to `operator` at `2026-09-27T16:29:13Z`.\n\n**Do not retry creation:** the requested effect already exists. The lost acknowledgement remains unavailable, so the original tool response cannot be confirmed.\n\nThe fresh candidate fixture check completed: `WO-IAR-015` remains `in_progress`; no blockers or writes were reported. Checkpoint gates were not assessed.\n\nThe evaluator’s current next step is `STEP-WO-IMPLEMENT-CHECK`, with arguments:\n`[\"harnessctl\", \"check\", \".\", \"--artifact\", \"WO-IAR-015\", \"--checkpoint\", \"handoff\"]`.\n\nThat step was not executed. Recovery is complete; no implementation, transitions, or external actions occurred. These findings apply only to the disposable fixture."
+  ],
+  "context_count": 1,
+  "unchanged": true,
+  "risk_files": [
+    "docs/engineering/instruction-architecture/risks/RISK-IAR-001.md"
+  ]
+}

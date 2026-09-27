@@ -1053,7 +1053,9 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionFixture, unittest.TestCase):
         rendered = render_operating_card()
         self.assertEqual(rendered, template.read_bytes().replace(b"\r\n", b"\n"))
         self.assertLessEqual(len(rendered), OPERATING_CARD_LIMIT)
-        self.assertEqual([b"## Stop when", b"## Traps"], re.findall(rb"^## .*$", rendered, flags=re.MULTILINE))
+        self.assertIn(b"Compatibility pointer", rendered)
+        self.assertIn(b"[CONTINUE.md](harness/CONTINUE.md)", rendered)
+        self.assertEqual([], re.findall(rb"^## .*$", rendered, flags=re.MULTILINE))
         self.assertNotIn(b"| Class |", rendered)
         mutated = json.loads(json.dumps(load_workflow_contract()))
         mutated["restitution_fields"].remove("outcome")  # ECP-PRM-020: the contract is the field set; a malformed one refuses
@@ -1068,7 +1070,9 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionFixture, unittest.TestCase):
             "preflight", str(self.root), "--work-order", "WO-001", "--phase", "review", "--json"
         )
         manifest = json.loads(output)["reading_manifest"]
-        self.assertEqual(["ENGINEERING_HARNESS.md", "docs/engineering/OPERATING_CARD.md", "AGENTS.md"], manifest[:3])
+        self.assertEqual("ENGINEERING_HARNESS.md", manifest[0])
+        self.assertNotIn("AGENTS.md", manifest)
+        self.assertNotIn("docs/engineering/OPERATING_CARD.md", manifest)
         self.assertNotIn("docs/engineering/WORKFLOW.md", manifest)
 
     def test_lf_and_crlf_pr_fields_select_the_same_values(self) -> None:
@@ -1641,7 +1645,10 @@ class CheckProjectionTests(unittest.TestCase):
         present = {step["id"] for procedure in contract["procedures"] for step in procedure.get("steps", [])}
         self.assertTrue(renamed <= present, renamed - present)
         workflow_md = (REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/WORKFLOW.md").read_text(encoding="utf-8")
-        self.assertIn("`WFL-003` - `harnessctl check` and `harnessctl transition` MUST select the first", workflow_md)
+        self.assertIn("harness/CONTINUE.md", workflow_md)
+        current = (REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/harness/CONTINUE.md").read_text(encoding="utf-8")
+        self.assertIn("Read the result's selected procedure and its exact next typed step", current)
+        self.assertIn("harnessctl check REPO --artifact ARTIFACT-ID --json", current)
         self.assertNotIn("harnessctl focus", workflow_md)
         reference = (REPOSITORY_ROOT / "docs/notes/harnessctl-reference.md").read_text(encoding="utf-8")
         self.assertEqual(0, reference.count("| `focus` |"))

@@ -279,18 +279,17 @@ class AdrApplicabilityTests(unittest.TestCase):
             "docs/engineering/templates/WORK_ORDER.template.md": (
                 "every applicable architecture plus every required deciding ADR",
             ),
-            "docs/engineering/WORKFLOW.md": (
-                "decision applicability",
-                "no one-ADR-per-requirement rule exists",
+            "docs/engineering/harness/AUTHORITY.md": (
+                "A human MUST NOT approve their own architecture decision",
+                "assessment unless they explicitly hold approval authority for that artifact",
+                "and the separation rules permit it",
             ),
-            "docs/engineering/DECISION_RIGHTS.md": (
-                "MUST NOT approve its own architecture decision assessment",
-            ),
-            "docs/engineering/QUALITY_GATES.md": (
-                "each `adr_required` architecture has active deciding ADR coverage",
-            ),
-            "docs/engineering/TRACEABILITY.md": (
-                "`ADR.decides -> ARCH` establishes coverage",
+            "docs/engineering/harness/DEFINITION_LINKS.md": (
+                "`decision_assessment.outcome` as `adr_required` or",
+                "`no_significant_decision`",
+                "The first requires a selected active architecture",
+                "One architecture decision (ADR) may cover several related",
+                "Architecture decision (ADR) → Architecture (ARCH) | `decides`",
             ),
         }
         for relative, phrases in expectations.items():

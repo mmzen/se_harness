@@ -1,0 +1,13 @@
+{
+  "purpose": "Immutable design-review inputs, not installed instructions or verification evidence. Working notes remain outside the repository.",
+  "files": [
+    {
+      "path": "discovery-split-review-source.md",
+      "sha256": "881f561c8cfdfb4f8bdcd515475ee4e00cce750dcc60f4e3dd87764b4f36d2a0"
+    },
+    {
+      "path": "instruction-review-source.md",
+      "sha256": "9811b1770fa81e20f19890cb45de6d991aa463cf60a4338b39251d9d4c978a28"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 This repository uses SE Harness {{HARNESS_VERSION}}.
 
-The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,
+The keywords **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**,
 **SHOULD**, **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and
 **OPTIONAL** in this document are to be interpreted as described in BCP 14
 (RFC 2119 and RFC 8174) when, and only when, they appear in all capitals.
@@ -14,124 +14,153 @@ scope, binds assurance and release claims to exact evidence, and gives every
 actor the same deterministic next step. These goals are informative; the rules
 below and the installed evaluator's machine policy are normative.
 
-## Global invariants
+## Policy / Global invariants
 
-`HRN-001` - Formal artifacts under `docs/engineering/` are the repository-native
-source of product intent, requirements, architecture decisions, work authority,
-verification contracts, assurance decisions, and release decisions. Code,
+### HRN-001 — Formal authority
+
+Formal artifacts under `docs/engineering/` are the authoritative
+records of product intent, requirements, architecture decisions, work authority,
+verification contracts, risks, assurance decisions, and release decisions. Code,
 tests, commits, tickets, dashboards, and conversation text are evidence or
 observations; they MUST NOT substitute for formal authority.
 
-`HRN-002` - Repository facts and commands belong in the owner-controlled region
-of `AGENTS.md`. That content is repository-owned and MUST NOT grant product,
-engineering, assurance, release, or external-action authority. This harness does
-not scaffold, track, or require it.
+### HRN-002 — Change control
 
-`HRN-003` - An actor MUST select one bounded artifact scope before acting. It
-MUST NOT report findings from unrelated work orders as findings of the selected
-scope. A discovered issue outside scope MAY be identified only as an unassessed
-observation with its artifact ID, and MUST NOT block the selected work unless a
-declared dependency or gate connects it.
+Formal artifacts MAY be drafted, reviewed, and validated before a work order
+is approved. This preparation MUST NOT authorize implementation.
 
-`HRN-004` - Only `harnessctl` MAY compute lifecycle legality and the canonical
-next action. Agent prose, prompts, Skills, dashboards, and repository notes MAY
-render or invoke that result and MUST NOT redefine it.
+Accepted formal artifacts MUST define the change before implementation starts.
+One or more approved work orders MUST authorize implementation. A valid
+repository-owned exception MAY remove the requirement for formal definitions,
+work orders, or both. It MUST NOT change lifecycle rules or waive required gates.
 
-`HRN-005` - Preparation, inspection, validation, and evidence capture MUST NOT
-exercise a decision right. A state change requires the exact artifact, target
-state, accountable actor, passing gates, and an explicit applied transition.
+Any required work orders MUST pass the required validation checks before
+implementation starts. The result MUST be verified against the accepted
+definitions that apply. All required verification checks remain required.
 
-`HRN-006` - A transition MUST change only the artifacts explicitly selected by
-the accountable actor. Related artifact states MUST NOT be synchronized by
-inference.
+### HRN-003 — Lifecycle authority
 
-`HRN-007` - Repository-owned instructions MAY add stricter local constraints.
-They MUST NOT waive, weaken, or contradict this managed contract.
+Artifacts and the work itself MUST follow a strict lifecycle.
+`harnessctl` MUST be the only source of truth for lifecycle states, allowed
+state changes and the next action. Actors MUST use its results when reporting
+or taking lifecycle actions. Agent text, prompts, Skills, dashboards, and
+repository notes MUST NOT work out their own answers or change those results.
 
-`HRN-008` - Managed integrity, graph validation, scope validation, and required
-gates MUST fail closed. A warning MUST NOT be treated as approval or accepted
-risk.
+### HRN-004 — Bounded scope
 
-## Scope of these obligations
+An actor MUST select one clearly defined set of artifacts before
+acting. This set defines the scope. Findings from unrelated work orders MUST
+NOT be presented as findings about the selected scope. An issue outside the
+scope MAY be reported only as an observation that has not been assessed, with
+its artifact ID. It MUST NOT block the selected work unless a recorded
+dependency or gate connects it to that work.
 
-The bounded-scope invariant above, the lifecycle handoff rules, and the stop
-conditions bind an actor executing or reporting a lifecycle stage. Reading,
-analysis, and answering questions are unconstrained, provided no lifecycle
-state changes, no decision right is exercised, and no finding is presented as
-a formal result.
+### HRN-005 — Explicit decisions
 
-Before acting on a lifecycle stage, read `docs/engineering/OPERATING_CARD.md`,
-the selected work order, and every governing artifact listed by the phase
-reading manifest. For authoring, design or review, also read and apply
-[the authoring and review policy](docs/engineering/ARTIFACT_AUTHORING.md), including
-its shared design principle and the questions relevant to the selected work.
-This applies whether or not a skill is used. Other routed policies below are
-reference material unless the selected procedure requires them.
+Each decision MUST identify the accountable human or agent and the authority
+used. Being a human or an agent does not by itself authorize an action.
 
-## Routing
+Preparing, inspecting, validating, or collecting evidence MUST NOT
+count as an authorized decision. A state change requires the exact artifact,
+the intended state, and the accountable actor. The required gates MUST pass,
+and an explicit state transition MUST be applied.
 
-The installed evaluator owns executable policy. Its machine `WORKFLOW.json`
-and `QUALITY_GATES.json`, this router, and the instruction/ignore fragments are
-locked. Human explanations, artifact templates, CI and owner settings are
-editable files. Editing the selected version is not an upgrade; it must agree
-with the installation record.
+### HRN-006 — Targeted transitions
 
-An explicit upgrade keeps editable files by default. Use `--replace-file PATH`
-for each editable file that should receive the supplied template. Owner content
-beside managed fragments is preserved. The guides below explain policy; they
-do not replace the installed evaluator's decisions.
+A state transition MUST change only the artifacts explicitly
+selected by the accountable actor. The states of related artifacts MUST NOT
+change just because they are linked.
 
-| Subject | Guide and machine policy |
+### HRN-007 — Repository ownership
+
+`AGENTS.md` MUST belong entirely to the repository owner and contain
+no harness instructions. Repository-specific facts and commands belong in
+that file. The harness MUST NOT generate, track, or require that owner content.
+
+### HRN-008 — Rule precedence
+
+Repository instructions MAY add stricter rules. They MUST NOT grant authority
+for product, engineering, assurance, release, or external actions. They MUST
+NOT remove, weaken, or contradict the harness rules.
+
+Repository owners MAY define exceptions through the supported exception
+capability described in [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability). This changes only the obligations the capability permits
+them to configure: whether formal definitions and work orders are required.
+Lifecycle rules and required gates remain fixed. Repository prose alone MUST
+NOT waive a harness rule.
+
+### HRN-009 — Required checks
+
+Managed-file integrity checks, artifact graph checks, scope checks, and required
+gates MUST all pass before the affected action can proceed. Warnings MUST NOT
+count as approval or acceptance of a risk.
+
+## Scope of these rules
+
+The bounded-scope, lifecycle-reporting, and stop rules apply when a human or
+agent performs or reports a governed lifecycle action. Reading, analysis, and
+answering questions need no work order when they change no lifecycle state,
+exercise no decision right, and present no finding as a formal verdict.
+
+Preparing a proposed artifact package does not require an approved work
+order. A human or agent MAY create and edit drafts, record risks and open
+questions, review the proposed content, and validate the package. These
+actions MUST follow the authoring procedure and required checks. They MUST
+NOT change an accepted definition, approve a work order, or start
+implementation. Decisions and lifecycle transitions follow their separate
+authority rules.
+
+Before a lifecycle action, select the exact artifacts and read the governing
+files returned by the evaluator. A checkpoint-free `check` reports lifecycle
+context. It does not evaluate checkpoint gates or authorize work.
+
+## Using these instructions
+
+A human is a person; an agent is an automated system acting under granted
+authority. Approval, verification acceptance and release decisions require an
+authorized human. Agents may apply a matching recorded decision. Resolve the
+identity and right in [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights)
+before obtaining or applying a decision.
+
+`harnessctl` means this repository's selected released evaluator, invoked through
+its absolute Python path with `-I -m se_harness`, from outside the checkout.
+`REPO` is the absolute repository path. Replace uppercase placeholders with actual
+inputs. Keep each `ID=value` assignment as one argument. If the executable or
+identity is unknown, use [SETUP.md](docs/engineering/harness/SETUP.md#procedure).
+
+Transient working material stays in the conversation or temporary storage outside
+the repository, at the agent's discretion. It has no formal authority and SHALL
+NOT be persisted in the repository. This rule covers working notes, not formal
+artifacts or evidence required at a contract's prescribed durable location.
+
+## Read by task
+
+Read the selected file's entry conditions and current step. Read its required
+references before the action they govern. A link alone does not require reading
+its target. Do not load all procedures or future stages in advance.
+
+| Current need | Read first |
 | --- | --- |
-| Lifecycle states, transitions, procedures, next actions, and handoff fields | `docs/engineering/WORKFLOW.md` and its machine-readable `WORKFLOW.json` |
-| Roles, accountabilities, delegation, and reserved decisions | `docs/engineering/DECISION_RIGHTS.md` |
-| Gate criteria, executable predicates, validation planes, pass/fail behavior, and exceptions | `docs/engineering/QUALITY_GATES.md` and `docs/engineering/QUALITY_GATES.json` |
-| Normative chain, artifact applicability, relation types, and coverage | `docs/engineering/TRACEABILITY.md` |
-| Eligible operator and technical-artifact English prose | `docs/engineering/TECHNICAL_COMMUNICATION.md` |
-| Artifact authoring locations and templates | `docs/engineering/templates/README.md` |
-| Authoring, design simplicity and review questions | `docs/engineering/ARTIFACT_AUTHORING.md` |
-| Repository-specific facts and commands | the owner-controlled region of `AGENTS.md` |
+| Discuss or explain without a lifecycle action | Only the source sections needed to answer. |
+| Define a new change | [DEFINE_CHANGE.md](docs/engineering/harness/DEFINE_CHANGE.md#read-this-when) |
+| Continue selected work or recover after compaction | [CONTINUE.md](docs/engineering/harness/CONTINUE.md#read-this-when) |
+| Resolve decision authority | [AUTHORITY.md](docs/engineering/harness/AUTHORITY.md#decision-rights) |
+| Report a lifecycle result, failed check or uncertain write | [RESULTS.md](docs/engineering/harness/RESULTS.md#read-this-when) |
+| Assess an owner-defined exception | [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability) |
+| Prepare or repair the evaluator | [SETUP.md](docs/engineering/harness/SETUP.md#read-this-when) |
 
-`docs/engineering/README.md` is an index. It MUST NOT become a second policy
-source.
+Before the first eligible English explanation in a fresh context, read
+[COMMUNICATION.md](docs/engineering/harness/COMMUNICATION.md#communication).
+Reuse it while retained in context. This applies to ordinary answers too.
+Machine WORKFLOW.json and QUALITY_GATES.json are evaluator inputs; read them only
+when changing or investigating their contracts. Use evaluator results in normal
+work. Missing instructions or an unknown returned procedure stop the affected
+action: report the exact discovery gap in RESULTS.md.
 
-## Lifecycle handoff
+## After compaction
 
-After completing a lifecycle stage or reaching a stop condition, the actor MUST
-obtain the selected workflow result using result schema 2. The structured
-result is authoritative. The actor MUST preserve its actual artifact IDs,
-lifecycle state, observed effects, material non-effects, blockers, accountable
-decision, recommended next action, and command argument boundaries or suggested
-response meaning. It MUST NOT claim an effect, decision, or authority absent
-from that result.
-
-For human interaction, the actor SHOULD summarize the result clearly and
-concisely. It MAY adapt wording and structure to the user and situation, add
-relevant explanation, and omit empty fields. It MUST distinguish completed
-work from remaining work, identify any required accountable decision, and
-recommend exactly one next action. Complete alternatives MAY be shown
-separately. It MUST NOT add an unrelated finding or another recommendation.
-
-Automation reads the structured JSON result. Human wording is not evidence
-identity: new result digests bind machine fields, including candidate, lifecycle
-state, and command arguments. The complete handoff procedure is
-`WORKFLOW.md#lifecycle-handoff-procedure`.
-
-## Stop conditions
-
-The actor MUST stop before changing state or scope when any of these conditions
-is true:
-
-- managed integrity fails;
-- the selected governing chain is invalid or artifact IDs are ambiguous;
-- no phase-eligible selected work order exists;
-- a required governing artifact or gate is missing;
-- a required check fails;
-- owner instructions conflict with this contract;
-- remediation would exceed the selected work order; or
-- the requested action lacks the decision right or explicit authority defined
-  by the routed policies.
-
-The actor MUST report the failing rule or gate, the unchanged lifecycle state,
-and one exact retry or accountable escalation. It MUST NOT ask an open-ended
-next-action question when `harnessctl` provides a canonical recommendation.
+Recover the repository, selected IDs, objective, existing authority and pending
+action from the summary. For governed work, obtain fresh context through
+CONTINUE.md and reread the current procedure and prerequisites lost from context.
+A summary preserves pointers and decisions, not current lifecycle truth. Inspect
+uncertain writes or external effects before retrying. Resume only unapplied work.

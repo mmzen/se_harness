@@ -1,0 +1,17 @@
+{
+  "args": [
+    "transition",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--set",
+    "WO-IAR-017=approved",
+    "--decision",
+    "WO-IAR-017=engineering-owner",
+    "--reason",
+    "WO-IAR-017=Human decision: I approve, answering the explicit request to approve WO-IAR-017. Apply the reviewed test-only scope and required assurance classification; no production or external delivery scope added.",
+    "--apply",
+    "--json"
+  ],
+  "exit_code": 0,
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+}

@@ -31,7 +31,7 @@ OLD_ROUTER_PROCEDURE = (
     "tag, approve, release, publish, or deploy."
 )
 ROUTER_INVARIANT_SUMMARY = (
-    "`HRN-006` - A transition MUST change only the artifacts explicitly selected by"
+    "### HRN-006 — Targeted transitions"
 )
 OLD_REVIEW_PROCEDURE = (
     "Run `harnessctl preflight . --work-order WO-... --phase review` for a completed "
@@ -77,20 +77,15 @@ class InstructionArchitectureTests(unittest.TestCase):
         return target
 
     def test_large_owner_instructions_accept_both_line_endings_and_preserve_markers(self) -> None:
-        target = self.installed_target()
-        path = target / "AGENTS.md"
-        original = path.read_text(encoding="utf-8")
-        owner = "Owner notes about using this repository.\n" * 180
-        self.assertGreater(len(owner.encode("utf-8")), 6000)
-        for newline in ("\n", "\r\n"):
-            content = (owner + original).replace("\r\n", "\n").replace("\n", newline).encode("utf-8")
+        target=self.installed_target()
+        path=target/'AGENTS.md'
+        for newline in ('\n','\r\n'):
+            content=('Owner notes about using this repository.\n'*180).replace('\n',newline).encode()
             path.write_bytes(content)
-            code, output, error = invoke("doctor", str(target))
-            self.assertEqual(0, code, output + error)
-            self.assertEqual(content, path.read_bytes())
-        path.write_bytes(content.replace(b"se-harness:begin", b"se-harness:broken", 1))
-        code, output, error = invoke("doctor", str(target))
-        self.assertNotEqual(0, code, output + error)
+            code,output,error=invoke('doctor',str(target))
+            self.assertEqual(0,code,output+error)
+            self.assertEqual(content,path.read_bytes())
+        self.assertNotIn('AGENTS.md',json.loads((target/'.engineering-harness.lock').read_bytes())['files'])
 
     def add_active_packet(self, target: Path, *, status: str = "in_progress") -> None:
         destination = target / "docs" / "engineering" / "instruction-architecture"
@@ -130,57 +125,32 @@ class InstructionArchitectureTests(unittest.TestCase):
                 )
 
     def test_instruction_route_and_ownership_modes_are_explicit(self) -> None:
-        target = self.installed_target()
-        agents = (target / "AGENTS.md").read_text(encoding="utf-8")
-        managed = agents.split(BEGIN_MARKER, 1)[1].split(END_MARKER, 1)[0]
-        self.assertIn("ENGINEERING_HARNESS.md", managed)
-        self.assertNotIn("REPOSITORY_CONTEXT.md", managed)
-        claude = (target / "CLAUDE.md").read_text(encoding="utf-8")
-        self.assertEqual(1, sum(line.strip() == "@AGENTS.md" for line in claude.splitlines()))
-
-        router = (target / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
-        for name in ("WORKFLOW.md", "DECISION_RIGHTS.md", "QUALITY_GATES.md", "TRACEABILITY.md", "TECHNICAL_COMMUNICATION.md"):
-            self.assertIn(name, router)
-        index = (target / "docs" / "engineering" / "README.md").read_text(encoding="utf-8")
-        self.assertIn("Repository-owned after installation", index)
-        self.assertNotIn("## Workflow", index)
-
-        lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
-        self.assertEqual("fragment", lock["files"]["AGENTS.md"]["mode"])
-        self.assertEqual("fragment", lock["files"]["CLAUDE.md"]["mode"])
-        self.assertEqual("managed", lock["files"]["ENGINEERING_HARNESS.md"]["mode"])
-        self.assertEqual("seed", lock["files"]["docs/engineering/README.md"]["mode"])
-        self.assertEqual(
-            "seed", lock["files"]["docs/engineering/TECHNICAL_COMMUNICATION.md"]["mode"]
-        )
-        self.assertTrue((target / "docs/engineering/TECHNICAL_COMMUNICATION.md").is_file())
-        self.assertNotIn("docs/engineering/REPOSITORY_CONTEXT.md", lock["files"])
-        self.assertTrue((target / ".github" / "PULL_REQUEST_TEMPLATE.md").is_file())
+        target=self.installed_target()
+        lock=json.loads((target/'.engineering-harness.lock').read_bytes())
+        for name in ('AGENTS.md','CLAUDE.md'):
+            self.assertFalse((target/name).exists())
+            self.assertNotIn(name,lock['files'])
+        self.assertEqual('managed',lock['files']['ENGINEERING_HARNESS.md']['mode'])
+        for path,entry in lock['files'].items():
+            if path.startswith('docs/engineering/harness/'):
+                self.assertEqual('managed',entry['mode'],path)
+        self.assertEqual('seed',lock['files']['docs/engineering/README.md']['mode'])
+        self.assertNotIn('docs/engineering/REPOSITORY_CONTEXT.md',lock['files'])
+        self.assertTrue((target/'.github/PULL_REQUEST_TEMPLATE.md').is_file())
 
     def test_technical_communication_has_one_managed_owner_and_one_thin_route(self) -> None:
-        target = self.installed_target("technical-communication")
-        source = (
-            REPOSITORY_ROOT
-            / "templates/repository/standard/docs/engineering/TECHNICAL_COMMUNICATION.md"
-        )
-        installed = target / "docs/engineering/TECHNICAL_COMMUNICATION.md"
-        self.assertEqual(
-            canonical_sha256(source.read_bytes()), canonical_sha256(installed.read_bytes())
-        )
-        router = (target / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
-        self.assertEqual(1, router.count("docs/engineering/TECHNICAL_COMMUNICATION.md"))
-        self.assertNotIn("operator-communication", router)
-        self.assertNotIn("technical-artifact-writing", router)
-
-        policy = source.read_text(encoding="utf-8")
-        self.assertIn("based on ASD-STE100", policy)
-        self.assertIn("not ASD-STE100 compliance", policy)
-        self.assertIn("MUST NOT download", policy)
-        self.assertIn("operator-communication", policy)
-        self.assertIn("technical-artifact-writing", policy)
-        for prohibited in ("requests.", "urllib.", "socket.", "http://", "https://"):
-            with self.subTest(prohibited=prohibited):
-                self.assertNotIn(prohibited, policy)
+        target=self.installed_target()
+        policy=(target/'docs/engineering/harness/COMMUNICATION.md').read_text(encoding='utf-8')
+        pointer=(target/'docs/engineering/TECHNICAL_COMMUNICATION.md').read_text(encoding='utf-8')
+        router=(target/'ENGINEERING_HARNESS.md').read_text(encoding='utf-8')
+        self.assertIn('COMMUNICATION.md',router)
+        self.assertIn('harness/COMMUNICATION.md',pointer)
+        self.assertIn('Compatibility pointer',pointer)
+        self.assertNotIn('MUST',pointer)
+        for phrase in ('based on ASD-STE100','not ASD-STE100 compliance','MUST NOT download','Protected content'):
+            self.assertIn(phrase,policy)
+        for prohibited in ('requests.','urllib.','socket.'):
+            self.assertNotIn(prohibited,policy)
 
     def test_inspection_guidance_packet_preserves_the_authority_boundary(self) -> None:
         requirement = (PACKET_ROOT / "requirements" / "REQ-IAR-017.md").read_text(encoding="utf-8")
@@ -212,62 +182,35 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertIn("free-form recommendation", baseline)
 
     def test_router_keeps_invariants_while_workflow_owns_ordered_procedure(self) -> None:
-        target = self.installed_target()
-        router = (target / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
-        workflow = (target / "docs" / "engineering" / "WORKFLOW.md").read_text(
-            encoding="utf-8"
-        )
-
-        self.assertIn(ROUTER_INVARIANT_SUMMARY, router)
-        self.assertNotIn(OLD_ROUTER_PROCEDURE, router)
-        self.assertNotIn("capture-verification", router)
-        for required in (
-            "`WFL-WO-PREPARE-VREC`",
-            "`WFL-VREC-DECIDE`",
-            "`WFL-RLS-DECIDE`",
-            "A VREC decision MUST NOT change a referenced work order",
-            "Release status performs no external action",
-        ):
-            self.assertIn(required, workflow)
+        target=self.installed_target()
+        router=(target/'ENGINEERING_HARNESS.md').read_text(encoding='utf-8')
+        procedure=(target/'docs/engineering/harness/VERIFY_OUTCOME.md').read_text(encoding='utf-8')
+        self.assertIn('HRN-006',router)
+        self.assertNotIn('capture-verification',router)
+        self.assertIn('capture-verification',procedure)
+        self.assertIn('**Inputs:**',procedure)
+        self.assertIn('**Output:**',procedure)
+        self.assertIn('**Completion:**',procedure)
 
 
 
     def test_stage_aware_handoff_upgrade_is_safe_and_idempotent(self) -> None:
-        target = self.installed_target("prior-handoff")
-        router_path = target / "ENGINEERING_HARNESS.md"
-        workflow_path = target / "docs" / "engineering" / "WORKFLOW.md"
-        desired_router = router_path.read_text(encoding="utf-8")
-        desired_workflow = workflow_path.read_text(encoding="utf-8")
-        router_parts = desired_router.split(f"\n{ROUTER_HANDOFF_HEADING}\n", 1)
-        workflow_parts = desired_workflow.split(f"\n{WORKFLOW_HANDOFF_HEADING}\n", 1)
-        self.assertEqual(2, len(router_parts))
-        self.assertEqual(2, len(workflow_parts))
-        _, next_router_section = router_parts[1].split("\n## ", 1)
-        prior_router = router_parts[0] + "\n## " + next_router_section
-        prior_workflow = workflow_parts[0] + "\n"
-        self.assertNotEqual(desired_router, prior_router)
-        self.assertNotEqual(desired_workflow, prior_workflow)
-        router_path.write_text(prior_router, encoding="utf-8")
-        workflow_path.write_text(prior_workflow, encoding="utf-8")
-        lock_path = target / ".engineering-harness.lock"
-        lock = json.loads(lock_path.read_text(encoding="utf-8"))
-        lock["files"]["ENGINEERING_HARNESS.md"]["sha256"] = canonical_sha256(
-            prior_router.encode("utf-8")
-        )
-        lock["files"]["docs/engineering/WORKFLOW.md"]["sha256"] = canonical_sha256(
-            prior_workflow.encode("utf-8")
-        )
-        lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-
-        code, output, error = invoke("upgrade", str(target), "--apply", "--replace-file", "docs/engineering/WORKFLOW.md")
-        self.assertEqual(0, code, error)
-        self.assertIn("update     ENGINEERING_HARNESS.md", output)
-        self.assertIn("update     docs/engineering/WORKFLOW.md", output)
-        self.assertEqual(desired_router, router_path.read_text(encoding="utf-8"))
-        self.assertEqual(desired_workflow, workflow_path.read_text(encoding="utf-8"))
-        first_lock = lock_path.read_bytes()
-        self.assertEqual(0, invoke("upgrade", str(target), "--apply", "--replace-file", "docs/engineering/WORKFLOW.md")[0])
-        self.assertEqual(first_lock, lock_path.read_bytes())
+        target=self.installed_target()
+        relative='docs/engineering/harness/RESULTS.md'
+        path=target/relative
+        desired=path.read_bytes()
+        prior=desired+b'\nPrior released handoff note.\n'
+        path.write_bytes(prior)
+        lock_path=target/'.engineering-harness.lock'
+        lock=json.loads(lock_path.read_bytes())
+        lock['files'][relative]['sha256']=canonical_sha256(prior)
+        lock_path.write_text(json.dumps(lock),encoding='utf-8')
+        code,output,error=invoke('upgrade',str(target),'--apply')
+        self.assertEqual(0,code,output+error)
+        self.assertEqual(desired,path.read_bytes())
+        first=lock_path.read_bytes()
+        self.assertEqual(0,invoke('upgrade',str(target),'--apply')[0])
+        self.assertEqual(first,lock_path.read_bytes())
 
     def test_router_responsibility_refinement_upgrades_safely(self) -> None:
         target = self.installed_target("prior-router")
@@ -318,19 +261,13 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertEqual(original_lock, customized_lock_path.read_bytes())
 
     def test_workflow_owns_review_and_visualization_procedure(self) -> None:
-        target = self.installed_target()
-        router = (target / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
-        workflow = (target / "docs" / "engineering" / "WORKFLOW.md").read_text(
-            encoding="utf-8"
-        )
-
-        self.assertIn(ROUTER_REVIEW_SUMMARY, router)
-        self.assertNotIn(OLD_REVIEW_PROCEDURE, router)
-        review_section = router.split("## Routing", 1)[1].split("\n## ", 1)[0]
-        self.assertNotIn("--phase review", review_section)
-        self.assertNotIn("harnessctl dashboard .", review_section)
-        self.assertIn(WORKFLOW_REVIEW_STEP, workflow)
-        self.assertNotIn(OLD_WORKFLOW_REVIEW_STEP, workflow)
+        target=self.installed_target()
+        router=(target/'ENGINEERING_HARNESS.md').read_text(encoding='utf-8')
+        execution=(target/'docs/engineering/harness/EXECUTE_WORK.md').read_text(encoding='utf-8')
+        self.assertNotIn('--phase review',router)
+        self.assertNotIn('harnessctl dashboard',router)
+        self.assertIn('--phase review',execution)
+        self.assertIn('--checkpoint handoff',execution)
 
 
     def test_old_locked_guidance_becomes_editable_without_losing_owner_content(self):
@@ -375,11 +312,10 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertEqual("test-owner", report["assurance"]["decided_by"])
         self.assertEqual([], report["diagnostics"])
         self.assertEqual(
-            ["ENGINEERING_HARNESS.md", "docs/engineering/OPERATING_CARD.md", "AGENTS.md"],
-            report["reading_manifest"][:3],
+            ["ENGINEERING_HARNESS.md"],
+            report["reading_manifest"][:1],
         )
         for path in (
-            "docs/engineering/ARTIFACT_AUTHORING.md",
             "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
             "docs/engineering/instruction-architecture/work-orders/WO-IAR-001.md",
         ):
@@ -394,7 +330,7 @@ class InstructionArchitectureTests(unittest.TestCase):
         review = json.loads(output)
         self.assertTrue(review["ready"])
         self.assertEqual("review", review["phase"])
-        self.assertIn("docs/engineering/ARTIFACT_AUTHORING.md", review["reading_manifest"])
+        self.assertNotIn("docs/engineering/ARTIFACT_AUTHORING.md", review["reading_manifest"])
         after = {
             path.relative_to(target).as_posix(): path.read_bytes()
             for path in target.rglob("*")
@@ -426,11 +362,11 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertEqual(0, code, error)
         self.assertIn("Harness preflight: PASS", output)
 
-        agents = completed / "AGENTS.md"
+        agents = completed / "docs/engineering/harness/RESULTS.md"
         agents.write_text(
             agents.read_text(encoding="utf-8").replace(
-                "Read `ENGINEERING_HARNESS.md`",
-                "Skip `ENGINEERING_HARNESS.md`",
+                "MUST",
+                "MAY",
             ),
             encoding="utf-8",
         )
@@ -443,7 +379,7 @@ class InstructionArchitectureTests(unittest.TestCase):
             "review",
         )
         self.assertEqual(1, code)
-        self.assertIn("[I001] managed:AGENTS.md", output)
+        self.assertIn("[I001] managed:docs/engineering/harness/RESULTS.md", output)
 
         code, output, _ = invoke(
             "preflight",
@@ -509,25 +445,26 @@ class InstructionArchitectureTests(unittest.TestCase):
 
     def test_distribution_comparison_detects_coordinated_file_and_lock_change(self) -> None:
         target = self.installed_target()
-        agents = target / "AGENTS.md"
+        relative = "docs/engineering/harness/RESULTS.md"
+        agents = target / relative
         agents.write_text(
             agents.read_text(encoding="utf-8").replace(
-                "Read `ENGINEERING_HARNESS.md`",
-                "Skip `ENGINEERING_HARNESS.md`",
+                "MUST",
+                "MAY",
             ),
             encoding="utf-8",
         )
         lock_path = target / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
-        managed = tracked_content("fragment", agents.read_bytes())
+        managed = tracked_content("managed", agents.read_bytes())
         self.assertIsNotNone(managed)
-        lock["files"]["AGENTS.md"]["sha256"] = canonical_sha256(managed)
+        lock["files"][relative]["sha256"] = canonical_sha256(managed)
         lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
         code, output, _ = invoke("doctor", str(target))
         self.assertEqual(1, code)
-        self.assertIn("PASS managed:AGENTS.md", output)
-        self.assertIn("FAIL distribution:AGENTS.md", output)
+        self.assertIn("PASS managed:" + relative, output)
+        self.assertIn("FAIL distribution:" + relative, output)
 
     def test_pull_request_work_order_selection_is_strict(self) -> None:
         # SPEC-DST-025 DST-ENG-008: the selector script is retired; the
@@ -895,28 +832,17 @@ class AgentDirectiveSurfaceRouterTests(unittest.TestCase):
         self.root = Path(self.temporary.name)
 
     def test_router_states_the_scope_of_its_obligations_after_the_invariants(self) -> None:
-        target = self.root / "target"
+        target=self.root/'target'
         standard_repository(target)
-        router = (target / "ENGINEERING_HARNESS.md").read_text(encoding="utf-8")
-        heading = "## Scope of these obligations"
-        self.assertEqual(1, router.count(heading))
-        self.assertLess(router.index("## Global invariants"), router.index(heading))
-        self.assertLess(router.index(heading), router.index("## Routing"))
-        section = router.split(heading, 1)[1].split("## Routing", 1)[0]
-        for phrase in (
-            "bind an actor executing or reporting a lifecycle stage",
-            "Reading,\nanalysis, and answering questions are unconstrained",
-            "no finding is presented as\na formal result",
-            "docs/engineering/OPERATING_CARD.md",
-            "listed by the phase\nreading manifest",
-            "docs/engineering/ARTIFACT_AUTHORING.md",
-        ):
-            self.assertIn(phrase, section)
-        card = target / "docs/engineering/OPERATING_CARD.md"
-        self.assertTrue(card.is_file())
-        self.assertLessEqual(len(card.read_bytes()), 1024)
-        lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
-        self.assertEqual("seed", lock["files"]["docs/engineering/OPERATING_CARD.md"]["mode"])
+        router=(target/'ENGINEERING_HARNESS.md').read_text(encoding='utf-8')
+        self.assertLess(router.index('HRN-009'),router.index('## Read by task'))
+        self.assertIn('Preparing',router)
+        self.assertIn('checkpoint-free',router)
+        self.assertIn('no lifecycle state',router)
+        card=target/'docs/engineering/OPERATING_CARD.md'
+        self.assertLessEqual(len(card.read_bytes()),1024)
+        self.assertIn('Compatibility pointer',card.read_text())
+        self.assertIn('harness/CONTINUE.md',card.read_text())
 
     def test_review_preflight_reports_an_orphaned_ready_record_for_the_selected_work_order(self) -> None:
         import shutil

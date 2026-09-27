@@ -1,0 +1,391 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-IAR-015",
+    "artifacts": [
+      "WO-IAR-015"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-IAR-011",
+      "ARCH-IAR-011",
+      "CAP-IAR-002",
+      "INT-IAR-001",
+      "REQ-IAR-022",
+      "REQ-IAR-023",
+      "REQ-IAR-024",
+      "REQ-IAR-026",
+      "REQ-IAR-027",
+      "SPEC-IAR-014",
+      "VER-IAR-014"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/",
+      "docs/engineering/instruction-architecture/README.md",
+      "docs/engineering/instruction-architecture/work-orders/WO-IAR-015.md",
+      "plugins/verity-plane/claude-code/",
+      "plugins/verity-plane/codex/",
+      "plugins/verity-plane/common/",
+      "scripts/build_plugin_archives.py",
+      "scripts/build_plugin_marketplace.py",
+      "templates/repository/standard/.agents/skills/",
+      "templates/repository/standard/.claude/skills/",
+      "tests/plugin_integration/change_skill/",
+      "tests/plugin_integration/evidence-skill/",
+      "tests/plugin_integration/onboarding/",
+      "tests/plugin_integration/package_assembly/",
+      "tests/plugin_integration/progressive_discovery/",
+      "tests/plugin_integration/repository_connection/",
+      "tests/plugin_integration/test_simple_plugin.py"
+    ],
+    "changed_paths": [
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/acceptance-cli-help.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/acceptance-cli-help.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/acceptance-cli-help.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/acceptance-delivery-focused.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/acceptance-delivery-focused.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/acceptance-delivery-focused.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/acceptance-distributions.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/acceptance-distributions.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/acceptance-distributions.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/acceptance-full-regression.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/acceptance-full-regression.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/acceptance-full-regression.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/ci-handoff-WO-IAR-015-context.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/ci-handoff-WO-IAR-015-context.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/ci-handoff-WO-IAR-015-context.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/ci-handoff-WO-IAR-015-evidence.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/ci-handoff-WO-IAR-015-evidence.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/ci-handoff-WO-IAR-015-evidence.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/claude-native-startup-final.assertions.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/claude-native-startup-final.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/claude-native-startup-final.log",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/claude-native-startup-final.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/claude-native-startup-final.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/claude-native-startup.assertions.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/claude-native-startup.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/claude-native-startup.log",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/claude-native-startup.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/claude-native-startup.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/completion-change-inventory.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/completion.md",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/delivery-final-focused.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/delivery-final-focused.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/delivery-final-focused.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/iar-start-apply.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/iar-start-apply.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/iar-start-apply.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/iar-start-approve.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/iar-start-approve.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/iar-start-approve.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/iar-start-preview.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/iar-start-preview.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/iar-start-preview.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/.gitattributes",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/altered.events.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/altered.hooks.log",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/altered.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/current-return.events.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/current-return.hooks.log",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/current-return.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/current.events.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/current.hooks.log",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/current.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/mismatch.events.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/mismatch.hooks.log",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/mismatch.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/missing.events.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/missing.hooks.log",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/missing.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/observation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/released-018.events.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/released-018.hooks.log",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/released-018.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-boundaries/released-fixture-init.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-cli/native-demonstration-hook-extract.log",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-cli/native-demonstration-observation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-cli/native-demonstration-transcript-extract.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-cli/native-startup-extract.log",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-cli/observation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-cli/REPORT.md",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-probe-refusal/current.events.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-probe-refusal/current.hooks.log",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-probe-refusal/current.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-probe-refusal/observation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-probe-refusal/released-fixture-init.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-recovery/observation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-recovery/original-write.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-recovery/recovery.events.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-recovery/recovery.hooks.log",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/claude-recovery/recovery.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-boundaries/native-events.jsonl",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-boundaries/observation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-boundaries/released-fixture-init.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-callback-first/native-events.jsonl",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-callback-first/observation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-callback/native-events.jsonl",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-callback/observation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-callback/REPORT.md",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-cli/native-context-extract.jsonl",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-cli/observation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-cli/REPORT.md",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-recovery-first/native-events.jsonl",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-recovery-first/observation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-recovery-first/original-write.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-recovery/command-01.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-recovery/command-02.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-recovery/command-03.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-recovery/command-04.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-recovery/command-05.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-recovery/command-06.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-recovery/command-07.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-recovery/native-events.jsonl",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-recovery/observation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/codex-recovery/original-write.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/file-index.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/path-map.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/provenance/acceptance_native.py",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/provenance/acceptance_recovery.py",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/provenance/capture_codex_hooks.py",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/provenance/iar_metrics.py",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/provenance/prepared-demo.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/provenance/reading-recheck.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/provenance/run_demo.py",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/native-acceptance/README.md",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/packaging-scope-proposal.md",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/preparation-change-inventory.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/README.md",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/review-WO-IAR-015-context.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/review-WO-IAR-015-context.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/review-WO-IAR-015-context.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/review-WO-IAR-015-review.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/review-WO-IAR-015-review.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/review-WO-IAR-015-review.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/verification-id-scan.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/WO-IAR-015-handoff.md",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/WO-IAR-015-start-preflight.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/WO-IAR-015-start-preflight.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/WO-IAR-015-start-preflight.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/WO-IAR-015-started-context.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/WO-IAR-015-started-context.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/WO-IAR-015-started-context.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-complete-apply.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-complete-apply.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-complete-apply.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-complete-preview.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-complete-preview.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-complete-preview.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-completed-context.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-completed-context.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-completed-context.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-doctor.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-doctor.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-doctor.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-entry.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-entry.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-entry.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-handoff.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-handoff.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-handoff.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-rebind.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-rebind.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-rebind.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-review.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-review.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-review.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-validation.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-validation.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-acceptance-validation.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-preparation-scope.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-preparation-scope.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-015/wo15-preparation-scope.stdout",
+      "docs/engineering/instruction-architecture/README.md",
+      "docs/engineering/instruction-architecture/work-orders/WO-IAR-015.md",
+      "plugins/verity-plane/claude-code/hooks/hooks.json",
+      "plugins/verity-plane/claude-code/README.md",
+      "plugins/verity-plane/codex/hooks/hooks.json",
+      "plugins/verity-plane/codex/README.md",
+      "plugins/verity-plane/common/scripts/inject_instructions.py",
+      "plugins/verity-plane/common/skills/change/references/work-orders.md",
+      "plugins/verity-plane/common/skills/change/SKILL.md",
+      "plugins/verity-plane/common/skills/evidence/SKILL.md",
+      "plugins/verity-plane/common/skills/harness-operator-brief/SKILL.md",
+      "plugins/verity-plane/common/skills/harness-orient/scripts/orient.py",
+      "plugins/verity-plane/common/skills/harness-orient/SKILL.md",
+      "plugins/verity-plane/common/skills/setup/SKILL.md",
+      "templates/repository/standard/.agents/skills/harness-operator-brief/SKILL.md",
+      "templates/repository/standard/.agents/skills/harness-orient/scripts/orient.py",
+      "templates/repository/standard/.agents/skills/harness-orient/SKILL.md",
+      "tests/plugin_integration/package_assembly/test_package_assembly.py",
+      "tests/plugin_integration/progressive_discovery/__init__.py",
+      "tests/plugin_integration/progressive_discovery/test_delivery.py",
+      "tests/plugin_integration/test_simple_plugin.py"
+    ],
+    "change_set_complete": true
+  },
+  "compliance": {
+    "checkpoint": "scope",
+    "workflow_rule_id": "WFL-WO-PREPARE-VREC",
+    "procedure_id": "PROC-WO-PREPARE-VREC",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4I-SCOPE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-IAR-015:[execution_scope]"
+              }
+            ],
+            "message": "WO-IAR-015 declares 17 normalized scope path(s); this inspection grants no execution authority."
+          },
+          {
+            "id": "QGP-G4I-COMPLETE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-IAR-015"
+              }
+            ],
+            "message": "The caller explicitly asserted that the declared change set is complete."
+          },
+          {
+            "id": "QGP-G4I-PATHS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-IAR-015"
+              }
+            ],
+            "message": "All 181 declared changed path(s) are within execution scope."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "d71c8ae51d70fa08205151e4262c58d29c40bab467342ffc6a56f398e6ea990b",
+    "change_set_source": "arguments"
+  },
+  "procedure": {
+    "id": "PROC-WO-PREPARE-VREC",
+    "current_step": "STEP-WO-PREPARE-VREC-CAPTURE",
+    "steps": [
+      {
+        "id": "STEP-WO-PREPARE-VREC-CAPTURE",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-CANDIDATE-READY"
+        ],
+        "effects": [
+          "Prepare one ready VREC using the selected approved inputs."
+        ],
+        "non_effects": [
+          "Substitute inspected record, verification and evidence inputs before running this command. Preparation does not verify WO-IAR-015."
+        ],
+        "argv": [
+          "harnessctl",
+          "capture-verification",
+          ".",
+          "--work-order",
+          "WO-IAR-015",
+          "--owner",
+          "delegated-executor",
+          "--id",
+          "VREC-...",
+          "--verification",
+          "VER-...",
+          "--evidence",
+          "..."
+        ],
+        "corrective": {
+          "QGP-G4C-STATUS": {
+            "kind": "response",
+            "value": "Resolve QGP-G4C-STATUS for WO-IAR-015 using the reported candidate-readiness failure, then retry preparation."
+          },
+          "QGP-G4C-GRAPH": {
+            "kind": "response",
+            "value": "Resolve QGP-G4C-GRAPH for WO-IAR-015 using the reported candidate-readiness failure, then retry preparation."
+          },
+          "QGP-G4C-INTEGRITY": {
+            "kind": "response",
+            "value": "Resolve QGP-G4C-INTEGRITY for WO-IAR-015 using the reported candidate-readiness failure, then retry preparation."
+          }
+        }
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-IAR-015",
+        "status": "implemented"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-IAR-015",
+        "status": "implemented"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 50
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated scope compliance for WO-IAR-015."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-IAR-015 is implemented."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-WO-PREPARE-VREC",
+      "step_id": "STEP-WO-PREPARE-VREC-CAPTURE",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "capture-verification",
+        ".",
+        "--work-order",
+        "WO-IAR-015",
+        "--owner",
+        "delegated-executor",
+        "--id",
+        "VREC-...",
+        "--verification",
+        "VER-...",
+        "--evidence",
+        "..."
+      ]
+    },
+    "alternatives": []
+  },
+  "result_sha256": "bdc54db820fa2c498470efe6dd4c6d9d29e04e6a723a3697fa01d06e8a18c4a4"
+}

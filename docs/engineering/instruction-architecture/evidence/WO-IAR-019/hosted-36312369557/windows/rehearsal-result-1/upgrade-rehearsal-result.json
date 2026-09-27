@@ -1,0 +1,170 @@
+{
+  "failure": null,
+  "instruction_delivery": {
+    "input": "synthetic-fixture",
+    "native_host_delivery": "not_assessed",
+    "refusal_preserved_repository": true
+  },
+  "lock": {
+    "canonical_sha256": "8f2dbfa6f5e341a795b6067391bf95ef13694cfe1766a1e27ba04a068a609112",
+    "evaluator": {
+      "payload_sha256": "71c951a74d2f9c242d594fdbc419dcb173b87d51d25694db6a54a9b6cfc6c356",
+      "version": "0.19.0"
+    },
+    "schema": 4,
+    "tool_version": "0.19.0"
+  },
+  "overall_result": "pass",
+  "predecessor": {
+    "version": "0.18.0"
+  },
+  "schema": "se-harness-upgrade-rehearsal-v1",
+  "semantic_sha256": "8f2dbfa6f5e341a795b6067391bf95ef13694cfe1766a1e27ba04a068a609112",
+  "steps": [
+    {
+      "argv": [
+        "D:\\a\\_temp\\predecessor-env\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "<copy>\\repository"
+      ],
+      "exit_code": 0,
+      "expect": "success",
+      "id": "predecessor-doctor-before",
+      "outcome": "pass",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "ddc3be62c1c49fd25d3ea1432a40f81778d359228d68572453c2fbe095b02195"
+    },
+    {
+      "argv": [
+        "D:\\a\\_temp\\successor-env\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "<copy>\\repository",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expect": "success",
+      "id": "successor-upgrade-plan",
+      "outcome": "pass",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "f812c65c18d34d5c434dfdc4386f59bf429c1e4b700223224371e27277baad08"
+    },
+    {
+      "argv": [
+        "D:\\a\\_temp\\successor-env\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "<copy>\\repository",
+        "--apply",
+        "--json"
+      ],
+      "exit_code": 2,
+      "expect": "failure",
+      "id": "successor-upgrade-without-delivery",
+      "outcome": "pass",
+      "stderr_sha256": "bc20136e8c40a9445dba8e502105fb0e84e02eac9055302db8cbc86fa3d1679f",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "D:\\a\\_temp\\successor-env\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "\nimport hashlib, json, sys\nfrom importlib import import_module\nfrom pathlib import Path\n\n# These modules are loaded only by the installed successor's interpreter.\ncandidate = import_module(\"se_harness\")\nplan_install = import_module(\"se_harness.installer\").plan_install\ncanonical_sha256 = import_module(\"se_harness.integrity\").canonical_sha256\n\ntarget, receipt = (Path(value) for value in sys.argv[1:])\nchanges, _ = plan_install(target, project_name=None, mode=\"upgrade\")\nentry = next(change.desired for change in changes if change.path == \"ENGINEERING_HARNESS.md\")\nreceipt.parent.mkdir()\ntrace = receipt.parent / \"synthetic-delivery.txt\"\ntrace.write_bytes(b\"SYNTHETIC installer-test input. No native host event was observed.\\n\")\nentry_hash = canonical_sha256(entry)\nvalue = {\n    \"schema\": \"se-harness-native-instruction-delivery-v1\",\n    \"test_fixture\": True, \"native_host_delivery\": \"not_assessed\",\n    \"repository\": str(target.resolve()), \"target_version\": candidate.__version__,\n    \"prior_lock_sha256\": canonical_sha256((target / \".engineering-harness.lock\").read_bytes()),\n    \"entry_sha256\": entry_hash, \"host\": \"claude\", \"host_version\": \"synthetic-fixture\",\n    \"events\": {event: {\"origin\": \"native-host\", \"delivered_root_sha256\": entry_hash,\n                       \"trace\": trace.name, \"trace_sha256\": hashlib.sha256(trace.read_bytes()).hexdigest()}\n               for event in (\"startup\", \"compact\")},\n}\n# The native-host discriminator is a simulated protocol value, not an observation.\nreceipt.write_text(json.dumps(value, indent=2) + \"\\n\", encoding=\"utf-8\")\n",
+        "<copy>\\repository",
+        "<copy>\\synthetic-delivery\\receipt.json"
+      ],
+      "exit_code": 0,
+      "expect": "success",
+      "id": "prepare-synthetic-delivery",
+      "outcome": "pass",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "D:\\a\\_temp\\successor-env\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "upgrade",
+        "<copy>\\repository",
+        "--apply",
+        "--evidence-output",
+        "docs/engineering/evidence/upgrade-rehearsal-transaction.json",
+        "--instruction-delivery-evidence",
+        "<copy>\\synthetic-delivery\\receipt.json"
+      ],
+      "exit_code": 0,
+      "expect": "success",
+      "id": "successor-upgrade-apply",
+      "outcome": "pass",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "04ec6e3b79b22468f6cb40ebc89656c29fc48f97c2f27cf10482e82cc44e8397"
+    },
+    {
+      "argv": [
+        "D:\\a\\_temp\\successor-env\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "<copy>\\repository"
+      ],
+      "exit_code": 0,
+      "expect": "success",
+      "id": "successor-doctor-after",
+      "outcome": "pass",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "bfd65cfe591bf04bad4a8f1fb0e5273fee2eecd30818412e73d93a2a8b072539"
+    },
+    {
+      "argv": [
+        "D:\\a\\_temp\\successor-env\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "<copy>\\repository"
+      ],
+      "exit_code": 0,
+      "expect": "any",
+      "id": "successor-validate-after",
+      "outcome": "pass",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "00ee44e298eaa8c83ce94120dea5ee8e58a6e8657163daad1089210c1addbfb3"
+    },
+    {
+      "argv": [
+        "D:\\a\\_temp\\predecessor-env\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "doctor",
+        "<copy>\\repository"
+      ],
+      "exit_code": 1,
+      "expect": "failure",
+      "id": "predecessor-doctor-after",
+      "outcome": "pass",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "1065a22e4a695559ff2ada05529c749ee70c0f88d946a566481dfd82337189b1"
+    }
+  ],
+  "successor": {
+    "version": "0.19.0"
+  },
+  "tolerated_diagnostics": [],
+  "validation": {
+    "artifacts": 1686,
+    "errors": 0,
+    "warnings": 50
+  }
+}

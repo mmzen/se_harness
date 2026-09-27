@@ -1,0 +1,14 @@
+test_actions_have_entry_and_continuation_conditions (test_progressive_instruction_discovery.ProgressiveInstructionContentTests.test_actions_have_entry_and_continuation_conditions) ... ok
+test_all_source_headings_and_main_steps_have_valid_destinations (test_progressive_instruction_discovery.ProgressiveInstructionContentTests.test_all_source_headings_and_main_steps_have_valid_destinations) ... ok
+test_entry_preserves_nine_invariants_and_conditional_reading (test_progressive_instruction_discovery.ProgressiveInstructionContentTests.test_entry_preserves_nine_invariants_and_conditional_reading) ... ok
+test_every_markdown_file_and_heading_link_resolves_inside_the_template (test_progressive_instruction_discovery.ProgressiveInstructionContentTests.test_every_markdown_file_and_heading_link_resolves_inside_the_template) ... ok
+test_no_review_markers_or_stale_lifecycle_links_ship (test_progressive_instruction_discovery.ProgressiveInstructionContentTests.test_no_review_markers_or_stale_lifecycle_links_ship) ... ok
+test_original_command_operands_are_preserved (test_progressive_instruction_discovery.ProgressiveInstructionContentTests.test_original_command_operands_are_preserved) ... ok
+test_pr_preparation_does_not_require_release_preparation (test_progressive_instruction_discovery.ProgressiveInstructionContentTests.test_pr_preparation_does_not_require_release_preparation) ... ok
+test_reserved_decisions_and_unsupported_capabilities_are_explicit (test_progressive_instruction_discovery.ProgressiveInstructionContentTests.test_reserved_decisions_and_unsupported_capabilities_are_explicit) ... ok
+test_review_source_is_the_accepted_input (test_progressive_instruction_discovery.ProgressiveInstructionContentTests.test_review_source_is_the_accepted_input) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.228s
+
+OK

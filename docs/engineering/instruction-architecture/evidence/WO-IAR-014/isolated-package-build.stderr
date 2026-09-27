@@ -1,0 +1,23 @@
+C:\Users\mathi\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\site-packages\setuptools\config\_apply_pyprojecttoml.py:82: SetuptoolsDeprecationWarning: `project.license` as a TOML table is deprecated
+!!
+
+        ********************************************************************************
+        Please use a simple string containing a SPDX expression for `project.license`. You can also use `project.license-files`. (Both options available on setuptools>=77.0.0).
+
+        By 2027-Feb-18, you need to update your project and remove deprecated calls
+        or your builds will no longer be supported.
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  corresp(dist, value, root_dir)
+warning: no files found matching 'scripts\normalize_sdist.py'
+warning: no files found matching 'tests\test_agentic_execution.py'
+warning: no files found matching 'tests\test_instruction_architecture.py'
+warning: no files found matching 'tests\test_public_onboarding.py'
+warning: no files found matching 'tests\test_release_build.py'
+warning: no files found matching 'tests\test_standard_repository_lifecycle.py'
+warning: no files found matching 'tests\fixtures\agentic_execution\phase3\portable_vectors.json'
+warning: no files found matching '*.json' under directory 'tests\fixtures\agentic_execution\phase4\skills'
+warning: no files found matching '*.json' under directory 'tests\fixtures\agentic_execution\host_activation'

@@ -732,6 +732,11 @@ def load_validated_contracts() -> tuple[dict[str, Any], dict[str, Any], dict[str
     workflow = load_workflow_contract()
     quality = load_quality_gate_contract()
     rules, procedures, gates = validate_contracts(workflow, quality)
+    from se_harness.instruction_discovery import DiscoveryError, validate_coverage
+    try:
+        validate_coverage(procedures)
+    except DiscoveryError as exc:
+        raise ContractError(str(exc)) from exc
     return workflow, quality, rules, procedures, gates
 
 
@@ -759,11 +764,7 @@ def render_operating_card(
     workflow: Mapping[str, Any] | None = None,
     quality_gates: Mapping[str, Any] | None = None,
 ) -> bytes:
-    """Render the managed operating card from the machine contracts (ADS-RDM-002).
-
-    The card is derived content: every line restates a contract value or a
-    router rule. It is bounded to OPERATING_CARD_LIMIT bytes.
-    """
+    """Keep the old card path as a bounded compatibility pointer."""
 
     workflow = load_workflow_contract() if workflow is None else workflow
     quality_gates = load_quality_gate_contract() if quality_gates is None else quality_gates
@@ -771,16 +772,13 @@ def render_operating_card(
     lines = [
         "# Operating card",
         "",
-        "Derived from `WORKFLOW.json` and `QUALITY_GATES.json`; `harnessctl` alone computes",
-        "legality and the next step.",
+        "Compatibility pointer. The current instructions are in the following files;",
+        "this file contains no additional policy. Read only the section selected by",
+        "the root router or the evaluator result.",
         "",
-        "## Stop when",
+        "- [CONTINUE.md](harness/CONTINUE.md)",
         "",
     ]
-    lines.extend(f"- {item};" for item in _CARD_STOP_CONDITIONS)
-    lines.extend(["", "Then report the failing rule, the unchanged state, and the corrective step.", "", "## Traps", ""])
-    lines.extend(f"- {item}" for item in _CARD_TRAPS)
-    lines.append("")
     rendered = "\n".join(lines).encode("utf-8")
     if len(rendered) > OPERATING_CARD_LIMIT:
         raise ContractRefusal(WEX_ADS_003, f"operating card is {len(rendered)} bytes; limit is {OPERATING_CARD_LIMIT}")

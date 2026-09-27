@@ -171,9 +171,12 @@ class RiskArtifactTests(RiskFixture):
         self.assertEqual("RISK-", ARTIFACT_PREFIXES["risk"])
         self.assertIn("| `risk` | `risks/` |", (TEMPLATES / "templates/README.md").read_text(encoding="utf-8"))
         self.assertIn("## risk", (TEMPLATES / "ARTIFACT_AUTHORING.md").read_text(encoding="utf-8"))
-        traceability = (TEMPLATES / "TRACEABILITY.md").read_text(encoding="utf-8")
-        for token in ("| `risk` | `RISK-` |", "`TRC-REL-023`", "`TRC-REL-024`", "`TRC-REL-025`", "`TRC-016`"):
-            self.assertIn(token, traceability)  # RSK-MGT-031
+        types = " ".join((TEMPLATES / "harness/ARTIFACTS.md").read_text(encoding="utf-8").split())
+        self.assertIn("| `risk` | `RISK-` |", types)
+        links = " ".join((TEMPLATES / "harness/RISKS_AND_DECISIONS.md").read_text(encoding="utf-8").split())
+        for token in ("| `threatens` |", "| `mitigated_by` |", "| `avoided_by` |",
+                      "does not block work by itself", "its `blocks` set MUST equal the risk's `threatens` set"):
+            self.assertIn(token, links)  # RSK-MGT-031, routed by IAR-DIS-010.
         code, output, error = invoke("create-artifact", str(self.root), "--domain", "product", "--type", "risk", "--id", "RISK-PRD-009")
         self.assertEqual(0, code, error + output)
         text = (self.root / "docs/engineering/product/risks/RISK-PRD-009.md").read_text(encoding="utf-8")
@@ -234,9 +237,12 @@ class RiskArtifactTests(RiskFixture):
         self.assertEqual({"accepted", "avoided", "mitigated", "withdrawn"}, terminal)
         validator = validate_engineering_artifacts
         self.assertEqual(RISK_EDGES, {state: set(row.transitions_to) for state, row in validator.WORKFLOW_LIFECYCLES["risk"].items()})
-        workflow_policy = (TEMPLATES / "WORKFLOW.md").read_text(encoding="utf-8")
-        for row in ("| Risk | `identified` | `raised`, `withdrawn` |", "| Risk | `raised` | `accepted`, `avoided`, `mitigating`, `withdrawn` |", "| Risk | `mitigating` | `mitigated`, `withdrawn` |"):
-            self.assertIn(row, workflow_policy)
+        # IAR-DIS-005: machine states stay in WORKFLOW.json. Agent instructions
+        # describe the supported operation and its authority boundary.
+        policy = (TEMPLATES / "harness/RISKS_AND_DECISIONS.md").read_text(encoding="utf-8")
+        self.assertIn("harnessctl raise-risk REPO", policy)
+        self.assertIn("New risks (RISK) in `raised`", policy)
+        self.assertIn("A risk (RISK) alone does not block work", policy)
 
 
 class RaiseTests(RiskFixture):
@@ -377,8 +383,10 @@ class BorrowedStopTests(RiskFixture):
                 self.assertTrue(all(b["predicates"] == [] and b["structural"] == ["QGS-EDGE"] for b in risk_bindings), risk_bindings)
                 self.assertFalse(any("RISK" in p["id"] or "risk" in json.dumps(p) for gate in quality["gates"] for p in gate["predicates"]))
         self.assertEqual((PACKAGE / "quality_gates_contract.json").read_bytes(), (TEMPLATES / "QUALITY_GATES.json").read_bytes())
-        self.assertIn("| risk | `raised`, `accepted`, `avoided`, `mitigating`, `mitigated`, `withdrawn` | none | `QGS-EDGE` |",
-                      (TEMPLATES / "QUALITY_GATES.md").read_text(encoding="utf-8"))
+        # Edge bindings above remain exact; the successor agent guide routes
+        # risk decisions without duplicating the evaluator's gate matrix.
+        self.assertIn("The blocked artifacts change state only through their own transitions",
+                      (TEMPLATES / "harness/RISKS_AND_DECISIONS.md").read_text(encoding="utf-8"))
 
     def test_risks_lists_the_threats_to_an_artifact_and_its_chain_and_writes_nothing(self) -> None:
         # RSK-MGT-033.

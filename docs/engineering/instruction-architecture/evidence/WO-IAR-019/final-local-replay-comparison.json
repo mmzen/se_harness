@@ -1,0 +1,8 @@
+{
+  "commit": "98e307ae34cfd908441cd7f1c12ae5757c25e3a1",
+  "platform": "win32",
+  "semantic_sha256": "8be6f18f7cfeb71d9cad2c2c60d15f165b132c12ff86a69c2391c5aa530b97a1",
+  "runs": 2,
+  "result": "pass",
+  "native_host_delivery": "not_assessed"
+}

@@ -1,0 +1,12 @@
+{
+  "status": "incomplete",
+  "source_thread": "01a0e37f-a778-7b71-a39b-93a898d33f6f",
+  "surface": "Codex native app-server over stdio; ephemeral fork of the CLI demo",
+  "host_version": "codex-cli 0.155.0-alpha.16.4",
+  "platform": "Windows",
+  "output": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\iar-demo-tools\\observations\\codex-hooks-20260927T155602Z-adb647",
+  "instruction_file_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\repositories\\codex\\ENGINEERING_HARNESS.md",
+  "expected_entry_sha256": "b55a88ab900a7466b372ec32a4bc80ca47fa26a79ec0f8bc703aba58174bfaab",
+  "error": "thread/fork: {\"code\": -32600, \"message\": \"ephemeral paginated thread/fork requires `excludeTurns: true`\"}",
+  "stderr_lines_received": 0
+}

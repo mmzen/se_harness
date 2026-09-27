@@ -13,6 +13,7 @@ import sys
 from pathlib import Path
 
 from se_harness.integrity import IntegrityError, pretty_json_bytes, raw_sha256
+from se_harness.instruction_discovery import DiscoveryError
 from se_harness.workflow_contract import CHECKPOINT_ORDER, EVIDENCE_CHECKPOINTS
 from se_harness import __version__
 from se_harness.artifact_layout import create_artifact, scaffold_domain
@@ -186,7 +187,9 @@ def _upgrade(args: argparse.Namespace) -> int:
         print(format_plan(changes))
     if not args.apply:
         if args.json:
-            _print_json(_command_result("upgrade", "completed", changes=listed, written=False))
+            delivery_required = any(item.action == "remove" and item.path in {"AGENTS.md", "CLAUDE.md"} for item in changes)
+            _print_json(_command_result("upgrade", "completed", changes=listed, written=False,
+                                        instruction_delivery_required=delivery_required))
         return 0
     blocked = [item.path for item in changes if item.action == "customized"]
     if blocked:
@@ -208,6 +211,7 @@ def _upgrade(args: argparse.Namespace) -> int:
         allow_updates=True,
         evidence_output=Path(args.evidence_output) if args.evidence_output else None,
         replace_files=args.replace_file,
+        instruction_delivery_evidence=Path(args.instruction_delivery_evidence) if args.instruction_delivery_evidence else None,
     )
     if args.json:
         _print_json(_command_result(
@@ -1104,6 +1108,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     upgrade = commands.add_parser("upgrade", help="plan or apply safe harness upgrades")
     upgrade.add_argument("--replace-file", action="append", default=[], metavar="PATH", help="replace this editable seeded file with the current template; repeat for more files")
+    upgrade.add_argument("--instruction-delivery-evidence", metavar="PATH", help="reviewed native startup/compaction evidence bound to this upgrade; required before retiring AGENTS/CLAUDE harness fragments")
     upgrade.add_argument("target", nargs="?", default=".")
     upgrade.add_argument("--apply", action="store_true", help="apply safe changes; customized files remain untouched")
     upgrade.add_argument(
@@ -1257,6 +1262,7 @@ def main(argv: list[str] | None = None) -> int:
         return int(args.handler(args))
     except (
         ContractError,
+        DiscoveryError,
         HarnessError,
         IntegrityError,
         ProcedureError,

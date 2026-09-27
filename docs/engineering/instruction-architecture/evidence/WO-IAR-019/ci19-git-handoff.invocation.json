@@ -1,0 +1,16 @@
+{
+  "args": [
+    "check",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--artifact",
+    "WO-IAR-019",
+    "--checkpoint",
+    "handoff",
+    "--from-git",
+    "2f339039fe4f6189334fcd10632e20360cfa389f",
+    "--json"
+  ],
+  "exit_code": 0,
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+}

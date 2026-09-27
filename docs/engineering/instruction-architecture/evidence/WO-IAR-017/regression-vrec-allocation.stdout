@@ -1,0 +1,13 @@
+{
+  "allocated_id": "VREC-IAR-009",
+  "changes": [
+    {
+      "action": "create",
+      "path": "docs/engineering/instruction-architecture/verification-records/VREC-IAR-009.md"
+    }
+  ],
+  "command": "create-artifact",
+  "dry_run": true,
+  "outcome": "completed",
+  "schema": "se-harness-command-result-v1"
+}

@@ -184,8 +184,8 @@ class HarnessCtlTests(unittest.TestCase):
         required = [
             ".engineering-harness.toml",
             ".engineering-harness.lock",
-            "AGENTS.md",
-            "CLAUDE.md",
+            "docs/engineering/harness/CONTINUE.md",
+            "docs/engineering/harness/AUTHORITY.md",
             "ENGINEERING_HARNESS.md",
             ".github/workflows/engineering-harness.yml",
             "docs/engineering/templates/REQUIREMENT.template.md",
@@ -201,7 +201,8 @@ class HarnessCtlTests(unittest.TestCase):
         # the six other inert keys; tests/test_configuration_surface.py pins the
         # key set that remains and names each key's reader.
         self.assertNotIn("schema_version", (target / ".engineering-harness.toml").read_text(encoding="utf-8"))
-        self.assertIn("@AGENTS.md", (target / "CLAUDE.md").read_text(encoding="utf-8"))
+        self.assertFalse((target / "AGENTS.md").exists())
+        self.assertFalse((target / "CLAUDE.md").exists())
         self.assert_portable_release_surfaces(target)
 
         # SPEC-DST-025 DST-ENG-004: the commands run the package's own scripts.
@@ -227,12 +228,10 @@ class HarnessCtlTests(unittest.TestCase):
         agents = (target / "AGENTS.md").read_text(encoding="utf-8")
         claude = (target / "CLAUDE.md").read_text(encoding="utf-8")
         ignored = (target / ".gitignore").read_text(encoding="utf-8")
-        self.assertTrue(agents.startswith("# Existing agent rules"))
-        self.assertIn(BEGIN_MARKER, agents)
-        self.assertIn(END_MARKER, agents)
-        self.assertTrue(claude.startswith("# Existing Claude rules"))
-        self.assertIn("@AGENTS.md", claude)
-        self.assertIn(BEGIN_MARKER, claude)
+        self.assertEqual("# Existing agent rules\n", agents)
+        self.assertEqual("# Existing Claude rules\n", claude)
+        self.assertIn("# se-harness:begin", ignored)
+        self.assertIn("# se-harness:end", ignored)
         self.assertTrue(ignored.startswith("/build/"))
         self.assertEqual("# Owner-curated context\n", context_path.read_text(encoding="utf-8"))
         adopted_lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
@@ -341,7 +340,7 @@ class HarnessCtlTests(unittest.TestCase):
     def test_upgrade_keeps_customized_guidance_and_replaces_only_selected_files(self) -> None:
         target = self.root / "editable-upgrade"
         self.assertEqual(0, invoke("init", str(target))[0])
-        paths = ["docs/engineering/WORKFLOW.md", "docs/engineering/templates/REQUIREMENT.template.md", ".github/workflows/engineering-harness.yml"]
+        paths = ["docs/engineering/ARTIFACT_AUTHORING.md", "docs/engineering/templates/REQUIREMENT.template.md", ".github/workflows/engineering-harness.yml"]
         for path in paths:
             (target / path).write_bytes(b"Owner content\n")
         config = target / ".engineering-harness.toml"
@@ -356,46 +355,53 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertEqual(b"Owner content\n", (target / paths[1]).read_bytes())
         self.assertIn('note = "keep"', config.read_text(encoding="utf-8"))
 
-    def test_invalid_project_name_and_malformed_markers_fail_closed(self) -> None:
+    def test_invalid_project_name_and_malformed_managed_markers_fail_closed(self) -> None:
         invalid = self.root / "invalid-name"
         code, _, error = invoke("init", str(invalid), "--project-name", 'bad"\nname')
         self.assertEqual(2, code)
         self.assertIn("project name", error)
         self.assertFalse(invalid.exists())
 
-        target = self.root / "bad-markers"
-        target.mkdir()
-        (target / "AGENTS.md").write_text(f"rules\n{BEGIN_MARKER}\nbroken\n", encoding="utf-8")
-        code, _, error = invoke("init", str(target))
-        self.assertEqual(2, code)
-        self.assertIn("markers", error)
-        self.assertEqual(f"rules\n{BEGIN_MARKER}\nbroken\n", (target / "AGENTS.md").read_text(encoding="utf-8"))
+        # IAR-DIS-006: owner instructions are opaque on fresh adoption; marker
+        # validation still applies to fragments that the harness actually owns.
+        for name in (".gitignore", ".gitattributes"):
+            with self.subTest(managed=name):
+                target = self.root / name[1:]
+                target.mkdir()
+                original = f"rules\n{BEGIN_MARKER}\nbroken\n".encode()
+                (target / name).write_bytes(original)
+                code, _, error = invoke("init", str(target))
+                self.assertEqual(2, code)
+                self.assertIn("markers", error)
+                self.assertEqual(original, (target / name).read_bytes())
+                self.assertFalse((target / ".engineering-harness.lock").exists())
+        for name in ("AGENTS.md", "CLAUDE.md"):
+            with self.subTest(owner=name):
+                target = self.root / name
+                target.mkdir()
+                original = f"Owner text\r\n{BEGIN_MARKER}\r\n".encode()
+                (target / name).write_bytes(original)
+                code, output, error = invoke("init", str(target))
+                self.assertEqual(0, code, output + error)
+                self.assertEqual(original, (target / name).read_bytes())
 
-        claude_target = self.root / "bad-claude-markers"
-        claude_target.mkdir()
-        (claude_target / "CLAUDE.md").write_text(f"rules\n{END_MARKER}\n", encoding="utf-8")
-        code, _, error = invoke("init", str(claude_target))
-        self.assertEqual(2, code)
-        self.assertIn("markers", error)
-        self.assertFalse((claude_target / ".engineering-harness.lock").exists())
-
-    def test_upgrade_adds_cross_agent_files_without_reviving_the_retired_scaffold(self) -> None:
+    def test_upgrade_does_not_revive_owner_adapters_or_retired_scaffold(self) -> None:
         target = self.root / "older-installation"
         self.assertEqual(0, invoke("init", str(target), "--project-name", "Legacy Project")[0])
         claude_path = target / "CLAUDE.md"
         retired = "docs/engineering/REPOSITORY_CONTEXT.md"
-        claude_path.unlink()
+        self.assertFalse(claude_path.exists())
         lock_path = target / ".engineering-harness.lock"
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
-        lock["files"].pop("CLAUDE.md")
+        self.assertNotIn("CLAUDE.md", lock["files"])
         lock["files"][retired] = {"mode": "seed", "state": "present"}
         lock_path.write_text(json.dumps(lock, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
         code, output, error = invoke("upgrade", str(target), "--apply")
         self.assertEqual(0, code, error)
-        self.assertIn("add        CLAUDE.md", output)
+        self.assertNotIn("CLAUDE.md", output)
         self.assertNotIn(retired, output)
-        self.assertIn("@AGENTS.md", claude_path.read_text(encoding="utf-8"))
+        self.assertFalse(claude_path.exists())
         self.assertFalse((target / retired).exists())
         regenerated = json.loads(lock_path.read_text(encoding="utf-8"))
         self.assertNotIn(retired, regenerated["files"])
@@ -406,13 +412,14 @@ class HarnessCtlTests(unittest.TestCase):
         claude_path = target / "CLAUDE.md"
         retired = "docs/engineering/REPOSITORY_CONTEXT.md"
         context_path = target / retired
-        claude_path.write_text(claude_path.read_text(encoding="utf-8") + "\n## Claude-specific\nKeep this.\n", encoding="utf-8")
+        owner_bytes = b"## Claude-specific\r\nKeep this.\r\n"
+        claude_path.write_bytes(owner_bytes)
         context_path.write_bytes(b"# Curated\r\nUse `python -m unittest`.\r\n")
         before = context_path.read_bytes()
 
         code, _, error = invoke("upgrade", str(target), "--apply")
         self.assertEqual(0, code, error)
-        self.assertIn("Keep this.", claude_path.read_text(encoding="utf-8"))
+        self.assertEqual(owner_bytes, claude_path.read_bytes())
         self.assertEqual(before, context_path.read_bytes())
         lock = json.loads((target / ".engineering-harness.lock").read_text(encoding="utf-8"))
         self.assertNotIn(retired, lock["files"])
@@ -471,17 +478,17 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertRegex(lock["evaluator"]["payload_sha256"], r"^[0-9a-f]{64}$")
         self.assert_portable_release_surfaces(target)
 
-    def test_doctor_hashes_only_the_managed_fragment(self) -> None:
+    def test_doctor_hashes_only_the_remaining_managed_fragment(self) -> None:
         target = self.root / "fragment-doctor"
         self.assertEqual(0, invoke("init", str(target))[0])
-        agents = target / "AGENTS.md"
-        agents.write_text("# Owner rules\n\n" + agents.read_text(encoding="utf-8") + "\nOwner tail.\n", encoding="utf-8")
+        fragment = target / ".gitignore"
+        installed = fragment.read_text(encoding="utf-8")
+        fragment.write_text("# Owner rules\n\n" + installed + "\n# Owner tail.\n", encoding="utf-8")
         self.assertEqual(0, invoke("doctor", str(target))[0])
-
-        agents.write_text(agents.read_text(encoding="utf-8").replace("Read `ENGINEERING_HARNESS.md`", "Skip `ENGINEERING_HARNESS.md`"), encoding="utf-8")
+        fragment.write_text(fragment.read_text(encoding="utf-8").replace("# se-harness:begin", "# se-harness:begin\n# Changed tracked content"), encoding="utf-8")
         code, output, _ = invoke("doctor", str(target))
         self.assertEqual(1, code)
-        self.assertIn("FAIL managed:AGENTS.md", output)
+        self.assertIn("FAIL managed:.gitignore", output)
 
     def test_doctor_detects_managed_drift(self) -> None:
         target = self.root / "doctor"
@@ -504,16 +511,18 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertEqual(1, code)
         self.assertIn("FAIL managed:docs/engineering/WORKFLOW.json", output)
 
-    def test_doctor_detects_missing_claude_import_and_ignores_the_retired_path(self) -> None:
+    def test_doctor_requires_current_instructions_without_a_claude_import(self) -> None:
         target = self.root / "doctor-instructions"
         self.assertEqual(0, invoke("init", str(target))[0])
-        claude_path = target / "CLAUDE.md"
-        claude_path.write_text(claude_path.read_text(encoding="utf-8").replace("@AGENTS.md", "Claude rules only."), encoding="utf-8")
-
+        (target / "CLAUDE.md").write_text("Claude owner rules only.\n", encoding="utf-8")
+        code, output, error = invoke("doctor", str(target))
+        self.assertEqual(0, code, output + error)
+        self.assertNotIn("claude-import", output)
+        self.assertNotIn("docs/engineering/REPOSITORY_CONTEXT.md", output)
+        (target / "docs/engineering/harness/CONTINUE.md").unlink()
         code, output, _ = invoke("doctor", str(target))
         self.assertEqual(1, code)
-        self.assertIn("FAIL claude-import", output)
-        self.assertNotIn("docs/engineering/REPOSITORY_CONTEXT.md", output)
+        self.assertIn("docs/engineering/harness/CONTINUE.md", output)
 
     def test_validate_inspect_and_dashboard_commands_preserve_success(self) -> None:
         target = self.root / "operate"
@@ -585,7 +594,9 @@ class HarnessCtlTests(unittest.TestCase):
         self.assertRegex(lock["evaluator"]["payload_sha256"], r"^[0-9a-f]{64}$")
         # SPEC-DST-025 DST-ENG-002: the lock records no scripts/ path.
         self.assertEqual([], [path for path in lock["files"] if path.startswith("scripts/")])
-        self.assertEqual("fragment", lock["files"]["CLAUDE.md"]["mode"])
+        self.assertNotIn("AGENTS.md", lock["files"])
+        self.assertNotIn("CLAUDE.md", lock["files"])
+        self.assertEqual("managed", lock["files"]["docs/engineering/harness/CONTINUE.md"]["mode"])
         self.assertEqual({"mode": "seed", "state": "present"}, lock["files"]["docs/engineering/README.md"])
         self.assertNotIn("docs/engineering/REPOSITORY_CONTEXT.md", lock["files"])
         self.assertNotIn("docs/engineering/ADOPTION_REPORT.md", lock["files"])

@@ -1,0 +1,17 @@
+{
+  "args": [
+    "transition",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--set",
+    "VREC-IAR-010=verified",
+    "--decision",
+    "VREC-IAR-010=assurance-owner",
+    "--reason",
+    "VREC-IAR-010=Human user decision: I verify VREC-IAR-010. Codex applies the recorded assurance-owner decision to WO-IAR-019 at candidate 5e30efb0f31f174479708dc940ed07ebe1678be7. This decision covers only the selected CI rehearsal correction record; it does not verify native host delivery or authorize merge or release.",
+    "--apply",
+    "--json"
+  ],
+  "exit_code": 0,
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+}
