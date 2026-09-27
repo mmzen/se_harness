@@ -33,3 +33,10 @@ files and passed without changing scope. The first distribution validation lacke
 Git's trust setting for this sandbox-owned checkout; repeating it with a
 command-local safe.directory for this exact repository passed all 16 records.
 Neither retry weakened a check or changed the approved work.
+
+The first full suite ran 1,131 tests and found three diagnostic-index failures:
+a separate missing-identity raise increased the generated diagnostic entry count.
+Missing approval and invalid approval identity now share the existing unusable-
+approval refusal. Both conditions remain rejected. No diagnostic catalogue edit,
+new code or test relaxation was needed. The focused grant and diagnostic checks
+pass after the correction; the full corrected result is retained separately.

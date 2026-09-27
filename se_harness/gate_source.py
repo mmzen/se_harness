@@ -43,15 +43,13 @@ class DelegationError(CodedError):
 def _approved_scope(root: Path, path: Path, metadata: Mapping[str, Any]) -> Mapping[str, Any]:
     approvals = [e for e in metadata.get("lifecycle_events", [])
                  if e.get("to") == "approved"]
-    if not approvals:
-        raise DelegationError(WEX_ECP_022, f"{path.name} has no recorded work-order approval")
-    approval = approvals[-1]
+    approval = approvals[-1] if approvals else {}
     # The event records the decision-maker, not a required role-name string.
     # Attribution does not authenticate authority; the existing decision and
     # lifecycle checks still govern recording and using this approval.
     actor = approval.get("decided_by")
     if not isinstance(actor, str) or not actor.strip():
-        raise DelegationError(WEX_ECP_022, f"{path.name} approval needs a recorded decision-maker identity")
+        raise DelegationError(WEX_ECP_022, f"{path.name} has no recorded work-order approval with a decision-maker identity")
     if "scope_paths" in approval:
         # New approvals grant execution directly. Older scoped events always
         # recorded delegation_class, including an empty value for no grant.

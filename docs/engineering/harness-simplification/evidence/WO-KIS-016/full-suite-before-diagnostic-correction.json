@@ -1,0 +1,35 @@
+{
+  "tested_commit": "a1bf768f7191d6a3d7005cad168ecd87d36fd806",
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-B",
+    "scripts/run_tests.py",
+    "--scale",
+    "full",
+    "--workers",
+    "4"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\identityfix-verification",
+  "git_settings": [
+    [
+      "safe.directory",
+      "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness"
+    ],
+    [
+      "safe.directory",
+      "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/identityfix-verification"
+    ],
+    [
+      "core.autocrlf",
+      "false"
+    ],
+    [
+      "core.longpaths",
+      "true"
+    ]
+  ],
+  "exit_code": 1,
+  "seconds": 210.67,
+  "stdout": "Evaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-fr3e50pf\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-fr3e50pf\\private\\verity-plane\\evaluator\\Scripts\\python.exe\nWEX_SCALE artifacts=100 validation=0.123650s focus=0.304530s plan=0.217735s\nWEX_SCALE artifacts=500 validation=0.533285s focus=0.768842s plan=0.980343s\nWEX_SCALE artifacts=1000 validation=1.056701s focus=1.186251s plan=1.911349s\n======================================================================\nFAIL: test_diagnostic_code_index.DiagnosticCodeIndexTests.test_the_check_mode_reports_the_verdict\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\identityfix-verification\\tests\\test_diagnostic_code_index.py\", line 62, in test_the_check_mode_reports_the_verdict\n    self.assertEqual(0, main([\"--check\", \"--repository\", str(REPOSITORY_ROOT)]))\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0 != 1\n\n======================================================================\nFAIL: test_diagnostic_code_index.DiagnosticCodeIndexTests.test_the_committed_page_equals_the_regeneration\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\identityfix-verification\\tests\\test_diagnostic_code_index.py\", line 59, in test_the_committed_page_equals_the_regeneration\n    self.assertEqual(self.rendered, self.committed)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: \"<!--[16443 chars]n` (+6 more) |\\n| `WEX-ECP-030` | `WEX-ECP-030[5070 chars] |\\n\" != \"<!--[16443 chars]n` (+5 more) |\\n| `WEX-ECP-030` | `WEX-ECP-030[5070 chars] |\\n\"\nDiff is 22276 characters long. Set self.maxDiff to None to see it.\n\n======================================================================\nFAIL: test_compatibility_windows.RetiredCodeRegistryTests.test_the_index_page_names_no_retired_code_and_matches_the_source\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\identityfix-verification\\tests\\test_compatibility_windows.py\", line 81, in test_the_index_page_names_no_retired_code_and_matches_the_source\n    self.assertEqual(0, completed.returncode, completed.stdout + completed.stderr)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0 != 1 : docs/notes/diagnostic-codes.md differs from the regeneration; run --write\n\n\n----------------------------------------------------------------------\nRan 1131 tests in 206.687s (175 classes, 4 workers)\n\nFAILED (failures=3, skipped=16)\n",
+  "stderr": "docs/notes/diagnostic-codes.md differs from the regeneration; run --write\n--workers must be at least 1\n"
+}
