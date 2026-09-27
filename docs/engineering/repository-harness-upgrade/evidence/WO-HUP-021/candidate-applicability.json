@@ -1,0 +1,39 @@
+{
+  "tested_commit": "0b40d1a1eb6994508fd9d629c0bdca16e2c6e0c2",
+  "source_tests": "1125 tests, no failures, 16 skips",
+  "changes_after_test": [
+    "Evidence retention and review",
+    "Evaluator-applied completion of WO-HUP-021 and WO-HUP-023"
+  ],
+  "changed_paths_before_candidate_commit": [
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/WO-HUP-021-handoff.md",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/adopt019-WO-HUP-021-completed-context.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/adopt019-WO-HUP-023-completed-context.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/adopt019-completion-applied.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/adopt019-completion-preview.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/checks/corrected/candidate-cli.result.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/checks/corrected/distributions.result.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/checks/corrected/doctor.result.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/checks/corrected/evaluator-facts.result.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/checks/corrected/full-suite.result.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/checks/corrected/predecessor-assessment.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/checks/corrected/predecessor-assessment.result.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/checks/corrected/released-root-qualification.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/checks/corrected/released-root.result.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/checks/corrected/review-preflight-023.result.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/checks/corrected/review-preflight.result.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/checks/corrected/validate.result.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/combined-handoff.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/completion-change-inventory.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/handoff.json",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-021/verification-review.md",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-023/WO-HUP-023-handoff.md",
+    "docs/engineering/repository-harness-upgrade/evidence/WO-HUP-023/handoff.json",
+    "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-021.md",
+    "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-023.md"
+  ],
+  "implementation_bytes_unchanged": true,
+  "governing_definition_bytes_unchanged": true,
+  "work_order_approval_and_scope_unchanged": true,
+  "candidate_identity": "Bound by VREC-HUP-021 after this evidence is committed; no self-referential commit value is claimed."
+}

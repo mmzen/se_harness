@@ -1,0 +1,35 @@
+{
+  "tested_commit": "0b40d1a1eb6994508fd9d629c0bdca16e2c6e0c2",
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\bin\\python.exe",
+    "-B",
+    "-m",
+    "repository_tools.evaluator_facts",
+    "derive",
+    "--repository",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adopt019-verification"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adopt019-verification",
+  "exit_code": 0,
+  "seconds": 0.19,
+  "stdout": "{\"candidate_version\":\"0.20.0\",\"payload_sha256\":\"71c951a74d2f9c242d594fdbc419dcb173b87d51d25694db6a54a9b6cfc6c356\",\"schema\":\"se-harness-evaluator-facts-v1\",\"version\":\"0.19.0\",\"wheel\":\"se_harness-0.19.0-py3-none-any.whl\",\"wheel_sha256\":\"43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8\"}\n",
+  "stderr": "",
+  "git_settings": [
+    [
+      "safe.directory",
+      "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness"
+    ],
+    [
+      "safe.directory",
+      "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/adopt019-verification"
+    ],
+    [
+      "core.autocrlf",
+      "false"
+    ],
+    [
+      "core.longpaths",
+      "true"
+    ]
+  ]
+}

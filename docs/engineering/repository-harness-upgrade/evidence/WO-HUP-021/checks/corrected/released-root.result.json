@@ -1,0 +1,38 @@
+{
+  "tested_commit": "0b40d1a1eb6994508fd9d629c0bdca16e2c6e0c2",
+  "argv": [
+    "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "qualify",
+    "released-root",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--output",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\adopt019-corrected-checks\\released-root-qualification.json",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "seconds": 6.52,
+  "stdout": "{\n  \"authority\": \"evidence-only; no lifecycle or external action authorized\",\n  \"checks\": [\n    {\n      \"id\": \"RR001\",\n      \"message\": \"runtime matches the target root lock\",\n      \"passed\": true,\n      \"subject\": \"released-evaluator\"\n    },\n    {\n      \"id\": \"RR002\",\n      \"message\": \"101/101 managed checks passed\",\n      \"passed\": true,\n      \"subject\": \"managed-root\"\n    },\n    {\n      \"id\": \"RR003\",\n      \"message\": \"artifacts=1700; errors=0; warnings=52\",\n      \"passed\": true,\n      \"subject\": \"engineering-graph\"\n    },\n    {\n      \"id\": \"RR004\",\n      \"message\": \"target state is unchanged\",\n      \"passed\": true,\n      \"subject\": \"repository-state\"\n    }\n  ],\n  \"completion\": \"completed\",\n  \"evaluator\": {\n    \"diagnostics\": [],\n    \"distribution\": \"se-harness\",\n    \"entry_point_sha256\": \"d82a4afd41cbf0d7e33d79c9fe86d9ac3f7687adc48f33188c7b0b5695df53a1\",\n    \"evaluator_archive_name\": \"se_harness-0.19.0-py3-none-any.whl\",\n    \"evaluator_archive_sha256\": \"43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8\",\n    \"evaluator_payload_manifest\": \"se-harness-installed-payload-v1\",\n    \"evaluator_payload_sha256\": \"71c951a74d2f9c242d594fdbc419dcb173b87d51d25694db6a54a9b6cfc6c356\",\n    \"identity_sha256\": \"ef49b1402450c63da8a271fb5453694c59f5d97b40f02a48bdffc0f652522b8d\",\n    \"isolated_python\": true,\n    \"pythonpath_present\": false,\n    \"role\": \"released-evaluator\",\n    \"user_site_enabled\": false,\n    \"version\": \"0.19.0\"\n  },\n  \"independence\": \"released-evaluator\",\n  \"operation\": \"released-root\",\n  \"passed\": true,\n  \"schema\": \"se-harness-release-qualification-v1\",\n  \"target\": {\n    \"head\": \"0b40d1a1eb6994508fd9d629c0bdca16e2c6e0c2\",\n    \"identity_sha256\": \"9c69fada55923976258181c8fda4904922a1cc9a98f405e846712687140d1255\",\n    \"kind\": \"released-root\",\n    \"lock_schema\": 4,\n    \"lock_sha256\": \"9596f8940992968f4670ef717b6063df4e649d9912b83020a8ec3cb0714f2bd4\",\n    \"tree\": \"73370a29e9e9432f49d8baa5504aae4baa2c9060\"\n  }\n}\n",
+  "stderr": "",
+  "git_settings": [
+    [
+      "safe.directory",
+      "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness"
+    ],
+    [
+      "safe.directory",
+      "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/adopt019-verification"
+    ],
+    [
+      "core.autocrlf",
+      "false"
+    ],
+    [
+      "core.longpaths",
+      "true"
+    ]
+  ]
+}

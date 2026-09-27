@@ -2,7 +2,7 @@
 id = "WO-HUP-023"
 type = "work_order"
 title = "Recover approval encoding and finish the two-line 0.19.0 adoption correction"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner"]
 created = "2026-09-27"
 updated = "2026-09-27"
@@ -43,6 +43,13 @@ to = "in_progress"
 decided_at = "2026-09-27T20:35:49Z"
 decided_by = "Codex executor under approved WO-HUP-023"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Start the approved correction under the recorded human approval and DR-015."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-27T20:41:33Z"
+decided_by = "Codex executor under recorded human approval"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Completed the approved scope under DR-015. Full-scale suite: 1125 tests, zero failures, 16 skips. Released integrity, qualification, predecessor assessment, review preflight and complete combined handoff passed. Native evidence is limited to Windows Codex CLI startup and manual compaction; hosted CI remains required before integration."
 +++
 
 # Recover approval encoding and finish the adoption correction

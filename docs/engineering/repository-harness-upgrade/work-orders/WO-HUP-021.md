@@ -2,7 +2,7 @@
 id = "WO-HUP-021"
 type = "work_order"
 title = "Adopt public 0.19.0 and its progressive instruction delivery"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner"]
 created = "2026-09-27"
 updated = "2026-09-27"
@@ -64,6 +64,13 @@ to = "in_progress"
 decided_at = "2026-09-27T20:08:54Z"
 decided_by = "Codex executor under approved WO-HUP-021"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Start the approved bounded adoption and native delivery preparation under DR-015."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-27T20:41:33Z"
+decided_by = "Codex executor under recorded human approval"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Completed the approved scope under DR-015. Full-scale suite: 1125 tests, zero failures, 16 skips. Released integrity, qualification, predecessor assessment, review preflight and complete combined handoff passed. Native evidence is limited to Windows Codex CLI startup and manual compaction; hosted CI remains required before integration."
 +++
 
 # Adopt public 0.19.0 and its progressive instruction delivery
