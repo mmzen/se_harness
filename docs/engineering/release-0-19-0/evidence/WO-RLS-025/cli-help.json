@@ -1,0 +1,13 @@
+{
+  "command": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\bin\\python.exe",
+    "-B",
+    "-m",
+    "se_harness",
+    "--help"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "exit_code": 0,
+  "seconds": 0.31,
+  "output_tail": "        emit the LF-terminated pull-request body for one work\r\n                        order\r\n    transition          plan or atomically apply explicit lifecycle\r\n                        transitions\r\n    decide              dispose one pending decision with a declared option,\r\n                        under DR-DECISION-DISPOSE\r\n    raise-risk          record a risk description, owner and next action;\r\n                        optionally request a blocking decision\r\n    risks               list the risks threatening one artifact and its\r\n                        governing chain; writes nothing\r\n    check-pr            check a PR against its selected work orders and their\r\n                        combined scope\r\n    select-work-order   select one structured work-order field from a GitHub\r\n                        pull-request event\r\n    upgrade             plan or apply safe harness upgrades\r\n    scaffold-domain     safely create the canonical organization for one\r\n                        engineering domain\r\n    create-artifact     create one incomplete draft from the canonical\r\n                        artifact template\r\n    release-unit        derive a release unit's work-order census from the\r\n                        commits between the previous release tag and a\r\n                        candidate commit\r\n    identity            emit and verify one evaluator or candidate runtime\r\n                        identity\r\n    qualify             run one typed, provenance-bound release qualification\r\n                        operation\r\n    capture-verification\r\n                        prepare a ready commit-bound verification record\r\n    refresh-verification\r\n                        create a new ready record after an unchanged rebase;\r\n                        preserve the original\r\n    prepare-release     prepare a ready commit-bound release record\r\n\r\noptions:\r\n  -h, --help            show this help message and exit\r\n  --version             show program's version number and exit\r\n"
+}

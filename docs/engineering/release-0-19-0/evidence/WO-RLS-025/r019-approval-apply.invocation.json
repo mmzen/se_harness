@@ -1,0 +1,23 @@
+{
+  "args": [
+    "transition",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--set",
+    "REL-SEH-030=approved",
+    "--decision",
+    "REL-SEH-030=release-owner",
+    "--reason",
+    "REL-SEH-030=Human decision in this task: I approve. The user approves the reviewed REL-SEH-030 and WO-RLS-025 preparation package, including checker 0.19.0, plugin 0.2.0 inputs and the bounded delivery envelope. Codex applies that decision; this does not verify a candidate, release an RLS, merge, publish or adopt.",
+    "--set",
+    "WO-RLS-025=approved",
+    "--decision",
+    "WO-RLS-025=engineering-owner",
+    "--reason",
+    "WO-RLS-025=Human decision in this task: I approve. Apply the exact reviewed scope and required assurance classification, including ordinary release-branch pushes, a draft PR and read-only rehearsals. Codex may execute the approved preparation under DR-015; verification acceptance, release, merge, publication and adoption remain separate.",
+    "--json",
+    "--apply"
+  ],
+  "exit_code": 0,
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+}
