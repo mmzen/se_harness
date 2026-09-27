@@ -2,7 +2,7 @@
 id = "VREC-IAR-009"
 type = "verification_record"
 title = "Verification candidate for WO-IAR-017"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-27"
 updated = "2026-09-27"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/instruction-architecture/evidence/WO-IAR-017
 evaluator_evidence_path = "docs/engineering/instruction-architecture/evidence/VREC-IAR-009-evaluator.json"
 evaluator_evidence_sha256 = "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f"
 
+verified_at = "2026-09-27T09:03:28Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-IAR-017"]
 conforms_to = ["VER-IAR-014"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-27T09:03:28Z"
+decided_by = "assurance-owner"
+reason = "Human user decision: I verify VREC-IAR-009. Codex applies the recorded assurance decision to the reviewed WO-IAR-017 test correction at candidate 82c78c18a5229cc54d53b443708457669efe152e. This decision covers only the selected verification record."
 +++
 
 # Verification Record Candidate
