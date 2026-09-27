@@ -243,3 +243,25 @@ The harness repository has an unavoidable one-release bootstrap lag: the last re
 - Acceptance scenarios: `acceptance/instruction-architecture.feature`
 
 `OPS-IAR-001` was separately reviewed and approved through `WO-OCA-001` on 2026-08-16. It accepts continuing operation of the implemented instruction and enforcement requirements, including released-governor separation, managed integrity, preflight, layered validation, inspection, and bounded guidance. `REL-IAR-001` is a rejected historical proposal: `WO-IAR-001` was released through `REL-SEH-002` and `RLS-SEH-002` in `v0.2.1` instead. Operating approval remains independent from release authority.
+
+## Proposed progressive instruction discovery (2026-09-20)
+
+Draft package for a compact injected entry, conditional procedures, owner-only AGENTS.md, evaluator discovery and host delivery. No implementation or approval has been applied.
+
+- [CAP-IAR-002](capabilities/CAP-IAR-002.md) — Discover harness instructions for the current action.
+- [REQ-IAR-022](requirements/REQ-IAR-022.md) — Compact injected entry.
+- [REQ-IAR-023](requirements/REQ-IAR-023.md) — Instructions selected by action.
+- [REQ-IAR-024](requirements/REQ-IAR-024.md) — Evaluator-owned discovery results.
+- [REQ-IAR-025](requirements/REQ-IAR-025.md) — Repository-owned AGENTS.md.
+- [REQ-IAR-026](requirements/REQ-IAR-026.md) — Fresh startup and compaction context.
+- [REQ-IAR-027](requirements/REQ-IAR-027.md) — Complete migration and clear communication.
+- [SPEC-IAR-014](specifications/SPEC-IAR-014.md) — Progressive discovery of harness instructions.
+- [ARCH-IAR-011](architecture/ARCH-IAR-011.md) — Separate owner instructions, released guidance and evaluator authority.
+- [ADR-IAR-011](architecture/adr/ADR-IAR-011.md) — Use an injected entry with action-selected procedures.
+- [VER-IAR-014](verification/VER-IAR-014.md) — Verify progressive discovery and safe instruction migration.
+- [WO-IAR-013](work-orders/WO-IAR-013.md) — Split the agent instructions and preserve their meaning.
+- [WO-IAR-014](work-orders/WO-IAR-014.md) — Implement evaluator discovery and safe installer migration.
+- [WO-IAR-015](work-orders/WO-IAR-015.md) — Deliver current instructions at startup and after compaction.
+- [DEC-IAR-001](decisions/DEC-IAR-001.md) — Adopt a successor instruction contract without rewriting accepted history.
+
+Review inputs: [proposal provenance](proposals/progressive-discovery/README.md).
