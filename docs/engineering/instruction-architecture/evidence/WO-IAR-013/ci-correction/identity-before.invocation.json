@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\ci_source_identity_probe.py"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "exit_code": 1,
+  "started_at": "2026-09-27T09:24:34.155064+00:00",
+  "ended_at": "2026-09-27T09:24:34.562982+00:00",
+  "stage": "Intermediate implementation; not verification acceptance."
+}

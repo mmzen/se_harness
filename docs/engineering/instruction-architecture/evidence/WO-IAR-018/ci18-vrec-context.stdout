@@ -1,0 +1,173 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {
+    "commit": "82c78c18a5229cc54d53b443708457669efe152e",
+    "git_object_format": "sha1"
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "VREC-IAR-009",
+    "artifacts": [
+      "VREC-IAR-009"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-IAR-011",
+      "ARCH-IAR-011",
+      "CAP-IAR-002",
+      "INT-IAR-001",
+      "REQ-IAR-022",
+      "REQ-IAR-023",
+      "REQ-IAR-024",
+      "REQ-IAR-025",
+      "REQ-IAR-026",
+      "REQ-IAR-027",
+      "SPEC-IAR-014",
+      "VER-IAR-014",
+      "WO-IAR-017"
+    ],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-VREC-DELIVER",
+    "procedure_id": "PROC-REPOSITORY-INTEGRATION",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-VERIFIED-COVERAGE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4V-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:VREC-IAR-009"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G4V-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:pre-action"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G4V-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:VREC-IAR-009"
+              }
+            ],
+            "message": "No open decision blocks VREC-IAR-009."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "5f9721d4eb8d9ea902eb383d7a6b1c48282f54208ac8bcc4d07fc082bf5f6260",
+    "change_set_source": "arguments"
+  },
+  "procedure": {
+    "id": "PROC-REPOSITORY-INTEGRATION",
+    "current_step": "STEP-REPOSITORY-INTEGRATION",
+    "steps": [
+      {
+        "id": "STEP-REPOSITORY-INTEGRATION",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-VERIFIED-COVERAGE"
+        ],
+        "effects": [
+          "Permits only the named repository action."
+        ],
+        "non_effects": [
+          "No action occurs from this decision request."
+        ],
+        "decision_right": "DR-DELIVERY-SELECT",
+        "role": "repository-owner",
+        "artifact": "VREC-IAR-009",
+        "decision": "the exact repository integration action",
+        "outcomes": [
+          "authorize",
+          "stop"
+        ],
+        "response": "Authorize the exact repository integration action for VREC-IAR-009: <action>."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "VREC-IAR-009",
+        "status": "verified"
+      }
+    ],
+    "after": [
+      {
+        "id": "VREC-IAR-009",
+        "status": "verified"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 50
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated pre-action compliance for VREC-IAR-009."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "VREC-IAR-009 is verified."
+    ],
+    "decision_required": {
+      "decision_right": "DR-DELIVERY-SELECT",
+      "role": "repository-owner",
+      "artifact": "VREC-IAR-009",
+      "decision": "the exact repository integration action",
+      "outcomes": [
+        "authorize",
+        "stop"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-REPOSITORY-INTEGRATION",
+      "step_id": "STEP-REPOSITORY-INTEGRATION",
+      "action": "the exact repository integration action"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Authorize the exact repository integration action for VREC-IAR-009: <action>."
+    },
+    "alternatives": [
+      "Use complete alternative procedure PROC-REPOSITORY-INTEGRATION."
+    ]
+  },
+  "result_sha256": "c313a4ef723ccfdfc93b61ecfa5dc93d5e56eb7836049ed9f32305fd60df308b"
+}

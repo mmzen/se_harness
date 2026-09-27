@@ -1,0 +1,105 @@
+{
+  "baseline": "a72c8262a134d0e07f78ca2fbfb16c1ecf610894",
+  "preserved_files": [
+    {
+      "path": "docs/engineering/instruction-architecture/architecture/ARCH-IAR-011.md",
+      "git_blob_sha256": "6c51056665858dc75c4baacf1b2ce3207ac5625e79ba56bce0211ee561adeed2",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-011.md",
+      "git_blob_sha256": "30fbcb87e7eed8370b505b99d823b0f9f6cf494f929365202c39f05870c6ad42",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md",
+      "git_blob_sha256": "8e681d1d5114b7ea674251a98239bdad5beab1f135467737282c044497b192bd",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/decisions/DEC-IAR-001.md",
+      "git_blob_sha256": "2fcb7d6f5db780a3dcb0631aa791e283ac5172f9308a9703a16358d04e2e6aa7",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/VREC-IAR-009-evaluator.json",
+      "git_blob_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/proposals/progressive-discovery/APPLICABILITY.md",
+      "git_blob_sha256": "5d5dad0b0a34e5e0c2119b881f263eeb0f6a69daf82a809af4c36f0f19e8ce79",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/proposals/progressive-discovery/README.md",
+      "git_blob_sha256": "e5a2bb0d29d27e597272dd54975b55432e8f3345a0e57ed2c1f99401455e42c2",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/proposals/progressive-discovery/discovery-split-review-source.md",
+      "git_blob_sha256": "881f561c8cfdfb4f8bdcd515475ee4e00cce750dcc60f4e3dd87764b4f36d2a0",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/proposals/progressive-discovery/instruction-review-source.md",
+      "git_blob_sha256": "4c210e7e0bb975c3b67cc673bf1986792a2ee46fc37eb5e6722769666d6ff300",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/proposals/progressive-discovery/sources.json",
+      "git_blob_sha256": "01f780efabfe86a3d19f39cde5c10529191b5dbebbed9aa5c889dfec989e5eb4",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/requirements/REQ-IAR-022.md",
+      "git_blob_sha256": "58446990ca0eadc3c4c655367f7dbe9749008aeddfe534d16867d8e63af6d969",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/requirements/REQ-IAR-023.md",
+      "git_blob_sha256": "5023bb77855fe400235680db215d97e3cc175a62a3d2e652ff15bb299af31fa1",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/requirements/REQ-IAR-024.md",
+      "git_blob_sha256": "70b8fad3597514932b6d2325a16bc409d213f61c6e51af150edd3f162f6c4690",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/requirements/REQ-IAR-025.md",
+      "git_blob_sha256": "23638188b364328ba4460516d4d0cbdef112280a762ee6aa315af6ef8b5b5066",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/requirements/REQ-IAR-026.md",
+      "git_blob_sha256": "b618ddacdce23d43e015fa1b5bb75edc4faf574bb45571bdc8847b75053615e8",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/requirements/REQ-IAR-027.md",
+      "git_blob_sha256": "846a7f01e7b891c3fb9a70c76e2eb1e843c00ecd29457eabb510583d45ebd282",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md",
+      "git_blob_sha256": "0a2070f45e4c2d280fb17c9ed3ffae70d93dd7fec0383b8806dc98c915c37e90",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/verification-records/VREC-IAR-009.md",
+      "git_blob_sha256": "007f49b9491b2696697d13453eeda63d3cb85a88c5e1200738ad586e64401cc6",
+      "unchanged": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/verification/VER-IAR-014.md",
+      "git_blob_sha256": "158cd5044c5947578d450e7743e99eb97cb7b60970181e101d33322c5af05254",
+      "unchanged": true
+    }
+  ],
+  "vrec": "VREC-IAR-009",
+  "bound_evidence_unchanged_count": 32,
+  "vrec_status": "verified",
+  "vrec_candidate": "82c78c18a5229cc54d53b443708457669efe152e",
+  "basis": "Comparison to baseline Git blobs; only Git CRLF checkout conversion is normalized."
+}

@@ -34,8 +34,11 @@ class ProgressiveInstructionContentTests(unittest.TestCase):
         cls.mapping = json.loads((ACCEPTANCE / "source-map.json").read_text(encoding="utf-8"))
 
     def test_review_source_is_the_accepted_input(self):
-        self.assertEqual("9811b1770fa81e20f19890cb45de6d991aa463cf60a4338b39251d9d4c978a28",
-                         hashlib.sha256(SOURCE.read_bytes()).hexdigest())
+        # Git stores LF; Windows checkouts may use CRLF. Normalize only that
+        # conversion, preserving all other bytes of the accepted review input.
+        source = SOURCE.read_bytes().replace(b"\r\n", b"\n")
+        self.assertEqual("4c210e7e0bb975c3b67cc673bf1986792a2ee46fc37eb5e6722769666d6ff300",
+                         hashlib.sha256(source).hexdigest())
 
     def test_all_source_headings_and_main_steps_have_valid_destinations(self):
         expected = [(n, line) for n, line in enumerate(SOURCE.read_text(encoding="utf-8").splitlines(), 1)

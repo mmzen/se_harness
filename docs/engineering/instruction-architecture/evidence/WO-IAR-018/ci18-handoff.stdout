@@ -1,0 +1,554 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "WO-IAR-018",
+    "artifacts": [
+      "WO-IAR-018"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-IAR-011",
+      "ARCH-IAR-011",
+      "CAP-IAR-002",
+      "INT-IAR-001",
+      "REQ-IAR-022",
+      "REQ-IAR-023",
+      "REQ-IAR-024",
+      "REQ-IAR-025",
+      "REQ-IAR-026",
+      "REQ-IAR-027",
+      "SPEC-IAR-014",
+      "VER-IAR-014"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-011.md",
+      "docs/engineering/instruction-architecture/architecture/ARCH-IAR-011.md",
+      "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md",
+      "docs/engineering/instruction-architecture/decisions/DEC-IAR-001.md",
+      "docs/engineering/instruction-architecture/evidence/VREC-IAR-009-evaluator.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/",
+      "docs/engineering/instruction-architecture/proposals/progressive-discovery/APPLICABILITY.md",
+      "docs/engineering/instruction-architecture/proposals/progressive-discovery/discovery-split-review-source.md",
+      "docs/engineering/instruction-architecture/proposals/progressive-discovery/instruction-review-source.md",
+      "docs/engineering/instruction-architecture/proposals/progressive-discovery/README.md",
+      "docs/engineering/instruction-architecture/proposals/progressive-discovery/sources.json",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-022.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-023.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-024.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-025.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-026.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-027.md",
+      "docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md",
+      "docs/engineering/instruction-architecture/verification-records/VREC-IAR-009.md",
+      "docs/engineering/instruction-architecture/verification/VER-IAR-014.md",
+      "docs/engineering/instruction-architecture/work-orders/WO-IAR-018.md"
+    ],
+    "changed_paths": [
+      "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-011.md",
+      "docs/engineering/instruction-architecture/architecture/ARCH-IAR-011.md",
+      "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md",
+      "docs/engineering/instruction-architecture/decisions/DEC-IAR-001.md",
+      "docs/engineering/instruction-architecture/evidence/VREC-IAR-009-evaluator.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/change-set.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-approval-apply.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-approval-apply.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-approval-apply.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-approval-preview.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-approval-preview.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-approval-preview.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-combined-pr-initial.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-combined-pr-initial.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-combined-pr-initial.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-context.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-context.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-context.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-doctor.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-doctor.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-doctor.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-evidence.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-evidence.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-evidence.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-review-preflight.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-review-preflight.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-review-preflight.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-start-apply.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-start-apply.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-start-apply.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-start-preflight.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-start-preflight.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-start-preflight.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-start-preview.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-start-preview.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-start-preview.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-started-context.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-started-context.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-started-context.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-validate.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-validate.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-validate.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-vrec-context.invocation.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-vrec-context.stderr",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/ci18-vrec-context.stdout",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/preserved-inputs.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-018/WO-IAR-018-handoff.md",
+      "docs/engineering/instruction-architecture/proposals/progressive-discovery/APPLICABILITY.md",
+      "docs/engineering/instruction-architecture/proposals/progressive-discovery/discovery-split-review-source.md",
+      "docs/engineering/instruction-architecture/proposals/progressive-discovery/instruction-review-source.md",
+      "docs/engineering/instruction-architecture/proposals/progressive-discovery/README.md",
+      "docs/engineering/instruction-architecture/proposals/progressive-discovery/sources.json",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-022.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-023.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-024.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-025.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-026.md",
+      "docs/engineering/instruction-architecture/requirements/REQ-IAR-027.md",
+      "docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md",
+      "docs/engineering/instruction-architecture/verification-records/VREC-IAR-009.md",
+      "docs/engineering/instruction-architecture/verification/VER-IAR-014.md",
+      "docs/engineering/instruction-architecture/work-orders/WO-IAR-018.md"
+    ],
+    "change_set_complete": true
+  },
+  "compliance": {
+    "checkpoint": "handoff",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT",
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G4I-STATUS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-IAR-018"
+              }
+            ],
+            "message": "WO-IAR-018 status is in_progress."
+          },
+          {
+            "id": "QGP-G4I-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-IAR-018"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G4I-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G4I-SCOPE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-IAR-018:[execution_scope]"
+              }
+            ],
+            "message": "WO-IAR-018 has recorded execution approval for its 21 scope path(s)."
+          },
+          {
+            "id": "QGP-G4I-COMPLETE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-IAR-018"
+              }
+            ],
+            "message": "The caller explicitly asserted that the declared change set is complete."
+          },
+          {
+            "id": "QGP-G4I-PATHS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-IAR-018"
+              }
+            ],
+            "message": "All 62 declared changed path(s) are within execution scope."
+          },
+          {
+            "id": "QGP-G4I-PREFLIGHT",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-IAR-018:review"
+              }
+            ],
+            "message": "Released-installation review preflight inputs are ready."
+          },
+          {
+            "id": "QGP-G4I-EVIDENCE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-IAR-018"
+              }
+            ],
+            "message": "Fresh retained evidence is bound at docs/engineering/instruction-architecture/evidence/WO-IAR-018/WO-IAR-018-handoff.md."
+          },
+          {
+            "id": "QGP-G4I-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-IAR-018"
+              }
+            ],
+            "message": "No open decision blocks WO-IAR-018."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "7b6f584fa22f59e34ad255a03803ac03c2a3eb37d8ffafe431b1908339d3ff7d",
+    "change_set_source": "arguments"
+  },
+  "procedure": {
+    "id": "PROC-WO-IMPLEMENT",
+    "current_step": "STEP-WO-IMPLEMENT-PREVIEW",
+    "steps": [
+      {
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "Evaluated implementation handoff for WO-IAR-018."
+        ],
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-IAR-018",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-START"
+          },
+          "QGP-G4I-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G4I-COMPLETE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-IAR-018",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ]
+          },
+          "QGP-G4I-PATHS": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-IAR-018",
+              "--phase",
+              "review"
+            ]
+          },
+          "QGP-G4I-EVIDENCE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-IAR-018",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "QGP-G4I-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-IMPLEMENT-PREVIEW",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "Plan completion of WO-IAR-018."
+        ],
+        "non_effects": [
+          "Completion does not verify, release or deliver the work."
+        ],
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-IAR-018=implemented",
+          "--decision",
+          "WO-IAR-018=delegated-executor"
+        ],
+        "corrective": {
+          "QGP-G4I-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-START"
+          },
+          "QGP-G4I-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G4I-COMPLETE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-IAR-018",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ]
+          },
+          "QGP-G4I-PATHS": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-IAR-018",
+              "--phase",
+              "review"
+            ]
+          },
+          "QGP-G4I-EVIDENCE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-IAR-018",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "QGP-G4I-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-IMPLEMENT-APPLY",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "Record completion of only WO-IAR-018 under its approved execution scope."
+        ],
+        "non_effects": [
+          "Completion does not verify, release or deliver the work."
+        ],
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-IAR-018=implemented",
+          "--decision",
+          "WO-IAR-018=delegated-executor",
+          "--apply"
+        ],
+        "corrective": {
+          "QGP-G4I-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-START"
+          },
+          "QGP-G4I-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G4I-COMPLETE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-IAR-018",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ]
+          },
+          "QGP-G4I-PATHS": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-IAR-018",
+              "--phase",
+              "review"
+            ]
+          },
+          "QGP-G4I-EVIDENCE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-IAR-018",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "QGP-G4I-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-IAR-018",
+        "status": "in_progress"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-IAR-018",
+        "status": "in_progress"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 50
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Evaluated handoff compliance for WO-IAR-018."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-IAR-018 is in_progress."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-PREVIEW",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "transition",
+        ".",
+        "--set",
+        "WO-IAR-018=implemented",
+        "--decision",
+        "WO-IAR-018=delegated-executor"
+      ]
+    },
+    "alternatives": []
+  },
+  "result_sha256": "b3e78c2571e610ec577d365733119f312333f144deda6f89d042a688c735c287"
+}

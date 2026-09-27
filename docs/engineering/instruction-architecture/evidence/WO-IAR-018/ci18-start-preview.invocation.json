@@ -1,0 +1,16 @@
+{
+  "args": [
+    "transition",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--set",
+    "WO-IAR-018=in_progress",
+    "--decision",
+    "WO-IAR-018=Codex",
+    "--reason",
+    "WO-IAR-018=Execute the human-approved governance transport correction for PR 489, preserving every listed input and existing assurance decision.",
+    "--json"
+  ],
+  "exit_code": 0,
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+}

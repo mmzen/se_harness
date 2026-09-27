@@ -1,0 +1,17 @@
+{
+  "args": [
+    "transition",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--set",
+    "WO-IAR-018=implemented",
+    "--decision",
+    "WO-IAR-018=Codex",
+    "--reason",
+    "WO-IAR-018=Completed the approved transport correction: 19 governance inputs and 32 VREC evidence files preserved; released integrity, validation, selected handoff and combined PR check passed. No new assurance claim; WO-IAR-013 through WO-IAR-016 remain in progress.",
+    "--json",
+    "--apply"
+  ],
+  "exit_code": 0,
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+}
