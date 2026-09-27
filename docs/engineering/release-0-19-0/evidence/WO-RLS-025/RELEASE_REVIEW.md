@@ -57,3 +57,37 @@ retains the run identity and retrieval details. The hosted artifact expires at
 
 All required release-preparation checks are complete. RLS-SEH-028 remains ready
 for the human release decision. No release transition or publication occurred.
+
+## Human release authorization
+
+On 2026-09-27 the human said: “I authorize the release record”. The released
+0.18.0 evaluator applied `RLS-SEH-028: ready -> released` with
+`authorized_by = "release-owner"`. Only this release record changed state.
+The candidate, version, tag, distribution hashes, verified VREC and its
+evidence remain unchanged. The preceding sections retain the preparation
+and review history; the current release record is now `released`.
+
+The first transition preview stopped with `WEX201` / `E009`: the generated
+ready record named its preparation actor, `Codex`, as its sole owner. The
+release decision actor therefore did not match an owner. That preview wrote
+nothing. The ready record's `owners` field was corrected to `["release-owner"]`
+to record the human accountability explicitly supplied in this task.
+`prepared_by = "Codex"` and every other record byte were preserved before
+the transition. `release-owner-correction.json` retains both byte digests
+and the exact field change; the failed preview remains alongside the
+passing corrected preview and apply results.
+
+The existing hosted replay remains evidence for the unchanged candidate,
+recipe and bound archive hashes at its recorded review ref. It did not run
+on the owner correction. Fresh released gates and structural graph checks
+validated the corrected record and the applied transition. No build input
+changed, so no new build or source-test result is claimed.
+
+This records the human release decision. PR #490 still needs integration;
+merge and publication remain separately authorized external actions.
+
+Post-transition graph validation passed. Distribution validation passed for
+all 16 bound records, requiring RLS-SEH-028. Its first local invocation lacked
+the sandbox command-local Git ownership setting and could not read Git objects;
+the retry passed with the established exact-repository setting. Details are
+retained in `released-distribution-validation.json`.

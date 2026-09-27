@@ -1,0 +1,16 @@
+{
+  "record": "RLS-SEH-028",
+  "before_sha256": "a996f53ce4ac2e3950df36ee29077e96d2153b53fe33d48b3864f96d389d293c",
+  "after_sha256": "48afaf0cb3a794788f11b667abd8a9c27935215863a478633be9fb6b65579cbc",
+  "changed_field": "owners",
+  "before": [
+    "Codex"
+  ],
+  "after": [
+    "release-owner"
+  ],
+  "basis": "The human requested release preparation and explicitly supplied the release-owner decision in this task. Correct the unaccepted ready record to name that human role, while retaining Codex as its preparation actor. No lifecycle state or accepted decision is changed by this correction.",
+  "unchanged": "All remaining record bytes, including candidate, version, tag, distribution, relationships and preparation provenance; verification and replay evidence.",
+  "failed_preview": "r019-authorize-preview: WEX201/E009; no writes",
+  "human_decision": "I authorize the release record"
+}

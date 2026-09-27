@@ -2,8 +2,8 @@
 id = "RLS-SEH-028"
 type = "release_record"
 title = "Release candidate 0.19.0"
-status = "ready"
-owners = ["Codex"]
+status = "released"
+owners = ["release-owner"]
 created = "2026-09-27"
 updated = "2026-09-27"
 version = "0.19.0"
@@ -15,6 +15,8 @@ evaluator_evidence_path = "docs/engineering/release-0-19-0/evidence/RLS-SEH-028-
 evaluator_evidence_sha256 = "81eef664cc9b26a839508163c924fc82fe531a4a9eaa8c8cc35ff3488f858c85"
 tag = "v0.19.0"
 
+released_at = "2026-09-27T18:44:21Z"
+authorized_by = "release-owner"
 [distribution]
 schema = 2
 kind = "python-wheel-sdist"
@@ -34,6 +36,13 @@ build_recipe_sha256 = "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92
 satisfies = ["REL-SEH-030"]
 includes_verification = ["VREC-SEH-028"]
 releases_work = ["WO-DOC-016", "WO-ECP-039", "WO-HUP-019", "WO-HUP-020", "WO-IAR-013", "WO-IAR-014", "WO-IAR-015", "WO-IAR-016", "WO-IAR-017", "WO-IAR-018", "WO-IAR-019", "WO-PLG-023", "WO-PLG-025", "WO-RLS-025"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "released"
+decided_at = "2026-09-27T18:44:21Z"
+decided_by = "release-owner"
+reason = "Human release-owner decision in this task: I authorize the release record. Codex applies this supplied human decision for 0.19.0 at candidate 30d4dba2a088c4f83756c1241b76cdab40f796bd. Corrected the ready record owner from the preparation actor Codex to the accountable release-owner; prepared_by remains Codex. Every other reviewed record byte and all verification and replay evidence are unchanged. Only this RLS changes state. Merge, publication, latest promotion and root adoption remain separate actions."
 +++
 
 # Release Record Candidate

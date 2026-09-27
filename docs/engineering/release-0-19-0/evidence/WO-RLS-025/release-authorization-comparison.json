@@ -1,0 +1,11 @@
+{
+  "record": "RLS-SEH-028",
+  "candidate": "30d4dba2a088c4f83756c1241b76cdab40f796bd",
+  "reviewed_bytes_match": true,
+  "sha256": {
+    "record_sha256": "a996f53ce4ac2e3950df36ee29077e96d2153b53fe33d48b3864f96d389d293c",
+    "evaluator_evidence_sha256": "81eef664cc9b26a839508163c924fc82fe531a4a9eaa8c8cc35ff3488f858c85",
+    "verification_record_sha256": "76938af876241b8c135c98cabc8d58cfb98526009db5a63c9dedf985b63d0098",
+    "replay_sha256": "c1b751cd2c2aefd109377fa187d827c93d944689fa6df7c1bad61aa0bc94f361"
+  }
+}

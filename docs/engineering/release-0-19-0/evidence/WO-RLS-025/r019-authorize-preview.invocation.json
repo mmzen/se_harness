@@ -1,0 +1,16 @@
+{
+  "args": [
+    "transition",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--set",
+    "RLS-SEH-028=released",
+    "--decision",
+    "RLS-SEH-028=release-owner",
+    "--reason",
+    "RLS-SEH-028=Human release-owner decision in this task: I authorize the release record. Codex applies this decision to the unchanged reviewed RLS-SEH-028 for 0.19.0 at candidate 30d4dba2a088c4f83756c1241b76cdab40f796bd. The record, verification and replay digests match the reviewed inputs. This decision changes only this release record; it does not authorize merge, publication, latest promotion or root adoption.",
+    "--json"
+  ],
+  "exit_code": 1,
+  "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+}

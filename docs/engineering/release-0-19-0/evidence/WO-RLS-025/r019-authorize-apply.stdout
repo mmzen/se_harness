@@ -1,0 +1,206 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {
+    "commit": "30d4dba2a088c4f83756c1241b76cdab40f796bd",
+    "git_object_format": "sha1"
+  },
+  "operation": {
+    "kind": "transition",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "RLS-SEH-028",
+    "artifacts": [
+      "RLS-SEH-028"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "transition",
+    "workflow_rule_id": "WFL-RLS-EXTERNAL",
+    "procedure_id": "PROC-EXTERNAL-ACTION",
+    "status": "pass",
+    "gates": [
+      {
+        "id": "QG-G5-RELEASE-DECISION",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGP-G5D-STATUS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "RLS-SEH-028"
+              }
+            ],
+            "message": "RLS-SEH-028 status is ready."
+          },
+          {
+            "id": "QGP-G5D-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:RLS-SEH-028"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G5D-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:transition"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G5D-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:RLS-SEH-028"
+              }
+            ],
+            "message": "No open decision blocks RLS-SEH-028."
+          }
+        ]
+      },
+      {
+        "id": "QG-STRUCTURAL",
+        "status": "pass",
+        "predicates": [
+          {
+            "id": "QGS-EDGE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "RLS-SEH-028"
+              }
+            ],
+            "message": "ready -> released is a declared lifecycle edge for RLS-SEH-028."
+          },
+          {
+            "id": "QGS-VERIFIED-INCLUSION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "RLS-SEH-028"
+              }
+            ],
+            "message": "Every verification record RLS-SEH-028 includes is verified."
+          }
+        ]
+      }
+    ]
+  },
+  "procedure": {
+    "id": "PROC-EXTERNAL-ACTION",
+    "current_step": "STEP-EXTERNAL-ACTION",
+    "steps": [
+      {
+        "id": "STEP-EXTERNAL-ACTION",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G5-EXTERNAL-ACTION"
+        ],
+        "effects": [
+          "Permits only the exact named external action."
+        ],
+        "non_effects": [
+          "Release status alone performs no external action."
+        ],
+        "decision_right": "DR-EXTERNAL-ACTION",
+        "role": "accountable external-action owner",
+        "artifact": "RLS-SEH-028",
+        "decision": "the exact tag, publication, deployment, or operating action",
+        "outcomes": [
+          "authorize",
+          "stop"
+        ],
+        "response": "Authorize this exact external action for RLS-SEH-028: <action and target>."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "RLS-SEH-028",
+        "status": "ready"
+      }
+    ],
+    "after": [
+      {
+        "id": "RLS-SEH-028",
+        "status": "released"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": [
+      {
+        "id": "RLS-SEH-028",
+        "path": "docs/engineering/release-0-19-0/releases/RLS-SEH-028.md",
+        "fields": [
+          "authorized_by",
+          "lifecycle_events",
+          "released_at",
+          "status",
+          "updated"
+        ]
+      }
+    ]
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Applied 1 explicit lifecycle transition(s) atomically."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "RLS-SEH-028 is released."
+    ],
+    "decision_required": {
+      "decision_right": "DR-EXTERNAL-ACTION",
+      "role": "accountable external-action owner",
+      "artifact": "RLS-SEH-028",
+      "decision": "the exact tag, publication, deployment, or operating action",
+      "outcomes": [
+        "authorize",
+        "stop"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-EXTERNAL-ACTION",
+      "step_id": "STEP-EXTERNAL-ACTION",
+      "action": "the exact tag, publication, deployment, or operating action"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Authorize this exact external action for RLS-SEH-028: <action and target>."
+    },
+    "alternatives": []
+  },
+  "result_sha256": "6b12a644adff76d59bdb2fac2e3be9a3c8d2762dfb9ce2bc90e776d1b06ef4a5"
+}

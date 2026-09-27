@@ -1,0 +1,56 @@
+{
+  "record": "RLS-SEH-028",
+  "version": "0.19.0",
+  "tag": "v0.19.0",
+  "candidate": "30d4dba2a088c4f83756c1241b76cdab40f796bd",
+  "record_sha256": "a996f53ce4ac2e3950df36ee29077e96d2153b53fe33d48b3864f96d389d293c",
+  "evaluator_evidence_sha256": "81eef664cc9b26a839508163c924fc82fe531a4a9eaa8c8cc35ff3488f858c85",
+  "distribution": {
+    "schema": 2,
+    "kind": "python-wheel-sdist",
+    "source_date_epoch": 1790532014,
+    "wheel": "se_harness-0.19.0-py3-none-any.whl",
+    "wheel_sha256": "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8",
+    "sdist": "se_harness-0.19.0.tar.gz",
+    "sdist_sha256": "e8aae38d4f6896078739902491a9268cf3ebdfc199af05a7ae6d74cda7daaffe",
+    "checksums": "SHA256SUMS",
+    "checksums_sha256": "90c870a856bb1bb07c8186585ce8045618f4589abbd71f20acc27cd7c02771d3",
+    "source_manifest_sha256": "b9c8ba4e42f9387722d8512f2454500ba06de50c1c33006dfca48dacf6a6a0ee",
+    "build_recipe_schema": "se-harness-release-build-recipe/v1",
+    "build_recipe": "release/build-recipe.json",
+    "build_recipe_sha256": "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92362acdc"
+  },
+  "verification_record": "VREC-SEH-028",
+  "verification_record_sha256": "76938af876241b8c135c98cabc8d58cfb98526009db5a63c9dedf985b63d0098",
+  "replay": {
+    "record": "RLS-SEH-028",
+    "candidate": "30d4dba2a088c4f83756c1241b76cdab40f796bd",
+    "review_ref_commit": "e156c5a59347d231c56b34644facef65790a3c8b",
+    "workflow_url": "https://github.com/mmzen/se_harness/actions/runs/36340880463",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "Replay exact candidate twice without credentials",
+        "conclusion": "success"
+      }
+    ],
+    "artifact": {
+      "name": "release-build-replay-RLS-SEH-028",
+      "id": 10938817713,
+      "expires_at": "2026-12-26T18:30:13Z",
+      "expired": false
+    },
+    "download_command": [
+      "gh",
+      "run",
+      "download",
+      "36340880463",
+      "--repo",
+      "mmzen/se_harness",
+      "--name",
+      "release-build-replay-RLS-SEH-028"
+    ],
+    "replay_sha256": "c1b751cd2c2aefd109377fa187d827c93d944689fa6df7c1bad61aa0bc94f361",
+    "result": "Two builds match both bound distribution hashes."
+  }
+}
