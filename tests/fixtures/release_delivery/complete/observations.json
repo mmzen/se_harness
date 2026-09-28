@@ -1,0 +1,231 @@
+{
+  "schema": "se-harness-delivery-observations/v1",
+  "observed_at": "2026-09-28T10:00:00Z",
+  "release": {
+    "record": "RLS-EXAMPLE-001",
+    "status": "released",
+    "source": "synthetic-example-only",
+    "observed_at": "2026-09-28T10:00:00Z",
+    "evidence": [
+      {
+        "path": "evidence/observations.txt",
+        "sha256": "db589ca78d3a0d1f91cea10e751117a4d71719fa336b95209620048adb907c05"
+      }
+    ]
+  },
+  "surfaces": [
+    {
+      "id": "evaluator",
+      "status": "pass",
+      "identity": {
+        "record": "RLS-EXAMPLE-001",
+        "version": "0.19.0",
+        "wheel_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "source": "https://example.invalid/releases/v0.19.0",
+      "observed_at": "2026-09-28T10:00:00Z",
+      "evidence": {
+        "publisher": [
+          {
+            "path": "evidence/observations.txt",
+            "sha256": "db589ca78d3a0d1f91cea10e751117a4d71719fa336b95209620048adb907c05"
+          }
+        ],
+        "public_install": [
+          {
+            "path": "evidence/observations.txt",
+            "sha256": "db589ca78d3a0d1f91cea10e751117a4d71719fa336b95209620048adb907c05"
+          }
+        ]
+      }
+    },
+    {
+      "id": "marketplace",
+      "status": "pass",
+      "identity": {
+        "plugin_version": "0.2.1",
+        "source_commit": "1111111111111111111111111111111111111111",
+        "evaluator_version": "0.19.0",
+        "wheel_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "public_revision": "2222222222222222222222222222222222222222",
+        "codex_content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "claude-code_content_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      },
+      "source": "https://example.invalid/repository.git#plugin-marketplace",
+      "observed_at": "2026-09-28T10:00:00Z",
+      "evidence": {
+        "assembly": [
+          {
+            "path": "evidence/observations.txt",
+            "sha256": "db589ca78d3a0d1f91cea10e751117a4d71719fa336b95209620048adb907c05"
+          }
+        ],
+        "qualification": [
+          {
+            "path": "evidence/observations.txt",
+            "sha256": "db589ca78d3a0d1f91cea10e751117a4d71719fa336b95209620048adb907c05"
+          }
+        ],
+        "public_ref": [
+          {
+            "path": "evidence/observations.txt",
+            "sha256": "db589ca78d3a0d1f91cea10e751117a4d71719fa336b95209620048adb907c05"
+          }
+        ]
+      },
+      "routes": [
+        {
+          "host": "codex",
+          "host_version": "example-only",
+          "kind": "fresh",
+          "source": "https://example.invalid/repository.git#plugin-marketplace",
+          "revision": "2222222222222222222222222222222222222222",
+          "plugin_version": "0.2.1",
+          "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "evaluator_version": "0.19.0",
+          "wheel_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "status": "pass",
+          "observed_at": "2026-09-28T10:00:00Z",
+          "evidence": [
+            {
+              "path": "evidence/observations.txt",
+              "sha256": "db589ca78d3a0d1f91cea10e751117a4d71719fa336b95209620048adb907c05"
+            }
+          ]
+        },
+        {
+          "host": "codex",
+          "host_version": "example-only",
+          "kind": "update",
+          "source": "https://example.invalid/repository.git#plugin-marketplace",
+          "revision": "2222222222222222222222222222222222222222",
+          "plugin_version": "0.2.1",
+          "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "evaluator_version": "0.19.0",
+          "wheel_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "status": "pass",
+          "observed_at": "2026-09-28T10:00:00Z",
+          "evidence": [
+            {
+              "path": "evidence/observations.txt",
+              "sha256": "db589ca78d3a0d1f91cea10e751117a4d71719fa336b95209620048adb907c05"
+            }
+          ],
+          "starting_version": "0.1.0",
+          "starting_source": "https://example.invalid/repository.git#plugin-marketplace"
+        },
+        {
+          "host": "claude-code",
+          "host_version": "example-only",
+          "kind": "fresh",
+          "source": "https://example.invalid/repository.git#plugin-marketplace",
+          "revision": "2222222222222222222222222222222222222222",
+          "plugin_version": "0.2.1",
+          "content_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "evaluator_version": "0.19.0",
+          "wheel_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "status": "pass",
+          "observed_at": "2026-09-28T10:00:00Z",
+          "evidence": [
+            {
+              "path": "evidence/observations.txt",
+              "sha256": "db589ca78d3a0d1f91cea10e751117a4d71719fa336b95209620048adb907c05"
+            }
+          ]
+        },
+        {
+          "host": "claude-code",
+          "host_version": "example-only",
+          "kind": "update",
+          "source": "https://example.invalid/repository.git#plugin-marketplace",
+          "revision": "2222222222222222222222222222222222222222",
+          "plugin_version": "0.2.1",
+          "content_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "evaluator_version": "0.19.0",
+          "wheel_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "status": "pass",
+          "observed_at": "2026-09-28T10:00:00Z",
+          "evidence": [
+            {
+              "path": "evidence/observations.txt",
+              "sha256": "db589ca78d3a0d1f91cea10e751117a4d71719fa336b95209620048adb907c05"
+            }
+          ],
+          "starting_version": "0.1.0",
+          "starting_source": "https://example.invalid/repository.git#plugin-marketplace"
+        }
+      ]
+    },
+    {
+      "id": "documentation",
+      "status": "pass",
+      "identity": {
+        "commit": "3333333333333333333333333333333333333333"
+      },
+      "source": "https://example.invalid/docs",
+      "observed_at": "2026-09-28T10:00:00Z",
+      "evidence": {
+        "claims_review": [
+          {
+            "path": "evidence/observations.txt",
+            "sha256": "db589ca78d3a0d1f91cea10e751117a4d71719fa336b95209620048adb907c05"
+          }
+        ],
+        "links": [
+          {
+            "path": "evidence/observations.txt",
+            "sha256": "db589ca78d3a0d1f91cea10e751117a4d71719fa336b95209620048adb907c05"
+          }
+        ]
+      }
+    },
+    {
+      "id": "demonstration",
+      "status": "pass",
+      "identity": {
+        "governance_commit": "4444444444444444444444444444444444444444"
+      },
+      "source": "https://example.invalid/demo",
+      "observed_at": "2026-09-28T10:00:00Z",
+      "evidence": {
+        "readback": [
+          {
+            "path": "evidence/observations.txt",
+            "sha256": "db589ca78d3a0d1f91cea10e751117a4d71719fa336b95209620048adb907c05"
+          }
+        ],
+        "compatibility": [
+          {
+            "path": "evidence/observations.txt",
+            "sha256": "db589ca78d3a0d1f91cea10e751117a4d71719fa336b95209620048adb907c05"
+          }
+        ]
+      }
+    },
+    {
+      "id": "release_markers",
+      "status": "pass",
+      "identity": {
+        "latest": "v0.19.0",
+        "last": "5555555555555555555555555555555555555555"
+      },
+      "source": "https://example.invalid/repository",
+      "observed_at": "2026-09-28T10:00:00Z",
+      "evidence": {
+        "authorization": [
+          {
+            "path": "evidence/observations.txt",
+            "sha256": "db589ca78d3a0d1f91cea10e751117a4d71719fa336b95209620048adb907c05"
+          }
+        ],
+        "readback": [
+          {
+            "path": "evidence/observations.txt",
+            "sha256": "db589ca78d3a0d1f91cea10e751117a4d71719fa336b95209620048adb907c05"
+          }
+        ]
+      }
+    }
+  ],
+  "plan_sha256": "5017955848aa891cf801218059bf8b77a0b03332932dfd31b9c836505e50a7d0"
+}
