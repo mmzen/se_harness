@@ -2,7 +2,7 @@
 id = "VREC-IAR-015"
 type = "verification_record"
 title = "Verification candidate for WO-IAR-020"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-28"
 updated = "2026-09-28"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/instruction-architecture/evidence/WO-IAR-020
 evaluator_evidence_path = "docs/engineering/instruction-architecture/evidence/VREC-IAR-015-evaluator.json"
 evaluator_evidence_sha256 = "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2"
 
+verified_at = "2026-09-28T19:03:27Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-IAR-020"]
 conforms_to = ["VER-IAR-016"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-28T19:03:27Z"
+decided_by = "assurance-owner"
+reason = "Human repository owner mmzen: \"I verify VREC-IAR-015\". Codex applies this human assurance decision to candidate 8b8cdb46b97cbc3164eec4459932a9f6428939a6 for WO-IAR-020 under VER-IAR-016 with the reviewed native qualification evidence and its documented limits, including Claude session-only --model opus and the unchanged unavailable saved model. The selected 0.19.0 evaluator encodes the assurance right as assurance-owner; mmzen is the decision-maker. Only VREC-IAR-015 changes state. This decision does not authorize push, merge, release or publication."
 +++
 
 # Verification Record Candidate
