@@ -22,6 +22,8 @@ The repository [README](../../README.md) is the concise public entry point.
 
 | Guide | Question answered |
 | --- | --- |
+| [Plugin installation](plugin-installation-guide.md) | How do I install Verity Plane and connect a project? |
+| [Marketplace publication](plugin-marketplace-publication.md) | How do prepared packages become an observed public delivery? |
 | [Installation and safe upgrades](harness-installation-and-upgrades.md) | How do I install the tool and safely update an existing repository? |
 | [`harnessctl check` explained](harnessctl-check.md) | What does `check` evaluate at each checkpoint, how does an artifact's state select the rule and gates, and why does it refuse? |
 | [Diagnostic code index](diagnostic-codes.md) | Which diagnostic codes exist, which component speaks each prefix, and what message text comes with a code? (generated from source; a test pins it) |
@@ -40,7 +42,7 @@ The repository [README](../../README.md) is the concise public entry point.
 | [Read-only agent orientation](harness-orient.md) | How can an agent understand installed harness state and return the next accountable decision without changing anything? |
 | [Artifact authoring](artifact-authoring.md) | How is each formal artifact type written, and which rules does the tool enforce? |
 | [Lifecycle state contract](lifecycle-state-contract.md) | Which lifecycle states does each artifact family admit, and what does each state's contract row grant? |
-| [Clear technical communication](technical-communication.md) | How do agents apply the two clarity profiles, preserve protected content, and use the explicit read-only operator-brief skill? |
+| [Clear technical communication](technical-communication.md) | How do agents apply the communication policy, preserve protected content, and use the explicit read-only operator-brief skill? |
 | [Repository host adapters](agentic-execution-host-adapters.md) | How do Codex and Claude Code discover the same canonical repository skills without duplicating workflow authority? |
 | [Installing the Verity Plane plugin](../../release/plugin-marketplace/README.md) | How do I install the published marketplace plugin in Codex or Claude Code? |
 | [Early plugin-distribution exploration](agentic-execution-plugin-distribution.md) | What options did the earlier proposal consider? Historical analysis; current installation uses the guide above. |
@@ -84,9 +86,9 @@ Dated review packets, decision aids, and superseded guidance, kept for the decis
 
 ## Know what is authoritative
 
-- **SE Harness guarantees and managed policy:** start at [`ENGINEERING_HARNESS.md`](../../ENGINEERING_HARNESS.md), which routes to workflow, decision-rights, quality-gate, and traceability policies.
+- **SE Harness guarantees and managed policy:** start at [`ENGINEERING_HARNESS.md`](../../ENGINEERING_HARNESS.md), which routes to the exact procedure and supporting section needed for the selected task.
 - **Configurable harness policy:** `.engineering-harness.toml` selects supported enforcement settings.
-- **Repository-specific control:** the owner-controlled region of [`AGENTS.md`](../../AGENTS.md), product artifacts, build commands, Git strategy, hosting controls, and local agent instructions belong to the repository and its accountable owners.
+- **Repository-specific control:** the entirely repository-owned [`AGENTS.md`](../../AGENTS.md), product artifacts, build commands, Git strategy, hosting controls, and local agent instructions belong to the repository and its accountable owners.
 - **Illustrations:** the notes in this directory help readers understand the model but do not authorize work or override managed policy.
 
 If explanatory prose, policy, and executable checks disagree, stop and report the discrepancy. Do not assume that whichever file is executable automatically has governance authority.

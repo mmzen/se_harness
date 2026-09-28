@@ -105,11 +105,12 @@ class PublicOnboardingTests(unittest.TestCase):
 
         commands = self.fenced_commands(self.section("Install into a repository", self.installation))
         self.assertEqual(2, len(commands))
-        self.assertEqual({"init", "doctor"}, {command[3] for command in commands})
+        self.assertEqual({"init", "doctor"}, {command[4] for command in commands})
         for command in commands:
             with self.subTest(command=command):
-                self.assertEqual(["python", "-m", "se_harness"], command[:3])
-                build_parser().parse_args(command[3:])
+                self.assertEqual(["CHECKER", "-I", "-m", "se_harness"], command[:4])
+                self.assertEqual("REPO", command[5])
+                build_parser().parse_args(command[4:])
         for text in ("outside", "python -m venv", "-m pip install", "se-harness==", "version your repository pins"):
             with self.subTest(text=text):
                 self.assertIn(text, self.getting_started)

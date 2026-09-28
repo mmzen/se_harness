@@ -2,7 +2,7 @@
 id = "WO-PLG-027"
 type = "work_order"
 title = "Correct current engineering and installation guidance"
-status = "approved"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-09-28"
 updated = "2026-09-28"
@@ -45,6 +45,20 @@ decided_at = "2026-09-28T20:39:06Z"
 decided_by = "engineering-owner"
 reason = "Human repository owner mmzen: \"I approve\", responding to the nine-artifact marketplace refresh package and required commit-bound verification for WO-PLG-026, WO-PLG-027 and WO-PLG-028. The selected pairing is plugin 0.2.1 with the unchanged released evaluator 0.19.0. Reviewed SHA-256 683de2f044926e4b5ae49d16710e093bc98fb6ca06f93866da53ddd40493823b; transition input SHA-256 721fab4c640b22b68b707dcacd13ebf46bf9b4f40c6dcdb26c12a124256c2476. Legacy 0.19.0 role engineering-owner encodes the right; mmzen is the human decision-maker and Codex applies it. Only confirmed assurance fields and confirmation prose were added to the three draft WOs. WO-PLG-026 and WO-PLG-027 may start after required checks. WO-PLG-028 waits for human-verified preparation coverage and separately authorized, observed publication. No external mutation is authorized."
 scope_paths = ["docs/notes/getting-started.md", "docs/notes/harnessctl-reference.md", "docs/notes/harness-operational-phasing.md", "docs/notes/harness-uml-model.md", "docs/notes/harness-overview.md", "docs/notes/harness-lineage-example.md", "docs/notes/technical-communication.md", "docs/notes/developing-se-harness.md", "docs/notes/harness-installation-and-upgrades.md", "docs/notes/agentic-execution-host-adapters.md", "docs/notes/README.md", "docs/engineering/plugin-integration/README.md", "tests/test_progressive_documentation.py", "tests/test_public_onboarding.py", "docs/engineering/plugin-integration/work-orders/WO-PLG-027.md", "docs/engineering/plugin-integration/evidence/", "docs/engineering/plugin-integration/verification-records/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-28T21:02:43Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Begin approved guidance scope after WO-PLG-026 package edits. Execution entry commit cc6901a215b6f23febb1d918591c0c4ddc6a3d08; shared proposal baseline c4d9036fdaab378f08fe2db68978126f66ab961e retained. No earlier WO-PLG-027 implementation is excluded."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-28T21:14:14Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed."
 +++
 
 # Correct current engineering and installation guidance

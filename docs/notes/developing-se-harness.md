@@ -6,7 +6,13 @@
 
 The one-time emergency bootstrap published version 0.5.0a1 and used that exact external release to convert this checkout from its retired self-hosted evaluator controls. Exact public 0.5.0 later governed the 0.6.0 release through the ordinary standard repository lifecycle. On 2026-08-23, the separately governed `WO-HUP-002` transaction adopted exact public 0.6.0 as the standard root evaluator. No self-hosting installation profile, evaluator descriptor, or special promotion command was introduced. Candidate source and packages remain evidence only and must not create formal artifacts, run root preflight, or manage lifecycle state.
 
-Candidate source in this checkout reports version 0.20.0. The standard root is governed by exact public 0.19.0, adopted under `WO-HUP-021` and recorded in `.engineering-harness.toml`. The schema-4 lock retains that release's immutable public wheel and installed-payload digests and selects plugin ownership under `WO-PLG-024`. Candidate source remains development evidence; its version does not select the governing evaluator or grant release authority.
+Candidate source in this checkout reports version 0.20.0. The standard root is governed by exact public 0.19.0, adopted under `WO-HUP-021` and recorded in `.engineering-harness.toml`. The schema-4 lock retains that release's immutable public wheel and installed-payload digests and selects plugin ownership completed under `WO-PLG-025`. Candidate source remains development evidence; its version does not select the governing evaluator or grant release authority.
+
+In evaluator examples, `harnessctl` means the absolute Python executable of
+the repository's selected released evaluator followed by `-I -m se_harness`.
+Run it from outside the checkout. `REPO` is the absolute repository path;
+replace placeholders before running a command. Source-development commands
+are identified separately and do not govern repository lifecycle state.
 
 ## Candidate identity and editable files (WO-KIS-003)
 
@@ -34,8 +40,12 @@ from AGENTS.md. The transaction and native-delivery evidence are retained under
 This repository gets its agent skills and native instruction-delivery hook
 from Verity Plane 0.2.0. Check the actual installed plugin version: the older
 0.1.0 marketplace distribution does not provide this released delivery setup.
-Use a reviewed local 0.2.0 assembly from the public 0.19.0 wheel until the
-[marketplace distribution](../../release/plugin-marketplace/README.md) is updated.
+The prepared plugin 0.2.1 candidate also bundles the public 0.19.0 wheel.
+WO-PLG-026 retains its local Windows CLI qualification on both hosts, including
+fresh installation, update, startup and compaction. It has not replaced the
+observed public 0.1.0/0.18.0 route or the user's existing local 0.2.0 selection.
+Use the [marketplace guide](../../release/plugin-marketplace/README.md) for
+the candidate identity and the remaining publication conditions.
 WO-HUP-021 retains the exact package identities and local installation evidence.
 Its native rehearsal covers Windows Codex CLI startup and manual compaction,
 not Codex desktop UI or automatic threshold compaction. A clone needs its own
@@ -103,23 +113,28 @@ docs/engineering/                        self-governing formal artifact graph an
 .github/workflows/publish-dashboard-pages.yml release-bound Explorer recovery
 ```
 
-Since `WO-DST-024` (`SPEC-DST-025`) the candidate's validator, Explorer generator, inspector and layout registry live in `se_harness/engine/` and ship inside the wheel; the installer writes none of them into a repository. The root copies under `scripts/` were the released 0.15.0 evaluator's footprint, hash-locked until `WO-HUP-017` adopted 0.16.0 and they left through the leaving-set rule; since then the package is the only home of the evaluator's scripts, here as everywhere. The release workflows validate and generate through the evaluator (`python -m se_harness validate .`, `harnessctl dashboard`).
+Since `WO-DST-024` (`SPEC-DST-025`) the candidate's validator, Explorer generator, inspector and layout registry live in `se_harness/engine/` and ship inside the wheel; the installer writes none of them into a repository. The root copies under `scripts/` were the released 0.15.0 evaluator's footprint, hash-locked until `WO-HUP-017` adopted 0.16.0 and they left through the leaving-set rule; since then the package is the only home of the evaluator's scripts, here as everywhere. The release workflows validate and generate through the selected external evaluator (`harnessctl validate REPO`, `harnessctl dashboard REPO`).
 
 ## Ordinary development checks
 
 See [what the tests should protect](test-suite.md) for the simplified test scope and the Windows/Linux checks.
 
-Use the commands confirmed by the owner-controlled region of `AGENTS.md`:
+Run source-development checks from the checkout using the repository-owned `AGENTS.md`:
 
 ```powershell
-python -m se_harness validate .
 python scripts/validate_release_distributions.py --root .
 python scripts/run_tests.py
 python -m se_harness --help
-python -m se_harness doctor .
 ```
 
 `scripts/run_tests.py` (`WO-TST-001`, `ADR-TST-001`) runs the same `unittest` suite across worker processes — one test class per task, longest first from the timings the previous run left in `target/test-timings.json` — and prints one report in `unittest`'s form with one exit code. `python -m unittest discover -s tests -p "test_*.py"` remains the canonical serial reference and is what the release qualification runs; `python scripts/run_tests.py --workers 1` equals it. The two 1,000-artifact scale tests run at full size only with `--scale full` (or `SE_HARNESS_TEST_SCALE=full`), which the hosted candidate lane and the release qualification (`release-qualification.yml`, `WO-TST-003`) set; locally the 100 and 500 sizes run and the 1,000 size is reported skipped.
+
+Run governed checks separately, from outside the checkout:
+
+```text
+harnessctl validate REPO --json
+harnessctl doctor REPO --json
+```
 
 Run phase-appropriate work-order preflight and focused checks required by the governing verification contract. No formatter or linter is currently declared as a repository gate.
 
@@ -242,7 +257,7 @@ Ordinary ready RLS records use the complete schema-3 evaluator identity in the c
 Owner content moved here from the retired repository-context document under `WO-ADS-002`. It grants no authority; every step below runs only under the approved work order or release record it names.
 
 - Candidate version bump: raise `pyproject.toml` to the new version. Since `WO-ECP-010` (issue #210) no migration scenario accompanies it: `repository_tools.evaluator_facts derive` needs only the declared root and the candidate version, and the `upgrade-rehearsal` legs rehearse the real `upgrade --apply` of that candidate against an export holding the predecessor's lock, failing when the resulting lock does not name the candidate's version and payload. `tests/test_ci_pipeline.py` asserts that a bump needs no scenario.
-- Release contract with the WO-KIS-004 candidate: the owner chooses the final candidate and approves its work scope. `harnessctl release-unit . --from <tag> --to <commit>` is an advisory census; missing trailers need no exemptions. Capture and explicitly verify one final VREC covering all released work and required verification contracts, with evidence that the final integration was tested. Earlier records may have different commits and remain historical evidence. `prepare-release` binds that final VREC at its exact candidate. The installed 0.19.0 root applies these checks following the authorized `WO-HUP-021` upgrade.
+- Release contract with the WO-KIS-004 candidate: the owner chooses the final candidate and approves its work scope. `harnessctl release-unit REPO --from <tag> --to <commit>` is an advisory census; missing trailers need no exemptions. Capture and explicitly verify one final VREC covering all released work and required verification contracts, with evidence that the final integration was tested. Earlier records may have different commits and remain historical evidence. `prepare-release` binds that final VREC at its exact candidate. The installed 0.19.0 root applies these checks following the authorized `WO-HUP-021` upgrade.
 - Build: under an approved release work order and after the exact candidate commit exists, run `python -m repository_tools.release_build replay --repository . --commit <full-candidate> --version <version> --output-directory <bundle-dir> --result <replay.json>`. The strict interpreter reads `release/build-recipe.json` and `release/build-toolchain.lock` from that candidate, launches two fresh instances of the digest-pinned Linux/amd64 producer, proves the exact CPython and complete hash-locked tool inventory, applies only the closed environment and argument arrays, normalizes the sdist, and requires byte-for-byte equality. Create retained binding evidence with `python scripts/create_release_bundle_manifest.py --repository . --commit <full-candidate> --version <version> --wheel <bundle-dir>/<wheel> --sdist <bundle-dir>/<sdist> --build-recipe release/build-recipe.json --output <bundle.json>`. Do not substitute native host commands for this recipe-era path. After the two producer runs the replay hands the workspace back to the calling user with one further run of the same pinned image (`chown -R <uid>:<gid> /workspace`, POSIX hosts only, `WO-RLO-007`): the producer writes as root inside the bind mount, and without the hand-back a hosted runner cannot tear the workspace down. The host this runs on does not enter the result (`WO-RLO-008`): the export disables Git line-ending conversion for its own invocation and each producer establishes the declared `0o775`/`0o664` source mode set inside the container, so a Windows workstation reproduces a bound record's exact bytes. Do not re-add a host restriction here; the two mechanisms are the obligation and are tested, and a note cannot fail a build. A workstation without a Docker engine does not build at all: the hosted Publication Rehearsal runs this exact replay in `candidate` mode, so the build of record is read from a `workflow_dispatch` of `publication-rehearsal.yml` on the release branch at the candidate head (the pull-request event builds the merge commit, not the head), its retained `release-build-replay.json` downloaded, `candidate.commit` checked equal to the candidate, and `.manifest` retained as the bundle (`WO-RLS-019`, 0.13.0); the bound-record replay then re-proves the digests before the release decision.
 - Release preparation: first run generic `harnessctl prepare-release ...` to create the ready RLS, then bind the retained schema-2 bundle with `python scripts/bind_release_distribution.py --repository . --release-record <RLS-path> --manifest <bundle.json>`. The binder changes only the repository-owned distribution table and fails atomically. Before the release decision, dispatch `.github/workflows/release-candidate-replay.yml` on the review ref with only `release_record=RLS-...`; it rebuilds twice from the already-bound recipe and hashes with read-only repository permission and retains technical evidence. Historical released schema-1 records remain valid as records, but they are never re-published: the release qualification is one definition, `.github/workflows/release-qualification.yml`, and it replays a bound schema-2 recipe only (`WO-CIP-002`, `SPEC-CIP-001` CIP-LEG 1). A new ready record cannot use schema 1. The publication rehearsal uses one changed-path decision: build inputs select candidate replay, publication implementation/workflows select both legs, and ordinary runtime/documentation PRs skip them. Manual release preparation runs both. A successful summary check reports skipped legs; source tests, installed-package checks and managed validation still run. See [rehearsing the publication path](release-publication-rehearsal.md).
 - Authorized last mile: after the RLS is `released` in `main`, dispatch `.github/workflows/publish-pypi.yml` from `main` with only `release_record=RLS-...`. Before privileged jobs, the workflow validates the complete committed governance graph with current semantics. It derives the candidate, governance commit, version, tag, recipe, files, hashes, and canonical `release/MAJOR.MINOR` maintenance line. The `qualify` job is a caller of `.github/workflows/release-qualification.yml` in `release-record` mode, so the release executes exactly the definition the rehearsal executed; there is no legacy leg. Only verified inert bytes cross into jobs that reconcile the exact GitHub tag and Release, maintenance line, PyPI state, Pages deployment, and public observation. The Pages deployment is a caller of `.github/workflows/pages-publication.yml`, the same definition the standalone `publish-dashboard-pages.yml` recovery workflow calls. The protected `pypi` environment remains a separate human decision.
@@ -252,9 +267,9 @@ This repository integrates reviewed work through branches and pull requests with
 
 ## Advancing the root evaluator
 
-Candidate success never changes the root evaluator. The current root is exact public 0.19.0 under a schema-4 plugin-ownership lock, adopted by `WO-HUP-021` from the wheel published under `RLS-SEH-028`. Its retained transaction follows review of native startup and post-compaction delivery and the separate AGENTS owner edit. `WO-HUP-019` previously adopted 0.18.0 from the wheel bound in `RLS-SEH-027`; that transaction updated 25 supplied files, preserved 11 editable adoptions and left five files unchanged, with 19 editable replacements selected explicitly. `WO-HUP-018` previously adopted exact public 0.17.0 through the simple upgrade from a wheel-file install whose digest equals the wheel bound in `RLS-SEH-026`, so the lock records the archive pair; it took the five-key configuration, the hardened managed workflow, the hash-marked ignore block and the risk template into the root. `WO-HUP-017` had adopted 0.16.0 the same way, the first adoption in which files left the managed set (the eight retired script copies); `WO-HUP-016`, `WO-HUP-015`, `WO-HUP-014`, `WO-HUP-013`, `WO-HUP-011`, `WO-HUP-010`, `WO-HUP-009` and `WO-HUP-008` had adopted 0.15.0, 0.14.0, 0.13.0, 0.12.0, 0.11.0, 0.10.0, 0.9.0 and 0.8.0 the same way. `WO-HUP-007` had adopted 0.7.1 the same way from an index install with a `null` pair; that `null` later blocked `prepare-release` (`MG004`) until a same-version refresh from a wheel-file install wrote the pair (`REL-SEH-019`), which is why this repository now installs the root from the digest-verified wheel file. After a later SE Harness version is immutably published, maintainers install that exact release outside the checkout — an ordinary `pip install "se-harness==X"` is enough, from the index or from a wheel file — review `harnessctl upgrade .`, and run `harnessctl upgrade . --apply --evidence-output docs/engineering/<domain>/evidence/<name>.json`. The `--evidence-output` path is not optional for this repository: `.github/workflows/predecessor-evaluator-assessment.yml` accepts a root transition only when the target commit retains exactly one transaction document under `docs/engineering/**/evidence/` whose prior lock digest and prior version match the base root and whose target identity matches the new lock (`scripts/validate_governor_transition.py`, `_select_transition`); without it the lane refuses the pull request. The lane also requires the base commit to hold exactly one released `RLS-*` record for the target version and downloads that record's wheel to run `identity`, `doctor`, `validate`, and `qualify released-root` with the exact target evaluator; `WO-HUP-007` passed it that way on 2026-08-27. The installed evaluator's version and installed-payload digest become the lock's identity; the archive digest is recorded when the installation carries one and `null` otherwise (`WO-REB-027`, `SPEC-REB-012`). No evaluator-upgrade packet is required any more; a wheel-file install is not required by the upgrade either, but it is what records the archive pair `prepare-release` reads, so this repository uses it. Which repository change is authorized is this repository's own policy: the changed managed files land under a normal work order. The standard upgrade transaction preserves repository-owned content and fails closed on customization or integrity ambiguity.
+Candidate success never changes the root evaluator. The current root is exact public 0.19.0 under a schema-4 plugin-ownership lock, adopted by `WO-HUP-021` from the wheel published under `RLS-SEH-028`. Its retained transaction follows review of native startup and post-compaction delivery and the separate AGENTS owner edit. `WO-HUP-019` previously adopted 0.18.0 from the wheel bound in `RLS-SEH-027`; that transaction updated 25 supplied files, preserved 11 editable adoptions and left five files unchanged, with 19 editable replacements selected explicitly. `WO-HUP-018` previously adopted exact public 0.17.0 through the simple upgrade from a wheel-file install whose digest equals the wheel bound in `RLS-SEH-026`, so the lock records the archive pair; it took the five-key configuration, the hardened managed workflow, the hash-marked ignore block and the risk template into the root. `WO-HUP-017` had adopted 0.16.0 the same way, the first adoption in which files left the managed set (the eight retired script copies); `WO-HUP-016`, `WO-HUP-015`, `WO-HUP-014`, `WO-HUP-013`, `WO-HUP-011`, `WO-HUP-010`, `WO-HUP-009` and `WO-HUP-008` had adopted 0.15.0, 0.14.0, 0.13.0, 0.12.0, 0.11.0, 0.10.0, 0.9.0 and 0.8.0 the same way. `WO-HUP-007` had adopted 0.7.1 the same way from an index install with a `null` pair; that `null` later blocked `prepare-release` (`MG004`) until a same-version refresh from a wheel-file install wrote the pair (`REL-SEH-019`), which is why this repository now installs the root from the digest-verified wheel file. After a later SE Harness version is immutably published, maintainers install that exact release outside the checkout — an ordinary `"CHECKER" -m pip install "se-harness==X"` is enough, from the index or from a wheel file — review `harnessctl upgrade REPO`, and run `harnessctl upgrade REPO --apply --evidence-output docs/engineering/<domain>/evidence/<name>.json`. The `--evidence-output` path is not optional for this repository: `.github/workflows/predecessor-evaluator-assessment.yml` accepts a root transition only when the target commit retains exactly one transaction document under `docs/engineering/**/evidence/` whose prior lock digest and prior version match the base root and whose target identity matches the new lock (`scripts/validate_governor_transition.py`, `_select_transition`); without it the lane refuses the pull request. The lane also requires the base commit to hold exactly one released `RLS-*` record for the target version and downloads that record's wheel to run `identity`, `doctor`, `validate`, and `qualify released-root` with the exact target evaluator; `WO-HUP-007` passed it that way on 2026-08-27. The installed evaluator's version and installed-payload digest become the lock's identity; the archive digest is recorded when the installation carries one and `null` otherwise (`WO-REB-027`, `SPEC-REB-012`). No evaluator-upgrade packet is required any more; a wheel-file install is not required by the upgrade either, but it is what records the archive pair `prepare-release` reads, so this repository uses it. Which repository change is authorized is this repository's own policy: the changed managed files land under a normal work order. The standard upgrade transaction preserves repository-owned content and fails closed on customization or integrity ambiguity.
 
-See the current [standard repository lifecycle guide](../engineering/self-hosting-boundary/SELF_HOSTING.md), the owner-controlled region of [`AGENTS.md`](../../AGENTS.md), and managed [`ENGINEERING_HARNESS.md`](../../ENGINEERING_HARNESS.md).
+See the current [standard repository lifecycle guide](../engineering/self-hosting-boundary/SELF_HOSTING.md), the entirely repository-owned [`AGENTS.md`](../../AGENTS.md), and managed [`ENGINEERING_HARNESS.md`](../../ENGINEERING_HARNESS.md).
 
 ## Local plugin development
 
@@ -268,7 +283,7 @@ See [simple plugin operation](plugin-simplification-2026-09-13.md).
 
 Candidate commands use one execution procedure for a person or agent, under
 the work order's recorded approval and relevant local gates. The approval
-meaning is maintained in the candidate `DECISION_RIGHTS.md#approved-execution`;
+meaning is maintained in the installed [authority guide](../engineering/harness/AUTHORITY.md#authority-from-work-approval);
 skills and templates refer to that policy. Local execution needs no GitHub
 response or preliminary merge. CI still checks integration and publication.
 New approval events retain approved paths without an optional delegation class.
@@ -277,7 +292,7 @@ that grant need approval of remaining execution through the existing amendment
 process. This repository follows its installed 0.19.0 evaluator after the authorized `WO-HUP-021` adoption.
 
 For a combined PR, use one `Harness-Work-Orders: WO-AAA-001, WO-BBB-002` line.
-`harnessctl check-pr . --event event.json --from-git <base>` checks each selected
+`harnessctl check-pr REPO --event event.json --from-git <base>` checks each selected
 work order and the complete diff against their union. A draft or outside path fails.
 
 Evidence freshness covers the selected governing chain and files in the work
@@ -286,7 +301,7 @@ Verification capture is independent of dashboard generation. With local edits,
 select a committed candidate and a test command, with the test command last:
 
 ```sh
-harnessctl capture-verification . --id VREC-AAA-001 --work-order WO-AAA-001 \
+harnessctl capture-verification REPO --id VREC-AAA-001 --work-order WO-AAA-001 \
   --verification VER-AAA-001 --evidence docs/engineering/product/evidence/checks.md \
   --candidate-commit HEAD --test-command python -m unittest discover -s tests
 ```

@@ -295,7 +295,7 @@ the decision.
 A complete graph proves that the required relations are declared. It does
 not prove that the statements are good, that the evidence is persuasive, or
 that a human approved a transition. Those judgments belong to the
-accountable roles in `docs/engineering/DECISION_RIGHTS.md`.
+human and agent [decision rights](../engineering/harness/AUTHORITY.md#decision-rights).
 
 If a policy and an executable check disagree, stop and report the
 difference. Neither this diagram nor an implementation detail resolves

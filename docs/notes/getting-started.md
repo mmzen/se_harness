@@ -6,33 +6,43 @@
 
 ## Summary
 
-This page takes you from an empty environment to your first useful command in a repository that SE Harness manages. You install the tool in its own environment outside the repository, confirm the repository is healthy with `doctor`, and then work in one repeating loop: run `check`, do what the result says, run `check` again. Project-specific terms are defined in the [glossary](glossary.md).
+This page takes you from an empty environment to your first useful command in a repository that SE Harness manages. You install the tool in its own environment outside the repository, confirm the repository is healthy with `doctor`, and then work in one repeating loop: run `check`, do what the result says, run `check` again. Project-specific terms are defined in the [glossary](../../GLOSSARY.md).
 
 ## Install the evaluator outside the checkout
 
 The installed copy of SE Harness that judges a repository is called the evaluator. It must run from a Python virtual environment *outside* the repository checkout, at the exact released version the repository pins in `.engineering-harness.toml`. This separation is deliberate: the code in the checkout is the thing being judged, so the judge cannot run from inside it. Running from the checkout is refused.
 
-From the directory above the checkout:
+For a fresh project selecting released 0.19.0, choose an absolute external
+environment directory `EVAL`. Run these commands from outside the checkout:
 
-```bash
-python -m venv se-harness-eval
-se-harness-eval/Scripts/python -m pip install "se-harness==0.14.0"
+```text
+python -m venv "EVAL"
+"CHECKER" -m pip install "se-harness==0.19.0"
+"CHECKER" -I -m se_harness --version
 ```
 
-Use the version your repository pins, and `se-harness-eval/bin/python` on Linux or macOS. Then always invoke the evaluator as `python -I -m se_harness`. The `-I` flag isolates Python from user packages and path variables, so the evaluator is exactly the installed release and nothing else:
+Replace `CHECKER` with the absolute Python executable inside `EVAL`:
+`EVAL/Scripts/python.exe` on Windows, or `EVAL/bin/python` on Linux and macOS.
+In PowerShell, prefix a quoted executable with `&`. Use the version your repository pins
+for an existing project; this example does not authorize an upgrade.
 
-```bash
-../se-harness-eval/Scripts/python -I -m se_harness --version
-```
+In evaluator examples, `harnessctl` means the absolute Python executable of
+the repository's selected released evaluator followed by `-I -m se_harness`.
+Run it from outside the checkout. `REPO` is the absolute repository path;
+replace placeholders before running a command. Source-development commands
+are identified separately and do not govern repository lifecycle state.
 
-The examples below shorten this to `harnessctl`, the launcher name for the same program. In your shell, either spell out the full command or use the launcher inside the evaluator environment.
+The `-I` flag isolates Python from user packages and path variables. If the
+repository has no installation yet, follow [Install into a repository](harness-installation-and-upgrades.md#install-into-a-repository)
+before its first health check. Plugin installation, evaluator setup and
+repository adoption are separate operations; see the [plugin walkthrough](plugin-installation-guide.md).
 
 ## First health check: `doctor`
 
-From the repository root:
+From the external working directory:
 
 ```bash
-harnessctl doctor .
+harnessctl doctor REPO
 ```
 
 `doctor` prints a flat list of PASS or FAIL lines. It answers one question: do the installed managed files match what the tool expects? A clean `doctor` means the harness itself is healthy. It says nothing about your work; that is the next command's job.
@@ -42,7 +52,7 @@ harnessctl doctor .
 `check` reads the repository and answers: what state is the selected work in, and what is the next step? Run it with no artifact and it picks the single work order that is in progress:
 
 ```bash
-harnessctl check .
+harnessctl check REPO
 ```
 
 The result always ends with one next step: a command to run, or a decision that is due and the person who owns it. The loop is:
@@ -55,7 +65,7 @@ When the result is blocked, it names what refused and the one retry. Fix the cau
 
 ## Prepare and verify a record in one commit
 
-When a work order is implemented, a verification record is prepared for it and a human decides whether it becomes verified. These two steps do not need two commits. `capture-verification` writes the record file; `transition --apply` accepts that file while it is still untracked; and neither the record nor the decision contains the hash of its own commit. So the normal flow is: run `capture-verification`, apply the verifying transition, and commit both results together as one governance commit. The one rule to remember is that a record binds an earlier, already-existing commit, so it always lands in a commit *after* the work it describes.
+When a work order is implemented, a verification record is prepared for it and a human decides whether it becomes verified. These two steps do not need two commits. `capture-verification` writes the record file; `transition --apply` accepts that file while it is still untracked; and neither the record nor the decision contains the hash of its own commit. After capture, the human reviews the ready record and makes the verification decision. Only then may the agent apply that recorded decision and commit both results together as one governance commit. The one rule to remember is that a record binds an earlier, already-existing commit, so it always lands in a commit *after* the work it describes.
 
 ## Where to go next
 

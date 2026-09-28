@@ -4,6 +4,12 @@
 
 > Every `EX` identifier, title, path, version, and commit in this note is fictional. The examples demonstrate current behavior; they are not repository state and grant no authority.
 
+In evaluator examples, `harnessctl` means the absolute Python executable of
+the repository's selected released evaluator followed by `-I -m se_harness`.
+Run it from outside the checkout. `REPO` is the absolute repository path;
+replace placeholders before running a command. Source-development commands
+are identified separately and do not govern repository lifecycle state.
+
 ## Example 1: add per-customer API rate limiting
 
 ### The user request
@@ -57,20 +63,24 @@ Only after the user says, for example, â€œI approve `WO-EX-001`; implement it,â€
 The coding agent normally runs:
 
 ```powershell
-harnessctl doctor .
-harnessctl preflight . --work-order WO-EX-001 --phase start
+harnessctl doctor REPO
+harnessctl preflight REPO --work-order WO-EX-001 --phase start
 ```
 
-It reads the returned manifest, transitions the approved work order to `in_progress`, and implements only its scope. It then runs the commands owned by this repository, followed by harness observations:
+It reads the returned manifest, transitions the approved work order to `in_progress`, and implements only its scope. It runs repository tests from the checkout, then returns to the external directory for harness observations:
 
 ```powershell
-# Repository-specific examples; use the actual commands in the AGENTS.md owner region
+# Repository-specific examples; use the actual commands in the repository-owned AGENTS.md
 python -m unittest discover -s tests -p "test_*.py"
+```
 
-harnessctl validate .
-harnessctl inspect .
-harnessctl dashboard .
-harnessctl preflight . --work-order WO-EX-001 --phase review
+From outside the checkout:
+
+```text
+harnessctl validate REPO
+harnessctl inspect REPO
+harnessctl dashboard REPO
+harnessctl preflight REPO --work-order WO-EX-001 --phase review
 ```
 
 `validate` supplies gate-oriented graph results. `inspect` then groups current lifecycle attention, retained findings, and bounded suggestions for possible accountable next steps; it executes nothing and does not establish eligibility or approval. The dashboard provides the visual view of the same repository evidence.
@@ -88,8 +98,9 @@ Before selecting a candidate, the same change contains the honest work-order tra
 With `HEAD` at clean candidate C, the agent prepares a record:
 
 ```powershell
-harnessctl capture-verification . `
+harnessctl capture-verification REPO `
   --id VREC-EX-001 `
+  --owner Codex `
   --work-order WO-EX-001 `
   --verification VER-EX-001 `
   --evidence docs/engineering/api-governance/evidence/WO-EX-001-verification.md
@@ -104,20 +115,22 @@ VREC-EX-001.commit              -> C
 VREC-EX-001.prepared_at/by       -> preparation facts only
 ```
 
-The ready record is committed later because it cannot contain the hash of its own commit. The assurance owner reads `VER-EX-001` and the retained evidence. After that explicit decision, the operator applies `harnessctl transition . --set VREC-EX-001=verified --decision VREC-EX-001=<actor> --apply`; this adds the decision fields and event to the VREC only. The preparation command did not make that decision.
+`--owner Codex` identifies the preparation agent, not the human who will decide verification. In the decision commands below, replace `<actor>` with the authorized human identity using the selected evaluator's supported decision encoding.
+
+The ready record is committed later because it cannot contain the hash of its own commit. The assurance owner reads `VER-EX-001` and the retained evidence. After that explicit decision, the operator applies `harnessctl transition REPO --set VREC-EX-001=verified --decision VREC-EX-001=<actor> --apply`; this adds the decision fields and event to the VREC only. The preparation command did not make that decision.
 
 ### Separate release decision
 
 After the verified record is retained and the release owner authorizes preparation, the agent runs:
 
 ```powershell
-harnessctl prepare-release . `
+harnessctl prepare-release REPO `
   --id RLS-EX-001 `
   --release-contract REL-EX-001 `
   --verification-record VREC-EX-001 `
   --work-order WO-EX-001 `
   --version 1.4.0 `
-  --authorized-by release-owner `
+  --owner Codex `
   --tag v1.4.0
 ```
 
@@ -131,7 +144,7 @@ RLS-EX-001.commit                -> C
 RLS-EX-001.prepared_at/by         -> preparation facts only
 ```
 
-After an explicit release-owner decision, the operator applies `harnessctl transition . --set RLS-EX-001=released --decision RLS-EX-001=<actor> --apply`; this changes the RLS only. If separately authorized, a human or repository automation creates `v1.4.0` at **C**, not at the later governance commit. GitHub Release creation, package publication, and deployment remain separate external actions; the harness command performs none of them.
+After an explicit release-owner decision, the operator applies `harnessctl transition REPO --set RLS-EX-001=released --decision RLS-EX-001=<actor> --apply`; this changes the RLS only. If separately authorized, a human or repository automation creates `v1.4.0` at **C**, not at the later governance commit. GitHub Release creation, package publication, and deployment remain separate external actions; the harness command performs none of them.
 
 ### Timeline and authority
 
@@ -158,8 +171,9 @@ The value is the complete, inspectable answer: why the change exists, what was i
 Suppose the final candidate also contains an independently approved documentation work order `WO-EX-002`, with `VER-EX-002` and its own retained evidence. A release is not forced to correspond to one governance topic. One aggregate VREC can cover the complete candidate payload:
 
 ```powershell
-harnessctl capture-verification . `
+harnessctl capture-verification REPO `
   --id VREC-EX-002 `
+  --owner Codex `
   --work-order WO-EX-001 `
   --work-order WO-EX-002 `
   --verification VER-EX-001 `
