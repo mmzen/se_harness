@@ -2,10 +2,15 @@
 id = "WO-PLG-026"
 type = "work_order"
 title = "Prepare and qualify the 0.2.1 marketplace candidate"
-status = "draft"
+status = "in_progress"
 owners = ["mmzen"]
 created = "2026-09-28"
 updated = "2026-09-28"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "Later assurance and delivery decisions rely on the changed content and evidence; human mmzen confirmed required commit-bound verification when approving this exact package."
+decided_by = "mmzen"
 
 [execution_scope]
 paths = [
@@ -38,6 +43,21 @@ paths = [
 implements = ["REQ-PLG-039"]
 specifications = ["SPEC-PLG-023"]
 verification = ["VER-PLG-026"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-28T20:39:06Z"
+decided_by = "engineering-owner"
+reason = "Human repository owner mmzen: \"I approve\", responding to the nine-artifact marketplace refresh package and required commit-bound verification for WO-PLG-026, WO-PLG-027 and WO-PLG-028. The selected pairing is plugin 0.2.1 with the unchanged released evaluator 0.19.0. Reviewed SHA-256 f3b3d9239fa983c30f514a430a6545e885fbaee6bb4b9d7213e866e841035c97; transition input SHA-256 ce72209bd9814627f7744b5e516d72e315f8ec752b58df6c916b392a5ddac5d0. Legacy 0.19.0 role engineering-owner encodes the right; mmzen is the human decision-maker and Codex applies it. Only confirmed assurance fields and confirmation prose were added to the three draft WOs. WO-PLG-026 and WO-PLG-027 may start after required checks. WO-PLG-028 waits for human-verified preparation coverage and separately authorized, observed publication. No external mutation is authorized."
+scope_paths = ["README.md", "plugins/verity-plane/codex/.codex-plugin/plugin.json", "plugins/verity-plane/claude-code/.claude-plugin/plugin.json", "plugins/verity-plane/codex/README.md", "plugins/verity-plane/claude-code/README.md", "release/plugin-marketplace/README.md", "release/plugin-marketplace/submissions/README.md", "release/plugin-marketplace/submissions/reviewer-test-cases.md", "docs/notes/plugin-installation-guide.md", "docs/notes/plugin-marketplace-publication.md", "tests/test_public_onboarding.py", "tests/plugin_integration/package_assembly/", "docs/engineering/plugin-integration/requirements/REQ-PLG-039.md", "docs/engineering/plugin-integration/requirements/REQ-PLG-040.md", "docs/engineering/plugin-integration/requirements/REQ-PLG-041.md", "docs/engineering/plugin-integration/specifications/SPEC-PLG-023.md", "docs/engineering/plugin-integration/verification/VER-PLG-026.md", "docs/engineering/plugin-integration/verification/VER-PLG-027.md", "docs/engineering/plugin-integration/work-orders/WO-PLG-027.md", "docs/engineering/plugin-integration/work-orders/WO-PLG-028.md", "docs/engineering/plugin-integration/work-orders/WO-PLG-026.md", "docs/engineering/plugin-integration/evidence/", "docs/engineering/plugin-integration/verification-records/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-28T20:43:02Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex starts the unchanged scope approved by mmzen; plugin 0.2.1 and released evaluator 0.19.0, baseline c4d9036fdaab378f08fe2db68978126f66ab961e."
 +++
 
 # Prepare and qualify the 0.2.1 marketplace candidate
@@ -84,12 +104,12 @@ Coordinate the shared onboarding test file with the documentation WO through
 sequential edits. Complete both preparation WOs before final combined candidate
 capture. This WO does not wait for actual public publication to be verified.
 
-## Proposed assurance
+## Confirmed assurance
 
 Commit-bound verification: **required**. Later assurance and delivery decisions
-rely on the correctness of the changed content and retained evidence. This is an
-agent proposal awaiting human confirmation; no assurance decision-maker is
-invented in metadata.
+rely on the correctness of the changed content and retained evidence. This is the
+classification confirmed by human mmzen with "I approve" in response to the
+nine-artifact review and explicit required-verification request on 2026-09-28.
 
 ## Authorized decision envelope
 

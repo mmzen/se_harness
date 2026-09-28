@@ -2,7 +2,7 @@
 id = "REQ-PLG-041"
 type = "requirement"
 title = "Confirm the refreshed public marketplace before claiming completion"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-09-28"
 updated = "2026-09-28"
@@ -13,6 +13,13 @@ source = "Owner-approved marketplace and documentation correction plan, followed
 
 [relations]
 derives_from = ["CAP-DST-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-28T20:39:06Z"
+decided_by = "product-owner"
+reason = "Human repository owner mmzen: \"I approve\", responding to the nine-artifact marketplace refresh package and required commit-bound verification for WO-PLG-026, WO-PLG-027 and WO-PLG-028. The selected pairing is plugin 0.2.1 with the unchanged released evaluator 0.19.0. Reviewed SHA-256 578aa670f881c02f253592abb93726bfc0fe729c1e2b3d19398c14e1acd97fca; transition input SHA-256 578aa670f881c02f253592abb93726bfc0fe729c1e2b3d19398c14e1acd97fca. Legacy 0.19.0 role product-owner encodes the right; mmzen is the human decision-maker and Codex applies it. Only confirmed assurance fields and confirmation prose were added to the three draft WOs. WO-PLG-026 and WO-PLG-027 may start after required checks. WO-PLG-028 waits for human-verified preparation coverage and separately authorized, observed publication. No external mutation is authorized."
 +++
 
 # Confirm the refreshed public marketplace before claiming completion

@@ -2,7 +2,7 @@
 id = "SPEC-PLG-023"
 type = "specification"
 title = "Refresh marketplace delivery and current guidance for plugin 0.2.1"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-09-28"
 updated = "2026-09-28"
@@ -10,6 +10,13 @@ contract = "Prepare and qualify plugin 0.2.1 with released evaluator 0.19.0, cor
 
 [relations]
 specifies = ["REQ-PLG-039", "REQ-PLG-040", "REQ-PLG-041"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-28T20:39:06Z"
+decided_by = "technical-owner"
+reason = "Human repository owner mmzen: \"I approve\", responding to the nine-artifact marketplace refresh package and required commit-bound verification for WO-PLG-026, WO-PLG-027 and WO-PLG-028. The selected pairing is plugin 0.2.1 with the unchanged released evaluator 0.19.0. Reviewed SHA-256 2e58fc3614d6032d9af587f753a50420b8418f227519a9e394befd82afb09bb8; transition input SHA-256 2e58fc3614d6032d9af587f753a50420b8418f227519a9e394befd82afb09bb8. Legacy 0.19.0 role technical-owner encodes the right; mmzen is the human decision-maker and Codex applies it. Only confirmed assurance fields and confirmation prose were added to the three draft WOs. WO-PLG-026 and WO-PLG-027 may start after required checks. WO-PLG-028 waits for human-verified preparation coverage and separately authorized, observed publication. No external mutation is authorized."
 +++
 
 # Refresh marketplace delivery and current guidance for plugin 0.2.1

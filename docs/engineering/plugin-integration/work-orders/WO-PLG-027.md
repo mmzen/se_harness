@@ -2,10 +2,15 @@
 id = "WO-PLG-027"
 type = "work_order"
 title = "Correct current engineering and installation guidance"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-09-28"
 updated = "2026-09-28"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "Later assurance and delivery decisions rely on the changed content and evidence; human mmzen confirmed required commit-bound verification when approving this exact package."
+decided_by = "mmzen"
 
 [execution_scope]
 paths = [
@@ -32,6 +37,14 @@ paths = [
 implements = ["REQ-PLG-040"]
 specifications = ["SPEC-PLG-023"]
 verification = ["VER-PLG-026"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-28T20:39:06Z"
+decided_by = "engineering-owner"
+reason = "Human repository owner mmzen: \"I approve\", responding to the nine-artifact marketplace refresh package and required commit-bound verification for WO-PLG-026, WO-PLG-027 and WO-PLG-028. The selected pairing is plugin 0.2.1 with the unchanged released evaluator 0.19.0. Reviewed SHA-256 683de2f044926e4b5ae49d16710e093bc98fb6ca06f93866da53ddd40493823b; transition input SHA-256 721fab4c640b22b68b707dcacd13ebf46bf9b4f40c6dcdb26c12a124256c2476. Legacy 0.19.0 role engineering-owner encodes the right; mmzen is the human decision-maker and Codex applies it. Only confirmed assurance fields and confirmation prose were added to the three draft WOs. WO-PLG-026 and WO-PLG-027 may start after required checks. WO-PLG-028 waits for human-verified preparation coverage and separately authorized, observed publication. No external mutation is authorized."
+scope_paths = ["docs/notes/getting-started.md", "docs/notes/harnessctl-reference.md", "docs/notes/harness-operational-phasing.md", "docs/notes/harness-uml-model.md", "docs/notes/harness-overview.md", "docs/notes/harness-lineage-example.md", "docs/notes/technical-communication.md", "docs/notes/developing-se-harness.md", "docs/notes/harness-installation-and-upgrades.md", "docs/notes/agentic-execution-host-adapters.md", "docs/notes/README.md", "docs/engineering/plugin-integration/README.md", "tests/test_progressive_documentation.py", "tests/test_public_onboarding.py", "docs/engineering/plugin-integration/work-orders/WO-PLG-027.md", "docs/engineering/plugin-integration/evidence/", "docs/engineering/plugin-integration/verification-records/"]
 +++
 
 # Correct current engineering and installation guidance
@@ -72,12 +85,12 @@ Apply this work after the package-facing edits to the shared onboarding test
 file. A combined final VREC may cover both preparation WOs at the same exact
 commit. Availability remains based on the last actual public observation.
 
-## Proposed assurance
+## Confirmed assurance
 
 Commit-bound verification: **required**. Later assurance and delivery decisions
-rely on the correctness of the changed content and retained evidence. This is an
-agent proposal awaiting human confirmation; no assurance decision-maker is
-invented in metadata.
+rely on the correctness of the changed content and retained evidence. This is the
+classification confirmed by human mmzen with "I approve" in response to the
+nine-artifact review and explicit required-verification request on 2026-09-28.
 
 ## Authorized decision envelope
 

@@ -2,13 +2,20 @@
 id = "VER-PLG-026"
 type = "verification"
 title = "Verify the prepared marketplace and corrected guidance"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-09-28"
 updated = "2026-09-28"
 
 [relations]
 verifies = ["REQ-PLG-039", "REQ-PLG-040"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-28T20:39:06Z"
+decided_by = "quality-owner"
+reason = "Human repository owner mmzen: \"I approve\", responding to the nine-artifact marketplace refresh package and required commit-bound verification for WO-PLG-026, WO-PLG-027 and WO-PLG-028. The selected pairing is plugin 0.2.1 with the unchanged released evaluator 0.19.0. Reviewed SHA-256 73ef123fbfe638f71175d65851ea947461c0726094628e32a3d22fa058a2f48a; transition input SHA-256 73ef123fbfe638f71175d65851ea947461c0726094628e32a3d22fa058a2f48a. Legacy 0.19.0 role quality-owner encodes the right; mmzen is the human decision-maker and Codex applies it. Only confirmed assurance fields and confirmation prose were added to the three draft WOs. WO-PLG-026 and WO-PLG-027 may start after required checks. WO-PLG-028 waits for human-verified preparation coverage and separately authorized, observed publication. No external mutation is authorized."
 +++
 
 # Verify the prepared marketplace and corrected guidance
