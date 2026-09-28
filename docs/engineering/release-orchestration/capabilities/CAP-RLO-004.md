@@ -2,7 +2,7 @@
 id = "CAP-RLO-004"
 type = "capability"
 title = "Track delivery across all release surfaces"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-09-28"
 updated = "2026-09-28"
@@ -10,6 +10,13 @@ ability = "A release operator can identify outstanding delivery work across the 
 
 [relations]
 derives_from = ["INT-RLO-001"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-28T19:38:37Z"
+decided_by = "product-owner"
+reason = "Human repository owner mmzen: \"I approve\", responding to the seven-artifact release-delivery package and required commit-bound verification request on 2026-09-28. Reviewed SHA-256 f4bdd5e9a19f9b1913336a3d8db6e801a083f2ce976c17bdf119bfddd007abf3; transition input SHA-256 f4bdd5e9a19f9b1913336a3d8db6e801a083f2ce976c17bdf119bfddd007abf3. Legacy evaluator role product-owner records the human decision; Codex applies it. Only the confirmed assurance fields and confirmation text were added to WO-RLO-011. Implementation is bounded by that work order; no external action is authorized."
 +++
 
 # Capability: Track delivery across all release surfaces

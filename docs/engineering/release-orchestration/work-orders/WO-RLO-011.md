@@ -2,10 +2,15 @@
 id = "WO-RLO-011"
 type = "work_order"
 title = "Add release delivery completion procedure and checks"
-status = "draft"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-09-28"
 updated = "2026-09-28"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "Later release closeout relies on the correctness of the reporting code and required procedure; human mmzen confirmed required commit-bound verification on 2026-09-28."
+decided_by = "mmzen"
 
 [execution_scope]
 paths = [
@@ -30,6 +35,28 @@ paths = [
 implements = ["REQ-RLO-018", "REQ-RLO-019", "REQ-RLO-020"]
 specifications = ["SPEC-RLO-006"]
 verification = ["VER-RLO-008"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-28T19:38:37Z"
+decided_by = "engineering-owner"
+reason = "Human repository owner mmzen: \"I approve\", responding to the seven-artifact release-delivery package and required commit-bound verification request on 2026-09-28. Reviewed SHA-256 01f4390678f4c8c6130b5d5fe6de2acfbb5ffa0aaccb383cc4a069449439f85a; transition input SHA-256 db64efff1d1b0e361702f924fb0cde270e59e5a7564f1d9f3f7ea0b2a500d3c2. Legacy evaluator role engineering-owner records the human decision; Codex applies it. Only the confirmed assurance fields and confirmation text were added to WO-RLO-011. Implementation is bounded by that work order; no external action is authorized."
+scope_paths = ["scripts/check_release_delivery.py", "tests/test_release_delivery.py", "tests/fixtures/release_delivery/", "docs/notes/release-delivery-completion.md", "docs/notes/developing-se-harness.md", "docs/notes/plugin-marketplace-publication.md", "docs/engineering/release-orchestration/capabilities/CAP-RLO-004.md", "docs/engineering/release-orchestration/requirements/REQ-RLO-018.md", "docs/engineering/release-orchestration/requirements/REQ-RLO-019.md", "docs/engineering/release-orchestration/requirements/REQ-RLO-020.md", "docs/engineering/release-orchestration/specifications/SPEC-RLO-006.md", "docs/engineering/release-orchestration/verification/VER-RLO-008.md", "docs/engineering/release-orchestration/work-orders/WO-RLO-011.md", "docs/engineering/release-orchestration/evidence/", "docs/engineering/release-orchestration/verification-records/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-28T19:39:32Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex starts the bounded implementation under mmzen approval of the seven-artifact package and required commit-bound verification."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-28T19:51:53Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Codex records the bounded implementation under mmzen approval. Final focused tests, existing release regressions, the documented example, link review and Git-derived handoff passed. One native symlink test was explicitly skipped because Windows denied symlink creation. No verification acceptance or external action is applied."
 +++
 
 # Work Order: Add release delivery completion procedure and checks
@@ -45,8 +72,9 @@ recorded from that confirmation before approval is previewed.
 ## Proposed assurance
 
 Commit-bound verification: **required**. Later release closeout depends on the
-correctness of this reporting code and required procedure. Human confirmation
-of the classification is pending; no assurance decision-maker is recorded yet.
+correctness of this reporting code and required procedure. Human mmzen confirmed
+this classification with "I approve" in response to the exact package and
+required-verification approval request on 2026-09-28.
 
 ## Objective
 

@@ -2,7 +2,7 @@
 id = "REQ-RLO-019"
 type = "requirement"
 title = "Check delivery identity and public availability"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-09-28"
 updated = "2026-09-28"
@@ -13,6 +13,13 @@ source = "2026-09-28 marketplace audit and approved release-procedure correction
 
 [relations]
 derives_from = ["CAP-RLO-004"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-28T19:38:37Z"
+decided_by = "product-owner"
+reason = "Human repository owner mmzen: \"I approve\", responding to the seven-artifact release-delivery package and required commit-bound verification request on 2026-09-28. Reviewed SHA-256 d86eadf49538b2affdcde226c1bed1f9074b864eac570d9c0cc9334daf66d538; transition input SHA-256 d86eadf49538b2affdcde226c1bed1f9074b864eac570d9c0cc9334daf66d538. Legacy evaluator role product-owner records the human decision; Codex applies it. Only the confirmed assurance fields and confirmation text were added to WO-RLO-011. Implementation is bounded by that work order; no external action is authorized."
 +++
 
 # Requirement: Check delivery identity and public availability

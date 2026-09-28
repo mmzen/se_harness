@@ -2,7 +2,7 @@
 id = "SPEC-RLO-006"
 type = "specification"
 title = "Repository delivery planning and completion checks"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-09-28"
 updated = "2026-09-28"
@@ -10,6 +10,13 @@ contract = "Report completion only when every declared delivery surface has matc
 
 [relations]
 specifies = ["REQ-RLO-018", "REQ-RLO-019", "REQ-RLO-020"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-28T19:38:37Z"
+decided_by = "engineering-owner"
+reason = "Human repository owner mmzen: \"I approve\", responding to the seven-artifact release-delivery package and required commit-bound verification request on 2026-09-28. Reviewed SHA-256 93f82e8118171632319744149ce945617e493ea853134fc505debdd1bf23736a; transition input SHA-256 93f82e8118171632319744149ce945617e493ea853134fc505debdd1bf23736a. Legacy evaluator role engineering-owner records the human decision; Codex applies it. Only the confirmed assurance fields and confirmation text were added to WO-RLO-011. Implementation is bounded by that work order; no external action is authorized."
 +++
 
 # Specification: Repository delivery planning and completion checks

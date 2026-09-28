@@ -2,7 +2,7 @@
 id = "REQ-RLO-018"
 type = "requirement"
 title = "Declare every delivery surface and outstanding handoff"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-09-28"
 updated = "2026-09-28"
@@ -13,6 +13,13 @@ source = "2026-09-28 marketplace audit and approved release-procedure correction
 
 [relations]
 derives_from = ["CAP-RLO-004"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-28T19:38:37Z"
+decided_by = "product-owner"
+reason = "Human repository owner mmzen: \"I approve\", responding to the seven-artifact release-delivery package and required commit-bound verification request on 2026-09-28. Reviewed SHA-256 c793c7622ef3c4fd666d5e6d43f2def577a41a2c5d98df12ac8366a7f01b3ce4; transition input SHA-256 c793c7622ef3c4fd666d5e6d43f2def577a41a2c5d98df12ac8366a7f01b3ce4. Legacy evaluator role product-owner records the human decision; Codex applies it. Only the confirmed assurance fields and confirmation text were added to WO-RLO-011. Implementation is bounded by that work order; no external action is authorized."
 +++
 
 # Requirement: Declare every delivery surface and outstanding handoff

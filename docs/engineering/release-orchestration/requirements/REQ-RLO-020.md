@@ -2,7 +2,7 @@
 id = "REQ-RLO-020"
 type = "requirement"
 title = "Report delivery completion without granting authority"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-09-28"
 updated = "2026-09-28"
@@ -13,6 +13,13 @@ source = "2026-09-28 marketplace audit and approved release-procedure correction
 
 [relations]
 derives_from = ["CAP-RLO-004"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-28T19:38:37Z"
+decided_by = "product-owner"
+reason = "Human repository owner mmzen: \"I approve\", responding to the seven-artifact release-delivery package and required commit-bound verification request on 2026-09-28. Reviewed SHA-256 742575e8789d4693a248a27cb90196995b4eaa92187e4a1eee598acf6db04774; transition input SHA-256 742575e8789d4693a248a27cb90196995b4eaa92187e4a1eee598acf6db04774. Legacy evaluator role product-owner records the human decision; Codex applies it. Only the confirmed assurance fields and confirmation text were added to WO-RLO-011. Implementation is bounded by that work order; no external action is authorized."
 +++
 
 # Requirement: Report delivery completion without granting authority

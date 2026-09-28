@@ -46,6 +46,16 @@ and instructions come from the same source commit; no output overlay is needed.
 
 ## Check and deliver
 
+For a newly planned delivery, use the
+[release delivery handoff](release-delivery-completion.md#perform-and-retain-each-handoff).
+Evaluator publication leaves plugin assembly, qualification and separately
+authorized marketplace publication pending with an owner and next action.
+The original version-specific example above does not select a new package.
+After publication, retain both fresh-install and update observations from the
+actual public ref on each claimed host. Reconcile current availability claims
+and run the [overall completion check](release-delivery-completion.md#run-the-completion-check).
+Local qualification alone does not close that delivery.
+
 1. Run the declared package checks, host validators and local native installation
    acceptance in fresh profiles. Follow VER-PLG-023 and retain actual evidence.
 2. Prepare the commit-bound verification record and obtain its owner decision.

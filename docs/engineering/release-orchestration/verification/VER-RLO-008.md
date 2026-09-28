@@ -2,13 +2,20 @@
 id = "VER-RLO-008"
 type = "verification"
 title = "Release delivery completion and handoff verification"
-status = "draft"
+status = "approved"
 owners = ["mmzen"]
 created = "2026-09-28"
 updated = "2026-09-28"
 
 [relations]
 verifies = ["REQ-RLO-018", "REQ-RLO-019", "REQ-RLO-020"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-28T19:38:37Z"
+decided_by = "quality-owner"
+reason = "Human repository owner mmzen: \"I approve\", responding to the seven-artifact release-delivery package and required commit-bound verification request on 2026-09-28. Reviewed SHA-256 120acb98ef1615017295693cc0aaef6705fbf1f8821a04b5fda270916701ffde; transition input SHA-256 120acb98ef1615017295693cc0aaef6705fbf1f8821a04b5fda270916701ffde. Legacy evaluator role quality-owner records the human decision; Codex applies it. Only the confirmed assurance fields and confirmation text were added to WO-RLO-011. Implementation is bounded by that work order; no external action is authorized."
 +++
 
 # Verification Contract: Release delivery completion and handoff verification
