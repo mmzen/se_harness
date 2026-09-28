@@ -1,0 +1,649 @@
+FFFFF
+======================================================================
+FAIL: test_named_human_approval_starts_for_either_executor (tests.test_delegation_class.LocalDelegationTests.test_named_human_approval_starts_for_either_executor) (executor='Jordan Developer')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_delegation_class.py", line 91, in test_named_human_approval_starts_for_either_executor
+    self.assertEqual(0, code, self.blockers(result, err))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : QGP-G3-SCOPE: WEX-ECP-022: WO-PRD-001.md has no recorded engineering-owner approval
+
+======================================================================
+FAIL: test_named_human_approval_starts_for_either_executor (tests.test_delegation_class.LocalDelegationTests.test_named_human_approval_starts_for_either_executor) (executor='Codex fixture agent')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_delegation_class.py", line 91, in test_named_human_approval_starts_for_either_executor
+    self.assertEqual(0, code, self.blockers(result, err))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : QGP-G3-SCOPE: WEX-ECP-022: WO-PRD-001.md has no recorded engineering-owner approval
+
+======================================================================
+FAIL: test_named_human_approval_starts_for_either_executor (tests.test_delegation_class.LocalDelegationTests.test_named_human_approval_starts_for_either_executor)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_delegation_class.py", line 94, in test_named_human_approval_starts_for_either_executor
+    self.assertEqual(0, code, self.blockers(result, err))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : QGP-G3-SCOPE: WEX-ECP-022: WO-PRD-001.md has no recorded engineering-owner approval
+
+======================================================================
+FAIL: test_capture_accepts_named_approvers_for_every_selected_work_order (tests.test_revision_provenance.RevisionCliTests.test_capture_accepts_named_approvers_for_every_selected_work_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_revision_provenance.py", line 839, in test_capture_accepts_named_approvers_for_every_selected_work_order
+    self.assertEqual(0, code, output + error)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : Outcome
+Blocked.
+
+Done
+None.
+
+Not done
+- The requested workflow operation remains incomplete.
+
+Blocked by
+- WEX-ECP-022: WO-001.md has no recorded engineering-owner approval
+
+Current lifecycle state
+- No lifecycle state was changed.
+
+Decision required
+None.
+
+Next
+remediate (PROC-REMEDIATE/STEP-REMEDIATE-FOCUS).
+
+Command or response
+harnessctl check . --artifact VREC-002
+
+Change set
+None.
+complete: false
+
+Gates
+None.
+
+
+======================================================================
+FAIL: test_named_human_approval_allows_completion_after_handoff (tests.test_workflow_execution.OnePreconditionEngineTests.test_named_human_approval_allows_completion_after_handoff)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_workflow_execution.py", line 1446, in test_named_human_approval_allows_completion_after_handoff
+    self.assertEqual(0, code, output + error)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : {
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {},
+  "operation": {
+    "kind": "check",
+    "outcome": "blocked"
+  },
+  "selection": {
+    "primary": "WO-001",
+    "artifacts": [
+      "WO-001"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-001",
+      "ARCH-001",
+      "CAP-001",
+      "INT-001",
+      "REQ-001",
+      "SPEC-001",
+      "VER-001"
+    ],
+    "dependencies": [],
+    "declared_paths": [
+      "src/"
+    ],
+    "changed_paths": [
+      "src/a.py"
+    ],
+    "change_set_complete": true
+  },
+  "compliance": {
+    "checkpoint": "handoff",
+    "workflow_rule_id": "WFL-WO-IMPLEMENT",
+    "procedure_id": "PROC-WO-IMPLEMENT",
+    "status": "fail",
+    "gates": [
+      {
+        "id": "QG-G4-IMPLEMENTATION-EVIDENCE",
+        "status": "fail",
+        "predicates": [
+          {
+            "id": "QGP-G4I-STATUS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-001"
+              }
+            ],
+            "message": "WO-001 status is in_progress."
+          },
+          {
+            "id": "QGP-G4I-GRAPH",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "formal-graph:WO-001"
+              }
+            ],
+            "message": "The selected formal graph is valid."
+          },
+          {
+            "id": "QGP-G4I-INTEGRITY",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "repository-integrity:handoff"
+              }
+            ],
+            "message": "No repository-integrity blocker prevents selected evaluation."
+          },
+          {
+            "id": "QGP-G4I-SCOPE",
+            "status": "fail",
+            "evidence": [
+              {
+                "kind": "artifact",
+                "reference": "WO-001:[execution_scope]"
+              }
+            ],
+            "message": "WEX-ECP-022: WO-001.md has no recorded engineering-owner approval"
+          },
+          {
+            "id": "QGP-G4I-COMPLETE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "declared-change-set:WO-001"
+              }
+            ],
+            "message": "The caller explicitly asserted that the declared change set is complete."
+          },
+          {
+            "id": "QGP-G4I-PATHS",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "declared-change-set:WO-001"
+              }
+            ],
+            "message": "All 1 declared changed path(s) are within execution scope."
+          },
+          {
+            "id": "QGP-G4I-PREFLIGHT",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "preflight:WO-001:review"
+              }
+            ],
+            "message": "Released-installation review preflight inputs are ready."
+          },
+          {
+            "id": "QGP-G4I-EVIDENCE",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "path",
+                "reference": "work-order-evidence:WO-001"
+              }
+            ],
+            "message": "Fresh retained evidence is bound at docs/engineering/product/evidence/WO-001-verification.md."
+          },
+          {
+            "id": "QGP-G4I-DECISION",
+            "status": "pass",
+            "evidence": [
+              {
+                "kind": "result",
+                "reference": "decision-register:WO-001"
+              }
+            ],
+            "message": "No open decision blocks WO-001."
+          }
+        ]
+      }
+    ],
+    "formal_snapshot_sha256": "a1eee7927aed865154dd4db97b713fd6bb5d2b184bc48c6cb11cd39d2637d44e",
+    "change_set_source": "arguments"
+  },
+  "procedure": {
+    "id": "PROC-WO-IMPLEMENT",
+    "current_step": "STEP-WO-IMPLEMENT-CHECK",
+    "steps": [
+      {
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "Evaluated implementation handoff for WO-001."
+        ],
+        "non_effects": [
+          "A checkpoint does not complete or verify work."
+        ],
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "WO-001",
+          "--checkpoint",
+          "handoff"
+        ],
+        "corrective": {
+          "QGP-G4I-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-START"
+          },
+          "QGP-G4I-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G4I-COMPLETE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-001",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ]
+          },
+          "QGP-G4I-PATHS": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-001",
+              "--phase",
+              "review"
+            ]
+          },
+          "QGP-G4I-EVIDENCE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-001",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "QGP-G4I-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-IMPLEMENT-PREVIEW",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "Plan completion of WO-001."
+        ],
+        "non_effects": [
+          "Completion does not verify, release or deliver the work."
+        ],
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-001=implemented",
+          "--decision",
+          "WO-001=delegated-executor"
+        ],
+        "corrective": {
+          "QGP-G4I-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-START"
+          },
+          "QGP-G4I-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G4I-COMPLETE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-001",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ]
+          },
+          "QGP-G4I-PATHS": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-001",
+              "--phase",
+              "review"
+            ]
+          },
+          "QGP-G4I-EVIDENCE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-001",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "QGP-G4I-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      },
+      {
+        "id": "STEP-WO-IMPLEMENT-APPLY",
+        "kind": "command",
+        "gate_ids": [
+          "QG-G4-IMPLEMENTATION-EVIDENCE"
+        ],
+        "effects": [
+          "Record completion of only WO-001 under its approved execution scope."
+        ],
+        "non_effects": [
+          "Completion does not verify, release or deliver the work."
+        ],
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-001=implemented",
+          "--decision",
+          "WO-001=delegated-executor",
+          "--apply"
+        ],
+        "corrective": {
+          "QGP-G4I-STATUS": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-START"
+          },
+          "QGP-G4I-GRAPH": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-INTEGRITY": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-SCOPE": {
+            "kind": "escalation",
+            "decision_right": "DR-WO-SELECT"
+          },
+          "QGP-G4I-COMPLETE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-001",
+              "--checkpoint",
+              "handoff",
+              "--from-git",
+              "<base>"
+            ]
+          },
+          "QGP-G4I-PATHS": {
+            "kind": "escalation",
+            "decision_right": "DR-REMEDIATION-SCOPE"
+          },
+          "QGP-G4I-PREFLIGHT": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "preflight",
+              ".",
+              "--work-order",
+              "WO-001",
+              "--phase",
+              "review"
+            ]
+          },
+          "QGP-G4I-EVIDENCE": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "evidence",
+              ".",
+              "--artifact",
+              "WO-001",
+              "--checkpoint",
+              "handoff"
+            ]
+          },
+          "QGP-G4I-DECISION": {
+            "kind": "escalation",
+            "decision_right": "DR-DECISION-DISPOSE"
+          }
+        }
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "WO-001",
+        "status": "in_progress"
+      }
+    ],
+    "after": [
+      {
+        "id": "WO-001",
+        "status": "in_progress"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 0
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "blocked",
+    "done": [
+      "Evaluated handoff compliance for WO-001."
+    ],
+    "not_done": [
+      "The handoff checkpoint did not pass."
+    ],
+    "blocked_by": [
+      "QGP-G4I-SCOPE: WEX-ECP-022: WO-001.md has no recorded engineering-owner approval"
+    ],
+    "current_lifecycle_state": [
+      "WO-001 is in_progress."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-CHECK",
+      "action": "Escalate QGP-G4I-SCOPE under DR-WO-SELECT"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Escalate to the accountable owner under DR-WO-SELECT: WEX-ECP-022: WO-001.md has no recorded engineering-owner approval"
+    },
+    "alternatives": []
+  },
+  "instruction_discovery": {
+    "schema": "se-harness-instruction-discovery-v1",
+    "status": "available",
+    "agent_instructions": {
+      "entry": {
+        "file": "ENGINEERING_HARNESS.md",
+        "heading": "read-by-task"
+      },
+      "shared_prerequisites": [
+        {
+          "file": "docs/engineering/harness/COMMUNICATION.md",
+          "heading": "communication",
+          "when": "Before the first eligible English explanation in a fresh context."
+        },
+        {
+          "file": "docs/engineering/harness/RESULTS.md",
+          "heading": "report-a-lifecycle-result",
+          "when": "Before reporting a lifecycle result."
+        }
+      ],
+      "procedure": {
+        "id": "PROC-WO-IMPLEMENT",
+        "location": {
+          "file": "docs/engineering/harness/EXECUTE_WORK.md",
+          "heading": "retain-the-implementation-evidence"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "authority-from-work-approval",
+            "when": "Before using the selected work order's execution grant."
+          }
+        ],
+        "steps": {
+          "STEP-WO-IMPLEMENT-CHECK": {
+            "location": {
+              "file": "docs/engineering/harness/EXECUTE_WORK.md",
+              "heading": "retain-the-implementation-evidence"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "when": "Before using the selected work order's execution grant."
+              }
+            ]
+          },
+          "STEP-WO-IMPLEMENT-PREVIEW": {
+            "location": {
+              "file": "docs/engineering/harness/EXECUTE_WORK.md",
+              "heading": "record-implementation-completion"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "when": "Before using the selected work order's execution grant."
+              }
+            ]
+          },
+          "STEP-WO-IMPLEMENT-APPLY": {
+            "location": {
+              "file": "docs/engineering/harness/EXECUTE_WORK.md",
+              "heading": "record-implementation-completion"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "authority-from-work-approval",
+                "when": "Before using the selected work order's execution grant."
+              }
+            ]
+          }
+        }
+      },
+      "current_step": {
+        "id": "STEP-WO-IMPLEMENT-CHECK",
+        "location": {
+          "file": "docs/engineering/harness/EXECUTE_WORK.md",
+          "heading": "retain-the-implementation-evidence"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "authority-from-work-approval",
+            "when": "Before using the selected work order's execution grant."
+          }
+        ]
+      }
+    },
+    "formal_artifact_ids": [
+      "ADR-001",
+      "ARCH-001",
+      "CAP-001",
+      "INT-001",
+      "REQ-001",
+      "SPEC-001",
+      "VER-001",
+      "WO-001"
+    ],
+    "evaluator_only_inputs": [
+      "docs/engineering/WORKFLOW.json",
+      "docs/engineering/QUALITY_GATES.json"
+    ]
+  },
+  "result_sha256": "a85284302d43da98f25ce27b1f9f1b6870df87c3ff8e083a53ff262bb423476d"
+}
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 3.119s
+
+FAILED (failures=5)

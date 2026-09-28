@@ -816,6 +816,34 @@ class RevisionCliTests(unittest.TestCase):
         self.assertFalse((self.root/"docs/engineering/product/verification-records/VREC-003.md").exists())
         self.assertEqual(1,git(self.root,"worktree","list","--porcelain").count("worktree "))
 
+    def test_capture_accepts_named_approvers_for_every_selected_work_order(self) -> None:
+        self.initialize_candidate(aggregate=True)
+        for number, actor in ((1, "Alex Reviewer"), (2, "Sam Reviewer")):
+            path = self.root / f"docs/engineering/product/work-orders/WO-00{number}.md"
+            content = path.read_text(encoding="utf-8")
+            write(path, content.replace('decided_by = "engineering-owner"',
+                                        f'decided_by = "{actor}"', 1))
+        git(self.root, "add", ".")
+        git(self.root, "-c", "user.name=Harness Test", "-c", "user.email=harness@example.invalid",
+            "commit", "-m", "named human approvals")
+        originals = {path: path.read_bytes() for path in
+                     (self.root / "docs/engineering/product/work-orders").glob("*.md")}
+        code, output, error = invoke(
+            "capture-verification", str(self.root), "--id", "VREC-002",
+            "--work-order", "WO-001", "--work-order", "WO-002",
+            "--verification", "VER-001", "--verification", "VER-002",
+            "--evidence", "docs/engineering/product/evidence/WO-001-verification.md",
+            "--evidence", "docs/engineering/product/evidence/WO-002-verification.md",
+            "--owner", "Codex fixture agent",
+        )
+        self.assertEqual(0, code, output + error)
+        record = (self.root / "docs/engineering/product/verification-records/VREC-002.md").read_text(encoding="utf-8")
+        self.assertIn('status = "ready"', record)
+        self.assertIn('prepared_by = "Codex fixture agent"', record)
+        self.assertNotIn("verified_at =", record)
+        for path, original in originals.items():
+            self.assertEqual(original, path.read_bytes())
+
     def test_capture_requires_implemented_work_order(self) -> None:
         self.initialize_candidate()
         path = self.root / "docs/engineering/product/work-orders/WO-001.md"

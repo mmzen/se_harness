@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "tests.test_delegation_class.LocalDelegationTests.test_named_human_approval_starts_for_either_executor",
+    "tests.test_revision_provenance.RevisionCliTests.test_capture_accepts_named_approvers_for_every_selected_work_order",
+    "tests.test_workflow_execution.OnePreconditionEngineTests.test_named_human_approval_allows_completion_after_handoff"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "exit_code": 1
+}

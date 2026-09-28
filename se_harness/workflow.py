@@ -519,7 +519,7 @@ def plan_transition(
             # Approval and scope are checked by the shared scope predicate below.
             if apply:
                 mutation_guard.require_mutation_authority(root, operation=DELEGATED_RIGHTS[str(right)])
-            effective_reasons[artifact_id] = delegated_reason(str(right), "recorded engineering-owner approval", reasons.get(artifact_id))
+            effective_reasons[artifact_id] = delegated_reason(str(right), "recorded work-order approval", reasons.get(artifact_id))
         path = safe_destination(root, artifact.path.relative_to(root))
         original = path.read_bytes()
         # Plans intentionally expose no execution timestamp. A fixed valid value
