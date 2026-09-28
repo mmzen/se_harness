@@ -2,7 +2,7 @@
 id = "WO-PLG-026"
 type = "work_order"
 title = "Prepare and qualify the 0.2.1 marketplace candidate"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-09-28"
 updated = "2026-09-28"
@@ -58,6 +58,13 @@ to = "in_progress"
 decided_at = "2026-09-28T20:43:02Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex starts the unchanged scope approved by mmzen; plugin 0.2.1 and released evaluator 0.19.0, baseline c4d9036fdaab378f08fe2db68978126f66ab961e."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-28T21:01:12Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Completed approved package scope with 89 passing focused tests, independent composition checks, both Windows native routes and instruction boundary evidence; public delivery remains pending."
 +++
 
 # Prepare and qualify the 0.2.1 marketplace candidate

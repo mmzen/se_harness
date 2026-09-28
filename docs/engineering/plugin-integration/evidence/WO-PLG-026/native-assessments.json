@@ -1,0 +1,289 @@
+{
+  "codex": {
+    "status": "passed",
+    "cases": [
+      {
+        "phase": "startup",
+        "passed": true,
+        "context_count": 1,
+        "expected_error": null,
+        "probe": {
+          "instruction_file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-fresh\\codex\\project\\ENGINEERING_HARNESS.md",
+          "harness_version": "0.19.0",
+          "entry_sha256": "01e3136872ddce43debb4ebf5edf3fb84f6abcb03b494f7921b1d48d5b480e27",
+          "final_heading": "After compaction",
+          "delivery_gap": false,
+          "reason": "Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.",
+          "governed_action_allowed": false
+        },
+        "model_response_assessed": true,
+        "context_sha256": [
+          "9bc164e3288ea9ad53dfe83e50d51729704578f81f5582fcb76c6aad44ecbc55"
+        ],
+        "replies": [
+          "{\n  \"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-fresh\\\\codex\\\\project\\\\ENGINEERING_HARNESS.md\",\n  \"harness_version\": \"0.19.0\",\n  \"entry_sha256\": \"01e3136872ddce43debb4ebf5edf3fb84f6abcb03b494f7921b1d48d5b480e27\",\n  \"final_heading\": \"After compaction\",\n  \"delivery_gap\": false,\n  \"reason\": \"Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.\",\n  \"governed_action_allowed\": false\n}"
+        ]
+      },
+      {
+        "phase": "compact",
+        "passed": true,
+        "context_count": 1,
+        "expected_error": null,
+        "probe": {
+          "instruction_file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-fresh\\codex\\project\\ENGINEERING_HARNESS.md",
+          "harness_version": "0.19.0",
+          "entry_sha256": "01e3136872ddce43debb4ebf5edf3fb84f6abcb03b494f7921b1d48d5b480e27",
+          "final_heading": "After compaction",
+          "delivery_gap": false,
+          "reason": "Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.",
+          "governed_action_allowed": false
+        },
+        "model_response_assessed": true,
+        "context_sha256": [
+          "9bc164e3288ea9ad53dfe83e50d51729704578f81f5582fcb76c6aad44ecbc55"
+        ],
+        "replies": [
+          "{\n  \"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-fresh\\\\codex\\\\project\\\\ENGINEERING_HARNESS.md\",\n  \"harness_version\": \"0.19.0\",\n  \"entry_sha256\": \"01e3136872ddce43debb4ebf5edf3fb84f6abcb03b494f7921b1d48d5b480e27\",\n  \"final_heading\": \"After compaction\",\n  \"delivery_gap\": false,\n  \"reason\": \"Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.\",\n  \"governed_action_allowed\": false\n}"
+        ]
+      }
+    ],
+    "unchanged": true
+  },
+  "codex-boundaries": {
+    "status": "passed",
+    "cases": [
+      {
+        "case": "initial",
+        "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-fresh\\codex\\project",
+        "passed": true,
+        "context_count": 1,
+        "expected_error": null,
+        "probe": {
+          "instruction_file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-fresh\\codex\\project\\ENGINEERING_HARNESS.md",
+          "harness_version": "0.19.0",
+          "entry_sha256": "01e3136872ddce43debb4ebf5edf3fb84f6abcb03b494f7921b1d48d5b480e27",
+          "final_heading": "After compaction",
+          "delivery_gap": false,
+          "reason": "Instruction delivery succeeded. Delivery changes no lifecycle state and grants no decision authority.",
+          "governed_action_allowed": false
+        },
+        "model_response_assessed": true,
+        "context_sha256": [
+          "9bc164e3288ea9ad53dfe83e50d51729704578f81f5582fcb76c6aad44ecbc55"
+        ],
+        "replies": [
+          "{\n  \"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-fresh\\\\codex\\\\project\\\\ENGINEERING_HARNESS.md\",\n  \"harness_version\": \"0.19.0\",\n  \"entry_sha256\": \"01e3136872ddce43debb4ebf5edf3fb84f6abcb03b494f7921b1d48d5b480e27\",\n  \"final_heading\": \"After compaction\",\n  \"delivery_gap\": false,\n  \"reason\": \"Instruction delivery succeeded. Delivery changes no lifecycle state and grants no decision authority.\",\n  \"governed_action_allowed\": false\n}"
+        ]
+      },
+      {
+        "case": "switch",
+        "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-sessions\\switch-repository",
+        "passed": true,
+        "context_count": 1,
+        "expected_error": null,
+        "probe": {
+          "instruction_file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-sessions\\switch-repository\\ENGINEERING_HARNESS.md",
+          "harness_version": "0.19.0",
+          "entry_sha256": "7cbbad1d88dd732942efbb539b7bf9ac5082ad3f49271309e5dbdd7dc23cd5ea",
+          "final_heading": "After compaction",
+          "delivery_gap": false,
+          "reason": "Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.",
+          "governed_action_allowed": false
+        },
+        "model_response_assessed": true,
+        "context_sha256": [
+          "ca6f454ba98d54c6348357dad888355a75bb2b7d8815010572a4fba68976c246"
+        ],
+        "replies": [
+          "{\n  \"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-sessions\\\\switch-repository\\\\ENGINEERING_HARNESS.md\",\n  \"harness_version\": \"0.19.0\",\n  \"entry_sha256\": \"7cbbad1d88dd732942efbb539b7bf9ac5082ad3f49271309e5dbdd7dc23cd5ea\",\n  \"final_heading\": \"After compaction\",\n  \"delivery_gap\": false,\n  \"reason\": \"Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.\",\n  \"governed_action_allowed\": false\n}"
+        ]
+      },
+      {
+        "case": "missing",
+        "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-sessions\\missing-repository",
+        "passed": true,
+        "context_count": 1,
+        "expected_error": "required regular file is unavailable: ENGINEERING_HARNESS.md",
+        "probe": {
+          "instruction_file_path": null,
+          "harness_version": null,
+          "entry_sha256": null,
+          "final_heading": null,
+          "delivery_gap": true,
+          "reason": "required regular file is unavailable: ENGINEERING_HARNESS.md",
+          "governed_action_allowed": false
+        },
+        "model_response_assessed": true,
+        "context_sha256": [
+          "4d982b5e94e33d803975736b1c9763ff15a8dc98e464ab1cfdcdee603b2c138b"
+        ],
+        "replies": [
+          "{\n  \"instruction_file_path\": null,\n  \"harness_version\": null,\n  \"entry_sha256\": null,\n  \"final_heading\": null,\n  \"delivery_gap\": true,\n  \"reason\": \"required regular file is unavailable: ENGINEERING_HARNESS.md\",\n  \"governed_action_allowed\": false\n}"
+        ]
+      },
+      {
+        "case": "mismatch",
+        "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-sessions\\mismatch-repository",
+        "passed": true,
+        "context_count": 1,
+        "expected_error": "do not select the same supported release",
+        "probe": {
+          "instruction_file_path": null,
+          "harness_version": null,
+          "entry_sha256": null,
+          "final_heading": null,
+          "delivery_gap": true,
+          "reason": "SE Harness instruction delivery is unavailable: configuration and installation record do not select the same supported release.",
+          "governed_action_allowed": false
+        },
+        "model_response_assessed": true,
+        "context_sha256": [
+          "f553bf4f6e1364fe9edf23e38862af71e0bb0bf3a8541b53a1ef124e71b2ffc7"
+        ],
+        "replies": [
+          "{\n  \"instruction_file_path\": null,\n  \"harness_version\": null,\n  \"entry_sha256\": null,\n  \"final_heading\": null,\n  \"delivery_gap\": true,\n  \"reason\": \"SE Harness instruction delivery is unavailable: configuration and installation record do not select the same supported release.\",\n  \"governed_action_allowed\": false\n}"
+        ]
+      }
+    ],
+    "unchanged": true
+  },
+  "claude-startup": {
+    "passed": true,
+    "context_count": 1,
+    "expected_error": null,
+    "probe": {
+      "instruction_file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-fresh\\claude\\project\\ENGINEERING_HARNESS.md",
+      "harness_version": "0.19.0",
+      "entry_sha256": "01e3136872ddce43debb4ebf5edf3fb84f6abcb03b494f7921b1d48d5b480e27",
+      "final_heading": "After compaction",
+      "delivery_gap": false,
+      "reason": "SessionStart hook delivered the full harness instruction body with source path, release version, and entry SHA-256 present; document ends at the 'After compaction' section. Delivery is informational only and changes no lifecycle state.",
+      "governed_action_allowed": false
+    },
+    "model_response_assessed": true,
+    "context_sha256": [
+      "cbd217e2ec8d157f2ff8ba4669bde8bfe62f93cb6c993f9c4cdb668c4f7aab56"
+    ],
+    "replies": [
+      "{\"instruction_file_path\":\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-fresh\\\\claude\\\\project\\\\ENGINEERING_HARNESS.md\",\"harness_version\":\"0.19.0\",\"entry_sha256\":\"01e3136872ddce43debb4ebf5edf3fb84f6abcb03b494f7921b1d48d5b480e27\",\"final_heading\":\"After compaction\",\"delivery_gap\":false,\"reason\":\"SessionStart hook delivered the full harness instruction body with source path, release version, and entry SHA-256 present; document ends at the 'After compaction' section. Delivery is informational only and changes no lifecycle state.\",\"governed_action_allowed\":false}"
+    ],
+    "session_id": "5be3b5ce-6655-426a-9bb2-ef4855c7e81f",
+    "test_only_model": "opus",
+    "saved_model_changed": false
+  },
+  "claude-after-compact": {
+    "passed": true,
+    "context_count": 1,
+    "expected_error": null,
+    "probe": {
+      "instruction_file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-fresh\\claude\\project\\ENGINEERING_HARNESS.md",
+      "harness_version": "0.19.0",
+      "entry_sha256": "01e3136872ddce43debb4ebf5edf3fb84f6abcb03b494f7921b1d48d5b480e27",
+      "final_heading": "After compaction",
+      "delivery_gap": false,
+      "reason": "The newest SessionStart hook context delivered the complete harness instruction body, including the source path, selected release 0.19.0, and the 64-hex entry SHA-256; the document ends at the 'After compaction' section.",
+      "governed_action_allowed": false
+    },
+    "model_response_assessed": true,
+    "context_sha256": [
+      "cbd217e2ec8d157f2ff8ba4669bde8bfe62f93cb6c993f9c4cdb668c4f7aab56"
+    ],
+    "replies": [
+      "{\"instruction_file_path\":\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-fresh\\\\claude\\\\project\\\\ENGINEERING_HARNESS.md\",\"harness_version\":\"0.19.0\",\"entry_sha256\":\"01e3136872ddce43debb4ebf5edf3fb84f6abcb03b494f7921b1d48d5b480e27\",\"final_heading\":\"After compaction\",\"delivery_gap\":false,\"reason\":\"The newest SessionStart hook context delivered the complete harness instruction body, including the source path, selected release 0.19.0, and the 64-hex entry SHA-256; the document ends at the 'After compaction' section.\",\"governed_action_allowed\":false}"
+    ],
+    "session_id": "4ae7dc56-308c-45bf-9e82-ac659fb5929e",
+    "test_only_model": "opus",
+    "saved_model_changed": false
+  },
+  "claude-compact-assess": {
+    "passed": true,
+    "native_compact_callbacks": 1,
+    "all_callbacks_full_root": [
+      true
+    ],
+    "limit": "The later resumed interpretation probe also receives startup context. Compaction injection is independently established by the actual SessionStart:compact callback."
+  },
+  "claude-behavior-resume2": {
+    "status": "passed",
+    "cases": [
+      {
+        "case": "initial",
+        "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-fresh\\claude\\project",
+        "passed": true,
+        "context_count": 1,
+        "expected_error": null,
+        "probe": null,
+        "model_response_assessed": false,
+        "context_sha256": [
+          "cbd217e2ec8d157f2ff8ba4669bde8bfe62f93cb6c993f9c4cdb668c4f7aab56"
+        ],
+        "replies": [],
+        "behavior": {
+          "available": true,
+          "may_implement": false,
+          "next_step": "Confirm the repository path and the exact artifact IDs (work order + accepted definitions) in scope, then — with tool use permitted — resolve the evaluator per SETUP.md and run harnessctl check for that scope to get the authoritative lifecycle state and next action before any implementation."
+        },
+        "retained_response": "```json\n{\n  \"available\": true,\n  \"may_implement\": false,\n  \"next_step\": \"Confirm the repository path and the exact artifact IDs (work order + accepted definitions) in scope, then — with tool use permitted — resolve the evaluator per SETUP.md and run harnessctl check for that scope to get the authoritative lifecycle state and next action before any implementation.\"\n}\n```\n\nTwo notes outside the JSON: the harness text itself arrived in this session (SE Harness 0.19.0, from `claude/project/ENGINEERING_HARNESS.md`), which is what `available: true` refers to; the referenced procedure files under `docs/engineering/harness/` I have not read, since you asked me not to use tools. And the delivery states it grants no decision authority, so implementation stays blocked until an approved work order is confirmed via `harnessctl`."
+      },
+      {
+        "case": "switch",
+        "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-sessions\\switch-repository",
+        "passed": true,
+        "context_count": 1,
+        "expected_error": null,
+        "probe": null,
+        "model_response_assessed": false,
+        "context_sha256": [
+          "ca6f454ba98d54c6348357dad888355a75bb2b7d8815010572a4fba68976c246"
+        ],
+        "replies": [],
+        "behavior": {
+          "available": true,
+          "may_implement": false,
+          "next_step": "Confirm the artifact IDs in scope for this newly selected repository (C:\\Users\\mathi\\...\\marketplace-021-sessions\\switch-repository) — the approved work order and the accepted definitions it implements — then, with tool use permitted, resolve the evaluator per SETUP.md and run harnessctl check for that scope to obtain the authoritative lifecycle state and next action."
+        },
+        "retained_response": "```json\n{\n  \"available\": true,\n  \"may_implement\": false,\n  \"next_step\": \"Confirm the artifact IDs in scope for this newly selected repository (C:\\\\Users\\\\mathi\\\\...\\\\marketplace-021-sessions\\\\switch-repository) — the approved work order and the accepted definitions it implements — then, with tool use permitted, resolve the evaluator per SETUP.md and run harnessctl check for that scope to obtain the authoritative lifecycle state and next action.\"\n}\n```\n\nThe working directory changed, and with it the harness source: a different file (`marketplace-021-sessions/switch-repository/ENGINEERING_HARNESS.md`), a different entry SHA-256 (`7cbbad1d…`, previously `01e31368…`), and a different repository title (\"Different selected repository\", previously \"Marketplace acceptance\"). Same release, 0.19.0.\n\nSo `available: true` refers to this repository's instructions, freshly delivered. Nothing from the previous repository's scope carries over — selection is per-repository, and I have no artifact IDs for this one. As before, the delivery grants no decision authority, and I have not read the procedure files under `docs/engineering/harness/` because you asked me not to use tools."
+      },
+      {
+        "case": "missing",
+        "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-sessions\\missing-repository",
+        "passed": true,
+        "context_count": 1,
+        "expected_error": "required regular file is unavailable: ENGINEERING_HARNESS.md",
+        "probe": null,
+        "model_response_assessed": false,
+        "context_sha256": [
+          "4d982b5e94e33d803975736b1c9763ff15a8dc98e464ab1cfdcdee603b2c138b"
+        ],
+        "replies": [],
+        "behavior": {
+          "available": false,
+          "may_implement": false,
+          "next_step": "Report the discovery gap as delivered: ENGINEERING_HARNESS.md is missing for C:\\Users\\mathi\\...\\marketplace-021-sessions\\missing-repository. Confirm the selected repository and its released evaluator, restore the instruction file, then re-run delivery before any governed action."
+        },
+        "retained_response": "```json\n{\n  \"available\": false,\n  \"may_implement\": false,\n  \"next_step\": \"Report the discovery gap as delivered: ENGINEERING_HARNESS.md is missing for C:\\\\Users\\\\mathi\\\\...\\\\marketplace-021-sessions\\\\missing-repository. Confirm the selected repository and its released evaluator, restore the instruction file, then re-run delivery before any governed action.\"\n}\n```\n\nThe working directory changed again and the harness delivery failed this time: the required regular file `ENGINEERING_HARNESS.md` is unavailable, so there is no release or entry SHA for this repository. That is why `available` is now `false`.\n\nThe two harness texts from earlier in this session belonged to other repositories (`marketplace-021-fresh/claude/project` and `switch-repository`, different entry SHAs). I am not carrying them over to this one, and I can't substitute them, infer lifecycle authority, or assume release 0.19.0 applies here. I also can't read `RESULTS.md` for the prescribed gap-reporting format — it lives under the instruction set that isn't available, and you asked me not to use tools.\n\nRead-only discussion and analysis remain available if you want to look at anything in this repository."
+      },
+      {
+        "case": "mismatch",
+        "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-sessions\\mismatch-repository",
+        "passed": true,
+        "context_count": 1,
+        "expected_error": "do not select the same supported release",
+        "probe": null,
+        "model_response_assessed": false,
+        "context_sha256": [
+          "f553bf4f6e1364fe9edf23e38862af71e0bb0bf3a8541b53a1ef124e71b2ffc7"
+        ],
+        "replies": [],
+        "behavior": {
+          "available": false,
+          "may_implement": false,
+          "next_step": "Report the discovery gap as delivered: for C:\\Users\\mathi\\...\\marketplace-021-sessions\\mismatch-repository, the configuration and the installation record do not select the same supported release. Have the repository owner reconcile the two to a single supported release, then re-run delivery before any governed action."
+        },
+        "retained_response": "```json\n{\n  \"available\": false,\n  \"may_implement\": false,\n  \"next_step\": \"Report the discovery gap as delivered: for C:\\\\Users\\\\mathi\\\\...\\\\marketplace-021-sessions\\\\mismatch-repository, the configuration and the installation record do not select the same supported release. Have the repository owner reconcile the two to a single supported release, then re-run delivery before any governed action.\"\n}\n```\n\nDifferent failure from the previous repository: the instruction file isn't missing here — configuration and the installation record disagree on which supported release applies, so no release is validly selected and delivery stopped.\n\nI'm not resolving that disagreement by picking one side. Choosing the configured release over the recorded one (or the reverse) would be a silent upgrade or downgrade of the governing rules, and that call belongs to the repository owner. I'm likewise not reusing the 0.19.0 text delivered earlier for the other two repositories.\n\nRead-only discussion of this repository is still available if that would help diagnose the mismatch."
+      }
+    ],
+    "method": "Ordinary readiness question; full delivered root independently assessed from native callbacks. Earlier provider refusal retained.",
+    "unchanged": true
+  }
+}

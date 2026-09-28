@@ -1,0 +1,19 @@
+{
+  "observed_at": "2026-09-28T20:57:56.811348+00:00",
+  "evaluator": {
+    "version": "0.19.0",
+    "filename": "se_harness-0.19.0-py3-none-any.whl",
+    "wheel_sha256": "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8",
+    "url": "https://files.pythonhosted.org/packages/69/50/39e1768e21e532301795fc4c6d72905735db9516a9c453e33c73b75649ed/se_harness-0.19.0-py3-none-any.whl",
+    "local_wheel_sha256": "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8"
+  },
+  "markers": {
+    "latest": "v0.19.0",
+    "last": "30d4dba2a088c4f83756c1241b76cdab40f796bd"
+  },
+  "methods": [
+    "PyPI version metadata read",
+    "GitHub latest release read",
+    "GitHub last tag peeled to commit"
+  ]
+}

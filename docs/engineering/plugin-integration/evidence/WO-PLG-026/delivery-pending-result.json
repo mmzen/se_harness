@@ -1,0 +1,159 @@
+{
+  "schema": "se-harness-delivery-result/v1",
+  "status": "incomplete",
+  "input_status": "valid",
+  "authority": "derived operational evidence; no lifecycle transition",
+  "limitation": "Assesses supplied, retained observations only. Does not independently run host tests, authenticate human reviews, or establish live public state. Grants no lifecycle or external authority.",
+  "formal_release": {
+    "record": "RLS-SEH-028",
+    "status": "released",
+    "source": "c4d9036fdaab378f08fe2db68978126f66ab961e",
+    "observed_at": "2026-09-28T20:58:48.971819+00:00",
+    "evidence": [
+      {
+        "path": "release-readback.json",
+        "sha256": "a7cde1be9dc5abd394859fa17a0440bf50bb78d2c77555b2265e1bfc403f6d8e"
+      }
+    ]
+  },
+  "evaluator_publication": "satisfied",
+  "observed_at": "2026-09-28T20:58:48.971819+00:00",
+  "surfaces": [
+    {
+      "id": "evaluator",
+      "disposition": "unchanged",
+      "status": "satisfied",
+      "owner": "mmzen",
+      "next_action": "Retain public wheel readback and unchanged compatibility mapping.",
+      "expected": {
+        "record": "RLS-SEH-028",
+        "version": "0.19.0",
+        "wheel_sha256": "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8"
+      },
+      "observation": {
+        "id": "evaluator",
+        "status": "pass",
+        "observed_at": "2026-09-28T20:58:48.971819+00:00",
+        "source": "https://pypi.org/project/se-harness/0.19.0/",
+        "identity": {
+          "record": "RLS-SEH-028",
+          "version": "0.19.0",
+          "wheel_sha256": "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8"
+        },
+        "evidence": {
+          "readback": [
+            {
+              "path": "unchanged-public-readback.json",
+              "sha256": "898ae04189a4f66ef2d55786ff5a625cf428cded937103cfc94b183a86d7d161"
+            }
+          ],
+          "compatibility": [
+            {
+              "path": "compatibility-review.json",
+              "sha256": "491de76e35d7d3f49f68b3740f0278e7cf72bc9ac099e098b6a6a238d2c0b422"
+            }
+          ]
+        }
+      },
+      "findings": []
+    },
+    {
+      "id": "marketplace",
+      "disposition": "update",
+      "status": "pending",
+      "owner": "mmzen",
+      "next_action": "Finish candidate verification, obtain exact publication authorization, then observe fresh/update routes.",
+      "expected": {
+        "plugin_version": "0.2.1",
+        "source_commit": "ce6d5fa4080e2ef0904446aa0b066d907532b63c",
+        "evaluator_version": "0.19.0",
+        "wheel_sha256": "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8",
+        "public_revision": null,
+        "codex_content_sha256": "76e5bfe26c5ffed1b82c4cc7f79cb23189ce5b1935ff53c5375439a7602ebf26",
+        "claude-code_content_sha256": "ef76b3f7fbd3bb3096c912a6b850277706bf838a73c6ca8a1ea787a3d2a2f32a"
+      },
+      "observation": null,
+      "findings": [
+        {
+          "code": "missing",
+          "location": "marketplace",
+          "message": "Surface not observed"
+        }
+      ]
+    },
+    {
+      "id": "documentation",
+      "disposition": "update",
+      "status": "pending",
+      "owner": "mmzen",
+      "next_action": "Verify current guidance, then reconcile and observe merged availability claims after publication.",
+      "expected": {
+        "commit": null
+      },
+      "observation": null,
+      "findings": [
+        {
+          "code": "missing",
+          "location": "documentation",
+          "message": "Surface not observed"
+        }
+      ]
+    },
+    {
+      "id": "demonstration",
+      "disposition": "update",
+      "status": "pending",
+      "owner": "mmzen",
+      "next_action": "Observe deployed demonstration provenance after the authorized integration/publication sequence.",
+      "expected": {
+        "governance_commit": null
+      },
+      "observation": null,
+      "findings": [
+        {
+          "code": "missing",
+          "location": "demonstration",
+          "message": "Surface not observed"
+        }
+      ]
+    },
+    {
+      "id": "release_markers",
+      "disposition": "unchanged",
+      "status": "satisfied",
+      "owner": "mmzen",
+      "next_action": "Retain unchanged latest and last readback. No marker mutation.",
+      "expected": {
+        "latest": "v0.19.0",
+        "last": "30d4dba2a088c4f83756c1241b76cdab40f796bd"
+      },
+      "observation": {
+        "id": "release_markers",
+        "status": "pass",
+        "observed_at": "2026-09-28T20:58:48.971819+00:00",
+        "source": "https://github.com/mmzen/se_harness",
+        "identity": {
+          "latest": "v0.19.0",
+          "last": "30d4dba2a088c4f83756c1241b76cdab40f796bd"
+        },
+        "evidence": {
+          "readback": [
+            {
+              "path": "unchanged-public-readback.json",
+              "sha256": "898ae04189a4f66ef2d55786ff5a625cf428cded937103cfc94b183a86d7d161"
+            }
+          ],
+          "compatibility": [
+            {
+              "path": "compatibility-review.json",
+              "sha256": "491de76e35d7d3f49f68b3740f0278e7cf72bc9ac099e098b6a6a238d2c0b422"
+            }
+          ]
+        }
+      },
+      "findings": []
+    }
+  ],
+  "findings": [],
+  "plan_sha256": "2a21b58e45ed9fe058a7bd7b0a1ffccc8068489a190a986787953ccb22431f38"
+}
