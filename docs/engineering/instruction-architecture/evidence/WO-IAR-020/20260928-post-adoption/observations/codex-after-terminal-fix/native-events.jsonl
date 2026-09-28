@@ -1,0 +1,2 @@
+{"at": "2026-09-28T18:46:00.656253+00:00", "phase": "initialize", "request": {"method": "initialize", "params": {"clientInfo": {"name": "iar_acceptance", "version": "1.0"}, "capabilities": {"experimentalApi": true}}}}
+{"at": "2026-09-28T18:46:00.815340+00:00", "phase": "initialize", "request": {"method": "hooks/list", "params": {"cwds": ["C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness"]}}}

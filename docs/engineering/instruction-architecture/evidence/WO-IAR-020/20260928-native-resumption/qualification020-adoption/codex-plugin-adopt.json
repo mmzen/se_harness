@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+    "plugin",
+    "add",
+    "verity-plane@se-harness",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\qualification020-adoption",
+  "at": "2026-09-28T18:32:13.889875+00:00",
+  "exit_code": 0,
+  "result": {
+    "pluginId": "verity-plane@se-harness",
+    "name": "verity-plane",
+    "marketplaceName": "se-harness",
+    "version": "0.2.0",
+    "installedPath": "C:\\Users\\mathi\\.codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.0",
+    "authPolicy": "ON_INSTALL"
+  },
+  "stderr": ""
+}

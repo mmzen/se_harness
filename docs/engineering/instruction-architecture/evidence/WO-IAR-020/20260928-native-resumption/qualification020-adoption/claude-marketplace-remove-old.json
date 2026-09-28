@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "plugin",
+    "marketplace",
+    "remove",
+    "se-harness",
+    "--scope",
+    "user"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\qualification020-adoption",
+  "at": "2026-09-28T18:32:26.272880+00:00",
+  "exit_code": 0,
+  "result": "√ Successfully removed marketplace: se-harness (from user settings)",
+  "stderr": ""
+}

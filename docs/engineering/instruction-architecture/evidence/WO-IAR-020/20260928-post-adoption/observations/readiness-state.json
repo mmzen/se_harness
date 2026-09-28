@@ -1,0 +1,37 @@
+{
+  "codex_hooks": {
+    "data": [
+      {
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "hooks": [
+          {
+            "key": "verity-plane@se-harness:hooks/hooks.json:session_start:0:0",
+            "eventName": "sessionStart",
+            "handlerType": "command",
+            "command": "python \"C:\\Users\\mathi\\.codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.0/scripts/inject_instructions.py\" --host codex",
+            "async": false,
+            "matcher": "^(startup|resume|clear|compact)$",
+            "timeoutSec": 10,
+            "statusMessage": null,
+            "additionalContextLimit": 5000,
+            "sourcePath": "C:\\Users\\mathi\\.codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.0\\hooks\\hooks.json",
+            "source": "plugin",
+            "pluginId": "verity-plane@se-harness",
+            "displayOrder": 9,
+            "enabled": true,
+            "isManaged": false,
+            "currentHash": "sha256:f297274c31689e31abb00ae43e22a718a8e6242311442e65d5007f4d618839ff",
+            "trustStatus": "untrusted"
+          }
+        ],
+        "warnings": [],
+        "errors": []
+      }
+    ]
+  },
+  "claude_auth": {
+    "loggedIn": false,
+    "authMethod": "none",
+    "apiProvider": "firstParty"
+  }
+}

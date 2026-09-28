@@ -1,0 +1,229 @@
+{
+  "status": "incomplete: real-profile hook trust/authentication and native post-adoption probes remain",
+  "isolated_claude_startup": "pass",
+  "isolated_claude_native_compaction": "pass",
+  "isolated_claude_boundaries": "switch metadata passed; missing/mismatch/uncertain-write operator behavior passed",
+  "original_probe_refusal": "Preserved; no claim that the refused missing-root metadata probe passed. The safer operator-question observations are separate.",
+  "adoption": "Real Codex and Claude user profiles now select reviewed Verity Plane 0.2.0; package bytes and unchanged unrelated plugins/marketplaces verified.",
+  "evaluator": "Repository still selects released 0.19.0. No repository adoption or lifecycle transition occurred.",
+  "uncertain_write_limit": "Hypothetical lost acknowledgement; instruction response checked, not real transaction recovery.",
+  "excluded": "Credentials, raw host debug files, unrelated conversations and fixture trees.",
+  "retained": [
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-after-compact/after-compact.events.json",
+      "sha256": "84e5c736e856e3cbbab1b4661475a9d5267d687d007209fa4830288e97c005a3"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-after-compact/after-compact.invocation.json",
+      "sha256": "9f567ff20b5c8a0cb45e7e23d6984524f1a2916549a8ce53589fa29e21015cc7"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-after-compact-assessment.json",
+      "sha256": "5d1fda370a4b21403ddc42320be9aa176c776a1da9ca3a8936f8fb91ec761a1b"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-behavior-boundaries/mismatch.events.json",
+      "sha256": "29318c3d8326a1eb4c8faeced6ce1aeef3463ce2e77e53dac93618a157f4f8a6"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-behavior-boundaries/mismatch.invocation.json",
+      "sha256": "1ee897d3a346f277ae10071901fc8235782d5be1e8fc704b0f9d0e1421be397d"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-behavior-boundaries/missing.events.json",
+      "sha256": "fdbeb1899fb502c3d80c4e7897c5920580b79defe5a6b495487296edbebee747"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-behavior-boundaries/missing.invocation.json",
+      "sha256": "8b3da7589baf61462a23cb241c50dd7093873b1206196720c11bbcc3b154bf53"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-behavior-boundaries/uncertain-write.events.json",
+      "sha256": "d48c6b7ec57d2b66cb9b9a24a194813f0e13fdf78ff3d6a04ef38f310b45f288"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-behavior-boundaries/uncertain-write.invocation.json",
+      "sha256": "5b1cabf92f441ab93c07d0b3f909c2814289f1ae27198caf966af8f4bf529d33"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-behavior-boundaries-assessment.json",
+      "sha256": "d4c38d7518908e5b4107ed303668e3d20b6ccfcba5a1441f09d58d461f19392f"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-boundaries/missing.events.json",
+      "sha256": "72a3abe76435ad727c68704e5d9b044bb0092369512635b04bd0093694114ed3"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-boundaries/missing.invocation.json",
+      "sha256": "1079e272db020192f135d67b81d1a8cd2ea1b36cb1c5013c3519172e0155ea8e"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-boundaries/switch.events.json",
+      "sha256": "98a433d16bf0333eeb74eadb95814e070d5bcd4dfed0b8bc59f0a281a3687283"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-boundaries/switch.invocation.json",
+      "sha256": "07f69be7cc098f6801b4d7bfcdb909756d02a9544016d08ef410d595bcb55241"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-boundaries-assessment.json",
+      "sha256": "f3cfbc91b869d7e2f40c4e02da3ccab8e68d410dc784eac023c62c5a03ba5149"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-compact/compact.events.json",
+      "sha256": "6b16651e8fea2f59d225dbef0d46dd1da2b38c17cbd05a3edf89d5d57e953f2d"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-compact/compact.invocation.json",
+      "sha256": "63db24408c4194dffdd8854a00340c91baa1d45ceb984b2f05d7f93885d3e56f"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-compact-assessment.json",
+      "sha256": "00682fade8001247cfcb75269012bfc490438267b386646cf4da22d4132ba5bc"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-compact-observation.json",
+      "sha256": "dab88b2c7d9525c2ebba213439ceb30812ce79c613f658ce106a6e89b0b5acee"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-isolated-plugins.json",
+      "sha256": "5ac7a77c83e880d8ea3a837442d70fcce1943ad21a28a16388673f89a9eb847c"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-real-plugins.json",
+      "sha256": "14a73e3164c0557b18c29efe131e4643696d0a270da70f06025b0d57825fc976"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-startup/startup.events.json",
+      "sha256": "ae792ac8c7ecc70281dba638ec6b907f829de553d3f6ab73f5500218fed7df76"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-startup/startup.invocation.json",
+      "sha256": "e9d2594bc33a2fa7999615642393faca5ccc78fba2f57c46b6ad6b86cd289c90"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-startup-reassessment.json",
+      "sha256": "02ed24ca65f6a25ac10168353735ae565f0aac66d378aa2f94a4ebff090e6e4f"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-startup.json",
+      "sha256": "711e9242a7671638565733b2ff9deb06961cd6abeec60ad3eba69059c8c6d815"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/claude-version.json",
+      "sha256": "33987f617d610d18bb57877c5386f7a6d64e21ff0a68fc337fe3689d9af0d7b3"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/codex-real-plugins.json",
+      "sha256": "c063ca7487c636058d71fbfabb323accb36a949a3face729655151f58f6347aa"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/codex-version.json",
+      "sha256": "8632a17654808e130f0555d9c0b9b11d361117acb77141867427f767347b509b"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-host/package-review.json",
+      "sha256": "edc81db5f14dc33e3c030fb8e3bb6f090bb1ad54ef3d88f0afc1b7f210827c69"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/claude-before-replacement.json",
+      "sha256": "ef7d6cc9afffc778227d62f0fe1a6b2e445c54c83c1766c525e29b33bd6c7243"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/claude-marketplace-remove-old.json",
+      "sha256": "98ba47c8533d246622a77fa59073d95a9dca52a85a504bc14af22423f5bb39f9"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/claude-marketplace-replace.json",
+      "sha256": "d276111e15d6d9480877f52e4f897466e07401d7aff3f6776ed4408f9a73199a"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/claude-marketplaces-after.json",
+      "sha256": "ef095657960173c22f3f8116bcd8ce138cfce20e675654313a71c3172bff4e2f"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/claude-marketplaces-before.json",
+      "sha256": "a917f7f6959f07b2f17c2ebb0ecfaa4bf141971fa8cc78d5b775313906344766"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/claude-plugin-adopt.json",
+      "sha256": "4810df95fc19fd0c376e33136e3668fdd46b328bf282d6c4ae8f7856b6b572fa"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/claude-plugins-after.json",
+      "sha256": "5b60395bba7590c889475348ace26afd81fb7d4705e02a01092af9462d00523a"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/claude-plugins-before.json",
+      "sha256": "6b3a8fb7ad1928568c48cb07799fc96a2fc6d526a1307d59a7346ca42753b7b6"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/codex-before-replacement.json",
+      "sha256": "6d5a25b020697962f95ffa8ed77da5b5fd836a384f787b6c0938ecb5b05b800e"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/codex-marketplace-adopt.json",
+      "sha256": "2bcce87fe11c942804a1b1011fe8b8c93f59f93853755fea5e4910679401a883"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/codex-marketplace-remove-old.json",
+      "sha256": "203a059c9d9c1377ade819f497c8050e39a6daa7cb640e4f2a5b86b15c760c57"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/codex-marketplace-replace.json",
+      "sha256": "77a8b7f0c5885576d5b2560e753f2424e6a3336379c8cd3f7f4b7d68423d7a54"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/codex-marketplaces-after.json",
+      "sha256": "1d046316f3cd0d2882dc5284cda000844ca50682c4b18ff959e7b83e649cd1ed"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/codex-marketplaces-before.json",
+      "sha256": "a387ad978d3b96f520fec1378c80821a36159d4d6bbc673efeb6b989eb6376a3"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/codex-plugin-adopt.json",
+      "sha256": "49bf3ab39f0bfce7f1b0e2bc5e0f9ddcefd02e64403f960f07f9344d64d9dde1"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/codex-plugins-after.json",
+      "sha256": "45e77a9ada35678bef7f70bf816068fb7911d9ff58267746fdf0dbb5941310ed"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/codex-plugins-before.json",
+      "sha256": "1b667540e1868e85e047c90b4f24f3c62167bda05cef85670856f0f6fba3d8dc"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/post-adoption-inventory.json",
+      "sha256": "c2ef5304746c313fc1f1eb12a7cd1316dd61bd7cbf06376be313cd32abba9583"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/review.json",
+      "sha256": "c46c2ca09b7d21e78fe4e8c171ae3defb9e8f2755ce5ed03811bd234afe1c05b"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/qualification020-adoption/codex-hook-inventory/native-events.jsonl",
+      "sha256": "2b3adc625ec2ca4f4d4f96da443623f21a5afdab720a50637ecfe05ab9516a1d"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/helpers/qualification020_resume.py",
+      "sha256": "393737e850e59add37196ee0edf5ac49c8f217ac3e3aa30388680c06431b2c41"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/helpers/qualification020_claude.py",
+      "sha256": "9d1bea52a2381ff55dddb4bb1bde7a1d9d15e4466fdb077e7daba338f43773a8"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/helpers/qualification020_adopt.py",
+      "sha256": "ca1020af62838710a466caf42256cc9a06e4d8f073da26704a944e7d02b41604"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/helpers/qualification020_real.py",
+      "sha256": "1be383f9317cddc3d0c62e932062fcd1f921be2faf7afe2e6ce54b8059961359"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-native-resumption/helpers/complete-real-profile-qualification.ps1",
+      "sha256": "76e95693bc271c9d807fc8f02721149693dd2d187685181d8545b77442e7baf7"
+    }
+  ]
+}

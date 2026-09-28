@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "plugin",
+    "list",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\qualification020-adoption",
+  "at": "2026-09-28T18:32:28.355312+00:00",
+  "exit_code": 0,
+  "result": [
+    {
+      "id": "verity-plane@se-harness",
+      "version": "0.2.0",
+      "scope": "user",
+      "enabled": true,
+      "installPath": "C:\\Users\\mathi\\.claude\\plugins\\cache\\se-harness\\verity-plane\\0.2.0",
+      "installedAt": "2026-09-28T18:32:27.370Z",
+      "lastUpdated": "2026-09-28T18:32:27.370Z"
+    }
+  ],
+  "stderr": ""
+}

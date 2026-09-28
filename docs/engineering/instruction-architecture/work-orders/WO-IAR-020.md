@@ -2,7 +2,7 @@
 id = "WO-IAR-020"
 type = "work_order"
 title = "Qualify active plugin instruction delivery"
-status = "in_progress"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-28"
 updated = "2026-09-28"
@@ -39,6 +39,13 @@ to = "in_progress"
 decided_at = "2026-09-28T07:53:47Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex starts the selected work under mmzen's recorded approval and passing start checks."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-28T18:55:05Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Codex completed the approved native qualification and mmzen-authorized exact plugin adoption. VER-IAR-016 evidence records real Codex and Claude startup and compaction, active package bytes, boundary probes, preserved failures and explicit limits. Claude uses session-only opus because its saved model is unavailable. Review preflight and complete-change handoff pass; human commit-bound verification remains pending."
 +++
 
 # Qualify active plugin instruction delivery

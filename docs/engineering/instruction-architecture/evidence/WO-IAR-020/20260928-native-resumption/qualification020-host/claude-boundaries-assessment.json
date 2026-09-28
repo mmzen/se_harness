@@ -1,0 +1,33 @@
+{
+  "host": "claude",
+  "cases": [
+    {
+      "case": "switch",
+      "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\cleanup-native\\boundary-switch",
+      "session_id": "d4ffce27-bb83-4874-b1ce-f021f92cdcfd",
+      "passed": true,
+      "context_count": 1,
+      "expected_error": null,
+      "probe": {
+        "instruction_file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\cleanup-native\\boundary-switch\\ENGINEERING_HARNESS.md",
+        "harness_version": "0.19.0",
+        "entry_sha256": "b21b3589594a1cdea8c72944d3463b7548593a013aa42475872b13d5be3351af",
+        "final_heading": "After compaction",
+        "delivery_gap": false,
+        "reason": "SessionStart hook delivered the harness instruction source, release 0.19.0, and entry SHA-256 in full, ending at the 'After compaction' section; no delivery failure observed.",
+        "governed_action_allowed": false
+      },
+      "model_response_assessed": true,
+      "context_sha256": [
+        "ddf42a688c81e11de9697690fa130425c2a1ac74129eb106ac6b1e44941a73fd"
+      ],
+      "replies": [
+        "{\"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\cleanup-native\\\\boundary-switch\\\\ENGINEERING_HARNESS.md\", \"harness_version\": \"0.19.0\", \"entry_sha256\": \"b21b3589594a1cdea8c72944d3463b7548593a013aa42475872b13d5be3351af\", \"final_heading\": \"After compaction\", \"delivery_gap\": false, \"reason\": \"SessionStart hook delivered the harness instruction source, release 0.19.0, and entry SHA-256 in full, ending at the 'After compaction' section; no delivery failure observed.\", \"governed_action_allowed\": false}"
+      ],
+      "retained_answer": "{\"instruction_file_path\":\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\cleanup-native\\\\boundary-switch\\\\ENGINEERING_HARNESS.md\",\"harness_version\":\"0.19.0\",\"entry_sha256\":\"b21b3589594a1cdea8c72944d3463b7548593a013aa42475872b13d5be3351af\",\"final_heading\":\"After compaction\",\"delivery_gap\":false,\"reason\":\"SessionStart hook delivered the harness instruction source, release 0.19.0, and entry SHA-256 in full, ending at the 'After compaction' section; no delivery failure observed.\",\"governed_action_allowed\":false}"
+    }
+  ],
+  "status": "incomplete",
+  "limit": "The uncertain-write case is a hypothetical lost acknowledgement. It checks instruction use; it does not demonstrate transaction recovery after an actual write.",
+  "error": "Claude exited 1: "
+}

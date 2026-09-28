@@ -1,0 +1,8 @@
+{
+  "reviewed_manifest": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\docs\\engineering\\instruction-architecture\\acceptance\\plugin-adoption\\replacement.json",
+  "reviewed_manifest_sha256": "0f6bc0e6a17f785b9e3d7f241791a17cf55c932cf738384aadbd744fd5f28723",
+  "all_bytes_match": true,
+  "target_version": "0.2.0",
+  "selected_evaluator_unchanged": "0.19.0",
+  "authority": "Human mmzen: Go, continuing the reviewed native qualification and real-profile adoption handoff. Scope is only the se-harness source and verity-plane@se-harness 0.2.0; hook trust is through supported host review."
+}

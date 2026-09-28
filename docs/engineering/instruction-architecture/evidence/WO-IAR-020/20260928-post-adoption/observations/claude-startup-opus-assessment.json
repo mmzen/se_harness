@@ -1,0 +1,26 @@
+{
+  "session_id": "a90f93ba-38bd-42b4-a487-92d6af9248fe",
+  "unchanged": true,
+  "session_model_override": "opus",
+  "saved_model_setting_changed": false,
+  "passed": true,
+  "context_count": 1,
+  "expected_error": null,
+  "probe": {
+    "instruction_file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\ENGINEERING_HARNESS.md",
+    "harness_version": "0.19.0",
+    "entry_sha256": "aee9ed33d732c27ec06de7676450baaa9a05ea54e39906cca3791745be538d74",
+    "final_heading": "After compaction",
+    "delivery_gap": false,
+    "reason": "SessionStart hook delivered the SE Harness instruction source with release 0.19.0 and entry SHA-256; full instruction body received through the final '## After compaction' section.",
+    "governed_action_allowed": false
+  },
+  "model_response_assessed": true,
+  "context_sha256": [
+    "5f9a66ab968d2c75b6103f0355b1cf8b95fc4255e2ec714f9375d6b69f4ad349"
+  ],
+  "replies": [
+    "{\"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\se_harness\\\\ENGINEERING_HARNESS.md\", \"harness_version\": \"0.19.0\", \"entry_sha256\": \"aee9ed33d732c27ec06de7676450baaa9a05ea54e39906cca3791745be538d74\", \"final_heading\": \"After compaction\", \"delivery_gap\": false, \"reason\": \"SessionStart hook delivered the SE Harness instruction source with release 0.19.0 and entry SHA-256; full instruction body received through the final '## After compaction' section.\", \"governed_action_allowed\": false}"
+  ],
+  "retained_answer": "```json\n{\n  \"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\se_harness\\\\ENGINEERING_HARNESS.md\",\n  \"harness_version\": \"0.19.0\",\n  \"entry_sha256\": \"aee9ed33d732c27ec06de7676450baaa9a05ea54e39906cca3791745be538d74\",\n  \"final_heading\": \"After compaction\",\n  \"delivery_gap\": false,\n  \"reason\": \"SessionStart hook delivered the SE Harness instruction source with release 0.19.0 and entry SHA-256; full instruction body received through the final '## After compaction' section.\",\n  \"governed_action_allowed\": false\n}\n```"
+}

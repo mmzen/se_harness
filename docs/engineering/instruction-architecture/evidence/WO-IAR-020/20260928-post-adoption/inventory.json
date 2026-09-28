@@ -1,0 +1,93 @@
+{
+  "qualification": "passed for the recorded Windows native CLI profiles and invocation settings",
+  "host_versions": {
+    "codex": "0.158.0-alpha.2.1",
+    "claude": "2.1.273"
+  },
+  "plugin": "verity-plane@se-harness 0.2.0",
+  "repository_evaluator": "0.19.0",
+  "root_sha256_lf": "aee9ed33d732c27ec06de7676450baaa9a05ea54e39906cca3791745be538d74",
+  "real_profile_startup_and_compaction": "pass on both hosts; full native callback payload retained",
+  "codex_trust": "Exact reviewed hook trusted through native control; no trust bypass.",
+  "claude_model_limit": "Saved model global.anthropic.claude-fable-5-1 is unavailable on the current account. Native probes pass with invocation-only --model opus. Saved preferences unchanged; default-model usability is not qualified.",
+  "other_limits": [
+    "Uncertain-write boundary is a hypothetical lost acknowledgement; no actual transaction recovery claim.",
+    "CLI host evidence does not establish every desktop entry route or future host version.",
+    "Reviewed marketplace is a local workspace directory, not a newly published marketplace release."
+  ],
+  "retained": [
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-post-adoption/observations/after-terminal-fix.json",
+      "sha256": "ff4a2eed1850441e2d71b0e13bdb635e74b6826d01e6dce52bf2273df9f5994f"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-post-adoption/observations/claude-compact-opus/claude-compact-opus.events.json",
+      "sha256": "40c6d92cf47e1bb4178c9c5eaeb4b134f4819526379feec6e14dce8847527f64"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-post-adoption/observations/claude-compact-opus/claude-compact-opus.invocation.json",
+      "sha256": "f8cf99001633a6ac50600cf9e491862ab92c073425806b4d2f871f5e9629f9fe"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-post-adoption/observations/claude-compact-opus-assessment.json",
+      "sha256": "d95a92b1760315056d68ed6151e34eb5f753644565d7d5206ef401ec95003ee6"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-post-adoption/observations/claude-startup/claude-startup.events.json",
+      "sha256": "d3809e1827a28dd39a29e5762771d01af0cfbfc1a1ab471269228162828e8df7"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-post-adoption/observations/claude-startup/claude-startup.invocation.json",
+      "sha256": "3b777678c254739567ff204654aa8e6c5326befb06b147bfad3c70b13fc8ecc4"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-post-adoption/observations/claude-startup-opus/claude-startup-opus.events.json",
+      "sha256": "7d172cbb0f8bec73a56a29a4d54db0850079ddd9ea2fd2520b5dd3a9798b3c93"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-post-adoption/observations/claude-startup-opus/claude-startup-opus.invocation.json",
+      "sha256": "0a8ed00228c1391a96c5ded01858ec18ff061c6d7ad158bdfd34efa34aa2ec35"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-post-adoption/observations/claude-startup-opus-assessment.json",
+      "sha256": "357819164b9ac3804a12c9daae17d9cf180ba663a065979f740f58ea6c86566e"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-post-adoption/observations/codex-after-terminal-fix/native-events.jsonl",
+      "sha256": "b3f33f77b186c87009f27fd7724dcc9f4b96be6eddcd397bfb0c387e20a04525"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-post-adoption/observations/codex-native/native-events.jsonl",
+      "sha256": "6ed57f7f986ebb6f639801565ee8d0bac6ecf7468224c3d2ec40ce9e05e14dce"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-post-adoption/observations/codex-native-assessment.json",
+      "sha256": "15e02966ce1d6f4c8f63c4c02dee933ef5ff3858eba04bb42f4c2084a7fdeb68"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-post-adoption/observations/codex-ready-check/native-events.jsonl",
+      "sha256": "ab65d1b6aead0b69260467c4caab02bed7ddc7a4077a36083e2ab7e7607c41ac"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-post-adoption/observations/readiness-state.json",
+      "sha256": "3c5c5ca959f0c324d6dd3e1eba0a653f429e6e39d3fd87b4411dcfa970451e46"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-post-adoption/observations/runtime-model-context.json",
+      "sha256": "396fa92d57ec91134152312fd0cc306884b78ef9d1c2799d9c4372971815d758"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-post-adoption/helpers/qualification020_real.py",
+      "sha256": "e008899bac5ff4d7e4a80ff65034095b66aebba7bbe41329aed22f48e235b8d9"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-post-adoption/helpers/complete-real-profile-qualification.ps1",
+      "sha256": "1fc710d0c02e900f4039d35aac9d287fd1a66ad1babe9da1d3d8bdcac03af813"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/20260928-post-adoption/helpers/acceptance_native.py",
+      "sha256": "370159fb9ce9f8883901e4988a371f9e6ede0906d0c6c4ec8f19c82cd8cf3ed8"
+    }
+  ],
+  "earlier_evidence": "20260928-native-resumption/inventory.json and inventory-of-evidence.json remain preserved historical snapshots."
+}

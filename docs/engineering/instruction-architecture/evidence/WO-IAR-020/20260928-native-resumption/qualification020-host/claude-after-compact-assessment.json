@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "context_count": 1,
+  "expected_error": null,
+  "probe": {
+    "instruction_file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\cleanup-native\\claude-repository\\ENGINEERING_HARNESS.md",
+    "harness_version": "0.19.0",
+    "entry_sha256": "b21b3589594a1cdea8c72944d3463b7548593a013aa42475872b13d5be3351af",
+    "final_heading": "After compaction",
+    "delivery_gap": false,
+    "reason": "Instruction delivery succeeded: the newest SessionStart hook context supplied the instruction source path, selected release 0.19.0, and the entry SHA-256, followed by the full ENGINEERING_HARNESS.md body ending at the 'After compaction' section.",
+    "governed_action_allowed": false
+  },
+  "model_response_assessed": true,
+  "context_sha256": [
+    "36d25289be818fc9d7d7e280b94f6f8ac2c39fed0b52cff1192c024222f5e314"
+  ],
+  "replies": [
+    "{\"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\cleanup-native\\\\claude-repository\\\\ENGINEERING_HARNESS.md\", \"harness_version\": \"0.19.0\", \"entry_sha256\": \"b21b3589594a1cdea8c72944d3463b7548593a013aa42475872b13d5be3351af\", \"final_heading\": \"After compaction\", \"delivery_gap\": false, \"reason\": \"Instruction delivery succeeded: the newest SessionStart hook context supplied the instruction source path, selected release 0.19.0, and the entry SHA-256, followed by the full ENGINEERING_HARNESS.md body ending at the 'After compaction' section.\", \"governed_action_allowed\": false}"
+  ],
+  "retained_answer": "{\"instruction_file_path\":\"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\cleanup-native\\\\claude-repository\\\\ENGINEERING_HARNESS.md\",\"harness_version\":\"0.19.0\",\"entry_sha256\":\"b21b3589594a1cdea8c72944d3463b7548593a013aa42475872b13d5be3351af\",\"final_heading\":\"After compaction\",\"delivery_gap\":false,\"reason\":\"Instruction delivery succeeded: the newest SessionStart hook context supplied the instruction source path, selected release 0.19.0, and the entry SHA-256, followed by the full ENGINEERING_HARNESS.md body ending at the 'After compaction' section.\",\"governed_action_allowed\":false}",
+  "session_id": "2381d5e4-a122-4a31-8ce1-9e96767f2f69"
+}

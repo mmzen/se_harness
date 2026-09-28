@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "native_compact_callbacks": 1,
+  "each_payload_is_full_current_root": [
+    true
+  ],
+  "entry_sha256": "b21b3589594a1cdea8c72944d3463b7548593a013aa42475872b13d5be3351af",
+  "unchanged": true,
+  "interpretation_probe_passed": true,
+  "interpretation_limit": "The follow-up native process resumes/forks the compacted session and also receives its normal fresh SessionStart context. The retained compact callback independently proves injection during compaction."
+}
