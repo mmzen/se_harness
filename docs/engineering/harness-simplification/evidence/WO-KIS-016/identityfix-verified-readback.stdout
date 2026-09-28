@@ -1,0 +1,290 @@
+{
+  "schema": "se-harness-workflow-result-v2",
+  "digest_format": "machine-fields-v1",
+  "candidate": {
+    "commit": "06b27bef95ee78a7880b87de2d7aa4870379fbef",
+    "git_object_format": "sha1"
+  },
+  "operation": {
+    "kind": "check",
+    "outcome": "completed"
+  },
+  "selection": {
+    "primary": "VREC-KIS-016",
+    "artifacts": [
+      "VREC-KIS-016"
+    ]
+  },
+  "scope": {
+    "mode": "selected",
+    "governing": [
+      "ADR-KIS-002",
+      "ARCH-KIS-002",
+      "CAP-KIS-003",
+      "INT-KIS-003",
+      "REQ-KIS-009",
+      "SPEC-KIS-003",
+      "VER-KIS-009",
+      "WO-KIS-016"
+    ],
+    "dependencies": [],
+    "declared_paths": [],
+    "changed_paths": [],
+    "change_set_complete": false
+  },
+  "compliance": {
+    "checkpoint": "pre-action",
+    "workflow_rule_id": "WFL-VREC-DELIVER",
+    "procedure_id": "PROC-DELIVERY-SELECT",
+    "status": "not_assessable",
+    "gates": []
+  },
+  "procedure": {
+    "id": "PROC-DELIVERY-SELECT",
+    "current_step": "STEP-DELIVERY-SELECT",
+    "steps": [
+      {
+        "id": "STEP-DELIVERY-SELECT",
+        "kind": "decision",
+        "gate_ids": [
+          "QG-G4-VERIFIED-COVERAGE"
+        ],
+        "effects": [
+          "Selects one delivery path."
+        ],
+        "non_effects": [
+          "Selection performs no repository or release action."
+        ],
+        "decision_right": "DR-DELIVERY-SELECT",
+        "role": "repository-owner or release-owner",
+        "artifact": "VREC-KIS-016",
+        "decision": "which separately authorized delivery path to select",
+        "outcomes": [
+          "repository-integration",
+          "release-preparation",
+          "stop"
+        ],
+        "response": "Select one separately authorized delivery path for VREC-KIS-016."
+      }
+    ]
+  },
+  "state": {
+    "before": [
+      {
+        "id": "VREC-KIS-016",
+        "status": "verified"
+      }
+    ],
+    "after": [
+      {
+        "id": "VREC-KIS-016",
+        "status": "verified"
+      }
+    ]
+  },
+  "findings": {
+    "scoped_blockers": [],
+    "repository_blockers": [],
+    "unrelated_count": 52
+  },
+  "mutation": {
+    "writes": []
+  },
+  "restitution": {
+    "outcome": "completed",
+    "done": [
+      "Recorded the assurance decision for VREC-KIS-016; referenced work orders were not changed."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "VREC-KIS-016 is verified."
+    ],
+    "decision_required": {
+      "decision_right": "DR-DELIVERY-SELECT",
+      "role": "repository-owner or release-owner",
+      "artifact": "VREC-KIS-016",
+      "decision": "which separately authorized delivery path to select",
+      "outcomes": [
+        "repository-integration",
+        "release-preparation",
+        "stop"
+      ]
+    },
+    "next": {
+      "procedure_id": "PROC-DELIVERY-SELECT",
+      "step_id": "STEP-DELIVERY-SELECT",
+      "action": "which separately authorized delivery path to select"
+    },
+    "command_or_response": {
+      "kind": "response",
+      "value": "Select one separately authorized delivery path for VREC-KIS-016."
+    },
+    "alternatives": [
+      "Use complete alternative procedure PROC-REPOSITORY-INTEGRATION."
+    ]
+  },
+  "instruction_discovery": {
+    "schema": "se-harness-instruction-discovery-v1",
+    "status": "available",
+    "agent_instructions": {
+      "entry": {
+        "file": "ENGINEERING_HARNESS.md",
+        "heading": "read-by-task"
+      },
+      "shared_prerequisites": [
+        {
+          "file": "docs/engineering/harness/COMMUNICATION.md",
+          "heading": "communication",
+          "when": "Before the first eligible English explanation in a fresh context."
+        },
+        {
+          "file": "docs/engineering/harness/RESULTS.md",
+          "heading": "report-a-lifecycle-result",
+          "when": "Before reporting a lifecycle result."
+        }
+      ],
+      "procedure": {
+        "id": "PROC-DELIVERY-SELECT",
+        "location": {
+          "file": "docs/engineering/harness/DELIVER_RESULT.md",
+          "heading": "select-the-delivery-action"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "decision-rights",
+            "when": "Before obtaining or applying an accountable decision."
+          }
+        ],
+        "steps": {
+          "STEP-DELIVERY-SELECT": {
+            "location": {
+              "file": "docs/engineering/harness/DELIVER_RESULT.md",
+              "heading": "select-the-delivery-action"
+            },
+            "prerequisites": [
+              {
+                "file": "docs/engineering/harness/AUTHORITY.md",
+                "heading": "decision-rights",
+                "when": "Before obtaining or applying an accountable decision."
+              }
+            ]
+          }
+        }
+      },
+      "current_step": {
+        "id": "STEP-DELIVERY-SELECT",
+        "location": {
+          "file": "docs/engineering/harness/DELIVER_RESULT.md",
+          "heading": "select-the-delivery-action"
+        },
+        "prerequisites": [
+          {
+            "file": "docs/engineering/harness/AUTHORITY.md",
+            "heading": "decision-rights",
+            "when": "Before obtaining or applying an accountable decision."
+          }
+        ]
+      }
+    },
+    "formal_artifact_ids": [
+      "ADR-KIS-002",
+      "ARCH-KIS-002",
+      "CAP-KIS-003",
+      "INT-KIS-003",
+      "REQ-KIS-009",
+      "SPEC-KIS-003",
+      "VER-KIS-009",
+      "VREC-KIS-016",
+      "WO-KIS-016"
+    ],
+    "evaluator_only_inputs": [
+      "docs/engineering/WORKFLOW.json",
+      "docs/engineering/QUALITY_GATES.json"
+    ],
+    "formal_artifacts": [
+      {
+        "id": "ADR-KIS-002",
+        "file": "docs/engineering/harness-simplification/architecture/adr/ADR-KIS-002.md"
+      },
+      {
+        "id": "ARCH-KIS-002",
+        "file": "docs/engineering/harness-simplification/architecture/ARCH-KIS-002.md"
+      },
+      {
+        "id": "CAP-KIS-003",
+        "file": "docs/engineering/harness-simplification/capabilities/CAP-KIS-003.md"
+      },
+      {
+        "id": "INT-KIS-003",
+        "file": "docs/engineering/harness-simplification/intent/INT-KIS-003.md"
+      },
+      {
+        "id": "REQ-KIS-009",
+        "file": "docs/engineering/harness-simplification/requirements/REQ-KIS-009.md"
+      },
+      {
+        "id": "SPEC-KIS-003",
+        "file": "docs/engineering/harness-simplification/specifications/SPEC-KIS-003.md"
+      },
+      {
+        "id": "VER-KIS-009",
+        "file": "docs/engineering/harness-simplification/verification/VER-KIS-009.md"
+      },
+      {
+        "id": "VREC-KIS-016",
+        "file": "docs/engineering/harness-simplification/verification-records/VREC-KIS-016.md"
+      },
+      {
+        "id": "WO-KIS-016",
+        "file": "docs/engineering/harness-simplification/work-orders/WO-KIS-016.md"
+      }
+    ]
+  },
+  "result_sha256": "5f6f0adba547f53430c9ea04bb7f8e26097fc3c440bcc31bc1a7a5576773a931",
+  "context": {
+    "reading_manifest": [
+      "ENGINEERING_HARNESS.md",
+      "docs/engineering/harness-simplification/intent/INT-KIS-003.md",
+      "docs/engineering/harness-simplification/capabilities/CAP-KIS-003.md",
+      "docs/engineering/harness-simplification/requirements/REQ-KIS-009.md",
+      "docs/engineering/harness-simplification/specifications/SPEC-KIS-003.md",
+      "docs/engineering/harness-simplification/architecture/ARCH-KIS-002.md",
+      "docs/engineering/harness-simplification/architecture/adr/ADR-KIS-002.md",
+      "docs/engineering/harness-simplification/verification/VER-KIS-009.md",
+      "docs/engineering/harness-simplification/work-orders/WO-KIS-016.md"
+    ],
+    "governing": [
+      "ADR-KIS-002",
+      "ARCH-KIS-002",
+      "CAP-KIS-003",
+      "INT-KIS-003",
+      "REQ-KIS-009",
+      "SPEC-KIS-003",
+      "VER-KIS-009",
+      "WO-KIS-016"
+    ],
+    "declared_paths": [],
+    "state": {
+      "status": "verified",
+      "family": "verification_record"
+    },
+    "next": {
+      "argv": [],
+      "procedure_id": "PROC-DELIVERY-SELECT",
+      "step_id": "STEP-DELIVERY-SELECT"
+    },
+    "decision_required": {
+      "decision_right": "DR-DELIVERY-SELECT",
+      "role": "repository-owner or release-owner",
+      "artifact": "VREC-KIS-016",
+      "decision": "which separately authorized delivery path to select",
+      "outcomes": [
+        "repository-integration",
+        "release-preparation",
+        "stop"
+      ]
+    }
+  }
+}

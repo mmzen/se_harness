@@ -2,10 +2,10 @@
 id = "VREC-KIS-016"
 type = "verification_record"
 title = "Verification candidate for WO-KIS-016"
-status = "ready"
+status = "verified"
 owners = ["Codex agent"]
 created = "2026-09-27"
-updated = "2026-09-27"
+updated = "2026-09-28"
 commit = "06b27bef95ee78a7880b87de2d7aa4870379fbef"
 git_object_format = "sha1"
 worktree_state = "clean"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/harness-simplification/evidence/WO-KIS-016/W
 evaluator_evidence_path = "docs/engineering/harness-simplification/evidence/VREC-KIS-016-evaluator.json"
 evaluator_evidence_sha256 = "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2"
 
+verified_at = "2026-09-28T05:26:55Z"
+verified_by = "Requesting human in this conversation (assurance owner)"
 [relations]
 verifies_work_order = ["WO-KIS-016"]
 conforms_to = ["VER-KIS-009"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-28T05:26:55Z"
+decided_by = "Requesting human in this conversation (assurance owner)"
+reason = "On 2026-09-28 the requesting human in this conversation, acting as assurance owner, explicitly stated \"I verify VREC-KIS-016\" after review of the prepared record and evidence. Record that exact verification decision for candidate 06b27bef95ee78a7880b87de2d7aa4870379fbef and the unchanged 61 selected evidence files. Reviewed ready-record SHA-256: 9fb40339fa603bae0b2cc43f2433ffb0587b6327c7529ec67ebd47cc110203d3. Hosted CI remains required before integration. This decision does not authorize push, PR creation, merge, release or adoption."
 +++
 
 # Verification Record Candidate

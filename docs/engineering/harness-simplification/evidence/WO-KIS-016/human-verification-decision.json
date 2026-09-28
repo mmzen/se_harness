@@ -1,0 +1,17 @@
+{
+  "decision": "I verify VREC-KIS-016",
+  "decision_date": "2026-09-28",
+  "accountable_human": "Requesting human in this conversation (assurance owner)",
+  "reviewed_inputs": {
+    "record": "docs/engineering/harness-simplification/verification-records/VREC-KIS-016.md",
+    "record_sha256": "9fb40339fa603bae0b2cc43f2433ffb0587b6327c7529ec67ebd47cc110203d3",
+    "candidate": "06b27bef95ee78a7880b87de2d7aa4870379fbef",
+    "evaluator_evidence_sha256": "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2",
+    "evidence_manifest": "identityfix-capture-inputs.json"
+  },
+  "selected_evidence_files_rechecked": 61,
+  "applied_status": "verified",
+  "verified_at": "2026-09-28T05:26:55Z",
+  "verified_by": "Requesting human in this conversation (assurance owner)",
+  "record_sha256_after": "ec8adfd93cb508e71c5e9a247ff03809a6aefa99daf8032a8c59f8f8dcb24419"
+}
