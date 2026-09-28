@@ -29,9 +29,9 @@ authority for any PR creation or update.
 
 **Actions:**
 
-1. Identify the complete set of work orders covering the PR diff. The selected
-   0.18.0 PR checker accepts work orders in `approved`, `in_progress`, or
-   `implemented`. Do not reset a later state to fit this checker.
+1. Identify the complete set of work orders covering the PR diff. Use the
+   selected released PR checker's eligibility result. Do not reset a later
+   state to fit the checker.
 2. For one work order, generate its body with `pr-body` and review the result.
 3. For several work orders, prepare one body with the combined scope and
    verification summary. Use exactly one plural declaration; do not concatenate
@@ -86,7 +86,7 @@ change set. A changed body, candidate, or base requires a new check.
 
 **Later use:** Use the current result with the selected integration procedure
 and its external-action authority. Required CI still applies. Repository
-exception support remains the explicit open item under Shared policy.
+exception support is described in [EXCEPTIONS.md#availability](EXCEPTIONS.md#availability).
 
 ## Read next when
 

@@ -1,0 +1,94 @@
+[
+  {
+    "dimension": "Efficiency",
+    "score": 6.5,
+    "reason": "The agent reaches the right procedure with fewer initial reads, but repeated checks, broad file reads and the older installed adapters still add work.",
+    "criteria": [
+      [
+        "Task routing",
+        2.2
+      ],
+      [
+        "Avoided repetition",
+        1.5
+      ],
+      [
+        "Procedure effort",
+        1.6
+      ],
+      [
+        "Adapter alignment",
+        1.2
+      ]
+    ]
+  },
+  {
+    "dimension": "Clarity",
+    "score": 7.0,
+    "reason": "The procedural format and authority boundaries are clear. Stale template references, a release-version label and provider-specific wording still require interpretation.",
+    "criteria": [
+      [
+        "Concrete steps and outputs",
+        2.2
+      ],
+      [
+        "Decision boundaries",
+        2.0
+      ],
+      [
+        "Terminology and references",
+        1.5
+      ],
+      [
+        "Cross-surface consistency",
+        1.3
+      ]
+    ]
+  },
+  {
+    "dimension": "Discoverability",
+    "score": 7.5,
+    "reason": "The root router and evaluator return precise reading destinations. The exposed plugin cache and references outside the main collection do not yet consistently follow that route.",
+    "criteria": [
+      [
+        "Entry route",
+        2.3
+      ],
+      [
+        "Evaluator mapping",
+        2.4
+      ],
+      [
+        "Deep references",
+        1.7
+      ],
+      [
+        "Installed entry consistency",
+        1.1
+      ]
+    ]
+  },
+  {
+    "dimension": "Context management",
+    "score": 7.5,
+    "reason": "Startup content is much smaller and conditional reading is explicit. Whole-file reading, repeated result fields and limited root-delivery headroom remain concerns.",
+    "criteria": [
+      [
+        "Startup size",
+        2.3
+      ],
+      [
+        "Conditional loading",
+        2.2
+      ],
+      [
+        "Recovery after compaction",
+        1.9
+      ],
+      [
+        "Remaining overhead and margin",
+        1.1
+      ]
+    ]
+  }
+]

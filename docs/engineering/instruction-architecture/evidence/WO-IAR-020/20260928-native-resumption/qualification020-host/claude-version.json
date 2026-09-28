@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "--version"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\qualification020-host",
+  "exit_code": 0,
+  "result": "2.1.273 (Claude Code)",
+  "stderr": ""
+}

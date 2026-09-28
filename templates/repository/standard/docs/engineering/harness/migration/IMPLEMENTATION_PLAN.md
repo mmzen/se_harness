@@ -27,6 +27,18 @@ Validate clean installation, upgrades, LF/CRLF preservation, refusal, interrupte
 writes and retry on supported platforms. Keep native host traces distinct from
 simulated tests. A file split alone does not establish delivery or migration safety.
 
+## Compatibility-guide retirement
+
+Fresh installations no longer seed the six former human guides. Supported
+upgrades preserve 0.19.0 owner bytes and remove the obsolete seed tracking;
+the recognized 0.18.0 full-guide conversion remains a version-conditioned
+migration. Its customized guides still require an explicit owner plan.
+
+Use [Retired guide files](../UPGRADE.md#retired-guide-files) for these upgrade
+cases and the separate pointer-cleanup procedure. Release and repository
+adoption remain separate decisions. Product retirement does not authorize
+deleting this repository's installed copies or rewriting historical references.
+
 ## Deferred capabilities
 
 Owner-configured exception evaluation and generic accepted-definition linked

@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-B",
+    "-m",
+    "unittest",
+    "tests.test_artifact_catalog.ArtifactCatalogTests.test_work_order_template_expresses_conditional_architecture",
+    "tests.test_installer.InstructionMigrationTests.test_recognized_fragments_preserve_all_owner_bytes"
+  ],
+  "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar021-baseline-tymqktcf",
+  "baseline": "fd05dc9f28452c906e764a37570342acbabd09b9",
+  "exit_code": 1,
+  "note": "Git archive uses LF, separate from Windows checkout CRLF fixtures."
+}

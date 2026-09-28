@@ -1,0 +1,37 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+    "plugin",
+    "marketplace",
+    "list",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\qualification020-adoption",
+  "at": "2026-09-28T18:29:48.318124+00:00",
+  "exit_code": 0,
+  "result": {
+    "marketplaces": [
+      {
+        "name": "openai-primary-runtime",
+        "root": "C:\\Users\\mathi\\.cache\\codex-runtimes\\codex-primary-runtime\\plugins\\openai-primary-runtime"
+      },
+      {
+        "name": "openai-bundled",
+        "root": "C:\\Users\\mathi\\.codex\\.tmp\\bundled-marketplaces\\openai-bundled"
+      },
+      {
+        "name": "se-harness",
+        "root": "C:\\Users\\mathi\\.codex\\.tmp\\marketplaces\\se-harness",
+        "marketplaceSource": {
+          "sourceType": "git",
+          "source": "https://github.com/mmzen/se_harness.git"
+        }
+      },
+      {
+        "name": "openai-curated",
+        "root": "C:\\Users\\mathi\\.codex\\.tmp\\plugins"
+      }
+    ]
+  },
+  "stderr": ""
+}

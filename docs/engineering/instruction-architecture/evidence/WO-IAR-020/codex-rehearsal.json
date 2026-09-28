@@ -1,0 +1,53 @@
+{
+  "host": "codex",
+  "profile": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\codex\\codex",
+  "fixture": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\cleanup-native\\repository",
+  "status": "passed",
+  "cases": [
+    {
+      "phase": "startup",
+      "passed": true,
+      "context_count": 1,
+      "expected_error": null,
+      "probe": {
+        "instruction_file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\cleanup-native\\repository\\ENGINEERING_HARNESS.md",
+        "harness_version": "0.19.0",
+        "entry_sha256": "b21b3589594a1cdea8c72944d3463b7548593a013aa42475872b13d5be3351af",
+        "final_heading": "After compaction",
+        "delivery_gap": false,
+        "reason": "Instruction delivery succeeded. Delivery changes no lifecycle state and grants no decision authority.",
+        "governed_action_allowed": false
+      },
+      "model_response_assessed": true,
+      "context_sha256": [
+        "e738893b863660b694a37a9f77907d8085154ffb301e48d2ed4ad54550c88b4e"
+      ],
+      "replies": [
+        "{\n  \"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\cleanup-native\\\\repository\\\\ENGINEERING_HARNESS.md\",\n  \"harness_version\": \"0.19.0\",\n  \"entry_sha256\": \"b21b3589594a1cdea8c72944d3463b7548593a013aa42475872b13d5be3351af\",\n  \"final_heading\": \"After compaction\",\n  \"delivery_gap\": false,\n  \"reason\": \"Instruction delivery succeeded. Delivery changes no lifecycle state and grants no decision authority.\",\n  \"governed_action_allowed\": false\n}"
+      ]
+    },
+    {
+      "phase": "compact",
+      "passed": true,
+      "context_count": 1,
+      "expected_error": null,
+      "probe": {
+        "instruction_file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\cleanup-native\\repository\\ENGINEERING_HARNESS.md",
+        "harness_version": "0.19.0",
+        "entry_sha256": "b21b3589594a1cdea8c72944d3463b7548593a013aa42475872b13d5be3351af",
+        "final_heading": "After compaction",
+        "delivery_gap": false,
+        "reason": "Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.",
+        "governed_action_allowed": false
+      },
+      "model_response_assessed": true,
+      "context_sha256": [
+        "e738893b863660b694a37a9f77907d8085154ffb301e48d2ed4ad54550c88b4e"
+      ],
+      "replies": [
+        "{\n  \"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\cleanup-native\\\\repository\\\\ENGINEERING_HARNESS.md\",\n  \"harness_version\": \"0.19.0\",\n  \"entry_sha256\": \"b21b3589594a1cdea8c72944d3463b7548593a013aa42475872b13d5be3351af\",\n  \"final_heading\": \"After compaction\",\n  \"delivery_gap\": false,\n  \"reason\": \"Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.\",\n  \"governed_action_allowed\": false\n}"
+      ]
+    }
+  ],
+  "unchanged": true
+}

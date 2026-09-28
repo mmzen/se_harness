@@ -1,0 +1,12 @@
+{
+  "build_source_base": "d0e94b1cc50be9972aec85d5f64064b3361aeb06",
+  "unchanged_production_inputs": true,
+  "changed_nonproduction_inputs": [
+    "docs/notes/harnessctl-reference.md",
+    "tests/test_release_build.py"
+  ],
+  "sdist_source_differences": [
+    "tests/test_release_build.py"
+  ],
+  "meaning": "Disposable package test build. No release reproducibility, publication or adoption claim."
+}

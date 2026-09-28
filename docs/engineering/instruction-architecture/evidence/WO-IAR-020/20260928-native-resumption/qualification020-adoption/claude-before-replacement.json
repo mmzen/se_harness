@@ -1,0 +1,28 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "plugin",
+    "marketplace",
+    "list",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\qualification020-adoption",
+  "at": "2026-09-28T18:32:25.904845+00:00",
+  "exit_code": 0,
+  "result": [
+    {
+      "name": "claude-plugins-official",
+      "source": "github",
+      "repo": "anthropics/claude-plugins-official",
+      "installLocation": "C:\\Users\\mathi\\.claude\\plugins\\marketplaces\\claude-plugins-official"
+    },
+    {
+      "name": "se-harness",
+      "source": "github",
+      "repo": "mmzen/se_harness",
+      "ref": "plugin-marketplace",
+      "installLocation": "C:\\Users\\mathi\\.claude\\plugins\\marketplaces\\se-harness"
+    }
+  ],
+  "stderr": ""
+}

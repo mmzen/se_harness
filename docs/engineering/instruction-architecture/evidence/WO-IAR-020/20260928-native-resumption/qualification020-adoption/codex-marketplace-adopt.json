@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+    "plugin",
+    "marketplace",
+    "add",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\cleanup-native\\marketplace",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\qualification020-adoption",
+  "at": "2026-09-28T18:31:38.090645+00:00",
+  "exit_code": 1,
+  "result": "",
+  "stderr": "Error: marketplace 'se-harness' is already added from a different source; remove it before adding this source\n"
+}

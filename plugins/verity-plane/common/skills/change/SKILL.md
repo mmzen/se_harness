@@ -39,14 +39,17 @@ including failures. Run setup if the evaluator environment needs repair.
 ## Follow the selected operation
 
 When the root selects `docs/engineering/harness/`, use its selected action
-file and returned reading locations. The legacy references below apply only
+file and returned reading locations. The two legacy references below apply only
 to installations without that collection; do not load them on the new route.
 
 - For a package or amendment, read [Artifact packages](references/artifacts.md).
 - For WO approval, start, implementation or completion, read
   [Work orders](references/work-orders.md).
-- Before reusing any decision, apply the input comparison in
-  [Continuing authority](references/authority.md).
+
+On either route, before reusing a decision, apply the input comparison in
+[Continuing authority](references/authority.md#continuing-authority). Before an
+external mutation, read [External actions](references/authority.md#external-actions)
+for this provider's required controls.
 
 Use the actual schema-2 result's procedure, gates and next action. An unchecked
 next step supplies no decision. On a legacy installation, read its required

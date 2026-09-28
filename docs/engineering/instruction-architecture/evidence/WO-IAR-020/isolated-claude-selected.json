@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "plugin",
+    "list",
+    "--json"
+  ],
+  "isolated_profile": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\claude\\claude",
+  "exit_code": 0,
+  "stdout": "[\n  {\n    \"id\": \"verity-plane@se-harness\",\n    \"version\": \"0.2.0\",\n    \"scope\": \"user\",\n    \"enabled\": true,\n    \"installPath\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.2.0\",\n    \"installedAt\": \"2026-09-27T15:17:38.520Z\",\n    \"lastUpdated\": \"2026-09-28T08:15:41.332Z\"\n  }\n]\n",
+  "stderr": ""
+}

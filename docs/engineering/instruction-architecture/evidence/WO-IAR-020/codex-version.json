@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+    "--version"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\cleanup-native",
+  "exit_code": 0,
+  "stdout": "codex-cli 0.158.0-alpha.2.1\n",
+  "stderr": ""
+}

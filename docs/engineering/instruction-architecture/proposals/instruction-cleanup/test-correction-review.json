@@ -1,0 +1,29 @@
+{
+  "status": "proposal only; repository test files unchanged",
+  "files": [
+    {
+      "path": "tests/test_artifact_catalog.py",
+      "before_sha256_lf": "80eec05d658879e86c0106ee5e277b59edb2df2d45b9059ef96394da959273d7",
+      "after_sha256_lf": "d6200ad9f261f57ba093e5bf3f6348b7a38d54ccf1ec740f47b9e977c93d3157"
+    },
+    {
+      "path": "tests/test_installer.py",
+      "before_sha256_lf": "3f26a2f28ece2c87fe51039bfdbbb899ab7484b0a7e8819497fd59d7280ca849",
+      "after_sha256_lf": "006f376a3e51e6d79a61db2bf4ddba5440a79040c02a998b6b2e98c780cb641e"
+    }
+  ],
+  "probe": {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-B",
+      "-m",
+      "unittest",
+      "tests.test_artifact_catalog.ArtifactCatalogTests.test_work_order_template_expresses_conditional_architecture",
+      "tests.test_installer.InstructionMigrationTests.test_recognized_fragments_preserve_all_owner_bytes"
+    ],
+    "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar021-test-proposal-mdy7oz2a",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "..\r\n----------------------------------------------------------------------\r\nRan 2 tests in 2.283s\r\n\r\nOK\r\n"
+  }
+}

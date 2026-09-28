@@ -1,0 +1,12 @@
+{
+  "session_id": "debeff14-54c4-43fd-b970-33e6cd2b1d2e",
+  "unchanged": true,
+  "session_model_override": "opus",
+  "saved_model_setting_changed": false,
+  "passed": true,
+  "native_compact_callbacks": 1,
+  "each_payload_is_full_current_root": [
+    true
+  ],
+  "entry_sha256": "aee9ed33d732c27ec06de7676450baaa9a05ea54e39906cca3791745be538d74"
+}

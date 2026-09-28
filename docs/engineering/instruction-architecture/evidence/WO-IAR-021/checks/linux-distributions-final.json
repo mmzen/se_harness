@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-B",
+    "scripts/validate_release_distributions.py",
+    "--root",
+    "."
+  ],
+  "cwd": "/tmp/iar021-linux-4v5u3obx/repository",
+  "source": "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+  "exit_code": 0,
+  "seconds": 0.6,
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "platform": "linux"
+}

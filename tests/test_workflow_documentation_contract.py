@@ -22,13 +22,12 @@ INSTALLED_GATES = ENGINEERING_ROOT / "QUALITY_GATES.json"
 
 class WorkflowDocumentationContractTests(unittest.TestCase):
     def test_integrity_policy_keeps_default_schema_and_bounded_plugin_exception(self) -> None:
-        # Machine lock semantics remain unchanged; old human policy is a pointer.
+        # Machine lock semantics remain unchanged; current routes need no pointer.
         from se_harness.integrity import LOCK_SCHEMA
         self.assertEqual(3,LOCK_SCHEMA)
-        workflow=(ENGINEERING_ROOT/'WORKFLOW.md').read_text(encoding='utf-8')
-        self.assertIn('Compatibility pointer',workflow)
-        self.assertNotIn('MUST',workflow)
-        self.assertIn('harness/RECORD_STATE.md',workflow)
+        self.assertFalse((ENGINEERING_ROOT/'WORKFLOW.md').exists())
+        workflow=(ENGINEERING_ROOT/'harness/CONTINUE.md').read_text(encoding='utf-8')
+        self.assertIn('RECORD_STATE.md#',workflow)
 
     def test_runtime_and_installed_contracts_are_byte_identical(self) -> None:
         self.assertEqual(RUNTIME_CONTRACT.read_bytes(), INSTALLED_CONTRACT.read_bytes())
@@ -143,9 +142,7 @@ class WorkflowDocumentationContractTests(unittest.TestCase):
             self.assertIn(phrase,root)
         for i in range(1,10):self.assertIn(f'HRN-{i:03d}',root)
         for name in ('DECISION_RIGHTS.md','WORKFLOW.md','QUALITY_GATES.md','TRACEABILITY.md','TECHNICAL_COMMUNICATION.md'):
-            pointer=(ENGINEERING_ROOT/name).read_text(encoding='utf-8')
-            self.assertIn('Compatibility pointer',pointer)
-            self.assertNotIn('MUST',pointer)
+            self.assertFalse((ENGINEERING_ROOT/name).exists())
 
 
 

@@ -149,28 +149,37 @@ class StandardRepositoryLifecycleTests(unittest.TestCase):
                 self.assertEqual("unchanged", actions[relative])
                 self.assertEqual(customized, (target / relative).read_bytes())
 
-    def test_standard_upgrade_detects_a_customized_technical_communication_policy(self) -> None:
+    def test_standard_upgrade_preserves_a_retired_customized_owner_pointer(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             target = Path(temporary) / "repository"
             changes, old_lock = plan_install(target, project_name="Policy Fixture", mode="init")
             apply_changes(target, changes, old_lock, allow_updates=False)
             policy = target / "docs/engineering/TECHNICAL_COMMUNICATION.md"
-            customized = policy.read_bytes() + b"\nRepository-owned customization.\n"
+            released = REPOSITORY_ROOT / 'tests/fixtures/progressive-discovery/released-0.19.0/TECHNICAL_COMMUNICATION.md'
+            customized = released.read_bytes() + b"\r\nRepository-owned customization.\xff\r\n"
             policy.write_bytes(customized)
+            lock_path = target / '.engineering-harness.lock'
+            old_lock = json.loads(lock_path.read_bytes())
+            old_lock['files']['docs/engineering/TECHNICAL_COMMUNICATION.md'] = {'mode': 'seed', 'state': 'present'}
+            old_lock['tool_version'] = old_lock['evaluator']['version'] = '0.19.0'
+            lock_path.write_text(json.dumps(old_lock), encoding='utf-8')
 
             changes, old_lock = plan_install(target, project_name=None, mode="upgrade")
             action = {
                 item.path: item.action
                 for item in changes
             }["docs/engineering/TECHNICAL_COMMUNICATION.md"]
-            self.assertEqual("customized", action)
+            self.assertEqual("unchanged", action)
             self.assertEqual(customized, policy.read_bytes())
-            before = {p.relative_to(target): p.read_bytes() for p in target.rglob("*") if p.is_file()}
-            with self.assertRaisesRegex(HarnessError, "conflicts or customizations; no files were written"):
-                apply_changes(target, changes, old_lock, allow_updates=True)
-            self.assertEqual(before, {p.relative_to(target): p.read_bytes() for p in target.rglob("*") if p.is_file()})
-            checks = {item.name: item for item in inspect_installation(target)}
-            self.assertTrue(checks["seed:docs/engineering/TECHNICAL_COMMUNICATION.md"].passed)
+            lock = apply_changes(target, changes, old_lock, allow_updates=True)
+            self.assertEqual(customized, policy.read_bytes())
+            self.assertNotIn('docs/engineering/TECHNICAL_COMMUNICATION.md', lock['files'])
+            checks = inspect_installation(target)
+            self.assertTrue(all(item.passed for item in checks), checks)
+            retry, retry_lock = plan_install(target, project_name=None, mode='upgrade')
+            self.assertTrue(all(item.action == 'unchanged' for item in retry))
+            apply_changes(target, retry, retry_lock, allow_updates=True)
+            self.assertEqual(customized, policy.read_bytes())
 
     # The fifteen managed paths of the three skills 0.11.0 retired from the
     # 0.10.0 template; the SPEC-DST-022 DST-UPR-007 conformance pair.

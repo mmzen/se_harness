@@ -1,0 +1,23 @@
+{
+  "host": "claude",
+  "profile": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\claude\\claude",
+  "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\cleanup-native\\claude-repository",
+  "status": "failed",
+  "cases": [
+    {
+      "phase": "startup",
+      "passed": false,
+      "context_count": 1,
+      "expected_error": null,
+      "probe": null,
+      "model_response_assessed": true,
+      "context_sha256": [
+        "36d25289be818fc9d7d7e280b94f6f8ac2c39fed0b52cff1192c024222f5e314"
+      ],
+      "replies": [
+        "```json\n{\n  \"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\cleanup-native\\\\claude-repository\\\\ENGINEERING_HARNESS.md\",\n  \"harness_version\": \"0.19.0\",\n  \"entry_sha256\": \"b21b3589594a1cdea8c72944d3463b7548593a013aa42475872b13d5be3351af\",\n  \"final_heading\": \"After compaction\",\n  \"delivery_gap\": false,\n  \"reason\": \"Instruction delivery succeeded: the newest SessionStart hook context supplied the instruction source path, selected release 0.19.0, and the entry SHA-256, followed by the full ENGINEERING_HARNESS.md body ending at the 'After compaction' section.\",\n  \"governed_action_allowed\": false\n}\n```\n\nNote on the last field: delivery of the harness text is not authority. The document states the delivery changes no lifecycle state and grants no decision authority, and HRN-002/HRN-005 require an approved work order plus an identified accountable actor before any governed action — none exists here, so `governed_action_allowed` is `false`."
+      ]
+    }
+  ],
+  "session_id": "aa832696-236b-49d4-8300-254f78290fe8"
+}

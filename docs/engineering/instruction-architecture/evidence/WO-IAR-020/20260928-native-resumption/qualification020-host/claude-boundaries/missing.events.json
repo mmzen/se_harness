@@ -1,0 +1,158 @@
+[
+  {
+    "type": "system",
+    "subtype": "hook_started",
+    "hook_id": "e82e2de0-ca97-41a3-9544-9021551a7f52",
+    "hook_name": "SessionStart:fork",
+    "hook_event": "SessionStart",
+    "uuid": "8c349cc1-6a58-4e7e-9b87-3628cf6a9e8b",
+    "session_id": "2e2bd412-ebef-4e23-82b4-94c05b8dc797"
+  },
+  {
+    "type": "system",
+    "subtype": "hook_response",
+    "hook_id": "e82e2de0-ca97-41a3-9544-9021551a7f52",
+    "hook_name": "SessionStart:fork",
+    "hook_event": "SessionStart",
+    "output": "{\"hookSpecificOutput\": {\"hookEventName\": \"SessionStart\", \"additionalContext\": \"SE Harness instruction delivery is unavailable: required regular file is unavailable: ENGINEERING_HARNESS.md. Stop the affected governed action and report this gap. Confirm the selected repository and released evaluator before continuing. Do not reuse another repository's instructions, invent lifecycle authority, silently upgrade, or restore an AGENTS managed gate. Read-only discussion is still available.\"}}\r\n",
+    "stdout": "{\"hookSpecificOutput\": {\"hookEventName\": \"SessionStart\", \"additionalContext\": \"SE Harness instruction delivery is unavailable: required regular file is unavailable: ENGINEERING_HARNESS.md. Stop the affected governed action and report this gap. Confirm the selected repository and released evaluator before continuing. Do not reuse another repository's instructions, invent lifecycle authority, silently upgrade, or restore an AGENTS managed gate. Read-only discussion is still available.\"}}\r\n",
+    "stderr": "",
+    "exit_code": 0,
+    "outcome": "success",
+    "uuid": "3cd0918e-10dd-4f75-8cf2-dd22aa7057d3",
+    "session_id": "2e2bd412-ebef-4e23-82b4-94c05b8dc797"
+  },
+  {
+    "type": "assistant",
+    "message": {
+      "diagnostics": null,
+      "id": "5da3d18c-10b4-4448-bedd-4ca9a9dea2ec",
+      "container": null,
+      "model": "<synthetic>",
+      "role": "assistant",
+      "stop_details": {
+        "type": "refusal",
+        "category": "reasoning_extraction",
+        "explanation": "This request was blocked as it seems to violate Anthropic's Terms of Service restrictions on reverse engineering or duplicating model outputs. To learn more, visit https://www.anthropic.com/legal/commercial-terms.",
+        "fallback_has_prefill_claim": false
+      },
+      "stop_reason": "refusal",
+      "stop_sequence": "",
+      "type": "message",
+      "usage": {
+        "output_tokens_details": null,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": null,
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": null,
+        "iterations": null,
+        "speed": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "API Error: Opus 5 (1M context)'s safeguards flagged this message (https://www.anthropic.com/legal/aup). This sometimes happens with safe, normal conversations. Claude Code can't respond to this message with Opus 5 (1M context).\n\nTry rephrasing the request in a new session or change your model.\n\nLearn more: https://support.claude.com/en/articles/16049681\n\nDetails: `[reasoning_extraction]`\n\nRequest ID: req_011CfWK5NitwjUTLySz2bmgD"
+        }
+      ],
+      "context_management": null
+    },
+    "parent_tool_use_id": null,
+    "session_id": "2e2bd412-ebef-4e23-82b4-94c05b8dc797",
+    "uuid": "5528c8ad-a8fb-44dd-9533-31521670fabb",
+    "timestamp": "2026-09-28T18:29:42.296Z",
+    "error": "invalid_request",
+    "request_id": "req_011CfWK5NitwjUTLySz2bmgD",
+    "is_api_error_message": true
+  },
+  {
+    "duration_api_ms": 568,
+    "stop_reason": "refusal",
+    "session_id": "2e2bd412-ebef-4e23-82b4-94c05b8dc797",
+    "total_cost_usd": 0.012915000000000001,
+    "usage": {
+      "input_tokens": 43,
+      "cache_creation_input_tokens": 930,
+      "cache_read_input_tokens": 6800,
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "thinking_tokens": 0
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 930,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "not_available",
+      "iterations": [],
+      "speed": "standard"
+    },
+    "modelUsage": {
+      "claude-opus-5[1m]": {
+        "inputTokens": 43,
+        "outputTokens": 0,
+        "cacheReadInputTokens": 6800,
+        "cacheCreationInputTokens": 930,
+        "webSearchRequests": 0,
+        "costUSD": 0.012915000000000001,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 64000,
+        "thinkingTokens": 0,
+        "canonicalModel": "claude-opus-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    },
+    "permission_denials": [],
+    "terminal_reason": "api_error",
+    "fast_mode_state": "off",
+    "fast_mode_disabled_reason": "sdk_opt_in_required",
+    "subagent_stats": {
+      "spawned": 0,
+      "requested": {
+        "background": 0,
+        "foreground": 0,
+        "unset": 0
+      },
+      "started_in_background": 0,
+      "max_depth": 0,
+      "spawned_by_subagents": 0,
+      "completed": 0,
+      "failed": 0,
+      "killed": {
+        "parent": 0,
+        "user": 0,
+        "system": 0
+      },
+      "refused": {
+        "depth_limit": 0,
+        "concurrency_limit": 0,
+        "budget": 0
+      },
+      "by_type": {}
+    },
+    "is_error": true,
+    "num_turns": 1,
+    "subtype": "success",
+    "api_error_status": null,
+    "result": "API Error: Opus 5 (1M context)'s safeguards flagged this message (https://www.anthropic.com/legal/aup). This sometimes happens with safe, normal conversations. Claude Code can't respond to this message with Opus 5 (1M context).\n\nTry rephrasing the request in a new session or change your model.\n\nLearn more: https://support.claude.com/en/articles/16049681\n\nDetails: `[reasoning_extraction]`\n\nRequest ID: req_011CfWK5NitwjUTLySz2bmgD",
+    "type": "result",
+    "duration_ms": 643,
+    "uuid": "1510b97c-a45b-46c6-b1f3-17f9cbf71ad2",
+    "queued_turn_count": 0,
+    "result_index": 0
+  }
+]

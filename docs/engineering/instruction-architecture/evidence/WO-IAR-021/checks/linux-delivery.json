@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/plugin_integration/progressive_discovery",
+    "-p",
+    "test_*.py"
+  ],
+  "cwd": "/tmp/iar021-linux-j89cwwu8/repository",
+  "source": "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+  "exit_code": 0,
+  "seconds": 0.35,
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "platform": "linux"
+}

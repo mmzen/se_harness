@@ -1,0 +1,8 @@
+{
+  "host": "claude",
+  "profile": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\claude\\claude",
+  "fixture": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\cleanup-native\\claude-repository",
+  "status": "incomplete",
+  "cases": [],
+  "error": "Claude exited 1: "
+}

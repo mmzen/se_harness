@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "plugin",
+    "update",
+    "verity-plane@se-harness",
+    "--scope",
+    "user",
+    "--json"
+  ],
+  "isolated_profile": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\claude\\claude",
+  "exit_code": 0,
+  "stdout": "{\"command\":\"update\",\"outcome\":\"ok\",\"plugin\":\"verity-plane@se-harness\",\"pluginId\":\"verity-plane@se-harness\",\"scope\":\"user\",\"message\":\"Plugin \\\"verity-plane\\\" updated from 0.1.0 to 0.2.0 for scope user. Restart to apply changes.\",\"updateOutcome\":\"updated\",\"oldVersion\":\"0.1.0\",\"newVersion\":\"0.2.0\"}\n",
+  "stderr": ""
+}

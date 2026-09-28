@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "plugin",
+    "list",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\cleanup-native",
+  "exit_code": 0,
+  "stdout": "[\n  {\n    \"id\": \"verity-plane@se-harness\",\n    \"version\": \"0.1.0\",\n    \"scope\": \"user\",\n    \"enabled\": true,\n    \"installPath\": \"C:\\\\Users\\\\mathi\\\\.claude\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.1.0\",\n    \"installedAt\": \"2026-09-15T17:54:00.133Z\",\n    \"lastUpdated\": \"2026-09-15T17:54:00.133Z\"\n  }\n]\n",
+  "stderr": ""
+}

@@ -1,0 +1,2165 @@
+{
+  "work_orders": [
+    "WO-IAR-022",
+    "WO-IAR-024",
+    "WO-IAR-025"
+  ],
+  "verification": [
+    "VER-IAR-017"
+  ],
+  "trusted_base": "fd05dc9f28452c906e764a37570342acbabd09b9",
+  "verified_reference_correction": "a0435434bcfa9ce385931e2d0e64bf98cab300e1",
+  "verified_reference_record": "VREC-IAR-013",
+  "checks": [
+    {
+      "label": "retirement-windows-final",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "scripts/run_tests.py",
+        "--workers",
+        "4"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "seconds": 243.26,
+      "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "win32"
+    },
+    {
+      "label": "retirement-linux-full-final",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "scripts/run_tests.py",
+        "--workers",
+        "4"
+      ],
+      "cwd": "/tmp/iar022-linux-p6o4nxqq/repository",
+      "source": "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+      "exit_code": 0,
+      "seconds": 72.61,
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "platform": "linux"
+    },
+    {
+      "label": "retirement-note-final",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_progressive_documentation.py"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "seconds": 0.42,
+      "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "win32"
+    },
+    {
+      "label": "retirement-windows-delivery",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/plugin_integration/progressive_discovery",
+        "-p",
+        "test_*.py"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "seconds": 1.52,
+      "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "win32"
+    },
+    {
+      "label": "retirement-linux-delivery-final",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/plugin_integration/progressive_discovery",
+        "-p",
+        "test_*.py"
+      ],
+      "cwd": "/tmp/iar022-linux-p6o4nxqq/repository",
+      "source": "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+      "exit_code": 0,
+      "seconds": 0.7,
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "platform": "linux"
+    },
+    {
+      "label": "retirement-windows-distributions",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "seconds": 5.02,
+      "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "win32"
+    },
+    {
+      "label": "retirement-linux-distributions-final",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "/tmp/iar022-linux-p6o4nxqq/repository",
+      "source": "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+      "exit_code": 0,
+      "seconds": 0.96,
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "platform": "linux"
+    },
+    {
+      "label": "retirement-windows-cli",
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "seconds": 0.32,
+      "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "win32"
+    },
+    {
+      "label": "retirement-linux-cli-final",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "/tmp/iar022-linux-p6o4nxqq/repository",
+      "source": "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+      "exit_code": 0,
+      "seconds": 0.19,
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "platform": "linux"
+    }
+  ],
+  "raw_capture": {
+    "path": "raw-capture.zip",
+    "sha256": "181fc6c9a95336bc129882466ba8de4da55e924951a6bd57d595e9d0a9d24e52",
+    "members": [
+      {
+        "path": "checks/retirement-018-after.json",
+        "sha256": "bd9237310360764e530655d55d04a017f5ae7428bc55abcb1758ea4d66f7f1bb",
+        "bytes": 447
+      },
+      {
+        "path": "checks/retirement-018-after.stderr",
+        "sha256": "bf5f398d9b537af6f6ef9b24329ec8616c24db6776c1aa415bf7e959e952c646",
+        "bytes": 114
+      },
+      {
+        "path": "checks/retirement-018-after.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "checks/retirement-018-before.json",
+        "sha256": "61eb293fd6dc321041125ec8d14737340af0b0bec0d0ca1c059ec4346abf7637",
+        "bytes": 530
+      },
+      {
+        "path": "checks/retirement-018-before.stderr",
+        "sha256": "ca9cea58accd3a8667c8958141cd7147d4676596a99b6a32be5367e4c64d599b",
+        "bytes": 829
+      },
+      {
+        "path": "checks/retirement-018-before.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "checks/retirement-focused-first.json",
+        "sha256": "3fa46a10cadb4c1d135f531771bd7fa8453fa98f45fbcb3cbb1b3722f4e7acf1",
+        "bytes": 870
+      },
+      {
+        "path": "checks/retirement-focused-first.stderr",
+        "sha256": "e4ce4e3c85ba34027f5b7fc4c22f672f4c5d2fd0980c46ca60b8f626f267b5f3",
+        "bytes": 9583
+      },
+      {
+        "path": "checks/retirement-focused-first.stdout",
+        "sha256": "9e2e496d7a101db7ac45a104084e3abf7d29501a55bdee9ed738544854c251d1",
+        "bytes": 154
+      },
+      {
+        "path": "checks/retirement-linux-cli-final.json",
+        "sha256": "61378cfd2273bc66efc6c3cae3505962f47b3311355c9aa6ae350dc5ccdbe180",
+        "bytes": 383
+      },
+      {
+        "path": "checks/retirement-linux-cli-final.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "checks/retirement-linux-cli-final.stdout",
+        "sha256": "224357081085d15204305659dcbeb000cb1787dfd860d78119224a780605f7cc",
+        "bytes": 3578
+      },
+      {
+        "path": "checks/retirement-linux-cli.json",
+        "sha256": "c23e6717c3a03fe3ee841f47ac1993113f1a820fc70fc9cdfd69e955b8ca8cae",
+        "bytes": 383
+      },
+      {
+        "path": "checks/retirement-linux-cli.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "checks/retirement-linux-cli.stdout",
+        "sha256": "224357081085d15204305659dcbeb000cb1787dfd860d78119224a780605f7cc",
+        "bytes": 3578
+      },
+      {
+        "path": "checks/retirement-linux-delivery-final.json",
+        "sha256": "0520b20a6a6389395f42c718baadcc9631dd47faa9487d9622a9516c069dd502",
+        "bytes": 473
+      },
+      {
+        "path": "checks/retirement-linux-delivery-final.stderr",
+        "sha256": "20a004535369d28967e6df2157e113db7adaa9ccc4b0d5983da06d76af8042e8",
+        "bytes": 109
+      },
+      {
+        "path": "checks/retirement-linux-delivery-final.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "checks/retirement-linux-delivery.json",
+        "sha256": "95ea27bef57dbd696fd04fa149ee2dc508852d5a32e8fcdeeaf1bbfd1c60c757",
+        "bytes": 474
+      },
+      {
+        "path": "checks/retirement-linux-delivery.stderr",
+        "sha256": "df92d0172230ea8f67692f5b789de956a8dc2fdd364bc60c27abc2e66b0f9343",
+        "bytes": 109
+      },
+      {
+        "path": "checks/retirement-linux-delivery.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "checks/retirement-linux-distributions-final.json",
+        "sha256": "69f53799c8ce0816a84948607e0a9ef58c3880c4a18e11cdadbb8354bdcc29c7",
+        "bytes": 413
+      },
+      {
+        "path": "checks/retirement-linux-distributions-final.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "checks/retirement-linux-distributions-final.stdout",
+        "sha256": "6fbee372f5bfd97e23cfc84ee2d8a22db5416108c05dc95494361d0d5aec1d6a",
+        "bytes": 83
+      },
+      {
+        "path": "checks/retirement-linux-distributions.json",
+        "sha256": "e3878c2415002f12fa9b611d9358208e04f0b05aa57acc8c2fcabb1c236addc4",
+        "bytes": 413
+      },
+      {
+        "path": "checks/retirement-linux-distributions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "checks/retirement-linux-distributions.stdout",
+        "sha256": "6fbee372f5bfd97e23cfc84ee2d8a22db5416108c05dc95494361d0d5aec1d6a",
+        "bytes": 83
+      },
+      {
+        "path": "checks/retirement-linux-full-final.json",
+        "sha256": "8723deb5e1f485ead42461b0ba7ba73a41084afdda81082f478c854692213c91",
+        "bytes": 396
+      },
+      {
+        "path": "checks/retirement-linux-full-final.stderr",
+        "sha256": "0ae5ab307bed36434c28a9c8f8a94fe40cc90b4b0059441977994e22cc0e4f49",
+        "bytes": 29
+      },
+      {
+        "path": "checks/retirement-linux-full-final.stdout",
+        "sha256": "f7770b85ff680557f0203aec6888025bb9e4d06616789689c553883bf387f69e",
+        "bytes": 516
+      },
+      {
+        "path": "checks/retirement-linux-full.json",
+        "sha256": "8a63090b5276f172593824a373f61dca2486db5b3642e2bf29f8a21299bda80f",
+        "bytes": 396
+      },
+      {
+        "path": "checks/retirement-linux-full.stderr",
+        "sha256": "0ae5ab307bed36434c28a9c8f8a94fe40cc90b4b0059441977994e22cc0e4f49",
+        "bytes": 29
+      },
+      {
+        "path": "checks/retirement-linux-full.stdout",
+        "sha256": "63832b76a3b3c0ccce5c25bd4d64d92759d5866fbcb837a2ed7f0a8f61ed451d",
+        "bytes": 1333
+      },
+      {
+        "path": "checks/retirement-note-final.json",
+        "sha256": "e4fd7250c10bdda302d80a542070dda796734e129a6afee1a2fe653266303bf9",
+        "bytes": 513
+      },
+      {
+        "path": "checks/retirement-note-final.stderr",
+        "sha256": "81a7c574f891938f09fd01435f0f288ab5fdce7cbbe64d6e381ec70c1bfa46fb",
+        "bytes": 121
+      },
+      {
+        "path": "checks/retirement-note-final.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "checks/retirement-owner-boundaries-fixed.json",
+        "sha256": "9df6679bc6b26e608f71ce8c884fcc8ba9ad58702f8199368e2c7f07c818e122",
+        "bytes": 614
+      },
+      {
+        "path": "checks/retirement-owner-boundaries-fixed.stderr",
+        "sha256": "d81b5920953afce4656e9d60dfacca1e6d968124496c9c3a96597855aa9d4f63",
+        "bytes": 109
+      },
+      {
+        "path": "checks/retirement-owner-boundaries-fixed.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "checks/retirement-owner-boundaries.json",
+        "sha256": "bfdc208691f63789dc80416f3c653948524c509f9f85d902567fac8c62303204",
+        "bytes": 614
+      },
+      {
+        "path": "checks/retirement-owner-boundaries.stderr",
+        "sha256": "8898e2fc784b2e2d3d430d73cbff7de8ddee49055499d6af50c8633584a35274",
+        "bytes": 906
+      },
+      {
+        "path": "checks/retirement-owner-boundaries.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "checks/retirement-route.json",
+        "sha256": "44e0651b831f98fa80297e6d3e145b6cacdf326eca4e87081205ea5623258a96",
+        "bytes": 575
+      },
+      {
+        "path": "checks/retirement-route.stderr",
+        "sha256": "e60f9878da6a4ddf52515e26914dbf86c094d99e4ec5f7fe12d0930efddf65f2",
+        "bytes": 103
+      },
+      {
+        "path": "checks/retirement-route.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "checks/retirement-windows-cli.json",
+        "sha256": "1f814431689a075a00c3858ce2629bd33772c0f5f661ad3d2736a77d5ad6f78b",
+        "bytes": 435
+      },
+      {
+        "path": "checks/retirement-windows-cli.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "checks/retirement-windows-cli.stdout",
+        "sha256": "721718c6a64371c984e64e9c5bbb6a27efc22727147bb755a691c4625ebbe684",
+        "bytes": 3617
+      },
+      {
+        "path": "checks/retirement-windows-delivery.json",
+        "sha256": "dacf93538c05eddc1e5cc39c8d01f93a2e1df31f559a122e66750a7ebe27e6d7",
+        "bytes": 530
+      },
+      {
+        "path": "checks/retirement-windows-delivery.stderr",
+        "sha256": "3462a8d386f5245a5a0c6e13c6306660f3263c7dae88509e3851d0e369c28d00",
+        "bytes": 126
+      },
+      {
+        "path": "checks/retirement-windows-delivery.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "checks/retirement-windows-distributions.json",
+        "sha256": "300930994c46ee32cd01bf5510e36f18dd2f0f5f1f5bfdcf273b04cad513cc79",
+        "bytes": 465
+      },
+      {
+        "path": "checks/retirement-windows-distributions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "checks/retirement-windows-distributions.stdout",
+        "sha256": "4c371cc9343ba93be33c9a2075a11af9e31f766c14a54ab590e790c64b32cf40",
+        "bytes": 84
+      },
+      {
+        "path": "checks/retirement-windows-final.json",
+        "sha256": "56cef35a1ec1f0de6fef7341685d29ae5944811ab83c4e7302a9a9c3863e3f66",
+        "bytes": 449
+      },
+      {
+        "path": "checks/retirement-windows-final.stderr",
+        "sha256": "697e7bfe46c133456519d600a8da0eeb85a5a7e6ed6cb2579e3cd715acc9e887",
+        "bytes": 30
+      },
+      {
+        "path": "checks/retirement-windows-final.stdout",
+        "sha256": "54180a075968096fd9248c7f94c4eb2a94c2966438da2302e4790f8beb869c4c",
+        "bytes": 601
+      },
+      {
+        "path": "checks/retirement-windows-full.json",
+        "sha256": "e2ad42984999f6e4c9c0871281d41f10c0e9f6f7830c11af67e2b3df3cf34350",
+        "bytes": 460
+      },
+      {
+        "path": "checks/retirement-windows-full.stderr",
+        "sha256": "697e7bfe46c133456519d600a8da0eeb85a5a7e6ed6cb2579e3cd715acc9e887",
+        "bytes": 30
+      },
+      {
+        "path": "checks/retirement-windows-full.stdout",
+        "sha256": "f5ffc1a826b3ba2e6ea737ff3cf14c93014bad5556114b91154fbee12f591d5f",
+        "bytes": 1624
+      },
+      {
+        "path": "retirement-packages/build.json",
+        "sha256": "a0d56cc4b45c9fe4c97d9377afc660c568b7d3fa72963f439ca28da40b57fa21",
+        "bytes": 662
+      },
+      {
+        "path": "retirement-packages/build.stderr",
+        "sha256": "9297aea85049c380a4a33f305a708e8b643d0b71d3ffba5e7ba516dc456ba352",
+        "bytes": 2820
+      },
+      {
+        "path": "retirement-packages/build.stdout",
+        "sha256": "e51684f373346780d792a352f35e50df718f732917d35b34b13e666578384c8a",
+        "bytes": 58128
+      },
+      {
+        "path": "retirement-packages/source-inputs.json",
+        "sha256": "42675e898d5c7cc8a6146d511ebf11b9f99d76dfc4a6ddcd962244e2bc8837c1",
+        "bytes": 2048850
+      },
+      {
+        "path": "retirement-packages/checks/candidate-origin.json",
+        "sha256": "b16959fec3d090889b0dcbea7608b9629c5e1490b4f851e1e8bc77432fae37a0",
+        "bytes": 452
+      },
+      {
+        "path": "retirement-packages/checks/candidate-origin.prior-1.json",
+        "sha256": "b16959fec3d090889b0dcbea7608b9629c5e1490b4f851e1e8bc77432fae37a0",
+        "bytes": 452
+      },
+      {
+        "path": "retirement-packages/checks/candidate-origin.prior-1.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/candidate-origin.prior-1.stdout",
+        "sha256": "d2e7ee5904bc7387a6782af48c1f06b8dc3e4e8dc3022b04595d50076427f445",
+        "bytes": 232
+      },
+      {
+        "path": "retirement-packages/checks/candidate-origin.prior-2.json",
+        "sha256": "af4ece42e4bc9dc4e36f8f5c862c799fbd9ea916c18fe8a758eb246d8b04360f",
+        "bytes": 452
+      },
+      {
+        "path": "retirement-packages/checks/candidate-origin.prior-2.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/candidate-origin.prior-2.stdout",
+        "sha256": "d2e7ee5904bc7387a6782af48c1f06b8dc3e4e8dc3022b04595d50076427f445",
+        "bytes": 232
+      },
+      {
+        "path": "retirement-packages/checks/candidate-origin.prior-3.json",
+        "sha256": "af4ece42e4bc9dc4e36f8f5c862c799fbd9ea916c18fe8a758eb246d8b04360f",
+        "bytes": 452
+      },
+      {
+        "path": "retirement-packages/checks/candidate-origin.prior-3.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/candidate-origin.prior-3.stdout",
+        "sha256": "d2e7ee5904bc7387a6782af48c1f06b8dc3e4e8dc3022b04595d50076427f445",
+        "bytes": 232
+      },
+      {
+        "path": "retirement-packages/checks/candidate-origin.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/candidate-origin.stdout",
+        "sha256": "d2e7ee5904bc7387a6782af48c1f06b8dc3e4e8dc3022b04595d50076427f445",
+        "bytes": 232
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-doctor.json",
+        "sha256": "4eefebdef825a1af83c2010437a8758e8065e4e9c478c99b06839d605fdb089b",
+        "bytes": 574
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-doctor.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-doctor.stdout",
+        "sha256": "150ec6af1a3af064485fff330ba3f46de832880fb90b81f0ae3275a384e02658",
+        "bytes": 13614
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-predecessor-init.json",
+        "sha256": "5bef04e6c8bf74848bf4e6755c2f0a8233a5318260b8faae2178bee8728496e5",
+        "bytes": 588
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-predecessor-init.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-predecessor-init.stdout",
+        "sha256": "9973ee076b0816c10f1564ba0d095df18d2788be726ccbbd2e9cd68dd7a41fdb",
+        "bytes": 6385
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-reconcile-apply.json",
+        "sha256": "75a5b2ef3e2957a29928305ac17b40be0de4f9a3a4add80485acc5c7f13ab9ee",
+        "bytes": 591
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-reconcile-apply.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-reconcile-apply.stdout",
+        "sha256": "69f8c44d76c802fc9436b515c0af8f58ad872dd87006b56d1f4bbd0b59a6b001",
+        "bytes": 6217
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-reconcile-preview.json",
+        "sha256": "2a6c788ab2645f972c965f7ce5fb09508e7e94fd5dbb7c9ad81e9837a46aafb4",
+        "bytes": 575
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-reconcile-preview.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-reconcile-preview.stdout",
+        "sha256": "8ce935ad03c61f625f2af2682c7a742caacbb410b4f891a089f0068cae2051f2",
+        "bytes": 6233
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-rehearsal.json",
+        "sha256": "f3abd78f8364a8a25a7283eb77986397300c350584c08683080c68d3454aceae",
+        "bytes": 1538
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-retry.json",
+        "sha256": "61526b5eb56de286b2ec8b9aa480157cda11250389f31d4d5c9657d87a4456ad",
+        "bytes": 591
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-retry.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-retry.stdout",
+        "sha256": "69f8c44d76c802fc9436b515c0af8f58ad872dd87006b56d1f4bbd0b59a6b001",
+        "bytes": 6217
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-upgrade.json",
+        "sha256": "3bb7bc515061e5b840652e8110206a228c74cd5deaf7cbc5499bdffcf99b5464",
+        "bytes": 590
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-upgrade.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/cleanup-upgrade.stdout",
+        "sha256": "6fb3ffc174a90408f907045a643a37b3f03fee40d195d8b959360a3cf7196d74",
+        "bytes": 6776
+      },
+      {
+        "path": "retirement-packages/checks/distribution-members.json",
+        "sha256": "53e2b57e340e2052de13b50d11997b38307f9b985509f8fd315573052d843310",
+        "bytes": 27464
+      },
+      {
+        "path": "retirement-packages/checks/existing-upgrade-rehearsal-retry.json",
+        "sha256": "d9664a621b6dbee57a22862713c58675412c0908287b643ea83f2ad3f77954d6",
+        "bytes": 1035
+      },
+      {
+        "path": "retirement-packages/checks/existing-upgrade-rehearsal-retry.stderr",
+        "sha256": "4c81475266eac1cfb464f5d3425f159aad921050371bb0a91f8c1e8c13dc8a75",
+        "bytes": 2242
+      },
+      {
+        "path": "retirement-packages/checks/existing-upgrade-rehearsal-retry.stdout",
+        "sha256": "845b9a7c3d5b3ff51a54983fc128b1c87d33ba537e0cce6c2f8217ebcdbdf8f9",
+        "bytes": 3533
+      },
+      {
+        "path": "retirement-packages/checks/existing-upgrade-rehearsal.json",
+        "sha256": "f0ec1ce0ad3d5bb367603499250233107112685f4e7ac757965bbe1b07ce0330",
+        "bytes": 1100
+      },
+      {
+        "path": "retirement-packages/checks/existing-upgrade-rehearsal.stderr",
+        "sha256": "9101d390ae4ecd2901865d48a889ce42746c1cda377d45b24201b8c426f04f18",
+        "bytes": 28564
+      },
+      {
+        "path": "retirement-packages/checks/existing-upgrade-rehearsal.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/fresh-sdist-check.json",
+        "sha256": "c376a42a88335d61030976031110421251f0ad33e9d6f51b33d77545548d8f49",
+        "bytes": 601
+      },
+      {
+        "path": "retirement-packages/checks/fresh-sdist-check.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/fresh-sdist-check.stdout",
+        "sha256": "5d4cb6edeb322347fe2706608bf889454b0f874afb0e60eaa2bf13148c2e4748",
+        "bytes": 5885
+      },
+      {
+        "path": "retirement-packages/checks/fresh-sdist-create.json",
+        "sha256": "9027602ba5c1964d656d9f2bf82d38280aa48e1d8896b459a95fc94733460d62",
+        "bytes": 670
+      },
+      {
+        "path": "retirement-packages/checks/fresh-sdist-create.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/fresh-sdist-create.stdout",
+        "sha256": "15bcda613fa7096f00855670aa15a05d41c171cc64be3efc2c37296a0d213861",
+        "bytes": 260
+      },
+      {
+        "path": "retirement-packages/checks/fresh-sdist-doctor.json",
+        "sha256": "7664e0eb96661a01eb4fd08f3bd8a20cb09730645b370bfee30217665b9f492c",
+        "bytes": 563
+      },
+      {
+        "path": "retirement-packages/checks/fresh-sdist-doctor.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/fresh-sdist-doctor.stdout",
+        "sha256": "150ec6af1a3af064485fff330ba3f46de832880fb90b81f0ae3275a384e02658",
+        "bytes": 13614
+      },
+      {
+        "path": "retirement-packages/checks/fresh-sdist-init.json",
+        "sha256": "8d8ed93bc7b3076ee1af69f736e5730a74ad758a2a0caf09b344ca3cbda6f571",
+        "bytes": 617
+      },
+      {
+        "path": "retirement-packages/checks/fresh-sdist-init.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/fresh-sdist-init.stdout",
+        "sha256": "0ae7f6555e5c4b5d37f123bb3de7e4104adddc055a217a30afbe5b90f920b177",
+        "bytes": 5838
+      },
+      {
+        "path": "retirement-packages/checks/fresh-sdist-scaffold.json",
+        "sha256": "d1ad4faa3d7ca89cefb6963a6aa011ccba04e581ec92db39482f01545a8543da",
+        "bytes": 604
+      },
+      {
+        "path": "retirement-packages/checks/fresh-sdist-scaffold.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/fresh-sdist-scaffold.stdout",
+        "sha256": "5535b37b50d5970f98f9150b2ad086db669b760442734f112851ec5286b06c14",
+        "bytes": 1826
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-check.json",
+        "sha256": "e1801a419d25fff7be08405f1b017deee0e7499257f659b5f18a9d9b7b83ef09",
+        "bytes": 605
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-check.prior-1.json",
+        "sha256": "abceba3576339a33f955fc9df5b3d6f6e1670284f8584e561e93c4ca012ad076",
+        "bytes": 605
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-check.prior-1.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-check.prior-1.stdout",
+        "sha256": "1b1da9ce12e622f9d58d5f6693ff9c9e5e1cfb33b288022724c91652fb842d1e",
+        "bytes": 6390
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-check.prior-2.json",
+        "sha256": "8850f05ff0208f0c8d65b718a43b17adc0b78910e31ac180496ed96068688903",
+        "bytes": 605
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-check.prior-2.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-check.prior-2.stdout",
+        "sha256": "c45ae6514d3494686ec19c640cb0eff0b69fe0c97ac4717c49e9faeda810a7cb",
+        "bytes": 5602
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-check.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-check.stdout",
+        "sha256": "5d4cb6edeb322347fe2706608bf889454b0f874afb0e60eaa2bf13148c2e4748",
+        "bytes": 5885
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-create.json",
+        "sha256": "59bdfb7d0b837b647f0516eb0e455ed0f465e0bac2b1dc94c1809e1f3bc4c517",
+        "bytes": 674
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-create.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-create.stdout",
+        "sha256": "15bcda613fa7096f00855670aa15a05d41c171cc64be3efc2c37296a0d213861",
+        "bytes": 260
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-doctor.json",
+        "sha256": "1c4cb4cc53cae91136bbfc8810b7563b83b81f6abe7d4efe75413d65a008b93a",
+        "bytes": 568
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-doctor.prior-1.json",
+        "sha256": "7f940caa7427993e3be8c85a92eaa243dee670537ddd11fcfc0722f6d68915c9",
+        "bytes": 568
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-doctor.prior-1.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-doctor.prior-1.stdout",
+        "sha256": "150ec6af1a3af064485fff330ba3f46de832880fb90b81f0ae3275a384e02658",
+        "bytes": 13614
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-doctor.prior-2.json",
+        "sha256": "0fb95148c8d922021e7ffe3dfcd547971456d213126c1d1c80a3f4ca69075b2b",
+        "bytes": 568
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-doctor.prior-2.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-doctor.prior-2.stdout",
+        "sha256": "150ec6af1a3af064485fff330ba3f46de832880fb90b81f0ae3275a384e02658",
+        "bytes": 13614
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-doctor.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-doctor.stdout",
+        "sha256": "150ec6af1a3af064485fff330ba3f46de832880fb90b81f0ae3275a384e02658",
+        "bytes": 13614
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-init.json",
+        "sha256": "99c2fd8ea8c5c4be9bba8804c2de86f80be97988a30578b3a59e8dfe918a2fc0",
+        "bytes": 621
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-init.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-init.stdout",
+        "sha256": "0ae7f6555e5c4b5d37f123bb3de7e4104adddc055a217a30afbe5b90f920b177",
+        "bytes": 5838
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-scaffold.json",
+        "sha256": "a1fe55bd1f92a8955388dcdade00d9ea5a508b2297fae3a6c2f288d58d758273",
+        "bytes": 608
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-scaffold.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/fresh-wheel-scaffold.stdout",
+        "sha256": "5535b37b50d5970f98f9150b2ad086db669b760442734f112851ec5286b06c14",
+        "bytes": 1826
+      },
+      {
+        "path": "retirement-packages/checks/owner-preservation.json",
+        "sha256": "c31b2c33f8674cd93d06c902019842a084f597bf746b7834c767c6bcfc0b3189",
+        "bytes": 1289
+      },
+      {
+        "path": "retirement-packages/checks/predecessor-doctor.json",
+        "sha256": "768e9cabbd0c0f6bad068fb35ad822e42ef6b52427fd1d8b067fb92473a6ad0e",
+        "bytes": 525
+      },
+      {
+        "path": "retirement-packages/checks/predecessor-doctor.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/predecessor-doctor.stdout",
+        "sha256": "c578d8088a0f18c4186fb842c3a6607ba5d56b3d04ab14f3cb00d0694f59ae0d",
+        "bytes": 14353
+      },
+      {
+        "path": "retirement-packages/checks/predecessor-init.json",
+        "sha256": "3d4c8d57e349a81bc7046177f5147d5159964aeda83c5b6b37f2bc064c25ce80",
+        "bytes": 577
+      },
+      {
+        "path": "retirement-packages/checks/predecessor-init.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/predecessor-init.stdout",
+        "sha256": "9973ee076b0816c10f1564ba0d095df18d2788be726ccbbd2e9cd68dd7a41fdb",
+        "bytes": 6385
+      },
+      {
+        "path": "retirement-packages/checks/sdist-wheel-build.json",
+        "sha256": "f6281e64bee152e6ec6c54fd3af93eb6c929740ed307b5726b80141d25ccb5d8",
+        "bytes": 715
+      },
+      {
+        "path": "retirement-packages/checks/sdist-wheel-build.stderr",
+        "sha256": "3405c8ac12a6c18470e03fd12262d15aa7b3c85bcc7b45291d4f4d4ee669899d",
+        "bytes": 1410
+      },
+      {
+        "path": "retirement-packages/checks/sdist-wheel-build.stdout",
+        "sha256": "fe64afd5339fb41b6f0a32d252bfd6e4e9b75095989a12b3308148bdd54ee048",
+        "bytes": 35637
+      },
+      {
+        "path": "retirement-packages/checks/upgrade-apply.json",
+        "sha256": "c0ce81f71d196341bd4203a0638daf1ddeb3bfdd9942140b170ae2ddcca52ea9",
+        "bytes": 585
+      },
+      {
+        "path": "retirement-packages/checks/upgrade-apply.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/upgrade-apply.stdout",
+        "sha256": "6fb3ffc174a90408f907045a643a37b3f03fee40d195d8b959360a3cf7196d74",
+        "bytes": 6776
+      },
+      {
+        "path": "retirement-packages/checks/upgrade-doctor.json",
+        "sha256": "e2349a34e4e0d3b8c2e755463fa3c390e8342834154cf206c253a8bedc31bab8",
+        "bytes": 568
+      },
+      {
+        "path": "retirement-packages/checks/upgrade-doctor.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/upgrade-doctor.stdout",
+        "sha256": "150ec6af1a3af064485fff330ba3f46de832880fb90b81f0ae3275a384e02658",
+        "bytes": 13614
+      },
+      {
+        "path": "retirement-packages/checks/upgrade-preview.json",
+        "sha256": "3dd8d94a60e577f143c3d588ff223f6fb9793af0c5be8bfd04058d5a7cc75ce4",
+        "bytes": 569
+      },
+      {
+        "path": "retirement-packages/checks/upgrade-preview.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/upgrade-preview.stdout",
+        "sha256": "268dfc2dd300d31ace15909120d7ae9b5a30ddbd2c1ef8b54b446fc86fe83d75",
+        "bytes": 6792
+      },
+      {
+        "path": "retirement-packages/checks/upgrade-retry.json",
+        "sha256": "9bc83ebf04a85d2a34fe3287445d5e3cb2c08a94739af2803667591be5849fd9",
+        "bytes": 585
+      },
+      {
+        "path": "retirement-packages/checks/upgrade-retry.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-packages/checks/upgrade-retry.stdout",
+        "sha256": "69f8c44d76c802fc9436b515c0af8f58ad872dd87006b56d1f4bbd0b59a6b001",
+        "bytes": 6217
+      },
+      {
+        "path": "retirement-packages/rehearsal/upgrade-rehearsal-timing.json",
+        "sha256": "b26efcf68c48fde79814d4356daf752ca7156b4056dbbab3d4a1ea65eb40203c",
+        "bytes": 3353
+      },
+      {
+        "path": "retirement-packages/rehearsal-retry/upgrade-rehearsal-result.json",
+        "sha256": "a66811458bad74703ade33c9c7c3cca2a53d0779384bb62ce0b6670d5b341c09",
+        "bytes": 4322
+      },
+      {
+        "path": "retirement-packages/rehearsal-retry/upgrade-rehearsal-timing.json",
+        "sha256": "c38169361bf387971d25980cd00bd7651b27d4b00e9fc809882886836a67f92f",
+        "bytes": 5048
+      },
+      {
+        "path": "retirement-final-packages/build.json",
+        "sha256": "a40968123fbfec435b147dfc70d3b4d64fa4ac832d0ff7dad1199979a726b891",
+        "bytes": 673
+      },
+      {
+        "path": "retirement-final-packages/build.stderr",
+        "sha256": "9297aea85049c380a4a33f305a708e8b643d0b71d3ffba5e7ba516dc456ba352",
+        "bytes": 2820
+      },
+      {
+        "path": "retirement-final-packages/build.stdout",
+        "sha256": "a9d09b88ad4d9653702c80d74839b03c14c242da1af368e171b0c7eb248c7867",
+        "bytes": 58134
+      },
+      {
+        "path": "retirement-final-packages/comparison.json",
+        "sha256": "afbf1ce2d76012d4ec38e1dd30911328550b2979317611e9b9b0c0cb9ca8fc35",
+        "bytes": 969
+      },
+      {
+        "path": "retirement-final-packages/sdist-build.json",
+        "sha256": "fe97ac528bac258d921f29fd8bbfcc6a32908586e9b1a1811b8b1c886c9ddad7",
+        "bytes": 677
+      },
+      {
+        "path": "retirement-final-packages/sdist-build.stderr",
+        "sha256": "3405c8ac12a6c18470e03fd12262d15aa7b3c85bcc7b45291d4f4d4ee669899d",
+        "bytes": 1410
+      },
+      {
+        "path": "retirement-final-packages/sdist-build.stdout",
+        "sha256": "7b3f4f84fb34957781f2f494ad580fa41313dff45f4303ef65d1652931d9e791",
+        "bytes": 35643
+      },
+      {
+        "path": "retirement-final-packages/source-inputs.json",
+        "sha256": "0afe3ddf0e4e03f34fa1ba2d1c4cd777df716654a064338fdd23189170bd9d0d",
+        "bytes": 2048994
+      },
+      {
+        "path": "retirement-linux-packages/candidate-install.json",
+        "sha256": "7eb037578c93a29f8846022d5f00ee09a20192a6ff8d2f488e4735ef505ce454",
+        "bytes": 498
+      },
+      {
+        "path": "retirement-linux-packages/candidate-install.stderr",
+        "sha256": "424b2f4d0c0cd440f7c8c5816665b385d24f479fb492eed56c12f9413d387fa3",
+        "bytes": 256
+      },
+      {
+        "path": "retirement-linux-packages/candidate-install.stdout",
+        "sha256": "3e0ca00c6511ffec290c06a91600ae1b4f63ef8e1e19e7574236fe9e8db272af",
+        "bytes": 78
+      },
+      {
+        "path": "retirement-linux-packages/candidate-venv.json",
+        "sha256": "5a851f1b745a9d75128331719d06fa24060ef4f73528e5b682c2caa5ce9c065b",
+        "bytes": 308
+      },
+      {
+        "path": "retirement-linux-packages/candidate-venv.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages/candidate-venv.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-final/candidate-install.json",
+        "sha256": "80fc43f7e93968bcd145453121b011251374241fe4cae933f9afe7b03f5a2149",
+        "bytes": 498
+      },
+      {
+        "path": "retirement-linux-packages-final/candidate-install.stderr",
+        "sha256": "424b2f4d0c0cd440f7c8c5816665b385d24f479fb492eed56c12f9413d387fa3",
+        "bytes": 256
+      },
+      {
+        "path": "retirement-linux-packages-final/candidate-install.stdout",
+        "sha256": "3e0ca00c6511ffec290c06a91600ae1b4f63ef8e1e19e7574236fe9e8db272af",
+        "bytes": 78
+      },
+      {
+        "path": "retirement-linux-packages-final/candidate-venv.json",
+        "sha256": "b2f72d783e842d2e82fcad5c50ab30439bbf222b5068601b3a1ecee5b53467ac",
+        "bytes": 308
+      },
+      {
+        "path": "retirement-linux-packages-final/candidate-venv.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-final/candidate-venv.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/candidate-install.json",
+        "sha256": "09c1931755ba13334614da19159af864b8cad436e545630cc2c7943c5278be35",
+        "bytes": 498
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/candidate-install.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/candidate-install.stdout",
+        "sha256": "07a60125bd385d564f0270543739c567b0d82dddfd21d8673dac633147c60b01",
+        "bytes": 161
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/candidate-venv.json",
+        "sha256": "3e7ea11bc8da91184020a937d59853ad4e424d0fb6d35f96e278f1b013f15f47",
+        "bytes": 308
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/candidate-venv.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/candidate-venv.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/installed.json",
+        "sha256": "8063983e0039bde1e0ccbd6980514a68afa27872888b7ad7bcf70f48cf3353f0",
+        "bytes": 390
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/installed.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/installed.stdout",
+        "sha256": "f6ce2693f83fc1062c8eae956ca986e5a1dc04f9993582553672cdc6ea09f9d4",
+        "bytes": 7792
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/predecessor-install.json",
+        "sha256": "f7f7f13461ef695db37642086bab8639988521d489258da59a847fcc1eb0eb49",
+        "bytes": 500
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/predecessor-install.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/predecessor-install.stdout",
+        "sha256": "287f125880781deb0ee9af1d08fe0e951f22bf96733f6150b340cdf8b2003c22",
+        "bytes": 162
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/predecessor-venv.json",
+        "sha256": "9c77401d88b0ffc72379d0be7a97f8ad99b27cbe5f0937315547e6f1580425b3",
+        "bytes": 310
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/predecessor-venv.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/predecessor-venv.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/rehearsal.json",
+        "sha256": "12b83d3c40badb23a34c1e8e80ce4721aeefaeeaf99989d164fd38d6a7e65e98",
+        "bytes": 389
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/rehearsal.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/rehearsal.stdout",
+        "sha256": "a4aca95bc5b7038699bbca515156d61ce94f9ed3ded85f3e5229f7cd15de9ab1",
+        "bytes": 716
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/sdist-install.json",
+        "sha256": "fac9384874b77cfe64bdccebc0a7d6a174f99ad9ed0abb1785dda3458ecff551",
+        "bytes": 501
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/sdist-install.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/sdist-install.stdout",
+        "sha256": "4544a00da5dfe6b3241bcc68411033c9491c572b09e39bd771929ccc9f7dfbda",
+        "bytes": 168
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/sdist-venv.json",
+        "sha256": "a171aaae9ca7ef90ae7384b2388adfe63648608b11e5cf7e1ea7b07da9a5d578",
+        "bytes": 304
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/sdist-venv.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/sdist-venv.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/candidate-origin.json",
+        "sha256": "daa56d9aa07f59a6fa43accad450dd0dd29d29f37b6b1c714b0c52ef00b8a732",
+        "bytes": 366
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/candidate-origin.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/candidate-origin.stdout",
+        "sha256": "0e98a53745ae1dfe2dab31385dc8bd3433bc96f48ea3fe0854bf621366f4f8bf",
+        "bytes": 142
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/distribution-members.json",
+        "sha256": "81e2e3a3abb524bd9f811fe0fb94ea4968393780d6be503d250526db806ae262",
+        "bytes": 27095
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/existing-upgrade-rehearsal-retry.json",
+        "sha256": "60c2c4cd850942c848b05a88ee556793664e3504a4f8e6f816ca8756c708feef",
+        "bytes": 796
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/existing-upgrade-rehearsal-retry.stderr",
+        "sha256": "6e6548487f49dc872b83886606be70beff7e675c82a68173f6273ec2f8fb825a",
+        "bytes": 2195
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/existing-upgrade-rehearsal-retry.stdout",
+        "sha256": "837b2d497fbdd7f723512de0c4c0a4ec3778a14ee302c50b0af5e70d2001babd",
+        "bytes": 3100
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-sdist-check.json",
+        "sha256": "da1870cd816d555449f69fc4f06f31ad94f09b0ee9dcc0a3b695a66796bc30ab",
+        "bytes": 520
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-sdist-check.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-sdist-check.stdout",
+        "sha256": "2984579fe98f1b1ca338d39ef3c4645c6fe7f02d13336fbf0dfd009244e0a6f4",
+        "bytes": 5654
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-sdist-create.json",
+        "sha256": "80a1984adfe953c6b4d583847d9ba30ba82633990783965404627e5c3a4cd4be",
+        "bytes": 585
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-sdist-create.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-sdist-create.stdout",
+        "sha256": "f28f98c5c939a39ae23fb00c844a5fcfcf7743cb27bbebb3138eb084a04a6904",
+        "bytes": 248
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-sdist-doctor.json",
+        "sha256": "a55f300f7bb6b8141bb871b343bc6409b4d086cb51b18b6af019a7521b91d06e",
+        "bytes": 485
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-sdist-doctor.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-sdist-doctor.stdout",
+        "sha256": "48aa3522c2d5fda1ffc2511c23d4be52235193ef5334451e682081acf0f9ee27",
+        "bytes": 13111
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-sdist-init.json",
+        "sha256": "fb8c7b33fd3f527a0ad958b09ac247fbf4ccd2c178495d130cab4f16889c3ffb",
+        "bytes": 536
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-sdist-init.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-sdist-init.stdout",
+        "sha256": "8a14f888961e8bd98ede7052a8a3e0321c75eaeaffeabc38c42d5fd2e69adc04",
+        "bytes": 5598
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-sdist-scaffold.json",
+        "sha256": "e3745b2ee206650d208eec014426d8156df63d1d561c35c3371962dee61b57d4",
+        "bytes": 522
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-sdist-scaffold.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-sdist-scaffold.stdout",
+        "sha256": "d90977054a361e4070bd33b514b17694ab9b55cc2d6f9596eb0f21526cca91b2",
+        "bytes": 1746
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-wheel-check.json",
+        "sha256": "ceef1c62f73da022fb218fd77c7615d379a99a41677191c175583aed8772c68f",
+        "bytes": 524
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-wheel-check.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-wheel-check.stdout",
+        "sha256": "2984579fe98f1b1ca338d39ef3c4645c6fe7f02d13336fbf0dfd009244e0a6f4",
+        "bytes": 5654
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-wheel-create.json",
+        "sha256": "b6b24b04f2623ab9b7df8d0080361369eb8969d8f558e8c08aeb0bff24a1ca31",
+        "bytes": 589
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-wheel-create.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-wheel-create.stdout",
+        "sha256": "f28f98c5c939a39ae23fb00c844a5fcfcf7743cb27bbebb3138eb084a04a6904",
+        "bytes": 248
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-wheel-doctor.json",
+        "sha256": "ed98f775cf8810e312981bf8e060be30f0bf0edf8934932bc5d8829af35e0505",
+        "bytes": 489
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-wheel-doctor.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-wheel-doctor.stdout",
+        "sha256": "48aa3522c2d5fda1ffc2511c23d4be52235193ef5334451e682081acf0f9ee27",
+        "bytes": 13111
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-wheel-init.json",
+        "sha256": "09d591a355f951d885f3ffc5e60c1faabc59be74ff94ed6c842bb318f3b4fc59",
+        "bytes": 540
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-wheel-init.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-wheel-init.stdout",
+        "sha256": "8a14f888961e8bd98ede7052a8a3e0321c75eaeaffeabc38c42d5fd2e69adc04",
+        "bytes": 5598
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-wheel-scaffold.json",
+        "sha256": "c49ee070d075cecb88dab5809a72eca124cab3e52e38d04bc08ceb070dd27f4e",
+        "bytes": 527
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-wheel-scaffold.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/fresh-wheel-scaffold.stdout",
+        "sha256": "d90977054a361e4070bd33b514b17694ab9b55cc2d6f9596eb0f21526cca91b2",
+        "bytes": 1746
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/owner-preservation.json",
+        "sha256": "56d8a808e38eabb220a5d6c46b9c87cb7c548923feede545040b9e5089cde426",
+        "bytes": 1254
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/predecessor-doctor.json",
+        "sha256": "9bca0e3c49a5dcfd05ff2204b65bc6511e4423c6b5f28f6b554a9d728997c20a",
+        "bytes": 491
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/predecessor-doctor.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/predecessor-doctor.stdout",
+        "sha256": "c59bf8f3559980fb337c36deb3038a9e42c19bf9544fd18aeb38f422187fc6cf",
+        "bytes": 13820
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/predecessor-init.json",
+        "sha256": "541b3f6bfefe89834166667bd7faef14ec718c5eb3d22738f0ef351218d30e23",
+        "bytes": 541
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/predecessor-init.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/predecessor-init.stdout",
+        "sha256": "a1fcbac786ab845a38c0408040f8dd1b385d42cf2d24b54a88d064bfc232e4ab",
+        "bytes": 6121
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/upgrade-apply.json",
+        "sha256": "063c0124deb59490f3fb70a890e528445be66fc8927413bd339853d7292abb67",
+        "bytes": 505
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/upgrade-apply.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/upgrade-apply.stdout",
+        "sha256": "720993f0c613af361b1c92f9c918d9ec6eca47a4a4ed559b4e571d65bdf27117",
+        "bytes": 6511
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/upgrade-doctor.json",
+        "sha256": "b5e936c47b40e3748fb42e79be5f3fa213635134cf6c30b9f15290f6ce859965",
+        "bytes": 489
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/upgrade-doctor.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/upgrade-doctor.stdout",
+        "sha256": "48aa3522c2d5fda1ffc2511c23d4be52235193ef5334451e682081acf0f9ee27",
+        "bytes": 13111
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/upgrade-preview.json",
+        "sha256": "9879fa629ea3f0d8a162b179322d488c7ecc31d6fae3f3becf426515fd1a2be3",
+        "bytes": 490
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/upgrade-preview.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/upgrade-preview.stdout",
+        "sha256": "7f09e56b24dc9b11e876d61de7bb989d2da084997f91a47626f7c16713fb4c7d",
+        "bytes": 6527
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/upgrade-retry.json",
+        "sha256": "0902a98488ad0ceb14ed5d733d0fdbb9f532966c956a9ada0dcd73396ce1989c",
+        "bytes": 505
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/upgrade-retry.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/checks/upgrade-retry.stdout",
+        "sha256": "18375dcff087e508fbd2fbe0a3a865218c58a7ab190f48332e9e2a54055acb9f",
+        "bytes": 5976
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/rehearsal-retry/upgrade-rehearsal-result.json",
+        "sha256": "6005c94d589a42527a6463488cadac247a80643c2d8605f69e41c339436415df",
+        "bytes": 3890
+      },
+      {
+        "path": "retirement-linux-packages-confirmed/rehearsal-retry/upgrade-rehearsal-timing.json",
+        "sha256": "618b42ad6bb0f82c5eb4c1f04cc9a5a91750a77043ec85ad7ba7707066ed083b",
+        "bytes": 4763
+      },
+      {
+        "path": "retirement-inventory/build-input-comparison.json",
+        "sha256": "28e9075dab9a30185eb954f09f9bb64f31ba7994e1aeba914c430bdd16075e75",
+        "bytes": 415
+      },
+      {
+        "path": "retirement-inventory/consumer-inventory.json",
+        "sha256": "79f3b8bf741cbaa1f8bf73a9a7ece8dec1dc76abddddd3aa4d0264009b8a928d",
+        "bytes": 5236799
+      },
+      {
+        "path": "retirement-inventory/protected-files.json",
+        "sha256": "e2331864bbc22a084bbc4f14c95f12e6521185151ed7888389f8d8aa6b7f16f6",
+        "bytes": 4342
+      },
+      {
+        "path": "commands/retirement_approve25.py",
+        "sha256": "e63b5a8fd0454e96f54923ef03bb57291b6a760ba123575c8bc3a675114b6b06",
+        "bytes": 1751
+      },
+      {
+        "path": "commands/retirement_authorize.py",
+        "sha256": "8855b219bb189682b6636a273fb51f98ddc28a1d578adeff2f135ca60053de28",
+        "bytes": 2959
+      },
+      {
+        "path": "commands/retirement_build.py",
+        "sha256": "ee3696df9fe5b3b668e50dced8be1eddbc977dbc24f46b854664565106e76e0e",
+        "bytes": 1560
+      },
+      {
+        "path": "commands/retirement_cleanup_rehearsal.py",
+        "sha256": "48e49e35c5b6843d0fcfa53b0813a5555836aa9db2f3d7727065dff5acca0752",
+        "bytes": 3069
+      },
+      {
+        "path": "commands/retirement_evidence.py",
+        "sha256": "ed83a14271413943bdc97aa7cb5e0796a67b70f21dc67b961403ae60c914b7ad",
+        "bytes": 4061
+      },
+      {
+        "path": "commands/retirement_final_packages.py",
+        "sha256": "4c31f24d4340cfc4b8b4e8ce094537b0ad14a40eb4241ab6cba664850c9f52b5",
+        "bytes": 2137
+      },
+      {
+        "path": "commands/retirement_handoff.py",
+        "sha256": "a4e3ab459d834d187562cab91be3a3cf6abcb8203d4a58777f064e2429c227e6",
+        "bytes": 1300
+      },
+      {
+        "path": "commands/retirement_inventory.py",
+        "sha256": "27243568f6492f75706f035d49ddd7c7300a85c7b80b974d7e34e9f7482e0b93",
+        "bytes": 5271
+      },
+      {
+        "path": "commands/retirement_linux.py",
+        "sha256": "9ee61cbfbd1d163e98db1ffb9739f373216d92a3bb7b939f1567f516db8ed867",
+        "bytes": 2221
+      },
+      {
+        "path": "commands/retirement_linux_packages.py",
+        "sha256": "e4b402961f689f14e9582ac36381bceb12f293dcd85f751cdc0e11bc88b4d2de",
+        "bytes": 1528
+      },
+      {
+        "path": "commands/retirement_packages_check.py",
+        "sha256": "dc00ca21d9bbad694ba7eed0e4db8f7f97859e4ee68ac4af6fa2b3485cc38d84",
+        "bytes": 7356
+      },
+      {
+        "path": "commands/retirement_prepare_sources.py",
+        "sha256": "b6bf030581b2b1d3f834fdf93703d980f0795a732d7aa208fbb0086b534c4aa9",
+        "bytes": 1776
+      },
+      {
+        "path": "commands/retirement_tools.py",
+        "sha256": "317160e755ea43bf4d8c93b96325dd1368e718eca88cf6f52812b3d9200191d0",
+        "bytes": 1329
+      },
+      {
+        "path": "governance/retirement-choice-apply.invocation.json",
+        "sha256": "def6c864f13311e671e11108d05654df988d4956dca219cf9c45aeadf0afb8c4",
+        "bytes": 591
+      },
+      {
+        "path": "governance/retirement-choice-apply.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-choice-apply.stdout",
+        "sha256": "64696e6048f2982750be230c89db6eb7b17a244cfaf76c21a29cbf9baeebfc59",
+        "bytes": 4704
+      },
+      {
+        "path": "governance/retirement-choice-input.json",
+        "sha256": "708bd77a38addca772526c4860934052e1f8fc32c5167881c7250b8918513dee",
+        "bytes": 361
+      },
+      {
+        "path": "governance/retirement-choice-preview.invocation.json",
+        "sha256": "ff2bac98368e3f18c07693c9e7e785812845c992e38ba5ccef2a3b413849255e",
+        "bytes": 575
+      },
+      {
+        "path": "governance/retirement-choice-preview.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-choice-preview.stdout",
+        "sha256": "a085d0a24038fd3643a559abcc1cfaf0bce0aa94acf8f16e965068f1a8d82fa3",
+        "bytes": 4716
+      },
+      {
+        "path": "governance/retirement-correction-check.invocation.json",
+        "sha256": "c5d0d937a9b441282dd70def8c80b2c0afeae923659c90c5f04335d2faa5bada",
+        "bytes": 424
+      },
+      {
+        "path": "governance/retirement-correction-check.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-correction-check.stdout",
+        "sha256": "86c4fb20e6580266a2035e819b592be2a87c6e14d3fa4cfcdb4b17778eb1c9eb",
+        "bytes": 7674
+      },
+      {
+        "path": "governance/retirement-correction-create.invocation.json",
+        "sha256": "942041f5e8b121bbdbf044efa265a068d61be37b76dd7d2f6a07d7ec2ca9455d",
+        "bytes": 512
+      },
+      {
+        "path": "governance/retirement-correction-create.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-correction-create.stdout",
+        "sha256": "5e8b7d74292299952459fd248c695cc004fac30957759e551baf36880327d5cc",
+        "bytes": 279
+      },
+      {
+        "path": "governance/retirement-correction-preview.invocation.json",
+        "sha256": "1b5820c98b60c3ff2d00f64d65d69757c3479de50e91ddaa05506bc88ca14a0b",
+        "bytes": 498
+      },
+      {
+        "path": "governance/retirement-correction-preview.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-correction-preview.stdout",
+        "sha256": "173c93c76e54c9d279a1ef2c48cfcc5bcfb2bf7e9c615398d14cc7a456489dd8",
+        "bytes": 311
+      },
+      {
+        "path": "governance/retirement-correction-validate.invocation.json",
+        "sha256": "74ceb5598a41f62087d3ec0062b3364edcd837c3409cfb94269d039219fc51cc",
+        "bytes": 389
+      },
+      {
+        "path": "governance/retirement-correction-validate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-correction-validate.stdout",
+        "sha256": "c120379d7016f5d7cc6c3c534c1f3a52f0ee55d70937f2b3d219bcdf90016e55",
+        "bytes": 340473
+      },
+      {
+        "path": "governance/retirement-entry.invocation.json",
+        "sha256": "cd2c063aceebe9f1c6a1f6a61f4e9a2f418c5f1aeec1a8d52f84cd6b295972cf",
+        "bytes": 424
+      },
+      {
+        "path": "governance/retirement-entry.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-entry.stdout",
+        "sha256": "56c652c12fd770e78e7b8e499b4545174f8069d48275244e15bc34f2878c9763",
+        "bytes": 16309
+      },
+      {
+        "path": "governance/retirement-final-validate.invocation.json",
+        "sha256": "74ceb5598a41f62087d3ec0062b3364edcd837c3409cfb94269d039219fc51cc",
+        "bytes": 389
+      },
+      {
+        "path": "governance/retirement-final-validate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-final-validate.stdout",
+        "sha256": "bdc67ad0d4223fc4d5aa8713dcb2e30f1320df0684544bcb5c3ac58b52c2a9ac",
+        "bytes": 340670
+      },
+      {
+        "path": "governance/retirement-last-link-check.invocation.json",
+        "sha256": "2aa841001112027399ef9cd365cdcf05e934e68783fb93f20704b4fcac64e1a0",
+        "bytes": 424
+      },
+      {
+        "path": "governance/retirement-last-link-check.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-last-link-check.stdout",
+        "sha256": "b372fe2cf9527748564b6bfae018b312cc0023d96c29996dc960fd066d531bbe",
+        "bytes": 7094
+      },
+      {
+        "path": "governance/retirement-last-link-create.invocation.json",
+        "sha256": "2f77c4525fa8cdd518995022e4fd819df46417b68aeaeff97f4f7fdd38427e07",
+        "bytes": 512
+      },
+      {
+        "path": "governance/retirement-last-link-create.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-last-link-create.stdout",
+        "sha256": "1ecb7d7b1b55e0085fb78103c2aab4d971435ea9a588d5e7fe77a97c4ee45814",
+        "bytes": 279
+      },
+      {
+        "path": "governance/retirement-last-link-preview.invocation.json",
+        "sha256": "1b5820c98b60c3ff2d00f64d65d69757c3479de50e91ddaa05506bc88ca14a0b",
+        "bytes": 498
+      },
+      {
+        "path": "governance/retirement-last-link-preview.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-last-link-preview.stdout",
+        "sha256": "acc38dd50f64b7248dba8656b425b05f2b4b2797341fe7b8c640f7c25f61ab29",
+        "bytes": 311
+      },
+      {
+        "path": "governance/retirement-last-link-validate.invocation.json",
+        "sha256": "74ceb5598a41f62087d3ec0062b3364edcd837c3409cfb94269d039219fc51cc",
+        "bytes": 389
+      },
+      {
+        "path": "governance/retirement-last-link-validate.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-last-link-validate.stdout",
+        "sha256": "3fd43f0178b6b2d4772332ff8963bdf9692248c0ece05e0d31910686c45f123d",
+        "bytes": 340664
+      },
+      {
+        "path": "governance/retirement-WO-IAR-022-planned-scope.invocation.json",
+        "sha256": "cbd7c7c82f3c6db898d7ba1bd3d77cf93c69a6e396732004ae61b6262473f73d",
+        "bytes": 2372
+      },
+      {
+        "path": "governance/retirement-WO-IAR-022-planned-scope.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-WO-IAR-022-planned-scope.stdout",
+        "sha256": "78d9bf9b5054b1170c7e8ff7b629a203c7c23b3979ac7aef63b1e57a4a06208f",
+        "bytes": 17060
+      },
+      {
+        "path": "governance/retirement-WO-IAR-022-review-preflight.invocation.json",
+        "sha256": "2749289e18ea90357c2c3dd5fd99e661e06a80e76dc71964dca9af6784626db0",
+        "bytes": 461
+      },
+      {
+        "path": "governance/retirement-WO-IAR-022-review-preflight.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-WO-IAR-022-review-preflight.stdout",
+        "sha256": "560f074b79f33185787d347a27f8a3d42b01a8e6ce9045a80cb150c65255e034",
+        "bytes": 1474
+      },
+      {
+        "path": "governance/retirement-WO-IAR-022-start-apply.invocation.json",
+        "sha256": "f1c08d93bacbb5369e852d83895943424d6d08999cc39dd63e0ba9ca4cc62f12",
+        "bytes": 634
+      },
+      {
+        "path": "governance/retirement-WO-IAR-022-start-apply.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-WO-IAR-022-start-apply.stdout",
+        "sha256": "5cc5645a619ff8388632cee1822df91d6427427404e297e209ef8b64cb6c6464",
+        "bytes": 16796
+      },
+      {
+        "path": "governance/retirement-WO-IAR-022-start-preflight.invocation.json",
+        "sha256": "6a9e5978c4100a2649461516f4ccab779ed62f1a7fd6a04b9cbe7a46f6d9393e",
+        "bytes": 460
+      },
+      {
+        "path": "governance/retirement-WO-IAR-022-start-preflight.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-WO-IAR-022-start-preflight.stdout",
+        "sha256": "3e23123afa80affbacc70ef2401cffa5189663c4569559a903770b2cc3b74993",
+        "bytes": 1470
+      },
+      {
+        "path": "governance/retirement-WO-IAR-022-start-preview.invocation.json",
+        "sha256": "91bbefe652a5b96f67efe8e06937e3f23feffac34f43459fcda2c9eada243e4c",
+        "bytes": 618
+      },
+      {
+        "path": "governance/retirement-WO-IAR-022-start-preview.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-WO-IAR-022-start-preview.stdout",
+        "sha256": "c5e30b5c239bdc90e6835dfbf59c7bd65f26a3ee5a92bfa842d7d360c3006fff",
+        "bytes": 16808
+      },
+      {
+        "path": "governance/retirement-WO-IAR-022-start-readback.invocation.json",
+        "sha256": "cd2c063aceebe9f1c6a1f6a61f4e9a2f418c5f1aeec1a8d52f84cd6b295972cf",
+        "bytes": 424
+      },
+      {
+        "path": "governance/retirement-WO-IAR-022-start-readback.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-WO-IAR-022-start-readback.stdout",
+        "sha256": "977bf1c9c67b95c714fcc98f06f5d448ebfc2824d40d41daeba6626661886ccc",
+        "bytes": 18102
+      },
+      {
+        "path": "governance/retirement-WO-IAR-024-planned-scope.invocation.json",
+        "sha256": "a7f498aece515c8f524647ac8ab70ab2df00d31bd6aeea5c4df1ecd96dfc8e1d",
+        "bytes": 1777
+      },
+      {
+        "path": "governance/retirement-WO-IAR-024-planned-scope.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-WO-IAR-024-planned-scope.stdout",
+        "sha256": "774f14f4d3372b1a87f151419c55328b672851f209d6a0cb0aacd93407abe288",
+        "bytes": 15763
+      },
+      {
+        "path": "governance/retirement-WO-IAR-024-review-preflight.invocation.json",
+        "sha256": "650b11316f06401c423217ed70078a9a612af2bf56366a817bfcdbe42952b133",
+        "bytes": 461
+      },
+      {
+        "path": "governance/retirement-WO-IAR-024-review-preflight.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-WO-IAR-024-review-preflight.stdout",
+        "sha256": "2b2c30d745ab1e75f2cb4ee698b5ee49cb89136bcdee5805887ff1b3cdf4c4a3",
+        "bytes": 1436
+      },
+      {
+        "path": "governance/retirement-WO-IAR-024-start-apply.invocation.json",
+        "sha256": "6de886c3528535a696c17c13947c2de61a87af185f56f30da6f4d0feb6e64218",
+        "bytes": 634
+      },
+      {
+        "path": "governance/retirement-WO-IAR-024-start-apply.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-WO-IAR-024-start-apply.stdout",
+        "sha256": "231e63df3b836a9a85b964987620c2ca368de819a6723240f779b989572384e5",
+        "bytes": 15905
+      },
+      {
+        "path": "governance/retirement-WO-IAR-024-start-preflight.invocation.json",
+        "sha256": "c55a9a1fcb6271f0d4d8f118e3a8e324f676b35f8168db01591578eab93f5578",
+        "bytes": 460
+      },
+      {
+        "path": "governance/retirement-WO-IAR-024-start-preflight.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-WO-IAR-024-start-preflight.stdout",
+        "sha256": "8eef5717e7b5a8e49ece2785c4a2cead4ec255031a6020f78734520a71782524",
+        "bytes": 1432
+      },
+      {
+        "path": "governance/retirement-WO-IAR-024-start-preview.invocation.json",
+        "sha256": "6018913fbe5304171e07dff44cfc01dc9cf082aa47dd2fa4b71fd0f85f5125c6",
+        "bytes": 618
+      },
+      {
+        "path": "governance/retirement-WO-IAR-024-start-preview.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-WO-IAR-024-start-preview.stdout",
+        "sha256": "bc6081f45a561dcdcdc2c09217b6ec705e22bdaa2d513b170033ffc15d77cb86",
+        "bytes": 15917
+      },
+      {
+        "path": "governance/retirement-WO-IAR-024-start-readback.invocation.json",
+        "sha256": "c5d0d937a9b441282dd70def8c80b2c0afeae923659c90c5f04335d2faa5bada",
+        "bytes": 424
+      },
+      {
+        "path": "governance/retirement-WO-IAR-024-start-readback.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-WO-IAR-024-start-readback.stdout",
+        "sha256": "a1971e4619ef434bf7dec20a38ca3a46d4aa9a7288ea331a002d1b5db9c855db",
+        "bytes": 16322
+      },
+      {
+        "path": "governance/retirement-WO-IAR-025-planned-scope.invocation.json",
+        "sha256": "7c2369c7d4144c5d8c690971121fc8f32b4b9cc1429ae66552270747b820dcec",
+        "bytes": 754
+      },
+      {
+        "path": "governance/retirement-WO-IAR-025-planned-scope.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-WO-IAR-025-planned-scope.stdout",
+        "sha256": "74e2ebd7375425044159295fa5b50c1188b735f6f337dcad37e45db71c079eee",
+        "bytes": 14680
+      },
+      {
+        "path": "governance/retirement-WO-IAR-025-review-preflight.invocation.json",
+        "sha256": "e61186b9d9a05182b711cafaa878d56cbeb5c2872549f27e9ae8286af574b01d",
+        "bytes": 461
+      },
+      {
+        "path": "governance/retirement-WO-IAR-025-review-preflight.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-WO-IAR-025-review-preflight.stdout",
+        "sha256": "4f5884582dc78deebcb9390051edf97f7d50effa1f12c02f5bf75ef0333c1ac1",
+        "bytes": 1412
+      },
+      {
+        "path": "governance/retirement-WO-IAR-025-start-apply.invocation.json",
+        "sha256": "d58bd8c477690bec02f17d218d51d6815b992bb55a868a71ffd7cb9b4a49e0b8",
+        "bytes": 634
+      },
+      {
+        "path": "governance/retirement-WO-IAR-025-start-apply.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-WO-IAR-025-start-apply.stdout",
+        "sha256": "57fdb0668024795610d6d7d0fd31a4d595b68a8c6f8c6d695d77741b17f8f217",
+        "bytes": 15615
+      },
+      {
+        "path": "governance/retirement-WO-IAR-025-start-preflight.invocation.json",
+        "sha256": "518d8da3ff918fca7835428f87d1dcfea3497f569047baa298fb15a8801554ba",
+        "bytes": 460
+      },
+      {
+        "path": "governance/retirement-WO-IAR-025-start-preflight.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-WO-IAR-025-start-preflight.stdout",
+        "sha256": "e13c5d0905847db82b9a8241ac3cbbeaf239ae553f7dbc668bdbacda97f36b0b",
+        "bytes": 1408
+      },
+      {
+        "path": "governance/retirement-WO-IAR-025-start-preview.invocation.json",
+        "sha256": "24b6ca86bc7d4d48930bf53295a37e1b0c0bb3c332a9a09c7a77f1bb5e1dbf17",
+        "bytes": 618
+      },
+      {
+        "path": "governance/retirement-WO-IAR-025-start-preview.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-WO-IAR-025-start-preview.stdout",
+        "sha256": "5eb13d6cb2493c0815585ebb26b3001751acb9cd84dfdcba547ab2a0e60bc274",
+        "bytes": 15627
+      },
+      {
+        "path": "governance/retirement-WO-IAR-025-start-readback.invocation.json",
+        "sha256": "2aa841001112027399ef9cd365cdcf05e934e68783fb93f20704b4fcac64e1a0",
+        "bytes": 424
+      },
+      {
+        "path": "governance/retirement-WO-IAR-025-start-readback.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement-WO-IAR-025-start-readback.stdout",
+        "sha256": "51b8d9e94c596515db13680192c1b3202ec90a43decb267304dc99c8d5613965",
+        "bytes": 15742
+      },
+      {
+        "path": "governance/retirement022-current.invocation.json",
+        "sha256": "cd2c063aceebe9f1c6a1f6a61f4e9a2f418c5f1aeec1a8d52f84cd6b295972cf",
+        "bytes": 424
+      },
+      {
+        "path": "governance/retirement022-current.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement022-current.stdout",
+        "sha256": "56c652c12fd770e78e7b8e499b4545174f8069d48275244e15bc34f2878c9763",
+        "bytes": 16309
+      },
+      {
+        "path": "governance/retirement024-approval-apply.invocation.json",
+        "sha256": "b61944b4b542fb03b93df1e1d507a304921414630ded87dba9afcde33fe9e757",
+        "bytes": 1007
+      },
+      {
+        "path": "governance/retirement024-approval-apply.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement024-approval-apply.stdout",
+        "sha256": "25b83487509952a6c99ca02ca1c01d0b33b7245726b5680e463d3dc12d732131",
+        "bytes": 13432
+      },
+      {
+        "path": "governance/retirement024-approval-preview.invocation.json",
+        "sha256": "effaee375e3d2f1b595b3a75d869804085c40745ac719cf7b5733b9b09cc7c18",
+        "bytes": 991
+      },
+      {
+        "path": "governance/retirement024-approval-preview.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement024-approval-preview.stdout",
+        "sha256": "1f5256f633abf41325666d432c042ebab9a40bcae440963fc428f1f491f795b4",
+        "bytes": 13444
+      },
+      {
+        "path": "governance/retirement024-current.invocation.json",
+        "sha256": "c5d0d937a9b441282dd70def8c80b2c0afeae923659c90c5f04335d2faa5bada",
+        "bytes": 424
+      },
+      {
+        "path": "governance/retirement024-current.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement024-current.stdout",
+        "sha256": "86c4fb20e6580266a2035e819b592be2a87c6e14d3fa4cfcdb4b17778eb1c9eb",
+        "bytes": 7674
+      },
+      {
+        "path": "governance/retirement025-approval-apply.invocation.json",
+        "sha256": "5077213410014e67f0b2f5856d9c416c48dc06c5239bded307f757d876cf59bb",
+        "bytes": 998
+      },
+      {
+        "path": "governance/retirement025-approval-apply.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement025-approval-apply.stdout",
+        "sha256": "a71b6a3c9ca0b60ecdc9c6e658be851093c6363b255e52cded1fa00555cf61b1",
+        "bytes": 13142
+      },
+      {
+        "path": "governance/retirement025-approval-preview.invocation.json",
+        "sha256": "9c54c049c17702d42da77d24481a30e30686e273286ca52953d660fc7938a673",
+        "bytes": 982
+      },
+      {
+        "path": "governance/retirement025-approval-preview.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "governance/retirement025-approval-preview.stdout",
+        "sha256": "bbf39a7818e98739810a1450c3c575fa347ab2157a6bb446aac456071ff4dab8",
+        "bytes": 13154
+      }
+    ]
+  },
+  "consumer_inventory": {
+    "files": 1743,
+    "classifications": {
+      "current": 12,
+      "conditional": 7,
+      "historical": 1724
+    }
+  },
+  "limits": [
+    "Source and disposable installed-package tests, not a release build or publication.",
+    "Native qualification and real adoption remain WO-IAR-020/later work.",
+    "Repository-installed pointers, root policy, machine gates and VREC-IAR-013 evidence are unchanged."
+  ]
+}

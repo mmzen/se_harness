@@ -1,0 +1,36 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+    "plugin",
+    "list",
+    "--json",
+    "--marketplace",
+    "se-harness"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\qualification020-host",
+  "exit_code": 0,
+  "result": {
+    "installed": [
+      {
+        "pluginId": "verity-plane@se-harness",
+        "name": "verity-plane",
+        "marketplaceName": "se-harness",
+        "version": "0.1.0",
+        "installed": true,
+        "enabled": true,
+        "source": {
+          "source": "local",
+          "path": "C:\\Users\\mathi\\.codex\\.tmp\\marketplaces\\se-harness\\packages\\codex\\verity-plane"
+        },
+        "marketplaceSource": {
+          "sourceType": "git",
+          "source": "https://github.com/mmzen/se_harness.git"
+        },
+        "installPolicy": "AVAILABLE",
+        "authPolicy": "ON_INSTALL"
+      }
+    ],
+    "available": []
+  },
+  "stderr": ""
+}

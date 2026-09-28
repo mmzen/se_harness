@@ -1,0 +1,397 @@
+{
+  "checks": [
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_artifact_catalog.ArtifactCatalogTests.test_work_order_template_expresses_conditional_architecture",
+        "tests.test_installer.InstructionMigrationTests.test_recognized_fragments_preserve_all_owner_bytes"
+      ],
+      "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar021-baseline-tymqktcf",
+      "baseline": "fd05dc9f28452c906e764a37570342acbabd09b9",
+      "exit_code": 1,
+      "note": "Git archive uses LF, separate from Windows checkout CRLF fixtures.",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/baseline-failures.json",
+      "sha256": "48716fed3638fed5dffcc49888f7be1f7c6839ff4516283f2fddca8b1eda2385"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "seconds": 0.33,
+      "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "win32",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/cli.json",
+      "sha256": "e08d8d9c1195205aba291f6501601d65ef9119ca218de4d25a95edab68bdc832"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_artifact_catalog.ArtifactCatalogTests.test_work_order_template_expresses_conditional_architecture",
+        "tests.test_installer.InstructionMigrationTests.test_recognized_fragments_preserve_all_owner_bytes"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "seconds": 3.16,
+      "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "win32",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/corrected-test-cases.json",
+      "sha256": "ef8c6252b30ab767219f8155a41b58ab3503c217a6f67d33b39339181f0fd91b"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/plugin_integration/progressive_discovery",
+        "-p",
+        "test_*.py"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "seconds": 1.65,
+      "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "win32",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/delivery.json",
+      "sha256": "722ebb43c99b2282ea81dad9cef11071cabab2d76ef069bd37b07cf398feee3f"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "seconds": 5.05,
+      "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "win32",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/distributions.json",
+      "sha256": "2c0ac66934ff27511668bf139b6dc78bbbf22644aa234928131d12dfa4f37473"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "-m",
+        "repository_tools.explorer_design.build_explorer_template",
+        "--check"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "seconds": 0.26,
+      "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "win32",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/explorer-generated.json",
+      "sha256": "1d21227c529c4a2aca0d04a02f1a914a6b1490a980bbdb241c36b7f58c81e661"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_progressive_instruction_discovery"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "seconds": 1.66,
+      "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "win32",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/focused-corrected.json",
+      "sha256": "5d51b71a76f60a630b1affd876518a4067fefa714638d8949cc988811d2e84ee"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_progressive_instruction_discovery",
+        "tests.test_instruction_discovery",
+        "tests.test_workflow_documentation_contract",
+        "tests.test_instruction_architecture",
+        "tests.test_dashboard_webui"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 1,
+      "seconds": 99.04,
+      "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "win32",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/focused.json",
+      "sha256": "2c75ff51d030adbd05e35beba3a8ebc2c57eb9462bb3ecaeda1d0253c2c68eca"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "scripts/run_tests.py",
+        "--workers",
+        "4"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "seconds": 239.64,
+      "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "win32",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/full-final.json",
+      "sha256": "d9530dd50813f2601b91fe46db0367608bb7d20e3b5d194f32ca97757d99c28b"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "scripts/run_tests.py",
+        "--workers",
+        "4"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 1,
+      "seconds": 234.22,
+      "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "win32",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/full.json",
+      "sha256": "b9f614a1608bffa2b491d9bc278819ca9d26764e6514b29977fc10a081d2be9e"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_installer.InstructionMigrationTests.test_recognized_fragments_preserve_all_owner_bytes"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 1,
+      "seconds": 2.21,
+      "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "platform": "win32",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/installer-recheck.json",
+      "sha256": "043c69f39989ea33307256a80fe2d2763b2954a0ee58884214c0bd63258d3b37"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "/tmp/iar021-linux-4v5u3obx/repository",
+      "source": "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+      "exit_code": 0,
+      "seconds": 0.12,
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "platform": "linux",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/linux-cli-final.json",
+      "sha256": "08d140ad84a19a04d02bdef351ab59726ef4ab894b3b928fdedfdd9fd8771549"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "se_harness",
+        "--help"
+      ],
+      "cwd": "/tmp/iar021-linux-j89cwwu8/repository",
+      "source": "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+      "exit_code": 0,
+      "seconds": 0.12,
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "platform": "linux",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/linux-cli.json",
+      "sha256": "aecdbdd25f94ed4a2693f541515ab64c9a6baf4a1603ed810bca5f033f475b8d"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/plugin_integration/progressive_discovery",
+        "-p",
+        "test_*.py"
+      ],
+      "cwd": "/tmp/iar021-linux-4v5u3obx/repository",
+      "source": "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+      "exit_code": 0,
+      "seconds": 0.5,
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "platform": "linux",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/linux-delivery-final.json",
+      "sha256": "5d0cecf92eb98a2d050edab0863f467fb378d0b78d61145f5738a3663a6ac4b3"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/plugin_integration/progressive_discovery",
+        "-p",
+        "test_*.py"
+      ],
+      "cwd": "/tmp/iar021-linux-j89cwwu8/repository",
+      "source": "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+      "exit_code": 0,
+      "seconds": 0.35,
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "platform": "linux",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/linux-delivery.json",
+      "sha256": "5a8258030e3641d87bffaf7c37cf673c46242c8f92924277745d03d1028aef83"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "/tmp/iar021-linux-4v5u3obx/repository",
+      "source": "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+      "exit_code": 0,
+      "seconds": 0.6,
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "platform": "linux",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/linux-distributions-final.json",
+      "sha256": "60d4e3938ea229c754323b5ae098baf27c03652db961070c29fb31cb9f9ced9e"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "scripts/validate_release_distributions.py",
+        "--root",
+        "."
+      ],
+      "cwd": "/tmp/iar021-linux-j89cwwu8/repository",
+      "source": "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+      "exit_code": 0,
+      "seconds": 0.6,
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "platform": "linux",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/linux-distributions.json",
+      "sha256": "8e24dcdd369924c882cf15c2ec1aff1028f7ba7c1f1d09cbca6b75aa04dbd6fb"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_progressive_instruction_discovery",
+        "tests.test_instruction_discovery",
+        "tests.test_workflow_documentation_contract",
+        "tests.test_instruction_architecture",
+        "tests.test_dashboard_webui"
+      ],
+      "cwd": "/tmp/iar021-linux-j89cwwu8/repository",
+      "source": "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+      "exit_code": 0,
+      "seconds": 28.81,
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "platform": "linux",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/linux-focused-corrected.json",
+      "sha256": "5665a586e28c60c1a4182dc72f32fef44143730284213482f9b41c6d009af47a"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_progressive_instruction_discovery",
+        "tests.test_instruction_discovery",
+        "tests.test_workflow_documentation_contract",
+        "tests.test_instruction_architecture",
+        "tests.test_dashboard_webui"
+      ],
+      "cwd": "/tmp/iar021-linux-4v5u3obx/repository",
+      "source": "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+      "exit_code": 0,
+      "seconds": 40.8,
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "platform": "linux",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/linux-focused-final.json",
+      "sha256": "d0728fbcad0446ad71fc26486e2054bb3896dcfeee36c56933604b2aa9f52a9f"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_progressive_instruction_discovery",
+        "tests.test_instruction_discovery",
+        "tests.test_workflow_documentation_contract",
+        "tests.test_instruction_architecture",
+        "tests.test_dashboard_webui"
+      ],
+      "cwd": "/tmp/iar021-linux-vcu9nu4s/repository",
+      "source": "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+      "exit_code": 1,
+      "seconds": 41.26,
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "platform": "linux",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/linux-focused.json",
+      "sha256": "056cf7aed058ed5495f49c3ceaefa4ccbefbee29bc4772360605b7c1ff5a21ab"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "scripts/run_tests.py",
+        "--workers",
+        "4"
+      ],
+      "cwd": "/tmp/iar021-linux-4v5u3obx/repository",
+      "source": "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+      "exit_code": 0,
+      "seconds": 54.16,
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "platform": "linux",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/linux-full-final.json",
+      "sha256": "3070192d9b3a9ee02dd84b01c490e12273750f7218b6b0946bee6d50dc73143c"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "scripts/run_tests.py",
+        "--workers",
+        "4"
+      ],
+      "cwd": "/tmp/iar021-linux-j89cwwu8/repository",
+      "source": "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+      "exit_code": 1,
+      "seconds": 42.22,
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "platform": "linux",
+      "record": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks/linux-full.json",
+      "sha256": "d0bc072696381dd010d198eff176a856afdecd89231dfc090cb0ee13af6389d3"
+    }
+  ],
+  "original_failures_retained": true
+}

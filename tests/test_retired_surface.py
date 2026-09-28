@@ -93,7 +93,7 @@ ABSENT_TEXT: dict[str, tuple[str, ...]] = {
     "templates/repository/standard/ENGINEERING_HARNESS.md.tpl": ("block verbatim", "restitution verbatim"),
     "templates/repository/standard/docs/engineering/harness/RESULTS.md": ("block verbatim", "restitution verbatim"),
     # ECP-CTX-007 as amended under WO-ECP-020: nothing names next or accept-candidate as a command
-    "templates/repository/standard/docs/engineering/WORKFLOW.md": ("block verbatim", "restitution verbatim", "harnessctl next"),
+    "templates/repository/standard/docs/engineering/harness/CONTINUE.md": ("block verbatim", "restitution verbatim", "harnessctl next"),
     "docs/notes/harnessctl-reference.md": ("| `next` |", "harnessctl next [", "| `accept-candidate` |", "harnessctl accept-candidate"),
     "docs/notes/harnessctl-check.md": ("harnessctl next",),
     # the designed Explorer (WO-DPB-*): the phrases of the prototype it replaced

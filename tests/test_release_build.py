@@ -213,10 +213,11 @@ class DeterministicSdistTests(unittest.TestCase):
         }
         self.assertEqual(expected, set(distributed))
         self.assertEqual(len(distributed), len(set(distributed)))
-        policy = "templates/repository/standard/docs/engineering/TECHNICAL_COMMUNICATION.md"
+        policy = "templates/repository/standard/docs/engineering/harness/COMMUNICATION.md"
         self.assertEqual(
             1,
-            sum(policy in relatives for relatives in data_files.values()),
+            sum((REPOSITORY_ROOT / policy) in REPOSITORY_ROOT.glob(pattern)
+                for relatives in data_files.values() for pattern in relatives),
         )
         claude_prefix = "share/se-harness/templates/repository/standard/.claude/skills"
         claude_distributed = [

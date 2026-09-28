@@ -1,0 +1,9 @@
+{
+  "static_protocol_probe": true,
+  "not_native_host_observation": true,
+  "context_utf16_units": 8913,
+  "hook_limit_utf16_units": 10000,
+  "headroom_utf16_units": 1087,
+  "cache_hooks_exists": false,
+  "cache_inject_script_exists": false
+}

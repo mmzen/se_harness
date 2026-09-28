@@ -1,0 +1,12 @@
+{
+  "kind": "Existing candidate conformance tests; not a released lifecycle verdict or native-host demonstration",
+  "modules": [
+    "tests.test_progressive_instruction_discovery",
+    "tests.test_instruction_discovery",
+    "tests.plugin_integration.progressive_discovery.test_delivery"
+  ],
+  "returncode": 0,
+  "seconds": 1.84,
+  "stdout": "",
+  "stderr": ".....................s....\n----------------------------------------------------------------------\nRan 26 tests in 1.463s\n\nOK (skipped=1)\n"
+}

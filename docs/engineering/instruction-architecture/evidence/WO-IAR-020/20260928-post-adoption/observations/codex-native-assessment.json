@@ -1,0 +1,54 @@
+{
+  "status": "passed",
+  "profile": "real",
+  "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "cases": [
+    {
+      "phase": "startup",
+      "passed": true,
+      "context_count": 1,
+      "expected_error": null,
+      "probe": {
+        "instruction_file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\ENGINEERING_HARNESS.md",
+        "harness_version": "0.19.0",
+        "entry_sha256": "aee9ed33d732c27ec06de7676450baaa9a05ea54e39906cca3791745be538d74",
+        "final_heading": "After compaction",
+        "delivery_gap": false,
+        "reason": "Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.",
+        "governed_action_allowed": false
+      },
+      "model_response_assessed": true,
+      "context_sha256": [
+        "5f9a66ab968d2c75b6103f0355b1cf8b95fc4255e2ec714f9375d6b69f4ad349"
+      ],
+      "replies": [
+        "{\"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\se_harness\\\\ENGINEERING_HARNESS.md\", \"harness_version\": \"0.19.0\", \"entry_sha256\": \"aee9ed33d732c27ec06de7676450baaa9a05ea54e39906cca3791745be538d74\", \"final_heading\": \"After compaction\", \"delivery_gap\": false, \"reason\": \"Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.\", \"governed_action_allowed\": false}"
+      ],
+      "retained_answer": "{\n  \"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\se_harness\\\\ENGINEERING_HARNESS.md\",\n  \"harness_version\": \"0.19.0\",\n  \"entry_sha256\": \"aee9ed33d732c27ec06de7676450baaa9a05ea54e39906cca3791745be538d74\",\n  \"final_heading\": \"After compaction\",\n  \"delivery_gap\": false,\n  \"reason\": \"Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.\",\n  \"governed_action_allowed\": false\n}"
+    },
+    {
+      "phase": "compact",
+      "passed": true,
+      "context_count": 1,
+      "expected_error": null,
+      "probe": {
+        "instruction_file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\ENGINEERING_HARNESS.md",
+        "harness_version": "0.19.0",
+        "entry_sha256": "aee9ed33d732c27ec06de7676450baaa9a05ea54e39906cca3791745be538d74",
+        "final_heading": "After compaction",
+        "delivery_gap": false,
+        "reason": "Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.",
+        "governed_action_allowed": false
+      },
+      "model_response_assessed": true,
+      "context_sha256": [
+        "5f9a66ab968d2c75b6103f0355b1cf8b95fc4255e2ec714f9375d6b69f4ad349"
+      ],
+      "replies": [
+        "{\"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\se_harness\\\\ENGINEERING_HARNESS.md\", \"harness_version\": \"0.19.0\", \"entry_sha256\": \"aee9ed33d732c27ec06de7676450baaa9a05ea54e39906cca3791745be538d74\", \"final_heading\": \"After compaction\", \"delivery_gap\": false, \"reason\": \"Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.\", \"governed_action_allowed\": false}"
+      ],
+      "retained_answer": "{\n  \"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\se_harness\\\\ENGINEERING_HARNESS.md\",\n  \"harness_version\": \"0.19.0\",\n  \"entry_sha256\": \"aee9ed33d732c27ec06de7676450baaa9a05ea54e39906cca3791745be538d74\",\n  \"final_heading\": \"After compaction\",\n  \"delivery_gap\": false,\n  \"reason\": \"Instruction delivery succeeded. This delivery changes no lifecycle state and grants no decision authority.\",\n  \"governed_action_allowed\": false\n}"
+    }
+  ],
+  "unchanged": true
+}
