@@ -1,0 +1,688 @@
+{
+  "purpose": "Draft review snapshot; no approvals or implementation evidence",
+  "governing_evaluator": "0.19.0",
+  "assessment_base": "fd05dc9f28452c906e764a37570342acbabd09b9",
+  "artifacts": [
+    {
+      "id": "REQ-IAR-028",
+      "path": "docs/engineering/instruction-architecture/requirements/REQ-IAR-028.md",
+      "status": "draft",
+      "sha256": "90357e1f425cab75d1850d76dd385178978eff0a0b53c44db053e5a2a87f6e38",
+      "relations": {
+        "derives_from": [
+          "CAP-IAR-002"
+        ]
+      }
+    },
+    {
+      "id": "SPEC-IAR-015",
+      "path": "docs/engineering/instruction-architecture/specifications/SPEC-IAR-015.md",
+      "status": "draft",
+      "sha256": "e3336d7c24d89c8fce3c591194abba4c30f623fa81956b8dc4519011997f64cd",
+      "relations": {
+        "specifies": [
+          "REQ-IAR-028"
+        ]
+      }
+    },
+    {
+      "id": "VER-IAR-015",
+      "path": "docs/engineering/instruction-architecture/verification/VER-IAR-015.md",
+      "status": "draft",
+      "sha256": "afad1e04732d8a4cdee475602b7963a3d94c1645f54054929bdfb4e62e37ac81",
+      "relations": {
+        "verifies": [
+          "REQ-IAR-022",
+          "REQ-IAR-023",
+          "REQ-IAR-027"
+        ]
+      }
+    },
+    {
+      "id": "VER-IAR-016",
+      "path": "docs/engineering/instruction-architecture/verification/VER-IAR-016.md",
+      "status": "draft",
+      "sha256": "56df632eee3fd599a95f83210a8989207300068edf96264f0b4f975f013e2e92",
+      "relations": {
+        "verifies": [
+          "REQ-IAR-026"
+        ]
+      }
+    },
+    {
+      "id": "VER-IAR-017",
+      "path": "docs/engineering/instruction-architecture/verification/VER-IAR-017.md",
+      "status": "draft",
+      "sha256": "ad59c0cd5b1bb650091f749ed37ae833e7011e55b76015dc0d104903a3f7adb6",
+      "relations": {
+        "verifies": [
+          "REQ-IAR-028",
+          "REQ-IAR-027"
+        ]
+      }
+    },
+    {
+      "id": "WO-IAR-020",
+      "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-020.md",
+      "status": "draft",
+      "sha256": "79da4d95025d427f7e5aaa63b112ccffe39da6dedcc7cab7a8bfdf64ed6626fb",
+      "relations": {
+        "implements": [
+          "REQ-IAR-026"
+        ],
+        "specifications": [
+          "SPEC-IAR-014"
+        ],
+        "verification": [
+          "VER-IAR-016"
+        ],
+        "architecture": [
+          "ARCH-IAR-011",
+          "ADR-IAR-011"
+        ]
+      }
+    },
+    {
+      "id": "WO-IAR-021",
+      "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-021.md",
+      "status": "draft",
+      "sha256": "933eade4dcaa2d008ebef09a572d98c1b28e67bedcab8bfae013e183df78f285",
+      "relations": {
+        "implements": [
+          "REQ-IAR-022",
+          "REQ-IAR-023",
+          "REQ-IAR-027"
+        ],
+        "specifications": [
+          "SPEC-IAR-014"
+        ],
+        "verification": [
+          "VER-IAR-015"
+        ],
+        "architecture": [
+          "ARCH-IAR-011",
+          "ADR-IAR-011"
+        ]
+      }
+    },
+    {
+      "id": "WO-IAR-022",
+      "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-022.md",
+      "status": "draft",
+      "sha256": "efffd9b25b3c604f34b106e4e50491601eb748ca5cbe65b99cee105aa6e7dff6",
+      "relations": {
+        "implements": [
+          "REQ-IAR-028",
+          "REQ-IAR-027"
+        ],
+        "specifications": [
+          "SPEC-IAR-014",
+          "SPEC-IAR-015"
+        ],
+        "verification": [
+          "VER-IAR-017"
+        ]
+      }
+    },
+    {
+      "id": "DEC-IAR-002",
+      "path": "docs/engineering/instruction-architecture/decisions/DEC-IAR-002.md",
+      "status": "open",
+      "sha256": "79aa68ee9d20a1fc6081427b1fbc4249609cef37faf4113140792263d932b4dd",
+      "relations": {
+        "concerns": [
+          "REQ-IAR-028",
+          "SPEC-IAR-015",
+          "VER-IAR-017",
+          "WO-IAR-022"
+        ],
+        "blocks": [
+          "REQ-IAR-028",
+          "SPEC-IAR-015",
+          "VER-IAR-017",
+          "WO-IAR-022"
+        ]
+      }
+    }
+  ],
+  "validation": {
+    "valid": false,
+    "artifact_count": 1713,
+    "error_count": 3,
+    "errors": [
+      {
+        "code": "E019",
+        "message": "assurance decided_by must be a non-empty string",
+        "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-020.md",
+        "plane": "governance"
+      },
+      {
+        "code": "E019",
+        "message": "assurance decided_by must be a non-empty string",
+        "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-021.md",
+        "plane": "governance"
+      },
+      {
+        "code": "E019",
+        "message": "assurance decided_by must be a non-empty string",
+        "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-022.md",
+        "plane": "governance"
+      }
+    ],
+    "warning_count": 52
+  },
+  "validation_invocation": {
+    "args": [
+      "validate",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "--json"
+    ],
+    "exit_code": 1,
+    "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+  },
+  "work_order_checks": {
+    "WO-IAR-020": {
+      "invocation": {
+        "args": [
+          "check",
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+          "--artifact",
+          "WO-IAR-020",
+          "--json"
+        ],
+        "exit_code": 1,
+        "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+      },
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "candidate": {},
+        "state": {
+          "before": [
+            {
+              "id": "WO-IAR-020",
+              "status": "draft"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-IAR-020",
+              "status": "draft"
+            }
+          ]
+        },
+        "procedure": {
+          "id": "PROC-FOCUS-SELECTED",
+          "current_step": "STEP-FOCUS-SELECTED",
+          "steps": [
+            {
+              "id": "STEP-FOCUS-SELECTED",
+              "kind": "command",
+              "gate_ids": [],
+              "effects": [
+                "Projected selected state for WO-IAR-020."
+              ],
+              "non_effects": [
+                "Focus changes no lifecycle state."
+              ],
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "WO-IAR-020"
+              ]
+            }
+          ]
+        },
+        "compliance": {
+          "checkpoint": "pre-action",
+          "workflow_rule_id": "WFL-DEFAULT-REVIEW",
+          "procedure_id": "PROC-FOCUS-SELECTED",
+          "status": "fail",
+          "gates": []
+        },
+        "context": {
+          "reading_manifest": [
+            "ENGINEERING_HARNESS.md",
+            "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
+            "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md",
+            "docs/engineering/instruction-architecture/requirements/REQ-IAR-026.md",
+            "docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md",
+            "docs/engineering/instruction-architecture/architecture/ARCH-IAR-011.md",
+            "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-011.md",
+            "docs/engineering/instruction-architecture/verification/VER-IAR-016.md",
+            "docs/engineering/instruction-architecture/work-orders/WO-IAR-020.md"
+          ],
+          "governing": [
+            "ADR-IAR-011",
+            "ARCH-IAR-011",
+            "CAP-IAR-002",
+            "INT-IAR-001",
+            "REQ-IAR-026",
+            "SPEC-IAR-014",
+            "VER-IAR-016"
+          ],
+          "declared_paths": [
+            "docs/engineering/instruction-architecture/acceptance/plugin-adoption/",
+            "docs/engineering/instruction-architecture/work-orders/WO-IAR-020.md",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-020/"
+          ],
+          "state": {
+            "status": "draft",
+            "family": "work_order"
+          },
+          "next": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-IAR-020"
+            ],
+            "procedure_id": "PROC-FOCUS-SELECTED",
+            "step_id": "STEP-FOCUS-SELECTED"
+          },
+          "decision_required": null
+        },
+        "findings": {
+          "scoped_blockers": [
+            {
+              "code": "E019",
+              "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-020.md",
+              "message": "assurance decided_by must be a non-empty string",
+              "plane": "governance"
+            }
+          ],
+          "repository_blockers": [],
+          "unrelated_count": 54
+        },
+        "restitution": {
+          "outcome": "blocked",
+          "done": [],
+          "not_done": [
+            "The selected check operation remains incomplete."
+          ],
+          "blocked_by": [
+            "E019: assurance decided_by must be a non-empty string"
+          ],
+          "current_lifecycle_state": [
+            "No lifecycle state was changed."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-FOCUS-SELECTED",
+            "step_id": "STEP-FOCUS-SELECTED",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-IAR-020"
+            ]
+          },
+          "alternatives": []
+        },
+        "result_sha256": "6498670730f3e1072c412c30c2c42805ec15a79828512388082fd98b51e6e537"
+      }
+    },
+    "WO-IAR-021": {
+      "invocation": {
+        "args": [
+          "check",
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+          "--artifact",
+          "WO-IAR-021",
+          "--json"
+        ],
+        "exit_code": 1,
+        "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+      },
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "candidate": {},
+        "state": {
+          "before": [
+            {
+              "id": "WO-IAR-021",
+              "status": "draft"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-IAR-021",
+              "status": "draft"
+            }
+          ]
+        },
+        "procedure": {
+          "id": "PROC-FOCUS-SELECTED",
+          "current_step": "STEP-FOCUS-SELECTED",
+          "steps": [
+            {
+              "id": "STEP-FOCUS-SELECTED",
+              "kind": "command",
+              "gate_ids": [],
+              "effects": [
+                "Projected selected state for WO-IAR-021."
+              ],
+              "non_effects": [
+                "Focus changes no lifecycle state."
+              ],
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "WO-IAR-021"
+              ]
+            }
+          ]
+        },
+        "compliance": {
+          "checkpoint": "pre-action",
+          "workflow_rule_id": "WFL-DEFAULT-REVIEW",
+          "procedure_id": "PROC-FOCUS-SELECTED",
+          "status": "fail",
+          "gates": []
+        },
+        "context": {
+          "reading_manifest": [
+            "ENGINEERING_HARNESS.md",
+            "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
+            "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md",
+            "docs/engineering/instruction-architecture/requirements/REQ-IAR-022.md",
+            "docs/engineering/instruction-architecture/requirements/REQ-IAR-023.md",
+            "docs/engineering/instruction-architecture/requirements/REQ-IAR-027.md",
+            "docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md",
+            "docs/engineering/instruction-architecture/architecture/ARCH-IAR-011.md",
+            "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-011.md",
+            "docs/engineering/instruction-architecture/verification/VER-IAR-015.md",
+            "docs/engineering/instruction-architecture/work-orders/WO-IAR-021.md"
+          ],
+          "governing": [
+            "ADR-IAR-011",
+            "ARCH-IAR-011",
+            "CAP-IAR-002",
+            "INT-IAR-001",
+            "REQ-IAR-022",
+            "REQ-IAR-023",
+            "REQ-IAR-027",
+            "SPEC-IAR-014",
+            "VER-IAR-015"
+          ],
+          "declared_paths": [
+            "templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md",
+            "templates/repository/standard/docs/engineering/README.md.seed",
+            "templates/repository/standard/docs/engineering/harness/EXECUTE_WORK.md",
+            "templates/repository/standard/docs/engineering/harness/DEFINE_CHANGE.md",
+            "templates/repository/standard/docs/engineering/harness/DELIVER_RESULT.md",
+            "templates/repository/standard/docs/engineering/harness/PULL_REQUEST.md",
+            "templates/repository/standard/docs/engineering/harness/AUTHORITY.md",
+            "templates/repository/standard/docs/engineering/harness/SKILL_PROVIDER.md",
+            "repository_tools/explorer_design/sources/shell/explorer.js",
+            "se_harness/engine/harness_explorer/index.template.html",
+            "plugins/verity-plane/common/skills/change/SKILL.md",
+            "plugins/verity-plane/common/skills/change/references/authority.md",
+            "plugins/verity-plane/common/skills/evidence/SKILL.md",
+            "tests/test_progressive_instruction_discovery.py",
+            "tests/test_instruction_discovery.py",
+            "tests/test_workflow_documentation_contract.py",
+            "tests/test_instruction_architecture.py",
+            "tests/test_dashboard_webui.py",
+            "tests/plugin_integration/progressive_discovery/",
+            "tests/plugin_integration/change_skill/",
+            "tests/plugin_integration/evidence-skill/",
+            "docs/engineering/instruction-architecture/acceptance/instruction-cleanup/",
+            "docs/engineering/instruction-architecture/proposals/instruction-cleanup/",
+            "docs/notes/instruction-reassessment-2026-09-28/",
+            "docs/engineering/instruction-architecture/requirements/REQ-IAR-028.md",
+            "docs/engineering/instruction-architecture/specifications/SPEC-IAR-015.md",
+            "docs/engineering/instruction-architecture/verification/VER-IAR-015.md",
+            "docs/engineering/instruction-architecture/verification/VER-IAR-016.md",
+            "docs/engineering/instruction-architecture/verification/VER-IAR-017.md",
+            "docs/engineering/instruction-architecture/work-orders/WO-IAR-020.md",
+            "docs/engineering/instruction-architecture/work-orders/WO-IAR-022.md",
+            "docs/engineering/instruction-architecture/decisions/DEC-IAR-002.md",
+            "docs/engineering/instruction-architecture/work-orders/WO-IAR-021.md",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-021/"
+          ],
+          "state": {
+            "status": "draft",
+            "family": "work_order"
+          },
+          "next": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-IAR-021"
+            ],
+            "procedure_id": "PROC-FOCUS-SELECTED",
+            "step_id": "STEP-FOCUS-SELECTED"
+          },
+          "decision_required": null
+        },
+        "findings": {
+          "scoped_blockers": [
+            {
+              "code": "E019",
+              "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-021.md",
+              "message": "assurance decided_by must be a non-empty string",
+              "plane": "governance"
+            }
+          ],
+          "repository_blockers": [],
+          "unrelated_count": 54
+        },
+        "restitution": {
+          "outcome": "blocked",
+          "done": [],
+          "not_done": [
+            "The selected check operation remains incomplete."
+          ],
+          "blocked_by": [
+            "E019: assurance decided_by must be a non-empty string"
+          ],
+          "current_lifecycle_state": [
+            "No lifecycle state was changed."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-FOCUS-SELECTED",
+            "step_id": "STEP-FOCUS-SELECTED",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-IAR-021"
+            ]
+          },
+          "alternatives": []
+        },
+        "result_sha256": "dda11617386b3b7826facaace7b8c90b61cc0a2e0f5316fb7ed034d820b96360"
+      }
+    },
+    "WO-IAR-022": {
+      "invocation": {
+        "args": [
+          "check",
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+          "--artifact",
+          "WO-IAR-022",
+          "--json"
+        ],
+        "exit_code": 1,
+        "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+      },
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "candidate": {},
+        "state": {
+          "before": [
+            {
+              "id": "WO-IAR-022",
+              "status": "draft"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-IAR-022",
+              "status": "draft"
+            }
+          ]
+        },
+        "procedure": {
+          "id": "PROC-FOCUS-SELECTED",
+          "current_step": "STEP-FOCUS-SELECTED",
+          "steps": [
+            {
+              "id": "STEP-FOCUS-SELECTED",
+              "kind": "command",
+              "gate_ids": [],
+              "effects": [
+                "Projected selected state for WO-IAR-022."
+              ],
+              "non_effects": [
+                "Focus changes no lifecycle state."
+              ],
+              "argv": [
+                "harnessctl",
+                "check",
+                ".",
+                "--artifact",
+                "WO-IAR-022"
+              ]
+            }
+          ]
+        },
+        "compliance": {
+          "checkpoint": "pre-action",
+          "workflow_rule_id": "WFL-DEFAULT-REVIEW",
+          "procedure_id": "PROC-FOCUS-SELECTED",
+          "status": "fail",
+          "gates": []
+        },
+        "context": {
+          "reading_manifest": [
+            "ENGINEERING_HARNESS.md",
+            "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
+            "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md",
+            "docs/engineering/instruction-architecture/requirements/REQ-IAR-027.md",
+            "docs/engineering/instruction-architecture/requirements/REQ-IAR-028.md",
+            "docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md",
+            "docs/engineering/instruction-architecture/specifications/SPEC-IAR-015.md",
+            "docs/engineering/instruction-architecture/verification/VER-IAR-017.md",
+            "docs/engineering/instruction-architecture/work-orders/WO-IAR-022.md"
+          ],
+          "governing": [
+            "CAP-IAR-002",
+            "INT-IAR-001",
+            "REQ-IAR-027",
+            "REQ-IAR-028",
+            "SPEC-IAR-014",
+            "SPEC-IAR-015",
+            "VER-IAR-017"
+          ],
+          "declared_paths": [
+            "templates/repository/standard/docs/engineering/OPERATING_CARD.md",
+            "templates/repository/standard/docs/engineering/DECISION_RIGHTS.md",
+            "templates/repository/standard/docs/engineering/QUALITY_GATES.md",
+            "templates/repository/standard/docs/engineering/WORKFLOW.md",
+            "templates/repository/standard/docs/engineering/TRACEABILITY.md",
+            "templates/repository/standard/docs/engineering/TECHNICAL_COMMUNICATION.md",
+            "pyproject.toml",
+            "se_harness/installer.py",
+            "se_harness/preflight.py",
+            "tests/test_installer.py",
+            "tests/test_hash_bound_integrity.py",
+            "tests/test_instruction_architecture.py",
+            "tests/test_workflow_documentation_contract.py",
+            "tests/test_progressive_instruction_discovery.py",
+            "tests/test_instruction_discovery.py",
+            "tests/test_release_build.py",
+            "tests/test_upgrade_rehearsal.py",
+            "tests/plugin_integration/progressive_discovery/",
+            "templates/repository/standard/docs/engineering/harness/UPGRADE.md",
+            "templates/repository/standard/docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md",
+            "docs/engineering/instruction-architecture/acceptance/guide-retirement/",
+            "docs/engineering/instruction-architecture/work-orders/WO-IAR-022.md",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-022/"
+          ],
+          "state": {
+            "status": "draft",
+            "family": "work_order"
+          },
+          "next": {
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-IAR-022"
+            ],
+            "procedure_id": "PROC-FOCUS-SELECTED",
+            "step_id": "STEP-FOCUS-SELECTED"
+          },
+          "decision_required": null
+        },
+        "findings": {
+          "scoped_blockers": [
+            {
+              "code": "E019",
+              "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-022.md",
+              "message": "assurance decided_by must be a non-empty string",
+              "plane": "governance"
+            }
+          ],
+          "repository_blockers": [],
+          "unrelated_count": 54
+        },
+        "restitution": {
+          "outcome": "blocked",
+          "done": [],
+          "not_done": [
+            "The selected check operation remains incomplete."
+          ],
+          "blocked_by": [
+            "E019: assurance decided_by must be a non-empty string"
+          ],
+          "current_lifecycle_state": [
+            "No lifecycle state was changed."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-FOCUS-SELECTED",
+            "step_id": "STEP-FOCUS-SELECTED",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "check",
+              ".",
+              "--artifact",
+              "WO-IAR-022"
+            ]
+          },
+          "alternatives": []
+        },
+        "result_sha256": "3f80015cede124adbdc9c54240b9d9c2d62e2e2548dd742167fbc716771296cb"
+      }
+    }
+  }
+}
