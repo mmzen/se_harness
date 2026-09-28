@@ -1,6 +1,7 @@
 # Instruction cleanup implementation proposal
 
-Status: **draft for review**. No work order has been approved or started.
+Status: **product-wide retirement selected; implementation package remains draft**.
+No work order has been approved or started.
 The repository remains governed by its selected released evaluator, **0.19.0**.
 Candidate source is 0.20.0; this proposal does not release or adopt it.
 
@@ -16,7 +17,7 @@ obsolete default entry points.
 | --- | --- | --- | --- | --- |
 | 1 | [WO-IAR-020](../../work-orders/WO-IAR-020.md) — Qualify active plugin instruction delivery | Active-package inventory and fresh native startup/compaction evidence for Codex and Claude Code. If adoption is needed, an exact repair handoff precedes any real profile change. | [VER-IAR-016](../../verification/VER-IAR-016.md) | Accepted existing discovery definitions; proposed WO and VER need human approval. |
 | 2 | [WO-IAR-021](../../work-orders/WO-IAR-021.md) — Correct instruction references and context guidance | Correct source templates, Explorer descriptions, provider references and reading guidance, with focused regression checks. | [VER-IAR-015](../../verification/VER-IAR-015.md) | May proceed independently of stage 1 after approval. |
-| 3 | [WO-IAR-022](../../work-orders/WO-IAR-022.md) — Stop shipping obsolete guide pointers safely | Future fresh installations omit the six pointers. Upgrades preserve owner content and supported legacy migration. | [VER-IAR-017](../../verification/VER-IAR-017.md) | Product-wide choice in DEC-IAR-002; accepted new definitions; verified stage 2 as the implementation base. |
+| 3 | [WO-IAR-022](../../work-orders/WO-IAR-022.md) — Stop shipping obsolete guide pointers safely | Future fresh installations omit the six pointers. Upgrades preserve owner content and supported legacy migration. | [VER-IAR-017](../../verification/VER-IAR-017.md) | DEC-IAR-002 now selects product-wide retirement. New definitions and the WO still need approval; use verified stage 2 as the implementation base. |
 | 4 | Later release package | Published, verified release containing stages 2 and 3. | Exact combined candidate coverage and release contract/record. | Select the version and prepare separate release artifacts when the implementation is verified. No new release ID is invented now. |
 | 5 | Later repository adoption work order | Adopt that exact release; remove reviewed stock pointers from this repository only when current consumers no longer need them. | Native evidence from stage 1, exact file hashes, installer preview/apply, owner-byte checks and post-adoption readiness. | Published release, passing native qualification and separate adoption authority. |
 
@@ -73,19 +74,25 @@ bounded evidence criteria.
 | [VER-IAR-016](../../verification/VER-IAR-016.md) | draft | Actual loaded package and native events on each claimed host. |
 | [VER-IAR-017](../../verification/VER-IAR-017.md) | draft | Fresh install, packaging, supported upgrades, owner bytes, refusal and retry. |
 | [WO-IAR-020](../../work-orders/WO-IAR-020.md), [WO-IAR-021](../../work-orders/WO-IAR-021.md), [WO-IAR-022](../../work-orders/WO-IAR-022.md) | draft | Separately bounded execution scopes and decision envelopes. |
-| [DEC-IAR-002](../../decisions/DEC-IAR-002.md) | open | Product-wide retirement, repository-only cleanup, or retaining pointers for now. |
+| [DEC-IAR-002](../../decisions/DEC-IAR-002.md) | decided | Product-wide retirement selected by the requesting repository owner. |
 
 Typed metadata links provide the formal traceability: the new requirement derives
 from CAP-IAR-002; SPEC-IAR-015 specifies it; VER-IAR-017 verifies it; WO-IAR-022
-selects those records and the reused migration requirement. DEC-IAR-002 blocks
-the four retirement records pending the scope choice. The table is a review
+selects those records and the reused migration requirement. DEC-IAR-002's scope
+choice is now resolved; it does not approve the four related records. The table is a review
 index, not an additional source of authority.
 
-## Retirement recommendation
+## Selected retirement scope
 
-Choose **product-wide retirement** in DEC-IAR-002. New repositories should not
+The owner selected **product-wide retirement** in DEC-IAR-002. New repositories should not
 receive obsolete entry points. This adds packaging and migration testing; it
 avoids carrying the same cleanup into every future installation.
+
+The supplied answer was “For DEC-IAR-012: product wide retirement.” There is no
+DEC-IAR-012 in this repository. DEC-IAR-002 is the unique presented retirement
+decision with that option. The released evaluator recorded its disposition as
+`product-wide`, retaining the supplied answer verbatim. Its required
+`repository-owner` label represents the human requester, not the applying agent.
 
 The six paths are under `docs/engineering/`:
 
@@ -129,28 +136,32 @@ token savings or native delivery from a file-size or protocol measurement.
 ## Review status and next decisions
 
 Creation used the released evaluator's supported preview/create sequence. All
-new IDs were checked against available Git history. No accepted artifact, source
+new IDs were checked against available Git history. The only applied lifecycle
+change is DEC-IAR-002 from `open` to `decided`. No accepted definition, source
 implementation, installed instruction, plugin configuration or lock was changed.
 
-Released validation reports **three E019 errors**, one per new WO, because
-`assurance.decided_by` is intentionally empty pending human confirmation. There
-are no other validation errors. Do not insert an agent or placeholder identity
-to make the drafts pass. Repository warnings remain separate from these proposed
-records. The [review snapshot](review.json) contains exact artifact digests and
-the evaluator's selected-work results.
+Released validation now reports **zero errors**. The earlier three E019 errors
+came from malformed draft assurance tables with empty decision identities.
+The unconfirmed `required` classification and rationale now remain explicit
+proposals in each WO's body; the optional draft table is absent. Before approval,
+record the actual human confirmation in a complete assurance table. This format
+correction does not waive required verification or approve a work order.
+The 52 existing location warnings remain separate. The [review snapshot](review.json)
+contains exact artifact digests, disposition evidence and selected-work results.
 
-Each checkpoint-free WO check currently reports `draft`, its E019 blocker, and
+Each checkpoint-free WO check currently reports `draft`, no scoped blocker, and
 `PROC-FOCUS-SELECTED` / `STEP-FOCUS-SELECTED` as its next result. It does not report
-execution authority or evaluate start gates. After an actual human confirmation
-is recorded, rerun validation and obtain the next evaluator result before any
-approval preview. Resolve DEC-IAR-002 before approving the retirement records.
+execution authority or evaluate approval/start gates. The decision's readback
+confirms `decided` with no scoped blocker and the same focus step. After an actual
+human assurance confirmation is recorded, rerun validation and obtain the next
+evaluator result before any approval preview.
 
 For review, the proposed order is:
 
 1. Review WO-IAR-020 / VER-IAR-016 and WO-IAR-021 / VER-IAR-015, including their
    required assurance classification. They do not depend on the retirement choice.
-2. Select DEC-IAR-002's retirement scope. If product-wide is chosen, review
-   REQ-IAR-028, SPEC-IAR-015, VER-IAR-017 and WO-IAR-022 as one coherent package.
+2. With product-wide scope selected, review REQ-IAR-028, SPEC-IAR-015, VER-IAR-017
+   and WO-IAR-022 as one coherent package. The scope selection is not their approval.
 3. Apply only matching recorded human decisions through the evaluator. The
    installed 0.19.0 approval-identity compatibility issue must be handled through
    an explicitly reviewed route; earlier WO-specific encoding approvals are not

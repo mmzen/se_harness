@@ -2,7 +2,7 @@
 id = "DEC-IAR-002"
 type = "decision"
 title = "Scope of obsolete-guide retirement"
-status = "open"
+status = "decided"
 owners = ["repository-owner", "technical-owner"]
 created = "2026-09-28"
 updated = "2026-09-28"
@@ -26,6 +26,20 @@ label = "Keep the six pointers for now and implement only plugin qualification a
 [relations]
 concerns = ["REQ-IAR-028", "SPEC-IAR-015", "VER-IAR-017", "WO-IAR-022"]
 blocks = ["REQ-IAR-028", "SPEC-IAR-015", "VER-IAR-017", "WO-IAR-022"]
+
+[disposition]
+option = "product-wide"
+label = "Stop seeding the six guides in a future release, preserve existing owner files, and adopt the change separately in this repository."
+decided_by = "repository-owner"
+decided_at = "2026-09-28T07:46:06Z"
+reason = "For DEC-IAR-012: product wide retirement."
+
+[[lifecycle_events]]
+from = "open"
+to = "decided"
+decided_at = "2026-09-28T07:46:06Z"
+decided_by = "repository-owner"
+reason = "For DEC-IAR-012: product wide retirement."
 +++
 
 # Scope of obsolete-guide retirement

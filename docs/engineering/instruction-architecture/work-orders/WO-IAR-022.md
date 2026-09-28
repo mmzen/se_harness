@@ -7,10 +7,8 @@ owners = ["engineering-owner"]
 created = "2026-09-28"
 updated = "2026-09-28"
 
-[assurance]
-commit_bound_verification = "required"
-rationale = "Proposed: later discovery, adoption and assurance decisions rely on the changed trusted content or retained host evidence. Verification must bind the exact candidate commit."
-decided_by = ""
+# Assurance is proposed in the body. Add the complete decision table only
+# after the accountable human confirms it, before approval.
 
 [execution_scope]
 paths = [
@@ -113,10 +111,15 @@ under evidence/WO-IAR-022/. A clean source search alone is insufficient.
 
 ## Assurance and completion
 
-Commit-bound assurance is proposed as `required`. The accountable human has
-not yet confirmed it; `assurance.decided_by` is intentionally empty. Do not fill
-it with an agent or role label merely to pass validation. This draft grants no
-implementation, approval, verification acceptance or release authority.
+Commit-bound assurance is proposed as `required`: later discovery, adoption
+and assurance decisions rely on the changed trusted content or retained host
+evidence. Verification must bind the exact candidate commit.
+
+The accountable human has not yet confirmed this classification. The optional
+draft `[assurance]` table is therefore absent. Before approval, record the
+confirmed classification, rationale and actual deciding human in that table.
+Do not insert a placeholder identity. This draft grants no implementation,
+approval, verification acceptance or release authority.
 
 After approval, use the repository-selected released evaluator for the exact
 WO's start, scope and handoff checks. Retain actual findings and the complete
