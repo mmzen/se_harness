@@ -2,7 +2,7 @@
 id = "VREC-RLO-011"
 type = "verification_record"
 title = "Verification candidate for WO-RLO-011"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-28"
 updated = "2026-09-28"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-orchestration/evidence/WO-RLO-011-as
 evaluator_evidence_path = "docs/engineering/release-orchestration/evidence/VREC-RLO-011-evaluator.json"
 evaluator_evidence_sha256 = "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2"
 
+verified_at = "2026-09-28T20:06:28Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-RLO-011"]
 conforms_to = ["VER-RLO-008"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-28T20:06:28Z"
+decided_by = "assurance-owner"
+reason = "Human repository owner mmzen: \"I verify VREC-RLO-011\". Codex applies this human assurance decision to candidate 755bd0c761f2466df491d99823e279696d7796ba for WO-RLO-011 under VER-RLO-008 with the reviewed retained evidence and documented limits: 82 tests passed and one native symlink test was skipped because Windows denied symlink creation. Supplied delivery observations are checked locally; no live public delivery is established by this decision. The selected 0.19.0 evaluator encodes the assurance right as assurance-owner; mmzen is the decision-maker. Only VREC-RLO-011 changes state. This decision does not authorize push, merge, release or publication."
 +++
 
 # Verification Record Candidate
