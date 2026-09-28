@@ -3,7 +3,9 @@
 > Repository-owned after installation. Maintain this file as the index of local artifact domains and supporting engineering documentation. Shared harness policy is routed from `ENGINEERING_HARNESS.md` and remains managed separately.
 
 `WORKFLOW.json` and `QUALITY_GATES.json` are managed executable policy.
-`WORKFLOW.md` and `QUALITY_GATES.md` are their bound human explanations.
+[Continue selected work](harness/CONTINUE.md#continue-selected-work) locates the
+current procedure. [Gates](harness/RESULTS.md#gates)
+explains gate results and checkpoints.
 Project one artifact with `harnessctl check --artifact ID`; add
 `--checkpoint` for a start, pre-action, scope, or handoff checkpoint. Use repository-wide `inspect` only as
 a separate maintenance operation.

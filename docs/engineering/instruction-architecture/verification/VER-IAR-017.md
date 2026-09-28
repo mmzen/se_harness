@@ -2,13 +2,20 @@
 id = "VER-IAR-017"
 type = "verification"
 title = "Verify compatibility-guide retirement and supported upgrades"
-status = "draft"
+status = "approved"
 owners = ["quality-owner", "repository-owner"]
 created = "2026-09-28"
 updated = "2026-09-28"
 
 [relations]
 verifies = ["REQ-IAR-028", "REQ-IAR-027"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-28T07:51:40Z"
+decided_by = "quality-owner"
+reason = "Human repository owner mmzen: \"I approve, you can start the work orders\". Approval covers the reviewed instruction-cleanup package and required commit-bound assurance. Legacy evaluator role quality-owner records that human decision; Codex applies it. Reviewed SHA-256 ad59c0cd5b1bb650091f749ed37ae833e7011e55b76015dc0d104903a3f7adb6."
 +++
 
 # Verify compatibility-guide retirement and supported upgrades

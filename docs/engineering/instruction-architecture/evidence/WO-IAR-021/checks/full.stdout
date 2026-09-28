@@ -1,0 +1,32 @@
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-tjykix__\private\verity-plane\evaluator\Scripts\python.exe
+Evaluator Python: C:\Users\mathi\AppData\Local\Temp\simple-plugin-tjykix__\private\verity-plane\evaluator\Scripts\python.exe
+docs/notes/diagnostic-codes.md matches the source
+WEX_SCALE artifacts=100 validation=0.136563s focus=0.308068s plan=0.252793s
+WEX_SCALE artifacts=500 validation=0.625495s focus=0.760204s plan=1.090865s
+======================================================================
+FAIL: test_artifact_catalog.ArtifactCatalogTests.test_work_order_template_expresses_conditional_architecture
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_artifact_catalog.py", line 93, in test_work_order_template_expresses_conditional_architecture
+    self.assertEqual(metadata, tomllib.loads(candidate.split("+++", 2)[1]))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'id'[354 chars] '<accountable role>'}, 'execution_scope': {'p[186 chars]x']}} != {'id'[354 chars] '<actual human who confirmed the assurance cl[225 chars]x']}}
+Diff is 886 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+ERROR: test_installer.InstructionMigrationTests.test_recognized_fragments_preserve_all_owner_bytes (newline=b'\r\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_installer.py", line 140, in test_recognized_fragments_preserve_all_owner_bytes
+    lock=self.apply()
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_installer.py", line 55, in apply
+    return installer.apply_changes(self.root,changes,lock,allow_updates=True,instruction_delivery_evidence=evidence,**kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\se_harness\installer.py", line 611, in apply_changes
+    raise HarnessError("installation has conflicts or customizations; no files were written")
+se_harness.installer.HarnessError: installation has conflicts or customizations; no files were written
+
+----------------------------------------------------------------------
+Ran 1134 tests in 232.447s (175 classes, 4 workers)
+
+FAILED (failures=1, errors=1, skipped=16)

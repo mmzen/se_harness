@@ -37,7 +37,9 @@ class InstructionMigrationTests(unittest.TestCase):
         config = self.root/installer.CONFIG_NAME
         config.write_bytes(config.read_bytes().replace(__version__.encode(), b'0.18.0'))
         for name in ('AGENTS.md', 'CLAUDE.md'):
-            fragment = (FIXTURES/name).read_bytes().replace(b'\n', newline)
+            # The fixture may already have CRLF in a Windows checkout.
+            # Normalize first so this case supplies CRLF, not CR-CR-LF.
+            fragment = (FIXTURES/name).read_bytes().replace(b'\r\n', b'\n').replace(b'\n', newline)
             (self.root/name).write_bytes(owner+fragment+suffix)
             lock['files'][name] = {'mode':'fragment','sha256':canonical_sha256(fragment)}
         provenance = json.loads((FIXTURES/'provenance.json').read_bytes())

@@ -1,0 +1,6 @@
+{
+  "purpose": "Byte-exact capture. Git may normalize line endings in the separate readable copies; the ZIP entries preserve the originally retained bytes and digests.",
+  "archive": "raw-capture.zip",
+  "sha256": "5f70137f20ac07993896f7c0ea84fe8f033fa2de82dd7facfd663ac18979fd1f",
+  "entries": 21
+}

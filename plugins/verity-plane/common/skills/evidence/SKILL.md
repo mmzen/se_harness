@@ -48,8 +48,10 @@ from a real host or external action. Do not invent a result, erase an original
 failure after a successful retry, or turn an unrun check into a pass.
 
 For the new instruction collection, follow its returned verification, release
-or external-action procedure and RESULTS.md for the handoff. Otherwise, choose
-the applicable legacy reference:
+or external-action procedure and RESULTS.md for the handoff. On either route,
+before an external mutation, read the provider controls in
+[External actions](../change/references/authority.md#external-actions).
+On installations without the collection, choose the applicable legacy reference:
 
 - [Prepare evidence and records](references/records.md) for handoff, VREC or RLS.
 - [External actions](references/external-actions.md) if the selected procedure

@@ -2,13 +2,15 @@
 id = "WO-IAR-021"
 type = "work_order"
 title = "Correct instruction references and context guidance"
-status = "draft"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-28"
 updated = "2026-09-28"
 
-# Assurance is proposed in the body. Add the complete decision table only
-# after the accountable human confirms it, before approval.
+[assurance]
+commit_bound_verification = "required"
+rationale = "Later discovery, adoption and assurance decisions rely on changed trusted content or retained host evidence. The human approved verification bound to the exact candidate commit."
+decided_by = "mmzen"
 
 [execution_scope]
 paths = [
@@ -53,6 +55,28 @@ implements = ["REQ-IAR-022", "REQ-IAR-023", "REQ-IAR-027"]
 specifications = ["SPEC-IAR-014"]
 verification = ["VER-IAR-015"]
 architecture = ["ARCH-IAR-011", "ADR-IAR-011"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-28T07:52:17Z"
+decided_by = "engineering-owner"
+reason = "Human repository owner mmzen: \"I approve, you can start the work orders\". Approval covers the reviewed instruction-cleanup package and required commit-bound assurance. Legacy evaluator role engineering-owner records that human decision; Codex applies it. Reviewed SHA-256 b4b8427c69a6dfc7ce02b881f83606c50a9f47f3ab4dbbdb8bdff42f8d0b8d24."
+scope_paths = ["templates/repository/standard/docs/engineering/templates/WORK_ORDER.template.md", "templates/repository/standard/docs/engineering/README.md.seed", "templates/repository/standard/docs/engineering/harness/EXECUTE_WORK.md", "templates/repository/standard/docs/engineering/harness/DEFINE_CHANGE.md", "templates/repository/standard/docs/engineering/harness/DELIVER_RESULT.md", "templates/repository/standard/docs/engineering/harness/PULL_REQUEST.md", "templates/repository/standard/docs/engineering/harness/AUTHORITY.md", "templates/repository/standard/docs/engineering/harness/SKILL_PROVIDER.md", "repository_tools/explorer_design/sources/shell/explorer.js", "se_harness/engine/harness_explorer/index.template.html", "plugins/verity-plane/common/skills/change/SKILL.md", "plugins/verity-plane/common/skills/change/references/authority.md", "plugins/verity-plane/common/skills/evidence/SKILL.md", "tests/test_progressive_instruction_discovery.py", "tests/test_instruction_discovery.py", "tests/test_workflow_documentation_contract.py", "tests/test_instruction_architecture.py", "tests/test_dashboard_webui.py", "tests/plugin_integration/progressive_discovery/", "tests/plugin_integration/change_skill/", "tests/plugin_integration/evidence-skill/", "docs/engineering/instruction-architecture/acceptance/instruction-cleanup/", "docs/engineering/instruction-architecture/proposals/instruction-cleanup/", "docs/notes/instruction-reassessment-2026-09-28/", "docs/engineering/instruction-architecture/requirements/REQ-IAR-028.md", "docs/engineering/instruction-architecture/specifications/SPEC-IAR-015.md", "docs/engineering/instruction-architecture/verification/VER-IAR-015.md", "docs/engineering/instruction-architecture/verification/VER-IAR-016.md", "docs/engineering/instruction-architecture/verification/VER-IAR-017.md", "docs/engineering/instruction-architecture/work-orders/WO-IAR-020.md", "docs/engineering/instruction-architecture/work-orders/WO-IAR-022.md", "docs/engineering/instruction-architecture/decisions/DEC-IAR-002.md", "docs/engineering/instruction-architecture/work-orders/WO-IAR-021.md", "docs/engineering/instruction-architecture/evidence/WO-IAR-021/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-28T07:53:47Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex starts the selected work under mmzen's recorded approval and passing start checks."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-28T08:27:09Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Codex completed the approved source correction. VER-IAR-015 evidence, full Windows/Linux suites and combined-scope handoff pass; human verification is pending."
 +++
 
 # Correct instruction references and context guidance
@@ -125,15 +149,14 @@ installed plugin or root has adopted it.
 
 ## Assurance and completion
 
-Commit-bound assurance is proposed as `required`: later discovery, adoption
-and assurance decisions rely on the changed trusted content or retained host
-evidence. Verification must bind the exact candidate commit.
+The human repository owner, mmzen, confirmed commit-bound assurance as
+`required`: later discovery, adoption and assurance decisions rely on changed
+trusted content or retained host evidence. Verification must bind the exact
+candidate commit. The recorded approval is: "I approve, you can start the work orders".
 
-The accountable human has not yet confirmed this classification. The optional
-draft `[assurance]` table is therefore absent. Before approval, record the
-confirmed classification, rationale and actual deciding human in that table.
-Do not insert a placeholder identity. This draft grants no implementation,
-approval, verification acceptance or release authority.
+The evaluator records work authority through the explicit lifecycle transition.
+This approval does not grant verification acceptance, release or real host
+configuration authority beyond the decision envelope above.
 
 After approval, use the repository-selected released evaluator for the exact
 WO's start, scope and handoff checks. Retain actual findings and the complete

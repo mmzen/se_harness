@@ -1,0 +1,21 @@
+.F...........................................................s.....................
+======================================================================
+FAIL: test_active_generated_surfaces_resolve_document_anchors (tests.test_progressive_instruction_discovery.ProgressiveInstructionContentTests.test_active_generated_surfaces_resolve_document_anchors)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\mathi\Documents\Codex\2026-09-20\verity-plane-plugin-verity-plane-se\work\se_harness\tests\test_progressive_instruction_discovery.py", line 179, in test_active_generated_surfaces_resolve_document_anchors
+    self.assertEqual([], reference_errors(text, TEMPLATES / name, TEMPLATES))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['[a-z]', '\\w+']
+
+Second list contains 2 additional elements.
+First extra element 0:
+'[a-z]'
+
+- []
++ ['[a-z]', '\\w+']
+
+----------------------------------------------------------------------
+Ran 83 tests in 98.515s
+
+FAILED (failures=1, skipped=1)

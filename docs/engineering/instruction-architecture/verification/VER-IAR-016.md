@@ -2,13 +2,20 @@
 id = "VER-IAR-016"
 type = "verification"
 title = "Verify the active plugin and native instruction delivery"
-status = "draft"
+status = "approved"
 owners = ["quality-owner", "repository-owner"]
 created = "2026-09-28"
 updated = "2026-09-28"
 
 [relations]
 verifies = ["REQ-IAR-026"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-28T07:51:40Z"
+decided_by = "quality-owner"
+reason = "Human repository owner mmzen: \"I approve, you can start the work orders\". Approval covers the reviewed instruction-cleanup package and required commit-bound assurance. Legacy evaluator role quality-owner records that human decision; Codex applies it. Reviewed SHA-256 56df632eee3fd599a95f83210a8989207300068edf96264f0b4f975f013e2e92."
 +++
 
 # Verify the active plugin and native instruction delivery

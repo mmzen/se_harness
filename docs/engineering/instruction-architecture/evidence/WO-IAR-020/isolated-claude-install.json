@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+    "plugin",
+    "install",
+    "verity-plane@se-harness"
+  ],
+  "isolated_profile": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar-instruction-demo-bztgja2p\\profiles\\claude\\claude",
+  "exit_code": 0,
+  "stdout": "Installing plugin \"verity-plane@se-harness\"...\u221a Plugin \"verity-plane@se-harness\" is already installed (scope: user)\n",
+  "stderr": ""
+}

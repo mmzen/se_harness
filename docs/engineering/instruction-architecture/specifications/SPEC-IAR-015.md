@@ -2,7 +2,7 @@
 id = "SPEC-IAR-015"
 type = "specification"
 title = "Safe retirement of obsolete guide pointers"
-status = "draft"
+status = "approved"
 owners = ["repository-owner", "technical-owner"]
 created = "2026-09-28"
 updated = "2026-09-28"
@@ -10,6 +10,13 @@ contract = "Stop seeding six obsolete guides in new installations, preserve exis
 
 [relations]
 specifies = ["REQ-IAR-028"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-28T07:51:40Z"
+decided_by = "technical-owner"
+reason = "Human repository owner mmzen: \"I approve, you can start the work orders\". Approval covers the reviewed instruction-cleanup package and required commit-bound assurance. Legacy evaluator role technical-owner records that human decision; Codex applies it. Reviewed SHA-256 e3336d7c24d89c8fce3c591194abba4c30f623fa81956b8dc4519011997f64cd."
 +++
 
 # Safe retirement of obsolete guide pointers

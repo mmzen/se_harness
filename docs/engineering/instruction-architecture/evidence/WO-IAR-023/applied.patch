@@ -1,0 +1,32 @@
+--- a/tests/test_artifact_catalog.py
++++ b/tests/test_artifact_catalog.py
+@@ -90,7 +90,15 @@
+         metadata = tomllib.loads(template.split("+++", 2)[1])
+         self.assertNotIn("architecture", metadata["relations"])
+         self.assertNotIn("delegation", metadata)
+-        self.assertEqual(metadata, tomllib.loads(candidate.split("+++", 2)[1]))
++        # Installed templates follow the selected released evaluator. Candidate
++        # authoring prompts may evolve before that release is adopted here.
++        candidate_metadata = tomllib.loads(candidate.split("+++", 2)[1])
++        self.assertNotIn("architecture", candidate_metadata["relations"])
++        self.assertNotIn("delegation", candidate_metadata)
++        self.assertEqual(metadata["relations"], candidate_metadata["relations"])
++        self.assertEqual(metadata["execution_scope"], candidate_metadata["execution_scope"])
++        self.assertIn("<actual human who confirmed the assurance classification>", candidate)
++        self.assertIn("docs/engineering/harness/AUTHORITY.md#authority-from-work-approval", candidate)
+         self.assertIn("Omit the `architecture` relation only when no active architecture addresses any implemented requirement.", template)
+         self.assertIn("docs/engineering/ARTIFACT_AUTHORING.md", template)
+ 
+--- a/tests/test_installer.py
++++ b/tests/test_installer.py
+@@ -37,7 +37,9 @@
+         config = self.root/installer.CONFIG_NAME
+         config.write_bytes(config.read_bytes().replace(__version__.encode(), b'0.18.0'))
+         for name in ('AGENTS.md', 'CLAUDE.md'):
+-            fragment = (FIXTURES/name).read_bytes().replace(b'\n', newline)
++            # The fixture may already have CRLF in a Windows checkout.
++            # Normalize first so this case supplies CRLF, not CR-CR-LF.
++            fragment = (FIXTURES/name).read_bytes().replace(b'\r\n', b'\n').replace(b'\n', newline)
+             (self.root/name).write_bytes(owner+fragment+suffix)
+             lock['files'][name] = {'mode':'fragment','sha256':canonical_sha256(fragment)}
+         provenance = json.loads((FIXTURES/'provenance.json').read_bytes())

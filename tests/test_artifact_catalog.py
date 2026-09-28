@@ -90,7 +90,15 @@ class ArtifactCatalogTests(unittest.TestCase):
         metadata = tomllib.loads(template.split("+++", 2)[1])
         self.assertNotIn("architecture", metadata["relations"])
         self.assertNotIn("delegation", metadata)
-        self.assertEqual(metadata, tomllib.loads(candidate.split("+++", 2)[1]))
+        # Installed templates follow the selected released evaluator. Candidate
+        # authoring prompts may evolve before that release is adopted here.
+        candidate_metadata = tomllib.loads(candidate.split("+++", 2)[1])
+        self.assertNotIn("architecture", candidate_metadata["relations"])
+        self.assertNotIn("delegation", candidate_metadata)
+        self.assertEqual(metadata["relations"], candidate_metadata["relations"])
+        self.assertEqual(metadata["execution_scope"], candidate_metadata["execution_scope"])
+        self.assertIn("<actual human who confirmed the assurance classification>", candidate)
+        self.assertIn("docs/engineering/harness/AUTHORITY.md#authority-from-work-approval", candidate)
         self.assertIn("Omit the `architecture` relation only when no active architecture addresses any implemented requirement.", template)
         self.assertIn("docs/engineering/ARTIFACT_AUTHORING.md", template)
 

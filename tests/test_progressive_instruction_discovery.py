@@ -7,6 +7,7 @@ from pathlib import Path
 import hashlib
 import json
 import re
+import tempfile
 import unittest
 
 
@@ -23,6 +24,30 @@ def anchor(heading: str) -> str:
 
 def document(path: str) -> Path:
     return TEMPLATES / (path + ".tpl" if path == "ENGINEERING_HARNESS.md" else path)
+
+
+def reference_errors(text: str, source: Path, root: Path) -> list[str]:
+    """Check active Markdown and code-formatted document references."""
+    targets = [target for target in re.findall(r"\[[^\]\n]*\]\(([^)\n]+)\)", text)
+               if '.md' in target or target.startswith('#')]
+    targets += re.findall(r"`((?:docs/)[^`\s]+\.md#[^`\s]+)`", text)
+    targets += re.findall(r"<code>(docs/[^<\s]+\.md#[^<\s]+)</code>", text)
+    errors = []
+    for target in targets:
+        if '://' in target:
+            continue
+        name, _, selected = target.partition('#')
+        base = root if name.startswith('docs/') else source.parent
+        path = (base / name).resolve() if name else source.resolve()
+        if path.name == 'ENGINEERING_HARNESS.md' and not path.exists():
+            path = path.with_suffix('.md.tpl')
+        if not path.is_relative_to(root.resolve()) or not path.is_file():
+            errors.append(target)
+        elif selected:
+            headings = {anchor(m[1]) for m in re.finditer(r'^#{1,6} (.+)$', path.read_text(encoding='utf-8'), re.M)}
+            if selected not in headings:
+                errors.append(target)
+    return errors
 
 
 class ProgressiveInstructionContentTests(unittest.TestCase):
@@ -127,6 +152,45 @@ class ProgressiveInstructionContentTests(unittest.TestCase):
         self.assertNotIn("RELEASE.md", text)
         self.assertNotIn("harnessctl prepare-release", text)
         self.assertIn("No RLS is created", text)
+
+    def test_active_generated_surfaces_resolve_document_anchors(self):
+        from tests.fixture_support import standard_repository
+        from tests.cli_support import invoke
+        from tests.mutation_guard_support import patch_mutation_authority
+        patch_mutation_authority(self)
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = standard_repository(Path(temporary) / 'repository')
+            for args in [('scaffold-domain', str(repo), '--domain', 'routing'),
+                         ('create-artifact', str(repo), '--domain', 'routing', '--type', 'work_order', '--id', 'WO-RTE-001')]:
+                code, output, error = invoke(*args)
+                self.assertEqual(0, code, output + error)
+            generated = repo / 'docs/engineering/routing/work-orders/WO-RTE-001.md'
+            text = generated.read_text(encoding='utf-8')
+            self.assertIn('docs/engineering/harness/AUTHORITY.md#authority-from-work-approval', text)
+            self.assertIn('<actual human who confirmed the assurance classification>', text)
+            for source in [generated, repo / 'docs/engineering/README.md']:
+                self.assertEqual([], reference_errors(source.read_text(encoding='utf-8'), source, repo))
+            # This is the defect that Markdown-only scans previously missed.
+            broken = text.replace('harness/AUTHORITY.md#authority-from-work-approval', 'DECISION_RIGHTS.md#approved-execution')
+            self.assertEqual(['docs/engineering/DECISION_RIGHTS.md#approved-execution'], reference_errors(broken, generated, repo))
+        for name in ['repository_tools/explorer_design/sources/shell/explorer.js',
+                     'se_harness/engine/harness_explorer/index.template.html']:
+            text = (ROOT / name).read_text(encoding='utf-8')
+            self.assertIn('docs/engineering/harness/RESULTS.md#gates', text)
+            self.assertEqual([], reference_errors(text, TEMPLATES / name, TEMPLATES))
+
+    def test_provider_controls_have_a_route_from_both_skills(self):
+        skills = ROOT / 'plugins/verity-plane/common/skills'
+        for name in ('change', 'evidence'):
+            path = skills / name / 'SKILL.md'
+            text = path.read_text(encoding='utf-8')
+            self.assertIn('authority.md#external-actions', text)
+            self.assertEqual([], reference_errors(text, path, skills))
+        authority = (skills / 'change/references/authority.md').read_text(encoding='utf-8')
+        external = authority.split('## External actions', 1)[1]
+        for requirement in ('exact action', 'full commit or release', 'destination', 'current gates',
+                            'independent enforcement', 'actual invocation', 'Stop the affected mutation'):
+            self.assertIn(requirement, external)
 
 
 if __name__ == "__main__":

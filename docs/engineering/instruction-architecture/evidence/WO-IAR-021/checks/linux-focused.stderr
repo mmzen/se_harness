@@ -1,0 +1,13 @@
+.........................................................................F.........
+======================================================================
+FAIL: test_release_proof_fields_reach_the_summary_and_compact_topology (tests.test_dashboard_webui.DashboardWebUIContractTests.test_release_proof_fields_reach_the_summary_and_compact_topology)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/iar021-linux-vcu9nu4s/repository/tests/test_dashboard_webui.py", line 450, in test_release_proof_fields_reach_the_summary_and_compact_topology
+    self.assertEqual("https://github.com/mmzen/se_harness", summary["repository"].get("source_url"))
+AssertionError: 'https://github.com/mmzen/se_harness' != None
+
+----------------------------------------------------------------------
+Ran 83 tests in 40.860s
+
+FAILED (failures=1)

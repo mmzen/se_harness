@@ -2,13 +2,15 @@
 id = "WO-IAR-020"
 type = "work_order"
 title = "Qualify active plugin instruction delivery"
-status = "draft"
+status = "in_progress"
 owners = ["engineering-owner"]
 created = "2026-09-28"
 updated = "2026-09-28"
 
-# Assurance is proposed in the body. Add the complete decision table only
-# after the accountable human confirms it, before approval.
+[assurance]
+commit_bound_verification = "required"
+rationale = "Later discovery, adoption and assurance decisions rely on changed trusted content or retained host evidence. The human approved verification bound to the exact candidate commit."
+decided_by = "mmzen"
 
 [execution_scope]
 paths = [
@@ -22,6 +24,21 @@ implements = ["REQ-IAR-026"]
 specifications = ["SPEC-IAR-014"]
 verification = ["VER-IAR-016"]
 architecture = ["ARCH-IAR-011", "ADR-IAR-011"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-28T07:52:17Z"
+decided_by = "engineering-owner"
+reason = "Human repository owner mmzen: \"I approve, you can start the work orders\". Approval covers the reviewed instruction-cleanup package and required commit-bound assurance. Legacy evaluator role engineering-owner records that human decision; Codex applies it. Reviewed SHA-256 4e575d54072d5d391ced30b566d7a3a5e6d427ca005a32290c608d4f310a9a54."
+scope_paths = ["docs/engineering/instruction-architecture/acceptance/plugin-adoption/", "docs/engineering/instruction-architecture/work-orders/WO-IAR-020.md", "docs/engineering/instruction-architecture/evidence/WO-IAR-020/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-28T07:53:47Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex starts the selected work under mmzen's recorded approval and passing start checks."
 +++
 
 # Qualify active plugin instruction delivery
@@ -76,15 +93,14 @@ credentials. Future retirement decisions rely on this evidence.
 
 ## Assurance and completion
 
-Commit-bound assurance is proposed as `required`: later discovery, adoption
-and assurance decisions rely on the changed trusted content or retained host
-evidence. Verification must bind the exact candidate commit.
+The human repository owner, mmzen, confirmed commit-bound assurance as
+`required`: later discovery, adoption and assurance decisions rely on changed
+trusted content or retained host evidence. Verification must bind the exact
+candidate commit. The recorded approval is: "I approve, you can start the work orders".
 
-The accountable human has not yet confirmed this classification. The optional
-draft `[assurance]` table is therefore absent. Before approval, record the
-confirmed classification, rationale and actual deciding human in that table.
-Do not insert a placeholder identity. This draft grants no implementation,
-approval, verification acceptance or release authority.
+The evaluator records work authority through the explicit lifecycle transition.
+This approval does not grant verification acceptance, release or real host
+configuration authority beyond the decision envelope above.
 
 After approval, use the repository-selected released evaluator for the exact
 WO's start, scope and handoff checks. Retain actual findings and the complete

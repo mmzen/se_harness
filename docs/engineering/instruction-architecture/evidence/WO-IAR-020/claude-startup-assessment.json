@@ -1,0 +1,7 @@
+{
+  "native_startup_payload_complete": true,
+  "model_response_verified": false,
+  "post_compaction_verified": false,
+  "gap": "Isolated Claude OAuth session expired and could not be refreshed. No compaction occurred.",
+  "real_profile_changed": false
+}

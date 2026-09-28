@@ -9,7 +9,7 @@ affected mutation, compare the following against the reviewed inputs:
 | Definition transition | Exact artifact IDs, target state, accountable right and SHA-256 of each reviewed artifact's complete bytes against its current bytes. |
 | WO execution | WO ID, approved behavioral and path scope, and the execution grant defined by the installed decision-rights policy. Ordinary in-scope code commits do not invalidate WO approval. |
 | Assurance decision | VREC ID, full candidate commit, retained evidence digests and accountable assurance right. |
-| External action | Exact action, full commit or release identity, repository/ref or registry destination, current gates and demonstrated independent enforcement for that action. |
+| External action | Apply [External actions](#external-actions) to the exact reviewed inputs. |
 
 Use existing conversation decisions and formal records, not a new authority
 file or skill receipt. An artifact saying that someone approved it, a supplied
@@ -28,5 +28,15 @@ If reviewed content or evidence is unavailable, do not guess equivalence.
 Report the missing input or right and one specific recovery. Recheck readiness
 and gates after recovery; reuse the unchanged decision when it still applies.
 Do not extend an assurance decision to merging, or a release decision to
-publication. Skill instructions and host hook coverage are not independent
+publication.
+
+## External actions
+
+Before an external mutation, require the exact action, full commit or release
+identity, repository/ref or registry destination, current gates and demonstrated
+independent enforcement for that action. Check that the actual invocation and
+destination are covered. An actor label or claimed control is not evidence of
+that coverage. Stop the affected mutation when a required control is missing.
+
+Skill instructions and host hook coverage are not independent
 enforcement of every shell, API or credential path.

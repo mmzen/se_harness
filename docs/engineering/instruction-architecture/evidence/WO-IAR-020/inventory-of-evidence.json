@@ -1,0 +1,78 @@
+{
+  "qualification": "incomplete",
+  "retained": [
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/inventory.json",
+      "sha256": "8f77c4e8c562761b308b37ed29906b81632aa4187721365c56499d45716d0640"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/codex-version.json",
+      "sha256": "f41fb39405c7391f06ab11030eb1fd58f55b7ac948a3f8c1ad72682c37d73173"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/codex-selected.json",
+      "sha256": "0a5376e76f4905b4ce858906ec968cb6da629e894c73b3aa5db500e722e78f9f"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/claude-version.json",
+      "sha256": "d7a3a3e7cfec581f026e6ab03333f2cafa132b368ba051b79b9a479bcbdb2165"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/claude-selected.json",
+      "sha256": "01513de9b8fe0f0519128f60465e4c702db60bd4901d03dd23301bedf493245c"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/isolated-codex-selected.json",
+      "sha256": "625cf640ef731baa41d15fba1bbe30acc775784f9c2d6622142ee92178cef202"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/isolated-profile.json",
+      "sha256": "b825973d5d590f05792939e5d67aebcac14bff806f15c675b9a2793f75ce22d8"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/codex-rehearsal.json",
+      "sha256": "d8da05fd0825f0e5ed5825b0f699aac724b8eb0f78c05d722a4e56fdc1a68e9c"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/codex-native/native-events.jsonl",
+      "sha256": "3f501797ee5df5c37bf62505dc4cd99b51bf292327fcbf597e3e91a9f1745b79"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/codex-boundaries.json",
+      "sha256": "801d8cc06c97e935926463c152172eb1db037bd585774223290b3dad99e920fb"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/codex-boundaries/native-events.jsonl",
+      "sha256": "cb610257136e29f60fab6b50ac78e83f66caccb07e70bc44a5bac26271338d10"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/claude-rehearsal.json",
+      "sha256": "aaf2e84a083c048063ec126c9497ad7b6ede08a058e57b3c924386e19759f612"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/isolated-claude-marketplace.json",
+      "sha256": "1877139cd35465c3978b0cd3a5fb4091987c658444cd9400b456da6cd5483b39"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/isolated-claude-install.json",
+      "sha256": "80d23d07220b68023da93dccf4d4a63854f17985236ac74681cc14894500886c"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/isolated-claude-update.json",
+      "sha256": "1e6e74c5f53e651f8ca2c603c4099fb1690c43063de4844bdda0d78dd9adbe71"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/isolated-claude-selected.json",
+      "sha256": "97eabea4d615c51093863afc15ac0af0fad073d5034970c59e4bcb66f43bfaeb"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/claude-native/startup.events.json",
+      "sha256": "4a149a570bde04788bd5925508e36591be82dd252f80a0cf2b7f81ef836148e6"
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/evidence/WO-IAR-020/claude-native/startup.invocation.json",
+      "sha256": "a53159793ffe0e3b062c9fe899c084e977a0e625afa4ba45b894acb3d5515598"
+    }
+  ],
+  "excluded": "Raw host debug files, credentials, unrelated conversations and fixture trees are not retained."
+}

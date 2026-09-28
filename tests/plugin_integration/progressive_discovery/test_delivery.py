@@ -103,6 +103,38 @@ class InstructionDeliveryTests(unittest.TestCase):
         with patch.object(delivery,'read_regular',side_effect=changing):
             self.assertIn('changed during delivery',self.context())
 
+    def test_full_real_root_envelope_includes_long_path_and_unicode_units(self):
+        # Use the real shipped root, not a short stand-in. The repository path
+        # contributes to the same budget as policy and the delivery prefix.
+        text=(ROOT/'templates/repository/standard/ENGINEERING_HARNESS.md.tpl').read_text(encoding='utf-8')
+        text=text.replace('{{PROJECT_NAME}}','Qualification').replace('{{HARNESS_VERSION}}','0.19.0')
+        self.assertIn('This repository uses SE Harness 0.19.0.',text)
+        long=self.fixture('representative-project-'+'x'*90+'\U0001f642','0.19.0','')
+        entry=long/'ENGINEERING_HARNESS.md'
+        def install_root(value):
+            entry.write_text(value,encoding='utf-8',newline='\n')
+            lock_path=long/'.engineering-harness.lock'
+            lock=json.loads(lock_path.read_text(encoding='utf-8'))
+            lock['files']['ENGINEERING_HARNESS.md']['sha256']=hashlib.sha256(value.encode('utf-8')).hexdigest()
+            lock_path.write_text(json.dumps(lock),encoding='utf-8')
+        install_root(text)
+        for host in ('codex','claude'):
+            context=self.context(self.event(repo=long),host)
+            self.assertTrue(context.endswith(text))
+            self.assertIn('## After compaction',context)
+            units=len(context.encode('utf-16-le'))//2
+            self.assertGreater(units,len(context))
+            self.assertLessEqual(units,delivery.MAX_CONTEXT_CHARACTERS)
+            # A root that fits by itself can still overflow the FULL envelope.
+            padding=delivery.MAX_CONTEXT_CHARACTERS-units+1
+            oversized=text+'x'*padding
+            self.assertLess(len(oversized.encode('utf-16-le'))//2,delivery.MAX_CONTEXT_CHARACTERS)
+            install_root(oversized)
+            refused=self.context(self.event(repo=long),host)
+            self.assertIn('no truncated policy',refused)
+            self.assertNotIn('## Policy / Global invariants',refused)
+            install_root(text)
+
     def test_cli_emits_one_json_result_and_changes_no_repository_files(self):
         before={p.name:p.read_bytes() for p in self.repo.iterdir()}
         for raw in [json.dumps(self.event()).encode(),b'{"cwd":"one","cwd":"two"}',b'[]',b'{',b'x'*65537,b'['*2000+b']'*2000]:

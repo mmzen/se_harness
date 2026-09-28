@@ -1,0 +1,12 @@
+{
+  "method": "Actual protocol helper result, not native-host evidence",
+  "repository_path": "C:\\Users\\mathi\\AppData\\Local\\Temp\\instruction-delivery-o7oeagns\\representative-project-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx🙂",
+  "entry_sha256_lf": "b21b3589594a1cdea8c72944d3463b7548593a013aa42475872b13d5be3351af",
+  "full_utf16_units": 9002,
+  "helper_limit": 10000,
+  "remaining_units": 998,
+  "prior_report_full_utf16_units": 8913,
+  "comparison": "Root policy unchanged; path and project name differ. Compare actual complete envelopes, not root length alone.",
+  "complete_root": true,
+  "oversize_root_itself_below_limit_but_envelope_over_limit": "refused by passing focused test on both host formats"
+}

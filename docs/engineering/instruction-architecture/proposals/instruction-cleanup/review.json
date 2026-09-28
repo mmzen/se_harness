@@ -1,13 +1,13 @@
 {
-  "purpose": "Proposal review snapshot; retirement scope decided, definitions and work orders remain draft",
+  "purpose": "Approved cleanup execution snapshot; actual artifact states below. Initial reviewed proposal is preserved at d243f792ffb9cfda4929a0eaeb5b4db16f88220f. WO-IAR-023 has a separate recorded human approval.",
   "governing_evaluator": "0.19.0",
   "assessment_base": "fd05dc9f28452c906e764a37570342acbabd09b9",
   "artifacts": [
     {
       "id": "REQ-IAR-028",
       "path": "docs/engineering/instruction-architecture/requirements/REQ-IAR-028.md",
-      "status": "draft",
-      "sha256": "90357e1f425cab75d1850d76dd385178978eff0a0b53c44db053e5a2a87f6e38",
+      "status": "approved",
+      "sha256": "59ac30b91ff46a649423047f42aae37ec5bb0e747552c40746f4b0c29e15866f",
       "relations": {
         "derives_from": [
           "CAP-IAR-002"
@@ -17,8 +17,8 @@
     {
       "id": "SPEC-IAR-015",
       "path": "docs/engineering/instruction-architecture/specifications/SPEC-IAR-015.md",
-      "status": "draft",
-      "sha256": "e3336d7c24d89c8fce3c591194abba4c30f623fa81956b8dc4519011997f64cd",
+      "status": "approved",
+      "sha256": "063e0e767784a80c701755ccfcdfe96549046a030ac02cbeb14b8494d8659af0",
       "relations": {
         "specifies": [
           "REQ-IAR-028"
@@ -28,8 +28,8 @@
     {
       "id": "VER-IAR-015",
       "path": "docs/engineering/instruction-architecture/verification/VER-IAR-015.md",
-      "status": "draft",
-      "sha256": "afad1e04732d8a4cdee475602b7963a3d94c1645f54054929bdfb4e62e37ac81",
+      "status": "approved",
+      "sha256": "f41f9ecd04d9129f9f7c0e048b41276074812d0520de3ea74d3b78d097016c66",
       "relations": {
         "verifies": [
           "REQ-IAR-022",
@@ -41,8 +41,8 @@
     {
       "id": "VER-IAR-016",
       "path": "docs/engineering/instruction-architecture/verification/VER-IAR-016.md",
-      "status": "draft",
-      "sha256": "56df632eee3fd599a95f83210a8989207300068edf96264f0b4f975f013e2e92",
+      "status": "approved",
+      "sha256": "6dae609edf936d1d886fdbdab6ce75153a939c0a3465039eada28b67c227a3ad",
       "relations": {
         "verifies": [
           "REQ-IAR-026"
@@ -52,8 +52,8 @@
     {
       "id": "VER-IAR-017",
       "path": "docs/engineering/instruction-architecture/verification/VER-IAR-017.md",
-      "status": "draft",
-      "sha256": "ad59c0cd5b1bb650091f749ed37ae833e7011e55b76015dc0d104903a3f7adb6",
+      "status": "approved",
+      "sha256": "5e18875ff481707347e163f3ac7395d2996c4245abd2c3fe7878d356a85ded57",
       "relations": {
         "verifies": [
           "REQ-IAR-028",
@@ -64,8 +64,8 @@
     {
       "id": "WO-IAR-020",
       "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-020.md",
-      "status": "draft",
-      "sha256": "786c3801569fae2f428c279f35586a4f94cb27c4250db982cb7e925974ee3b18",
+      "status": "in_progress",
+      "sha256": "d0ae678bac5aed21e3fcc508abdacecf92b36228f1f089b4c1e65fbbba3b13cc",
       "relations": {
         "implements": [
           "REQ-IAR-026"
@@ -85,8 +85,8 @@
     {
       "id": "WO-IAR-021",
       "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-021.md",
-      "status": "draft",
-      "sha256": "6259e4e1ccaab8b8f9779e860a1eb89cf8c93fe4308b4cebda0cf50b4cb1df29",
+      "status": "implemented",
+      "sha256": "a826271af2fd43edc9ee436e058bc0801752470a16abbb71a160f0640758b57d",
       "relations": {
         "implements": [
           "REQ-IAR-022",
@@ -108,8 +108,8 @@
     {
       "id": "WO-IAR-022",
       "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-022.md",
-      "status": "draft",
-      "sha256": "9102051678765d9d13f3c65665d117f4a0a84f18aaaddbde9cc5378e11b61ba1",
+      "status": "approved",
+      "sha256": "ebcaf362fe0cb49b2a763200c70b19a04d545f21ec35bf2b0a47fed6cd285ba2",
       "relations": {
         "implements": [
           "REQ-IAR-028",
@@ -143,11 +143,33 @@
           "WO-IAR-022"
         ]
       }
+    },
+    {
+      "id": "WO-IAR-023",
+      "path": "docs/engineering/instruction-architecture/work-orders/WO-IAR-023.md",
+      "status": "implemented",
+      "sha256": "b5d15d821355d00583c0e6c69a2d396587875a73ee89286a6fa688c362ad17f5",
+      "relations": {
+        "implements": [
+          "REQ-IAR-023",
+          "REQ-IAR-027"
+        ],
+        "specifications": [
+          "SPEC-IAR-014"
+        ],
+        "verification": [
+          "VER-IAR-015"
+        ],
+        "architecture": [
+          "ARCH-IAR-011",
+          "ADR-IAR-011"
+        ]
+      }
     }
   ],
   "validation": {
     "valid": true,
-    "artifact_count": 1713,
+    "artifact_count": 1714,
     "error_count": 0,
     "errors": [],
     "warning_count": 52
@@ -183,44 +205,285 @@
           "before": [
             {
               "id": "WO-IAR-020",
-              "status": "draft"
+              "status": "in_progress"
             }
           ],
           "after": [
             {
               "id": "WO-IAR-020",
-              "status": "draft"
+              "status": "in_progress"
             }
           ]
         },
         "procedure": {
-          "id": "PROC-FOCUS-SELECTED",
-          "current_step": "STEP-FOCUS-SELECTED",
+          "id": "PROC-WO-IMPLEMENT",
+          "current_step": "STEP-WO-IMPLEMENT-CHECK",
           "steps": [
             {
-              "id": "STEP-FOCUS-SELECTED",
+              "id": "STEP-WO-IMPLEMENT-CHECK",
               "kind": "command",
-              "gate_ids": [],
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
               "effects": [
-                "Projected selected state for WO-IAR-020."
+                "Evaluated implementation handoff for WO-IAR-020."
               ],
               "non_effects": [
-                "Focus changes no lifecycle state."
+                "A checkpoint does not complete or verify work."
               ],
               "argv": [
                 "harnessctl",
                 "check",
                 ".",
                 "--artifact",
-                "WO-IAR-020"
-              ]
+                "WO-IAR-020",
+                "--checkpoint",
+                "handoff"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-020",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-IAR-020",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-020",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            },
+            {
+              "id": "STEP-WO-IMPLEMENT-PREVIEW",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Plan completion of WO-IAR-020."
+              ],
+              "non_effects": [
+                "Completion does not verify, release or deliver the work."
+              ],
+              "argv": [
+                "harnessctl",
+                "transition",
+                ".",
+                "--set",
+                "WO-IAR-020=implemented",
+                "--decision",
+                "WO-IAR-020=delegated-executor"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-020",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-IAR-020",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-020",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            },
+            {
+              "id": "STEP-WO-IMPLEMENT-APPLY",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-IMPLEMENTATION-EVIDENCE"
+              ],
+              "effects": [
+                "Record completion of only WO-IAR-020 under its approved execution scope."
+              ],
+              "non_effects": [
+                "Completion does not verify, release or deliver the work."
+              ],
+              "argv": [
+                "harnessctl",
+                "transition",
+                ".",
+                "--set",
+                "WO-IAR-020=implemented",
+                "--decision",
+                "WO-IAR-020=delegated-executor",
+                "--apply"
+              ],
+              "corrective": {
+                "QGP-G4I-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-START"
+                },
+                "QGP-G4I-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G4I-COMPLETE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "check",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-020",
+                    "--checkpoint",
+                    "handoff",
+                    "--from-git",
+                    "<base>"
+                  ]
+                },
+                "QGP-G4I-PATHS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G4I-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-IAR-020",
+                    "--phase",
+                    "review"
+                  ]
+                },
+                "QGP-G4I-EVIDENCE": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "evidence",
+                    ".",
+                    "--artifact",
+                    "WO-IAR-020",
+                    "--checkpoint",
+                    "handoff"
+                  ]
+                },
+                "QGP-G4I-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
             }
           ]
         },
         "compliance": {
           "checkpoint": "pre-action",
-          "workflow_rule_id": "WFL-DEFAULT-REVIEW",
-          "procedure_id": "PROC-FOCUS-SELECTED",
+          "workflow_rule_id": "WFL-WO-IMPLEMENT",
+          "procedure_id": "PROC-WO-IMPLEMENT",
           "status": "not_assessable",
           "gates": []
         },
@@ -251,7 +514,7 @@
             "docs/engineering/instruction-architecture/evidence/WO-IAR-020/"
           ],
           "state": {
-            "status": "draft",
+            "status": "in_progress",
             "family": "work_order"
           },
           "next": {
@@ -260,10 +523,12 @@
               "check",
               ".",
               "--artifact",
-              "WO-IAR-020"
+              "WO-IAR-020",
+              "--checkpoint",
+              "handoff"
             ],
-            "procedure_id": "PROC-FOCUS-SELECTED",
-            "step_id": "STEP-FOCUS-SELECTED"
+            "procedure_id": "PROC-WO-IMPLEMENT",
+            "step_id": "STEP-WO-IMPLEMENT-CHECK"
           },
           "decision_required": null
         },
@@ -280,12 +545,12 @@
           "not_done": [],
           "blocked_by": [],
           "current_lifecycle_state": [
-            "WO-IAR-020 is draft."
+            "WO-IAR-020 is in_progress."
           ],
           "decision_required": null,
           "next": {
-            "procedure_id": "PROC-FOCUS-SELECTED",
-            "step_id": "STEP-FOCUS-SELECTED",
+            "procedure_id": "PROC-WO-IMPLEMENT",
+            "step_id": "STEP-WO-IMPLEMENT-CHECK",
             "action": "Run the bound command"
           },
           "command_or_response": {
@@ -295,12 +560,14 @@
               "check",
               ".",
               "--artifact",
-              "WO-IAR-020"
+              "WO-IAR-020",
+              "--checkpoint",
+              "handoff"
             ]
           },
           "alternatives": []
         },
-        "result_sha256": "9fcbb99b91ab0aa6c1797646901839db36dc4767279d0607a27fe21b87b50b70"
+        "result_sha256": "142efa69a9667af11d501cfc0050410b9aa6cb1a212f318403a22264830a8468"
       }
     },
     "WO-IAR-021": {
@@ -323,44 +590,68 @@
           "before": [
             {
               "id": "WO-IAR-021",
-              "status": "draft"
+              "status": "implemented"
             }
           ],
           "after": [
             {
               "id": "WO-IAR-021",
-              "status": "draft"
+              "status": "implemented"
             }
           ]
         },
         "procedure": {
-          "id": "PROC-FOCUS-SELECTED",
-          "current_step": "STEP-FOCUS-SELECTED",
+          "id": "PROC-WO-PREPARE-VREC",
+          "current_step": "STEP-WO-PREPARE-VREC-CAPTURE",
           "steps": [
             {
-              "id": "STEP-FOCUS-SELECTED",
+              "id": "STEP-WO-PREPARE-VREC-CAPTURE",
               "kind": "command",
-              "gate_ids": [],
+              "gate_ids": [
+                "QG-G4-CANDIDATE-READY"
+              ],
               "effects": [
-                "Projected selected state for WO-IAR-021."
+                "Prepare one ready VREC using the selected approved inputs."
               ],
               "non_effects": [
-                "Focus changes no lifecycle state."
+                "Substitute inspected record, verification and evidence inputs before running this command. Preparation does not verify WO-IAR-021."
               ],
               "argv": [
                 "harnessctl",
-                "check",
+                "capture-verification",
                 ".",
-                "--artifact",
-                "WO-IAR-021"
-              ]
+                "--work-order",
+                "WO-IAR-021",
+                "--owner",
+                "delegated-executor",
+                "--id",
+                "VREC-...",
+                "--verification",
+                "VER-...",
+                "--evidence",
+                "..."
+              ],
+              "corrective": {
+                "QGP-G4C-STATUS": {
+                  "kind": "response",
+                  "value": "Resolve QGP-G4C-STATUS for WO-IAR-021 using the reported candidate-readiness failure, then retry preparation."
+                },
+                "QGP-G4C-GRAPH": {
+                  "kind": "response",
+                  "value": "Resolve QGP-G4C-GRAPH for WO-IAR-021 using the reported candidate-readiness failure, then retry preparation."
+                },
+                "QGP-G4C-INTEGRITY": {
+                  "kind": "response",
+                  "value": "Resolve QGP-G4C-INTEGRITY for WO-IAR-021 using the reported candidate-readiness failure, then retry preparation."
+                }
+              }
             }
           ]
         },
         "compliance": {
           "checkpoint": "pre-action",
-          "workflow_rule_id": "WFL-DEFAULT-REVIEW",
-          "procedure_id": "PROC-FOCUS-SELECTED",
+          "workflow_rule_id": "WFL-WO-PREPARE-VREC",
+          "procedure_id": "PROC-WO-PREPARE-VREC",
           "status": "not_assessable",
           "gates": []
         },
@@ -426,19 +717,27 @@
             "docs/engineering/instruction-architecture/evidence/WO-IAR-021/"
           ],
           "state": {
-            "status": "draft",
+            "status": "implemented",
             "family": "work_order"
           },
           "next": {
             "argv": [
               "harnessctl",
-              "check",
+              "capture-verification",
               ".",
-              "--artifact",
-              "WO-IAR-021"
+              "--work-order",
+              "WO-IAR-021",
+              "--owner",
+              "delegated-executor",
+              "--id",
+              "VREC-...",
+              "--verification",
+              "VER-...",
+              "--evidence",
+              "..."
             ],
-            "procedure_id": "PROC-FOCUS-SELECTED",
-            "step_id": "STEP-FOCUS-SELECTED"
+            "procedure_id": "PROC-WO-PREPARE-VREC",
+            "step_id": "STEP-WO-PREPARE-VREC-CAPTURE"
           },
           "decision_required": null
         },
@@ -450,32 +749,40 @@
         "restitution": {
           "outcome": "completed",
           "done": [
-            "Projected the selected scope for WO-IAR-021."
+            "WO-IAR-021 is implemented; no assurance decision was inferred."
           ],
           "not_done": [],
           "blocked_by": [],
           "current_lifecycle_state": [
-            "WO-IAR-021 is draft."
+            "WO-IAR-021 is implemented."
           ],
           "decision_required": null,
           "next": {
-            "procedure_id": "PROC-FOCUS-SELECTED",
-            "step_id": "STEP-FOCUS-SELECTED",
+            "procedure_id": "PROC-WO-PREPARE-VREC",
+            "step_id": "STEP-WO-PREPARE-VREC-CAPTURE",
             "action": "Run the bound command"
           },
           "command_or_response": {
             "kind": "command",
             "argv": [
               "harnessctl",
-              "check",
+              "capture-verification",
               ".",
-              "--artifact",
-              "WO-IAR-021"
+              "--work-order",
+              "WO-IAR-021",
+              "--owner",
+              "delegated-executor",
+              "--id",
+              "VREC-...",
+              "--verification",
+              "VER-...",
+              "--evidence",
+              "..."
             ]
           },
           "alternatives": []
         },
-        "result_sha256": "a08a2e3ed9363aa4ed5a4d5158b90d6e92f3ea3e90932460a932d1cbf94770b5"
+        "result_sha256": "53027f2bd8384788cdee009bebde0007fea47f479d3862ee78b26926d047d99c"
       }
     },
     "WO-IAR-022": {
@@ -498,29 +805,190 @@
           "before": [
             {
               "id": "WO-IAR-022",
-              "status": "draft"
+              "status": "approved"
             }
           ],
           "after": [
             {
               "id": "WO-IAR-022",
-              "status": "draft"
+              "status": "approved"
             }
           ]
         },
         "procedure": {
-          "id": "PROC-FOCUS-SELECTED",
-          "current_step": "STEP-FOCUS-SELECTED",
+          "id": "PROC-WO-START",
+          "current_step": "STEP-WO-START-PREFLIGHT",
           "steps": [
             {
-              "id": "STEP-FOCUS-SELECTED",
+              "id": "STEP-WO-START-PREFLIGHT",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G3-WORK-AUTHORIZATION"
+              ],
+              "effects": [
+                "Evaluated start readiness for WO-IAR-022."
+              ],
+              "non_effects": [
+                "Preflight does not authorize or start implementation."
+              ],
+              "argv": [
+                "harnessctl",
+                "preflight",
+                ".",
+                "--work-order",
+                "WO-IAR-022",
+                "--phase",
+                "start"
+              ],
+              "corrective": {
+                "QGP-G3-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G3-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G3-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G3-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G3-PREFLIGHT": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G3-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            },
+            {
+              "id": "STEP-WO-START-PREVIEW",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G3-WORK-AUTHORIZATION"
+              ],
+              "effects": [
+                "Planned the explicit transition for WO-IAR-022."
+              ],
+              "non_effects": [
+                "A preview does not change lifecycle state."
+              ],
+              "argv": [
+                "harnessctl",
+                "transition",
+                ".",
+                "--set",
+                "WO-IAR-022=in_progress",
+                "--decision",
+                "WO-IAR-022=delegated-executor"
+              ],
+              "corrective": {
+                "QGP-G3-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G3-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G3-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G3-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G3-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-IAR-022",
+                    "--phase",
+                    "start"
+                  ]
+                },
+                "QGP-G3-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            },
+            {
+              "id": "STEP-WO-START-APPLY",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G3-WORK-AUTHORIZATION"
+              ],
+              "effects": [
+                "Changed only WO-IAR-022 to in_progress."
+              ],
+              "non_effects": [
+                "Related artifacts remain unchanged."
+              ],
+              "argv": [
+                "harnessctl",
+                "transition",
+                ".",
+                "--set",
+                "WO-IAR-022=in_progress",
+                "--decision",
+                "WO-IAR-022=delegated-executor",
+                "--apply"
+              ],
+              "corrective": {
+                "QGP-G3-STATUS": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G3-GRAPH": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G3-INTEGRITY": {
+                  "kind": "escalation",
+                  "decision_right": "DR-REMEDIATION-SCOPE"
+                },
+                "QGP-G3-SCOPE": {
+                  "kind": "escalation",
+                  "decision_right": "DR-WO-SELECT"
+                },
+                "QGP-G3-PREFLIGHT": {
+                  "kind": "command",
+                  "argv": [
+                    "harnessctl",
+                    "preflight",
+                    ".",
+                    "--work-order",
+                    "WO-IAR-022",
+                    "--phase",
+                    "start"
+                  ]
+                },
+                "QGP-G3-DECISION": {
+                  "kind": "escalation",
+                  "decision_right": "DR-DECISION-DISPOSE"
+                }
+              }
+            },
+            {
+              "id": "STEP-WO-START-FINAL-FOCUS",
               "kind": "command",
               "gate_ids": [],
               "effects": [
-                "Projected selected state for WO-IAR-022."
+                "Projected the resulting state for WO-IAR-022."
               ],
               "non_effects": [
-                "Focus changes no lifecycle state."
+                "Focus does not change lifecycle state."
               ],
               "argv": [
                 "harnessctl",
@@ -534,8 +1002,8 @@
         },
         "compliance": {
           "checkpoint": "pre-action",
-          "workflow_rule_id": "WFL-DEFAULT-REVIEW",
-          "procedure_id": "PROC-FOCUS-SELECTED",
+          "workflow_rule_id": "WFL-WO-START",
+          "procedure_id": "PROC-WO-START",
           "status": "not_assessable",
           "gates": []
         },
@@ -586,19 +1054,21 @@
             "docs/engineering/instruction-architecture/evidence/WO-IAR-022/"
           ],
           "state": {
-            "status": "draft",
+            "status": "approved",
             "family": "work_order"
           },
           "next": {
             "argv": [
               "harnessctl",
-              "check",
+              "preflight",
               ".",
-              "--artifact",
-              "WO-IAR-022"
+              "--work-order",
+              "WO-IAR-022",
+              "--phase",
+              "start"
             ],
-            "procedure_id": "PROC-FOCUS-SELECTED",
-            "step_id": "STEP-FOCUS-SELECTED"
+            "procedure_id": "PROC-WO-START",
+            "step_id": "STEP-WO-START-PREFLIGHT"
           },
           "decision_required": null
         },
@@ -615,27 +1085,214 @@
           "not_done": [],
           "blocked_by": [],
           "current_lifecycle_state": [
-            "WO-IAR-022 is draft."
+            "WO-IAR-022 is approved."
           ],
           "decision_required": null,
           "next": {
-            "procedure_id": "PROC-FOCUS-SELECTED",
-            "step_id": "STEP-FOCUS-SELECTED",
+            "procedure_id": "PROC-WO-START",
+            "step_id": "STEP-WO-START-PREFLIGHT",
             "action": "Run the bound command"
           },
           "command_or_response": {
             "kind": "command",
             "argv": [
               "harnessctl",
-              "check",
+              "preflight",
               ".",
-              "--artifact",
-              "WO-IAR-022"
+              "--work-order",
+              "WO-IAR-022",
+              "--phase",
+              "start"
             ]
           },
           "alternatives": []
         },
-        "result_sha256": "b02889fbdd35c748adeffb65c7953baaffa372259da0fde0ff35f4ef32ed0cc9"
+        "result_sha256": "03176297a39c0d7fcb8b3901b50b239c6f0afcc7e8d3e8674d18b0c4a866c4c9"
+      }
+    },
+    "WO-IAR-023": {
+      "invocation": {
+        "args": [
+          "check",
+          "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+          "--artifact",
+          "WO-IAR-023",
+          "--json"
+        ],
+        "exit_code": 0,
+        "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+        "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+      },
+      "result": {
+        "schema": "se-harness-workflow-result-v2",
+        "candidate": {},
+        "state": {
+          "before": [
+            {
+              "id": "WO-IAR-023",
+              "status": "implemented"
+            }
+          ],
+          "after": [
+            {
+              "id": "WO-IAR-023",
+              "status": "implemented"
+            }
+          ]
+        },
+        "procedure": {
+          "id": "PROC-WO-PREPARE-VREC",
+          "current_step": "STEP-WO-PREPARE-VREC-CAPTURE",
+          "steps": [
+            {
+              "id": "STEP-WO-PREPARE-VREC-CAPTURE",
+              "kind": "command",
+              "gate_ids": [
+                "QG-G4-CANDIDATE-READY"
+              ],
+              "effects": [
+                "Prepare one ready VREC using the selected approved inputs."
+              ],
+              "non_effects": [
+                "Substitute inspected record, verification and evidence inputs before running this command. Preparation does not verify WO-IAR-023."
+              ],
+              "argv": [
+                "harnessctl",
+                "capture-verification",
+                ".",
+                "--work-order",
+                "WO-IAR-023",
+                "--owner",
+                "delegated-executor",
+                "--id",
+                "VREC-...",
+                "--verification",
+                "VER-...",
+                "--evidence",
+                "..."
+              ],
+              "corrective": {
+                "QGP-G4C-STATUS": {
+                  "kind": "response",
+                  "value": "Resolve QGP-G4C-STATUS for WO-IAR-023 using the reported candidate-readiness failure, then retry preparation."
+                },
+                "QGP-G4C-GRAPH": {
+                  "kind": "response",
+                  "value": "Resolve QGP-G4C-GRAPH for WO-IAR-023 using the reported candidate-readiness failure, then retry preparation."
+                },
+                "QGP-G4C-INTEGRITY": {
+                  "kind": "response",
+                  "value": "Resolve QGP-G4C-INTEGRITY for WO-IAR-023 using the reported candidate-readiness failure, then retry preparation."
+                }
+              }
+            }
+          ]
+        },
+        "compliance": {
+          "checkpoint": "pre-action",
+          "workflow_rule_id": "WFL-WO-PREPARE-VREC",
+          "procedure_id": "PROC-WO-PREPARE-VREC",
+          "status": "not_assessable",
+          "gates": []
+        },
+        "context": {
+          "reading_manifest": [
+            "ENGINEERING_HARNESS.md",
+            "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
+            "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md",
+            "docs/engineering/instruction-architecture/requirements/REQ-IAR-023.md",
+            "docs/engineering/instruction-architecture/requirements/REQ-IAR-027.md",
+            "docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md",
+            "docs/engineering/instruction-architecture/architecture/ARCH-IAR-011.md",
+            "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-011.md",
+            "docs/engineering/instruction-architecture/verification/VER-IAR-015.md",
+            "docs/engineering/instruction-architecture/work-orders/WO-IAR-023.md"
+          ],
+          "governing": [
+            "ADR-IAR-011",
+            "ARCH-IAR-011",
+            "CAP-IAR-002",
+            "INT-IAR-001",
+            "REQ-IAR-023",
+            "REQ-IAR-027",
+            "SPEC-IAR-014",
+            "VER-IAR-015"
+          ],
+          "declared_paths": [
+            "tests/test_artifact_catalog.py",
+            "tests/test_installer.py",
+            "docs/engineering/instruction-architecture/proposals/instruction-cleanup/",
+            "docs/engineering/instruction-architecture/acceptance/instruction-cleanup/",
+            "docs/engineering/instruction-architecture/work-orders/WO-IAR-023.md",
+            "docs/engineering/instruction-architecture/evidence/WO-IAR-023/"
+          ],
+          "state": {
+            "status": "implemented",
+            "family": "work_order"
+          },
+          "next": {
+            "argv": [
+              "harnessctl",
+              "capture-verification",
+              ".",
+              "--work-order",
+              "WO-IAR-023",
+              "--owner",
+              "delegated-executor",
+              "--id",
+              "VREC-...",
+              "--verification",
+              "VER-...",
+              "--evidence",
+              "..."
+            ],
+            "procedure_id": "PROC-WO-PREPARE-VREC",
+            "step_id": "STEP-WO-PREPARE-VREC-CAPTURE"
+          },
+          "decision_required": null
+        },
+        "findings": {
+          "scoped_blockers": [],
+          "repository_blockers": [],
+          "unrelated_count": 52
+        },
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "WO-IAR-023 is implemented; no assurance decision was inferred."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "WO-IAR-023 is implemented."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-WO-PREPARE-VREC",
+            "step_id": "STEP-WO-PREPARE-VREC-CAPTURE",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "capture-verification",
+              ".",
+              "--work-order",
+              "WO-IAR-023",
+              "--owner",
+              "delegated-executor",
+              "--id",
+              "VREC-...",
+              "--verification",
+              "VER-...",
+              "--evidence",
+              "..."
+            ]
+          },
+          "alternatives": []
+        },
+        "result_sha256": "f554e464cd5cb63a85dd45e9d6bd23d6cf9b4f9cd86336e2482b57ccf30d173b"
       }
     }
   },

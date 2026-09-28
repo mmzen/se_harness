@@ -1,0 +1,8 @@
+{
+  "shared_full_suite_evidence": "docs/engineering/instruction-architecture/evidence/WO-IAR-021/checks.json",
+  "focused_checks": [
+    "corrected-test-cases.json"
+  ],
+  "baseline_failure": "baseline-failures.json",
+  "applied_patch_sha256": "5b3bd23461cda722ff2cb71151357e0be76b1999e525dedb6b13415c5d8807da"
+}
