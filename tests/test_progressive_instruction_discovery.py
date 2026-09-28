@@ -179,6 +179,29 @@ class ProgressiveInstructionContentTests(unittest.TestCase):
             self.assertIn('docs/engineering/harness/RESULTS.md#gates', text)
             self.assertEqual([], reference_errors(text, TEMPLATES / name, TEMPLATES))
 
+    def test_evidence_preparation_route_works_without_compatibility_pointers(self):
+        from tests.fixture_support import standard_repository
+        from tests.mutation_guard_support import patch_mutation_authority
+        patch_mutation_authority(self)
+        records = (ROOT / 'plugins/verity-plane/common/skills/evidence/references/records.md').read_text(encoding='utf-8')
+        current = records.split('For the current instruction collection,', 1)[1].split('For an older release,', 1)[0]
+        reference = 'docs/engineering/harness/AUTHORITY.md#authority-from-work-approval'
+        self.assertIn(reference, current)
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = standard_repository(Path(temporary) / 'repository')
+            for name in ('OPERATING_CARD.md', 'DECISION_RIGHTS.md', 'QUALITY_GATES.md',
+                         'WORKFLOW.md', 'TRACEABILITY.md', 'TECHNICAL_COMMUNICATION.md'):
+                # Exercise the current route independently of any retained seeds.
+                (repo / 'docs/engineering' / name).unlink(missing_ok=True)
+            self.assertEqual([], reference_errors(current, repo / 'evidence-reference.md', repo))
+            broken = current.replace('#authority-from-work-approval', '#missing-authority')
+            self.assertEqual([reference.replace('#authority-from-work-approval', '#missing-authority')],
+                             reference_errors(broken, repo / 'evidence-reference.md', repo))
+        legacy = records.split('For an older release,', 1)[1].split('Apply the same checks', 1)[0]
+        self.assertIn('selected by its installed root', legacy)
+        self.assertIn('docs/engineering/DECISION_RIGHTS.md', legacy)
+        self.assertIn('not permission to fall back', legacy)
+
     def test_provider_controls_have_a_route_from_both_skills(self):
         skills = ROOT / 'plugins/verity-plane/common/skills'
         for name in ('change', 'evidence'):

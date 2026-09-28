@@ -2,7 +2,7 @@
 id = "WO-IAR-022"
 type = "work_order"
 title = "Stop shipping obsolete guide pointers safely"
-status = "approved"
+status = "implemented"
 owners = ["engineering-owner"]
 created = "2026-09-28"
 updated = "2026-09-28"
@@ -51,6 +51,20 @@ decided_at = "2026-09-28T07:52:17Z"
 decided_by = "engineering-owner"
 reason = "Human repository owner mmzen: \"I approve, you can start the work orders\". Approval covers the reviewed instruction-cleanup package and required commit-bound assurance. Legacy evaluator role engineering-owner records that human decision; Codex applies it. Reviewed SHA-256 cb0d5f0455ae20e2c46c2cc19997b4775d5c2390a54d2339c9a287965ff722bc."
 scope_paths = ["templates/repository/standard/docs/engineering/OPERATING_CARD.md", "templates/repository/standard/docs/engineering/DECISION_RIGHTS.md", "templates/repository/standard/docs/engineering/QUALITY_GATES.md", "templates/repository/standard/docs/engineering/WORKFLOW.md", "templates/repository/standard/docs/engineering/TRACEABILITY.md", "templates/repository/standard/docs/engineering/TECHNICAL_COMMUNICATION.md", "pyproject.toml", "se_harness/installer.py", "se_harness/preflight.py", "tests/test_installer.py", "tests/test_hash_bound_integrity.py", "tests/test_instruction_architecture.py", "tests/test_workflow_documentation_contract.py", "tests/test_progressive_instruction_discovery.py", "tests/test_instruction_discovery.py", "tests/test_release_build.py", "tests/test_upgrade_rehearsal.py", "tests/plugin_integration/progressive_discovery/", "templates/repository/standard/docs/engineering/harness/UPGRADE.md", "templates/repository/standard/docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md", "docs/engineering/instruction-architecture/acceptance/guide-retirement/", "docs/engineering/instruction-architecture/work-orders/WO-IAR-022.md", "docs/engineering/instruction-architecture/evidence/WO-IAR-022/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-28T08:47:41Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex starts the unchanged approved scope under mmzen's recorded approval after passing start checks."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-28T09:18:21Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Codex completed the unchanged approved scope. VER-IAR-017 evidence, full Windows/Linux suites, installed-package checks and combined complete-change handoff pass. Human commit-bound verification remains pending."
 +++
 
 # Stop shipping obsolete guide pointers safely

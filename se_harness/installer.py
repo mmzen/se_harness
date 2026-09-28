@@ -42,6 +42,51 @@ SEED_SUFFIX = ".seed"
 MACHINE_POLICY = frozenset({"ENGINEERING_HARNESS.md", "docs/engineering/WORKFLOW.json", "docs/engineering/QUALITY_GATES.json"})
 INSTRUCTION_PREFIX = "docs/engineering/harness/"
 RETIRED_ENTRIES = frozenset({"AGENTS.md", "CLAUDE.md"})
+# Only the supported 0.18.0 upgrade converts full guides to these pointers.
+# They are not templates and are never created by a fresh installation.
+RETIRED_GUIDES = {
+    "OPERATING_CARD.md": ("Operating card", ("CONTINUE.md",)),
+    "DECISION_RIGHTS.md": ("Decision rights", ("AUTHORITY.md",)),
+    "QUALITY_GATES.md": ("Quality gates", ("RESULTS.md",)),
+    "WORKFLOW.md": ("Workflow", ("CONTINUE.md", "RECORD_STATE.md", "RESULTS.md")),
+    "TRACEABILITY.md": ("Traceability", ("ARTIFACTS.md", "DEFINITION_LINKS.md", "WORK_AND_EVIDENCE.md")),
+    "TECHNICAL_COMMUNICATION.md": ("Technical communication", ("COMMUNICATION.md",)),
+}
+
+
+def _legacy_guide_pointer(name: str) -> bytes:
+    title, destinations = RETIRED_GUIDES[name]
+    lines = [f"# {title}", "",
+             "Compatibility pointer. The current instructions are in the following files;",
+             "this file contains no additional policy. Read only the section selected by",
+             "the root router or the evaluator result.", "",
+             *(f"- [{destination}](harness/{destination})" for destination in destinations), ""]
+    return "\n".join(lines).encode("utf-8")
+
+
+def _retired_guide_changes(target: Path, lock: dict, replacements: set[str],
+                           migration: dict) -> list[Change]:
+    """Preserve leaving owner seeds; classify supported old full guides first."""
+    legacy = lock.get("tool_version") == migration.get("source_version")
+    result = []
+    for name in RETIRED_GUIDES:
+        relative = "docs/engineering/" + name
+        destination = safe_destination(target, Path(relative))
+        current = destination.read_bytes() if destination.exists() else None
+        if relative not in lock.get("files", {}) and not legacy:
+            continue
+        if not legacy or current is None:
+            result.append(Change(relative, "unchanged", "seed", current or b"", current))
+            continue
+        desired = _legacy_guide_pointer(name)
+        if current == desired:
+            action = "unchanged"
+        elif relative in replacements or canonical_sha256(current) == migration.get("editable_guides", {}).get(relative):
+            action = "update"
+        else:
+            action = "customized"
+        result.append(Change(relative, action, "seed", desired, current))
+    return result
 
 
 def _managed(path: Path) -> bool:
@@ -306,12 +351,15 @@ def plan_install(
     replacements = {Path(path).as_posix() for path in replace_files}
     templates = effective_template_files(old_lock)
     editable = {item.target.as_posix() for item in templates if item.mode == "seed"}
-    if replacements - editable:
-        raise HarnessError("--replace-file must name a seeded file: " + ", ".join(sorted(replacements - editable)))
     old_files = old_lock.get("files", {})
     from se_harness.instruction_discovery import load_catalog, validate_collection
     migration = load_catalog().get("migration", {})
     legacy_guides = migration.get("editable_guides", {})
+    if mode == "upgrade" and old_lock.get("tool_version") == migration.get("source_version"):
+        editable.update("docs/engineering/" + name for name in RETIRED_GUIDES
+                        if safe_destination(target, Path("docs/engineering/" + name)).is_file())
+    if replacements - editable:
+        raise HarnessError("--replace-file must name a seeded file: " + ", ".join(sorted(replacements - editable)))
 
     for item in templates:
         destination = safe_destination(target, item.target)
@@ -381,6 +429,7 @@ def plan_install(
         changes.append(Change(relative, action, item.mode, desired, current))
 
     if mode == "upgrade":
+        changes.extend(_retired_guide_changes(target, old_lock, replacements, migration))
         changes.extend(_plan_leaving_set(target, old_lock, old_files))
 
     # Check the replacement entry and every mapped action before any old entry
@@ -680,6 +729,11 @@ def apply_changes(
                     files[item.path] = old_files[item.path]
                 continue
             if item.mode == "seed":
+                if item.path in {"docs/engineering/" + name for name in RETIRED_GUIDES}:
+                    # Retired seeds remain owner files, including a just-migrated
+                    # 0.18.0 pointer. Neither these files nor their absence is
+                    # part of the new installation's tracked template inventory.
+                    continue
                 files[item.path] = {
                     "mode": "seed",
                     "state": "present" if destination.is_file() else "removed",

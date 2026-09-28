@@ -1,0 +1,20 @@
+{
+  "method": "Exact decompressed member comparison, including RECORD; archive timestamps may differ.",
+  "packages": [
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\retirement-final-packages\\dist\\se_harness-0.20.0-py3-none-any.whl",
+      "sha256": "dbd1b2ada7cf64980df5eeb929c793c195d8525899b9a7039b70d534c2228e3b",
+      "all_members_equal_to_tested_wheel": true
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\retirement-final-packages\\sdist-wheel\\se_harness-0.20.0-py3-none-any.whl",
+      "sha256": "65167a5506b09b7a467a278dfe47816377e45cd9434124f4b2c0a9354daed56c",
+      "all_members_equal_to_tested_wheel": true
+    }
+  ],
+  "sdist": {
+    "sha256": "fbbd038b0208aa44e9e0bc9847c068a6b25c2d2c573e7dd0f855395f5e0dcc50",
+    "omits_six_templates": true,
+    "contains_final_packaging_test": true
+  }
+}

@@ -17,7 +17,7 @@ from tests.mutation_guard_support import patch_mutation_authority
 FIXTURES = Path(__file__).parent/'fixtures/progressive-discovery/released-0.18.0'
 
 
-class InstructionMigrationTests(unittest.TestCase):
+class InstructionMigrationFixture(unittest.TestCase):
     def setUp(self):
         patch_mutation_authority(self)
         temporary = tempfile.TemporaryDirectory(prefix='instruction-migration-')
@@ -72,6 +72,8 @@ class InstructionMigrationTests(unittest.TestCase):
         evidence.write_text(json.dumps(value),encoding='utf-8')
         return evidence
 
+
+class InstructionMigrationTests(InstructionMigrationFixture):
     def test_missing_or_stale_delivery_evidence_preserves_the_old_entry(self):
         self.prior(b'Owner\r\n')
         changes,lock=installer.plan_install(self.root,project_name=None,mode='upgrade')
@@ -210,3 +212,78 @@ class InstructionMigrationTests(unittest.TestCase):
         self.assertEqual(before,self.snapshot())
         self.apply()
         self.assertEqual(b'Owner\r\n',(self.root/'AGENTS.md').read_bytes())
+
+
+class RetiredGuideTests(InstructionMigrationFixture):
+    """Expected predecessor text comes from the retained public wheel, not the renderer."""
+
+    RELEASED = FIXTURES.parent / 'released-0.19.0'
+    NAMES = ('OPERATING_CARD.md', 'DECISION_RIGHTS.md', 'QUALITY_GATES.md',
+             'WORKFLOW.md', 'TRACEABILITY.md', 'TECHNICAL_COMMUNICATION.md')
+
+    def test_new_install_omits_all_six_guides_and_keeps_current_instructions(self):
+        lock = json.loads((self.root / installer.LOCK_NAME).read_bytes())
+        distributed = {item.target.as_posix() for item in installer.template_files()}
+        for name in self.NAMES:
+            relative = 'docs/engineering/' + name
+            self.assertFalse((self.root / relative).exists(), name)
+            self.assertNotIn(relative, lock['files'])
+            self.assertNotIn(relative, distributed)
+        self.assertTrue(all(c.passed for c in inspect_installation(self.root)))
+
+    def test_published_pointer_fixture_digests_match(self):
+        provenance = json.loads((self.RELEASED / 'provenance.json').read_bytes())
+        self.assertEqual(set(self.NAMES), set(provenance['files']))
+        for name, entry in provenance['files'].items():
+            raw = (self.RELEASED / name).read_bytes().replace(b'\r\n', b'\n')
+            self.assertEqual(entry['sha256'], hashlib.sha256(raw).hexdigest(), name)
+
+    def test_current_owner_seeds_preserve_stock_custom_and_absent_bytes(self):
+        lock_path = self.root / installer.LOCK_NAME
+        lock = json.loads(lock_path.read_bytes())
+        lock['tool_version'] = lock['evaluator']['version'] = '0.19.0'
+        observed = {}
+        for i, name in enumerate(self.NAMES):
+            relative = 'docs/engineering/' + name
+            raw = (self.RELEASED / name).read_bytes()
+            if i % 3 == 1:
+                raw += b'\r\nOwner note \xff\r\n'
+            if i % 3 == 2:
+                raw = None
+            if raw is not None:
+                (self.root / relative).write_bytes(raw)
+            lock['files'][relative] = {'mode': 'seed', 'state': 'removed' if raw is None else 'present'}
+            observed[relative] = raw
+        lock_path.write_text(json.dumps(lock), encoding='utf-8')
+        result = self.apply()
+        for relative, raw in observed.items():
+            self.assertNotIn(relative, result['files'])
+            self.assertEqual(raw, (self.root / relative).read_bytes() if (self.root / relative).exists() else None)
+        self.assertTrue(all(c.passed for c in inspect_installation(self.root)))
+        before = self.snapshot()
+        self.apply()
+        self.assertEqual(before, self.snapshot())
+
+    def test_018_preview_and_conversion_match_published_pointers_without_tracking_them(self):
+        self.prior(b'Owner\r\n')
+        changes, _ = installer.plan_install(self.root, project_name=None, mode='upgrade')
+        by_path = {item.path: item for item in changes}
+        for name in self.NAMES:
+            expected = (self.RELEASED / name).read_bytes().replace(b'\r\n', b'\n')
+            item = by_path['docs/engineering/' + name]
+            self.assertEqual('update', item.action)
+            self.assertEqual(expected, item.desired)
+        lock = self.apply()
+        for name in self.NAMES:
+            relative = 'docs/engineering/' + name
+            self.assertEqual((self.RELEASED / name).read_bytes().replace(b'\r\n', b'\n'), (self.root / relative).read_bytes())
+            self.assertNotIn(relative, lock['files'])
+        self.assertTrue(all(c.passed for c in inspect_installation(self.root)))
+
+    def test_unsafe_retired_destination_refuses_before_any_write(self):
+        path = self.root / 'docs/engineering/OPERATING_CARD.md'
+        path.mkdir()
+        before = self.snapshot()
+        with self.assertRaises((installer.HarnessError, OSError)):
+            self.apply()
+        self.assertEqual(before, self.snapshot())

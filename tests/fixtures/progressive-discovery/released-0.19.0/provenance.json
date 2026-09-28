@@ -1,0 +1,32 @@
+{
+  "archive": "se_harness-0.19.0-py3-none-any.whl",
+  "archive_sha256": "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8",
+  "version": "0.19.0",
+  "files": {
+    "OPERATING_CARD.md": {
+      "member": "se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/OPERATING_CARD.md",
+      "sha256": "32eee9a8ef3a9351d14db98f8c0af40261b97386118e7d5cd52584e525974a94"
+    },
+    "DECISION_RIGHTS.md": {
+      "member": "se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/DECISION_RIGHTS.md",
+      "sha256": "d41f91528924b665c88b3d5820d8f3691c7aaf6cd9a0be1bdd588d21c3d76c46"
+    },
+    "QUALITY_GATES.md": {
+      "member": "se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/QUALITY_GATES.md",
+      "sha256": "1255a1e3006f1d7473f6ccb4fcea3767942f84d80c5e5b8affccfcc4c97c572c"
+    },
+    "WORKFLOW.md": {
+      "member": "se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/WORKFLOW.md",
+      "sha256": "9065e3c302c2445284784a504c85c320e19c95010f966a05b38bf7528cf3fcff"
+    },
+    "TRACEABILITY.md": {
+      "member": "se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/TRACEABILITY.md",
+      "sha256": "1a1a8c0ed9b758d88a2835a8ee32764fa91360b36362e75fe04c28cf2bc2fe2e"
+    },
+    "TECHNICAL_COMMUNICATION.md": {
+      "member": "se_harness-0.19.0.data/data/share/se-harness/templates/repository/standard/docs/engineering/TECHNICAL_COMMUNICATION.md",
+      "sha256": "0729f5b696d5a3e6e2a957ecdac8df7ab7a2ea58856773fb3b3a3008c41db118"
+    }
+  },
+  "newline_policy": "Files are extracted bytes from the released wheel. Tests normalize checkout CRLF to LF before comparing with these published LF digests; owner preservation compares exact observed bytes without normalization."
+}

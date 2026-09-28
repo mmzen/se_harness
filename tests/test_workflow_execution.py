@@ -1041,7 +1041,7 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionFixture, unittest.TestCase):
         self.assertEqual("machine-fields-v1", result["digest_format"])
         self.assertEqual(result["result_sha256"], restitution_digest(result))
 
-    def test_operating_card_template_equals_its_contract_rendering_and_stays_bounded(self) -> None:
+    def test_legacy_operating_card_renderer_stays_bounded_without_a_current_seed(self) -> None:
         from se_harness.workflow_contract import (
             OPERATING_CARD_LIMIT,
             load_quality_gate_contract,
@@ -1051,7 +1051,7 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionFixture, unittest.TestCase):
 
         template = Path(__file__).resolve().parents[1] / "templates/repository/standard/docs/engineering/OPERATING_CARD.md"
         rendered = render_operating_card()
-        self.assertEqual(rendered, template.read_bytes().replace(b"\r\n", b"\n"))
+        self.assertFalse(template.exists())
         self.assertLessEqual(len(rendered), OPERATING_CARD_LIMIT)
         self.assertIn(b"Compatibility pointer", rendered)
         self.assertIn(b"[CONTINUE.md](harness/CONTINUE.md)", rendered)
@@ -1063,9 +1063,9 @@ class AgentDirectiveSurfaceTests(WorkflowExecutionFixture, unittest.TestCase):
             render_operating_card(mutated, load_quality_gate_contract())
 
         installed = self.root / "docs/engineering/OPERATING_CARD.md"
-        self.assertTrue(installed.is_file())
+        self.assertFalse(installed.exists())
         lock = json.loads((self.root / ".engineering-harness.lock").read_text(encoding="utf-8"))
-        self.assertEqual("seed", lock["files"]["docs/engineering/OPERATING_CARD.md"]["mode"])
+        self.assertNotIn("docs/engineering/OPERATING_CARD.md", lock["files"])
         code, output, error = invoke(
             "preflight", str(self.root), "--work-order", "WO-001", "--phase", "review", "--json"
         )
@@ -1664,12 +1664,10 @@ class CheckProjectionTests(unittest.TestCase):
         renamed = {"STEP-WO-START-FINAL-FOCUS", "STEP-FOCUS-SELECTED", "STEP-FOCUS-RELATED", "STEP-REMEDIATE-FOCUS"}
         present = {step["id"] for procedure in contract["procedures"] for step in procedure.get("steps", [])}
         self.assertTrue(renamed <= present, renamed - present)
-        workflow_md = (REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/WORKFLOW.md").read_text(encoding="utf-8")
-        self.assertIn("harness/CONTINUE.md", workflow_md)
         current = (REPOSITORY_ROOT / "templates/repository/standard/docs/engineering/harness/CONTINUE.md").read_text(encoding="utf-8")
         self.assertIn("Read the result's selected procedure and its exact next typed step", current)
         self.assertIn("harnessctl check REPO --artifact ARTIFACT-ID --json", current)
-        self.assertNotIn("harnessctl focus", workflow_md)
+        self.assertNotIn("harnessctl focus", current)
         reference = (REPOSITORY_ROOT / "docs/notes/harnessctl-reference.md").read_text(encoding="utf-8")
         self.assertEqual(0, reference.count("| `focus` |"))
         self.assertNotIn("harnessctl focus", reference)

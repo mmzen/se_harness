@@ -141,8 +141,8 @@ work also needs passing local handoff checks. CI calls this command directly.
 ## Selected-scope workflow execution
 
 The command shapes below are stable interfaces. The candidate standard
-[`WORKFLOW.md`](../../templates/repository/standard/docs/engineering/WORKFLOW.md)
-defines the procedure, and
+[`CONTINUE.md`](../../templates/repository/standard/docs/engineering/harness/CONTINUE.md#continue-selected-work)
+routes to the selected procedure, and
 [`WORKFLOW.json`](../../templates/repository/standard/docs/engineering/WORKFLOW.json)
 is the machine-readable contract loaded by `harnessctl`. Use the workflow rule
 selected for the artifact's exact type, state, and direct related records. Do

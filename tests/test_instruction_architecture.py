@@ -138,15 +138,12 @@ class InstructionArchitectureTests(unittest.TestCase):
         self.assertNotIn('docs/engineering/REPOSITORY_CONTEXT.md',lock['files'])
         self.assertTrue((target/'.github/PULL_REQUEST_TEMPLATE.md').is_file())
 
-    def test_technical_communication_has_one_managed_owner_and_one_thin_route(self) -> None:
+    def test_technical_communication_has_one_managed_owner_and_a_direct_route(self) -> None:
         target=self.installed_target()
         policy=(target/'docs/engineering/harness/COMMUNICATION.md').read_text(encoding='utf-8')
-        pointer=(target/'docs/engineering/TECHNICAL_COMMUNICATION.md').read_text(encoding='utf-8')
+        self.assertFalse((target/'docs/engineering/TECHNICAL_COMMUNICATION.md').exists())
         router=(target/'ENGINEERING_HARNESS.md').read_text(encoding='utf-8')
         self.assertIn('COMMUNICATION.md',router)
-        self.assertIn('harness/COMMUNICATION.md',pointer)
-        self.assertIn('Compatibility pointer',pointer)
-        self.assertNotIn('MUST',pointer)
         for phrase in ('based on ASD-STE100','not ASD-STE100 compliance','MUST NOT download','Protected content'):
             self.assertIn(phrase,policy)
         for prohibited in ('requests.','urllib.','socket.'):
@@ -781,9 +778,8 @@ class AgentDirectiveSurfaceRouterTests(unittest.TestCase):
         self.assertIn('checkpoint-free',router)
         self.assertIn('no lifecycle state',router)
         card=target/'docs/engineering/OPERATING_CARD.md'
-        self.assertLessEqual(len(card.read_bytes()),1024)
-        self.assertIn('Compatibility pointer',card.read_text())
-        self.assertIn('harness/CONTINUE.md',card.read_text())
+        self.assertFalse(card.exists())
+        self.assertIn('harness/CONTINUE.md',router)
 
     def test_review_preflight_reports_an_orphaned_ready_record_for_the_selected_work_order(self) -> None:
         import shutil
