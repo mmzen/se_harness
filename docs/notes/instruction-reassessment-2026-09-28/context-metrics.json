@@ -1,0 +1,56 @@
+{
+  "context_scenarios": {
+    "startup": {
+      "whole_file_words": 1466,
+      "files": [
+        "ENGINEERING_HARNESS.md",
+        "COMMUNICATION.md"
+      ]
+    },
+    "new_outcome": {
+      "whole_file_words": 2630,
+      "files": [
+        "ENGINEERING_HARNESS.md",
+        "COMMUNICATION.md",
+        "DEFINE_CHANGE.md"
+      ]
+    },
+    "select_existing_artifacts": {
+      "whole_file_words": 4092,
+      "files": [
+        "ENGINEERING_HARNESS.md",
+        "COMMUNICATION.md",
+        "DEFINE_CHANGE.md",
+        "ARTIFACTS.md",
+        "DEFINITION_LINKS.md"
+      ]
+    },
+    "resume_implementation": {
+      "whole_file_words": 5656,
+      "files": [
+        "ENGINEERING_HARNESS.md",
+        "COMMUNICATION.md",
+        "CONTINUE.md",
+        "EXECUTE_WORK.md",
+        "AUTHORITY.md",
+        "RESULTS.md"
+      ]
+    },
+    "verification_decision": {
+      "whole_file_words": 6210,
+      "files": [
+        "ENGINEERING_HARNESS.md",
+        "COMMUNICATION.md",
+        "CONTINUE.md",
+        "VERIFY_OUTCOME.md",
+        "AUTHORITY.md",
+        "RESULTS.md"
+      ]
+    }
+  },
+  "scenario_note": "Whole-file envelopes for these named guides only; not measured agent consumption. Selected sections cost less; skills, owner instructions, formal artifacts, code and tool results add context. No recursive link loading assumed.",
+  "padding_characters_in_harness_tables": 4920,
+  "observed_check_json_characters": 8424,
+  "observed_check_compact_json_characters": 6164,
+  "legacy_pointer_words": 210
+}

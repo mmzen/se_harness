@@ -1,0 +1,57 @@
+{
+  "evaluator": "released 0.19.0",
+  "kind": "Temporary copy of installed policy/config/lock files; no repository files changed; no native-host claim.",
+  "baseline_failures": [],
+  "after_deleting_six_pointer_files": [
+    {
+      "name": "seed:docs/engineering/DECISION_RIGHTS.md",
+      "detail": "state mismatch"
+    },
+    {
+      "name": "seed:docs/engineering/OPERATING_CARD.md",
+      "detail": "state mismatch"
+    },
+    {
+      "name": "seed:docs/engineering/QUALITY_GATES.md",
+      "detail": "state mismatch"
+    },
+    {
+      "name": "seed:docs/engineering/TECHNICAL_COMMUNICATION.md",
+      "detail": "state mismatch"
+    },
+    {
+      "name": "seed:docs/engineering/TRACEABILITY.md",
+      "detail": "state mismatch"
+    },
+    {
+      "name": "seed:docs/engineering/WORKFLOW.md",
+      "detail": "state mismatch"
+    }
+  ],
+  "new_failures": [
+    {
+      "name": "seed:docs/engineering/DECISION_RIGHTS.md",
+      "detail": "state mismatch"
+    },
+    {
+      "name": "seed:docs/engineering/OPERATING_CARD.md",
+      "detail": "state mismatch"
+    },
+    {
+      "name": "seed:docs/engineering/QUALITY_GATES.md",
+      "detail": "state mismatch"
+    },
+    {
+      "name": "seed:docs/engineering/TECHNICAL_COMMUNICATION.md",
+      "detail": "state mismatch"
+    },
+    {
+      "name": "seed:docs/engineering/TRACEABILITY.md",
+      "detail": "state mismatch"
+    },
+    {
+      "name": "seed:docs/engineering/WORKFLOW.md",
+      "detail": "state mismatch"
+    }
+  ]
+}
