@@ -1,19 +1,19 @@
 {
   "evaluator": {
-    "archive": "se_harness-0.19.0-py3-none-any.whl",
-    "archive_sha256": "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8",
-    "payload_sha256": "71c951a74d2f9c242d594fdbc419dcb173b87d51d25694db6a54a9b6cfc6c356",
-    "release_record": "docs/engineering/release-0-19-0/releases/RLS-SEH-028.md",
-    "release_record_sha256": "d83e62f55b67fea8dfae8b651f1ac60326f067dc0b91549997f14eeb8a75a1ff",
-    "release_revision": "c4d9036fdaab378f08fe2db68978126f66ab961e",
-    "version": "0.19.0"
+    "archive": "se_harness-0.20.0-py3-none-any.whl",
+    "archive_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+    "payload_sha256": "88c26138f759af78b2d7eeed3d15f92b573ff264ea6a531b2c22dbbf1905130e",
+    "release_record": "docs/engineering/release-0-20-0/releases/RLS-SEH-029.md",
+    "release_record_sha256": "c34a8470c2a24c8b458a83b83914f0cb1337dd44915c25d4eec3d6219fd97042",
+    "release_revision": "23ae2d1f6af0f1bf8484b95b0850cb0019eeb7db",
+    "version": "0.20.0"
   },
   "files": {
     ".claude-plugin/plugin.json": {
       "bytes": 173,
       "mode": 420,
       "origin": "claude",
-      "sha256": "58b354270759afdc1954844661fc18e2e3f5caf5167433a05f6e2d4c299b5d08"
+      "sha256": "e5b9167dd9f6f3d911fc92bfb1acc4041d56c7c42570b5f566abdee21cc9ff9c"
     },
     "LICENSE": {
       "bytes": 35149,
@@ -22,10 +22,10 @@
       "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
     },
     "README.md": {
-      "bytes": 2520,
+      "bytes": 2653,
       "mode": 420,
       "origin": "claude",
-      "sha256": "d971e849df147f0703faa726b0c52ed3975911a257b8bcaed7d5370bc6495cfb"
+      "sha256": "0982f98b16ceb3174331bd27d5e4f3d1f77b6280d6a4682cc502961ba4f1aa86"
     },
     "hooks/hooks.json": {
       "bytes": 339,
@@ -33,11 +33,11 @@
       "origin": "claude",
       "sha256": "677e2b7797c7f708589578559a3ea19d36c41cfe1dce05f3c39365ce5c395cf5"
     },
-    "packages/se_harness-0.19.0-py3-none-any.whl": {
-      "bytes": 533746,
+    "packages/se_harness-0.20.0-py3-none-any.whl": {
+      "bytes": 533448,
       "mode": 420,
       "origin": "evaluator",
-      "sha256": "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8"
+      "sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0"
     },
     "scripts/inject_instructions.py": {
       "bytes": 7095,
@@ -166,6 +166,6 @@
   "source": {
     "plan": "release/plugin-assembly.json",
     "plan_sha256": "de1402ea173c138b2a342619c0074c0c8a83a60b0e1a7871bfb6bdffa90baa25",
-    "revision": "ce6d5fa4080e2ef0904446aa0b066d907532b63c"
+    "revision": "7253d13b212ad6f7df670021290fea32e81d66de"
   }
 }
