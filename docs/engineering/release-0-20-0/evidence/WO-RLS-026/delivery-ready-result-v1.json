@@ -1,0 +1,150 @@
+{
+  "command": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-B",
+    "scripts/check_release_delivery.py",
+    "--plan",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\docs\\engineering\\release-0-20-0\\evidence\\WO-RLS-026\\delivery-plan-bound-v1.json",
+    "--observations",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\docs\\engineering\\release-0-20-0\\evidence\\WO-RLS-026\\delivery-observations-ready-v1.json",
+    "--evidence-root",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\docs\\engineering\\release-0-20-0\\evidence\\WO-RLS-026",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "exit_code": 1,
+  "expected_exit_code": 1,
+  "result": {
+    "schema": "se-harness-delivery-result/v1",
+    "status": "incomplete",
+    "input_status": "valid",
+    "authority": "derived operational evidence; no lifecycle transition",
+    "limitation": "Assesses supplied, retained observations only. Does not independently run host tests, authenticate human reviews, or establish live public state. Grants no lifecycle or external authority.",
+    "formal_release": {
+      "record": "RLS-SEH-029",
+      "status": "ready",
+      "source": "docs/engineering/release-0-20-0/releases/RLS-SEH-029.md",
+      "observed_at": "2026-09-29T18:27:43.794222+00:00",
+      "evidence": [
+        {
+          "path": "ready-release-observation.json",
+          "sha256": "f4ad804812fe03219b2b9a4bae5ece3899dc3da55937d54e76937720b912f572"
+        }
+      ]
+    },
+    "evaluator_publication": "pending",
+    "observed_at": "2026-09-29T18:27:43.794222+00:00",
+    "surfaces": [
+      {
+        "id": "evaluator",
+        "disposition": "update",
+        "status": "pending",
+        "owner": "mmzen (accountable); Codex (operator)",
+        "next_action": "Obtain the exact RLS release decision after the bound-record replay; then merge under separate authority, authorize publication and observe public hashes.",
+        "expected": {
+          "record": "RLS-SEH-029",
+          "version": "0.20.0",
+          "wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+          "sdist_sha256": "5b6784aeabdf72e0e6b43a7a2bc81244c7a9da6415cf39fbc39f440ec57d426c"
+        },
+        "observation": null,
+        "findings": [
+          {
+            "code": "missing",
+            "location": "evaluator",
+            "message": "Surface not observed"
+          }
+        ]
+      },
+      {
+        "id": "marketplace",
+        "disposition": "update",
+        "status": "pending",
+        "owner": "mmzen (accountable); Codex (operator)",
+        "next_action": "After public wheel observation, assemble and qualify 0.2.2; obtain exact ordinary descendant publication authority, then check public fresh/update routes.",
+        "expected": {
+          "plugin_version": "0.2.2",
+          "source_commit": null,
+          "evaluator_version": "0.20.0",
+          "wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+          "public_revision": null,
+          "codex_content_sha256": null,
+          "claude-code_content_sha256": null
+        },
+        "observation": null,
+        "findings": [
+          {
+            "code": "missing",
+            "location": "marketplace",
+            "message": "Surface not observed"
+          }
+        ]
+      },
+      {
+        "id": "documentation",
+        "disposition": "update",
+        "status": "pending",
+        "owner": "mmzen (accountable); Codex (operator)",
+        "next_action": "Keep current public and candidate claims distinct; reconcile availability only after public observations and read back integrated documentation.",
+        "expected": {
+          "commit": null
+        },
+        "observation": null,
+        "findings": [
+          {
+            "code": "missing",
+            "location": "documentation",
+            "message": "Surface not observed"
+          }
+        ]
+      },
+      {
+        "id": "demonstration",
+        "disposition": "update",
+        "status": "pending",
+        "owner": "mmzen (accountable); Codex (operator)",
+        "next_action": "Observe deployment provenance for the newly released governance snapshot.",
+        "expected": {
+          "governance_commit": null
+        },
+        "observation": null,
+        "findings": [
+          {
+            "code": "missing",
+            "location": "demonstration",
+            "message": "Surface not observed"
+          }
+        ]
+      },
+      {
+        "id": "release_markers",
+        "disposition": "update",
+        "status": "pending",
+        "owner": "mmzen (accountable); Codex (operator)",
+        "next_action": "After the public evaluator observation cycle, obtain exact latest/last authorization, apply and read back targets.",
+        "expected": {
+          "latest": "v0.20.0",
+          "last": "7253d13b212ad6f7df670021290fea32e81d66de"
+        },
+        "observation": null,
+        "findings": [
+          {
+            "code": "missing",
+            "location": "release_markers",
+            "message": "Surface not observed"
+          }
+        ]
+      }
+    ],
+    "findings": [
+      {
+        "code": "mismatch",
+        "location": "release.status",
+        "message": "Identity differs",
+        "expected": "released",
+        "observed": "ready"
+      }
+    ],
+    "plan_sha256": "c2aa25ca23a5527a77019d5e70e1a17699d9649a10e3fcee839dbdfd966741cf"
+  }
+}
