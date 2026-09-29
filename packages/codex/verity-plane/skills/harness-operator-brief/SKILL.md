@@ -17,8 +17,10 @@ outcome, declared non-effects, one supported source kind, one bounded UTF-8
 source payload and digest, an ordered protected-content declaration, and any
 approved project terms.
 
-Read the repository instructions, the complete skill core, and
-`docs/engineering/TECHNICAL_COMMUNICATION.md`. Use `skill-contract.json` for the requested output format.
+Read the selected root's communication guide and this skill core. The new
+collection uses `docs/engineering/harness/COMMUNICATION.md`; older released
+roots select `docs/engineering/TECHNICAL_COMMUNICATION.md`. Use the installed
+root's choice and `skill-contract.json` for the requested output format.
 
 
 ## Plugin inputs and helper location

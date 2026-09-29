@@ -1,15 +1,18 @@
 # Verity Plane marketplace
 
 Verity Plane brings SE Harness setup, orientation, change and evidence workflows
-to Codex and Claude Code. Plugin **0.1.0** includes the published **SE Harness
-0.18.0** wheel and five skills, including an explicitly requested operator brief.
+to Codex and Claude Code. Plugin **0.2.1** includes the released **SE Harness
+0.19.0** wheel and five skills, including an explicitly requested operator brief.
 
 ## Install from Git
 
 These commands select the `plugin-marketplace` distribution branch of
 `mmzen/se_harness`. The development branch contains assembly inputs; install the
-complete distribution branch. If that ref is unavailable, use a locally built
-distribution below until publication is complete.
+complete distribution branch. Before expecting this version from Git, check that
+the branch's `PACKAGE-IDENTITY.json` reports plugin 0.2.1, evaluator 0.19.0 and
+the accepted source commit. This guide is also an assembly input: its presence
+in the source repository does not establish publication. Until the public ref
+matches, use the local distribution below for candidate qualification.
 
 **Codex**
 
@@ -26,8 +29,28 @@ claude plugin install verity-plane@se-harness
 ```
 
 Start a new task or session after installation so the host loads the skills.
-Plugin versions already cached by the host may require its ordinary marketplace
-refresh/update command. Each host maintains its own installation.
+Each host maintains its own installation. For an existing Git installation:
+
+**Codex**
+
+```text
+codex plugin marketplace upgrade se-harness --json
+codex plugin add verity-plane@se-harness --json
+codex plugin list --marketplace se-harness --json
+```
+
+**Claude Code**
+
+```text
+claude plugin marketplace update se-harness
+claude plugin update verity-plane@se-harness --json
+claude plugin list --json
+```
+
+Confirm the configured marketplace source first. A local marketplace with the
+same name can select another tree. Restart the host, inspect the loaded plugin
+path and compare its manifest and file hashes with `PACKAGE-IDENTITY.json`.
+An existing cache directory alone does not prove which plugin the session uses.
 
 ## Install a local distribution
 
@@ -42,6 +65,15 @@ codex plugin add verity-plane@se-harness
 claude plugin marketplace add "MARKETPLACE_DIRECTORY"
 claude plugin install verity-plane@se-harness
 ```
+
+## Instruction delivery
+
+This package includes native startup and post-compaction instruction hooks.
+They read the selected repository's `ENGINEERING_HARNESS.md` and reject missing,
+changed or incompatible input. They grant no lifecycle authority and do not
+enforce all tool calls. Python must be available to the hook launcher; Codex
+requires review and trust of the current hook definition. Confirm delivery
+before governed work. Repository-only skills do not install these hooks.
 
 ## Prepare the checker for a project
 
@@ -68,10 +100,12 @@ distribution file other than the identity file itself. Native archives and
 their source inventories are under `packages/`. Each native plugin is complete
 inside its own directory; neither host needs the other host's files.
 
-Local native acceptance is checked on Windows. Package identity alone does not
+Native qualification targets disposable Windows profiles on both hosts. Package identity alone does not
 prove a model-driven session, another operating system, public Git installation
-or provider approval. The source repository's WO-PLG-023 evidence records actual
-checks; public installation is reported separately after observing the Git ref.
+or provider approval. The source repository's WO-PLG-026 evidence records this candidate's actual
+checks; WO-PLG-028 records subsequent public routes. Neither a local result nor
+this guide establishes successful public installation. Desktop UI, automatic
+threshold compaction and other platforms require their own observations.
 
 Provider listings require their own review. [Submission materials](submissions/README.md)
 identify the OpenAI and Anthropic routes and missing publisher inputs.

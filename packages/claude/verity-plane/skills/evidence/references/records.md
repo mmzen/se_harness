@@ -48,8 +48,14 @@ an index are not recursive evidence selections. Compare the full candidate
 commit and retained file digests with the supplied preparation inputs again
 before the write. If they changed, stop reuse of the earlier decision.
 
-Use the installed `DECISION_RIGHTS.md` execution grant and actual workflow
-result for preparation. Apply the same checks to every explicitly selected WO;
+For the current instruction collection, read
+`docs/engineering/harness/AUTHORITY.md#authority-from-work-approval` and use
+the actual workflow result for preparation. For an older release, follow
+the authority guide selected by its installed root; that guide may be
+`docs/engineering/DECISION_RIGHTS.md`. A missing current guide is a discovery
+failure, not permission to fall back to an old guide.
+
+Apply the same checks to every explicitly selected WO;
 do not impose an additional actor-specific selection limit. Preparation already
 covered by the approval needs no renewed owner request. Follow the installed
 evaluator's actual checks, including on an earlier release; this skill does not

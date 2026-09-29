@@ -11,9 +11,20 @@ connects its existing procedures to the operator's request.
 
 ## Repository context
 
-Read the selected repository's AGENTS.md and ENGINEERING_HARNESS.md on entry,
-after compaction, and after switching repositories. Read the operating card and
-the reading manifest for the selected work. Use normal file reads.
+Use this repository's ENGINEERING_HARNESS.md in the current context. Read it
+when it is absent, after switching repositories, or when its selected release
+changes. Follow its task router and read applicable owner instructions when
+present. AGENTS.md is not a plugin installation or instruction-delivery requirement.
+
+When a result includes `instruction_discovery`, require `status = "available"`.
+Read its current step's exact file and heading and each prerequisite whose
+condition applies. Read the selected formal records separately. The
+`evaluator_only_inputs` are not normal agent reading. An incompatible result
+stops the affected action; report the version/discovery gap.
+
+For a released result without this field, use that installed root's procedure
+router and reading manifest. Do not apply candidate instructions to an older
+selected release. A manual root read does not prove automatic host delivery.
 
 For drafting, design and review, read and apply the selected repository's
 `docs/engineering/ARTIFACT_AUTHORING.md`: its shared design principle and the
@@ -27,17 +38,23 @@ including failures. Run setup if the evaluator environment needs repair.
 
 ## Follow the selected operation
 
+When the root selects `docs/engineering/harness/`, use its selected action
+file and returned reading locations. The two legacy references below apply only
+to installations without that collection; do not load them on the new route.
+
 - For a package or amendment, read [Artifact packages](references/artifacts.md).
 - For WO approval, start, implementation or completion, read
   [Work orders](references/work-orders.md).
-- Before reusing any decision, apply the input comparison in
-  [Continuing authority](references/authority.md).
 
-Read the installed operating card and every file in the selected phase reading
-manifest. Use the actual schema-2 result's procedure, gates and next action.
-An unchecked next step supplies no decision. These references route to
-`WORKFLOW.json`, `DECISION_RIGHTS.md` and `ARTIFACT_AUTHORING.md`; they neither
-replace those contracts nor authenticate their inputs.
+On either route, before reusing a decision, apply the input comparison in
+[Continuing authority](references/authority.md#continuing-authority). Before an
+external mutation, read [External actions](references/authority.md#external-actions)
+for this provider's required controls.
+
+Use the actual schema-2 result's procedure, gates and next action. An unchecked
+next step supplies no decision. On a legacy installation, read its required
+operating card and phase manifest as directed by that installed root. Skills
+neither replace the released contracts nor authenticate their inputs.
 
 Continue the selected approved execution under its installed policy without
 another skill invocation or duplicate start, completion or preparation approval.

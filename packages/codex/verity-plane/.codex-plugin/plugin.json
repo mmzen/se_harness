@@ -1,6 +1,6 @@
 {
   "name": "verity-plane",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "Shared SE Harness skills with explicit repository checks.",
   "skills": "./skills/",
   "author": {

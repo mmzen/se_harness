@@ -12,6 +12,11 @@ does not pin that release. A development wheel is only for disposable testing.
 
 Use the target and action already requested; ask only for a missing choice.
 
+When the installed root selects `docs/engineering/harness/`, read only its
+selected SETUP.md, UPGRADE.md or SKILL_PROVIDER.md procedure. Use the references
+below for bootstrap or a legacy installation without that collection. A missing
+root is a setup input, not permission to invent the repository's instructions.
+
 - For checker setup or repair, follow [the environment procedure](references/environment.md).
 - To initialize a project or switch it to plugin skills, follow [project connection](references/repository.md).
 - For a requested version upgrade or a mismatched checker, follow [maintenance](references/maintenance.md).

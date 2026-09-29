@@ -1,14 +1,31 @@
 # Verity Plane
 
-This package exposes shared skills through the host's native skill discovery.
+Verity Plane 0.2.1 exposes shared skills through the host's native skill discovery.
 Use setup to prepare the repository-selected evaluator, harness-orient to inspect
 the project, and change/evidence for its explicit workflow commands.
 
-Read AGENTS.md and ENGINEERING_HARNESS.md when entering a repository, after
-compaction, and after switching repositories. There are no automatic session
-or before-tool hooks. Ordinary edits use the host's normal permissions.
-Host support depends on native skill discovery and running explicit commands,
-without an exact host or Python patch-version allowlist.
+This version includes a SessionStart adapter for startup and post-compaction
+instruction delivery. It reads the selected repository's ENGINEERING_HARNESS.md,
+compares its bytes with the installation record and checks the selected version.
+It neither computes lifecycle authority nor upgrades the repository. Missing,
+changed, incompatible or oversized input is reported as a delivery gap.
+
+This package selects the unchanged released SE Harness 0.19.0 wheel.
+WO-PLG-026 records qualification of this exact 0.2.1 candidate. Historical
+VREC-IAR-015 coverage of 0.2.0 assets does not verify these new archives.
+Support claims depend on the recorded host versions and routes; they do not
+establish desktop UI, automatic threshold compaction or other platforms.
+Public installation needs separate observation under WO-PLG-028.
+Python 3.11+ must be available to the hook launcher. Codex also requires the
+user to trust the plugin's reviewed hooks. Real host settings are not changed by
+building or testing this source. Repository-only skills do not install hooks.
+
+The complete context is bounded to 10,000 characters. A larger entry is refused,
+not silently truncated. Codex's handler has a 5,000 approximate-token threshold;
+Claude Code's documented character limit remains the shared bound.
+
+API references: [Codex hooks](https://learn.chatgpt.com/docs/hooks) and
+[Claude Code hooks](https://code.claude.com/docs/en/hooks).
 
 The setup environment is outside the checkout. Development archives are labeled
 DEVELOPMENT.md and cannot establish release eligibility. Installation into the
