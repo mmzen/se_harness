@@ -1,0 +1,29 @@
+{
+  "base_commit": "5111bc68ca1e3fc493478d6507d00571867c00b8",
+  "implementation_commit": "c93f32a566a5e5939d42ae75ef78bea619649bf2",
+  "contract": "VER-HUP-022",
+  "cases": {
+    "A020-01": "Released-root qualification and doctor pass; full suite checks current instruction routes.",
+    "A020-02": "Exact released identity, integrity, artifact validation and governor assessment pass. CI pin is 0.20.0.",
+    "A020-03": "Tracked-byte comparison confirms owner preservation and no out-of-scope changes; no-op upgrade proposes no changes.",
+    "A020-04": "Explicit template replacement matches the released wheel. Current notes describe root 0.20.0, source 0.21.0 and preserved pointers. Only the documentation test pin changed.",
+    "A020-05": "1162 full-scale tests pass; 17 platform skips. Distribution check, CLI smoke and version derivation pass. Handoff and commit-bound capture follow."
+  },
+  "review_findings": [],
+  "simplicity": "Uses the existing released installer and standard transaction. No new implementation mechanism, test exemption or lifecycle rule.",
+  "failed_attempts": [
+    {
+      "label": "governor-assessment",
+      "resolution": "Retained missing-path refusal; repeated with the actual evaluator console entry-point as required by this existing CI helper."
+    },
+    {
+      "label": "released-root-qualification",
+      "resolution": "Retained sandbox Git observation refusal; passed under the workstation user without changing Git configuration or the evaluator."
+    }
+  ],
+  "limitations": [
+    "Windows local execution does not establish Linux CI; both hosted platforms remain required before integration.",
+    "Manual root recovery is disclosed; no fresh host startup/compaction claim.",
+    "Six pointers are preserved; no cleanup performed."
+  ]
+}

@@ -2,7 +2,7 @@
 id = "WO-HUP-024"
 type = "work_order"
 title = "Adopt released 0.20.0 in the development repository"
-status = "in_progress"
+status = "implemented"
 owners = ["repository-owner", "engineering-owner"]
 created = "2026-09-29"
 updated = "2026-09-29"
@@ -60,6 +60,13 @@ to = "in_progress"
 decided_at = "2026-09-29T20:28:20Z"
 decided_by = "Codex executor under mmzen approval"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Start approved adoption under DR-015; mmzen approved WO-HUP-024 and VER-HUP-022, required commit-bound assurance and selected template replacement."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-29T20:35:26Z"
+decided_by = "Codex executor under mmzen approval"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. Execution under DR-015 and recorded mmzen approval. Approved 0.20.0 adoption applied; full-scale suite passed 1162 tests with 17 skips. Released identity, doctor, graph validation, qualification, predecessor assessment, distribution validation and complete Git-derived handoff passed. Host delivery and pointer cleanup remain separate; hosted CI required before integration."
 +++
 
 # Adopt released 0.20.0 in the development repository
