@@ -2,10 +2,10 @@
 id = "VREC-PLG-023"
 type = "verification_record"
 title = "Verification candidate for 2 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-28"
-updated = "2026-09-28"
+updated = "2026-09-29"
 commit = "8b6f383c4abf69b038f126935e1bcd20fc0e9a7c"
 git_object_format = "sha1"
 worktree_state = "clean"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/plugin-integration/evidence/VREC-PLG-023/com
 evaluator_evidence_path = "docs/engineering/plugin-integration/evidence/VREC-PLG-023-evaluator.json"
 evaluator_evidence_sha256 = "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2"
 
+verified_at = "2026-09-29T05:38:52Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-PLG-026", "WO-PLG-027"]
 conforms_to = ["VER-PLG-026"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-29T05:38:52Z"
+decided_by = "assurance-owner"
+reason = "Human repository owner mmzen explicitly decided: \"I verify VREC-PLG-023\" on 2026-09-29, for candidate 8b6f383c4abf69b038f126935e1bcd20fc0e9a7c covering WO-PLG-026 and WO-PLG-027 under VER-PLG-026. The candidate, record and all 30 retained evidence files match the reviewed inputs; released 0.19.0 checks pass. Legacy assurance-owner encodes the decision right; mmzen is the human decision-maker and Codex only applies the decision. No push, PR, publication, real-profile adoption or WO-PLG-028 execution is inferred."
 +++
 
 # Verification Record Candidate
