@@ -2,7 +2,7 @@
 id = "VREC-SEH-029"
 type = "verification_record"
 title = "Verification candidate for 16 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-29"
 updated = "2026-09-29"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/harness-simplification/evidence/VREC-KIS-016
 evaluator_evidence_path = "docs/engineering/release-0-20-0/evidence/VREC-SEH-029-evaluator.json"
 evaluator_evidence_sha256 = "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2"
 
+verified_at = "2026-09-29T18:25:40Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-HUP-021", "WO-HUP-023", "WO-IAR-020", "WO-IAR-021", "WO-IAR-022", "WO-IAR-023", "WO-IAR-024", "WO-IAR-025", "WO-KIS-016", "WO-PLG-026", "WO-PLG-027", "WO-PLG-028", "WO-PLG-029", "WO-RLO-010", "WO-RLO-011", "WO-RLS-026"]
 conforms_to = ["VER-HUP-021", "VER-IAR-015", "VER-IAR-016", "VER-IAR-017", "VER-KIS-009", "VER-PLG-026", "VER-PLG-027", "VER-RLO-007", "VER-RLO-008", "VER-RLS-026"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-29T18:25:40Z"
+decided_by = "assurance-owner"
+reason = "Human mmzen: \"I verify VREC-SEH-029 as assurance owner.\" Decision covers exact candidate 7253d13b212ad6f7df670021290fea32e81d66de, all 16 work orders and 10 verification contracts in the reviewed record. Reviewed record SHA-256 2b828f69f3cab49da5fe803d9105c92d40766ceac9315c348ff6b8135993b774. Evidence sidecar and all 45 retained paths match the reviewed inputs. Legacy assurance-owner label transports mmzen's actual human decision under the approved 0.19.0 compatibility encoding; Codex applies it. No release, merge, publication or marker decision is inferred."
 +++
 
 # Verification Record Candidate
