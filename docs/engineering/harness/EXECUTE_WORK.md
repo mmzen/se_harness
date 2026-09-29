@@ -42,7 +42,11 @@ and work orders (WO) with completion recorded when the required checks pass.
 **Actions:**
 
 1. Inspect the selected work order (WO).
-2. Read every file in `context.reading_manifest`.
+2. Read the formal artifacts in `context.reading_manifest`. For instructions,
+   read the selected procedure's entry conditions, current step, and prerequisites
+   whose conditions apply. Reuse current required material still in context;
+   reread it when changed or lost. After compaction, obtain a fresh `check`
+   result before continuing. This does not remove any required formal input.
 3. Read the approved behavior, permitted paths, decision limits, stop
    conditions, verification contracts (VER), and required repository checks.
 4. Identify the complete change baseline required by the selected procedure.

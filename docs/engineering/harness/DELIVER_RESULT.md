@@ -119,10 +119,11 @@ destination, current gates, and any existing human authorization.
 3. Run the selected procedure's pre-action check with the command below.
 4. Check required CI, repository protection, and destination controls using
    the delivery procedure's tools.
-5. Check any additional controls required by the selected tool or provider.
-   Verity Plane's current `change` skill requires demonstrated independent
-   enforcement for the exact external action and destination. An actor label
-   or claimed control does not prove that the actual invocation is covered.
+5. Read and check any additional controls required by the selected tool or
+   provider before the external mutation. When using Verity Plane's `change`
+   or `evidence` skill, read the installed `change` skill's
+   `references/authority.md#external-actions`. It owns the provider's
+   independent-enforcement requirement for the exact action and destination.
 6. Stop the external mutation if authority, a required gate, or a required
    control is missing. Reuse valid existing authorization without a duplicate request.
 
@@ -138,7 +139,8 @@ when offered. Include any further change-set inputs required by that procedure.
 This check does not authenticate a human decision or prove external controls.
 
 The Verity Plane requirement comes from the installed `change` skill's
-`references/authority.md`. It applies when that skill is used; it is not a
+`references/authority.md#external-actions`. It applies when its `change` or
+`evidence` skill is used; it is not a
 new lifecycle gate defined by this document. Read the selected provider's
 current requirements and report a missing control against that source.
 

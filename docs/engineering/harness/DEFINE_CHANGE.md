@@ -51,7 +51,9 @@ the requester.
 1. Read the change request and existing clarifications.
 2. Draft one statement describing the observable result for the intended
    human, agent, or system. Include the conditions under which it is needed.
-3. Present the statement to the requester.
+3. Present the statement to the requester. When the proposed scope is also
+   clear, present its inclusions, exclusions, and constraints in the same
+   exchange. Obtain confirmation of both before drafting dependent definitions.
 4. Ask the requester to resolve any missing information or competing
    interpretations that would change the outcome.
 5. Revise the statement using the feedback. Repeat the exchange until the
@@ -91,7 +93,9 @@ by the requester.
 4. Use component names where exact file paths are not yet known.
 5. Present these boundaries to the requester. Identify any unresolved boundary.
 6. Revise the scope until the requester confirms it. Reuse an existing
-   confirmation when the boundaries are unchanged.
+   confirmation when the boundaries are unchanged, including confirmation
+   obtained with the intended outcome. Retain both confirmations even when
+   one reply supplies them.
 7. Retain the confirmed scope as transient working material.
 
 **Harness command:** None.
