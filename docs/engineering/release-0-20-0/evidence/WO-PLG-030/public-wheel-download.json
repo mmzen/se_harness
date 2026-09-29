@@ -1,0 +1,9 @@
+{
+  "source": "https://pypi.org/pypi/se-harness/0.20.0/json",
+  "url": "https://files.pythonhosted.org/packages/ea/28/80f2ec8839fe9c81cab7f66c312501cf5bc80951f57f9cda202e51fc1b76/se_harness-0.20.0-py3-none-any.whl",
+  "filename": "se_harness-0.20.0-py3-none-any.whl",
+  "sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+  "observed_at": "2026-09-29T19:03:26.526228+00:00",
+  "release_record": "RLS-SEH-029",
+  "matches_release_record": true
+}

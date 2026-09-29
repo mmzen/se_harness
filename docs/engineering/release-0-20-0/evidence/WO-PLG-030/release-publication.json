@@ -1,0 +1,94 @@
+{
+  "record": "RLS-SEH-029",
+  "version": "0.20.0",
+  "published": true,
+  "workflow": "https://github.com/mmzen/se_harness/actions/runs/36615077351",
+  "candidate": "7253d13b212ad6f7df670021290fea32e81d66de",
+  "governance": "23ae2d1f6af0f1bf8484b95b0850cb0019eeb7db",
+  "stages": {
+    "github": {
+      "maintenance_branch": "release/0.20",
+      "maintenance_state": "created",
+      "state": "exact",
+      "url": "https://github.com/mmzen/se_harness/releases/tag/v0.20.0"
+    },
+    "pages": {
+      "state": "exact",
+      "url": "https://www.verityplane.ai/"
+    },
+    "public_install": {
+      "state": "exact"
+    },
+    "pypi": {
+      "state": "exact",
+      "url": "https://pypi.org/project/se-harness/0.20.0/"
+    },
+    "qualification": {
+      "state": "exact"
+    },
+    "resolution": {
+      "state": "exact",
+      "workflow_url": "https://github.com/mmzen/se_harness/actions/runs/36615077351"
+    }
+  },
+  "public_install_passed": true,
+  "pypi_hashes_match": true,
+  "pages_identity_matches": true,
+  "observed_at": "2026-09-29T18:58:39.859252+00:00",
+  "remaining": [
+    "marketplace WO-PLG-030/031",
+    "documentation closeout WO-PLG-031",
+    "separate latest/last authorization",
+    "separate repository adoption and owner-guide cleanup"
+  ],
+  "evidence": [
+    {
+      "path": "artifacts-final.json",
+      "sha256": "e89bb718057dcebf611dad3e3799164c87f781562627c7a647639e2c3e6398b2"
+    },
+    {
+      "path": "artifacts-latest.json",
+      "sha256": "fc4dd626ed4ca18e668c9e9da40d18690e8a7d54daa83a21f34b563b80dafdf6"
+    },
+    {
+      "path": "authorization.json",
+      "sha256": "561362143cd83be90a2f241880569b737ae138a733260e80b7bc4d8d0a8409be"
+    },
+    {
+      "path": "github-release.json",
+      "sha256": "29dbfae888d4e88dea94b0a0793a021329a277652359e2613d48692a180c6e2e"
+    },
+    {
+      "path": "github-tag.json",
+      "sha256": "1c383c4db0c4571594271b731c6365af2612fa7b883bc4870f7ce5c9162e123a"
+    },
+    {
+      "path": "pages-publication-manifest.json",
+      "sha256": "d99a66f14720f058dd646528318f9f0c04d28dbabbf1b5d9452fec38c2d9daea"
+    },
+    {
+      "path": "pypi-0.20.0.json",
+      "sha256": "3637bb0f7e6a1df21db0e8aca0bc012a2f68102234460bcc473ca41c412ea110"
+    },
+    {
+      "path": "release-plan-RLS-SEH-029/release-plan.json",
+      "sha256": "69cf8a0269826023e7df787ee3a490af9e17068fd622502564b2b81a0dbd6608"
+    },
+    {
+      "path": "release-result-RLS-SEH-029/public-install-qualification.json",
+      "sha256": "51aa5c56fe07d576ade007596cf689fa32173f809fb941d3fc9d52b3280f393e"
+    },
+    {
+      "path": "release-result-RLS-SEH-029/release-result.json",
+      "sha256": "635a29b7bc9175c71e009650a92b57908e1ab436c29622583e7cb51182552660"
+    },
+    {
+      "path": "run-final.json",
+      "sha256": "06941490866138e235d718766838a9349ea33f0a3a018715eb32d89543af5a22"
+    },
+    {
+      "path": "run-latest.json",
+      "sha256": "632b79637447b9128020078598fd3711dd270b49d9c1041b386b7a1e4394fa86"
+    }
+  ]
+}

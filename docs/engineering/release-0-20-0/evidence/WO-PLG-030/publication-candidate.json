@@ -1,0 +1,44 @@
+{
+  "destination": "https://github.com/mmzen/se_harness.git",
+  "ref": "refs/heads/plugin-marketplace",
+  "expected_old_commit": "86d75e56e28c0c34819c0079b41dc67075f58490",
+  "prepared_commit": "5662817f42994bd0dc9aabaa56891f9c298ab965",
+  "tree": "34a50b287a32ce503787f55cbb4d6d0d29579f3b",
+  "retained_local_ref": "refs/heads/prepared/marketplace-0.2.2",
+  "source_commit": "7253d13b212ad6f7df670021290fea32e81d66de",
+  "released_governance_commit": "23ae2d1f6af0f1bf8484b95b0850cb0019eeb7db",
+  "plugin_version": "0.2.2",
+  "evaluator_version": "0.20.0",
+  "package_identity_sha256": "b119643684085c676e43725f5d420f4d6edf17fc99a92ca53fafd6f2be63bd11",
+  "file_count": 63,
+  "tree_matches_all_distribution_bytes": true,
+  "diff_stat": "PACKAGE-IDENTITY.json                              |  40 ++++++++++-----------\n README.md                                          |  12 ++++---\n .../claude/verity-plane/.claude-plugin/plugin.json |   2 +-\n packages/claude/verity-plane/README.md             |  16 +++++----\n .../claude/verity-plane/assembly-inventory.json    |  28 +++++++--------\n ...-any.whl => se_harness-0.20.0-py3-none-any.whl} | Bin 533746 -> 533448 bytes\n .../codex/verity-plane/.codex-plugin/plugin.json   |   2 +-\n packages/codex/verity-plane/README.md              |  16 +++++----\n .../codex/verity-plane/assembly-inventory.json     |  28 +++++++--------\n ...-any.whl => se_harness-0.20.0-py3-none-any.whl} | Bin 533746 -> 533448 bytes\n packages/verity-plane-claude.zip                   | Bin 569856 -> 571134 bytes\n packages/verity-plane-codex.zip                    | Bin 570112 -> 571394 bytes\n 12 files changed, 75 insertions(+), 69 deletions(-)",
+  "changed_paths": [
+    "M\tPACKAGE-IDENTITY.json",
+    "M\tREADME.md",
+    "M\tpackages/claude/verity-plane/.claude-plugin/plugin.json",
+    "M\tpackages/claude/verity-plane/README.md",
+    "M\tpackages/claude/verity-plane/assembly-inventory.json",
+    "R064\tpackages/claude/verity-plane/packages/se_harness-0.19.0-py3-none-any.whl\tpackages/claude/verity-plane/packages/se_harness-0.20.0-py3-none-any.whl",
+    "M\tpackages/codex/verity-plane/.codex-plugin/plugin.json",
+    "M\tpackages/codex/verity-plane/README.md",
+    "M\tpackages/codex/verity-plane/assembly-inventory.json",
+    "R064\tpackages/codex/verity-plane/packages/se_harness-0.19.0-py3-none-any.whl\tpackages/codex/verity-plane/packages/se_harness-0.20.0-py3-none-any.whl",
+    "M\tpackages/verity-plane-claude.zip",
+    "M\tpackages/verity-plane-codex.zip"
+  ],
+  "status": "Prepared locally. Human verification and exact publication authorization pending.",
+  "push_argv": [
+    "git",
+    "push",
+    "origin",
+    "5662817f42994bd0dc9aabaa56891f9c298ab965:refs/heads/plugin-marketplace"
+  ],
+  "pre_push_checks": [
+    "Require human verification of the qualification record.",
+    "Require explicit publication authorization for this exact commit and destination.",
+    "Read live remote head and stop on movement.",
+    "Require released evaluator pre-action pass and independent provider controls.",
+    "Use ordinary fast-forward push and read back all bytes."
+  ]
+}

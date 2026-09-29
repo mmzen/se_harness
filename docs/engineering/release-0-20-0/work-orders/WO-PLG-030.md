@@ -2,7 +2,7 @@
 id = "WO-PLG-030"
 type = "work_order"
 title = "Assemble and qualify plugin 0.2.2 from public evaluator 0.20.0"
-status = "approved"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-09-29"
 updated = "2026-09-29"
@@ -32,6 +32,20 @@ decided_at = "2026-09-29T17:32:13Z"
 decided_by = "engineering-owner"
 reason = "Human repository owner mmzen: \"I approve\", responding to the reviewed seven-artifact 0.20.0/0.2.2 release package, required commit-bound verification, stated ordinary review-branch pushes/draft PRs and read-only CI rehearsals, and existing 0.19.0 role encoding. Reviewed SHA-256 50ecd19f44ad8a9d2fbf874a19cc960cc757cb07d05bf2ba4c389f064af32336; approval input SHA-256 e6b5e09f54b93985b878963f48c720099f328d233476de09461ee6a033eb601e. Only the confirmed assurance classification was added to work orders. Legacy label engineering-owner transports the human decision; Codex applies it. Exact candidate verification, RLS release, merge, publication, markers and adoption remain separate."
 scope_paths = ["docs/engineering/release-0-20-0/work-orders/WO-PLG-030.md", "docs/engineering/release-0-20-0/evidence/WO-PLG-030/", "docs/engineering/release-0-20-0/verification-records/"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-29T19:02:23Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex starts the unchanged mmzen-approved package qualification after RLS-SEH-029 publication, exact public wheel readback and passing start preflight. The human requested continued marketplace delivery."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-29T19:23:39Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Both exact plugin 0.2.2 packages passed public-wheel identity, 32 focused tests, independent check, negative cases and both Windows CLI native qualification. Descendant distribution commit prepared and all bytes compared. Retained evidence and handoff pass. VREC capture remains pending a separate scope correction for its generated companion; no verification or marketplace publication is inferred."
 +++
 
 # Assemble and qualify plugin 0.2.2
