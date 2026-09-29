@@ -1,6 +1,16 @@
 # Plugin integration
 
-## Marketplace refresh for plugin 0.2.1
+## Current public package: plugin 0.2.2
+
+The [0.20.0 release package](../release-0-20-0/README.md) is published with
+plugin 0.2.2 at `5662817f42994bd0dc9aabaa56891f9c298ab965`. VREC-PLG-025
+verified package qualification. [WO-PLG-031 evidence](../release-0-20-0/evidence/WO-PLG-031/README.md)
+records the public file comparison, fresh installs and updates from 0.2.1 on
+both Windows CLIs, and native evidence applicability. Documentation integration
+and final delivery readback remain pending in that report. Repository adoption
+is separate.
+
+## Historical marketplace refresh for plugin 0.2.1
 
 [WO-PLG-026](work-orders/WO-PLG-026.md) prepares plugin 0.2.1 with the unchanged
 released evaluator 0.19.0. Its [local evidence](evidence/WO-PLG-026/README.md)
@@ -10,7 +20,7 @@ records Windows native qualification on Codex and Claude Code.
 [VER-PLG-026](verification/VER-PLG-026.md) defines preparation acceptance.
 
 VREC-PLG-023 verified preparation, integrated through PR #496. The separately
-authorized public commit `86d75e56e28c0c34819c0079b41dc67075f58490` now supplies
+authorized public commit `86d75e56e28c0c34819c0079b41dc67075f58490` supplied
 plugin 0.2.1 with evaluator 0.19.0. [WO-PLG-028](work-orders/WO-PLG-028.md)
 retains the [publication and public-route evidence](evidence/WO-PLG-028/README.md)
 under [VER-PLG-027](verification/VER-PLG-027.md). Fresh-install and update package
@@ -20,10 +30,7 @@ correction. VREC-PLG-024 verified public confirmation; PR #497 integrated the
 current claims. The [delivery closeout](evidence/WO-PLG-028/delivery-closeout.md),
 integrated through PR #498, records completion of all five declared surfaces.
 
-The [next release package](../release-0-20-0/README.md) prepares evaluator 0.20.0
-and plugin 0.2.2. WO-PLG-030 and WO-PLG-031 own its later package qualification,
-marketplace publication, public observations and documentation. The 0.2.1
-receipt does not establish those future results.
+The 0.2.1 receipt remains historical evidence; it does not establish 0.2.2 delivery.
 
 ## Replacement cleanup package
 

@@ -11,11 +11,11 @@ ROOT = Path(__file__).resolve().parents[3]
 # Candidate identities come from approved REL-SEH-031, not candidate output.
 PLUGIN = "0.2.2"
 CANDIDATE_EVALUATOR = "0.20.0"
-# Published identities retain REQ-PLG-039 / SPEC-PLG-023 and their actual receipt.
-EVALUATOR = "0.19.0"
-WHEEL_SHA = "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8"
-RELEASE = "docs/engineering/release-0-19-0/releases/RLS-SEH-028.md"
-OBSERVATION = "docs/engineering/plugin-integration/evidence/WO-PLG-028/publication.json"
+# Published identities come from RLS-SEH-029 and independent public readback.
+EVALUATOR = "0.20.0"
+WHEEL_SHA = "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0"
+RELEASE = "docs/engineering/release-0-20-0/releases/RLS-SEH-029.md"
+OBSERVATION = "docs/engineering/release-0-20-0/evidence/WO-PLG-031/publication.json"
 
 
 def selected_inputs():
@@ -36,7 +36,7 @@ def identity_findings(inputs):
         findings.append("candidate manifest version")
     release = inputs["release"]
     if (release.get("id"), release.get("status"), release.get("version")) != (
-            "RLS-SEH-028", "released", EVALUATOR):
+            "RLS-SEH-029", "released", EVALUATOR):
         findings.append("released evaluator selection")
     distribution = release.get("distribution", {})
     if (distribution.get("wheel"), distribution.get("wheel_sha256")) != (

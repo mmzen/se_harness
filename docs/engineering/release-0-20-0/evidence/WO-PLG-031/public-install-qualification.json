@@ -1,0 +1,59 @@
+{
+  "authority": "evidence-only; no lifecycle or external action authorized",
+  "checks": [
+    {
+      "id": "PI001",
+      "message": "released wheel, record, and installed archive agree",
+      "passed": true,
+      "subject": "public-wheel"
+    },
+    {
+      "id": "PI002",
+      "message": "wheel and installed payload digests agree",
+      "passed": true,
+      "subject": "installed-payload"
+    },
+    {
+      "id": "PI003",
+      "message": "entry point and resources are isolated from source",
+      "passed": true,
+      "subject": "installed-runtime"
+    },
+    {
+      "id": "PI004",
+      "message": "installed version and qualification surface passed",
+      "passed": true,
+      "subject": "public-cli"
+    },
+    {
+      "id": "PI005",
+      "message": "target state is unchanged",
+      "passed": true,
+      "subject": "repository-state"
+    }
+  ],
+  "completion": "completed",
+  "evaluator": {
+    "archive_name": "se_harness-0.20.0-py3-none-any.whl",
+    "archive_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+    "distribution": "se-harness",
+    "entry_point_sha256": "303ff403d05c842b26de2f3dd17cfcafc6552b708292d545743fe1177d671177",
+    "identity_sha256": "2b60de56540ac57181bfa512434293c55ada68ed1442af5d9a10d69011ca36ff",
+    "payload_manifest": "se-harness-installed-payload-v1",
+    "payload_sha256": "88c26138f759af78b2d7eeed3d15f92b573ff264ea6a531b2c22dbbf1905130e",
+    "role": "public-install",
+    "version": "0.20.0"
+  },
+  "independence": "public-install-observation",
+  "operation": "public-install",
+  "passed": true,
+  "schema": "se-harness-release-qualification-v1",
+  "target": {
+    "commit": "7253d13b212ad6f7df670021290fea32e81d66de",
+    "identity_sha256": "26c7f8042db252f3bb322ca83e036621d4463e0538f4e05e5ef9c618e3b7f803",
+    "kind": "public-install",
+    "release_record": "RLS-SEH-029",
+    "version": "0.20.0",
+    "wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0"
+  }
+}

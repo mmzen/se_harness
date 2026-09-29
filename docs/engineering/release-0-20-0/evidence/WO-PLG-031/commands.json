@@ -1,0 +1,690 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "plugin",
+        "details",
+        "verity-plane@se-harness"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+      "observed_at": "2026-09-29T19:48:35.028458+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "53f191d5fb0e93176a85a884e75f70382a619d5f8a20dd17c505db7911c78d0b",
+      "stdout": "verity-plane 0.2.2\n  Description: Use SE Harness skills for repository setup, governed changes and verification evidence.\n  Source: verity-plane@se-harness\n\nComponent inventory\n  Skills (5)  change, evidence, harness-operator-brief, harness-orient, setup\n  Agents (0)\n  Hooks (1)  SessionStart  (harness-only — no model context cost)\n  MCP servers (0)\n  LSP servers (0)\n\nProjected token cost\n  Always-on:   ~331 tok   added to every session\n\nPer-component (rounded)\n  component               always-on  on-invoke\n  change                        ~70       ~940\n  evidence                      ~60       ~910\n  harness-operator-brief        ~80      ~1.3k\n  harness-orient                ~80      ~1.2k\n  setup                         ~40       ~390\n\n  On-invoke cost is paid each time a skill or agent fires.\n  Token counts are estimates and may differ from actual usage.\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "plugin",
+        "marketplace",
+        "add",
+        "mmzen/se_harness@plugin-marketplace"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+      "observed_at": "2026-09-29T19:48:33.565074+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "d0f1e052ab66f4ae851410c7c37ffc320252c5e0a2e845a22abb6c99ade34b4e",
+      "stdout": "Adding marketplace…SSH not configured, cloning via HTTPS: https://github.com/mmzen/se_harness.git\nRefreshing marketplace cache (timeout: 120s)…\nCloning repository (timeout: 120s): https://github.com/mmzen/se_harness.git (ref: plugin-marketplace)\nClone complete, validating marketplace…\nCleaning up old marketplace cache…\n√ Successfully added marketplace: se-harness (declared in user settings)\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "plugin",
+        "list",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+      "observed_at": "2026-09-29T19:48:34.275595+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "1cb9b23cdece9e4cb97a425d2b40f406ec1ce8d75a01c884b28d382553ec2058",
+      "stdout": "[\n  {\n    \"id\": \"verity-plane@se-harness\",\n    \"version\": \"0.2.2\",\n    \"scope\": \"user\",\n    \"enabled\": true,\n    \"installPath\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\p31\\\\fresh\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.2.2\",\n    \"installedAt\": \"2026-09-29T19:48:33.914Z\",\n    \"lastUpdated\": \"2026-09-29T19:48:33.914Z\"\n  }\n]\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "plugin",
+        "marketplace",
+        "list",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+      "observed_at": "2026-09-29T19:48:31.025202+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "stdout": "[]\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "plugin",
+        "install",
+        "verity-plane@se-harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+      "observed_at": "2026-09-29T19:48:33.974790+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "951e0be2b1f5ebe1f6ff0c6fa1b66bd66d6f2e9edc09db3b4fcd9329f08739b9",
+      "stdout": "{\"command\":\"install\",\"outcome\":\"ok\",\"plugin\":\"verity-plane@se-harness\",\"pluginId\":\"verity-plane@se-harness\",\"scope\":\"user\",\"message\":\"Successfully installed plugin: verity-plane@se-harness (scope: user)\"}\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/p31/fresh/profiles/claude/claude/plugins/marketplaces/se-harness",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh\\profiles\\claude\\claude\\plugins\\marketplaces\\se-harness",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+      "observed_at": "2026-09-29T19:48:34.583709+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "7f477f17c783d28b6961ea78055955790317d56b2d0cd45c52e2203bdde5c8f3",
+      "stdout": "5662817f42994bd0dc9aabaa56891f9c298ab965\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "plugin",
+        "marketplace",
+        "list",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+      "observed_at": "2026-09-29T19:48:34.528456+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "0889534bb8b5282c2b87e92bf8f78dbe4acaa4df4ab253b0a3014da560784e21",
+      "stdout": "[\n  {\n    \"name\": \"se-harness\",\n    \"source\": \"github\",\n    \"repo\": \"mmzen/se_harness\",\n    \"ref\": \"plugin-marketplace\",\n    \"installLocation\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\p31\\\\fresh\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\marketplaces\\\\se-harness\"\n  }\n]\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "--version"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+      "observed_at": "2026-09-29T19:48:30.719775+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "f8e1c3ef52479aac12b679a60da498a9e5c9c43c0d741e182088775a4b29de09",
+      "stdout": "2.1.273 (Claude Code)\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "debug",
+        "prompt-input",
+        "List installed Verity Plane skills."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+      "observed_at": "2026-09-29T19:49:13.081415+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "31e1ad30825a1242c1eff7d6b5857bf5987ba383e24d498a2c65ee00c60f3538",
+      "stdout_retention": "Native debug prompt contains unrelated host instructions; inventory and skill-presence assessment retained in public-routes.json, raw output remains outside repository.",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_retention": "Native debug prompt contains unrelated host instructions; inventory and skill-presence assessment retained in public-routes.json, raw output remains outside repository."
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "plugin",
+        "marketplace",
+        "add",
+        "mmzen/se_harness",
+        "--ref",
+        "plugin-marketplace",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+      "observed_at": "2026-09-29T19:49:12.516646+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "907671d860ace4038e23236a5eb2e4ea5e3c506b1382b1d183d1fab16c76d2b8",
+      "stdout": "{\n  \"marketplaceName\": \"se-harness\",\n  \"installedRoot\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\p31\\\\fresh\\\\profiles\\\\codex\\\\codex\\\\.tmp\\\\marketplaces\\\\se-harness\",\n  \"alreadyAdded\": false\n}\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "plugin",
+        "list",
+        "--marketplace",
+        "se-harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+      "observed_at": "2026-09-29T19:49:12.638197+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "5660b189886a30d75bd0d0200c3da87f14cfbf51751775c4e3fbdf21ad99b1a4",
+      "stdout": "{\n  \"installed\": [\n    {\n      \"pluginId\": \"verity-plane@se-harness\",\n      \"name\": \"verity-plane\",\n      \"marketplaceName\": \"se-harness\",\n      \"version\": \"0.2.2\",\n      \"installed\": true,\n      \"enabled\": true,\n      \"source\": {\n        \"source\": \"local\",\n        \"path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\p31\\\\fresh\\\\profiles\\\\codex\\\\codex\\\\.tmp\\\\marketplaces\\\\se-harness\\\\packages\\\\codex\\\\verity-plane\"\n      },\n      \"marketplaceSource\": {\n        \"sourceType\": \"git\",\n        \"source\": \"https://github.com/mmzen/se_harness.git\"\n      },\n      \"installPolicy\": \"AVAILABLE\",\n      \"authPolicy\": \"ON_INSTALL\"\n    }\n  ],\n  \"available\": []\n}\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "plugin",
+        "marketplace",
+        "list",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+      "observed_at": "2026-09-29T19:48:23.471775+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "21962037787af48448d33c990bb6d08f0034fca53ea45d00ef32876c4363bf52",
+      "stdout": "{\n  \"marketplaces\": []\n}\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "plugin",
+        "add",
+        "verity-plane@se-harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+      "observed_at": "2026-09-29T19:49:12.596281+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "b7e45181b487e539f9ebb9a3facf98935dde9f8157f1c1cd8d63f70a9d35aed1",
+      "stdout": "{\n  \"pluginId\": \"verity-plane@se-harness\",\n  \"name\": \"verity-plane\",\n  \"marketplaceName\": \"se-harness\",\n  \"version\": \"0.2.2\",\n  \"installedPath\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\p31\\\\fresh\\\\profiles\\\\codex\\\\codex\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.2.2\",\n  \"authPolicy\": \"ON_INSTALL\"\n}\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/p31/fresh/profiles/codex/codex/.tmp/marketplaces/se-harness",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh\\profiles\\codex\\codex\\.tmp\\marketplaces\\se-harness",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+      "observed_at": "2026-09-29T19:49:12.722992+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "7f477f17c783d28b6961ea78055955790317d56b2d0cd45c52e2203bdde5c8f3",
+      "stdout": "5662817f42994bd0dc9aabaa56891f9c298ab965\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "plugin",
+        "marketplace",
+        "list",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+      "observed_at": "2026-09-29T19:49:12.682988+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "4a98f2329f67abcc9ce2ea4c6d45ff674bb221e0a216ede5a88784663a12c72b",
+      "stdout": "{\n  \"marketplaces\": [\n    {\n      \"name\": \"se-harness\",\n      \"root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\p31\\\\fresh\\\\profiles\\\\codex\\\\codex\\\\.tmp\\\\marketplaces\\\\se-harness\",\n      \"marketplaceSource\": {\n        \"sourceType\": \"git\",\n        \"source\": \"https://github.com/mmzen/se_harness.git\"\n      }\n    }\n  ]\n}\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "--version"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\p31\\fresh",
+      "observed_at": "2026-09-29T19:48:23.421837+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "cdfae75a4ea1a6ca8bfd876fa9422186f87b39bcff01e7a3157d1dbc4895bd1b",
+      "stdout": "codex-cli 0.158.0-alpha.2.1\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "api",
+        "repos/mmzen/se_harness/git/ref/tags/last"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "observed_at": "2026-09-29T19:55:39.670825+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "cea8904d3d83fee09e13cb28f7871c41a5095fe7d67d7102adce3f2a7c282cab",
+      "stdout": "{\"ref\":\"refs/tags/last\",\"node_id\":\"REF_kwDOT09fPK5yZWZzL3RhZ3MvbGFzdA\",\"url\":\"https://api.github.com/repos/mmzen/se_harness/git/refs/tags/last\",\"object\":{\"sha\":\"7253d13b212ad6f7df670021290fea32e81d66de\",\"type\":\"commit\",\"url\":\"https://api.github.com/repos/mmzen/se_harness/git/commits/7253d13b212ad6f7df670021290fea32e81d66de\"}}",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "api",
+        "repos/mmzen/se_harness/releases/latest"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "observed_at": "2026-09-29T19:55:39.234723+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "0e761f1a7169e1d8c587d49b18cf262ac510b44068e1b8ebaedd9fcd0b4426c5",
+      "stdout": "{\"url\":\"https://api.github.com/repos/mmzen/se_harness/releases/399435871\",\"assets_url\":\"https://api.github.com/repos/mmzen/se_harness/releases/399435871/assets\",\"upload_url\":\"https://uploads.github.com/repos/mmzen/se_harness/releases/399435871/assets{?name,label}\",\"html_url\":\"https://github.com/mmzen/se_harness/releases/tag/v0.20.0\",\"id\":399435871,\"author\":{\"login\":\"github-actions[bot]\",\"id\":41898282,\"node_id\":\"MDM6Qm90NDE4OTgyODI=\",\"avatar_url\":\"https://avatars.githubusercontent.com/in/15368?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/github-actions%5Bbot%5D\",\"html_url\":\"https://github.com/apps/github-actions\",\"followers_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/followers\",\"following_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/subscriptions\",\"organizations_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/orgs\",\"repos_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/repos\",\"events_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/received_events\",\"type\":\"Bot\",\"user_view_type\":\"public\",\"site_admin\":false},\"node_id\":\"RE_kwDOT09fPM4Xzuhf\",\"tag_name\":\"v0.20.0\",\"target_commitish\":\"main\",\"name\":\"SE Harness 0.20.0\",\"draft\":false,\"immutable\":false,\"prerelease\":false,\"created_at\":\"2026-09-29T18:39:51Z\",\"updated_at\":\"2026-09-29T18:55:25Z\",\"published_at\":\"2026-09-29T18:55:25Z\",\"assets\":[{\"url\":\"https://api.github.com/repos/mmzen/se_harness/releases/assets/598965633\",\"id\":598965633,\"node_id\":\"RA_kwDOT09fPM4js32B\",\"name\":\"se_harness-0.20.0-py3-none-any.whl\",\"label\":\"\",\"uploader\":{\"login\":\"github-actions[bot]\",\"id\":41898282,\"node_id\":\"MDM6Qm90NDE4OTgyODI=\",\"avatar_url\":\"https://avatars.githubusercontent.com/in/15368?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/github-actions%5Bbot%5D\",\"html_url\":\"https://github.com/apps/github-actions\",\"followers_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/followers\",\"following_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/subscriptions\",\"organizations_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/orgs\",\"repos_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/repos\",\"events_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/received_events\",\"type\":\"Bot\",\"user_view_type\":\"public\",\"site_admin\":false},\"content_type\":\"application/octet-stream\",\"state\":\"uploaded\",\"size\":533448,\"digest\":\"sha256:7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0\",\"download_count\":1,\"created_at\":\"2026-09-29T18:55:22Z\",\"updated_at\":\"2026-09-29T18:55:22Z\",\"browser_download_url\":\"https://github.com/mmzen/se_harness/releases/download/v0.20.0/se_harness-0.20.0-py3-none-any.whl\"},{\"url\":\"https://api.github.com/repos/mmzen/se_harness/releases/assets/598965696\",\"id\":598965696,\"node_id\":\"RA_kwDOT09fPM4js33A\",\"name\":\"se_harness-0.20.0.tar.gz\",\"label\":\"\",\"uploader\":{\"login\":\"github-actions[bot]\",\"id\":41898282,\"node_id\":\"MDM6Qm90NDE4OTgyODI=\",\"avatar_url\":\"https://avatars.githubusercontent.com/in/15368?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/github-actions%5Bbot%5D\",\"html_url\":\"https://github.com/apps/github-actions\",\"followers_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/followers\",\"following_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/subscriptions\",\"organizations_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/orgs\",\"repos_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/repos\",\"events_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/received_events\",\"type\":\"Bot\",\"user_view_type\":\"public\",\"site_admin\":false},\"content_type\":\"application/x-gtar\",\"state\":\"uploaded\",\"size\":783502,\"digest\":\"sha256:5b6784aeabdf72e0e6b43a7a2bc81244c7a9da6415cf39fbc39f440ec57d426c\",\"download_count\":1,\"created_at\":\"2026-09-29T18:55:23Z\",\"updated_at\":\"2026-09-29T18:55:23Z\",\"browser_download_url\":\"https://github.com/mmzen/se_harness/releases/download/v0.20.0/se_harness-0.20.0.tar.gz\"},{\"url\":\"https://api.github.com/repos/mmzen/se_harness/releases/assets/598965597\",\"id\":598965597,\"node_id\":\"RA_kwDOT09fPM4js31d\",\"name\":\"SHA256SUMS\",\"label\":\"\",\"uploader\":{\"login\":\"github-actions[bot]\",\"id\":41898282,\"node_id\":\"MDM6Qm90NDE4OTgyODI=\",\"avatar_url\":\"https://avatars.githubusercontent.com/in/15368?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/github-actions%5Bbot%5D\",\"html_url\":\"https://github.com/apps/github-actions\",\"followers_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/followers\",\"following_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/subscriptions\",\"organizations_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/orgs\",\"repos_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/repos\",\"events_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/github-actions%5Bbot%5D/received_events\",\"type\":\"Bot\",\"user_view_type\":\"public\",\"site_admin\":false},\"content_type\":\"application/octet-stream\",\"state\":\"uploaded\",\"size\":192,\"digest\":\"sha256:cec4ea0130555088ea031c46e524d3e5794c3795288407177ad3cc079749e43a\",\"download_count\":1,\"created_at\":\"2026-09-29T18:55:21Z\",\"updated_at\":\"2026-09-29T18:55:21Z\",\"browser_download_url\":\"https://github.com/mmzen/se_harness/releases/download/v0.20.0/SHA256SUMS\"}],\"tarball_url\":\"https://api.github.com/repos/mmzen/se_harness/tarball/v0.20.0\",\"zipball_url\":\"https://api.github.com/repos/mmzen/se_harness/zipball/v0.20.0\",\"body\":\"# SE Harness 0.20.0\\n\\nReleased from candidate `7253d13b212ad6f7df670021290fea32e81d66de` under `RLS-SEH-029`.\\n\\nVerification: `VREC-SEH-029`\\n\\nReleased work: `WO-HUP-021`, `WO-HUP-023`, `WO-IAR-020`, `WO-IAR-021`, `WO-IAR-022`, `WO-IAR-023`, `WO-IAR-024`, `WO-IAR-025`, `WO-KIS-016`, `WO-PLG-026`, `WO-PLG-027`, `WO-PLG-028`, `WO-PLG-029`, `WO-RLO-010`, `WO-RLO-011`, `WO-RLS-026`\\n\\nInstall with `python -m pip install se-harness==0.20.0`.\\n\"}",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "plugin",
+        "details",
+        "verity-plane@se-harness"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:48:26.428861+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "53f191d5fb0e93176a85a884e75f70382a619d5f8a20dd17c505db7911c78d0b",
+      "stdout": "verity-plane 0.2.2\n  Description: Use SE Harness skills for repository setup, governed changes and verification evidence.\n  Source: verity-plane@se-harness\n\nComponent inventory\n  Skills (5)  change, evidence, harness-operator-brief, harness-orient, setup\n  Agents (0)\n  Hooks (1)  SessionStart  (harness-only — no model context cost)\n  MCP servers (0)\n  LSP servers (0)\n\nProjected token cost\n  Always-on:   ~331 tok   added to every session\n\nPer-component (rounded)\n  component               always-on  on-invoke\n  change                        ~70       ~940\n  evidence                      ~60       ~910\n  harness-operator-brief        ~80      ~1.3k\n  harness-orient                ~80      ~1.2k\n  setup                         ~40       ~390\n\n  On-invoke cost is paid each time a skill or agent fires.\n  Token counts are estimates and may differ from actual usage.\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "plugin",
+        "list",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:48:25.695377+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "4afd54a0de7974956d15db9c04316862fad7ed9e8fb4952b501f7eb37c5e89b6",
+      "stdout": "[\n  {\n    \"id\": \"verity-plane@se-harness\",\n    \"version\": \"0.2.2\",\n    \"scope\": \"user\",\n    \"enabled\": true,\n    \"installPath\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\public028\\\\fresh\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.2.2\",\n    \"installedAt\": \"2026-09-29T06:08:05.446Z\",\n    \"lastUpdated\": \"2026-09-29T19:48:25.371Z\"\n  }\n]\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "plugin",
+        "list",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:48:21.739011+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "47fa821b3b7e8baf5a7fa51a844039b1f59aa585ccaf4fa61287326bbc5c5efd",
+      "stdout": "[\n  {\n    \"id\": \"verity-plane@se-harness\",\n    \"version\": \"0.2.1\",\n    \"scope\": \"user\",\n    \"enabled\": true,\n    \"installPath\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\public028\\\\fresh\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.2.1\",\n    \"installedAt\": \"2026-09-29T06:08:05.446Z\",\n    \"lastUpdated\": \"2026-09-29T06:08:05.446Z\"\n  }\n]\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "plugin",
+        "marketplace",
+        "update",
+        "se-harness"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:48:24.911436+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "81e77a747bf20cb5d14616c7de1b7aaf5672833f1bfb76250a22da5616ea0125",
+      "stdout": "Updating marketplace: se-harness...Refreshing marketplace cache (timeout: 120s)…\n√ Successfully updated marketplace: se-harness\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/public028/fresh/profiles/claude/claude/plugins/marketplaces/se-harness",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh\\profiles\\claude\\claude\\plugins\\marketplaces\\se-harness",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:48:25.987779+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "7f477f17c783d28b6961ea78055955790317d56b2d0cd45c52e2203bdde5c8f3",
+      "stdout": "5662817f42994bd0dc9aabaa56891f9c298ab965\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/public028/fresh/profiles/claude/claude/plugins/marketplaces/se-harness",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh\\profiles\\claude\\claude\\plugins\\marketplaces\\se-harness",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:48:22.031911+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "4fd7fc01a11c6e8e827b2e71bfe71db66429ec9deb7dbcc0bd5436d72a45c853",
+      "stdout": "86d75e56e28c0c34819c0079b41dc67075f58490\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "plugin",
+        "marketplace",
+        "list",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:48:25.940821+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "2f14ed38738af98211fc79fbfd1efd381a89634bd4f840b9a777512c48c05302",
+      "stdout": "[\n  {\n    \"name\": \"se-harness\",\n    \"source\": \"github\",\n    \"repo\": \"mmzen/se_harness\",\n    \"ref\": \"plugin-marketplace\",\n    \"installLocation\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\public028\\\\fresh\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\marketplaces\\\\se-harness\"\n  }\n]\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "plugin",
+        "marketplace",
+        "list",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:48:21.984480+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "2f14ed38738af98211fc79fbfd1efd381a89634bd4f840b9a777512c48c05302",
+      "stdout": "[\n  {\n    \"name\": \"se-harness\",\n    \"source\": \"github\",\n    \"repo\": \"mmzen/se_harness\",\n    \"ref\": \"plugin-marketplace\",\n    \"installLocation\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\public028\\\\fresh\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\marketplaces\\\\se-harness\"\n  }\n]\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "plugin",
+        "update",
+        "verity-plane@se-harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:48:25.412093+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "599658e462cdb204823aabe5a4cd9c5944b2e40ffdc0361c9b1c3393cd5d751a",
+      "stdout": "{\"command\":\"update\",\"outcome\":\"ok\",\"plugin\":\"verity-plane@se-harness\",\"pluginId\":\"verity-plane@se-harness\",\"scope\":\"user\",\"message\":\"Plugin \\\"verity-plane\\\" updated from 0.2.1 to 0.2.2 for scope user. Restart to apply changes.\",\"updateOutcome\":\"updated\",\"oldVersion\":\"0.2.1\",\"newVersion\":\"0.2.2\"}\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+        "--version"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:48:21.405403+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "f8e1c3ef52479aac12b679a60da498a9e5c9c43c0d741e182088775a4b29de09",
+      "stdout": "2.1.273 (Claude Code)\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "plugin",
+        "list",
+        "--marketplace",
+        "se-harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:48:23.124081+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "1cd34e0f34bba6d58103dc170f42f753f78aba27dff2faa3b1a02dba74424865",
+      "stdout": "{\n  \"installed\": [\n    {\n      \"pluginId\": \"verity-plane@se-harness\",\n      \"name\": \"verity-plane\",\n      \"marketplaceName\": \"se-harness\",\n      \"version\": \"0.2.1\",\n      \"installed\": true,\n      \"enabled\": true,\n      \"source\": {\n        \"source\": \"local\",\n        \"path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\public028\\\\fresh\\\\profiles\\\\codex\\\\codex\\\\.tmp\\\\marketplaces\\\\se-harness\\\\packages\\\\codex\\\\verity-plane\"\n      },\n      \"marketplaceSource\": {\n        \"sourceType\": \"git\",\n        \"source\": \"https://github.com/mmzen/se_harness.git\"\n      },\n      \"installPolicy\": \"AVAILABLE\",\n      \"authPolicy\": \"ON_INSTALL\"\n    }\n  ],\n  \"available\": []\n}\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "plugin",
+        "marketplace",
+        "upgrade",
+        "se-harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:49:11.785917+00:00",
+      "exit_code": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "",
+      "stderr_sha256": "713bb504b31ef6f9c590b127394cea6543b9072f5bc38eb837edafb6ceac8556",
+      "stderr": "Failed to upgrade marketplace `se-harness`: git clone marketplace source timed out after 30s: Cloning into 'C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh\\profiles\\codex\\codex\\.tmp/marketplaces\\.staging\\marketplace-upgrade-Cv4G1q'...\nUpdating files:   9% (1214/12345)\nUpdating files:  10% (1235/12345)\nUpdating files:  11% (1358/12345)\nUpdating files:  12% (1482/12345)\nUpdating files:  13% (1605/12345)\nUpdating files:  14% (1729/12345)\nUpdating files:  15% (1852/12345)\nUpdating files:  16% (1976/12345)\nUpdating files:  17% (2099/12345)\nUpdating files:  18% (2223/12345)\nUpdating files:  19% (2346/12345)\nUpdating files:  19% (2431/12345)\nUpdating files:  20% (2469/12345)\nUpdating files:  21% (2593/12345)\nUpdating files:  22% (2716/12345)\nUpdating files:  23% (2840/12345)\nUpdating files:  24% (2963/12345)\nUpdating files:  25% (3087/12345)\nUpdating files:  26% (3210/12345)\nUpdating files:  27% (3334/12345)\nUpdating files:  28% (3457/12345)\nUpdating files:  28% (3531/12345)\nUpdating files:  29% (3581/12345)\nUpdating files:  30% (3704/12345)\nUpdating files:  31% (3827/12345)\nUpdating files:  32% (3951/12345)\nUpdating files:  33% (4074/12345)\nUpdating files:  34% (4198/12345)\nUpdating files:  35% (4321/12345)\nUpdating files:  36% (4445/12345)\nUpdating files:  37% (4568/12345)\nUpdating files:  38% (4692/12345)\nUpdating files:  38% (4694/12345)\nUpdating files:  39% (4815/12345)\nUpdating files:  40% (4938/12345)\nUpdating files:  41% (5062/12345)\nUpdating files:  42% (5185/12345)\nUpdating files:  43% (5309/12345)\nUpdating files:  44% (5432/12345)\nUpdating files:  45% (5556/12345)\nUpdating files:  46% (5679/12345)\nUpdating files:  46% (5768/12345)\nUpdating files:  47% (5803/12345)\nUpdating files:  48% (5926/12345)\nUpdating files:  49% (6050/12345)\nUpdating files:  50% (6173/12345)\nUpdating files:  51% (6296/12345)\nUpdating files:  52% (6420/12345)\nUpdating files:  53% (6543/12345)\nUpdating files:  54% (6667/12345)\nUpdating files:  55% (6790/12345)\nUpdating files:  56% (6914/12345)\nUpdating files:  56% (6997/12345)\nUpdating files:  57% (7037/12345)\nUpdating files:  58% (7161/12345)\nUpdating files:  59% (7284/12345)\nUpdating files:  60% (7407/12345)\nUpdating files:  61% (7531/12345)\nUpdating files:  62% (7654/12345)\nUpdating files:  63% (7778/12345)\nUpdating files:  63% (7861/12345)\nUpdating files:  64% (7901/12345)\nUpdating files:  65% (8025/12345)\nUpdating files:  66% (8148/12345)\nUpdating files:  67% (8272/12345)\nUpdating files:  68% (8395/12345)\nUpdating files:  69% (8519/12345)\nUpdating files:  70% (8642/12345)\nUpdating files:  71% (8765/12345)\nUpdating files:  72% (8889/12345)\nUpdating files:  73% (9012/12345)\nUpdating files:  74% (9136/12345)\nUpdating files:  74% (9158/12345)\nUpdating files:  75% (9259/12345)\nUpdating files:  76% (9383/12345)\nUpdating files:  77% (9506/12345)\nUpdating files:  78% (9630/12345)\nUpdating files:  79% (9753/12345)\nUpdating files:  79% (9810/12345)\nUpdating files:  80% (9876/12345)\nUpdating files:  81% (10000/12345)\nUpdating files:  82% (10123/12345)\nUpdating files:  83% (10247/12345)\nUpdating files:  84% (10370/12345)\nUpdating files:  85% (10494/12345)\nUpdating files:  86% (10617/12345)\nUpdating files:  87% (10741/12345)\nUpdating files:  88% (10864/12345)\nUpdating files:  89% (10988/12345)\nUpdating files:  90% (11111/12345)\nUpdating files:  90% (11161/12345)\nUpdating files:  91% (11234/12345)\nUpdating files:  92% (11358/12345)\nUpdating files:  93% (11481/12345)\nUpdating files:  94% (11605/12345)\nUpdating files:  95% (11728/12345)\nUpdating files:  96% (11852/12345)\nUpdating files:  97% (11975/12345)\nUpdating files:  98% (12099/12345)\nUpdating files:  98% (12101/12345)\nUpdating files:  99% (12222/12345)\nUpdating files: 100% (12345/12345)\nUpdating files: 100% (12345/12345), done.\nError: 1 upgrade failure(s) occurred.\n"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "debug",
+        "prompt-input",
+        "List installed Verity Plane skills."
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:52:19.121555+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "28cfc32729cf2ee91e000539847328b7c1095348e445e3c3c4ccbd96363cc2e6",
+      "stdout_retention": "Native debug prompt contains unrelated host instructions; inventory and skill-presence assessment retained in public-routes.json, raw output remains outside repository.",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_retention": "Native debug prompt contains unrelated host instructions; inventory and skill-presence assessment retained in public-routes.json, raw output remains outside repository."
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "plugin",
+        "list",
+        "--marketplace",
+        "se-harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:52:18.799962+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "b2ecced09c378d2d62a7c80f244c0e156015374c64d547799b05706f41cff91a",
+      "stdout": "{\n  \"installed\": [\n    {\n      \"pluginId\": \"verity-plane@se-harness\",\n      \"name\": \"verity-plane\",\n      \"marketplaceName\": \"se-harness\",\n      \"version\": \"0.2.2\",\n      \"installed\": true,\n      \"enabled\": true,\n      \"source\": {\n        \"source\": \"local\",\n        \"path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\public028\\\\fresh\\\\profiles\\\\codex\\\\codex\\\\.tmp\\\\marketplaces\\\\se-harness\\\\packages\\\\codex\\\\verity-plane\"\n      },\n      \"marketplaceSource\": {\n        \"sourceType\": \"git\",\n        \"source\": \"https://github.com/mmzen/se_harness.git\"\n      },\n      \"installPolicy\": \"AVAILABLE\",\n      \"authPolicy\": \"ON_INSTALL\"\n    }\n  ],\n  \"available\": []\n}\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "plugin",
+        "list",
+        "--marketplace",
+        "se-harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:51:46.864118+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "1cd34e0f34bba6d58103dc170f42f753f78aba27dff2faa3b1a02dba74424865",
+      "stdout": "{\n  \"installed\": [\n    {\n      \"pluginId\": \"verity-plane@se-harness\",\n      \"name\": \"verity-plane\",\n      \"marketplaceName\": \"se-harness\",\n      \"version\": \"0.2.1\",\n      \"installed\": true,\n      \"enabled\": true,\n      \"source\": {\n        \"source\": \"local\",\n        \"path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\public028\\\\fresh\\\\profiles\\\\codex\\\\codex\\\\.tmp\\\\marketplaces\\\\se-harness\\\\packages\\\\codex\\\\verity-plane\"\n      },\n      \"marketplaceSource\": {\n        \"sourceType\": \"git\",\n        \"source\": \"https://github.com/mmzen/se_harness.git\"\n      },\n      \"installPolicy\": \"AVAILABLE\",\n      \"authPolicy\": \"ON_INSTALL\"\n    }\n  ],\n  \"available\": []\n}\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "plugin",
+        "marketplace",
+        "upgrade",
+        "se-harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:52:18.460685+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "f768dcb48b071a2e1e94001be89440f5dc6b231fce40de07dc9be7222492945b",
+      "stdout": "{\n  \"selectedMarketplaces\": [\n    \"se-harness\"\n  ],\n  \"upgradedRoots\": [\n    \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\public028\\\\fresh\\\\profiles\\\\codex\\\\codex\\\\.tmp\\\\marketplaces\\\\se-harness\"\n  ],\n  \"errors\": []\n}\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/public028/fresh/profiles/codex/codex/.tmp/marketplaces/se-harness",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh\\profiles\\codex\\codex\\.tmp\\marketplaces\\se-harness",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:52:18.889402+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "7f477f17c783d28b6961ea78055955790317d56b2d0cd45c52e2203bdde5c8f3",
+      "stdout": "5662817f42994bd0dc9aabaa56891f9c298ab965\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/public028/fresh/profiles/codex/codex/.tmp/marketplaces/se-harness",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh\\profiles\\codex\\codex\\.tmp\\marketplaces\\se-harness",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:51:46.944732+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "4fd7fc01a11c6e8e827b2e71bfe71db66429ec9deb7dbcc0bd5436d72a45c853",
+      "stdout": "86d75e56e28c0c34819c0079b41dc67075f58490\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "plugin",
+        "marketplace",
+        "list",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:52:18.848660+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "5a1a19ebaa402f43af8ebbf64486c9f884cb04cc9849c583d3bf6c7e2cd2e1dc",
+      "stdout": "{\n  \"marketplaces\": [\n    {\n      \"name\": \"se-harness\",\n      \"root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\public028\\\\fresh\\\\profiles\\\\codex\\\\codex\\\\.tmp\\\\marketplaces\\\\se-harness\",\n      \"marketplaceSource\": {\n        \"sourceType\": \"git\",\n        \"source\": \"https://github.com/mmzen/se_harness.git\"\n      }\n    }\n  ]\n}\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "plugin",
+        "marketplace",
+        "list",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:51:46.906499+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "5a1a19ebaa402f43af8ebbf64486c9f884cb04cc9849c583d3bf6c7e2cd2e1dc",
+      "stdout": "{\n  \"marketplaces\": [\n    {\n      \"name\": \"se-harness\",\n      \"root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\public028\\\\fresh\\\\profiles\\\\codex\\\\codex\\\\.tmp\\\\marketplaces\\\\se-harness\",\n      \"marketplaceSource\": {\n        \"sourceType\": \"git\",\n        \"source\": \"https://github.com/mmzen/se_harness.git\"\n      }\n    }\n  ]\n}\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "plugin",
+        "add",
+        "verity-plane@se-harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:52:18.757086+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "405c95e46fb7e4ee6dc1070b008468edb8a4af14356e193477060351a4b3b61a",
+      "stdout": "{\n  \"pluginId\": \"verity-plane@se-harness\",\n  \"name\": \"verity-plane\",\n  \"marketplaceName\": \"se-harness\",\n  \"version\": \"0.2.2\",\n  \"installedPath\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\public028\\\\fresh\\\\profiles\\\\codex\\\\codex\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.2.2\",\n  \"authPolicy\": \"ON_INSTALL\"\n}\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "--version"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:51:46.819047+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "cdfae75a4ea1a6ca8bfd876fa9422186f87b39bcff01e7a3157d1dbc4895bd1b",
+      "stdout": "codex-cli 0.158.0-alpha.2.1\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/public028/fresh/profiles/codex/codex/.tmp/marketplaces/se-harness",
+        "-C",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh\\profiles\\codex\\codex\\.tmp\\marketplaces\\se-harness",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:48:23.236767+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "4fd7fc01a11c6e8e827b2e71bfe71db66429ec9deb7dbcc0bd5436d72a45c853",
+      "stdout": "86d75e56e28c0c34819c0079b41dc67075f58490\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "plugin",
+        "marketplace",
+        "list",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:48:23.184173+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "5a1a19ebaa402f43af8ebbf64486c9f884cb04cc9849c583d3bf6c7e2cd2e1dc",
+      "stdout": "{\n  \"marketplaces\": [\n    {\n      \"name\": \"se-harness\",\n      \"root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\public028\\\\fresh\\\\profiles\\\\codex\\\\codex\\\\.tmp\\\\marketplaces\\\\se-harness\",\n      \"marketplaceSource\": {\n        \"sourceType\": \"git\",\n        \"source\": \"https://github.com/mmzen/se_harness.git\"\n      }\n    }\n  ]\n}\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+        "--version"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh",
+      "observed_at": "2026-09-29T19:48:23.054748+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "cdfae75a4ea1a6ca8bfd876fa9422186f87b39bcff01e7a3157d1dbc4895bd1b",
+      "stdout": "codex-cli 0.158.0-alpha.2.1\n",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": ""
+    }
+  ],
+  "limitations": "Auth material, complete host prompt dumps, raw Claude debug logs and disposable profiles are excluded."
+}

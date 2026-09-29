@@ -1,0 +1,40 @@
+{
+  "observed_at": "2026-09-29T19:55:39.969521+00:00",
+  "status": "pass",
+  "methods": [
+    "GitHub release/latest API",
+    "GitHub last ref API",
+    "PyPI version JSON GET",
+    "Pages publication-manifest GET"
+  ],
+  "evaluator": {
+    "version": "0.20.0",
+    "wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+    "sdist_sha256": "5b6784aeabdf72e0e6b43a7a2bc81244c7a9da6415cf39fbc39f440ec57d426c",
+    "wheel_url": "https://files.pythonhosted.org/packages/ea/28/80f2ec8839fe9c81cab7f66c312501cf5bc80951f57f9cda202e51fc1b76/se_harness-0.20.0-py3-none-any.whl"
+  },
+  "markers": {
+    "latest": "v0.20.0",
+    "last": "7253d13b212ad6f7df670021290fea32e81d66de"
+  },
+  "pages": {
+    "url": "https://www.verityplane.ai/publication-manifest.json",
+    "response_sha256": "ebdd37296bb2ff9879c214735d9dec6eae23be4a094e9518f7b350f3f5018dd3",
+    "provenance": {
+      "bundle_manifest_sha256": "1d403c55db3a31b5eb93f3ef70b16073cf314982c7c7e0d6a7260c857d070eaf",
+      "candidate_commit": "7253d13b212ad6f7df670021290fea32e81d66de",
+      "derived_non_authoritative": true,
+      "generated_dashboard_sha256": "4d8a0de418b0f7c8ba308c5cef304d86236710e056d89e1556259d5c2a15b3c2",
+      "generation_summary_sha256": "894f6975b9871b61bf41c5f677ed450ab51b1d4bb46d78139b8e66a2327d0513",
+      "governance_commit": "23ae2d1f6af0f1bf8484b95b0850cb0019eeb7db",
+      "published_dashboard_sha256": "c64e12f49269a5e8422a0bcd9ba1556c6bd7b6fc0df9218cfee6f4a9ac176a87",
+      "release_record": "RLS-SEH-029",
+      "release_tag": "v0.20.0",
+      "repository": "mmzen/se_harness",
+      "schema": "se-harness-pages-publication-v1",
+      "version": "0.20.0"
+    },
+    "resource_file_count": 2606,
+    "extraction": "Top-level publication identities retained; resource_files omitted from this compact observation."
+  }
+}

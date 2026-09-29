@@ -39,13 +39,13 @@ from AGENTS.md. The transaction and native-delivery evidence are retained under
 
 This repository gets its agent skills and native instruction-delivery hook
 from its installed Verity Plane 0.2.0 selection. The public marketplace now
-offers plugin 0.2.1 with the unchanged released 0.19.0 wheel, observed at
-`86d75e56e28c0c34819c0079b41dc67075f58490` on 2026-09-29. Publication does not
-replace the user's existing local plugin selection.
-WO-PLG-026 retains local Windows qualification. WO-PLG-028 retains public
-fresh-install and update package checks, startup and manual compaction on both
-hosts in its
-[confirmation evidence](../engineering/plugin-integration/evidence/WO-PLG-028/README.md).
+offers plugin 0.2.2 with released evaluator 0.20.0, observed at
+`5662817f42994bd0dc9aabaa56891f9c298ab965` on 2026-09-29. Publication does not
+replace the user's existing local plugin selection or this repository's 0.19.0
+evaluator. WO-PLG-030 retains native qualification; WO-PLG-031 retains both
+public fresh-install and update routes and the exact-input native evidence
+comparison in its
+[confirmation evidence](../engineering/release-0-20-0/evidence/WO-PLG-031/README.md).
 Use the [marketplace guide](../../release/plugin-marketplace/README.md) for
 the published package identity and installation commands.
 WO-HUP-021 retains the exact package identities and local installation evidence.
@@ -256,13 +256,13 @@ Ordinary ready RLS records use the complete schema-3 evaluator identity in the c
 
 ## Release sequences
 
-The [0.20.0 release package](../engineering/release-0-20-0/README.md) includes
-the plugin 0.2.2 handoff. After evaluator publication, WO-PLG-030 must assemble,
-qualify and publish the matching distribution to `plugin-marketplace` under
-separate exact publication authority. WO-PLG-031 then checks public fresh and
-update routes and the current documentation. A green evaluator publisher does
-not complete those steps. The five-surface delivery report remains incomplete
-until their actual results and the demonstration and markers are confirmed.
+The [0.20.0 release package](../engineering/release-0-20-0/README.md) and plugin
+0.2.2 are published. VREC-PLG-025 covers package qualification; the public
+marketplace readback matches that exact distribution. WO-PLG-031 confirms both
+public install/update routes and reconciles current documentation. Its
+[delivery report](../engineering/release-0-20-0/evidence/WO-PLG-031/README.md)
+keeps documentation integration and final readback pending until observed.
+A green evaluator publisher alone does not establish complete delivery.
 
 
 Owner content moved here from the retired repository-context document under `WO-ADS-002`. It grants no authority; every step below runs only under the approved work order or release record it names.

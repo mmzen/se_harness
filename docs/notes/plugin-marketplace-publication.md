@@ -4,12 +4,15 @@ The [0.20.0 release package](../engineering/release-0-20-0/README.md) selects
 plugin 0.2.2. WO-PLG-030 covers assembly, qualification and preparation of the
 marketplace commit. WO-PLG-031 covers public observations and current claims.
 Their verification contracts and the selected external-action procedure govern
-delivery. These commands grant no approval. The previous public package remains
-0.2.1 with evaluator 0.19.0 until the new publication is observed.
+delivery. These commands grant no approval. Plugin 0.2.2 with evaluator 0.20.0
+is now public at `5662817f42994bd0dc9aabaa56891f9c298ab965`.
+The [public readback and installation evidence](../engineering/release-0-20-0/evidence/WO-PLG-031/README.md)
+compares all 63 public files with the verified distribution. Current-document
+integration and the final closeout receipt remain separate steps.
 
 ## Assemble committed inputs
 
-Wait for the selected 0.20.0 RLS to be released and its wheel to be independently
+For any new assembly, first require the selected RLS to be released and its wheel to be independently
 available from the public release. Compare the downloaded wheel SHA-256 with
 that record's distribution binding. A local candidate wheel does not satisfy
 this prerequisite. The repository's own governing evaluator stays at 0.19.0

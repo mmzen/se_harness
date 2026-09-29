@@ -2,7 +2,7 @@
 id = "WO-PLG-031"
 type = "work_order"
 title = "Confirm public 0.2.2 delivery and reconcile current documentation"
-status = "approved"
+status = "in_progress"
 owners = ["mmzen"]
 created = "2026-09-29"
 updated = "2026-09-29"
@@ -40,6 +40,13 @@ decided_at = "2026-09-29T17:32:13Z"
 decided_by = "engineering-owner"
 reason = "Human repository owner mmzen: \"I approve\", responding to the reviewed seven-artifact 0.20.0/0.2.2 release package, required commit-bound verification, stated ordinary review-branch pushes/draft PRs and read-only CI rehearsals, and existing 0.19.0 role encoding. Reviewed SHA-256 f86b461c68312da6ac89a1cfb6b02154295ae08b86ecd710b79098605c6ae954; approval input SHA-256 b292643fa27cc608db189fe2a522e9b289601db09baaf249f7145fb8513e8ec9. Only the confirmed assurance classification was added to work orders. Legacy label engineering-owner transports the human decision; Codex applies it. Exact candidate verification, RLS release, merge, publication, markers and adoption remain separate."
 scope_paths = ["docs/engineering/release-0-20-0/work-orders/WO-PLG-031.md", "docs/engineering/release-0-20-0/evidence/WO-PLG-031/", "docs/engineering/release-0-20-0/verification-records/", "README.md", "docs/notes/plugin-installation-guide.md", "docs/notes/plugin-marketplace-publication.md", "docs/notes/developing-se-harness.md", "docs/notes/release-delivery-completion.md", "docs/engineering/plugin-integration/README.md", "docs/engineering/instruction-architecture/README.md", "tests/test_progressive_documentation.py", "tests/plugin_integration/package_assembly/test_refresh_guidance.py"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-29T19:47:43Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex starts the unchanged mmzen-approved public 0.2.2 delivery observations and documentation work after VREC-PLG-025 verification, merged PR 500 and authorized publication with exact public byte readback. User reconfirmed WO-PLG-031 approval."
 +++
 
 # Confirm public 0.2.2 delivery and current documentation

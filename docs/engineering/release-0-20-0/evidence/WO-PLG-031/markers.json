@@ -1,0 +1,43 @@
+{
+  "human": "mmzen",
+  "decision": "Continue marketplace delivery and latest / last tagging",
+  "observed_at": "2026-09-29T19:01:20.855234+00:00",
+  "record": "RLS-SEH-029",
+  "version": "0.20.0",
+  "candidate": "7253d13b212ad6f7df670021290fea32e81d66de",
+  "latest_before": "v0.19.0",
+  "latest_after": "v0.20.0",
+  "last_before": {
+    "ref": "refs/tags/last",
+    "node_id": "REF_kwDOT09fPK5yZWZzL3RhZ3MvbGFzdA",
+    "url": "https://api.github.com/repos/mmzen/se_harness/git/refs/tags/last",
+    "object": {
+      "sha": "77789baf2bc8b6ba475ea81e40f53acdafa9f58b",
+      "type": "tag",
+      "url": "https://api.github.com/repos/mmzen/se_harness/git/tags/77789baf2bc8b6ba475ea81e40f53acdafa9f58b"
+    }
+  },
+  "last_after": {
+    "ref": "refs/tags/last",
+    "node_id": "REF_kwDOT09fPK5yZWZzL3RhZ3MvbGFzdA",
+    "url": "https://api.github.com/repos/mmzen/se_harness/git/refs/tags/last",
+    "object": {
+      "sha": "7253d13b212ad6f7df670021290fea32e81d66de",
+      "type": "commit",
+      "url": "https://api.github.com/repos/mmzen/se_harness/git/commits/7253d13b212ad6f7df670021290fea32e81d66de"
+    }
+  },
+  "tag_update_command": [
+    "git",
+    "-c",
+    "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+    "-C",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "push",
+    "--force-with-lease=refs/tags/last:77789baf2bc8b6ba475ea81e40f53acdafa9f58b",
+    "origin",
+    "7253d13b212ad6f7df670021290fea32e81d66de:refs/tags/last"
+  ],
+  "tag_update_stdout": "",
+  "observation_prerequisite": "Publisher 36615077351 succeeded; public wheel/sdist hashes and clean public installation passed; publication-summary.json retained."
+}
