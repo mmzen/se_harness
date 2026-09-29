@@ -1,0 +1,22 @@
+{
+  "failures": [
+    {
+      "case": "Codex fresh public clone",
+      "observation": "Filename too long during native clone under the long disposable path.",
+      "recovery": "Confirmed no marketplace registration, enabled core.longpaths=true for test child processes only, retried successfully. Original command retained."
+    },
+    {
+      "case": "Codex prior-public fixture",
+      "observation": "LICENSE SHA differed because an unchanged LF Git blob had retained CRLF checkout bytes. Byte-preserving checkout-index did not rewrite it.",
+      "recovery": "Confirmed the old public commit and attributes. Materialized only digest-validated original Git blobs into the disposable tracked tree, verified all prior-public digests, then installed 0.1.0. No accepted/published package edited."
+    },
+    {
+      "case": "Claude model startup",
+      "observation": [
+        "Failed to authenticate: OAuth session expired and could not be refreshed"
+      ],
+      "recovery": "Pending human renewal of the disposable profile login. Startup callback delivered the full root; no model or compaction pass claimed."
+    }
+  ],
+  "test_correction_helper": "Before applying the approved proposal, a helper compared CRLF proposal bytes with its recorded LF-content hash and refused. It was corrected to compare the unchanged proposal text with LF normalization; repository test remained unchanged until the comparison and scope check passed."
+}

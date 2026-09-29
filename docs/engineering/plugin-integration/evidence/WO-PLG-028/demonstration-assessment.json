@@ -1,0 +1,40 @@
+{
+  "observed_at": "2026-09-29T06:28:56.660982+00:00",
+  "status": "pass",
+  "expected": {
+    "repository": "mmzen/se_harness",
+    "release_record": "RLS-SEH-028",
+    "version": "0.19.0",
+    "candidate_commit": "30d4dba2a088c4f83756c1241b76cdab40f796bd",
+    "governance_commit": "523ff825773e05c970c041ecee5c22bfabedaa3f",
+    "release_tag": "v0.19.0"
+  },
+  "expected_source": "Prior explicit Publish rls-seh-028 authorization and its resolved release plan, before this marketplace publication.",
+  "prior_plan_sha256": "f9967da8bab58d3ef9e5118ac27e23897bad7fe0d1e5f960bfa15d80cb516c0d",
+  "governance_record_sha256": "d83e62f55b67fea8dfae8b651f1ac60326f067dc0b91549997f14eeb8a75a1ff",
+  "readback_sha256": "a07c38cfeb90db5b05bba949f2d218c9ccb077a5b52da8b13133d7bbf22f9af3",
+  "checks": {
+    "index.html": {
+      "url": "https://mmzen.github.io/se_harness/index.html",
+      "sha256": "fc360dbfc5946d03ea90c29b16add4b200bb6dd2195ddf56aee80469b94e4148",
+      "expected_sha256": "fc360dbfc5946d03ea90c29b16add4b200bb6dd2195ddf56aee80469b94e4148",
+      "bytes": 443455,
+      "passed": true
+    },
+    "dashboard-manifest.json": {
+      "url": "https://mmzen.github.io/se_harness/dashboard-manifest.json",
+      "sha256": "e92ba82ca591420afe8698548531b76825df57ab9e6c21523b2de7546085aa1c",
+      "expected_sha256": "e92ba82ca591420afe8698548531b76825df57ab9e6c21523b2de7546085aa1c",
+      "bytes": 791745,
+      "passed": true
+    },
+    "generation-summary.json": {
+      "url": "https://mmzen.github.io/se_harness/generation-summary.json",
+      "sha256": "f63b543dd6b0bf5e0d44c0b293f98dcd5847a62d3431c93ff1b3bc00df213afc",
+      "expected_sha256": "f63b543dd6b0bf5e0d44c0b293f98dcd5847a62d3431c93ff1b3bc00df213afc",
+      "bytes": 2120,
+      "passed": true
+    }
+  },
+  "limits": "Readback of the existing released 0.19.0 deployment; no redeployment performed. Does not claim that the release-bound demonstration includes later plugin work."
+}

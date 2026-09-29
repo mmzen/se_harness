@@ -1,10 +1,11 @@
 # Install or update the Verity Plane plugin
 
-The public marketplace observed on 2026-09-28 is plugin 0.1.0 with evaluator
-0.18.0 at `ed68b30c88043773be929540b7b10ae537957c2d`. The prepared candidate is
-plugin 0.2.1 with the unchanged released evaluator 0.19.0. Its public publication
-and update confirmation remain pending. This guide does not upgrade a project's
-selected harness.
+The public marketplace observed on 2026-09-29 is plugin 0.2.1 with released
+evaluator 0.19.0 at `86d75e56e28c0c34819c0079b41dc67075f58490`.
+Public fresh-install and 0.1.0-to-0.2.1 update package checks passed on both
+Windows CLIs. Native session qualification remains in progress; see the
+[public confirmation evidence](../engineering/plugin-integration/evidence/WO-PLG-028/README.md).
+This guide does not upgrade a project's selected harness.
 
 ## Select the distribution
 
@@ -130,11 +131,13 @@ gap; stop the affected governed action and resolve it before continuing.
 
 ## Qualification limits
 
-WO-PLG-026 retains this candidate's Windows native fresh, update and local 0.2.0
-replacement observations. WO-PLG-028 will retain later public-route observations.
-Until a route has a passing retained result, it is a procedure to check, not a
-claim of success. Desktop UI, automatic threshold compaction and other operating
-systems need separate evidence. Model sessions require valid host authentication.
+WO-PLG-026 retains local Windows qualification. WO-PLG-028 retains public Git
+fresh-install and update checks on Codex 0.158.0-alpha.2.1 and Claude Code 2.1.273.
+All four installed packages match the verified distribution. Codex startup and
+manual compaction passed; Claude Code session acceptance remains pending.
+The long disposable Codex paths required process-local Git long-path support.
+Desktop UI, automatic threshold compaction and other operating systems need
+separate evidence. Model sessions require valid host authentication.
 
 Historical development checks with Codex 0.154.0-alpha.6.2, Claude Code 2.1.266
 and a development 0.18.0 checker remain in

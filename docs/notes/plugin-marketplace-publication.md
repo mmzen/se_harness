@@ -1,7 +1,7 @@
 # Prepare and publish the Verity Plane marketplace
 
-WO-PLG-026 governs preparation of the 0.2.1/0.19.0 candidate.
-WO-PLG-027 covers current guidance; WO-PLG-028 covers public confirmation. Its verification and the selected
+WO-PLG-026 and WO-PLG-027 prepared the 0.2.1/0.19.0 package and guidance,
+verified by VREC-PLG-023 and integrated in PR #496. WO-PLG-028 covers public confirmation. Its verification and the selected
 external-action procedure govern delivery. These commands grant no approval.
 
 ## Assemble committed inputs
@@ -53,8 +53,13 @@ Evaluator publication leaves plugin assembly, qualification and separately
 authorized marketplace publication pending with an owner and next action.
 The selected plugin is 0.2.1, while the wheel remains the published 0.19.0
 release. Do not use source version 0.20.0 as the evaluator or bundled wheel.
-The public observation retained on 2026-09-28 is still 0.1.0/0.18.0 at
-`ed68b30c88043773be929540b7b10ae537957c2d`; preparation is not publication.
+The separately authorized publication on 2026-09-29 advanced the public branch
+from `ed68b30c88043773be929540b7b10ae537957c2d` to
+`86d75e56e28c0c34819c0079b41dc67075f58490`. All 63 public files match the verified
+distribution. Its assembly source remains
+`ce6d5fa4080e2ef0904446aa0b066d907532b63c`.
+See the [publication receipt](../engineering/plugin-integration/evidence/WO-PLG-028/publication.json)
+and [confirmation status](../engineering/plugin-integration/evidence/WO-PLG-028/README.md).
 After publication, retain both fresh-install and update observations from the
 actual public ref on each claimed host. Reconcile current availability claims
 and run the [overall completion check](release-delivery-completion.md#run-the-completion-check).
