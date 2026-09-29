@@ -1,0 +1,24 @@
+{
+  "observed_at": "2026-09-29T19:32:34.943215+00:00",
+  "base": "37dde9493548928430714aaddbd3b6839479ab57",
+  "qualification_work_order": "WO-PLG-030",
+  "correction_work_order": "WO-PLG-032",
+  "record_id": "VREC-PLG-025",
+  "record_id_unused_across_local_refs": true,
+  "verification_contract": "VER-PLG-028",
+  "source_commit": "7253d13b212ad6f7df670021290fea32e81d66de",
+  "released_governance_commit": "23ae2d1f6af0f1bf8484b95b0850cb0019eeb7db",
+  "prepared_distribution_commit": "5662817f42994bd0dc9aabaa56891f9c298ab965",
+  "package_identity_sha256": "b119643684085c676e43725f5d420f4d6edf17fc99a92ca53fafd6f2be63bd11",
+  "public_wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+  "package_file_count": 63,
+  "all_package_and_installed_bytes_still_match": true,
+  "all_distribution_commit_blobs_still_match": true,
+  "reuse_assessment": "WO-PLG-030 native observations remain applicable: identical source, public wheel, assembled packages, installed inventories and prepared distribution tree. This work changes only preparation scope and evidence; it adds no claim of public or desktop availability.",
+  "generated_destinations": [
+    "docs/engineering/release-0-20-0/verification-records/VREC-PLG-025.md",
+    "docs/engineering/release-0-20-0/evidence/VREC-PLG-025-evaluator.json"
+  ],
+  "review": "Only the missing generated companion needs additional destination authority. Existing released capture writes both files and binds exact candidate and evidence. No product change or new abstraction is needed.",
+  "pending": "Capture after completion at a clean committed candidate, human verification of that record, then separate exact marketplace publication authority."
+}

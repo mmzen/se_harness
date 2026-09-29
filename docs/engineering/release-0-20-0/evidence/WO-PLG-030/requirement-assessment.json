@@ -1,0 +1,49 @@
+{
+  "observed_at": "2026-09-29T19:21:37.999551+00:00",
+  "work_order": "WO-PLG-030",
+  "verification_contract": "VER-PLG-028",
+  "governing_evaluator": "0.19.0",
+  "source_commit": "7253d13b212ad6f7df670021290fea32e81d66de",
+  "released_governance_commit": "23ae2d1f6af0f1bf8484b95b0850cb0019eeb7db",
+  "public_wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+  "requirements": {
+    "REQ-PLG-002": {
+      "status": "pass",
+      "evidence": [
+        "package-identity.json",
+        "commands.json",
+        "native-qualification.json",
+        "native-traces.json"
+      ],
+      "assessment": "Both 0.2.2 outputs carry the public 0.20.0 wheel. Independent builder check and all 32 package tests passed. Negative digest and altered same-version inventory are refused. Both installed package inventories match. Native startup, manual compaction, actual resume, repository switch and invalid roots passed."
+    },
+    "REQ-RLO-018": {
+      "status": "pass",
+      "evidence": [
+        "publication-candidate.json",
+        "release-publication.json",
+        "marker-promotion.json"
+      ],
+      "assessment": "Exact source, wheel, package and descendant distribution commit retained. Public marketplace observation and current documentation are assigned to approved WO-PLG-031. Markers were independently authorized and applied; historical publication-summary remaining list predates marker-promotion receipt."
+    }
+  },
+  "review": {
+    "product_changes": "None. Existing committed package source was assembled without overlays.",
+    "complete_tree_matches": true,
+    "material_findings": [
+      "Capture requires an evaluator companion outside the approved WO-PLG-030 paths. Capture has not run; prepare a bounded correction.",
+      "The initial resume driver named an obsolete executable; only the transient probe driver was corrected, and actual resume then passed."
+    ],
+    "authority": "No human verification or marketplace publication inferred from local passes."
+  },
+  "next_publication": {
+    "commit": "5662817f42994bd0dc9aabaa56891f9c298ab965",
+    "destination": "mmzen/se_harness:plugin-marketplace",
+    "expected_old": "86d75e56e28c0c34819c0079b41dc67075f58490",
+    "requires": [
+      "Human verification of exact qualification candidate",
+      "Exact distribution publication authorization",
+      "Fresh remote comparison and external-action checks"
+    ]
+  }
+}
