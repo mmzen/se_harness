@@ -43,8 +43,8 @@ offers plugin 0.2.1 with the unchanged released 0.19.0 wheel, observed at
 `86d75e56e28c0c34819c0079b41dc67075f58490` on 2026-09-29. Publication does not
 replace the user's existing local plugin selection.
 WO-PLG-026 retains local Windows qualification. WO-PLG-028 retains public
-fresh-install and update package checks on both hosts; native session
-qualification remains in progress in its
+fresh-install and update package checks, startup and manual compaction on both
+hosts in its
 [confirmation evidence](../engineering/plugin-integration/evidence/WO-PLG-028/README.md).
 Use the [marketplace guide](../../release/plugin-marketplace/README.md) for
 the published package identity and installation commands.

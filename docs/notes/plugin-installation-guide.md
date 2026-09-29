@@ -3,7 +3,7 @@
 The public marketplace observed on 2026-09-29 is plugin 0.2.1 with released
 evaluator 0.19.0 at `86d75e56e28c0c34819c0079b41dc67075f58490`.
 Public fresh-install and 0.1.0-to-0.2.1 update package checks passed on both
-Windows CLIs. Native session qualification remains in progress; see the
+Windows CLIs. Startup and manual compaction also passed on both hosts; see the
 [public confirmation evidence](../engineering/plugin-integration/evidence/WO-PLG-028/README.md).
 This guide does not upgrade a project's selected harness.
 
@@ -133,8 +133,9 @@ gap; stop the affected governed action and resolve it before continuing.
 
 WO-PLG-026 retains local Windows qualification. WO-PLG-028 retains public Git
 fresh-install and update checks on Codex 0.158.0-alpha.2.1 and Claude Code 2.1.273.
-All four installed packages match the verified distribution. Codex startup and
-manual compaction passed; Claude Code session acceptance remains pending.
+All four installed packages match the verified distribution. Startup and manual
+compaction passed on both hosts. Claude acceptance passed after renewing the
+disposable login; the earlier authentication failure remains in the evidence.
 The long disposable Codex paths required process-local Git long-path support.
 Desktop UI, automatic threshold compaction and other operating systems need
 separate evidence. Model sessions require valid host authentication.

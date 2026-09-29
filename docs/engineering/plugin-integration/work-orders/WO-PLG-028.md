@@ -2,7 +2,7 @@
 id = "WO-PLG-028"
 type = "work_order"
 title = "Confirm the published marketplace and reconcile availability claims"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-09-28"
 updated = "2026-09-29"
@@ -45,6 +45,13 @@ to = "in_progress"
 decided_at = "2026-09-29T06:05:18Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-29T16:27:51Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed."
 +++
 
 # Confirm the published marketplace and reconcile availability claims

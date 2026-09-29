@@ -2,7 +2,7 @@
 id = "WO-PLG-029"
 type = "work_order"
 title = "Align the publication guidance test with observed delivery"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-09-29"
 updated = "2026-09-29"
@@ -40,6 +40,13 @@ to = "in_progress"
 decided_at = "2026-09-29T06:22:11Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-29T16:27:51Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed."
 +++
 
 # Align the publication guidance test with observed delivery

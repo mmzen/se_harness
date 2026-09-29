@@ -14,7 +14,7 @@ authorized public commit `86d75e56e28c0c34819c0079b41dc67075f58490` now supplies
 plugin 0.2.1 with evaluator 0.19.0. [WO-PLG-028](work-orders/WO-PLG-028.md)
 retains the [publication and public-route evidence](evidence/WO-PLG-028/README.md)
 under [VER-PLG-027](verification/VER-PLG-027.md). Fresh-install and update package
-checks passed on both hosts; native session qualification remains in progress.
+checks, startup and manual compaction passed on both hosts.
 [WO-PLG-029](work-orders/WO-PLG-029.md) covers the approved publication-test
 correction. Overall delivery remains incomplete until confirmation and the
 current documentation's separately authorized integration and readback finish.

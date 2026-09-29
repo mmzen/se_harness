@@ -1,15 +1,34 @@
 ```toml
 artifact = "WO-PLG-028"
 checkpoint = "handoff"
-formal_snapshot_sha256 = "d63b03b03d65852741a069648f9695e10050a1544f18735eba69dbd3146ca9ef"
-rebound_at = "2026-09-29T07:55:47Z"
+formal_snapshot_sha256 = "b567177e46368e9480e58aa731a8bccb91f936e38f19f04f2ba6d06f22ff1cc9"
+rebound_at = "2026-09-29T16:25:30Z"
 ```
 
 # WO-PLG-028 handoff evidence
 
 Retained by `harnessctl evidence`; body content is owner-authored.
 
-## Partial evidence for draft review
+## Completed candidate checks — 2026-09-29
+
+Claude startup, manual compaction and the resumed-session check passed after
+renewing the disposable login. All four public package routes and native root
+delivery on both hosts now pass. The initial failures below remain historical
+observations; they no longer describe the current acceptance result.
+
+See [the candidate assessment](../WO-PLG-028/requirement-assessment.json),
+[native retry](../WO-PLG-028/native-delivery-v2.json),
+[focused tests](../WO-PLG-028/checks-v2.json), and
+[delivery result](../WO-PLG-028/delivery-result-v4.json).
+The tests have 61 passes and one explicit Windows symlink-privilege skip.
+The delivery result leaves only public documentation integration pending,
+as VER-PLG-027 permits for this candidate phase.
+
+Completion and exact-commit verification use these observations and the final
+handoff results. A human verification decision and later integration remain
+separate. No new marketplace publication or user-profile adoption occurred.
+
+## Earlier partial evidence for draft review
 
 See [the current evidence summary](README.md), [local checks](checks.json),
 [public routes](public-routes.json) and [native delivery](native-delivery.json).
