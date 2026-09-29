@@ -1,0 +1,6 @@
+{
+  "reviewer": "Codex",
+  "human_scope_reference": "mmzen approved the unchanged 0.19.0 evaluator/marker pairing in SPEC-PLG-023 on 2026-09-28. This technical mapping adds no release decision.",
+  "evaluator": "Exact published wheel bytes and released record preserved; native setup and instruction delivery passed. No evaluator or installed repository rule changes.",
+  "release_markers": "Current latest v0.19.0 and last commit match RLS-SEH-028; a plugin package version change does not change these selected evaluator identities."
+}

@@ -1,0 +1,104 @@
+{
+  "requirement": "REQ-PLG-040",
+  "contract": "VER-PLG-026",
+  "cases": [
+    "MP-03",
+    "MP-06"
+  ],
+  "execution_entry_commit": "cc6901a215b6f23febb1d918591c0c4ddc6a3d08",
+  "shared_proposal_baseline": "c4d9036fdaab378f08fe2db68978126f66ab961e",
+  "baseline_reason": "WO-PLG-027 began after completed WO-PLG-026 package edits. No prior WO-PLG-027 implementation is excluded. Combined final scope is checked against the shared baseline.",
+  "files": [
+    {
+      "path": "docs/notes/getting-started.md",
+      "sha256": "39f2631d3c82bdc2853222dbb3e51f26750c793dd832dffe46ee0aa295042232",
+      "result": "pass",
+      "assessment": "MP-03/06: glossary resolves to root; fresh 0.19.0 and existing pin are distinct; absolute external Python/target and PowerShell quoting are explicit; adoption and human verification remain separate."
+    },
+    {
+      "path": "docs/notes/harnessctl-reference.md",
+      "sha256": "7e385d3af600b10283c825d7aba90c46af14f14ba031db9ed03bdab5251a8d47",
+      "result": "pass",
+      "assessment": "MP-06: task router, continuation, authority and results replace compatibility authority; shorthand requires selected absolute isolated interpreter outside checkout; parser inventory remains intact."
+    },
+    {
+      "path": "docs/notes/harness-operational-phasing.md",
+      "sha256": "160005f9c5fc21d5115e926ebbe321a42399647d18705c73610dade02d3ace64",
+      "result": "pass",
+      "assessment": "MP-06: actual current file/heading routes and explicit REPO target replace old guides; evaluator results identify gates; timing and decision model preserved."
+    },
+    {
+      "path": "docs/notes/harness-uml-model.md",
+      "sha256": "ffe0c3cdf196b232608fec549b6c6630dd13d4849cc9552d761335a544fd865b",
+      "result": "pass",
+      "assessment": "MP-06: only the stale decision-rights reference changed; original 0.14.0 conceptual model, diagram and historical assertions preserved."
+    },
+    {
+      "path": "docs/notes/harness-overview.md",
+      "sha256": "c2e588042f273a944e059a9d3cadb1ceccc4199fcc4d036c05635e49bfe9a5a3",
+      "result": "pass",
+      "assessment": "MP-06: AGENTS ownership covers the entire file; conceptual introduction and human boundaries preserved."
+    },
+    {
+      "path": "docs/notes/harness-lineage-example.md",
+      "sha256": "4b823eaec9a1595b223fb7be429368198b5618737bc751f6fd8a0deeeb033f6f",
+      "result": "pass",
+      "assessment": "MP-06: evaluator and source-test working directories separated; released parser rejects former --authorized-by so prepare-release now uses --owner; preparation identity is separate from human decision; all EX data remain fictional."
+    },
+    {
+      "path": "docs/notes/technical-communication.md",
+      "sha256": "46d1dcf82547008dce739c90fd3098e74a13a7603bad34407e6e7d6afa6f10c2",
+      "result": "pass",
+      "assessment": "MP-06: current COMMUNICATION section is direct authority; shared policy no longer claims two separate mandatory profiles; existing brief contract and protected-content boundaries preserved."
+    },
+    {
+      "path": "docs/notes/developing-se-harness.md",
+      "sha256": "68372907154ffceee6c82f6d22253b112c9ce597313e3e78b3f28eade2bd1871",
+      "result": "pass",
+      "assessment": "MP-06: actual WO-PLG-025 provider completion; local 0.2.0, prepared 0.2.1 and observed public 0.1.0 kept distinct; source vs selected evaluator commands separated; current authority link fixed; merged release-delivery sequence retained."
+    },
+    {
+      "path": "docs/notes/harness-installation-and-upgrades.md",
+      "sha256": "aa8059defa7ad54201258456fd832e9deb6bc49a79aee2cf2f770f21330f373d",
+      "result": "pass",
+      "assessment": "MP-03/06: selected absolute external checker/target and exact release pin; existing project does not silently advance; template replacement example is current; 0.19 pointers distinguished from unreleased 0.20 seed retirement; dated migrations preserved."
+    },
+    {
+      "path": "docs/notes/agentic-execution-host-adapters.md",
+      "sha256": "a4a0bcafeb1c0471571a811ccf41ae9934862adad43a6865591a9dfd27a94448",
+      "result": "pass",
+      "assessment": "MP-06: inspected actual .agents two cores and single supplied Claude orientation adapter; separate plugin provider and hooks; retired writing skills explicitly historical; editable inventory not described as locked lifecycle authority."
+    },
+    {
+      "path": "docs/notes/README.md",
+      "sha256": "e7ef70ddd0c4fa4904112857eba5d451e0859b124d9776293518f672828c3bef",
+      "result": "pass",
+      "assessment": "MP-06: plugin setup/publication are discoverable; current task routing and whole-file AGENTS ownership; dated history kept."
+    },
+    {
+      "path": "docs/engineering/plugin-integration/README.md",
+      "sha256": "a4a249049c4b0e072e2b33f128b7dd7bd7ef8864a62b67d42af152bf16ced98c",
+      "result": "pass",
+      "assessment": "MP-06: refresh definitions/work orders and separate public-confirmation prerequisites are discoverable; root 0.19.0/WO-HUP-021 corrected; initial 0.1.0 delivery identified as initial history."
+    },
+    {
+      "path": "tests/test_public_onboarding.py",
+      "sha256": "f366b4ea8765477cc9503bcb93834b5702c0e1a763916025c098178217a1b3d4",
+      "result": "pass",
+      "assessment": "MP-03/06: linked setup examples require isolated CHECKER invocation and explicit REPO; candidate/public identity and existing onboarding tests preserved."
+    },
+    {
+      "path": "tests/test_progressive_documentation.py",
+      "sha256": "35cffb63d217d99717be7e97572dd682b10dd99a6f6adbaf1870ffbcb930c52b",
+      "result": "pass",
+      "assessment": "MP-03/06: actual source links and headings checked for all selected docs; runnable examples parsed with explicit targets; stale policy routes/partial AGENTS ownership rejected; two test-extractor errors corrected without relaxing document criteria."
+    }
+  ],
+  "design_review": "Direct corrections to existing guides and existing test modules. No new product mechanism, builder, parser or lifecycle policy. Reused the existing source/composed link checker. Corrected two extractor defects (non-command diagram text, successful --version exit) and retained their failures.",
+  "limits": [
+    "Parser assessment validates syntax, not authorization or successful execution of fictional commands.",
+    "Only the approved current-guide set was corrected; dated notes and formal historical records keep their original bytes.",
+    "Public availability remains the retained last observation; no publication was attempted."
+  ],
+  "additional_recovery": "Initial identity attempt lacked required identity arguments and made no change. The retained fresh identity check uses the approved full root/version/wheel/payload selection and passes."
+}

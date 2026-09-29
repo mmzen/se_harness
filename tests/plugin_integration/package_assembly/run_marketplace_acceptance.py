@@ -13,6 +13,8 @@ parser.add_argument("--output", type=Path, required=True, help="new disposable d
 parser.add_argument("--codex", type=Path, required=True)
 parser.add_argument("--claude", type=Path, required=True)
 parser.add_argument("--expected-wheel-sha256", required=True)
+parser.add_argument("--expected-evaluator-version", default="0.18.0",
+                    help="independently selected released version; historical default is 0.18.0")
 parser.add_argument("--source", help="optional public Git marketplace source")
 parser.add_argument("--ref", help="Git ref for the optional public source")
 parser.add_argument("--install-only", action="store_true")
@@ -98,7 +100,7 @@ for host, executable in hosts.items():
     # Its packaged openai.yaml declares allow_implicit_invocation: false.
     for skill in expected_skills - ({"harness-operator-brief"} if host == "codex" else set()):
         assert skill in discovered, (host, skill)
-    wheel = plugin / "packages/se_harness-0.18.0-py3-none-any.whl"
+    wheel = plugin / f"packages/se_harness-{args.expected_evaluator_version}-py3-none-any.whl"
     assert hashlib.sha256(wheel.read_bytes()).hexdigest() == args.expected_wheel_sha256
     if install_only:
         observations.append({"host": host, "version": version, "route": "persistent native marketplace installation",
@@ -110,7 +112,7 @@ for host, executable in hosts.items():
         "--data-root", data, "--wheel", wheel], expect="missing-harness")
     checker = [python, "-I", "-m", "se_harness"]
     checker_version = run("checker-version", [*checker, "--version"]).strip()
-    assert "0.18.0" in checker_version
+    assert checker_version.split()[-1] == args.expected_evaluator_version, checker_version
     run("init-preview", [*checker, "init", project, "--project-name", "Marketplace acceptance", "--dry-run", "--json"])
     assert not (project / ".engineering-harness.toml").exists()
     run("init", [*checker, "init", project, "--project-name", "Marketplace acceptance", "--json"])

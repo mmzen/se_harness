@@ -1,0 +1,793 @@
+[
+  {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\scripts\\build_plugin_marketplace.py",
+      "build",
+      "--repository",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "--revision",
+      "ce6d5fa4080e2ef0904446aa0b066d907532b63c",
+      "--release-revision",
+      "c4d9036fdaab378f08fe2db68978126f66ab961e",
+      "--release-record",
+      "docs/engineering/release-0-19-0/releases/RLS-SEH-028.md",
+      "--expected-wheel-sha256",
+      "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8",
+      "--wheel",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\r019-public-github-assets\\se_harness-0.19.0-py3-none-any.whl",
+      "--evaluator-python",
+      "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "--output-directory",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-distribution"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:48:27.623301+00:00",
+    "label": "assembly-build",
+    "stdout": "{\n  \"accepted\": true,\n  \"archives\": {\n    \"verity-plane-claude.zip\": \"43364142347cf44c1006e3898facde904a432778ac94eee543f2213cb81cd15e\",\n    \"verity-plane-codex.zip\": \"8ee33563960684110189a07ff23a53fdf3720f49da1b4b89f449bd5a735d1b77\"\n  },\n  \"claim\": \"Contents only; native host testing and publication remain separate.\",\n  \"evaluator\": {\n    \"archive\": \"se_harness-0.19.0-py3-none-any.whl\",\n    \"archive_sha256\": \"43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8\",\n    \"payload_sha256\": \"71c951a74d2f9c242d594fdbc419dcb173b87d51d25694db6a54a9b6cfc6c356\",\n    \"release_record\": \"docs/engineering/release-0-19-0/releases/RLS-SEH-028.md\",\n    \"release_record_sha256\": \"d83e62f55b67fea8dfae8b651f1ac60326f067dc0b91549997f14eeb8a75a1ff\",\n    \"release_revision\": \"c4d9036fdaab378f08fe2db68978126f66ab961e\",\n    \"version\": \"0.19.0\"\n  },\n  \"identity_sha256\": \"babd540ae53dfa1f77288ff7d83c1a906673bddcdcbe53d12365ceb7fffd672e\",\n  \"plugin_version\": \"0.2.1\",\n  \"source\": {\n    \"plan\": \"release/plugin-assembly.json\",\n    \"plan_sha256\": \"de1402ea173c138b2a342619c0074c0c8a83a60b0e1a7871bfb6bdffa90baa25\",\n    \"revision\": \"ce6d5fa4080e2ef0904446aa0b066d907532b63c\"\n  }\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\scripts\\build_plugin_marketplace.py",
+      "check",
+      "--repository",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "--revision",
+      "ce6d5fa4080e2ef0904446aa0b066d907532b63c",
+      "--release-revision",
+      "c4d9036fdaab378f08fe2db68978126f66ab961e",
+      "--release-record",
+      "docs/engineering/release-0-19-0/releases/RLS-SEH-028.md",
+      "--expected-wheel-sha256",
+      "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8",
+      "--wheel",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\r019-public-github-assets\\se_harness-0.19.0-py3-none-any.whl",
+      "--evaluator-python",
+      "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "--output-directory",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-distribution"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:48:51.639063+00:00",
+    "label": "assembly-check",
+    "stdout": "{\n  \"accepted\": true,\n  \"archives\": {\n    \"verity-plane-claude.zip\": \"43364142347cf44c1006e3898facde904a432778ac94eee543f2213cb81cd15e\",\n    \"verity-plane-codex.zip\": \"8ee33563960684110189a07ff23a53fdf3720f49da1b4b89f449bd5a735d1b77\"\n  },\n  \"claim\": \"Contents only; native host testing and publication remain separate.\",\n  \"evaluator\": {\n    \"archive\": \"se_harness-0.19.0-py3-none-any.whl\",\n    \"archive_sha256\": \"43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8\",\n    \"payload_sha256\": \"71c951a74d2f9c242d594fdbc419dcb173b87d51d25694db6a54a9b6cfc6c356\",\n    \"release_record\": \"docs/engineering/release-0-19-0/releases/RLS-SEH-028.md\",\n    \"release_record_sha256\": \"d83e62f55b67fea8dfae8b651f1ac60326f067dc0b91549997f14eeb8a75a1ff\",\n    \"release_revision\": \"c4d9036fdaab378f08fe2db68978126f66ab961e\",\n    \"version\": \"0.19.0\"\n  },\n  \"identity_sha256\": \"babd540ae53dfa1f77288ff7d83c1a906673bddcdcbe53d12365ceb7fffd672e\",\n  \"plugin_version\": \"0.2.1\",\n  \"source\": {\n    \"plan\": \"release/plugin-assembly.json\",\n    \"plan_sha256\": \"de1402ea173c138b2a342619c0074c0c8a83a60b0e1a7871bfb6bdffa90baa25\",\n    \"revision\": \"ce6d5fa4080e2ef0904446aa0b066d907532b63c\"\n  }\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "-c",
+      "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+      "-c",
+      "core.longpaths=true",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "commit",
+      "-m",
+      "Prepare plugin 0.2.1 marketplace with released evaluator 0.19.0"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:48:06.457721+00:00",
+    "label": "commit-package",
+    "stdout": "[plan/marketplace-refresh ce6d5fa4] Prepare plugin 0.2.1 marketplace with released evaluator 0.19.0\n 23 files changed, 485 insertions(+), 158 deletions(-)\n create mode 100644 docs/engineering/plugin-integration/evidence/WO-PLG-026/public-observation.json\n create mode 100644 tests/plugin_integration/package_assembly/test_refresh_guidance.py\n",
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+  },
+  {
+    "argv": [
+      "git",
+      "-c",
+      "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+      "-c",
+      "core.longpaths=true",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "diff",
+      "--check"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:48:06.085065+00:00",
+    "label": "diff-check",
+    "stdout": "",
+    "stderr": "warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/requirements/REQ-PLG-039.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/requirements/REQ-PLG-040.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/requirements/REQ-PLG-041.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/specifications/SPEC-PLG-023.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/verification/VER-PLG-026.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/verification/VER-PLG-027.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/work-orders/WO-PLG-026.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/work-orders/WO-PLG-027.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/work-orders/WO-PLG-028.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/notes/plugin-installation-guide.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/notes/plugin-marketplace-publication.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'plugins/verity-plane/claude-code/.claude-plugin/plugin.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'plugins/verity-plane/claude-code/README.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'plugins/verity-plane/codex/.codex-plugin/plugin.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'plugins/verity-plane/codex/README.md', LF will be replaced by CRLF the next time Git touches it\n"
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-m",
+      "unittest",
+      "tests.test_public_onboarding",
+      "tests.test_progressive_documentation",
+      "tests.plugin_integration.package_assembly.test_marketplace",
+      "tests.plugin_integration.package_assembly.test_package_assembly",
+      "tests.plugin_integration.package_assembly.test_refresh_guidance",
+      "tests.test_instruction_architecture",
+      "-v"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:49:29.445998+00:00",
+    "label": "focused-tests-1",
+    "stdout": "",
+    "stderr": "test_init_commit_doctor_exits_zero_on_a_crlf_checkout (tests.test_public_onboarding.FreshConsumerDoctorTests.test_init_commit_doctor_exits_zero_on_a_crlf_checkout) ... ok\ntest_init_commit_doctor_exits_zero_on_an_lf_checkout (tests.test_public_onboarding.FreshConsumerDoctorTests.test_init_commit_doctor_exits_zero_on_an_lf_checkout) ... ok\ntest_current_workflow_preserves_scope_evidence_and_separate_decisions (tests.test_public_onboarding.PublicOnboardingTests.test_current_workflow_preserves_scope_evidence_and_separate_decisions) ... ok\ntest_deeper_guidance_remains_directly_discoverable (tests.test_public_onboarding.PublicOnboardingTests.test_deeper_guidance_remains_directly_discoverable) ... ok\ntest_explorer_images_are_readable_repository_owned_pngs (tests.test_public_onboarding.PublicOnboardingTests.test_explorer_images_are_readable_repository_owned_pngs) ... ok\ntest_linked_manual_installation_examples_parse_against_the_current_cli (tests.test_public_onboarding.PublicOnboardingTests.test_linked_manual_installation_examples_parse_against_the_current_cli) ... ok\ntest_native_commands_match_the_published_git_installation_routes (tests.test_public_onboarding.PublicOnboardingTests.test_native_commands_match_the_published_git_installation_routes) ... ok\ntest_opening_identifies_the_harness_and_retained_authority (tests.test_public_onboarding.PublicOnboardingTests.test_opening_identifies_the_harness_and_retained_authority) ... ok\ntest_operator_notes_are_indexed_sectioned_and_point_at_shipped_paths (tests.test_public_onboarding.PublicOnboardingTests.test_operator_notes_are_indexed_sectioned_and_point_at_shipped_paths) ... ok\ntest_plugin_setup_uses_a_released_wheel_and_keeps_project_changes_explicit (tests.test_public_onboarding.PublicOnboardingTests.test_plugin_setup_uses_a_released_wheel_and_keeps_project_changes_explicit) ... ok\ntest_project_metadata_exposes_public_readme_license_and_urls (tests.test_public_onboarding.PublicOnboardingTests.test_project_metadata_exposes_public_readme_license_and_urls) ... ok\ntest_public_markdown_has_no_placeholders_mojibake_or_missing_local_links (tests.test_public_onboarding.PublicOnboardingTests.test_public_markdown_has_no_placeholders_mojibake_or_missing_local_links) ... ok\ntest_release_links_and_public_project_routes_remain (tests.test_public_onboarding.PublicOnboardingTests.test_release_links_and_public_project_routes_remain) ... ok\ntest_root_is_a_bounded_human_entry_point (tests.test_public_onboarding.PublicOnboardingTests.test_root_is_a_bounded_human_entry_point) ... ok\ntest_virtual_twin_propagation_is_a_vision_with_conformity_evidence (tests.test_public_onboarding.PublicOnboardingTests.test_virtual_twin_propagation_is_a_vision_with_conformity_evidence) ... ok\ntest_active_public_command_contract_uses_six_commands (tests.test_progressive_documentation.ProgressiveDocumentationTests.test_active_public_command_contract_uses_six_commands) ... ok\ntest_all_local_note_links_resolve (tests.test_progressive_documentation.ProgressiveDocumentationTests.test_all_local_note_links_resolve) ... ok\ntest_authority_notes_keep_their_boundary_sections (tests.test_progressive_documentation.ProgressiveDocumentationTests.test_authority_notes_keep_their_boundary_sections) ... ok\ntest_candidate_version_matches_package_metadata (tests.test_progressive_documentation.ProgressiveDocumentationTests.test_candidate_version_matches_package_metadata) ... ok\ntest_check_note_is_indexed_linked_and_names_only_contract_identifiers (tests.test_progressive_documentation.ProgressiveDocumentationTests.test_check_note_is_indexed_linked_and_names_only_contract_identifiers) ... ok\ntest_command_reference_exactly_covers_current_cli (tests.test_progressive_documentation.ProgressiveDocumentationTests.test_command_reference_exactly_covers_current_cli) ... ok\ntest_development_note_explains_standard_evaluator_and_candidate_planes (tests.test_progressive_documentation.ProgressiveDocumentationTests.test_development_note_explains_standard_evaluator_and_candidate_planes) ... ok\ntest_every_command_a_note_names_exists_in_the_current_cli (tests.test_progressive_documentation.ProgressiveDocumentationTests.test_every_command_a_note_names_exists_in_the_current_cli) ... ok\ntest_every_local_anchor_in_a_note_resolves_to_a_heading (tests.test_progressive_documentation.ProgressiveDocumentationTests.test_every_local_anchor_in_a_note_resolves_to_a_heading) ... ok\ntest_example_commands_exist_in_current_cli (tests.test_progressive_documentation.ProgressiveDocumentationTests.test_example_commands_exist_in_current_cli) ... ok\ntest_expertise_metadata_is_not_visible_rendered_content (tests.test_progressive_documentation.ProgressiveDocumentationTests.test_expertise_metadata_is_not_visible_rendered_content) ... ok\ntest_installation_note_separates_package_and_repository_upgrade (tests.test_progressive_documentation.ProgressiveDocumentationTests.test_installation_note_separates_package_and_repository_upgrade) ... ok\ntest_markdown_fences_are_balanced (tests.test_progressive_documentation.ProgressiveDocumentationTests.test_markdown_fences_are_balanced) ... ok\ntest_model_and_example_use_current_relation_terms (tests.test_progressive_documentation.ProgressiveDocumentationTests.test_model_and_example_use_current_relation_terms) ... ok\ntest_notes_are_current_and_not_consumer_specific (tests.test_progressive_documentation.ProgressiveDocumentationTests.test_notes_are_current_and_not_consumer_specific) ... ok\ntest_notes_index_links_the_progressive_path (tests.test_progressive_documentation.ProgressiveDocumentationTests.test_notes_index_links_the_progressive_path) ... ok\ntest_required_documents_have_exact_expertise_labels (tests.test_progressive_documentation.ProgressiveDocumentationTests.test_required_documents_have_exact_expertise_labels) ... ok\ntest_complete_composition_preserves_native_output_and_committed_assets (tests.plugin_integration.package_assembly.test_marketplace.MarketplaceTests.test_complete_composition_preserves_native_output_and_committed_assets) ... warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nok\ntest_existing_output_and_source_overlap_preserve_sentinel (tests.plugin_integration.package_assembly.test_marketplace.MarketplaceTests.test_existing_output_and_source_overlap_preserve_sentinel) ... warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nok\ntest_git_checkout_preserves_distribution_bytes_with_autocrlf (tests.plugin_integration.package_assembly.test_marketplace.MarketplaceTests.test_git_checkout_preserves_distribution_bytes_with_autocrlf) ... warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nok\ntest_incomplete_package_and_version_disagreement_fail_before_output (tests.plugin_integration.package_assembly.test_marketplace.MarketplaceTests.test_incomplete_package_and_version_disagreement_fail_before_output) ... warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nok\ntest_missing_escaping_and_wrong_host_sources_fail_before_output (tests.plugin_integration.package_assembly.test_marketplace.MarketplaceTests.test_missing_escaping_and_wrong_host_sources_fail_before_output) ... warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nok\ntest_modified_wrapper_native_archive_and_unexpected_directory_are_refused (tests.plugin_integration.package_assembly.test_marketplace.MarketplaceTests.test_modified_wrapper_native_archive_and_unexpected_directory_are_refused) ... warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nok\ntest_redirected_and_interrupted_output_are_not_accepted (tests.plugin_integration.package_assembly.test_marketplace.MarketplaceTests.test_redirected_and_interrupted_output_are_not_accepted) ... warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nok\ntest_altered_output_and_omitted_inventory_entry (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_altered_output_and_omitted_inventory_entry) ... ok\ntest_candidate_evaluator_is_never_imported (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_candidate_evaluator_is_never_imported) ... ok\ntest_cli_build_check_and_refusal (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_cli_build_check_and_refusal) ... ok\ntest_committed_instruction_hooks_are_validated_before_assembly (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_committed_instruction_hooks_are_validated_before_assembly) ... ok\ntest_committed_source_only_and_missing_source (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_committed_source_only_and_missing_source) ... ok\ntest_conflicts_host_separation_and_manifest_name (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_conflicts_host_separation_and_manifest_name) ... ok\ntest_duplicate_json_key_and_malformed_release (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_duplicate_json_key_and_malformed_release) ... ok\ntest_extra_file_archive_change_and_false_inventory_digest (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_extra_file_archive_change_and_false_inventory_digest) ... ok\ntest_forbidden_inputs (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_forbidden_inputs) ... ok\ntest_git_executable_mode_and_host_only_scripts (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_git_executable_mode_and_host_only_scripts) ... ok\ntest_git_symlink_is_not_read (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_git_symlink_is_not_read) ... ok\ntest_independent_release_identity_required (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_independent_release_identity_required) ... ok\ntest_interruption_is_not_accepted_and_fresh_retry_rechecked (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_interruption_is_not_accepted_and_fresh_retry_rechecked) ... ok\ntest_missing_and_corrupt_wheel (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_missing_and_corrupt_wheel) ... ok\ntest_output_links_are_rejected (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_output_links_are_rejected) ... ok\ntest_same_source_wheel_and_deterministic_archives (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_same_source_wheel_and_deterministic_archives) ... ok\ntest_unsafe_paths_preserve_outside_sentinel (tests.plugin_integration.package_assembly.test_package_assembly.PackageAssemblyTests.test_unsafe_paths_preserve_outside_sentinel) ... ok\ntest_mutually_stale_documents_do_not_establish_identity (tests.plugin_integration.package_assembly.test_refresh_guidance.RefreshGuidanceTests.test_mutually_stale_documents_do_not_establish_identity) ... ok\ntest_package_links_resolve_after_composition (tests.plugin_integration.package_assembly.test_refresh_guidance.RefreshGuidanceTests.test_package_links_resolve_after_composition) ... ok\ntest_premature_public_claim_is_rejected (tests.plugin_integration.package_assembly.test_refresh_guidance.RefreshGuidanceTests.test_premature_public_claim_is_rejected) ... ok\ntest_selected_candidate_and_public_claims_have_independent_inputs (tests.plugin_integration.package_assembly.test_refresh_guidance.RefreshGuidanceTests.test_selected_candidate_and_public_claims_have_independent_inputs) ... ok\ntest_source_links_resolve_in_source_context (tests.plugin_integration.package_assembly.test_refresh_guidance.RefreshGuidanceTests.test_source_links_resolve_in_source_context) ... ok\ntest_wrong_manifest_or_wheel_is_rejected (tests.plugin_integration.package_assembly.test_refresh_guidance.RefreshGuidanceTests.test_wrong_manifest_or_wheel_is_rejected) ... ok\ntest_review_preflight_reports_an_orphaned_ready_record_for_the_selected_work_order (tests.test_instruction_architecture.AgentDirectiveSurfaceRouterTests.test_review_preflight_reports_an_orphaned_ready_record_for_the_selected_work_order) ... ok\ntest_router_states_the_scope_of_its_obligations_after_the_invariants (tests.test_instruction_architecture.AgentDirectiveSurfaceRouterTests.test_router_states_the_scope_of_its_obligations_after_the_invariants) ... ok\ntest_consumer_workflow_uses_one_released_package_evaluator (tests.test_instruction_architecture.InstructionArchitectureTests.test_consumer_workflow_uses_one_released_package_evaluator) ... ok\ntest_distribution_comparison_detects_coordinated_file_and_lock_change (tests.test_instruction_architecture.InstructionArchitectureTests.test_distribution_comparison_detects_coordinated_file_and_lock_change) ... ok\ntest_inspection_guidance_packet_preserves_the_authority_boundary (tests.test_instruction_architecture.InstructionArchitectureTests.test_inspection_guidance_packet_preserves_the_authority_boundary) ... ok\ntest_instruction_route_and_ownership_modes_are_explicit (tests.test_instruction_architecture.InstructionArchitectureTests.test_instruction_route_and_ownership_modes_are_explicit) ... ok\ntest_large_owner_instructions_accept_both_line_endings_and_preserve_markers (tests.test_instruction_architecture.InstructionArchitectureTests.test_large_owner_instructions_accept_both_line_endings_and_preserve_markers) ... ok\ntest_lock_records_standard_evaluator_identity_after_instruction_install (tests.test_instruction_architecture.InstructionArchitectureTests.test_lock_records_standard_evaluator_identity_after_instruction_install) ... ok\ntest_old_locked_guidance_becomes_editable_without_losing_owner_content (tests.test_instruction_architecture.InstructionArchitectureTests.test_old_locked_guidance_becomes_editable_without_losing_owner_content) ... ok\ntest_portable_orientation_skill_is_managed_provider_neutral_and_non_authoritative (tests.test_instruction_architecture.InstructionArchitectureTests.test_portable_orientation_skill_is_managed_provider_neutral_and_non_authoritative) ... ok\ntest_preflight_reports_phase_integrity_and_id_failures (tests.test_instruction_architecture.InstructionArchitectureTests.test_preflight_reports_phase_integrity_and_id_failures) ... ok\ntest_preflight_requires_and_projects_explicit_assurance_for_selected_work (tests.test_instruction_architecture.InstructionArchitectureTests.test_preflight_requires_and_projects_explicit_assurance_for_selected_work) ... ok\ntest_preflight_returns_deterministic_reading_manifest_without_writes (tests.test_instruction_architecture.InstructionArchitectureTests.test_preflight_returns_deterministic_reading_manifest_without_writes) ... ok\ntest_pull_request_work_order_selection_is_strict (tests.test_instruction_architecture.InstructionArchitectureTests.test_pull_request_work_order_selection_is_strict) ... ok\ntest_router_keeps_invariants_while_workflow_owns_ordered_procedure (tests.test_instruction_architecture.InstructionArchitectureTests.test_router_keeps_invariants_while_workflow_owns_ordered_procedure) ... ok\ntest_router_responsibility_refinement_upgrades_safely (tests.test_instruction_architecture.InstructionArchitectureTests.test_router_responsibility_refinement_upgrades_safely) ... ok\ntest_selection_accepts_the_live_event_reduction (tests.test_instruction_architecture.InstructionArchitectureTests.test_selection_accepts_the_live_event_reduction) ... ok\ntest_stage_aware_handoff_upgrade_is_safe_and_idempotent (tests.test_instruction_architecture.InstructionArchitectureTests.test_stage_aware_handoff_upgrade_is_safe_and_idempotent) ... ok\ntest_technical_communication_has_one_managed_owner_and_a_direct_route (tests.test_instruction_architecture.InstructionArchitectureTests.test_technical_communication_has_one_managed_owner_and_a_direct_route) ... ok\ntest_workflow_owns_review_and_visualization_procedure (tests.test_instruction_architecture.InstructionArchitectureTests.test_workflow_owns_review_and_visualization_procedure) ... ok\ntest_evaluator_setup_is_discovered_outside_owner_instructions (tests.test_instruction_architecture.OwnerInstructionRegionTests.test_evaluator_setup_is_discovered_outside_owner_instructions) ... ok\ntest_owner_entries_are_not_installed_or_tracked (tests.test_instruction_architecture.OwnerInstructionRegionTests.test_owner_entries_are_not_installed_or_tracked) ... ok\ntest_owner_file_carries_required_repository_facts (tests.test_instruction_architecture.OwnerInstructionRegionTests.test_owner_file_carries_required_repository_facts) ... ok\ntest_owner_file_claims_no_authority (tests.test_instruction_architecture.OwnerInstructionRegionTests.test_owner_file_claims_no_authority) ... ok\ntest_owner_file_contains_no_retired_harness_instructions (tests.test_instruction_architecture.OwnerInstructionRegionTests.test_owner_file_contains_no_retired_harness_instructions) ... ok\ntest_owner_file_keeps_product_test_constraints (tests.test_instruction_architecture.OwnerInstructionRegionTests.test_owner_file_keeps_product_test_constraints) ... ok\ntest_repository_scripts_remain_owner_controlled (tests.test_instruction_architecture.OwnerInstructionRegionTests.test_repository_scripts_remain_owner_controlled) ... ok\n\n----------------------------------------------------------------------\nRan 89 tests in 124.500s\n\nOK\n"
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "plugin",
+      "marketplace",
+      "list",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:50:02.001725+00:00",
+    "label": "old-claude-marketplaces",
+    "stdout": "[\n  {\n    \"name\": \"claude-plugins-official\",\n    \"source\": \"github\",\n    \"repo\": \"anthropics/claude-plugins-official\",\n    \"installLocation\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\marketplaces\\\\claude-plugins-official\"\n  },\n  {\n    \"name\": \"se-harness\",\n    \"source\": \"directory\",\n    \"path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\cleanup-native\\\\marketplace\",\n    \"installLocation\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\cleanup-native\\\\marketplace\"\n  }\n]\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "plugin",
+      "list",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:50:01.778833+00:00",
+    "label": "old-claude-plugins",
+    "stdout": "[\n  {\n    \"id\": \"verity-plane@se-harness\",\n    \"version\": \"0.2.0\",\n    \"scope\": \"user\",\n    \"enabled\": true,\n    \"installPath\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.2.0\",\n    \"installedAt\": \"2026-09-27T15:17:38.520Z\",\n    \"lastUpdated\": \"2026-09-28T08:15:41.332Z\"\n  }\n]\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+      "plugin",
+      "marketplace",
+      "list",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:50:01.485709+00:00",
+    "label": "old-codex-marketplaces",
+    "stdout": "{\n  \"marketplaces\": [\n    {\n      \"name\": \"se-harness\",\n      \"root\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\adopt019-native\\\\marketplace\"\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+      "plugin",
+      "list",
+      "--marketplace",
+      "se-harness",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:50:01.373924+00:00",
+    "label": "old-codex-plugins",
+    "stdout": "{\n  \"installed\": [\n    {\n      \"pluginId\": \"verity-plane@se-harness\",\n      \"name\": \"verity-plane\",\n      \"marketplaceName\": \"se-harness\",\n      \"version\": \"0.2.0\",\n      \"installed\": true,\n      \"enabled\": true,\n      \"source\": {\n        \"source\": \"local\",\n        \"path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\adopt019-native\\\\marketplace\\\\packages\\\\codex\\\\verity-plane\"\n      },\n      \"marketplaceSource\": {\n        \"sourceType\": \"local\",\n        \"source\": \"\\\\\\\\?\\\\C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\adopt019-native\\\\marketplace\"\n      },\n      \"installPolicy\": \"AVAILABLE\",\n      \"authPolicy\": \"ON_INSTALL\"\n    }\n  ],\n  \"available\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "plugin",
+      "marketplace",
+      "add",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-distribution"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:50:15.087009+00:00",
+    "label": "replace-claude-add-source",
+    "stdout": "Adding marketplace…√ Successfully added marketplace: se-harness (declared in user settings)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "plugin",
+      "install",
+      "verity-plane@se-harness",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:50:15.404512+00:00",
+    "label": "replace-claude-install",
+    "stdout": "{\"command\":\"install\",\"outcome\":\"ok\",\"plugin\":\"verity-plane@se-harness\",\"pluginId\":\"verity-plane@se-harness\",\"scope\":\"user\",\"message\":\"Successfully installed plugin: verity-plane@se-harness (scope: user)\"}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "plugin",
+      "list",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:50:15.651197+00:00",
+    "label": "replace-claude-plugins",
+    "stdout": "[\n  {\n    \"id\": \"verity-plane@se-harness\",\n    \"version\": \"0.2.1\",\n    \"scope\": \"user\",\n    \"enabled\": true,\n    \"installPath\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.2.1\",\n    \"installedAt\": \"2026-09-28T20:50:15.364Z\",\n    \"lastUpdated\": \"2026-09-28T20:50:15.364Z\"\n  }\n]\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "plugin",
+      "marketplace",
+      "remove",
+      "se-harness"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:50:14.776543+00:00",
+    "label": "replace-claude-remove-source",
+    "stdout": "√ Successfully removed marketplace: se-harness\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+      "plugin",
+      "marketplace",
+      "add",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-distribution",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:50:14.171288+00:00",
+    "label": "replace-codex-add-source",
+    "stdout": "{\n  \"marketplaceName\": \"se-harness\",\n  \"installedRoot\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-distribution\",\n  \"alreadyAdded\": false\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+      "plugin",
+      "add",
+      "verity-plane@se-harness",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:50:14.262161+00:00",
+    "label": "replace-codex-install",
+    "stdout": "{\n  \"pluginId\": \"verity-plane@se-harness\",\n  \"name\": \"verity-plane\",\n  \"marketplaceName\": \"se-harness\",\n  \"version\": \"0.2.1\",\n  \"installedPath\": \"C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar-instruction-demo-bztgja2p\\\\profiles\\\\codex\\\\codex\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.2.1\",\n  \"authPolicy\": \"ON_INSTALL\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+      "plugin",
+      "list",
+      "--marketplace",
+      "se-harness",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:50:14.312499+00:00",
+    "label": "replace-codex-plugins",
+    "stdout": "{\n  \"installed\": [\n    {\n      \"pluginId\": \"verity-plane@se-harness\",\n      \"name\": \"verity-plane\",\n      \"marketplaceName\": \"se-harness\",\n      \"version\": \"0.2.1\",\n      \"installed\": true,\n      \"enabled\": true,\n      \"source\": {\n        \"source\": \"local\",\n        \"path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-distribution\\\\packages\\\\codex\\\\verity-plane\"\n      },\n      \"marketplaceSource\": {\n        \"sourceType\": \"local\",\n        \"source\": \"\\\\\\\\?\\\\C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-distribution\"\n      },\n      \"installPolicy\": \"AVAILABLE\",\n      \"authPolicy\": \"ON_INSTALL\"\n    }\n  ],\n  \"available\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+      "plugin",
+      "marketplace",
+      "remove",
+      "se-harness"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:50:14.120915+00:00",
+    "label": "replace-codex-remove-source",
+    "stdout": "Removed marketplace `se-harness`.\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "-c",
+      "safe.directory=C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+      "-c",
+      "core.longpaths=true",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "add",
+      "--",
+      "README.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-039.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-040.md",
+      "docs/engineering/plugin-integration/requirements/REQ-PLG-041.md",
+      "docs/engineering/plugin-integration/specifications/SPEC-PLG-023.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-026.md",
+      "docs/engineering/plugin-integration/verification/VER-PLG-027.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-026.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-027.md",
+      "docs/engineering/plugin-integration/work-orders/WO-PLG-028.md",
+      "docs/notes/plugin-installation-guide.md",
+      "docs/notes/plugin-marketplace-publication.md",
+      "plugins/verity-plane/claude-code/.claude-plugin/plugin.json",
+      "plugins/verity-plane/claude-code/README.md",
+      "plugins/verity-plane/codex/.codex-plugin/plugin.json",
+      "plugins/verity-plane/codex/README.md",
+      "release/plugin-marketplace/README.md",
+      "release/plugin-marketplace/submissions/README.md",
+      "release/plugin-marketplace/submissions/reviewer-test-cases.md",
+      "tests/plugin_integration/package_assembly/run_marketplace_acceptance.py",
+      "tests/test_public_onboarding.py",
+      "docs/engineering/plugin-integration/evidence/WO-PLG-026/public-observation.json",
+      "tests/plugin_integration/package_assembly/test_refresh_guidance.py"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:48:06.219302+00:00",
+    "label": "stage-package",
+    "stdout": "",
+    "stderr": "warning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nwarning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/requirements/REQ-PLG-039.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/requirements/REQ-PLG-040.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/requirements/REQ-PLG-041.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/specifications/SPEC-PLG-023.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/verification/VER-PLG-026.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/verification/VER-PLG-027.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/work-orders/WO-PLG-026.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/work-orders/WO-PLG-027.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/engineering/plugin-integration/work-orders/WO-PLG-028.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/notes/plugin-installation-guide.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/notes/plugin-marketplace-publication.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'plugins/verity-plane/claude-code/.claude-plugin/plugin.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'plugins/verity-plane/claude-code/README.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'plugins/verity-plane/codex/.codex-plugin/plugin.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'plugins/verity-plane/codex/README.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tests/plugin_integration/package_assembly/test_refresh_guidance.py', LF will be replaced by CRLF the next time Git touches it\n"
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "init",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-sessions\\switch-repository",
+      "--project-name",
+      "Different selected repository",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:54:13.706049+00:00",
+    "label": "switch-init",
+    "stdout": "{\n  \"changes\": [\n    {\n      \"action\": \"add\",\n      \"path\": \".agents/skills/harness-operator-brief/SKILL.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".agents/skills/harness-operator-brief/scripts/check_brief.py\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".agents/skills/harness-operator-brief/skill-contract.json\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".agents/skills/harness-orient/SKILL.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".agents/skills/harness-orient/scripts/orient.py\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".agents/skills/harness-orient/skill-contract.json\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".claude/skills/harness-orient/SKILL.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".engineering-harness.toml\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".gitattributes\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".github/PULL_REQUEST_TEMPLATE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".github/workflows/engineering-harness.yml\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \".gitignore\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"ENGINEERING_HARNESS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"GLOSSARY.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/ARTIFACT_AUTHORING.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/DECISION_RIGHTS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/OPERATING_CARD.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/QUALITY_GATES.json\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/QUALITY_GATES.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/README.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/TECHNICAL_COMMUNICATION.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/TRACEABILITY.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/WORKFLOW.json\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/WORKFLOW.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/AMEND_DEFINITIONS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/ARTIFACTS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/AUTHORITY.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/AUTHORIZE_WORK.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/COMMUNICATION.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/CONTINUE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/DEFINE_CHANGE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/DEFINITION_LINKS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/DELIVER_RESULT.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/DRAFT_DEFINITIONS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/DRAFT_WORK_ORDERS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/EXCEPTIONS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/EXECUTE_WORK.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/PULL_REQUEST.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/RECORD_STATE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/RELEASE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/RESULTS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/RISKS_AND_DECISIONS.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/SETUP.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/SKILL_PROVIDER.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/UPGRADE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/VERIFY_OUTCOME.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/WORK_AND_EVIDENCE.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/harness/migration/REFERENCE_MAP.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/ADR.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/ARCHITECTURE.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/CAPABILITY.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/DECISION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/INTENT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/OPERATING_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/README.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RELEASE_CONTRACT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RELEASE_RECORD.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/REQUIREMENT.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/RISK.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/SPECIFICATION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/VERIFICATION.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/VERIFICATION_RECORD.template.md\"\n    },\n    {\n      \"action\": \"add\",\n      \"path\": \"docs/engineering/templates/WORK_ORDER.template.md\"\n    }\n  ],\n  \"command\": \"init\",\n  \"outcome\": \"completed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"written\": true\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "plugin",
+      "marketplace",
+      "add",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-upgrade\\marketplace"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:10.046466+00:00",
+    "label": "update-claude-add-source",
+    "stdout": "Adding marketplace…√ Successfully added marketplace: se-harness (declared in user settings)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "plugin",
+      "list",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:10.613954+00:00",
+    "label": "update-claude-before",
+    "stdout": "[\n  {\n    \"id\": \"verity-plane@se-harness\",\n    \"version\": \"0.1.0\",\n    \"scope\": \"user\",\n    \"enabled\": true,\n    \"installPath\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-upgrade\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.1.0\",\n    \"installedAt\": \"2026-09-28T20:53:10.333Z\",\n    \"lastUpdated\": \"2026-09-28T20:53:10.333Z\"\n  }\n]\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "plugin",
+      "install",
+      "verity-plane@se-harness",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:10.375600+00:00",
+    "label": "update-claude-install-old",
+    "stdout": "{\"command\":\"install\",\"outcome\":\"ok\",\"plugin\":\"verity-plane@se-harness\",\"pluginId\":\"verity-plane@se-harness\",\"scope\":\"user\",\"message\":\"Successfully installed plugin: verity-plane@se-harness (scope: user)\"}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "--version"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:09.557572+00:00",
+    "label": "update-claude-version",
+    "stdout": "2.1.273 (Claude Code)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+      "plugin",
+      "marketplace",
+      "add",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-upgrade\\marketplace",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:09.402624+00:00",
+    "label": "update-codex-add-source",
+    "stdout": "{\n  \"marketplaceName\": \"se-harness\",\n  \"installedRoot\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-upgrade\\\\marketplace\",\n  \"alreadyAdded\": false\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+      "plugin",
+      "list",
+      "--marketplace",
+      "se-harness",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:09.525121+00:00",
+    "label": "update-codex-before",
+    "stdout": "{\n  \"installed\": [\n    {\n      \"pluginId\": \"verity-plane@se-harness\",\n      \"name\": \"verity-plane\",\n      \"marketplaceName\": \"se-harness\",\n      \"version\": \"0.1.0\",\n      \"installed\": true,\n      \"enabled\": true,\n      \"source\": {\n        \"source\": \"local\",\n        \"path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-upgrade\\\\marketplace\\\\packages\\\\codex\\\\verity-plane\"\n      },\n      \"marketplaceSource\": {\n        \"sourceType\": \"local\",\n        \"source\": \"\\\\\\\\?\\\\C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-upgrade\\\\marketplace\"\n      },\n      \"installPolicy\": \"AVAILABLE\",\n      \"authPolicy\": \"ON_INSTALL\"\n    }\n  ],\n  \"available\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+      "plugin",
+      "add",
+      "verity-plane@se-harness",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:09.480106+00:00",
+    "label": "update-codex-install-old",
+    "stdout": "{\n  \"pluginId\": \"verity-plane@se-harness\",\n  \"name\": \"verity-plane\",\n  \"marketplaceName\": \"se-harness\",\n  \"version\": \"0.1.0\",\n  \"installedPath\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-upgrade\\\\profiles\\\\codex\\\\codex\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.1.0\",\n  \"authPolicy\": \"ON_INSTALL\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+      "plugin",
+      "marketplace",
+      "upgrade",
+      "se-harness",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 1,
+    "observed_at": "2026-09-28T20:53:11.446154+00:00",
+    "label": "update-codex-refresh",
+    "stdout": "",
+    "stderr": "Error: marketplace `se-harness` is not configured as a Git marketplace\n"
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+      "--version"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:09.346291+00:00",
+    "label": "update-codex-version",
+    "stdout": "codex-cli 0.158.0-alpha.2.1\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "-c",
+      "core.longpaths=true",
+      "-c",
+      "core.autocrlf=false",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-upgrade\\marketplace",
+      "checkout",
+      "--force",
+      "--detach",
+      "581e797eb718bdc752a885bfe8d810d92dbda969"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:11.162066+00:00",
+    "label": "update-fixture-checkout-candidate",
+    "stdout": "",
+    "stderr": "Previous HEAD position was ed68b30 Prepare Verity Plane 0.1.0 marketplace distribution\nHEAD is now at 581e797 Local qualification of complete 0.2.1 candidate\n"
+  },
+  {
+    "argv": [
+      "git",
+      "-c",
+      "core.longpaths=true",
+      "-c",
+      "core.autocrlf=false",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-upgrade\\marketplace",
+      "checkout",
+      "--detach",
+      "ed68b30c88043773be929540b7b10ae537957c2d"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:08.966321+00:00",
+    "label": "update-fixture-checkout-public",
+    "stdout": "",
+    "stderr": "HEAD is now at ed68b30 Prepare Verity Plane 0.1.0 marketplace distribution\n"
+  },
+  {
+    "argv": [
+      "git",
+      "-c",
+      "core.longpaths=true",
+      "-c",
+      "core.autocrlf=false",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-upgrade\\marketplace",
+      "-c",
+      "user.name=Local qualification",
+      "-c",
+      "user.email=qualification@example.invalid",
+      "commit-tree",
+      "c281ba2a366b67e715a041fded45e6be967497ad",
+      "-p",
+      "ed68b30c88043773be929540b7b10ae537957c2d",
+      "-m",
+      "Local qualification of complete 0.2.1 candidate"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:11.049591+00:00",
+    "label": "update-fixture-commit-candidate",
+    "stdout": "581e797eb718bdc752a885bfe8d810d92dbda969\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "-c",
+      "core.longpaths=true",
+      "-c",
+      "core.autocrlf=false",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-upgrade\\marketplace",
+      "--work-tree",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-distribution",
+      "read-tree",
+      "--empty"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:10.660315+00:00",
+    "label": "update-fixture-empty-index",
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "-c",
+      "core.longpaths=true",
+      "-c",
+      "core.autocrlf=false",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-upgrade\\marketplace",
+      "fetch",
+      "--depth=1",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "ed68b30c88043773be929540b7b10ae537957c2d"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:08.842368+00:00",
+    "label": "update-fixture-fetch-public",
+    "stdout": "",
+    "stderr": "From C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\n * branch            ed68b30c88043773be929540b7b10ae537957c2d -> FETCH_HEAD\n"
+  },
+  {
+    "argv": [
+      "git",
+      "-c",
+      "core.longpaths=true",
+      "-c",
+      "core.autocrlf=false",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-upgrade\\marketplace",
+      "init",
+      "-q"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:08.101594+00:00",
+    "label": "update-fixture-init",
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "-c",
+      "core.longpaths=true",
+      "-c",
+      "core.autocrlf=false",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-upgrade\\marketplace",
+      "--work-tree",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-distribution",
+      "add",
+      "--all"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:10.855720+00:00",
+    "label": "update-fixture-stage-candidate",
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "-c",
+      "core.longpaths=true",
+      "-c",
+      "core.autocrlf=false",
+      "-C",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-upgrade\\marketplace",
+      "write-tree"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:10.998539+00:00",
+    "label": "update-fixture-write-tree",
+    "stdout": "c281ba2a366b67e715a041fded45e6be967497ad\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "plugin",
+      "details",
+      "verity-plane@se-harness"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:40.112263+00:00",
+    "label": "update-resume-claude-active",
+    "stdout": "verity-plane 0.2.1\n  Description: Use SE Harness skills for repository setup, governed changes and verification evidence.\n  Source: verity-plane@se-harness\n\nComponent inventory\n  Skills (5)  change, evidence, harness-operator-brief, harness-orient, setup\n  Agents (0)\n  Hooks (1)  SessionStart  (harness-only — no model context cost)\n  MCP servers (0)\n  LSP servers (0)\n\nProjected token cost\n  Always-on:   ~331 tok   added to every session\n\nPer-component (rounded)\n  component               always-on  on-invoke\n  change                        ~70       ~940\n  evidence                      ~60       ~910\n  harness-operator-brief        ~80      ~1.3k\n  harness-orient                ~80      ~1.2k\n  setup                         ~40       ~390\n\n  On-invoke cost is paid each time a skill or agent fires.\n  Token counts are estimates and may differ from actual usage.\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "plugin",
+      "list",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:39.859308+00:00",
+    "label": "update-resume-claude-after",
+    "stdout": "[\n  {\n    \"id\": \"verity-plane@se-harness\",\n    \"version\": \"0.2.1\",\n    \"scope\": \"user\",\n    \"enabled\": true,\n    \"installPath\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-upgrade\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.2.1\",\n    \"installedAt\": \"2026-09-28T20:53:10.333Z\",\n    \"lastUpdated\": \"2026-09-28T20:53:39.582Z\"\n  }\n]\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "plugin",
+      "update",
+      "verity-plane@se-harness",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:39.616215+00:00",
+    "label": "update-resume-claude-new",
+    "stdout": "{\"command\":\"update\",\"outcome\":\"ok\",\"plugin\":\"verity-plane@se-harness\",\"pluginId\":\"verity-plane@se-harness\",\"scope\":\"user\",\"message\":\"Plugin \\\"verity-plane\\\" updated from 0.1.0 to 0.2.1 for scope user. Restart to apply changes.\",\"updateOutcome\":\"updated\",\"oldVersion\":\"0.1.0\",\"newVersion\":\"0.2.1\"}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "plugin",
+      "marketplace",
+      "update",
+      "se-harness"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:39.317699+00:00",
+    "label": "update-resume-claude-refresh",
+    "stdout": "Updating marketplace: se-harness...Validating local marketplace\n√ Successfully updated marketplace: se-harness\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\.local\\bin\\claude.exe",
+      "plugin",
+      "list",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:39.068358+00:00",
+    "label": "update-resume-claude-state",
+    "stdout": "[\n  {\n    \"id\": \"verity-plane@se-harness\",\n    \"version\": \"0.1.0\",\n    \"scope\": \"user\",\n    \"enabled\": true,\n    \"installPath\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-upgrade\\\\profiles\\\\claude\\\\claude\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.1.0\",\n    \"installedAt\": \"2026-09-28T20:53:10.333Z\",\n    \"lastUpdated\": \"2026-09-28T20:53:10.333Z\"\n  }\n]\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+      "debug",
+      "prompt-input",
+      "List installed Verity Plane skills."
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:38.738151+00:00",
+    "label": "update-resume-codex-active",
+    "stdout": "[\n  {\n    \"type\": \"message\",\n    \"id\": \"msg_01a0e9cb-6ec8-7493-9d61-e53a642e7e2f\",\n    \"role\": \"developer\",\n    \"content\": [\n      {\n        \"type\": \"input_text\",\n        \"text\": \"<skills_instructions>\\n## Skills\\nA skill is a set of local instructions to follow that is stored in a `SKILL.md` file. Below is the list of skills that can be used. Each entry includes a name, description, and a short path that can be expanded into an absolute path using the skill roots table.\\n### Skill roots\\n- `r0` = `C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/marketplace-021-upgrade/profiles/codex/codex/skills/.system`\\n- `r1` = `C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/marketplace-021-upgrade/profiles/codex/codex/plugins/cache/se-harness/verity-plane/0.2.1/skills`\\n### Available skills\\n- imagegen: Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas. (file: r0/imagegen/SKILL.md)\\n- openai-docs: Use for Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, customization, automations, and self-knowledge—including 'you,' 'your,' 'this app,' or 'this coding agent' when they refer to Codex—and for OpenAI APIs/products and ChatGPT Work. Also use for model choice/migration, prompting, SDKs, Responses, Realtime, agents, evals, and Chat/Work/Codex comparisons. Do not use for generic app/software tasks that merely mention Codex. (file: r0/openai-docs/SKILL.md)\\n- plugin-creator: Create and scaffold plugin directories for Codex with a required `.codex-plugin/plugin.json`, optional plugin folders/files, valid manifest defaults, and personal-marketplace entries by default. Use when Codex needs to create a new personal plugin, add optional plugin structure, generate or update marketplace entries for plugin ordering and availability metadata, or update an existing local plugin during development with the CLI-driven cachebuster and reinstall flow. (file: r0/plugin-creator/SKILL.md)\\n- skill-creator: Create or update a Codex skill with appropriately scoped instructions and any needed supporting resources. (file: r0/skill-creator/SKILL.md)\\n- skill-installer: Install Codex skills into $CODEX_HOME/skills from a curated list or a GitHub repo path. Use when a user asks to list installable skills, install a curated skill, or install a skill from another repo (including private repos). (file: r0/skill-installer/SKILL.md)\\n- verity-plane:change: Draft or amend an SE Harness artifact package and execute a selected work order through existing released workflow commands. Continue work already covered by actual authority, and stop the affected action when its scope, inputs or gates no longer match. (file: r1/change/SKILL.md)\\n- verity-plane:evidence: Retain observed checks and prepare SE Harness verification or release records through existing released procedures. Use for evidence handoff, candidate capture, preparation recovery, and identifying the next accountable decision. (file: r1/evidence/SKILL.md)\\n- verity-plane:harness-orient: Orient an operator to an installed SE Harness repository or one selected formal artifact using its exact released evaluator. Use for read-only repository understanding and next-decision guidance; do not use for implementation, approval, release, Git, credential, or external-action requests. (file: r1/harness-orient/SKILL.md)\\n- verity-plane:setup: Prepare or repair the SE Harness checker, connect a project to plugin skills, or carry out a requested harness upgrade using the existing tools. (file: r1/setup/SKILL.md)\\n</skills_instructions>\"\n      },\n      {\n        \"type\": \"input_text\",\n        \"text\": \"<permissions instructions>\\nFilesystem sandboxing defines which files can be read or written. `sandbox_mode` is `read-only`: The sandbox only permits reading files. Network access is restricted.\\n# Escalation Requests\\r\\n\\r\\nCommands are run outside the sandbox if they are approved by the user, or match an existing rule that allows it to run unrestricted. The command string is split into independent command segments at shell control operators, including but not limited to:\\r\\n\\r\\n- Pipes: |\\r\\n- Logical operators: &&, ||\\r\\n- Command separators: ;\\r\\n- Subshell boundaries: (...), $(...)\\r\\n\\r\\nEach resulting segment is evaluated independently for sandbox restrictions and approval requirements.\\r\\n\\r\\nExample:\\r\\n\\r\\ngit pull | tee output.txt\\r\\n\\r\\nThis is treated as two command segments:\\r\\n\\r\\n[\\\"git\\\", \\\"pull\\\"]\\r\\n\\r\\n[\\\"tee\\\", \\\"output.txt\\\"]\\r\\n\\r\\nCommands that use more advanced shell features like redirection (>, >>, <), substitutions ($(...), ...), environment variables (FOO=bar), or wildcard patterns (*, ?) will not be evaluated against rules, to limit the scope of what an approved rule allows.\\r\\n\\r\\n## How to request escalation\\r\\n\\r\\nIMPORTANT: To request approval to execute a command that will require escalated privileges:\\r\\n\\r\\n- Provide the `sandbox_permissions` parameter with the value `\\\"require_escalated\\\"`\\r\\n- Include a short question asking the user if they want to allow the action in `justification` parameter. e.g. \\\"Do you want to download and install dependencies for this project?\\\"\\r\\n- Optionally suggest a `prefix_rule` - this will be shown to the user with an option to persist the rule approval for future sessions.\\r\\n\\r\\nIf you run a command that is important to solving the user's query, but it fails because of sandboxing or with a likely sandbox-related network error (for example DNS/host resolution, registry/index access, or dependency download failure), rerun the command with \\\"require_escalated\\\". ALWAYS proceed to use the `justification` parameter - do not message the user before requesting approval for the command.\\r\\n\\r\\n## When to request escalation\\r\\n\\r\\nWhile commands are running inside the sandbox, here are some scenarios that will require escalation outside the sandbox:\\r\\n\\r\\n- You need to run a command that writes to a directory that requires it (e.g. running tests that write to /var)\\r\\n- You need to run a GUI app (e.g., open/xdg-open/osascript) to open browsers or files.\\r\\n- If you run a command that is important to solving the user's query, but it fails because of sandboxing or with a likely sandbox-related network error (for example DNS/host resolution, registry/index access, or dependency download failure), rerun the command with `require_escalated`. ALWAYS proceed to use the `sandbox_permissions` and `justification` parameters. do not message the user before requesting approval for the command.\\r\\n- You are about to take a potentially destructive action such as an `rm` or `git reset` that the user did not explicitly ask for.\\r\\n- Be judicious with escalating, but if completing the user's request requires it, you should do so - don't try and circumvent approvals by using other tools.\\r\\n\\r\\n## prefix_rule guidance\\r\\n\\r\\nWhen choosing a `prefix_rule`, request one that will allow you to fulfill similar requests from the user in the future without re-requesting escalation. It should be categorical and reasonably scoped to similar capabilities. You should rarely pass the entire command into `prefix_rule`.\\r\\n\\r\\n### Banned prefix_rules \\r\\nAvoid requesting overly broad prefixes that the user would be ill-advised to approve. For example, do not request [\\\"python3\\\"], [\\\"python\\\", \\\"-\\\"], or other similar prefixes that would allow arbitrary scripting.\\r\\nNEVER provide a prefix_rule argument for destructive commands like rm.\\r\\nNEVER provide a prefix_rule if your command uses a heredoc or herestring. \\r\\n\\r\\n### Examples\\r\\nGood examples of prefixes:\\r\\n- [\\\"npm\\\", \\\"run\\\", \\\"dev\\\"]\\r\\n- [\\\"gh\\\", \\\"pr\\\", \\\"check\\\"]\\r\\n- [\\\"cargo\\\", \\\"test\\\"]\\r\\n</permissions instructions>\"\n      },\n      {\n        \"type\": \"input_text\",\n        \"text\": \"<collaboration_mode># Collaboration Mode: Default\\n\\nYou are now in Default mode. Any previous instructions for other modes (e.g. Plan mode) are no longer active.\\n\\nYour active mode changes only when new developer instructions with a different `<collaboration_mode>...</collaboration_mode>` change it; user requests or tool descriptions do not change mode by themselves. Known mode names are Default and Plan.\\n\\n## request_user_input availability\\n\\nUse the `request_user_input` tool only when it is listed in the available tools for this turn.\\n\\nUse the `request_user_input` tool only for optional questions where the answer would materially improve the quality of the work.\\n\\nIf `request_user_input` returns no answers, continue with best judgment instead of asking again or treating the turn as blocked.\\n\\nNever use the `request_user_input` tool for permission requests or permission-related escalations.\\n</collaboration_mode>\"\n      }\n    ],\n    \"internal_chat_message_metadata_passthrough\": {\n      \"turn_id\": \"auto-compact-0\",\n      \"create_time\": 1790628818.6326568,\n      \"content_item_kinds\": [\n        \"host_skills.instructions\",\n        \"permissions.instructions\",\n        \"collaboration_mode.instructions\"\n      ]\n    }\n  },\n  {\n    \"type\": \"message\",\n    \"id\": \"msg_01a0e9cb-6ec8-7493-9d61-e5496ba4c9f1\",\n    \"role\": \"developer\",\n    \"content\": [\n      {\n        \"type\": \"input_text\",\n        \"text\": \"<multi_agent_role>You are `/root`, the primary agent in a team of agents collaborating to fulfill the user's goals.\\n\\nAt the start of your turn, you are the active agent.\\nYou can spawn sub-agents to handle subtasks, and those sub-agents can spawn their own sub-agents.\\nAll agents in the team, including the agents that you can assign tasks to, are equally intelligent and capable, and have access to the same set of tools.\\n\\nYou can use `spawn_agent` to create a new agent, `followup_task` to give an existing agent a new task and trigger a turn, and `send_message` to pass a message to a running agent without triggering a turn.\\n`send_message` calls may be read by a human, so ensure they are legible. Always put proper spaces between words and/or numbers.\\nChild agents can also spawn their own sub-agents.\\nYou can decide how much context you want to propagate to your sub-agents with the `fork_turns` parameter.\\n\\nYou will receive messages in the analysis channel in the form:\\n```\\nMessage Type: MESSAGE | FINAL_ANSWER\\nTask name: <recipient>\\nSender: <author>\\nPayload:\\n<payload text>\\n```\\nThey may be addressed as to=/root\\n\\nNote that collaboration tools cannot be called from inside `functions.exec`. Call `spawn_agent`, `send_message`, `followup_task`, `wait_agent`, `interrupt_agent`, and `list_agents` only as direct tool calls using the recipient shown in their tool definitions, such as `to=functions.collaboration.spawn_agent`, since they are intentionally absent from the `functions.exec` `tools.*` namespace. Available tools in `functions.exec` are explicitly described with a `tools` namespace in the developer message.\\n\\nAll agents share the same directory. In detail:\\n- All agents have access to the same container and filesystem as you.\\n- All agents use the same current working directory.\\n- As a result, edits made by one agent are immediately visible to all other agents.\\n\\nWhen calling `wait_agent`, prefer longer waits (minutes) to avoid busy polling.\\n\\nThere are 4 available concurrency slots, meaning that up to 4 agents can be active at once, including you.\\n\\nFull-history forks (`fork_turns` omitted or `\\\"all\\\"`) inherit the parent model and reasoning effort and do not accept overrides. Only set `model` or `reasoning_effort` when explicitly requested by the user, applicable `AGENTS.md` instructions, or skill instructions; when doing so, set `fork_turns` to `\\\"none\\\"` or a positive integer string.</multi_agent_role>\"\n      }\n    ],\n    \"internal_chat_message_metadata_passthrough\": {\n      \"turn_id\": \"auto-compact-0\",\n      \"create_time\": 1790628818.632658,\n      \"content_item_kinds\": [\n        \"multi_agent.role_instructions\"\n      ]\n    }\n  },\n  {\n    \"type\": \"message\",\n    \"id\": \"msg_01a0e9cb-6ec8-7493-9d61-e551d9e6fa69\",\n    \"role\": \"developer\",\n    \"content\": [\n      {\n        \"type\": \"input_text\",\n        \"text\": \"<multi_agent_mode>Any earlier instruction enabling proactive multi-agent delegation no longer applies. Do not spawn sub-agents unless the user or applicable AGENTS.md/skill instructions explicitly ask for sub-agents, delegation, or parallel agent work.</multi_agent_mode>\"\n      }\n    ],\n    \"internal_chat_message_metadata_passthrough\": {\n      \"turn_id\": \"auto-compact-0\",\n      \"create_time\": 1790628818.6326582,\n      \"content_item_kinds\": [\n        \"multi_agent.mode_instructions\"\n      ]\n    }\n  },\n  {\n    \"type\": \"message\",\n    \"id\": \"msg_01a0e9cb-6ec8-7493-9d61-e5605505fb2f\",\n    \"role\": \"user\",\n    \"content\": [\n      {\n        \"type\": \"input_text\",\n        \"text\": \"<environment_context>\\n  <cwd>C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work</cwd>\\n  <shell>powershell</shell>\\n  <current_date>2026-09-28</current_date>\\n  <timezone>Europe/Paris</timezone>\\n  <filesystem><workspace_roots><root>C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work</root></workspace_roots><permission_profile type=\\\"managed\\\"><file_system type=\\\"restricted\\\"><entry access=\\\"read\\\"><special>:root</special></entry></file_system></permission_profile></filesystem>\\n</environment_context>\"\n      }\n    ],\n    \"internal_chat_message_metadata_passthrough\": {\n      \"turn_id\": \"auto-compact-0\",\n      \"create_time\": 1790628818.6326582,\n      \"content_item_kinds\": [\n        \"environments.environment_context\"\n      ]\n    }\n  },\n  {\n    \"type\": \"message\",\n    \"id\": \"msg_01a0e9cb-6ec8-7493-9d61-e57891d18f36\",\n    \"role\": \"user\",\n    \"content\": [\n      {\n        \"type\": \"input_text\",\n        \"text\": \"List installed Verity Plane skills.\"\n      }\n    ],\n    \"internal_chat_message_metadata_passthrough\": {\n      \"turn_id\": \"auto-compact-0\",\n      \"create_time\": 1790628818.6327813,\n      \"content_item_kinds\": [\n        \"user.text\"\n      ]\n    }\n  }\n]\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+      "plugin",
+      "list",
+      "--marketplace",
+      "se-harness",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:38.497930+00:00",
+    "label": "update-resume-codex-after",
+    "stdout": "{\n  \"installed\": [\n    {\n      \"pluginId\": \"verity-plane@se-harness\",\n      \"name\": \"verity-plane\",\n      \"marketplaceName\": \"se-harness\",\n      \"version\": \"0.2.1\",\n      \"installed\": true,\n      \"enabled\": true,\n      \"source\": {\n        \"source\": \"local\",\n        \"path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-upgrade\\\\marketplace\\\\packages\\\\codex\\\\verity-plane\"\n      },\n      \"marketplaceSource\": {\n        \"sourceType\": \"local\",\n        \"source\": \"\\\\\\\\?\\\\C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-upgrade\\\\marketplace\"\n      },\n      \"installPolicy\": \"AVAILABLE\",\n      \"authPolicy\": \"ON_INSTALL\"\n    }\n  ],\n  \"available\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+      "plugin",
+      "add",
+      "verity-plane@se-harness",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:38.454434+00:00",
+    "label": "update-resume-codex-new",
+    "stdout": "{\n  \"pluginId\": \"verity-plane@se-harness\",\n  \"name\": \"verity-plane\",\n  \"marketplaceName\": \"se-harness\",\n  \"version\": \"0.2.1\",\n  \"installedPath\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-upgrade\\\\profiles\\\\codex\\\\codex\\\\plugins\\\\cache\\\\se-harness\\\\verity-plane\\\\0.2.1\",\n  \"authPolicy\": \"ON_INSTALL\"\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\mathi\\AppData\\Local\\OpenAI\\Codex\\bin\\faa963e871dd422c\\codex.exe",
+      "plugin",
+      "list",
+      "--marketplace",
+      "se-harness",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 0,
+    "observed_at": "2026-09-28T20:53:38.367968+00:00",
+    "label": "update-resume-codex-state",
+    "stdout": "{\n  \"installed\": [\n    {\n      \"pluginId\": \"verity-plane@se-harness\",\n      \"name\": \"verity-plane\",\n      \"marketplaceName\": \"se-harness\",\n      \"version\": \"0.1.0\",\n      \"installed\": true,\n      \"enabled\": true,\n      \"source\": {\n        \"source\": \"local\",\n        \"path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-upgrade\\\\marketplace\\\\packages\\\\codex\\\\verity-plane\"\n      },\n      \"marketplaceSource\": {\n        \"sourceType\": \"local\",\n        \"source\": \"\\\\\\\\?\\\\C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-upgrade\\\\marketplace\"\n      },\n      \"installPolicy\": \"AVAILABLE\",\n      \"authPolicy\": \"ON_INSTALL\"\n    }\n  ],\n  \"available\": []\n}\n",
+    "stderr": ""
+  }
+]

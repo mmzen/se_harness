@@ -2,7 +2,11 @@
 
 <!-- Target expertise: 6/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
-> This note explains timing. It does not replace `docs/engineering/WORKFLOW.md`, `DECISION_RIGHTS.md`, `QUALITY_GATES.md`, or `TRACEABILITY.md`.
+> This note explains timing. Start with the installed
+> [task router](../../ENGINEERING_HARNESS.md#read-by-task). Its current guides explain
+> [decision rights](../engineering/harness/AUTHORITY.md#decision-rights),
+> [gates](../engineering/harness/RESULTS.md#gates) and the
+> [artifact model](../engineering/harness/ARTIFACTS.md#artifact-data-model).
 
 ## Lifecycle at a glance
 
@@ -63,19 +67,25 @@ G1 through G4 are governance history. They do not become a new release candidate
 
 ## Commands by phase
 
+In evaluator examples, `harnessctl` means the absolute Python executable of
+the repository's selected released evaluator followed by `-I -m se_harness`.
+Run it from outside the checkout. `REPO` is the absolute repository path;
+replace placeholders before running a command. Source-development commands
+are identified separately and do not govern repository lifecycle state.
+
 The coding agent normally operates these commands; the accountable human makes the adjacent decision.
 
 | When | Agent-operated command | What it does not do |
 | --- | --- | --- |
-| Before editing | `harnessctl doctor .` and `harnessctl preflight . --work-order WO-EX-001 --phase start` | Does not authorize the work order or prove comprehension. |
-| During and before review | repository-specific checks, `harnessctl validate .`, `harnessctl inspect .`, `harnessctl dashboard .`, and `harnessctl preflight . --work-order WO-EX-001 --phase review` | `validate` supplies gate-oriented exit behavior; a successfully produced `inspect` report can still show an invalid graph or unresolved attention. Neither judges semantic correctness or approves the pull request. |
+| Before editing | `harnessctl doctor REPO` and `harnessctl preflight REPO --work-order WO-EX-001 --phase start` | Does not authorize the work order or prove comprehension. |
+| During and before review | repository-specific checks, `harnessctl validate REPO`, `harnessctl inspect REPO`, `harnessctl dashboard REPO`, and `harnessctl preflight REPO --work-order WO-EX-001 --phase review` | `validate` supplies gate-oriented exit behavior; a successfully produced `inspect` report can still show an invalid graph or unresolved attention. Neither judges semantic correctness or approves the pull request. |
 | At clean candidate C | `harnessctl capture-verification ...` | Prepares only a `ready` VREC; does not verify, commit, or push. |
 | After human verification and release authorization | `harnessctl prepare-release ...` | Prepares only a `ready` RLS; does not release, tag, publish, or deploy. |
 
 ## Formal gates versus Explorer readiness
 
-Only the exact `QG-*` IDs in `docs/engineering/QUALITY_GATES.md` identify
-normative gates. The G0-G5 portions group related gates for reporting and do not
+Use the exact `QG-*` gate IDs and predicate results returned by the selected
+evaluator. The [gate guide](../engineering/harness/RESULTS.md#gates) explains their meaning. The G0-G5 portions group related gates for reporting and do not
 replace those IDs.
 
 Harness Explorer uses G0-G5 labels for a differently grouped, derived

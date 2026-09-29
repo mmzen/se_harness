@@ -1,0 +1,12 @@
+{
+  "source_commit": "ce6d5fa4080e2ef0904446aa0b066d907532b63c",
+  "package_identity_sha256": "babd540ae53dfa1f77288ff7d83c1a906673bddcdcbe53d12365ceb7fffd672e",
+  "sources": [
+    "README.md",
+    "submissions/README.md",
+    "submissions/reviewer-test-cases.md",
+    "packages/codex/verity-plane/README.md",
+    "packages/claude/verity-plane/README.md"
+  ],
+  "findings": []
+}

@@ -1,0 +1,25 @@
+{
+  "assembly_source_commit": "ce6d5fa4080e2ef0904446aa0b066d907532b63c",
+  "compared_head_before_doc_commit": "cc6901a215b6f23febb1d918591c0c4ddc6a3d08",
+  "comparison_includes_working_changes": true,
+  "unchanged_paths": [
+    "plugins/verity-plane",
+    "release/plugin-assembly.json",
+    "release/plugin-marketplace",
+    "scripts/build_plugin_archives.py",
+    "scripts/build_plugin_marketplace.py",
+    "repository_tools/plugin_distribution.py",
+    "templates/repository/standard",
+    "ENGINEERING_HARNESS.md",
+    "docs/engineering/harness",
+    ".engineering-harness.lock",
+    ".engineering-harness.toml"
+  ],
+  "changed_paths": [],
+  "package_identity_sha256": "babd540ae53dfa1f77288ff7d83c1a906673bddcdcbe53d12365ceb7fffd672e",
+  "all_distribution_files_match": true,
+  "file_count": 62,
+  "retained_native_evidence": "../WO-PLG-026/native-assessments.json",
+  "mapping": "The final preparation candidate contains these unchanged assembly inputs and delivered bytes. Retain the original assembly source identity; do not relabel its archives. WO-PLG-027 only changes approved wider guidance, documentation tests and its own lifecycle/evidence. Native evidence therefore applies to the same delivered package; the updated source-guidance tests assess the new docs.",
+  "public_confirmation": "Still pending WO-PLG-028; local evidence is not public-route evidence."
+}

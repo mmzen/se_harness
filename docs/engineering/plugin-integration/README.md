@@ -1,5 +1,20 @@
 # Plugin integration
 
+## Marketplace refresh for plugin 0.2.1
+
+[WO-PLG-026](work-orders/WO-PLG-026.md) prepares plugin 0.2.1 with the unchanged
+released evaluator 0.19.0. Its [local evidence](evidence/WO-PLG-026/README.md)
+records Windows native qualification on Codex and Claude Code.
+[WO-PLG-027](work-orders/WO-PLG-027.md) corrects current guidance.
+[SPEC-PLG-023](specifications/SPEC-PLG-023.md) defines this delivery and
+[VER-PLG-026](verification/VER-PLG-026.md) defines preparation acceptance.
+
+The last retained public observation remains plugin 0.1.0 with evaluator 0.18.0.
+[WO-PLG-028](work-orders/WO-PLG-028.md) waits for human-verified preparation and
+separately authorized, observed publication before confirming the public routes
+under [VER-PLG-027](verification/VER-PLG-027.md). Local checks do not establish
+public availability or complete the release delivery.
+
 ## Replacement cleanup package
 
 [WO-PLG-025](work-orders/WO-PLG-025.md) is implemented, completing the existing cleanup
@@ -23,9 +38,9 @@ owner-approved README repair. See
 [contributor setup and restoration](../../notes/developing-se-harness.md#agent-skills-for-this-checkout).
 This adoption does not change the published plugin or earlier assurance records.
 
-## Marketplace publication
+## Initial marketplace publication
 
-[WO-PLG-023](work-orders/WO-PLG-023.md) prepares the complete Codex and Claude
+[WO-PLG-023](work-orders/WO-PLG-023.md) prepared the initial 0.1.0/0.18.0 delivery: the complete Codex and Claude
 marketplaces, native installation evidence and provider submission drafts.
 [SPEC-PLG-022](specifications/SPEC-PLG-022.md) defines the composition;
 [VER-PLG-023](verification/VER-PLG-023.md) separates local acceptance from later
@@ -64,7 +79,7 @@ disposable skill replacement, one repairable environment, explicit checks,
 proportionate evidence and one execution route. Optional helpers are not a prerequisite.
 
 Merged source is not automatically a published plugin or an adopted evaluator.
-This repository uses released 0.18.0 following WO-HUP-019. Plugin marketplace delivery is separate.
+This repository uses released 0.19.0 following WO-HUP-021. Plugin marketplace delivery is separate.
 
 ## Historical records
 

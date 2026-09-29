@@ -14,14 +14,9 @@ not download or try to reproduce the external standard.
 
 For eligible prose, an agent uses consistent terms, identifies responsible
 actors, states conditions and results directly, and avoids vague references.
-The agent can use two profiles:
-
-- `operator-communication` for concise, action-first explanations; and
-- `technical-artifact-writing` for narrative parts of draft requirements,
-  specifications, architecture, work orders, and verification contracts.
-
-The profiles guide composition. They are not automatic formatters. They do not
-authorize a style-only rewrite of approved or historical artifacts.
+The same policy applies to operator explanations and narrative parts of
+draft engineering artifacts. It is not an automatic formatter and does not
+authorize style-only rewrites of approved or historical artifacts.
 
 ## What the policy protects
 
@@ -76,7 +71,7 @@ The policy and brief skill do not:
 - claim ASD-STE100 compliance.
 
 The managed policy at
-`docs/engineering/TECHNICAL_COMMUNICATION.md` is authoritative for these
+[COMMUNICATION.md](../engineering/harness/COMMUNICATION.md#communication) is authoritative for these
 communication rules. The skill and this note only explain and apply that policy.
 
 ## Contributor checks

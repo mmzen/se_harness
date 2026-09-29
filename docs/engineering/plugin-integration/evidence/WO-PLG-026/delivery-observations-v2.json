@@ -1,0 +1,68 @@
+{
+  "schema": "se-harness-delivery-observations/v1",
+  "plan_sha256": "2a21b58e45ed9fe058a7bd7b0a1ffccc8068489a190a986787953ccb22431f38",
+  "observed_at": "2026-09-28T20:58:48.971819+00:00",
+  "release": {
+    "record": "RLS-SEH-028",
+    "status": "released",
+    "source": "c4d9036fdaab378f08fe2db68978126f66ab961e",
+    "observed_at": "2026-09-28T20:58:48.971819+00:00",
+    "evidence": [
+      {
+        "path": "release-readback.json",
+        "sha256": "a7cde1be9dc5abd394859fa17a0440bf50bb78d2c77555b2265e1bfc403f6d8e"
+      }
+    ]
+  },
+  "surfaces": [
+    {
+      "id": "evaluator",
+      "status": "pass",
+      "observed_at": "2026-09-28T20:58:48.971819+00:00",
+      "source": "https://pypi.org/project/se-harness/0.19.0/",
+      "identity": {
+        "record": "RLS-SEH-028",
+        "version": "0.19.0",
+        "wheel_sha256": "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8"
+      },
+      "evidence": {
+        "readback": [
+          {
+            "path": "unchanged-public-readback.json",
+            "sha256": "898ae04189a4f66ef2d55786ff5a625cf428cded937103cfc94b183a86d7d161"
+          }
+        ],
+        "compatibility": [
+          {
+            "path": "compatibility-review.json",
+            "sha256": "491de76e35d7d3f49f68b3740f0278e7cf72bc9ac099e098b6a6a238d2c0b422"
+          }
+        ]
+      }
+    },
+    {
+      "id": "release_markers",
+      "status": "pass",
+      "observed_at": "2026-09-28T20:58:48.971819+00:00",
+      "source": "https://github.com/mmzen/se_harness",
+      "identity": {
+        "latest": "v0.19.0",
+        "last": "30d4dba2a088c4f83756c1241b76cdab40f796bd"
+      },
+      "evidence": {
+        "readback": [
+          {
+            "path": "unchanged-public-readback.json",
+            "sha256": "898ae04189a4f66ef2d55786ff5a625cf428cded937103cfc94b183a86d7d161"
+          }
+        ],
+        "compatibility": [
+          {
+            "path": "compatibility-review.json",
+            "sha256": "491de76e35d7d3f49f68b3740f0278e7cf72bc9ac099e098b6a6a238d2c0b422"
+          }
+        ]
+      }
+    }
+  ]
+}

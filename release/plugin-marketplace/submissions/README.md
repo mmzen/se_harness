@@ -1,6 +1,6 @@
 # Verity Plane catalog submission materials
 
-These materials accompany plugin 0.1.0 and its published SE Harness 0.18.0 wheel.
+These materials accompany plugin 0.2.1 and its released SE Harness 0.19.0 wheel.
 They are drafts for provider review. A Git marketplace installation does not
 establish approval or availability in a provider directory.
 
@@ -44,16 +44,21 @@ an existing Python 3.11+ installation is required.
 2. Explain this repository's engineering state and next decision.
 3. Draft a bounded work order for my requested change.
 
-**Initial release notes:** Standard marketplace packaging of shared setup,
+**Proposed release notes:** Standard marketplace packaging of shared setup,
 orientation, change, evidence and operator-brief skills. The supplied checker
 wheel installs offline when setup is invoked. Plugin installation alone does
-not initialize or upgrade a project. There are no automatic tool/session hooks,
-remote MCP service or plugin-specific login.
+not initialize or upgrade a project. Native startup/compaction hooks deliver the
+selected repository instructions and disclose delivery gaps. They require local
+Python and applicable host trust. They do not enforce all tool actions. There is
+no remote MCP service or plugin-specific login.
 
 ## OpenAI
 
-Use the [plugin portal](https://platform.openai.com/plugins), select **Skills only**,
-and upload the checked native archive and listing materials. The existing
+Provider guidance checked on 2026-09-28. Use the [plugin portal](https://platform.openai.com/plugins), select **Skills only**,
+for this package without an MCP server. Disclose its bundled command hooks;
+the portal category does not mean that it has no hooks. Upload only the checked
+archive and complete listing materials. The [migration guidance](https://developers.openai.com/plugins/guides/submit-claude-plugin)
+requires hook scripts in the execution environment and host trust. The existing
 `.codex-plugin/plugin.json` compatibility manifest remains supported. The portal
 review and any required scanner/model checks are separate from local acceptance.
 After provider approval, the owner chooses publication in the Plugins Directory.
@@ -61,12 +66,11 @@ See the [submission procedure](https://developers.openai.com/plugins/deploy/subm
 
 ## Anthropic
 
-Submit through the [Console form](https://platform.claude.com/plugins/submit) or
-[organization form](https://claude.ai/admin-settings/directory/submissions/plugins/new)
-using the complete published plugin directory and immutable Git commit.
-Third-party submissions go to the reviewed **Claude community marketplace**.
-The official catalog is curated separately and has no direct application route.
-See [Claude distribution guidance](https://code.claude.com/docs/en/plugins#submit-your-plugin-to-the-community-marketplace).
+Consult the current [plugin distribution guidance](https://code.claude.com/docs/en/plugins)
+and its provider-submission route before applying. `se-harness` is a third-party
+Git marketplace; it is not an Anthropic official or community listing. Submit
+the complete tested directory and immutable commit through the route available
+to the publisher. This draft records no provider submission or approval.
 
 ## Publisher inputs still needed
 
@@ -80,6 +84,8 @@ this draft. Record submission and publication outcomes only when observed.
 
 ## Data behavior for reviewers
 
+Startup/compaction hooks read the selected root instruction file and its installation
+identity, then send the validated root or a gap notice to the host context.
 The skills read repository files and call the selected local checker. Requested
 initialization and workflow operations can write project artifacts. Setup writes
 a private environment outside the project. Requested plugin ownership replaces

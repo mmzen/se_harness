@@ -1,0 +1,13 @@
+{
+  "schema": "se-harness-delivery-observations/v1",
+  "plan_sha256": "9cfea05dcf1e2a1e3b2e2d1f3ae716ebc2eea2d689341a932442399d6562b689",
+  "observed_at": "2026-09-28T20:55:26.213318+00:00",
+  "release": {
+    "record": "RLS-SEH-028",
+    "status": "released",
+    "source": "c4d9036fdaab378f08fe2db68978126f66ab961e",
+    "observed_at": "2026-09-28T20:55:26.213351+00:00",
+    "evidence": []
+  },
+  "surfaces": []
+}

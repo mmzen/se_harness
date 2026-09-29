@@ -1,0 +1,69 @@
+{
+  "codex_local_git_refresh": "Native upgrade refused a local directory source; retained in command-results. Inspected unchanged 0.1.0 installations, then used native add against the advanced complete local source. Public Git refresh is still a later obligation.",
+  "claude_provider_refusal": "The metadata-copy boundary prompt received an Opus reasoning_extraction refusal. The full actual hook callback delivered the switched public root. The ordinary readiness question subsequently passed all boundaries; no provider policy or saved model setting was changed.",
+  "parser_recovery": "First ordinary answer contained fenced JSON plus explanation; then a Windows default-encoding read corrupted its reloaded Unicode. Original output was retained. UTF-8 and fenced-JSON parsing recovered it without replaying the initial model request.",
+  "automatic_review": "The initial Claude session launch was rejected for possible project-context egress. Read-only inspection proved the fixture was newly generated solely from public 0.19.0 templates and had no owner/ancestor/profile CLAUDE.md. Review then permitted the same bounded probe.",
+  "original_assessments": {
+    "claude-boundaries": {
+      "status": "incomplete",
+      "cases": [
+        {
+          "case": "initial",
+          "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-fresh\\claude\\project",
+          "passed": true,
+          "context_count": 1,
+          "expected_error": null,
+          "probe": {
+            "instruction_file_path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-fresh\\claude\\project\\ENGINEERING_HARNESS.md",
+            "harness_version": "0.19.0",
+            "entry_sha256": "01e3136872ddce43debb4ebf5edf3fb84f6abcb03b494f7921b1d48d5b480e27",
+            "final_heading": "After compaction",
+            "delivery_gap": false,
+            "reason": "SessionStart hook delivered the harness instruction source, release version, and entry SHA-256 in full; the document body was present through its final heading.",
+            "governed_action_allowed": false
+          },
+          "model_response_assessed": true,
+          "context_sha256": [
+            "cbd217e2ec8d157f2ff8ba4669bde8bfe62f93cb6c993f9c4cdb668c4f7aab56"
+          ],
+          "replies": [
+            "```json\n{\n  \"instruction_file_path\": \"C:\\\\Users\\\\mathi\\\\Documents\\\\Codex\\\\2026-09-20\\\\verity-plane-plugin-verity-plane-se\\\\work\\\\marketplace-021-fresh\\\\claude\\\\project\\\\ENGINEERING_HARNESS.md\",\n  \"harness_version\": \"0.19.0\",\n  \"entry_sha256\": \"01e3136872ddce43debb4ebf5edf3fb84f6abcb03b494f7921b1d48d5b480e27\",\n  \"final_heading\": \"After compaction\",\n  \"delivery_gap\": false,\n  \"reason\": \"SessionStart hook delivered the harness instruction source, release version, and entry SHA-256 in full; the document body was present through its final heading.\",\n  \"governed_action_allowed\": false\n}\n```"
+          ]
+        }
+      ],
+      "error": "Claude exited 1: "
+    },
+    "claude-behavior-boundaries": {
+      "status": "incomplete",
+      "cases": [],
+      "method": "Ordinary readiness question; full delivered root independently assessed from native callbacks. Earlier provider refusal retained.",
+      "error": "Extra data: line 6 column 1 (char 361)"
+    },
+    "claude-behavior-resume": {
+      "status": "incomplete",
+      "cases": [
+        {
+          "case": "initial",
+          "repository": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\marketplace-021-fresh\\claude\\project",
+          "passed": false,
+          "context_count": 1,
+          "expected_error": null,
+          "probe": null,
+          "model_response_assessed": false,
+          "context_sha256": [
+            "b8d319407a2cc62572ab9e753661348201128ce5efe24ce5260467a775a2d2ad"
+          ],
+          "replies": [],
+          "behavior": {
+            "available": true,
+            "may_implement": false,
+            "next_step": "Confirm the repository path and the exact artifact IDs (work order + accepted definitions) in scope, then â€” with tool use permitted â€” resolve the evaluator per SETUP.md and run harnessctl check for that scope to get the authoritative lifecycle state and next action before any implementation."
+          },
+          "retained_response": "```json\n{\n  \"available\": true,\n  \"may_implement\": false,\n  \"next_step\": \"Confirm the repository path and the exact artifact IDs (work order + accepted definitions) in scope, then â€” with tool use permitted â€” resolve the evaluator per SETUP.md and run harnessctl check for that scope to get the authoritative lifecycle state and next action before any implementation.\"\n}\n```\n\nTwo notes outside the JSON: the harness text itself arrived in this session (SE Harness 0.19.0, from `claude/project/ENGINEERING_HARNESS.md`), which is what `available: true` refers to; the referenced procedure files under `docs/engineering/harness/` I have not read, since you asked me not to use tools. And the delivery states it grants no decision authority, so implementation stays blocked until an approved work order is confirmed via `harnessctl`."
+        }
+      ],
+      "method": "Ordinary readiness question; full delivered root independently assessed from native callbacks. Earlier provider refusal retained.",
+      "unchanged": true
+    }
+  }
+}

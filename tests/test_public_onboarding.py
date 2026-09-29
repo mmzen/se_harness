@@ -91,14 +91,10 @@ class PublicOnboardingTests(unittest.TestCase):
         ):
             with self.subTest(text=text):
                 self.assertIn(text, install)
-        # Published identities come from the retained marketplace, not candidate __version__.
-        published = " ".join(self.marketplace.split())
-        plugin = re.search(r"Plugin \*\*(\d+\.\d+\.\d+)\*\*", published)
-        checker = re.search(r"\*\*SE Harness (\d+\.\d+\.\d+)\*\*", published)
-        self.assertIsNotNone(plugin)
-        self.assertIsNotNone(checker)
-        self.assertIn(f"Plugin **{plugin[1]}**", install)
-        self.assertIn(f"released **SE Harness {checker[1]}**", install)
+        # Bind candidate claims to manifests/released metadata, and public claims
+        # to retained public observation. Matching README strings are not proof.
+        from tests.plugin_integration.package_assembly.test_refresh_guidance import identity_findings, selected_inputs
+        self.assertEqual([], identity_findings(selected_inputs()))
         self.assertNotRegex(install, r"pip install\s+se-harness==")
         self.assertNotIn("python -m pip install .", install)
         self.assertNotIn("harnessctl upgrade", install)
@@ -109,11 +105,12 @@ class PublicOnboardingTests(unittest.TestCase):
 
         commands = self.fenced_commands(self.section("Install into a repository", self.installation))
         self.assertEqual(2, len(commands))
-        self.assertEqual({"init", "doctor"}, {command[3] for command in commands})
+        self.assertEqual({"init", "doctor"}, {command[4] for command in commands})
         for command in commands:
             with self.subTest(command=command):
-                self.assertEqual(["python", "-m", "se_harness"], command[:3])
-                build_parser().parse_args(command[3:])
+                self.assertEqual(["CHECKER", "-I", "-m", "se_harness"], command[:4])
+                self.assertEqual("REPO", command[5])
+                build_parser().parse_args(command[4:])
         for text in ("outside", "python -m venv", "-m pip install", "se-harness==", "version your repository pins"):
             with self.subTest(text=text):
                 self.assertIn(text, self.getting_started)
@@ -122,7 +119,7 @@ class PublicOnboardingTests(unittest.TestCase):
                 self.assertIn(text, self.installation)
 
     def test_native_commands_match_the_published_git_installation_routes(self) -> None:
-        expected = self.fenced_commands(self.section("Install from Git", self.marketplace))
+        expected = self.fenced_commands(self.section("Install from Git", self.marketplace).split("For an existing Git installation:", 1)[0])
         self.assertEqual(4, len(expected))
         self.assertEqual(
             [["codex", "plugin", "marketplace", "add"], ["codex", "plugin", "add"],

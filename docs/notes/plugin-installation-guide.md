@@ -1,76 +1,75 @@
-# Install or try the Verity Plane plugin
+# Install or update the Verity Plane plugin
 
-For the standard marketplace route, use the [distribution guide](../../release/plugin-marketplace/README.md).
-[WO-PLG-023](../engineering/plugin-integration/work-orders/WO-PLG-023.md) prepares
-its committed catalogs, packages and native acceptance. Its evidence records
-publication status; the source guide alone does not establish a public listing.
-Maintainers use the [marketplace composition procedure](plugin-marketplace-publication.md).
+The public marketplace observed on 2026-09-28 is plugin 0.1.0 with evaluator
+0.18.0 at `ed68b30c88043773be929540b7b10ae537957c2d`. The prepared candidate is
+plugin 0.2.1 with the unchanged released evaluator 0.19.0. Its public publication
+and update confirmation remain pending. This guide does not upgrade a project's
+selected harness.
 
-## Development walkthrough
+## Select the distribution
 
-This guide covers **development packages on Windows**. It does not claim that the
-current plugin is published in a public catalog. The checked package contains the
-development SE Harness 0.18.0 wheel; use a disposable project for this trial.
-Installing plugin instructions does not upgrade an existing project's harness.
+For the currently published tree, follow its
+[distribution guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace).
+For candidate qualification, maintainers use the
+[committed composition procedure](plugin-marketplace-publication.md#assemble-committed-inputs)
+to produce an external directory with both complete host packages. Do not install
+the incomplete host folders directly from development source.
 
-You need Python 3.11 or later with `venv` and `ensurepip`, an installed Codex or
-Claude Code CLI, this checkout and a local SE Harness wheel. All paths below are
-absolute placeholders; replace them and quote paths containing spaces.
+The [assembly README](../../release/plugin-marketplace/README.md) is rendered at
+the distribution root. Its package links resolve there, not in the source tree.
+Check `PACKAGE-IDENTITY.json`: plugin 0.2.1, evaluator 0.19.0, the accepted source
+commit and wheel SHA-256
+`43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8`.
 
-## 1. Assemble the local package
+## Install in a disposable profile
 
-From this checkout, use the existing development command:
-
-```text
-python scripts/build_plugin_archives.py develop --repository . --wheel "LOCAL_WHEEL" --output-directory "NEW_PACKAGE_DIRECTORY"
-```
-
-Choose an output directory outside the checkout. It contains `codex/verity-plane`
-and `claude/verity-plane`, each with skills, setup and the selected wheel. These
-packages are for development, not publication.
-
-## 2. Load it in your host
-
-**Codex:** put this file at `NEW_PACKAGE_DIRECTORY/.agents/plugins/marketplace.json`:
-
-```json
-{
-  "name": "verity-local",
-  "plugins": [{
-    "name": "verity-plane",
-    "source": {"source": "local", "path": "./codex/verity-plane"},
-    "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
-    "category": "Productivity"
-  }]
-}
-```
-
-Then run:
+Use Python 3.11+ with `venv` and `ensurepip`, installed host CLIs and Git.
+Qualification uses disposable HOME/USERPROFILE, CODEX_HOME, CLAUDE_CONFIG_DIR,
+APPDATA and LOCALAPPDATA directories. Keep any required host login separate from
+retained evidence. Do not change real user profiles to run these checks.
+Replace `MARKETPLACE_DIRECTORY` with the absolute composed directory:
 
 ```text
-codex plugin marketplace add "NEW_PACKAGE_DIRECTORY" --json
-codex plugin add verity-plane@verity-local --json
+codex plugin marketplace add "MARKETPLACE_DIRECTORY" --json
+codex plugin add verity-plane@se-harness --json
+codex plugin list --marketplace se-harness --json
 ```
-
-Use the returned `installedPath` as `PLUGIN` in step 3. Start a new Codex session
-to use its skills. These CLI commands were checked with the version below;
-the host's [plugin documentation](https://learn.chatgpt.com/docs/plugins) also
-describes its plugin browser. The [local catalog format](https://developers.openai.com/plugins/build/plugins)
-comes from the host, not a new SE Harness installer.
-
-**Claude Code:** use `NEW_PACKAGE_DIRECTORY/claude/verity-plane` as `PLUGIN`:
 
 ```text
-claude --plugin-dir "PLUGIN" plugin details verity-plane
-claude --plugin-dir "PLUGIN"
+claude plugin marketplace add "MARKETPLACE_DIRECTORY"
+claude plugin install verity-plane@se-harness --json
+claude plugin list --json
 ```
 
-The first command displays the plugin and its skills; the second opens a session
-using it. This is a [session-only local load](https://code.claude.com/docs/en/plugins-reference),
-not a persistent marketplace installation. The interactive model session itself
-was not part of this guide's acceptance check.
+Use the returned installed path as `PLUGIN` below. Inspect the configured
+marketplace source and installed manifest. Restart the host. Confirm the loaded
+plugin path and compare its files with the composition's identity inventory.
 
-## 3. Connect a disposable project and check it
+## Update an existing Git installation
+
+First confirm that `se-harness` selects the intended Git source. Once the public
+identity matches the accepted candidate, refresh and install its new version:
+
+```text
+codex plugin marketplace upgrade se-harness --json
+codex plugin add verity-plane@se-harness --json
+codex plugin list --marketplace se-harness --json
+```
+
+```text
+claude plugin marketplace update se-harness
+claude plugin update verity-plane@se-harness --json
+claude plugin list --json
+```
+
+Restart and inspect active bytes again. A marketplace named `se-harness` may
+instead point to a local development tree. Before switching that source, record
+its location and inspect the host's marketplace list. Remove only the selected
+source through the native marketplace command, then add the intended source
+and update the plugin. Preserve other installations. A cache directory or a
+successful refresh alone does not prove the new package is loaded.
+
+## Connect a disposable project and check it
 
 Create an empty `PROJECT` directory. Choose a persistent `DATA` directory outside
 that project and the plugin's replaceable package directory. `WHEEL` is the selected
@@ -116,27 +115,29 @@ authority to govern this repository.
 | Doctor reports a project/checker version mismatch | Use the project's matching wheel, or follow the separately requested upgrade procedure. Reinstalling the checker alone does not upgrade a project. |
 
 The shared [maintenance instructions](../../plugins/verity-plane/common/skills/setup/references/maintenance.md)
-contain the repair and explicit upgrade procedure. Run checks when needed; this
-plugin has no enforcement hook running in the background.
+contain the repair and explicit upgrade procedure. Run checks when needed; the
+startup/compaction hooks deliver instructions but do not enforce every tool call.
 
-## What was checked
 
-| Host on Windows | Observed route |
-| --- | --- |
-| Codex CLI 0.154.0-alpha.6.2 | Local catalog installation, native setup-skill discovery, then the installed package's setup, project connection and passing doctor. |
-| Claude Code 2.1.266 | Session plugin discovery, then that package's setup, project connection and passing doctor. |
+## Check instruction delivery
 
-Both used Python 3.14.6 and development checker 0.18.0 in fresh profiles. The
-commands were run directly; this does not certify an agent's behavior in a model
-session, the desktop UI, other platforms or public installation. No extra host
-prompt blocked these command walkthroughs. The initial missing-harness result is
-the expected confusing case explained in step 3.
+Start a session in the connected project. Codex requires review and trust of
+the current hook definition. The hook launcher needs Python on PATH. Verify
+that the delivered context names this project's `ENGINEERING_HARNESS.md`, its
+matching SHA-256 and final heading `After compaction`. Repeat after manual
+compaction. A missing, changed or incompatible root must disclose a delivery
+gap; stop the affected governed action and resolve it before continuing.
 
-See [the concise results](../engineering/plugin-integration/evidence/WO-PLG-016/README.md).
-To repeat the optional local acceptance with both CLIs installed:
+## Qualification limits
 
-```text
-python tests/plugin_integration/onboarding/run_acceptance.py --wheel "LOCAL_WHEEL" --output "NEW_DISPOSABLE_DIRECTORY"
-```
+WO-PLG-026 retains this candidate's Windows native fresh, update and local 0.2.0
+replacement observations. WO-PLG-028 will retain later public-route observations.
+Until a route has a passing retained result, it is a procedure to check, not a
+claim of success. Desktop UI, automatic threshold compaction and other operating
+systems need separate evidence. Model sessions require valid host authentication.
 
-It uses isolated profiles and makes no model request. It is not a new CI prerequisite.
+Historical development checks with Codex 0.154.0-alpha.6.2, Claude Code 2.1.266
+and a development 0.18.0 checker remain in
+[WO-PLG-016 evidence](../engineering/plugin-integration/evidence/WO-PLG-016/README.md).
+They do not qualify 0.2.1. The optional old no-model acceptance helper remains a
+development-only check; it does not replace native startup/compaction evidence.

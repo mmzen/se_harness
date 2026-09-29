@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+import shlex
 import tomllib
 import unittest
 from pathlib import Path
@@ -12,6 +13,39 @@ from se_harness.cli import build_parser
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 NOTES_ROOT = REPOSITORY_ROOT / "docs" / "notes"
+
+# The current-guide selection is the approved WO-PLG-027 scope. Historical notes
+# outside this set keep their original examples and version claims.
+REFRESHED_GUIDES = (
+    "getting-started.md", "harnessctl-reference.md", "harness-operational-phasing.md",
+    "harness-uml-model.md", "harness-overview.md", "harness-lineage-example.md",
+    "technical-communication.md", "developing-se-harness.md",
+    "harness-installation-and-upgrades.md", "agentic-execution-host-adapters.md", "README.md",
+)
+EXAMPLE_GUIDES = (
+    "getting-started.md", "harness-installation-and-upgrades.md",
+    "harness-lineage-example.md", "developing-se-harness.md",
+)
+
+
+def evaluator_examples():
+    """Extract runnable evaluator examples, excluding source-only demonstrations."""
+    for name in EXAMPLE_GUIDES:
+        content = (NOTES_ROOT / name).read_text(encoding="utf-8")
+        for block in re.findall(r"```[^\n]*\n(.*?)\n```", content, re.DOTALL):
+            block = re.sub(r"[\\`]\n\s*", " ", block)
+            for line in block.splitlines():
+                if not re.match(r'\s*(?:harnessctl |(?:& )?"CHECKER" -I -m se_harness )', line):
+                    continue
+                words = shlex.split(line, comments=True)
+                if not words:
+                    continue
+                if words[0] == "harnessctl":
+                    yield name, words[1:]
+                elif words[:4] == ["CHECKER", "-I", "-m", "se_harness"]:
+                    yield name, words[4:]
+                elif words[:5] == ["&", "CHECKER", "-I", "-m", "se_harness"]:
+                    yield name, words[5:]
 
 DOCUMENTS = {
     NOTES_ROOT / "README.md": "4/10",
@@ -262,15 +296,57 @@ class ProgressiveDocumentationTests(unittest.TestCase):
         installation = self.contents[NOTES_ROOT / "harness-installation-and-upgrades.md"]
         upgrade = installation.split("## Review and apply an upgrade\n", 1)[1]
         commands = (
-            "python -m pip install --upgrade se-harness",
-            "python -m se_harness upgrade /path/to/repository",
-            "python -m se_harness upgrade /path/to/repository --apply",
-            "python -m se_harness doctor /path/to/repository",
+            '"CHECKER" -m pip install "se-harness==0.19.0"',
+            '"CHECKER" -I -m se_harness upgrade "REPO"',
+            '"CHECKER" -I -m se_harness upgrade "REPO" --apply',
+            '"CHECKER" -I -m se_harness doctor "REPO"',
         )
         positions = [upgrade.index(command) for command in commands]
         self.assertEqual(sorted(positions), positions)
         self.assertIn("does **not** silently rewrite", installation)
         self.assertIn("read-only plan", installation)
+
+    def test_refreshed_source_routes_resolve_files_and_headings(self) -> None:
+        from tests.plugin_integration.package_assembly.test_refresh_guidance import link_findings
+
+        sources = [f"docs/notes/{name}" for name in REFRESHED_GUIDES]
+        sources += ["docs/engineering/plugin-integration/README.md"]
+        files = {source: (REPOSITORY_ROOT / source).read_bytes() for source in sources}
+        for source in sources:
+            for target in re.findall(r"\[[^]]*\]\(([^)]+)\)", files[source].decode("utf-8")):
+                if re.match(r"(?:https?://|mailto:)", target):
+                    continue
+                path = (REPOSITORY_ROOT / source).parent / target.split("#", 1)[0]
+                if not target.split("#", 1)[0]:
+                    path = REPOSITORY_ROOT / source
+                if path.is_file():
+                    files[path.resolve().relative_to(REPOSITORY_ROOT.resolve()).as_posix()] = path.read_bytes()
+        self.assertEqual([], link_findings(files, sources))
+
+    def test_examples_parse_with_explicit_repository_selection(self) -> None:
+        examples = list(evaluator_examples())
+        self.assertTrue(examples)
+        for name, args in examples:
+            with self.subTest(note=name, args=args):
+                if args == ["--version"]:
+                    with self.assertRaises(SystemExit) as result:
+                        build_parser().parse_args(args)
+                    self.assertEqual(0, result.exception.code)
+                    continue
+                parsed = build_parser().parse_args(args)
+                if hasattr(parsed, "target"):
+                    self.assertIn(parsed.target, ("REPO", "PROJECT"))
+                self.assertNotIn("--authorized-by", args)
+
+    def test_current_guides_do_not_route_to_retired_policy_files(self) -> None:
+        for name in REFRESHED_GUIDES:
+            text = (NOTES_ROOT / name).read_text(encoding="utf-8")
+            with self.subTest(note=name):
+                self.assertNotRegex(text, r"docs/engineering/(?:WORKFLOW|DECISION_RIGHTS|QUALITY_GATES|TRACEABILITY|TECHNICAL_COMMUNICATION)\.md")
+                self.assertNotRegex(text, r"owner-controlled region of.*AGENTS")
+        start = (NOTES_ROOT / "getting-started.md").read_text(encoding="utf-8")
+        self.assertNotIn("](glossary.md)", start)
+        self.assertIn("](../../GLOSSARY.md)", start)
 
     def test_development_note_explains_standard_evaluator_and_candidate_planes(self) -> None:
         development = self.contents[NOTES_ROOT / "developing-se-harness.md"]

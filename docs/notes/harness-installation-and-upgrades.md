@@ -25,11 +25,15 @@ does not select a different checker or perform an upgrade.
 
 ## Install into a repository
 
-Use an external Python environment containing the selected released package:
+Use an external Python environment containing the selected released package.
+`CHECKER` is its absolute Python executable; `REPO` is the absolute repository
+path. Replace both placeholders and run from outside the checkout. In PowerShell,
+prefix a quoted executable with `&`. The `harnessctl` shorthand elsewhere means
+this same absolute executable followed by `-I -m se_harness`:
 
 ```text
-python -m se_harness init /path/to/repository
-python -m se_harness doctor /path/to/repository
+"CHECKER" -I -m se_harness init "REPO"
+"CHECKER" -I -m se_harness doctor "REPO"
 ```
 
 An existing repository keeps its editable files. The installer inserts the
@@ -46,14 +50,16 @@ copies are installed under the target's `scripts/` directory.
 
 ## Review and apply an upgrade
 
-Install the new released package in the external environment, review the
-read-only plan, apply it, then check the result:
+Select the exact authorized release first. The example below targets 0.19.0;
+an existing 0.19.0 repository needs no upgrade just because source reports
+0.20.0. Install the selected released package in the external environment,
+review the read-only plan, apply the authorized changes, then check the result:
 
 ```text
-python -m pip install --upgrade se-harness
-python -m se_harness upgrade /path/to/repository
-python -m se_harness upgrade /path/to/repository --apply
-python -m se_harness doctor /path/to/repository
+"CHECKER" -m pip install "se-harness==0.19.0"
+"CHECKER" -I -m se_harness upgrade "REPO"
+"CHECKER" -I -m se_harness upgrade "REPO" --apply
+"CHECKER" -I -m se_harness doctor "REPO"
 ```
 
 Installing the package does **not** silently rewrite a repository.
@@ -63,8 +69,8 @@ made while an older lock treated them as managed files. To take a supplied
 replacement, name that file explicitly:
 
 ```text
-python -m se_harness upgrade /path/to/repository --replace-file docs/engineering/WORKFLOW.md
-python -m se_harness upgrade /path/to/repository --apply --replace-file docs/engineering/WORKFLOW.md
+"CHECKER" -I -m se_harness upgrade "REPO" --replace-file docs/engineering/templates/WORK_ORDER.template.md
+"CHECKER" -I -m se_harness upgrade "REPO" --apply --replace-file docs/engineering/templates/WORK_ORDER.template.md
 ```
 
 Repeat `--replace-file` for each editable file to replace. An intentionally
@@ -111,6 +117,17 @@ There is no registry of every metadata field ending in `_sha256`. The format
 that consumes a checksum validates it. Git attributes are assessed by their
 effective values, wherever their rule is written.
 
+## Published release and candidate differences
+
+Released 0.19.0 supplies editable compatibility pointers to older instruction
+filenames. Current work starts at [ENGINEERING_HARNESS.md](../../ENGINEERING_HARNESS.md#read-by-task)
+and reads the selected guide under `docs/engineering/harness/`. Those pointers
+are navigation aids, not separate policy authorities.
+
+Candidate source 0.20.0 retires the old instruction seeds. That candidate behavior
+does not change a repository governed by 0.19.0. Release and explicit adoption
+must occur before the candidate's installer behavior applies there.
+
 ## Earlier migrations and retained history
 
 Schema 3 remains the lock floor; schema 4 selects plugin-provided skills. Old
@@ -130,8 +147,8 @@ customization; owner seed content and owner bytes around a managed fragment
 block are never deleted. With `--evidence-output`, the `remove` actions are
 recorded in the transaction evidence beside the updates.
 
-The first release after 0.15.0 retires the eight `scripts/` paths named under
-"Two things are installed". A repository initialized by 0.15.0 or earlier
+The first release after 0.15.0 retires the eight evaluator script copies
+that earlier installers placed under repository `scripts/`. A repository initialized by 0.15.0 or earlier
 sees eight `remove` actions in its upgrade plan, and none of them is
 reinstalled afterwards.
 

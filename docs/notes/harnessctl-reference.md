@@ -2,24 +2,36 @@
 
 <!-- Target expertise: 7/10. The score describes the knowledge expected from the reader, not the quality or complexity of the document. -->
 
-> This is a non-authoritative reference to command syntax, actors, and side
-> effects. The standard installation's `docs/engineering/WORKFLOW.md` and
-> `WORKFLOW.json` own lifecycle transitions, ordered next actions, gate IDs, and
-> decision-right IDs. This reference does not restate or override those rules.
+> This is a non-authoritative reference to command syntax, actors and side
+> effects. The selected released evaluator computes lifecycle states, allowed
+> transitions, gates and next actions. Start with
+> [ENGINEERING_HARNESS.md](../../ENGINEERING_HARNESS.md#read-by-task), then use
+> [CONTINUE.md](../engineering/harness/CONTINUE.md#continue-selected-work),
+> [decision rights](../engineering/harness/AUTHORITY.md#decision-rights) and
+> [results](../engineering/harness/RESULTS.md#report-a-lifecycle-result) when directed.
 
 ## Invocation
 
-After activating the environment that owns SE Harness:
+In evaluator examples, `harnessctl` means the absolute Python executable of
+the repository's selected released evaluator followed by `-I -m se_harness`.
+Run it from outside the checkout. `REPO` is the absolute repository path;
+replace placeholders before running a command. Source-development commands
+are identified separately and do not govern repository lifecycle state.
+
+For example, with `CHECKER` replaced by that absolute executable:
 
 ```text
-harnessctl COMMAND [arguments]
+"CHECKER" -I -m se_harness check "REPO" --artifact WO-ID --json
 ```
 
-The equivalent interpreter-scoped form is `python -m se_harness COMMAND [arguments]`. Run `harnessctl COMMAND --help` for the exact parser help installed in the selected environment.
+In PowerShell, prefix a quoted executable with `&`. Run
+`harnessctl COMMAND --help` for the exact parser help in the selected environment.
+The syntax inventory below shows parser defaults and optional inputs; always
+supply an absolute `TARGET` for repository operations from the external directory.
 
 ## Command shape
 
-Four rules hold on every subcommand (`WO-ECP-022`):
+These rules hold on every subcommand (`WO-ECP-022`):
 
 - **The repository is the positional `TARGET`**, default `.`, on every
   command that reads or writes one. `select-work-order` reads an event file,
@@ -56,12 +68,12 @@ Four rules hold on every subcommand (`WO-ECP-022`):
 | `validate` | human or agent | read-only | validate formal metadata, typed relations, lifecycle, coverage, evidence paths, and provenance |
 | `inspect` | human or agent | read-only | summarize existing validation, lifecycle queues, Explorer findings, and bounded next-step guidance without acting as a gate |
 | `dashboard` | human or agent | writes derived output only | generate the read-only Harness Explorer; under `--json` an engine refusal exits 2 and a failed generation carries the engine's standard error in `error` |
-| `doctor` | human or agent | read-only | inspect required files, managed hashes, distribution parity, owner seeds, and scripts |
+| `doctor` | human or agent | read-only | inspect installation integrity, required supplied files and evaluator identity |
 | `preflight` | coding agent or reviewer | read-only | check one work order for start or review readiness and return its reading manifest |
 | `evidence` | coding agent at a checkpoint | writes or rebinds one evidence packet header | write the work order's evidence packet with a machine header bound to the current formal snapshot, keeping the owner-authored body byte for byte |
 | `pr-body` | coding agent opening a pull request | read-only | emit the LF-terminated pull-request body: the work-order line, the restitution line when a Git-derived handoff result is retained, and the evidence list; an unknown artifact is a failed result on standard output, exit 1, as for `check` and `evidence` |
 | `check-pr` | managed GitHub CI | scope check; may rebind an in-progress handoff | check one or several approved work orders and their combined diff |
-| `check` | coding agent, first call on a work order; the managed gate | read-only, except the self-binding Git-derived handoff checkpoint, which rebinds the packet header and retains its completed result | without a checkpoint, return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result, selecting the single in_progress work order when none is named; with a checkpoint, evaluate one fixed checkpoint and emit canonical restitution |
+| `check` | human or agent selecting work or assessing a checkpoint | read-only, except the self-binding Git-derived handoff checkpoint, which rebinds the packet header and retains its completed result | without a checkpoint, return the selected artifact's complete execution context: state, governing chain, declared scope, reading manifest, next command and required decision, in one schema-2 result, selecting the single in_progress work order when none is named; with a checkpoint, evaluate one fixed checkpoint and emit canonical restitution |
 | `transition` | authorized actor; a person or agent uses the same recorded WO approval for start and completion after local checks pass (see [one execution route](delegation-class.md)) | plan is read-only; `--apply` atomically mutates only explicitly selected artifacts | validate and record accountable lifecycle decisions without implicit related-record changes |
 | `decide` | the role that holds `DR-DECISION-DISPOSE` for the blocked artifact: its owner, or for a deviation the owner of the specification it departs from | plan is read-only; `--apply` writes the decision's `[disposition]` table and one lifecycle event, and moves every raised risk the decision concerns in the same act | answer, defer, or withdraw one open decision artifact so the artifacts it blocks can move again |
 | `raise-risk` | anyone working: a reviewer, an implementer, or an agent mid-execution; no decision right is needed | writes one risk artifact in `raised`, and with `--with-decision` the open decision that blocks the threatened artifacts; dry-run is read-only | record one measured threat to governed work so that an owner answers it before the threatened stage moves |
@@ -455,7 +467,7 @@ Use `--candidate-commit COMMIT --test-command <argv...>` to test the exact final
 integration in a temporary checkout, including when the caller has local edits.
 
 For a harmless rebase, use
-`harnessctl refresh-verification . --from VREC-OLD-001 --id VREC-NEW-001`.
+`harnessctl refresh-verification REPO --from VREC-OLD-001 --id VREC-NEW-001`.
 This compares relevant Git tree entries, governing inputs, and retained evidence.
 It preserves the old ready record and writes a new ready successor. Changed
 relevant files require fresh tests; verified records cannot be refreshed.
