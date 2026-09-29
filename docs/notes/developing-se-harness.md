@@ -38,14 +38,16 @@ from AGENTS.md. The transaction and native-delivery evidence are retained under
 ## Agent skills for this checkout
 
 This repository gets its agent skills and native instruction-delivery hook
-from Verity Plane 0.2.0. Check the actual installed plugin version: the older
-0.1.0 marketplace distribution does not provide this released delivery setup.
-The prepared plugin 0.2.1 candidate also bundles the public 0.19.0 wheel.
-WO-PLG-026 retains its local Windows CLI qualification on both hosts, including
-fresh installation, update, startup and compaction. It has not replaced the
-observed public 0.1.0/0.18.0 route or the user's existing local 0.2.0 selection.
+from its installed Verity Plane 0.2.0 selection. The public marketplace now
+offers plugin 0.2.1 with the unchanged released 0.19.0 wheel, observed at
+`86d75e56e28c0c34819c0079b41dc67075f58490` on 2026-09-29. Publication does not
+replace the user's existing local plugin selection.
+WO-PLG-026 retains local Windows qualification. WO-PLG-028 retains public
+fresh-install and update package checks, startup and manual compaction on both
+hosts in its
+[confirmation evidence](../engineering/plugin-integration/evidence/WO-PLG-028/README.md).
 Use the [marketplace guide](../../release/plugin-marketplace/README.md) for
-the candidate identity and the remaining publication conditions.
+the published package identity and installation commands.
 WO-HUP-021 retains the exact package identities and local installation evidence.
 Its native rehearsal covers Windows Codex CLI startup and manual compaction,
 not Codex desktop UI or automatic threshold compaction. A clone needs its own

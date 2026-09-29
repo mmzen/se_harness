@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import os
+import hashlib
+import json
 import re
 import shlex
 import struct
@@ -117,6 +119,35 @@ class PublicOnboardingTests(unittest.TestCase):
         for text in ("external Python environment", "selected released package", "separate, explicit", "harnessctl upgrade --apply"):
             with self.subTest(text=text):
                 self.assertIn(text, self.installation)
+
+    def test_public_routes_match_the_independently_accepted_distribution(self) -> None:
+        evidence = REPOSITORY_ROOT / "docs/engineering/plugin-integration/evidence"
+        accepted = json.loads((evidence / "WO-PLG-026/package-identity.json").read_text(encoding="utf-8"))
+        public = json.loads((evidence / "WO-PLG-028/publication.json").read_text(encoding="utf-8"))
+        routes = json.loads((evidence / "WO-PLG-028/public-routes.json").read_text(encoding="utf-8"))["routes"]
+        self.assertEqual(accepted, public["identity"])
+        self.assertTrue(public["tree_matches_accepted_distribution"])
+        self.assertEqual(4, len(routes))
+        self.assertEqual({(host, kind) for host in ("codex", "claude-code") for kind in ("fresh", "update")},
+                         {(route["host"], route["kind"]) for route in routes})
+        for route in routes:
+            with self.subTest(host=route["host"], kind=route["kind"]):
+                host = "claude" if route["host"] == "claude-code" else "codex"
+                prefix = f"packages/{host}/verity-plane/"
+                inventory = {name.removeprefix(prefix): digest for name, digest in accepted["files"].items()
+                             if name.startswith(prefix)}
+                self.assertTrue(inventory)
+                digest = hashlib.sha256(json.dumps(inventory, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+                self.assertEqual("pass", route["status"])
+                self.assertEqual(public["source"], route["source"])
+                self.assertEqual(public["revision"], route["revision"])
+                self.assertEqual(accepted["plugin_version"], route["plugin_version"])
+                self.assertEqual(accepted["evaluator"]["version"], route["evaluator_version"])
+                self.assertEqual(accepted["evaluator"]["archive_sha256"], route["wheel_sha256"])
+                self.assertEqual(digest, route["content_sha256"])
+                if route["kind"] == "update":
+                    self.assertEqual("0.1.0", route["starting_version"])
+                    self.assertIn("ed68b30c88043773be929540b7b10ae537957c2d", route["starting_source"])
 
     def test_native_commands_match_the_published_git_installation_routes(self) -> None:
         expected = self.fenced_commands(self.section("Install from Git", self.marketplace).split("For an existing Git installation:", 1)[0])

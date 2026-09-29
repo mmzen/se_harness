@@ -1,0 +1,20 @@
+{
+  "preserved_preparation": [
+    "WO-PLG-026",
+    "WO-PLG-027",
+    "VREC-PLG-023"
+  ],
+  "unchanged_package": "Publication tree equals all 63 accepted distribution blobs; assembly source ce6d5fa4080e2ef0904446aa0b066d907532b63c is preserved.",
+  "proof_scripts": {
+    "public028_routes.py": "704876973d4bfcea9ce793fd937f0c511478bd64afb2c2bf585066a3551f877c",
+    "public028_sessions.py": "e4607970468fae214ab4febd8900109ba7be7a6ea068b6e4be29c2ffbae782c0",
+    "public028_route_hooks.py": "39fb4c3271ef7dc9eaa2284efb13a329ca96e8347ecacb37ea7189c038c346c2",
+    "public028_readback.py": "795d44608c9d01519b74660fe83115aae2e71680ddfc0c4c83425449cbcd9bfc",
+    "marketplace_publish021.py": "c96e77b5d351931cfa390e1392bc6ecca6c1249516377d99b9a1e0154c3e2e9b"
+  },
+  "source_baselines": {
+    "package": "c4d9036fdaab378f08fe2db68978126f66ab961e",
+    "public_confirmation_changes": "703df23c9c41d60903933106a5eeec988702a789"
+  },
+  "baseline_reason": "PR #496 already integrated the human-verified preparation; WO-PLG-028 and WO-PLG-029 retain their complete incremental changes from that merged tree."
+}

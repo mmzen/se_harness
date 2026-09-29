@@ -13,7 +13,7 @@ PLUGIN = "0.2.1"
 EVALUATOR = "0.19.0"
 WHEEL_SHA = "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8"
 RELEASE = "docs/engineering/release-0-19-0/releases/RLS-SEH-028.md"
-OBSERVATION = "docs/engineering/plugin-integration/evidence/WO-PLG-026/public-observation.json"
+OBSERVATION = "docs/engineering/plugin-integration/evidence/WO-PLG-028/publication.json"
 
 
 def selected_inputs():
@@ -50,8 +50,10 @@ def identity_findings(inputs):
     identity = inputs["observation"]["identity"]
     if not observed or observed.groups() != (identity["plugin_version"], identity["evaluator"]["version"]):
         findings.append("public claim lacks matching observation")
-    if f"prepared candidate is plugin **{PLUGIN}** with **SE Harness {EVALUATOR}**, pending publication" not in root:
-        findings.append("candidate status")
+    if inputs["observation"].get("tree_matches_accepted_distribution") is not True:
+        findings.append("public tree lacks accepted-package comparison")
+    if "pending publication" in root:
+        findings.append("stale publication status")
     return findings
 
 
@@ -99,9 +101,20 @@ class RefreshGuidanceTests(unittest.TestCase):
 
     def test_premature_public_claim_is_rejected(self):
         data = selected_inputs()
-        data["root"] = data["root"].replace("Plugin **0.1.0** bundles released **SE Harness 0.18.0**",
-                                           "Plugin **0.2.1** bundles released **SE Harness 0.19.0**")
+        # A contradictory retained observation must defeat a current claim.
+        data["observation"]["identity"]["plugin_version"] = "0.1.0"
+        data["observation"]["identity"]["evaluator"]["version"] = "0.18.0"
         self.assertIn("public claim lacks matching observation", identity_findings(data))
+
+    def test_public_claim_requires_accepted_package_comparison(self):
+        data = selected_inputs()
+        data["observation"]["tree_matches_accepted_distribution"] = False
+        self.assertIn("public tree lacks accepted-package comparison", identity_findings(data))
+
+    def test_published_guide_rejects_pending_publication_status(self):
+        data = selected_inputs()
+        data["root"] += "\nThis package is pending publication.\n"
+        self.assertIn("stale publication status", identity_findings(data))
 
     def test_source_links_resolve_in_source_context(self):
         sources = ["README.md", "docs/notes/plugin-installation-guide.md", "docs/notes/plugin-marketplace-publication.md"]

@@ -38,7 +38,7 @@ claude plugin install verity-plane@se-harness
 
 Start a new task or session, then invoke **verity-plane:setup** with your project path and a persistent data directory outside it.
 
-Observed public delivery (2026-09-28): Plugin **0.1.0** bundles released **SE Harness 0.18.0**. The prepared candidate is plugin **0.2.1** with **SE Harness 0.19.0**, pending publication. Its startup/compaction hooks deliver the selected repository's instructions; they do not enforce every tool action. See [installation and update guidance](docs/notes/plugin-installation-guide.md). Running setup installs that wheel **offline** into a private environment; it does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.
+Observed public delivery (2026-09-29): Plugin **0.2.1** bundles released **SE Harness 0.19.0**. Public fresh-install and update package checks passed on both Windows CLIs; startup and manual compaction checks passed on both hosts. Its startup/compaction hooks deliver the selected repository's instructions; they do not enforce every tool action. See [installation and update guidance](docs/notes/plugin-installation-guide.md). Running setup installs that wheel **offline** into a private environment; it does not download the harness from PyPI. Plugin installation alone does not initialize or upgrade a project. Python must include `venv` and `ensurepip`.
 
 See the [plugin setup guide](https://github.com/mmzen/se_harness/tree/plugin-marketplace#prepare-the-checker-for-a-project).
 

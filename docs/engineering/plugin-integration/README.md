@@ -9,11 +9,15 @@ records Windows native qualification on Codex and Claude Code.
 [SPEC-PLG-023](specifications/SPEC-PLG-023.md) defines this delivery and
 [VER-PLG-026](verification/VER-PLG-026.md) defines preparation acceptance.
 
-The last retained public observation remains plugin 0.1.0 with evaluator 0.18.0.
-[WO-PLG-028](work-orders/WO-PLG-028.md) waits for human-verified preparation and
-separately authorized, observed publication before confirming the public routes
-under [VER-PLG-027](verification/VER-PLG-027.md). Local checks do not establish
-public availability or complete the release delivery.
+VREC-PLG-023 verified preparation, integrated through PR #496. The separately
+authorized public commit `86d75e56e28c0c34819c0079b41dc67075f58490` now supplies
+plugin 0.2.1 with evaluator 0.19.0. [WO-PLG-028](work-orders/WO-PLG-028.md)
+retains the [publication and public-route evidence](evidence/WO-PLG-028/README.md)
+under [VER-PLG-027](verification/VER-PLG-027.md). Fresh-install and update package
+checks, startup and manual compaction passed on both hosts.
+[WO-PLG-029](work-orders/WO-PLG-029.md) covers the approved publication-test
+correction. Overall delivery remains incomplete until confirmation and the
+current documentation's separately authorized integration and readback finish.
 
 ## Replacement cleanup package
 
