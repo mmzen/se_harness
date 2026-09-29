@@ -2,7 +2,7 @@
 id = "VREC-PLG-024"
 type = "verification_record"
 title = "Verification candidate for 2 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-29"
 updated = "2026-09-29"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/plugin-integration/evidence/WO-PLG-026/comma
 evaluator_evidence_path = "docs/engineering/plugin-integration/evidence/VREC-PLG-024-evaluator.json"
 evaluator_evidence_sha256 = "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2"
 
+verified_at = "2026-09-29T16:33:26Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-PLG-028", "WO-PLG-029"]
 conforms_to = ["VER-PLG-027"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-29T16:33:26Z"
+decided_by = "assurance-owner"
+reason = "Human repository owner mmzen explicitly decided \"i verify VREC-PLG-024\" on 2026-09-29, for candidate f849eaf6c5d29172fc6fc5cd8ec64a702de33168 covering WO-PLG-028 and WO-PLG-029 under VER-PLG-027. The reviewed record and all 45 retained evidence files are unchanged. Legacy 0.19.0 assurance-owner encodes the decision right; mmzen is the human decision-maker and Codex applies it. This records candidate-phase verification; documentation integration and final public readback remain pending. No merge, new publication, profile adoption or related work-order state change is inferred."
 +++
 
 # Verification Record Candidate
