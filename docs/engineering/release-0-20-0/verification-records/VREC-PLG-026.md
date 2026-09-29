@@ -2,7 +2,7 @@
 id = "VREC-PLG-026"
 type = "verification_record"
 title = "Verification candidate for 2 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-29"
 updated = "2026-09-29"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/release-0-20-0/evidence/VREC-PLG-025-evaluat
 evaluator_evidence_path = "docs/engineering/release-0-20-0/evidence/VREC-PLG-026-evaluator.json"
 evaluator_evidence_sha256 = "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2"
 
+verified_at = "2026-09-29T20:05:54Z"
+verified_by = "assurance-owner"
 [relations]
 verifies_work_order = ["WO-PLG-031", "WO-PLG-033"]
 conforms_to = ["VER-PLG-029"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-29T20:05:54Z"
+decided_by = "assurance-owner"
+reason = "Human assurance owner mmzen explicitly decided: \"i verify VREC-PLG-026\". Reviewed ready record SHA-256 8bf130e70e72089607c7a9453bd2a542364793117b59400df210d12a7dc2d461; exact candidate 08f2e1b7a4fc9b4fd654154b914526bb7bb9c528. Covers WO-PLG-031 and WO-PLG-033 under VER-PLG-029 with 51 unchanged retained evidence files. Legacy assurance-owner encodes the actual human decision; Codex applies it. Merge and final documentation readback remain separate."
 +++
 
 # Verification Record Candidate
