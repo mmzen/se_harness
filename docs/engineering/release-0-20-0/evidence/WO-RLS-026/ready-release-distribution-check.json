@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-B",
+    "scripts/validate_release_distributions.py",
+    "--root",
+    ".",
+    "--require-record",
+    "RLS-SEH-029"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "exit_code": 0,
+  "stdout": "SE Harness release distribution validation: PASS (17 distribution-bearing records)\n",
+  "stderr": ""
+}

@@ -1,0 +1,326 @@
+{
+  "kind": "synthetic regression, not live delivery evidence",
+  "source_plan_sha256": "35e118e6d685931d8112a6e47f07519634d037313e373985d3c41dbfd2240037",
+  "source_plan_path": "docs/engineering/release-0-20-0/evidence/WO-RLS-026/delivery-plan-preparation.json",
+  "changes_to_scenario": "Only synthetic root record/wheel binding, matching evaluator surface values and test review; all five dispositions, destinations, owners, work references and next actions retained. Marketplace public/package identities remain null and observations absent.",
+  "synthetic_release_evidence": "Synthetic evaluator publication for the pending-marketplace regression; no live release or publication occurred.\n",
+  "command": [
+    "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-B",
+    "scripts/check_release_delivery.py",
+    "--plan",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\r020-delivery-scenario\\plan.json",
+    "--observations",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\r020-delivery-scenario\\observations.json",
+    "--evidence-root",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\r020-delivery-scenario",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+  "exit_code": 1,
+  "expected_exit_code": 1,
+  "result": {
+    "schema": "se-harness-delivery-result/v1",
+    "status": "incomplete",
+    "input_status": "valid",
+    "authority": "derived operational evidence; no lifecycle transition",
+    "limitation": "Assesses supplied, retained observations only. Does not independently run host tests, authenticate human reviews, or establish live public state. Grants no lifecycle or external authority.",
+    "formal_release": {
+      "record": "RLS-SYNTHETIC-001",
+      "status": "released",
+      "source": "synthetic-test-only",
+      "observed_at": "2026-09-29T17:46:41.877112+00:00",
+      "evidence": [
+        {
+          "path": "synthetic-evidence.txt",
+          "sha256": "d82037deb0d72a60ed4d389a2b98f02337fe9f7ef6b26c271f7e2a9c893db6ac"
+        }
+      ]
+    },
+    "evaluator_publication": "satisfied",
+    "observed_at": "2026-09-29T17:46:41.877112+00:00",
+    "surfaces": [
+      {
+        "id": "evaluator",
+        "disposition": "update",
+        "status": "satisfied",
+        "owner": "mmzen (accountable); Codex (operator)",
+        "next_action": "Verify the aggregate candidate, prepare and release its bound RLS, then separately authorize publication and observe public hashes.",
+        "expected": {
+          "record": "RLS-SYNTHETIC-001",
+          "version": "0.20.0",
+          "wheel_sha256": "d82037deb0d72a60ed4d389a2b98f02337fe9f7ef6b26c271f7e2a9c893db6ac",
+          "sdist_sha256": "d82037deb0d72a60ed4d389a2b98f02337fe9f7ef6b26c271f7e2a9c893db6ac"
+        },
+        "observation": {
+          "id": "evaluator",
+          "status": "pass",
+          "observed_at": "2026-09-29T17:46:41.877112+00:00",
+          "source": "https://github.com/mmzen/se_harness/releases/tag/v0.20.0",
+          "identity": {
+            "record": "RLS-SYNTHETIC-001",
+            "version": "0.20.0",
+            "wheel_sha256": "d82037deb0d72a60ed4d389a2b98f02337fe9f7ef6b26c271f7e2a9c893db6ac",
+            "sdist_sha256": "d82037deb0d72a60ed4d389a2b98f02337fe9f7ef6b26c271f7e2a9c893db6ac"
+          },
+          "evidence": {
+            "publisher": [
+              {
+                "path": "synthetic-evidence.txt",
+                "sha256": "d82037deb0d72a60ed4d389a2b98f02337fe9f7ef6b26c271f7e2a9c893db6ac"
+              }
+            ],
+            "public_install": [
+              {
+                "path": "synthetic-evidence.txt",
+                "sha256": "d82037deb0d72a60ed4d389a2b98f02337fe9f7ef6b26c271f7e2a9c893db6ac"
+              }
+            ]
+          }
+        },
+        "findings": []
+      },
+      {
+        "id": "marketplace",
+        "disposition": "update",
+        "status": "pending",
+        "owner": "mmzen (accountable); Codex (operator)",
+        "next_action": "After public wheel observation, assemble and qualify 0.2.2; obtain exact ordinary descendant publication authority, then check public fresh/update routes.",
+        "expected": {
+          "plugin_version": "0.2.2",
+          "source_commit": null,
+          "evaluator_version": "0.20.0",
+          "wheel_sha256": "d82037deb0d72a60ed4d389a2b98f02337fe9f7ef6b26c271f7e2a9c893db6ac",
+          "public_revision": null,
+          "codex_content_sha256": null,
+          "claude-code_content_sha256": null
+        },
+        "observation": null,
+        "findings": [
+          {
+            "code": "missing",
+            "location": "marketplace",
+            "message": "Surface not observed"
+          }
+        ]
+      },
+      {
+        "id": "documentation",
+        "disposition": "update",
+        "status": "pending",
+        "owner": "mmzen (accountable); Codex (operator)",
+        "next_action": "Keep current public and candidate claims distinct; reconcile availability only after public observations and read back integrated documentation.",
+        "expected": {
+          "commit": null
+        },
+        "observation": null,
+        "findings": [
+          {
+            "code": "missing",
+            "location": "documentation",
+            "message": "Surface not observed"
+          }
+        ]
+      },
+      {
+        "id": "demonstration",
+        "disposition": "update",
+        "status": "pending",
+        "owner": "mmzen (accountable); Codex (operator)",
+        "next_action": "Observe deployment provenance for the newly released governance snapshot.",
+        "expected": {
+          "governance_commit": null
+        },
+        "observation": null,
+        "findings": [
+          {
+            "code": "missing",
+            "location": "demonstration",
+            "message": "Surface not observed"
+          }
+        ]
+      },
+      {
+        "id": "release_markers",
+        "disposition": "update",
+        "status": "pending",
+        "owner": "mmzen (accountable); Codex (operator)",
+        "next_action": "After the public evaluator observation cycle, obtain exact latest/last authorization, apply and read back targets.",
+        "expected": {
+          "latest": "v0.20.0",
+          "last": null
+        },
+        "observation": null,
+        "findings": [
+          {
+            "code": "missing",
+            "location": "release_markers",
+            "message": "Surface not observed"
+          }
+        ]
+      }
+    ],
+    "findings": [],
+    "plan_sha256": "d98793fb97a27056d58cd26a86f3c62ef093452d71949ace54554741757d13a4"
+  },
+  "raw_files": {
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\r020-delivery-scenario\\observations.json": "25edab0c87f546b77256e6e8c2903fcb7d32ac02add0fbd6d4a544177612e8ba",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\r020-delivery-scenario\\plan.json": "d98793fb97a27056d58cd26a86f3c62ef093452d71949ace54554741757d13a4",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\r020-delivery-scenario\\stderr.txt": "5e1b70ce71db0c31f6ab722b625b4acb333c7c0dd6bf28a85dfed67886ced2e7",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\r020-delivery-scenario\\stdout.json": "5a39bec1b043e69dae6157adfd423c5523ddccfcec1d53e45036c508d006e1bf",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\r020-delivery-scenario\\synthetic-evidence.txt": "d82037deb0d72a60ed4d389a2b98f02337fe9f7ef6b26c271f7e2a9c893db6ac"
+  },
+  "scenario_inputs": {
+    "plan": {
+      "schema": "se-harness-delivery-plan/v1",
+      "release": {
+        "contract": "REL-SEH-031",
+        "record": "RLS-SYNTHETIC-001",
+        "version": "0.20.0",
+        "wheel_sha256": "d82037deb0d72a60ed4d389a2b98f02337fe9f7ef6b26c271f7e2a9c893db6ac"
+      },
+      "review": {
+        "by": "Synthetic test operator",
+        "reference": "Scenario derived from approved REL-SEH-031 scope; no live decision or publication claim"
+      },
+      "surfaces": [
+        {
+          "id": "evaluator",
+          "owner": "mmzen (accountable); Codex (operator)",
+          "destination": "https://github.com/mmzen/se_harness/releases/tag/v0.20.0",
+          "work_reference": "WO-RLS-026; subsequent exact released RLS",
+          "next_action": "Verify the aggregate candidate, prepare and release its bound RLS, then separately authorize publication and observe public hashes.",
+          "disposition": "update",
+          "expected": {
+            "record": "RLS-SYNTHETIC-001",
+            "version": "0.20.0",
+            "wheel_sha256": "d82037deb0d72a60ed4d389a2b98f02337fe9f7ef6b26c271f7e2a9c893db6ac",
+            "sdist_sha256": "d82037deb0d72a60ed4d389a2b98f02337fe9f7ef6b26c271f7e2a9c893db6ac"
+          },
+          "required_observations": [
+            "publisher",
+            "public_install"
+          ]
+        },
+        {
+          "id": "marketplace",
+          "owner": "mmzen (accountable); Codex (operator)",
+          "destination": "https://github.com/mmzen/se_harness#plugin-marketplace",
+          "work_reference": "WO-PLG-030; WO-PLG-031",
+          "next_action": "After public wheel observation, assemble and qualify 0.2.2; obtain exact ordinary descendant publication authority, then check public fresh/update routes.",
+          "disposition": "update",
+          "expected": {
+            "plugin_version": "0.2.2",
+            "source_commit": null,
+            "evaluator_version": "0.20.0",
+            "wheel_sha256": "d82037deb0d72a60ed4d389a2b98f02337fe9f7ef6b26c271f7e2a9c893db6ac",
+            "public_revision": null,
+            "codex_content_sha256": null,
+            "claude-code_content_sha256": null
+          },
+          "required_observations": [
+            "assembly",
+            "qualification",
+            "public_ref"
+          ],
+          "hosts": [
+            "codex",
+            "claude-code"
+          ]
+        },
+        {
+          "id": "documentation",
+          "owner": "mmzen (accountable); Codex (operator)",
+          "destination": "https://github.com/mmzen/se_harness/tree/main",
+          "work_reference": "WO-RLS-026; WO-PLG-031",
+          "next_action": "Keep current public and candidate claims distinct; reconcile availability only after public observations and read back integrated documentation.",
+          "disposition": "update",
+          "expected": {
+            "commit": null
+          },
+          "required_observations": [
+            "claims_review",
+            "links"
+          ]
+        },
+        {
+          "id": "demonstration",
+          "owner": "mmzen (accountable); Codex (operator)",
+          "destination": "https://mmzen.github.io/se_harness/",
+          "work_reference": "REL-SEH-031 publisher; WO-PLG-031",
+          "next_action": "Observe deployment provenance for the newly released governance snapshot.",
+          "disposition": "update",
+          "expected": {
+            "governance_commit": null
+          },
+          "required_observations": [
+            "deployment"
+          ]
+        },
+        {
+          "id": "release_markers",
+          "owner": "mmzen (accountable); Codex (operator)",
+          "destination": "https://github.com/mmzen/se_harness",
+          "work_reference": "REL-SEH-031; separate mmzen marker decision; WO-PLG-031",
+          "next_action": "After the public evaluator observation cycle, obtain exact latest/last authorization, apply and read back targets.",
+          "disposition": "update",
+          "expected": {
+            "latest": "v0.20.0",
+            "last": null
+          },
+          "required_observations": [
+            "authorization",
+            "readback"
+          ]
+        }
+      ],
+      "synthetic_test_only": true
+    },
+    "observations": {
+      "schema": "se-harness-delivery-observations/v1",
+      "synthetic_test_only": true,
+      "plan_sha256": "d98793fb97a27056d58cd26a86f3c62ef093452d71949ace54554741757d13a4",
+      "observed_at": "2026-09-29T17:46:41.877112+00:00",
+      "release": {
+        "record": "RLS-SYNTHETIC-001",
+        "status": "released",
+        "source": "synthetic-test-only",
+        "observed_at": "2026-09-29T17:46:41.877112+00:00",
+        "evidence": [
+          {
+            "path": "synthetic-evidence.txt",
+            "sha256": "d82037deb0d72a60ed4d389a2b98f02337fe9f7ef6b26c271f7e2a9c893db6ac"
+          }
+        ]
+      },
+      "surfaces": [
+        {
+          "id": "evaluator",
+          "status": "pass",
+          "observed_at": "2026-09-29T17:46:41.877112+00:00",
+          "source": "https://github.com/mmzen/se_harness/releases/tag/v0.20.0",
+          "identity": {
+            "record": "RLS-SYNTHETIC-001",
+            "version": "0.20.0",
+            "wheel_sha256": "d82037deb0d72a60ed4d389a2b98f02337fe9f7ef6b26c271f7e2a9c893db6ac",
+            "sdist_sha256": "d82037deb0d72a60ed4d389a2b98f02337fe9f7ef6b26c271f7e2a9c893db6ac"
+          },
+          "evidence": {
+            "publisher": [
+              {
+                "path": "synthetic-evidence.txt",
+                "sha256": "d82037deb0d72a60ed4d389a2b98f02337fe9f7ef6b26c271f7e2a9c893db6ac"
+              }
+            ],
+            "public_install": [
+              {
+                "path": "synthetic-evidence.txt",
+                "sha256": "d82037deb0d72a60ed4d389a2b98f02337fe9f7ef6b26c271f7e2a9c893db6ac"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

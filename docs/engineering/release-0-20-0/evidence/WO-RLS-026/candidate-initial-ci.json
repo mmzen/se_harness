@@ -1,0 +1,173 @@
+{
+  "head": "c11d084c2a1bcca48d8c747a495aec5f2c728761",
+  "url": "https://github.com/mmzen/se_harness/actions/runs/36607207100",
+  "event": "pull_request",
+  "conclusion": "success",
+  "observed_at": "2026-09-29T17:52:27.142847+00:00",
+  "jobs": [
+    {
+      "name": "Candidate source evidence",
+      "conclusion": "success"
+    },
+    {
+      "name": "Candidate package evidence",
+      "conclusion": "success"
+    },
+    {
+      "name": "Upgrade rehearsal (Windows)",
+      "conclusion": "success"
+    },
+    {
+      "name": "Upgrade rehearsal (Linux)",
+      "conclusion": "success"
+    },
+    {
+      "name": "Build deterministic integration package",
+      "conclusion": "success"
+    },
+    {
+      "name": "Verify integration package (Windows)",
+      "conclusion": "success"
+    },
+    {
+      "name": "Verify integration package (Linux)",
+      "conclusion": "success"
+    },
+    {
+      "name": "Retain verified integration package",
+      "conclusion": "success"
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "integration-package-staging-96ba693353468ef07698adfe0689ef71449b9d12",
+      "id": 11052122262,
+      "expires_at": "2026-09-30T17:50:16Z",
+      "expired": false
+    },
+    {
+      "name": "candidate-wheel-non-promotable-96ba693353468ef07698adfe0689ef71449b9d12",
+      "id": 11051992077,
+      "expires_at": "2026-09-30T17:46:36Z",
+      "expired": false
+    },
+    {
+      "name": "upgrade-rehearsal-Linux",
+      "id": 11051732494,
+      "expires_at": "2026-10-13T17:47:56Z",
+      "expired": false
+    },
+    {
+      "name": "candidate-source-raw",
+      "id": 11051692885,
+      "expires_at": "2026-10-13T17:46:30Z",
+      "expired": false
+    },
+    {
+      "name": "upgrade-rehearsal-Windows",
+      "id": 11051533737,
+      "expires_at": "2026-10-13T17:49:12Z",
+      "expired": false
+    },
+    {
+      "name": "complete-candidate-qualification",
+      "id": 11051398417,
+      "expires_at": "2026-10-13T17:46:37Z",
+      "expired": false
+    },
+    {
+      "name": "se-harness-integration-96ba693353468ef07698adfe0689ef71449b9d12",
+      "id": 11051359339,
+      "expires_at": "2026-10-02T17:51:36Z",
+      "expired": false
+    },
+    {
+      "name": "candidate-package-qualification-0.19.0",
+      "id": 11050768952,
+      "expires_at": "2026-10-13T17:47:05Z",
+      "expired": false
+    }
+  ],
+  "download_command": [
+    "gh",
+    "run",
+    "download",
+    "36607207100",
+    "--repo",
+    "mmzen/se_harness",
+    "--name",
+    "ARTIFACT_NAME"
+  ],
+  "downloaded_files": [
+    {
+      "path": "candidate-package-qualification-0.19.0/candidate-package-qualification.json",
+      "bytes": 1748,
+      "sha256": "b283be31ac5afc4c5ff8877ac0d70d639ddeb4f336f78ad62a4acb9734212868"
+    },
+    {
+      "path": "candidate-source-raw/output.log",
+      "bytes": 629,
+      "sha256": "4f5b5d61d36c47f952e530c343c82216b7280459726ead3d466161fc27b41ea2"
+    },
+    {
+      "path": "candidate-source-raw/summary.json",
+      "bytes": 1794,
+      "sha256": "7d989c21d08dc6c274046bb963f41b2791434250a81a8e1faa0167bc35bb9d81"
+    },
+    {
+      "path": "complete-candidate-qualification/complete-candidate.json",
+      "bytes": 1519,
+      "sha256": "0aa7e104f568b87a979ca506acb5a18f70fac6fc899583a8344c612d3a5f77f2"
+    },
+    {
+      "path": "upgrade-rehearsal-Windows/rehearsal-result-1/upgrade-rehearsal-result.json",
+      "bytes": 3884,
+      "sha256": "cc284c46fc78c08145c1f4eb3bb1639e9d52311625d65c4d68cf8452f9227ea9"
+    },
+    {
+      "path": "upgrade-rehearsal-Windows/rehearsal-result-1/upgrade-rehearsal-timing.json",
+      "bytes": 4972,
+      "sha256": "8a024afffaae355082abe149810f104bd6a74428756064b1486805135e35df1d"
+    },
+    {
+      "path": "upgrade-rehearsal-Windows/rehearsal-result-2/upgrade-rehearsal-result.json",
+      "bytes": 3884,
+      "sha256": "cc284c46fc78c08145c1f4eb3bb1639e9d52311625d65c4d68cf8452f9227ea9"
+    },
+    {
+      "path": "upgrade-rehearsal-Windows/rehearsal-result-2/upgrade-rehearsal-timing.json",
+      "bytes": 4976,
+      "sha256": "3664a1770fadaad64575e2cf343624f06095af9bb1a3cff11ff03b41903a5619"
+    },
+    {
+      "path": "upgrade-rehearsal-Windows/windows-check-evidence/output.log",
+      "bytes": 113,
+      "sha256": "bd825c16a923bb505706810cb96eedfc8d0f01a7932c190b748dee2406900671"
+    },
+    {
+      "path": "upgrade-rehearsal-Windows/windows-check-evidence/summary.json",
+      "bytes": 1365,
+      "sha256": "c0fd16684a9543368d02178a877b62ee38c2ce048ffe7082c8a840e914d55ce9"
+    },
+    {
+      "path": "upgrade-rehearsal-Linux/rehearsal-result-1/upgrade-rehearsal-result.json",
+      "bytes": 3878,
+      "sha256": "1d386692118db36d6d5a1f58303c630ab555465a83110169128687fade768d44"
+    },
+    {
+      "path": "upgrade-rehearsal-Linux/rehearsal-result-1/upgrade-rehearsal-timing.json",
+      "bytes": 4961,
+      "sha256": "d9341d9767df162d59cd33244c74088ed32cbc7fe5e80ec27eb114e1430d378c"
+    },
+    {
+      "path": "upgrade-rehearsal-Linux/rehearsal-result-2/upgrade-rehearsal-result.json",
+      "bytes": 3878,
+      "sha256": "1d386692118db36d6d5a1f58303c630ab555465a83110169128687fade768d44"
+    },
+    {
+      "path": "upgrade-rehearsal-Linux/rehearsal-result-2/upgrade-rehearsal-timing.json",
+      "bytes": 4961,
+      "sha256": "e34a1e249ce4d470d3cc21377c5592b57678ec3f679973a55633033f6b2ab9b4"
+    }
+  ]
+}

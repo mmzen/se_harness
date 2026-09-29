@@ -7,6 +7,10 @@ Windows CLIs. Startup and manual compaction also passed on both hosts; see the
 [public confirmation evidence](../engineering/plugin-integration/evidence/WO-PLG-028/README.md).
 This guide does not upgrade a project's selected harness.
 
+The [next release package](../engineering/release-0-20-0/README.md) prepares
+evaluator 0.20.0 and plugin 0.2.2. Those source inputs are not a public
+installation result. Continue to use the observed public identities above.
+
 ## Select the distribution
 
 For the currently published tree, follow its
@@ -16,9 +20,10 @@ For candidate qualification, maintainers use the
 to produce an external directory with both complete host packages. Do not install
 the incomplete host folders directly from development source.
 
-The [assembly README](../../release/plugin-marketplace/README.md) is rendered at
-the distribution root. Its package links resolve there, not in the source tree.
-Check `PACKAGE-IDENTITY.json`: plugin 0.2.1, evaluator 0.19.0, the accepted source
+The [assembly README](../../release/plugin-marketplace/README.md) now targets the
+0.2.2 candidate. Its package links resolve in the assembled distribution.
+For the currently observed public tree, check `PACKAGE-IDENTITY.json` for
+plugin 0.2.1, evaluator 0.19.0, the accepted source
 commit and wheel SHA-256
 `43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8`.
 

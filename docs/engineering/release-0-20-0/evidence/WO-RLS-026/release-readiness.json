@@ -1,0 +1,217 @@
+[
+  {
+    "command": [
+      "check",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "--artifact",
+      "RLS-SEH-029",
+      "--json"
+    ],
+    "exit_code": 0,
+    "result_sha256": "e37bdcb6ae0118f271e7cd14a86ce7fb3518caccf112cf70746461893c235101",
+    "state": {
+      "before": [
+        {
+          "id": "RLS-SEH-029",
+          "status": "ready"
+        }
+      ],
+      "after": [
+        {
+          "id": "RLS-SEH-029",
+          "status": "ready"
+        }
+      ]
+    },
+    "compliance": {
+      "checkpoint": "pre-action",
+      "workflow_rule_id": "WFL-RLS-DECIDE",
+      "procedure_id": "PROC-RLS-DECIDE",
+      "status": "not_assessable",
+      "gates": []
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Projected release candidate RLS-SEH-029."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "RLS-SEH-029 is ready; included VRECs and work orders were not changed."
+      ],
+      "decision_required": {
+        "decision_right": "DR-RLS-DECIDE",
+        "role": "release-owner",
+        "artifact": "RLS-SEH-029",
+        "decision": "whether the exact candidate is authorized for release",
+        "outcomes": [
+          "released",
+          "reject"
+        ]
+      },
+      "next": {
+        "procedure_id": "PROC-RLS-DECIDE",
+        "step_id": "STEP-RLS-DECIDE",
+        "action": "whether the exact candidate is authorized for release"
+      },
+      "command_or_response": {
+        "kind": "response",
+        "value": "I authorize release record RLS-SEH-029."
+      },
+      "alternatives": [
+        "Use complete alternative procedure PROC-RLS-REJECT."
+      ]
+    }
+  },
+  {
+    "command": [
+      "check",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "--artifact",
+      "RLS-SEH-029",
+      "--checkpoint",
+      "transition",
+      "--target",
+      "released",
+      "--json"
+    ],
+    "exit_code": 0,
+    "result_sha256": "9757942033b5d2c967e7ca6c19c3b8b71ce78058f59d49168b3510db516c95d3",
+    "state": {
+      "before": [
+        {
+          "id": "RLS-SEH-029",
+          "status": "ready"
+        }
+      ],
+      "after": [
+        {
+          "id": "RLS-SEH-029",
+          "status": "ready"
+        }
+      ]
+    },
+    "compliance": {
+      "checkpoint": "transition",
+      "workflow_rule_id": "WFL-RLS-DECIDE",
+      "procedure_id": "PROC-RLS-DECIDE",
+      "status": "pass",
+      "gates": [
+        {
+          "id": "QG-G5-RELEASE-DECISION",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGP-G5D-STATUS",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "RLS-SEH-029"
+                }
+              ],
+              "message": "RLS-SEH-029 status is ready."
+            },
+            {
+              "id": "QGP-G5D-GRAPH",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "formal-graph:RLS-SEH-029"
+                }
+              ],
+              "message": "The selected formal graph is valid."
+            },
+            {
+              "id": "QGP-G5D-INTEGRITY",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "repository-integrity:transition"
+                }
+              ],
+              "message": "No repository-integrity blocker prevents selected evaluation."
+            },
+            {
+              "id": "QGP-G5D-DECISION",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "decision-register:RLS-SEH-029"
+                }
+              ],
+              "message": "No open decision blocks RLS-SEH-029."
+            }
+          ]
+        },
+        {
+          "id": "QG-STRUCTURAL",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGS-EDGE",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "RLS-SEH-029"
+                }
+              ],
+              "message": "ready -> released is a declared lifecycle edge for RLS-SEH-029."
+            },
+            {
+              "id": "QGS-VERIFIED-INCLUSION",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "RLS-SEH-029"
+                }
+              ],
+              "message": "Every verification record RLS-SEH-029 includes is verified."
+            }
+          ]
+        }
+      ],
+      "formal_snapshot_sha256": "f33f3a6fe50d676a6aceb7095f50b6efc89ad1d14d0fc8af9cd8a43eba920dad",
+      "change_set_source": "arguments"
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Evaluated transition compliance for RLS-SEH-029."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "RLS-SEH-029 is ready."
+      ],
+      "decision_required": {
+        "decision_right": "DR-RLS-DECIDE",
+        "role": "release-owner",
+        "artifact": "RLS-SEH-029",
+        "decision": "whether the exact candidate is authorized for release",
+        "outcomes": [
+          "released",
+          "reject"
+        ]
+      },
+      "next": {
+        "procedure_id": "PROC-RLS-DECIDE",
+        "step_id": "STEP-RLS-DECIDE",
+        "action": "whether the exact candidate is authorized for release"
+      },
+      "command_or_response": {
+        "kind": "response",
+        "value": "I authorize release record RLS-SEH-029."
+      },
+      "alternatives": [
+        "Use complete alternative procedure PROC-RLS-REJECT."
+      ]
+    }
+  }
+]

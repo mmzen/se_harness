@@ -1,0 +1,76 @@
+[
+  {
+    "label": "r020-vrec-context",
+    "exit": 0,
+    "args": [
+      "check",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "--artifact",
+      "VREC-SEH-029",
+      "--json"
+    ],
+    "result_sha256": "8b7588bba3f288e9b6e5881b8b64c7f08058dea25680e36fe5465db9424f7851",
+    "compliance": "not_assessable",
+    "state": {
+      "before": [
+        {
+          "id": "VREC-SEH-029",
+          "status": "ready"
+        }
+      ],
+      "after": [
+        {
+          "id": "VREC-SEH-029",
+          "status": "ready"
+        }
+      ]
+    }
+  },
+  {
+    "label": "r020-vrec-decision-readiness",
+    "exit": 0,
+    "args": [
+      "check",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "--artifact",
+      "VREC-SEH-029",
+      "--checkpoint",
+      "transition",
+      "--target",
+      "verified",
+      "--json"
+    ],
+    "result_sha256": "3cfdaa8984771d72c51fabb759b1fdb733f6dcf056078d91d26dcf0f0be150b2",
+    "compliance": "pass",
+    "state": {
+      "before": [
+        {
+          "id": "VREC-SEH-029",
+          "status": "ready"
+        }
+      ],
+      "after": [
+        {
+          "id": "VREC-SEH-029",
+          "status": "ready"
+        }
+      ]
+    }
+  },
+  {
+    "label": "r020-governance-pr-check",
+    "exit": 0,
+    "args": [
+      "check-pr",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "--event",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\r020-pr-event.json",
+      "--from-git",
+      "ff2b5694f5f74743cfc305ed563f01d165f2fe91",
+      "--json"
+    ],
+    "result_sha256": null,
+    "compliance": null,
+    "state": null
+  }
+]

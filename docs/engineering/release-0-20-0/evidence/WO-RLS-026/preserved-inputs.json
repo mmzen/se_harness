@@ -1,0 +1,50 @@
+{
+  "protected_files": {
+    "AGENTS.md": "c69db32976ae152095d167e5eca8aad56fc731b7111ef11bfe9e13781128ecf6",
+    "ENGINEERING_HARNESS.md": "0164388b881c968f07b42a2b6125b0f7d3f52a04421b5c8acbf698135eec76bb",
+    ".engineering-harness.lock": "27395da1d0b4c6d0b77437f3ba6f25c5a0c1cb9ce720b889cae4e9803def3d20",
+    "docs/engineering/OPERATING_CARD.md": "f33ec9e96702ad63f5cb816bc182398fdb58fd2a55436a29a306972692faccb7",
+    "docs/engineering/DECISION_RIGHTS.md": "f291428b93bf7165c293964be340f18935f06c06c2f981acc593d6cebd5fd95a",
+    "docs/engineering/QUALITY_GATES.md": "647941d3301caa0aeee58afc94415c345dfaa2072f85d37e6744fa5915e216b5",
+    "docs/engineering/WORKFLOW.md": "d9949e28d281260bd7d7aa9538dd239ea60fb18b5b0391cda2fdbab39ad7b1b3",
+    "docs/engineering/TRACEABILITY.md": "26e43956215d49eb74d2f56d361c76c55984b2b98c84daf995d4faf5ded64a09",
+    "docs/engineering/TECHNICAL_COMMUNICATION.md": "e8ceafc9969e1710ecaf3fd791fb9046606765bc3a4c48eed21769c6ecc2e049"
+  },
+  "unchanged_after_edits": true,
+  "assembly_plan_unchanged": true,
+  "shared_paths": {
+    "LICENSE": "LICENSE",
+    "scripts/setup.py": "plugins/verity-plane/common/scripts/setup.py",
+    "skills/change/SKILL.md": "plugins/verity-plane/common/skills/change/SKILL.md",
+    "skills/change/references/artifacts.md": "plugins/verity-plane/common/skills/change/references/artifacts.md",
+    "skills/change/references/authority.md": "plugins/verity-plane/common/skills/change/references/authority.md",
+    "skills/change/references/work-orders.md": "plugins/verity-plane/common/skills/change/references/work-orders.md",
+    "skills/evidence/SKILL.md": "plugins/verity-plane/common/skills/evidence/SKILL.md",
+    "skills/evidence/references/external-actions.md": "plugins/verity-plane/common/skills/evidence/references/external-actions.md",
+    "skills/evidence/references/records.md": "plugins/verity-plane/common/skills/evidence/references/records.md",
+    "skills/harness-operator-brief/SKILL.md": "plugins/verity-plane/common/skills/harness-operator-brief/SKILL.md",
+    "skills/harness-operator-brief/agents/openai.yaml": "plugins/verity-plane/common/skills/harness-operator-brief/agents/openai.yaml",
+    "skills/harness-operator-brief/scripts/check_brief.py": "plugins/verity-plane/common/skills/harness-operator-brief/scripts/check_brief.py",
+    "skills/harness-operator-brief/skill-contract.json": "plugins/verity-plane/common/skills/harness-operator-brief/skill-contract.json",
+    "skills/harness-orient/SKILL.md": "plugins/verity-plane/common/skills/harness-orient/SKILL.md",
+    "skills/harness-orient/scripts/orient.py": "plugins/verity-plane/common/skills/harness-orient/scripts/orient.py",
+    "skills/harness-orient/skill-contract.json": "plugins/verity-plane/common/skills/harness-orient/skill-contract.json",
+    "skills/setup/SKILL.md": "plugins/verity-plane/common/skills/setup/SKILL.md",
+    "skills/setup/references/environment.md": "plugins/verity-plane/common/skills/setup/references/environment.md",
+    "skills/setup/references/maintenance.md": "plugins/verity-plane/common/skills/setup/references/maintenance.md",
+    "skills/setup/references/repository.md": "plugins/verity-plane/common/skills/setup/references/repository.md",
+    "scripts/inject_instructions.py": "plugins/verity-plane/common/scripts/inject_instructions.py"
+  },
+  "host_paths": {
+    "codex": {
+      ".codex-plugin/plugin.json": "plugins/verity-plane/codex/.codex-plugin/plugin.json",
+      "README.md": "plugins/verity-plane/codex/README.md",
+      "hooks/hooks.json": "plugins/verity-plane/codex/hooks/hooks.json"
+    },
+    "claude": {
+      ".claude-plugin/plugin.json": "plugins/verity-plane/claude-code/.claude-plugin/plugin.json",
+      "README.md": "plugins/verity-plane/claude-code/README.md",
+      "hooks/hooks.json": "plugins/verity-plane/claude-code/hooks/hooks.json"
+    }
+  }
+}

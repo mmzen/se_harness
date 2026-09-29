@@ -1,0 +1,105 @@
+{
+  "schema": "se-harness-delivery-plan/v1",
+  "release": {
+    "contract": "REL-SEH-031",
+    "record": "RLS-SEH-029",
+    "version": "0.20.0",
+    "wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0"
+  },
+  "review": {
+    "by": "mmzen",
+    "reference": "REL-SEH-031 approval lifecycle event, 2026-09-29; seven-artifact review and user decision I approve"
+  },
+  "surfaces": [
+    {
+      "id": "evaluator",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness/releases/tag/v0.20.0",
+      "work_reference": "WO-RLS-026; subsequent exact released RLS",
+      "next_action": "Obtain the exact RLS release decision after the bound-record replay; then merge under separate authority, authorize publication and observe public hashes.",
+      "disposition": "update",
+      "expected": {
+        "record": "RLS-SEH-029",
+        "version": "0.20.0",
+        "wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+        "sdist_sha256": "5b6784aeabdf72e0e6b43a7a2bc81244c7a9da6415cf39fbc39f440ec57d426c"
+      },
+      "required_observations": [
+        "publisher",
+        "public_install"
+      ]
+    },
+    {
+      "id": "marketplace",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness#plugin-marketplace",
+      "work_reference": "WO-PLG-030; WO-PLG-031",
+      "next_action": "After public wheel observation, assemble and qualify 0.2.2; obtain exact ordinary descendant publication authority, then check public fresh/update routes.",
+      "disposition": "update",
+      "expected": {
+        "plugin_version": "0.2.2",
+        "source_commit": null,
+        "evaluator_version": "0.20.0",
+        "wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+        "public_revision": null,
+        "codex_content_sha256": null,
+        "claude-code_content_sha256": null
+      },
+      "required_observations": [
+        "assembly",
+        "qualification",
+        "public_ref"
+      ],
+      "hosts": [
+        "codex",
+        "claude-code"
+      ]
+    },
+    {
+      "id": "documentation",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness/tree/main",
+      "work_reference": "WO-RLS-026; WO-PLG-031",
+      "next_action": "Keep current public and candidate claims distinct; reconcile availability only after public observations and read back integrated documentation.",
+      "disposition": "update",
+      "expected": {
+        "commit": null
+      },
+      "required_observations": [
+        "claims_review",
+        "links"
+      ]
+    },
+    {
+      "id": "demonstration",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://mmzen.github.io/se_harness/",
+      "work_reference": "REL-SEH-031 publisher; WO-PLG-031",
+      "next_action": "Observe deployment provenance for the newly released governance snapshot.",
+      "disposition": "update",
+      "expected": {
+        "governance_commit": null
+      },
+      "required_observations": [
+        "deployment"
+      ]
+    },
+    {
+      "id": "release_markers",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness",
+      "work_reference": "REL-SEH-031; separate mmzen marker decision; WO-PLG-031",
+      "next_action": "After the public evaluator observation cycle, obtain exact latest/last authorization, apply and read back targets.",
+      "disposition": "update",
+      "expected": {
+        "latest": "v0.20.0",
+        "last": "7253d13b212ad6f7df670021290fea32e81d66de"
+      },
+      "required_observations": [
+        "authorization",
+        "readback"
+      ]
+    }
+  ],
+  "binding_note": "Codex derived the allocated ready record and final build hashes under WO-RLS-026. Original human scope/dispositions remain as approved; the exact RLS release decision remains pending. Future public identities remain null. This version preserves delivery-plan-preparation.json unchanged."
+}

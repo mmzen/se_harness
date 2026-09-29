@@ -1,0 +1,87 @@
+{
+  "head": "7253d13b212ad6f7df670021290fea32e81d66de",
+  "url": "https://github.com/mmzen/se_harness/actions/runs/36608246589",
+  "event": "workflow_dispatch",
+  "conclusion": "success",
+  "observed_at": "2026-09-29T17:58:15.332854+00:00",
+  "jobs": [
+    {
+      "name": "Select release rehearsals",
+      "conclusion": "success"
+    },
+    {
+      "name": "Rehearse the qualification of this candidate / Qualify and replay (candidate)",
+      "conclusion": "success"
+    },
+    {
+      "name": "Rehearse the qualification of the release record / Qualify and replay (release-record)",
+      "conclusion": "success"
+    },
+    {
+      "name": "Publication rehearsal",
+      "conclusion": "success"
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "qualification-release-record-RLS-SEH-028",
+      "id": 11052870137,
+      "expires_at": "2026-10-13T17:57:23Z",
+      "expired": false
+    },
+    {
+      "name": "release-bundle-RLS-SEH-028",
+      "id": 11052215732,
+      "expires_at": "2026-10-01T17:57:25Z",
+      "expired": false
+    },
+    {
+      "name": "qualification-candidate-7253d13b212ad6f7df670021290fea32e81d66de",
+      "id": 11052162931,
+      "expires_at": "2026-10-13T17:55:17Z",
+      "expired": false
+    }
+  ],
+  "download_command": [
+    "gh",
+    "run",
+    "download",
+    "36608246589",
+    "--repo",
+    "mmzen/se_harness",
+    "--name",
+    "ARTIFACT_NAME"
+  ],
+  "downloaded_files": [
+    {
+      "path": "qualification-candidate-7253d13b212ad6f7df670021290fea32e81d66de/release-build-replay.json",
+      "bytes": 7097,
+      "sha256": "f501bca95ea18b109f3a26cf75301177226e5d2cc187afb7610ff6842db8a914"
+    },
+    {
+      "path": "qualification-release-record-RLS-SEH-028/complete-candidate-qualification.json",
+      "bytes": 1519,
+      "sha256": "6f7bf5d5e28970e5362b46523d9656e489b001b5c2fc8e5967387379538c572c"
+    },
+    {
+      "path": "qualification-release-record-RLS-SEH-028/qualification.json",
+      "bytes": 446,
+      "sha256": "75d3c21a8311a8270edf31bd47ec913c2734a57d447eb323a13a3bc54389b654"
+    },
+    {
+      "path": "qualification-release-record-RLS-SEH-028/release-build-replay.json",
+      "bytes": 7256,
+      "sha256": "c1b751cd2c2aefd109377fa187d827c93d944689fa6df7c1bad61aa0bc94f361"
+    },
+    {
+      "path": "qualification-release-record-RLS-SEH-028/release-test-evidence/output.log",
+      "bytes": 1644,
+      "sha256": "5ea4d606e35886d35b937d8568d910851d1cb78fe390f12709222f952ef533c7"
+    },
+    {
+      "path": "qualification-release-record-RLS-SEH-028/release-test-evidence/summary.json",
+      "bytes": 2817,
+      "sha256": "1aba8dee6b269e9070c347f3a9bf2989e17d0cc5b3eede323b8d20cfc4da4f64"
+    }
+  ]
+}

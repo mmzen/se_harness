@@ -1,0 +1,54 @@
+{
+  "purpose": "Reviewed draft inputs; no human decision or approval is recorded.",
+  "branch": "work/release-0-20-0",
+  "baseline": "ff2b5694f5f74743cfc305ed563f01d165f2fe91",
+  "evaluator": "0.19.0",
+  "proposed_evaluator_release": "0.20.0",
+  "proposed_plugin_version": "0.2.2",
+  "artifacts": [
+    {
+      "id": "REL-SEH-031",
+      "path": "docs/engineering/release-0-20-0/release/REL-SEH-031.md",
+      "sha256": "ea50a1e5291d48a466adcd608ef0d39e1c091ef8e341621628281a6f9ca19326",
+      "target": "approved"
+    },
+    {
+      "id": "VER-PLG-028",
+      "path": "docs/engineering/release-0-20-0/verification/VER-PLG-028.md",
+      "sha256": "3d3a6dc9fb7afbeec88795a7a5078c28736d6f61fc44a281393694bcf8e365cf",
+      "target": "approved"
+    },
+    {
+      "id": "VER-PLG-029",
+      "path": "docs/engineering/release-0-20-0/verification/VER-PLG-029.md",
+      "sha256": "470ee9fe58336c8705bf0516ea953a9b18ece20b090034bd82ed23d0f0026086",
+      "target": "approved"
+    },
+    {
+      "id": "VER-RLS-026",
+      "path": "docs/engineering/release-0-20-0/verification/VER-RLS-026.md",
+      "sha256": "f38d07f7382aa06e6fcca7ed90c8eac45b5b5a169472aee56efffb8a478d7296",
+      "target": "approved"
+    },
+    {
+      "id": "WO-PLG-030",
+      "path": "docs/engineering/release-0-20-0/work-orders/WO-PLG-030.md",
+      "sha256": "50ecd19f44ad8a9d2fbf874a19cc960cc757cb07d05bf2ba4c389f064af32336",
+      "target": "approved"
+    },
+    {
+      "id": "WO-PLG-031",
+      "path": "docs/engineering/release-0-20-0/work-orders/WO-PLG-031.md",
+      "sha256": "f86b461c68312da6ac89a1cfb6b02154295ae08b86ecd710b79098605c6ae954",
+      "target": "approved"
+    },
+    {
+      "id": "WO-RLS-026",
+      "path": "docs/engineering/release-0-20-0/work-orders/WO-RLS-026.md",
+      "sha256": "c35ec9cdf80e2070d51d7a9d551f5d8ce4ca01b772d5ae841b6b0ec777602d33",
+      "target": "approved"
+    }
+  ],
+  "assurance_proposal": "required for all three WOs; populate confirmed assurance only after the human decision",
+  "proposed_legacy_encoding": "engineering-owner for VER/WO; release-owner for REL; retain actual human mmzen and supplied decision in reasons"
+}

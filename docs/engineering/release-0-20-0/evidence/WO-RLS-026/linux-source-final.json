@@ -1,0 +1,44 @@
+{
+  "candidate": "29d8e69e0a061b96e7a4df42f2ed59ab2ab9c281",
+  "working_tree": "clean",
+  "command": [
+    "/opt/hostedtoolcache/Python/3.11.16/x64/bin/python",
+    "scripts/run_tests.py",
+    "--workers",
+    "4",
+    "--scale",
+    "full",
+    "--timings",
+    "target/test-timings.json"
+  ],
+  "cwd": "/home/runner/work/se_harness/se_harness",
+  "checker": {
+    "version": "0.20.0",
+    "origin": "/home/runner/work/se_harness/se_harness/se_harness/__init__.py"
+  },
+  "started_at": "2026-09-29T17:54:42.787151+00:00",
+  "exit_code": 0,
+  "result": "pass",
+  "output_tail": "docs/notes/diagnostic-codes.md matches the source\nEvaluator Python: /tmp/simple-plugin-w3bnpldv/private/verity-plane/evaluator/bin/python\nEvaluator Python: /tmp/simple-plugin-w3bnpldv/private/verity-plane/evaluator/bin/python\n--workers must be at least 1\nWEX_SCALE artifacts=100 validation=0.017989s focus=0.052101s plan=0.036971s\nWEX_SCALE artifacts=500 validation=0.069924s focus=0.099344s plan=0.122826s\nWEX_SCALE artifacts=1000 validation=0.231004s focus=0.298090s plan=0.339377s\n0.20.0\n----------------------------------------------------------------------\nRan 1162 tests in 31.346s (177 classes, 4 workers)\n\nOK (skipped=2)\n",
+  "raw": {
+    "file": "output.log",
+    "bytes": 629,
+    "artifact": "candidate-source-raw",
+    "repository": "mmzen/se_harness",
+    "run_id": "36608252082",
+    "run_url": "https://github.com/mmzen/se_harness/actions/runs/36608252082",
+    "retention_days": 14,
+    "estimated_expiry": "2026-10-13T17:54:42.787151+00:00",
+    "availability": "local; upload not yet confirmed",
+    "download_command": [
+      "gh",
+      "run",
+      "download",
+      "36608252082",
+      "--repo",
+      "mmzen/se_harness",
+      "--name",
+      "candidate-source-raw"
+    ]
+  }
+}

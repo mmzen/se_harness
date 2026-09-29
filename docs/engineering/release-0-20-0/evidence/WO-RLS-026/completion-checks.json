@@ -1,0 +1,160 @@
+[
+  {
+    "label": "r020-complete-doctor",
+    "invocation": {
+      "args": [
+        "doctor",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--json"
+      ],
+      "exit_code": 0,
+      "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+    },
+    "result_sha256": "a1dec046a7baae1415269298f120d6c96477ccb69c86a78b77130a5fe7f956f9",
+    "compliance": null,
+    "state": null
+  },
+  {
+    "label": "r020-complete-validate",
+    "invocation": {
+      "args": [
+        "validate",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--json"
+      ],
+      "exit_code": 0,
+      "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+    },
+    "result_sha256": "bbfec938a1cad9154ee91b42356bc91598b4b410ca0dcb6f5019014c2331022c",
+    "compliance": null,
+    "state": null
+  },
+  {
+    "label": "r020-complete-preflight",
+    "invocation": {
+      "args": [
+        "preflight",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--work-order",
+        "WO-RLS-026",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "exit_code": 0,
+      "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+    },
+    "result_sha256": "fdba3a7348f7c9d2b6012b7aeb713a9b871d89c23173e2b80d52fd2947e5fa71",
+    "compliance": null,
+    "state": null
+  },
+  {
+    "label": "r020-complete-handoff",
+    "invocation": {
+      "args": [
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--artifact",
+        "WO-RLS-026",
+        "--checkpoint",
+        "handoff",
+        "--from-git",
+        "ff2b5694f5f74743cfc305ed563f01d165f2fe91",
+        "--json"
+      ],
+      "exit_code": 0,
+      "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+    },
+    "result_sha256": "d1de892c48613e3f106117cae8575fc1e5667deaf39d4727d1ce9c1922cc2914",
+    "compliance": "pass",
+    "state": {
+      "before": [
+        {
+          "id": "WO-RLS-026",
+          "status": "in_progress"
+        }
+      ],
+      "after": [
+        {
+          "id": "WO-RLS-026",
+          "status": "in_progress"
+        }
+      ]
+    }
+  },
+  {
+    "label": "r020-complete-preview",
+    "invocation": {
+      "args": [
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--set",
+        "WO-RLS-026=implemented",
+        "--decision",
+        "WO-RLS-026=Codex",
+        "--reason",
+        "WO-RLS-026=Codex records completion under mmzen-approved scope after local full/focused checks, hosted candidate qualification, Windows/Linux upgrade rehearsals, both manual publication legs, two identical pinned builds, documentation review and the complete Git-derived handoff passed. Exact final-candidate CI, build and aggregate VREC preparation continue under the same scope; human verification and release remain separate.",
+        "--json"
+      ],
+      "exit_code": 0,
+      "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+    },
+    "result_sha256": "80338e3e1a4dd0dd826ac7a6f3221df972423be210927b024d9a9e25e0fb69b1",
+    "compliance": "pass",
+    "state": {
+      "before": [
+        {
+          "id": "WO-RLS-026",
+          "status": "in_progress"
+        }
+      ],
+      "after": [
+        {
+          "id": "WO-RLS-026",
+          "status": "implemented"
+        }
+      ]
+    }
+  },
+  {
+    "label": "r020-complete-apply",
+    "invocation": {
+      "args": [
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--set",
+        "WO-RLS-026=implemented",
+        "--decision",
+        "WO-RLS-026=Codex",
+        "--reason",
+        "WO-RLS-026=Codex records completion under mmzen-approved scope after local full/focused checks, hosted candidate qualification, Windows/Linux upgrade rehearsals, both manual publication legs, two identical pinned builds, documentation review and the complete Git-derived handoff passed. Exact final-candidate CI, build and aggregate VREC preparation continue under the same scope; human verification and release remain separate.",
+        "--json",
+        "--apply"
+      ],
+      "exit_code": 0,
+      "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+    },
+    "result_sha256": "10ca3fa2cab5bc9aec92e4c8db23f5051f5cb39d8f24b69393f1109fe7da6aae",
+    "compliance": "pass",
+    "state": {
+      "before": [
+        {
+          "id": "WO-RLS-026",
+          "status": "in_progress"
+        }
+      ],
+      "after": [
+        {
+          "id": "WO-RLS-026",
+          "status": "implemented"
+        }
+      ]
+    }
+  }
+]

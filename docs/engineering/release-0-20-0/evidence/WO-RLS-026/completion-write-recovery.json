@@ -1,0 +1,7 @@
+{
+  "operation": "local commit after successful implemented transition",
+  "refusal": "git diff --check reported CR at line ends in the appended handoff prose",
+  "recovery": "Readback confirms WO-RLS-026 implemented; transition not replayed. Normalize handoff prose line endings to LF before the still-pending local commit. No semantic instruction or evidence result changed.",
+  "before_sha256": "481758b4a746f008fbb7999f1caa8c4e3ddc6fc8e8adf383b1a723ea34316c03",
+  "after_sha256": "f51302616b7dab49b0053c26dfc148b4a17ae1c7920d1ebfd78c2080708262a1"
+}

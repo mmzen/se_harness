@@ -1,0 +1,18 @@
+{
+  "schema": "se-harness-delivery-observations/v1",
+  "plan_sha256": "c2aa25ca23a5527a77019d5e70e1a17699d9649a10e3fcee839dbdfd966741cf",
+  "observed_at": "2026-09-29T18:27:43.794222+00:00",
+  "release": {
+    "record": "RLS-SEH-029",
+    "status": "ready",
+    "source": "docs/engineering/release-0-20-0/releases/RLS-SEH-029.md",
+    "observed_at": "2026-09-29T18:27:43.794222+00:00",
+    "evidence": [
+      {
+        "path": "ready-release-observation.json",
+        "sha256": "f4ad804812fe03219b2b9a4bae5ece3899dc3da55937d54e76937720b912f572"
+      }
+    ]
+  },
+  "surfaces": []
+}

@@ -1,0 +1,51 @@
+{
+  "authority": "evidence-only; no lifecycle or external action authorized",
+  "checks": [
+    {
+      "id": "CC001",
+      "message": "candidate runtime is bound to the checkout",
+      "passed": true,
+      "subject": "candidate-runtime"
+    },
+    {
+      "id": "CC002",
+      "message": "HEAD and tracked tree match the candidate",
+      "passed": true,
+      "subject": "candidate-commit"
+    },
+    {
+      "id": "CC003",
+      "message": "artifacts=1746; errors=0; warnings=52",
+      "passed": true,
+      "subject": "engineering-graph"
+    },
+    {
+      "id": "CC004",
+      "message": "target state is unchanged",
+      "passed": true,
+      "subject": "repository-state"
+    }
+  ],
+  "completion": "completed",
+  "evaluator": {
+    "candidate_commit": "29d8e69e0a061b96e7a4df42f2ed59ab2ab9c281",
+    "diagnostics": [],
+    "distribution": "se-harness",
+    "identity_sha256": "3511126b235c540424eb654c0ea797e1f22b069033ae6476c807f9c6b69653f6",
+    "isolated_python": false,
+    "pythonpath_present": false,
+    "role": "candidate-source",
+    "user_site_enabled": false,
+    "version": "0.20.0"
+  },
+  "independence": "candidate-controlled",
+  "operation": "complete-candidate",
+  "passed": true,
+  "schema": "se-harness-release-qualification-v1",
+  "target": {
+    "commit": "29d8e69e0a061b96e7a4df42f2ed59ab2ab9c281",
+    "identity_sha256": "8c75046d4cad795d326f7f08776af2843cf3212449d1ba3b009cb48b2cbea412",
+    "kind": "complete-candidate",
+    "tree": "bb194e1f743c8e255c5bd6cbdeb5a83897f7ab47"
+  }
+}

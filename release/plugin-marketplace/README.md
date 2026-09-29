@@ -1,15 +1,16 @@
 # Verity Plane marketplace
 
 Verity Plane brings SE Harness setup, orientation, change and evidence workflows
-to Codex and Claude Code. Plugin **0.2.1** includes the released **SE Harness
-0.19.0** wheel and five skills, including an explicitly requested operator brief.
+to Codex and Claude Code. Plugin **0.2.2** selects **SE Harness 0.20.0** and five
+skills, including an explicitly requested operator brief. Release assembly
+requires that evaluator's independently published wheel and released record.
 
 ## Install from Git
 
 These commands select the `plugin-marketplace` distribution branch of
 `mmzen/se_harness`. The development branch contains assembly inputs; install the
 complete distribution branch. Before expecting this version from Git, check that
-the branch's `PACKAGE-IDENTITY.json` reports plugin 0.2.1, evaluator 0.19.0 and
+the branch's `PACKAGE-IDENTITY.json` reports plugin 0.2.2, evaluator 0.20.0 and
 the accepted source commit. This guide is also an assembly input: its presence
 in the source repository does not establish publication. Until the public ref
 matches, use the local distribution below for candidate qualification.
@@ -102,8 +103,9 @@ inside its own directory; neither host needs the other host's files.
 
 Native qualification targets disposable Windows profiles on both hosts. Package identity alone does not
 prove a model-driven session, another operating system, public Git installation
-or provider approval. The source repository's WO-PLG-026 evidence records this candidate's actual
-checks; WO-PLG-028 records subsequent public routes. Neither a local result nor
+or provider approval. Consult the source repository's WO-PLG-030 qualification
+evidence and WO-PLG-031 public-route evidence for this package's actual results.
+Neither a local result nor
 this guide establishes successful public installation. Desktop UI, automatic
 threshold compaction and other platforms require their own observations.
 
