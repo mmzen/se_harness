@@ -1,0 +1,55 @@
+{
+  "human": "mmzen",
+  "decision": "I approve",
+  "artifacts": [
+    {
+      "id": "REL-SEH-031",
+      "path": "docs/engineering/release-0-20-0/release/REL-SEH-031.md",
+      "sha256": "ea50a1e5291d48a466adcd608ef0d39e1c091ef8e341621628281a6f9ca19326",
+      "target": "approved",
+      "approval_input_sha256": "ea50a1e5291d48a466adcd608ef0d39e1c091ef8e341621628281a6f9ca19326"
+    },
+    {
+      "id": "VER-PLG-028",
+      "path": "docs/engineering/release-0-20-0/verification/VER-PLG-028.md",
+      "sha256": "3d3a6dc9fb7afbeec88795a7a5078c28736d6f61fc44a281393694bcf8e365cf",
+      "target": "approved",
+      "approval_input_sha256": "3d3a6dc9fb7afbeec88795a7a5078c28736d6f61fc44a281393694bcf8e365cf"
+    },
+    {
+      "id": "VER-PLG-029",
+      "path": "docs/engineering/release-0-20-0/verification/VER-PLG-029.md",
+      "sha256": "470ee9fe58336c8705bf0516ea953a9b18ece20b090034bd82ed23d0f0026086",
+      "target": "approved",
+      "approval_input_sha256": "470ee9fe58336c8705bf0516ea953a9b18ece20b090034bd82ed23d0f0026086"
+    },
+    {
+      "id": "VER-RLS-026",
+      "path": "docs/engineering/release-0-20-0/verification/VER-RLS-026.md",
+      "sha256": "f38d07f7382aa06e6fcca7ed90c8eac45b5b5a169472aee56efffb8a478d7296",
+      "target": "approved",
+      "approval_input_sha256": "f38d07f7382aa06e6fcca7ed90c8eac45b5b5a169472aee56efffb8a478d7296"
+    },
+    {
+      "id": "WO-PLG-030",
+      "path": "docs/engineering/release-0-20-0/work-orders/WO-PLG-030.md",
+      "sha256": "50ecd19f44ad8a9d2fbf874a19cc960cc757cb07d05bf2ba4c389f064af32336",
+      "target": "approved",
+      "approval_input_sha256": "e6b5e09f54b93985b878963f48c720099f328d233476de09461ee6a033eb601e"
+    },
+    {
+      "id": "WO-PLG-031",
+      "path": "docs/engineering/release-0-20-0/work-orders/WO-PLG-031.md",
+      "sha256": "f86b461c68312da6ac89a1cfb6b02154295ae08b86ecd710b79098605c6ae954",
+      "target": "approved",
+      "approval_input_sha256": "b292643fa27cc608db189fe2a522e9b289601db09baaf249f7145fb8513e8ec9"
+    },
+    {
+      "id": "WO-RLS-026",
+      "path": "docs/engineering/release-0-20-0/work-orders/WO-RLS-026.md",
+      "sha256": "c35ec9cdf80e2070d51d7a9d551f5d8ce4ca01b772d5ae841b6b0ec777602d33",
+      "target": "approved",
+      "approval_input_sha256": "3b8d7452d90d16fcd0dba479af38a3d7c821ff3b5bbe10621eb7a703391add1b"
+    }
+  ]
+}

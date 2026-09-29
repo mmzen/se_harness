@@ -1,7 +1,9 @@
 # Instruction cleanup implementation proposal
 
-Status: **WO-IAR-021 and WO-IAR-023 implemented; verification preparation selected**.
-WO-IAR-022 is approved and waits for verified instruction corrections.
+Status: **WO-IAR-020 through WO-IAR-025 implemented and verified** through
+VREC-IAR-013, VREC-IAR-014 and VREC-IAR-015. The
+[0.20.0 release package](../../../release-0-20-0/README.md) now covers evaluator
+publication and the plugin 0.2.2 handoff. Repository adoption remains later work.
 The repository remains governed by its selected released evaluator, **0.19.0**.
 Candidate source is 0.20.0; this proposal does not release or adopt it.
 
@@ -11,14 +13,14 @@ weaken discovery. The proposed outcome is a usable current instruction path in
 the active host, precise references in shipped content, and safe retirement of
 obsolete default entry points.
 
-## Recommended sequence
+## Delivery sequence and current status
 
 | Stage | Work order | Deliverable | Verification | Dependency |
 | --- | --- | --- | --- | --- |
-| 1 | [WO-IAR-020](../../work-orders/WO-IAR-020.md) — Qualify active plugin instruction delivery | Active-package inventory and fresh native startup/compaction evidence for Codex and Claude Code. If adoption is needed, an exact repair handoff precedes any real profile change. | [VER-IAR-016](../../verification/VER-IAR-016.md) | Approved; real host adoption remains separately authorized. |
-| 2 | [WO-IAR-021](../../work-orders/WO-IAR-021.md) — Correct instruction references and context guidance | Correct source templates, Explorer descriptions, provider references and reading guidance, with focused regression checks. | [VER-IAR-015](../../verification/VER-IAR-015.md) | Approved and started independently of stage 1. |
-| 3 | [WO-IAR-022](../../work-orders/WO-IAR-022.md) — Stop shipping obsolete guide pointers safely | Future fresh installations omit the six pointers. Upgrades preserve owner content and supported legacy migration. | [VER-IAR-017](../../verification/VER-IAR-017.md) | DEC-IAR-002 now selects product-wide retirement. Definitions and WO are approved; use verified stage 2 as the implementation base. |
-| 4 | Later release package | Published, verified release containing stages 2 and 3. | Exact combined candidate coverage and release contract/record. | Select the version and prepare separate release artifacts when the implementation is verified. No new release ID is invented now. |
+| 1 | [WO-IAR-020](../../work-orders/WO-IAR-020.md) — Qualify active plugin instruction delivery | Active-package inventory and fresh native startup/compaction evidence for Codex and Claude Code. If adoption is needed, an exact repair handoff precedes any real profile change. | [VER-IAR-016](../../verification/VER-IAR-016.md) | Implemented; native qualification verified by VREC-IAR-015. Real profile adoption remains separate. |
+| 2 | [WO-IAR-021](../../work-orders/WO-IAR-021.md) — Correct instruction references and context guidance | Correct source templates, Explorer descriptions, provider references and reading guidance, with focused regression checks. | [VER-IAR-015](../../verification/VER-IAR-015.md) | Implemented and verified by VREC-IAR-013, including the WO-IAR-023 test correction. |
+| 3 | [WO-IAR-022](../../work-orders/WO-IAR-022.md) — Stop shipping obsolete guide pointers safely | Future fresh installations omit the six pointers. Upgrades preserve owner content and supported legacy migration. | [VER-IAR-017](../../verification/VER-IAR-017.md) | Implemented and verified by VREC-IAR-014 with WO-IAR-024/025 corrections. DEC-IAR-002 selects product-wide retirement. |
+| 4 | Later release package | Published, verified release containing stages 2 and 3. | Exact combined candidate coverage and release contract/record. | REL-SEH-031 selects 0.20.0 and the downstream plugin 0.2.2 delivery; WO-RLS-026 prepares its combined candidate. |
 | 5 | Later repository adoption work order | Adopt that exact release; remove reviewed stock pointers from this repository only when current consumers no longer need them. | Native evidence from stage 1, exact file hashes, installer preview/apply, owner-byte checks and post-adoption readiness. | Published release, passing native qualification and separate adoption authority. |
 
 Stage 1 does not authorize product-hook changes or real profile updates. A stale
@@ -73,7 +75,7 @@ bounded evidence criteria.
 | [VER-IAR-015](../../verification/VER-IAR-015.md) | approved | References, protected meaning, full delivery envelope and six task-reading traces. |
 | [VER-IAR-016](../../verification/VER-IAR-016.md) | approved | Actual loaded package and native events on each claimed host. |
 | [VER-IAR-017](../../verification/VER-IAR-017.md) | approved | Fresh install, packaging, supported upgrades, owner bytes, refusal and retry. |
-| [WO-IAR-020](../../work-orders/WO-IAR-020.md), [WO-IAR-021](../../work-orders/WO-IAR-021.md), [WO-IAR-022](../../work-orders/WO-IAR-022.md) | 020 in progress; 021 implemented; 022 approved | Separately bounded execution scopes and decision envelopes. |
+| [WO-IAR-020](../../work-orders/WO-IAR-020.md), [WO-IAR-021](../../work-orders/WO-IAR-021.md), [WO-IAR-022](../../work-orders/WO-IAR-022.md) | implemented | Separately bounded execution scopes and decision envelopes. |
 | [DEC-IAR-002](../../decisions/DEC-IAR-002.md) | decided | Product-wide retirement selected by the requesting repository owner. |
 
 Typed metadata links provide the formal traceability: the new requirement derives
@@ -135,35 +137,24 @@ token savings or native delivery from a file-size or protocol measurement.
 
 ## Execution and review status
 
-The human approved the reviewed package with “I approve, you can start the work
-orders.” The selected 0.19.0 evaluator applied the five definition approvals and
-three WO approvals. Actual human mmzen and the exact decision are retained in
-the reasons; the evaluator's legacy role labels do not replace that identity.
-WO-IAR-020 and WO-IAR-021 passed start checks. WO-IAR-021 and the separate
-WO-IAR-023 correction subsequently passed complete combined-scope handoff and
-were transitioned to `implemented` by the evaluator. WO-IAR-020 remains in
-progress; no native-qualification completion is claimed.
+WO-IAR-020 through WO-IAR-025 are implemented. The human verified VREC-IAR-013
+for the instruction corrections, VREC-IAR-014 for retirement and its bounded
+corrections, and VREC-IAR-015 for native qualification. Their exact candidates
+and evidence remain in those records. The initial proposal remains in Git at
+`d243f792ffb9cfda4929a0eaeb5b4db16f88220f`.
 
-Full testing exposed two test assumptions outside WO-IAR-021's paths. The human
-separately approved [WO-IAR-023](../../work-orders/WO-IAR-023.md), required
-commit-bound assurance and the legacy approval encoding. It is now implemented.
-The reviewed [test correction](test-correction.patch) is applied; its
-[isolated review](test-correction-review.json) preserves the pre-approval probe.
+The [instruction review](../../evidence/WO-IAR-021/review.md) and
+[test-correction review](../../evidence/WO-IAR-023/review.md) retain the earlier
+findings and results. Failed native attempts, including the expired Claude
+login, remain historical observations; they do not replace the later verified
+startup and manual-compaction results in VREC-IAR-015.
 
-The current source correction and its evidence are described in
-[the implementation review](../../evidence/WO-IAR-021/review.md).
-[WO-IAR-023 evidence](../../evidence/WO-IAR-023/review.md) explains the two test
-changes and the pre-existing CRLF fixture failure. Original failing results are
-retained beside corrected checks. The initial proposal remains in Git at
-d243f792ffb9cfda4929a0eaeb5b4db16f88220f.
+The subsequent public 0.2.1 plugin delivery has its own
+[closeout evidence](../../../plugin-integration/evidence/WO-PLG-028/delivery-closeout.md).
+It bundles evaluator 0.19.0. It does not publish candidate evaluator 0.20.0 or
+qualify the next 0.2.2 archives.
 
-WO-IAR-020 found both real hosts still select plugin 0.1.0. Isolated Codex
-startup and compaction passed with the 0.2.0 package. Claude delivered the full
-startup root, but its isolated OAuth login expired before the model response;
-compaction remains unverified. The
-[adoption handoff](../../acceptance/plugin-adoption/README.md) names exact
-replacement inputs and remaining authority. Real profiles remain unchanged.
-
-WO-IAR-022 has not started. No compatibility pointer is removed. No human
-verification, release or repository adoption is inferred from the approvals.
-The PR remains a draft while these stages are assessed.
+The six repository-owned pointers remain present intentionally. Publishing
+0.20.0 will stop supplying them to new repositories. Upgrades preserve existing
+owner bytes. Removing this repository's copies requires later adoption with
+the exact published release and reviewed cleanup authority.

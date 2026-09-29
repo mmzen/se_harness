@@ -47,6 +47,14 @@ publication commit is prepared, fill the expected identity from that reviewed
 input. Do not copy an unexpected public result into the expected value to make
 the check pass. Changed scope or identity needs the applicable review.
 
+Before a wheel binding and RLS ID exist, retain a preparation plan with those
+fields explicitly pending. It is not yet a valid completion-check input: the
+current checker requires non-empty `release.record` and a real
+`release.wheel_sha256`. After those inputs exist, retain a new bound plan version
+with their actual values. Surface `expected` fields may still be `null`; those
+pending values prevent completion. Preserve the preparation plan as reviewed
+scope. Do not insert a placeholder digest or a previous release's binding.
+
 The final observations bind the **complete byte SHA-256** of the current plan.
 After a plan revision, reassess applicability before rebinding retained evidence.
 Do not change a digest simply to suppress a mismatch.
@@ -83,9 +91,12 @@ python scripts/build_plugin_marketplace.py build --repository . --revision SOURC
 python scripts/build_plugin_marketplace.py check --repository . --revision SOURCE_COMMIT --release-revision RELEASE_COMMIT --release-record RLS_PATH --expected-wheel-sha256 WHEEL_SHA256 --wheel "PUBLIC_WHEEL" --evaluator-python "EVALUATOR_PYTHON" --output-directory "NEW_OUTPUT"
 ```
 
-The earlier publication guide includes the original 0.1.0/0.18.0 example. It is
-not an identity selection for a new delivery. This procedure adds the handoff;
-the separate marketplace correction must update its version-specific examples.
+The [publication guide](plugin-marketplace-publication.md#assemble-committed-inputs)
+selects identities from the new released record and committed plugin source.
+Its previous-publication receipt is historical evidence, not an input selection
+for the next delivery. The [0.20.0 package](../engineering/release-0-20-0/README.md)
+assigns plugin 0.2.2 assembly and publication to WO-PLG-030, and public
+fresh/update observation and current claims to WO-PLG-031.
 
 Use the host commands qualified for the selected package. A local marketplace
 directory or an existing cache is not the public Git route. Retain the public

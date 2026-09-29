@@ -1,6 +1,26 @@
 # Instruction Architecture Rationalization
 
-This packet defines the implemented instruction architecture for repositories installed or adopted by SE Harness. `WO-IAR-001` retains exact evidence for the bounded implementation. Commit-bound verification and release authority remain separate.
+## Current instruction architecture
+
+Released SE Harness 0.19.0 uses a compact `ENGINEERING_HARNESS.md` entry and
+action-selected guides under `docs/engineering/harness/`. `AGENTS.md` belongs
+entirely to the repository owner. The released evaluator supplies lifecycle
+results and instruction discovery. This repository adopted that release under
+WO-HUP-021; source preparation does not change its selected evaluator.
+
+The [cleanup package](proposals/instruction-cleanup/README.md) is implemented
+and verified. Its instruction refinements and retirement of six default guide
+seeds are included in the [0.20.0 release preparation](../release-0-20-0/README.md).
+Publication, repository adoption and removal of this repository's preserved
+owner pointers remain separate stages.
+
+## Historical architecture packets
+
+The sections below retain earlier packet summaries. References to an AGENTS
+managed region or procedures owned by WORKFLOW.md describe those earlier
+contracts; they do not route current work. Read the current root's task router.
+`WO-IAR-001` retains the original bounded implementation evidence. Its acceptance
+does not supply authority for later revisions.
 
 ## Implemented policy-responsibility refinement
 
@@ -244,9 +264,9 @@ The harness repository has an unavoidable one-release bootstrap lag: the last re
 
 `OPS-IAR-001` was separately reviewed and approved through `WO-OCA-001` on 2026-08-16. It accepts continuing operation of the implemented instruction and enforcement requirements, including released-governor separation, managed integrity, preflight, layered validation, inspection, and bounded guidance. `REL-IAR-001` is a rejected historical proposal: `WO-IAR-001` was released through `REL-SEH-002` and `RLS-SEH-002` in `v0.2.1` instead. Operating approval remains independent from release authority.
 
-## Proposed progressive instruction discovery (2026-09-20)
+## Progressive instruction discovery released in 0.19.0
 
-Draft package for a compact injected entry, conditional procedures, owner-only AGENTS.md, evaluator discovery and host delivery. No implementation or approval has been applied.
+The compact injected entry, conditional procedures, owner-only AGENTS.md, evaluator discovery and host delivery were implemented and released in 0.19.0. The links below identify the governing records and original proposal provenance.
 
 - [CAP-IAR-002](capabilities/CAP-IAR-002.md) — Discover harness instructions for the current action.
 - [REQ-IAR-022](requirements/REQ-IAR-022.md) — Compact injected entry.

@@ -1,4 +1,4 @@
-"""Offline checks for SPEC-PLG-023's selected delivery, not live publication."""
+"""Check REL-SEH-031 candidate inputs and the separately observed public delivery."""
 from copy import deepcopy
 import json
 import posixpath
@@ -8,8 +8,10 @@ import tomllib
 import unittest
 
 ROOT = Path(__file__).resolve().parents[3]
-# Expected identity comes from accepted REQ-PLG-039 / SPEC-PLG-023, not README.
-PLUGIN = "0.2.1"
+# Candidate identities come from approved REL-SEH-031, not candidate output.
+PLUGIN = "0.2.2"
+CANDIDATE_EVALUATOR = "0.20.0"
+# Published identities retain REQ-PLG-039 / SPEC-PLG-023 and their actual receipt.
 EVALUATOR = "0.19.0"
 WHEEL_SHA = "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8"
 RELEASE = "docs/engineering/release-0-19-0/releases/RLS-SEH-028.md"
@@ -41,7 +43,7 @@ def identity_findings(inputs):
             f"se_harness-{EVALUATOR}-py3-none-any.whl", WHEEL_SHA):
         findings.append("released wheel identity")
     guide = " ".join(inputs["marketplace"].split())
-    if (f"Plugin **{PLUGIN}**" not in guide or f"**SE Harness {EVALUATOR}**" not in guide):
+    if (f"Plugin **{PLUGIN}**" not in guide or f"**SE Harness {CANDIDATE_EVALUATOR}**" not in guide):
         findings.append("assembled guide selection")
     root = " ".join(inputs["root"].split())
     observed = re.search(
@@ -96,7 +98,7 @@ class RefreshGuidanceTests(unittest.TestCase):
     def test_mutually_stale_documents_do_not_establish_identity(self):
         data = selected_inputs()
         for name in ("root", "marketplace"):
-            data[name] = data[name].replace("0.2.1", "0.1.0").replace("0.19.0", "0.18.0")
+            data[name] = data[name].replace(PLUGIN, "0.1.0").replace(CANDIDATE_EVALUATOR, "0.18.0").replace("0.2.1", "0.1.0").replace(EVALUATOR, "0.18.0")
         self.assertIn("assembled guide selection", identity_findings(data))
 
     def test_premature_public_claim_is_rejected(self):

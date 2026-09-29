@@ -1,0 +1,122 @@
+{
+  "comparison_head": "ff2b5694f5f74743cfc305ed563f01d165f2fe91",
+  "historical_records": [
+    {
+      "id": "VREC-KIS-016",
+      "candidate": "06b27bef95ee78a7880b87de2d7aa4870379fbef",
+      "work_orders": [
+        "WO-KIS-016"
+      ],
+      "bound_files": 61,
+      "evidence_git_blobs_unchanged": true,
+      "sidecar_sha256": "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2"
+    },
+    {
+      "id": "VREC-IAR-013",
+      "candidate": "a0435434bcfa9ce385931e2d0e64bf98cab300e1",
+      "work_orders": [
+        "WO-IAR-021",
+        "WO-IAR-023"
+      ],
+      "bound_files": 7,
+      "evidence_git_blobs_unchanged": true,
+      "sidecar_sha256": "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2"
+    },
+    {
+      "id": "VREC-IAR-014",
+      "candidate": "e2fe4fa3cf0a7549423260fbaba5ba1806631495",
+      "work_orders": [
+        "WO-IAR-022",
+        "WO-IAR-024",
+        "WO-IAR-025"
+      ],
+      "bound_files": 11,
+      "evidence_git_blobs_unchanged": true,
+      "sidecar_sha256": "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2"
+    },
+    {
+      "id": "VREC-IAR-015",
+      "candidate": "8b8cdb46b97cbc3164eec4459932a9f6428939a6",
+      "work_orders": [
+        "WO-IAR-020"
+      ],
+      "bound_files": 4,
+      "evidence_git_blobs_unchanged": true,
+      "sidecar_sha256": "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2"
+    },
+    {
+      "id": "VREC-PLG-023",
+      "candidate": "8b6f383c4abf69b038f126935e1bcd20fc0e9a7c",
+      "work_orders": [
+        "WO-PLG-026",
+        "WO-PLG-027"
+      ],
+      "bound_files": 30,
+      "evidence_git_blobs_unchanged": true,
+      "sidecar_sha256": "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2"
+    },
+    {
+      "id": "VREC-PLG-024",
+      "candidate": "f849eaf6c5d29172fc6fc5cd8ec64a702de33168",
+      "work_orders": [
+        "WO-PLG-028",
+        "WO-PLG-029"
+      ],
+      "bound_files": 45,
+      "evidence_git_blobs_unchanged": true,
+      "sidecar_sha256": "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2"
+    },
+    {
+      "id": "VREC-RLO-010",
+      "candidate": "ca5a52cdbb1dc0563c4b67c0a7f116f070ce472e",
+      "work_orders": [
+        "WO-RLO-010"
+      ],
+      "bound_files": 26,
+      "evidence_git_blobs_unchanged": true,
+      "sidecar_sha256": "81dcc0fbfc44d1cbd3a0a78ac40ccd36159f5ac5ad2d08abc049bd914e63b38f"
+    },
+    {
+      "id": "VREC-RLO-011",
+      "candidate": "755bd0c761f2466df491d99823e279696d7796ba",
+      "work_orders": [
+        "WO-RLO-011"
+      ],
+      "bound_files": 2,
+      "evidence_git_blobs_unchanged": true,
+      "sidecar_sha256": "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2"
+    },
+    {
+      "id": "VREC-HUP-021",
+      "candidate": "05aa49a4a639a028b2122ee6fb64a16e58b6273c",
+      "work_orders": [
+        "WO-HUP-021",
+        "WO-HUP-023"
+      ],
+      "bound_files": 135,
+      "evidence_git_blobs_unchanged": true,
+      "sidecar_sha256": "e47384120e30c37f16266e887354cc5e0f5cb956e4d93c53fc7a5bd43ffec9c2"
+    }
+  ],
+  "direct_capture_evidence": [
+    "docs/engineering/harness-simplification/evidence/VREC-KIS-016-evaluator.json",
+    "docs/engineering/harness-simplification/verification-records/VREC-KIS-016.md",
+    "docs/engineering/instruction-architecture/evidence/VREC-IAR-013-evaluator.json",
+    "docs/engineering/instruction-architecture/evidence/VREC-IAR-014-evaluator.json",
+    "docs/engineering/instruction-architecture/evidence/VREC-IAR-015-evaluator.json",
+    "docs/engineering/instruction-architecture/verification-records/VREC-IAR-013.md",
+    "docs/engineering/instruction-architecture/verification-records/VREC-IAR-014.md",
+    "docs/engineering/instruction-architecture/verification-records/VREC-IAR-015.md",
+    "docs/engineering/plugin-integration/evidence/VREC-PLG-023-evaluator.json",
+    "docs/engineering/plugin-integration/evidence/VREC-PLG-024-evaluator.json",
+    "docs/engineering/plugin-integration/verification-records/VREC-PLG-023.md",
+    "docs/engineering/plugin-integration/verification-records/VREC-PLG-024.md",
+    "docs/engineering/release-orchestration/evidence/VREC-RLO-010-evaluator.json",
+    "docs/engineering/release-orchestration/evidence/VREC-RLO-011-evaluator.json",
+    "docs/engineering/release-orchestration/verification-records/VREC-RLO-010.md",
+    "docs/engineering/release-orchestration/verification-records/VREC-RLO-011.md",
+    "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-021-evaluator.json",
+    "docs/engineering/repository-harness-upgrade/verification-records/VREC-HUP-021.md"
+  ],
+  "limit": "Original candidates and claims only. Current integration and package qualification remain separately required."
+}

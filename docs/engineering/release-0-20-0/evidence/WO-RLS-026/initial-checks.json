@@ -1,0 +1,12 @@
+[
+  {
+    "label": "r020-initial-preflight",
+    "exit": 0,
+    "result_sha256": null
+  },
+  {
+    "label": "r020-initial-pr-check",
+    "exit": 0,
+    "result_sha256": null
+  }
+]

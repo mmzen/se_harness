@@ -16,8 +16,14 @@ retains the [publication and public-route evidence](evidence/WO-PLG-028/README.m
 under [VER-PLG-027](verification/VER-PLG-027.md). Fresh-install and update package
 checks, startup and manual compaction passed on both hosts.
 [WO-PLG-029](work-orders/WO-PLG-029.md) covers the approved publication-test
-correction. Overall delivery remains incomplete until confirmation and the
-current documentation's separately authorized integration and readback finish.
+correction. VREC-PLG-024 verified public confirmation; PR #497 integrated the
+current claims. The [delivery closeout](evidence/WO-PLG-028/delivery-closeout.md),
+integrated through PR #498, records completion of all five declared surfaces.
+
+The [next release package](../release-0-20-0/README.md) prepares evaluator 0.20.0
+and plugin 0.2.2. WO-PLG-030 and WO-PLG-031 own its later package qualification,
+marketplace publication, public observations and documentation. The 0.2.1
+receipt does not establish those future results.
 
 ## Replacement cleanup package
 

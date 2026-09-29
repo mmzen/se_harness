@@ -256,6 +256,15 @@ Ordinary ready RLS records use the complete schema-3 evaluator identity in the c
 
 ## Release sequences
 
+The [0.20.0 release package](../engineering/release-0-20-0/README.md) includes
+the plugin 0.2.2 handoff. After evaluator publication, WO-PLG-030 must assemble,
+qualify and publish the matching distribution to `plugin-marketplace` under
+separate exact publication authority. WO-PLG-031 then checks public fresh and
+update routes and the current documentation. A green evaluator publisher does
+not complete those steps. The five-surface delivery report remains incomplete
+until their actual results and the demonstration and markers are confirmed.
+
+
 Owner content moved here from the retired repository-context document under `WO-ADS-002`. It grants no authority; every step below runs only under the approved work order or release record it names.
 
 - Candidate version bump: raise `pyproject.toml` to the new version. Since `WO-ECP-010` (issue #210) no migration scenario accompanies it: `repository_tools.evaluator_facts derive` needs only the declared root and the candidate version, and the `upgrade-rehearsal` legs rehearse the real `upgrade --apply` of that candidate against an export holding the predecessor's lock, failing when the resulting lock does not name the candidate's version and payload. `tests/test_ci_pipeline.py` asserts that a bump needs no scenario.
