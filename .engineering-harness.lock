@@ -1,10 +1,10 @@
 {
   "evaluator": {
-    "archive_name": "se_harness-0.19.0-py3-none-any.whl",
-    "archive_sha256": "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8",
+    "archive_name": "se_harness-0.20.0-py3-none-any.whl",
+    "archive_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
     "payload_manifest": "se-harness-installed-payload-v1",
-    "payload_sha256": "71c951a74d2f9c242d594fdbc419dcb173b87d51d25694db6a54a9b6cfc6c356",
-    "version": "0.19.0"
+    "payload_sha256": "88c26138f759af78b2d7eeed3d15f92b573ff264ea6a531b2c22dbbf1905130e",
+    "version": "0.20.0"
   },
   "files": {
     ".engineering-harness.toml": {
@@ -29,7 +29,7 @@
     },
     "ENGINEERING_HARNESS.md": {
       "mode": "managed",
-      "sha256": "aee9ed33d732c27ec06de7676450baaa9a05ea54e39906cca3791745be538d74"
+      "sha256": "b0faac200ca8879b50ce9ff28c015495e84fa164b97543584f5b0d2d5650a611"
     },
     "GLOSSARY.md": {
       "mode": "seed",
@@ -39,41 +39,17 @@
       "mode": "seed",
       "state": "present"
     },
-    "docs/engineering/DECISION_RIGHTS.md": {
-      "mode": "seed",
-      "state": "present"
-    },
-    "docs/engineering/OPERATING_CARD.md": {
-      "mode": "seed",
-      "state": "present"
-    },
     "docs/engineering/QUALITY_GATES.json": {
       "mode": "managed",
       "sha256": "532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2"
     },
-    "docs/engineering/QUALITY_GATES.md": {
-      "mode": "seed",
-      "state": "present"
-    },
     "docs/engineering/README.md": {
-      "mode": "seed",
-      "state": "present"
-    },
-    "docs/engineering/TECHNICAL_COMMUNICATION.md": {
-      "mode": "seed",
-      "state": "present"
-    },
-    "docs/engineering/TRACEABILITY.md": {
       "mode": "seed",
       "state": "present"
     },
     "docs/engineering/WORKFLOW.json": {
       "mode": "managed",
       "sha256": "310b35d4f07a071258d220d1c3d751f603c4eee74cea83467f7ba2f74b594516"
-    },
-    "docs/engineering/WORKFLOW.md": {
-      "mode": "seed",
-      "state": "present"
     },
     "docs/engineering/harness/AMEND_DEFINITIONS.md": {
       "mode": "managed",
@@ -101,7 +77,7 @@
     },
     "docs/engineering/harness/DEFINE_CHANGE.md": {
       "mode": "managed",
-      "sha256": "18ae756eb5f699b342d31441accfc2e38854a9826554fba2e587e6e82a944da5"
+      "sha256": "7f41ea6b62df110755524d88293019406d6cf6a238abc67e795db98234024f52"
     },
     "docs/engineering/harness/DEFINITION_LINKS.md": {
       "mode": "managed",
@@ -109,7 +85,7 @@
     },
     "docs/engineering/harness/DELIVER_RESULT.md": {
       "mode": "managed",
-      "sha256": "3fefcffd5781f69ec47b6bd65d42a59bb6d5f57b909c2af3bbf6a210cfbe0825"
+      "sha256": "dd357c71d839a9a4e3def66857c1768f812a07ee2f72f869cecf79c0375fd1ff"
     },
     "docs/engineering/harness/DRAFT_DEFINITIONS.md": {
       "mode": "managed",
@@ -125,11 +101,11 @@
     },
     "docs/engineering/harness/EXECUTE_WORK.md": {
       "mode": "managed",
-      "sha256": "10e46c4965dc0437098fab322d332740991cf5c344752482a1772ddc41a9cf45"
+      "sha256": "efe36fe63c3de054207ac483a00a0c3697cfaa7109879326d5cd3355a6e6b980"
     },
     "docs/engineering/harness/PULL_REQUEST.md": {
       "mode": "managed",
-      "sha256": "2f8c42a774235d25decc48fe92eac12dcdf4475df07c84880cd0b52e7b730ffc"
+      "sha256": "7ae7f7323db0fea5b7f32cd2f91c294c46982a630e5a9cac289b64c52e82a056"
     },
     "docs/engineering/harness/RECORD_STATE.md": {
       "mode": "managed",
@@ -157,7 +133,7 @@
     },
     "docs/engineering/harness/UPGRADE.md": {
       "mode": "managed",
-      "sha256": "ae4bd44d187b1cc11c0662800c3c7ae827df17b69bc5a33c4dcdba2e96fde05d"
+      "sha256": "75b89083818ccdecc1e5b96da1fdf2e9ca4bd9be645a715fe26e1be2e19b2c52"
     },
     "docs/engineering/harness/VERIFY_OUTCOME.md": {
       "mode": "managed",
@@ -169,7 +145,7 @@
     },
     "docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md": {
       "mode": "managed",
-      "sha256": "4344e923db88c9f8fc15636a82ce369adc15b9330312db42958992ac30aec761"
+      "sha256": "8467bd0a7a16cbac0de573a0742daf65ae97257c8154639f937ea77da5cec792"
     },
     "docs/engineering/harness/migration/REFERENCE_MAP.md": {
       "mode": "managed",
@@ -242,5 +218,5 @@
   "skill_ownership": {
     "provider": "plugin"
   },
-  "tool_version": "0.19.0"
+  "tool_version": "0.20.0"
 }

@@ -5,9 +5,9 @@
 Installing the Python package makes a checker available. Updating a repository
 is a separate, explicit `harnessctl upgrade --apply` operation.
 
-This guide describes the 0.19.0 installation and instruction-delivery model. An existing
+This guide describes the 0.20.0 installation and instruction-delivery model. An existing
 repository keeps its installed evaluator and lock until an explicit upgrade.
-The SE Harness development repository adopted released 0.19.0 under WO-HUP-021.
+The SE Harness development repository adopted released 0.20.0 under WO-HUP-024.
 
 ## What is kept under control
 
@@ -16,7 +16,8 @@ The SE Harness development repository adopted released 0.19.0 under WO-HUP-021.
 | `ENGINEERING_HARNESS.md`, `docs/engineering/harness/`, machine `WORKFLOW.json` and `QUALITY_GATES.json` | Locked entry, conditional instructions and machine policy. Actual changes fail integrity checks. |
 | Marked blocks in `.gitignore` and `.gitattributes` | Only the supplied block is locked. Owner text around it is preserved. |
 | `AGENTS.md` and any owner-created `CLAUDE.md` | Repository-owned. The harness installs no entry block in these files. |
-| Compatibility pointers, artifact templates, CI workflow and `.engineering-harness.toml` | Editable supplied files; customized content needs an explicit migration decision. |
+| Artifact templates, CI workflow and `.engineering-harness.toml` | Editable supplied files; customized content needs an explicit migration decision. |
+| Existing compatibility pointers | Owner files preserved on upgrade; 0.20.0 no longer creates them on a fresh installation. |
 | Repository skill copies | Editable supplied files when using repository ownership; disposable when switching to the plugin. |
 
 The installed evaluator owns executable policy. Its selected version must match
@@ -50,13 +51,13 @@ copies are installed under the target's `scripts/` directory.
 
 ## Review and apply an upgrade
 
-Select the exact authorized release first. The example below targets 0.19.0;
-an existing 0.19.0 repository needs no upgrade just because source reports
-0.20.0. Install the selected released package in the external environment,
+Select the exact authorized release first. The example below targets 0.20.0;
+an existing 0.20.0 repository needs no upgrade just because source reports
+0.21.0. Install the selected released package in the external environment,
 review the read-only plan, apply the authorized changes, then check the result:
 
 ```text
-"CHECKER" -m pip install "se-harness==0.19.0"
+"CHECKER" -m pip install "se-harness==0.20.0"
 "CHECKER" -I -m se_harness upgrade "REPO"
 "CHECKER" -I -m se_harness upgrade "REPO" --apply
 "CHECKER" -I -m se_harness doctor "REPO"
@@ -119,14 +120,15 @@ effective values, wherever their rule is written.
 
 ## Published release and candidate differences
 
-Released 0.19.0 supplies editable compatibility pointers to older instruction
-filenames. Current work starts at [ENGINEERING_HARNESS.md](../../ENGINEERING_HARNESS.md#read-by-task)
+Released 0.20.0 omits the six obsolete guide seeds from fresh installations.
+An upgrade preserves existing stock pointers and custom owner text. Current work starts at [ENGINEERING_HARNESS.md](../../ENGINEERING_HARNESS.md#read-by-task)
 and reads the selected guide under `docs/engineering/harness/`. Those pointers
 are navigation aids, not separate policy authorities.
 
-Candidate source 0.20.0 retires the old instruction seeds. That candidate behavior
-does not change a repository governed by 0.19.0. Release and explicit adoption
-must occur before the candidate's installer behavior applies there.
+This repository adopted 0.20.0 under WO-HUP-024 and preserves its six existing
+owner pointers. Their removal remains a separate action after active-consumer
+and native-delivery checks. Development source is now 0.21.0; its version alone
+does not change any repository's selected evaluator.
 
 ## Earlier migrations and retained history
 

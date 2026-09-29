@@ -10,7 +10,7 @@ updated = "YYYY-MM-DD"
 [assurance]
 commit_bound_verification = "<required or not_required>"
 rationale = "<why future decisions do or do not require commit-bound assurance>"
-decided_by = "<accountable role>"
+decided_by = "<actual human who confirmed the assurance classification>"
 
 [execution_scope]
 paths = [
@@ -42,7 +42,7 @@ backslashes, wildcards, dot components, drive prefixes, URIs, or duplicate
 case variants.
 
 Approval authorizes routine execution through the single procedure in
-`docs/engineering/DECISION_RIGHTS.md#approved-execution`. The selected person or
+`docs/engineering/harness/AUTHORITY.md#authority-from-work-approval`. The selected person or
 agent can start, implement, check, record completion and prepare required
 verification within this scope without separate permission for those steps.
 Record completion only after the work and evidence are complete. Owner

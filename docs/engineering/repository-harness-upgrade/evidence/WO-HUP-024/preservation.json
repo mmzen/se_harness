@@ -1,0 +1,57 @@
+{
+  "base_commit": "5111bc68ca1e3fc493478d6507d00571867c00b8",
+  "tracked_files_compared": 12385,
+  "modified_tracked_paths": [
+    ".engineering-harness.lock",
+    ".engineering-harness.toml",
+    ".github/workflows/engineering-harness.yml",
+    "ENGINEERING_HARNESS.md",
+    "docs/engineering/harness/DEFINE_CHANGE.md",
+    "docs/engineering/harness/DELIVER_RESULT.md",
+    "docs/engineering/harness/EXECUTE_WORK.md",
+    "docs/engineering/harness/PULL_REQUEST.md",
+    "docs/engineering/harness/UPGRADE.md",
+    "docs/engineering/harness/migration/IMPLEMENTATION_PLAN.md",
+    "docs/engineering/instruction-architecture/README.md",
+    "docs/engineering/repository-harness-upgrade/README.md",
+    "docs/engineering/templates/WORK_ORDER.template.md",
+    "docs/notes/developing-se-harness.md",
+    "docs/notes/harness-installation-and-upgrades.md",
+    "pyproject.toml",
+    "se_harness/__init__.py",
+    "tests/test_progressive_documentation.py"
+  ],
+  "outside_scope_changes": [],
+  "owner_files": {
+    "AGENTS.md": {
+      "before_sha256": "c69db32976ae152095d167e5eca8aad56fc731b7111ef11bfe9e13781128ecf6",
+      "after_sha256": "c69db32976ae152095d167e5eca8aad56fc731b7111ef11bfe9e13781128ecf6"
+    },
+    "docs/engineering/OPERATING_CARD.md": {
+      "before_sha256": "f33ec9e96702ad63f5cb816bc182398fdb58fd2a55436a29a306972692faccb7",
+      "after_sha256": "f33ec9e96702ad63f5cb816bc182398fdb58fd2a55436a29a306972692faccb7"
+    },
+    "docs/engineering/DECISION_RIGHTS.md": {
+      "before_sha256": "f291428b93bf7165c293964be340f18935f06c06c2f981acc593d6cebd5fd95a",
+      "after_sha256": "f291428b93bf7165c293964be340f18935f06c06c2f981acc593d6cebd5fd95a"
+    },
+    "docs/engineering/QUALITY_GATES.md": {
+      "before_sha256": "647941d3301caa0aeee58afc94415c345dfaa2072f85d37e6744fa5915e216b5",
+      "after_sha256": "647941d3301caa0aeee58afc94415c345dfaa2072f85d37e6744fa5915e216b5"
+    },
+    "docs/engineering/WORKFLOW.md": {
+      "before_sha256": "d9949e28d281260bd7d7aa9538dd239ea60fb18b5b0391cda2fdbab39ad7b1b3",
+      "after_sha256": "d9949e28d281260bd7d7aa9538dd239ea60fb18b5b0391cda2fdbab39ad7b1b3"
+    },
+    "docs/engineering/TRACEABILITY.md": {
+      "before_sha256": "26e43956215d49eb74d2f56d361c76c55984b2b98c84daf995d4faf5ded64a09",
+      "after_sha256": "26e43956215d49eb74d2f56d361c76c55984b2b98c84daf995d4faf5ded64a09"
+    },
+    "docs/engineering/TECHNICAL_COMMUNICATION.md": {
+      "before_sha256": "e8ceafc9969e1710ecaf3fd791fb9046606765bc3a4c48eed21769c6ecc2e049",
+      "after_sha256": "e8ceafc9969e1710ecaf3fd791fb9046606765bc3a4c48eed21769c6ecc2e049"
+    }
+  },
+  "claude_absent": true,
+  "formal_records_unchanged_since_start": true
+}

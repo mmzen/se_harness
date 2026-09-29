@@ -3,6 +3,22 @@
 This domain governs separately authorized standard-root evaluator upgrades and
 their bounded post-adoption qualification.
 
+## Current adoption: 0.20.0
+
+WO-HUP-024 adopts the public wheel released under RLS-SEH-029, with verification
+contract VER-HUP-022. The installer updates the selected instructions and lock
+and replaces the explicitly reviewed work-order template. CI selects 0.20.0;
+development source advances to 0.21.0. The retained transaction is
+[evidence/WO-HUP-024-evaluator-upgrade.json](evidence/WO-HUP-024-evaluator-upgrade.json).
+
+AGENTS.md and the six existing guide pointers retain their bytes. Native host
+configuration and pointer cleanup remain separate. See the
+[adoption evidence](evidence/WO-HUP-024/README.md) for actual checks, candidate
+identity and the pending human verification decision. No release or publication
+is performed by this adoption.
+
+## Historical upgrade records
+
 - `INT-HUP-001` through `VER-HUP-001` are approved. `WO-HUP-001` is
   `implemented`, and verified `VREC-HUP-001` retains its commit-bound evidence.
   That transaction moved the root from released bootstrap `0.5.0a1` to exact
