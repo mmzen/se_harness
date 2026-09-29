@@ -1,0 +1,45 @@
+{
+  "authority": "evidence-only; no lifecycle or external action authorized",
+  "checks": [
+    {
+      "id": "CP001",
+      "message": "released verifier identity is exact and isolated",
+      "passed": true,
+      "subject": "released-verifier"
+    },
+    {
+      "id": "CP002",
+      "message": "10 released-verifier scenarios passed",
+      "passed": true,
+      "subject": "candidate-wheel"
+    }
+  ],
+  "completion": "completed",
+  "evaluator": {
+    "diagnostics": [],
+    "distribution": "se-harness",
+    "entry_point_sha256": "31185b188e408767c084c4a5bc5d61a7c6829504f134aa5124732bdf0717f8ba",
+    "evaluator_archive_name": "se_harness-0.19.0-py3-none-any.whl",
+    "evaluator_archive_sha256": "43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8",
+    "evaluator_payload_manifest": "se-harness-installed-payload-v1",
+    "evaluator_payload_sha256": "71c951a74d2f9c242d594fdbc419dcb173b87d51d25694db6a54a9b6cfc6c356",
+    "identity_sha256": "f115eee648330f3e82fbc1f5a64c1ed41b16fb0e8ef8f33b5005f3258055e943",
+    "isolated_python": true,
+    "pythonpath_present": false,
+    "role": "released-verifier",
+    "user_site_enabled": false,
+    "version": "0.19.0"
+  },
+  "independence": "released-verifier",
+  "operation": "candidate-package",
+  "passed": true,
+  "schema": "se-harness-release-qualification-v1",
+  "target": {
+    "acceptance_contract_sha256": "a443e93d6da7d0538bdf790a16f4dea49ac7a6ede384c65e40362627d7a84b75",
+    "commit": "29d8e69e0a061b96e7a4df42f2ed59ab2ab9c281",
+    "identity_sha256": "fb3c1d0d34384ba8965a464757f16093d00dd6b9462ec5a9eb49ce390ab92f77",
+    "kind": "candidate-package",
+    "version": "0.20.0",
+    "wheel_sha256": "75a7a70dc8e49e831d80ccff421764be75df5d9eb68091d4124a789a59b009aa"
+  }
+}
