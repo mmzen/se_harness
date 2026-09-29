@@ -1,0 +1,276 @@
+{
+  "schema": "se-harness-delivery-observations/v1",
+  "plan_sha256": "29fd048258b5000b9aecdcd7f09ed8b77478e04e78b903aa4c1ed6ddc2711949",
+  "observed_at": "2026-09-29T19:59:31.082119+00:00",
+  "release": {
+    "record": "RLS-SEH-029",
+    "status": "released",
+    "source": "https://github.com/mmzen/se_harness/blob/23ae2d1f6af0f1bf8484b95b0850cb0019eeb7db/docs/engineering/release-0-20-0/releases/RLS-SEH-029.md",
+    "observed_at": "2026-09-29T19:55:39.969521+00:00",
+    "evidence": [
+      {
+        "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/released-record.md",
+        "sha256": "c34a8470c2a24c8b458a83b83914f0cb1337dd44915c25d4eec3d6219fd97042"
+      }
+    ]
+  },
+  "surfaces": [
+    {
+      "id": "evaluator",
+      "status": "pass",
+      "identity": {
+        "record": "RLS-SEH-029",
+        "version": "0.20.0",
+        "wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+        "sdist_sha256": "5b6784aeabdf72e0e6b43a7a2bc81244c7a9da6415cf39fbc39f440ec57d426c"
+      },
+      "source": "https://github.com/mmzen/se_harness/releases/tag/v0.20.0",
+      "observed_at": "2026-09-29T19:55:39.969521+00:00",
+      "evidence": {
+        "publisher": [
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/publisher-result.json",
+            "sha256": "635a29b7bc9175c71e009650a92b57908e1ab436c29622583e7cb51182552660"
+          },
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-surfaces.json",
+            "sha256": "d3ff3be0364860be3d2b1f124979667660e81b7c61b2826374b5a94a8558207a"
+          }
+        ],
+        "public_install": [
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-install-qualification.json",
+            "sha256": "51aa5c56fe07d576ade007596cf689fa32173f809fb941d3fc9d52b3280f393e"
+          }
+        ]
+      }
+    },
+    {
+      "id": "marketplace",
+      "status": "pass",
+      "identity": {
+        "plugin_version": "0.2.2",
+        "source_commit": "7253d13b212ad6f7df670021290fea32e81d66de",
+        "evaluator_version": "0.20.0",
+        "wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+        "public_revision": "5662817f42994bd0dc9aabaa56891f9c298ab965",
+        "codex_content_sha256": "ea6ab271e6758d6177e014a385ef546a0189fa7d24c403d14089a74be15519d4",
+        "claude-code_content_sha256": "d3d6fd544964c85561ff7e274acaae301d8bd44fa8df8aeb41858b5aea4beffa"
+      },
+      "source": "https://github.com/mmzen/se_harness#plugin-marketplace",
+      "observed_at": "2026-09-29T19:55:39.969521+00:00",
+      "evidence": {
+        "assembly": [
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-030/package-identity.json",
+            "sha256": "b119643684085c676e43725f5d420f4d6edf17fc99a92ca53fafd6f2be63bd11"
+          }
+        ],
+        "qualification": [
+          {
+            "path": "docs/engineering/release-0-20-0/verification-records/VREC-PLG-025.md",
+            "sha256": "9d3006262f297b339423a4470f2c0067fe497fabe63af4ac7d47bf4c48346042"
+          },
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-030/native-qualification.json",
+            "sha256": "1ca6851cd965d23e1e953197a1a841517fbfa4e542eb1ba49cef7cbce8725b8b"
+          }
+        ],
+        "public_ref": [
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-readback.json",
+            "sha256": "fdf1f4a3062ce0e71cce64c3d2214179b64cbf2ccbdda8824666b20e30a29dd3"
+          },
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/publication.json",
+            "sha256": "30cc1e32fb2adda0b023000d5bf9b7bce6685d7206a4c7230dde55accc1b0c2e"
+          }
+        ],
+        "native_startup_compaction": [
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/native-recheck.json",
+            "sha256": "5f9a1ea91417e18fb3fcd2b3dfe7a38251500c6cd1402cb47b8215c6104b9988"
+          },
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-030/native-traces.json",
+            "sha256": "3025a6b46d34c53a3114aa709ff3ee972b31f25cb3875a055acd7a19c28765a4"
+          },
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/probe-sources.json",
+            "sha256": "a39005971f13d0b63951bfa15d5920044a45bb4f69cc929f6ff55a3f5410b41c"
+          }
+        ],
+        "codex_fresh": [
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-routes.json",
+            "sha256": "0422c574d599462150be87fbb446c06866ec731aebb009ee6d74e1b258ba4ab3"
+          }
+        ],
+        "claude-code_fresh": [
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-routes.json",
+            "sha256": "0422c574d599462150be87fbb446c06866ec731aebb009ee6d74e1b258ba4ab3"
+          }
+        ],
+        "codex_update": [
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-routes.json",
+            "sha256": "0422c574d599462150be87fbb446c06866ec731aebb009ee6d74e1b258ba4ab3"
+          }
+        ],
+        "claude-code_update": [
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-routes.json",
+            "sha256": "0422c574d599462150be87fbb446c06866ec731aebb009ee6d74e1b258ba4ab3"
+          }
+        ]
+      },
+      "routes": [
+        {
+          "host": "codex",
+          "host_version": "codex-cli 0.158.0-alpha.2.1",
+          "kind": "fresh",
+          "source": "https://github.com/mmzen/se_harness#plugin-marketplace",
+          "revision": "5662817f42994bd0dc9aabaa56891f9c298ab965",
+          "plugin_version": "0.2.2",
+          "content_sha256": "ea6ab271e6758d6177e014a385ef546a0189fa7d24c403d14089a74be15519d4",
+          "evaluator_version": "0.20.0",
+          "status": "pass",
+          "observed_at": "2026-09-29T19:48:23.423128+00:00",
+          "wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+          "evidence": [
+            {
+              "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-routes.json",
+              "sha256": "0422c574d599462150be87fbb446c06866ec731aebb009ee6d74e1b258ba4ab3"
+            }
+          ]
+        },
+        {
+          "host": "claude-code",
+          "host_version": "2.1.273 (Claude Code)",
+          "kind": "fresh",
+          "source": "https://github.com/mmzen/se_harness#plugin-marketplace",
+          "revision": "5662817f42994bd0dc9aabaa56891f9c298ab965",
+          "plugin_version": "0.2.2",
+          "content_sha256": "d3d6fd544964c85561ff7e274acaae301d8bd44fa8df8aeb41858b5aea4beffa",
+          "evaluator_version": "0.20.0",
+          "status": "pass",
+          "observed_at": "2026-09-29T19:48:30.721192+00:00",
+          "wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+          "evidence": [
+            {
+              "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-routes.json",
+              "sha256": "0422c574d599462150be87fbb446c06866ec731aebb009ee6d74e1b258ba4ab3"
+            }
+          ]
+        },
+        {
+          "host": "codex",
+          "host_version": "codex-cli 0.158.0-alpha.2.1",
+          "kind": "update",
+          "source": "https://github.com/mmzen/se_harness#plugin-marketplace",
+          "revision": "5662817f42994bd0dc9aabaa56891f9c298ab965",
+          "plugin_version": "0.2.2",
+          "content_sha256": "ea6ab271e6758d6177e014a385ef546a0189fa7d24c403d14089a74be15519d4",
+          "evaluator_version": "0.20.0",
+          "status": "pass",
+          "observed_at": "2026-09-29T19:51:46.820359+00:00",
+          "wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+          "evidence": [
+            {
+              "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-routes.json",
+              "sha256": "0422c574d599462150be87fbb446c06866ec731aebb009ee6d74e1b258ba4ab3"
+            }
+          ],
+          "starting_version": "0.2.1",
+          "starting_source": "https://github.com/mmzen/se_harness#plugin-marketplace"
+        },
+        {
+          "host": "claude-code",
+          "host_version": "2.1.273 (Claude Code)",
+          "kind": "update",
+          "source": "https://github.com/mmzen/se_harness#plugin-marketplace",
+          "revision": "5662817f42994bd0dc9aabaa56891f9c298ab965",
+          "plugin_version": "0.2.2",
+          "content_sha256": "d3d6fd544964c85561ff7e274acaae301d8bd44fa8df8aeb41858b5aea4beffa",
+          "evaluator_version": "0.20.0",
+          "status": "pass",
+          "observed_at": "2026-09-29T19:48:21.406799+00:00",
+          "wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+          "evidence": [
+            {
+              "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-routes.json",
+              "sha256": "0422c574d599462150be87fbb446c06866ec731aebb009ee6d74e1b258ba4ab3"
+            }
+          ],
+          "starting_version": "0.2.1",
+          "starting_source": "https://github.com/mmzen/se_harness#plugin-marketplace"
+        }
+      ]
+    },
+    {
+      "id": "documentation",
+      "status": "pending",
+      "identity": {
+        "commit": "867e56bbec76a4b7475c85c6c8a07bd58187b5c8"
+      },
+      "source": "local review branch work/public-marketplace-022 at 867e56bbec76a4b7475c85c6c8a07bd58187b5c8; public integration pending",
+      "observed_at": "2026-09-29T19:55:39.969521+00:00",
+      "evidence": {
+        "claims_review": [
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/review.json",
+            "sha256": "3c1f51c9e2bceadee6ffb550342aa11625d51832b8d40bf9329cbc2b5240a66c"
+          }
+        ],
+        "links": [
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/checks.json",
+            "sha256": "97d1324617c85448593e4002341d135827c0f494444cdcc9dec957cfef248de9"
+          }
+        ]
+      }
+    },
+    {
+      "id": "demonstration",
+      "status": "pass",
+      "identity": {
+        "governance_commit": "23ae2d1f6af0f1bf8484b95b0850cb0019eeb7db"
+      },
+      "source": "https://mmzen.github.io/se_harness/",
+      "observed_at": "2026-09-29T19:55:39.969521+00:00",
+      "evidence": {
+        "deployment": [
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-surfaces.json",
+            "sha256": "d3ff3be0364860be3d2b1f124979667660e81b7c61b2826374b5a94a8558207a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "release_markers",
+      "status": "pass",
+      "identity": {
+        "latest": "v0.20.0",
+        "last": "7253d13b212ad6f7df670021290fea32e81d66de"
+      },
+      "source": "https://github.com/mmzen/se_harness",
+      "observed_at": "2026-09-29T19:55:39.969521+00:00",
+      "evidence": {
+        "authorization": [
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/markers.json",
+            "sha256": "afcf74f4bc7a70bf9a0d5fdc6f6b23ef861e188032635223bcdf53819ddbd170"
+          }
+        ],
+        "readback": [
+          {
+            "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-surfaces.json",
+            "sha256": "d3ff3be0364860be3d2b1f124979667660e81b7c61b2826374b5a94a8558207a"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -40,3 +40,18 @@ authorized integration and public documentation readback remain required.
 The five-surface report must remain incomplete until that readback succeeds.
 Final closeout will be an append-only receipt outside this candidate's bound
 evidence; integrating that receipt creates no further VREC cycle.
+
+## Candidate review and closeout inputs
+
+Documentation commit: `867e56bbec76a4b7475c85c6c8a07bd58187b5c8`.
+[Checks](checks.json): 61 passed, one Windows symlink-privilege skip. The initial
+UTF-8 editing error and successful correction are preserved. [Claims review](review.json)
+compares source and packaged instructions with the public receipts.
+
+[Current plan](delivery-plan-v3.json), [observations](delivery-observations-v3.json)
+and [result](delivery-result-v3.json) show four satisfied surfaces and documentation
+pending. [Negative controls](delivery-negative-checks.json) reject a missing
+marketplace and a wrong revision. [Evidence mapping](evidence-mapping-v3.json)
+explains reuse and the corrected source-field error in the preserved version 2
+report. [Requirement assessment](requirement-assessment.json) separates completed
+candidate checks from the later public documentation readback.

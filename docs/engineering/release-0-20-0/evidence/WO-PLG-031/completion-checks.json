@@ -1,0 +1,94 @@
+{
+  "status": "pass",
+  "base": "788a8f127aa11069269161e6466ce5b7cf1a1d9a",
+  "observed_at": "2026-09-29T20:01:08.403149+00:00",
+  "work_orders": [
+    "WO-PLG-031",
+    "WO-PLG-033"
+  ],
+  "scope_method": "Released check-pr derives the full diff from the trusted base, checks the union of approved scopes and retains per-WO handoff evidence.",
+  "combined_handoff": {
+    "changed_paths": [
+      "README.md",
+      "docs/engineering/instruction-architecture/README.md",
+      "docs/engineering/plugin-integration/README.md",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/README.md",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/checks.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/commands.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/markers.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/native-recheck.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/probe-sources.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-install-qualification.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-readback.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-routes.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-surfaces.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/publication.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/publisher-result.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/released-record.md",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/review.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-033/review.json",
+      "docs/engineering/release-0-20-0/work-orders/WO-PLG-031.md",
+      "docs/engineering/release-0-20-0/work-orders/WO-PLG-033.md",
+      "docs/notes/developing-se-harness.md",
+      "docs/notes/plugin-installation-guide.md",
+      "docs/notes/plugin-marketplace-publication.md",
+      "docs/notes/release-delivery-completion.md",
+      "tests/plugin_integration/package_assembly/test_refresh_guidance.py",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/WO-PLG-031-handoff.md",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/completion-checks.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-negative-checks.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-observations-v2.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-observations-v3.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-plan-v2.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-plan-v3.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-result-v2.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-result-v3.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/evidence-mapping-v3.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/evidence-mapping.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-031/requirement-assessment.json",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-033/WO-PLG-033-handoff.md",
+      "docs/engineering/release-0-20-0/evidence/WO-PLG-033/completion-checks.json"
+    ],
+    "command": "check-pr",
+    "outcome": "completed",
+    "schema": "se-harness-command-result-v1",
+    "status": "pass",
+    "work_orders": [
+      "WO-PLG-031",
+      "WO-PLG-033"
+    ]
+  },
+  "validation": {
+    "valid": true,
+    "exit_code": 0
+  },
+  "review": {
+    "assurance": {
+      "commit_bound_verification": "required",
+      "decided_by": "mmzen",
+      "rationale": "Human mmzen confirmed required commit-bound verification by approving the reviewed 0.20.0/0.2.2 release package; later release, publication and availability decisions rely on this work."
+    },
+    "authority_boundary": "Preflight is derived, read-only evidence. It does not approve artifacts, authorize a diff, verify work, release software, commit, push, tag, publish, or deploy.",
+    "background": [],
+    "diagnostics": [],
+    "phase": "review",
+    "reading_manifest": [
+      "ENGINEERING_HARNESS.md",
+      "docs/engineering/release-orchestration/intent/INT-RLO-001.md",
+      "docs/engineering/release-orchestration/capabilities/CAP-RLO-004.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-019.md",
+      "docs/engineering/release-orchestration/requirements/REQ-RLO-020.md",
+      "docs/engineering/release-orchestration/specifications/SPEC-RLO-006.md",
+      "docs/engineering/release-0-20-0/verification/VER-PLG-029.md",
+      "docs/engineering/release-0-20-0/work-orders/WO-PLG-031.md"
+    ],
+    "ready": true,
+    "schema": "se-harness-preflight-v2",
+    "skew": [],
+    "work_order": {
+      "id": "WO-PLG-031",
+      "path": "docs/engineering/release-0-20-0/work-orders/WO-PLG-031.md",
+      "status": "in_progress"
+    }
+  }
+}

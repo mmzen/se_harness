@@ -2,7 +2,7 @@
 id = "WO-PLG-031"
 type = "work_order"
 title = "Confirm public 0.2.2 delivery and reconcile current documentation"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-09-29"
 updated = "2026-09-29"
@@ -47,6 +47,13 @@ to = "in_progress"
 decided_at = "2026-09-29T19:47:43Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex starts the unchanged mmzen-approved public 0.2.2 delivery observations and documentation work after VREC-PLG-025 verification, merged PR 500 and authorized publication with exact public byte readback. User reconfirmed WO-PLG-031 approval."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-29T20:01:57Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Bounded public delivery and documentation work complete at candidate stage; public route and native input checks, focused tests, claims review, delivery negative controls and combined Git-derived handoff pass. Exact VREC capture and human verification follow; documentation integration and final append-only readback remain separate."
 +++
 
 # Confirm public 0.2.2 delivery and current documentation
