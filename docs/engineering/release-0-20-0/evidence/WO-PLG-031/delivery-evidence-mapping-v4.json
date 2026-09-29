@@ -1,0 +1,19 @@
+{
+  "reviewer": "Codex",
+  "prior_plan": {
+    "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-plan-v3.json",
+    "sha256": "29fd048258b5000b9aecdcd7f09ed8b77478e04e78b903aa4c1ed6ddc2711949"
+  },
+  "current_plan": {
+    "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-plan-v4.json",
+    "sha256": "1be29a78e355fd57a4bbe9dce074ed8c0cec9515c0bbbf2a58daf0ec783c6c19"
+  },
+  "authority": "mmzen reported PR501 merged; approved WO-PLG-031 and VER-PLG-029 explicitly cover append-only post-merge closeout and its review-branch push/draft PR.",
+  "documentation": "All seven public source guides at PR501 merge match Git blobs in verified candidate 08f2e1b7a4fc9b4fd654154b914526bb7bb9c528.",
+  "reuse": "Earlier package, evaluator, public installation and native observations are reused at unchanged identities with their original timestamps. Marketplace ref, Pages provenance and markers are re-observed in the new receipt. All VREC-PLG-026-bound bytes remain unchanged.",
+  "readback": {
+    "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/documentation-public-readback.json",
+    "sha256": "a689bb6252f51f5cbbad7d48c45a919ebebb4c775e95335791308188312f464e"
+  },
+  "ci": "Required validate passed on the exact merged PR head. Other check states are retained as observed; a merge does not imply every optional job finished."
+}

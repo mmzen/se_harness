@@ -1,0 +1,323 @@
+{
+  "status": "pass",
+  "observed_at": "2026-09-29T20:10:57.928889+00:00",
+  "merge_commit": "03012212b216bea05df85608134b59a64da2d2f7",
+  "verified_candidate": "08f2e1b7a4fc9b4fd654154b914526bb7bb9c528",
+  "verified_record": "VREC-PLG-026",
+  "public_main": "03012212b216bea05df85608134b59a64da2d2f7",
+  "pr": {
+    "number": 501,
+    "url": "https://github.com/mmzen/se_harness/pull/501",
+    "head": "b2c02a271a22036440f16e03875bc1382894dc4a",
+    "merged_at": "2026-09-29T20:08:44Z",
+    "merged_by": "mmzen"
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "url": "https://github.com/mmzen/se_harness/blob/03012212b216bea05df85608134b59a64da2d2f7/README.md",
+      "blob_sha": "185d620ea6d2dae2186da98368063cf2da97d256",
+      "expected_candidate": "08f2e1b7a4fc9b4fd654154b914526bb7bb9c528",
+      "expected_sha256": "73d698937f6961b666762daa6ee764ec35ec5da553211b863e8656bc4f36d50d",
+      "observed_sha256": "73d698937f6961b666762daa6ee764ec35ec5da553211b863e8656bc4f36d50d",
+      "matches": true
+    },
+    {
+      "path": "docs/notes/plugin-installation-guide.md",
+      "url": "https://github.com/mmzen/se_harness/blob/03012212b216bea05df85608134b59a64da2d2f7/docs/notes/plugin-installation-guide.md",
+      "blob_sha": "3681353b888c068d29f77d72ca9eae7ac190085b",
+      "expected_candidate": "08f2e1b7a4fc9b4fd654154b914526bb7bb9c528",
+      "expected_sha256": "1348a2e12dfcfb4c81a482fcada4203d25b7bac9b73f185038b72a809e353f6b",
+      "observed_sha256": "1348a2e12dfcfb4c81a482fcada4203d25b7bac9b73f185038b72a809e353f6b",
+      "matches": true
+    },
+    {
+      "path": "docs/notes/plugin-marketplace-publication.md",
+      "url": "https://github.com/mmzen/se_harness/blob/03012212b216bea05df85608134b59a64da2d2f7/docs/notes/plugin-marketplace-publication.md",
+      "blob_sha": "1829a397e12bf5fad0bf874cb5d5f939ef2a5e9f",
+      "expected_candidate": "08f2e1b7a4fc9b4fd654154b914526bb7bb9c528",
+      "expected_sha256": "d0c3b523d24c3c7dc55a70f52fc42d2dd9ef882f384c70add8e4da22d966311c",
+      "observed_sha256": "d0c3b523d24c3c7dc55a70f52fc42d2dd9ef882f384c70add8e4da22d966311c",
+      "matches": true
+    },
+    {
+      "path": "docs/notes/developing-se-harness.md",
+      "url": "https://github.com/mmzen/se_harness/blob/03012212b216bea05df85608134b59a64da2d2f7/docs/notes/developing-se-harness.md",
+      "blob_sha": "fa7d472a389b608ecd877e350968bba6d4b73e45",
+      "expected_candidate": "08f2e1b7a4fc9b4fd654154b914526bb7bb9c528",
+      "expected_sha256": "558a66d59ea841d60add71ac4e3c3f6a2a779ce8b88044e39d4a33040f2c195e",
+      "observed_sha256": "558a66d59ea841d60add71ac4e3c3f6a2a779ce8b88044e39d4a33040f2c195e",
+      "matches": true
+    },
+    {
+      "path": "docs/notes/release-delivery-completion.md",
+      "url": "https://github.com/mmzen/se_harness/blob/03012212b216bea05df85608134b59a64da2d2f7/docs/notes/release-delivery-completion.md",
+      "blob_sha": "87e66ce8eb76612e6ee2de1b0ca06946411695ef",
+      "expected_candidate": "08f2e1b7a4fc9b4fd654154b914526bb7bb9c528",
+      "expected_sha256": "73bcae908e624bfa6663a17809559d50caaf9eb7ecaa14cd98c1ae3d2bf6ed0f",
+      "observed_sha256": "73bcae908e624bfa6663a17809559d50caaf9eb7ecaa14cd98c1ae3d2bf6ed0f",
+      "matches": true
+    },
+    {
+      "path": "docs/engineering/plugin-integration/README.md",
+      "url": "https://github.com/mmzen/se_harness/blob/03012212b216bea05df85608134b59a64da2d2f7/docs/engineering/plugin-integration/README.md",
+      "blob_sha": "a6b0b71a194b1ad5068a203d667f744617999b40",
+      "expected_candidate": "08f2e1b7a4fc9b4fd654154b914526bb7bb9c528",
+      "expected_sha256": "903fd3ed074ba08884abd2681f45391c975d99483314340dda7d0bb428a7f769",
+      "observed_sha256": "903fd3ed074ba08884abd2681f45391c975d99483314340dda7d0bb428a7f769",
+      "matches": true
+    },
+    {
+      "path": "docs/engineering/instruction-architecture/README.md",
+      "url": "https://github.com/mmzen/se_harness/blob/03012212b216bea05df85608134b59a64da2d2f7/docs/engineering/instruction-architecture/README.md",
+      "blob_sha": "99dce91d824515e2d23a2a6491e7b19203b62885",
+      "expected_candidate": "08f2e1b7a4fc9b4fd654154b914526bb7bb9c528",
+      "expected_sha256": "43ce17440956270e47f430769f6cebe3d3e5c62be24b9e88de5733d4315bc629",
+      "observed_sha256": "43ce17440956270e47f430769f6cebe3d3e5c62be24b9e88de5733d4315bc629",
+      "matches": true
+    }
+  ],
+  "marketplace_revision": "5662817f42994bd0dc9aabaa56891f9c298ab965",
+  "markers": {
+    "latest": "v0.20.0",
+    "last": "7253d13b212ad6f7df670021290fea32e81d66de"
+  },
+  "pages": {
+    "url": "https://www.verityplane.ai/publication-manifest.json",
+    "response_sha256": "ebdd37296bb2ff9879c214735d9dec6eae23be4a094e9518f7b350f3f5018dd3",
+    "provenance": {
+      "bundle_manifest_sha256": "1d403c55db3a31b5eb93f3ef70b16073cf314982c7c7e0d6a7260c857d070eaf",
+      "candidate_commit": "7253d13b212ad6f7df670021290fea32e81d66de",
+      "derived_non_authoritative": true,
+      "generated_dashboard_sha256": "4d8a0de418b0f7c8ba308c5cef304d86236710e056d89e1556259d5c2a15b3c2",
+      "generation_summary_sha256": "894f6975b9871b61bf41c5f677ed450ab51b1d4bb46d78139b8e66a2327d0513",
+      "governance_commit": "23ae2d1f6af0f1bf8484b95b0850cb0019eeb7db",
+      "published_dashboard_sha256": "c64e12f49269a5e8422a0bcd9ba1556c6bd7b6fc0df9218cfee6f4a9ac176a87",
+      "release_record": "RLS-SEH-029",
+      "release_tag": "v0.20.0",
+      "repository": "mmzen/se_harness",
+      "schema": "se-harness-pages-publication-v1",
+      "version": "0.20.0"
+    },
+    "resource_file_count": 2606
+  },
+  "ci": {
+    "head": "b2c02a271a22036440f16e03875bc1382894dc4a",
+    "required_validate": "success",
+    "checks": [
+      {
+        "name": "Upgrade rehearsal (Windows)",
+        "status": "in_progress",
+        "conclusion": null,
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36624075240/job/109597244904"
+      },
+      {
+        "name": "Upgrade rehearsal (Linux)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36624075240/job/109597244791"
+      },
+      {
+        "name": "Candidate package evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36624075240/job/109596961975"
+      },
+      {
+        "name": "CodeQL",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/mmzen/se_harness/runs/109596756848"
+      },
+      {
+        "name": "Rehearse the qualification of the release record",
+        "status": "completed",
+        "conclusion": "skipped",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36624075701/job/109596593212"
+      },
+      {
+        "name": "Rehearse the qualification of this candidate",
+        "status": "completed",
+        "conclusion": "skipped",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36624075701/job/109596593007"
+      },
+      {
+        "name": "Publication rehearsal",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36624075701/job/109596591158"
+      },
+      {
+        "name": "Select release rehearsals",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36624075701/job/109596453667"
+      },
+      {
+        "name": "validate",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36624075445/job/109596450598"
+      },
+      {
+        "name": "Candidate source evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36624075240/job/109596450096"
+      },
+      {
+        "name": "Predecessor evaluator assessment",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36624075137/job/109596447937"
+      },
+      {
+        "name": "Analyze (javascript-typescript)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36624071970/job/109596442554"
+      },
+      {
+        "name": "Analyze (python)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36624071970/job/109596442448"
+      },
+      {
+        "name": "Analyze (actions)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/mmzen/se_harness/actions/runs/36624071970/job/109596442319"
+      }
+    ]
+  },
+  "invocations": [
+    {
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "api",
+        "repos/mmzen/se_harness/pulls/501"
+      ],
+      "exit_code": 0,
+      "response_sha256": "50c0f8ebfda2766c551b15d36c8159813f46cad6793a3295e2284282ef3d8345"
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "api",
+        "repos/mmzen/se_harness/git/ref/heads/main"
+      ],
+      "exit_code": 0,
+      "response_sha256": "b2495f28af149c8488121cf873856f4cfa2a8de9eb7fe824b5ea341e6c6d4520"
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "api",
+        "repos/mmzen/se_harness/contents/README.md?ref=03012212b216bea05df85608134b59a64da2d2f7"
+      ],
+      "exit_code": 0,
+      "response_sha256": "9a1832f16166d19eacebc889ccc3b59a440cc56bff5dbb78433cd76d047e937b"
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "api",
+        "repos/mmzen/se_harness/contents/docs/notes/plugin-installation-guide.md?ref=03012212b216bea05df85608134b59a64da2d2f7"
+      ],
+      "exit_code": 0,
+      "response_sha256": "a04003243297f4f502b854aa41254de40692443dea3567689c5a9fe6e5d9dd5f"
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "api",
+        "repos/mmzen/se_harness/contents/docs/notes/plugin-marketplace-publication.md?ref=03012212b216bea05df85608134b59a64da2d2f7"
+      ],
+      "exit_code": 0,
+      "response_sha256": "918c7d4e8e186039278309dd1fc92c747be7871dd850e9022a2662f9388f8876"
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "api",
+        "repos/mmzen/se_harness/contents/docs/notes/developing-se-harness.md?ref=03012212b216bea05df85608134b59a64da2d2f7"
+      ],
+      "exit_code": 0,
+      "response_sha256": "a616e097f073167f727581401ee00da9fb09882deec4a9a9dc61516893b00445"
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "api",
+        "repos/mmzen/se_harness/contents/docs/notes/release-delivery-completion.md?ref=03012212b216bea05df85608134b59a64da2d2f7"
+      ],
+      "exit_code": 0,
+      "response_sha256": "527e5d31da76ee2d0a17f0de34e51a8a174d4355366ca8cea10b61ee5d8f9e73"
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "api",
+        "repos/mmzen/se_harness/contents/docs/engineering/plugin-integration/README.md?ref=03012212b216bea05df85608134b59a64da2d2f7"
+      ],
+      "exit_code": 0,
+      "response_sha256": "bff09ab88689a67778ba59421dc901ffadb5a64d987d8f7dfcf676f099fd7f1c"
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "api",
+        "repos/mmzen/se_harness/contents/docs/engineering/instruction-architecture/README.md?ref=03012212b216bea05df85608134b59a64da2d2f7"
+      ],
+      "exit_code": 0,
+      "response_sha256": "40665752675b2fa95f025c46b6e1cccd33e7d136aa247e0d4ac218b21272da6f"
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "api",
+        "repos/mmzen/se_harness/git/ref/heads/plugin-marketplace"
+      ],
+      "exit_code": 0,
+      "response_sha256": "4691b4e26e3214eeaf64e0a510a14a913e33677b44a5bb67e9014e7127420983"
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "api",
+        "repos/mmzen/se_harness/releases/latest"
+      ],
+      "exit_code": 0,
+      "response_sha256": "0e761f1a7169e1d8c587d49b18cf262ac510b44068e1b8ebaedd9fcd0b4426c5"
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "api",
+        "repos/mmzen/se_harness/git/ref/tags/last"
+      ],
+      "exit_code": 0,
+      "response_sha256": "cea8904d3d83fee09e13cb28f7871c41a5095fe7d67d7102adce3f2a7c282cab"
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "api",
+        "repos/mmzen/se_harness/commits/b2c02a271a22036440f16e03875bc1382894dc4a/check-runs?per_page=100"
+      ],
+      "exit_code": 0,
+      "response_sha256": "2fb7d8073cef5b2cd6b401199cb37f0c492a1e395a49ecd57ee4bda95d9c1a76"
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\GitHub CLI\\gh.exe",
+        "api",
+        "repos/mmzen/se_harness/git/ref/heads/main"
+      ],
+      "exit_code": 0,
+      "response_sha256": "b2495f28af149c8488121cf873856f4cfa2a8de9eb7fe824b5ea341e6c6d4520"
+    }
+  ],
+  "boundary": "Append-only post-integration operational receipt under WO-PLG-031 and VER-PLG-029. Bound candidate evidence and VREC-PLG-026 remain unchanged."
+}

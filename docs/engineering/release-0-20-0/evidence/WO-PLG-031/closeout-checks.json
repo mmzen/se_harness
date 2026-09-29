@@ -1,0 +1,68 @@
+{
+  "observed_at": "2026-09-29T20:11:54.935528+00:00",
+  "trusted_base": "03012212b216bea05df85608134b59a64da2d2f7",
+  "work_order": "WO-PLG-031",
+  "authority": "Explicit post-integration append-only closeout clause in approved WO-PLG-031; PR501 merged by mmzen; no repeated implementation or assurance transition.",
+  "verified_record": "VREC-PLG-026",
+  "bound_evidence_files_unchanged": 51,
+  "record_sha256": "4564381b3583dd25327ebafabf3b5c0bc92c22291b51231806322deac7cf79f3",
+  "scope_check": {
+    "invocation": {
+      "args": [
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--artifact",
+        "WO-PLG-031",
+        "--checkpoint",
+        "scope",
+        "--changed-path",
+        "docs/engineering/release-0-20-0/evidence/WO-PLG-031/documentation-public-readback.json",
+        "--changed-path",
+        "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-plan-v4.json",
+        "--changed-path",
+        "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-observations-v4.json",
+        "--changed-path",
+        "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-result-v4.json",
+        "--changed-path",
+        "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-evidence-mapping-v4.json",
+        "--changed-path",
+        "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-final-negative-checks.json",
+        "--changed-path",
+        "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-closeout.md",
+        "--changed-path",
+        "docs/engineering/release-0-20-0/evidence/WO-PLG-031/closeout-checks.json",
+        "--changes-complete",
+        "--json"
+      ],
+      "exit_code": 0,
+      "python": "C:\\Users\\mathi\\Documents\\Codex\\plugin-data\\verity-plane\\evaluator\\Scripts\\python.exe",
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se"
+    },
+    "result_sha256": "cab322c79854259c93142991d7706bba5095d0e73934d5cdc934be8747068d13"
+  },
+  "delivery_check": {
+    "invocation": {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\scripts\\check_release_delivery.py",
+        "--plan",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\docs\\engineering\\release-0-20-0\\evidence\\WO-PLG-031\\delivery-plan-v4.json",
+        "--observations",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\docs\\engineering\\release-0-20-0\\evidence\\WO-PLG-031\\delivery-observations-v4.json",
+        "--evidence-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "observed_at": "2026-09-29T20:11:28.324411+00:00",
+      "exit_code": 0
+    },
+    "status": "complete",
+    "stdout_sha256": "5d0c6ae7e7c3101ee5060eefb6d7b98829ef1015e687d99d5c7c81743cf6f2bd"
+  },
+  "negative_controls": [
+    "missing-marketplace: incomplete, exit 1",
+    "wrong-public-revision: incomplete, exit 1"
+  ],
+  "limits": "Adds receipts only. Prior candidate tests and human decision are retained; this receipt does not require a new VREC or another receipt cycle."
+}
