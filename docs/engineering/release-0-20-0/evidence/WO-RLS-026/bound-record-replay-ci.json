@@ -1,0 +1,39 @@
+{
+  "head": "be1755679f592acd40051816359856d4019d8ee9",
+  "url": "https://github.com/mmzen/se_harness/actions/runs/36612357797",
+  "event": "workflow_dispatch",
+  "conclusion": "success",
+  "observed_at": "2026-09-29T18:30:00.730161+00:00",
+  "jobs": [
+    {
+      "name": "Replay exact candidate twice without credentials",
+      "conclusion": "success"
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "release-build-replay-RLS-SEH-029",
+      "id": 11053726081,
+      "expires_at": "2026-12-28T18:28:59Z",
+      "expired": false
+    }
+  ],
+  "download_command": [
+    "gh",
+    "run",
+    "download",
+    "36612357797",
+    "--repo",
+    "mmzen/se_harness",
+    "--name",
+    "ARTIFACT_NAME"
+  ],
+  "downloaded_files": [
+    {
+      "path": "release-build-replay-RLS-SEH-029/release-build-replay.json",
+      "bytes": 7256,
+      "sha256": "d14359c5204c01a362c51acf7bca89088b2811f2f94258e8aa7d69385816de7e",
+      "permanent_copy": "bound-record-replay.json"
+    }
+  ]
+}
