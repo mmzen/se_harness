@@ -1,0 +1,60 @@
+{
+  "reviewer": "Codex",
+  "contract": "VER-PLG-029",
+  "candidate_phase": "pass",
+  "overall_delivery": "incomplete until documentation integration and readback",
+  "criteria": {
+    "REQ-RLO-019": {
+      "status": "pass for candidate",
+      "evidence": [
+        {
+          "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/publication.json",
+          "sha256": "30cc1e32fb2adda0b023000d5bf9b7bce6685d7206a4c7230dde55accc1b0c2e"
+        },
+        {
+          "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-readback.json",
+          "sha256": "fdf1f4a3062ce0e71cce64c3d2214179b64cbf2ccbdda8824666b20e30a29dd3"
+        },
+        {
+          "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/public-routes.json",
+          "sha256": "0422c574d599462150be87fbb446c06866ec731aebb009ee6d74e1b258ba4ab3"
+        },
+        {
+          "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/native-recheck.json",
+          "sha256": "5f9a1ea91417e18fb3fcd2b3dfe7a38251500c6cd1402cb47b8215c6104b9988"
+        },
+        {
+          "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/review.json",
+          "sha256": "3c1f51c9e2bceadee6ffb550342aa11625d51832b8d40bf9329cbc2b5240a66c"
+        },
+        {
+          "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/checks.json",
+          "sha256": "97d1324617c85448593e4002341d135827c0f494444cdcc9dec957cfef248de9"
+        }
+      ],
+      "remaining": "Documentation merge and public readback."
+    },
+    "REQ-RLO-020": {
+      "status": "pass for candidate; final closeout pending",
+      "evidence": [
+        {
+          "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-plan-v3.json",
+          "sha256": "29fd048258b5000b9aecdcd7f09ed8b77478e04e78b903aa4c1ed6ddc2711949"
+        },
+        {
+          "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-observations-v3.json",
+          "sha256": "dfd64ad1f2be101afc289cce4f3144834966038669305046f0a832f317e20ebb"
+        },
+        {
+          "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-result-v3.json",
+          "sha256": "241549ed1b322563be27c1fcdabf25625a371a7f1f9d2946dd920cc7d16827c9"
+        },
+        {
+          "path": "docs/engineering/release-0-20-0/evidence/WO-PLG-031/delivery-negative-checks.json",
+          "sha256": "564ea9e346d1f47c9482380eb6a346922cb63285b8a7d8cbb7056e558542b23c"
+        }
+      ],
+      "remaining": "After authorized integration, append-only final observations and complete report. No new VREC solely for receipts."
+    }
+  }
+}

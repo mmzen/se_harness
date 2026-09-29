@@ -1,15 +1,11 @@
 # Install or update the Verity Plane plugin
 
-The public marketplace observed on 2026-09-29 is plugin 0.2.1 with released
-evaluator 0.19.0 at `86d75e56e28c0c34819c0079b41dc67075f58490`.
-Public fresh-install and 0.1.0-to-0.2.1 update package checks passed on both
-Windows CLIs. Startup and manual compaction also passed on both hosts; see the
-[public confirmation evidence](../engineering/plugin-integration/evidence/WO-PLG-028/README.md).
-This guide does not upgrade a project's selected harness.
-
-The [next release package](../engineering/release-0-20-0/README.md) prepares
-evaluator 0.20.0 and plugin 0.2.2. Those source inputs are not a public
-installation result. Continue to use the observed public identities above.
+The public marketplace observed on 2026-09-29 is plugin 0.2.2 with released
+evaluator 0.20.0 at `5662817f42994bd0dc9aabaa56891f9c298ab965`.
+Public fresh-install and 0.2.1-to-0.2.2 update checks passed on both Windows CLIs.
+See the [public confirmation evidence](../engineering/release-0-20-0/evidence/WO-PLG-031/README.md)
+for native-delivery evidence reuse, actual commands and limits.
+Installing this plugin does not upgrade a project's selected harness.
 
 ## Select the distribution
 
@@ -21,11 +17,11 @@ to produce an external directory with both complete host packages. Do not instal
 the incomplete host folders directly from development source.
 
 The [assembly README](../../release/plugin-marketplace/README.md) now targets the
-0.2.2 candidate. Its package links resolve in the assembled distribution.
+published 0.2.2 composition. Its package links resolve in the assembled distribution.
 For the currently observed public tree, check `PACKAGE-IDENTITY.json` for
-plugin 0.2.1, evaluator 0.19.0, the accepted source
+plugin 0.2.2, evaluator 0.20.0, the accepted source
 commit and wheel SHA-256
-`43419a0c5e7711e7888ed69c207d5599dcd39a4aeb706c8827e7bb33c46573d8`.
+`7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0`.
 
 ## Install in a disposable profile
 
@@ -33,16 +29,16 @@ Use Python 3.11+ with `venv` and `ensurepip`, installed host CLIs and Git.
 Qualification uses disposable HOME/USERPROFILE, CODEX_HOME, CLAUDE_CONFIG_DIR,
 APPDATA and LOCALAPPDATA directories. Keep any required host login separate from
 retained evidence. Do not change real user profiles to run these checks.
-Replace `MARKETPLACE_DIRECTORY` with the absolute composed directory:
+Use the public Git marketplace:
 
 ```text
-codex plugin marketplace add "MARKETPLACE_DIRECTORY" --json
+codex plugin marketplace add mmzen/se_harness --ref plugin-marketplace --json
 codex plugin add verity-plane@se-harness --json
 codex plugin list --marketplace se-harness --json
 ```
 
 ```text
-claude plugin marketplace add "MARKETPLACE_DIRECTORY"
+claude plugin marketplace add mmzen/se_harness@plugin-marketplace
 claude plugin install verity-plane@se-harness --json
 claude plugin list --json
 ```
@@ -136,17 +132,22 @@ gap; stop the affected governed action and resolve it before continuing.
 
 ## Qualification limits
 
-WO-PLG-026 retains local Windows qualification. WO-PLG-028 retains public Git
-fresh-install and update checks on Codex 0.158.0-alpha.2.1 and Claude Code 2.1.273.
-All four installed packages match the verified distribution. Startup and manual
-compaction passed on both hosts. Claude acceptance passed after renewing the
-disposable login; the earlier authentication failure remains in the evidence.
-The long disposable Codex paths required process-local Git long-path support.
+WO-PLG-030 retains native Windows qualification of plugin 0.2.2.
+WO-PLG-031 confirms the public fresh-install and update routes on
+Codex 0.158.0-alpha.2.1 and Claude Code 2.1.273. All four installed packages
+match the verified distribution. The earlier startup, manual compaction,
+resume and boundary checks are reused after exact package, fixture and host
+version comparison. Public Claude startup was checked again; Codex hook
+registration was checked again and still requires the user's normal trust step.
+
+One Codex marketplace refresh timed out while cloning. Its old installation
+remained intact; repeating the same native refresh succeeded. Both attempts
+are retained. Long disposable paths used process-local Git long-path support.
 Desktop UI, automatic threshold compaction and other operating systems need
 separate evidence. Model sessions require valid host authentication.
 
 Historical development checks with Codex 0.154.0-alpha.6.2, Claude Code 2.1.266
 and a development 0.18.0 checker remain in
 [WO-PLG-016 evidence](../engineering/plugin-integration/evidence/WO-PLG-016/README.md).
-They do not qualify 0.2.1. The optional old no-model acceptance helper remains a
+They do not qualify the current public package. The optional old no-model acceptance helper remains a
 development-only check; it does not replace native startup/compaction evidence.

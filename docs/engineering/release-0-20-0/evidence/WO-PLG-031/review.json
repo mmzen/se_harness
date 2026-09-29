@@ -1,0 +1,25 @@
+{
+  "status": "pass",
+  "reviewer": "Codex",
+  "observed_at": "2026-09-29T19:58:44.780352+00:00",
+  "files": {
+    "README.md": "73d698937f6961b666762daa6ee764ec35ec5da553211b863e8656bc4f36d50d",
+    "docs/notes/plugin-installation-guide.md": "1348a2e12dfcfb4c81a482fcada4203d25b7bac9b73f185038b72a809e353f6b",
+    "docs/notes/plugin-marketplace-publication.md": "d0c3b523d24c3c7dc55a70f52fc42d2dd9ef882f384c70add8e4da22d966311c",
+    "docs/notes/developing-se-harness.md": "558a66d59ea841d60add71ac4e3c3f6a2a779ce8b88044e39d4a33040f2c195e",
+    "docs/notes/release-delivery-completion.md": "73bcae908e624bfa6663a17809559d50caaf9eb7ecaa14cd98c1ae3d2bf6ed0f",
+    "docs/engineering/plugin-integration/README.md": "903fd3ed074ba08884abd2681f45391c975d99483314340dda7d0bb428a7f769",
+    "docs/engineering/instruction-architecture/README.md": "43ce17440956270e47f430769f6cebe3d3e5c62be24b9e88de5733d4315bc629",
+    "tests/plugin_integration/package_assembly/test_refresh_guidance.py": "50bf4f64602ad5e201ae21c7f666a5690433187ffede29cbe054d48de4df1777"
+  },
+  "findings": [
+    "Current version and availability claims agree with independent public receipt and all four installed inventories.",
+    "Install guide now uses the tested public Git route. The incomplete development-source host folders remain excluded.",
+    "Existing exact receipt/digest, negative availability and link checks are preserved. Only selected identity constants changed. tests/test_progressive_documentation.py required no edit.",
+    "Existing owner evaluator 0.19.0 and local plugin selection 0.2.0 stay explicit. No adoption or stale pointer deletion occurred.",
+    "Native trust is not inferred: disposable Codex public hooks are registered but untrusted; full native behavior evidence is reused with exact package, fixture and host version matches under VER-PLG-029.",
+    "No new code, abstraction or policy is needed for these evidence-backed documentation corrections.",
+    "Current-document integration is pending; final readback is deliberately outside this verification candidate."
+  ],
+  "packaged_readmes": "Both installed host README files and marketplace root README match qualified bytes; packaged-link checks passed and no package changes are needed."
+}

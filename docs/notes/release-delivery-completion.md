@@ -96,7 +96,10 @@ selects identities from the new released record and committed plugin source.
 Its previous-publication receipt is historical evidence, not an input selection
 for the next delivery. The [0.20.0 package](../engineering/release-0-20-0/README.md)
 assigns plugin 0.2.2 assembly and publication to WO-PLG-030, and public
-fresh/update observation and current claims to WO-PLG-031.
+fresh/update observation and current claims to WO-PLG-031. Its
+[public delivery evidence](../engineering/release-0-20-0/evidence/WO-PLG-031/README.md)
+records the published 0.2.2/0.20.0 identities and keeps final documentation
+integration and readback pending. Earlier plan versions remain historical.
 
 Use the host commands qualified for the selected package. A local marketplace
 directory or an existing cache is not the public Git route. Retain the public

@@ -10,9 +10,11 @@ WO-HUP-021; source preparation does not change its selected evaluator.
 
 The [cleanup package](proposals/instruction-cleanup/README.md) is implemented
 and verified. Its instruction refinements and retirement of six default guide
-seeds are included in the [0.20.0 release preparation](../release-0-20-0/README.md).
-Publication, repository adoption and removal of this repository's preserved
-owner pointers remain separate stages.
+seeds are included in the published [0.20.0 release](../release-0-20-0/README.md).
+The [public plugin 0.2.2 evidence](../release-0-20-0/evidence/WO-PLG-031/README.md)
+confirms delivery of the corresponding instructions. This repository still
+selects 0.19.0. Repository adoption and removal of its preserved owner pointers
+remain separate authorized stages.
 
 ## Historical architecture packets
 

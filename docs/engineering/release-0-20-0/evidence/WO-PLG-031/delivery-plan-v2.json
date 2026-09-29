@@ -1,0 +1,106 @@
+{
+  "schema": "se-harness-delivery-plan/v1",
+  "release": {
+    "contract": "REL-SEH-031",
+    "record": "RLS-SEH-029",
+    "version": "0.20.0",
+    "wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0"
+  },
+  "review": {
+    "by": "mmzen",
+    "reference": "REL-SEH-031 approval lifecycle event, 2026-09-29; seven-artifact review and user decision I approve"
+  },
+  "surfaces": [
+    {
+      "id": "evaluator",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness/releases/tag/v0.20.0",
+      "work_reference": "WO-RLS-026; subsequent exact released RLS",
+      "next_action": "Retain matching public evidence; complete documentation integration and final readback under WO-PLG-031.",
+      "disposition": "update",
+      "expected": {
+        "record": "RLS-SEH-029",
+        "version": "0.20.0",
+        "wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+        "sdist_sha256": "5b6784aeabdf72e0e6b43a7a2bc81244c7a9da6415cf39fbc39f440ec57d426c"
+      },
+      "required_observations": [
+        "publisher",
+        "public_install"
+      ]
+    },
+    {
+      "id": "marketplace",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness#plugin-marketplace",
+      "work_reference": "WO-PLG-030; WO-PLG-031",
+      "next_action": "Retain matching public evidence; complete documentation integration and final readback under WO-PLG-031.",
+      "disposition": "update",
+      "expected": {
+        "plugin_version": "0.2.2",
+        "source_commit": "7253d13b212ad6f7df670021290fea32e81d66de",
+        "evaluator_version": "0.20.0",
+        "wheel_sha256": "7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0",
+        "public_revision": "5662817f42994bd0dc9aabaa56891f9c298ab965",
+        "codex_content_sha256": "ea6ab271e6758d6177e014a385ef546a0189fa7d24c403d14089a74be15519d4",
+        "claude-code_content_sha256": "d3d6fd544964c85561ff7e274acaae301d8bd44fa8df8aeb41858b5aea4beffa"
+      },
+      "required_observations": [
+        "assembly",
+        "qualification",
+        "public_ref",
+        "native_startup_compaction"
+      ],
+      "hosts": [
+        "codex",
+        "claude-code"
+      ]
+    },
+    {
+      "id": "documentation",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness/tree/main",
+      "work_reference": "WO-RLS-026; WO-PLG-031",
+      "next_action": "Human verification of VREC-PLG-026, separately authorized integration, then public documentation readback and append-only final report.",
+      "disposition": "update",
+      "expected": {
+        "commit": "867e56bbec76a4b7475c85c6c8a07bd58187b5c8"
+      },
+      "required_observations": [
+        "claims_review",
+        "links"
+      ]
+    },
+    {
+      "id": "demonstration",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://mmzen.github.io/se_harness/",
+      "work_reference": "REL-SEH-031 publisher; WO-PLG-031",
+      "next_action": "Retain matching public evidence; complete documentation integration and final readback under WO-PLG-031.",
+      "disposition": "update",
+      "expected": {
+        "governance_commit": "23ae2d1f6af0f1bf8484b95b0850cb0019eeb7db"
+      },
+      "required_observations": [
+        "deployment"
+      ]
+    },
+    {
+      "id": "release_markers",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness",
+      "work_reference": "REL-SEH-031; separate mmzen marker decision; WO-PLG-031",
+      "next_action": "Retain matching public evidence; complete documentation integration and final readback under WO-PLG-031.",
+      "disposition": "update",
+      "expected": {
+        "latest": "v0.20.0",
+        "last": "7253d13b212ad6f7df670021290fea32e81d66de"
+      },
+      "required_observations": [
+        "authorization",
+        "readback"
+      ]
+    }
+  ],
+  "binding_note": "Version 2 fills pending identities from VREC-PLG-025 qualified inputs, RLS-SEH-029 released governance, authorized markers and the locally committed documentation. Scope and dispositions retain the reviewed release plan. Public evidence does not define expected package identities. Documentation is not yet integrated."
+}
