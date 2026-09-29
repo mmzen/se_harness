@@ -2,7 +2,7 @@
 id = "WO-RLS-026"
 type = "work_order"
 title = "Prepare evaluator 0.20.0 and plugin 0.2.2 release inputs"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-09-29"
 updated = "2026-09-29"
@@ -54,6 +54,13 @@ to = "in_progress"
 decided_at = "2026-09-29T17:33:21Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed. Codex starts the unchanged mmzen-approved release preparation after passing start preflight; downstream WO-PLG-030 and WO-PLG-031 remain approved until their public-release prerequisites exist."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-29T17:53:07Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed. Codex records completion under mmzen-approved scope after local full/focused checks, hosted candidate qualification, Windows/Linux upgrade rehearsals, both manual publication legs, two identical pinned builds, documentation review and the complete Git-derived handoff passed. Exact final-candidate CI, build and aggregate VREC preparation continue under the same scope; human verification and release remain separate."
 +++
 
 # Prepare evaluator 0.20.0 and plugin 0.2.2 release inputs

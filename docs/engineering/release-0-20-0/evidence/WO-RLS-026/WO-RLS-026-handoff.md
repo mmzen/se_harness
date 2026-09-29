@@ -14,3 +14,10 @@ Retained by `harnessctl evidence`; body content is owner-authored.
 REVIEW.md and local-*.json retain the implementation review and passing local checks.
 Hosted candidate CI and both manual rehearsals are still pending. This packet supports
 the authorized draft review; it is not an implementation-completion or assurance claim.
+
+## Implementation completion
+
+REPORT.md records passing local and initial hosted checks, both manual rehearsals,
+reproducible builds and documented evidence limits. It supersedes the initial
+pending-check status. Exact final-candidate CI/build and aggregate verification
+preparation continue under the approved scope after completion.

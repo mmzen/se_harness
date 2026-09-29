@@ -1,0 +1,32 @@
+{
+  "source_commit": "c11d084c2a1bcca48d8c747a495aec5f2c728761",
+  "sources": [
+    "README.md",
+    "docs/engineering/README.md",
+    "docs/engineering/instruction-architecture/README.md",
+    "docs/engineering/instruction-architecture/proposals/instruction-cleanup/README.md",
+    "docs/engineering/plugin-integration/README.md",
+    "docs/engineering/release-0-20-0/README.md",
+    "docs/engineering/release-0-20-0/RELEASE_NOTES.md",
+    "docs/engineering/release-0-20-0/coverage.md",
+    "docs/engineering/release-0-20-0/evidence/WO-RLS-026/REVIEW.md",
+    "docs/engineering/release-0-20-0/evidence/WO-RLS-026/WO-RLS-026-handoff.md",
+    "docs/engineering/release-0-20-0/evidence/WO-RLS-026/delivery-plan-status.md",
+    "docs/engineering/release-0-20-0/release/REL-SEH-031.md",
+    "docs/engineering/release-0-20-0/verification/VER-PLG-028.md",
+    "docs/engineering/release-0-20-0/verification/VER-PLG-029.md",
+    "docs/engineering/release-0-20-0/verification/VER-RLS-026.md",
+    "docs/engineering/release-0-20-0/work-orders/WO-PLG-030.md",
+    "docs/engineering/release-0-20-0/work-orders/WO-PLG-031.md",
+    "docs/engineering/release-0-20-0/work-orders/WO-RLS-026.md",
+    "docs/notes/developing-se-harness.md",
+    "docs/notes/plugin-installation-guide.md",
+    "docs/notes/plugin-marketplace-publication.md",
+    "docs/notes/release-delivery-completion.md"
+  ],
+  "findings": [],
+  "valid_directory_targets": [
+    "tests/fixtures/release_delivery/complete"
+  ],
+  "correction": "Initial audit required every link to be a file. Existing directory fixture link is valid; this audit accepts existing directories, preserving the original diagnostic."
+}
