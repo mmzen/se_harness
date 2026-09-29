@@ -2,7 +2,7 @@
 id = "VREC-HUP-022"
 type = "verification_record"
 title = "Verification candidate for WO-HUP-024"
-status = "ready"
+status = "verified"
 owners = ["Codex preparation agent under mmzen approval"]
 created = "2026-09-29"
 updated = "2026-09-29"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/repository-harness-upgrade/evidence/WO-HUP-0
 evaluator_evidence_path = "docs/engineering/repository-harness-upgrade/evidence/VREC-HUP-022-evaluator.json"
 evaluator_evidence_sha256 = "5f2209f1d8d60901e7f8cf46ea5b62f7bb9705e4603c72f15489f9be90af2384"
 
+verified_at = "2026-09-29T20:43:52Z"
+verified_by = "mmzen (human assurance owner)"
 [relations]
 verifies_work_order = ["WO-HUP-024"]
 conforms_to = ["VER-HUP-022"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-29T20:43:52Z"
+decided_by = "mmzen (human assurance owner)"
+reason = "Human mmzen confirmed Yes when asked whether the stated VREC-HUP-023 verification meant VREC-HUP-022. This accepts the presented evidence for exact candidate dfa32b54ee52cc7196b13b4feba0033b3502a7b5 covering WO-HUP-024 and VER-HUP-022. Codex applies the human decision and makes no assurance decision itself."
 +++
 
 # Verification Record Candidate
