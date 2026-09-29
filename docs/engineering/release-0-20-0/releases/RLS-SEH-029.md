@@ -2,8 +2,8 @@
 id = "RLS-SEH-029"
 type = "release_record"
 title = "Release candidate 0.20.0"
-status = "ready"
-owners = ["Codex"]
+status = "released"
+owners = ["release-owner"]
 created = "2026-09-29"
 updated = "2026-09-29"
 version = "0.20.0"
@@ -15,6 +15,8 @@ evaluator_evidence_path = "docs/engineering/release-0-20-0/evidence/RLS-SEH-029-
 evaluator_evidence_sha256 = "3d06ef9adf5b4bcb9bd9d9d93ae6ea13f35ec4f0ca9ab8338586e48254d39713"
 tag = "v0.20.0"
 
+released_at = "2026-09-29T18:39:51Z"
+authorized_by = "release-owner"
 [distribution]
 schema = 2
 kind = "python-wheel-sdist"
@@ -34,6 +36,13 @@ build_recipe_sha256 = "0c3f368c45f8f41177d84f695ec743d56794bb33604b4834ada369d92
 satisfies = ["REL-SEH-031"]
 includes_verification = ["VREC-SEH-029"]
 releases_work = ["WO-HUP-021", "WO-HUP-023", "WO-IAR-020", "WO-IAR-021", "WO-IAR-022", "WO-IAR-023", "WO-IAR-024", "WO-IAR-025", "WO-KIS-016", "WO-PLG-026", "WO-PLG-027", "WO-PLG-028", "WO-PLG-029", "WO-RLO-010", "WO-RLO-011", "WO-RLS-026"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "released"
+decided_at = "2026-09-29T18:39:51Z"
+decided_by = "release-owner"
+reason = "Human release owner mmzen: \"I authorize  release record RLS-SEH-029\". Decision covers SE Harness 0.20.0 at exact candidate 7253d13b212ad6f7df670021290fea32e81d66de, all 16 work orders, verified VREC-SEH-029 and the reviewed schema-2 distribution binding. Reviewed ready record SHA-256 0dc2f82b6e756a2b91cf1650180143d5d2d4576a6250fbc73eb155eb853a3157. The 0.19.0 evaluator first refused E009 because prepared owner Codex differed from the human release role. Corrected only owners from Codex to the already approved release-owner compatibility label, as in RLS-SEH-028; prepared_by remains Codex. All other reviewed bytes and evidence are unchanged. Corrected input SHA-256 5a7948e0d7c91804e22aadaa63d47da8c6ab0803c5b9c19f260aa7862508fac6. Bound-record replay 36612357797 passed with both pinned builds matching the wheel and sdist hashes. Legacy release-owner transports mmzen's actual human decision; Codex applies it. No merge, publication, marker promotion, adoption or owner-file deletion is authorized by this decision."
 +++
 
 # Release Record Candidate

@@ -1,0 +1,1195 @@
+{
+  "human": "mmzen",
+  "decision": "I authorize  release record RLS-SEH-029",
+  "reviewed_ready_sha256": "0dc2f82b6e756a2b91cf1650180143d5d2d4576a6250fbc73eb155eb853a3157",
+  "ownership_correction": {
+    "before": [
+      "Codex"
+    ],
+    "after": [
+      "release-owner"
+    ],
+    "prepared_by_unchanged": "Codex",
+    "other_bytes_unchanged": true,
+    "corrected_input_sha256": "5a7948e0d7c91804e22aadaa63d47da8c6ab0803c5b9c19f260aa7862508fac6",
+    "basis": "Current human release decision and previously approved 0.19.0 compatibility encoding; same correction as RLS-SEH-028."
+  },
+  "initial_refusal": {
+    "schema": "se-harness-workflow-result-v2",
+    "digest_format": "machine-fields-v1",
+    "candidate": {},
+    "operation": {
+      "kind": "transition",
+      "outcome": "blocked"
+    },
+    "selection": {
+      "primary": "RLS-SEH-029",
+      "artifacts": [
+        "RLS-SEH-029"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [],
+      "dependencies": [],
+      "declared_paths": [],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "pre-action",
+      "workflow_rule_id": "WFL-FAIL-REMEDIATE",
+      "procedure_id": "PROC-REMEDIATE",
+      "status": "fail",
+      "gates": []
+    },
+    "procedure": {
+      "id": "PROC-REMEDIATE",
+      "current_step": "STEP-REMEDIATE-FOCUS",
+      "steps": [
+        {
+          "id": "STEP-REMEDIATE-FOCUS",
+          "kind": "command",
+          "gate_ids": [],
+          "effects": [
+            "Re-evaluated selected state for RLS-SEH-029."
+          ],
+          "non_effects": [
+            "Remediation does not expand scope or change state."
+          ],
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "RLS-SEH-029"
+          ]
+        }
+      ]
+    },
+    "state": {
+      "before": [],
+      "after": []
+    },
+    "findings": {
+      "scoped_blockers": [
+        {
+          "code": "WEX201",
+          "message": "proposed final graph is invalid [E009]: field 'authorized_by' must identify one of the record owners"
+        }
+      ],
+      "repository_blockers": [],
+      "unrelated_count": 0
+    },
+    "mutation": {
+      "writes": []
+    },
+    "restitution": {
+      "outcome": "blocked",
+      "done": [],
+      "not_done": [
+        "The requested workflow operation remains incomplete."
+      ],
+      "blocked_by": [
+        "WEX201: proposed final graph is invalid [E009]: field 'authorized_by' must identify one of the record owners"
+      ],
+      "current_lifecycle_state": [
+        "No lifecycle state was changed."
+      ],
+      "decision_required": null,
+      "next": {
+        "procedure_id": "PROC-REMEDIATE",
+        "step_id": "STEP-REMEDIATE-FOCUS",
+        "action": "remediate"
+      },
+      "command_or_response": {
+        "kind": "command",
+        "argv": [
+          "harnessctl",
+          "check",
+          ".",
+          "--artifact",
+          "RLS-SEH-029"
+        ]
+      },
+      "alternatives": []
+    },
+    "instruction_discovery": {
+      "schema": "se-harness-instruction-discovery-v1",
+      "status": "available",
+      "agent_instructions": {
+        "entry": {
+          "file": "ENGINEERING_HARNESS.md",
+          "heading": "read-by-task"
+        },
+        "shared_prerequisites": [
+          {
+            "file": "docs/engineering/harness/COMMUNICATION.md",
+            "heading": "communication",
+            "when": "Before the first eligible English explanation in a fresh context."
+          },
+          {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "report-a-lifecycle-result",
+            "when": "Before reporting a lifecycle result."
+          }
+        ],
+        "procedure": {
+          "id": "PROC-REMEDIATE",
+          "location": {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "if-a-procedure-is-blocked"
+          },
+          "prerequisites": [],
+          "steps": {
+            "STEP-REMEDIATE-FOCUS": {
+              "location": {
+                "file": "docs/engineering/harness/RESULTS.md",
+                "heading": "if-a-procedure-is-blocked"
+              },
+              "prerequisites": []
+            }
+          }
+        },
+        "current_step": {
+          "id": "STEP-REMEDIATE-FOCUS",
+          "location": {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "if-a-procedure-is-blocked"
+          },
+          "prerequisites": []
+        }
+      },
+      "formal_artifact_ids": [
+        "RLS-SEH-029"
+      ],
+      "evaluator_only_inputs": [
+        "docs/engineering/WORKFLOW.json",
+        "docs/engineering/QUALITY_GATES.json"
+      ]
+    },
+    "result_sha256": "dfb9f6be92f0c0cfc5a6ed302f4400ef6cbe3b7db4fe7362bbdd59dc22687681"
+  },
+  "applied": {
+    "schema": "se-harness-workflow-result-v2",
+    "digest_format": "machine-fields-v1",
+    "candidate": {
+      "commit": "7253d13b212ad6f7df670021290fea32e81d66de",
+      "git_object_format": "sha1"
+    },
+    "operation": {
+      "kind": "transition",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "RLS-SEH-029",
+      "artifacts": [
+        "RLS-SEH-029"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [],
+      "dependencies": [],
+      "declared_paths": [],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "transition",
+      "workflow_rule_id": "WFL-RLS-EXTERNAL",
+      "procedure_id": "PROC-EXTERNAL-ACTION",
+      "status": "pass",
+      "gates": [
+        {
+          "id": "QG-G5-RELEASE-DECISION",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGP-G5D-STATUS",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "RLS-SEH-029"
+                }
+              ],
+              "message": "RLS-SEH-029 status is ready."
+            },
+            {
+              "id": "QGP-G5D-GRAPH",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "formal-graph:RLS-SEH-029"
+                }
+              ],
+              "message": "The selected formal graph is valid."
+            },
+            {
+              "id": "QGP-G5D-INTEGRITY",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "repository-integrity:transition"
+                }
+              ],
+              "message": "No repository-integrity blocker prevents selected evaluation."
+            },
+            {
+              "id": "QGP-G5D-DECISION",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "result",
+                  "reference": "decision-register:RLS-SEH-029"
+                }
+              ],
+              "message": "No open decision blocks RLS-SEH-029."
+            }
+          ]
+        },
+        {
+          "id": "QG-STRUCTURAL",
+          "status": "pass",
+          "predicates": [
+            {
+              "id": "QGS-EDGE",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "RLS-SEH-029"
+                }
+              ],
+              "message": "ready -> released is a declared lifecycle edge for RLS-SEH-029."
+            },
+            {
+              "id": "QGS-VERIFIED-INCLUSION",
+              "status": "pass",
+              "evidence": [
+                {
+                  "kind": "artifact",
+                  "reference": "RLS-SEH-029"
+                }
+              ],
+              "message": "Every verification record RLS-SEH-029 includes is verified."
+            }
+          ]
+        }
+      ]
+    },
+    "procedure": {
+      "id": "PROC-EXTERNAL-ACTION",
+      "current_step": "STEP-EXTERNAL-ACTION",
+      "steps": [
+        {
+          "id": "STEP-EXTERNAL-ACTION",
+          "kind": "decision",
+          "gate_ids": [
+            "QG-G5-EXTERNAL-ACTION"
+          ],
+          "effects": [
+            "Permits only the exact named external action."
+          ],
+          "non_effects": [
+            "Release status alone performs no external action."
+          ],
+          "decision_right": "DR-EXTERNAL-ACTION",
+          "role": "accountable external-action owner",
+          "artifact": "RLS-SEH-029",
+          "decision": "the exact tag, publication, deployment, or operating action",
+          "outcomes": [
+            "authorize",
+            "stop"
+          ],
+          "response": "Authorize this exact external action for RLS-SEH-029: <action and target>."
+        }
+      ]
+    },
+    "state": {
+      "before": [
+        {
+          "id": "RLS-SEH-029",
+          "status": "ready"
+        }
+      ],
+      "after": [
+        {
+          "id": "RLS-SEH-029",
+          "status": "released"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 0
+    },
+    "mutation": {
+      "writes": [
+        {
+          "id": "RLS-SEH-029",
+          "path": "docs/engineering/release-0-20-0/releases/RLS-SEH-029.md",
+          "fields": [
+            "authorized_by",
+            "lifecycle_events",
+            "released_at",
+            "status",
+            "updated"
+          ]
+        }
+      ]
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Applied 1 explicit lifecycle transition(s) atomically."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "RLS-SEH-029 is released."
+      ],
+      "decision_required": {
+        "decision_right": "DR-EXTERNAL-ACTION",
+        "role": "accountable external-action owner",
+        "artifact": "RLS-SEH-029",
+        "decision": "the exact tag, publication, deployment, or operating action",
+        "outcomes": [
+          "authorize",
+          "stop"
+        ]
+      },
+      "next": {
+        "procedure_id": "PROC-EXTERNAL-ACTION",
+        "step_id": "STEP-EXTERNAL-ACTION",
+        "action": "the exact tag, publication, deployment, or operating action"
+      },
+      "command_or_response": {
+        "kind": "response",
+        "value": "Authorize this exact external action for RLS-SEH-029: <action and target>."
+      },
+      "alternatives": []
+    },
+    "instruction_discovery": {
+      "schema": "se-harness-instruction-discovery-v1",
+      "status": "available",
+      "agent_instructions": {
+        "entry": {
+          "file": "ENGINEERING_HARNESS.md",
+          "heading": "read-by-task"
+        },
+        "shared_prerequisites": [
+          {
+            "file": "docs/engineering/harness/COMMUNICATION.md",
+            "heading": "communication",
+            "when": "Before the first eligible English explanation in a fresh context."
+          },
+          {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "report-a-lifecycle-result",
+            "when": "Before reporting a lifecycle result."
+          }
+        ],
+        "procedure": {
+          "id": "PROC-EXTERNAL-ACTION",
+          "location": {
+            "file": "docs/engineering/harness/DELIVER_RESULT.md",
+            "heading": "confirm-authority-for-the-external-action"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            }
+          ],
+          "steps": {
+            "STEP-EXTERNAL-ACTION": {
+              "location": {
+                "file": "docs/engineering/harness/DELIVER_RESULT.md",
+                "heading": "confirm-authority-for-the-external-action"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                }
+              ]
+            }
+          }
+        },
+        "current_step": {
+          "id": "STEP-EXTERNAL-ACTION",
+          "location": {
+            "file": "docs/engineering/harness/DELIVER_RESULT.md",
+            "heading": "confirm-authority-for-the-external-action"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            }
+          ]
+        }
+      },
+      "formal_artifact_ids": [
+        "RLS-SEH-029"
+      ],
+      "evaluator_only_inputs": [
+        "docs/engineering/WORKFLOW.json",
+        "docs/engineering/QUALITY_GATES.json"
+      ]
+    },
+    "result_sha256": "628eadd40fc5115d9b355002cb514848b976369a2e99cf8085e0dee40fb6ea6f"
+  },
+  "readback": {
+    "schema": "se-harness-workflow-result-v2",
+    "digest_format": "machine-fields-v1",
+    "candidate": {
+      "commit": "7253d13b212ad6f7df670021290fea32e81d66de",
+      "git_object_format": "sha1"
+    },
+    "operation": {
+      "kind": "check",
+      "outcome": "completed"
+    },
+    "selection": {
+      "primary": "RLS-SEH-029",
+      "artifacts": [
+        "RLS-SEH-029"
+      ]
+    },
+    "scope": {
+      "mode": "selected",
+      "governing": [
+        "ADR-DST-001",
+        "ADR-IAR-011",
+        "ADR-KIS-002",
+        "ADR-PLG-001",
+        "ADR-RLO-001",
+        "ARCH-DST-001",
+        "ARCH-IAR-011",
+        "ARCH-KIS-002",
+        "ARCH-PLG-001",
+        "ARCH-RLO-001",
+        "CAP-DST-001",
+        "CAP-IAR-002",
+        "CAP-KIS-003",
+        "CAP-RLO-001",
+        "CAP-RLO-004",
+        "INT-DST-001",
+        "INT-IAR-001",
+        "INT-KIS-003",
+        "INT-RLO-001",
+        "REL-SEH-031",
+        "REQ-DST-006",
+        "REQ-IAR-022",
+        "REQ-IAR-023",
+        "REQ-IAR-024",
+        "REQ-IAR-025",
+        "REQ-IAR-026",
+        "REQ-IAR-027",
+        "REQ-IAR-028",
+        "REQ-KIS-009",
+        "REQ-PLG-002",
+        "REQ-PLG-039",
+        "REQ-PLG-040",
+        "REQ-PLG-041",
+        "REQ-RLO-001",
+        "REQ-RLO-018",
+        "REQ-RLO-019",
+        "REQ-RLO-020",
+        "SPEC-DST-001",
+        "SPEC-IAR-014",
+        "SPEC-IAR-015",
+        "SPEC-KIS-003",
+        "SPEC-PLG-001",
+        "SPEC-PLG-021",
+        "SPEC-PLG-023",
+        "SPEC-RLO-001",
+        "SPEC-RLO-006",
+        "VER-HUP-021",
+        "VER-IAR-015",
+        "VER-IAR-016",
+        "VER-IAR-017",
+        "VER-KIS-009",
+        "VER-PLG-026",
+        "VER-PLG-027",
+        "VER-RLO-007",
+        "VER-RLO-008",
+        "VER-RLS-026",
+        "VREC-SEH-029",
+        "WO-HUP-021",
+        "WO-HUP-023",
+        "WO-IAR-020",
+        "WO-IAR-021",
+        "WO-IAR-022",
+        "WO-IAR-023",
+        "WO-IAR-024",
+        "WO-IAR-025",
+        "WO-KIS-016",
+        "WO-PLG-026",
+        "WO-PLG-027",
+        "WO-PLG-028",
+        "WO-PLG-029",
+        "WO-RLO-010",
+        "WO-RLO-011",
+        "WO-RLS-026"
+      ],
+      "dependencies": [],
+      "declared_paths": [],
+      "changed_paths": [],
+      "change_set_complete": false
+    },
+    "compliance": {
+      "checkpoint": "pre-action",
+      "workflow_rule_id": "WFL-RLS-EXTERNAL",
+      "procedure_id": "PROC-EXTERNAL-ACTION",
+      "status": "not_assessable",
+      "gates": []
+    },
+    "procedure": {
+      "id": "PROC-EXTERNAL-ACTION",
+      "current_step": "STEP-EXTERNAL-ACTION",
+      "steps": [
+        {
+          "id": "STEP-EXTERNAL-ACTION",
+          "kind": "decision",
+          "gate_ids": [
+            "QG-G5-EXTERNAL-ACTION"
+          ],
+          "effects": [
+            "Permits only the exact named external action."
+          ],
+          "non_effects": [
+            "Release status alone performs no external action."
+          ],
+          "decision_right": "DR-EXTERNAL-ACTION",
+          "role": "accountable external-action owner",
+          "artifact": "RLS-SEH-029",
+          "decision": "the exact tag, publication, deployment, or operating action",
+          "outcomes": [
+            "authorize",
+            "stop"
+          ],
+          "response": "Authorize this exact external action for RLS-SEH-029: <action and target>."
+        }
+      ]
+    },
+    "state": {
+      "before": [
+        {
+          "id": "RLS-SEH-029",
+          "status": "released"
+        }
+      ],
+      "after": [
+        {
+          "id": "RLS-SEH-029",
+          "status": "released"
+        }
+      ]
+    },
+    "findings": {
+      "scoped_blockers": [],
+      "repository_blockers": [],
+      "unrelated_count": 52
+    },
+    "mutation": {
+      "writes": []
+    },
+    "restitution": {
+      "outcome": "completed",
+      "done": [
+        "Recorded the release decision for RLS-SEH-029; included VRECs and work orders were not changed."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "RLS-SEH-029 is released."
+      ],
+      "decision_required": {
+        "decision_right": "DR-EXTERNAL-ACTION",
+        "role": "accountable external-action owner",
+        "artifact": "RLS-SEH-029",
+        "decision": "the exact tag, publication, deployment, or operating action",
+        "outcomes": [
+          "authorize",
+          "stop"
+        ]
+      },
+      "next": {
+        "procedure_id": "PROC-EXTERNAL-ACTION",
+        "step_id": "STEP-EXTERNAL-ACTION",
+        "action": "the exact tag, publication, deployment, or operating action"
+      },
+      "command_or_response": {
+        "kind": "response",
+        "value": "Authorize this exact external action for RLS-SEH-029: <action and target>."
+      },
+      "alternatives": []
+    },
+    "instruction_discovery": {
+      "schema": "se-harness-instruction-discovery-v1",
+      "status": "available",
+      "agent_instructions": {
+        "entry": {
+          "file": "ENGINEERING_HARNESS.md",
+          "heading": "read-by-task"
+        },
+        "shared_prerequisites": [
+          {
+            "file": "docs/engineering/harness/COMMUNICATION.md",
+            "heading": "communication",
+            "when": "Before the first eligible English explanation in a fresh context."
+          },
+          {
+            "file": "docs/engineering/harness/RESULTS.md",
+            "heading": "report-a-lifecycle-result",
+            "when": "Before reporting a lifecycle result."
+          }
+        ],
+        "procedure": {
+          "id": "PROC-EXTERNAL-ACTION",
+          "location": {
+            "file": "docs/engineering/harness/DELIVER_RESULT.md",
+            "heading": "confirm-authority-for-the-external-action"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            }
+          ],
+          "steps": {
+            "STEP-EXTERNAL-ACTION": {
+              "location": {
+                "file": "docs/engineering/harness/DELIVER_RESULT.md",
+                "heading": "confirm-authority-for-the-external-action"
+              },
+              "prerequisites": [
+                {
+                  "file": "docs/engineering/harness/AUTHORITY.md",
+                  "heading": "decision-rights",
+                  "when": "Before obtaining or applying an accountable decision."
+                }
+              ]
+            }
+          }
+        },
+        "current_step": {
+          "id": "STEP-EXTERNAL-ACTION",
+          "location": {
+            "file": "docs/engineering/harness/DELIVER_RESULT.md",
+            "heading": "confirm-authority-for-the-external-action"
+          },
+          "prerequisites": [
+            {
+              "file": "docs/engineering/harness/AUTHORITY.md",
+              "heading": "decision-rights",
+              "when": "Before obtaining or applying an accountable decision."
+            }
+          ]
+        }
+      },
+      "formal_artifact_ids": [
+        "ADR-DST-001",
+        "ADR-IAR-011",
+        "ADR-KIS-002",
+        "ADR-PLG-001",
+        "ADR-RLO-001",
+        "ARCH-DST-001",
+        "ARCH-IAR-011",
+        "ARCH-KIS-002",
+        "ARCH-PLG-001",
+        "ARCH-RLO-001",
+        "CAP-DST-001",
+        "CAP-IAR-002",
+        "CAP-KIS-003",
+        "CAP-RLO-001",
+        "CAP-RLO-004",
+        "INT-DST-001",
+        "INT-IAR-001",
+        "INT-KIS-003",
+        "INT-RLO-001",
+        "REL-SEH-031",
+        "REQ-DST-006",
+        "REQ-IAR-022",
+        "REQ-IAR-023",
+        "REQ-IAR-024",
+        "REQ-IAR-025",
+        "REQ-IAR-026",
+        "REQ-IAR-027",
+        "REQ-IAR-028",
+        "REQ-KIS-009",
+        "REQ-PLG-002",
+        "REQ-PLG-039",
+        "REQ-PLG-040",
+        "REQ-PLG-041",
+        "REQ-RLO-001",
+        "REQ-RLO-018",
+        "REQ-RLO-019",
+        "REQ-RLO-020",
+        "RLS-SEH-029",
+        "SPEC-DST-001",
+        "SPEC-IAR-014",
+        "SPEC-IAR-015",
+        "SPEC-KIS-003",
+        "SPEC-PLG-001",
+        "SPEC-PLG-021",
+        "SPEC-PLG-023",
+        "SPEC-RLO-001",
+        "SPEC-RLO-006",
+        "VER-HUP-021",
+        "VER-IAR-015",
+        "VER-IAR-016",
+        "VER-IAR-017",
+        "VER-KIS-009",
+        "VER-PLG-026",
+        "VER-PLG-027",
+        "VER-RLO-007",
+        "VER-RLO-008",
+        "VER-RLS-026",
+        "VREC-SEH-029",
+        "WO-HUP-021",
+        "WO-HUP-023",
+        "WO-IAR-020",
+        "WO-IAR-021",
+        "WO-IAR-022",
+        "WO-IAR-023",
+        "WO-IAR-024",
+        "WO-IAR-025",
+        "WO-KIS-016",
+        "WO-PLG-026",
+        "WO-PLG-027",
+        "WO-PLG-028",
+        "WO-PLG-029",
+        "WO-RLO-010",
+        "WO-RLO-011",
+        "WO-RLS-026"
+      ],
+      "evaluator_only_inputs": [
+        "docs/engineering/WORKFLOW.json",
+        "docs/engineering/QUALITY_GATES.json"
+      ],
+      "formal_artifacts": [
+        {
+          "id": "ADR-DST-001",
+          "file": "docs/engineering/harness-distribution/architecture/adr/ADR-DST-001.md"
+        },
+        {
+          "id": "ADR-IAR-011",
+          "file": "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-011.md"
+        },
+        {
+          "id": "ADR-KIS-002",
+          "file": "docs/engineering/harness-simplification/architecture/adr/ADR-KIS-002.md"
+        },
+        {
+          "id": "ADR-PLG-001",
+          "file": "docs/engineering/plugin-integration/architecture/adr/ADR-PLG-001.md"
+        },
+        {
+          "id": "ADR-RLO-001",
+          "file": "docs/engineering/release-orchestration/architecture/adr/ADR-RLO-001.md"
+        },
+        {
+          "id": "ARCH-DST-001",
+          "file": "docs/engineering/harness-distribution/architecture/ARCH-DST-001.md"
+        },
+        {
+          "id": "ARCH-IAR-011",
+          "file": "docs/engineering/instruction-architecture/architecture/ARCH-IAR-011.md"
+        },
+        {
+          "id": "ARCH-KIS-002",
+          "file": "docs/engineering/harness-simplification/architecture/ARCH-KIS-002.md"
+        },
+        {
+          "id": "ARCH-PLG-001",
+          "file": "docs/engineering/plugin-integration/architecture/ARCH-PLG-001.md"
+        },
+        {
+          "id": "ARCH-RLO-001",
+          "file": "docs/engineering/release-orchestration/architecture/ARCH-RLO-001.md"
+        },
+        {
+          "id": "CAP-DST-001",
+          "file": "docs/engineering/harness-distribution/capabilities/CAP-DST-001.md"
+        },
+        {
+          "id": "CAP-IAR-002",
+          "file": "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md"
+        },
+        {
+          "id": "CAP-KIS-003",
+          "file": "docs/engineering/harness-simplification/capabilities/CAP-KIS-003.md"
+        },
+        {
+          "id": "CAP-RLO-001",
+          "file": "docs/engineering/release-orchestration/capabilities/CAP-RLO-001.md"
+        },
+        {
+          "id": "CAP-RLO-004",
+          "file": "docs/engineering/release-orchestration/capabilities/CAP-RLO-004.md"
+        },
+        {
+          "id": "INT-DST-001",
+          "file": "docs/engineering/harness-distribution/intent/INT-DST-001.md"
+        },
+        {
+          "id": "INT-IAR-001",
+          "file": "docs/engineering/instruction-architecture/intent/INT-IAR-001.md"
+        },
+        {
+          "id": "INT-KIS-003",
+          "file": "docs/engineering/harness-simplification/intent/INT-KIS-003.md"
+        },
+        {
+          "id": "INT-RLO-001",
+          "file": "docs/engineering/release-orchestration/intent/INT-RLO-001.md"
+        },
+        {
+          "id": "REL-SEH-031",
+          "file": "docs/engineering/release-0-20-0/release/REL-SEH-031.md"
+        },
+        {
+          "id": "REQ-DST-006",
+          "file": "docs/engineering/harness-distribution/requirements/REQ-DST-006.md"
+        },
+        {
+          "id": "REQ-IAR-022",
+          "file": "docs/engineering/instruction-architecture/requirements/REQ-IAR-022.md"
+        },
+        {
+          "id": "REQ-IAR-023",
+          "file": "docs/engineering/instruction-architecture/requirements/REQ-IAR-023.md"
+        },
+        {
+          "id": "REQ-IAR-024",
+          "file": "docs/engineering/instruction-architecture/requirements/REQ-IAR-024.md"
+        },
+        {
+          "id": "REQ-IAR-025",
+          "file": "docs/engineering/instruction-architecture/requirements/REQ-IAR-025.md"
+        },
+        {
+          "id": "REQ-IAR-026",
+          "file": "docs/engineering/instruction-architecture/requirements/REQ-IAR-026.md"
+        },
+        {
+          "id": "REQ-IAR-027",
+          "file": "docs/engineering/instruction-architecture/requirements/REQ-IAR-027.md"
+        },
+        {
+          "id": "REQ-IAR-028",
+          "file": "docs/engineering/instruction-architecture/requirements/REQ-IAR-028.md"
+        },
+        {
+          "id": "REQ-KIS-009",
+          "file": "docs/engineering/harness-simplification/requirements/REQ-KIS-009.md"
+        },
+        {
+          "id": "REQ-PLG-002",
+          "file": "docs/engineering/plugin-integration/requirements/REQ-PLG-002.md"
+        },
+        {
+          "id": "REQ-PLG-039",
+          "file": "docs/engineering/plugin-integration/requirements/REQ-PLG-039.md"
+        },
+        {
+          "id": "REQ-PLG-040",
+          "file": "docs/engineering/plugin-integration/requirements/REQ-PLG-040.md"
+        },
+        {
+          "id": "REQ-PLG-041",
+          "file": "docs/engineering/plugin-integration/requirements/REQ-PLG-041.md"
+        },
+        {
+          "id": "REQ-RLO-001",
+          "file": "docs/engineering/release-orchestration/requirements/REQ-RLO-001.md"
+        },
+        {
+          "id": "REQ-RLO-018",
+          "file": "docs/engineering/release-orchestration/requirements/REQ-RLO-018.md"
+        },
+        {
+          "id": "REQ-RLO-019",
+          "file": "docs/engineering/release-orchestration/requirements/REQ-RLO-019.md"
+        },
+        {
+          "id": "REQ-RLO-020",
+          "file": "docs/engineering/release-orchestration/requirements/REQ-RLO-020.md"
+        },
+        {
+          "id": "RLS-SEH-029",
+          "file": "docs/engineering/release-0-20-0/releases/RLS-SEH-029.md"
+        },
+        {
+          "id": "SPEC-DST-001",
+          "file": "docs/engineering/harness-distribution/specifications/SPEC-DST-001.md"
+        },
+        {
+          "id": "SPEC-IAR-014",
+          "file": "docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md"
+        },
+        {
+          "id": "SPEC-IAR-015",
+          "file": "docs/engineering/instruction-architecture/specifications/SPEC-IAR-015.md"
+        },
+        {
+          "id": "SPEC-KIS-003",
+          "file": "docs/engineering/harness-simplification/specifications/SPEC-KIS-003.md"
+        },
+        {
+          "id": "SPEC-PLG-001",
+          "file": "docs/engineering/plugin-integration/specifications/SPEC-PLG-001.md"
+        },
+        {
+          "id": "SPEC-PLG-021",
+          "file": "docs/engineering/plugin-integration/specifications/SPEC-PLG-021.md"
+        },
+        {
+          "id": "SPEC-PLG-023",
+          "file": "docs/engineering/plugin-integration/specifications/SPEC-PLG-023.md"
+        },
+        {
+          "id": "SPEC-RLO-001",
+          "file": "docs/engineering/release-orchestration/specifications/SPEC-RLO-001.md"
+        },
+        {
+          "id": "SPEC-RLO-006",
+          "file": "docs/engineering/release-orchestration/specifications/SPEC-RLO-006.md"
+        },
+        {
+          "id": "VER-HUP-021",
+          "file": "docs/engineering/repository-harness-upgrade/verification/VER-HUP-021.md"
+        },
+        {
+          "id": "VER-IAR-015",
+          "file": "docs/engineering/instruction-architecture/verification/VER-IAR-015.md"
+        },
+        {
+          "id": "VER-IAR-016",
+          "file": "docs/engineering/instruction-architecture/verification/VER-IAR-016.md"
+        },
+        {
+          "id": "VER-IAR-017",
+          "file": "docs/engineering/instruction-architecture/verification/VER-IAR-017.md"
+        },
+        {
+          "id": "VER-KIS-009",
+          "file": "docs/engineering/harness-simplification/verification/VER-KIS-009.md"
+        },
+        {
+          "id": "VER-PLG-026",
+          "file": "docs/engineering/plugin-integration/verification/VER-PLG-026.md"
+        },
+        {
+          "id": "VER-PLG-027",
+          "file": "docs/engineering/plugin-integration/verification/VER-PLG-027.md"
+        },
+        {
+          "id": "VER-RLO-007",
+          "file": "docs/engineering/release-orchestration/verification/VER-RLO-007.md"
+        },
+        {
+          "id": "VER-RLO-008",
+          "file": "docs/engineering/release-orchestration/verification/VER-RLO-008.md"
+        },
+        {
+          "id": "VER-RLS-026",
+          "file": "docs/engineering/release-0-20-0/verification/VER-RLS-026.md"
+        },
+        {
+          "id": "VREC-SEH-029",
+          "file": "docs/engineering/release-0-20-0/verification-records/VREC-SEH-029.md"
+        },
+        {
+          "id": "WO-HUP-021",
+          "file": "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-021.md"
+        },
+        {
+          "id": "WO-HUP-023",
+          "file": "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-023.md"
+        },
+        {
+          "id": "WO-IAR-020",
+          "file": "docs/engineering/instruction-architecture/work-orders/WO-IAR-020.md"
+        },
+        {
+          "id": "WO-IAR-021",
+          "file": "docs/engineering/instruction-architecture/work-orders/WO-IAR-021.md"
+        },
+        {
+          "id": "WO-IAR-022",
+          "file": "docs/engineering/instruction-architecture/work-orders/WO-IAR-022.md"
+        },
+        {
+          "id": "WO-IAR-023",
+          "file": "docs/engineering/instruction-architecture/work-orders/WO-IAR-023.md"
+        },
+        {
+          "id": "WO-IAR-024",
+          "file": "docs/engineering/instruction-architecture/work-orders/WO-IAR-024.md"
+        },
+        {
+          "id": "WO-IAR-025",
+          "file": "docs/engineering/instruction-architecture/work-orders/WO-IAR-025.md"
+        },
+        {
+          "id": "WO-KIS-016",
+          "file": "docs/engineering/harness-simplification/work-orders/WO-KIS-016.md"
+        },
+        {
+          "id": "WO-PLG-026",
+          "file": "docs/engineering/plugin-integration/work-orders/WO-PLG-026.md"
+        },
+        {
+          "id": "WO-PLG-027",
+          "file": "docs/engineering/plugin-integration/work-orders/WO-PLG-027.md"
+        },
+        {
+          "id": "WO-PLG-028",
+          "file": "docs/engineering/plugin-integration/work-orders/WO-PLG-028.md"
+        },
+        {
+          "id": "WO-PLG-029",
+          "file": "docs/engineering/plugin-integration/work-orders/WO-PLG-029.md"
+        },
+        {
+          "id": "WO-RLO-010",
+          "file": "docs/engineering/release-orchestration/work-orders/WO-RLO-010.md"
+        },
+        {
+          "id": "WO-RLO-011",
+          "file": "docs/engineering/release-orchestration/work-orders/WO-RLO-011.md"
+        },
+        {
+          "id": "WO-RLS-026",
+          "file": "docs/engineering/release-0-20-0/work-orders/WO-RLS-026.md"
+        }
+      ]
+    },
+    "result_sha256": "1b3770ba18e06c195ce3b108b39ad709ca786c79fa6cd1187be0635e0e59a0c5",
+    "context": {
+      "reading_manifest": [
+        "ENGINEERING_HARNESS.md",
+        "docs/engineering/instruction-architecture/intent/INT-IAR-001.md",
+        "docs/engineering/instruction-architecture/capabilities/CAP-IAR-002.md",
+        "docs/engineering/instruction-architecture/requirements/REQ-IAR-022.md",
+        "docs/engineering/instruction-architecture/requirements/REQ-IAR-024.md",
+        "docs/engineering/instruction-architecture/requirements/REQ-IAR-025.md",
+        "docs/engineering/instruction-architecture/requirements/REQ-IAR-026.md",
+        "docs/engineering/instruction-architecture/specifications/SPEC-IAR-014.md",
+        "docs/engineering/instruction-architecture/architecture/ARCH-IAR-011.md",
+        "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-011.md",
+        "docs/engineering/repository-harness-upgrade/verification/VER-HUP-021.md",
+        "docs/engineering/repository-harness-upgrade/work-orders/WO-HUP-021.md"
+      ],
+      "governing": [
+        "ADR-DST-001",
+        "ADR-IAR-011",
+        "ADR-KIS-002",
+        "ADR-PLG-001",
+        "ADR-RLO-001",
+        "ARCH-DST-001",
+        "ARCH-IAR-011",
+        "ARCH-KIS-002",
+        "ARCH-PLG-001",
+        "ARCH-RLO-001",
+        "CAP-DST-001",
+        "CAP-IAR-002",
+        "CAP-KIS-003",
+        "CAP-RLO-001",
+        "CAP-RLO-004",
+        "INT-DST-001",
+        "INT-IAR-001",
+        "INT-KIS-003",
+        "INT-RLO-001",
+        "REL-SEH-031",
+        "REQ-DST-006",
+        "REQ-IAR-022",
+        "REQ-IAR-023",
+        "REQ-IAR-024",
+        "REQ-IAR-025",
+        "REQ-IAR-026",
+        "REQ-IAR-027",
+        "REQ-IAR-028",
+        "REQ-KIS-009",
+        "REQ-PLG-002",
+        "REQ-PLG-039",
+        "REQ-PLG-040",
+        "REQ-PLG-041",
+        "REQ-RLO-001",
+        "REQ-RLO-018",
+        "REQ-RLO-019",
+        "REQ-RLO-020",
+        "SPEC-DST-001",
+        "SPEC-IAR-014",
+        "SPEC-IAR-015",
+        "SPEC-KIS-003",
+        "SPEC-PLG-001",
+        "SPEC-PLG-021",
+        "SPEC-PLG-023",
+        "SPEC-RLO-001",
+        "SPEC-RLO-006",
+        "VER-HUP-021",
+        "VER-IAR-015",
+        "VER-IAR-016",
+        "VER-IAR-017",
+        "VER-KIS-009",
+        "VER-PLG-026",
+        "VER-PLG-027",
+        "VER-RLO-007",
+        "VER-RLO-008",
+        "VER-RLS-026",
+        "VREC-SEH-029",
+        "WO-HUP-021",
+        "WO-HUP-023",
+        "WO-IAR-020",
+        "WO-IAR-021",
+        "WO-IAR-022",
+        "WO-IAR-023",
+        "WO-IAR-024",
+        "WO-IAR-025",
+        "WO-KIS-016",
+        "WO-PLG-026",
+        "WO-PLG-027",
+        "WO-PLG-028",
+        "WO-PLG-029",
+        "WO-RLO-010",
+        "WO-RLO-011",
+        "WO-RLS-026"
+      ],
+      "declared_paths": [],
+      "state": {
+        "status": "released",
+        "family": "release_record"
+      },
+      "next": {
+        "argv": [],
+        "procedure_id": "PROC-EXTERNAL-ACTION",
+        "step_id": "STEP-EXTERNAL-ACTION"
+      },
+      "decision_required": {
+        "decision_right": "DR-EXTERNAL-ACTION",
+        "role": "accountable external-action owner",
+        "artifact": "RLS-SEH-029",
+        "decision": "the exact tag, publication, deployment, or operating action",
+        "outcomes": [
+          "authorize",
+          "stop"
+        ]
+      }
+    }
+  },
+  "released_record_sha256": "c34a8470c2a24c8b458a83b83914f0cb1337dd44915c25d4eec3d6219fd97042"
+}
