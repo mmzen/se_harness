@@ -2,7 +2,7 @@
 id = "WO-IAR-029"
 type = "work_order"
 title = "Connect both host plugins to pinned external resources"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-09-30"
 updated = "2026-09-30"
@@ -52,6 +52,13 @@ to = "in_progress"
 decided_at = "2026-09-30T12:21:44Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-30T17:21:03Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Connect both host plugins to pinned external resources
