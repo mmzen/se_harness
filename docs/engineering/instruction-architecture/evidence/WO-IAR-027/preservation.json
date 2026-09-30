@@ -1,0 +1,10 @@
+{
+  "baseline": "7bf6850bca0526791756cf9dbfb07b201b87aeda",
+  "before_raw_sha256": "25b711d3f7cd64aab058727595f62217e177d009f17a371dd03b007bcda50c8b",
+  "after_raw_sha256": "2de2788e42287163c097401e8cd71c2c85e7f71dece5cba81ac6773d9f5a3f7f",
+  "after_lf_sha256": "4eb639dffb6308db4633c9f5046194041d27aca7e9ada7d49f4bd340c9c6f410",
+  "exact_reviewed_replacements": 12,
+  "unselected_bytes_preserved": true,
+  "term_names_preserved": true,
+  "line_endings_preserved": true
+}

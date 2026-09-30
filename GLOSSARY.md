@@ -26,13 +26,13 @@ artifacts.
 
 **Work order (WO).** A file that authorizes one bounded change and lists the paths it may touch. Nothing is implemented without one.
 
-**Verification record (VREC).** A file that binds a work order's evidence to one exact commit. A human decides whether it becomes `verified`; after that it can never be edited.
+**Verification record (VREC).** A file that binds evidence and one or more work orders to one exact commit. A human decides whether to accept it as `verified`; later permitted lifecycle transitions preserve its candidate and evidence history (see [verification decisions](docs/engineering/harness/VERIFY_OUTCOME.md#record-the-verification-decision)).
 
-**Release record (RLS).** A file recording the separate release decision, tied to the same exact commit that verification assessed.
+**Release record (RLS).** A file that binds a release contract, eligible verification records and one exact candidate commit. Preparation creates a `ready` record; an authorized human makes the separate release decision (see [release decisions](docs/engineering/harness/RELEASE.md#obtain-the-release-decision-when-required)).
 
 **Definition.** The collective name for the artifacts that describe a plan before work starts: intent, capability, requirement, specification, architecture, ADR, verification contract, release contract, and operating contract.
 
-**Decision right.** The rule that says who may take a given decision. Commands report which decision is due and which right owns it; they never take it.
+**Decision right.** The rule that identifies who may authorize a specific action. The evaluator reports the required right and checks the action; a command may apply an authorized decision, but running it does not supply that decision (see [decision rights](docs/engineering/harness/AUTHORITY.md#decision-rights)).
 
 **Evaluator.** The installed copy of SE Harness that judges a repository. It runs at a pinned released version, from a virtual environment outside the checkout.
 
@@ -52,7 +52,7 @@ artifacts.
 
 **Managed file.** A file the tool installs and hash-locks. Editing it by hand breaks `doctor` and the required CI check.
 
-**Owner file.** Repository content the owner controls, such as product code and local instructions. The harness does not write or lock it.
+**Owner file.** Repository content the owner controls, such as product code and local instructions. The harness may seed some owner files at installation, but later replacement requires explicit owner authority; owner content is not hash-locked as managed policy (see [upgrades](docs/engineering/harness/UPGRADE.md#upgrade-the-installed-harness)).
 
 **Lock.** The file `.engineering-harness.lock`, which records the digest of every managed file and the identity of the evaluator release that installed them.
 
@@ -60,11 +60,11 @@ artifacts.
 
 **Checkpoint.** The moment in a procedure at which `check` runs a gate: `start`, `pre-action`, `transition`, `handoff`, or `scope`.
 
-**Projection.** `check` without a checkpoint. It reads the state and names the next step; it judges nothing and writes nothing.
+**Projection.** A `check` result obtained without a checkpoint. It reports lifecycle context and the next step; it does not evaluate checkpoint gates or authorize work (see [continuation](docs/engineering/harness/CONTINUE.md#continue-selected-work)).
 
-**Restitution.** The fixed-format result block every workflow command prints: what completed, what is blocked, the decision due, and one next step, with a digest of its own content.
+**Restitution.** The operator-facing summary in a workflow result: what completed, what is blocked, the decision due and one next step. Agents report that result without inventing effects or authority (see [reporting results](docs/engineering/harness/RESULTS.md#report-a-lifecycle-result)).
 
-**result_sha256.** The digest inside a restitution. For a completed handoff it covers the change set and every check's status, and the pull-request body declares it, so the reviewed result and the reviewed tree cannot drift apart.
+**result_sha256.** The digest that binds the declared machine fields of a workflow result; in the current format, explanatory wording is excluded. A generated `Harness-Restitution` field refers to one work-order result and does not replace checking the current PR body and complete diff (see [result digests](docs/engineering/harness/RESULTS.md#report-a-lifecycle-result) and [PR checks](docs/engineering/harness/PULL_REQUEST.md#check-a-governed-pull-request)).
 
 **Evidence packet.** The retained file recording what was done and checked for one work order. It is bound to the formal snapshot current when it was written, so later artifact edits are detectable.
 
@@ -72,7 +72,7 @@ artifacts.
 
 **Formal snapshot.** A digest over the canonical bytes of every formal artifact in the repository. Evidence packets bind to it.
 
-**Delegation class.** One table on a work order that lets an automated actor take three named lifecycle steps while the required pull-request check is green. Every other decision stays human.
+**Delegation class.** A historical work-order table that granted specified execution steps under the rules of its release. Current work-order approval grants bounded execution through [authority from work approval](docs/engineering/harness/AUTHORITY.md#authority-from-work-approval); older approvals keep their recorded limits, and human-reserved decisions remain with humans.
 
 **Change set.** The list of paths a change touched, derived from Git or explicitly declared. Scope checks compare it against the paths the work order authorizes.
 
@@ -80,7 +80,7 @@ artifacts.
 
 **Candidate.** The source code of this checkout as it stands on a branch: judged by the root evaluator, never judging. The word takes a qualifier when it matters: a candidate commit is one exact revision; the candidate package is a wheel built from it and never promoted; the candidate templates are the managed files under `templates/repository/standard/` that ship with the next release (`SPEC-DST-014`, `WO-DST-023`).
 
-**Digest.** A SHA-256 over exact bytes. The lock holds one per managed file, a verification record holds one over the formal snapshot and one over its evaluator evidence, and a restitution holds one over its own content as `result_sha256` (`SPEC-REV-001`).
+**Digest.** A SHA-256 value computed from the bytes or canonical fields specified by its contract. Examples include managed-file hashes, formal-snapshot and evaluator-evidence hashes, and the workflow result's `result_sha256`; each uses its own declared input and format (`SPEC-REV-001`, [current result format](docs/engineering/harness/RESULTS.md#report-a-lifecycle-result)).
 
 **Canonical.** The single byte form a file is reduced to before it is hashed or compared: LF line endings for text, sorted keys and fixed separators for JSON. Two files that differ only outside the canonical form have the same digest (`SPEC-DST-014`).
 
@@ -88,13 +88,13 @@ artifacts.
 
 **Schema.** The declared shape of a machine-read document, named by a string such as `se-harness-inspection-v2`. A consumer refuses a document whose schema it does not know; a new field means a new schema name (`SPEC-ECP-006`).
 
-**Accountable role.** The named role that holds a decision right and answers for the decision: product owner, technical owner, assurance owner, release owner, engineering owner. In this repository one person holds every role; the record still names the role, not the person (`DECISION_RIGHTS.md`).
+**Accountable role.** A legacy label for a decision responsibility, such as assurance owner or release owner. Current [decision rights](docs/engineering/harness/AUTHORITY.md#decision-rights) distinguish humans and agents and record the actual decision-maker and authority; a profile or role label alone grants no permission.
 
 **Dashboard snapshot.** The generator's canonical projection of every artifact, relation and diagnostic, from which the Explorer bundle and the inspection are built. Not the formal snapshot, which is a digest over artifact bytes (`SPEC-DST-014`).
 
 **Provenance.** The recorded chain from a claim to the exact revision and evidence behind it: the commit a record binds, the worktree state, the evaluator that produced the evidence and its digest (`SPEC-REV-001`).
 
-**Predicate.** One named check inside a gate, such as `QGP-G4I-PATHS`, with a fixed evaluator and the evidence it needs. A gate passes when every predicate it binds to the checkpoint passes (`QUALITY_GATES.md`).
+**Predicate.** One exact condition assessed by a gate, such as `QGP-G4I-PATHS`. At the selected checkpoint, every required predicate assessed there must pass before that gate permits the action (see [gates](docs/engineering/harness/RESULTS.md#gates)).
 
 **Contract (of a specification).** The one sentence in a specification's front matter saying what an implementation must do to conform. The Explorer shows it under the title; the validator budgets it at 30 words on a draft (`SPEC-TCM-006`).
 
@@ -104,7 +104,11 @@ artifacts.
 
 ## Upkeep
 
-This page is a note: change it by pull request and review, never by a work
-order. `harnessctl inspect` reports the frequent project terms without an
-entry and the entries whose term appears in no artifact; add or retire
-entries from that report and from reviewers' questions.
+Follow the repository's selected harness procedure when changing this page,
+then use a reviewed pull request. SE Harness 0.20.0 has no owner-configured
+documentation exception; [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability)
+therefore directs this work through the normal definition and work-order process.
+
+`harnessctl inspect` reports frequent project terms without an entry and entries
+whose term appears in no artifact. Use that report and reviewers' questions to
+propose glossary updates; the report grants no change authority.

@@ -1,0 +1,172 @@
+{
+  "repository_glossary_sha256": "25b711d3f7cd64aab058727595f62217e177d009f17a371dd03b007bcda50c8b",
+  "proposed_lf_sha256": "4eb639dffb6308db4633c9f5046194041d27aca7e9ada7d49f4bd340c9c6f410",
+  "changes": [
+    {
+      "section": "Verification record (VREC)",
+      "before": "**Verification record (VREC).** A file that binds a work order's evidence to one exact commit. A human decides whether it becomes `verified`; after that it can never be edited.",
+      "after": "**Verification record (VREC).** A file that binds evidence and one or more work orders to one exact commit. A human decides whether to accept it as `verified`; later permitted lifecycle transitions preserve its candidate and evidence history (see [verification decisions](docs/engineering/harness/VERIFY_OUTCOME.md#record-the-verification-decision))."
+    },
+    {
+      "section": "Release record (RLS)",
+      "before": "**Release record (RLS).** A file recording the separate release decision, tied to the same exact commit that verification assessed.",
+      "after": "**Release record (RLS).** A file that binds a release contract, eligible verification records and one exact candidate commit. Preparation creates a `ready` record; an authorized human makes the separate release decision (see [release decisions](docs/engineering/harness/RELEASE.md#obtain-the-release-decision-when-required))."
+    },
+    {
+      "section": "Decision right",
+      "before": "**Decision right.** The rule that says who may take a given decision. Commands report which decision is due and which right owns it; they never take it.",
+      "after": "**Decision right.** The rule that identifies who may authorize a specific action. The evaluator reports the required right and checks the action; a command may apply an authorized decision, but running it does not supply that decision (see [decision rights](docs/engineering/harness/AUTHORITY.md#decision-rights))."
+    },
+    {
+      "section": "Owner file",
+      "before": "**Owner file.** Repository content the owner controls, such as product code and local instructions. The harness does not write or lock it.",
+      "after": "**Owner file.** Repository content the owner controls, such as product code and local instructions. The harness may seed some owner files at installation, but later replacement requires explicit owner authority; owner content is not hash-locked as managed policy (see [upgrades](docs/engineering/harness/UPGRADE.md#upgrade-the-installed-harness))."
+    },
+    {
+      "section": "Projection",
+      "before": "**Projection.** `check` without a checkpoint. It reads the state and names the next step; it judges nothing and writes nothing.",
+      "after": "**Projection.** A `check` result obtained without a checkpoint. It reports lifecycle context and the next step; it does not evaluate checkpoint gates or authorize work (see [continuation](docs/engineering/harness/CONTINUE.md#continue-selected-work))."
+    },
+    {
+      "section": "Restitution",
+      "before": "**Restitution.** The fixed-format result block every workflow command prints: what completed, what is blocked, the decision due, and one next step, with a digest of its own content.",
+      "after": "**Restitution.** The operator-facing summary in a workflow result: what completed, what is blocked, the decision due and one next step. Agents report that result without inventing effects or authority (see [reporting results](docs/engineering/harness/RESULTS.md#report-a-lifecycle-result))."
+    },
+    {
+      "section": "result_sha256",
+      "before": "**result_sha256.** The digest inside a restitution. For a completed handoff it covers the change set and every check's status, and the pull-request body declares it, so the reviewed result and the reviewed tree cannot drift apart.",
+      "after": "**result_sha256.** The digest that binds the declared machine fields of a workflow result; in the current format, explanatory wording is excluded. A generated `Harness-Restitution` field refers to one work-order result and does not replace checking the current PR body and complete diff (see [result digests](docs/engineering/harness/RESULTS.md#report-a-lifecycle-result) and [PR checks](docs/engineering/harness/PULL_REQUEST.md#check-a-governed-pull-request))."
+    },
+    {
+      "section": "Delegation class",
+      "before": "**Delegation class.** One table on a work order that lets an automated actor take three named lifecycle steps while the required pull-request check is green. Every other decision stays human.",
+      "after": "**Delegation class.** A historical work-order table that granted specified execution steps under the rules of its release. Current work-order approval grants bounded execution through [authority from work approval](docs/engineering/harness/AUTHORITY.md#authority-from-work-approval); older approvals keep their recorded limits, and human-reserved decisions remain with humans."
+    },
+    {
+      "section": "Digest",
+      "before": "**Digest.** A SHA-256 over exact bytes. The lock holds one per managed file, a verification record holds one over the formal snapshot and one over its evaluator evidence, and a restitution holds one over its own content as `result_sha256` (`SPEC-REV-001`).",
+      "after": "**Digest.** A SHA-256 value computed from the bytes or canonical fields specified by its contract. Examples include managed-file hashes, formal-snapshot and evaluator-evidence hashes, and the workflow result's `result_sha256`; each uses its own declared input and format (`SPEC-REV-001`, [current result format](docs/engineering/harness/RESULTS.md#report-a-lifecycle-result))."
+    },
+    {
+      "section": "Accountable role",
+      "before": "**Accountable role.** The named role that holds a decision right and answers for the decision: product owner, technical owner, assurance owner, release owner, engineering owner. In this repository one person holds every role; the record still names the role, not the person (`DECISION_RIGHTS.md`).",
+      "after": "**Accountable role.** A legacy label for a decision responsibility, such as assurance owner or release owner. Current [decision rights](docs/engineering/harness/AUTHORITY.md#decision-rights) distinguish humans and agents and record the actual decision-maker and authority; a profile or role label alone grants no permission."
+    },
+    {
+      "section": "Predicate",
+      "before": "**Predicate.** One named check inside a gate, such as `QGP-G4I-PATHS`, with a fixed evaluator and the evidence it needs. A gate passes when every predicate it binds to the checkpoint passes (`QUALITY_GATES.md`).",
+      "after": "**Predicate.** One exact condition assessed by a gate, such as `QGP-G4I-PATHS`. At the selected checkpoint, every required predicate assessed there must pass before that gate permits the action (see [gates](docs/engineering/harness/RESULTS.md#gates))."
+    },
+    {
+      "section": "Upkeep",
+      "before": "This page is a note: change it by pull request and review, never by a work\norder. `harnessctl inspect` reports the frequent project terms without an\nentry and the entries whose term appears in no artifact; add or retire\nentries from that report and from reviewers' questions.\n",
+      "after": "Follow the repository's selected harness procedure when changing this page,\nthen use a reviewed pull request. SE Harness 0.20.0 has no owner-configured\ndocumentation exception; [EXCEPTIONS.md](docs/engineering/harness/EXCEPTIONS.md#availability)\ntherefore directs this work through the normal definition and work-order process.\n\n`harnessctl inspect` reports frequent project terms without an entry and entries\nwhose term appears in no artifact. Use that report and reviewers' questions to\npropose glossary updates; the report grants no change authority.\n"
+    }
+  ],
+  "source_assessment": {
+    "requirement": "REQ-IAR-027",
+    "specification": "SPEC-IAR-014#IAR-DIS-010 through IAR-DIS-013",
+    "method": "Manual comparison with unchanged installed 0.20.0 policy, followed by exact approved paragraph replacement and link checks. Expected authority comes from these policy sources, not the proposed glossary.",
+    "entries": [
+      {
+        "entry": "Verification record (VREC)",
+        "sources": [
+          "VERIFY_OUTCOME.md",
+          "WORK_AND_EVIDENCE.md"
+        ],
+        "result": "pass"
+      },
+      {
+        "entry": "Release record (RLS)",
+        "sources": [
+          "RELEASE.md",
+          "WORK_AND_EVIDENCE.md"
+        ],
+        "result": "pass"
+      },
+      {
+        "entry": "Decision right",
+        "sources": [
+          "AUTHORITY.md"
+        ],
+        "result": "pass"
+      },
+      {
+        "entry": "Owner file",
+        "sources": [
+          "UPGRADE.md"
+        ],
+        "result": "pass"
+      },
+      {
+        "entry": "Projection",
+        "sources": [
+          "CONTINUE.md"
+        ],
+        "result": "pass"
+      },
+      {
+        "entry": "Restitution",
+        "sources": [
+          "RESULTS.md"
+        ],
+        "result": "pass"
+      },
+      {
+        "entry": "result_sha256",
+        "sources": [
+          "RESULTS.md",
+          "PULL_REQUEST.md"
+        ],
+        "result": "pass"
+      },
+      {
+        "entry": "Delegation class",
+        "sources": [
+          "AUTHORITY.md"
+        ],
+        "result": "pass"
+      },
+      {
+        "entry": "Digest",
+        "sources": [
+          "RESULTS.md",
+          "WORK_AND_EVIDENCE.md"
+        ],
+        "result": "pass"
+      },
+      {
+        "entry": "Accountable role",
+        "sources": [
+          "AUTHORITY.md"
+        ],
+        "result": "pass"
+      },
+      {
+        "entry": "Predicate",
+        "sources": [
+          "RESULTS.md"
+        ],
+        "result": "pass"
+      },
+      {
+        "entry": "Upkeep",
+        "sources": [
+          "EXCEPTIONS.md"
+        ],
+        "result": "pass"
+      }
+    ],
+    "source_sha256": {
+      "docs/engineering/harness/AUTHORITY.md": "582bdd61367121bce0e97456d6d418218dbaf71aeaa1b7f4fe78bd51e7ef36b6",
+      "docs/engineering/harness/CONTINUE.md": "e3e71c06cd3cfbeae967f3adef70d50754c053f674ba01a21bafb8b0db22f938",
+      "docs/engineering/harness/EXCEPTIONS.md": "924a1610b804bf2ca619bd28f634aa150bf54ea339337f70d645a2edc97c036e",
+      "docs/engineering/harness/PULL_REQUEST.md": "7ae7f7323db0fea5b7f32cd2f91c294c46982a630e5a9cac289b64c52e82a056",
+      "docs/engineering/harness/RELEASE.md": "86bf1819f886f5ce93e5064bde56ce3199e0f9f96e33b0c9057edf5fb54f626b",
+      "docs/engineering/harness/RESULTS.md": "33102ecf549ec439fda9d3cd645c2904dafe292d48a444566820363df5a48abb",
+      "docs/engineering/harness/UPGRADE.md": "75b89083818ccdecc1e5b96da1fdf2e9ca4bd9be645a715fe26e1be2e19b2c52",
+      "docs/engineering/harness/VERIFY_OUTCOME.md": "4dd9ecbd03cc6fedeb661efb60812371d4776382280b7382f5ad19a6d56e9d35",
+      "docs/engineering/harness/WORK_AND_EVIDENCE.md": "b6508bdf0a3158fe87d17e4695013af62cb186ba97112af94d18037d952cf236"
+    }
+  }
+}
