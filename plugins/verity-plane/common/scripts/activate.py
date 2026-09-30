@@ -25,7 +25,7 @@ def activate(host: str, session: str, data: Path, target: Path | None) -> str:
                 read_regular(path, 16384)
                 path.unlink()
             return context
-        context = bounded_context(session_guidance(host, session, data) + "\n" + repository_context(root, data))
+        context = bounded_context(session_guidance(host, session, data) + "\n" + repository_context(root, data), host)
         atomic_json(path, {"schema":"se-harness-session-v1", "host":host,
                            "session_id":session, "repository":str(root)})
     return context

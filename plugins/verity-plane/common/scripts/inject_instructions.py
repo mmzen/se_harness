@@ -23,7 +23,10 @@ from harness_runtime import (DeliveryError, unique_object, read_regular, selecte
 
 
 MAX_INPUT_BYTES = 64 * 1024
-MAX_CONTEXT_CHARACTERS = 10000  # The smaller documented host context limit.
+# Claude bounds additionalContext in UTF-16 units. Codex has a separate
+# 5,000 approximate-token envelope configured in hooks.json; cap its text at
+# 20,000 units here instead of applying Claude's smaller host limit to it.
+CONTEXT_LIMITS = {"claude": 10000, "codex": 20000}
 MAX_ROOT_BYTES = 64 * 1024
 MAX_CONFIG_BYTES = 1024 * 1024
 SOURCES = {"codex": {"startup", "resume", "clear", "compact"},
@@ -96,15 +99,17 @@ def session_guidance(host: str, session: str, data: Path) -> str:
             "Select or switch through verity-plane:setup (scripts/activate.py in this plugin).\n")
 
 
-def bounded_context(context: str) -> str:
-    if len(context.encode("utf-16-le")) // 2 > MAX_CONTEXT_CHARACTERS:
-        raise DeliveryError("the complete root exceeds the host delivery limit; no truncated policy was sent")
+def bounded_context(context: str, host: str) -> str:
+    units = len(context.encode("utf-16-le")) // 2
+    if units > CONTEXT_LIMITS[host]:
+        raise DeliveryError(f"the complete root needs {units} UTF-16 units, exceeding the {host} "
+                            f"delivery bound of {CONTEXT_LIMITS[host]}; no truncated policy was sent")
     return context
 
 
 def bootstrap(host: str, session: str, data: Path) -> str:
     text = read_regular(Path(__file__).resolve().parents[1]/"assets/bootstrap.md", MAX_ROOT_BYTES).decode("utf-8")
-    return bounded_context(session_guidance(host, session, data) + "\n" + text)
+    return bounded_context(session_guidance(host, session, data) + "\n" + text, host)
 
 
 def context_for(event: dict, host: str) -> str:
@@ -119,7 +124,7 @@ def context_for(event: dict, host: str) -> str:
     if root is None:
         root = selected_repository(event.get("cwd"))
     context = (bootstrap(host, session, data) if root is None else
-               bounded_context(session_guidance(host, session, data) + "\n" + repository_context(root, data)))
+               bounded_context(session_guidance(host, session, data) + "\n" + repository_context(root, data), host))
     unchanged_selection(path, saved)
     return context
 

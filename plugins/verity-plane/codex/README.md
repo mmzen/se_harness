@@ -23,9 +23,11 @@ Python 3.11+ must be available to the hook launcher. Codex also requires the
 user to trust the plugin's reviewed hooks. Real host settings are not changed by
 building or testing this source. Repository-only skills do not install hooks.
 
-The complete context is bounded to 10,000 characters. A larger entry is refused,
-not silently truncated. Codex's handler has a 5,000 approximate-token threshold;
-Claude Code's documented character limit remains the shared bound.
+The complete context, including paths and metadata, is capped at 20,000 UTF-16
+units for Codex and 10,000 for Claude Code. A larger entry is refused with its
+measured size; policy is never truncated. Codex's handler keeps its separate
+5,000 approximate-token threshold. Native tests must confirm full delivery with
+the actual host paths.
 
 API references: [Codex hooks](https://learn.chatgpt.com/docs/hooks) and
 [Claude Code hooks](https://code.claude.com/docs/en/hooks).

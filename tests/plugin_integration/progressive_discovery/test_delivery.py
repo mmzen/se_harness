@@ -89,11 +89,22 @@ class InstructionDeliveryTests(unittest.TestCase):
         self.assertIn('A complete root.',self.context(self.event(repo=child)))
 
     def test_limits_refuse_instead_of_truncating_policy(self):
-        large=self.fixture('large','0.19.0','x'*10001)
-        self.assertIn('no truncated policy',self.context(self.event(repo=large)))
-        self.assertNotIn('x'*100,self.context(self.event(repo=large)))
-        wide=self.fixture('wide','0.19.0','\U0001f642'*5001)
-        self.assertIn('no truncated policy',self.context(self.event(repo=wide)))
+        for host,limit in delivery.CONTEXT_LIMITS.items():
+            large=self.fixture('large-'+host,'0.19.0','x'*(limit+1))
+            self.assertIn('no truncated policy',self.context(self.event(repo=large),host))
+            self.assertNotIn('x'*100,self.context(self.event(repo=large),host))
+            wide=self.fixture('wide-'+host,'0.19.0','\U0001f642'*(limit//2+1))
+            self.assertIn('no truncated policy',self.context(self.event(repo=wide),host))
+
+    def test_codex_does_not_inherit_claude_context_limit(self):
+        root=self.fixture('native-path-regression','0.20.0','Required policy.\n'*660)
+        text=(root/'ENGINEERING_HARNESS.md').read_text(encoding='utf-8')
+        context=self.context(self.event(repo=root),'codex')
+        self.assertGreater(len(context.encode('utf-16-le'))//2,10000)
+        self.assertTrue(context.endswith(text))
+        refused=self.context(self.event(repo=root),'claude')
+        self.assertIn('claude delivery bound of 10000',refused)
+        self.assertNotIn('Required policy.',refused)
 
     def test_concurrent_selection_change_refuses_mixed_inputs(self):
         original=delivery.read_regular
@@ -129,11 +140,12 @@ class InstructionDeliveryTests(unittest.TestCase):
             self.assertIn('## After compaction',context)
             units=len(context.encode('utf-16-le'))//2
             self.assertGreater(units,len(context))
-            self.assertLessEqual(units,delivery.MAX_CONTEXT_CHARACTERS)
+            limit=delivery.CONTEXT_LIMITS[host]
+            self.assertLessEqual(units,limit)
             # A root that fits by itself can still overflow the FULL envelope.
-            padding=delivery.MAX_CONTEXT_CHARACTERS-units+1
+            padding=limit-units+1
             oversized=text+'x'*padding
-            self.assertLess(len(oversized.encode('utf-16-le'))//2,delivery.MAX_CONTEXT_CHARACTERS)
+            self.assertLess(len(oversized.encode('utf-16-le'))//2,limit)
             install_root(oversized)
             refused=self.context(self.event(repo=long),host)
             self.assertIn('no truncated policy',refused)
