@@ -2,7 +2,7 @@
 id = "VREC-IAR-016"
 type = "verification_record"
 title = "Verification candidate for WO-IAR-026"
-status = "ready"
+status = "verified"
 owners = ["Codex preparation agent under mmzen approval"]
 created = "2026-09-30"
 updated = "2026-09-30"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/instruction-architecture/evidence/WO-IAR-026
 evaluator_evidence_path = "docs/engineering/instruction-architecture/evidence/VREC-IAR-016-evaluator.json"
 evaluator_evidence_sha256 = "5f2209f1d8d60901e7f8cf46ea5b62f7bb9705e4603c72f15489f9be90af2384"
 
+verified_at = "2026-09-30T06:46:37Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-IAR-026"]
 conforms_to = ["VER-IAR-018"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-30T06:46:37Z"
+decided_by = "mmzen"
+reason = "Human mmzen: i verify VREC-IAR-016. Accept the reviewed retained evidence for exact candidate 928cacdb1d44819b7468f82f5006fbd75896c630, WO-IAR-026 and VER-IAR-018, including the documented native-host limits and separate hosted CI requirement. Codex applies this human assurance decision. This changes only VREC-IAR-016 and does not authorize push, PR, merge or publication."
 +++
 
 # Verification Record Candidate
