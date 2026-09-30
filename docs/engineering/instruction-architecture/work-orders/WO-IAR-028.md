@@ -2,7 +2,7 @@
 id = "WO-IAR-028"
 type = "work_order"
 title = "Build the released resource resolver and evaluator route"
-status = "approved"
+status = "in_progress"
 owners = ["mmzen"]
 created = "2026-09-30"
 updated = "2026-09-30"
@@ -67,6 +67,13 @@ decided_at = "2026-09-30T11:12:12Z"
 decided_by = "mmzen"
 reason = "Human mmzen: I confirm and approve. Approves the updated external-resource package and required commit-bound verification for WO-IAR-028, WO-IAR-029 and WO-IAR-030. Clarification confirmed: Ok for this plan; short bootstrap before cloning, immediate activation of the actual checkout, per-session recovery after compaction/resume and independent parallel sessions. DEC-IAR-003 separately records future release and separate adoption. Reviewed file SHA-256 8be03ea7c47f1c767b2193326f341d2b743e3325bae83ad84ecee167109c0e1f. Only the confirmed assurance metadata and its explanatory paragraph were completed before preview."
 scope_paths = ["se_harness/resources.py", "se_harness/cli.py", "se_harness/artifact_layout.py", "se_harness/instruction_discovery.py", "se_harness/instruction_discovery.json", "se_harness/preflight.py", "se_harness/installer.py", "se_harness/integrity.py", "se_harness/runtime_identity.py", "se_harness/evaluator_identity.py", "se_harness/workflow_contract.py", "se_harness/engine/validation_core.py", "se_harness/engine/validation_authoring.py", "se_harness/engine/inspect_engineering_artifacts.py", "se_harness/engine/dashboard_snapshot.py", "se_harness/engine/dashboard_bundle.py", "se_harness/hash_bound.py", "se_harness/hash_bound_classes.json", "pyproject.toml", "MANIFEST.in", "templates/repository/standard/", "tests/test_resources.py", "tests/test_instruction_discovery.py", "tests/test_progressive_instruction_discovery.py", "tests/test_instruction_architecture.py", "tests/test_artifact_authoring.py", "tests/test_artifact_authoring_policy.py", "tests/test_artifact_catalog.py", "tests/test_evaluator_identity.py", "tests/test_hash_bound_integrity.py", "tests/artifact_support.py", "docs/engineering/instruction-architecture/work-orders/WO-IAR-028.md", "docs/engineering/instruction-architecture/verification-records/VREC-IAR-018.md", "docs/engineering/instruction-architecture/evidence/VREC-IAR-018-evaluator.json", "docs/engineering/instruction-architecture/evidence/WO-IAR-028/", "tests/test_installer.py", "docs/engineering/instruction-architecture/verification-records/VREC-IAR-020.md", "docs/engineering/instruction-architecture/evidence/VREC-IAR-020-evaluator.json"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-30T11:13:53Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed. Start the approved resource resolver and evaluator work under human mmzen package approval and required commit-bound verification. Implementation baseline 05bd4e76ba73cbce3117c27774181b97c374915b; installed 0.20.0 remains governing."
 +++
 
 # Build the released resource resolver and evaluator route
