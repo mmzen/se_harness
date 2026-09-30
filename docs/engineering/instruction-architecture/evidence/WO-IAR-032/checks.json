@@ -1,0 +1,722 @@
+{
+  "governing_evaluator": "0.20.0",
+  "checks": [
+    {
+      "label": "delivery018-scope-approval-preview",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery018-scope-approval-preview.json",
+        "sha256": "f2b1d9af84cbf686b0be06c26cc6b5f5bc5ff9c4821b9f69b8f4c4d15024e990",
+        "availability": "local file; no CI upload claimed"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--set",
+        "WO-IAR-032=approved",
+        "--decision",
+        "WO-IAR-032=mmzen",
+        "--reason",
+        "WO-IAR-032=Human mmzen confirmed: Approve WO-IAR-032 and classification. Approves transport of the ten unchanged already-approved files and not_required assurance; existing authorization covers push and PR followed by WO-IAR-029. Reviewed draft SHA-256 bcdc8eddc762a906a4b0dfa93812c2ee37efed2d6507ae0da4fdfb288eeda80c. Only confirmed assurance metadata and its explanatory paragraph were completed before preview.",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Planned 1 explicit lifecycle transition(s); no files were written."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-IAR-032 is approved."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-WO-START",
+          "step_id": "STEP-WO-START-PREFLIGHT",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "preflight",
+            ".",
+            "--work-order",
+            "WO-IAR-032",
+            "--phase",
+            "start"
+          ]
+        },
+        "alternatives": []
+      },
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null,
+      "errors": null,
+      "summary": {}
+    },
+    {
+      "label": "delivery018-scope-approval-applied",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery018-scope-approval-applied.json",
+        "sha256": "2f8b7541d9ca92d7a7cb3aeaa5b1b2906fbda8824dea419c1d81930e56dadcf9",
+        "availability": "local file; no CI upload claimed"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--set",
+        "WO-IAR-032=approved",
+        "--decision",
+        "WO-IAR-032=mmzen",
+        "--reason",
+        "WO-IAR-032=Human mmzen confirmed: Approve WO-IAR-032 and classification. Approves transport of the ten unchanged already-approved files and not_required assurance; existing authorization covers push and PR followed by WO-IAR-029. Reviewed draft SHA-256 bcdc8eddc762a906a4b0dfa93812c2ee37efed2d6507ae0da4fdfb288eeda80c. Only confirmed assurance metadata and its explanatory paragraph were completed before preview.",
+        "--json",
+        "--apply"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Applied 1 explicit lifecycle transition(s) atomically."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-IAR-032 is approved."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-WO-START",
+          "step_id": "STEP-WO-START-PREFLIGHT",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "preflight",
+            ".",
+            "--work-order",
+            "WO-IAR-032",
+            "--phase",
+            "start"
+          ]
+        },
+        "alternatives": []
+      },
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null,
+      "errors": null,
+      "summary": {}
+    },
+    {
+      "label": "delivery018-scope-start-preflight",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery018-scope-start-preflight.json",
+        "sha256": "da43825844a8e452fabfff016e605f7d21589cb3a5b360c998bc44fb52dba189",
+        "availability": "local file; no CI upload claimed"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--work-order",
+        "WO-IAR-032",
+        "--phase",
+        "start",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "restitution": null,
+      "diagnostics": [],
+      "valid": null,
+      "error_count": null,
+      "warning_count": null,
+      "errors": null,
+      "summary": {}
+    },
+    {
+      "label": "delivery018-scope-start-preview",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery018-scope-start-preview.json",
+        "sha256": "9b48e0159a706d63103752004260bc42af62443178a21163b725a6542c4f9031",
+        "availability": "local file; no CI upload claimed"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--set",
+        "WO-IAR-032=in_progress",
+        "--decision",
+        "WO-IAR-032=Codex",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Planned 1 explicit lifecycle transition(s); no files were written."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-IAR-032 is in_progress."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-WO-IMPLEMENT",
+          "step_id": "STEP-WO-IMPLEMENT-CHECK",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "WO-IAR-032",
+            "--checkpoint",
+            "handoff"
+          ]
+        },
+        "alternatives": []
+      },
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null,
+      "errors": null,
+      "summary": {}
+    },
+    {
+      "label": "delivery018-scope-start-applied",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery018-scope-start-applied.json",
+        "sha256": "04cf8ee801d2f251c448b862668d407bb34871902dd46ac81fa93aba2678cf6d",
+        "availability": "local file; no CI upload claimed"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--set",
+        "WO-IAR-032=in_progress",
+        "--decision",
+        "WO-IAR-032=Codex",
+        "--json",
+        "--apply"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Applied 1 explicit lifecycle transition(s) atomically."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-IAR-032 is in_progress."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-WO-IMPLEMENT",
+          "step_id": "STEP-WO-IMPLEMENT-CHECK",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "WO-IAR-032",
+            "--checkpoint",
+            "handoff"
+          ]
+        },
+        "alternatives": []
+      },
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null,
+      "errors": null,
+      "summary": {}
+    },
+    {
+      "label": "delivery032-validation",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery032-validation.json",
+        "sha256": "bbc831f7b48e8b7f7fd94c82055da4cf93eb3fabe4d9c448861bcd9a280bbca3",
+        "availability": "local file; no CI upload claimed"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "restitution": null,
+      "diagnostics": null,
+      "valid": true,
+      "error_count": 0,
+      "warning_count": 54,
+      "errors": [],
+      "summary": {}
+    },
+    {
+      "label": "delivery032-review",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery032-review.json",
+        "sha256": "c03c58b1e4170a572422bc896a4d7cace8dfae49fd15ab5357e288d8f7c7c49f",
+        "availability": "local file; no CI upload claimed"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--work-order",
+        "WO-IAR-032",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "restitution": null,
+      "diagnostics": [],
+      "valid": null,
+      "error_count": null,
+      "warning_count": null,
+      "errors": null,
+      "summary": {}
+    },
+    {
+      "label": "delivery032-pr-check",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery032-pr-check.json",
+        "sha256": "99b049dd2421339b5e5457f929f83c69f22fe352b8f2a986e61ca95ea656b517",
+        "availability": "local file; no CI upload claimed"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check-pr",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--event",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery032-event.json",
+        "--from-git",
+        "4a03dabcd632976b8262f5f516b1810a850e2209",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "restitution": null,
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null,
+      "errors": null,
+      "summary": {
+        "changed_paths": [
+          "docs/engineering/instruction-architecture/architecture/ARCH-IAR-012.md",
+          "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-012.md",
+          "docs/engineering/instruction-architecture/decisions/DEC-IAR-003.md",
+          "docs/engineering/instruction-architecture/evidence/VREC-IAR-018-evaluator.json",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-028/WO-IAR-028-handoff.md",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-028/implementation.json",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-031/WO-IAR-031-handoff.md",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-031/combined-handoff.json",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-031/governance-checks.json",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-031/implementation.json",
+          "docs/engineering/instruction-architecture/requirements/REQ-IAR-029.md",
+          "docs/engineering/instruction-architecture/requirements/REQ-IAR-030.md",
+          "docs/engineering/instruction-architecture/requirements/REQ-IAR-031.md",
+          "docs/engineering/instruction-architecture/specifications/SPEC-IAR-016.md",
+          "docs/engineering/instruction-architecture/verification-records/VREC-IAR-018.md",
+          "docs/engineering/instruction-architecture/verification/VER-IAR-020.md",
+          "docs/engineering/instruction-architecture/verification/VER-IAR-021.md",
+          "docs/engineering/instruction-architecture/verification/VER-IAR-022.md",
+          "docs/engineering/instruction-architecture/work-orders/WO-IAR-028.md",
+          "docs/engineering/instruction-architecture/work-orders/WO-IAR-029.md",
+          "docs/engineering/instruction-architecture/work-orders/WO-IAR-030.md",
+          "docs/engineering/instruction-architecture/work-orders/WO-IAR-031.md",
+          "se_harness/artifact_layout.py",
+          "se_harness/cli.py",
+          "se_harness/instruction_discovery.py",
+          "se_harness/integrity.py",
+          "se_harness/preflight.py",
+          "se_harness/resources.py",
+          "se_harness/workflow_compliance.py",
+          "se_harness/workflow_result.py",
+          "templates/repository/standard/ENGINEERING_HARNESS.md.tpl",
+          "tests/test_resources.py",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-032/WO-IAR-032-handoff.md",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-032/transport.json",
+          "docs/engineering/instruction-architecture/work-orders/WO-IAR-032.md"
+        ],
+        "status": "pass",
+        "work_orders": [
+          "WO-IAR-028",
+          "WO-IAR-029",
+          "WO-IAR-030",
+          "WO-IAR-031",
+          "WO-IAR-032"
+        ]
+      }
+    },
+    {
+      "label": "delivery032-complete-preview",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery032-complete-preview.json",
+        "sha256": "869881760c9600c2767e3bba686aa941d2f8b1355ed0fe8e2074cf835c368912",
+        "availability": "local file; no CI upload claimed"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--set",
+        "WO-IAR-032=implemented",
+        "--decision",
+        "WO-IAR-032=Codex",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Planned 1 explicit lifecycle transition(s); no files were written."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-IAR-032 is implemented."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-FOCUS-SELECTED",
+          "step_id": "STEP-FOCUS-SELECTED",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "WO-IAR-032"
+          ]
+        },
+        "alternatives": []
+      },
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null,
+      "errors": null,
+      "summary": {}
+    },
+    {
+      "label": "delivery032-complete-applied",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery032-complete-applied.json",
+        "sha256": "420bc7e12e9dfa54b4bdcb763a9bfddf9f07657bf0818bb527e93e24cb711847",
+        "availability": "local file; no CI upload claimed"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--set",
+        "WO-IAR-032=implemented",
+        "--decision",
+        "WO-IAR-032=Codex",
+        "--apply",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Applied 1 explicit lifecycle transition(s) atomically."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-IAR-032 is implemented."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-FOCUS-SELECTED",
+          "step_id": "STEP-FOCUS-SELECTED",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "WO-IAR-032"
+          ]
+        },
+        "alternatives": []
+      },
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null,
+      "errors": null,
+      "summary": {}
+    },
+    {
+      "label": "delivery032-complete-readback",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery032-complete-readback.json",
+        "sha256": "691b5b7b6e41b3e299fd533ceaf9674222319b0a3ea6795c4bb7970d2391c5cd",
+        "availability": "local file; no CI upload claimed"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--artifact",
+        "WO-IAR-032",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "WO-IAR-032 is implemented; its approved assurance classification requires no new VREC."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-IAR-032 is implemented."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-FOCUS-SELECTED",
+          "step_id": "STEP-FOCUS-SELECTED",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "check",
+            ".",
+            "--artifact",
+            "WO-IAR-032"
+          ]
+        },
+        "alternatives": []
+      },
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null,
+      "errors": null,
+      "summary": {}
+    },
+    {
+      "label": "delivery032-final-pr-check",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery032-final-pr-check.json",
+        "sha256": "db4138c60ba27cc7f7127709c72b935cf5869ec90d4638856dc855eb0d4c22e9",
+        "availability": "local file; no CI upload claimed"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check-pr",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--event",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery032-event.json",
+        "--from-git",
+        "4a03dabcd632976b8262f5f516b1810a850e2209",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "restitution": null,
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null,
+      "errors": null,
+      "summary": {
+        "changed_paths": [
+          "docs/engineering/instruction-architecture/architecture/ARCH-IAR-012.md",
+          "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-012.md",
+          "docs/engineering/instruction-architecture/decisions/DEC-IAR-003.md",
+          "docs/engineering/instruction-architecture/evidence/VREC-IAR-018-evaluator.json",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-028/WO-IAR-028-handoff.md",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-028/implementation.json",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-031/WO-IAR-031-handoff.md",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-031/combined-handoff.json",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-031/governance-checks.json",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-031/implementation.json",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-032/WO-IAR-032-handoff.md",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-032/checks.json",
+          "docs/engineering/instruction-architecture/evidence/WO-IAR-032/transport.json",
+          "docs/engineering/instruction-architecture/requirements/REQ-IAR-029.md",
+          "docs/engineering/instruction-architecture/requirements/REQ-IAR-030.md",
+          "docs/engineering/instruction-architecture/requirements/REQ-IAR-031.md",
+          "docs/engineering/instruction-architecture/specifications/SPEC-IAR-016.md",
+          "docs/engineering/instruction-architecture/verification-records/VREC-IAR-018.md",
+          "docs/engineering/instruction-architecture/verification/VER-IAR-020.md",
+          "docs/engineering/instruction-architecture/verification/VER-IAR-021.md",
+          "docs/engineering/instruction-architecture/verification/VER-IAR-022.md",
+          "docs/engineering/instruction-architecture/work-orders/WO-IAR-028.md",
+          "docs/engineering/instruction-architecture/work-orders/WO-IAR-029.md",
+          "docs/engineering/instruction-architecture/work-orders/WO-IAR-030.md",
+          "docs/engineering/instruction-architecture/work-orders/WO-IAR-031.md",
+          "docs/engineering/instruction-architecture/work-orders/WO-IAR-032.md",
+          "se_harness/artifact_layout.py",
+          "se_harness/cli.py",
+          "se_harness/instruction_discovery.py",
+          "se_harness/integrity.py",
+          "se_harness/preflight.py",
+          "se_harness/resources.py",
+          "se_harness/workflow_compliance.py",
+          "se_harness/workflow_result.py",
+          "templates/repository/standard/ENGINEERING_HARNESS.md.tpl",
+          "tests/test_resources.py"
+        ],
+        "status": "pass",
+        "work_orders": [
+          "WO-IAR-028",
+          "WO-IAR-029",
+          "WO-IAR-030",
+          "WO-IAR-031",
+          "WO-IAR-032"
+        ]
+      }
+    },
+    {
+      "label": "delivery032-final-pre-action",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery032-final-pre-action.json",
+        "sha256": "683a29eb2e33b0b334eaa63618af5729715f426e4d077ae1ef7c65e208c50d2b",
+        "availability": "local file; no CI upload claimed"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--artifact",
+        "VREC-IAR-018",
+        "--checkpoint",
+        "pre-action",
+        "--procedure",
+        "PROC-REPOSITORY-INTEGRATION",
+        "--from-git",
+        "4a03dabcd632976b8262f5f516b1810a850e2209",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Evaluated pre-action compliance for VREC-IAR-018."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "VREC-IAR-018 is verified."
+        ],
+        "decision_required": {
+          "decision_right": "DR-DELIVERY-SELECT",
+          "role": "repository-owner",
+          "artifact": "VREC-IAR-018",
+          "decision": "the exact repository integration action",
+          "outcomes": [
+            "authorize",
+            "stop"
+          ]
+        },
+        "next": {
+          "procedure_id": "PROC-REPOSITORY-INTEGRATION",
+          "step_id": "STEP-REPOSITORY-INTEGRATION",
+          "action": "the exact repository integration action"
+        },
+        "command_or_response": {
+          "kind": "response",
+          "value": "Authorize the exact repository integration action for VREC-IAR-018: <action>."
+        },
+        "alternatives": [
+          "Use complete alternative procedure PROC-REPOSITORY-INTEGRATION."
+        ]
+      },
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null,
+      "errors": null,
+      "summary": {}
+    }
+  ]
+}

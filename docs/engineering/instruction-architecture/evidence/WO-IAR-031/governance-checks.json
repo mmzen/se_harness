@@ -1,0 +1,438 @@
+{
+  "governing_evaluator": "0.20.0",
+  "checks": [
+    {
+      "label": "wiring-approval-applied",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-approval-applied.json",
+        "sha256": "67251f0f895c490156b0020e1c683998f3a84c5f4b9c0848fd6a151f5d5781d2"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--set",
+        "WO-IAR-031=approved",
+        "--decision",
+        "WO-IAR-031=mmzen",
+        "--reason",
+        "WO-IAR-031=Human mmzen confirmed: Approve WO-IAR-031 and verification. Covers the two omitted workflow-result files and required commit-bound verification under VER-IAR-020. Reviewed SHA-256 b50f187883677ea4a9f8b5b090ebb2bd2fa8df93b58e0052650efd29959f4b83. Only confirmed assurance metadata and its explanatory paragraph were completed before preview.",
+        "--json",
+        "--apply"
+      ],
+      "exit_code": 0,
+      "outcome": "completed",
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null
+    },
+    {
+      "label": "wiring-approval-readback",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-approval-readback.json",
+        "sha256": "2642237bb799bf92de1c962e867430f43653a33e1e5dc8525412ebe721cbe4db"
+      },
+      "argv": null,
+      "exit_code": null,
+      "outcome": null,
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null
+    },
+    {
+      "label": "wiring-start-preflight",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-start-preflight.json",
+        "sha256": "c395cafa1a525be70bd96d644ff672cd2b9d4c1beebe7a5a21dc7a581028c008"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--work-order",
+        "WO-IAR-031",
+        "--phase",
+        "start",
+        "--json"
+      ],
+      "exit_code": 0,
+      "outcome": null,
+      "diagnostics": [],
+      "valid": null,
+      "error_count": null,
+      "warning_count": null
+    },
+    {
+      "label": "wiring-start-applied",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-start-applied.json",
+        "sha256": "446b30d1be31d81cfd95df13326f8e6427bc123e711f8a734f2dd4e18578b233"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--set",
+        "WO-IAR-031=in_progress",
+        "--decision",
+        "WO-IAR-031=Codex",
+        "--json",
+        "--apply"
+      ],
+      "exit_code": 0,
+      "outcome": "completed",
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null
+    },
+    {
+      "label": "wiring-planned-scope",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-planned-scope.json",
+        "sha256": "345928d0f7cd8e2138e995b9cc0ce62d81f92b62cf678957c57f4e8aaa8cb656"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--artifact",
+        "WO-IAR-031",
+        "--checkpoint",
+        "scope",
+        "--changes-complete",
+        "--json",
+        "--changed-path",
+        "se_harness/workflow_result.py",
+        "--changed-path",
+        "se_harness/workflow_compliance.py",
+        "--changed-path",
+        "tests/test_resources.py",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/work-orders/WO-IAR-031.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-031/implementation.json",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-031/handoff.json"
+      ],
+      "exit_code": 0,
+      "outcome": "completed",
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null
+    },
+    {
+      "label": "wiring-review-WO-IAR-028",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-review-WO-IAR-028.json",
+        "sha256": "a0ce935f19e388998d67dc746de797d2364befc39d58eccdd63a9cb238e50b07"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--work-order",
+        "WO-IAR-028",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "exit_code": 0,
+      "outcome": null,
+      "diagnostics": [],
+      "valid": null,
+      "error_count": null,
+      "warning_count": null
+    },
+    {
+      "label": "wiring-review-WO-IAR-031",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-review-WO-IAR-031.json",
+        "sha256": "8b530231e18508f85ec777d018dfb8e997700ae7513baa80caa87d439c0b9df8"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--work-order",
+        "WO-IAR-031",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "exit_code": 0,
+      "outcome": null,
+      "diagnostics": [],
+      "valid": null,
+      "error_count": null,
+      "warning_count": null
+    },
+    {
+      "label": "wiring-final-validation",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-final-validation.json",
+        "sha256": "ea240ea9901cf754310f0961f0e4c9d50da60db82fe73a24ad1312e2ef5591f8"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--json"
+      ],
+      "exit_code": 0,
+      "outcome": null,
+      "diagnostics": null,
+      "valid": true,
+      "error_count": 0,
+      "warning_count": 54
+    },
+    {
+      "label": "wiring-completion-preview",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-completion-preview.json",
+        "sha256": "b2967fee0d24defbe32de3c9d77777b27a7b1f4c44c1a6cc96592806a92bf431"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--set",
+        "WO-IAR-028=implemented",
+        "--set",
+        "WO-IAR-031=implemented",
+        "--decision",
+        "WO-IAR-028=Codex",
+        "--decision",
+        "WO-IAR-031=Codex",
+        "--reason",
+        "WO-IAR-028=Completed VER-IAR-020 resource and public-workflow qualification at committed implementation 6b6f64ed94ecfc89dcc9c74179a742b134edd87a. Released combined Git-derived handoff passed from base 3ed0fc5e89462011ea115ad4c4191067f815cf95.",
+        "--reason",
+        "WO-IAR-031=Completed approved workflow wiring with unchanged lifecycle semantics; required component and installed-wheel Windows/Linux checks passed. Combined handoff covers both approved work orders.",
+        "--json"
+      ],
+      "exit_code": 0,
+      "outcome": "completed",
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null
+    },
+    {
+      "label": "wiring-completion-applied",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "transition",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--set",
+        "WO-IAR-028=implemented",
+        "--set",
+        "WO-IAR-031=implemented",
+        "--decision",
+        "WO-IAR-028=Codex",
+        "--decision",
+        "WO-IAR-031=Codex",
+        "--reason",
+        "WO-IAR-028=Completed VER-IAR-020 resource and public-workflow qualification at committed implementation 6b6f64ed94ecfc89dcc9c74179a742b134edd87a. Released combined Git-derived handoff passed from base 3ed0fc5e89462011ea115ad4c4191067f815cf95.",
+        "--reason",
+        "WO-IAR-031=Completed approved workflow wiring with unchanged lifecycle semantics; required component and installed-wheel Windows/Linux checks passed. Combined handoff covers both approved work orders.",
+        "--json",
+        "--apply"
+      ],
+      "exit_code": 0,
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Applied 2 explicit lifecycle transition(s) atomically."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-IAR-028 is implemented."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-WO-PREPARE-VREC",
+          "step_id": "STEP-WO-PREPARE-VREC-CAPTURE",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "capture-verification",
+            ".",
+            "--work-order",
+            "WO-IAR-028",
+            "--owner",
+            "delegated-executor",
+            "--id",
+            "VREC-...",
+            "--verification",
+            "VER-...",
+            "--evidence",
+            "..."
+          ]
+        },
+        "alternatives": []
+      },
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-completion-applied.json",
+        "sha256": "bdfb318d4186e03f92b12dd9e49e851323cd62ee1d6a949b033345e263bf2dd2"
+      }
+    },
+    {
+      "label": "wiring-completed-WO-IAR-028",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--artifact",
+        "WO-IAR-028",
+        "--json"
+      ],
+      "exit_code": 0,
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "WO-IAR-028 is implemented; no assurance decision was inferred."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-IAR-028 is implemented."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-WO-PREPARE-VREC",
+          "step_id": "STEP-WO-PREPARE-VREC-CAPTURE",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "capture-verification",
+            ".",
+            "--work-order",
+            "WO-IAR-028",
+            "--owner",
+            "delegated-executor",
+            "--id",
+            "VREC-...",
+            "--verification",
+            "VER-...",
+            "--evidence",
+            "..."
+          ]
+        },
+        "alternatives": []
+      },
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-completed-WO-IAR-028.json",
+        "sha256": "4fc565be4b8f56139df065d182e885e929b48524507b29a26a1afba2bb42a91b"
+      }
+    },
+    {
+      "label": "wiring-completed-WO-IAR-031",
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--artifact",
+        "WO-IAR-031",
+        "--json"
+      ],
+      "exit_code": 0,
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "WO-IAR-031 is implemented; no assurance decision was inferred."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-IAR-031 is implemented."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-WO-PREPARE-VREC",
+          "step_id": "STEP-WO-PREPARE-VREC-CAPTURE",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "capture-verification",
+            ".",
+            "--work-order",
+            "WO-IAR-031",
+            "--owner",
+            "delegated-executor",
+            "--id",
+            "VREC-...",
+            "--verification",
+            "VER-...",
+            "--evidence",
+            "..."
+          ]
+        },
+        "alternatives": []
+      },
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-completed-WO-IAR-031.json",
+        "sha256": "514bd66f56e367c109505bb00c15c694a665070a5e948e154b2141c3605c9f6e"
+      }
+    }
+  ],
+  "implementation_base": "3ed0fc5e89462011ea115ad4c4191067f815cf95",
+  "wiring_base": "65574a147c87fe2d17082c16876a9bc79ee1e0a7",
+  "handoff_method": "Released check-pr derives the full Git diff, verifies the union of WO-IAR-028 and WO-IAR-031 scopes, then evaluates the admitted subset for each in-progress work order. The local event fixture does not create a PR. Generated evidence and lifecycle records remain within the same approved scope.",
+  "candidate_input_comparison": {
+    "tested_implementation_commit": "6b6f64ed94ecfc89dcc9c74179a742b134edd87a",
+    "unchanged_inputs": [
+      "se_harness/",
+      "templates/repository/standard/",
+      "tests/",
+      "pyproject.toml",
+      "MANIFEST.in"
+    ],
+    "later_changes": "Only lifecycle records and retained evidence; no implementation or package input changed."
+  }
+}

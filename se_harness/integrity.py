@@ -14,6 +14,7 @@ from typing import Any
 
 
 LOCK_SCHEMA = 3
+EXTERNAL_RESOURCE_LAYOUT = "released-resources-v1"
 HASH_ALGORITHM = "sha256"
 HASH_MODE = "utf8-text-lf-v1"
 EVALUATOR_PAYLOAD_MANIFEST = "se-harness-installed-payload-v1"
@@ -226,8 +227,15 @@ def validate_lock(value: Any) -> dict[str, Any]:
             "remove the stale .engineering-harness.lock and re-adopt the repository "
             "with harnessctl init"
         )
-    if type(schema) is not int or schema not in {LOCK_SCHEMA, 4}:
+    if type(schema) is not int or schema not in {LOCK_SCHEMA, 4, 5}:
         raise IntegrityError("unsupported lock schema")
+    if schema == 5:
+        if value.get("resource_layout") != EXTERNAL_RESOURCE_LAYOUT:
+            raise IntegrityError("schema 5 requires the released-resources-v1 layout")
+        if "skill_ownership" in value:
+            raise IntegrityError("external resources do not use repository skill ownership")
+    elif "resource_layout" in value:
+        raise IntegrityError("external resources require lock schema 5")
     if schema == LOCK_SCHEMA and "skill_ownership" in value:
         raise IntegrityError("plugin ownership requires lock schema 4")
     if schema == 4:
@@ -275,6 +283,10 @@ def validate_lock(value: Any) -> dict[str, Any]:
     for relative, entry in files.items():
         if not isinstance(relative, str) or not relative:
             raise IntegrityError("lock paths must be non-empty strings")
+        if schema == 5 and ("\\" in relative or ":" in relative or any(part in {"", ".", ".."} for part in relative.split("/"))):
+            raise IntegrityError("external layout integration paths must be normalized relative paths")
+        if schema == 5 and (relative == "ENGINEERING_HARNESS.md" or relative.startswith("docs/engineering/")):
+            raise IntegrityError("external resource copies must not remain in repository lock entries")
         if not isinstance(entry, dict):
             raise IntegrityError(f"lock entry must be an object: {relative}")
         mode = entry.get("mode")

@@ -107,6 +107,20 @@ def _print_json(payload: object) -> None:
     print(json.dumps(payload, indent=2, sort_keys=True))
 
 
+def _resources(args: argparse.Namespace) -> int:
+    from se_harness.resources import ResourceSet
+    result = ResourceSet(Path(args.target)).query(args.resource, content=args.content)
+    if args.json:
+        _print_json(result)
+    elif args.content:
+        print(result["content"], end="")
+    else:
+        print(f"Selected SE Harness {result['release']['version']}")
+        for item in result["resources"]:
+            print(f"{item['resource']}: {item['path']} (SHA-256 {item['sha256']})")
+    return 0
+
+
 def _scan_repository(target: Path) -> bytes:
     indicators = {
         "Rust": ["Cargo.toml"],
@@ -903,6 +917,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="harnessctl", description="Install and operate the standard software-engineering harness.")
     parser.add_argument("--version", action="version", version=__version__)
     commands = parser.add_subparsers(dest="command", required=True)
+
+    resources = commands.add_parser("resources", help="resolve selected released instructions and templates without writing repository copies")
+    resources.add_argument("target", nargs="?", default=".")
+    resources.add_argument("--resource", help="one resource-relative ID; omit to list available resources")
+    resources.add_argument("--content", action="store_true", help="return one resource's text; render project and release for the entry")
+    resources.add_argument("--json", action="store_true")
+    resources.set_defaults(handler=_resources)
 
     # ECP-INS-001: one installation command; its behaviour follows the target.
     init = commands.add_parser("init", help="install the standard harness into an absent, empty or existing repository")

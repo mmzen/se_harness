@@ -1,0 +1,45 @@
+{
+  "argv": [
+    "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+    "-I",
+    "-m",
+    "se_harness",
+    "check-pr",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "--event",
+    "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-local-event.json",
+    "--from-git",
+    "3ed0fc5e89462011ea115ad4c4191067f815cf95",
+    "--json"
+  ],
+  "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+  "exit_code": 0,
+  "result": {
+    "changed_paths": [
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-028/implementation.json",
+      "docs/engineering/instruction-architecture/work-orders/WO-IAR-031.md",
+      "se_harness/artifact_layout.py",
+      "se_harness/cli.py",
+      "se_harness/instruction_discovery.py",
+      "se_harness/integrity.py",
+      "se_harness/preflight.py",
+      "se_harness/resources.py",
+      "se_harness/workflow_compliance.py",
+      "se_harness/workflow_result.py",
+      "templates/repository/standard/ENGINEERING_HARNESS.md.tpl",
+      "tests/test_resources.py",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-028/WO-IAR-028-handoff.md",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-031/WO-IAR-031-handoff.md",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-031/combined-handoff.json",
+      "docs/engineering/instruction-architecture/evidence/WO-IAR-031/implementation.json"
+    ],
+    "command": "check-pr",
+    "outcome": "completed",
+    "schema": "se-harness-command-result-v1",
+    "status": "pass",
+    "work_orders": [
+      "WO-IAR-028",
+      "WO-IAR-031"
+    ]
+  }
+}

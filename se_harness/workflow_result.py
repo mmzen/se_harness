@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import shlex
+from pathlib import Path
 from typing import Any, Iterable, Mapping
 from se_harness.integrity import canonical_json_bytes, raw_sha256
 from se_harness.workflow_contract import RESULT_STATUSES, restitution_fields
@@ -83,6 +84,7 @@ def build_result(
     unrelated_count: int = 0,
     writes: Iterable[Mapping[str, Any]] = (),
     candidate: Mapping[str, Any] | None = None,
+    repository: Path | None = None,
 ) -> dict[str, Any]:
     if outcome not in OUTCOMES:
         raise RestitutionError(WEX230, f"invalid schema-2 outcome {outcome!r}")
@@ -120,6 +122,7 @@ def build_result(
         result["instruction_discovery"] = describe(
             procedure,
             [*result["selection"]["artifacts"], *result["scope"]["governing"], *result["scope"]["dependencies"]],
+            repository=repository,
         )
     except DiscoveryError as exc:
         # Keep refusal results renderable even when the mapping itself is damaged.

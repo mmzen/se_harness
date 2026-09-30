@@ -1,0 +1,824 @@
+{
+  "work_orders": [
+    "WO-IAR-028",
+    "WO-IAR-031"
+  ],
+  "verification": "VER-IAR-020",
+  "tested_implementation_commit": "6b6f64ed94ecfc89dcc9c74179a742b134edd87a",
+  "governing_evaluator": {
+    "version": "0.20.0",
+    "python": "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+    "invocation": [
+      "-I",
+      "-m",
+      "se_harness"
+    ]
+  },
+  "candidate_role": "non-promotable candidate-package; no root adoption or release",
+  "candidate_evaluator": {
+    "version": "0.21.0",
+    "payload_manifest": "se-harness-installed-payload-v1",
+    "payload_sha256": "df621b84feecfd854e6ff56113867fdafabb7d8326acd6293b36c781d555bb44",
+    "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+    "archive_sha256": "04343a02735a368ad1cb3d2b3e5206f7f453d27150f0f4c39b411729a5dadef2"
+  },
+  "change": "Pass selected repository context through two workflow result call sites to released-resource discovery. Existing callers retain the optional-parameter default.",
+  "review": [
+    "Production correction is five added lines in the two approved files. No lifecycle rule, predicate, state, next-action argument or digest algorithm changed.",
+    "Equivalent legacy and external fixtures preserve actual public results, including pass, fail and not_assessable scope verdicts.",
+    "External references bind the selected release and resource bytes. Formal records remain repository-relative; paths of local environments are excluded from portable result identity.",
+    "Unavailable resource identity returns explicit incompatible discovery. A scope-only pass supplies no execution authority and does not override that discovery gap.",
+    "The shared resolver reuses wheel identity and the existing instruction catalogue. No policy registry, dependency or fallback search was added."
+  ],
+  "criteria": [
+    {
+      "criterion": "selected resource identity",
+      "status": "pass",
+      "evidence": "Both installed-wheel runs compare all queried resources against a manifest independently computed from wheel ZIP members."
+    },
+    {
+      "criterion": "artifact authoring",
+      "status": "pass",
+      "evidence": "Both installed-wheel runs create and validate only the requested REQ and WO drafts; no guide or template collection is copied."
+    },
+    {
+      "criterion": "policy and discovery parity",
+      "status": "pass",
+      "evidence": "Both installed-wheel runs compare six public legacy/external workflow cases: approved projection/start, in-progress projection, admitted scope, rejected scope, and incomplete scope. Source tests cover all 23 typed headings and relocated result identity."
+    },
+    {
+      "criterion": "refusal boundaries",
+      "status": "pass",
+      "evidence": "Unit boundary tests plus installed-wheel altered-template/path-escape refusals before authoring; Linux additionally checks a real installed-resource symlink."
+    },
+    {
+      "criterion": "CLI and CI independence",
+      "status": "pass",
+      "evidence": "Same exact wheel in private Windows and Linux environments outside checkout, without a host plugin. Python socket audit denies network; Linux also uses an isolated network namespace. No claim of host-wide Windows network disconnection."
+    }
+  ],
+  "source_checks": [
+    {
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-focused-01.json",
+        "sha256": "a3663c58eb9b1db14f388c02c0f81969a0bec35585c4d0bcceb22fa6d953113b",
+        "bytes": 50069
+      },
+      "argv": [
+        "C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "tests.test_resources"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 1,
+      "seconds": null,
+      "output_excerpt": "-se\\work\\se_harness\\tests\\test_resources.py\", line 151, in test_public_results_preserve_legacy_lifecycle_and_scope_verdicts\n    self.assertEqual(expected_gate, new[\"compliance\"][\"status\"])\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'not_assessable' != 'fail'\n- not_assessable\n+ fail\n\n\n----------------------------------------------------------------------\nRan 13 tests in 11.431s\n\nFAILED (failures=5, skipped=1)\n"
+    },
+    {
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-focused-02.json",
+        "sha256": "b9df767afecb5d037017c889ed642eef6a56c332d41542902995c2fe7b866520",
+        "bytes": 462
+      },
+      "argv": [
+        "C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "tests.test_resources"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "seconds": null,
+      "output_excerpt": "...s.........\n----------------------------------------------------------------------\nRan 13 tests in 12.357s\n\nOK (skipped=1)\n"
+    },
+    {
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-focused-combined.json",
+        "sha256": "a1c4cacfdb201659468104b39926d28d134ad771bf28189c5c2dca42f1572d12",
+        "bytes": 1049
+      },
+      "argv": [
+        "C:/Users/mathi/AppData/Local/Python/pythoncore-3.14-64/python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "tests.test_resources",
+        "tests.test_artifact_authoring",
+        "tests.test_artifact_authoring_policy",
+        "tests.test_instruction_discovery",
+        "tests.test_progressive_instruction_discovery",
+        "tests.test_instruction_architecture",
+        "tests.test_evaluator_identity",
+        "tests.test_hash_bound_integrity",
+        "tests.test_workflow_compliance",
+        "tests.test_workflow_restitution"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "seconds": 99.57834148406982,
+      "output_excerpt": "...s............s............................................................................................................................s........................................................\n----------------------------------------------------------------------\nRan 198 tests in 98.905s\n\nOK (skipped=3)\n"
+    }
+  ],
+  "installed_checks": [
+    {
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-windows-01.json",
+        "sha256": "63baf89a0bbc4045b7fd03b9c066a10653daae5f30e983d81645818f76f9d711",
+        "bytes": 285164
+      },
+      "platform": "Windows-11-10.0.26200-SP0",
+      "driver_python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "network": "Python socket audit denies network; Linux invocation also uses a private network namespace",
+      "passed": true,
+      "expected_evaluator": {
+        "version": "0.21.0",
+        "payload_manifest": "se-harness-installed-payload-v1",
+        "payload_sha256": "df621b84feecfd854e6ff56113867fdafabb7d8326acd6293b36c781d555bb44",
+        "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+        "archive_sha256": "04343a02735a368ad1cb3d2b3e5206f7f453d27150f0f4c39b411729a5dadef2"
+      },
+      "workflow_cases": [
+        {
+          "status": "approved",
+          "arguments": [],
+          "exit_code": 0,
+          "gate_status": null,
+          "parity": true,
+          "external_result_sha256": "2e6721dbc525e0ecd821f0e0434b4eb3601dcd0d141721182fa1c23e46ee9513"
+        },
+        {
+          "status": "approved",
+          "arguments": [
+            "--checkpoint",
+            "start"
+          ],
+          "exit_code": 0,
+          "gate_status": "pass",
+          "parity": true,
+          "external_result_sha256": "596021fc9c0ecdfd533bf71eceaabd1db1b0051f51da22ebbaff421d5e14e37a"
+        },
+        {
+          "status": "in_progress",
+          "arguments": [],
+          "exit_code": 0,
+          "gate_status": null,
+          "parity": true,
+          "external_result_sha256": "0dff572d47efa5027b33237f2471be71949454930f1040a41211b43cc72bec82"
+        },
+        {
+          "status": "in_progress",
+          "arguments": [
+            "--checkpoint",
+            "scope",
+            "--changed-path",
+            "src/component/ok.py",
+            "--changes-complete"
+          ],
+          "exit_code": 0,
+          "gate_status": "pass",
+          "parity": true,
+          "external_result_sha256": "b3c361917cf578aff8350cf0794aaf7ede395ee1de725e1fa098a0eb687cd563"
+        },
+        {
+          "status": "in_progress",
+          "arguments": [
+            "--checkpoint",
+            "scope",
+            "--changed-path",
+            "src/outside.py",
+            "--changes-complete"
+          ],
+          "exit_code": 1,
+          "gate_status": "fail",
+          "parity": true,
+          "external_result_sha256": "ee8403f6226be05f063a21625d7b5c9f2e7b9a68563bc1630873c6b0da800107"
+        },
+        {
+          "status": "in_progress",
+          "arguments": [
+            "--checkpoint",
+            "scope",
+            "--changed-path",
+            "src/component/ok.py"
+          ],
+          "exit_code": 1,
+          "gate_status": "not_assessable",
+          "parity": true,
+          "external_result_sha256": "40394e266b2f909c98ceb42afe557db6fbae8998477281651537433b3eda041d"
+        }
+      ],
+      "steps": [
+        {
+          "label": "venv",
+          "exit_code": 0,
+          "seconds": 6.948728799819946,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "install exact local wheel",
+          "exit_code": 0,
+          "seconds": 2.5862627029418945,
+          "stdout_sha256": "ddc5395eb7307b446a13368cca65658320db1dcf5f8be354bd92d8334bb50468",
+          "failure_excerpt": null
+        },
+        {
+          "label": "candidate identity",
+          "exit_code": 0,
+          "seconds": 0.3501269817352295,
+          "stdout_sha256": "df675563abe92a11a4c933c7969802a89fb279c62791a2ee5f6f4429526c2f5c",
+          "failure_excerpt": null
+        },
+        {
+          "label": "resource inventory",
+          "exit_code": 0,
+          "seconds": 0.8745806217193604,
+          "stdout_sha256": "c2d0723fe65f4cd2dffe71e7c33b6fa75012ff7fed3fedbf3e5ef533533427e8",
+          "failure_excerpt": null
+        },
+        {
+          "label": "render compact entry",
+          "exit_code": 0,
+          "seconds": 0.4859309196472168,
+          "stdout_sha256": "064f1a53ecf60072bf4085f734336fe0a2be908e44fc0c055abf851f14b21820",
+          "failure_excerpt": null
+        },
+        {
+          "label": "minimal fixture doctor",
+          "exit_code": 0,
+          "seconds": 0.5080552101135254,
+          "stdout_sha256": "78346df86890aa0720ca03b4bf10ac048fd78fbd58b13ce57628425b0d9591e7",
+          "failure_excerpt": null
+        },
+        {
+          "label": "create requirement",
+          "exit_code": 0,
+          "seconds": 0.5856137275695801,
+          "stdout_sha256": "c8f579221f4d2cfdfd2f88a6f046ac7d76f01bb2f9a8f572ab891c89343a7c44",
+          "failure_excerpt": null
+        },
+        {
+          "label": "create work_order",
+          "exit_code": 0,
+          "seconds": 0.5966708660125732,
+          "stdout_sha256": "b436c2018a6f0ba3cc97e9aef81db5030819c676208133b4e0ef7f86a7ced763",
+          "failure_excerpt": null
+        },
+        {
+          "label": "validate requested drafts",
+          "exit_code": 0,
+          "seconds": 0.4152214527130127,
+          "stdout_sha256": "c7c46f1d605c9f1ab5917947662512c3a79bcf18a04864080e7d3f45d4077c5e",
+          "failure_excerpt": null
+        },
+        {
+          "label": "reject path escape",
+          "exit_code": 2,
+          "seconds": 0.45926809310913086,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": "harnessctl: resource ID must be a normalized relative path\n"
+        },
+        {
+          "label": "reject altered resource before authoring",
+          "exit_code": 2,
+          "seconds": 0.44101619720458984,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": "harnessctl: selected evaluator payload_sha256 does not match installed resources\n"
+        },
+        {
+          "label": "restored selected resources",
+          "exit_code": 0,
+          "seconds": 0.482898473739624,
+          "stdout_sha256": "ce808ab80e21045c418e4148e3bdfa1553873757a76d04f14c0fe50914d354e7",
+          "failure_excerpt": null
+        },
+        {
+          "label": "legacy fixture initialization",
+          "exit_code": 0,
+          "seconds": 0.844184160232544,
+          "stdout_sha256": "653788d3cf1803601fd5486a7a6f6a49af9cb09e6973ed85fd2818069c65971e",
+          "failure_excerpt": null
+        },
+        {
+          "label": "workflow 0 legacy",
+          "exit_code": 0,
+          "seconds": 0.5865516662597656,
+          "stdout_sha256": "22aea8bc7bd7d823de9c92e2f0ece74e71327f91736e2b5c7267183f8c013a50",
+          "failure_excerpt": null
+        },
+        {
+          "label": "workflow 0 external",
+          "exit_code": 0,
+          "seconds": 0.6983621120452881,
+          "stdout_sha256": "a06cdd7cef03207e9ea6962acb07ea8f58d3243d326a7225ea30356f63e3eb5e",
+          "failure_excerpt": null
+        },
+        {
+          "label": "workflow 1 legacy",
+          "exit_code": 0,
+          "seconds": 0.48425745964050293,
+          "stdout_sha256": "574f4e12115dd3d9a0aba38caa3d593d2017f6b83fb42a2913a902c5cc42184b",
+          "failure_excerpt": null
+        },
+        {
+          "label": "workflow 1 external",
+          "exit_code": 0,
+          "seconds": 0.6456902027130127,
+          "stdout_sha256": "15ca5613639ec0a8c55e7ced9b511da6a641117299e460cb93fc8fe4ff19542a",
+          "failure_excerpt": null
+        },
+        {
+          "label": "workflow 2 legacy",
+          "exit_code": 0,
+          "seconds": 0.5288147926330566,
+          "stdout_sha256": "502216b9ececb8fc0d11a8c5cef843ff1fa178c2b971d38a726ee06beb9d7c9b",
+          "failure_excerpt": null
+        },
+        {
+          "label": "workflow 2 external",
+          "exit_code": 0,
+          "seconds": 0.6685779094696045,
+          "stdout_sha256": "953b947fe9cea46b20cde9800099faecdff9f56172557dbb06f5a307f83b6123",
+          "failure_excerpt": null
+        },
+        {
+          "label": "workflow 3 legacy",
+          "exit_code": 0,
+          "seconds": 0.3637244701385498,
+          "stdout_sha256": "8861ba7837db915a95721b37725cb8b728a1ba2bc39481a88d5867d777f35f74",
+          "failure_excerpt": null
+        },
+        {
+          "label": "workflow 3 external",
+          "exit_code": 0,
+          "seconds": 0.5101659297943115,
+          "stdout_sha256": "248c66cd3616b20974634e1b888d8dd4406fb8ab0c0d2d9350cfb23fc2e507a1",
+          "failure_excerpt": null
+        },
+        {
+          "label": "workflow 4 legacy",
+          "exit_code": 1,
+          "seconds": 0.3614771366119385,
+          "stdout_sha256": "ff872d0b4facafa7de358ad5c0687ccbbb03e96fefd94a66583efe6357bc8c9d",
+          "failure_excerpt": "docs/engineering/harness/AUTHORITY.md\",\n            \"heading\": \"authority-from-work-approval\",\n            \"when\": \"Before using the selected work order's execution grant.\"\n          }\n        ]\n      }\n    },\n    \"formal_artifact_ids\": [\n      \"ADR-001\",\n      \"ARCH-001\",\n      \"CAP-001\",\n      \"INT-001\",\n      \"REQ-001\",\n      \"SPEC-001\",\n      \"VER-001\",\n      \"WO-TST-001\"\n    ],\n    \"evaluator_only_inputs\": [\n      \"docs/engineering/WORKFLOW.json\",\n      \"docs/engineering/QUALITY_GATES.json\"\n    ]\n  },\n  \"result_sha256\": \"aa66ec22978d12a804b40145c4c699edaf3b95cbc2f1f111a630571eb1c5878e\"\n}\n"
+        },
+        {
+          "label": "workflow 4 external",
+          "exit_code": 1,
+          "seconds": 0.5095374584197998,
+          "stdout_sha256": "6462a54f3f72f2a2b863102a40ec8b3b7a0185d9d46d3e02c73ef93a059318e7",
+          "failure_excerpt": "S.json\",\n        \"sha256\": \"532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2\"\n      }\n    ],\n    \"release\": {\n      \"version\": \"0.21.0\",\n      \"payload_manifest\": \"se-harness-installed-payload-v1\",\n      \"payload_sha256\": \"df621b84feecfd854e6ff56113867fdafabb7d8326acd6293b36c781d555bb44\",\n      \"archive_name\": \"se_harness-0.21.0-py3-none-any.whl\",\n      \"archive_sha256\": \"04343a02735a368ad1cb3d2b3e5206f7f453d27150f0f4c39b411729a5dadef2\"\n    },\n    \"formal_artifact_source\": \"repository\"\n  },\n  \"result_sha256\": \"ee8403f6226be05f063a21625d7b5c9f2e7b9a68563bc1630873c6b0da800107\"\n}\n"
+        },
+        {
+          "label": "workflow 5 legacy",
+          "exit_code": 1,
+          "seconds": 0.43376684188842773,
+          "stdout_sha256": "cd219c1561264100f0d5b7bd85f1cfaeff5bdc6868b018ed0f946fba96386762",
+          "failure_excerpt": "docs/engineering/harness/AUTHORITY.md\",\n            \"heading\": \"authority-from-work-approval\",\n            \"when\": \"Before using the selected work order's execution grant.\"\n          }\n        ]\n      }\n    },\n    \"formal_artifact_ids\": [\n      \"ADR-001\",\n      \"ARCH-001\",\n      \"CAP-001\",\n      \"INT-001\",\n      \"REQ-001\",\n      \"SPEC-001\",\n      \"VER-001\",\n      \"WO-TST-001\"\n    ],\n    \"evaluator_only_inputs\": [\n      \"docs/engineering/WORKFLOW.json\",\n      \"docs/engineering/QUALITY_GATES.json\"\n    ]\n  },\n  \"result_sha256\": \"765fc3adc85fde6bc6acd56f201a3127403bb08c3ddc7085fc4c68e298eec347\"\n}\n"
+        },
+        {
+          "label": "workflow 5 external",
+          "exit_code": 1,
+          "seconds": 0.5056636333465576,
+          "stdout_sha256": "bbb487f0e0c3c2b55cf9f182b699f90ea69383092f575ef9681a4a12a9eb6c03",
+          "failure_excerpt": "S.json\",\n        \"sha256\": \"532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2\"\n      }\n    ],\n    \"release\": {\n      \"version\": \"0.21.0\",\n      \"payload_manifest\": \"se-harness-installed-payload-v1\",\n      \"payload_sha256\": \"df621b84feecfd854e6ff56113867fdafabb7d8326acd6293b36c781d555bb44\",\n      \"archive_name\": \"se_harness-0.21.0-py3-none-any.whl\",\n      \"archive_sha256\": \"04343a02735a368ad1cb3d2b3e5206f7f453d27150f0f4c39b411729a5dadef2\"\n    },\n    \"formal_artifact_source\": \"repository\"\n  },\n  \"result_sha256\": \"40394e266b2f909c98ceb42afe557db6fbae8998477281651537433b3eda041d\"\n}\n"
+        }
+      ],
+      "authored_files": [
+        "docs\\engineering\\product\\requirements\\REQ-QAL-001.md",
+        "docs\\engineering\\product\\work-orders\\WO-QAL-001.md"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-windows-01",
+      "command_note": "Exact argv and cwd for every step are retained in the referenced raw JSON. Common CLI invocation and candidate-identity command are repeated here for review.",
+      "candidate_identity_command": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-windows-01\\evaluator\\Scripts\\python.exe",
+        "-I",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resources_offline_cli.py",
+        "identity",
+        "--role",
+        "candidate-package",
+        "--expected-version",
+        "0.21.0",
+        "--expected-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-windows-01\\evaluator",
+        "--checkout-root",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-windows-01\\repository",
+        "--candidate-commit",
+        "6b6f64ed94ecfc89dcc9c74179a742b134edd87a",
+        "--require-isolated-python",
+        "--json"
+      ],
+      "candidate_identity": {
+        "candidate_commit": "6b6f64ed94ecfc89dcc9c74179a742b134edd87a",
+        "checkout_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-windows-01\\repository",
+        "diagnostics": [],
+        "distribution_origin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-windows-01\\evaluator\\Lib\\site-packages",
+        "entry_point_origin": null,
+        "evaluator_archive_name": null,
+        "evaluator_archive_sha256": null,
+        "evaluator_payload_manifest": null,
+        "evaluator_payload_sha256": null,
+        "evaluator_wheel_sha256": null,
+        "expected_root": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-windows-01\\evaluator",
+        "harness_version": "0.21.0",
+        "isolated_python": true,
+        "module_origin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-windows-01\\evaluator\\Lib\\site-packages\\se_harness\\runtime_identity.py",
+        "passed": true,
+        "python_binary_position": "within-expected-root",
+        "python_entry_is_link": false,
+        "python_executable": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-windows-01\\evaluator\\Scripts\\python.exe",
+        "python_version": "3.14.6",
+        "pythonpath_present": false,
+        "role": "candidate-package",
+        "schema": "se-harness-runtime-identity-v4",
+        "template_origin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-windows-01\\evaluator\\share\\se-harness\\templates\\repository\\standard",
+        "user_site_enabled": false
+      }
+    },
+    {
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-linux-01.json",
+        "sha256": "4891b4ffcfe2102a3018bc49ad0fad089e2013c727af8dc7ff713bc91ec82bd0",
+        "bytes": 269649
+      },
+      "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "driver_python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "network": "Python socket audit denies network; Linux invocation also uses a private network namespace",
+      "passed": true,
+      "expected_evaluator": {
+        "version": "0.21.0",
+        "payload_manifest": "se-harness-installed-payload-v1",
+        "payload_sha256": "df621b84feecfd854e6ff56113867fdafabb7d8326acd6293b36c781d555bb44",
+        "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+        "archive_sha256": "04343a02735a368ad1cb3d2b3e5206f7f453d27150f0f4c39b411729a5dadef2"
+      },
+      "workflow_cases": [
+        {
+          "status": "approved",
+          "arguments": [],
+          "exit_code": 0,
+          "gate_status": null,
+          "parity": true,
+          "external_result_sha256": "2e6721dbc525e0ecd821f0e0434b4eb3601dcd0d141721182fa1c23e46ee9513"
+        },
+        {
+          "status": "approved",
+          "arguments": [
+            "--checkpoint",
+            "start"
+          ],
+          "exit_code": 0,
+          "gate_status": "pass",
+          "parity": true,
+          "external_result_sha256": "596021fc9c0ecdfd533bf71eceaabd1db1b0051f51da22ebbaff421d5e14e37a"
+        },
+        {
+          "status": "in_progress",
+          "arguments": [],
+          "exit_code": 0,
+          "gate_status": null,
+          "parity": true,
+          "external_result_sha256": "0dff572d47efa5027b33237f2471be71949454930f1040a41211b43cc72bec82"
+        },
+        {
+          "status": "in_progress",
+          "arguments": [
+            "--checkpoint",
+            "scope",
+            "--changed-path",
+            "src/component/ok.py",
+            "--changes-complete"
+          ],
+          "exit_code": 0,
+          "gate_status": "pass",
+          "parity": true,
+          "external_result_sha256": "b3c361917cf578aff8350cf0794aaf7ede395ee1de725e1fa098a0eb687cd563"
+        },
+        {
+          "status": "in_progress",
+          "arguments": [
+            "--checkpoint",
+            "scope",
+            "--changed-path",
+            "src/outside.py",
+            "--changes-complete"
+          ],
+          "exit_code": 1,
+          "gate_status": "fail",
+          "parity": true,
+          "external_result_sha256": "ee8403f6226be05f063a21625d7b5c9f2e7b9a68563bc1630873c6b0da800107"
+        },
+        {
+          "status": "in_progress",
+          "arguments": [
+            "--checkpoint",
+            "scope",
+            "--changed-path",
+            "src/component/ok.py"
+          ],
+          "exit_code": 1,
+          "gate_status": "not_assessable",
+          "parity": true,
+          "external_result_sha256": "40394e266b2f909c98ceb42afe557db6fbae8998477281651537433b3eda041d"
+        }
+      ],
+      "steps": [
+        {
+          "label": "venv",
+          "exit_code": 0,
+          "seconds": 2.5584471225738525,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "install exact local wheel",
+          "exit_code": 0,
+          "seconds": 0.6199140548706055,
+          "stdout_sha256": "effad07df17c4aa8d44ce7fe79e8ff31c92b18db11637dd4709dc90e5d4a4681",
+          "failure_excerpt": null
+        },
+        {
+          "label": "candidate identity",
+          "exit_code": 0,
+          "seconds": 0.13646435737609863,
+          "stdout_sha256": "cb6d750b05ac15c8419fcc3776f7ddca481fc2d2a2083d4ecac1ecd0f8332e3d",
+          "failure_excerpt": null
+        },
+        {
+          "label": "resource inventory",
+          "exit_code": 0,
+          "seconds": 0.18900322914123535,
+          "stdout_sha256": "7ff1a2699a6e3a59905a998f724af560ef2dd634a298cae2cc5c9fc2e50acdb5",
+          "failure_excerpt": null
+        },
+        {
+          "label": "render compact entry",
+          "exit_code": 0,
+          "seconds": 0.17832040786743164,
+          "stdout_sha256": "ed054447bd58930b242c93eb7d2d63d04907fd7dc232fe6b5a5497e6c507e694",
+          "failure_excerpt": null
+        },
+        {
+          "label": "minimal fixture doctor",
+          "exit_code": 0,
+          "seconds": 0.18076419830322266,
+          "stdout_sha256": "35f284350cd39759879b1fc48f84c7412b524da196e1c4163a10495fd76302b4",
+          "failure_excerpt": null
+        },
+        {
+          "label": "create requirement",
+          "exit_code": 0,
+          "seconds": 0.23477697372436523,
+          "stdout_sha256": "c8f579221f4d2cfdfd2f88a6f046ac7d76f01bb2f9a8f572ab891c89343a7c44",
+          "failure_excerpt": null
+        },
+        {
+          "label": "create work_order",
+          "exit_code": 0,
+          "seconds": 0.21100473403930664,
+          "stdout_sha256": "b436c2018a6f0ba3cc97e9aef81db5030819c676208133b4e0ef7f86a7ced763",
+          "failure_excerpt": null
+        },
+        {
+          "label": "validate requested drafts",
+          "exit_code": 0,
+          "seconds": 0.12599897384643555,
+          "stdout_sha256": "c7c46f1d605c9f1ab5917947662512c3a79bcf18a04864080e7d3f45d4077c5e",
+          "failure_excerpt": null
+        },
+        {
+          "label": "reject path escape",
+          "exit_code": 2,
+          "seconds": 0.16694021224975586,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": "harnessctl: resource ID must be a normalized relative path\n"
+        },
+        {
+          "label": "reject altered resource before authoring",
+          "exit_code": 2,
+          "seconds": 0.14219951629638672,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": "harnessctl: selected evaluator payload_sha256 does not match installed resources\n"
+        },
+        {
+          "label": "reject linked installed resource",
+          "exit_code": 2,
+          "seconds": 0.12697577476501465,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": "harnessctl: selected payload is unavailable: the installed evaluator payload contains a symlink\n"
+        },
+        {
+          "label": "restored selected resources",
+          "exit_code": 0,
+          "seconds": 0.17126893997192383,
+          "stdout_sha256": "eb53b0bc753ab87611b9d90d34c85a395c33321729d1912f9953efdd78743b91",
+          "failure_excerpt": null
+        },
+        {
+          "label": "legacy fixture initialization",
+          "exit_code": 0,
+          "seconds": 0.3922586441040039,
+          "stdout_sha256": "c85958746507a728578dc78c74e3587f530c32a479ce2f8ed213e4b47654a2f2",
+          "failure_excerpt": null
+        },
+        {
+          "label": "workflow 0 legacy",
+          "exit_code": 0,
+          "seconds": 0.18033194541931152,
+          "stdout_sha256": "22aea8bc7bd7d823de9c92e2f0ece74e71327f91736e2b5c7267183f8c013a50",
+          "failure_excerpt": null
+        },
+        {
+          "label": "workflow 0 external",
+          "exit_code": 0,
+          "seconds": 0.2457282543182373,
+          "stdout_sha256": "a06cdd7cef03207e9ea6962acb07ea8f58d3243d326a7225ea30356f63e3eb5e",
+          "failure_excerpt": null
+        },
+        {
+          "label": "workflow 1 legacy",
+          "exit_code": 0,
+          "seconds": 0.1965043544769287,
+          "stdout_sha256": "574f4e12115dd3d9a0aba38caa3d593d2017f6b83fb42a2913a902c5cc42184b",
+          "failure_excerpt": null
+        },
+        {
+          "label": "workflow 1 external",
+          "exit_code": 0,
+          "seconds": 0.24063539505004883,
+          "stdout_sha256": "15ca5613639ec0a8c55e7ced9b511da6a641117299e460cb93fc8fe4ff19542a",
+          "failure_excerpt": null
+        },
+        {
+          "label": "workflow 2 legacy",
+          "exit_code": 0,
+          "seconds": 0.1842329502105713,
+          "stdout_sha256": "502216b9ececb8fc0d11a8c5cef843ff1fa178c2b971d38a726ee06beb9d7c9b",
+          "failure_excerpt": null
+        },
+        {
+          "label": "workflow 2 external",
+          "exit_code": 0,
+          "seconds": 0.2526540756225586,
+          "stdout_sha256": "953b947fe9cea46b20cde9800099faecdff9f56172557dbb06f5a307f83b6123",
+          "failure_excerpt": null
+        },
+        {
+          "label": "workflow 3 legacy",
+          "exit_code": 0,
+          "seconds": 0.13589143753051758,
+          "stdout_sha256": "8861ba7837db915a95721b37725cb8b728a1ba2bc39481a88d5867d777f35f74",
+          "failure_excerpt": null
+        },
+        {
+          "label": "workflow 3 external",
+          "exit_code": 0,
+          "seconds": 0.18797516822814941,
+          "stdout_sha256": "248c66cd3616b20974634e1b888d8dd4406fb8ab0c0d2d9350cfb23fc2e507a1",
+          "failure_excerpt": null
+        },
+        {
+          "label": "workflow 4 legacy",
+          "exit_code": 1,
+          "seconds": 0.13846588134765625,
+          "stdout_sha256": "ff872d0b4facafa7de358ad5c0687ccbbb03e96fefd94a66583efe6357bc8c9d",
+          "failure_excerpt": "docs/engineering/harness/AUTHORITY.md\",\n            \"heading\": \"authority-from-work-approval\",\n            \"when\": \"Before using the selected work order's execution grant.\"\n          }\n        ]\n      }\n    },\n    \"formal_artifact_ids\": [\n      \"ADR-001\",\n      \"ARCH-001\",\n      \"CAP-001\",\n      \"INT-001\",\n      \"REQ-001\",\n      \"SPEC-001\",\n      \"VER-001\",\n      \"WO-TST-001\"\n    ],\n    \"evaluator_only_inputs\": [\n      \"docs/engineering/WORKFLOW.json\",\n      \"docs/engineering/QUALITY_GATES.json\"\n    ]\n  },\n  \"result_sha256\": \"aa66ec22978d12a804b40145c4c699edaf3b95cbc2f1f111a630571eb1c5878e\"\n}\n"
+        },
+        {
+          "label": "workflow 4 external",
+          "exit_code": 1,
+          "seconds": 0.18245649337768555,
+          "stdout_sha256": "6462a54f3f72f2a2b863102a40ec8b3b7a0185d9d46d3e02c73ef93a059318e7",
+          "failure_excerpt": "S.json\",\n        \"sha256\": \"532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2\"\n      }\n    ],\n    \"release\": {\n      \"version\": \"0.21.0\",\n      \"payload_manifest\": \"se-harness-installed-payload-v1\",\n      \"payload_sha256\": \"df621b84feecfd854e6ff56113867fdafabb7d8326acd6293b36c781d555bb44\",\n      \"archive_name\": \"se_harness-0.21.0-py3-none-any.whl\",\n      \"archive_sha256\": \"04343a02735a368ad1cb3d2b3e5206f7f453d27150f0f4c39b411729a5dadef2\"\n    },\n    \"formal_artifact_source\": \"repository\"\n  },\n  \"result_sha256\": \"ee8403f6226be05f063a21625d7b5c9f2e7b9a68563bc1630873c6b0da800107\"\n}\n"
+        },
+        {
+          "label": "workflow 5 legacy",
+          "exit_code": 1,
+          "seconds": 0.1435225009918213,
+          "stdout_sha256": "cd219c1561264100f0d5b7bd85f1cfaeff5bdc6868b018ed0f946fba96386762",
+          "failure_excerpt": "docs/engineering/harness/AUTHORITY.md\",\n            \"heading\": \"authority-from-work-approval\",\n            \"when\": \"Before using the selected work order's execution grant.\"\n          }\n        ]\n      }\n    },\n    \"formal_artifact_ids\": [\n      \"ADR-001\",\n      \"ARCH-001\",\n      \"CAP-001\",\n      \"INT-001\",\n      \"REQ-001\",\n      \"SPEC-001\",\n      \"VER-001\",\n      \"WO-TST-001\"\n    ],\n    \"evaluator_only_inputs\": [\n      \"docs/engineering/WORKFLOW.json\",\n      \"docs/engineering/QUALITY_GATES.json\"\n    ]\n  },\n  \"result_sha256\": \"765fc3adc85fde6bc6acd56f201a3127403bb08c3ddc7085fc4c68e298eec347\"\n}\n"
+        },
+        {
+          "label": "workflow 5 external",
+          "exit_code": 1,
+          "seconds": 0.19441843032836914,
+          "stdout_sha256": "bbb487f0e0c3c2b55cf9f182b699f90ea69383092f575ef9681a4a12a9eb6c03",
+          "failure_excerpt": "S.json\",\n        \"sha256\": \"532383a951a0c168d8b71c9b40f710c96b5e331bd443ea12fab7f8b6fbba44f2\"\n      }\n    ],\n    \"release\": {\n      \"version\": \"0.21.0\",\n      \"payload_manifest\": \"se-harness-installed-payload-v1\",\n      \"payload_sha256\": \"df621b84feecfd854e6ff56113867fdafabb7d8326acd6293b36c781d555bb44\",\n      \"archive_name\": \"se_harness-0.21.0-py3-none-any.whl\",\n      \"archive_sha256\": \"04343a02735a368ad1cb3d2b3e5206f7f453d27150f0f4c39b411729a5dadef2\"\n    },\n    \"formal_artifact_source\": \"repository\"\n  },\n  \"result_sha256\": \"40394e266b2f909c98ceb42afe557db6fbae8998477281651537433b3eda041d\"\n}\n"
+        }
+      ],
+      "authored_files": [
+        "docs/engineering/product/requirements/REQ-QAL-001.md",
+        "docs/engineering/product/work-orders/WO-QAL-001.md"
+      ],
+      "cwd": "/tmp/iar-external-resource-wiring-20260930-01",
+      "command_note": "Exact argv and cwd for every step are retained in the referenced raw JSON. Common CLI invocation and candidate-identity command are repeated here for review.",
+      "candidate_identity_command": [
+        "/tmp/iar-external-resource-wiring-20260930-01/evaluator/bin/python",
+        "-I",
+        "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/external_resources_offline_cli.py",
+        "identity",
+        "--role",
+        "candidate-package",
+        "--expected-version",
+        "0.21.0",
+        "--expected-root",
+        "/tmp/iar-external-resource-wiring-20260930-01/evaluator",
+        "--checkout-root",
+        "/tmp/iar-external-resource-wiring-20260930-01/repository",
+        "--candidate-commit",
+        "6b6f64ed94ecfc89dcc9c74179a742b134edd87a",
+        "--require-isolated-python",
+        "--json"
+      ],
+      "candidate_identity": {
+        "candidate_commit": "6b6f64ed94ecfc89dcc9c74179a742b134edd87a",
+        "checkout_root": "/tmp/iar-external-resource-wiring-20260930-01/repository",
+        "diagnostics": [],
+        "distribution_origin": "/tmp/iar-external-resource-wiring-20260930-01/evaluator/lib/python3.12/site-packages",
+        "entry_point_origin": null,
+        "evaluator_archive_name": null,
+        "evaluator_archive_sha256": null,
+        "evaluator_payload_manifest": null,
+        "evaluator_payload_sha256": null,
+        "evaluator_wheel_sha256": null,
+        "expected_root": "/tmp/iar-external-resource-wiring-20260930-01/evaluator",
+        "harness_version": "0.21.0",
+        "isolated_python": true,
+        "module_origin": "/tmp/iar-external-resource-wiring-20260930-01/evaluator/lib/python3.12/site-packages/se_harness/runtime_identity.py",
+        "passed": true,
+        "python_binary_position": "outside-declared-roots",
+        "python_entry_is_link": true,
+        "python_executable": "/tmp/iar-external-resource-wiring-20260930-01/evaluator/bin/python",
+        "python_version": "3.12.3",
+        "pythonpath_present": false,
+        "role": "candidate-package",
+        "schema": "se-harness-runtime-identity-v4",
+        "template_origin": "/tmp/iar-external-resource-wiring-20260930-01/evaluator/share/se-harness/templates/repository/standard",
+        "user_site_enabled": false
+      }
+    }
+  ],
+  "earlier_failures": [
+    {
+      "run": "wiring-focused-01",
+      "cause": "Test fixture errors: short legacy WO ID rejected by start preflight; status changed without matching fixture history; assertion expected the wrong diagnostic word.",
+      "resolution": "Use a supported WO-TST-001 fixture, rebuild its fixture-only history, and assert the reported payload_sha256 mismatch. No candidate production correction was required.",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-focused-01.json",
+        "sha256": "a3663c58eb9b1db14f388c02c0f81969a0bec35585c4d0bcceb22fa6d953113b",
+        "bytes": 50069
+      }
+    }
+  ],
+  "raw_retention": "Raw files and transient drivers remain outside the repository at the listed local paths. No upload or fixed remote retention is claimed.",
+  "limits": [
+    "Native host delivery and installer migration belong to WO-IAR-029 and WO-IAR-030 and are not claimed here.",
+    "Broad suite is required on the later integrated candidate; these are focused component checks.",
+    "Verification acceptance and external delivery remain human decisions."
+  ],
+  "source_input_note": "Combined source checks started before the implementation commit was created; source bytes were unchanged during the run. Independent wheel qualification below uses the exact committed candidate.",
+  "drivers": [
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resources_qualify.py",
+      "sha256": "a5eac800b96739207dd78e47e7f6db233153e131522c1e2454b2fb095aad46df"
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resources_offline_cli.py",
+      "sha256": "0e4ad1fdae6596bcc54a0cb2d1d331193560d7971cf8344c1a4c2790362ea91a"
+    },
+    {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resource_wiring_build.py",
+      "sha256": "d7584c5e4a5509094ccb02792c026c8255699bfc0e29f2dc726bb88c81d296c5"
+    }
+  ],
+  "build": {
+    "raw": {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-wheel-build.json",
+      "sha256": "62f6e2ac69affb060bc8634e0e0e066d1f7d69460b19de602c99fbdb893e0e08",
+      "bytes": 40063
+    },
+    "manifest": {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-wheel-expected.json",
+      "sha256": "16d3b5b125b3399f9f687c182d6a3c4142a64dd757d486a150543b6efbd19e2e",
+      "bytes": 23591
+    },
+    "argv": [
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\retirement-build-env\\Scripts\\python.exe",
+      "-I",
+      "-m",
+      "build",
+      "--wheel",
+      "--no-isolation",
+      "--outdir",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-candidate-build\\dist",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-candidate-build\\source"
+    ],
+    "exit_code": 0
+  }
+}

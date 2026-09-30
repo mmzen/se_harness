@@ -1,0 +1,1113 @@
+{
+  "work_order": "WO-IAR-028",
+  "status": "partial implementation; no completion or assurance claim",
+  "implementation_base": "3ed0fc5e89462011ea115ad4c4191067f815cf95",
+  "governing_evaluator": {
+    "python": "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+    "version": "0.20.0"
+  },
+  "tests": [
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "tests.test_resources",
+        "tests.test_artifact_authoring",
+        "tests.test_artifact_authoring_policy",
+        "tests.test_instruction_discovery",
+        "tests.test_progressive_instruction_discovery",
+        "tests.test_instruction_architecture",
+        "tests.test_evaluator_identity",
+        "tests.test_hash_bound_integrity"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "role": "candidate-source",
+      "exit_code": 0,
+      "seconds": 65.50432062149048,
+      "stdout": "",
+      "stderr": "..........s............................................................................................................................s...\n----------------------------------------------------------------------\nRan 139 tests in 64.907s\n\nOK (skipped=2)\n",
+      "candidate_state": "dirty source observation before fb788d2d; installed-wheel runs below bind the exact committed candidate"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "tests.test_resources",
+        "tests.test_artifact_authoring",
+        "tests.test_artifact_authoring_policy",
+        "tests.test_instruction_discovery",
+        "tests.test_progressive_instruction_discovery",
+        "tests.test_instruction_architecture",
+        "tests.test_evaluator_identity",
+        "tests.test_hash_bound_integrity"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "role": "candidate-source",
+      "exit_code": 0,
+      "seconds": 61.20138931274414,
+      "stdout": "",
+      "stderr": "...s.........s............................................................................................................................s...\n----------------------------------------------------------------------\nRan 142 tests in 60.670s\n\nOK (skipped=3)\n",
+      "candidate_state": "dirty source observation before fb788d2d; installed-wheel runs below bind the exact committed candidate"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "tests.test_resources"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "role": "candidate-source",
+      "exit_code": 0,
+      "seconds": 8.141531705856323,
+      "stdout": "",
+      "stderr": "...s......\n----------------------------------------------------------------------\nRan 10 tests in 7.732s\n\nOK (skipped=1)\n",
+      "candidate_state": "dirty source observation before fb788d2d; installed-wheel runs below bind the exact committed candidate"
+    }
+  ],
+  "review": {
+    "design": "Reuse the existing wheel payload manifest, one ResourceSet resolver, one explicit external layout and the retained legacy branch. No new dependency or resource registry.",
+    "findings_resolved": [
+      "Partial config/lock selection now refuses fallback to repository copies.",
+      "Recheck selection and payload before returning bytes or writing artifacts.",
+      "Reject linked resource inputs and source-tree fallback.",
+      "List resources with one final identity check instead of rehashing the full payload for every returned member.",
+      "git diff --check initially returned 2 because six touched source files retained checkout CRLF while this command used core.autocrlf=false. Restored LF only on those edited source files, matching their committed baseline; installed policy and other files remain unchanged.",
+      "Qualification runner now resolves its own paths before changing subprocess cwd.",
+      "Candidate runtime identity uses candidate-package semantics; released-evaluator digest flags were correctly refused and removed from that test invocation. Independent wheel digests remain checked through the resource query.",
+      "Offline test runner uses the real module argv path; the identity guard correctly refused the earlier pretend console entry point.",
+      "Draft authoring fixture now supplies an existing unapproved governing chain rather than invalid empty relation arrays. No candidate code change was needed for these fixture corrections."
+    ],
+    "remaining": [
+      "Approval and implementation of WO-IAR-031 result wiring.",
+      "Public lifecycle result parity through the wired discovery route.",
+      "Complete handoff and exact-candidate verification preparation; no VREC has been prepared."
+    ],
+    "line_endings_aligned": [
+      "se_harness/integrity.py",
+      "se_harness/artifact_layout.py",
+      "se_harness/preflight.py",
+      "se_harness/instruction_discovery.py",
+      "se_harness/cli.py",
+      "templates/repository/standard/ENGINEERING_HARNESS.md.tpl"
+    ]
+  },
+  "candidate_package": {
+    "candidate_commit": "fb788d2d376b8ecca86a811883cbce832528f22d",
+    "evaluator": {
+      "version": "0.21.0",
+      "payload_manifest": "se-harness-installed-payload-v1",
+      "payload_sha256": "6a6f09436549ff8d1641c832d9f883562c7be21a540f034ac37af1955a14818e",
+      "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+      "archive_sha256": "72839d1e6ba7932c1373a0800afc91b1113e3b918195e26f6a0173c25fe5c80c"
+    },
+    "build": {
+      "candidate_commit": "fb788d2d376b8ecca86a811883cbce832528f22d",
+      "role": "non-promotable candidate-package",
+      "argv": [
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\retirement-build-env\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "build",
+        "--wheel",
+        "--no-isolation",
+        "--outdir",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\candidate-build\\dist",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\candidate-build\\source"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0
+    }
+  },
+  "qualification_runs": [
+    {
+      "candidate_commit": "fb788d2d376b8ecca86a811883cbce832528f22d",
+      "scope": "resource and authoring checks; workflow wiring remains unqualified",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "driver_python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "network": "Python socket audit denies network; Linux invocation also uses a private network namespace",
+      "expected_evaluator": {
+        "version": "0.21.0",
+        "payload_manifest": "se-harness-installed-payload-v1",
+        "payload_sha256": "6a6f09436549ff8d1641c832d9f883562c7be21a540f034ac37af1955a14818e",
+        "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+        "archive_sha256": "72839d1e6ba7932c1373a0800afc91b1113e3b918195e26f6a0173c25fe5c80c"
+      },
+      "passed": false,
+      "failure": "FileNotFoundError(2, 'Le fichier sp\u00e9cifi\u00e9 est introuvable', None, 2, None)",
+      "step_results": [
+        {
+          "label": "venv",
+          "exit_code": 0
+        }
+      ],
+      "commands": [
+        {
+          "label": "venv",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "-m",
+            "venv",
+            "external-resources-proposal-20260930\\windows-wheel-01\\evaluator"
+          ],
+          "cwd": "external-resources-proposal-20260930\\windows-wheel-01",
+          "exit_code": 0,
+          "seconds": 8.449195861816406
+        }
+      ]
+    },
+    {
+      "candidate_commit": "fb788d2d376b8ecca86a811883cbce832528f22d",
+      "scope": "resource and authoring checks; workflow wiring remains unqualified",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "driver_python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "network": "Python socket audit denies network; Linux invocation also uses a private network namespace",
+      "expected_evaluator": {
+        "version": "0.21.0",
+        "payload_manifest": "se-harness-installed-payload-v1",
+        "payload_sha256": "6a6f09436549ff8d1641c832d9f883562c7be21a540f034ac37af1955a14818e",
+        "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+        "archive_sha256": "72839d1e6ba7932c1373a0800afc91b1113e3b918195e26f6a0173c25fe5c80c"
+      },
+      "passed": false,
+      "failure": "AssertionError(('candidate identity', 1, '', '6f6a0173c25fe5c80c\",\\n  \"expected_root\": \"C:\\\\\\\\Users\\\\\\\\mathi\\\\\\\\Documents\\\\\\\\Codex\\\\\\\\2026-09-20\\\\\\\\verity-plane-plugin-verity-plane-se\\\\\\\\work\\\\\\\\external-resources-proposal-20260930\\\\\\\\windows-wheel-02\\\\\\\\evaluator\",\\n  \"harness_version\": \"0.21.0\",\\n  \"isolated_python\": true,\\n  \"module_origin\": \"C:\\\\\\\\Users\\\\\\\\mathi\\\\\\\\Documents\\\\\\\\Codex\\\\\\\\2026-09-20\\\\\\\\verity-plane-plugin-verity-plane-se\\\\\\\\work\\\\\\\\external-resources-proposal-20260930\\\\\\\\windows-wheel-02\\\\\\\\evaluator\\\\\\\\Lib\\\\\\\\site-packages\\\\\\\\se_harness\\\\\\\\runtime_identity.py\",\\n  \"passed\": false,\\n  \"python_binary_position\": \"within-expected-root\",\\n  \"python_entry_is_link\": false,\\n  \"p",
+      "step_results": [
+        {
+          "label": "venv",
+          "exit_code": 0
+        },
+        {
+          "label": "install exact local wheel",
+          "exit_code": 0
+        },
+        {
+          "label": "candidate identity",
+          "exit_code": 1
+        }
+      ],
+      "commands": [
+        {
+          "label": "candidate identity",
+          "argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-02\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resources_offline_cli.py",
+            "identity",
+            "--role",
+            "candidate-package",
+            "--expected-version",
+            "0.21.0",
+            "--expected-root",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-02\\evaluator",
+            "--checkout-root",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-02\\repository",
+            "--candidate-commit",
+            "fb788d2d376b8ecca86a811883cbce832528f22d",
+            "--evaluator-payload-sha256",
+            "6a6f09436549ff8d1641c832d9f883562c7be21a540f034ac37af1955a14818e",
+            "--evaluator-wheel-sha256",
+            "72839d1e6ba7932c1373a0800afc91b1113e3b918195e26f6a0173c25fe5c80c",
+            "--require-isolated-python",
+            "--json"
+          ],
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-02",
+          "exit_code": 1,
+          "seconds": 0.32175636291503906
+        }
+      ],
+      "refusals": [
+        {
+          "label": "candidate identity",
+          "exit_code": 1,
+          "excerpt": "{\"diagnostics\": [{\"code\": \"RID016\", \"message\": \"candidate identity cannot claim a released evaluator digest\", \"subject\": \"evaluator_wheel_sha256\"}, {\"code\": \"RID023\", \"message\": \"candidate identity cannot claim a released evaluator payload\", \"subject\": \"evaluator_payload_sha256\"}]}"
+        }
+      ]
+    },
+    {
+      "candidate_commit": "fb788d2d376b8ecca86a811883cbce832528f22d",
+      "scope": "resource and authoring checks; workflow wiring remains unqualified",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "driver_python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "network": "Python socket audit denies network; Linux invocation also uses a private network namespace",
+      "expected_evaluator": {
+        "version": "0.21.0",
+        "payload_manifest": "se-harness-installed-payload-v1",
+        "payload_sha256": "6a6f09436549ff8d1641c832d9f883562c7be21a540f034ac37af1955a14818e",
+        "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+        "archive_sha256": "72839d1e6ba7932c1373a0800afc91b1113e3b918195e26f6a0173c25fe5c80c"
+      },
+      "passed": false,
+      "failure": "AssertionError(('create requirement', 2, 'harnessctl: mutation guard MG005 (create-artifact): RID010 entry_point_origin: harnessctl resolves outside the environment; RID011 entry_point_origin: harnessctl entry point is unavailable\\n', ''))",
+      "step_results": [
+        {
+          "label": "venv",
+          "exit_code": 0
+        },
+        {
+          "label": "install exact local wheel",
+          "exit_code": 0
+        },
+        {
+          "label": "candidate identity",
+          "exit_code": 0
+        },
+        {
+          "label": "resource inventory",
+          "exit_code": 0
+        },
+        {
+          "label": "render compact entry",
+          "exit_code": 0
+        },
+        {
+          "label": "minimal fixture doctor",
+          "exit_code": 0
+        },
+        {
+          "label": "create requirement",
+          "exit_code": 2
+        }
+      ],
+      "commands": [
+        {
+          "label": "create requirement",
+          "argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-03\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resources_offline_cli.py",
+            "create-artifact",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-03\\repository",
+            "--domain",
+            "product",
+            "--type",
+            "requirement",
+            "--id",
+            "REQ-QAL-001",
+            "--json"
+          ],
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-03",
+          "exit_code": 2,
+          "seconds": 0.5230967998504639
+        }
+      ],
+      "refusals": [
+        {
+          "label": "create requirement",
+          "exit_code": 2,
+          "excerpt": "harnessctl: mutation guard MG005 (create-artifact): RID010 entry_point_origin: harnessctl resolves outside the environment; RID011 entry_point_origin: harnessctl entry point is unavailable\n"
+        }
+      ]
+    },
+    {
+      "candidate_commit": "fb788d2d376b8ecca86a811883cbce832528f22d",
+      "scope": "resource and authoring checks; workflow wiring remains unqualified",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "driver_python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "network": "Python socket audit denies network; Linux invocation also uses a private network namespace",
+      "expected_evaluator": {
+        "version": "0.21.0",
+        "payload_manifest": "se-harness-installed-payload-v1",
+        "payload_sha256": "6a6f09436549ff8d1641c832d9f883562c7be21a540f034ac37af1955a14818e",
+        "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+        "archive_sha256": "72839d1e6ba7932c1373a0800afc91b1113e3b918195e26f6a0173c25fe5c80c"
+      },
+      "passed": false,
+      "authored_files": [
+        "docs\\engineering\\product\\requirements\\REQ-QAL-001.md",
+        "docs\\engineering\\product\\work-orders\\WO-QAL-001.md"
+      ],
+      "failure": "AssertionError(('validate requested drafts', 1, '', 'AL-001\",\\n      \"path\": \"docs/engineering/product/work-orders/WO-QAL-001.md\",\\n      \"status\": \"draft\",\\n      \"type\": \"work_order\"\\n    }\\n  ],\\n  \"error_count\": 3,\\n  \"errors\": [\\n    {\\n      \"code\": \"E005\",\\n      \"message\": \"field \\'derives_from\\' must be a non-empty array of strings\",\\n      \"path\": \"docs/engineering/product/requirements/REQ-QAL-001.md\",\\n      \"plane\": \"structure\"\\n    },\\n    {\\n      \"code\": \"E005\",\\n      \"message\": \"field \\'specifications\\' must be a non-empty array of strings\",\\n      \"path\": \"docs/engineering/product/work-orders/WO-QAL-001.md\",\\n      \"plane\": \"structure\"\\n    },\\n    {\\n      \"code\": \"E005\",\\",
+      "step_results": [
+        {
+          "label": "venv",
+          "exit_code": 0
+        },
+        {
+          "label": "install exact local wheel",
+          "exit_code": 0
+        },
+        {
+          "label": "candidate identity",
+          "exit_code": 0
+        },
+        {
+          "label": "resource inventory",
+          "exit_code": 0
+        },
+        {
+          "label": "render compact entry",
+          "exit_code": 0
+        },
+        {
+          "label": "minimal fixture doctor",
+          "exit_code": 0
+        },
+        {
+          "label": "create requirement",
+          "exit_code": 0
+        },
+        {
+          "label": "create work_order",
+          "exit_code": 0
+        },
+        {
+          "label": "validate requested drafts",
+          "exit_code": 1
+        }
+      ],
+      "commands": [
+        {
+          "label": "validate requested drafts",
+          "argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-04\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resources_offline_cli.py",
+            "validate",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-04\\repository",
+            "--json"
+          ],
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-04",
+          "exit_code": 1,
+          "seconds": 0.33889269828796387
+        }
+      ],
+      "refusals": [
+        {
+          "label": "validate requested drafts",
+          "exit_code": 1,
+          "excerpt": "{\"errors\": [{\"code\": \"E005\", \"message\": \"field 'derives_from' must be a non-empty array of strings\", \"path\": \"docs/engineering/product/requirements/REQ-QAL-001.md\", \"plane\": \"structure\"}, {\"code\": \"E005\", \"message\": \"field 'specifications' must be a non-empty array of strings\", \"path\": \"docs/engineering/product/work-orders/WO-QAL-001.md\", \"plane\": \"structure\"}, {\"code\": \"E005\", \"message\": \"field 'verification' must be a non-empty array of strings\", \"path\": \"docs/engineering/product/work-orders/WO-QAL-001.md\", \"plane\": \"structure\"}]}"
+        }
+      ]
+    },
+    {
+      "candidate_commit": "fb788d2d376b8ecca86a811883cbce832528f22d",
+      "scope": "resource and authoring checks; workflow wiring remains unqualified",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "driver_python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "network": "Python socket audit denies network; Linux invocation also uses a private network namespace",
+      "expected_evaluator": {
+        "version": "0.21.0",
+        "payload_manifest": "se-harness-installed-payload-v1",
+        "payload_sha256": "6a6f09436549ff8d1641c832d9f883562c7be21a540f034ac37af1955a14818e",
+        "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+        "archive_sha256": "72839d1e6ba7932c1373a0800afc91b1113e3b918195e26f6a0173c25fe5c80c"
+      },
+      "passed": true,
+      "authored_files": [
+        "docs\\engineering\\product\\requirements\\REQ-QAL-001.md",
+        "docs\\engineering\\product\\work-orders\\WO-QAL-001.md"
+      ],
+      "failure": null,
+      "step_results": [
+        {
+          "label": "venv",
+          "exit_code": 0
+        },
+        {
+          "label": "install exact local wheel",
+          "exit_code": 0
+        },
+        {
+          "label": "candidate identity",
+          "exit_code": 0
+        },
+        {
+          "label": "resource inventory",
+          "exit_code": 0
+        },
+        {
+          "label": "render compact entry",
+          "exit_code": 0
+        },
+        {
+          "label": "minimal fixture doctor",
+          "exit_code": 0
+        },
+        {
+          "label": "create requirement",
+          "exit_code": 0
+        },
+        {
+          "label": "create work_order",
+          "exit_code": 0
+        },
+        {
+          "label": "validate requested drafts",
+          "exit_code": 0
+        },
+        {
+          "label": "reject path escape",
+          "exit_code": 2
+        },
+        {
+          "label": "reject altered resource before authoring",
+          "exit_code": 2
+        },
+        {
+          "label": "restored selected resources",
+          "exit_code": 0
+        }
+      ],
+      "commands": [
+        {
+          "label": "venv",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "-m",
+            "venv",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\evaluator"
+          ],
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05",
+          "exit_code": 0,
+          "seconds": 6.201651096343994
+        },
+        {
+          "label": "install exact local wheel",
+          "argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "-m",
+            "pip",
+            "install",
+            "--no-index",
+            "--no-deps",
+            "--no-cache-dir",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\candidate-build\\dist\\se_harness-0.21.0-py3-none-any.whl"
+          ],
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05",
+          "exit_code": 0,
+          "seconds": 2.3318614959716797
+        },
+        {
+          "label": "candidate identity",
+          "argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resources_offline_cli.py",
+            "identity",
+            "--role",
+            "candidate-package",
+            "--expected-version",
+            "0.21.0",
+            "--expected-root",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\evaluator",
+            "--checkout-root",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\repository",
+            "--candidate-commit",
+            "fb788d2d376b8ecca86a811883cbce832528f22d",
+            "--require-isolated-python",
+            "--json"
+          ],
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05",
+          "exit_code": 0,
+          "seconds": 0.3366215229034424
+        },
+        {
+          "label": "resource inventory",
+          "argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resources_offline_cli.py",
+            "resources",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\repository",
+            "--json"
+          ],
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05",
+          "exit_code": 0,
+          "seconds": 0.8313608169555664
+        },
+        {
+          "label": "render compact entry",
+          "argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resources_offline_cli.py",
+            "resources",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\repository",
+            "--resource",
+            "ENGINEERING_HARNESS.md",
+            "--content",
+            "--json"
+          ],
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05",
+          "exit_code": 0,
+          "seconds": 0.45299768447875977
+        },
+        {
+          "label": "minimal fixture doctor",
+          "argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resources_offline_cli.py",
+            "doctor",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\repository",
+            "--json"
+          ],
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05",
+          "exit_code": 0,
+          "seconds": 0.4727144241333008
+        },
+        {
+          "label": "create requirement",
+          "argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resources_offline_cli.py",
+            "create-artifact",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\repository",
+            "--domain",
+            "product",
+            "--type",
+            "requirement",
+            "--id",
+            "REQ-QAL-001",
+            "--json"
+          ],
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05",
+          "exit_code": 0,
+          "seconds": 0.6223776340484619
+        },
+        {
+          "label": "create work_order",
+          "argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resources_offline_cli.py",
+            "create-artifact",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\repository",
+            "--domain",
+            "product",
+            "--type",
+            "work_order",
+            "--id",
+            "WO-QAL-001",
+            "--json"
+          ],
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05",
+          "exit_code": 0,
+          "seconds": 0.5616960525512695
+        },
+        {
+          "label": "validate requested drafts",
+          "argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resources_offline_cli.py",
+            "validate",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\repository",
+            "--json"
+          ],
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05",
+          "exit_code": 0,
+          "seconds": 0.3426332473754883
+        },
+        {
+          "label": "reject path escape",
+          "argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resources_offline_cli.py",
+            "resources",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\repository",
+            "--resource",
+            "../outside",
+            "--json"
+          ],
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05",
+          "exit_code": 2,
+          "seconds": 0.432586669921875
+        },
+        {
+          "label": "reject altered resource before authoring",
+          "argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resources_offline_cli.py",
+            "create-artifact",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\repository",
+            "--domain",
+            "product",
+            "--type",
+            "requirement",
+            "--id",
+            "REQ-QAL-002",
+            "--json"
+          ],
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05",
+          "exit_code": 2,
+          "seconds": 0.3933579921722412
+        },
+        {
+          "label": "restored selected resources",
+          "argv": [
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\evaluator\\Scripts\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resources_offline_cli.py",
+            "resources",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05\\repository",
+            "--resource",
+            "ENGINEERING_HARNESS.md",
+            "--json"
+          ],
+          "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\windows-wheel-05",
+          "exit_code": 0,
+          "seconds": 0.46760082244873047
+        }
+      ],
+      "refusals": [
+        {
+          "label": "reject path escape",
+          "exit_code": 2,
+          "excerpt": "harnessctl: resource ID must be a normalized relative path\n"
+        },
+        {
+          "label": "reject altered resource before authoring",
+          "exit_code": 2,
+          "excerpt": "harnessctl: selected evaluator payload_sha256 does not match installed resources\n"
+        }
+      ]
+    },
+    {
+      "candidate_commit": "fb788d2d376b8ecca86a811883cbce832528f22d",
+      "scope": "resource and authoring checks; workflow wiring remains unqualified",
+      "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "driver_python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "network": "Python socket audit denies network; Linux invocation also uses a private network namespace",
+      "expected_evaluator": {
+        "version": "0.21.0",
+        "payload_manifest": "se-harness-installed-payload-v1",
+        "payload_sha256": "6a6f09436549ff8d1641c832d9f883562c7be21a540f034ac37af1955a14818e",
+        "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+        "archive_sha256": "72839d1e6ba7932c1373a0800afc91b1113e3b918195e26f6a0173c25fe5c80c"
+      },
+      "passed": true,
+      "authored_files": [
+        "docs/engineering/product/requirements/REQ-QAL-001.md",
+        "docs/engineering/product/work-orders/WO-QAL-001.md"
+      ],
+      "failure": null,
+      "step_results": [
+        {
+          "label": "venv",
+          "exit_code": 0
+        },
+        {
+          "label": "install exact local wheel",
+          "exit_code": 0
+        },
+        {
+          "label": "candidate identity",
+          "exit_code": 0
+        },
+        {
+          "label": "resource inventory",
+          "exit_code": 0
+        },
+        {
+          "label": "render compact entry",
+          "exit_code": 0
+        },
+        {
+          "label": "minimal fixture doctor",
+          "exit_code": 0
+        },
+        {
+          "label": "create requirement",
+          "exit_code": 0
+        },
+        {
+          "label": "create work_order",
+          "exit_code": 0
+        },
+        {
+          "label": "validate requested drafts",
+          "exit_code": 0
+        },
+        {
+          "label": "reject path escape",
+          "exit_code": 2
+        },
+        {
+          "label": "reject altered resource before authoring",
+          "exit_code": 2
+        },
+        {
+          "label": "reject linked installed resource",
+          "exit_code": 2
+        },
+        {
+          "label": "restored selected resources",
+          "exit_code": 0
+        }
+      ],
+      "commands": [
+        {
+          "label": "venv",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "-m",
+            "venv",
+            "/tmp/iar-external-resource-qual-20260930-02/evaluator"
+          ],
+          "cwd": "/tmp/iar-external-resource-qual-20260930-02",
+          "exit_code": 0,
+          "seconds": 2.3597278594970703
+        },
+        {
+          "label": "install exact local wheel",
+          "argv": [
+            "/tmp/iar-external-resource-qual-20260930-02/evaluator/bin/python",
+            "-I",
+            "-m",
+            "pip",
+            "install",
+            "--no-index",
+            "--no-deps",
+            "--no-cache-dir",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/external-resources-proposal-20260930/linux-readable/se_harness-0.21.0-py3-none-any.whl"
+          ],
+          "cwd": "/tmp/iar-external-resource-qual-20260930-02",
+          "exit_code": 0,
+          "seconds": 0.5744779109954834
+        },
+        {
+          "label": "candidate identity",
+          "argv": [
+            "/tmp/iar-external-resource-qual-20260930-02/evaluator/bin/python",
+            "-I",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/external_resources_offline_cli.py",
+            "identity",
+            "--role",
+            "candidate-package",
+            "--expected-version",
+            "0.21.0",
+            "--expected-root",
+            "/tmp/iar-external-resource-qual-20260930-02/evaluator",
+            "--checkout-root",
+            "/tmp/iar-external-resource-qual-20260930-02/repository",
+            "--candidate-commit",
+            "fb788d2d376b8ecca86a811883cbce832528f22d",
+            "--require-isolated-python",
+            "--json"
+          ],
+          "cwd": "/tmp/iar-external-resource-qual-20260930-02",
+          "exit_code": 0,
+          "seconds": 0.1133265495300293
+        },
+        {
+          "label": "resource inventory",
+          "argv": [
+            "/tmp/iar-external-resource-qual-20260930-02/evaluator/bin/python",
+            "-I",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/external_resources_offline_cli.py",
+            "resources",
+            "/tmp/iar-external-resource-qual-20260930-02/repository",
+            "--json"
+          ],
+          "cwd": "/tmp/iar-external-resource-qual-20260930-02",
+          "exit_code": 0,
+          "seconds": 0.1861131191253662
+        },
+        {
+          "label": "render compact entry",
+          "argv": [
+            "/tmp/iar-external-resource-qual-20260930-02/evaluator/bin/python",
+            "-I",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/external_resources_offline_cli.py",
+            "resources",
+            "/tmp/iar-external-resource-qual-20260930-02/repository",
+            "--resource",
+            "ENGINEERING_HARNESS.md",
+            "--content",
+            "--json"
+          ],
+          "cwd": "/tmp/iar-external-resource-qual-20260930-02",
+          "exit_code": 0,
+          "seconds": 0.16521430015563965
+        },
+        {
+          "label": "minimal fixture doctor",
+          "argv": [
+            "/tmp/iar-external-resource-qual-20260930-02/evaluator/bin/python",
+            "-I",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/external_resources_offline_cli.py",
+            "doctor",
+            "/tmp/iar-external-resource-qual-20260930-02/repository",
+            "--json"
+          ],
+          "cwd": "/tmp/iar-external-resource-qual-20260930-02",
+          "exit_code": 0,
+          "seconds": 0.16766977310180664
+        },
+        {
+          "label": "create requirement",
+          "argv": [
+            "/tmp/iar-external-resource-qual-20260930-02/evaluator/bin/python",
+            "-I",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/external_resources_offline_cli.py",
+            "create-artifact",
+            "/tmp/iar-external-resource-qual-20260930-02/repository",
+            "--domain",
+            "product",
+            "--type",
+            "requirement",
+            "--id",
+            "REQ-QAL-001",
+            "--json"
+          ],
+          "cwd": "/tmp/iar-external-resource-qual-20260930-02",
+          "exit_code": 0,
+          "seconds": 0.21039676666259766
+        },
+        {
+          "label": "create work_order",
+          "argv": [
+            "/tmp/iar-external-resource-qual-20260930-02/evaluator/bin/python",
+            "-I",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/external_resources_offline_cli.py",
+            "create-artifact",
+            "/tmp/iar-external-resource-qual-20260930-02/repository",
+            "--domain",
+            "product",
+            "--type",
+            "work_order",
+            "--id",
+            "WO-QAL-001",
+            "--json"
+          ],
+          "cwd": "/tmp/iar-external-resource-qual-20260930-02",
+          "exit_code": 0,
+          "seconds": 0.2047891616821289
+        },
+        {
+          "label": "validate requested drafts",
+          "argv": [
+            "/tmp/iar-external-resource-qual-20260930-02/evaluator/bin/python",
+            "-I",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/external_resources_offline_cli.py",
+            "validate",
+            "/tmp/iar-external-resource-qual-20260930-02/repository",
+            "--json"
+          ],
+          "cwd": "/tmp/iar-external-resource-qual-20260930-02",
+          "exit_code": 0,
+          "seconds": 0.12242674827575684
+        },
+        {
+          "label": "reject path escape",
+          "argv": [
+            "/tmp/iar-external-resource-qual-20260930-02/evaluator/bin/python",
+            "-I",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/external_resources_offline_cli.py",
+            "resources",
+            "/tmp/iar-external-resource-qual-20260930-02/repository",
+            "--resource",
+            "../outside",
+            "--json"
+          ],
+          "cwd": "/tmp/iar-external-resource-qual-20260930-02",
+          "exit_code": 2,
+          "seconds": 0.15155625343322754
+        },
+        {
+          "label": "reject altered resource before authoring",
+          "argv": [
+            "/tmp/iar-external-resource-qual-20260930-02/evaluator/bin/python",
+            "-I",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/external_resources_offline_cli.py",
+            "create-artifact",
+            "/tmp/iar-external-resource-qual-20260930-02/repository",
+            "--domain",
+            "product",
+            "--type",
+            "requirement",
+            "--id",
+            "REQ-QAL-002",
+            "--json"
+          ],
+          "cwd": "/tmp/iar-external-resource-qual-20260930-02",
+          "exit_code": 2,
+          "seconds": 0.14069676399230957
+        },
+        {
+          "label": "reject linked installed resource",
+          "argv": [
+            "/tmp/iar-external-resource-qual-20260930-02/evaluator/bin/python",
+            "-I",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/external_resources_offline_cli.py",
+            "resources",
+            "/tmp/iar-external-resource-qual-20260930-02/repository",
+            "--json"
+          ],
+          "cwd": "/tmp/iar-external-resource-qual-20260930-02",
+          "exit_code": 2,
+          "seconds": 0.11651301383972168
+        },
+        {
+          "label": "restored selected resources",
+          "argv": [
+            "/tmp/iar-external-resource-qual-20260930-02/evaluator/bin/python",
+            "-I",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/external_resources_offline_cli.py",
+            "resources",
+            "/tmp/iar-external-resource-qual-20260930-02/repository",
+            "--resource",
+            "ENGINEERING_HARNESS.md",
+            "--json"
+          ],
+          "cwd": "/tmp/iar-external-resource-qual-20260930-02",
+          "exit_code": 0,
+          "seconds": 0.16635656356811523
+        }
+      ],
+      "refusals": [
+        {
+          "label": "reject path escape",
+          "exit_code": 2,
+          "excerpt": "harnessctl: resource ID must be a normalized relative path\n"
+        },
+        {
+          "label": "reject altered resource before authoring",
+          "exit_code": 2,
+          "excerpt": "harnessctl: selected evaluator payload_sha256 does not match installed resources\n"
+        },
+        {
+          "label": "reject linked installed resource",
+          "exit_code": 2,
+          "excerpt": "harnessctl: selected payload is unavailable: the installed evaluator payload contains a symlink\n"
+        }
+      ]
+    }
+  ],
+  "qualification_support": {
+    "external_resources_qualify.py": {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resources_qualify.py",
+      "sha256": "0654ae66fb1a7b4049253edada720872434c7fdff7fe6c8d3f5e465ca740de1f"
+    },
+    "external_resources_offline_cli.py": {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resources_offline_cli.py",
+      "sha256": "0e4ad1fdae6596bcc54a0cb2d1d331193560d7971cf8344c1a4c2790362ea91a"
+    },
+    "external_resource_build.py": {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external_resource_build.py",
+      "sha256": "8fdff962a0a8d8d8873f5fba39c16809a16703daacd6901a5be5370a779b8241"
+    }
+  },
+  "linux_fixture_access": {
+    "first_attempt": "EACCES reading wheel from builder output; no Linux qualification completed.",
+    "repair": "Created a byte-identical wheel copy in a fresh Windows test directory. Linux read it successfully. SHA-256 remained 72839d1e6ba7932c1373a0800afc91b1113e3b918195e26f6a0173c25fe5c80c.",
+    "isolation": "unshare --user --map-root-user --net; probe returned only loopback interface. Qualification has no host plugin, network route or downloads."
+  },
+  "criteria": {
+    "resource_inventory": "Passed against the independently computed wheel manifest on Windows and Linux.",
+    "artifact_authoring": "Passed: two requested draft files only; completed draft graph validates.",
+    "shared_resolver_refusals": "Passed unit checks for wrong version/digest, missing/altered/linked resources, path escape and selection change; installed-wheel tamper and escape checks passed on both platforms. Linux additionally exercised a real linked installed resource.",
+    "cli_ci_independence": "Passed for resource and authoring checks using the same wheel without a plugin; Linux private network namespace and Python socket audit; Windows Python socket audit, no claim of host-wide network disconnection.",
+    "workflow_parity": "Pending result-wiring approval and implementation."
+  },
+  "raw_evidence": {
+    "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\core-qualification-raw.json",
+    "sha256": "ca19ffb8390bb1d302df03296b5c56243fc475c0661e175c349876bfef439e75",
+    "availability": "Local working evidence retained outside the repository. No remote upload or fixed retention guarantee.",
+    "bytes": 322421
+  },
+  "released_checks": {
+    "core-current-scope": {
+      "exit_code": 0,
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--artifact",
+        "WO-IAR-028",
+        "--checkpoint",
+        "scope",
+        "--from-git",
+        "3ed0fc5e89462011ea115ad4c4191067f815cf95",
+        "--json"
+      ],
+      "observed": {
+        "restitution": {
+          "outcome": "completed",
+          "done": [
+            "Evaluated scope compliance for WO-IAR-028."
+          ],
+          "not_done": [],
+          "blocked_by": [],
+          "current_lifecycle_state": [
+            "WO-IAR-028 is in_progress."
+          ],
+          "decision_required": null,
+          "next": {
+            "procedure_id": "PROC-WO-IMPLEMENT",
+            "step_id": "STEP-WO-IMPLEMENT-PREVIEW",
+            "action": "Run the bound command"
+          },
+          "command_or_response": {
+            "kind": "command",
+            "argv": [
+              "harnessctl",
+              "transition",
+              ".",
+              "--set",
+              "WO-IAR-028=implemented",
+              "--decision",
+              "WO-IAR-028=delegated-executor"
+            ]
+          },
+          "alternatives": []
+        }
+      }
+    },
+    "core-partial-validation": {
+      "exit_code": 0,
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "validate",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--json"
+      ],
+      "observed": {
+        "valid": true,
+        "error_count": 0,
+        "warning_count": 54
+      }
+    },
+    "core-partial-preflight": {
+      "exit_code": 0,
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "preflight",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--work-order",
+        "WO-IAR-028",
+        "--phase",
+        "review",
+        "--json"
+      ],
+      "observed": {
+        "diagnostics": []
+      }
+    }
+  }
+}

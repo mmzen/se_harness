@@ -161,7 +161,7 @@ def validate_delivery_evidence(path: Path | None, target: Path, entry: bytes, pr
             "evidence_sha256": hashlib.sha256(raw).hexdigest()}
 
 
-def describe(procedure: Mapping[str, Any], formal_artifact_ids: list[str]) -> dict[str, Any]:
+def describe(procedure: Mapping[str, Any], formal_artifact_ids: list[str], *, repository: Path | None = None) -> dict[str, Any]:
     """Describe already selected identifiers without recomputing their meaning."""
     catalog = load_catalog()
     pid, sid = procedure.get("id"), procedure.get("current_step")
@@ -171,7 +171,7 @@ def describe(procedure: Mapping[str, Any], formal_artifact_ids: list[str]) -> di
     for step in procedure.get("steps", []):
         if step.get("id") not in mapped["steps"]:
             raise DiscoveryError(f"no released reading location for {pid}/{step.get('id')}")
-    return {
+    result = {
         "schema": SCHEMA,
         "status": "available",
         "agent_instructions": {
@@ -183,3 +183,33 @@ def describe(procedure: Mapping[str, Any], formal_artifact_ids: list[str]) -> di
         "formal_artifact_ids": sorted(set(formal_artifact_ids)),
         "evaluator_only_inputs": list(catalog["evaluator_only_inputs"]),
     }
+    if repository is not None:
+        from se_harness.resources import ResourceSet, uses_external_resources
+        try:
+            if uses_external_resources(repository):
+                resources = ResourceSet(repository)
+                result["schema"] = "se-harness-instruction-discovery-v2"
+                result["release"] = resources.release
+                result["formal_artifact_source"] = "repository"
+
+                def bind(value):
+                    if isinstance(value, dict):
+                        if "file" in value and "heading" in value:
+                            value["source"] = "released-resource"
+                            value["sha256"] = resources.members[value["file"]]["sha256"]
+                        for child in value.values():
+                            bind(child)
+                    elif isinstance(value, list):
+                        for child in value:
+                            bind(child)
+
+                bind(result["agent_instructions"])
+                result["evaluator_only_inputs"] = [
+                    {"source": "released-resource", "file": name,
+                     "sha256": resources.members[name]["sha256"]}
+                    for name in catalog["evaluator_only_inputs"]
+                ]
+                resources.assert_current()
+        except (ValueError, OSError) as exc:
+            raise DiscoveryError(f"selected resource discovery is unavailable: {exc}") from exc
+    return result

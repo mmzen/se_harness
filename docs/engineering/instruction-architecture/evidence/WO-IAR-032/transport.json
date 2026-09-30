@@ -1,0 +1,272 @@
+{
+  "identity_comparison": {
+    "frozen_reference": "ffe41ce4dae358cc966430907d645ebded9f91c9",
+    "files": [
+      {
+        "path": "docs/engineering/instruction-architecture/architecture/ARCH-IAR-012.md",
+        "reference_sha256": "6b7a22311c796f9d036249db386487fc486ba3643beed807ae5b011f24e64130",
+        "current_sha256": "6b7a22311c796f9d036249db386487fc486ba3643beed807ae5b011f24e64130",
+        "identical": true
+      },
+      {
+        "path": "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-012.md",
+        "reference_sha256": "28b8001c8813941aa8b1207b481c244d68beb9f7ae857357a09b8d6719619720",
+        "current_sha256": "28b8001c8813941aa8b1207b481c244d68beb9f7ae857357a09b8d6719619720",
+        "identical": true
+      },
+      {
+        "path": "docs/engineering/instruction-architecture/decisions/DEC-IAR-003.md",
+        "reference_sha256": "36a41a6c00ca2d2e65d7c5a2da4d2fdde548a7cf05d426ebbee5d48e4f67cc82",
+        "current_sha256": "36a41a6c00ca2d2e65d7c5a2da4d2fdde548a7cf05d426ebbee5d48e4f67cc82",
+        "identical": true
+      },
+      {
+        "path": "docs/engineering/instruction-architecture/requirements/REQ-IAR-029.md",
+        "reference_sha256": "642df258d254fa231f506291d47bbdb1eca6d40cccce8b48c233ccec9d021648",
+        "current_sha256": "642df258d254fa231f506291d47bbdb1eca6d40cccce8b48c233ccec9d021648",
+        "identical": true
+      },
+      {
+        "path": "docs/engineering/instruction-architecture/requirements/REQ-IAR-030.md",
+        "reference_sha256": "26354f8979faa6ad50995322fa29e692f7f8b411d40579c7d9e124c162a541aa",
+        "current_sha256": "26354f8979faa6ad50995322fa29e692f7f8b411d40579c7d9e124c162a541aa",
+        "identical": true
+      },
+      {
+        "path": "docs/engineering/instruction-architecture/requirements/REQ-IAR-031.md",
+        "reference_sha256": "4b8b2f42de0743bee7d5dfb7b695071021c9d41c00d7d13b1ea8cd54b4d884b8",
+        "current_sha256": "4b8b2f42de0743bee7d5dfb7b695071021c9d41c00d7d13b1ea8cd54b4d884b8",
+        "identical": true
+      },
+      {
+        "path": "docs/engineering/instruction-architecture/specifications/SPEC-IAR-016.md",
+        "reference_sha256": "1f7015733951ed72d9c5448f8dd0d22a7367100b6a147801b2697ccfa3a0c272",
+        "current_sha256": "1f7015733951ed72d9c5448f8dd0d22a7367100b6a147801b2697ccfa3a0c272",
+        "identical": true
+      },
+      {
+        "path": "docs/engineering/instruction-architecture/verification/VER-IAR-020.md",
+        "reference_sha256": "9d8223d835ecebb46e209254c3a897adf29dd485284cc08cddc8143ffe498778",
+        "current_sha256": "9d8223d835ecebb46e209254c3a897adf29dd485284cc08cddc8143ffe498778",
+        "identical": true
+      },
+      {
+        "path": "docs/engineering/instruction-architecture/verification/VER-IAR-021.md",
+        "reference_sha256": "0a6a0415756a8e42b0ed363e16e1ab7ff03b1d7ce9929ac5548ac37976bcba31",
+        "current_sha256": "0a6a0415756a8e42b0ed363e16e1ab7ff03b1d7ce9929ac5548ac37976bcba31",
+        "identical": true
+      },
+      {
+        "path": "docs/engineering/instruction-architecture/verification/VER-IAR-022.md",
+        "reference_sha256": "fcbc89560c0df7234eca534d5fe347522dfc5c1c5e2751cab5b1b774a1190a1d",
+        "current_sha256": "fcbc89560c0df7234eca534d5fe347522dfc5c1c5e2751cab5b1b774a1190a1d",
+        "identical": true
+      }
+    ],
+    "tested_source_reference": "6b6f64ed94ecfc89dcc9c74179a742b134edd87a",
+    "source_test_package_diff": ""
+  },
+  "prior_pr_check": {
+    "label": "delivery018-pr-check",
+    "raw": {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery018-pr-check.json",
+      "sha256": "479125dba724259eb62de375a0254f4a927c88f9a7b9752f602717848841c882",
+      "availability": "local file; no CI upload claimed"
+    },
+    "argv": [
+      "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+      "-I",
+      "-m",
+      "se_harness",
+      "check-pr",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "--event",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery018-event.json",
+      "--from-git",
+      "4a03dabcd632976b8262f5f516b1810a850e2209",
+      "--json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+    "exit_code": 2,
+    "restitution": null,
+    "diagnostics": null,
+    "valid": null,
+    "error_count": null,
+    "warning_count": null,
+    "errors": null,
+    "summary": {}
+  },
+  "scope_input_correction": {
+    "original": {
+      "label": "delivery032-scope",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery032-scope.json",
+        "sha256": "6714a8e4758cfcbe8d63678354893c2ca2956349b32d2998318f1bdee15ca57e",
+        "availability": "local file; no CI upload claimed"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--artifact",
+        "WO-IAR-032",
+        "--checkpoint",
+        "scope",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/architecture/ARCH-IAR-012.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-012.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/decisions/DEC-IAR-003.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/requirements/REQ-IAR-029.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/requirements/REQ-IAR-030.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/requirements/REQ-IAR-031.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/specifications/SPEC-IAR-016.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/verification/VER-IAR-020.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/verification/VER-IAR-021.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/verification/VER-IAR-022.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/work-orders/WO-IAR-032.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-032/",
+        "--changes-complete",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 1,
+      "restitution": {
+        "outcome": "blocked",
+        "done": [
+          "Evaluated scope compliance for WO-IAR-032."
+        ],
+        "not_done": [
+          "The scope checkpoint did not pass."
+        ],
+        "blocked_by": [
+          "QGP-G4I-PATHS: WEX201: changed path is outside execution scope: docs/engineering/instruction-architecture/evidence/WO-IAR-032"
+        ],
+        "current_lifecycle_state": [
+          "WO-IAR-032 is in_progress."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-WO-IMPLEMENT",
+          "step_id": "STEP-WO-IMPLEMENT-CHECK",
+          "action": "Escalate QGP-G4I-PATHS under DR-REMEDIATION-SCOPE"
+        },
+        "command_or_response": {
+          "kind": "response",
+          "value": "Escalate to the accountable owner under DR-REMEDIATION-SCOPE: WEX201: changed path is outside execution scope: docs/engineering/instruction-architecture/evidence/WO-IAR-032"
+        },
+        "alternatives": []
+      },
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null,
+      "errors": null,
+      "summary": {}
+    },
+    "correction": "Supply concrete planned file paths, not the evidence directory itself.",
+    "result": {
+      "label": "delivery032-scope-files",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery032-scope-files.json",
+        "sha256": "b83ab546545c616b7cab2a8c90bf70bf4667b31f87d541fcce9fa229d699bc0a",
+        "availability": "local file; no CI upload claimed"
+      },
+      "argv": [
+        "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+        "-I",
+        "-m",
+        "se_harness",
+        "check",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+        "--artifact",
+        "WO-IAR-032",
+        "--checkpoint",
+        "scope",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/architecture/ARCH-IAR-012.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/architecture/adr/ADR-IAR-012.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/decisions/DEC-IAR-003.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/requirements/REQ-IAR-029.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/requirements/REQ-IAR-030.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/requirements/REQ-IAR-031.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/specifications/SPEC-IAR-016.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/verification/VER-IAR-020.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/verification/VER-IAR-021.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/verification/VER-IAR-022.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/work-orders/WO-IAR-032.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-032/transport.json",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-032/checks.json",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-032/WO-IAR-032-handoff.md",
+        "--changed-path",
+        "docs/engineering/instruction-architecture/evidence/WO-IAR-032/publication.json",
+        "--changes-complete",
+        "--json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work",
+      "exit_code": 0,
+      "restitution": {
+        "outcome": "completed",
+        "done": [
+          "Evaluated scope compliance for WO-IAR-032."
+        ],
+        "not_done": [],
+        "blocked_by": [],
+        "current_lifecycle_state": [
+          "WO-IAR-032 is in_progress."
+        ],
+        "decision_required": null,
+        "next": {
+          "procedure_id": "PROC-WO-IMPLEMENT",
+          "step_id": "STEP-WO-IMPLEMENT-PREVIEW",
+          "action": "Run the bound command"
+        },
+        "command_or_response": {
+          "kind": "command",
+          "argv": [
+            "harnessctl",
+            "transition",
+            ".",
+            "--set",
+            "WO-IAR-032=implemented",
+            "--decision",
+            "WO-IAR-032=delegated-executor"
+          ]
+        },
+        "alternatives": []
+      },
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null,
+      "errors": null,
+      "summary": {}
+    }
+  }
+}

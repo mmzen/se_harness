@@ -1,0 +1,21 @@
+{
+  "repository": "mmzen/se_harness",
+  "branch": "work/external-harness-resources",
+  "initial_pr_readback": {
+    "base": "main",
+    "body": "Harness-Work-Orders: WO-IAR-028, WO-IAR-029, WO-IAR-030, WO-IAR-031, WO-IAR-032\n\n## Change\n\nAdd a pinned resource resolver so the selected evaluator wheel can supply harness instructions, authoring guidance, templates and machine inputs without repository copies. Public workflow results now identify the selected resource release while preserving existing lifecycle decisions and the legacy layout.\n\nThis PR implements WO-IAR-028 and WO-IAR-031 and retains the approved successor plan. WO-IAR-029 (host delivery) and WO-IAR-030 (installer migration) are approved planning records only; their implementation follows separately. The repository remains governed by released 0.20.0.\n\n## Validation\n\n- Focused suite: 198 tests run, 195 passed and 3 skipped.\n- Same committed candidate wheel: 25 Windows and 26 offline Linux qualification steps passed, including six legacy/external public workflow comparisons on each platform.\n- Released evaluator validation: no errors; 54 pre-existing warnings.\n- Human-verified VREC-IAR-018 covers WO-IAR-028 and WO-IAR-031 at 0a8f588a239c0d3108953b7f986759b88e5b4251. Later commits contain the verification record, its human decision and WO-IAR-032 transport evidence; verified source and package inputs are unchanged.\n- Evidence and refusal-test history: docs/engineering/instruction-architecture/evidence/WO-IAR-031/implementation.json and the earlier WO-IAR-028 evidence.\n\nNative host delivery and default installer migration are not claimed by this PR. Local raw qualification logs remain at the paths in the evidence summaries; CI has not yet run on this PR.\n\nWO-IAR-032 covers transport of ten unchanged approved package files. Its human-approved `not_required` assurance classification adds no new verification claim. The full main-base diff is checked against the combined work-order scopes.\n",
+    "head_sha": "8d56b25371aea3e501e65e7a0ddac320a417c7f8",
+    "html_url": "https://github.com/mmzen/se_harness/pull/506",
+    "number": 506,
+    "state": "open"
+  },
+  "failed_attempts": [
+    "gh pr create GraphQL failure at 2026-09-30T12:17:55Z; subsequent PR list empty",
+    "gh pr create GraphQL failure at 2026-09-30T12:18:18Z; subsequent REST PR list empty"
+  ],
+  "successful_route": "gh api POST repos/mmzen/se_harness/pulls --input prepared request JSON",
+  "external_enforcement": "Exact push and PR tool invocations passed the host independent sandbox approval review. Main ruleset governs later integration; no merge performed.",
+  "receipt_note": "This later receipt-only commit does not change verified inputs. Remote readback above describes the initial published head.",
+  "pre_action_raw": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\delivery032-publication-pre-action.json",
+  "receipt_recorded_at": "2026-09-30T12:20:02.567364+00:00"
+}

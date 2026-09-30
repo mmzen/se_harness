@@ -235,7 +235,14 @@ def rollback_directories(paths: list[Path]) -> None:
             pass
 
 
-def _validate_installed_templates(root: Path) -> Path:
+def _selected_resources(root: Path):
+    from se_harness.resources import ResourceSet, uses_external_resources
+    return ResourceSet(root) if uses_external_resources(root) else None
+
+
+def _validate_installed_templates(root: Path, resources=None) -> Path:
+    if resources is not None:
+        return resources.path("docs/engineering/templates/" + ARTIFACT_TEMPLATES["requirement"]).parent
     relative = Path("docs") / "engineering" / "templates"
     templates = validate_existing_chain(root, relative, final_kind="directory")
     if not templates.is_dir():
@@ -251,7 +258,8 @@ def scaffold_domain(
     dry_run: bool,
 ) -> list[AuthoringChange]:
     root = ensure_target(repository, must_exist=True)
-    _validate_installed_templates(root)
+    resources = _selected_resources(root)
+    _validate_installed_templates(root, resources)
     selected_domain = validate_domain(domain)
     selected_title = title if title is not None else selected_domain.replace("-", " ").title()
     if TITLE_PATTERN.fullmatch(selected_title) is None:
@@ -274,6 +282,8 @@ def scaffold_domain(
         return changes
 
     mutation_guard.require_mutation_authority(root, operation="scaffold-domain")
+    if resources is not None:
+        resources.assert_current()
     created_directories: list[Path] = []
     try:
         for relative in [domain_relative, *directory_relatives]:
@@ -321,11 +331,14 @@ def authoring_checklist(repository: Path, artifact_type: str) -> list[str]:
     """Return the installed authoring policy's checklist bullets for one artifact type (AUT-POL-003)."""
 
     root = ensure_target(repository, must_exist=True)
-    policy = validate_existing_chain(root, Path("docs") / "engineering" / "ARTIFACT_AUTHORING.md", final_kind="file")
+    resources = _selected_resources(root)
+    relative = Path("docs") / "engineering" / "ARTIFACT_AUTHORING.md"
+    policy = resources.path(relative.as_posix()) if resources is not None else validate_existing_chain(root, relative, final_kind="file")
     if not policy.is_file():
         return []
     try:
-        lines = canonical_text(policy.read_text(encoding="utf-8-sig")).split("\n")  # ECP-PRM-010
+        raw = resources.read(relative.as_posix()) if resources is not None else policy.read_bytes()
+        lines = canonical_text(raw.decode("utf-8-sig")).split("\n")  # ECP-PRM-010
     except (OSError, UnicodeError):
         return []
     bullets: list[str] = []
@@ -463,7 +476,8 @@ def create_artifact(
     dry_run: bool,
 ) -> AuthoringChange:
     root = ensure_target(repository, must_exist=True)
-    _validate_installed_templates(root)
+    resources = _selected_resources(root)
+    _validate_installed_templates(root, resources)
     selected_type = validate_artifact_type(artifact_type)
     allocated: str | None = None
     allocation_refs: tuple[str, ...] = ()
@@ -488,11 +502,12 @@ def create_artifact(
             raise HarnessError(f"artifact ID already exists: {selected_id} on local ref {on_refs[0]}")
 
     template_relative = Path("docs") / "engineering" / "templates" / ARTIFACT_TEMPLATES[selected_type]
-    template_path = validate_existing_chain(root, template_relative, final_kind="file")
+    template_path = resources.path(template_relative.as_posix()) if resources is not None else validate_existing_chain(root, template_relative, final_kind="file")
     if not template_path.is_file():
         raise HarnessError(f"canonical artifact template is missing: {template_relative.as_posix()}")
     try:
-        content = _render_draft(template_path.read_text(encoding="utf-8-sig"), selected_type, selected_id)
+        raw = resources.read(template_relative.as_posix()) if resources is not None else template_path.read_bytes()
+        content = _render_draft(raw.decode("utf-8-sig"), selected_type, selected_id)
     except (OSError, UnicodeError) as exc:
         raise HarnessError(f"cannot read canonical artifact template: {exc}") from exc
 
@@ -503,6 +518,8 @@ def create_artifact(
         return change
 
     mutation_guard.require_mutation_authority(root, operation="create-artifact")
+    if resources is not None:
+        resources.assert_current()
     missing: list[Path] = []
     probe = root
     for part in parent_relative.parts:

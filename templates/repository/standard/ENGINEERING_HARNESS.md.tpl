@@ -135,6 +135,14 @@ artifacts or evidence required at a contract's prescribed durable location.
 
 ## Read by task
 
+For the external-resource layout, the files below are released resources outside
+the checkout. Resolve a file with `harnessctl resources REPO --resource FILE --json`
+and read its returned path and the required heading. Use instruction links
+relative to that resource location. Formal artifacts remain repository files.
+`harnessctl resources REPO --resource ENGINEERING_HARNESS.md --content --json`
+returns this entry with the selected project and release. Repository-copy
+installations continue to read their installed files.
+
 Read the selected file's entry conditions and current step. Read its required
 references before the action they govern. A link alone does not require reading
 its target. Do not load all procedures or future stages in advance.
