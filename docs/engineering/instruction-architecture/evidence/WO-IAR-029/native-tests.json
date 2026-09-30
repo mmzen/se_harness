@@ -1,6 +1,6 @@
 {
   "work_order": "WO-IAR-029",
-  "status": "native_cli_checks_passed_qualification_incomplete",
+  "status": "native_cli_checks_passed_desktop_unverified",
   "candidate": "e79368c677541d7092129a853e8b39157865ace9",
   "governing_evaluator": "0.20.0",
   "observed_at": "2026-09-30T15:44:01.737347+00:00",
@@ -369,13 +369,13 @@
     },
     {
       "criterion": "Codex Windows desktop",
-      "status": "unassessed",
-      "detail": "Computer Use discovered the installed app as ChatGPT. Its guidance explicitly prohibits automating the ChatGPT desktop app UI. Native app-server results are not substituted for desktop qualification."
+      "status": "unverified",
+      "detail": "Computer Use discovered the installed app as ChatGPT. Its guidance explicitly prohibits automating the ChatGPT desktop app UI. Native app-server results are not substituted for desktop qualification. Human mmzen instructed: \"mark as unverified then, and we continue to\". Continue CLI qualification; no desktop pass is inferred."
     },
     {
       "criterion": "Repeated new/resumed work through exact delivery-authority handoff",
-      "status": "unassessed",
-      "detail": "This run qualified selection and context recovery, not the complete artifact/work-order/delivery walkthrough. No real publication was attempted."
+      "status": "passed_native_codex_cli",
+      "detail": "See cli-workflow.json: new drafts and approved/resumed execution on 0.21.0 and 0.20.0, exact-byte checks, clean local candidates, explicit push/PR authority boundary and unchanged remotes. This continuation uses Codex CLI; it makes no desktop or additional Claude-workflow claim."
     },
     {
       "criterion": "Packaging and ownership",
@@ -427,5 +427,9 @@
       ]
     },
     "alternatives": []
+  },
+  "cli_continuation": {
+    "path": "cli-workflow.json",
+    "sha256": "50de352c6247ec3f4df3bd75efeda77577b1796c63bb6c6bbaaeed1e5bf11bcc"
   }
 }

@@ -1,8 +1,9 @@
 # Native test review — WO-IAR-029
 
 Native CLI checks passed after correcting one delivery defect. WO-IAR-029
-remains `in_progress`: desktop qualification and the complete new/resumed-work
-delivery walkthrough are not yet assessed. No verification record was prepared.
+remains `in_progress`. Desktop delivery is unverified. The later
+[CLI workflow review](cli-workflow-review.md) completes the new/resumed-work
+walkthrough through Codex CLI. No verification record was prepared.
 
 Candidate: `e79368c677541d7092129a853e8b39157865ace9`.
 The governing evaluator remains released 0.20.0. The tested 0.21.0 wheel is a
@@ -51,20 +52,18 @@ native reruns match the candidate. The wheel and entry bytes did not change.
 
 ## Remaining qualification
 
-- **Codex Windows desktop:** unassessed. Computer Use identified the installed
+- **Codex Windows desktop:** **unverified**, as requested by human mmzen on 2026-09-30. Continue CLI qualification; this is not a desktop pass. Computer Use identified the installed
   app as ChatGPT. Its [skill](C:/Users/mathi/.codex/plugins/cache/openai-bundled/computer-use/26.924.22138/skills/computer-use/SKILL.md)
   references [guidance](C:/Users/mathi/.codex/plugins/cache/openai-bundled/computer-use/26.924.22138/docs/guidance.md)
   that states: “Do not automate the ChatGPT desktop app UI or Codex CLI or Codex
   extensions within Windows apps.” Shell-based native test drivers do not
   establish desktop delivery.
-- **Complete work-to-delivery walkthrough:** unassessed. The disposable
-  fixtures above qualify instruction selection and recovery. They do not yet
-  demonstrate the complete proposed-artifact, previously authorized work-order,
-  and exact push/PR-authority handoff cycle required by VER-IAR-021.
+- **Complete work-to-delivery walkthrough:** passed through Codex CLI on the
+  successor and legacy fixtures; see [the retained review](cli-workflow-review.md).
+  These results identify exact candidates and delivery authority without publication.
 
 The released evaluator still selects `PROC-WO-IMPLEMENT` /
-`STEP-WO-IMPLEMENT-CHECK`, with the bound handoff check for WO-IAR-029. The missing
-observations must be completed before reporting implementation completion.
+`STEP-WO-IMPLEMENT-CHECK`, with the bound handoff check for WO-IAR-029. Desktop delivery remains unverified under the user's instruction; no completion is inferred from CLI evidence alone.
 
 ## Evidence and limits
 
