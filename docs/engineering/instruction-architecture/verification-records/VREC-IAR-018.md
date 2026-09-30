@@ -2,7 +2,7 @@
 id = "VREC-IAR-018"
 type = "verification_record"
 title = "Verification candidate for 2 work orders"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-30"
 updated = "2026-09-30"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/instruction-architecture/evidence/WO-IAR-028
 evaluator_evidence_path = "docs/engineering/instruction-architecture/evidence/VREC-IAR-018-evaluator.json"
 evaluator_evidence_sha256 = "5f2209f1d8d60901e7f8cf46ea5b62f7bb9705e4603c72f15489f9be90af2384"
 
+verified_at = "2026-09-30T12:02:38Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-IAR-028", "WO-IAR-031"]
 conforms_to = ["VER-IAR-020"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-30T12:02:38Z"
+decided_by = "mmzen"
+reason = "Human mmzen explicitly decided: i verify VREC-IAR-018. Accepts retained VER-IAR-020 evidence for WO-IAR-028 and WO-IAR-031 at candidate 0a8f588a239c0d3108953b7f986759b88e5b4251. Candidate, reviewed record and evidence were checked unchanged before application."
 +++
 
 # Verification Record Candidate
