@@ -27,8 +27,62 @@ observations and links current-main instructions for current public availability
 The five-surface plan retains pending future identities and downstream work.
 No public delivery or native desktop claim is added.
 
-This is source evidence only. Exact installed-package tests on Windows and Linux,
-independent released qualification and the pinned release build remain pending.
-The Docker client reports no running Linux engine. Hosted CI and the pinned
-publication rehearsal will require separately authorized branch publication and
-workflow dispatch. No VREC, RLS, release, push or PR is claimed by this review.
+## Local package and Linux results
+
+The exact tested source candidate is
+`2f8e64fcede02240972881b942ccf411cf5fffc5`.
+Its non-promotable wheel has SHA256
+`ad8ebadcf65871a8925c4aad071d259f3155f0ece9cd830505b9b033db482258`.
+The native build is test evidence, not the required pinned release build.
+
+Windows and Linux each pass 16 installed-package operations. The installed
+maintenance runner passes all ten existing scenarios against public 0.20.0 and
+against the exact minimal wheel approved in VER-RLS-027. Its minimal-layout
+assessment is candidate-controlled evidence. Separately, the exact public 0.20.0
+verifier passes typed candidate-package qualification of the maintenance wheel
+on both platforms with independence = released-verifier.
+
+Fresh maintenance initialization has the same 59-file footprint as public 0.20.0.
+Both platforms pass a real 0.19.0-to-0.20.1 upgrade and subsequent doctor checks.
+The sdist builds back into a wheel with all 115 package/template entries equal
+to the directly built wheel. The first sdist attempt hit a denied user pip cache;
+rerunning with --no-cache-dir passed without changing permissions or source.
+
+The Linux source suite passes 1167 tests with four skips at the exact candidate
+commit. Its first run used an archive without Git metadata: ten errors and two
+failures came from tests needing HEAD attributes or the repository origin.
+An attempted repair found that the prior temporary directory no longer existed.
+A fresh disposable shallow checkout was reconstructed from the exact Git commit
+and tree, with the real origin. The full suite then passed. Both failed attempts
+remain in tests.json; no product test or requirement was weakened.
+
+A Git comparison confirms no changes to installer.py, integrity.py, packaged
+templates, plugin source, installed root/configuration/lock or CI workflows.
+The code change is confined to the existing candidate acceptance runner.
+
+## Remaining work and requested external action
+
+Hosted CI and the pinned recipe build have not run. The Docker client cannot
+connect to a running Linux engine on this workstation. The existing publication
+rehearsal is the documented build route in that condition. Required hosted
+wheel/sdist and upgrade lanes remain part of the release checks.
+
+The next requested authority is an ordinary push of work/compatibility-0-20-1
+to mmzen/se_harness and a draft PR targeting release/0.20. The existing PR
+workflow selects the candidate recipe build because build inputs changed.
+If that does not provide the required run, the proposed fallback is dispatch
+of publication-rehearsal.yml at the reviewed branch head. That workflow has
+no mode input: dispatch selects the candidate build and an eligible existing
+release-record rehearsal. Inspect its exact inputs and provider controls before
+dispatch. These workflows have read-only permissions and do not publish.
+No merge, publication or marker action is part of that request.
+
+The final evidence commit changes only this review and tests.json. Local test
+and package results remain bound to the source candidate named above. Hosted
+checks must assess the subsequently published review head; the retained local
+wheel is not claimed to have been built from that evidence commit.
+
+WO-RLS-027 remains in_progress. No VREC or RLS has been prepared, no candidate
+has received human verification, and no push or PR has occurred. After the
+required hosted evidence passes, record implementation completion and prepare
+the exact commit-bound verification record. Release and adoption stay separate.
