@@ -2,7 +2,7 @@
 id = "WO-IAR-028"
 type = "work_order"
 title = "Build the released resource resolver and evaluator route"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-09-30"
 updated = "2026-09-30"
@@ -74,6 +74,13 @@ to = "in_progress"
 decided_at = "2026-09-30T11:13:53Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed. Start the approved resource resolver and evaluator work under human mmzen package approval and required commit-bound verification. Implementation baseline 05bd4e76ba73cbce3117c27774181b97c374915b; installed 0.20.0 remains governing."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-30T11:58:41Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed. Completed VER-IAR-020 resource and public-workflow qualification at committed implementation 6b6f64ed94ecfc89dcc9c74179a742b134edd87a. Released combined Git-derived handoff passed from base 3ed0fc5e89462011ea115ad4c4191067f815cf95."
 +++
 
 # Build the released resource resolver and evaluator route
