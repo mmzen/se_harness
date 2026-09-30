@@ -10,6 +10,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -85,9 +86,9 @@ def main() -> None:
             discovery = run('discovery', [executable, '--plugin-dir', plugin, 'plugin', 'details', 'verity-plane'])
             assert 'setup' in discovery and 'harness-orient' in discovery
         data = home/'plugin-data'
-        python = data/'verity-plane/evaluator'/('Scripts/python.exe' if os.name == 'nt' else 'bin/python')
-        run('setup', [sys.executable, '-I', plugin/'scripts/setup.py', '--target', project,
+        setup_output = run('setup', [sys.executable, '-I', plugin/'scripts/setup.py', '--target', project,
                      '--data-root', data, '--wheel', plugin/'packages'/wheel.name], missing_harness=True)
+        python = Path(re.search(r'^Evaluator Python: (.+)$',setup_output,re.M)[1].strip())
         assert python.is_file()
         checker = [python, '-I', '-m', 'se_harness']
         checker_version = run('checker-version', [*checker, '--version']).strip()

@@ -11,8 +11,15 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import subprocess
 import sys
 import tomllib
+
+# Only the adjacent reviewed plugin helper is added, never the target checkout.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from harness_runtime import (DeliveryError, unique_object, read_regular, selected_repository,
+    private_data, session_file, read_selection, unchanged_selection, release_selection,
+    installed_python, match_identity)
 
 
 MAX_INPUT_BYTES = 64 * 1024
@@ -23,53 +30,35 @@ SOURCES = {"codex": {"startup", "resume", "clear", "compact"},
            "claude": {"startup", "resume", "clear", "compact", "fork"}}
 
 
-class DeliveryError(ValueError):
-    pass
-
-
-def unique_object(pairs):
-    result = {}
-    for name, value in pairs:
-        if name in result:
-            raise DeliveryError("duplicate JSON field in the delivery inputs")
-        result[name] = value
-    return result
-
-
-def read_regular(path: Path, limit: int) -> bytes:
-    if path.is_symlink() or not path.is_file():
-        raise DeliveryError(f"required regular file is unavailable: {path.name}")
-    with path.open("rb") as stream:
-        raw = stream.read(limit + 1)
-    if len(raw) > limit:
-        raise DeliveryError(f"input exceeds the delivery size limit: {path.name}")
-    return raw
-
-
-def selected_repository(cwd: object) -> Path:
-    if not isinstance(cwd, str) or not cwd or any(ord(c) < 32 for c in cwd):
-        raise DeliveryError("the host did not supply an unambiguous absolute repository directory")
-    requested = Path(cwd)
-    if not requested.is_absolute() or not requested.is_dir():
-        raise DeliveryError("the host working directory is unavailable or not absolute")
-    current = requested.resolve(strict=True)
-    for directory in (current, *current.parents):
-        config, lock = directory / ".engineering-harness.toml", directory / ".engineering-harness.lock"
-        if config.exists() or lock.exists():
-            # Stop at the nearest selected installation. Never bypass a damaged
-            # nested selection by borrowing a parent's otherwise valid root.
-            return directory
-        if (directory / ".git").exists():
-            break
-    raise DeliveryError("the host directory has no selected SE Harness installation")
-
-
-def context_for(event: dict, host: str) -> str:
-    if event.get("input_error"):
-        raise DeliveryError(event["input_error"])
-    if event.get("hook_event_name") != "SessionStart" or event.get("source") not in SOURCES[host]:
-        raise DeliveryError("unsupported host event or SessionStart source")
-    root = selected_repository(event.get("cwd"))
+def repository_context(root: Path, data: Path) -> str:
+    config, lock, inputs = release_selection(root)
+    private_data("codex", data, root)
+    version = config["harness"]["tool_version"]
+    if lock["schema"] == 5:
+        python = installed_python(data, lock["evaluator"])
+        result = subprocess.run([str(python), "-I", "-m", "se_harness", "resources", str(root),
+            "--resource", "ENGINEERING_HARNESS.md", "--content", "--json"], cwd=data,
+            capture_output=True, text=True, encoding="utf-8", timeout=7)
+        if result.returncode:
+            raise DeliveryError("selected resources are unavailable or fail integrity; run the selected evaluator's resources command to inspect")
+        value = json.loads(result.stdout, object_pairs_hook=unique_object)
+        if value.get("schema") != "se-harness-resources-v1" or value.get("resource_layout") != "released-resources-v1":
+            raise DeliveryError("the evaluator returned an incompatible resource result")
+        match_identity(lock["evaluator"], value["release"])
+        text, digest = value["content"], value["content_sha256"]
+        if hashlib.sha256(text.encode("utf-8")).hexdigest() != digest:
+            raise DeliveryError("the delivered entry content digest does not match")
+        entry = value["resources"][0]
+        if entry["resource"] != "ENGINEERING_HARNESS.md":
+            raise DeliveryError("the evaluator did not return the selected entry")
+        for name, raw in inputs.items():
+            if read_regular(root/name, MAX_CONFIG_BYTES) != raw:
+                raise DeliveryError("selected instruction inputs changed during delivery")
+        return (f"Selected checkout: {root}\nEntry resource: ENGINEERING_HARNESS.md\n"
+                f"Selected release: {version}; entry SHA-256: {digest}.\n"
+                f"Evaluator Python: {python}\n"
+                "Use -I -m se_harness outside the checkout. Resolve instruction IDs through resources; "
+                "formal artifacts against the checkout.\n\n" + text)
     config_path, lock_path = root / ".engineering-harness.toml", root / ".engineering-harness.lock"
     config_raw = read_regular(config_path, MAX_CONFIG_BYTES)
     lock_raw = read_regular(lock_path, MAX_CONFIG_BYTES)
@@ -97,18 +86,48 @@ def context_for(event: dict, host: str) -> str:
             or read_regular(lock_path, MAX_CONFIG_BYTES) != lock_raw
             or read_regular(root / "ENGINEERING_HARNESS.md", MAX_ROOT_BYTES) != raw):
         raise DeliveryError("selected instruction inputs changed during delivery; inspect before retrying")
-    context = (f"SE Harness instruction source: {root / 'ENGINEERING_HARNESS.md'}\n"
+    return (f"SE Harness instruction source: {root / 'ENGINEERING_HARNESS.md'}\n"
                f"Selected release: {version}; entry SHA-256: {digest}.\n"
                "This delivery changes no lifecycle state and grants no decision authority.\n\n" + text)
+
+
+def session_guidance(host: str, session: str, data: Path) -> str:
+    return (f"Host: {host}; session_id: {session}\nPlugin data: {data}\n"
+            "Select or switch through verity-plane:setup (scripts/activate.py in this plugin).\n")
+
+
+def bounded_context(context: str) -> str:
     if len(context.encode("utf-16-le")) // 2 > MAX_CONTEXT_CHARACTERS:
         raise DeliveryError("the complete root exceeds the host delivery limit; no truncated policy was sent")
+    return context
+
+
+def bootstrap(host: str, session: str, data: Path) -> str:
+    text = read_regular(Path(__file__).resolve().parents[1]/"assets/bootstrap.md", MAX_ROOT_BYTES).decode("utf-8")
+    return bounded_context(session_guidance(host, session, data) + "\n" + text)
+
+
+def context_for(event: dict, host: str) -> str:
+    if event.get("input_error"):
+        raise DeliveryError(event["input_error"])
+    if event.get("hook_event_name") != "SessionStart" or event.get("source") not in SOURCES[host]:
+        raise DeliveryError("unsupported host event or SessionStart source")
+    data = private_data(host)
+    session = event.get("session_id")
+    path = session_file(host, session, data)
+    root, saved = read_selection(path, host, session)
+    if root is None:
+        root = selected_repository(event.get("cwd"))
+    context = (bootstrap(host, session, data) if root is None else
+               bounded_context(session_guidance(host, session, data) + "\n" + repository_context(root, data)))
+    unchanged_selection(path, saved)
     return context
 
 
 def respond(event: dict, host: str) -> dict:
     try:
         context = context_for(event, host)
-    except (DeliveryError, OSError, UnicodeError, ValueError, TypeError, AttributeError, RecursionError) as exc:
+    except (DeliveryError, OSError, UnicodeError, ValueError, TypeError, KeyError, AttributeError, RecursionError, subprocess.TimeoutExpired) as exc:
         # Both supported hosts deliver SessionStart additionalContext. A hook
         # error exit can discard it, so report the bounded gap through that channel.
         reason = str(exc).replace("\n", " ").replace("\r", " ")[:700]

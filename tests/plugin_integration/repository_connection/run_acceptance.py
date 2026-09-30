@@ -9,6 +9,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -34,7 +35,7 @@ def main() -> None:
     owner_file = project/'owner notes.txt'
     owner_file.write_text('Keep this project content.\n', encoding='utf-8')
     data = output/'private'
-    python = data/'verity-plane/evaluator'/('Scripts/python.exe' if os.name == 'nt' else 'bin/python')
+    python = None
     results = []
 
     def run(name, argv, expected=0):
@@ -50,7 +51,11 @@ def main() -> None:
         return run(name,[python,'-I','-m','se_harness',*argv],expected)
 
     def setup(name, selected, expected=0):
-        return run(name,[sys.executable,'-I',plugin/'scripts/setup.py','--target',project,'--data-root',data,'--wheel',selected],expected)
+        nonlocal python
+        result = run(name,[sys.executable,'-I',plugin/'scripts/setup.py','--target',project,'--data-root',data,'--wheel',selected],expected)
+        located = re.search(r'^Evaluator Python: (.+)$',result.stdout,re.M)
+        if located: python = Path(located[1].strip())
+        return result
 
     # A new code project: setup prepares Python but cannot yet report a healthy harness.
     setup('new-project-setup',wheel,expected=None)
@@ -72,8 +77,12 @@ def main() -> None:
     setup('reuse',wheel)
     package = next(python.parent.parent.glob('Lib/site-packages/se_harness/__init__.py'),None)
     if package is None: package=next(python.parent.parent.glob('lib/python*/site-packages/se_harness/__init__.py'))
-    package.unlink()  # Real interrupted installation; the documented rerun repairs it.
-    setup('repair',wheel)
+    package_bytes=package.read_bytes()
+    package.unlink()  # A damaged ready environment is refused, never overwritten in use.
+    setup('reject-in-place-repair',wheel,expected=None)
+    assert not package.exists()
+    package.write_bytes(package_bytes)  # Restore only this deliberately changed fixture input.
+    setup('reuse-restored-fixture',wheel)
     assert package.is_file()
     assert (project/'.engineering-harness.toml').read_bytes()==config_before
     assert (project/'.engineering-harness.lock').read_bytes()==lock_before

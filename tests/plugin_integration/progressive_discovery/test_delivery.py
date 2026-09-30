@@ -2,6 +2,7 @@
 import hashlib
 import importlib.util
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -21,6 +22,10 @@ class InstructionDeliveryTests(unittest.TestCase):
         temporary=tempfile.TemporaryDirectory(prefix='instruction-delivery-')
         self.addCleanup(temporary.cleanup)
         self.base=Path(temporary.name).resolve()
+        self.data=self.base/'private'
+        environment=patch.dict(os.environ, {'PLUGIN_DATA':str(self.data),'CLAUDE_PLUGIN_DATA':str(self.data)})
+        environment.start()
+        self.addCleanup(environment.stop)
         self.repo=self.fixture('first','0.19.0','A complete root.\n')
 
     def fixture(self,name,version,body,newline='\n'):
@@ -35,7 +40,7 @@ class InstructionDeliveryTests(unittest.TestCase):
         return repo
 
     def event(self,source='startup',repo=None):
-        return {'hook_event_name':'SessionStart','source':source,'cwd':str(repo or self.repo)}
+        return {'hook_event_name':'SessionStart','source':source,'cwd':str(repo or self.repo),'session_id':'fixture-session'}
 
     def context(self,event=None,host='codex'):
         return delivery.respond(event or self.event(),host)['hookSpecificOutput']['additionalContext']
@@ -79,7 +84,7 @@ class InstructionDeliveryTests(unittest.TestCase):
         self.assertIn('delivery is unavailable',self.context(self.event(repo=child)))
         (child/'.engineering-harness.toml').unlink()
         (child/'.git').mkdir()
-        self.assertIn('no selected',self.context(self.event(repo=child)))
+        self.assertIn('# Select the working repository',self.context(self.event(repo=child)))
         (child/'.git').rmdir()
         self.assertIn('A complete root.',self.context(self.event(repo=child)))
 
@@ -157,4 +162,4 @@ class InstructionDeliveryTests(unittest.TestCase):
         entry.unlink()
         try:entry.symlink_to(saved)
         except OSError as exc:self.skipTest(f'platform cannot create test symlink: {exc}')
-        self.assertIn('required regular file',self.context())
+        self.assertIn('linked input',self.context())

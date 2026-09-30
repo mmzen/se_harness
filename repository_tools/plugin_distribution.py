@@ -165,6 +165,19 @@ def _instruction_hooks(entries: dict[str, bytes], host: str, manifest: dict) -> 
         return
     if hook_paths != {config} or not entries.get(helper, b"").strip():
         raise AssemblyError(f"incomplete or unsupported {host} instruction hook assets")
+    # Legacy single-file adapters remain packageable. The session adapter needs
+    # all three shared assets; a partial package must fail before replacing output.
+    session_assets = ("scripts/harness_runtime.py", "scripts/activate.py", "assets/bootstrap.md")
+    if b"harness_runtime" in entries[helper] or any(p in entries for p in session_assets):
+        for path in session_assets:
+            if not entries.get(path, b"").strip():
+                raise AssemblyError(f"incomplete {host} session activation assets: {path}")
+            _asset(path, entries[path], host)
+            if path.endswith(".py"):
+                try:
+                    ast.parse(entries[path].decode("utf8"), filename=path)
+                except (SyntaxError, UnicodeError) as exc:
+                    raise AssemblyError(f"invalid session helper: {path}") from exc
     sources = "startup|resume|clear|compact" + ("|fork" if host == "claude" else "")
     command = {"type": "command", "command":
                f'python "${{CLAUDE_PLUGIN_ROOT}}/{helper}" --host {host}', "timeout": 10}

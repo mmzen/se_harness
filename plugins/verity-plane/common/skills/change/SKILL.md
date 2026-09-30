@@ -11,10 +11,18 @@ connects its existing procedures to the operator's request.
 
 ## Repository context
 
-Use this repository's ENGINEERING_HARNESS.md in the current context. Read it
-when it is absent, after switching repositories, or when its selected release
-changes. Follow its task router and read applicable owner instructions when
-present. AGENTS.md is not a plugin installation or instruction-delivery requirement.
+Use the selected entry returned by activation in the current context. If no
+checkout is active, follow the setup skill's activation procedure with the actual
+checkout path and host/session values delivered by the hook. After switching or
+compaction, validate the selected checkout again. Read applicable owner instructions.
+AGENTS.md is not a plugin installation or instruction-delivery requirement.
+
+For a `released-resources-v1` selection, use the exact evaluator's
+`resources ABSOLUTE_REPOSITORY --resource RESOURCE_ID --content --json` to read one
+required instruction or checklist. Resolve returned resource locations outside
+the checkout; formal artifact paths stay relative to the checkout. Do not require
+repository copies of ENGINEERING_HARNESS.md or docs/engineering/harness/.
+For a legacy selection, use its validated repository entry and task router.
 
 When a result includes `instruction_discovery`, require `status = "available"`.
 Read its current step's exact file and heading and each prerequisite whose
@@ -27,7 +35,7 @@ router and reading manifest. Do not apply candidate instructions to an older
 selected release. A manual root read does not prove automatic host delivery.
 
 For drafting, design and review, read and apply the selected repository's
-`docs/engineering/ARTIFACT_AUTHORING.md`: its shared design principle and the
+`docs/engineering/ARTIFACT_AUTHORING.md` resource: its shared design principle and the
 questions relevant to the current artifact or review of implemented changes.
 
 Use the repository-selected released evaluator in its private environment,

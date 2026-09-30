@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import subprocess
 import sys
 
@@ -107,9 +108,9 @@ for host, executable in hosts.items():
             "skills": sorted(actual_skills), "result": "passed", "installed_path": str(plugin), "compared_files": compared})
         continue
     data = profile / "plugin-data"
-    python = data / "verity-plane/evaluator/Scripts/python.exe"
-    run("setup-empty-project", [sys.executable, "-I", plugin / "scripts/setup.py", "--target", project,
+    setup_output = run("setup-empty-project", [sys.executable, "-I", plugin / "scripts/setup.py", "--target", project,
         "--data-root", data, "--wheel", wheel], expect="missing-harness")
+    python = Path(re.search(r'^Evaluator Python: (.+)$',setup_output,re.M)[1].strip())
     checker = [python, "-I", "-m", "se_harness"]
     checker_version = run("checker-version", [*checker, "--version"]).strip()
     assert checker_version.split()[-1] == args.expected_evaluator_version, checker_version
