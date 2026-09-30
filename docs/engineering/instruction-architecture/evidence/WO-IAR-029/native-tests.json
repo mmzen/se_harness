@@ -1,0 +1,431 @@
+{
+  "work_order": "WO-IAR-029",
+  "status": "native_cli_checks_passed_qualification_incomplete",
+  "candidate": "e79368c677541d7092129a853e8b39157865ace9",
+  "governing_evaluator": "0.20.0",
+  "observed_at": "2026-09-30T15:44:01.737347+00:00",
+  "host_versions": {
+    "codex": "codex-cli 0.158.0-alpha.2.1",
+    "claude": "2.1.273"
+  },
+  "source_fix": {
+    "cause": "A common 10,000-unit bound refused a real Codex envelope of 10,002 units.",
+    "change": "Apply the bound for the selected host: Claude 10,000 and Codex 20,000 UTF-16 units. Preserve the complete policy and report measured size on refusal.",
+    "files": {
+      "plugins/verity-plane/claude-code/README.md": "81c3d80b8787e1e2b7abc811cd2f6626eba6670015bfcd1fab54f69aaf22937c",
+      "plugins/verity-plane/codex/README.md": "81c3d80b8787e1e2b7abc811cd2f6626eba6670015bfcd1fab54f69aaf22937c",
+      "plugins/verity-plane/common/scripts/activate.py": "2b7f3d0aa5f5e994c347f1b453bcea0bd73fad7d12ede73d2a4be2bd24a78c54",
+      "plugins/verity-plane/common/scripts/inject_instructions.py": "a962f74c100a5e57562ed5b1039df6ff2acf1edd12f24ead9500f9d6c2e38afc",
+      "tests/plugin_integration/progressive_discovery/test_delivery.py": "d26a8a3f30391145c28b1f1645c38c443c22a5875eb8f3c166ba576a8b7c5ee3"
+    }
+  },
+  "checks": {
+    "full_suite": {
+      "tests": 1185,
+      "skipped": 18,
+      "passed": true
+    },
+    "final_focused": {
+      "tests": 45,
+      "skipped": 2,
+      "passed": true
+    },
+    "linux_boundaries": {
+      "tests": 17,
+      "passed": true
+    },
+    "installed_packages": {
+      "windows": {
+        "passed": true,
+        "steps": 39
+      },
+      "linux": {
+        "passed": true,
+        "steps": 39
+      }
+    },
+    "validation": {
+      "errors": 0,
+      "warnings": 54
+    }
+  },
+  "native_inputs": {
+    "codex": {
+      "assets/bootstrap.md": "3dee5f82b3e65b62fd4ccb2fcc30d224f24b0d58f7fc4a290d3578584d1fbacd",
+      "scripts/activate.py": "2b7f3d0aa5f5e994c347f1b453bcea0bd73fad7d12ede73d2a4be2bd24a78c54",
+      "scripts/harness_runtime.py": "6efaf415547fb311f889d145b269f885329450ecd2042d3c3022df9619bd1aa4",
+      "scripts/inject_instructions.py": "a962f74c100a5e57562ed5b1039df6ff2acf1edd12f24ead9500f9d6c2e38afc",
+      "scripts/setup.py": "282581fb69daabfa04909083b684385b6feeb8b72ef274c96ff04ad0171953eb",
+      "skills/change/SKILL.md": "7f167d8b2ccd13383be09769852fef100943cde07bab0bbfcbc9ac2ee17822c0",
+      "skills/evidence/SKILL.md": "810bd24204f2e003f796be422991f60fe78feec540c09ffb7debf46415754cf7",
+      "skills/harness-operator-brief/skill-contract.json": "5bb8bdcc254132489e6f67e8091dbea7f69404b6eb66434a98592a949483a842",
+      "skills/harness-operator-brief/SKILL.md": "3cba405afb93814ce3f79d5d762f8e310f32905475af1dfcf7508e4e935565f3",
+      "skills/harness-orient/skill-contract.json": "6dd5ad01256553328715df74924d1cce6ea6d368701681b48e1d045560eb7606",
+      "skills/harness-orient/SKILL.md": "722cf124a15e5003eccce92cf8573a4c30e59a772aa3f8b8f426104900f13c7d",
+      "skills/setup/SKILL.md": "3b60bb4fa25a3d7312c6828ccba0a814aba45a8f33d30eaae63122ae912f0c6d",
+      "skills/setup/references/environment.md": "3ccad389ba80926437cfc02c78408b50d42606407287d6466b9d7dc1dea413bc",
+      "skills/setup/references/maintenance.md": "ede24c48c4e92248b5dd01c0dc28187c2ef19c8bc09445820bb77198f4b58dbf",
+      "skills/setup/references/repository.md": "7a03d71898a91f9de98bc10b1207506e2f61ffafd269d9108d59ca6e800c5ed0",
+      "skills/harness-orient/scripts/orient.py": "ef3dc7dbd6544d22c29c98d287caa5043d7a1ba1f7aef485852a1447451c2cac",
+      "skills/harness-operator-brief/agents/openai.yaml": "3b82e13fbe48a36d1095e2ff2f3eddd54499c3ab3709d51483dd79ab73776def",
+      "skills/harness-operator-brief/scripts/check_brief.py": "ae83b40b199a3613de42f48c6d7480b45890116c5f9454b26bc05b4688777274",
+      "skills/evidence/references/external-actions.md": "99c8c7dbc30cd19caad6ce3ab42c46bb8820caff8f78b575abb76320ecb2c695",
+      "skills/evidence/references/records.md": "462e60635c8f3e08257d2ae27b6c690bc340dc5bc6fe2244b4d44ec9984fda3c",
+      "skills/change/references/artifacts.md": "0f515452b55aa4f35dfb5886a0a3607c533592059b8424233437b60c4a341e91",
+      "skills/change/references/authority.md": "967aa805a16358278355c526d4c16d215c16b481c3c0f15529e8780e695b16a0",
+      "skills/change/references/work-orders.md": "bd8cbd793407119408f81f9aa204426cc1291182e55e8e140af02c27bc362674",
+      "hooks/hooks.json": "3331f50d1d61b23510f12afb2d3882b42a8cb606b77e645d1380c621ead9c2d6"
+    },
+    "claude": {
+      "assets/bootstrap.md": "3dee5f82b3e65b62fd4ccb2fcc30d224f24b0d58f7fc4a290d3578584d1fbacd",
+      "scripts/activate.py": "2b7f3d0aa5f5e994c347f1b453bcea0bd73fad7d12ede73d2a4be2bd24a78c54",
+      "scripts/harness_runtime.py": "6efaf415547fb311f889d145b269f885329450ecd2042d3c3022df9619bd1aa4",
+      "scripts/inject_instructions.py": "a962f74c100a5e57562ed5b1039df6ff2acf1edd12f24ead9500f9d6c2e38afc",
+      "scripts/setup.py": "282581fb69daabfa04909083b684385b6feeb8b72ef274c96ff04ad0171953eb",
+      "skills/change/SKILL.md": "7f167d8b2ccd13383be09769852fef100943cde07bab0bbfcbc9ac2ee17822c0",
+      "skills/evidence/SKILL.md": "810bd24204f2e003f796be422991f60fe78feec540c09ffb7debf46415754cf7",
+      "skills/harness-operator-brief/skill-contract.json": "5bb8bdcc254132489e6f67e8091dbea7f69404b6eb66434a98592a949483a842",
+      "skills/harness-operator-brief/SKILL.md": "3cba405afb93814ce3f79d5d762f8e310f32905475af1dfcf7508e4e935565f3",
+      "skills/harness-orient/skill-contract.json": "6dd5ad01256553328715df74924d1cce6ea6d368701681b48e1d045560eb7606",
+      "skills/harness-orient/SKILL.md": "722cf124a15e5003eccce92cf8573a4c30e59a772aa3f8b8f426104900f13c7d",
+      "skills/setup/SKILL.md": "3b60bb4fa25a3d7312c6828ccba0a814aba45a8f33d30eaae63122ae912f0c6d",
+      "skills/setup/references/environment.md": "3ccad389ba80926437cfc02c78408b50d42606407287d6466b9d7dc1dea413bc",
+      "skills/setup/references/maintenance.md": "ede24c48c4e92248b5dd01c0dc28187c2ef19c8bc09445820bb77198f4b58dbf",
+      "skills/setup/references/repository.md": "7a03d71898a91f9de98bc10b1207506e2f61ffafd269d9108d59ca6e800c5ed0",
+      "skills/harness-orient/scripts/orient.py": "ef3dc7dbd6544d22c29c98d287caa5043d7a1ba1f7aef485852a1447451c2cac",
+      "skills/harness-operator-brief/agents/openai.yaml": "3b82e13fbe48a36d1095e2ff2f3eddd54499c3ab3709d51483dd79ab73776def",
+      "skills/harness-operator-brief/scripts/check_brief.py": "ae83b40b199a3613de42f48c6d7480b45890116c5f9454b26bc05b4688777274",
+      "skills/evidence/references/external-actions.md": "99c8c7dbc30cd19caad6ce3ab42c46bb8820caff8f78b575abb76320ecb2c695",
+      "skills/evidence/references/records.md": "462e60635c8f3e08257d2ae27b6c690bc340dc5bc6fe2244b4d44ec9984fda3c",
+      "skills/change/references/artifacts.md": "0f515452b55aa4f35dfb5886a0a3607c533592059b8424233437b60c4a341e91",
+      "skills/change/references/authority.md": "967aa805a16358278355c526d4c16d215c16b481c3c0f15529e8780e695b16a0",
+      "skills/change/references/work-orders.md": "bd8cbd793407119408f81f9aa204426cc1291182e55e8e140af02c27bc362674",
+      "hooks/hooks.json": "75d1f988195fcaefc78a558d9209a1ed4fbf47cc08d3f83298e3784559c4ccb9"
+    }
+  },
+  "entry_expectations": {
+    "0.21.0": {
+      "sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+      "basis": "Template read independently from the selected wheel and rendered with the fixture project name."
+    },
+    "0.20.0": {
+      "sha256": "e432765e8ed90b3a2131c881ea4321e7980108f767382e4648c9b62e7d28df8e",
+      "basis": "Template read independently from the selected wheel and rendered with the fixture project name."
+    }
+  },
+  "observations": [
+    {
+      "source": "claude-activate-legacy.json:SessionStart:resume",
+      "bootstrap": true
+    },
+    {
+      "source": "claude-activate-retry1.json:SessionStart:resume",
+      "bootstrap": true
+    },
+    {
+      "source": "claude-activate-switch-clear.json:SessionStart:resume",
+      "entry_complete": true,
+      "version": "0.20.0",
+      "entry_sha256": "e432765e8ed90b3a2131c881ea4321e7980108f767382e4648c9b62e7d28df8e",
+      "utf16_units": 9163
+    },
+    {
+      "source": "claude-activate.json:SessionStart:resume",
+      "bootstrap": true
+    },
+    {
+      "source": "claude-automatic-fixed.json:SessionStart:resume",
+      "entry_complete": true,
+      "version": "0.21.0",
+      "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+      "utf16_units": 9993
+    },
+    {
+      "source": "claude-automatic-fixed.json:SessionStart:compact",
+      "entry_complete": true,
+      "version": "0.21.0",
+      "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+      "utf16_units": 9993
+    },
+    {
+      "source": "claude-automatic.json:SessionStart:resume",
+      "entry_complete": true,
+      "version": "0.21.0",
+      "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+      "utf16_units": 9993
+    },
+    {
+      "source": "claude-automatic.json:SessionStart:compact",
+      "entry_complete": true,
+      "version": "0.21.0",
+      "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+      "utf16_units": 9993
+    },
+    {
+      "source": "claude-isolation-cleared.json:SessionStart:resume",
+      "bootstrap": true
+    },
+    {
+      "source": "claude-isolation-preserved.json:SessionStart:resume",
+      "entry_complete": true,
+      "version": "0.21.0",
+      "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+      "utf16_units": 9993
+    },
+    {
+      "source": "claude-manual-compact-fixed.json:SessionStart:resume",
+      "entry_complete": true,
+      "version": "0.21.0",
+      "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+      "utf16_units": 9993
+    },
+    {
+      "source": "claude-manual-compact-fixed.json:SessionStart:compact",
+      "entry_complete": true,
+      "version": "0.21.0",
+      "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+      "utf16_units": 9993
+    },
+    {
+      "source": "claude-manual-compact-legacy.json:SessionStart:resume",
+      "entry_complete": true,
+      "version": "0.20.0",
+      "entry_sha256": "e432765e8ed90b3a2131c881ea4321e7980108f767382e4648c9b62e7d28df8e",
+      "utf16_units": 9163
+    },
+    {
+      "source": "claude-manual-compact-legacy.json:SessionStart:compact",
+      "entry_complete": true,
+      "version": "0.20.0",
+      "entry_sha256": "e432765e8ed90b3a2131c881ea4321e7980108f767382e4648c9b62e7d28df8e",
+      "utf16_units": 9163
+    },
+    {
+      "source": "claude-manual-compact.json:SessionStart:resume",
+      "entry_complete": true,
+      "version": "0.21.0",
+      "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+      "utf16_units": 9993
+    },
+    {
+      "source": "claude-manual-compact.json:SessionStart:compact",
+      "entry_complete": true,
+      "version": "0.21.0",
+      "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+      "utf16_units": 9993
+    },
+    {
+      "source": "claude-parallel-startup.json:SessionStart:startup",
+      "bootstrap": true
+    },
+    {
+      "source": "claude-resumed.json:SessionStart:resume",
+      "entry_complete": true,
+      "version": "0.21.0",
+      "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+      "utf16_units": 9993
+    },
+    {
+      "source": "claude-startup.json:SessionStart:startup",
+      "bootstrap": true
+    },
+    {
+      "source": "codex-startup/native-events.jsonl:initialize",
+      "bootstrap": true
+    },
+    {
+      "source": "codex-flow/native-events.jsonl:startup",
+      "bootstrap": true
+    },
+    {
+      "source": "codex-flow/native-events.jsonl:after-manual",
+      "bootstrap": true
+    },
+    {
+      "source": "codex-flow/resume/native-events.jsonl:resumed",
+      "bootstrap": true
+    },
+    {
+      "source": "codex-recovery/native-events.jsonl:recovery",
+      "bootstrap": true
+    },
+    {
+      "source": "codex-recovery-fixed/native-events.jsonl:recovery-fixed",
+      "bootstrap": true
+    },
+    {
+      "source": "codex-automatic/native-events.jsonl:automatic",
+      "entry_complete": true,
+      "version": "0.21.0",
+      "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+      "utf16_units": 10002
+    },
+    {
+      "source": "codex-automatic/native-events.jsonl:automatic",
+      "entry_complete": true,
+      "version": "0.21.0",
+      "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+      "utf16_units": 10002
+    },
+    {
+      "source": "codex-manual-fixed/native-events.jsonl:manual-fixed",
+      "entry_complete": true,
+      "version": "0.21.0",
+      "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+      "utf16_units": 10002
+    },
+    {
+      "source": "codex-manual-fixed/native-events.jsonl:manual-fixed",
+      "entry_complete": true,
+      "version": "0.21.0",
+      "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+      "utf16_units": 10002
+    },
+    {
+      "source": "codex-parallel/cleared/native-events.jsonl:cleared",
+      "bootstrap": true
+    },
+    {
+      "source": "codex-parallel/corrupt-record/native-events.jsonl:corrupt-record",
+      "delivery_gap": true
+    },
+    {
+      "source": "codex-parallel/native-events.jsonl:independent-startup",
+      "bootstrap": true
+    },
+    {
+      "source": "codex-parallel/native-events.jsonl:legacy-compaction",
+      "entry_complete": true,
+      "version": "0.20.0",
+      "entry_sha256": "e432765e8ed90b3a2131c881ea4321e7980108f767382e4648c9b62e7d28df8e",
+      "utf16_units": 9164
+    },
+    {
+      "source": "codex-parallel/switched/native-events.jsonl:switched",
+      "entry_complete": true,
+      "version": "0.21.0",
+      "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+      "utf16_units": 10002
+    },
+    {
+      "source": "codex-concurrent/native-events.jsonl:concurrent-resume",
+      "entry_complete": true,
+      "version": "0.20.0",
+      "entry_sha256": "e432765e8ed90b3a2131c881ea4321e7980108f767382e4648c9b62e7d28df8e",
+      "utf16_units": 9164
+    },
+    {
+      "source": "codex-concurrent/native-events.jsonl:concurrent-resume",
+      "entry_complete": true,
+      "version": "0.21.0",
+      "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+      "utf16_units": 10002
+    },
+    {
+      "source": "codex-concurrent/native-events.jsonl:after-concurrent-compaction",
+      "entry_complete": true,
+      "version": "0.20.0",
+      "entry_sha256": "e432765e8ed90b3a2131c881ea4321e7980108f767382e4648c9b62e7d28df8e",
+      "utf16_units": 9164
+    },
+    {
+      "source": "codex-concurrent/native-events.jsonl:after-concurrent-compaction",
+      "entry_complete": true,
+      "version": "0.21.0",
+      "entry_sha256": "9c581e0e80d3e1851eb5ce46bffd06945264aa366b64b7360232c5bee4319990",
+      "utf16_units": 10002
+    }
+  ],
+  "coverage": [
+    {
+      "criterion": "Bootstrap, clone and immediate activation",
+      "status": "passed_native_cli",
+      "detail": "Claude cloned and activated in one native session. Codex started before its fixture clone, then its agent activated through individually reviewed commands."
+    },
+    {
+      "criterion": "Manual and automatic compaction; same-session resume",
+      "status": "passed_native_cli",
+      "detail": "Both hosts delivered the complete independent expected entry. Claude reported trigger=auto. Codex emitted contextCompaction during an ordinary turn without a compact RPC. Threshold overrides were local to the test invocation."
+    },
+    {
+      "criterion": "Two releases and compatible plugin update",
+      "status": "passed_native_cli",
+      "detail": "0.20.0 and 0.21.0 were selected independently and switched explicitly. Claude retained its selection across the tested adapter update. The selected evaluator wheel did not change."
+    },
+    {
+      "criterion": "Concurrent sessions and private setup",
+      "status": "passed_observed_cases",
+      "detail": "Two Codex sessions ran and compacted simultaneously with distinct releases. Claude activation and compaction overlapped in independent sessions. Portable tests cover immutable setup and controlled contention."
+    },
+    {
+      "criterion": "Selection failure, switch and clear",
+      "status": "passed_observed_cases",
+      "detail": "Native Codex rejected a corrupt record without fallback, then switching and clearing passed. Both hosts retained the other session selection. Interrupted replacement and missing resources remain covered by portable boundary tests."
+    },
+    {
+      "criterion": "Offline package use and unavailable resources",
+      "status": "passed_portable",
+      "detail": "Both installed-wheel walkthroughs passed. No claim of a disconnected native model session."
+    },
+    {
+      "criterion": "Codex Windows desktop",
+      "status": "unassessed",
+      "detail": "Computer Use discovered the installed app as ChatGPT. Its guidance explicitly prohibits automating the ChatGPT desktop app UI. Native app-server results are not substituted for desktop qualification."
+    },
+    {
+      "criterion": "Repeated new/resumed work through exact delivery-authority handoff",
+      "status": "unassessed",
+      "detail": "This run qualified selection and context recovery, not the complete artifact/work-order/delivery walkthrough. No real publication was attempted."
+    },
+    {
+      "criterion": "Packaging and ownership",
+      "status": "passed_observed_inputs",
+      "detail": "Final assembly/focused checks passed. Native-tested runtime, skills, assets and hooks match the candidate exactly; only the README explanation changed after package assembly. Real host settings and credentials were not changed. Existing disposable authentication was reused without credential copying."
+    }
+  ],
+  "preserved_failures": [
+    "Initial Claude test-launcher argument parsing failure; corrected by an explicit -- separator.",
+    "Local fixture clone initially failed on Git safe.directory ownership; the native agent used a transient upload-pack wrapper.",
+    "Codex Windows sandbox process creation failed before activation; exact commands subsequently passed native approval without a persistent permission rule.",
+    "Native Codex activation refused the 10,002-unit entry before the in-scope fix.",
+    "The disposable marketplace add refused an existing source; a one-invocation source override installed the candidate successfully."
+  ],
+  "limits": [
+    "No desktop qualification, VREC, human verification, completion transition, push, PR, release or adoption.",
+    "The old 0.2.2 package was restored in the disposable Codex profile after testing; test traces, fixtures and session records remain available."
+  ],
+  "trace_file": {
+    "path": "native-traces.json",
+    "sha256": "6b81c22a3be29482971d2febbb16b7f90916ae48c87485d1f2fb05a4de119a74"
+  },
+  "evaluator_restitution": {
+    "outcome": "completed",
+    "done": [
+      "Projected the selected scope for WO-IAR-029."
+    ],
+    "not_done": [],
+    "blocked_by": [],
+    "current_lifecycle_state": [
+      "WO-IAR-029 is in_progress."
+    ],
+    "decision_required": null,
+    "next": {
+      "procedure_id": "PROC-WO-IMPLEMENT",
+      "step_id": "STEP-WO-IMPLEMENT-CHECK",
+      "action": "Run the bound command"
+    },
+    "command_or_response": {
+      "kind": "command",
+      "argv": [
+        "harnessctl",
+        "check",
+        ".",
+        "--artifact",
+        "WO-IAR-029",
+        "--checkpoint",
+        "handoff"
+      ]
+    },
+    "alternatives": []
+  }
+}
