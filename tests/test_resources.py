@@ -13,7 +13,10 @@ from se_harness.evaluator_identity import installed_evaluator_identity
 from se_harness.instruction_discovery import describe, load_catalog, locations
 from se_harness.integrity import EXTERNAL_RESOURCE_LAYOUT, HASH_ALGORITHM, HASH_MODE, validate_lock
 from se_harness.preflight import inspect_installation
+from se_harness.workflow_result import machine_fields, restitution_digest
+from tests.artifact_support import create_base_chain, record_execution_approval
 from tests.cli_support import invoke
+from tests.fixture_support import standard_repository
 from tests.mutation_guard_support import patch_mutation_authority
 
 
@@ -97,6 +100,100 @@ class ResourceTests(unittest.TestCase):
                 self.assertEqual(legacy["agent_instructions"]["current_step"]["location"]["file"], external["agent_instructions"]["current_step"]["location"]["file"])
                 self.assertNotIn(str(self.bundle), json.dumps(external))
                 self.assertNotIn(str(self.root), json.dumps(external))
+
+    def workflow_fixture(self, status="approved"):
+        create_base_chain(self.root, work_order_status=status, operating_contract_status="draft")
+        for artifact in (self.root / "docs/engineering/product").rglob("*.md"):
+            artifact.write_text(artifact.read_text(encoding="utf-8").replace("WO-001", "WO-TST-001"), encoding="utf-8")
+        original_path = self.root / "docs/engineering/product/work-orders/WO-001.md"
+        path = original_path.with_name("WO-TST-001.md")
+        original_path.rename(path)
+        path.write_text(path.read_text(encoding="utf-8").replace(
+            "[relations]",
+            '[assurance]\ncommit_bound_verification = "required"\n'
+            'rationale = "Exact candidate required."\ndecided_by = "repository-owner"\n\n'
+            '[execution_scope]\npaths = ["src/component/"]\n\n[relations]', 1,
+        ), encoding="utf-8")
+        record_execution_approval(path)
+        return path
+
+    def test_public_results_preserve_legacy_lifecycle_and_scope_verdicts(self):
+        work = self.workflow_fixture()
+        legacy = Path(self.temp.name) / "legacy"
+        standard_repository(legacy)
+        shutil.copytree(self.root / "docs/engineering/product", legacy / "docs/engineering/product", dirs_exist_ok=True)
+        # Byte-preservation setup remains required for hash-bound evidence.
+        shutil.copyfile(legacy / ".gitattributes", self.root / ".gitattributes")
+        cases = (
+            ("approved", (), 0, None),
+            ("approved", ("--checkpoint", "start"), 0, "pass"),
+            ("in_progress", (), 0, None),
+            ("in_progress", ("--checkpoint", "scope", "--changed-path", "src/component/ok.py", "--changes-complete"), 0, "pass"),
+            ("in_progress", ("--checkpoint", "scope", "--changed-path", "src/outside.py", "--changes-complete"), 1, "fail"),
+            ("in_progress", ("--checkpoint", "scope", "--changed-path", "src/component/ok.py"), 1, "not_assessable"),
+        )
+        original = work.read_text(encoding="utf-8")
+        for status, arguments, expected_code, expected_gate in cases:
+            with self.subTest(status=status, arguments=arguments):
+                for root in (self.root, legacy):
+                    (root / work.relative_to(self.root)).write_text(
+                        original.replace('status = "approved"', f'status = "{status}"', 1), encoding="utf-8",
+                    )
+                    record_execution_approval(root / work.relative_to(self.root))
+                results = []
+                for root in (legacy, self.root):
+                    code, output, error = invoke("check", str(root), "--artifact", "WO-TST-001", *arguments, "--json")
+                    self.assertEqual(expected_code, code, output + error)
+                    results.append(json.loads(output))
+                old, new = results
+                self.assertEqual("se-harness-instruction-discovery-v1", old["instruction_discovery"]["schema"])
+                self.assertEqual("se-harness-instruction-discovery-v2", new["instruction_discovery"]["schema"])
+                self.assertEqual("available", new["instruction_discovery"]["status"])
+                for field in ("operation", "state", "procedure", "scope", "restitution"):
+                    self.assertEqual(old[field], new[field], field)
+                self.assertEqual(old["compliance"]["gates"], new["compliance"]["gates"])
+                if expected_gate is not None:
+                    self.assertEqual(expected_gate, new["compliance"]["status"])
+                else:
+                    discovery = new["instruction_discovery"]
+                    self.assertEqual("repository", discovery["formal_artifact_source"])
+                    self.assertIn({"id": "WO-TST-001", "file": work.relative_to(self.root).as_posix()}, discovery["formal_artifacts"])
+                    self.assertNotIn(resources.ENTRY, new["context"]["reading_manifest"])
+
+    def test_public_result_digest_binds_resource_identity_but_not_local_paths(self):
+        self.workflow_fixture()
+        relocated = Path(self.temp.name) / "relocated"
+        shutil.copytree(self.root, relocated)
+        relocated_bundle = Path(self.temp.name) / "relocated-resources"
+        shutil.copytree(self.bundle, relocated_bundle)
+        results = []
+        for root, bundle in ((self.root, self.bundle), (relocated, relocated_bundle)):
+            with patch.object(resources, "_installed_resource_root", return_value=bundle):
+                code, output, error = invoke("check", str(root), "--artifact", "WO-TST-001", "--json")
+            self.assertEqual(0, code, output + error)
+            result = json.loads(output)
+            self.assertEqual(result["result_sha256"], restitution_digest(result))
+            self.assertNotIn(str(root), json.dumps(machine_fields(result)))
+            self.assertNotIn(str(bundle), json.dumps(machine_fields(result)))
+            results.append(result)
+        self.assertEqual(results[0]["result_sha256"], results[1]["result_sha256"])
+        altered = deepcopy(results[0])
+        altered["instruction_discovery"]["release"]["payload_sha256"] = "0" * 64
+        self.assertNotEqual(results[0]["result_sha256"], restitution_digest(altered))
+
+    def test_public_checkpoint_reports_unavailable_selection_without_instruction_fallback(self):
+        self.workflow_fixture("in_progress")
+        self.lock["evaluator"]["payload_sha256"] = "0" * 64
+        self.write_lock()
+        before = self.files()
+        code, output, error = invoke("check", str(self.root), "--artifact", "WO-TST-001", "--checkpoint", "scope",
+                                    "--changed-path", "src/component/ok.py", "--changes-complete", "--json")
+        self.assertEqual(0, code, output + error)  # Scope supplies no execution authority.
+        discovery = json.loads(output)["instruction_discovery"]
+        self.assertEqual("incompatible", discovery["status"])
+        self.assertIn("payload_sha256", discovery["reason"])
+        self.assertNotIn("agent_instructions", discovery)
+        self.assertEqual(before, self.files())
 
     def test_wrong_version_digest_missing_or_changed_resource_refuses_before_authoring(self):
         for problem in ("version", "digest", "missing", "altered"):

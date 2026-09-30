@@ -646,6 +646,7 @@ def check_workflow(
         "alternatives": [f"Use complete alternative procedure {identifier}." for identifier in alternatives],
     }
     result = build_result(
+        repository=root,
         operation="check",
         outcome=outcome,
         primary=artifact_id,
@@ -768,6 +769,7 @@ def selected_result(
         ],
     }
     return build_result(
+        repository=root,
         operation=operation,
         outcome="blocked" if blocked else "completed",
         primary=primary.artifact_id,

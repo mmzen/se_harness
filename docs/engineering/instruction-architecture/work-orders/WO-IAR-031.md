@@ -2,10 +2,15 @@
 id = "WO-IAR-031"
 type = "work_order"
 title = "Bind workflow discovery to the selected resource layout"
-status = "draft"
+status = "in_progress"
 owners = ["mmzen"]
 created = "2026-09-30"
 updated = "2026-09-30"
+
+[assurance]
+commit_bound_verification = "required"
+rationale = "Human mmzen confirmed required commit-bound verification. Agents and CI rely on these workflow instruction references."
+decided_by = "mmzen"
 
 [execution_scope]
 paths = [
@@ -25,6 +30,21 @@ implements = ["REQ-IAR-029"]
 specifications = ["SPEC-IAR-016"]
 architecture = ["ARCH-IAR-012", "ADR-IAR-012"]
 verification = ["VER-IAR-020"]
+
+[[lifecycle_events]]
+from = "draft"
+to = "approved"
+decided_at = "2026-09-30T11:44:54Z"
+decided_by = "mmzen"
+reason = "Human mmzen confirmed: Approve WO-IAR-031 and verification. Covers the two omitted workflow-result files and required commit-bound verification under VER-IAR-020. Reviewed SHA-256 b50f187883677ea4a9f8b5b090ebb2bd2fa8df93b58e0052650efd29959f4b83. Only confirmed assurance metadata and its explanatory paragraph were completed before preview."
+scope_paths = ["se_harness/workflow_result.py", "se_harness/workflow_compliance.py", "tests/test_resources.py", "docs/engineering/instruction-architecture/work-orders/WO-IAR-031.md", "docs/engineering/instruction-architecture/evidence/WO-IAR-031/", "docs/engineering/instruction-architecture/verification-records/VREC-IAR-018.md", "docs/engineering/instruction-architecture/evidence/VREC-IAR-018-evaluator.json", "docs/engineering/instruction-architecture/verification-records/VREC-IAR-020.md", "docs/engineering/instruction-architecture/evidence/VREC-IAR-020-evaluator.json"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-30T11:49:38Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
 +++
 
 # Bind workflow discovery to the selected resource layout
@@ -44,11 +64,10 @@ instruction-discovery gap. Do not change gate predicates, lifecycle decisions,
 next-action arguments or the existing result-digest algorithm. Do not put local
 resource paths in portable result identity; the resource query resolves them.
 
-## Proposed assurance
+## Confirmed assurance
 
-Required commit-bound verification: agents and CI rely on the returned reading
-locations. Human confirmation is requested with approval; no assurance decision
-is recorded by this draft.
+Required commit-bound verification. Human mmzen confirmed: "Approve WO-IAR-031
+and verification". Agents and CI rely on the returned reading locations.
 
 ## Execution and decision envelope
 
