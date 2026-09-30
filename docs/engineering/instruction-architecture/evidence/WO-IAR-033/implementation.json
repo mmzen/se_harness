@@ -1,0 +1,328 @@
+{
+  "work_order": "WO-IAR-033",
+  "verification": "VER-IAR-020",
+  "tested_candidate": {
+    "commit": "d8fad3c638c7fdad078782e03c766343035ee4c9",
+    "runtime": {
+      "python": "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+      "module": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\se_harness\\__init__.py",
+      "harness_version": "0.21.0"
+    },
+    "files": {
+      "docs/notes/harnessctl-reference.md": "b538604fe46c8c2a3f3edeb1db20e96ac12c33b7f9a4aeb865a293dc7d73c317",
+      "tests/test_cli_shape.py": "23e98a8a478f3593c9eb8595d7bc98264761921513626db14adacb6bc9cb3ab9",
+      "tests/test_integrity_primitives.py": "3a729f45fefbd53a843e981e2f7933eb6bcd883db6a7b27a9d7198c238f43561",
+      "docs/engineering/instruction-architecture/work-orders/WO-IAR-033.md": "ae3650f6d21fb5bf5aae72e92098ee22bd069dcd6b47b19f5bbe0ec07c6eaa02"
+    }
+  },
+  "governing_evaluator": {
+    "version": "0.20.0",
+    "python": "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+    "invocation": [
+      "-I",
+      "-m",
+      "se_harness"
+    ]
+  },
+  "original_ci": {
+    "url": "https://github.com/mmzen/se_harness/actions/runs/36714116390",
+    "pr_head": {
+      "parents": [
+        "8d56b25371aea3e501e65e7a0ddac320a417c7f8"
+      ],
+      "sha": "5249f0c586c4194b255fc90aeeb4de29483b875a",
+      "tree": "5115f5b7965bcb38cea25aff7a14e2312c15ad1d"
+    },
+    "actual_tested_merge": {
+      "parents": [
+        "4a03dabcd632976b8262f5f516b1810a850e2209",
+        "5249f0c586c4194b255fc90aeeb4de29483b875a"
+      ],
+      "sha": "6ca3225295a6570462fdea30b7dce38d25cd272f",
+      "tree": "5115f5b7965bcb38cea25aff7a14e2312c15ad1d"
+    },
+    "identity_note": "The work-order objective names the PR head. CI actually tested its synthetic merge commit; both have exactly the same Git tree. Preserve the approved work-order wording and record the precise test identity here.",
+    "summary": {
+      "candidate": "6ca3225295a6570462fdea30b7dce38d25cd272f",
+      "working_tree": "clean",
+      "command": [
+        "/opt/hostedtoolcache/Python/3.11.16/x64/bin/python",
+        "scripts/run_tests.py",
+        "--workers",
+        "4",
+        "--scale",
+        "full",
+        "--timings",
+        "target/test-timings.json"
+      ],
+      "cwd": "/home/runner/work/se_harness/se_harness",
+      "checker": {
+        "version": "0.21.0",
+        "origin": "/home/runner/work/se_harness/se_harness/se_harness/__init__.py"
+      },
+      "started_at": "2026-09-30T12:21:02.213656+00:00",
+      "exit_code": 1,
+      "result": "fail",
+      "output_tail": "erence_exactly_covers_current_cli\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/se_harness/se_harness/tests/test_progressive_documentation.py\", line 290, in test_command_reference_exactly_covers_current_cli\n    self.assertEqual(set(command_action.choices), table_commands)\nAssertionError: Items in the first set but not the second:\n'resources'\n\n======================================================================\nFAIL: test_cli_shape.ParserShapeTests.test_every_subcommand_is_classified_and_takes_target_accordingly\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/runner/work/se_harness/se_harness/tests/test_cli_shape.py\", line 55, in test_every_subcommand_is_classified_and_takes_target_accordingly\n    self.assertEqual(\nAssertionError: Items in the second set but not the first:\n'resources'\n\n======================================================================\nFAIL: test_integrity_primitives.OwnershipLockBoundaryTests.test_schema_extension_keeps_pre3_floor_and_rejects_unknown_or_noninteger_formats (schema=5)\n----------------------------------------------------------------------\nse_harness.integrity.IntegrityError: schema 5 requires the released-resources-v1 layout\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/work/se_harness/se_harness/tests/test_integrity_primitives.py\", line 60, in test_schema_extension_keeps_pre3_floor_and_rejects_unknown_or_noninteger_formats\n    with self.subTest(schema=schema), self.assertRaisesRegex(integrity.IntegrityError, \"unsupported lock schema\"):\nAssertionError: \"unsupported lock schema\" does not match \"schema 5 requires the released-resources-v1 layout\"\n\n----------------------------------------------------------------------\nRan 1175 tests in 32.075s (178 classes, 4 workers)\n\nFAILED (failures=3, skipped=2)\n",
+      "raw": {
+        "file": "output.log",
+        "bytes": 2645,
+        "artifact": "candidate-source-raw",
+        "repository": "mmzen/se_harness",
+        "run_id": "36714116390",
+        "run_url": "https://github.com/mmzen/se_harness/actions/runs/36714116390",
+        "retention_days": 14,
+        "estimated_expiry": "2026-10-14T12:21:02.213656+00:00",
+        "availability": "local; upload not yet confirmed",
+        "download_command": [
+          "gh",
+          "run",
+          "download",
+          "36714116390",
+          "--repo",
+          "mmzen/se_harness",
+          "--name",
+          "candidate-source-raw"
+        ]
+      }
+    },
+    "downloaded_summary": {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\ci033-original-ci-artifact\\summary.json",
+      "sha256": "8d9d8b116f84bddab1bda01fd213a787d152fc88f8c719754998f6113def17fb",
+      "bytes": 3199,
+      "availability": "retained local file; no new CI upload claimed"
+    },
+    "downloaded_output": {
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\ci033-original-ci-artifact\\output.log",
+      "sha256": "24cd0d659ee0a351ad24bd4dd7c1c189b7d07c0c5e67bc3c98b8a328fd68a6e0",
+      "bytes": 2645,
+      "availability": "retained local file; no new CI upload claimed"
+    },
+    "artifact_observation": "gh run download succeeded during correction preparation. The retained CI summary was written before upload; its availability field is historical. Remote expiry remains estimated there."
+  },
+  "checks": [
+    {
+      "label": "pr506-ci-local-reproduction",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\pr506-ci-local-reproduction.json",
+        "sha256": "676c977a778b10dbffceadcdebd561a4f5b98488c6848f9669b41fb370593273",
+        "bytes": 3654,
+        "availability": "retained local file; no new CI upload claimed"
+      },
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "unittest",
+        "tests.test_progressive_documentation.ProgressiveDocumentationTests.test_command_reference_exactly_covers_current_cli",
+        "tests.test_cli_shape.ParserShapeTests.test_every_subcommand_is_classified_and_takes_target_accordingly",
+        "tests.test_integrity_primitives.OwnershipLockBoundaryTests.test_schema_extension_keeps_pre3_floor_and_rejects_unknown_or_noninteger_formats"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 1,
+      "restitution": null,
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null,
+      "output_excerpt": "------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_progressive_documentation.py\", line 290, in test_command_reference_exactly_covers_current_cli\n    self.assertEqual(set(command_action.choices), table_commands)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Items in the first set but not the second:\n'resources'\n\n======================================================================\nFAIL: test_every_subcommand_is_classified_and_takes_target_accordingly (tests.test_cli_shape.ParserShapeTests.test_every_subcommand_is_classified_and_takes_target_accordingly)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_cli_shape.py\", line 55, in test_every_subcommand_is_classified_and_takes_target_accordingly\n    self.assertEqual(\n    ~~~~~~~~~~~~~~~~^\n        REPOSITORY_COMMANDS | NON_REPOSITORY_COMMANDS | {\"qualify\"},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        set(choices),\n        ^^^^^^^^^^^^^\n    )\n    ^\nAssertionError: Items in the second set but not the first:\n'resources'\n\n======================================================================\nFAIL: test_schema_extension_keeps_pre3_floor_and_rejects_unknown_or_noninteger_formats (tests.test_integrity_primitives.OwnershipLockBoundaryTests.test_schema_extension_keeps_pre3_floor_and_rejects_unknown_or_noninteger_formats) (schema=5)\n----------------------------------------------------------------------\nse_harness.integrity.IntegrityError: schema 5 requires the released-resources-v1 layout\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\tests\\test_integrity_primitives.py\", line 60, in test_schema_extension_keeps_pre3_floor_and_rejects_unknown_or_noninteger_formats\n    with self.subTest(schema=schema), self.assertRaisesRegex(integrity.IntegrityError, \"unsupported lock schema\"):\n                                      ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: \"unsupported lock schema\" does not match \"schema 5 requires the released-resources-v1 layout\"\n\n----------------------------------------------------------------------\nRan 3 tests in 0.026s\n\nFAILED (failures=3)\n"
+    },
+    {
+      "label": "ci033-focused",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\ci033-focused.json",
+        "sha256": "81cf3c004e9bc319c62abf3e1062243eced1dc42e39492e8143b838553ce1259",
+        "bytes": 796,
+        "availability": "retained local file; no new CI upload claimed"
+      },
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-m",
+        "unittest",
+        "tests.test_cli_shape",
+        "tests.test_integrity_primitives",
+        "tests.test_progressive_documentation",
+        "tests.test_resources"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "restitution": null,
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null,
+      "output_excerpt": "0.21.0\n\n.............................................................s.........\n----------------------------------------------------------------------\nRan 71 tests in 20.197s\n\nOK (skipped=1)\n"
+    },
+    {
+      "label": "ci033-full-source",
+      "raw": {
+        "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\ci033-full-source.json",
+        "sha256": "52cd2fe62588003ce18045a08d4a7b42a20b4a03ece2a17c72acff9ee1e28e9f",
+        "bytes": 2163,
+        "availability": "retained local file; no new CI upload claimed"
+      },
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "scripts/record_evidence.py",
+        "--candidate",
+        "d8fad3c638c7fdad078782e03c766343035ee4c9",
+        "--output",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\ci033-source-evidence",
+        "--artifact",
+        "candidate-source-raw",
+        "--retention-days",
+        "14",
+        "--",
+        "scripts/run_tests.py",
+        "--workers",
+        "4",
+        "--scale",
+        "full",
+        "--timings",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\ci033-test-timings.json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "restitution": null,
+      "diagnostics": null,
+      "valid": null,
+      "error_count": null,
+      "warning_count": null,
+      "output_excerpt": "WEX_SCALE artifacts=100 validation=0.121859s focus=0.285278s plan=0.225960s\n\nWEX_SCALE artifacts=500 validation=0.555454s focus=0.712985s plan=1.059499s\n\nWEX_SCALE artifacts=1000 validation=1.080439s focus=1.270190s plan=2.088951s\n\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-jkpm2pca\\private\\verity-plane\\evaluator\\Scripts\\python.exe\n\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-jkpm2pca\\private\\verity-plane\\evaluator\\Scripts\\python.exe\n\n--workers must be at least 1\n\n0.21.0\n\ndocs/notes/diagnostic-codes.md matches the source\n\n----------------------------------------------------------------------\n\nRan 1176 tests in 207.082s (178 classes, 4 workers)\n\n\n\nOK (skipped=18)\n\n\npass: C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\ci033-source-evidence\\summary.json\n\nwarning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\nwarning: unable to access 'C:\\Users\\mathi/.config/git/ignore': Permission denied\n"
+    }
+  ],
+  "full_source_summary": {
+    "candidate": "d8fad3c638c7fdad078782e03c766343035ee4c9",
+    "working_tree": "clean",
+    "command": [
+      "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "scripts/run_tests.py",
+      "--workers",
+      "4",
+      "--scale",
+      "full",
+      "--timings",
+      "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\ci033-test-timings.json"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "checker": {
+      "version": "0.21.0",
+      "origin": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness\\se_harness\\__init__.py"
+    },
+    "started_at": "2026-09-30T12:30:59.035669+00:00",
+    "exit_code": 0,
+    "result": "pass",
+    "output_tail": "WEX_SCALE artifacts=100 validation=0.121859s focus=0.285278s plan=0.225960s\r\nWEX_SCALE artifacts=500 validation=0.555454s focus=0.712985s plan=1.059499s\r\nWEX_SCALE artifacts=1000 validation=1.080439s focus=1.270190s plan=2.088951s\r\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-jkpm2pca\\private\\verity-plane\\evaluator\\Scripts\\python.exe\r\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-jkpm2pca\\private\\verity-plane\\evaluator\\Scripts\\python.exe\r\n--workers must be at least 1\r\n0.21.0\r\ndocs/notes/diagnostic-codes.md matches the source\r\n----------------------------------------------------------------------\r\nRan 1176 tests in 207.082s (178 classes, 4 workers)\r\n\r\nOK (skipped=18)\r\n",
+    "raw": {
+      "file": "output.log",
+      "bytes": 717,
+      "artifact": "candidate-source-raw",
+      "repository": null,
+      "run_id": null,
+      "run_url": null,
+      "retention_days": 14,
+      "estimated_expiry": "2026-10-14T12:30:59.035669+00:00",
+      "availability": "local only",
+      "download_command": null
+    }
+  },
+  "full_source_raw": {
+    "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\ci033-source-evidence\\output.log",
+    "sha256": "38249d5bdfcd9cba4d37538719d042fe2596153f4403fa1408de5965e42ca174",
+    "bytes": 717,
+    "availability": "retained local file; no new CI upload claimed"
+  },
+  "package_input_comparison": {
+    "reference_commit": "0a8f588a239c0d3108953b7f986759b88e5b4251",
+    "argv": [
+      "git",
+      "diff",
+      "--name-only",
+      "0a8f588a239c0d3108953b7f986759b88e5b4251",
+      "--",
+      "se_harness/",
+      "templates/",
+      "pyproject.toml",
+      "MANIFEST.in",
+      "repository_tools/",
+      "scripts/"
+    ],
+    "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+    "exit_code": 0,
+    "diff": "",
+    "conclusion": "Evaluator code and package/build inputs are unchanged from the VREC-IAR-018 candidate. Only the approved documentation, regression tests and new work record changed."
+  },
+  "reused_qualification": {
+    "reference": "docs/engineering/instruction-architecture/evidence/WO-IAR-031/implementation.json",
+    "reference_sha256": "2e3bbde5aaaa29bbe759ffd352d673de0602a64219aad45ff641f1216c977898",
+    "verified_record": "VREC-IAR-018",
+    "candidate_evaluator": {
+      "version": "0.21.0",
+      "payload_manifest": "se-harness-installed-payload-v1",
+      "payload_sha256": "df621b84feecfd854e6ff56113867fdafabb7d8326acd6293b36c781d555bb44",
+      "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+      "archive_sha256": "04343a02735a368ad1cb3d2b3e5206f7f453d27150f0f4c39b411729a5dadef2"
+    },
+    "criteria": [
+      {
+        "criterion": "selected resource identity",
+        "status": "pass",
+        "evidence": "Both installed-wheel runs compare all queried resources against a manifest independently computed from wheel ZIP members."
+      },
+      {
+        "criterion": "artifact authoring",
+        "status": "pass",
+        "evidence": "Both installed-wheel runs create and validate only the requested REQ and WO drafts; no guide or template collection is copied."
+      },
+      {
+        "criterion": "policy and discovery parity",
+        "status": "pass",
+        "evidence": "Both installed-wheel runs compare six public legacy/external workflow cases: approved projection/start, in-progress projection, admitted scope, rejected scope, and incomplete scope. Source tests cover all 23 typed headings and relocated result identity."
+      },
+      {
+        "criterion": "refusal boundaries",
+        "status": "pass",
+        "evidence": "Unit boundary tests plus installed-wheel altered-template/path-escape refusals before authoring; Linux additionally checks a real installed-resource symlink."
+      },
+      {
+        "criterion": "CLI and CI independence",
+        "status": "pass",
+        "evidence": "Same exact wheel in private Windows and Linux environments outside checkout, without a host plugin. Python socket audit denies network; Linux also uses an isolated network namespace. No claim of host-wide Windows network disconnection."
+      }
+    ],
+    "basis": "Unchanged evaluator code, canonical resource templates and package/build tools. These observations are reused from the earlier exact wheel qualification, not claimed as new native-host or wheel runs."
+  },
+  "correction_assessment": [
+    {
+      "criterion": "CLI census and target shape",
+      "status": "pass",
+      "evidence": "The existing exact command-set and positional-target test now includes resources; no comparison was removed."
+    },
+    {
+      "criterion": "Command reference completeness",
+      "status": "pass",
+      "evidence": "The existing documentation-to-parser check passes. The new section identifies candidate-only availability, JSON schema, read-only behavior and single-resource content selection."
+    },
+    {
+      "criterion": "Schema refusal coverage",
+      "status": "pass",
+      "evidence": "Schema 6 remains rejected as unknown; older/noninteger formats remain refused. A new test rejects schema 5 without the required layout; existing resources tests cover valid schema 5 and resource-integrity failures."
+    },
+    {
+      "criterion": "Full source regression",
+      "status": "pass",
+      "evidence": "The approved full-scale source command passed at the committed correction; raw output and exact runtime are retained above."
+    }
+  ],
+  "review": [
+    "Only the three reviewed files and this work order were changed before testing.",
+    "No runtime code, accepted definition, previous assurance record or installed policy changed.",
+    "The patch keeps strict command equality and schema refusal checks; it does not suppress CI tests.",
+    "The correction is direct and adds no abstraction, dependency or new test framework."
+  ],
+  "limitations": [
+    "Corrected hosted CI has not run yet; the local source run does not replace integration CI.",
+    "No plugin delivery, installer migration, release or root adoption is claimed."
+  ],
+  "next": "Complete released handoff and capture a new ready verification record; human acceptance remains required."
+}

@@ -2,7 +2,7 @@
 id = "WO-IAR-033"
 type = "work_order"
 title = "Align the CLI reference and regression checks with external resources"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-09-30"
 updated = "2026-09-30"
@@ -43,6 +43,13 @@ to = "in_progress"
 decided_at = "2026-09-30T12:29:48Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-30T12:36:26Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Align the CLI reference and regression checks with external resources
