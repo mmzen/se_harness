@@ -1,0 +1,96 @@
+{
+  "work_order": "WO-IAR-028",
+  "status": "partial implementation; no completion or assurance claim",
+  "implementation_base": "3ed0fc5e89462011ea115ad4c4191067f815cf95",
+  "governing_evaluator": {
+    "python": "C:/Users/mathi/Documents/Codex/plugin-data/verity-plane/evaluator/Scripts/python.exe",
+    "version": "0.20.0"
+  },
+  "tests": [
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "tests.test_resources",
+        "tests.test_artifact_authoring",
+        "tests.test_artifact_authoring_policy",
+        "tests.test_instruction_discovery",
+        "tests.test_progressive_instruction_discovery",
+        "tests.test_instruction_architecture",
+        "tests.test_evaluator_identity",
+        "tests.test_hash_bound_integrity"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "role": "candidate-source",
+      "exit_code": 0,
+      "seconds": 65.50432062149048,
+      "stdout": "",
+      "stderr": "..........s............................................................................................................................s...\n----------------------------------------------------------------------\nRan 139 tests in 64.907s\n\nOK (skipped=2)\n"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "tests.test_resources",
+        "tests.test_artifact_authoring",
+        "tests.test_artifact_authoring_policy",
+        "tests.test_instruction_discovery",
+        "tests.test_progressive_instruction_discovery",
+        "tests.test_instruction_architecture",
+        "tests.test_evaluator_identity",
+        "tests.test_hash_bound_integrity"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "role": "candidate-source",
+      "exit_code": 0,
+      "seconds": 61.20138931274414,
+      "stdout": "",
+      "stderr": "...s.........s............................................................................................................................s...\n----------------------------------------------------------------------\nRan 142 tests in 60.670s\n\nOK (skipped=3)\n"
+    },
+    {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "tests.test_resources"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "role": "candidate-source",
+      "exit_code": 0,
+      "seconds": 8.141531705856323,
+      "stdout": "",
+      "stderr": "...s......\n----------------------------------------------------------------------\nRan 10 tests in 7.732s\n\nOK (skipped=1)\n"
+    }
+  ],
+  "review": {
+    "design": "Reuse the existing wheel payload manifest, one ResourceSet resolver, one explicit external layout and the retained legacy branch. No new dependency or resource registry.",
+    "findings_resolved": [
+      "Partial config/lock selection now refuses fallback to repository copies.",
+      "Recheck selection and payload before returning bytes or writing artifacts.",
+      "Reject linked resource inputs and source-tree fallback.",
+      "List resources with one final identity check instead of rehashing the full payload for every returned member.",
+      "git diff --check initially returned 2 because six touched source files retained checkout CRLF while this command used core.autocrlf=false. Restored LF only on those edited source files, matching their committed baseline; installed policy and other files remain unchanged."
+    ],
+    "remaining": [
+      "Wire selected repository through workflow_result.py and workflow_compliance.py after approval of WO-IAR-031.",
+      "Independently built wheel checks on Windows and network-disabled Linux.",
+      "Public lifecycle result parity, complete handoff, exact-candidate verification preparation."
+    ],
+    "line_endings_aligned": [
+      "se_harness/integrity.py",
+      "se_harness/artifact_layout.py",
+      "se_harness/preflight.py",
+      "se_harness/instruction_discovery.py",
+      "se_harness/cli.py",
+      "templates/repository/standard/ENGINEERING_HARNESS.md.tpl"
+    ]
+  }
+}

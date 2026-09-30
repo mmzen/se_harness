@@ -190,6 +190,24 @@ def inspect_installation(target: Path, *, verify_payload: bool = False) -> list[
         InstallationCheck("config", (target / CONFIG_NAME).is_file(), CONFIG_NAME),
         InstallationCheck("lock", (target / LOCK_NAME).is_file(), LOCK_NAME),
     ]
+    from se_harness.resources import ResourceSet, uses_external_resources
+    try:
+        if uses_external_resources(target):
+            resources = ResourceSet(target)
+            checks.append(InstallationCheck("released-resources", True, "selected wheel payload and declared instruction headings are available"))
+            for relative, entry in sorted(resources.lock["files"].items()):
+                path = safe_destination(target, Path(relative))
+                if entry["mode"] == "seed":
+                    passed = path.is_file() if entry["state"] == "present" else not path.exists()
+                else:
+                    current = tracked_content(entry["mode"], path.read_bytes()) if path.is_file() else None
+                    passed = current is not None and compare_lock_entry(entry, current) == "canonical"
+                checks.append(InstallationCheck(f"integration:{relative}", passed, "unchanged" if passed else "missing or changed"))
+            resources.assert_current()
+            return sorted(checks) + _hash_bound_checks(target)
+    except (OSError, UnicodeError, IntegrityError, HarnessError, ValueError) as exc:
+        checks.append(InstallationCheck("released-resources", False, str(exc)))
+        return sorted(checks) + _hash_bound_checks(target)
     for relative in REQUIRED_PATHS:
         checks.append(InstallationCheck(relative, (target / relative).is_file(), "required"))
 
@@ -708,9 +726,14 @@ def run_preflight(
         + sorted(verifications, key=lambda item: item.artifact_id)
         + ([work_order] if work_order is not None else [])
     )
-    manifest = _unique_paths(
-        list(READING_PATHS) + [_relative(item.path, root) for item in artifact_order]
-    )
+    from se_harness.resources import uses_external_resources
+    # External instructions belong to typed discovery, never the flat list of
+    # repository files. Legacy installations retain their original manifest.
+    try:
+        reading_paths = [] if uses_external_resources(root) else list(READING_PATHS)
+    except IntegrityError:
+        reading_paths = []  # installation diagnostics already identify the gap
+    manifest = _unique_paths(reading_paths + [_relative(item.path, root) for item in artifact_order])
     ordered_diagnostics = tuple(sorted(set(diagnostics)))
     locked = lock_files(root)
     relevant = tuple(item for item in ordered_diagnostics if lifecycle_relevant(item, locked))
