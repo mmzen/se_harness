@@ -2,7 +2,7 @@
 id = "VREC-IAR-021"
 type = "verification_record"
 title = "Verification candidate for WO-IAR-033"
-status = "ready"
+status = "verified"
 owners = ["Codex"]
 created = "2026-09-30"
 updated = "2026-09-30"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/instruction-architecture/evidence/WO-IAR-033
 evaluator_evidence_path = "docs/engineering/instruction-architecture/evidence/VREC-IAR-021-evaluator.json"
 evaluator_evidence_sha256 = "5f2209f1d8d60901e7f8cf46ea5b62f7bb9705e4603c72f15489f9be90af2384"
 
+verified_at = "2026-09-30T12:40:48Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-IAR-033"]
 conforms_to = ["VER-IAR-020"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-30T12:40:48Z"
+decided_by = "mmzen"
+reason = "Human mmzen confirmed: I verify VREC-IAR-021 as assurance owner. Exact reviewed candidate 46d195d6491ead833ccb6a7d671037a33ba50cbd and retained evidence are unchanged."
 +++
 
 # Verification Record Candidate
