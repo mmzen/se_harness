@@ -15,6 +15,20 @@ This is repository-owned operating guidance under
 It grants no approval, publication right or lifecycle transition. Use the
 selected released evaluator and its procedures for those decisions.
 
+## 0.20.1 maintenance delivery
+
+[REL-SEH-032](../engineering/release-0-20-1/release/REL-SEH-032.md) selects
+updates for all five surfaces. [WO-RLS-027](../engineering/release-0-20-1/work-orders/WO-RLS-027.md)
+prepares the evaluator correction and records the outstanding handoffs. A new
+plugin package must use the exact public 0.20.1 wheel and the released plugin
+behavior. Select its unused version and bounded delivery work before release
+authorization; do not reuse the earlier release's publication authority.
+
+The [preparation plan](../engineering/release-0-20-1/evidence/WO-RLS-027/plan.json)
+keeps future RLS, package and commit identities pending. It cannot pass closeout
+until actual bound inputs and observations exist. No surface is waived. The
+minimal-layout successor and its later repository adoption remain separate work.
+
 ## Prepare the delivery plan
 
 **Responsible:** The release operator prepares the plan. The authorized human
