@@ -2,7 +2,7 @@
 id = "VREC-IAR-017"
 type = "verification_record"
 title = "Verification candidate for WO-IAR-027"
-status = "ready"
+status = "verified"
 owners = ["Codex preparation agent under mmzen approval"]
 created = "2026-09-30"
 updated = "2026-09-30"
@@ -16,9 +16,18 @@ evidence_paths = ["docs/engineering/instruction-architecture/evidence/WO-IAR-027
 evaluator_evidence_path = "docs/engineering/instruction-architecture/evidence/VREC-IAR-017-evaluator.json"
 evaluator_evidence_sha256 = "5f2209f1d8d60901e7f8cf46ea5b62f7bb9705e4603c72f15489f9be90af2384"
 
+verified_at = "2026-09-30T07:31:13Z"
+verified_by = "mmzen"
 [relations]
 verifies_work_order = ["WO-IAR-027"]
 conforms_to = ["VER-IAR-019"]
+
+[[lifecycle_events]]
+from = "ready"
+to = "verified"
+decided_at = "2026-09-30T07:31:13Z"
+decided_by = "mmzen"
+reason = "Human mmzen: i verify VREC-IAR-017. Accept the reviewed evidence for exact candidate 1b54fb4854e20b3e9e4072f2b95bd60c4376fbfd, WO-IAR-027 and VER-IAR-019. Seventeen focused tests and fourteen links passed in the exact candidate; the selected glossary corrections preserve unrelated content. Codex applies this human assurance decision. Hosted CI remains required at integration. This decision does not authorize push, PR, merge or publication."
 +++
 
 # Verification Record Candidate
