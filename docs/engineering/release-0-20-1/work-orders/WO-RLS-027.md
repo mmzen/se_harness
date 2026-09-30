@@ -2,7 +2,7 @@
 id = "WO-RLS-027"
 type = "work_order"
 title = "Prepare the bounded 0.20.1 acceptance compatibility release"
-status = "in_progress"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-09-30"
 updated = "2026-09-30"
@@ -45,6 +45,13 @@ to = "in_progress"
 decided_at = "2026-09-30T19:44:15Z"
 decided_by = "Codex"
 reason = "Execution of DR-WO-START under recorded engineering-owner approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-30T20:23:52Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded engineering-owner approval; relevant local gates passed."
 +++
 
 # Prepare the bounded 0.20.1 acceptance compatibility release

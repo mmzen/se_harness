@@ -1,6 +1,6 @@
 # SE Harness 0.20.1 compatibility release
 
-Status: the package is approved and WO-RLS-027 is in progress. Release,
+Status: the package is approved and WO-RLS-027 is implemented. Release,
 publication and adoption decisions remain separate.
 
 [DEC-IAR-004](../instruction-architecture/decisions/DEC-IAR-004.md) records
