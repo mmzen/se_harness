@@ -256,6 +256,22 @@ Ordinary ready RLS records use the complete schema-3 evaluator identity in the c
 
 ## Release sequences
 
+This maintenance branch prepares 0.20.1 under
+[WO-RLS-027](../engineering/release-0-20-1/work-orders/WO-RLS-027.md).
+Its baseline is v0.20.0 at 7253d13b212ad6f7df670021290fea32e81d66de.
+Keep its selected 0.19.0 evaluator and CI unchanged. The correction changes only
+the acceptance runner, its tests, version metadata and declared documentation.
+Use released 0.20.0 separately to assess the maintenance wheel. The exact
+candidate must pass [VER-RLS-027](../engineering/release-0-20-1/verification/VER-RLS-027.md).
+The new runner's own successful tests do not make it an independent verifier.
+
+The [0.20.1 release contract](../engineering/release-0-20-1/release/REL-SEH-032.md)
+requires a new marketplace delivery plan and separately approved downstream work.
+The prior release assignments below are historical; they do not authorize a new
+package. Use the existing build recipe and publication sequence, then separately
+adopt the public patch before requalifying the minimal-layout successor.
+
+
 The [0.20.0 release package](../engineering/release-0-20-0/README.md) includes
 the plugin 0.2.2 handoff. After evaluator publication, WO-PLG-030 must assemble,
 qualify and publish the matching distribution to `plugin-marketplace` under

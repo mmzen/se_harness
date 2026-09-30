@@ -1,0 +1,104 @@
+{
+  "schema": "se-harness-delivery-plan/v1",
+  "release": {
+    "contract": "REL-SEH-032",
+    "record": null,
+    "version": "0.20.1",
+    "wheel_sha256": null
+  },
+  "review": {
+    "by": "mmzen",
+    "reference": "REL-SEH-032 approval; user: Approve package and required verification"
+  },
+  "surfaces": [
+    {
+      "id": "evaluator",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness/releases/tag/v0.20.1",
+      "work_reference": "WO-RLS-027 preparation; downstream exact delivery work pending separate approval",
+      "next_action": "Verify the exact candidate and select release preparation, then obtain separate release/publication authority.",
+      "disposition": "update",
+      "expected": {
+        "record": null,
+        "version": "0.20.1",
+        "wheel_sha256": null,
+        "sdist_sha256": null
+      },
+      "required_observations": [
+        "publisher",
+        "public_install"
+      ]
+    },
+    {
+      "id": "marketplace",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness#plugin-marketplace",
+      "work_reference": "WO-RLS-027 preparation; downstream exact delivery work pending separate approval",
+      "next_action": "Prepare and approve bounded downstream WO/VER and unused plugin version before release authorization; then assemble, qualify, publish and observe the exact public wheel package.",
+      "disposition": "update",
+      "expected": {
+        "plugin_version": null,
+        "source_commit": null,
+        "evaluator_version": "0.20.1",
+        "wheel_sha256": null,
+        "public_revision": null,
+        "codex_content_sha256": null,
+        "claude-code_content_sha256": null
+      },
+      "required_observations": [
+        "assembly",
+        "qualification",
+        "public_ref"
+      ],
+      "hosts": [
+        "codex",
+        "claude-code"
+      ]
+    },
+    {
+      "id": "documentation",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness/tree/main",
+      "work_reference": "WO-RLS-027 preparation; downstream exact delivery work pending separate approval",
+      "next_action": "Approve downstream current-main and packaged guidance scope; reconcile with actual public observations and verify links.",
+      "disposition": "update",
+      "expected": {
+        "commit": null
+      },
+      "required_observations": [
+        "claims_review",
+        "links"
+      ]
+    },
+    {
+      "id": "demonstration",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://mmzen.github.io/se_harness/",
+      "work_reference": "WO-RLS-027 preparation; downstream exact delivery work pending separate approval",
+      "next_action": "Observe the selected released-record deployment under downstream delivery authority.",
+      "disposition": "update",
+      "expected": {
+        "governance_commit": null
+      },
+      "required_observations": [
+        "deployment"
+      ]
+    },
+    {
+      "id": "release_markers",
+      "owner": "mmzen (accountable); Codex (operator)",
+      "destination": "https://github.com/mmzen/se_harness",
+      "work_reference": "WO-RLS-027 preparation; downstream exact delivery work pending separate approval",
+      "next_action": "After public observation obtain exact latest/last authorization, apply and read back.",
+      "disposition": "update",
+      "expected": {
+        "latest": "v0.20.1",
+        "last": null
+      },
+      "required_observations": [
+        "authorization",
+        "readback"
+      ]
+    }
+  ]
+}

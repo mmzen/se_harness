@@ -80,6 +80,100 @@ class DisposablePackageAcceptanceTests(unittest.TestCase):
             self.assertEqual("keep\n", outside.read_text())
 
 
+class MinimalLayoutAcceptanceTests(unittest.TestCase):
+    def assess(self, defect=None, integration_output=b"selected git"):
+        """Model installed CLI responses; the real runner owns all assertions."""
+        calls = []
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            wheel = root / "se_harness-1.2.3-py3-none-any.whl"
+            with zipfile.ZipFile(wheel, "w") as archive:
+                archive.writestr("se_harness-1.2.3.dist-info/METADATA", "Name: se-harness\nVersion: 1.2.3\n")
+
+            def environment(path):
+                (path / "bin").mkdir(parents=True)
+                for name in ("python", "harnessctl"):
+                    (path / "bin" / name).touch()
+
+            def command(argv, **kwargs):
+                calls.append(argv)
+                code, output = 0, b""
+                if len(argv) > 2 and argv[1] == "init":
+                    target = Path(argv[2])
+                    target.mkdir(exist_ok=True)
+                    lock = {"resource_layout": "released-resources-v1", "evaluator": {"payload_sha256": "a" * 64}}
+                    if defect == "unknown-layout":
+                        lock["resource_layout"] = "future-layout"
+                    elif defect == "null-layout":
+                        lock["resource_layout"] = None
+                    elif defect == "object-layout":
+                        lock["resource_layout"] = {}
+                    (target / ".engineering-harness.toml").write_text("selection\n", encoding="utf-8")
+                    raw = "{" if defect == "broken-lock" else "[]" if defect == "array-lock" else json.dumps(lock)
+                    (target / ".engineering-harness.lock").write_text(raw, encoding="utf-8")
+                    if defect == "extra-default-file":
+                        (target / "ENGINEERING_HARNESS.md").write_text("unexpected", encoding="utf-8")
+                elif "--integration" in argv:
+                    target = Path(argv[2])
+                    self.assertEqual({".engineering-harness.toml", ".engineering-harness.lock"},
+                                     {p.name for p in target.iterdir()})
+                    block = "# se-harness:begin\n*.md text eol=lf\n# se-harness:end\n"
+                    (target / ".gitattributes").write_text("owner only\n" if defect == "missing-block" else block,
+                                                          encoding="utf-8")
+                    code = 1 if defect == "integration-failure" else 0
+                    output = integration_output
+                elif len(argv) > 2 and Path(argv[2]).name == "customized":
+                    target = Path(argv[2])
+                    self.assertIn("*.json -text", (target / ".gitattributes").read_text())
+                    code = 0 if defect == "customization-accepted" else 1
+                    if defect == "refusal-writes":
+                        (target / "unexpected-write").touch()
+                elif len(argv) > 2 and Path(argv[2]).name == "corrupted":
+                    lock = json.loads((Path(argv[2]) / ".engineering-harness.lock").read_text())
+                    self.assertEqual("0" * 64, lock["evaluator"]["payload_sha256"])
+                    code = 0 if defect == "corruption-accepted" else 1
+                elif len(argv) > 2 and argv[1] == "approve":
+                    code = 2
+                return SimpleNamespace(returncode=code, stdout=output, stderr=b"")
+
+            with mock.patch.object(acceptance.venv.EnvBuilder, "create", side_effect=environment), \
+                    mock.patch.object(acceptance, "_launch", side_effect=command):
+                result = acceptance.assess_candidate_wheel(
+                    wheel, candidate_commit="b" * 40,
+                    candidate_wheel_sha256=hashlib.sha256(wheel.read_bytes()).hexdigest(),
+                    verifier_wheel_sha256="a" * 64,
+                )
+            return result, calls
+
+    def test_minimal_default_and_explicit_integration_complete_existing_scenarios(self):
+        result, calls = self.assess()
+        self.assertTrue(all(s.outcome == "passed" for s in result.scenarios))
+        self.assertEqual(10, len(result.scenarios))
+        self.assertEqual(1, sum("--integration" in argv for argv in calls))
+        self.assertEqual("customized-content-refusal", result.scenarios[7].scenario_id)
+        self.assertEqual("corrupted-integrity-refusal", result.scenarios[8].scenario_id)
+
+    def test_integration_output_is_bound_into_init_evidence(self):
+        first, _ = self.assess(integration_output=b"first receipt")
+        second, _ = self.assess(integration_output=b"changed receipt")
+        self.assertNotEqual(first.scenarios[1].output_sha256, second.scenarios[1].output_sha256)
+
+    def test_unsupported_and_unusable_layout_inputs_refuse(self):
+        for defect in ("unknown-layout", "null-layout", "object-layout", "broken-lock", "array-lock"):
+            with self.subTest(defect=defect), self.assertRaises(HarnessError):
+                self.assess(defect)
+
+    def test_bad_footprint_or_integration_cannot_become_acceptance(self):
+        for defect in ("extra-default-file", "integration-failure", "missing-block"):
+            with self.subTest(defect=defect), self.assertRaises(HarnessError):
+                self.assess(defect)
+
+    def test_refusal_scenarios_fail_on_acceptance_or_writes(self):
+        for defect in ("customization-accepted", "corruption-accepted", "refusal-writes"):
+            with self.subTest(defect=defect), self.assertRaises(HarnessError):
+                self.assess(defect)
+
+
 def runtime_identity(*, passed: bool, role: str, commit: str | None = None) -> SimpleNamespace:
     return SimpleNamespace(
         passed=passed,

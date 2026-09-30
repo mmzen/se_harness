@@ -30,6 +30,20 @@ These claims are deliberately separate. A successful `complete-candidate` result
 
 A fifth operation, `predecessor-view`, once qualified a deterministic predecessor-compatible view against an exact external predecessor evaluator. It existed only for the 0.5.0→0.6.0 handover and was retired under `WO-REB-028` (`ADR-REB-012`, amending `ADR-REB-009`); the retained 0.6.0 results remain valid history. Predecessor-to-successor agreement is now shown by the real upgrade rehearsal (`repository_tools/upgrade_rehearsal.py`, `WO-ECP-010`), not by a `qualify` operation.
 
+## Maintenance compatibility candidate
+
+The 0.20.1 maintenance candidate extends the existing acceptance runner for
+`released-resources-v1`. It checks the two-file default before explicitly
+selecting the Git integration used for managed-content refusal. Legacy candidate
+scenarios stay supported; unknown layouts and failed setup are refused.
+The maintenance installer itself remains unchanged.
+
+Testing this unreleased runner is candidate evidence. It becomes an independent
+verifier only after publication and separate selection of its exact public
+identity. The [compatibility release package](../engineering/release-0-20-1/README.md)
+requires Windows/Linux checks and independent qualification of the maintenance
+wheel by released 0.20.0. No candidate can qualify itself as a released verifier.
+
 ## Typical workflow order
 
 ```text

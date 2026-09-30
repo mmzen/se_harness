@@ -23,6 +23,8 @@ from se_harness.runtime_identity import COMMIT_PATTERN, SHA256_PATTERN
 
 
 ACCEPTANCE_SCHEMA = "se-harness-functional-acceptance-v1"
+# Recognize successor input without importing its resource implementation.
+EXTERNAL_RESOURCE_LAYOUT = "released-resources-v1"
 SCENARIO_IDS = (
     "installed-identity",
     "init",
@@ -341,6 +343,32 @@ def assess_candidate_wheel(
                 checkout=checkout,
             )
         )
+        if results[-1].outcome != "passed":
+            raise HarnessError("candidate acceptance failed: init")
+        try:
+            selected = json.loads((initialized / LOCK_RELATIVE).read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            raise HarnessError("candidate acceptance failed: unusable init lock") from exc
+        if not isinstance(selected, dict):
+            raise HarnessError("candidate acceptance failed: unusable init lock")
+        if "resource_layout" in selected and selected["resource_layout"] != EXTERNAL_RESOURCE_LAYOUT:
+            raise HarnessError("candidate acceptance does not support the selected resource layout")
+        external = selected.get("resource_layout") == EXTERNAL_RESOURCE_LAYOUT
+        if external:
+            if set(_snapshot(initialized)) != {".engineering-harness.toml", LOCK_RELATIVE}:
+                raise HarnessError("candidate acceptance failed: minimal init footprint")
+            # The refusal test needs managed content, selected after the default
+            # footprint has been checked. Bind this setup into the init evidence.
+            integration = _run(
+                "init", [str(harnessctl), "upgrade", str(initialized), "--integration", "git", "--apply"],
+                cwd=temporary, temporary=temporary, wheel=wheel, checkout=checkout,
+            )
+            results[-1] = ScenarioResult(
+                "init", integration.outcome,
+                _hash((results[-1].output_sha256 + integration.output_sha256).encode("ascii")),
+            )
+            if integration.outcome != "passed":
+                raise HarnessError("candidate acceptance failed: explicit Git integration")
         adopted = temporary / "adopted"
         adopted.mkdir()
         (adopted / "README.md").write_text("repository\n", encoding="utf-8")
@@ -361,8 +389,14 @@ def assess_candidate_wheel(
             )
         customized = temporary / "customized"
         shutil.copytree(initialized, customized)
-        customized_file = customized / "ENGINEERING_HARNESS.md"
-        customized_file.write_bytes(customized_file.read_bytes() + b"\nRepository customization.\n")
+        customized_file = customized / (".gitattributes" if external else "ENGINEERING_HARNESS.md")
+        original = customized_file.read_bytes()
+        if external:
+            if original.count(b"# se-harness:begin") != 1 or original.count(b"# se-harness:end") != 1:
+                raise HarnessError("candidate acceptance failed: missing managed Git block")
+            customized_file.write_bytes(original.replace(b"# se-harness:end", b"*.json -text\n# se-harness:end", 1))
+        else:
+            customized_file.write_bytes(original + b"\nRepository customization.\n")
         customized_before = _snapshot(customized)
         refusal = _run(
             "customized-content-refusal",
@@ -380,7 +414,10 @@ def assess_candidate_wheel(
         shutil.copytree(initialized, corrupted)
         lock_path = corrupted / LOCK_RELATIVE
         lock = json.loads(lock_path.read_text(encoding="utf-8"))
-        lock["files"]["ENGINEERING_HARNESS.md"]["sha256"] = "0" * 64
+        if external:
+            lock["evaluator"]["payload_sha256"] = "0" * 64
+        else:
+            lock["files"]["ENGINEERING_HARNESS.md"]["sha256"] = "0" * 64
         # Explicit LF: the lock is hash-bound text, so the writing platform must
         # not decide its bytes.
         lock_path.write_text(  # ECP-PRM-006: the same bytes, written with the newline the lock producers declare
