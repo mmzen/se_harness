@@ -44,6 +44,9 @@ class SimplePluginTests(unittest.TestCase):
                 self.assertEqual((ROOT/'plugins/verity-plane/common/skills/change/SKILL.md').read_bytes(),
                                  archive.read('verity-plane/skills/change/SKILL.md'))
                 self.assertIn('verity-plane/hooks/hooks.json', names)
+                for member in ('scripts/harness_runtime.py','scripts/activate.py','assets/bootstrap.md'):
+                    self.assertEqual((ROOT/'plugins/verity-plane/common'/member).read_bytes(),
+                                     archive.read('verity-plane/'+member))
                 self.assertEqual((ROOT/'plugins/verity-plane/common/scripts/inject_instructions.py').read_bytes(),
                                  archive.read('verity-plane/scripts/inject_instructions.py'))
                 manifest = '.codex-plugin' if host == 'codex' else '.claude-plugin'
@@ -83,6 +86,11 @@ class SimplePluginTests(unittest.TestCase):
             develop(source, self.wheel, output)
         self.assertEqual(before, {p.relative_to(output): p.read_bytes() for p in output.rglob('*') if p.is_file()})
         helper.write_bytes(helper_bytes)
+        activation = source/'plugins/verity-plane/common/scripts/activate.py'
+        activation.unlink()
+        with self.assertRaisesRegex(AssemblyError, 'incomplete'):
+            develop(source, self.wheel, output)
+        self.assertEqual(before, {p.relative_to(output): p.read_bytes() for p in output.rglob('*') if p.is_file()})
 
     def test_development_wrapper_packages_both_host_hooks(self):
         output = self.base/'wrapper'
@@ -111,19 +119,22 @@ class SimplePluginTests(unittest.TestCase):
         with zipfile.ZipFile(output/'verity-plane-codex.zip') as archive:
             self.assertEqual(self.wheel.read_bytes(), archive.read('verity-plane/packages/'+self.wheel.name))
 
-    def test_setup_retries_the_same_environment_and_preserves_the_checker_result(self):
+    def test_setup_reuses_an_immutable_environment_and_preserves_checker_result(self):
         data = self.base/'private'
         calls=[]
+        identity={'version':'0.0.0','archive_name':self.wheel.name,
+                  'archive_sha256':setup.hashlib.sha256(self.wheel.read_bytes()).hexdigest()}
         def run(argv, **kwargs):
             calls.append(argv)
+            if 'venv' in argv: Path(argv[-1]).mkdir(parents=True)
             return subprocess.CompletedProcess(argv, 7 if 'doctor' in argv else 0)
-        with patch.object(setup.subprocess, 'run', side_effect=run):
+        with patch.object(setup.subprocess, 'run', side_effect=run), patch.object(setup,'query_identity',return_value=identity):
             for _ in range(2):
                 self.assertEqual(7, setup.setup(self.target, data, self.wheel))
-        self.assertEqual(calls[0], calls[3])
-        self.assertIn('--force-reinstall', calls[1])
+        self.assertEqual(1, sum('venv' in argv for argv in calls))
+        self.assertEqual(1, sum('pip' in argv for argv in calls))
         self.assertIn('--no-index', calls[1])
-        self.assertIn('--no-deps', calls[1])
+        self.assertNotIn('--force-reinstall', calls[1])
         self.assertEqual(2, sum('doctor' in argv for argv in calls))
         self.assertEqual([], list(self.target.iterdir()))
 
@@ -131,6 +142,31 @@ class SimplePluginTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'outside the repository'):
             setup.setup(self.target, self.target/'private', self.wheel)
         self.assertFalse((self.target/'private').exists())
+
+    def test_setup_refuses_contention_and_partial_environment_without_running_code(self):
+        identity={'version':'0.0.0','archive_sha256':setup.hashlib.sha256(self.wheel.read_bytes()).hexdigest()}
+        environment=setup.environment_path(self.base/'private',identity)
+        lock=environment.with_name(environment.name+'.lock')
+        with patch.object(setup.subprocess,'run') as command:
+            with setup.exclusive(lock):
+                with self.assertRaisesRegex(ValueError,'another operation'):
+                    setup.setup(self.target,self.base/'private',self.wheel)
+            environment.mkdir()
+            (environment/'partial').write_text('retained failure')
+            with self.assertRaisesRegex(ValueError,'incomplete private environment'):
+                setup.setup(self.target,self.base/'private',self.wheel)
+            command.assert_not_called()
+        self.assertEqual('retained failure',(environment/'partial').read_text())
+
+    def test_setup_rejects_same_version_wheel_substitution_before_writes(self):
+        (self.target/'.engineering-harness.toml').write_text('[harness]\ntool_version="0.0.0"\n')
+        (self.target/'.engineering-harness.lock').write_text(json.dumps({'schema':4,'tool_version':'0.0.0',
+            'evaluator':{'version':'0.0.0','archive_sha256':'f'*64}}))
+        with patch.object(setup.subprocess,'run') as command:
+            with self.assertRaisesRegex(ValueError,'does not match'):
+                setup.setup(self.target,self.base/'private',self.wheel)
+            command.assert_not_called()
+        self.assertFalse((self.base/'private').exists())
 
     def test_setup_reports_missing_python_prerequisite_before_writes(self):
         with patch.dict(sys.modules, {'ensurepip': None}):
@@ -145,15 +181,20 @@ class SimplePluginTests(unittest.TestCase):
         subprocess.run([python, '-I', '-m', 'se_harness', 'init', str(self.target), '--project-name', 'Plugin fixture'], check=True,
                        cwd=self.base, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         argv = [python, '-I', str(SETUP), '--target', str(self.target), '--data-root', str(self.base/'private'), '--wheel', str(wheel)]
-        for attempt in range(3):
+        for attempt in range(2):
             result = subprocess.run(argv, cwd=self.base, capture_output=True)
             self.assertEqual(0, result.returncode, result.stdout.decode(errors='replace')+result.stderr.decode(errors='replace'))
             if attempt == 1:
-                environment = self.base/'private/verity-plane/evaluator'
+                environment = setup.environment_path(self.base/'private', {'version':setup.re.fullmatch(r'se_harness-(.+)-py3-none-any.whl',wheel.name)[1], 'archive_sha256':setup.hashlib.sha256(wheel.read_bytes()).hexdigest()})
                 package = next(environment.glob('Lib/site-packages/se_harness/__init__.py'), None)
                 if package is None:
                     package = next(environment.glob('lib/python*/site-packages/se_harness/__init__.py'))
-                package.unlink()  # Interrupted installation; the next setup must repair it.
+                original = package.read_bytes()
+                package.unlink()  # Never repair over a potentially active environment.
+                refused = subprocess.run(argv, cwd=self.base, capture_output=True)
+                self.assertNotEqual(0, refused.returncode)
+                self.assertFalse(package.exists())
+                package.write_bytes(original)
         (self.target/'ENGINEERING_HARNESS.md').write_text('changed managed content')
         failed = subprocess.run(argv, cwd=self.base, capture_output=True)
         self.assertNotEqual(0, failed.returncode)

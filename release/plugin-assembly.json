@@ -22,7 +22,10 @@
     "skills/setup/references/environment.md": "plugins/verity-plane/common/skills/setup/references/environment.md",
     "skills/setup/references/maintenance.md": "plugins/verity-plane/common/skills/setup/references/maintenance.md",
     "skills/setup/references/repository.md": "plugins/verity-plane/common/skills/setup/references/repository.md",
-    "scripts/inject_instructions.py": "plugins/verity-plane/common/scripts/inject_instructions.py"
+    "scripts/inject_instructions.py": "plugins/verity-plane/common/scripts/inject_instructions.py",
+    "scripts/harness_runtime.py": "plugins/verity-plane/common/scripts/harness_runtime.py",
+    "scripts/activate.py": "plugins/verity-plane/common/scripts/activate.py",
+    "assets/bootstrap.md": "plugins/verity-plane/common/assets/bootstrap.md"
   },
   "hosts": {
     "codex": {

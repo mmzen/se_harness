@@ -2,7 +2,7 @@
 id = "WO-IAR-029"
 type = "work_order"
 title = "Connect both host plugins to pinned external resources"
-status = "approved"
+status = "implemented"
 owners = ["mmzen"]
 created = "2026-09-30"
 updated = "2026-09-30"
@@ -45,6 +45,20 @@ decided_at = "2026-09-30T11:12:12Z"
 decided_by = "mmzen"
 reason = "Human mmzen: I confirm and approve. Approves the updated external-resource package and required commit-bound verification for WO-IAR-028, WO-IAR-029 and WO-IAR-030. Clarification confirmed: Ok for this plan; short bootstrap before cloning, immediate activation of the actual checkout, per-session recovery after compaction/resume and independent parallel sessions. DEC-IAR-003 separately records future release and separate adoption. Reviewed file SHA-256 3ced2cb314f96500ab5317ba58466d3bbe197fa1f4ab0dc83302aad51beaf6d2. Only the confirmed assurance metadata and its explanatory paragraph were completed before preview."
 scope_paths = ["plugins/verity-plane/common/", "plugins/verity-plane/codex/", "plugins/verity-plane/claude-code/", "release/plugin-assembly.json", "repository_tools/plugin_distribution.py", "tests/plugin_integration/progressive_discovery/", "tests/plugin_integration/package_assembly/", "tests/plugin_integration/onboarding/", "tests/plugin_integration/repository_connection/", "tests/plugin_integration/test_simple_plugin.py", "docs/engineering/instruction-architecture/work-orders/WO-IAR-029.md", "docs/engineering/instruction-architecture/verification-records/VREC-IAR-019.md", "docs/engineering/instruction-architecture/evidence/VREC-IAR-019-evaluator.json", "docs/engineering/instruction-architecture/evidence/WO-IAR-029/", "docs/engineering/instruction-architecture/verification-records/VREC-IAR-020.md", "docs/engineering/instruction-architecture/evidence/VREC-IAR-020-evaluator.json"]
+
+[[lifecycle_events]]
+from = "approved"
+to = "in_progress"
+decided_at = "2026-09-30T12:21:44Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-START under recorded work-order approval; relevant local gates passed."
+
+[[lifecycle_events]]
+from = "in_progress"
+to = "implemented"
+decided_at = "2026-09-30T17:21:03Z"
+decided_by = "Codex"
+reason = "Execution of DR-WO-COMPLETE under recorded work-order approval; relevant local gates passed."
 +++
 
 # Connect both host plugins to pinned external resources

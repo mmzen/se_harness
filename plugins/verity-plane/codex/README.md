@@ -4,27 +4,30 @@ Verity Plane 0.2.2 exposes shared skills through the host's native skill discove
 Use setup to prepare the repository-selected evaluator, harness-orient to inspect
 the project, and change/evidence for its explicit workflow commands.
 
-This version includes a SessionStart adapter for startup and post-compaction
-instruction delivery. It reads the selected repository's ENGINEERING_HARNESS.md,
-compares its bytes with the installation record and checks the selected version.
-It neither computes lifecycle authority nor upgrades the repository. Missing,
-changed, incompatible or oversized input is reported as a delivery gap.
+The candidate adapter delivers the selected release's compact entry at startup,
+compaction and resume. It restores a checkout selected for that host session,
+including one cloned below the host working directory. With no selection it
+provides a short bootstrap and the setup skill's activation inputs.
 
-Release assembly for this package requires the independently published
-SE Harness 0.20.0 wheel and its matching released record. Source version
-metadata alone does not establish that publication. WO-PLG-030 governs exact
-0.2.2 package qualification; WO-PLG-031 governs public installation observations.
-Read their retained results before claiming support. Earlier 0.2.1 observations
-do not qualify these archives. Host and route claims remain limited to the
-observed versions; desktop UI, automatic threshold compaction and other
-platforms need their own evidence.
+External-resource layouts use the exact installed evaluator's resource command.
+Legacy installations retain their validated repository-root delivery. Missing,
+changed, incompatible or oversized input reports a delivery gap without fallback.
+Setup retains separate immutable evaluator environments outside repositories.
+Activation immediately returns the complete entry; it grants no lifecycle authority.
+
+This source is under WO-IAR-029 qualification. Existing 0.2.2 publication evidence
+does not qualify the new adapter. Native desktop, automatic compaction, resume and
+parallel-session claims require their own retained observations in VER-IAR-021.
+Development archives cannot establish release or marketplace eligibility.
 Python 3.11+ must be available to the hook launcher. Codex also requires the
 user to trust the plugin's reviewed hooks. Real host settings are not changed by
 building or testing this source. Repository-only skills do not install hooks.
 
-The complete context is bounded to 10,000 characters. A larger entry is refused,
-not silently truncated. Codex's handler has a 5,000 approximate-token threshold;
-Claude Code's documented character limit remains the shared bound.
+The complete context, including paths and metadata, is capped at 20,000 UTF-16
+units for Codex and 10,000 for Claude Code. A larger entry is refused with its
+measured size; policy is never truncated. Codex's handler keeps its separate
+5,000 approximate-token threshold. Native tests must confirm full delivery with
+the actual host paths.
 
 API references: [Codex hooks](https://learn.chatgpt.com/docs/hooks) and
 [Claude Code hooks](https://code.claude.com/docs/en/hooks).

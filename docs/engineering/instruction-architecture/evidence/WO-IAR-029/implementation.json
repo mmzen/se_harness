@@ -1,0 +1,1591 @@
+{
+  "work_order": "WO-IAR-029",
+  "status": "native_qualification_pending",
+  "source_candidate": "dc673112b05aea7bc8df568383d5ec1461d20315",
+  "base": "7da8aeaf1e247fc4a46739fabdaab776f6af965a",
+  "source_files": {
+    "plugins/verity-plane/claude-code/README.md": "de50b8c7b1be68b5b018874689a01760ec229a191c2da3c0c665658aa37be16b",
+    "plugins/verity-plane/codex/README.md": "de50b8c7b1be68b5b018874689a01760ec229a191c2da3c0c665658aa37be16b",
+    "plugins/verity-plane/common/assets/bootstrap.md": "3dee5f82b3e65b62fd4ccb2fcc30d224f24b0d58f7fc4a290d3578584d1fbacd",
+    "plugins/verity-plane/common/scripts/activate.py": "ffd0345b6eb90d1cb1a59ae8ebeb54607939f4277aa2b665c1e57c79e2097154",
+    "plugins/verity-plane/common/scripts/harness_runtime.py": "6efaf415547fb311f889d145b269f885329450ecd2042d3c3022df9619bd1aa4",
+    "plugins/verity-plane/common/scripts/inject_instructions.py": "1baccbb27b266db2e056a8ac9781a751a35c7ba82f5ed5920ed2a9d71339b806",
+    "plugins/verity-plane/common/scripts/setup.py": "282581fb69daabfa04909083b684385b6feeb8b72ef274c96ff04ad0171953eb",
+    "plugins/verity-plane/common/skills/change/SKILL.md": "7f167d8b2ccd13383be09769852fef100943cde07bab0bbfcbc9ac2ee17822c0",
+    "plugins/verity-plane/common/skills/evidence/SKILL.md": "810bd24204f2e003f796be422991f60fe78feec540c09ffb7debf46415754cf7",
+    "plugins/verity-plane/common/skills/harness-operator-brief/SKILL.md": "3cba405afb93814ce3f79d5d762f8e310f32905475af1dfcf7508e4e935565f3",
+    "plugins/verity-plane/common/skills/harness-orient/SKILL.md": "722cf124a15e5003eccce92cf8573a4c30e59a772aa3f8b8f426104900f13c7d",
+    "plugins/verity-plane/common/skills/setup/SKILL.md": "3b60bb4fa25a3d7312c6828ccba0a814aba45a8f33d30eaae63122ae912f0c6d",
+    "plugins/verity-plane/common/skills/setup/references/environment.md": "3ccad389ba80926437cfc02c78408b50d42606407287d6466b9d7dc1dea413bc",
+    "plugins/verity-plane/common/skills/setup/references/maintenance.md": "ede24c48c4e92248b5dd01c0dc28187c2ef19c8bc09445820bb77198f4b58dbf",
+    "release/plugin-assembly.json": "b9dd5e39a89b91f855bd848f09985c502193b157d05cf7cc600e57b1325bfaac",
+    "repository_tools/plugin_distribution.py": "e4b527999f371917ab0d67fc48683465a35749f08fcc98b3ed3405e58cf6bb39",
+    "tests/plugin_integration/onboarding/run_acceptance.py": "4c1fa7911c4f986b76db49af321f1b14738afd58f49d7eb129d1d331447c92eb",
+    "tests/plugin_integration/package_assembly/run_marketplace_acceptance.py": "86de7bf71d0d98b75cb9efc096999a467ab0f2c14d6d6d06a055be9253b04d69",
+    "tests/plugin_integration/progressive_discovery/README.md": "e0aa088fe55674b985abbbbf639fa530fb4c71d16d07234b97f044d59397e73a",
+    "tests/plugin_integration/progressive_discovery/run_resource_acceptance.py": "da745fe1a172d22338a8595cb54a8829ef0d5dbe5a209cd5f628e7bddba880bb",
+    "tests/plugin_integration/progressive_discovery/test_activation.py": "c880336a0f7e75b1805e8b48e673359775a7ef10cc882ebd31be1ad5915625e0",
+    "tests/plugin_integration/progressive_discovery/test_delivery.py": "382dead47d120b082e608f26166d757d11b0e2bdbd983bcd2484d578237af28b",
+    "tests/plugin_integration/repository_connection/run_acceptance.py": "933393a412c9ff070584bee871a21ec19e38bfcc20472fdf397e3f143219e429",
+    "tests/plugin_integration/test_simple_plugin.py": "54ddc132a20e53ae7c367d42ac404d206de66838cc380ec3a754f56cad28e30e"
+  },
+  "governing_evaluator": "0.20.0",
+  "prepared_by": "Codex",
+  "effects": [
+    "Implemented per-host/session activation and bootstrap.",
+    "Implemented pinned external entry delivery with the existing resources command.",
+    "Retained legacy repository-root delivery.",
+    "Prepared immutable offline evaluator slots and concurrency refusal.",
+    "Updated shared skills, both plugin guides and assembly validation."
+  ],
+  "local_checks": {
+    "full_source": {
+      "argv": [
+        "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/run_tests.py",
+        "--workers",
+        "4",
+        "--scale",
+        "full",
+        "--timings",
+        "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\plugin029-full-final-timings.json"
+      ],
+      "cwd": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\se_harness",
+      "exit_code": 0,
+      "output": "0.21.0\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-l31vsyda\\private\\evaluators\\0.0.0\\2a048c3a8e79e400b912646e38a8e2a2f215f9f586b8bbb9c6748c4ca5a5212e\\Scripts\\python.exe\nEvaluator Python: C:\\Users\\mathi\\AppData\\Local\\Temp\\simple-plugin-l31vsyda\\private\\evaluators\\0.0.0\\2a048c3a8e79e400b912646e38a8e2a2f215f9f586b8bbb9c6748c4ca5a5212e\\Scripts\\python.exe\ndocs/notes/diagnostic-codes.md matches the source\nWEX_SCALE artifacts=100 validation=0.114148s focus=0.298811s plan=0.228485s\nWEX_SCALE artifacts=500 validation=0.533313s focus=0.701159s plan=1.000818s\nWEX_SCALE artifacts=1000 validation=1.083607s focus=1.253277s plan=2.005471s\n----------------------------------------------------------------------\nRan 1184 tests in 214.775s (179 classes, 4 workers)\n\nOK (skipped=18)\n",
+      "environment_overrides": {
+        "GIT_CONFIG_COUNT": "3",
+        "GIT_CONFIG_KEY_0": "safe.directory",
+        "GIT_CONFIG_VALUE_0": "C:/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/se_harness",
+        "GIT_CONFIG_KEY_1": "core.longpaths",
+        "GIT_CONFIG_VALUE_1": "true",
+        "GIT_CONFIG_KEY_2": "core.autocrlf",
+        "GIT_CONFIG_VALUE_2": "false"
+      },
+      "qualification": "Ran before LF normalization of three source files; source text was unchanged. Final normalized package bytes were exercised by the installed-wheel runs."
+    },
+    "focused_windows": {
+      "tests": 27,
+      "skipped": 2,
+      "result": "passed",
+      "raw": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\plugin029-focused-fourth.log"
+    },
+    "focused_linux": {
+      "tests": 27,
+      "skipped": 1,
+      "result": "passed",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "tests.plugin_integration.progressive_discovery.test_delivery",
+        "tests.plugin_integration.progressive_discovery.test_activation",
+        "tests.plugin_integration.test_simple_plugin"
+      ]
+    },
+    "validation": {
+      "errors": 0,
+      "warnings": 54,
+      "warning_scope": "existing repository warnings"
+    },
+    "scope": {
+      "outcome": "completed",
+      "done": [
+        "Evaluated scope compliance for WO-IAR-029."
+      ],
+      "not_done": [],
+      "blocked_by": [],
+      "current_lifecycle_state": [
+        "WO-IAR-029 is in_progress."
+      ],
+      "decision_required": null,
+      "next": {
+        "procedure_id": "PROC-WO-IMPLEMENT",
+        "step_id": "STEP-WO-IMPLEMENT-PREVIEW",
+        "action": "Run the bound command"
+      },
+      "command_or_response": {
+        "kind": "command",
+        "argv": [
+          "harnessctl",
+          "transition",
+          ".",
+          "--set",
+          "WO-IAR-029=implemented",
+          "--decision",
+          "WO-IAR-029=delegated-executor"
+        ]
+      },
+      "alternatives": []
+    },
+    "review_preflight": "passed"
+  },
+  "portable_checks": [
+    {
+      "platform": "windows",
+      "passed": true,
+      "scope": "Installed package and simulated-event adapter tests only; no native host, desktop, compaction or resume claim.",
+      "raw_report_sha256": "3206ca3bb46e7e49443009f768036a9282bbb219f01c0b30bf4d528d196372c5",
+      "raw_report_location": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\report.json",
+      "wheel": {
+        "version": "0.21.0",
+        "payload_manifest": "se-harness-installed-payload-v1",
+        "payload_sha256": "df621b84feecfd854e6ff56113867fdafabb7d8326acd6293b36c781d555bb44",
+        "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+        "archive_sha256": "04343a02735a368ad1cb3d2b3e5206f7f453d27150f0f4c39b411729a5dadef2"
+      },
+      "steps": [
+        {
+          "label": "codex-codex-first-startup",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "3a397e1b6eda0d1352ce40785964e7e39101dc36b317262f3c0131c79e6be53f",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "claude-claude-first-startup",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\claude\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "claude"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "481bf32a4fafa2068bfdbd8207b1b853de527de4cf8c42475f328a61533c8972",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "prepare-se_harness-0.21.0-py3-none-any.whl",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\setup.py",
+            "--target",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\empty",
+            "--data-root",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\data",
+            "--wheel",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-candidate-build\\dist\\se_harness-0.21.0-py3-none-any.whl"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 1,
+          "stdout_sha256": "ce5e90412cf0c8ef07182a65b3ecbca9ff6c0940399416349fd334b9c1b14902",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": "      \"detail\": \"required\",\n      \"name\": \"docs/engineering/ARTIFACT_AUTHORING.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/QUALITY_GATES.json\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/README.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/WORKFLOW.json\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required instruction file is missing: ENGINEERING_HARNESS.md\",\n      \"name\": \"instruction-discovery\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"3.14.6\",\n      \"name\": \"python\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"failed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n"
+        },
+        {
+          "label": "fixture",
+          "argv": [
+            "git",
+            "-C",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\fixture-source",
+            "init"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "52b680ae097566290615c4b57a427cc565fcc769df285e36c5a2f93362d8762e",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "fixture",
+          "argv": [
+            "git",
+            "-C",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\fixture-source",
+            "add",
+            "."
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "1509f6895e799fe33ef990c06a467b151193f89a90d546e3a403a11a0abd65ef",
+          "failure_excerpt": null
+        },
+        {
+          "label": "fixture",
+          "argv": [
+            "git",
+            "-C",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\fixture-source",
+            "commit",
+            "-m",
+            "Disposable selection fixture"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "12648b7e7d712c39cec023f82e106b4543ac3b19216d0c31270bf8da6f4708e0",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "clone-after-hook",
+          "argv": [
+            "git",
+            "clone",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\fixture-source",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\workspace\\cloned"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "915c1166503817748f1b37ca3828ba8897ab3856b56480871b334bf7471dba1a",
+          "failure_excerpt": null
+        },
+        {
+          "label": "activate-codex-codex-first",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\activate.py",
+            "--host",
+            "codex",
+            "--session-id",
+            "codex-first",
+            "--data-root",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\data",
+            "--target",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\workspace\\cloned"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "c1d0c9d4064b0c45c8ecf25f6e76e596bf0dd442a751dfa46413025514694b1b",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-codex-first-compact",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "4dd1372f4d507d1b919fab74730c3b1d8f6cb2741397dac9c63af47556f532a3",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-codex-first-resume",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "4dd1372f4d507d1b919fab74730c3b1d8f6cb2741397dac9c63af47556f532a3",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "activate-claude-claude-first",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\claude\\verity-plane\\scripts\\activate.py",
+            "--host",
+            "claude",
+            "--session-id",
+            "claude-first",
+            "--data-root",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\data",
+            "--target",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\workspace\\cloned"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "cd42d8ae334873f3b2505ab49e4cdd56dcb6a112e86cdfba915cf116a64d3271",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "claude-claude-first-compact",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\claude\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "claude"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "ec9355fb54fbb39844b6a9485df713c134e15b71af091a2170059b20500f563e",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "claude-claude-first-resume",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\claude\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "claude"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "ec9355fb54fbb39844b6a9485df713c134e15b71af091a2170059b20500f563e",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "prepare-se_harness-0.20.0-py3-none-any.whl",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\setup.py",
+            "--target",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\workspace\\legacy",
+            "--data-root",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\data",
+            "--wheel",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\public028\\fresh\\profiles\\codex\\codex\\plugins\\cache\\se-harness\\verity-plane\\0.2.2\\packages\\se_harness-0.20.0-py3-none-any.whl"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 1,
+          "stdout_sha256": "e5925224ee5eca8b6147f2053247550f13eee8501d32bcfe102b5085fb787453",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": "      \"detail\": \"required\",\n      \"name\": \"docs/engineering/ARTIFACT_AUTHORING.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/QUALITY_GATES.json\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/README.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/WORKFLOW.json\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required instruction file is missing: ENGINEERING_HARNESS.md\",\n      \"name\": \"instruction-discovery\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"3.14.6\",\n      \"name\": \"python\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"failed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n"
+        },
+        {
+          "label": "legacy-init",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\data\\evaluators\\0.20.0\\7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0\\Scripts\\python.exe",
+            "-I",
+            "-m",
+            "se_harness",
+            "init",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\workspace\\legacy",
+            "--project-name",
+            "Legacy fixture",
+            "--json"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "8a14f888961e8bd98ede7052a8a3e0321c75eaeaffeabc38c42d5fd2e69adc04",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "activate-codex-parallel",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\activate.py",
+            "--host",
+            "codex",
+            "--session-id",
+            "parallel",
+            "--data-root",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\data",
+            "--target",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\workspace\\legacy"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "3d0a8cff066352a34c1f271e1d98494a0d7e6ad10c830c75bb9b89bd99540111",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-parallel-compact",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "02458b56265a71541ff54154108c91f240fc1ba46f23ff05b3d8c1c8df433e47",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-codex-first-compact",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "4dd1372f4d507d1b919fab74730c3b1d8f6cb2741397dac9c63af47556f532a3",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-independent-startup",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "7c3c32c2412e93519a5659130515deb93b3fb6a140fcd6b42ca23715e5af2bbd",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "activate-codex-parallel",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\activate.py",
+            "--host",
+            "codex",
+            "--session-id",
+            "parallel",
+            "--data-root",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\data",
+            "--target",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\workspace\\cloned"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "5497ed8cb13ed342b48d7785ed1c3fba901d0279b372f4bac2b8087f87d39c24",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-parallel-resume",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "7907981360f99fec72a0675138bc285cb357f6971e9834ee637cba47fc530e63",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "activate-codex-parallel",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\activate.py",
+            "--host",
+            "codex",
+            "--session-id",
+            "parallel",
+            "--data-root",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\data",
+            "--clear"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "11a17dd5c0c66e18c3be9a692053dd81d1790b814697aaece3abd90f27db2074",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-parallel-startup",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "60918b53769ec32d27627e94bb670f926093ec273917ce03fa946d9a51e370f5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "activate-claude-parallel",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\claude\\verity-plane\\scripts\\activate.py",
+            "--host",
+            "claude",
+            "--session-id",
+            "parallel",
+            "--data-root",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\data",
+            "--target",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\workspace\\legacy"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "204508a2e2d1967d4804366de8faa797eee677474921a0feff1ad2ba4ff4b849",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "claude-parallel-compact",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\claude\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "claude"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "6e0b00dbd97e76937c3429a0537815714ff2dce9582ce0f852b179ebf4d3d123",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "claude-claude-first-compact",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\claude\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "claude"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "ec9355fb54fbb39844b6a9485df713c134e15b71af091a2170059b20500f563e",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "claude-independent-startup",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\claude\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "claude"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "950fda265e87b9556b3e4e60a75ebd0cc3e5adc29193e23a77a252c1d37504fb",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "activate-claude-parallel",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\claude\\verity-plane\\scripts\\activate.py",
+            "--host",
+            "claude",
+            "--session-id",
+            "parallel",
+            "--data-root",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\data",
+            "--target",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\workspace\\cloned"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "cf025168f3febad72a39d78277adda2f5f5acffa7e7376788aa526c1075de755",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "claude-parallel-resume",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\claude\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "claude"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "c39358a98efe543e7203f31105a464fa520d99c8ce9a84ad86667e1c149ce475",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "activate-claude-parallel",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\claude\\verity-plane\\scripts\\activate.py",
+            "--host",
+            "claude",
+            "--session-id",
+            "parallel",
+            "--data-root",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\data",
+            "--clear"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "64a3f3a3c638cc76063042340e5d82bb2b6ba4aa86cc0ede4e757007fbab4196",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "claude-parallel-startup",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\claude\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "claude"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "036f7fc8b58b8f2a7e2b26527ef3e065b439c762f9d7cc8c9e0299eb5dcf9312",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "activate-codex-codex-first",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\activate.py",
+            "--host",
+            "codex",
+            "--session-id",
+            "codex-first",
+            "--data-root",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\data",
+            "--target",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\empty"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 1,
+          "stdout_sha256": "8e6156fdcedb85d0ceb25328d5b9dda80997789c8ba5d278dbc150cd1ff9d0db",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": "{\"status\": \"unavailable\", \"error\": \"required regular file is unavailable: .engineering-harness.toml\", \"action\": \"Stop work on the requested target, resolve its setup or selection gap, then activate again. The previous session record is unchanged.\"}\n"
+        },
+        {
+          "label": "codex-codex-first-compact",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "4dd1372f4d507d1b919fab74730c3b1d8f6cb2741397dac9c63af47556f532a3",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-codex-first-compact",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "a58398e06c874d6f19bb18ef6b571418754f819e3b6390410ededc48166dbf75",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-codex-first-compact",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "1cd56327aac8c83f359a7400e5733b67291a111ae55765aed7a9aa5ac3e2c1e5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "claude-claude-first-resume",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\claude\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "claude"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "f35e98ee79c2856e22f66b0434c4926f4a967e053abed75827319e72fd8eb537",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "prepare-se_harness-0.21.0-py3-none-any.whl",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\setup.py",
+            "--target",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\workspace\\cloned",
+            "--data-root",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\data",
+            "--wheel",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-candidate-build\\dist\\se_harness-0.21.0-py3-none-any.whl"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "f20c4db0f8e874b4c3b1fe1bf41f4d48b1a41308c0dd30e4aadbf94c06bf4c18",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-codex-first-compact",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 0,
+          "stdout_sha256": "4dd1372f4d507d1b919fab74730c3b1d8f6cb2741397dac9c63af47556f532a3",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "prepare-se_harness-0.21.0-py3-none-any.whl",
+          "argv": [
+            "C:\\Users\\mathi\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+            "-I",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\codex\\verity-plane\\scripts\\setup.py",
+            "--target",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\workspace\\cloned",
+            "--data-root",
+            "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\data",
+            "--wheel",
+            "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\wiring-candidate-build\\dist\\se_harness-0.21.0-py3-none-any.whl"
+          ],
+          "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03",
+          "exit_code": 1,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "2c3be8e41b6273082b20d10f6f3c43c0e07862682af781009aeb41c0bba83aab",
+          "failure_excerpt": "Setup failed: another operation owns 04343a02735a368ad1cb3d2b3e5206f7f453d27150f0f4c39b411729a5dadef2.lock; inspect an interrupted operation before retrying. Check the supplied Python and wheel, then rerun the same command.\n"
+        }
+      ]
+    },
+    {
+      "platform": "linux",
+      "passed": true,
+      "scope": "Installed package and simulated-event adapter tests only; no native host, desktop, compaction or resume claim.",
+      "raw_report_sha256": "94cb49609d28cc5efa3298086c7bed4a0eb606324dbbb25e82c9bd182a18a22f",
+      "raw_report_location": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\plugin029-linux-installed-final.json",
+      "wheel": {
+        "version": "0.21.0",
+        "payload_manifest": "se-harness-installed-payload-v1",
+        "payload_sha256": "df621b84feecfd854e6ff56113867fdafabb7d8326acd6293b36c781d555bb44",
+        "archive_name": "se_harness-0.21.0-py3-none-any.whl",
+        "archive_sha256": "04343a02735a368ad1cb3d2b3e5206f7f453d27150f0f4c39b411729a5dadef2"
+      },
+      "steps": [
+        {
+          "label": "codex-codex-first-startup",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "86455df352863d6a4ab4b9340939eeaa14645d074fc00ca7af1fa001b778b971",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "claude-claude-first-startup",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/claude/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "claude"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "514a34af5ed0a1e662893bd625148e0c438a868935938e92511d1e4ff6dcd51a",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "prepare-se_harness-0.21.0-py3-none-any.whl",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/setup.py",
+            "--target",
+            "/tmp/iar29-resource-final/empty",
+            "--data-root",
+            "/tmp/iar29-resource-final/data",
+            "--wheel",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/external-resources-proposal-20260930/wiring-linux-readable/se_harness-0.21.0-py3-none-any.whl"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 1,
+          "stdout_sha256": "592fe9f45db68d1d7ec5d96439ef92157f328b0241d13f43a08add9e768e7588",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": "      \"detail\": \"required\",\n      \"name\": \"docs/engineering/ARTIFACT_AUTHORING.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/QUALITY_GATES.json\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/README.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/WORKFLOW.json\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required instruction file is missing: ENGINEERING_HARNESS.md\",\n      \"name\": \"instruction-discovery\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"3.12.3\",\n      \"name\": \"python\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"failed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n"
+        },
+        {
+          "label": "fixture",
+          "argv": [
+            "git",
+            "-C",
+            "/tmp/iar29-resource-final/fixture-source",
+            "init"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "e9fc316b99ee8346fb0a2865a08edf9f5e5efbb931ec6cbf135afed4c1fda3ce",
+          "stderr_sha256": "7cc74f74cc8a8f9938bd00571e2c171ce3c59d048f2242a836ccca722182d430",
+          "failure_excerpt": null
+        },
+        {
+          "label": "fixture",
+          "argv": [
+            "git",
+            "-C",
+            "/tmp/iar29-resource-final/fixture-source",
+            "add",
+            "."
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "fixture",
+          "argv": [
+            "git",
+            "-C",
+            "/tmp/iar29-resource-final/fixture-source",
+            "commit",
+            "-m",
+            "Disposable selection fixture"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "523a4ebee99cac5fddfea1c336c54cd2279d547a7bc46fedbab6d8d1d01868da",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "clone-after-hook",
+          "argv": [
+            "git",
+            "clone",
+            "/tmp/iar29-resource-final/fixture-source",
+            "/tmp/iar29-resource-final/workspace/cloned"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "057307fdb28ce94ef71f3f86bd9f147c010d7bc6bd760694e8683d3b9321b54d",
+          "failure_excerpt": null
+        },
+        {
+          "label": "activate-codex-codex-first",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/activate.py",
+            "--host",
+            "codex",
+            "--session-id",
+            "codex-first",
+            "--data-root",
+            "/tmp/iar29-resource-final/data",
+            "--target",
+            "/tmp/iar29-resource-final/workspace/cloned"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "3f42d94d11100d9a61031ee422fd647d65cc818ddf49647be2d93a8effe857d1",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-codex-first-compact",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "ccf4aad4f8703473bdf586674dd2763f5c42556508c4944910993a067b3d9d37",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-codex-first-resume",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "ccf4aad4f8703473bdf586674dd2763f5c42556508c4944910993a067b3d9d37",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "activate-claude-claude-first",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/claude/verity-plane/scripts/activate.py",
+            "--host",
+            "claude",
+            "--session-id",
+            "claude-first",
+            "--data-root",
+            "/tmp/iar29-resource-final/data",
+            "--target",
+            "/tmp/iar29-resource-final/workspace/cloned"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "2e4fc7eac130f1a158f6c95dc7390aeea3d17b7e4a2541e80d446daa4d21abc7",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "claude-claude-first-compact",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/claude/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "claude"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "d17f2b9e602f4c91b9fff7185d75bdb605ff52f345e3fc1c010dcc984016cc29",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "claude-claude-first-resume",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/claude/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "claude"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "d17f2b9e602f4c91b9fff7185d75bdb605ff52f345e3fc1c010dcc984016cc29",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "prepare-se_harness-0.20.0-py3-none-any.whl",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/setup.py",
+            "--target",
+            "/tmp/iar29-resource-final/workspace/legacy",
+            "--data-root",
+            "/tmp/iar29-resource-final/data",
+            "--wheel",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/public028/fresh/profiles/codex/codex/plugins/cache/se-harness/verity-plane/0.2.2/packages/se_harness-0.20.0-py3-none-any.whl"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 1,
+          "stdout_sha256": "5d7e7ba69b317f1fea6d1ac1768572b07475880cea2f92eaad95d5410ceb1073",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": "      \"detail\": \"required\",\n      \"name\": \"docs/engineering/ARTIFACT_AUTHORING.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/QUALITY_GATES.json\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/README.md\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required\",\n      \"name\": \"docs/engineering/WORKFLOW.json\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"required instruction file is missing: ENGINEERING_HARNESS.md\",\n      \"name\": \"instruction-discovery\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \".engineering-harness.lock\",\n      \"name\": \"lock\",\n      \"passed\": false\n    },\n    {\n      \"detail\": \"3.12.3\",\n      \"name\": \"python\",\n      \"passed\": true\n    }\n  ],\n  \"command\": \"doctor\",\n  \"outcome\": \"failed\",\n  \"schema\": \"se-harness-command-result-v1\",\n  \"warnings\": []\n}\n"
+        },
+        {
+          "label": "legacy-init",
+          "argv": [
+            "/tmp/iar29-resource-final/data/evaluators/0.20.0/7bcfe788c5daaf670bcee25a235663e8210002ce79ffba7162317b1f0509a6e0/bin/python",
+            "-I",
+            "-m",
+            "se_harness",
+            "init",
+            "/tmp/iar29-resource-final/workspace/legacy",
+            "--project-name",
+            "Legacy fixture",
+            "--json"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "8a14f888961e8bd98ede7052a8a3e0321c75eaeaffeabc38c42d5fd2e69adc04",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "activate-codex-parallel",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/activate.py",
+            "--host",
+            "codex",
+            "--session-id",
+            "parallel",
+            "--data-root",
+            "/tmp/iar29-resource-final/data",
+            "--target",
+            "/tmp/iar29-resource-final/workspace/legacy"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "ca025fb73a790621601b01fdcce504fe8be235217552d7eb0e34b9abf9fb893a",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-parallel-compact",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "943abb158a57c335ff3c6c5743ce68aca896b012a1e3ff911b9273ae4e19da34",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-codex-first-compact",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "ccf4aad4f8703473bdf586674dd2763f5c42556508c4944910993a067b3d9d37",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-independent-startup",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "1660b5e38f07a20faa52e93c18b482af08a855a28933a7a58d3d8e907e2a6aea",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "activate-codex-parallel",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/activate.py",
+            "--host",
+            "codex",
+            "--session-id",
+            "parallel",
+            "--data-root",
+            "/tmp/iar29-resource-final/data",
+            "--target",
+            "/tmp/iar29-resource-final/workspace/cloned"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "38623af9f1b39eac1d9aaec9b60c1f3962b2234ef819084a7aecea094e62cc71",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-parallel-resume",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "5dcce8de576300bd615de0965516b310525326e95aa200b27859bde9f0e3ffa2",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "activate-codex-parallel",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/activate.py",
+            "--host",
+            "codex",
+            "--session-id",
+            "parallel",
+            "--data-root",
+            "/tmp/iar29-resource-final/data",
+            "--clear"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "fda2203f835131555d5afd4d2de34a3bc46009c1f2d6798c05f2e6c5dfb8b99b",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-parallel-startup",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "4f859c67e7ffde69edc9e89fa0c70ff3342d783ef13b24eda772dd9bef24498c",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "activate-claude-parallel",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/claude/verity-plane/scripts/activate.py",
+            "--host",
+            "claude",
+            "--session-id",
+            "parallel",
+            "--data-root",
+            "/tmp/iar29-resource-final/data",
+            "--target",
+            "/tmp/iar29-resource-final/workspace/legacy"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "74fa1e24f24aeda1156d02de4e9b50ff20e954d25078a2671ce5aee7ee94fb14",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "claude-parallel-compact",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/claude/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "claude"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "d961a15175ce4ca9d5b8ec56f5839cdb858ecc22f55506c2bae732007f25b552",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "claude-claude-first-compact",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/claude/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "claude"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "d17f2b9e602f4c91b9fff7185d75bdb605ff52f345e3fc1c010dcc984016cc29",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "claude-independent-startup",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/claude/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "claude"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "534245e41f588f144be2aa7d959926cfb3ea8196bfd563718762c1102d4be364",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "activate-claude-parallel",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/claude/verity-plane/scripts/activate.py",
+            "--host",
+            "claude",
+            "--session-id",
+            "parallel",
+            "--data-root",
+            "/tmp/iar29-resource-final/data",
+            "--target",
+            "/tmp/iar29-resource-final/workspace/cloned"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "837ad4ae825211ba2dbdb40a4f8abd7796db18fcaa6df7dac65afce5cc66c4f5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "claude-parallel-resume",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/claude/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "claude"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "e0c658087db7e1f865e6e2ecd39c7f632fcf33e55d0a86a6a1d640f23377ba18",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "activate-claude-parallel",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/claude/verity-plane/scripts/activate.py",
+            "--host",
+            "claude",
+            "--session-id",
+            "parallel",
+            "--data-root",
+            "/tmp/iar29-resource-final/data",
+            "--clear"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "deaf2216b85e030e38438b7bdcb919d664d0c02fe7931963b9e5c406a0aa5240",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "claude-parallel-startup",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/claude/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "claude"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "ea6711b5e67e0c133512de7ca974e583f1edfd2856469460c82ff5057ea08905",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "activate-codex-codex-first",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/activate.py",
+            "--host",
+            "codex",
+            "--session-id",
+            "codex-first",
+            "--data-root",
+            "/tmp/iar29-resource-final/data",
+            "--target",
+            "/tmp/iar29-resource-final/empty"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 1,
+          "stdout_sha256": "8e6156fdcedb85d0ceb25328d5b9dda80997789c8ba5d278dbc150cd1ff9d0db",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": "{\"status\": \"unavailable\", \"error\": \"required regular file is unavailable: .engineering-harness.toml\", \"action\": \"Stop work on the requested target, resolve its setup or selection gap, then activate again. The previous session record is unchanged.\"}\n"
+        },
+        {
+          "label": "codex-codex-first-compact",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "ccf4aad4f8703473bdf586674dd2763f5c42556508c4944910993a067b3d9d37",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-codex-first-compact",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "a58398e06c874d6f19bb18ef6b571418754f819e3b6390410ededc48166dbf75",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-codex-first-compact",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "1cd56327aac8c83f359a7400e5733b67291a111ae55765aed7a9aa5ac3e2c1e5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "claude-claude-first-resume",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/claude/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "claude"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "f35e98ee79c2856e22f66b0434c4926f4a967e053abed75827319e72fd8eb537",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "prepare-se_harness-0.21.0-py3-none-any.whl",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/setup.py",
+            "--target",
+            "/tmp/iar29-resource-final/workspace/cloned",
+            "--data-root",
+            "/tmp/iar29-resource-final/data",
+            "--wheel",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/external-resources-proposal-20260930/wiring-linux-readable/se_harness-0.21.0-py3-none-any.whl"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "84e999b570017f3da041f15afa9f7604ef0d1925a51f82c02c6edb4b8c5aef0e",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "codex-codex-first-compact",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/inject_instructions.py",
+            "--host",
+            "codex"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 0,
+          "stdout_sha256": "ccf4aad4f8703473bdf586674dd2763f5c42556508c4944910993a067b3d9d37",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "failure_excerpt": null
+        },
+        {
+          "label": "prepare-se_harness-0.21.0-py3-none-any.whl",
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "/tmp/iar29-resource-final/packages/codex/verity-plane/scripts/setup.py",
+            "--target",
+            "/tmp/iar29-resource-final/workspace/cloned",
+            "--data-root",
+            "/tmp/iar29-resource-final/data",
+            "--wheel",
+            "/mnt/c/Users/mathi/Documents/Codex/2026-09-20/verity-plane-plugin-verity-plane-se/work/external-resources-proposal-20260930/wiring-linux-readable/se_harness-0.21.0-py3-none-any.whl"
+          ],
+          "cwd": "/tmp/iar29-resource-final",
+          "exit_code": 1,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "2c3be8e41b6273082b20d10f6f3c43c0e07862682af781009aeb41c0bba83aab",
+          "failure_excerpt": "Setup failed: another operation owns 04343a02735a368ad1cb3d2b3e5206f7f453d27150f0f4c39b411729a5dadef2.lock; inspect an interrupted operation before retrying. Check the supplied Python and wheel, then rerun the same command.\n"
+        }
+      ]
+    }
+  ],
+  "package_files": {
+    "codex": {
+      "DEVELOPMENT.md": "4ab483b07176be1c02e8e1fffbcee82e7dd6df8a9e6141425f9c6a13582f03a3",
+      "README.md": "de50b8c7b1be68b5b018874689a01760ec229a191c2da3c0c665658aa37be16b",
+      ".codex-plugin/plugin.json": "3c43fd26b427094620c3704bbdb847fdd06dde943dababfdd544fac004f13616",
+      "assets/bootstrap.md": "3dee5f82b3e65b62fd4ccb2fcc30d224f24b0d58f7fc4a290d3578584d1fbacd",
+      "hooks/hooks.json": "3331f50d1d61b23510f12afb2d3882b42a8cb606b77e645d1380c621ead9c2d6",
+      "packages/se_harness-0.21.0-py3-none-any.whl": "04343a02735a368ad1cb3d2b3e5206f7f453d27150f0f4c39b411729a5dadef2",
+      "scripts/activate.py": "ffd0345b6eb90d1cb1a59ae8ebeb54607939f4277aa2b665c1e57c79e2097154",
+      "scripts/harness_runtime.py": "6efaf415547fb311f889d145b269f885329450ecd2042d3c3022df9619bd1aa4",
+      "scripts/inject_instructions.py": "1baccbb27b266db2e056a8ac9781a751a35c7ba82f5ed5920ed2a9d71339b806",
+      "scripts/setup.py": "282581fb69daabfa04909083b684385b6feeb8b72ef274c96ff04ad0171953eb",
+      "skills/change/SKILL.md": "7f167d8b2ccd13383be09769852fef100943cde07bab0bbfcbc9ac2ee17822c0",
+      "skills/evidence/SKILL.md": "810bd24204f2e003f796be422991f60fe78feec540c09ffb7debf46415754cf7",
+      "skills/harness-operator-brief/skill-contract.json": "5bb8bdcc254132489e6f67e8091dbea7f69404b6eb66434a98592a949483a842",
+      "skills/harness-operator-brief/SKILL.md": "3cba405afb93814ce3f79d5d762f8e310f32905475af1dfcf7508e4e935565f3",
+      "skills/harness-orient/skill-contract.json": "6dd5ad01256553328715df74924d1cce6ea6d368701681b48e1d045560eb7606",
+      "skills/harness-orient/SKILL.md": "722cf124a15e5003eccce92cf8573a4c30e59a772aa3f8b8f426104900f13c7d",
+      "skills/setup/SKILL.md": "3b60bb4fa25a3d7312c6828ccba0a814aba45a8f33d30eaae63122ae912f0c6d",
+      "skills/setup/references/environment.md": "3ccad389ba80926437cfc02c78408b50d42606407287d6466b9d7dc1dea413bc",
+      "skills/setup/references/maintenance.md": "ede24c48c4e92248b5dd01c0dc28187c2ef19c8bc09445820bb77198f4b58dbf",
+      "skills/setup/references/repository.md": "7a03d71898a91f9de98bc10b1207506e2f61ffafd269d9108d59ca6e800c5ed0",
+      "skills/harness-orient/scripts/orient.py": "ef3dc7dbd6544d22c29c98d287caa5043d7a1ba1f7aef485852a1447451c2cac",
+      "skills/harness-operator-brief/agents/openai.yaml": "3b82e13fbe48a36d1095e2ff2f3eddd54499c3ab3709d51483dd79ab73776def",
+      "skills/harness-operator-brief/scripts/check_brief.py": "ae83b40b199a3613de42f48c6d7480b45890116c5f9454b26bc05b4688777274",
+      "skills/evidence/references/external-actions.md": "99c8c7dbc30cd19caad6ce3ab42c46bb8820caff8f78b575abb76320ecb2c695",
+      "skills/evidence/references/records.md": "462e60635c8f3e08257d2ae27b6c690bc340dc5bc6fe2244b4d44ec9984fda3c",
+      "skills/change/references/artifacts.md": "0f515452b55aa4f35dfb5886a0a3607c533592059b8424233437b60c4a341e91",
+      "skills/change/references/authority.md": "967aa805a16358278355c526d4c16d215c16b481c3c0f15529e8780e695b16a0",
+      "skills/change/references/work-orders.md": "bd8cbd793407119408f81f9aa204426cc1291182e55e8e140af02c27bc362674"
+    },
+    "claude": {
+      "DEVELOPMENT.md": "4ab483b07176be1c02e8e1fffbcee82e7dd6df8a9e6141425f9c6a13582f03a3",
+      "README.md": "de50b8c7b1be68b5b018874689a01760ec229a191c2da3c0c665658aa37be16b",
+      ".claude-plugin/plugin.json": "e5b9167dd9f6f3d911fc92bfb1acc4041d56c7c42570b5f566abdee21cc9ff9c",
+      "assets/bootstrap.md": "3dee5f82b3e65b62fd4ccb2fcc30d224f24b0d58f7fc4a290d3578584d1fbacd",
+      "hooks/hooks.json": "75d1f988195fcaefc78a558d9209a1ed4fbf47cc08d3f83298e3784559c4ccb9",
+      "packages/se_harness-0.21.0-py3-none-any.whl": "04343a02735a368ad1cb3d2b3e5206f7f453d27150f0f4c39b411729a5dadef2",
+      "scripts/activate.py": "ffd0345b6eb90d1cb1a59ae8ebeb54607939f4277aa2b665c1e57c79e2097154",
+      "scripts/harness_runtime.py": "6efaf415547fb311f889d145b269f885329450ecd2042d3c3022df9619bd1aa4",
+      "scripts/inject_instructions.py": "1baccbb27b266db2e056a8ac9781a751a35c7ba82f5ed5920ed2a9d71339b806",
+      "scripts/setup.py": "282581fb69daabfa04909083b684385b6feeb8b72ef274c96ff04ad0171953eb",
+      "skills/change/SKILL.md": "7f167d8b2ccd13383be09769852fef100943cde07bab0bbfcbc9ac2ee17822c0",
+      "skills/evidence/SKILL.md": "810bd24204f2e003f796be422991f60fe78feec540c09ffb7debf46415754cf7",
+      "skills/harness-operator-brief/skill-contract.json": "5bb8bdcc254132489e6f67e8091dbea7f69404b6eb66434a98592a949483a842",
+      "skills/harness-operator-brief/SKILL.md": "3cba405afb93814ce3f79d5d762f8e310f32905475af1dfcf7508e4e935565f3",
+      "skills/harness-orient/skill-contract.json": "6dd5ad01256553328715df74924d1cce6ea6d368701681b48e1d045560eb7606",
+      "skills/harness-orient/SKILL.md": "722cf124a15e5003eccce92cf8573a4c30e59a772aa3f8b8f426104900f13c7d",
+      "skills/setup/SKILL.md": "3b60bb4fa25a3d7312c6828ccba0a814aba45a8f33d30eaae63122ae912f0c6d",
+      "skills/setup/references/environment.md": "3ccad389ba80926437cfc02c78408b50d42606407287d6466b9d7dc1dea413bc",
+      "skills/setup/references/maintenance.md": "ede24c48c4e92248b5dd01c0dc28187c2ef19c8bc09445820bb77198f4b58dbf",
+      "skills/setup/references/repository.md": "7a03d71898a91f9de98bc10b1207506e2f61ffafd269d9108d59ca6e800c5ed0",
+      "skills/harness-orient/scripts/orient.py": "ef3dc7dbd6544d22c29c98d287caa5043d7a1ba1f7aef485852a1447451c2cac",
+      "skills/harness-operator-brief/agents/openai.yaml": "3b82e13fbe48a36d1095e2ff2f3eddd54499c3ab3709d51483dd79ab73776def",
+      "skills/harness-operator-brief/scripts/check_brief.py": "ae83b40b199a3613de42f48c6d7480b45890116c5f9454b26bc05b4688777274",
+      "skills/evidence/references/external-actions.md": "99c8c7dbc30cd19caad6ce3ab42c46bb8820caff8f78b575abb76320ecb2c695",
+      "skills/evidence/references/records.md": "462e60635c8f3e08257d2ae27b6c690bc340dc5bc6fe2244b4d44ec9984fda3c",
+      "skills/change/references/artifacts.md": "0f515452b55aa4f35dfb5886a0a3607c533592059b8424233437b60c4a341e91",
+      "skills/change/references/authority.md": "967aa805a16358278355c526d4c16d215c16b481c3c0f15529e8780e695b16a0",
+      "skills/change/references/work-orders.md": "bd8cbd793407119408f81f9aa204426cc1291182e55e8e140af02c27bc362674"
+    }
+  },
+  "native_startup": {
+    "argv": [
+      "C:/Users/mathi/.local/bin/claude.exe",
+      "--init-only",
+      "--plugin-dir",
+      "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\claude\\verity-plane",
+      "--setting-sources",
+      "project",
+      "--settings",
+      "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\native-claude\\settings.json",
+      "--strict-mcp-config",
+      "--debug-file",
+      "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\native-claude\\debug.log"
+    ],
+    "cwd": "C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\workspace",
+    "exit_code": 0,
+    "selected_hook_lines": [
+      "2026-09-30T13:20:29.149Z [DEBUG] Read hooks.json for plugin verity-plane (enabled=true): C:\\Users\\mathi\\AppData\\Local\\Temp\\iar29-resources-03\\packages\\claude\\verity-plane\\hooks\\hooks.json",
+      "2026-09-30T13:20:29.155Z [DEBUG] Registered 1 hooks from 1 plugins",
+      "2026-09-30T13:20:29.486Z [DEBUG] Hooks: Parsed initial response: {\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"Host: claude; session_id: [REDACTED] data: C:\\\\Users\\\\mathi\\\\AppData\\\\Local\\\\Temp\\\\iar29-resources-03\\\\native-claude\\\\config\\\\plugins\\\\data\\\\verity-plane-inline\\nSelect or switch through verity-plane:setup (scripts/activate.py in this plugin).\\n\\n# Select the working repository\\n\\nWhen asked to clone, clone to the intended destination, then activate that exact\\ncheckout. For existing work, reuse the known checkout path. Ask for a path only\\nwhen the intended repository is ambiguous. Do not scan child repositories.\\n\\nUse the setup skill's activation procedure with the host, session_id and\\nplugin data supplied with this message. It immediately returns\\nthe selected instructions. Read that complete entry before governed work. If the\\nrepository has no harness selection or its evaluator is missing, use the setup\\nskill with an explicitly selected release, then activate again. Do not choose a\\nrelease or upgrade silently.\\n\\nSelection belongs only to this host session. A new session activates its own\\ncheckout. Switching or clearing affects only this session. Activation gives no\\napproval, verification or delivery authority; follow the selected release for\\nnew or resumed work and any requested push or pull request.\\n\"}}",
+      "2026-09-30T13:20:29.499Z [DEBUG] Hook SessionStart (python \"${CLAUDE_PLUGIN_ROOT}/scripts/inject_instructions.py\" --host claude) provided additionalContext (1236 chars)"
+    ],
+    "stderr_bytes": 0,
+    "claim": "Native startup callback only, no model, compaction or resume assessment."
+  },
+  "remaining_required_observations": [
+    "Native Codex Windows desktop startup, clone and immediate activation.",
+    "Native helper and hook session identity across manual compaction, automatic compaction and resume on both hosts.",
+    "Concurrent native sessions, release switching, compatible plugin update and session isolation.",
+    "Native new/resumed work-order and delivery-authority handoff.",
+    "No automatic or desktop claim is supplied by simulated events or Claude init-only startup."
+  ],
+  "review": {
+    "simplicity": "One shared locator module, one activation entry point and the existing resource command; no daemon, policy copy, global last-used checkout or new dependency.",
+    "failure_handling": "Complete old or new session records; failed activation leaves old bytes. Interrupted setup remains unavailable until the exact unused environment is inspected and retired.",
+    "compatibility": "Released 0.20.0 remains this repository evaluator. Future release and adoption remain separate.",
+    "path_and_authority": "Only approved WO029 paths changed; no completion, verification, release, push or PR action performed."
+  },
+  "retained_failures": [
+    {
+      "case": "initial full-suite invocation",
+      "result": "3 failures and 11 errors caused by missing per-command Git safe.directory context; rerun under existing ENV passed.",
+      "path": "C:\\Users\\mathi\\Documents\\Codex\\2026-09-20\\verity-plane-plugin-verity-plane-se\\work\\external-resources-proposal-20260930\\plugin029-full-first.log",
+      "sha256": "d6b3cffba9c7a637f5c2eb801cc72feb4e8de406e26b506593c447465d7d7d1f"
+    },
+    {
+      "case": "full envelope size",
+      "result": "First installed walkthrough refused 10001 UTF-16 units. Delivery metadata was shortened; policy text and the 10000-unit bound were preserved. Final installed walkthroughs passed."
+    },
+    {
+      "case": "Linux archive access",
+      "result": "Initial archive location was unreadable in WSL. Reused a readable copy with the same independently expected SHA-256; final offline run passed."
+    },
+    {
+      "case": "source CRLF check",
+      "result": "Git diff --check flagged CRLF source lines with core.autocrlf=false. Normalized only the three touched text sources to canonical LF; final diff check passed."
+    }
+  ]
+}

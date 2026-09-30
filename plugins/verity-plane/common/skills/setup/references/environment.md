@@ -1,21 +1,29 @@
 # Private evaluator environment
 
-Choose the host's persistent plugin data directory outside the repository.
-The environment always lives at `DATA_ROOT/verity-plane/evaluator`.
-On Windows its Python is `Scripts/python.exe`; on Unix it is `bin/python`.
+Use the absolute persistent plugin-data path supplied by the native hook. It must
+be outside repositories and the replaceable plugin package. Separate release
+identities use separate directories under `DATA_ROOT/evaluators/VERSION/DIGEST`.
+The digest is the selected wheel SHA-256, or the selected payload SHA-256 when a
+legacy lock has no archive identity. Use the Python path returned by setup.
 
-With an available Python 3.11+ installation, run:
+With Python 3.11+ and the explicitly selected trusted wheel, run:
 
 ```text
-PYTHON ABSOLUTE_PLUGIN/scripts/setup.py --target ABSOLUTE_REPOSITORY --data-root ABSOLUTE_DATA_ROOT --wheel ABSOLUTE_SELECTED_WHEEL
+PYTHON -I ABSOLUTE_PLUGIN/scripts/setup.py --target ABSOLUTE_REPOSITORY --data-root ABSOLUTE_PLUGIN_DATA --wheel ABSOLUTE_SELECTED_WHEEL
 ```
 
-Use separate shell arguments and quote paths containing spaces. The helper uses
-venv, installs the supplied wheel with `--no-index --no-deps --force-reinstall`,
-and invokes `doctor ABSOLUTE_REPOSITORY --json` with the private Python and `-I`.
-It writes only its private environment and returns the actual checker exit code.
+Pass paths as separate arguments. Setup installs offline with `--no-index --no-deps`,
+validates the installed identity and marks that environment ready only afterward.
+Concurrent setup for the same identity reports contention; retry after the first
+operation finishes. Different releases remain independent. A ready environment is
+validated and reused; setup never reinstalls over one another session could use.
 
-Run this same command again if setup was interrupted or the selected evaluator
-changes. No separate receipt, activation script, or new output folder is needed.
-Select the release from the repository's installed harness configuration;
-doctor reports mismatches and managed-file problems through its normal result.
+Setup then runs the actual `doctor` with the private Python and `-I -m se_harness`
+from outside the checkout. Its exit code is the doctor result. A new project can
+have a prepared evaluator while doctor correctly reports no installed harness.
+Inspect that result before the separately requested initialization or upgrade.
+
+Interrupted or damaged environments produce an explicit gap. Inspect the exact
+private directory and confirm no session uses it before retiring it and retrying
+setup. Do not remove another identity's directory or edit readiness metadata.
+After preparation, activate the checkout again. Hooks never download or install.
