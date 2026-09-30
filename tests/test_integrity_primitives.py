@@ -52,11 +52,18 @@ class OwnershipLockBoundaryTests(unittest.TestCase):
             with self.subTest(binding=binding), self.assertRaises(integrity.IntegrityError):
                 integrity.validate_lock({"schema": 4, "skill_ownership": binding})
 
+    def test_schema5_requires_the_external_resource_layout(self) -> None:
+        for layout in (None, "unknown"):
+            with self.subTest(layout=layout), self.assertRaisesRegex(
+                integrity.IntegrityError, "schema 5 requires the released-resources-v1 layout"
+            ):
+                integrity.validate_lock({"schema": 5, "resource_layout": layout})
+
     def test_schema_extension_keeps_pre3_floor_and_rejects_unknown_or_noninteger_formats(self) -> None:
         for schema in (1, 2):
             with self.subTest(schema=schema), self.assertRaisesRegex(integrity.IntegrityError, "predates the supported floor"):
                 integrity.validate_lock({"schema": schema})
-        for schema in (0, 5, 4.0, "4", True, None):
+        for schema in (0, 6, 4.0, "4", True, None):
             with self.subTest(schema=schema), self.assertRaisesRegex(integrity.IntegrityError, "unsupported lock schema"):
                 integrity.validate_lock({"schema": schema})
 
